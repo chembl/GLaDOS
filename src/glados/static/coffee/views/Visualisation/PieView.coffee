@@ -56,11 +56,27 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       values.push bucket.doc_count
       labels.push bucket.key
 
+      col = [
+        glados.Settings.PIECHARTS.TEAL1,
+        glados.Settings.PIECHARTS.GREEN1,
+        glados.Settings.PIECHARTS.GREEN2,
+        glados.Settings.PIECHARTS.AMBER,
+        glados.Settings.PIECHARTS.ORANGE,
+        glados.Settings.PIECHARTS.RED,
+        glados.Settings.PIECHARTS.PINK,
+        glados.Settings.PIECHARTS.PURPLE,
+        glados.Settings.PIECHARTS.BLUE1,
+        glados.Settings.PIECHARTS.BLUE2
+      ]
+
+
     data1 =
       values: values
       labels: labels
       type: 'pie'
       textinfo:'value'
+      marker:
+        colors: col
 
 
     data = [data1]

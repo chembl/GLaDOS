@@ -55,6 +55,16 @@ glados.useNameSpace 'glados',
   Settings:
     PIECHARTS:
       MAX_CATEGORIES: 10
+      TEAL1: '#4DB6AC'
+      GREEN1: '#8BC34A'
+      GREEN2: '#CDDC39'
+      AMBER: '#FFC107'
+      ORANGE: '#FF9800'
+      RED: '#EF5350'
+      PINK: '#F06292'
+      PURPLE: '#7E57C2'
+      BLUE1: '#03A9F4'
+      BLUE2: '#80DEEA'
     GLADOS_STRINGS_PREFIX: 'glados_es_gs__'
     WS_HOSTNAME: 'https://www.ebi.ac.uk/'
     WS_BASE_URL: 'https://www.ebi.ac.uk/chembl/api/data/'
