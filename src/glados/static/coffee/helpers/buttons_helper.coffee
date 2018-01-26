@@ -52,11 +52,12 @@ class ButtonsHelper
     * @param {String} Tooltip that you want for the button
     * @param {String} data data that is going to be downloaded
   ###
-  @initDownloadBtn = (elem, filename, tooltip, data)->
-    elem.attr('download', filename,)
-    elem.addClass('tooltipped')
-    elem.attr('data-tooltip', tooltip)
-    elem.attr('href', 'data:text/html,' + data)
+  @initDownloadBtn = ($btn, filename, tooltip, data)->
+    $btn.attr('download', filename,)
+    $btn.addClass('tooltipped')
+    $btn.attr('data-tooltip', tooltip)
+    $btn.attr('href', 'data:text/html,' + data)
+    $btn.tooltip()
 
   ### *
     * Handles the copy event receiving the data to be copied as a parameter
@@ -101,13 +102,12 @@ class ButtonsHelper
 
   @initCopyButton = (elem, tooltip, data) ->
 
-    copy_btn = elem
-    copy_btn.addClass('tooltipped')
-    copy_btn.attr('data-tooltip', tooltip)
-    copy_btn.attr('data-copy', data )
-
-    copy_btn.click ButtonsHelper.handleCopy
-
+    $copyBtn = elem
+    $copyBtn.addClass('tooltipped')
+    $copyBtn.attr('data-tooltip', tooltip)
+    $copyBtn.attr('data-copy', data )
+    $copyBtn.click ButtonsHelper.handleCopy
+    $copyBtn.tooltip()
 
   # ------------------------------------------------------------
   # Cropped container
@@ -128,8 +128,6 @@ class ButtonsHelper
   @setLessText = (elem) ->
 
     $(elem).text('less...')
-
-
 
   ### *
     * @param {JQuery} elem element that is going to be toggled

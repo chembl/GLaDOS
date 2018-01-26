@@ -11,6 +11,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   showNoDataFoundMessage: ->
 
+
     $visualisationMessages = $(@el).find('.BCK-VisualisationMessages')
 
     if @config.custom_empty_message?
@@ -18,7 +19,12 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     else
       emptyMessage = "No data available. #{@config.title}"
 
-    $visualisationMessages.html("#{emptyMessage}")
+    glados.Utils.fillContentForElement $visualisationMessages,
+      msg: emptyMessage
+
+    $mainPieContainer = $(@el)
+    $mainPieContainer.addClass('pie-with-error')
+
 
   render: ->
 
@@ -34,24 +40,66 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       @showNoDataFoundMessage()
       return
 
+
+    $titleContainer = $(@el).find('.BCK-pie-title')
+    glados.Utils.fillContentForElement $titleContainer,
+      title: @config.title
+
     values = []
     labels = []
+
+    maxCategories = @config.max_categories
+    if buckets.length > maxCategories
+      buckets = glados.Utils.Buckets.mergeBuckets(buckets, maxCategories, @model, @config.x_axis_prop_name)
+
     for bucket in buckets
       values.push bucket.doc_count
       labels.push bucket.key
+
+      #define color palette
+      col = [
+        glados.Settings.PIECHARTS.TEAL1,
+        glados.Settings.PIECHARTS.GREEN1,
+        glados.Settings.PIECHARTS.GREEN2,
+        glados.Settings.PIECHARTS.AMBER,
+        glados.Settings.PIECHARTS.ORANGE,
+        glados.Settings.PIECHARTS.RED,
+        glados.Settings.PIECHARTS.PINK,
+        glados.Settings.PIECHARTS.PURPLE,
+        glados.Settings.PIECHARTS.BLUE1,
+        glados.Settings.PIECHARTS.BLUE2
+      ]
+
 
     data1 =
       values: values
       labels: labels
       type: 'pie'
       textinfo:'value'
+      marker:
+        colors: col
+
 
     data = [data1]
     width = @$vis_elem.width()
+    minWidth = 400
+    if width < minWidth
+      width = minWidth
+
     layout =
       height: width * (3/5)
       width: width
-      title: @config.title
+      margin:
+        l: 5
+        r: 5
+        b: 5
+        t: 40
+        pad: 4
+      legend:
+        orientation: 'h'
+      font:
+        family: "ChEMBL_HelveticaNeueLTPRo"
+
 
     pieDiv = @$vis_elem.get(0)
     Plotly.newPlot pieDiv, data, layout

@@ -50,16 +50,20 @@
       </div>
 
       <div class="divider"></div>
-      <div id="Bioactivity" class="section scrollspy">
-        <h3>Bioactivity</h3>
-
-        <div class="row">
-          {% with is_dynamic=True  %}
-            {% include "glados/AssayReportCardParts/AssociatedBioactivities.html" %}
-          {% endwith %}
-        </div>
-
+      <div id="ActivityCharts" class="section scrollspy">
+            <h3>Activity Charts</h3>
       </div>
+        <div class="row piechart-group">
+            <div class="col m12 l6 piechart-col">
+              <div id="Bioactivity" class="section piechart-section">
+                <h4 class="center-align">Bioactivity</h4>
+                  {% with is_dynamic=True  %}
+                    {% include "glados/AssayReportCardParts/AssociatedBioactivities.html" %}
+                  {% endwith %}
+              </div>
+            </div>
+            <div class="col m12 l6 piechart-col"></div>
+        </div>
 
       <div class="divider"></div>
       <div id="CompoundSummaries" class="section scrollspy">

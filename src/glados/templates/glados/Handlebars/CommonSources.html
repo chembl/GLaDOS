@@ -28,7 +28,9 @@
 
 
   {{#if msg}}
+  <div class="center-align">
     {{msg}}
+  </div>
   {{/if}}
 
   <div class="card-preolader-to-hide">
@@ -1254,6 +1256,20 @@ There are no UniChem cross references for this compound.
 {% endverbatim %}
 {% include "glados/base/PaginatedCollections/DefaultCarouselContent.html" %}
 {% verbatim %}
+</script>
+
+<script id="Handlebars-Common-Pie-External-Title" type="text/x-handlebars-template">
+
+    <b>{{ title }}</b>
+
+</script>
+
+<script id="Handlebars-Pie-Warning" type="text/x-handlebars-template">
+  <div class="card yellow lighten-4">
+    <div class="card-content">
+      <i class="fa fa-exclamation-triangle"></i> <b>Warning:</b> {{msg}}
+    </div>
+  </div>
 </script>
 
 {% endverbatim %}

@@ -4,9 +4,15 @@ glados.useNameSpace 'glados.views.ReportCards',
     initialize: ->
 
       CardView.prototype.initialize.call(@, arguments)
-      @collection.on 'reset', @.render, @
-      @collection.on 'error', @.showCompoundErrorCard, @
       @config = arguments[0].config
+
+      @collection.on 'reset', @.render, @
+
+      if @config.hide_on_error
+        @collection.on 'error', @hideSection, @
+      else
+        @collection.on 'error', @.showCompoundErrorCard, @
+
       @resource_type = arguments[0].resource_type
       @paginatedView = glados.views.PaginatedViews.PaginatedViewFactory.getNewCardsCarouselView(@collection, @el)
 

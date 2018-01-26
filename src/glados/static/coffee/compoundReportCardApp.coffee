@@ -20,6 +20,8 @@ class CompoundReportCardApp extends glados.ReportCardApp
     CompoundReportCardApp.initIndications()
     CompoundReportCardApp.initClinicalData()
     CompoundReportCardApp.initMetabolism()
+    CompoundReportCardApp.initHELMNotation()
+    CompoundReportCardApp.initBioSeq()
     CompoundReportCardApp.initActivitySummary()
     CompoundReportCardApp.initAssaySummary()
     CompoundReportCardApp.initTargetSummary()
@@ -191,8 +193,24 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @initClinicalData = ->
 
-    @registerSection('ClinicalData', 'Clinical Data')
-    @showSection('ClinicalData')
+    compound = CompoundReportCardApp.getCurrentCompound()
+
+    viewConfig =
+      embed_section_name: 'clinical_data'
+      embed_identifier: compound.get('molecule_chembl_id')
+      show_if: (model) -> model.attributes.pref_name?
+      properties_to_show: Compound.COLUMNS_SETTINGS.CLINICAL_DATA_SECTION
+
+    new glados.views.ReportCards.EntityDetailsInCardView
+      model: compound
+      el: $('#ClinDataCard')
+      config: viewConfig
+      section_id: 'ClinicalData'
+      section_label: 'Clinical Data'
+      report_card_app: @
+
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
 
   @initStructuralAlerts = ->
 
@@ -245,6 +263,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     pieConfig =
       x_axis_prop_name: 'types'
       title: gettext('glados_compound__associated_activities_pie_title_base') + chemblID
+      max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
 
     viewConfig =
       pie_config: pieConfig
@@ -259,8 +278,8 @@ class CompoundReportCardApp extends glados.ReportCardApp
       model: relatedActivities
       el: $('#CAssociatedActivitiesCard')
       config: viewConfig
-      section_id: 'CompoundBioactivitySummary'
-      section_label: 'Bioactivity Summary'
+      section_id: 'ActivityCharts'
+      section_label: 'Activity Charts'
       report_card_app: @
 
     relatedActivities.fetch()
@@ -273,6 +292,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     pieConfig =
       x_axis_prop_name: 'types'
       title: gettext('glados_compound__associated_assays_pie_title_base') + chemblID
+      max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
 
     viewConfig =
       pie_config: pieConfig
@@ -287,8 +307,8 @@ class CompoundReportCardApp extends glados.ReportCardApp
       model: relatedAssays
       el: $('#CAssociatedAssaysCard')
       config: viewConfig
-      section_id: 'CompoundAssaySummary'
-      section_label: 'Assay Summary'
+      section_id: 'ActivityCharts'
+      section_label: 'Activity Charts'
       report_card_app: @
 
     relatedAssays.fetch()
@@ -301,6 +321,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       x_axis_prop_name: 'classes'
       title: gettext('glados_compound__associated_targets_by_class_pie_title_base') + chemblID
       custom_empty_message: "No target classification data available for compound #{chemblID} (all may be non-protein targets)"
+      max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
 
     viewConfig =
       pie_config: pieConfig
@@ -315,8 +336,8 @@ class CompoundReportCardApp extends glados.ReportCardApp
       model: relatedTargets
       el: $('#CAssociatedTargetsCard')
       config: viewConfig
-      section_id: 'CompoundTargetSummary'
-      section_label: 'Target Summary'
+      section_id: 'ActivityCharts'
+      section_label: 'Activity Charts'
       report_card_app: @
 
     relatedTargets.fetch()
@@ -359,6 +380,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       embed_identifier: chemblID
       title: "Compounds similar to #{chemblID} with at least 70% similarity:"
       full_list_url: "/similarity_search_results/#{chemblID}/70"
+      hide_on_error: true
 
     new glados.views.ReportCards.CarouselInCardView
       collection: similarCompoundsList
@@ -397,6 +419,89 @@ class CompoundReportCardApp extends glados.ReportCardApp
       report_card_app: @
 
     compoundMetabolism.fetch()
+
+  @initHELMNotation = ->
+
+    compound = CompoundReportCardApp.getCurrentCompound()
+
+    viewConfig =
+      embed_section_name: 'helm_notation'
+      embed_identifier: compound.get('molecule_chembl_id')
+      show_if: (model) ->
+        HELMNotation = glados.Utils.getNestedValue(model.attributes, Compound.COLUMNS.HELM_NOTATION.comparator,
+          forceAsNumber=false, customNullValueLabel=undefined, returnUndefined=true)
+
+        if not HELMNotation?
+          return false
+        else
+          return true
+      properties_to_show: Compound.COLUMNS_SETTINGS.HELM_NOTATION_SECTION
+      after_render: (thisView) ->
+        ButtonsHelper.initCroppedTextFields()
+        $copyBtn = $(thisView.el).find('.BCK-Copy-btn')
+        ButtonsHelper.initCopyButton($copyBtn, 'Copy to Clipboard', thisView.model.get('helm_notation'))
+
+        $downloadBtn = $(thisView.el).find('.BCK-Dwnld-btn')
+        ButtonsHelper.initDownloadBtn($downloadBtn, "#{thisView.model.get('molecule_chembl_id')}-HELM.txt",
+          'Download', thisView.model.get('helm_notation'))
+
+    new glados.views.ReportCards.EntityDetailsInCardView
+      model: compound
+      el: $('#CHELMNotationCard')
+      config: viewConfig
+      section_id: 'CompoundHELMNotation'
+      section_label: 'HELM Notation'
+      report_card_app: @
+
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
+
+  @initBioSeq = ->
+
+    compound = CompoundReportCardApp.getCurrentCompound()
+
+    viewConfig =
+      embed_section_name: 'biocomponents'
+      embed_identifier: compound.get('molecule_chembl_id')
+      show_if: (model) ->
+        biocomponents = glados.Utils.getNestedValue(model.attributes, Compound.COLUMNS.BIOCOMPONENTS.comparator,
+          forceAsNumber=false, customNullValueLabel=undefined, returnUndefined=true)
+
+        if not biocomponents?
+          return false
+        else
+          return true
+      properties_to_show: Compound.COLUMNS_SETTINGS.BIOCOMPONENTS_SECTION
+      after_render: (thisView) ->
+        ButtonsHelper.initCroppedTextFields()
+
+        $buttonsContainers = $(thisView.el).find('.BCK-ButtonsContainer')
+
+        $buttonsContainers.each (i, div) ->
+
+          $div = $(div)
+          $copyBtn = $div.find('.BCK-Copy-btn')
+
+          ButtonsHelper.initCopyButton($copyBtn, 'Copy to Clipboard',
+            $div.attr('data-value'))
+
+          $downloadBtn = $div.find('.BCK-Dwnld-btn')
+          ButtonsHelper.initDownloadBtn($downloadBtn,
+            "#{thisView.model.get('molecule_chembl_id')}-Biocomp-#{$div.attr('data-description')}.txt",
+            'Download', $div.attr('data-value'))
+
+    new glados.views.ReportCards.EntityDetailsInCardView
+      model: compound
+      el: $('#CBioseqCard')
+      config: viewConfig
+      section_id: 'CompoundBIOLSeq'
+      section_label: 'Biocomponents'
+      report_card_app: @
+
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
+
+
 
   # -------------------------------------------------------------
   # Function Cells

@@ -611,6 +611,10 @@ Compound.COLUMNS = {
     comparator: 'withdrawn_country'
   WITHDRAWN_REASON: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     comparator: 'withdrawn_reason'
+  HELM_NOTATION: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
+    comparator: 'helm_notation'
+  BIOCOMPONENTS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
+    comparator: 'biotherapeutic.biocomponents'
 }
 
 Compound.ID_COLUMN = Compound.COLUMNS.CHEMBL_ID
@@ -706,6 +710,23 @@ Compound.COLUMNS_SETTINGS = {
     Compound.COLUMNS.WITHDRAWN_YEAR
     Compound.COLUMNS.WITHDRAWN_COUNTRY
     Compound.COLUMNS.WITHDRAWN_REASON
+  ]
+  HELM_NOTATION_SECTION: [
+    Compound.COLUMNS.CHEMBL_ID
+    Compound.COLUMNS.HELM_NOTATION
+  ]
+  BIOCOMPONENTS_SECTION: [
+    Compound.COLUMNS.CHEMBL_ID
+    Compound.COLUMNS.BIOCOMPONENTS
+  ]
+  CLINICAL_DATA_SECTION:[
+    _.extend Compound.COLUMNS.PREF_NAME,
+      additional_parsing:
+        encoded_value: (value) -> value.replace(/[ ]/g, '+')
+    _.extend Compound.COLUMNS.SYNONYMS,
+      additional_parsing:
+        search_term: (values) -> _.uniq(v.molecule_synonym for v in values).join(' OR ')
+        encoded_search_term: (values) -> _.uniq(v.molecule_synonym for v in values).join(' OR ')
   ]
 }
 

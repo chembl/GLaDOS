@@ -80,9 +80,21 @@ urlpatterns += [
     DirectTemplateView.as_view(
       template_name="glados/CompoundReportCardParts/SimilarCompoundsToEmbed.html")), ),
 
+  url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/clinical_data/$', xframe_options_exempt(
+    DirectTemplateView.as_view(
+      template_name="glados/CompoundReportCardParts/ClinicalDataToEmbed.html")), ),
+
   url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/metabolism/$', xframe_options_exempt(
     DirectTemplateView.as_view(
       template_name="glados/CompoundReportCardParts/MetabolismToEmbed.html")), ),
+
+  url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/helm_notation/$', xframe_options_exempt(
+    DirectTemplateView.as_view(
+      template_name="glados/CompoundReportCardParts/HELMNotationToEmbed.html")), ),
+
+  url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/biocomponents/$', xframe_options_exempt(
+    DirectTemplateView.as_view(
+      template_name="glados/CompoundReportCardParts/BiocomponentsToEmbed.html")), ),
 
   url(r'^compound_metabolism/(?P<chembl_id>\w+)$', xframe_options_exempt(
     DirectTemplateView.as_view(

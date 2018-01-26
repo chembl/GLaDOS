@@ -4,79 +4,83 @@
 
 {% block content %}
 
-<div class="container main-container">
+    <div class="container main-container">
 
 
-  {% block breadcrumb %}
-  {% include "glados/base/breadcrumb.html" %}
-  {% endblock %}
-
-  <div class="row">
-
-    <!-- the scrollspy disappears in medium and down -->
-    <div class="col m12 l10">
-
-      <h2>Tissue Report Card</h2>
-
-      <div class="divider"></div>
-      <div id="BasicInformation" class="section scrollspy">
-        <h3>Basic Information</h3>
+        {% block breadcrumb %}
+            {% include "glados/base/breadcrumb.html" %}
+        {% endblock %}
 
         <div class="row">
-          {% with is_dynamic=True  %}
-          {% include "glados/TissueReportCardParts/BasicInformation.html" %}
-          {% endwith %}
+
+            <!-- the scrollspy disappears in medium and down -->
+            <div class="col m12 l10">
+
+                <h2>Tissue Report Card</h2>
+
+                <div class="divider"></div>
+                <div id="BasicInformation" class="section scrollspy">
+                    <h3>Basic Information</h3>
+
+                    <div class="row">
+                        {% with is_dynamic=True %}
+                            {% include "glados/TissueReportCardParts/BasicInformation.html" %}
+                        {% endwith %}
+                    </div>
+
+                </div>
+
+                <div class="divider"></div>
+
+                <div id="ActivityCharts" class="section scrollspy">
+                    <h3>Activity Charts</h3>
+
+                    <div class="row piechart-group">
+                        <div class="col m12 l6 piechart-col">
+                            <div id="AssaySummary" class="section piechart-section">
+                                <h4 class="center-align">Assay Summary</h4>
+                                {% with is_dynamic=True %}
+                                    {% include "glados/TissueReportCardParts/AssaySummary.html" %}
+                                {% endwith %}
+                            </div>
+                        </div>
+
+                        <div class="col m12 l6 piechart-col">
+                            <div id="BioactivitySummary" class="section piechart-section">
+                                <h4 class="center-align">Bioactivity Summary</h4>
+                                {% with is_dynamic=True %}
+                                    {% include "glados/TissueReportCardParts/ActivitySummary.html" %}
+                                {% endwith %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="CompoundSummaries" class="section scrollspy">
+                    <h3>Compound Summaries</h3>
+
+                    <div class="row">
+                        {% with is_dynamic=True %}
+                            {% include "glados/TissueReportCardParts/CompoundSummary.html" %}
+                        {% endwith %}
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - -->
+            <!-- Scrolspy -->
+            <!-- - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <div class="col l2 hide-on-med-and-down">
+                {% include "glados/base/ScrollSpy/DefaultScrollSpyContent.html" %}
+            </div>
+
+
         </div>
-
-      </div>
-
-      <div id="AssaySummary" class="section scrollspy">
-        <h3>Assay Summary</h3>
-
-        <div class="row">
-          {% with is_dynamic=True  %}
-            {% include "glados/TissueReportCardParts/AssaySummary.html" %}
-          {% endwith %}
-        </div>
-
-      </div>
-
-      <div id="BioactivitySummary" class="section scrollspy">
-        <h3>Bioactivity Summary</h3>
-
-        <div class="row">
-          {% with is_dynamic=True  %}
-            {% include "glados/TissueReportCardParts/ActivitySummary.html" %}
-          {% endwith %}
-        </div>
-
-      </div>
-
-      <div id="CompoundSummaries" class="section scrollspy">
-        <h3>Compound Summaries</h3>
-
-        <div class="row">
-          {% with is_dynamic=True  %}
-            {% include "glados/TissueReportCardParts/CompoundSummary.html" %}
-          {% endwith %}
-        </div>
-
-      </div>
 
     </div>
-
-    <!-- - - - - - - - - - - - - - - - - - - - - - - -->
-    <!-- Scrolspy -->
-    <!-- - - - - - - - - - - - - - - - - - - - - - - -->
-
-    <div class="col l2 hide-on-med-and-down">
-      {% include "glados/base/ScrollSpy/DefaultScrollSpyContent.html" %}
-    </div>
-
-
-  </div>
-
-</div>
 
 
 {% endblock %}
@@ -85,5 +89,5 @@
 
 
 {% block custom_js_inline %}
-TissueReportCardApp.init();
+    TissueReportCardApp.init();
 {% endblock %}

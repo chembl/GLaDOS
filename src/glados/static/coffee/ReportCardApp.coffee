@@ -9,10 +9,14 @@ glados.useNameSpace 'glados',
         model: @scrollSpyHandler
 
 
-    @hideSection = (sectionID) -> $('#' + sectionID).hide()
+    @hideSection = (sectionID) ->
+      @scrollSpyHandler.hideSection(sectionID)
+      $('#' + sectionID).hide()
+
     @showSection = (sectionID) ->
       @scrollSpyHandler.showSection(sectionID)
       $('#' + sectionID).show()
+
     @registerSection = (sectionID, sectionLabel) ->
       @scrollSpyHandler.registerSection(sectionID, sectionLabel)
 

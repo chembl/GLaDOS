@@ -1,0 +1,65 @@
+{% extends "glados/base/basic_table_card.html" %}
+{% block card_id %}CBioseqCard{% endblock %}
+
+{% block general_content %}
+{% verbatim %}
+<script id='Handlebars-Bioseq' type="text/x-handlebars-template">
+
+    <b>{{molecule_chembl_id.value}} Biocomponents:</b>
+    <br>
+
+    <table class="compact-table">
+
+        {{#each biotherapeutic_dot_biocomponents.value}}
+            <tr>
+                <td>
+                    <b>{{this.description}}:</b>
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                    <div class="cropped-text-field">
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="cropped-text-field-input">
+                                    <input id="CompReps-canonicalSmiles" type="text" value='{{this.sequence}}'>
+                                </div>
+                            </td>
+                            <td class="cropped-text-field-btns-cell">
+
+                              <div class="cropped-text-field-btns BCK-ButtonsContainer"
+                                   data-description="{{this.description}}" data-value='{{this.sequence}}'>
+
+                                  {% endverbatim %}
+                                    {% block CompReps-canonicalSmiles-dnld %}
+                                      {% with btn_id='HELMNotation-dnld' %}
+                                        {% include "glados/base/btn_download_only_small.html" %}
+                                      {% endwith %}
+                                    {% endblock %}
+
+                                    {% block CompReps-canonicalSmiles-copy %}
+                                      {% with btn_id='HELMNotation-copy' %}
+                                        {% include "glados/base/btn_copy_small.html" %}
+                                      {% endwith %}
+                                    {% endblock %}
+                                  {% verbatim %}
+
+                              </div>
+
+                            </td>
+
+                        </tr>
+                    </table>
+
+                </div>
+
+                </td>
+            </tr>
+        {{/each}}
+    </table>
+</script>
+{% endverbatim %}
+<div class="BCK-Details-Container" data-hb-template="Handlebars-Bioseq"></div>
+{% endblock %}
