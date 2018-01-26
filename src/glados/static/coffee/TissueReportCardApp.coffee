@@ -57,6 +57,7 @@ class TissueReportCardApp extends glados.ReportCardApp
     pieConfig =
       x_axis_prop_name: 'types'
       title: gettext('glados_tissue__associated_assays_pie_title_base') + chemblID
+      max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
 
     viewConfig =
       pie_config: pieConfig
@@ -71,8 +72,8 @@ class TissueReportCardApp extends glados.ReportCardApp
       model: associatedAssays
       el: $('#TiAssociatedAssaysCard')
       config: viewConfig
-      section_id: 'AssaySummary'
-      section_label: 'Assay Summary'
+      section_id: 'ActivityCharts'
+      section_label: 'Activity Charts'
       report_card_app: @
 
     associatedAssays.fetch()
@@ -85,6 +86,7 @@ class TissueReportCardApp extends glados.ReportCardApp
     pieConfig =
       x_axis_prop_name: 'types'
       title: gettext('glados_tissue__bioactivities_pie_title_base') + chemblID
+      max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
 
     viewConfig =
       pie_config: pieConfig
@@ -99,8 +101,8 @@ class TissueReportCardApp extends glados.ReportCardApp
       model: bioactivities
       el: $('#TiAssociatedActivitiesCard')
       config: viewConfig
-      section_id: 'BioactivitySummary'
-      section_label: 'Activity Summary'
+      section_id: 'ActivityCharts'
+      section_label: 'Activity Charts'
       report_card_app: @
 
     bioactivities.fetch()

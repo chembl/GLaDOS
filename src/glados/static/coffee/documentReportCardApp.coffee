@@ -97,6 +97,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
       x_axis_prop_name: 'classes'
       title: gettext('glados_compound__associated_targets_by_class_pie_title_base') + chemblID
       custom_empty_message: "No target classification data available for document #{chemblID} (all may be non-protein targets)"
+      max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
 
     viewConfig =
       pie_config: pieConfig
@@ -111,8 +112,8 @@ class DocumentReportCardApp extends glados.ReportCardApp
       model: relatedTargets
       el: $('#DAssociatedTargetsCard')
       config: viewConfig
-      section_id: 'ProteinTargetSummay'
-      section_label: 'Target Summay'
+      section_id: 'ActivityCharts'
+      section_label: 'Activity Charts'
       report_card_app: @
 
     relatedTargets.fetch()
@@ -125,6 +126,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
     pieConfig =
       x_axis_prop_name: 'types'
       title: gettext('glados_document__associated_assays_pie_title_base') + chemblID
+      max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
 
     viewConfig =
       pie_config: pieConfig
@@ -139,8 +141,8 @@ class DocumentReportCardApp extends glados.ReportCardApp
       model: relatedAssays
       el: $('#DAssociatedAssaysCard')
       config: viewConfig
-      section_id: 'AssaySummary'
-      section_label: 'Assay Summary'
+      section_id: 'ActivityCharts'
+      section_label: 'Activity Charts'
       report_card_app: @
 
     relatedAssays.fetch()
@@ -153,6 +155,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
     pieConfig =
       x_axis_prop_name: 'types'
       title: gettext('glados_document__associated_activities_pie_title_base') + chemblID
+      max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
 
     viewConfig =
       pie_config: pieConfig
@@ -167,8 +170,8 @@ class DocumentReportCardApp extends glados.ReportCardApp
       model: relatedActivities
       el: $('#DAssociatedActivitiesCard')
       config: viewConfig
-      section_id: 'BioactivitySummary'
-      section_label: 'Activity Summary'
+      section_id: 'ActivityCharts'
+      section_label: 'Activity Charts'
       report_card_app: @
 
     relatedActivities.fetch()
