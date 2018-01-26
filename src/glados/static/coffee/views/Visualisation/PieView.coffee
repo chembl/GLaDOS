@@ -19,7 +19,8 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     else
       emptyMessage = "No data available. #{@config.title}"
 
-    $visualisationMessages.html("#{emptyMessage}")
+    glados.Utils.fillContentForElement $visualisationMessages,
+      msg: emptyMessage
 
     $mainPieContainer = $(@el)
     $mainPieContainer.addClass('pie-with-error')
