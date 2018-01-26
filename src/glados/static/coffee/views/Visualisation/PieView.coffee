@@ -56,6 +56,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       values.push bucket.doc_count
       labels.push bucket.key
 
+      #define color palette
       col = [
         glados.Settings.PIECHARTS.TEAL1,
         glados.Settings.PIECHARTS.GREEN1,
@@ -96,6 +97,9 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
         pad: 4
       legend:
         orientation: 'h'
+      font:
+        family: "ChEMBL_HelveticaNeueLTPRo"
+
 
     pieDiv = @$vis_elem.get(0)
     Plotly.newPlot pieDiv, data, layout
