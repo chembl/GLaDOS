@@ -146,9 +146,9 @@
 
                     <div class="row">
 
-                        {% block clinical_data %}
+                        {% with is_dynamic=True %}
                             {% include "glados/CompoundReportCardParts/ClinicalData.html" %}
-                        {% endblock %}
+                        {% endwith %}
 
                     </div>
 
