@@ -21,6 +21,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     CompoundReportCardApp.initClinicalData()
     CompoundReportCardApp.initMetabolism()
     CompoundReportCardApp.initHELMNotation()
+    CompoundReportCardApp.initBioSeq()
     CompoundReportCardApp.initActivitySummary()
     CompoundReportCardApp.initAssaySummary()
     CompoundReportCardApp.initTargetSummary()
@@ -192,8 +193,24 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @initClinicalData = ->
 
-    @registerSection('ClinicalData', 'Clinical Data')
-    @showSection('ClinicalData')
+    compound = CompoundReportCardApp.getCurrentCompound()
+
+    viewConfig =
+      embed_section_name: 'clinical_data'
+      embed_identifier: compound.get('molecule_chembl_id')
+      show_if: (model) -> model.attributes.pref_name?
+      properties_to_show: Compound.COLUMNS_SETTINGS.CLINICAL_DATA_SECTION
+
+    new glados.views.ReportCards.EntityDetailsInCardView
+      model: compound
+      el: $('#ClinDataCard')
+      config: viewConfig
+      section_id: 'ClinicalData'
+      section_label: 'Clinical Data'
+      report_card_app: @
+
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
 
   @initStructuralAlerts = ->
 
@@ -411,7 +428,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       embed_section_name: 'helm_notation'
       embed_identifier: compound.get('molecule_chembl_id')
       show_if: (model) ->
-        HELMNotation = glados.Utils.getNestedValue(model.attributes, 'helm_notation',
+        HELMNotation = glados.Utils.getNestedValue(model.attributes, Compound.COLUMNS.HELM_NOTATION.comparator,
           forceAsNumber=false, customNullValueLabel=undefined, returnUndefined=true)
 
         if not HELMNotation?
@@ -438,6 +455,53 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     if GlobalVariables['EMBEDED']
       compound.fetch()
+
+  @initBioSeq = ->
+
+    compound = CompoundReportCardApp.getCurrentCompound()
+
+    viewConfig =
+      embed_section_name: 'biocomponents'
+      embed_identifier: compound.get('molecule_chembl_id')
+      show_if: (model) ->
+        biocomponents = glados.Utils.getNestedValue(model.attributes, Compound.COLUMNS.BIOCOMPONENTS.comparator,
+          forceAsNumber=false, customNullValueLabel=undefined, returnUndefined=true)
+
+        if not biocomponents?
+          return false
+        else
+          return true
+      properties_to_show: Compound.COLUMNS_SETTINGS.BIOCOMPONENTS_SECTION
+      after_render: (thisView) ->
+        ButtonsHelper.initCroppedTextFields()
+
+        $buttonsContainers = $(thisView.el).find('.BCK-ButtonsContainer')
+
+        $buttonsContainers.each (i, div) ->
+
+          $div = $(div)
+          $copyBtn = $div.find('.BCK-Copy-btn')
+
+          ButtonsHelper.initCopyButton($copyBtn, 'Copy to Clipboard',
+            $div.attr('data-value'))
+
+          $downloadBtn = $div.find('.BCK-Dwnld-btn')
+          ButtonsHelper.initDownloadBtn($downloadBtn,
+            "#{thisView.model.get('molecule_chembl_id')}-Biocomp-#{$div.attr('data-description')}.txt",
+            'Download', $div.attr('data-value'))
+
+    new glados.views.ReportCards.EntityDetailsInCardView
+      model: compound
+      el: $('#CBioseqCard')
+      config: viewConfig
+      section_id: 'CompoundBIOLSeq'
+      section_label: 'Biocomponents'
+      report_card_app: @
+
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
+
+
 
   # -------------------------------------------------------------
   # Function Cells

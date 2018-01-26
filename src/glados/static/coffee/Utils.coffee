@@ -106,6 +106,9 @@ glados.useNameSpace 'glados',
 
         returnCol = {}
         returnCol.id = colDescription.id
+        if returnCol.id?
+          returnCol.template_id = returnCol.id.replace(/\./g, '_dot_')
+
         returnCol.name_to_show = colDescription['name_to_show']
         returnCol.show = colDescription.show
         returnCol.comparator = colDescription.comparator
@@ -129,6 +132,12 @@ glados.useNameSpace 'glados',
 
         if _.has(colDescription, 'parse_function')
           returnCol['value'] = colDescription['parse_function'](col_value)
+
+        if _.has(colDescription, 'additional_parsing')
+
+          for key in Object.keys(colDescription.additional_parsing)
+            parserFunction = colDescription.additional_parsing[key]
+            returnCol[key] = parserFunction col_value
 
         returnCol['has_link'] = _.has(colDescription, 'link_base') or _.has(colDescription, 'link_function')
         returnCol['has_multiple_links'] = colDescription.multiple_links == true
