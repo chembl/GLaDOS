@@ -298,7 +298,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @setMeta('data_loaded', true)
         @resetMeta(data.page_meta)
 
-        return data.drug_indications
+        return _.sortBy(data.drug_indications, (di) -> return -di.max_phase_for_ind)
 
       return list
 
