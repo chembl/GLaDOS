@@ -56,12 +56,19 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       type: 'pie'
       textinfo:'value'
 
+
     data = [data1]
     width = @$vis_elem.width()
     layout =
       height: width * (3/5)
       width: width
       title: @config.title
+      margin:
+        l: 5
+        r: 5
+        b: 5
+        t: 40
+        pad: 4
       legend:
         orientation: 'h'
 

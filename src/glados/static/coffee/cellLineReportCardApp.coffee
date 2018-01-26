@@ -57,6 +57,7 @@ class CellLineReportCardApp extends glados.ReportCardApp
     pieConfig =
       x_axis_prop_name: 'types'
       title: gettext('glados_cell_line__associated_assays_pie_title_base') + chemblID
+      max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
 
     viewConfig =
       pie_config: pieConfig
@@ -87,6 +88,7 @@ class CellLineReportCardApp extends glados.ReportCardApp
     pieConfig =
       x_axis_prop_name: 'types'
       title: gettext('glados_cell_line__bioactivities_pie_title_base') + chemblID
+      max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
 
     viewConfig =
       pie_config: pieConfig

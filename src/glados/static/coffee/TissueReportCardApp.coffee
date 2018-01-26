@@ -57,6 +57,7 @@ class TissueReportCardApp extends glados.ReportCardApp
     pieConfig =
       x_axis_prop_name: 'types'
       title: gettext('glados_tissue__associated_assays_pie_title_base') + chemblID
+      max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
 
     viewConfig =
       pie_config: pieConfig
@@ -85,6 +86,7 @@ class TissueReportCardApp extends glados.ReportCardApp
     pieConfig =
       x_axis_prop_name: 'types'
       title: gettext('glados_tissue__bioactivities_pie_title_base') + chemblID
+      max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
 
     viewConfig =
       pie_config: pieConfig
