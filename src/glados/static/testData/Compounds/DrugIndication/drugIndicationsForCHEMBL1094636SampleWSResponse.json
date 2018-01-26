@@ -1,1 +1,160 @@
-{}
+{
+  "drug_indications": [
+    {
+      "drugind_id": 50085,
+      "efo_id": "EFO:0001075",
+      "efo_term": "OVARIAN CARCINOMA",
+      "indication_refs": [
+        {
+          "ref_id": "NCT02655016,NCT02354586,NCT01847274,NCT02354131",
+          "ref_type": "ClinicalTrials",
+          "ref_url": "https://clinicaltrials.gov/search?id=%22NCT02655016%22OR%22NCT02354586%22OR%22NCT01847274%22OR%22NCT02354131%22"
+        },
+        {
+          "ref_id": "label/2017/208447lbl.pdf",
+          "ref_type": "FDA",
+          "ref_url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2017/208447lbl.pdf"
+        }
+      ],
+      "max_phase_for_ind": 4,
+      "mesh_heading": "OVARIAN NEOPLASMS",
+      "mesh_id": "D010051",
+      "molecule_chembl_id": "CHEMBL1094636"
+    },
+    {
+      "drugind_id": 50150,
+      "efo_id": "EFO:1000251",
+      "efo_term": "FALLOPIAN TUBE CARCINOMA",
+      "indication_refs": [
+        {
+          "ref_id": "label/2017/208447lbl.pdf",
+          "ref_type": "FDA",
+          "ref_url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2017/208447lbl.pdf"
+        }
+      ],
+      "max_phase_for_ind": 4,
+      "mesh_heading": "FALLOPIAN TUBE NEOPLASMS",
+      "mesh_id": "D005185",
+      "molecule_chembl_id": "CHEMBL1094636"
+    },
+    {
+      "drugind_id": 50191,
+      "efo_id": "EFO:1001100",
+      "efo_term": "PERITONEAL NEOPLASM",
+      "indication_refs": [
+        {
+          "ref_id": "label/2017/208447lbl.pdf",
+          "ref_type": "FDA",
+          "ref_url": "http://www.accessdata.fda.gov/drugsatfda_docs/label/2017/208447lbl.pdf"
+        }
+      ],
+      "max_phase_for_ind": 4,
+      "mesh_heading": "PERITONEAL NEOPLASMS",
+      "mesh_id": "D010534",
+      "molecule_chembl_id": "CHEMBL1094636"
+    },
+    {
+      "drugind_id": 50876,
+      "efo_id": "EFO:0000616",
+      "efo_term": "NEOPLASM",
+      "indication_refs": [
+        {
+          "ref_id": "NCT01226901",
+          "ref_type": "ClinicalTrials",
+          "ref_url": "https://clinicaltrials.gov/search?id=%22NCT01226901%22"
+        }
+      ],
+      "max_phase_for_ind": 1,
+      "mesh_heading": "NEOPLASMS",
+      "mesh_id": "D009369",
+      "molecule_chembl_id": "CHEMBL1094636"
+    },
+    {
+      "drugind_id": 53793,
+      "efo_id": "EFO:0000673",
+      "efo_term": "PROSTATE ADENOCARCINOMA",
+      "indication_refs": [
+        {
+          "ref_id": "NCT02854436",
+          "ref_type": "ClinicalTrials",
+          "ref_url": "https://clinicaltrials.gov/search?id=%22NCT02854436%22"
+        }
+      ],
+      "max_phase_for_ind": 2,
+      "mesh_heading": "PROSTATIC NEOPLASMS",
+      "mesh_id": "D011471",
+      "molecule_chembl_id": "CHEMBL1094636"
+    },
+    {
+      "drugind_id": 54185,
+      "efo_id": "EFO:0000311",
+      "efo_term": "CANCER",
+      "indication_refs": [
+        {
+          "ref_id": "NCT02476552",
+          "ref_type": "ClinicalTrials",
+          "ref_url": "https://clinicaltrials.gov/search?id=%22NCT02476552%22"
+        }
+      ],
+      "max_phase_for_ind": 1,
+      "mesh_heading": "NEOPLASMS",
+      "mesh_id": "D009369",
+      "molecule_chembl_id": "CHEMBL1094636"
+    },
+    {
+      "drugind_id": 54407,
+      "efo_id": "EFO:0000305",
+      "efo_term": "BREAST CARCINOMA",
+      "indication_refs": [
+        {
+          "ref_id": "NCT02826512",
+          "ref_type": "ClinicalTrials",
+          "ref_url": "https://clinicaltrials.gov/search?id=%22NCT02826512%22"
+        }
+      ],
+      "max_phase_for_ind": 2,
+      "mesh_heading": "BREAST NEOPLASMS",
+      "mesh_id": "D001943",
+      "molecule_chembl_id": "CHEMBL1094636"
+    },
+    {
+      "drugind_id": 54582,
+      "efo_id": "Orphanet:145",
+      "efo_term": "HEREDITARY BREAST AND OVARIAN CANCER SYNDROME",
+      "indication_refs": [
+        {
+          "ref_id": "NCT01905592",
+          "ref_type": "ClinicalTrials",
+          "ref_url": "https://clinicaltrials.gov/search?id=%22NCT01905592%22"
+        }
+      ],
+      "max_phase_for_ind": 3,
+      "mesh_heading": "HEREDITARY BREAST AND OVARIAN CANCER SYNDROME",
+      "mesh_id": "D061325",
+      "molecule_chembl_id": "CHEMBL1094636"
+    },
+    {
+      "drugind_id": 55267,
+      "efo_id": "EFO:0000574",
+      "efo_term": "LYMPHOMA",
+      "indication_refs": [
+        {
+          "ref_id": "NCT01244009",
+          "ref_type": "ClinicalTrials",
+          "ref_url": "https://clinicaltrials.gov/search?id=%22NCT01244009%22"
+        }
+      ],
+      "max_phase_for_ind": 2,
+      "mesh_heading": "LYMPHOMA",
+      "mesh_id": "D008223",
+      "molecule_chembl_id": "CHEMBL1094636"
+    }
+  ],
+  "page_meta": {
+    "limit": 20,
+    "next": null,
+    "offset": 0,
+    "previous": null,
+    "total_count": 9
+  }
+}
