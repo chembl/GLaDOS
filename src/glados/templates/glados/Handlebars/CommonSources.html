@@ -1,30 +1,36 @@
 {% verbatim %}
 <script id="Handlebars-Common-CardError" type="text/x-handlebars-template">
-  <i class="fa fa-exclamation-circle"></i> {{msg}}
+    <i class="fa fa-exclamation-circle"></i> {{msg}}
 </script>
 
 <script id="Handlebars-Common-ErrorInCard" type="text/x-handlebars-template">
-  <div class="card grey lighten-5">
-    <div class="card-content">
-      <i class="fa fa-exclamation-triangle"></i> <b>Error:</b> {{msg}}
+    <div class="card grey lighten-5">
+        <div class="card-content">
+            <i class="fa fa-exclamation-triangle"></i> <b>Error:</b> {{msg}}
+        </div>
     </div>
-  </div>
 </script>
 
 <script id="Handlebars-Common-ErrorInImage" type="text/x-handlebars-template">
 
-  <i class="fa fa-exclamation-triangle"></i> <b>Error:</b> {{msg}}
+    <i class="fa fa-exclamation-triangle"></i> <b>Error:</b> {{msg}}
 
 </script>
 
 <script id="Handlebars-Common-EmbedCode" type="text/x-handlebars-template">
 
-  <object data="{{base_url}}{{resource_type}}_report_card/{{chembl_id}}/embed/{{section_name}}/"
-             width="360px" height="600px"></object>
+    <object data="{{base_url}}{{resource_type}}_report_card/{{chembl_id}}/embed/{{section_name}}/"
+            width="360px" height="600px"></object>
 
 </script>
 
 <script id="Handlebars-Common-Preloader" type="text/x-handlebars-template">
+
+    <div class="center-align">
+        {{#if msg}}
+        {{msg}}
+        {{/if}}
+    </div>
 
 
   {{#if msg}}
@@ -33,96 +39,95 @@
   </div>
   {{/if}}
 
-
   <div class="card-preolader-to-hide">
-
-    <div class="progress">
-      <div class="indeterminate"></div>
-    </div>
-
-  </div>
+        <div class="progress">
+            <div class="indeterminate"></div>
+        </div>
+   </div>
 
 
 </script>
 
 <script id="Handlebars-Common-MiniRepCardPreloader" type="text/x-handlebars-template">
 
-     <div class="preloader-wrapper small active">
-      <div class="spinner-layer spinner-teal-only">
-        <div class="circle-clipper left">
-          <div class="circle"></div>
-        </div><div class="gap-patch">
-          <div class="circle"></div>
-        </div><div class="circle-clipper right">
-          <div class="circle"></div>
+    <div class="preloader-wrapper small active">
+        <div class="spinner-layer spinner-teal-only">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+                <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
         </div>
-      </div>
     </div>
 
 </script>
 
 <script id="Handlebars-Common-SelectAll" type="text/x-handlebars-template">
-  <input type="checkbox" class="filled-in BCK-toggle-select-all"
-         id="BCK-list-{{base_check_box_id}}-selectAll"
-    {{#if all_items_selected}}checked="checked"{{/if}}/>
-  <label for="BCK-list-{{base_check_box_id}}-selectAll">Select All</label>
+    <input type="checkbox" class="filled-in BCK-toggle-select-all"
+           id="BCK-list-{{base_check_box_id}}-selectAll"
+           {{#if all_items_selected}}checked="checked" {{/if}}/>
+    <label for="BCK-list-{{base_check_box_id}}-selectAll">Select All</label>
 </script>
 
 <script id="Handlebars-Common-Paginated-Row-large" type="text/x-handlebars-template">
 
     <tr class="BCK-items-row">
-      {{#unless selection_disabled}}
-      <td>
-        <input type="checkbox" class="filled-in BCK-select-one-item" id="BCK-table-{{base_check_box_id}}-select"
-           {{#if is_selected}}checked="checked"{{/if}}/>
-          <label for="BCK-table-{{base_check_box_id}}-select"></label>
-      </td>
-      {{/unless}}
+        {{#unless selection_disabled}}
+        <td>
+            <input type="checkbox" class="filled-in BCK-select-one-item" id="BCK-table-{{base_check_box_id}}-select"
+                   {{#if is_selected}}checked="checked" {{/if}}/>
+            <label for="BCK-table-{{base_check_box_id}}-select"></label>
+        </td>
+        {{/unless}}
 
-      {{#each columns}}
+        {{#each columns}}
 
 
-          <td class="{{#if this.img_url}}center-align{{/if}} {{format_class}}
+        <td class="{{#if this.img_url}}center-align{{/if}} {{format_class}}
             {{#unless this.show}}hidden_cell{{/unless}} BCK-sortable-pag-table-cell"
-              data-comparator="{{this.comparator}}"
-          >
+            data-comparator="{{this.comparator}}"
+        >
 
-          {{#if this.img_url}}
-            <img src="{{this.img_url}}" height="75px" width="75px" ><br>
-          {{/if}}
-          {{#if this.has_link}}
+            {{#if this.img_url}}
+            <img src="{{this.img_url}}" height="75px" width="75px"><br>
+            {{/if}}
+            {{#if this.has_link}}
             <a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
-          {{else if this.has_multiple_links}}
+            {{else if this.has_multiple_links}}
             {{#each this.links_values}}
             <a href="{{this.url}}" target="_blank">{{this.text}}</a>
             {{/each}}
 
-          {{else }}
+            {{else }}
 
 
             {{#unless this.hide_value}}
-              {{this.value}}
+            {{this.value}}
             {{/unless}}
 
-          {{/if}}
+            {{/if}}
 
-          {{#if this.is_function_link}}
+            {{#if this.is_function_link}}
             {{#unless this.hide_value}}<br>{{/unless}}
             <div>
-              <a class="BCK-function-link" data-function-paramaters="{{this.function_parameters}}"
-                 data-function_constant_parameters="{{this.function_constant_parameters}}"
-                 data-function_object_parameter="{{this.function_object_parameter}}"
-                 data-function-key="{{this.function_key}}"
-              >
-                <i class="fa fa-bar-chart" aria-hidden="true"></i>
-              </a>
+                <a class="BCK-function-link" data-function-paramaters="{{this.function_parameters}}"
+                   data-function_constant_parameters="{{this.function_constant_parameters}}"
+                   data-function_object_parameter="{{this.function_object_parameter}}"
+                   data-function-key="{{this.function_key}}"
+                >
+                    <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                </a>
             </div>
-          {{/if}}
+            {{/if}}
 
-          </td>
+        </td>
 
 
-      {{/each}}
+        {{/each}}
 
     </tr>
 
@@ -132,449 +137,453 @@
 <script id="Handlebars-Common-Paginated-Header-large" type="text/x-handlebars-template">
 
 
-  <thead>
+    <thead>
 
-    <tr class="BCK-headers-row" >
+    <tr class="BCK-headers-row">
 
-      {{#unless selection_disabled}}
-      <th>
-          <input type="checkbox" class="filled-in BCK-toggle-select-all"
-                 id="BCK-table-{{base_check_box_id}}-selectAll"
-                 {{#if all_items_selected}}checked="checked"{{/if}}/>
-          <label for="BCK-table-{{base_check_box_id}}-selectAll"></label>
-      </th>
-      {{/unless}}
+        {{#unless selection_disabled}}
+        <th>
+            <input type="checkbox" class="filled-in BCK-toggle-select-all"
+                   id="BCK-table-{{base_check_box_id}}-selectAll"
+                   {{#if all_items_selected}}checked="checked" {{/if}}/>
+            <label for="BCK-table-{{base_check_box_id}}-selectAll"></label>
+        </th>
+        {{/unless}}
 
-      {{#each columns}}
+        {{#each columns}}
         <th class="{{#unless this.show}}hidden_header{{/unless}} BCK-sortable-pag-table-header"
             data-comparator="{{this.comparator}}"
         >
 
-           <table class="headers-table {{#unless this.sort_disabled}}sort{{/unless}}"
-              {{#if this.table_cell_width}}style='width:{{this.table_cell_width}};'{{/if}}
-              data-view-id="{{this.view_id}}"
-           >
-            <thead>
-             <tr>
-               <th class="name-to-show">
+            <table class="headers-table {{#unless this.sort_disabled}}sort{{/unless}}"
+                   {{#if this.table_cell_width}}style='width:{{this.table_cell_width}};' {{
+            /if}}
+            data-view-id="{{this.view_id}}"
+            >
+    <thead>
+    <tr>
+        <th class="name-to-show">
 
-          {{this.name_to_show}}
-               </th>
-               <th>
-          {{#unless this.sort_disabled}}
+            {{this.name_to_show}}
+        </th>
+        <th>
+            {{#unless this.sort_disabled}}
 
-          <i class="fa {{sort_class}} grey-text sort-icon"
-             aria-hidden="true" data-comparator="{{this.comparator}}"></i>
+            <i class="fa {{sort_class}} grey-text sort-icon"
+               aria-hidden="true" data-comparator="{{this.comparator}}"></i>
 
-          {{/unless}}
+            {{/unless}}
 
-                 </th>
-               <tr>
-              <thead>
-            </table>
+        </th>
+    <tr>
+    <thead>
+    </table>
 
 
-          </th>
-      {{/each}}
+    </th>
+    {{/each}}
 
     </tr>
 
-  </thead>
+    </thead>
 
 </script>
 
 <script id="Handlebars-Common-Pagination-LI" type="text/x-handlebars-template">
 
-  <li class="collection-item BCK-items-li">
+    <li class="collection-item BCK-items-li">
 
-    {{#unless selection_disabled}}
-    <p>
-      <input type="checkbox" class="filled-in BCK-select-one-item"
-             id="BCK-list-{{base_check_box_id}}-select"
-      {{#if is_selected}}checked="checked"{{/if}}/>
-      <label for="BCK-list-{{base_check_box_id}}-select"></label>
-    </p>
-    {{/unless}}
+        {{#unless selection_disabled}}
+        <p>
+            <input type="checkbox" class="filled-in BCK-select-one-item"
+                   id="BCK-list-{{base_check_box_id}}-select"
+                   {{#if is_selected}}checked="checked" {{/if}}/>
+            <label for="BCK-list-{{base_check_box_id}}-select"></label>
+        </p>
+        {{/unless}}
 
-    <p>
+        <p>
 
-      {{#each columns}}
+            {{#each columns}}
         <div class="{{#unless this.show}}hidden_list_prop{{/unless}} BCK-sortable-pag-list-prop"
              data-comparator="{{this.comparator}}">
-          <b>{{this.name_to_show}}:</b>
-          {{#if this.has_link}}
+            <b>{{this.name_to_show}}:</b>
+            {{#if this.has_link}}
             <a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
-          {{else}}
+            {{else}}
             {{this.value}}
-          {{/if}}
-          <br>
+            {{/if}}
+            <br>
         </div>
 
-      {{/each}}
+        {{/each}}
 
-    </p>
+        </p>
 
-  </li>
+    </li>
 
 </script>
 
 
 <script id="Handlebars-Common-Paginated-UL" type="text/x-handlebars-template">
 
-  <div class="col s12 m4 l6">
-    Showing {{records_showing}} out of {{total_records}} records
-  </div>
-  <div class="col s12 m8 l6">
-    <ul class="pagination right-align">
-      <li class="page-selector" data-page='previous'><a><i class="material-icons">chevron_left</i></a></li>
+    <div class="col s12 m4 l6">
+        Showing {{records_showing}} out of {{total_records}} records
+    </div>
+    <div class="col s12 m8 l6">
+        <ul class="pagination right-align">
+            <li class="page-selector" data-page='previous'><a><i class="material-icons">chevron_left</i></a></li>
 
-        {{#if show_previous_ellipsis}}
-          <li class="disabled" >...</li>
-        {{/if}}
+            {{#if show_previous_ellipsis}}
+            <li class="disabled">...</li>
+            {{/if}}
 
-        {{#each pages}}
-          <li class="waves-effect page-selector active" data-page='{{this}}' ><a>{{this}}</a></li>
-        {{/each}}
-        {{#if show_next_ellipsis}}
-          <li class="disabled" >...</li>
-        {{/if}}
+            {{#each pages}}
+            <li class="waves-effect page-selector active" data-page='{{this}}'><a>{{this}}</a></li>
+            {{/each}}
+            {{#if show_next_ellipsis}}
+            <li class="disabled">...</li>
+            {{/if}}
 
-      <li class="waves-effect page-selector" data-page='next' ><a><i class="material-icons">chevron_right</i></a></li>
-    </ul>
+            <li class="waves-effect page-selector" data-page='next'><a><i class="material-icons">chevron_right</i></a>
+            </li>
+        </ul>
 
-  </div>
+    </div>
 
 </script>
 
 <script id="Handlebars-Common-GladosSummoned" type="text/x-handlebars-template">
-<div class="card">
-  <div class="card-image">
-    <img src="https://upload.wikimedia.org/wikipedia/en/b/bf/Glados.png">
-  </div>
-  <div class="card-content">
-    <p>I am still alive!</p>
-  </div>
-</div>
+    <div class="card">
+        <div class="card-image">
+            <img src="https://upload.wikimedia.org/wikipedia/en/b/bf/Glados.png">
+        </div>
+        <div class="card-content">
+            <p>I am still alive!</p>
+        </div>
+    </div>
 </script>
 
 
 <script id="Handlebars-Common-MiniReportCard" type="text/x-handlebars-template">
 
-  <div class="card horizontal grey lighten-5 z-depth-0 mini-report-card">
+    <div class="card horizontal grey lighten-5 z-depth-0 mini-report-card">
 
 
-    {{#unless hide_img}}
-      {{#if img_url}}
-        <div class="white card-image" >
-          <img src="{{img_url}}" height="150px" width="150px" >
+        {{#unless hide_img}}
+        {{#if img_url}}
+        <div class="white card-image">
+            <img src="{{img_url}}" height="150px" width="150px">
         </div>
-      {{/if}}
-    {{/unless}}
-    <div class="card-content {{#if img_url}}has-img{{/if}}">
-
-      {{#each columns}}
-
-      {{#if this.has_link}}
-
-        {{#if this.is_secondary_link}}
-          <small>
-            <p ><b>{{this.name_to_show}}</b>: <a href="{{this.link_url}}" target="_blank">{{this.value}}</a></p>
-          </small>
-        {{else}}
-          <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
-          </p>
         {{/if}}
+        {{/unless}}
+        <div class="card-content {{#if img_url}}has-img{{/if}}">
 
-      {{else}}
-      <small>
-        <p><b>{{this.name_to_show}}:</b> {{this.value}}</p>
-      </small>
-      {{/if}}
-      {{/each}}
+            {{#each columns}}
 
-      {{#if general_link_url}}
-        <hr>
-        <a target="_blank" href="{{general_link_url}}">{{general_link_text}}</a>
-      {{/if}}
+            {{#if this.has_link}}
+
+            {{#if this.is_secondary_link}}
+            <small>
+                <p><b>{{this.name_to_show}}</b>: <a href="{{this.link_url}}" target="_blank">{{this.value}}</a></p>
+            </small>
+            {{else}}
+            <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
+            </p>
+            {{/if}}
+
+            {{else}}
+            <small>
+                <p><b>{{this.name_to_show}}:</b> {{this.value}}</p>
+            </small>
+            {{/if}}
+            {{/each}}
+
+            {{#if general_link_url}}
+            <hr>
+            <a target="_blank" href="{{general_link_url}}">{{general_link_text}}</a>
+            {{/if}}
+        </div>
+
     </div>
 
-  </div>
-
- </script>
+</script>
 
 <script id='Handlebars-Common-Paginated-Card-Compound' type="text/x-handlebars-template">
 
-  <div class="col s{{small_size}}
+    <div class="col s{{small_size}}
                   m{{medium_size}}
                   l{{large_size}}">
 
-    <div class="card grey lighten-5 hoverable">
+        <div class="card grey lighten-5 hoverable">
 
-      <div class='checkbox-container'>
-        <input type="checkbox" class="filled-in BCK-select-one-item" id="BCK-cards-{{base_check_box_id}}-select"
-           {{#if is_selected}}checked="checked"{{/if}}/>
-          <label for="BCK-cards-{{base_check_box_id}}-select"></label>
-      </div>
+            <div class='checkbox-container'>
+                <input type="checkbox" class="filled-in BCK-select-one-item" id="BCK-cards-{{base_check_box_id}}-select"
+                       {{#if is_selected}}checked="checked" {{/if}}/>
+                <label for="BCK-cards-{{base_check_box_id}}-select"></label>
+            </div>
 
-      <div class="white card-image BCK-image">
+            <div class="white card-image BCK-image">
 
-        <div class="BCK-preloader"></div>
-        <div class="BCK-error-messages-container"></div>
-        <img class="BCK-specialStruct-image similarity-map-img">
-        <img class="BCK-main-image"src="{{img_url}}">
+                <div class="BCK-preloader"></div>
+                <div class="BCK-error-messages-container"></div>
+                <img class="BCK-specialStruct-image similarity-map-img">
+                <img class="BCK-main-image" src="{{img_url}}">
 
 
-      </div>
+            </div>
 
-      <div class="card-content BCK-info-opener">
-        <div class="slide-more-info opener">
-          <div class="center-align">
-            <a class="BCK-open-info">
-              <i class="fa fa-chevron-up" aria-hidden="true"></i>
-            </a>
-          </div>
+            <div class="card-content BCK-info-opener">
+                <div class="slide-more-info opener">
+                    <div class="center-align">
+                        <a class="BCK-open-info">
+                            <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+                {{#each columns}}
+                {{#if this.has_link}}
+                <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a></p>
+                {{else}}
+                <small>
+                    <p><b>{{this.name_to_show}}:</b> {{this.value}}</p>
+                </small>
+                {{/if}}
+                {{/each}}
+            </div>
+
+            <div class="grey lighten-5 BCK-info-container details">
+
+                <div class="slide-more-info">
+
+                    <div class="center-align">
+                        <a class="BCK-close-info">
+                            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="BCK-tabs-contents tabs-contents">
+
+                </div>
+
+                <div class="tabs-container">
+                    <div class="card-tabs">
+                        <a class="section-item BCK-openTab selected" data-tab-id="Details">Details</a>
+                        <a class="section-item BCK-openTab" data-tab-id="Targets">Targets</a>
+                    </div>
+                </div>
+
+
+            </div>
+
         </div>
-        {{#each columns}}
-          {{#if this.has_link}}
-            <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a></p>
-          {{else}}
-            <small>
-              <p><b>{{this.name_to_show}}:</b> {{this.value}}</p>
-            </small>
-          {{/if}}
-        {{/each}}
-      </div>
-
-      <div class="grey lighten-5 BCK-info-container details">
-
-        <div class="slide-more-info">
-
-          <div class="center-align">
-            <a class="BCK-close-info">
-              <i class="fa fa-chevron-down" aria-hidden="true"></i>
-            </a>
-          </div>
-
-        </div>
-
-        <div class="BCK-tabs-contents tabs-contents">
-
-        </div>
-
-        <div class="tabs-container">
-          <div class="card-tabs">
-            <a class="section-item BCK-openTab selected" data-tab-id="Details">Details</a>
-            <a class="section-item BCK-openTab" data-tab-id="Targets" >Targets</a>
-          </div>
-        </div>
-
-
-      </div>
 
     </div>
-
-  </div>
 
 </script>
 
 <script id='Handlebars-Common-Paginated-Card-TabContent' type="text/x-handlebars-template">
-  <div class="BCK-tab-content" data-tab-id='{{tab_id}}'>{{tab_id}}</div>
+    <div class="BCK-tab-content" data-tab-id='{{tab_id}}'>{{tab_id}}</div>
 </script>
 
 
 <script id="Handlebars-Common-Paginated-Card-Horizontal" type="text/x-handlebars-template">
 
-  <div class="col s{{small_size}}
+    <div class="col s{{small_size}}
                   m{{medium_size}}
-                  l{{large_size}}" >
+                  l{{large_size}}">
 
-    <div class="card horizontal grey lighten-5{{#unless img_url}} card-top-border{{/unless}} hoverable paginated-card" style="height: 85%">
+        <div class="card horizontal grey lighten-5{{#unless img_url}} card-top-border{{/unless}} hoverable paginated-card"
+             style="height: 85%">
 
-      <div class='checkbox-container'>
-        <input type="checkbox" class="filled-in BCK-select-one-item" id="BCK-cards-{{base_check_box_id}}-select"
-           {{#if is_selected}}checked="checked"{{/if}}/>
-          <label for="BCK-cards-{{base_check_box_id}}-select"></label>
-      </div>
+            <div class='checkbox-container'>
+                <input type="checkbox" class="filled-in BCK-select-one-item" id="BCK-cards-{{base_check_box_id}}-select"
+                       {{#if is_selected}}checked="checked" {{/if}}/>
+                <label for="BCK-cards-{{base_check_box_id}}-select"></label>
+            </div>
 
-      {{#if img_url}}
-        <div class="white card-image" >
-          <img src="{{img_url}}" height="150px" width="150px" >
+            {{#if img_url}}
+            <div class="white card-image">
+                <img src="{{img_url}}" height="150px" width="150px">
+            </div>
+            {{/if}}
+            <div class="card-stacked">
+                <div class="card-content">
+
+                    {{#each columns}}
+
+                    {{#if this.has_link}}
+
+                    {{#if this.is_secondary_link}}
+                    <small>
+                        <p><b>{{this.name_to_show}}</b>: <a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
+                        </p>
+                    </small>
+                    {{else}}
+                    <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
+                    </p>
+                    {{/if}}
+
+                    {{else}}
+                    <small>
+                        <p><b>{{this.name_to_show}}:</b> {{this.value}}</p>
+                    </small>
+                    {{/if}}
+                    {{/each}}
+
+                </div>
+            </div>
         </div>
-      {{/if}}
-      <div class="card-stacked">
-        <div class="card-content">
 
-          {{#each columns}}
-
-          {{#if this.has_link}}
-
-            {{#if this.is_secondary_link}}
-                <small>
-                  <p  ><b>{{this.name_to_show}}</b>: <a href="{{this.link_url}}" target="_blank">{{this.value}}</a></p>
-                </small>
-              {{else}}
-                <p  ><a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
-                </p>
-              {{/if}}
-
-          {{else}}
-          <small>
-            <p ><b>{{this.name_to_show}}:</b> {{this.value}}</p>
-          </small>
-          {{/if}}
-          {{/each}}
-
-        </div>
-      </div>
     </div>
 
-  </div>
-
- </script>
+</script>
 
 <script id="Handlebars-Common-Paginated-Card-Document" type="text/x-handlebars-template">
 
-  <div class="col s12 m6 l4">
+    <div class="col s12 m6 l4">
 
-    <div class="card grey lighten-5" >
+        <div class="card grey lighten-5">
 
-        <div class="card-content" >
+            <div class="card-content">
 
-          {{#each columns}}
+                {{#each columns}}
 
-          {{#if this.has_link}}
+                {{#if this.has_link}}
 
-          <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
-          </p>
+                <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
+                </p>
 
-          {{else if this.custom_html}}
-            <p style="overflow: hidden; text-overflow: ellipsis; white-space:nowrap;">
-              {{{this.custom_html}}}
-            </p>
-          {{else}}
-          <small>
-            <p style="overflow: hidden; text-overflow: ellipsis; white-space:nowrap;">
-              {{this.value}}
-            </p>
-          </small>
-          {{/if}}
-          {{/each}}
+                {{else if this.custom_html}}
+                <p style="overflow: hidden; text-overflow: ellipsis; white-space:nowrap;">
+                    {{{this.custom_html}}}
+                </p>
+                {{else}}
+                <small>
+                    <p style="overflow: hidden; text-overflow: ellipsis; white-space:nowrap;">
+                        {{this.value}}
+                    </p>
+                </small>
+                {{/if}}
+                {{/each}}
+
+            </div>
 
         </div>
 
     </div>
 
-  </div>
-
- </script>
+</script>
 
 <script id="Handlebars-Common-CompoundDetails" type="text/x-handlebars-template">
 
-  <div class="compound-details">
-    {{#if img_url}}
-      <div class="white center-align">
-        <img src="{{img_url}}" height="100px">
-      </div>
-    {{/if}}
-    <div class="card-content">
-
-      {{#each columns}}
-
-      {{#if this.has_link}}
-
-        {{#if this.is_secondary_link}}
-          <small>
-            <p ><b>{{this.name_to_show}}</b>: <a href="{{this.link_url}}" target="_blank">{{this.value}}</a></p>
-          </small>
-        {{else}}
-          <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a></p>
+    <div class="compound-details">
+        {{#if img_url}}
+        <div class="white center-align">
+            <img src="{{img_url}}" height="100px">
+        </div>
         {{/if}}
+        <div class="card-content">
 
-      {{else}}
-      <small>
-        <p >
-          <b>{{this.name_to_show}}</b>: {{this.value}}
-        </p>
-      </small>
-      {{/if}}
-      {{/each}}
+            {{#each columns}}
+
+            {{#if this.has_link}}
+
+            {{#if this.is_secondary_link}}
+            <small>
+                <p><b>{{this.name_to_show}}</b>: <a href="{{this.link_url}}" target="_blank">{{this.value}}</a></p>
+            </small>
+            {{else}}
+            <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a></p>
+            {{/if}}
+
+            {{else}}
+            <small>
+                <p>
+                    <b>{{this.name_to_show}}</b>: {{this.value}}
+                </p>
+            </small>
+            {{/if}}
+            {{/each}}
+
+        </div>
 
     </div>
-
-  </div>
 
 </script>
 
 <script id="Handlebars-Common-Paginated-Card" type="text/x-handlebars-template">
 
     <div class="col s12 m6 l4">
-      <div class="card grey lighten-5 hoverable">
+        <div class="card grey lighten-5 hoverable">
 
-        {{#if img_url}}
-          <div class="white card-image">
-            <img src="{{img_url}}" height="200px">
-          </div>
-        {{/if}}
-        <div class="card-content">
-
-          {{#each columns}}
-
-          {{#if this.has_link}}
-
-            {{#if this.is_secondary_link}}
-              <small>
-                <p ><b>{{this.name_to_show}}</b>: <a href="{{this.link_url}}" target="_blank">{{this.value}}</a></p>
-              </small>
-            {{else}}
-              <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a></p>
+            {{#if img_url}}
+            <div class="white card-image">
+                <img src="{{img_url}}" height="200px">
+            </div>
             {{/if}}
+            <div class="card-content">
 
-          {{else}}
-          <small>
-            <p >
-              <b>{{this.name_to_show}}</b>: {{this.value}}
-            </p>
-          </small>
-          {{/if}}
-          {{/each}}
+                {{#each columns}}
 
+                {{#if this.has_link}}
+
+                {{#if this.is_secondary_link}}
+                <small>
+                    <p><b>{{this.name_to_show}}</b>: <a href="{{this.link_url}}" target="_blank">{{this.value}}</a></p>
+                </small>
+                {{else}}
+                <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a></p>
+                {{/if}}
+
+                {{else}}
+                <small>
+                    <p>
+                        <b>{{this.name_to_show}}</b>: {{this.value}}
+                    </p>
+                </small>
+                {{/if}}
+                {{/each}}
+
+            </div>
         </div>
-      </div>
 
     </div>
 
-  </script>
+</script>
 
 <script id="Handlebars-Common-Paginated-Card-Carousel" type="text/x-handlebars-template">
 
     <div class="col s12 m6 l4">
-      <div class="card grey lighten-5">
+        <div class="card grey lighten-5">
 
-        {{#if img_url}}
-          <div class="white card-image">
-            <img src="{{img_url}}" class="responsive-img">
-          </div>
-        {{/if}}
-        <div class="card-content">
+            {{#if img_url}}
+            <div class="white card-image">
+                <img src="{{img_url}}" class="responsive-img">
+            </div>
+            {{/if}}
+            <div class="card-content">
 
-          {{#each columns}}
+                {{#each columns}}
 
-          {{#if this.has_link}}
+                {{#if this.has_link}}
 
-          <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
-          </p>
+                <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
+                </p>
 
-          {{else}}
-          <small>
-            <p >
-              {{this.name_to_show}}:{{this.value}}
-            </p>
-          </small>
-          {{/if}}
-          {{/each}}
+                {{else}}
+                <small>
+                    <p>
+                        {{this.name_to_show}}:{{this.value}}
+                    </p>
+                </small>
+                {{/if}}
+                {{/each}}
 
+            </div>
         </div>
-      </div>
 
     </div>
 
@@ -583,107 +592,110 @@
 <script id="Handlebars-Common-Paginated-Card-CarouselStructuralAlerts" type="text/x-handlebars-template">
 
     <div class="col s12 m6 l4">
-      <div class="card grey lighten-5">
+        <div class="card grey lighten-5">
 
-        {{#if img_url}}
-          <div class="white card-image">
-            <img src="{{img_url}}" class="responsive-img" style='min-height: 240px;'>
-          </div>
-        {{/if}}
-        <div class="card-content">
-
-          {{#each columns}}
-
-            {{#if this.img_url}}
-            {{else}}
-              <p >
-                {{this.value}}
-              </p>
+            {{#if img_url}}
+            <div class="white card-image">
+                <img src="{{img_url}}" class="responsive-img" style='min-height: 240px;'>
+            </div>
             {{/if}}
-          {{/each}}
+            <div class="card-content">
 
+                {{#each columns}}
+
+                {{#if this.img_url}}
+                {{else}}
+                <p>
+                    {{this.value}}
+                </p>
+                {{/if}}
+                {{/each}}
+
+            </div>
         </div>
-      </div>
 
     </div>
 
-  </script>
+</script>
 
 
 <script id="Handlebars-Common-SortSelect" type="text/x-handlebars-template">
 
-  <select class="{{#if custom_class }} {{custom_class}} {{else}} select-sort {{/if}}">
-    <option value="" disabled {{#unless this.one_selected}} selected {{/unless}}>Choose a field</option>
-    {{#each columns}}
-      <option value="{{this.comparator}}" {{#if this.selected}} selected {{/if}}>{{this.label}}</option>
-    {{/each}}
-  </select>
-  <label>{{#if custom_label }} {{custom_label}} {{else}} Sort by: {{/if}}</label>
+    <select class="{{#if custom_class }} {{custom_class}} {{else}} select-sort {{/if}}">
+        <option value="" disabled {{#unless this.one_selected}} selected {{
+        /unless}}>Choose a field</option>
+        {{#each columns}}
+        <option value="{{this.comparator}}" {{#if this.selected}} selected {{
+        /if}}>{{this.label}}</option>
+        {{/each}}
+    </select>
+    <label>{{#if custom_label }} {{custom_label}} {{else}} Sort by: {{/if}}</label>
 
 </script>
 
 <script id="Handlebars-Common-SortDirectionBtn" type="text/x-handlebars-template">
 
-  <a class="waves-effect waves-light btn-mini teal btn-sort-direction" {{#if disabled}} disabled {{/if}}
-  data-target-property="{{target_property}}">
+    <a class="waves-effect waves-light btn-mini teal btn-sort-direction" {{#if disabled}} disabled {{/if}}
+    data-target-property="{{target_property}}">
     <i class="fa {{sort_class}}" aria-hidden="true"></i>
     {{text}}
-  </a>
+    </a>
 
 </script>
 
 <script id="Handlebars-Common-Paginated-NumResults" type="text/x-handlebars-template">
-  {{num_results}} Results
+    {{num_results}} Results
 </script>
 
 
 <script id="Handlebars-Common-SelectPageSizeContainer" type="text/x-handlebars-template">
 
-  <div class="input-field">
+    <div class="input-field">
 
-      <select class="change-page-size">
+        <select class="change-page-size">
 
-        {{#each items}}
+            {{#each items}}
 
-        <option value="{{this.number}}" {{#if this.is_selected}}selected{{/if}}>{{this.number}}</option>
+            <option value="{{this.number}}" {{#if this.is_selected}}selected{{
+            /if}}>{{this.number}}</option>
 
-        {{/each}}
+            {{/each}}
 
-      </select>
-      <label>Records per page:</label>
+        </select>
+        <label>Records per page:</label>
     </div>
 
 </script>
 
 <script id="Handlebars-Common-CardsZoom" type="text/x-handlebars-template">
 
-  <div class="buttons-wrapper">
-    <a class="BCK-zoom-in zoom-btn {{#if disable_zoom_in}}disabled{{/if}}"><i class="fa fa-lg fa-plus"></i></a>
-    <a class="BCK-reset-zoom zoom-btn {{#if disable_reset}}disabled{{/if}}" ><i class="fa fa-lg fa-home"></i></a>
-    <a class="BCK-zoom-out  zoom-btn {{#if disable_zoom_out}}disabled{{/if}}" ><i class="fa fa-lg fa-minus"></i></a>
-  </div>
+    <div class="buttons-wrapper">
+        <a class="BCK-zoom-in zoom-btn {{#if disable_zoom_in}}disabled{{/if}}"><i class="fa fa-lg fa-plus"></i></a>
+        <a class="BCK-reset-zoom zoom-btn {{#if disable_reset}}disabled{{/if}}"><i class="fa fa-lg fa-home"></i></a>
+        <a class="BCK-zoom-out  zoom-btn {{#if disable_zoom_out}}disabled{{/if}}"><i class="fa fa-lg fa-minus"></i></a>
+    </div>
 
 </script>
 
 <script id="Handlebars-Common-SpecialStructuresControls" type="text/x-handlebars-template">
 
-<div class="tool-title">{{title}}</div>
-<div class="switch">
-    <label>
-      On
-      <input class="BCK-toggle-SimMaps" {{#if checked}}checked{{/if}} type="checkbox">
-      <span class="lever"></span>
-      Off
-    </label>
-</div>
+    <div class="tool-title">{{title}}</div>
+    <div class="switch">
+        <label>
+            On
+            <input class="BCK-toggle-SimMaps" {{#if checked}}checked{{/if}} type="checkbox">
+            <span class="lever"></span>
+            Off
+        </label>
+    </div>
 
 </script>
 <script id="Handlebars-Common-ShowHideColumnsDropdown-trigger" type="text/x-handlebars-template">
-  <a class='menu-button' href="#{{modal_id}}">Show/Hide Columns</a>
+    <a class='menu-button' href="#{{modal_id}}">Show/Hide Columns</a>
 
-  <div id="{{modal_id}}" class="modal bottom-sheet BCK-ModalContent"
-       data-hb-template="Handlebars-Common-ShowHideColumnsDropdown-content">
-  </div>
+    <div id="{{modal_id}}" class="modal bottom-sheet BCK-ModalContent"
+         data-hb-template="Handlebars-Common-ShowHideColumnsDropdown-content">
+    </div>
 
 </script>
 
@@ -692,67 +704,65 @@
     <div class="modal-content left-align div-cover-wrapper">
 
 
-      <div class="show-hide-columns">
+        <div class="show-hide-columns">
 
-        <div class="row">
-          You may need to scroll the table horizontally to see all columns. Drag and drop items to change their order.
-        </div>
+            <div class="row">
+                You may need to scroll the table horizontally to see all columns. Drag and drop items to change their
+                order.
+            </div>
 
-        <div class="row center-align">
+            <div class="row center-align">
 
-            <input type="checkbox" class="BCK-show-hide-column filled-in"
-                   data-comparator='SELECT-ALL' id="check-{{random_num}}"
-                   {{#if all_selected}} checked="checked" {{/if}}
-            />
-            <label for="check-{{random_num}}">Select All</label>
-
-        </div>
-
-        <div class="row BCK-draggable-container sortable-items-container">
-
-          {{#each all_columns}}
-
-          <div class="col s6 m3 l2 drag-dummy BCK-drag-dummy" data-comparator='{{this.comparator}}'>
-          </div>
-
-          <div class="col s6 m3 l2 sortable-item BCK-draggable" draggable='true' data-comparator='{{this.comparator}}'>
-
-            <div class="item-content">
-
-              <div class="item-checkbox">
-
-                  <input type="checkbox" class="BCK-show-hide-column filled-in"
-                       id="{{this.modal_id}}-check-{{this.comparator}}"
-                       data-comparator='{{this.comparator}}'
-                       {{#if this.show}} checked="checked" {{/if}}
+                <input type="checkbox" class="BCK-show-hide-column filled-in"
+                       data-comparator='SELECT-ALL' id="check-{{random_num}}"
+                       {{#if all_selected}} checked="checked" {{/if}}
                 />
-
-                  <label for="{{this.modal_id}}-check-{{this.comparator}}">
-                  {{this.position}}.
-                  </label>
-
-
-
-
-              </div>
-
-
-              <div class="property-name">{{this.name_to_show}}</div>
-
-
+                <label for="check-{{random_num}}">Select All</label>
 
             </div>
 
-          </div>
+            <div class="row BCK-draggable-container sortable-items-container">
 
-          {{/each}}
+                {{#each all_columns}}
+
+                <div class="col s6 m3 l2 drag-dummy BCK-drag-dummy" data-comparator='{{this.comparator}}'>
+                </div>
+
+                <div class="col s6 m3 l2 sortable-item BCK-draggable" draggable='true'
+                     data-comparator='{{this.comparator}}'>
+
+                    <div class="item-content">
+
+                        <div class="item-checkbox">
+
+                            <input type="checkbox" class="BCK-show-hide-column filled-in"
+                                   id="{{this.modal_id}}-check-{{this.comparator}}"
+                                   data-comparator='{{this.comparator}}'
+                                   {{#if this.show}} checked="checked" {{/if}}
+                            />
+
+                            <label for="{{this.modal_id}}-check-{{this.comparator}}">
+                                {{this.position}}.
+                            </label>
+
+
+                        </div>
+
+
+                        <div class="property-name">{{this.name_to_show}}</div>
+
+
+                    </div>
+
+                </div>
+
+                {{/each}}
+            </div>
+
         </div>
 
-      </div>
-
-      <div class='chembl-modal-cover BCK-loading-cover'> Loading... </div>
+        <div class='chembl-modal-cover BCK-loading-cover'> Loading...</div>
     </div>
-
 
 
 </script>
@@ -760,165 +770,173 @@
 
 <script id="Handlebars-Common-EditFiltersModal" type="text/x-handlebars-template">
 
-  <div class="center-align filters-title">
-      <b class="title">Filters</b>
-      <a class="BCK-Filters-Settings-Trigger menu-button modal-trigger" href="#{{modal_id}}">
-        <i class="fa fa-lg fa-cogs"></i>
-      </a>
-  </div>
-
-  <div class="BCK-ModalContent-container">
-    <div id="{{modal_id}}" class="modal bottom-sheet BCK-ModalContent"
-         data-hb-template="Handlebars-Common-ShowHideColumnsDropdown-content">
-
+    <div class="center-align filters-title">
+        <b class="title">Filters</b>
+        <a class="BCK-Filters-Settings-Trigger menu-button modal-trigger" href="#{{modal_id}}">
+            <i class="fa fa-lg fa-cogs"></i>
+        </a>
     </div>
-  </div>
+
+    <div class="BCK-ModalContent-container">
+        <div id="{{modal_id}}" class="modal bottom-sheet BCK-ModalContent"
+             data-hb-template="Handlebars-Common-ShowHideColumnsDropdown-content">
+
+        </div>
+    </div>
 
 
 </script>
 
 <script id="Handlebars-Common-CollectionErrorMsg" type="text/x-handlebars-template">
-  {{#if custom_explanation}} {{custom_explanation}} <br> {{/if}}
-  <i class="fa fa-exclamation-circle"></i> Error: {{msg}}
-  <a> <i class="fa fa-times" aria-hidden="true" onclick="$(this).parent().parent().empty();"></i></a>
+    {{#if custom_explanation}} {{custom_explanation}} <br> {{/if}}
+    <i class="fa fa-exclamation-circle"></i> Error: {{msg}}
+    <a> <i class="fa fa-times" aria-hidden="true" onclick="$(this).parent().parent().empty();"></i></a>
 </script>
 
 <script id="Handlebars-Common-DownloadColMessages0" type="text/x-handlebars-template">
-  <i class="fa fa-cog fa-spin fa-fw"></i>
-  {{#if custom_base_progress_text }}{{custom_base_progress_text}}{{else}} Collecting Items... {{/if}} {{percentage}}%
-  <div class="progress">
-      <div class="determinate" style="width: {{percentage}}%"></div>
-  </div>
+    <i class="fa fa-cog fa-spin fa-fw"></i>
+    {{#if custom_base_progress_text }}{{custom_base_progress_text}}{{else}} Collecting Items... {{/if}} {{percentage}}%
+    <div class="progress">
+        <div class="determinate" style="width: {{percentage}}%"></div>
+    </div>
 </script>
 
 <script id="Handlebars-Common-DownloadColMessages1" type="text/x-handlebars-template">
-  <i class="fa fa-cog fa-spin fa-fw"></i> Generating File...
+    <i class="fa fa-cog fa-spin fa-fw"></i> Generating File...
 </script>
 
 <script id="Handlebars-Common-DownloadColMessages2" type="text/x-handlebars-template">
-  <i class="fa fa-cog fa-spin fa-fw"></i> Done! Final file has {{num_compounds}} compounds
+    <i class="fa fa-cog fa-spin fa-fw"></i> Done! Final file has {{num_compounds}} compounds
 </script>
 
 <script id="Handlebars-Common-DownloadColMessages3" type="text/x-handlebars-template">
-  <i class="fa fa-cog fa-spin fa-fw"></i> Generating File... {{percentage}}%
+    <i class="fa fa-cog fa-spin fa-fw"></i> Generating File... {{percentage}}%
 </script>
 
 <script id="Handlebars-Common-VisualisationProgress" type="text/x-handlebars-template">
-  {{#unless hide_cog}}<i class="fa fa-cog fa-spin fa-fw"></i>{{/unless}}
-  {{#if show_warning_icon}} <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{/if}}
-  {{message}}
-  {{#if link_url}}
+    {{#unless hide_cog}}<i class="fa fa-cog fa-spin fa-fw"></i>{{/unless}}
+    {{#if show_warning_icon}} <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{/if}}
+    {{message}}
+    {{#if link_url}}
     <a target="_blank" href="{{link_url}}">{{link_text}}</a>
-  {{/if}}
+    {{/if}}
 </script>
 
 <script id="Handlebars-Common-PlotError" type="text/x-handlebars-template">
-  <br><br>
-  <img class="responsive-img" src="{{static_images_url}}plot_error.png">
+    <br><br>
+    <img class="responsive-img" src="{{static_images_url}}plot_error.png">
 </script>
 
 <script id="Handlebars-Common-MatrixError" type="text/x-handlebars-template">
-  <br><br>
-  <img class="responsive-img" src="{{static_images_url}}matrix_error.png">
+    <br><br>
+    <img class="responsive-img" src="{{static_images_url}}matrix_error.png">
 </script>
 
 <script id="Handlebars-Common-DownloadErrorModal" type="text/x-handlebars-template">
 
-  <div id="{{modal_id}}" class="modal">
-    <div class="modal-content">
-      <h4>Error</h4>
-      <p>{{msg}}</p>
+    <div id="{{modal_id}}" class="modal">
+        <div class="modal-content">
+            <h4>Error</h4>
+            <p>{{msg}}</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">OK</a>
+        </div>
     </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">OK</a>
-    </div>
-  </div>
 
 </script>
 
 <script id="Handlebars-Common-ESResultsPlot-axesOptions" type="text/x-handlebars-template">
-  <span class="hide-on-med-and-down">Summary:</span>
-  {{#each options}}
-  <option value="{{this.id}}" {{#if this.selected}}selected{{/if}}>{{this.label}}</option>
-  {{/each}}
+    <span class="hide-on-med-and-down">Summary:</span>
+    {{#each options}}
+    <option value="{{this.id}}" {{#if this.selected}}selected{{/if}}>{{this.label}}</option>
+    {{/each}}
 </script>
 
 <script id="Handlebars-Common-Histogram-numbars" type="text/x-handlebars-template">
-  <p><small>Number of bins: <b>{{current_value}}</b></small></p></p>
-  <p class="range-field">
-    <input type="range" min="{{min_value}}" max="{{max_value}}" value="{{current_value}}"/>
-  </p>
+    <p>
+        <small>Number of bins: <b>{{current_value}}</b></small>
+    </p></p>
+    <p class="range-field">
+        <input type="range" min="{{min_value}}" max="{{max_value}}" value="{{current_value}}"/>
+    </p>
 </script>
 
 <script id="Handlebars-Common-Histogram-binsize" type="text/x-handlebars-template">
-  <p><small>Bin size: <b>{{current_value}}</b></small></p></p>
-  <p class="range-field">
-    <input type="range" min="{{min_value}}" max="{{max_value}}" value="{{current_value}}"/>
-  </p>
+    <p>
+        <small>Bin size: <b>{{current_value}}</b></small>
+    </p></p>
+    <p class="range-field">
+        <input type="range" min="{{min_value}}" max="{{max_value}}" value="{{current_value}}"/>
+    </p>
 </script>
 
 <script id="Handlebars-Common-ESResultsPlot-rejectedResults" type="text/x-handlebars-template">
-  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> The following results were excluded from the plot
-  because in any of the shown axes their value is null: <br>
-  {{#each rejected}}
-    <a href="/compound_report_card/{{id}}" target="_blank" {{#if selected}}class="green lighten-5"{{/if}}>{{id}}</a>
-  {{/each}}
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> The following results were excluded from the plot
+    because in any of the shown axes their value is null: <br>
+    {{#each rejected}}
+    <a href="/compound_report_card/{{id}}" target="_blank" {{#if selected}}class="green lighten-5" {{/if}}>{{id}}</a>
+    {{/each}}
 </script>
 
 
 <script id="Handlebars-Common-ESResultsMatrix-ZoomOptions" type="text/x-handlebars-template">
     <div class="matrix-vis-options grey lighten-3">
         <a class="BCK-reset-zoom-btn"><i class="fa fa-lg fa-home tooltipped" aria-hidden="true" href=""
-              data-position="bottom" data-tooltip="Reset zoom"></i></a>
-        <a class="BCK-zoom-in-btn"><i class="fa fa-lg fa-search-plus tooltipped" aria-hidden="true" data-position="bottom"
-              data-tooltip="Zoom in" ></i></a>
-        <a class="BCK-zoom-out-btn"><i class="fa fa-lg fa-search-minus tooltipped" aria-hidden="true" data-position="bottom"
-              data-tooltip="Zoom out"></i></a>
-        <a class="BCK-toggle-grab"><i class="fa fa-lg fa-hand-paper-o tooltipped" aria-hidden="true" data-position="bottom"
-              data-tooltip="Grab"></i></a>
-        <a class="BCK-open-full-screen"><i class="fa fa-lg fa-arrows-alt tooltipped" aria-hidden="true" data-position="bottom"
-              data-tooltip="Open in full screen"></i></a>
+                                         data-position="bottom" data-tooltip="Reset zoom"></i></a>
+        <a class="BCK-zoom-in-btn"><i class="fa fa-lg fa-search-plus tooltipped" aria-hidden="true"
+                                      data-position="bottom"
+                                      data-tooltip="Zoom in"></i></a>
+        <a class="BCK-zoom-out-btn"><i class="fa fa-lg fa-search-minus tooltipped" aria-hidden="true"
+                                       data-position="bottom"
+                                       data-tooltip="Zoom out"></i></a>
+        <a class="BCK-toggle-grab"><i class="fa fa-lg fa-hand-paper-o tooltipped" aria-hidden="true"
+                                      data-position="bottom"
+                                      data-tooltip="Grab"></i></a>
+        <a class="BCK-open-full-screen"><i class="fa fa-lg fa-arrows-alt tooltipped" aria-hidden="true"
+                                           data-position="bottom"
+                                           data-tooltip="Open in full screen"></i></a>
     </div>
 </script>
 
 <script id="Handlebars-Common-totalItems" type="text/x-handlebars-template">
-<small>
-  Total items: {{num_items}}
-</small>
+    <small>
+        Total items: {{num_items}}
+    </small>
 </script>
 
 <script id="Handlebars-Common-PieAllSourcesLink" type="text/x-handlebars-template">
-<a target='_blank' href="{{url}}" > {{link_text}}</a>
+    <a target='_blank' href="{{url}}"> {{link_text}}</a>
 </script>
 
 <script id="Handlebars-Common-ESResultsListInfiniteView" type="text/x-handlebars-template">
-{% endverbatim %}
-  {% include "glados/base/PaginatedCollections/DefaultInfinityBrowserContent.html" %}
-{% verbatim %}
+    {% endverbatim %}
+    {% include "glados/base/PaginatedCollections/DefaultInfinityBrowserContent.html" %}
+    {% verbatim %}
 </script>
 
 <script id="Handlebars-Common-ESResultsListGraphView" type="text/x-handlebars-template">
 
-  <span class="load-messages-container">
+    <span class="load-messages-container">
   </span>
 
-  <div class="card grey lighten-5">
-    <div class="card-content">
-      {% endverbatim %}
+    <div class="card grey lighten-5">
+        <div class="card-content">
+            {% endverbatim %}
 
-        {% include "glados/base/Visualisation/DefaultScatterPLotContent.html" %}
+            {% include "glados/base/Visualisation/DefaultScatterPLotContent.html" %}
 
-      {% verbatim %}
+            {% verbatim %}
+        </div>
     </div>
-  </div>
 
 </script>
 
 <script id="Handlebars-Common-ESResultsListTableView" type="text/x-handlebars-template">
 
-  {% endverbatim %}
+    {% endverbatim %}
     {% include "glados/base/PaginatedCollections/DefaultTableContent.html" %}
-  {% verbatim %}
+    {% verbatim %}
 
 </script>
 
@@ -927,336 +945,350 @@
 {% verbatim %}
 <script id="Handlebars-Common-ESResultsListCardsView" type="text/x-handlebars-template">
 
-{% endverbatim %}
+    {% endverbatim %}
     {% include "glados/base/PaginatedCollections/DefaultCardPageContent.html" %}
-{% verbatim %}
+    {% verbatim %}
 </script>
 
 <script id="Handlebars-Common-ESResultsListMatrixView" type="text/x-handlebars-template">
-  <span class="load-messages-container">
+    <span class="load-messages-container">
   </span>
 
-  <div class="card grey lighten-5">
-    <div class="card-content">
+    <div class="card grey lighten-5">
+        <div class="card-content">
 
-      {% endverbatim %}
-        {% include "glados/ActivityAggregations/ActivityAggregationMatrixBase.html" %}
-      {% verbatim %}
+            {% endverbatim %}
+            {% include "glados/ActivityAggregations/ActivityAggregationMatrixBase.html" %}
+            {% verbatim %}
+        </div>
     </div>
-</div>
 </script>
 
 <script id="Handlebars-Common-ESResultsListBioactivityView" type="text/x-handlebars-template">
 
-  <span class="load-messages-container">
+    <span class="load-messages-container">
   </span>
-  <div class="card grey lighten-5">
-    <div class="card-content">
-    {% endverbatim %}
-      {% include "glados/ActivityAggregations/ActivityAggregationMatrixBase.html" %}
-    {% verbatim %}
+    <div class="card grey lighten-5">
+        <div class="card-content">
+            {% endverbatim %}
+            {% include "glados/ActivityAggregations/ActivityAggregationMatrixBase.html" %}
+            {% verbatim %}
+        </div>
     </div>
-  </div>
 </script>
 
 <script id="Handlebars-DownloadColButtons" type="text/x-handlebars-template">
 
-  <div class="buttons-container">
-    {{#each formats}}
-    <a class="menu-button big BCK-download-btn-for-format" data-format="{{this}}"><i class="fa fa-download"></i> {{this}}</a>
-    {{/each}}
-  </div>
+    <div class="buttons-container">
+        {{#each formats}}
+        <a class="menu-button big BCK-download-btn-for-format" data-format="{{this}}"><i class="fa fa-download"></i>
+            {{this}}</a>
+        {{/each}}
+    </div>
 
 </script>
 
 <script id="Handlebars-SwitchColViewButtons" type="text/x-handlebars-template">
 
-  <div class="summary-tabs">
-    {{#each options}}<a class="section-item BCK-btn-switch-view {{#if is_disabled}}disabled{{/if}}" data-view="{{this.label}}">
-      <p class="icon"><i class="fa {{this.icon_class}}"></i></p>
-      <p class="label">{{this.label}}</p>
+    <div class="summary-tabs">
+        {{#each options}}<a class="section-item BCK-btn-switch-view {{#if is_disabled}}disabled{{/if}}"
+                            data-view="{{this.label}}">
+        <p class="icon"><i class="fa {{this.icon_class}}"></i></p>
+        <p class="label">{{this.label}}</p>
     </a>{{/each}}
-  </div>
+    </div>
 
 </script>
 
 <script id="Handlebars-SelectionMenu" type="text/x-handlebars-template">
 
-  <div class="selection-menu">
-    <div class="selection-information">
+    <div class="selection-menu">
+        <div class="selection-information">
 
-      <b>{{#if out_of_n}}first {{/if}}{{total_items}} {{entity_label}}{{#if out_of_n}} out of <span class="teal-text tooltipped" data-position="bottom" data-tooltip="Please narrow your search.">{{out_of_n}}</span> found{{/if}}</b><br>
-      {{num_selected}} Selected
+            <b>{{#if out_of_n}}first {{/if}}{{total_items}} {{entity_label}}{{#if out_of_n}} out of <span
+                    class="teal-text tooltipped" data-position="bottom" data-tooltip="Please narrow your search.">{{out_of_n}}</span>
+                found{{/if}}</b><br>
+            {{num_selected}} Selected
+        </div>
+
+        <div class="selection-button-container">
+            <a class="menu-button mini BCK-toggle-clear-selections">
+                {{#if none_is_selected}}
+                Select All
+                {{else}}
+                Clear Selections
+                {{/if}}
+            </a>
+        </div>
+
     </div>
-
-    <div class="selection-button-container">
-      <a class="menu-button mini BCK-toggle-clear-selections">
-        {{#if none_is_selected}}
-        Select All
-        {{else}}
-        Clear Selections
-        {{/if}}
-      </a>
-    </div>
-
-  </div>
 
 </script>
 
 <script id="Handlebars-ESResultsList" type="text/x-handlebars-template">
 
-  <h2 class="browser-header" >
-    {{entity_name}}
-  </h2>
+    <h2 class="browser-header">
+        {{entity_name}}
+    </h2>
 
-  {% endverbatim %}
+    {% endverbatim %}
     {% include "glados/Browsers/DefaultBrowserContent.html" %}
-  {% verbatim %}
+    {% verbatim %}
 </script>
 
 <script id="Handlebars-ESResultsListTitleAndMenu" type="text/x-handlebars-template">
-  <h3>{{es_results_list_title}}
-    <small><small>
-      <a id ="{{es_results_list_id}}-filter-link" href="{{es_results_url_path}}" style="display: none">Filter {{es_results_list_title}} results</a>
-      <a id ="{{es_results_list_id}}-all-link" href="{{es_all_results_url_path}}" style="display: none">Explore All Results</a>
-    </small></small>
-  </h3>
+    <h3>{{es_results_list_title}}
+        <small>
+            <small>
+                <a id="{{es_results_list_id}}-filter-link" href="{{es_results_url_path}}" style="display: none">Filter
+                    {{es_results_list_title}} results</a>
+                <a id="{{es_results_list_id}}-all-link" href="{{es_all_results_url_path}}" style="display: none">Explore
+                    All Results</a>
+            </small>
+        </small>
+    </h3>
 
-  <div id ="{{es_results_list_id}}-menu">
-    {% endverbatim %}
-      {% include "glados/Browsers/DefaultBrowserMenuContent.html" %}
-    {% verbatim %}
-  </div>
+    <div id="{{es_results_list_id}}-menu">
+        {% endverbatim %}
+        {% include "glados/Browsers/DefaultBrowserMenuContent.html" %}
+        {% verbatim %}
+    </div>
 
 </script>
 
 <script id="Handlebars-Common-MiniHistogramContainer" type="text/x-handlebars-template">
-  <div class="BCK-VisualisationMessages"></div>
-  <div class="BCK-HistogramContainer histogram mini"></div>
+    <div class="BCK-VisualisationMessages"></div>
+    <div class="BCK-HistogramContainer histogram mini"></div>
 </script>
 
 <script id="Handlebars-Common-Bioactivity-Columns-Selector-Container" type="text/x-handlebars-template">
 
-  {{#each columnsDescriptions}}
+    {{#each columnsDescriptions}}
     <div class="input-field col l3 m4 s6">
-      <select class="BCK-Bioactivity-column-select">
-        {{#each this.fields}}
-          <option value='{{this.value}}'  {{#if this.is_selected}}selected='selected'{{/if}}
-          >{{this.name_to_show}}</option>
-        {{/each}}
-      </select>
-      <label>Column {{this.columnNumber}}:</label>
+        <select class="BCK-Bioactivity-column-select">
+            {{#each this.fields}}
+            <option value='{{this.value}}' {{#if this.is_selected}}selected='selected' {{
+            /if}}
+            >{{this.name_to_show}}</option>
+            {{/each}}
+        </select>
+        <label>Column {{this.columnNumber}}:</label>
     </div>
-  {{/each}}
+    {{/each}}
 
 </script>
 
 <script id="Handlebars-Common-SeeMatrixAllActivites" type="text/x-handlebars-template">
- <a target="_blank" href="{{url}}">Click here to browse all activities used in this visualisation.</a>
+    <a target="_blank" href="{{url}}">Click here to browse all activities used in this visualisation.</a>
 </script>
 
 
 <script id="Handlebars-Common-FacetsList" type="text/x-handlebars-template">
 
-  <div class='BCK-Preloader-Container' data-hb-template="Handlebars-Common-Preloader" >
-  </div>
-
-  <div class='BCK-FacetsContent'>
-    <div class="BCK-clearFiltersButtonContainer">
-      <div class="clear-filters-button center-align">
-        <a class="menu-button BCK-clear-facets">Clear Filters</a>
-      </div>
+    <div class='BCK-Preloader-Container' data-hb-template="Handlebars-Common-Preloader">
     </div>
 
-    <ul class="collapsible z-depth-0 BCK-facets-collapsible" data-collapsible="expandable">
-      {{#each facets}}
-        <li data-facet-group-key="{{this.key}}" class="BCK-facet-li">
-          <div class="BCK-collapsible-header collapsible-header {{#unless closed}}active{{/unless}}">
-            <i class="BCK-open-close-icon material-icons">arrow_drop_up</i>{{this.label}}</div>
-          <div class="collapsible-body">
-            <div class="BCK-facet-group-histogram histogram-container" data-facet-group-key="{{this.key}}"></div>
-          </div>
-        </li>
-      {{/each}}
+    <div class='BCK-FacetsContent'>
+        <div class="BCK-clearFiltersButtonContainer">
+            <div class="clear-filters-button center-align">
+                <a class="menu-button BCK-clear-facets">Clear Filters</a>
+            </div>
+        </div>
 
-    </ul>
-  </div>
+        <ul class="collapsible z-depth-0 BCK-facets-collapsible" data-collapsible="expandable">
+            {{#each facets}}
+            <li data-facet-group-key="{{this.key}}" class="BCK-facet-li">
+                <div class="BCK-collapsible-header collapsible-header {{#unless closed}}active{{/unless}}">
+                    <i class="BCK-open-close-icon material-icons">arrow_drop_up</i>{{this.label}}
+                </div>
+                <div class="collapsible-body">
+                    <div class="BCK-facet-group-histogram histogram-container"
+                         data-facet-group-key="{{this.key}}"></div>
+                </div>
+            </li>
+            {{/each}}
+
+        </ul>
+    </div>
 </script>
 
 <script id="Handlebars-Common-StructureQuery" type="text/x-handlebars-template">
 
- <div class="card-panel z-depth-0 green lighten-5">
-  <img src="{{image_url}}" height="150"><br>
-  <b>Query:</b>
-  {{search_term}}
-  {{#if similarity}}
-    <b>Threshold:</b> {{similarity}}%
-  {{/if}}
-  <a class="menu-button BCK-Edit-Query">Edit Search</a>
- </div>
+    <div class="card-panel z-depth-0 green lighten-5">
+        <img src="{{image_url}}" height="150"><br>
+        <b>Query:</b>
+        {{search_term}}
+        {{#if similarity}}
+        <b>Threshold:</b> {{similarity}}%
+        {{/if}}
+        <a class="menu-button BCK-Edit-Query">Edit Search</a>
+    </div>
 
 </script>
 
 <script id="Handlebars-Common-MarvinModal" type="text/x-handlebars-template" data-starting-top="0%">
-  <div id="{{id}}" class='modal' style="display: none; width:85% !important; max-height: 100vh !important; overflow-y: hidden !important ; overflow-x: hidden !important; height: 100vh !important;">
-    {% endverbatim %}
-      {% with in_modal=True %}
-        {% include "glados/Sketchers/marvinSearch.html" %}
-      {% endwith %}
-    {% verbatim %}
-  </div>
+    <div id="{{id}}" class='modal'
+         style="display: none; width:85% !important; max-height: 100vh !important; overflow-y: hidden !important ; overflow-x: hidden !important; height: 100vh !important;">
+        {% endverbatim %}
+        {% with in_modal=True %}
+            {% include "glados/Sketchers/marvinSearch.html" %}
+        {% endwith %}
+        {% verbatim %}
+    </div>
 </script>
 
 <script id="Handlebars-Marvin-Similarity-Percentage" type="text/x-handlebars-template">
-  >= {{percentage}}%
+    >= {{percentage}}%
 </script>
 <script id="Handlebars-Marvin-Similarity-PercentageSlider" type="text/x-handlebars-template">
-  <input class="similarity-search-threshold-input" type="range" id="test5" min="70" max="100" value="{{percentage}}"/>
+    <input class="similarity-search-threshold-input" type="range" id="test5" min="70" max="100" value="{{percentage}}"/>
 </script>
 
 <script id="Handlebars-Compound-MoleculeFeaturesGrid" type="text/x-handlebars-template">
 
-<div class="mol-features-grid white-text">
+    <div class="mol-features-grid white-text">
 
-            <div class="row center-align first-row">
+        <div class="row center-align first-row">
 
-              <div id='Bck-MolType' data-feature-name='Bck-MolType' class="col s2 {{#unless table_cell_mode}}offset-s1{{/unless}}"
-               data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
-
-                <!-- Backbone -->
-
-              </div>
-              <div id='Bck-RuleOfFive' data-feature-name='Bck-RuleOfFive' class="col s2"
-                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+            <div id='Bck-MolType' data-feature-name='Bck-MolType'
+                 class="col s2 {{#unless table_cell_mode}}offset-s1{{/unless}}"
+                 data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
 
                 <!-- Backbone -->
 
-              </div>
-              <div id='Bck-FirstInClass' data-feature-name='Bck-FirstInClass' class="col s2"
-                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+            </div>
+            <div id='Bck-RuleOfFive' data-feature-name='Bck-RuleOfFive' class="col s2"
+                 data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
 
                 <!-- Backbone -->
 
-              </div>
-
-              <div id='Bck-Chirality' data-feature-name='Bck-Chirality' class="col s2"
-                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
-
-                <!-- Backbone -->
-
-              </div>
-              <div id='Bck-Prodrug' data-feature-name='Bck-Prodrug' class="col s2"
-                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+            </div>
+            <div id='Bck-FirstInClass' data-feature-name='Bck-FirstInClass' class="col s2"
+                 data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
 
                 <!-- Backbone -->
-
-              </div>
 
             </div>
 
-            <div class="row center-align second-row">
-
-              <div id='Bck-Oral' data-feature-name='Bck-Oral' class="col s2 {{#unless table_cell_mode}}offset-s1{{/unless}}"
-                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+            <div id='Bck-Chirality' data-feature-name='Bck-Chirality' class="col s2"
+                 data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
 
                 <!-- Backbone -->
 
-              </div>
-              <div id='Bck-Parenteral' data-feature-name='Bck-Parenteral' class="col s2"
-                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+            </div>
+            <div id='Bck-Prodrug' data-feature-name='Bck-Prodrug' class="col s2"
+                 data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
 
                 <!-- Backbone -->
-
-              </div>
-              <div id='Bck-Topical' data-feature-name='Bck-Topical' class="col s2"
-                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
-
-                <!-- Backbone -->
-
-              </div>
-              <div id='Bck-BlackBox' data-feature-name='Bck-BlackBox' class="col s2"
-                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
-
-                <!-- Backbone -->
-
-              </div>
-              <div id='Bck-Availability' data-feature-name='Bck-Availability' class="col s2"
-                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
-
-                <!-- Backbone -->
-
-              </div>
 
             </div>
 
+        </div>
 
-          </div>
+        <div class="row center-align second-row">
+
+            <div id='Bck-Oral' data-feature-name='Bck-Oral'
+                 class="col s2 {{#unless table_cell_mode}}offset-s1{{/unless}}"
+                 data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+
+                <!-- Backbone -->
+
+            </div>
+            <div id='Bck-Parenteral' data-feature-name='Bck-Parenteral' class="col s2"
+                 data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+
+                <!-- Backbone -->
+
+            </div>
+            <div id='Bck-Topical' data-feature-name='Bck-Topical' class="col s2"
+                 data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+
+                <!-- Backbone -->
+
+            </div>
+            <div id='Bck-BlackBox' data-feature-name='Bck-BlackBox' class="col s2"
+                 data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+
+                <!-- Backbone -->
+
+            </div>
+            <div id='Bck-Availability' data-feature-name='Bck-Availability' class="col s2"
+                 data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+
+                <!-- Backbone -->
+
+            </div>
+
+        </div>
+
+
+    </div>
 
 </script>
 
 <script id="Handlebars-Compound-MoleculeFeatures-IconContainer" type="text/x-handlebars-template">
-  <!-- the django like variables inside the verbatim are rendered with handlebars, not by django -->
-  <div class="feat-icon {{active_class}}">
-    <div class="valign-wrapper">
-      <i class="valign icon {{icon_class}} tooltipped {{#unless table_cell_mode}}table_cell_icon{{/unless}}"
-         data-icon="{{data_icon}}"
-         data-position="{{tooltip_position}}"
-         data-tooltip="{{tooltip}}" data-tooltip="{{tooltip}}"></i>
+    <!-- the django like variables inside the verbatim are rendered with handlebars, not by django -->
+    <div class="feat-icon {{active_class}}">
+        <div class="valign-wrapper">
+            <i class="valign icon {{icon_class}} tooltipped {{#unless table_cell_mode}}table_cell_icon{{/unless}}"
+               data-icon="{{data_icon}}"
+               data-position="{{tooltip_position}}"
+               data-tooltip="{{tooltip}}" data-tooltip="{{tooltip}}"></i>
+        </div>
     </div>
-  </div>
 </script>
 
 <script id="Handlebars-ScrollSpyContent" type="text/x-handlebars-template">
-<ul class="section table-of-contents">
-  {{#each sections}}
-    <li><a href="#{{this.name}}">
-        <small>{{this.label}}</small>
+    <ul class="section table-of-contents">
+        {{#each sections}}
+        <li><a href="#{{this.name}}">
+            <small>{{this.label}}</small>
         </a>
-    </li>
-  {{/each}}
-</ul>
+        </li>
+        {{/each}}
+    </ul>
 </script>
 
 <script id="Handlebars-Common-References-Collapsible" type="text/x-handlebars-template">
 
- <ul class="collapsible ebi-links z-depth-0" data-collapsible="expandable">
+    <ul class="collapsible ebi-links z-depth-0" data-collapsible="expandable">
 
- {{#each references_groups}}
+        {{#each references_groups}}
 
-   <li>
-      <div class="collapsible-header {{#if active}}active{{/if}}">
-        <a href="{{this.src_url}}">
-          <i class="fa fa-link"></i>
-        </a>
-        {{this.src_name}}
-      </div>
-      <div class="collapsible-body">
+        <li>
+            <div class="collapsible-header {{#if active}}active{{/if}}">
+                <a href="{{this.src_url}}">
+                    <i class="fa fa-link"></i>
+                </a>
+                {{this.src_name}}
+            </div>
+            <div class="collapsible-body">
 
-        {{#each this.ref_items}}
-          <a target='_blank' href="{{this.link}}">{{this.id}}</a>
+                {{#each this.ref_items}}
+                <a target='_blank' href="{{this.link}}">{{this.id}}</a>
+                {{/each}}
+
+            </div>
+
+        </li>
+
         {{/each}}
 
-      </div>
 
-   </li>
-
- {{/each}}
-
-
- </ul>
+    </ul>
 
 </script>
 
 <script id="Handlebars-Common-No-References-Collapsible" type="text/x-handlebars-template">
 
-There are no UniChem cross references for this compound.
+    There are no UniChem cross references for this compound.
 
 </script>
 
 <script id="Handlebars-Common-DefaultCarouselContent" type="text/x-handlebars-template">
-{% endverbatim %}
-{% include "glados/base/PaginatedCollections/DefaultCarouselContent.html" %}
-{% verbatim %}
+    {% endverbatim %}
+    {% include "glados/base/PaginatedCollections/DefaultCarouselContent.html" %}
+    {% verbatim %}
 </script>
 
 <script id="Handlebars-Common-Pie-External-Title" type="text/x-handlebars-template">
@@ -1266,11 +1298,11 @@ There are no UniChem cross references for this compound.
 </script>
 
 <script id="Handlebars-Pie-Warning" type="text/x-handlebars-template">
-  <div class="card yellow lighten-4">
-    <div class="card-content">
-      <i class="fa fa-exclamation-triangle"></i> <b>Warning:</b> {{msg}}
+    <div class="card yellow lighten-4">
+        <div class="card-content">
+            <i class="fa fa-exclamation-triangle"></i> <b>Warning:</b> {{msg}}
+        </div>
     </div>
-  </div>
 </script>
 
 {% endverbatim %}
