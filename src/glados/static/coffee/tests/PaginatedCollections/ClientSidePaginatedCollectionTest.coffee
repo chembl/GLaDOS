@@ -4,8 +4,8 @@ describe 'Client Side Paginated Collection', ->
 
     testModels = ({name: i} for i in [1..100])
     settings = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.APPROVED_DRUGS_CLINICAL_CANDIDATES_LIST
-    list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewClientSideCollectionFor(settings,
-      {preexisting_models: testModels})
+    settings.preexisting_models = testModels
+    list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewClientSideCollectionFor(settings)
 
     it 'initialises correctly', ->
 
