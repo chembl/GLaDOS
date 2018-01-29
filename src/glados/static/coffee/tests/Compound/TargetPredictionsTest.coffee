@@ -16,4 +16,6 @@ describe 'Target Predictions', ->
 
   it 'is generated from a preloaded compound model', ->
 
+    settings = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.TARGET_PREDICTIONS
+
     console.log 'compound: ', compound
