@@ -52,6 +52,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     if buckets.length > maxCategories
       buckets = glados.Utils.Buckets.mergeBuckets(buckets, maxCategories, @model, @config.x_axis_prop_name)
 
+    bucketsIndex = _.indexBy(buckets, 'key')
     for bucket in buckets
       values.push bucket.doc_count
       labels.push bucket.key
@@ -107,7 +108,6 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     thisView = @
     pieDiv.on('plotly_click', (eventInfo) ->
       clickedKey = eventInfo.points[0].label
-      bucketsIndex =  thisView.model.get('bucket_data')[thisView.xAxisAggName].buckets_index
       link = bucketsIndex[clickedKey].link
       window.open(link)
     )
