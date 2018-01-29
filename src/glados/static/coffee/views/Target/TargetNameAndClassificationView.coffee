@@ -55,4 +55,4 @@ TargetNameAndClassificationView = CardView.extend
         if syn_struc['component_synonym']?
           synonyms.push(syn_struc['component_synonym']) unless syn_struc['syn_type'] == 'EC_NUMBER'
 
-    return synonyms
+    return _.unique(synonyms)
