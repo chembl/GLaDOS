@@ -53,7 +53,7 @@ def faqs(request):
   return render(request, 'glados/faqs.html', context)
 
 
-def get_latest_tweets():
+def get_latest_tweets(page_number=1, count=15):
   """
   Returns the latest tweets from chembl, It tries to find them in the cache first to avoid hammering twitter
   :return: The structure returned by the twitter api. If there is an error getting the tweets, it returns an
@@ -61,7 +61,7 @@ def get_latest_tweets():
   """
   if not settings.TWITTER_ENABLED:
     return []
-  cache_key = 'latest_tweets'
+  cache_key = str(page_number) + "-" + str(count)
   cache_time = 3600  # time to live in seconds
 
   tweets = cache.get(cache_key)
@@ -91,7 +91,7 @@ def get_latest_tweets():
   t = Twitter(auth=OAuth(access_token, access_token_secret, consumer_key, consumer_secret))
 
   try:
-    tweets = t.statuses.user_timeline(screen_name="chembl", count=2)
+    tweets = t.statuses.user_timeline(screen_name="chembl", count = count, page = page_number)
   except Exception as e:
     print_server_error(e)
     return []
@@ -99,6 +99,16 @@ def get_latest_tweets():
   cache.set(cache_key, tweets, cache_time)
   return tweets
 
+
+def test(request):
+    page_number = request.GET.get('page', '')
+    count = request.GET.get('count', '')
+
+    tweets = {
+        'tweets': get_latest_tweets(page_number, count)
+    }
+
+    return JsonResponse(tweets)
 
 def replace_urls_from_entinies(html, urls):
   """
