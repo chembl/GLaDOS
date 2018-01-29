@@ -470,6 +470,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       DRUG_INDICATIONS_LIST:
         MODEL: glados.models.Compound.DrugIndication
         BASE_URL: 'base_url is set by initURL'
+        DEFAULT_PAGE_SIZE: 5
         COLUMNS: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
