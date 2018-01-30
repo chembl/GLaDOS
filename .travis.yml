@@ -1,3 +1,10 @@
+dist: trusty
+addons:
+  apt:
+    packages:
+    - memcached
+    - gettext
+  chrome: stable
 language: python
 python:
   - "3.5"
@@ -8,11 +15,7 @@ before_script:
   - python -m glados.manage compilemessages
   - python -m glados.manage migrate
   - python -m glados.manage runserver 8000  2>&1 | grep -v 200 | grep -v 304 &
+  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
   - sleep 60 # give Web server some time to bind to sockets, etc
 script:
   - "./run_tests_no_install.sh"
-addons:
-  apt:
-    packages:
-    - memcached
-    - gettext

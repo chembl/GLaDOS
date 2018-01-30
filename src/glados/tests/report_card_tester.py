@@ -6,7 +6,13 @@ import traceback
 import sys
 import atexit
 
+
 class ReportCardTester(unittest.TestCase):
+
+  # set the window size and headless mode
+  CHROME_OPTIONS = webdriver.ChromeOptions()
+  CHROME_OPTIONS.add_argument('headless')
+  CHROME_OPTIONS.add_argument('window-size=1200x600')
 
   HOST = 'http://127.0.0.1:8000'
   DEFAULT_TIMEOUT = 60
@@ -19,11 +25,11 @@ class ReportCardTester(unittest.TestCase):
 
   NUM_BROWSER_CALLS = 0
 
-  @staticmethod
-  def instantiateBrowser():
+  @classmethod
+  def instantiateBrowser(cls):
     if ReportCardTester.SINGLETON_BROWSER is None:
       try:
-        ReportCardTester.SINGLETON_BROWSER = webdriver.PhantomJS()
+        ReportCardTester.SINGLETON_BROWSER = webdriver.Chrome(chrome_options=cls.CHROME_OPTIONS)
         ReportCardTester.SINGLETON_BROWSER.set_window_size(1024, 768)
         ReportCardTester.SINGLETON_BROWSER.implicitly_wait(ReportCardTester.IMPLICIT_WAIT)
         ReportCardTester.NUM_BROWSER_CALLS = 0
