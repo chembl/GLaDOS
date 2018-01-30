@@ -15,7 +15,7 @@ class JavascriptTest(ReportCardTester):
     self.getURL(url, wait_for_glados_ready=False)
     time.sleep(5)
     print('-----HTML-------------------------------------------')
-    print(self.browser.find_element_by_css_selector('html').get_attribute('innerHTML'))
+    print(self.browser.find_element_by_css_selector('body').get_attribute('innerHTML'))
     print('-----HTML-------------------------------------------\n')
     timeout = ReportCardTester.DEFAULT_TIMEOUT*2
     loaded = False
