@@ -38,6 +38,9 @@ class JavascriptTest(ReportCardTester):
           pass
         if not loaded:
           print("Loading {0} ...".format(url))
+          print('-----HTML-------------------------------------------')
+          print(self.browser.find_element_by_css_selector('body').get_attribute('innerHTML'))
+          print('-----HTML-------------------------------------------\n')
           time.sleep(1)
 
     print('FAILED ELEM:', jasmine_failed_elem)
