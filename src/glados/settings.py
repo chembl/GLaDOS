@@ -37,12 +37,12 @@ SECRET_KEY = 'Cake, and grief counseling, will be available at the conclusion of
 # Twitter
 # ----------------------------------------------------------------------------------------------------------------------
 
-TWITTER_ENABLED = True
+TWITTER_ENABLED = False
 
-TWITTER_ACCESS_TOKEN = '732582863107981312-dZ8OEZZdNCsltXtN2pTp3xShPMYHxkE'
-TWITTER_ACCESS_TOKEN_SECRET = 'NeyIr4Qol3iOYUMhXQlYbrY7MTpZAjYTiXa2aMjjxPFPP'
-TWITTER_CONSUMER_KEY = 'BQFmlwCsCc2Amai4ELLDSe8DY'
-TWITTER_CONSUMER_SECRET ='Gn8ZuoI6yBl1BEACPBQvgtQP7ZmTe0pseh9RiwSEjnpdHZyvwO'
+TWITTER_ACCESS_TOKEN = '<your twitter access token>'
+TWITTER_ACCESS_TOKEN_SECRET = '<your twitter access token secret>'
+TWITTER_CONSUMER_KEY = '<your twitter consumer key>'
+TWITTER_CONSUMER_SECRET = '<your twitter consumer secret'
 
 
 # SECURITY WARNING: don't run with debug turned on in production!

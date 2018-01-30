@@ -458,6 +458,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS_DESCRIPTION:
           Infinite:
             Default: glados.models.MainPage.Tweet.COLUMNS_SETTINGS.INFINITE_VIEW
+            CustomItemTemplate: 'Handlebars-Common-Paginated-Card-Tweet'
         ID_COLUMN: glados.models.MainPage.Tweet.ID_COLUMN
       SIMILARITY_RESULTS_LIST:
         MODEL: Compound
