@@ -41,7 +41,7 @@ class JavascriptTest(ReportCardTester):
           time.sleep(1)
     self.assertTrue(loaded, "Error: '{0}' failed to load under {1} seconds!".format(url, timeout))
 
-    if jasmine_failed_elem is not None and jasmine_failed_elem.text:
+    if jasmine_failed_elem is not None:
       failures_parent = self.browser.find_element_by_class_name('jasmine-failures')
       fails = failures_parent.find_elements_by_class_name('jasmine-failed')
       errors = ''
@@ -51,13 +51,13 @@ class JavascriptTest(ReportCardTester):
         stack = self.browser.find_element_by_class_name('jasmine-stack-trace').text
         errors += "ERROR_DESC:{0}\nERROR_MSG:{1}\nERROR_STACK:\n{2}\n".format(desc, msg, stack)
 
-      self.fail("Jasmine test failed:\n{0}\n{1}".format(jasmine_failed_elem.text, errors))
+      self.fail("Jasmine test failed:\n{0}\n{1}".format(getattr(jasmine_failed_elem, 'text', 'Unknown error text!'), errors))
 
-    if jasmine_passed_elem is None:
-      self.fail("Could not find jasmine passed output!")
-    else:
+    elif jasmine_passed_elem is not None:
       summary_text = jasmine_passed_elem.text
       self.assertIn(', 0 failures', summary_text, 'Check the javascript tests out! ' + self.HOST + '/js_tests/' )
+    else:
+      self.fail("Could not find jasmine passed nor failed output!")
 
 
 
