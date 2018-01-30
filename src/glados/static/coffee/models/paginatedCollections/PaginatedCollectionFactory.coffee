@@ -311,6 +311,54 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @setMeta('base_url', @baseUrl, true)
         @initialiseUrl()
 
+      # ----------------------------------------------------------------------------------------------------------------
+      # parse
+      # ----------------------------------------------------------------------------------------------------------------
+      list.parse = (data) ->
+        data.page_meta.records_in_page = data.tweets.length
+
+        rawTweets = data.tweets
+        simplifiedTweets = []
+
+        replace_urls_from_entities = (html, urls) ->
+          for url in urls
+            link = "<a href='#{(url['url'])}'>#{url['display_url']}</a>"
+            html = html.replace(url['url'], link)
+
+          return html
+
+        for t in rawTweets
+
+          html = t.text
+
+          for entityType in _.keys(t.entities)
+
+            entities = t.entities[entityType]
+
+            if entityType == 'urls'
+              html = replace_urls_from_entities(html, entities)
+
+          simpleTweet =
+            id: t.id
+            text: html
+            createdAt: t['created_at'].split(' ')[1..2].reverse().join(' ')
+            user:
+              name: t.user.name
+              screenName: t.user.screen_name
+              profileImgUrl: t.user.profile_image_url
+
+          simplifiedTweets.push(simpleTweet)
+
+        @setMeta('data_loaded', true)
+        @resetMeta(data.page_meta)
+
+        return simplifiedTweets
+
+      # ----------------------------------------------------------------------------------------------------------------
+      # end parse
+      # ----------------------------------------------------------------------------------------------------------------
+
+
       return list
 
 
