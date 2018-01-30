@@ -1,10 +1,16 @@
 from glados.tests.report_card_tester import ReportCardTester
 import time
+import pprint
 
 # The tests for the javascript code only (not backbone views and DOM) can be seen just by browsing <host>/js_tests/
 # This file automates the process of looking at the page and checking if it is correct
 class JavascriptTest(ReportCardTester):
 
+  def print_log(self, log_type):
+    log_entries = self.browser.get_log()
+    print('------{0}-LOG-----------------------------------------------------------------------'.format(log_type))
+    for log_entry_i in log_entries:
+      pprint.pprint(log_entry_i)
 
   def tearDown(self):
     self.browser.quit()
@@ -14,9 +20,7 @@ class JavascriptTest(ReportCardTester):
     url = self.HOST + '/js_tests/'
     self.getURL(url, wait_for_glados_ready=False)
     time.sleep(5)
-    print('-----HTML-------------------------------------------')
-    print(self.browser.find_element_by_css_selector('body').get_attribute('innerHTML'))
-    print('-----HTML-------------------------------------------\n')
+    self.print_log('browser')
     timeout = ReportCardTester.DEFAULT_TIMEOUT*2
     loaded = False
     start_time = time.time()
@@ -42,9 +46,6 @@ class JavascriptTest(ReportCardTester):
           pass
         if not loaded:
           print("Loading {0} ...".format(url))
-          print('-----HTML-------------------------------------------')
-          print(self.browser.find_element_by_css_selector('body').get_attribute('innerHTML'))
-          print('-----HTML-------------------------------------------\n')
           time.sleep(1)
 
     print('FAILED ELEM:', jasmine_failed_elem)
