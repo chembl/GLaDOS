@@ -2,12 +2,13 @@ from glados.tests.report_card_tester import ReportCardTester
 import time
 import pprint
 
+
 # The tests for the javascript code only (not backbone views and DOM) can be seen just by browsing <host>/js_tests/
 # This file automates the process of looking at the page and checking if it is correct
 class JavascriptTest(ReportCardTester):
 
   def print_log(self, log_type):
-    log_entries = self.browser.get_log()
+    log_entries = self.browser.get_log(log_type)
     print('------{0}-LOG-----------------------------------------------------------------------'.format(log_type))
     for log_entry_i in log_entries:
       pprint.pprint(log_entry_i)
