@@ -302,6 +302,18 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return list
 
+    getNewTweetsList: ->
+
+      list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.TWEETS_LIST)
+
+      list.initURL = ->
+        @baseUrl = "#{glados.Settings.GLADOS_BASE_PATH_REL}tweets"
+        @setMeta('base_url', @baseUrl, true)
+        @initialiseUrl()
+
+      return list
+
+
     getNewSimilaritySearchResultsList: ->
       list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.SIMILARITY_RESULTS_LIST)
 

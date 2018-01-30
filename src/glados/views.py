@@ -137,7 +137,7 @@ def replace_urls_from_entinies(html, urls):
 
 
 def main_page(request):
-  tweets = get_latest_tweets()
+  tweets = get_latest_tweets()[0]
   simplified_tweets = []
 
   for t in tweets:

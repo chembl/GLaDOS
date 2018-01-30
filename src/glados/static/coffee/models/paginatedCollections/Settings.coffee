@@ -450,6 +450,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         ID_COLUMN: Compound.ID_COLUMN
         ADDITIONAL_COLUMNS:[]
         ENABLE_COLLECTION_CACHING: true
+      TWEETS_LIST:
+        MODEL: glados.models.MainPage.Tweet
+        BASE_URL: 'base_url is set by initURL'
+        DEFAULT_PAGE_SIZE: 15
+        COLUMNS: []
+        COLUMNS_DESCRIPTION:
+          Infinite:
+            Default: []
+        ID_COLUMN: []
       SIMILARITY_RESULTS_LIST:
         MODEL: Compound
         BASE_URL: 'base_url is set by initURL'
