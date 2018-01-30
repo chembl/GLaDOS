@@ -15,7 +15,7 @@ install:
   - "sudo chmod 4755 /opt/google/chrome/chrome-sandbox"
   - "export PLATFORM=linux64"
   - "VERSION=$(curl http://chromedriver.storage.googleapis.com/LATEST_RELEASE)"
-  - "sudo curl http://chromedriver.storage.googleapis.com/$VERSION/chromedriver_$PLATFORM.zip | bsdtar -xvf - -C /usr/bin/"
+  - "sudo curl http://chromedriver.storage.googleapis.com/$VERSION/chromedriver_$PLATFORM.zip | sudo tar -xvf - -C /usr/local/bin"
 # Install GLaDOS
   - "pip install -r requirements.txt"
   - python setup.py install
