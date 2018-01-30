@@ -22,6 +22,7 @@ class JavascriptTest(ReportCardTester):
     self.getURL(url, wait_for_glados_ready=False)
     time.sleep(5)
     self.print_log('browser')
+    self.print_log('driver')
     timeout = ReportCardTester.DEFAULT_TIMEOUT*2
     loaded = False
     start_time = time.time()
