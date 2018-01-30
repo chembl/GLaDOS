@@ -21,8 +21,6 @@ class JavascriptTest(ReportCardTester):
     url = self.HOST + '/js_tests/'
     self.getURL(url, wait_for_glados_ready=False)
     time.sleep(5)
-    self.print_log('browser')
-    self.print_log('driver')
     timeout = ReportCardTester.DEFAULT_TIMEOUT*2
     loaded = False
     start_time = time.time()
@@ -52,6 +50,9 @@ class JavascriptTest(ReportCardTester):
 
     print('FAILED ELEM:', jasmine_failed_elem)
     print('PASSED ELEM:', jasmine_passed_elem)
+    self.print_log('browser')
+    self.print_log('driver')
+    self.print_log('client')
 
     self.assertTrue(loaded, "Error: '{0}' failed to load under {1} seconds!".format(url, timeout))
 
