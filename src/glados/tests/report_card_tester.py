@@ -11,8 +11,10 @@ class ReportCardTester(unittest.TestCase):
 
   # set the window size and headless mode
   CHROME_OPTIONS = webdriver.ChromeOptions()
-  CHROME_OPTIONS.add_argument('headless')
-  CHROME_OPTIONS.add_argument('window-size=1200x600')
+  CHROME_OPTIONS.add_argument('--headless')
+  CHROME_OPTIONS.add_argument('--no-sandbox')
+  CHROME_OPTIONS.add_argument('--disable-gpu')
+  CHROME_OPTIONS.add_argument('--window-size=1200x600')
 
   HOST = 'http://127.0.0.1:8000'
   DEFAULT_TIMEOUT = 60
