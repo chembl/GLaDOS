@@ -28,17 +28,21 @@ class JavascriptTest(ReportCardTester):
       else:
         try:
           jasmine_failed_elem = jasmine_alert_elem.find_element_by_class_name('jasmine-failed')
-          loaded = True
+          loaded = jasmine_failed_elem is not None
         except:
           pass
         try:
           jasmine_passed_elem = jasmine_alert_elem.find_element_by_class_name('jasmine-passed')
-          loaded = True
+          loaded = jasmine_passed_elem is not None
         except:
           pass
         if not loaded:
           print("Loading {0} ...".format(url))
           time.sleep(1)
+
+    print('FAILED ELEM:', jasmine_failed_elem)
+    print('PASSED ELEM:', jasmine_passed_elem)
+
     self.assertTrue(loaded, "Error: '{0}' failed to load under {1} seconds!".format(url, timeout))
 
     if jasmine_failed_elem is not None:
