@@ -36,7 +36,7 @@ class ReportCardTester(unittest.TestCase):
         ReportCardTester.SINGLETON_BROWSER.implicitly_wait(ReportCardTester.IMPLICIT_WAIT)
         ReportCardTester.NUM_BROWSER_CALLS = 0
       except:
-        print("CRITICAL ERROR: It was not possible to start the Firefox Selenium driver due to:", file=sys.stderr)
+        print("CRITICAL ERROR: It was not possible to start the Browser Selenium driver due to:", file=sys.stderr)
         traceback.print_exc()
         sys.exit(1)
 
