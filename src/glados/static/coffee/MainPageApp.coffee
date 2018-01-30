@@ -22,11 +22,8 @@ class MainPageApp
     tweetsList.initURL()
 
     console.log 'tweetsList: ', tweetsList
+    $tweetsElem = $('.BCK-Tweets-container')
+    glados.views.PaginatedViews.PaginatedViewFactory.getNewInfinitePaginatedView(tweetsList, $tweetsElem, 'do-repaint')
 
     tweetsList.fetch()
-
-
-
-
-
 

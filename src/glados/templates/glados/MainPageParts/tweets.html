@@ -1,93 +1,20 @@
-<div class="card teal lighten-5 z-depth-0">
-    <div class="card-content tweet-content">
+<div class="BCK-Tweets-container">
+    <div class="card teal lighten-5 z-depth-0">
+        <div class="card-content tweet-content">
 
-        <div class="col s12 tweet-header">
+            <div class="col s12 tweet-header">
 
-            <p>
-                <i class="fa fa-twitter" aria-hidden="true"></i>
-                Tweets by <a target="_blank" href="https://twitter.com/chembl">@ChEMBL</a>
-            </p>
+                <p>
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                    Tweets by <a target="_blank" href="https://twitter.com/chembl">@ChEMBL</a>
+                </p>
 
-        </div>
+            </div>
 
-        <div class="tweets">
-
-            <ul class="tweets-list">
-
-                {% if tweets %}
-
-                    {% for tweet in tweets %}
-
-                        <li class="tweet grey lighten-5">
-
-                        <a href="https://twitter.com/ChEMBL/status/{{ tweet.id }}" target="_blank">
-
-                            <div class="row  valign-wrapper">
-
-                                <div class="col s2">
-                                    <img class="responsive-img" src="{{ tweet.user.profile_image_url }}" alt=""
-                                         class="circle">
-                                </div>
-
-
-                                <div class="col s10 tweet-profile-name">
-                                    <p><b>ChEMBL</b></p>
-                                </div>
-
-
-                            </div>
-
-                        </a>
-
-                        <div class="row">
-                            <div class="flow-text">
-                                <div class="tweet-content">
-                                    <p>
-                                        {% autoescape off %}
-                                            {{ tweet.text }}
-                                        {% endautoescape %}
-                                    </p>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="row tweet-info">
-                        <div class="col s4">
-
-                        <a href="#"
-                           onclick="window.open('https://twitter.com/intent/like?tweet_id={{ tweet.id }}','like {{ tweet.id }}','width=600,height=400')">
-                            <i class="fa fa-heart" aria-hidden="true"></i>
-                        </a>
-
-                        <a href="#"
-                        onclick="window.open('https://twitter.com/intent/retweet?tweet_id={{ tweet.id }}','retweet
-                        {{ tweet.id}','width=600,height=400')">
-                                <i class="fa fa-retweet" aria-hidden="true"></i>
-                                </a>
-
-                                </div>
-                                <div class="col s8 right-align">
-                                <span>{{ tweet.created_at }}</span>
-                        </div>
-                        </div>
-
-
-
-                    {% endfor %}
-
-                {% else %}
-                    <p>No Tweets were found.</p>
-                {% endif %}
-
-
-            </ul>
-
-            <div class="row  center-align">
-                <button class="waves-effect waves-light btn-chembl teal"
-                   onclick="funcioncargarmastweets"> <i class="fa fa-spinner" aria-hidden="true"></i> Load more
-                    tweets</button>
-                </div>
-                </div>
+            <div class="tweets">
+                {% include "glados/base/PaginatedCollections/DefaultInfinityBrowserContent.html" %}
+            </div>
         </div>
     </div>
+
+</div>
