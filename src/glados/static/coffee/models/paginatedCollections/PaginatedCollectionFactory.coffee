@@ -358,7 +358,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       # end parse
       # ----------------------------------------------------------------------------------------------------------------
 
-
       return list
 
 
