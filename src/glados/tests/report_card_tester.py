@@ -80,12 +80,12 @@ class ReportCardTester(unittest.TestCase):
           traceback.print_exc()
           print("{0} Waiting for 'GLaDOS-page-loaded' ...".format(url))
           if time.time() - start_time > timeout/3:
-            print("Travis Firefox might be stalled ...")
-            print("Closing Firefox ...")
+            print("Travis Browser might be stalled ...")
+            print("Closing Browser ...")
             ReportCardTester.closeBrowser()
             print("Giving travis some free relaxation time 30 secs ...")
             time.sleep(30)
-            print("Starting Firefox ...")
+            print("Starting Browser ...")
             ReportCardTester.instantiateBrowser()
             self.browser = ReportCardTester.SINGLETON_BROWSER
             self.getURL(url, timeout=timeout, wait_for_glados_ready=wait_for_glados_ready, retries=retries-1)
