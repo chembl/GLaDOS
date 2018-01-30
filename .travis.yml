@@ -10,15 +10,20 @@ language: python
 python:
   - "3.5"
 install:
+# Install cromedriver
+  - "sudo chown root /opt/google/chrome/chrome-sandbox"
+  - "sudo chmod 4755 /opt/google/chrome/chrome-sandbox"
+  - "export PLATFORM=linux64"
+  - "VERSION=$(curl http://chromedriver.storage.googleapis.com/LATEST_RELEASE)"
+  - "sudo curl http://chromedriver.storage.googleapis.com/$VERSION/chromedriver_$PLATFORM.zip | bsdtar -xvf - -C /usr/bin/"
+# Install GLaDOS
   - "pip install -r requirements.txt"
   - python setup.py install
 before_script:
+# Start server
   - python -m glados.manage compilemessages
   - python -m glados.manage migrate
   - python -m glados.manage runserver 8000  2>&1 | grep -v 200 | grep -v 304 &
-  - "sudo chown root /opt/google/chrome/chrome-sandbox"
-  - "sudo chmod 4755 /opt/google/chrome/chrome-sandbox"
-  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
   - sleep 60 # give Web server some time to bind to sockets, etc
 script:
   - "./run_tests_no_install.sh"
