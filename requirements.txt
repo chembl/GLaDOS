@@ -1,7 +1,7 @@
 Arpeggio
 django==1.10.4
 django-compressor>=2.0
-selenium
+selenium==3.8.1
 twitter
 python3-memcached
 pyScss
