@@ -13,6 +13,7 @@ class JavascriptTest(ReportCardTester):
   def test_javascript_code_only(self):
     url = self.HOST + '/js_tests/'
     self.getURL(url, wait_for_glados_ready=False)
+    time.sleep(5)
     print('-----HTML-------------------------------------------')
     print(self.browser.find_element_by_css_selector('html').get_attribute('innerHTML'))
     print('-----HTML-------------------------------------------\n')
