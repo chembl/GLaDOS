@@ -14,6 +14,11 @@ glados.models.MainPage.Tweet.COLUMNS =
   USER_NAME:
     name_to_show: 'USERNAME'
     comparator: 'user.screenName'
+  IMG_URL:
+    name_to_show: 'IMG URL'
+    comparator: 'user.profileImgUrl'
+
+
 
 
 glados.models.MainPage.Tweet.COLUMNS_SETTINGS =
@@ -28,6 +33,7 @@ glados.models.MainPage.Tweet.COLUMNS_SETTINGS =
     glados.models.MainPage.Tweet.COLUMNS.HTML
     glados.models.MainPage.Tweet.COLUMNS.CREATED_AT
     glados.models.MainPage.Tweet.COLUMNS.USER_NAME
+    glados.models.MainPage.Tweet.COLUMNS.IMG_URL
   ]
 
 glados.models.MainPage.Tweet.ID_COLUMN = glados.models.MainPage.Tweet.COLUMNS.TWEET_ID
