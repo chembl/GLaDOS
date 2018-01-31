@@ -227,12 +227,17 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         columnsWithValues = glados.Utils.getColumnsWithValues(visibleColumns, item)
         idValue = glados.Utils.getNestedValue(item.attributes, @collection.getMeta('id_column').comparator)
 
+        columnsByComparator = {}
+        for column_i in columnsWithValues
+          columnsByComparator[column_i.comparator] = column_i
+          
         templateParams =
           base_check_box_id: idValue
           is_selected: @collection.itemIsSelected(idValue)
           img_url: glados.Utils.getImgURL(columnsWithValues)
           columns: columnsWithValues
           selection_disabled: @disableItemsSelection
+          columns_by_comparator: columnsByComparator
 
         if (@isCards() or @isInfinite())
           templateParams.small_size = @CURRENT_CARD_SIZES.small
