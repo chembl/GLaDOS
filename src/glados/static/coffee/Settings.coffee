@@ -275,3 +275,6 @@ glados.setupOnLoadAfterJS = () ->
       )
 
 $( "body" ).ready(glados.setupOnLoadAfterJS)
+
+# enable this variable to prevent unsafe calls like saveAs from file saver
+glados.JS_TEST_MODE = false
