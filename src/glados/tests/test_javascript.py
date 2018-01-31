@@ -21,7 +21,8 @@ class JavascriptTest(ReportCardTester):
     url = self.HOST + '/js_tests/'
     self.getURL(url, wait_for_glados_ready=False)
     time.sleep(5)
-    timeout = ReportCardTester.DEFAULT_TIMEOUT*2
+    # timeout = ReportCardTester.DEFAULT_TIMEOUT*2
+    timeout = 10
     loaded = False
     start_time = time.time()
     jasmine_alert_elem = None
