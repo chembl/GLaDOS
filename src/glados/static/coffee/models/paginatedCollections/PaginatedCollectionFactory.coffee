@@ -323,8 +323,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           for url in urls
             link = "<a href='#{(url['url'])}'>#{url['display_url']}</a>"
             html = html.replace(url['url'], link)
-
           return html
+
+        replace_hashtags_from_entities = (html, hashtags) ->
+          for hashtag in hashtags
+            link = "<a href='https://twitter.com/hashtag/#{(hashtag['text'])}'>##{hashtag['text']}</a>"
+            console.log 'link: ', link
+            html = html.replace('#' + hashtag['text'], link)
+          return html
+
 
         for t in rawTweets
 
@@ -336,6 +343,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
             if entityType == 'urls'
               html = replace_urls_from_entities(html, entities)
+            if entityType == 'hashtags'
+              html = replace_hashtags_from_entities(html, entities)
 
           simpleTweet =
             id: t.id
