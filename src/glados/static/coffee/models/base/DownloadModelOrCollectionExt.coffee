@@ -93,7 +93,7 @@ DownloadModelOrCollectionExt =
     downloadObject = if customObject? then customObject else @getDownloadObject(downloadParserFunction)
     strContent = @getFullCSVString(downloadObject, isTabSeparated)
     blob = @getBlobToDownload strContent
-    saveAs blob, filename
+    saveAs(blob, filename) unless glados.JS_TEST_MODE
 
     return strContent
 
@@ -114,7 +114,7 @@ DownloadModelOrCollectionExt =
     downloadObject = @getDownloadObject(downloadParserFunction)
     strContent = @getJSONString(downloadObject)
     blob = @getBlobToDownload strContent
-    saveAs blob, filename
+    saveAs(blob, filename) unless glados.JS_TEST_MODE
     return strContent
 
   # --------------------------------------------------------------------
@@ -192,7 +192,7 @@ DownloadModelOrCollectionExt =
     strContent = @getXLSString(downloadObject)
 
     blob = @getBlobToDownload strContent, 'application/octet-stream'
-    saveAs blob, filename
+    saveAs(blob, filename) unless glados.JS_TEST_MODE
 
     ab2s= (buf) ->
       String.fromCharCode.apply(null, new Uint8Array(buf));
@@ -206,7 +206,7 @@ DownloadModelOrCollectionExt =
   downloadTextFile: (filename, strFileContent) ->
 
     blob = @getBlobToDownload strFileContent
-    saveAs blob, filename
+    saveAs(blob, filename) unless glados.JS_TEST_MODE
     return strFileContent
 
   # --------------------------------------------------------------------
