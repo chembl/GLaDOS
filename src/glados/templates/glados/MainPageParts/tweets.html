@@ -1,51 +1,3 @@
-<script id='Handlebars-Common-Paginated-Card-Tweet' type="text/x-handlebars-template">
-    {% verbatim %}
-    <div class="tweet grey lighten-5">
-
-        <a href="https://twitter.com/{{columns_by_comparator.user__screenName.value}}/status/{{columns_by_comparator.id.value}}"
-           target="_blank">
-
-            <div class="row valign-wrapper">
-                <div class="col s2">
-                    <img class="responsive-img valign circle" src="{{columns_by_comparator.user__profileImgUrl.value}}" alt="">
-                </div>
-
-                <div class="col s10 tweet-profile-name">
-                    <p><b>ChEMBL</b></p>
-                </div>
-            </div>
-
-        </a>
-
-        <div class="row">
-            <div class="flow-text">
-                <div class="tweet-content">
-                    <p>
-                        {{{columns_by_comparator.text.value}}}
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="row tweet-info">
-            <div class="col s4">
-                <a href="#"
-                   onclick="window.open('https://twitter.com/intent/like?tweet_id={{columns_by_comparator.id.value}}','like {{columns_by_comparator.id.value}}','width=600,height=400')">
-                    <i class="fa fa-heart" aria-hidden="true"></i>
-                </a>
-                <a href="#"
-                   onclick="window.open('https://twitter.com/intent/retweet?tweet_id={{columns_by_comparator.id.value}}','retweet {{columns_by_comparator.id.value}}','width=600,height=400')">
-                    <i class="fa fa-retweet" aria-hidden="true"></i>
-                </a>
-            </div>
-            <div class="col s8 right-align">
-                 <span>{{columns_by_comparator.createdAt.value}}</span>
-            </div>
-        </div>
-    </div>
-    {% endverbatim %}
-</script>
-
 <div class="BCK-Tweets-container">
     <div class="card teal lighten-5 z-depth-0">
         <div class="card-content tweet-content">
@@ -61,7 +13,14 @@
 
             <div class="tweets">
                 {% include "glados/base/PaginatedCollections/DefaultInfinityBrowserContent.html" %}
+                <div class="row  center-align">
+                    <button class="waves-effect waves-light btn-chembl teal" onclick="funcioncargarmastweets">
+                        <i class="fa fa-spinner" aria-hidden="true"></i>
+                        Load more tweets
+                    </button>
+                </div>
             </div>
+
         </div>
     </div>
 
