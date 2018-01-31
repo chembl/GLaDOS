@@ -30,15 +30,21 @@ class ReportCardTester(unittest.TestCase):
   @classmethod
   def instantiateBrowser(cls):
     if ReportCardTester.SINGLETON_BROWSER is None:
-      try:
-        ReportCardTester.SINGLETON_BROWSER = webdriver.Chrome(chrome_options=cls.CHROME_OPTIONS)
-        ReportCardTester.SINGLETON_BROWSER.set_window_size(1024, 768)
-        ReportCardTester.SINGLETON_BROWSER.implicitly_wait(ReportCardTester.IMPLICIT_WAIT)
-        ReportCardTester.NUM_BROWSER_CALLS = 0
-      except:
-        print("CRITICAL ERROR: It was not possible to start the Browser Selenium driver due to:", file=sys.stderr)
-        traceback.print_exc()
-        sys.exit(1)
+      retries = 0
+      created = False
+      while not created and retries < 3:
+        try:
+          ReportCardTester.SINGLETON_BROWSER = webdriver.Chrome(chrome_options=cls.CHROME_OPTIONS)
+          ReportCardTester.SINGLETON_BROWSER.implicitly_wait(ReportCardTester.IMPLICIT_WAIT)
+          ReportCardTester.NUM_BROWSER_CALLS = 0
+          created = True
+        except:
+          retries += 1
+          print("CRITICAL ERROR: It was not possible to start the Browser Selenium driver due to:", file=sys.stderr)
+          time.sleep(5)
+          traceback.print_exc()
+      if not created:
+        raise Exception('Unable to start browser after {0} retries.'.format(retries))
 
   @staticmethod
   @atexit.register
@@ -56,7 +62,7 @@ class ReportCardTester(unittest.TestCase):
     self.browser = ReportCardTester.SINGLETON_BROWSER
 
   def tearDown(self):
-    if ReportCardTester.NUM_BROWSER_CALLS > 4:
+    if ReportCardTester.NUM_BROWSER_CALLS > 10:
       ReportCardTester.closeBrowser()
 
   def getURL(self, url, timeout=DEFAULT_TIMEOUT, wait_for_glados_ready=True, retries=3):
