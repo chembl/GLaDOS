@@ -107,12 +107,15 @@ def get_latest_tweets_json(request):
     offset = request.GET.get('offset', '')
     page_number = str((int(offset) / int(count)) + 1)
     tweets_data = get_latest_tweets(page_number, count)
-    tweets = tweets_data[0]
+    tweets_content = tweets_data[0]
     user_data = tweets_data[1]
     total_count = user_data['statuses_count']
 
+    for tweet_i in tweets_content:
+        tweet_i['id'] = str(tweet_i['id'])
+
     tweets = {
-        'tweets': tweets,
+        'tweets': tweets_content,
         'page_meta': {
             "limit": int(count),
             # this may be useful if we need to download the tweets
