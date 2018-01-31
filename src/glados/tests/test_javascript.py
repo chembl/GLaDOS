@@ -27,6 +27,9 @@ class JavascriptTest(ReportCardTester):
     jasmine_alert_elem = None
     jasmine_failed_elem = None
     jasmine_passed_elem = None
+    print('-------HTML-----------------------------------------------------------------------')
+    print(self.browser.find_element_by_css_selector('html').get_attribute('innerHTML'))
+
     while not loaded and time.time() - start_time < timeout:
       if jasmine_alert_elem is None:
         try:

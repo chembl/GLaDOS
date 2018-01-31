@@ -11,7 +11,6 @@ class ReportCardTester(unittest.TestCase):
 
   # set the window size and headless mode
   CHROME_OPTIONS = webdriver.ChromeOptions()
-  CHROME_OPTIONS.binary_location = '/usr/bin/google-chrome-stable'
   CHROME_OPTIONS.add_argument('--headless')
   CHROME_OPTIONS.add_argument('--no-sandbox')
   CHROME_OPTIONS.add_argument('--disable-gpu')
