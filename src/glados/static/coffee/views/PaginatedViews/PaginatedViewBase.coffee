@@ -207,12 +207,18 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @shouldIgnoreContentChangeRequestWhileStreaming()
         return
 
+      console.log 'SENT DATA TO TEMPLATE'
       if (@isInfinite() or @isCards()) and not @isComplicated
         templateID = @collection.getMeta('custom_cards_template')
+        if @isInfinite()
+          infiniteConfig = @collection.getMeta('columns_description').Infinite
+          if infiniteConfig.CustomItemTemplate?
+            templateID = infiniteConfig.CustomItemTemplate
       # this second way should be the correct way to do it, not changing it for now so I don't have refactor many things
       if customItemTemplate?
         templateID = customItemTemplate
       templateID ?= $specificElemContainer.attr('data-hb-template')
+      console.log 'TEMPLATE ID: ', templateID
       applyTemplate = Handlebars.compile($('#' + templateID).html())
       $appendTo = $specificElemContainer
 

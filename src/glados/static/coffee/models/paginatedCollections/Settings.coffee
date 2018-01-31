@@ -536,6 +536,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Default: ApprovedDrugClinicalCandidate.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
           Carousel:
             Default: ApprovedDrugClinicalCandidate.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+
+
       STRUCTURAL_ALERTS_LIST:
         MODEL: glados.models.Compound.StructuralAlert
         COLUMNS: glados.models.Compound.StructuralAlert.COLUMNS_SETTINGS.ALL_COLUMNS

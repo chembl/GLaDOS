@@ -1,6 +1,58 @@
 <script id='Handlebars-Common-Paginated-Card-Tweet' type="text/x-handlebars-template">
-    hola
+    {% verbatim %}
+    <div class="tweet grey lighten-5">
+
+          <a href="https://twitter.com/ChEMBL/status/{{columns.TWEET_ID.value}}" target="_blank">
+
+            <div class="row valign-wrapper">
+
+              <div class="col s2">
+                <img class="responsive-img valign" src="" alt="" class="circle">
+              </div>
+
+              <div class="col s5 ">
+                <p><b>ChEMBL</b></p>
+              </div>
+
+              <div class="col s5 right-align">
+                <span>{{createdAt}}</span>
+              </div>
+
+            </div>
+
+          </a>
+
+          <div class="row">
+
+            <div class="flow-text">
+              <div class="tweet-content">
+                <p>
+                    {{ columns }}
+                {{#each columns}}
+                  {{#if this.has_link}}
+                    <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a></p>
+                  {{else}}
+                    <small>
+                      <p><b>{{this.name_to_show}}:</b> {{this.value}}</p>
+                    </small>
+                  {{/if}}
+                {{/each}}
+                   {{columns.HTML.value}}
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col s4">
+
+            </div>
+          </div>
+    </div>
+    {% endverbatim %}
 </script>
+
 <div class="BCK-Tweets-container">
     <div class="card teal lighten-5 z-depth-0">
         <div class="card-content tweet-content">
