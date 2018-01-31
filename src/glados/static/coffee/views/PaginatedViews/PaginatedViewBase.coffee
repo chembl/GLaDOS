@@ -229,8 +229,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
         columnsByComparator = {}
         for column_i in columnsWithValues
-          columnsByComparator[column_i.comparator] = column_i
-          
+          columnsByComparator[column_i.comparator.replace(/[^a-zA-Z0-9]/g, '__')] = column_i
+
         templateParams =
           base_check_box_id: idValue
           is_selected: @collection.itemIsSelected(idValue)
