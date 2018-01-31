@@ -319,6 +319,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         rawTweets = data.tweets
         simplifiedTweets = []
 
+        #gets hashtags, mentions and links in tweets and turns them into html <a> tags
         replace_urls_from_entities = (html, urls) ->
           for url in urls
             link = "<a href='#{(url['url'])}'>#{url['display_url']}</a>"
@@ -328,8 +329,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         replace_hashtags_from_entities = (html, hashtags) ->
           for hashtag in hashtags
             link = "<a href='https://twitter.com/hashtag/#{(hashtag['text'])}'>##{hashtag['text']}</a>"
-            console.log 'link: ', link
             html = html.replace('#' + hashtag['text'], link)
+          return html
+
+        replace_mentions_from_entities = (html, mentions) ->
+          for mention in mentions
+            link = "<a href='https://twitter.com/#{(mention['screen_name'])}'>@#{mention['screen_name']}</a>"
+            html = html.replace('@' + mention['screen_name'], link)
           return html
 
 
@@ -345,6 +351,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
               html = replace_urls_from_entities(html, entities)
             if entityType == 'hashtags'
               html = replace_hashtags_from_entities(html, entities)
+            if entityType == 'user_mentions'
+              html = replace_mentions_from_entities(html, entities)
 
           simpleTweet =
             id: t.id
