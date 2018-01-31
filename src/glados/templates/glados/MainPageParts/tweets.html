@@ -2,7 +2,7 @@
     {% verbatim %}
     <div class="tweet grey lighten-5">
 
-          <a href="https://twitter.com/ChEMBL/status/{{columns.TWEET_ID.value}}" target="_blank">
+          <a href="https://twitter.com/{{columns_by_comparator.user__screenName.value}}/status/{{columns_by_comparator.id.value}}" target="_blank">
 
             <div class="row valign-wrapper">
 
@@ -15,7 +15,7 @@
               </div>
 
               <div class="col s5 right-align">
-                <span>{{createdAt}}</span>
+                <span>{{columns_by_comparator.createdAt.value}}</span>
               </div>
 
             </div>
@@ -27,17 +27,7 @@
             <div class="flow-text">
               <div class="tweet-content">
                 <p>
-                    {{ columns }}
-                {{#each columns}}
-                  {{#if this.has_link}}
-                    <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a></p>
-                  {{else}}
-                    <small>
-                      <p><b>{{this.name_to_show}}:</b> {{this.value}}</p>
-                    </small>
-                  {{/if}}
-                {{/each}}
-                   {{columns.HTML.value}}
+                   {{{columns_by_comparator.text.value}}}
                 </p>
               </div>
             </div>
