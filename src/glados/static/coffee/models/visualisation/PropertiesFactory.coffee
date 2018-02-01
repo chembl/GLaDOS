@@ -113,10 +113,10 @@ glados.useNameSpace 'glados.models.visualisation',
           label: 'Standard Value nM'
           domain:[1, 100, 1000]
           coloursRange: [
-            glados.Settings.VISUALISATION_GREEN_BASE
-            glados.Settings.VISUALISATION_LIGHT_GREEN_BASE
-            glados.Settings.VISUALISATION_AMBER_BASE
-            glados.Settings.VISUALISATION_RED_BASE
+            glados.Settings.VIS_COLORS.TEAL2
+            glados.Settings.VIS_COLORS.TEAL3
+            glados.Settings.VIS_COLORS.TEAL5
+            glados.Settings.VIS_COLORS.RED2
           ]
           colourScaleType: glados.Visualisation.THRESHOLD
         MOLECULE_CHEMBL_ID:
