@@ -231,6 +231,8 @@ urlpatterns += [
 
   url(r'^$', views.main_page, name='main'),
 
+  url(r'^tweets/$', views.get_latest_tweets_json, name='tweets'),
+
   url(r'^marvin_search_fullscreen/$',
       DirectTemplateView.as_view(template_name="glados/marvin_search_fullscreen.html"), ),
 

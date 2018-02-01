@@ -1,0 +1,2114 @@
+{
+  "page_meta": {
+    "limit": 15,
+    "total_count": 155,
+    "offset": 0
+  },
+  "tweets": [
+    {
+      "lang": "en",
+      "retweeted_status": {
+        "lang": "en",
+        "id": 950740444127752194,
+        "text": "The @ChEMBL team is recruiting a #SoftwareEngineer to work on developing @SureChEMBL #java #devjobs #artifactory… https://t.co/8wsoXqVULR",
+        "retweeted": false,
+        "in_reply_to_status_id_str": null,
+        "entities": {
+          "hashtags": [
+            {
+              "text": "SoftwareEngineer",
+              "indices": [
+                33,
+                50
+              ]
+            },
+            {
+              "text": "java",
+              "indices": [
+                85,
+                90
+              ]
+            },
+            {
+              "text": "devjobs",
+              "indices": [
+                91,
+                99
+              ]
+            },
+            {
+              "text": "artifactory",
+              "indices": [
+                100,
+                112
+              ]
+            }
+          ],
+          "urls": [
+            {
+              "expanded_url": "https://twitter.com/i/web/status/950740444127752194",
+              "indices": [
+                114,
+                137
+              ],
+              "display_url": "twitter.com/i/web/status/9…",
+              "url": "https://t.co/8wsoXqVULR"
+            }
+          ],
+          "symbols": [
+
+          ],
+          "user_mentions": [
+            {
+              "name": "ChEMBL Database",
+              "indices": [
+                4,
+                11
+              ],
+              "id_str": "1545130538",
+              "id": 1545130538,
+              "screen_name": "ChEMBL"
+            },
+            {
+              "name": "SureChEMBL",
+              "indices": [
+                73,
+                84
+              ],
+              "id_str": "2240306478",
+              "id": 2240306478,
+              "screen_name": "SureChEMBL"
+            }
+          ]
+        },
+        "favorited": false,
+        "favorite_count": 0,
+        "in_reply_to_user_id_str": null,
+        "possibly_sensitive": false,
+        "in_reply_to_user_id": null,
+        "truncated": true,
+        "created_at": "Tue Jan 09 14:46:00 +0000 2018",
+        "in_reply_to_status_id": null,
+        "contributors": null,
+        "in_reply_to_screen_name": null,
+        "is_quote_status": false,
+        "retweet_count": 5,
+        "coordinates": null,
+        "user": {
+          "profile_sidebar_fill_color": "DDEEF6",
+          "profile_text_color": "333333",
+          "profile_link_color": "1DA1F2",
+          "description": "At @emblebi we empower researchers and tech visionaries to realise the potential of ‘big data’ in biology. Follow us for updates on new openings.",
+          "is_translation_enabled": false,
+          "verified": false,
+          "utc_offset": -28800,
+          "entities": {
+            "description": {
+              "urls": [
+
+              ]
+            },
+            "url": {
+              "urls": [
+                {
+                  "expanded_url": "http://www.ebi.ac.uk/about/jobs",
+                  "indices": [
+                    0,
+                    23
+                  ],
+                  "display_url": "ebi.ac.uk/about/jobs",
+                  "url": "https://t.co/JdcfSKeeLT"
+                }
+              ]
+            }
+          },
+          "is_translator": false,
+          "friends_count": 124,
+          "profile_background_tile": false,
+          "default_profile": true,
+          "notifications": false,
+          "profile_sidebar_border_color": "C0DEED",
+          "profile_image_url_https": "https://pbs.twimg.com/profile_images/803242776024465409/Vl5wDYfZ_normal.jpg",
+          "has_extended_profile": true,
+          "profile_image_url": "http://pbs.twimg.com/profile_images/803242776024465409/Vl5wDYfZ_normal.jpg",
+          "id": 720655851443326976,
+          "lang": "en",
+          "created_at": "Thu Apr 14 16:51:58 +0000 2016",
+          "statuses_count": 640,
+          "favourites_count": 19,
+          "profile_background_image_url_https": null,
+          "location": "Cambridge, England",
+          "following": false,
+          "protected": false,
+          "url": "https://t.co/JdcfSKeeLT",
+          "follow_request_sent": false,
+          "profile_use_background_image": true,
+          "time_zone": "Pacific Time (US & Canada)",
+          "geo_enabled": false,
+          "profile_background_color": "F5F8FA",
+          "name": "EMBL-EBI Jobs",
+          "followers_count": 432,
+          "id_str": "720655851443326976",
+          "profile_background_image_url": null,
+          "screen_name": "EMBLEBIjobs",
+          "listed_count": 30,
+          "default_profile_image": false,
+          "contributors_enabled": false,
+          "profile_banner_url": "https://pbs.twimg.com/profile_banners/720655851443326976/1476974640",
+          "translator_type": "none"
+        },
+        "source": "<a href=\"https://about.twitter.com/products/tweetdeck\" rel=\"nofollow\">TweetDeck</a>",
+        "id_str": "950740444127752194",
+        "geo": null,
+        "place": null
+      },
+      "id": 951443552327913472,
+      "text": "RT @EMBLEBIjobs: The @ChEMBL team is recruiting a #SoftwareEngineer to work on developing @SureChEMBL #java #devjobs #artifactory #embljobs…",
+      "retweeted": false,
+      "in_reply_to_status_id_str": null,
+      "entities": {
+        "hashtags": [
+          {
+            "text": "SoftwareEngineer",
+            "indices": [
+              50,
+              67
+            ]
+          },
+          {
+            "text": "java",
+            "indices": [
+              102,
+              107
+            ]
+          },
+          {
+            "text": "devjobs",
+            "indices": [
+              108,
+              116
+            ]
+          },
+          {
+            "text": "artifactory",
+            "indices": [
+              117,
+              129
+            ]
+          },
+          {
+            "text": "embljobs",
+            "indices": [
+              130,
+              139
+            ]
+          }
+        ],
+        "urls": [
+
+        ],
+        "symbols": [
+
+        ],
+        "user_mentions": [
+          {
+            "name": "EMBL-EBI Jobs",
+            "indices": [
+              3,
+              15
+            ],
+            "id_str": "720655851443326976",
+            "id": 720655851443326976,
+            "screen_name": "EMBLEBIjobs"
+          },
+          {
+            "name": "ChEMBL Database",
+            "indices": [
+              21,
+              28
+            ],
+            "id_str": "1545130538",
+            "id": 1545130538,
+            "screen_name": "ChEMBL"
+          },
+          {
+            "name": "SureChEMBL",
+            "indices": [
+              90,
+              101
+            ],
+            "id_str": "2240306478",
+            "id": 2240306478,
+            "screen_name": "SureChEMBL"
+          }
+        ]
+      },
+      "favorited": false,
+      "favorite_count": 0,
+      "in_reply_to_user_id_str": null,
+      "in_reply_to_user_id": null,
+      "truncated": false,
+      "created_at": "Thu Jan 11 13:19:54 +0000 2018",
+      "in_reply_to_status_id": null,
+      "contributors": null,
+      "in_reply_to_screen_name": null,
+      "is_quote_status": false,
+      "retweet_count": 5,
+      "coordinates": null,
+      "user": {
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_link_color": "1DA1F2",
+        "description": "The Organization of Drug Discovery Data",
+        "is_translation_enabled": false,
+        "verified": false,
+        "utc_offset": 0,
+        "entities": {
+          "description": {
+            "urls": [
+
+            ]
+          },
+          "url": {
+            "urls": [
+              {
+                "expanded_url": "http://www.ebi.ac.uk/chembl",
+                "indices": [
+                  0,
+                  22
+                ],
+                "display_url": "ebi.ac.uk/chembl",
+                "url": "http://t.co/nozEOqezsk"
+              }
+            ]
+          }
+        },
+        "is_translator": false,
+        "friends_count": 14,
+        "profile_background_tile": false,
+        "default_profile": true,
+        "notifications": false,
+        "profile_sidebar_border_color": "C0DEED",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/378800000043124029/2aa940b93acf41000e3a42a3b1e9f5df_normal.png",
+        "has_extended_profile": false,
+        "profile_image_url": "http://pbs.twimg.com/profile_images/378800000043124029/2aa940b93acf41000e3a42a3b1e9f5df_normal.png",
+        "id": 1545130538,
+        "lang": "en",
+        "created_at": "Tue Jun 25 08:10:26 +0000 2013",
+        "statuses_count": 155,
+        "favourites_count": 10,
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "location": "Hinxton, UK",
+        "following": false,
+        "protected": false,
+        "url": "http://t.co/nozEOqezsk",
+        "follow_request_sent": false,
+        "profile_use_background_image": true,
+        "time_zone": "London",
+        "geo_enabled": false,
+        "profile_background_color": "C0DEED",
+        "name": "ChEMBL Database",
+        "followers_count": 982,
+        "id_str": "1545130538",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "screen_name": "ChEMBL",
+        "listed_count": 31,
+        "default_profile_image": false,
+        "contributors_enabled": false,
+        "translator_type": "none"
+      },
+      "source": "<a href=\"https://about.twitter.com/products/tweetdeck\" rel=\"nofollow\">TweetDeck</a>",
+      "id_str": "951443552327913472",
+      "geo": null,
+      "place": null
+    },
+    {
+      "lang": "en",
+      "coordinates": null,
+      "id": 950388393829109760,
+      "text": "Nice summary of 2017’s bumper crop of new drug approvals. You will find the 46 new CDER approvals in the next ChEMB… https://t.co/AfiZaPCVvY",
+      "retweeted": false,
+      "favorited": false,
+      "in_reply_to_status_id_str": null,
+      "entities": {
+        "hashtags": [
+
+        ],
+        "urls": [
+          {
+            "expanded_url": "https://twitter.com/i/web/status/950388393829109760",
+            "indices": [
+              117,
+              140
+            ],
+            "display_url": "twitter.com/i/web/status/9…",
+            "url": "https://t.co/AfiZaPCVvY"
+          }
+        ],
+        "symbols": [
+
+        ],
+        "user_mentions": [
+
+        ]
+      },
+      "quoted_status_id_str": "949058362947153920",
+      "favorite_count": 5,
+      "in_reply_to_user_id_str": null,
+      "possibly_sensitive": false,
+      "in_reply_to_user_id": null,
+      "truncated": true,
+      "created_at": "Mon Jan 08 15:27:05 +0000 2018",
+      "in_reply_to_status_id": null,
+      "contributors": null,
+      "in_reply_to_screen_name": null,
+      "quoted_status": {
+        "lang": "en",
+        "id": 949058362947153920,
+        "text": "New blog on #Forbes : 2017: A Banner Year For Innovation, But Will It Be Short-Lived?\nhttps://t.co/aGlqmInYAf",
+        "retweeted": false,
+        "in_reply_to_status_id_str": null,
+        "entities": {
+          "hashtags": [
+            {
+              "text": "Forbes",
+              "indices": [
+                12,
+                19
+              ]
+            }
+          ],
+          "urls": [
+            {
+              "expanded_url": "https://goo.gl/2sqRN2",
+              "indices": [
+                86,
+                109
+              ],
+              "display_url": "goo.gl/2sqRN2",
+              "url": "https://t.co/aGlqmInYAf"
+            }
+          ],
+          "symbols": [
+
+          ],
+          "user_mentions": [
+
+          ]
+        },
+        "favorited": false,
+        "favorite_count": 9,
+        "in_reply_to_user_id_str": null,
+        "possibly_sensitive": false,
+        "in_reply_to_user_id": null,
+        "truncated": false,
+        "created_at": "Thu Jan 04 23:22:01 +0000 2018",
+        "in_reply_to_status_id": null,
+        "contributors": null,
+        "in_reply_to_screen_name": null,
+        "is_quote_status": false,
+        "retweet_count": 11,
+        "coordinates": null,
+        "user": {
+          "profile_sidebar_fill_color": "DDEEF6",
+          "profile_text_color": "333333",
+          "profile_link_color": "1DA1F2",
+          "description": "Senior Fellow at FasterCures and consultant (ex-Lilly) who focuses on biomedical innovation - where it comes from and how to get more of it.  More on LinkedIn.",
+          "is_translation_enabled": false,
+          "verified": false,
+          "utc_offset": -28800,
+          "entities": {
+            "description": {
+              "urls": [
+
+              ]
+            },
+            "url": {
+              "urls": [
+                {
+                  "expanded_url": "http://www.linkedin.com/profile/view?id=2128371",
+                  "indices": [
+                    0,
+                    22
+                  ],
+                  "display_url": "linkedin.com/profile/view?i…",
+                  "url": "http://t.co/QPXY6rWrJT"
+                }
+              ]
+            }
+          },
+          "is_translator": false,
+          "friends_count": 175,
+          "profile_background_tile": false,
+          "default_profile": true,
+          "notifications": false,
+          "profile_sidebar_border_color": "C0DEED",
+          "profile_image_url_https": "https://pbs.twimg.com/profile_images/2488223619/t0x9zppztt6edrohyo78_normal.jpeg",
+          "has_extended_profile": false,
+          "profile_image_url": "http://pbs.twimg.com/profile_images/2488223619/t0x9zppztt6edrohyo78_normal.jpeg",
+          "id": 30618682,
+          "lang": "en",
+          "created_at": "Sun Apr 12 07:15:46 +0000 2009",
+          "statuses_count": 1663,
+          "favourites_count": 766,
+          "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+          "location": "Indianapolis",
+          "following": false,
+          "protected": false,
+          "url": "http://t.co/QPXY6rWrJT",
+          "follow_request_sent": false,
+          "profile_use_background_image": true,
+          "time_zone": "Pacific Time (US & Canada)",
+          "geo_enabled": false,
+          "profile_background_color": "C0DEED",
+          "name": "Bernard Munos",
+          "followers_count": 1312,
+          "id_str": "30618682",
+          "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+          "screen_name": "bhmunos",
+          "listed_count": 108,
+          "default_profile_image": false,
+          "contributors_enabled": false,
+          "profile_banner_url": "https://pbs.twimg.com/profile_banners/30618682/1406061924",
+          "translator_type": "none"
+        },
+        "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+        "id_str": "949058362947153920",
+        "geo": null,
+        "place": null
+      },
+      "is_quote_status": true,
+      "retweet_count": 0,
+      "quoted_status_id": 949058362947153920,
+      "user": {
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_link_color": "1DA1F2",
+        "description": "The Organization of Drug Discovery Data",
+        "is_translation_enabled": false,
+        "verified": false,
+        "utc_offset": 0,
+        "entities": {
+          "description": {
+            "urls": [
+
+            ]
+          },
+          "url": {
+            "urls": [
+              {
+                "expanded_url": "http://www.ebi.ac.uk/chembl",
+                "indices": [
+                  0,
+                  22
+                ],
+                "display_url": "ebi.ac.uk/chembl",
+                "url": "http://t.co/nozEOqezsk"
+              }
+            ]
+          }
+        },
+        "is_translator": false,
+        "friends_count": 14,
+        "profile_background_tile": false,
+        "default_profile": true,
+        "notifications": false,
+        "profile_sidebar_border_color": "C0DEED",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/378800000043124029/2aa940b93acf41000e3a42a3b1e9f5df_normal.png",
+        "has_extended_profile": false,
+        "profile_image_url": "http://pbs.twimg.com/profile_images/378800000043124029/2aa940b93acf41000e3a42a3b1e9f5df_normal.png",
+        "id": 1545130538,
+        "lang": "en",
+        "created_at": "Tue Jun 25 08:10:26 +0000 2013",
+        "statuses_count": 155,
+        "favourites_count": 10,
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "location": "Hinxton, UK",
+        "following": false,
+        "protected": false,
+        "url": "http://t.co/nozEOqezsk",
+        "follow_request_sent": false,
+        "profile_use_background_image": true,
+        "time_zone": "London",
+        "geo_enabled": false,
+        "profile_background_color": "C0DEED",
+        "name": "ChEMBL Database",
+        "followers_count": 982,
+        "id_str": "1545130538",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "screen_name": "ChEMBL",
+        "listed_count": 31,
+        "default_profile_image": false,
+        "contributors_enabled": false,
+        "translator_type": "none"
+      },
+      "source": "<a href=\"https://about.twitter.com/products/tweetdeck\" rel=\"nofollow\">TweetDeck</a>",
+      "id_str": "950388393829109760",
+      "geo": null,
+      "place": null
+    },
+    {
+      "lang": "en",
+      "id": 943485530301517824,
+      "text": "@baoilleach Thanks Noel - will fix all for next release",
+      "retweeted": false,
+      "in_reply_to_status_id_str": "943086222871842819",
+      "entities": {
+        "hashtags": [
+
+        ],
+        "urls": [
+
+        ],
+        "symbols": [
+
+        ],
+        "user_mentions": [
+          {
+            "name": "Noel O'Boyle",
+            "indices": [
+              0,
+              11
+            ],
+            "id_str": "370743159",
+            "id": 370743159,
+            "screen_name": "baoilleach"
+          }
+        ]
+      },
+      "favorited": false,
+      "favorite_count": 1,
+      "in_reply_to_user_id_str": "370743159",
+      "in_reply_to_user_id": 370743159,
+      "truncated": false,
+      "created_at": "Wed Dec 20 14:17:34 +0000 2017",
+      "in_reply_to_status_id": 943086222871842819,
+      "contributors": null,
+      "in_reply_to_screen_name": "baoilleach",
+      "is_quote_status": false,
+      "retweet_count": 0,
+      "coordinates": null,
+      "user": {
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_link_color": "1DA1F2",
+        "description": "The Organization of Drug Discovery Data",
+        "is_translation_enabled": false,
+        "verified": false,
+        "utc_offset": 0,
+        "entities": {
+          "description": {
+            "urls": [
+
+            ]
+          },
+          "url": {
+            "urls": [
+              {
+                "expanded_url": "http://www.ebi.ac.uk/chembl",
+                "indices": [
+                  0,
+                  22
+                ],
+                "display_url": "ebi.ac.uk/chembl",
+                "url": "http://t.co/nozEOqezsk"
+              }
+            ]
+          }
+        },
+        "is_translator": false,
+        "friends_count": 14,
+        "profile_background_tile": false,
+        "default_profile": true,
+        "notifications": false,
+        "profile_sidebar_border_color": "C0DEED",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/378800000043124029/2aa940b93acf41000e3a42a3b1e9f5df_normal.png",
+        "has_extended_profile": false,
+        "profile_image_url": "http://pbs.twimg.com/profile_images/378800000043124029/2aa940b93acf41000e3a42a3b1e9f5df_normal.png",
+        "id": 1545130538,
+        "lang": "en",
+        "created_at": "Tue Jun 25 08:10:26 +0000 2013",
+        "statuses_count": 155,
+        "favourites_count": 10,
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "location": "Hinxton, UK",
+        "following": false,
+        "protected": false,
+        "url": "http://t.co/nozEOqezsk",
+        "follow_request_sent": false,
+        "profile_use_background_image": true,
+        "time_zone": "London",
+        "geo_enabled": false,
+        "profile_background_color": "C0DEED",
+        "name": "ChEMBL Database",
+        "followers_count": 982,
+        "id_str": "1545130538",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "screen_name": "ChEMBL",
+        "listed_count": 31,
+        "default_profile_image": false,
+        "contributors_enabled": false,
+        "translator_type": "none"
+      },
+      "source": "<a href=\"https://about.twitter.com/products/tweetdeck\" rel=\"nofollow\">TweetDeck</a>",
+      "id_str": "943485530301517824",
+      "geo": null,
+      "place": null
+    },
+    {
+      "lang": "en",
+      "id": 925661231872204800,
+      "text": "ChEMBL, SureChEMBL data now included in Google’s BigQuery: https://t.co/XQc2YAodr8",
+      "retweeted": false,
+      "in_reply_to_status_id_str": null,
+      "entities": {
+        "hashtags": [
+
+        ],
+        "urls": [
+          {
+            "expanded_url": "https://cloud.google.com/blog/big-data/2017/10/google-patents-public-datasets-connecting-public-paid-and-private-patent-data",
+            "indices": [
+              59,
+              82
+            ],
+            "display_url": "cloud.google.com/blog/big-data/…",
+            "url": "https://t.co/XQc2YAodr8"
+          }
+        ],
+        "symbols": [
+
+        ],
+        "user_mentions": [
+
+        ]
+      },
+      "favorited": false,
+      "favorite_count": 8,
+      "in_reply_to_user_id_str": null,
+      "possibly_sensitive": false,
+      "in_reply_to_user_id": null,
+      "truncated": false,
+      "created_at": "Wed Nov 01 09:50:10 +0000 2017",
+      "in_reply_to_status_id": null,
+      "contributors": null,
+      "in_reply_to_screen_name": null,
+      "is_quote_status": false,
+      "retweet_count": 2,
+      "coordinates": null,
+      "user": {
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_link_color": "1DA1F2",
+        "description": "The Organization of Drug Discovery Data",
+        "is_translation_enabled": false,
+        "verified": false,
+        "utc_offset": 0,
+        "entities": {
+          "description": {
+            "urls": [
+
+            ]
+          },
+          "url": {
+            "urls": [
+              {
+                "expanded_url": "http://www.ebi.ac.uk/chembl",
+                "indices": [
+                  0,
+                  22
+                ],
+                "display_url": "ebi.ac.uk/chembl",
+                "url": "http://t.co/nozEOqezsk"
+              }
+            ]
+          }
+        },
+        "is_translator": false,
+        "friends_count": 14,
+        "profile_background_tile": false,
+        "default_profile": true,
+        "notifications": false,
+        "profile_sidebar_border_color": "C0DEED",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/378800000043124029/2aa940b93acf41000e3a42a3b1e9f5df_normal.png",
+        "has_extended_profile": false,
+        "profile_image_url": "http://pbs.twimg.com/profile_images/378800000043124029/2aa940b93acf41000e3a42a3b1e9f5df_normal.png",
+        "id": 1545130538,
+        "lang": "en",
+        "created_at": "Tue Jun 25 08:10:26 +0000 2013",
+        "statuses_count": 155,
+        "favourites_count": 10,
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "location": "Hinxton, UK",
+        "following": false,
+        "protected": false,
+        "url": "http://t.co/nozEOqezsk",
+        "follow_request_sent": false,
+        "profile_use_background_image": true,
+        "time_zone": "London",
+        "geo_enabled": false,
+        "profile_background_color": "C0DEED",
+        "name": "ChEMBL Database",
+        "followers_count": 982,
+        "id_str": "1545130538",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "screen_name": "ChEMBL",
+        "listed_count": 31,
+        "default_profile_image": false,
+        "contributors_enabled": false,
+        "translator_type": "none"
+      },
+      "source": "<a href=\"https://about.twitter.com/products/tweetdeck\" rel=\"nofollow\">TweetDeck</a>",
+      "id_str": "925661231872204800",
+      "geo": null,
+      "place": null
+    },
+    {
+      "lang": "en",
+      "id": 925660559403601920,
+      "text": "@cdsouthan UniChem license is CC-BY (as stated in latest paper). Will clarify on FTP site.",
+      "retweeted": false,
+      "in_reply_to_status_id_str": "925041750221180929",
+      "entities": {
+        "hashtags": [
+
+        ],
+        "urls": [
+
+        ],
+        "symbols": [
+
+        ],
+        "user_mentions": [
+          {
+            "name": "Christopher Southan",
+            "indices": [
+              0,
+              10
+            ],
+            "id_str": "87252725",
+            "id": 87252725,
+            "screen_name": "cdsouthan"
+          }
+        ]
+      },
+      "favorited": false,
+      "favorite_count": 0,
+      "in_reply_to_user_id_str": "87252725",
+      "in_reply_to_user_id": 87252725,
+      "truncated": false,
+      "created_at": "Wed Nov 01 09:47:29 +0000 2017",
+      "in_reply_to_status_id": 925041750221180929,
+      "contributors": null,
+      "in_reply_to_screen_name": "cdsouthan",
+      "is_quote_status": false,
+      "retweet_count": 0,
+      "coordinates": null,
+      "user": {
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_link_color": "1DA1F2",
+        "description": "The Organization of Drug Discovery Data",
+        "is_translation_enabled": false,
+        "verified": false,
+        "utc_offset": 0,
+        "entities": {
+          "description": {
+            "urls": [
+
+            ]
+          },
+          "url": {
+            "urls": [
+              {
+                "expanded_url": "http://www.ebi.ac.uk/chembl",
+                "indices": [
+                  0,
+                  22
+                ],
+                "display_url": "ebi.ac.uk/chembl",
+                "url": "http://t.co/nozEOqezsk"
+              }
+            ]
+          }
+        },
+        "is_translator": false,
+        "friends_count": 14,
+        "profile_background_tile": false,
+        "default_profile": true,
+        "notifications": false,
+        "profile_sidebar_border_color": "C0DEED",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/378800000043124029/2aa940b93acf41000e3a42a3b1e9f5df_normal.png",
+        "has_extended_profile": false,
+        "profile_image_url": "http://pbs.twimg.com/profile_images/378800000043124029/2aa940b93acf41000e3a42a3b1e9f5df_normal.png",
+        "id": 1545130538,
+        "lang": "en",
+        "created_at": "Tue Jun 25 08:10:26 +0000 2013",
+        "statuses_count": 155,
+        "favourites_count": 10,
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "location": "Hinxton, UK",
+        "following": false,
+        "protected": false,
+        "url": "http://t.co/nozEOqezsk",
+        "follow_request_sent": false,
+        "profile_use_background_image": true,
+        "time_zone": "London",
+        "geo_enabled": false,
+        "profile_background_color": "C0DEED",
+        "name": "ChEMBL Database",
+        "followers_count": 982,
+        "id_str": "1545130538",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "screen_name": "ChEMBL",
+        "listed_count": 31,
+        "default_profile_image": false,
+        "contributors_enabled": false,
+        "translator_type": "none"
+      },
+      "source": "<a href=\"https://about.twitter.com/products/tweetdeck\" rel=\"nofollow\">TweetDeck</a>",
+      "id_str": "925660559403601920",
+      "geo": null,
+      "place": null
+    },
+    {
+      "lang": "en",
+      "id": 887304149473349632,
+      "text": "Join the ChEMBL team and support drug discovery scientists with their projects!\nhttps://t.co/kscNTvdJ5j",
+      "retweeted": false,
+      "in_reply_to_status_id_str": null,
+      "entities": {
+        "hashtags": [
+
+        ],
+        "urls": [
+          {
+            "expanded_url": "https://www.embl.de/jobs/searchjobs/index.php?ref=EBI_00993&newlang=1",
+            "indices": [
+              80,
+              103
+            ],
+            "display_url": "embl.de/jobs/searchjob…",
+            "url": "https://t.co/kscNTvdJ5j"
+          }
+        ],
+        "symbols": [
+
+        ],
+        "user_mentions": [
+
+        ]
+      },
+      "favorited": false,
+      "favorite_count": 4,
+      "in_reply_to_user_id_str": null,
+      "possibly_sensitive": false,
+      "in_reply_to_user_id": null,
+      "truncated": false,
+      "created_at": "Tue Jul 18 13:32:49 +0000 2017",
+      "in_reply_to_status_id": null,
+      "contributors": null,
+      "in_reply_to_screen_name": null,
+      "is_quote_status": false,
+      "retweet_count": 6,
+      "coordinates": null,
+      "user": {
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_link_color": "1DA1F2",
+        "description": "The Organization of Drug Discovery Data",
+        "is_translation_enabled": false,
+        "verified": false,
+        "utc_offset": 0,
+        "entities": {
+          "description": {
+            "urls": [
+
+            ]
+          },
+          "url": {
+            "urls": [
+              {
+                "expanded_url": "http://www.ebi.ac.uk/chembl",
+                "indices": [
+                  0,
+                  22
+                ],
+                "display_url": "ebi.ac.uk/chembl",
+                "url": "http://t.co/nozEOqezsk"
+              }
+            ]
+          }
+        },
+        "is_translator": false,
+        "friends_count": 14,
+        "profile_background_tile": false,
+        "default_profile": true,
+        "notifications": false,
+        "profile_sidebar_border_color": "C0DEED",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/378800000043124029/2aa940b93acf41000e3a42a3b1e9f5df_normal.png",
+        "has_extended_profile": false,
+        "profile_image_url": "http://pbs.twimg.com/profile_images/378800000043124029/2aa940b93acf41000e3a42a3b1e9f5df_normal.png",
+        "id": 1545130538,
+        "lang": "en",
+        "created_at": "Tue Jun 25 08:10:26 +0000 2013",
+        "statuses_count": 155,
+        "favourites_count": 10,
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "location": "Hinxton, UK",
+        "following": false,
+        "protected": false,
+        "url": "http://t.co/nozEOqezsk",
+        "follow_request_sent": false,
+        "profile_use_background_image": true,
+        "time_zone": "London",
+        "geo_enabled": false,
+        "profile_background_color": "C0DEED",
+        "name": "ChEMBL Database",
+        "followers_count": 982,
+        "id_str": "1545130538",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "screen_name": "ChEMBL",
+        "listed_count": 31,
+        "default_profile_image": false,
+        "contributors_enabled": false,
+        "translator_type": "none"
+      },
+      "source": "<a href=\"https://about.twitter.com/products/tweetdeck\" rel=\"nofollow\">TweetDeck</a>",
+      "id_str": "887304149473349632",
+      "geo": null,
+      "place": null
+    },
+    {
+      "lang": "en",
+      "id": 885251319149285377,
+      "text": "@dgelemi Left as an exercise for the reader :)",
+      "retweeted": false,
+      "in_reply_to_status_id_str": "885176891631599616",
+      "entities": {
+        "hashtags": [
+
+        ],
+        "urls": [
+
+        ],
+        "symbols": [
+
+        ],
+        "user_mentions": [
+          {
+            "name": "Jérémy",
+            "indices": [
+              0,
+              8
+            ],
+            "id_str": "120168877",
+            "id": 120168877,
+            "screen_name": "dgelemi"
+          }
+        ]
+      },
+      "favorited": false,
+      "favorite_count": 1,
+      "in_reply_to_user_id_str": "120168877",
+      "in_reply_to_user_id": 120168877,
+      "truncated": false,
+      "created_at": "Wed Jul 12 21:35:36 +0000 2017",
+      "in_reply_to_status_id": 885176891631599616,
+      "contributors": null,
+      "in_reply_to_screen_name": "dgelemi",
+      "is_quote_status": false,
+      "retweet_count": 0,
+      "coordinates": null,
+      "user": {
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_link_color": "1DA1F2",
+        "description": "The Organization of Drug Discovery Data",
+        "is_translation_enabled": false,
+        "verified": false,
+        "utc_offset": 0,
+        "entities": {
+          "description": {
+            "urls": [
+
+            ]
+          },
+          "url": {
+            "urls": [
+              {
+                "expanded_url": "http://www.ebi.ac.uk/chembl",
+                "indices": [
+                  0,
+                  22
+                ],
+                "display_url": "ebi.ac.uk/chembl",
+                "url": "http://t.co/nozEOqezsk"
+              }
+            ]
+          }
+        },
+        "is_translator": false,
+        "friends_count": 14,
+        "profile_background_tile": false,
+        "default_profile": true,
+        "notifications": false,
+        "profile_sidebar_border_color": "C0DEED",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/378800000043124029/2aa940b93acf41000e3a42a3b1e9f5df_normal.png",
+        "has_extended_profile": false,
+        "profile_image_url": "http://pbs.twimg.com/profile_images/378800000043124029/2aa940b93acf41000e3a42a3b1e9f5df_normal.png",
+        "id": 1545130538,
+        "lang": "en",
+        "created_at": "Tue Jun 25 08:10:26 +0000 2013",
+        "statuses_count": 155,
+        "favourites_count": 10,
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "location": "Hinxton, UK",
+        "following": false,
+        "protected": false,
+        "url": "http://t.co/nozEOqezsk",
+        "follow_request_sent": false,
+        "profile_use_background_image": true,
+        "time_zone": "London",
+        "geo_enabled": false,
+        "profile_background_color": "C0DEED",
+        "name": "ChEMBL Database",
+        "followers_count": 982,
+        "id_str": "1545130538",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "screen_name": "ChEMBL",
+        "listed_count": 31,
+        "default_profile_image": false,
+        "contributors_enabled": false,
+        "translator_type": "none"
+      },
+      "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+      "id_str": "885251319149285377",
+      "geo": null,
+      "place": null
+    },
+    {
+      "lang": "en",
+      "id": 885115030345310208,
+      "text": "Eloy's debut on the ChEMBL blog:\nhttps://t.co/GN7Es9nCwu",
+      "retweeted": false,
+      "in_reply_to_status_id_str": null,
+      "entities": {
+        "hashtags": [
+
+        ],
+        "urls": [
+          {
+            "expanded_url": "https://chembl.blogspot.co.uk/2017/07/using-autoencoders-for-molecule.html",
+            "indices": [
+              33,
+              56
+            ],
+            "display_url": "chembl.blogspot.co.uk/2017/07/using-…",
+            "url": "https://t.co/GN7Es9nCwu"
+          }
+        ],
+        "symbols": [
+
+        ],
+        "user_mentions": [
+
+        ]
+      },
+      "favorited": false,
+      "favorite_count": 16,
+      "in_reply_to_user_id_str": null,
+      "possibly_sensitive": false,
+      "in_reply_to_user_id": null,
+      "truncated": false,
+      "created_at": "Wed Jul 12 12:34:02 +0000 2017",
+      "in_reply_to_status_id": null,
+      "contributors": null,
+      "in_reply_to_screen_name": null,
+      "is_quote_status": false,
+      "retweet_count": 4,
+      "coordinates": null,
+      "user": {
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_link_color": "1DA1F2",
+        "description": "The Organization of Drug Discovery Data",
+        "is_translation_enabled": false,
+        "verified": false,
+        "utc_offset": 0,
+        "entities": {
+          "description": {
+            "urls": [
+
+            ]
+          },
+          "url": {
+            "urls": [
+              {
+                "expanded_url": "http://www.ebi.ac.uk/chembl",
+                "indices": [
+                  0,
+                  22
+                ],
+                "display_url": "ebi.ac.uk/chembl",
+                "url": "http://t.co/nozEOqezsk"
+              }
+            ]
+          }
+        },
+        "is_translator": false,
+        "friends_count": 14,
+        "profile_background_tile": false,
+        "default_profile": true,
+        "notifications": false,
+        "profile_sidebar_border_color": "C0DEED",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/378800000043124029/2aa940b93acf41000e3a42a3b1e9f5df_normal.png",
+        "has_extended_profile": false,
+        "profile_image_url": "http://pbs.twimg.com/profile_images/378800000043124029/2aa940b93acf41000e3a42a3b1e9f5df_normal.png",
+        "id": 1545130538,
+        "lang": "en",
+        "created_at": "Tue Jun 25 08:10:26 +0000 2013",
+        "statuses_count": 155,
+        "favourites_count": 10,
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "location": "Hinxton, UK",
+        "following": false,
+        "protected": false,
+        "url": "http://t.co/nozEOqezsk",
+        "follow_request_sent": false,
+        "profile_use_background_image": true,
+        "time_zone": "London",
+        "geo_enabled": false,
+        "profile_background_color": "C0DEED",
+        "name": "ChEMBL Database",
+        "followers_count": 982,
+        "id_str": "1545130538",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "screen_name": "ChEMBL",
+        "listed_count": 31,
+        "default_profile_image": false,
+        "contributors_enabled": false,
+        "translator_type": "none"
+      },
+      "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+      "id_str": "885115030345310208",
+      "geo": null,
+      "place": null
+    },
+    {
+      "lang": "en",
+      "id": 885098788100210688,
+      "text": "It's today!\nhttps://t.co/KZofRVcJRM",
+      "retweeted": false,
+      "in_reply_to_status_id_str": null,
+      "entities": {
+        "hashtags": [
+
+        ],
+        "urls": [
+          {
+            "expanded_url": "http://chembl.blogspot.co.uk/2017/07/chembl-web-services-webinar-4pm-12th.html",
+            "indices": [
+              12,
+              35
+            ],
+            "display_url": "chembl.blogspot.co.uk/2017/07/chembl…",
+            "url": "https://t.co/KZofRVcJRM"
+          }
+        ],
+        "symbols": [
+
+        ],
+        "user_mentions": [
+
+        ]
+      },
+      "favorited": false,
+      "favorite_count": 1,
+      "in_reply_to_user_id_str": null,
+      "possibly_sensitive": false,
+      "in_reply_to_user_id": null,
+      "truncated": false,
+      "created_at": "Wed Jul 12 11:29:30 +0000 2017",
+      "in_reply_to_status_id": null,
+      "contributors": null,
+      "in_reply_to_screen_name": null,
+      "is_quote_status": false,
+      "retweet_count": 0,
+      "coordinates": null,
+      "user": {
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_link_color": "1DA1F2",
+        "description": "The Organization of Drug Discovery Data",
+        "is_translation_enabled": false,
+        "verified": false,
+        "utc_offset": 0,
+        "entities": {
+          "description": {
+            "urls": [
+
+            ]
+          },
+          "url": {
+            "urls": [
+              {
+                "expanded_url": "http://www.ebi.ac.uk/chembl",
+                "indices": [
+                  0,
+                  22
+                ],
+                "display_url": "ebi.ac.uk/chembl",
+                "url": "http://t.co/nozEOqezsk"
+              }
+            ]
+          }
+        },
+        "is_translator": false,
+        "friends_count": 14,
+        "profile_background_tile": false,
+        "default_profile": true,
+        "notifications": false,
+        "profile_sidebar_border_color": "C0DEED",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/378800000043124029/2aa940b93acf41000e3a42a3b1e9f5df_normal.png",
+        "has_extended_profile": false,
+        "profile_image_url": "http://pbs.twimg.com/profile_images/378800000043124029/2aa940b93acf41000e3a42a3b1e9f5df_normal.png",
+        "id": 1545130538,
+        "lang": "en",
+        "created_at": "Tue Jun 25 08:10:26 +0000 2013",
+        "statuses_count": 155,
+        "favourites_count": 10,
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "location": "Hinxton, UK",
+        "following": false,
+        "protected": false,
+        "url": "http://t.co/nozEOqezsk",
+        "follow_request_sent": false,
+        "profile_use_background_image": true,
+        "time_zone": "London",
+        "geo_enabled": false,
+        "profile_background_color": "C0DEED",
+        "name": "ChEMBL Database",
+        "followers_count": 982,
+        "id_str": "1545130538",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "screen_name": "ChEMBL",
+        "listed_count": 31,
+        "default_profile_image": false,
+        "contributors_enabled": false,
+        "translator_type": "none"
+      },
+      "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+      "id_str": "885098788100210688",
+      "geo": null,
+      "place": null
+    },
+    {
+      "lang": "en",
+      "id": 879618619780595712,
+      "text": "@rguha @dgelemi Could also take all compounds extracted from Journal of Natural Products, with caveat that likely s… https://t.co/UCLllyxfgr",
+      "retweeted": false,
+      "in_reply_to_status_id_str": "878979731521249280",
+      "entities": {
+        "hashtags": [
+
+        ],
+        "urls": [
+          {
+            "expanded_url": "https://twitter.com/i/web/status/879618619780595712",
+            "indices": [
+              117,
+              140
+            ],
+            "display_url": "twitter.com/i/web/status/8…",
+            "url": "https://t.co/UCLllyxfgr"
+          }
+        ],
+        "symbols": [
+
+        ],
+        "user_mentions": [
+          {
+            "name": "Rajarshi Guha",
+            "indices": [
+              0,
+              6
+            ],
+            "id_str": "64756252",
+            "id": 64756252,
+            "screen_name": "rguha"
+          },
+          {
+            "name": "Jérémy",
+            "indices": [
+              7,
+              15
+            ],
+            "id_str": "120168877",
+            "id": 120168877,
+            "screen_name": "dgelemi"
+          }
+        ]
+      },
+      "favorited": false,
+      "favorite_count": 2,
+      "in_reply_to_user_id_str": "64756252",
+      "in_reply_to_user_id": 64756252,
+      "truncated": true,
+      "created_at": "Tue Jun 27 08:33:16 +0000 2017",
+      "in_reply_to_status_id": 878979731521249280,
+      "contributors": null,
+      "in_reply_to_screen_name": "rguha",
+      "is_quote_status": false,
+      "retweet_count": 0,
+      "coordinates": null,
+      "user": {
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_link_color": "1DA1F2",
+        "description": "The Organization of Drug Discovery Data",
+        "is_translation_enabled": false,
+        "verified": false,
+        "utc_offset": 0,
+        "entities": {
+          "description": {
+            "urls": [
+
+            ]
+          },
+          "url": {
+            "urls": [
+              {
+                "expanded_url": "http://www.ebi.ac.uk/chembl",
+                "indices": [
+                  0,
+                  22
+                ],
+                "display_url": "ebi.ac.uk/chembl",
+                "url": "http://t.co/nozEOqezsk"
+              }
+            ]
+          }
+        },
+        "is_translator": false,
+        "friends_count": 14,
+        "profile_background_tile": false,
+        "default_profile": true,
+        "notifications": false,
+        "profile_sidebar_border_color": "C0DEED",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/378800000043124029/2aa940b93acf41000e3a42a3b1e9f5df_normal.png",
+        "has_extended_profile": false,
+        "profile_image_url": "http://pbs.twimg.com/profile_images/378800000043124029/2aa940b93acf41000e3a42a3b1e9f5df_normal.png",
+        "id": 1545130538,
+        "lang": "en",
+        "created_at": "Tue Jun 25 08:10:26 +0000 2013",
+        "statuses_count": 155,
+        "favourites_count": 10,
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "location": "Hinxton, UK",
+        "following": false,
+        "protected": false,
+        "url": "http://t.co/nozEOqezsk",
+        "follow_request_sent": false,
+        "profile_use_background_image": true,
+        "time_zone": "London",
+        "geo_enabled": false,
+        "profile_background_color": "C0DEED",
+        "name": "ChEMBL Database",
+        "followers_count": 982,
+        "id_str": "1545130538",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "screen_name": "ChEMBL",
+        "listed_count": 31,
+        "default_profile_image": false,
+        "contributors_enabled": false,
+        "translator_type": "none"
+      },
+      "source": "<a href=\"https://about.twitter.com/products/tweetdeck\" rel=\"nofollow\">TweetDeck</a>",
+      "id_str": "879618619780595712",
+      "geo": null,
+      "place": null
+    },
+    {
+      "lang": "en",
+      "id": 879618319380361216,
+      "text": "@rguha @dgelemi So some drugs with natural_product flag could still be synthetic, but analogues of natural products",
+      "retweeted": false,
+      "in_reply_to_status_id_str": "878979731521249280",
+      "entities": {
+        "hashtags": [
+
+        ],
+        "urls": [
+
+        ],
+        "symbols": [
+
+        ],
+        "user_mentions": [
+          {
+            "name": "Rajarshi Guha",
+            "indices": [
+              0,
+              6
+            ],
+            "id_str": "64756252",
+            "id": 64756252,
+            "screen_name": "rguha"
+          },
+          {
+            "name": "Jérémy",
+            "indices": [
+              7,
+              15
+            ],
+            "id_str": "120168877",
+            "id": 120168877,
+            "screen_name": "dgelemi"
+          }
+        ]
+      },
+      "favorited": false,
+      "favorite_count": 1,
+      "in_reply_to_user_id_str": "64756252",
+      "in_reply_to_user_id": 64756252,
+      "truncated": false,
+      "created_at": "Tue Jun 27 08:32:04 +0000 2017",
+      "in_reply_to_status_id": 878979731521249280,
+      "contributors": null,
+      "in_reply_to_screen_name": "rguha",
+      "is_quote_status": false,
+      "retweet_count": 0,
+      "coordinates": null,
+      "user": {
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_link_color": "1DA1F2",
+        "description": "The Organization of Drug Discovery Data",
+        "is_translation_enabled": false,
+        "verified": false,
+        "utc_offset": 0,
+        "entities": {
+          "description": {
+            "urls": [
+
+            ]
+          },
+          "url": {
+            "urls": [
+              {
+                "expanded_url": "http://www.ebi.ac.uk/chembl",
+                "indices": [
+                  0,
+                  22
+                ],
+                "display_url": "ebi.ac.uk/chembl",
+                "url": "http://t.co/nozEOqezsk"
+              }
+            ]
+          }
+        },
+        "is_translator": false,
+        "friends_count": 14,
+        "profile_background_tile": false,
+        "default_profile": true,
+        "notifications": false,
+        "profile_sidebar_border_color": "C0DEED",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/378800000043124029/2aa940b93acf41000e3a42a3b1e9f5df_normal.png",
+        "has_extended_profile": false,
+        "profile_image_url": "http://pbs.twimg.com/profile_images/378800000043124029/2aa940b93acf41000e3a42a3b1e9f5df_normal.png",
+        "id": 1545130538,
+        "lang": "en",
+        "created_at": "Tue Jun 25 08:10:26 +0000 2013",
+        "statuses_count": 155,
+        "favourites_count": 10,
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "location": "Hinxton, UK",
+        "following": false,
+        "protected": false,
+        "url": "http://t.co/nozEOqezsk",
+        "follow_request_sent": false,
+        "profile_use_background_image": true,
+        "time_zone": "London",
+        "geo_enabled": false,
+        "profile_background_color": "C0DEED",
+        "name": "ChEMBL Database",
+        "followers_count": 982,
+        "id_str": "1545130538",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "screen_name": "ChEMBL",
+        "listed_count": 31,
+        "default_profile_image": false,
+        "contributors_enabled": false,
+        "translator_type": "none"
+      },
+      "source": "<a href=\"https://about.twitter.com/products/tweetdeck\" rel=\"nofollow\">TweetDeck</a>",
+      "id_str": "879618319380361216",
+      "geo": null,
+      "place": null
+    },
+    {
+      "lang": "en",
+      "id": 879617839052750849,
+      "text": "@rguha @dgelemi Yes, we flag drugs/clinical candidates as ‘natural product derived’ based on scaffold (e.g., sugar, steroid, nucleotide etc)",
+      "retweeted": false,
+      "in_reply_to_status_id_str": "878979731521249280",
+      "entities": {
+        "hashtags": [
+
+        ],
+        "urls": [
+
+        ],
+        "symbols": [
+
+        ],
+        "user_mentions": [
+          {
+            "name": "Rajarshi Guha",
+            "indices": [
+              0,
+              6
+            ],
+            "id_str": "64756252",
+            "id": 64756252,
+            "screen_name": "rguha"
+          },
+          {
+            "name": "Jérémy",
+            "indices": [
+              7,
+              15
+            ],
+            "id_str": "120168877",
+            "id": 120168877,
+            "screen_name": "dgelemi"
+          }
+        ]
+      },
+      "favorited": false,
+      "favorite_count": 0,
+      "in_reply_to_user_id_str": "64756252",
+      "in_reply_to_user_id": 64756252,
+      "truncated": false,
+      "created_at": "Tue Jun 27 08:30:09 +0000 2017",
+      "in_reply_to_status_id": 878979731521249280,
+      "contributors": null,
+      "in_reply_to_screen_name": "rguha",
+      "is_quote_status": false,
+      "retweet_count": 0,
+      "coordinates": null,
+      "user": {
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_link_color": "1DA1F2",
+        "description": "The Organization of Drug Discovery Data",
+        "is_translation_enabled": false,
+        "verified": false,
+        "utc_offset": 0,
+        "entities": {
+          "description": {
+            "urls": [
+
+            ]
+          },
+          "url": {
+            "urls": [
+              {
+                "expanded_url": "http://www.ebi.ac.uk/chembl",
+                "indices": [
+                  0,
+                  22
+                ],
+                "display_url": "ebi.ac.uk/chembl",
+                "url": "http://t.co/nozEOqezsk"
+              }
+            ]
+          }
+        },
+        "is_translator": false,
+        "friends_count": 14,
+        "profile_background_tile": false,
+        "default_profile": true,
+        "notifications": false,
+        "profile_sidebar_border_color": "C0DEED",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/378800000043124029/2aa940b93acf41000e3a42a3b1e9f5df_normal.png",
+        "has_extended_profile": false,
+        "profile_image_url": "http://pbs.twimg.com/profile_images/378800000043124029/2aa940b93acf41000e3a42a3b1e9f5df_normal.png",
+        "id": 1545130538,
+        "lang": "en",
+        "created_at": "Tue Jun 25 08:10:26 +0000 2013",
+        "statuses_count": 155,
+        "favourites_count": 10,
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "location": "Hinxton, UK",
+        "following": false,
+        "protected": false,
+        "url": "http://t.co/nozEOqezsk",
+        "follow_request_sent": false,
+        "profile_use_background_image": true,
+        "time_zone": "London",
+        "geo_enabled": false,
+        "profile_background_color": "C0DEED",
+        "name": "ChEMBL Database",
+        "followers_count": 982,
+        "id_str": "1545130538",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "screen_name": "ChEMBL",
+        "listed_count": 31,
+        "default_profile_image": false,
+        "contributors_enabled": false,
+        "translator_type": "none"
+      },
+      "source": "<a href=\"https://about.twitter.com/products/tweetdeck\" rel=\"nofollow\">TweetDeck</a>",
+      "id_str": "879617839052750849",
+      "geo": null,
+      "place": null
+    },
+    {
+      "lang": "en",
+      "id": 878312617474838528,
+      "text": "New paper! Using ChEMBL web services for building applications and data processing workflows rlvt to drug discovery: https://t.co/db8DM45fa0",
+      "retweeted": false,
+      "in_reply_to_status_id_str": null,
+      "entities": {
+        "hashtags": [
+
+        ],
+        "urls": [
+          {
+            "expanded_url": "http://www.tandfonline.com/doi/abs/10.1080/17460441.2017.1339032",
+            "indices": [
+              117,
+              140
+            ],
+            "display_url": "tandfonline.com/doi/abs/10.108…",
+            "url": "https://t.co/db8DM45fa0"
+          }
+        ],
+        "symbols": [
+
+        ],
+        "user_mentions": [
+
+        ]
+      },
+      "favorited": false,
+      "favorite_count": 6,
+      "in_reply_to_user_id_str": null,
+      "possibly_sensitive": false,
+      "in_reply_to_user_id": null,
+      "truncated": false,
+      "created_at": "Fri Jun 23 18:03:40 +0000 2017",
+      "in_reply_to_status_id": null,
+      "contributors": null,
+      "in_reply_to_screen_name": null,
+      "is_quote_status": false,
+      "retweet_count": 2,
+      "coordinates": null,
+      "user": {
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_link_color": "1DA1F2",
+        "description": "The Organization of Drug Discovery Data",
+        "is_translation_enabled": false,
+        "verified": false,
+        "utc_offset": 0,
+        "entities": {
+          "description": {
+            "urls": [
+
+            ]
+          },
+          "url": {
+            "urls": [
+              {
+                "expanded_url": "http://www.ebi.ac.uk/chembl",
+                "indices": [
+                  0,
+                  22
+                ],
+                "display_url": "ebi.ac.uk/chembl",
+                "url": "http://t.co/nozEOqezsk"
+              }
+            ]
+          }
+        },
+        "is_translator": false,
+        "friends_count": 14,
+        "profile_background_tile": false,
+        "default_profile": true,
+        "notifications": false,
+        "profile_sidebar_border_color": "C0DEED",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/378800000043124029/2aa940b93acf41000e3a42a3b1e9f5df_normal.png",
+        "has_extended_profile": false,
+        "profile_image_url": "http://pbs.twimg.com/profile_images/378800000043124029/2aa940b93acf41000e3a42a3b1e9f5df_normal.png",
+        "id": 1545130538,
+        "lang": "en",
+        "created_at": "Tue Jun 25 08:10:26 +0000 2013",
+        "statuses_count": 155,
+        "favourites_count": 10,
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "location": "Hinxton, UK",
+        "following": false,
+        "protected": false,
+        "url": "http://t.co/nozEOqezsk",
+        "follow_request_sent": false,
+        "profile_use_background_image": true,
+        "time_zone": "London",
+        "geo_enabled": false,
+        "profile_background_color": "C0DEED",
+        "name": "ChEMBL Database",
+        "followers_count": 982,
+        "id_str": "1545130538",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "screen_name": "ChEMBL",
+        "listed_count": 31,
+        "default_profile_image": false,
+        "contributors_enabled": false,
+        "translator_type": "none"
+      },
+      "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+      "id_str": "878312617474838528",
+      "geo": null,
+      "place": null
+    },
+    {
+      "lang": "en",
+      "id": 878196586613923841,
+      "text": "Details of technical improvements in ChEMBL_23: https://t.co/x6j1iWGEyJ",
+      "retweeted": false,
+      "in_reply_to_status_id_str": null,
+      "entities": {
+        "hashtags": [
+
+        ],
+        "urls": [
+          {
+            "expanded_url": "http://chembl.blogspot.co.uk/2017/06/chembl-release-23-technical-aspects.html",
+            "indices": [
+              48,
+              71
+            ],
+            "display_url": "chembl.blogspot.co.uk/2017/06/chembl…",
+            "url": "https://t.co/x6j1iWGEyJ"
+          }
+        ],
+        "symbols": [
+
+        ],
+        "user_mentions": [
+
+        ]
+      },
+      "favorited": false,
+      "favorite_count": 6,
+      "in_reply_to_user_id_str": null,
+      "possibly_sensitive": false,
+      "in_reply_to_user_id": null,
+      "truncated": false,
+      "created_at": "Fri Jun 23 10:22:37 +0000 2017",
+      "in_reply_to_status_id": null,
+      "contributors": null,
+      "in_reply_to_screen_name": null,
+      "is_quote_status": false,
+      "retweet_count": 6,
+      "coordinates": null,
+      "user": {
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_link_color": "1DA1F2",
+        "description": "The Organization of Drug Discovery Data",
+        "is_translation_enabled": false,
+        "verified": false,
+        "utc_offset": 0,
+        "entities": {
+          "description": {
+            "urls": [
+
+            ]
+          },
+          "url": {
+            "urls": [
+              {
+                "expanded_url": "http://www.ebi.ac.uk/chembl",
+                "indices": [
+                  0,
+                  22
+                ],
+                "display_url": "ebi.ac.uk/chembl",
+                "url": "http://t.co/nozEOqezsk"
+              }
+            ]
+          }
+        },
+        "is_translator": false,
+        "friends_count": 14,
+        "profile_background_tile": false,
+        "default_profile": true,
+        "notifications": false,
+        "profile_sidebar_border_color": "C0DEED",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/378800000043124029/2aa940b93acf41000e3a42a3b1e9f5df_normal.png",
+        "has_extended_profile": false,
+        "profile_image_url": "http://pbs.twimg.com/profile_images/378800000043124029/2aa940b93acf41000e3a42a3b1e9f5df_normal.png",
+        "id": 1545130538,
+        "lang": "en",
+        "created_at": "Tue Jun 25 08:10:26 +0000 2013",
+        "statuses_count": 155,
+        "favourites_count": 10,
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "location": "Hinxton, UK",
+        "following": false,
+        "protected": false,
+        "url": "http://t.co/nozEOqezsk",
+        "follow_request_sent": false,
+        "profile_use_background_image": true,
+        "time_zone": "London",
+        "geo_enabled": false,
+        "profile_background_color": "C0DEED",
+        "name": "ChEMBL Database",
+        "followers_count": 982,
+        "id_str": "1545130538",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "screen_name": "ChEMBL",
+        "listed_count": 31,
+        "default_profile_image": false,
+        "contributors_enabled": false,
+        "translator_type": "none"
+      },
+      "source": "<a href=\"https://about.twitter.com/products/tweetdeck\" rel=\"nofollow\">TweetDeck</a>",
+      "id_str": "878196586613923841",
+      "geo": null,
+      "place": null
+    },
+    {
+      "lang": "en",
+      "retweeted_status": {
+        "lang": "en",
+        "id": 873115267705917441,
+        "text": "On #InternationalArchivesDay we celebrate the diverse teams that keep our public molecular archive engines running… https://t.co/iGz7yij8iG",
+        "retweeted": false,
+        "in_reply_to_status_id_str": null,
+        "entities": {
+          "hashtags": [
+            {
+              "text": "InternationalArchivesDay",
+              "indices": [
+                3,
+                28
+              ]
+            }
+          ],
+          "urls": [
+            {
+              "expanded_url": "https://twitter.com/i/web/status/873115267705917441",
+              "indices": [
+                116,
+                139
+              ],
+              "display_url": "twitter.com/i/web/status/8…",
+              "url": "https://t.co/iGz7yij8iG"
+            }
+          ],
+          "symbols": [
+
+          ],
+          "user_mentions": [
+
+          ]
+        },
+        "favorited": false,
+        "favorite_count": 46,
+        "in_reply_to_user_id_str": null,
+        "possibly_sensitive": false,
+        "in_reply_to_user_id": null,
+        "truncated": true,
+        "created_at": "Fri Jun 09 09:51:16 +0000 2017",
+        "in_reply_to_status_id": null,
+        "contributors": null,
+        "in_reply_to_screen_name": null,
+        "is_quote_status": false,
+        "retweet_count": 38,
+        "coordinates": null,
+        "user": {
+          "profile_sidebar_fill_color": "DDFFCC",
+          "profile_text_color": "333333",
+          "profile_link_color": "0084B4",
+          "description": "The European Bioinformatics Institute (EMBL-EBI) provides freely available life science data and services, and performs basic research in computational biology.",
+          "is_translation_enabled": false,
+          "verified": false,
+          "utc_offset": 0,
+          "entities": {
+            "description": {
+              "urls": [
+
+              ]
+            },
+            "url": {
+              "urls": [
+                {
+                  "expanded_url": "http://www.ebi.ac.uk",
+                  "indices": [
+                    0,
+                    22
+                  ],
+                  "display_url": "ebi.ac.uk",
+                  "url": "http://t.co/J7QSI4Ulqw"
+                }
+              ]
+            }
+          },
+          "is_translator": false,
+          "friends_count": 605,
+          "profile_background_tile": true,
+          "default_profile": false,
+          "notifications": false,
+          "profile_sidebar_border_color": "BDDCAD",
+          "profile_image_url_https": "https://pbs.twimg.com/profile_images/489048108454535168/z8TCx3Qy_normal.jpeg",
+          "has_extended_profile": false,
+          "profile_image_url": "http://pbs.twimg.com/profile_images/489048108454535168/z8TCx3Qy_normal.jpeg",
+          "id": 123582098,
+          "lang": "en",
+          "created_at": "Tue Mar 16 15:01:13 +0000 2010",
+          "statuses_count": 6030,
+          "favourites_count": 3874,
+          "profile_background_image_url_https": "https://pbs.twimg.com/profile_background_images/338467188/Background_plain.jpg",
+          "location": "Hinxton, Cambridge, UK",
+          "following": false,
+          "protected": false,
+          "url": "http://t.co/J7QSI4Ulqw",
+          "follow_request_sent": false,
+          "profile_use_background_image": true,
+          "time_zone": "London",
+          "geo_enabled": false,
+          "profile_background_color": "9AE4E8",
+          "name": "EMBL-EBI",
+          "followers_count": 28623,
+          "id_str": "123582098",
+          "profile_background_image_url": "http://pbs.twimg.com/profile_background_images/338467188/Background_plain.jpg",
+          "screen_name": "emblebi",
+          "listed_count": 658,
+          "default_profile_image": false,
+          "contributors_enabled": false,
+          "profile_banner_url": "https://pbs.twimg.com/profile_banners/123582098/1484920461",
+          "translator_type": "none"
+        },
+        "source": "<a href=\"https://about.twitter.com/products/tweetdeck\" rel=\"nofollow\">TweetDeck</a>",
+        "id_str": "873115267705917441",
+        "geo": null,
+        "place": null
+      },
+      "id": 873118687238082561,
+      "text": "RT @emblebi: On #InternationalArchivesDay we celebrate the diverse teams that keep our public molecular archive engines running smoothly #S…",
+      "retweeted": false,
+      "in_reply_to_status_id_str": null,
+      "entities": {
+        "hashtags": [
+          {
+            "text": "InternationalArchivesDay",
+            "indices": [
+              16,
+              41
+            ]
+          }
+        ],
+        "urls": [
+
+        ],
+        "symbols": [
+
+        ],
+        "user_mentions": [
+          {
+            "name": "EMBL-EBI",
+            "indices": [
+              3,
+              11
+            ],
+            "id_str": "123582098",
+            "id": 123582098,
+            "screen_name": "emblebi"
+          }
+        ]
+      },
+      "favorited": false,
+      "favorite_count": 0,
+      "in_reply_to_user_id_str": null,
+      "in_reply_to_user_id": null,
+      "truncated": false,
+      "created_at": "Fri Jun 09 10:04:51 +0000 2017",
+      "in_reply_to_status_id": null,
+      "contributors": null,
+      "in_reply_to_screen_name": null,
+      "is_quote_status": false,
+      "retweet_count": 38,
+      "coordinates": null,
+      "user": {
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_link_color": "1DA1F2",
+        "description": "The Organization of Drug Discovery Data",
+        "is_translation_enabled": false,
+        "verified": false,
+        "utc_offset": 0,
+        "entities": {
+          "description": {
+            "urls": [
+
+            ]
+          },
+          "url": {
+            "urls": [
+              {
+                "expanded_url": "http://www.ebi.ac.uk/chembl",
+                "indices": [
+                  0,
+                  22
+                ],
+                "display_url": "ebi.ac.uk/chembl",
+                "url": "http://t.co/nozEOqezsk"
+              }
+            ]
+          }
+        },
+        "is_translator": false,
+        "friends_count": 14,
+        "profile_background_tile": false,
+        "default_profile": true,
+        "notifications": false,
+        "profile_sidebar_border_color": "C0DEED",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/378800000043124029/2aa940b93acf41000e3a42a3b1e9f5df_normal.png",
+        "has_extended_profile": false,
+        "profile_image_url": "http://pbs.twimg.com/profile_images/378800000043124029/2aa940b93acf41000e3a42a3b1e9f5df_normal.png",
+        "id": 1545130538,
+        "lang": "en",
+        "created_at": "Tue Jun 25 08:10:26 +0000 2013",
+        "statuses_count": 155,
+        "favourites_count": 10,
+        "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+        "location": "Hinxton, UK",
+        "following": false,
+        "protected": false,
+        "url": "http://t.co/nozEOqezsk",
+        "follow_request_sent": false,
+        "profile_use_background_image": true,
+        "time_zone": "London",
+        "geo_enabled": false,
+        "profile_background_color": "C0DEED",
+        "name": "ChEMBL Database",
+        "followers_count": 982,
+        "id_str": "1545130538",
+        "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+        "screen_name": "ChEMBL",
+        "listed_count": 31,
+        "default_profile_image": false,
+        "contributors_enabled": false,
+        "translator_type": "none"
+      },
+      "source": "<a href=\"https://about.twitter.com/products/tweetdeck\" rel=\"nofollow\">TweetDeck</a>",
+      "id_str": "873118687238082561",
+      "geo": null,
+      "place": null
+    }
+  ]
+}
