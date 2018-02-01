@@ -81,12 +81,31 @@ glados.useNameSpace 'glados.models.visualisation',
             glados.Settings.VIS_COLORS.PURPLE2
           ]
           colourScaleType: glados.Visualisation.CATEGORICAL
+
+        # Check where this graph is being displayed
         TARGET_CLASS:
           propName:'target_class'
           label: 'Target Class'
           label_mini: 'Class'
           domain: ["Other", "Enzyme", "Unclassified protein", "Membrane receptor", "Ion channel", "Other cytosolic protein", "Transporter", "Transcription factor", "Epigenetic regulator", "Secreted protein", "Structural protein", "Auxiliary transport protein", "Surface antigen", "Other membrane protein", "Adhesion", "Other nuclear protein"]
-          range: ["#242071","#-c1bdce","#-f57c0f","#-4787c6","#a83045","#fd4694","#698098","#-8b44f7","#-ffff5b","#-895cd7","#6b9011","#fd9871","#a67943","#-49b408","#-f61e24","#-c040b3"]
+          range: [
+           glados.Settings.VIS_COLORS.TEAL1,
+            glados.Settings.VIS_COLORS.TEAL2,
+            glados.Settings.VIS_COLORS.TEAL3,
+            glados.Settings.VIS_COLORS.TEAL4,
+            glados.Settings.VIS_COLORS.TEAL5,
+            glados.Settings.VIS_COLORS.RED3,
+            glados.Settings.VIS_COLORS.RED2,
+            glados.Settings.VIS_COLORS.RED4,
+            glados.Settings.VIS_COLORS.RED5,
+            glados.Settings.VIS_COLORS.BLUE1,
+            glados.Settings.VIS_COLORS.BLUE2,
+            glados.Settings.VIS_COLORS.BLUE3,
+            glados.Settings.VIS_COLORS.BLUE4,
+            glados.Settings.VIS_COLORS.BLUE5,
+            glados.Settings.VIS_COLORS.ORANGE2,
+            glados.Settings.VIS_COLORS.ORANGE3,
+          ]
 
 #  (->
 #
