@@ -144,7 +144,7 @@ describe "Properties Factory for visualisation", ->
 
         scale = prop.colourScale
         domainMustBe = [minVal, maxVal]
-        rangeMustBe = [glados.Settings.VISUALISATION_LIGHT_BLUE_MIN, glados.Settings.VISUALISATION_LIGHT_BLUE_MAX]
+        rangeMustBe = [glados.Settings.VIS_COLORS.RED5, glados.Settings.VIS_COLORS.RED2]
         domainGot = scale.domain()
         rangeGot = scale.range()
 

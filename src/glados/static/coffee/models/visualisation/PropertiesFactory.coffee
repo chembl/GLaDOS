@@ -26,7 +26,7 @@ glados.useNameSpace 'glados.models.visualisation',
           propName:'molecule_properties.full_mwt'
           label: 'Parent Molecular Weight'
           label_mini: 'Mol. Wt.'
-          coloursRange: [glados.Settings.VISUALISATION_LIGHT_BLUE_MIN, glados.Settings.VISUALISATION_LIGHT_BLUE_MAX]
+          coloursRange: [glados.Settings.VIS_COLORS.RED5, glados.Settings.VIS_COLORS.RED2]
           colourScaleType: glados.Visualisation.CONTINUOUS
           ticksNumber: 5
         PSA:
