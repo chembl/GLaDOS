@@ -55,23 +55,38 @@ glados.useNameSpace 'glados',
   Settings:
     PIECHARTS:
       MAX_CATEGORIES: 10
+    VIS_COLORS:
+      TEAL1: '#0D343A'
+      TEAL2: '#025C5E'
       TEAL3: '#09979B'
       TEAL4: '#75D8D5'
       TEAL5: '#C4E6E5'
+
+      RED1: '#65323E'
+      RED2: '#D33C60'
       RED3: '#FE7F9D'
       RED4: '#FFC0CB'
       RED5: '#F1D6DB'
+
+      BLUE1: '#02355C'
+      BLUE2: '#0F77C9'
       BLUE3: '#4EB1FF'
       BLUE4: '#94D0FF'
       BLUE5: '#C0E3FF'
-      OTHER:
-      PURPLE1: '#8795E8'
+
+      ORANGE1: '#A0221D'
+      ORANGE2: '#EE4F4F'
       ORANGE3: '#FF855A'
       ORANGE4: '#FFB89E'
       ORANGE5: '#FFD5C5'
+
+      YELLOW2: '#FDA420'
       YELLOW3: '#FFC107'
       YELLOW4: '#FFDE7C'
       YELLOW5: '#FCECBE'
+
+      PURPLE1: '#3A49A2'
+      PURPLE2: '#8795E8'
 
     GLADOS_STRINGS_PREFIX: 'glados_es_gs__'
     WS_HOSTNAME: 'https://www.ebi.ac.uk/'
