@@ -495,8 +495,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if numCards < pageSize
         index = 0
       else
-        index = $cards.length - @collection.getMeta('page_size')
-
+        index = $cards.length - pageSize
       wayPointCard = $cards[index]
       # the advancer function requests always the next page
       advancer = $.proxy ->
@@ -511,11 +510,15 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       # destroy all waypoints before assigning the new one.
       Waypoint.destroyAll()
+      scroll_container = null
+      $scroll_containers = $(@el).find('.infinite-scroll-container')
+      if $scroll_containers.length == 1
+        scroll_container = $scroll_containers[0]
 
       waypoint = new Waypoint(
         element: wayPointCard
+        context: if scroll_container? then scroll_container else window
         handler: (direction) ->
-
           if direction == 'down'
             advancer()
 
