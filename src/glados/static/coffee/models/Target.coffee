@@ -115,7 +115,7 @@ Target.COLUMNS = {
     comparator: 'target_chembl_id'
     link_base: 'report_card_url'
   BIOACTIVITIES_NUMBER: glados.models.paginatedCollections.ColumnsFactory.generateColumn Target.INDEX_NAME,
-    comparator: '_metadata.activity_count'
+    comparator: '_metadata.related_activities.count'
     link_base: 'activities_url'
     on_click: TargetReportCardApp.initMiniHistogramFromFunctionLink
     function_parameters: ['target_chembl_id']
