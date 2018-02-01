@@ -114,7 +114,7 @@ DANViewExt =
       color2 = null
 
       if color_value == 'solid'
-          return '#4caf50'
+          return glados.Settings.VIS_COLORS.TEAL3
 
       if color_value=='assay_type'
 
