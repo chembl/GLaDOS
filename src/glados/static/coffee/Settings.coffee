@@ -88,6 +88,9 @@ glados.useNameSpace 'glados',
       PURPLE1: '#3A49A2'
       PURPLE2: '#8795E8'
 
+      GREY1: '#bbbbbb'
+      WHITE: '#fff'
+
     GLADOS_STRINGS_PREFIX: 'glados_es_gs__'
     WS_HOSTNAME: 'https://www.ebi.ac.uk/'
     WS_BASE_URL: 'https://www.ebi.ac.uk/chembl/api/data/'
@@ -126,7 +129,7 @@ glados.useNameSpace 'glados',
     VISUALISATION_AMBER_BASE: '#ffc107' # amber
     VISUALISATION_GRID_EXTERNAL_BORDER: '#D2D2D2'
     VISUALISATION_GRID_DIVIDER_LINES: '#bdbdbd' #grey lighten-1
-    VISUALISATION_GRID_UNDEFINED: '#9e9e9e' #grey
+    VISUALISATION_GRID_UNDEFINED: '#d9d9d9' #grey
     VISUALISATION_GRID_NO_DATA: '#eeeeee' #grey lighten-3
     VISUALISATION_GRID_PANELS: 'white' #grey lighten-4
     VISUALISATION_LEGEND_HEIGHT: 100

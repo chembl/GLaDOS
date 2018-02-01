@@ -89,7 +89,7 @@ glados.useNameSpace 'glados.models.visualisation',
           label_mini: 'Class'
           domain: ["Other", "Enzyme", "Unclassified protein", "Membrane receptor", "Ion channel", "Other cytosolic protein", "Transporter", "Transcription factor", "Epigenetic regulator", "Secreted protein", "Structural protein", "Auxiliary transport protein", "Surface antigen", "Other membrane protein", "Adhesion", "Other nuclear protein"]
           range: [
-           glados.Settings.VIS_COLORS.TEAL1,
+            glados.Settings.VIS_COLORS.TEAL1,
             glados.Settings.VIS_COLORS.TEAL2,
             glados.Settings.VIS_COLORS.TEAL3,
             glados.Settings.VIS_COLORS.TEAL4,
@@ -171,8 +171,8 @@ glados.useNameSpace 'glados.models.visualisation',
           label: 'PChEMBL Value Avg'
           type: Number
           coloursRange: [
-            glados.Settings.VIS_COLORS.TEAL5,
-            glados.Settings.VIS_COLORS.TEAL2
+            glados.Settings.VIS_COLORS.TEAL4,
+            glados.Settings.VIS_COLORS.TEAL1
           ]
           colourScaleType: glados.Visualisation.CONTINUOUS
           ticksNumber: 5

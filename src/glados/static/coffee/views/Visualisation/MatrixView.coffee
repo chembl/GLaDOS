@@ -387,7 +387,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .classed('cells-container-g', true)
 
     cellsContainerG.append('rect')
-      .style("fill", glados.Settings.VISUALISATION_GRID_NO_DATA)
+      .style("fill", glados.Settings.VIS_COLORS.WHITE) #.style("fill", glados.Settings.VISUALISATION_GRID_NO_DATA)
       .classed('background-rect', true)
 
     @updateCellsForWindow(cellsContainerG)
@@ -445,7 +445,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     fillColour = (d) ->
 
       if not d[thisView.currentPropertyColour.propName]?
-        return glados.Settings.VISUALISATION_GRID_UNDEFINED
+        return glados.Settings.VISUALISATION_GRID_NO_DATA
 
       thisView.getCellColour(d[thisView.currentPropertyColour.propName])
 
@@ -474,6 +474,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       thisView.getCellColour = thisView.currentPropertyColour.colourScale
 
 
+      #asigns colors?
       t = cellsContainerG.transition().duration(transitionDuration)
       gladosColour = (d, i) ->
         seed = glados.Utils.getRadiansFromDegrees(i)
