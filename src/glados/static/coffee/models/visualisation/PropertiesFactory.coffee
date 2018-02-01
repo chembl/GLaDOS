@@ -13,7 +13,14 @@ glados.useNameSpace 'glados.models.visualisation',
           propName:'molecule_properties.num_ro5_violations'
           label: '#RO5 Violations'
           domain: [glados.Settings.DEFAULT_NULL_VALUE_LABEL, 0, 1, 2, 3, 4]
-          coloursRange: [glados.Settings.VISUALISATION_GREY_BASE, '#e3f2fd', '#90caf9', '#42a5f5', '#1976d2', '#0d47a1']
+          coloursRange: [
+            glados.Settings.VISUALISATION_GRID_NO_DATA,
+            glados.Settings.VIS_COLORS.TEAL5,
+            glados.Settings.VIS_COLORS.TEAL4,
+            glados.Settings.VIS_COLORS.TEAL3,
+            glados.Settings.VIS_COLORS.TEAL2,
+            glados.Settings.VIS_COLORS.TEAL1
+          ]
           colourScaleType: glados.Visualisation.CATEGORICAL
         FULL_MWT:
           propName:'molecule_properties.full_mwt'

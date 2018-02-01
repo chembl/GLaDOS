@@ -60,7 +60,14 @@ describe "Properties Factory for visualisation", ->
 
         scale = prop.colourScale
         domainMustBe = [glados.Settings.DEFAULT_NULL_VALUE_LABEL, 0, 1, 2, 3, 4]
-        rangeMustBe = [glados.Settings.VISUALISATION_GREY_BASE, '#e3f2fd', '#90caf9', '#42a5f5', '#1976d2', '#0d47a1']
+        rangeMustBe = [
+            glados.Settings.VISUALISATION_GRID_NO_DATA,
+            glados.Settings.VIS_COLORS.TEAL5,
+            glados.Settings.VIS_COLORS.TEAL4,
+            glados.Settings.VIS_COLORS.TEAL3,
+            glados.Settings.VIS_COLORS.TEAL2,
+            glados.Settings.VIS_COLORS.TEAL1
+          ]
         domainGot = scale.domain()
         rangeGot = scale.range()
 
