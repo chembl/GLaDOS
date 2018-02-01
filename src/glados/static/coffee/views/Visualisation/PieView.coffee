@@ -59,16 +59,16 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       #define color palette
       col = [
-        glados.Settings.PIECHARTS.TEAL3,
-        glados.Settings.PIECHARTS.TEAL4,
-        glados.Settings.PIECHARTS.TEAL5,
-        glados.Settings.PIECHARTS.RED3,
-        glados.Settings.PIECHARTS.RED4,
-        glados.Settings.PIECHARTS.RED5,
-        glados.Settings.PIECHARTS.BLUE3,
-        glados.Settings.PIECHARTS.BLUE4,
-        glados.Settings.PIECHARTS.BLUE5,
-        glados.Settings.PIECHARTS.ORANGE4,
+            glados.Settings.VIS_COLORS.TEAL3,
+            glados.Settings.VIS_COLORS.TEAL4,
+            glados.Settings.VIS_COLORS.TEAL5,
+            glados.Settings.VIS_COLORS.RED2,
+            glados.Settings.VIS_COLORS.RED3,
+            glados.Settings.VIS_COLORS.RED4,
+            glados.Settings.VIS_COLORS.PURPLE2,
+            glados.Settings.VIS_COLORS.BLUE2,
+            glados.Settings.VIS_COLORS.BLUE3,
+            glados.Settings.VIS_COLORS.BLUE4,
       ]
 
 
