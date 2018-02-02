@@ -53,14 +53,15 @@ def faqs(request):
   return render(request, 'glados/faqs.html', context)
 
 
-def get_latest_tweets(page_number = 1, count = 15):
+def get_latest_tweets(page_number=1, count=15):
   """
   Returns the latest tweets from chembl, It tries to find them in the cache first to avoid hammering twitter
   :return: The structure returned by the twitter api. If there is an error getting the tweets, it returns an
   empty list.
   """
+  default_empty_response = ([], {}, 0)
   if not settings.TWITTER_ENABLED:
-    return []
+    return default_empty_response
   cache_key = str(page_number) + "-" + str(count)
   cache_time = 3600  # time to live in seconds
 
@@ -86,7 +87,7 @@ def get_latest_tweets(page_number = 1, count = 15):
 
   except AttributeError as e:
     print_server_error(e)
-    return []
+    return default_empty_response
 
   t = Twitter(auth=OAuth(access_token, access_token_secret, consumer_key, consumer_secret))
 
@@ -96,20 +97,29 @@ def get_latest_tweets(page_number = 1, count = 15):
     user_data = users[0]
   except Exception as e:
     print_server_error(e)
-    return []
+    return default_empty_response
 
   cache.set(cache_key, tweets, cache_time)
-  return [tweets, user_data]
+  return tweets, user_data, user_data['statuses_count']
 
 
 def get_latest_tweets_json(request):
-    count = request.GET.get('limit', '')
-    offset = request.GET.get('offset', '')
-    page_number = str((int(offset) / int(count)) + 1)
-    tweets_data = get_latest_tweets(page_number, count)
-    tweets_content = tweets_data[0]
-    user_data = tweets_data[1]
-    total_count = user_data['statuses_count']
+    try:
+      count = request.GET.get('limit', 15)
+      offset = request.GET.get('offset', 0)
+      page_number = str((int(offset) / int(count)) + 1)
+      tweets_content, user_data, total_count = get_latest_tweets(page_number, count)
+    except:
+      traceback.print_exc()
+      return JsonResponse({
+        'tweets': [],
+        'page_meta': {
+            "limit": 0,
+            "offset": 0,
+            "total_count": 0
+        },
+        'ERROR': 'Unexpected error while processing your request!'
+      })
 
     for tweet_i in tweets_content:
         tweet_i['id'] = str(tweet_i['id'])
