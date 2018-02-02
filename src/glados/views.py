@@ -65,42 +65,31 @@ def get_latest_tweets(page_number=1, count=15):
   cache_key = str(page_number) + "-" + str(count)
   cache_time = 3600  # time to live in seconds
 
-  tweets = cache.get(cache_key)
+  t_cached_response = cache.get(cache_key)
 
   # If they are found in the cache, just return them
-  if tweets:
+  if t_cached_response and isinstance(t_cached_response, tuple) and len(t_cached_response) == 3:
     print('Using cached tweets!')
-    return tweets
+    return t_cached_response
 
   print('tweets not found in cache!')
-  access_token = ''
-  access_token_secret = ''
-  consumer_key = ''
-  consumer_secret = ''
 
   try:
-
     access_token = settings.TWITTER_ACCESS_TOKEN
     access_token_secret = settings.TWITTER_ACCESS_TOKEN_SECRET
     consumer_key = settings.TWITTER_CONSUMER_KEY
     consumer_secret = settings.TWITTER_CONSUMER_SECRET
-
-  except AttributeError as e:
-    print_server_error(e)
-    return default_empty_response
-
-  t = Twitter(auth=OAuth(access_token, access_token_secret, consumer_key, consumer_secret))
-
-  try:
+    t = Twitter(auth=OAuth(access_token, access_token_secret, consumer_key, consumer_secret))
     tweets = t.statuses.user_timeline(screen_name="chembl", count=count, page=page_number)
     users = t.users.lookup(screen_name="chembl")
     user_data = users[0]
+    t_response = (tweets, user_data, user_data['statuses_count'])
+    cache.set(cache_key, t_response, cache_time)
+    return t_response
   except Exception as e:
     print_server_error(e)
     return default_empty_response
 
-  cache.set(cache_key, tweets, cache_time)
-  return tweets, user_data, user_data['statuses_count']
 
 
 def get_latest_tweets_json(request):
@@ -109,8 +98,8 @@ def get_latest_tweets_json(request):
       offset = request.GET.get('offset', 0)
       page_number = str((int(offset) / int(count)) + 1)
       tweets_content, user_data, total_count = get_latest_tweets(page_number, count)
-    except:
-      traceback.print_exc()
+    except Exception as e:
+      print_server_error(e)
       return JsonResponse({
         'tweets': [],
         'page_meta': {
