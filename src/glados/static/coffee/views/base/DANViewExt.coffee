@@ -62,35 +62,25 @@ DANViewExt =
     color_value = 'solid';
 
     assayType2Color =
-      'A': Color({r: 255, g: 0, b: 0}),
-      'F': Color({r: 0, g: 255, b: 0}),
-      'B': Color({r: 0, g: 0, b: 255}),
-      'P': Color({r: 0, g: 255, b: 255}),
-      'T': Color({r: 255, g: 0, b: 255}),
-      'U': Color({r: 125, g: 125, b: 255}),
-      null: Color({r: 0, g: 0, b: 0})
+      'A': Color(glados.Settings.VIS_COLORS.RED2),
+      'F': Color(glados.Settings.VIS_COLORS.RED3),
+      'B': Color(glados.Settings.VIS_COLORS.TEAL3),
+      'P': Color(glados.Settings.VIS_COLORS.TEAL4),
+      'T': Color(glados.Settings.VIS_COLORS.BLUE2),
+      'U': Color(glados.Settings.VIS_COLORS.ORANGE2),
+      null: Color(glados.Settings.VIS_COLORS.GREY1)
 
     assayTestType2Color =
-      'In vivo': Color({r: 255, g: 0, b: 0}),
-      'In vitro': Color({r: 0, g: 255, b: 0}),
-      'Ex vivo': Color({r: 0, g: 0, b: 255}),
-      null: Color({r: 0, g: 0, b: 0})
-
-#    tip = d3.tip()
-#          .attr('class', 'd3-tip')
-#          .html( (d) ->
-#              if typeof d == 'string' || d instanceof String
-#                  return d
-#              return d.z
-#          )
+      'In vivo': Color(glados.Settings.VIS_COLORS.RED2),
+      'In vitro': Color(glados.Settings.VIS_COLORS.TEAL3),
+      'Ex vivo': Color(glados.Settings.VIS_COLORS.ORANGE2),
+      null: Color(glados.Settings.VIS_COLORS.GREY1)
 
     mouseover= (p) ->
-#      tip.show(p)
       d3.selectAll(".dan-row text").classed("active", (d, i) -> i == p.y)
       d3.selectAll(".dan-column text").classed("active", (d, i) ->  i == p.x )
 
     mouseout = ->
-#      tip.hide()
       d3.selectAll("text").classed("active", false)
       d3.selectAll("text").classed("linked", false)
 
@@ -114,7 +104,7 @@ DANViewExt =
       color2 = null
 
       if color_value == 'solid'
-          return '#4caf50'
+          return glados.Settings.VIS_COLORS.TEAL3
 
       if color_value=='assay_type'
 
