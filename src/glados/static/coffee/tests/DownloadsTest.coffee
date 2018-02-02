@@ -59,7 +59,7 @@ describe "Downloads", ->
     it 'Generates the configuration for Compounds', ->
 
       comparatorsMustBe = ["molecule_chembl_id","pref_name","molecule_synonyms","molecule_type","max_phase",
-        "molecule_properties.full_mwt","_metadata.related_targets.count","_metadata.activity_count",
+        "molecule_properties.full_mwt","_metadata.related_targets.count","_metadata.related_activities.count",
         "molecule_properties.alogp","molecule_properties.psa","molecule_properties.hba","molecule_properties.hbd",
         "molecule_properties.num_ro5_violations","molecule_properties.rtb","molecule_properties.ro3_pass",
         "molecule_properties.qed_weighted","molecule_properties.acd_most_apka","molecule_properties.acd_most_bpka",
@@ -75,7 +75,7 @@ describe "Downloads", ->
     it 'Generates the configuration for Compounds (similarity Searches)', ->
 
       comparatorsMustBe = ["molecule_chembl_id","pref_name","molecule_synonyms","molecule_type","max_phase",
-        "molecule_properties.full_mwt","_metadata.related_targets.count","_metadata.activity_count",
+        "molecule_properties.full_mwt","_metadata.related_targets.count","_metadata.related_activities.count",
         "molecule_properties.alogp","molecule_properties.psa","molecule_properties.hba","molecule_properties.hbd",
         "molecule_properties.num_ro5_violations","molecule_properties.rtb","molecule_properties.ro3_pass",
         "molecule_properties.qed_weighted","molecule_properties.acd_most_apka","molecule_properties.acd_most_bpka",
@@ -101,7 +101,7 @@ describe "Downloads", ->
     it 'Generates the configuration for Targets', ->
 
       comparatorsMustBe = ["target_chembl_id","pref_name","target_components","target_type","organism",
-       "_metadata.related_compounds.count","_metadata.activity_count","tax_id", "species_group_flag"]
+       "_metadata.related_compounds.count","_metadata.related_activities.count","tax_id", "species_group_flag"]
 
       comparatorsGot = (col.comparator for col in Target.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS)
       expect(TestsUtils.listsAreEqual(comparatorsMustBe, comparatorsGot)).toBe(true)
