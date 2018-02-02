@@ -17,11 +17,11 @@ glados.useNameSpace 'glados.views.Compound',
           'height': 80,
           'width': 80,
           'background-fit': 'cover',
-          'border-color': glados.views.Compound.MetabolismView.EMBL_PETROL,
+          'border-color': glados.Settings.VIS_COLORS.TEAL3,
           'border-width': 2,
-          'border-opacity': 0.5,
+          'border-opacity': 0.7,
           'label': 'data(pref_name)',
-          'font-size': 12,
+          'font-size': 11,
           'shape': 'rectangle'
       }
 
@@ -31,12 +31,12 @@ glados.useNameSpace 'glados.views.Compound',
           selector: 'edge',
           style:
             'width': 3,
-            'line-color': glados.views.Compound.MetabolismView.LIGHT_BLUE,
-            'target-arrow-color': glados.views.Compound.MetabolismView.LIGHT_BLUE,
+            'line-color': glados.Settings.VIS_COLORS.TEAL5,
+            'target-arrow-color': glados.Settings.VIS_COLORS.TEAL5,
             'target-arrow-shape': 'triangle',
             'label': 'data(enzyme)',
-            'font-size': 10,
-            'color': 'black',
+            'font-size': 9,
+            'color': glados.Settings.VIS_COLORS.TEAL1,
             'width': 2,
             'curve-style': 'bezier'
         }
@@ -82,8 +82,6 @@ glados.useNameSpace 'glados.views.Compound',
         ans.stylesheet.push(nodes_style)
         ans.stylesheet.push(edges_style)
 
-        console.log('Edges Styles!')
-        console.log(edges_style)
 
         # From each node I see, what can I add to the object?
         for node in data.nodes
@@ -106,11 +104,11 @@ glados.useNameSpace 'glados.views.Compound',
             selector: "##{node.chembl_id}",
             style:
               'background-image': background_img,
-              'background-color': '#FFF'
+              'background-color': "white"
 
           if node.is_current
             newStyle.style['border-width'] = 4
-            newStyle.style['border-color'] = glados.views.Compound.MetabolismView.EMBL_GREEN
+            newStyle.style['border-color'] = glados.Settings.VIS_COLORS.ORANGE2
 
           ans.stylesheet.push(newStyle)
 
@@ -149,8 +147,6 @@ glados.useNameSpace 'glados.views.Compound',
           ans.elems.push(newItem)
           i++
 
-        console.log('For cytoscape!')
-        console.log(ans)
         return ans
 
     getCytoscapeInstance: (container_id, data) ->
@@ -264,12 +260,3 @@ glados.useNameSpace 'glados.views.Compound',
         return cy
 
     loadFromVariable: (container_id, data) -> @getCytoscapeInstance(container_id, data)
-
-# ----------------------------------------------------------------------------------------------------------------------
-# View constants
-# ----------------------------------------------------------------------------------------------------------------------
-glados.views.Compound.MetabolismView.EMBL_GREEN = '#71B360'
-glados.views.Compound.MetabolismView.EMBL_PETROL = '#819FF7'
-glados.views.Compound.MetabolismView.LIGHT_BLUE = '#819FF7'
-glados.views.Compound.MetabolismView.EMBL_GRAY = '#294D51'
-glados.views.Compound.MetabolismView.GRAY = 'gray'
