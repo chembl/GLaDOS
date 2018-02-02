@@ -113,10 +113,16 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
           break
         getFontSizeFor.range([minFont, maxFontSize])
 
-    getColourFor = d3.scale.linear()
+    getColourFor = d3.scale.quantize()
       .domain([minFontSize, maxFontSize])
-      .interpolate(d3.interpolateHcl)
-      .range([d3.rgb(glados.Settings.VISUALISATION_TEAL_MIN), d3.rgb(glados.Settings.VISUALISATION_TEAL_MAX)])
+      .range([
+        glados.Settings.VIS_COLORS.TEAL5,
+        glados.Settings.VIS_COLORS.TEAL4,
+        glados.Settings.VIS_COLORS.TEAL3,
+        glados.Settings.VIS_COLORS.TEAL2,
+      ])
+#      .interpolate(d3.interpolateHcl)
+#      .range([d3.rgb(glados.Settings.VIS_COLORS.TEAL5), d3.rgb(glados.Settings.VIS_COLORS.RED2)])
 
     #rescale values
     for wordVal in wordList

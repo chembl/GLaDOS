@@ -2858,8 +2858,10 @@ span.badge-primary-color-no-float {
  */
 .wordcloud-word:hover {
   cursor: pointer;
-  text-decoration: underline;
-  color: black !important;
+  /*text-decoration: underline;*/
+  letter-spacing: 0.5px;
+  transition: all .15s ease-in-out;
+  color: #D33C60 !important;  /* glados.Settings.VIS_COLORS.RED2 */
 
 }
 
