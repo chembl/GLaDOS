@@ -302,6 +302,81 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return list
 
+    getNewTweetsList: ->
+
+      list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.TWEETS_LIST)
+      list.initURL = ->
+        @baseUrl = "#{glados.Settings.GLADOS_BASE_PATH_REL}tweets"
+        @setMeta('base_url', @baseUrl, true)
+        @initialiseUrl()
+
+      # ----------------------------------------------------------------------------------------------------------------
+      # parse
+      # ----------------------------------------------------------------------------------------------------------------
+      list.parse = (data) ->
+        data.page_meta.records_in_page = data.tweets.length
+
+        rawTweets = data.tweets
+        simplifiedTweets = []
+
+        #gets hashtags, mentions and links in tweets and turns them into html <a> tags
+        replace_urls_from_entities = (html, urls) ->
+          for url in urls
+            link = "<a href='#{(url['url'])}'>#{url['display_url']}</a>"
+            html = html.replace(url['url'], link)
+          return html
+
+        replace_hashtags_from_entities = (html, hashtags) ->
+          for hashtag in hashtags
+            link = "<a href='https://twitter.com/hashtag/#{(hashtag['text'])}'>##{hashtag['text']}</a>"
+            html = html.replace('#' + hashtag['text'], link)
+          return html
+
+        replace_mentions_from_entities = (html, mentions) ->
+          for mention in mentions
+            link = "<a href='https://twitter.com/#{(mention['screen_name'])}'>@#{mention['screen_name']}</a>"
+            html = html.replace('@' + mention['screen_name'], link)
+          return html
+
+
+        for t in rawTweets
+
+          html = t.text
+
+          for entityType in _.keys(t.entities)
+
+            entities = t.entities[entityType]
+
+            if entityType == 'urls'
+              html = replace_urls_from_entities(html, entities)
+            if entityType == 'hashtags'
+              html = replace_hashtags_from_entities(html, entities)
+            if entityType == 'user_mentions'
+              html = replace_mentions_from_entities(html, entities)
+
+          simpleTweet =
+            id: t.id
+            text: html
+            createdAt: t['created_at'].split(' ')[1..2].reverse().join(' ')
+            user:
+              name: t.user.name
+              screenName: t.user.screen_name
+              profileImgUrl: t.user.profile_image_url
+
+          simplifiedTweets.push(simpleTweet)
+
+        @setMeta('data_loaded', true)
+        @resetMeta(data.page_meta)
+
+        return simplifiedTweets
+
+      # ----------------------------------------------------------------------------------------------------------------
+      # end parse
+      # ----------------------------------------------------------------------------------------------------------------
+
+      return list
+
+
     getNewSimilaritySearchResultsList: ->
       list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.SIMILARITY_RESULTS_LIST)
 

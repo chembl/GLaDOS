@@ -44,6 +44,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
   @initBasicInformation = ->
 
     document = DocumentReportCardApp.getCurrentDocument()
+    document = DocumentReportCardApp.getCurrentDocument()
 
     new DocumentBasicInformationView
       model: document

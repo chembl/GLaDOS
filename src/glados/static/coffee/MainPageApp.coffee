@@ -18,8 +18,12 @@ class MainPageApp
 
     databaseInfo.fetch()
 
+    tweetsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewTweetsList()
+    tweetsList.initURL()
 
+    console.log 'tweetsList: ', tweetsList
+    $tweetsElem = $('.BCK-Tweets-container')
+    glados.views.PaginatedViews.PaginatedViewFactory.getNewInfinitePaginatedView(tweetsList, $tweetsElem, 'do-repaint')
 
-
-
+    tweetsList.fetch()
 

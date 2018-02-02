@@ -53,52 +53,79 @@ def faqs(request):
   return render(request, 'glados/faqs.html', context)
 
 
-def get_latest_tweets():
+def get_latest_tweets(page_number=1, count=15):
   """
   Returns the latest tweets from chembl, It tries to find them in the cache first to avoid hammering twitter
   :return: The structure returned by the twitter api. If there is an error getting the tweets, it returns an
   empty list.
   """
+  default_empty_response = ([], {}, 0)
   if not settings.TWITTER_ENABLED:
-    return []
-  cache_key = 'latest_tweets'
+    return default_empty_response
+  cache_key = str(page_number) + "-" + str(count)
   cache_time = 3600  # time to live in seconds
 
-  tweets = cache.get(cache_key)
+  t_cached_response = cache.get(cache_key)
 
   # If they are found in the cache, just return them
-  if tweets:
+  if t_cached_response and isinstance(t_cached_response, tuple) and len(t_cached_response) == 3:
     print('Using cached tweets!')
-    return tweets
+    return t_cached_response
 
   print('tweets not found in cache!')
-  access_token = ''
-  access_token_secret = ''
-  consumer_key = ''
-  consumer_secret = ''
 
   try:
-
     access_token = settings.TWITTER_ACCESS_TOKEN
     access_token_secret = settings.TWITTER_ACCESS_TOKEN_SECRET
     consumer_key = settings.TWITTER_CONSUMER_KEY
     consumer_secret = settings.TWITTER_CONSUMER_SECRET
-
-  except AttributeError as e:
-    print_server_error(e)
-    return []
-
-  t = Twitter(auth=OAuth(access_token, access_token_secret, consumer_key, consumer_secret))
-
-  try:
-    tweets = t.statuses.user_timeline(screen_name="chembl", count=2)
+    t = Twitter(auth=OAuth(access_token, access_token_secret, consumer_key, consumer_secret))
+    tweets = t.statuses.user_timeline(screen_name="chembl", count=count, page=page_number)
+    users = t.users.lookup(screen_name="chembl")
+    user_data = users[0]
+    t_response = (tweets, user_data, user_data['statuses_count'])
+    cache.set(cache_key, t_response, cache_time)
+    return t_response
   except Exception as e:
     print_server_error(e)
-    return []
+    return default_empty_response
 
-  cache.set(cache_key, tweets, cache_time)
-  return tweets
 
+
+def get_latest_tweets_json(request):
+    try:
+      count = request.GET.get('limit', 15)
+      offset = request.GET.get('offset', 0)
+      page_number = str((int(offset) / int(count)) + 1)
+      tweets_content, user_data, total_count = get_latest_tweets(page_number, count)
+    except Exception as e:
+      print_server_error(e)
+      return JsonResponse({
+        'tweets': [],
+        'page_meta': {
+            "limit": 0,
+            "offset": 0,
+            "total_count": 0
+        },
+        'ERROR': 'Unexpected error while processing your request!'
+      })
+
+    for tweet_i in tweets_content:
+        tweet_i['id'] = str(tweet_i['id'])
+
+    tweets = {
+        'tweets': tweets_content,
+        'page_meta': {
+            "limit": int(count),
+            # this may be useful if we need to download the tweets
+            # "next": ,
+            "offset": int(offset),
+            # "previous": null,
+            "total_count": total_count
+        }
+    }
+
+    return JsonResponse(tweets)
 
 def replace_urls_from_entinies(html, urls):
   """
@@ -112,38 +139,7 @@ def replace_urls_from_entinies(html, urls):
 
 
 def main_page(request):
-  tweets = get_latest_tweets()
-  simplified_tweets = []
-
-  for t in tweets:
-
-    html = t['text']
-
-    for entity_type in t['entities']:
-
-      entities = t['entities'][entity_type]
-
-      if entity_type == 'urls':
-        html = replace_urls_from_entinies(html, entities)
-
-    simp_tweet = {
-      'id': t['id'],
-      'text': html,
-      'created_at': '-'.join(t['created_at'].split(' ')[2:0:-1]),
-
-      'user': {
-        'name': t['user']['name'],
-        'screen_name': t['user']['screen_name'],
-        'profile_image_url': t['user']['profile_image_url']
-      }
-
-    }
-
-    simplified_tweets.append(simp_tweet)
-
-  context = {'tweets': simplified_tweets}
-
-  return render(request, 'glados/mainPage.html', context)
+  return render(request, 'glados/mainPage.html')
 
 
 def wizard_step_json(request, step_id):

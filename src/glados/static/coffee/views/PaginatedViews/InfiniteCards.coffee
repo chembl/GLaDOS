@@ -2,8 +2,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
   InfiniteCards:
 
     initAvailablePageSizes: ->
+
       @AVAILABLE_PAGE_SIZES = [50]
-      @currentPageSize = @AVAILABLE_PAGE_SIZES[0]
+      @currentPageSize = @collection.getMeta('default_page_size')
+      @currentPageSize ?= @AVAILABLE_PAGE_SIZES[0]
 
     wakeUpView: ->
       @currentPageNum = 1
