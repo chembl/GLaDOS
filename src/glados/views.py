@@ -140,38 +140,7 @@ def replace_urls_from_entinies(html, urls):
 
 
 def main_page(request):
-  tweets = get_latest_tweets()[0]
-  simplified_tweets = []
-
-  for t in tweets:
-
-    html = t['text']
-
-    for entity_type in t['entities']:
-
-      entities = t['entities'][entity_type]
-
-      if entity_type == 'urls':
-        html = replace_urls_from_entinies(html, entities)
-
-    simp_tweet = {
-      'id': t['id'],
-      'text': html,
-      'created_at': '-'.join(t['created_at'].split(' ')[2:0:-1]),
-
-      'user': {
-        'name': t['user']['name'],
-        'screen_name': t['user']['screen_name'],
-        'profile_image_url': t['user']['profile_image_url']
-      }
-
-    }
-
-    simplified_tweets.append(simp_tweet)
-
-  context = {'tweets': simplified_tweets}
-
-  return render(request, 'glados/mainPage.html', context)
+  return render(request, 'glados/mainPage.html')
 
 
 def wizard_step_json(request, step_id):
