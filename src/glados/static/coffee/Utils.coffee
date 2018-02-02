@@ -1,13 +1,27 @@
 glados.useNameSpace 'glados',
   Utils:
+
+    checkReportCardByChembId: (chemblId) ->
+      lookup_url = glados.models.paginatedCollections.Settings.ES_BASE_URL
+      lookup_url += '/chembl_chembl_id_lookup/_search?q=status:ACTIVE%20AND%20chembl_id:'
+      lookup_url += chemblId
+      ajax_deferred = $.post lookup_url
+      ajax_deferred.then (data) ->
+        if data.hits.hits.length > 0
+          entityName = data.hits.hits[0]._source.entity_type
+          rcUrl = glados.Utils.getEntityFromName(entityName).get_report_card_url(chemblId)
+          if not window.location.pathname.includes(rcUrl)
+            window.location.replace(glados.Settings.GLADOS_BASE_URL_FULL+rcUrl.substring(1))
+
     getEntityFromName: (entityName) ->
+      entityName = entityName.toLowerCase()
       switch
-        when entityName == Compound.prototype.entityName then Compound
-        when entityName == Target.prototype.entityName then Target
-        when entityName == Assay.prototype.entityName then Assay
-        when entityName == Document.prototype.entityName then Document
-        when entityName == CellLine.prototype.entityName then CellLine
-        when entityName == glados.models.Tissue.prototype.entityName then glados.models.Tissue
+        when entityName == Compound.prototype.entityName.toLowerCase() then Compound
+        when entityName == Target.prototype.entityName.toLowerCase() then Target
+        when entityName == Assay.prototype.entityName.toLowerCase() then Assay
+        when entityName == Document.prototype.entityName.toLowerCase() then Document
+        when entityName == CellLine.prototype.entityName.toLowerCase() then CellLine
+        when entityName == glados.models.Tissue.prototype.entityName.toLowerCase() then glados.models.Tissue
 
     # Will round a number to the closest 10*, 20* or 50*
     # Check the next function to get some examples about how this function works
