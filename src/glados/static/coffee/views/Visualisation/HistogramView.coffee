@@ -188,17 +188,24 @@ glados.useNameSpace 'glados.views.Visualisation',
         .attr('y', (b) -> BARS_CONTAINER_HEIGHT - getHeightForBucket(b.doc_count) )
         .classed('value-bar', true)
 
+      frontBar = barGroups.append('rect')
+        .attr('height', BARS_CONTAINER_HEIGHT)
+        .attr('width', getXForBucket.rangeBand())
+        .classed('front-bar', true)
+        .on('click', (b) -> window.open(b.link) )
+
       barsColourScale = @config.bars_colour_scale
       if barsColourScale?
         valueBars.attr('fill', (b) -> barsColourScale(b.key))
       else
         valueBars.attr('fill', glados.Settings.VIS_COLORS.TEAL3)
 
-      barGroups.append('rect')
-        .attr('height', BARS_CONTAINER_HEIGHT)
-        .attr('width', getXForBucket.rangeBand())
-        .classed('front-bar', true)
-        .on('click', (b) -> window.open(b.link) )
+        frontBar.on('mouseover', (d, i)->
+          esto = d3.select(valueBars[0][i])
+          esto.attr('fill', glados.Settings.VIS_COLORS.RED2))
+        .on('mouseout', (d, i)->
+          esto = d3.select(valueBars[0][i])
+          esto.attr('fill', glados.Settings.VIS_COLORS.TEAL3))
 
       #-----------------------------------------------------------------------------------------------------------------
       # add qtips
