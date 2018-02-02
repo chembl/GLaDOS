@@ -3183,7 +3183,7 @@ span.badge-primary-color-no-float {
       stroke-width: 1;
       stroke: black;
       fill: black;
-      opacity: 0.2;
+      opacity: 0.07;
     }
   }
 
@@ -3408,7 +3408,7 @@ $facets-width-large: 21%;
       &:not(.selected):not(.disabled):hover {
 
         .value-bar {
-          fill: color($primary-color-name, 'lighten-3');
+          fill: color($primary-color-name, 'lighten-5');
         }
 
         .background-bar {
