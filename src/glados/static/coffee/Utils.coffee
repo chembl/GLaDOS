@@ -2,6 +2,7 @@ glados.useNameSpace 'glados',
   Utils:
 
     checkReportCardByChembId: (chemblId) ->
+      chemblId = chemblId.toUpperCase()
       lookup_url = glados.models.paginatedCollections.Settings.ES_BASE_URL
       lookup_url += '/chembl_chembl_id_lookup/_search?q=status:ACTIVE%20AND%20chembl_id:'
       lookup_url += chemblId
