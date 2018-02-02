@@ -39,7 +39,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     color = d3.scale.linear()
     .domain([-1, 5])
-    .range(["#eceff1", "#607d8b"])
+    .range([glados.Settings.VIS_COLORS.WHITE, glados.Settings.VIS_COLORS.TEAL3])
     .interpolate(d3.interpolateRgb);
 
     pack = d3.layout.pack()

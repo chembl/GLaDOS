@@ -121,9 +121,6 @@ DocumentWordCloudView = CardView.extend(ResponsiviseViewExt).extend
         glados.Settings.VIS_COLORS.TEAL3,
         glados.Settings.VIS_COLORS.TEAL2,
       ])
-#      .interpolate(d3.interpolateHcl)
-#      .range([d3.rgb(glados.Settings.VIS_COLORS.TEAL5), d3.rgb(glados.Settings.VIS_COLORS.RED2)])
-
     #rescale values
     for wordVal in wordList
       wordVal[1] = getFontSizeFor wordVal[1]
