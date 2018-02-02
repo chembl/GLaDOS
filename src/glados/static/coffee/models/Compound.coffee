@@ -587,7 +587,7 @@ Compound.COLUMNS = {
     execute_on_render: true
     format_class: 'number-cell-center'
   BIOACTIVITIES_NUMBER: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: '_metadata.activity_count'
+    comparator: '_metadata.related_activities.count'
     link_base: 'activities_url'
     on_click: CompoundReportCardApp.initMiniHistogramFromFunctionLink
     function_parameters: ['molecule_chembl_id']
