@@ -68,7 +68,7 @@ def get_latest_tweets(page_number=1, count=15):
   t_cached_response = cache.get(cache_key)
 
   # If they are found in the cache, just return them
-  if t_cached_response:
+  if t_cached_response and isinstance(t_cached_response, tuple) and len(t_cached_response) == 3:
     print('Using cached tweets!')
     return t_cached_response
 
