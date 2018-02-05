@@ -5,7 +5,6 @@ class CompoundReportCardApp extends glados.ReportCardApp
   @init = ->
 
     super
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblID()
 
     compound = CompoundReportCardApp.getCurrentCompound()
 
