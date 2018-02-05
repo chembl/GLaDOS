@@ -39,16 +39,11 @@ class MainPageApp
       aggs:
         x_axis_agg:
           field: 'year'
-          type: glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
+          type: glados.models.Aggregations.Aggregation.AggTypes.RANGE
+          histogram: true
           min_columns: minCols
           max_columns: maxCols
           num_columns: defaultCols
-          bucket_links:
-            bucket_filter_template: 'year:(>={{min_val}} AND <={{max_val}})'
-            template_data:
-              min_val: 'BUCKET.from'
-              max_val: 'BUCKETS.to'
-            link_generator: Document.getDocumentsListURL
 
     allDocumentsByYear = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.DOCUMENT_INDEX_URL

@@ -359,6 +359,10 @@ glados.useNameSpace 'glados.models.Aggregations',
               order:
                 _count: 'desc'
 
+        else if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
+          aggsData[aggKey] =
+            terms:
+              field: aggDescription.field
 
       queryData = @get('query')
 
