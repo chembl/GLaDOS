@@ -224,8 +224,6 @@ class DocumentReportCardApp extends glados.ReportCardApp
   # -------------------------------------------------------------
   @initAssayNetworkFS = ->
 
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblID()
-
     documentAssayNetwork = new DocumentAssayNetwork
       document_chembl_id: GlobalVariables.CHEMBL_ID
 
