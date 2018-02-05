@@ -99,6 +99,8 @@ glados.useNameSpace 'glados.views.Visualisation',
       buckets = @model.get('bucket_data')[@xAxisAggName].buckets
 
       maxCategories = @config.max_categories
+
+
       if buckets.length > maxCategories
         buckets = glados.Utils.Buckets.mergeBuckets(buckets, maxCategories, @model, @xAxisAggName)
 
@@ -163,9 +165,17 @@ glados.useNameSpace 'glados.views.Visualisation',
       else
         xRangeEnd = BARS_CONTAINER_WIDTH
 
+
+      #     get one value names for axis
+      oneValueNames = []
+      for name in bucketNames
+        newName = name.split '-'
+        oneValueNames.push parseInt(newName[0])
+
       getXForBucket = d3.scale.ordinal()
-        .domain(bucketNames)
-        .rangeBands([0,xRangeEnd], 0.1)
+        .domain(oneValueNames)
+        .rangeRoundBands([0,xRangeEnd], 0.05)
+
       getHeightForBucket = d3.scale.linear()
         .domain([0, _.max(bucketSizes)])
         .range([BARS_MIN_HEIGHT, BARS_CONTAINER_HEIGHT])
@@ -175,7 +185,7 @@ glados.useNameSpace 'glados.views.Visualisation',
         .enter()
         .append('g')
         .classed('bar-group', true)
-        .attr('transform', (b) -> 'translate(' + getXForBucket(b.key) + ')')
+        .attr('transform', (b, i) -> 'translate(' + getXForBucket(oneValueNames[i]) + ')')
 
       barGroups.append('rect')
         .attr('height', BARS_CONTAINER_HEIGHT)
@@ -273,8 +283,10 @@ glados.useNameSpace 'glados.views.Visualisation',
         .attr('y', X_AXIS_HEIGHT*(3/4))
         .classed('property-label', true)
 
+      formatAsYear = d3.format("1999")
       xAxis = d3.svg.axis()
         .scale(getXForBucket)
+        .tickFormat(formatAsYear)
 
       xAxisContainerG.call(xAxis)
       @rotateXAxisTicksIfNeeded(xAxisContainerG, getXForBucket)

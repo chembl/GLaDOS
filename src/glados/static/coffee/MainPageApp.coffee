@@ -68,7 +68,6 @@ class MainPageApp
       x_axis_initial_num_columns: 40
       x_axis_prop_name: 'x_axis_agg'
       title: 'Documents by Year'
-      range_categories: true
 
     new glados.views.Visualisation.HistogramView
       el: $('.BCK-MainHistogramContainer')
