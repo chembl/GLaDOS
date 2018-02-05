@@ -1,7 +1,19 @@
 glados.useNameSpace 'glados',
   Utils:
+    showErrorModalMessage: (message, redirection_link) ->
+      if not glados.Utils.modalErrorTemplate?
+        glados.Utils.modalErrorTemplate = Handlebars.compile($('#Handlebars-Common-RedCardError').html())
+      compiledErrorMessage = glados.Utils.modalErrorTemplate
+        msg: message
+        redirect_link: redirection_link
+      $('#glados-messages .modal-content').html(compiledErrorMessage)
+      $('#glados-messages').modal('open')
 
-    checkReportCardByChembId: (chemblId) ->
+      setTimeout ->
+        window.location.replace(redirection_link)
+      , 5000
+
+    checkReportCardByChemblId: (chemblId) ->
       chemblId = chemblId.toUpperCase()
       lookup_url = glados.models.paginatedCollections.Settings.ES_BASE_URL
       lookup_url += '/chembl_chembl_id_lookup/_search?q=status:ACTIVE%20AND%20chembl_id:'
@@ -10,9 +22,31 @@ glados.useNameSpace 'glados',
       ajax_deferred.then (data) ->
         if data.hits.hits.length > 0
           entityName = data.hits.hits[0]._source.entity_type
-          rcUrl = glados.Utils.getEntityFromName(entityName).get_report_card_url(chemblId)
+          correctEntity = glados.Utils.getEntityFromName(entityName)
+          rcUrl = correctEntity.get_report_card_url(chemblId)
           if not window.location.pathname.includes(rcUrl)
-            window.location.replace(glados.Settings.GLADOS_BASE_URL_FULL+rcUrl.substring(1))
+            entityName = glados.Utils.getEntityByReportCardURL().prototype.entityName
+            message = chemblId+' is not a '+entityName+' registered in ChEMBL. <br> However, '+chemblId+' is a '
+            message += correctEntity.prototype.entityName + '.'
+            glados.Utils.showErrorModalMessage(
+              message,
+              glados.Settings.GLADOS_BASE_URL_FULL+rcUrl.substring(1)
+            )
+
+    getEntityByReportCardURL: (reportCardURL=window.location.pathname)->
+      if reportCardURL.includes(Compound.reportCardPath)
+        return Compound
+      else if reportCardURL.includes(Target.reportCardPath)
+        return Target
+      else if reportCardURL.includes(Assay.reportCardPath)
+        return Assay
+      else if reportCardURL.includes(Document.reportCardPath)
+        return Document
+      else if reportCardURL.includes(CellLine.reportCardPath)
+        return CellLine
+      else if reportCardURL.includes(glados.models.Tissue.reportCardPath)
+        return glados.models.Tissue
+      return null
 
     getEntityFromName: (entityName) ->
       entityName = entityName.toLowerCase()
