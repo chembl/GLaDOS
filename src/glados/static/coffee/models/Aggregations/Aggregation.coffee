@@ -359,7 +359,9 @@ glados.useNameSpace 'glados.models.Aggregations',
               order:
                 _count: 'desc'
 
+
       queryData = @get('query')
+
 
       return {
         size: 0
@@ -396,3 +398,4 @@ glados.models.Aggregations.Aggregation.QueryTypes =
 glados.models.Aggregations.Aggregation.AggTypes =
    RANGE: 'RANGE'
    TERMS: 'TERMS'
+   HISTOGRAM: 'HISTOGRAM'

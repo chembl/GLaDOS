@@ -27,24 +27,19 @@ class MainPageApp
 
     MainPageApp.initPapersPerYear()
 
-
-
-  # --------------------------------------------------------------------------------------------------------------------
-  # Aggregations
-  # --------------------------------------------------------------------------------------------------------------------
-  @getDocumentsPerYearAgg = (minCols=1, maxCols=30, defaultCols=30) ->
+# ---------------- Aggregation -------------- #
+  @getDocumentsPerYearAgg = (minCols=1, maxCols=40, defaultCols=40) ->
 
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
       query_string_template: '*'
       template_data: {}
 
-
     aggsConfig =
       aggs:
         x_axis_agg:
           field: 'year'
-          type: glados.models.Aggregations.Aggregation.AggTypes.RANGE
+          type: glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
           min_columns: minCols
           max_columns: maxCols
           num_columns: defaultCols
@@ -74,14 +69,14 @@ class MainPageApp
       initial_property_x: 'count'
       x_axis_options: ['count']
       x_axis_min_columns: 1
-      x_axis_max_columns: 30
-      x_axis_initial_num_columns: 30
+      x_axis_max_columns: 40
+      x_axis_initial_num_columns: 40
       x_axis_prop_name: 'x_axis_agg'
       title: 'Documents by Year'
       range_categories: true
 
-    histogramView = new glados.views.Visualisation.HistogramView
-      el: $('#PapersPerYearHistogram')
+    new glados.views.Visualisation.HistogramView
+      el: $('.BCK-MainHistogramContainer')
       config: histogramConfig
       model: allDocumentsByYear
 
