@@ -46,6 +46,12 @@ glados.useNameSpace 'glados.models.visualisation',
             1: 'Yes'
             false: 'No'
             true: 'Yes'
+    DocumentAggregation:
+      Properties:
+        HIT_COUNT:
+          propName: 'hit_count'
+          label: 'Hit Count'
+          type: Number
     Target:
       esIndex:'chembl_target'
       Properties:
