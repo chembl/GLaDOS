@@ -35,10 +35,11 @@
 
 <div id="MainPageCentralDiv" class="row hide-on-small-only">
 
-  <div class="col m12 l9 ">
+<!----- PAPERS PER YEAR HISTOGRAM -->
+  <div class="col m12 l9" id="main-page-histogram">
 
-    {% block marvin %}
-    {% include "glados/MainPageParts/central_card.html" %}
+    {% block histogram %}
+    {% include "glados/MainPageParts/Visualizations/papers_per_year_histogram.html" %}
     {% endblock %}
 
   </div>
