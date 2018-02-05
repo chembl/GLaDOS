@@ -40,7 +40,6 @@ class MainPageApp
         x_axis_agg:
           field: 'year'
           type: glados.models.Aggregations.Aggregation.AggTypes.RANGE
-          histogram: true
           min_columns: minCols
           max_columns: maxCols
           num_columns: defaultCols
@@ -57,6 +56,7 @@ class MainPageApp
     allDocumentsByYear = MainPageApp.getDocumentsPerYearAgg()
 
     histogramConfig =
+      histogram: true
       big_size: true
       paint_axes_selectors: true
       properties:

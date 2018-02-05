@@ -166,26 +166,41 @@ glados.useNameSpace 'glados.views.Visualisation',
         xRangeEnd = BARS_CONTAINER_WIDTH
 
 
-      #     get one value names for axis
-      oneValueNames = []
-      for name in bucketNames
-        newName = name.split '-'
-        oneValueNames.push parseInt(newName[0])
+      if @config.histogram
+        console.log 'HISTOGRAM'
+        oneValueNames = []
+        for name in bucketNames
+          newName = name.split '-'
+          oneValueNames.push parseInt(newName[0])
 
-      getXForBucket = d3.scale.ordinal()
+        getXForBucket = d3.scale.ordinal()
         .domain(oneValueNames)
         .rangeRoundBands([0,xRangeEnd], 0.05)
+
+      else
+        getXForBucket = d3.scale.ordinal()
+          .domain(bucketNames)
+          .rangeRoundBands([0,xRangeEnd], 0.05)
 
       getHeightForBucket = d3.scale.linear()
         .domain([0, _.max(bucketSizes)])
         .range([BARS_MIN_HEIGHT, BARS_CONTAINER_HEIGHT])
 
-      barGroups = barsContainerG.selectAll('.bar-group')
-        .data(buckets)
-        .enter()
-        .append('g')
-        .classed('bar-group', true)
-        .attr('transform', (b, i) -> 'translate(' + getXForBucket(oneValueNames[i]) + ')')
+
+      if @config.histogram
+        barGroups = barsContainerG.selectAll('.bar-group')
+          .data(buckets)
+          .enter()
+          .append('g')
+          .classed('bar-group', true)
+          .attr('transform', (b, i) -> 'translate(' + getXForBucket(oneValueNames[i]) + ')')
+      else
+        barGroups = barsContainerG.selectAll('.bar-group')
+          .data(buckets)
+          .enter()
+          .append('g')
+          .classed('bar-group', true)
+          .attr('transform', (b) -> 'translate(' + getXForBucket(b.key) + ')')
 
       barGroups.append('rect')
         .attr('height', BARS_CONTAINER_HEIGHT)
@@ -286,7 +301,9 @@ glados.useNameSpace 'glados.views.Visualisation',
       formatAsYear = d3.format("1999")
       xAxis = d3.svg.axis()
         .scale(getXForBucket)
-        .tickFormat(formatAsYear)
+
+      if @.config.histogram
+        xAxis.tickFormat(formatAsYear)
 
       xAxisContainerG.call(xAxis)
       @rotateXAxisTicksIfNeeded(xAxisContainerG, getXForBucket)
