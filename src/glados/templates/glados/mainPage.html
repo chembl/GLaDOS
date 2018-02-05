@@ -36,13 +36,14 @@
 <div id="MainPageCentralDiv" class="row hide-on-small-only">
 
 <!----- PAPERS PER YEAR HISTOGRAM -->
-  <div class="col m12 l9" id="main-page-histogram">
+  <div class="col m12 l9" id="PapersPerYearHistogram">
+  <h3>Papers per year about compound</h3>
 
-    {% block histogram %}
-    {% include "glados/MainPageParts/Visualizations/papers_per_year_histogram.html" %}
-    {% endblock %}
-
+    {% with is_dynamic=False %}
+        {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
+    {% endwith %}
   </div>
+<!----- PAPERS PER YEAR HISTOGRAM -->
 
   <div class="col m6 l3">
 
