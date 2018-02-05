@@ -8,7 +8,7 @@ glados.useNameSpace 'glados',
       new glados.views.ScrollSpy.ScrollSpyView
         el: $('.BCK-ScrollSpy')
         model: @scrollSpyHandler
-      glados.Utils.checkReportCardByChembId(GlobalVariables.CHEMBL_ID)
+      glados.Utils.checkReportCardByChemblId(GlobalVariables.CHEMBL_ID)
 
 
     @hideSection = (sectionID) ->
