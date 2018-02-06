@@ -145,8 +145,20 @@
   <script type="text/javascript" src="{% static 'js/api/easychem.js' %}"></script>
 
   {% endcompress %}
-
-
+  <div id="glados-messages" class="modal">
+    <div class="modal-content">
+    </div>
+    <div class="modal-footer">
+    </div>
+  </div>
+  <script type="application/javascript">
+    $('#glados-messages').modal(
+      {
+        dismissible: false,
+        opacity: .5
+      }
+    );
+  </script>
   </body>
   </html>
 {% endwith %}
