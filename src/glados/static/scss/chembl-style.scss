@@ -3162,6 +3162,8 @@ span.badge-primary-color-no-float {
   .title {
     cursor: pointer;
     font-size: 110%;
+    font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+    fill: #5e5e5e;
   }
   .title:hover {
     fill: color('teal', 'accent-4');
@@ -3214,7 +3216,7 @@ span.badge-primary-color-no-float {
     }
 
     text {
-      fill: grey;
+      fill: #666666;
     }
   }
 

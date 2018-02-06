@@ -121,8 +121,8 @@ glados.useNameSpace 'glados.views.Visualisation',
       thisView = @
 
       if @config.big_size
-        TITLE_Y = 30
-        TITLE_Y_PADDING = 15
+        TITLE_Y = 40
+        TITLE_Y_PADDING = 40
         RIGHT_PADDING = 20
         X_AXIS_HEIGHT = 100
         Y_AXIS_WIDTH = 60
@@ -237,7 +237,7 @@ glados.useNameSpace 'glados.views.Visualisation',
       barGroups.each (d, i) ->
 
         if thisView.config.range_categories
-          rangeText = '[' + d.key.replace('-', ',') + ')'
+          rangeText = '[' + d.key.replace('-', ',') + ']'
         else
           rangeText = d.key
 
