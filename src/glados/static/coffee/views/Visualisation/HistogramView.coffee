@@ -252,8 +252,11 @@ glados.useNameSpace 'glados.views.Visualisation',
           style:
             classes:'qtip-light'
           position:
-            my: if thisView.config.big_size then 'bottom center' else 'top center'
+            my: if thisView.config.big_size then 'bottom right' else 'top center'
             at: 'bottom center'
+            target: 'mouse'
+            adjust:
+              y: -50
 
       #-----------------------------------------------------------------------------------------------------------------
       # add title
