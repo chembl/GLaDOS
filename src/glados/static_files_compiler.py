@@ -9,6 +9,7 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 import math
 
+
 class FileCompilerEventHandler(FileSystemEventHandler):
 
     def __init__(self, compile_func):
@@ -44,17 +45,23 @@ class StaticFilesCompiler(object):
     def compile_coffee():
         print("If coffee static files compilation takes longer than 10 seconds,\n"
               "please install nodejs to increase compilation speed!")
-        StaticFilesCompiler(StaticFilesCompiler.COFFEE_COMPILE_FUNC,
-                            StaticFilesCompiler.COFFEE_PATH,
-                            StaticFilesCompiler.COFFEE_GEN_PATH,
-                            '.coffee', '.js')
+        compiler = StaticFilesCompiler(
+            StaticFilesCompiler.COFFEE_COMPILE_FUNC,
+            StaticFilesCompiler.COFFEE_PATH,
+            StaticFilesCompiler.COFFEE_GEN_PATH,
+            '.coffee', '.js'
+        )
+        return compiler.compiled_all_correctly_on_start
 
     @staticmethod
     def compile_scss():
-        StaticFilesCompiler(StaticFilesCompiler.SCSS_COMPILE_FUNC,
-                            StaticFilesCompiler.SCSS_PATH,
-                            StaticFilesCompiler.SCSS_GEN_PATH,
-                            '.scss','.css', exclude_regex_str="^_.*")
+        compiler = StaticFilesCompiler(
+            StaticFilesCompiler.SCSS_COMPILE_FUNC,
+            StaticFilesCompiler.SCSS_PATH,
+            StaticFilesCompiler.SCSS_GEN_PATH,
+            '.scss','.css', exclude_regex_str="^_.*"
+        )
+        return compiler.compiled_all_correctly_on_start
 
     def __init__(self, compiler_function, src_path, out_path, ext_to_compile, ext_replace, exclude_regex_str=None):
         self.compiler_function = compiler_function
@@ -68,7 +75,7 @@ class StaticFilesCompiler(object):
         self.exclude_regex = None
         if self.exclude_regex_str:
             self.exclude_regex = re.compile(self.exclude_regex_str)
-        self.compile_all()
+        self.compiled_all_correctly_on_start = self.compile_all()
         self.watch = settings.WATCH_AND_UPDATE_STATIC_COMPILED_FILES
         if self.watch:
             self.file_event_handler = FileCompilerEventHandler(self.watchdog_event_handler)
@@ -120,6 +127,7 @@ class StaticFilesCompiler(object):
     def compile_all(self):
         import time
         t_ini = time.time()
+        tpe_tasks = []
         with futures.ThreadPoolExecutor(max_workers=5) as tpe:
             print("Compiling {0} files.".format(self.ext_to_compile))
             for cur_dir, dirs, files in os.walk(top=self.src_path):
@@ -135,6 +143,11 @@ class StaticFilesCompiler(object):
                     file_src_i = os.path.join(cur_dir, file_i)
                     compiled_out_path = self.get_compiled_out_path(file_i, compiled_dir_path)
                     if compiled_out_path is not None:
-                        tpe.submit(self.compile_and_save, file_src_i, compiled_out_path)
+                        tpe_task = tpe.submit(self.compile_and_save, file_src_i, compiled_out_path)
+                        tpe_tasks.append(tpe_task)
             tpe.shutdown(wait=True)
             print("{0} files compiled in {1} seconds.".format(self.ext_to_compile, math.floor(time.time()-t_ini+1)))
+        compiled_all_correctly = True
+        for tpe_task_i in tpe_tasks:
+            compiled_all_correctly &= tpe_task_i.result()
+        return compiled_all_correctly

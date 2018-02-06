@@ -1545,7 +1545,7 @@ a.error-redirect-link{
   color: $chembl-teal;
   text-decoration: underline;
   &:hover{
-    color: lighten($teal, 2);
+    color: color('teal', 'lighten-1');
     font-size: 1.3em;
   }
 }
