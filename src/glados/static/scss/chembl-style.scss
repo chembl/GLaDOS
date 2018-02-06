@@ -1537,6 +1537,20 @@ div#CNC-zoom-modal {
 }
 
 /**
+* Error message styles
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+a.error-redirect-link{
+  font-size: 1.3em;
+  color: $chembl-teal;
+  text-decoration: underline;
+  &:hover{
+    color: color('teal', 'lighten-1');
+    font-size: 1.3em;
+  }
+}
+
+/**
 * Preloaders and Error message wrapppers
 * ----------------------------------------------------------------------------------------------------------------------
 */
@@ -2506,12 +2520,28 @@ span.badge-primary-color-no-float {
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
+.tweet-content {
+  display: flex;
+  flex-direction: column;
+
+  .tweet-header {
+    margin-bottom: 10px;
+  }
+}
+
 .tweets {
+  max-height: 350px;
+  overflow: scroll;
 
   .tweet {
     border-bottom: 1px solid $primary-color;
-    margin-bottom: 5px;
+    margin-bottom: 25px;
     padding: 10px;
+    width: 100%;
+    margin-top: -20px;
+
+    /* margin bottom and margin top are chating to hide number of results */
+
   }
 
   .row {
@@ -2523,9 +2553,35 @@ span.badge-primary-color-no-float {
   }
 
   .tweet-content {
-    font-size: 80%;
+    font-size: 70%;
     padding: 5px;
     word-wrap: break-word;
+  }
+  .tweet-profile-name{
+    padding-left: 10px;
+
+  }
+
+}
+
+.tweet-info{
+  span{
+    font-size: 12px;
+    margin-right:10px;
+    color:#009688;
+  }
+
+  .s4{
+    padding-left:10px;
+  }
+
+  a {
+    color: #d1d1d1;
+    padding-right: 10px;
+  }
+
+    a:hover {
+    color: #009688;
   }
 }
 
@@ -2816,8 +2872,10 @@ span.badge-primary-color-no-float {
  */
 .wordcloud-word:hover {
   cursor: pointer;
-  text-decoration: underline;
-  color: black !important;
+  /*text-decoration: underline;*/
+  letter-spacing: 0.5px;
+  transition: all .15s ease-in-out;
+  color: #D33C60 !important;  /* glados.Settings.VIS_COLORS.RED2 */
 
 }
 
@@ -3141,7 +3199,7 @@ span.badge-primary-color-no-float {
       stroke-width: 1;
       stroke: black;
       fill: black;
-      opacity: 0.2;
+      opacity: 0.07;
     }
   }
 
@@ -3366,7 +3424,7 @@ $facets-width-large: 21%;
       &:not(.selected):not(.disabled):hover {
 
         .value-bar {
-          fill: color($primary-color-name, 'lighten-3');
+          fill: color($primary-color-name, 'lighten-5');
         }
 
         .background-bar {
@@ -3601,7 +3659,6 @@ $facets-width-large: 21%;
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
-
 .piechart-group {
   display: flex;
   flex-flow: wrap;
@@ -3611,7 +3668,7 @@ $facets-width-large: 21%;
       display: flex;
       flex-direction: column;
       flex-grow: 1;
-      width:100%;
+      width: 100%;
       .layout {
         display: flex;
         flex-grow: 1;
@@ -3633,7 +3690,7 @@ $facets-width-large: 21%;
                   text-align: center;
                 }
               }
-              .pie-content{
+              .pie-content {
                 overflow: scroll;
               }
             }

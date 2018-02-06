@@ -28,6 +28,28 @@ describe 'Drug Indications List', ->
 
   it 'parses the data correctly', ->
 
-    console.log 'sampleDataToParse: ', sampleDataToParse
-    console.log 'testChemblID: ', testChemblID
-    console.log 'drugIndicationsList: ', drugIndicationsList
+    parsedDataGot = drugIndicationsList.parse(sampleDataToParse)
+
+    drugIndicationsIndex = _.indexBy(parsedDataGot, 'drugind_id')
+
+    for drugIndicationMustBe in sampleDataToParse.drug_indications
+
+      drugIndID = drugIndicationMustBe.drugind_id
+      drugIndicationGot = drugIndicationsIndex[drugIndID]
+
+      expect(drugIndicationGot?).toBe(true)
+      expect(drugIndicationGot.mesh_heading).toBe(drugIndicationMustBe.mesh_heading)
+      expect(drugIndicationGot.mesh_id).toBe(drugIndicationMustBe.mesh_id)
+      expect(drugIndicationGot.max_phase_for_ind).toBe(drugIndicationMustBe.max_phase_for_ind)
+
+  it 'sorts the items by drug indication by default', ->
+
+    parsedDataGot = drugIndicationsList.parse(sampleDataToParse)
+    console.log 'parsedDataGot: ', parsedDataGot
+
+    previousMaxPhase = 4
+    for drugIndicationGot in parsedDataGot
+      currentMaxPhase = drugIndicationGot.max_phase_for_ind
+      expect(currentMaxPhase <= previousMaxPhase).toBe(true)
+      previousMaxPhase = currentMaxPhase
+

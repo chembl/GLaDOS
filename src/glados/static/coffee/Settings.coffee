@@ -55,16 +55,42 @@ glados.useNameSpace 'glados',
   Settings:
     PIECHARTS:
       MAX_CATEGORIES: 10
-      TEAL1: '#4DB6AC'
-      GREEN1: '#8BC34A'
-      GREEN2: '#CDDC39'
-      AMBER: '#FFC107'
-      ORANGE: '#FF9800'
-      RED: '#EF5350'
-      PINK: '#F06292'
-      PURPLE: '#7E57C2'
-      BLUE1: '#03A9F4'
-      BLUE2: '#80DEEA'
+    VIS_COLORS:
+      TEAL1: '#0D343A'
+      TEAL2: '#025C5E'
+      TEAL3: '#09979B'
+      TEAL4: '#75D8D5'
+      TEAL5: '#C4E6E5'
+
+      RED1: '#65323E'
+      RED2: '#D33C60'
+      RED3: '#FE7F9D'
+      RED4: '#FFC0CB'
+      RED5: '#F1D6DB'
+
+      BLUE1: '#02355C'
+      BLUE2: '#0F77C9'
+      BLUE3: '#4EB1FF'
+      BLUE4: '#94D0FF'
+      BLUE5: '#C0E3FF'
+
+      ORANGE1: '#A0221D'
+      ORANGE2: '#EE4F4F'
+      ORANGE3: '#FF855A'
+      ORANGE4: '#FFB89E'
+      ORANGE5: '#FFD5C5'
+
+      YELLOW2: '#FDA420'
+      YELLOW3: '#FFC107'
+      YELLOW4: '#FFDE7C'
+      YELLOW5: '#FCECBE'
+
+      PURPLE1: '#3A49A2'
+      PURPLE2: '#8795E8'
+
+      GREY1: '#bbbbbb'
+      WHITE: '#fff'
+
     GLADOS_STRINGS_PREFIX: 'glados_es_gs__'
     WS_HOSTNAME: 'https://www.ebi.ac.uk/'
     WS_BASE_URL: 'https://www.ebi.ac.uk/chembl/api/data/'
@@ -103,7 +129,7 @@ glados.useNameSpace 'glados',
     VISUALISATION_AMBER_BASE: '#ffc107' # amber
     VISUALISATION_GRID_EXTERNAL_BORDER: '#D2D2D2'
     VISUALISATION_GRID_DIVIDER_LINES: '#bdbdbd' #grey lighten-1
-    VISUALISATION_GRID_UNDEFINED: '#9e9e9e' #grey
+    VISUALISATION_GRID_UNDEFINED: '#d9d9d9' #grey
     VISUALISATION_GRID_NO_DATA: '#eeeeee' #grey lighten-3
     VISUALISATION_GRID_PANELS: 'white' #grey lighten-4
     VISUALISATION_LEGEND_HEIGHT: 100
@@ -275,3 +301,6 @@ glados.setupOnLoadAfterJS = () ->
       )
 
 $( "body" ).ready(glados.setupOnLoadAfterJS)
+
+# enable this variable to prevent unsafe calls like saveAs from file saver
+glados.JS_TEST_MODE = false

@@ -23,7 +23,7 @@ glados.useNameSpace 'glados.views.Compound',
       fileExtension = if sdfFile then '.sdf' else '.xyz'
       typeForceField = Compound.SDF_3D_ENDPOINTS[@model.get 'cur3DEndpointIndex'].label
       blobToDownload = new Blob([fileToDownload], {type: mimeType+";charset=utf-8"})
-      saveAs(blobToDownload, @model.get('molecule_chembl_id')+'-'+typeForceField+fileExtension)
+      saveAs(blobToDownload, @model.get('molecule_chembl_id')+'-'+typeForceField+fileExtension) unless glados.JS_TEST_MODE
 
     copyFile: (sdfFile)->
       fileToDownload = @getDesiredFile(sdfFile)

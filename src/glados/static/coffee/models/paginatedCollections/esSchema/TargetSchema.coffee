@@ -23,7 +23,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           intervals: 20
         },
         '_metadata.related_compounds.count',
-        '_metadata.activity_count',
+        '_metadata.related_activities.count',
       ],
       # Default Hidden
       [

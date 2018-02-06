@@ -2,6 +2,8 @@ glados.useNameSpace 'glados.models',
   Tissue: Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
     entityName: 'Tissue'
+    idAttribute:'tissue_chembl_id'
+
     initialize: ->
       @url = glados.Settings.WS_BASE_URL + 'tissue/' + @get('tissue_chembl_id') + '.json'
 

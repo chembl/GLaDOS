@@ -1,13 +1,73 @@
 glados.useNameSpace 'glados',
   Utils:
+    showErrorModalMessage: (message, redirection_link) ->
+      if not glados.Utils.modalErrorTemplate?
+        glados.Utils.modalErrorTemplate = Handlebars.compile($('#Handlebars-Common-RedCardError').html())
+      compiledErrorMessage = glados.Utils.modalErrorTemplate
+        msg: message
+        redirect_link: redirection_link
+      $('#glados-messages .modal-content').html(compiledErrorMessage)
+      $('#glados-messages').modal
+        ready: (modal, trigger)->
+          secsForRedirect = 10
+          callRedirect = ->
+            setTimeout ->
+              $(modal).find('.redirect-time').html(secsForRedirect+'s')
+              secsForRedirect -= 1
+              if secsForRedirect <= 0
+                window.location.replace(redirection_link)
+              else
+                setTimeout ->
+                  callRedirect()
+                , 1000
+          callRedirect()
+      $('#glados-messages').modal('open')
+
+
+    checkReportCardByChemblId: (chemblId) ->
+      chemblId = chemblId.toUpperCase()
+      lookup_url = glados.models.paginatedCollections.Settings.ES_BASE_URL
+      lookup_url += '/chembl_chembl_id_lookup/_search?q=status:ACTIVE%20AND%20chembl_id:'
+      lookup_url += chemblId
+      ajax_deferred = $.post lookup_url
+      ajax_deferred.then (data) ->
+        if data.hits.hits.length > 0
+          entityName = data.hits.hits[0]._source.entity_type
+          correctEntity = glados.Utils.getEntityFromName(entityName)
+          rcUrl = correctEntity.get_report_card_url(chemblId)
+          if not window.location.pathname.includes(rcUrl)
+            entityName = glados.Utils.getEntityByReportCardURL().prototype.entityName
+            message = chemblId+' is not a '+entityName+' registered in ChEMBL. <br> However, '+chemblId+' is a '
+            message += correctEntity.prototype.entityName + '.'
+            glados.Utils.showErrorModalMessage(
+              message,
+              glados.Settings.GLADOS_BASE_URL_FULL+rcUrl.substring(1)
+            )
+
+    getEntityByReportCardURL: (reportCardURL=window.location.pathname)->
+      if reportCardURL.includes(Compound.reportCardPath)
+        return Compound
+      else if reportCardURL.includes(Target.reportCardPath)
+        return Target
+      else if reportCardURL.includes(Assay.reportCardPath)
+        return Assay
+      else if reportCardURL.includes(Document.reportCardPath)
+        return Document
+      else if reportCardURL.includes(CellLine.reportCardPath)
+        return CellLine
+      else if reportCardURL.includes(glados.models.Tissue.reportCardPath)
+        return glados.models.Tissue
+      return null
+
     getEntityFromName: (entityName) ->
+      entityName = entityName.toLowerCase()
       switch
-        when entityName == Compound.prototype.entityName then Compound
-        when entityName == Target.prototype.entityName then Target
-        when entityName == Assay.prototype.entityName then Assay
-        when entityName == Document.prototype.entityName then Document
-        when entityName == CellLine.prototype.entityName then CellLine
-        when entityName == glados.models.Tissue.prototype.entityName then glados.models.Tissue
+        when entityName == Compound.prototype.entityName.toLowerCase() then Compound
+        when entityName == Target.prototype.entityName.toLowerCase() then Target
+        when entityName == Assay.prototype.entityName.toLowerCase() then Assay
+        when entityName == Document.prototype.entityName.toLowerCase() then Document
+        when entityName == CellLine.prototype.entityName.toLowerCase() or entityName == 'cell' then CellLine
+        when entityName == glados.models.Tissue.prototype.entityName.toLowerCase() then glados.models.Tissue
 
     # Will round a number to the closest 10*, 20* or 50*
     # Check the next function to get some examples about how this function works

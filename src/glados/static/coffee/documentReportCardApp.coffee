@@ -44,6 +44,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
   @initBasicInformation = ->
 
     document = DocumentReportCardApp.getCurrentDocument()
+    document = DocumentReportCardApp.getCurrentDocument()
 
     new DocumentBasicInformationView
       model: document
@@ -222,8 +223,6 @@ class DocumentReportCardApp extends glados.ReportCardApp
   # Full Screen views
   # -------------------------------------------------------------
   @initAssayNetworkFS = ->
-
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblID()
 
     documentAssayNetwork = new DocumentAssayNetwork
       document_chembl_id: GlobalVariables.CHEMBL_ID

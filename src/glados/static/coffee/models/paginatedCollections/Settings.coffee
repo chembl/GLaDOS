@@ -450,6 +450,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         ID_COLUMN: Compound.ID_COLUMN
         ADDITIONAL_COLUMNS:[]
         ENABLE_COLLECTION_CACHING: true
+      TWEETS_LIST:
+        MODEL: glados.models.MainPage.Tweet
+        BASE_URL: 'base_url is set by initURL'
+        DEFAULT_PAGE_SIZE: 15
+        COLUMNS: glados.models.MainPage.Tweet.COLUMNS_SETTINGS.ALL_COLUMNS
+        COLUMNS_DESCRIPTION:
+          Infinite:
+            Default: glados.models.MainPage.Tweet.COLUMNS_SETTINGS.INFINITE_VIEW
+            CustomItemTemplate: 'Handlebars-Common-Paginated-Card-Tweet'
+        ID_COLUMN: glados.models.MainPage.Tweet.ID_COLUMN
       SIMILARITY_RESULTS_LIST:
         MODEL: Compound
         BASE_URL: 'base_url is set by initURL'
@@ -470,11 +480,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       DRUG_INDICATIONS_LIST:
         MODEL: glados.models.Compound.DrugIndication
         BASE_URL: 'base_url is set by initURL'
-        COLUMNS: []
+        DEFAULT_PAGE_SIZE: 5
+        COLUMNS: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
-            Default: []
-        ID_COLUMN: undefined
+            Default: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+        ID_COLUMN: glados.models.Compound.DrugIndication.ID_COLUMN
       COMPOUND_WS_RESULTS_LIST_CAROUSEL:
         MODEL: Compound
         BASE_URL: 'base_url is set by initURL'
@@ -525,6 +536,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Default: ApprovedDrugClinicalCandidate.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
           Carousel:
             Default: ApprovedDrugClinicalCandidate.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+
+
       STRUCTURAL_ALERTS_LIST:
         MODEL: glados.models.Compound.StructuralAlert
         COLUMNS: glados.models.Compound.StructuralAlert.COLUMNS_SETTINGS.ALL_COLUMNS

@@ -137,6 +137,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     render: ->
 
+      console.log 'RENDER'
       if not @collection.getMeta('data_loaded')
         return
 
@@ -206,12 +207,18 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @shouldIgnoreContentChangeRequestWhileStreaming()
         return
 
+      console.log 'SENT DATA TO TEMPLATE'
       if (@isInfinite() or @isCards()) and not @isComplicated
         templateID = @collection.getMeta('custom_cards_template')
+        if @isInfinite()
+          infiniteConfig = @collection.getMeta('columns_description').Infinite
+          if infiniteConfig.CustomItemTemplate?
+            templateID = infiniteConfig.CustomItemTemplate
       # this second way should be the correct way to do it, not changing it for now so I don't have refactor many things
       if customItemTemplate?
         templateID = customItemTemplate
       templateID ?= $specificElemContainer.attr('data-hb-template')
+      console.log 'TEMPLATE ID: ', templateID
       applyTemplate = Handlebars.compile($('#' + templateID).html())
       $appendTo = $specificElemContainer
 
@@ -220,12 +227,17 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         columnsWithValues = glados.Utils.getColumnsWithValues(visibleColumns, item)
         idValue = glados.Utils.getNestedValue(item.attributes, @collection.getMeta('id_column').comparator)
 
+        columnsByComparator = {}
+        for column_i in columnsWithValues
+          columnsByComparator[column_i.comparator.replace(/[^a-zA-Z0-9]/g, '__')] = column_i
+
         templateParams =
           base_check_box_id: idValue
           is_selected: @collection.itemIsSelected(idValue)
           img_url: glados.Utils.getImgURL(columnsWithValues)
           columns: columnsWithValues
           selection_disabled: @disableItemsSelection
+          columns_by_comparator: columnsByComparator
 
         if (@isCards() or @isInfinite())
           templateParams.small_size = @CURRENT_CARD_SIZES.small
@@ -483,8 +495,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if numCards < pageSize
         index = 0
       else
-        index = $cards.length - @collection.getMeta('page_size')
-
+        index = $cards.length - pageSize
       wayPointCard = $cards[index]
       # the advancer function requests always the next page
       advancer = $.proxy ->
@@ -499,11 +510,15 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       # destroy all waypoints before assigning the new one.
       Waypoint.destroyAll()
+      scroll_container = null
+      $scroll_containers = $(@el).find('.infinite-scroll-container')
+      if $scroll_containers.length == 1
+        scroll_container = $scroll_containers[0]
 
       waypoint = new Waypoint(
         element: wayPointCard
+        context: if scroll_container? then scroll_container else window
         handler: (direction) ->
-
           if direction == 'down'
             advancer()
 

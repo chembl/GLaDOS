@@ -5,7 +5,6 @@ class CompoundReportCardApp extends glados.ReportCardApp
   @init = ->
 
     super
-    GlobalVariables.CHEMBL_ID = URLProcessor.getRequestedChemblID()
 
     compound = CompoundReportCardApp.getCurrentCompound()
 
@@ -154,8 +153,24 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @initIndications = ->
 
-    @registerSection('Indications', 'Indications')
-    @showSection('Indications')
+    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
+    drugIndicationsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugIndicationsList()
+    drugIndicationsList.initURL(chemblID)
+
+    viewConfig =
+      embed_section_name: 'drug_indications'
+      embed_identifier: chemblID
+
+    new glados.views.ReportCards.PaginatedTableInCardView
+      collection: drugIndicationsList
+      el: $('#CDrugIndicationsCard')
+      resource_type: gettext('glados_entities_compound_name')
+      section_id: 'Indications'
+      section_label: 'Indications'
+      config: viewConfig
+      report_card_app: @
+
+    drugIndicationsList.fetch({reset: true})
 
   @initMoleculeFeatures = ->
 
