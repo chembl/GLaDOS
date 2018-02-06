@@ -44,10 +44,7 @@ class MainPageApp
           min_columns: 43
           max_columns: 43
           num_columns: 43
-        split_series_agg:
-          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
-          field: 'journal'
-          size: 5
+
 
     allDocumentsByYear = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.DOCUMENT_INDEX_URL

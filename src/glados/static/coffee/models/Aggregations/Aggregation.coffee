@@ -8,6 +8,7 @@ glados.useNameSpace 'glados.models.Aggregations',
       @url = @get('index_url')
       @set('state', glados.models.Aggregations.Aggregation.States.INITIAL_STATE)
       @loadQuery()
+#      console.log "subAggs", @getSubAggregations()
 
     loadQuery: ->
       queryConfig = @get('query_config')
@@ -37,6 +38,16 @@ glados.useNameSpace 'glados.models.Aggregations',
 
       aggsConfig = @get('aggs_config')
       return aggsConfig.aggs[aggName]
+
+
+#    Get sub aggregations
+    getSubAggregations: () ->
+      aggs = @get('aggs_config').aggs
+      for aggKey, aggDescription of aggs
+        subAggs = aggs.aggs
+      if subAggs?
+        return subAggs
+
 
     #-------------------------------------------------------------------------------------------------------------------
     # Changing configuration
@@ -111,7 +122,6 @@ glados.useNameSpace 'glados.models.Aggregations',
       @set('state', glados.models.Aggregations.Aggregation.States.LOADING_BUCKETS)
 
       esJSONRequest = JSON.stringify(@getRequestData())
-      console.log 'esJSONRequest', esJSONRequest
 
       fetchESOptions =
         url: @url
@@ -371,6 +381,10 @@ glados.useNameSpace 'glados.models.Aggregations',
               interval: aggDescription.interval
               keyed: true
 
+        if @getSubAggregations()?
+          console.log "subAggs", @getSubAggregations()
+
+
       queryData = @get('query')
 
       return {
@@ -409,4 +423,3 @@ glados.models.Aggregations.Aggregation.AggTypes =
    RANGE: 'RANGE'
    TERMS: 'TERMS'
    HISTOGRAM: 'HISTOGRAM'
-   SPLIT_SERIES: 'SPLIT_SERIES'
