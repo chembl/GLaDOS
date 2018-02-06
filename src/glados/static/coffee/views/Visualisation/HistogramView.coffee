@@ -167,7 +167,6 @@ glados.useNameSpace 'glados.views.Visualisation',
 
 
       if @config.histogram
-        console.log 'HISTOGRAM'
         oneValueNames = []
         for name in bucketNames
           newName = name.split '-'
@@ -235,12 +234,15 @@ glados.useNameSpace 'glados.views.Visualisation',
       #-----------------------------------------------------------------------------------------------------------------
       # add qtips
       #-----------------------------------------------------------------------------------------------------------------
-      barGroups.each (d) ->
+      barGroups.each (d, i) ->
 
         if thisView.config.range_categories
           rangeText = '[' + d.key.replace('-', ',') + ')'
         else
           rangeText = d.key
+
+        if thisView.config.histogram
+          rangeText = oneValueNames[i]
 
         text = '<b>' + rangeText + '</b>' + ":" + d.doc_count
 
