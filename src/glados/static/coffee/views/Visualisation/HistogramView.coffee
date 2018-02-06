@@ -165,20 +165,20 @@ glados.useNameSpace 'glados.views.Visualisation',
       else
         xRangeEnd = BARS_CONTAINER_WIDTH
 
-        getXForBucket = d3.scale.ordinal()
-          .domain(bucketNames)
-          .rangeRoundBands([0,xRangeEnd], 0.05)
+      getXForBucket = d3.scale.ordinal()
+        .domain(bucketNames)
+        .rangeRoundBands([0,xRangeEnd], 0.05)
 
       getHeightForBucket = d3.scale.linear()
         .domain([0, _.max(bucketSizes)])
         .range([BARS_MIN_HEIGHT, BARS_CONTAINER_HEIGHT])
 
-        barGroups = barsContainerG.selectAll('.bar-group')
-          .data(buckets)
-          .enter()
-          .append('g')
-          .classed('bar-group', true)
-          .attr('transform', (b) -> 'translate(' + getXForBucket(b.key) + ')')
+      barGroups = barsContainerG.selectAll('.bar-group')
+        .data(buckets)
+        .enter()
+        .append('g')
+        .classed('bar-group', true)
+        .attr('transform', (b) -> 'translate(' + getXForBucket(b.key) + ')')
 
       barGroups.append('rect')
         .attr('height', BARS_CONTAINER_HEIGHT)
