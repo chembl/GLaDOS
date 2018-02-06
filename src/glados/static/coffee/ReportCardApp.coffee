@@ -2,11 +2,13 @@ glados.useNameSpace 'glados',
   ReportCardApp: class ReportCardApp
 
     @init = ->
+      GlobalVariables.CHEMBL_ID = glados.Utils.URLS.getCurrentModelChemblID()
       @scrollSpyHandler = new glados.models.ScrollSpy.ScrollSpyHandler
       ScrollSpyHelper.initializeScrollSpyPinner()
       new glados.views.ScrollSpy.ScrollSpyView
         el: $('.BCK-ScrollSpy')
         model: @scrollSpyHandler
+      glados.Utils.checkReportCardByChemblId(GlobalVariables.CHEMBL_ID)
 
 
     @hideSection = (sectionID) ->
@@ -24,9 +26,7 @@ glados.useNameSpace 'glados',
     @initMiniReportCard = (Entity, $containerElem, chemblID, model, customTemplate, additionalTemplateParams={},
     fetchModel=true, customColumns)->
 
-      if model?
-        model = model
-      else
+      if not model
         model = new Entity({id: chemblID})
 
       view = new glados.views.MiniReportCardView

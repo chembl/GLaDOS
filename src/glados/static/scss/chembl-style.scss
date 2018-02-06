@@ -1537,6 +1537,20 @@ div#CNC-zoom-modal {
 }
 
 /**
+* Error message styles
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+a.error-redirect-link{
+  font-size: 1.3em;
+  color: $chembl-teal;
+  text-decoration: underline;
+  &:hover{
+    color: lighten($teal, 2);
+    font-size: 1.3em;
+  }
+}
+
+/**
 * Preloaders and Error message wrapppers
 * ----------------------------------------------------------------------------------------------------------------------
 */

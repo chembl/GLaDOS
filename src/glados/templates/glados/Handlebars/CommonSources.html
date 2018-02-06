@@ -1,4 +1,24 @@
 {% verbatim %}
+
+<script id="Handlebars-Common-RedCardError" type="text/x-handlebars-template">
+    <div class="card-panel red darken-4">
+        <div class="white-text">
+            <p class="center-align Bck-errormsg">
+                <i class="fa fa-exclamation-circle"></i> {{{msg}}}
+            </p>
+        </div>
+    </div>
+    {{#if redirect_link}}
+        <div class="card-panel">
+            <p class="center-align Bck-errormsg">
+                Please Wait, you will be redirected shortly .  . . <br>
+                If you are not redirected, please
+                <a class="error-redirect-link" href="{{redirect_link}}">click here</a>.
+            </p>
+        </div>
+    {{/if}}
+</script>
+
 <script id="Handlebars-Common-CardError" type="text/x-handlebars-template">
   <i class="fa fa-exclamation-circle"></i> {{msg}}
 </script>
