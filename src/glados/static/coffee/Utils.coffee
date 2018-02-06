@@ -7,11 +7,22 @@ glados.useNameSpace 'glados',
         msg: message
         redirect_link: redirection_link
       $('#glados-messages .modal-content').html(compiledErrorMessage)
+      $('#glados-messages').modal
+        ready: (modal, trigger)->
+          secsForRedirect = 10
+          callRedirect = ->
+            setTimeout ->
+              $(modal).find('.redirect-time').html(secsForRedirect+'s')
+              secsForRedirect -= 1
+              if secsForRedirect <= 0
+                window.location.replace(redirection_link)
+              else
+                setTimeout ->
+                  callRedirect()
+                , 1000
+          callRedirect()
       $('#glados-messages').modal('open')
 
-      setTimeout ->
-        window.location.replace(redirection_link)
-      , 5000
 
     checkReportCardByChemblId: (chemblId) ->
       chemblId = chemblId.toUpperCase()
