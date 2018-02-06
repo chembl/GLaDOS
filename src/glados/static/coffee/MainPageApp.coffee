@@ -38,7 +38,7 @@ class MainPageApp
     aggsConfig =
       aggs:
         x_axis_agg:
-          type: glados.models.Aggregations.Aggregation.AggTypes.RANGE
+          type: glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
           field: 'year'
           interval: defaultInterval
           min_columns: 40
@@ -54,6 +54,7 @@ class MainPageApp
 
 
   @initPapersPerYear = ->
+
     allDocumentsByYear = MainPageApp.getDocumentsPerYearAgg()
 
     histogramConfig =
@@ -77,3 +78,4 @@ class MainPageApp
 
 
     allDocumentsByYear.fetch()
+    console.log 'allDocumentsByYear: ', allDocumentsByYear

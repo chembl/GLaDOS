@@ -165,18 +165,6 @@ glados.useNameSpace 'glados.views.Visualisation',
       else
         xRangeEnd = BARS_CONTAINER_WIDTH
 
-
-      if @config.histogram
-        oneValueNames = []
-        for name in bucketNames
-          newName = name.split '-'
-          oneValueNames.push parseInt(newName[0])
-
-        getXForBucket = d3.scale.ordinal()
-        .domain(oneValueNames)
-        .rangeRoundBands([0,xRangeEnd], 0.15)
-
-      else
         getXForBucket = d3.scale.ordinal()
           .domain(bucketNames)
           .rangeRoundBands([0,xRangeEnd], 0.05)
@@ -185,15 +173,6 @@ glados.useNameSpace 'glados.views.Visualisation',
         .domain([0, _.max(bucketSizes)])
         .range([BARS_MIN_HEIGHT, BARS_CONTAINER_HEIGHT])
 
-
-      if @config.histogram
-        barGroups = barsContainerG.selectAll('.bar-group')
-          .data(buckets)
-          .enter()
-          .append('g')
-          .classed('bar-group', true)
-          .attr('transform', (b, i) -> 'translate(' + getXForBucket(oneValueNames[i]) + ')')
-      else
         barGroups = barsContainerG.selectAll('.bar-group')
           .data(buckets)
           .enter()
@@ -242,9 +221,11 @@ glados.useNameSpace 'glados.views.Visualisation',
           rangeText = d.key
 
         if thisView.config.histogram
-          rangeText = oneValueNames[i]
+          rangeText = d.key.split '.'
+          rangeText = rangeText[0]
 
-        text = '<b>' + rangeText + '</b>' + ":" + d.doc_count
+
+        text = '<b>' + rangeText + '</b>' + ": " + d.doc_count
 
         $(@).qtip
           content:
