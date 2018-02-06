@@ -87,7 +87,7 @@ glados.useNameSpace 'glados.models.Aggregations',
       aggsConfig = @get('aggs_config')
       aggs = aggsConfig.aggs
       for aggKey, aggDescription of aggs
-        if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE
+        if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE or glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
           return true
       return false
 
@@ -175,7 +175,7 @@ glados.useNameSpace 'glados.models.Aggregations',
       aggs = aggsConfig.aggs
       for aggKey, aggDescription of aggs
 
-        if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE
+        if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE or glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
           minAggName = @getMinAggName(aggKey)
           currentAggReceivedMin = receivedAggsInfo[minAggName].value
           aggDescription.min_value = currentAggReceivedMin
@@ -208,7 +208,7 @@ glados.useNameSpace 'glados.models.Aggregations',
         # ---------------------------------------------------------------------
         # Parsing by type
         # ---------------------------------------------------------------------
-        if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE
+        if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE or glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
 
           currentBuckets = receivedAggsInfo[aggKey].buckets
           bucketsList = glados.Utils.Buckets.getBucketsList(currentBuckets)
@@ -300,7 +300,7 @@ glados.useNameSpace 'glados.models.Aggregations',
 
       aggs = aggsConfig.aggs
       for aggKey, aggDescription of aggs
-        if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE
+        if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE or glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
           minAggName = @getMinAggName(aggKey)
           aggsData[minAggName] =
             min:
@@ -360,12 +360,17 @@ glados.useNameSpace 'glados.models.Aggregations',
                 _count: 'desc'
 
         else if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
+          minValue = aggDescription.min_value
+          maxValue = aggDescription.max_value
+          numCols = aggDescription.num_columns
+
           aggsData[aggKey] =
-            terms:
+            histogram:
               field: aggDescription.field
+              interval: aggDescription.interval
+              keyed: true
 
       queryData = @get('query')
-
 
       return {
         size: 0

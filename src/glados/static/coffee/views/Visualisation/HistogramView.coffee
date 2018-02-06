@@ -13,10 +13,10 @@ glados.useNameSpace 'glados.views.Visualisation',
         @paintNumBarsRange()
       @showPreloader()
 
-    events:
-      'change .BCK-ESResultsPlot-selectXAxis': 'handleXAxisPropertyChange'
-      'change .BCK-ESResultsPlot-selectXAxis-numBars input': 'handleNumColumnsChange'
-      'change .BCK-ESResultsPlot-selectXAxis-binSize input': 'handleBinSizeChange'
+#    events:
+#      'change .BCK-ESResultsPlot-selectXAxis': 'handleXAxisPropertyChange'
+#      'change .BCK-ESResultsPlot-selectXAxis-numBars input': 'handleNumColumnsChange'
+#      'change .BCK-ESResultsPlot-selectXAxis-binSize input': 'handleBinSizeChange'
 
     showPreloader: ->
       if @config.big_size

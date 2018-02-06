@@ -28,7 +28,7 @@ class MainPageApp
     MainPageApp.initPapersPerYear()
 
 # ---------------- Aggregation -------------- #
-  @getDocumentsPerYearAgg = (minCols=1, maxCols=40, defaultCols=40) ->
+  @getDocumentsPerYearAgg = (defaultInterval=1) ->
 
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
@@ -38,11 +38,12 @@ class MainPageApp
     aggsConfig =
       aggs:
         x_axis_agg:
-          field: 'year'
           type: glados.models.Aggregations.Aggregation.AggTypes.RANGE
-          min_columns: minCols
-          max_columns: maxCols
-          num_columns: defaultCols
+          field: 'year'
+          interval: defaultInterval
+          min_columns: 40
+          max_columns: 40
+          num_columns: 40
 
     allDocumentsByYear = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.DOCUMENT_INDEX_URL
