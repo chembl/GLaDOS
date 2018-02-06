@@ -3191,17 +3191,19 @@ span.badge-primary-color-no-float {
 
   .x-axis, .y-axis {
     .axis-line {
-      stroke-width: 1;
-      stroke: black;
+      stroke-width: 0.5;
+      stroke: grey;
+
     }
     .property-label {
       font-size: 80%;
     }
     .tick {
-      font-size: 80%;
+      font-size: 60%;
+
       .axis-helper-line {
-        stroke-width: 1;
-        stroke: color('grey', 'lighten-1');
+        stroke-width: 0.5;
+        stroke: grey;
       }
       .rotated {
         font-size: 70%;
@@ -3210,12 +3212,16 @@ span.badge-primary-color-no-float {
     path {
       display: none;
     }
+
+    text {
+      fill: grey;
+    }
   }
 
   .y-axis {
     .tick {
       line {
-        stroke-width: 1;
+        stroke-width: 0.1;
         stroke: color('grey', 'lighten-1');
       }
     }
@@ -3384,6 +3390,7 @@ $facets-width-large: 21%;
       cursor: pointer;
       .value-bar {
         fill: color($primary-color-name, 'lighten-4');
+
       }
       .key-text {
         font-size: 80%;

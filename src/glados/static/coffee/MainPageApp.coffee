@@ -60,7 +60,7 @@ class MainPageApp
       big_size: true
       paint_axes_selectors: true
       properties:
-        count: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('DocumentAggregation', 'HIT_COUNT')
+        count: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('DocumentAggregation', 'YEAR')
       initial_property_x: 'count'
       x_axis_options: ['count']
       x_axis_min_columns: 1

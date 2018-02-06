@@ -175,7 +175,7 @@ glados.useNameSpace 'glados.views.Visualisation',
 
         getXForBucket = d3.scale.ordinal()
         .domain(oneValueNames)
-        .rangeRoundBands([0,xRangeEnd], 0.05)
+        .rangeRoundBands([0,xRangeEnd], 0.15)
 
       else
         getXForBucket = d3.scale.ordinal()
@@ -298,15 +298,21 @@ glados.useNameSpace 'glados.views.Visualisation',
         .attr('y', X_AXIS_HEIGHT*(3/4))
         .classed('property-label', true)
 
-      formatAsYear = d3.format("1999")
+
       xAxis = d3.svg.axis()
         .scale(getXForBucket)
 
       if @.config.histogram
+        formatAsYear = d3.format("1999")
         xAxis.tickFormat(formatAsYear)
 
       xAxisContainerG.call(xAxis)
-      @rotateXAxisTicksIfNeeded(xAxisContainerG, getXForBucket)
+
+      if @config.histogram
+        xAxisContainerG.selectAll('.tick text')
+            .attr('transform', 'translate(-10,20)rotate(-90)')
+      else
+        @rotateXAxisTicksIfNeeded(xAxisContainerG, getXForBucket)
 
       yAxisContainerG = mainSVGContainer.append('g')
         .attr('transform', 'translate(' + Y_AXIS_WIDTH + ',' + (TITLE_Y + TITLE_Y_PADDING) + ')')
@@ -327,10 +333,13 @@ glados.useNameSpace 'glados.views.Visualisation',
         .orient('left')
 
       yAxisContainerG.call(yAxis)
-      yAxisContainerG.selectAll('.tick line')
-        .attr("stroke-dasharray", "4,10")
-      # remove first tick line, was not able to do it with css
-      yAxisContainerG.select('.tick line').style('display', 'none')
+      if @config.histogram
+        yAxisContainerG.selectAll('.tick line').style('display', 'none')
+      else
+        yAxisContainerG.selectAll('.tick line')
+          .attr("stroke-dasharray", "4,10")
+        # remove first tick line, was not able to do it with css
+        yAxisContainerG.select('.tick line').style('display', 'none')
 
     rotateXAxisTicksIfNeeded: (xAxisContainerG, getXForBucket) ->
       # check if ticks are too big
@@ -365,7 +374,6 @@ glados.useNameSpace 'glados.views.Visualisation',
           ticksContainerGs.append('line')
             .classed('axis-helper-line', true)
             .attr('y2', h)
-
 
 
 

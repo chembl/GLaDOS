@@ -48,9 +48,9 @@ glados.useNameSpace 'glados.models.visualisation',
             true: 'Yes'
     DocumentAggregation:
       Properties:
-        HIT_COUNT:
-          propName: 'hit_count'
-          label: 'Hit Count'
+        YEAR:
+          propName: 'year'
+          label: 'Year'
           type: Number
     Target:
       esIndex:'chembl_target'
