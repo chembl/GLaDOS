@@ -55,7 +55,7 @@ glados.useNameSpace 'glados',
         when entityName == Target.prototype.entityName.toLowerCase() then Target
         when entityName == Assay.prototype.entityName.toLowerCase() then Assay
         when entityName == Document.prototype.entityName.toLowerCase() then Document
-        when entityName == CellLine.prototype.entityName.toLowerCase() then CellLine
+        when entityName == CellLine.prototype.entityName.toLowerCase() or entityName == 'cell' then CellLine
         when entityName == glados.models.Tissue.prototype.entityName.toLowerCase() then glados.models.Tissue
 
     # Will round a number to the closest 10*, 20* or 50*
