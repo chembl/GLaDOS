@@ -37,19 +37,17 @@ class MainPageApp
 
     aggsConfig =
       aggs:
-        x_axis_agg:
+        documentsPerYear:
           type: glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
           field: 'year'
-          interval: defaultInterval
-          min_columns: 43
-          max_columns: 43
-          num_columns: 43
+          default_interval_size: defaultInterval
+          min_interval_size: 1
+          max_interval_size: 10
           aggs:
             split_series_agg:
-              terms:
-                type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
-                field: 'journal'
-                size: 5
+              type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+              field: 'journal'
+              size: 5
 
     allDocumentsByYear = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.DOCUMENT_INDEX_URL
