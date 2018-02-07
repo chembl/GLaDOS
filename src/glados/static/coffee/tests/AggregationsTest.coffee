@@ -344,6 +344,16 @@ describe 'Aggregation', ->
       expect(parsedObj.documentsPerYear.min_bin_size).toBe(minIntervalSize)
       expect(parsedObj.documentsPerYear.max_bin_size).toBe(maxIntervalSize)
 
+    it 'changes the bin size for an aggregation', ->
+
+      newBinSize = 8
+      allDocumentsByYear.changeBinSizeForAggregation('documentsPerYear', newBinSize)
+
+      aggsConfigGot = allDocumentsByYear.get('aggs_config').aggs.documentsPerYear
+      aggConfigGot = aggsConfigGot
+      expect(aggConfigGot.bin_size).toBe(newBinSize)
+      expect(aggConfigGot.intervals_set_by_bin_size).toBe(true)
+
 
 
 

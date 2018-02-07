@@ -383,10 +383,15 @@ glados.useNameSpace 'glados.models.Aggregations',
 
         else if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
 
+          if aggDescription.bin_size?
+            binSize = aggDescription.bin_size
+          else
+            binSize = aggDescription.default_interval_size
+
           aggsData[aggKey] =
             histogram:
               field: aggDescription.field
-              interval: aggDescription.default_interval_size
+              interval: binSize
               keyed: true
 
         #recursion
