@@ -63,7 +63,7 @@ class MainPageApp
     allDocumentsByYear = MainPageApp.getDocumentsPerYearAgg()
 
     histogramConfig =
-      histogram: true
+      stacked_histogram: true
       big_size: true
       paint_axes_selectors: true
       properties:
@@ -73,7 +73,7 @@ class MainPageApp
       x_axis_min_columns: 1
       x_axis_max_columns: 40
       x_axis_initial_num_columns: 40
-      x_axis_prop_name: 'x_axis_agg'
+      x_axis_prop_name: 'documentsPerYear'
       title: 'Documents by Year'
 
     new glados.views.Visualisation.HistogramView

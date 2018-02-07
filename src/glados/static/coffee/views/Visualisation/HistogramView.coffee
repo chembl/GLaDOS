@@ -236,7 +236,7 @@ glados.useNameSpace 'glados.views.Visualisation',
         else
           rangeText = d.key
 
-        if thisView.config.histogram
+        if thisView.config.stacked_histogram
           rangeText = d.key.split '.'
           rangeText = rangeText[0]
 
@@ -304,13 +304,13 @@ glados.useNameSpace 'glados.views.Visualisation',
       xAxis = d3.svg.axis()
         .scale(getXForBucket)
 
-      if @.config.histogram
+      if @config.stacked_histogram
         formatAsYear = d3.format("1999")
         xAxis.tickFormat(formatAsYear)
 
       xAxisContainerG.call(xAxis)
 
-      if @config.histogram
+      if @config.stacked_histogram
         xAxisContainerG.selectAll('.tick text')
             .attr('transform', 'translate(-10,20)rotate(-90)')
       else
@@ -335,7 +335,7 @@ glados.useNameSpace 'glados.views.Visualisation',
         .orient('left')
 
       yAxisContainerG.call(yAxis)
-      if @config.histogram
+      if @config.stacked_histogram
         yAxisContainerG.selectAll('.tick line').style('display', 'none')
       else
         yAxisContainerG.selectAll('.tick line')
