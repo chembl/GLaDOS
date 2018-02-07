@@ -16,7 +16,22 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
     # Parse/Fetch Collection data
     # ------------------------------------------------------------------------------------------------------------------
-    
+
+    simplifyHighlights: (highlights)->
+      simplifiedHL = {}
+      for propPath in _.keys(highlights)
+        hlData = highlights[propPath]
+        for suffixJ in glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_SUFFIXES_TO_REMOVE
+          if propPath.endsWith suffixJ
+            propPath = propPath.replace new RegExp('\.'+suffixJ+'$'), ''
+        if not _.has simplifiedHL, propPath
+          simplifiedHL[propPath] = new Set()
+        for hlK in hlData
+          simplifiedHL[propPath].add hlK
+      for propPath in _.keys(simplifiedHL)
+        simplifiedHL[propPath] = Array.from(simplifiedHL[propPath]).join(' . . . . ')
+      return simplifiedHL
+
     # Parses the Elastic Search Response and resets the pagination metadata
     parse: (data) ->
 
@@ -40,6 +55,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         curPageResultsIds[hitI._id] = true
 
         currentItemData = hitI._source
+        currentItemData._highlights = if hitI.highlight? then @simplifyHighlights(hitI.highlight) else null
         currentItemData._score = hitI._score
 
         if not currentItemData._score? and scores?
@@ -248,9 +264,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     addHighlightsToQuery: (esQuery)->
       esQuery.highlight = {
+        order: "score"
+        fragment_size: 150
+        number_of_fragments: 3
+        fragmenter: "simple"
+        pre_tags: ["<em class=\"glados-result-hightlight\">"]
+        post_tags: ["</em>"]
+        type: "fvh"
         fields:
-          '*':
-            type: 'fvh'
+          '*': {}
       }
 
     addSortingToQuery: (esQuery) ->
@@ -834,3 +856,5 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           $progressElement.html Handlebars.compile($('#Handlebars-Common-CollectionErrorMsg').html())
             msg: msg
       )
+  ,
+    HIGHLIGHT_SUFFIXES_TO_REMOVE: ['eng_analyzed', 'ws_analyzed', 'std_analyzed', 'alphanumeric_lowercase_keyword']
