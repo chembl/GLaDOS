@@ -8,7 +8,6 @@ glados.useNameSpace 'glados.models.Aggregations',
       @url = @get('index_url')
       @set('state', glados.models.Aggregations.Aggregation.States.INITIAL_STATE)
       @loadQuery()
-#      console.log "subAggs", @getSubAggregations()
 
     loadQuery: ->
       queryConfig = @get('query_config')
@@ -383,7 +382,6 @@ glados.useNameSpace 'glados.models.Aggregations',
 
         if @getSubAggregations()?
           console.log "subAggs", @getSubAggregations()
-
 
       queryData = @get('query')
 
