@@ -175,8 +175,8 @@ glados.useNameSpace 'glados',
 
         #remove this if no need for old
 
-        col_value = glados.Utils.getNestedValue(model.attributes, colDescription.comparator, forceAsNumber=false,
-        customNullValueLabel=colDescription.custom_null_vale_label)
+        col_value = glados.Utils.getNestedValue(model.attributes, colDescription.comparator, forceAsNumber=false,\
+          customNullValueLabel=colDescription.custom_null_vale_label)
 
         returnCol['format_class'] = colDescription.format_class
 
@@ -239,6 +239,12 @@ glados.useNameSpace 'glados',
         if _.has(colDescription, 'custom_field_template')
           returnCol['custom_html'] = Handlebars.compile(colDescription['custom_field_template'])
             val: returnCol['value']
+
+        # Include highlight data in the column
+        returnCol.has_highlight = model.get('_highlights')? and\
+            _.has(model.get('_highlights'), colDescription.comparator)
+        if returnCol.has_highlight
+          returnCol.highlighted_value = model.get('_highlights')[colDescription.comparator]
 
         # This method should return a value based on the parameter, not modify the parameter
         return returnCol
