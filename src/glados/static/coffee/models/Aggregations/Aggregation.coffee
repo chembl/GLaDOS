@@ -39,14 +39,6 @@ glados.useNameSpace 'glados.models.Aggregations',
       return aggsConfig.aggs[aggName]
 
 
-#    Get sub aggregations
-    getSubAggregations: () ->
-      aggs = @get('aggs_config').aggs
-      for aggKey, aggDescription of aggs
-        subAggs = aggs.aggs
-      if subAggs?
-        return subAggs
-
 
     #-------------------------------------------------------------------------------------------------------------------
     # Changing configuration
@@ -334,12 +326,10 @@ glados.useNameSpace 'glados.models.Aggregations',
     getMinAggName: (aggKey) -> aggKey + '_min'
     getMaxAggName: (aggKey) -> aggKey + '_max'
 
-    getRequestData: ->
-
-      aggsData = {}
-      aggsConfig = @get('aggs_config')
+    addAggregationsData: (aggsData, aggsConfig) ->
 
       aggs = aggsConfig.aggs
+
       for aggKey, aggDescription of aggs
         if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE
 
@@ -370,9 +360,6 @@ glados.useNameSpace 'glados.models.Aggregations',
                 _count: 'desc'
 
         else if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
-          minValue = aggDescription.min_value
-          maxValue = aggDescription.max_value
-          numCols = aggDescription.num_columns
 
           aggsData[aggKey] =
             histogram:
@@ -380,8 +367,21 @@ glados.useNameSpace 'glados.models.Aggregations',
               interval: aggDescription.interval
               keyed: true
 
-        if @getSubAggregations()?
-          console.log "subAggs", @getSubAggregations()
+        #recursion
+        internalAggs = aggDescription.aggs
+
+        if internalAggs?
+
+          aggsData[aggKey].aggs = {}
+          aggsConfig = aggs[aggKey]
+          @addAggregationsData(aggsData[aggKey].aggs, aggsConfig)
+
+    getRequestData: ->
+
+      aggsData = {}
+      aggsConfig = @get('aggs_config')
+      @addAggregationsData(aggsData, aggsConfig)
+
 
       queryData = @get('query')
 

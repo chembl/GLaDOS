@@ -269,6 +269,7 @@ describe 'Aggregation', ->
     bucketsTestData = undefined
     indexUrl = glados.models.Aggregations.Aggregation.DOCUMENT_INDEX_URL
     currentField = 'year'
+    currentInternalField = 'journal'
 
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
@@ -281,11 +282,10 @@ describe 'Aggregation', ->
           type: glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
           field: currentField
           interval: 1
-        aggs:
-          split_series_agg:
-            terms:
+          aggs:
+            split_series_agg:
               type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
-              field: 'journal'
+              field: currentInternalField
               size: 5
 
     beforeAll (done) ->
@@ -304,10 +304,16 @@ describe 'Aggregation', ->
       testQueryString(queryStringMustBe, allDocumentsByYear, indexUrl)
 
     it 'Generates the request data', ->
-
       requestData = allDocumentsByYear.getRequestData()
-      console.log 'requestData: ', requestData
       expect(requestData.aggs.documentsPerYear.histogram.field).toBe(currentField)
+      expect(requestData.aggs.documentsPerYear.aggs?).toBe(true)
+
+      splitSeriesAgg = requestData.aggs.documentsPerYear.aggs.split_series_agg
+      expect(splitSeriesAgg?).toBe(true)
+      expect(splitSeriesAgg.terms.field).toBe(currentInternalField)
+      expect(splitSeriesAgg.terms.size).toBe(5)
+
+
 
 
 
