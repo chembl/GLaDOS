@@ -268,7 +268,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         fragment_size: 150
         number_of_fragments: 3
         fragmenter: "simple"
-        pre_tags: ["<em class=\"glados-result-hightlight\">"]
+        pre_tags: ["<em class=\"glados-result-highlight\">"]
         post_tags: ["</em>"]
         type: "fvh"
         fields:
