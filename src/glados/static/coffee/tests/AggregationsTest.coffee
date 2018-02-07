@@ -1,4 +1,20 @@
 describe 'Aggregation', ->
+  #---------------------------------------------------------------------------------------------------------------------
+  # generic test functions
+  #---------------------------------------------------------------------------------------------------------------------
+  testQueryString = (queryStringMustBe, aggregation, indexUrl) ->
+
+      expect(aggregation.url).toBe(indexUrl)
+      expect(aggregation.get('state'))\
+        .toBe(glados.models.Aggregations.Aggregation.States.INITIAL_STATE)
+
+      queryGot = aggregation.get('query')
+      expect(queryGot.query_string?).toBe(true)
+      expect(queryGot.query_string.query).toBe(queryStringMustBe)
+
+  #---------------------------------------------------------------------------------------------------------------------
+  # tests
+  #---------------------------------------------------------------------------------------------------------------------
   describe '1. with a numeric property (Associated compounds for a target)', ->
     associatedCompounds = undefined
     minMaxTestData = undefined
@@ -208,14 +224,7 @@ describe 'Aggregation', ->
     it 'initializes correctly', ->
 
       queryStringMustBe = 'target_chembl_id:CHEMBL2111342'
-
-      expect(associatedBioactivities.url).toBe(indexUrl)
-      expect(associatedBioactivities.get('state'))\
-        .toBe(glados.models.Aggregations.Aggregation.States.INITIAL_STATE)
-
-      queryGot = associatedBioactivities.get('query')
-      expect(queryGot.query_string?).toBe(true)
-      expect(queryGot.query_string.query).toBe(queryStringMustBe)
+      testQueryString(queryStringMustBe, associatedBioactivities, indexUrl)
 
     it 'Knows that it does not need to get Min and Max', ->
       expect(associatedBioactivities.needsMinAndMax()).toBe(false)
@@ -252,6 +261,55 @@ describe 'Aggregation', ->
       for bucketShouldBe in bucketsShouldBe
         keyShouldBe = bucketShouldBe.key
         expect(bucketIndexGot[keyShouldBe].key).toBe(keyShouldBe)
+
+
+  describe '3. histogram aggregation stacked (All Documents produced per year)', ->
+
+    allDocumentsByYear = undefined
+    bucketsTestData = undefined
+    indexUrl = glados.models.Aggregations.Aggregation.DOCUMENT_INDEX_URL
+    currentField = 'year'
+
+    queryConfig =
+      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
+      query_string_template: '*'
+      template_data: {}
+
+    aggsConfig =
+      aggs:
+        documentsPerYear:
+          type: glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
+          field: currentField
+          interval: 1
+        aggs:
+          split_series_agg:
+            terms:
+              type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+              field: 'journal'
+              size: 5
+
+    beforeAll (done) ->
+      allDocumentsByYear = new glados.models.Aggregations.Aggregation
+        index_url: indexUrl
+        query_config: queryConfig
+        aggs_config: aggsConfig
+        test_mode: true
+
+      $.get (glados.Settings.STATIC_URL + 'testData/AggregationBucketsSampleResponseSc2.json'), (testData) ->
+        bucketsTestData = testData
+        done()
+
+    it 'initializes correctly', ->
+      queryStringMustBe = '*'
+      testQueryString(queryStringMustBe, allDocumentsByYear, indexUrl)
+
+    it 'Generates the request data', ->
+
+      requestData = allDocumentsByYear.getRequestData()
+      console.log 'requestData: ', requestData
+      expect(requestData.aggs.documentsPerYear.histogram.field).toBe(currentField)
+
+
 
 
 

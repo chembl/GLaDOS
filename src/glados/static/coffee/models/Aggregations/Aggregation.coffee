@@ -97,7 +97,7 @@ glados.useNameSpace 'glados.models.Aggregations',
       aggsConfig = @get('aggs_config')
       aggs = aggsConfig.aggs
       for aggKey, aggDescription of aggs
-        if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE or aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
+        if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE
           return true
       return false
 
@@ -185,7 +185,7 @@ glados.useNameSpace 'glados.models.Aggregations',
       aggs = aggsConfig.aggs
       for aggKey, aggDescription of aggs
 
-        if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE or aggDescription.type ==glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
+        if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE
           minAggName = @getMinAggName(aggKey)
           currentAggReceivedMin = receivedAggsInfo[minAggName].value
           aggDescription.min_value = currentAggReceivedMin

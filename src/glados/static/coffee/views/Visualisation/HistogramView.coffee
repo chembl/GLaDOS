@@ -126,6 +126,7 @@ glados.useNameSpace 'glados.views.Visualisation',
         RIGHT_PADDING = 20
         X_AXIS_HEIGHT = 100
         Y_AXIS_WIDTH = 60
+
       else
         TITLE_Y = 10
         TITLE_Y_PADDING = 5
@@ -139,9 +140,11 @@ glados.useNameSpace 'glados.views.Visualisation',
 
       BARS_MIN_HEIGHT = 2
 
+      LEGEND_WIDTH = VISUALISATION_WIDTH * 0.1
       BARS_CONTAINER_HEIGHT = VISUALISATION_HEIGHT - TITLE_Y - TITLE_Y_PADDING - X_AXIS_HEIGHT
-      BARS_CONTAINER_WIDTH = VISUALISATION_WIDTH - Y_AXIS_WIDTH - RIGHT_PADDING
+      BARS_CONTAINER_WIDTH = (VISUALISATION_WIDTH - Y_AXIS_WIDTH - RIGHT_PADDING) - LEGEND_WIDTH
       X_AXIS_TRANS_Y =  BARS_CONTAINER_HEIGHT + TITLE_Y + TITLE_Y_PADDING
+
 
       #-------------------------------------------------------------------------------------------------------------------
       # add histogram bars container
@@ -152,6 +155,18 @@ glados.useNameSpace 'glados.views.Visualisation',
         .attr('height', BARS_CONTAINER_HEIGHT)
         .attr('width', BARS_CONTAINER_WIDTH)
         .classed('bars-background', true)
+
+      #-------------------------------------------------------------------------------------------------------------------
+      # add legend container
+      #-------------------------------------------------------------------------------------------------------------------
+      legendContainerG = mainSVGContainer.append('g')
+        .attr('transform', 'translate('+ (Y_AXIS_WIDTH + BARS_CONTAINER_WIDTH) + ',' + (TITLE_Y + TITLE_Y_PADDING) + ')')
+      legendContainerG.append('rect')
+        .attr('height', BARS_CONTAINER_HEIGHT)
+        .attr('width', LEGEND_WIDTH)
+        .attr('fill', "red")
+        .classed('legend-container', true)
+#        .call(d3.legend)
 
       #-------------------------------------------------------------------------------------------------------------------
       # add histogram bars groups
@@ -179,6 +194,7 @@ glados.useNameSpace 'glados.views.Visualisation',
         .append('g')
         .classed('bar-group', true)
         .attr('transform', (b) -> 'translate(' + getXForBucket(b.key) + ')')
+#        .attr("data-legend",(b) ->  return b.key)
 
       barGroups.append('rect')
         .attr('height', BARS_CONTAINER_HEIGHT)

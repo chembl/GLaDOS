@@ -1,0 +1,93 @@
+{
+  "took": 5,
+  "timed_out": false,
+  "_shards": {
+    "total": 1,
+    "successful": 1,
+    "failed": 0
+  },
+  "hits": {
+    "total": 34298,
+    "max_score": 0,
+    "hits": []
+  },
+  "aggregations": {
+    "x_axis_agg": {
+      "buckets": [
+        {
+          "key": 1992,
+          "doc_count": 958
+        },
+        {
+          "key": 1993,
+          "doc_count": 1000
+        },
+        {
+          "key": 1994,
+          "doc_count": 1099
+        },
+        {
+          "key": 1995,
+          "doc_count": 1169
+        },
+        {
+          "key": 1996,
+          "doc_count": 1244
+        },
+        {
+          "key": 1997,
+          "doc_count": 1159
+        },
+        {
+          "key": 1998,
+          "doc_count": 1371
+        },
+        {
+          "key": 1999,
+          "doc_count": 1410
+        },
+        {
+          "key": 2000,
+          "doc_count": 1428
+        },
+        {
+          "key": 2001,
+          "doc_count": 1441
+        },
+        {
+          "key": 2002,
+          "doc_count": 1662
+        },
+        {
+          "key": 2003,
+          "doc_count": 1780
+        },
+        {
+          "key": 2004,
+          "doc_count": 2106
+        },
+        {
+          "key": 2005,
+          "doc_count": 2009
+        },
+        {
+          "key": 2006,
+          "doc_count": 2133
+        },
+        {
+          "key": 2007,
+          "doc_count": 3823
+        },
+        {
+          "key": 2008,
+          "doc_count": 4063
+        },
+        {
+          "key": 2009,
+          "doc_count": 4443
+        }
+      ]
+    }
+  },
+  "status": 200
+}
