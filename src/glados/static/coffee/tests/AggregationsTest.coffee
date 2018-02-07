@@ -270,6 +270,11 @@ describe 'Aggregation', ->
     indexUrl = glados.models.Aggregations.Aggregation.DOCUMENT_INDEX_URL
     currentField = 'year'
     currentInternalField = 'journal'
+    defaultIntervalSize = 1
+    defaultSplitSeriesSize = 5
+    minIntervalSize = 1
+    maxIntervalSize = 10
+
 
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
@@ -281,12 +286,14 @@ describe 'Aggregation', ->
         documentsPerYear:
           type: glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
           field: currentField
-          interval: 1
+          default_interval_size: defaultIntervalSize
+          min_interval_size: minIntervalSize
+          max_interval_size: maxIntervalSize
           aggs:
             split_series_agg:
               type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
               field: currentInternalField
-              size: 5
+              size: defaultSplitSeriesSize
 
     beforeAll (done) ->
       allDocumentsByYear = new glados.models.Aggregations.Aggregation
@@ -295,7 +302,7 @@ describe 'Aggregation', ->
         aggs_config: aggsConfig
         test_mode: true
 
-      $.get (glados.Settings.STATIC_URL + 'testData/AggregationBucketsSampleResponseSc2.json'), (testData) ->
+      $.get (glados.Settings.STATIC_URL + 'testData/AggregationBucketsSampleHistogram.json'), (testData) ->
         bucketsTestData = testData
         done()
 
@@ -306,12 +313,39 @@ describe 'Aggregation', ->
     it 'Generates the request data', ->
       requestData = allDocumentsByYear.getRequestData()
       expect(requestData.aggs.documentsPerYear.histogram.field).toBe(currentField)
+      expect(requestData.aggs.documentsPerYear.histogram.interval).toBe(defaultIntervalSize)
       expect(requestData.aggs.documentsPerYear.aggs?).toBe(true)
 
       splitSeriesAgg = requestData.aggs.documentsPerYear.aggs.split_series_agg
       expect(splitSeriesAgg?).toBe(true)
       expect(splitSeriesAgg.terms.field).toBe(currentInternalField)
-      expect(splitSeriesAgg.terms.size).toBe(5)
+      expect(splitSeriesAgg.terms.size).toBe(defaultSplitSeriesSize)
+
+    it 'Knows that it does not need to get Min and Max', ->
+      expect(allDocumentsByYear.needsMinAndMax()).toBe(false)
+
+    it 'parses the bucket data', ->
+
+      parsedObj = allDocumentsByYear.parse(bucketsTestData)
+      console.log ' parsedObj: ',  parsedObj
+      bucketsShouldBe = bucketsTestData.aggregations.documentsPerYear.buckets
+      bucketsGot = parsedObj.documentsPerYear.buckets
+
+      console.log 'bucketsShouldBe: ', bucketsShouldBe
+      console.log 'bucketsGot: ', bucketsGot
+
+      for key, bucket of bucketsGot
+        keyGot = bucket.key
+        bucketShouldBe = bucketsShouldBe[keyGot]
+        expect(bucketShouldBe?).toBe(true)
+
+      expect(parsedObj.documentsPerYear.num_columns).toBe(Object.keys(bucketsShouldBe).length)
+      expect(parsedObj.documentsPerYear.bin_size).toBe(defaultIntervalSize)
+      expect(parsedObj.documentsPerYear.min_bin_size).toBe(minIntervalSize)
+      expect(parsedObj.documentsPerYear.max_bin_size).toBe(maxIntervalSize)
+
+
+
 
 
 

@@ -113,6 +113,7 @@ glados.useNameSpace 'glados.models.Aggregations',
       @set('state', glados.models.Aggregations.Aggregation.States.LOADING_BUCKETS)
 
       esJSONRequest = JSON.stringify(@getRequestData())
+      console.log 'esJSONRequest', esJSONRequest
 
       fetchESOptions =
         url: @url
@@ -210,7 +211,7 @@ glados.useNameSpace 'glados.models.Aggregations',
         # ---------------------------------------------------------------------
         # Parsing by type
         # ---------------------------------------------------------------------
-        if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE or aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
+        if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE
 
           currentBuckets = receivedAggsInfo[aggKey].buckets
           bucketsList = glados.Utils.Buckets.getBucketsList(currentBuckets)
@@ -241,6 +242,27 @@ glados.useNameSpace 'glados.models.Aggregations',
             buckets: currentBuckets
             num_columns: currentNumCols
             buckets_index: _.indexBy(currentBuckets, 'key')
+
+        else if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
+
+          currentBuckets = receivedAggsInfo[aggKey].buckets
+          bucketsList = glados.Utils.Buckets.getBucketsList(currentBuckets)
+          currentNumCols = bucketsList.length
+
+          currentMinValue = aggDescription.min_value
+          currentMaxValue = aggDescription.max_value
+
+          intervalSize = glados.Utils.Buckets.getIntervalSize(currentMaxValue, currentMinValue, currentNumCols)
+
+          @parseBucketsLink(aggDescription, bucketsList)
+
+          bucketsData[aggKey] =
+            buckets: bucketsList
+            num_columns: currentNumCols
+            bin_size: aggDescription.default_interval_size
+            min_bin_size: aggDescription.min_interval_size
+            max_bin_size: aggDescription.max_interval_size
+
 
       return bucketsData
 
@@ -364,7 +386,7 @@ glados.useNameSpace 'glados.models.Aggregations',
           aggsData[aggKey] =
             histogram:
               field: aggDescription.field
-              interval: aggDescription.interval
+              interval: aggDescription.default_interval_size
               keyed: true
 
         #recursion
