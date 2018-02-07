@@ -327,7 +327,7 @@
       {{#each columns}}
 
         {{#if this.has_highlight}}
-          {{{this.highlighted_value}}}
+          <small><p><b>{{this.name_to_show}}:</b>{{{this.highlighted_value}}}</p></small>
         {{else if this.has_link}}
 
         {{#if this.is_secondary_link}}
@@ -390,7 +390,7 @@
         </div>
         {{#each columns}}
           {{#if this.has_highlight}}
-            {{{this.highlighted_value}}}
+            <small><p><b>{{this.name_to_show}}:</b>{{{this.highlighted_value}}}</p></small>
           {{else if this.has_link}}
             <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a></p>
           {{else}}
@@ -463,7 +463,7 @@
           {{#each columns}}
 
             {{#if this.has_highlight}}
-              {{{this.highlighted_value}}}
+              <small><p><b>{{this.name_to_show}}:</b>{{{this.highlighted_value}}}</p></small>
             {{else if this.has_link}}
 
             {{#if this.is_secondary_link}}
@@ -501,7 +501,7 @@
           {{#each columns}}
 
           {{#if this.has_highlight}}
-            {{{this.highlighted_value}}}
+            <small><p><b>{{this.name_to_show}}:</b>{{{this.highlighted_value}}}</p></small>
           {{else if this.has_link}}
 
           <p><a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
@@ -541,7 +541,7 @@
       {{#each columns}}
 
         {{#if this.has_highlight}}
-          {{{this.highlighted_value}}}
+          <small><p><b>{{this.name_to_show}}:</b>{{{this.highlighted_value}}}</p></small>
         {{else if this.has_link}}
 
         {{#if this.is_secondary_link}}
@@ -582,7 +582,7 @@
           {{#each columns}}
 
           {{#if this.has_highlight}}
-            {{{this.highlighted_value}}}
+            <small><p><b>{{this.name_to_show}}:</b>{{{this.highlighted_value}}}</p></small>
           {{else if this.has_link}}
 
             {{#if this.is_secondary_link}}
