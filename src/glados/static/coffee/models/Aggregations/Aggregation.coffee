@@ -113,7 +113,6 @@ glados.useNameSpace 'glados.models.Aggregations',
       @set('state', glados.models.Aggregations.Aggregation.States.LOADING_BUCKETS)
 
       esJSONRequest = JSON.stringify(@getRequestData())
-      console.log 'esJSONRequest', esJSONRequest
 
       fetchESOptions =
         url: @url
@@ -199,21 +198,17 @@ glados.useNameSpace 'glados.models.Aggregations',
       return aggsConfig
 
 
-    parse: (data) ->
+    loadBuckets: (bucketsData, newAggsConfig, receivedAggsInfo) ->
 
-      bucketsData = {}
-      aggsConfig = @get('aggs_config')
-      receivedAggsInfo = data.aggregations
-
-      aggs = aggsConfig.aggs
+      aggs = newAggsConfig.aggs
       for aggKey, aggDescription of aggs
 
+        currentBuckets = receivedAggsInfo[aggKey].buckets
         # ---------------------------------------------------------------------
         # Parsing by type
         # ---------------------------------------------------------------------
         if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE
 
-          currentBuckets = receivedAggsInfo[aggKey].buckets
           bucketsList = glados.Utils.Buckets.getBucketsList(currentBuckets)
           currentNumCols = bucketsList.length
 
@@ -226,6 +221,7 @@ glados.useNameSpace 'glados.models.Aggregations',
 
           bucketsData[aggKey] =
             buckets: bucketsList
+            buckets_index: currentBuckets
             num_columns: currentNumCols
             bin_size: intervalSize
             min_bin_size: aggDescription.min_bin_size
@@ -233,19 +229,18 @@ glados.useNameSpace 'glados.models.Aggregations',
 
         else if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.TERMS
 
-          currentBuckets = receivedAggsInfo[aggKey].buckets
           currentNumCols = currentBuckets.length
 
           @parseBucketsLink(aggDescription, currentBuckets)
 
           bucketsData[aggKey] =
             buckets: currentBuckets
+            buckets_index: currentBuckets
             num_columns: currentNumCols
             buckets_index: _.indexBy(currentBuckets, 'key')
 
         else if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
 
-          currentBuckets = receivedAggsInfo[aggKey].buckets
           bucketsList = glados.Utils.Buckets.getBucketsList(currentBuckets)
           currentNumCols = bucketsList.length
 
@@ -258,11 +253,26 @@ glados.useNameSpace 'glados.models.Aggregations',
 
           bucketsData[aggKey] =
             buckets: bucketsList
+            buckets_index: currentBuckets
             num_columns: currentNumCols
             bin_size: aggDescription.default_interval_size
             min_bin_size: aggDescription.min_interval_size
             max_bin_size: aggDescription.max_interval_size
 
+        #recursion
+        for internalBucketKey, internalBuckets of currentBuckets
+
+          newAggsConfig = aggs[aggKey]
+          newBucketsData = bucketsData[aggKey].buckets_index[internalBucketKey]
+          newReceivedAggsInfo = receivedAggsInfo[aggKey].buckets[internalBucketKey]
+          @loadBuckets(newBucketsData, newAggsConfig, newReceivedAggsInfo)
+
+    parse: (data) ->
+
+      bucketsData = {}
+      aggsConfig = @get('aggs_config')
+      receivedAggsInfo = data.aggregations
+      @loadBuckets(bucketsData, aggsConfig, receivedAggsInfo)
 
       return bucketsData
 

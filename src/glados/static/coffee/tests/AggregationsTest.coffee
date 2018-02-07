@@ -327,12 +327,8 @@ describe 'Aggregation', ->
     it 'parses the bucket data', ->
 
       parsedObj = allDocumentsByYear.parse(bucketsTestData)
-      console.log ' parsedObj: ',  parsedObj
       bucketsShouldBe = bucketsTestData.aggregations.documentsPerYear.buckets
       bucketsGot = parsedObj.documentsPerYear.buckets
-
-      console.log 'bucketsShouldBe: ', bucketsShouldBe
-      console.log 'bucketsGot: ', bucketsGot
 
       for key, bucket of bucketsGot
         keyGot = bucket.key
@@ -343,6 +339,19 @@ describe 'Aggregation', ->
       expect(parsedObj.documentsPerYear.bin_size).toBe(defaultIntervalSize)
       expect(parsedObj.documentsPerYear.min_bin_size).toBe(minIntervalSize)
       expect(parsedObj.documentsPerYear.max_bin_size).toBe(maxIntervalSize)
+
+      bucketsGot = parsedObj.documentsPerYear.buckets
+
+      for bucketGot in bucketsGot
+
+        splitSeriesAgg = bucketGot.split_series_agg
+        expect(splitSeriesAgg?).toBe(true)
+        bucketKey = bucketGot.key
+        bucketMustBe = bucketsTestData.aggregations.documentsPerYear.buckets[bucketKey]
+        bucketLengthMustBe = bucketMustBe.split_series_agg.buckets.length
+        bucketLengthGot = bucketGot.split_series_agg.num_columns
+        expect(bucketLengthGot).toBe(bucketLengthMustBe)
+
 
     it 'changes the bin size for an aggregation', ->
 
