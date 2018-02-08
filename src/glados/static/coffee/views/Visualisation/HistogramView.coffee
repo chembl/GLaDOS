@@ -98,6 +98,30 @@ glados.useNameSpace 'glados.views.Visualisation',
 
       buckets = @model.get('bucket_data')[@xAxisAggName].buckets
 
+
+      # ----------------------------------------------------------------------------------------------------------------
+      # Get Sub Bucket
+      # ----------------------------------------------------------------------------------------------------------------
+
+      if @config.stacked_histogram
+
+        allsplitSeries = []
+
+        for bucket in buckets
+          splitSeriesBuckets = bucket.split_series_agg.buckets
+
+          for splitSeriesBucket in splitSeriesBuckets
+            allsplitSeries.push(splitSeriesBucket)
+
+      SeriesGroups = _.groupBy allsplitSeries, "key"
+      console.log 'Groups: ', SeriesGroups
+
+
+
+
+
+
+
       maxCategories = @config.max_categories
 
 
@@ -159,14 +183,14 @@ glados.useNameSpace 'glados.views.Visualisation',
       #-------------------------------------------------------------------------------------------------------------------
       # add legend container
       #-------------------------------------------------------------------------------------------------------------------
-      legendContainerG = mainSVGContainer.append('g')
-        .attr('transform', 'translate('+ (Y_AXIS_WIDTH + BARS_CONTAINER_WIDTH) + ',' + (TITLE_Y + TITLE_Y_PADDING) + ')')
-      legendContainerG.append('rect')
-        .attr('height', BARS_CONTAINER_HEIGHT)
-        .attr('width', LEGEND_WIDTH)
-        .attr('fill', "red")
-        .classed('legend-container', true)
-#        .call(d3.legend)
+#      legendContainerG = mainSVGContainer.append('g')
+#        .attr('transform', 'translate('+ (Y_AXIS_WIDTH + BARS_CONTAINER_WIDTH) + ',' + (TITLE_Y + TITLE_Y_PADDING) + ')')
+#      legendContainerG.append('rect')
+#        .attr('height', BARS_CONTAINER_HEIGHT)
+#        .attr('width', LEGEND_WIDTH)
+#        .attr('fill', "red")
+#        .classed('legend-container', true)
+##        .call(d3.legend)
 
       #-------------------------------------------------------------------------------------------------------------------
       # add histogram bars groups

@@ -54,7 +54,6 @@ class MainPageApp
       query_config: queryConfig
       aggs_config: aggsConfig
 
-    console.log 'allDocumentsByYear: ', allDocumentsByYear
     return allDocumentsByYear
 
 
