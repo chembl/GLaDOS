@@ -237,9 +237,9 @@
 
                     <div class="row">
 
-                        {% block target_predictions %}
+                        {% with is_dynamic=True %}
                             {% include "glados/CompoundReportCardParts/TargetPredictions.html" %}
-                        {% endblock %}
+                        {% endwith %}
 
                     </div>
 
