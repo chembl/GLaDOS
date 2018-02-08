@@ -1,5 +1,9 @@
 glados.useNameSpace 'glados',
   Utils:
+    escapeRegExp: (strToEscape)->
+      return strToEscape.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); # $& means the whole matched string
+
+
     showErrorModalMessage: (message, redirection_link) ->
       if not glados.Utils.modalErrorTemplate?
         glados.Utils.modalErrorTemplate = Handlebars.compile($('#Handlebars-Common-RedCardError').html())
