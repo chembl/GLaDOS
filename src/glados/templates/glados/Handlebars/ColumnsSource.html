@@ -28,9 +28,11 @@
 
     {% verbatim %}
 
+    {% endverbatim %}{% if not for_card %}{% verbatim %}
     {{#if this.img_url}}
         <img src="{{this.img_url}}" height="75px" width="75px"/><br/>
     {{/if}}
+    {% endverbatim %}{% endif %}{% verbatim %}
 
     {{#if this.has_highlight}}
         {{{this.highlighted_value}}}
@@ -48,6 +50,7 @@
         {{/unless}}
     {{/if}}
 
+    {% endverbatim %}{% if not for_card %}{% verbatim %}
     {{#if this.is_function_link}}
         {{#unless this.hide_value}}<br>{{/unless}}
         <div>
@@ -59,6 +62,7 @@
             </a>
         </div>
     {{/if}}
+    {% endverbatim %}{% endif %}{% verbatim %}
 
     {% endverbatim %}
 
