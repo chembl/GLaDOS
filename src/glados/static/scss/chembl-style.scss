@@ -111,6 +111,25 @@ strong {
 }
 
 /**
+* Custom elements
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+.ellipsis-show-on-hover{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  &:hover{
+    background: white;
+    position: absolute;
+    z-index: 1;
+    overflow: visible;
+    white-space: normal;
+    height: auto;
+    width: 100%;
+  }
+}
+
+/**
 * General layout setup
 * ----------------------------------------------------------------------------------------------------------------------
 */
