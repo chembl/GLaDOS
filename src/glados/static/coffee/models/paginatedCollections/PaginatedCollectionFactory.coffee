@@ -146,11 +146,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             generatorProperty = @generator.generator_property
             generatorModel = @generator.model
             filterFunc = @generator.filter
+            sortByFunc = @generator.sort_by_function
 
             generatorModel.on 'change', (->
               models = glados.Utils.getNestedValue(generatorModel.attributes, generatorProperty)
               if filterFunc?
                 models = _.filter(models, filterFunc)
+              if sortByFunc?
+                models = _.sortBy(models, sortByFunc)
 
               parsedModels = []
               BaseModel = @getMeta('model')

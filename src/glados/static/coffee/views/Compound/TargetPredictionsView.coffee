@@ -8,12 +8,16 @@ glados.useNameSpace 'glados.views.Compound',
       @model.on 'error', @.showCompoundErrorCard, @
       @resource_type = 'Compound'
 
+      sortByFunc = (item) -> -parseFloat(item.probability)
       settings = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.TARGET_PREDICTIONS
       filterFunc1uM = (p) -> p.value == 1
+
       generator1uM =
         model: @model
         generator_property: '_metadata.target_predictions'
         filter: filterFunc1uM
+        sort_by_function: sortByFunc
+
       list1uM = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewClientSideCollectionFor(settings,
         generator1uM)
 
@@ -25,6 +29,8 @@ glados.useNameSpace 'glados.views.Compound',
         model: @model
         generator_property: '_metadata.target_predictions'
         filter: filterFunc10uM
+        sort_by_function: sortByFunc
+
       list10uM = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewClientSideCollectionFor(settings,
         generator10uM)
 

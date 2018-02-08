@@ -61,3 +61,25 @@ describe 'Target Predictions', ->
       expect(predMustBe.probability).toBe(predGot.get('probability'))
       expect(predMustBe.target_accession).toBe(predGot.get('target_accession'))
       expect(predMustBe.target_chembl_id).toBe(predGot.get('target_chembl_id'))
+
+  it 'is sorts elements by score by default', ->
+
+    settings = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.TARGET_PREDICTIONS
+
+    generator =
+      model: compound
+      generator_property: '_metadata.target_predictions'
+      sort_by_function: (item) -> -parseFloat(item.probability)
+
+    list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewClientSideCollectionFor(settings, generator)
+    compound.trigger('change')
+
+    targetPredictionsMustBe = compound.get('_metadata').target_predictions
+    expect(targetPredictionsMustBe.length).toBe(list.length)
+
+    previousProbability = Number.MAX_VALUE
+    targetPredictionsGot = list.models
+
+    for targPredGot in targetPredictionsGot
+      expect(previousProbability >= targPredGot.get('probability')).toBe(true)
+      previousProbability = targPredGot.get('probability')
