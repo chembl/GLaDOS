@@ -143,8 +143,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           if @config.generator?
             generatorProperty = @config.generator.generator_property
             generatorModel = @config.generator.model
+            filterFunc = @config.generator.filter
+
             generatorModel.on 'change', (->
               models = glados.Utils.getNestedValue(generatorModel.attributes, generatorProperty)
+              if filterFunc?
+                models = _.filter(models, filterFunc)
+
               @reset(models)
             ), @
 
