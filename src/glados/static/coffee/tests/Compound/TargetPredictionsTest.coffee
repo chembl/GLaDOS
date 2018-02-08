@@ -18,11 +18,11 @@ describe 'Target Predictions', ->
 
     settings = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.TARGET_PREDICTIONS
 
-    settings.generator =
+    generator =
       model: compound
       generator_property: '_metadata.target_predictions'
 
-    list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewClientSideCollectionFor(settings)
+    list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewClientSideCollectionFor(settings, generator)
     compound.trigger('change')
 
     targetPredictionsMustBe = compound.get('_metadata').target_predictions
@@ -42,12 +42,13 @@ describe 'Target Predictions', ->
     settings = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.TARGET_PREDICTIONS
 
     filterFunc = (p) -> p.value == 10
-    settings.generator =
+    generator =
       model: compound
       generator_property: '_metadata.target_predictions'
       filter: filterFunc
 
-    list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewClientSideCollectionFor(settings)
+    list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewClientSideCollectionFor(settings,
+      generator)
     compound.trigger('change')
 
     targetPredictionsMustBe = _.filter(compound.get('_metadata').target_predictions, filterFunc)

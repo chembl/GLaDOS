@@ -8,6 +8,22 @@ glados.useNameSpace 'glados.views.Compound',
       @model.on 'error', @.showCompoundErrorCard, @
       @resource_type = 'Compound'
 
+      settings1uM = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.TARGET_PREDICTIONS
+      filterFunc1uM = (p) -> p.value == 1
+      settings1uM.generator =
+        model: @model
+        generator_property: '_metadata.target_predictions'
+        filter: filterFunc1uM
+      @list1uM = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewClientSideCollectionFor(settings1uM)
+
+#      settings10uM = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.TARGET_PREDICTIONS
+#      filterFunc1uM = (p) -> p.value == 1
+#      settings1uM.generator =
+#        model: @model
+#        generator_property: '_metadata.target_predictions'
+#        filter: filterFunc1uM
+#      @list1uM = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewClientSideCollectionFor(settings1uM)
+
 
     render: ->
 
@@ -18,6 +34,7 @@ glados.useNameSpace 'glados.views.Compound',
       if rawTargetPredidctions.length == 0
         return
 
-      console.log 'targ preds!', @model.get('_metadata').target_predictions
+      console.log '@list1uM: ', @list1uM
 
+      @showCardContent()
       @showSection()

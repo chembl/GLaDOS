@@ -111,7 +111,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
 # creates a new instance of a Client Side Paginated Collection from either Web Services or elasticsearch, This means that
 # the collection gets all the data is in one call and the full list is in the client all the time.
-    getNewClientSideCollectionFor: (collectionSettings) ->
+    getNewClientSideCollectionFor: (collectionSettings, generator) ->
 
       collection = glados.models.paginatedCollections.ClientSidePaginatedCollection\
       .extend(glados.models.paginatedCollections.SelectionFunctions)
@@ -122,6 +122,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         initialize: ->
 
           @config = collectionSettings
+          @generator = generator
           @meta =
             base_url: collectionSettings.BASE_URL
             default_page_size: collectionSettings.DEFAULT_PAGE_SIZE
@@ -140,10 +141,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           if @config.preexisting_models?
             @reset(@config.preexisting_models)
 
-          if @config.generator?
-            generatorProperty = @config.generator.generator_property
-            generatorModel = @config.generator.model
-            filterFunc = @config.generator.filter
+          if @generator?
+            generatorProperty = @generator.generator_property
+            generatorModel = @generator.model
+            filterFunc = @generator.filter
 
             generatorModel.on 'change', (->
               models = glados.Utils.getNestedValue(generatorModel.attributes, generatorProperty)
