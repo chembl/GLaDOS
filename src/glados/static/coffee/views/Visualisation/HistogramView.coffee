@@ -104,38 +104,8 @@ glados.useNameSpace 'glados.views.Visualisation',
       # ----------------------------------------------------------------------------------------------------------------
 
       if @config.stacked_histogram
-
-        #gets count of internal buckets
-        internalBucketsCounts = {}
-
-        for bucket in buckets
-          splitSeriesBuckets = bucket.split_series_agg.buckets
-
-          for splitSeriesBucket in splitSeriesBuckets
-            bucketKey = splitSeriesBucket.key
-
-            if not internalBucketsCounts[bucketKey]
-              internalBucketsCounts[bucketKey] = 0
-
-            internalBucketsCounts[bucketKey] += splitSeriesBucket.doc_count
-
-        console.log 'internalBucketsCounts: ', internalBucketsCounts
-
-        sortingList = []
-        for key, value of internalBucketsCounts
-          sortingList.push
-            key: key
-            count: value
-
-        sortedList = _.sortBy sortingList, (item) -> -item.count
-
-        InternalBucketsWithPosition = {}
-        for item, pos in sortedList
-          InternalBucketsWithPosition[item.key] =
-            key: item.key
-            count: item.count
-            pos: pos
-
+        subBuckets = glados.Utils.Buckets.getSubBuckets(buckets)
+     
       maxCategories = @config.max_categories
 
 

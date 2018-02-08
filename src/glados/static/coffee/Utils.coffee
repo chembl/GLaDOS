@@ -331,6 +331,38 @@ glados.useNameSpace 'glados',
           buckets.push bucket
 
         return buckets
+
+      getSubBuckets: (buckets) ->
+        internalBucketsCounts = {}
+
+        for bucket in buckets
+          splitSeriesBuckets = bucket.split_series_agg.buckets
+
+          for splitSeriesBucket in splitSeriesBuckets
+            bucketKey = splitSeriesBucket.key
+
+            if not internalBucketsCounts[bucketKey]
+              internalBucketsCounts[bucketKey] = 0
+
+            internalBucketsCounts[bucketKey] += splitSeriesBucket.doc_count
+
+        sortingList = []
+        for key, value of internalBucketsCounts
+          sortingList.push
+            key: key
+            count: value
+
+        sortedList = _.sortBy sortingList, (item) -> -item.count
+
+        InternalBucketsWithPosition = {}
+        for item, pos in sortedList
+          InternalBucketsWithPosition[item.key] =
+            key: item.key
+            count: item.count
+            pos: pos
+
+        return InternalBucketsWithPosition
+
     ErrorMessages:
 
       getJQXHRErrorText: (jqXHR) ->
