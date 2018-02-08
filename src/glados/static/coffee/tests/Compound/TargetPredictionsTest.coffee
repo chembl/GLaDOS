@@ -18,14 +18,19 @@ describe 'Target Predictions', ->
 
     settings = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.TARGET_PREDICTIONS
 
-    console.log 'compound: ', compound
     settings.generator =
       model: compound
       generator_property: '_metadata.target_predictions'
 
     list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewClientSideCollectionFor(settings)
+    compound.trigger('change')
 
     targetPredictionsMustBe = compound.get('_metadata').target_predictions
-    console.log 'targetPreidctionsMustBe: ', targetPredictionsMustBe
+    for predMustBe in targetPredictionsMustBe
+      predID = predMustBe.pred_id
+      predGot = list.get(predID)
 
-    console.log 'list: ', list
+      expect(predMustBe.molecule_chembl_id).toBe(predGot.get('molecule_chembl_id'))
+      expect(predMustBe.probability).toBe(predGot.get('probability'))
+      expect(predMustBe.target_accession).toBe(predGot.get('target_accession'))
+      expect(predMustBe.target_chembl_id).toBe(predGot.get('target_chembl_id'))

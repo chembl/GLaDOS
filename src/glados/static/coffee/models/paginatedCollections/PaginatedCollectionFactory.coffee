@@ -144,7 +144,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             generatorProperty = @config.generator.generator_property
             generatorModel = @config.generator.model
             generatorModel.on 'change', (->
-              @reset(glados.Utils.getNestedValue(generatorModel.attributes, generatorProperty))
+              models = glados.Utils.getNestedValue(generatorModel.attributes, generatorProperty)
+              @reset(models)
             ), @
 
       return new collection

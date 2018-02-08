@@ -521,9 +521,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Default: Document.COLUMNS_SETTINGS.SEARCH_BY_TERM_RESULTS
     CLIENT_SIDE_WS_COLLECTIONS:
       TARGET_PREDICTIONS:
-        MODEL: Target
+        MODEL: glados.models.Compound.TargetPrediction
         DEFAULT_PAGE_SIZE: 5
-        ID_COLUMN: Target.ID_COLUMN
+        ID_COLUMN: glados.models.Compound.TargetPrediction.ID_COLUMN
         COLUMNS: []
         COLUMNS_DESCRIPTION:
           Table:
