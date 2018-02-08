@@ -19,3 +19,13 @@ describe 'Target Predictions', ->
     settings = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.TARGET_PREDICTIONS
 
     console.log 'compound: ', compound
+    settings.generator =
+      model: compound
+      generator_property: '_metadata.target_predictions'
+
+    list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewClientSideCollectionFor(settings)
+
+    targetPredictionsMustBe = compound.get('_metadata').target_predictions
+    console.log 'targetPreidctionsMustBe: ', targetPredictionsMustBe
+
+    console.log 'list: ', list
