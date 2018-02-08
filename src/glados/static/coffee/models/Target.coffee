@@ -114,6 +114,7 @@ Target.COLUMNS = {
   CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Target.INDEX_NAME,
     comparator: 'target_chembl_id'
     link_base: 'report_card_url'
+    hide_label: true
   BIOACTIVITIES_NUMBER: glados.models.paginatedCollections.ColumnsFactory.generateColumn Target.INDEX_NAME,
     comparator: '_metadata.related_activities.count'
     link_base: 'activities_url'
@@ -126,7 +127,6 @@ Target.COLUMNS = {
     function_link: true
     execute_on_render: true
     format_class: 'number-cell-center'
-    secondary_link: true
   PREF_NAME: glados.models.paginatedCollections.ColumnsFactory.generateColumn Target.INDEX_NAME,
     comparator: 'pref_name'
     sort_disabled: true
@@ -143,7 +143,6 @@ Target.COLUMNS = {
   NUM_COMPOUNDS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Target.INDEX_NAME,
     comparator: '_metadata.related_compounds.count'
     format_class: 'number-cell-center'
-    secondary_link: true
     link_base: 'compounds_url'
   NUM_COMPOUNDS_HISTOGRAM: glados.models.paginatedCollections.ColumnsFactory.generateColumn Target.INDEX_NAME,
     comparator: '_metadata.related_compounds.count'
@@ -157,7 +156,6 @@ Target.COLUMNS = {
     function_link: true
     execute_on_render: true
     format_class: 'number-cell-center'
-    secondary_link: true
   SPECIES_GROUP: glados.models.paginatedCollections.ColumnsFactory.generateColumn Target.INDEX_NAME,
     comparator: 'species_group_flag'
   TAX_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Target.INDEX_NAME,

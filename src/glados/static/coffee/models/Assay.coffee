@@ -49,6 +49,7 @@ Assay.COLUMNS = {
   CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
     comparator: 'assay_chembl_id'
     link_base: 'report_card_url'
+    hide_label: true
   STRAIN: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
     comparator: 'assay_strain'
     custom_field_template: '<i>{{val}}</i>'
@@ -61,7 +62,6 @@ Assay.COLUMNS = {
   DOCUMENT: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
     comparator: 'document_chembl_id'
     link_base: 'document_link'
-    secondary_link: true
   BAO_LABEL: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
     comparator: 'bao_label'
   SRC_DESCRIPTION: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
@@ -69,7 +69,6 @@ Assay.COLUMNS = {
   TISSUE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
     comparator: 'tissue_chembl_id'
     link_base: 'tissue_link'
-    secondary_link: true
   CELL_TYPE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
     comparator: 'assay_cell_type'
   SUBCELLULAR_FRACTION: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
@@ -86,7 +85,6 @@ Assay.COLUMNS = {
     function_link: true
     execute_on_render: true
     format_class: 'number-cell-center'
-    secondary_link: true
   BIOACTIVITIES_NUMBER: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
     comparator: '_metadata.related_activities.count'
     link_base: 'activities_url'
@@ -97,7 +95,6 @@ Assay.COLUMNS = {
     function_link: true
     execute_on_render: true
     format_class: 'number-cell-center'
-    secondary_link: true
 }
 
 Assay.ID_COLUMN = Assay.COLUMNS.CHEMBL_ID

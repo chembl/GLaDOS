@@ -39,7 +39,7 @@
 */
 
 $chembl-teal: color("teal", "darken-3");
-$chembl-highlight: #FF855A;
+$chembl-highlight: #FE7F9D;
 
 .chembl-teal {
   background-color: $chembl-teal !important;
@@ -108,6 +108,25 @@ h6 {
 b,
 strong {
   color: $primary-color-dark
+}
+
+/**
+* Custom elements
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+.ellipsis-show-on-hover{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  &:hover{
+    background: white;
+    position: absolute;
+    z-index: 1;
+    overflow: visible;
+    white-space: normal;
+    height: auto;
+    width: 100%;
+  }
 }
 
 /**

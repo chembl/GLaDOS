@@ -1,5 +1,9 @@
 glados.useNameSpace 'glados',
   Utils:
+    escapeRegExp: (strToEscape)->
+      return strToEscape.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); # $& means the whole matched string
+
+
     showErrorModalMessage: (message, redirection_link) ->
       if not glados.Utils.modalErrorTemplate?
         glados.Utils.modalErrorTemplate = Handlebars.compile($('#Handlebars-Common-RedCardError').html())
@@ -202,7 +206,7 @@ glados.useNameSpace 'glados',
         returnCol['has_link'] = _.has(colDescription, 'link_base') or _.has(colDescription, 'link_function')
         returnCol['has_multiple_links'] = colDescription.multiple_links == true
 
-        returnCol['is_secondary_link'] = colDescription.secondary_link == true
+        returnCol['hide_label'] = colDescription.hide_label == true
         returnCol['is_function_link'] = colDescription.function_link == true
         returnCol['execute_on_render'] = colDescription.execute_on_render == true
 

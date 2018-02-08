@@ -34,6 +34,7 @@ Document.COLUMNS = {
   CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
     comparator: 'document_chembl_id'
     link_base: 'report_card_url'
+    hide_label: true
   TITLE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
     comparator: 'title'
     custom_field_template: '<i>{{val}}</i>'
@@ -77,7 +78,6 @@ Document.COLUMNS = {
     function_link: true
     execute_on_render: true
     format_class: 'number-cell-center'
-    secondary_link: true
   NUM_COMPOUNDS_HISTOGRAM: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
     comparator: '_metadata.related_compounds.count'
     link_base: 'compounds_url'
@@ -88,12 +88,10 @@ Document.COLUMNS = {
     function_link: true
     execute_on_render: true
     format_class: 'number-cell-center'
-    secondary_link: true
   NUM_TARGETS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
     comparator: '_metadata.related_targets.count'
     format_as_number: true
     link_base: 'targets_url'
-    secondary_link: true
     on_click: DocumentReportCardApp.initMiniHistogramFromFunctionLink
     function_parameters: ['document_chembl_id']
     function_constant_parameters: ['targets']

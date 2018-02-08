@@ -1,0 +1,71 @@
+{% verbatim %}
+
+<script id="Handlebars-Common-Paginated-Header-large" type="text/x-handlebars-template">
+
+
+    <thead>
+
+        <tr class="BCK-headers-row" >
+
+            {{#unless selection_disabled}}
+                <th>
+                    <input type="checkbox" class="filled-in BCK-toggle-select-all"
+                        id="BCK-table-{{base_check_box_id}}-selectAll"
+                        {{#if all_items_selected}}checked="checked"{{/if}}/>
+                    <label for="BCK-table-{{base_check_box_id}}-selectAll"></label>
+                </th>
+            {{/unless}}
+
+            {% endverbatim %}
+            {% include "glados/Handlebars/ColumnsTableHeadersSource.html" with for_table=True %}
+            {% verbatim %}
+
+        </tr>
+
+    </thead>
+
+</script>
+
+<script id="Handlebars-Common-Paginated-Row-large" type="text/x-handlebars-template">
+
+    <tr class="BCK-items-row">
+        {{#unless selection_disabled}}
+            <td>
+                <input type="checkbox" class="filled-in BCK-select-one-item" id="BCK-table-{{base_check_box_id}}-select"
+                    {{#if is_selected}}checked="checked"{{/if}}/>
+                <label for="BCK-table-{{base_check_box_id}}-select"></label>
+            </td>
+        {{/unless}}
+
+        {% endverbatim %}
+            {% include "glados/Handlebars/ColumnsSource.html" with for_table=True %}
+        {% verbatim %}
+
+    </tr>
+
+</script>
+
+<script id="Handlebars-Common-Pagination-LI" type="text/x-handlebars-template">
+
+    <li class="collection-item BCK-items-li">
+
+        {{#unless selection_disabled}}
+            <p>
+                <input type="checkbox" class="filled-in BCK-select-one-item"
+                    id="BCK-list-{{base_check_box_id}}-select"
+                    {{#if is_selected}}checked="checked"{{/if}}/>
+                <label for="BCK-list-{{base_check_box_id}}-select"></label>
+            </p>
+        {{/unless}}
+
+        <p>
+            {% endverbatim %}
+                {% include "glados/Handlebars/ColumnsSource.html" with for_table_as_card=True %}
+            {% verbatim %}
+        </p>
+
+    </li>
+
+</script>
+
+{% endverbatim %}
