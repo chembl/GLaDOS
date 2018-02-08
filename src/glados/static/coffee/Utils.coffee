@@ -332,11 +332,11 @@ glados.useNameSpace 'glados',
 
         return buckets
 
-      getSubBuckets: (buckets) ->
+      getSubBuckets: (buckets, subBucketsAggName) ->
         internalBucketsCounts = {}
 
         for bucket in buckets
-          splitSeriesBuckets = bucket.split_series_agg.buckets
+          splitSeriesBuckets = bucket[subBucketsAggName].buckets
 
           for splitSeriesBucket in splitSeriesBuckets
             bucketKey = splitSeriesBucket.key

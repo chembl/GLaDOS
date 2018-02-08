@@ -73,6 +73,7 @@ class MainPageApp
       x_axis_max_columns: 40
       x_axis_initial_num_columns: 40
       x_axis_prop_name: 'documentsPerYear'
+      sub_buckets_property_name: 'split_series_agg'
       title: 'Documents by Year'
 
     new glados.views.Visualisation.HistogramView

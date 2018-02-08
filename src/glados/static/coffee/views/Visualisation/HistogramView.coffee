@@ -7,6 +7,7 @@ glados.useNameSpace 'glados.views.Visualisation',
       @$vis_elem = $(@el).find('.BCK-HistogramContainer')
       @setUpResponsiveRender()
       @xAxisAggName = @config.x_axis_prop_name
+      @subBucketsAggName = @config.sub_buckets_property_name
       if @config.paint_axes_selectors
         @currentXAxisProperty = @config.properties[@config.initial_property_x]
         @paintAxesSelectors()
@@ -104,8 +105,10 @@ glados.useNameSpace 'glados.views.Visualisation',
       # ----------------------------------------------------------------------------------------------------------------
 
       if @config.stacked_histogram
-        subBuckets = glados.Utils.Buckets.getSubBuckets(buckets)
-     
+        subBuckets = glados.Utils.Buckets.getSubBuckets(buckets, @subBucketsAggName)
+        console.log 'buckets: ', buckets
+        console.log 'subBuckets: ', subBuckets
+
       maxCategories = @config.max_categories
 
 
