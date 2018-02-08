@@ -98,18 +98,7 @@ glados.useNameSpace 'glados.views.Visualisation',
       @$vis_elem.empty()
 
       buckets = @model.get('bucket_data')[@xAxisAggName].buckets
-
-
-      # ----------------------------------------------------------------------------------------------------------------
-      # Get Sub Bucket
-      # ----------------------------------------------------------------------------------------------------------------
-
-      if @config.stacked_histogram
-        subBucketsOrder = glados.Utils.Buckets.getSubBucketsOrder(buckets, @subBucketsAggName)
-
-
       maxCategories = @config.max_categories
-
 
       if buckets.length > maxCategories
         buckets = glados.Utils.Buckets.mergeBuckets(buckets, maxCategories, @model, @xAxisAggName)
@@ -393,3 +382,47 @@ glados.useNameSpace 'glados.views.Visualisation',
     #-------------------------------------------------------------------------------------------------------------------
 
     renderStackedHistogramBars: (barsContainerG, buckets) ->
+
+      if @config.stacked_histogram
+        subBucketsOrder = glados.Utils.Buckets.getSubBucketsOrder(buckets, @subBucketsAggName)
+
+      thisView = @
+      barGroups = barsContainerG.selectAll('.bar-group')
+        .data(buckets)
+        .enter()
+        .append('g')
+        .classed('bar-group', true)
+        .attr('transform', (b) -> 'translate(' + thisView.getXForBucket(b.key) + ')')
+
+      valueBars = barGroups.append('rect')
+        .attr('height', (b) -> thisView.getHeightForBucket(b.doc_count))
+        .attr('width', thisView.getXForBucket.rangeBand())
+        .attr('y', (b) -> thisView.BARS_CONTAINER_HEIGHT - thisView.getHeightForBucket(b.doc_count))
+        .attr('fill', 'Gainsboro')
+
+      #BAR SPLIT SERIES
+      barGroups.each (d) ->
+        subBuckets = d[thisView.subBucketsAggName].buckets
+
+        for bucket in subBuckets
+          bucket.pos = subBucketsOrder[bucket.key].pos
+        subBuckets = _.sortBy(subBuckets, (item) -> item.pos)
+
+        previousHeight = thisView.BARS_CONTAINER_HEIGHT
+        for bucket in subBuckets
+          bucket.posY =  previousHeight - thisView.getHeightForBucket(bucket.doc_count)
+          previousHeight = bucket.posY
+
+        thisBarGroup = d3.select(@)
+        stackedBarsGroups = thisBarGroup.selectAll('.bar-sub-group')
+          .data(subBuckets)
+          .enter()
+          .append('g')
+          .classed('bar-group', true)
+
+        stackedBarsGroups.append('rect')
+          .attr('height', (b) -> thisView.getHeightForBucket(b.doc_count))
+          .attr('width', thisView.getXForBucket.rangeBand())
+          .attr('y', (b) -> b.posY )
+          .attr('fill', 'rgb(0,' +  Math.floor(Math.random() * 255 + ', 0)'))
+

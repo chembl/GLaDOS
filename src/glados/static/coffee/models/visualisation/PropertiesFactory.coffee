@@ -168,6 +168,20 @@ glados.useNameSpace 'glados.models.visualisation',
             glados.Settings.VIS_COLORS.PURPLE1,
             glados.Settings.VIS_COLORS.PURPLE2
           ]
+# randomColours = []
+#            numColours = 16
+#            seed = 3
+#            for i in [1..numColours]
+#              randomColours.push ("#" + (Math.round(Math.sin(seed++) * 0xFFFFFF)).toString(16))
+#
+#            range = randomColours
+##            range = [glados.Settings.VISUALISATION_GREY_BASE].concat(d3.scale.category20b().range()).concat(randomColours)
+#
+#            console.log 'AAA range: ', range
+#            console.log 'AAA range: ', JSON.stringify(range)
+#            return range
+#          )()
+          colour
 
           colourScaleType: glados.Visualisation.CATEGORICAL
     ActivityAggregation:
