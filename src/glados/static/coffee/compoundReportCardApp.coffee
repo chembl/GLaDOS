@@ -367,6 +367,8 @@ class CompoundReportCardApp extends glados.ReportCardApp
       section_id: 'TargetPredictions'
       section_label: 'Target Predictions'
       report_card_app: @
+      embed_section_name: 'target_predictions'
+      embed_identifier: glados.Utils.URLS.getCurrentModelChemblID()
 
     if GlobalVariables['EMBEDED']
       compound.fetch()
