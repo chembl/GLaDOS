@@ -186,109 +186,11 @@ glados.useNameSpace 'glados.views.Visualisation',
         .domain([0, _.max(bucketSizes)])
         .range([BARS_MIN_HEIGHT, @BARS_CONTAINER_HEIGHT])
 
-#      if @config.stacked_histogram
-#        barGroups = barsContainerG.selectAll('.bar-group')
-#          .data(buckets)
-#          .enter()
-#          .append('g')
-#          .classed('bar-group', true)
-#          .attr('transform', (b) -> 'translate(' + thisView.getXForBucket(b.key) + ')')
-#
-#        barGroups.append('rect')
-#          .attr('height', @BARS_CONTAINER_HEIGHT)
-#          .attr('width', thisView.getXForBucket.rangeBand())
-#          .classed('background-bar', true)
-#
-#        h = @BARS_CONTAINER_HEIGHT
-#        valueBars = barGroups.append('rect')
-#          .attr('height', (b) -> thisView.getHeightForBucket(b.doc_count))
-#          .attr('width', thisView.getXForBucket.rangeBand())
-#          .attr('y', (b) -> h - thisView.getHeightForBucket(b.doc_count))
-#          .classed('value-bar', true)
-#
-##        #BAR SPLIT SERIES
-##        barGroups.each (d, i) ->
-##          key = d.key
-##          count = d.doc_count
-##          subBuckets = d[thisView.subBucketsAggName].buckets
-##
-##          stackedBars = valueBars.append('rect')
-##            .data(subBuckets)
-##            .enter()
-##            .append('rect')
-##            .
-#
-#
-#
-#      else
-
-      
-      barGroups = barsContainerG.selectAll('.bar-group')
-        .data(buckets)
-        .enter()
-        .append('g')
-        .classed('bar-group', true)
-        .attr('transform', (b) -> 'translate(' + thisView.getXForBucket(b.key) + ')')
-
-      barGroups.append('rect')
-        .attr('height', @BARS_CONTAINER_HEIGHT)
-        .attr('width', thisView.getXForBucket.rangeBand())
-        .classed('background-bar', true)
-
-      h = @BARS_CONTAINER_HEIGHT
-      valueBars = barGroups.append('rect')
-        .attr('height', (b) -> thisView.getHeightForBucket(b.doc_count))
-        .attr('width', thisView.getXForBucket.rangeBand())
-        .attr('y', (b) -> h - thisView.getHeightForBucket(b.doc_count))
-        .classed('value-bar', true)
-
-      frontBar = barGroups.append('rect')
-        .attr('height', @BARS_CONTAINER_HEIGHT)
-        .attr('width', thisView.getXForBucket.rangeBand())
-        .classed('front-bar', true)
-        .on('click', (b) -> window.open(b.link) )
-
-      barsColourScale = @config.bars_colour_scale
-      if barsColourScale?
-        valueBars.attr('fill', (b) -> barsColourScale(b.key))
+      if @config.stacked_histogram
+        @renderStackedHistogramBars(barsContainerG, buckets)
       else
-        valueBars.attr('fill', glados.Settings.VIS_COLORS.TEAL3)
+        @renderSimpleHistogramBars(barsContainerG, buckets)
 
-        frontBar.on('mouseover', (d, i)->
-          esto = d3.select(valueBars[0][i])
-          esto.attr('fill', glados.Settings.VIS_COLORS.RED2))
-        .on('mouseout', (d, i)->
-          esto = d3.select(valueBars[0][i])
-          esto.attr('fill', glados.Settings.VIS_COLORS.TEAL3))
-
-      #-----------------------------------------------------------------------------------------------------------------
-      # add qtips
-      #-----------------------------------------------------------------------------------------------------------------
-      barGroups.each (d, i) ->
-
-        if thisView.config.range_categories
-          rangeText = '[' + d.key.replace('-', ',') + ']'
-        else
-          rangeText = d.key
-
-        if thisView.config.stacked_histogram
-          rangeText = d.key.split '.'
-          rangeText = rangeText[0]
-
-
-        text = '<b>' + rangeText + '</b>' + ": " + d.doc_count
-
-        $(@).qtip
-          content:
-            text: text
-          style:
-            classes:'qtip-light'
-          position:
-            my: if thisView.config.big_size then 'bottom right' else 'top center'
-            at: 'bottom center'
-            target: 'mouse'
-            adjust:
-              y: -50
 
       #-----------------------------------------------------------------------------------------------------------------
       # add title
@@ -412,6 +314,82 @@ glados.useNameSpace 'glados.views.Visualisation',
             .classed('axis-helper-line', true)
             .attr('y2', h)
 
+    #-------------------------------------------------------------------------------------------------------------------
+    # Simple Histogram
+    #-------------------------------------------------------------------------------------------------------------------
+
+    renderSimpleHistogramBars: (barsContainerG, buckets) ->
+      thisView = @
+      barGroups = barsContainerG.selectAll('.bar-group')
+        .data(buckets)
+        .enter()
+        .append('g')
+        .classed('bar-group', true)
+        .attr('transform', (b) -> 'translate(' + thisView.getXForBucket(b.key) + ')')
+
+      barGroups.append('rect')
+        .attr('height', @BARS_CONTAINER_HEIGHT)
+        .attr('width', thisView.getXForBucket.rangeBand())
+        .classed('background-bar', true)
+
+      h = @BARS_CONTAINER_HEIGHT
+      valueBars = barGroups.append('rect')
+        .attr('height', (b) -> thisView.getHeightForBucket(b.doc_count))
+        .attr('width', thisView.getXForBucket.rangeBand())
+        .attr('y', (b) -> h - thisView.getHeightForBucket(b.doc_count))
+        .classed('value-bar', true)
+
+      frontBar = barGroups.append('rect')
+        .attr('height', @BARS_CONTAINER_HEIGHT)
+        .attr('width', thisView.getXForBucket.rangeBand())
+        .classed('front-bar', true)
+        .on('click', (b) -> window.open(b.link) )
+
+      barsColourScale = @config.bars_colour_scale
+      if barsColourScale?
+        valueBars.attr('fill', (b) -> barsColourScale(b.key))
+      else
+        valueBars.attr('fill', glados.Settings.VIS_COLORS.TEAL3)
+
+        frontBar.on('mouseover', (d, i)->
+          esto = d3.select(valueBars[0][i])
+          esto.attr('fill', glados.Settings.VIS_COLORS.RED2))
+        .on('mouseout', (d, i)->
+          esto = d3.select(valueBars[0][i])
+          esto.attr('fill', glados.Settings.VIS_COLORS.TEAL3))
+
+      #-----------------------------------------------------------------------------------------------------------------
+      # add qtips
+      #-----------------------------------------------------------------------------------------------------------------
+      barGroups.each (d, i) ->
+
+        if thisView.config.range_categories
+          rangeText = '[' + d.key.replace('-', ',') + ']'
+        else
+          rangeText = d.key
+
+        if thisView.config.stacked_histogram
+          rangeText = d.key.split '.'
+          rangeText = rangeText[0]
 
 
+        text = '<b>' + rangeText + '</b>' + ": " + d.doc_count
 
+        $(@).qtip
+          content:
+            text: text
+          style:
+            classes:'qtip-light'
+          position:
+            my: if thisView.config.big_size then 'bottom right' else 'top center'
+            at: 'bottom center'
+            target: 'mouse'
+            adjust:
+              y: -50
+
+
+    #-------------------------------------------------------------------------------------------------------------------
+    #  Stacked Histogram
+    #-------------------------------------------------------------------------------------------------------------------
+
+    renderStackedHistogramBars: (barsContainerG, buckets) ->
