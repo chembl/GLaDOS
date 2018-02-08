@@ -25,11 +25,25 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           if propPath.endsWith suffixJ
             propPath = propPath.replace new RegExp('\.'+suffixJ+'$'), ''
         if not _.has simplifiedHL, propPath
-          simplifiedHL[propPath] = new Set()
+          simplifiedHL[propPath] = {}
         for hlK in hlData
-          simplifiedHL[propPath].add hlK
+          simpleHlK = hlK.replace(
+            new RegExp(
+              glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_OPEN_TAG_REGEX_ESCAPED, 'g'
+            ), ''
+          )
+          simpleHlK = simpleHlK.replace(
+            new RegExp(
+              glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_CLOSE_TAG_REGEX_ESCAPED, 'g'
+            ), ''
+          )
+          included = false
+          _.each _.keys(simplifiedHL[propPath]), (keyJ, indexJ, keysList) ->
+            included |= keyJ.includes(simpleHlK) or simpleHlK.includes(keyJ)
+          if not included
+            simplifiedHL[propPath][simpleHlK] = hlK
       for propPath in _.keys(simplifiedHL)
-        simplifiedHL[propPath] = Array.from(simplifiedHL[propPath]).join(' . . . . ')
+        simplifiedHL[propPath] = Array.from(_.values(simplifiedHL[propPath])).join(' . . . . ')
       return simplifiedHL
 
     # Parses the Elastic Search Response and resets the pagination metadata
@@ -264,13 +278,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     addHighlightsToQuery: (esQuery)->
       esQuery.highlight = {
-        order: "score"
+        order: 'score'
         fragment_size: 150
         number_of_fragments: 3
-        fragmenter: "simple"
-        pre_tags: ["<em class=\"glados-result-highlight\">"]
-        post_tags: ["</em>"]
-        type: "fvh"
+        fragmenter: 'simple'
+        pre_tags: [glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_OPEN_TAG]
+        post_tags: [glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_CLOSE_TAG]
+        type: 'fvh'
         fields:
           '*': {}
       }
@@ -858,3 +872,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       )
   ,
     HIGHLIGHT_SUFFIXES_TO_REMOVE: ['eng_analyzed', 'ws_analyzed', 'std_analyzed', 'alphanumeric_lowercase_keyword']
+    HIGHLIGHT_OPEN_TAG: '<em class="glados-result-highlight">'
+    HIGHLIGHT_CLOSE_TAG: '</em>'
+
+glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_OPEN_TAG_REGEX_ESCAPED = \
+  glados.Utils.escapeRegExp glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_OPEN_TAG
+glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_CLOSE_TAG_REGEX_ESCAPED = \
+  glados.Utils.escapeRegExp glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_CLOSE_TAG
