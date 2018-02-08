@@ -62,7 +62,6 @@ glados.models.Compound.Drug.COLUMNS =
     name_to_show: 'Patent'
     comparator: '_metadata.drug.drug_data.sc_patent'
     link_base: 'patent_url'
-    secondary_link: true
   WITHDRAWN_YEAR: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     name_to_show: 'Withdrawn Year'
     comparator: 'withdrawn_year'

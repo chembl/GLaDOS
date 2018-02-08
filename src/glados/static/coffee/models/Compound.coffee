@@ -473,6 +473,7 @@ Compound.COLUMNS = {
     comparator: 'molecule_chembl_id'
     link_base: 'report_card_url'
     image_base_url: 'image_url'
+    hide_label: true
   SYNONYMS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     comparator: 'molecule_synonyms'
     parse_function: (values) -> _.uniq(v.molecule_synonym for v in values).join(', ')
@@ -565,7 +566,6 @@ Compound.COLUMNS = {
     comparator: '_metadata.related_targets.count'
     format_as_number: true
     link_base: 'targets_url'
-    secondary_link: true
     on_click: CompoundReportCardApp.initMiniHistogramFromFunctionLink
     function_parameters: ['molecule_chembl_id']
     function_constant_parameters: ['targets']
@@ -578,7 +578,6 @@ Compound.COLUMNS = {
     comparator: '_metadata.related_targets.count'
     format_as_number: true
     link_base: 'targets_url'
-    secondary_link: true
     on_click: CompoundReportCardApp.initMiniHistogramFromFunctionLink
     function_parameters: ['molecule_chembl_id']
     function_constant_parameters: ['targets_by_class']
@@ -598,7 +597,6 @@ Compound.COLUMNS = {
     function_link: true
     execute_on_render: true
     format_class: 'number-cell-center'
-    secondary_link: true
   COMPOUND_SOURCES_LIST: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     # this should be generated automatically
     id: 'compound_sources_list'

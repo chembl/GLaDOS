@@ -25,7 +25,6 @@ Activity.COLUMNS = {
   ASSAY_CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: 'assay_chembl_id'
     link_base:'assay_link'
-    secondary_link: true
     use_in_summary: true
   ASSAY_DESCRIPTION: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     'comparator': 'assay_description'
@@ -38,7 +37,6 @@ Activity.COLUMNS = {
   ASSAY_TISSUE_CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: '_metadata.assay_data.tissue_chembl_id'
     link_base: 'tissue_link'
-    secondary_link: true
   ASSAY_CELL_TYPE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: '_metadata.assay_data.assay_cell_type'
   ASSAY_SUBCELLULAR_FRACTION: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
@@ -54,7 +52,6 @@ Activity.COLUMNS = {
   DOCUMENT_CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: 'document_chembl_id'
     link_base: 'document_link'
-    secondary_link: true
   DOCUMENT_JOURNAL: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     'comparator': 'document_journal'
   DOCUMENT_YEAR: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
@@ -63,7 +60,6 @@ Activity.COLUMNS = {
     comparator: 'molecule_chembl_id'
     image_base_url: 'image_url'
     link_base:'molecule_link'
-    secondary_link: true
   ALOGP: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: '_metadata.parent_molecule_data.alogp'
   MAX_PHASE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
@@ -120,7 +116,6 @@ Activity.COLUMNS = {
   TARGET_CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: 'target_chembl_id'
     link_base:'target_link'
-    secondary_link: true
   TARGET_ORGANISM: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: 'target_organism'
   TARGET_PREF_NAME: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,

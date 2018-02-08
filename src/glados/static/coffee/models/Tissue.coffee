@@ -29,6 +29,7 @@ glados.models.Tissue.COLUMNS = {
   CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn glados.models.Tissue.INDEX_NAME,
     comparator: 'tissue_chembl_id'
     link_base: 'report_card_url'
+    hide_label: true
   PREF_NAME: glados.models.paginatedCollections.ColumnsFactory.generateColumn glados.models.Tissue.INDEX_NAME,
     comparator: 'pref_name'
   UBERON_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn glados.models.Tissue.INDEX_NAME,
@@ -53,7 +54,6 @@ glados.models.Tissue.COLUMNS = {
     function_link: true
     execute_on_render: true
     format_class: 'number-cell-center'
-    secondary_link: true
   NUM_COMPOUNDS_HISTOGRAM: glados.models.paginatedCollections.ColumnsFactory.generateColumn glados.models.Tissue.INDEX_NAME,
     comparator: '_metadata.related_compounds.count'
     link_base: 'compounds_url'
@@ -64,7 +64,6 @@ glados.models.Tissue.COLUMNS = {
     function_link: true
     execute_on_render: true
     format_class: 'number-cell-center'
-    secondary_link: true
 }
 
 glados.models.Tissue.ID_COLUMN = glados.models.Tissue.COLUMNS.CHEMBL_ID

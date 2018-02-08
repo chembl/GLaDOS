@@ -28,6 +28,7 @@ CellLine.COLUMNS = {
   CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn CellLine.INDEX_NAME,
     link_base: 'report_card_url'
     comparator: 'cell_chembl_id'
+    hide_label: true
   SOURCE_TISSUE: glados.models.paginatedCollections.ColumnsFactory.generateColumn CellLine.INDEX_NAME,
     comparator: 'cell_source_tissue'
   CLO_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn CellLine.INDEX_NAME,
@@ -61,7 +62,6 @@ CellLine.COLUMNS = {
     function_link: true
     execute_on_render: true
     format_class: 'number-cell-center'
-    secondary_link: true
   NUM_COMPOUNDS_HISTOGRAM: glados.models.paginatedCollections.ColumnsFactory.generateColumn CellLine.INDEX_NAME,
     comparator: '_metadata.related_compounds.count'
     link_base: 'compounds_url'
@@ -72,7 +72,6 @@ CellLine.COLUMNS = {
     function_link: true
     execute_on_render: true
     format_class: 'number-cell-center'
-    secondary_link: true
 }
 
 CellLine.ID_COLUMN = CellLine.COLUMNS.CHEMBL_ID
