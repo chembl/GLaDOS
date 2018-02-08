@@ -111,7 +111,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
 # creates a new instance of a Client Side Paginated Collection from either Web Services or elasticsearch, This means that
 # the collection gets all the data is in one call and the full list is in the client all the time.
-    getNewClientSideCollectionFor: (collectionSettings) ->
+    getNewClientSideCollectionFor: (collectionSettings, generator) ->
 
       collection = glados.models.paginatedCollections.ClientSidePaginatedCollection\
       .extend(glados.models.paginatedCollections.SelectionFunctions)
@@ -120,6 +120,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         model: collectionSettings.MODEL
 
         initialize: ->
+
+          @config = collectionSettings
+          @generator = generator
           @meta =
             base_url: collectionSettings.BASE_URL
             default_page_size: collectionSettings.DEFAULT_PAGE_SIZE
@@ -132,8 +135,35 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             all_items_selected: false
             selection_exceptions: {}
             data_loaded: false
+            model: collectionSettings.MODEL
 
           @on 'reset', @resetMeta, @
+
+          if @config.preexisting_models?
+            @reset(@config.preexisting_models)
+
+          if @generator?
+            generatorProperty = @generator.generator_property
+            generatorModel = @generator.model
+            filterFunc = @generator.filter
+            sortByFunc = @generator.sort_by_function
+
+            generatorModel.on 'change', (->
+              models = glados.Utils.getNestedValue(generatorModel.attributes, generatorProperty)
+              if filterFunc?
+                models = _.filter(models, filterFunc)
+              if sortByFunc?
+                models = _.sortBy(models, sortByFunc)
+
+              parsedModels = []
+              BaseModel = @getMeta('model')
+              for model in models
+                parsedModel = BaseModel.prototype.parse model
+                parsedModels.push parsedModel
+
+              @setMeta('data_loaded', true)
+              @reset(parsedModels)
+            ), @
 
       return new collection
 

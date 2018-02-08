@@ -520,6 +520,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           Carousel:
             Default: Document.COLUMNS_SETTINGS.SEARCH_BY_TERM_RESULTS
     CLIENT_SIDE_WS_COLLECTIONS:
+      TARGET_PREDICTIONS:
+        MODEL: glados.models.Compound.TargetPrediction
+        DEFAULT_PAGE_SIZE: 5
+        ID_COLUMN: glados.models.Compound.TargetPrediction.ID_COLUMN
+        COLUMNS: glados.models.Compound.TargetPrediction.COLUMNS_SETTINGS.ALL_COLUMNS
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: glados.models.Compound.TargetPrediction.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
       # used for targets
       APPROVED_DRUGS_CLINICAL_CANDIDATES_LIST:
         MODEL: ApprovedDrugClinicalCandidate
