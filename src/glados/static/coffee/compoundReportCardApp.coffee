@@ -359,8 +359,17 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @initTargetPredictions = ->
 
-    @registerSection('TargetPredictions', 'Target Predictions')
-    @showSection('TargetPredictions')
+    compound = CompoundReportCardApp.getCurrentCompound()
+
+    new glados.views.Compound.TargetPredictionsView
+      model: compound
+      el: $('#CTargetPredictionsCard')
+      section_id: 'TargetPredictions'
+      section_label: 'Target Predictions'
+      report_card_app: @
+
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
 
   @initCrossReferences = ->
 
