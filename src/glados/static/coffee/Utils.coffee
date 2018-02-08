@@ -332,7 +332,7 @@ glados.useNameSpace 'glados',
 
         return buckets
 
-      getSubBuckets: (buckets, subBucketsAggName) ->
+      getSubBucketsOrder: (buckets, subBucketsAggName) ->
         internalBucketsCounts = {}
 
         for bucket in buckets

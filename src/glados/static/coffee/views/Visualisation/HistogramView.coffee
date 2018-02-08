@@ -105,9 +105,8 @@ glados.useNameSpace 'glados.views.Visualisation',
       # ----------------------------------------------------------------------------------------------------------------
 
       if @config.stacked_histogram
-        subBuckets = glados.Utils.Buckets.getSubBuckets(buckets, @subBucketsAggName)
-        console.log 'buckets: ', buckets
-        console.log 'subBuckets: ', subBuckets
+        subBucketsOrder = glados.Utils.Buckets.getSubBucketsOrder(buckets, @subBucketsAggName)
+
 
       maxCategories = @config.max_categories
 
@@ -152,9 +151,9 @@ glados.useNameSpace 'glados.views.Visualisation',
       BARS_MIN_HEIGHT = 2
 
       LEGEND_WIDTH = VISUALISATION_WIDTH * 0.1
-      BARS_CONTAINER_HEIGHT = VISUALISATION_HEIGHT - TITLE_Y - TITLE_Y_PADDING - X_AXIS_HEIGHT
-      BARS_CONTAINER_WIDTH = (VISUALISATION_WIDTH - Y_AXIS_WIDTH - RIGHT_PADDING) - LEGEND_WIDTH
-      X_AXIS_TRANS_Y =  BARS_CONTAINER_HEIGHT + TITLE_Y + TITLE_Y_PADDING
+      @BARS_CONTAINER_HEIGHT = VISUALISATION_HEIGHT - TITLE_Y - TITLE_Y_PADDING - X_AXIS_HEIGHT
+      @BARS_CONTAINER_WIDTH = (VISUALISATION_WIDTH - Y_AXIS_WIDTH - RIGHT_PADDING) - LEGEND_WIDTH
+      X_AXIS_TRANS_Y =  @BARS_CONTAINER_HEIGHT + TITLE_Y + TITLE_Y_PADDING
 
 
       #-------------------------------------------------------------------------------------------------------------------
@@ -163,21 +162,9 @@ glados.useNameSpace 'glados.views.Visualisation',
       barsContainerG = mainSVGContainer.append('g')
         .attr('transform', 'translate('+ Y_AXIS_WIDTH + ',' + (TITLE_Y + TITLE_Y_PADDING) + ')')
       barsContainerG.append('rect')
-        .attr('height', BARS_CONTAINER_HEIGHT)
-        .attr('width', BARS_CONTAINER_WIDTH)
+        .attr('height', @BARS_CONTAINER_HEIGHT)
+        .attr('width', @BARS_CONTAINER_WIDTH)
         .classed('bars-background', true)
-
-      #-------------------------------------------------------------------------------------------------------------------
-      # add legend container
-      #-------------------------------------------------------------------------------------------------------------------
-#      legendContainerG = mainSVGContainer.append('g')
-#        .attr('transform', 'translate('+ (Y_AXIS_WIDTH + BARS_CONTAINER_WIDTH) + ',' + (TITLE_Y + TITLE_Y_PADDING) + ')')
-#      legendContainerG.append('rect')
-#        .attr('height', BARS_CONTAINER_HEIGHT)
-#        .attr('width', LEGEND_WIDTH)
-#        .attr('fill', "red")
-#        .classed('legend-container', true)
-##        .call(d3.legend)
 
       #-------------------------------------------------------------------------------------------------------------------
       # add histogram bars groups
@@ -186,41 +173,78 @@ glados.useNameSpace 'glados.views.Visualisation',
       bucketSizes = (b.doc_count for b in buckets)
 
       if @config.fixed_bar_width
-        barWidth = BARS_CONTAINER_WIDTH / @config.max_categories
+        barWidth = @BARS_CONTAINER_WIDTH / @config.max_categories
         xRangeEnd = barWidth * buckets.length
       else
-        xRangeEnd = BARS_CONTAINER_WIDTH
+        xRangeEnd = @BARS_CONTAINER_WIDTH
 
-      getXForBucket = d3.scale.ordinal()
+      thisView.getXForBucket = d3.scale.ordinal()
         .domain(bucketNames)
         .rangeRoundBands([0,xRangeEnd], 0.05)
 
-      getHeightForBucket = d3.scale.linear()
+      thisView.getHeightForBucket = d3.scale.linear()
         .domain([0, _.max(bucketSizes)])
-        .range([BARS_MIN_HEIGHT, BARS_CONTAINER_HEIGHT])
+        .range([BARS_MIN_HEIGHT, @BARS_CONTAINER_HEIGHT])
 
+#      if @config.stacked_histogram
+#        barGroups = barsContainerG.selectAll('.bar-group')
+#          .data(buckets)
+#          .enter()
+#          .append('g')
+#          .classed('bar-group', true)
+#          .attr('transform', (b) -> 'translate(' + thisView.getXForBucket(b.key) + ')')
+#
+#        barGroups.append('rect')
+#          .attr('height', @BARS_CONTAINER_HEIGHT)
+#          .attr('width', thisView.getXForBucket.rangeBand())
+#          .classed('background-bar', true)
+#
+#        h = @BARS_CONTAINER_HEIGHT
+#        valueBars = barGroups.append('rect')
+#          .attr('height', (b) -> thisView.getHeightForBucket(b.doc_count))
+#          .attr('width', thisView.getXForBucket.rangeBand())
+#          .attr('y', (b) -> h - thisView.getHeightForBucket(b.doc_count))
+#          .classed('value-bar', true)
+#
+##        #BAR SPLIT SERIES
+##        barGroups.each (d, i) ->
+##          key = d.key
+##          count = d.doc_count
+##          subBuckets = d[thisView.subBucketsAggName].buckets
+##
+##          stackedBars = valueBars.append('rect')
+##            .data(subBuckets)
+##            .enter()
+##            .append('rect')
+##            .
+#
+#
+#
+#      else
+
+      
       barGroups = barsContainerG.selectAll('.bar-group')
         .data(buckets)
         .enter()
         .append('g')
         .classed('bar-group', true)
-        .attr('transform', (b) -> 'translate(' + getXForBucket(b.key) + ')')
-#        .attr("data-legend",(b) ->  return b.key)
+        .attr('transform', (b) -> 'translate(' + thisView.getXForBucket(b.key) + ')')
 
       barGroups.append('rect')
-        .attr('height', BARS_CONTAINER_HEIGHT)
-        .attr('width', getXForBucket.rangeBand())
+        .attr('height', @BARS_CONTAINER_HEIGHT)
+        .attr('width', thisView.getXForBucket.rangeBand())
         .classed('background-bar', true)
 
+      h = @BARS_CONTAINER_HEIGHT
       valueBars = barGroups.append('rect')
-        .attr('height', (b) -> getHeightForBucket(b.doc_count))
-        .attr('width', getXForBucket.rangeBand())
-        .attr('y', (b) -> BARS_CONTAINER_HEIGHT - getHeightForBucket(b.doc_count) )
+        .attr('height', (b) -> thisView.getHeightForBucket(b.doc_count))
+        .attr('width', thisView.getXForBucket.rangeBand())
+        .attr('y', (b) -> h - thisView.getHeightForBucket(b.doc_count))
         .classed('value-bar', true)
 
       frontBar = barGroups.append('rect')
-        .attr('height', BARS_CONTAINER_HEIGHT)
-        .attr('width', getXForBucket.rangeBand())
+        .attr('height', @BARS_CONTAINER_HEIGHT)
+        .attr('width', thisView.getXForBucket.rangeBand())
         .classed('front-bar', true)
         .on('click', (b) -> window.open(b.link) )
 
@@ -301,19 +325,19 @@ glados.useNameSpace 'glados.views.Visualisation',
         .classed('x-axis', true)
 
       xAxisContainerG.append('line')
-        .attr('x2', BARS_CONTAINER_WIDTH)
+        .attr('x2', @BARS_CONTAINER_WIDTH)
         .classed('axis-line', true)
 
       xAxisContainerG.append('text')
         .text(@currentXAxisProperty.label)
         .attr('text-anchor', 'middle')
-        .attr('x', BARS_CONTAINER_WIDTH/2)
+        .attr('x', @BARS_CONTAINER_WIDTH/2)
         .attr('y', X_AXIS_HEIGHT*(3/4))
         .classed('property-label', true)
 
 
       xAxis = d3.svg.axis()
-        .scale(getXForBucket)
+        .scale(thisView.getXForBucket)
 
       if @config.stacked_histogram
         formatAsYear = d3.format("1999")
@@ -321,28 +345,28 @@ glados.useNameSpace 'glados.views.Visualisation',
 
       xAxisContainerG.call(xAxis)
 
-      if @config.stacked_histogram
+      if @config.disable_axes_ticks_autorotation
         xAxisContainerG.selectAll('.tick text')
             .attr('transform', 'translate(-10,20)rotate(-90)')
       else
-        @rotateXAxisTicksIfNeeded(xAxisContainerG, getXForBucket)
+        @rotateXAxisTicksIfNeeded(xAxisContainerG, thisView.getXForBucket)
 
       yAxisContainerG = mainSVGContainer.append('g')
         .attr('transform', 'translate(' + Y_AXIS_WIDTH + ',' + (TITLE_Y + TITLE_Y_PADDING) + ')')
         .classed('y-axis', true)
 
       yAxisContainerG.append('line')
-        .attr('y2', BARS_CONTAINER_HEIGHT)
+        .attr('y2', @BARS_CONTAINER_HEIGHT)
         .classed('axis-line', true)
 
       # reverse the original scale range to get correct number order
       scaleForYAxis = d3.scale.linear()
-        .domain(getHeightForBucket.domain())
-        .range([getHeightForBucket.range()[1], getHeightForBucket.range()[0]])
+        .domain(thisView.getHeightForBucket.domain())
+        .range([thisView.getHeightForBucket.range()[1], thisView.getHeightForBucket.range()[0]])
 
       yAxis = d3.svg.axis()
         .scale(scaleForYAxis)
-        .tickSize(-BARS_CONTAINER_WIDTH, 0)
+        .tickSize(-@BARS_CONTAINER_WIDTH, 0)
         .orient('left')
 
       yAxisContainerG.call(yAxis)

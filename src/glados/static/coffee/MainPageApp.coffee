@@ -63,6 +63,7 @@ class MainPageApp
 
     histogramConfig =
       stacked_histogram: true
+      disable_axes_ticks_autorotation: true
       big_size: true
       paint_axes_selectors: true
       properties:

@@ -160,7 +160,7 @@ describe "Utils", ->
       subBucketsAggName = 'split_series_agg'
 
       testBucketsWithSubBuckets = generateBucketsWithSubBuckets(2, 20, subBucketsAggName)
-      newBucketsWithSubBuckets =  glados.Utils.Buckets.getSubBuckets(testBucketsWithSubBuckets, subBucketsAggName)
+      newBucketsWithSubBuckets =  glados.Utils.Buckets.getSubBucketsOrder(testBucketsWithSubBuckets, subBucketsAggName)
 
       newBucketsWithSubBucketsList = _.sortBy( _.values(newBucketsWithSubBuckets), (item) -> item.pos )
 
