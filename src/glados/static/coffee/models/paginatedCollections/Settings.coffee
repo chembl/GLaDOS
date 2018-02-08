@@ -524,10 +524,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         MODEL: glados.models.Compound.TargetPrediction
         DEFAULT_PAGE_SIZE: 5
         ID_COLUMN: glados.models.Compound.TargetPrediction.ID_COLUMN
-        COLUMNS: []
+        COLUMNS: glados.models.Compound.TargetPrediction.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
-            Default: []
+            Default: glados.models.Compound.TargetPrediction.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
       # used for targets
       APPROVED_DRUGS_CLINICAL_CANDIDATES_LIST:
         MODEL: ApprovedDrugClinicalCandidate

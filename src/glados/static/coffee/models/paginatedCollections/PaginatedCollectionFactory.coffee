@@ -135,6 +135,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             all_items_selected: false
             selection_exceptions: {}
             data_loaded: false
+            model: collectionSettings.MODEL
 
           @on 'reset', @resetMeta, @
 
@@ -151,7 +152,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
               if filterFunc?
                 models = _.filter(models, filterFunc)
 
-              @reset(models)
+              parsedModels = []
+              BaseModel = @getMeta('model')
+              for model in models
+                parsedModel = BaseModel.prototype.parse model
+                parsedModels.push parsedModel
+
+              @setMeta('data_loaded', true)
+              @reset(parsedModels)
             ), @
 
       return new collection

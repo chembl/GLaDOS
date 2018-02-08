@@ -14,19 +14,22 @@ glados.useNameSpace 'glados.views.Compound',
         model: @model
         generator_property: '_metadata.target_predictions'
         filter: filterFunc1uM
-      @list1uM = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewClientSideCollectionFor(settings,
+      list1uM = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewClientSideCollectionFor(settings,
         generator1uM)
 
-      @list1uMView = glados.views.PaginatedViews.PaginatedViewFactory.getNewTablePaginatedView(
-        @list1uM, $(@el).find('.BCK-1MicroMolar-Predictions'), customRenderEvent=undefined, disableColumnsSelection=true)
+      glados.views.PaginatedViews.PaginatedViewFactory.getNewTablePaginatedView(
+        list1uM, $(@el).find('.BCK-1MicroMolar-Predictions'), customRenderEvent=undefined, disableColumnsSelection=true)
 
       filterFunc10uM = (p) -> p.value == 10
       generator10uM =
         model: @model
         generator_property: '_metadata.target_predictions'
         filter: filterFunc10uM
-      @list10uM = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewClientSideCollectionFor(settings,
+      list10uM = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewClientSideCollectionFor(settings,
         generator10uM)
+
+      glados.views.PaginatedViews.PaginatedViewFactory.getNewTablePaginatedView(
+        list10uM, $(@el).find('.BCK-10MicroMolar-Predictions'), customRenderEvent=undefined, disableColumnsSelection=true)
 
       @initEmbedModal(arguments[0].embed_section_name, arguments[0].embed_identifier)
       @activateModals()
@@ -34,17 +37,11 @@ glados.useNameSpace 'glados.views.Compound',
 
     render: ->
 
-      console.log 'RENDER TARG PREDS!'
       rawTargetPredidctions = @model.get('_metadata').target_predictions
       if not rawTargetPredidctions?
         return
       if rawTargetPredidctions.length == 0
         return
-
-      console.log '@list1uM: ', @list1uM
-      console.log '@list1uMView: ', @list1uMView
-
-      console.log '@list10uM: ', @list10uM
 
       @showCardContent()
       @showSection()
