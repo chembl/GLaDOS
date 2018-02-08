@@ -17,13 +17,12 @@
             {{#unless this.hide_label}}
                 <small>
             {{/unless}}
-            <p style="overflow: hidden; text-overflow: ellipsis; white-space:nowrap;">
+            <p>
             {{#unless this.hide_label}}
                 <b>{{this.name_to_show}}:</b>
             {{/unless}}
         {% endverbatim %}
     {% endif %}
-
 
 
     {% verbatim %}
@@ -68,6 +67,8 @@
 
 
     {% if for_card %}
+
+
         {% verbatim %}
             </p>
             {{#unless this.hide_label}}
