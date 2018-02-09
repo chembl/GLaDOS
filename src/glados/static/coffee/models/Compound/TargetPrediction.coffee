@@ -14,6 +14,8 @@ glados.models.Compound.TargetPrediction.COLUMNS =
   TARGET_CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: 'target_chembl_id'
     link_base:'target_link'
+  TARGET_PREF_NAME: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'target_pref_name'
   ORGANISM:
     name_to_show: 'Organism'
     comparator: 'target_organism'
@@ -21,6 +23,16 @@ glados.models.Compound.TargetPrediction.COLUMNS =
     name_to_show: 'Score'
     comparator: 'probability'
     parse_function: (value) -> parseFloat(value).toFixed(3)
+  IN_TRAINING:
+    name_to_show: 'In Training Set'
+    comparator: 'in_training'
+    parse_function: (value) ->
+      if value == '0'
+        return 'no'
+      else if value == '1'
+        return 'yes'
+      else
+        return 'unknown'
 
 glados.models.Compound.TargetPrediction.ID_COLUMN = glados.models.Compound.TargetPrediction.COLUMNS.PRED_ID
 
@@ -33,6 +45,15 @@ glados.models.Compound.TargetPrediction.COLUMNS_SETTINGS =
   )()
   RESULTS_LIST_TABLE: [
     glados.models.Compound.TargetPrediction.COLUMNS.TARGET_CHEMBL_ID
+    glados.models.Compound.TargetPrediction.COLUMNS.TARGET_PREF_NAME
     glados.models.Compound.TargetPrediction.COLUMNS.ORGANISM
     glados.models.Compound.TargetPrediction.COLUMNS.SCORE
+    glados.models.Compound.TargetPrediction.COLUMNS.IN_TRAINING
   ]
+
+glados.models.Compound.TargetPrediction.CONDITIONAL_ROW_FORMATS =
+  COMPOUND_REPORT_CARD: (model) ->
+    if model.get('in_training') == '0'
+      return {
+        color: glados.Settings.VIS_COLORS.LIGHT_GREEN5
+      }

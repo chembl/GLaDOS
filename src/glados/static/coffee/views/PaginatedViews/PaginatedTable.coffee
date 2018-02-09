@@ -122,6 +122,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     fillTemplates: ->
 
       $elem = $(@el).find('.BCK-items-container')
+
+      if @collection.getMeta('columns_description').Table.remove_striping
+        $elem.removeClass('striped')
+
       allColumns = @getAllColumns()
       @numVisibleColumnsList.push allColumns.length
       # this is a workaround to the problem
@@ -168,12 +172,18 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         columnsWithValues = glados.Utils.getColumnsWithValues(columns, item)
         idValue = glados.Utils.getNestedValue(item.attributes, @collection.getMeta('id_column').comparator)
 
+        conditionalRowFormatFunc = @collection.getMeta('columns_description').Table.ConditionalRowFormatting
+        conditionalFormat = undefined
+        if conditionalRowFormatFunc?
+          conditionalFormat = conditionalRowFormatFunc(item)
+
         templateParams =
           base_check_box_id: idValue
           is_selected: @collection.itemIsSelected(idValue)
           img_url: glados.Utils.getImgURL(columnsWithValues)
           columns: columnsWithValues
           selection_disabled: @disableItemsSelection
+          conditional_format: conditionalFormat
 
         $newItemElem = $(applyTemplateTo(templateParams))
         $appendTo.append($newItemElem)
