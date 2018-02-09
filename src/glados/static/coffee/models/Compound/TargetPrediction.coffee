@@ -21,6 +21,16 @@ glados.models.Compound.TargetPrediction.COLUMNS =
     name_to_show: 'Score'
     comparator: 'probability'
     parse_function: (value) -> parseFloat(value).toFixed(3)
+  IN_TRAINING:
+    name_to_show: 'In Training Set'
+    comparator: 'in_training'
+    parse_function: (value) ->
+      if value == '0'
+        return 'no'
+      else if value == '1'
+        return 'yes'
+      else
+        return 'unknown'
 
 glados.models.Compound.TargetPrediction.ID_COLUMN = glados.models.Compound.TargetPrediction.COLUMNS.PRED_ID
 
@@ -35,4 +45,5 @@ glados.models.Compound.TargetPrediction.COLUMNS_SETTINGS =
     glados.models.Compound.TargetPrediction.COLUMNS.TARGET_CHEMBL_ID
     glados.models.Compound.TargetPrediction.COLUMNS.ORGANISM
     glados.models.Compound.TargetPrediction.COLUMNS.SCORE
+    glados.models.Compound.TargetPrediction.COLUMNS.IN_TRAINING
   ]
