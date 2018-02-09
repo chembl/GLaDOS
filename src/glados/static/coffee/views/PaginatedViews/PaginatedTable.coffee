@@ -122,6 +122,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     fillTemplates: ->
 
       $elem = $(@el).find('.BCK-items-container')
+
+      if @collection.getMeta('columns_description').Table.remove_striping
+        $elem.removeClass('striped')
+
       allColumns = @getAllColumns()
       @numVisibleColumnsList.push allColumns.length
       # this is a workaround to the problem
@@ -174,6 +178,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           img_url: glados.Utils.getImgURL(columnsWithValues)
           columns: columnsWithValues
           selection_disabled: @disableItemsSelection
+          conditional_format:
+            color: '#e8f5e9'
 
         $newItemElem = $(applyTemplateTo(templateParams))
         $appendTo.append($newItemElem)

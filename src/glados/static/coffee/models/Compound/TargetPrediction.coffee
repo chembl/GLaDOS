@@ -47,3 +47,10 @@ glados.models.Compound.TargetPrediction.COLUMNS_SETTINGS =
     glados.models.Compound.TargetPrediction.COLUMNS.SCORE
     glados.models.Compound.TargetPrediction.COLUMNS.IN_TRAINING
   ]
+
+glados.models.Compound.TargetPrediction.CONDITIONAL_ROW_FORMATS =
+  COMPOUND_REPORT_CARD: (model) ->
+    if model.get('in_training') == '0'
+      return {
+        color: '#e8f5e9'
+      }

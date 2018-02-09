@@ -528,6 +528,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS_DESCRIPTION:
           Table:
             Default: glados.models.Compound.TargetPrediction.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+            ConditionalRowFormatting: glados.models.Compound.TargetPrediction.CONDITIONAL_ROW_FORMATS.COMPOUND_REPORT_CARD
+            remove_striping: true
       # used for targets
       APPROVED_DRUGS_CLINICAL_CANDIDATES_LIST:
         MODEL: ApprovedDrugClinicalCandidate
@@ -544,8 +546,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Default: ApprovedDrugClinicalCandidate.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
           Carousel:
             Default: ApprovedDrugClinicalCandidate.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-
-
       STRUCTURAL_ALERTS_LIST:
         MODEL: glados.models.Compound.StructuralAlert
         COLUMNS: glados.models.Compound.StructuralAlert.COLUMNS_SETTINGS.ALL_COLUMNS
