@@ -383,10 +383,21 @@ glados.useNameSpace 'glados.views.Visualisation',
 
     renderStackedHistogramBars: (barsContainerG, buckets) ->
 
-      if @config.stacked_histogram
-        subBucketsOrder = glados.Utils.Buckets.getSubBucketsOrder(buckets, @subBucketsAggName)
+      subBucketsOrder = glados.Utils.Buckets.getSubBucketsOrder(buckets, @subBucketsAggName)
 
       thisView = @
+
+      barsColourScale = thisView.config.bars_colour_scale
+
+      zScaleDomains = []
+      for key, value of subBucketsOrder
+          zScaleDomains.push(key)
+
+      zScale = d3.scale.ordinal()
+        .domain(zScaleDomains)
+        .range(barsColourScale.range)
+
+
       barGroups = barsContainerG.selectAll('.bar-group')
         .data(buckets)
         .enter()
@@ -418,11 +429,26 @@ glados.useNameSpace 'glados.views.Visualisation',
           .data(subBuckets)
           .enter()
           .append('g')
+          .attr('transform', (b) -> "translate(0, #{b.posY})" )
           .classed('bar-group', true)
 
         stackedBarsGroups.append('rect')
           .attr('height', (b) -> thisView.getHeightForBucket(b.doc_count))
           .attr('width', thisView.getXForBucket.rangeBand())
-          .attr('y', (b) -> b.posY )
-          .attr('fill', 'rgb(0,' +  Math.floor(Math.random() * 255 + ', 0)'))
+          .attr('fill', (b) -> zScale(b.key))
+#          .attr('fill', 'red')
+
+
+
+#      if barsColourScale?
+#        valueBars.attr('fill', (b) -> barsColourScale(b.key))
+#      else
+#        valueBars.attr('fill', glados.Settings.VIS_COLORS.TEAL3)
+#
+#        frontBar.on('mouseover', (d, i)->
+#          esto = d3.select(valueBars[0][i])
+#          esto.attr('fill', glados.Settings.VIS_COLORS.RED2))
+#        .on('mouseout', (d, i)->
+#          esto = d3.select(valueBars[0][i])
+#          esto.attr('fill', glados.Settings.VIS_COLORS.TEAL3))
 

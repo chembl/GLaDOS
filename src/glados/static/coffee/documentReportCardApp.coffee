@@ -461,7 +461,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
     stdTypeProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Target', 'TARGET_TYPE',
     withColourScale=true)
 
-    barsColourScale = stdTypeProp.colourScale
+    barsColourScale = stdTypeProp.colourScaleRnage
 
     config =
       max_categories: 8

@@ -52,6 +52,28 @@ glados.useNameSpace 'glados.models.visualisation',
           propName: 'year'
           label: 'Year'
           type: Number
+          colourScale:
+            colourScaleType: glados.Visualisation.CATEGORICAL
+            range: [
+            glados.Settings.VIS_COLORS.TEAL1,
+            glados.Settings.VIS_COLORS.TEAL2,
+            glados.Settings.VIS_COLORS.TEAL3,
+            glados.Settings.VIS_COLORS.TEAL4,
+            glados.Settings.VIS_COLORS.TEAL5,
+            glados.Settings.VIS_COLORS.RED3,
+            glados.Settings.VIS_COLORS.RED2,
+            glados.Settings.VIS_COLORS.RED4,
+            glados.Settings.VIS_COLORS.RED5,
+            glados.Settings.VIS_COLORS.BLUE1,
+            glados.Settings.VIS_COLORS.BLUE2,
+            glados.Settings.VIS_COLORS.BLUE3,
+            glados.Settings.VIS_COLORS.BLUE4,
+            glados.Settings.VIS_COLORS.BLUE5,
+            glados.Settings.VIS_COLORS.ORANGE2,
+            glados.Settings.VIS_COLORS.ORANGE3,
+            glados.Settings.VIS_COLORS.PURPLE1,
+            glados.Settings.VIS_COLORS.PURPLE2
+            ]
     Target:
       esIndex:'chembl_target'
       Properties:
@@ -88,7 +110,6 @@ glados.useNameSpace 'glados.models.visualisation',
           ]
           colourScaleType: glados.Visualisation.CATEGORICAL
 
-        # Check where this graph is being displayed
         TARGET_CLASS:
           propName:'target_class'
           label: 'Target Class'
@@ -168,21 +189,6 @@ glados.useNameSpace 'glados.models.visualisation',
             glados.Settings.VIS_COLORS.PURPLE1,
             glados.Settings.VIS_COLORS.PURPLE2
           ]
-# randomColours = []
-#            numColours = 16
-#            seed = 3
-#            for i in [1..numColours]
-#              randomColours.push ("#" + (Math.round(Math.sin(seed++) * 0xFFFFFF)).toString(16))
-#
-#            range = randomColours
-##            range = [glados.Settings.VISUALISATION_GREY_BASE].concat(d3.scale.category20b().range()).concat(randomColours)
-#
-#            console.log 'AAA range: ', range
-#            console.log 'AAA range: ', JSON.stringify(range)
-#            return range
-#          )()
-          colour
-
           colourScaleType: glados.Visualisation.CATEGORICAL
     ActivityAggregation:
       Properties:
@@ -289,3 +295,18 @@ glados.models.visualisation.PropertiesFactory.getPropertyConfigFor = (entityName
     glados.models.visualisation.PropertiesFactory.generateColourScale(prop)
 
   return prop
+
+
+  # randomColours = []
+#            numColours = 16
+#            seed = 3
+#            for i in [1..numColours]
+#              randomColours.push ("#" + (Math.round(Math.sin(seed++) * 0xFFFFFF)).toString(16))
+#
+#            range = randomColours
+##            range = [glados.Settings.VISUALISATION_GREY_BASE].concat(d3.scale.category20b().range()).concat(randomColours)
+#
+#            console.log 'AAA range: ', range
+#            console.log 'AAA range: ', JSON.stringify(range)
+#            return range
+#          )()

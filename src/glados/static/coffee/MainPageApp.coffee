@@ -47,7 +47,7 @@ class MainPageApp
             split_series_agg:
               type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
               field: 'journal'
-              size: 10
+              size: 15
 
     allDocumentsByYear = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.DOCUMENT_INDEX_URL
@@ -60,14 +60,17 @@ class MainPageApp
   @initPapersPerYear = ->
 
     allDocumentsByYear = MainPageApp.getDocumentsPerYearAgg()
+    type = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('DocumentAggregation', 'YEAR')
+    barsColourScale = type.colourScale
 
     histogramConfig =
+      bars_colour_scale: barsColourScale
       stacked_histogram: true
       disable_axes_ticks_autorotation: true
       big_size: true
       paint_axes_selectors: true
       properties:
-        count: glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('DocumentAggregation', 'YEAR')
+        count: type
       initial_property_x: 'count'
       x_axis_options: ['count']
       x_axis_min_columns: 1
