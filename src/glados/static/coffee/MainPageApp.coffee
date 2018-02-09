@@ -60,8 +60,11 @@ class MainPageApp
   @initPapersPerYear = ->
 
     allDocumentsByYear = MainPageApp.getDocumentsPerYearAgg()
-    type = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('DocumentAggregation', 'YEAR')
-    barsColourScale = type.colourScale
+    yearProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('DocumentAggregation',
+      'YEAR')
+    journalNameProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('DocumentAggregation',
+      'JOURNAL_NAME')
+    barsColourScale = journalNameProp.colourScale
 
     histogramConfig =
       bars_colour_scale: barsColourScale
@@ -71,15 +74,15 @@ class MainPageApp
       big_size: true
       paint_axes_selectors: true
       properties:
-        count: type
-      initial_property_x: 'count'
-      initial_property_z: 'Journal'
+        year: yearProp
+        journal: journalNameProp
+      initial_property_x: 'year'
+      initial_property_z: 'journal'
       x_axis_options: ['count']
       x_axis_min_columns: 1
       x_axis_max_columns: 40
       x_axis_initial_num_columns: 40
       x_axis_prop_name: 'documentsPerYear'
-      sub_buckets_property_name: 'split_series_agg'
       title: 'Documents by Year'
 
     new glados.views.Visualisation.HistogramView

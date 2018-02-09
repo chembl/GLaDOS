@@ -52,15 +52,18 @@ glados.useNameSpace 'glados.models.visualisation',
           propName: 'year'
           label: 'Year'
           type: Number
-          colourScale:
-            colourScaleType: glados.Visualisation.CATEGORICAL
-            range: [
-              glados.Settings.VIS_COLORS.TEAL1,
-              glados.Settings.VIS_COLORS.TEAL2,
-              glados.Settings.VIS_COLORS.TEAL3,
-              glados.Settings.VIS_COLORS.TEAL4,
-              glados.Settings.VIS_COLORS.TEAL5,
-            ]
+        JOURNAL_NAME:
+          propName: 'split_series_agg'
+          label: 'Journal'
+          type: Number
+          colourScaleType: glados.Visualisation.CATEGORICAL
+          coloursRange: [
+            glados.Settings.VIS_COLORS.TEAL1,
+            glados.Settings.VIS_COLORS.TEAL2,
+            glados.Settings.VIS_COLORS.TEAL3,
+            glados.Settings.VIS_COLORS.TEAL4,
+            glados.Settings.VIS_COLORS.TEAL5,
+          ]
     Target:
       esIndex:'chembl_target'
       Properties:

@@ -16,7 +16,8 @@ glados.useNameSpace 'glados.models.visualisation',
       if @isDiscrete()
         @set('ticks', @get('property').domain)
         @set('values-selection', {}) unless not @get('selection-enabled')
-        @fillAmountPerValue()
+        if @get('collection')?
+          @fillAmountPerValue()
       else if @isThreshold()
         @set('values-selection', {}) unless not @get('selection-enabled')
         @setTicks()

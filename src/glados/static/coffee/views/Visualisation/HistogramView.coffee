@@ -7,7 +7,13 @@ glados.useNameSpace 'glados.views.Visualisation',
       @$vis_elem = $(@el).find('.BCK-HistogramContainer')
       @setUpResponsiveRender()
       @xAxisAggName = @config.x_axis_prop_name
-      @subBucketsAggName = @config.sub_buckets_property_name
+
+      if @config.initial_property_z?
+        @subBucketsAggName = @config.properties[@config.initial_property_z].propName
+        @currentZAxisProperty = @config.properties[@config.initial_property_z]
+
+      console.log '@subBucketsAggName', @subBucketsAggName
+
       if @config.paint_axes_selectors
         @currentXAxisProperty = @config.properties[@config.initial_property_x]
         @paintAxesSelectors()
@@ -186,8 +192,9 @@ glados.useNameSpace 'glados.views.Visualisation',
       if @config.legend_vertical
 
         thisView.$legendContainer = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
-#        glados.Utils.renderLegendForProperty(thisView.currentPropertyColour, undefined, thisView.$legendContainer,
-#          enableSelection=false)
+
+        glados.Utils.renderLegendForProperty(@currentZAxisProperty, undefined, thisView.$legendContainer,
+          enableSelection=false)
 
       #-----------------------------------------------------------------------------------------------------------------
       # add title
@@ -400,9 +407,12 @@ glados.useNameSpace 'glados.views.Visualisation',
       for key, value of subBucketsOrder
           zScaleDomains.push(key)
 
-      zScale = d3.scale.ordinal()
-        .domain(zScaleDomains)
-        .range(barsColourScale.range)
+      @currentZAxisProperty.domain = zScaleDomains
+      glados.models.visualisation.PropertiesFactory.generateColourScale(@currentZAxisProperty)
+
+      zScale = @currentZAxisProperty.colourScale
+
+      console.log 'Bioorg. Med. Chem. Lett.: ', zScale('Bioorg. Med. Chem. Lett.')
 
 #     each bar container
       barGroups = barsContainerG.selectAll('.bar-group')
