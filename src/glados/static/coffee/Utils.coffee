@@ -256,7 +256,7 @@ glados.useNameSpace 'glados',
       else
         return (glados.Utils.getNestedValue(model.attributes, propertyName) for model in list.models)
 
-    renderLegendForProperty: (property, collection, $legendContainer, enableSelection=true) ->
+    renderLegendForProperty: (property, collection, $legendContainer, enableSelection=true, legendConfig) ->
 
       if not property.legendModel?
         property.legendModel = new glados.models.visualisation.LegendModel
@@ -268,6 +268,7 @@ glados.useNameSpace 'glados',
         property.legendView = new LegendView
           model: property.legendModel
           el: $legendContainer
+          config: legendConfig
       else
         property.legendView.render()
 

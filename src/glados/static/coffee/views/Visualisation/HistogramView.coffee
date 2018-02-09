@@ -12,8 +12,6 @@ glados.useNameSpace 'glados.views.Visualisation',
         @subBucketsAggName = @config.properties[@config.initial_property_z].propName
         @currentZAxisProperty = @config.properties[@config.initial_property_z]
 
-      console.log '@subBucketsAggName', @subBucketsAggName
-
       if @config.paint_axes_selectors
         @currentXAxisProperty = @config.properties[@config.initial_property_x]
         @paintAxesSelectors()
@@ -33,6 +31,7 @@ glados.useNameSpace 'glados.views.Visualisation',
 
     hideHistogramContent: -> $(@el).find('.BCK-HistogramContainer').hide()
     hideAxesSelectors: -> $(@el).find('.BCK-AxesSelectorContainer').hide()
+
     # ------------------------------------------------------------------------------------------------------------------
     # axes selectors
     # ------------------------------------------------------------------------------------------------------------------
@@ -191,10 +190,11 @@ glados.useNameSpace 'glados.views.Visualisation',
       #-------------------------------------------------------------------------------------------------------------------
       if @config.legend_vertical
 
-        thisView.$legendContainer = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
-
-        glados.Utils.renderLegendForProperty(@currentZAxisProperty, undefined, thisView.$legendContainer,
-          enableSelection=false)
+        legendConfig =
+          columns_layout: true
+        legendElem = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
+        glados.Utils.renderLegendForProperty(@currentZAxisProperty, undefined, legendElem,
+          enableSelection=false, legendConfig)
 
       #-----------------------------------------------------------------------------------------------------------------
       # add title
@@ -411,8 +411,6 @@ glados.useNameSpace 'glados.views.Visualisation',
       glados.models.visualisation.PropertiesFactory.generateColourScale(@currentZAxisProperty)
 
       zScale = @currentZAxisProperty.colourScale
-
-      console.log 'Bioorg. Med. Chem. Lett.: ', zScale('Bioorg. Med. Chem. Lett.')
 
 #     each bar container
       barGroups = barsContainerG.selectAll('.bar-group')

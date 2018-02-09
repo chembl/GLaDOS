@@ -11,6 +11,7 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   initialize: ->
 
+    @config = arguments[0].config
     @model.on 'change', @render, @
     @$vis_elem = $(@el)
     @setUpResponsiveRender()
@@ -206,7 +207,26 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
   # ------------------------------------------------------------------------------------------------------------------
   paintDiscreteLegend: (legendG) ->
 
+    if @config.columns_layout
+      @paintColumnsLayout(legendG)
+    else
+      @paintBarLayout(legendG)
+
+
+  paintColumnsLayout: (legendG) ->
+    domain = @model.get('domain')
+    getColourFor = @model.get('property').colourScale
+    radius = '5px'
+
+#    legendG.selectAll('circle')
+#      .data(domain)
+#      .enter()
+#      .append('circle')
+#      .attr('x', (d, i) ->)
+
+  paintBarLayout: (legendG) ->
     rectanglePadding = 1
+
     getXInLegendFor = d3.scale.ordinal()
       .domain( @model.get('domain') )
       .rangeBands([0, @legendWidth])
@@ -240,7 +260,6 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style('fill', glados.Settings.VISUALISATION_DARKEN_2 )
       .attr('text-anchor', 'middle')
       .attr("transform", "translate(" + getXInLegendFor.rangeBand()/2 + ")")
-
 
     legendG.call(legendAxis)
 
