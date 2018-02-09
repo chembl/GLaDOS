@@ -55,24 +55,11 @@ glados.useNameSpace 'glados.models.visualisation',
           colourScale:
             colourScaleType: glados.Visualisation.CATEGORICAL
             range: [
-            glados.Settings.VIS_COLORS.TEAL1,
-            glados.Settings.VIS_COLORS.TEAL2,
-            glados.Settings.VIS_COLORS.TEAL3,
-            glados.Settings.VIS_COLORS.TEAL4,
-            glados.Settings.VIS_COLORS.TEAL5,
-            glados.Settings.VIS_COLORS.RED3,
-            glados.Settings.VIS_COLORS.RED2,
-            glados.Settings.VIS_COLORS.RED4,
-            glados.Settings.VIS_COLORS.RED5,
-            glados.Settings.VIS_COLORS.BLUE1,
-            glados.Settings.VIS_COLORS.BLUE2,
-            glados.Settings.VIS_COLORS.BLUE3,
-            glados.Settings.VIS_COLORS.BLUE4,
-            glados.Settings.VIS_COLORS.BLUE5,
-            glados.Settings.VIS_COLORS.ORANGE2,
-            glados.Settings.VIS_COLORS.ORANGE3,
-            glados.Settings.VIS_COLORS.PURPLE1,
-            glados.Settings.VIS_COLORS.PURPLE2
+              glados.Settings.VIS_COLORS.TEAL1,
+              glados.Settings.VIS_COLORS.TEAL2,
+              glados.Settings.VIS_COLORS.TEAL3,
+              glados.Settings.VIS_COLORS.TEAL4,
+              glados.Settings.VIS_COLORS.TEAL5,
             ]
     Target:
       esIndex:'chembl_target'

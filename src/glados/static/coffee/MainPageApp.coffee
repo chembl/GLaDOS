@@ -47,7 +47,7 @@ class MainPageApp
             split_series_agg:
               type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
               field: 'journal'
-              size: 15
+              size: 10
 
     allDocumentsByYear = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.DOCUMENT_INDEX_URL
@@ -72,6 +72,7 @@ class MainPageApp
       properties:
         count: type
       initial_property_x: 'count'
+      initial_property_z: 'Journal'
       x_axis_options: ['count']
       x_axis_min_columns: 1
       x_axis_max_columns: 40

@@ -350,7 +350,7 @@ glados.useNameSpace 'glados.views.Visualisation',
       #-----------------------------------------------------------------------------------------------------------------
       # add qtips
       #-----------------------------------------------------------------------------------------------------------------
-      barGroups.each (d, i) ->
+      barGroups.each (d) ->
 
         if thisView.config.range_categories
           rangeText = '[' + d.key.replace('-', ',') + ']'
@@ -384,9 +384,7 @@ glados.useNameSpace 'glados.views.Visualisation',
     renderStackedHistogramBars: (barsContainerG, buckets) ->
 
       subBucketsOrder = glados.Utils.Buckets.getSubBucketsOrder(buckets, @subBucketsAggName)
-
       thisView = @
-
       barsColourScale = thisView.config.bars_colour_scale
 
       zScaleDomains = []
@@ -397,7 +395,6 @@ glados.useNameSpace 'glados.views.Visualisation',
         .domain(zScaleDomains)
         .range(barsColourScale.range)
 
-
       barGroups = barsContainerG.selectAll('.bar-group')
         .data(buckets)
         .enter()
@@ -405,18 +402,12 @@ glados.useNameSpace 'glados.views.Visualisation',
         .classed('bar-group', true)
         .attr('transform', (b) -> 'translate(' + thisView.getXForBucket(b.key) + ')')
 
-      valueBars = barGroups.append('rect')
-        .attr('height', (b) -> thisView.getHeightForBucket(b.doc_count))
-        .attr('width', thisView.getXForBucket.rangeBand())
-        .attr('y', (b) -> thisView.BARS_CONTAINER_HEIGHT - thisView.getHeightForBucket(b.doc_count))
-        .attr('fill', 'Gainsboro')
-
-      #BAR SPLIT SERIES
       barGroups.each (d) ->
         subBuckets = d[thisView.subBucketsAggName].buckets
 
         for bucket in subBuckets
           bucket.pos = subBucketsOrder[bucket.key].pos
+          bucket.bar_key = d.key.split(".")[0]
         subBuckets = _.sortBy(subBuckets, (item) -> item.pos)
 
         previousHeight = thisView.BARS_CONTAINER_HEIGHT
@@ -425,6 +416,7 @@ glados.useNameSpace 'glados.views.Visualisation',
           previousHeight = bucket.posY
 
         thisBarGroup = d3.select(@)
+
         stackedBarsGroups = thisBarGroup.selectAll('.bar-sub-group')
           .data(subBuckets)
           .enter()
@@ -436,19 +428,29 @@ glados.useNameSpace 'glados.views.Visualisation',
           .attr('height', (b) -> thisView.getHeightForBucket(b.doc_count))
           .attr('width', thisView.getXForBucket.rangeBand())
           .attr('fill', (b) -> zScale(b.key))
-#          .attr('fill', 'red')
+
+        stackedBarsGroups.each (d) ->
+          key =  d.key
+          docCount = d.doc_count
+          barText = d.bar_key
+
+          barName = thisView.currentXAxisProperty.label
+          keyName = thisView.config.initial_property_z
+
+          text = '<b>' + keyName + '</b>' + ":  " + key + \
+            '<br>' + '<b>' + "Documents:  " + '</b>' + docCount + \
+            '<br>' + '<b>' + barName + ":  "  + '</b>' +  barText
+          $(@).qtip
+            content:
+              text: text
+            style:
+              classes:'qtip-light'
+            position:
+              my: if thisView.config.big_size then 'bottom right' else 'top center'
+              at: 'bottom center'
+              target: 'mouse'
+              adjust:
+                y: -50
 
 
-
-#      if barsColourScale?
-#        valueBars.attr('fill', (b) -> barsColourScale(b.key))
-#      else
-#        valueBars.attr('fill', glados.Settings.VIS_COLORS.TEAL3)
-#
-#        frontBar.on('mouseover', (d, i)->
-#          esto = d3.select(valueBars[0][i])
-#          esto.attr('fill', glados.Settings.VIS_COLORS.RED2))
-#        .on('mouseout', (d, i)->
-#          esto = d3.select(valueBars[0][i])
-#          esto.attr('fill', glados.Settings.VIS_COLORS.TEAL3))
 
