@@ -67,6 +67,7 @@ class MainPageApp
       bars_colour_scale: barsColourScale
       stacked_histogram: true
       rotate_x_axis_if_needed: false
+      legend_vertical: true
       big_size: true
       paint_axes_selectors: true
       properties:

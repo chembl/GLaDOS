@@ -14,10 +14,10 @@ glados.useNameSpace 'glados.views.Visualisation',
         @paintNumBarsRange()
       @showPreloader()
 
-#    events:
-#      'change .BCK-ESResultsPlot-selectXAxis': 'handleXAxisPropertyChange'
-#      'change .BCK-ESResultsPlot-selectXAxis-numBars input': 'handleNumColumnsChange'
-#      'change .BCK-ESResultsPlot-selectXAxis-binSize input': 'handleBinSizeChange'
+    events:
+      'change .BCK-ESResultsPlot-selectXAxis': 'handleXAxisPropertyChange'
+      'change .BCK-ESResultsPlot-selectXAxis-numBars input': 'handleNumColumnsChange'
+      'change .BCK-ESResultsPlot-selectXAxis-binSize input': 'handleBinSizeChange'
 
     showPreloader: ->
       if @config.big_size
@@ -180,6 +180,15 @@ glados.useNameSpace 'glados.views.Visualisation',
         @renderSimpleHistogramBars(barsContainerG, buckets)
 
 
+      #-------------------------------------------------------------------------------------------------------------------
+      # add legend
+      #-------------------------------------------------------------------------------------------------------------------
+      if @config.legend_vertical
+
+        thisView.$legendContainer = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
+#        glados.Utils.renderLegendForProperty(thisView.currentPropertyColour, undefined, thisView.$legendContainer,
+#          enableSelection=false)
+
       #-----------------------------------------------------------------------------------------------------------------
       # add title
       #-----------------------------------------------------------------------------------------------------------------
@@ -239,7 +248,7 @@ glados.useNameSpace 'glados.views.Visualisation',
 
       xAxisContainerG.call(xAxis)
 
-      if @config.rotate_x_axis_if_needed 
+      if @config.rotate_x_axis_if_needed
         @rotateXAxisTicksIfNeeded(xAxisContainerG, thisView.getXForBucket)
 
       yAxisContainerG = mainSVGContainer.append('g')
@@ -453,4 +462,5 @@ glados.useNameSpace 'glados.views.Visualisation',
               at: 'bottom center'
               target: 'mouse'
               adjust:
-                y: -50
+                y: -10
+
