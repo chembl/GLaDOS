@@ -139,9 +139,8 @@ glados.useNameSpace 'glados.views.Visualisation',
 
       BARS_MIN_HEIGHT = 2
 
-      LEGEND_WIDTH = VISUALISATION_WIDTH * 0.1
       @BARS_CONTAINER_HEIGHT = VISUALISATION_HEIGHT - TITLE_Y - TITLE_Y_PADDING - X_AXIS_HEIGHT
-      @BARS_CONTAINER_WIDTH = (VISUALISATION_WIDTH - Y_AXIS_WIDTH - RIGHT_PADDING) - LEGEND_WIDTH
+      @BARS_CONTAINER_WIDTH = (VISUALISATION_WIDTH - Y_AXIS_WIDTH - RIGHT_PADDING)
       X_AXIS_TRANS_Y =  @BARS_CONTAINER_HEIGHT + TITLE_Y + TITLE_Y_PADDING
 
 
@@ -169,7 +168,7 @@ glados.useNameSpace 'glados.views.Visualisation',
 
       thisView.getXForBucket = d3.scale.ordinal()
         .domain(bucketNames)
-        .rangeRoundBands([0,xRangeEnd], 0.05)
+        .rangeRoundBands([0,xRangeEnd], 0.2)
 
       thisView.getHeightForBucket = d3.scale.linear()
         .domain([0, _.max(bucketSizes)])
@@ -229,6 +228,10 @@ glados.useNameSpace 'glados.views.Visualisation',
 
       xAxis = d3.svg.axis()
         .scale(thisView.getXForBucket)
+        .tickValues thisView.getXForBucket.domain().filter((d, i) ->
+          !(i % 3)
+        )
+
 
       if @config.stacked_histogram
         formatAsYear = d3.format("1999")
@@ -236,10 +239,7 @@ glados.useNameSpace 'glados.views.Visualisation',
 
       xAxisContainerG.call(xAxis)
 
-      if @config.disable_axes_ticks_autorotation
-        xAxisContainerG.selectAll('.tick text')
-            .attr('transform', 'translate(-10,20)rotate(-90)')
-      else
+      if @config.rotate_x_axis_if_needed 
         @rotateXAxisTicksIfNeeded(xAxisContainerG, thisView.getXForBucket)
 
       yAxisContainerG = mainSVGContainer.append('g')
@@ -348,7 +348,7 @@ glados.useNameSpace 'glados.views.Visualisation',
           esto.attr('fill', glados.Settings.VIS_COLORS.TEAL3))
 
       #-----------------------------------------------------------------------------------------------------------------
-      # add qtips
+      # qtips
       #-----------------------------------------------------------------------------------------------------------------
       barGroups.each (d) ->
 
@@ -395,6 +395,7 @@ glados.useNameSpace 'glados.views.Visualisation',
         .domain(zScaleDomains)
         .range(barsColourScale.range)
 
+#     each bar container
       barGroups = barsContainerG.selectAll('.bar-group')
         .data(buckets)
         .enter()
@@ -405,6 +406,7 @@ glados.useNameSpace 'glados.views.Visualisation',
       barGroups.each (d) ->
         subBuckets = d[thisView.subBucketsAggName].buckets
 
+#       get xAxis interval name and pos for each stacked bar
         for bucket in subBuckets
           bucket.pos = subBucketsOrder[bucket.key].pos
           bucket.bar_key = d.key.split(".")[0]
@@ -415,8 +417,8 @@ glados.useNameSpace 'glados.views.Visualisation',
           bucket.posY =  previousHeight - thisView.getHeightForBucket(bucket.doc_count)
           previousHeight = bucket.posY
 
+#       stacked bars
         thisBarGroup = d3.select(@)
-
         stackedBarsGroups = thisBarGroup.selectAll('.bar-sub-group')
           .data(subBuckets)
           .enter()
@@ -429,11 +431,12 @@ glados.useNameSpace 'glados.views.Visualisation',
           .attr('width', thisView.getXForBucket.rangeBand())
           .attr('fill', (b) -> zScale(b.key))
 
+#        qtips
         stackedBarsGroups.each (d) ->
+
           key =  d.key
           docCount = d.doc_count
           barText = d.bar_key
-
           barName = thisView.currentXAxisProperty.label
           keyName = thisView.config.initial_property_z
 
@@ -451,6 +454,3 @@ glados.useNameSpace 'glados.views.Visualisation',
               target: 'mouse'
               adjust:
                 y: -50
-
-
-

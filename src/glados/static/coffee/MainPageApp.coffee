@@ -66,7 +66,7 @@ class MainPageApp
     histogramConfig =
       bars_colour_scale: barsColourScale
       stacked_histogram: true
-      disable_axes_ticks_autorotation: true
+      rotate_x_axis_if_needed: false
       big_size: true
       paint_axes_selectors: true
       properties:
