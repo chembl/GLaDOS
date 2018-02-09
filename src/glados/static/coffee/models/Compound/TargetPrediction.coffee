@@ -14,6 +14,8 @@ glados.models.Compound.TargetPrediction.COLUMNS =
   TARGET_CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: 'target_chembl_id'
     link_base:'target_link'
+  TARGET_PREF_NAME: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'target_pref_name'
   ORGANISM:
     name_to_show: 'Organism'
     comparator: 'target_organism'
@@ -43,6 +45,7 @@ glados.models.Compound.TargetPrediction.COLUMNS_SETTINGS =
   )()
   RESULTS_LIST_TABLE: [
     glados.models.Compound.TargetPrediction.COLUMNS.TARGET_CHEMBL_ID
+    glados.models.Compound.TargetPrediction.COLUMNS.TARGET_PREF_NAME
     glados.models.Compound.TargetPrediction.COLUMNS.ORGANISM
     glados.models.Compound.TargetPrediction.COLUMNS.SCORE
     glados.models.Compound.TargetPrediction.COLUMNS.IN_TRAINING
