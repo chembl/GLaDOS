@@ -106,6 +106,10 @@ urlpatterns += [
     DirectTemplateView.as_view(
       template_name="glados/MoleculeMetabolismGraphFS.html")), ),
 
+  url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/cross_refs/$', xframe_options_exempt(
+    DirectTemplateView.as_view(
+      template_name="glados/CompoundReportCardParts/CrossReferencesToEmbed.html")), ),
+
   url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/unichem_cross_refs/$', xframe_options_exempt(
     DirectTemplateView.as_view(
       template_name="glados/CompoundReportCardParts/UniChemCrossReferencesToEmbed.html")), ),

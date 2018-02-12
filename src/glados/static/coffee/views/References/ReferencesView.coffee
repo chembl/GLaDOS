@@ -1,33 +1,55 @@
 glados.useNameSpace 'glados.views.References',
   ReferencesView: Backbone.View.extend
     initialize: ->
+      @config = arguments[0].config
       @model.on 'change', @render, @
 
     render: ->
 
-      references = @model.get('_metadata').unichem
-      if not references?
-        @renderWhenNoRefs()
-        return
-
-      refsIndex = _.groupBy(references, 'src_name')
-
       refsGroups = []
-      for refKey, refsList of refsIndex
-        refsGroups.push
-          src_name: refKey
-          src_url: refsList[0].src_url
-          ref_items: refsList
-          active: false
 
+      if @config.is_unichem
+        references = @model.get('_metadata').unichem
+        if not references?
+          @renderWhenNoRefs()
+          return
+
+        refsIndex = _.groupBy(references, 'src_name')
+
+        for refKey, refsList of refsIndex
+          refsGroups.push
+            src_name: refKey
+            src_url: refsList[0].src_url
+            ref_items: refsList
+
+      else
+
+        references = @model.get('cross_references')
+        if not references?
+          @renderWhenNoRefs()
+          return
+
+        refsIndex = _.groupBy(references, 'xref_src')
+
+        for refKey, refsList of refsIndex
+
+          for ref in refsList
+            ref.src_url = ref.xref_src_url
+            ref.link = ref.xref_url
+            ref.id = ref.xref_name
+            ref.id ?= ref.xref_id
+
+          refsGroups.push
+            src_name: refKey
+            src_url: refsList[0].xref_src_url
+            ref_items: refsList
+
+      console.log 'refsGroups: ', refsGroups
       refsGroups.sort (a, b) -> a.src_name.localeCompare(b.src_name)
-      refsGroups[0].active = true
 
       referencesContainer = $(@el)
       glados.Utils.fillContentForElement referencesContainer,
         references_groups: refsGroups
-
-      $(@el).find('.collapsible').collapsible()
 
     renderWhenNoRefs: ->
 
