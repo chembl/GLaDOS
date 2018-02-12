@@ -12,6 +12,7 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
   initialize: ->
 
     @config = arguments[0].config
+    console.log '@config:', @config
     @model.on 'change', @render, @
     @$vis_elem = $(@el)
     @setUpResponsiveRender()
@@ -63,22 +64,32 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     @clearLegend()
     elemWidth = $(@el).width()
-    horizontalPadding = 10
+    Padding = 10
     @legendWidth = 0.95 * elemWidth
     legendHeight = @LEGEND_HEIGHT
 
-    legendContainer = d3.select($(@el).get(0))
-    legendSVG = legendContainer.append('svg')
-      .attr('width', @legendWidth + 2 * horizontalPadding )
-      .attr('height', legendHeight )
-    legendG = legendSVG.append('g')
-      .attr("transform", "translate(" + horizontalPadding + "," + (legendHeight - 30) + ")")
+    if !@config.hide_title
+      legendContainer = d3.select($(@el).get(0))
+      legendSVG = legendContainer.append('svg')
+        .attr('width', @legendWidth + 2 * Padding )
+        .attr('height', legendHeight )
+      legendG = legendSVG.append('g')
+        .attr("transform", "translate(" + Padding + "," + (legendHeight - 30) + ")")
 
-    legendSVG.append('text')
-      .text(@model.get('property').label)
-      .attr("class", 'plot-colour-legend-title')
-      .attr('text-anchor', 'middle')
-      .attr("transform", "translate(" + (@legendWidth / 2) + ", 35)")
+      legendSVG.append('text')
+        .text(@model.get('property').label)
+        .attr("class", 'plot-colour-legend-title')
+        .attr('text-anchor', 'middle')
+        .attr("transform", "translate(" + (@legendWidth / 2) + ", 35)")
+
+    else
+      legendContainer = d3.select($(@el).get(0))
+      legendSVG = legendContainer.append('svg')
+        .attr('width', @legendWidth + 2 * Padding )
+        .attr('height', legendHeight )
+      legendG = legendSVG.append('g')
+        .attr("transform", "translate(" + Padding + "," + (Padding) + ")")
+
 
     if @model.isDiscrete()
       @paintDiscreteLegend(legendG)
@@ -202,6 +213,7 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
   selectRange: ->
     values = (parseFloat($(elem).attr('data-range-value')) for elem in $(@el).find('.legend-range-selector')).sort()
     @model.selectRange(values[0], values[1])
+
   # ------------------------------------------------------------------------------------------------------------------
   # Categorical
   # ------------------------------------------------------------------------------------------------------------------
@@ -212,18 +224,39 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
     else
       @paintBarLayout(legendG)
 
-
+  # ------------------------------------------------------------------------------------------------------------------
+  # Columns layout
+  # ------------------------------------------------------------------------------------------------------------------
   paintColumnsLayout: (legendG) ->
     domain = @model.get('domain')
+    console.log 'doma'
     getColourFor = @model.get('property').colourScale
-    radius = '5px'
+    radius = 6
 
-#    legendG.selectAll('circle')
-#      .data(domain)
-#      .enter()
-#      .append('circle')
-#      .attr('x', (d, i) ->)
+    legendG.selectAll('circle')
+      .data(domain)
+      .enter()
+      .append('circle')
+      .attr('cx', 0)
+      .attr('cy', (d, i) -> i * ( radius * 3 ))
+      .attr('r', radius)
+      .attr('fill', (d) -> getColourFor(d))
 
+    legendG.selectAll('text')
+      .data(domain)
+      .enter()
+      .append('text')
+      .text((d) -> d)
+      .attr('x', 15)
+      .attr('y', (d, i) -> (i * ( radius * 3 )) + 4)
+      .style('font-size', '70%')
+      .style('fill', '#333')
+
+
+
+  # ------------------------------------------------------------------------------------------------------------------
+  # Bar layout
+  # ------------------------------------------------------------------------------------------------------------------
   paintBarLayout: (legendG) ->
     rectanglePadding = 1
 

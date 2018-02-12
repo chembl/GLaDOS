@@ -192,6 +192,9 @@ glados.useNameSpace 'glados.views.Visualisation',
 
         legendConfig =
           columns_layout: true
+          hide_title: true
+
+
         legendElem = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
         glados.Utils.renderLegendForProperty(@currentZAxisProperty, undefined, legendElem,
           enableSelection=false, legendConfig)
