@@ -198,12 +198,17 @@ glados.useNameSpace 'glados.models.Aggregations',
       return aggsConfig
 
 
-    loadBuckets: (bucketsData, newAggsConfig, receivedAggsInfo) ->
+    loadBuckets: (bucketsData, newAggsConfig, receivedAggsInfo, parentKey) ->
 
       aggs = newAggsConfig.aggs
       for aggKey, aggDescription of aggs
 
         currentBuckets = receivedAggsInfo[aggKey].buckets
+        if parentKey?
+          for bucket in currentBuckets
+#           this could not work in all cases in the future
+            bucket.parent_key = parseInt(parentKey)
+
         # ---------------------------------------------------------------------
         # Parsing by type
         # ---------------------------------------------------------------------
@@ -265,7 +270,11 @@ glados.useNameSpace 'glados.models.Aggregations',
           newAggsConfig = aggs[aggKey]
           newBucketsData = bucketsData[aggKey].buckets_index[internalBucketKey]
           newReceivedAggsInfo = receivedAggsInfo[aggKey].buckets[internalBucketKey]
-          @loadBuckets(newBucketsData, newAggsConfig, newReceivedAggsInfo)
+
+          parentKey = undefined
+          if newBucketsData?
+            parentKey = newBucketsData.key
+          @loadBuckets(newBucketsData, newAggsConfig, newReceivedAggsInfo, parentKey)
 
     parse: (data) ->
 

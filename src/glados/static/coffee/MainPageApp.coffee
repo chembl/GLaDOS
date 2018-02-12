@@ -48,6 +48,16 @@ class MainPageApp
               type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
               field: 'journal'
               size: 10
+              bucket_links:
+
+                bucket_filter_template: 'year:{{year}} AND journal:("{{bucket_key}}"' +
+                                        '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
+                template_data:
+                  year: 'BUCKET.parent_key'
+                  bucket_key: 'BUCKET.key'
+                  extra_buckets: 'EXTRA_BUCKETS.key'
+
+                link_generator: Document.getDocumentsListURL
 
     allDocumentsByYear = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.DOCUMENT_INDEX_URL

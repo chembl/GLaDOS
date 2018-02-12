@@ -459,6 +459,7 @@ glados.useNameSpace 'glados.views.Visualisation',
           .attr('height', (b) -> thisView.getHeightForBucket(b.doc_count))
           .attr('width', thisView.getXForBucket.rangeBand())
           .attr('fill', (b) -> zScale(b.key))
+          .on('click', (b) -> window.open(b.link))
 
 #        qtips
         stackedBarsGroups.each (d) ->

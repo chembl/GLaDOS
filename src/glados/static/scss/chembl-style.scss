@@ -3100,6 +3100,13 @@ span.badge-primary-color-no-float {
 
 }
 
+.histogram-legend{
+  max-height: 100px;
+  overflow-y: scroll;
+  margin: 15px;
+  padding: 15px;
+}
+
 
     //  .axis-helper-line {
     //    stroke-width: 0.5;
@@ -3116,8 +3123,8 @@ span.badge-primary-color-no-float {
     //text {
     //  fill: #666666;
     //}
-    //
-}
+//    //
+//}
 
 
 

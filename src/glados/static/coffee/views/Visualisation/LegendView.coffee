@@ -70,9 +70,11 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
     if !@config.hide_title
       legendContainer = d3.select($(@el).get(0))
       legendSVG = legendContainer.append('svg')
+        .classed('main-legendSVG', true)
         .attr('width', @legendWidth + 2 * Padding )
         .attr('height', legendHeight )
       legendG = legendSVG.append('g')
+        .classed('main-legendG', true)
         .attr("transform", "translate(" + Padding + "," + (legendHeight - 30) + ")")
 
       legendSVG.append('text')
@@ -84,10 +86,13 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
     else
       legendContainer = d3.select($(@el).get(0))
       legendSVG = legendContainer.append('svg')
+        .classed('main-legendSVG', true)
         .attr('width', @legendWidth + 2 * Padding )
         .attr('height', legendHeight )
       legendG = legendSVG.append('g')
+        .classed('main-legendG', true)
         .attr("transform", "translate(" + Padding*2 + "," + (Padding) + ")")
+
 
 
     if @model.isDiscrete()
@@ -98,6 +103,11 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
       @paintContinuousLegend(legendG)
 
     @addExtraCss()
+
+    if @config.columns_layout
+      legendSVG = $(@el).find('.main-legendSVG')
+      legendGHeight = $(@el).find('.main-legendG')[0].getBBox().height
+      legendSVG.height(legendGHeight + 5)
 
   # ------------------------------------------------------------------------------------------------------------------
   # Continuous
