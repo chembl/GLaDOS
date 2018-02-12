@@ -23,6 +23,7 @@ glados.useNameSpace 'glados',
       @scrollSpyHandler.registerSection(sectionID, sectionLabel)
       sectionModel = new Backbone.Model
         title: sectionLabel
+        expanded: true
 
       new glados.views.ReportCards.SectionView
         el: $('#' + sectionID)
