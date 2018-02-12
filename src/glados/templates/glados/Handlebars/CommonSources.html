@@ -736,33 +736,33 @@
 </ul>
 </script>
 
-<script id="Handlebars-Common-References-Collapsible" type="text/x-handlebars-template">
+<script id="Handlebars-Common-References-Table" type="text/x-handlebars-template">
 
- <ul class="collapsible ebi-links z-depth-0" data-collapsible="expandable">
+ <table class="bordered striped">
 
  {{#each references_groups}}
 
-   <li>
-      <div class="collapsible-header {{#if active}}active{{/if}}">
-        <a href="{{this.src_url}}">
-          <i class="fa fa-link"></i>
+   <tr>
+      <th>
+        <a target="_blank" href="{{this.src_url}}" class="ref-source-link">
+          {{this.src_name}}
         </a>
-        {{this.src_name}}
-      </div>
-      <div class="collapsible-body">
+
+      </th>
+      <td >
 
         {{#each this.ref_items}}
-          <a target='_blank' href="{{this.link}}">{{this.id}}</a>
+          <a target='_blank' href="{{this.link}}">{{this.id}}</a>{{#unless @last }}, {{/unless}}
         {{/each}}
 
-      </div>
+      </td>
 
-   </li>
+   </tr>
 
  {{/each}}
 
 
- </ul>
+ </table>
 
 </script>
 
