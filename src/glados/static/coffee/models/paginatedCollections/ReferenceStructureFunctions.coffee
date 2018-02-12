@@ -64,9 +64,20 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
     loadReferenceCTAB: ->
 
-      url = glados.Settings.BEAKER_BASE_URL + 'smiles2ctab'
-      data = @getMeta('reference_smiles')
-      getReferenceCTAB = $.post(url, data)
+      formData = new FormData()
+      smilesFileBlob = new Blob([@getMeta('reference_smiles')], {type: 'chemical/x-daylight-smiles'})
+      formData.append('file', smilesFileBlob, 'molecule.smi')
+      formData.append('sanitize', 0)
+
+      ajaxRequestDict =
+        url: glados.Settings.BEAKER_BASE_URL + 'smiles2ctab'
+        data: formData
+        enctype: 'multipart/form-data'
+        processData: false
+        contentType: false
+        cache: false
+
+      getReferenceCTAB = $.post(ajaxRequestDict)
 
       getReferenceCTAB.done $.proxy(@handleReferenceCTABLoaded, @)
       getReferenceCTAB.error $.proxy(@handleReferenceCTABError, @)
@@ -90,9 +101,20 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
     loadReferenceSmarts: ->
 
-      url = glados.Settings.BEAKER_BASE_URL + 'ctab2smarts'
-      data = @getMeta('reference_ctab')
-      getReferenceSmarts = $.post(url, data)
+      formData = new FormData()
+      molFileBlob = new Blob([@getMeta('reference_ctab')], {type: 'chemical/x-mdl-molfile'})
+      formData.append('file', molFileBlob, 'molecule.mol')
+      formData.append('sanitize', 0)
+
+      ajaxRequestDict =
+        url: glados.Settings.BEAKER_BASE_URL + 'ctab2smarts'
+        data: formData
+        enctype: 'multipart/form-data'
+        processData: false
+        contentType: false
+        cache: false
+
+      getReferenceSmarts = $.post(ajaxRequestDict)
 
       getReferenceSmarts.done $.proxy(@handleReferenceSmartsLoaded, @)
       getReferenceSmarts.error $.proxy(@handleReferenceSmartsError, @)

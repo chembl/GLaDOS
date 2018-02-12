@@ -109,7 +109,6 @@ SearchModel = Backbone.Model.extend
           if maxScore > scoreI
             break
           insertAt++
-        console.warn(groupedSuggestions[sortedSuggestions[0]][0].entityLabel, JSON.stringify(allSuggestionsScores))
         allSuggestionsScores.splice(insertAt, 0, suggestions[0].maxScore)
         allSuggestions.splice(insertAt, 0, suggestions)
 
