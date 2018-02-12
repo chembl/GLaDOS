@@ -11,6 +11,8 @@ glados.useNameSpace 'glados.views.Visualisation',
       if @config.initial_property_z?
         @subBucketsAggName = @config.properties[@config.initial_property_z].propName
         @currentZAxisProperty = @config.properties[@config.initial_property_z]
+        @maxZCategories = @config.max_z_categories
+        console.log ' @maxZCategories',  @maxZCategories
 
       if @config.paint_axes_selectors
         @currentXAxisProperty = @config.properties[@config.initial_property_x]
@@ -404,7 +406,6 @@ glados.useNameSpace 'glados.views.Visualisation',
 
       subBucketsOrder = glados.Utils.Buckets.getSubBucketsOrder(buckets, @subBucketsAggName)
       thisView = @
-      barsColourScale = thisView.config.bars_colour_scale
 
       zScaleDomains = []
       for key, value of subBucketsOrder
@@ -426,10 +427,18 @@ glados.useNameSpace 'glados.views.Visualisation',
       barGroups.each (d) ->
         subBuckets = d[thisView.subBucketsAggName].buckets
 
+        console.log 'subBuckets.length: ', subBuckets.length
+        console.log '@maxZCategories: ', @maxZCategories
+
+        if subBuckets.length >  thisView.maxZCategories
+
+          subBuckets = glados.Utils.Buckets.mergeBuckets(subBuckets,  thisView.maxZCategories, @model, @subBucketsAggName, subBuckets = true)
+
 #       get xAxis interval name and pos for each stacked bar
         for bucket in subBuckets
-          bucket.pos = subBucketsOrder[bucket.key].pos
-          bucket.bar_key = d.key.split(".")[0]
+          if bucket.key != glados.Visualisation.Activity.OTHERS_LABEL
+            bucket.pos = subBucketsOrder[bucket.key].pos
+            bucket.bar_key = d.key.split(".")[0]
         subBuckets = _.sortBy(subBuckets, (item) -> item.pos)
 
         previousHeight = thisView.BARS_CONTAINER_HEIGHT

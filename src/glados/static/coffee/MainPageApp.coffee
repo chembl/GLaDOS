@@ -84,6 +84,7 @@ class MainPageApp
       x_axis_initial_num_columns: 40
       x_axis_prop_name: 'documentsPerYear'
       title: 'Documents by Year'
+      max_z_categories: 7
 
     new glados.views.Visualisation.HistogramView
       el: $('.BCK-MainHistogramContainer')

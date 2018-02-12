@@ -368,7 +368,3 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
     console.log 'paint threshold legend!'
 
   getTextAmountPerRange: (value) -> '(' + @model.getTextAmountPerRange(value) + ')'
-
-
-
-

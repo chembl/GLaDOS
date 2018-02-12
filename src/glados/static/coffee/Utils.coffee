@@ -278,7 +278,7 @@ glados.useNameSpace 'glados',
     getRadiansFromDegrees: (degrees) -> (degrees * Math.PI) / 180
 
     Buckets:
-      mergeBuckets: (buckets, maxCategories, model, aggName) ->
+      mergeBuckets: (buckets, maxCategories, model, aggName, subBuckets=false) ->
 
         if buckets.length > maxCategories
           start = maxCategories - 1
@@ -290,10 +290,18 @@ glados.useNameSpace 'glados',
           else
             mergedLink = ''
 
-          othersBucket =
-            doc_count: _.reduce(_.pluck(bucketsToMerge, 'doc_count'), ((a, b) -> a + b))
-            key: glados.Visualisation.Activity.OTHERS_LABEL
-            link: mergedLink
+          if subBuckets
+            othersBucket =
+              key: glados.Visualisation.Activity.OTHERS_LABEL
+              doc_count: _.reduce(_.pluck(bucketsToMerge, 'doc_count'), ((a, b) -> a + b))
+              pos: Number.MAX_VALUE
+              bar_key: "2000"
+              link: mergedLink
+          else
+            othersBucket =
+              doc_count: _.reduce(_.pluck(bucketsToMerge, 'doc_count'), ((a, b) -> a + b))
+              key: glados.Visualisation.Activity.OTHERS_LABEL
+              link: mergedLink
 
           buckets = buckets[0..start-1]
           buckets.push(othersBucket)
@@ -333,6 +341,7 @@ glados.useNameSpace 'glados',
 
         return buckets
 
+#     returns ordered list of sub buckets odc count
       getSubBucketsOrder: (buckets, subBucketsAggName) ->
         internalBucketsCounts = {}
 
@@ -342,9 +351,11 @@ glados.useNameSpace 'glados',
           for splitSeriesBucket in splitSeriesBuckets
             bucketKey = splitSeriesBucket.key
 
+#            adds the sub bucket to the list
             if not internalBucketsCounts[bucketKey]
               internalBucketsCounts[bucketKey] = 0
 
+#           adds the doc count to the bucket name
             internalBucketsCounts[bucketKey] += splitSeriesBucket.doc_count
 
         sortingList = []
