@@ -238,13 +238,13 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
     if GlobalVariables.CURRENT_SCREEN_TYPE == 'SMALL_SCREEN'
       domainGroupsSize = 2
     else if GlobalVariables.CURRENT_SCREEN_TYPE == 'MEDIUM_SCREEN'
-      domainGroupsSize = 4
+      domainGroupsSize = 3
     else if GlobalVariables.CURRENT_SCREEN_TYPE == 'LARGE_SCREEN'
       domainGroupsSize = 4
 
 
     columnSize = Math.ceil domain.length/domainGroupsSize
-
+    columnWidth = @legendWidth / domainGroupsSize
     domainGroups = []
 
     i = 0
@@ -262,7 +262,7 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('cy', (d, i) -> i * ( radius * 3 ))
         .attr('r', radius)
         .attr('fill', (d) -> getColourFor(d))
-        .attr('transform', 'translate(' + 200 * a + ', 0)')
+        .attr('transform', 'translate(' + columnWidth * a + ', 0)')
 
       legendG.selectAll('.text-' + a)
         .data(column)
@@ -271,13 +271,9 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
         .text((d) -> d)
         .attr('x', 15)
         .attr('y', (d, i) -> (i * ( radius * 3 )) + 4)
-        .attr('transform', 'translate(' + 200 * a + ', 0)')
+        .attr('transform', 'translate(' + columnWidth * a + ', 0)')
         .style('font-size', '70%')
         .style('fill', '#333')
-
-      console.log 'column: ', column
-
-
 
   # ------------------------------------------------------------------------------------------------------------------
   # Bar layout
