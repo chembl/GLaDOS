@@ -1,0 +1,11 @@
+{% extends "glados/base/embed_base.html" %}
+
+{% block title %}Compound Cross References{% endblock %}
+
+{% block content2 %}
+  {% include "glados/CompoundReportCardParts/CrossReferences.html" %}
+{% endblock %}
+
+{% block custom_js_inline %}
+CompoundReportCardApp.initCrossReferences();
+{% endblock %}

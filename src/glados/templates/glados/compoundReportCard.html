@@ -266,9 +266,9 @@
 
                     <div class="row BCK-section-content">
 
-                        {% block cross_references %}
+                        {% with is_dynamic=True %}
                             {% include "glados/CompoundReportCardParts/CrossReferences.html" %}
-                        {% endblock %}
+                        {% endwith %}
 
                     </div>
 
