@@ -187,6 +187,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
         formData.append('format', 'svg')
         formData.append('height', '500')
         formData.append('width', '500')
+#        formData.append('sanitize', 0)
         ajax_deferred = $.post
           url: Compound.SMILES_2_SIMILARITY_MAP_URL
           data: formData
@@ -304,6 +305,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
         formData.append('smarts', referenceSmarts)
         formData.append('computeCoords', 0)
         formData.append('force', 'true')
+#        formData.append('sanitize', 0)
         ajax_deferred = $.post
           url: Compound.SDF_2D_HIGHLIGHT_URL
           data: formData
@@ -367,11 +369,28 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
       else if @get(data3DCacheName)?
         resolve(data3DCacheName)
       else
-        ajax_deferred = $.post(Compound.SDF_3D_ENDPOINTS[endpointIndex], @get('sdf2DData'))
+        formData = new FormData()
+        molFileBlob = new Blob([@get('sdf2DData')], {type: 'chemical/x-mdl-molfile'})
+        formData.append('file', molFileBlob, 'molecule.mol')
+
+        ajaxRequestDict =
+          url: Compound.SDF_3D_ENDPOINTS[endpointIndex].url
+          data: formData
+          enctype: 'multipart/form-data'
+          processData: false
+          contentType: false
+          cache: false
+
+        ajax_deferred = $.post ajaxRequestDict
         compoundModel = @
         ajax_deferred.done (ajaxData)->
-          compoundModel.set(data3DCacheName, ajaxData)
-          resolve(ajaxData)
+          if ajaxData? and ajaxData.trim().length > 0
+            compoundModel.set(data3DCacheName, ajaxData)
+            resolve(ajaxData)
+          else
+            compoundModel.set('sdf3DError', true)
+            reject()
+
         ajax_deferred.fail (error)->
           compoundModel.set('sdf3DError', true)
           reject()
