@@ -12,7 +12,6 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
   initialize: ->
 
     @config = arguments[0].config
-    console.log '@config:', @config
     @model.on 'change', @render, @
     @$vis_elem = $(@el)
     @setUpResponsiveRender()
@@ -88,7 +87,7 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('width', @legendWidth + 2 * Padding )
         .attr('height', legendHeight )
       legendG = legendSVG.append('g')
-        .attr("transform", "translate(" + Padding + "," + (Padding) + ")")
+        .attr("transform", "translate(" + Padding*2 + "," + (Padding) + ")")
 
 
     if @model.isDiscrete()
@@ -224,33 +223,59 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
     else
       @paintBarLayout(legendG)
 
+#  GlobalVariables.CURRENT_SCREEN_TYPE == GlobalVariables.SMALL_SCREEN
+#  GlobalVariables.CURRENT_SCREEN_TYPE == GlobalVariables.MEDIUM_SCREEN
+#  GlobalVariables.CURRENT_SCREEN_TYPE == GlobalVariables.LARGE_SCREEN
   # ------------------------------------------------------------------------------------------------------------------
   # Columns layout
   # ------------------------------------------------------------------------------------------------------------------
   paintColumnsLayout: (legendG) ->
+
     domain = @model.get('domain')
-    console.log 'doma'
     getColourFor = @model.get('property').colourScale
     radius = 6
 
-    legendG.selectAll('circle')
-      .data(domain)
-      .enter()
-      .append('circle')
-      .attr('cx', 0)
-      .attr('cy', (d, i) -> i * ( radius * 3 ))
-      .attr('r', radius)
-      .attr('fill', (d) -> getColourFor(d))
+    if GlobalVariables.CURRENT_SCREEN_TYPE == 'SMALL_SCREEN'
+      domainGroupsSize = 2
+    else if GlobalVariables.CURRENT_SCREEN_TYPE == 'MEDIUM_SCREEN'
+      domainGroupsSize = 4
+    else if GlobalVariables.CURRENT_SCREEN_TYPE == 'LARGE_SCREEN'
+      domainGroupsSize = 4
 
-    legendG.selectAll('text')
-      .data(domain)
-      .enter()
-      .append('text')
-      .text((d) -> d)
-      .attr('x', 15)
-      .attr('y', (d, i) -> (i * ( radius * 3 )) + 4)
-      .style('font-size', '70%')
-      .style('fill', '#333')
+
+    columnSize = Math.ceil domain.length/domainGroupsSize
+
+    domainGroups = []
+
+    i = 0
+    while i < domain.length
+      column = domain.slice i, i+columnSize
+      domainGroups.push column
+      i+=columnSize
+
+    for column, a in domainGroups
+      legendG.selectAll('.circle-' + a )
+        .data(column)
+        .enter()
+        .append('circle')
+        .attr('cx', 0)
+        .attr('cy', (d, i) -> i * ( radius * 3 ))
+        .attr('r', radius)
+        .attr('fill', (d) -> getColourFor(d))
+        .attr('transform', 'translate(' + 200 * a + ', 0)')
+
+      legendG.selectAll('.text-' + a)
+        .data(column)
+        .enter()
+        .append('text')
+        .text((d) -> d)
+        .attr('x', 15)
+        .attr('y', (d, i) -> (i * ( radius * 3 )) + 4)
+        .attr('transform', 'translate(' + 200 * a + ', 0)')
+        .style('font-size', '70%')
+        .style('fill', '#333')
+
+      console.log 'column: ', column
 
 
 
