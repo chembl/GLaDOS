@@ -27,8 +27,6 @@ glados.useNameSpace 'glados.views.References',
       glados.Utils.fillContentForElement referencesContainer,
         references_groups: refsGroups
 
-      $(@el).find('.collapsible').collapsible()
-
     renderWhenNoRefs: ->
 
       referencesContainer = $(@el)
