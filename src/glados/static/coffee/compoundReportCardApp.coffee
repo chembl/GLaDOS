@@ -376,6 +376,8 @@ class CompoundReportCardApp extends glados.ReportCardApp
   @initCrossReferences = ->
 
     compound = CompoundReportCardApp.getCurrentCompound()
+    refsConfig =
+      is_unichem: false
 
     new glados.views.ReportCards.ReferencesInCardView
       model: CompoundReportCardApp.getCurrentCompound()
@@ -386,6 +388,8 @@ class CompoundReportCardApp extends glados.ReportCardApp
       section_id: 'CompoundCrossReferences'
       section_label: 'Cross References'
       report_card_app: @
+      config:
+        refs_config: refsConfig
 
     if GlobalVariables['EMBEDED']
       compound.fetch()
@@ -393,6 +397,8 @@ class CompoundReportCardApp extends glados.ReportCardApp
   @initUniChemCrossReferences = ->
 
     compound = CompoundReportCardApp.getCurrentCompound()
+    refsConfig =
+      is_unichem: true
 
     new glados.views.ReportCards.ReferencesInCardView
       model: CompoundReportCardApp.getCurrentCompound()
@@ -403,6 +409,8 @@ class CompoundReportCardApp extends glados.ReportCardApp
       section_id: 'UniChemCrossReferences'
       section_label: 'UniChem Cross References'
       report_card_app: @
+      config:
+        refs_config: refsConfig
 
     if GlobalVariables['EMBEDED']
       compound.fetch()

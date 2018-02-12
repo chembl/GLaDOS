@@ -2,6 +2,7 @@ glados.useNameSpace 'glados.views.ReportCards',
   ReferencesInCardView: CardView.extend
 
     initialize: ->
+      @config = arguments[0].config
       CardView.prototype.initialize.call(@, arguments)
       @model.on 'change', @render, @
 
@@ -12,9 +13,11 @@ glados.useNameSpace 'glados.views.ReportCards',
       @initEmbedModal(@embed_section_name, @embed_identifier)
       @activateModals()
 
+      refsConfig = @config.refs_config
       new glados.views.References.ReferencesView
         model: @model
         el: $(@el).find('.BCK-ReferencesContainer')
+        config: refsConfig
 
     render: ->
 
