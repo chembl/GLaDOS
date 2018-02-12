@@ -423,11 +423,17 @@ glados.useNameSpace 'glados.views.Visualisation',
         .classed('bar-group', true)
         .attr('transform', (b) -> 'translate(' + thisView.getXForBucket(b.key) + ')')
 
+      noOthersBucket = {}
       barGroups.each (d) ->
         subBuckets = d[thisView.subBucketsAggName].buckets
 
         if subBuckets.length >  thisView.maxZCategories
           subBuckets = glados.Utils.Buckets.mergeBuckets(subBuckets,  thisView.maxZCategories, @model, @subBucketsAggName, subBuckets = true)
+
+#       fills object with buckets that are not in the 'other' section
+        for bucket in subBuckets
+          if not noOthersBucket[bucket.key]? and bucket.key != 'Other'
+            noOthersBucket[bucket.key] = bucket
 
 #       get xAxis interval name and pos for each stacked bar
         for bucket in subBuckets
@@ -485,3 +491,8 @@ glados.useNameSpace 'glados.views.Visualisation',
               adjust:
                 y: -10
 
+#     only sends the buckets that are not in the 'others' section for rendering in the legend
+      noOtherScaleDomains = []
+      for key, value of noOthersBucket
+          noOtherScaleDomains.push(key)
+      @currentZAxisProperty.domain = noOtherScaleDomains
