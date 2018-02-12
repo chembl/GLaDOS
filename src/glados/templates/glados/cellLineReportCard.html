@@ -16,11 +16,10 @@
 
                 <h2>Cell Line Report Card</h2>
 
-                <div class="divider"></div>
                 <div id="BasicInformation" class="section scrollspy">
-                    <h3>Basic Information</h3>
+                    {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-                    <div class="row">
+                    <div class="row BCK-section-content">
 
                         {% block dbi %}
                             {% with is_dynamic=True %}
@@ -32,12 +31,10 @@
 
                 </div>
 
-                <div class="divider"></div>
                 <div id="ActivityCharts" class="scrollspy">
-                    <h3>Activity Charts</h3>
+                    {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-
-                    <div class="row piechart-group">
+                    <div class="row piechart-group BCK-section-content">
                         <div class="col m12 l6 piechart-col">
                             <div id="AssaySummary" class="section piechart-section">
                                 <h4 class="center-align">Assay Summary</h4>
@@ -58,11 +55,10 @@
                     </div>
                 </div>
 
-                <div class="divider"></div>
                 <div id="CompoundSummaries" class="section scrollspy">
-                    <h3>Compound Summaries</h3>
+                    {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-                    <div class="row">
+                    <div class="row BCK-section-content">
                         {% with is_dynamic=True %}
                             {% include "glados/CellReportCardParts/CompoundSummary.html" %}
                         {% endwith %}

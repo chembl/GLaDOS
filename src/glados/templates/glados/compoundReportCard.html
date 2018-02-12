@@ -22,11 +22,11 @@
                 <!-- Compound name and classification Section Start -->
                 <h2>Compound Report Card</h2>
 
-                <div class="divider"></div>
-                <div id="CompoundNameAndClassification" class="section scrollspy">
-                    <h3>Compound Name and Classification</h3>
 
-                    <div class="row">
+                <div id="CompoundNameAndClassification" class="section scrollspy">
+                    {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
+
+                    <div class="row BCK-section-content">
 
                         {% block cnc %}
                             {% include "glados/CompoundReportCardParts/NameAndClassification.html" %}
@@ -37,21 +37,20 @@
 
                 </div>
 
-                <div class="divider"></div>
                 <div id="CompoundRepresentations" class="section scrollspy" style="display: none;">
-                    <h3>Compound Representations</h3>
+                    {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-                    <div class="row">
+                    <div class="row BCK-section-content">
                         {% include "glados/CompoundReportCardParts/Representations.html" %}
                     </div>
 
                 </div>
 
-                <div class="divider"></div>
-                <div id="CompoundSources" class="section scrollspy" style="display: none;">
-                    <h3>Compound Sources</h3>
 
-                    <div class="row">
+                <div id="CompoundSources" class="section scrollspy" style="display: none;">
+                    {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
+
+                    <div class="row BCK-section-content">
                         {% with is_dynamic=True %}
                             {% include "glados/CompoundReportCardParts/Sources.html" %}
                         {% endwith %}
@@ -60,12 +59,10 @@
                 </div>
 
 
-                <div class="divider"></div>
                 <div id="AlternateFormsOfCompoundInChEMBL" class="section scrollspy" style="display: none;">
-                    <h3>Alternate Forms of Compound in ChEMBL</h3>
+                    {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-
-                    <div class="row">
+                    <div class="row BCK-section-content">
 
                         {% with is_dynamic=True %}
                             {% include "glados/CompoundReportCardParts/AlternateForms.html" %}
@@ -75,11 +72,10 @@
 
                 </div>
 
-                <div class="divider"></div>
                 <div id="SimilarCompounds" class="section scrollspy" style="display: none;">
-                    <h3>Similar Compounds</h3>
+                    {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-                    <div class="row">
+                    <div class="row BCK-section-content">
 
                         {% with is_dynamic=True %}
                             {% include "glados/CompoundReportCardParts/SimilarCompounds.html" %}
@@ -90,21 +86,19 @@
 
                 </div>
 
-                <div class="divider"></div>
                 <div id="MoleculeFeatures" class="section scrollspy" style="display: none;">
-                    <h3>Molecule Features</h3>
+                    {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-                    <div class="row">
+                    <div class="row BCK-section-content">
                         {% include "glados/CompoundReportCardParts/MoleculeFeatures.html" %}
                     </div>
 
                 </div>
 
-                <div class="divider"></div>
                 <div id="WithdrawnInfo" class="section scrollspy" style="display: none;">
-                    <h3>Withdrawal Information</h3>
+                    {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-                    <div class="row">
+                    <div class="row BCK-section-content">
 
                         {% with is_dynamic=True %}
                             {% include "glados/CompoundReportCardParts/WithdrawnInformation.html" %}
@@ -114,11 +108,10 @@
 
                 </div>
 
-                <div class="divider"></div>
                 <div id="MechanismOfAction" class="section scrollspy" style="display: none;">
-                    <h3>Mechanism of Action</h3>
-                    <div class="row">
+                    {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
+                    <div class="row BCK-section-content">
 
                         {% block mechanism_of_action %}
                             {% include "glados/CompoundReportCardParts/MechanismOfAction.html" %}
@@ -128,23 +121,22 @@
                     </div>
                 </div>
 
-                <div class="divider"></div>
-                <div id="Indications" class="section scrollspy">
-                    <h3>Indications</h3>
 
-                    <div class="row">
+                <div id="Indications" class="section scrollspy">
+                    {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
+
+                    <div class="row BCK-section-content">
                         {% with is_dynamic=True %}
                             {% include "glados/CompoundReportCardParts/Indications.html" %}
                         {% endwith %}
                     </div>
                 </div>
              
-              
-                <div class="divider"></div>
-                <div id="ClinicalData" class="section scrollspy">
-                    <h3>Clinical Data</h3>
 
-                    <div class="row">
+                <div id="ClinicalData" class="section scrollspy">
+                    {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
+
+                    <div class="row BCK-section-content">
 
                         {% with is_dynamic=True %}
                             {% include "glados/CompoundReportCardParts/ClinicalData.html" %}
@@ -154,11 +146,10 @@
 
                 </div>
 
-                <div class="divider"></div>
                 <div id="Metabolism" class="section scrollspy" style="display: none;">
-                    <h3>Metabolism</h3>
+                    {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-                    <div class="row">
+                    <div class="row BCK-section-content">
 
                         {% block metabolism %}
                             {% include "glados/CompoundReportCardParts/Metabolism.html" %}
@@ -170,11 +161,10 @@
 
                 </div>
 
-              <div class="divider"></div>
               <div id="CompoundBIOLSeq" class="section scrollspy" style="display: none;">
-                <h3>Biological Sequence</h3>
+                {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-                <div class="row">
+                <div class="row BCK-section-content">
                   {% with is_dynamic=True %}
                     {% include "glados/CompoundReportCardParts/Biocomponents.html" %}
                   {% endwith %}
@@ -182,12 +172,12 @@
 
               </div>
 
-              <div class="divider"></div>
+
 
               <div id="CompoundHELMNotation" class="section scrollspy" style="display: none;">
-                  <h3>HELM Notation</h3>
+                  {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-                  <div class="row">
+                  <div class="row BCK-section-content">
                       {% with is_dynamic=True %}
                           {% include "glados/CompoundReportCardParts/HELMNotation.html" %}
                       {% endwith %}
@@ -195,10 +185,10 @@
 
               </div>
 
-                <div class="divider"></div>
+
                 <div id="ActivityCharts" class="scrollspy">
-                    <h3>Activity Charts</h3>
-                    <div class="row piechart-group">
+                    {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
+                    <div class="row piechart-group BCK-section-content">
                         <div class="col m12 l6 piechart-col">
                             <div id="CompoundBioactivitySummary" class="section piechart-section">
                                 <h4 class="center-align">Compound Bioactivity Summary</h4>
@@ -231,11 +221,10 @@
                 </div>
 
 
-                <div class="divider"></div>
                 <div id="TargetPredictions" class="section scrollspy" style="display: none;">
-                    <h3>Target Predictions</h3>
+                    {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-                    <div class="row">
+                    <div class="row BCK-section-content">
 
                         {% with is_dynamic=True %}
                             {% include "glados/CompoundReportCardParts/TargetPredictions.html" %}
@@ -245,12 +234,11 @@
 
                 </div>
 
-                <div class="divider"></div>
+
                 <div id="CalculatedCompoundParentProperties" class="section scrollspy" style="display: none;">
-                    <h3>Calculated Compound Parent Properties</h3>
+                    {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-
-                    <div class="row">
+                    <div class="row BCK-section-content">
 
                         {% block calculated_parent_properties %}
                             {% include "glados/CompoundReportCardParts/CalculatedCompoundParentProperties.html" %}
@@ -260,24 +248,23 @@
 
                 </div>
 
-                <div class="divider"></div>
                 <div id="StructuralAlerts" class="section scrollspy" style="display: none;">
-                    <h3>Structural Alerts</h3>
+                    {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-
-                    {% with is_dynamic=True %}
-                        {% include "glados/CompoundReportCardParts/StructuralAlerts.html" %}
-                    {% endwith %}
+                    <div class="BCK-section-content">
+                        {% with is_dynamic=True %}
+                            {% include "glados/CompoundReportCardParts/StructuralAlerts.html" %}
+                        {% endwith %}
+                    </div>
 
 
                 </div>
 
 
-                <div class="divider"></div>
                 <div id="CompoundCrossReferences" class="section scrollspy">
-                    <h3>Compound Cross References</h3>
+                    {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-                    <div class="row">
+                    <div class="row BCK-section-content">
 
                         {% block cross_references %}
                             {% include "glados/CompoundReportCardParts/CrossReferences.html" %}
@@ -287,11 +274,12 @@
 
                 </div>
 
-                <div class="divider"></div>
-                <div id="UniChemCrossReferences" class="section scrollspy" style="display: none;">
-                    <h3>UniChem Cross References</h3>
 
-                    <div class="row">
+                <div id="UniChemCrossReferences" class="section scrollspy" style="display: none;">
+
+                    {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
+
+                    <div class="row BCK-section-content">
 
                         {% with is_dynamic=True %}
                             {% include "glados/CompoundReportCardParts/UniChemCrossReferences.html" %}

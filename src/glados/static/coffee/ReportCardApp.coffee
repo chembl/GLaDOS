@@ -21,6 +21,13 @@ glados.useNameSpace 'glados',
 
     @registerSection = (sectionID, sectionLabel) ->
       @scrollSpyHandler.registerSection(sectionID, sectionLabel)
+      sectionModel = new Backbone.Model
+        title: sectionLabel
+        expanded: true
+
+      new glados.views.ReportCards.SectionView
+        el: $('#' + sectionID)
+        model:sectionModel
 
     # you can provide chembld iD or a model already created
     @initMiniReportCard = (Entity, $containerElem, chemblID, model, customTemplate, additionalTemplateParams={},
