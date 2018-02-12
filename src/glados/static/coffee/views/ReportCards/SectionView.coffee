@@ -13,14 +13,18 @@ glados.useNameSpace 'glados.views.ReportCards',
     toggleExpandCollapse: ->
 
       if @model.get('expanded')
-        console.log 'Collapse!'
+
+        $sectionContent = $(@el).find('.BCK-section-content')
+        $sectionContent.slideUp()
 
         $icon = $(@el).find('.BCK-expand-collapse-button')
         $icon.removeClass('fa-minus')
         $icon.addClass('fa-plus')
         @model.set('expanded', false)
       else
-        console.log 'Expand!!'
+
+        $sectionContent = $(@el).find('.BCK-section-content')
+        $sectionContent.slideDown()
 
         $icon = $(@el).find('.BCK-expand-collapse-button')
         $icon.removeClass('fa-plus')

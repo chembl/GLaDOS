@@ -26,7 +26,7 @@
                 <div id="CompoundNameAndClassification" class="section scrollspy">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-                    <div class="row">
+                    <div class="row BCK-section-content">
 
                         {% block cnc %}
                             {% include "glados/CompoundReportCardParts/NameAndClassification.html" %}
@@ -40,7 +40,7 @@
                 <div id="CompoundRepresentations" class="section scrollspy" style="display: none;">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-                    <div class="row">
+                    <div class="row BCK-section-content">
                         {% include "glados/CompoundReportCardParts/Representations.html" %}
                     </div>
 
@@ -50,7 +50,7 @@
                 <div id="CompoundSources" class="section scrollspy" style="display: none;">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-                    <div class="row">
+                    <div class="row BCK-section-content">
                         {% with is_dynamic=True %}
                             {% include "glados/CompoundReportCardParts/Sources.html" %}
                         {% endwith %}
@@ -62,7 +62,7 @@
                 <div id="AlternateFormsOfCompoundInChEMBL" class="section scrollspy" style="display: none;">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-                    <div class="row">
+                    <div class="row BCK-section-content">
 
                         {% with is_dynamic=True %}
                             {% include "glados/CompoundReportCardParts/AlternateForms.html" %}
@@ -75,7 +75,7 @@
                 <div id="SimilarCompounds" class="section scrollspy" style="display: none;">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-                    <div class="row">
+                    <div class="row BCK-section-content">
 
                         {% with is_dynamic=True %}
                             {% include "glados/CompoundReportCardParts/SimilarCompounds.html" %}
@@ -89,7 +89,7 @@
                 <div id="MoleculeFeatures" class="section scrollspy" style="display: none;">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-                    <div class="row">
+                    <div class="row BCK-section-content">
                         {% include "glados/CompoundReportCardParts/MoleculeFeatures.html" %}
                     </div>
 
@@ -98,7 +98,7 @@
                 <div id="WithdrawnInfo" class="section scrollspy" style="display: none;">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-                    <div class="row">
+                    <div class="row BCK-section-content">
 
                         {% with is_dynamic=True %}
                             {% include "glados/CompoundReportCardParts/WithdrawnInformation.html" %}
@@ -111,8 +111,7 @@
                 <div id="MechanismOfAction" class="section scrollspy" style="display: none;">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-                    <div class="row">
-
+                    <div class="row BCK-section-content">
 
                         {% block mechanism_of_action %}
                             {% include "glados/CompoundReportCardParts/MechanismOfAction.html" %}
@@ -126,7 +125,7 @@
                 <div id="Indications" class="section scrollspy">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-                    <div class="row">
+                    <div class="row BCK-section-content">
                         {% with is_dynamic=True %}
                             {% include "glados/CompoundReportCardParts/Indications.html" %}
                         {% endwith %}
@@ -137,7 +136,7 @@
                 <div id="ClinicalData" class="section scrollspy">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-                    <div class="row">
+                    <div class="row BCK-section-content">
 
                         {% with is_dynamic=True %}
                             {% include "glados/CompoundReportCardParts/ClinicalData.html" %}
@@ -150,7 +149,7 @@
                 <div id="Metabolism" class="section scrollspy" style="display: none;">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-                    <div class="row">
+                    <div class="row BCK-section-content">
 
                         {% block metabolism %}
                             {% include "glados/CompoundReportCardParts/Metabolism.html" %}
@@ -165,7 +164,7 @@
               <div id="CompoundBIOLSeq" class="section scrollspy" style="display: none;">
                 {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-                <div class="row">
+                <div class="row BCK-section-content">
                   {% with is_dynamic=True %}
                     {% include "glados/CompoundReportCardParts/Biocomponents.html" %}
                   {% endwith %}
@@ -178,7 +177,7 @@
               <div id="CompoundHELMNotation" class="section scrollspy" style="display: none;">
                   {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-                  <div class="row">
+                  <div class="row BCK-section-content">
                       {% with is_dynamic=True %}
                           {% include "glados/CompoundReportCardParts/HELMNotation.html" %}
                       {% endwith %}
@@ -189,7 +188,7 @@
 
                 <div id="ActivityCharts" class="scrollspy">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
-                    <div class="row piechart-group">
+                    <div class="row piechart-group BCK-section-content">
                         <div class="col m12 l6 piechart-col">
                             <div id="CompoundBioactivitySummary" class="section piechart-section">
                                 <h4 class="center-align">Compound Bioactivity Summary</h4>
@@ -225,7 +224,7 @@
                 <div id="TargetPredictions" class="section scrollspy" style="display: none;">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-                    <div class="row">
+                    <div class="row BCK-section-content">
 
                         {% with is_dynamic=True %}
                             {% include "glados/CompoundReportCardParts/TargetPredictions.html" %}
@@ -239,7 +238,7 @@
                 <div id="CalculatedCompoundParentProperties" class="section scrollspy" style="display: none;">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-                    <div class="row">
+                    <div class="row BCK-section-content">
 
                         {% block calculated_parent_properties %}
                             {% include "glados/CompoundReportCardParts/CalculatedCompoundParentProperties.html" %}
@@ -252,9 +251,11 @@
                 <div id="StructuralAlerts" class="section scrollspy" style="display: none;">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-                    {% with is_dynamic=True %}
-                        {% include "glados/CompoundReportCardParts/StructuralAlerts.html" %}
-                    {% endwith %}
+                    <div class="BCK-section-content">
+                        {% with is_dynamic=True %}
+                            {% include "glados/CompoundReportCardParts/StructuralAlerts.html" %}
+                        {% endwith %}
+                    </div>
 
 
                 </div>
@@ -263,7 +264,7 @@
                 <div id="CompoundCrossReferences" class="section scrollspy">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-                    <div class="row">
+                    <div class="row BCK-section-content">
 
                         {% block cross_references %}
                             {% include "glados/CompoundReportCardParts/CrossReferences.html" %}
@@ -278,7 +279,7 @@
 
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-                    <div class="row">
+                    <div class="row BCK-section-content">
 
                         {% with is_dynamic=True %}
                             {% include "glados/CompoundReportCardParts/UniChemCrossReferences.html" %}
