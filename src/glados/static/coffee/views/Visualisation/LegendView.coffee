@@ -233,9 +233,6 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
     else
       @paintBarLayout(legendG)
 
-#  GlobalVariables.CURRENT_SCREEN_TYPE == GlobalVariables.SMALL_SCREEN
-#  GlobalVariables.CURRENT_SCREEN_TYPE == GlobalVariables.MEDIUM_SCREEN
-#  GlobalVariables.CURRENT_SCREEN_TYPE == GlobalVariables.LARGE_SCREEN
   # ------------------------------------------------------------------------------------------------------------------
   # Columns layout
   # ------------------------------------------------------------------------------------------------------------------
@@ -244,13 +241,14 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
     domain = @model.get('domain')
     getColourFor = @model.get('property').colourScale
     radius = 6
+    elemWidth = $(@el).width()
 
-    if GlobalVariables.CURRENT_SCREEN_TYPE == 'SMALL_SCREEN'
-      domainGroupsSize = 2
-    else if GlobalVariables.CURRENT_SCREEN_TYPE == 'MEDIUM_SCREEN'
-      domainGroupsSize = 3
-    else if GlobalVariables.CURRENT_SCREEN_TYPE == 'LARGE_SCREEN'
+    if elemWidth >= 700
       domainGroupsSize = 4
+    else if elemWidth <= 450
+      domainGroupsSize = 2
+    else
+      domainGroupsSize = 3
 
 
     columnSize = Math.ceil domain.length/domainGroupsSize
@@ -284,6 +282,11 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('transform', 'translate(' + columnWidth * a + ', 0)')
         .style('font-size', '70%')
         .style('fill', '#333')
+
+
+
+
+
 
   # ------------------------------------------------------------------------------------------------------------------
   # Bar layout
