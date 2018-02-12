@@ -12,7 +12,6 @@ glados.useNameSpace 'glados.views.Visualisation',
         @subBucketsAggName = @config.properties[@config.initial_property_z].propName
         @currentZAxisProperty = @config.properties[@config.initial_property_z]
         @maxZCategories = @config.max_z_categories
-        console.log ' @maxZCategories',  @maxZCategories
 
       if @config.paint_axes_selectors
         @currentXAxisProperty = @config.properties[@config.initial_property_x]
@@ -427,11 +426,7 @@ glados.useNameSpace 'glados.views.Visualisation',
       barGroups.each (d) ->
         subBuckets = d[thisView.subBucketsAggName].buckets
 
-        console.log 'subBuckets.length: ', subBuckets.length
-        console.log '@maxZCategories: ', @maxZCategories
-
         if subBuckets.length >  thisView.maxZCategories
-
           subBuckets = glados.Utils.Buckets.mergeBuckets(subBuckets,  thisView.maxZCategories, @model, @subBucketsAggName, subBuckets = true)
 
 #       get xAxis interval name and pos for each stacked bar
@@ -458,7 +453,12 @@ glados.useNameSpace 'glados.views.Visualisation',
         stackedBarsGroups.append('rect')
           .attr('height', (b) -> thisView.getHeightForBucket(b.doc_count))
           .attr('width', thisView.getXForBucket.rangeBand())
-          .attr('fill', (b) -> zScale(b.key))
+          .attr('fill', (b) ->
+            if b.key == 'Other'
+              return glados.Settings.VIS_COLORS.GREY2
+            else
+              return zScale(b.key)
+          )
           .on('click', (b) -> window.open(b.link))
 
 #        qtips

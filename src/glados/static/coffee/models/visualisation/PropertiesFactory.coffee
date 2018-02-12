@@ -58,11 +58,12 @@ glados.useNameSpace 'glados.models.visualisation',
           type: Number
           colourScaleType: glados.Visualisation.CATEGORICAL
           coloursRange: [
-            glados.Settings.VIS_COLORS.TEAL1,
-            glados.Settings.VIS_COLORS.TEAL2,
-            glados.Settings.VIS_COLORS.TEAL3,
-            glados.Settings.VIS_COLORS.TEAL4,
-            glados.Settings.VIS_COLORS.TEAL5,
+            '#0d343a',
+            '#0a585b',
+            '#077c80',
+            '#2ba3a5',
+            '#6fc7c6',
+            '#c4e6e5'
           ]
     Target:
       esIndex:'chembl_target'
