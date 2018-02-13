@@ -239,7 +239,9 @@ class TargetReportCardApp extends glados.ReportCardApp
     target = TargetReportCardApp.getCurrentTarget()
     refsConfig =
       is_unichem: false
-      filter: (ref) -> ref.xref_src == 'Wikipedia'
+      filter: (ref) ->
+        refsInThisSection = ['ArrayExpress', 'EnsemblGene', 'GoComponent', 'GoFunction', 'GoProcess', 'Wikipedia']
+        return ref.xref_src in refsInThisSection
 
     new glados.views.ReportCards.ReferencesInCardView
       model: target
@@ -261,7 +263,10 @@ class TargetReportCardApp extends glados.ReportCardApp
     target = TargetReportCardApp.getCurrentTarget()
     refsConfig =
       is_unichem: false
-      filter: (ref) -> ref.xref_src == 'canSAR-Target'
+      filter: (ref) ->
+        refsInThisSection = ['canSAR-Target', 'CGD', 'ComplexPortal', 'HumanProteinAtlas', 'IntAct',
+          'GuideToPHARMACOLOGY', 'MICAD', 'EnsemblGene', 'PharmGKB', 'Pharos', 'Reactome', 'TIMBAL', 'UniProt']
+        return ref.xref_src in refsInThisSection
 
     new glados.views.ReportCards.ReferencesInCardView
       model: target
@@ -283,7 +288,9 @@ class TargetReportCardApp extends glados.ReportCardApp
     target = TargetReportCardApp.getCurrentTarget()
     refsConfig =
       is_unichem: false
-#      filter: (ref) -> ref.xref_src == 'canSAR-Target'
+      filter: (ref) ->
+        refsInThisSection = ['InterPro', 'Pfam']
+        return ref.xref_src in refsInThisSection
 
     new glados.views.ReportCards.ReferencesInCardView
       model: target
@@ -305,7 +312,9 @@ class TargetReportCardApp extends glados.ReportCardApp
     target = TargetReportCardApp.getCurrentTarget()
     refsConfig =
       is_unichem: false
-#      filter: (ref) -> ref.xref_src == 'canSAR-Target'
+      filter: (ref) ->
+        refsInThisSection = ['PDBe', 'CREDO']
+        return ref.xref_src in refsInThisSection
 
     new glados.views.ReportCards.ReferencesInCardView
       model: target
