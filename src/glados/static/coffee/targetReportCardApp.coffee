@@ -239,6 +239,13 @@ class TargetReportCardApp extends glados.ReportCardApp
     @registerSection('TargetCrossReferencesGene', 'Gene Cross References')
     @showSection('TargetCrossReferencesGene')
 
+    target = TargetReportCardApp.getCurrentTarget()
+
+
+
+    if GlobalVariables['EMBEDED']
+      target.fetch()
+
   @initProteinCrossReferences = ->
 
     @registerSection('TargetCrossReferencesProtein', 'Protein Cross References')
