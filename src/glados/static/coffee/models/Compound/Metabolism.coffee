@@ -37,12 +37,12 @@ glados.useNameSpace 'glados.models.Compound',
 
         substrateID = metData.substrate_chembl_id
         if not nodesToPosition[substrateID]?
-          @addNode(substrateID, selectedChemblID, metData._metadata.compound_data.substrate_pref_name,
+          @addNode(substrateID, selectedChemblID, metData.substrate_name,
             metData._metadata.compound_data.substrate_image_file, nodesList, nodesToPosition)
 
         metaboliteID = metData.metabolite_chembl_id
         if not nodesToPosition[metaboliteID]?
-          @addNode(metaboliteID, selectedChemblID, metData._metadata.compound_data.metabolite_pref_name,
+          @addNode(metaboliteID, selectedChemblID, metData.metabolite_name,
             metData._metadata.compound_data.metabolite_image_file, nodesList, nodesToPosition)
 
         newEdge =

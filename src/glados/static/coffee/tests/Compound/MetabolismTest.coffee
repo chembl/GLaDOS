@@ -43,6 +43,8 @@ describe 'Compound Metabolism', ->
       nodeGot = nodesGotIndex[nodeID]
       expect(nodeGot?).toBe(true)
       expect(nodeGot.is_current).toBe(nodeID == testChemblID)
+      #for the pref name, the fields 'metabolite_name', and substrate_name were added to the response
+      # https://github.com/chembl/chembl_webservices_2/issues/150
 #      expect(nodeGot.pref_name).toBe(nodeMustBe.pref_name)
 
   it 'parses the edges correctly', ->
