@@ -34,7 +34,7 @@ class TargetReportCardApp extends glados.ReportCardApp
 
       @currentTarget = new Target
         target_chembl_id: targetChemblID
-        fetch_from_elastic: false
+        fetch_from_elastic: true
       return @currentTarget
 
     else return @currentTarget
