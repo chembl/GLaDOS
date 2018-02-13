@@ -18,6 +18,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
 
     simplifyHighlights: (highlights)->
+      gs_data = glados.models.paginatedCollections.esSchema.GLaDOS_es_GeneratedSchema[@getMeta('index_name')]
       simplifiedHL = {}
       for propPath in _.keys(highlights)
         hlData = highlights[propPath]
@@ -45,7 +46,26 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           if not included
             simplifiedHL[propPath][simpleHlK] = hlK
       for propPath in _.keys(simplifiedHL)
-        simplifiedHL[propPath] = Array.from(_.values(simplifiedHL[propPath])).join(' . . . . ')
+        maxValueLength = 0
+        _.each simplifiedHL[propPath], (valueJ, indexJ, valuesList) ->
+          if valueJ.length > 0
+            maxValueLength = valueJ.length
+
+        joinStr = ', '
+        if maxValueLength > 90
+          joinStr = ' . . . . '
+
+        label = propPath
+        label_mini = propPath
+        if gs_data[propPath]?
+          label = django.gettext(gs_data[propPath].label_id)
+          label_mini = django.gettext(gs_data[propPath].label_mini_id)
+
+        simplifiedHL[propPath] = {
+          value: Array.from(_.values(simplifiedHL[propPath])).join(joinStr)
+          label: label
+          label_mini: label_mini
+        }
       return simplifiedHL
 
     # Parses the Elastic Search Response and resets the pagination metadata
