@@ -26,6 +26,34 @@ urlpatterns = \
   )
 
 urlpatterns += [
+
+  # --------------------------------------------------------------------------------------------------------------------
+  # Main Pages
+  # --------------------------------------------------------------------------------------------------------------------
+  url(r'^$', views.main_page, name='main'),
+
+  url(r'^tweets/$', views.get_latest_tweets_json, name='tweets'),
+
+  url(r'^marvin_search_fullscreen/$',
+      DirectTemplateView.as_view(template_name="glados/marvin_search_fullscreen.html"), ),
+
+  url(r'^compound_3D_speck/$',
+      DirectTemplateView.as_view(template_name="glados/comp_3D_view_speck_fullscreen.html"), ),
+
+  url(r'^acknowledgements/$', views.acks, name='acks'),
+
+  url(r'^faqs/$', views.faqs, name='faqs'),
+
+  url(r'^download_wizard/(?P<step_id>\w+)$', views.wizard_step_json, name='wizard_step_json'),
+
+  # --------------------------------------------------------------------------------------------------------------------
+  # Tests
+  # --------------------------------------------------------------------------------------------------------------------
+  url(r'^layout_test/$', DirectTemplateView.as_view(template_name="glados/layoutTest.html"), ),
+  url(r'^string_standardisation_test/$',
+      DirectTemplateView.as_view(template_name="glados/stringStandardisationTest.html"), ),
+  url(r'^js_tests/$', DirectTemplateView.as_view(template_name="glados/jsTests.html"), ),
+
   # --------------------------------------------------------------------------------------------------------------------
   # Django Admin
   # --------------------------------------------------------------------------------------------------------------------
@@ -229,16 +257,6 @@ urlpatterns += [
   url(r'^cell_line_report_card/(?P<chembl_id>\w+)/embed/related_compounds/$', xframe_options_exempt(
     DirectTemplateView.as_view(template_name="glados/CellReportCardParts/CompoundSummaryToEmbed.html")), ),
 
-  url(r'^$', views.main_page, name='main'),
-
-  url(r'^tweets/$', views.get_latest_tweets_json, name='tweets'),
-
-  url(r'^marvin_search_fullscreen/$',
-      DirectTemplateView.as_view(template_name="glados/marvin_search_fullscreen.html"), ),
-
-  url(r'^compound_3D_speck/$',
-      DirectTemplateView.as_view(template_name="glados/comp_3D_view_speck_fullscreen.html"), ),
-
   url(r'^cells/(filter/[\S| ]+)?$',
       DirectTemplateView.as_view(template_name="glados/Browsers/browseCells.html"), ),
 
@@ -262,17 +280,6 @@ urlpatterns += [
 
   url(r'^tissues/(filter/[\S| ]+)?$',
       DirectTemplateView.as_view(template_name="glados/Browsers/browseTissues.html"), ),
-  # --------------------------------------------------------------------------------------------------------------------
-  # Tests
-  # --------------------------------------------------------------------------------------------------------------------
-  url(r'^layout_test/$', DirectTemplateView.as_view(template_name="glados/layoutTest.html"), ),
-  url(r'^string_standardisation_test/$', DirectTemplateView.as_view(template_name="glados/stringStandardisationTest.html"), ),
-  url(r'^js_tests/$', DirectTemplateView.as_view(template_name="glados/jsTests.html"), ),
-
-  url(r'^acknowledgements/$', views.acks, name='acks'),
-  url(r'^faqs/$', views.faqs, name='faqs'),
-
-  url(r'^download_wizard/(?P<step_id>\w+)$', views.wizard_step_json, name='wizard_step_json'),
 
   # --------------------------------------------------------------------------------------------------------------------
   # Drug Browser
