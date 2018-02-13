@@ -302,6 +302,17 @@ header .row {
   }
 }
 
+.pin-top{
+  .chembl-header {
+    .inner-row{
+      .hide-on-pin-top{
+        display: none;
+      }
+    }
+  }
+}
+
+
 #chembl-header-container {
   height: 0;
   z-index: 20;
