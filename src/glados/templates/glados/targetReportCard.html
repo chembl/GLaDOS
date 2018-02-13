@@ -149,9 +149,9 @@
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
                     <div class="row BCK-section-content">
-                        {% block dtcr %}
+                        {% with is_dynamic=True %}
                             {% include "glados/TargetReportCardParts/DomainCrossReferences.html" %}
-                        {% endblock %}
+                        {% endwith %}
                     </div>
 
 
