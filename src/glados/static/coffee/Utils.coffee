@@ -164,9 +164,9 @@ glados.useNameSpace 'glados',
     # handlebars template, with the corresponding values for each column
     # handlebars only allow very simple logic, we have to help the template here and
     # give it everything as ready as possible
-    getColumnsWithValues: (columns, model) ->
-
-      return columns.map (colDescription) ->
+    getColumnsWithValuesAndHighlights: (columns, model) ->
+      included = new Set()
+      columnsToReturn = columns.map (colDescription) ->
 
         returnCol = {}
         returnCol.id = colDescription.id
@@ -244,14 +244,31 @@ glados.useNameSpace 'glados',
           returnCol['custom_html'] = Handlebars.compile(colDescription['custom_field_template'])
             val: returnCol['value']
 
-        # Include highlight data in the column
-        returnCol.has_highlight = model.get('_highlights')? and\
-            _.has(model.get('_highlights'), colDescription.comparator)
-        if returnCol.has_highlight
-          returnCol.highlighted_value = model.get('_highlights')[colDescription.comparator]
+        if colDescription.show
+          # Include highlight data in the column
+          returnCol.has_highlight = model.get('_highlights')? and\
+              _.has(model.get('_highlights'), colDescription.comparator)
+          if returnCol.has_highlight
+            included.add colDescription.comparator
+            returnCol.highlighted_value = model.get('_highlights')[colDescription.comparator].value
 
         # This method should return a value based on the parameter, not modify the parameter
         return returnCol
+
+      highlights = null
+      if model.get('_highlights')? and included.size == 0
+        highlights = []
+        for comparator, hlData of model.get('_highlights')
+          if not included.has(comparator)
+            highlights.push {
+              label: hlData.label
+              label_mini: hlData.label_mini
+              value: hlData.value
+            }
+            if highlights.length >= 3
+              break
+
+      return [columnsToReturn, highlights]
 
 
     #gets the image url from the first column with values that has a 'img_url'
