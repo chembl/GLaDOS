@@ -18,11 +18,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
 
     simplifyHighlights: (highlights)->
+      gs_data = glados.models.paginatedCollections.esSchema.GLaDOS_es_GeneratedSchema[@getMeta('index_name')]
       simplifiedHL = {}
       for propPath in _.keys(highlights)
         hlData = highlights[propPath]
         for suffixJ in glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_SUFFIXES_TO_REMOVE
-          if propPath.endsWith suffixJ
+          if suffixJ instanceof RegExp
+            propPath = propPath.replace suffixJ, ''
+          else if propPath.endsWith suffixJ
             propPath = propPath.replace new RegExp('\.'+suffixJ+'$'), ''
         if not _.has simplifiedHL, propPath
           simplifiedHL[propPath] = {}
@@ -43,7 +46,78 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           if not included
             simplifiedHL[propPath][simpleHlK] = hlK
       for propPath in _.keys(simplifiedHL)
-        simplifiedHL[propPath] = Array.from(_.values(simplifiedHL[propPath])).join(' . . . . ')
+        maxValueLength = 0
+        _.each _.values(simplifiedHL[propPath]), (valueJ, indexJ, valuesList) ->
+          if valueJ.length > 0
+            maxValueLength = valueJ.length
+
+        joinStr = ', '
+        if maxValueLength > 90
+          joinStr = ' . . . . '
+
+        label = propPath
+        label_mini = propPath
+        if gs_data[propPath]?
+          label = django.gettext(gs_data[propPath].label_id)
+          label_mini = django.gettext(gs_data[propPath].label_mini_id)
+
+
+        hlValue =  Array.from(_.values(simplifiedHL[propPath])).join(joinStr)
+        miniHLValue = hlValue
+        if hlValue.length > 120
+          firstSimplified = _.keys(simplifiedHL[propPath])[0].trim()
+          firstComplete = _.values(simplifiedHL[propPath])[0].trim()
+          startsHighlighted = firstComplete.startsWith(
+            glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_OPEN_TAG
+          )
+          endsHighlighted = firstComplete.startsWith(
+            glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_CLOSE_TAG
+          )
+
+          simpleHlKWords = firstSimplified.split(/([^a-zA-Z0-9]|\s)/)
+
+          firstWord = simpleHlKWords[0]
+          if firstWord.length > 50
+            firstWord = firstWord.substring -1, 50
+          if startsHighlighted
+            firstWord = glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_OPEN_TAG + firstWord +
+              glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_CLOSE_TAG
+
+          lastWord = simpleHlKWords[simpleHlKWords.length - 1]
+          if lastWord.length > 50
+            lastWord = lastWord.substring -1, 50
+          if endsHighlighted
+            lastWord = glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_OPEN_TAG + lastWord +
+              glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_CLOSE_TAG
+
+          tagIdx = firstComplete.indexOf(
+            glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_OPEN_TAG
+          )
+          closeTagIdx = firstComplete.indexOf(
+            glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_CLOSE_TAG
+          )
+          firstTag = firstComplete.substring(
+            tagIdx-1, closeTagIdx +
+              glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_CLOSE_TAG.length + 1
+          )
+
+          tagCount = (firstComplete.match(new RegExp(
+              glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_OPEN_TAG_REGEX_ESCAPED, 'g'
+            ), ''
+          ) || []).length
+
+          miniHLValue = firstWord + ' . . . ' + firstTag + ' . . . ' + lastWord
+          if tagCount == 1 and (startsHighlighted or endsHighlighted)
+            miniHLValue = firstWord + ' . . . ' + lastWord
+          if tagCount == 2 and (startsHighlighted or endsHighlighted)
+            miniHLValue = firstWord + ' . . . ' + lastWord
+
+        simplifiedHL[propPath] = {
+          miniValue: miniHLValue
+          value: hlValue
+          label: label
+          label_mini: label_mini
+        }
       return simplifiedHL
 
     # Parses the Elastic Search Response and resets the pagination metadata
@@ -871,7 +945,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             msg: msg
       )
   ,
-    HIGHLIGHT_SUFFIXES_TO_REMOVE: ['eng_analyzed', 'ws_analyzed', 'std_analyzed', 'alphanumeric_lowercase_keyword']
+    HIGHLIGHT_SUFFIXES_TO_REMOVE: [
+      'eng_analyzed', 'ws_analyzed', 'std_analyzed', 'alphanumeric_lowercase_keyword', /\.\d*$/
+    ]
     HIGHLIGHT_OPEN_TAG: '<em class="glados-result-highlight">'
     HIGHLIGHT_CLOSE_TAG: '</em>'
 

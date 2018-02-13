@@ -91,7 +91,7 @@ describe "Utils", ->
     it 'generates columns and values for chembl25', ->
 
       columns = Compound.COLUMNS_SETTINGS.TEST
-      colsWithVals = glados.Utils.getColumnsWithValues(columns, testCompound)
+      [colsWithVals, highlights] = glados.Utils.getColumnsWithValuesAndHighlights(columns, testCompound)
 
       for col in colsWithVals
         expect(col.value?).toBe(true)
@@ -113,7 +113,7 @@ describe "Utils", ->
     it 'obtains img url for chembl25', ->
 
       columns = Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-      colsWithVals = glados.Utils.getColumnsWithValues(columns, testCompound)
+      [colsWithVals, highlights] = glados.Utils.getColumnsWithValuesAndHighlights(columns, testCompound)
 
       expect(glados.Utils.getImgURL(colsWithVals)).toBe("https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL25.svg?engine=indigo")
 
@@ -183,7 +183,7 @@ describe "Utils", ->
 
       it 'generates the correct values', ->
 
-        columnsWithValuesGot = glados.Utils.getColumnsWithValues(testColumns, testTarget)
+        [columnsWithValuesGot, highlights] = glados.Utils.getColumnsWithValuesAndHighlights(testColumns, testTarget)
         expect(columnsWithValuesGot[0].value).toBe('P61794, Q8K5E0')
         expect(columnsWithValuesGot[0].link_url).toBe('http://www.uniprot.org/uniprot/?query=accession:P61794+OR+accession:Q8K5E0')
 

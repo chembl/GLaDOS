@@ -20,7 +20,7 @@ glados.useNameSpace 'glados.views',
 
       columns = @customColumns
       columns ?= @entity.MINI_REPORT_CARD.COLUMNS
-      valuesObject = glados.Utils.getColumnsWithValues(columns, @model)
+      [valuesObject, highlights] = glados.Utils.getColumnsWithValuesAndHighlights(columns, @model)
       imgUrl = glados.Utils.getImgURL(valuesObject)
 
       paramsObj =

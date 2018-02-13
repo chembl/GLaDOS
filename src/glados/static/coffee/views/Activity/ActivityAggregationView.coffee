@@ -5,7 +5,7 @@ glados.useNameSpace 'glados.views.Activity',
 
     render: ->
       templateID = glados.models.Activity.ActivityAggregation.MINI_REPORT_CARD.TEMPLATE
-      valuesObject = glados.Utils.getColumnsWithValues(\
+      [valuesObject, highlights] = glados.Utils.getColumnsWithValuesAndHighlights(\
         glados.models.Activity.ActivityAggregation.MINI_REPORT_CARD.COLUMNS, @model)
 
       filter = 'target_chembl_id:("' + @model.get('target_chembl_id') +

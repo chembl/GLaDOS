@@ -34,7 +34,11 @@
     {% endverbatim %}{% endif %}{% verbatim %}
 
     {{#if this.has_highlight}}
-        {{{this.highlighted_value}}}
+        {{#if this.has_link}}
+            <a href="{{this.link_url}}" target="_blank">{{{this.highlighted_value}}}</a>
+        {{else}}
+            {{{this.highlighted_value}}}
+        {{/if}}
     {{else if this.has_link}}
         <a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
     {{else if this.has_multiple_links}}
@@ -47,6 +51,14 @@
         {{#unless this.hide_value}}
             {{this.value}}
         {{/unless}}
+    {{/if}}
+
+    {{#if @first}}
+        {{#if ../highlights}}
+            {{#each ../highlights}}
+                <br><small><b>{{{this.label}}}:</b> {{{this.value}}}</small>
+            {{/each}}
+        {{/if}}
     {{/if}}
 
     {% endverbatim %}{% if not for_card %}{% verbatim %}

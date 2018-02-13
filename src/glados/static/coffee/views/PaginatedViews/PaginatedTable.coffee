@@ -169,7 +169,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       for item in @collection.getCurrentPage()
 
-        columnsWithValues = glados.Utils.getColumnsWithValues(columns, item)
+        [columnsWithValues, highlights] = glados.Utils.getColumnsWithValuesAndHighlights(columns, item)
         idValue = glados.Utils.getNestedValue(item.attributes, @collection.getMeta('id_column').comparator)
 
         conditionalRowFormatFunc = @collection.getMeta('columns_description').Table.ConditionalRowFormatting
@@ -182,6 +182,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           is_selected: @collection.itemIsSelected(idValue)
           img_url: glados.Utils.getImgURL(columnsWithValues)
           columns: columnsWithValues
+          highlights: highlights
           selection_disabled: @disableItemsSelection
           conditional_format: conditionalFormat
 
