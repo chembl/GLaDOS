@@ -63,5 +63,8 @@ glados.useNameSpace 'glados.views.References',
     renderWhenNoRefs: ->
 
       referencesContainer = $(@el)
-      glados.Utils.fillContentForElement referencesContainer, {is_unichem:@config.is_unichem},
+      glados.Utils.fillContentForElement referencesContainer, {
+        is_unichem: @config.is_unichem
+        chembl_id: @model.get('id')
+        },
         'Handlebars-Common-No-References'
