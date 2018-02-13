@@ -151,7 +151,34 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     filterForTargets = '_metadata.related_compounds.chembl_ids.\\*:' + objData.molecule_chembl_id
     objData.targets_url = Target.getTargetsListURL(filterForTargets)
 
+    @parseChemSpiderXref(objData)
     return objData;
+
+  #---------------------------------------------------------------------------------------------------------------------
+  # Get extra xrefs
+  #---------------------------------------------------------------------------------------------------------------------
+  parseChemSpiderXref: (objData) ->
+
+    molStructures = objData.molecule_structures
+    if not molStructures?
+      return
+
+    inchiKey = molStructures.standard_inchi_key
+    if not inchiKey?
+      return
+
+    chemSpiderLink = "https://www.chemspider.com/Search.aspx?q=#{inchiKey}"
+    chemSpiderSourceLink = "https://www.chemspider.com/"
+    chemSpidetLinkText = "ChemSpider:#{inchiKey}"
+
+    objData.cross_references.push
+      xref_name: chemSpidetLinkText,
+      xref_src: 'ChemSpider',
+      xref_id: inchiKey,
+      xref_url: chemSpiderLink,
+      xref_src_url: chemSpiderSourceLink
+
+
 
   #---------------------------------------------------------------------------------------------------------------------
   # Similarity
