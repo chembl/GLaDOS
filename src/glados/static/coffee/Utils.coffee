@@ -295,7 +295,6 @@ glados.useNameSpace 'glados',
               key: glados.Visualisation.Activity.OTHERS_LABEL
               doc_count: _.reduce(_.pluck(bucketsToMerge, 'doc_count'), ((a, b) -> a + b))
               pos: Number.MAX_VALUE
-              bar_key: "2000"
               link: mergedLink
           else
             othersBucket =

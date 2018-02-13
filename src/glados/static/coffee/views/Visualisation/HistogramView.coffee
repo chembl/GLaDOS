@@ -427,10 +427,27 @@ glados.useNameSpace 'glados.views.Visualisation',
       barGroups.each (d) ->
         subBuckets = d[thisView.subBucketsAggName].buckets
 
-        if subBuckets.length >  thisView.maxZCategories
-          subBuckets = glados.Utils.Buckets.mergeBuckets(subBuckets,  thisView.maxZCategories, @model, @subBucketsAggName, subBuckets = true)
+#       get total doc count for each bar group
+        totalCount = 0
+        for bucket in subBuckets
+          totalCount += bucket.doc_count
 
-#       fills object with buckets that are not in the 'other' section
+#       get number of max categories for each bar group
+        maxCategories = 0
+        for bucket in subBuckets
+          if bucket.doc_count > (totalCount * 0.02)
+            maxCategories += 1
+          console.log bucket.parent_key, "maxC: ", maxCategories
+        console.log "maxC: ", maxCategories
+        console.log '----'
+
+#        there should be at least 2 max categories for the merge to work
+        if maxCategories <= 1
+          maxCategories++
+
+        subBuckets = glados.Utils.Buckets.mergeBuckets(subBuckets,  maxCategories, @model, @subBucketsAggName, subBuckets = true)
+
+#       fills object with buckets that are not in the 'other' section (for legend domain)
         for bucket in subBuckets
           if not noOthersBucket[bucket.key]? and bucket.key != 'Other'
             noOthersBucket[bucket.key] = bucket

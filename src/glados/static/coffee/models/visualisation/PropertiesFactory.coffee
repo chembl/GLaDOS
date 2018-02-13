@@ -64,7 +64,13 @@ glados.useNameSpace 'glados.models.visualisation',
             '#2ba3a5',
             '#6fc7c6',
             '#c4e6e5',
-
+            '#fdabbc',
+            '#f1d6db',
+            '#f9849d',
+            '#e95f7e',
+            '#cc4362',
+            '#a03a50',
+            '#a03a50'
           ]
     Target:
       esIndex:'chembl_target'
