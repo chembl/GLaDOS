@@ -265,7 +265,7 @@ glados.useNameSpace 'glados',
               label_mini: hlData.label_mini
               value: hlData.value
             }
-            if highlights.length >= 3
+            if highlights.length >= 1
               break
 
       return [columnsToReturn, highlights]
