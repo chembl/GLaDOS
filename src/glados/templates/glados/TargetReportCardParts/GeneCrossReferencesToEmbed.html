@@ -1,0 +1,13 @@
+{% extends "glados/base/embed_base.html" %}
+
+{% block title %}Gene Cross References{% endblock %}
+
+{% block content2 %}
+
+    {% include "glados/TargetReportCardParts/GeneCrossReferences.html" %}
+
+{% endblock %}
+
+{% block custom_js_inline %}
+TargetReportCardApp.initGeneCrossReferences();
+{% endblock %}

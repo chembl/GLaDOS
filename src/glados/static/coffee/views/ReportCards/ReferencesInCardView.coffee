@@ -21,8 +21,9 @@ glados.useNameSpace 'glados.views.ReportCards',
 
     render: ->
 
-      if not @model.get('_metadata').unichem?
-        return
+      if @config.refs_config.is_unichem
+        if not @model.get('_metadata').unichem?
+          return
 
       @showSection()
       @showCardContent()

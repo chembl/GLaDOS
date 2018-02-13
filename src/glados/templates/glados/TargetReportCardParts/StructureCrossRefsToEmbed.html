@@ -1,0 +1,11 @@
+{% extends "glados/base/embed_base.html" %}
+
+{% block title %}Structure Cross References{% endblock %}
+
+{% block content2 %}
+    {% include "glados/TargetReportCardParts/StructureCrossReferences.html" %}
+{% endblock %}
+
+{% block custom_js_inline %}
+TargetReportCardApp.initStructureCrossReferences();
+{% endblock %}

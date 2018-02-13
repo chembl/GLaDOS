@@ -34,7 +34,7 @@ class TargetReportCardApp extends glados.ReportCardApp
 
       @currentTarget = new Target
         target_chembl_id: targetChemblID
-        fetch_from_elastic: false
+        fetch_from_elastic: true
       return @currentTarget
 
     else return @currentTarget
@@ -236,23 +236,100 @@ class TargetReportCardApp extends glados.ReportCardApp
 
   @initGeneCrossReferences = ->
 
-    @registerSection('TargetCrossReferencesGene', 'Gene Cross References')
-    @showSection('TargetCrossReferencesGene')
+    target = TargetReportCardApp.getCurrentTarget()
+    refsConfig =
+      is_unichem: false
+      filter: (ref) ->
+        refsInThisSection = ['ArrayExpress', 'EnsemblGene', 'GoComponent', 'GoFunction', 'GoProcess', 'Wikipedia']
+        return ref.xref_src in refsInThisSection
+
+    new glados.views.ReportCards.ReferencesInCardView
+      model: target
+      el: $('#TGeneCrossReferencesCard')
+      embed_section_name: 'gene_cross_refs'
+      embed_identifier: glados.Utils.URLS.getCurrentModelChemblID()
+      resource_type: gettext('glados_entities_target_name')
+      section_id: 'TargetCrossReferencesGene'
+      section_label: 'Gene Cross References'
+      report_card_app: @
+      config:
+        refs_config: refsConfig
+
+    if GlobalVariables['EMBEDED']
+      target.fetch()
 
   @initProteinCrossReferences = ->
 
-    @registerSection('TargetCrossReferencesProtein', 'Protein Cross References')
-    @showSection('TargetCrossReferencesProtein')
+    target = TargetReportCardApp.getCurrentTarget()
+    refsConfig =
+      is_unichem: false
+      filter: (ref) ->
+        refsInThisSection = ['canSAR-Target', 'CGD', 'ComplexPortal', 'HumanProteinAtlas', 'IntAct',
+          'GuideToPHARMACOLOGY', 'MICAD', 'EnsemblGene', 'PharmGKB', 'Pharos', 'Reactome', 'TIMBAL', 'UniProt']
+        return ref.xref_src in refsInThisSection
+
+    new glados.views.ReportCards.ReferencesInCardView
+      model: target
+      el: $('#TProteinCrossReferencesCard')
+      embed_section_name: 'protein_cross_refs'
+      embed_identifier: glados.Utils.URLS.getCurrentModelChemblID()
+      resource_type: gettext('glados_entities_target_name')
+      section_id: 'TargetCrossReferencesProtein'
+      section_label: 'Protein Cross References'
+      report_card_app: @
+      config:
+        refs_config: refsConfig
+
+    if GlobalVariables['EMBEDED']
+      target.fetch()
 
   @initDomainCrossReferences = ->
 
-    @registerSection('TargetCrossReferencesDomain', 'Domain Cross References')
-    @showSection('TargetCrossReferencesDomain')
+    target = TargetReportCardApp.getCurrentTarget()
+    refsConfig =
+      is_unichem: false
+      filter: (ref) ->
+        refsInThisSection = ['InterPro', 'Pfam']
+        return ref.xref_src in refsInThisSection
+
+    new glados.views.ReportCards.ReferencesInCardView
+      model: target
+      el: $('#TDomainCrossReferencesCard')
+      embed_section_name: 'domain_cross_refs'
+      embed_identifier: glados.Utils.URLS.getCurrentModelChemblID()
+      resource_type: gettext('glados_entities_target_name')
+      section_id: 'TargetCrossReferencesDomain'
+      section_label: 'Domain Cross References'
+      report_card_app: @
+      config:
+        refs_config: refsConfig
+
+    if GlobalVariables['EMBEDED']
+      target.fetch()
 
   @initStructureCrossReferences = ->
 
-    @registerSection('TargetCrossReferencesStructure', 'Structure Cross References')
-    @showSection('TargetCrossReferencesStructure')
+    target = TargetReportCardApp.getCurrentTarget()
+    refsConfig =
+      is_unichem: false
+      filter: (ref) ->
+        refsInThisSection = ['PDBe', 'CREDO']
+        return ref.xref_src in refsInThisSection
+
+    new glados.views.ReportCards.ReferencesInCardView
+      model: target
+      el: $('#TStructureCrossReferencesCard')
+      embed_section_name: 'structure_cross_refs'
+      embed_identifier: glados.Utils.URLS.getCurrentModelChemblID()
+      resource_type: gettext('glados_entities_target_name')
+      section_id: 'TargetCrossReferencesStructure'
+      section_label: 'Structure Cross References'
+      report_card_app: @
+      config:
+        refs_config: refsConfig
+
+    if GlobalVariables['EMBEDED']
+      target.fetch()
 
   @initMiniBioactivitiesHistogram = ($containerElem, chemblID) ->
 

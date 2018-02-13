@@ -7,6 +7,7 @@ glados.useNameSpace 'glados.views.References',
     render: ->
 
       refsGroups = []
+      refsFilter = @config.filter
 
       if @config.is_unichem
         references = @model.get('_metadata').unichem
@@ -25,7 +26,15 @@ glados.useNameSpace 'glados.views.References',
       else
 
         references = @model.get('cross_references')
+
         if not references?
+          @renderWhenNoRefs()
+          return
+
+        if refsFilter?
+          references = _.filter(references, refsFilter)
+
+        if references.length == 0
           @renderWhenNoRefs()
           return
 
@@ -54,5 +63,8 @@ glados.useNameSpace 'glados.views.References',
     renderWhenNoRefs: ->
 
       referencesContainer = $(@el)
-      glados.Utils.fillContentForElement referencesContainer, {},
-        'Handlebars-Common-No-References-Collapsible'
+      glados.Utils.fillContentForElement referencesContainer, {
+        is_unichem: @config.is_unichem
+        chembl_id: @model.get('id')
+        },
+        'Handlebars-Common-No-References'

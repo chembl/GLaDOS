@@ -123,9 +123,9 @@
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
                     <div class="row BCK-section-content">
-                        {% block gtcr %}
+                        {% with is_dynamic=True %}
                             {% include "glados/TargetReportCardParts/GeneCrossReferences.html" %}
-                        {% endblock %}
+                        {% endwith %}
 
                     </div>
 
@@ -136,9 +136,9 @@
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
                     <div class="row BCK-section-content">
-                        {% block ptcr %}
+                        {% with is_dynamic=True %}
                             {% include "glados/TargetReportCardParts/ProteinCrossReferences.html" %}
-                        {% endblock %}
+                        {% endwith %}
 
                     </div>
 
@@ -149,9 +149,9 @@
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
                     <div class="row BCK-section-content">
-                        {% block dtcr %}
+                        {% with is_dynamic=True %}
                             {% include "glados/TargetReportCardParts/DomainCrossReferences.html" %}
-                        {% endblock %}
+                        {% endwith %}
                     </div>
 
 
@@ -161,9 +161,9 @@
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
                     <div class="row BCK-section-content">
-                        {% block stcr %}
+                        {% with is_dynamic=True %}
                             {% include "glados/TargetReportCardParts/StructureCrossReferences.html" %}
-                        {% endblock %}
+                        {% endwith %}
                     </div>
 
 
