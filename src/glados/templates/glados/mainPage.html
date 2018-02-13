@@ -33,24 +33,23 @@
   {% include "glados/SearchResultsParts/SearchBar.html" %}
 {% endwith %}
 
-<div id="MainPageCentralDiv" class="row hide-on-small-only">
+<div id="MainPageCentralDiv" class="row">
 
-<!----- PAPERS PER YEAR HISTOGRAM ----->
-  <div class="col m12 l9 ppy" id="PapersPerYearHistogram">
+  <div class="col l9 s12 ppy" id="PapersPerYearHistogram">
   
     {% with is_dynamic=False %}
         {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
     {% endwith %}
   </div>
 
-  <div class="col m6 l3">
+  <div class="col m6 l3  hide-on-small-only">
 
     {% block database_info %}
     {% include "glados/MainPageParts/database_info.html" %}
     {% endblock %}
 </div>
 
-   <div class="col m6 l3">
+   <div class="col m6 l3  hide-on-small-only">
     {% block tweets %}
     {% include "glados/MainPageParts/tweets.html" %}
     {% endblock %}
@@ -60,9 +59,9 @@
 
 </div>
 
-{% block marvin_fullscreen %}
-{% include "glados/MainPageParts/link_to_marvin_fullscreen.html" %}
-{% endblock %}
+{#{% block marvin_fullscreen %}#}
+{#{% include "glados/MainPageParts/link_to_marvin_fullscreen.html" %}#}
+{#{% endblock %}#}
 
 {% endblock %}
 
