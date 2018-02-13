@@ -38,13 +38,13 @@ glados.useNameSpace 'glados.views.References',
             ref.link = ref.xref_url
             ref.id = ref.xref_name
             ref.id ?= ref.xref_id
+            ref.is_atc = refKey == 'ATC'
 
           refsGroups.push
             src_name: refKey
             src_url: refsList[0].xref_src_url
             ref_items: refsList
 
-      console.log 'refsGroups: ', refsGroups
       refsGroups.sort (a, b) -> a.src_name.localeCompare(b.src_name)
 
       referencesContainer = $(@el)
