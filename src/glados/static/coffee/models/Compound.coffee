@@ -152,6 +152,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     objData.targets_url = Target.getTargetsListURL(filterForTargets)
 
     @parseChemSpiderXref(objData)
+    @parseATCXrefs(objData)
     return objData;
 
   #---------------------------------------------------------------------------------------------------------------------
@@ -178,7 +179,47 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
       xref_url: chemSpiderLink,
       xref_src_url: chemSpiderSourceLink
 
+  parseATCXrefs: (objData) ->
 
+    metadata = objData._metadata
+    if not metadata?
+      return
+
+    atcClassifications = metadata.atc_classifications
+    if not atcClassifications?
+      return
+
+    if atcClassifications.length == 0
+      return
+
+    for classification in atcClassifications
+
+      levelsList = []
+      for i in [1..5]
+
+        levelNameKey = "level#{i}"
+        levelNameData = classification[levelNameKey]
+
+        levelLink = "http://www.whocc.no/atc_ddd_index/?code=#{levelNameData}&showdescription=yes"
+
+        if i != 5
+          levelDescKey = "level#{i}_description"
+          levelDescData = classification[levelDescKey].split(' - ')[1]
+        else
+          levelDescData = classification.who_name
+
+        levelsList.push
+          name: levelNameData
+          description: levelDescData
+          link: levelLink
+
+      refsOBJ =
+        xref_src: 'ATC'
+        xref_src_url: 'https://www.whocc.no/atc_ddd_index/'
+        xref_name: 'One ATC Group'
+        levels_refs: levelsList
+
+      objData.cross_references.push refsOBJ
 
   #---------------------------------------------------------------------------------------------------------------------
   # Similarity

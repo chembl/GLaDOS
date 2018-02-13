@@ -752,7 +752,20 @@
       <td >
 
         {{#each this.ref_items}}
+
+          {{#if this.is_atc}}
+            <ul>
+              {{#each this.levels_refs}}
+              <li>
+                {{this.name}} - <a target='_blank' href="{{this.link}}">{{this.description}}</a>
+              </li>
+              {{/each}}
+            </ul>
+          {{else}}
+
           <a target='_blank' href="{{this.link}}">{{this.id}}</a>{{#unless @last }}, {{/unless}}
+
+            {{/if}}
         {{/each}}
 
       </td>
