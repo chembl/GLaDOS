@@ -495,4 +495,5 @@ glados.useNameSpace 'glados.views.Visualisation',
       noOtherScaleDomains = []
       for key, value of noOthersBucket
           noOtherScaleDomains.push(key)
+      noOtherScaleDomains.push('Other')
       @currentZAxisProperty.domain = noOtherScaleDomains

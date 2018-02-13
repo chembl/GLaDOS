@@ -269,7 +269,12 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('cx', 0)
         .attr('cy', (d, i) -> i * ( radius * 3 ))
         .attr('r', radius)
-        .attr('fill', (d) -> getColourFor(d))
+        .attr('fill', (d) ->
+              if d == 'Other'
+                return glados.Settings.VIS_COLORS.GREY2
+              else
+                return getColourFor(d)
+            )
         .attr('transform', 'translate(' + columnWidth * a + ', 0)')
 
       legendG.selectAll('.text-' + a)
@@ -283,24 +288,16 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
         .style('font-size', '70%')
         .style('fill', '#333')
 
-    texts = legendG.selectAll('text')
-#    console.log 'texts: ', texts
-    console.log 'texts: ', texts[0]
-
 #   if the text is too long add ellipsis
+    texts = legendG.selectAll('text')
     for text, d in texts[0]
-      containerLimit = columnWidth - 20
+      containerLimit = columnWidth - 40
       originalWidth = $(texts[0][d])[0].getBBox().width
       originalText = $(texts[0][d])[0].textContent
 
       newText =  glados.Utils.Text.getTextForEllipsis(originalText, originalWidth, containerLimit )
-      console.log 'newText: ', newText
 
       d3.select($(texts[0][d])[0]).text(newText)
-
-
-
-
 
   # ------------------------------------------------------------------------------------------------------------------
   # Bar layout
