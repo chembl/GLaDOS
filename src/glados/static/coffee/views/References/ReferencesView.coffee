@@ -34,6 +34,10 @@ glados.useNameSpace 'glados.views.References',
         if refsFilter?
           references = _.filter(references, refsFilter)
 
+        if references.length == 0
+          @renderWhenNoRefs()
+          return
+
         refsIndex = _.groupBy(references, 'xref_src')
 
         for refKey, refsList of refsIndex
@@ -59,5 +63,5 @@ glados.useNameSpace 'glados.views.References',
     renderWhenNoRefs: ->
 
       referencesContainer = $(@el)
-      glados.Utils.fillContentForElement referencesContainer, {},
-        'Handlebars-Common-No-References-Collapsible'
+      glados.Utils.fillContentForElement referencesContainer, {is_unichem:@config.is_unichem},
+        'Handlebars-Common-No-References'
