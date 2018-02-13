@@ -22,7 +22,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       for propPath in _.keys(highlights)
         hlData = highlights[propPath]
         for suffixJ in glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_SUFFIXES_TO_REMOVE
-          if propPath.endsWith suffixJ
+          if suffixJ instanceof RegExp
+            propPath = propPath.replace suffixJ, ''
+          else if propPath.endsWith suffixJ
             propPath = propPath.replace new RegExp('\.'+suffixJ+'$'), ''
         if not _.has simplifiedHL, propPath
           simplifiedHL[propPath] = {}
@@ -871,7 +873,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             msg: msg
       )
   ,
-    HIGHLIGHT_SUFFIXES_TO_REMOVE: ['eng_analyzed', 'ws_analyzed', 'std_analyzed', 'alphanumeric_lowercase_keyword']
+    HIGHLIGHT_SUFFIXES_TO_REMOVE: [
+      'eng_analyzed', 'ws_analyzed', 'std_analyzed', 'alphanumeric_lowercase_keyword', /\.\d*$/
+    ]
     HIGHLIGHT_OPEN_TAG: '<em class="glados-result-highlight">'
     HIGHLIGHT_CLOSE_TAG: '</em>'
 
