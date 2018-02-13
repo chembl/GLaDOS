@@ -258,8 +258,26 @@ class TargetReportCardApp extends glados.ReportCardApp
 
   @initProteinCrossReferences = ->
 
-    @registerSection('TargetCrossReferencesProtein', 'Protein Cross References')
-    @showSection('TargetCrossReferencesProtein')
+    target = TargetReportCardApp.getCurrentTarget()
+    refsConfig =
+      is_unichem: false
+      filter: (ref) -> ref.xref_src == 'canSAR-Target'
+
+    new glados.views.ReportCards.ReferencesInCardView
+      model: target
+      el: $('#TProteinCrossReferencesCard')
+      embed_section_name: 'protein_cross_refs'
+      embed_identifier: glados.Utils.URLS.getCurrentModelChemblID()
+      resource_type: gettext('glados_entities_target_name')
+      section_id: 'TargetCrossReferencesProtein'
+      section_label: 'Protein Cross References'
+      report_card_app: @
+      config:
+        refs_config: refsConfig
+
+    if GlobalVariables['EMBEDED']
+      target.fetch()
+
 
   @initDomainCrossReferences = ->
 

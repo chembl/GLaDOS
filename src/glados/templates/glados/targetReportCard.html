@@ -136,9 +136,9 @@
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
                     <div class="row BCK-section-content">
-                        {% block ptcr %}
+                        {% with is_dynamic=True %}
                             {% include "glados/TargetReportCardParts/ProteinCrossReferences.html" %}
-                        {% endblock %}
+                        {% endwith %}
 
                     </div>
 

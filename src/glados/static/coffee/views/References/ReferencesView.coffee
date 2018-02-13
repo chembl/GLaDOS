@@ -26,8 +26,7 @@ glados.useNameSpace 'glados.views.References',
       else
 
         references = @model.get('cross_references')
-        console.log 'references: ', references
-        console.log '@model: ', @model
+
         if not references?
           @renderWhenNoRefs()
           return

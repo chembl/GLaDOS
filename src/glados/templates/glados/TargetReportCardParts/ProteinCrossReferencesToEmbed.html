@@ -1,0 +1,13 @@
+{% extends "glados/base/embed_base.html" %}
+
+{% block title %}Protein Cross References{% endblock %}
+
+{% block content2 %}
+
+    {% include "glados/TargetReportCardParts/ProteinCrossReferences.html" %}
+
+{% endblock %}
+
+{% block custom_js_inline %}
+TargetReportCardApp.initProteinCrossReferences();
+{% endblock %}

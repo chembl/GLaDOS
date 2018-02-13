@@ -156,6 +156,10 @@ urlpatterns += [
     DirectTemplateView.as_view(
       template_name="glados/TargetReportCardParts/GeneCrossReferencesToEmbed.html")), ),
 
+  url(r'^target_report_card/(?P<chembl_id>\w+)/embed/protein_cross_refs/$', xframe_options_exempt(
+    DirectTemplateView.as_view(
+      template_name="glados/TargetReportCardParts/ProteinCrossReferencesToEmbed.html")), ),
+
   url(r'^target_report_card/(?P<chembl_id>\w+)/embed/associated_compounds/$', xframe_options_exempt(
     DirectTemplateView.as_view(
       template_name="glados/TargetReportCardParts/AssociatedCompoundsToEmbed.html")), ),
