@@ -88,7 +88,7 @@ glados.useNameSpace 'glados',
       PURPLE1: '#3A49A2'
       PURPLE2: '#8795E8'
 
-      GREY2: '#d6d6d6'
+      GREY2: '#e4e4e4'
       GREY1: '#bbbbbb'
       WHITE: '#fff'
 

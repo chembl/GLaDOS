@@ -285,7 +285,6 @@ glados.useNameSpace 'glados',
           stop = buckets.length - 1
           bucketsToMerge = buckets[start..stop]
 
-          console.log 'model: ', model
           if model?
             mergedLink = model.getMergedLink(bucketsToMerge, aggName)
           else
@@ -297,6 +296,7 @@ glados.useNameSpace 'glados',
               doc_count: _.reduce(_.pluck(bucketsToMerge, 'doc_count'), ((a, b) -> a + b))
               pos: Number.MAX_VALUE
               link: mergedLink
+              bar_key: bucketsToMerge[0].parent_key
           else
             othersBucket =
               doc_count: _.reduce(_.pluck(bucketsToMerge, 'doc_count'), ((a, b) -> a + b))
