@@ -21,6 +21,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         initialize: ->
 
           @meta =
+            index_name: esIndexSettings.INDEX_NAME
             index: esIndexSettings.PATH
             default_page_size: esIndexSettings.DEFAULT_PAGE_SIZE
             page_size: glados.Settings.CARD_PAGE_SIZES[2]
