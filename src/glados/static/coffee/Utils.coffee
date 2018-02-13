@@ -285,6 +285,7 @@ glados.useNameSpace 'glados',
           stop = buckets.length - 1
           bucketsToMerge = buckets[start..stop]
 
+          console.log 'model: ', model
           if model?
             mergedLink = model.getMergedLink(bucketsToMerge, aggName)
           else

@@ -437,13 +437,11 @@ glados.useNameSpace 'glados.views.Visualisation',
         for bucket in subBuckets
           if bucket.doc_count > (totalCount * 0.02)
             maxCategories += 1
-          console.log bucket.parent_key, "maxC: ", maxCategories
-        console.log "maxC: ", maxCategories
-        console.log '----'
 
-#        there should be at least 2 max categories for the merge to work
+#        there should be at least 2 categories for the merge to work
         if maxCategories <= 1
           maxCategories++
+
 
         subBuckets = glados.Utils.Buckets.mergeBuckets(subBuckets,  maxCategories, @model, @subBucketsAggName, subBuckets = true)
 
@@ -484,14 +482,14 @@ glados.useNameSpace 'glados.views.Visualisation',
           )
           .on('click', (b) -> window.open(b.link))
 
-#        qtips
+#       qtips
         stackedBarsGroups.each (d) ->
 
           key =  d.key
           docCount = d.doc_count
           barText = d.bar_key
           barName = thisView.currentXAxisProperty.label
-          keyName = thisView.config.initial_property_z
+          keyName = thisView.currentZAxisProperty.label
 
           text = '<b>' + keyName + '</b>' + ":  " + key + \
             '<br>' + '<b>' + "Documents:  " + '</b>' + docCount + \
