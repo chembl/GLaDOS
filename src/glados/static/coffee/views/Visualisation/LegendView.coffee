@@ -241,6 +241,7 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
     domain = @model.get('domain')
     getColourFor = @model.get('property').colourScale
     radius = 6
+    containerLimit = 0
     elemWidth = $(@el).width()
 
     if elemWidth >= 700
@@ -249,7 +250,6 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
       domainGroupsSize = 2
     else
       domainGroupsSize = 3
-
 
     columnSize = Math.ceil domain.length/domainGroupsSize
     columnWidth = @legendWidth / domainGroupsSize
@@ -283,6 +283,20 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
         .style('font-size', '70%')
         .style('fill', '#333')
 
+    texts = legendG.selectAll('text')
+#    console.log 'texts: ', texts
+    console.log 'texts: ', texts[0]
+
+#   if the text is too long add ellipsis
+    for text, d in texts[0]
+      containerLimit = columnWidth - 20
+      originalWidth = $(texts[0][d])[0].getBBox().width
+      originalText = $(texts[0][d])[0].textContent
+
+      newText =  glados.Utils.Text.getTextForEllipsis(originalText, originalWidth, containerLimit )
+      console.log 'newText: ', newText
+
+      d3.select($(texts[0][d])[0]).text(newText)
 
 
 

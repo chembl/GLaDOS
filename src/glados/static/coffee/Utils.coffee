@@ -411,14 +411,15 @@ glados.useNameSpace 'glados',
 
     Text:
       getTextForEllipsis: (originalText, originalWidth, containerLimit) ->
-
-        numChars = originalText.length
-        charLength = originalWidth / numChars
-        # reduce by num numchars because font characters are not all of the same width
-        numChars = Math.ceil(containerLimit / charLength) - 2
-        textLimit = numChars - 4
-        textLimit = if textLimit < 0 then 0 else textLimit
-        return originalText[0..textLimit] + '...'
+        if originalWidth > containerLimit
+          numChars = originalText.length
+          charLength = originalWidth / numChars
+          # reduce by num numchars because font characters are not all of the same width
+          numChars = Math.ceil(containerLimit / charLength) - 2
+          textLimit = numChars - 4
+          textLimit = if textLimit < 0 then 0 else textLimit
+          return originalText[0..textLimit] + '...'
+        else return originalText
 
     QueryStrings:
       getQueryStringForItemsList: (chemblIDs, idAttribute) ->
