@@ -302,8 +302,25 @@ class TargetReportCardApp extends glados.ReportCardApp
 
   @initStructureCrossReferences = ->
 
-    @registerSection('TargetCrossReferencesStructure', 'Structure Cross References')
-    @showSection('TargetCrossReferencesStructure')
+    target = TargetReportCardApp.getCurrentTarget()
+    refsConfig =
+      is_unichem: false
+#      filter: (ref) -> ref.xref_src == 'canSAR-Target'
+
+    new glados.views.ReportCards.ReferencesInCardView
+      model: target
+      el: $('#TStructureCrossReferencesCard')
+      embed_section_name: 'structure_cross_refs'
+      embed_identifier: glados.Utils.URLS.getCurrentModelChemblID()
+      resource_type: gettext('glados_entities_target_name')
+      section_id: 'TargetCrossReferencesStructure'
+      section_label: 'Structure Cross References'
+      report_card_app: @
+      config:
+        refs_config: refsConfig
+
+    if GlobalVariables['EMBEDED']
+      target.fetch()
 
   @initMiniBioactivitiesHistogram = ($containerElem, chemblID) ->
 
