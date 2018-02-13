@@ -260,11 +260,7 @@ glados.useNameSpace 'glados',
         highlights = []
         for comparator, hlData of model.get('_highlights')
           if not included.has(comparator)
-            highlights.push {
-              label: hlData.label
-              label_mini: hlData.label_mini
-              value: hlData.value
-            }
+            highlights.push hlData
             if highlights.length >= 1
               break
 
