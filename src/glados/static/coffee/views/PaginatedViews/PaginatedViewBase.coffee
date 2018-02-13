@@ -224,7 +224,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       for item in @collection.getCurrentPage()
 
-        columnsWithValues = glados.Utils.getColumnsWithValues(visibleColumns, item)
+        [columnsWithValues, highlights] = glados.Utils.getColumnsWithValuesAndHighlights(visibleColumns, item)
         idValue = glados.Utils.getNestedValue(item.attributes, @collection.getMeta('id_column').comparator)
 
         columnsByComparator = {}
@@ -236,6 +236,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           is_selected: @collection.itemIsSelected(idValue)
           img_url: glados.Utils.getImgURL(columnsWithValues)
           columns: columnsWithValues
+          highlights: highlights
           selection_disabled: @disableItemsSelection
           columns_by_comparator: columnsByComparator
 
