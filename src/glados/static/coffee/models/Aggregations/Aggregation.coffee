@@ -300,7 +300,7 @@ glados.useNameSpace 'glados.models.Aggregations',
 
     getMergedLink: (bucketsToMerge, aggName) ->
 
-      currentAggConfig = @get('aggs_config').aggs[aggName]
+      currentAggConfig = glados.Utils.getNestedValue(@get('aggs_config').aggs, aggName)
       linksDescription = currentAggConfig.bucket_links
       templateDataDesc =  linksDescription.template_data
       template = linksDescription.bucket_filter_template

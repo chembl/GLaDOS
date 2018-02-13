@@ -442,8 +442,8 @@ glados.useNameSpace 'glados.views.Visualisation',
         if maxCategories <= 1
           maxCategories++
 
-
-        subBuckets = glados.Utils.Buckets.mergeBuckets(subBuckets,  maxCategories, @model, @subBucketsAggName, subBuckets = true)
+        subBucketsCompleteAggName = "#{thisView.xAxisAggName}.aggs.#{thisView.subBucketsAggName}"
+        subBuckets = glados.Utils.Buckets.mergeBuckets(subBuckets,  maxCategories, thisView.model, subBucketsCompleteAggName, subBuckets = true)
 
 #       fills object with buckets that are not in the 'other' section (for legend domain)
         for bucket in subBuckets
