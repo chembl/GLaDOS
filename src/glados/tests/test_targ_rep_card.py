@@ -27,7 +27,7 @@ class TargetReportCardTest(ReportCardTester):
 
     synonyms = self.browser.find_element_by_id('Bck-Target_Synonyms')
     self.assertEqual(synonyms.text,
-                     'ADRA1A ADRA1D Alpha-1A adrenergic receptor Alpha-1D adrenergic receptor'
+                     'ADRA1A ADRA1D Alpha-1D adrenergic receptor Alpha-1A adrenergic receptor'
                       ' Alpha-1D adrenoceptor Alpha-1D adrenoreceptor Alpha-adrenergic receptor 1a')
 
     organism = self.browser.find_element_by_id('Bck-Target_Organism')
