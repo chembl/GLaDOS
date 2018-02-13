@@ -1,0 +1,15 @@
+{% extends "glados/base/embed_base.html" %}
+
+{% block title %}Gene Cross References{% endblock %}
+
+{% block content2 %}
+
+   <div id="TargetLigandEfficiencies" style="margin-top: 25px;">
+    {% include "glados/TargetReportCardParts/GeneCrossReferences.html" %}
+   </div>
+
+{% endblock %}
+
+{% block custom_js_inline %}
+TargetReportCardApp.initGeneCrossReferences();
+{% endblock %}
