@@ -236,12 +236,22 @@ class TargetReportCardApp extends glados.ReportCardApp
 
   @initGeneCrossReferences = ->
 
-    @registerSection('TargetCrossReferencesGene', 'Gene Cross References')
-    @showSection('TargetCrossReferencesGene')
-
     target = TargetReportCardApp.getCurrentTarget()
+    refsConfig =
+      is_unichem: false
+      filter: (ref) -> ref.xref_src == 'Wikipedia'
 
-
+    new glados.views.ReportCards.ReferencesInCardView
+      model: target
+      el: $('#TGeneCrossReferencesCard')
+      embed_section_name: 'gene_cross_refs'
+      embed_identifier: glados.Utils.URLS.getCurrentModelChemblID()
+      resource_type: gettext('glados_entities_target_name')
+      section_id: 'TargetCrossReferencesGene'
+      section_label: 'Gene Cross References'
+      report_card_app: @
+      config:
+        refs_config: refsConfig
 
     if GlobalVariables['EMBEDED']
       target.fetch()

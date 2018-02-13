@@ -7,6 +7,7 @@ glados.useNameSpace 'glados.views.References',
     render: ->
 
       refsGroups = []
+      refsFilter = @config.filter
 
       if @config.is_unichem
         references = @model.get('_metadata').unichem
@@ -28,6 +29,9 @@ glados.useNameSpace 'glados.views.References',
         if not references?
           @renderWhenNoRefs()
           return
+
+        if refsFilter?
+          references = _.filter(references, refsFilter)
 
         refsIndex = _.groupBy(references, 'xref_src')
 
