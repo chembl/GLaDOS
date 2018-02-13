@@ -172,6 +172,9 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     chemSpiderSourceLink = "https://www.chemspider.com/"
     chemSpidetLinkText = "ChemSpider:#{inchiKey}"
 
+    if not objData.cross_references?
+      objData.cross_references = []
+
     objData.cross_references.push
       xref_name: chemSpidetLinkText,
       xref_src: 'ChemSpider',
@@ -219,6 +222,9 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
         xref_name: 'One ATC Group'
         levels_refs: levelsList
 
+      if not objData.cross_references?
+        objData.cross_references = []
+    
       objData.cross_references.push refsOBJ
 
   #---------------------------------------------------------------------------------------------------------------------
