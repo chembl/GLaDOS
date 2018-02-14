@@ -82,6 +82,9 @@ glados.useNameSpace 'glados.apps.Embedding',
         structural_alerts:
           template: "#{@compoundReportCardBaseTemplate} #CStructuralAlertsCard"
           initFunction: CompoundReportCardApp.initStructuralAlerts
+        cross_refs:
+          template: "#{@compoundReportCardBaseTemplate} #CrossReferencesCard"
+          initFunction: CompoundReportCardApp.initCrossReferences
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
 
