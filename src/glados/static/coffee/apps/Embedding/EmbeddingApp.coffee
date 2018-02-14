@@ -49,6 +49,9 @@ glados.useNameSpace 'glados.apps.Embedding',
         mechanism_of_action:
           template: "#{@compoundReportCardBaseTemplate} #MechOfActCard"
           initFunction: CompoundReportCardApp.initMechanismOfAction
+        drug_indications:
+          template: "#{@compoundReportCardBaseTemplate} #CDrugIndicationsCard"
+          initFunction: CompoundReportCardApp.initIndications
 
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
