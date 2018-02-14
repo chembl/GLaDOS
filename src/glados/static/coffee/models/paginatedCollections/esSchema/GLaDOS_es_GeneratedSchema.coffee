@@ -2127,6 +2127,12 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         label_id : 'glados_es_gs__molecule__target_predictions___target_organism__label'
         label_mini_id : 'glados_es_gs__molecule__target_predictions___target_organism__label__mini'
 
+      '_metadata.target_predictions.target_pref_name' : 
+        type : String
+        aggregatable : true
+        label_id : 'glados_es_gs__molecule__target_predictions___target_pref_name__label'
+        label_mini_id : 'glados_es_gs__molecule__target_predictions___target_pref_name__label__mini'
+
       '_metadata.target_predictions.target_tax_id' : 
         type : String
         aggregatable : true
@@ -2300,6 +2306,18 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         aggregatable : true
         label_id : 'glados_es_gs__molecule__cross_references___xref_src__label'
         label_mini_id : 'glados_es_gs__molecule__cross_references___xref_src__label__mini'
+
+      'cross_references.xref_src_url' : 
+        type : String
+        aggregatable : false
+        label_id : 'glados_es_gs__molecule__cross_references___xref_src_url__label'
+        label_mini_id : 'glados_es_gs__molecule__cross_references___xref_src_url__label__mini'
+
+      'cross_references.xref_url' : 
+        type : String
+        aggregatable : false
+        label_id : 'glados_es_gs__molecule__cross_references___xref_url__label'
+        label_mini_id : 'glados_es_gs__molecule__cross_references___xref_url__label__mini'
 
       cross_references : 
         type : Object
@@ -2664,6 +2682,12 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         aggregatable : true
         label_id : 'glados_es_gs__molecule__structure_type__label'
         label_mini_id : 'glados_es_gs__molecule__structure_type__label__mini'
+
+      target_pref_name : 
+        type : String
+        aggregatable : true
+        label_id : 'glados_es_gs__molecule__target_pref_name__label'
+        label_mini_id : 'glados_es_gs__molecule__target_pref_name__label__mini'
 
       therapeutic_flag : 
         type : Boolean
@@ -3108,6 +3132,12 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         label_id : 'glados_es_gs__target__target_predictions___target_organism__label'
         label_mini_id : 'glados_es_gs__target__target_predictions___target_organism__label__mini'
 
+      '_metadata.target_predictions.target_pref_name' : 
+        type : String
+        aggregatable : true
+        label_id : 'glados_es_gs__target__target_predictions___target_pref_name__label'
+        label_mini_id : 'glados_es_gs__target__target_predictions___target_pref_name__label__mini'
+
       '_metadata.target_predictions.target_tax_id' : 
         type : String
         aggregatable : true
@@ -3151,6 +3181,18 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         aggregatable : true
         label_id : 'glados_es_gs__target__cross_references___xref_src__label'
         label_mini_id : 'glados_es_gs__target__cross_references___xref_src__label__mini'
+
+      'cross_references.xref_src_url' : 
+        type : String
+        aggregatable : false
+        label_id : 'glados_es_gs__target__cross_references___xref_src_url__label'
+        label_mini_id : 'glados_es_gs__target__cross_references___xref_src_url__label__mini'
+
+      'cross_references.xref_url' : 
+        type : String
+        aggregatable : false
+        label_id : 'glados_es_gs__target__cross_references___xref_url__label'
+        label_mini_id : 'glados_es_gs__target__cross_references___xref_url__label__mini'
 
       cross_references : 
         type : Object
