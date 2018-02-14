@@ -37,7 +37,9 @@ glados.useNameSpace 'glados.apps.Embedding',
         alternate_forms:
           template: "#{@compoundReportCardBaseTemplate} #AlternateFormsCard"
           initFunction: CompoundReportCardApp.initAlternateForms
-
+        similar:
+          template: "#{@compoundReportCardBaseTemplate} #SimilarCompoundsCard"
+          initFunction: CompoundReportCardApp.initSimilarCompounds
 
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
