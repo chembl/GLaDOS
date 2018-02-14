@@ -76,6 +76,9 @@ glados.useNameSpace 'glados.apps.Embedding',
         target_predictions:
           template: "#{@compoundReportCardBaseTemplate} #CTargetPredictionsCard"
           initFunction: CompoundReportCardApp.initTargetPredictions
+        calculated_properties:
+          template: "#{@compoundReportCardBaseTemplate} #CalculatedParentPropertiesCard"
+          initFunction: CompoundReportCardApp.initCalculatedCompoundParentProperties
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
 
