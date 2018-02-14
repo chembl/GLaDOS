@@ -2739,6 +2739,7 @@ span.badge-primary-color-no-float {
 
 }
 
+#TODO ======= target browseeer =======
 /**
 * Target Browser
 * ----------------------------------------------------------------------------------------------------------------------
@@ -2759,6 +2760,11 @@ span.badge-primary-color-no-float {
       display: inline-block;
       margin-bottom: 5px;
     }
+  }
+
+  label{
+    color: red;
+    font-size: 1em;
   }
 
   [type="checkbox"].filled-in + label {
