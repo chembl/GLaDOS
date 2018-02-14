@@ -19,10 +19,6 @@
     {{/if}}
 </script>
 
-<script id="Handlebars-Common-CardError" type="text/x-handlebars-template">
-  <i class="fa fa-exclamation-circle"></i> {{msg}}
-</script>
-
 <script id="Handlebars-Common-ErrorInCard" type="text/x-handlebars-template">
   <div class="card grey lighten-5">
     <div class="card-content">
@@ -44,21 +40,6 @@
 
 </script>
 
-<script id="Handlebars-Common-MiniRepCardPreloader" type="text/x-handlebars-template">
-
-     <div class="preloader-wrapper small active">
-      <div class="spinner-layer spinner-teal-only">
-        <div class="circle-clipper left">
-          <div class="circle"></div>
-        </div><div class="gap-patch">
-          <div class="circle"></div>
-        </div><div class="circle-clipper right">
-          <div class="circle"></div>
-        </div>
-      </div>
-    </div>
-
-</script>
 
 <script id="Handlebars-Common-SelectAll" type="text/x-handlebars-template">
   <input type="checkbox" class="filled-in BCK-toggle-select-all"
@@ -845,3 +826,6 @@ There are no {{#if is_unichem}}UniChem {{/if}}cross references for {{chembl_id}}
 
 <!-- Preloaders -->
 {% include "glados/Handlebars/PreloaderSources.html" %}
+
+<!-- Error Messages -->
+{% include "glados/Handlebars/ErrorSources.html" %}
