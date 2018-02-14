@@ -529,7 +529,7 @@ header .row {
     }
     a {
       font-size: 1em;
-      color: white;
+      //color: white;
     }
   }
   &.pin-top {
@@ -2054,11 +2054,22 @@ $search-items-height: 35px;
   }
 }
 
+.search-bar{
+  .search-bar-help{
+    color: #e7e7e7;
+    font-size: 0.7em;
+    letter-spacing: 0.05em;
+    .example-link{
+      color: #e7e7e7;
+
+    }
+  }
+}
 .search-bar-help {
 
   position: absolute;
-  bottom: -25px;
-  left: 10px;
+  bottom: -20px;
+  left: 5px;
 
   a {
     color: white
@@ -2300,8 +2311,8 @@ $marvin-size-fullscreen: 91vh;
   //background-size: cover;
   margin-left: 0.75rem;
   margin-right: 0.75rem;
-  margin-top: 2px !important;
-  margin-bottom: 2px !important;
+  //margin-top: 2px !important;
+  //margin-bottom: 2px !important;
   .card-content {
     padding-top: 10px !important;
     padding-bottom: 10px !important;
