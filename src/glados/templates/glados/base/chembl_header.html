@@ -40,7 +40,7 @@
             </ul>
         </div>
         {% if main_page %}
-            <div class="hide-on-pinned col l10 m7 hide-on-small-only main-page-search-bar">
+            <div class=" col l10 m7 hide-on-small-only hide-on-pinned main-page-search-bar">
                 {% include "glados/SearchResultsParts/SearchBar.html" %}
             </div>
         {% endif %}
@@ -61,7 +61,6 @@
                 </li>
             </ul>
         </div>
-    
         {% block header_search_bar %}
           {% include "glados/SearchResultsParts/SearchBarChEMBLHeader.html" %}
         {% endblock %}
