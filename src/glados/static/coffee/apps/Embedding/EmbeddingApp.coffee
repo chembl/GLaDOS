@@ -85,6 +85,9 @@ glados.useNameSpace 'glados.apps.Embedding',
         cross_refs:
           template: "#{@compoundReportCardBaseTemplate} #CrossReferencesCard"
           initFunction: CompoundReportCardApp.initCrossReferences
+        unichem_cross_refs:
+          template: "#{@compoundReportCardBaseTemplate} #UniChemCrossReferencesCard"
+          initFunction: CompoundReportCardApp.initUniChemCrossReferences
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
 
