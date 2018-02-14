@@ -27,6 +27,10 @@ class MainPageApp
 
     MainPageApp.initPapersPerYear()
 
+    #initialize browser targets viz
+    targetHierarchy = TargetBrowserApp.initTargetHierarchyTree()
+    targetBrowserView = TargetBrowserApp.initBrowserMain(targetHierarchy, $('#BCK-TargetBrowserMain'))
+    targetHierarchy.fetch()
 # ---------------- Aggregation -------------- #
   @getDocumentsPerYearAgg = (defaultInterval=1) ->
 
