@@ -55,6 +55,7 @@
     CHEMBL_ID = pathnameParts[pathnameParts.length - 4];
     EMBEDED = $.inArray('embed', pathnameParts) != -1;
     GlobalVariables['EMBEDED'] = EMBEDED;
+    glados.apps.Embedding.EmbeddingApp.init();
     {% block custom_js_inline %}{% endblock %}
 
   });
