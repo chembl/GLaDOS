@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}{% endblock %}</title>
+  {% load compress %}
+  <!-- Imports used by all the templates-->
+  {% block common_css %}
+    {% include "glados/base/css_imports_for_all.html" %}
+  {% endblock %}
+
+  <!-- Imports used by the current template -->
+  {% block stylesheets %}{% endblock %}
+
+</head>
+<body>
+
+  <div class="row">
+
+    {% block content %}
+    {% endblock %}
+
+  </div>
+
+  {% block content2 %}
+  {% endblock %}
+
+  {% include "glados/base/modals/generated_modals_container.html" %}
+
+  <!-- handlebars templates -->
+{% block common_handlebars %}
+  {% include "glados/Handlebars/CommonSources.html" %}
+  {% include "glados/Handlebars/DownloadWizard/Hbs-WizardStep.html" %}
+{% endblock %}
+
+<!-- - - - - - - - - - - - - - - - - -->
+<!-- APIs -->
+<!-- - - - - - - - - - - - - - - - - -->
+
+<!-- common imports for all templates -->
+{% include "glados/base/js_imports_for_all.html" %}
+
+<!-- custom js imports that each template decides to load -->
+{% compress js %}
+   {% block custom_js %}{% endblock %}
+{% endcompress %}
+
+<!-- inline javascript -->
+{% compress js %}
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function () {
+
+    var pathname = window.location.pathname;
+    var pathnameParts = pathname.split('/');
+    CHEMBL_ID = pathnameParts[pathnameParts.length - 4];
+    EMBEDED = $.inArray('embed', pathnameParts) != -1;
+    GlobalVariables['EMBEDED'] = EMBEDED;
+    {% block custom_js_inline %}{% endblock %}
+
+  });
+</script>
+{% endcompress%}
+
+  <!-- a function to be called after the content is rendered  -->
+{% compress js %}
+  <script type="text/javascript" charset="utf-8">
+
+    afterRender = function (){
+
+      {% block custom_afterRender %}{% endblock %}
+
+    }
+
+  </script>
+  {% endcompress%}
+
+{% load static %}
+
+<!-- common imports for all templates that need to be last -->
+{% compress js %}
+<!-- this sets up the styles for the chemical formulas after they have been rendered in the page-->
+<script type="text/javascript" src="{% static 'js/api/easychem.js' %}"></script>
+{% endcompress %}
+
+</body>
+</html>
