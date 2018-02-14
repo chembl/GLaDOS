@@ -73,6 +73,9 @@ glados.useNameSpace 'glados.apps.Embedding',
         related_targets:
           template: "#{@compoundReportCardBaseTemplate} #CAssociatedTargetsCard"
           initFunction: CompoundReportCardApp.initTargetSummary
+        target_predictions:
+          template: "#{@compoundReportCardBaseTemplate} #CTargetPredictionsCard"
+          initFunction: CompoundReportCardApp.initTargetPredictions
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
 
