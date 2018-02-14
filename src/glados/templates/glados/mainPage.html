@@ -32,13 +32,13 @@
 
 <div id="MainPageCentralDiv" class="row">
 
-  <div class="col l5 m12 s12" id="browse_targets">
-     {% block browse_targets %}
-        {% include "glados/MainPageParts/browse_targets.html" %}
-     {% endblock %}
-  </div>
+{#  <div class="col l5 m12 s12" id="browse_targets">#}
+{#     {% block browse_targets %}#}
+{#        {% include "glados/MainPageParts/browse_targets.html" %}#}
+{#     {% endblock %}#}
+{#  </div>#}
 
-  <div class="col l4 m12 s12 ppy" id="PapersPerYearHistogram">
+  <div class="col l9 m12 s12 ppy" id="PapersPerYearHistogram">
     {% with is_dynamic=False %}
         {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
     {% endwith %}
