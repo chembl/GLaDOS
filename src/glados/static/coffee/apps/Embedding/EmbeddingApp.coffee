@@ -52,6 +52,9 @@ glados.useNameSpace 'glados.apps.Embedding',
         drug_indications:
           template: "#{@compoundReportCardBaseTemplate} #CDrugIndicationsCard"
           initFunction: CompoundReportCardApp.initIndications
+        clinical_data:
+          template: "#{@compoundReportCardBaseTemplate} #ClinDataCard"
+          initFunction: CompoundReportCardApp.initClinicalData
 
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
