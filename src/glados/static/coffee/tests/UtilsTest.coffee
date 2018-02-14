@@ -129,6 +129,48 @@ describe "Utils", ->
 
       return buckets
 
+    generateBucketsWithSubBuckets = (numBuckets, numSumBuckets, subBucketsAggName) ->
+
+      buckets = []
+      for i in [1..numBuckets]
+
+        newBucket =
+          key: 'bucket' + i
+          doc_count: 1
+
+        newBucket[subBucketsAggName] = {}
+        newBucket[subBucketsAggName].buckets = []
+        subBucketsContainer = newBucket[subBucketsAggName].buckets
+
+        for j in [1..numSumBuckets]
+
+          subBucket =
+            key: "bucket-#{j}"
+            doc_count: j
+
+          subBucketsContainer.push subBucket
+
+        buckets.push newBucket
+
+      return buckets
+
+
+    it 'gets sub buckets correctly', ->
+
+      subBucketsAggName = 'split_series_agg'
+
+      testBucketsWithSubBuckets = generateBucketsWithSubBuckets(2, 20, subBucketsAggName)
+      newBucketsWithSubBuckets =  glados.Utils.Buckets.getSubBucketsOrder(testBucketsWithSubBuckets, subBucketsAggName)
+
+      newBucketsWithSubBucketsList = _.sortBy( _.values(newBucketsWithSubBuckets), (item) -> item.pos )
+
+      currentCount = Number.MAX_VALUE
+
+      for bucket in newBucketsWithSubBucketsList
+        bucketCount = bucket.count
+        expect(bucketCount <= currentCount ).toBe(true)
+        currentCount = bucketCount
+
     it 'merges buckets with from a maximum number of categories', ->
 
       numBuckets = 10

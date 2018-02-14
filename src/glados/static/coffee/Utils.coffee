@@ -339,7 +339,7 @@ glados.useNameSpace 'glados',
       else
         return (glados.Utils.getNestedValue(model.attributes, propertyName) for model in list.models)
 
-    renderLegendForProperty: (property, collection, $legendContainer, enableSelection=true) ->
+    renderLegendForProperty: (property, collection, $legendContainer, enableSelection=true, legendConfig) ->
 
       if not property.legendModel?
         property.legendModel = new glados.models.visualisation.LegendModel
@@ -351,6 +351,7 @@ glados.useNameSpace 'glados',
         property.legendView = new LegendView
           model: property.legendModel
           el: $legendContainer
+          config: legendConfig
       else
         property.legendView.render()
 
@@ -360,7 +361,7 @@ glados.useNameSpace 'glados',
     getRadiansFromDegrees: (degrees) -> (degrees * Math.PI) / 180
 
     Buckets:
-      mergeBuckets: (buckets, maxCategories, model, aggName) ->
+      mergeBuckets: (buckets, maxCategories, model, aggName, subBuckets=false) ->
 
         if buckets.length > maxCategories
           start = maxCategories - 1
@@ -372,10 +373,18 @@ glados.useNameSpace 'glados',
           else
             mergedLink = ''
 
-          othersBucket =
-            doc_count: _.reduce(_.pluck(bucketsToMerge, 'doc_count'), ((a, b) -> a + b))
-            key: glados.Visualisation.Activity.OTHERS_LABEL
-            link: mergedLink
+          if subBuckets
+            othersBucket =
+              key: glados.Visualisation.Activity.OTHERS_LABEL
+              doc_count: _.reduce(_.pluck(bucketsToMerge, 'doc_count'), ((a, b) -> a + b))
+              pos: Number.MAX_VALUE
+              link: mergedLink
+              bar_key: bucketsToMerge[0].parent_key
+          else
+            othersBucket =
+              doc_count: _.reduce(_.pluck(bucketsToMerge, 'doc_count'), ((a, b) -> a + b))
+              key: glados.Visualisation.Activity.OTHERS_LABEL
+              link: mergedLink
 
           buckets = buckets[0..start-1]
           buckets.push(othersBucket)
@@ -414,6 +423,41 @@ glados.useNameSpace 'glados',
           buckets.push bucket
 
         return buckets
+
+#     returns ordered list of sub buckets odc count
+      getSubBucketsOrder: (buckets, subBucketsAggName) ->
+        internalBucketsCounts = {}
+
+        for bucket in buckets
+          splitSeriesBuckets = bucket[subBucketsAggName].buckets
+
+          for splitSeriesBucket in splitSeriesBuckets
+            bucketKey = splitSeriesBucket.key
+
+#            adds the sub bucket to the list
+            if not internalBucketsCounts[bucketKey]
+              internalBucketsCounts[bucketKey] = 0
+
+#           adds the doc count to the bucket name
+            internalBucketsCounts[bucketKey] += splitSeriesBucket.doc_count
+
+        sortingList = []
+        for key, value of internalBucketsCounts
+          sortingList.push
+            key: key
+            count: value
+
+        sortedList = _.sortBy sortingList, (item) -> -item.count
+
+        InternalBucketsWithPosition = {}
+        for item, pos in sortedList
+          InternalBucketsWithPosition[item.key] =
+            key: item.key
+            count: item.count
+            pos: pos
+
+        return InternalBucketsWithPosition
+
     ErrorMessages:
 
       getJQXHRErrorText: (jqXHR) ->
@@ -450,14 +494,15 @@ glados.useNameSpace 'glados',
 
     Text:
       getTextForEllipsis: (originalText, originalWidth, containerLimit) ->
-
-        numChars = originalText.length
-        charLength = originalWidth / numChars
-        # reduce by num numchars because font characters are not all of the same width
-        numChars = Math.ceil(containerLimit / charLength) - 2
-        textLimit = numChars - 4
-        textLimit = if textLimit < 0 then 0 else textLimit
-        return originalText[0..textLimit] + '...'
+        if originalWidth > containerLimit
+          numChars = originalText.length
+          charLength = originalWidth / numChars
+          # reduce by num numchars because font characters are not all of the same width
+          numChars = Math.ceil(containerLimit / charLength) - 2
+          textLimit = numChars - 4
+          textLimit = if textLimit < 0 then 0 else textLimit
+          return originalText[0..textLimit] + '...'
+        else return originalText
 
     QueryStrings:
       getQueryStringForItemsList: (chemblIDs, idAttribute) ->

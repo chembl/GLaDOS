@@ -6,7 +6,7 @@
   {% endwith %}
 {% endblock main_start_tag %}
 {% block chembl_header %}
-  {% with hide_side_nav=False %}
+  {% with hide_side_nav=False main_page=True%}
     {{block.super}}
   {% endwith %}
 {% endblock chembl_header %}
@@ -29,28 +29,29 @@
 
 </div>
 
-{% with hide_side_nav=False %}
-  {% include "glados/SearchResultsParts/SearchBar.html" %}
-{% endwith %}
 
-<div id="MainPageCentralDiv" class="row hide-on-small-only">
+<div id="MainPageCentralDiv" class="row">
 
-  <div class="col m12 l9 ">
+{#  <div class="col l5 m12 s12" id="browse_targets">#}
+{#     {% block browse_targets %}#}
+{#        {% include "glados/MainPageParts/browse_targets.html" %}#}
+{#     {% endblock %}#}
+{#  </div>#}
 
-    {% block marvin %}
-    {% include "glados/MainPageParts/central_card.html" %}
-    {% endblock %}
-
+  <div class="col l9 m12 s12 ppy" id="PapersPerYearHistogram">
+    {% with is_dynamic=False %}
+        {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
+    {% endwith %}
   </div>
 
-  <div class="col m6 l3">
+  <div class="col m6 l3  hide-on-small-only">
 
     {% block database_info %}
     {% include "glados/MainPageParts/database_info.html" %}
     {% endblock %}
-</div>
+  </div>
 
-   <div class="col m6 l3">
+   <div class="col m6 l3  hide-on-small-only">
     {% block tweets %}
     {% include "glados/MainPageParts/tweets.html" %}
     {% endblock %}
@@ -60,9 +61,9 @@
 
 </div>
 
-{% block marvin_fullscreen %}
-{% include "glados/MainPageParts/link_to_marvin_fullscreen.html" %}
-{% endblock %}
+{#{% block marvin_fullscreen %}#}
+{#{% include "glados/MainPageParts/link_to_marvin_fullscreen.html" %}#}
+{#{% endblock %}#}
 
 {% endblock %}
 

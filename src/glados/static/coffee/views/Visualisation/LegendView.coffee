@@ -11,6 +11,7 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   initialize: ->
 
+    @config = arguments[0].config
     @model.on 'change', @render, @
     @$vis_elem = $(@el)
     @setUpResponsiveRender()
@@ -62,22 +63,37 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     @clearLegend()
     elemWidth = $(@el).width()
-    horizontalPadding = 10
+    Padding = 10
     @legendWidth = 0.95 * elemWidth
     legendHeight = @LEGEND_HEIGHT
 
-    legendContainer = d3.select($(@el).get(0))
-    legendSVG = legendContainer.append('svg')
-      .attr('width', @legendWidth + 2 * horizontalPadding )
-      .attr('height', legendHeight )
-    legendG = legendSVG.append('g')
-      .attr("transform", "translate(" + horizontalPadding + "," + (legendHeight - 30) + ")")
+    if !@config.hide_title
+      legendContainer = d3.select($(@el).get(0))
+      legendSVG = legendContainer.append('svg')
+        .classed('main-legendSVG', true)
+        .attr('width', @legendWidth + 2 * Padding )
+        .attr('height', legendHeight )
+      legendG = legendSVG.append('g')
+        .classed('main-legendG', true)
+        .attr("transform", "translate(" + Padding + "," + (legendHeight - 30) + ")")
 
-    legendSVG.append('text')
-      .text(@model.get('property').label)
-      .attr("class", 'plot-colour-legend-title')
-      .attr('text-anchor', 'middle')
-      .attr("transform", "translate(" + (@legendWidth / 2) + ", 35)")
+      legendSVG.append('text')
+        .text(@model.get('property').label)
+        .attr("class", 'plot-colour-legend-title')
+        .attr('text-anchor', 'middle')
+        .attr("transform", "translate(" + (@legendWidth / 2) + ", 35)")
+
+    else
+      legendContainer = d3.select($(@el).get(0))
+      legendSVG = legendContainer.append('svg')
+        .classed('main-legendSVG', true)
+        .attr('width', @legendWidth + 2 * Padding )
+        .attr('height', legendHeight )
+      legendG = legendSVG.append('g')
+        .classed('main-legendG', true)
+        .attr("transform", "translate(" + Padding*2 + "," + (Padding) + ")")
+
+
 
     if @model.isDiscrete()
       @paintDiscreteLegend(legendG)
@@ -87,6 +103,11 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
       @paintContinuousLegend(legendG)
 
     @addExtraCss()
+
+    if @config.columns_layout
+      legendSVG = $(@el).find('.main-legendSVG')
+      legendGHeight = $(@el).find('.main-legendG')[0].getBBox().height
+      legendSVG.height(legendGHeight + 5)
 
   # ------------------------------------------------------------------------------------------------------------------
   # Continuous
@@ -201,12 +222,89 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
   selectRange: ->
     values = (parseFloat($(elem).attr('data-range-value')) for elem in $(@el).find('.legend-range-selector')).sort()
     @model.selectRange(values[0], values[1])
+
   # ------------------------------------------------------------------------------------------------------------------
   # Categorical
   # ------------------------------------------------------------------------------------------------------------------
   paintDiscreteLegend: (legendG) ->
 
+    if @config.columns_layout
+      @paintColumnsLayout(legendG)
+    else
+      @paintBarLayout(legendG)
+
+  # ------------------------------------------------------------------------------------------------------------------
+  # Columns layout
+  # ------------------------------------------------------------------------------------------------------------------
+  paintColumnsLayout: (legendG) ->
+
+    domain = @model.get('domain')
+    getColourFor = @model.get('property').colourScale
+    radius = 6
+    containerLimit = 0
+    elemWidth = $(@el).width()
+
+    if elemWidth >= 700
+      domainGroupsSize = 4
+    else if elemWidth <= 450
+      domainGroupsSize = 2
+    else
+      domainGroupsSize = 3
+
+    columnSize = Math.ceil domain.length/domainGroupsSize
+    columnWidth = @legendWidth / domainGroupsSize
+    domainGroups = []
+
+    i = 0
+    while i < domain.length
+      column = domain.slice i, i+columnSize
+      domainGroups.push column
+      i+=columnSize
+
+    for column, a in domainGroups
+      legendG.selectAll('.circle-' + a )
+        .data(column)
+        .enter()
+        .append('circle')
+        .attr('cx', 0)
+        .attr('cy', (d, i) -> i * ( radius * 3 ))
+        .attr('r', radius)
+        .attr('fill', (d) ->
+              if d == 'Other'
+                return glados.Settings.VIS_COLORS.GREY2
+              else
+                return getColourFor(d)
+            )
+        .attr('transform', 'translate(' + columnWidth * a + ', 0)')
+
+      legendG.selectAll('.text-' + a)
+        .data(column)
+        .enter()
+        .append('text')
+        .text((d) -> d)
+        .attr('x', 15)
+        .attr('y', (d, i) -> (i * ( radius * 3 )) + 4)
+        .attr('transform', 'translate(' + columnWidth * a + ', 0)')
+        .style('font-size', '70%')
+        .style('fill', '#333')
+
+#   if the text is too long add ellipsis
+    texts = legendG.selectAll('text')
+    for text, d in texts[0]
+      containerLimit = columnWidth - 40
+      originalWidth = $(texts[0][d])[0].getBBox().width
+      originalText = $(texts[0][d])[0].textContent
+
+      newText =  glados.Utils.Text.getTextForEllipsis(originalText, originalWidth, containerLimit )
+
+      d3.select($(texts[0][d])[0]).text(newText)
+
+  # ------------------------------------------------------------------------------------------------------------------
+  # Bar layout
+  # ------------------------------------------------------------------------------------------------------------------
+  paintBarLayout: (legendG) ->
     rectanglePadding = 1
+
     getXInLegendFor = d3.scale.ordinal()
       .domain( @model.get('domain') )
       .rangeBands([0, @legendWidth])
@@ -240,7 +338,6 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style('fill', glados.Settings.VISUALISATION_DARKEN_2 )
       .attr('text-anchor', 'middle')
       .attr("transform", "translate(" + getXInLegendFor.rangeBand()/2 + ")")
-
 
     legendG.call(legendAxis)
 
@@ -295,7 +392,3 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
     console.log 'paint threshold legend!'
 
   getTextAmountPerRange: (value) -> '(' + @model.getTextAmountPerRange(value) + ')'
-
-
-
-

@@ -202,8 +202,8 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
   li.menu-logo {
     font-size: $large-font-size;
     text-align: center;
-    background-color: $chembl-teal;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    //background-color: $chembl-teal;
+    box-shadow: 0 2px 5px 0 rgba(150, 150, 150, 0.16), 0 2px 10px 0 rgba(107, 107, 107, 0.12);
     padding: 0;
     margin: 0;
     height: calc(#{$chembl-header-height} + #{2*$chembl-header-padding});
@@ -212,6 +212,7 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
       padding: 0;
       margin: auto;
       text-align: center;
+      height: 100%;
     }
     .chembl-logo-header {
       margin: 0.5em auto 0.5em auto;
@@ -227,6 +228,7 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
   }
   li {
     margin-bottom: 1%;
+    padding-top: 5px;
   }
 
   a {
@@ -321,6 +323,17 @@ header .row {
     width: 100%;
   }
 }
+
+.pin-top{
+  .chembl-header {
+    .inner-row{
+      .hide-on-pin-top{
+        display: none;
+      }
+    }
+  }
+}
+
 
 #chembl-header-container {
   height: 0;
@@ -468,7 +481,7 @@ header .row {
           &.long-link {
             flex-grow: 3;
             padding: 0 0 0.2em 0;
-            text-shadow: 2px 2px black;
+            //text-shadow: 2px 2px black;
             max-height: 5em;
             overflow: hidden;
 
@@ -538,7 +551,7 @@ header .row {
     }
     a {
       font-size: 1em;
-      color: white;
+      //color: white;
     }
   }
   &.pin-top {
@@ -1994,6 +2007,7 @@ em.glados-result-highlight{
   input:focus {
 
     border-bottom: 0px;
+    color: #6c6c6c;
 
   }
 
@@ -2001,11 +2015,12 @@ em.glados-result-highlight{
   input[type=search]:focus {
     border-bottom: 0;
     box-shadow: none;
+    color: #6c6c6c;
   }
 
-  border: 2px solid $primary-color;
+  //border: 2px solid $primary-color;
+  //border-radius: 5px;
   background-color: white;
-  border-radius: 5px;
 
 }
 
@@ -2084,6 +2099,7 @@ $search-items-height: 35px;
   @extend .clean-button;
   background-color: $primary-color;
   color: white;
+  border-radius: 0px 3px 3px 0px;
   &:active, &:target {
     background-color: darken($primary-color, 3%) !important;
   }
@@ -2095,11 +2111,22 @@ $search-items-height: 35px;
   }
 }
 
+.search-bar{
+  .search-bar-help{
+    color: #e7e7e7;
+    font-size: 0.7em;
+    letter-spacing: 0.05em;
+    .example-link{
+      color: #e7e7e7;
+
+    }
+  }
+}
 .search-bar-help {
 
   position: absolute;
-  bottom: -25px;
-  left: 10px;
+  bottom: -20px;
+  left: 5px;
 
   a {
     color: white
@@ -2333,27 +2360,29 @@ $marvin-size-fullscreen: 91vh;
 
 }
 
+#banner-img{
+  background-image: url("http://www.ebi.ac.uk/web_guidelines/images/banners/EBI_SERVICES_Banner.jpg") !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;;
+}
 .search-banner {
 
-  background-image: url("http://www.ebi.ac.uk/web_guidelines/images/banners/EBI_SERVICES_Banner.jpg");
-  backgroground-position: right center;
-  background-repeat: no-repeat;
-  background-size: cover;
   margin-left: 0.75rem;
   margin-right: 0.75rem;
-  margin-top: 2px !important;
-  margin-bottom: 2px !important;
+  //margin-top: 2px !important;
+  //margin-bottom: 2px !important;
   .card-content {
     padding-top: 10px !important;
     padding-bottom: 10px !important;
   }
 
   .search-bar {
-    background-color: $primary-color;
+    //background-color: $primary-color;
+    border-radius: 4px;
     .search-input-wrapper {
       background-color: white;
-      border-top-left-radius: 5px;
-      border-bottom-left-radius: 5px;
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
     }
     .advanced-search-wrapper {
       background-color: white;
@@ -2766,6 +2795,7 @@ span.badge-primary-color-no-float {
 
 }
 
+#TODO ======= target browseeer =======
 /**
 * Target Browser
 * ----------------------------------------------------------------------------------------------------------------------
@@ -2786,6 +2816,11 @@ span.badge-primary-color-no-float {
       display: inline-block;
       margin-bottom: 5px;
     }
+  }
+
+  label{
+    color: red;
+    font-size: 1em;
   }
 
   [type="checkbox"].filled-in + label {
@@ -3155,6 +3190,34 @@ span.badge-primary-color-no-float {
 
 }
 
+.histogram-legend{
+  max-height: 100px;
+  overflow-y: scroll;
+  margin: 15px;
+  padding: 15px;
+}
+
+
+    //  .axis-helper-line {
+    //    stroke-width: 0.5;
+    //    stroke: grey;
+    //  }
+    //  .rotated {
+    //    font-size: 70%;
+    //  }
+    //}
+    //path {
+    //  display: none;
+    //}
+    //
+    //text {
+    //  fill: #666666;
+    //}
+//    //
+//}
+
+
+
 /**
   * Scatter plot
   * ----------------------------------------------------------------------------------------------------------------------
@@ -3217,6 +3280,8 @@ span.badge-primary-color-no-float {
   .title {
     cursor: pointer;
     font-size: 110%;
+    font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+    fill: #5e5e5e;
   }
   .title:hover {
     fill: color('teal', 'accent-4');
@@ -3246,17 +3311,19 @@ span.badge-primary-color-no-float {
 
   .x-axis, .y-axis {
     .axis-line {
-      stroke-width: 1;
-      stroke: black;
+      stroke-width: 0.5;
+      stroke: grey;
+
     }
     .property-label {
       font-size: 80%;
     }
     .tick {
-      font-size: 80%;
+      font-size: 60%;
+
       .axis-helper-line {
-        stroke-width: 1;
-        stroke: color('grey', 'lighten-1');
+        stroke-width: 0.5;
+        stroke: grey;
       }
       .rotated {
         font-size: 70%;
@@ -3265,18 +3332,23 @@ span.badge-primary-color-no-float {
     path {
       display: none;
     }
+
+    text {
+      fill: #666666;
+    }
   }
 
   .y-axis {
     .tick {
       line {
-        stroke-width: 1;
+        stroke-width: 0.1;
         stroke: color('grey', 'lighten-1');
       }
     }
   }
 
 }
+
 
 .browser-views-container {
   display: flex;
@@ -3439,6 +3511,7 @@ $facets-width-large: 21%;
       cursor: pointer;
       .value-bar {
         fill: color($primary-color-name, 'lighten-4');
+
       }
       .key-text {
         font-size: 80%;

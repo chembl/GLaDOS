@@ -38,6 +38,8 @@ glados.useNameSpace 'glados.models.Aggregations',
       aggsConfig = @get('aggs_config')
       return aggsConfig.aggs[aggName]
 
+
+
     #-------------------------------------------------------------------------------------------------------------------
     # Changing configuration
     #-------------------------------------------------------------------------------------------------------------------
@@ -196,21 +198,22 @@ glados.useNameSpace 'glados.models.Aggregations',
       return aggsConfig
 
 
-    parse: (data) ->
+    loadBuckets: (bucketsData, newAggsConfig, receivedAggsInfo, parentKey) ->
 
-      bucketsData = {}
-      aggsConfig = @get('aggs_config')
-      receivedAggsInfo = data.aggregations
-
-      aggs = aggsConfig.aggs
+      aggs = newAggsConfig.aggs
       for aggKey, aggDescription of aggs
+
+        currentBuckets = receivedAggsInfo[aggKey].buckets
+        if parentKey?
+          for bucket in currentBuckets
+#           this could not work in all cases in the future
+            bucket.parent_key = parseInt(parentKey)
 
         # ---------------------------------------------------------------------
         # Parsing by type
         # ---------------------------------------------------------------------
         if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE
 
-          currentBuckets = receivedAggsInfo[aggKey].buckets
           bucketsList = glados.Utils.Buckets.getBucketsList(currentBuckets)
           currentNumCols = bucketsList.length
 
@@ -223,6 +226,7 @@ glados.useNameSpace 'glados.models.Aggregations',
 
           bucketsData[aggKey] =
             buckets: bucketsList
+            buckets_index: currentBuckets
             num_columns: currentNumCols
             bin_size: intervalSize
             min_bin_size: aggDescription.min_bin_size
@@ -230,15 +234,54 @@ glados.useNameSpace 'glados.models.Aggregations',
 
         else if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.TERMS
 
-          currentBuckets = receivedAggsInfo[aggKey].buckets
           currentNumCols = currentBuckets.length
 
           @parseBucketsLink(aggDescription, currentBuckets)
 
           bucketsData[aggKey] =
             buckets: currentBuckets
+            buckets_index: currentBuckets
             num_columns: currentNumCols
             buckets_index: _.indexBy(currentBuckets, 'key')
+
+        else if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
+
+          bucketsList = glados.Utils.Buckets.getBucketsList(currentBuckets)
+          currentNumCols = bucketsList.length
+
+          currentMinValue = aggDescription.min_value
+          currentMaxValue = aggDescription.max_value
+
+          intervalSize = glados.Utils.Buckets.getIntervalSize(currentMaxValue, currentMinValue, currentNumCols)
+
+          @parseBucketsLink(aggDescription, bucketsList)
+
+          bucketsData[aggKey] =
+            buckets: bucketsList
+            buckets_index: currentBuckets
+            num_columns: currentNumCols
+            bin_size: aggDescription.default_interval_size
+            min_bin_size: aggDescription.min_interval_size
+            max_bin_size: aggDescription.max_interval_size
+
+        #recursion
+        for internalBucketKey, internalBuckets of currentBuckets
+
+          newAggsConfig = aggs[aggKey]
+          newBucketsData = bucketsData[aggKey].buckets_index[internalBucketKey]
+          newReceivedAggsInfo = receivedAggsInfo[aggKey].buckets[internalBucketKey]
+
+          parentKey = undefined
+          if newBucketsData?
+            parentKey = newBucketsData.key
+          @loadBuckets(newBucketsData, newAggsConfig, newReceivedAggsInfo, parentKey)
+
+    parse: (data) ->
+
+      bucketsData = {}
+      aggsConfig = @get('aggs_config')
+      receivedAggsInfo = data.aggregations
+      @loadBuckets(bucketsData, aggsConfig, receivedAggsInfo)
 
       return bucketsData
 
@@ -257,7 +300,7 @@ glados.useNameSpace 'glados.models.Aggregations',
 
     getMergedLink: (bucketsToMerge, aggName) ->
 
-      currentAggConfig = @get('aggs_config').aggs[aggName]
+      currentAggConfig = glados.Utils.getNestedValue(@get('aggs_config').aggs, aggName)
       linksDescription = currentAggConfig.bucket_links
       templateDataDesc =  linksDescription.template_data
       template = linksDescription.bucket_filter_template
@@ -300,7 +343,7 @@ glados.useNameSpace 'glados.models.Aggregations',
 
       aggs = aggsConfig.aggs
       for aggKey, aggDescription of aggs
-        if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE
+        if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE or aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
           minAggName = @getMinAggName(aggKey)
           aggsData[minAggName] =
             min:
@@ -324,12 +367,10 @@ glados.useNameSpace 'glados.models.Aggregations',
     getMinAggName: (aggKey) -> aggKey + '_min'
     getMaxAggName: (aggKey) -> aggKey + '_max'
 
-    getRequestData: ->
-
-      aggsData = {}
-      aggsConfig = @get('aggs_config')
+    addAggregationsData: (aggsData, aggsConfig) ->
 
       aggs = aggsConfig.aggs
+
       for aggKey, aggDescription of aggs
         if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE
 
@@ -358,6 +399,35 @@ glados.useNameSpace 'glados.models.Aggregations',
               size: aggDescription.size
               order:
                 _count: 'desc'
+
+        else if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
+
+          if aggDescription.bin_size?
+            binSize = aggDescription.bin_size
+          else
+            binSize = aggDescription.default_interval_size
+
+          aggsData[aggKey] =
+            histogram:
+              field: aggDescription.field
+              interval: binSize
+              keyed: true
+
+        #recursion
+        internalAggs = aggDescription.aggs
+
+        if internalAggs?
+
+          aggsData[aggKey].aggs = {}
+          aggsConfig = aggs[aggKey]
+          @addAggregationsData(aggsData[aggKey].aggs, aggsConfig)
+
+    getRequestData: ->
+
+      aggsData = {}
+      aggsConfig = @get('aggs_config')
+      @addAggregationsData(aggsData, aggsConfig)
+
 
       queryData = @get('query')
 
@@ -396,3 +466,4 @@ glados.models.Aggregations.Aggregation.QueryTypes =
 glados.models.Aggregations.Aggregation.AggTypes =
    RANGE: 'RANGE'
    TERMS: 'TERMS'
+   HISTOGRAM: 'HISTOGRAM'

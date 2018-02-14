@@ -6,7 +6,7 @@
       {% endblock %}
       <div class="hide-on-small-only" >
 
-        <div class="card search-banner z-depth-0">
+        <div class="search-banner">
             <div class="card-content">
 
               <div class="section">
@@ -15,18 +15,17 @@
 
                     <div class="col m12">
 
-                      <div class="search-bar full-height z-depth-2">
+                      <div class="search-bar full-height">
 
-                        <div class="search-bar-help">
-                          <small><b>Example:</b>
+                        <div class="search-bar-help hide-on-med-and-down">
+                          Example:
                             <a class="example-link" href="{% url 'main' %}search_results/Dopamine">Dopamine</a>,
                             <a class="example-link" href="{% url 'main' %}search_results/Aspirin" >Aspirin</a>,
                             <a class="example-link" href="{% url 'main' %}search_results/NCCc1ccc(O)c(O)c1">NCCc1ccc(O)c(O)c1</a>,
                             <a class="example-link" href="{% url 'main' %}search_results/Liver">Liver</a>
-                          </small>
                         </div>
 
-                        <div class="col m7 l8">
+                        <div class="col m6 l7">
 
                           <div class="search-input-wrapper" >
                             <input type="search" value="" name="search-str"
@@ -34,7 +33,7 @@
                           </div>
 
                         </div>
-                        <div class="col m5 l4">
+                        <div class="col m6 l5">
                             <div class="row no-margin">
 
                                 <div class="col m4 advanced-search-wrapper">
@@ -52,7 +51,7 @@
                                   <a onclick="this.blur();" class="draw-structure draw-st-btn col m12 tooltipped hide-on-small-only"
                                         data-position="left" data-delay="50" data-tooltip="Draw a structure">
                                     <span>
-                                      <i class="icon icon-conceptual icon-c6" data-icon="b"> </i> Draw
+                                      <i class="icon icon-conceptual icon-c6" data-icon="b">  </i> Draw
                                     </span>
                                   </a>
 

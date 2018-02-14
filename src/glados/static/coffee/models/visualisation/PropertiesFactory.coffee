@@ -46,6 +46,32 @@ glados.useNameSpace 'glados.models.visualisation',
             1: 'Yes'
             false: 'No'
             true: 'Yes'
+    DocumentAggregation:
+      Properties:
+        YEAR:
+          propName: 'year'
+          label: 'Year'
+          type: Number
+        JOURNAL_NAME:
+          propName: 'split_series_agg'
+          label: 'Journal'
+          type: Number
+          colourScaleType: glados.Visualisation.CATEGORICAL
+          coloursRange: [
+            '#0d343a',
+            '#0a585b',
+            '#077c80',
+            '#2ba3a5',
+            '#6fc7c6',
+            '#c4e6e5',
+            '#fdabbc',
+            '#f1d6db',
+            '#f9849d',
+            '#e95f7e',
+            '#cc4362',
+            '#a03a50',
+            '#a03a50'
+          ]
     Target:
       esIndex:'chembl_target'
       Properties:
@@ -82,7 +108,6 @@ glados.useNameSpace 'glados.models.visualisation',
           ]
           colourScaleType: glados.Visualisation.CATEGORICAL
 
-        # Check where this graph is being displayed
         TARGET_CLASS:
           propName:'target_class'
           label: 'Target Class'
@@ -162,7 +187,6 @@ glados.useNameSpace 'glados.models.visualisation',
             glados.Settings.VIS_COLORS.PURPLE1,
             glados.Settings.VIS_COLORS.PURPLE2
           ]
-
           colourScaleType: glados.Visualisation.CATEGORICAL
     ActivityAggregation:
       Properties:
@@ -269,3 +293,18 @@ glados.models.visualisation.PropertiesFactory.getPropertyConfigFor = (entityName
     glados.models.visualisation.PropertiesFactory.generateColourScale(prop)
 
   return prop
+
+
+  # randomColours = []
+#            numColours = 16
+#            seed = 3
+#            for i in [1..numColours]
+#              randomColours.push ("#" + (Math.round(Math.sin(seed++) * 0xFFFFFF)).toString(16))
+#
+#            range = randomColours
+##            range = [glados.Settings.VISUALISATION_GREY_BASE].concat(d3.scale.category20b().range()).concat(randomColours)
+#
+#            console.log 'AAA range: ', range
+#            console.log 'AAA range: ', JSON.stringify(range)
+#            return range
+#          )()

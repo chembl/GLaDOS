@@ -153,6 +153,7 @@ class TargetReportCardApp extends glados.ReportCardApp
 
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     associatedAssays = TargetReportCardApp.getAssociatedAssaysAgg(chemblID)
+    console.log chemblID
 
     pieConfig =
       x_axis_prop_name: 'types'
