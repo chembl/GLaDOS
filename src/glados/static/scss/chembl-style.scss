@@ -182,8 +182,8 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
   li.menu-logo {
     font-size: $large-font-size;
     text-align: center;
-    background-color: $chembl-teal;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    //background-color: $chembl-teal;
+    box-shadow: 0 2px 5px 0 rgba(150, 150, 150, 0.16), 0 2px 10px 0 rgba(107, 107, 107, 0.12);
     padding: 0;
     margin: 0;
     height: calc(#{$chembl-header-height} + #{2*$chembl-header-padding});
@@ -207,6 +207,7 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
   }
   li {
     margin-bottom: 1%;
+    padding-top: 10px;
   }
 
   a {
@@ -2303,12 +2304,13 @@ $marvin-size-fullscreen: 91vh;
 
 }
 
+#banner-img{
+  background-image: url("http://www.ebi.ac.uk/web_guidelines/images/banners/EBI_SERVICES_Banner.jpg") !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;;
+}
 .search-banner {
 
-  //background-image: url("http://www.ebi.ac.uk/web_guidelines/images/banners/EBI_SERVICES_Banner.jpg");
-  //backgroground-position: right center;
-  //background-repeat: no-repeat;
-  //background-size: cover;
   margin-left: 0.75rem;
   margin-right: 0.75rem;
   //margin-top: 2px !important;

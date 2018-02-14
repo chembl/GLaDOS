@@ -1,7 +1,7 @@
 {% load static %}
-<div class="chembl-header row {{ hide_side_nav|yesno:',side-nav-padding' }}">
+<div class="chembl-header row {{ hide_side_nav|yesno:',side-nav-padding' }}" {% if main_page %} id="banner-img" {% endif %}>
     <div class="inner-row">
-        <div class="col l3 m5 s10 hide-on-small-pinned">
+        <div class="col l2 m5 s10 hide-on-small-pinned">
             <ul>
                 {% if hide_side_nav %}
                     <li>
@@ -39,8 +39,8 @@
                 </li>
             </ul>
         </div>
-        <div class="hide-on-pinned col l8 m7 push-l1 hide-on-small-only">
-             {% if main_page%}
+        <div class="hide-on-pinned col l10 m7 hide-on-small-only main-page-search-bar">
+             {% if main_page %}
                 {% include "glados/SearchResultsParts/SearchBar.html" %}
               {% endif %}
         </div>
