@@ -4,8 +4,4 @@ glados.useNameSpace 'glados.apps.Embedding',
       ":report_card_path/:chembl_id/:section_name/": 'initReportCardSection'
 
     initReportCardSection: (reportCardPath, chemblID, sectionName) ->
-
-      console.log 'init report card section!'
-      console.log 'reportCardPath: ', reportCardPath
-      console.log 'chemblID: ', chemblID
-      console.log 'sectionName: ', sectionName
+      glados.apps.Embedding.EmbeddingApp.initReportCardSection(reportCardPath, chemblID, sectionName)

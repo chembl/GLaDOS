@@ -44,26 +44,6 @@
 
 </script>
 
-<script id="Handlebars-Common-Preloader" type="text/x-handlebars-template">
-
-
-  {{#if msg}}
-  <div class="center-align">
-    {{msg}}
-  </div>
-  {{/if}}
-
-  <div class="card-preolader-to-hide">
-
-    <div class="progress">
-      <div class="indeterminate"></div>
-    </div>
-
-  </div>
-
-
-</script>
-
 <script id="Handlebars-Common-MiniRepCardPreloader" type="text/x-handlebars-template">
 
      <div class="preloader-wrapper small active">
@@ -862,3 +842,6 @@ There are no {{#if is_unichem}}UniChem {{/if}}cross references for {{chembl_id}}
 
 <!-- Inclusion general report card templates -->
 {% include "glados/Handlebars/ReportCardTemplates.html" %}
+
+<!-- Preloaders -->
+{% include "glados/Handlebars/PreloaderSources.html" %}
