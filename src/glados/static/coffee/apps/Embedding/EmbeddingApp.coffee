@@ -34,7 +34,11 @@ glados.useNameSpace 'glados.apps.Embedding',
         sources:
           template: "#{@compoundReportCardBaseTemplate} #CSourcesCard"
           initFunction: CompoundReportCardApp.initSources
-          
+        alternate_forms:
+          template: "#{@compoundReportCardBaseTemplate} #AlternateFormsCard"
+          initFunction: CompoundReportCardApp.initAlternateForms
+
+
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
 
@@ -44,4 +48,7 @@ glados.useNameSpace 'glados.apps.Embedding',
       initFunction = @requiredHTMLTemplatesURLS["#{reportCardPath}/"][sectionName].initFunction
       GlobalVariables['CURRENT_MODEL_CHEMBL_ID'] = chemblID
 
+      console.log 'reportCardPath: ', reportCardPath
+      console.log 'chemblID: ', chemblID
+      console.log 'sectionName: ', sectionName
       @loadHTMLSection(requiredHTMLURL, initFunction)
