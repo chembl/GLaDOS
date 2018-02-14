@@ -55,6 +55,10 @@ glados.useNameSpace 'glados.apps.Embedding',
         clinical_data:
           template: "#{@compoundReportCardBaseTemplate} #ClinDataCard"
           initFunction: CompoundReportCardApp.initClinicalData
+        metabolism:
+          template: "#{@compoundReportCardBaseTemplate} #MetabolismCard"
+          initFunction: CompoundReportCardApp.initMetabolism
+
 
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
