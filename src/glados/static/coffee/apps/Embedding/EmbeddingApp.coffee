@@ -46,7 +46,9 @@ glados.useNameSpace 'glados.apps.Embedding',
         withdrawal_info:
           template: "#{@compoundReportCardBaseTemplate} #CWithdrawnInfoCard"
           initFunction: CompoundReportCardApp.initWithdrawnInfo
-
+        mechanism_of_action:
+          template: "#{@compoundReportCardBaseTemplate} #MechOfActCard"
+          initFunction: CompoundReportCardApp.initMechanismOfAction
 
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
