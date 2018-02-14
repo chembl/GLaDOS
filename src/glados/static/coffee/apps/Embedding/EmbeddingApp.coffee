@@ -64,6 +64,9 @@ glados.useNameSpace 'glados.apps.Embedding',
         biocomponents:
           template: "#{@compoundReportCardBaseTemplate} #CBioseqCard"
           initFunction: CompoundReportCardApp.initBioSeq
+        related_activities:
+          template: "#{@compoundReportCardBaseTemplate} #CAssociatedActivitiesCard"
+          initFunction: CompoundReportCardApp.initActivitySummary
 
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
