@@ -39,7 +39,11 @@
                 </li>
             </ul>
         </div>
-
+        <div class="hide-on-pinned">
+             {% if main_page%}
+                {% include "glados/SearchResultsParts/SearchBar.html" %}
+              {% endif %}
+        </div>
         <div class="col l1 push-l8 m1 push-m6 s2 hide-on-small-pinned hide-on-pin-top">
             <ul class="right-align-content">
                 <li>
@@ -61,6 +65,5 @@
         {% block header_search_bar %}
           {% include "glados/SearchResultsParts/SearchBarChEMBLHeader.html" %}
         {% endblock %}
-
     </div>
 </div>

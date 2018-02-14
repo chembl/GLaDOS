@@ -6,7 +6,7 @@
   {% endwith %}
 {% endblock main_start_tag %}
 {% block chembl_header %}
-  {% with hide_side_nav=False %}
+  {% with hide_side_nav=False main_page=True%}
     {{block.super}}
   {% endwith %}
 {% endblock chembl_header %}
