@@ -594,6 +594,9 @@ glados.useNameSpace 'glados',
     URLS:
       getCurrentModelChemblID: ->
 
+        if GlobalVariables['CURRENT_MODEL_CHEMBL_ID']?
+          return GlobalVariables['CURRENT_MODEL_CHEMBL_ID']
+
         if GlobalVariables['EMBEDED']
           return URLProcessor.getRequestedChemblIDWhenEmbedded()
         else

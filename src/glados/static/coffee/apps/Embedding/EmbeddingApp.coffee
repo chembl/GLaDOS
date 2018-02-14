@@ -35,6 +35,7 @@ glados.useNameSpace 'glados.apps.Embedding',
       requiredHTMLURL = Handlebars.compile(requiredHTMLURLTempl)
         chembl_id: chemblID
       initFunction = @requiredHTMLTemplatesURLS["#{reportCardPath}/"][sectionName].initFunction
+      GlobalVariables['CURRENT_MODEL_CHEMBL_ID'] = chemblID
 
       @loadHTMLSection(requiredHTMLURL, initFunction)
 
