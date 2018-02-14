@@ -4,4 +4,5 @@ glados.useNameSpace 'glados.apps.Embedding',
     @init = ->
 
       new glados.apps.Embedding.EmbeddingRouter
+      Backbone.history.start()
       console.log 'INIT embedding app'
