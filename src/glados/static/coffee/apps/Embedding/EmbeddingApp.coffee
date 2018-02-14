@@ -61,6 +61,9 @@ glados.useNameSpace 'glados.apps.Embedding',
         helm_notation:
           template: "#{@compoundReportCardBaseTemplate} #CHELMNotationCard"
           initFunction: CompoundReportCardApp.initHELMNotation
+        biocomponents:
+          template: "#{@compoundReportCardBaseTemplate} #CBioseqCard"
+          initFunction: CompoundReportCardApp.initBioSeq
 
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->

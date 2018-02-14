@@ -504,6 +504,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     if GlobalVariables['EMBEDED']
       compound.fetch()
 
+  # https://chembl-glados.herokuapp.com/compound_report_card/CHEMBL1201585
   @initBioSeq = ->
 
     compound = CompoundReportCardApp.getCurrentCompound()
