@@ -43,6 +43,10 @@ glados.useNameSpace 'glados.apps.Embedding',
         molecule_features:
           template: "#{@compoundReportCardBaseTemplate} #MoleculeFeaturesCard"
           initFunction: CompoundReportCardApp.initMoleculeFeatures
+        withdrawal_info:
+          template: "#{@compoundReportCardBaseTemplate} #CWithdrawnInfoCard"
+          initFunction: CompoundReportCardApp.initWithdrawnInfo
+
 
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
