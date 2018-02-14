@@ -31,6 +31,10 @@ glados.useNameSpace 'glados.apps.Embedding',
         representations:
           template: "#{@compoundReportCardBaseTemplate} #CompRepsCard"
           initFunction: CompoundReportCardApp.initRepresentations
+        sources:
+          template: "#{@compoundReportCardBaseTemplate} #CSourcesCard"
+          initFunction: CompoundReportCardApp.initSources
+          
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
 
