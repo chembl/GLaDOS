@@ -70,6 +70,9 @@ glados.useNameSpace 'glados.apps.Embedding',
         related_assays:
           template: "#{@compoundReportCardBaseTemplate} #CAssociatedAssaysCard"
           initFunction: CompoundReportCardApp.initAssaySummary
+        related_targets:
+          template: "#{@compoundReportCardBaseTemplate} #CAssociatedTargetsCard"
+          initFunction: CompoundReportCardApp.initTargetSummary
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
 
