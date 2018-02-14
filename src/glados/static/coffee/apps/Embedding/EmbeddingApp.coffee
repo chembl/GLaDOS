@@ -9,7 +9,6 @@ glados.useNameSpace 'glados.apps.Embedding',
     @loadHTMLSection: (sectionLoadURL, successCallBack) ->
 
       $embedContentContainer = $('#BCK-embedded-content')
-      console.log '$embedContentContainer: ', $embedContentContainer
 
       glados.Utils.fillContentForElement($embedContentContainer, {
         msg: 'Loading section html...'
@@ -23,11 +22,15 @@ glados.useNameSpace 'glados.apps.Embedding',
         else
           successCallBack()
 
+    @compoundReportCardBaseTemplate = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{Compound.reportCardPath}{{chembl_id}}"
     @requiredHTMLTemplatesURLS:
       "#{Compound.reportCardPath}":
-        'name_and_classification':
-          template: "#{glados.Settings.GLADOS_BASE_PATH_REL}#{Compound.reportCardPath}{{chembl_id}} #CNCCard"
+        name_and_classification:
+          template: "#{@compoundReportCardBaseTemplate} #CNCCard"
           initFunction: CompoundReportCardApp.initNameAndClassification
+        representations:
+          template: "#{@compoundReportCardBaseTemplate} #CompRepsCard"
+          initFunction: CompoundReportCardApp.initRepresentations
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
 
