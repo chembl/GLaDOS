@@ -79,6 +79,9 @@ glados.useNameSpace 'glados.apps.Embedding',
         calculated_properties:
           template: "#{@compoundReportCardBaseTemplate} #CalculatedParentPropertiesCard"
           initFunction: CompoundReportCardApp.initCalculatedCompoundParentProperties
+        structural_alerts:
+          template: "#{@compoundReportCardBaseTemplate} #CStructuralAlertsCard"
+          initFunction: CompoundReportCardApp.initStructuralAlerts
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
 
