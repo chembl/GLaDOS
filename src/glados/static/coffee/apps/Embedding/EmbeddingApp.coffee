@@ -40,6 +40,9 @@ glados.useNameSpace 'glados.apps.Embedding',
         similar:
           template: "#{@compoundReportCardBaseTemplate} #SimilarCompoundsCard"
           initFunction: CompoundReportCardApp.initSimilarCompounds
+        molecule_features:
+          template: "#{@compoundReportCardBaseTemplate} #MoleculeFeaturesCard"
+          initFunction: CompoundReportCardApp.initMoleculeFeatures
 
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
