@@ -467,6 +467,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     compoundMetabolism.fetch()
 
+  #https://chembl-glados.herokuapp.com/compound_report_card/CHEMBL1201585/
   @initHELMNotation = ->
 
     compound = CompoundReportCardApp.getCurrentCompound()
