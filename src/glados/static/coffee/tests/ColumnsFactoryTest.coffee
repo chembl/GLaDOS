@@ -13,7 +13,7 @@ describe "Columns Factory for paginated views", ->
     expect(configGot.is_sorting).toBe(0)
     expect(configGot.sort_class).toBe('fa-sort')
     expect(configGot.label_id).toBe('glados_es_gs__molecule__molecule_type__label')
-    expect(configGot.name_to_show).toBe('Molecule Type')
+    expect(configGot.name_to_show).toBe('Type')
 
   it 'generates the configuration for an non aggregatable property', ->
 

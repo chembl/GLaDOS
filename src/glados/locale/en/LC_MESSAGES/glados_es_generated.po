@@ -1,25 +1,25 @@
 msgid "glados_es_gs__activity___metadata__label"
-msgstr " Metadata"
+msgstr "Metadata"
 
 
 msgid "glados_es_gs__activity___metadata__label__mini"
-msgstr " Metadata"
+msgstr "Metadata"
 
 
 msgid "glados_es_gs__activity__activity_comment__label"
-msgstr "Activity Comment"
+msgstr "Comment"
 
 
 msgid "glados_es_gs__activity__activity_comment__label__mini"
-msgstr "Activity Comment"
+msgstr "Comment"
 
 
 msgid "glados_es_gs__activity__activity_generated___short_data_validity_comment__label"
-msgstr "Activity Generated Short Data Validity Comment"
+msgstr "Short Data Validity Comment"
 
 
 msgid "glados_es_gs__activity__activity_generated___short_data_validity_comment__label__mini"
-msgstr "Activity Generated Short Data Validity Comment"
+msgstr "Short Data Valdt. Commn."
 
 
 msgid "glados_es_gs__activity__activity_generated__label"
@@ -31,11 +31,11 @@ msgstr "Activity Generated"
 
 
 msgid "glados_es_gs__activity__activity_id__label"
-msgstr "Activity ID"
+msgstr "ID"
 
 
 msgid "glados_es_gs__activity__activity_id__label__mini"
-msgstr "Activity ID"
+msgstr "ID"
 
 
 msgid "glados_es_gs__activity__assay_chembl_id__label"
@@ -59,7 +59,7 @@ msgstr "Assay Data Assay Organism"
 
 
 msgid "glados_es_gs__activity__assay_data___assay_organism__label__mini"
-msgstr "Assay Data Assay Organism"
+msgstr "Assay Data Assay Orgns."
 
 
 msgid "glados_es_gs__activity__assay_data___assay_subcellular_fraction__label"
@@ -67,7 +67,7 @@ msgstr "Assay Data Assay Subcellular Fraction"
 
 
 msgid "glados_es_gs__activity__assay_data___assay_subcellular_fraction__label__mini"
-msgstr "Assay Data Assay Subcellular Fraction"
+msgstr "Assay Data Assay Subcl. Frctn."
 
 
 msgid "glados_es_gs__activity__assay_data___assay_tissue__label"
@@ -115,7 +115,7 @@ msgstr "Assay Description"
 
 
 msgid "glados_es_gs__activity__assay_description__label__mini"
-msgstr "Assay Description"
+msgstr "Assay Descr."
 
 
 msgid "glados_es_gs__activity__assay_type__label"
@@ -163,7 +163,7 @@ msgstr "Data Validity Comment"
 
 
 msgid "glados_es_gs__activity__data_validity_comment__label__mini"
-msgstr "Data Validity Comment"
+msgstr "Data Valdt. Commn."
 
 
 msgid "glados_es_gs__activity__document_chembl_id__label"
@@ -195,7 +195,7 @@ msgstr "Ligand Efficiency BEI"
 
 
 msgid "glados_es_gs__activity__ligand_efficiency___bei__label__mini"
-msgstr "Ligand Efficiency BEI"
+msgstr "Ligand Effcn. BEI"
 
 
 msgid "glados_es_gs__activity__ligand_efficiency___le__label"
@@ -211,7 +211,7 @@ msgstr "Ligand Efficiency LLE"
 
 
 msgid "glados_es_gs__activity__ligand_efficiency___lle__label__mini"
-msgstr "Ligand Efficiency LLE"
+msgstr "Ligand Effcn. LLE"
 
 
 msgid "glados_es_gs__activity__ligand_efficiency___sei__label"
@@ -219,7 +219,7 @@ msgstr "Ligand Efficiency SEI"
 
 
 msgid "glados_es_gs__activity__ligand_efficiency___sei__label__mini"
-msgstr "Ligand Efficiency SEI"
+msgstr "Ligand Effcn. SEI"
 
 
 msgid "glados_es_gs__activity__ligand_efficiency__label"
@@ -267,7 +267,7 @@ msgstr "Organism Taxonomy L4 Synonyms"
 
 
 msgid "glados_es_gs__activity__organism_taxonomy___l4_synonyms__label__mini"
-msgstr "Organism Taxonomy L4 Synonyms"
+msgstr "Orgns. Taxnm. L4 Synnm."
 
 
 msgid "glados_es_gs__activity__organism_taxonomy___oc_id__label"
@@ -275,7 +275,7 @@ msgstr "Organism Taxonomy Oc ID"
 
 
 msgid "glados_es_gs__activity__organism_taxonomy___oc_id__label__mini"
-msgstr "Organism Taxonomy Oc ID"
+msgstr "Orgns. Taxnm. Oc ID"
 
 
 msgid "glados_es_gs__activity__organism_taxonomy___tax_id__label"
@@ -283,7 +283,7 @@ msgstr "Organism Taxonomy Tax ID"
 
 
 msgid "glados_es_gs__activity__organism_taxonomy___tax_id__label__mini"
-msgstr "Organism Taxonomy Tax ID"
+msgstr "Orgns. Taxnm. Tax ID"
 
 
 msgid "glados_es_gs__activity__organism_taxonomy__label"
@@ -299,7 +299,7 @@ msgstr "Parent Molecule ChEMBL ID"
 
 
 msgid "glados_es_gs__activity__parent_molecule_chembl_id__label__mini"
-msgstr "Parent Molecule ChEMBL ID"
+msgstr "Parent Molcl. ChEMBL ID"
 
 
 msgid "glados_es_gs__activity__parent_molecule_data___alogp__label"
@@ -307,7 +307,7 @@ msgstr "Parent Molecule Data Alogp"
 
 
 msgid "glados_es_gs__activity__parent_molecule_data___alogp__label__mini"
-msgstr "Parent Molecule Data Alogp"
+msgstr "Parent Molcl. Data Alogp"
 
 
 msgid "glados_es_gs__activity__parent_molecule_data___compound_key__label"
@@ -315,7 +315,7 @@ msgstr "Parent Molecule Data Compound Key"
 
 
 msgid "glados_es_gs__activity__parent_molecule_data___compound_key__label__mini"
-msgstr "Parent Molecule Data Compound Key"
+msgstr "Parent Molcl. Data Compn. Key"
 
 
 msgid "glados_es_gs__activity__parent_molecule_data___full_mwt__label"
@@ -323,7 +323,7 @@ msgstr "Parent Molecule Data Full Mwt"
 
 
 msgid "glados_es_gs__activity__parent_molecule_data___full_mwt__label__mini"
-msgstr "Parent Molecule Data Full Mwt"
+msgstr "Parent Molcl. Data Full Mwt"
 
 
 msgid "glados_es_gs__activity__parent_molecule_data___image_file__label"
@@ -331,7 +331,7 @@ msgstr "Parent Molecule Data Image File"
 
 
 msgid "glados_es_gs__activity__parent_molecule_data___image_file__label__mini"
-msgstr "Parent Molecule Data Image File"
+msgstr "Parent Molcl. Data Image File"
 
 
 msgid "glados_es_gs__activity__parent_molecule_data___max_phase__label"
@@ -339,7 +339,7 @@ msgstr "Parent Molecule Data Max Phase"
 
 
 msgid "glados_es_gs__activity__parent_molecule_data___max_phase__label__mini"
-msgstr "Parent Molecule Data Max Phase"
+msgstr "Parent Molcl. Data Max Phase"
 
 
 msgid "glados_es_gs__activity__parent_molecule_data___num_ro5_violations__label"
@@ -347,7 +347,7 @@ msgstr "Parent Molecule Data # Ro5 Violations"
 
 
 msgid "glados_es_gs__activity__parent_molecule_data___num_ro5_violations__label__mini"
-msgstr "Parent Molecule Data # Ro5 Violations"
+msgstr "Parent Molcl. Data # Ro5 Viltn."
 
 
 msgid "glados_es_gs__activity__parent_molecule_data__label"
@@ -379,7 +379,7 @@ msgstr "Protein Classification L1"
 
 
 msgid "glados_es_gs__activity__protein_classification___l1__label__mini"
-msgstr "Protein Classification L1"
+msgstr "Prtn. Clssf. L1"
 
 
 msgid "glados_es_gs__activity__protein_classification___l2__label"
@@ -387,7 +387,7 @@ msgstr "Protein Classification L2"
 
 
 msgid "glados_es_gs__activity__protein_classification___l2__label__mini"
-msgstr "Protein Classification L2"
+msgstr "Prtn. Clssf. L2"
 
 
 msgid "glados_es_gs__activity__protein_classification___l3__label"
@@ -395,7 +395,7 @@ msgstr "Protein Classification L3"
 
 
 msgid "glados_es_gs__activity__protein_classification___l3__label__mini"
-msgstr "Protein Classification L3"
+msgstr "Prtn. Clssf. L3"
 
 
 msgid "glados_es_gs__activity__protein_classification___l4__label"
@@ -403,7 +403,7 @@ msgstr "Protein Classification L4"
 
 
 msgid "glados_es_gs__activity__protein_classification___l4__label__mini"
-msgstr "Protein Classification L4"
+msgstr "Prtn. Clssf. L4"
 
 
 msgid "glados_es_gs__activity__protein_classification___l5__label"
@@ -411,7 +411,7 @@ msgstr "Protein Classification L5"
 
 
 msgid "glados_es_gs__activity__protein_classification___l5__label__mini"
-msgstr "Protein Classification L5"
+msgstr "Prtn. Clssf. L5"
 
 
 msgid "glados_es_gs__activity__protein_classification___l6__label"
@@ -419,7 +419,7 @@ msgstr "Protein Classification L6"
 
 
 msgid "glados_es_gs__activity__protein_classification___l6__label__mini"
-msgstr "Protein Classification L6"
+msgstr "Prtn. Clssf. L6"
 
 
 msgid "glados_es_gs__activity__protein_classification___protein_class_id__label"
@@ -427,7 +427,7 @@ msgstr "Protein Classification Protein Class ID"
 
 
 msgid "glados_es_gs__activity__protein_classification___protein_class_id__label__mini"
-msgstr "Protein Classification Protein Class ID"
+msgstr "Prtn. Clssf. Prtn. Class ID"
 
 
 msgid "glados_es_gs__activity__protein_classification__label"
@@ -435,7 +435,7 @@ msgstr "Protein Classification"
 
 
 msgid "glados_es_gs__activity__protein_classification__label__mini"
-msgstr "Protein Classification"
+msgstr "Prtn. Clssf."
 
 
 msgid "glados_es_gs__activity__published_relation__label"
@@ -491,7 +491,7 @@ msgstr "Source Src Description"
 
 
 msgid "glados_es_gs__activity__source___src_description__label__mini"
-msgstr "Source Src Description"
+msgstr "Source Src Descr."
 
 
 msgid "glados_es_gs__activity__source___src_id__label"
@@ -623,59 +623,59 @@ msgstr "Uo Units"
 
 
 msgid "glados_es_gs__assay___metadata__label"
-msgstr " Metadata"
+msgstr "Metadata"
 
 
 msgid "glados_es_gs__assay___metadata__label__mini"
-msgstr " Metadata"
+msgstr "Metadata"
 
 
 msgid "glados_es_gs__assay__assay_category__label"
-msgstr "Assay Category"
+msgstr "Category"
 
 
 msgid "glados_es_gs__assay__assay_category__label__mini"
-msgstr "Assay Category"
+msgstr "Category"
 
 
 msgid "glados_es_gs__assay__assay_cell_type__label"
-msgstr "Assay Cell Type"
+msgstr "Cell Type"
 
 
 msgid "glados_es_gs__assay__assay_cell_type__label__mini"
-msgstr "Assay Cell Type"
+msgstr "Cell Type"
 
 
 msgid "glados_es_gs__assay__assay_chembl_id__label"
-msgstr "Assay ChEMBL ID"
+msgstr "ChEMBL ID"
 
 
 msgid "glados_es_gs__assay__assay_chembl_id__label__mini"
-msgstr "Assay ChEMBL ID"
+msgstr "ChEMBL ID"
 
 
 msgid "glados_es_gs__assay__assay_generated___confidence_label__label"
-msgstr "Assay Generated Confidence Label"
+msgstr "Confidence Label"
 
 
 msgid "glados_es_gs__assay__assay_generated___confidence_label__label__mini"
-msgstr "Assay Generated Confidence Label"
+msgstr "Confidence Label"
 
 
 msgid "glados_es_gs__assay__assay_generated___relationship_label__label"
-msgstr "Assay Generated Relationship Label"
+msgstr "Relationship Label"
 
 
 msgid "glados_es_gs__assay__assay_generated___relationship_label__label__mini"
-msgstr "Assay Generated Relationship Label"
+msgstr "Reltn. Label"
 
 
 msgid "glados_es_gs__assay__assay_generated___type_label__label"
-msgstr "Assay Generated Type Label"
+msgstr "Type Label"
 
 
 msgid "glados_es_gs__assay__assay_generated___type_label__label__mini"
-msgstr "Assay Generated Type Label"
+msgstr "Type Label"
 
 
 msgid "glados_es_gs__assay__assay_generated__label"
@@ -687,67 +687,67 @@ msgstr "Assay Generated"
 
 
 msgid "glados_es_gs__assay__assay_organism__label"
-msgstr "Assay Organism"
+msgstr "Organism"
 
 
 msgid "glados_es_gs__assay__assay_organism__label__mini"
-msgstr "Assay Organism"
+msgstr "Organism"
 
 
 msgid "glados_es_gs__assay__assay_strain__label"
-msgstr "Assay Strain"
+msgstr "Strain"
 
 
 msgid "glados_es_gs__assay__assay_strain__label__mini"
-msgstr "Assay Strain"
+msgstr "Strain"
 
 
 msgid "glados_es_gs__assay__assay_subcellular_fraction__label"
-msgstr "Assay Subcellular Fraction"
+msgstr "Subcellular Fraction"
 
 
 msgid "glados_es_gs__assay__assay_subcellular_fraction__label__mini"
-msgstr "Assay Subcellular Fraction"
+msgstr "Subcl. Fraction"
 
 
 msgid "glados_es_gs__assay__assay_tax_id__label"
-msgstr "Assay Tax ID"
+msgstr "Tax ID"
 
 
 msgid "glados_es_gs__assay__assay_tax_id__label__mini"
-msgstr "Assay Tax ID"
+msgstr "Tax ID"
 
 
 msgid "glados_es_gs__assay__assay_test_type__label"
-msgstr "Assay Test Type"
+msgstr "Test Type"
 
 
 msgid "glados_es_gs__assay__assay_test_type__label__mini"
-msgstr "Assay Test Type"
+msgstr "Test Type"
 
 
 msgid "glados_es_gs__assay__assay_tissue__label"
-msgstr "Assay Tissue"
+msgstr "Tissue"
 
 
 msgid "glados_es_gs__assay__assay_tissue__label__mini"
-msgstr "Assay Tissue"
+msgstr "Tissue"
 
 
 msgid "glados_es_gs__assay__assay_type__label"
-msgstr "Assay Type"
+msgstr "Type"
 
 
 msgid "glados_es_gs__assay__assay_type__label__mini"
-msgstr "Assay Type"
+msgstr "Type"
 
 
 msgid "glados_es_gs__assay__assay_type_description__label"
-msgstr "Assay Type Description"
+msgstr "Type Description"
 
 
 msgid "glados_es_gs__assay__assay_type_description__label__mini"
-msgstr "Assay Type Description"
+msgstr "Type Descr."
 
 
 msgid "glados_es_gs__assay__bao_format__label"
@@ -779,7 +779,7 @@ msgstr "Confidence Description"
 
 
 msgid "glados_es_gs__assay__confidence_description__label__mini"
-msgstr "Confidence Description"
+msgstr "Confd. Descr."
 
 
 msgid "glados_es_gs__assay__confidence_score__label"
@@ -795,7 +795,7 @@ msgstr "Description"
 
 
 msgid "glados_es_gs__assay__description__label__mini"
-msgstr "Description"
+msgstr "Descr."
 
 
 msgid "glados_es_gs__assay__document_chembl_id__label"
@@ -843,7 +843,7 @@ msgstr "Organism Taxonomy L4 Synonyms"
 
 
 msgid "glados_es_gs__assay__organism_taxonomy___l4_synonyms__label__mini"
-msgstr "Organism Taxonomy L4 Synonyms"
+msgstr "Orgns. Taxnm. L4 Synnm."
 
 
 msgid "glados_es_gs__assay__organism_taxonomy___oc_id__label"
@@ -851,7 +851,7 @@ msgstr "Organism Taxonomy Oc ID"
 
 
 msgid "glados_es_gs__assay__organism_taxonomy___oc_id__label__mini"
-msgstr "Organism Taxonomy Oc ID"
+msgstr "Orgns. Taxnm. Oc ID"
 
 
 msgid "glados_es_gs__assay__organism_taxonomy___tax_id__label"
@@ -859,7 +859,7 @@ msgstr "Organism Taxonomy Tax ID"
 
 
 msgid "glados_es_gs__assay__organism_taxonomy___tax_id__label__mini"
-msgstr "Organism Taxonomy Tax ID"
+msgstr "Orgns. Taxnm. Tax ID"
 
 
 msgid "glados_es_gs__assay__organism_taxonomy__label"
@@ -875,7 +875,7 @@ msgstr "Related Activities Count"
 
 
 msgid "glados_es_gs__assay__related_activities___count__label__mini"
-msgstr "Related Activities Count"
+msgstr "Reltd. Actvt. Count"
 
 
 msgid "glados_es_gs__assay__related_activities__label"
@@ -891,7 +891,7 @@ msgstr "Related Compounds ChEMBL Ids"
 
 
 msgid "glados_es_gs__assay__related_compounds___chembl_ids__label__mini"
-msgstr "Related Compounds ChEMBL Ids"
+msgstr "Reltd. Compn. ChEMBL Ids"
 
 
 msgid "glados_es_gs__assay__related_compounds___count__label"
@@ -899,7 +899,7 @@ msgstr "Related Compounds Count"
 
 
 msgid "glados_es_gs__assay__related_compounds___count__label__mini"
-msgstr "Related Compounds Count"
+msgstr "Reltd. Compn. Count"
 
 
 msgid "glados_es_gs__assay__related_compounds__label"
@@ -915,7 +915,7 @@ msgstr "Related Documents ChEMBL Ids"
 
 
 msgid "glados_es_gs__assay__related_documents___chembl_ids__label__mini"
-msgstr "Related Documents ChEMBL Ids"
+msgstr "Reltd. Docmn. ChEMBL Ids"
 
 
 msgid "glados_es_gs__assay__related_documents___count__label"
@@ -923,7 +923,7 @@ msgstr "Related Documents Count"
 
 
 msgid "glados_es_gs__assay__related_documents___count__label__mini"
-msgstr "Related Documents Count"
+msgstr "Reltd. Docmn. Count"
 
 
 msgid "glados_es_gs__assay__related_documents__label"
@@ -939,7 +939,7 @@ msgstr "Related Targets ChEMBL Ids"
 
 
 msgid "glados_es_gs__assay__related_targets___chembl_ids__label__mini"
-msgstr "Related Targets ChEMBL Ids"
+msgstr "Reltd. Targt. ChEMBL Ids"
 
 
 msgid "glados_es_gs__assay__related_targets___count__label"
@@ -947,7 +947,7 @@ msgstr "Related Targets Count"
 
 
 msgid "glados_es_gs__assay__related_targets___count__label__mini"
-msgstr "Related Targets Count"
+msgstr "Reltd. Targt. Count"
 
 
 msgid "glados_es_gs__assay__related_targets__label"
@@ -963,7 +963,7 @@ msgstr "Relationship Description"
 
 
 msgid "glados_es_gs__assay__relationship_description__label__mini"
-msgstr "Relationship Description"
+msgstr "Reltn. Descr."
 
 
 msgid "glados_es_gs__assay__relationship_type__label"
@@ -971,7 +971,7 @@ msgstr "Relationship Type"
 
 
 msgid "glados_es_gs__assay__relationship_type__label__mini"
-msgstr "Relationship Type"
+msgstr "Reltn. Type"
 
 
 msgid "glados_es_gs__assay__source___src_description__label"
@@ -979,7 +979,7 @@ msgstr "Source Src Description"
 
 
 msgid "glados_es_gs__assay__source___src_description__label__mini"
-msgstr "Source Src Description"
+msgstr "Source Src Descr."
 
 
 msgid "glados_es_gs__assay__source___src_id__label"
@@ -1007,11 +1007,11 @@ msgstr "Source"
 
 
 msgid "glados_es_gs__assay__src_assay_id__label"
-msgstr "Src Assay ID"
+msgstr "Src  ID"
 
 
 msgid "glados_es_gs__assay__src_assay_id__label__mini"
-msgstr "Src Assay ID"
+msgstr "Src  ID"
 
 
 msgid "glados_es_gs__assay__src_id__label"
@@ -1039,11 +1039,11 @@ msgstr "Tissue ChEMBL ID"
 
 
 msgid "glados_es_gs__cell_line___metadata__label"
-msgstr " Metadata"
+msgstr "Metadata"
 
 
 msgid "glados_es_gs__cell_line___metadata__label__mini"
-msgstr " Metadata"
+msgstr "Metadata"
 
 
 msgid "glados_es_gs__cell_line__cell_chembl_id__label"
@@ -1059,7 +1059,7 @@ msgstr "Cell Description"
 
 
 msgid "glados_es_gs__cell_line__cell_description__label__mini"
-msgstr "Cell Description"
+msgstr "Cell Descr."
 
 
 msgid "glados_es_gs__cell_line__cell_id__label"
@@ -1107,7 +1107,7 @@ msgstr "Cellosaurus ID"
 
 
 msgid "glados_es_gs__cell_line__cellosaurus_id__label__mini"
-msgstr "Cellosaurus ID"
+msgstr "Cells. ID"
 
 
 msgid "glados_es_gs__cell_line__cl_lincs_id__label"
@@ -1171,7 +1171,7 @@ msgstr "Organism Taxonomy L4 Synonyms"
 
 
 msgid "glados_es_gs__cell_line__organism_taxonomy___l4_synonyms__label__mini"
-msgstr "Organism Taxonomy L4 Synonyms"
+msgstr "Orgns. Taxnm. L4 Synnm."
 
 
 msgid "glados_es_gs__cell_line__organism_taxonomy___oc_id__label"
@@ -1179,7 +1179,7 @@ msgstr "Organism Taxonomy Oc ID"
 
 
 msgid "glados_es_gs__cell_line__organism_taxonomy___oc_id__label__mini"
-msgstr "Organism Taxonomy Oc ID"
+msgstr "Orgns. Taxnm. Oc ID"
 
 
 msgid "glados_es_gs__cell_line__organism_taxonomy___tax_id__label"
@@ -1187,7 +1187,7 @@ msgstr "Organism Taxonomy Tax ID"
 
 
 msgid "glados_es_gs__cell_line__organism_taxonomy___tax_id__label__mini"
-msgstr "Organism Taxonomy Tax ID"
+msgstr "Orgns. Taxnm. Tax ID"
 
 
 msgid "glados_es_gs__cell_line__organism_taxonomy__label"
@@ -1203,7 +1203,7 @@ msgstr "Related Activities ChEMBL Ids"
 
 
 msgid "glados_es_gs__cell_line__related_activities___chembl_ids__label__mini"
-msgstr "Related Activities ChEMBL Ids"
+msgstr "Reltd. Actvt. ChEMBL Ids"
 
 
 msgid "glados_es_gs__cell_line__related_activities___count__label"
@@ -1211,7 +1211,7 @@ msgstr "Related Activities Count"
 
 
 msgid "glados_es_gs__cell_line__related_activities___count__label__mini"
-msgstr "Related Activities Count"
+msgstr "Reltd. Actvt. Count"
 
 
 msgid "glados_es_gs__cell_line__related_activities__label"
@@ -1227,7 +1227,7 @@ msgstr "Related Assays ChEMBL Ids"
 
 
 msgid "glados_es_gs__cell_line__related_assays___chembl_ids__label__mini"
-msgstr "Related Assays ChEMBL Ids"
+msgstr "Reltd. Assays ChEMBL Ids"
 
 
 msgid "glados_es_gs__cell_line__related_assays___count__label"
@@ -1251,7 +1251,7 @@ msgstr "Related Compounds ChEMBL Ids"
 
 
 msgid "glados_es_gs__cell_line__related_compounds___chembl_ids__label__mini"
-msgstr "Related Compounds ChEMBL Ids"
+msgstr "Reltd. Compn. ChEMBL Ids"
 
 
 msgid "glados_es_gs__cell_line__related_compounds___count__label"
@@ -1259,7 +1259,7 @@ msgstr "Related Compounds Count"
 
 
 msgid "glados_es_gs__cell_line__related_compounds___count__label__mini"
-msgstr "Related Compounds Count"
+msgstr "Reltd. Compn. Count"
 
 
 msgid "glados_es_gs__cell_line__related_compounds__label"
@@ -1275,7 +1275,7 @@ msgstr "Related Documents ChEMBL Ids"
 
 
 msgid "glados_es_gs__cell_line__related_documents___chembl_ids__label__mini"
-msgstr "Related Documents ChEMBL Ids"
+msgstr "Reltd. Docmn. ChEMBL Ids"
 
 
 msgid "glados_es_gs__cell_line__related_documents___count__label"
@@ -1283,7 +1283,7 @@ msgstr "Related Documents Count"
 
 
 msgid "glados_es_gs__cell_line__related_documents___count__label__mini"
-msgstr "Related Documents Count"
+msgstr "Reltd. Docmn. Count"
 
 
 msgid "glados_es_gs__cell_line__related_documents__label"
@@ -1299,7 +1299,7 @@ msgstr "Related Targets ChEMBL Ids"
 
 
 msgid "glados_es_gs__cell_line__related_targets___chembl_ids__label__mini"
-msgstr "Related Targets ChEMBL Ids"
+msgstr "Reltd. Targt. ChEMBL Ids"
 
 
 msgid "glados_es_gs__cell_line__related_targets___count__label"
@@ -1307,7 +1307,7 @@ msgstr "Related Targets Count"
 
 
 msgid "glados_es_gs__cell_line__related_targets___count__label__mini"
-msgstr "Related Targets Count"
+msgstr "Reltd. Targt. Count"
 
 
 msgid "glados_es_gs__cell_line__related_targets__label"
@@ -1323,7 +1323,7 @@ msgstr "Related Tissues ChEMBL Ids"
 
 
 msgid "glados_es_gs__cell_line__related_tissues___chembl_ids__label__mini"
-msgstr "Related Tissues ChEMBL Ids"
+msgstr "Reltd. Tisss. ChEMBL Ids"
 
 
 msgid "glados_es_gs__cell_line__related_tissues___count__label"
@@ -1331,7 +1331,7 @@ msgstr "Related Tissues Count"
 
 
 msgid "glados_es_gs__cell_line__related_tissues___count__label__mini"
-msgstr "Related Tissues Count"
+msgstr "Reltd. Tisss. Count"
 
 
 msgid "glados_es_gs__cell_line__related_tissues__label"
@@ -1343,11 +1343,11 @@ msgstr "Related Tissues"
 
 
 msgid "glados_es_gs__document___metadata__label"
-msgstr " Metadata"
+msgstr "Metadata"
 
 
 msgid "glados_es_gs__document___metadata__label__mini"
-msgstr " Metadata"
+msgstr "Metadata"
 
 
 msgid "glados_es_gs__document__abstract__label"
@@ -1375,11 +1375,11 @@ msgstr "Doc Type"
 
 
 msgid "glados_es_gs__document__document_chembl_id__label"
-msgstr "Document ChEMBL ID"
+msgstr "ChEMBL ID"
 
 
 msgid "glados_es_gs__document__document_chembl_id__label__mini"
-msgstr "Document ChEMBL ID"
+msgstr "ChEMBL ID"
 
 
 msgid "glados_es_gs__document__doi__label"
@@ -1459,7 +1459,7 @@ msgstr "Related Activities Count"
 
 
 msgid "glados_es_gs__document__related_activities___count__label__mini"
-msgstr "Related Activities Count"
+msgstr "Reltd. Actvt. Count"
 
 
 msgid "glados_es_gs__document__related_activities__label"
@@ -1475,7 +1475,7 @@ msgstr "Related Assays ChEMBL Ids"
 
 
 msgid "glados_es_gs__document__related_assays___chembl_ids__label__mini"
-msgstr "Related Assays ChEMBL Ids"
+msgstr "Reltd. Assays ChEMBL Ids"
 
 
 msgid "glados_es_gs__document__related_assays___count__label"
@@ -1499,7 +1499,7 @@ msgstr "Related Cell Lines ChEMBL Ids"
 
 
 msgid "glados_es_gs__document__related_cell_lines___chembl_ids__label__mini"
-msgstr "Related Cell Lines ChEMBL Ids"
+msgstr "Reltd. Cell Lines ChEMBL Ids"
 
 
 msgid "glados_es_gs__document__related_cell_lines___count__label"
@@ -1507,7 +1507,7 @@ msgstr "Related Cell Lines Count"
 
 
 msgid "glados_es_gs__document__related_cell_lines___count__label__mini"
-msgstr "Related Cell Lines Count"
+msgstr "Reltd. Cell Lines Count"
 
 
 msgid "glados_es_gs__document__related_cell_lines__label"
@@ -1523,7 +1523,7 @@ msgstr "Related Compounds ChEMBL Ids"
 
 
 msgid "glados_es_gs__document__related_compounds___chembl_ids__label__mini"
-msgstr "Related Compounds ChEMBL Ids"
+msgstr "Reltd. Compn. ChEMBL Ids"
 
 
 msgid "glados_es_gs__document__related_compounds___count__label"
@@ -1531,7 +1531,7 @@ msgstr "Related Compounds Count"
 
 
 msgid "glados_es_gs__document__related_compounds___count__label__mini"
-msgstr "Related Compounds Count"
+msgstr "Reltd. Compn. Count"
 
 
 msgid "glados_es_gs__document__related_compounds__label"
@@ -1547,7 +1547,7 @@ msgstr "Related Targets ChEMBL Ids"
 
 
 msgid "glados_es_gs__document__related_targets___chembl_ids__label__mini"
-msgstr "Related Targets ChEMBL Ids"
+msgstr "Reltd. Targt. ChEMBL Ids"
 
 
 msgid "glados_es_gs__document__related_targets___count__label"
@@ -1555,7 +1555,7 @@ msgstr "Related Targets Count"
 
 
 msgid "glados_es_gs__document__related_targets___count__label__mini"
-msgstr "Related Targets Count"
+msgstr "Reltd. Targt. Count"
 
 
 msgid "glados_es_gs__document__related_targets__label"
@@ -1571,7 +1571,7 @@ msgstr "Related Tissues ChEMBL Ids"
 
 
 msgid "glados_es_gs__document__related_tissues___chembl_ids__label__mini"
-msgstr "Related Tissues ChEMBL Ids"
+msgstr "Reltd. Tisss. ChEMBL Ids"
 
 
 msgid "glados_es_gs__document__related_tissues___count__label"
@@ -1579,7 +1579,7 @@ msgstr "Related Tissues Count"
 
 
 msgid "glados_es_gs__document__related_tissues___count__label__mini"
-msgstr "Related Tissues Count"
+msgstr "Reltd. Tisss. Count"
 
 
 msgid "glados_es_gs__document__related_tissues__label"
@@ -1595,7 +1595,7 @@ msgstr "Source Src Description"
 
 
 msgid "glados_es_gs__document__source___src_description__label__mini"
-msgstr "Source Src Description"
+msgstr "Source Src Descr."
 
 
 msgid "glados_es_gs__document__source___src_id__label"
@@ -1647,11 +1647,11 @@ msgstr "Year"
 
 
 msgid "glados_es_gs__molecule___metadata__label"
-msgstr " Metadata"
+msgstr "Metadata"
 
 
 msgid "glados_es_gs__molecule___metadata__label__mini"
-msgstr " Metadata"
+msgstr "Metadata"
 
 
 msgid "glados_es_gs__molecule__activity_count__label"
@@ -1671,115 +1671,115 @@ msgstr "Applicants"
 
 
 msgid "glados_es_gs__molecule__atc_classification___code__label"
-msgstr "Atc Classification Code"
+msgstr "ATC Classification Code"
 
 
 msgid "glados_es_gs__molecule__atc_classification___code__label__mini"
-msgstr "Atc Classification Code"
+msgstr "ATC Clssf. Code"
 
 
 msgid "glados_es_gs__molecule__atc_classification___description__label"
-msgstr "Atc Classification Description"
+msgstr "ATC Classification Description"
 
 
 msgid "glados_es_gs__molecule__atc_classification___description__label__mini"
-msgstr "Atc Classification Description"
+msgstr "ATC Clssf. Descr."
 
 
 msgid "glados_es_gs__molecule__atc_classification__label"
-msgstr "Atc Classification"
+msgstr "ATC Classification"
 
 
 msgid "glados_es_gs__molecule__atc_classification__label__mini"
-msgstr "Atc Classification"
+msgstr "ATC Clssf."
 
 
 msgid "glados_es_gs__molecule__atc_classifications___level1__label"
-msgstr "Atc Classifications Level1"
+msgstr "ATC Classifications Level1"
 
 
 msgid "glados_es_gs__molecule__atc_classifications___level1__label__mini"
-msgstr "Atc Classifications Level1"
+msgstr "ATC Clssf. Level1"
 
 
 msgid "glados_es_gs__molecule__atc_classifications___level1_description__label"
-msgstr "Atc Classifications Level1 Description"
+msgstr "ATC Classifications Level1 Description"
 
 
 msgid "glados_es_gs__molecule__atc_classifications___level1_description__label__mini"
-msgstr "Atc Classifications Level1 Description"
+msgstr "ATC Clssf. Level1 Descr."
 
 
 msgid "glados_es_gs__molecule__atc_classifications___level2__label"
-msgstr "Atc Classifications Level2"
+msgstr "ATC Classifications Level2"
 
 
 msgid "glados_es_gs__molecule__atc_classifications___level2__label__mini"
-msgstr "Atc Classifications Level2"
+msgstr "ATC Clssf. Level2"
 
 
 msgid "glados_es_gs__molecule__atc_classifications___level2_description__label"
-msgstr "Atc Classifications Level2 Description"
+msgstr "ATC Classifications Level2 Description"
 
 
 msgid "glados_es_gs__molecule__atc_classifications___level2_description__label__mini"
-msgstr "Atc Classifications Level2 Description"
+msgstr "ATC Clssf. Level2 Descr."
 
 
 msgid "glados_es_gs__molecule__atc_classifications___level3__label"
-msgstr "Atc Classifications Level3"
+msgstr "ATC Classifications Level3"
 
 
 msgid "glados_es_gs__molecule__atc_classifications___level3__label__mini"
-msgstr "Atc Classifications Level3"
+msgstr "ATC Clssf. Level3"
 
 
 msgid "glados_es_gs__molecule__atc_classifications___level3_description__label"
-msgstr "Atc Classifications Level3 Description"
+msgstr "ATC Classifications Level3 Description"
 
 
 msgid "glados_es_gs__molecule__atc_classifications___level3_description__label__mini"
-msgstr "Atc Classifications Level3 Description"
+msgstr "ATC Clssf. Level3 Descr."
 
 
 msgid "glados_es_gs__molecule__atc_classifications___level4__label"
-msgstr "Atc Classifications Level4"
+msgstr "ATC Classifications Level4"
 
 
 msgid "glados_es_gs__molecule__atc_classifications___level4__label__mini"
-msgstr "Atc Classifications Level4"
+msgstr "ATC Clssf. Level4"
 
 
 msgid "glados_es_gs__molecule__atc_classifications___level4_description__label"
-msgstr "Atc Classifications Level4 Description"
+msgstr "ATC Classifications Level4 Description"
 
 
 msgid "glados_es_gs__molecule__atc_classifications___level4_description__label__mini"
-msgstr "Atc Classifications Level4 Description"
+msgstr "ATC Clssf. Level4 Descr."
 
 
 msgid "glados_es_gs__molecule__atc_classifications___level5__label"
-msgstr "Atc Classifications Level5"
+msgstr "ATC Classifications Level5"
 
 
 msgid "glados_es_gs__molecule__atc_classifications___level5__label__mini"
-msgstr "Atc Classifications Level5"
+msgstr "ATC Clssf. Level5"
 
 
 msgid "glados_es_gs__molecule__atc_classifications___who_name__label"
-msgstr "Atc Classifications Who Name"
+msgstr "ATC Classifications Who Name"
 
 
 msgid "glados_es_gs__molecule__atc_classifications___who_name__label__mini"
-msgstr "Atc Classifications Who Name"
+msgstr "ATC Clssf. Who Name"
 
 
 msgid "glados_es_gs__molecule__atc_classifications__label"
-msgstr "Atc Classifications"
+msgstr "ATC Classifications"
 
 
 msgid "glados_es_gs__molecule__atc_classifications__label__mini"
-msgstr "Atc Classifications"
+msgstr "ATC Clssf."
 
 
 msgid "glados_es_gs__molecule__availability_type__label"
@@ -1787,7 +1787,7 @@ msgstr "Availability Type"
 
 
 msgid "glados_es_gs__molecule__availability_type__label__mini"
-msgstr "Availability Type"
+msgstr "Avlbl. Type"
 
 
 msgid "glados_es_gs__molecule__biocomponents___component_id__label"
@@ -1795,7 +1795,7 @@ msgstr "Biocomponents Component ID"
 
 
 msgid "glados_es_gs__molecule__biocomponents___component_id__label__mini"
-msgstr "Biocomponents Component ID"
+msgstr "Bicmp. Compn. ID"
 
 
 msgid "glados_es_gs__molecule__biocomponents___component_type__label"
@@ -1803,7 +1803,7 @@ msgstr "Biocomponents Component Type"
 
 
 msgid "glados_es_gs__molecule__biocomponents___component_type__label__mini"
-msgstr "Biocomponents Component Type"
+msgstr "Bicmp. Compn. Type"
 
 
 msgid "glados_es_gs__molecule__biocomponents___description__label"
@@ -1811,7 +1811,7 @@ msgstr "Biocomponents Description"
 
 
 msgid "glados_es_gs__molecule__biocomponents___description__label__mini"
-msgstr "Biocomponents Description"
+msgstr "Bicmp. Descr."
 
 
 msgid "glados_es_gs__molecule__biocomponents___organism__label"
@@ -1819,7 +1819,7 @@ msgstr "Biocomponents Organism"
 
 
 msgid "glados_es_gs__molecule__biocomponents___organism__label__mini"
-msgstr "Biocomponents Organism"
+msgstr "Bicmp. Orgns."
 
 
 msgid "glados_es_gs__molecule__biocomponents___sequence__label"
@@ -1827,7 +1827,7 @@ msgstr "Biocomponents Sequence"
 
 
 msgid "glados_es_gs__molecule__biocomponents___sequence__label__mini"
-msgstr "Biocomponents Sequence"
+msgstr "Bicmp. Seqnc."
 
 
 msgid "glados_es_gs__molecule__biocomponents___tax_id__label"
@@ -1835,7 +1835,7 @@ msgstr "Biocomponents Tax ID"
 
 
 msgid "glados_es_gs__molecule__biocomponents___tax_id__label__mini"
-msgstr "Biocomponents Tax ID"
+msgstr "Bicmp. Tax ID"
 
 
 msgid "glados_es_gs__molecule__biotherapeutic___biocomponents__label"
@@ -1843,7 +1843,7 @@ msgstr "Biotherapeutic Biocomponents"
 
 
 msgid "glados_es_gs__molecule__biotherapeutic___biocomponents__label__mini"
-msgstr "Biotherapeutic Biocomponents"
+msgstr "Bithr. Bicmp."
 
 
 msgid "glados_es_gs__molecule__biotherapeutic___description__label"
@@ -1851,7 +1851,7 @@ msgstr "Biotherapeutic Description"
 
 
 msgid "glados_es_gs__molecule__biotherapeutic___description__label__mini"
-msgstr "Biotherapeutic Description"
+msgstr "Bithr. Descr."
 
 
 msgid "glados_es_gs__molecule__biotherapeutic___helm_notation__label"
@@ -1859,15 +1859,15 @@ msgstr "Biotherapeutic Helm Notation"
 
 
 msgid "glados_es_gs__molecule__biotherapeutic___helm_notation__label__mini"
-msgstr "Biotherapeutic Helm Notation"
+msgstr "Bithr. Helm Nottn."
 
 
 msgid "glados_es_gs__molecule__biotherapeutic___molecule_chembl_id__label"
-msgstr "Biotherapeutic Molecule ChEMBL ID"
+msgstr "Biotherapeutic ChEMBL ID"
 
 
 msgid "glados_es_gs__molecule__biotherapeutic___molecule_chembl_id__label__mini"
-msgstr "Biotherapeutic Molecule ChEMBL ID"
+msgstr "Bithr. ChEMBL ID"
 
 
 msgid "glados_es_gs__molecule__biotherapeutic__label"
@@ -1875,7 +1875,7 @@ msgstr "Biotherapeutic"
 
 
 msgid "glados_es_gs__molecule__biotherapeutic__label__mini"
-msgstr "Biotherapeutic"
+msgstr "Bithr."
 
 
 msgid "glados_es_gs__molecule__black_box__label"
@@ -1911,27 +1911,27 @@ msgstr "Chirality"
 
 
 msgid "glados_es_gs__molecule__compound_generated___availability_type_label__label"
-msgstr "Compound Generated Availability Type Label"
+msgstr "Availability Type Label"
 
 
 msgid "glados_es_gs__molecule__compound_generated___availability_type_label__label__mini"
-msgstr "Compound Generated Availability Type Label"
+msgstr "Avlbl. Type Label"
 
 
 msgid "glados_es_gs__molecule__compound_generated___chirality_label__label"
-msgstr "Compound Generated Chirality Label"
+msgstr "Chirality Label"
 
 
 msgid "glados_es_gs__molecule__compound_generated___chirality_label__label__mini"
-msgstr "Compound Generated Chirality Label"
+msgstr "Chirality Label"
 
 
 msgid "glados_es_gs__molecule__compound_generated___image_file__label"
-msgstr "Compound Generated Image File"
+msgstr "Image File"
 
 
 msgid "glados_es_gs__molecule__compound_generated___image_file__label__mini"
-msgstr "Compound Generated Image File"
+msgstr "Image File"
 
 
 msgid "glados_es_gs__molecule__compound_generated__label"
@@ -1943,51 +1943,51 @@ msgstr "Compound Generated"
 
 
 msgid "glados_es_gs__molecule__compound_records___compound_key__label"
-msgstr "Compound Records Compound Key"
+msgstr "Records Key"
 
 
 msgid "glados_es_gs__molecule__compound_records___compound_key__label__mini"
-msgstr "Compound Records Compound Key"
+msgstr "Records Key"
 
 
 msgid "glados_es_gs__molecule__compound_records___compound_name__label"
-msgstr "Compound Records Compound Name"
+msgstr "Records Name"
 
 
 msgid "glados_es_gs__molecule__compound_records___compound_name__label__mini"
-msgstr "Compound Records Compound Name"
+msgstr "Records Name"
 
 
 msgid "glados_es_gs__molecule__compound_records___src_description__label"
-msgstr "Compound Records Src Description"
+msgstr "Records Src Description"
 
 
 msgid "glados_es_gs__molecule__compound_records___src_description__label__mini"
-msgstr "Compound Records Src Description"
+msgstr "Recrd. Src Descr."
 
 
 msgid "glados_es_gs__molecule__compound_records___src_id__label"
-msgstr "Compound Records Src ID"
+msgstr "Records Src ID"
 
 
 msgid "glados_es_gs__molecule__compound_records___src_id__label__mini"
-msgstr "Compound Records Src ID"
+msgstr "Records Src ID"
 
 
 msgid "glados_es_gs__molecule__compound_records___src_short_name__label"
-msgstr "Compound Records Src Short Name"
+msgstr "Records Src Short Name"
 
 
 msgid "glados_es_gs__molecule__compound_records___src_short_name__label__mini"
-msgstr "Compound Records Src Short Name"
+msgstr "Recrd. Src Short Name"
 
 
 msgid "glados_es_gs__molecule__compound_records__label"
-msgstr "Compound Records"
+msgstr "Records"
 
 
 msgid "glados_es_gs__molecule__compound_records__label__mini"
-msgstr "Compound Records"
+msgstr "Records"
 
 
 msgid "glados_es_gs__molecule__cross_references___xref_id__label"
@@ -1995,7 +1995,7 @@ msgstr "Cross References Xref ID"
 
 
 msgid "glados_es_gs__molecule__cross_references___xref_id__label__mini"
-msgstr "Cross References Xref ID"
+msgstr "Cross Refrn. Xref ID"
 
 
 msgid "glados_es_gs__molecule__cross_references___xref_name__label"
@@ -2003,7 +2003,7 @@ msgstr "Cross References Xref Name"
 
 
 msgid "glados_es_gs__molecule__cross_references___xref_name__label__mini"
-msgstr "Cross References Xref Name"
+msgstr "Cross Refrn. Xref Name"
 
 
 msgid "glados_es_gs__molecule__cross_references___xref_src__label"
@@ -2011,7 +2011,23 @@ msgstr "Cross References Xref Src"
 
 
 msgid "glados_es_gs__molecule__cross_references___xref_src__label__mini"
-msgstr "Cross References Xref Src"
+msgstr "Cross Refrn. Xref Src"
+
+
+msgid "glados_es_gs__molecule__cross_references___xref_src_url__label"
+msgstr "Cross References Xref Src Url"
+
+
+msgid "glados_es_gs__molecule__cross_references___xref_src_url__label__mini"
+msgstr "Cross Refrn. Xref Src Url"
+
+
+msgid "glados_es_gs__molecule__cross_references___xref_url__label"
+msgstr "Cross References Xref Url"
+
+
+msgid "glados_es_gs__molecule__cross_references___xref_url__label__mini"
+msgstr "Cross Refrn. Xref Url"
 
 
 msgid "glados_es_gs__molecule__cross_references__label"
@@ -2027,7 +2043,7 @@ msgstr "Development Phase"
 
 
 msgid "glados_es_gs__molecule__development_phase__label__mini"
-msgstr "Development Phase"
+msgstr "Devlp. Phase"
 
 
 msgid "glados_es_gs__molecule__disease_name__label"
@@ -2135,35 +2151,35 @@ msgstr "Max Phase"
 
 
 msgid "glados_es_gs__molecule__molecule_chembl_id__label"
-msgstr "Molecule ChEMBL ID"
+msgstr "ChEMBL ID"
 
 
 msgid "glados_es_gs__molecule__molecule_chembl_id__label__mini"
-msgstr "Molecule ChEMBL ID"
+msgstr "ChEMBL ID"
 
 
 msgid "glados_es_gs__molecule__molecule_hierarchy___molecule_chembl_id__label"
-msgstr "Molecule Hierarchy Molecule ChEMBL ID"
+msgstr "Hierarchy ChEMBL ID"
 
 
 msgid "glados_es_gs__molecule__molecule_hierarchy___molecule_chembl_id__label__mini"
-msgstr "Molecule Hierarchy Molecule ChEMBL ID"
+msgstr "Hierarchy ChEMBL ID"
 
 
 msgid "glados_es_gs__molecule__molecule_hierarchy___parent_chembl_id__label"
-msgstr "Molecule Hierarchy Parent ChEMBL ID"
+msgstr "Hierarchy Parent ChEMBL ID"
 
 
 msgid "glados_es_gs__molecule__molecule_hierarchy___parent_chembl_id__label__mini"
-msgstr "Molecule Hierarchy Parent ChEMBL ID"
+msgstr "Hirrc. Parent ChEMBL ID"
 
 
 msgid "glados_es_gs__molecule__molecule_hierarchy__label"
-msgstr "Molecule Hierarchy"
+msgstr "Hierarchy"
 
 
 msgid "glados_es_gs__molecule__molecule_hierarchy__label__mini"
-msgstr "Molecule Hierarchy"
+msgstr "Hierarchy"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___acd_logd__label"
@@ -2291,7 +2307,7 @@ msgstr "Mw Monoisotopic"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___mw_monoisotopic__label__mini"
-msgstr "Mw Monoisotopic"
+msgstr "Mw Monst."
 
 
 msgid "glados_es_gs__molecule__molecule_properties___num_alerts__label"
@@ -2307,7 +2323,7 @@ msgstr "# Lipinski Ro5 Violations"
 
 
 msgid "glados_es_gs__molecule__molecule_properties___num_lipinski_ro5_violations__label__mini"
-msgstr "# Lipinski Ro5 Violations"
+msgstr "# Lipns. Ro5 Viltn."
 
 
 msgid "glados_es_gs__molecule__molecule_properties___num_ro5_violations__label"
@@ -2351,83 +2367,83 @@ msgstr "Rtb"
 
 
 msgid "glados_es_gs__molecule__molecule_properties__label"
-msgstr "Molecule Properties"
+msgstr "Properties"
 
 
 msgid "glados_es_gs__molecule__molecule_properties__label__mini"
-msgstr "Molecule Properties"
+msgstr "Properties"
 
 
 msgid "glados_es_gs__molecule__molecule_structures___canonical_smiles__label"
-msgstr "Molecule Structures Canonical Smiles"
+msgstr "Structures Canonical Smiles"
 
 
 msgid "glados_es_gs__molecule__molecule_structures___canonical_smiles__label__mini"
-msgstr "Molecule Structures Canonical Smiles"
+msgstr "Strct. Cannc. Smiles"
 
 
 msgid "glados_es_gs__molecule__molecule_structures___standard_inchi__label"
-msgstr "Molecule Structures Standard Inchi"
+msgstr "Structures Standard Inchi"
 
 
 msgid "glados_es_gs__molecule__molecule_structures___standard_inchi__label__mini"
-msgstr "Molecule Structures Standard Inchi"
+msgstr "Strct. Stndr. Inchi"
 
 
 msgid "glados_es_gs__molecule__molecule_structures___standard_inchi_key__label"
-msgstr "Molecule Structures Standard Inchi Key"
+msgstr "Structures Standard Inchi Key"
 
 
 msgid "glados_es_gs__molecule__molecule_structures___standard_inchi_key__label__mini"
-msgstr "Molecule Structures Standard Inchi Key"
+msgstr "Strct. Stndr. Inchi Key"
 
 
 msgid "glados_es_gs__molecule__molecule_structures__label"
-msgstr "Molecule Structures"
+msgstr "Structures"
 
 
 msgid "glados_es_gs__molecule__molecule_structures__label__mini"
-msgstr "Molecule Structures"
+msgstr "Structures"
 
 
 msgid "glados_es_gs__molecule__molecule_synonyms___molecule_synonym__label"
-msgstr "Molecule Synonyms Molecule Synonym"
+msgstr "Synonyms Synonym"
 
 
 msgid "glados_es_gs__molecule__molecule_synonyms___molecule_synonym__label__mini"
-msgstr "Molecule Synonyms Molecule Synonym"
+msgstr "Synonyms Synonym"
 
 
 msgid "glados_es_gs__molecule__molecule_synonyms___syn_type__label"
-msgstr "Molecule Synonyms Syn Type"
+msgstr "Synonyms Syn Type"
 
 
 msgid "glados_es_gs__molecule__molecule_synonyms___syn_type__label__mini"
-msgstr "Molecule Synonyms Syn Type"
+msgstr "Synonyms Syn Type"
 
 
 msgid "glados_es_gs__molecule__molecule_synonyms___synonyms__label"
-msgstr "Molecule Synonyms Synonyms"
+msgstr "Synonyms Synonyms"
 
 
 msgid "glados_es_gs__molecule__molecule_synonyms___synonyms__label__mini"
-msgstr "Molecule Synonyms Synonyms"
+msgstr "Synonyms Synonyms"
 
 
 msgid "glados_es_gs__molecule__molecule_synonyms__label"
-msgstr "Molecule Synonyms"
+msgstr "Synonyms"
 
 
 msgid "glados_es_gs__molecule__molecule_synonyms__label__mini"
-msgstr "Molecule Synonyms"
+msgstr "Synonyms"
 
 
 msgid "glados_es_gs__molecule__molecule_type__label"
-msgstr "Molecule Type"
+msgstr "Type"
 
 
 msgid "glados_es_gs__molecule__molecule_type__label__mini"
-msgstr "Molecule Type"
+msgstr "Type"
 
 
 msgid "glados_es_gs__molecule__natural_product__label"
@@ -2491,7 +2507,7 @@ msgstr "Related Activities Count"
 
 
 msgid "glados_es_gs__molecule__related_activities___count__label__mini"
-msgstr "Related Activities Count"
+msgstr "Reltd. Actvt. Count"
 
 
 msgid "glados_es_gs__molecule__related_activities__label"
@@ -2507,7 +2523,7 @@ msgstr "Related Assays ChEMBL Ids"
 
 
 msgid "glados_es_gs__molecule__related_assays___chembl_ids__label__mini"
-msgstr "Related Assays ChEMBL Ids"
+msgstr "Reltd. Assays ChEMBL Ids"
 
 
 msgid "glados_es_gs__molecule__related_assays___count__label"
@@ -2531,7 +2547,7 @@ msgstr "Related Cell Lines ChEMBL Ids"
 
 
 msgid "glados_es_gs__molecule__related_cell_lines___chembl_ids__label__mini"
-msgstr "Related Cell Lines ChEMBL Ids"
+msgstr "Reltd. Cell Lines ChEMBL Ids"
 
 
 msgid "glados_es_gs__molecule__related_cell_lines___count__label"
@@ -2539,7 +2555,7 @@ msgstr "Related Cell Lines Count"
 
 
 msgid "glados_es_gs__molecule__related_cell_lines___count__label__mini"
-msgstr "Related Cell Lines Count"
+msgstr "Reltd. Cell Lines Count"
 
 
 msgid "glados_es_gs__molecule__related_cell_lines__label"
@@ -2555,7 +2571,7 @@ msgstr "Related Documents ChEMBL Ids"
 
 
 msgid "glados_es_gs__molecule__related_documents___chembl_ids__label__mini"
-msgstr "Related Documents ChEMBL Ids"
+msgstr "Reltd. Docmn. ChEMBL Ids"
 
 
 msgid "glados_es_gs__molecule__related_documents___count__label"
@@ -2563,7 +2579,7 @@ msgstr "Related Documents Count"
 
 
 msgid "glados_es_gs__molecule__related_documents___count__label__mini"
-msgstr "Related Documents Count"
+msgstr "Reltd. Docmn. Count"
 
 
 msgid "glados_es_gs__molecule__related_documents__label"
@@ -2579,7 +2595,7 @@ msgstr "Related Targets ChEMBL Ids"
 
 
 msgid "glados_es_gs__molecule__related_targets___chembl_ids__label__mini"
-msgstr "Related Targets ChEMBL Ids"
+msgstr "Reltd. Targt. ChEMBL Ids"
 
 
 msgid "glados_es_gs__molecule__related_targets___count__label"
@@ -2587,7 +2603,7 @@ msgstr "Related Targets Count"
 
 
 msgid "glados_es_gs__molecule__related_targets___count__label__mini"
-msgstr "Related Targets Count"
+msgstr "Reltd. Targt. Count"
 
 
 msgid "glados_es_gs__molecule__related_targets__label"
@@ -2603,7 +2619,7 @@ msgstr "Related Tissues ChEMBL Ids"
 
 
 msgid "glados_es_gs__molecule__related_tissues___chembl_ids__label__mini"
-msgstr "Related Tissues ChEMBL Ids"
+msgstr "Reltd. Tisss. ChEMBL Ids"
 
 
 msgid "glados_es_gs__molecule__related_tissues___count__label"
@@ -2611,7 +2627,7 @@ msgstr "Related Tissues Count"
 
 
 msgid "glados_es_gs__molecule__related_tissues___count__label__mini"
-msgstr "Related Tissues Count"
+msgstr "Reltd. Tisss. Count"
 
 
 msgid "glados_es_gs__molecule__related_tissues__label"
@@ -2675,15 +2691,15 @@ msgstr "Target Predictions In Training"
 
 
 msgid "glados_es_gs__molecule__target_predictions___in_training__label__mini"
-msgstr "Target Predictions In Training"
+msgstr "Target Prdct. In Trnng."
 
 
 msgid "glados_es_gs__molecule__target_predictions___molecule_chembl_id__label"
-msgstr "Target Predictions Molecule ChEMBL ID"
+msgstr "Target Predictions ChEMBL ID"
 
 
 msgid "glados_es_gs__molecule__target_predictions___molecule_chembl_id__label__mini"
-msgstr "Target Predictions Molecule ChEMBL ID"
+msgstr "Target Prdct. ChEMBL ID"
 
 
 msgid "glados_es_gs__molecule__target_predictions___pred_id__label"
@@ -2691,7 +2707,7 @@ msgstr "Target Predictions Pred ID"
 
 
 msgid "glados_es_gs__molecule__target_predictions___pred_id__label__mini"
-msgstr "Target Predictions Pred ID"
+msgstr "Target Prdct. Pred ID"
 
 
 msgid "glados_es_gs__molecule__target_predictions___probability__label"
@@ -2699,7 +2715,7 @@ msgstr "Target Predictions Probability"
 
 
 msgid "glados_es_gs__molecule__target_predictions___probability__label__mini"
-msgstr "Target Predictions Probability"
+msgstr "Target Prdct. Prbbl."
 
 
 msgid "glados_es_gs__molecule__target_predictions___target_accession__label"
@@ -2707,7 +2723,7 @@ msgstr "Target Predictions Target Accession"
 
 
 msgid "glados_es_gs__molecule__target_predictions___target_accession__label__mini"
-msgstr "Target Predictions Target Accession"
+msgstr "Target Prdct. Target Accss."
 
 
 msgid "glados_es_gs__molecule__target_predictions___target_chembl_id__label"
@@ -2715,7 +2731,7 @@ msgstr "Target Predictions Target ChEMBL ID"
 
 
 msgid "glados_es_gs__molecule__target_predictions___target_chembl_id__label__mini"
-msgstr "Target Predictions Target ChEMBL ID"
+msgstr "Target Prdct. Target ChEMBL ID"
 
 
 msgid "glados_es_gs__molecule__target_predictions___target_organism__label"
@@ -2723,7 +2739,15 @@ msgstr "Target Predictions Target Organism"
 
 
 msgid "glados_es_gs__molecule__target_predictions___target_organism__label__mini"
-msgstr "Target Predictions Target Organism"
+msgstr "Target Prdct. Target Orgns."
+
+
+msgid "glados_es_gs__molecule__target_predictions___target_pref_name__label"
+msgstr "Target Predictions Target Pref Name"
+
+
+msgid "glados_es_gs__molecule__target_predictions___target_pref_name__label__mini"
+msgstr "Target Prdct. Target Pref Name"
 
 
 msgid "glados_es_gs__molecule__target_predictions___target_tax_id__label"
@@ -2731,7 +2755,7 @@ msgstr "Target Predictions Target Tax ID"
 
 
 msgid "glados_es_gs__molecule__target_predictions___target_tax_id__label__mini"
-msgstr "Target Predictions Target Tax ID"
+msgstr "Target Prdct. Target Tax ID"
 
 
 msgid "glados_es_gs__molecule__target_predictions___value__label"
@@ -2739,7 +2763,7 @@ msgstr "Target Predictions Value"
 
 
 msgid "glados_es_gs__molecule__target_predictions___value__label__mini"
-msgstr "Target Predictions Value"
+msgstr "Target Prdct. Value"
 
 
 msgid "glados_es_gs__molecule__target_predictions__label"
@@ -2747,7 +2771,15 @@ msgstr "Target Predictions"
 
 
 msgid "glados_es_gs__molecule__target_predictions__label__mini"
-msgstr "Target Predictions"
+msgstr "Target Prdct."
+
+
+msgid "glados_es_gs__molecule__target_pref_name__label"
+msgstr "Target Pref Name"
+
+
+msgid "glados_es_gs__molecule__target_pref_name__label__mini"
+msgstr "Target Pref Name"
 
 
 msgid "glados_es_gs__molecule__therapeutic_flag__label"
@@ -2755,7 +2787,7 @@ msgstr "Therapeutic Flag"
 
 
 msgid "glados_es_gs__molecule__therapeutic_flag__label__mini"
-msgstr "Therapeutic Flag"
+msgstr "Thrpt. Flag"
 
 
 msgid "glados_es_gs__molecule__topical__label"
@@ -2879,11 +2911,11 @@ msgstr "Withdrawn Year"
 
 
 msgid "glados_es_gs__target___metadata__label"
-msgstr " Metadata"
+msgstr "Metadata"
 
 
 msgid "glados_es_gs__target___metadata__label__mini"
-msgstr " Metadata"
+msgstr "Metadata"
 
 
 msgid "glados_es_gs__target__activity_count__label"
@@ -2899,7 +2931,7 @@ msgstr "Cross References Xref ID"
 
 
 msgid "glados_es_gs__target__cross_references___xref_id__label__mini"
-msgstr "Cross References Xref ID"
+msgstr "Cross Refrn. Xref ID"
 
 
 msgid "glados_es_gs__target__cross_references___xref_name__label"
@@ -2907,7 +2939,7 @@ msgstr "Cross References Xref Name"
 
 
 msgid "glados_es_gs__target__cross_references___xref_name__label__mini"
-msgstr "Cross References Xref Name"
+msgstr "Cross Refrn. Xref Name"
 
 
 msgid "glados_es_gs__target__cross_references___xref_src__label"
@@ -2915,7 +2947,23 @@ msgstr "Cross References Xref Src"
 
 
 msgid "glados_es_gs__target__cross_references___xref_src__label__mini"
-msgstr "Cross References Xref Src"
+msgstr "Cross Refrn. Xref Src"
+
+
+msgid "glados_es_gs__target__cross_references___xref_src_url__label"
+msgstr "Cross References Xref Src Url"
+
+
+msgid "glados_es_gs__target__cross_references___xref_src_url__label__mini"
+msgstr "Cross Refrn. Xref Src Url"
+
+
+msgid "glados_es_gs__target__cross_references___xref_url__label"
+msgstr "Cross References Xref Url"
+
+
+msgid "glados_es_gs__target__cross_references___xref_url__label__mini"
+msgstr "Cross Refrn. Xref Url"
 
 
 msgid "glados_es_gs__target__cross_references__label"
@@ -2987,7 +3035,7 @@ msgstr "Organism Taxonomy L4 Synonyms"
 
 
 msgid "glados_es_gs__target__organism_taxonomy___l4_synonyms__label__mini"
-msgstr "Organism Taxonomy L4 Synonyms"
+msgstr "Orgns. Taxnm. L4 Synnm."
 
 
 msgid "glados_es_gs__target__organism_taxonomy___oc_id__label"
@@ -2995,7 +3043,7 @@ msgstr "Organism Taxonomy Oc ID"
 
 
 msgid "glados_es_gs__target__organism_taxonomy___oc_id__label__mini"
-msgstr "Organism Taxonomy Oc ID"
+msgstr "Orgns. Taxnm. Oc ID"
 
 
 msgid "glados_es_gs__target__organism_taxonomy___tax_id__label"
@@ -3003,7 +3051,7 @@ msgstr "Organism Taxonomy Tax ID"
 
 
 msgid "glados_es_gs__target__organism_taxonomy___tax_id__label__mini"
-msgstr "Organism Taxonomy Tax ID"
+msgstr "Orgns. Taxnm. Tax ID"
 
 
 msgid "glados_es_gs__target__organism_taxonomy__label"
@@ -3027,7 +3075,7 @@ msgstr "Protein Classification L1"
 
 
 msgid "glados_es_gs__target__protein_classification___l1__label__mini"
-msgstr "Protein Classification L1"
+msgstr "Prtn. Clssf. L1"
 
 
 msgid "glados_es_gs__target__protein_classification___l2__label"
@@ -3035,7 +3083,7 @@ msgstr "Protein Classification L2"
 
 
 msgid "glados_es_gs__target__protein_classification___l2__label__mini"
-msgstr "Protein Classification L2"
+msgstr "Prtn. Clssf. L2"
 
 
 msgid "glados_es_gs__target__protein_classification___l3__label"
@@ -3043,7 +3091,7 @@ msgstr "Protein Classification L3"
 
 
 msgid "glados_es_gs__target__protein_classification___l3__label__mini"
-msgstr "Protein Classification L3"
+msgstr "Prtn. Clssf. L3"
 
 
 msgid "glados_es_gs__target__protein_classification___l4__label"
@@ -3051,7 +3099,7 @@ msgstr "Protein Classification L4"
 
 
 msgid "glados_es_gs__target__protein_classification___l4__label__mini"
-msgstr "Protein Classification L4"
+msgstr "Prtn. Clssf. L4"
 
 
 msgid "glados_es_gs__target__protein_classification___l5__label"
@@ -3059,7 +3107,7 @@ msgstr "Protein Classification L5"
 
 
 msgid "glados_es_gs__target__protein_classification___l5__label__mini"
-msgstr "Protein Classification L5"
+msgstr "Prtn. Clssf. L5"
 
 
 msgid "glados_es_gs__target__protein_classification___l6__label"
@@ -3067,7 +3115,7 @@ msgstr "Protein Classification L6"
 
 
 msgid "glados_es_gs__target__protein_classification___l6__label__mini"
-msgstr "Protein Classification L6"
+msgstr "Prtn. Clssf. L6"
 
 
 msgid "glados_es_gs__target__protein_classification___protein_class_id__label"
@@ -3075,7 +3123,7 @@ msgstr "Protein Classification Protein Class ID"
 
 
 msgid "glados_es_gs__target__protein_classification___protein_class_id__label__mini"
-msgstr "Protein Classification Protein Class ID"
+msgstr "Prtn. Clssf. Prtn. Class ID"
 
 
 msgid "glados_es_gs__target__protein_classification__label"
@@ -3083,7 +3131,7 @@ msgstr "Protein Classification"
 
 
 msgid "glados_es_gs__target__protein_classification__label__mini"
-msgstr "Protein Classification"
+msgstr "Prtn. Clssf."
 
 
 msgid "glados_es_gs__target__protein_classifications___protein_classification_id__label"
@@ -3091,7 +3139,7 @@ msgstr "Protein Classifications Protein Classification ID"
 
 
 msgid "glados_es_gs__target__protein_classifications___protein_classification_id__label__mini"
-msgstr "Protein Classifications Protein Classification ID"
+msgstr "Prtn. Clssf. Prtn. Clssf. ID"
 
 
 msgid "glados_es_gs__target__related_activities___count__label"
@@ -3099,7 +3147,7 @@ msgstr "Related Activities Count"
 
 
 msgid "glados_es_gs__target__related_activities___count__label__mini"
-msgstr "Related Activities Count"
+msgstr "Reltd. Actvt. Count"
 
 
 msgid "glados_es_gs__target__related_activities__label"
@@ -3115,7 +3163,7 @@ msgstr "Related Assays ChEMBL Ids"
 
 
 msgid "glados_es_gs__target__related_assays___chembl_ids__label__mini"
-msgstr "Related Assays ChEMBL Ids"
+msgstr "Reltd. Assays ChEMBL Ids"
 
 
 msgid "glados_es_gs__target__related_assays___count__label"
@@ -3139,7 +3187,7 @@ msgstr "Related Cell Lines ChEMBL Ids"
 
 
 msgid "glados_es_gs__target__related_cell_lines___chembl_ids__label__mini"
-msgstr "Related Cell Lines ChEMBL Ids"
+msgstr "Reltd. Cell Lines ChEMBL Ids"
 
 
 msgid "glados_es_gs__target__related_cell_lines___count__label"
@@ -3147,7 +3195,7 @@ msgstr "Related Cell Lines Count"
 
 
 msgid "glados_es_gs__target__related_cell_lines___count__label__mini"
-msgstr "Related Cell Lines Count"
+msgstr "Reltd. Cell Lines Count"
 
 
 msgid "glados_es_gs__target__related_cell_lines__label"
@@ -3163,7 +3211,7 @@ msgstr "Related Compounds ChEMBL Ids"
 
 
 msgid "glados_es_gs__target__related_compounds___chembl_ids__label__mini"
-msgstr "Related Compounds ChEMBL Ids"
+msgstr "Reltd. Compn. ChEMBL Ids"
 
 
 msgid "glados_es_gs__target__related_compounds___count__label"
@@ -3171,7 +3219,7 @@ msgstr "Related Compounds Count"
 
 
 msgid "glados_es_gs__target__related_compounds___count__label__mini"
-msgstr "Related Compounds Count"
+msgstr "Reltd. Compn. Count"
 
 
 msgid "glados_es_gs__target__related_compounds__label"
@@ -3187,7 +3235,7 @@ msgstr "Related Documents ChEMBL Ids"
 
 
 msgid "glados_es_gs__target__related_documents___chembl_ids__label__mini"
-msgstr "Related Documents ChEMBL Ids"
+msgstr "Reltd. Docmn. ChEMBL Ids"
 
 
 msgid "glados_es_gs__target__related_documents___count__label"
@@ -3195,7 +3243,7 @@ msgstr "Related Documents Count"
 
 
 msgid "glados_es_gs__target__related_documents___count__label__mini"
-msgstr "Related Documents Count"
+msgstr "Reltd. Docmn. Count"
 
 
 msgid "glados_es_gs__target__related_documents__label"
@@ -3211,7 +3259,7 @@ msgstr "Related Tissues ChEMBL Ids"
 
 
 msgid "glados_es_gs__target__related_tissues___chembl_ids__label__mini"
-msgstr "Related Tissues ChEMBL Ids"
+msgstr "Reltd. Tisss. ChEMBL Ids"
 
 
 msgid "glados_es_gs__target__related_tissues___count__label"
@@ -3219,7 +3267,7 @@ msgstr "Related Tissues Count"
 
 
 msgid "glados_es_gs__target__related_tissues___count__label__mini"
-msgstr "Related Tissues Count"
+msgstr "Reltd. Tisss. Count"
 
 
 msgid "glados_es_gs__target__related_tissues__label"
@@ -3247,275 +3295,283 @@ msgstr "Tags"
 
 
 msgid "glados_es_gs__target__target_chembl_id__label"
-msgstr "Target ChEMBL ID"
+msgstr "ChEMBL ID"
 
 
 msgid "glados_es_gs__target__target_chembl_id__label__mini"
-msgstr "Target ChEMBL ID"
+msgstr "ChEMBL ID"
 
 
 msgid "glados_es_gs__target__target_component___accession__label"
-msgstr "Target Component Accession"
+msgstr "Component Accession"
 
 
 msgid "glados_es_gs__target__target_component___accession__label__mini"
-msgstr "Target Component Accession"
+msgstr "Component Accession"
 
 
 msgid "glados_es_gs__target__target_component___component_id__label"
-msgstr "Target Component Component ID"
+msgstr "Component Component ID"
 
 
 msgid "glados_es_gs__target__target_component___component_id__label__mini"
-msgstr "Target Component Component ID"
+msgstr "Compn. Compn. ID"
 
 
 msgid "glados_es_gs__target__target_component___component_type__label"
-msgstr "Target Component Component Type"
+msgstr "Component Component Type"
 
 
 msgid "glados_es_gs__target__target_component___component_type__label__mini"
-msgstr "Target Component Component Type"
+msgstr "Compn. Compn. Type"
 
 
 msgid "glados_es_gs__target__target_component___description__label"
-msgstr "Target Component Description"
+msgstr "Component Description"
 
 
 msgid "glados_es_gs__target__target_component___description__label__mini"
-msgstr "Target Component Description"
+msgstr "Compn. Descr."
 
 
 msgid "glados_es_gs__target__target_component___go_slims__label"
-msgstr "Target Component Go Slims"
+msgstr "Component Go Slims"
 
 
 msgid "glados_es_gs__target__target_component___go_slims__label__mini"
-msgstr "Target Component Go Slims"
+msgstr "Component Go Slims"
 
 
 msgid "glados_es_gs__target__target_component___organism__label"
-msgstr "Target Component Organism"
+msgstr "Component Organism"
 
 
 msgid "glados_es_gs__target__target_component___organism__label__mini"
-msgstr "Target Component Organism"
+msgstr "Component Organism"
 
 
 msgid "glados_es_gs__target__target_component___protein_classifications__label"
-msgstr "Target Component Protein Classifications"
+msgstr "Component Protein Classifications"
 
 
 msgid "glados_es_gs__target__target_component___protein_classifications__label__mini"
-msgstr "Target Component Protein Classifications"
+msgstr "Compn. Prtn. Clssf."
 
 
 msgid "glados_es_gs__target__target_component___sequence__label"
-msgstr "Target Component Sequence"
+msgstr "Component Sequence"
 
 
 msgid "glados_es_gs__target__target_component___sequence__label__mini"
-msgstr "Target Component Sequence"
+msgstr "Component Sequence"
 
 
 msgid "glados_es_gs__target__target_component___target_component_synonyms__label"
-msgstr "Target Component Target Component Synonyms"
+msgstr "Component Component Synonyms"
 
 
 msgid "glados_es_gs__target__target_component___target_component_synonyms__label__mini"
-msgstr "Target Component Target Component Synonyms"
+msgstr "Compn. Compn. Synnm."
 
 
 msgid "glados_es_gs__target__target_component___targets__label"
-msgstr "Target Component Targets"
+msgstr "Component Targets"
 
 
 msgid "glados_es_gs__target__target_component___targets__label__mini"
-msgstr "Target Component Targets"
+msgstr "Component Targets"
 
 
 msgid "glados_es_gs__target__target_component___tax_id__label"
-msgstr "Target Component Tax ID"
+msgstr "Component Tax ID"
 
 
 msgid "glados_es_gs__target__target_component___tax_id__label__mini"
-msgstr "Target Component Tax ID"
+msgstr "Component Tax ID"
 
 
 msgid "glados_es_gs__target__target_component__label"
-msgstr "Target Component"
+msgstr "Component"
 
 
 msgid "glados_es_gs__target__target_component__label__mini"
-msgstr "Target Component"
+msgstr "Component"
 
 
 msgid "glados_es_gs__target__target_component_synonyms___component_synonym__label"
-msgstr "Target Component Synonyms Component Synonym"
+msgstr "Component Synonyms Component Synonym"
 
 
 msgid "glados_es_gs__target__target_component_synonyms___component_synonym__label__mini"
-msgstr "Target Component Synonyms Component Synonym"
+msgstr "Compn. Synnm. Compn. Synnm."
 
 
 msgid "glados_es_gs__target__target_component_synonyms___syn_type__label"
-msgstr "Target Component Synonyms Syn Type"
+msgstr "Component Synonyms Syn Type"
 
 
 msgid "glados_es_gs__target__target_component_synonyms___syn_type__label__mini"
-msgstr "Target Component Synonyms Syn Type"
+msgstr "Compn. Synnm. Syn Type"
 
 
 msgid "glados_es_gs__target__target_components___accession__label"
-msgstr "Target Components Accession"
+msgstr "Components Accession"
 
 
 msgid "glados_es_gs__target__target_components___accession__label__mini"
-msgstr "Target Components Accession"
+msgstr "Components Accession"
 
 
 msgid "glados_es_gs__target__target_components___component_description__label"
-msgstr "Target Components Component Description"
+msgstr "Components Component Description"
 
 
 msgid "glados_es_gs__target__target_components___component_description__label__mini"
-msgstr "Target Components Component Description"
+msgstr "Compn. Compn. Descr."
 
 
 msgid "glados_es_gs__target__target_components___component_id__label"
-msgstr "Target Components Component ID"
+msgstr "Components Component ID"
 
 
 msgid "glados_es_gs__target__target_components___component_id__label__mini"
-msgstr "Target Components Component ID"
+msgstr "Compn. Compn. ID"
 
 
 msgid "glados_es_gs__target__target_components___component_type__label"
-msgstr "Target Components Component Type"
+msgstr "Components Component Type"
 
 
 msgid "glados_es_gs__target__target_components___component_type__label__mini"
-msgstr "Target Components Component Type"
+msgstr "Compn. Compn. Type"
 
 
 msgid "glados_es_gs__target__target_components___relationship__label"
-msgstr "Target Components Relationship"
+msgstr "Components Relationship"
 
 
 msgid "glados_es_gs__target__target_components___relationship__label__mini"
-msgstr "Target Components Relationship"
+msgstr "Compn. Reltn."
 
 
 msgid "glados_es_gs__target__target_components___target_component_synonyms__label"
-msgstr "Target Components Target Component Synonyms"
+msgstr "Components Component Synonyms"
 
 
 msgid "glados_es_gs__target__target_components___target_component_synonyms__label__mini"
-msgstr "Target Components Target Component Synonyms"
+msgstr "Compn. Compn. Synnm."
 
 
 msgid "glados_es_gs__target__target_components__label"
-msgstr "Target Components"
+msgstr "Components"
 
 
 msgid "glados_es_gs__target__target_components__label__mini"
-msgstr "Target Components"
+msgstr "Components"
 
 
 msgid "glados_es_gs__target__target_predictions___in_training__label"
-msgstr "Target Predictions In Training"
+msgstr "Predictions In Training"
 
 
 msgid "glados_es_gs__target__target_predictions___in_training__label__mini"
-msgstr "Target Predictions In Training"
+msgstr "Prdct. In Trnng."
 
 
 msgid "glados_es_gs__target__target_predictions___molecule_chembl_id__label"
-msgstr "Target Predictions Molecule ChEMBL ID"
+msgstr "Predictions Molecule ChEMBL ID"
 
 
 msgid "glados_es_gs__target__target_predictions___molecule_chembl_id__label__mini"
-msgstr "Target Predictions Molecule ChEMBL ID"
+msgstr "Prdct. Molcl. ChEMBL ID"
 
 
 msgid "glados_es_gs__target__target_predictions___pred_id__label"
-msgstr "Target Predictions Pred ID"
+msgstr "Predictions Pred ID"
 
 
 msgid "glados_es_gs__target__target_predictions___pred_id__label__mini"
-msgstr "Target Predictions Pred ID"
+msgstr "Prdct. Pred ID"
 
 
 msgid "glados_es_gs__target__target_predictions___probability__label"
-msgstr "Target Predictions Probability"
+msgstr "Predictions Probability"
 
 
 msgid "glados_es_gs__target__target_predictions___probability__label__mini"
-msgstr "Target Predictions Probability"
+msgstr "Prdct. Prbbl."
 
 
 msgid "glados_es_gs__target__target_predictions___target_accession__label"
-msgstr "Target Predictions Target Accession"
+msgstr "Predictions Accession"
 
 
 msgid "glados_es_gs__target__target_predictions___target_accession__label__mini"
-msgstr "Target Predictions Target Accession"
+msgstr "Prdct. Accss."
 
 
 msgid "glados_es_gs__target__target_predictions___target_chembl_id__label"
-msgstr "Target Predictions Target ChEMBL ID"
+msgstr "Predictions ChEMBL ID"
 
 
 msgid "glados_es_gs__target__target_predictions___target_chembl_id__label__mini"
-msgstr "Target Predictions Target ChEMBL ID"
+msgstr "Prdct. ChEMBL ID"
 
 
 msgid "glados_es_gs__target__target_predictions___target_organism__label"
-msgstr "Target Predictions Target Organism"
+msgstr "Predictions Organism"
 
 
 msgid "glados_es_gs__target__target_predictions___target_organism__label__mini"
-msgstr "Target Predictions Target Organism"
+msgstr "Prdct. Organism"
+
+
+msgid "glados_es_gs__target__target_predictions___target_pref_name__label"
+msgstr "Predictions Pref Name"
+
+
+msgid "glados_es_gs__target__target_predictions___target_pref_name__label__mini"
+msgstr "Prdct. Pref Name"
 
 
 msgid "glados_es_gs__target__target_predictions___target_tax_id__label"
-msgstr "Target Predictions Target Tax ID"
+msgstr "Predictions Tax ID"
 
 
 msgid "glados_es_gs__target__target_predictions___target_tax_id__label__mini"
-msgstr "Target Predictions Target Tax ID"
+msgstr "Prdct. Tax ID"
 
 
 msgid "glados_es_gs__target__target_predictions___value__label"
-msgstr "Target Predictions Value"
+msgstr "Predictions Value"
 
 
 msgid "glados_es_gs__target__target_predictions___value__label__mini"
-msgstr "Target Predictions Value"
+msgstr "Prdct. Value"
 
 
 msgid "glados_es_gs__target__target_predictions__label"
-msgstr "Target Predictions"
+msgstr "Predictions"
 
 
 msgid "glados_es_gs__target__target_predictions__label__mini"
-msgstr "Target Predictions"
+msgstr "Prdct."
 
 
 msgid "glados_es_gs__target__target_type__label"
-msgstr "Target Type"
+msgstr "Type"
 
 
 msgid "glados_es_gs__target__target_type__label__mini"
-msgstr "Target Type"
+msgstr "Type"
 
 
 msgid "glados_es_gs__target__targets___target_chembl_id__label"
-msgstr "Targets Target ChEMBL ID"
+msgstr "Targets ChEMBL ID"
 
 
 msgid "glados_es_gs__target__targets___target_chembl_id__label__mini"
-msgstr "Targets Target ChEMBL ID"
+msgstr "Targets ChEMBL ID"
 
 
 msgid "glados_es_gs__target__tax_id__label"
@@ -3527,11 +3583,11 @@ msgstr "Tax ID"
 
 
 msgid "glados_es_gs__tissue___metadata__label"
-msgstr " Metadata"
+msgstr "Metadata"
 
 
 msgid "glados_es_gs__tissue___metadata__label__mini"
-msgstr " Metadata"
+msgstr "Metadata"
 
 
 msgid "glados_es_gs__tissue__bto_id__label"
@@ -3595,7 +3651,7 @@ msgstr "Organism Taxonomy L4 Synonyms"
 
 
 msgid "glados_es_gs__tissue__organism_taxonomy___l4_synonyms__label__mini"
-msgstr "Organism Taxonomy L4 Synonyms"
+msgstr "Orgns. Taxnm. L4 Synnm."
 
 
 msgid "glados_es_gs__tissue__organism_taxonomy___oc_id__label"
@@ -3603,7 +3659,7 @@ msgstr "Organism Taxonomy Oc ID"
 
 
 msgid "glados_es_gs__tissue__organism_taxonomy___oc_id__label__mini"
-msgstr "Organism Taxonomy Oc ID"
+msgstr "Orgns. Taxnm. Oc ID"
 
 
 msgid "glados_es_gs__tissue__organism_taxonomy___tax_id__label"
@@ -3611,7 +3667,7 @@ msgstr "Organism Taxonomy Tax ID"
 
 
 msgid "glados_es_gs__tissue__organism_taxonomy___tax_id__label__mini"
-msgstr "Organism Taxonomy Tax ID"
+msgstr "Orgns. Taxnm. Tax ID"
 
 
 msgid "glados_es_gs__tissue__organism_taxonomy__label"
@@ -3635,7 +3691,7 @@ msgstr "Related Activities ChEMBL Ids"
 
 
 msgid "glados_es_gs__tissue__related_activities___chembl_ids__label__mini"
-msgstr "Related Activities ChEMBL Ids"
+msgstr "Reltd. Actvt. ChEMBL Ids"
 
 
 msgid "glados_es_gs__tissue__related_activities___count__label"
@@ -3643,7 +3699,7 @@ msgstr "Related Activities Count"
 
 
 msgid "glados_es_gs__tissue__related_activities___count__label__mini"
-msgstr "Related Activities Count"
+msgstr "Reltd. Actvt. Count"
 
 
 msgid "glados_es_gs__tissue__related_activities__label"
@@ -3659,7 +3715,7 @@ msgstr "Related Assays ChEMBL Ids"
 
 
 msgid "glados_es_gs__tissue__related_assays___chembl_ids__label__mini"
-msgstr "Related Assays ChEMBL Ids"
+msgstr "Reltd. Assays ChEMBL Ids"
 
 
 msgid "glados_es_gs__tissue__related_assays___count__label"
@@ -3683,7 +3739,7 @@ msgstr "Related Cell Lines ChEMBL Ids"
 
 
 msgid "glados_es_gs__tissue__related_cell_lines___chembl_ids__label__mini"
-msgstr "Related Cell Lines ChEMBL Ids"
+msgstr "Reltd. Cell Lines ChEMBL Ids"
 
 
 msgid "glados_es_gs__tissue__related_cell_lines___count__label"
@@ -3691,7 +3747,7 @@ msgstr "Related Cell Lines Count"
 
 
 msgid "glados_es_gs__tissue__related_cell_lines___count__label__mini"
-msgstr "Related Cell Lines Count"
+msgstr "Reltd. Cell Lines Count"
 
 
 msgid "glados_es_gs__tissue__related_cell_lines__label"
@@ -3707,7 +3763,7 @@ msgstr "Related Compounds ChEMBL Ids"
 
 
 msgid "glados_es_gs__tissue__related_compounds___chembl_ids__label__mini"
-msgstr "Related Compounds ChEMBL Ids"
+msgstr "Reltd. Compn. ChEMBL Ids"
 
 
 msgid "glados_es_gs__tissue__related_compounds___count__label"
@@ -3715,7 +3771,7 @@ msgstr "Related Compounds Count"
 
 
 msgid "glados_es_gs__tissue__related_compounds___count__label__mini"
-msgstr "Related Compounds Count"
+msgstr "Reltd. Compn. Count"
 
 
 msgid "glados_es_gs__tissue__related_compounds__label"
@@ -3731,7 +3787,7 @@ msgstr "Related Documents ChEMBL Ids"
 
 
 msgid "glados_es_gs__tissue__related_documents___chembl_ids__label__mini"
-msgstr "Related Documents ChEMBL Ids"
+msgstr "Reltd. Docmn. ChEMBL Ids"
 
 
 msgid "glados_es_gs__tissue__related_documents___count__label"
@@ -3739,7 +3795,7 @@ msgstr "Related Documents Count"
 
 
 msgid "glados_es_gs__tissue__related_documents___count__label__mini"
-msgstr "Related Documents Count"
+msgstr "Reltd. Docmn. Count"
 
 
 msgid "glados_es_gs__tissue__related_documents__label"
@@ -3755,7 +3811,7 @@ msgstr "Related Targets ChEMBL Ids"
 
 
 msgid "glados_es_gs__tissue__related_targets___chembl_ids__label__mini"
-msgstr "Related Targets ChEMBL Ids"
+msgstr "Reltd. Targt. ChEMBL Ids"
 
 
 msgid "glados_es_gs__tissue__related_targets___count__label"
@@ -3763,7 +3819,7 @@ msgstr "Related Targets Count"
 
 
 msgid "glados_es_gs__tissue__related_targets___count__label__mini"
-msgstr "Related Targets Count"
+msgstr "Reltd. Targt. Count"
 
 
 msgid "glados_es_gs__tissue__related_targets__label"
@@ -3775,11 +3831,11 @@ msgstr "Related Targets"
 
 
 msgid "glados_es_gs__tissue__tissue_chembl_id__label"
-msgstr "Tissue ChEMBL ID"
+msgstr "ChEMBL ID"
 
 
 msgid "glados_es_gs__tissue__tissue_chembl_id__label__mini"
-msgstr "Tissue ChEMBL ID"
+msgstr "ChEMBL ID"
 
 
 msgid "glados_es_gs__tissue__uberon_id__label"
