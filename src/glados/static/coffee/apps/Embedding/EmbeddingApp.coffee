@@ -134,6 +134,9 @@ glados.useNameSpace 'glados.apps.Embedding',
         curation_summary:
           template: "#{@assayReportCardBaseTemplate} #ACurationSummaryCard"
           initFunction: AssayReportCardApp.initCurationSummary
+        bioactivities:
+          template: "#{@assayReportCardBaseTemplate} #AAssociatedBioactivitiesCard"
+          initFunction: AssayReportCardApp.initActivitySummary
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
 
