@@ -2270,10 +2270,12 @@ $max_chembl_logo_height: 60px;
     padding: 0;
   }
 
-  .rel-notes {
-    display: inline-block;
-    padding-left: 5px;
-    font-size: 0.85rem;
+  .download-button {
+    margin-bottom: -7px;
+    .rel-notes {
+      display: block;
+      font-size: 0.7rem;
+    }
   }
 
   .version-number-wrapper {
@@ -2290,6 +2292,7 @@ $max_chembl_logo_height: 60px;
 
 .database-stats {
   font-size: 0.85rem;
+  margin-bottom: 10px;
 }
 
 /**
