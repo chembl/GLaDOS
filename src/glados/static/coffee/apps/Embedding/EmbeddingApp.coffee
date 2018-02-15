@@ -23,6 +23,7 @@ glados.useNameSpace 'glados.apps.Embedding',
           successCallBack()
 
     @compoundReportCardBaseTemplate = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{Compound.reportCardPath}{{chembl_id}}"
+    @targetReportCardBaseTemplate = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{Target.reportCardPath}{{chembl_id}}"
     @requiredHTMLTemplatesURLS:
       "#{Compound.reportCardPath}":
         name_and_classification:
@@ -88,6 +89,12 @@ glados.useNameSpace 'glados.apps.Embedding',
         unichem_cross_refs:
           template: "#{@compoundReportCardBaseTemplate} #UniChemCrossReferencesCard"
           initFunction: CompoundReportCardApp.initUniChemCrossReferences
+      "#{Target.reportCardPath}":
+        name_and_classification:
+          template: "#{@targetReportCardBaseTemplate} #TNameClassificationCard"
+          initFunction: TargetReportCardApp.initTargetNameAndClassification
+
+
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
 
