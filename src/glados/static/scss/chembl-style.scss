@@ -666,6 +666,20 @@ header .row {
   height: calc(#{$chembl-header-height} + #{2*$chembl-header-padding});
 }
 
+#chembl-header-container.pin-top {
+  #banner-img {
+    background-image: url("http://www.ebi.ac.uk/web_guidelines/images/banners/EBI_SERVICES_Banner.jpg") !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+}
+
+#chembl-header-container.pinned {
+  #banner-img {
+    background-image: none;
+
+  }
+}
 /**
 * EMBL-EBI bar
 * ----------------------------------------------------------------------------------------------------------------------
@@ -2360,11 +2374,6 @@ $marvin-size-fullscreen: 91vh;
 
 }
 
-#banner-img{
-  background-image: url("http://www.ebi.ac.uk/web_guidelines/images/banners/EBI_SERVICES_Banner.jpg") !important;
-  background-repeat: no-repeat !important;
-  background-size: cover !important;;
-}
 .search-banner {
 
   margin-left: 0.75rem;
@@ -2795,7 +2804,7 @@ span.badge-primary-color-no-float {
 
 }
 
-#TODO ======= target browseeer =======
+
 /**
 * Target Browser
 * ----------------------------------------------------------------------------------------------------------------------
@@ -2819,7 +2828,6 @@ span.badge-primary-color-no-float {
   }
 
   label{
-    color: red;
     font-size: 1em;
   }
 
