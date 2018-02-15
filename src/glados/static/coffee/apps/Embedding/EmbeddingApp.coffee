@@ -148,6 +148,9 @@ glados.useNameSpace 'glados.apps.Embedding',
         assay_network:
           template: "#{@documentReportCardBaseTemplate} #DAssayNetworkCard"
           initFunction: DocumentReportCardApp.initAssayNetwork
+        word_cloud:
+          template: "#{@documentReportCardBaseTemplate} #DWordCloudCard"
+          initFunction: DocumentReportCardApp.initWordCloud
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
 
