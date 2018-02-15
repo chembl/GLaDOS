@@ -93,6 +93,9 @@ glados.useNameSpace 'glados.apps.Embedding',
         name_and_classification:
           template: "#{@targetReportCardBaseTemplate} #TNameClassificationCard"
           initFunction: TargetReportCardApp.initTargetNameAndClassification
+        components:
+          template: "#{@targetReportCardBaseTemplate} #TComponentsCard"
+          initFunction: TargetReportCardApp.initTargetComponents
 
 
 
