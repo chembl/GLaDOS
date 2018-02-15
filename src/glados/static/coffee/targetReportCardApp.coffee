@@ -98,6 +98,7 @@ class TargetReportCardApp extends glados.ReportCardApp
 
     targetRelations.fetch({reset: true})
 
+  #CHEMBL2363965
   @initApprovedDrugsClinicalCandidates = ->
 
     targetChemblID = glados.Utils.URLS.getCurrentModelChemblID()

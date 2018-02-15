@@ -96,7 +96,12 @@ glados.useNameSpace 'glados.apps.Embedding',
         components:
           template: "#{@targetReportCardBaseTemplate} #TComponentsCard"
           initFunction: TargetReportCardApp.initTargetComponents
-
+        relations:
+          template: "#{@targetReportCardBaseTemplate} #TRelationsCard"
+          initFunction: TargetReportCardApp.initTargetRelations
+        approved_drugs_clinical_candidates:
+          template: "#{@targetReportCardBaseTemplate} #ApprovedDrugsAndClinicalCandidatesCard"
+          initFunction: TargetReportCardApp.initApprovedDrugsClinicalCandidates
 
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
