@@ -26,6 +26,8 @@ glados.useNameSpace 'glados.apps.Embedding',
     @targetReportCardBaseTemplate = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{Target.reportCardPath}{{chembl_id}}"
     @assayReportCardBaseTemplate = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{Assay.reportCardPath}{{chembl_id}}"
     @documentReportCardBaseTemplate = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{Document.reportCardPath}{{chembl_id}}"
+    @documentReportCardBaseTemplate = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{Document.reportCardPath}{{chembl_id}}"
+    @cellLineReportCardBaseTemplate = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{CellLine.reportCardPath}{{chembl_id}}"
     @requiredHTMLTemplatesURLS:
       "#{Compound.reportCardPath}":
         name_and_classification:
@@ -160,7 +162,10 @@ glados.useNameSpace 'glados.apps.Embedding',
         related_activities:
           template: "#{@documentReportCardBaseTemplate} #DAssociatedActivitiesCard"
           initFunction: DocumentReportCardApp.initActivitySummary
-
+      "#{CellLine.reportCardPath}":
+        basic_information:
+          template: "#{@cellLineReportCardBaseTemplate} #CBasicInformation"
+          initFunction: CellLineReportCardApp.initBasicInformation
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
 
