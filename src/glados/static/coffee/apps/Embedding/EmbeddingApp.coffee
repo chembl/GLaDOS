@@ -105,7 +105,9 @@ glados.useNameSpace 'glados.apps.Embedding',
         bioactivities:
           template: "#{@targetReportCardBaseTemplate} #TAssociatedBioactivitiesCard"
           initFunction: TargetReportCardApp.initBioactivities
-
+        associated_assays:
+          template: "#{@targetReportCardBaseTemplate} #TAssociatedAssaysCard"
+          initFunction: TargetReportCardApp.initAssociatedAssays
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
 
