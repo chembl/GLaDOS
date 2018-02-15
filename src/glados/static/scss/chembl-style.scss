@@ -1417,6 +1417,16 @@ div#CompoundNameAndClassification .comp-phase-0 {
   right: 0px;
 }
 
+.embed-preview{
+  height: 60vh;
+}
+
+.code-container{
+  border: 1px solid $primary-color;
+  padding: 10px;
+  overflow: scroll;
+}
+
 div#CNC-zoom-modal {
   height: $modals-height;
   overflow-y: hidden;

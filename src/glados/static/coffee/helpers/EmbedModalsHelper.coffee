@@ -28,7 +28,7 @@ glados.useNameSpace 'glados.helpers',
         resource_type: $clicked.attr('data-resource-type')
 
       $codeElem.text(rendered)
-      $previewElem = $modal.find('.embed-preview')
+      $previewElem = $modal.find('.BCK-embed-preview')
 
       $codeElem = $modal.find('code')
       $codeToPreview = $codeElem.text()
