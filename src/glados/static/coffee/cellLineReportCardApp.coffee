@@ -13,9 +13,6 @@ class CellLineReportCardApp extends glados.ReportCardApp
     CellLineReportCardApp.initAssociatedCompounds()
     cellLine.fetch()
 
-    $('.scrollspy').scrollSpy()
-    ScrollSpyHelper.initializeScrollSpyPinner()
-
   # -------------------------------------------------------------
   # Singleton
   # -------------------------------------------------------------
