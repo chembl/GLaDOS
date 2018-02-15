@@ -38,7 +38,7 @@ CardView = Backbone.View.extend
 
   initEmbedModal: (sectionName, chemblID) ->
 
-    embedURL = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{@resource_type.toLowerCase().replace(' ','_')}_report_card/#{chemblID}/embed/#{sectionName}"
+    embedURL = "#{glados.Settings.GLADOS_BASE_URL_FULL}#{@resource_type.toLowerCase().replace(' ','_')}_report_card/#{chemblID}/embed/#{sectionName}"
     glados.helpers.EmbedModalsHelper.initEmbedModal($(@el), embedURL)
 
   activateTooltips: ->
