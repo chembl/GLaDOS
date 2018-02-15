@@ -444,7 +444,11 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     fillColour = (d) ->
 
-      if d.key
+
+      propValue = d[thisView.currentPropertyColour.propName]
+
+      if not propValue?
+
         return glados.Settings.VISUALISATION_GRID_NO_DATA
 
       thisView.getCellColour(d[thisView.currentPropertyColour.propName])

@@ -202,7 +202,7 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
   li.menu-logo {
     font-size: $large-font-size;
     text-align: center;
-    //background-color: $chembl-teal;
+    background-color: $chembl-teal;
     box-shadow: 0 2px 5px 0 rgba(150, 150, 150, 0.16), 0 2px 10px 0 rgba(107, 107, 107, 0.12);
     padding: 0;
     margin: 0;
@@ -221,9 +221,15 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
       width: 5em;
       padding: 0.5em;
     }
+    .main-page-menu-logo {
+        background-color: #6abec3;
+      }
     &.pinned-non-materialize {
       font-size: #{$large-font-size*$chembl-header-shrink-ratio};
       height: calc(#{$chembl-header-height} + #{2*0.1em});
+      .main-page-menu-logo {
+        background-color: $chembl-teal;
+      }
     }
   }
   li {
@@ -666,6 +672,20 @@ header .row {
   height: calc(#{$chembl-header-height} + #{2*$chembl-header-padding});
 }
 
+#chembl-header-container.pin-top {
+  #banner-img {
+    background-image: url("http://www.ebi.ac.uk/web_guidelines/images/banners/EBI_SERVICES_Banner.jpg") !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+}
+
+#chembl-header-container.pinned {
+  #banner-img {
+    background-image: none;
+
+  }
+}
 /**
 * EMBL-EBI bar
 * ----------------------------------------------------------------------------------------------------------------------
@@ -2243,6 +2263,15 @@ $max_chembl_logo_height: 60px;
 
 .database-info {
 
+  .release-wrapper{
+    @media only screen and (min-width: 1500px) {
+      margin-left: 15%;
+    }
+    @media only screen and (max-width: 990px) and (min-width: 700px){
+      margin-left: 20%;
+    }
+  }
+
   .row {
     margin: 0;
   }
@@ -2250,26 +2279,43 @@ $max_chembl_logo_height: 60px;
     padding: 0;
   }
 
-  .rel-notes {
-    display: inline-block;
-    padding-left: 5px;
-    font-size: 0.85rem;
+  .download-button {
+    margin-bottom: -7px;
+    .rel-notes {
+      display: block;
+      font-size: 0.7rem;
+    }
   }
 
   .version-number-wrapper {
     position: relative;
   }
 
-  .version-number-logo {
+  .logo-and-info {
+    display: flex;
+    .release-info {
+      margin-left: 5%;
+      height: fit-content;
+      padding-top: 10px;
 
-    width: $max_chembl_logo_width;
-    width: $max_chembl_logo_height;
+    }
+    .version-number-logo {
+
+      width: $max_chembl_logo_width;
+      width: $max_chembl_logo_height;
+    }
   }
+}
 
+.xl400 {
+  @media only screen and (min-width: 1250px) {
+    max-width: 400px;
+  }
 }
 
 .database-stats {
   font-size: 0.85rem;
+  margin-bottom: 35px;
 }
 
 /**
@@ -2360,11 +2406,6 @@ $marvin-size-fullscreen: 91vh;
 
 }
 
-#banner-img{
-  background-image: url("http://www.ebi.ac.uk/web_guidelines/images/banners/EBI_SERVICES_Banner.jpg") !important;
-  background-repeat: no-repeat !important;
-  background-size: cover !important;;
-}
 .search-banner {
 
   margin-left: 0.75rem;
@@ -2795,7 +2836,7 @@ span.badge-primary-color-no-float {
 
 }
 
-#TODO ======= target browseeer =======
+
 /**
 * Target Browser
 * ----------------------------------------------------------------------------------------------------------------------
@@ -2819,7 +2860,6 @@ span.badge-primary-color-no-float {
   }
 
   label{
-    color: red;
     font-size: 1em;
   }
 

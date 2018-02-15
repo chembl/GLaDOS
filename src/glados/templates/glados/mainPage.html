@@ -11,7 +11,7 @@
   {% endwith %}
 {% endblock chembl_header %}
 {% block side_nav %}
-  {% with hide_side_nav=False %}
+  {% with hide_side_nav=False main_page=True%}
     {{block.super}}
   {% endwith %}
 {% endblock side_nav %}
@@ -44,14 +44,14 @@
     {% endwith %}
   </div>
 
-  <div class="col m6 l3  hide-on-small-only">
+  <div class="col m6 l3 xl400 hide-on-small-only">
 
     {% block database_info %}
     {% include "glados/MainPageParts/database_info.html" %}
     {% endblock %}
   </div>
 
-   <div class="col m6 l3  hide-on-small-only">
+   <div class="col m6 l3 xl400 hide-on-small-only">
     {% block tweets %}
     {% include "glados/MainPageParts/tweets.html" %}
     {% endblock %}

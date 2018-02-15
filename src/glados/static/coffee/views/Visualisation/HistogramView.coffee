@@ -248,14 +248,13 @@ glados.useNameSpace 'glados.views.Visualisation',
 
       xAxis = d3.svg.axis()
         .scale(thisView.getXForBucket)
-        .tickValues thisView.getXForBucket.domain().filter((d, i) ->
-          !(i % 3)
-        )
 
 
       if @config.stacked_histogram
         formatAsYear = d3.format("1999")
         xAxis.tickFormat(formatAsYear)
+            .tickValues thisView.getXForBucket.domain().filter((d, i) -> !(i % 3))
+
 
       xAxisContainerG.call(xAxis)
 

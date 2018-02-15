@@ -195,8 +195,8 @@ glados.useNameSpace 'glados.models.visualisation',
           label: 'PChEMBL Value Avg'
           type: Number
           coloursRange: [
-            glados.Settings.VIS_COLORS.TEAL4,
-            glados.Settings.VIS_COLORS.TEAL1
+            glados.Settings.VIS_COLORS.TEAL6,
+            glados.Settings.VIS_COLORS.TEAL3
           ]
           colourScaleType: glados.Visualisation.CONTINUOUS
           ticksNumber: 5
@@ -209,8 +209,8 @@ glados.useNameSpace 'glados.models.visualisation',
           label: 'Activity Count'
           type: Number
           coloursRange: [
-            glados.Settings.VIS_COLORS.TEAL5,
-            glados.Settings.VIS_COLORS.TEAL2
+            glados.Settings.VIS_COLORS.TEAL6,
+            glados.Settings.VIS_COLORS.TEAL3
           ]
           colourScaleType: glados.Visualisation.CONTINUOUS
           ticksNumber: 5

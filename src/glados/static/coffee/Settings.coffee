@@ -62,6 +62,9 @@ glados.useNameSpace 'glados',
       TEAL4: '#75D8D5'
       TEAL5: '#C4E6E5'
 
+      TEAL6: '#D4FAF7'
+
+
       RED1: '#65323E'
       RED2: '#D33C60'
       RED3: '#FE7F9D'
@@ -88,8 +91,10 @@ glados.useNameSpace 'glados',
       PURPLE1: '#3A49A2'
       PURPLE2: '#8795E8'
 
-      GREY2: '#e4e4e4'
+
       GREY1: '#bbbbbb'
+      GREY2: '#e4e4e4'
+      GREY3: '#f1f1f1'
       WHITE: '#fff'
 
       LIGHT_GREEN5: '#f1f8e9'
