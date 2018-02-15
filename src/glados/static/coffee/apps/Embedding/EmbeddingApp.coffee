@@ -145,6 +145,9 @@ glados.useNameSpace 'glados.apps.Embedding',
         basic_information:
           template: "#{@documentReportCardBaseTemplate} #DBasicInformation"
           initFunction: DocumentReportCardApp.initBasicInformation
+        assay_network:
+          template: "#{@documentReportCardBaseTemplate} #DAssayNetworkCard"
+          initFunction: DocumentReportCardApp.initAssayNetwork
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
 
