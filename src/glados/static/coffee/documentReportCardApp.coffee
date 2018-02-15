@@ -19,9 +19,6 @@ class DocumentReportCardApp extends glados.ReportCardApp
 
     document.fetch()
 
-    $('.scrollspy').scrollSpy()
-    ScrollSpyHelper.initializeScrollSpyPinner()
-
   # -------------------------------------------------------------
   # Singleton
   # -------------------------------------------------------------
