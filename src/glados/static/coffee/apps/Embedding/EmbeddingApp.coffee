@@ -131,6 +131,9 @@ glados.useNameSpace 'glados.apps.Embedding',
         basic_information:
           template: "#{@assayReportCardBaseTemplate} #ABasicInformation"
           initFunction: AssayReportCardApp.initAssayBasicInformation
+        curation_summary:
+          template: "#{@assayReportCardBaseTemplate} #ACurationSummaryCard"
+          initFunction: AssayReportCardApp.initCurationSummary
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
 
