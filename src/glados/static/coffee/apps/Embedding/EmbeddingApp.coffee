@@ -123,6 +123,9 @@ glados.useNameSpace 'glados.apps.Embedding',
         domain_cross_refs:
           template: "#{@targetReportCardBaseTemplate} #TDomainCrossReferencesCard"
           initFunction: TargetReportCardApp.initDomainCrossReferences
+        structure_cross_refs:
+          template: "#{@targetReportCardBaseTemplate} #TStructureCrossReferencesCard"
+          initFunction: TargetReportCardApp.initStructureCrossReferences
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
 
