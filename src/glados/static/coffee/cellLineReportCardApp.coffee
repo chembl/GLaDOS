@@ -78,7 +78,6 @@ class CellLineReportCardApp extends glados.ReportCardApp
 
   @initActivitySummary = ->
 
-    #TODO: update when index is ready
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     bioactivities = CellLineReportCardApp.getAssociatedBioactivitiesAgg(chemblID)
 
