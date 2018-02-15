@@ -62,7 +62,7 @@ glados.useNameSpace 'glados',
       TEAL4: '#75D8D5'
       TEAL5: '#C4E6E5'
 
-      TEAL6: '#d7fdfa'
+      TEAL6: '#D4FAF7'
 
 
       RED1: '#65323E'
