@@ -257,11 +257,10 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
       else
         formData = new FormData()
         formData.append('file', new Blob([referenceSmiles+'\n'+mySmiles], {type: 'chemical/x-daylight-smiles'}), 'sim.smi')
-#        formData.append('fingerprint', referenceSmiles)
         formData.append('format', 'svg')
         formData.append('height', '500')
         formData.append('width', '500')
-#        formData.append('sanitize', 0)
+        formData.append('sanitize', 0)
         ajax_deferred = $.post
           url: Compound.SMILES_2_SIMILARITY_MAP_URL
           data: formData
@@ -337,6 +336,8 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
           cache: false
         ajax_deferred.done (ajaxData)->
           alignedSdf = ajaxData.split('$$$$')[0]+'$$$$\n'
+          if alignedSdf.includes('Wrong arguments')
+            reject('Wrong arguments')
           model.set('aligned_sdf', alignedSdf)
           resolve(ajaxData)
         ajax_deferred.fail (jqxhrError)->
@@ -346,6 +347,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
       console.error jqxhrError
       model.set
         'download_aligned_error': true
+        'aligned_sdf': null
 #        'reference_smiles_error': true
 #      model.trigger glados.Events.Compound.STRUCTURE_HIGHLIGHT_ERROR
     return promise
@@ -379,7 +381,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
         formData.append('smarts', referenceSmarts)
         formData.append('computeCoords', 0)
         formData.append('force', 'true')
-#        formData.append('sanitize', 0)
+        formData.append('sanitize', 0)
         ajax_deferred = $.post
           url: Compound.SDF_2D_HIGHLIGHT_URL
           data: formData
