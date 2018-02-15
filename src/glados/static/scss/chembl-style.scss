@@ -2263,6 +2263,15 @@ $max_chembl_logo_height: 60px;
 
 .database-info {
 
+  .release-wrapper{
+    @media only screen and (min-width: 1500px) {
+      margin-left: 15%;
+    }
+    @media only screen and (max-width: 990px) and (min-width: 700px){
+      margin-left: 20%;
+    }
+  }
+
   .row {
     margin: 0;
   }
@@ -2282,17 +2291,31 @@ $max_chembl_logo_height: 60px;
     position: relative;
   }
 
-  .version-number-logo {
+  .logo-and-info {
+    display: flex;
+    .release-info {
+      margin-left: 5%;
+      height: fit-content;
+      padding-top: 10px;
 
-    width: $max_chembl_logo_width;
-    width: $max_chembl_logo_height;
+    }
+    .version-number-logo {
+
+      width: $max_chembl_logo_width;
+      width: $max_chembl_logo_height;
+    }
   }
+}
 
+.xl400 {
+  @media only screen and (min-width: 1250px) {
+    max-width: 400px;
+  }
 }
 
 .database-stats {
   font-size: 0.85rem;
-  margin-bottom: 10px;
+  margin-bottom: 35px;
 }
 
 /**

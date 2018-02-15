@@ -4,48 +4,47 @@
 
   <div class="card-content">
 
-      <div class="row valign-wrapper">
+      <div class="release-wrapper">
+          <div class="row valign-wrapper">
 
 
-        <div class="col s4">
+              <div class="col s12 logo-and-info">
 
-          <div class="version-number-logo">
-            {% endverbatim %}
-            <img src="{% static 'img/chembl_logo.png' %}" class="responsive-img">
-            {% verbatim %}
+                  <div class="version-number-logo">
+                      {% endverbatim %}
+                      <img src="{% static 'img/chembl_logo.png' %}" class="responsive-img">
+                      {% verbatim %}
+                  </div>
+
+
+                  <div class="release-info">
+                      <p><b>DB: {{chembl_db_version}}</b></p>
+                      <p>{{chembl_release_date}}</p>
+                  </div>
+
+              </div>
+
+
           </div>
-
-        </div>
-
-        <div class="col s8 ">
 
           <div class="row">
-            <p><b>DB: {{chembl_db_version}}</b></p>
-            <p>{{chembl_release_date}}</p>
+
+              <div class="database-stats">
+
+                  <ul>
+
+                      <li>Targets: <span class="teal-text">{{num_targets}}</span></li>
+                      <li>Compound records: <span class="teal-text">{{num_compound_records}}</span></li>
+                      <li>Distinct compounds: <span class="teal-text">{{num_compounds}}</span></li>
+                      <li>Activities: <span class="teal-text">{{num_activities}}</span></li>
+                      <li>Publications: <span class="teal-text">{{num_publications}}</span></li>
+
+                  </ul>
+
+              </div>
+
+
           </div>
-
-        </div>
-
-
-      </div>
-
-      <div class="row">
-
-        <div class="database-stats">
-
-          <ul>
-
-            <li>Targets: <span class="teal-text">{{num_targets}}</span></li>
-            <li>Compound records: <span class="teal-text">{{num_compound_records}}</span></li>
-            <li>Distinct compounds: <span class="teal-text">{{num_compounds}}</span></li>
-            <li>Activities: <span class="teal-text">{{num_activities}}</span></li>
-            <li>Publications: <span class="teal-text">{{num_publications}}</span></li>
-
-          </ul>
-
-        </div>
-
-
       </div>
 
       <div class="row">
