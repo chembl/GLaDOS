@@ -195,7 +195,7 @@ glados.useNameSpace 'glados.models.visualisation',
           label: 'PChEMBL Value Avg'
           type: Number
           coloursRange: [
-            glados.Settings.VIS_COLORS.TEAL4,
+            glados.Settings.VIS_COLORS.TEAL6,
             glados.Settings.VIS_COLORS.TEAL1
           ]
           colourScaleType: glados.Visualisation.CONTINUOUS
