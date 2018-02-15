@@ -36,7 +36,7 @@ CardView = Backbone.View.extend
     $(@el).find('.card-load-error').first().show()
 
 
-  initEmbedModal: (section_name, chemblID) ->
+  initEmbedModal: (sectionName, chemblID) ->
 
     if EMBEDED?
       # prevent unnecessary loops
@@ -51,9 +51,14 @@ CardView = Backbone.View.extend
     modal.attr('id', modal_id)
     modal_trigger.attr('href', '#' + modal_id)
     modal_trigger.attr('rendered', 'false')
-    modal_trigger.attr('data-embed-sect-name', section_name)
+    modal_trigger.attr('data-embed-sect-name', sectionName)
     modal_trigger.attr('data-chembl-id', chemblID)
     modal_trigger.attr('data-resource-type', @resource_type.toLowerCase().replace(' ','_'))
+
+
+    embedURL = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{@resource_type.toLowerCase().replace(' ','_')}_report_card/#{chemblID}/embed/#{sectionName}"
+    console.log 'embedURL: ', embedURL
+    modal_trigger.attr('data-embed-url', embedURL)
 
     modal_trigger.click glados.helpers.EmbedModalsHelper.renderModalPreview
 
