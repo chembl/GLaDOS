@@ -157,6 +157,9 @@ glados.useNameSpace 'glados.apps.Embedding',
         related_assays:
           template: "#{@documentReportCardBaseTemplate} #DAssociatedAssaysCard"
           initFunction: DocumentReportCardApp.initAssaySummary
+        related_activities:
+          template: "#{@documentReportCardBaseTemplate} #DAssociatedActivitiesCard"
+          initFunction: DocumentReportCardApp.initActivitySummary
 
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
