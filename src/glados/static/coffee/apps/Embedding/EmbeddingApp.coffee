@@ -114,6 +114,9 @@ glados.useNameSpace 'glados.apps.Embedding',
         associated_compounds:
           template: "#{@targetReportCardBaseTemplate} #TAssociatedCompoundProperties"
           initFunction: TargetReportCardApp.initAssociatedCompounds
+        gene_cross_refs:
+          template: "#{@targetReportCardBaseTemplate} #TGeneCrossReferencesCard"
+          initFunction: TargetReportCardApp.initGeneCrossReferences
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
 
