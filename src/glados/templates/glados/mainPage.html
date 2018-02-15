@@ -11,7 +11,7 @@
   {% endwith %}
 {% endblock chembl_header %}
 {% block side_nav %}
-  {% with hide_side_nav=False %}
+  {% with hide_side_nav=False main_page=True%}
     {{block.super}}
   {% endwith %}
 {% endblock side_nav %}
