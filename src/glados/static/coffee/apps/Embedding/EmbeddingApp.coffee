@@ -102,6 +102,9 @@ glados.useNameSpace 'glados.apps.Embedding',
         approved_drugs_clinical_candidates:
           template: "#{@targetReportCardBaseTemplate} #ApprovedDrugsAndClinicalCandidatesCard"
           initFunction: TargetReportCardApp.initApprovedDrugsClinicalCandidates
+        bioactivities:
+          template: "#{@targetReportCardBaseTemplate} #TAssociatedBioactivitiesCard"
+          initFunction: TargetReportCardApp.initBioactivities
 
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
