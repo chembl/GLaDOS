@@ -183,6 +183,9 @@ glados.useNameSpace 'glados.apps.Embedding',
         related_assays:
           template: "#{@tissueReportCardBaseTemplate} #TiAssociatedAssaysCard"
           initFunction: TissueReportCardApp.initAssaySummary
+        bioactivities:
+          template: "#{@tissueReportCardBaseTemplate} #TiAssociatedActivitiesCard"
+          initFunction: TissueReportCardApp.initActivitySummary
 
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
