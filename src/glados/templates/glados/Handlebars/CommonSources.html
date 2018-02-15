@@ -33,14 +33,6 @@
 
 </script>
 
-<script id="Handlebars-Common-EmbedCode" type="text/x-handlebars-template">
-
-  <object data="{{base_url}}{{resource_type}}_report_card/{{chembl_id}}/embed/{{section_name}}/"
-             width="360px" height="600px"></object>
-
-</script>
-
-
 <script id="Handlebars-Common-SelectAll" type="text/x-handlebars-template">
   <input type="checkbox" class="filled-in BCK-toggle-select-all"
          id="BCK-list-{{base_check_box_id}}-selectAll"
@@ -829,3 +821,5 @@ There are no {{#if is_unichem}}UniChem {{/if}}cross references for {{chembl_id}}
 
 <!-- Error Messages -->
 {% include "glados/Handlebars/ErrorSources.html" %}
+
+{% include "glados/Handlebars/EmbeddingSources.html" %}

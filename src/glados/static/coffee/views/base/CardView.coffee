@@ -55,42 +55,7 @@ CardView = Backbone.View.extend
     modal_trigger.attr('data-chembl-id', chemblID)
     modal_trigger.attr('data-resource-type', @resource_type.toLowerCase().replace(' ','_'))
 
-    modal_trigger.click @renderModalPreview
-
-
-  # this function is to be used for the click event in the embed modal button.
-  # it can get all the information needed from the clicked element, no closure is needed.
-  renderModalPreview: ->
-
-    clicked = $(@)
-    if clicked.attr('rendered') == 'true'
-      return
-
-    section_name = clicked.attr('data-embed-sect-name')
-    modal = $(clicked.attr('href'))
-
-    code_elem = modal.find('code')
-    console.log 'this: ', @
-    chembl_id = clicked.attr('data-chembl-id')
-
-    rendered = Handlebars.compile($('#Handlebars-Common-EmbedCode').html())
-      base_url: glados.Settings.GLADOS_BASE_URL_FULL
-      chembl_id: chembl_id
-      chembl_id: chembl_id
-      section_name: section_name
-      resource_type: clicked.attr('data-resource-type')
-
-    code_elem.text(rendered)
-    preview_elem = modal.find('.embed-preview')
-
-    code_elem = modal.find('code')
-    code_to_preview = code_elem.text()
-
-    preview_elem.html(code_to_preview)
-
-
-    clicked.attr('rendered', 'true')
-
+    modal_trigger.click glados.helpers.EmbedModalsHelper.renderModalPreview
 
   activateTooltips: ->
     $(@el).find('.tooltipped').tooltip()
