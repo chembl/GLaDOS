@@ -387,7 +387,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .classed('cells-container-g', true)
 
     cellsContainerG.append('rect')
-      .style("fill", glados.Settings.VIS_COLORS.WHITE) #.style("fill", glados.Settings.VISUALISATION_GRID_NO_DATA)
+      .style("fill", glados.Settings.VIS_COLORS.GREY3) #.style("fill", glados.Settings.VISUALISATION_GRID_NO_DATA)
       .classed('background-rect', true)
 
     @updateCellsForWindow(cellsContainerG)
