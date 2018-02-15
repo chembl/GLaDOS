@@ -198,8 +198,4 @@ glados.useNameSpace 'glados.apps.Embedding',
       initFunction = @requiredHTMLTemplatesURLS["#{reportCardPath}/"][sectionName].initFunction
       GlobalVariables['CURRENT_MODEL_CHEMBL_ID'] = chemblID
 
-      console.log 'reportCardPath: ', reportCardPath
-      console.log 'chemblID: ', chemblID
-      console.log 'sectionName: ', sectionName
-      console.log 'requiredHTMLURL: ', requiredHTMLURL
       @loadHTMLSection(requiredHTMLURL, initFunction)
