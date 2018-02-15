@@ -5,7 +5,27 @@ glados.useNameSpace 'glados.helpers',
   # --------------------------------------------------------------------------------------------------------------------
   EmbedModalsHelper: class EmbedModalsHelper
 
-    @initEmbedModal = ->
+    # $parentElement is the parent element that contains the embed modal and trigger button
+    @initEmbedModal = ($parentElement, embedURL)->
+      
+      if EMBEDED?
+        # prevent unnecessary loops
+        $parentElement.find('.embed-modal-trigger').remove()
+        $parentElement.find('.embed-modal').remove()
+        return
+
+      $modalTrigger = $parentElement.find('.embed-modal-trigger')
+      $modal = $parentElement.find('.embed-modal')
+
+      modalNumber = Math.floor((Math.random() * 1000000) + 1)
+
+      modalId = 'embed-modal-for-' + modalNumber
+      $modal.attr('id', modalId)
+      $modalTrigger.attr('href', "##{modalId}" )
+      $modalTrigger.attr('rendered', 'false')
+
+      $modalTrigger.attr('data-embed-url', embedURL)
+      $modalTrigger.click @renderModalPreview
 
     # this function is to be used for the click event in the embed modal button.
     # it can get all the information needed from the clicked element, no closure is needed.

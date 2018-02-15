@@ -38,29 +38,8 @@ CardView = Backbone.View.extend
 
   initEmbedModal: (sectionName, chemblID) ->
 
-    if EMBEDED?
-      # prevent unnecessary loops
-      $(@el).find('.embed-modal-trigger').remove()
-      $(@el).find('.embed-modal').remove()
-      return
-
-    modal_trigger = $(@el).find('.embed-modal-trigger')
-
-    modal = $(@el).find('.embed-modal')
-    modal_id = 'embed-modal-for-' + $(@el).attr('id')
-    modal.attr('id', modal_id)
-    modal_trigger.attr('href', '#' + modal_id)
-    modal_trigger.attr('rendered', 'false')
-    modal_trigger.attr('data-embed-sect-name', sectionName)
-    modal_trigger.attr('data-chembl-id', chemblID)
-    modal_trigger.attr('data-resource-type', @resource_type.toLowerCase().replace(' ','_'))
-
-
     embedURL = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{@resource_type.toLowerCase().replace(' ','_')}_report_card/#{chemblID}/embed/#{sectionName}"
-    console.log 'embedURL: ', embedURL
-    modal_trigger.attr('data-embed-url', embedURL)
-
-    modal_trigger.click glados.helpers.EmbedModalsHelper.renderModalPreview
+    glados.helpers.EmbedModalsHelper.initEmbedModal($(@el), embedURL)
 
   activateTooltips: ->
     $(@el).find('.tooltipped').tooltip()
