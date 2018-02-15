@@ -24,6 +24,7 @@ glados.useNameSpace 'glados.apps.Embedding',
 
     @compoundReportCardBaseTemplate = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{Compound.reportCardPath}{{chembl_id}}"
     @targetReportCardBaseTemplate = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{Target.reportCardPath}{{chembl_id}}"
+    @assayReportCardBaseTemplate = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{Assay.reportCardPath}{{chembl_id}}"
     @requiredHTMLTemplatesURLS:
       "#{Compound.reportCardPath}":
         name_and_classification:
@@ -126,6 +127,10 @@ glados.useNameSpace 'glados.apps.Embedding',
         structure_cross_refs:
           template: "#{@targetReportCardBaseTemplate} #TStructureCrossReferencesCard"
           initFunction: TargetReportCardApp.initStructureCrossReferences
+      "#{Assay.reportCardPath}":
+        basic_information:
+          template: "#{@assayReportCardBaseTemplate} #ABasicInformation"
+          initFunction: AssayReportCardApp.initAssayBasicInformation
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
 
