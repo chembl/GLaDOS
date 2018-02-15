@@ -28,6 +28,7 @@ glados.useNameSpace 'glados.apps.Embedding',
     @documentReportCardBaseTemplate = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{Document.reportCardPath}{{chembl_id}}"
     @documentReportCardBaseTemplate = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{Document.reportCardPath}{{chembl_id}}"
     @cellLineReportCardBaseTemplate = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{CellLine.reportCardPath}{{chembl_id}}"
+    @tissueReportCardBaseTemplate = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{glados.models.Tissue.reportCardPath}{{chembl_id}}"
     @requiredHTMLTemplatesURLS:
       "#{Compound.reportCardPath}":
         name_and_classification:
@@ -175,6 +176,11 @@ glados.useNameSpace 'glados.apps.Embedding',
         related_compounds:
           template: "#{@cellLineReportCardBaseTemplate} #CLAssociatedCompoundProperties"
           initFunction: CellLineReportCardApp.initAssociatedCompounds
+      "#{glados.models.Tissue.reportCardPath}":
+        basic_information:
+          template: "#{@tissueReportCardBaseTemplate} #TiBasicInformation"
+          initFunction: TissueReportCardApp.initBasicInformation
+
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
 
@@ -187,4 +193,5 @@ glados.useNameSpace 'glados.apps.Embedding',
       console.log 'reportCardPath: ', reportCardPath
       console.log 'chemblID: ', chemblID
       console.log 'sectionName: ', sectionName
+      console.log 'requiredHTMLURL: ', requiredHTMLURL
       @loadHTMLSection(requiredHTMLURL, initFunction)
