@@ -151,6 +151,10 @@ glados.useNameSpace 'glados.apps.Embedding',
         word_cloud:
           template: "#{@documentReportCardBaseTemplate} #DWordCloudCard"
           initFunction: DocumentReportCardApp.initWordCloud
+        related_targets:
+          template: "#{@documentReportCardBaseTemplate} #DAssociatedTargetsCard"
+          initFunction: DocumentReportCardApp.initTargetSummary
+
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
 
