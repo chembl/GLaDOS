@@ -269,6 +269,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         console.log 'base url: ', @baseUrl
         @setMeta('base_url', @baseUrl, true)
         @setMeta('use_post', true)
+        @setMeta('extra_params', ['only=molecule_chembl_id'])
         params = {}
         if term.startsWith('CHEMBL')
           params['chembl_id'] = term
@@ -297,6 +298,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         console.log 'base url: ', @baseUrl
         @setMeta('base_url', @baseUrl, true)
         @setMeta('use_post', true)
+        @setMeta('extra_params', ['only=molecule_chembl_id'])
         @setMeta('post_parameters', {
           molecule_structures__canonical_smiles__flexmatch: term
         })
@@ -415,6 +417,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         console.log 'base url: ', @baseUrl
         @setMeta('base_url', @baseUrl, true)
         @setMeta('use_post', true)
+        @setMeta('extra_params', ['only=molecule_chembl_id'])
         params = {
           similarity: percentage
         }
@@ -446,6 +449,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         console.log 'base url: ', @baseUrl
         @setMeta('base_url', @baseUrl, true)
         @setMeta('use_post', true)
+        @setMeta('extra_params', ['only=molecule_chembl_id'])
         params = {
           similarity: percentage
         }
