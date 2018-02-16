@@ -44,12 +44,6 @@ class TargetReportCardTest(ReportCardTester):
                      'Small molecule receptor (family A GPCR) > Monoamine receptor > Adrenergic receptor')
 
     # --------------------------------------
-    # Target Components
-    # --------------------------------------
-    # Embed trigger
-    self.assert_embed_trigger('TComponentsCard', 'target', 'components', 'CHEMBL223')
-
-    # --------------------------------------
     # Approved Drugs and Clinical Candidates
     # --------------------------------------
 
