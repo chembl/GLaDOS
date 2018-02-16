@@ -73,80 +73,9 @@ urlpatterns += [
   url(r'^compound_report_card/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/compoundReportCard.html"), ),
 
-  url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/representations/$', xframe_options_exempt(
-    DirectTemplateView.as_view(template_name="glados/CompoundReportCardParts/RepresentationsToEmbed.html")), ),
-
-  url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/sources/$', xframe_options_exempt(
-    DirectTemplateView.as_view(template_name="glados/CompoundReportCardParts/SourcesToEmbed.html")), ),
-
-  url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/withdrawal_info/$', xframe_options_exempt(
-    DirectTemplateView.as_view(template_name="glados/CompoundReportCardParts/WithdrawnInformationToEmbed.html")), ),
-
-  url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/name_and_classification/$', xframe_options_exempt(
-    DirectTemplateView.as_view(template_name="glados/CompoundReportCardParts/NameAndClassificationToEmbed.html")), ),
-
-  url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/mechanism_of_action/$', xframe_options_exempt(
-    DirectTemplateView.as_view(template_name="glados/CompoundReportCardParts/MechanismOfActionToEmbed.html")), ),
-
-  url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/drug_indications/$', xframe_options_exempt(
-    DirectTemplateView.as_view(template_name="glados/CompoundReportCardParts/IndicationsToEmbed.html")), ),
-
-  url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/target_predictions/$', xframe_options_exempt(
-    DirectTemplateView.as_view(template_name="glados/CompoundReportCardParts/TargetPredictionsToEmbed.html")), ),
-
-   url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/molecule_features/$', xframe_options_exempt(
-    DirectTemplateView.as_view(template_name="glados/CompoundReportCardParts/MoleculeFeaturesToEmbed.html")), ),
-
-  url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/alternate_forms/$', xframe_options_exempt(
-    DirectTemplateView.as_view(template_name="glados/CompoundReportCardParts/AlternateFormsToEmbed.html")), ),
-
-  url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/related_activities/$', xframe_options_exempt(
-    DirectTemplateView.as_view(template_name="glados/CompoundReportCardParts/BioactivitySummaryToEmbed.html")), ),
-
-  url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/related_assays/$', xframe_options_exempt(
-    DirectTemplateView.as_view(template_name="glados/CompoundReportCardParts/AssaySummaryToEmbed.html")), ),
-
-  url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/related_targets/$', xframe_options_exempt(
-    DirectTemplateView.as_view(template_name="glados/CompoundReportCardParts/TargetSummaryToEmbed.html")), ),
-
-  url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/structural_alerts/$', xframe_options_exempt(
-    DirectTemplateView.as_view(template_name="glados/CompoundReportCardParts/StructuralAlertsToEmbed.html")), ),
-
-  url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/calculated_properties/$', xframe_options_exempt(
-    DirectTemplateView.as_view(
-      template_name="glados/CompoundReportCardParts/CalculatedCompoundParentPropertiesToEmbed.html")), ),
-
-  url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/similar/$', xframe_options_exempt(
-    DirectTemplateView.as_view(
-      template_name="glados/CompoundReportCardParts/SimilarCompoundsToEmbed.html")), ),
-
-  url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/clinical_data/$', xframe_options_exempt(
-    DirectTemplateView.as_view(
-      template_name="glados/CompoundReportCardParts/ClinicalDataToEmbed.html")), ),
-
-  url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/metabolism/$', xframe_options_exempt(
-    DirectTemplateView.as_view(
-      template_name="glados/CompoundReportCardParts/MetabolismToEmbed.html")), ),
-
-  url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/helm_notation/$', xframe_options_exempt(
-    DirectTemplateView.as_view(
-      template_name="glados/CompoundReportCardParts/HELMNotationToEmbed.html")), ),
-
-  url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/biocomponents/$', xframe_options_exempt(
-    DirectTemplateView.as_view(
-      template_name="glados/CompoundReportCardParts/BiocomponentsToEmbed.html")), ),
-
   url(r'^compound_metabolism/(?P<chembl_id>\w+)$', xframe_options_exempt(
     DirectTemplateView.as_view(
       template_name="glados/MoleculeMetabolismGraphFS.html")), ),
-
-  url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/cross_refs/$', xframe_options_exempt(
-    DirectTemplateView.as_view(
-      template_name="glados/CompoundReportCardParts/CrossReferencesToEmbed.html")), ),
-
-  url(r'^compound_report_card/(?P<chembl_id>\w+)/embed/unichem_cross_refs/$', xframe_options_exempt(
-    DirectTemplateView.as_view(
-      template_name="glados/CompoundReportCardParts/UniChemCrossReferencesToEmbed.html")), ),
 
   url(r'^compounds/(filter/[\S| ]+)?$',
       DirectTemplateView.as_view(template_name="glados/Browsers/browseCompounds.html"), ),
@@ -161,53 +90,6 @@ urlpatterns += [
   url(r'^target_report_card/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/targetReportCard.html"), ),
 
-  url(r'^target_report_card/(?P<chembl_id>\w+)/embed/name_and_classification/$', xframe_options_exempt(
-    DirectTemplateView.as_view(template_name="glados/TargetReportCardParts/NameAndClassificationToEmbed.html")), ),
-
-  url(r'^target_report_card/(?P<chembl_id>\w+)/embed/components/$', xframe_options_exempt(
-    DirectTemplateView.as_view(template_name="glados/TargetReportCardParts/ComponentsToEmbed.html")), ),
-
-  url(r'^target_report_card/(?P<chembl_id>\w+)/embed/relations/$', xframe_options_exempt(
-    DirectTemplateView.as_view(template_name="glados/TargetReportCardParts/RelationsToEmbed.html")), ),
-
-  url(r'^target_report_card/(?P<chembl_id>\w+)/embed/approved_drugs_clinical_candidates/$', xframe_options_exempt(
-    DirectTemplateView.as_view(
-      template_name="glados/TargetReportCardParts/ApprovedDrugsAndClinicalCandidatesToEmbed.html")), ),
-
-  url(r'^target_report_card/(?P<chembl_id>\w+)/embed/bioactivities/$', xframe_options_exempt(
-    DirectTemplateView.as_view(
-      template_name="glados/TargetReportCardParts/AssociatedBioactivitiesToEmbed.html")), ),
-
-  url(r'^target_report_card/(?P<chembl_id>\w+)/embed/associated_assays/$', xframe_options_exempt(
-    DirectTemplateView.as_view(
-      template_name="glados/TargetReportCardParts/AssociatedAssaysToEmbed.html")), ),
-
-  url(r'^target_report_card/(?P<chembl_id>\w+)/embed/ligand_efficiencies/$', xframe_options_exempt(
-    DirectTemplateView.as_view(
-      template_name="glados/TargetReportCardParts/LigandEfficienciesToEmbed.html")), ),
-
-  url(r'^target_report_card/(?P<chembl_id>\w+)/embed/gene_cross_refs/$', xframe_options_exempt(
-    DirectTemplateView.as_view(
-      template_name="glados/TargetReportCardParts/GeneCrossReferencesToEmbed.html")), ),
-
-  url(r'^target_report_card/(?P<chembl_id>\w+)/embed/protein_cross_refs/$', xframe_options_exempt(
-    DirectTemplateView.as_view(
-      template_name="glados/TargetReportCardParts/ProteinCrossReferencesToEmbed.html")), ),
-
-  url(r'^target_report_card/(?P<chembl_id>\w+)/embed/structure_cross_refs/$', xframe_options_exempt(
-    DirectTemplateView.as_view(
-      template_name="glados/TargetReportCardParts/StructureCrossRefsToEmbed.html")), ),
-
-  url(r'^target_report_card/(?P<chembl_id>\w+)/embed/domain_cross_refs/$', xframe_options_exempt(
-    DirectTemplateView.as_view(
-      template_name="glados/TargetReportCardParts/DomainCrossReferencesToEmbed.html")), ),
-
-
-
-  url(r'^target_report_card/(?P<chembl_id>\w+)/embed/associated_compounds/$', xframe_options_exempt(
-    DirectTemplateView.as_view(
-      template_name="glados/TargetReportCardParts/AssociatedCompoundsToEmbed.html")), ),
-
   url(r'^targets/(filter/[\S| ]+)?$',
       DirectTemplateView.as_view(template_name="glados/Browsers/browseTargets.html"), ),
 
@@ -218,18 +100,6 @@ urlpatterns += [
   url(r'^assay_report_card/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/assayReportCard.html"), ),
 
-  url(r'^assay_report_card/(?P<chembl_id>\w+)/embed/basic_information/$', xframe_options_exempt(
-    DirectTemplateView.as_view(template_name="glados/AssayReportCardParts/BasicInformationToEmbed.html")), ),
-
-  url(r'^assay_report_card/(?P<chembl_id>\w+)/embed/curation_summary/$', xframe_options_exempt(
-    DirectTemplateView.as_view(template_name="glados/AssayReportCardParts/CurationSummaryToEmbed.html")), ),
-
-  url(r'^assay_report_card/(?P<chembl_id>\w+)/embed/bioactivities/$', xframe_options_exempt(
-    DirectTemplateView.as_view(template_name="glados/AssayReportCardParts/AssociatedBioactivitiesToEmbed.html")), ),
-
-  url(r'^assay_report_card/(?P<chembl_id>\w+)/embed/associated_compounds/$', xframe_options_exempt(
-    DirectTemplateView.as_view(template_name="glados/AssayReportCardParts/AssociatedCompoundsToEmbed.html")), ),
-
   url(r'^assays/(filter/[\S| ]+)?$',
       DirectTemplateView.as_view(template_name="glados/Browsers/browseAssays.html"), ),
 
@@ -239,27 +109,6 @@ urlpatterns += [
 
   url(r'^document_report_card/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/documentReportCard.html"), ),
-
-  url(r'^document_report_card/(?P<chembl_id>\w+)/embed/basic_information/$', xframe_options_exempt(
-    DirectTemplateView.as_view(template_name="glados/DocumentReportCardParts/BasicInformationToEmbed.html")), ),
-
-  url(r'^document_report_card/(?P<chembl_id>\w+)/embed/word_cloud/$', xframe_options_exempt(
-    DirectTemplateView.as_view(template_name="glados/DocumentReportCardParts/WordCloudToEmbed.html")), ),
-
-  url(r'^document_report_card/(?P<chembl_id>\w+)/embed/assay_network/$', xframe_options_exempt(
-      DirectTemplateView.as_view(template_name="glados/DocumentReportCardParts/AssayNetworkToEmbed.html")), ),
-
-  url(r'^document_report_card/(?P<chembl_id>\w+)/embed/related_targets/$', xframe_options_exempt(
-      DirectTemplateView.as_view(template_name="glados/DocumentReportCardParts/TargetSummaryToEmbed.html")), ),
-
-  url(r'^document_report_card/(?P<chembl_id>\w+)/embed/related_assays/$', xframe_options_exempt(
-      DirectTemplateView.as_view(template_name="glados/DocumentReportCardParts/AssaySummaryToEmbed.html")), ),
-
-  url(r'^document_report_card/(?P<chembl_id>\w+)/embed/related_activities/$', xframe_options_exempt(
-      DirectTemplateView.as_view(template_name="glados/DocumentReportCardParts/ActivitySummaryToEmbed.html")), ),
-
-  url(r'^document_report_card/(?P<chembl_id>\w+)/embed/related_compounds/$', xframe_options_exempt(
-      DirectTemplateView.as_view(template_name="glados/DocumentReportCardParts/CompoundSummaryToEmbed.html")), ),
 
   url(r'^document_assay_network/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/DocumentAssayNetwork/DocumentAssayNetwork.html"), ),
@@ -276,18 +125,6 @@ urlpatterns += [
   url(r'^cell_line_report_card/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/cellLineReportCard.html"), ),
 
-  url(r'^cell_line_report_card/(?P<chembl_id>\w+)/embed/basic_information/$', xframe_options_exempt(
-    DirectTemplateView.as_view(template_name="glados/CellReportCardParts/BasicInformationToEmbed.html")), ),
-
-  url(r'^cell_line_report_card/(?P<chembl_id>\w+)/embed/related_assays/$', xframe_options_exempt(
-    DirectTemplateView.as_view(template_name="glados/CellReportCardParts/AssaySummaryToEmbed.html")), ),
-
-  url(r'^cell_line_report_card/(?P<chembl_id>\w+)/embed/bioactivities/$', xframe_options_exempt(
-    DirectTemplateView.as_view(template_name="glados/CellReportCardParts/ActivitySummaryToEmbed.html")), ),
-
-  url(r'^cell_line_report_card/(?P<chembl_id>\w+)/embed/related_compounds/$', xframe_options_exempt(
-    DirectTemplateView.as_view(template_name="glados/CellReportCardParts/CompoundSummaryToEmbed.html")), ),
-
   url(r'^cells/(filter/[\S| ]+)?$',
       DirectTemplateView.as_view(template_name="glados/Browsers/browseCells.html"), ),
 
@@ -296,19 +133,7 @@ urlpatterns += [
   # --------------------------------------------------------------------------------------------------------------------
   url(r'^tissue_report_card/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/tissueReportCard.html"), ),
-
-  url(r'^tissue_report_card/(?P<chembl_id>\w+)/embed/basic_information/$', xframe_options_exempt(
-    DirectTemplateView.as_view(template_name="glados/TissueReportCardParts/BasicInformationToEmbed.html")), ),
-
-  url(r'^tissue_report_card/(?P<chembl_id>\w+)/embed/related_assays/$', xframe_options_exempt(
-    DirectTemplateView.as_view(template_name="glados/TissueReportCardParts/AssaySummaryToEmbed.html")), ),
-
-  url(r'^tissue_report_card/(?P<chembl_id>\w+)/embed/bioactivities/$', xframe_options_exempt(
-    DirectTemplateView.as_view(template_name="glados/TissueReportCardParts/ActivitySummaryToEmbed.html")), ),
-
-  url(r'^tissue_report_card/(?P<chembl_id>\w+)/embed/related_compounds/$', xframe_options_exempt(
-    DirectTemplateView.as_view(template_name="glados/TissueReportCardParts/CompoundSummaryToEmbed.html")), ),
-
+  
   url(r'^tissues/(filter/[\S| ]+)?$',
       DirectTemplateView.as_view(template_name="glados/Browsers/browseTissues.html"), ),
 
