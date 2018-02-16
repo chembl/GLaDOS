@@ -25,6 +25,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       params.push(limit_str)
       params.push(page_str)
 
+      extra_params = @getMeta('extra_params')
+      if extra_params? and _.isArray(extra_params)
+        params = params.concat(extra_params)
+
+
       # ----------------------------------------------
       # Sorting
       # ----------------------------------------------
