@@ -37,9 +37,6 @@ class TargetReportCardTest(ReportCardTester):
     specs_group = self.browser.find_element_by_id('Bck-Target_SpecsGroup')
     self.assertEqual(specs_group.text, 'No')
 
-    # Embed trigger
-    self.assert_embed_trigger('TNameClassificationCard', 'target', 'name_and_classification', 'CHEMBL223')
-
     # Protein target classification
     protein_target_classification = self.browser.find_element_by_id('Bck-Target-Classification')
     self.assertEqual(protein_target_classification.text,

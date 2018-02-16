@@ -92,9 +92,6 @@ class CompoundReportCardTest(ReportCardTester):
     molformula_td = self.browser.find_element_by_id('Bck-MOLFORMULA')
     self.assertEqual('C9H8O4', molformula_td.text)
 
-    # Embed trigger
-    self.assert_embed_trigger('CNCCard', 'compound', 'name_and_classification', 'CHEMBL25')
-
     # --------------------------------------
     # Compound Representations
     # --------------------------------------
