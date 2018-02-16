@@ -104,6 +104,8 @@ glados.useNameSpace 'glados.views.Visualisation',
       @$vis_elem.empty()
 
       buckets = @model.get('bucket_data')[@xAxisAggName].buckets
+
+
       maxCategories = @config.max_categories
 
       if buckets.length > maxCategories
@@ -258,9 +260,6 @@ glados.useNameSpace 'glados.views.Visualisation',
         xAxisTickInterval = 5
       if elemWidth < 300
         xAxisTickInterval = 6
-
-      console.log 'elemWidth', elemWidth
-      console.log 'xAxisTickInterval', xAxisTickInterval
 
       if @config.stacked_histogram
         formatAsYear = d3.format("1999")

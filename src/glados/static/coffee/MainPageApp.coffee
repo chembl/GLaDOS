@@ -100,6 +100,7 @@ class MainPageApp
       title: 'Documents by Year'
       title_link_url: Document.getDocumentsListURL()
       max_z_categories: 7
+      title_link_url: Document.getDocumentsListURL()
 
     config =
       histogram_config: histogramConfig
