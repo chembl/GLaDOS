@@ -90,6 +90,11 @@ glados.useNameSpace 'glados.views.Visualisation',
 
     render: ->
 
+      console.log 'TRY TO RENDER HISTOGRAM'
+      # only bother if my element is visible
+      if not $(@el).is(":visible")
+        return
+      console.log 'RENDER HISTOGRAM'
       if @model.get('state') == glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE
         $visualisationMessages = $(@el).find('.BCK-VisualisationMessages')
         noDataMsg = if @config.big_size then 'No data available. ' + @config.title else 'No data.'

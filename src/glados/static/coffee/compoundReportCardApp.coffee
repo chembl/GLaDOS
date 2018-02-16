@@ -306,6 +306,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     allDocumentsByYear = CompoundReportCardApp.getPapersPerYearAgg(chemblID)
+    console.log 'allDocumentsByYear: ', allDocumentsByYear
 
     yearProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('DocumentAggregation',
       'YEAR')
@@ -338,7 +339,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     config =
       histogram_config: histogramConfig
       resource_type: gettext('glados_entities_compound_name')
-      embed_section_name: 'paper_per_year'
+      embed_section_name: 'papers_per_year'
       embed_identifier: chemblID
 
     new glados.views.ReportCards.HistogramInCardView

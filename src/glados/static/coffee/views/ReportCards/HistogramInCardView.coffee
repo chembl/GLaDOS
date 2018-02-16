@@ -28,3 +28,11 @@ glados.useNameSpace 'glados.views.ReportCards',
 
       @showSection() unless @config.is_outside_an_entity_report_card
       @showCardContent()
+
+      @xAxisAggName = @config.histogram_config.x_axis_prop_name
+      bucketData = @model.get('bucket_data')
+      if bucketData?
+        buckets = @model.get('bucket_data')[@xAxisAggName].buckets
+
+        if buckets.length == 0
+          @hideSection()
