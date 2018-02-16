@@ -1,6 +1,6 @@
 <div class='BCK-MainHistogramContainer'>
 
-  <div class="row BCK-AxesSelectorContainer">
+  <div class="row BCK-AxesSelectorContainer" {% if hide_plot_options %} style="display: none;" {% endif %}>
     <div class="input-field col s6 m4" >
       <select class="BCK-ESResultsPlot-selectXAxis" data-hb-template="Handlebars-Common-ESResultsPlot-axesOptions">
       </select>
