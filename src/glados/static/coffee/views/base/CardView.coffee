@@ -4,7 +4,8 @@ CardView = Backbone.View.extend
 
   initialize: (originalArguments) ->
 
-    unless GlobalVariables['EMBEDED']
+    @config ?= {}
+    unless GlobalVariables['EMBEDED'] or @config.is_outside_an_entity_report_card
       @sectionID = originalArguments[0].section_id
       @sectionLabel = originalArguments[0].section_label
       @reportCardApp = originalArguments[0].report_card_app
@@ -35,69 +36,20 @@ CardView = Backbone.View.extend
     $(@el).find('.card-load-error').find('.Bck-errormsg').first().html(rendered)
     $(@el).find('.card-load-error').first().show()
 
+  initEmbedModal: (sectionName, chemblID) ->
 
-  initEmbedModal: (section_name, chemblID) ->
-
-    if EMBEDED?
-      # prevent unnecessary loops
-      $(@el).find('.embed-modal-trigger').remove()
-      $(@el).find('.embed-modal').remove()
-      return
-
-    modal_trigger = $(@el).find('.embed-modal-trigger')
-
-    modal = $(@el).find('.embed-modal')
-    modal_id = 'embed-modal-for-' + $(@el).attr('id')
-    modal.attr('id', modal_id)
-    modal_trigger.attr('href', '#' + modal_id)
-    modal_trigger.attr('rendered', 'false')
-    modal_trigger.attr('data-embed-sect-name', section_name)
-    modal_trigger.attr('data-chembl-id', chemblID)
-    modal_trigger.attr('data-resource-type', @resource_type.toLowerCase().replace(' ','_'))
-
-    modal_trigger.click @renderModalPreview
-
-
-  # this function is to be used for the click event in the embed modal button.
-  # it can get all the information needed from the clicked element, no closure is needed.
-  renderModalPreview: ->
-
-    clicked = $(@)
-    if clicked.attr('rendered') == 'true'
-      return
-
-    section_name = clicked.attr('data-embed-sect-name')
-    modal = $(clicked.attr('href'))
-
-    code_elem = modal.find('code')
-    console.log 'this: ', @
-    chembl_id = clicked.attr('data-chembl-id')
-
-    rendered = Handlebars.compile($('#Handlebars-Common-EmbedCode').html())
-      base_url: glados.Settings.GLADOS_BASE_URL_FULL
-      chembl_id: chembl_id
-      chembl_id: chembl_id
-      section_name: section_name
-      resource_type: clicked.attr('data-resource-type')
-
-    code_elem.text(rendered)
-    preview_elem = modal.find('.embed-preview')
-
-    code_elem = modal.find('code')
-    code_to_preview = code_elem.text()
-
-    preview_elem.html(code_to_preview)
-
-
-    clicked.attr('rendered', 'true')
-
+    console.log 'initEmbedModal: ', @config
+    if @config.is_outside_an_entity_report_card
+      embedURL = @config.embed_url
+    else
+      embedURL = "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/##{@resource_type.toLowerCase().replace(' ','_')}_report_card/#{chemblID}/#{sectionName}"
+    glados.helpers.EmbedModalsHelper.initEmbedModal($(@el), embedURL)
 
   activateTooltips: ->
     $(@el).find('.tooltipped').tooltip()
 
   activateModals: ->
     $(@el).find('.modal').modal()
-
 
   showCardContent: ->
     $(@el).children('.card-preolader-to-hide').hide()

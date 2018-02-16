@@ -37,20 +37,11 @@ class TargetReportCardTest(ReportCardTester):
     specs_group = self.browser.find_element_by_id('Bck-Target_SpecsGroup')
     self.assertEqual(specs_group.text, 'No')
 
-    # Embed trigger
-    self.assert_embed_trigger('TNameClassificationCard', 'target', 'name_and_classification', 'CHEMBL223')
-
     # Protein target classification
     protein_target_classification = self.browser.find_element_by_id('Bck-Target-Classification')
     self.assertEqual(protein_target_classification.text,
                      '- Membrane receptor > Family A G protein-coupled receptor > '
                      'Small molecule receptor (family A GPCR) > Monoamine receptor > Adrenergic receptor')
-
-    # --------------------------------------
-    # Target Components
-    # --------------------------------------
-    # Embed trigger
-    self.assert_embed_trigger('TComponentsCard', 'target', 'components', 'CHEMBL223')
 
     # --------------------------------------
     # Approved Drugs and Clinical Candidates

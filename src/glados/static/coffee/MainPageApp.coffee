@@ -11,7 +11,7 @@ class MainPageApp
       el: $('.BCK-Central-Card')
 
     databaseInfo = new glados.models.MainPage.DatabaseSummaryInfo()
-    console.log 'databaseInfo: ', databaseInfo
+
     new glados.views.MainPage.DatabaseSummaryView
       model: databaseInfo
       el: $('.BCK-Database-summary-info')
@@ -28,9 +28,9 @@ class MainPageApp
     MainPageApp.initPapersPerYear()
 
     #initialize browser targets viz
-    targetHierarchy = TargetBrowserApp.initTargetHierarchyTree()
-    targetBrowserView = TargetBrowserApp.initBrowserMain(targetHierarchy, $('#BCK-TargetBrowserMain'))
-    targetHierarchy.fetch()
+#    targetHierarchy = TargetBrowserApp.initTargetHierarchyTree()
+#    targetBrowserView = TargetBrowserApp.initBrowserMain(targetHierarchy, $('#BCK-TargetBrowserMain'))
+#    targetHierarchy.fetch()
 # ---------------- Aggregation -------------- #
   @getDocumentsPerYearAgg = (defaultInterval=1) ->
 
@@ -98,13 +98,19 @@ class MainPageApp
       x_axis_initial_num_columns: 40
       x_axis_prop_name: 'documentsPerYear'
       title: 'Documents by Year'
+      title_link_url: Document.getDocumentsListURL()
       max_z_categories: 7
 
-    new glados.views.Visualisation.HistogramView
-      el: $('.BCK-MainHistogramContainer')
-      config: histogramConfig
-      model: allDocumentsByYear
+    config =
+      histogram_config: histogramConfig
+      is_outside_an_entity_report_card: true
+      embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#documents_by_year_histogram"
 
+    new glados.views.ReportCards.HistogramInCardView
+      el: $('#PapersPerYearHistogram')
+      model: allDocumentsByYear
+      config: config
+      report_card_app: @
 
     allDocumentsByYear.fetch()
 

@@ -19,10 +19,6 @@
     {{/if}}
 </script>
 
-<script id="Handlebars-Common-CardError" type="text/x-handlebars-template">
-  <i class="fa fa-exclamation-circle"></i> {{msg}}
-</script>
-
 <script id="Handlebars-Common-ErrorInCard" type="text/x-handlebars-template">
   <div class="card grey lighten-5">
     <div class="card-content">
@@ -34,49 +30,6 @@
 <script id="Handlebars-Common-ErrorInImage" type="text/x-handlebars-template">
 
   <i class="fa fa-exclamation-triangle"></i> <b>Error:</b> {{msg}}
-
-</script>
-
-<script id="Handlebars-Common-EmbedCode" type="text/x-handlebars-template">
-
-  <object data="{{base_url}}{{resource_type}}_report_card/{{chembl_id}}/embed/{{section_name}}/"
-             width="360px" height="600px"></object>
-
-</script>
-
-<script id="Handlebars-Common-Preloader" type="text/x-handlebars-template">
-
-
-  {{#if msg}}
-  <div class="center-align">
-    {{msg}}
-  </div>
-  {{/if}}
-
-  <div class="card-preolader-to-hide">
-
-    <div class="progress">
-      <div class="indeterminate"></div>
-    </div>
-
-  </div>
-
-
-</script>
-
-<script id="Handlebars-Common-MiniRepCardPreloader" type="text/x-handlebars-template">
-
-     <div class="preloader-wrapper small active">
-      <div class="spinner-layer spinner-teal-only">
-        <div class="circle-clipper left">
-          <div class="circle"></div>
-        </div><div class="gap-patch">
-          <div class="circle"></div>
-        </div><div class="circle-clipper right">
-          <div class="circle"></div>
-        </div>
-      </div>
-    </div>
 
 </script>
 
@@ -862,3 +815,11 @@ There are no {{#if is_unichem}}UniChem {{/if}}cross references for {{chembl_id}}
 
 <!-- Inclusion general report card templates -->
 {% include "glados/Handlebars/ReportCardTemplates.html" %}
+
+<!-- Preloaders -->
+{% include "glados/Handlebars/PreloaderSources.html" %}
+
+<!-- Error Messages -->
+{% include "glados/Handlebars/ErrorSources.html" %}
+
+{% include "glados/Handlebars/EmbeddingSources.html" %}

@@ -13,9 +13,6 @@ class CellLineReportCardApp extends glados.ReportCardApp
     CellLineReportCardApp.initAssociatedCompounds()
     cellLine.fetch()
 
-    $('.scrollspy').scrollSpy()
-    ScrollSpyHelper.initializeScrollSpyPinner()
-
   # -------------------------------------------------------------
   # Singleton
   # -------------------------------------------------------------
@@ -81,7 +78,6 @@ class CellLineReportCardApp extends glados.ReportCardApp
 
   @initActivitySummary = ->
 
-    #TODO: update when index is ready
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     bioactivities = CellLineReportCardApp.getAssociatedBioactivitiesAgg(chemblID)
 

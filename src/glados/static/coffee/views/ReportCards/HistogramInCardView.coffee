@@ -3,8 +3,8 @@ glados.useNameSpace 'glados.views.ReportCards',
 
     initialize: ->
 
-      CardView.prototype.initialize.call(@, arguments)
       @config = arguments[0].config
+      CardView.prototype.initialize.call(@, arguments)
       @model.on 'change', @render, @
       $progressElem = $(@el).find('.load-messages-container')
       @model.set('progress_elem', $progressElem)
@@ -25,5 +25,6 @@ glados.useNameSpace 'glados.views.ReportCards',
         model: @model
 
     render: ->
-      @showSection()
+
+      @showSection() unless @config.is_outside_an_entity_report_card
       @showCardContent()

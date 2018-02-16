@@ -92,9 +92,6 @@ class CompoundReportCardTest(ReportCardTester):
     molformula_td = self.browser.find_element_by_id('Bck-MOLFORMULA')
     self.assertEqual('C9H8O4', molformula_td.text)
 
-    # Embed trigger
-    self.assert_embed_trigger('CNCCard', 'compound', 'name_and_classification', 'CHEMBL25')
-
     # --------------------------------------
     # Compound Representations
     # --------------------------------------
@@ -139,15 +136,9 @@ class CompoundReportCardTest(ReportCardTester):
     self.assert_copy_button('CompReps-standardInchiKey-copy', 'Copy to Clipboard', 'BSYNRYMUTXBXSQ-UHFFFAOYSA-N')
     self.assert_copy_button('CompReps-standardInchiKey-small-copy', 'Copy to Clipboard', 'BSYNRYMUTXBXSQ-UHFFFAOYSA-N')
 
-    # Embed trigger
-    self.assert_embed_trigger('CompRepsCard', 'compound', 'representations', 'CHEMBL25')
-
     # --------------------------------------
     # Calculated Compound Parent Properties
     # --------------------------------------
-
-    # Embed trigger
-    self.assert_embed_trigger('CalculatedParentPropertiesCard', 'compound', 'calculated_properties', 'CHEMBL25')
 
     # --------------------------------------
     # Molecule Features
@@ -184,17 +175,12 @@ class CompoundReportCardTest(ReportCardTester):
     self.assert_molecule_feature('Bck-Availability', True, 't',
                                  'Availability: Over the Counter', 'bottom')
 
-     # Embed trigger
-    self.assert_embed_trigger('MoleculeFeaturesCard', 'compound', 'molecule_features', 'CHEMBL25')
-
     # --------------------------------------
     # Alternate Forms of Compound in ChEMBL
     # --------------------------------------
 
     self.assert_alternate_forms(['CHEMBL25', 'CHEMBL2296002', 'CHEMBL1697753'])
 
-    # Embed trigger
-    self.assert_embed_trigger('AlternateFormsCard', 'compound', 'alternate_forms', 'CHEMBL25')
 
   def test_compound_report_card_scenario_2(self):
 

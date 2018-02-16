@@ -140,7 +140,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
   @initMechanismOfAction = ->
 
     mechanismOfActionList = new MechanismOfActionList()
-    mechanismOfActionList.url = glados.Settings.WS_BASE_URL + 'mechanism.json?molecule_chembl_id=' + GlobalVariables.CHEMBL_ID;
+    mechanismOfActionList.url = glados.Settings.WS_BASE_URL + 'mechanism.json?molecule_chembl_id=' + glados.Utils.URLS.getCurrentModelChemblID()
     new CompoundMechanismsOfActionView
       collection: mechanismOfActionList
       el: $('#MechOfActCard')
@@ -149,6 +149,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       section_label: 'Mechanism Of Action'
       report_card_app: @
 
+    console.log 'URL: ', mechanismOfActionList.url
     mechanismOfActionList.fetch({reset: true})
 
   @initIndications = ->
@@ -466,6 +467,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     compoundMetabolism.fetch()
 
+  #https://chembl-glados.herokuapp.com/compound_report_card/CHEMBL1201585/
   @initHELMNotation = ->
 
     compound = CompoundReportCardApp.getCurrentCompound()
@@ -502,6 +504,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     if GlobalVariables['EMBEDED']
       compound.fetch()
 
+  # https://chembl-glados.herokuapp.com/compound_report_card/CHEMBL1201585
   @initBioSeq = ->
 
     compound = CompoundReportCardApp.getCurrentCompound()
