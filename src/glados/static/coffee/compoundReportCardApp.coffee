@@ -303,9 +303,10 @@ class CompoundReportCardApp extends glados.ReportCardApp
     relatedActivities.fetch()
 
   @initPapersAboutCompound = ->
-    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
 
-    allDocumentsByYear = MainPageApp.getDocumentsPerYearAgg()
+    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
+    allDocumentsByYear = CompoundReportCardApp.getPapersPerYearAgg(chemblID)
+
     yearProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('DocumentAggregation',
       'YEAR')
     journalNameProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('DocumentAggregation',
@@ -330,13 +331,14 @@ class CompoundReportCardApp extends glados.ReportCardApp
       x_axis_initial_num_columns: 40
       x_axis_prop_name: 'documentsPerYear'
       title: 'Documents by Year'
+      title_link_url: Document.getDocumentsListURL('_metadata.related_compounds.chembl_ids.\\*:' +
+        chemblID)
       max_z_categories: 7
 
     new glados.views.Visualisation.HistogramView
       el: $('.BCK-MainHistogramContainer')
       config: histogramConfig
       model: allDocumentsByYear
-
 
     allDocumentsByYear.fetch()
 
@@ -866,11 +868,11 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     return bioactivities
 
-  getPapersPerYearAgg = (chemblID) ->
+  @getPapersPerYearAgg = (chemblID, defaultInterval=1)  ->
     queryConfig =
-    type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
-    query_string_template: '*'
-    template_data: {}
+      type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
+      queryValueField: 'molecule_chembl_id'
+      fields: ['_metadata.related_compounds.chembl_ids.*']
 
     aggsConfig =
       aggs:
@@ -900,6 +902,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       index_url: glados.models.Aggregations.Aggregation.DOCUMENT_INDEX_URL
       query_config: queryConfig
       aggs_config: aggsConfig
+      molecule_chembl_id: chemblID
 
     return allDocumentsByYear
 

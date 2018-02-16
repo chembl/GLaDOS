@@ -68,7 +68,6 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
     @legendWidth = 0.95 * elemWidth
     legendHeight = @LEGEND_HEIGHT
 
-    console.log '@', @
     if !@config.hide_title
       legendContainer = d3.select($(@el).get(0))
       legendSVG = legendContainer.append('svg')
