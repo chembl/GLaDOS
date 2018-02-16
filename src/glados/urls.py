@@ -133,7 +133,7 @@ urlpatterns += [
   # --------------------------------------------------------------------------------------------------------------------
   url(r'^tissue_report_card/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/tissueReportCard.html"), ),
-  
+
   url(r'^tissues/(filter/[\S| ]+)?$',
       DirectTemplateView.as_view(template_name="glados/Browsers/browseTissues.html"), ),
 
