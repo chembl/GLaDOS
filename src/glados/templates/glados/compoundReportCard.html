@@ -221,8 +221,10 @@
                 </div>
 
 
+
                 <div id="TargetPredictions" class="section scrollspy" style="display: none;">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
+
 
                     <div class="row BCK-section-content">
 
@@ -231,6 +233,20 @@
                         {% endwith %}
 
                     </div>
+
+                </div>
+
+                Papers about compound per year
+
+                <div id="PapersAboutCompound" class="section scrollspy">
+                    {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
+
+                    <div class="BCK-section-content">
+                        {% with is_dynamic=False %}
+                             {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
+                        {% endwith %}
+                    </div>
+
 
                 </div>
 
