@@ -340,6 +340,8 @@ class CompoundReportCardApp extends glados.ReportCardApp
       config: histogramConfig
       model: allDocumentsByYear
 
+
+
     allDocumentsByYear.fetch()
 
 
@@ -889,12 +891,14 @@ class CompoundReportCardApp extends glados.ReportCardApp
               size: 10
               bucket_links:
 
-                bucket_filter_template: 'year:{{year}} AND journal:("{{bucket_key}}"' +
+                bucket_filter_template: '_metadata.related_compounds.chembl_ids.\\*:({{molecule_chembl_id}})' +
+                                        ' AND year:({{year}}) AND journal:("{{bucket_key}}"' +
                                         '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
                 template_data:
                   year: 'BUCKET.parent_key'
                   bucket_key: 'BUCKET.key'
                   extra_buckets: 'EXTRA_BUCKETS.key'
+                  molecule_chembl_id: 'molecule_chembl_id'
 
                 link_generator: Document.getDocumentsListURL
 

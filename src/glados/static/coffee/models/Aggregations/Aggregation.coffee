@@ -316,7 +316,11 @@ glados.useNameSpace 'glados.models.Aggregations',
         restOfBuckets = bucketsToMerge[1..bucketsToMerge.length-1]
 
       templateValues = {}
+      console.log 'templateDataDesc: ', templateDataDesc
       for propKey, propExp of templateDataDesc
+#        console.log 'propKey: ', propKey
+#        console.log 'value: ', propKey.propKey
+
 
         if propExp.startsWith('BUCKET')
           propName = propExp.split('.')[1]
@@ -326,6 +330,8 @@ glados.useNameSpace 'glados.models.Aggregations',
           value = (b.key for b in restOfBuckets)
         else
           value = @get(propExp)
+          console.log 'propExp: ', propExp
+          console.log 'value: ', value
 
         templateValues[propKey] = value
 
