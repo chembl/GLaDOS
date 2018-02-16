@@ -22,6 +22,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     CompoundReportCardApp.initHELMNotation()
     CompoundReportCardApp.initBioSeq()
     CompoundReportCardApp.initActivitySummary()
+    CompoundReportCardApp.initPapersAboutCompound()
     CompoundReportCardApp.initAssaySummary()
     CompoundReportCardApp.initTargetSummary()
     CompoundReportCardApp.initTargetPredictions()
@@ -29,6 +30,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     CompoundReportCardApp.initStructuralAlerts()
     CompoundReportCardApp.initCrossReferences()
     CompoundReportCardApp.initUniChemCrossReferences()
+
 
     compound.fetch()
 
@@ -299,6 +301,45 @@ class CompoundReportCardApp extends glados.ReportCardApp
       report_card_app: @
 
     relatedActivities.fetch()
+
+  @initPapersAboutCompound = ->
+    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
+
+    allDocumentsByYear = MainPageApp.getDocumentsPerYearAgg()
+    yearProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('DocumentAggregation',
+      'YEAR')
+    journalNameProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('DocumentAggregation',
+      'JOURNAL_NAME')
+    barsColourScale = journalNameProp.colourScale
+
+    histogramConfig =
+      bars_colour_scale: barsColourScale
+      stacked_histogram: true
+      rotate_x_axis_if_needed: false
+      legend_vertical: true
+      big_size: true
+      paint_axes_selectors: true
+      properties:
+        year: yearProp
+        journal: journalNameProp
+      initial_property_x: 'year'
+      initial_property_z: 'journal'
+      x_axis_options: ['count']
+      x_axis_min_columns: 1
+      x_axis_max_columns: 40
+      x_axis_initial_num_columns: 40
+      x_axis_prop_name: 'documentsPerYear'
+      title: 'Documents by Year'
+      max_z_categories: 7
+
+    new glados.views.Visualisation.HistogramView
+      el: $('.BCK-MainHistogramContainer')
+      config: histogramConfig
+      model: allDocumentsByYear
+
+
+    allDocumentsByYear.fetch()
+
 
   @initAssaySummary = ->
 
@@ -824,3 +865,41 @@ class CompoundReportCardApp extends glados.ReportCardApp
       aggs_config: aggsConfig
 
     return bioactivities
+
+  getPapersPerYearAgg = (chemblID) ->
+    queryConfig =
+    type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
+    query_string_template: '*'
+    template_data: {}
+
+    aggsConfig =
+      aggs:
+        documentsPerYear:
+          type: glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
+          field: 'year'
+          default_interval_size: defaultInterval
+          min_interval_size: 1
+          max_interval_size: 10
+          aggs:
+            split_series_agg:
+              type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+              field: 'journal'
+              size: 10
+              bucket_links:
+
+                bucket_filter_template: 'year:{{year}} AND journal:("{{bucket_key}}"' +
+                                        '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
+                template_data:
+                  year: 'BUCKET.parent_key'
+                  bucket_key: 'BUCKET.key'
+                  extra_buckets: 'EXTRA_BUCKETS.key'
+
+                link_generator: Document.getDocumentsListURL
+
+    allDocumentsByYear = new glados.models.Aggregations.Aggregation
+      index_url: glados.models.Aggregations.Aggregation.DOCUMENT_INDEX_URL
+      query_config: queryConfig
+      aggs_config: aggsConfig
+
+    return allDocumentsByYear
+

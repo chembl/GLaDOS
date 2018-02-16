@@ -220,6 +220,18 @@
                     </div>
                 </div>
 
+                Papers about compound per year
+
+                <div id="PapersAboutCompound" class="section scrollspy">
+                    {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
+
+                    <div class="BCK-section-content">
+                        {% with is_dynamic=False %}
+                             {% include "glados/CompoundReportCardParts/PapersAboutCompound.html" %}
+                        {% endwith %}
+                    </div>
+
+                </div>
 
 
                 <div id="TargetPredictions" class="section scrollspy" style="display: none;">
@@ -235,21 +247,6 @@
                     </div>
 
                 </div>
-
-                Papers about compound per year
-
-                <div id="PapersAboutCompound" class="section scrollspy">
-                    {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
-
-                    <div class="BCK-section-content">
-                        {% with is_dynamic=False %}
-                             {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
-                        {% endwith %}
-                    </div>
-
-
-                </div>
-
 
                 <div id="CalculatedCompoundParentProperties" class="section scrollspy" style="display: none;">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
