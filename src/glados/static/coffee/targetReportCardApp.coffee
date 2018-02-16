@@ -233,7 +233,6 @@ class TargetReportCardApp extends glados.ReportCardApp
       section_label: 'Associated Compounds'
       report_card_app: @
 
-
     associatedCompounds.fetch()
 
   @initGeneCrossReferences = ->

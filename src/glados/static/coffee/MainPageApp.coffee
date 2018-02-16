@@ -28,9 +28,9 @@ class MainPageApp
     MainPageApp.initPapersPerYear()
 
     #initialize browser targets viz
-    targetHierarchy = TargetBrowserApp.initTargetHierarchyTree()
-    targetBrowserView = TargetBrowserApp.initBrowserMain(targetHierarchy, $('#BCK-TargetBrowserMain'))
-    targetHierarchy.fetch()
+#    targetHierarchy = TargetBrowserApp.initTargetHierarchyTree()
+#    targetBrowserView = TargetBrowserApp.initBrowserMain(targetHierarchy, $('#BCK-TargetBrowserMain'))
+#    targetHierarchy.fetch()
 # ---------------- Aggregation -------------- #
   @getDocumentsPerYearAgg = (defaultInterval=1) ->
 
@@ -100,6 +100,20 @@ class MainPageApp
       title: 'Documents by Year'
       title_link_url: Document.getDocumentsListURL()
       max_z_categories: 7
+
+    config =
+      histogram_config: histogramConfig
+      is_entity_report_card: false
+      resource_type: 'Target'
+      embed_section_name: 'associated_compounds'
+      embed_identifier: 'CHEMBL1'
+
+    new glados.views.ReportCards.HistogramInCardView
+      el: $('#PapersPerYearHistogram')
+      model: allDocumentsByYear
+      target_chembl_id: 'CHEMBL1'
+      config: config
+      report_card_app: @
 
     new glados.views.Visualisation.HistogramView
       el: $('.BCK-MainHistogramContainer')

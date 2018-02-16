@@ -3,8 +3,8 @@ glados.useNameSpace 'glados.views.ReportCards',
 
     initialize: ->
 
-      CardView.prototype.initialize.call(@, arguments)
       @config = arguments[0].config
+      CardView.prototype.initialize.call(@, arguments)
       @model.on 'change', @render, @
       $progressElem = $(@el).find('.load-messages-container')
       @model.set('progress_elem', $progressElem)
@@ -19,11 +19,13 @@ glados.useNameSpace 'glados.views.ReportCards',
       @model.set('x_axis_min_columns', histogramConfig.x_axis_min_columns)
       @model.set('x_axis_max_columns', histogramConfig.x_axis_max_columns)
 
-      @histogramView = new glados.views.Visualisation.HistogramView
-        el: $(@el).find('.BCK-MainHistogramContainer')
-        config: histogramConfig
-        model: @model
+#      @histogramView = new glados.views.Visualisation.HistogramView
+#        el: $(@el).find('.BCK-MainHistogramContainer')
+#        config: histogramConfig
+#        model: @model
 
     render: ->
-      @showSection()
+
+      console.log 'RENDER'
+      @showSection() unless not @config.is_entity_report_card
       @showCardContent()

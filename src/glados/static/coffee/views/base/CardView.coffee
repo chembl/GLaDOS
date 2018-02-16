@@ -4,7 +4,7 @@ CardView = Backbone.View.extend
 
   initialize: (originalArguments) ->
 
-    unless GlobalVariables['EMBEDED']
+    unless GlobalVariables['EMBEDED'] or not @config.is_entity_report_card
       @sectionID = originalArguments[0].section_id
       @sectionLabel = originalArguments[0].section_label
       @reportCardApp = originalArguments[0].report_card_app
@@ -47,8 +47,11 @@ CardView = Backbone.View.extend
   activateModals: ->
     $(@el).find('.modal').modal()
 
-
   showCardContent: ->
+    console.log 'SHOW CARD content'
+    console.log '$(@el)', $(@el)
+    console.log '$(@el).children(\'.card-preolader-to-hide\')', $(@el).children('.card-preolader-to-hide')
+    console.log '$(@el)', $(@el).find('.card-preolader-to-hide')
     $(@el).children('.card-preolader-to-hide').hide()
     $(@el).children(':not(.card-preolader-to-hide, .card-load-error, .modal)').show()
 

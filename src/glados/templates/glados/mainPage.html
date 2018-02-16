@@ -38,8 +38,8 @@
 {#     {% endblock %}#}
 {#  </div>#}
 
-  <div class="col l9 m12 s12 ppy" id="PapersPerYearHistogram">
-    {% with is_dynamic=False %}
+  <div class="col l9 m12 s12 ppy" >
+    {% with is_dynamic=True %}
         {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
     {% endwith %}
   </div>
