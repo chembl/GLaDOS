@@ -249,11 +249,23 @@ glados.useNameSpace 'glados.views.Visualisation',
       xAxis = d3.svg.axis()
         .scale(thisView.getXForBucket)
 
+      elemWidth = $(@el).width()
+      xAxisTickInterval = 3
+
+      if elemWidth < 500
+        xAxisTickInterval = 4
+      if elemWidth < 400
+        xAxisTickInterval = 5
+      if elemWidth < 300
+        xAxisTickInterval = 6
+
+      console.log 'elemWidth', elemWidth
+      console.log 'xAxisTickInterval', xAxisTickInterval
 
       if @config.stacked_histogram
         formatAsYear = d3.format("1999")
         xAxis.tickFormat(formatAsYear)
-            .tickValues thisView.getXForBucket.domain().filter((d, i) -> !(i % 3))
+            .tickValues thisView.getXForBucket.domain().filter((d, i) -> !(i % xAxisTickInterval))
 
 
       xAxisContainerG.call(xAxis)
