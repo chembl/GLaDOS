@@ -335,10 +335,25 @@ class CompoundReportCardApp extends glados.ReportCardApp
         chemblID)
       max_z_categories: 7
 
-    new glados.views.Visualisation.HistogramView
-      el: $('.BCK-MainHistogramContainer')
-      config: histogramConfig
+    config =
+      histogram_config: histogramConfig
+      resource_type: gettext('glados_entities_compound_name')
+      embed_section_name: 'paper_per_year'
+      embed_identifier: chemblID
+
+    new glados.views.ReportCards.HistogramInCardView
+      el: $('#PapersAboutCompoundPerYear')
       model: allDocumentsByYear
+      config: config
+      compound_chembl_id: chemblID
+      section_id: 'PapersAboutCompound'
+      section_label: 'Papers Per Year About Compound'
+      report_card_app: @
+
+#    new glados.views.Visualisation.HistogramView
+#      el: $('.BCK-MainHistogramContainer')
+#      config: histogramConfig
+#      model: allDocumentsByYear
 
 
 
