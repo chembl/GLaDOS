@@ -223,10 +223,13 @@
                 <div id="PapersAboutCompound" class="section scrollspy" style="display: none;">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-                    <div class="BCK-section-content">
-                        {% with is_dynamic=True %}
-                             {% include "glados/CompoundReportCardParts/PapersAboutCompound.html" %}
-                        {% endwith %}
+                    <div class="BCK-section-content row">
+                        <div class="col m12 l6 max-height-col">
+                                {% with is_dynamic=True %}
+                                     {% include "glados/CompoundReportCardParts/PapersAboutCompound.html" %}
+                                {% endwith %}
+                        </div>
+                        <div class="col m12 l6"></div>
                     </div>
 
                 </div>
