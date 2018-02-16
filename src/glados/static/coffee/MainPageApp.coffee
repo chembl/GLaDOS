@@ -11,7 +11,7 @@ class MainPageApp
       el: $('.BCK-Central-Card')
 
     databaseInfo = new glados.models.MainPage.DatabaseSummaryInfo()
-    console.log 'databaseInfo: ', databaseInfo
+
     new glados.views.MainPage.DatabaseSummaryView
       model: databaseInfo
       el: $('.BCK-Database-summary-info')
@@ -103,23 +103,14 @@ class MainPageApp
 
     config =
       histogram_config: histogramConfig
-      is_entity_report_card: false
-      resource_type: 'Target'
-      embed_section_name: 'associated_compounds'
-      embed_identifier: 'CHEMBL1'
+      is_outside_an_entity_report_card: true
+      embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#documents_by_year_histogram"
 
     new glados.views.ReportCards.HistogramInCardView
       el: $('#PapersPerYearHistogram')
       model: allDocumentsByYear
-      target_chembl_id: 'CHEMBL1'
       config: config
       report_card_app: @
-
-    new glados.views.Visualisation.HistogramView
-      el: $('.BCK-MainHistogramContainer')
-      config: histogramConfig
-      model: allDocumentsByYear
-
 
     allDocumentsByYear.fetch()
 

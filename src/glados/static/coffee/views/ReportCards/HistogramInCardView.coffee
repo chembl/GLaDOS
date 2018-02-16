@@ -19,13 +19,12 @@ glados.useNameSpace 'glados.views.ReportCards',
       @model.set('x_axis_min_columns', histogramConfig.x_axis_min_columns)
       @model.set('x_axis_max_columns', histogramConfig.x_axis_max_columns)
 
-#      @histogramView = new glados.views.Visualisation.HistogramView
-#        el: $(@el).find('.BCK-MainHistogramContainer')
-#        config: histogramConfig
-#        model: @model
+      @histogramView = new glados.views.Visualisation.HistogramView
+        el: $(@el).find('.BCK-MainHistogramContainer')
+        config: histogramConfig
+        model: @model
 
     render: ->
 
-      console.log 'RENDER'
-      @showSection() unless not @config.is_entity_report_card
+      @showSection() unless @config.is_outside_an_entity_report_card
       @showCardContent()

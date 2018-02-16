@@ -29,7 +29,7 @@ glados.useNameSpace 'glados.apps.Embedding',
     @documentReportCardBaseTemplate = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{Document.reportCardPath}{{chembl_id}}"
     @cellLineReportCardBaseTemplate = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{CellLine.reportCardPath}{{chembl_id}}"
     @tissueReportCardBaseTemplate = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{glados.models.Tissue.reportCardPath}{{chembl_id}}"
-    @requiredHTMLTemplatesURLS:
+    @requiredHTMLTemplatesURLSReportCards:
       "#{Compound.reportCardPath}":
         name_and_classification:
           template: "#{@compoundReportCardBaseTemplate} #CNCCard"
@@ -190,12 +190,17 @@ glados.useNameSpace 'glados.apps.Embedding',
           template: "#{@tissueReportCardBaseTemplate} #TiAssociatedCompoundsCard"
           initFunction: TissueReportCardApp.initAssociatedCompounds
 
+    @requiredHTMLTemplatesURLSVisualisations:
+      documents_by_year_histogram:
+        template: "#{glados.Settings.GLADOS_BASE_PATH_REL} #PapersPerYearHistogram"
+        initFunction: MainPageApp.initPapersPerYear
+
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
 
-      requiredHTMLURLTempl = @requiredHTMLTemplatesURLS["#{reportCardPath}/"][sectionName].template
+      requiredHTMLURLTempl = @requiredHTMLTemplatesURLSReportCards["#{reportCardPath}/"][sectionName].template
       requiredHTMLURL = Handlebars.compile(requiredHTMLURLTempl)
         chembl_id: chemblID
-      initFunction = @requiredHTMLTemplatesURLS["#{reportCardPath}/"][sectionName].initFunction
+      initFunction = @requiredHTMLTemplatesURLSReportCards["#{reportCardPath}/"][sectionName].initFunction
       GlobalVariables['CURRENT_MODEL_CHEMBL_ID'] = chemblID
 
       @loadHTMLSection(requiredHTMLURL, initFunction)
@@ -206,3 +211,11 @@ glados.useNameSpace 'glados.apps.Embedding',
       mySong = '<iframe width="560" height="315" src="https://www.youtube.com/embed/nfRlrV8awo0?showinfo=0" ' +
       'frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>'
       $embedContentContainer.html(mySong)
+
+    @initVisualisation: (visualisationPath) ->
+
+      #I will use a template, just in case we need something more complex in the future
+      requiredHTMLURLTempl = @requiredHTMLTemplatesURLSVisualisations[visualisationPath].template
+      requiredHTMLURL = Handlebars.compile(requiredHTMLURLTempl)()
+      initFunction = @requiredHTMLTemplatesURLSVisualisations[visualisationPath].initFunction
+      @loadHTMLSection(requiredHTMLURL, initFunction)
