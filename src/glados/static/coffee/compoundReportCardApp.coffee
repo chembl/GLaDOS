@@ -347,15 +347,8 @@ class CompoundReportCardApp extends glados.ReportCardApp
       config: config
       compound_chembl_id: chemblID
       section_id: 'PapersAboutCompound'
-      section_label: 'Papers Per Year About Compound'
+      section_label: 'Papers Per Year'
       report_card_app: @
-
-#    new glados.views.Visualisation.HistogramView
-#      el: $('.BCK-MainHistogramContainer')
-#      config: histogramConfig
-#      model: allDocumentsByYear
-
-
 
     allDocumentsByYear.fetch()
 
