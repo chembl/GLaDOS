@@ -202,8 +202,12 @@ glados.useNameSpace 'glados.views.Visualisation',
         legendConfig =
           columns_layout: true
           hide_title: true
-          max_height: 
-
+#
+        if @config.max_height
+          legendConfig =
+          columns_layout: true
+          hide_title: true
+          max_height: $(@el).height() - @config.max_height
 
         legendElem = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
         glados.Utils.renderLegendForProperty(@currentZAxisProperty, undefined, legendElem,

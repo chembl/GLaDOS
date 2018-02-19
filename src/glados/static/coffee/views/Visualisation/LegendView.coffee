@@ -110,6 +110,10 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
       legendGHeight = $(@el).find('.main-legendG')[0].getBBox().height
       legendSVG.height(legendGHeight + 5)
 
+      if @config.max_height?
+        legendSVG.height(@config.max_height)
+
+
   # ------------------------------------------------------------------------------------------------------------------
   # Continuous
   # ------------------------------------------------------------------------------------------------------------------

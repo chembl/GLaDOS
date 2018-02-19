@@ -335,7 +335,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       title_link_url: Document.getDocumentsListURL('_metadata.related_compounds.chembl_ids.\\*:' +
         chemblID)
       max_z_categories: 7
-      max_height: 300
+      max_height: 320
 
     config =
       histogram_config: histogramConfig
@@ -349,7 +349,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       config: config
       compound_chembl_id: chemblID
       section_id: 'PapersAboutCompound'
-      section_label: 'Literature'
+      section_label: chemblID + ' in Literature'
       report_card_app: @
 
     allDocumentsByYear.fetch()
