@@ -1,23 +1,21 @@
 <div class='BCK-MainHistogramContainer'>
+    <div class="row BCK-AxesSelectorContainer" {% if hide_plot_options %} style="display: none;" {% endif %}>
 
-  <div class="row BCK-AxesSelectorContainer">
-    <div class="input-field col s6 m4" >
-      <select class="BCK-ESResultsPlot-selectXAxis" data-hb-template="Handlebars-Common-ESResultsPlot-axesOptions">
-      </select>
-      <label>X axis:</label>
+        <div class="input-field col s6 m4">
+            <select class="BCK-ESResultsPlot-selectXAxis"
+                    data-hb-template="Handlebars-Common-ESResultsPlot-axesOptions"> </select>
+            <label>X axis:</label>
+        </div>
+
+        <div class="col s6 m4 BCK-ESResultsPlot-selectXAxis-numBars"
+             data-hb-template="Handlebars-Common-Histogram-numbars"></div>
+        <div class="col s6 m4 BCK-ESResultsPlot-selectXAxis-binSize"
+             data-hb-template="Handlebars-Common-Histogram-binsize"></div>
+
     </div>
 
-    <div class="col s6 m4 BCK-ESResultsPlot-selectXAxis-numBars" data-hb-template="Handlebars-Common-Histogram-numbars">
-    </div>
-    <div class="col s6 m4 BCK-ESResultsPlot-selectXAxis-binSize" data-hb-template="Handlebars-Common-Histogram-binsize">
-    </div>
-
-  </div>
-
-  <div class="row BCK-VisualisationMessages" data-hb-template="Handlebars-Common-VisualisationProgress">
-  </div>
-
-  <div class="BCK-HistogramContainer histogram">
-  </div>
-
+    <div class="row BCK-VisualisationMessages" data-hb-template="Handlebars-Common-VisualisationProgress"></div>
+    <div class="BCK-HistogramContainer histogram"></div>
+    <div class="BCK-CompResultsGraphLegendContainer legend histogram-legend"></div>
 </div>
+

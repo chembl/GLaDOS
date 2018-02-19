@@ -64,6 +64,9 @@ glados.useNameSpace 'glados.apps.Embedding',
         metabolism:
           template: "#{@compoundReportCardBaseTemplate} #MetabolismCard"
           initFunction: CompoundReportCardApp.initMetabolism
+        papers_per_year:
+          template: "#{@compoundReportCardBaseTemplate} #PapersAboutCompoundPerYear"
+          initFunction: CompoundReportCardApp.initPapersAboutCompound
         helm_notation:
           template: "#{@compoundReportCardBaseTemplate} #CHELMNotationCard"
           initFunction: CompoundReportCardApp.initHELMNotation
