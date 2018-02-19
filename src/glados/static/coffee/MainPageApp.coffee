@@ -89,6 +89,16 @@ class MainPageApp
               type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
               field: 'indication_class'
               size: 5
+              bucket_links:
+                bucket_filter_template: '_metadata.drug.is_drug:true AND ' +
+                                        'max_phase :{{max_phase}} AND indication_class:("{{bucket_key}}"' +
+                                        '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
+                template_data:
+                  max_phase: 'BUCKET.parent_key'
+                  bucket_key: 'BUCKET.key'
+                  extra_buckets: 'EXTRA_BUCKETS.key'
+
+                link_generator: Compound.getCompoundsListURL
 
     MaxPhaseForDisease = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
