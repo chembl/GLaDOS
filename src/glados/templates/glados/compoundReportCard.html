@@ -220,11 +220,11 @@
                     </div>
                 </div>
 
-                <div id="PapersAboutCompound" class="section scrollspy max-height-col" style="display: none;">
+                <div id="PapersAboutCompound" class="section scrollspy " style="display: none;">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
                     <div class="BCK-section-content row">
-                        <div class="col s12 m12 l6 ">
+                        <div class="col s12 max-height-col">
                                 {% with is_dynamic=True %}
                                      {% include "glados/CompoundReportCardParts/PapersAboutCompound.html" %}
                                 {% endwith %}

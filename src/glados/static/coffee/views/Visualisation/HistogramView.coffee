@@ -90,11 +90,9 @@ glados.useNameSpace 'glados.views.Visualisation',
 
     render: ->
 
-      console.log 'TRY TO RENDER HISTOGRAM'
       # only bother if my element is visible
       if not $(@el).is(":visible")
         return
-      console.log 'RENDER HISTOGRAM'
       if @model.get('state') == glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE
         $visualisationMessages = $(@el).find('.BCK-VisualisationMessages')
         noDataMsg = if @config.big_size then 'No data available. ' + @config.title else 'No data.'
@@ -122,6 +120,9 @@ glados.useNameSpace 'glados.views.Visualisation',
 
       VISUALISATION_WIDTH = $(@el).width()
       VISUALISATION_HEIGHT = if @config.big_size then $(window).height() * 0.6 else 60
+
+      if @config.max_height?
+        VISUALISATION_HEIGHT = @config.max_height
 
       mainContainer = d3.select(@$vis_elem.get(0))
       mainSVGContainer = mainContainer
@@ -201,6 +202,7 @@ glados.useNameSpace 'glados.views.Visualisation',
         legendConfig =
           columns_layout: true
           hide_title: true
+          max_height: 
 
 
         legendElem = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
