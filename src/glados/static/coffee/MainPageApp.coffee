@@ -25,12 +25,13 @@ class MainPageApp
 
     tweetsList.fetch()
 
-    MainPageApp.initPapersPerYear()
+#    MainPageApp.initPapersPerYear()
+    MainPageApp.initMaxPhaseForDisease()
 
-    #initialize browser targets viz
-    targetHierarchy = TargetBrowserApp.initTargetHierarchyTree()
-    targetBrowserView = TargetBrowserApp.initBrowserAsCircles(targetHierarchy, $('#BCK-TargetBrowserAsCircles'))
-    targetHierarchy.fetch()
+#    #initialize browser targets viz
+#    targetHierarchy = TargetBrowserApp.initTargetHierarchyTree()
+#    targetBrowserView = TargetBrowserApp.initBrowserAsCircles(targetHierarchy, $('#BCK-TargetBrowserAsCircles'))
+#    targetHierarchy.fetch()
 
 # ---------------- Aggregation -------------- #
   @getDocumentsPerYearAgg = (defaultInterval=1) ->
@@ -70,6 +71,22 @@ class MainPageApp
       aggs_config: aggsConfig
 
     return allDocumentsByYear
+
+  @getMaxPhaseForDiseaseAgg = () ->
+    queryConfig =
+      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
+      query_string_template: '_metadata.drug.is_drug: true'
+      template_data: {}
+
+    MaxPhaseForDisease = new glados.models.Aggregations.Aggregation
+      index_url: glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
+      query_config: queryConfig
+
+    console.log 'MaxPhaseForDisease: ', MaxPhaseForDisease
+    return MaxPhaseForDisease
+
+  @initMaxPhaseForDisease = ->
+    console.log @getMaxPhaseForDiseaseAgg()
 
 
   @initPapersPerYear = ->
