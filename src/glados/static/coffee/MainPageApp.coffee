@@ -84,6 +84,11 @@ class MainPageApp
           type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
           field: 'max_phase'
           size: 5
+          aggs:
+            split_series_agg:
+              type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+              field: 'indication_class'
+              size: 5
 
     MaxPhaseForDisease = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
