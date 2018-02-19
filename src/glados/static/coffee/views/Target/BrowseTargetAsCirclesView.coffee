@@ -54,8 +54,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     .append("g")
     .attr("transform", "translate(" + thisView.diameter / 2 + "," + thisView.diameter / 2 + ")")
 
-
-
     # use plain version
     @root = @model.get('plain')
     focus = @root
@@ -100,7 +98,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr("id", (d) ->
         if d.parent then 'circleFor-' + d.id else 'circleFor-Root')
       .style("fill", (d) ->
-        if d.children then color(d.depth) else null)
+        if d.children then color(d.depth) else glados.Settings.VIS_COLORS.WHITE)
       .on("click", handleClickOnNode)
       .on('mouseover', handleNodeMouseOver)
       .on('mouseout', handleNodeMouseOut)
@@ -109,6 +107,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     .data(nodes)
     .enter().append('text')
     .attr("class", "label")
+    .attr('text-anchor', 'middle')
     .style("fill-opacity", (d) ->
       if d.parent == thisView.root then 1 else 0)
     .style("display", (d) ->
@@ -116,7 +115,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     .text((d) -> return d.name + " (" + d.size + ")" )
 
     #Select circles to create the views
-    @createCircleViews()
+#    @createCircleViews()
 
     d3.select(container)
     .on("click", () -> thisView.focusTo(thisView.root) )
