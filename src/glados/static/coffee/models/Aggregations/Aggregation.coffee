@@ -318,6 +318,8 @@ glados.useNameSpace 'glados.models.Aggregations',
       templateValues = {}
       for propKey, propExp of templateDataDesc
 
+
+
         if propExp.startsWith('BUCKET')
           propName = propExp.split('.')[1]
           value = bucket[propName]

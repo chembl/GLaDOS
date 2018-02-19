@@ -90,6 +90,9 @@ glados.useNameSpace 'glados.views.Visualisation',
 
     render: ->
 
+      # only bother if my element is visible
+      if not $(@el).is(":visible")
+        return
       if @model.get('state') == glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE
         $visualisationMessages = $(@el).find('.BCK-VisualisationMessages')
         noDataMsg = if @config.big_size then 'No data available. ' + @config.title else 'No data.'
@@ -104,6 +107,8 @@ glados.useNameSpace 'glados.views.Visualisation',
       @$vis_elem.empty()
 
       buckets = @model.get('bucket_data')[@xAxisAggName].buckets
+
+
       maxCategories = @config.max_categories
 
       if buckets.length > maxCategories
@@ -115,6 +120,9 @@ glados.useNameSpace 'glados.views.Visualisation',
 
       VISUALISATION_WIDTH = $(@el).width()
       VISUALISATION_HEIGHT = if @config.big_size then $(window).height() * 0.6 else 60
+
+      if @config.max_height?
+        VISUALISATION_HEIGHT = @config.max_height
 
       mainContainer = d3.select(@$vis_elem.get(0))
       mainSVGContainer = mainContainer
@@ -194,7 +202,12 @@ glados.useNameSpace 'glados.views.Visualisation',
         legendConfig =
           columns_layout: true
           hide_title: true
-
+#
+        if @config.max_height
+          legendConfig =
+          columns_layout: true
+          hide_title: true
+          max_height: $(@el).height() - @config.max_height
 
         legendElem = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
         glados.Utils.renderLegendForProperty(@currentZAxisProperty, undefined, legendElem,
@@ -249,11 +262,20 @@ glados.useNameSpace 'glados.views.Visualisation',
       xAxis = d3.svg.axis()
         .scale(thisView.getXForBucket)
 
+      elemWidth = $(@el).width()
+      xAxisTickInterval = 3
+
+      if elemWidth < 500
+        xAxisTickInterval = 4
+      if elemWidth < 400
+        xAxisTickInterval = 5
+      if elemWidth < 300
+        xAxisTickInterval = 6
 
       if @config.stacked_histogram
         formatAsYear = d3.format("1999")
         xAxis.tickFormat(formatAsYear)
-            .tickValues thisView.getXForBucket.domain().filter((d, i) -> !(i % 3))
+            .tickValues thisView.getXForBucket.domain().filter((d, i) -> !(i % xAxisTickInterval))
 
 
       xAxisContainerG.call(xAxis)
