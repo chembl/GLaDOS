@@ -3873,7 +3873,8 @@ $facets-width-large: 21%;
 .section {
   .max-height-col {
     .histogram {
-      max-height: 400px;
+      //max-height: 400px;
+      width: 100%;
     }
   }
 }
