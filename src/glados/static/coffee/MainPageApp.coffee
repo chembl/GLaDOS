@@ -75,18 +75,28 @@ class MainPageApp
   @getMaxPhaseForDiseaseAgg = () ->
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
-      query_string_template: '_metadata.drug.is_drug: true'
+      query_string_template: '_metadata.drug.is_drug:true'
       template_data: {}
+
+    aggsConfig =
+      aggs:
+        maxPhaseForDisease:
+          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+          field: 'max_phase'
+          size: 5
 
     MaxPhaseForDisease = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
       query_config: queryConfig
+      aggs_config: aggsConfig
 
-    console.log 'MaxPhaseForDisease: ', MaxPhaseForDisease
     return MaxPhaseForDisease
 
   @initMaxPhaseForDisease = ->
-    console.log @getMaxPhaseForDiseaseAgg()
+    maxPhaseForDisease = MainPageApp.getMaxPhaseForDiseaseAgg()
+    console.log 'maxPhaseForDisease: ', maxPhaseForDisease
+
+    maxPhaseForDisease.fetch()
 
 
   @initPapersPerYear = ->
