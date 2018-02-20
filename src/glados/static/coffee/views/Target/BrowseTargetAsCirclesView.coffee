@@ -62,6 +62,17 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     console.log('nodes after')
     console.log(nodes)
 
+    #get depth domain in tree
+    getNodeNumChildren = (node) -> if not node.children? then 0 else node.children.length
+    nodeWithMinNumChildren = _.min(nodes, getNodeNumChildren)
+    minNumChildren = if not nodeWithMinNumChildren.children? then 0 else nodeWithMinNumChildren.children.length
+    nodeWithMaxNumChildren = _.max(nodes, getNodeNumChildren)
+    maxNumChildren = if not nodeWithMaxNumChildren.children? then 0 else nodeWithMaxNumChildren.children.length
+
+    textSize = d3.scale.linear()
+      .domain([minNumChildren, maxNumChildren])
+      .range([60, 150])
+
     # -----------------------------------------
     # Node click handler function
     # -----------------------------------------
@@ -104,21 +115,22 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
       .on('mouseout', handleNodeMouseOut)
 
     text = svg.selectAll('text')
-    .data(nodes)
-    .enter().append('text')
-    .attr("class", "label")
-    .attr('text-anchor', 'middle')
-    .style("fill-opacity", (d) ->
-      if d.parent == thisView.root then 1 else 0)
-    .style("display", (d) ->
-      if d.parent == thisView.root then 'inline' else 'none')
-    .text((d) -> return d.name + " (" + d.size + ")" )
+      .data(nodes)
+      .enter().append('text')
+      .attr("class", "label")
+      .attr('text-anchor', 'middle')
+      .style("fill-opacity", (d) ->
+        if d.parent == thisView.root then 1 else 0)
+      .style("display", (d) ->
+        if d.parent == thisView.root then 'inline' else 'none')
+      .text((d) -> return d.name + " (" + d.size + ")" )
+      .attr('font-size', (d) -> if d.children? then "#{textSize(d.children.length)}%" else "#{textSize(0)}%")
 
     #Select circles to create the views
 #    @createCircleViews()
 
     d3.select(container)
-    .on("click", () -> thisView.focusTo(thisView.root) )
+      .on("click", () -> thisView.focusTo(thisView.root) )
 
 
     @zoomTo([@root.x, @root.y, @root.r * 2 + @margin])
