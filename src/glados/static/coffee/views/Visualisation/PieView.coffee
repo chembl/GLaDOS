@@ -79,7 +79,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     bucketSizes = (b.doc_count for b in buckets)
 
     color = d3.scale.category10()
-    pie = d3.layout.pie();
+    pie = d3.layout.pie()
 
     arc = d3.svg.arc()
       .innerRadius(innerRadius)
@@ -100,7 +100,6 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 #  qtips
 # ----------------------------------------------------------------------------------------------------------------------
     arcs.each (d) ->
-      console.log 'd: ', d
       text = d.data
       $(@).qtip
         content:
