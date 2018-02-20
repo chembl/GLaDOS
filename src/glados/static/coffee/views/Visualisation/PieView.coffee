@@ -9,6 +9,11 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     @$vis_elem = $(@el).find('.BCK-pie-container')
     updateViewProxy = @setUpResponsiveRender()
 
+    if @config.stacked_donut
+      @splitSeriesAggName = @config.split_series_prop_name
+
+
+
   showNoDataFoundMessage: ->
 
     $visualisationMessages = $(@el).find('.BCK-VisualisationMessages')
@@ -54,12 +59,13 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       @renderSimplePie(buckets)
 
   renderStackedDonut: (buckets) ->
-    @$vis_elem.empty()
+    thisView = @
+    thisView.$vis_elem.empty()
 
     VISUALISATION_WIDTH = $(@el).width()
     VISUALISATION_HEIGHT = VISUALISATION_WIDTH * 0.6
-    innerRadius = VISUALISATION_WIDTH / 6
-    outerRadius = VISUALISATION_WIDTH / 4
+    RADIUS = VISUALISATION_WIDTH / 30
+
 
     mainContainer = d3.select(@$vis_elem.get(0))
     mainSVGContainer = mainContainer
@@ -69,23 +75,23 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('height', VISUALISATION_HEIGHT)
 
     arcsContainer = mainSVGContainer.append('g')
-      .append('rect')
+    subArcsContainer = mainSVGContainer.append('g')
+
+    arcsBackground = arcsContainer.append('rect')
         .attr('height', VISUALISATION_HEIGHT)
         .attr('width', VISUALISATION_WIDTH)
         .attr('fill', 'white')
         .classed('arcs-background', true)
 
-    bucketNames = (b.key for b in buckets)
     bucketSizes = (b.doc_count for b in buckets)
-
     color = d3.scale.category10()
     pie = d3.layout.pie()
 
-    arc = d3.svg.arc()
-      .innerRadius(innerRadius)
-      .outerRadius(outerRadius)
+    innerArc = d3.svg.arc()
+      .innerRadius(RADIUS*2)
+      .outerRadius(RADIUS*4)
 
-    arcs = mainSVGContainer.selectAll('g.arc')
+    arcs = arcsContainer.selectAll('g.arc')
       .data(pie(bucketSizes))
       .enter()
       .append('g')
@@ -94,7 +100,26 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     arcs.append('path')
       .attr('fill', (d, i) -> color(i))
-      .attr('d', arc)
+      .attr('d', innerArc)
+
+    for bucket in buckets
+      subBuckets = bucket[thisView.splitSeriesAggName].buckets
+      subBucketSizes = (b.doc_count for b in subBuckets)
+
+      outerArc = d3.svg.arc()
+        .innerRadius(RADIUS*4)
+        .outerRadius(RADIUS*6)
+
+      subArcs = subArcsContainer.selectAll('g.arc')
+        .data(pie(subBucketSizes))
+        .enter()
+        .append('g')
+        .attr('class', 'arc')
+        .attr('transform', 'translate(' + VISUALISATION_WIDTH/2 + ', ' + VISUALISATION_HEIGHT/2 + ')')
+
+      subArcs.append('path')
+        .attr('fill', (d, i) -> color(i))
+        .attr('d', outerArc)
 
 # ----------------------------------------------------------------------------------------------------------------------
 #  qtips

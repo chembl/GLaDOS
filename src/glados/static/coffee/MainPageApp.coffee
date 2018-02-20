@@ -111,7 +111,7 @@ class MainPageApp
 
     pieConfig =
       x_axis_prop_name: 'maxPhaseForDisease'
-      split_series_prop_Name: 'indication_class'
+      split_series_prop_name: 'split_series_agg'
       title: 'Max phase for disease'
       max_categories: 5
       stacked_donut: true
