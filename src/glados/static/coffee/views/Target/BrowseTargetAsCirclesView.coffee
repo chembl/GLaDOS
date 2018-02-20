@@ -213,7 +213,9 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     transition.selectAll("text")
       .filter( (d) ->
-        d == focus or d.parent == focus or @style.display == 'inline')
+        console.log 'd: ', d
+        if d?
+          d == focus or d.parent == focus or @style.display == 'inline')
       .style('fill-opacity', (d) ->
         if d.parent == focus then 1 else 0)
       .each('start', (d) ->
