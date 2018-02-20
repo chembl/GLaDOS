@@ -13,7 +13,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     @$vis_elem = $(@el).find('.vis-container')
     @showResponsiveViewPreloader()
-
     @setUpResponsiveRender()
     @model.on 'change', @render, @
 
@@ -134,9 +133,13 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
   addHoverabilityTo: (nodes) ->
 
     console.log 'add hoverability: ', nodes
-    d3Nodes = d3.selectAll(("#circleFor-#{n.id}" for n in nodes).join(','))
+    d3Nodes = d3.select($(@el)[0]).selectAll(("#circleFor-#{n.id}" for n in nodes).join(','))
     d3Nodes.classed('hoverable', true)
 
+  removeHoverabilityToAll: ->
+
+    d3.select($(@el)[0]).selectAll('.node')
+      .classed('hoverable', false)
 
   createCircleViews: ->
 
@@ -176,10 +179,10 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   focusTo: (node) ->
 
-    # TODO: If it causes problems, make sure to not do the focus procedure when the focus is already in the node passed
-    # as parameter
     thisView = @
     focus = node
+    @removeHoverabilityToAll()
+    @addHoverabilityTo(node.children)
     transition = d3.transition()
       .duration(1000)
       .tween("zoom", (d) ->

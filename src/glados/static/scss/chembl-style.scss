@@ -2893,9 +2893,10 @@ span.badge-primary-color-no-float {
       cursor: pointer;
       &.hoverable{
         stroke-width: 1px;
-        stroke: gray;
+        stroke: black;
         &:hover{
           stroke: color('green', 'base');
+          stroke-width: 2px;
         }
       }
     }
