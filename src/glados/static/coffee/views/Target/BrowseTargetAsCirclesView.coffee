@@ -127,10 +127,16 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     d3.select(container)
       .on("click", () -> thisView.focusTo(thisView.root) )
 
-
+    @currentLevel = 0
     @zoomTo([@root.x, @root.y, @root.r * 2 + @margin])
+    @addHoverabilityTo(@root.children)
 
-    $('.tooltipped').tooltip()
+  addHoverabilityTo: (nodes) ->
+
+    console.log 'add hoverability: ', nodes
+    d3Nodes = d3.selectAll(("#circleFor-#{n.id}" for n in nodes).join(','))
+    d3Nodes.classed('hoverable', true)
+
 
   createCircleViews: ->
 
@@ -175,11 +181,11 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     thisView = @
     focus = node
     transition = d3.transition()
-    .duration(1000)
-    .tween("zoom", (d) ->
-        i = d3.interpolateZoom(thisView.currentViewFrame, [focus.x, focus.y, focus.r * 2 + thisView.margin])
-        return (t) -> thisView.zoomTo(i(t))
-    )
+      .duration(1000)
+      .tween("zoom", (d) ->
+          i = d3.interpolateZoom(thisView.currentViewFrame, [focus.x, focus.y, focus.r * 2 + thisView.margin])
+          return (t) -> thisView.zoomTo(i(t))
+      )
 
     transition.selectAll("text")
       .filter( (d) ->

@@ -2891,14 +2891,15 @@ span.badge-primary-color-no-float {
   .browser-as-circles {
     .node {
       cursor: pointer;
-      stroke-width: 0.5px;
-      stroke: gray;
+      &.hoverable{
+        stroke-width: 1px;
+        stroke: gray;
+        &:hover{
+          stroke: color('green', 'base');
+        }
+      }
     }
 
-    .node:hover {
-      cursor: pointer;
-      stroke-width: 3;
-    }
 
     .node--leaf {
       fill: white;
