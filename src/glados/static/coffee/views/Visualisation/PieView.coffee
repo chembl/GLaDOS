@@ -120,7 +120,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
         .data(AggregationPie(subBucketSizes))
         .enter()
         .append('g')
-        .attr('class', 'arc')
+        .attr('class', 'subArc')
         .attr('transform', 'translate(' + VISUALISATION_WIDTH/2 + ', ' + VISUALISATION_HEIGHT/2 + ')')
 
       subArcs.append('path')
