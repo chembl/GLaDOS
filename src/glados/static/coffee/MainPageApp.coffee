@@ -109,7 +109,23 @@ class MainPageApp
 
   @initMaxPhaseForDisease = ->
     maxPhaseForDisease = MainPageApp.getMaxPhaseForDiseaseAgg()
-    console.log 'maxPhaseForDisease: ', maxPhaseForDisease
+
+    pieConfig =
+      x_axis_prop_name: 'max_phase'
+      title: 'Max phase for disease'
+      max_categories: 5
+      stacked_donut: true
+
+    config =
+      pie_config: pieConfig
+      is_outside_an_entity_report_card: true
+      embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#max_phase_for_disease"
+
+    new glados.views.ReportCards.PieInCardView
+      el: $('#MaxPhaseForDisease')
+      model: maxPhaseForDisease
+      config: config
+      report_card_app: @
 
     maxPhaseForDisease.fetch()
 
