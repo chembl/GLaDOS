@@ -102,16 +102,22 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('fill', (d, i) -> color(i))
       .attr('d', innerArc)
 
-    for bucket in buckets
+    for bucket, i in buckets
       subBuckets = bucket[thisView.splitSeriesAggName].buckets
       subBucketSizes = (b.doc_count for b in subBuckets)
+
+      bigSlice =  pie(bucketSizes)[i]
+
+      AggregationPie = d3.layout.pie()
+        .startAngle(bigSlice.startAngle)
+        .endAngle(bigSlice.endAngle)
 
       outerArc = d3.svg.arc()
         .innerRadius(RADIUS*4)
         .outerRadius(RADIUS*6)
 
       subArcs = subArcsContainer.selectAll('g.arc')
-        .data(pie(subBucketSizes))
+        .data(AggregationPie(subBucketSizes))
         .enter()
         .append('g')
         .attr('class', 'arc')
