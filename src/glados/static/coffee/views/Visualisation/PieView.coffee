@@ -58,7 +58,8 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     VISUALISATION_WIDTH = $(@el).width()
     VISUALISATION_HEIGHT = VISUALISATION_WIDTH * 0.6
-
+    innerRadius = VISUALISATION_WIDTH / 6
+    outerRadius = VISUALISATION_WIDTH / 4
 
     mainContainer = d3.select(@$vis_elem.get(0))
     mainSVGContainer = mainContainer
@@ -74,22 +75,18 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('fill', 'white')
         .classed('arcs-background', true)
 
-    fakedataset = [10, 40, 3, 20, 50, 70]
-    
+    bucketNames = (b.key for b in buckets)
+    bucketSizes = (b.doc_count for b in buckets)
 
     color = d3.scale.category10()
+    pie = d3.layout.pie();
 
-    pie = d3.layout.pie(fakedataset);
-    innerRadius = VISUALISATION_WIDTH / 6
-    outerRadius = VISUALISATION_WIDTH / 4
     arc = d3.svg.arc()
       .innerRadius(innerRadius)
       .outerRadius(outerRadius)
 
-
-
     arcs = mainSVGContainer.selectAll('g.arc')
-      .data(pie(fakedataset))
+      .data(pie(bucketSizes))
       .enter()
       .append('g')
       .attr('class', 'arc')
@@ -99,20 +96,34 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('fill', (d, i) -> color(i))
       .attr('d', arc)
 
-
+# ----------------------------------------------------------------------------------------------------------------------
+#  qtips
+# ----------------------------------------------------------------------------------------------------------------------
+    arcs.each (d) ->
+      console.log 'd: ', d
+      text = d.data
+      $(@).qtip
+        content:
+          text: text
+        style:
+          classes:'qtip-light'
+        position:
+          my: 'bottom left'
+          at: 'top right'
+          target: 'mouse'
+          adjust:
+            y: -10
+            x: 40
 
   renderSimplePie: (buckets) ->
     values = []
     labels = []
-
-
 
     bucketsIndex = _.indexBy(buckets, 'key')
     for bucket in buckets
       values.push bucket.doc_count
       labels.push bucket.key
 
-      #define color palette
       col = [
             glados.Settings.VIS_COLORS.TEAL3,
             glados.Settings.VIS_COLORS.TEAL4,
@@ -126,7 +137,6 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
             glados.Settings.VIS_COLORS.BLUE4,
       ]
 
-
     data1 =
       values: values
       labels: labels
@@ -134,7 +144,6 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       textinfo:'value'
       marker:
         colors: col
-
 
     data = [data1]
     width = @$vis_elem.width()
@@ -155,7 +164,6 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
         orientation: 'h'
       font:
         family: "ChEMBL_HelveticaNeueLTPRo"
-
 
     pieDiv = @$vis_elem.get(0)
     Plotly.newPlot pieDiv, data, layout
