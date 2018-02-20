@@ -110,7 +110,7 @@ class MainPageApp
     maxPhaseForDisease = MainPageApp.getMaxPhaseForDiseaseAgg()
 
     pieConfig =
-      x_axis_prop_name: 'max_phase'
+      x_axis_prop_name: 'maxPhaseForDisease'
       split_series_prop_Name: 'indication_class'
       title: 'Max phase for disease'
       max_categories: 5

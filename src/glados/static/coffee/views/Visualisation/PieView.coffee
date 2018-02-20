@@ -44,6 +44,14 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     glados.Utils.fillContentForElement $titleContainer,
       title: @config.title
 
+    if @config.stacked_donut
+      @renderStackedDonut(buckets)
+    else
+      @renderSimplePie(buckets)
+
+  renderStackedDonut: (buckets) ->
+    
+  renderSimplePie: (buckets) ->
     values = []
     labels = []
 
