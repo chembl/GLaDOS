@@ -30,40 +30,45 @@
 </div>
 
 
-{#<div id="MainPageCentralDiv" class="row">#}
-{##}
-{#  <div class="col l9 m12 s12">#}
-{##}
-{#    <div class="col m6 s12" >#}
-{#      {% block browse_targets %}#}
-{#          {% include "glados/MainPageParts/TargetBrowserParts/browse_as_circles.html" %}#}
-{#      {% endblock %}#}
-{#    </div>#}
-{##}
-{#    <div class="col m6 s12 ppy" >#}
-{#      {% with is_dynamic=True %}#}
-{#          {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}#}
-{#      {% endwith %}#}
-{#    </div>#}
-{##}
-{#  </div>#}
-{##}
-{#  <div class="col m6 l3 xl400 hide-on-small-only">#}
-{##}
-{#    {% block database_info %}#}
-{#    {% include "glados/MainPageParts/database_info.html" %}#}
-{#    {% endblock %}#}
-{#  </div>#}
-{##}
-{#   <div class="col m6 l3 xl400 hide-on-small-only">#}
-{#    {% block tweets %}#}
-{#    {% include "glados/MainPageParts/tweets.html" %}#}
-{#    {% endblock %}#}
-{##}
-{##}
-{#  </div>#}
-{##}
-{#</div>#}
+<div id="MainPageCentralDiv" class="row">
+
+  <div class="col l9 m12 s12">
+
+    <div class="col m6 s12" >
+      {% block browse_targets %}
+          {% include "glados/MainPageParts/TargetBrowserParts/browse_as_circles.html" %}
+      {% endblock %}
+    </div>
+
+    <div class="col m6 s12 ppy" >
+      {% with is_dynamic=True %}
+          {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
+      {% endwith %}
+    </div>
+
+     <div class="col m6 s12" >
+      {% with is_dynamic=True %}
+          {% include "glados/MainPageParts/Visualizations/MaxPhaseForDiseaseDonut.html" %}
+      {% endwith %}
+    </div>
+    <div class="col m6 s12" ></div>
+  </div>
+
+  <div class="col m6 l3 xl400 hide-on-small-only">
+    {% block database_info %}
+        {% include "glados/MainPageParts/database_info.html" %}
+    {% endblock %}
+  </div>
+
+   <div class="col m6 l3 xl400 hide-on-small-only">
+    {% block tweets %}
+        {% include "glados/MainPageParts/tweets.html" %}
+    {% endblock %}
+
+
+  </div>
+
+</div>
 
 {#{% block marvin_fullscreen %}#}
 {#{% include "glados/MainPageParts/link_to_marvin_fullscreen.html" %}#}

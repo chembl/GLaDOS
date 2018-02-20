@@ -2,9 +2,8 @@ glados.useNameSpace 'glados.views.ReportCards',
   PieInCardView: CardView.extend
 
     initialize: ->
-
-      CardView.prototype.initialize.call(@, arguments)
       @config = arguments[0].config
+      CardView.prototype.initialize.call(@, arguments)
       @model.on 'change', @render, @
       @resource_type = @config.resource_type
 
@@ -18,7 +17,7 @@ glados.useNameSpace 'glados.views.ReportCards',
 
     render: ->
 
-      @showSection()
+      @showSection() unless @config.is_outside_an_entity_report_card
       @showCardContent()
 
       if @model.get('state') != glados.models.Aggregations.Aggregation.States.INITIAL_STATE or \
@@ -29,5 +28,3 @@ glados.useNameSpace 'glados.views.ReportCards',
       glados.Utils.fillContentForElement $linkToActivities,
         link_text: @config.link_to_all.link_text
         url: @config.link_to_all.url
-
-

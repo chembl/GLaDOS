@@ -3,8 +3,9 @@
 CardView = Backbone.View.extend
 
   initialize: (originalArguments) ->
-
+    console.log '@config: ', @config
     @config ?= {}
+
     unless GlobalVariables['EMBEDED'] or @config.is_outside_an_entity_report_card
       @sectionID = originalArguments[0].section_id
       @sectionLabel = originalArguments[0].section_label

@@ -11,7 +11,6 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   showNoDataFoundMessage: ->
 
-
     $visualisationMessages = $(@el).find('.BCK-VisualisationMessages')
 
     if @config.custom_empty_message?

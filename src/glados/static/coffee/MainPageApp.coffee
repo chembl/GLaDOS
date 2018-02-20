@@ -25,13 +25,12 @@ class MainPageApp
 
     tweetsList.fetch()
 
-#    MainPageApp.initPapersPerYear()
+    MainPageApp.initPapersPerYear()
     MainPageApp.initMaxPhaseForDisease()
 
-#    #initialize browser targets viz
-#    targetHierarchy = TargetBrowserApp.initTargetHierarchyTree()
-#    targetBrowserView = TargetBrowserApp.initBrowserAsCircles(targetHierarchy, $('#BCK-TargetBrowserAsCircles'))
-#    targetHierarchy.fetch()
+    targetHierarchy = TargetBrowserApp.initTargetHierarchyTree()
+    targetBrowserView = TargetBrowserApp.initBrowserAsCircles(targetHierarchy, $('#BCK-TargetBrowserAsCircles'))
+    targetHierarchy.fetch()
 
 # ---------------- Aggregation -------------- #
   @getDocumentsPerYearAgg = (defaultInterval=1) ->
@@ -112,6 +111,7 @@ class MainPageApp
 
     pieConfig =
       x_axis_prop_name: 'max_phase'
+      split_series_prop_Name: 'indication_class'
       title: 'Max phase for disease'
       max_categories: 5
       stacked_donut: true
@@ -120,6 +120,9 @@ class MainPageApp
       pie_config: pieConfig
       is_outside_an_entity_report_card: true
       embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#max_phase_for_disease"
+      link_to_all:
+        link_text: 'See all drug Compounds in Chembl'
+        url: Drug.getDrugsListURL()
 
     new glados.views.ReportCards.PieInCardView
       el: $('#MaxPhaseForDisease')
@@ -128,7 +131,6 @@ class MainPageApp
       report_card_app: @
 
     maxPhaseForDisease.fetch()
-
 
   @initPapersPerYear = ->
 
