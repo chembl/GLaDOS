@@ -87,7 +87,7 @@ class MainPageApp
             split_series_agg:
               type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
               field: 'indication_class'
-              size: 5
+              size: 10
               bucket_links:
                 bucket_filter_template: '_metadata.drug.is_drug:true AND ' +
                                         'max_phase :{{max_phase}} AND indication_class:("{{bucket_key}}"' +

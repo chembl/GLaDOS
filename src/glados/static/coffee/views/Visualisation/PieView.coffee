@@ -12,8 +12,6 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     if @config.stacked_donut
       @splitSeriesAggName = @config.split_series_prop_name
 
-
-
   showNoDataFoundMessage: ->
 
     $visualisationMessages = $(@el).find('.BCK-VisualisationMessages')
@@ -28,7 +26,6 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     $mainPieContainer = $(@el)
     $mainPieContainer.addClass('pie-with-error')
-
 
   render: ->
 
@@ -63,8 +60,8 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     thisView.$vis_elem.empty()
 
     VISUALISATION_WIDTH = $(@el).width()
-    VISUALISATION_HEIGHT = VISUALISATION_WIDTH * 0.6
-    RADIUS = VISUALISATION_WIDTH / 30
+    VISUALISATION_HEIGHT = VISUALISATION_WIDTH
+    RADIUS = VISUALISATION_WIDTH / 15
 
 
     mainContainer = d3.select(@$vis_elem.get(0))
@@ -77,7 +74,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     arcsContainer = mainSVGContainer.append('g')
     subArcsContainer = mainSVGContainer.append('g')
 
-    arcsBackground = arcsContainer.append('rect')
+    arcsContainer.append('rect')
         .attr('height', VISUALISATION_HEIGHT)
         .attr('width', VISUALISATION_WIDTH)
         .attr('fill', 'white')
