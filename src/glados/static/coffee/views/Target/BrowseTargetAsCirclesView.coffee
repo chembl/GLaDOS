@@ -3,9 +3,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
   # this may have to be improved depending If there are browser issues.
   CTRL_KEY_NUMBER: 17
 
-  events:
-    'click .reset-zoom': 'resetZoom'
-
   initialize: ->
 
     $(document).on("keydown", $.proxy(@handleKeyDown, @))
@@ -17,11 +14,8 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     @$vis_elem = $(@el).find('.vis-container')
     @showResponsiveViewPreloader()
 
-    # the render function is debounced so it waits for the size of the
-    # element to be ready
-    updateViewProxy = @setUpResponsiveRender()
-
-    @model.on 'change', updateViewProxy, @
+    @setUpResponsiveRender()
+    @model.on 'change', @render, @
 
   render: ->
 
@@ -56,6 +50,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     # use plain version
     @root = @model.get('plain')
+    console.log '@root: ', @root
     focus = @root
     nodes = pack.nodes(@root)
     @currentViewFrame = undefined
@@ -159,30 +154,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       nodeView.parentView = thisView
 
-
-  #----------------------------------------------------------
-  # Reset zoom btn
-  #----------------------------------------------------------
-
-  toggleResetZoomBtn: (focus) ->
-
-    if focus.name == 'root'
-      @hideResetZoomBtn()
-    else
-      @showResetZoomBtn()
-
-  showResetZoomBtn: ->
-
-    $(@el).find('.reset-zoom').show()
-
-  hideResetZoomBtn: ->
-
-    $(@el).find('.reset-zoom').hide()
-
-  resetZoom: ->
-
-    @focusTo @root
-
   #----------------------------------------------------------
   # Zoom and focus
   #----------------------------------------------------------
@@ -203,7 +174,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     # as parameter
     thisView = @
     focus = node
-    @toggleResetZoomBtn(focus)
     transition = d3.transition()
     .duration(1000)
     .tween("zoom", (d) ->
@@ -213,7 +183,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     transition.selectAll("text")
       .filter( (d) ->
-        console.log 'd: ', d
         if d?
           d == focus or d.parent == focus or @style.display == 'inline')
       .style('fill-opacity', (d) ->
