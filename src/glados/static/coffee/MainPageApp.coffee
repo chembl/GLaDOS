@@ -115,6 +115,7 @@ class MainPageApp
       title: 'Max phase for disease'
       max_categories: 5
       stacked_donut: true
+      hide_title: true
 
     config =
       pie_config: pieConfig

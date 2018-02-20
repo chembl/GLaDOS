@@ -39,25 +39,73 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       @showNoDataFoundMessage()
       return
 
+    maxCategories = @config.max_categories
+    if buckets.length > maxCategories
+      buckets = glados.Utils.Buckets.mergeBuckets(buckets, maxCategories, @model, @config.x_axis_prop_name)
 
-    $titleContainer = $(@el).find('.BCK-pie-title')
-    glados.Utils.fillContentForElement $titleContainer,
-      title: @config.title
+    if not @config.hide_title
+      $titleContainer = $(@el).find('.BCK-pie-title')
+      glados.Utils.fillContentForElement $titleContainer,
+        title: @config.title
 
     if @config.stacked_donut
-      @renderStackedDonut(buckets)
+      @renderStackedDonut(buckets, maxCategories)
     else
       @renderSimplePie(buckets)
 
   renderStackedDonut: (buckets) ->
+    @$vis_elem.empty()
+
+    VISUALISATION_WIDTH = $(@el).width()
+    VISUALISATION_HEIGHT = VISUALISATION_WIDTH * 0.6
+
+
+    mainContainer = d3.select(@$vis_elem.get(0))
+    mainSVGContainer = mainContainer
+      .append('svg')
+      .attr('class', 'mainSVGContainer')
+      .attr('width', VISUALISATION_WIDTH)
+      .attr('height', VISUALISATION_HEIGHT)
+
+    arcsContainer = mainSVGContainer.append('g')
+      .append('rect')
+        .attr('height', VISUALISATION_HEIGHT)
+        .attr('width', VISUALISATION_WIDTH)
+        .attr('fill', 'white')
+        .classed('arcs-background', true)
+
+    fakedataset = [10, 40, 3, 20, 50, 70]
     
+
+    color = d3.scale.category10()
+
+    pie = d3.layout.pie(fakedataset);
+    innerRadius = VISUALISATION_WIDTH / 6
+    outerRadius = VISUALISATION_WIDTH / 4
+    arc = d3.svg.arc()
+      .innerRadius(innerRadius)
+      .outerRadius(outerRadius)
+
+
+
+    arcs = mainSVGContainer.selectAll('g.arc')
+      .data(pie(fakedataset))
+      .enter()
+      .append('g')
+      .attr('class', 'arc')
+      .attr('transform', 'translate(' + VISUALISATION_WIDTH/2 + ', ' + VISUALISATION_HEIGHT/2 + ')')
+
+    arcs.append('path')
+      .attr('fill', (d, i) -> color(i))
+      .attr('d', arc)
+
+
+
   renderSimplePie: (buckets) ->
     values = []
     labels = []
 
-    maxCategories = @config.max_categories
-    if buckets.length > maxCategories
-      buckets = glados.Utils.Buckets.mergeBuckets(buckets, maxCategories, @model, @config.x_axis_prop_name)
+
 
     bucketsIndex = _.indexBy(buckets, 'key')
     for bucket in buckets
