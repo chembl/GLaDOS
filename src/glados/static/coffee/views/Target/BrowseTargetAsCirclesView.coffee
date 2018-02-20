@@ -130,11 +130,11 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     @zoomTo([@root.x, @root.y, @root.r * 2 + @margin])
     @addHoverabilityTo(@root.children)
 
-  addHoverabilityTo: (nodes) ->
+  addHoverabilityTo: (nodes=[]) ->
 
-    console.log 'add hoverability: ', nodes
-    d3Nodes = d3.select($(@el)[0]).selectAll(("#circleFor-#{n.id}" for n in nodes).join(','))
-    d3Nodes.classed('hoverable', true)
+    if nodes.length > 0
+      d3Nodes = d3.select($(@el)[0]).selectAll(("#circleFor-#{n.id}" for n in nodes).join(','))
+      d3Nodes.classed('hoverable', true)
 
   removeHoverabilityToAll: ->
 
