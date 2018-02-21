@@ -79,12 +79,14 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
         return
 
       if focus != d
-        thisView.focusTo(d)
+        thisView.focusTo(thisView.currentHover)
 
     # -----------------------------------------
     # Node hover handler function
     # -----------------------------------------
     handleNodeMouseOver = (d) ->
+
+      console.log 'real hover is over: ', d.name
 
       console.log 'thisView', thisView
       console.log '@currentHoverableElems: ', thisView.currentHoverableElems
@@ -95,9 +97,15 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
       console.log 'currentHoverableNames: ', currentHoverableNames
 
       if d.id in currentHoverableIDs
-        thisView.currentHover = d.name
+
+        thisView.currentHover = d
         isPressingCtrl = d3.event.ctrlKey
         thisView.fillInstructionsTemplate d.name, isPressingCtrl
+
+        allNodes = d3.select($(thisView.el)[0]).selectAll('.node')
+        allNodes.classed('force-hover', false)
+        nodeElem = d3.select($(thisView.el)[0]).select("#circleFor-#{d.id}" for n in nodes)
+        nodeElem.classed('force-hover', true)
 
     circles = svg.selectAll('circle')
       .data(nodes).enter().append('circle')
@@ -144,6 +152,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     d3.select($(@el)[0]).selectAll('.node')
       .classed('hoverable', false)
+      .classed('force-hover', false)
     @currentHoverableElems = []
 
   createCircleViews: ->
@@ -248,13 +257,13 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     if event.which == @CTRL_KEY_NUMBER
 
-      @fillInstructionsTemplate @currentHover, true
+      @fillInstructionsTemplate @currentHover.name, true
 
   handleKeyUp: (event) ->
 
     if event.which == @CTRL_KEY_NUMBER
 
-      @fillInstructionsTemplate @currentHover, false
+      @fillInstructionsTemplate @currentHover.name, false
 
 
 
