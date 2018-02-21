@@ -116,6 +116,8 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     arcs.append('path')
       .attr('fill', (d, i) -> color(i))
+#      .attr('stroke-width', 1)
+#      .attr('stroke', 'white')
       .attr('d', innerArc)
 
     arcs.append('text')
@@ -133,6 +135,12 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     for bucket, i in buckets
       subBuckets = bucket[thisView.splitSeriesAggName].buckets
+      console.log 'subBuckets: ', subBuckets
+      #get other buckets
+
+      subBucketsCompleteAggName = "#{thisView.xAxisAggName}.aggs.#{thisView.splitSeriesAggName}"
+      subBuckets = glados.Utils.Buckets.mergeBuckets(subBuckets,  5, thisView.model, subBucketsCompleteAggName)
+      console.log 'subBuckets with others: ', subBuckets
       subBucketSizes = (b.doc_count for b in subBuckets)
 
       bigSlice =  pie(bucketSizes)[i]
@@ -143,7 +151,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       outerArc = d3.svg.arc()
         .innerRadius(RADIUS*4)
-        .outerRadius(RADIUS*6)
+        .outerRadius(RADIUS*5.5)
 
       subArcs = subArcsContainer.selectAll('g.arc')
         .data(AggregationPie(subBucketSizes))
@@ -154,6 +162,8 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       subArcs.append('path')
         .attr('fill', (d, i) -> color2(i))
+#        .attr('stroke-width', 0.1)
+#        .attr('stroke', 'white')
         .attr('d', outerArc)
 
 # ----------------------------------------------------------------------------------------------------------------------
