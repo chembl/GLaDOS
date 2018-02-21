@@ -86,15 +86,18 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     # -----------------------------------------
     handleNodeMouseOver = (d) ->
 
-      thisView.currentHover = d.name
-      isPressingCtrl = d3.event.ctrlKey
-      thisView.fillInstructionsTemplate d.name, isPressingCtrl
+      console.log 'thisView', thisView
+      console.log '@currentHoverableElems: ', thisView.currentHoverableElems
+      currentHoverableIDs = (n.id for n in thisView.currentHoverableElems)
+      console.log 'currentHoverableNodes: ', currentHoverableIDs
 
-    handleNodeMouseOut = (d) ->
+      currentHoverableNames = (n.name for n in thisView.currentHoverableElems)
+      console.log 'currentHoverableNames: ', currentHoverableNames
 
-      thisView.currentHover = undefined
-      thisView.fillInstructionsTemplate undefined
-
+      if d.id in currentHoverableIDs
+        thisView.currentHover = d.name
+        isPressingCtrl = d3.event.ctrlKey
+        thisView.fillInstructionsTemplate d.name, isPressingCtrl
 
     circles = svg.selectAll('circle')
       .data(nodes).enter().append('circle')
@@ -106,7 +109,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
         if d.children then color(d.depth) else glados.Settings.VIS_COLORS.WHITE)
       .on("click", handleClickOnNode)
       .on('mouseover', handleNodeMouseOver)
-      .on('mouseout', handleNodeMouseOut)
 
     text = svg.selectAll('text')
       .data(nodes)
@@ -127,6 +129,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
       .on("click", () -> thisView.focusTo(thisView.root) )
 
     @currentLevel = 0
+    @currentHoverableElems = []
     @zoomTo([@root.x, @root.y, @root.r * 2 + @margin])
     @addHoverabilityTo(@root.children)
 
@@ -135,11 +138,13 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     if nodes.length > 0
       d3Nodes = d3.select($(@el)[0]).selectAll(("#circleFor-#{n.id}" for n in nodes).join(','))
       d3Nodes.classed('hoverable', true)
+    @currentHoverableElems = nodes
 
   removeHoverabilityToAll: ->
 
     d3.select($(@el)[0]).selectAll('.node')
       .classed('hoverable', false)
+    @currentHoverableElems = []
 
   createCircleViews: ->
 
@@ -182,7 +187,15 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     thisView = @
     focus = node
     @removeHoverabilityToAll()
-    @addHoverabilityTo(node.children)
+    ancestry = []
+    currentParent = node.parent
+    while currentParent?
+      ancestry.push currentParent
+      currentParent = currentParent.parent
+
+    newHoverableNodes = _.union(ancestry, node.children)
+
+    @addHoverabilityTo(newHoverableNodes)
     transition = d3.transition()
       .duration(1000)
       .tween("zoom", (d) ->

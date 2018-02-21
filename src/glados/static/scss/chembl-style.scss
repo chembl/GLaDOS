@@ -2894,7 +2894,7 @@ span.badge-primary-color-no-float {
       &.hoverable{
         stroke-width: 1px;
         stroke: black;
-        &:hover{
+        &:hover,&.force-hover{
           stroke: color('green', 'base');
           stroke-width: 2px;
         }
