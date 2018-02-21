@@ -10,6 +10,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       else
         defaultColumns = []
 
+
       contextualProperties = @get('contextual_properties')
       if contextualProperties?
         for col in contextualProperties
@@ -25,6 +26,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         additionalColumns = []
 
       allColumns = _.union(defaultColumns, contextualProperties, additionalColumns)
+      if @get 'include_highlights_column'
+        srhColumn = glados.models.paginatedCollections.ColumnsFactory.getSearchResultsHighlightColumn()
+        if allColumns?
+          allColumns.splice 1, 0, srhColumn
+        else
+          allColumns = [srhColumn]
+
       allColumns ?= []
       @set('all_columns', allColumns)
       @setColumnsPositions()

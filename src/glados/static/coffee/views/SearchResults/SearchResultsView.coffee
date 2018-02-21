@@ -28,6 +28,8 @@ glados.useNameSpace 'glados.views.SearchResults',
           resultsBrowserI = new glados.views.Browsers.BrowserMenuView
             collection: resultsListsDict[resourceName]
             el: $container.find('.BCK-BrowserContainer')
+            attributes:
+              include_search_results_highlight: true
 
           resultsBrowserI.render()
           @browsersDict[resourceName] = resultsBrowserI

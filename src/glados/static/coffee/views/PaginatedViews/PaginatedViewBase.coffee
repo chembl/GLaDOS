@@ -10,6 +10,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     initialize: ->
 
       # @collection - must be provided in the constructor call
+      @include_search_results_highlight = @attributes?.include_search_results_highlight || false
       @type = arguments[0].type
       @customRenderEvents = arguments[0].custom_render_evts
       @renderAtInit = arguments[0].render_at_init
@@ -77,6 +78,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         default_columns: defaultColumns
         additional_columns: additionalColumns
         contextual_properties: contextualProperties
+        include_highlights_column: @include_search_results_highlight
 
       console.log 'columns handler: ', @columnsHandler
       @columnsHandler.on 'change:exit change:enter', @handleShowHideColumns, @
