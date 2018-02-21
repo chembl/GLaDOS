@@ -63,9 +63,11 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     nodeWithMaxNumChildren = _.max(nodes, getNodeNumChildren)
     maxNumChildren = if not nodeWithMaxNumChildren.children? then 0 else nodeWithMaxNumChildren.children.length
 
+    console.log 'minNumChildren: ', minNumChildren
+    console.log 'maxNumChildren: ', maxNumChildren
     textSize = d3.scale.linear()
       .domain([minNumChildren, maxNumChildren])
-      .range([60, 150])
+      .range([60, 160])
 
     # -----------------------------------------
     # Node click handler function
@@ -86,15 +88,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     # -----------------------------------------
     handleNodeMouseOver = (d) ->
 
-      console.log 'real hover is over: ', d.name
-
-      console.log 'thisView', thisView
-      console.log '@currentHoverableElems: ', thisView.currentHoverableElems
       currentHoverableIDs = (n.id for n in thisView.currentHoverableElems)
-      console.log 'currentHoverableNodes: ', currentHoverableIDs
-
-      currentHoverableNames = (n.name for n in thisView.currentHoverableElems)
-      console.log 'currentHoverableNames: ', currentHoverableNames
 
       if d.id in currentHoverableIDs
 
@@ -128,7 +122,11 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
       .style("display", (d) ->
         if d.parent == thisView.root then 'inline' else 'none')
       .text((d) -> return d.name + " (" + d.size + ")" )
-      .attr('font-size', (d) -> if d.children? then "#{textSize(d.children.length)}%" else "#{textSize(0)}%")
+      .attr('font-size', (d) ->
+        if d.children?
+          return "#{textSize(d.children.length)}%"
+        else return "#{textSize(0)}%"
+      )
 
     #Select circles to create the views
 #    @createCircleViews()

@@ -27,6 +27,7 @@ class MainPageApp
 
     MainPageApp.initPapersPerYear()
 
+    targetsHierarchyAgg = MainPageApp.getTargetsTreeAgg()
     #initialize browser targets viz
     targetHierarchy = TargetBrowserApp.initTargetHierarchyTree()
     targetBrowserView = TargetBrowserApp.initBrowserAsCircles(targetHierarchy, $('#BCK-TargetBrowserAsCircles'))
@@ -70,6 +71,23 @@ class MainPageApp
       aggs_config: aggsConfig
 
     return allDocumentsByYear
+
+
+  @getTargetsTreeAgg = ->
+
+#    queryConfig =
+#      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
+#      query_string_template: '*'
+#      template_data: {}
+#
+#    aggsConfig =
+#      aggs:
+#        documentsPerYear:
+#          type: glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
+#          field: 'year'
+#          default_interval_size: defaultInterval
+#          min_interval_size: 1
+#          max_interval_size: 10
 
 
   @initPapersPerYear = ->
