@@ -161,27 +161,33 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 #        .attr('stroke', 'white')
         .attr('d', outerArc)
 
-      # TODO: Check why qtip on outter slices is not showing
-#      for subArc in subArcs[0]
-#        console.log 'subArc: ', subArc
-#
-#        d3subArc = d3.select(subArc)
-#          .on('click', -> console.log 'wooo')
-#
-#        $(subArc).qtip
-#        content:
-#          text: 'wooo'
-#        style:
-#          classes:'qtip-light'
-#        position:
-#          my: 'bottom left'
-#          at: 'top right'
-#          target: 'mouse'
-#          adjust:
-#            y: -5
-#            x: 5
-#      console.log '------'
+      # ----------------------------------------------------------------------------------------------------------------------
+      #  qtips outter slices
+      # ----------------------------------------------------------------------------------------------------------------------
 
+      for subArc, i in subArcs[0]
+        parentPropName = thisView.xAxisPropName.label
+        propName = thisView.splitSeriesPropName.label
+
+        subBucketName = subBuckets[i].key
+        parentBucketName = subBuckets[i].parent_key
+        count = subBuckets[i].doc_count
+
+        text = '<b>' + propName + '</b>' + ":  " + subBucketName + '<br>'  \
+              + '<b>' + parentPropName + '</b>' + ":  " + parentBucketName + '<br>' \
+              + '<b>' + "Count:  " + '</b>' + count + '<br>'
+        $(subArc).qtip
+          content:
+            text: text
+          style:
+            classes:'qtip-light'
+          position:
+            my: 'bottom left'
+            at: 'top right'
+            target: 'mouse'
+            adjust:
+              y: -5
+              x: 5
 
 # ----------------------------------------------------------------------------------------------------------------------
 #  qtips inner slices
