@@ -262,13 +262,13 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     if event.which == @CTRL_KEY_NUMBER
 
-      @fillInstructionsTemplate @currentHover.name, true
+      @fillInstructionsTemplate(@currentHover.name, true) unless not @currentHover?
 
   handleKeyUp: (event) ->
 
     if event.which == @CTRL_KEY_NUMBER
 
-      @fillInstructionsTemplate @currentHover.name, false
+      @fillInstructionsTemplate(@currentHover.name, false) unless not @currentHover?
 
 
 
