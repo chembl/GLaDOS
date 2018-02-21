@@ -119,6 +119,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('d', innerArc)
 
     arcs.append('text')
+      .attr('class', 'arc-text')
       .attr('text-anchor', 'middle')
       .attr('alignment-baseline', 'middle')
       .text((d, i) -> i)
@@ -148,7 +149,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
         .data(AggregationPie(subBucketSizes))
         .enter()
         .append('g')
-        .attr('class', 'subArc')
+        .attr('class', 'sub-arc')
         .attr('transform', 'translate(' + VISUALISATION_WIDTH/2 + ', ' + VISUALISATION_HEIGHT/2 + ')')
 
       subArcs.append('path')
