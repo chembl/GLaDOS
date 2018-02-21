@@ -33,7 +33,11 @@
     {{/if}}
     {% endverbatim %}{% endif %}{% verbatim %}
 
-    {{#if this.has_highlight}}
+    {{#if this.search_hit_highlight_column}}
+        {{#each this.value}}
+            <b>{{{this.label_mini}}}:</b> {{{this.value_mini}}}
+        {{/each}}
+    {{else if this.has_highlight}}
         {{#if this.has_link}}
             <a href="{{this.link_url}}" target="_blank">{{{this.highlighted_value}}}</a>
         {{else}}
@@ -53,6 +57,7 @@
         {{/unless}}
     {{/if}}
 
+    {% endverbatim %}{% if for_card %}{% verbatim %}
     {{#if @first}}
         {{#if ../highlights}}
             {{#each ../highlights}}
@@ -60,6 +65,7 @@
             {{/each}}
         {{/if}}
     {{/if}}
+    {% endverbatim %}{% endif %}{% verbatim %}
 
     {% endverbatim %}{% if not for_card %}{% verbatim %}
     {{#if this.is_function_link}}
