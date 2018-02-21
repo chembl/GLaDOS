@@ -108,6 +108,8 @@ class MainPageApp
 
   @initMaxPhaseForDisease = ->
     maxPhaseForDisease = MainPageApp.getMaxPhaseForDiseaseAgg()
+    maxPhaseProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound',
+      'MAX_PHASE')
 
     pieConfig =
       x_axis_prop_name: 'maxPhaseForDisease'
@@ -116,6 +118,9 @@ class MainPageApp
       max_categories: 5
       stacked_donut: true
       hide_title: true
+      properties:
+        max_phase: maxPhaseProp
+      initial_property_x: 'max_phase'
 
     config =
       pie_config: pieConfig

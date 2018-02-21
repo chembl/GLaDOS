@@ -46,6 +46,17 @@ glados.useNameSpace 'glados.models.visualisation',
             1: 'Yes'
             false: 'No'
             true: 'Yes'
+        MAX_PHASE:
+          propName: 'max_phase'
+          label: 'Max phase'
+          domain: [ 0, 1, 2, 3, 4]
+          coloursRange: [
+            glados.Settings.VIS_COLORS.TEAL5,
+            glados.Settings.VIS_COLORS.TEAL4,
+            glados.Settings.VIS_COLORS.TEAL3,
+            glados.Settings.VIS_COLORS.TEAL2,
+          ]
+
     DocumentAggregation:
       Properties:
         YEAR:

@@ -63,7 +63,6 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     VISUALISATION_HEIGHT = VISUALISATION_WIDTH
     RADIUS = VISUALISATION_WIDTH / 15
 
-
     mainContainer = d3.select(@$vis_elem.get(0))
     mainSVGContainer = mainContainer
       .append('svg')
