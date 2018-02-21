@@ -89,9 +89,9 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     glados.models.visualisation.PropertiesFactory.generateColourScale(@xAxisPropName)
     color = @xAxisPropName.colourScale
 
-    #subbuckets colour scale
     subBucketsOrder = glados.Utils.Buckets.getSubBucketsOrder(buckets, @splitSeriesAggName)
 
+    #subbuckets colour scale
     zScaleDomains = []
     for key, value of subBucketsOrder
       zScaleDomains.push(key)
@@ -132,17 +132,39 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
         y = -Math.sin(angle) * RADIUS*3
         'translate(' + x + ', ' + y + ')')
 
+
     for bucket, i in buckets
       subBuckets = bucket[thisView.splitSeriesAggName].buckets
+
+      # same subBucket order for all buckets
+#      for bucket in subBuckets
+#        if bucket.key != glados.Visualisation.Activity.OTHERS_LABEL
+#          bucket.pos = subBucketsOrder[bucket.key].pos
+#      subBuckets = _.sortBy(subBuckets, (item) -> item.pos)
+
       #get other buckets
+#      totalCount = 0
+#      for bucket in subBuckets
+#        totalCount += bucket.doc_count
+#
+#      maxCategories = 0
+#      for bucket in subBuckets
+#        if bucket.doc_count > (totalCount * 0.05)
+#          maxCategories += 1
+#
+#      if maxCategories <= 1
+#        maxCategories++
+
 #      subBucketsCompleteAggName = "#{thisView.xAxisAggName}.aggs.#{thisView.splitSeriesAggName}"
-#      subBuckets = glados.Utils.Buckets.mergeBuckets(subBuckets,  5, thisView.model, subBucketsCompleteAggName)
+#      subBuckets = glados.Utils.Buckets.mergeBuckets(subBuckets,  maxCategories, thisView.model, subBucketsCompleteAggName)
       subBucketSizes = (b.doc_count for b in subBuckets)
 
       bigSlice =  pie(bucketSizes)[i]
+
       AggregationPie = d3.layout.pie()
         .startAngle(bigSlice.startAngle)
         .endAngle(bigSlice.endAngle)
+#        .sort(null)
 
       outerArc = d3.svg.arc()
         .innerRadius(RADIUS*4)
@@ -213,6 +235,16 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
           adjust:
             y: -5
             x: 5
+
+# ----------------------------------------------------------------------------------------------------------------------
+#  legend
+# ----------------------------------------------------------------------------------------------------------------------
+    legendConfig =
+              columns_layout: true
+              hide_title: true
+
+    legendElem = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
+    glados.Utils.renderLegendForProperty(@splitSeriesPropName, undefined, legendElem, enableSelection=false, legendConfig)
 
   renderSimplePie: (buckets) ->
     values = []
