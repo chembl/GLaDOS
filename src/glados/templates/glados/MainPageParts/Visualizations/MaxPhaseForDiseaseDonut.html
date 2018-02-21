@@ -5,5 +5,7 @@
 {% block general_content %}
     <span class="load-messages-container" data-hb-template="Handlebars-Common-VisualisationProgress"></span>
     <span class="BCK-all-sources-link" data-hb-template="Handlebars-Common-PieAllSourcesLink"></span>
+    {% with side_legend=True %}
         {% include "glados/base/Visualisation/DefaultPieChartContent.html" %}
+    {% endwith %}
 {% endblock %}

@@ -5,7 +5,6 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     @config = arguments[0].config
     @xAxisAggName = @config.x_axis_prop_name
-    @xAxisPropName = @config.properties[@config.initial_property_x]
     @model.on 'change', @render, @
     @$vis_elem = $(@el).find('.BCK-pie-container')
     updateViewProxy = @setUpResponsiveRender()
@@ -13,6 +12,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     if @config.stacked_donut
       @splitSeriesAggName = @config.split_series_prop_name
       @splitSeriesPropName = @config.properties[@config.initial_property_z]
+      @xAxisPropName = @config.properties[@config.initial_property_x]
 
 
   showNoDataFoundMessage: ->
@@ -62,9 +62,12 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     thisView = @
     thisView.$vis_elem.empty()
 
-    VISUALISATION_WIDTH = $(@el).width()
+    if @config.side_legend
+      VISUALISATION_WIDTH = $(@el).width() - $(@el).width() * 0.20
+    else
+      VISUALISATION_WIDTH = $(@el).width()
     VISUALISATION_HEIGHT = VISUALISATION_WIDTH
-    RADIUS = VISUALISATION_WIDTH / 15
+    RADIUS = VISUALISATION_WIDTH / 13
 
     mainContainer = d3.select(@$vis_elem.get(0))
     mainSVGContainer = mainContainer
@@ -242,9 +245,11 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     legendConfig =
               columns_layout: true
               hide_title: true
+              side_legend: @config.side_legend
 
     legendElem = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
     glados.Utils.renderLegendForProperty(@splitSeriesPropName, undefined, legendElem, enableSelection=false, legendConfig)
+    $(thisView.el).find('.BCK-CompResultsGraphLegendContainer').css('max-height', VISUALISATION_HEIGHT);
 
   renderSimplePie: (buckets) ->
     values = []

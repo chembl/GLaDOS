@@ -3865,6 +3865,17 @@ $facets-width-large: 21%;
   }
 }
 
+.main-pie-container{
+  display:flex !important;
+  .legend{
+    width: 100%;
+    margin-left: -5px;
+    padding-top: 10px;
+    overflow-y: scroll;
+    overflow-x: hidden !important;
+  }
+}
+
 /**
 * Report card section
 * ----------------------------------------------------------------------------------------------------------------------

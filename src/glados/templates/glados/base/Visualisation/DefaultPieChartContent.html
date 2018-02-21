@@ -5,6 +5,13 @@
     </div>
 
     <div class="BCK-pie-title" data-hb-template="Handlebars-Common-Pie-External-Title"></div>
-    <div class="BCK-pie-container row pie-content"></div>
-    <div class="BCK-CompResultsGraphLegendContainer legend histogram-legend"></div>
+    {% if side_legend %}
+        <div class="main-pie-container">
+            <div class="BCK-pie-container row pie-content"></div>
+            <div class="BCK-CompResultsGraphLegendContainer legend pie-legend"></div>
+        </div>
+    {% else %}
+        <div class="BCK-pie-container row pie-content"></div>
+    {% endif %}
+
 </div>

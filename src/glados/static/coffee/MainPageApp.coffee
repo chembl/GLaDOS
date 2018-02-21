@@ -112,6 +112,7 @@ class MainPageApp
     indicationClassProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'INDICATION_CLASS')
 
     pieConfig =
+      side_legend: true
       x_axis_prop_name: 'maxPhaseForDisease'
       split_series_prop_name: 'split_series_agg'
       title: 'Max phase for disease'
