@@ -12,8 +12,6 @@ glados.useNameSpace 'glados.views.ReportCards',
       @initEmbedModal(@config.embed_section_name, @config.embed_identifier)
       @activateModals()
 
-      console.log 'INIT VIS IN CARD!!!'
-      console.log 'model: ', @model
       ViewClass = @config.view_class
 
       new ViewClass
@@ -22,7 +20,4 @@ glados.useNameSpace 'glados.views.ReportCards',
 
     render: ->
 
-      console.log 'RENDER VIS IN CARD!!!'
-      console.log 'element: ', $(@el)
       @showCardContent()
-      console.log 'card content shown!!'
