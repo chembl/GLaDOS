@@ -2899,6 +2899,12 @@ span.badge-primary-color-no-float {
           stroke-width: 2px;
         }
       }
+
+      &.selected {
+        stroke: color('green', 'base');
+        stroke-width: 1;
+        stroke-dasharray: 10;
+      }
     }
 
 
@@ -2917,10 +2923,7 @@ span.badge-primary-color-no-float {
       pointer-events: none;
     }
 
-    .selected {
-      stroke: color('green', 'base');
-      stroke-width: 2;
-    }
+
 
     .incomplete {
       stroke: color('green', 'base');

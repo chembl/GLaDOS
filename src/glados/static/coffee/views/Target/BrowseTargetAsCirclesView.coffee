@@ -204,6 +204,11 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     newHoverableNodes = _.union(ancestry, node.children)
 
+    d3.select($(@el)[0]).selectAll(".node")
+      .classed('selected', false)
+
+    selectedNode = d3.select($(@el)[0]).select("#circleFor-#{node.id}")
+    selectedNode.classed('selected', true)
     @addHoverabilityTo(newHoverableNodes)
     transition = d3.transition()
       .duration(1000)
