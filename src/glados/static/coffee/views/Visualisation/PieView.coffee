@@ -82,6 +82,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('fill', 'white')
         .classed('arcs-background', true)
 
+    buckets = _.sortBy buckets, (item) -> item.key
     bucketSizes = (b.doc_count for b in buckets)
 
     #buckets colour scale
@@ -100,6 +101,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     color2 = @splitSeriesPropName.colourScale
 
     pie = d3.layout.pie()
+      .sort(null)
 
     innerArc = d3.svg.arc()
       .innerRadius(RADIUS*2)
@@ -115,6 +117,18 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     arcs.append('path')
       .attr('fill', (d, i) -> color(i))
       .attr('d', innerArc)
+
+    arcs.append('text')
+      .attr('text-anchor', 'middle')
+      .attr('alignment-baseline', 'middle')
+      .text((d, i) -> i)
+      .attr('fill', 'white')
+      .attr('transform', (d) ->
+        angle = Math.PI/2 + (d.endAngle + d.startAngle)/2
+        x = -Math.cos(angle) * RADIUS*3
+        y = -Math.sin(angle) * RADIUS*3
+        console.log d
+        return 'translate(' + x + ', ' + y + ')')
 
     for bucket, i in buckets
       subBuckets = bucket[thisView.splitSeriesAggName].buckets
@@ -145,7 +159,14 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 #  qtips
 # ----------------------------------------------------------------------------------------------------------------------
     arcs.each (d) ->
-      text = d.data
+      propName = thisView.xAxisPropName.label
+      for bucket in buckets
+        if bucket.doc_count == d.value
+           bucketCount = bucket.doc_count
+           bucketName = bucket.key
+
+      text = '<b>' + propName + '</b>' + ":  " + bucketName + \
+        '<br>' + '<b>' + "Count:  " + '</b>' + bucketCount
       $(@).qtip
         content:
           text: text
@@ -156,8 +177,8 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
           at: 'top right'
           target: 'mouse'
           adjust:
-            y: -10
-            x: 40
+            y: -5
+            x: 5
 
   renderSimplePie: (buckets) ->
     values = []
