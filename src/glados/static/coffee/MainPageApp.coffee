@@ -129,7 +129,7 @@ class MainPageApp
       is_outside_an_entity_report_card: true
       embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#max_phase_for_disease"
       link_to_all:
-        link_text: 'See all drug Compounds in Chembl'
+        link_text: 'See all drug Compounds in ChEMBL'
         url: Drug.getDrugsListURL()
 
     new glados.views.ReportCards.PieInCardView

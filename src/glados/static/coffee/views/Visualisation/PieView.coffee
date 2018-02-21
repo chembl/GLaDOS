@@ -130,21 +130,16 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
         angle = Math.PI/2 + (d.endAngle + d.startAngle)/2
         x = -Math.cos(angle) * RADIUS*3
         y = -Math.sin(angle) * RADIUS*3
-        console.log d
-        return 'translate(' + x + ', ' + y + ')')
+        'translate(' + x + ', ' + y + ')')
 
     for bucket, i in buckets
       subBuckets = bucket[thisView.splitSeriesAggName].buckets
-      console.log 'subBuckets: ', subBuckets
       #get other buckets
-
-      subBucketsCompleteAggName = "#{thisView.xAxisAggName}.aggs.#{thisView.splitSeriesAggName}"
-      subBuckets = glados.Utils.Buckets.mergeBuckets(subBuckets,  5, thisView.model, subBucketsCompleteAggName)
-      console.log 'subBuckets with others: ', subBuckets
+#      subBucketsCompleteAggName = "#{thisView.xAxisAggName}.aggs.#{thisView.splitSeriesAggName}"
+#      subBuckets = glados.Utils.Buckets.mergeBuckets(subBuckets,  5, thisView.model, subBucketsCompleteAggName)
       subBucketSizes = (b.doc_count for b in subBuckets)
 
       bigSlice =  pie(bucketSizes)[i]
-
       AggregationPie = d3.layout.pie()
         .startAngle(bigSlice.startAngle)
         .endAngle(bigSlice.endAngle)
@@ -166,8 +161,30 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 #        .attr('stroke', 'white')
         .attr('d', outerArc)
 
+      # TODO: Check why qtip on outter slices is not showing
+#      for subArc in subArcs[0]
+#        console.log 'subArc: ', subArc
+#
+#        d3subArc = d3.select(subArc)
+#          .on('click', -> console.log 'wooo')
+#
+#        $(subArc).qtip
+#        content:
+#          text: 'wooo'
+#        style:
+#          classes:'qtip-light'
+#        position:
+#          my: 'bottom left'
+#          at: 'top right'
+#          target: 'mouse'
+#          adjust:
+#            y: -5
+#            x: 5
+#      console.log '------'
+
+
 # ----------------------------------------------------------------------------------------------------------------------
-#  qtips
+#  qtips inner slices
 # ----------------------------------------------------------------------------------------------------------------------
     arcs.each (d) ->
       propName = thisView.xAxisPropName.label
