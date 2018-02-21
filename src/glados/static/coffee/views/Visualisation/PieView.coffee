@@ -67,7 +67,11 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     else
       VISUALISATION_WIDTH = $(@el).width()
     VISUALISATION_HEIGHT = VISUALISATION_WIDTH
-    RADIUS = VISUALISATION_WIDTH / 13
+    TITLE_Y = 40
+    RADIUS = VISUALISATION_WIDTH / 15
+    X_CENTER = VISUALISATION_WIDTH/2
+    Y_CENTER = VISUALISATION_HEIGHT/2 + TITLE_Y/2
+
 
     mainContainer = d3.select(@$vis_elem.get(0))
     mainSVGContainer = mainContainer
@@ -78,7 +82,6 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     arcsContainer = mainSVGContainer.append('g')
     subArcsContainer = mainSVGContainer.append('g')
-    marginArcContainer = mainSVGContainer.append('g')
 
     arcsContainer.append('rect')
         .attr('height', VISUALISATION_HEIGHT)
@@ -120,7 +123,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       .enter()
       .append('g')
       .attr('class', 'arc')
-      .attr('transform', 'translate(' + VISUALISATION_WIDTH/2 + ', ' + VISUALISATION_HEIGHT/2 + ')')
+      .attr('transform', 'translate(' + X_CENTER + ', ' + Y_CENTER + ')')
 
     arcs.append('path')
       .attr('fill', (d, i) -> color(i))
@@ -144,27 +147,22 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     for bucket, i in buckets
       subBuckets = bucket[thisView.splitSeriesAggName].buckets
 
-      # same subBucket order for all buckets
-#      for bucket in subBuckets
-#        if bucket.key != glados.Visualisation.Activity.OTHERS_LABEL
-#          bucket.pos = subBucketsOrder[bucket.key].pos
-#      subBuckets = _.sortBy(subBuckets, (item) -> item.pos)
+      totalCount = 0
+      for bucket in subBuckets
+        totalCount += bucket.doc_count
 
-      #get other buckets
-#      totalCount = 0
-#      for bucket in subBuckets
-#        totalCount += bucket.doc_count
-#
-#      maxCategories = 0
-#      for bucket in subBuckets
-#        if bucket.doc_count > (totalCount * 0.05)
-#          maxCategories += 1
-#
-#      if maxCategories <= 1
-#        maxCategories++
+#      TODO: should this be dependant on slice size??
+      maxCategories = 0
+      for bucket in subBuckets
+        if bucket.doc_count > (totalCount * 0.06)
+          maxCategories += 1
 
-#      subBucketsCompleteAggName = "#{thisView.xAxisAggName}.aggs.#{thisView.splitSeriesAggName}"
-#      subBuckets = glados.Utils.Buckets.mergeBuckets(subBuckets,  maxCategories, thisView.model, subBucketsCompleteAggName)
+      if maxCategories <= 1
+        maxCategories++
+
+      subBucketsCompleteAggName = "#{thisView.xAxisAggName}.aggs.#{thisView.splitSeriesAggName}"
+      subBuckets = glados.Utils.Buckets.mergeBuckets(subBuckets,  maxCategories, thisView.model, subBucketsCompleteAggName)
+
       subBucketSizes = (b.doc_count for b in subBuckets)
 
       bigSlice =  pie(bucketSizes)[i]
@@ -172,24 +170,29 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       AggregationPie = d3.layout.pie()
         .startAngle(bigSlice.startAngle)
         .endAngle(bigSlice.endAngle)
-#        .sort(null)
+        .sort(null)
 
       subArcs = subArcsContainer.selectAll('g.arc')
         .data(AggregationPie(subBucketSizes))
         .enter()
         .append('g')
         .attr('class', 'sub-arc')
-        .attr('transform', 'translate(' + VISUALISATION_WIDTH/2 + ', ' + VISUALISATION_HEIGHT/2 + ')')
+        .attr('transform', 'translate(' + X_CENTER + ', ' + Y_CENTER + ')')
 
       subArcs.append('path')
-        .attr('fill', (d, i) -> color2(i))
+#        .attr('fill', (d, i) -> color2(i))
         .attr('stroke-width', 0.5)
         .attr('stroke', 'white')
         .attr('d', outerArc)
 
-      # ----------------------------------------------------------------------------------------------------------------------
-      #  qtips outter slices
-      # ----------------------------------------------------------------------------------------------------------------------
+      for subBucket, i in subBuckets
+        if subBucket.key == 'Other'
+          d3.select(subArcs[0][i]).attr('fill', glados.Settings.VIS_COLORS.GREY2)
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+#  qtips outter slices
+# ----------------------------------------------------------------------------------------------------------------------
 
       for subArc, i in subArcs[0]
         parentPropName = thisView.xAxisPropName.label
@@ -251,6 +254,18 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     legendElem = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
     glados.Utils.renderLegendForProperty(@splitSeriesPropName, undefined, legendElem, enableSelection=false, legendConfig)
     $(thisView.el).find('.BCK-CompResultsGraphLegendContainer').css('max-height', VISUALISATION_HEIGHT);
+
+# -----------------------------------------------------------------------------------------------------------------
+# title
+# -----------------------------------------------------------------------------------------------------------------
+
+    mainSVGContainer.append('text')
+      .text(@config.title)
+      .attr('x', VISUALISATION_WIDTH/2)
+      .attr('y', TITLE_Y)
+      .attr('text-anchor', 'middle')
+      .classed('title', 'true')
+      .on('click', -> window.open(@config.title_link_url))
 
   renderSimplePie: (buckets) ->
     values = []

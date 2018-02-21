@@ -259,13 +259,6 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
     if @config.side_legend
       domainGroupsSize = 1
 
-      legendG.append('g')
-        .append('rect')
-        .attr('height', 500)
-        .attr('width', elemWidth)
-        .attr('fill', 'white')
-        .classed('arcs-background', true)
-
     columnSize = Math.ceil domain.length/domainGroupsSize
     columnWidth = @legendWidth / domainGroupsSize
     domainGroups = []
