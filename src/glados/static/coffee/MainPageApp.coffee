@@ -108,20 +108,21 @@ class MainPageApp
 
   @initMaxPhaseForDisease = ->
     maxPhaseForDisease = MainPageApp.getMaxPhaseForDiseaseAgg()
-    maxPhaseProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound',
-      'MAX_PHASE', withColourScale=true)
-    ColourScale = maxPhaseProp.colourScale
+    maxPhaseProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'MAX_PHASE', true)
+    indicationClassProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'INDICATION_CLASS')
 
     pieConfig =
       x_axis_prop_name: 'maxPhaseForDisease'
       split_series_prop_name: 'split_series_agg'
       title: 'Max phase for disease'
-      max_categories: 5
+      max_categories: 8
       stacked_donut: true
       hide_title: true
       properties:
         max_phase: maxPhaseProp
+        indication_class: indicationClassProp
       initial_property_x: 'max_phase'
+      initial_property_z: 'indication_class'
 
     config =
       pie_config: pieConfig

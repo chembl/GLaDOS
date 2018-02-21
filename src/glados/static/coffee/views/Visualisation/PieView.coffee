@@ -12,6 +12,8 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     if @config.stacked_donut
       @splitSeriesAggName = @config.split_series_prop_name
+      @splitSeriesPropName = @config.properties[@config.initial_property_z]
+
 
   showNoDataFoundMessage: ->
 
@@ -82,8 +84,21 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     bucketSizes = (b.doc_count for b in buckets)
 
+    #buckets colour scale
     glados.models.visualisation.PropertiesFactory.generateColourScale(@xAxisPropName)
     color = @xAxisPropName.colourScale
+
+    #subbuckets colour scale
+    subBucketsOrder = glados.Utils.Buckets.getSubBucketsOrder(buckets, @splitSeriesAggName)
+
+    zScaleDomains = []
+    for key, value of subBucketsOrder
+      zScaleDomains.push(key)
+
+    @splitSeriesPropName.domain = zScaleDomains
+    glados.models.visualisation.PropertiesFactory.generateColourScale(@splitSeriesPropName)
+    color2 = @splitSeriesPropName.colourScale
+
     pie = d3.layout.pie()
 
     innerArc = d3.svg.arc()
@@ -123,7 +138,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('transform', 'translate(' + VISUALISATION_WIDTH/2 + ', ' + VISUALISATION_HEIGHT/2 + ')')
 
       subArcs.append('path')
-        .attr('fill', (d, i) -> color(i))
+        .attr('fill', (d, i) -> color2(i))
         .attr('d', outerArc)
 
 # ----------------------------------------------------------------------------------------------------------------------
