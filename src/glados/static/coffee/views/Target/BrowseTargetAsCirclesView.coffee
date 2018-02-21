@@ -18,6 +18,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   render: ->
 
+    @$vis_elem.empty()
     thisView = @
     @fillInstructionsTemplate undefined
 
