@@ -16,8 +16,13 @@ glados.useNameSpace 'glados.views.ReportCards',
       console.log 'model: ', @model
       ViewClass = @config.view_class
 
+      new ViewClass
+        el: $(@el).find('.BCK-visualisation-container')
+        model: @model
 
     render: ->
 
       console.log 'RENDER VIS IN CARD!!!'
+      console.log 'element: ', $(@el)
       @showCardContent()
+      console.log 'card content shown!!'
