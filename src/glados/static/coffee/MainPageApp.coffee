@@ -109,7 +109,8 @@ class MainPageApp
   @initMaxPhaseForDisease = ->
     maxPhaseForDisease = MainPageApp.getMaxPhaseForDiseaseAgg()
     maxPhaseProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound',
-      'MAX_PHASE')
+      'MAX_PHASE', withColourScale=true)
+    ColourScale = maxPhaseProp.colourScale
 
     pieConfig =
       x_axis_prop_name: 'maxPhaseForDisease'

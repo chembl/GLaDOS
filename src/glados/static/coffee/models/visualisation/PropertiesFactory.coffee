@@ -55,8 +55,9 @@ glados.useNameSpace 'glados.models.visualisation',
             glados.Settings.VIS_COLORS.TEAL4,
             glados.Settings.VIS_COLORS.TEAL3,
             glados.Settings.VIS_COLORS.TEAL2,
+            glados.Settings.VIS_COLORS.TEAL1,
           ]
-
+          colourScaleType: glados.Visualisation.CATEGORICAL
     DocumentAggregation:
       Properties:
         YEAR:

@@ -5,6 +5,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     @config = arguments[0].config
     @xAxisAggName = @config.x_axis_prop_name
+    @xAxisPropName = @config.properties[@config.initial_property_x]
     @model.on 'change', @render, @
     @$vis_elem = $(@el).find('.BCK-pie-container')
     updateViewProxy = @setUpResponsiveRender()
@@ -80,7 +81,9 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
         .classed('arcs-background', true)
 
     bucketSizes = (b.doc_count for b in buckets)
-    color = d3.scale.category10()
+
+    glados.models.visualisation.PropertiesFactory.generateColourScale(@xAxisPropName)
+    color = @xAxisPropName.colourScale
     pie = d3.layout.pie()
 
     innerArc = d3.svg.arc()
