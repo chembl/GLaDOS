@@ -197,6 +197,9 @@ glados.useNameSpace 'glados.apps.Embedding',
       documents_by_year_histogram:
         template: "#{glados.Settings.GLADOS_BASE_PATH_REL} #PapersPerYearHistogram"
         initFunction: MainPageApp.initPapersPerYear
+      targets_by_protein_class:
+        template: "#{glados.Settings.GLADOS_BASE_PATH_REL} #BCK-TargetBrowserAsCircles"
+        initFunction: MainPageApp.initTargetsVisualisation
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
 
