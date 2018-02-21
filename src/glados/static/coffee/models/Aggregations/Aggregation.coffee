@@ -204,10 +204,18 @@ glados.useNameSpace 'glados.models.Aggregations',
       for aggKey, aggDescription of aggs
 
         currentBuckets = receivedAggsInfo[aggKey].buckets
+
         if parentKey?
           for bucket in currentBuckets
 #           this could not work in all cases in the future
             bucket.parent_key = parseInt(parentKey)
+
+        console.log '---'
+        console.log 'currentBuckets: ', currentBuckets
+        console.log 'currentBuckets is array: ', _.isArray(currentBuckets)
+        console.log 'currentBuckets is object: ', _.isObject(currentBuckets)
+        console.log '^^^'
+
 
         # ---------------------------------------------------------------------
         # Parsing by type
@@ -267,6 +275,12 @@ glados.useNameSpace 'glados.models.Aggregations',
         #recursion
         for internalBucketKey, internalBuckets of currentBuckets
 
+          if _.isArray(currentBuckets)
+            internalBucketKey = internalBuckets.key
+          console.log 'internalBucketKey: ', internalBucketKey
+          console.log 'internalBuckets: ', internalBuckets
+          console.log 'aggKey: ', aggKey
+          console.log '^^^'
           newAggsConfig = aggs[aggKey]
           newBucketsData = bucketsData[aggKey].buckets_index[internalBucketKey]
           newReceivedAggsInfo = receivedAggsInfo[aggKey].buckets[internalBucketKey]

@@ -28,6 +28,7 @@ class MainPageApp
     MainPageApp.initPapersPerYear()
 
     targetsHierarchyAgg = MainPageApp.getTargetsTreeAgg()
+    targetsHierarchyAgg.fetch()
     #initialize browser targets viz
     targetHierarchy = TargetBrowserApp.initTargetHierarchyTree()
     targetBrowserView = TargetBrowserApp.initBrowserAsCircles(targetHierarchy, $('#BCK-TargetBrowserAsCircles'))
@@ -75,19 +76,41 @@ class MainPageApp
 
   @getTargetsTreeAgg = ->
 
-#    queryConfig =
-#      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
-#      query_string_template: '*'
-#      template_data: {}
-#
-#    aggsConfig =
-#      aggs:
-#        documentsPerYear:
-#          type: glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
-#          field: 'year'
-#          default_interval_size: defaultInterval
-#          min_interval_size: 1
-#          max_interval_size: 10
+    queryConfig =
+      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
+      query_string_template: '*'
+      template_data: {}
+
+    aggsConfig =
+      aggs:
+        l1_class:
+          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+          field: '_metadata.protein_classification.l1'
+          size: 100
+          bucket_links:
+            bucket_filter_template: '_metadata.protein_classification.l1:("{{bucket_key}}")'
+            template_data:
+              bucket_key: 'BUCKET.key'
+            link_generator: Target.getTargetsListURL
+          aggs:
+            l2_class:
+              type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+              field: '_metadata.protein_classification.l2'
+              size: 100
+              bucket_links:
+                bucket_filter_template: '_metadata.protein_classification.l2:("{{bucket_key}}")'
+                template_data:
+                  bucket_key: 'BUCKET.key'
+                link_generator: Target.getTargetsListURL
+
+
+    targetsTreeAgg = new glados.models.Aggregations.Aggregation
+      index_url: glados.models.Aggregations.Aggregation.TARGET_INDEX_URL
+      query_config: queryConfig
+      aggs_config: aggsConfig
+
+    return targetsTreeAgg
+
 
 
   @initPapersPerYear = ->
