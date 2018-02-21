@@ -26,13 +26,7 @@ class MainPageApp
     tweetsList.fetch()
 
     MainPageApp.initPapersPerYear()
-
-    targetsHierarchyAgg = MainPageApp.getTargetsTreeAgg()
-    targetsHierarchyAgg.fetch()
-    #initialize browser targets viz
-    targetHierarchy = TargetBrowserApp.initTargetHierarchyTree()
-    targetBrowserView = TargetBrowserApp.initBrowserAsCircles(targetHierarchy, $('#BCK-TargetBrowserAsCircles'))
-    targetHierarchy.fetch()
+    MainPageApp.initTargetsVisualisation()
 
 # ---------------- Aggregation -------------- #
   @getDocumentsPerYearAgg = (defaultInterval=1) ->
@@ -157,3 +151,24 @@ class MainPageApp
 
     allDocumentsByYear.fetch()
 
+  @initTargetsVisualisation = ->
+
+    targetHierarchy = TargetBrowserApp.initTargetHierarchyTree()
+
+    config =
+      is_outside_an_entity_report_card: true
+      embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#targets_by__protein_class"
+
+
+    console.log 'INIT targets visualisation!!!'
+#    targetsHierarchyAgg = MainPageApp.getTargetsTreeAgg()
+#    targetsHierarchyAgg.fetch()
+#    #initialize browser targets viz
+#    targetBrowserView = TargetBrowserApp.initBrowserAsCircles(targetHierarchy, $('#BCK-TargetBrowserAsCircles'))
+#    targetHierarchy.fetch()
+
+    new glados.views.ReportCards.VisualisationInCardView
+      el: $('#BCK-TargetBrowserAsCircles')
+      model: targetHierarchy
+      config: config
+      report_card_app: @

@@ -1,5 +1,11 @@
+{% extends "glados/base/basic_visualisation_card.html" %}
+
+{% block card_id %}BCK-TargetBrowserAsCircles{% endblock %}
+
+{% block general_content %}
+
 <div class="target-browser">
-  <div id="BCK-TargetBrowserAsCircles" class="browser-as-circles">
+  <div class="browser-as-circles">
 
     <div class="vis-container">
       <!-- Backbone fills this with the BrowseTargetAsCirclesView -->
@@ -35,3 +41,5 @@
 
   </div>
 </div>
+
+{% endblock %}
