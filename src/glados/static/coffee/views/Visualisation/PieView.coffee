@@ -78,6 +78,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     arcsContainer = mainSVGContainer.append('g')
     subArcsContainer = mainSVGContainer.append('g')
+    marginArcContainer = mainSVGContainer.append('g')
 
     arcsContainer.append('rect')
         .attr('height', VISUALISATION_HEIGHT)
@@ -110,6 +111,10 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       .innerRadius(RADIUS*2)
       .outerRadius(RADIUS*4)
 
+    outerArc = d3.svg.arc()
+        .innerRadius(RADIUS*4)
+        .outerRadius(RADIUS*5.5)
+
     arcs = arcsContainer.selectAll('g.arc')
       .data(pie(bucketSizes))
       .enter()
@@ -119,8 +124,8 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     arcs.append('path')
       .attr('fill', (d, i) -> color(i))
-#      .attr('stroke-width', 1)
-#      .attr('stroke', 'white')
+      .attr('stroke-width', 1)
+      .attr('stroke', 'white')
       .attr('d', innerArc)
 
     arcs.append('text')
@@ -169,10 +174,6 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
         .endAngle(bigSlice.endAngle)
 #        .sort(null)
 
-      outerArc = d3.svg.arc()
-        .innerRadius(RADIUS*4)
-        .outerRadius(RADIUS*5.5)
-
       subArcs = subArcsContainer.selectAll('g.arc')
         .data(AggregationPie(subBucketSizes))
         .enter()
@@ -182,8 +183,8 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       subArcs.append('path')
         .attr('fill', (d, i) -> color2(i))
-#        .attr('stroke-width', 0.1)
-#        .attr('stroke', 'white')
+        .attr('stroke-width', 0.5)
+        .attr('stroke', 'white')
         .attr('d', outerArc)
 
       # ----------------------------------------------------------------------------------------------------------------------
