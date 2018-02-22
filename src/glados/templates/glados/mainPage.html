@@ -35,9 +35,9 @@
   <div class="col l9 m12 s12">
 
     <div class="col m6 s12" >
-      {% block browse_targets %}
+      {% with is_dynamic=True %}
           {% include "glados/MainPageParts/TargetBrowserParts/browse_as_circles.html" %}
-      {% endblock %}
+      {% endwith %}
     </div>
 
     <div class="col m6 s12 ppy" >
@@ -52,6 +52,7 @@
       {% endwith %}
     </div>
     <div class="col m6 s12" ></div>
+
   </div>
 
   <div class="col m6 l3 xl400 hide-on-small-only">

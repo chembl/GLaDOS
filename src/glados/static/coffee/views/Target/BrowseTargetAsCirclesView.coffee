@@ -3,9 +3,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
   # this may have to be improved depending If there are browser issues.
   CTRL_KEY_NUMBER: 17
 
-  events:
-    'click .reset-zoom': 'resetZoom'
-
   initialize: ->
 
     $(document).on("keydown", $.proxy(@handleKeyDown, @))
@@ -16,15 +13,12 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     @$vis_elem = $(@el).find('.vis-container')
     @showResponsiveViewPreloader()
-
-    # the render function is debounced so it waits for the size of the
-    # element to be ready
-    updateViewProxy = @setUpResponsiveRender()
-
-    @model.on 'change', updateViewProxy, @
+    @setUpResponsiveRender()
+    @model.on 'change', @render, @
 
   render: ->
 
+    @$vis_elem.empty()
     thisView = @
     @fillInstructionsTemplate undefined
 
@@ -54,15 +48,27 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     .append("g")
     .attr("transform", "translate(" + thisView.diameter / 2 + "," + thisView.diameter / 2 + ")")
 
-
-
     # use plain version
     @root = @model.get('plain')
+    console.log '@root: ', @root
     focus = @root
     nodes = pack.nodes(@root)
     @currentViewFrame = undefined
     console.log('nodes after')
     console.log(nodes)
+
+    #get depth domain in tree
+    getNodeNumChildren = (node) -> if not node.children? then 0 else node.children.length
+    nodeWithMinNumChildren = _.min(nodes, getNodeNumChildren)
+    minNumChildren = if not nodeWithMinNumChildren.children? then 0 else nodeWithMinNumChildren.children.length
+    nodeWithMaxNumChildren = _.max(nodes, getNodeNumChildren)
+    maxNumChildren = if not nodeWithMaxNumChildren.children? then 0 else nodeWithMaxNumChildren.children.length
+
+    console.log 'minNumChildren: ', minNumChildren
+    console.log 'maxNumChildren: ', maxNumChildren
+    textSize = d3.scale.linear()
+      .domain([minNumChildren, maxNumChildren])
+      .range([60, 160])
 
     # -----------------------------------------
     # Node click handler function
@@ -76,22 +82,25 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
         return
 
       if focus != d
-        thisView.focusTo(d)
+        thisView.focusTo(thisView.currentHover)
 
     # -----------------------------------------
     # Node hover handler function
     # -----------------------------------------
     handleNodeMouseOver = (d) ->
 
-      thisView.currentHover = d.name
-      isPressingCtrl = d3.event.ctrlKey
-      thisView.fillInstructionsTemplate d.name, isPressingCtrl
+      currentHoverableIDs = (n.id for n in thisView.currentHoverableElems)
 
-    handleNodeMouseOut = (d) ->
+      if d.id in currentHoverableIDs
 
-      thisView.currentHover = undefined
-      thisView.fillInstructionsTemplate undefined
+        thisView.currentHover = d
+        isPressingCtrl = d3.event.ctrlKey
+        thisView.fillInstructionsTemplate d.name, isPressingCtrl
 
+        allNodes = d3.select($(thisView.el)[0]).selectAll('.node')
+        allNodes.classed('force-hover', false)
+        nodeElem = d3.select($(thisView.el)[0]).select("#circleFor-#{d.id}" for n in nodes)
+        nodeElem.classed('force-hover', true)
 
     circles = svg.selectAll('circle')
       .data(nodes).enter().append('circle')
@@ -100,31 +109,50 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr("id", (d) ->
         if d.parent then 'circleFor-' + d.id else 'circleFor-Root')
       .style("fill", (d) ->
-        if d.children then color(d.depth) else null)
+        if d.children then color(d.depth) else glados.Settings.VIS_COLORS.WHITE)
       .on("click", handleClickOnNode)
       .on('mouseover', handleNodeMouseOver)
-      .on('mouseout', handleNodeMouseOut)
 
     text = svg.selectAll('text')
-    .data(nodes)
-    .enter().append('text')
-    .attr("class", "label")
-    .style("fill-opacity", (d) ->
-      if d.parent == thisView.root then 1 else 0)
-    .style("display", (d) ->
-      if d.parent == thisView.root then 'inline' else 'none')
-    .text((d) -> return d.name + " (" + d.size + ")" )
+      .data(nodes)
+      .enter().append('text')
+      .attr("class", "label")
+      .attr('text-anchor', 'middle')
+      .style("fill-opacity", (d) ->
+        if d.parent == thisView.root then 1 else 0)
+      .style("display", (d) ->
+        if d.parent == thisView.root then 'inline' else 'none')
+      .text((d) -> return d.name + " (" + d.size + ")" )
+      .attr('font-size', (d) ->
+        if d.children?
+          return "#{textSize(d.children.length)}%"
+        else return "#{textSize(0)}%"
+      )
 
     #Select circles to create the views
-    @createCircleViews()
+#    @createCircleViews()
 
     d3.select(container)
-    .on("click", () -> thisView.focusTo(thisView.root) )
+      .on("click", () -> thisView.focusTo(thisView.root) )
 
-
+    @currentLevel = 0
+    @currentHoverableElems = []
     @zoomTo([@root.x, @root.y, @root.r * 2 + @margin])
+    @addHoverabilityTo(@root.children)
 
-    $('.tooltipped').tooltip()
+  addHoverabilityTo: (nodes=[]) ->
+
+    if nodes.length > 0
+      d3Nodes = d3.select($(@el)[0]).selectAll(("#circleFor-#{n.id}" for n in nodes).join(','))
+      d3Nodes.classed('hoverable', true)
+    @currentHoverableElems = nodes
+
+  removeHoverabilityToAll: ->
+
+    d3.select($(@el)[0]).selectAll('.node')
+      .classed('hoverable', false)
+      .classed('force-hover', false)
+    @currentHoverableElems = []
 
   createCircleViews: ->
 
@@ -148,30 +176,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       nodeView.parentView = thisView
 
-
-  #----------------------------------------------------------
-  # Reset zoom btn
-  #----------------------------------------------------------
-
-  toggleResetZoomBtn: (focus) ->
-
-    if focus.name == 'root'
-      @hideResetZoomBtn()
-    else
-      @showResetZoomBtn()
-
-  showResetZoomBtn: ->
-
-    $(@el).find('.reset-zoom').show()
-
-  hideResetZoomBtn: ->
-
-    $(@el).find('.reset-zoom').hide()
-
-  resetZoom: ->
-
-    @focusTo @root
-
   #----------------------------------------------------------
   # Zoom and focus
   #----------------------------------------------------------
@@ -188,21 +192,34 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   focusTo: (node) ->
 
-    # TODO: If it causes problems, make sure to not do the focus procedure when the focus is already in the node passed
-    # as parameter
     thisView = @
     focus = node
-    @toggleResetZoomBtn(focus)
+    @removeHoverabilityToAll()
+    ancestry = []
+    currentParent = node.parent
+    while currentParent?
+      ancestry.push currentParent
+      currentParent = currentParent.parent
+
+    newHoverableNodes = _.union(ancestry, node.children)
+
+    d3.select($(@el)[0]).selectAll(".node")
+      .classed('selected', false)
+
+    selectedNode = d3.select($(@el)[0]).select("#circleFor-#{node.id}")
+    selectedNode.classed('selected', true)
+    @addHoverabilityTo(newHoverableNodes)
     transition = d3.transition()
-    .duration(1000)
-    .tween("zoom", (d) ->
-        i = d3.interpolateZoom(thisView.currentViewFrame, [focus.x, focus.y, focus.r * 2 + thisView.margin])
-        return (t) -> thisView.zoomTo(i(t))
-    )
+      .duration(1000)
+      .tween("zoom", (d) ->
+          i = d3.interpolateZoom(thisView.currentViewFrame, [focus.x, focus.y, focus.r * 2 + thisView.margin])
+          return (t) -> thisView.zoomTo(i(t))
+      )
 
     transition.selectAll("text")
       .filter( (d) ->
-        d == focus or d.parent == focus or @style.display == 'inline')
+        if d?
+          d == focus or d.parent == focus or @style.display == 'inline')
       .style('fill-opacity', (d) ->
         if d.parent == focus then 1 else 0)
       .each('start', (d) ->
@@ -244,13 +261,13 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     if event.which == @CTRL_KEY_NUMBER
 
-      @fillInstructionsTemplate @currentHover, true
+      @fillInstructionsTemplate(@currentHover.name, true) unless not @currentHover?
 
   handleKeyUp: (event) ->
 
     if event.which == @CTRL_KEY_NUMBER
 
-      @fillInstructionsTemplate @currentHover, false
+      @fillInstructionsTemplate(@currentHover.name, false) unless not @currentHover?
 
 
 

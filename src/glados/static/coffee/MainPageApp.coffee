@@ -27,10 +27,7 @@ class MainPageApp
 
     MainPageApp.initPapersPerYear()
     MainPageApp.initMaxPhaseForDisease()
-
-    targetHierarchy = TargetBrowserApp.initTargetHierarchyTree()
-    targetBrowserView = TargetBrowserApp.initBrowserAsCircles(targetHierarchy, $('#BCK-TargetBrowserAsCircles'))
-    targetHierarchy.fetch()
+    MainPageApp.initTargetsVisualisation()
 
 # ---------------- Aggregation -------------- #
   @getDocumentsPerYearAgg = (defaultInterval=1) ->
@@ -48,6 +45,7 @@ class MainPageApp
           default_interval_size: defaultInterval
           min_interval_size: 1
           max_interval_size: 10
+          bucket_key_parse_function: (key) -> key.replace(/\.0/i, '')
           aggs:
             split_series_agg:
               type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
@@ -58,7 +56,7 @@ class MainPageApp
                 bucket_filter_template: 'year:{{year}} AND journal:("{{bucket_key}}"' +
                                         '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
                 template_data:
-                  year: 'BUCKET.parent_key'
+                  year: 'BUCKET.parsed_parent_key'
                   bucket_key: 'BUCKET.key'
                   extra_buckets: 'EXTRA_BUCKETS.key'
 
@@ -149,6 +147,85 @@ class MainPageApp
 
     maxPhaseForDisease.fetch()
 
+  @getTargetsTreeAgg = ->
+
+    queryConfig =
+      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
+      query_string_template: '*'
+      template_data: {}
+
+    aggsConfig =
+      aggs:
+        l1_class:
+          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+          field: '_metadata.protein_classification.l1'
+          size: 100
+          bucket_links:
+            bucket_filter_template: '_metadata.protein_classification.l1:("{{bucket_key}}")'
+            template_data:
+              bucket_key: 'BUCKET.key'
+            link_generator: Target.getTargetsListURL
+          aggs:
+            l2_class:
+              type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+              field: '_metadata.protein_classification.l2'
+              size: 100
+              bucket_links:
+                bucket_filter_template: '_metadata.protein_classification.l2:("{{bucket_key}}")'
+                template_data:
+                  bucket_key: 'BUCKET.key'
+                link_generator: Target.getTargetsListURL
+              aggs:
+                l3_class:
+                  type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+                  field: '_metadata.protein_classification.l3'
+                  size: 100
+                  bucket_links:
+                    bucket_filter_template: '_metadata.protein_classification.l3:("{{bucket_key}}")'
+                    template_data:
+                      bucket_key: 'BUCKET.key'
+                    link_generator: Target.getTargetsListURL
+                  aggs:
+                    l4_class:
+                      type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+                      field: '_metadata.protein_classification.l4'
+                      size: 100
+                      bucket_links:
+                        bucket_filter_template: '_metadata.protein_classification.l4:("{{bucket_key}}")'
+                        template_data:
+                          bucket_key: 'BUCKET.key'
+                        link_generator: Target.getTargetsListURL
+                      aggs:
+                        l5_class:
+                          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+                          field: '_metadata.protein_classification.l5'
+                          size: 100
+                          bucket_links:
+                            bucket_filter_template: '_metadata.protein_classification.l5:("{{bucket_key}}")'
+                            template_data:
+                              bucket_key: 'BUCKET.key'
+                            link_generator: Target.getTargetsListURL
+                          aggs:
+                            l6_class:
+                              type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+                              field: '_metadata.protein_classification.l6'
+                              size: 100
+                              bucket_links:
+                                bucket_filter_template: '_metadata.protein_classification.l6:("{{bucket_key}}")'
+                                template_data:
+                                  bucket_key: 'BUCKET.key'
+                                link_generator: Target.getTargetsListURL
+
+
+    targetsTreeAgg = new glados.models.Aggregations.Aggregation
+      index_url: glados.models.Aggregations.Aggregation.TARGET_INDEX_URL
+      query_config: queryConfig
+      aggs_config: aggsConfig
+
+    return targetsTreeAgg
+
+
+
   @initPapersPerYear = ->
 
     allDocumentsByYear = MainPageApp.getDocumentsPerYearAgg()
@@ -193,3 +270,28 @@ class MainPageApp
 
     allDocumentsByYear.fetch()
 
+  @initTargetsVisualisation = ->
+
+    targetHierarchy = TargetBrowserApp.initTargetHierarchyTree()
+
+    config =
+      is_outside_an_entity_report_card: true
+      embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#targets_by_protein_class"
+      view_class: BrowseTargetAsCirclesView
+
+
+    console.log 'INIT targets visualisation!!!'
+    targetsHierarchyAgg = MainPageApp.getTargetsTreeAgg()
+    targetsHierarchyAgg.fetch()
+    console.log 'targetsHierarchyAgg: ', targetsHierarchyAgg
+#    #initialize browser targets viz
+    targetBrowserView = TargetBrowserApp.initBrowserAsCircles(targetHierarchy, $('#BCK-TargetBrowserAsCircles'))
+    targetHierarchy.fetch()
+
+    new glados.views.ReportCards.VisualisationInCardView
+      el: $('#BCK-TargetBrowserAsCircles')
+      model: targetHierarchy
+      config: config
+      report_card_app: @
+
+    targetHierarchy.fetch()

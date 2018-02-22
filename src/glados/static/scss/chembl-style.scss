@@ -2891,21 +2891,28 @@ span.badge-primary-color-no-float {
   .browser-as-circles {
     .node {
       cursor: pointer;
-      stroke-width: 0.5px;
-      stroke: gray;
+      &.hoverable{
+        stroke-width: 1px;
+        stroke: black;
+        &:hover,&.force-hover{
+          stroke: color('green', 'base');
+          stroke-width: 2px;
+        }
+      }
+
+      &.selected {
+        stroke: color('green', 'base');
+        stroke-width: 1;
+        stroke-dasharray: 10;
+      }
     }
 
-    .node:hover {
-      cursor: pointer;
-      stroke-width: 3;
-    }
 
     .node--leaf {
       fill: white;
     }
 
     .label {
-      font: 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
       text-anchor: middle;
       text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
     }
@@ -2915,10 +2922,7 @@ span.badge-primary-color-no-float {
       pointer-events: none;
     }
 
-    .selected {
-      stroke: color('green', 'base');
-      stroke-width: 2;
-    }
+
 
     .incomplete {
       stroke: color('green', 'base');
@@ -3940,5 +3944,15 @@ $facets-width-large: 21%;
 .report-card-header-table{
   .collapser-button-cell{
     text-align: right;
+  }
+}
+
+/**
+* Visualisation Cards
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+.visualisation-card{
+  .card-content{
+    padding: 5px;
   }
 }

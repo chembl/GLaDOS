@@ -166,6 +166,16 @@ glados.useNameSpace 'glados',
     # give it everything as ready as possible
     getColumnsWithValuesAndHighlights: (columns, model) ->
       included = new Set()
+
+      highlights = null
+      if model.get('_highlights')? and included.size == 0
+        highlights = []
+        for comparator, hlData of model.get('_highlights')
+          if not included.has(comparator)
+            highlights.push hlData
+            if highlights.length >= 1
+              break
+
       columnsToReturn = columns.map (colDescription) ->
 
         returnCol = {}
@@ -175,12 +185,13 @@ glados.useNameSpace 'glados',
 
         returnCol.name_to_show = colDescription['name_to_show']
         returnCol.show = colDescription.show
+        returnCol.search_hit_highlight_column = colDescription.search_hit_highlight_column || false
         returnCol.comparator = colDescription.comparator
-
-        #remove this if no need for old
-
-        col_value = glados.Utils.getNestedValue(model.attributes, colDescription.comparator, forceAsNumber=false,\
-          customNullValueLabel=colDescription.custom_null_vale_label)
+        if colDescription.search_hit_highlight_column
+          col_value = highlights
+        else
+          col_value = glados.Utils.getNestedValue(model.attributes, colDescription.comparator, forceAsNumber=false,\
+            customNullValueLabel=colDescription.custom_null_vale_label)
 
         returnCol['format_class'] = colDescription.format_class
 
@@ -254,15 +265,6 @@ glados.useNameSpace 'glados',
 
         # This method should return a value based on the parameter, not modify the parameter
         return returnCol
-
-      highlights = null
-      if model.get('_highlights')? and included.size == 0
-        highlights = []
-        for comparator, hlData of model.get('_highlights')
-          if not included.has(comparator)
-            highlights.push hlData
-            if highlights.length >= 1
-              break
 
       return [columnsToReturn, highlights]
 
