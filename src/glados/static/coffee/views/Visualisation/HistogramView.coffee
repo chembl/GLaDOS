@@ -475,7 +475,7 @@ glados.useNameSpace 'glados.views.Visualisation',
         for bucket in subBuckets
           if bucket.key != glados.Visualisation.Activity.OTHERS_LABEL
             bucket.pos = subBucketsOrder[bucket.key].pos
-            bucket.bar_key = d.key.split(".")[0]
+            bucket.parent_key = d.key.split(".")[0]
         subBuckets = _.sortBy(subBuckets, (item) -> item.pos)
 
         previousHeight = thisView.BARS_CONTAINER_HEIGHT
@@ -508,7 +508,7 @@ glados.useNameSpace 'glados.views.Visualisation',
 
           key =  d.key
           docCount = d.doc_count
-          barText = d.bar_key
+          barText = d.parent_key
           barName = thisView.currentXAxisProperty.label
           keyName = thisView.currentZAxisProperty.label
 

@@ -2891,21 +2891,28 @@ span.badge-primary-color-no-float {
   .browser-as-circles {
     .node {
       cursor: pointer;
-      stroke-width: 0.5px;
-      stroke: gray;
+      &.hoverable{
+        stroke-width: 1px;
+        stroke: black;
+        &:hover,&.force-hover{
+          stroke: color('green', 'base');
+          stroke-width: 2px;
+        }
+      }
+
+      &.selected {
+        stroke: color('green', 'base');
+        stroke-width: 1;
+        stroke-dasharray: 10;
+      }
     }
 
-    .node:hover {
-      cursor: pointer;
-      stroke-width: 3;
-    }
 
     .node--leaf {
       fill: white;
     }
 
     .label {
-      font: 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
       text-anchor: middle;
       text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
     }
@@ -2915,10 +2922,7 @@ span.badge-primary-color-no-float {
       pointer-events: none;
     }
 
-    .selected {
-      stroke: color('green', 'base');
-      stroke-width: 2;
-    }
+
 
     .incomplete {
       stroke: color('green', 'base');
@@ -3866,6 +3870,53 @@ $facets-width-large: 21%;
 }
 
 /**
+* stacked donut pie-chart
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+.main-pie-container {
+  display:flex !important;
+  .legend{
+    background-color: white;
+    width: 100%;
+    margin-left: -10px;
+    padding-top: 40px;
+    overflow-y: scroll;
+    overflow-x: hidden !important;
+  }
+  .title {
+    cursor: pointer;
+    font-size: 110%;
+    font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+    fill: #5e5e5e;
+  }
+
+  .title:hover {
+    fill: color('teal', 'accent-4');
+  }
+
+  .sub-arc:hover {
+    //fill: #0d343a;
+    fill-opacity: 0.7;
+    cursor: pointer;
+  }
+
+  .arc:hover {
+    cursor: pointer;
+    fill: #D33C60;
+  }
+
+  .arc {
+    text{
+      font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+      font-size: 80%;
+    }
+  }
+
+}
+
+
+
+/**
 * Report card section
 * ----------------------------------------------------------------------------------------------------------------------
 */
@@ -3893,5 +3944,15 @@ $facets-width-large: 21%;
 .report-card-header-table{
   .collapser-button-cell{
     text-align: right;
+  }
+}
+
+/**
+* Visualisation Cards
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+.visualisation-card{
+  .card-content{
+    padding: 5px;
   }
 }

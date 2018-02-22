@@ -12,7 +12,6 @@ describe "Target hierarchy tree", ->
     targetTree.resetSearch()
     targetTree.collapseAll()
 
-
   it "selects all nodes", (done) ->
     targetTree.selectAll()
     for node in targetTree.get('all_nodes').models

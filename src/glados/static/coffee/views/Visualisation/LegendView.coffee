@@ -256,6 +256,9 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
     else
       domainGroupsSize = 3
 
+    if @config.side_legend
+      domainGroupsSize = 1
+
     columnSize = Math.ceil domain.length/domainGroupsSize
     columnWidth = @legendWidth / domainGroupsSize
     domainGroups = []

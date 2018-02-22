@@ -26,11 +26,9 @@ class MainPageApp
     tweetsList.fetch()
 
     MainPageApp.initPapersPerYear()
+    MainPageApp.initMaxPhaseForDisease()
+    MainPageApp.initTargetsVisualisation()
 
-    #initialize browser targets viz
-#    targetHierarchy = TargetBrowserApp.initTargetHierarchyTree()
-#    targetBrowserView = TargetBrowserApp.initBrowserMain(targetHierarchy, $('#BCK-TargetBrowserMain'))
-#    targetHierarchy.fetch()
 # ---------------- Aggregation -------------- #
   @getDocumentsPerYearAgg = (defaultInterval=1) ->
 
@@ -47,6 +45,7 @@ class MainPageApp
           default_interval_size: defaultInterval
           min_interval_size: 1
           max_interval_size: 10
+          bucket_key_parse_function: (key) -> key.replace(/\.0/i, '')
           aggs:
             split_series_agg:
               type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
@@ -57,7 +56,7 @@ class MainPageApp
                 bucket_filter_template: 'year:{{year}} AND journal:("{{bucket_key}}"' +
                                         '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
                 template_data:
-                  year: 'BUCKET.parent_key'
+                  year: 'BUCKET.parsed_parent_key'
                   bucket_key: 'BUCKET.key'
                   extra_buckets: 'EXTRA_BUCKETS.key'
 
@@ -69,6 +68,162 @@ class MainPageApp
       aggs_config: aggsConfig
 
     return allDocumentsByYear
+
+  @getMaxPhaseForDiseaseAgg = () ->
+    queryConfig =
+      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
+      query_string_template: '_metadata.drug.is_drug:true'
+      template_data: {}
+
+    aggsConfig =
+      aggs:
+        maxPhaseForDisease:
+          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+          field: 'max_phase'
+          size: 5
+          bucket_links:
+            bucket_filter_template: '_metadata.drug.is_drug:true AND ' +
+                                    'max_phase:{{bucket_key}}'
+            template_data:
+              bucket_key: 'BUCKET.key'
+
+            link_generator: Compound.getCompoundsListURL
+          aggs:
+            split_series_agg:
+              type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+              field: 'indication_class'
+              size: 10
+              bucket_links:
+                bucket_filter_template: '_metadata.drug.is_drug:true AND ' +
+                                        'max_phase :{{max_phase}} AND indication_class:("{{bucket_key}}"' +
+                                        '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
+                template_data:
+                  max_phase: 'BUCKET.parent_key'
+                  bucket_key: 'BUCKET.key'
+                  extra_buckets: 'EXTRA_BUCKETS.key'
+
+                link_generator: Compound.getCompoundsListURL
+
+    MaxPhaseForDisease = new glados.models.Aggregations.Aggregation
+      index_url: glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
+      query_config: queryConfig
+      aggs_config: aggsConfig
+
+    return MaxPhaseForDisease
+
+  @initMaxPhaseForDisease = ->
+    maxPhaseForDisease = MainPageApp.getMaxPhaseForDiseaseAgg()
+    maxPhaseProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'MAX_PHASE', true)
+    indicationClassProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'INDICATION_CLASS')
+
+    pieConfig =
+      side_legend: true
+      x_axis_prop_name: 'maxPhaseForDisease'
+      split_series_prop_name: 'split_series_agg'
+      title: 'Max Phase for Disease'
+      max_categories: 5
+      stacked_donut: true
+      hide_title: true
+      properties:
+        max_phase: maxPhaseProp
+        indication_class: indicationClassProp
+      initial_property_x: 'max_phase'
+      initial_property_z: 'indication_class'
+      title_link_url: Drug.getDrugsListURL()
+
+    config =
+      pie_config: pieConfig
+      is_outside_an_entity_report_card: true
+      embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#max_phase_for_disease"
+      link_to_all:
+        link_text: 'See all drug Compounds in ChEMBL'
+        url: Drug.getDrugsListURL()
+
+    new glados.views.ReportCards.PieInCardView
+      el: $('#MaxPhaseForDisease')
+      model: maxPhaseForDisease
+      config: config
+      report_card_app: @
+
+    maxPhaseForDisease.fetch()
+
+  @getTargetsTreeAgg = ->
+
+    queryConfig =
+      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
+      query_string_template: '*'
+      template_data: {}
+
+    aggsConfig =
+      aggs:
+        l1_class:
+          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+          field: '_metadata.protein_classification.l1'
+          size: 100
+          bucket_links:
+            bucket_filter_template: '_metadata.protein_classification.l1:("{{bucket_key}}")'
+            template_data:
+              bucket_key: 'BUCKET.key'
+            link_generator: Target.getTargetsListURL
+          aggs:
+            l2_class:
+              type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+              field: '_metadata.protein_classification.l2'
+              size: 100
+              bucket_links:
+                bucket_filter_template: '_metadata.protein_classification.l2:("{{bucket_key}}")'
+                template_data:
+                  bucket_key: 'BUCKET.key'
+                link_generator: Target.getTargetsListURL
+              aggs:
+                l3_class:
+                  type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+                  field: '_metadata.protein_classification.l3'
+                  size: 100
+                  bucket_links:
+                    bucket_filter_template: '_metadata.protein_classification.l3:("{{bucket_key}}")'
+                    template_data:
+                      bucket_key: 'BUCKET.key'
+                    link_generator: Target.getTargetsListURL
+                  aggs:
+                    l4_class:
+                      type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+                      field: '_metadata.protein_classification.l4'
+                      size: 100
+                      bucket_links:
+                        bucket_filter_template: '_metadata.protein_classification.l4:("{{bucket_key}}")'
+                        template_data:
+                          bucket_key: 'BUCKET.key'
+                        link_generator: Target.getTargetsListURL
+                      aggs:
+                        l5_class:
+                          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+                          field: '_metadata.protein_classification.l5'
+                          size: 100
+                          bucket_links:
+                            bucket_filter_template: '_metadata.protein_classification.l5:("{{bucket_key}}")'
+                            template_data:
+                              bucket_key: 'BUCKET.key'
+                            link_generator: Target.getTargetsListURL
+                          aggs:
+                            l6_class:
+                              type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+                              field: '_metadata.protein_classification.l6'
+                              size: 100
+                              bucket_links:
+                                bucket_filter_template: '_metadata.protein_classification.l6:("{{bucket_key}}")'
+                                template_data:
+                                  bucket_key: 'BUCKET.key'
+                                link_generator: Target.getTargetsListURL
+
+
+    targetsTreeAgg = new glados.models.Aggregations.Aggregation
+      index_url: glados.models.Aggregations.Aggregation.TARGET_INDEX_URL
+      query_config: queryConfig
+      aggs_config: aggsConfig
+
+    return targetsTreeAgg
+
 
 
   @initPapersPerYear = ->
@@ -115,3 +270,28 @@ class MainPageApp
 
     allDocumentsByYear.fetch()
 
+  @initTargetsVisualisation = ->
+
+    targetHierarchy = TargetBrowserApp.initTargetHierarchyTree()
+
+    config =
+      is_outside_an_entity_report_card: true
+      embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#targets_by_protein_class"
+      view_class: BrowseTargetAsCirclesView
+
+
+    console.log 'INIT targets visualisation!!!'
+    targetsHierarchyAgg = MainPageApp.getTargetsTreeAgg()
+    targetsHierarchyAgg.fetch()
+    console.log 'targetsHierarchyAgg: ', targetsHierarchyAgg
+#    #initialize browser targets viz
+    targetBrowserView = TargetBrowserApp.initBrowserAsCircles(targetHierarchy, $('#BCK-TargetBrowserAsCircles'))
+    targetHierarchy.fetch()
+
+    new glados.views.ReportCards.VisualisationInCardView
+      el: $('#BCK-TargetBrowserAsCircles')
+      model: targetHierarchy
+      config: config
+      report_card_app: @
+
+    targetHierarchy.fetch()
