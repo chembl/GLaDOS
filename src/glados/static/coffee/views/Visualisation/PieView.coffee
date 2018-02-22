@@ -198,6 +198,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       for subArc, i in subArcs[0]
         parentPropName = thisView.xAxisPropName.label
         propName = thisView.splitSeriesPropName.label
+        console.log 'propName: ', propName
 
         subBucketName = subBuckets[i].key
         parentBucketName = subBuckets[i].parent_key

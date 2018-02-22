@@ -60,7 +60,7 @@ glados.useNameSpace 'glados.models.visualisation',
           colourScaleType: glados.Visualisation.CATEGORICAL
         INDICATION_CLASS:
           propName: 'indication_class'
-          label: 'Max phase'
+          label: 'Indication class'
           type: String
           colourScaleType: glados.Visualisation.CATEGORICAL
           coloursRange: [
