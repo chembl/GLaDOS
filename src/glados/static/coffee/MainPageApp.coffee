@@ -124,6 +124,7 @@ class MainPageApp
         indication_class: indicationClassProp
       initial_property_x: 'max_phase'
       initial_property_z: 'indication_class'
+      title_link_url: Drug.getDrugsListURL()
 
     config =
       pie_config: pieConfig

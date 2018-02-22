@@ -108,6 +108,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     glados.models.visualisation.PropertiesFactory.generateColourScale(@splitSeriesPropName)
     color2 = @splitSeriesPropName.colourScale
 
+#   paint inner slices
     pie = d3.layout.pie()
       .sort(null)
 
@@ -161,6 +162,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       if maxCategories <= 1
         maxCategories++
 
+#     get 'Other' sub Buckets
       subBucketsCompleteAggName = "#{thisView.xAxisAggName}.aggs.#{thisView.splitSeriesAggName}"
       subBuckets = glados.Utils.Buckets.mergeBuckets(subBuckets,  maxCategories, thisView.model, subBucketsCompleteAggName, subBuckets=true)
 
@@ -168,8 +170,8 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       for bucket in subBuckets
         if not noOthersBucket[bucket.key]? and bucket.key != 'Other'
           noOthersBucket[bucket.key] = bucket
-      console.log 'noOthersBucket: ', noOthersBucket
 
+#     paint outter slices
       subBucketSizes = (b.doc_count for b in subBuckets)
 
       bigSlice =  pie(bucketSizes)[i]
@@ -203,14 +205,13 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
           noOtherScaleDomains.push(key)
       noOtherScaleDomains.push('Other')
       @splitSeriesPropName.domain = noOtherScaleDomains
+
 # ----------------------------------------------------------------------------------------------------------------------
 #  qtips outter slices
 # ----------------------------------------------------------------------------------------------------------------------
-
       for subArc, i in subArcs[0]
         parentPropName = thisView.xAxisPropName.label
         propName = thisView.splitSeriesPropName.label
-        console.log 'propName: ', propName
 
         subBucketName = subBuckets[i].key
         parentBucketName = subBuckets[i].parent_key
@@ -279,7 +280,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('y', TITLE_Y)
       .attr('text-anchor', 'middle')
       .classed('title', 'true')
-      .on('click', -> window.open(@config.title_link_url))
+      .on('click', -> window.open thisView.config.title_link_url)
 
 # -----------------------------------------------------------------------------------------------------------------
 # RENDER SIMPLE PIE
