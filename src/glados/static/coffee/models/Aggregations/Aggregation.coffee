@@ -248,7 +248,7 @@ glados.useNameSpace 'glados.models.Aggregations',
 
           currentNumCols = bucketsList.length
 
-          @parseBucketsLink(aggDescription, currentBuckets)
+          @parseBucketsLink(aggDescription, bucketsList)
 
           bucketsData[aggKey] =
             buckets: bucketsList
