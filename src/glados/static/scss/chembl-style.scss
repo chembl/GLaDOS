@@ -114,11 +114,11 @@ strong {
 * Custom elements
 * ----------------------------------------------------------------------------------------------------------------------
 */
-.ellipsis-show-on-hover{
+.ellipsis-show-on-hover {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  &:hover{
+  &:hover {
     background: white;
     position: absolute;
     z-index: 1;
@@ -222,8 +222,8 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
       padding: 0.5em;
     }
     .main-page-menu-logo {
-        background-color: #6abec3;
-      }
+      background-color: #6abec3;
+    }
     &.pinned-non-materialize {
       font-size: #{$large-font-size*$chembl-header-shrink-ratio};
       height: calc(#{$chembl-header-height} + #{2*0.1em});
@@ -330,16 +330,15 @@ header .row {
   }
 }
 
-.pin-top{
+.pin-top {
   .chembl-header {
-    .inner-row{
-      .hide-on-pin-top{
+    .inner-row {
+      .hide-on-pin-top {
         display: none;
       }
     }
   }
 }
-
 
 #chembl-header-container {
   height: 0;
@@ -686,6 +685,7 @@ header .row {
 
   }
 }
+
 /**
 * EMBL-EBI bar
 * ----------------------------------------------------------------------------------------------------------------------
@@ -1437,11 +1437,11 @@ div#CompoundNameAndClassification .comp-phase-0 {
   right: 0px;
 }
 
-.embed-preview{
+.embed-preview {
   height: 60vh;
 }
 
-.code-container{
+.code-container {
   border: 1px solid $primary-color;
   padding: 10px;
   overflow: scroll;
@@ -1603,11 +1603,11 @@ div#CNC-zoom-modal {
 * Error message styles
 * ----------------------------------------------------------------------------------------------------------------------
 */
-a.error-redirect-link{
+a.error-redirect-link {
   font-size: 1.3em;
   color: $chembl-teal;
   text-decoration: underline;
-  &:hover{
+  &:hover {
     color: color('teal', 'lighten-1');
     font-size: 1.3em;
   }
@@ -1617,7 +1617,7 @@ a.error-redirect-link{
 * highlight styles
 * ----------------------------------------------------------------------------------------------------------------------
 */
-em.glados-result-highlight{
+em.glados-result-highlight {
   background: $chembl-highlight;
   font-style: normal;
   color: white;
@@ -1972,10 +1972,10 @@ em.glados-result-highlight{
   text-align: center;
 }
 
-.card-image{
+.card-image {
   display: table;
   height: 100%;
-  .image-container{
+  .image-container {
     display: table-cell;
     vertical-align: middle;
   }
@@ -2141,17 +2141,18 @@ $search-items-height: 35px;
   }
 }
 
-.search-bar{
-  .search-bar-help{
+.search-bar {
+  .search-bar-help {
     color: #e7e7e7;
     font-size: 0.7em;
     letter-spacing: 0.05em;
-    .example-link{
+    .example-link {
       color: #e7e7e7;
 
     }
   }
 }
+
 .search-bar-help {
 
   position: absolute;
@@ -2273,11 +2274,11 @@ $max_chembl_logo_height: 60px;
 
 .database-info {
 
-  .release-wrapper{
+  .release-wrapper {
     @media only screen and (min-width: 1500px) {
       margin-left: 15%;
     }
-    @media only screen and (max-width: 990px) and (min-width: 700px){
+    @media only screen and (max-width: 990px) and (min-width: 700px) {
       margin-left: 20%;
     }
   }
@@ -2678,22 +2679,22 @@ span.badge-primary-color-no-float {
     padding: 5px;
     word-wrap: break-word;
   }
-  .tweet-profile-name{
+  .tweet-profile-name {
     padding-left: 10px;
 
   }
 
 }
 
-.tweet-info{
-  span{
+.tweet-info {
+  span {
     font-size: 12px;
-    margin-right:10px;
-    color:#009688;
+    margin-right: 10px;
+    color: #009688;
   }
 
-  .s4{
-    padding-left:10px;
+  .s4 {
+    padding-left: 10px;
   }
 
   a {
@@ -2701,7 +2702,7 @@ span.badge-primary-color-no-float {
     padding-right: 10px;
   }
 
-    a:hover {
+  a:hover {
     color: #009688;
   }
 }
@@ -2846,7 +2847,6 @@ span.badge-primary-color-no-float {
 
 }
 
-
 /**
 * Target Browser
 * ----------------------------------------------------------------------------------------------------------------------
@@ -2869,7 +2869,7 @@ span.badge-primary-color-no-float {
     }
   }
 
-  label{
+  label {
     font-size: 1em;
   }
 
@@ -2891,10 +2891,10 @@ span.badge-primary-color-no-float {
   .browser-as-circles {
     .node {
       cursor: pointer;
-      &.hoverable{
+      &.hoverable {
         stroke-width: 1px;
         stroke: black;
-        &:hover,&.force-hover{
+        &:hover, &.force-hover {
           stroke: color('green', 'base');
           stroke-width: 2px;
         }
@@ -2906,7 +2906,6 @@ span.badge-primary-color-no-float {
         stroke-dasharray: 10;
       }
     }
-
 
     .node--leaf {
       fill: white;
@@ -2921,8 +2920,6 @@ span.badge-primary-color-no-float {
     .node--root {
       pointer-events: none;
     }
-
-
 
     .incomplete {
       stroke: color('green', 'base');
@@ -3005,7 +3002,7 @@ span.badge-primary-color-no-float {
   /*text-decoration: underline;*/
   letter-spacing: 0.5px;
   transition: all .15s ease-in-out;
-  color: #D33C60 !important;  /* glados.Settings.VIS_COLORS.RED2 */
+  color: #D33C60 !important; /* glados.Settings.VIS_COLORS.RED2 */
 
 }
 
@@ -3244,33 +3241,30 @@ span.badge-primary-color-no-float {
 
 }
 
-.histogram-legend{
+.histogram-legend {
   max-height: 100px;
   overflow-y: scroll;
   margin: 15px;
   padding: 15px;
 }
 
-
-    //  .axis-helper-line {
-    //    stroke-width: 0.5;
-    //    stroke: grey;
-    //  }
-    //  .rotated {
-    //    font-size: 70%;
-    //  }
-    //}
-    //path {
-    //  display: none;
-    //}
-    //
-    //text {
-    //  fill: #666666;
-    //}
+//  .axis-helper-line {
+//    stroke-width: 0.5;
+//    stroke: grey;
+//  }
+//  .rotated {
+//    font-size: 70%;
+//  }
+//}
+//path {
+//  display: none;
+//}
+//
+//text {
+//  fill: #666666;
+//}
 //    //
 //}
-
-
 
 /**
   * Scatter plot
@@ -3402,7 +3396,6 @@ span.badge-primary-color-no-float {
   }
 
 }
-
 
 .browser-views-container {
   display: flex;
@@ -3874,8 +3867,8 @@ $facets-width-large: 21%;
 * ----------------------------------------------------------------------------------------------------------------------
 */
 .main-pie-container {
-  display:flex !important;
-  .legend{
+  display: flex !important;
+  .legend {
     background-color: white;
     width: 100%;
     margin-left: -10px;
@@ -3906,15 +3899,13 @@ $facets-width-large: 21%;
   }
 
   .arc {
-    text{
+    text {
       font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
       font-size: 80%;
     }
   }
 
 }
-
-
 
 /**
 * Report card section
@@ -3933,7 +3924,7 @@ $facets-width-large: 21%;
 * References
 * ----------------------------------------------------------------------------------------------------------------------
 */
-.ref-source-link{
+.ref-source-link {
   color: black;
 }
 
@@ -3941,8 +3932,8 @@ $facets-width-large: 21%;
 * Report Cards
 * ----------------------------------------------------------------------------------------------------------------------
 */
-.report-card-header-table{
-  .collapser-button-cell{
+.report-card-header-table {
+  .collapser-button-cell {
     text-align: right;
   }
 }
@@ -3951,8 +3942,23 @@ $facets-width-large: 21%;
 * Visualisation Cards
 * ----------------------------------------------------------------------------------------------------------------------
 */
-.visualisation-card{
-  .card-content{
+.visualisation-card {
+  height: 40vh;
+  .card-content {
     padding: 5px;
+    height: 100%;
+    .row {
+      margin: 0;
+    }
+    .main-histogram-container {
+      height: 100%;
+      .histogram {
+        height: calc(100% - 100px);
+      }
+      .histogram-legend {
+        margin: 0;
+      }
+    }
   }
+
 }
