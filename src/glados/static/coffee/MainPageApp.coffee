@@ -96,6 +96,46 @@ class MainPageApp
                 template_data:
                   bucket_key: 'BUCKET.key'
                 link_generator: Target.getTargetsListURL
+              aggs:
+                l3_class:
+                  type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+                  field: '_metadata.protein_classification.l3'
+                  size: 100
+                  bucket_links:
+                    bucket_filter_template: '_metadata.protein_classification.l3:("{{bucket_key}}")'
+                    template_data:
+                      bucket_key: 'BUCKET.key'
+                    link_generator: Target.getTargetsListURL
+                  aggs:
+                    l4_class:
+                      type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+                      field: '_metadata.protein_classification.l4'
+                      size: 100
+                      bucket_links:
+                        bucket_filter_template: '_metadata.protein_classification.l4:("{{bucket_key}}")'
+                        template_data:
+                          bucket_key: 'BUCKET.key'
+                        link_generator: Target.getTargetsListURL
+                      aggs:
+                        l5_class:
+                          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+                          field: '_metadata.protein_classification.l5'
+                          size: 100
+                          bucket_links:
+                            bucket_filter_template: '_metadata.protein_classification.l5:("{{bucket_key}}")'
+                            template_data:
+                              bucket_key: 'BUCKET.key'
+                            link_generator: Target.getTargetsListURL
+                          aggs:
+                            l6_class:
+                              type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+                              field: '_metadata.protein_classification.l6'
+                              size: 100
+                              bucket_links:
+                                bucket_filter_template: '_metadata.protein_classification.l6:("{{bucket_key}}")'
+                                template_data:
+                                  bucket_key: 'BUCKET.key'
+                                link_generator: Target.getTargetsListURL
 
 
     targetsTreeAgg = new glados.models.Aggregations.Aggregation
@@ -164,6 +204,7 @@ class MainPageApp
     console.log 'INIT targets visualisation!!!'
     targetsHierarchyAgg = MainPageApp.getTargetsTreeAgg()
     targetsHierarchyAgg.fetch()
+    console.log 'targetsHierarchyAgg: ', targetsHierarchyAgg
 #    #initialize browser targets viz
     targetBrowserView = TargetBrowserApp.initBrowserAsCircles(targetHierarchy, $('#BCK-TargetBrowserAsCircles'))
     targetHierarchy.fetch()

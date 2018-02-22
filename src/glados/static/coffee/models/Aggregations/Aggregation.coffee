@@ -215,13 +215,6 @@ glados.useNameSpace 'glados.models.Aggregations',
 #           this could not work in all cases in the future
             bucket.parent_key = parseInt(parentKey)
 
-        console.log '---'
-        console.log 'currentBuckets: ', currentBuckets
-        console.log 'currentBuckets is array: ', _.isArray(currentBuckets)
-        console.log 'currentBuckets is object: ', _.isObject(currentBuckets)
-        console.log '^^^'
-
-
         # ---------------------------------------------------------------------
         # Parsing by type
         # ---------------------------------------------------------------------
@@ -280,13 +273,14 @@ glados.useNameSpace 'glados.models.Aggregations',
 
           if _.isArray(currentBuckets)
             internalBucketKey = internalBuckets.key
-          console.log 'internalBucketKey: ', internalBucketKey
-          console.log 'internalBuckets: ', internalBuckets
-          console.log 'aggKey: ', aggKey
-          console.log '^^^'
+
           newAggsConfig = aggs[aggKey]
           newBucketsData = bucketsData[aggKey].buckets_index[internalBucketKey]
-          newReceivedAggsInfo = receivedAggsInfo[aggKey].buckets[internalBucketKey]
+
+          if _.isArray(receivedAggsInfo[aggKey].buckets)
+            newReceivedAggsInfo = _.find(receivedAggsInfo[aggKey].buckets, (bucket) -> bucket.key == internalBucketKey)
+          else
+            newReceivedAggsInfo = receivedAggsInfo[aggKey].buckets[internalBucketKey]
 
           parentKey = undefined
           if newBucketsData?
@@ -334,8 +328,6 @@ glados.useNameSpace 'glados.models.Aggregations',
 
       templateValues = {}
       for propKey, propExp of templateDataDesc
-
-
 
         if propExp.startsWith('BUCKET')
           propName = propExp.split('.')[1]
