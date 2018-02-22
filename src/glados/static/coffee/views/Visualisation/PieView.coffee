@@ -165,19 +165,19 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       for subBucket in subBuckets
         totalBucketCount += subBucket.doc_count
 
-      maxCategories = 0
-      for bucket in subBuckets
-        if bucket.doc_count > (totalBucketCount * 0.06)
-          maxCategories += 1
-
 #      maxCategories = 0
-#      for subBucket in subBuckets
-#        if 100/wholePieCount * totalBucketCount > 30
-#          if subBucket.doc_count > totalBucketCount * 0.06
-#            maxCategories += 1
-#        else
-#          if subBucket.doc_count > totalBucketCount * 0.08
-#            maxCategories += 1
+#      for bucket in subBuckets
+#        if bucket.doc_count > (totalBucketCount * 0.06)
+#          maxCategories += 1
+
+      maxCategories = 0
+      for subBucket in subBuckets
+        if 100/wholePieCount * totalBucketCount > 30
+          if subBucket.doc_count > totalBucketCount * 0.06
+            maxCategories += 1
+        else
+          if subBucket.doc_count > totalBucketCount * 0.08
+            maxCategories += 1
 
       if maxCategories <= 1
         maxCategories++
