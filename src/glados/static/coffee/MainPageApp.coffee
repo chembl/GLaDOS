@@ -44,6 +44,7 @@ class MainPageApp
           default_interval_size: defaultInterval
           min_interval_size: 1
           max_interval_size: 10
+          bucket_key_parse_function: (key) -> key.replace(/\.0/i, '')
           aggs:
             split_series_agg:
               type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
@@ -54,7 +55,7 @@ class MainPageApp
                 bucket_filter_template: 'year:{{year}} AND journal:("{{bucket_key}}"' +
                                         '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
                 template_data:
-                  year: 'BUCKET.parent_key'
+                  year: 'BUCKET.parsed_parent_key'
                   bucket_key: 'BUCKET.key'
                   extra_buckets: 'EXTRA_BUCKETS.key'
 
