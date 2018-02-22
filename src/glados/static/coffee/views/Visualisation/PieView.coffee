@@ -99,7 +99,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     subBucketsOrder = glados.Utils.Buckets.getSubBucketsOrder(buckets, @splitSeriesAggName)
 
-    #subbuckets colour scale
+    #sub buckets colour scale
     zScaleDomains = []
     for key, value of subBucketsOrder
       zScaleDomains.push(key)
@@ -151,7 +151,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       for bucket in subBuckets
         totalCount += bucket.doc_count
 
-#      should this be dependant on slice size??
+#     should this be dependant on slice size??
       maxCategories = 0
       for bucket in subBuckets
         if bucket.doc_count > (totalCount * 0.06)
@@ -161,7 +161,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
         maxCategories++
 
       subBucketsCompleteAggName = "#{thisView.xAxisAggName}.aggs.#{thisView.splitSeriesAggName}"
-      subBuckets = glados.Utils.Buckets.mergeBuckets(subBuckets,  maxCategories, thisView.model, subBucketsCompleteAggName)
+      subBuckets = glados.Utils.Buckets.mergeBuckets(subBuckets,  maxCategories, thisView.model, subBucketsCompleteAggName, subBuckets=true)
 
       subBucketSizes = (b.doc_count for b in subBuckets)
 
@@ -180,14 +180,13 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('transform', 'translate(' + X_CENTER + ', ' + Y_CENTER + ')')
 
       subArcs.append('path')
-#        .attr('fill', (d, i) -> color2(i))
         .attr('stroke-width', 0.5)
         .attr('stroke', 'white')
         .attr('d', outerArc)
 
       for subBucket, i in subBuckets
         if subBucket.key == 'Other'
-          d3.select(subArcs[0][i]).attr('fill', glados.Settings.VIS_COLORS.GREY2)
+          d3.select(subArcs[0][i]).attr('fill', glados.Settings.VIS_COLORS.GREY3)
         else
           d3.select(subArcs[0][i]).attr('fill', color2(i))
 

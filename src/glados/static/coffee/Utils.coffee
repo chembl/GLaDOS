@@ -379,7 +379,7 @@ glados.useNameSpace 'glados',
               doc_count: _.reduce(_.pluck(bucketsToMerge, 'doc_count'), ((a, b) -> a + b))
               pos: Number.MAX_VALUE
               link: mergedLink
-              bar_key: bucketsToMerge[0].parent_key
+              parent_key: bucketsToMerge[0].parent_key
           else
             othersBucket =
               doc_count: _.reduce(_.pluck(bucketsToMerge, 'doc_count'), ((a, b) -> a + b))
