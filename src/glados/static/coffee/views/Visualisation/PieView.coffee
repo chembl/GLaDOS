@@ -69,10 +69,15 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     else
       VISUALISATION_WIDTH = $(@el).width()
     VISUALISATION_HEIGHT = VISUALISATION_WIDTH
+    if $(@el).parents('.visualisation-card')
+      VISUALISATION_HEIGHT = @$vis_elem.height()
     TITLE_Y = 40
-    RADIUS = VISUALISATION_WIDTH / 15
+    RADIUS = VISUALISATION_WIDTH / 20
     X_CENTER = VISUALISATION_WIDTH/2
     Y_CENTER = VISUALISATION_HEIGHT/2 + TITLE_Y/2
+
+
+
 
     mainContainer = d3.select(@$vis_elem.get(0))
     mainSVGContainer = mainContainer

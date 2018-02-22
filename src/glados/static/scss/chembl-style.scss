@@ -3959,6 +3959,15 @@ $facets-width-large: 21%;
         margin: 0;
       }
     }
+    .principal-pie-container {
+      height: calc(100% - 40px);
+      .main-pie-container {
+        height: 100%;
+        .pie-content {
+          height: 100%;
+        }
+      }
+    }
   }
 
 }
