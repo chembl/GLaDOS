@@ -77,9 +77,9 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     mainContainer = d3.select(@$vis_elem.get(0))
     mainSVGContainer = mainContainer
       .append('svg')
-      .attr('class', 'mainSVGContainer')
-      .attr('width', VISUALISATION_WIDTH)
-      .attr('height', VISUALISATION_HEIGHT)
+        .attr('class', 'mainSVGContainer')
+        .attr('width', VISUALISATION_WIDTH)
+        .attr('height', VISUALISATION_HEIGHT)
 
     arcsContainer = mainSVGContainer.append('g')
     subArcsContainer = mainSVGContainer.append('g')
@@ -130,8 +130,9 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       .data(bucketsData)
       .enter()
       .append('g')
-      .attr('class', 'arc')
-      .attr('transform', 'translate(' + X_CENTER + ', ' + Y_CENTER + ')')
+        .attr('class', 'arc')
+        .attr('transform', 'translate(' + X_CENTER + ', ' + Y_CENTER + ')')
+        .on('click', (d) -> window.open d.link)
 
     arcs.append('path')
       .attr('fill', (d) -> color(d.key))
@@ -164,7 +165,6 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       for subBucket in subBuckets
         totalBucketCount += subBucket.doc_count
 
-#     should this be dependant on slice size??
       maxCategories = 0
       for bucket in subBuckets
         if bucket.doc_count > (totalBucketCount * 0.06)
@@ -305,7 +305,6 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 # -----------------------------------------------------------------------------------------------------------------
 # title
 # -----------------------------------------------------------------------------------------------------------------
-
     mainSVGContainer.append('text')
       .text(@config.title)
       .attr('x', VISUALISATION_WIDTH/2)
@@ -317,7 +316,6 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 # -----------------------------------------------------------------------------------------------------------------
 # RENDER SIMPLE PIE
 # -----------------------------------------------------------------------------------------------------------------
-
   renderSimplePie: (buckets) ->
     values = []
     labels = []
@@ -371,7 +369,6 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     pieDiv = @$vis_elem.get(0)
     Plotly.newPlot pieDiv, data, layout
 
-    thisView = @
     pieDiv.on('plotly_click', (eventInfo) ->
       clickedKey = eventInfo.points[0].label
       link = bucketsIndex[clickedKey].link

@@ -64,7 +64,6 @@ glados.useNameSpace 'glados.models.visualisation',
           type: String
           colourScaleType: glados.Visualisation.CATEGORICAL
           coloursRange: [
-#            '#0d343a',
             '#0a585b',
             '#077c80',
             '#2ba3a5',
@@ -74,7 +73,7 @@ glados.useNameSpace 'glados.models.visualisation',
             '#fdabbc',
             '#f9849d',
             '#e95f7e',
-            '#cc4362',
+            '#cc4362'
           ]
     DocumentAggregation:
       Properties:

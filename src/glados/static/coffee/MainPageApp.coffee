@@ -83,6 +83,13 @@ class MainPageApp
           type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
           field: 'max_phase'
           size: 5
+          bucket_links:
+            bucket_filter_template: '_metadata.drug.is_drug:true AND ' +
+                                    'max_phase:{{bucket_key}}'
+            template_data:
+              bucket_key: 'BUCKET.key'
+
+            link_generator: Compound.getCompoundsListURL
           aggs:
             split_series_agg:
               type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
