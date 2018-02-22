@@ -125,7 +125,6 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       currentDatum = bucketsData[i]
       currentBucket = buckets[i]
       _.extend(currentDatum, currentBucket)
-    console.log 'bucketsData: ', bucketsData
 
     arcs = arcsContainer.selectAll('g.arc')
       .data(bucketsData)
@@ -153,18 +152,32 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
         'translate(' + x + ', ' + y + ')')
 
     noOthersBucket = {}
+    wholePieCount = 0
+    for bucket in buckets
+      for subBucket in bucket[thisView.splitSeriesAggName].buckets
+        wholePieCount += subBucket.doc_count
+
     for bucket, i in buckets
       subBuckets = bucket[thisView.splitSeriesAggName].buckets
 
-      totalCount = 0
-      for bucket in subBuckets
-        totalCount += bucket.doc_count
+      totalBucketCount = 0
+      for subBucket in subBuckets
+        totalBucketCount += subBucket.doc_count
 
 #     should this be dependant on slice size??
       maxCategories = 0
       for bucket in subBuckets
-        if bucket.doc_count > (totalCount * 0.06)
+        if bucket.doc_count > (totalBucketCount * 0.06)
           maxCategories += 1
+
+#      maxCategories = 0
+#      for subBucket in subBuckets
+#        if 100/wholePieCount * totalBucketCount > 30
+#          if subBucket.doc_count > totalBucketCount * 0.06
+#            maxCategories += 1
+#        else
+#          if subBucket.doc_count > totalBucketCount * 0.08
+#            maxCategories += 1
 
       if maxCategories <= 1
         maxCategories++
@@ -211,16 +224,15 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
         .append('g')
           .attr('class', 'sub-arc')
           .attr('transform', 'translate(' + X_CENTER + ', ' + Y_CENTER + ')')
-          .on('click', (d) -> window.open d.link)
+          .on('click', (d) -> window.open d.link )
           .attr('fill', (d) ->
             if d.key == 'Other'
-              glados.Settings.VIS_COLORS.GREY3
+              glados.Settings.VIS_COLORS.GREY2
             else
               color2(d.key)
           )
 
       subArcs.append('path')
-#        .attr('fill', (d, i) -> color2(i) )
         .attr('stroke-width', 0.5)
         .attr('stroke', 'white')
         .attr('d', outerArc)
