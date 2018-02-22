@@ -119,15 +119,23 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
         .innerRadius(RADIUS*4)
         .outerRadius(RADIUS*5.5)
 
+#   add bucket data to pie data
+    bucketsData = pie(bucketSizes)
+    for i in [0..buckets.length-1]
+      currentDatum = bucketsData[i]
+      currentBucket = buckets[i]
+      _.extend(currentDatum, currentBucket)
+    console.log 'bucketsData: ', bucketsData
+
     arcs = arcsContainer.selectAll('g.arc')
-      .data(pie(bucketSizes))
+      .data(bucketsData)
       .enter()
       .append('g')
       .attr('class', 'arc')
       .attr('transform', 'translate(' + X_CENTER + ', ' + Y_CENTER + ')')
 
     arcs.append('path')
-      .attr('fill', (d, i) -> color(i))
+      .attr('fill', (d) -> color(d.key))
       .attr('stroke-width', 1)
       .attr('stroke', 'white')
       .attr('d', innerArc)
@@ -170,7 +178,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
         if not noOthersBucket[bucket.key]? and bucket.key != 'Other'
           noOthersBucket[bucket.key] = bucket
 
-# only sends the buckets that are not in the 'others' section for rendering in the legend
+#     only sends the buckets that are not in the 'others' section for rendering in the legend
       noOtherScaleDomains = []
       for key, value of noOthersBucket
           noOtherScaleDomains.push(key)
