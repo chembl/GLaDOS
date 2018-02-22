@@ -105,8 +105,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       zScaleDomains.push(key)
 
     @splitSeriesPropName.domain = zScaleDomains
-    glados.models.visualisation.PropertiesFactory.generateColourScale(@splitSeriesPropName)
-    color2 = @splitSeriesPropName.colourScale
+
 
 #   paint inner slices
     pie = d3.layout.pie()
@@ -171,40 +170,53 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
         if not noOthersBucket[bucket.key]? and bucket.key != 'Other'
           noOthersBucket[bucket.key] = bucket
 
-#     paint outter slices
-      subBucketSizes = (b.doc_count for b in subBuckets)
-
-      bigSlice =  pie(bucketSizes)[i]
-
-      AggregationPie = d3.layout.pie()
-        .startAngle(bigSlice.startAngle)
-        .endAngle(bigSlice.endAngle)
-        .sort(null)
-
-      subArcs = subArcsContainer.selectAll('g.arc')
-        .data(AggregationPie(subBucketSizes))
-        .enter()
-        .append('g')
-        .attr('class', 'sub-arc')
-        .attr('transform', 'translate(' + X_CENTER + ', ' + Y_CENTER + ')')
-
-      subArcs.append('path')
-        .attr('stroke-width', 0.5)
-        .attr('stroke', 'white')
-        .attr('d', outerArc)
-
-      for subBucket, i in subBuckets
-        if subBucket.key == 'Other'
-          d3.select(subArcs[0][i]).attr('fill', glados.Settings.VIS_COLORS.GREY3)
-        else
-          d3.select(subArcs[0][i]).attr('fill', color2(i))
-
-#     only sends the buckets that are not in the 'others' section for rendering in the legend
+# only sends the buckets that are not in the 'others' section for rendering in the legend
       noOtherScaleDomains = []
       for key, value of noOthersBucket
           noOtherScaleDomains.push(key)
       noOtherScaleDomains.push('Other')
       @splitSeriesPropName.domain = noOtherScaleDomains
+
+      glados.models.visualisation.PropertiesFactory.generateColourScale(@splitSeriesPropName)
+      color2 = @splitSeriesPropName.colourScale
+
+#     paint outter slices
+      subBucketSizes = (b.doc_count for b in subBuckets)
+
+      bigSlice =  pie(bucketSizes)[i]
+
+      aggregationPie = d3.layout.pie()
+        .startAngle(bigSlice.startAngle)
+        .endAngle(bigSlice.endAngle)
+        .sort(null)
+
+      # add subucket data to aggregation pie data
+      subBucketsData = aggregationPie(subBucketSizes)
+      for i in [0..subBuckets.length-1]
+        currentDatum = subBucketsData[i]
+        currentBucket = subBuckets[i]
+        _.extend(currentDatum, currentBucket)
+
+      subArcs = subArcsContainer.selectAll('g.arc')
+        .data(subBucketsData)
+        .enter()
+        .append('g')
+          .attr('class', 'sub-arc')
+          .attr('transform', 'translate(' + X_CENTER + ', ' + Y_CENTER + ')')
+          .on('click', (d) -> window.open d.link)
+          .attr('fill', (d) ->
+            if d.key == 'Other'
+              glados.Settings.VIS_COLORS.GREY3
+            else
+              color2(d.key)
+          )
+
+      subArcs.append('path')
+#        .attr('fill', (d, i) -> color2(i) )
+        .attr('stroke-width', 0.5)
+        .attr('stroke', 'white')
+        .attr('d', outerArc)
+
 
 # ----------------------------------------------------------------------------------------------------------------------
 #  qtips outter slices
