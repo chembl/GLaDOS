@@ -204,17 +204,22 @@ glados.useNameSpace 'glados.models.Aggregations',
       for aggKey, aggDescription of aggs
 
         currentBuckets = receivedAggsInfo[aggKey].buckets
+        if _.isArray(currentBuckets)
+          bucketsList = currentBuckets
+          currentBuckets = _.indexBy(currentBuckets, 'key')
+        else
+          bucketsList = glados.Utils.Buckets.getBucketsList(currentBuckets)
 
         if parentKey?
-          for bucket in currentBuckets
+          for bucket in bucketsList
 #           this could not work in all cases in the future
             bucket.parent_key = parseInt(parentKey)
 
-#        console.log '---'
-#        console.log 'currentBuckets: ', currentBuckets
-#        console.log 'currentBuckets is array: ', _.isArray(currentBuckets)
-#        console.log 'currentBuckets is object: ', _.isObject(currentBuckets)
-#        console.log '^^^'
+        console.log '---'
+        console.log 'currentBuckets: ', currentBuckets
+        console.log 'currentBuckets is array: ', _.isArray(currentBuckets)
+        console.log 'currentBuckets is object: ', _.isObject(currentBuckets)
+        console.log '^^^'
 
 
         # ---------------------------------------------------------------------
@@ -222,7 +227,6 @@ glados.useNameSpace 'glados.models.Aggregations',
         # ---------------------------------------------------------------------
         if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE
 
-          bucketsList = glados.Utils.Buckets.getBucketsList(currentBuckets)
           currentNumCols = bucketsList.length
 
           currentMinValue = aggDescription.min_value
@@ -242,19 +246,18 @@ glados.useNameSpace 'glados.models.Aggregations',
 
         else if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.TERMS
 
-          currentNumCols = currentBuckets.length
+          currentNumCols = bucketsList.length
 
           @parseBucketsLink(aggDescription, currentBuckets)
 
           bucketsData[aggKey] =
-            buckets: currentBuckets
+            buckets: bucketsList
             buckets_index: currentBuckets
             num_columns: currentNumCols
             buckets_index: _.indexBy(currentBuckets, 'key')
 
         else if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
 
-          bucketsList = glados.Utils.Buckets.getBucketsList(currentBuckets)
           currentNumCols = bucketsList.length
 
           currentMinValue = aggDescription.min_value
@@ -277,10 +280,10 @@ glados.useNameSpace 'glados.models.Aggregations',
 
           if _.isArray(currentBuckets)
             internalBucketKey = internalBuckets.key
-#          console.log 'internalBucketKey: ', internalBucketKey
-#          console.log 'internalBuckets: ', internalBuckets
-#          console.log 'aggKey: ', aggKey
-#          console.log '^^^'
+          console.log 'internalBucketKey: ', internalBucketKey
+          console.log 'internalBuckets: ', internalBuckets
+          console.log 'aggKey: ', aggKey
+          console.log '^^^'
           newAggsConfig = aggs[aggKey]
           newBucketsData = bucketsData[aggKey].buckets_index[internalBucketKey]
           newReceivedAggsInfo = receivedAggsInfo[aggKey].buckets[internalBucketKey]

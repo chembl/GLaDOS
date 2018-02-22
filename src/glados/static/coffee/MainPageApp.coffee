@@ -162,11 +162,11 @@ class MainPageApp
 
 
     console.log 'INIT targets visualisation!!!'
-#    targetsHierarchyAgg = MainPageApp.getTargetsTreeAgg()
-#    targetsHierarchyAgg.fetch()
+    targetsHierarchyAgg = MainPageApp.getTargetsTreeAgg()
+    targetsHierarchyAgg.fetch()
 #    #initialize browser targets viz
     targetBrowserView = TargetBrowserApp.initBrowserAsCircles(targetHierarchy, $('#BCK-TargetBrowserAsCircles'))
-#    targetHierarchy.fetch()
+    targetHierarchy.fetch()
 
     new glados.views.ReportCards.VisualisationInCardView
       el: $('#BCK-TargetBrowserAsCircles')
