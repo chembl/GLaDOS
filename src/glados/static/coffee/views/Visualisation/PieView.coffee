@@ -14,7 +14,6 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       @splitSeriesPropName = @config.properties[@config.initial_property_z]
       @xAxisPropName = @config.properties[@config.initial_property_x]
 
-
   showNoDataFoundMessage: ->
 
     $visualisationMessages = $(@el).find('.BCK-VisualisationMessages')
@@ -58,6 +57,9 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     else
       @renderSimplePie(buckets)
 
+# ----------------------------------------------------------------------------------------------------------------------
+# RENDER STACKED DONUT
+# ----------------------------------------------------------------------------------------------------------------------
   renderStackedDonut: (buckets) ->
     thisView = @
     thisView.$vis_elem.empty()
@@ -71,7 +73,6 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     RADIUS = VISUALISATION_WIDTH / 15
     X_CENTER = VISUALISATION_WIDTH/2
     Y_CENTER = VISUALISATION_HEIGHT/2 + TITLE_Y/2
-
 
     mainContainer = d3.select(@$vis_elem.get(0))
     mainSVGContainer = mainContainer
@@ -143,7 +144,6 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
         y = -Math.sin(angle) * RADIUS*3
         'translate(' + x + ', ' + y + ')')
 
-
     for bucket, i in buckets
       subBuckets = bucket[thisView.splitSeriesAggName].buckets
 
@@ -151,7 +151,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       for bucket in subBuckets
         totalCount += bucket.doc_count
 
-#      TODO: should this be dependant on slice size??
+#      should this be dependant on slice size??
       maxCategories = 0
       for bucket in subBuckets
         if bucket.doc_count > (totalCount * 0.06)
@@ -188,7 +188,8 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       for subBucket, i in subBuckets
         if subBucket.key == 'Other'
           d3.select(subArcs[0][i]).attr('fill', glados.Settings.VIS_COLORS.GREY2)
-
+        else
+          d3.select(subArcs[0][i]).attr('fill', color2(i))
 
 # ----------------------------------------------------------------------------------------------------------------------
 #  qtips outter slices
@@ -267,6 +268,10 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       .classed('title', 'true')
       .on('click', -> window.open(@config.title_link_url))
 
+# -----------------------------------------------------------------------------------------------------------------
+# RENDER SIMPLE PIE
+# -----------------------------------------------------------------------------------------------------------------
+
   renderSimplePie: (buckets) ->
     values = []
     labels = []
@@ -286,7 +291,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
             glados.Settings.VIS_COLORS.PURPLE2,
             glados.Settings.VIS_COLORS.BLUE2,
             glados.Settings.VIS_COLORS.BLUE3,
-            glados.Settings.VIS_COLORS.BLUE4,
+            glados.Settings.VIS_COLORS.BLUE4
       ]
 
     data1 =
