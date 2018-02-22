@@ -22,8 +22,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     thisView = @
     @fillInstructionsTemplate undefined
 
-    console.log('nodes before')
-    console.log(@model.get('plain'))
 
     @hideResponsiveViewPreloader()
     @margin = 20
@@ -50,12 +48,9 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     # use plain version
     @root = @model.get('plain')
-    console.log '@root: ', @root
     focus = @root
     nodes = pack.nodes(@root)
     @currentViewFrame = undefined
-    console.log('nodes after')
-    console.log(nodes)
 
     #get depth domain in tree
     getNodeNumChildren = (node) -> if not node.children? then 0 else node.children.length
@@ -64,8 +59,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     nodeWithMaxNumChildren = _.max(nodes, getNodeNumChildren)
     maxNumChildren = if not nodeWithMaxNumChildren.children? then 0 else nodeWithMaxNumChildren.children.length
 
-    console.log 'minNumChildren: ', minNumChildren
-    console.log 'maxNumChildren: ', maxNumChildren
     textSize = d3.scale.linear()
       .domain([minNumChildren, maxNumChildren])
       .range([60, 160])

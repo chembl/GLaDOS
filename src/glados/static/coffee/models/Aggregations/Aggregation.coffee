@@ -284,7 +284,8 @@ glados.useNameSpace 'glados.models.Aggregations',
           newBucketsData = bucketsData[aggKey].buckets_index[internalBucketKey]
 
           if _.isArray(receivedAggsInfo[aggKey].buckets)
-            newReceivedAggsInfo = _.find(receivedAggsInfo[aggKey].buckets, (bucket) -> bucket.key == internalBucketKey)
+            newReceivedAggsInfo = _.find(receivedAggsInfo[aggKey].buckets, (bucket) ->
+              String(bucket.key) == String(internalBucketKey))
           else
             newReceivedAggsInfo = receivedAggsInfo[aggKey].buckets[internalBucketKey]
 
