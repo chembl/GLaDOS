@@ -144,6 +144,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
         y = -Math.sin(angle) * RADIUS*3
         'translate(' + x + ', ' + y + ')')
 
+    noOthersBucket = {}
     for bucket, i in buckets
       subBuckets = bucket[thisView.splitSeriesAggName].buckets
 
@@ -162,6 +163,12 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       subBucketsCompleteAggName = "#{thisView.xAxisAggName}.aggs.#{thisView.splitSeriesAggName}"
       subBuckets = glados.Utils.Buckets.mergeBuckets(subBuckets,  maxCategories, thisView.model, subBucketsCompleteAggName, subBuckets=true)
+
+#     fills object with buckets that are not in the 'other' section (for legend domain)
+      for bucket in subBuckets
+        if not noOthersBucket[bucket.key]? and bucket.key != 'Other'
+          noOthersBucket[bucket.key] = bucket
+      console.log 'noOthersBucket: ', noOthersBucket
 
       subBucketSizes = (b.doc_count for b in subBuckets)
 
@@ -190,6 +197,12 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
         else
           d3.select(subArcs[0][i]).attr('fill', color2(i))
 
+#     only sends the buckets that are not in the 'others' section for rendering in the legend
+      noOtherScaleDomains = []
+      for key, value of noOthersBucket
+          noOtherScaleDomains.push(key)
+      noOtherScaleDomains.push('Other')
+      @splitSeriesPropName.domain = noOtherScaleDomains
 # ----------------------------------------------------------------------------------------------------------------------
 #  qtips outter slices
 # ----------------------------------------------------------------------------------------------------------------------
