@@ -182,6 +182,13 @@ $small-font-size: 0.7rem;
 // d/h = (1-cos(30 degree))/2
 $hexagon-lateral-distance-proportion: 0.0669872981;
 
+.z-depth-below-zero {
+  z-index: -1;
+  box-shadow: none;
+  li:first-child {
+    margin-top: $chembl-header-height !important;
+  }
+}
 .side-nav {
   border: none;
   width: $side-nav-width;
@@ -358,7 +365,6 @@ header .row {
     transition: height 0.25s, width 0.25s;
     transition-timing-function: ease;
     font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
-    //box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
     color: white;
     padding-top: $chembl-header-padding;
