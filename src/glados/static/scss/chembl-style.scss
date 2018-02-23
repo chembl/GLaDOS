@@ -3963,7 +3963,7 @@ $facets-width-large: 21%;
       }
     }
     .principal-pie-container {
-      height: calc(100% - 40px);
+      height: calc(100% - 30px);
       .main-pie-container {
         height: 100%;
         .pie-content {
@@ -3972,4 +3972,8 @@ $facets-width-large: 21%;
       }
     }
   }
+}
+
+#MaxPhaseForDisease .all-sources-link {
+  font-size: 70%;
 }
