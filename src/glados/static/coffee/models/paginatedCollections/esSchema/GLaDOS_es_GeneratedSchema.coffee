@@ -1180,6 +1180,34 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         label_id : 'glados_es_gs__document__related_tissues__label'
         label_mini_id : 'glados_es_gs__document__related_tissues__label__mini'
 
+      '_metadata.similar_documents.document_chembl_id' : 
+        type : String
+        aggregatable : true
+        label_id : 'glados_es_gs__document__similar_documents___document_chembl_id__label'
+        label_mini_id : 'glados_es_gs__document__similar_documents___document_chembl_id__label__mini'
+
+      '_metadata.similar_documents.mol_tani' : 
+        type : Number
+        integer : false
+        year : false
+        aggregatable : true
+        label_id : 'glados_es_gs__document__similar_documents___mol_tani__label'
+        label_mini_id : 'glados_es_gs__document__similar_documents___mol_tani__label__mini'
+
+      '_metadata.similar_documents.tid_tani' : 
+        type : Number
+        integer : false
+        year : false
+        aggregatable : true
+        label_id : 'glados_es_gs__document__similar_documents___tid_tani__label'
+        label_mini_id : 'glados_es_gs__document__similar_documents___tid_tani__label__mini'
+
+      '_metadata.similar_documents' : 
+        type : Object
+        aggregatable : false
+        label_id : 'glados_es_gs__document__similar_documents__label'
+        label_mini_id : 'glados_es_gs__document__similar_documents__label__mini'
+
       '_metadata.source.src_description' : 
         type : String
         aggregatable : true
@@ -1954,6 +1982,80 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         aggregatable : false
         label_id : 'glados_es_gs__molecule__drug__label'
         label_mini_id : 'glados_es_gs__molecule__drug__label__mini'
+
+      '_metadata.drug_indications.drugind_id' : 
+        type : String
+        aggregatable : true
+        label_id : 'glados_es_gs__molecule__drug_indications___drugind_id__label'
+        label_mini_id : 'glados_es_gs__molecule__drug_indications___drugind_id__label__mini'
+
+      '_metadata.drug_indications.efo_id' : 
+        type : String
+        aggregatable : true
+        label_id : 'glados_es_gs__molecule__drug_indications___efo_id__label'
+        label_mini_id : 'glados_es_gs__molecule__drug_indications___efo_id__label__mini'
+
+      '_metadata.drug_indications.efo_term' : 
+        type : String
+        aggregatable : true
+        label_id : 'glados_es_gs__molecule__drug_indications___efo_term__label'
+        label_mini_id : 'glados_es_gs__molecule__drug_indications___efo_term__label__mini'
+
+      '_metadata.drug_indications.indication_refs.ref_id' : 
+        type : String
+        aggregatable : true
+        label_id : 'glados_es_gs__molecule__indication_refs___ref_id__label'
+        label_mini_id : 'glados_es_gs__molecule__indication_refs___ref_id__label__mini'
+
+      '_metadata.drug_indications.indication_refs.ref_type' : 
+        type : String
+        aggregatable : true
+        label_id : 'glados_es_gs__molecule__indication_refs___ref_type__label'
+        label_mini_id : 'glados_es_gs__molecule__indication_refs___ref_type__label__mini'
+
+      '_metadata.drug_indications.indication_refs.ref_url' : 
+        type : String
+        aggregatable : true
+        label_id : 'glados_es_gs__molecule__indication_refs___ref_url__label'
+        label_mini_id : 'glados_es_gs__molecule__indication_refs___ref_url__label__mini'
+
+      '_metadata.drug_indications.indication_refs' : 
+        type : Object
+        aggregatable : false
+        label_id : 'glados_es_gs__molecule__drug_indications___indication_refs__label'
+        label_mini_id : 'glados_es_gs__molecule__drug_indications___indication_refs__label__mini'
+
+      '_metadata.drug_indications.max_phase_for_ind' : 
+        type : Number
+        integer : true
+        year : false
+        aggregatable : true
+        label_id : 'glados_es_gs__molecule__drug_indications___max_phase_for_ind__label'
+        label_mini_id : 'glados_es_gs__molecule__drug_indications___max_phase_for_ind__label__mini'
+
+      '_metadata.drug_indications.mesh_heading' : 
+        type : String
+        aggregatable : true
+        label_id : 'glados_es_gs__molecule__drug_indications___mesh_heading__label'
+        label_mini_id : 'glados_es_gs__molecule__drug_indications___mesh_heading__label__mini'
+
+      '_metadata.drug_indications.mesh_id' : 
+        type : String
+        aggregatable : true
+        label_id : 'glados_es_gs__molecule__drug_indications___mesh_id__label'
+        label_mini_id : 'glados_es_gs__molecule__drug_indications___mesh_id__label__mini'
+
+      '_metadata.drug_indications.molecule_chembl_id' : 
+        type : String
+        aggregatable : true
+        label_id : 'glados_es_gs__molecule__drug_indications___molecule_chembl_id__label'
+        label_mini_id : 'glados_es_gs__molecule__drug_indications___molecule_chembl_id__label__mini'
+
+      '_metadata.drug_indications' : 
+        type : Object
+        aggregatable : false
+        label_id : 'glados_es_gs__molecule__drug_indications__label'
+        label_mini_id : 'glados_es_gs__molecule__drug_indications__label__mini'
 
       '_metadata.es_completion' : 
         type : String
