@@ -65,7 +65,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     thisView.$vis_elem.empty()
 
     if @config.side_legend
-      VISUALISATION_WIDTH = $(@el).width() - $(@el).width() * 0.25
+      VISUALISATION_WIDTH = $(@el).width() - $(@el).width() * 0.30
     else
       VISUALISATION_WIDTH = $(@el).width()
     VISUALISATION_HEIGHT = VISUALISATION_WIDTH
@@ -164,8 +164,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     noOthersBucket = {}
     wholePieCount = 0
     for bucket in buckets
-      for subBucket in bucket[thisView.splitSeriesAggName].buckets
-        wholePieCount += subBucket.doc_count
+      wholePieCount += bucket.doc_count
 
     for bucket, i in buckets
       subBuckets = bucket[thisView.splitSeriesAggName].buckets
@@ -176,16 +175,17 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
 #      maxCategories = 0
 #      for bucket in subBuckets
-#        if bucket.doc_count > (totalBucketCount * 0.06)
+#        if bucket.doc_count > (totalBucketCount * 0.05)
 #          maxCategories += 1
 
       maxCategories = 0
       for subBucket in subBuckets
-        if 100/wholePieCount * totalBucketCount > 30
-          if subBucket.doc_count > totalBucketCount * 0.06
+
+        if 100/wholePieCount * buckets[i].doc_count > 20
+          if subBucket.doc_count > totalBucketCount * 0.04
             maxCategories += 1
         else
-          if subBucket.doc_count > totalBucketCount * 0.08
+          if subBucket.doc_count > totalBucketCount * 0.06
             maxCategories += 1
 
       if maxCategories <= 1

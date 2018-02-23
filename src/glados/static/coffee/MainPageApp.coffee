@@ -90,7 +90,7 @@ class MainPageApp
             split_series_agg:
               type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
               field: '_metadata.drug_indications.efo_term'
-              size: 10
+              size: 12
               bucket_links:
                 bucket_filter_template: '_metadata.drug.is_drug:true AND ' +
                                         'max_phase :{{max_phase}} AND _metadata.drug_indications.efo_term:("{{bucket_key}}"' +
