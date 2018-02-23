@@ -72,7 +72,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     if $(@el).parents('.visualisation-card')
       VISUALISATION_HEIGHT = @$vis_elem.height()
     TITLE_Y = 40
-    RADIUS = VISUALISATION_WIDTH / 20
+    RADIUS = Math.min(VISUALISATION_WIDTH, VISUALISATION_HEIGHT)  / 20
     X_CENTER = VISUALISATION_WIDTH/2
     Y_CENTER = VISUALISATION_HEIGHT/2 + TITLE_Y/2
 
