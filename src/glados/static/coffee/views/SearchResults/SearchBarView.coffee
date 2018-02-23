@@ -34,6 +34,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         el: $editorModal
       })
 
+
     popStateHandler: ()->
       @atResultsPage = URLProcessor.isAtSearchResultsPage()
       if window.location.href != @last_location_url
