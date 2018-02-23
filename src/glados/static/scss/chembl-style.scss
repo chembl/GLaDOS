@@ -466,7 +466,6 @@ header .row {
             display: block;
             height: 5em;
             width: 5em;
-            padding: 0.5em;
             //margin: 0 #{-4em*$hexagon-lateral-distance-proportion-0.5em} 0 #{-4em*$hexagon-lateral-distance-proportion-0.5em} !important;
             margin: auto
           }
@@ -599,7 +598,7 @@ header .row {
     }
     ul {
       li {
-        margin-right: 2em;
+        //margin-right: 2em;
       }
       &.right-align-content {
         li {

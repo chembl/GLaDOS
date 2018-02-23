@@ -3,15 +3,6 @@
     <div class="inner-row">
         <div class="col l2 m5 s10 hide-on-small-pinned">
             <ul>
-                {% if main_page and not hide_side_nav %}
-                    <li class="menu-logo {% if main_page %} side-nav-width {% endif %}">
-                        <a class=" {% if main_page %}main-page-menu-logo {% endif %}"
-                           href="{% url 'main' %}">
-                            <img title="Go to the ChEMBL homepage" class="chembl-logo-header" alt="ChEMBL logo"
-                                 src="{% static 'img/chembl_logo.png' %}"/>
-                        </a>
-                    </li>
-                {% endif %}
                 {% if hide_side_nav %}
                     <li>
                         <a data-activates="slide-out" class="button-collapse hoverable z-depth-1 waves-effect waves-light">
@@ -32,6 +23,15 @@
                             <i class="material-icons">menu</i>
                         </a>
                     </li>
+                    {% if main_page %}
+                        <li class="menu-logo side-nav-width hide-on-med-and-down">
+                            <a class=" {% if main_page %}main-page-menu-logo {% endif %}"
+                               href="{% url 'main' %}">
+                                <img title="Go to the ChEMBL homepage" class="chembl-logo-header" alt="ChEMBL logo"
+                                     src="{% static 'img/chembl_logo.png' %}"/>
+                            </a>
+                        </li>
+                    {% endif %}
                 {% endif %}
                 <li>
                     <a href="{% url 'main' %}" class="waves-effect waves-light long-link l2">
