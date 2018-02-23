@@ -51,7 +51,11 @@
           {% include "glados/MainPageParts/Visualizations/MaxPhaseForDiseaseDonut.html" %}
       {% endwith %}
     </div>
-    <div class="col m6 s12" ></div>
+    <div class="col m6 s12" >
+        {% with is_dynamic=False %}
+          {% include "glados/MainPageParts/Visualizations/YourIdeaHereCard.html" %}
+      {% endwith %}
+    </div>
 
   </div>
 
