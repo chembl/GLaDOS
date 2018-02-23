@@ -1972,12 +1972,14 @@ em.glados-result-highlight{
   text-align: center;
 }
 
-.card-image{
-  display: table;
-  height: 100%;
-  .image-container{
-    display: table-cell;
-    vertical-align: middle;
+.card.horizontal{
+  .card-image{
+    display: table;
+    height: 100%;
+    .image-container{
+      display: table-cell;
+      vertical-align: middle;
+    }
   }
 }
 
