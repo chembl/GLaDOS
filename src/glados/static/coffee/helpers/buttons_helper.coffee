@@ -4,10 +4,11 @@ class ButtonsHelper
   # Modals
   # ------------------------------------------------------------
   # it returns the element that has the modal contents so it can be used to bind views to it.
-  @generateModalFromTemplate = ($trigger, templateID, startingTop=undefined , endingTop=undefined) ->
+  @generateModalFromTemplate = ($trigger=undefined, templateID, startingTop=undefined , endingTop=undefined) ->
 
-    if $trigger.attr('data-modal-configured') == 'yes'
-      return
+    if $trigger?
+      if $trigger.attr('data-modal-configured') == 'yes'
+        return
 
     if $('#'+templateID).attr('data-starting-top')
       startingTop = $('#'+templateID).attr('data-starting-top')
@@ -23,10 +24,13 @@ class ButtonsHelper
 
     modalId = 'modal-' + (new Date()).getTime()
     $('body').append($(glados.Utils.getContentFromTemplate(templateID, {id: modalId})))
-    $trigger.attr('href', '#' + modalId).addClass('modal-trigger')
     $newModal = $('#' + modalId)
     $newModal.modal options
-    $trigger.attr('data-modal-configured', 'yes')
+
+
+    if $trigger?
+      $trigger.attr('href', '#' + modalId).addClass('modal-trigger')
+      $trigger.attr('data-modal-configured', 'yes')
 
     return $newModal
 
