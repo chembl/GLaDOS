@@ -29,11 +29,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     initializeSketcherButton: ()->
       $openEditorBtn = $(@el).find('.draw-structure.hide-on-small-only')
-      $editorModal = ButtonsHelper.generateModalFromTemplate($openEditorBtn, 'Handlebars-Common-MarvinModal')
-      @marvinEditor = new MarvinSketcherView({
-        el: $editorModal
-      })
-
+      $openEditorBtn.click glados.helpers.ChemicalEditorHelper.showChemicalEditorModal
 
     popStateHandler: ()->
       @atResultsPage = URLProcessor.isAtSearchResultsPage()
