@@ -3939,6 +3939,11 @@ $facets-width-large: 21%;
 * Visualisation Cards
 * ----------------------------------------------------------------------------------------------------------------------
 */
+.tall{
+  .visualisation-card {
+    height: 60vh;
+  }
+}
 .visualisation-card {
   height: 40vh;
   .card-content {
