@@ -65,7 +65,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     thisView.$vis_elem.empty()
 
     if @config.side_legend
-      VISUALISATION_WIDTH = $(@el).width() - $(@el).width() * 0.20
+      VISUALISATION_WIDTH = $(@el).width() - $(@el).width() * 0.25
     else
       VISUALISATION_WIDTH = $(@el).width()
     VISUALISATION_HEIGHT = VISUALISATION_WIDTH
@@ -150,7 +150,12 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('text-anchor', 'middle')
       .attr('alignment-baseline', 'middle')
       .text((d, i) -> i)
-      .attr('fill', 'white')
+      .attr('fill', (d, i) ->
+        if i == 1 or i == 0
+          return '#025C5E'
+        else
+          return 'white'
+      )
       .attr('transform', (d) ->
         angle = Math.PI/2 + (d.endAngle + d.startAngle)/2
         x = -Math.cos(angle) * RADIUS*3

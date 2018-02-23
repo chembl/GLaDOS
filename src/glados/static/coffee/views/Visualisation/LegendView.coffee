@@ -245,7 +245,7 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     domain = @model.get('domain')
     getColourFor = @model.get('property').colourScale
-    radius = 6
+    radius = 5
     containerLimit = 0
     elemWidth = $(@el).width()
 
@@ -293,7 +293,7 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('x', 15)
         .attr('y', (d, i) -> (i * ( radius * 3 )) + 4)
         .attr('transform', 'translate(' + columnWidth * a + ', 0)')
-        .style('font-size', '70%')
+        .style('font-size', '60%')
         .style('fill', '#333')
 
 #   if the text is too long add ellipsis

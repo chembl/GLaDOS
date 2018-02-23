@@ -3327,7 +3327,7 @@ span.badge-primary-color-no-float {
 
   .title {
     cursor: pointer;
-    font-size: 110%;
+    font-size: 90%;
     font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
     fill: #5e5e5e;
   }
@@ -3878,7 +3878,7 @@ $facets-width-large: 21%;
   }
   .title {
     cursor: pointer;
-    font-size: 110%;
+    font-size: 90%;
     font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
     fill: #5e5e5e;
   }
@@ -3895,7 +3895,6 @@ $facets-width-large: 21%;
 
   .arc:hover {
     cursor: pointer;
-    fill: #D33C60;
   }
 
   .arc {
@@ -3952,11 +3951,15 @@ $facets-width-large: 21%;
     }
     .main-histogram-container {
       height: 100%;
+      background-color: white;
       .histogram {
-        height: calc(100% - 100px);
+        height: calc(100% - 85px);
       }
       .histogram-legend {
+        max-height: 80px;
         margin: 0;
+
+
       }
     }
     .principal-pie-container {
@@ -3969,5 +3972,4 @@ $facets-width-large: 21%;
       }
     }
   }
-
 }
