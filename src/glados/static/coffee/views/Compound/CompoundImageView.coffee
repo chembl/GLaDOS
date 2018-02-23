@@ -38,7 +38,12 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
       'click .CNC-img': 'openEditor'
 
   openEditor: ->
-    glados.helpers.ChemicalEditorHelper.showChemicalEditorModal()
+
+    @molecule_structures = @model.get('molecule_structures')
+    if not @molecule_structures?
+      return
+
+    glados.helpers.ChemicalEditorHelper.showChemicalEditorModal(undefined, @model)
 
   renderImage: ->
     img_url = @model.get('image_url')
