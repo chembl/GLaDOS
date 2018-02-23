@@ -153,6 +153,9 @@ glados.useNameSpace 'glados.views.Visualisation',
         TITLE_Y = 0
         TITLE_Y_PADDING = 0
 
+      if @config.hide_x_axis_title
+        X_AXIS_HEIGHT = 30
+
       BARS_MIN_HEIGHT = 2
 
       @BARS_CONTAINER_HEIGHT = VISUALISATION_HEIGHT - TITLE_Y - TITLE_Y_PADDING - X_AXIS_HEIGHT
@@ -254,7 +257,10 @@ glados.useNameSpace 'glados.views.Visualisation',
         .classed('axis-line', true)
 
       xAxisContainerG.append('text')
-        .text(@currentXAxisProperty.label)
+        .text(() ->
+        if @config.hide_x_axis_title
+          @currentXAxisProperty.label
+        )
         .attr('text-anchor', 'middle')
         .attr('x', @BARS_CONTAINER_WIDTH/2)
         .attr('y', X_AXIS_HEIGHT*(3/4))
