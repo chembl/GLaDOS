@@ -322,7 +322,7 @@ header .row {
 }
 
 .side-nav-width{
-  width: $side-nav-width !important;
+  min-width: $side-nav-width !important;
   margin-left: -10px;
 }
 
@@ -501,14 +501,16 @@ header .row {
           &.long-link {
             flex-grow: 3;
             padding: 0 0 0.2em 0;
-            //text-shadow: 2px 2px black;
+            margin-left: 10px;
+
             max-height: 5em;
-            overflow: hidden;
+            overflow-x: visible !important;
+            overflow-y: hidden !important;
 
             div {
-              font-size: 3.5em;
+              font-size: 3em;
               position: relative;
-              top: 0.15em;
+              top: 0.4em;
               display: block;
               .beta-sign {
                 font-size: 0.3em;
