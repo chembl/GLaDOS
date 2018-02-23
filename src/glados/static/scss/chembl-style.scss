@@ -2860,8 +2860,6 @@ span.badge-primary-color-no-float {
 
 .target-browser {
 
-  padding-top: 20px;
-
   .options {
     a {
       display: inline-block;
@@ -3965,6 +3963,16 @@ $facets-width-large: 21%;
         height: 100%;
         .pie-content {
           height: 100%;
+        }
+      }
+    }
+
+    .target-browser{
+      height: 100%;
+      .browser-as-circles{
+        height: 100%;
+        .vis-container{
+          height: calc(100% - 40px);
         }
       }
     }

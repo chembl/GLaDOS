@@ -22,10 +22,17 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     thisView = @
     @fillInstructionsTemplate undefined
 
-
     @hideResponsiveViewPreloader()
     @margin = 20
-    @diameter = $(@el).width()
+
+    @VISUALISATION_WIDTH = $(@el).width()
+    @VISUALISATION_HEIGHT = @VISUALISATION_WIDTH
+    @diameter = @VISUALISATION_WIDTH
+
+    if $(@el).parents('.visualisation-card')
+      @VISUALISATION_HEIGHT = @$vis_elem.height()
+      if @VISUALISATION_HEIGHT < @VISUALISATION_WIDTH
+        @diameter = @VISUALISATION_HEIGHT
 
     @diameter = 300 unless @diameter != 0
 
@@ -41,10 +48,10 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     container = @$vis_elem[0]
     svg = d3.select(container).append("svg")
-    .attr("width", thisView.diameter)
-    .attr("height", thisView.diameter)
+    .attr("width", @VISUALISATION_WIDTH)
+    .attr("height", @VISUALISATION_HEIGHT)
     .append("g")
-    .attr("transform", "translate(" + thisView.diameter / 2 + "," + thisView.diameter / 2 + ")")
+    .attr("transform", "translate(" + @VISUALISATION_WIDTH / 2 + "," + @VISUALISATION_HEIGHT / 2 + ")")
 
     # use plain version
     @root = @model.get('plain')
