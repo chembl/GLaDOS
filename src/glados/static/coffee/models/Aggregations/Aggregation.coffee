@@ -198,23 +198,34 @@ glados.useNameSpace 'glados.models.Aggregations',
       return aggsConfig
 
 
-    loadBuckets: (bucketsData, newAggsConfig, receivedAggsInfo, parentKey) ->
+    loadBuckets: (bucketsData, newAggsConfig, receivedAggsInfo, parentKey, parsedParentKey) ->
 
       aggs = newAggsConfig.aggs
       for aggKey, aggDescription of aggs
 
         currentBuckets = receivedAggsInfo[aggKey].buckets
-        if parentKey?
-          for bucket in currentBuckets
-#           this could not work in all cases in the future
-            bucket.parent_key = parseInt(parentKey)
+        if _.isArray(currentBuckets)
+          bucketsList = currentBuckets
+          currentBuckets = _.indexBy(currentBuckets, 'key')
+        else
+          bucketsList = glados.Utils.Buckets.getBucketsList(currentBuckets)
+
+          #bucket_key_parse_function
+        parseKeyFunction = aggDescription.bucket_key_parse_function
+
+        for bucket in bucketsList
+
+          if parseKeyFunction?
+            bucket.parsed_key = parseKeyFunction(bucket.key)
+
+          bucket.parent_key = parentKey
+          bucket.parsed_parent_key = parsedParentKey
 
         # ---------------------------------------------------------------------
         # Parsing by type
         # ---------------------------------------------------------------------
         if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE
 
-          bucketsList = glados.Utils.Buckets.getBucketsList(currentBuckets)
           currentNumCols = bucketsList.length
 
           currentMinValue = aggDescription.min_value
@@ -234,19 +245,18 @@ glados.useNameSpace 'glados.models.Aggregations',
 
         else if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.TERMS
 
-          currentNumCols = currentBuckets.length
+          currentNumCols = bucketsList.length
 
-          @parseBucketsLink(aggDescription, currentBuckets)
+          @parseBucketsLink(aggDescription, bucketsList)
 
           bucketsData[aggKey] =
-            buckets: currentBuckets
+            buckets: bucketsList
             buckets_index: currentBuckets
             num_columns: currentNumCols
             buckets_index: _.indexBy(currentBuckets, 'key')
 
         else if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
 
-          bucketsList = glados.Utils.Buckets.getBucketsList(currentBuckets)
           currentNumCols = bucketsList.length
 
           currentMinValue = aggDescription.min_value
@@ -267,14 +277,23 @@ glados.useNameSpace 'glados.models.Aggregations',
         #recursion
         for internalBucketKey, internalBuckets of currentBuckets
 
+          if _.isArray(currentBuckets)
+            internalBucketKey = internalBuckets.key
+
           newAggsConfig = aggs[aggKey]
           newBucketsData = bucketsData[aggKey].buckets_index[internalBucketKey]
-          newReceivedAggsInfo = receivedAggsInfo[aggKey].buckets[internalBucketKey]
+
+          if _.isArray(receivedAggsInfo[aggKey].buckets)
+            newReceivedAggsInfo = _.find(receivedAggsInfo[aggKey].buckets, (bucket) ->
+              String(bucket.key) == String(internalBucketKey))
+          else
+            newReceivedAggsInfo = receivedAggsInfo[aggKey].buckets[internalBucketKey]
 
           parentKey = undefined
           if newBucketsData?
             parentKey = newBucketsData.key
-          @loadBuckets(newBucketsData, newAggsConfig, newReceivedAggsInfo, parentKey)
+            parsedParentKey = newBucketsData.parsed_key
+          @loadBuckets(newBucketsData, newAggsConfig, newReceivedAggsInfo, parentKey, parsedParentKey)
 
     parse: (data) ->
 
@@ -317,8 +336,6 @@ glados.useNameSpace 'glados.models.Aggregations',
 
       templateValues = {}
       for propKey, propExp of templateDataDesc
-
-
 
         if propExp.startsWith('BUCKET')
           propName = propExp.split('.')[1]

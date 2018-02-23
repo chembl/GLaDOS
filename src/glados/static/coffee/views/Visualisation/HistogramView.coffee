@@ -108,7 +108,6 @@ glados.useNameSpace 'glados.views.Visualisation',
 
       buckets = @model.get('bucket_data')[@xAxisAggName].buckets
 
-
       maxCategories = @config.max_categories
 
       if buckets.length > maxCategories
@@ -120,6 +119,9 @@ glados.useNameSpace 'glados.views.Visualisation',
 
       VISUALISATION_WIDTH = $(@el).width()
       VISUALISATION_HEIGHT = if @config.big_size then $(window).height() * 0.6 else 60
+
+      if $(@el).parents('.visualisation-card')
+        VISUALISATION_HEIGHT = @$vis_elem.height()
 
       if @config.max_height?
         VISUALISATION_HEIGHT = @config.max_height
@@ -150,6 +152,9 @@ glados.useNameSpace 'glados.views.Visualisation',
       if @config.hide_title
         TITLE_Y = 0
         TITLE_Y_PADDING = 0
+
+      if @config.hide_x_axis_title
+        X_AXIS_HEIGHT = 30
 
       BARS_MIN_HEIGHT = 2
 
@@ -252,7 +257,10 @@ glados.useNameSpace 'glados.views.Visualisation',
         .classed('axis-line', true)
 
       xAxisContainerG.append('text')
-        .text(@currentXAxisProperty.label)
+        .text(() ->
+        if @config.hide_x_axis_title
+          @currentXAxisProperty.label
+        )
         .attr('text-anchor', 'middle')
         .attr('x', @BARS_CONTAINER_WIDTH/2)
         .attr('y', X_AXIS_HEIGHT*(3/4))
@@ -475,7 +483,7 @@ glados.useNameSpace 'glados.views.Visualisation',
         for bucket in subBuckets
           if bucket.key != glados.Visualisation.Activity.OTHERS_LABEL
             bucket.pos = subBucketsOrder[bucket.key].pos
-            bucket.bar_key = d.key.split(".")[0]
+            bucket.parent_key = d.key.split(".")[0]
         subBuckets = _.sortBy(subBuckets, (item) -> item.pos)
 
         previousHeight = thisView.BARS_CONTAINER_HEIGHT
@@ -508,7 +516,7 @@ glados.useNameSpace 'glados.views.Visualisation',
 
           key =  d.key
           docCount = d.doc_count
-          barText = d.bar_key
+          barText = d.parent_key
           barName = thisView.currentXAxisProperty.label
           keyName = thisView.currentZAxisProperty.label
 

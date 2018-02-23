@@ -64,7 +64,7 @@ urlpatterns += [
   # Embedding
   # --------------------------------------------------------------------------------------------------------------------
   url(r'^embed/$',
-    DirectTemplateView.as_view(template_name="glados/Embedding/embed_base.html"), ),
+      xframe_options_exempt(DirectTemplateView.as_view(template_name="glados/Embedding/embed_base.html")), ),
 
   # --------------------------------------------------------------------------------------------------------------------
   # Compounds

@@ -5,10 +5,10 @@ TargetHierarchyTree = Backbone.Model.extend
     'all_nodes': new TargetHierarchyChildren
 
   initialize: ->
-    @on 'change', @initHierarhy, @
+    @on 'change', @initHierarchy, @
 
 
-  initHierarhy: ->
+  initHierarchy: ->
 
     # save the plain object version before doing the modifications
     plain = {}
@@ -62,12 +62,12 @@ TargetHierarchyTree = Backbone.Model.extend
     @set('all_nodes', all_nodes, {silent: true})
     @set('children', children_col, {silent: true})
 
-
     for child in @get('children').models
       child.set('show', true, {silent: true})
       child.set('collapsed', true, {silent: true})
     @collapseAll()
 
+    @currentLevel = 0
 
   collapseAll: ->
 
