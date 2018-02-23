@@ -1590,6 +1590,38 @@ msgid "glados_es_gs__document__related_tissues__label__mini"
 msgstr "Related Tissues"
 
 
+msgid "glados_es_gs__document__similar_documents___document_chembl_id__label"
+msgstr "Similar Documents ChEMBL ID"
+
+
+msgid "glados_es_gs__document__similar_documents___document_chembl_id__label__mini"
+msgstr "Siml. Docm. ChEMBL ID"
+
+
+msgid "glados_es_gs__document__similar_documents___mol_tani__label"
+msgstr "Similar Documents Mol Tani"
+
+
+msgid "glados_es_gs__document__similar_documents___mol_tani__label__mini"
+msgstr "Siml. Docm. Mol Tani"
+
+
+msgid "glados_es_gs__document__similar_documents___tid_tani__label"
+msgstr "Similar Documents Tid Tani"
+
+
+msgid "glados_es_gs__document__similar_documents___tid_tani__label__mini"
+msgstr "Siml. Docm. Tid Tani"
+
+
+msgid "glados_es_gs__document__similar_documents__label"
+msgstr "Similar Documents"
+
+
+msgid "glados_es_gs__document__similar_documents__label__mini"
+msgstr "Simlr. Docmnt."
+
+
 msgid "glados_es_gs__document__source___src_description__label"
 msgstr "Source Src Description"
 
@@ -2086,6 +2118,78 @@ msgid "glados_es_gs__molecule__drug__label__mini"
 msgstr "Drug"
 
 
+msgid "glados_es_gs__molecule__drug_indications___drugind_id__label"
+msgstr "Drug Indications Drugind ID"
+
+
+msgid "glados_es_gs__molecule__drug_indications___drugind_id__label__mini"
+msgstr "Drug Indc. Drgn. ID"
+
+
+msgid "glados_es_gs__molecule__drug_indications___efo_id__label"
+msgstr "Drug Indications EFO ID"
+
+
+msgid "glados_es_gs__molecule__drug_indications___efo_id__label__mini"
+msgstr "Drug Indc. EFO ID"
+
+
+msgid "glados_es_gs__molecule__drug_indications___efo_term__label"
+msgstr "Drug Indications EFO Term"
+
+
+msgid "glados_es_gs__molecule__drug_indications___efo_term__label__mini"
+msgstr "Drug Indc. EFO Term"
+
+
+msgid "glados_es_gs__molecule__drug_indications___indication_refs__label"
+msgstr "Drug Indications Indication Refs"
+
+
+msgid "glados_es_gs__molecule__drug_indications___indication_refs__label__mini"
+msgstr "Drug Indc. Indc. Refs"
+
+
+msgid "glados_es_gs__molecule__drug_indications___max_phase_for_ind__label"
+msgstr "Drug Indications Max Phase For Ind"
+
+
+msgid "glados_es_gs__molecule__drug_indications___max_phase_for_ind__label__mini"
+msgstr "Drug Indc. Max Phs. For Ind"
+
+
+msgid "glados_es_gs__molecule__drug_indications___mesh_heading__label"
+msgstr "Drug Indications MESH Heading"
+
+
+msgid "glados_es_gs__molecule__drug_indications___mesh_heading__label__mini"
+msgstr "Drug Indc. MESH Hedn."
+
+
+msgid "glados_es_gs__molecule__drug_indications___mesh_id__label"
+msgstr "Drug Indications MESH ID"
+
+
+msgid "glados_es_gs__molecule__drug_indications___mesh_id__label__mini"
+msgstr "Drug Indc. MESH ID"
+
+
+msgid "glados_es_gs__molecule__drug_indications___molecule_chembl_id__label"
+msgstr "Drug Indications ChEMBL ID"
+
+
+msgid "glados_es_gs__molecule__drug_indications___molecule_chembl_id__label__mini"
+msgstr "Drug Indc. ChEMBL ID"
+
+
+msgid "glados_es_gs__molecule__drug_indications__label"
+msgstr "Drug Indications"
+
+
+msgid "glados_es_gs__molecule__drug_indications__label__mini"
+msgstr "Drug Indctn."
+
+
 msgid "glados_es_gs__molecule__drug_type__label"
 msgstr "Drug Type"
 
@@ -2132,6 +2236,30 @@ msgstr "Indication Class"
 
 msgid "glados_es_gs__molecule__indication_class__label__mini"
 msgstr "Indctn. Class"
+
+
+msgid "glados_es_gs__molecule__indication_refs___ref_id__label"
+msgstr "Indication Refs Ref ID"
+
+
+msgid "glados_es_gs__molecule__indication_refs___ref_id__label__mini"
+msgstr "Indc. Refs Ref ID"
+
+
+msgid "glados_es_gs__molecule__indication_refs___ref_type__label"
+msgstr "Indication Refs Ref Type"
+
+
+msgid "glados_es_gs__molecule__indication_refs___ref_type__label__mini"
+msgstr "Indc. Refs Ref Type"
+
+
+msgid "glados_es_gs__molecule__indication_refs___ref_url__label"
+msgstr "Indication Refs Ref Url"
+
+
+msgid "glados_es_gs__molecule__indication_refs___ref_url__label__mini"
+msgstr "Indc. Refs Ref Url"
 
 
 msgid "glados_es_gs__molecule__inorganic_flag__label"
