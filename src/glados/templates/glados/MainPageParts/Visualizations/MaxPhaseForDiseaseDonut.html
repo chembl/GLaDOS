@@ -3,9 +3,9 @@
 {% block card_id %}MaxPhaseForDisease{% endblock %}
 
 {% block general_content %}
+    <span class="BCK-all-sources-link all-sources-link" data-hb-template="Handlebars-Common-PieAllSourcesLink"></span>
     <span class="load-messages-container" data-hb-template="Handlebars-Common-VisualisationProgress"></span>
     {% with side_legend=True %}
         {% include "glados/base/Visualisation/DefaultPieChartContent.html" %}
     {% endwith %}
-    <span class="BCK-all-sources-link all-sources-link" data-hb-template="Handlebars-Common-PieAllSourcesLink"></span>
 {% endblock %}
