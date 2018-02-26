@@ -17,7 +17,7 @@
             {{#unless this.hide_label}}
                 <small>
             {{/unless}}
-            <div class="css-tooltipped">
+            <div class="css-tooltipped" onmouseover="glados.Utils.Tooltips.cssTooltippedOnOverflownOnly(this);">
                 <p class="p-oneline">
             {{#unless this.hide_label}}
                 <b>{{this.name_to_show_short}}:</b>
@@ -36,7 +36,7 @@
 
     {{#if this.search_hit_highlight_column}}
         {{#each this.value}}
-            <p class="css-tooltipped">
+            <p class="css-tooltipped{{#if this.active_tooltip}} active-tooltip{{/if}}">
                 <b>{{{this.label_mini}}}:</b> {{{this.value_mini}}}
                 <span class="css-tooltip z-depth-5">
                     <b>{{{this.label}}}:</b> {{{this.value}}}
@@ -80,7 +80,7 @@
                 </p>
                 </div>
             {{#each ../highlights}}
-                <div class="css-tooltipped">
+                <div class="css-tooltipped{{#if this.active_tooltip}} active-tooltip{{/if}}">
                     <small>
                         <p><b>{{{this.label_mini}}}:</b> {{{this.value_mini}}}</p>
                         <p class="css-tooltip z-depth-5">

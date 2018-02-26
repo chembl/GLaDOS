@@ -515,6 +515,19 @@ glados.useNameSpace 'glados',
         return idAttribute + ':(' + ('"' + id + '"' for id in chemblIDs).join(' OR ') + ')'
 
     Tooltips:
+
+      cssTooltippedOnOverflownOnly: (element)->
+        $elem = $(element)
+        checkedWidth = parseInt($elem.attr('css-tooltipped-checked-width') || '0')
+        console.warn($elem.width(), checkedWidth, $elem.width() == checkedWidth)
+        if $elem.width() != checkedWidth
+          $elem.removeClass 'active-tooltip'
+          ellipsisElem = $elem.find('.p-oneline')[0]
+          if ellipsisElem?
+            if ellipsisElem.scrollWidth > ellipsisElem.clientWidth
+              $elem.addClass 'active-tooltip'
+          $elem.attr('css-tooltipped-checked-width', $elem.width())
+
       # removes all qtips from and element, the elements that have a tooltip must have the property
       # data-qtip-configured set to 'yes'
       destroyAllTooltips: ($elem, withMercy) ->
