@@ -183,7 +183,7 @@ $small-font-size: 0.7rem;
 $hexagon-lateral-distance-proportion: 0.0669872981;
 
 .z-depth-below-zero {
-  z-index: -1;
+  z-index: 1;
   box-shadow: none;
   .menu-logo{
     visibility: hidden;
@@ -240,12 +240,13 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
     }
   }
   li {
-    margin-bottom: 1%;
-    padding-top: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 
   a {
     height: auto;
+    font-size: 0.85em;
   }
 
   li {
@@ -354,7 +355,7 @@ header .row {
 
 #chembl-header-container {
   height: 0;
-  z-index: 20;
+  z-index: 2;
   font-size: $large-font-size;
   width: 100%;
   .inner-row {
@@ -378,6 +379,13 @@ header .row {
     background-image: url("http://www.ebi.ac.uk/web_guidelines/images/banners/EBI_SERVICES_Banner.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+    .chembl-logo-header {
+      margin: 0.5em auto 0.5em auto;
+      display: block;
+      height: 5em;
+      width: 5em;
+      padding: 0.5em;
+    }
     .hide-before-big-bar {
       display: none;
     }
