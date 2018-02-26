@@ -19,6 +19,8 @@ glados.useNameSpace 'glados.apps.Browsers',
         .bind(glados.models.paginatedCollections.PaginatedCollectionFactory)
       tissues: glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESTissuesList\
         .bind(glados.models.paginatedCollections.PaginatedCollectionFactory)
+      drugs: glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESDrugsList\
+        .bind(glados.models.paginatedCollections.PaginatedCollectionFactory)
 
     @initBrowserForEntity = (entityName, filter) ->
 
