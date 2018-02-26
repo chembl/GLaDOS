@@ -508,9 +508,9 @@ header .row {
             overflow-y: hidden !important;
 
             div {
-              font-size: 3em;
+              font-size: 3.5em;
               position: relative;
-              top: 0.4em;
+              top: 0.15em;
               display: block;
               .beta-sign {
                 font-size: 0.3em;
@@ -3402,6 +3402,9 @@ span.badge-primary-color-no-float {
 
 .browser-views-container {
   display: flex;
+  .facets-container-hidden {
+    display: none !important;
+  }
 }
 
 $browser-tools-height: 98vh;
@@ -3473,6 +3476,7 @@ $facets-width-medium: 30%;
 $facets-width-large: 21%;
 
 .pag-items-container {
+  height: fit-content;
   float: left;
   padding-left: 8px;
   @media #{$medium-only} {
