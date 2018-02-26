@@ -1,21 +1,10 @@
 {% load static %}
 
-<li class="menu-logo">
-    <a class="waves-effect waves-teal {% if main_page %}main-page-menu-logo {% endif %}"
-       href="{% url 'main' %}">
-        <img title="Go to the ChEMBL homepage" class="chembl-logo-header" alt="ChEMBL logo"
-             src="{% static 'img/chembl_logo.png' %}"/>
-    </a>
-</li>
+<li class="menu-logo"><a href="#"> <img class="chembl-logo-header" alt="ChEMBL logo" src="#"/></a></li>
 <li><a class="waves-effect waves-teal" href="https://www.ebi.ac.uk/unichem">UniChem</a></li>
-<li><a class="waves-effect waves-teal" href="https://www.ebi.ac.uk/chemblntd">ChEMBL-NTD</a></li>
-</li>
-<li><a class="waves-effect waves-teal" href="https://www.ebi.ac.uk/chembl/ws">Web Services <span class="new badge">new</span></a></li>
-<li>
-    <a class="waves-effect waves-teal" href="https://www.surechembl.org/">
-        SureChEMBL <span class="new badge">new</span>
-    </a>
-</li>
+<li><a class="waves-effect waves-teal" href="https://www.ebi.ac.uk/chemblntd">ChEMBL-NTD</a></li></li>
+<li><a class="waves-effect waves-teal" href="https://www.ebi.ac.uk/chembl/ws">Web Services </a></li>
+<li><a class="waves-effect waves-teal" href="https://www.surechembl.org/"> SureChEMBL </a></li>
 <li><a class="waves-effect waves-teal" href="https://www.ebi.ac.uk/rdf">EBI RDF Platform</a></li>
 <li><a class="waves-effect waves-teal" href="{% url 'faqs' %}">FAQ</a></li>
 <li><a class="waves-effect waves-teal" href="{% url 'acks' %}">Acknowledgements</a></li>
