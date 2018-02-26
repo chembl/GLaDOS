@@ -3405,6 +3405,11 @@ span.badge-primary-color-no-float {
   .facets-container-hidden {
     display: none !important;
   }
+  .facets-hidden {
+    .preloader-row {
+      display: none;
+    }
+  }
 }
 
 $browser-tools-height: 98vh;
@@ -3696,6 +3701,12 @@ $facets-width-large: 21%;
   .card-content {
     &.has-img {
       width: 60%
+    }
+  }
+  .empty-list-message{
+    margin-bottom: 0px;
+    .h5{
+      margin: 0px;
     }
   }
 }
