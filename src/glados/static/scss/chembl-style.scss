@@ -134,9 +134,11 @@ strong {
     z-index: 100;
   }
 
-  &:hover{
-    .css-tooltip{
-      visibility: visible;
+  &.active-tooltip{
+    &:hover{
+      .css-tooltip{
+        visibility: visible;
+      }
     }
   }
 }
