@@ -6,15 +6,12 @@ glados.useNameSpace 'glados.apps.Browsers',
       router = new glados.apps.Browsers.BrowserRouter
       Backbone.history.start()
 
-      console.log 'INIT BROWSER APP!!!'
-
     @entityListsInitFunctions:
       compounds: glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList\
         .bind(glados.models.paginatedCollections.PaginatedCollectionFactory)
 
-    @initBrowserForEntity = (entityName) ->
+    @initBrowserForEntity = (entityName, filter) ->
 
-      filter = URLProcessor.getFilter()
       initListFunction = @entityListsInitFunctions[entityName]
       compsList = initListFunction(filter)
 
