@@ -62,7 +62,7 @@ CompoundRepresentationsView = CardView.extend
     openEditorCallBack = ->
       glados.helpers.ChemicalEditorHelper.showChemicalEditorModal(undefined, thisModel)
 
-    ButtonsHelper.initLinkButton($(@el).find('#Reps-Molfile-edit'), 'Open Molecule Editor', -> openEditorCallBack
+    ButtonsHelper.initLinkButton($(@el).find('#Reps-Molfile-edit'), 'Open Molecule Editor', -> openEditorCallBack())
 
     ButtonsHelper.initLinkButton($(@el).find('#Reps-Molfile-edit-small'), 'Open Molecule Editor', ->
       compound_model.get('get_sdf_content_promise')().done (molfile_data) ->

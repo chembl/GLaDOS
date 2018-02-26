@@ -4,7 +4,7 @@ glados.useNameSpace 'glados.helpers',
     @showChemicalEditorModal = (customContext, compound) ->
 
       editorModalID = 'modal-MarvinSketcher'
-      $editorModal = $("#BCK-GeneratedModalsContainer #{editorModalID}")
+      $editorModal = $("#BCK-GeneratedModalsContainer ##{editorModalID}")
 
       if $editorModal.length == 0
 
@@ -21,7 +21,6 @@ glados.useNameSpace 'glados.helpers',
         thisContext = @
         compound.get('get_sdf_content_promise')().done (molfileData) ->
           thisContext.marvinEditor.loadStructure(molfileData, MarvinSketcherView.SDF_FORMAT)
-
 
       $editorModal.modal('open')
 
