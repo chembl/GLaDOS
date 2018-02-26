@@ -32,28 +32,42 @@
 
 <div id="MainPageCentralDiv" class="row">
 
-{#  <div class="col l5 m12 s12" id="browse_targets">#}
-{#     {% block browse_targets %}#}
-{#        {% include "glados/MainPageParts/browse_targets.html" %}#}
-{#     {% endblock %}#}
-{#  </div>#}
+  <div class="col l9 m12 s12">
 
-  <div class="col l9 m12 s12 ppy" >
-    {% with is_dynamic=True %}
-        {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
-    {% endwith %}
+    <div class="col l6 m12 s12 tall">
+      {% with is_dynamic=True %}
+          {% include "glados/MainPageParts/TargetBrowserParts/browse_as_circles.html" %}
+      {% endwith %}
+    </div>
+
+    <div class="col l6 m12 s12 ppy tall" >
+      {% with is_dynamic=True %}
+          {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
+      {% endwith %}
+    </div>
+
+     <div class="col l6 m12 s12" >
+      {% with is_dynamic=True %}
+          {% include "glados/MainPageParts/Visualizations/MaxPhaseForDiseaseDonut.html" %}
+      {% endwith %}
+    </div>
+    <div class="col l6 m12 s12" >
+        {% with is_dynamic=False %}
+          {% include "glados/MainPageParts/Visualizations/YourIdeaHereCard.html" %}
+      {% endwith %}
+    </div>
+
   </div>
 
   <div class="col m6 l3 xl400 hide-on-small-only">
-
     {% block database_info %}
-    {% include "glados/MainPageParts/database_info.html" %}
+        {% include "glados/MainPageParts/database_info.html" %}
     {% endblock %}
   </div>
 
    <div class="col m6 l3 xl400 hide-on-small-only">
     {% block tweets %}
-    {% include "glados/MainPageParts/tweets.html" %}
+        {% include "glados/MainPageParts/tweets.html" %}
     {% endblock %}
 
 

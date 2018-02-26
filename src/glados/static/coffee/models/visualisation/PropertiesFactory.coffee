@@ -46,6 +46,35 @@ glados.useNameSpace 'glados.models.visualisation',
             1: 'Yes'
             false: 'No'
             true: 'Yes'
+        MAX_PHASE:
+          propName: 'max_phase'
+          label: 'Max phase'
+          domain: [ 0, 1, 2, 3, 4]
+          coloursRange: [
+            glados.Settings.VIS_COLORS.TEAL5,
+            glados.Settings.VIS_COLORS.TEAL4,
+            glados.Settings.VIS_COLORS.TEAL3,
+            glados.Settings.VIS_COLORS.TEAL2,
+            glados.Settings.VIS_COLORS.TEAL1,
+          ]
+          colourScaleType: glados.Visualisation.CATEGORICAL
+        INDICATION_CLASS:
+          propName: 'indication_class'
+          label: 'Indication class'
+          type: String
+          colourScaleType: glados.Visualisation.CATEGORICAL
+          coloursRange: [
+            '#0a585b',
+            '#077c80',
+            '#2ba3a5',
+            '#6fc7c6',
+            '#c4e6e5',
+            '#f1d6db',
+            '#fdabbc',
+            '#f9849d',
+            '#e95f7e',
+            '#cc4362'
+          ]
     DocumentAggregation:
       Properties:
         YEAR:
