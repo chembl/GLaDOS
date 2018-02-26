@@ -11,6 +11,8 @@ glados.useNameSpace 'glados.apps.Browsers',
         .bind(glados.models.paginatedCollections.PaginatedCollectionFactory)
       targets: glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESTargetsList\
         .bind(glados.models.paginatedCollections.PaginatedCollectionFactory)
+      assays: glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESAssaysList\
+        .bind(glados.models.paginatedCollections.PaginatedCollectionFactory)
 
     @initBrowserForEntity = (entityName, filter) ->
 
