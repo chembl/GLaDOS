@@ -125,6 +125,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           value: hlValue
           label: label
           label_mini: label_mini
+          active_tooltip: miniHLValue != hlValue
         }
       return simplifiedHL
 
