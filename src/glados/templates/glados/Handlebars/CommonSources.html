@@ -569,16 +569,6 @@
 
 </script>
 
-<script id="Handlebars-Common-MarvinModal" type="text/x-handlebars-template" data-starting-top="0%">
-  <div id="{{id}}" class='modal' style="display: none; width:85% !important; max-height: 100vh !important; overflow-y: hidden !important ; overflow-x: hidden !important; height: 100vh !important;">
-    {% endverbatim %}
-      {% with in_modal=True %}
-        {% include "glados/Sketchers/marvinSearch.html" %}
-      {% endwith %}
-    {% verbatim %}
-  </div>
-</script>
-
 <script id="Handlebars-Marvin-Similarity-Percentage" type="text/x-handlebars-template">
   >= {{percentage}}%
 </script>
@@ -808,18 +798,11 @@ There are no {{#if is_unichem}}UniChem {{/if}}cross references for {{chembl_id}}
 
 {% endverbatim %}
 
-<!-- Inclusion of cards and tables templates -->
 
 {% include "glados/Handlebars/CardSources.html" %}
 {% include "glados/Handlebars/TableSources.html" %}
-
-<!-- Inclusion general report card templates -->
 {% include "glados/Handlebars/ReportCardTemplates.html" %}
-
-<!-- Preloaders -->
 {% include "glados/Handlebars/PreloaderSources.html" %}
-
-<!-- Error Messages -->
 {% include "glados/Handlebars/ErrorSources.html" %}
-
 {% include "glados/Handlebars/EmbeddingSources.html" %}
+{% include "glados/Handlebars/SketcherSources.html" %}

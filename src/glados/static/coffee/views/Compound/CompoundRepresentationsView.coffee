@@ -52,25 +52,11 @@ CompoundRepresentationsView = CardView.extend
     )
 
     # Editor button/link
-    $openInEditorBtn = $(@el).find('#Reps-Molfile-edit')
-    $editorModal = ButtonsHelper.generateModalFromTemplate($openInEditorBtn, 'Handlebars-Common-MarvinModal')
+    thisModel = @model
+    openEditorCallBack = ->
+      glados.helpers.ChemicalEditorHelper.showChemicalEditorModal(undefined, thisModel)
 
-    ButtonsHelper.initLinkButton($openInEditorBtn, 'Open Molecule Editor')
-    @marvinEditor = null
-
-    ButtonsHelper.initLinkButton($(@el).find('#Reps-Molfile-edit'), 'Open Molecule Editor', ->
-      compound_model.get('get_sdf_content_promise')().done (molfile_data) ->
-        if $editorModal.attr('data-marvin-initialised') != 'yes'
-          thisView.marvinEditor = new MarvinSketcherView({
-            el: $editorModal
-            sdf_to_load_on_ready: molfile_data
-          })
-          marvin_iframe = $(thisView.el).find('.sketch-iframe')
-          $($(thisView.el).find('.sketch-iframe'), marvin_iframe.contents()).addClass('border')
-          $editorModal.attr('data-marvin-initialised', 'yes')
-        else if thisView.marvinEditor?
-          thisView.marvinEditor.loadStructure(molfile_data, MarvinSketcherView.SDF_FORMAT)
-    )
+    ButtonsHelper.initLinkButton($(@el).find('#Reps-Molfile-edit'), 'Open Molecule Editor', -> openEditorCallBack())
 
     ButtonsHelper.initLinkButton($(@el).find('#Reps-Molfile-edit-small'), 'Open Molecule Editor', ->
       compound_model.get('get_sdf_content_promise')().done (molfile_data) ->

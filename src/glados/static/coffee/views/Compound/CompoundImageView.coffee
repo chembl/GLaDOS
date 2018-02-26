@@ -6,6 +6,7 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
   RENDERER_3D_SPECK_NAME:  '3DSpeck'
 
   initialize: ->
+    console.log 'my view', $(@el)
     @model.on 'change', @.render, @
 
 
@@ -28,13 +29,21 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
     @initZoomModal()
 
   events: ->
-    # aahhh!!! >(
     return _.extend {}, DownloadViewExt.events,
 #      "click #CNC-3d-modal-trigger": "initDefault3DView"
 #      "click #CNC-3d-modal-trigger-small": "initDefault3DView"
       "click a[href='#BCK-compound-3dview-3DMol']": "lazyInit3DView"
       "click a[href='#BCK-compound-3dview-LiteMol']": "lazyInit3DView"
       "click a[href='#BCK-compound-3dview-Speck']": "lazyInit3DView"
+      'click .CNC-img': 'openEditor'
+
+  openEditor: ->
+
+    @molecule_structures = @model.get('molecule_structures')
+    if not @molecule_structures?
+      return
+
+    glados.helpers.ChemicalEditorHelper.showChemicalEditorModal(undefined, @model)
 
   renderImage: ->
     img_url = @model.get('image_url')
