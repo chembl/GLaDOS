@@ -52,12 +52,6 @@ CompoundRepresentationsView = CardView.extend
     )
 
     # Editor button/link
-    $openInEditorBtn = $(@el).find('#Reps-Molfile-edit')
-    $editorModal = ButtonsHelper.generateModalFromTemplate($openInEditorBtn, 'Handlebars-Common-MarvinModal')
-
-    ButtonsHelper.initLinkButton($openInEditorBtn, 'Open Molecule Editor')
-    @marvinEditor = null
-
     thisModel = @model
     openEditorCallBack = ->
       glados.helpers.ChemicalEditorHelper.showChemicalEditorModal(undefined, thisModel)
