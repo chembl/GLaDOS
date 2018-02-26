@@ -3412,7 +3412,6 @@ span.badge-primary-color-no-float {
   }
 }
 
-
 $browser-tools-height: 98vh;
 $browser-tool-bar-width: 55px;
 .browser-tools {
@@ -3706,6 +3705,9 @@ $facets-width-large: 21%;
   }
   .empty-list-message{
     margin-bottom: 0px;
+    .h5{
+      margin: 0px;
+    }
   }
 }
 
