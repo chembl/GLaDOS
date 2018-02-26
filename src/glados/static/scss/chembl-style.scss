@@ -378,6 +378,13 @@ header .row {
     background-image: url("http://www.ebi.ac.uk/web_guidelines/images/banners/EBI_SERVICES_Banner.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+    .chembl-logo-header {
+      margin: 0.5em auto 0.5em auto;
+      display: block;
+      height: 5em;
+      width: 5em;
+      padding: 0.5em;
+    }
     .hide-before-big-bar {
       display: none;
     }
