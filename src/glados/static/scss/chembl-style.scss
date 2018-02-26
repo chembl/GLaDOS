@@ -183,7 +183,7 @@ $small-font-size: 0.7rem;
 $hexagon-lateral-distance-proportion: 0.0669872981;
 
 .z-depth-below-zero {
-  z-index: -1;
+  z-index: 1;
   box-shadow: none;
   .menu-logo{
     visibility: hidden;
@@ -354,7 +354,7 @@ header .row {
 
 #chembl-header-container {
   height: 0;
-  z-index: 20;
+  z-index: 2;
   font-size: $large-font-size;
   width: 100%;
   .inner-row {
