@@ -22,15 +22,33 @@ glados.useNameSpace 'glados.apps.Browsers',
       drugs: glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESDrugsList\
         .bind(glados.models.paginatedCollections.PaginatedCollectionFactory)
 
+    # TODO: standardise the entity names from the models
+    @entityNames:
+      compounds: 'Compounds'
+      targets: 'Targets'
+      assays: 'Assays'
+      documents: 'Documents'
+      cells: 'Cells'
+      tissues: 'Tissues'
+      drugs: 'Drugs'
+
     @initBrowserForEntity = (entityName, filter) ->
 
-      initListFunction = @entityListsInitFunctions[entityName]
-      compsList = initListFunction(filter)
+      $mainContainer = $('.BCK-main-container')
+      $mainContainer.show()
 
-      $browserContainer = $('.BCK-BrowserContainer')
+      $browserWrapper = $mainContainer.find('.BCK-browser-wrapper')
+      glados.Utils.fillContentForElement $browserWrapper,
+        entity_name: @entityNames[entityName]
+
+      initListFunction = @entityListsInitFunctions[entityName]
+      list = initListFunction(filter)
+
+      $browserContainer = $browserWrapper.find('.BCK-BrowserContainer')
+
       new glados.views.Browsers.BrowserMenuView
-        collection: compsList
+        collection: list
         el: $browserContainer
 
-      compsList.fetch()
+      list.fetch()
 
