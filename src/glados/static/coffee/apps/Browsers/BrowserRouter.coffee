@@ -1,7 +1,8 @@
 glados.useNameSpace 'glados.apps.Browsers',
   BrowserRouter: Backbone.Router.extend
     routes:
-      ':entity_name(/filter/:filter)': 'initBrowser'
+      ':entity_name(/filter/:filter)(/state/:state)': 'initBrowser'
 
-    initBrowser: (entityName, filter) -> glados.apps.Browsers.BrowserApp.initBrowserForEntity(entityName, filter)
+    initBrowser: (entityName, filter, state) ->
+      glados.apps.Browsers.BrowserApp.initBrowserForEntity(entityName, filter, state)
 

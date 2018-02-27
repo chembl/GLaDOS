@@ -36,15 +36,54 @@ glados.useNameSpace 'glados.apps.Browsers',
       drugs: 'Drugs'
       activities: 'Activities'
 
-    @initBrowserForEntity = (entityName, filter) ->
+    @initBrowserForEntity = (entityName, filter, state) ->
 
-      console.log 'initBrowserForEntity!!!'
+      console.log 'debug'
       $mainContainer = $('.BCK-main-container')
       $mainContainer.show()
 
       $browserWrapper = $mainContainer.find('.BCK-browser-wrapper')
       glados.Utils.fillContentForElement $browserWrapper,
         entity_name: @entityNames[entityName]
+
+      $browserWrapper.show()
+      #this is temporary, while we figure out how handle the states
+      # -----------------learn to handle the state!----------------
+      $matrixFSContainer = $mainContainer.find('.BCK-matrix-full-screen')
+      if state?
+        if state.startsWith('matrix_fs_')
+          sourceEntity = state.split('matrix_fs_')[1]
+          console.log 'sourceEntity: ', sourceEntity
+
+          $browserWrapper.children().hide()
+          $matrixFSContainer.show()
+
+          if sourceEntity == 'Targets'
+            filterProperty = 'target_chembl_id'
+            aggList = ['target_chembl_id', 'molecule_chembl_id']
+          else
+            filterProperty = 'molecule_chembl_id'
+            aggList = ['molecule_chembl_id', 'target_chembl_id']
+
+          ctm = new glados.models.Activity.ActivityAggregationMatrix
+            query_string: filter
+            filter_property: filterProperty
+            aggregations: aggList
+
+          config = MatrixView.getDefaultConfig sourceEntity
+
+          $matrixContainer = $matrixFSContainer.find('.BCK-CompTargetMatrix')
+          new MatrixView
+            model: ctm
+            el: $matrixContainer
+            config: config
+
+          console.log 'fetch atm!!'
+          ctm.fetch()
+
+          return
+      $matrixFSContainer.hide()
+      # -----------------learn to handle the state!----------------
 
       initListFunction = @entityListsInitFunctions[entityName]
       list = initListFunction(filter)
