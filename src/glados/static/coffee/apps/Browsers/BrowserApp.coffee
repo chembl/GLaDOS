@@ -21,6 +21,9 @@ glados.useNameSpace 'glados.apps.Browsers',
         .bind(glados.models.paginatedCollections.PaginatedCollectionFactory)
       drugs: glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESDrugsList\
         .bind(glados.models.paginatedCollections.PaginatedCollectionFactory)
+      activities: glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESActivitiesList\
+        .bind(glados.models.paginatedCollections.PaginatedCollectionFactory)
+
 
     # TODO: standardise the entity names from the models
     @entityNames:
@@ -31,9 +34,11 @@ glados.useNameSpace 'glados.apps.Browsers',
       cells: 'Cells'
       tissues: 'Tissues'
       drugs: 'Drugs'
+      activities: 'Activities'
 
     @initBrowserForEntity = (entityName, filter) ->
 
+      console.log 'initBrowserForEntity!!!'
       $mainContainer = $('.BCK-main-container')
       $mainContainer.show()
 
