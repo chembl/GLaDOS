@@ -72,7 +72,7 @@ glados.useNameSpace 'glados.models.Activity',
         when 'molecule_chembl_id' then 'Compounds'
         else 'Targets'
 
-      return Activity.getActivitiesListURL(filter) + '/#matrix_fs/' + startingFrom
+      return Activity.getActivitiesListURL(filter) + '/state/matrix_fs_' + startingFrom
     #-------------------------------------------------------------------------------------------------------------------
     # Parsing
     #-------------------------------------------------------------------------------------------------------------------
