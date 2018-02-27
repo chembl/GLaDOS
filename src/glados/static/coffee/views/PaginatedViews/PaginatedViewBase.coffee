@@ -80,7 +80,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         contextual_properties: contextualProperties
         include_highlights_column: @include_search_results_highlight
 
-      console.log 'columns handler: ', @columnsHandler
+#      console.log 'columns handler: ', @columnsHandler
       @columnsHandler.on 'change:exit change:enter', @handleShowHideColumns, @
       @columnsHandler.on glados.models.paginatedCollections.ColumnsHandler.EVENTS.COLUMNS_ORDER_CHANGED,
         @handleColumnsOrderChange, @
@@ -139,7 +139,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     render: ->
 
-      console.log 'RENDER'
       if not @collection.getMeta('data_loaded')
         return
 
@@ -173,6 +172,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @collection.length == 0
         @showNoResultsFound()
         return true
+      $(@el).find('.preloader-row').removeClass('preloader-row-hidden')
       return false
 
     showNoResultsFound: ->
@@ -209,7 +209,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @shouldIgnoreContentChangeRequestWhileStreaming()
         return
 
-      console.log 'SENT DATA TO TEMPLATE'
+#      console.log 'SENT DATA TO TEMPLATE'
       if (@isInfinite() or @isCards()) and not @isComplicated
         templateID = @collection.getMeta('custom_cards_template')
         if @isInfinite()
@@ -220,7 +220,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if customItemTemplate?
         templateID = customItemTemplate
       templateID ?= $specificElemContainer.attr('data-hb-template')
-      console.log 'TEMPLATE ID: ', templateID
+#      console.log 'TEMPLATE ID: ', templateID
       applyTemplate = Handlebars.compile($('#' + templateID).html())
       $appendTo = $specificElemContainer
 
@@ -352,7 +352,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     sortCollection: (event) ->
 
       $target = $(event.currentTarget)
-      console.log '$target: ', $target
+#      console.log '$target: ', $target
       if not @eventForThisView($target)
         return
 
@@ -426,7 +426,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     hidePreloaderOnly: ->
       $preloaderCont = $(@el).find('.BCK-PreloaderContainer')
+      $preloaderRow = $(@el).find('.preloader-row')
       $preloaderCont.hide()
+      $preloaderRow.addClass('preloader-row-hidden')
 
     showHeaderContainer: ->
       $headerRow = $(@el).find('.BCK-header-container,.BCK-top-scroller-container')
