@@ -835,6 +835,6 @@ Compound.MINI_REPORT_CARD =
 Compound.getCompoundsListURL = (filter) ->
 
   if filter
-    return glados.Settings.GLADOS_BASE_PATH_REL + 'compounds/filter/' + encodeURIComponent(filter)
+    return glados.Settings.GLADOS_BASE_PATH_REL + 'browse/#compounds/filter/' + encodeURIComponent(filter)
   else
-    return glados.Settings.GLADOS_BASE_PATH_REL + 'compounds'
+    return glados.Settings.GLADOS_BASE_PATH_REL + 'browse/#compounds'
