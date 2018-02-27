@@ -322,7 +322,7 @@ describe "Compounds vs Target Matrix", ->
 
     filterMustBe = ctm.get('filter_property') + ':(' + ('"' + id + '"' for id in testIDs).join(' OR ') + ')'
 
-    urlMustBe = Activity.getActivitiesListURL(filterMustBe) + '/#matrix_fs/' + startingFrom
+    urlMustBe = Activity.getActivitiesListURL(filterMustBe) + '/state/matrix_fs_' + startingFrom
     urlGot = ctm.getLinkToFullScreen()
     expect(urlGot).toBe(urlMustBe)
 
