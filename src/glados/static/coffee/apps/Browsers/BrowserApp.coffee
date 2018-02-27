@@ -38,7 +38,6 @@ glados.useNameSpace 'glados.apps.Browsers',
 
     @initBrowserForEntity = (entityName, filter, state) ->
 
-      console.log 'debug'
       $mainContainer = $('.BCK-main-container')
       $mainContainer.show()
 
@@ -53,7 +52,6 @@ glados.useNameSpace 'glados.apps.Browsers',
       if state?
         if state.startsWith('matrix_fs_')
           sourceEntity = state.split('matrix_fs_')[1]
-          console.log 'sourceEntity: ', sourceEntity
 
           $browserWrapper.children().hide()
           $matrixFSContainer.show()
@@ -78,7 +76,6 @@ glados.useNameSpace 'glados.apps.Browsers',
             el: $matrixContainer
             config: config
 
-          console.log 'fetch atm!!'
           ctm.fetch()
 
           return
