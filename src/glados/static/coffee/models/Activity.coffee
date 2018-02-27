@@ -218,6 +218,6 @@ Activity.getActivitiesListURL = (filter) ->
 
 
   if filter
-    return glados.Settings.GLADOS_BASE_PATH_REL + 'activities/filter/' + encodeURIComponent(filter)
+    return glados.Settings.GLADOS_BASE_PATH_REL + 'browse/#activities/filter/' + encodeURIComponent(filter)
   else
-    return glados.Settings.GLADOS_BASE_PATH_REL + 'activities'
+    return glados.Settings.GLADOS_BASE_PATH_REL + 'browse/#activities'
