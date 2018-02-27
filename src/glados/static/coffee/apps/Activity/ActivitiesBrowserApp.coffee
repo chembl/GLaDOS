@@ -65,6 +65,7 @@ glados.useNameSpace 'glados.apps.Activity',
 
       ctm.fetch()
 
+    # I will leave this here until we implement the state handling
     @initMatrixCellMiniReportCard: ($containerElem, d, compoundsAreRows=true) ->
 
       summary = new glados.models.Activity.ActivityAggregation
