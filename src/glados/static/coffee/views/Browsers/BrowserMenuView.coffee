@@ -86,7 +86,6 @@ glados.useNameSpace 'glados.views.Browsers',
       $pagItemsContainer = $(@el).find('.BCK-View-Container')
       $pagItemsContainer.addClass('facets-hidden')
 
-      $filtersContainer.addClass('facets-container-hidden')
       @manualResizeCurrentView()
 
     showFilters: ->

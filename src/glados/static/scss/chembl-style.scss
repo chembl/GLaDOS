@@ -3422,13 +3422,8 @@ span.badge-primary-color-no-float {
 
 .browser-views-container {
   display: flex;
-  .facets-container-hidden {
+  .facets-container-hidden, preloader-row-hidden {
     display: none !important;
-  }
-  .facets-hidden {
-    .preloader-row {
-      display: none;
-    }
   }
 }
 
