@@ -69,11 +69,16 @@
 
     {% block content %}{% endblock %}
 
-    <div class="container" style="height: 100vh;">
+    <div id='GladosMainSplashScreen' class="container" style="height: 100vh;">
       Loading...
         <div class="progress">
             <div class="indeterminate"></div>
         </div>
+    </div>
+
+    <div id='GladosMainContent' style="display: none">
+
+      Content!!!
     </div>
 
 
@@ -123,6 +128,7 @@
       glados.helpers.HeaderHelper.initializeHeader();
       glados.helpers.SideMenuHelper.initializeSideMenu();
       glados.views.SearchResults.SearchBarView.createInstances();
+
       glados.apps.BreadcrumbApp.init();
       {% block custom_js_inline %}{% endblock %}
 
@@ -132,6 +138,10 @@
       var baseMenuItem = DownloadWizardApp.initWizardStep();
       DownloadWizardApp.initBaseWizardStepView(baseMenuItem, $('#download-wizard'));
       baseMenuItem.fetch();
+
+      glados.apps.Main.MainGladosApp.init();
+
+      {% block custom_js_inline %}{% endblock %}
     });
   </script>
   {% endcompress%}

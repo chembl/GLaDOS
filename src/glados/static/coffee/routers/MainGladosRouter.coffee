@@ -1,2 +1,7 @@
 glados.useNameSpace 'glados.routers',
-  MainGladosRouter: Backbone.Router.extend {}
+  MainGladosRouter: Backbone.Router.extend
+    routes:
+      '': 'initMainPage'
+    initMainPage: ->
+
+      console.log 'THIS CAME FROM THE ROUTER!!!'

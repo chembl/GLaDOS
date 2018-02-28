@@ -1,0 +1,13 @@
+{% verbatim %}
+  <script id="Handlebars-CriclesBrowser-instructions" type="text/x-handlebars-template">
+
+    {{#if node_name}}
+      {{#if is_pressing_ctrl}}
+        Click to browse all targets of class {{node_name}}
+      {{else}}
+        <i class="icon icon-functional" data-icon="3"></i> Click to focus on {{node_name}}
+      {{/if}}
+    {{/if}}
+
+  </script>
+{% endverbatim %}
