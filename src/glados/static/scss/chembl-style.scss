@@ -165,7 +165,7 @@ a:hover {
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
-$side-nav-width: 200px;
+$side-nav-width: 186px;
 $sidenav-links-side-padding: 8px;
 $sidenav-links-lineheight: 1.1em;
 $sidenav-links-v-padding: 8px;
@@ -183,7 +183,7 @@ $small-font-size: 0.7rem;
 $hexagon-lateral-distance-proportion: 0.0669872981;
 
 .z-depth-below-zero {
-  z-index: 1;
+  z-index: 1 !important;
   box-shadow: none;
   .menu-logo{
     visibility: hidden;
@@ -192,9 +192,13 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
 .side-nav {
   border: none;
   width: $side-nav-width;
-  height: 100%;
-  padding: 0px;
+  height: 100vh;
+  padding: 0;
   font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+  background-color: #fafafa;
+  border-right: #dedede solid 0.5px;
+  box-shadow: 0 0.1px 0.1px 0 #eeeeee;
+  z-index: 1100;
 
   &:not(.fixed) {
     display: none;
@@ -206,12 +210,53 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
     height: 100px;
   }
 
+  ul.menu-links {
+    padding-top: 10px;
+    li {
+      height: 45px;
+      a {
+        height: 100%;
+        font-size: 0.75em;
+        font-family: "ChEMBL_Verdana", Verdana, sans-serif;
+        color: rgba(0, 90, 81, 0.7);
+        padding-left: 3*$sidenav-links-side-padding;
+        border-left: #fafafa solid 6px;
+      }
+
+      .divide {
+        border-bottom: #dedede solid 1px;
+        width: 60%;
+        margin-left: 4.5*$sidenav-links-side-padding;
+        margin-top: 15px;
+        margin-bottom: 20px;
+      }
+
+    }
+    li:hover {
+      background-color: #efefef;
+      a {
+        background-color: #efefef;
+        border-left: rgba(0, 90, 81, 0.7) solid 6px;
+        font-weight: bolder;
+        color: rgba(0, 90, 81, 0.7);
+        transition: all 0.1s ease-in;
+      }
+    }
+    li.divider-li {
+      height: 15px;
+    }
+    li.divider-li:hover {
+      background-color: #fafafa;
+    }
+  }
+
   li.menu-logo {
     font-size: $large-font-size;
     text-align: center;
     background-color: #6abec3;
     margin-top: 0px;
     height: calc(#{$chembl-header-height} + #{2*$chembl-header-padding});
+
     a {
       font-size: 1em;
       padding: 0;
@@ -232,48 +277,8 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
     &.pinned-non-materialize {
       font-size: #{$large-font-size*$chembl-header-shrink-ratio};
       height: calc(#{$chembl-header-height} + #{2*0.1em});
-      .main-page-menu-logo {
-        background-color: $chembl-teal;
-      }
       .chembl-logo-header {
         margin: -0.5em auto 0.5em auto;
-      }
-    }
-  }
-  li {
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-
-  a {
-    height: auto;
-    font-size: 0.85em;
-  }
-
-  li {
-    a {
-      &.selected {
-        background: $primary-color;
-        color: white;
-        span.badge-primary-color-no-float {
-          color: $primary-color;
-          background-color: $chip-bg-color;
-        }
-      }
-
-      font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
-      min-height: inherit;
-      line-height: $sidenav-links-lineheight;
-      padding: $sidenav-links-v-padding $sidenav-links-side-padding $sidenav-links-v-padding $sidenav-links-side-padding;
-      padding-left: 2*$sidenav-links-side-padding;
-
-      span.badge {
-        margin-top: calc(#{$sidenav-links-lineheight / 2} - #{$badge-height / 2} - #{$sidenav-badge-padding/2});
-        border-radius: 2*$sidenav-badge-padding;
-        padding: #{$sidenav-badge-padding - 2px} $sidenav-badge-padding #{$sidenav-badge-padding + 2px} $sidenav-badge-padding;
-        &.new:after {
-          content: "";
-        }
       }
     }
   }
@@ -368,7 +373,7 @@ header .row {
     transition: height 0.25s, width 0.25s;
     transition-timing-function: ease;
     font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
+    //box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
     color: white;
     padding-top: $chembl-header-padding;
     padding-bottom: $chembl-header-padding;
