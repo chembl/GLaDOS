@@ -17,9 +17,10 @@
             {{#unless this.hide_label}}
                 <small>
             {{/unless}}
-            <p>
+            <div class="css-tooltipped" onmouseover="glados.Utils.Tooltips.cssTooltippedOnOverflownOnly(this);">
+                <p class="p-oneline">
             {{#unless this.hide_label}}
-                <b>{{this.name_to_show}}:</b>
+                <b>{{this.name_to_show_short}}:</b>
             {{/unless}}
         {% endverbatim %}
     {% endif %}
@@ -35,7 +36,12 @@
 
     {{#if this.search_hit_highlight_column}}
         {{#each this.value}}
-            <b>{{{this.label_mini}}}:</b> {{{this.value_mini}}}
+            <p class="css-tooltipped{{#if this.active_tooltip}} active-tooltip{{/if}}">
+                <b>{{{this.label_mini}}}:</b> {{{this.value_mini}}}
+                <span class="css-tooltip z-depth-5">
+                    <b>{{{this.label}}}:</b> {{{this.value}}}
+                </span>
+            </p>
         {{/each}}
     {{else if this.has_highlight}}
         {{#if this.has_link}}
@@ -60,10 +66,34 @@
     {% endverbatim %}{% if for_card %}{% verbatim %}
     {{#if @first}}
         {{#if ../highlights}}
+                </p>
+                <p class="css-tooltip z-depth-5">
+                    {{#if this.has_highlight}}
+                        {{#if this.has_link}}
+                            <a href="{{this.link_url}}" target="_blank">{{{this.highlighted_value}}}</a>
+                        {{else}}
+                            {{{this.highlighted_value}}}
+                        {{/if}}
+                    {{else if this.has_link}}
+                        <a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
+                    {{/if}}
+                </p>
+                </div>
             {{#each ../highlights}}
-                <br><small><b>{{{this.label_mini}}}:</b> {{{this.value_mini}}}</small>
+                <div class="css-tooltipped{{#if this.active_tooltip}} active-tooltip{{/if}}">
+                    <small>
+                        <p><b>{{{this.label_mini}}}:</b> {{{this.value_mini}}}</p>
+                        <p class="css-tooltip z-depth-5">
+                            <b>{{{this.label}}}:</b> {{{this.value}}}
+                        </p>
+                    </small>
             {{/each}}
         {{/if}}
+    {{else}}
+        </p>
+        <p class="css-tooltip z-depth-5">
+            <b>{{{this.name_to_show}}}:</b> {{{this.value}}}
+        </p>
     {{/if}}
     {% endverbatim %}{% endif %}{% verbatim %}
 
@@ -88,7 +118,7 @@
 
 
         {% verbatim %}
-            </p>
+            </div>
             {{#unless this.hide_label}}
                 </small>
             {{/unless}}

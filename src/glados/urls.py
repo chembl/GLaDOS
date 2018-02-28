@@ -73,6 +73,12 @@ urlpatterns += [
       xframe_options_exempt(DirectTemplateView.as_view(template_name="glados/Embedding/embed_base.html")), ),
 
   # --------------------------------------------------------------------------------------------------------------------
+  # Browser
+  # --------------------------------------------------------------------------------------------------------------------
+  url(r'^browse/$',
+      xframe_options_exempt(DirectTemplateView.as_view(template_name="glados/Browsers/browse.html")), ),
+
+  # --------------------------------------------------------------------------------------------------------------------
   # Compounds
   # --------------------------------------------------------------------------------------------------------------------
 
@@ -83,12 +89,6 @@ urlpatterns += [
     DirectTemplateView.as_view(
       template_name="glados/MoleculeMetabolismGraphFS.html")), ),
 
-  url(r'^compounds/(filter/[\S| ]+)?$',
-      DirectTemplateView.as_view(template_name="glados/Browsers/browseCompounds.html"), ),
-    
-  url(r'^drugs/(filter/[\S| ]+)?$',
-    DirectTemplateView.as_view(template_name="glados/Browsers/browseDrugs.html"), ),
-
   # --------------------------------------------------------------------------------------------------------------------
   # Targets
   # --------------------------------------------------------------------------------------------------------------------
@@ -96,18 +96,12 @@ urlpatterns += [
   url(r'^target_report_card/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/targetReportCard.html"), ),
 
-  url(r'^targets/(filter/[\S| ]+)?$',
-      DirectTemplateView.as_view(template_name="glados/Browsers/browseTargets.html"), ),
-
   # --------------------------------------------------------------------------------------------------------------------
   # Assays
   # --------------------------------------------------------------------------------------------------------------------
 
   url(r'^assay_report_card/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/assayReportCard.html"), ),
-
-  url(r'^assays/(filter/[\S| ]+)?$',
-      DirectTemplateView.as_view(template_name="glados/Browsers/browseAssays.html"), ),
 
   # --------------------------------------------------------------------------------------------------------------------
   # Documents
@@ -122,8 +116,6 @@ urlpatterns += [
   url(r'^documents_with_same_terms/(?P<doc_terms>.+)/$',
     DirectTemplateView.as_view(template_name="glados/DocumentTerms/DocumentTermsSearch.html"), ),
 
-  url(r'^documents/(filter/[\S| ]+)?$',
-      DirectTemplateView.as_view(template_name="glados/Browsers/browseDocuments.html"), ),
   # --------------------------------------------------------------------------------------------------------------------
   # Cells
   # --------------------------------------------------------------------------------------------------------------------
@@ -131,17 +123,11 @@ urlpatterns += [
   url(r'^cell_line_report_card/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/cellLineReportCard.html"), ),
 
-  url(r'^cells/(filter/[\S| ]+)?$',
-      DirectTemplateView.as_view(template_name="glados/Browsers/browseCells.html"), ),
-
   # --------------------------------------------------------------------------------------------------------------------
   # Tissues
   # --------------------------------------------------------------------------------------------------------------------
   url(r'^tissue_report_card/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/tissueReportCard.html"), ),
-
-  url(r'^tissues/(filter/[\S| ]+)?$',
-      DirectTemplateView.as_view(template_name="glados/Browsers/browseTissues.html"), ),
 
   # --------------------------------------------------------------------------------------------------------------------
   # Drug Browser
@@ -179,12 +165,6 @@ urlpatterns += [
   # Embedded Compound vs Target Matrix
   url(r'^compound_target_matrix/embed/$',
       DirectTemplateView.as_view(template_name="glados/SearchResultsParts/CompoundTargetMatrixToEmbed.html"), ),
-
-  # --------------------------------------------------------------------------------------------------------------------
-  # Activities
-  # --------------------------------------------------------------------------------------------------------------------
-  url(r'^activities/(filter/[\S| ]+)?$',
-      DirectTemplateView.as_view(template_name="glados/Browsers/browseActivities.html"), ),
 
 ]
 

@@ -39,9 +39,9 @@ Assay.reportCardPath = 'assay_report_card/'
 Assay.getAssaysListURL = (filter) ->
 
   if filter
-    return glados.Settings.GLADOS_BASE_PATH_REL + 'assays/filter/' + encodeURIComponent(filter)
+    return glados.Settings.GLADOS_BASE_PATH_REL + 'browse/#assays/filter/' + encodeURIComponent(filter)
   else
-    return glados.Settings.GLADOS_BASE_PATH_REL + 'assays'
+    return glados.Settings.GLADOS_BASE_PATH_REL + 'browse/#assays'
 
 Assay.INDEX_NAME = 'chembl_assay'
 Assay.COLUMNS = {
