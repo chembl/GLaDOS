@@ -218,7 +218,7 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
         height: 100%;
         font-size: 0.75em;
         font-family: "ChEMBL_Verdana", Verdana, sans-serif;
-        color: rgba(0, 90, 81, 0.7);
+        color: rgba(0, 116, 103, 0.82);
         padding-left: 3*$sidenav-links-side-padding;
         border-left: #fafafa solid 6px;
       }
@@ -226,7 +226,7 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
       .divide {
         border-bottom: #dedede solid 1px;
         width: 60%;
-        margin-left: 4.5*$sidenav-links-side-padding;
+        margin-left: 4*$sidenav-links-side-padding;
         margin-top: 15px;
         margin-bottom: 20px;
       }
@@ -236,9 +236,9 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
       background-color: #efefef;
       a {
         background-color: #efefef;
-        border-left: rgba(0, 90, 81, 0.7) solid 6px;
+        border-left: #009688 solid 6px;
         font-weight: bolder;
-        color: rgba(0, 90, 81, 0.7);
+        color: #009688;
         transition: all 0.1s ease-in;
       }
     }
