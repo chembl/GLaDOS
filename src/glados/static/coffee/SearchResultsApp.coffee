@@ -17,8 +17,8 @@ class SearchResultsApp
   # Views
   # --------------------------------------------------------------------------------------------------------------------
 
-  @initSubstructureSearchResults = () ->
-    GlobalVariables.SEARCH_TERM = URLProcessor.getSubstructureSearchQueryString()
+  @initSubstructureSearchResults = (searchTerm) ->
+    GlobalVariables.SEARCH_TERM = searchTerm
     resultsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewSubstructureSearchResultsList()
     resultsList.initURL GlobalVariables.SEARCH_TERM
 

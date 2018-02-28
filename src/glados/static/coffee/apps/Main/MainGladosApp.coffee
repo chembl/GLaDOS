@@ -7,6 +7,7 @@ glados.useNameSpace 'glados.apps.Main',
     @baseTemplates:
       main_page: 'Handlebars-MainPageLayout'
       search_results: 'Handlebars-SearchResultsLayout'
+      substructure_search_results: 'Handlebars-SubstructureSearchResultsLayout'
       browser: 'Handlebars-MainBrowserContent'
 
     @init = ->
@@ -39,6 +40,11 @@ glados.useNameSpace 'glados.apps.Main',
 
       @prepareContentFor('search_results')
       SearchResultsApp.init()
+
+    @initSubstructureSearchResults = (searchTerm) ->
+
+      @prepareContentFor('substructure_search_results')
+      SearchResultsApp.initSubstructureSearchResults(searchTerm)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Entity Browsers
