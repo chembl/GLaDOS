@@ -14,6 +14,7 @@ glados.useNameSpace 'glados.apps.Main',
 
     @prepareContentFor = (pageName) ->
 
+      alert('perpare content for: ' + pageName)
       templateName = @baseTemplates[pageName]
       $gladosMainContent = $('#GladosMainContent')
 
