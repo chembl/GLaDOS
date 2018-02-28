@@ -4,17 +4,29 @@ glados.useNameSpace 'glados.apps.Main',
     @hideMainSplashScreen = -> $('#GladosMainSplashScreen').hide()
     @showMainGladosContent = -> $('#GladosMainContent').show()
 
-    
-    @init = ->
+    @baseTemplates:
+      main_page: 'Handlebars-MainPageLayout'
 
-      console.log 'INIT MAIN APP!!'
+    @init = ->
 
       new glados.routers.MainGladosRouter
       Backbone.history.start()
 
+    @prepareContentFor = (pageName) ->
+
+      templateName = @baseTemplates[pageName]
+      $gladosMainContent = $('#GladosMainContent')
+
+      glados.Utils.fillContentForElement($gladosMainContent, {}, templateName)
       @hideMainSplashScreen()
       @showMainGladosContent()
-      console.log 'everything is shown!!'
+
+    @initMainPage = ->
+
+      @prepareContentFor('main_page')
+      MainPageApp.init()
+
+
 
 
 
