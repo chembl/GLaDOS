@@ -1,5 +1,5 @@
 
-<ul id="slide-out" class="side-nav teal lighten-5 {{ hide_side_nav|yesno:',fixed' }} {% if main_page %} z-depth-below-zero {% endif%}">
+<ul id="slide-out" class="side-nav  {{ hide_side_nav|yesno:',fixed' }} {% if main_page %} z-depth-below-zero {% endif%}">
  {% block menu_links %}
      {% if main_page %}
          {% with main_page=True %}

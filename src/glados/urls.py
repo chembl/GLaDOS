@@ -44,6 +44,12 @@ urlpatterns += [
 
   url(r'^faqs/$', views.faqs, name='faqs'),
 
+  url(r'^db_schema',
+    DirectTemplateView.as_view(template_name="glados/database_schema.html"), name='db_schema'),
+
+  url(r'^ws_schema',
+    DirectTemplateView.as_view(template_name="glados/web_services_schema.html"), name='ws_schema'),
+
   url(r'^download_wizard/(?P<step_id>\w+)$', views.wizard_step_json, name='wizard_step_json'),
 
   # --------------------------------------------------------------------------------------------------------------------
