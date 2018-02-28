@@ -1,7 +1,7 @@
 {% load static %}
 <div class="chembl-header row ">
     <div class="inner-row">
-        <div class="col l2 m5 s10 hide-on-small-pinned">
+        <div class="col l2 m4 s10 hide-on-small-pinned">
             <ul>
                 {% if hide_side_nav %}
                     <li>
@@ -50,7 +50,7 @@
         </div>
 
         {% if main_page %}
-            <div class=" col push-l2 l8 m7 hide-on-small-only hide-on-pinned main-page-search-bar">
+            <div class=" col push-l2 l8 m8 hide-on-small-only hide-on-pinned main-page-search-bar">
                 {% include "glados/SearchResultsParts/SearchBar.html" %}
             </div>
         {% endif %}
