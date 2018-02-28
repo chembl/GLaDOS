@@ -197,8 +197,9 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
   background-color: #fafafa;
   border-right: #dedede solid 0.5px;
   box-shadow: 0 0.1px 0.1px 0 #eeeeee;
-  overflow-y: hidden;
+  overflow-y: scroll;
   z-index: 1100;
+  height: 100%;
 
   &:not(.fixed) {
     display: none;
@@ -207,10 +208,11 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
   &:after {
     content: "   ";
     display: block;
-    height: 100px;
+    height: 10px;
   }
 
   ul.menu-links {
+    height: fit-content;
     li {
       height: 45px;
       a {
