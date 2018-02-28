@@ -7,6 +7,7 @@ glados.useNameSpace 'glados.apps.Main',
     @baseTemplates:
       main_page: 'Handlebars-MainPageLayout'
       search_results: 'Handlebars-SearchResultsLayout'
+      browser: 'Handlebars-MainBrowserContent'
 
     @init = ->
 
@@ -23,15 +24,30 @@ glados.useNameSpace 'glados.apps.Main',
       @hideMainSplashScreen()
       @showMainGladosContent()
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # Main page
+    # ------------------------------------------------------------------------------------------------------------------
     @initMainPage = ->
 
       @prepareContentFor('main_page')
       MainPageApp.init()
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # Search Results
+    # ------------------------------------------------------------------------------------------------------------------
     @initSearchResults = (searchTerm) ->
 
       @prepareContentFor('search_results')
       SearchResultsApp.init()
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Entity Browsers
+    # ------------------------------------------------------------------------------------------------------------------
+    @initBrowserForEntity = (entityName, filter, state) ->
+
+      @prepareContentFor('browser')
+      glados.apps.Browsers.BrowserApp.initBrowserForEntity(entityName, filter, state)
+      console.log 'init browser for entity!!!'
 
 
 

@@ -6,6 +6,7 @@ class SearchResultsApp
 
   @init = ->
     @eSQueryExplainView = glados.views.SearchResults.ESQueryExplainView.getInstance()
+    console.log '@eSQueryExplainView: ', @eSQueryExplainView
 
     $searchResultsContainer = $('.BCK-SearchResultsContainer')
     new glados.views.SearchResults.SearchResultsView
