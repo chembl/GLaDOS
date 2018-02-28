@@ -192,12 +192,12 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
 .side-nav {
   border: none;
   width: $side-nav-width;
-  height: 100vh;
   padding: 0;
   font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
   background-color: #fafafa;
   border-right: #dedede solid 0.5px;
   box-shadow: 0 0.1px 0.1px 0 #eeeeee;
+  overflow-y: hidden;
   z-index: 1100;
 
   &:not(.fixed) {
@@ -211,7 +211,6 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
   }
 
   ul.menu-links {
-    padding-top: 10px;
     li {
       height: 45px;
       a {
@@ -255,7 +254,7 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
     text-align: center;
     background-color: #6abec3;
     margin-top: 0px;
-    height: calc(#{$chembl-header-height} + #{2*$chembl-header-padding});
+    height: calc(#{$chembl-header-height} + #{2*$chembl-header-padding} - 10px);
 
     a {
       font-size: 1em;
@@ -305,7 +304,7 @@ footer {
     &.page-footer {
       padding-top: 0px;
     }
-    z-index: 1000;
+    z-index: 2000;
   }
 }
 
@@ -373,7 +372,6 @@ header .row {
     transition: height 0.25s, width 0.25s;
     transition-timing-function: ease;
     font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
-    //box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
     color: white;
     padding-top: $chembl-header-padding;
     padding-bottom: $chembl-header-padding;
@@ -713,7 +711,7 @@ div#global-masthead nav {
   height: $global-masthead-large-height;
   background-color: #333333;
   position: relative;
-  z-index: 1000;
+  z-index: 1101;
   line-height: 1px;
   border-bottom: 1px solid #e3e3e3
 }
