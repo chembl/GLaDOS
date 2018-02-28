@@ -205,6 +205,6 @@ Target.MINI_REPORT_CARD =
 Target.getTargetsListURL = (filter) ->
 
   if filter
-    return glados.Settings.GLADOS_BASE_PATH_REL + 'targets/filter/' + encodeURIComponent(filter)
+    return glados.Settings.GLADOS_BASE_PATH_REL + 'browse/#targets/filter/' + encodeURIComponent(filter)
   else
-    return glados.Settings.GLADOS_BASE_PATH_REL + 'targets'
+    return glados.Settings.GLADOS_BASE_PATH_REL + 'browse/#targets'

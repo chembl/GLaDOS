@@ -124,10 +124,10 @@ glados.useNameSpace 'glados.views.Browsers',
       $(@el).find('.BCK-FacetsContent').show()
 
     hideAll: ->
-
       $(@el).find('.BCK-Preloader-Container').hide()
       $(@el).find('.BCK-FacetsContent').hide()
       $(@el).hide()
+      $(@el).addClass('facets-container-hidden')
 
 
     checkIfNoItems: ->
@@ -136,6 +136,8 @@ glados.useNameSpace 'glados.views.Browsers',
       if totalRecords == 0
         @hideAll()
         return true
+      else
+        $(@el).removeClass('facets-container-hidden')
 
     # ------------------------------------------------------------------------------------------------------------------
     # Filters reordering

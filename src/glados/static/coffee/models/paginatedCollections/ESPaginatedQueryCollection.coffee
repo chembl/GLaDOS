@@ -52,7 +52,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             maxValueLength = valueJ.length
 
         joinStr = ', '
-        if maxValueLength > glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_MAX_WORD_LENGTH * 5
+        if maxValueLength > glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_MAX_WORD_LENGTH * 10
           joinStr = ' .... '
 
         label = propPath
@@ -64,7 +64,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
         hlValue =  Array.from(_.values(simplifiedHL[propPath])).join(joinStr)
         miniHLValue = hlValue
-        if hlValue.length > glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_MAX_WORD_LENGTH * 5
+        if hlValue.length > glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_MAX_WORD_LENGTH * 10
           firstSimplified = _.keys(simplifiedHL[propPath])[0].trim()
           firstComplete = _.values(simplifiedHL[propPath])[0].trim()
           startsHighlighted = firstComplete.startsWith(
@@ -125,6 +125,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           value: hlValue
           label: label
           label_mini: label_mini
+          active_tooltip: miniHLValue != hlValue
         }
       return simplifiedHL
 

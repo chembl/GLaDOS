@@ -599,11 +599,11 @@ msgstr "Target Organism"
 
 
 msgid "glados_es_gs__activity__target_pref_name__label"
-msgstr "Target Pref Name"
+msgstr "Target Name"
 
 
 msgid "glados_es_gs__activity__target_pref_name__label__mini"
-msgstr "Target Pref Name"
+msgstr "Target Name"
 
 
 msgid "glados_es_gs__activity__target_tax_id__label"
@@ -2143,11 +2143,11 @@ msgstr "Drug Indc. EFO Term"
 
 
 msgid "glados_es_gs__molecule__drug_indications___indication_refs__label"
-msgstr "Drug Indications Indication Refs"
+msgstr "Drug Indications Refs"
 
 
 msgid "glados_es_gs__molecule__drug_indications___indication_refs__label__mini"
-msgstr "Drug Indc. Indc. Refs"
+msgstr "Drug Indc. Refs"
 
 
 msgid "glados_es_gs__molecule__drug_indications___max_phase_for_ind__label"
@@ -2239,27 +2239,27 @@ msgstr "Indctn. Class"
 
 
 msgid "glados_es_gs__molecule__indication_refs___ref_id__label"
-msgstr "Indication Refs Ref ID"
+msgstr "Indication Refs ID"
 
 
 msgid "glados_es_gs__molecule__indication_refs___ref_id__label__mini"
-msgstr "Indc. Refs Ref ID"
+msgstr "Indctn. Refs ID"
 
 
 msgid "glados_es_gs__molecule__indication_refs___ref_type__label"
-msgstr "Indication Refs Ref Type"
+msgstr "Indication Refs Type"
 
 
 msgid "glados_es_gs__molecule__indication_refs___ref_type__label__mini"
-msgstr "Indc. Refs Ref Type"
+msgstr "Indctn. Refs Type"
 
 
 msgid "glados_es_gs__molecule__indication_refs___ref_url__label"
-msgstr "Indication Refs Ref Url"
+msgstr "Indication Refs Url"
 
 
 msgid "glados_es_gs__molecule__indication_refs___ref_url__label__mini"
-msgstr "Indc. Refs Ref Url"
+msgstr "Indctn. Refs Url"
 
 
 msgid "glados_es_gs__molecule__inorganic_flag__label"
@@ -2535,11 +2535,11 @@ msgstr "Structures"
 
 
 msgid "glados_es_gs__molecule__molecule_synonyms___molecule_synonym__label"
-msgstr "Synonyms Synonym"
+msgstr "Synonyms"
 
 
 msgid "glados_es_gs__molecule__molecule_synonyms___molecule_synonym__label__mini"
-msgstr "Synms. Synm."
+msgstr "Synonyms"
 
 
 msgid "glados_es_gs__molecule__molecule_synonyms___syn_type__label"
@@ -2551,11 +2551,11 @@ msgstr "Synms. Syn Type"
 
 
 msgid "glados_es_gs__molecule__molecule_synonyms___synonyms__label"
-msgstr "Synonyms"
+msgstr "Synonyms Synonyms"
 
 
 msgid "glados_es_gs__molecule__molecule_synonyms___synonyms__label__mini"
-msgstr "Synonyms"
+msgstr "Synms. Synms."
 
 
 msgid "glados_es_gs__molecule__molecule_synonyms__label"
@@ -2615,11 +2615,11 @@ msgstr "Polymer Flag"
 
 
 msgid "glados_es_gs__molecule__pref_name__label"
-msgstr "Pref Name"
+msgstr "Name"
 
 
 msgid "glados_es_gs__molecule__pref_name__label__mini"
-msgstr "Pref Name"
+msgstr "Name"
 
 
 msgid "glados_es_gs__molecule__prodrug__label"
@@ -2871,11 +2871,11 @@ msgstr "Targ. Prdc. Orgn."
 
 
 msgid "glados_es_gs__molecule__target_predictions___target_pref_name__label"
-msgstr "Target Predictions Pref Name"
+msgstr "Target Predictions Name"
 
 
 msgid "glados_es_gs__molecule__target_predictions___target_pref_name__label__mini"
-msgstr "Targ. Prdc. Pref Name"
+msgstr "Targ. Prdc. Name"
 
 
 msgid "glados_es_gs__molecule__target_predictions___target_tax_id__label"
@@ -2903,11 +2903,11 @@ msgstr "Target Prdctn."
 
 
 msgid "glados_es_gs__molecule__target_pref_name__label"
-msgstr "Target Pref Name"
+msgstr "Target Name"
 
 
 msgid "glados_es_gs__molecule__target_pref_name__label__mini"
-msgstr "Target Pref Name"
+msgstr "Target Name"
 
 
 msgid "glados_es_gs__molecule__therapeutic_flag__label"
@@ -3191,11 +3191,11 @@ msgstr "Orgnsm. Taxnm."
 
 
 msgid "glados_es_gs__target__pref_name__label"
-msgstr "Pref Name"
+msgstr "Name"
 
 
 msgid "glados_es_gs__target__pref_name__label__mini"
-msgstr "Pref Name"
+msgstr "Name"
 
 
 msgid "glados_es_gs__target__protein_classification___l1__label"
@@ -3263,11 +3263,11 @@ msgstr "Prtn. Clsf."
 
 
 msgid "glados_es_gs__target__protein_classifications___protein_classification_id__label"
-msgstr "Protein Classifications Classification ID"
+msgstr "Protein Classifications ID"
 
 
 msgid "glados_es_gs__target__protein_classifications___protein_classification_id__label__mini"
-msgstr "Prtn. Clsf. Clsf. ID"
+msgstr "Prtn. Clsf. ID"
 
 
 msgid "glados_es_gs__target__related_activities___count__label"
@@ -3527,11 +3527,11 @@ msgstr "Component"
 
 
 msgid "glados_es_gs__target__target_component_synonyms___component_synonym__label"
-msgstr "Component Synonyms Synonym"
+msgstr "Component Synonyms"
 
 
 msgid "glados_es_gs__target__target_component_synonyms___component_synonym__label__mini"
-msgstr "Comp. Synm. Synm."
+msgstr "Compnt. Synms."
 
 
 msgid "glados_es_gs__target__target_component_synonyms___syn_type__label"
@@ -3551,27 +3551,27 @@ msgstr "Compnt. Acsn."
 
 
 msgid "glados_es_gs__target__target_components___component_description__label"
-msgstr "Components Component Description"
+msgstr "Components Description"
 
 
 msgid "glados_es_gs__target__target_components___component_description__label__mini"
-msgstr "Comp. Comp. Desc."
+msgstr "Comp. Desc."
 
 
 msgid "glados_es_gs__target__target_components___component_id__label"
-msgstr "Components Component ID"
+msgstr "Components ID"
 
 
 msgid "glados_es_gs__target__target_components___component_id__label__mini"
-msgstr "Comp. Comp. ID"
+msgstr "Components ID"
 
 
 msgid "glados_es_gs__target__target_components___component_type__label"
-msgstr "Components Component Type"
+msgstr "Components Type"
 
 
 msgid "glados_es_gs__target__target_components___component_type__label__mini"
-msgstr "Comp. Comp. Type"
+msgstr "Components Type"
 
 
 msgid "glados_es_gs__target__target_components___relationship__label"
@@ -3583,11 +3583,11 @@ msgstr "Comp. Relt."
 
 
 msgid "glados_es_gs__target__target_components___target_component_synonyms__label"
-msgstr "Components Component Synonyms"
+msgstr "Components Synonyms"
 
 
 msgid "glados_es_gs__target__target_components___target_component_synonyms__label__mini"
-msgstr "Comp. Comp. Synm."
+msgstr "Compnt. Synms."
 
 
 msgid "glados_es_gs__target__target_components__label"
@@ -3655,11 +3655,11 @@ msgstr "Prdctn. Orgnsm."
 
 
 msgid "glados_es_gs__target__target_predictions___target_pref_name__label"
-msgstr "Predictions Pref Name"
+msgstr "Predictions Name"
 
 
 msgid "glados_es_gs__target__target_predictions___target_pref_name__label__mini"
-msgstr "Prdc. Pref Name"
+msgstr "Prdctn. Name"
 
 
 msgid "glados_es_gs__target__target_predictions___target_tax_id__label"
@@ -3807,11 +3807,11 @@ msgstr "Orgnsm. Taxnm."
 
 
 msgid "glados_es_gs__tissue__pref_name__label"
-msgstr "Pref Name"
+msgstr "Name"
 
 
 msgid "glados_es_gs__tissue__pref_name__label__mini"
-msgstr "Pref Name"
+msgstr "Name"
 
 
 msgid "glados_es_gs__tissue__related_activities___chembl_ids__label"

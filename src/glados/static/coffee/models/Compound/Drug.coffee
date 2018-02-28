@@ -141,6 +141,6 @@ glados.models.Compound.Drug.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS = _.union(
 Drug.getDrugsListURL = (filter) ->
 
   if filter
-    return glados.Settings.GLADOS_BASE_PATH_REL + 'drugs/filter/' + encodeURIComponent(filter)
+    return glados.Settings.GLADOS_BASE_PATH_REL + 'browse/#drugs/filter/' + encodeURIComponent(filter)
   else
-    return glados.Settings.GLADOS_BASE_PATH_REL + 'drugs'
+    return glados.Settings.GLADOS_BASE_PATH_REL + 'browse/#drugs'

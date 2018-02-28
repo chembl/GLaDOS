@@ -159,6 +159,6 @@ Document.MINI_REPORT_CARD =
 Document.getDocumentsListURL = (filter) ->
 
   if filter
-    return glados.Settings.GLADOS_BASE_PATH_REL + 'documents/filter/' + encodeURIComponent(filter)
+    return glados.Settings.GLADOS_BASE_PATH_REL + 'browse/#documents/filter/' + encodeURIComponent(filter)
   else
-    return glados.Settings.GLADOS_BASE_PATH_REL + 'documents'
+    return glados.Settings.GLADOS_BASE_PATH_REL + 'browse/#documents'
