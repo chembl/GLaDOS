@@ -6,6 +6,7 @@ glados.useNameSpace 'glados.apps.Main',
 
     @baseTemplates:
       main_page: 'Handlebars-MainPageLayout'
+      search_results: 'Handlebars-SearchResultsLayout'
 
     @init = ->
 
@@ -26,6 +27,13 @@ glados.useNameSpace 'glados.apps.Main',
 
       @prepareContentFor('main_page')
       MainPageApp.init()
+
+    @initSearchResults = (searchTerm) ->
+
+      @prepareContentFor('search_results')
+      SearchResultsApp.init()
+
+
 
 
 

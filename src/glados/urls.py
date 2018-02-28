@@ -32,6 +32,8 @@ urlpatterns += [
   # --------------------------------------------------------------------------------------------------------------------
   url(r'^$', views.main_html_base, name='main'),
 
+  url(r'^g/$', views.main_html_base_no_bar, name='main'),
+
   url(r'^tweets/$', views.get_latest_tweets_json, name='tweets'),
 
   url(r'^marvin_search_fullscreen/$',
@@ -136,8 +138,8 @@ urlpatterns += [
   url(r'^search_results_parser/(?P<search_string>.*?)$',
       glados.grammar.search_parser.parse_url_search, ),
 
-  url(r'^search_results/.*?$',
-      DirectTemplateView.as_view(template_name="glados/SearchResultsParts/SearchResultsMain.html"), ),
+  # url(r'^search_results/.*?$',
+  #     DirectTemplateView.as_view(template_name="glados/SearchResultsParts/SearchResultsMain.html"), ),
 
   url(r'^substructure_search_results/.*?$',
       DirectTemplateView.as_view(template_name="glados/SubstructureSearchResultsParts/SearchResultsMain.html"), ),
