@@ -32,7 +32,7 @@ urlpatterns += [
   # --------------------------------------------------------------------------------------------------------------------
   url(r'^$', views.main_html_base, name='main'),
 
-  url(r'^g/$', views.main_html_base_no_bar, name='main'),
+  url(r'^g/$', views.main_html_base_no_bar, name='no_bar'),
 
   url(r'^tweets/$', views.get_latest_tweets_json, name='tweets'),
 

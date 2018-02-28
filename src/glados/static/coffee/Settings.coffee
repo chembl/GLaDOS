@@ -260,6 +260,10 @@ glados.loadSearchResultsURLS = ()->
           glados.Settings.SEARCH_RESULTS_ES_PATH_REGEX+
           '(/'+glados.Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH+')?/(.*?)$')
 
+  glados.Settings.ENTITY_BROWSERS_URL_TEMPLATE = "#{glados.Settings.GLADOS_BASE_PATH_REL}" +
+    "g/#browse/{{entity}}{{#if filter}}/filter/{{filter}}{{/if}}"
+  glados.Settings.ENTITY_BROWSERS_URL_GENERATOR = Handlebars.compile(glados.Settings.ENTITY_BROWSERS_URL_TEMPLATE)
+
 # Logs the JavaScript environment details
 glados.logGladosSettings = () ->
   if glados.Settings.DEBUG

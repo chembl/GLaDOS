@@ -47,7 +47,6 @@ glados.useNameSpace 'glados.apps.Main',
 
       @prepareContentFor('browser')
       glados.apps.Browsers.BrowserApp.initBrowserForEntity(entityName, filter, state)
-      console.log 'init browser for entity!!!'
 
 
 
