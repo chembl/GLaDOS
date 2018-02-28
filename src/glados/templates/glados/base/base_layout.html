@@ -67,8 +67,15 @@
       {% include "glados/base/side_nav.html" %}
     {% endblock %}
 
-
     {% block content %}{% endblock %}
+
+    <div class="container" style="height: 100vh;">
+      Loading...
+        <div class="progress">
+            <div class="indeterminate"></div>
+        </div>
+    </div>
+
 
     {% block download_db_menu %}
       {% include "glados/MainPageParts/download_db_menu.html" %}
