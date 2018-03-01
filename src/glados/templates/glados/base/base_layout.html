@@ -51,7 +51,6 @@
 
   <!-- Breadcrumbs -->
   {% block breadcrumb %}
-      <script type="text/javascript" src="{% static 'js/coffee-gen/models/base/Breadcrumb.js' %}"></script>
       <div class="container main-container {{ hide_side_nav|yesno:',side-nav-padding' }}">
           {% include "glados/base/breadcrumb.html" %}
       </div>
@@ -117,7 +116,7 @@
       glados.helpers.HeaderHelper.initializeHeader();
       glados.helpers.SideMenuHelper.initializeSideMenu();
       glados.views.SearchResults.SearchBarView.createInstances();
-
+      BreadcrumbApp.init();
       {% block custom_js_inline %}{% endblock %}
 
       //the initialization of modals needs to be as specific as possible to avoid issues with all the other modals
