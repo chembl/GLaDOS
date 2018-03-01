@@ -1230,7 +1230,7 @@ div#global-footer img {
 /* medium and up screens */
 @media only screen and (min-width: 601px) {
   .main-container {
-    width: 95%;
+    width: 97.5%;
     max-width: none;
   }
 }
@@ -1769,12 +1769,18 @@ em.glados-result-highlight {
 
   a {
     border-bottom: 0 none;
-    color: color("teal", "base")
+    color: color("teal", "base");
   }
 
   a:hover {
 
     color: color("teal", "accent-4")
+  }
+
+  span{
+    border-bottom: 0 none;
+    color: color("teal", "base");
+    font-size: 70%;
   }
 
 }
@@ -2030,7 +2036,7 @@ em.glados-result-highlight {
 */
 
 .ebi-breadcrumb {
-  font-size: 80%;
+  font-size: 70%;
 }
 
 /**
