@@ -1,15 +1,24 @@
 {% extends "glados/base/base_layout.html" %}
 <!-- HIDE SIDE-NAV: Needs to call 3 blocks again -->
+
+{% block breadcrumb %}
+  {% with hide_side_nav=False %}
+    {{block.super}}
+  {% endwith %}
+{% endblock breadcrumb %}
+
 {% block main_start_tag %}
   {% with hide_side_nav=False %}
     {{block.super}}
   {% endwith %}
 {% endblock main_start_tag %}
+
 {% block chembl_header %}
   {% with hide_side_nav=False main_page=True%}
     {{block.super}}
   {% endwith %}
 {% endblock chembl_header %}
+
 {% block side_nav %}
   {% with hide_side_nav=False main_page=True%}
     {{block.super}}
@@ -19,7 +28,7 @@
 {% block title %}ChEMBL{% endblock %}
 
 {% block content %}
-    
+
 <div id="MainPageCentralDiv" class="row">
 
   <div class="col l9 m12 s12">
