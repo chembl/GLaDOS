@@ -2,7 +2,12 @@ glados.useNameSpace 'glados.apps',
   BreadcrumbApp: class BreadcrumbApp
 
     @init = ->
-      breadCrumbs = new glados.models.base.Breadcrumb.Breadcrumb
-    #    breadCrumbs.fetch()
+      breadcrumbs = new glados.models.base.Breadcrumb.Breadcrumb
 
-      console.log 'Breadcrumbs: ', breadCrumbs
+      new glados.views.base.BreadcrumbsView
+        el: $('#BCK-breadcrumbs')
+        model: breadcrumbs
+        
+#      breadCrumbs.fetch()
+
+      console.log 'breadcrumbs: ', breadcrumbs
