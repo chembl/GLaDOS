@@ -10,10 +10,10 @@ glados.useNameSpace 'glados.models.base.Breadcrumb',
       breadcrumbsURL = breadcrumbsURL.split '/'
 
       current_url = @base_url.slice(0, -1)
-      breadcrumbs = []
+      breadcrumbs = {}
       for url in breadcrumbsURL
         if url != ''
-          breadcrumbs.push
+          breadcrumbs[url] =
             label: url
             url: current_url + '/' + url
           current_url = current_url + '/' + url
