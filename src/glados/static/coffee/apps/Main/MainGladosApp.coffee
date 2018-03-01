@@ -7,7 +7,7 @@ glados.useNameSpace 'glados.apps.Main',
     @baseTemplates:
       main_page: 'Handlebars-MainPageLayout'
       search_results: 'Handlebars-SearchResultsLayout'
-      substructure_search_results: 'Handlebars-SubstructureSearchResultsLayout'
+      structure_search_results: 'Handlebars-SubstructureSearchResultsLayout'
       browser: 'Handlebars-MainBrowserContent'
 
     @init = ->
@@ -15,13 +15,14 @@ glados.useNameSpace 'glados.apps.Main',
       new glados.routers.MainGladosRouter
       Backbone.history.start()
 
-    @prepareContentFor = (pageName) ->
+    @prepareContentFor = (pageName, templateParams={}) ->
 
       alert('perpare content for: ' + pageName)
       templateName = @baseTemplates[pageName]
       $gladosMainContent = $('#GladosMainContent')
+      $gladosMainContent.empty()
 
-      glados.Utils.fillContentForElement($gladosMainContent, {}, templateName)
+      glados.Utils.fillContentForElement($gladosMainContent, templateParams, templateName)
       @hideMainSplashScreen()
       @showMainGladosContent()
 
@@ -43,8 +44,25 @@ glados.useNameSpace 'glados.apps.Main',
 
     @initSubstructureSearchResults = (searchTerm) ->
 
-      @prepareContentFor('substructure_search_results')
+      templateParams =
+        type: 'Substructure'
+      @prepareContentFor('structure_search_results', templateParams)
       SearchResultsApp.initSubstructureSearchResults(searchTerm)
+
+    @initSimilaritySearchResults = (searchTerm, threshold) ->
+
+      templateParams =
+        type: 'Similarity'
+      @prepareContentFor('structure_search_results', templateParams)
+      SearchResultsApp.initSimilaritySearchResults(searchTerm, threshold)
+
+    @initFlexmatchSearchResults = (searchTerm) ->
+
+      templateParams =
+        type: ''
+      @prepareContentFor('structure_search_results', templateParams)
+      SearchResultsApp.initFlexmatchSearchResults(searchTerm)
+
 
     # ------------------------------------------------------------------------------------------------------------------
     # Entity Browsers

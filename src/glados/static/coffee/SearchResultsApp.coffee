@@ -38,9 +38,9 @@ class SearchResultsApp
       glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_SUBSTRUCTURE_HIGHLIGHTING,
       GlobalVariables.SEARCH_TERM)
 
-  @initSimilaritySearchResults = () ->
-    GlobalVariables.SEARCH_TERM = URLProcessor.getSimilaritySearchQueryString()
-    GlobalVariables.SIMILARITY_PERCENTAGE = URLProcessor.getSimilaritySearchPercentage()
+  @initSimilaritySearchResults = (searchTerm, threshold) ->
+    GlobalVariables.SEARCH_TERM = searchTerm
+    GlobalVariables.SIMILARITY_PERCENTAGE = threshold
     queryParams =
       search_term: GlobalVariables.SEARCH_TERM
       similarity_percentage: GlobalVariables.SIMILARITY_PERCENTAGE
@@ -62,8 +62,8 @@ class SearchResultsApp
       glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_SIMILARITY_MAPS,
       GlobalVariables.SEARCH_TERM)
 
-  @initFlexmatchSearchResults = () ->
-    GlobalVariables.SEARCH_TERM = URLProcessor.getUrlPartInReversePosition(0)
+  @initFlexmatchSearchResults = (searchTerm) ->
+    GlobalVariables.SEARCH_TERM = searchTerm
 
     queryParams =
       search_term: GlobalVariables.SEARCH_TERM
