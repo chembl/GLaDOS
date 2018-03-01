@@ -1769,12 +1769,18 @@ em.glados-result-highlight {
 
   a {
     border-bottom: 0 none;
-    color: color("teal", "base")
+    color: color("teal", "base");
   }
 
   a:hover {
 
     color: color("teal", "accent-4")
+  }
+
+  span{
+    border-bottom: 0 none;
+    color: color("teal", "base");
+    font-size: 70%;
   }
 
 }
