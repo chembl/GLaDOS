@@ -49,6 +49,15 @@
 
   </header>
 
+  <div class="container main-container">
+
+    {% block breadcrumb %}
+    {% include "glados/base/breadcrumb.html" %}
+    {% endblock %}
+
+  </div>
+
+
 
   {% block main_start_tag %}
   <main class="with-sidenav {{ hide_side_nav|yesno:',side-nav-padding' }}">
