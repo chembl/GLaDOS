@@ -7,5 +7,3 @@ glados.useNameSpace 'glados.apps',
       new glados.views.base.BreadcrumbsView
         el: $('#BCK-breadcrumbs')
         model: breadcrumbs
-
-#      breadCrumbs.fetch()

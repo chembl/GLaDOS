@@ -679,13 +679,6 @@
 </ul>
 </script>
 
-<script id="Handlebars-BreadcrumbsContent" type="text/x-handlebars-template">
-    {{#each breadcrumbs}}
-        <span> > </span>
-        <a href="{{ this.url }}" class="ebi-breadcrumb"> {{ this.label }} </a>
-    {{/each}}
-</script>
-
 <script id="Handlebars-Common-References-Table" type="text/x-handlebars-template">
 
  <table class="bordered striped">
@@ -814,3 +807,4 @@ There are no {{#if is_unichem}}UniChem {{/if}}cross references for {{chembl_id}}
 {% include "glados/Handlebars/EmbeddingSources.html" %}
 {% include "glados/Handlebars/SketcherSources.html" %}
 {% include "glados/Handlebars/BrowserSources.html" %}
+{% include "glados/Handlebars/BreadcrumbSources.html" %}
