@@ -49,7 +49,9 @@
 
   </header>
 
+  <!-- Breadcrumbs -->
   {% block breadcrumb %}
+      <script type="text/javascript" src="{% static 'js/coffee-gen/models/base/Breadcrumb.js' %}"></script>
       <div class="container main-container {{ hide_side_nav|yesno:',side-nav-padding' }}">
           {% include "glados/base/breadcrumb.html" %}
       </div>
