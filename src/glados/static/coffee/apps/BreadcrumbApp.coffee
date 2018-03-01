@@ -1,8 +1,8 @@
-class BreadcrumbApp
+glados.useNameSpace 'glados.apps',
+  BreadcrumbApp: class BreadcrumbApp
 
-  @init = ->
-    console.log 'INIT BREADCRUMB APP'
+    @init = ->
+      breadCrumbs = new glados.models.base.Breadcrumb.Breadcrumb
+    #    breadCrumbs.fetch()
 
-    breadCrumbs = glados.models.base.Breadcrumb
-
-    console.log 'Breadcrumbs: ', breadCrumbs
+      console.log 'Breadcrumbs: ', breadCrumbs
