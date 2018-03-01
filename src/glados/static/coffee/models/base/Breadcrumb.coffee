@@ -2,20 +2,23 @@ glados.useNameSpace 'glados.models.base.Breadcrumb',
   Breadcrumb: Backbone.Model.extend
     initialize: ->
       @complete_url = document.URL
-      @base_url = glados.models.base.Breadcrumb.BASE_URL
-      @breadcrumbs_list = @getBreadcrumbsList(@complete_url)
+      @base_url = glados.Settings.GLADOS_BASE_URL_FULL
+      @breadcrumbs_list = @getBreadcrumbsList(@base_url, @complete_url)
 
+    getBreadcrumbsList: (baseURL, completeURL) ->
+      breadcrumbsURL = completeURL.replace baseURL, ''
+      breadcrumbsURL = breadcrumbsURL.split '/'
 
-    getBreadcrumbsList: (baseURL) ->
-     breadcrumbsUrl =
+      current_url = @base_url.slice(0, -1)
+      breadcrumbs = []
+      for url in breadcrumbsURL
+        if url != ''
+          breadcrumbs.push
+            label: url
+            url: current_url + '/' + url
+          current_url = current_url + '/' + url
 
-      return baseURL
-
-
-
-glados.models.base.Breadcrumb.BASE_URL =
-  name: 'ChEMBL Database'
-  url: glados.Settings.GLADOS_BASE_URL_FULL
+      return breadcrumbs
 
 
 
