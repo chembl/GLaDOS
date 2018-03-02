@@ -74,6 +74,13 @@ glados.useNameSpace 'glados.apps.Main',
       @prepareContentFor('browser')
       glados.apps.Browsers.BrowserApp.initBrowserForEntity(entityName, filter, state)
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # Report Cards
+    # ------------------------------------------------------------------------------------------------------------------
+    @initReportCard = (entityName, chemblID) ->
+
+      console.log 'INIT REPORT CARD'
+
 
 
 
