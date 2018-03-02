@@ -334,6 +334,8 @@ footer {
 
   .local-footer {
     border-top: 2px solid #eee;
+    height: 80px;
+    overflow-y: hidden;
   }
 
   /*
@@ -384,7 +386,7 @@ footer {
   }
 
   .ebi-footer-meta {
-    font-size: 85%;
+    font-size: 80%;
     margin-bottom: 9px;
   }
 
