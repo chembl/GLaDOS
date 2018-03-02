@@ -1,11 +1,25 @@
 header {
   z-index: 20;
   div#masthead-contaniner {
+    height: 35px;
 
-    /* Colour - defaults to be reset by custom stylesheet
-    ===================================================*/
+    //CUSTOM  TO OVERRIDE CHEMBL STYLE
     div#masthead-black-bar {
-      background-color: #333 !Important;
+      background-color: #333;
+
+      #ebi-nav {
+        background-color: #333;
+        box-shadow: none;
+        line-height: 35px;
+        height: 35px;
+        ul {
+          li a{
+            font-family: Helvetica, Arial, FreeSans, "Liberation Sans", sans-serif;
+            font-weight: 100;
+            font-size: 0.9em;
+          }
+        }
+      }
     }
 
     a.ebi-background, .ebi-background, .ebi-background.button, .ebi-background.button:hover, .ebi-background.tag {
@@ -93,10 +107,6 @@ header {
     }
 
     /*
-        SITE-WIDE MASTHEAD LAYOUT AND SIZE
-        Generic rules for global and local mastheads
-      =================================================== */
-    /*
         GLOBAL MASTHEAD
       ================================== */
     #local-title a,
@@ -133,15 +143,6 @@ header {
       }
     }
 
-    div#masthead-black-bar {
-      /* custom colour for Home */
-      /* custom colour for Services */
-      /* custom colour for Research */
-      /* custom colour for Training */
-      /* custom colour for About us */
-      /* Custom icon for search */
-      /* EMBL Dropdwon styles */
-    }
     div#masthead-black-bar a,
     div#masthead-black-bar a:hover,
     div#masthead-black-bar ul.menu li a:hover,
@@ -158,6 +159,7 @@ header {
     }
     div#masthead-black-bar ul li a:before {
       display: inline-block;
+      border-bottom: none;
       padding-right: .4rem;
     }
     div#masthead-black-bar ul li.home a:before {
@@ -282,37 +284,16 @@ header {
     }
 
 
-    /* extend Froundation utility selectors/classes */
-    .small {
-      font-size: 80%;
-      line-height: inherit;
-    }
 
     .nowrap {
       white-space: nowrap;
     }
 
-    .code {
-      font-family: Consolas, "Liberation Mono", Courier, monospace;
-      font-weight: normal;
-      color: #0a0a0a;
-      background-color: #e6e6e6;
-      border: 1px solid #cacaca;
-      padding: 0.125rem 0.3125rem 0.0625rem;
-      overflow-x: auto;
-    }
 
     pre {
       overflow-x: auto;
     }
 
-    pre > .code,
-    pre > code {
-      padding: 0;
-      border: 0;
-      background: none;
-      font-size: .8rem;
-    }
 
     .kbd {
       margin: 0;
@@ -692,26 +673,6 @@ header {
       }
     }
 
-    /* Orbit thumbnails */
-    nav.orbit-bullets button.thumbnail {
-      width: auto;
-      border-radius: 0;
-    }
-
-    nav.orbit-bullets button.thumbnail.is-active {
-      box-shadow: 0 0 1px #444;
-    }
-
-    nav.orbit-bullets button.thumbnail.image {
-      width: 4rem;
-      height: 3rem;
-      overflow: hidden;
-    }
-
-    nav.orbit-bullets button.thumbnail.image > img {
-      min-width: 6rem;
-      margin-left: -2rem;
-    }
 
     /* Disable padding on left or right of foundation columns */
     .columns.no-pad-right {
@@ -783,46 +744,6 @@ header {
     .tabs-title > a[aria-selected='true'] {
       color: white;
       background: #666;
-    }
-
-    /* related / popular */
-    .related {
-      background: #222;
-      margin-top: 4.25rem;
-      color: white;
-      padding: .5rem 0 0 1.1rem;
-    }
-    .related h3 {
-      color: white;
-      background: none;
-      margin-bottom: 0;
-    }
-    .related ul {
-      margin-left: 0;
-      margin-top: .25rem;
-    }
-    .related ul li {
-      display: inline-block;
-      width: 49%;
-      padding-right: 0;
-      font-size: .9rem;
-      min-width: 7rem;
-    }
-    .related ul li a {
-      color: white;
-      border-bottom: none;
-    }
-    .related ul li a:hover {
-      text-decoration: underline;
-    }
-    .related ul li a:after {
-      content: " >";
-    }
-    .related ul:after {
-      content: " ";
-      height: .5rem;
-      display: block;
-      clear: both;
     }
 
     /* button grid */
@@ -1062,58 +983,6 @@ header {
     .padding-bottom-xlarge {
       padding-bottom: 2rem;
     }
-
-    /* icon to indicate link is a PDF file */
-    /* print styles */
-    @media print {
-      a, a:visited {
-        border-bottom: none;
-      }
-      #skip-to,
-      form#local-search,
-      .global-footer,
-      #search_ebi,
-      #shortcuts,
-      #ebi_search_results {
-        display: none;
-      }
-      body {
-        font-size: .9rem;
-      }
-      div#masthead-black-bar nav a[href]:after,
-      .masthead nav a[href]:after,
-      .masthead-inner a[href]:after {
-        content: " ";
-      }
-      .row {
-        max-width: 100%;
-      }
-    }
-
-    /* Clearable text inputs
-       Also need JS, via: http://stackoverflow.com/questions/6258521/clear-icon-inside-input-text */
-    input.clearable {
-      background: #fff url("data:image/gif;base64,R0lGODlhBwAHAIAAAP///5KSkiH5BAAAAAAALAAAAAAHAAcAAAIMTICmsGrIXnLxuDMLADs=") no-repeat right -10px center;
-      padding: 3px 25px 3px 4px;
-      transition: background 0.4s;
-    }
-
-    input.clearable.x {
-      background-position: right 12px center;
-    }
-
-    /* (jQ) Show icon */
-    input.clearable.onX {
-      cursor: pointer;
-    }
-
-    /* (jQ) hover cursor style */
-    input.clearable::-ms-clear {
-      display: none;
-      width: 0;
-      height: 0;
-    }
-
 
 
     /* wide screen support */
