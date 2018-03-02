@@ -18,7 +18,6 @@ glados.useNameSpace 'glados.apps.Main',
 
     @prepareContentFor = (pageName, templateParams={}) ->
 
-      alert('perpare content for: ' + pageName)
       #make sure splash screen is shown, specially useful when it changes urls without using the server
       @showMainSplashScreen()
       templateName = @baseTemplates[pageName]
