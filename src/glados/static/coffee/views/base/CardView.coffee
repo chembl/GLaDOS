@@ -3,7 +3,6 @@
 CardView = Backbone.View.extend
 
   initialize: (originalArguments) ->
-    console.log '@config: ', @config
     @config ?= {}
 
     unless GlobalVariables['EMBEDED'] or @config.is_outside_an_entity_report_card
@@ -39,7 +38,6 @@ CardView = Backbone.View.extend
 
   initEmbedModal: (sectionName, chemblID) ->
 
-    console.log 'initEmbedModal: ', @config
     if @config.is_outside_an_entity_report_card
       embedURL = @config.embed_url
     else
