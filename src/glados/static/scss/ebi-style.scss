@@ -1,0 +1,440 @@
+header {
+  z-index: 20;
+  //CUSTOM  TO OVERRIDE CHEMBL STYLE (MOBILE)
+  @media screen and (max-width: 39.9375em) {
+    div#masthead-contaniner {
+      height: 50px !important;
+      #ebi-nav {
+        line-height: 50px !important;
+        height: 50px !important;
+      }
+    }
+  }
+  div#masthead-contaniner {
+    z-index: 5000;
+    height: 35px;
+
+    //CUSTOM  TO OVERRIDE CHEMBL STYLE HEADER
+    div#masthead-black-bar {
+      background-color: #333;
+
+      #ebi-nav {
+        background-color: #333;
+        box-shadow: none;
+        line-height: 35px;
+        height: 35px;
+        ul {
+          li a {
+            font-family: Helvetica, Arial, FreeSans, "Liberation Sans", sans-serif;
+            font-weight: 100;
+            font-size: 0.9em;
+          }
+        }
+      }
+    }
+
+    #local-title a,
+    nav a,
+    nav a:hover {
+      border-bottom: none;
+    }
+
+    /* Global menu styling */
+    nav ul#global-nav.menu li {
+      border-right: none;
+      display: inline-block;
+    }
+
+    /* Mobile logo */
+    @media screen and (max-width: 40em) {
+      nav ul#global-nav.menu li.home {
+        display: none;
+      }
+      nav ul#global-nav.menu li.home-mobile a {
+        display: block;
+        height: 50px;
+        width: 67px;
+        background-image: url("https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.2/images/logos/EMBL-EBI/EMBL_EBI_Logo_white.svg");
+        background-size: 64px 47px;
+        background-repeat: no-repeat;
+        margin-left: 6px;
+      }
+    }
+
+    @media screen and (min-width: 40em) {
+      nav ul#global-nav.menu li.home-mobile {
+        display: none;
+      }
+    }
+
+    div#masthead-black-bar a,
+    div#masthead-black-bar a:hover,
+    div#masthead-black-bar ul.menu li a:hover,
+    div#masthead-black-bar ul.menu li a:active,
+    div#masthead-black-bar ul.menu li a:focus,
+    div#masthead-black-bar ul.menu li.active a,
+    div#masthead-black-bar ul.menu li.active-trail a {
+      color: white;
+      border-bottom: none;
+    }
+    div#masthead-black-bar ul.menu li.active a,
+    div#masthead-black-bar ul.menu li.active-trail a {
+      background: black;
+    }
+    div#masthead-black-bar ul li a:before {
+      display: inline-block;
+      border-bottom: none;
+      padding-right: .4rem;
+    }
+    div#masthead-black-bar ul li.home a:before {
+      font-family: 'EBI-Generic';
+      content: 'H';
+    }
+    div#masthead-black-bar ul li.home a:hover,
+    div#masthead-black-bar ul li.home a:active,
+    div#masthead-black-bar ul li.home a:focus {
+      background-color: #007c82;
+    }
+    div#masthead-black-bar ul li.services a:before {
+      font-family: 'EBI-Generic';
+      content: '(';
+    }
+    div#masthead-black-bar ul li.services a:hover,
+    div#masthead-black-bar ul li.services a:active,
+    div#masthead-black-bar ul li.services a:focus {
+      background-color: #389198;
+    }
+    div#masthead-black-bar ul li.research a:before {
+      font-family: 'EBI-Generic';
+      content: ')';
+    }
+    div#masthead-black-bar ul li.research a:hover,
+    div#masthead-black-bar ul li.research a:active,
+    div#masthead-black-bar ul li.research a:focus {
+      background-color: #6dab49;
+    }
+    div#masthead-black-bar ul li.training a:before {
+      font-family: 'EBI-Generic';
+      content: 't';
+    }
+    div#masthead-black-bar ul li.training a:hover,
+    div#masthead-black-bar ul li.training a:active,
+    div#masthead-black-bar ul li.training a:focus {
+      background-color: #e9b400;
+    }
+    div#masthead-black-bar ul li.about a:before {
+      font-family: 'EBI-Generic';
+      content: 'i';
+    }
+    div#masthead-black-bar ul li.about a:hover,
+    div#masthead-black-bar ul li.about a:active,
+    div#masthead-black-bar ul li.about a:focus,
+    div#masthead-black-bar ul li.about-us a:hover,
+    div#masthead-black-bar ul li.about-us a:active,
+    div#masthead-black-bar ul li.about-us a:focus {
+      background-color: #389198;
+    }
+    div#masthead-black-bar ul li.search a:before {
+      font-family: 'EBI-Functional';
+      content: '1';
+    }
+    div#masthead-black-bar ul li.search .dropdown-pane {
+      width: 100%;
+      left: 0;
+      background: #222;
+      border: none;
+      margin-top: -2px;
+      color: #fff;
+    }
+    div#masthead-black-bar .dropdown-pane.embl-dropdown {
+      background-color: #333;
+      background-image: url("../images/map.png");
+      background-position: 100% 100%;
+      background-repeat: no-repeat;
+      color: #fff;
+      height: 21rem;
+      padding-right: 17rem;
+      min-width: 39.9375em;
+      left: 0;
+    }
+    div#masthead-black-bar .dropdown-pane.embl-dropdown h6 {
+      color: white;
+      font-weight: 700;
+    }
+    div#masthead-black-bar .dropdown-pane.embl-dropdown .button {
+      color: #007c82;
+      background: #fff;
+    }
+    @media screen and (max-width: 39.9375em) {
+      div#masthead-black-bar .dropdown-pane.embl-dropdown {
+        display: none;
+        width: 0 !important;
+        overflow: hidden;
+      }
+    }
+
+    /* Local masthead secondary links on mobile */
+    @media screen and (max-width: 39.9375em) {
+      div#masthead-black-bar {
+        height: 50px;
+      }
+      div#masthead-black-bar nav ul.menu {
+        text-align: center;
+        line-height: 25px;
+      }
+      div#masthead-black-bar nav ul.menu li {
+        float: right;
+        display: inline-block;
+      }
+      div#masthead-black-bar nav ul.menu li.home-mobile {
+        float: left;
+      }
+      div#masthead-black-bar nav ul.menu > li > a > img,
+      div#masthead-black-bar nav ul.menu > li > a:before {
+        display: block;
+        margin: 0 auto 0.25rem;
+        font-size: 15px;
+      }
+      div#masthead-black-bar nav ul.menu > li > a {
+        text-align: center;
+        font-size: 15px;
+        padding: 0rem .35rem;
+      }
+      .embl-selector {
+        height: 50px !important;
+      }
+    }
+
+    /* embl selector */
+    .embl-selector .button,
+    .embl-selector .button.hover,
+    .embl-selector .button:focus,
+    .embl-selector .button:hover {
+      font-family: Helvetica, Arial, FreeSans, "Liberation Sans", sans-serif;
+      font-weight: 100;
+      background: no-repeat 4px 50% url("https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.2/images/logos/EMBL-EBI/EMBL_EBI_Logo_white.svg");
+      padding-left: 108px;
+      background-size: 100px;
+      height: 34px;
+      line-height: 12px;
+      border: none;
+    }
+
+    .embl-selector .button.hover,
+    .embl-selector .button:hover {
+      background-color: #888;
+    }
+
+    @media screen and (max-width: 53em) {
+      .embl-selector .button {
+        width: 0px;
+        padding-right: 0;
+        overflow: hidden;
+      }
+      .embl-selector .button:after {
+        display: none;
+      }
+      div#masthead-black-bar nav ul.menu li a {
+        padding-right: .5rem;
+        padding-left: .5rem;
+      }
+    }
+
+    @media screen and (min-width: 53.01em) {
+      .button[aria-expanded="false"]::after {
+        content: '';
+        display: block;
+        width: 0;
+        height: 0;
+        border: inset 4px;
+        border-color: #fff transparent transparent;
+        border-top-style: solid;
+        position: absolute;
+        top: 18px;
+        margin-left: 55px;
+      }
+      .embl-selector .button,
+      .embl-selector .button.hover,
+      .embl-selector .button:focus,
+      .embl-selector .button:hover {
+        padding-right: 17px;
+      }
+    }
+
+    ul.menu {
+      font-size: .9rem;
+    }
+
+    .sans-serif {
+      font-family: Helvetica, Arial, FreeSans, "Liberation Sans", sans-serif;
+      font-size: 1.1rem;
+    }
+
+    @media screen and (min-width: 40em) {
+      body.full-width .row,
+      body.full-width .row .row {
+        max-width: 150rem;
+      }
+    }
+
+  }
+}
+
+footer {
+  background-color: none;
+
+  a.active,
+  a:hover,
+  a:active {
+    border-bottom-style: solid;
+  }
+
+  a.special {
+    font-style: italic;
+    border-bottom-style: double;
+    border-bottom-width: 3px;
+    padding: 0.1em 0.3em;
+  }
+
+  a:hover {
+    opacity: .9;
+  }
+
+  a.image,
+  a.image:visited {
+    border-bottom: 0 none;
+  }
+
+  a.button, a.button:visited {
+    color: #f8f8f8;
+    white-space: nowrap;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: #222;
+  }
+
+  h4 {
+    color: #999;
+  }
+
+  a {
+    color: #3e3e3e;
+  }
+
+  a:visited {
+    color: #666;
+  }
+
+  a:hover,
+  a:focus,
+  a:active {
+    color: #000;
+  }
+
+  .local-footer {
+    border-top: 2px solid #eee;
+    height: 80px;
+    overflow-y: hidden;
+  }
+
+  /*
+      GLOBAL FOOTER
+    ================================ */
+  .global-footer {
+    div {
+      padding-right: 200px; //side-nav-width
+      padding-left: 200px; //side-nav-width
+    }
+  }
+  .global-footer {
+    border-top: 5px solid #eee;
+    padding-top: .5rem;
+  }
+  .global-footer h5 {
+    margin-top: 1.25rem;
+    margin-bottom: 5px;
+  }
+  .global-footer .ebi-logo {
+    display: block;
+    height: 53px;
+    width: 89%;
+    background-image: url("https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.2/images/logos/EMBL-EBI/EMBL_EBI_Logo_black.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-left: -.25rem;
+    position: relative;
+    top: 8px;
+  }
+  .global-footer p {
+    margin: 0 0 5px 0;
+  }
+  .global-footer ul {
+    margin-left: 0;
+    font-size: 80%;
+    font-weight: 100;
+    list-style: none;
+  }
+  .global-footer a {
+    color: #666;
+  }
+  .global-footer a:hover,
+  .global-footer a:focus,
+  .global-footer a:active {
+    color: #666;
+    border-bottom: 1px dashed #e4e4e4;
+  }
+
+  .ebi-footer-meta {
+    font-size: 80%;
+    margin-bottom: 9px;
+  }
+
+  ul.menu {
+    font-size: .9rem;
+  }
+
+  .sans-serif {
+    font-family: Helvetica, Arial, FreeSans, "Liberation Sans", sans-serif;
+    font-size: 1.1rem;
+  }
+
+  .serif .sans-serif {
+    font-size: 1rem;
+  }
+
+  .block {
+    display: block;
+  }
+
+  .clear {
+    clear: both;
+  }
+
+  .no-underline a, a.no-underline {
+    border-bottom: none;
+    text-decoration: none;
+  }
+
+  .button:focus,
+  .button:hover,
+  .button.hover {
+    opacity: .8;
+  }
+
+  .tabs-title > a {
+    border-bottom: none;
+  }
+
+  .tabs-title > a:hover {
+    background-color: #007c82;
+    color: white;
+  }
+
+  .tabs-title > a:focus,
+  .tabs-title > a[aria-selected='true'] {
+    color: white;
+    background: #666;
+  }
+
+}
