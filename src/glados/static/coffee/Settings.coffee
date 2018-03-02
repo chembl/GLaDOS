@@ -235,7 +235,7 @@ glados.loadURLPaths = (request_root, app_root, static_root)->
   glados.Settings.WS_BASE_SIMILARITY_SEARCH_URL = 'https://www.ebi.ac.uk/chembl/api/data/similarity.json'
 
   glados.Settings.FLEXMATCH_SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_BASE_PATH_REL+
-  glados.Settings.NO_SIDE_NAV_PLACEHOLDER'/#flexmatch_search_results/'
+  glados.Settings.NO_SIDE_NAV_PLACEHOLDER + '/#flexmatch_search_results/'
   glados.Settings.WS_BASE_FLEXMATCH_SEARCH_URL = 'https://www.ebi.ac.uk/chembl/api/data/molecule.json'
 
   glados.Settings.BASE_COMPOUND_METABOLISM_FS_URL = '/compound_metabolism/'
@@ -244,6 +244,7 @@ glados.loadURLPaths = (request_root, app_root, static_root)->
 
 # This function must be called after loadURLPaths and glados.models.paginatedCollections.Settings has loaded
 glados.loadSearchResultsURLS = ()->
+
   # the search url is expected to be search_results/[(compounds|targets ... et al)/][advanced/]:query_string
   elastic_search_paths = []
   glados.Settings.SEARCH_PATH_2_ES_KEY = {}
@@ -262,8 +263,8 @@ glados.loadSearchResultsURLS = ()->
   glados.Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH = 'advanced_search'
   glados.Settings.SEARCH_RESULT_URL_REGEXP = new RegExp(glados.Settings.SEARCH_RESULTS_PAGE+'.*')
 
-  glados.Settings.ENTITY_BROWSERS_URL_TEMPLATE = "#{glados.Settings.GLADOS_BASE_PATH_REL}" +
-  glados.Settings.NO_SIDE_NAV_PLACEHOLDER+ "/#browse/{{entity}}{{#if filter}}/filter/{{filter}}{{/if}}"
+  console.log 'going to set up template in settings'
+  glados.Settings.ENTITY_BROWSERS_URL_TEMPLATE = "#{glados.Settings.GLADOS_BASE_PATH_REL}" + glados.Settings.NO_SIDE_NAV_PLACEHOLDER+ "/#browse/{{entity}}{{#if filter}}/filter/{{filter}}{{/if}}"
   glados.Settings.ENTITY_BROWSERS_URL_GENERATOR = Handlebars.compile(glados.Settings.ENTITY_BROWSERS_URL_TEMPLATE)
 
 # Logs the JavaScript environment details
