@@ -222,17 +222,20 @@ glados.loadURLPaths = (request_root, app_root, static_root)->
 
   glados.Settings.STATIC_IMAGES_URL = static_root + 'img/'
 
+  glados.Settings.NO_SIDE_NAV_PLACEHOLDER = 'g'
   # Marvin full screen URL
   glados.Settings.MARVIN_FULL_SCREEN_PAGE = glados.Settings.GLADOS_BASE_PATH_REL+'marvin_search_fullscreen/'
 
   glados.Settings.SUBSTRUCTURE_SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_BASE_PATH_REL+
-  'g/#substructure_search_results/'
+  glados.Settings.NO_SIDE_NAV_PLACEHOLDER+'/#substructure_search_results/'
   glados.Settings.WS_BASE_SUBSTRUCTURE_SEARCH_URL = 'https://www.ebi.ac.uk/chembl/api/data/substructure.json'
 
-  glados.Settings.SIMILARITY_SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_BASE_PATH_REL+'g/#similarity_search_results/'
+  glados.Settings.SIMILARITY_SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_BASE_PATH_REL+
+  glados.Settings.NO_SIDE_NAV_PLACEHOLDER+'/#similarity_search_results/'
   glados.Settings.WS_BASE_SIMILARITY_SEARCH_URL = 'https://www.ebi.ac.uk/chembl/api/data/similarity.json'
 
-  glados.Settings.FLEXMATCH_SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_BASE_PATH_REL+'g/#flexmatch_search_results/'
+  glados.Settings.FLEXMATCH_SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_BASE_PATH_REL+
+  glados.Settings.NO_SIDE_NAV_PLACEHOLDER'/#flexmatch_search_results/'
   glados.Settings.WS_BASE_FLEXMATCH_SEARCH_URL = 'https://www.ebi.ac.uk/chembl/api/data/molecule.json'
 
   glados.Settings.BASE_COMPOUND_METABOLISM_FS_URL = '/compound_metabolism/'
@@ -260,7 +263,7 @@ glados.loadSearchResultsURLS = ()->
   glados.Settings.SEARCH_RESULT_URL_REGEXP = new RegExp(glados.Settings.SEARCH_RESULTS_PAGE+'.*')
 
   glados.Settings.ENTITY_BROWSERS_URL_TEMPLATE = "#{glados.Settings.GLADOS_BASE_PATH_REL}" +
-    "g/#browse/{{entity}}{{#if filter}}/filter/{{filter}}{{/if}}"
+  glados.Settings.NO_SIDE_NAV_PLACEHOLDER+ "/#browse/{{entity}}{{#if filter}}/filter/{{filter}}{{/if}}"
   glados.Settings.ENTITY_BROWSERS_URL_GENERATOR = Handlebars.compile(glados.Settings.ENTITY_BROWSERS_URL_TEMPLATE)
 
 # Logs the JavaScript environment details
