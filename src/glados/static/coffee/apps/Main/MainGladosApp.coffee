@@ -1,6 +1,7 @@
 glados.useNameSpace 'glados.apps.Main',
   MainGladosApp: class ActivitiesBrowserApp
 
+    @showMainSplashScreen = -> $('#GladosMainSplashScreen').show()
     @hideMainSplashScreen = -> $('#GladosMainSplashScreen').hide()
     @showMainGladosContent = -> $('#GladosMainContent').show()
 
@@ -18,6 +19,8 @@ glados.useNameSpace 'glados.apps.Main',
     @prepareContentFor = (pageName, templateParams={}) ->
 
       alert('perpare content for: ' + pageName)
+      #make sure splash screen is shown, specially useful when it changes urls without using the server
+      @showMainSplashScreen()
       templateName = @baseTemplates[pageName]
       $gladosMainContent = $('#GladosMainContent')
       $gladosMainContent.empty()
@@ -40,7 +43,7 @@ glados.useNameSpace 'glados.apps.Main',
     @initSearchResults = (searchTerm) ->
 
       @prepareContentFor('search_results')
-      SearchResultsApp.init()
+      SearchResultsApp.init(searchTerm)
 
     @initSubstructureSearchResults = (searchTerm) ->
 

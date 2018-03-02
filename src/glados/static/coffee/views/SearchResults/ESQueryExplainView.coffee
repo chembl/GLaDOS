@@ -7,10 +7,8 @@ glados.useNameSpace 'glados.views.SearchResults',
     # ------------------------------------------------------------------------------------------------------------------
 
     initialize: ->
-      console.log 'INIT QUERY EXPLAIN!!'
       @referencesTemplate = Handlebars.compile $("#Handlebars-query-explain-references").html()
 
-      console.log '$(@el): ', $(@el)
       @searchModel = SearchModel.getInstance()
       @searchModel.on('change:jsonQuery', @updateQueryFromModel.bind(@))
       if @searchModel.get('queryString')

@@ -4,15 +4,16 @@ class SearchResultsApp
   # Initialization
   # --------------------------------------------------------------------------------------------------------------------
 
-  @init = ->
+  @init = (searchTerm) ->
     @eSQueryExplainView = new glados.views.SearchResults.ESQueryExplainView
       el: $('#es-query-explain-wrapper')
-      model: @searchModel
 
     $searchResultsContainer = $('.BCK-SearchResultsContainer')
     new glados.views.SearchResults.SearchResultsView
       el: $searchResultsContainer
       model: SearchModel.getInstance()
+
+    SearchModel.getInstance().search(searchTerm)
 
   # --------------------------------------------------------------------------------------------------------------------
   # Views

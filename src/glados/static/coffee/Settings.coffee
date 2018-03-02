@@ -257,9 +257,7 @@ glados.loadSearchResultsURLS = ()->
 
   glados.Settings.SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_BASE_PATH_REL+'g/#search_results'
   glados.Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH = 'advanced_search'
-  glados.Settings.SEARCH_RESULT_URL_REGEXP = new RegExp('^'+glados.Settings.SEARCH_RESULTS_PAGE+
-          glados.Settings.SEARCH_RESULTS_ES_PATH_REGEX+
-          '(/'+glados.Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH+')?/(.*?)$')
+  glados.Settings.SEARCH_RESULT_URL_REGEXP = new RegExp(glados.Settings.SEARCH_RESULTS_PAGE+'.*')
 
   glados.Settings.ENTITY_BROWSERS_URL_TEMPLATE = "#{glados.Settings.GLADOS_BASE_PATH_REL}" +
     "g/#browse/{{entity}}{{#if filter}}/filter/{{filter}}{{/if}}"
