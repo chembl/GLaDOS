@@ -1,5 +1,9 @@
 glados.useNameSpace 'glados.views.SearchResults',
   SearchResultsView: Backbone.View.extend(glados.views.SearchResults.URLFunctions).extend
+
+    events:
+      'click .BCK-select-results-entity': 'openTab'
+
     initialize: ->
 
       @browsersDict = {}
@@ -111,6 +115,7 @@ glados.useNameSpace 'glados.views.SearchResults',
           prepend_br: true
           total_records: totalRecords
           label:resourceLabel
+          key: key_i
           url_path: @getSearchURLFor(key_i, @model.get('queryString'))
           selected: @selected_es_entity == key_i
         })
@@ -119,9 +124,9 @@ glados.useNameSpace 'glados.views.SearchResults',
       glados.Utils.fillContentForElement $tabsContainer,
         chips: chipStruct
 
-      glados.Utils.overrideHrefNavigationUnlessTargetBlank(
-        $('.BCK-summary-tabs-container').find('a'), @navigateTo.bind(@)
-      )
+#      glados.Utils.overrideHrefNavigationUnlessTargetBlank(
+#        $('.BCK-summary-tabs-container').find('a'), @navigateTo.bind(@)
+#      )
 
     parseURLData: () ->
       @es_path = URLProcessor.getSpecificSearchResultsPage()
@@ -134,16 +139,27 @@ glados.useNameSpace 'glados.views.SearchResults',
       @showSelectedResourceOnly()
       @renderTabs()
 
-    showSelectedResourceOnly: ->
+    openTab: (event) ->
 
-      for resourceName, resultsListSettings of glados.models.paginatedCollections.Settings.ES_INDEXES
+      $clickedElem = $(event.currentTarget)
+      entityKey = $clickedElem.attr('data-resource-key')
+      $(@el).find('.BCK-select-results-entity').removeClass('selected')
+      @showSelectedResourceOnly(entityKey)
+      $clickedElem.addClass('selected')
+
+
+    showSelectedResourceOnly: (selectedKey) ->
+
+      for currentKey, resultsListSettings of glados.models.paginatedCollections.Settings.ES_INDEXES
+
         # if there is a selection and this container is not selected it gets hidden if else it shows all resources
-        if @selected_es_entity? and @selected_es_entity != resourceName
-          @$searchResultsListsContainersDict[resourceName].hide()
+        if selectedKey? and selectedKey!= '' and selectedKey != currentKey
+          @$searchResultsListsContainersDict[currentKey].hide()
         else
-          @$searchResultsListsContainersDict[resourceName].hide()
-          @$searchResultsListsContainersDict[resourceName].show(100)
-          @browsersDict[resourceName].wakeUp()
+          @$searchResultsListsContainersDict[currentKey].hide()
+          @$searchResultsListsContainersDict[currentKey].show(100)
+          @browsersDict[currentKey].wakeUp()
+
 
     # ------------------------------------------------------------------------------------------------------------------
     # Helper functions

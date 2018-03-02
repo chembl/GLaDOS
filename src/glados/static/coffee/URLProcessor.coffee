@@ -32,7 +32,8 @@ class URLProcessor
   # Tells whether or not the url is at the search results page
   @isAtSearchResultsPage = (url_path)->
     if _.isUndefined(url_path)
-      url_path = window.location.pathname;
+      url_path = window.location.href;
+
     pattern = glados.Settings.SEARCH_RESULT_URL_REGEXP
     match = pattern.exec(url_path)
     if match
@@ -60,6 +61,7 @@ class URLProcessor
 
   # gets the query string for the search results page
   @getSearchQueryString = (url_path)->
+    console.log 'getSearchQueryString: '
     if _.isUndefined(url_path)
       url_path = window.location.pathname;
     pattern = glados.Settings.SEARCH_RESULT_URL_REGEXP

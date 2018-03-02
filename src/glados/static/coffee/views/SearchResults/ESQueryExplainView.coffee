@@ -6,18 +6,17 @@ glados.useNameSpace 'glados.views.SearchResults',
     # Initialization
     # ------------------------------------------------------------------------------------------------------------------
 
-    el: $('#es-query-explain-wrapper')
-    initialize: () ->
+    initialize: ->
       @referencesTemplate = Handlebars.compile $("#Handlebars-query-explain-references").html()
-      @atResultsPage = URLProcessor.isAtSearchResultsPage()
+
       @searchModel = SearchModel.getInstance()
       @searchModel.on('change:jsonQuery', @updateQueryFromModel.bind(@))
       if @searchModel.get('queryString')
         @updateQueryFromModel()
       @query_explain_el = null
       @tooltipCallbacks = []
-      if @atResultsPage
-        $(@el).show()
+
+      $(@el).show()
 
     updateQueryFromModel:()->
       [queryHtml, @tooltipCallbacks] = @buildParsedQueryRecursive(@searchModel.get('jsonQuery'))
@@ -124,16 +123,3 @@ glados.useNameSpace 'glados.views.SearchResults',
     closeExplainDiv: ()->
       $(@el).find('.es-query-explain').slideUp()
       $(@el).find('.es-query-explain-header').show(400)
-
-
-
-      
-
-# ----------------------------------------------------------------------------------------------------------------------
-# Singleton pattern
-# ----------------------------------------------------------------------------------------------------------------------
-
-glados.views.SearchResults.ESQueryExplainView.getInstance = () ->
-  if not glados.views.SearchResults.ESQueryExplainView.__view_instance
-    glados.views.SearchResults.ESQueryExplainView.__view_instance = new glados.views.SearchResults.ESQueryExplainView
-  return glados.views.SearchResults.ESQueryExplainView.__view_instance
