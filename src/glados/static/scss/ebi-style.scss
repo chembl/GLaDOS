@@ -1,5 +1,6 @@
-header {
+header, footer {
   z-index: 20;
+  //CUSTOM  TO OVERRIDE CHEMBL STYLE (MOBILE)
   @media screen and (max-width: 39.9375em) {
     div#masthead-contaniner {
       height: 50px !important;
@@ -13,7 +14,7 @@ header {
     z-index: 5000;
     height: 35px;
 
-    //CUSTOM  TO OVERRIDE CHEMBL STYLE
+    //CUSTOM  TO OVERRIDE CHEMBL STYLE HEADER
     div#masthead-black-bar {
       background-color: #333;
 
