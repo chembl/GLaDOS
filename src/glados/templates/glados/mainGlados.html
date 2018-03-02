@@ -15,18 +15,15 @@
     {{block.super}}
   {% endwith %}
 {% endblock side_nav %}
+{% block breadcrumb %}
+  {% with hide_side_nav=False main_page=True%}
+    {{block.super}}
+  {% endwith %}
+{% endblock %}
 
 {% block title %}ChEMBL{% endblock %}
 
 {% block content %}
-
-<div class="container main-container">
-
-  {% block breadcrumb %}
-  {% include "glados/base/breadcrumb.html" %}
-  {% endblock %}
-
-</div>
 
 {% endblock %}
 
