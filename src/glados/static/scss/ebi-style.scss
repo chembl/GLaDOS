@@ -1,6 +1,7 @@
 header {
   z-index: 20;
   div#masthead-contaniner {
+    z-index: 5000;
     height: 35px;
 
     //CUSTOM  TO OVERRIDE CHEMBL STYLE
@@ -352,11 +353,15 @@ header {
     .embl-selector .button.hover,
     .embl-selector .button:focus,
     .embl-selector .button:hover {
-      background: no-repeat 4px 50% url("../images/logos/EMBL-EBI/EMBL_EBI_Logo_white.svg");
+      font-family: Helvetica, Arial, FreeSans, "Liberation Sans", sans-serif;
+      font-weight: 100;
+      background: no-repeat 4px 50% url("https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.2/images/logos/EMBL-EBI/EMBL_EBI_Logo_white.svg");
       padding-left: 108px;
       background-size: 100px;
-      height: 37px;
+      height: 34px;
       line-height: 12px;
+      //padding-right:30px !important;
+      border: none;
     }
 
     .embl-selector .button.hover,
