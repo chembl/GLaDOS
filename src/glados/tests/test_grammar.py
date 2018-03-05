@@ -3,6 +3,7 @@ import unittest
 import glados.tests.utils as utils
 import glados.grammar.smiles as smiles
 import glados.grammar.inchi as inchi
+import glados.grammar.fasta as fasta
 from arpeggio import ParserPython
 
 
@@ -64,6 +65,16 @@ class GrammarTester(unittest.TestCase):
         if parser:
             for inchi_key_i in utils.INCHI_KEY_EXAMPLES:
                 self.try_parsing(parser, inchi_key_i)
+
+    def test_fasta_parsing(self):
+        # noinspection PyBroadException
+        try:
+            parser = ParserPython(fasta.fasta, skipws=False)
+        except:
+            self.fail("Could not instantiate the FASTA parser!")
+        if parser:
+            for fasta_sequence_i in utils.FASTA_SAMPLES:
+                self.try_parsing(parser, fasta_sequence_i)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Simple Grammars Tests
