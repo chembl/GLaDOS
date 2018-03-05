@@ -3443,11 +3443,11 @@ $facets-width-large: 21%;
 */
 .main-pie-container {
   display: flex !important;
+  background-color: white;
   .legend {
-    background-color: white;
     width: 100%;
     margin-left: -10px;
-    padding-top: 40px;
+    margin-top: 0px;
     overflow-y: scroll;
     overflow-x: hidden !important;
   }
@@ -3463,7 +3463,6 @@ $facets-width-large: 21%;
   }
 
   .sub-arc:hover {
-    //fill: #0d343a;
     fill-opacity: 0.7;
     cursor: pointer;
   }
