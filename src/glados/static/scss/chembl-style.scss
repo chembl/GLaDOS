@@ -3566,3 +3566,14 @@ $facets-width-large: 21%;
 .all-sources-link {
   font-size: 80%;
 }
+
+#GladosMainSplashScreen {
+  z-index: 5000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+  background: lime; /* Just to visualize the extent */
+}

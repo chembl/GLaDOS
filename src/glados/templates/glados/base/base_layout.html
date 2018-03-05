@@ -25,6 +25,11 @@
 
   <body>
 
+  <div id='GladosMainSplashScreen' class="loader-container" style="height: 100vh;">
+      <div class="chembl-logo valign-wrapper"> chembl logo</div>
+      <div class="splash-animation valign-wrapper"> splash animation</div>
+  </div>
+
   <header>
     <div id="masthead-contaniner" class="row">
 
@@ -69,12 +74,6 @@
 
     {% block content %}{% endblock %}
 
-    <div id='GladosMainSplashScreen' class="container" style="height: 100vh;">
-      Loading...
-        <div class="progress">
-            <div class="indeterminate"></div>
-        </div>
-    </div>
 
     <div id='GladosMainContent' style="display: none">
 
