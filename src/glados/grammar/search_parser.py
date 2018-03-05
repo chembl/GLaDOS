@@ -6,8 +6,10 @@ import arpeggio
 import glados.grammar.common as common
 import glados.grammar.smiles as smiles
 import glados.grammar.inchi as inchi
+import glados.grammar.fasta as fasta
 import re
 import json
+import operator
 import requests
 import urllib.parse
 import traceback
@@ -143,6 +145,7 @@ def expression_term():
     return [parenthesised_expression,
             smiles.smiles,
             inchi.inchi_key, inchi.inchi,
+            fasta.fasta,
             property_term,
             exact_match_term,
             single_term]
@@ -193,11 +196,12 @@ def adjust_exact_term(exact_term: str) -> str:
         return exact_term[0]+'"'+exact_term[1:]+'"'
 
 
-def get_chembl_id_dict(chembl_id, cross_references=[], include_in_query=True):
+def get_chembl_id_dict(chembl_id, cross_references=[], include_in_query=True, score=None):
     return {
         'chembl_id': chembl_id,
         'cross_references': cross_references,
-        'include_in_query': include_in_query
+        'include_in_query': include_in_query,
+        'score': score
     }
 
 
@@ -356,6 +360,7 @@ def check_smiles(term_dict: dict):
         traceback.print_exc()
 
 
+# noinspection PyBroadException
 def check_unichem(term_dict: dict):
     try:
         response = requests.get(
@@ -401,7 +406,55 @@ def check_unichem(term_dict: dict):
                 }
             )
     except:
-        print(term_dict)
+        traceback.print_exc()
+
+
+# noinspection PyBroadException
+def check_fasta(term_dict: dict):
+    try:
+        url_path = '/chembl/api/utils/blast'
+        response = requests.post(
+            BASE_EBI_URL + url_path,
+            data=term_dict['term'],
+            headers={'Accept': 'application/json'},
+            timeout=10
+        )
+        json_response = response.json()
+        if 'error_message' in json_response:
+            return None
+
+        for key_id in json_response['targets']:
+            chembl_ids_by_score = sorted(json_response['targets'][key_id].items(), key=operator.itemgetter(1),
+                                         reverse=True)
+            term_dict['references'].append(
+                {
+                    'type': 'blast',
+                    'label': 'BLAST - Targets - {0}'.format(key_id),
+                    'blast_id': key_id,
+                    'chembl_ids': [
+                        get_chembl_id_dict(chembl_id, score=score) for chembl_id, score in chembl_ids_by_score
+                    ],
+                    'include_in_query': True,
+                    'chembl_entity': 'target'
+                }
+            )
+
+        for key_id in json_response['compounds']:
+            chembl_ids_by_score = sorted(json_response['compounds'][key_id].items(), key=operator.itemgetter(1),
+                                         reverse=True)
+            term_dict['references'].append(
+                {
+                    'type': 'blast',
+                    'label': 'BLAST - Compounds - {0}'.format(key_id),
+                    'blast_id': key_id,
+                    'chembl_ids': [
+                        get_chembl_id_dict(chembl_id, score=score) for chembl_id, score in chembl_ids_by_score
+                    ],
+                    'include_in_query': True,
+                    'chembl_entity': 'compound'
+                }
+            )
+    except:
         traceback.print_exc()
 
 
@@ -497,6 +550,12 @@ class TermsVisitor(PTNodeVisitor):
         check_inchi(term_dict, term_is_inchi_key=True)
         return term_dict
 
+    def visit_fasta(self, node, children):
+        term = ''.join(children)
+        term_dict = self.get_term_dict(term, include_in_query=False)
+        check_fasta(term_dict)
+        return term_dict
+
     def visit_property_term(self, node, children):
         term = ''.join(children)
         term_dict = self.get_term_dict(term)
@@ -527,7 +586,9 @@ class TermsVisitor(PTNodeVisitor):
 def parse_query_str(query_string: str):
     if len(query_string.strip()) == 0:
         return {}
-    query_string = re.sub(r'\s+', ' ', query_string)
+    print(query_string)
+    query_string = re.sub(r'[\s&&[^\n]]+', ' ', query_string)
+    print(query_string)
     pt = parser.parse(query_string)
     result = arpeggio.visit_parse_tree(pt, TermsVisitor())
     json_result = json.dumps(result, indent=4)
@@ -536,25 +597,25 @@ def parse_query_str(query_string: str):
 
 # parse_query_str('[12H]-[He] [He]  [Cu]-[Zn]')
 
-longest_chembl_smiles = r"CCCCCCCCCCCCCCCC[NH2+]OC(CO)C(O)C(OC1OC(CO)C(O)C(O)C1O)C(O)CO.CCCCCCCCCCCCCCCC[NH2+" \
-                        r"]OC(CO)C(O)C(OC2OC(CO)C(O)C(O)C2O)C(O)CO.CCCCCCCCCCCCCCCC[NH2+]OC(CO)C(O)C(OC3OC(CO" \
-                        r")C(O)C(O)C3O)C(O)CO.CCCCCCCCCCCCCCCC[NH2+]OC(CO)C(O)C(OC4OC(CO)C(O)C(O)C4O)C(O)CO.C" \
-                        r"CCCCCCCCCCCCCCC[NH2+]OC(CO)C(O)C(OC5OC(CO)C(O)C(O)C5O)C(O)CO.CCCCCCCCCCCCCCCC[NH2+]" \
-                        r"OC(CO)C(O)C(OC6OC(CO)C(O)C(O)C6O)C(O)CO.CCCCCCCCCCCCCCCC[NH2+]OC(CO)C(O)C(OC7OC(CO)" \
-                        r"C(O)C(O)C7O)C(O)CO.CCCCCCCCCCCCCCCC[NH2+]OC(CO)C(O)C(OC8OC(CO)C(O)C(O)C8O)C(O)CO.CC" \
-                        r"CCCCCCCCCCCCCC[NH2+]OC(CO)C(O)C(OC9OC(CO)C(O)C(O)C9O)C(O)CO.CCCCCCCCCCCCCCCC[NH2+]O" \
-                        r"C(CO)C(O)C(OC%10OC(CO)C(O)C(O)C%10O)C(O)CO.CCCCCCCCCCCCCCCC[NH2+]OC(CO)C(O)C(OC%11O" \
-                        r"C(CO)C(O)C(O)C%11O)C(O)CO.CCCCCCCCCCCCCCCC[NH2+]OC(CO)C(O)C(OC%12OC(CO)C(O)C(O)C%12" \
-                        r"O)C(O)CO.CCCCCCCCCC(C(=O)NCCc%13ccc(OP(=S)(Oc%14ccc(CCNC(=O)C(CCCCCCCCC)P(=O)(O)[O-" \
-                        r"])cc%14)N(C)\N=C\c%15ccc(Op%16(Oc%17ccc(\C=N\N(C)P(=S)(Oc%18ccc(CCNC(=O)C(CCCCCCCCC" \
-                        r")P(=O)(O)[O-])cc%18)Oc%19ccc(CCNC(=O)C(CCCCCCCCC)P(=O)(O)[O-])cc%19)cc%17)np(Oc%20c" \
-                        r"cc(\C=N\N(C)P(=S)(Oc%21ccc(CCNC(=O)C(CCCCCCCCC)P(=O)(O)[O-])cc%21)Oc%22ccc(CCNC(=O)" \
-                        r"C(CCCCCCCCC)P(=O)(O)[O-])cc%22)cc%20)(Oc%23ccc(\C=N\N(C)P(=S)(Oc%24ccc(CCNC(=O)C(CC" \
-                        r"CCCCCCC)P(=O)(O)[O-])cc%24)Oc%25ccc(CCNC(=O)C(CCCCCCCCC)P(=O)(O)[O-])cc%25)cc%23)np" \
-                        r"(Oc%26ccc(\C=N\N(C)P(=S)(Oc%27ccc(CCNC(=O)C(CCCCCCCCC)P(=O)(O)[O-])cc%27)Oc%28ccc(C" \
-                        r"CNC(=O)C(CCCCCCCCC)P(=O)(O)[O-])cc%28)cc%26)(Oc%29ccc(\C=N\N(C)P(=S)(Oc%30ccc(CCNC(" \
-                        r"=O)C(CCCCCCCCC)P(=O)(O)[O-])cc%30)Oc%31ccc(CCNC(=O)C(CCCCCCCCC)P(=O)(O)[O-])cc%31)c" \
-                        r"c%29)n%16)cc%15)cc%13)P(=O)(O)[O-]"
+# longest_chembl_smiles = r"CCCCCCCCCCCCCCCC[NH2+]OC(CO)C(O)C(OC1OC(CO)C(O)C(O)C1O)C(O)CO.CCCCCCCCCCCCCCCC[NH2+" \
+#                         r"]OC(CO)C(O)C(OC2OC(CO)C(O)C(O)C2O)C(O)CO.CCCCCCCCCCCCCCCC[NH2+]OC(CO)C(O)C(OC3OC(CO" \
+#                         r")C(O)C(O)C3O)C(O)CO.CCCCCCCCCCCCCCCC[NH2+]OC(CO)C(O)C(OC4OC(CO)C(O)C(O)C4O)C(O)CO.C" \
+#                         r"CCCCCCCCCCCCCCC[NH2+]OC(CO)C(O)C(OC5OC(CO)C(O)C(O)C5O)C(O)CO.CCCCCCCCCCCCCCCC[NH2+]" \
+#                         r"OC(CO)C(O)C(OC6OC(CO)C(O)C(O)C6O)C(O)CO.CCCCCCCCCCCCCCCC[NH2+]OC(CO)C(O)C(OC7OC(CO)" \
+#                         r"C(O)C(O)C7O)C(O)CO.CCCCCCCCCCCCCCCC[NH2+]OC(CO)C(O)C(OC8OC(CO)C(O)C(O)C8O)C(O)CO.CC" \
+#                         r"CCCCCCCCCCCCCC[NH2+]OC(CO)C(O)C(OC9OC(CO)C(O)C(O)C9O)C(O)CO.CCCCCCCCCCCCCCCC[NH2+]O" \
+#                         r"C(CO)C(O)C(OC%10OC(CO)C(O)C(O)C%10O)C(O)CO.CCCCCCCCCCCCCCCC[NH2+]OC(CO)C(O)C(OC%11O" \
+#                         r"C(CO)C(O)C(O)C%11O)C(O)CO.CCCCCCCCCCCCCCCC[NH2+]OC(CO)C(O)C(OC%12OC(CO)C(O)C(O)C%12" \
+#                         r"O)C(O)CO.CCCCCCCCCC(C(=O)NCCc%13ccc(OP(=S)(Oc%14ccc(CCNC(=O)C(CCCCCCCCC)P(=O)(O)[O-" \
+#                         r"])cc%14)N(C)\N=C\c%15ccc(Op%16(Oc%17ccc(\C=N\N(C)P(=S)(Oc%18ccc(CCNC(=O)C(CCCCCCCCC" \
+#                         r")P(=O)(O)[O-])cc%18)Oc%19ccc(CCNC(=O)C(CCCCCCCCC)P(=O)(O)[O-])cc%19)cc%17)np(Oc%20c" \
+#                         r"cc(\C=N\N(C)P(=S)(Oc%21ccc(CCNC(=O)C(CCCCCCCCC)P(=O)(O)[O-])cc%21)Oc%22ccc(CCNC(=O)" \
+#                         r"C(CCCCCCCCC)P(=O)(O)[O-])cc%22)cc%20)(Oc%23ccc(\C=N\N(C)P(=S)(Oc%24ccc(CCNC(=O)C(CC" \
+#                         r"CCCCCCC)P(=O)(O)[O-])cc%24)Oc%25ccc(CCNC(=O)C(CCCCCCCCC)P(=O)(O)[O-])cc%25)cc%23)np" \
+#                         r"(Oc%26ccc(\C=N\N(C)P(=S)(Oc%27ccc(CCNC(=O)C(CCCCCCCCC)P(=O)(O)[O-])cc%27)Oc%28ccc(C" \
+#                         r"CNC(=O)C(CCCCCCCCC)P(=O)(O)[O-])cc%28)cc%26)(Oc%29ccc(\C=N\N(C)P(=S)(Oc%30ccc(CCNC(" \
+#                         r"=O)C(CCCCCCCCC)P(=O)(O)[O-])cc%30)Oc%31ccc(CCNC(=O)C(CCCCCCCCC)P(=O)(O)[O-])cc%31)c" \
+#                         r"c%29)n%16)cc%15)cc%13)P(=O)(O)[O-]"
 
 
 # t_ini = time.time()
@@ -606,11 +667,12 @@ longest_chembl_smiles = r"CCCCCCCCCCCCCCCC[NH2+]OC(CO)C(O)C(OC1OC(CO)C(O)C(O)C1O
 #     json=\
 #         {
 #             "size": 140,
-#             "_source": ["pref_name","molecule_synonyms.*"],
+#             "_source": ["pref_name", "molecule_synonyms.*", "_metadata.compound_records.*"],
 #             "query": {
 #                 "multi_match": {
 #                     "query": "vitamin",
-#                     "fields": ["*.std_analyzed"]
+#                     "fields": ["*.std_analyzed"],
+#                     "fuzziness": 0
 #                 }
 #             }
 #         }
@@ -629,11 +691,28 @@ longest_chembl_smiles = r"CCCCCCCCCCCCCCCC[NH2+]OC(CO)C(O)C(OC1OC(CO)C(O)C(O)C1O
 #         for synonym_i in hit_i['_source']['molecule_synonyms']:
 #             inner_group.add(synonym_i['synonyms'].lower())
 #             inner_group.add(synonym_i['molecule_synonym'].lower())
+#     if '_metadata' in hit_i['_source'] and 'compound_records' in hit_i['_source']['_metadata']:
+#         for cr_i in hit_i['_source']['_metadata']['compound_records']:
+#             if 'compound_name' in cr_i:
+#                 inner_group.add(cr_i['compound_name'].lower())
+#     to_remove = []
+#     for vit_i in inner_group:
+#         if vit_i.startswith('CHEMBL'):
+#             continue
+#         index = vit_i.find('vitamin')
+#         if index == -1:
+#             to_remove.append(vit_i)
+#     # for to_remove_i in to_remove:
+#     #     inner_group.remove(to_remove_i)
 #     vitamins.append(inner_group)
 #
 # for vit_i in vitamins:
 #     print("'"+"','".join(sorted(vit_i))+"'")
 
-
-def parse_url_search(request, search_string=None):
-    return HttpResponse(parse_query_str(search_string))
+def parse_url_search(request):
+    if request.method == 'GET':
+        return HttpResponse('INVALID USAGE! PLEASE USE POST!', status=400)
+    elif request.method == 'POST':
+        query_string = request.POST.get('query_string', '')
+        print(query_string)
+        return HttpResponse(parse_query_str(query_string))

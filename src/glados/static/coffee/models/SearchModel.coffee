@@ -203,7 +203,9 @@ SearchModel = Backbone.Model.extend
       @set('queryString', expressionStr)
       @set('jsonQuery', parsedQuery)
 
-    ajaxDeferred = $.get(glados.Settings.SEARCH_RESULTS_PARSER_URL+'/'+encodeURIComponent(rawQueryString))
+    ajaxDeferred = glados.doCSRFPost glados.Settings.SEARCH_RESULTS_PARSER_ENDPOINT, {
+        query_string: rawQueryString
+    }
     ajaxDeferred.done(done_callback.bind(@))
     return ajaxDeferred
 
