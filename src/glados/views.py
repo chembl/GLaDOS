@@ -8,6 +8,8 @@ from django.conf import settings
 from glados.utils import *
 from django.core.cache import cache
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 
 # Returns all acknowledgements grouped by current and old
@@ -157,6 +159,23 @@ def render_params_from_hash(request, hash):
     'shortened_params': url
   }
   return render(request, 'glados/mainGladosNoBar.html', context)
+
+@csrf_exempt
+def shorten_url(request):
+
+   if request.method == "POST":
+
+      req_data = json.loads(request.body.decode('utf-8'))
+      print('req body: ', request.body)
+
+      resp_data = {
+        'long_url': req_data['long_url'],
+        'short_url': 'afcacd18e184f8976b193f4677215840c1c17c19e440f117e11eabc7cf078c0e'
+      }
+      return JsonResponse(resp_data)
+
+   else:
+      return JsonResponse({'error': 'this is only available via POST'})
 
 def wizard_step_json(request, step_id):
   """
