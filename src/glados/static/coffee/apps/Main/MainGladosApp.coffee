@@ -14,13 +14,16 @@ glados.useNameSpace 'glados.apps.Main',
     @init = ->
 
       mainRouter = new glados.routers.MainGladosRouter
-      Backbone.history.start()
 
       #now if there are shortened params
       shortenedURL = $('#GladosShortenedParamsContainer').attr('data-shortened-params')
       if shortenedURL != ''
+
+        Backbone.history.start({silent: true})
         window.history.pushState({}, '', glados.Settings.GLADOS_BASE_PATH_REL+glados.Settings.NO_SIDE_NAV_PLACEHOLDER)
         mainRouter.navigate(shortenedURL, {trigger: true})
+      else
+        Backbone.history.start()
 
     @prepareContentFor = (pageName, templateParams={}) ->
 
@@ -39,6 +42,7 @@ glados.useNameSpace 'glados.apps.Main',
     # ------------------------------------------------------------------------------------------------------------------
     @initMainPage = ->
 
+      alert ('init main page')
       @prepareContentFor('main_page')
       MainPageApp.init()
 
