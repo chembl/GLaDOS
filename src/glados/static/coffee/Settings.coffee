@@ -242,6 +242,28 @@ glados.loadURLPaths = (request_root, app_root, static_root)->
 
   glados.Settings.OLD_DEFAULT_IMAGES_BASE_URL = 'https://www.ebi.ac.uk/chembl/compound/displayimage_large/'
 
+
+# Loads the GLaDOS Top S3cre7 data, do not remove or js calls to post method in the django server will fail
+glados.loadGLaDOSTopS3cre7 = ()->
+  glados.GLaDOSTopS3cre7 =
+    CSRF:
+      name: 'csrfmiddlewaretoken'
+      value:  $('.GLaDOS-top-s3cre7').find("[name=\"csrfmiddlewaretoken\"]").val()
+
+glados.doCSRFPost = (gladosServicePath, paramsDict)->
+  formData = new FormData()
+  formData.append glados.GLaDOSTopS3cre7.CSRF.name, glados.GLaDOSTopS3cre7.CSRF.value
+  for param, value of paramsDict
+    formData.append param, value
+  ajax_deferred = $.post
+    url: glados.Settings.GLADOS_BASE_URL_FULL + gladosServicePath
+    data: formData
+    enctype: 'multipart/form-data'
+    processData: false
+    contentType: false
+    cache: false
+  return ajax_deferred
+
 # This function must be called after loadURLPaths and glados.models.paginatedCollections.Settings has loaded
 glados.loadSearchResultsURLS = ()->
 
@@ -257,7 +279,7 @@ glados.loadSearchResultsURLS = ()->
 
   glados.Settings.SEARCH_RESULTS_ES_PATH_REGEX = '(?:/('+elastic_search_paths.join('|')+'))?'
 
-  glados.Settings.SEARCH_RESULTS_PARSER_URL = glados.Settings.GLADOS_BASE_PATH_REL+'search_results_parser'
+  glados.Settings.SEARCH_RESULTS_PARSER_ENDPOINT = 'search_results_parser'
 
   glados.Settings.SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_BASE_PATH_REL+'g/#search_results'
   glados.Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH = 'advanced_search'

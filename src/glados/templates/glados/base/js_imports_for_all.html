@@ -5,8 +5,13 @@
 <script type="text/javascript" src="{% url 'js-glados_es_generated-catalog' %}"></script>
 <script type="text/javascript" src="{% url 'js-glados_es_override-catalog' %}"></script>
 
-<!-- Already compressed external files -->
 
+<!-- CSRF TOKEN -->
+<div style="display: none" class="GLaDOS-top-s3cre7">
+    {% csrf_token %}
+</div>
+
+<!-- Already compressed external files -->
 
 {% load compress %}
 <!-- FIRST COMPRESS: loads java script external libraries and glados settings -->
@@ -66,6 +71,7 @@
 <script type="text/javascript">
   glados.loadURLPaths('{{ request_root_url }}', '{% url "main" %}', '{% static "" %}');
   glados.Settings.DEBUG = {{ js_debug }};
+  glados.loadGLaDOSTopS3cre7();
 </script>
 <script type="text/javascript" src="{% static 'js/coffee-gen/GlobalVariables.js' %}"></script>
 

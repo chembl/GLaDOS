@@ -135,7 +135,7 @@ urlpatterns += [
   # Search Results
   # --------------------------------------------------------------------------------------------------------------------
 
-  url(r'^search_results_parser/(?P<search_string>.*?)$',
+  url(r'^search_results_parser.*$',
       glados.grammar.search_parser.parse_url_search, ),
 
   # url(r'^search_results/.*?$',

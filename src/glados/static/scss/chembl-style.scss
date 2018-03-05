@@ -848,6 +848,8 @@ div#CompoundNameAndClassification .comp-phase-0 {
   padding: 5px;
   font-weight: 500;
   display: inline-block;
+  word-break: break-all;
+  line-height: normal;
 }
 
 .chip-syn {
