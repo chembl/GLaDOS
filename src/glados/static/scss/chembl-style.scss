@@ -3640,62 +3640,60 @@ $facets-width-large: 21%;
   .loader-container {
     display: flex;
     align-items: center;
-    flex-direction: row;
+    flex-direction: column;
     width: 200px;
     height: 200px;
 
     .chembl-logo {
       color: #0D343A;
-      font-size: 3em;
+      font-size: 2em;
+      background: none;
     }
-  }
 
-  .spinner {
-    margin-top: 7px;
-    width: 100px;
-    height: 100px;
-    position: relative;
-  }
+    .spinner {
+      margin-top: 7px;
+      position: relative;
+      top: -70%;
+      left: -30%;
+    }
 
-  .ball {
-    margin-top: 12px;
-    background-color: #D33C60;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    position: fixed;
-  }
+    .ball {
+      margin-top: 12px;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      position: fixed;
+    }
 
+    //one
+    .ball-1 {
+      background-color: #0D343A;
+      animation: one 2.01s infinite ease-in-out;
+    }
+    .ball-2 {
+      background-color: #D33C60;
+      animation: one-half 2.04s infinite ease-in-out;
+    }
 
+    //two
+    .ball-3 {
+      background-color: #0D343A;
+      animation: two 2.02s infinite ease-in-out;
+    }
+    .ball-4 {
+      background-color: #D33C60;
+      animation: two-half 1.97s infinite ease-in-out;
+    }
 
-//one
-  .ball-1 {
-    background-color: #0D343A;
-    animation: one 3.01s infinite ease-in-out;
-  }
-  .ball-2 {
-    background-color: #D33C60;
-    animation: one-half 3.04s infinite ease-in-out;
-  }
+    //three
+    .ball-5 {
+      background-color: #0D343A;
+      animation: three 1.99s infinite ease-in-out;
+    }
+    .ball-6 {
+      background-color: #D33C60;
+      animation: three-half 2s infinite ease-in-out;
+    }
 
-  //two
-  .ball-3 {
-    background-color: #0D343A;
-    animation: two 3.02s infinite ease-in-out;
   }
-  .ball-4 {
-    background-color: #D33C60;
-    animation: two-half 2.97s infinite ease-in-out;
-  }
-
-  //three
-  .ball-5 {
-    background-color: #0D343A;
-    animation: three 2.99s infinite ease-in-out;
-  }
-  .ball-6 {
-    background-color: #D33C60;
-    animation: three-half 3s infinite ease-in-out;
-  }
-
 }
