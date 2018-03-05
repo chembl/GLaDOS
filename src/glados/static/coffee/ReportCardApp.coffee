@@ -2,7 +2,7 @@ glados.useNameSpace 'glados',
   ReportCardApp: class ReportCardApp
 
     @init = ->
-      
+
       glados.apps.Main.MainGladosApp.hideMainSplashScreen()
 
       GlobalVariables.CHEMBL_ID = glados.Utils.URLS.getCurrentModelChemblID()
