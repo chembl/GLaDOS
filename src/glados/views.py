@@ -141,6 +141,13 @@ def replace_urls_from_entinies(html, urls):
 def main_page(request):
   return render(request, 'glados/mainPage.html')
 
+def main_html_base(request):
+
+  return render(request, 'glados/mainGlados.html')
+
+def main_html_base_no_bar(request):
+
+  return render(request, 'glados/mainGladosNoBar.html')
 
 def wizard_step_json(request, step_id):
   """

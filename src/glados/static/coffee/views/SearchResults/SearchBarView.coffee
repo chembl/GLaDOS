@@ -76,15 +76,20 @@ glados.useNameSpace 'glados.views.SearchResults',
     # ------------------------------------------------------------------------------------------------------------------
 
     search: () ->
+
+      console.log 'SEARCH!!'
       # Updates the navigation URL
       search_url_for_query = @getCurrentSearchURL()
+      console.log 'search_url_for_query: ', search_url_for_query
       window.history.pushState({}, 'ChEMBL: '+@expandable_search_bar.val(), search_url_for_query)
       console.log("SEARCHING FOR:"+@expandable_search_bar.val())
       if @atResultsPage
+        console.log 'is at results page!'
         @searchModel.search(@expandable_search_bar.val(), null)
       else
         # Navigates to the specified URL
         window.location.href = search_url_for_query
+        location.reload()
 
     searchAdvanced: () ->
       searchBarQueryString = @expandable_search_bar.val()

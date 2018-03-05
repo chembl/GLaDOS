@@ -216,8 +216,6 @@ Activity.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS = _.union(Activity.COLUMNS_SE
 
 Activity.getActivitiesListURL = (filter) ->
 
-
-  if filter
-    return glados.Settings.GLADOS_BASE_PATH_REL + 'activities/filter/' + encodeURIComponent(filter)
-  else
-    return glados.Settings.GLADOS_BASE_PATH_REL + 'activities'
+  glados.Settings.ENTITY_BROWSERS_URL_GENERATOR
+    entity: 'activities'
+    filter: encodeURIComponent(filter) unless not filter?

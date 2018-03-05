@@ -19,13 +19,13 @@
 
                         <div class="search-bar-help hide-on-med-and-down">
                           Example:
-                            <a class="example-link" href="{% url 'main' %}search_results/Dopamine">Dopamine</a>,
-                            <a class="example-link" href="{% url 'main' %}search_results/Aspirin" >Aspirin</a>,
-                            <a class="example-link" href="{% url 'main' %}search_results/NCCc1ccc(O)c(O)c1">NCCc1ccc(O)c(O)c1</a>,
-                            <a class="example-link" href="{% url 'main' %}search_results/Liver">Liver</a>
+                            <a class="example-link" href="{% url 'main' %}g/#search_results/Dopamine">Dopamine</a>,
+                            <a class="example-link" href="{% url 'main' %}g/#search_results/Aspirin" >Aspirin</a>,
+                            <a class="example-link" href="{% url 'main' %}g/#search_results/NCCc1ccc(O)c(O)c1">NCCc1ccc(O)c(O)c1</a>,
+                            <a class="example-link" href="{% url 'main' %}g/#search_results/Liver">Liver</a>
                         </div>
 
-                        <div class="col m6 l7">
+                        <div class="col m5 l8">
 
                           <div class="search-input-wrapper" >
                             <input type="search" value="" name="search-str"
@@ -33,20 +33,9 @@
                           </div>
 
                         </div>
-                        <div class="col m6 l5">
+                        <div class="col m7 l4">
                             <div class="row no-margin">
-
-                                <div class="col m4 advanced-search-wrapper">
-
-                                  <button onclick="this.blur();" class="search-opts col m12">
-                                    <span>
-                                      <i class="icon icon-generic" data-icon="("></i> Advanced
-                                    </span>
-                                  </button>
-
-                                </div>
-
-                                <div class="col m3 draw-and-search-wrapper">
+                                <div class="col m5 draw-and-search-wrapper">
 
                                   <a onclick="this.blur();" class="draw-structure draw-st-btn col m12 tooltipped hide-on-small-only"
                                         data-position="left" data-delay="50" data-tooltip="Draw a structure">
@@ -57,7 +46,7 @@
 
                                 </div>
 
-                                <div class="col m5">
+                                <div class="col m7">
 
                                   <button onclick="this.blur();" class="search-button search-btn col m12 tooltipped"
                                         data-position="left" data-delay="50" data-tooltip="Search">

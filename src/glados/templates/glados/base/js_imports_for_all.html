@@ -189,7 +189,6 @@
     <!-- Drug Browser -->
     <!-- The Drug.js file needs to be loaded after the Compound.js -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound/Drug.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/DrugsBrowserApp.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/ApprovedDrugClinicalCandidate.js' %}"></script>
 
     <!-- Activities -->
@@ -200,12 +199,6 @@
     <!-- Browsers -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/apps/Activity/ActivitiesBrowserApp.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/apps/Activity/ActivitiesRouter.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/apps/Document/DocumentsBrowserApp.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/apps/Cell/CellsBrowserApp.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/apps/Tissue/TissuesBrowserApp.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/AssaysBrowserApp.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/CompoundsBrowserApp.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/TargetsBrowserApp.js' %}"></script>
 
     <!-- 3D Visualization of compounds -->
     <script type="text/javascript" src="{% static 'speck/static/MoleculeVisualisator.js' %}"></script>
@@ -269,6 +262,10 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Visualisation/PieView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Visualisation/HistogramView.js' %}"></script>
 
+    <!-- Browsers -->
+    <script type="text/javascript" src="{% static 'js/coffee-gen/apps/Browsers/BrowserRouter.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/apps/Browsers/BrowserApp.js' %}"></script>
+
     <!-- References -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/References/ReferencesView.js' %}"></script>
 
@@ -301,6 +298,11 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/MainPage/CentralCardView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/MainPageApp.js' %}"></script>
 
+    <!-- Breadcrumbs -->
+    <script type="text/javascript" src="{% static 'js/coffee-gen/apps/BreadcrumbApp.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/models/base/Breadcrumb.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/views/base/BreadcrumbsView.js' %}"></script>
+
     <!-- Sketchers Full Screen Page -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/MarvinFullScreenApp.js' %}"></script>
 
@@ -313,6 +315,13 @@
     <!-- Embedder -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/apps/Embedding/EmbeddingRouter.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/apps/Embedding/EmbeddingApp.js' %}"></script>
+
+    <!-- Routing -->
+    <script type="text/javascript" src="{% static 'js/coffee-gen/routers/MainGladosRouter.js' %}"></script>
+
+    <!-- Main glados app -->
+    <script type="text/javascript" src="{% static 'js/coffee-gen/apps/Main/MainGladosApp.js' %}"></script>
+
     <!-- JavaScript Environment log -->
     <script type="text/javascript">
       glados.logGladosSettings();

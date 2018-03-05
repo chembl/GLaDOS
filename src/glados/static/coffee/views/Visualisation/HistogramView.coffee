@@ -120,7 +120,7 @@ glados.useNameSpace 'glados.views.Visualisation',
       VISUALISATION_WIDTH = $(@el).width()
       VISUALISATION_HEIGHT = if @config.big_size then $(window).height() * 0.6 else 60
 
-      if $(@el).parents('.visualisation-card')
+      if $(@el).parents('.visualisation-card').length > 0
         VISUALISATION_HEIGHT = @$vis_elem.height()
 
       if @config.max_height?
