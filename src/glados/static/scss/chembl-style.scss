@@ -115,9 +115,9 @@ strong {
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
-.css-tooltipped{
+.css-tooltipped {
   position: relative;
-  .css-tooltip{
+  .css-tooltip {
     white-space: normal;
     visibility: hidden;
     word-wrap: break-word;
@@ -134,9 +134,9 @@ strong {
     z-index: 100;
   }
 
-  &.active-tooltip{
-    &:hover{
-      .css-tooltip{
+  &.active-tooltip {
+    &:hover {
+      .css-tooltip {
         visibility: visible;
       }
     }
@@ -199,10 +199,11 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
 .z-depth-below-zero {
   z-index: 1 !important;
   box-shadow: none;
-  .menu-logo{
+  .menu-logo {
     visibility: hidden;
   }
 }
+
 .side-nav {
   border: none;
   width: $side-nav-width;
@@ -226,7 +227,7 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
   }
 
   ul.menu-links {
-    overflow-y:scroll;
+    overflow-y: scroll;
     li {
       height: 45px;
       a {
@@ -271,7 +272,6 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
     background-color: #6abec3;
     margin-top: 0px;
     height: calc(#{$chembl-header-height} + #{2*$chembl-header-padding} - 10px);
-
 
     a {
       font-size: 1em;
@@ -344,7 +344,7 @@ header .row {
   }
 }
 
-.side-nav-width{
+.side-nav-width {
   min-width: $side-nav-width !important;
   margin-left: -10px;
 }
@@ -716,8 +716,6 @@ header .row {
   display: block;
   height: calc(#{$chembl-header-height} + #{2*$chembl-header-padding});
 }
-
-
 
 /**
 * Scroll spy
@@ -1299,7 +1297,7 @@ em.glados-result-highlight {
     color: color("teal", "accent-4")
   }
 
-  span{
+  span {
     border-bottom: 0 none;
     color: color("teal", "base");
     font-size: 70%;
@@ -1537,11 +1535,11 @@ em.glados-result-highlight {
   text-align: center;
 }
 
-.card.horizontal{
-  .card-image{
+.card.horizontal {
+  .card-image {
     display: table;
     height: 100%;
-    .image-container{
+    .image-container {
       display: table-cell;
       vertical-align: middle;
     }
@@ -3234,7 +3232,7 @@ $facets-width-large: 21%;
   .paginated-card {
     .card-stacked {
       width: 50%;
-      .card-content{
+      .card-content {
         padding: 0.75em;
       }
     }
@@ -3260,9 +3258,9 @@ $facets-width-large: 21%;
       width: 60%
     }
   }
-  .empty-list-message{
+  .empty-list-message {
     margin-bottom: 0px;
-    .h5{
+    .h5 {
       margin: 0px;
     }
   }
@@ -3515,11 +3513,12 @@ $facets-width-large: 21%;
 * Visualisation Cards
 * ----------------------------------------------------------------------------------------------------------------------
 */
-.tall{
+.tall {
   .visualisation-card {
     height: 60vh;
   }
 }
+
 .visualisation-card {
   height: 40vh;
   .card-content {
@@ -3538,7 +3537,6 @@ $facets-width-large: 21%;
         max-height: 80px;
         margin: 0;
 
-
       }
     }
     .principal-pie-container {
@@ -3551,11 +3549,11 @@ $facets-width-large: 21%;
       }
     }
 
-    .target-browser{
+    .target-browser {
       height: 100%;
-      .browser-as-circles{
+      .browser-as-circles {
         height: 100%;
-        .vis-container{
+        .vis-container {
           height: calc(100% - 40px);
         }
       }
@@ -3567,13 +3565,137 @@ $facets-width-large: 21%;
   font-size: 80%;
 }
 
+/**
+* SPLASH SCREEN
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+
+@keyframes one {
+  0%, 5%, 95%, 100% {
+    transform: translate(50px,0px) scale(1);
+  }
+  50%, 45%, 55% {
+    transform: translate(0px,25px) scale(0.8);
+  }
+}
+
+@keyframes one-half {
+  0%, 5%, 95%, 100% {
+    transform: translate(0px,25px) scale(1);
+  }
+  50%, 45%, 55% {
+    transform: translate(50px,0px) scale(0.8);
+  }
+}
+
+@keyframes two {
+  0%, 5%, 95%, 100%{
+    transform: translate(0px,75px) scale(1);
+  }
+  50%, 45%, 55% {
+    transform: translate(100px,25px) scale(0.8);
+  }
+}
+
+@keyframes two-half {
+  0%, 5%, 95%, 100%{
+    transform: translate(100px,25px) scale(1);
+  }
+  50%, 45%, 55% {
+    transform: translate(0px,75px) scale(0.8);
+  }
+}
+
+@keyframes three {
+  0%, 5%, 95%, 100% {
+    transform: translate(50px,100px) scale(1);
+  }
+  50%, 45%, 55% {
+    transform: translate(100px,75px) scale(0.8);
+  }
+}
+
+@keyframes three-half {
+  0%, 5%, 95%, 100% {
+    transform: translate(100px,75px) scale(1);
+  }
+  50%, 45%, 55% {
+    transform: translate(50px,100px) scale(0.8);
+  }
+}
+
+
 #GladosMainSplashScreen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 5000;
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  overflow: auto;
-  background: lime; /* Just to visualize the extent */
+  background-color: #fcfcfc;
+
+  .loader-container {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 200px;
+    height: 200px;
+
+    .chembl-logo {
+      color: #0D343A;
+      font-size: 3em;
+    }
+  }
+
+  .spinner {
+    margin-top: 7px;
+    width: 100px;
+    height: 100px;
+    position: relative;
+  }
+
+  .ball {
+    margin-top: 12px;
+    background-color: #D33C60;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    position: fixed;
+  }
+
+
+
+//one
+  .ball-1 {
+    background-color: #0D343A;
+    animation: one 3.01s infinite ease-in-out;
+  }
+  .ball-2 {
+    background-color: #D33C60;
+    animation: one-half 3.04s infinite ease-in-out;
+  }
+
+  //two
+  .ball-3 {
+    background-color: #0D343A;
+    animation: two 3.02s infinite ease-in-out;
+  }
+  .ball-4 {
+    background-color: #D33C60;
+    animation: two-half 2.97s infinite ease-in-out;
+  }
+
+  //three
+  .ball-5 {
+    background-color: #0D343A;
+    animation: three 2.99s infinite ease-in-out;
+  }
+  .ball-6 {
+    background-color: #D33C60;
+    animation: three-half 3s infinite ease-in-out;
+  }
+
 }
