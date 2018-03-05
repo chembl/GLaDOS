@@ -1987,16 +1987,13 @@ $marvin-size-fullscreen: 91vh;
 .search-banner {
 
   margin-left: 0.75rem;
-  margin-right: 0.75rem;
-  //margin-top: 2px !important;
-  //margin-bottom: 2px !important;
+  margin-right: 0.70rem;
   .card-content {
     padding-top: 10px !important;
     padding-bottom: 10px !important;
   }
 
   .search-bar {
-    //background-color: $primary-color;
     border-radius: 4px;
     .search-input-wrapper {
       background-color: white;
