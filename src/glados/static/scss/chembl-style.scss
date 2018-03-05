@@ -533,8 +533,8 @@ header .row {
             margin-left: 10px;
 
             max-height: 5em;
-            overflow-x: visible !important;
-            overflow-y: hidden !important;
+            overflow-x: hidden;
+            overflow-y: hidden;
 
             div {
               font-size: 3.5em;
@@ -1987,16 +1987,13 @@ $marvin-size-fullscreen: 91vh;
 .search-banner {
 
   margin-left: 0.75rem;
-  margin-right: 0.75rem;
-  //margin-top: 2px !important;
-  //margin-bottom: 2px !important;
+  margin-right: 0.70rem;
   .card-content {
     padding-top: 10px !important;
     padding-bottom: 10px !important;
   }
 
   .search-bar {
-    //background-color: $primary-color;
     border-radius: 4px;
     .search-input-wrapper {
       background-color: white;
@@ -3446,11 +3443,11 @@ $facets-width-large: 21%;
 */
 .main-pie-container {
   display: flex !important;
+  background-color: white;
   .legend {
-    background-color: white;
     width: 100%;
     margin-left: -10px;
-    padding-top: 40px;
+    margin-top: 0px;
     overflow-y: scroll;
     overflow-x: hidden !important;
   }
@@ -3466,7 +3463,6 @@ $facets-width-large: 21%;
   }
 
   .sub-arc:hover {
-    //fill: #0d343a;
     fill-opacity: 0.7;
     cursor: pointer;
   }
