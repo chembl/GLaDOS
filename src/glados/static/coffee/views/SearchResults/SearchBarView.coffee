@@ -25,7 +25,6 @@ glados.useNameSpace 'glados.views.SearchResults',
         # Handles the popstate event to reload a search
         @last_location_url = window.location.href
         window.onpopstate = @popStateHandler.bind(@)
-        @searchFromURL()
 
     initializeSketcherButton: ()->
       $openEditorBtn = $(@el).find('.draw-structure.hide-on-small-only')
@@ -45,6 +44,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       @showAdvanced = URLProcessor.isAtAdvancedSearchResultsPage()
 
     searchFromURL: ->
+
       @parseURLData()
       urlQueryString = decodeURI(URLProcessor.getSearchQueryString())
       urlQueryString = decodeURI(URLProcessor.getSearchQueryString())
@@ -77,7 +77,6 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     search: () ->
 
-      console.log 'SEARCH!!'
       # Updates the navigation URL
       search_url_for_query = @getCurrentSearchURL()
       console.log 'search_url_for_query: ', search_url_for_query
