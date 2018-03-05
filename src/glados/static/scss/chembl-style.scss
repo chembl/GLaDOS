@@ -533,8 +533,8 @@ header .row {
             margin-left: 10px;
 
             max-height: 5em;
-            overflow-x: visible !important;
-            overflow-y: hidden !important;
+            overflow-x: hidden;
+            overflow-y: hidden;
 
             div {
               font-size: 3.5em;
