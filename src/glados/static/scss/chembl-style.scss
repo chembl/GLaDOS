@@ -3570,57 +3570,64 @@ $facets-width-large: 21%;
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
+$splash-width: 60px;
+$splash-color1: #75D8D5;
+//$splash-color1: #09979B;
+$splash-color2: #FE7F9D;
+
+
+
 @keyframes one {
   0%, 5%, 95%, 100% {
-    transform: translate(50px,0px) scale(1);
+    transform: translate($splash-width/2,0px) scale(1);
   }
   50%, 45%, 55% {
-    transform: translate(0px,25px) scale(0.8);
+    transform: translate(0px,$splash-width/4) scale(0.6);
   }
 }
 
 @keyframes one-half {
   0%, 5%, 95%, 100% {
-    transform: translate(0px,25px) scale(1);
+    transform: translate(0px,$splash-width/4) scale(1);
   }
   50%, 45%, 55% {
-    transform: translate(50px,0px) scale(0.8);
+    transform: translate($splash-width/2,0px) scale(0.6);
   }
 }
 
 @keyframes two {
   0%, 5%, 95%, 100%{
-    transform: translate(0px,75px) scale(1);
+    transform: translate(0px,3*$splash-width/4) scale(1);
   }
   50%, 45%, 55% {
-    transform: translate(100px,25px) scale(0.8);
+    transform: translate($splash-width,$splash-width/4) scale(0.6);
   }
 }
 
 @keyframes two-half {
   0%, 5%, 95%, 100%{
-    transform: translate(100px,25px) scale(1);
+    transform: translate($splash-width,$splash-width/4) scale(1);
   }
   50%, 45%, 55% {
-    transform: translate(0px,75px) scale(0.8);
+    transform: translate(0px,3*$splash-width/4) scale(0.6);
   }
 }
 
 @keyframes three {
   0%, 5%, 95%, 100% {
-    transform: translate(50px,100px) scale(1);
+    transform: translate($splash-width/2,$splash-width) scale(1);
   }
   50%, 45%, 55% {
-    transform: translate(100px,75px) scale(0.8);
+    transform: translate($splash-width,3*$splash-width/4) scale(0.6);
   }
 }
 
 @keyframes three-half {
   0%, 5%, 95%, 100% {
-    transform: translate(100px,75px) scale(1);
+    transform: translate($splash-width,3*$splash-width/4) scale(1);
   }
   50%, 45%, 55% {
-    transform: translate(50px,100px) scale(0.8);
+    transform: translate($splash-width/2,$splash-width) scale(0.6);
   }
 }
 
@@ -3643,18 +3650,20 @@ $facets-width-large: 21%;
     flex-direction: column;
     width: 200px;
     height: 200px;
+    padding-top: 100px;
 
     .chembl-logo {
-      color: #025C5E;
-      font-size: 2em;
+      color: #cacaca;
+      font-size: 1.8em;
       background: none;
+      margin-top: 20px;
     }
 
     .spinner {
       margin-top: 7px;
       position: relative;
-      top: -70%;
-      left: -30%;
+      top: -100%;
+      left: -20%;
     }
 
     .ball {
@@ -3663,37 +3672,37 @@ $facets-width-large: 21%;
       height: 15px;
       border-radius: 50%;
       position: fixed;
+      mix-blend-mode: multiply;
     }
 
-    //one
+//one
     .ball-1 {
-      background-color: #025C5E;
-      animation: one 2.01s infinite ease-in-out;
+      background-color: $splash-color1;
+      animation: one 3s infinite ease-in-out;
     }
     .ball-2 {
-      background-color: #D33C60;
-      animation: one-half 2.04s infinite ease-in-out;
+      background-color: $splash-color2;
+      animation: one-half 3s infinite ease-in-out;
     }
 
-    //two
+//two
     .ball-3 {
-      background-color: #025C5E;
-      animation: two 2.02s infinite ease-in-out;
+      background-color: $splash-color1;
+      animation: two 3s infinite ease-in-out;
     }
     .ball-4 {
-      background-color: #D33C60;
-      animation: two-half 1.97s infinite ease-in-out;
+      background-color: $splash-color2;
+      animation: two-half 3s infinite ease-in-out;
     }
 
-    //three
+//three
     .ball-5 {
-      background-color: #025C5E;
-      animation: three 1.99s infinite ease-in-out;
+      background-color: $splash-color2;
+      animation: three 3s infinite ease-in-out;
     }
     .ball-6 {
-      background-color: #D33C60;
-      animation: three-half 2s infinite ease-in-out;
+      background-color: $splash-color1;
+      animation: three-half 3s infinite ease-in-out;
     }
-
   }
 }
