@@ -219,7 +219,6 @@ SearchModel = Backbone.Model.extend
 
   # coordinates the search across the different results lists
   search: (rawQueryString, selected_es_entity) ->
-    alert 'SEARCH'
     @selected_es_entity = if _.isUndefined(selected_es_entity) then null else selected_es_entity
     ajaxDeferred = @parseQueryString(rawQueryString)
     ajaxDeferred.then(@__search.bind(@))

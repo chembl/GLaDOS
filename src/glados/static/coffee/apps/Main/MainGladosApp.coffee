@@ -42,7 +42,6 @@ glados.useNameSpace 'glados.apps.Main',
     # ------------------------------------------------------------------------------------------------------------------
     @initMainPage = ->
 
-      alert ('init main page')
       @prepareContentFor('main_page')
       MainPageApp.init()
 

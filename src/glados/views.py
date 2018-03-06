@@ -9,6 +9,7 @@ from glados.utils import *
 from django.core.cache import cache
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+import glados.url_shortener.url_shortener
 import json
 
 
@@ -167,6 +168,7 @@ def shorten_url(request):
 
       req_data = json.loads(request.body.decode('utf-8'))
       print('req body: ', request.body)
+      print('test', glados.url_shortener.url_shortener.shorten_url('tetas'))
 
       resp_data = {
         'long_url': req_data['long_url'],
