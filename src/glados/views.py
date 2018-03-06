@@ -167,12 +167,11 @@ def shorten_url(request):
    if request.method == "POST":
 
       req_data = json.loads(request.body.decode('utf-8'))
-      print('req body: ', request.body)
-      print('test', glados.url_shortener.url_shortener.shorten_url('tetas'))
+      short_url =  glados.url_shortener.url_shortener.shorten_url(request.body.decode('utf-8'))
 
       resp_data = {
         'long_url': req_data['long_url'],
-        'short_url': 'afcacd18e184f8976b193f4677215840c1c17c19e440f117e11eabc7cf078c0e'
+        'short_url': short_url
       }
       return JsonResponse(resp_data)
 
