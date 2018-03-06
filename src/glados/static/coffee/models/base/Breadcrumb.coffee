@@ -13,14 +13,21 @@ glados.useNameSpace 'glados.models.base.Breadcrumb',
       breadcrumbs = {}
       for url in breadcrumbsURL
         if url != ''
-          urlString = url.replace /_/g, ' '
-          urlString = urlString.replace urlString.charAt(0), urlString.charAt(0).toUpperCase()
+          urlString = @beautifyURL(url)
           breadcrumbs[url] =
             label: urlString
             url: current_url + '/' + url
           current_url = current_url + '/' + url
 
       return breadcrumbs
+
+    beautifyURL: (url) ->
+      newUrl = url.replace /_/g, ' '  #replace _ with spaces
+      newUrl = newUrl.replace '#', ''
+      newUrl = newUrl.replace newUrl.charAt(0), newUrl.charAt(0).toUpperCase()
+      newUrl = newUrl.replace /\b(\w)/g, (x) -> x[0].toUpperCase()
+
+      return newUrl
 
 
 
