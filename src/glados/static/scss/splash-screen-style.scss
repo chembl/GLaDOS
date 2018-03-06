@@ -72,7 +72,16 @@ $splash-color2: #FE7F9D;
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: #fafafa;
+  background-color: rgba(0, 0, 0, 0.89);
+
+  .splash-card {
+    width: 30%;
+    height: 35%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FAFAFA;
+  }
 
   .loader-container {
     display: flex;
@@ -81,6 +90,12 @@ $splash-color2: #FE7F9D;
     width: 200px;
     height: 200px;
     padding-top: 100px;
+
+    .loading-msg{
+      color: #cacaca;
+      font-size: 0.9em;
+      margin-top: 10px;
+    }
 
     .chembl-logo {
       color: #cacaca;
@@ -134,5 +149,11 @@ $splash-color2: #FE7F9D;
       background-color: $splash-color1;
       animation: three-half 3s infinite ease-in-out;
     }
+  }
+}
+
+@media (max-width: 600px) {
+  .splash-card {
+    width: 100% !important;
   }
 }

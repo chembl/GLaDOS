@@ -13,8 +13,17 @@ glados.useNameSpace 'glados.apps.Main',
 
     @init = ->
 
-      new glados.routers.MainGladosRouter
-      Backbone.history.start()
+      mainRouter = new glados.routers.MainGladosRouter
+
+      #now if there are shortened params
+      shortenedURL = $('#GladosShortenedParamsContainer').attr('data-shortened-params')
+      if shortenedURL != ''
+
+        Backbone.history.start({silent: true})
+        window.history.pushState({}, '', glados.Settings.GLADOS_BASE_PATH_REL+glados.Settings.NO_SIDE_NAV_PLACEHOLDER)
+        mainRouter.navigate(shortenedURL, {trigger: true})
+      else
+        Backbone.history.start()
 
     @prepareContentFor = (pageName, templateParams={}) ->
 
@@ -73,6 +82,13 @@ glados.useNameSpace 'glados.apps.Main',
 
       @prepareContentFor('browser')
       glados.apps.Browsers.BrowserApp.initBrowserForEntity(entityName, filter, state)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Report Cards
+    # ------------------------------------------------------------------------------------------------------------------
+    @initReportCard = (entityName, chemblID) ->
+
+      console.log 'INIT REPORT CARD'
 
 
 

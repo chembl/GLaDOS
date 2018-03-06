@@ -7,6 +7,7 @@ glados.useNameSpace 'glados.routers',
       'similarity_search_results/:search_term/:threshold': 'initSimilaritySearchResults'
       'flexmatch_search_results/:search_term': 'initFlexmatchSearchResults'
       'browse/:entity_name(/filter/:filter)(/state/:state)': 'initBrowser'
+      'report_card/:entity_name/:chembl_id': 'initReportCard'
 
     initMainPage: -> glados.apps.Main.MainGladosApp.initMainPage()
 
@@ -20,4 +21,7 @@ glados.useNameSpace 'glados.routers',
 
     initBrowser: (entityName, filter, state) ->
       glados.apps.Main.MainGladosApp.initBrowserForEntity(entityName, filter, state)
+
+    initReportCard: (entityName, chemblID) ->
+      glados.apps.Main.MainGladosApp.initReportCard(entityName, chemblID)
 
