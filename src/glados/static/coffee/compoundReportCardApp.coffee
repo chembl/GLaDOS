@@ -349,7 +349,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       config: config
       compound_chembl_id: chemblID
       section_id: 'PapersAboutCompound'
-      section_label: chemblID + ' in Literature'
+      section_label: 'Literature'
       report_card_app: @
 
     allDocumentsByYear.fetch()
