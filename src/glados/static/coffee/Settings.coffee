@@ -327,7 +327,7 @@ glados.setupOnLoadAfterJS = () ->
   $(document).ajaxStart () ->
     glados.ajax_count++
     $('#GLaDOS-page-loaded').html('NO')
-    $('#GladosMainSplashScreen').show()
+#    $('#GladosMainSplashScreen').show()
   $(document).ajaxStop () ->
     glados.ajax_count--
     if glados.ajax_count == 0

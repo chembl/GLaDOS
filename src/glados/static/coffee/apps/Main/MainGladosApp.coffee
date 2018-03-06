@@ -1,7 +1,7 @@
 glados.useNameSpace 'glados.apps.Main',
   MainGladosApp: class ActivitiesBrowserApp
 
-    @showMainSplashScreen = -> #$('#GladosMainSplashScreen').show()
+    @showMainSplashScreen = -> $('#GladosMainSplashScreen').show()
     @hideMainSplashScreen = -> #$('#GladosMainSplashScreen').hide()
     @showMainGladosContent = -> $('#GladosMainContent').show()
 
@@ -34,7 +34,7 @@ glados.useNameSpace 'glados.apps.Main',
       $gladosMainContent.empty()
 
       glados.Utils.fillContentForElement($gladosMainContent, templateParams, templateName)
-      @hideMainSplashScreen()
+#      @hideMainSplashScreen()
       @showMainGladosContent()
 
     # ------------------------------------------------------------------------------------------------------------------
