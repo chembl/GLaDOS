@@ -72,14 +72,15 @@ $splash-color2: #FE7F9D;
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.89);
 
   .splash-card {
-    width: 70%;
-    height: 70%;
+    width: 30%;
+    height: 35%;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #FAFAFA;
   }
 
   .loader-container {
@@ -89,6 +90,12 @@ $splash-color2: #FE7F9D;
     width: 200px;
     height: 200px;
     padding-top: 100px;
+
+    .loading-msg{
+      color: #cacaca;
+      font-size: 0.9em;
+      margin-top: 10px;
+    }
 
     .chembl-logo {
       color: #cacaca;
