@@ -20,7 +20,6 @@ glados.useNameSpace 'glados.apps.Main',
 
       #make sure splash screen is shown, specially useful when it changes urls without using the server
       @showMainSplashScreen()
-      return
       templateName = @baseTemplates[pageName]
       $gladosMainContent = $('#GladosMainContent')
       $gladosMainContent.empty()
@@ -35,7 +34,6 @@ glados.useNameSpace 'glados.apps.Main',
     @initMainPage = ->
 
       @prepareContentFor('main_page')
-      return
       MainPageApp.init()
 
     # ------------------------------------------------------------------------------------------------------------------
