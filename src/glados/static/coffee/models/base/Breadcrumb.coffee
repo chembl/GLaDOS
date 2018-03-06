@@ -24,8 +24,16 @@ glados.useNameSpace 'glados.models.base.Breadcrumb',
     beautifyURL: (url) ->
       newUrl = url.replace /_/g, ' '  #replace _ with spaces
       newUrl = newUrl.replace '#', ''
+      newUrl = newUrl.replace /%20/g, ' '
+      newUrl = newUrl.replace /%3A/g, ': '
+      newUrl = newUrl.replace /%22/g, ''
+      newUrl = newUrl.replace /AND/g, 'And'
+      newUrl = newUrl.replace /OR/g, 'Or'
       newUrl = newUrl.replace newUrl.charAt(0), newUrl.charAt(0).toUpperCase()
       newUrl = newUrl.replace /\b(\w)/g, (x) -> x[0].toUpperCase()
+
+      if newUrl.length > 30
+        newUrl = newUrl.substring(0,50)+'...'
 
       return newUrl
 
