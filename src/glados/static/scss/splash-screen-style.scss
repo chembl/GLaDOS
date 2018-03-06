@@ -151,3 +151,9 @@ $splash-color2: #FE7F9D;
     }
   }
 }
+
+@media (max-width: 600px) {
+  .splash-card {
+    width: 100% !important;
+  }
+}
