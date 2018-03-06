@@ -53,6 +53,7 @@ glados.getScreenType = ->
 
 glados.useNameSpace 'glados',
   Settings:
+    MAX_GENERATED_URL_LENGTH: 1000
     PIECHARTS:
       MAX_CATEGORIES: 10
     VIS_COLORS:

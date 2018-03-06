@@ -611,6 +611,20 @@ glados.useNameSpace 'glados',
           model.fetch()
 
     URLS:
+      shortenHTMLLinkIfNecessary: ($anchor) ->
+        if $anchor.attr('data-shortening-checked') != 'yes'
+
+          href = $anchor.attr('href')
+
+          if href?
+            if href.length > glados.Settings.MAX_GENERATED_URL_LENGTH
+              console.log 'needs shortening: ', $anchor
+              console.log 'href:', href
+              console.log '^^^'
+
+          $anchor.attr('data-shortening-checked', 'yes')
+
+
       getCurrentModelChemblID: ->
 
         if GlobalVariables['CURRENT_MODEL_CHEMBL_ID']?
