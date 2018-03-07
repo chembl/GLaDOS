@@ -3218,14 +3218,25 @@ $facets-width-large: 21%;
     top: 40%;
     left: 0.75em;
     width: 100%;
-
     .page-selector {
-      background-color: rgba(39, 255, 2, 0.39) !important;
+
+      i {
+        border-radius: 100%;
+        transition: all 100ms ease-in-out;
+        color: #848484;
+        font-size: 2em;
+      }
+      i:hover {
+        transition: all 100ms ease-in-out;
+        color: #444;
+      }
     }
   }
 
   .items-container {
     margin-bottom: 0;
+    margin-left: 30px;
+    margin-right: 30px;
   }
   .pagination {
     margin: 0;
