@@ -12,16 +12,18 @@
     <h5>No records were found.</h5>
 </div>
 
-<div class="carousel-container">
+<div class="row carousel-container">
+    <div class="col s12 chevron-container">
+        <div class="page-selector col s1" data-page='previous'><a><i class="material-icons">chevron_left</i></a></div>
+        <div class="waves-effect  col s1 push-s10 page-selector" data-page='next'><a><i class="material-icons">chevron_right</i></a></div>
+    </div>
     <div class='BCK-items-container row items-container' data-hb-template="Handlebars-Common-Paginated-Card-Carousel"
          style="display: none">
-
         <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
-
     </div>
+
     <div class="BCK-footer-container carousel-footer" style="display: none">
         <div class='BCK-paginator-container' data-hb-template="Handlebars-Common-Carousel-UL">
-
             <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
         </div>
     </div>

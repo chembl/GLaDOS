@@ -3210,7 +3210,6 @@ $facets-width-large: 21%;
 */
 
 .carousel-container {
-  z-index: 5;
 
   .items-container{
     margin-bottom: 0;
@@ -3222,17 +3221,23 @@ $facets-width-large: 21%;
   .chevron-container {
     background-color: rgba(255, 205, 46, 0.7) !important;
     z-index: 10;
+    width: inherit;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: -0.75rem !important;
+    margin-right: -0.75rem !important;
     position: absolute;
-    top:40%;
-    .page-selector {
-      background-color: rgba(255, 205, 46, 0.7) !important;
+    left: 0;
+    height: 80%;
+    .page-selector{
+      background-color: rgba(39, 255, 2, 0.39) !important;
     }
+
   }
 
-  background-color: rgba(255, 0, 1, 0.39) !important;
-  .pagination {
-    background-color: rgba(39, 255, 2, 0.39) !important;
-  }
+  //.pagination {
+  //  background-color: rgba(39, 255, 2, 0.39) !important;
+  //}
 }
 
 .paginated-collection {
