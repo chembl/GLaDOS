@@ -3209,6 +3209,10 @@ $facets-width-large: 21%;
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
+/* carrousel with overlay buttons
+* --------------------------------------------
+*/
+
 .carousel-container {
   position: relative;
 
@@ -3218,6 +3222,7 @@ $facets-width-large: 21%;
     top: 40%;
     left: 0.75em;
     width: 100%;
+
     .page-selector {
       i {
         border-radius: 100%;
@@ -3229,6 +3234,11 @@ $facets-width-large: 21%;
         transition: all 100ms ease-in-out;
         color: #444;
       }
+    }
+
+    .page-selector.disabled i {
+      color: #cccccc;
+      cursor: default;
     }
   }
 
@@ -3249,11 +3259,11 @@ $facets-width-large: 21%;
   }
 }
 
-  .push-30px{
-    margin-left: 40px !important;
-    margin-top: 0;
-    margin-bottom: 0;
-  }
+.push-30px {
+  margin-left: 40px !important;
+  margin-top: 0;
+  margin-bottom: 0;
+}
 
 .paginated-collection {
   padding: 4px;

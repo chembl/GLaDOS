@@ -475,8 +475,6 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
 
-    console.log 'DEBUG'
-    alert 'DEBUG'
     carouselConfig =
       custom_available_page_sizes:
         'SMALL_SCREEN': 1
