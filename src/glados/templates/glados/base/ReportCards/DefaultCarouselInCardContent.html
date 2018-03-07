@@ -3,14 +3,13 @@
     {{title}}
 </script>
 <script id="Handlebars-CarouselLinkToFullList" type="text/x-handlebars-template">
-    See <a target="_blank" href="{{full_list_link}}">full list</a>.
+    See <a target="_blank" href="{{full_list_link}}">full list</a>
 </script>
 {% endverbatim %}
 
 <span class="BCK-CarouselTitle" data-hb-template="Handlebars-CarouselInCardTitle">
 </span>
-<br>
-<span class="BCK-LinkToFullList" data-hb-template="Handlebars-CarouselLinkToFullList">
-</span>
 
+<span class="BCK-LinkToFullList right" data-hb-template="Handlebars-CarouselLinkToFullList">
+</span>
 {% include "glados/base/PaginatedCollections/DefaultCarouselContent.html" %}

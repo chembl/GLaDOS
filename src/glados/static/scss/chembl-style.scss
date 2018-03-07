@@ -3209,6 +3209,13 @@ $facets-width-large: 21%;
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
+#SimilarCompoundsCard {
+    background-color: rgba(255, 0, 1, 0.39) !important;
+  .pagination{
+    background-color: rgba(255, 0, 1, 0.39) !important;
+  }
+}
+
 .paginated-collection {
   padding: 4px;
   .pg-table {
@@ -3566,3 +3573,4 @@ $facets-width-large: 21%;
 .all-sources-link {
   font-size: 80%;
 }
+
