@@ -3210,12 +3210,28 @@ $facets-width-large: 21%;
 */
 
 .carousel-container {
+  z-index: 5;
+
+  .items-container{
+    margin-bottom: 0;
+  }
+  .pagination{
+    margin: 0;
+  }
+
+  .chevron-container {
+    background-color: rgba(255, 205, 46, 0.7) !important;
+    z-index: 10;
+    position: absolute;
+    top:40%;
+    .page-selector {
+      background-color: rgba(255, 205, 46, 0.7) !important;
+    }
+  }
+
   background-color: rgba(255, 0, 1, 0.39) !important;
   .pagination {
-    background-color: rgba(255, 0, 1, 0.39) !important;
-  }
-  .carousel-footer {
-    background-color: rgba(255, 0, 1, 0.39) !important;
+    background-color: rgba(39, 255, 2, 0.39) !important;
   }
 }
 
