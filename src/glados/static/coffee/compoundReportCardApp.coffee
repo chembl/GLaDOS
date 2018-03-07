@@ -474,7 +474,21 @@ class CompoundReportCardApp extends glados.ReportCardApp
   @initSimilarCompounds = ->
 
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
-    similarCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewSimilaritySearchResultsListForCarousel()
+
+    console.log 'DEBUG'
+    alert 'DEBUG'
+    carouselConfig =
+      custom_available_page_sizes:
+        'SMALL_SCREEN': 1
+        'MEDIUM_SCREEN': 3
+        'LARGE_SCREEN': 6
+      custom_card_sizes:
+        small: 12
+        medium: 4
+        large: 2
+
+    similarCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory\
+    .getNewSimilaritySearchResultsListForCarousel(customConfig=carouselConfig)
     similarCompoundsList.initURL glados.Utils.URLS.getCurrentModelChemblID(), glados.Settings.DEFAULT_SIMILARITY_THRESHOLD
 
     viewConfig =
@@ -483,6 +497,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       title: "Compounds similar to #{chemblID} with at least 70% similarity:"
       full_list_url: CompoundReportCardApp.getCurrentCompound().getSimilaritySearchURL()
       hide_on_error: true
+      carousel_config: carouselConfig
 
     new glados.views.ReportCards.CarouselInCardView
       collection: similarCompoundsList
