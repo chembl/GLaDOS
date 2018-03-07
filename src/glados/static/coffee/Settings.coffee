@@ -243,6 +243,9 @@ glados.loadURLPaths = (request_root, app_root, static_root)->
 
   glados.Settings.OLD_DEFAULT_IMAGES_BASE_URL = 'https://www.ebi.ac.uk/chembl/compound/displayimage_large/'
 
+  glados.Settings.NEEDS_SHORTENING_REGEXP = \
+  new RegExp("#{glados.Settings.GLADOS_BASE_PATH_REL}#{glados.Settings.NO_SIDE_NAV_PLACEHOLDER}(/)?#")
+
 
 # Loads the GLaDOS Top S3cre7 data, do not remove or js calls to post method in the django server will fail
 glados.loadGLaDOSTopS3cre7 = ()->

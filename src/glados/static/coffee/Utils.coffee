@@ -615,15 +615,18 @@ glados.useNameSpace 'glados',
         if $anchor.attr('data-shortening-checked') != 'yes'
 
           href = $anchor.attr('href')
+          console.log 'needs shortening: ', @glados.Utils.URLS.URLNeedsShortening(href)
 
-          if href?
-            if href.length > glados.Settings.MAX_GENERATED_URL_LENGTH
-              console.log 'needs shortening: ', $anchor
-              console.log 'href:', href
-              console.log '^^^'
 
           $anchor.attr('data-shortening-checked', 'yes')
 
+      URLNeedsShortening: (url='') ->
+
+        if url.length > glados.Settings.MAX_GENERATED_URL_LENGTH
+          matches = url.match(glados.Settings.NEEDS_SHORTENING_REGEXP)
+          if matches?
+            return true
+        return false
 
       getCurrentModelChemblID: ->
 
