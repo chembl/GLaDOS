@@ -3210,34 +3210,26 @@ $facets-width-large: 21%;
 */
 
 .carousel-container {
-
-  .items-container{
-    margin-bottom: 0;
-  }
-  .pagination{
-    margin: 0;
-  }
+  position: relative;
 
   .chevron-container {
-    background-color: rgba(255, 205, 46, 0.7) !important;
     z-index: 10;
-    width: inherit;
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: -0.75rem !important;
-    margin-right: -0.75rem !important;
     position: absolute;
-    left: 0;
-    height: 80%;
-    .page-selector{
+    top: 40%;
+    left: 0.75em;
+    width: 100%;
+
+    .page-selector {
       background-color: rgba(39, 255, 2, 0.39) !important;
     }
-
   }
 
-  //.pagination {
-  //  background-color: rgba(39, 255, 2, 0.39) !important;
-  //}
+  .items-container {
+    margin-bottom: 0;
+  }
+  .pagination {
+    margin: 0;
+  }
 }
 
 .paginated-collection {
