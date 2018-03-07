@@ -61,6 +61,10 @@ $splash-color2: #FE7F9D;
   }
 }
 
+@keyframes ease-to-white {
+  0% { background-color: rgba(0, 0, 0, 0.9); }
+  100% { background-color: rgba(0, 0, 0, 0.4); }
+}
 
 #GladosMainSplashScreen {
   display: flex;
@@ -72,7 +76,8 @@ $splash-color2: #FE7F9D;
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.89);
+  animation: ease-to-white 3s 1 ease-in;
+  background-color: rgba(0, 0, 0, 0.4);
 
   .splash-card {
     width: 30%;
