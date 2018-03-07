@@ -54,6 +54,10 @@ glados.getScreenType = ->
 glados.useNameSpace 'glados',
   Settings:
     MAX_GENERATED_URL_LENGTH: 1000
+    URL_SHORTENING_STATUSES:
+      REQUESTING_HASH: 'REQUESTING_HASH'
+      REQUESTING_ERROR: 'REQUESTING_ERROR'
+      SUCCESS: 'SUCCESS'
     PIECHARTS:
       MAX_CATEGORIES: 10
     VIS_COLORS:
@@ -246,6 +250,8 @@ glados.loadURLPaths = (request_root, app_root, static_root)->
   glados.Settings.NEEDS_SHORTENING_REGEXP = \
   new RegExp("#{glados.Settings.GLADOS_BASE_PATH_REL}#{glados.Settings.NO_SIDE_NAV_PLACEHOLDER}(/)?#")
 
+  glados.Settings.SHORTENING_MATCH_REPEXG = new RegExp("#.*$")
+
 
 # Loads the GLaDOS Top S3cre7 data, do not remove or js calls to post method in the django server will fail
 glados.loadGLaDOSTopS3cre7 = ()->
@@ -284,12 +290,15 @@ glados.loadSearchResultsURLS = ()->
   glados.Settings.SEARCH_RESULTS_ES_PATH_REGEX = '(?:/('+elastic_search_paths.join('|')+'))?'
 
   glados.Settings.SEARCH_RESULTS_PARSER_ENDPOINT = 'search_results_parser'
+  glados.Settings.SHORTEN_URLS_ENDPOINT = 'shorten_url'
+  glados.Settings.SHORTEN_URLS_URL = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{glados.Settings.SHORTEN_URLS_ENDPOINT}"
+  glados.Settings.SHORTENED_URL_GENERATOR =
+  Handlebars.compile("#{glados.Settings.GLADOS_BASE_PATH_REL}#{glados.Settings.NO_SIDE_NAV_PLACEHOLDER}/tiny/{{{hash}}}")
 
   glados.Settings.SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_BASE_PATH_REL+'g/#search_results'
   glados.Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH = 'advanced_search'
   glados.Settings.SEARCH_RESULT_URL_REGEXP = new RegExp(glados.Settings.SEARCH_RESULTS_PAGE+'.*')
 
-  console.log 'going to set up template in settings'
   glados.Settings.ENTITY_BROWSERS_URL_TEMPLATE = "#{glados.Settings.GLADOS_BASE_PATH_REL}" + glados.Settings.NO_SIDE_NAV_PLACEHOLDER+ "/#browse/{{entity}}{{#if filter}}/filter/{{filter}}{{/if}}"
   glados.Settings.ENTITY_BROWSERS_URL_GENERATOR = Handlebars.compile(glados.Settings.ENTITY_BROWSERS_URL_TEMPLATE)
 

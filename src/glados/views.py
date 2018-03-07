@@ -164,12 +164,10 @@ def shorten_url(request):
 
    if request.method == "POST":
 
-      req_data = json.loads(request.body.decode('utf-8'))
       short_url = url_shortener.shorten_url(request.body.decode('utf-8'))
 
       resp_data = {
-        'long_url': req_data['long_url'],
-        'short_url': short_url
+        'hash': short_url
       }
       return JsonResponse(resp_data)
 

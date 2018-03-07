@@ -1,9 +1,11 @@
 import hashlib
+import base64
 
 #given a long url, it shortens it and saves it in elastic, it returns the hash obtained
 def shorten_url(long_url):
 
-  short_url = hashlib.sha256(long_url.encode('utf-8')).hexdigest()
+  hex_digest = hashlib.md5(long_url.encode('utf-8')).digest()
+  short_url = base64.b64encode(hex_digest).decode('utf-8')
   # save this in elastic
 
   return short_url
