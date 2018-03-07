@@ -100,11 +100,14 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     hideFooter: ->
 
       $elem = $(@el).find('.BCK-footer-container')
+      $elemChevrons = $(@el).find('.BCK-chevrons-container')
       if $elem.length == 0
         return
 
       $elem.addClass('row-hidden')
+      $elemChevrons.addClass('row-hidden')
       $elem.hide()
+      $elemChevrons.hide()
 
     fillPaginators: ->
 

@@ -3233,13 +3233,17 @@ $facets-width-large: 21%;
     }
   }
 
-  .items-container {
+  .items-container{
     margin-bottom: 0;
     margin-left: 30px;
     margin-right: 30px;
   }
   .pagination {
     margin: 0;
+  }
+
+  .number-of-results {
+    margin-left: 30px !important;
   }
 }
 

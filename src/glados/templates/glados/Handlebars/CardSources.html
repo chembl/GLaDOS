@@ -219,18 +219,22 @@
 
 
 <script id="Handlebars-Common-Carousel-UL" type="text/x-handlebars-template">
-     <ul class="col s12 pagination center-align">
-            {{#if show_previous_ellipsis}}
-            <li class="disabled">...</li>
-            {{/if}}
-            {{#each pages}}
-            <li class="waves-effect page-selector active" data-page='{{this}}'><a>{{this}}</a></li>
-            {{/each}}
-            {{#if show_next_ellipsis}}
-            <li class="disabled">...</li>
-            {{/if}}
-            </li>
-        </ul>
+    <div class="col s12 m4 l6 number-of-results">
+        Showing {{records_showing}} out of {{total_records}} records
+    </div>
+
+    <ul class="col s12 pagination center-align">
+        {{#if show_previous_ellipsis}}
+        <li class="disabled">...</li>
+        {{/if}}
+        {{#each pages}}
+        <li class="waves-effect page-selector active" data-page='{{this}}'><a>{{this}}</a></li>
+        {{/each}}
+        {{#if show_next_ellipsis}}
+        <li class="disabled">...</li>
+        {{/if}}
+        </li>
+    </ul>
 
 </script>
 
