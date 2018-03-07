@@ -3209,9 +3209,12 @@ $facets-width-large: 21%;
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
-#SimilarCompoundsCard {
+.carousel-container {
+  background-color: rgba(255, 0, 1, 0.39) !important;
+  .pagination {
     background-color: rgba(255, 0, 1, 0.39) !important;
-  .pagination{
+  }
+  .carousel-footer {
     background-color: rgba(255, 0, 1, 0.39) !important;
   }
 }

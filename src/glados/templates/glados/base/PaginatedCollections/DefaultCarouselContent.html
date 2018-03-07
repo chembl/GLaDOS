@@ -1,31 +1,27 @@
-
 <div class='BCK-PreloaderContainer row'>
-  {% block comp_card_loaders %}
-  {% include "glados/base/card_loaders.html" %}
-  {% endblock %}
+    {% block comp_card_loaders %}
+        {% include "glados/base/card_loaders.html" %}
+    {% endblock %}
 </div>
 
 <div class='BCK-SuggestedLabel row' style="display: none">
-  <h5>No records were found. However, we found the following similar results:</h5>
+    <h5>No records were found. However, we found the following similar results:</h5>
 </div>
 
 <div class='BCK-EmptyListMessage row' style="display: none">
-  <h5>No records were found.</h5>
+    <h5>No records were found.</h5>
 </div>
 
-<div class='BCK-items-container row' data-hb-template="Handlebars-Common-Paginated-Card-Carousel"
-     style="display: none">
+<div class="carousel-container">
+    <div class='BCK-items-container row' data-hb-template="Handlebars-Common-Paginated-Card-Carousel"
+         style="display: none">
 
-  <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+        <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
 
-</div>
+    </div>
 
-<div class="BCK-footer-container row" style="display: none">
+    <div class='BCK-paginator-container' data-hb-template="Handlebars-Common-Carousel-UL">
 
-  <div class='BCK-paginator-container' data-hb-template="Handlebars-Common-Paginated-UL">
-
-    <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
-
-  </div>
-
+        <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+    </div>
 </div>

@@ -198,7 +198,7 @@
 <script id="Handlebars-Common-Paginated-Card-Carousel" type="text/x-handlebars-template">
 
     <div class="col s12 m6 l4">
-        <div class="card grey lighten-5">
+        <div class="card blue lighten-5">
 
             {{#if img_url}}
                 <div class="white card-image">
@@ -213,6 +213,32 @@
 
             </div>
         </div>
+
+    </div>
+
+</script>
+
+
+<script id="Handlebars-Common-Carousel-UL" type="text/x-handlebars-template">
+
+    <div class="col s12 m8 l6">
+        <ul class="pagination">
+
+
+            {{#if show_previous_ellipsis}}
+            <li class="disabled">...</li>
+            {{/if}}
+
+            {{#each pages}}
+            <li class="waves-effect page-selector active" data-page='{{this}}'><a>{{this}}</a></li>
+            {{/each}}
+            {{#if show_next_ellipsis}}
+            <li class="disabled">...</li>
+            {{/if}}
+
+            <li class="waves-effect page-selector" data-page='next'><a><i class="material-icons">chevron_right</i></a>
+            </li>
+        </ul>
 
     </div>
 
