@@ -3219,7 +3219,6 @@ $facets-width-large: 21%;
     left: 0.75em;
     width: 100%;
     .page-selector {
-
       i {
         border-radius: 100%;
         transition: all 100ms ease-in-out;
@@ -3240,6 +3239,9 @@ $facets-width-large: 21%;
   }
   .pagination {
     margin: 0;
+    a {
+      font-size: 1em;
+    }
   }
 
   .number-of-results {
