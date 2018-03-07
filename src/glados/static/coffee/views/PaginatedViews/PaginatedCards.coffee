@@ -10,7 +10,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       defaultPageSize = @collection.getMeta('default_page_size')
       if defaultPageSize?
         @currentPageSize = defaultPageSize
-      else
         @currentPageSize = @getPageSizeAccordingToZoom()
 
     #-------------------------------------------------------------------------------------------------------------------
