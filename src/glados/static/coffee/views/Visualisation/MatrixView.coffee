@@ -1049,7 +1049,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     # Open in full screen
     # --------------------------------------
-    $(@el).find('.BCK-open-full-screen').click -> window.open(thisView.model.getLinkToFullScreen())
+    $(@el).find('.BCK-open-full-screen').click ->
+      glados.Utils.URLS.shortenLinkIfTooLongAndOpen(thisView.model.getLinkToFullScreen())
     # --------------------------------------
     # colour property selector
     # --------------------------------------

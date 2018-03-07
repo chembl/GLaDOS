@@ -611,6 +611,25 @@ glados.useNameSpace 'glados',
           model.fetch()
 
     URLS:
+      shortenLinkIfTooLongAndOpen: (url) ->
+
+        if glados.Utils.URLS.URLNeedsShortening(url)
+
+          urlToShorten = url.match(glados.Settings.SHORTENING_MATCH_REPEXG)[0]
+
+          paramsDict =
+            long_url: urlToShorten
+
+          shortenURL = glados.doCSRFPost(glados.Settings.SHORTEN_URLS_ENDPOINT, paramsDict)
+          shortenURL.then (data) ->
+            newHref = glados.Settings.SHORTENED_URL_GENERATOR
+                hash: data.hash
+            window.open newHref
+
+        else
+
+          window.open url
+
       shortenHTMLLinkIfNecessary: ($anchor) ->
         if $anchor.attr('data-shortening-checked') != 'yes'
 
@@ -622,7 +641,6 @@ glados.useNameSpace 'glados',
             $anchor.click(glados.Utils.URLS.handleShortenedAnchorClick)
 
             urlToShorten = href.match(glados.Settings.SHORTENING_MATCH_REPEXG)[0]
-
             paramsDict =
               long_url: urlToShorten
 
