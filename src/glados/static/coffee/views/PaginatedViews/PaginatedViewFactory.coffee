@@ -55,7 +55,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         type: glados.views.PaginatedViews.PaginatedViewFactory.CARDS_TYPE
         custom_render_evts: customRenderEvents
 
-    getNewCardsCarouselView: (collection, el, customRenderEvents)->
+    getNewCardsCarouselView: (collection, el, customRenderEvents, config)->
 
       View = glados.views.PaginatedViews.PaginatedViewFactory.Carousel
 
@@ -64,6 +64,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         el: el
         type: glados.views.PaginatedViews.PaginatedViewFactory.CAROUSEL_TYPE
         custom_render_evts: customRenderEvents
+        config: config
 
     getNewInfinitePaginatedView: (collection, el, customRenderEvents)->
 
