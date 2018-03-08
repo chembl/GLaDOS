@@ -615,7 +615,6 @@ glados.useNameSpace 'glados',
 
         if glados.Utils.URLS.URLNeedsShortening(url)
 
-          console.log 'needs shortening!'
           $('#GladosMainSplashScreen').show()
           urlToShorten = url.match(glados.Settings.SHORTENING_MATCH_REPEXG)[0]
 
@@ -624,19 +623,34 @@ glados.useNameSpace 'glados',
 
           shortenURL = glados.doCSRFPost(glados.Settings.SHORTEN_URLS_ENDPOINT, paramsDict)
           shortenURL.then (data) ->
-            newHref = glados.Settings.SHORTENED_URL_GENERATOR
-                hash: data.hash
 
-            # wait some seconds to allow elastic to save the data.
+            hashGot = data.hash
+            newHref = glados.Settings.SHORTENED_URL_GENERATOR
+                hash: hashGot
+
+            # check until I am sure that the has is accessible
             openLink = ->
               $('#GladosMainSplashScreen').hide()
-              console.log 'new href is: ', newHref
               window.open newHref
 
-            setTimeout openLink, 1000
+            openIfReady = (data) ->
+
+
+              if data.long_url?
+                setTimeout openLink, 2000
+              else
+                setTimeout ->
+                  checkIfURLReady = $.getJSON("#{glados.Settings.EXTEND_URLS_ENDPOINT_URL}/#{hashGot}")
+                  checkIfURLReady.then openIfReady
+                , 1000
+
+            checkIfURLReady = $.getJSON("#{glados.Settings.EXTEND_URLS_ENDPOINT_URL}/#{hashGot}")
+            checkIfURLReady.then openIfReady
+
+
+
 
         else
-          console.log 'doesnt need shortening!'
           window.open url
 
       shortenHTMLLinkIfNecessary: ($anchor) ->

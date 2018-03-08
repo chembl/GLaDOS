@@ -291,7 +291,9 @@ glados.loadSearchResultsURLS = ()->
 
   glados.Settings.SEARCH_RESULTS_PARSER_ENDPOINT = 'search_results_parser'
   glados.Settings.SHORTEN_URLS_ENDPOINT = 'shorten_url'
+  glados.Settings.EXTEND_URLS_ENDPOINT = 'extend_url'
   glados.Settings.SHORTEN_URLS_URL = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{glados.Settings.SHORTEN_URLS_ENDPOINT}"
+  glados.Settings.EXTEND_URLS_ENDPOINT_URL = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{glados.Settings.EXTEND_URLS_ENDPOINT}"
   glados.Settings.SHORTENED_URL_GENERATOR =
   Handlebars.compile("#{glados.Settings.GLADOS_BASE_PATH_REL}#{glados.Settings.NO_SIDE_NAV_PLACEHOLDER}/tiny/{{{hash}}}")
 

@@ -174,6 +174,15 @@ def shorten_url(request):
   else:
     return JsonResponse({'error': 'this is only available via POST'})
 
+def extend_url(request, hash):
+
+  resp_data = {
+    'long_url': url_shortener.get_original_url(hash)
+  }
+
+  return JsonResponse(resp_data)
+
+
 def wizard_step_json(request, step_id):
   """
   :param request: http request
