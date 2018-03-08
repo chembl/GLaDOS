@@ -3246,6 +3246,10 @@ $facets-width-large: 21%;
     margin-bottom: 0;
     margin-left: 30px;
     margin-right: 30px;
+
+    .p-oneline a {
+        font-size: 0.9rem;
+    }
   }
   .pagination {
     margin: 0;
