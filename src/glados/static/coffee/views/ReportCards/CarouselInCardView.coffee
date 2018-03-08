@@ -5,7 +5,6 @@ glados.useNameSpace 'glados.views.ReportCards',
 
       CardView.prototype.initialize.call(@, arguments)
       @config = arguments[0].config
-      carouselConfig =  @config.carousel_config
 
       @collection.on 'reset', @.render, @
 
@@ -15,8 +14,7 @@ glados.useNameSpace 'glados.views.ReportCards',
         @collection.on 'error', @.showCompoundErrorCard, @
 
       @resource_type = arguments[0].resource_type
-      @paginatedView = glados.views.PaginatedViews.PaginatedViewFactory.getNewCardsCarouselView(@collection, @el,
-      undefined, carouselConfig)
+      @paginatedView = glados.views.PaginatedViews.PaginatedViewFactory.getNewCardsCarouselView(@collection, @el)
 
       @initEmbedModal(@config.embed_section_name, @config.embed_identifier)
       @activateModals()

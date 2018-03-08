@@ -9,9 +9,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     initialize: ->
 
-      @config = arguments[0].config
-      @config ?= {}
-
       # @collection - must be provided in the constructor call
       @include_search_results_highlight = @attributes?.include_search_results_highlight || false
       @type = arguments[0].type
@@ -245,7 +242,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           selection_disabled: @disableItemsSelection
           columns_by_comparator: columnsByComparator
 
-        if (@isCards() or @isInfinite() or @isCarousel())
+        if (@isCards() or @isInfinite())
           templateParams.small_size = @CURRENT_CARD_SIZES.small
           templateParams.medium_size = @CURRENT_CARD_SIZES.medium
           templateParams.large_size = @CURRENT_CARD_SIZES.large

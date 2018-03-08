@@ -440,14 +440,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return list
 
-    getNewSimilaritySearchResultsListForCarousel: (customConfig={}) ->
+    getNewSimilaritySearchResultsListForCarousel: ->
       config = glados.models.paginatedCollections.Settings.WS_COLLECTIONS.COMPOUND_WS_RESULTS_LIST_CAROUSEL
-
-      if customConfig.custom_available_page_sizes?
-        config.DEFAULT_PAGE_SIZE = customConfig.custom_available_page_sizes[GlobalVariables.CURRENT_SCREEN_TYPE]
-      else
-        config.DEFAULT_PAGE_SIZE = glados.Settings.DEFAULT_CAROUSEL_SIZES[GlobalVariables.CURRENT_SCREEN_TYPE]
-
+      config.DEFAULT_PAGE_SIZE = glados.Settings.DEFAULT_CAROUSEL_SIZES[GlobalVariables.CURRENT_SCREEN_TYPE]
       list = @getNewWSCollectionFor config
 
       list.initURL = (term, percentage) ->

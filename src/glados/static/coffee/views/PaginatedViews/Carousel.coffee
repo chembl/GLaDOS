@@ -3,16 +3,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     initAvailablePageSizes: ->
 
-      if @config.custom_available_page_sizes?
-        @AVAILABLE_PAGE_SIZES = @config.custom_available_page_sizes
-        @currentPageSize = @AVAILABLE_PAGE_SIZES[GlobalVariables.CURRENT_SCREEN_TYPE]
-
-      if @config.custom_card_sizes?
-        @CURRENT_CARD_SIZES = @config.custom_card_sizes
-
-      else
-        @AVAILABLE_PAGE_SIZES ?= (size for key, size of glados.Settings.DEFAULT_CAROUSEL_SIZES)
-        @currentPageSize = glados.Settings.DEFAULT_CAROUSEL_SIZES[GlobalVariables.CURRENT_SCREEN_TYPE]
+      @AVAILABLE_PAGE_SIZES = (size for key, size of glados.Settings.DEFAULT_CAROUSEL_SIZES)
+      @currentPageSize = glados.Settings.DEFAULT_CAROUSEL_SIZES[GlobalVariables.CURRENT_SCREEN_TYPE]
 
       f = (newPageSize) ->
         @currentPageSize = newPageSize
