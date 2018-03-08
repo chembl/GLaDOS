@@ -18,15 +18,12 @@ glados.useNameSpace 'glados.views.ReportCards',
         return
 
       propertiesToShow = @config.properties_to_show
-
-
       [columnsWithValues, highlights] = glados.Utils.getColumnsWithValuesAndHighlights(propertiesToShow, @model)
       protertiesWithValuesIndex = _.indexBy(columnsWithValues, 'template_id')
 
-
       if @config.sort_alpha
 
-        for property, i in propertiesToShow
+        for property in propertiesToShow
 
           if property.id = @config.property_id_to_sort
             valueNames = protertiesWithValuesIndex[property.id].value
