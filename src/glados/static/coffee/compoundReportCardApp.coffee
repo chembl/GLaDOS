@@ -492,7 +492,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     viewConfig =
       embed_section_name: 'similar'
       embed_identifier: chemblID
-      title: "Compounds similar to #{chemblID} with at least 70% similarity:"
+      title: "Compounds similar to #{chemblID} with at least 85% similarity:"
       full_list_url: CompoundReportCardApp.getCurrentCompound().getSimilaritySearchURL()
       hide_on_error: true
       carousel_config: carouselConfig

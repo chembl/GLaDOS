@@ -6,8 +6,8 @@
 
             <div class="col l6 m12 s12 tall">
 
-                    {% with is_dynamic=True %}
-                    {% include "glados/MainPageParts/TargetBrowserParts/browse_as_circles.html" %}
+                    {% with is_dynamic=False %}
+                    {% include "glados/MainPageParts/Visualizations/YourIdeaHereCard.html" %}
                     {% endwith %}
 
             </div>
@@ -15,7 +15,7 @@
             <div class="col l6 m12 s12 ppy tall">
 
                     {% with is_dynamic=True %}
-                    {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
+                    {% include "glados/MainPageParts/TargetBrowserParts/browse_as_circles.html" %}
                     {% endwith %}
 
             </div>
@@ -29,8 +29,8 @@
             </div>
             <div class="col l6 m12 s12">
 
-                    {% with is_dynamic=False %}
-                    {% include "glados/MainPageParts/Visualizations/YourIdeaHereCard.html" %}
+                    {% with is_dynamic=True %}
+                    {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
                     {% endwith %}
 
             </div>
