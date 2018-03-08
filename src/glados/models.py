@@ -82,5 +82,9 @@ class WizardOption(models.Model):
   type = models.ForeignKey(WizardOptionType)
   image_url = models.CharField(max_length=400)
 
+class TiryURL(models.Model):
+
+  long_url = models.TextField()
+  hash = models.CharField(max_length=100)
 
 
