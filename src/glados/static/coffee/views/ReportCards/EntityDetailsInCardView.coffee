@@ -20,6 +20,11 @@ glados.useNameSpace 'glados.views.ReportCards',
       propertiesToShow = @config.properties_to_show
       [columnsWithValues, highlights] = glados.Utils.getColumnsWithValuesAndHighlights(propertiesToShow, @model)
       protertiesWithValuesIndex = _.indexBy(columnsWithValues, 'template_id')
+
+      if @config.sort_alpha
+        valueNames = protertiesWithValuesIndex[propertiesToShow[0].id].value
+        valueNames.sort()
+
       $containerElem = $(@el).find('.BCK-Details-Container')
       glados.Utils.fillContentForElement $containerElem, protertiesWithValuesIndex
 
