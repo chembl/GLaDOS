@@ -1,4 +1,5 @@
 from django.db import models
+from .es_models import TinyURLIndex
 
 
 class Acknowledgement(models.Model):
@@ -86,5 +87,14 @@ class TinyURL(models.Model):
 
   long_url = models.TextField()
   hash = models.CharField(max_length=100)
+
+  def indexing(self):
+    obj = TinyURLIndex(
+      meta={'id': self.id},
+      long_url=self.long_url,
+      hash=self.hash,
+    )
+    obj.save()
+    return obj.to_dict(include_meta=True)
 
 

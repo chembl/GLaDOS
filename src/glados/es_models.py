@@ -4,7 +4,10 @@ from elasticsearch.helpers import bulk
 from elasticsearch import Elasticsearch
 from . import models
 
-connections.create_connection()
+ELASTICSEARCH_HOST = 'https://wwwdev.ebi.ac.uk/chembl/glados-es/__secret/'
+ELASTICSEARCH_USERNAME = 'GLaDOS'
+ELASTICSEARCH_PASSWORD = 'GLaDOS ToP S3CRe7'
+connections.create_connection(hosts=[ELASTICSEARCH_HOST], http_auth=(ELASTICSEARCH_USERNAME, ELASTICSEARCH_PASSWORD))
 
 class TinyURLIndex(DocType):
   long_url = Text()
@@ -13,18 +16,7 @@ class TinyURLIndex(DocType):
   class Meta:
     index = 'chembl_glados_tiny_url'
 
-  def indexing(self):
-    obj = BlogPostIndex(
-      meta={'id': self.id},
-      author=self.author.username,
-      posted_date=self.posted_date,
-      title=self.title,
-      text=self.text
-    )
-    obj.save()
-    return obj.to_dict(include_meta=True)
-
 def bulk_indexing():
-  TinyURL.init()
+  TinyURLIndex.init()
   es = Elasticsearch()
   bulk(client=es, actions=(b.indexing() for b in models.TinyURL.objects.all().iterator()))
