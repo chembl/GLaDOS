@@ -19,13 +19,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         @collection.resetPageSize(newPageSize)
 
       resetPageSizeProxy = $.proxy(f, @)
-      thisView = @
       $(window).resize ->
         if GlobalVariables.CURRENT_SCREEN_TYPE_CHANGED
-          if thisView.config.custom_available_page_sizes?
-            resetPageSizeProxy thisView.AVAILABLE_PAGE_SIZES[GlobalVariables.CURRENT_SCREEN_TYPE]
-          else
-            resetPageSizeProxy glados.Settings.DEFAULT_CAROUSEL_SIZES[GlobalVariables.CURRENT_SCREEN_TYPE]
+          resetPageSizeProxy glados.Settings.DEFAULT_CAROUSEL_SIZES[GlobalVariables.CURRENT_SCREEN_TYPE]
 
     renderViewState: ->
 
