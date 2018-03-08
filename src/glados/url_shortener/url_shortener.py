@@ -1,6 +1,6 @@
 import hashlib
 import base64
-from glados.es_models import TinyURL
+from glados.es_models import TinyURLIndex
 
 
 #given a long url, it shortens it and saves it in elastic, it returns the hash obtained
