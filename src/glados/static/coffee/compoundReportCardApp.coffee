@@ -114,6 +114,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
           return true
       properties_to_show: Compound.COLUMNS_SETTINGS.COMPOUND_SOURCES_SECTION
       sort_alpha: true
+      property_id_to_sort: 'compound_sources_list'
 
     new glados.views.ReportCards.EntityDetailsInCardView
       model: compound
