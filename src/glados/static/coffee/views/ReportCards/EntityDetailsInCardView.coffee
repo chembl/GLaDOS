@@ -7,16 +7,13 @@ glados.useNameSpace 'glados.views.ReportCards',
       @model.on 'change', @.render, @
       @model.on 'error', @.showCompoundErrorCard, @
       @resource_type = 'Compound'
-
       @initEmbedModal(@config.embed_section_name, @config.embed_identifier)
       @activateModals()
-
+      
     render: ->
-
       show = @config.show_if(@model)
       if not show
         return
-
       propertiesToShow = @config.properties_to_show
       [columnsWithValues, highlights] = glados.Utils.getColumnsWithValuesAndHighlights(propertiesToShow, @model)
       protertiesWithValuesIndex = _.indexBy(columnsWithValues, 'template_id')
