@@ -10,3 +10,4 @@ watchdog
 whitenoise
 requests
 python-gettext
+elasticsearch-dsl>=6.1.0
