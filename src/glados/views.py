@@ -159,20 +159,20 @@ def render_params_from_hash(request, hash):
   }
   return render(request, 'glados/mainGladosNoBar.html', context)
 
-@csrf_exempt
 def shorten_url(request):
 
-   if request.method == "POST":
+  if request.method == "POST":
+    long_url = request.POST.get('long_url', '')
+    short_url = url_shortener.shorten_url(long_url)
 
-      short_url = url_shortener.shorten_url(request.body.decode('utf-8'))
+    print('short_url', short_url)
+    resp_data = {
+      'hash': short_url
+    }
+    return JsonResponse(resp_data)
 
-      resp_data = {
-        'hash': short_url
-      }
-      return JsonResponse(resp_data)
-
-   else:
-      return JsonResponse({'error': 'this is only available via POST'})
+  else:
+    return JsonResponse({'error': 'this is only available via POST'})
 
 def wizard_step_json(request, step_id):
   """
