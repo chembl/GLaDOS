@@ -3213,26 +3213,36 @@ $facets-width-large: 21%;
 * --------------------------------------------
 */
 
+$chevron-button-size: 40px;
+
 .carousel-container {
   position: relative;
 
   .chevron-container {
     z-index: 10;
     position: absolute;
-    top: 40%;
+    top: 30%;
     left: 0.75em;
     width: 100%;
 
     .page-selector {
-      i {
-        border-radius: 100%;
-        transition: all 100ms ease-in-out;
-        color: #848484;
-        font-size: 2em;
-      }
-      i:hover {
-        transition: all 100ms ease-in-out;
-        color: #444;
+      background-color: rgba(255, 0, 0, 0.24) !important;
+      height: $chevron-button-size * 2;
+      width: $chevron-button-size;
+      border-radius: 80px 0 0 80px;
+
+      a {
+        height: 2.5em;
+
+        i {
+          transition: all 100ms ease-in-out;
+          color: #848484;
+          font-size: 2.5em;
+        }
+        i:hover {
+          transition: all 100ms ease-in-out;
+          color: #444;
+        }
       }
     }
 
@@ -3579,12 +3589,12 @@ $facets-width-large: 21%;
 */
 .tall {
   .visualisation-card {
-    height: 60vh;
+    height: 55vh;
   }
 }
 
 .visualisation-card {
-  height: 40vh;
+  height: 45vh;
   .card-content {
     padding: 5px;
     height: 100%;
@@ -3629,3 +3639,8 @@ $facets-width-large: 21%;
   font-size: 80%;
 }
 
+.about-chembl{
+  p{
+    margin: 0 10px 0 20px !important;
+  }
+}
