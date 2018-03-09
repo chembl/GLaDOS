@@ -3,11 +3,13 @@ from elasticsearch_dsl import DocType, Text
 from elasticsearch.helpers import bulk
 from elasticsearch import Elasticsearch
 from . import models
+from django.conf import settings
 
-ELASTICSEARCH_HOST = 'https://wwwdev.ebi.ac.uk/chembl/glados-es/__secret/'
-ELASTICSEARCH_USERNAME = 'GLaDOS'
-ELASTICSEARCH_PASSWORD = 'GLaDOS ToP S3CRe7'
-connections.create_connection(hosts=[ELASTICSEARCH_HOST], http_auth=(ELASTICSEARCH_USERNAME, ELASTICSEARCH_PASSWORD))
+if settings.ELASTICSEARCH_PASSWORD == None:
+  connections.create_connection(hosts=[settings.ELASTICSEARCH_HOST])
+else:
+  connections.create_connection(hosts=[settings.ELASTICSEARCH_HOST],
+                              http_auth=(settings.ELASTICSEARCH_USERNAME, settings.ELASTICSEARCH_PASSWORD))
 
 class TinyURLIndex(DocType):
   long_url = Text()
