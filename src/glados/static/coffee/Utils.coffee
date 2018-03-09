@@ -519,7 +519,6 @@ glados.useNameSpace 'glados',
       cssTooltippedOnOverflownOnly: (element)->
         $elem = $(element)
         checkedWidth = parseInt($elem.attr('css-tooltipped-checked-width') || '0')
-        console.warn($elem.width(), checkedWidth, $elem.width() == checkedWidth)
         if $elem.width() != checkedWidth
           $elem.removeClass 'active-tooltip'
           ellipsisElem = $elem.find('.p-oneline')[0]
