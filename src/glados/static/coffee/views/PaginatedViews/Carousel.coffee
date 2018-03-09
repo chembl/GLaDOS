@@ -33,7 +33,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       mustComplicate = @collection.getMeta('complicate_cards_view')
       @isComplicated = isDefaultZoom and mustComplicate
 
-      @clearContentContainer()
+#      @clearContentContainer()
 
       @fillSelectAllContainer() unless @disableItemsSelection
       @fillPaginators()
