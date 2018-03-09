@@ -8,9 +8,7 @@ from django.conf import settings
 from glados.utils import *
 from django.core.cache import cache
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
 import glados.url_shortener.url_shortener as url_shortener
-import json
 
 
 # Returns all acknowledgements grouped by current and old
