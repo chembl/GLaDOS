@@ -43,13 +43,13 @@ glados.useNameSpace 'glados.routers',
         glados.routers.MainGladosRouter._instance = new glados.routers.MainGladosRouter
       return glados.routers.MainGladosRouter._instance
 
-    getSearchURL: (esEntity, searchTerm, currentState)->
+    getSearchURL: (esEntityKey, searchTerm, currentState)->
       tab = 'all'
-      if esEntity? and _.has(glados.Settings.ES_KEY_2_SEARCH_PATH, esEntity)
-        tab = glados.Settings.ES_KEY_2_SEARCH_PATH[esEntity]
+      if esEntityKey? and _.has(glados.Settings.ES_KEY_2_SEARCH_PATH, esEntityKey)
+        tab = glados.Settings.ES_KEY_2_SEARCH_PATH[esEntityKey]
       url = "#{glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL}/search_results/#{tab}"
       if searchTerm?
-       url += "/query/#{searchTerm}"
+       url += "/query/" + encodeURIComponent(searchTerm)
       if currentState?
        url += "/state/#{currentState}"
       return url
@@ -61,7 +61,7 @@ glados.useNameSpace 'glados.routers',
         tab = 'all'
       fragment = "search_results/#{tab}"
       if searchTerm?
-       fragment += "/query/#{searchTerm}"
+       fragment += "/query/" + encodeURIComponent(searchTerm)
       if state?
        fragment += "/state/#{state}"
       glados.routers.MainGladosRouter.getInstance().navigate(fragment)
