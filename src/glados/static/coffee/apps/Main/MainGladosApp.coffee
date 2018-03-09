@@ -25,6 +25,29 @@ glados.useNameSpace 'glados.apps.Main',
       else
         Backbone.history.start()
 
+    @setUpLinkShortenerListener = (containerElem) ->
+
+      mutationCallback = (mutationsList) ->
+
+        for mutation in mutationsList
+          addedNodes = mutation.addedNodes
+          for node in addedNodes
+            $node = $(node)
+            # check for the current added node
+            isAnchor = node.nodeName == 'A'
+            if isAnchor
+              glados.Utils.URLS.shortenHTMLLinkIfNecessary($node)
+
+            # and also check for check for the added node's descendants
+            $node.find('a').each (index) -> glados.Utils.URLS.shortenHTMLLinkIfNecessary($(@))
+
+      mutObserver = new MutationObserver(mutationCallback)
+      observationConfig =
+        childList: true
+        subtree: true
+
+      mutObserver.observe(containerElem, observationConfig)
+
     @prepareContentFor = (pageName, templateParams={}) ->
 
       #make sure splash screen is shown, specially useful when it changes urls without using the server
@@ -32,6 +55,7 @@ glados.useNameSpace 'glados.apps.Main',
       templateName = @baseTemplates[pageName]
       $gladosMainContent = $('#GladosMainContent')
       $gladosMainContent.empty()
+      @setUpLinkShortenerListener($gladosMainContent[0])
 
       glados.Utils.fillContentForElement($gladosMainContent, templateParams, templateName)
 #      @hideMainSplashScreen()

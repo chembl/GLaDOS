@@ -137,7 +137,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       .append('g')
         .attr('class', 'arc')
         .attr('transform', 'translate(' + X_CENTER + ', ' + Y_CENTER + ')')
-        .on('click', (d) -> window.open d.link)
+        .on('click', (d) -> glados.Utils.URLS.shortenLinkIfTooLongAndOpen d.link)
 
     arcs.append('path')
       .attr('fill', (d) -> color(d.key))
@@ -234,7 +234,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
         .append('g')
           .attr('class', 'sub-arc')
           .attr('transform', 'translate(' + X_CENTER + ', ' + Y_CENTER + ')')
-          .on('click', (d) -> window.open d.link )
+          .on('click', (d) -> glados.Utils.URLS.shortenLinkIfTooLongAndOpen d.link )
           .attr('fill', (d) ->
             if d.key == 'Other'
               glados.Settings.VIS_COLORS.GREY2
@@ -321,7 +321,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('y', TITLE_Y)
       .attr('text-anchor', 'middle')
       .classed('title', 'true')
-      .on('click', -> window.open thisView.config.title_link_url)
+      .on('click', -> glados.Utils.URLS.shortenLinkIfTooLongAndOpen thisView.config.title_link_url)
 
 # -----------------------------------------------------------------------------------------------------------------
 # RENDER SIMPLE PIE
@@ -382,5 +382,5 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     pieDiv.on('plotly_click', (eventInfo) ->
       clickedKey = eventInfo.points[0].label
       link = bucketsIndex[clickedKey].link
-      window.open(link)
+      glados.Utils.URLS.shortenLinkIfTooLongAndOpen(link)
     )

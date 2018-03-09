@@ -816,7 +816,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
       .text(@NUM_COLUMNS + ' ' + @config.cols_entity_name)
       .classed('columns-text', true)
       .attr('text-anchor', 'middle')
-      .on('click', -> window.open(thisView.model.getLinkToAllColumns()))
+      .on('click', -> glados.Utils.URLS.shortenLinkIfTooLongAndOpen(thisView.model.getLinkToAllColumns()))
 
     corner1G.append('text')
       .text(@NUM_ROWS + ' ' + @config.rows_entity_name)
@@ -1049,7 +1049,8 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     # --------------------------------------
     # Open in full screen
     # --------------------------------------
-    $(@el).find('.BCK-open-full-screen').click -> window.open(thisView.model.getLinkToFullScreen())
+    $(@el).find('.BCK-open-full-screen').click ->
+      glados.Utils.URLS.shortenLinkIfTooLongAndOpen(thisView.model.getLinkToFullScreen())
     # --------------------------------------
     # colour property selector
     # --------------------------------------
@@ -1700,10 +1701,10 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
   #---------------------------------------------------------------------------------------------------------------------
   # Headers/Footers link
   #---------------------------------------------------------------------------------------------------------------------
-  handleRowHeaderClick: (d) -> window.open(d.header_url)
-  handleRowFooterClick: (d) -> window.open(d.footer_url)
-  handleColHeaderClick: (d) -> window.open(d.header_url)
-  handleColFooterClick: (d) -> window.open(d.footer_url)
+  handleRowHeaderClick: (d) -> glados.Utils.URLS.shortenLinkIfTooLongAndOpen(d.header_url)
+  handleRowFooterClick: (d) -> glados.Utils.URLS.shortenLinkIfTooLongAndOpen(d.footer_url)
+  handleColHeaderClick: (d) -> glados.Utils.URLS.shortenLinkIfTooLongAndOpen(d.header_url)
+  handleColFooterClick: (d) -> glados.Utils.URLS.shortenLinkIfTooLongAndOpen(d.footer_url)
 
 #---------------------------------------------------------------------------------------------------------------------
 # Static Functions

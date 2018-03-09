@@ -189,15 +189,20 @@ describe "Compounds vs Target Matrix", ->
 
     rowsPropName = testAggList[0]
     colsPropName = testAggList[1]
-    colsGot = matrix.columns_index
+    rowsGot = matrix.rows_index
 
-    filter = "#{colsPropName}:(#{_.keys(colsGot).join(' OR ')})"
+
 
     if rowsPropName == 'molecule_chembl_id'
+      relatedEntitiesPropName = '_metadata.related_compounds.chembl_ids.\\*'
+      filter = "#{relatedEntitiesPropName}:(#{_.keys(rowsGot).join(' OR ')})"
       allColsHeaderURLMustBe = Target.getTargetsListURL(filter)
     else
+      relatedEntitiesPropName = '_metadata.related_targets.chembl_ids.\\*'
+      filter = "#{relatedEntitiesPropName}:(#{_.keys(rowsGot).join(' OR ')})"
       allColsHeaderURLMustBe = Compound.getCompoundsListURL(filter)
 
+    console.log 'allColsHeaderURLMustBe: ', allColsHeaderURLMustBe
     expect(ctm.getLinkToAllColumns()).toBe(allColsHeaderURLMustBe)
     expect(matrix.link_to_all_columns).toBe(allColsHeaderURLMustBe)
 
