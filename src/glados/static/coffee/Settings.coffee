@@ -219,23 +219,25 @@ glados.loadURLPaths = (request_root, app_root, static_root)->
   glados.Settings.STATIC_URL = static_root
   glados.Settings.GLADOS_BASE_PATH_REL = app_root
   glados.Settings.GLADOS_BASE_URL_FULL = request_root+app_root
+  glados.Settings.NO_SIDE_NAV_PLACEHOLDER = 'g'
+  glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL = glados.Settings.GLADOS_BASE_URL_FULL +
+    glados.Settings.NO_SIDE_NAV_PLACEHOLDER + '/#'
 
   glados.Settings.STATIC_IMAGES_URL = static_root + 'img/'
 
-  glados.Settings.NO_SIDE_NAV_PLACEHOLDER = 'g'
   # Marvin full screen URL
   glados.Settings.MARVIN_FULL_SCREEN_PAGE = glados.Settings.GLADOS_BASE_PATH_REL+'marvin_search_fullscreen/'
 
-  glados.Settings.SUBSTRUCTURE_SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_BASE_PATH_REL+
-  glados.Settings.NO_SIDE_NAV_PLACEHOLDER+'/#substructure_search_results/'
+  glados.Settings.SUBSTRUCTURE_SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL +
+    'substructure_search_results/'
   glados.Settings.WS_BASE_SUBSTRUCTURE_SEARCH_URL = 'https://www.ebi.ac.uk/chembl/api/data/substructure.json'
 
-  glados.Settings.SIMILARITY_SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_BASE_PATH_REL+
-  glados.Settings.NO_SIDE_NAV_PLACEHOLDER+'/#similarity_search_results/'
+  glados.Settings.SIMILARITY_SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL +
+    'similarity_search_results/'
   glados.Settings.WS_BASE_SIMILARITY_SEARCH_URL = 'https://www.ebi.ac.uk/chembl/api/data/similarity.json'
 
-  glados.Settings.FLEXMATCH_SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_BASE_PATH_REL+
-  glados.Settings.NO_SIDE_NAV_PLACEHOLDER + '/#flexmatch_search_results/'
+  glados.Settings.FLEXMATCH_SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL +
+    'flexmatch_search_results/'
   glados.Settings.WS_BASE_FLEXMATCH_SEARCH_URL = 'https://www.ebi.ac.uk/chembl/api/data/molecule.json'
 
   glados.Settings.BASE_COMPOUND_METABOLISM_FS_URL = '/compound_metabolism/'
@@ -277,16 +279,11 @@ glados.loadSearchResultsURLS = ()->
     glados.Settings.SEARCH_PATH_2_ES_KEY[path_i] = key_i
     glados.Settings.ES_KEY_2_SEARCH_PATH[key_i] = path_i
 
-  glados.Settings.SEARCH_RESULTS_ES_PATH_REGEX = '(?:/('+elastic_search_paths.join('|')+'))?'
-
   glados.Settings.SEARCH_RESULTS_PARSER_ENDPOINT = 'search_results_parser'
 
-  glados.Settings.SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_BASE_PATH_REL+'g/#search_results'
-  glados.Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH = 'advanced_search'
-  glados.Settings.SEARCH_RESULT_URL_REGEXP = new RegExp(glados.Settings.SEARCH_RESULTS_PAGE+'.*')
-
   console.log 'going to set up template in settings'
-  glados.Settings.ENTITY_BROWSERS_URL_TEMPLATE = "#{glados.Settings.GLADOS_BASE_PATH_REL}" + glados.Settings.NO_SIDE_NAV_PLACEHOLDER+ "/#browse/{{entity}}{{#if filter}}/filter/{{filter}}{{/if}}"
+  glados.Settings.ENTITY_BROWSERS_URL_TEMPLATE = glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL +
+    "browse/{{entity}}{{#if filter}}/filter/{{filter}}{{/if}}"
   glados.Settings.ENTITY_BROWSERS_URL_GENERATOR = Handlebars.compile(glados.Settings.ENTITY_BROWSERS_URL_TEMPLATE)
 
 # Logs the JavaScript environment details
