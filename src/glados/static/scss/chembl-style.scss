@@ -3265,10 +3265,13 @@ $chevron-button-margin: 0px;
     margin-bottom: 0;
     margin-left: $chevron-button-margin;
     margin-right: $chevron-button-margin;
-    .card-content {
-      padding: 10px 10px 5px 10px;
-      .p-oneline a {
-        font-size: 0.8rem;
+    //display: flex;
+    .carousel-card {
+      .card-content {
+        padding: 10px 10px 5px 10px;
+        .p-oneline a {
+          font-size: 0.8rem;
+        }
       }
     }
   }
