@@ -109,19 +109,18 @@ glados.useNameSpace 'glados.apps.Main',
         reverseDict[val] = key
 
       reverseDict.activities = 'ACTIVITY'
-
-
       # use dict created by jf
       dictKey = reverseDict[entityName]
+
       if entityName != 'activities'
-        seeAllLabel = glados.models.paginatedCollections.Settings.ES_INDEXES[dictKey].LABEL
+        listConfig = glados.models.paginatedCollections.Settings.ES_INDEXES[dictKey]
       else
-        seeAllLabel = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH[dictKey].LABEL
+        listConfig = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH[dictKey]
 
       breadcrumbLinks = [
         {
-          label: seeAllLabel
-          link: Compound.getCompoundsListURL()
+          label: listConfig.LABEL
+          link: listConfig.BROWSE_LIST_URL()
         }
       ]
       console.log 'breadcrumbLinks: ', breadcrumbLinks

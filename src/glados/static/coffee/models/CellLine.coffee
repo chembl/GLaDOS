@@ -104,3 +104,9 @@ CellLine.COLUMNS_SETTINGS = {
 
 CellLine.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS = _.union(CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE,
   CellLine.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL)
+
+CellLine.getCellsListURL = (filter) ->
+
+  glados.Settings.ENTITY_BROWSERS_URL_GENERATOR
+    entity: 'cells'
+    filter: encodeURIComponent(filter) unless not filter?
