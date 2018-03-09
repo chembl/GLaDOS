@@ -3639,10 +3639,27 @@ $chevron-button-margin: 0px;
 }
 
 .about-chembl {
+  height: 100%;
   p {
+
+    color: rgba(0, 133, 121, 0.91) !important;
     font-family: "Sentinel SSm A", "Sentinel SSm B", "sans-serif";
     font-style: italic;
+    line-height: 1.4em;
+    font-size: 1.2em;
+
+    margin: 0 10px 0 20px !important;
+  }
+
+  p {
     quotes: "\201C" "\201D";
-    //margin: 0 10px 0 20px !important;
+  }
+  p:before {
+    content: open-quote;
+    font-size: 1.4em;
+  }
+  p:after {
+    content: close-quote;
+    font-size: 1.4em;
   }
 }
