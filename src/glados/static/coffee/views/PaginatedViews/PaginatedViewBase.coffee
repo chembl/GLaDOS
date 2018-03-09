@@ -55,9 +55,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @renderAtInit
         @render()
 
-#      @initPageQueue()
+      @initPageQueue()
 
-#    initPageQueue: ->
+    initPageQueue: ->
 
     bindCollectionEvents: ->
 

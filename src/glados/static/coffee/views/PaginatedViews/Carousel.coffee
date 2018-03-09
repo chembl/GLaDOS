@@ -28,44 +28,39 @@ glados.useNameSpace 'glados.views.PaginatedViews',
             resetPageSizeProxy glados.Settings.DEFAULT_CAROUSEL_SIZES[GlobalVariables.CURRENT_SCREEN_TYPE]
 
     getPageEvent: (event) ->
-
       clicked = $(event.currentTarget)
       currentPage = @collection.getMeta('current_page')
-      console.log 'currentPage: ', currentPage
+      pageNum = clicked.attr('data-page')
+
+
       if not @eventForThisView(clicked)
         return
       # Don't bother if the link was disabled.
       if clicked.hasClass('disabled') or clicked.hasClass('previous')
         return
 
-      @showPaginatedViewPreloader() unless @collection.getMeta('server_side') != true
-      pageNum = clicked.attr('data-page')
+      if pageNum != 'next' and pageNum <= currentPage
+        return
 
-      if pageNum ='next' or clicked.attr('data-page') > currentPage
+      nextPage = if pageNum == 'next' then currentPage + 1 else pageNum
 
-      
-
-#      @generatePageQueue: (currentPage, endPage)
-
-      # generate queue and request first
-
-        @requestPageInCollection(pageNum)
+      @generatePageQueue(parseInt(currentPage), parseInt(nextPage))
+      nextPageToLoad = @pageQueue.shift()
+      @requestPageInCollection(nextPageToLoad)
 
     # function to generate queue
     generatePageQueue: (startPage, endPage) ->
-
-
+      @pageQueue = (num for num in [(startPage + 1)..(endPage + 1)])
 
     initPageQueue: ->
-#      @generatePageQueue(1, 2)
+      @pageQueue = [2]
+#      @collection.setMeta('current_page', nextPageToLoad - 1)
 
     renderViewState: ->
 
       isDefaultZoom = @mustDisableReset()
       mustComplicate = @collection.getMeta('complicate_cards_view')
       @isComplicated = isDefaultZoom and mustComplicate
-
-#      @clearContentContainer()
 
       @fillSelectAllContainer() unless @disableItemsSelection
       @fillPaginators()
@@ -76,11 +71,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @showPaginatedViewContent()
 
       glados.views.PaginatedViews.PaginatedViewBase.renderViewState.call(@)
-      #pop page from list
-      # get next in queu if any
-
-      # make sure current page is correct
-      #@collection.setMeta('current_page', 5)
+      nextPageToLoad = @pageQueue.shift()
+      if nextPageToLoad?
+        @requestPageInCollection(nextPageToLoad)
+#        @collection.setMeta('current_page', nextPageToLoad - 1)
 #      @fillPaginators()
 
     sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
