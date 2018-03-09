@@ -104,16 +104,20 @@ glados.useNameSpace 'glados.apps.Main',
     # ------------------------------------------------------------------------------------------------------------------
     @initBrowserForEntity = (entityName, filter, state) ->
 
-
-      console.log 'glados.Settings.ES_KEY_2_SEARCH_PATH: ', glados.Settings.ES_KEY_2_SEARCH_PATH
-      #use the reverse of glados.Settings.ES_KEY_2_SEARCH_PATH defined by JF in settings
       reverseDict = {}
       for key, val of glados.Settings.ES_KEY_2_SEARCH_PATH
         reverseDict[val] = key
 
-      console.log 'reverseDict: ', reverseDict
+      reverseDict.activities = 'ACTIVITY'
 
-      seeAllLabel = glados.models.paginatedCollections.Settings.ES_INDEXES[reverseDict[entityName]].LABEL
+
+      # use dict created by jf
+      dictKey = reverseDict[entityName]
+      if entityName != 'activities'
+        seeAllLabel = glados.models.paginatedCollections.Settings.ES_INDEXES[dictKey].LABEL
+      else
+        seeAllLabel = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH[dictKey].LABEL
+
       breadcrumbLinks = [
         {
           label: seeAllLabel
