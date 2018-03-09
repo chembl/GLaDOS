@@ -27,6 +27,24 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           else
             resetPageSizeProxy glados.Settings.DEFAULT_CAROUSEL_SIZES[GlobalVariables.CURRENT_SCREEN_TYPE]
 
+    getPageEvent: (event) ->
+
+      clicked = $(event.currentTarget)
+      if not @eventForThisView(clicked)
+        return
+
+      # Don't bother if the link was disabled.
+      if clicked.hasClass('disabled')
+        return
+
+      if clicked.hasClass('previous')
+        return
+
+      @showPaginatedViewPreloader() unless @collection.getMeta('server_side') != true
+      pageNum = clicked.attr('data-page')
+      @requestPageInCollection(pageNum)
+
+
     renderViewState: ->
 
       isDefaultZoom = @mustDisableReset()
