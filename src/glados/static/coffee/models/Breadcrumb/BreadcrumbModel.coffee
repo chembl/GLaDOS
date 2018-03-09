@@ -1,5 +1,5 @@
-glados.useNameSpace 'glados.models.base.Breadcrumb',
-  Breadcrumb: Backbone.Model.extend
+glados.useNameSpace 'glados.models.Breadcrumb',
+  BreadcrumbModel: Backbone.Model.extend
     initialize: ->
       @complete_url = document.URL
       @base_url = glados.Settings.GLADOS_BASE_URL_FULL
@@ -36,6 +36,3 @@ glados.useNameSpace 'glados.models.base.Breadcrumb',
         newUrl = newUrl.substring(0,50)+'...'
 
       return newUrl
-
-
-
