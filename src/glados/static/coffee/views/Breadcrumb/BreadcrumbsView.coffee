@@ -1,4 +1,4 @@
-glados.useNameSpace 'glados.views.base',
+glados.useNameSpace 'glados.views.Breadcrumb',
   BreadcrumbsView: Backbone.View.extend
     initialize: ->
       @model.on 'change', @render

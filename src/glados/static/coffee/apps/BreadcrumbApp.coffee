@@ -4,6 +4,6 @@ glados.useNameSpace 'glados.apps',
     @init = ->
       breadcrumbs = new glados.models.Breadcrumb.BreadcrumbModel
 
-      new glados.views.base.BreadcrumbsView
+      new glados.views.Breadcrumb.BreadcrumbsView
         el: $('#BCK-breadcrumbs')
         model: breadcrumbs
