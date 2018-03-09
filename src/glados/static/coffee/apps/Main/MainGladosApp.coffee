@@ -66,6 +66,7 @@ glados.useNameSpace 'glados.apps.Main',
     # ------------------------------------------------------------------------------------------------------------------
     @initMainPage = ->
 
+      glados.apps.BreadcrumbApp.setBreadCrumb()
       @prepareContentFor('main_page')
       MainPageApp.init()
 
@@ -98,12 +99,29 @@ glados.useNameSpace 'glados.apps.Main',
       @prepareContentFor('structure_search_results', templateParams)
       SearchResultsApp.initFlexmatchSearchResults(searchTerm)
 
-
     # ------------------------------------------------------------------------------------------------------------------
     # Entity Browsers
     # ------------------------------------------------------------------------------------------------------------------
     @initBrowserForEntity = (entityName, filter, state) ->
 
+
+      console.log 'glados.Settings.ES_KEY_2_SEARCH_PATH: ', glados.Settings.ES_KEY_2_SEARCH_PATH
+      #use the reverse of glados.Settings.ES_KEY_2_SEARCH_PATH defined by JF in settings
+      reverseDict = {}
+      for key, val of glados.Settings.ES_KEY_2_SEARCH_PATH
+        reverseDict[val] = key
+
+      console.log 'reverseDict: ', reverseDict
+
+      seeAllLabel = glados.models.paginatedCollections.Settings.ES_INDEXES[reverseDict[entityName]].LABEL
+      breadcrumbLinks = [
+        {
+          label: seeAllLabel
+          link: Compound.getCompoundsListURL()
+        }
+      ]
+      console.log 'breadcrumbLinks: ', breadcrumbLinks
+      glados.apps.BreadcrumbApp.setBreadCrumb()
       @prepareContentFor('browser')
       glados.apps.Browsers.BrowserApp.initBrowserForEntity(entityName, filter, state)
 

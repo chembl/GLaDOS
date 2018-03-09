@@ -10,6 +10,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         ID_NAME: 'ESCompound'
         LABEL: 'Compounds'
         INDEX_NAME: 'chembl_molecule'
+        BROWSE_LIST_URL: Compound.getCompoundsListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
         COLUMNS: Compound.COLUMNS_SETTINGS.ALL_COLUMNS

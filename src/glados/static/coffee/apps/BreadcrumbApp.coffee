@@ -1,9 +1,8 @@
 glados.useNameSpace 'glados.apps',
   BreadcrumbApp: class BreadcrumbApp
 
-    @init = ->
-      breadcrumbs = new glados.models.Breadcrumb.BreadcrumbModel
+    @setBreadCrumb = ->
 
-      new glados.views.Breadcrumb.BreadcrumbsView
-        el: $('#BCK-breadcrumbs')
-        model: breadcrumbs
+      breadcrumbs = glados.models.Breadcrumb.BreadcrumbModel.getInstance()
+      # make sure that the view exists
+      glados.views.Breadcrumb.BreadcrumbsView.getInstance()
