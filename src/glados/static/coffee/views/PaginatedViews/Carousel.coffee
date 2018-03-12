@@ -39,7 +39,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if clicked.hasClass('disabled') or clicked.hasClass('previous')
         return
 
-      if pageNum != 'next' and pageNum <= currentPage
+      if pageNum != 'next' and pageNum <= currentPage - 1
         return
 
       nextPage = if pageNum == 'next' then currentPage + 1 else pageNum
@@ -48,15 +48,22 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       nextPageToLoad = @pageQueue.shift()
       @requestPageInCollection(nextPageToLoad)
 
+      console.log 'nextPageToLoad: ', nextPageToLoad
+      console.log 'Page clicked: ', nextPage
+      @collection.setMeta('current_page',nextPage)
+      @fillPaginators()
+      console.log "CURRENT PAGE", @collection.getMeta 'current_page'
+
+
     # function to generate queue
     generatePageQueue: (startPage, endPage) ->
       @pageQueue = (num for num in [(startPage + 1)..(endPage + 1)])
+      console.log '@pageQueue: ', @pageQueue
 
     initPageQueue: ->
       @pageQueue = [2]
 
     renderViewState: ->
-      console.log "RENDER VIEW STATE", @collection.getMeta('current_page')
       isDefaultZoom = @mustDisableReset()
       mustComplicate = @collection.getMeta('complicate_cards_view')
       @isComplicated = isDefaultZoom and mustComplicate
@@ -68,9 +75,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         @fillPaginators()
 
 
-
       @fillSelectAllContainer() unless @disableItemsSelection
-#      @fillPaginators()
       if @collection.getMeta('total_pages') == 1
         @hidePaginators()
         @hideFooter()
