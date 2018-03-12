@@ -3210,6 +3210,7 @@ $chevron-button-margin: 0px;
 
 .carousel-container {
   position: relative;
+  overflow: hidden;
 
   .chevron-container {
     z-index: 10;
@@ -3262,7 +3263,7 @@ $chevron-button-margin: 0px;
     margin-left: $chevron-button-margin;
     margin-right: $chevron-button-margin;
     display: flex;
-    
+
     .carousel-card {
       border: solid 1px red;
 
