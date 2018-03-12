@@ -38,9 +38,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if clicked.hasClass('disabled')
         return
 
-
       if pageNum <= currentPage - 1 or clicked.attr('data-page') == 'previous'
-#        paginatorPage = if clicked.hasClass('previous') then currentPage - 1 else pageNum
+
+        paginatorPage = if clicked.hasClass('previous') then currentPage - 1 else pageNum
+        @animateCards(currentPage, paginatorPage)
+#
 #        @collection.setMeta('current_page', paginatorPage)
 #        @fillPaginators()
         return
@@ -67,6 +69,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @isComplicated = isDefaultZoom and mustComplicate
 
       nextPageToLoad = @pageQueue.shift()
+
       if nextPageToLoad?
         @requestPageInCollection(nextPageToLoad)
         @collection.setMeta('current_page', nextPageToLoad - 1)
@@ -76,6 +79,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @collection.getMeta('total_pages') == 1
         @hidePaginators()
         @hideFooter()
+
       @activateSelectors()
       @showPaginatedViewContent()
 
@@ -84,11 +88,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     animateCards: (currentPage, nextPage) ->
 
       $elem = $(@el).find '.BCK-items-container'
-      cardsToMove = $elem.children('.carousel-card').slice(0, (nextPage - 1)* @currentPageSize )
+      $elem.show()
+      pxToMove = $elem.children('.carousel-card').first().width() * (nextPage - currentPage + 1) * @currentPageSize
       $elem.animate {
-        left: '-=150px'
+        left: '-=' + pxToMove + 'px'
       }
-#      cardsToMove.hide(1000)
 
     sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
       customTemplateID =  @collection.getMeta('columns_description').Carousel.CustomItemTemplate
