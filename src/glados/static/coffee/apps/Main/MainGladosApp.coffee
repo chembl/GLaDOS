@@ -83,6 +83,15 @@ glados.useNameSpace 'glados.apps.Main',
       templateParams =
         type: 'Substructure'
       @prepareContentFor('structure_search_results', templateParams)
+
+      breadcrumbLinks = [
+        {
+          label: 'Substructure Search Results'
+          link: "#{glados.Settings.SUBSTRUCTURE_SEARCH_RESULTS_PAGE}#{searchTerm}"
+        }
+      ]
+
+      glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
       SearchResultsApp.initSubstructureSearchResults(searchTerm)
 
     @initSimilaritySearchResults = (searchTerm, threshold) ->
@@ -90,6 +99,14 @@ glados.useNameSpace 'glados.apps.Main',
       templateParams =
         type: 'Similarity'
       @prepareContentFor('structure_search_results', templateParams)
+
+      breadcrumbLinks = [
+        {
+          label: 'Similarity Search Results'
+          link: "#{glados.Settings.SIMILARITY_SEARCH_RESULTS_PAGE}#{searchTerm}/#{searchTerm}/#{threshold}"
+        }
+      ]
+      glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
       SearchResultsApp.initSimilaritySearchResults(searchTerm, threshold)
 
     @initFlexmatchSearchResults = (searchTerm) ->
@@ -97,6 +114,14 @@ glados.useNameSpace 'glados.apps.Main',
       templateParams =
         type: ''
       @prepareContentFor('structure_search_results', templateParams)
+
+      breadcrumbLinks = [
+        {
+          label: 'Structure Search Results'
+          link: "#{glados.Settings.FLEXMATCH_SEARCH_RESULTS_PAGE}#{searchTerm}/#{searchTerm}"
+        }
+      ]
+      glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
       SearchResultsApp.initFlexmatchSearchResults(searchTerm)
 
     # ------------------------------------------------------------------------------------------------------------------
