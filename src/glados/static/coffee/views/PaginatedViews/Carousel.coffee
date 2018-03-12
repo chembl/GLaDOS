@@ -85,7 +85,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       $elem = $(@el).find '.BCK-items-container'
       cardsToMove = $elem.children('.carousel-card').slice(0, (nextPage - 1)* @currentPageSize )
-      cardsToMove.hide(1000)
+      $elem.animate {
+        left: '-=150px'
+      }
+#      cardsToMove.hide(1000)
 
     sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
       customTemplateID =  @collection.getMeta('columns_description').Carousel.CustomItemTemplate

@@ -3263,6 +3263,7 @@ $chevron-button-margin: 0px;
     margin-left: $chevron-button-margin;
     margin-right: $chevron-button-margin;
     display: flex;
+    position: relative;
 
     .carousel-card {
 
