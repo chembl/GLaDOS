@@ -4,6 +4,7 @@
         {{#each breadcrumbs}}
         <span> > </span>
         <a href="{{ this.link }}" class="ebi-breadcrumb"> {{ this.label }} </a>
+        {{#if this.is_filter_link}}<a class="BCK-open-filter-explain"><i class="fa fa-filter"></i></a>{{/if}}
         {{/each}}
     </script>
 

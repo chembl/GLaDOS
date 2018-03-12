@@ -15,8 +15,10 @@ glados.useNameSpace 'glados.views.Breadcrumb',
 # ----------------------------------------------------------------------------------------------------------------------
 glados.views.Breadcrumb.BreadcrumbsView.getInstance = ->
   if not glados.views.Breadcrumb.BreadcrumbsView.__view_instance?
+    $breadcrumbsContainer = $('#BCK-breadcrumbs')
+    glados.apps.Main.MainGladosApp.setUpLinkShortenerListener($breadcrumbsContainer[0])
     glados.views.Breadcrumb.BreadcrumbsView.__view_instance = new glados.views.Breadcrumb.BreadcrumbsView
-      el: $('#BCK-breadcrumbs')
+      el: $breadcrumbsContainer
       model: glados.models.Breadcrumb.BreadcrumbModel.getInstance()
 
   return glados.views.Breadcrumb.BreadcrumbsView.__view_instance

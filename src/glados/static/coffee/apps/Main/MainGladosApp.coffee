@@ -122,6 +122,11 @@ glados.useNameSpace 'glados.apps.Main',
           label: listConfig.LABEL
           link: listConfig.BROWSE_LIST_URL()
         }
+        {
+          label: '(Filters Applied)'
+          link: listConfig.BROWSE_LIST_URL(filter)
+          is_filter_link: true
+        }
       ]
 
       glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
