@@ -123,9 +123,10 @@ glados.useNameSpace 'glados.apps.Main',
           link: listConfig.BROWSE_LIST_URL()
         }
         {
-          label: '(Filters Applied)'
+          label: filter
           link: listConfig.BROWSE_LIST_URL(filter)
           is_filter_link: true
+          truncate: true
         }
       ]
 

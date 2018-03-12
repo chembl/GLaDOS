@@ -3,10 +3,13 @@
     <script id="Handlebars-BreadcrumbsContent" type="text/x-handlebars-template">
         {{#each breadcrumbs}}
         <span> > </span>
+
         <a {{#unless this.is_filter_link}}href="{{ this.link }}"{{/unless}}
-           class="ebi-breadcrumb {{#if this.is_filter_link}}BCK-open-filter-explain{{/if}}">
+           class="ebi-breadcrumb {{#if this.truncate}}truncate{{/if}}
+            {{#if this.is_filter_link}}BCK-open-filter-explain{{/if}}">
             {{ this.label }}
         </a>
+
         {{/each}}
     </script>
 

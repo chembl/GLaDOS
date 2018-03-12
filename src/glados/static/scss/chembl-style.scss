@@ -1564,6 +1564,13 @@ em.glados-result-highlight {
 
 .ebi-breadcrumb {
   font-size: 70%;
+  &.truncate {
+    width: 200px;
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    line-height: 10px;
+  }
 }
 
 /**
