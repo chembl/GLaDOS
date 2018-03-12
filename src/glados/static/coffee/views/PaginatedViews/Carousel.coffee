@@ -42,7 +42,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if pageNum != 'next' and pageNum <= currentPage - 1
         return
 
-      nextPage = if pageNum == 'next' then currentPage + 1 else pageNum
+      nextPage = if pageNum == 'next' then currentPage else pageNum
 
       @generatePageQueue(parseInt(currentPage), parseInt(nextPage))
       nextPageToLoad = @pageQueue.shift()
