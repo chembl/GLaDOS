@@ -53,7 +53,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       @collection.setMeta('current_page',nextPage)
       @fillPaginators()
-      @animateCards()
+      @animateCards(currentPage, nextPage)
 
     generatePageQueue: (startPage, endPage) ->
       @pageQueue = (num for num in [(startPage + 1)..(endPage + 1)])
@@ -81,15 +81,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       glados.views.PaginatedViews.PaginatedViewBase.renderViewState.call(@)
 
-    animateCards: ->
-      console.log 'ANIMATE CARDS'
+    animateCards: (currentPage, nextPage) ->
       $elem = $(@el).find '.BCK-items-container'
-#      cardsToMove = $elem.children '.carousel-card:lt(6)'
-#      cardsToMove.addClass '.animated-card'
-      $elem.css "background-color",  "red"
-      $elem.animate {
-        "transform" : "translate(50px,100px)"
-      }
+      cardsToMove = $elem.children('.carousel-card').slice(0, (nextPage - 1)* 6 )
+      cardsToMove.hide(1000)
 
 #      cardsToMove.animate({"transform" :"translate(-50px,0)"})
 

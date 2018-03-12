@@ -3265,10 +3265,10 @@ $chevron-button-margin: 0px;
     display: flex;
 
     .carousel-card {
-      border: solid 1px red;
 
       .card-container {
         height: calc(100% - 20px);
+
         .card-content {
           padding: 10px 10px 5px 10px;
 
@@ -3279,21 +3279,21 @@ $chevron-button-margin: 0px;
       }
     }
   }
+}
 
-  /**
+/*
 * Paginated Collections
 * ----------------------------------------------------------------------------------------------------------------------
 */
-  .pagination {
-    margin: 0;
-    a {
-      font-size: 1em;
-    }
+.pagination {
+  margin: 0;
+  a {
+    font-size: 1em;
   }
+}
 
-  .number-of-results {
-    margin-left: 30px !important;
-  }
+.number-of-results {
+  margin-left: 30px !important;
 }
 
 .push-30px {
