@@ -52,11 +52,17 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     generatePageQueue: (startPage, endPage) ->
       @pageQueue = (num for num in [(startPage + 1)..(endPage + 1)])
 
+
     initPageQueue: ->
       @pageQueue = [2]
-#      @collection.setMeta('current_page', nextPageToLoad - 1)
+      @renderedPages = [1, 2]
+      console.log '@pageQueue: ', @pageQueue
+      console.log '@renderedPages: ', @renderedPages
+#      @collection.setMeta('current_page', 1)
+#      @fillPaginators()
 
     renderViewState: ->
+      console.log 'RENDER STATE VIEW; PAGE: ', @collection.getMeta('current_page')
 
       isDefaultZoom = @mustDisableReset()
       mustComplicate = @collection.getMeta('complicate_cards_view')
@@ -72,10 +78,15 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       glados.views.PaginatedViews.PaginatedViewBase.renderViewState.call(@)
       nextPageToLoad = @pageQueue.shift()
+#      console.log '@pageQueue: ', nextPageToLoad
       if nextPageToLoad?
         @requestPageInCollection(nextPageToLoad)
 #        @collection.setMeta('current_page', nextPageToLoad - 1)
-#      @fillPaginators()
+      currentPage = @collection.getMeta('current_page')
+      @collection.setMeta('current_page', currentPage - 1 )
+#      console.log 'SET CURRENT PAGE: '
+
+      @fillPaginators()
 
     sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
       customTemplateID =  @collection.getMeta('columns_description').Carousel.CustomItemTemplate
@@ -86,47 +97,3 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     getDefaultColumns: -> @collection.getMeta('columns_description').Carousel.Default
     getAdditionalColumns: -> @collection.getMeta('columns_description').Carousel.Additional
-
-
-#      setUpLoadingWaypoint: ->
-#
-#      $cards = $(@el).find('.BCK-items-container').children()
-#
-#      # don't bother when there aren't any cards
-#      if $cards.length == 0
-#        return
-#
-#      pageSize = @collection.getMeta('page_size')
-#      numCards = $cards.length
-#
-#      if numCards < pageSize
-#        index = 0
-#      else
-#        index = $cards.length - pageSize
-#      wayPointCard = $cards[index]
-#      # the advancer function requests always the next page
-#      advancer = $.proxy ->
-#        #destroy waypoint to avoid issues with triggering more page requests.
-#        Waypoint.destroyAll()
-#        # dont' bother if already on last page
-#        if @collection.currentlyOnLastPage()
-#          return
-#        @showPaginatedViewPreloaderAndContent()
-#        @requestPageInCollection('next')
-#      , @
-#
-#      # destroy all waypoints before assigning the new one.
-#      Waypoint.destroyAll()
-#      scroll_container = null
-#      $scroll_containers = $(@el).find('.infinite-scroll-container')
-#      if $scroll_containers.length == 1
-#        scroll_container = $scroll_containers[0]
-#
-#      waypoint = new Waypoint(
-#        element: wayPointCard
-#        context: if scroll_container? then scroll_container else window
-#        handler: (direction) ->
-#          if direction == 'down'
-#            advancer()
-#
-#      )
