@@ -715,9 +715,11 @@ glados.useNameSpace 'glados',
           $clickedElem.attr('data-qtip-configured', 'yes')
 
 
-      URLNeedsShortening: (url='') ->
+      URLNeedsShortening: (url='', customMaxLength) ->
 
-        if url.length > glados.Settings.MAX_GENERATED_URL_LENGTH
+        maxLength = customMaxLength
+        maxLength ?= glados.Settings.MAX_GENERATED_URL_LENGTH
+        if url.length > maxLength
           matches = url.match(glados.Settings.NEEDS_SHORTENING_REGEXP)
           if matches?
             return true

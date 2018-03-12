@@ -48,9 +48,9 @@ TWITTER_CONSUMER_SECRET = '<TWITTER_CONSUMER_SECRET>'
 # ElasticSearch
 # ----------------------------------------------------------------------------------------------------------------------
 
-ELASTICSEARCH_HOST = 'https://wwwdev.ebi.ac.uk/chembl/glados-es/__secret/'
-ELASTICSEARCH_USERNAME = 'GLaDOS'
-ELASTICSEARCH_PASSWORD = '1M ST1LL aL1Ve'
+ELASTICSEARCH_HOST = 'http://wp-p2m-50.ebi.ac.uk:9200'
+ELASTICSEARCH_USERNAME = None
+ELASTICSEARCH_PASSWORD = None
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = RUN_ENV == RunEnvs.DEV

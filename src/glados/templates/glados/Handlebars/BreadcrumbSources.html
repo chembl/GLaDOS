@@ -1,16 +1,38 @@
 {% verbatim %}
 
-    <script id="Handlebars-BreadcrumbsContent" type="text/x-handlebars-template">
-        {{#each breadcrumbs}}
-        <span> > </span>
+<script id="Handlebars-BreadcrumbsContent" type="text/x-handlebars-template">
+    {{#each breadcrumbs}}
+    <span> > </span>
 
-        <a {{#unless this.is_filter_link}}href="{{ this.link }}"{{/unless}}
-           class="ebi-breadcrumb {{#if this.truncate}}truncate{{/if}}
-            {{#if this.is_filter_link}}BCK-open-filter-explain{{/if}}">
-            {{ this.label }}
-        </a>
+    <a {{#unless this.is_filter_link}}href="{{ this.link }}" {{/unless}}
+    class="ebi-breadcrumb {{#if this.truncate}}truncate{{/if}}
+    {{#if this.is_filter_link}}BCK-open-filter-explain{{/if}}">
+    {{ this.label }}
+    </a>
 
-        {{/each}}
-    </script>
+    {{/each}}
+
+    {{#unless hide_share_button}}<a class="BCK-open-share-modal"><i class="fa fa-share-alt"></i></a>{{/unless}}
+</script>
+
+<script id="Handlebars-FilterExplainContent" type="text/x-handlebars-template">
+
+    <div class="card-panel z-depth-0 teal lighten-5">
+        <div class="long-filter-content">
+            <b>Filter:</b><br>
+            <code>{{long_filter}}</code>
+        </div>
+    </div>
+
+</script>
+
+<script id="Handlebars-share-page-modal" type="text/x-handlebars-template" >
+  <div id="{{id}}" class='modal'>
+    <div class="card-panel z-depth-0">
+        Use this link to share this page:
+        <div class="BCK-link-to-share-url share-url"></div>
+    </div>
+  </div>
+</script>
 
 {% endverbatim %}

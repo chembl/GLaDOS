@@ -66,7 +66,7 @@ glados.useNameSpace 'glados.apps.Main',
     # ------------------------------------------------------------------------------------------------------------------
     @initMainPage = ->
 
-      glados.apps.BreadcrumbApp.setBreadCrumb()
+      glados.apps.BreadcrumbApp.setBreadCrumb([], undefined, hideShareButton=true)
       @prepareContentFor('main_page')
       MainPageApp.init()
 
@@ -76,6 +76,20 @@ glados.useNameSpace 'glados.apps.Main',
     @initSearchResults = (searchTerm) ->
 
       @prepareContentFor('search_results')
+
+      breadcrumbLinks = [
+        {
+          label: 'Search Results'
+          link: glados.Settings.SEARCH_RESULTS_PAGE
+        }
+        {
+          label: searchTerm
+          link: "#{glados.Settings.SEARCH_RESULTS_PAGE}/#{searchTerm}"
+          truncate: true
+        }
+      ]
+      glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
+
       SearchResultsApp.init(searchTerm)
 
     @initSubstructureSearchResults = (searchTerm) ->
@@ -155,7 +169,10 @@ glados.useNameSpace 'glados.apps.Main',
         }
       ]
 
-      glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
+      glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks,
+        longFilter=filter,
+        hideShareButton=false,
+        longFilterURL=listConfig.BROWSE_LIST_URL(filter))
       @prepareContentFor('browser')
       glados.apps.Browsers.BrowserApp.initBrowserForEntity(entityName, filter, state)
 

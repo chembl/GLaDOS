@@ -8,10 +8,45 @@ glados.useNameSpace 'glados.views.Breadcrumb',
 
       $breadcrumbsContainer = $(@el).find('.BCK-dynamic-breadcrumbs')
       breadcrumbsList = @model.get('breadcrumbs_list')
+      hideShareButton = @model.get('hide_share_button')
       glados.Utils.fillContentForElement $breadcrumbsContainer,
         breadcrumbs: breadcrumbsList
+        hide_share_button: hideShareButton
+
+      $longFilterContent = $(@el).find('.BCK-filter-explain')
+      longFilter = @model.get('long_filter')
+      glados.Utils.fillContentForElement $longFilterContent,
+        long_filter: longFilter
 
       @hideFilterMenu()
+
+      if not hideShareButton
+        $modalTrigger = $(@el).find('.BCK-open-share-modal')
+
+        templateParams =
+          link_to_share: @model.get('long_filter_url')
+        $editorModal = ButtonsHelper.generateModalFromTemplate($modalTrigger, 'Handlebars-share-page-modal',
+          startingTop=undefined , endingTop=undefined, customID=undefined, templateParams=templateParams)
+
+        $linkToShareURL = $editorModal.find('.BCK-link-to-share-url')
+
+        needsShortening = glados.Utils.URLS.URLNeedsShortening(window.location.href, 100)
+
+        urlToShorten = window.location.href.match(glados.Settings.SHORTENING_MATCH_REPEXG)[0]
+        if needsShortening
+
+          $linkToShareURL.text('Loading...')
+          paramsDict =
+            long_url: urlToShorten
+
+          shortenURL = glados.doCSRFPost(glados.Settings.SHORTEN_URLS_ENDPOINT, paramsDict)
+
+          shortenURL.then (data) ->
+            newHref = glados.Settings.SHORTENED_URL_GENERATOR
+              hash: data.hash
+            $linkToShareURL.text("#{glados.Settings.GLADOS_BASE_URL_FULL}#{newHref.slice(1)}")
+        else
+          $linkToShareURL.text(window.location.href)
 
     events:
       'click .BCK-open-filter-explain': 'toggleFilterMenu'
