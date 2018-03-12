@@ -115,8 +115,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if $elem.length == 0
         return
       template = $('#' + $elem.attr('data-hb-template'))
-
       current_page = @collection.getMeta('current_page')
+      console.log 'current_page: ', current_page
       records_in_page = @collection.getMeta('records_in_page')
       page_size = @collection.getMeta('page_size')
       num_pages = @collection.getMeta('total_pages')

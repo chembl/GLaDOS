@@ -54,16 +54,23 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     initPageQueue: ->
       @pageQueue = [2]
-#      @collection.setMeta('current_page', nextPageToLoad - 1)
 
     renderViewState: ->
-
+      console.log "RENDER VIEW STATE", @collection.getMeta('current_page')
       isDefaultZoom = @mustDisableReset()
       mustComplicate = @collection.getMeta('complicate_cards_view')
       @isComplicated = isDefaultZoom and mustComplicate
 
+      nextPageToLoad = @pageQueue.shift()
+      if nextPageToLoad?
+        @requestPageInCollection(nextPageToLoad)
+        @collection.setMeta('current_page', nextPageToLoad - 1)
+        @fillPaginators()
+
+
+
       @fillSelectAllContainer() unless @disableItemsSelection
-      @fillPaginators()
+#      @fillPaginators()
       if @collection.getMeta('total_pages') == 1
         @hidePaginators()
         @hideFooter()
@@ -71,11 +78,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @showPaginatedViewContent()
 
       glados.views.PaginatedViews.PaginatedViewBase.renderViewState.call(@)
-      nextPageToLoad = @pageQueue.shift()
-      if nextPageToLoad?
-        @requestPageInCollection(nextPageToLoad)
-#        @collection.setMeta('current_page', nextPageToLoad - 1)
-#      @fillPaginators()
+
+
+
 
     sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
       customTemplateID =  @collection.getMeta('columns_description').Carousel.CustomItemTemplate
