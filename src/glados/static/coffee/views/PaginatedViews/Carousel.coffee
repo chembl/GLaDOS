@@ -35,11 +35,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if not @eventForThisView(clicked)
         return
       # Don't bother if the link was disabled.
-      if clicked.hasClass('disabled') or clicked.hasClass('previous')
+      if clicked.hasClass('disabled')
         return
 
-      if pageNum == 'next' and pageNum <= currentPage - 1
-
+      if pageNum != 'next' and pageNum <= currentPage - 1 or clicked.hasClass('previous')
         return
 
       nextPage = if pageNum == 'next' then currentPage else pageNum
@@ -50,6 +49,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       @collection.setMeta('current_page',nextPage)
       @fillPaginators()
+      @animateCards()
 
     generatePageQueue: (startPage, endPage) ->
       @pageQueue = (num for num in [(startPage + 1)..(endPage + 1)])
@@ -76,6 +76,14 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @showPaginatedViewContent()
 
       glados.views.PaginatedViews.PaginatedViewBase.renderViewState.call(@)
+
+    animateCards: ->
+      console.log 'ANIMATE CARDS'
+      $elem = $(@el).find('.BCK-items-container')
+      cardsToMove = $elem.children('.carousel-card:lt(6)')
+      cardsToMove.addClass('.animated-card')
+#      cardsToMove.animate({"transform" :"translate(-50px,0)"})
+      console.log 'cardsToMove: ', cardsToMove
 
 
     sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
