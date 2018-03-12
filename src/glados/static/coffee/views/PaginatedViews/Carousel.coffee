@@ -38,7 +38,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if clicked.hasClass('disabled') or clicked.hasClass('previous')
         return
 
-      if pageNum != 'next' and pageNum <= currentPage - 1
+      if pageNum == 'next' and pageNum <= currentPage - 1
+
         return
 
       nextPage = if pageNum == 'next' then currentPage else pageNum
