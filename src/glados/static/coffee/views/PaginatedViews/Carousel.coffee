@@ -32,7 +32,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       currentPage = @collection.getMeta('current_page')
       pageNum = clicked.attr('data-page')
 
-
       if not @eventForThisView(clicked)
         return
       # Don't bother if the link was disabled.
@@ -48,17 +47,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       nextPageToLoad = @pageQueue.shift()
       @requestPageInCollection(nextPageToLoad)
 
-      console.log 'nextPageToLoad: ', nextPageToLoad
-      console.log 'Page clicked: ', nextPage
       @collection.setMeta('current_page',nextPage)
       @fillPaginators()
-      console.log "CURRENT PAGE", @collection.getMeta 'current_page'
 
-
-    # function to generate queue
     generatePageQueue: (startPage, endPage) ->
       @pageQueue = (num for num in [(startPage + 1)..(endPage + 1)])
-      console.log '@pageQueue: ', @pageQueue
 
     initPageQueue: ->
       @pageQueue = [2]
@@ -74,7 +67,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         @collection.setMeta('current_page', nextPageToLoad - 1)
         @fillPaginators()
 
-
       @fillSelectAllContainer() unless @disableItemsSelection
       if @collection.getMeta('total_pages') == 1
         @hidePaginators()
@@ -83,8 +75,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @showPaginatedViewContent()
 
       glados.views.PaginatedViews.PaginatedViewBase.renderViewState.call(@)
-
-
 
 
     sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
