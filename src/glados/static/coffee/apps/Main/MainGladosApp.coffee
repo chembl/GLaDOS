@@ -123,8 +123,8 @@ glados.useNameSpace 'glados.apps.Main',
           link: listConfig.BROWSE_LIST_URL()
         }
       ]
-      console.log 'breadcrumbLinks: ', breadcrumbLinks
-      glados.apps.BreadcrumbApp.setBreadCrumb()
+
+      glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
       @prepareContentFor('browser')
       glados.apps.Browsers.BrowserApp.initBrowserForEntity(entityName, filter, state)
 

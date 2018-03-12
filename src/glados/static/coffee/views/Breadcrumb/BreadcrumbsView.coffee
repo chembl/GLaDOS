@@ -1,19 +1,21 @@
 glados.useNameSpace 'glados.views.Breadcrumb',
   BreadcrumbsView: Backbone.View.extend
     initialize: ->
-      @model.on 'change', @render
-      @breadcrumbs = @model.breadcrumbs_list
-      @render()
+      @model.on 'change', @render, @
 
     render: ->
-      glados.Utils.fillContentForElement $(@el), breadcrumbs: @breadcrumbs, 'Handlebars-BreadcrumbsContent'
+
+      $breadcrumbsContainer = $(@el)
+      breadcrumbsList = @model.get('breadcrumbs_list')
+      glados.Utils.fillContentForElement $breadcrumbsContainer,
+        breadcrumbs: breadcrumbsList
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Singleton
 # ----------------------------------------------------------------------------------------------------------------------
 glados.views.Breadcrumb.BreadcrumbsView.getInstance = ->
   if not glados.views.Breadcrumb.BreadcrumbsView.__view_instance?
-    glados.views.Breadcrumb.BreadcrumbsView.__view_instance = new glados.models.Breadcrumb.BreadcrumbModel
+    glados.views.Breadcrumb.BreadcrumbsView.__view_instance = new glados.views.Breadcrumb.BreadcrumbsView
       el: $('#BCK-breadcrumbs')
       model: glados.models.Breadcrumb.BreadcrumbModel.getInstance()
 

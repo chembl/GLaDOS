@@ -1,8 +1,10 @@
 glados.useNameSpace 'glados.apps',
   BreadcrumbApp: class BreadcrumbApp
 
-    @setBreadCrumb = ->
+    @setBreadCrumb = (breadcrumbsList=[])->
 
-      breadcrumbs = glados.models.Breadcrumb.BreadcrumbModel.getInstance()
       # make sure that the view exists
       glados.views.Breadcrumb.BreadcrumbsView.getInstance()
+
+      breadcrumbs = glados.models.Breadcrumb.BreadcrumbModel.getInstance()
+      breadcrumbs.set('breadcrumbs_list', breadcrumbsList)
