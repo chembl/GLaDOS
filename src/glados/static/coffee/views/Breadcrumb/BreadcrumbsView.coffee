@@ -2,13 +2,23 @@ glados.useNameSpace 'glados.views.Breadcrumb',
   BreadcrumbsView: Backbone.View.extend
     initialize: ->
       @model.on 'change', @render, @
+      @hideFilterMenu()
 
     render: ->
 
-      $breadcrumbsContainer = $(@el)
+      $breadcrumbsContainer = $(@el).find('.BCK-dynamic-breadcrumbs')
       breadcrumbsList = @model.get('breadcrumbs_list')
       glados.Utils.fillContentForElement $breadcrumbsContainer,
         breadcrumbs: breadcrumbsList
+
+      @hideFilterMenu()
+
+    events:
+      'click .BCK-open-filter-explain': 'toggleFilterMenu'
+
+    toggleFilterMenu: -> $(@el).find('.BCK-filter-explain').slideToggle()
+    openFilterMenu: -> $(@el).find('.BCK-filter-explain').show()
+    hideFilterMenu: -> $(@el).find('.BCK-filter-explain').hide()
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Singleton
