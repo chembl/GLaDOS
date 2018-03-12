@@ -7,6 +7,15 @@ class TissueReportCardApp extends glados.ReportCardApp
 
     super
     tissue = TissueReportCardApp.getCurrentTissue()
+
+    breadcrumbLinks = [
+      {
+        label: tissue.get('id')
+        link: glados.models.Tissue.get_report_card_url(tissue.get('id'))
+      }
+    ]
+    glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
+
     TissueReportCardApp.initBasicInformation()
     TissueReportCardApp.initAssaySummary()
     TissueReportCardApp.initActivitySummary()

@@ -4,6 +4,12 @@ CellLine = Backbone.Model.extend
   idAttribute:'cell_chembl_id'
 
   initialize: ->
+
+    id = @get('id')
+    id ?= @get('cell_chembl_id')
+    @set('id', id)
+    @set('cell_chembl_id', id)
+
     @url = glados.Settings.WS_BASE_URL + 'cell_line/' + @get('cell_chembl_id') + '.json'
 
   parse: (data) ->

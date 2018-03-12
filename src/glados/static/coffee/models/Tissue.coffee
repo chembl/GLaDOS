@@ -5,6 +5,12 @@ glados.useNameSpace 'glados.models',
     idAttribute:'tissue_chembl_id'
 
     initialize: ->
+
+      id = @get('id')
+      id ?= @get('tissue_chembl_id')
+      @set('id', id)
+      @set('tissue_chembl_id', id)
+
       @url = glados.Settings.WS_BASE_URL + 'tissue/' + @get('tissue_chembl_id') + '.json'
 
     parse: (response) ->

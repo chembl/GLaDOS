@@ -8,6 +8,14 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     compound = CompoundReportCardApp.getCurrentCompound()
 
+    breadcrumbLinks = [
+        {
+          label: compound.get('id')
+          link: Compound.get_report_card_url(compound.get('id'))
+        }
+      ]
+    glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
+
     CompoundReportCardApp.initNameAndClassification()
     CompoundReportCardApp.initRepresentations()
     CompoundReportCardApp.initSources()
