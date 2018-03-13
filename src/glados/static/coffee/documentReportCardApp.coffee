@@ -8,6 +8,14 @@ class DocumentReportCardApp extends glados.ReportCardApp
     super
     document = DocumentReportCardApp.getCurrentDocument()
 
+    breadcrumbLinks = [
+      {
+        label: document.get('id')
+        link: Document.get_report_card_url(document.get('id'))
+      }
+    ]
+    glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
+
     DocumentReportCardApp.initBasicInformation()
     DocumentReportCardApp.initRelatedDocuments()
     DocumentReportCardApp.initWordCloud()

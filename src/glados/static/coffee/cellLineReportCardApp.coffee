@@ -7,6 +7,15 @@ class CellLineReportCardApp extends glados.ReportCardApp
 
     super
     cellLine = CellLineReportCardApp.getCurrentCellLine()
+
+    breadcrumbLinks = [
+      {
+        label: cellLine.get('id')
+        link: CellLine.get_report_card_url(cellLine.get('id'))
+      }
+    ]
+    glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
+
     CellLineReportCardApp.initBasicInformation()
     CellLineReportCardApp.initAssaySummary()
     CellLineReportCardApp.initActivitySummary()

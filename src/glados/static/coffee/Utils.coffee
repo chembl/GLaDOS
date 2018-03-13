@@ -610,6 +610,120 @@ glados.useNameSpace 'glados',
           model.fetch()
 
     URLS:
+      shortenLinkIfTooLongAndOpen: (url) ->
+
+        if glados.Utils.URLS.URLNeedsShortening(url)
+
+          $('#GladosMainSplashScreen').show()
+          urlToShorten = url.match(glados.Settings.SHORTENING_MATCH_REPEXG)[0]
+
+          paramsDict =
+            long_url: urlToShorten
+
+          shortenURL = glados.doCSRFPost(glados.Settings.SHORTEN_URLS_ENDPOINT, paramsDict)
+          shortenURL.then (data) ->
+
+            hashGot = data.hash
+            newHref = glados.Settings.SHORTENED_URL_GENERATOR
+                hash: hashGot
+
+            # check until I am sure that the has is accessible
+            openLink = ->
+              $('#GladosMainSplashScreen').hide()
+              window.open newHref
+
+            openIfReady = (data) ->
+
+
+              if data.long_url?
+                setTimeout openLink, 2000
+              else
+                setTimeout ->
+                  checkIfURLReady = $.getJSON("#{glados.Settings.EXTEND_URLS_ENDPOINT_URL}/#{hashGot}")
+                  checkIfURLReady.then openIfReady
+                , 1000
+
+            checkIfURLReady = $.getJSON("#{glados.Settings.EXTEND_URLS_ENDPOINT_URL}/#{hashGot}")
+            checkIfURLReady.then openIfReady
+
+
+
+
+        else
+          window.open url
+
+      shortenHTMLLinkIfNecessary: ($anchor) ->
+        if $anchor.attr('data-shortening-checked') != 'yes'
+
+          href = $anchor.attr('href')
+          if glados.Utils.URLS.URLNeedsShortening(href)
+            $anchor.attr('data-original-href', $anchor.attr('href'))
+            $anchor.attr('data-url-shortening-status', glados.Settings.URL_SHORTENING_STATUSES.REQUESTING_HASH)
+            $anchor.removeAttr('href')
+            $anchor.click(glados.Utils.URLS.handleShortenedAnchorClick)
+
+            urlToShorten = href.match(glados.Settings.SHORTENING_MATCH_REPEXG)[0]
+            paramsDict =
+              long_url: urlToShorten
+
+            shortenURL = glados.doCSRFPost(glados.Settings.SHORTEN_URLS_ENDPOINT, paramsDict)
+            shortenURL.then (data) ->
+              newHref = glados.Settings.SHORTENED_URL_GENERATOR
+                hash: data.hash
+              $anchor.attr('href', newHref)
+              $anchor.attr('data-url-shortening-status', glados.Settings.URL_SHORTENING_STATUSES.SUCCESS)
+              $anchor.unbind('click', glados.Utils.URLS.handleShortenedAnchorClick)
+
+            shortenURL.error ->
+              $anchor.attr('data-url-shortening-status', glados.Settings.URL_SHORTENING_STATUSES.REQUESTING_ERROR)
+
+          $anchor.attr('data-shortening-checked', 'yes')
+
+      handleShortenedAnchorClick: (event) ->
+
+        $clickedElem = $(event.currentTarget)
+        if $clickedElem.attr('data-url-shortening-status') == glados.Settings.URL_SHORTENING_STATUSES.REQUESTING_HASH
+          if $clickedElem.attr('data-qtip-configured') != 'yes'
+
+            $qtipContent = $('<div>This url is too long. It is being shortened for you...</div>')
+            qtipConfig =
+              content:
+                text: $qtipContent
+              style:
+                classes:'matrix-qtip qtip-light qtip-shadow'
+              position: glados.Utils.Tooltips.getQltipSafePostion($clickedElem, $qtipContent)
+
+            $clickedElem.qtip qtipConfig
+            $clickedElem.qtip('api').show()
+            $clickedElem.attr('data-qtip-configured', 'yes')
+
+        else if $clickedElem.attr('data-url-shortening-status') == glados.Settings.URL_SHORTENING_STATUSES.REQUESTING_ERROR
+
+          $clickedElem.qtip('destroy', true)
+
+          $qtipContent = $('<div>This url is too long. However there was an error while shortening it...</div>')
+          qtipConfig =
+            content:
+              text: $qtipContent
+            style:
+              classes:'matrix-qtip qtip-light qtip-shadow'
+            position: glados.Utils.Tooltips.getQltipSafePostion($clickedElem, $qtipContent)
+
+          $clickedElem.qtip qtipConfig
+          $clickedElem.qtip('api').show()
+          $clickedElem.attr('data-qtip-configured', 'yes')
+
+
+      URLNeedsShortening: (url='', customMaxLength) ->
+
+        maxLength = customMaxLength
+        maxLength ?= glados.Settings.MAX_GENERATED_URL_LENGTH
+        if url.length > maxLength
+          matches = url.match(glados.Settings.NEEDS_SHORTENING_REGEXP)
+          if matches?
+            return true
+        return false
+
       getCurrentModelChemblID: ->
 
         if GlobalVariables['CURRENT_MODEL_CHEMBL_ID']?

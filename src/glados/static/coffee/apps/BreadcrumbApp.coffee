@@ -1,9 +1,14 @@
 glados.useNameSpace 'glados.apps',
   BreadcrumbApp: class BreadcrumbApp
 
-    @init = ->
-      breadcrumbs = new glados.models.base.Breadcrumb.Breadcrumb
+    @setBreadCrumb = (breadcrumbsList=[], longFilter, hideShareButton=false, longFilterURL)->
 
-      new glados.views.base.BreadcrumbsView
-        el: $('#BCK-breadcrumbs')
-        model: breadcrumbs
+      # make sure that the view exists
+      glados.views.Breadcrumb.BreadcrumbsView.getInstance()
+
+      breadcrumbs = glados.models.Breadcrumb.BreadcrumbModel.getInstance()
+      breadcrumbs.set
+        breadcrumbs_list: breadcrumbsList
+        long_filter: longFilter
+        long_filter_url: longFilterURL
+        hide_share_button: hideShareButton

@@ -8,6 +8,14 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     compound = CompoundReportCardApp.getCurrentCompound()
 
+    breadcrumbLinks = [
+        {
+          label: compound.get('id')
+          link: Compound.get_report_card_url(compound.get('id'))
+        }
+      ]
+    glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
+
     CompoundReportCardApp.initNameAndClassification()
     CompoundReportCardApp.initRepresentations()
     CompoundReportCardApp.initSources()
@@ -113,6 +121,8 @@ class CompoundReportCardApp extends glados.ReportCardApp
         else
           return true
       properties_to_show: Compound.COLUMNS_SETTINGS.COMPOUND_SOURCES_SECTION
+      sort_alpha: true
+      property_id_to_sort: 'compound_sources_list'
 
     new glados.views.ReportCards.EntityDetailsInCardView
       model: compound
@@ -349,7 +359,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       config: config
       compound_chembl_id: chemblID
       section_id: 'PapersAboutCompound'
-      section_label: chemblID + ' in Literature'
+      section_label: 'Literature'
       report_card_app: @
 
     allDocumentsByYear.fetch()
@@ -474,15 +484,28 @@ class CompoundReportCardApp extends glados.ReportCardApp
   @initSimilarCompounds = ->
 
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
-    similarCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewSimilaritySearchResultsListForCarousel()
+
+    carouselConfig =
+      custom_available_page_sizes:
+        'SMALL_SCREEN': 1
+        'MEDIUM_SCREEN': 3
+        'LARGE_SCREEN': 6
+      custom_card_sizes:
+        small: 12
+        medium: 4
+        large: 2
+
+    similarCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory\
+    .getNewSimilaritySearchResultsListForCarousel(customConfig=carouselConfig)
     similarCompoundsList.initURL glados.Utils.URLS.getCurrentModelChemblID(), glados.Settings.DEFAULT_SIMILARITY_THRESHOLD
 
     viewConfig =
       embed_section_name: 'similar'
       embed_identifier: chemblID
-      title: "Compounds similar to #{chemblID} with at least 70% similarity:"
-      full_list_url: "/similarity_search_results/#{chemblID}/70"
+      title: "Compounds similar to #{chemblID} with at least 85% similarity:"
+      full_list_url: CompoundReportCardApp.getCurrentCompound().getSimilaritySearchURL()
       hide_on_error: true
+      carousel_config: carouselConfig
 
     new glados.views.ReportCards.CarouselInCardView
       collection: similarCompoundsList

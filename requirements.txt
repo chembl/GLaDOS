@@ -4,9 +4,10 @@ django-compressor>=2.0
 selenium==3.8.1
 twitter
 python3-memcached
-pyScss
+pyScss==1.3.5
 CoffeeScript==1.1.2
-watchdog
+watchdog==0.8.3
 whitenoise
 requests
 python-gettext
+elasticsearch-dsl>=6.1.0

@@ -6,6 +6,16 @@ class TargetReportCardApp extends glados.ReportCardApp
   @init = ->
     super
 
+    target = TargetReportCardApp.getCurrentTarget()
+
+    breadcrumbLinks = [
+      {
+        label: target.get('id')
+        link: Target.get_report_card_url(target.get('id'))
+      }
+    ]
+    glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
+
     TargetReportCardApp.initTargetNameAndClassification()
     TargetReportCardApp.initTargetComponents()
     TargetReportCardApp.initTargetRelations()
@@ -19,8 +29,7 @@ class TargetReportCardApp extends glados.ReportCardApp
     TargetReportCardApp.initDomainCrossReferences()
     TargetReportCardApp.initStructureCrossReferences()
 
-    
-    target = TargetReportCardApp.getCurrentTarget()
+
     target.fetch()
 
   # -------------------------------------------------------------

@@ -44,6 +44,14 @@ TWITTER_ACCESS_TOKEN_SECRET = '<TWITTER_ACCESS_TOKEN_SECRET>'
 TWITTER_CONSUMER_KEY = '<TWITTER_CONSUMER_KEY>'
 TWITTER_CONSUMER_SECRET = '<TWITTER_CONSUMER_SECRET>'
 
+# ----------------------------------------------------------------------------------------------------------------------
+# ElasticSearch
+# ----------------------------------------------------------------------------------------------------------------------
+
+ELASTICSEARCH_HOST = 'http://wp-p2m-50.ebi.ac.uk:9200'
+ELASTICSEARCH_USERNAME = None
+ELASTICSEARCH_PASSWORD = None
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = RUN_ENV == RunEnvs.DEV
 

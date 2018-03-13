@@ -1,31 +1,32 @@
-
 <div class='BCK-PreloaderContainer row'>
-  {% block comp_card_loaders %}
-  {% include "glados/base/card_loaders.html" %}
-  {% endblock %}
+    {% block comp_card_loaders %}
+        {% include "glados/base/card_loaders.html" %}
+    {% endblock %}
 </div>
 
 <div class='BCK-SuggestedLabel row' style="display: none">
-  <h5>No records were found. However, we found the following similar results:</h5>
+    <h5>No records were found. However, we found the following similar results:</h5>
 </div>
 
 <div class='BCK-EmptyListMessage row' style="display: none">
-  <h5>No records were found.</h5>
+    <h5>No records were found.</h5>
 </div>
 
-<div class='BCK-items-container row' data-hb-template="Handlebars-Common-Paginated-Card-Carousel"
-     style="display: none">
+<div class="carousel-container left-align">
 
-  <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+    <div class="BCK-chevrons-container row chevron-container" >
+        <div class="left valign-wrapper page-selector" data-page='previous'><a><i class="material-icons">chevron_left</i></a></div>
+        <div class="right valign-wrapper page-selector" data-page='next'><a><i class="material-icons">chevron_right</i></a></div>
+    </div>
 
-</div>
+    <div class='BCK-items-container row items-container' data-hb-template="Handlebars-Common-Paginated-Card-Carousel"
+         style="display: none">
+        <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+    </div>
 
-<div class="BCK-footer-container row" style="display: none">
-
-  <div class='BCK-paginator-container' data-hb-template="Handlebars-Common-Paginated-UL">
-
-    <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
-
-  </div>
-
+    <div class="BCK-footer-container carousel-footer" style="display: none">
+        <div class='BCK-paginator-container' data-hb-template="Handlebars-Common-Carousel-UL">
+            <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+        </div>
+    </div>
 </div>

@@ -2,7 +2,7 @@ glados.useNameSpace 'glados.apps.Main',
   MainGladosApp: class ActivitiesBrowserApp
 
     @showMainSplashScreen = -> $('#GladosMainSplashScreen').show()
-    @hideMainSplashScreen = -> $('#GladosMainSplashScreen').hide()
+    @hideMainSplashScreen = -> #$('#GladosMainSplashScreen').hide()
     @showMainGladosContent = -> $('#GladosMainContent').show()
 
     @baseTemplates:
@@ -12,8 +12,41 @@ glados.useNameSpace 'glados.apps.Main',
       browser: 'Handlebars-MainBrowserContent'
 
     @init = ->
-      glados.routers.MainGladosRouter.getInstance()
-      Backbone.history.start()
+
+      mainRouter = glados.routers.MainGladosRouter.getInstance()
+
+      #now if there are shortened params
+      shortenedURL = $('#GladosShortenedParamsContainer').attr('data-shortened-params')
+      if shortenedURL != ''
+
+        Backbone.history.start({silent: true})
+        window.history.pushState({}, '', glados.Settings.GLADOS_BASE_PATH_REL+glados.Settings.NO_SIDE_NAV_PLACEHOLDER)
+        mainRouter.navigate(shortenedURL, {trigger: true})
+      else
+        Backbone.history.start()
+
+    @setUpLinkShortenerListener = (containerElem) ->
+
+      mutationCallback = (mutationsList) ->
+
+        for mutation in mutationsList
+          addedNodes = mutation.addedNodes
+          for node in addedNodes
+            $node = $(node)
+            # check for the current added node
+            isAnchor = node.nodeName == 'A'
+            if isAnchor
+              glados.Utils.URLS.shortenHTMLLinkIfNecessary($node)
+
+            # and also check for check for the added node's descendants
+            $node.find('a').each (index) -> glados.Utils.URLS.shortenHTMLLinkIfNecessary($(@))
+
+      mutObserver = new MutationObserver(mutationCallback)
+      observationConfig =
+        childList: true
+        subtree: true
+
+      mutObserver.observe(containerElem, observationConfig)
 
     @prepareContentFor = (pageName, templateParams={}) ->
 
@@ -22,9 +55,10 @@ glados.useNameSpace 'glados.apps.Main',
       templateName = @baseTemplates[pageName]
       $gladosMainContent = $('#GladosMainContent')
       $gladosMainContent.empty()
+      @setUpLinkShortenerListener($gladosMainContent[0])
 
       glados.Utils.fillContentForElement($gladosMainContent, templateParams, templateName)
-      @hideMainSplashScreen()
+#      @hideMainSplashScreen()
       @showMainGladosContent()
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -32,6 +66,7 @@ glados.useNameSpace 'glados.apps.Main',
     # ------------------------------------------------------------------------------------------------------------------
     @initMainPage = ->
 
+      glados.apps.BreadcrumbApp.setBreadCrumb([], undefined, hideShareButton=true)
       @prepareContentFor('main_page')
       MainPageApp.init()
 
@@ -41,6 +76,20 @@ glados.useNameSpace 'glados.apps.Main',
     @initSearchResults = (currentTab, searchTerm, currentState) ->
 
       @prepareContentFor('search_results')
+
+      breadcrumbLinks = [
+        {
+          label: 'Search Results'
+          link: glados.Settings.SEARCH_RESULTS_PAGE
+        }
+        {
+          label: searchTerm
+          link: "#{glados.Settings.SEARCH_RESULTS_PAGE}/#{searchTerm}"
+          truncate: true
+        }
+      ]
+      glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
+
       SearchResultsApp.init(currentTab, searchTerm, currentState)
 
     @initSubstructureSearchResults = (searchTerm) ->
@@ -48,6 +97,15 @@ glados.useNameSpace 'glados.apps.Main',
       templateParams =
         type: 'Substructure'
       @prepareContentFor('structure_search_results', templateParams)
+
+      breadcrumbLinks = [
+        {
+          label: 'Substructure Search Results'
+          link: "#{glados.Settings.SUBSTRUCTURE_SEARCH_RESULTS_PAGE}#{searchTerm}"
+        }
+      ]
+
+      glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
       SearchResultsApp.initSubstructureSearchResults(searchTerm)
 
     @initSimilaritySearchResults = (searchTerm, threshold) ->
@@ -55,6 +113,14 @@ glados.useNameSpace 'glados.apps.Main',
       templateParams =
         type: 'Similarity'
       @prepareContentFor('structure_search_results', templateParams)
+
+      breadcrumbLinks = [
+        {
+          label: 'Similarity Search Results'
+          link: "#{glados.Settings.SIMILARITY_SEARCH_RESULTS_PAGE}#{searchTerm}/#{searchTerm}/#{threshold}"
+        }
+      ]
+      glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
       SearchResultsApp.initSimilaritySearchResults(searchTerm, threshold)
 
     @initFlexmatchSearchResults = (searchTerm) ->
@@ -62,16 +128,60 @@ glados.useNameSpace 'glados.apps.Main',
       templateParams =
         type: ''
       @prepareContentFor('structure_search_results', templateParams)
-      SearchResultsApp.initFlexmatchSearchResults(searchTerm)
 
+      breadcrumbLinks = [
+        {
+          label: 'Structure Search Results'
+          link: "#{glados.Settings.FLEXMATCH_SEARCH_RESULTS_PAGE}#{searchTerm}/#{searchTerm}"
+        }
+      ]
+      glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
+      SearchResultsApp.initFlexmatchSearchResults(searchTerm)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Entity Browsers
     # ------------------------------------------------------------------------------------------------------------------
     @initBrowserForEntity = (entityName, filter, state) ->
 
+      reverseDict = {}
+      for key, val of glados.Settings.ES_KEY_2_SEARCH_PATH
+        reverseDict[val] = key
+
+      reverseDict.activities = 'ACTIVITY'
+      # use dict created by jf
+      dictKey = reverseDict[entityName]
+
+      if entityName != 'activities'
+        listConfig = glados.models.paginatedCollections.Settings.ES_INDEXES[dictKey]
+      else
+        listConfig = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH[dictKey]
+
+      breadcrumbLinks = [
+        {
+          label: listConfig.LABEL
+          link: listConfig.BROWSE_LIST_URL()
+        }
+        {
+          label: filter
+          link: listConfig.BROWSE_LIST_URL(filter)
+          is_filter_link: true
+          truncate: true
+        }
+      ]
+
+      glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks,
+        longFilter=filter,
+        hideShareButton=false,
+        longFilterURL=listConfig.BROWSE_LIST_URL(filter))
       @prepareContentFor('browser')
       glados.apps.Browsers.BrowserApp.initBrowserForEntity(entityName, filter, state)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Report Cards
+    # ------------------------------------------------------------------------------------------------------------------
+    @initReportCard = (entityName, chemblID) ->
+
+      console.log 'INIT REPORT CARD'
 
 
 

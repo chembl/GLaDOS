@@ -53,6 +53,11 @@ glados.getScreenType = ->
 
 glados.useNameSpace 'glados',
   Settings:
+    MAX_GENERATED_URL_LENGTH: 1000
+    URL_SHORTENING_STATUSES:
+      REQUESTING_HASH: 'REQUESTING_HASH'
+      REQUESTING_ERROR: 'REQUESTING_ERROR'
+      SUCCESS: 'SUCCESS'
     PIECHARTS:
       MAX_CATEGORIES: 10
     VIS_COLORS:
@@ -244,6 +249,11 @@ glados.loadURLPaths = (request_root, app_root, static_root)->
 
   glados.Settings.OLD_DEFAULT_IMAGES_BASE_URL = 'https://www.ebi.ac.uk/chembl/compound/displayimage_large/'
 
+  glados.Settings.NEEDS_SHORTENING_REGEXP = \
+  new RegExp("#{glados.Settings.GLADOS_BASE_PATH_REL}#{glados.Settings.NO_SIDE_NAV_PLACEHOLDER}(/)?#")
+
+  glados.Settings.SHORTENING_MATCH_REPEXG = new RegExp("#.*$")
+
 
 # Loads the GLaDOS Top S3cre7 data, do not remove or js calls to post method in the django server will fail
 glados.loadGLaDOSTopS3cre7 = ()->
@@ -280,8 +290,13 @@ glados.loadSearchResultsURLS = ()->
     glados.Settings.ES_KEY_2_SEARCH_PATH[key_i] = path_i
 
   glados.Settings.SEARCH_RESULTS_PARSER_ENDPOINT = 'search_results_parser'
+  glados.Settings.SHORTEN_URLS_ENDPOINT = 'shorten_url'
+  glados.Settings.EXTEND_URLS_ENDPOINT = 'extend_url'
+  glados.Settings.SHORTEN_URLS_URL = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{glados.Settings.SHORTEN_URLS_ENDPOINT}"
+  glados.Settings.EXTEND_URLS_ENDPOINT_URL = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{glados.Settings.EXTEND_URLS_ENDPOINT}"
+  glados.Settings.SHORTENED_URL_GENERATOR =
+  Handlebars.compile("#{glados.Settings.GLADOS_BASE_PATH_REL}#{glados.Settings.NO_SIDE_NAV_PLACEHOLDER}/tiny/{{{hash}}}")
 
-  console.log 'going to set up template in settings'
   glados.Settings.ENTITY_BROWSERS_URL_TEMPLATE = glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL +
     "browse/{{entity}}{{#if filter}}/filter/{{filter}}{{/if}}"
   glados.Settings.ENTITY_BROWSERS_URL_GENERATOR = Handlebars.compile(glados.Settings.ENTITY_BROWSERS_URL_TEMPLATE)
@@ -324,12 +339,14 @@ glados.setupOnLoadAfterJS = () ->
   $(document).ajaxStart () ->
     glados.ajax_count++
     $('#GLaDOS-page-loaded').html('NO')
+#    $('#GladosMainSplashScreen').show()
   $(document).ajaxStop () ->
     glados.ajax_count--
     if glados.ajax_count == 0
       setTimeout(
         () ->
           $('#GLaDOS-page-loaded').html('YES')
+          $('#GladosMainSplashScreen').hide()
         , 1000
       )
 

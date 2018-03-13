@@ -1,0 +1,164 @@
+/*
+* SPLASH SCREEN
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+
+$splash-width: 60px;
+$splash-color1: #75D8D5;
+$splash-color2: #FE7F9D;
+
+@keyframes one {
+  0%, 5%, 95%, 100% {
+    transform: translate($splash-width/2,0px) scale(1);
+  }
+  50%, 45%, 55% {
+    transform: translate(0px,$splash-width/4) scale(0.6);
+  }
+}
+
+@keyframes one-half {
+  0%, 5%, 95%, 100% {
+    transform: translate(0px,$splash-width/4) scale(1);
+  }
+  50%, 45%, 55% {
+    transform: translate($splash-width/2,0px) scale(0.6);
+  }
+}
+
+@keyframes two {
+  0%, 5%, 95%, 100%{
+    transform: translate(0px,3*$splash-width/4) scale(1);
+  }
+  50%, 45%, 55% {
+    transform: translate($splash-width,$splash-width/4) scale(0.6);
+  }
+}
+
+@keyframes two-half {
+  0%, 5%, 95%, 100%{
+    transform: translate($splash-width,$splash-width/4) scale(1);
+  }
+  50%, 45%, 55% {
+    transform: translate(0px,3*$splash-width/4) scale(0.6);
+  }
+}
+
+@keyframes three {
+  0%, 5%, 95%, 100% {
+    transform: translate($splash-width/2,$splash-width) scale(1);
+  }
+  50%, 45%, 55% {
+    transform: translate($splash-width,3*$splash-width/4) scale(0.6);
+  }
+}
+
+@keyframes three-half {
+  0%, 5%, 95%, 100% {
+    transform: translate($splash-width,3*$splash-width/4) scale(1);
+  }
+  50%, 45%, 55% {
+    transform: translate($splash-width/2,$splash-width) scale(0.6);
+  }
+}
+
+@keyframes ease-to-white {
+  0% { background-color: rgba(0, 0, 0, 0.9); }
+  100% { background-color: rgba(0, 0, 0, 0.4); }
+}
+
+#GladosMainSplashScreen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  animation: ease-to-white 3s 1 ease-in;
+  background-color: rgba(0, 0, 0, 0.4);
+
+  .splash-card {
+    width: 30%;
+    height: 35%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FAFAFA;
+  }
+
+  .loader-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 200px;
+    height: 200px;
+    padding-top: 100px;
+
+    .loading-msg{
+      color: #cacaca;
+      font-size: 0.9em;
+      margin-top: 10px;
+    }
+
+    .chembl-logo {
+      color: #cacaca;
+      font-size: 1.8em;
+      background: none;
+      margin-top: 20px;
+    }
+
+    .spinner {
+      margin-top: 7px;
+      position: relative;
+      top: -100%;
+      left: -20%;
+    }
+
+    .ball {
+      margin-top: 12px;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      position: fixed;
+      mix-blend-mode: multiply;
+    }
+
+//one
+    .ball-1 {
+      background-color: $splash-color1;
+      animation: one 3s infinite ease-in-out;
+    }
+    .ball-2 {
+      background-color: $splash-color2;
+      animation: one-half 3s infinite ease-in-out;
+    }
+
+//two
+    .ball-3 {
+      background-color: $splash-color1;
+      animation: two 3s infinite ease-in-out;
+    }
+    .ball-4 {
+      background-color: $splash-color2;
+      animation: two-half 3s infinite ease-in-out;
+    }
+
+//three
+    .ball-5 {
+      background-color: $splash-color2;
+      animation: three 3s infinite ease-in-out;
+    }
+    .ball-6 {
+      background-color: $splash-color1;
+      animation: three-half 3s infinite ease-in-out;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .splash-card {
+    width: 100% !important;
+  }
+}

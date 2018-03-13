@@ -1,16 +1,22 @@
 <div class="ebi-links hide-on-small-only">
-  <div class="col s12">
-    <a href="https://www.ebi.ac.uk/" class="ebi-breadcrumb">EBI</a>
-      <span> > </span>
-    <a href="https://www.ebi.ac.uk/services/all" class="ebi-breadcrumb"> Databases</a>
-      <span> > </span>
-    <a href="https://www.ebi.ac.uk/services/chemical-biology" class="ebi-breadcrumb"> Chemical Biology</a>
-      <span> > </span>
-    <a href="{% url 'main' %}" class="ebi-breadcrumb"> ChEMBL Database</a>
 
-    <div id="BCK-breadcrumbs" class="chembl-breadcrumbs" data-hb-template="Handlebars-BreadcrumbsContent"></div>
+  <div id="BCK-breadcrumbs">
+    <div class="col s12">
+      <a href="https://www.ebi.ac.uk/" class="ebi-breadcrumb">EBI</a>
+        <span> > </span>
+      <a href="https://www.ebi.ac.uk/services/all" class="ebi-breadcrumb"> Databases</a>
+        <span> > </span>
+      <a href="https://www.ebi.ac.uk/services/chemical-biology" class="ebi-breadcrumb"> Chemical Biology</a>
+        <span> > </span>
+      <a href="{% url 'main' %}" class="ebi-breadcrumb"> ChEMBL Database</a>
+
+      <div class="chembl-breadcrumbs BCK-dynamic-breadcrumbs" data-hb-template="Handlebars-BreadcrumbsContent"></div>
     </div>
 
+    <div class="col s12 BCK-filter-explain" style="display: none" data-hb-template="Handlebars-FilterExplainContent">
+    </div>
+
+  </div>
 
 
 </div>

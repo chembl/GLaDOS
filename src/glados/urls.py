@@ -138,29 +138,12 @@ urlpatterns += [
   url(r'^search_results_parser.*$',
       glados.grammar.search_parser.parse_url_search, ),
 
-  # url(r'^search_results/.*?$',
-  #     DirectTemplateView.as_view(template_name="glados/SearchResultsParts/SearchResultsMain.html"), ),
-
-  url(r'^substructure_search_results/.*?$',
-      DirectTemplateView.as_view(template_name="glados/SubstructureSearchResultsParts/SearchResultsMain.html"), ),
-
-  url(r'^similarity_search_results/.*?$',
-      DirectTemplateView.as_view(template_name="glados/SimilaritySearchResultsParts/SearchResultsMain.html"), ),
-
-  url(r'^flexmatch_search_results/.*?$',
-      DirectTemplateView.as_view(template_name="glados/FlexmatchSearchResultsParts/SearchResultsMain.html"), ),
-
-  # Compound results graph
-  url(r'^compound_results_graph/$',
-      DirectTemplateView.as_view(template_name="glados/SearchResultsParts/CompoundResultsGraph.html"), ),
-
-  # Compound vs Target Matrix
-  url(r'^compound_target_matrix/$',
-      DirectTemplateView.as_view(template_name="glados/SearchResultsParts/CompoundTargetMatrix.html"), ),
-
-  # Embedded Compound vs Target Matrix
-  url(r'^compound_target_matrix/embed/$',
-      DirectTemplateView.as_view(template_name="glados/SearchResultsParts/CompoundTargetMatrixToEmbed.html"), ),
+  # --------------------------------------------------------------------------------------------------------------------
+  # Tiny urls
+  # --------------------------------------------------------------------------------------------------------------------
+  url(r'^g/tiny/(?P<hash>.*?)$', views.render_params_from_hash, name='tiny'),
+  url(r'^shorten_url', views.shorten_url, name='shorten'),
+  url(r'^extend_url/(?P<hash>.*?)$', views.extend_url, name='extend')
 
 ]
 

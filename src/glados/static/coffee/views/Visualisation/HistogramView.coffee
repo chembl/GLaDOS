@@ -240,7 +240,7 @@ glados.useNameSpace 'glados.views.Visualisation',
           .classed('title', @config.big_size)
           .on('click',
             if @config.title_link_url
-              -> window.open(thisView.config.title_link_url)
+              -> glados.Utils.URLS.shortenLinkIfTooLongAndOpen(thisView.config.title_link_url)
           )
 
       if not @config.big_size
@@ -381,7 +381,7 @@ glados.useNameSpace 'glados.views.Visualisation',
         .attr('height', @BARS_CONTAINER_HEIGHT)
         .attr('width', thisView.getXForBucket.rangeBand())
         .classed('front-bar', true)
-        .on('click', (b) -> window.open(b.link) )
+        .on('click', (b) -> glados.Utils.URLS.shortenLinkIfTooLongAndOpen(b.link) )
 
       barsColourScale = @config.bars_colour_scale
       if barsColourScale?
@@ -509,7 +509,7 @@ glados.useNameSpace 'glados.views.Visualisation',
             else
               return zScale(b.key)
           )
-          .on('click', (b) -> window.open(b.link))
+          .on('click', (b) -> glados.Utils.URLS.shortenLinkIfTooLongAndOpen(b.link))
 
 #       qtips
         stackedBarsGroups.each (d) ->

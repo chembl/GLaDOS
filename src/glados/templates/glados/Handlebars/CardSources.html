@@ -197,8 +197,10 @@
 
 <script id="Handlebars-Common-Paginated-Card-Carousel" type="text/x-handlebars-template">
 
-    <div class="col s12 m6 l4">
-        <div class="card grey lighten-5">
+        <div class= "col s{{small_size}}
+            m{{medium_size}}
+            l{{large_size}}">
+        <div class="card  grey lighten-4">
 
             {{#if img_url}}
                 <div class="white card-image">
@@ -215,6 +217,18 @@
         </div>
 
     </div>
+</script>
+
+
+<script id="Handlebars-Common-Carousel-UL" type="text/x-handlebars-template">
+    <div class="col s12 m4 l6 number-of-results">
+        Showing {{records_showing}} out of {{total_records}} records
+    </div>
+    <ul class="col s12 pagination center-align">
+        {{#each pages}}
+        <li class="waves-effect page-selector active" data-page='{{this}}'><a>{{this}}</a></li>
+        {{/each}}
+    </ul>
 
 </script>
 

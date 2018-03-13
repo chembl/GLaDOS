@@ -8,6 +8,7 @@ from django.conf import settings
 from glados.utils import *
 from django.core.cache import cache
 from django.http import JsonResponse
+import glados.url_shortener.url_shortener as url_shortener
 
 
 # Returns all acknowledgements grouped by current and old
@@ -148,6 +149,37 @@ def main_html_base(request):
 def main_html_base_no_bar(request):
 
   return render(request, 'glados/mainGladosNoBar.html')
+
+def render_params_from_hash(request, hash):
+
+  context = {
+    'shortened_params': url_shortener.get_original_url(hash)
+  }
+  return render(request, 'glados/mainGladosNoBar.html', context)
+
+def shorten_url(request):
+
+  if request.method == "POST":
+    long_url = request.POST.get('long_url', '')
+    short_url = url_shortener.shorten_url(long_url)
+
+    print('short_url', short_url)
+    resp_data = {
+      'hash': short_url
+    }
+    return JsonResponse(resp_data)
+
+  else:
+    return JsonResponse({'error': 'this is only available via POST'})
+
+def extend_url(request, hash):
+
+  resp_data = {
+    'long_url': url_shortener.get_original_url(hash)
+  }
+
+  return JsonResponse(resp_data)
+
 
 def wizard_step_json(request, step_id):
   """

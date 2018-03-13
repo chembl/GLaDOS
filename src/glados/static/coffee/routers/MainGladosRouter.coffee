@@ -7,6 +7,7 @@ glados.useNameSpace 'glados.routers',
       'similarity_search_results/:search_term/:threshold': 'initSimilaritySearchResults'
       'flexmatch_search_results/:search_term': 'initFlexmatchSearchResults'
       'browse/:entity_name(/filter/:filter)(/state/:state)': 'initBrowser'
+      'report_card/:entity_name/:chembl_id': 'initReportCard'
 
     execute: (callback, args, name) ->
       # Always reset the value of this variable on navigation
@@ -78,4 +79,7 @@ glados.useNameSpace 'glados.routers',
         if not searchTerm?
           searchTerm = tab
       return [selectedESEntity, searchTerm, state]
+
+    initReportCard: (entityName, chemblID) ->
+      glados.apps.Main.MainGladosApp.initReportCard(entityName, chemblID)
 
