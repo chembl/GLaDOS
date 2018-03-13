@@ -231,7 +231,6 @@ glados.useNameSpace 'glados.views.Browsers',
 
     render: ->
 
-      console.log 'RENDER FILTERS'
       if @collection.isStreaming()
         @facetsStreamingCover.show()
       else
