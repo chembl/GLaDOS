@@ -1564,8 +1564,23 @@ em.glados-result-highlight {
 
 .ebi-breadcrumb {
   font-size: 70%;
-}
+  &.truncate {
+    max-width: 200px;
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    line-height: 10px;
+  }
 
+}
+.long-filter-content{
+  max-height: 20vh;
+  overflow: scroll;
+}
+.share-url{
+  padding: 4px;
+  border: 1px solid $primary-color-dark;
+}
 /**
 * Acknowledgements
 * ----------------------------------------------------------------------------------------------------------------------

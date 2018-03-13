@@ -5,6 +5,12 @@ glados.useNameSpace 'glados.models',
     idAttribute:'tissue_chembl_id'
 
     initialize: ->
+
+      id = @get('id')
+      id ?= @get('tissue_chembl_id')
+      @set('id', id)
+      @set('tissue_chembl_id', id)
+
       @url = glados.Settings.WS_BASE_URL + 'tissue/' + @get('tissue_chembl_id') + '.json'
 
     parse: (response) ->
@@ -92,3 +98,9 @@ glados.models.Tissue.COLUMNS_SETTINGS = {
 glados.models.Tissue.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS = _.union(
   glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD,
   glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL)
+
+glados.models.Tissue.getTissuesListURL = (filter) ->
+
+  glados.Settings.ENTITY_BROWSERS_URL_GENERATOR
+    entity: 'tissues'
+    filter: encodeURIComponent(filter) unless not filter?

@@ -7,6 +7,15 @@ class AssayReportCardApp extends glados.ReportCardApp
 
     super
     assay = AssayReportCardApp.getCurrentAssay()
+
+    breadcrumbLinks = [
+      {
+        label: assay.get('id')
+        link: Assay.get_report_card_url(assay.get('id'))
+      }
+    ]
+    glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
+
     AssayReportCardApp.initAssayBasicInformation()
     AssayReportCardApp.initCurationSummary()
     AssayReportCardApp.initActivitySummary()

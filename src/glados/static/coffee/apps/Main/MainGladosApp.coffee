@@ -66,6 +66,7 @@ glados.useNameSpace 'glados.apps.Main',
     # ------------------------------------------------------------------------------------------------------------------
     @initMainPage = ->
 
+      glados.apps.BreadcrumbApp.setBreadCrumb([], undefined, hideShareButton=true)
       @prepareContentFor('main_page')
       MainPageApp.init()
 
@@ -75,6 +76,20 @@ glados.useNameSpace 'glados.apps.Main',
     @initSearchResults = (searchTerm) ->
 
       @prepareContentFor('search_results')
+
+      breadcrumbLinks = [
+        {
+          label: 'Search Results'
+          link: glados.Settings.SEARCH_RESULTS_PAGE
+        }
+        {
+          label: searchTerm
+          link: "#{glados.Settings.SEARCH_RESULTS_PAGE}/#{searchTerm}"
+          truncate: true
+        }
+      ]
+      glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
+
       SearchResultsApp.init(searchTerm)
 
     @initSubstructureSearchResults = (searchTerm) ->
@@ -82,6 +97,15 @@ glados.useNameSpace 'glados.apps.Main',
       templateParams =
         type: 'Substructure'
       @prepareContentFor('structure_search_results', templateParams)
+
+      breadcrumbLinks = [
+        {
+          label: 'Substructure Search Results'
+          link: "#{glados.Settings.SUBSTRUCTURE_SEARCH_RESULTS_PAGE}#{searchTerm}"
+        }
+      ]
+
+      glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
       SearchResultsApp.initSubstructureSearchResults(searchTerm)
 
     @initSimilaritySearchResults = (searchTerm, threshold) ->
@@ -89,6 +113,14 @@ glados.useNameSpace 'glados.apps.Main',
       templateParams =
         type: 'Similarity'
       @prepareContentFor('structure_search_results', templateParams)
+
+      breadcrumbLinks = [
+        {
+          label: 'Similarity Search Results'
+          link: "#{glados.Settings.SIMILARITY_SEARCH_RESULTS_PAGE}#{searchTerm}/#{searchTerm}/#{threshold}"
+        }
+      ]
+      glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
       SearchResultsApp.initSimilaritySearchResults(searchTerm, threshold)
 
     @initFlexmatchSearchResults = (searchTerm) ->
@@ -96,14 +128,51 @@ glados.useNameSpace 'glados.apps.Main',
       templateParams =
         type: ''
       @prepareContentFor('structure_search_results', templateParams)
-      SearchResultsApp.initFlexmatchSearchResults(searchTerm)
 
+      breadcrumbLinks = [
+        {
+          label: 'Structure Search Results'
+          link: "#{glados.Settings.FLEXMATCH_SEARCH_RESULTS_PAGE}#{searchTerm}/#{searchTerm}"
+        }
+      ]
+      glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
+      SearchResultsApp.initFlexmatchSearchResults(searchTerm)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Entity Browsers
     # ------------------------------------------------------------------------------------------------------------------
     @initBrowserForEntity = (entityName, filter, state) ->
 
+      reverseDict = {}
+      for key, val of glados.Settings.ES_KEY_2_SEARCH_PATH
+        reverseDict[val] = key
+
+      reverseDict.activities = 'ACTIVITY'
+      # use dict created by jf
+      dictKey = reverseDict[entityName]
+
+      if entityName != 'activities'
+        listConfig = glados.models.paginatedCollections.Settings.ES_INDEXES[dictKey]
+      else
+        listConfig = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH[dictKey]
+
+      breadcrumbLinks = [
+        {
+          label: listConfig.LABEL
+          link: listConfig.BROWSE_LIST_URL()
+        }
+        {
+          label: filter
+          link: listConfig.BROWSE_LIST_URL(filter)
+          is_filter_link: true
+          truncate: true
+        }
+      ]
+
+      glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks,
+        longFilter=filter,
+        hideShareButton=false,
+        longFilterURL=listConfig.BROWSE_LIST_URL(filter))
       @prepareContentFor('browser')
       glados.apps.Browsers.BrowserApp.initBrowserForEntity(entityName, filter, state)
 
