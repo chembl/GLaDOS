@@ -59,7 +59,7 @@ class StaticFilesCompiler(object):
             StaticFilesCompiler.SCSS_COMPILE_FUNC,
             StaticFilesCompiler.SCSS_PATH,
             StaticFilesCompiler.SCSS_GEN_PATH,
-            '.scss','.css', exclude_regex_str="^_.*"
+            '.scss', '.css', exclude_regex_str=r'^_.*'
         )
         return compiler.compiled_all_correctly_on_start
 
@@ -102,6 +102,7 @@ class StaticFilesCompiler(object):
             compile_result = self.compiler_function(file_in)
             with open(file_out, 'w') as file_out_i:
                 file_out_i.write(compile_result)
+            print('COMPILED: {0}'.format(file_in))
             return True
         except Exception as e:
             print("WARNING: Failed to compile file: {0}".format(file_in))
@@ -128,13 +129,14 @@ class StaticFilesCompiler(object):
         import time
         t_ini = time.time()
         tpe_tasks = []
-        with futures.ThreadPoolExecutor(max_workers=5) as tpe:
+        with futures.ThreadPoolExecutor(max_workers=1) as tpe:
             print("Compiling {0} files.".format(self.ext_to_compile))
             for cur_dir, dirs, files in os.walk(top=self.src_path):
                 compiled_dir_path = self.get_compiled_path(cur_dir)
                 mkdirs_called = False
                 for file_i in files:
                     if self.exclude_regex is not None and self.exclude_regex.match(file_i):
+                        print('EXCLUDED: {0}/{1}'.format(cur_dir, file_i))
                         continue
                     # only create dirs and files if the compilation is successful and the files are not excluded
                     if not mkdirs_called:
@@ -143,6 +145,7 @@ class StaticFilesCompiler(object):
                     file_src_i = os.path.join(cur_dir, file_i)
                     compiled_out_path = self.get_compiled_out_path(file_i, compiled_dir_path)
                     if compiled_out_path is not None:
+                        print('SUBMITTING: {0}/{1}'.format(cur_dir, file_i))
                         tpe_task = tpe.submit(self.compile_and_save, file_src_i, compiled_out_path)
                         tpe_tasks.append(tpe_task)
             tpe.shutdown(wait=True)
