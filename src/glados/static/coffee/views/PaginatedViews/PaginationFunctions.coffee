@@ -109,13 +109,18 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       $elem.hide()
       $elemChevrons.hide()
 
-    fillPaginators: ->
+    fillPaginators: (customPage) ->
 
       $elem = $(@el).find('.BCK-paginator-container')
       if $elem.length == 0
         return
       template = $('#' + $elem.attr('data-hb-template'))
-      current_page = @collection.getMeta('current_page')
+
+      if customPage?
+        current_page = customPage
+      else
+        current_page = @collection.getMeta('current_page')
+
       records_in_page = @collection.getMeta('records_in_page')
       page_size = @collection.getMeta('page_size')
       num_pages = @collection.getMeta('total_pages')

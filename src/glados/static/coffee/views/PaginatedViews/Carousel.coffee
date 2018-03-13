@@ -27,6 +27,15 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           else
             resetPageSizeProxy glados.Settings.DEFAULT_CAROUSEL_SIZES[GlobalVariables.CURRENT_SCREEN_TYPE]
 
+    bindCollectionEvents: ->
+      @collection.on glados.Events.Collections.SELECTION_UPDATED, @selectionChangedHandler, @
+
+      if @customRenderEvents?
+        @collection.on @customRenderEvents, @.render, @
+
+      @collection.on 'reset sort do-repaint', @render, @
+      @collection.on 'error', @handleError, @
+
     getPageEvent: (event) ->
       clicked = $(event.currentTarget)
       currentPage = @collection.getMeta('current_page')
@@ -39,28 +48,28 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         return
 
       if parseInt(pageNum) == parseInt(currentPage) - 1
+        console.log 'Clicked same page: do nothing'
         return
 
-#     Going backwards
+#     Going backwards (collection is one page ahead of paginator number)
       if parseInt(pageNum) < parseInt(currentPage) - 1 or clicked.attr('data-page') == 'previous'
-        console.log 'GO BACK'
+        console.log 'Go back'
+        paginatorPage = if clicked.hasClass('previous') then parseInt(currentPage) - 2 else parseInt(pageNum)
+        console.log 'GOING BACK TO PAGE: ', paginatorPage
+        @animateCards(currentPage, paginatorPage)
 
-#        paginatorPage = if clicked.hasClass('previous') then currentPage - 1 else pageNum
-#        @animateCards(currentPage, paginatorPage)
-#
-##        @animateCards(currentPage, paginatorPage)
-#        @collection.setMeta('current_page', paginatorPage)
-#        @fillPaginators()
+#        @fillPaginators(customPag)
         return
 
 #     Going forward
       nextPage = if pageNum == 'next' then currentPage else pageNum
       @generatePageQueue(parseInt(currentPage), parseInt(nextPage))
       nextPageToLoad = @pageQueue.shift()
+      #if next page is
       @requestPageInCollection(nextPageToLoad)
       @collection.setMeta('current_page',nextPage)
       @fillPaginators()
-#      @animateCards(currentPage, nextPage)
+      @animateCards(currentPage, nextPage)
 
     generatePageQueue: (startPage, endPage) ->
       @pageQueue = (num for num in [(startPage + 1)..(endPage + 1)])
