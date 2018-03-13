@@ -67,6 +67,7 @@ glados.useNameSpace 'glados.views.Browsers',
     # Render
     # ------------------------------------------------------------------------------------------------------------------
     wakeUp: ->
+
       if @collection.facetsReady
         @render()
 
@@ -229,15 +230,13 @@ glados.useNameSpace 'glados.views.Browsers',
     destroyAllTooltips: -> glados.Utils.Tooltips.destroyAllTooltips($(@el))
 
     render: ->
+
       if @collection.isStreaming()
         @facetsStreamingCover.show()
       else
         @facetsStreamingCover.hide()
 
       if not $(@el).is(":visible") or $(@el).width() == 0
-        return
-
-      if @checkIfNoItems()
         return
 
       @destroyAllTooltips()
