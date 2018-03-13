@@ -48,27 +48,25 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         return
 
       if parseInt(pageNum) == parseInt(currentPage) - 1
-        console.log 'Clicked same page: do nothing'
         return
 
 #     Going backwards (collection is one page ahead of paginator number)
       if parseInt(pageNum) < parseInt(currentPage) - 1 or clicked.attr('data-page') == 'previous'
-        console.log 'Go back'
         paginatorPage = if clicked.hasClass('previous') then parseInt(currentPage) - 2 else parseInt(pageNum)
         console.log 'GOING BACK TO PAGE: ', paginatorPage
-#        @animateCards(currentPage, paginatorPage)
+#        @fillPaginators(paginatorPage)
+#       @animateCards(currentPage, paginatorPage)
 
-#        @fillPaginators(customPag)
-        return
+      else
+  #     Going forward
+        nextPage = if pageNum == 'next' then currentPage else pageNum
+        @generatePageQueue(parseInt(currentPage), parseInt(nextPage))
+        nextPageToLoad = @pageQueue.shift()
+        if nextPageToLoad > currentPage
+          @requestPageInCollection(nextPageToLoad)
 
-#     Going forward
-      nextPage = if pageNum == 'next' then currentPage else pageNum
-      @generatePageQueue(parseInt(currentPage), parseInt(nextPage))
-      nextPageToLoad = @pageQueue.shift()
-      #if next page is > collection current Page
-      @requestPageInCollection(nextPageToLoad)
-#      @fillPaginators(nextPage)
-#      @animateCards(currentPage, nextPage)
+#        @fillPaginators(nextPage)
+  #      @animateCards(currentPage, nextPage)
 
     generatePageQueue: (startPage, endPage) ->
       @pageQueue = (num for num in [(startPage + 1)..(endPage + 1)])
