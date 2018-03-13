@@ -65,11 +65,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       nextPage = if pageNum == 'next' then currentPage else pageNum
       @generatePageQueue(parseInt(currentPage), parseInt(nextPage))
       nextPageToLoad = @pageQueue.shift()
-      #if next page is
+      #if next page is > collection current Page
       @requestPageInCollection(nextPageToLoad)
-      @collection.setMeta('current_page',nextPage)
-      @fillPaginators()
-      @animateCards(currentPage, nextPage)
+      @fillPaginators(nextPage)
+#      @animateCards(currentPage, nextPage)
 
     generatePageQueue: (startPage, endPage) ->
       @pageQueue = (num for num in [(startPage + 1)..(endPage + 1)])
@@ -86,8 +85,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       if nextPageToLoad?
         @requestPageInCollection(nextPageToLoad)
-        @collection.setMeta('current_page', nextPageToLoad - 1)
-        @fillPaginators()
+        @fillPaginators(parseInt(nextPageToLoad) - 1)
 
       @fillSelectAllContainer() unless @disableItemsSelection
       if @collection.getMeta('total_pages') == 1

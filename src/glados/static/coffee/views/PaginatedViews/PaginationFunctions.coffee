@@ -47,9 +47,12 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @collection.setPage(pageNum)
 
 
-    enableDisableNextLastButtons: ->
+    enableDisableNextLastButtons: (customPage) ->
 
-      current_page = parseInt(@collection.getMeta('current_page'))
+      if customPage?
+        current_page = customPage
+      else
+        current_page = parseInt(@collection.getMeta('current_page'))
       total_pages = parseInt(@collection.getMeta('total_pages'))
 
       if current_page == 1
@@ -62,9 +65,12 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       else
         $(@el).find("[data-page='next']").removeClass('disabled')
 
-    activateCurrentPageButton: ->
+    activateCurrentPageButton: (customPage) ->
 
-      current_page = @collection.getMeta('current_page')
+      if customPage?
+        current_page = customPage
+      else
+        current_page = @collection.getMeta('current_page')
       $(@el).find('.page-selector').removeClass('active')
       $(@el).find("[data-page=" + current_page + "]").addClass('active')
 
@@ -121,6 +127,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       else
         current_page = @collection.getMeta('current_page')
 
+      console.log 'current_page', current_page
+      console.log 'collection_page: ', @collection.getMeta('current_page')
+
       records_in_page = @collection.getMeta('records_in_page')
       page_size = @collection.getMeta('page_size')
       num_pages = @collection.getMeta('total_pages')
@@ -158,7 +167,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         show_next_ellipsis: show_next_ellipsis
         show_previous_ellipsis: show_previous_ellipsis
 
-      @activateCurrentPageButton()
-      @enableDisableNextLastButtons()
+      @activateCurrentPageButton(customPage)
+      @enableDisableNextLastButtons(customPage)
 
 
