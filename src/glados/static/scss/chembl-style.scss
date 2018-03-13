@@ -3664,17 +3664,9 @@ $chevron-button-margin: 0px;
     font-size: 1.2em;
 
     margin: 0 10px 0 20px !important;
-  }
 
-  p {
-    quotes: "\201C" "\201D";
-  }
-  p:before {
-    content: open-quote;
-    font-size: 1.4em;
-  }
-  p:after {
-    content: close-quote;
-    font-size: 1.4em;
+    b {
+      color: rgba(0, 133, 121, 0.91) !important;
+    }
   }
 }
