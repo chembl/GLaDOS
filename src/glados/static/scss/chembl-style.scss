@@ -12,7 +12,26 @@
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
+@font-face {
+  font-family: "ChEMBL_Verdana";
+  src: local(Verdana), url("../../font/verdana/Verdana.eot");
+  src: url("../../font/verdana/Verdana.eot?#iefix") format("embedded-opentype"), url("../../font/verdana/Verdana.woff") format("woff"), url("../../font/verdana/Verdana.ttf") format("truetype"), url('../../font/verdana/Verdana.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
 
+@font-face {
+  font-family: "ChEMBL_Verdana";
+  src: local(Verdana Bold), url("../../font/verdana/Verdana-Bold.eot");
+  src: url("../../font/verdana/Verdana-Bold.eot?#iefix") format("embedded-opentype"), url("../../font/verdana/Verdana-Bold.woff") format("woff"), url("../../font/verdana/Verdana-Bold.ttf") format("truetype"), url('../../font/verdana/Verdana-Bold.svg') format('svg');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "ChEMBL_HelveticaNeueLTPRo";
+  src: local(Verdana Bold), url("../../font/helvetica/helveticaneueltprolt.eot");
+  src: url("../../font/helvetica/helveticaneueltprolt.eot?#iefix") format("embedded-opentype"), url("../../font/helvetica/helveticaneueltprolt.woff") format("woff"), url("../../font/helvetica/helveticaneueltprolt.ttf") format("truetype"), url('../../font/helvetica/helveticaneueltprolt.svg') format('svg'), url('../../font/helvetica/helveticaneueltprolt.otf') format('otf');
+}
 
 /**
 * Typograhpy and colours
@@ -3592,10 +3611,11 @@ $chevron-button-margin: 0px;
   }
 }
 
-.report-card-container {
-  max-width: 1280px + 200px;
+  .report-card-container {
+    max-width: 1280px + 200px;
 
-}
+  }
+
 
 /**
 * Visualisation Cards
@@ -3654,27 +3674,7 @@ $chevron-button-margin: 0px;
 }
 
 .about-chembl {
-  height: 100%;
   p {
-
-    color: rgba(0, 133, 121, 0.91) !important;
-    font-family: "Sentinel SSm A", "Sentinel SSm B", "sans-serif";
-    font-style: italic;
-    line-height: 1.4em;
-    font-size: 1.2em;
-
     margin: 0 10px 0 20px !important;
-  }
-
-  p {
-    quotes: "\201C" "\201D";
-  }
-  p:before {
-    content: open-quote;
-    font-size: 1.4em;
-  }
-  p:after {
-    content: close-quote;
-    font-size: 1.4em;
   }
 }
