@@ -118,9 +118,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     fillPaginators: (customPage) ->
 
-      console.log '------------------'
-      console.log 'FILL PAGINATORS'
-      console.log 'custom Page:', customPage
       $elem = $(@el).find('.BCK-paginator-container')
       if $elem.length == 0
         return
@@ -129,10 +126,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if customPage?
         current_page = parseInt(customPage)
       else
-        current_page = @collection.getMeta('current_page')
-
-#      console.log 'current_page', current_page
-#      console.log 'collection_page: ', @collection.getMeta('current_page')
+        current_page = parseInt(@collection.getMeta('current_page'))
 
       records_in_page = parseInt(@collection.getMeta('records_in_page'))
       page_size = parseInt(@collection.getMeta('page_size'))
@@ -162,11 +156,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         show_previous_ellipsis = true
 
       pages = (num for num in [first_page_to_show..last_page_to_show])
-      console.log 'pages: ', pages
-      console.log 'first_page_to_show: ', first_page_to_show
-      console.log 'last_page_to_show: ', last_page_to_show
-
-
       $elem.html Handlebars.compile(template.html())
         pages: pages
         records_showing: glados.Utils.getFormattedNumber(first_record+1) + '-' + \

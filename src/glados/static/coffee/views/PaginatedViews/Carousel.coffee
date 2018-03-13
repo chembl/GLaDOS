@@ -52,30 +52,22 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         return
 
 #     Going backwards
-
-#      console.log 'PAGE NUM', pageNum
-#      console.log 'ACTIVE PAGE', @activePage
-#      console.log '----'
-
-      console.log 'BACKWARDS?: ', parseInt(pageNum) < parseInt(@activePage) or clicked.attr('data-page') == 'previous'
       if parseInt(pageNum) < parseInt(@activePage) or clicked.attr('data-page') == 'previous'
-        console.log 'backwards: ', @activePage
-        @activePage = if clicked.hasClass('previous') then @activePage - 1 else pageNum
-        @fillPaginators(@activePage)
+        @activePage = if clicked.hasClass('previous') then parseInt(@activePage) - 1 else pageNum
+        @fillPaginators(parseInt(@activePage))
 #       @animateCards(currentPage, paginatorPage)
         return
 
 #     Going forward
       else
-        console.log 'FORWARD!'
-        @activePage  = if pageNum == 'next' then @activePage + 1 else pageNum
+        @activePage  = if pageNum == 'next' then parseInt(@activePage) + 1 else pageNum
 
         if parseInt(@activePage) >= parseInt(currentPage)
           @generatePageQueue(parseInt(currentPage), parseInt(@activePage))
           nextPageToLoad = @pageQueue.shift()
           @requestPageInCollection(nextPageToLoad)
         else
-          @fillPaginators(@activePage)
+          @fillPaginators(parseInt(@activePage))
   #      @animateCards(currentPage, nextPage)
 
     generatePageQueue: (startPage, endPage) ->
@@ -96,7 +88,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if nextPageToLoad?
         @requestPageInCollection(nextPageToLoad)
 
-      @fillPaginators(@activePage)
+      @fillPaginators(parseInt(@activePage))
       @fillSelectAllContainer() unless @disableItemsSelection
       if @collection.getMeta('total_pages') == 1
         @hidePaginators()
