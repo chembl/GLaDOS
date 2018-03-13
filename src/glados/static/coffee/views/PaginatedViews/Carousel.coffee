@@ -38,24 +38,29 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if clicked.hasClass('disabled')
         return
 
-      if pageNum <= currentPage - 1 or clicked.attr('data-page') == 'previous'
+      if parseInt(pageNum) == parseInt(currentPage) - 1
+        return
 
-        paginatorPage = if clicked.hasClass('previous') then currentPage - 1 else pageNum
-        @animateCards(currentPage, paginatorPage)
+#     Going backwards
+      if parseInt(pageNum) < parseInt(currentPage) - 1 or clicked.attr('data-page') == 'previous'
+        console.log 'GO BACK'
+
+#        paginatorPage = if clicked.hasClass('previous') then currentPage - 1 else pageNum
+#        @animateCards(currentPage, paginatorPage)
 #
+##        @animateCards(currentPage, paginatorPage)
 #        @collection.setMeta('current_page', paginatorPage)
 #        @fillPaginators()
         return
 
+#     Going forward
       nextPage = if pageNum == 'next' then currentPage else pageNum
-
       @generatePageQueue(parseInt(currentPage), parseInt(nextPage))
       nextPageToLoad = @pageQueue.shift()
       @requestPageInCollection(nextPageToLoad)
-
       @collection.setMeta('current_page',nextPage)
       @fillPaginators()
-      @animateCards(currentPage, nextPage)
+#      @animateCards(currentPage, nextPage)
 
     generatePageQueue: (startPage, endPage) ->
       @pageQueue = (num for num in [(startPage + 1)..(endPage + 1)])
