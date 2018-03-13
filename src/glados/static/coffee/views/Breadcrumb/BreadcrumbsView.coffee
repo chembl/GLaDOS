@@ -31,10 +31,12 @@ glados.useNameSpace 'glados.views.Breadcrumb',
         $linkToShareURL = $editorModal.find('.BCK-link-to-share-url')
 
         needsShortening = glados.Utils.URLS.URLNeedsShortening(window.location.href, 100)
+        match = window.location.href.match(glados.Settings.SHORTENING_MATCH_REPEXG)
 
-        urlToShorten = window.location.href.match(glados.Settings.SHORTENING_MATCH_REPEXG)[0]
-        if needsShortening
 
+        if needsShortening and match?
+
+          urlToShorten = window.location.href.match(glados.Settings.SHORTENING_MATCH_REPEXG)[0]
           $linkToShareURL.text('Loading...')
           paramsDict =
             long_url: urlToShorten
