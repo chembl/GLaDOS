@@ -418,7 +418,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         console.log 'base url: ', @baseUrl
         @setMeta('base_url', @baseUrl, true)
         @setMeta('use_post', true)
-        @setMeta('extra_params', ['only=molecule_chembl_id'])
+        @setMeta('extra_params', ['only=molecule_chembl_id,similarity'])
         params = {
           similarity: percentage
         }
