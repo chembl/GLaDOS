@@ -56,7 +56,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         console.log 'Go back'
         paginatorPage = if clicked.hasClass('previous') then parseInt(currentPage) - 2 else parseInt(pageNum)
         console.log 'GOING BACK TO PAGE: ', paginatorPage
-        @animateCards(currentPage, paginatorPage)
+#        @animateCards(currentPage, paginatorPage)
 
 #        @fillPaginators(customPag)
         return
@@ -67,7 +67,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       nextPageToLoad = @pageQueue.shift()
       #if next page is > collection current Page
       @requestPageInCollection(nextPageToLoad)
-      @fillPaginators(nextPage)
+#      @fillPaginators(nextPage)
 #      @animateCards(currentPage, nextPage)
 
     generatePageQueue: (startPage, endPage) ->
@@ -85,8 +85,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       if nextPageToLoad?
         @requestPageInCollection(nextPageToLoad)
-        @fillPaginators(parseInt(nextPageToLoad) - 1)
 
+      @fillPaginators(@collection.getMeta('current_page') - 1)
       @fillSelectAllContainer() unless @disableItemsSelection
       if @collection.getMeta('total_pages') == 1
         @hidePaginators()

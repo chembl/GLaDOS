@@ -71,6 +71,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         current_page = customPage
       else
         current_page = @collection.getMeta('current_page')
+
       $(@el).find('.page-selector').removeClass('active')
       $(@el).find("[data-page=" + current_page + "]").addClass('active')
 
