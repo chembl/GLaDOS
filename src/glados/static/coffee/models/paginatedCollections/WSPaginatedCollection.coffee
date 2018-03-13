@@ -268,10 +268,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       customPageNum = 1
       # 1000 is the maximun page size allowed by the ws
       customPageSize = 500
-      console.log 'going to get firt url'
       firstURL = @getPaginatedURL(customPageSize, customPageNum)
-      console.log 'firstURL: ', firstURL
       baseURL = firstURL.split('/chembl/')[0]
+
+
+
 
       # this is to keep the same strucutre as the function for the elasticsearch collections
       baseDeferred = jQuery.Deferred()
@@ -279,13 +280,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @allResults = []
       thisView = @
       getPage = (url, first = false) ->
-        console.log 'getPage! '
         # Uses POST if set in the meta
         use_post = thisView.getMeta('use_post')
         deferredGetPage = null
         if use_post and url == firstURL
-          console.log 'post parameters: ', thisView.getMeta('post_parameters')
-          console.log 'url: ', url
           fetchOptions =
             headers: {
               'X-HTTP-Method-Override': 'GET'
@@ -298,7 +296,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           deferredGetPage = $.get(url)
 
         deferredGetPage.done((response) ->
-          console.log 'response: ', response
           itemsKeyName =  _.reject(Object.keys(response), (key) -> key == 'page_meta')[0]
           totalRecords = if onlyFirstN? then Math.min(onlyFirstN, response.page_meta.total_count)\
             else response.page_meta.total_count
