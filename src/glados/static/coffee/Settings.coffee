@@ -151,7 +151,7 @@ glados.useNameSpace 'glados',
     RESPONSIVE_SIZE_CHECK_WAIT: 300
     # by default the debug is deactivated
     DEBUG: false
-    DEFAULT_SIMILARITY_THRESHOLD: 70
+    DEFAULT_SIMILARITY_THRESHOLD: 85
     LARGE_SCREEN_SIZE: 992
     SMALL_SCREEN_SIZE: 600
     SMALL_SCREEN: 'SMALL_SCREEN'
