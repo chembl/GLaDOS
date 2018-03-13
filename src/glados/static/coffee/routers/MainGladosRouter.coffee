@@ -64,6 +64,25 @@ glados.useNameSpace 'glados.routers',
       return url
 
     updateSearchURL: (esEntityKey, searchTerm, currentState, trigger=false)->
+      tabLabelPrefix = ''
+      if _.has glados.models.paginatedCollections.Settings.ES_INDEXES, esEntityKey
+        tabLabelPrefix = glados.models.paginatedCollections.Settings.ES_INDEXES[esEntityKey].LABEL
+      breadcrumbLinks = [
+        {
+          label: (tabLabelPrefix+' Search Results').trim()
+          link: @getSearchURL(esEntityKey, null, null)
+          truncate: true
+        }
+      ]
+      if searchTerm?
+        breadcrumbLinks.push
+          {
+            label: searchTerm
+            link: @getSearchURL(esEntityKey, searchTerm, null)
+            truncate: true
+          }
+      glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
+
       glados.routers.MainGladosRouter.getInstance().navigate(
         @getSearchURL(esEntityKey, searchTerm, currentState, true),
         {

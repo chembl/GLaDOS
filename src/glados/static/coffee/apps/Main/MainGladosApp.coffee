@@ -77,19 +77,6 @@ glados.useNameSpace 'glados.apps.Main',
 
       @prepareContentFor('search_results')
 
-      breadcrumbLinks = [
-        {
-          label: 'Search Results'
-          link: glados.Settings.SEARCH_RESULTS_PAGE
-        }
-        {
-          label: searchTerm
-          link: "#{glados.Settings.SEARCH_RESULTS_PAGE}/#{searchTerm}"
-          truncate: true
-        }
-      ]
-      glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
-
       SearchResultsApp.init(currentTab, searchTerm, currentState)
 
     @initSubstructureSearchResults = (searchTerm) ->
