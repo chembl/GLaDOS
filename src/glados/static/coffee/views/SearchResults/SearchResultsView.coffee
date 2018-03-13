@@ -8,9 +8,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       @browsersDict = {}
       @$searchResultsListsContainersDict = {}
-      @selected_es_entity = null
-      @es_path = null
-      @parseURLData()
+      @selected_es_entity = @attributes?.selected_es_entity || null
 
       $listsContainer = $(@el).find('.BCK-ESResults-lists')
       # @model.getResultsListsDict() and glados.models.paginatedCollections.Settings.ES_INDEXES
@@ -41,8 +39,8 @@ glados.useNameSpace 'glados.views.SearchResults',
           resultsListsDict[resourceName].on('score_and_records_update',@sortResultsListsViews, @)
           resultsListsDict[resourceName].on('score_and_records_update',@renderTabs, @)
 
-      @showSelectedResourceOnly()
       @renderTabs()
+      @showSelectedResourceOnly()
 
     # ------------------------------------------------------------------------------------------------------------------
     # sort Elements
@@ -98,7 +96,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         prepend_br: false
         total_records: 0
         label: 'All Results'
-        url_path: @getSearchURLFor(null, @model.get('queryString'))
+        url_path: glados.routers.MainGladosRouter.getSearchURL(null, @model.get('queryString'), null)
         selected: if @selected_es_entity then false else true
       })
 
@@ -116,7 +114,7 @@ glados.useNameSpace 'glados.views.SearchResults',
           total_records: totalRecords
           label:resourceLabel
           key: key_i
-          url_path: @getSearchURLFor(key_i, @model.get('queryString'))
+          url_path: glados.routers.MainGladosRouter.getSearchURL(key_i, @model.get('queryString'), null)
           selected: @selected_es_entity == key_i
         })
 
@@ -127,17 +125,6 @@ glados.useNameSpace 'glados.views.SearchResults',
 #      glados.Utils.overrideHrefNavigationUnlessTargetBlank(
 #        $('.BCK-summary-tabs-container').find('a'), @navigateTo.bind(@)
 #      )
-
-    parseURLData: () ->
-      @es_path = URLProcessor.getSpecificSearchResultsPage()
-      @selected_es_entity = if _.has(glados.Settings.SEARCH_PATH_2_ES_KEY,@es_path) then \
-        glados.Settings.SEARCH_PATH_2_ES_KEY[@es_path] else null
-
-    navigateTo: (navUrl) ->
-      window.history.pushState({}, 'ChEMBL: ' + @model.get('queryString'), navUrl)
-      @parseURLData()
-      @showSelectedResourceOnly()
-      @renderTabs()
 
     openTab: (event) ->
 

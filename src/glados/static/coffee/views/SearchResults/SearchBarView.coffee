@@ -1,13 +1,13 @@
 glados.useNameSpace 'glados.views.SearchResults',
   # View that renders the search bar and advanced search components
-  SearchBarView: Backbone.View.extend(glados.views.SearchResults.URLFunctions).extend
+  SearchBarView: Backbone.View.extend
 
     # ------------------------------------------------------------------------------------------------------------------
     # Initialization and navigation
     # ------------------------------------------------------------------------------------------------------------------
 
     initialize: () ->
-      @atResultsPage = URLProcessor.isAtSearchResultsPage()
+      @atResultsPage = false
       @searchModel = SearchModel.getInstance()
       @showAdvanced = false
 
@@ -46,7 +46,6 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     searchFromURL: ->
       @parseURLData()
-      urlQueryString = decodeURI(URLProcessor.getSearchQueryString())
       urlQueryString = decodeURI(URLProcessor.getSearchQueryString())
       if urlQueryString != @lastURLQuery
         @expandable_search_bar.val(urlQueryString)

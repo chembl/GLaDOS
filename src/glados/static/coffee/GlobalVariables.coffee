@@ -1,6 +1,9 @@
 # use this object to store global variables, such as the current chembl id being requested in the page.
 GlobalVariables = {}
 
+# This variable is updated by the backbone router
+GlobalVariables.atSearchResultsPage = false
+
 # tells whether or not the command key in Mac OSX is down or not
 GlobalVariables.IS_COMMAND_KEY_DOWN = false
 

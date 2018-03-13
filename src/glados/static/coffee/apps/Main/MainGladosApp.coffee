@@ -12,8 +12,7 @@ glados.useNameSpace 'glados.apps.Main',
       browser: 'Handlebars-MainBrowserContent'
 
     @init = ->
-
-      new glados.routers.MainGladosRouter
+      glados.routers.MainGladosRouter.getInstance()
       Backbone.history.start()
 
     @prepareContentFor = (pageName, templateParams={}) ->
@@ -39,10 +38,10 @@ glados.useNameSpace 'glados.apps.Main',
     # ------------------------------------------------------------------------------------------------------------------
     # Search Results
     # ------------------------------------------------------------------------------------------------------------------
-    @initSearchResults = (searchTerm) ->
+    @initSearchResults = (currentTab, searchTerm, currentState) ->
 
       @prepareContentFor('search_results')
-      SearchResultsApp.init(searchTerm)
+      SearchResultsApp.init(currentTab, searchTerm, currentState)
 
     @initSubstructureSearchResults = (searchTerm) ->
 

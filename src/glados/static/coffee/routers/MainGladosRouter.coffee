@@ -17,10 +17,11 @@ glados.useNameSpace 'glados.routers',
     initMainPage: -> glados.apps.Main.MainGladosApp.initMainPage()
 
     initSearchResults: (currentTab, searchTerm, currentState) ->
-      [currentTab, searchTerm, currentState] = \
-        glados.routers.MainGladosRouter.updateAndCorrectSearchURL(currentTab, searchTerm, currentState)
+      [selectedESEntity, searchTerm, currentState] = \
+        glados.routers.MainGladosRouter.validateAndParseSearchURL(currentTab, searchTerm, currentState)
+      glados.routers.MainGladosRouter.updateSearchURL(selectedESEntity, searchTerm, currentState)
       GlobalVariables.atSearchResultsPage = true
-      glados.apps.Main.MainGladosApp.initSearchResults(searchTerm)
+      glados.apps.Main.MainGladosApp.initSearchResults(selectedESEntity, searchTerm, currentState)
 
     initSubstructureSearchResults: (searchTerm) ->
       glados.apps.Main.MainGladosApp.initSubstructureSearchResults(searchTerm)
@@ -43,27 +44,38 @@ glados.useNameSpace 'glados.routers',
         glados.routers.MainGladosRouter._instance = new glados.routers.MainGladosRouter
       return glados.routers.MainGladosRouter._instance
 
-    getSearchURL: (esEntityKey, searchTerm, currentState)->
+    #-------------------------------------------------------------------------------------------------------------------
+    # SEARCH HELPERS
+    #-------------------------------------------------------------------------------------------------------------------
+
+    getSearchURL: (esEntityKey, searchTerm, currentState, fragmentOnly=false)->
       tab = 'all'
       if esEntityKey? and _.has(glados.Settings.ES_KEY_2_SEARCH_PATH, esEntityKey)
         tab = glados.Settings.ES_KEY_2_SEARCH_PATH[esEntityKey]
-      url = "#{glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL}/search_results/#{tab}"
+      url = ''
+      if not fragmentOnly
+        url += glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL
+      url += "/search_results/#{tab}"
       if searchTerm?
        url += "/query/" + encodeURIComponent(searchTerm)
       if currentState?
        url += "/state/#{currentState}"
       return url
 
-    updateAndCorrectSearchURL: (tab, searchTerm, state)->
+    updateSearchURL: (esEntityKey, searchTerm, currentState, trigger=false)->
+      glados.routers.MainGladosRouter.getInstance().navigate(
+        @getSearchURL(esEntityKey, searchTerm, currentState, true),
+        {
+          'trigger': trigger
+        }
+      )
+
+    validateAndParseSearchURL: (tab, searchTerm, state)->
+      selectedESEntity = null
+      if _.has(glados.Settings.SEARCH_PATH_2_ES_KEY, tab)
+        selectedESEntity = glados.Settings.SEARCH_PATH_2_ES_KEY[tab]
       if tab != 'all' and not _.has(glados.Settings.SEARCH_PATH_2_ES_KEY, tab)
         if not searchTerm?
           searchTerm = tab
-        tab = 'all'
-      fragment = "search_results/#{tab}"
-      if searchTerm?
-       fragment += "/query/" + encodeURIComponent(searchTerm)
-      if state?
-       fragment += "/state/#{state}"
-      glados.routers.MainGladosRouter.getInstance().navigate(fragment)
-      return [tab, searchTerm, state]
+      return [selectedESEntity, searchTerm, state]
 
