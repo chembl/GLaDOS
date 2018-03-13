@@ -43,7 +43,7 @@ class StaticFilesCompiler(object):
 
     @staticmethod
     def compile_coffee():
-        print("If coffee static files compilation takes longer than 10 seconds,\n"
+        print("If coffee static files compilation takes longer than 30 seconds,\n"
               "please install nodejs to increase compilation speed!")
         compiler = StaticFilesCompiler(
             StaticFilesCompiler.COFFEE_COMPILE_FUNC,
@@ -129,7 +129,7 @@ class StaticFilesCompiler(object):
         import time
         t_ini = time.time()
         tpe_tasks = []
-        with futures.ThreadPoolExecutor(max_workers=1) as tpe:
+        with futures.ThreadPoolExecutor(max_workers=5) as tpe:
             print("Compiling {0} files.".format(self.ext_to_compile))
             for cur_dir, dirs, files in os.walk(top=self.src_path):
                 compiled_dir_path = self.get_compiled_path(cur_dir)
