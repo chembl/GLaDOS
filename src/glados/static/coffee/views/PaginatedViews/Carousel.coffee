@@ -1,6 +1,6 @@
 glados.useNameSpace 'glados.views.PaginatedViews',
   Carousel:
-
+    activePage: 1
     initAvailablePageSizes: ->
 
       if @config.custom_available_page_sizes?
@@ -38,35 +38,29 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     getPageEvent: (event) ->
       clicked = $(event.currentTarget)
-      activeButton = $(@el).find('.active')
-      activePage = parseInt(activeButton.data().page)
       currentPage = @collection.getMeta('current_page')
       pageNum = clicked.attr('data-page')
 
       if not @eventForThisView(clicked)
         return
 
-      if clicked.hasClass('disabled')
-        return
-
-      if parseInt(pageNum) == activePage
+      if clicked.hasClass('disabled') or parseInt(pageNum) == @activePage
         return
 
 #     Going backwards
-      if pageNum < activePage or clicked.attr('data-page') == 'previous'
-        paginatorPage = if clicked.hasClass('previous') then activePage - 1 else pageNum
-        console.log 'GOING BACK TO PAGE: ', paginatorPage
-        @fillPaginators(paginatorPage)
+      if pageNum < @activePage or clicked.attr('data-page') == 'previous'
+        @activePage = if clicked.hasClass('previous') then @activePage - 1 else pageNum
+        @fillPaginators(@activePage)
 #       @animateCards(currentPage, paginatorPage)
         return
 
 #     Going forward
-      nextPage = if pageNum == 'next' then activePage + 1 else pageNum
-      if parseInt(nextPage) >= parseInt(currentPage)
-        @generatePageQueue(parseInt(currentPage), parseInt(nextPage))
+      @activePage  = if pageNum == 'next' then @activePage + 1 else pageNum
+      if parseInt(@activePage) >= parseInt(currentPage)
+        @generatePageQueue(parseInt(currentPage), parseInt(@activePage))
         nextPageToLoad = @pageQueue.shift()
         @requestPageInCollection(nextPageToLoad)
-#      @fillPaginators(nextPage)
+      @fillPaginators(@activePage)
 #      @animateCards(currentPage, nextPage)
 
     generatePageQueue: (startPage, endPage) ->
@@ -87,7 +81,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if nextPageToLoad?
         @requestPageInCollection(nextPageToLoad)
 
-      @fillPaginators(@collection.getMeta('current_page') - 1)
+      @fillPaginators(@activePage)
       @fillSelectAllContainer() unless @disableItemsSelection
       if @collection.getMeta('total_pages') == 1
         @hidePaginators()
