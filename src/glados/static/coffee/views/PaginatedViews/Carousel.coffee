@@ -38,6 +38,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     getPageEvent: (event) ->
       clicked = $(event.currentTarget)
+      activeButton = $(@el).find('.active')
+      activePage = parseInt(activeButton.data().page)
       currentPage = @collection.getMeta('current_page')
       pageNum = clicked.attr('data-page')
 
@@ -47,26 +49,25 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if clicked.hasClass('disabled')
         return
 
-      if parseInt(pageNum) == parseInt(currentPage) - 1
+      if parseInt(pageNum) == activePage
         return
 
-#     Going backwards (collection is one page ahead of paginator number)
-      if parseInt(pageNum) < parseInt(currentPage) - 1 or clicked.attr('data-page') == 'previous'
-        paginatorPage = if clicked.hasClass('previous') then parseInt(currentPage) - 2 else parseInt(pageNum)
+#     Going backwards
+      if pageNum < activePage or clicked.attr('data-page') == 'previous'
+        paginatorPage = if clicked.hasClass('previous') then activePage - 1 else pageNum
         console.log 'GOING BACK TO PAGE: ', paginatorPage
-#        @fillPaginators(paginatorPage)
+        @fillPaginators(paginatorPage)
 #       @animateCards(currentPage, paginatorPage)
+        return
 
-      else
-  #     Going forward
-        nextPage = if pageNum == 'next' then currentPage else pageNum
+#     Going forward
+      nextPage = if pageNum == 'next' then activePage + 1 else pageNum
+      if parseInt(nextPage) >= parseInt(currentPage)
         @generatePageQueue(parseInt(currentPage), parseInt(nextPage))
         nextPageToLoad = @pageQueue.shift()
-        if nextPageToLoad > currentPage
-          @requestPageInCollection(nextPageToLoad)
-
-#        @fillPaginators(nextPage)
-  #      @animateCards(currentPage, nextPage)
+        @requestPageInCollection(nextPageToLoad)
+#      @fillPaginators(nextPage)
+#      @animateCards(currentPage, nextPage)
 
     generatePageQueue: (startPage, endPage) ->
       @pageQueue = (num for num in [(startPage + 1)..(endPage + 1)])
@@ -78,6 +79,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       isDefaultZoom = @mustDisableReset()
       mustComplicate = @collection.getMeta('complicate_cards_view')
       @isComplicated = isDefaultZoom and mustComplicate
+#      activeButton = $(@el).find('.active')
+#      activePage = parseInt(activeButton.data().page)
 
       nextPageToLoad = @pageQueue.shift()
 
