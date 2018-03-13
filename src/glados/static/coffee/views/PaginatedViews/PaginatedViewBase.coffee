@@ -134,6 +134,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # this allows to have a paginated view inside another view
     stampViewIDOnElem: ($elem) -> $elem.attr('data-view-id', @viewID)
     eventForThisView: ($elem) ->
+      console.log 'data view id: ', $elem.attr('data-view-id')
+      console.log '@viewID: ', @viewID
+      console.log 'eventForThisView: ', $elem.attr('data-view-id') == @viewID
       $elem.attr('data-view-id') == @viewID
     # ------------------------------------------------------------------------------------------------------------------
     # Render

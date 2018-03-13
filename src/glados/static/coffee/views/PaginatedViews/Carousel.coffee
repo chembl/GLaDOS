@@ -41,27 +41,42 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       currentPage = @collection.getMeta('current_page')
       pageNum = clicked.attr('data-page')
 
+      console.log 'DATA CLICKED', clicked.data().page
+
       if not @eventForThisView(clicked)
+        console.log '?????:'
         return
 
       if clicked.hasClass('disabled') or parseInt(pageNum) == @activePage
+        console.log 'SAME OR DISABLED :'
         return
 
 #     Going backwards
-      if pageNum < @activePage or clicked.attr('data-page') == 'previous'
+
+#      console.log 'PAGE NUM', pageNum
+#      console.log 'ACTIVE PAGE', @activePage
+#      console.log '----'
+
+      console.log 'BACKWARDS?: ', parseInt(pageNum) < parseInt(@activePage) or clicked.attr('data-page') == 'previous'
+      if parseInt(pageNum) < parseInt(@activePage) or clicked.attr('data-page') == 'previous'
+        console.log 'backwards: ', @activePage
         @activePage = if clicked.hasClass('previous') then @activePage - 1 else pageNum
         @fillPaginators(@activePage)
 #       @animateCards(currentPage, paginatorPage)
         return
 
 #     Going forward
-      @activePage  = if pageNum == 'next' then @activePage + 1 else pageNum
-      if parseInt(@activePage) >= parseInt(currentPage)
-        @generatePageQueue(parseInt(currentPage), parseInt(@activePage))
-        nextPageToLoad = @pageQueue.shift()
-        @requestPageInCollection(nextPageToLoad)
-      @fillPaginators(@activePage)
-#      @animateCards(currentPage, nextPage)
+      else
+        console.log 'FORWARD!'
+        @activePage  = if pageNum == 'next' then @activePage + 1 else pageNum
+
+        if parseInt(@activePage) >= parseInt(currentPage)
+          @generatePageQueue(parseInt(currentPage), parseInt(@activePage))
+          nextPageToLoad = @pageQueue.shift()
+          @requestPageInCollection(nextPageToLoad)
+        else
+          @fillPaginators(@activePage)
+  #      @animateCards(currentPage, nextPage)
 
     generatePageQueue: (startPage, endPage) ->
       @pageQueue = (num for num in [(startPage + 1)..(endPage + 1)])

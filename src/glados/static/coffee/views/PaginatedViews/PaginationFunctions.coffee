@@ -118,22 +118,25 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     fillPaginators: (customPage) ->
 
+      console.log '------------------'
+      console.log 'FILL PAGINATORS'
+      console.log 'custom Page:', customPage
       $elem = $(@el).find('.BCK-paginator-container')
       if $elem.length == 0
         return
       template = $('#' + $elem.attr('data-hb-template'))
 
       if customPage?
-        current_page = customPage
+        current_page = parseInt(customPage)
       else
         current_page = @collection.getMeta('current_page')
 
 #      console.log 'current_page', current_page
 #      console.log 'collection_page: ', @collection.getMeta('current_page')
 
-      records_in_page = @collection.getMeta('records_in_page')
-      page_size = @collection.getMeta('page_size')
-      num_pages = @collection.getMeta('total_pages')
+      records_in_page = parseInt(@collection.getMeta('records_in_page'))
+      page_size = parseInt(@collection.getMeta('page_size'))
+      num_pages = parseInt(@collection.getMeta('total_pages'))
 
       first_record = (current_page - 1) * page_size
       last_page = first_record + records_in_page
@@ -159,6 +162,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         show_previous_ellipsis = true
 
       pages = (num for num in [first_page_to_show..last_page_to_show])
+      console.log 'pages: ', pages
+      console.log 'first_page_to_show: ', first_page_to_show
+      console.log 'last_page_to_show: ', last_page_to_show
+
 
       $elem.html Handlebars.compile(template.html())
         pages: pages
