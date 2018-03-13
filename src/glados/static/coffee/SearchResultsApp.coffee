@@ -53,6 +53,7 @@ class SearchResultsApp
       query_params: queryParams
 
     resultsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewSimilaritySearchResultsList()
+    console.log 'WS resultsList: ', resultsList
     resultsList.initURL GlobalVariables.SEARCH_TERM, GlobalVariables.SIMILARITY_PERCENTAGE
 
     $progressElement = $('#BCK-loading-messages-container')
@@ -108,6 +109,7 @@ class SearchResultsApp
           el: $browserContainer
       else
         esCompoundsList.setMeta('generator_items_list', resultsList.allResults)
+        console.log 'HERE: ', esCompoundsList
 
       fetchDeferred = esCompoundsList.fetch()
       if finalCall

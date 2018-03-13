@@ -146,6 +146,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       scores = @getMeta('scores')
 
       pageChanged = false
+      console.log 'parsing hits: ', data.hits.hits
       for hitI in data.hits.hits
         if not _.has(lastPageResultsIds, hitI._id)
           pageChanged = true
