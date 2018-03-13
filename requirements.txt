@@ -6,7 +6,7 @@ twitter
 python3-memcached
 pyScss==1.3.5
 CoffeeScript==1.1.2
-watchdog
+watchdog==0.8.3
 whitenoise
 requests
 python-gettext
