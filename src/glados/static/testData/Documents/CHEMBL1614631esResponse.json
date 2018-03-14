@@ -1,0 +1,147 @@
+{
+  "_index": "chembl_document",
+  "_type": "document",
+  "_id": "CHEMBL1614631",
+  "_version": 4,
+  "found": true,
+  "_source": {
+    "first_page": "191",
+    "last_page": "210",
+    "year": 2005,
+    "title": "Comparative evaluation of oral systemic exposure of 56 xenobiotics in rat, dog, monkey and human.",
+    "journal_full_title": "Xenobiotica; the fate of foreign compounds in biological systems.",
+    "abstract": "The prediction of human pharmacokinetics is often based on in vivo preclinical pharmacokinetic data. However, to date, no clear guidance has been available about the relative ability of the major preclinical species to estimate human oral exposure. The study was conducted to survey the literature on oral pharmacokinetic parameters in rat, dog, monkey and human, and to compare various methods for prediction of oral exposure in humans. Fifty-six non-peptide xenobiotics were identified with oral pharmacokinetic data in rat, dog, monkey and human, and comparison of the data from each species to humans was conducted along with an evaluation of the molecular features of these compounds. Monkey liver blood flow-based oral exposure was qualitatively and quantitatively more predictive of human oral exposure than rat or dog. Furthermore, generation of data in three versus two preclinical species did not always improve human predictivity. The use of molecular properties did not substantially improve the prediction of human oral exposure compared with the prediction from monkey alone. These observations confirm the continued importance of non-human primates in preclinical pharmacokinetics, and also have implications for pharmacokinetic lead optimization and for prediction of human pharmacokinetic parameters from in vivo preclinical data.",
+    "issue": "2",
+    "_metadata": {
+      "es_completion": [
+        {
+          "input": "16019946",
+          "weight": 10
+        },
+        {
+          "input": "2005",
+          "weight": 1
+        },
+        {
+          "input": "10.1080/00498250400028197",
+          "weight": 10
+        },
+        {
+          "input": "CHEMBL1614631",
+          "weight": 10
+        },
+        {
+          "input": "Comparative evaluation of oral systemic exposure of 56 xenobiotics in rat, dog, monkey and human.",
+          "weight": 100
+        },
+        {
+          "input": "The prediction of human pharmacokinetics is often based on in vivo preclinical pharmacokinetic data. However, to date, no clear guidance has been available about the relative ability of the major preclinical species to estimate human oral exposure. The study was conducted to survey the literature on oral pharmacokinetic parameters in rat, dog, monkey and human, and to compare various methods for prediction of oral exposure in humans. Fifty-six non-peptide xenobiotics were identified with oral pharmacokinetic data in rat, dog, monkey and human, and comparison of the data from each species to humans was conducted along with an evaluation of the molecular features of these compounds. Monkey liver blood flow-based oral exposure was qualitatively and quantitatively more predictive of human oral exposure than rat or dog. Furthermore, generation of data in three versus two preclinical species did not always improve human predictivity. The use of molecular properties did not substantially improve the prediction of human oral exposure compared with the prediction from monkey alone. These observations confirm the continued importance of non-human primates in preclinical pharmacokinetics, and also have implications for pharmacokinetic lead optimization and for prediction of human pharmacokinetic parameters from in vivo preclinical data.",
+          "weight": 60
+        },
+        {
+          "input": "Ward KW, Nagilla R, Jolivette LJ.",
+          "weight": 100
+        }
+      ],
+      "source": [
+        {
+          "src_description": "Scientific Literature",
+          "src_id": 1,
+          "src_short_name": "LITERATURE"
+        }
+      ],
+      "related_assays": {
+        "count": 4,
+        "chembl_ids": {
+          "0": [
+            "CHEMBL1614694",
+            "CHEMBL1614693",
+            "CHEMBL1614692",
+            "CHEMBL1614691"
+          ]
+        }
+      },
+      "related_activities": {
+        "count": 220
+      },
+      "related_compounds": {
+        "count": 55,
+        "chembl_ids": {
+          "0": [
+            "CHEMBL3301673",
+            "CHEMBL469",
+            "CHEMBL452",
+            "CHEMBL750",
+            "CHEMBL1614635",
+            "CHEMBL72958",
+            "CHEMBL6",
+            "CHEMBL515966",
+            "CHEMBL1614649",
+            "CHEMBL691",
+            "CHEMBL599",
+            "CHEMBL20634",
+            "CHEMBL1512",
+            "CHEMBL163",
+            "CHEMBL267648",
+            "CHEMBL79",
+            "CHEMBL1071",
+            "CHEMBL27",
+            "CHEMBL248702",
+            "CHEMBL1484",
+            "CHEMBL408",
+            "CHEMBL563",
+            "CHEMBL35",
+            "CHEMBL1614641",
+            "CHEMBL32",
+            "CHEMBL13",
+            "CHEMBL549",
+            "CHEMBL428",
+            "CHEMBL1029",
+            "CHEMBL1568698",
+            "CHEMBL456071",
+            "CHEMBL115",
+            "CHEMBL286259",
+            "CHEMBL956",
+            "CHEMBL6466",
+            "CHEMBL1726",
+            "CHEMBL6273",
+            "CHEMBL8",
+            "CHEMBL696",
+            "CHEMBL4",
+            "CHEMBL2220442",
+            "CHEMBL551786",
+            "CHEMBL17125",
+            "CHEMBL1350",
+            "CHEMBL637",
+            "CHEMBL532",
+            "CHEMBL1614638",
+            "CHEMBL95692",
+            "CHEMBL31601",
+            "CHEMBL655",
+            "CHEMBL335545",
+            "CHEMBL940",
+            "CHEMBL517",
+            "CHEMBL1614669",
+            "CHEMBL529"
+          ]
+        }
+      },
+      "related_targets": {
+        "count": 1,
+        "chembl_ids": {
+          "0": [
+            "CHEMBL612558"
+          ]
+        }
+      }
+    },
+    "doc_type": "PUBLICATION",
+    "journal": "Xenobiotica",
+    "doi": "10.1080/00498250400028197",
+    "document_chembl_id": "CHEMBL1614631",
+    "volume": "35",
+    "authors": "Ward KW, Nagilla R, Jolivette LJ.",
+    "patent_id": null,
+    "pubmed_id": 16019946
+  }
+}
