@@ -98,11 +98,12 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       $elem = $(@el).find '.BCK-items-container'
       $elem.show()
       totalPages = parseInt(@collection.getMeta('total_pages'))
-      pxToMove = $elem.children('.carousel-card').first().width() * (nextPage - activePage) * @currentPageSize
+      pxToMove = $elem.children('.carousel-card').first().outerWidth() * (nextPage - activePage) * @currentPageSize
+      console.log 'pxToMove: ', pxToMove
 
       if nextPage <= totalPages or nextPage >= 1
         $elem.animate {
-          left: '-=' + pxToMove + 'px'
+          left: '-=' + pxToMove+ 'px'
         }
 
     sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
