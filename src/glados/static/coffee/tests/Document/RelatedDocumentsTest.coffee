@@ -1,3 +1,3 @@
 describe 'Related Documents', ->
 
-  it 'works', ->
+  it 'initialises from a Document', ->
