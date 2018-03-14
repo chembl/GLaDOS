@@ -48,11 +48,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         return
 
 #     Going backwards
-#      beforePage = parseInt(@activePage)
+      beforePage = parseInt(@activePage)
       if parseInt(pageNum) < parseInt(@activePage) or clicked.attr('data-page') == 'previous'
         @activePage = if clicked.hasClass('previous') then parseInt(@activePage) - 1 else pageNum
-#        @animateCards(beforePage, parseInt(@activePage))
         @fillPaginators(parseInt(@activePage))
+        @animateCards(beforePage, parseInt(@activePage))
         return
 
 #     Going forward
@@ -64,7 +64,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           @requestPageInCollection(nextPageToLoad)
         else
           @fillPaginators(parseInt(@activePage))
-#        @animateCards(beforePage, parseInt(@activePage))
+        @animateCards(beforePage, parseInt(@activePage))
 
     generatePageQueue: (startPage, endPage) ->
       @pageQueue = (num for num in [(startPage + 1)..(endPage + 1)])
@@ -93,13 +93,16 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       glados.views.PaginatedViews.PaginatedViewBase.renderViewState.call(@)
 
-    animateCards: (currentPage, nextPage) ->
+    animateCards: (activePage, nextPage) ->
       $elem = $(@el).find '.BCK-items-container'
       $elem.show()
-      pxToMove = $elem.children('.carousel-card').first().width() * (nextPage - currentPage + 1) * @currentPageSize
-      $elem.animate {
-        left: '-=' + pxToMove + 'px'
-      }
+      totalPages = parseInt(@collection.getMeta('total_pages'))
+      pxToMove = $elem.children('.carousel-card').first().width() * (nextPage - activePage) * @currentPageSize
+
+      if nextPage <= totalPages or nextPage >= 1
+        $elem.animate {
+          left: '-=' + pxToMove + 'px'
+        }
 
     sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
       customTemplateID =  @collection.getMeta('columns_description').Carousel.CustomItemTemplate
