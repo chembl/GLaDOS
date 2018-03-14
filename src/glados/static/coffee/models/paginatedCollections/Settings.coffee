@@ -357,6 +357,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         LABEL: 'Drugs'
         INDEX_NAME: 'chembl_molecule'
         # PATH: Assigned after this declaration using the INDEX_NAME
+        BROWSE_LIST_URL: Drug.getDrugsListURL
         MODEL: glados.models.Compound.Drug
         COLUMNS: glados.models.Compound.Drug.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
