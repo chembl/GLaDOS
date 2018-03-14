@@ -24,6 +24,7 @@ DocumentBasicInformationView = CardView.extend(DownloadViewExt).extend
 
     div = $(@el).find('#' + div_id)
     template = $('#' + div.attr('data-hb-template'))
+    console.log 'template: ', '#' + div.attr('data-hb-template')
 
     div.html Handlebars.compile(template.html())
       doc_id: @model.get('document_chembl_id')
