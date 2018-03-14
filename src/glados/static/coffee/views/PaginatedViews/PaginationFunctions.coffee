@@ -136,24 +136,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       last_page = first_record + records_in_page
 
       # this sets the window for showing the pages
-      show_previous_ellipsis = false
-      show_next_ellipsis = false
-      if num_pages <= 5
-        first_page_to_show = 1
-        last_page_to_show = num_pages
-      else if current_page + 2 <= 5
-        first_page_to_show = 1
-        last_page_to_show = 5
-        show_next_ellipsis = true
-      else if current_page + 2 < num_pages
-        first_page_to_show = current_page - 2
-        last_page_to_show = current_page + 2
-        show_previous_ellipsis = true
-        show_next_ellipsis = true
-      else
-        first_page_to_show = num_pages - 4
-        last_page_to_show = num_pages
-        show_previous_ellipsis = true
+      [show_previous_ellipsis, show_next_ellipsis, first_page_to_show, last_page_to_show] = \
+      glados.Utils.Pagination.calculatePaginatorParams(num_pages, current_page)
 
       pages = (num for num in [first_page_to_show..last_page_to_show])
       $elem.html Handlebars.compile(template.html())
