@@ -55,15 +55,16 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         @animateCards(beforePage, parseInt(@activePage))
         return
 
+
 #     Going forward
       else
-        @activePage  = if pageNum == 'next' then parseInt(@activePage) + 1 else pageNum
+        @activePage = if pageNum == 'next' then parseInt(@activePage) + 1 else pageNum
         if parseInt(@activePage) >= parseInt(currentPage)
           @generatePageQueue(parseInt(currentPage), parseInt(@activePage))
           nextPageToLoad = @pageQueue.shift()
           @requestPageInCollection(nextPageToLoad)
-        else
-          @fillPaginators(parseInt(@activePage))
+
+        @fillPaginators(parseInt(@activePage))
         @animateCards(beforePage, parseInt(@activePage))
 
     generatePageQueue: (startPage, endPage) ->
