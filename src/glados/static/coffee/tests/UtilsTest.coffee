@@ -1,5 +1,46 @@
 describe "Utils", ->
 
+  describe "Pagination Utilities", ->
+
+    it 'works when less than 5 pages', ->
+      [show_previous_ellipsis, show_next_ellipsis, first_page_to_show, last_page_to_show] = \
+      glados.Utils.Pagination.calculatePaginatorParams(5, 2)
+
+      expect(show_previous_ellipsis).toBe(false)
+      expect(show_next_ellipsis).toBe(false)
+      expect(first_page_to_show).toBe(1)
+      expect(last_page_to_show).toBe(5)
+
+    it 'Shows first page of paginators correctly', ->
+      [show_previous_ellipsis, show_next_ellipsis, first_page_to_show, last_page_to_show] = \
+      glados.Utils.Pagination.calculatePaginatorParams(10, 2)
+
+      expect(show_previous_ellipsis).toBe(false)
+      expect(show_next_ellipsis).toBe(true)
+      expect(first_page_to_show).toBe(1)
+      expect(last_page_to_show).toBe(5)
+
+    it 'Shows pages correctly', ->
+      console.log 'results: ', glados.Utils.Pagination.calculatePaginatorParams(499, 496)
+      [show_previous_ellipsis, show_next_ellipsis, first_page_to_show, last_page_to_show] = \
+      glados.Utils.Pagination.calculatePaginatorParams(499, 496)
+
+      expect(show_previous_ellipsis).toBe(true)
+      expect(show_next_ellipsis).toBe(true)
+      expect(first_page_to_show).toBe(494)
+      expect(last_page_to_show).toBe(498)
+
+    it 'Shows last page of paginators correctly', ->
+      console.log 'results: ', glados.Utils.Pagination.calculatePaginatorParams(499, 499)
+      [show_previous_ellipsis, show_next_ellipsis, first_page_to_show, last_page_to_show] = \
+      glados.Utils.Pagination.calculatePaginatorParams(499, 499)
+
+      expect(show_previous_ellipsis).toBe(true)
+      expect(show_next_ellipsis).toBe(false)
+      expect(first_page_to_show).toBe(495)
+      expect(last_page_to_show).toBe(499)
+
+
   describe "Round numbers", ->
 
     testRoundNumbersForFactor = (factor, numbersMustBe) ->
