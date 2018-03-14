@@ -15,17 +15,22 @@ Document = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     else
       @url = glados.Settings.WS_BASE_URL + 'document/' + id + '.json'
 
-  parse: (data) ->
-    parsed = data
-    parsed.report_card_url = Document.get_report_card_url(parsed.document_chembl_id)
+  parse: (response) ->
 
-    filterForActivities = 'document_chembl_id:' + parsed.document_chembl_id
-    parsed.activities_url = Activity.getActivitiesListURL(filterForActivities)
+    if response._source?
+      objData = response._source
+    else
+      objData = response
 
-    filterForCompounds = '_metadata.related_documents.chembl_ids.\\*:' + parsed.document_chembl_id
-    parsed.compounds_url = Compound.getCompoundsListURL(filterForCompounds)
+    objData.report_card_url = Document.get_report_card_url(objData.document_chembl_id)
 
-    return parsed;
+    filterForActivities = 'document_chembl_id:' + objData.document_chembl_id
+    objData.activities_url = Activity.getActivitiesListURL(filterForActivities)
+
+    filterForCompounds = '_metadata.related_documents.chembl_ids.\\*:' + objData.document_chembl_id
+    objData.compounds_url = Compound.getCompoundsListURL(filterForCompounds)
+
+    return objData;
 
 # Constant definition for ReportCardEntity model functionalities
 _.extend(Document, glados.models.base.ReportCardEntity)

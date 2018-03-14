@@ -7,6 +7,23 @@ describe 'Document Model', ->
 
     TestsUtils.expectObjectsAreEqual(response, parsed)
 
+  testActivitiesURL = (response, parsed) ->
+
+    chemblID = response.document_chembl_id
+    activitiesURLMustBe = Activity.getActivitiesListURL('document_chembl_id:' + chemblID)
+    expect(parsed.activities_url).toBe(activitiesURLMustBe)
+
+  testReportCardURL = (response, parsed) ->
+
+    chemblID = response.document_chembl_id
+    activitiesURLMustBe = Document.get_report_card_url(chemblID)
+    expect(parsed.report_card_url).toBe(activitiesURLMustBe)
+
+  testCompoundsURL = (response, parsed) ->
+
+    chemblID = response.document_chembl_id
+    compoundsURLMustBe = Compound.getCompoundsListURL('_metadata.related_documents.chembl_ids.\\*:' + chemblID)
+    expect(parsed.compounds_url).toBe(compoundsURLMustBe)
   #-------------------------------------------------------------------------------------------------------------------
   # From Web services
   #-------------------------------------------------------------------------------------------------------------------
@@ -35,6 +52,9 @@ describe 'Document Model', ->
       expect(document.url).toBe(urlMustBe)
 
     it 'parses the basic information received from web services', -> testBasicProperties(wsResponse, parsed)
+    it 'parses the activities URL', -> testActivitiesURL(wsResponse, parsed)
+    it 'parses the report card URL', -> testReportCardURL(wsResponse, parsed)
+    it 'parses the compounds URL', -> testCompoundsURL(wsResponse, parsed)
 
   #-------------------------------------------------------------------------------------------------------------------
   # From Elasticsearch
@@ -61,3 +81,7 @@ describe 'Document Model', ->
 
       urlMustBe = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_document/document/' + chemblID
       expect(document.url).toBe(urlMustBe)
+
+    it 'parses the basic information received from elastic', -> testBasicProperties(esResponse._source, parsed)
+    it 'parses the activities URL', -> testActivitiesURL(esResponse._source, parsed)
+    it 'parses the report card URL', -> testReportCardURL(esResponse._source, parsed)
