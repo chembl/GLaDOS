@@ -231,28 +231,4 @@
     </ul>
 
 </script>
-
-<script id="Handlebars-Common-Paginated-Card-CarouselStructuralAlerts" type="text/x-handlebars-template">
-
-    <div class="col s12 m6 l4">
-        <div class="card grey lighten-5">
-
-            {{#if img_url}}
-                <div class="white card-image">
-                    <img src="{{img_url}}" class="responsive-img" style='min-height: 240px;'>
-                </div>
-            {{/if}}
-            <div class="card-content">
-
-                {% endverbatim %}
-                {% include "glados/Handlebars/ColumnsSource.html" with for_card=True %}
-                {% verbatim %}
-
-            </div>
-        </div>
-
-    </div>
-
-</script>
-
 {% endverbatim %}
