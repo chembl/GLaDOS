@@ -65,20 +65,6 @@
 
                 </div>
 
-                <div id="SimilarCompounds" class="section scrollspy" style="display: none;">
-                    {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
-
-                    <div class="row BCK-section-content">
-
-                        {% with is_dynamic=True %}
-                            {% include "glados/CompoundReportCardParts/SimilarCompounds.html" %}
-                        {% endwith %}
-
-                    </div>
-
-
-                </div>
-
                 <div id="MoleculeFeatures" class="section scrollspy" style="display: none;">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
@@ -136,6 +122,20 @@
                         {% endwith %}
 
                     </div>
+
+                </div>
+
+                <div id="SimilarCompounds" class="section scrollspy" style="display: none;">
+                    {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
+
+                    <div class="row BCK-section-content">
+
+                        {% with is_dynamic=True %}
+                            {% include "glados/CompoundReportCardParts/SimilarCompounds.html" %}
+                        {% endwith %}
+
+                    </div>
+
 
                 </div>
 
