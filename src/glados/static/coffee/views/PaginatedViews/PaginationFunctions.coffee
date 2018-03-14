@@ -166,5 +166,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       @activateCurrentPageButton(customPage)
       @enableDisableNextLastButtons(customPage)
+      @stampViewIDOnEventsTriggerers()
 
 

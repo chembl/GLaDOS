@@ -41,34 +41,30 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       currentPage = @collection.getMeta('current_page')
       pageNum = clicked.attr('data-page')
 
-      console.log 'DATA CLICKED', clicked.data().page
-
       if not @eventForThisView(clicked)
-        console.log '?????:'
         return
 
       if clicked.hasClass('disabled') or parseInt(pageNum) == @activePage
-        console.log 'SAME OR DISABLED :'
         return
 
 #     Going backwards
+#      beforePage = parseInt(@activePage)
       if parseInt(pageNum) < parseInt(@activePage) or clicked.attr('data-page') == 'previous'
         @activePage = if clicked.hasClass('previous') then parseInt(@activePage) - 1 else pageNum
+#        @animateCards(beforePage, parseInt(@activePage))
         @fillPaginators(parseInt(@activePage))
-#       @animateCards(currentPage, paginatorPage)
         return
 
 #     Going forward
       else
         @activePage  = if pageNum == 'next' then parseInt(@activePage) + 1 else pageNum
-
         if parseInt(@activePage) >= parseInt(currentPage)
           @generatePageQueue(parseInt(currentPage), parseInt(@activePage))
           nextPageToLoad = @pageQueue.shift()
           @requestPageInCollection(nextPageToLoad)
         else
           @fillPaginators(parseInt(@activePage))
-  #      @animateCards(currentPage, nextPage)
+#        @animateCards(beforePage, parseInt(@activePage))
 
     generatePageQueue: (startPage, endPage) ->
       @pageQueue = (num for num in [(startPage + 1)..(endPage + 1)])
@@ -80,8 +76,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       isDefaultZoom = @mustDisableReset()
       mustComplicate = @collection.getMeta('complicate_cards_view')
       @isComplicated = isDefaultZoom and mustComplicate
-#      activeButton = $(@el).find('.active')
-#      activePage = parseInt(activeButton.data().page)
 
       nextPageToLoad = @pageQueue.shift()
 
@@ -100,7 +94,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       glados.views.PaginatedViews.PaginatedViewBase.renderViewState.call(@)
 
     animateCards: (currentPage, nextPage) ->
-
       $elem = $(@el).find '.BCK-items-container'
       $elem.show()
       pxToMove = $elem.children('.carousel-card').first().width() * (nextPage - currentPage + 1) * @currentPageSize
