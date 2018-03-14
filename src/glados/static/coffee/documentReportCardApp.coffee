@@ -38,6 +38,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
 
       @currentDocument = new Document
         document_chembl_id: chemblID
+        fetch_from_elastic: true
       return @currentDocument
 
     else return @currentDocument
