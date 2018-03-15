@@ -73,6 +73,10 @@ Document.COLUMNS = {
     comparator: 'mol_tani'
     parse_function: (value) -> "#{parseFloat(value) * 100}%"
   }
+  REFERENCE: {
+    name_to_show: 'Reference'
+    comparator: 'reference'
+  }
   PUBMED_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
     comparator: 'pubmed_id'
     link_function: (id) -> 'http://europepmc.org/abstract/MED/' + encodeURIComponent(id)
@@ -168,6 +172,10 @@ Document.COLUMNS_SETTINGS = {
     Document.COLUMNS.CHEMBL_ID
     Document.COLUMNS.TARGET_TANIMOTO
     Document.COLUMNS.COMPOUND_TANIMOTO
+    Document.COLUMNS.REFERENCE
+    Document.COLUMNS.TITLE
+    Document.COLUMNS.PUBMED_ID
+    Document.COLUMNS.DOI
   ]
 }
 
