@@ -122,6 +122,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       'click .BCK-zoom-in': 'zoomIn'
       'click .BCK-zoom-out': 'zoomOut'
       'click .BCK-reset-zoom': 'resetZoom'
+      'scroll .'
 
     stampViewIDOnEventsTriggerers: ->
       eventTriggererSelectors = ['.page-selector', '.change-page-size', '.sort', '.select-search', '.select-sort',

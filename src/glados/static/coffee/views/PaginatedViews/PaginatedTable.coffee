@@ -265,7 +265,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
         # now set up tha header fixation
         if !$specificElemContainer.attr('data-header-pinner-setup')
-
           # delay this to wait for
           @setUpTableHeaderPinner($specificElemContainer)
           $specificElemContainer.attr('data-header-pinner-setup', true)
@@ -283,24 +282,26 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     setUpTableHeaderPinner: ($table) ->
 
-      #use the top scroller to trigger the pin
+      $win = $(window)
       $scrollContainer = $(@el).find('.BCK-top-scroller-container')
-      console.log '$scrollContainer: ', $scrollContainer
+      $stickyHeader = $(@el).find('.sticky-header').first()
 
       $firstTableRow = $table.find('tr').first()
 
-      $win = $(window)
       topTrigger = $scrollContainer.offset().top
+      stickyHeaderHeight = $stickyHeader.height()
 
       pinUnpinTableHeader = ->
 
-        # don't bother if table is not shown
+        scroll = $win.scrollTop()
+
         if !$table.is(":visible")
           return
 
-        #TODO: complete this function!
+        if scroll + stickyHeaderHeight/2 >= topTrigger
+          console.log "Should pin header!! "
 
-        $win.scroll _.throttle(pinUnpinTableHeader, 200)
+      $win.scroll _.throttle(pinUnpinTableHeader, 200)
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Static functions
