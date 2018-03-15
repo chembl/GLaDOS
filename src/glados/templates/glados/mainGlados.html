@@ -20,6 +20,11 @@
     {{block.super}}
   {% endwith %}
 {% endblock %}
+{% block footer %}
+    {% with main_page=True%}
+        {{block.super}}
+     {% endwith %}
+{% endblock %}
 
 {% block title %}ChEMBL{% endblock %}
 
