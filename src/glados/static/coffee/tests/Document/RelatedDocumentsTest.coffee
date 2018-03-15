@@ -19,9 +19,13 @@ describe 'Related Documents List', ->
   it 'initialises from a Document', ->
 
     document.set(parsed)
-    console.log 'document: ', document
 
     relatedDocumentsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewRelatedDocumentsList()
-    console.log 'relatedDocumentsList: ', relatedDocumentsList
     rawSimilarDocs = document.get('_metadata').similar_documents
-    console.log 'rawSimilarDocs: ', rawSimilarDocs
+    relatedDocumentsList.reset(_.map(rawSimilarDocs, Document.prototype.parse))
+
+    for doc in rawSimilarDocs
+      parsedDoc = relatedDocumentsList.get(doc.document_chembl_id)
+      expect(parsedDoc.get('id')).toBe(doc.document_chembl_id)
+      expect(parsedDoc.get('tid_tani')).toBe(doc.tid_tani)
+      expect(parsedDoc.get('mol_tani')).toBe(doc.mol_tani)
