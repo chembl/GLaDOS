@@ -551,7 +551,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     getNewRelatedDocumentsList: ->
 
-      config = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.SIMILAR_COMPOUNDS_IN_REPORT_CARD
+      config = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.SIMILAR_DOCUMENTS_IN_REPORT_CARD
       list = @getNewClientSideCollectionFor config
       return list
 

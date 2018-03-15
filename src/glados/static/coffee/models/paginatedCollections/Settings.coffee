@@ -554,12 +554,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Default: ApprovedDrugClinicalCandidate.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
           Carousel:
             Default: ApprovedDrugClinicalCandidate.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-      SIMILAR_COMPOUNDS_IN_REPORT_CARD:
+      SIMILAR_DOCUMENTS_IN_REPORT_CARD:
         MODEL: Document
+        DEFAULT_PAGE_SIZE: 5
         COLUMNS: Document.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
-          Carousel:
+          Table:
             Default: Document.COLUMNS_SETTINGS.SIMILAR_TERMS_IN_REPORT_CARDS
+            custom_page_sizes: glados.Settings.TABLE_PAGE_SIZES
         ID_COLUMN: Document.ID_COLUMN
       STRUCTURAL_ALERTS_LIST:
         MODEL: glados.models.Compound.StructuralAlert

@@ -50,7 +50,6 @@ class DocumentReportCardApp extends glados.ReportCardApp
   @initBasicInformation = ->
 
     document = DocumentReportCardApp.getCurrentDocument()
-    document = DocumentReportCardApp.getCurrentDocument()
 
     new DocumentBasicInformationView
       model: document
@@ -64,8 +63,38 @@ class DocumentReportCardApp extends glados.ReportCardApp
 
   @initRelatedDocuments = ->
 
-    @registerSection('RelatedDocuments', 'Related Documents')
-    @showSection('RelatedDocuments')
+    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
+
+    document = DocumentReportCardApp.getCurrentDocument()
+    relatedDocumentsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewRelatedDocumentsList()
+
+    viewConfig =
+      embed_section_name: 'related_documents'
+      embed_identifier: chemblID
+
+    new glados.views.ReportCards.PaginatedTableInCardView
+      collection: relatedDocumentsList
+      el: $('#CRelatedDocumentsCard')
+      resource_type: gettext('glados_entities_document_name')
+      section_id: 'RelatedDocuments'
+      section_label: 'Related Documents'
+      config: viewConfig
+      report_card_app: @
+
+    initRelatedDocs = ->
+
+      console.log 'related docs ready!!'
+      rawSimilarDocs = document.get('_metadata').similar_documents
+      rawSimilarDocs ?= []
+      console.log 'rawSimilarDocs: ', rawSimilarDocs
+
+      relatedDocumentsList.setMeta('data_loaded', true)
+      relatedDocumentsList.reset(_.map(rawSimilarDocs, Document.prototype.parse))
+
+    document.on 'change', initRelatedDocs
+
+    if GlobalVariables['EMBEDED']
+      document.fetch()
 
   @initAssayNetwork = ->
 
