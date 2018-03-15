@@ -270,14 +270,14 @@ class CompoundReportCardApp extends glados.ReportCardApp
     viewConfig =
       embed_section_name: 'alternate_forms'
       embed_identifier: chemblID
-      title: "Alternate forms of compound #{chemblID}:"
+      title: "Alternative forms of compound #{chemblID}:"
 
     new glados.views.ReportCards.CarouselInCardView
       collection: moleculeFormsList
       el: $('#AlternateFormsCard')
       resource_type: gettext('glados_entities_compound_name')
       section_id: 'AlternateFormsOfCompoundInChEMBL'
-      section_label: 'Alternate Forms'
+      section_label: 'Alternative Forms'
       config: viewConfig
       report_card_app: @
 
