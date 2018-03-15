@@ -81,17 +81,15 @@ class DocumentReportCardApp extends glados.ReportCardApp
       config: viewConfig
       report_card_app: @
 
-    initRelatedDocs = ->
+    initRelatedDocsList = ->
 
-      console.log 'related docs ready!!'
       rawSimilarDocs = document.get('_metadata').similar_documents
       rawSimilarDocs ?= []
-      console.log 'rawSimilarDocs: ', rawSimilarDocs
 
       relatedDocumentsList.setMeta('data_loaded', true)
       relatedDocumentsList.reset(_.map(rawSimilarDocs, Document.prototype.parse))
 
-    document.on 'change', initRelatedDocs
+    document.on 'change', initRelatedDocsList
 
     if GlobalVariables['EMBEDED']
       document.fetch()

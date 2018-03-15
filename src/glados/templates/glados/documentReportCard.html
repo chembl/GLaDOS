@@ -32,9 +32,9 @@
 
                     <div class="row BCK-section-content">
 
-                        {% block drd %}
+                        {% with is_dynamic=True %}
                             {% include "glados/DocumentReportCardParts/RelatedDocuments.html" %}
-                        {% endblock %}
+                        {% endwith %}
 
                     </div>
 
