@@ -302,8 +302,15 @@ footer {
     &.page-footer {
       padding-top: 0px;
     }
-    z-index: 2000;
   }
+}
+
+footer.z-depth-normal {
+  z-index: 1;
+}
+
+footer.z-depth-on-top {
+  z-index: 2000;
 }
 
 $chembl-nav-height: 56px;
