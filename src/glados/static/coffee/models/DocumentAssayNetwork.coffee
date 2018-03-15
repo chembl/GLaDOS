@@ -14,6 +14,7 @@ DocumentAssayNetwork = Backbone.Model.extend(DownloadModelOrCollectionExt).exten
     # 1. Get all the Assays from the document chembl id, in some cases it needs to iterate over the pagination
     # because there are too many, for example CHEMBL2766011
     triggerAssayRequest = (currentUrl) ->
+
       getAssaysGroup = $.getJSON currentUrl, (response) ->
         newAssays = response.assays
 
@@ -53,7 +54,9 @@ DocumentAssayNetwork = Backbone.Model.extend(DownloadModelOrCollectionExt).exten
         nextUrl = response.page_meta.next
 
         if nextUrl?
-          triggerActivityRequest(glados.Settings.WS_HOSTNAME + nextUrl)
+
+          fixedHostname = glados.Settings.WS_HOSTNAME.slice(0, glados.Settings.WS_HOSTNAME.length - 1)
+          triggerActivityRequest(fixedHostname + nextUrl)
         else
           activitiesListsReceived++
           checkIfAllInfoReady()

@@ -74,3 +74,13 @@ class TestsUtils
         return false
 
     return true
+
+  @expectObjectsAreEqual = (response, parsed) ->
+
+    for propKey, propVal of response
+
+      if not popVal?
+        expect(parsed[propVal]?).toBe(false)
+      else if _.isNumber(popVal) or _.isSring(propVal) or _.isBoolean(propVal)
+        expect(response[propVal]).toBe(parsed[propVal])
+      # propably later check objects and arrays

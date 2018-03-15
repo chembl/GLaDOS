@@ -13,6 +13,7 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend(DANViewEx
     @resource_type = 'Document'
 
   render: ->
+
     @showSection()
     @showCardContent()
     @hideResponsiveViewPreloader()
