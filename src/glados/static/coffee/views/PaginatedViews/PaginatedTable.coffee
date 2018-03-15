@@ -281,28 +281,29 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # Table header pinner
     # ------------------------------------------------------------------------------------------------------------------
     setUpTableHeaderPinner: ($table) ->
+      console.log 'stickyTableHeaders()', $table.stickyTableHeaders()
 
-      $win = $(window)
-      $scrollContainer = $(@el).find('.BCK-top-scroller-container')
-      $stickyHeader = $table.find('.sticky-header').first()
-
-      topTrigger = $scrollContainer.offset().top
-      stickyHeaderHeight = $stickyHeader.height()
-
-      pinUnpinTableHeader = ->
-
-        scroll = $win.scrollTop()
-        $elemToStick = $table.find('.sticky-header').first()
-
-        if !$table.is(":visible")
-          return
-
-        if scroll + stickyHeaderHeight/2 >= topTrigger - 5
-          $elemToStick.addClass('pinned-header')
-        else
-          $elemToStick.removeClass('pinned-header')
-
-      $win.scroll _.throttle(pinUnpinTableHeader, 200)
+#      $win = $(window)
+#      $scrollContainer = $(@el).find('.BCK-top-scroller-container')
+#      $stickyHeader = $table.find('.sticky-header').first()
+#
+#      topTrigger = $scrollContainer.offset().top
+#      stickyHeaderHeight = $stickyHeader.height()
+#
+#      pinUnpinTableHeader = ->
+#
+#        scroll = $win.scrollTop()
+#        $elemToStick = $table.find('.sticky-header').first()
+#
+#        if !$table.is(":visible")
+#          return
+#
+#        if scroll + stickyHeaderHeight/2 >= topTrigger - 5
+#          $elemToStick.addClass('pinned-header')
+#        else
+#          $elemToStick.removeClass('pinned-header')
+#
+#      $win.scroll _.throttle(pinUnpinTableHeader, 200)
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Static functions
