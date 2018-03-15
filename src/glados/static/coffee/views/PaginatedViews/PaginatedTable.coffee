@@ -285,6 +285,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       #use the top scroller to trigger the pin
       $scrollContainer = $(@el).find('.BCK-top-scroller-container')
+      console.log '$scrollContainer: ', $scrollContainer
+
       $firstTableRow = $table.find('tr').first()
 
       $win = $(window)

@@ -3323,6 +3323,9 @@ $chevron-button-margin: 0px;
   .pg-table {
     margin-left: 8px;
 
+    .sticky-header {
+      background-color: rgba(45, 255, 103, 0.1);
+    }
     .hidden_header, .hidden_cell {
       display: none;
     }
