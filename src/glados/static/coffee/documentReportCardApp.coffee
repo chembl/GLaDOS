@@ -71,6 +71,8 @@ class DocumentReportCardApp extends glados.ReportCardApp
     viewConfig =
       embed_section_name: 'related_documents'
       embed_identifier: chemblID
+      link_to_all_text: "Browse all documents related to #{chemblID}"
+      link_to_all_url: Document.getDocumentsListURL("_metadata.similar_documents.document_chembl_id:(\"#{chemblID}\")")
 
     new glados.views.ReportCards.PaginatedTableInCardView
       collection: relatedDocumentsList

@@ -21,5 +21,13 @@ glados.useNameSpace 'glados.views.ReportCards',
       if @collection.size() == 0 and !@collection.getMeta('force_show')
         return
 
+      linkToAllText = @config.link_to_all_text
+      linkToAllURL = @config.link_to_all_url
+      if linkToAllText? and linkToAllURL?
+        $linkToAllContainer = $(@el).find('.BCK-link-to-all')
+        glados.Utils.fillContentForElement $linkToAllContainer,
+          link_text: linkToAllText
+          url: linkToAllURL
+
       @showSection()
       @showCardContent()
