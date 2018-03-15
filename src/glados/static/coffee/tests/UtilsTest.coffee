@@ -38,7 +38,6 @@ describe "Utils", ->
       expect(first_page_to_show).toBe(495)
       expect(last_page_to_show).toBe(499)
 
-
   describe "Round numbers", ->
 
     testRoundNumbersForFactor = (factor, numbersMustBe) ->
