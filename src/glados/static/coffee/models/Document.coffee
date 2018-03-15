@@ -69,7 +69,7 @@ Document.COLUMNS = {
     parse_function: (value) -> "#{parseFloat(value) * 100}%"
   }
   COMPOUND_TANIMOTO: {
-    name_to_show: 'Document Similarity'
+    name_to_show: 'Compound Similarity'
     comparator: 'mol_tani'
     parse_function: (value) -> "#{parseFloat(value) * 100}%"
   }
