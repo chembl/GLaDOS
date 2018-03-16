@@ -22,6 +22,21 @@ glados.useNameSpace 'glados.apps.Embedding',
         else
           successCallBack()
 
+    @loadHTMLSectionInScript: (inScriptConfig, initFunction) ->
+
+      console.log 'HTML FROM SCRIPT'
+      templateToLoad = inScriptConfig.script_id
+      $contentFromScriptsContainer = $('#BCK-content-from-scripts')
+      glados.Utils.fillContentForElement $contentFromScriptsContainer, {}, templateToLoad
+      itemFromTemplateID = inScriptConfig.elem_id
+      $baseElement = $contentFromScriptsContainer.find("##{itemFromTemplateID}")
+
+      $embedContentContainer = $('#BCK-embedded-content')
+      $embedContentContainer.append($baseElement)
+
+      initFunction()
+      return
+
     @compoundReportCardBaseTemplate = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{Compound.reportCardPath}{{chembl_id}}"
     @targetReportCardBaseTemplate = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{Target.reportCardPath}{{chembl_id}}"
     @assayReportCardBaseTemplate = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{Assay.reportCardPath}{{chembl_id}}"
@@ -199,14 +214,20 @@ glados.useNameSpace 'glados.apps.Embedding',
 
     @requiredHTMLTemplatesURLSVisualisations:
       documents_by_year_histogram:
-        template: "#{glados.Settings.GLADOS_BASE_PATH_REL} #PapersPerYearHistogram"
         initFunction: MainPageApp.initPapersPerYear
+        in_script:
+          script_id: 'Handlebars-MainPageLayout'
+          elem_id: 'PapersPerYearHistogram'
       targets_by_protein_class:
-        template: "#{glados.Settings.GLADOS_BASE_PATH_REL} #BCK-TargetBrowserAsCircles"
         initFunction: MainPageApp.initTargetsVisualisation
+        in_script:
+          script_id: 'Handlebars-MainPageLayout'
+          elem_id: 'BCK-TargetBrowserAsCircles'
       max_phase_for_disease:
-        template: "#{glados.Settings.GLADOS_BASE_PATH_REL} #MaxPhaseForDisease"
         initFunction: MainPageApp.initMaxPhaseForDisease
+        in_script:
+          script_id: 'Handlebars-MainPageLayout'
+          elem_id: 'MaxPhaseForDisease'
 
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
@@ -229,7 +250,14 @@ glados.useNameSpace 'glados.apps.Embedding',
     @initVisualisation: (visualisationPath) ->
 
       #I will use a template, just in case we need something more complex in the future
-      requiredHTMLURLTempl = @requiredHTMLTemplatesURLSVisualisations[visualisationPath].template
-      requiredHTMLURL = Handlebars.compile(requiredHTMLURLTempl)()
-      initFunction = @requiredHTMLTemplatesURLSVisualisations[visualisationPath].initFunction
-      @loadHTMLSection(requiredHTMLURL, initFunction)
+      embedConfig = @requiredHTMLTemplatesURLSVisualisations[visualisationPath]
+      initFunction = embedConfig.initFunction
+      inScriptConfig = embedConfig.in_script
+
+      if not inScriptConfig?
+        requiredHTMLURLTempl = embedConfig.template
+        requiredHTMLURL = Handlebars.compile(requiredHTMLURLTempl)()
+        @loadHTMLSection(requiredHTMLURL, initFunction)
+      else
+        @loadHTMLSectionInScript(inScriptConfig, initFunction)
+
