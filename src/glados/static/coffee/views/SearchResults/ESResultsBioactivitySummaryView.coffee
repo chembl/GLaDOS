@@ -104,11 +104,16 @@ glados.useNameSpace 'glados.views.SearchResults',
     showDisplayAnywayButton: -> $(@el).find('.BCK-ShowAnywayButtonContainer').show()
     hideDisplayAnywayButton: -> $(@el).find('.BCK-ShowAnywayButtonContainer').hide()
     hideMatrix: -> $(@el).find('.BCK-CompTargetMatrix').hide()
-    showMatrix: -> $(@el).find('.BCK-CompTargetMatrix').show()
+    showMatrix: ->
+      $(@el).find('.BCK-CompTargetMatrix').show()
 
     displayAnyway: ->
       @FORCE_DISPLAY = true
       @handleVisualisationStatus()
+
+
+    initEmbedModal: ->
+
 
     #-------------------------------------------------------------------------------------------------------------------
     # Get items to generate matrix

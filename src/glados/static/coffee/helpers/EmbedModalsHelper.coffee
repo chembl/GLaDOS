@@ -7,7 +7,8 @@ glados.useNameSpace 'glados.helpers',
 
     # $parentElement is the parent element that contains the embed modal and trigger button
     @initEmbedModal = ($parentElement, embedURL)->
-      
+
+      console.log 'INIT EMBED MODAL'
       if EMBEDED?
         # prevent unnecessary loops
         $parentElement.find('.embed-modal-trigger').remove()
@@ -15,12 +16,14 @@ glados.useNameSpace 'glados.helpers',
         return
 
       $modalTrigger = $parentElement.find('.embed-modal-trigger')
-      $modal = $parentElement.find('.embed-modal')
-
       modalNumber = Math.floor((Math.random() * 1000000) + 1)
-
       modalId = 'embed-modal-for-' + modalNumber
-      $modal.attr('id', modalId)
+
+      modalContent = glados.Utils.getContentFromTemplate('Handlebars-Common-EmbedModal', {modal_id: modalId })
+      $generatedModalsContainer = $('#BCK-GeneratedModalsContainer')
+      $generatedModalsContainer.append(modalContent)
+      $generatedModalsContainer.find("##{modalId}").modal()
+
       $modalTrigger.attr('href', "##{modalId}" )
       $modalTrigger.attr('rendered', 'false')
 
@@ -31,6 +34,7 @@ glados.useNameSpace 'glados.helpers',
     # it can get all the information needed from the clicked element, no closure is needed.
     @renderModalPreview = ->
 
+      console.log 'render modal preview!!!'
       $clicked = $(@)
       if $clicked.attr('rendered') == 'true'
         return
