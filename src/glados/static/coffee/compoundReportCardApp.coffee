@@ -20,12 +20,12 @@ class CompoundReportCardApp extends glados.ReportCardApp
     CompoundReportCardApp.initRepresentations()
     CompoundReportCardApp.initSources()
     CompoundReportCardApp.initAlternateForms()
-    CompoundReportCardApp.initSimilarCompounds()
     CompoundReportCardApp.initMoleculeFeatures()
     CompoundReportCardApp.initWithdrawnInfo()
     CompoundReportCardApp.initMechanismOfAction()
     CompoundReportCardApp.initIndications()
     CompoundReportCardApp.initClinicalData()
+    CompoundReportCardApp.initSimilarCompounds()
     CompoundReportCardApp.initMetabolism()
     CompoundReportCardApp.initHELMNotation()
     CompoundReportCardApp.initBioSeq()
@@ -270,14 +270,14 @@ class CompoundReportCardApp extends glados.ReportCardApp
     viewConfig =
       embed_section_name: 'alternate_forms'
       embed_identifier: chemblID
-      title: "Alternate forms of compound #{chemblID}:"
+      title: "Alternative forms of compound #{chemblID}:"
 
     new glados.views.ReportCards.CarouselInCardView
       collection: moleculeFormsList
       el: $('#AlternateFormsCard')
       resource_type: gettext('glados_entities_compound_name')
       section_id: 'AlternateFormsOfCompoundInChEMBL'
-      section_label: 'Alternate Forms'
+      section_label: 'Alternative Forms'
       config: viewConfig
       report_card_app: @
 
@@ -502,7 +502,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     viewConfig =
       embed_section_name: 'similar'
       embed_identifier: chemblID
-      title: "Compounds similar to #{chemblID} with at least 85% similarity:"
+      title: "Compounds similar to #{chemblID} with at least 85% similarity, "
       full_list_url: CompoundReportCardApp.getCurrentCompound().getSimilaritySearchURL()
       hide_on_error: true
       carousel_config: carouselConfig

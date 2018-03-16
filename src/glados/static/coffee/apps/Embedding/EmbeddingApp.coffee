@@ -166,6 +166,10 @@ glados.useNameSpace 'glados.apps.Embedding',
         related_activities:
           template: "#{@documentReportCardBaseTemplate} #DAssociatedActivitiesCard"
           initFunction: DocumentReportCardApp.initActivitySummary
+        related_documents:
+          template: "#{@documentReportCardBaseTemplate} #CRelatedDocumentsCard"
+          initFunction: DocumentReportCardApp.initRelatedDocuments
+
       "#{CellLine.reportCardPath}":
         basic_information:
           template: "#{@cellLineReportCardBaseTemplate} #CBasicInformation"

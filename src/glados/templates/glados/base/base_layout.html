@@ -100,11 +100,11 @@
     <!-- - - - - - - - - - - - - - - - - - - - -->
     <!-- Footer -->
     <!-- - - - - - - - - - - - - - - - - - - - -->
-    <footer class="page-footer">
-        {% block footer %}
+    {% block footer %}
+        <footer class="page-footer {% if main_page %} z-depth-on-top {% else %} z-depth-normal {% endif %}">
             {% include "glados/base/footer.html" %}
-        {% endblock %}
-    </footer>
+        </footer>
+    {% endblock %}
 
 
     <!-- - - - - - - - - - - - - - - - - - - - -->

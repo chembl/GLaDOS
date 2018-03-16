@@ -1,0 +1,17 @@
+{
+  "abstract": "The prediction of human pharmacokinetics is often based on in vivo preclinical pharmacokinetic data. However, to date, no clear guidance has been available about the relative ability of the major preclinical species to estimate human oral exposure. The study was conducted to survey the literature on oral pharmacokinetic parameters in rat, dog, monkey and human, and to compare various methods for prediction of oral exposure in humans. Fifty-six non-peptide xenobiotics were identified with oral pharmacokinetic data in rat, dog, monkey and human, and comparison of the data from each species to humans was conducted along with an evaluation of the molecular features of these compounds. Monkey liver blood flow-based oral exposure was qualitatively and quantitatively more predictive of human oral exposure than rat or dog. Furthermore, generation of data in three versus two preclinical species did not always improve human predictivity. The use of molecular properties did not substantially improve the prediction of human oral exposure compared with the prediction from monkey alone. These observations confirm the continued importance of non-human primates in preclinical pharmacokinetics, and also have implications for pharmacokinetic lead optimization and for prediction of human pharmacokinetic parameters from in vivo preclinical data.",
+  "authors": "Ward KW, Nagilla R, Jolivette LJ.",
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL1614631",
+  "doi": "10.1080/00498250400028197",
+  "first_page": "191",
+  "issue": "2",
+  "journal": "Xenobiotica",
+  "journal_full_title": "Xenobiotica; the fate of foreign compounds in biological systems.",
+  "last_page": "210",
+  "patent_id": null,
+  "pubmed_id": 16019946,
+  "title": "Comparative evaluation of oral systemic exposure of 56 xenobiotics in rat, dog, monkey and human.",
+  "volume": "35",
+  "year": 2005
+}

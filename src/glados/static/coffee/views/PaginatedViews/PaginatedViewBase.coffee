@@ -55,6 +55,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @renderAtInit
         @render()
 
+      @initPageQueue()
+
+    initPageQueue: ->
+
     bindCollectionEvents: ->
 
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @selectionChangedHandler, @
@@ -212,7 +216,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @shouldIgnoreContentChangeRequestWhileStreaming()
         return
 
-#      console.log 'SENT DATA TO TEMPLATE'
       if (@isInfinite() or @isCards()) and not @isComplicated
         templateID = @collection.getMeta('custom_cards_template')
         if @isInfinite()
@@ -223,7 +226,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if customItemTemplate?
         templateID = customItemTemplate
       templateID ?= $specificElemContainer.attr('data-hb-template')
-#      console.log 'TEMPLATE ID: ', templateID
       applyTemplate = Handlebars.compile($('#' + templateID).html())
       $appendTo = $specificElemContainer
 
@@ -355,7 +357,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     sortCollection: (event) ->
 
       $target = $(event.currentTarget)
-#      console.log '$target: ', $target
       if not @eventForThisView($target)
         return
 

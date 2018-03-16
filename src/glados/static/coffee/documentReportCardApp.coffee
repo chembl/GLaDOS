@@ -38,6 +38,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
 
       @currentDocument = new Document
         document_chembl_id: chemblID
+        fetch_from_elastic: true
       return @currentDocument
 
     else return @currentDocument
@@ -48,7 +49,6 @@ class DocumentReportCardApp extends glados.ReportCardApp
   # -------------------------------------------------------------
   @initBasicInformation = ->
 
-    document = DocumentReportCardApp.getCurrentDocument()
     document = DocumentReportCardApp.getCurrentDocument()
 
     new DocumentBasicInformationView
@@ -63,8 +63,38 @@ class DocumentReportCardApp extends glados.ReportCardApp
 
   @initRelatedDocuments = ->
 
-    @registerSection('RelatedDocuments', 'Related Documents')
-    @showSection('RelatedDocuments')
+    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
+
+    document = DocumentReportCardApp.getCurrentDocument()
+    relatedDocumentsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewRelatedDocumentsList()
+
+    viewConfig =
+      embed_section_name: 'related_documents'
+      embed_identifier: chemblID
+      link_to_all_text: "Browse all documents related to #{chemblID}"
+      link_to_all_url: Document.getDocumentsListURL("_metadata.similar_documents.document_chembl_id:(\"#{chemblID}\")")
+
+    new glados.views.ReportCards.PaginatedTableInCardView
+      collection: relatedDocumentsList
+      el: $('#CRelatedDocumentsCard')
+      resource_type: gettext('glados_entities_document_name')
+      section_id: 'RelatedDocuments'
+      section_label: 'Related Documents'
+      config: viewConfig
+      report_card_app: @
+
+    initRelatedDocsList = ->
+
+      rawSimilarDocs = document.get('_metadata').similar_documents
+      rawSimilarDocs ?= []
+
+      relatedDocumentsList.setMeta('data_loaded', true)
+      relatedDocumentsList.reset(_.map(rawSimilarDocs, Document.prototype.parse))
+
+    document.on 'change', initRelatedDocsList
+
+    if GlobalVariables['EMBEDED']
+      document.fetch()
 
   @initAssayNetwork = ->
 

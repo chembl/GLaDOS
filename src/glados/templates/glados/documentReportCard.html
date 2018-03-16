@@ -27,14 +27,14 @@
 
                 </div>
 
-                <div id="RelatedDocuments" class="section scrollspy">
+                <div id="RelatedDocuments" class="section scrollspy" style="display: none">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
                     <div class="row BCK-section-content">
 
-                        {% block drd %}
+                        {% with is_dynamic=True %}
                             {% include "glados/DocumentReportCardParts/RelatedDocuments.html" %}
-                        {% endblock %}
+                        {% endwith %}
 
                     </div>
 
@@ -53,7 +53,7 @@
 
                 </div>
 
-                <div id="AssayNetwork" class="section scrollspy">
+                <div id="AssayNetwork" class="section scrollspy" style="display: none">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
                     <div class="row BCK-section-content">

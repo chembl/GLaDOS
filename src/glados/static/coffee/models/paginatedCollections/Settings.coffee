@@ -357,6 +357,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         LABEL: 'Drugs'
         INDEX_NAME: 'chembl_molecule'
         # PATH: Assigned after this declaration using the INDEX_NAME
+        BROWSE_LIST_URL: Drug.getDrugsListURL
         MODEL: glados.models.Compound.Drug
         COLUMNS: glados.models.Compound.Drug.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
@@ -553,13 +554,21 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Default: ApprovedDrugClinicalCandidate.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
           Carousel:
             Default: ApprovedDrugClinicalCandidate.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+      SIMILAR_DOCUMENTS_IN_REPORT_CARD:
+        MODEL: Document
+        DEFAULT_PAGE_SIZE: 5
+        COLUMNS: Document.COLUMNS_SETTINGS.ALL_COLUMNS
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: Document.COLUMNS_SETTINGS.SIMILAR_TERMS_IN_REPORT_CARDS
+            custom_page_sizes: glados.Settings.TABLE_PAGE_SIZES
+        ID_COLUMN: Document.ID_COLUMN
       STRUCTURAL_ALERTS_LIST:
         MODEL: glados.models.Compound.StructuralAlert
         COLUMNS: glados.models.Compound.StructuralAlert.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Carousel:
             Default: glados.models.Compound.StructuralAlert.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
-            CustomItemTemplate: 'Handlebars-Common-Paginated-Card-CarouselStructuralAlerts'
         ID_COLUMN: glados.models.Compound.StructuralAlert.ID_COLUMN
       STRUCTURAL_ALERTS_SETS_LIST:
         MODEL: glados.models.Compound.StructuralAlertSet

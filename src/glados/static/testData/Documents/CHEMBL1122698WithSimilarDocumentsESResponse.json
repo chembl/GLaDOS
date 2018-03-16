@@ -1,0 +1,647 @@
+{
+  "_index": "chembl_document",
+  "_type": "document",
+  "_id": "CHEMBL1122698",
+  "_version": 6,
+  "found": true,
+  "_source": {
+    "first_page": "1037",
+    "last_page": "1043",
+    "year": 1984,
+    "title": "Selective delivery of cytotoxic compounds to cells by the LDL pathway.",
+    "journal_full_title": "Journal of medicinal chemistry.",
+    "abstract": "Cancer cells need cholesterol to make new membrane. They get it either by de novo synthesis or from low-density lipoprotein (LDL), or both. Some types of cancer have very high LDL requirements. LDL particles, which circulate in the blood, contain a cholesteryl ester core surrounded by a phospholipid coat containing apoproteins that are recognized by LDL receptors on cell surfaces. After attachment to cells, LDL is endocytosed into lysosomes, where the core is exposed and hydrolyzed. A technique is known whereby LDL can be isolated, its core removed and replaced by a compatible lipophilic substance, and then reconstituted into intact LDL particles that are recognized and internalized by cells in the normal manner. A series of cytotoxic compounds has been synthesized, designed to be compatible with reconstituted LDL, and directed against cancers that copiously internalize LDL. They were evaluated by measuring the toxicity of reconstituted LDL toward test cells bearing LDL receptors. Selectivity was determined by comparison, either with mutant cells with few LDL receptors or with reconstituted methylated LDL (which is not recognized by LDL receptors) on normal cells. Two compounds, 19 and 25, were found that reconstitute well, kill or arrest the test cells at reasonably low concentrations, and are completely selective, suggesting that they are delivered to cells exclusively via the LDL pathway.",
+    "issue": "8",
+    "_metadata": {
+      "es_completion": [
+        {
+          "input": "Selective delivery of cytotoxic compounds to cells by the LDL pathway.",
+          "weight": 100
+        },
+        {
+          "input": "CHEMBL1122698",
+          "weight": 10
+        },
+        {
+          "input": "1984",
+          "weight": 1
+        },
+        {
+          "input": "6086924",
+          "weight": 10
+        },
+        {
+          "input": "10.1021/jm00374a017",
+          "weight": 10
+        },
+        {
+          "input": "Firestone RA, Pisano JM, Falck JR, McPhaul MM, Krieger M.",
+          "weight": 100
+        },
+        {
+          "input": "Cancer cells need cholesterol to make new membrane. They get it either by de novo synthesis or from low-density lipoprotein (LDL), or both. Some types of cancer have very high LDL requirements. LDL particles, which circulate in the blood, contain a cholesteryl ester core surrounded by a phospholipid coat containing apoproteins that are recognized by LDL receptors on cell surfaces. After attachment to cells, LDL is endocytosed into lysosomes, where the core is exposed and hydrolyzed. A technique is known whereby LDL can be isolated, its core removed and replaced by a compatible lipophilic substance, and then reconstituted into intact LDL particles that are recognized and internalized by cells in the normal manner. A series of cytotoxic compounds has been synthesized, designed to be compatible with reconstituted LDL, and directed against cancers that copiously internalize LDL. They were evaluated by measuring the toxicity of reconstituted LDL toward test cells bearing LDL receptors. Selectivity was determined by comparison, either with mutant cells with few LDL receptors or with reconstituted methylated LDL (which is not recognized by LDL receptors) on normal cells. Two compounds, 19 and 25, were found that reconstitute well, kill or arrest the test cells at reasonably low concentrations, and are completely selective, suggesting that they are delivered to cells exclusively via the LDL pathway.",
+          "weight": 60
+        }
+      ],
+      "related_cell_lines": {
+        "count": 1,
+        "chembl_ids": {
+          "0": [
+            "CHEMBL3308072"
+          ]
+        }
+      },
+      "source": [
+        {
+          "src_description": "Scientific Literature",
+          "src_id": 1,
+          "src_short_name": "LITERATURE"
+        }
+      ],
+      "related_assays": {
+        "count": 28,
+        "chembl_ids": {
+          "0": [
+            "CHEMBL748781",
+            "CHEMBL747953",
+            "CHEMBL752549",
+            "CHEMBL752548",
+            "CHEMBL749717",
+            "CHEMBL747377",
+            "CHEMBL749719",
+            "CHEMBL748783",
+            "CHEMBL747375",
+            "CHEMBL748780",
+            "CHEMBL749714",
+            "CHEMBL747955",
+            "CHEMBL749718",
+            "CHEMBL749715",
+            "CHEMBL747957",
+            "CHEMBL747958",
+            "CHEMBL749716",
+            "CHEMBL747959",
+            "CHEMBL747374",
+            "CHEMBL748782",
+            "CHEMBL747961",
+            "CHEMBL744186",
+            "CHEMBL747951",
+            "CHEMBL747952",
+            "CHEMBL747954",
+            "CHEMBL747376",
+            "CHEMBL747956",
+            "CHEMBL747960"
+          ]
+        }
+      },
+      "related_activities": {
+        "count": 56
+      },
+      "related_compounds": {
+        "count": 20,
+        "chembl_ids": {
+          "0": [
+            "CHEMBL1793870",
+            "CHEMBL1793872",
+            "CHEMBL1793868",
+            "CHEMBL1793873",
+            "CHEMBL1793869",
+            "CHEMBL1793881",
+            "CHEMBL8657",
+            "CHEMBL1793880",
+            "CHEMBL267481",
+            "CHEMBL9150",
+            "CHEMBL9072",
+            "CHEMBL1793866",
+            "CHEMBL9156",
+            "CHEMBL1793867",
+            "CHEMBL9093",
+            "CHEMBL9060",
+            "CHEMBL8606",
+            "CHEMBL267696",
+            "CHEMBL8814",
+            "CHEMBL1793879"
+          ]
+        }
+      },
+      "related_targets": {
+        "count": 2,
+        "chembl_ids": {
+          "0": [
+            "CHEMBL612545",
+            "CHEMBL372"
+          ]
+        }
+      },
+      "similar_documents": [
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1131445",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1130726",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1125545",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1128335",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1130705",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1123134",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1133319",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1136025",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1146821",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1123449",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1131397",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1123288",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1135232",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1121396",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1128052",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1128354",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1131698",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1124454",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1133274",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1134765",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1130623",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1122261",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1146675",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1151587",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1131120",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1126925",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1122627",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1121894",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1122050",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1123496",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1123261",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1132161",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1123634",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1130565",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1146719",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1127402",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1124435",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1121410",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1128934",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1126787",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1127686",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1123897",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1124188",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1131302",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1128702",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1151541",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1124618",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1129556",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1124371",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1131700",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1131593",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1149224",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1128844",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1147443",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1127573",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1123995",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1128786",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1131785",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1123916",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1133077",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1144947",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1125586",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1129344",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1127687",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1130763",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1132132",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1132208",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1129095",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1122687",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1130600",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1124695",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1132712",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1122225",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1125511",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1134192",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1124160",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1127607",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1123116",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1130857",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1123686",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1134067",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1148239",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1122973",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1123391",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1133332",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1128742",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1151504",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1121813",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1126926",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1131874",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1131935",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1134066",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1131502",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1124696",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1128969",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1132475",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1124395",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1123306",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1129970",
+          "mol_tani": 0.0
+        },
+        {
+          "tid_tani": 1.0,
+          "document_chembl_id": "CHEMBL1131795",
+          "mol_tani": 0.0
+        }
+      ]
+    },
+    "doc_type": "PUBLICATION",
+    "journal": "J. Med. Chem.",
+    "doi": "10.1021/jm00374a017",
+    "document_chembl_id": "CHEMBL1122698",
+    "volume": "27",
+    "authors": "Firestone RA, Pisano JM, Falck JR, McPhaul MM, Krieger M.",
+    "patent_id": null,
+    "pubmed_id": 6086924
+  }
+}

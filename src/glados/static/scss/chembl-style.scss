@@ -302,8 +302,15 @@ footer {
     &.page-footer {
       padding-top: 0px;
     }
-    z-index: 2000;
   }
+}
+
+footer.z-depth-normal {
+  z-index: 1;
+}
+
+footer.z-depth-on-top {
+  z-index: 2000;
 }
 
 $chembl-nav-height: 56px;
@@ -3200,10 +3207,6 @@ $facets-width-large: 21%;
   }
 }
 
-/**
-* Paginated Collections
-* ----------------------------------------------------------------------------------------------------------------------
-*/
 
 /* carrousel with overlay buttons
 * --------------------------------------------
@@ -3212,13 +3215,21 @@ $facets-width-large: 21%;
 $chevron-button-size: 40px;
 $chevron-button-margin: 0px;
 
+@media (max-width: 600px) {
+  #SimilarCompoundsCard, #AlternateFormsOfCompoundInChEMBL{
+    max-width: 500px !important;
+  }
+
+}
+
 .carousel-container {
   position: relative;
+  overflow: hidden;
 
   .chevron-container {
     z-index: 10;
     position: absolute;
-    top: 30%;
+    top: 25%;
     left: 0.75em;
     width: 100%;
 
@@ -3258,30 +3269,47 @@ $chevron-button-margin: 0px;
       border-radius: 0 80px 80px 0;
       box-shadow: 2px 0 2px 0px rgba(169, 169, 169, 0.38);
     }
-
   }
-
   .items-container {
     margin-bottom: 0;
     margin-left: $chevron-button-margin;
     margin-right: $chevron-button-margin;
-    .card-content {
-      padding: 10px 10px 5px 10px;
-      .p-oneline a {
-        font-size: 0.8rem;
+    position: relative;
+    display: flex;
+
+    .carousel-card {
+      width: calc(100% - 10px);
+      .card-container {
+        width: 85%;
+        margin-left: auto;
+        margin-right: auto;
+
+        .card-content {
+          padding: 10px 10px 5px 10px;
+
+          .p-oneline a {
+            font-size: 0.8rem;
+          }
+        }
       }
     }
-  }
-  .pagination {
-    margin: 0;
-    a {
-      font-size: 1em;
-    }
-  }
 
-  .number-of-results {
-    margin-left: 30px !important;
   }
+}
+
+/*
+* Paginated Collections
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+.pagination {
+  margin: 0;
+  a {
+    font-size: 1em;
+  }
+}
+
+.number-of-results {
+  margin-left: 30px !important;
 }
 
 .push-30px {
@@ -3670,3 +3698,228 @@ $chevron-button-margin: 0px;
     }
   }
 }
+
+
+
+/**** CUSTOM RESPONSIVE SIZES FOR CAROUSEL CARDS ********/
+
+.carousel-card.card-s1 {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(100% / (12 / 1));
+}
+
+.carousel-card.card-s2 {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(100% / (12 / 2));
+}
+
+.carousel-card.card-s3 {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(100% / (12 / 3));
+}
+
+.carousel-card.card-s4 {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(100% / (12 / 4));
+}
+
+.carousel-card.card-s5 {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(100% / (12 / 5));
+}
+
+.carousel-card.card-s6 {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(100% / (12 / 6));
+}
+
+.carousel-card.card-s7 {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(100% / (12 / 7));
+}
+
+.carousel-card.card-s8 {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(100% / (12 / 8));
+}
+
+.carousel-card.card-s9 {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(100% / (12 / 9));
+}
+
+.carousel-card.card-s10 {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(100% / (12 / 10));
+}
+
+.carousel-card.card-s11 {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(100% / (12 / 11));
+}
+
+.carousel-card.card-s12 {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 100%;
+}
+
+@media #{$medium-and-up} {
+    .carousel-card.card-m1 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 1));
+  }
+
+  .carousel-card.card-m2 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 2));
+  }
+
+  .carousel-card.card-m3 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 3));
+  }
+
+  .carousel-card.card-m4 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 4));
+  }
+
+  .carousel-card.card-m5 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 5));
+  }
+
+  .carousel-card.card-m6 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 6));
+  }
+
+  .carousel-card.card-m7 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 7));
+  }
+
+  .carousel-card.card-m8 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 8));
+  }
+
+  .carousel-card.card-m9 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 9));
+  }
+
+  .carousel-card.card-m10 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 10));
+  }
+
+  .carousel-card.card-m11 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 11));
+  }
+
+  .carousel-card.card-m12 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 12));
+  }
+}
+
+@media #{$large-and-up} {
+  .carousel-card.card-l1 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 1));
+  }
+
+  .carousel-card.card-l2 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 2));
+  }
+
+  .carousel-card.card-l3 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 3));
+  }
+
+  .carousel-card.card-l4 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 4));
+  }
+
+  .carousel-card.card-l5 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 5));
+  }
+
+  .carousel-card.card-l6 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 6));
+  }
+
+  .carousel-card.card-l7 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 7));
+  }
+
+  .carousel-card.card-l8 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 8));
+  }
+
+  .carousel-card.card-l9 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 9));
+  }
+
+  .carousel-card.card-l10 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 10));
+  }
+
+  .carousel-card.card-l11 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 11));
+  }
+
+  .carousel-card.card-l12 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 12));
+  }
+}
+

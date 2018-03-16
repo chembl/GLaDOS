@@ -10,19 +10,27 @@ Document = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     @set('id', id)
     @set('document_chembl_id', id)
 
-    @url = glados.Settings.WS_BASE_URL + 'document/' + @get('document_chembl_id') + '.json'
+    if @get('fetch_from_elastic')
+      @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_document/document/' + id
+    else
+      @url = glados.Settings.WS_BASE_URL + 'document/' + id + '.json'
 
-  parse: (data) ->
-    parsed = data
-    parsed.report_card_url = Document.get_report_card_url(parsed.document_chembl_id)
+  parse: (response) ->
 
-    filterForActivities = 'document_chembl_id:' + parsed.document_chembl_id
-    parsed.activities_url = Activity.getActivitiesListURL(filterForActivities)
+    if response._source?
+      objData = response._source
+    else
+      objData = response
 
-    filterForCompounds = '_metadata.related_documents.chembl_ids.\\*:' + parsed.document_chembl_id
-    parsed.compounds_url = Compound.getCompoundsListURL(filterForCompounds)
+    objData.report_card_url = Document.get_report_card_url(objData.document_chembl_id)
 
-    return parsed;
+    filterForActivities = 'document_chembl_id:' + objData.document_chembl_id
+    objData.activities_url = Activity.getActivitiesListURL(filterForActivities)
+
+    filterForCompounds = '_metadata.related_documents.chembl_ids.\\*:' + objData.document_chembl_id
+    objData.compounds_url = Compound.getCompoundsListURL(filterForCompounds)
+
+    return objData;
 
 # Constant definition for ReportCardEntity model functionalities
 _.extend(Document, glados.models.base.ReportCardEntity)
@@ -53,6 +61,21 @@ Document.COLUMNS = {
       'is_sorting': 0
       'sort_class': 'fa-sort'
       'custom_field_template': '<b>Score: </b>{{val}}'
+  }
+  # this is shown when showing related documents in a report card
+  TARGET_TANIMOTO: {
+    name_to_show: 'Target Similarity'
+    comparator: 'tid_tani'
+    parse_function: (value) -> "#{parseFloat(value) * 100}%"
+  }
+  COMPOUND_TANIMOTO: {
+    name_to_show: 'Compound Similarity'
+    comparator: 'mol_tani'
+    parse_function: (value) -> "#{parseFloat(value) * 100}%"
+  }
+  REFERENCE: {
+    name_to_show: 'Reference'
+    comparator: 'reference'
   }
   PUBMED_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
     comparator: 'pubmed_id'
@@ -144,6 +167,15 @@ Document.COLUMNS_SETTINGS = {
     Document.COLUMNS.TITLE
     Document.COLUMNS.AUTHORS
     Document.COLUMNS.YEAR
+  ]
+  SIMILAR_TERMS_IN_REPORT_CARDS: [
+    Document.COLUMNS.CHEMBL_ID
+    Document.COLUMNS.TARGET_TANIMOTO
+    Document.COLUMNS.COMPOUND_TANIMOTO
+    Document.COLUMNS.REFERENCE
+    Document.COLUMNS.TITLE
+    Document.COLUMNS.PUBMED_ID
+    Document.COLUMNS.DOI
   ]
 }
 

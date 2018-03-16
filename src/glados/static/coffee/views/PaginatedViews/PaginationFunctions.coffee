@@ -47,9 +47,12 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @collection.setPage(pageNum)
 
 
-    enableDisableNextLastButtons: ->
+    enableDisableNextLastButtons: (customPage) ->
 
-      current_page = parseInt(@collection.getMeta('current_page'))
+      if customPage?
+        current_page = customPage
+      else
+        current_page = parseInt(@collection.getMeta('current_page'))
       total_pages = parseInt(@collection.getMeta('total_pages'))
 
       if current_page == 1
@@ -62,9 +65,13 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       else
         $(@el).find("[data-page='next']").removeClass('disabled')
 
-    activateCurrentPageButton: ->
+    activateCurrentPageButton: (customPage) ->
 
-      current_page = @collection.getMeta('current_page')
+      if customPage?
+        current_page = customPage
+      else
+        current_page = @collection.getMeta('current_page')
+
       $(@el).find('.page-selector').removeClass('active')
       $(@el).find("[data-page=" + current_page + "]").addClass('active')
 
@@ -109,43 +116,36 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       $elem.hide()
       $elemChevrons.hide()
 
-    fillPaginators: ->
+    fillPaginators: (customPage) ->
 
       $elem = $(@el).find('.BCK-paginator-container')
       if $elem.length == 0
         return
       template = $('#' + $elem.attr('data-hb-template'))
 
-      current_page = @collection.getMeta('current_page')
-      records_in_page = @collection.getMeta('records_in_page')
-      page_size = @collection.getMeta('page_size')
-      num_pages = @collection.getMeta('total_pages')
+      current_page = parseInt(@collection.getMeta('current_page'))
+      records_in_page = parseInt(@collection.getMeta('records_in_page'))
+      page_size = parseInt(@collection.getMeta('page_size'))
+      num_pages = parseInt(@collection.getMeta('total_pages'))
+
+      if customPage?
+        current_page = parseInt(customPage)
+        if current_page != num_pages
+          records_in_page = page_size
 
       first_record = (current_page - 1) * page_size
       last_page = first_record + records_in_page
 
       # this sets the window for showing the pages
-      show_previous_ellipsis = false
-      show_next_ellipsis = false
-      if num_pages <= 5
-        first_page_to_show = 1
-        last_page_to_show = num_pages
-      else if current_page + 2 <= 5
-        first_page_to_show = 1
-        last_page_to_show = 5
-        show_next_ellipsis = true
-      else if current_page + 2 < num_pages
-        first_page_to_show = current_page - 2
-        last_page_to_show = current_page + 2
-        show_previous_ellipsis = true
-        show_next_ellipsis = true
-      else
-        first_page_to_show = num_pages - 4
-        last_page_to_show = num_pages
-        show_previous_ellipsis = true
+      [show_previous_ellipsis, show_next_ellipsis, first_page_to_show, last_page_to_show] = \
+      glados.Utils.Pagination.calculatePaginatorParams(num_pages, current_page)
+
+      console.log 'COLLECTION PAGE: ', parseInt(@collection.getMeta('current_page'))
+      console.log 'records_in_page: ', records_in_page
+      console.log 'page_size: ', page_size
+      console.log 'first_record: ', first_record
 
       pages = (num for num in [first_page_to_show..last_page_to_show])
-
       $elem.html Handlebars.compile(template.html())
         pages: pages
         records_showing: glados.Utils.getFormattedNumber(first_record+1) + '-' + \
@@ -154,7 +154,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         show_next_ellipsis: show_next_ellipsis
         show_previous_ellipsis: show_previous_ellipsis
 
-      @activateCurrentPageButton()
-      @enableDisableNextLastButtons()
+      @activateCurrentPageButton(customPage)
+      @enableDisableNextLastButtons(customPage)
+      @stampViewIDOnEventsTriggerers()
 
 
