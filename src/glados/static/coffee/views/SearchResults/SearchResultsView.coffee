@@ -8,13 +8,12 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       @browsersDict = {}
       @$searchResultsListsContainersDict = {}
-      @selected_es_entity = null
-      @es_path = null
-      @parseURLData()
+      @selected_es_entity = @attributes?.selected_es_entity || null
 
       $listsContainer = $(@el).find('.BCK-ESResults-lists')
       # @model.getResultsListsDict() and glados.models.paginatedCollections.Settings.ES_INDEXES
       # Share the same keys to access different objects
+      @model.resetSearchResultsListsDict()
       resultsListsDict = @model.getResultsListsDict()
 
       $listsContainer.empty()
@@ -23,8 +22,11 @@ glados.useNameSpace 'glados.views.SearchResults',
         if resultsListsDict[resourceName]?
           resultsListViewID = @getBCKListContainerBaseID(resourceName)
           $container = $('<div id="' + resultsListViewID + '-container">')
-          glados.Utils.fillContentForElement($container, {entity_name: @getEntityName(resourceName)},
-            'Handlebars-ESResultsList')
+          glados.Utils.fillContentForElement($container, {
+              entity_name: glados.models.paginatedCollections.Settings.ES_INDEXES[resourceName].LABEL
+            },
+            'Handlebars-ESResultsList'
+          )
           $listsContainer.append($container)
 
           # Initialises a Menu view which will be in charge of handling the menu bar,
@@ -38,17 +40,16 @@ glados.useNameSpace 'glados.views.SearchResults',
           resultsBrowserI.render()
           @browsersDict[resourceName] = resultsBrowserI
           @$searchResultsListsContainersDict[resourceName] = $('#'+resultsListViewID + '-container')
-          resultsListsDict[resourceName].on('score_and_records_update',@sortResultsListsViews, @)
-          resultsListsDict[resourceName].on('score_and_records_update',@renderTabs, @)
+          resultsListsDict[resourceName].on('score_and_records_update', @sortResultsListsViews, @)
+          resultsListsDict[resourceName].on('score_and_records_update', @renderTabs, @)
 
-      @showSelectedResourceOnly()
       @renderTabs()
+      @showSelectedResourceOnly()
 
     # ------------------------------------------------------------------------------------------------------------------
     # sort Elements
     # ------------------------------------------------------------------------------------------------------------------
     sortResultsListsViews: ->
-
       # If an entity is selected the ordering is skipped
       if not @selected_es_entity
         sorted_scores = []
@@ -98,7 +99,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         prepend_br: false
         total_records: 0
         label: 'All Results'
-        url_path: @getSearchURLFor(null, @model.get('queryString'))
+        url_path: glados.routers.MainGladosRouter.getSearchURL(null, @model.get('queryString'), null)
         selected: if @selected_es_entity then false else true
       })
 
@@ -116,7 +117,7 @@ glados.useNameSpace 'glados.views.SearchResults',
           total_records: totalRecords
           label:resourceLabel
           key: key_i
-          url_path: @getSearchURLFor(key_i, @model.get('queryString'))
+          url_path: glados.routers.MainGladosRouter.getSearchURL(key_i, @model.get('queryString'), null)
           selected: @selected_es_entity == key_i
         })
 
@@ -128,36 +129,24 @@ glados.useNameSpace 'glados.views.SearchResults',
 #        $('.BCK-summary-tabs-container').find('a'), @navigateTo.bind(@)
 #      )
 
-    parseURLData: () ->
-      @es_path = URLProcessor.getSpecificSearchResultsPage()
-      @selected_es_entity = if _.has(glados.Settings.SEARCH_PATH_2_ES_KEY,@es_path) then \
-        glados.Settings.SEARCH_PATH_2_ES_KEY[@es_path] else null
-
-    navigateTo: (navUrl) ->
-      window.history.pushState({}, 'ChEMBL: ' + @model.get('queryString'), navUrl)
-      @parseURLData()
-      @showSelectedResourceOnly()
-      @renderTabs()
-
     openTab: (event) ->
 
       $clickedElem = $(event.currentTarget)
-      entityKey = $clickedElem.attr('data-resource-key')
+      @selected_es_entity = $clickedElem.attr('data-resource-key')
       $(@el).find('.BCK-select-results-entity').removeClass('selected')
-      @showSelectedResourceOnly(entityKey)
+      @showSelectedResourceOnly()
       $clickedElem.addClass('selected')
+      glados.routers.MainGladosRouter.updateSearchURL @selected_es_entity, @model.get('queryString')
 
 
-    showSelectedResourceOnly: (selectedKey) ->
+    showSelectedResourceOnly: () ->
 
       for currentKey, resultsListSettings of glados.models.paginatedCollections.Settings.ES_INDEXES
-
         # if there is a selection and this container is not selected it gets hidden if else it shows all resources
-        if selectedKey? and selectedKey!= '' and selectedKey != currentKey
+        if @selected_es_entity? and @selected_es_entity!= '' and @selected_es_entity != currentKey
           @$searchResultsListsContainersDict[currentKey].hide()
         else
-          @$searchResultsListsContainersDict[currentKey].hide()
-          @$searchResultsListsContainersDict[currentKey].show(100)
+          @$searchResultsListsContainersDict[currentKey].show()
           @browsersDict[currentKey].wakeUp()
 
 
@@ -166,5 +155,3 @@ glados.useNameSpace 'glados.views.SearchResults',
     # ------------------------------------------------------------------------------------------------------------------
     getBCKListContainerBaseID: (resourceName) ->
       return 'BCK-'+glados.models.paginatedCollections.Settings.ES_INDEXES[resourceName].ID_NAME
-
-    getEntityName: (resourceName) -> resourceName.replace(/_/g, ' ').toLowerCase() + 's'

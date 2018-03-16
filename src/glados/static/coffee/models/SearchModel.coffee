@@ -56,6 +56,8 @@ SearchModel = Backbone.Model.extend
             chembl_id_link: glados.models.paginatedCollections.Settings.ES_INDEX_2_GLADOS_SETTINGS[optionJ._index]\
               .MODEL.get_colored_report_card_url(optionJ._id)
             header: false
+            entityKey: glados.models.paginatedCollections.Settings.ES_INDEX_2_GLADOS_SETTINGS[optionJ._index]\
+              .KEY_NAME
             entityLabel: glados.models.paginatedCollections.Settings.ES_INDEX_2_GLADOS_SETTINGS[optionJ._index]\
               .LABEL
             score: optionJ._score
@@ -99,8 +101,9 @@ SearchModel = Backbone.Model.extend
             suggestions.push docsSuggested[0]
           else
             suggestionI = docsSuggested[0]
-            suggestionI.chembl_id_link.href = glados.Settings.SEARCH_RESULTS_PAGE+'/'+suggestionI.entityLabel\
-                +' '+suggestionI.text
+            suggestionI.chembl_id_link.href = glados.routers.MainGladosRouter.getSearchURL(
+              suggestionI.entityKey, suggestionI.text
+            )
             suggestionI.chembl_id_link.text = 'Multiple '+suggestionI.entityLabel
             suggestions.push suggestionI
 
@@ -219,9 +222,14 @@ SearchModel = Backbone.Model.extend
 
   # coordinates the search across the different results lists
   search: (rawQueryString, selected_es_entity) ->
+    if not rawQueryString?
+      rawQueryString = ''
     @selected_es_entity = if _.isUndefined(selected_es_entity) then null else selected_es_entity
     ajaxDeferred = @parseQueryString(rawQueryString)
     ajaxDeferred.then(@__search.bind(@))
+
+  resetSearchResultsListsDict: ()->
+    @unset('resultsListsDict')
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Singleton pattern

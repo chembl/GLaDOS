@@ -4,7 +4,7 @@ class SearchResultsApp
   # Initialization
   # --------------------------------------------------------------------------------------------------------------------
 
-  @init = (searchTerm) ->
+  @init = (selectedESEntity, searchTerm, currentState) ->
     @eSQueryExplainView = new glados.views.SearchResults.ESQueryExplainView
       el: $('#es-query-explain-wrapper')
 
@@ -12,6 +12,9 @@ class SearchResultsApp
     new glados.views.SearchResults.SearchResultsView
       el: $searchResultsContainer
       model: SearchModel.getInstance()
+      attributes:
+        selected_es_entity: selectedESEntity
+        state: currentState
 
     SearchModel.getInstance().search(searchTerm)
 

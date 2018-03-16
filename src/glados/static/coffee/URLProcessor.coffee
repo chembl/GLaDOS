@@ -25,64 +25,15 @@ class URLProcessor
     return pathnameParts[2]
 
   # --------------------------------------------------------------------------------------------------------------------
-  # Search Results URL's
-  # --------------------------------------------------------------------------------------------------------------------
-
-
-  # Tells whether or not the url is at the search results page
-  @isAtSearchResultsPage = (url_path)->
-    if _.isUndefined(url_path)
-      url_path = window.location.href;
-
-    pattern = glados.Settings.SEARCH_RESULT_URL_REGEXP
-    match = pattern.exec(url_path)
-    if match
-      return true
-    return false
-
-  # Tells whether or not the url is at the search results page with advanced filters
-  @getSpecificSearchResultsPage = (url_path)->
-    if _.isUndefined(url_path)
-      url_path = window.location.pathname;
-    pattern = glados.Settings.SEARCH_RESULT_URL_REGEXP
-    match = pattern.exec(url_path)
-    if match and match.length > 3 and match[1]
-      return match[1]
-    else
-      return null
-
-  # Tells whether or not the url is at the search results page with advanced filters
-  @isAtAdvancedSearchResultsPage = (url_path)->
-    if _.isUndefined(url_path)
-      url_path = window.location.pathname;
-    pattern = glados.Settings.SEARCH_RESULT_URL_REGEXP
-    match = pattern.exec(url_path)
-    return match and match.length > 3 and match[2] == '/'+glados.Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH
-
-  # gets the query string for the search results page
-  @getSearchQueryString = (url_path)->
-    console.log 'getSearchQueryString: '
-    if _.isUndefined(url_path)
-      url_path = window.location.pathname;
-    pattern = glados.Settings.SEARCH_RESULT_URL_REGEXP
-    match = pattern.exec(url_path)
-    if match and match.length > 3
-      # todo add more?
-      if match[3] == 'GLaDOS'
-        $('body').css('background-image', 'url("' + glados.Settings.STATIC_IMAGES_URL + 'GLaDOS-ProfilePic.png")')
-        alert('Believe me, I am still alive!')
-
-      return match[3]
-    return ""
-
-  # --------------------------------------------------------------------------------------------------------------------
   # Paginated Collections filters
   # --------------------------------------------------------------------------------------------------------------------
+
   @getFilter = ->
     filterWord = '/filter/'
     pathname = window.location.pathname
     filter = pathname.split(filterWord)[1]
     return if filter? then decodeURIComponent(filter) else undefined
+
   # --------------------------------------------------------------------------------------------------------------------
   # Structure Search URL's
   # --------------------------------------------------------------------------------------------------------------------
