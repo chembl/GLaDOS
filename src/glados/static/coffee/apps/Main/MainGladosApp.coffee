@@ -26,40 +26,51 @@ glados.useNameSpace 'glados.apps.Main',
         Backbone.history.start()
 
     @setUpLinkShortenerListener = (containerElem) ->
+      if not @mutObserver?
+        mutationCallback = (mutationsList) ->
 
-      mutationCallback = (mutationsList) ->
+          for mutation in mutationsList
+            addedNodes = mutation.addedNodes
+            for node in addedNodes
+              $node = $(node)
+              # check for the current added node
+              isAnchor = node.nodeName == 'A'
+              if isAnchor
+                glados.Utils.URLS.shortenHTMLLinkIfNecessary($node)
 
-        for mutation in mutationsList
-          addedNodes = mutation.addedNodes
-          for node in addedNodes
-            $node = $(node)
-            # check for the current added node
-            isAnchor = node.nodeName == 'A'
-            if isAnchor
-              glados.Utils.URLS.shortenHTMLLinkIfNecessary($node)
+              # and also check for check for the added node's descendants
+              $node.find('a').each (index) -> glados.Utils.URLS.shortenHTMLLinkIfNecessary($(@))
 
-            # and also check for check for the added node's descendants
-            $node.find('a').each (index) -> glados.Utils.URLS.shortenHTMLLinkIfNecessary($(@))
+        @mutObserver = new MutationObserver(mutationCallback)
+        observationConfig =
+          childList: true
+          subtree: true
 
-      mutObserver = new MutationObserver(mutationCallback)
-      observationConfig =
-        childList: true
-        subtree: true
-
-      mutObserver.observe(containerElem, observationConfig)
+        @mutObserver.observe(containerElem, observationConfig)
 
     @prepareContentFor = (pageName, templateParams={}) ->
-
       #make sure splash screen is shown, specially useful when it changes urls without using the server
       @showMainSplashScreen()
-      templateName = @baseTemplates[pageName]
-      $gladosMainContent = $('#GladosMainContent')
-      $gladosMainContent.empty()
-      @setUpLinkShortenerListener($gladosMainContent[0])
 
-      glados.Utils.fillContentForElement($gladosMainContent, templateParams, templateName)
-#      @hideMainSplashScreen()
-      @showMainGladosContent()
+      promiseFunc = (resolve, reject)->
+        templateName = @baseTemplates[pageName]
+        $gladosMainContent = $('#GladosMainContent')
+        $gladosMainContent.empty()
+
+        @setUpLinkShortenerListener($gladosMainContent[0])
+
+        glados.Utils.fillContentForElement($gladosMainContent, templateParams, templateName)
+        @showMainGladosContent()
+        # This delay is required to allow the browser to render the splash screen
+        _.delay resolve, 100
+
+      promiseFunc = promiseFunc.bind(@)
+
+      promise = new Promise( (resolve, reject)->
+        # This delay is required to allow the browser to render the splash screen
+        _.delay promiseFunc, 100, resolve, reject
+      )
+      return promise
 
     # ------------------------------------------------------------------------------------------------------------------
     # Main page
@@ -67,101 +78,110 @@ glados.useNameSpace 'glados.apps.Main',
     @initMainPage = ->
 
       glados.apps.BreadcrumbApp.setBreadCrumb([], undefined, hideShareButton=true)
-      @prepareContentFor('main_page')
-      MainPageApp.init()
+      promise = @prepareContentFor('main_page')
+
+      promise.then ->
+        MainPageApp.init()
 
     # ------------------------------------------------------------------------------------------------------------------
     # Search Results
     # ------------------------------------------------------------------------------------------------------------------
     @initSearchResults = (currentTab, searchTerm, currentState) ->
 
-      @prepareContentFor('search_results')
+      promise = @prepareContentFor('search_results')
 
-      SearchResultsApp.init(currentTab, searchTerm, currentState)
+      promise.then ->
+        SearchResultsApp.init(currentTab, searchTerm, currentState)
 
     @initSubstructureSearchResults = (searchTerm) ->
 
       templateParams =
         type: 'Substructure'
-      @prepareContentFor('structure_search_results', templateParams)
+      promise = @prepareContentFor('structure_search_results', templateParams)
 
-      breadcrumbLinks = [
-        {
-          label: 'Substructure Search Results'
-          link: "#{glados.Settings.SUBSTRUCTURE_SEARCH_RESULTS_PAGE}#{searchTerm}"
-        }
-      ]
+      promise.then ->
+        breadcrumbLinks = [
+          {
+            label: 'Substructure Search Results'
+            link: "#{glados.Settings.SUBSTRUCTURE_SEARCH_RESULTS_PAGE}#{searchTerm}"
+          }
+        ]
 
-      glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
-      SearchResultsApp.initSubstructureSearchResults(searchTerm)
+        glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
+        SearchResultsApp.initSubstructureSearchResults(searchTerm)
 
     @initSimilaritySearchResults = (searchTerm, threshold) ->
 
       templateParams =
         type: 'Similarity'
-      @prepareContentFor('structure_search_results', templateParams)
+      promise = @prepareContentFor('structure_search_results', templateParams)
 
-      breadcrumbLinks = [
-        {
-          label: 'Similarity Search Results'
-          link: "#{glados.Settings.SIMILARITY_SEARCH_RESULTS_PAGE}#{searchTerm}/#{searchTerm}/#{threshold}"
-        }
-      ]
-      glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
-      SearchResultsApp.initSimilaritySearchResults(searchTerm, threshold)
+      promise.then ->
+        breadcrumbLinks = [
+          {
+            label: 'Similarity Search Results'
+            link: "#{glados.Settings.SIMILARITY_SEARCH_RESULTS_PAGE}#{searchTerm}/#{searchTerm}/#{threshold}"
+          }
+        ]
+
+        glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
+        SearchResultsApp.initSimilaritySearchResults(searchTerm, threshold)
 
     @initFlexmatchSearchResults = (searchTerm) ->
 
       templateParams =
         type: ''
-      @prepareContentFor('structure_search_results', templateParams)
+      promise = @prepareContentFor('structure_search_results', templateParams)
 
-      breadcrumbLinks = [
-        {
-          label: 'Structure Search Results'
-          link: "#{glados.Settings.FLEXMATCH_SEARCH_RESULTS_PAGE}#{searchTerm}/#{searchTerm}"
-        }
-      ]
-      glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
-      SearchResultsApp.initFlexmatchSearchResults(searchTerm)
+      promise.then ->
+        breadcrumbLinks = [
+          {
+            label: 'Structure Search Results'
+            link: "#{glados.Settings.FLEXMATCH_SEARCH_RESULTS_PAGE}#{searchTerm}/#{searchTerm}"
+          }
+        ]
+        glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
+        SearchResultsApp.initFlexmatchSearchResults(searchTerm)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Entity Browsers
     # ------------------------------------------------------------------------------------------------------------------
     @initBrowserForEntity = (entityName, filter, state) ->
 
-      reverseDict = {}
-      for key, val of glados.Settings.ES_KEY_2_SEARCH_PATH
-        reverseDict[val] = key
+      promise = @prepareContentFor('browser')
 
-      reverseDict.activities = 'ACTIVITY'
-      # use dict created by jf
-      dictKey = reverseDict[entityName]
+      promise.then ->
+        reverseDict = {}
+        for key, val of glados.Settings.ES_KEY_2_SEARCH_PATH
+          reverseDict[val] = key
 
-      if entityName != 'activities'
-        listConfig = glados.models.paginatedCollections.Settings.ES_INDEXES[dictKey]
-      else
-        listConfig = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH[dictKey]
+        reverseDict.activities = 'ACTIVITY'
+        # use dict created by jf
+        dictKey = reverseDict[entityName]
 
-      breadcrumbLinks = [
-        {
-          label: listConfig.LABEL
-          link: listConfig.BROWSE_LIST_URL()
-        }
-        {
-          label: filter
-          link: listConfig.BROWSE_LIST_URL(filter)
-          is_filter_link: true
-          truncate: true
-        }
-      ]
+        if entityName != 'activities'
+          listConfig = glados.models.paginatedCollections.Settings.ES_INDEXES[dictKey]
+        else
+          listConfig = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH[dictKey]
 
-      glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks,
-        longFilter=filter,
-        hideShareButton=false,
-        longFilterURL=listConfig.BROWSE_LIST_URL(filter))
-      @prepareContentFor('browser')
-      glados.apps.Browsers.BrowserApp.initBrowserForEntity(entityName, filter, state)
+        breadcrumbLinks = [
+          {
+            label: listConfig.LABEL
+            link: listConfig.BROWSE_LIST_URL()
+          }
+          {
+            label: filter
+            link: listConfig.BROWSE_LIST_URL(filter)
+            is_filter_link: true
+            truncate: true
+          }
+        ]
+
+        glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks,
+          longFilter=filter,
+          hideShareButton=false,
+          longFilterURL=listConfig.BROWSE_LIST_URL(filter))
+        glados.apps.Browsers.BrowserApp.initBrowserForEntity(entityName, filter, state)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Report Cards
