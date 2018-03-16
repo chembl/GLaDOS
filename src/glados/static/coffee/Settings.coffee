@@ -339,15 +339,19 @@ glados.setupOnLoadAfterJS = () ->
   $(document).ajaxStart () ->
     glados.ajax_count++
     $('#GLaDOS-page-loaded').html('NO')
+    # The code in charge of showing the splash screen will be the router
 #    $('#GladosMainSplashScreen').show()
   $(document).ajaxStop () ->
     glados.ajax_count--
+    console.warn(glados.ajax_count)
     if glados.ajax_count == 0
-      setTimeout(
+      _.delay(
         () ->
-          $('#GLaDOS-page-loaded').html('YES')
-          $('#GladosMainSplashScreen').hide()
-        , 1000
+          # Double check that ajax truly stopped
+          if glados.ajax_count == 0
+            $('#GLaDOS-page-loaded').html('YES')
+            $('#GladosMainSplashScreen').hide()
+        , 500
       )
 
 $( "body" ).ready(glados.setupOnLoadAfterJS)

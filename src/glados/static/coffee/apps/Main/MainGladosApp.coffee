@@ -2,6 +2,7 @@ glados.useNameSpace 'glados.apps.Main',
   MainGladosApp: class ActivitiesBrowserApp
 
     @showMainSplashScreen = -> $('#GladosMainSplashScreen').show()
+    # The code in charge of hiding the splash screen will be in settings ajaxStop
     @hideMainSplashScreen = -> #$('#GladosMainSplashScreen').hide()
     @showMainGladosContent = -> $('#GladosMainContent').show()
 
