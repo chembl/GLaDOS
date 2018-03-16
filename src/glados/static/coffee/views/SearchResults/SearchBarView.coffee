@@ -31,18 +31,12 @@ glados.useNameSpace 'glados.views.SearchResults',
     # ------------------------------------------------------------------------------------------------------------------
 
     events:
-      'click .example-link' : 'searchExampleLink'
       'click .search-button' : 'search'
       'click .search-opts' : 'searchAdvanced'
 
     updateSearchBarFromModel: (e) ->
       if @expandable_search_bar
         @expandable_search_bar.val(@searchModel.get('queryString'))
-
-    searchExampleLink: (e) ->
-      exampleString = $(e.currentTarget).html()
-      @expandable_search_bar.val(exampleString)
-      @search()
 
     # ------------------------------------------------------------------------------------------------------------------
     # Additional Functionalities
