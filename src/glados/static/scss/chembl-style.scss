@@ -3326,17 +3326,13 @@ $chevron-button-margin: 0px;
     border-collapse: separate;
     border-spacing: 2px;
 
-    .sticky-header {
-      background-color: rgba(255, 249, 0, 0.35);
-    }
-
     .sticky-header.pinned-header {
-      background-color: rgb(204, 255, 213);
-        display: table-header-group;
-        width: inherit !important;
-        position: fixed;
-        top: 3em;
-        z-index: 2;
+      background-color: white;
+      overflow-x: scroll;
+      position: fixed;
+      top: 3.5em;
+      z-index: 2;
+      border-bottom: none;
 
     }
 

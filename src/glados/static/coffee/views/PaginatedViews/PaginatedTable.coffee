@@ -281,26 +281,40 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # Table header pinner
     # ------------------------------------------------------------------------------------------------------------------
     setUpTableHeaderPinner: ($table) ->
-      $stickyHeader = $table.find('.sticky-header').first()
       $win = $(window)
       $scrollContainer = $(@el).find('.BCK-top-scroller-container')
 
       topTrigger = $scrollContainer.offset().top
-      stickyHeaderHeight = $stickyHeader.height()
+      stickyHeaderHeight = $table.find('.sticky-header').first().height()
       $table.data('data-state', 'no-pinned')
 
       pinUnpinTableHeader = ->
 
         scroll = $win.scrollTop()
-        $elemToStick = $table.find('.sticky-header').first()
-        $clonedHeader = $elemToStick.clone().addClass('pinned-header')
+        $originalHeader = $table.find('.sticky-header').first()
+        $clonedHeader = $originalHeader.clone().addClass('pinned-header')
+
 
         if !$table.is(":visible")
           return
 
         if scroll + stickyHeaderHeight/2 >= topTrigger - 5
-        
+
           if $table.data('data-state') == 'no-pinned'
+            $clonedHeader.height($originalHeader.height())
+            $clonedHeader.width($originalHeader.width())
+
+            originalwidths = []
+            $originalHeader.find('.BCK-headers-row').first().children('th').each( ->
+             originalwidths.push($(@).width())
+            )
+
+            console.log 'originalwidths: ', originalwidths
+
+            $clonedHeader.find('.BCK-headers-row').first().children('th').each( (i)->
+              $(@).width(originalwidths[i] + 9.5)
+            )
+
             $table.prepend($clonedHeader)
             $table.data('data-state', 'pinned')
 
@@ -309,12 +323,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           if $table.data('data-state') == 'pinned'
             $table.find('.pinned-header').first().remove()
             $table.data('data-state', 'no-pinned')
-            console.log 'DATA STATE: ', $table.data('data-state')
-#
-
-
-#            $elemToStick.addClass('pinned-header')
-
 
       $win.scroll _.throttle(pinUnpinTableHeader, 200)
 
