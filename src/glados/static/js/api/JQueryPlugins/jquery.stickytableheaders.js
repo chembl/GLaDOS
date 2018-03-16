@@ -46,33 +46,38 @@
         base.topOffset = null;
 
         base.init = function () {
-            console.log('----------------init sticky header library---------------');
 
             base.setOptions(options);
 
-            base.$el.each(function () {
-                var $this = $(this);
+            var $this = $(this);
+            // console.log('THIS: ', $this);
 
-                // remove padding on <table> to fix issue #7
-                $this.css('padding', 0);
+            // remove padding on <table> to fix issue #7
+            $this.css('padding', 0);
 
-                base.$originalHeader = $('thead:first', this);
-                base.$clonedHeader = base.$originalHeader.clone();
-                $this.trigger('clonedHeader.' + name, [base.$clonedHeader]);
+            console.log ('base', base);
+            base.$originalHeader = base.$el.find('.sticky-header').first()
 
-                base.$clonedHeader.addClass('tableFloatingHeader');
-                base.$clonedHeader.css({display: 'none', opacity: 0.0});
+            console.log('LIBRARY ORIGINAL HEADER', base.$originalHeader );
 
-                base.$originalHeader.addClass('tableFloatingHeaderOriginal');
+            base.$clonedHeader = base.$originalHeader.clone();
+            $this.trigger('clonedHeader.' + name, [base.$clonedHeader]);
 
-                base.$originalHeader.after(base.$clonedHeader);
+            base.$clonedHeader.addClass('tableFloatingHeader');
+            base.$clonedHeader.css({display: 'none', opacity: 0.0});
+            base.$originalHeader.addClass('tableFloatingHeaderOriginal');
 
-                base.$printStyle = $('<style type="text/css" media="print">' +
-                    '.tableFloatingHeader{display:none !important;}' +
-                    '.tableFloatingHeaderOriginal{position:static !important;}' +
-                    '</style>');
-                base.$head.append(base.$printStyle);
-            });
+            base.$originalHeader.after(base.$clonedHeader);
+
+            // console.log('Cloned Header', base.$clonedHeader );
+            // console.log('Original Header', base.$originalHeader );
+
+            base.$printStyle = $('<style type="text/css" media="print">' +
+                '.tableFloatingHeader{display:none !important;}' +
+                '.tableFloatingHeaderOriginal{position:static !important;}' +
+                '</style>');
+            base.$head.append(base.$printStyle);
+
 
             base.$clonedHeader.find("input, select").attr("disabled", true);
 

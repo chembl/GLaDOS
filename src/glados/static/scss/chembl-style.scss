@@ -3326,19 +3326,19 @@ $chevron-button-margin: 0px;
     border-collapse: separate;
     border-spacing: 2px;
 
-    //.sticky-header {
-    //  background-color: rgba(255, 249, 0, 0.35);
-    //}
-    //
-    //.sticky-header.pinned-header {
-    //  background-color: rgb(204, 255, 213);
-    //    display: table-header-group;
-    //    width: inherit !important;
-    //    position: fixed;
-    //    top: 3em;
-    //    z-index: 2;
-    //
-    //}
+    .sticky-header {
+      background-color: rgba(255, 249, 0, 0.35);
+    }
+
+    .sticky-header.pinned-header {
+      background-color: rgb(204, 255, 213);
+        display: table-header-group;
+        width: inherit !important;
+        position: fixed;
+        top: 3em;
+        z-index: 2;
+
+    }
 
     .hidden_header, .hidden_cell {
       display: none;
