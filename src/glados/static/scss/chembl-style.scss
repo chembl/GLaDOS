@@ -2980,6 +2980,7 @@ $browser-tool-bar-width: 55px;
   padding: 0 !important;
   background-color: color('grey', 'lighten-2');
   min-height: $browser-tools-height !important;
+  z-index: 3;
 
   .tool-bar {
     padding-top: 1px;
@@ -3065,7 +3066,7 @@ $facets-width-large: 21%;
 }
 
 .facets {
-
+  z-index: 3;
   @media #{$medium-only} {
     width: $facets-width-medium;
   }
@@ -3323,16 +3324,16 @@ $chevron-button-margin: 0px;
 
   .pg-table {
     margin-left: 8px;
-    border-collapse: separate;
-    border-spacing: 2px;
+    //border-collapse: separate;
+    //border-spacing: 2px;
 
     .sticky-header.pinned-header {
       background-color: rgb(255, 255, 255);
       overflow-x: scroll;
       position: fixed;
       top: 3.5em;
-      z-index: 1.1;
-      border-bottom: solid 0.5px rgb(248, 85, 54)
+      z-index: 2;
+      border-bottom: solid 0.5px #f1f1f1;
     }
 
     .hidden_header, .hidden_cell {
