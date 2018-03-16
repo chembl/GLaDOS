@@ -7,7 +7,6 @@ glados.useNameSpace 'glados.views.SearchResults',
     # ------------------------------------------------------------------------------------------------------------------
 
     initialize: () ->
-      @atResultsPage = false
       @searchModel = SearchModel.getInstance()
       @showAdvanced = false
 
@@ -21,36 +20,11 @@ glados.useNameSpace 'glados.views.SearchResults',
         el: autocompleteElem
       @autocompleteView.attachSearchBar(@)
       @initializeSketcherButton()
-      if @atResultsPage
-        # Handles the popstate event to reload a search
-        @last_location_url = window.location.href
-        window.onpopstate = @popStateHandler.bind(@)
 
     initializeSketcherButton: ()->
       $openEditorBtn = $(@el).find('.draw-structure.hide-on-small-only')
       $openEditorBtn.click glados.helpers.ChemicalEditorHelper.showChemicalEditorModal
 
-    popStateHandler: ()->
-      @atResultsPage = URLProcessor.isAtSearchResultsPage()
-      if window.location.href != @last_location_url
-        @last_location_url = window.location.href
-        if @atResultsPage
-          @searchFromURL()
-        else
-          $(window).scrollTop(0)
-          window.location.reload()
-
-    parseURLData: () ->
-      @showAdvanced = URLProcessor.isAtAdvancedSearchResultsPage()
-
-    searchFromURL: ->
-
-      @parseURLData()
-      urlQueryString = decodeURI(URLProcessor.getSearchQueryString())
-      if urlQueryString != @lastURLQuery
-        @expandable_search_bar.val(urlQueryString)
-        @searchModel.search(urlQueryString, null)
-        @lastURLQuery = urlQueryString
 
     # ------------------------------------------------------------------------------------------------------------------
     # Events Handling
@@ -75,27 +49,16 @@ glados.useNameSpace 'glados.views.SearchResults',
     # ------------------------------------------------------------------------------------------------------------------
 
     search: () ->
-
-      # Updates the navigation URL
-      search_url_for_query = @getCurrentSearchURL()
-      console.log 'search_url_for_query: ', search_url_for_query
-      window.history.pushState({}, 'ChEMBL: '+@expandable_search_bar.val(), search_url_for_query)
-      console.log("SEARCHING FOR:"+@expandable_search_bar.val())
-      if @atResultsPage
-        console.log 'is at results page!'
-        @searchModel.search(@expandable_search_bar.val(), null)
+      searchString = @expandable_search_bar.val()
+      if GlobalVariables.atSearchResultsPage
+        glados.routers.MainGladosRouter.updateSearchURL @selected_es_entity, searchString
+        @searchModel.search searchString, null
       else
         # Navigates to the specified URL
-        window.location.href = search_url_for_query
-        location.reload()
+        glados.routers.MainGladosRouter.updateSearchURL @selected_es_entity, searchString, null, true
 
     searchAdvanced: () ->
-      searchBarQueryString = @expandable_search_bar.val()
-      if @atResultsPage
-        @switchShowAdvanced()
-      else
-        window.location.href = glados.Settings.SEARCH_RESULTS_PAGE+"/"+glados.Settings.SEARCH_RESULTS_PAGE_ADVANCED_PATH+
-                "/"+encodeURI(searchBarQueryString)
+      return
 
     switchShowAdvanced: ->
       @showAdvanced = not @showAdvanced
