@@ -3327,13 +3327,12 @@ $chevron-button-margin: 0px;
     border-spacing: 2px;
 
     .sticky-header.pinned-header {
-      background-color: white;
+      background-color: rgb(255, 255, 255);
       overflow-x: scroll;
       position: fixed;
       top: 3.5em;
-      z-index: 2;
-      border-bottom: none;
-
+      z-index: 1.1;
+      border-bottom: solid 0.5px rgb(248, 85, 54)
     }
 
     .hidden_header, .hidden_cell {

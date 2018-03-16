@@ -288,12 +288,14 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       stickyHeaderHeight = $table.find('.sticky-header').first().height()
       $table.data('data-state', 'no-pinned')
 
-      pinUnpinTableHeader = ->
+      scrollTableHeader = ->
+        $pinnedHeader = $table.find('.pinned-header').first()
+        $pinnedHeader.offset({left: $table.offset().left - $table.scrollLeft()})
 
+      pinUnpinTableHeader = ->
         scroll = $win.scrollTop()
         $originalHeader = $table.find('.sticky-header').first()
         $clonedHeader = $originalHeader.clone().addClass('pinned-header')
-
 
         if !$table.is(":visible")
           return
@@ -309,10 +311,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
              originalwidths.push($(@).width())
             )
 
-            console.log 'originalwidths: ', originalwidths
-
             $clonedHeader.find('.BCK-headers-row').first().children('th').each( (i)->
-              $(@).width(originalwidths[i] + 9.5)
+              $(@).width(originalwidths[i] + 9.5) # check where does this value exactly come from
             )
 
             $table.prepend($clonedHeader)
@@ -324,7 +324,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
             $table.find('.pinned-header').first().remove()
             $table.data('data-state', 'no-pinned')
 
-      $win.scroll _.throttle(pinUnpinTableHeader, 200)
+      $win.scroll(pinUnpinTableHeader)
+      $table.scroll(scrollTableHeader)
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Static functions
