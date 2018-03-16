@@ -2,7 +2,7 @@ glados.useNameSpace 'glados.routers',
   MainGladosRouter: Backbone.Router.extend
     routes:
       '': 'initMainPage'
-      'search_results(/:current_tab)(/query/:search_term)(/state/:search_term)': 'initSearchResults'
+      'search_results(/:current_tab)(/query=:search_term)(/state=:search_term)': 'initSearchResults'
       'substructure_search_results/:search_term': 'initSubstructureSearchResults'
       'similarity_search_results/:search_term/:threshold': 'initSimilaritySearchResults'
       'flexmatch_search_results/:search_term': 'initFlexmatchSearchResults'
@@ -56,11 +56,11 @@ glados.useNameSpace 'glados.routers',
       url = ''
       if not fragmentOnly
         url += glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL
-      url += "/search_results/#{tab}"
-      if searchTerm?
-       url += "/query/" + encodeURIComponent(searchTerm)
+      url += "search_results/#{tab}"
+      if searchTerm? and _.isString(searchTerm) and searchTerm.trim().length > 0
+       url += "/query=" + encodeURIComponent(searchTerm)
       if currentState?
-       url += "/state/#{currentState}"
+       url += "/state=#{currentState}"
       return url
 
     updateSearchURL: (esEntityKey, searchTerm, currentState, trigger=false)->
@@ -75,20 +75,25 @@ glados.useNameSpace 'glados.routers',
         }
       ]
       if searchTerm?
-        breadcrumbLinks.push
+        breadcrumbLinks.push(
           {
             label: searchTerm
             link: @getSearchURL(esEntityKey, searchTerm, null)
             truncate: true
           }
-      glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
+        )
+      # Do the navigation before setting up the breadcrumb so the share button has the right url
+      if trigger and not window.location.href.startsWith(glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL)
+        window.location.href = @getSearchURL(esEntityKey, searchTerm, currentState)
+      else
+        glados.routers.MainGladosRouter.getInstance().navigate(
+          @getSearchURL(esEntityKey, searchTerm, currentState, true),
+          {
+            'trigger': trigger
+          }
+        )
+        glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
 
-      glados.routers.MainGladosRouter.getInstance().navigate(
-        @getSearchURL(esEntityKey, searchTerm, currentState, true),
-        {
-          'trigger': trigger
-        }
-      )
 
     validateAndParseSearchURL: (tab, searchTerm, state)->
       selectedESEntity = null
