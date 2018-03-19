@@ -11,7 +11,14 @@ glados.useNameSpace 'glados.views.Embedding',
         $parentElement.find('.embed-modal').remove()
         return
 
-      $modalTrigger = $parentElement.find('.embed-modal-trigger')
+      $triggerButtonContainer = $parentElement.find('.BCK-Embed-ButtonContainer')
+      if $triggerButtonContainer.length == 0
+        $triggerButtonContainer = $parentElement
+
+      triggerButtonContent = glados.Utils.getContentFromTemplate('Handlebars-Common-EmbedTrigger')
+      $triggerButtonContainer.append(triggerButtonContent)
+
+      @$modalTrigger = $parentElement.find('.embed-modal-trigger')
       modalNumber = Math.floor((Math.random() * 1000000) + 1)
       @modalId = 'embed-modal-for-' + modalNumber
 
@@ -20,19 +27,24 @@ glados.useNameSpace 'glados.views.Embedding',
       $generatedModalsContainer.append(modalContent)
       $generatedModalsContainer.find("##{@modalId}").modal()
 
-      $modalTrigger.attr('href', "##{@modalId}" )
-      $modalTrigger.attr('rendered', 'false')
+      @$modalTrigger.attr('href', "##{@modalId}" )
+      @$modalTrigger.attr('rendered', 'false')
+
+      @model.on 'change', @updateTriggerURL
+      @updateTriggerURL() unless not @model.get('embed_url')?
+      @$modalTrigger.click @renderModalPreview
+
+    showModalTrigger: -> @$modalTrigger.show()
+
+    updateTriggerURL: ->
 
       embedURL = @model.get('embed_url')
-      $modalTrigger.attr('data-embed-url', embedURL)
-      $modalTrigger.click @renderModalPreview
+      @$modalTrigger.attr('data-embed-url', embedURL)
+      @showModalTrigger()
 
     renderModalPreview: ->
 
       $clicked = $(@)
-      if $clicked.attr('rendered') == 'true'
-        return
-
       $modal = $($clicked.attr('href'))
       $codeElem = $modal.find('code')
       url = $clicked.attr('data-embed-url')
@@ -45,4 +57,3 @@ glados.useNameSpace 'glados.views.Embedding',
       $codeToPreview = $codeElem.text()
 
       $previewElem.html($codeToPreview)
-      $clicked.attr('rendered', 'true')

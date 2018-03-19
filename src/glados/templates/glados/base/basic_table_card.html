@@ -3,7 +3,7 @@
 <!-- This is the base layout for a card that shows the information with expandables, tables and collections -->
 <div class="col s12 m12 l12 layout">
 
-  <div id='{% block card_id %}{% endblock %}' class="card chembl-card grey lighten-5" >
+  <div id='{% block card_id %}{% endblock %}' class="card chembl-card grey lighten-5 BCK-Embed-ButtonContainer" >
 
     <!-- when it is dynamic it means that the information comes from the web services and backbone takes
     care of showing and hiding the preloader and error message-->
@@ -11,11 +11,6 @@
       {% block card_loaders %}
         {% include "glados/base/card_loaders.html" %}
       {% endblock %}
-
-      {% block embed_button %}
-        {% include "glados/base/embed_button.html" %}
-      {% endblock %}
-
     {% endif %}
 
     <div class="card-content" {% if is_dynamic %}style="display:none"{% endif %}>
