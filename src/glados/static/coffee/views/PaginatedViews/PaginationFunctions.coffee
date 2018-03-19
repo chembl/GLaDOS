@@ -140,11 +140,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       [show_previous_ellipsis, show_next_ellipsis, first_page_to_show, last_page_to_show] = \
       glados.Utils.Pagination.calculatePaginatorParams(num_pages, current_page)
 
-      console.log 'COLLECTION PAGE: ', parseInt(@collection.getMeta('current_page'))
-      console.log 'records_in_page: ', records_in_page
-      console.log 'page_size: ', page_size
-      console.log 'first_record: ', first_record
-
       pages = (num for num in [first_page_to_show..last_page_to_show])
       $elem.html Handlebars.compile(template.html())
         pages: pages
