@@ -3302,6 +3302,9 @@ $chevron-button-margin: 0px;
 * Paginated Collections
 * ----------------------------------------------------------------------------------------------------------------------
 */
+
+$chembl-header-height: 52.245px;
+
 .pagination {
   margin: 0;
   a {
@@ -3329,6 +3332,7 @@ $chevron-button-margin: 0px;
       background-color: rgb(255, 255, 255);
       position: fixed;
       z-index: 2;
+      top: 3.2em;
       border-bottom: solid 0.5px #f1f1f1;
     }
 

@@ -102,7 +102,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         $currentItem.append $divs
 
 
-
     # ------------------------------------------------------------------------------------------------------------------
     # Add Remove Columns
     # ------------------------------------------------------------------------------------------------------------------
@@ -141,6 +140,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @checkIfTableNeedsToScroll()
       if @pinUnpinTableHeader?
          @pinUnpinTableHeader()
+      if @scrollTableHeader?
+        @scrollTableHeader()
 
 
     sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
@@ -271,6 +272,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           @setUpTableHeaderPinner($specificElemContainer)
           $specificElemContainer.attr('data-header-pinner-setup', true)
         @pinUnpinTableHeader()
+        @scrollTableHeader()
 
 
     # this sets up dor a table the additional scroller on top of the table
@@ -290,6 +292,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       $table.data('data-state', 'no-pinned')
 
       scrollTableHeader = ->
+        $table = $(@el).find('table.BCK-items-container')
         $pinnedHeader = $table.find('.pinned-header').first()
         $pinnedHeader.offset({left: $table.offset().left - $table.scrollLeft()})
 
@@ -307,7 +310,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         bottomTrigger = $table.find('.BCK-items-row').last().offset().top
         searchBarHeight = $('#chembl-header-container.pinned').find('.chembl-header').height()
 
+
         if scroll >= topTrigger  -  searchBarHeight and scroll < bottomTrigger
+          @scrollTableHeader()
           $table.data('data-state','pinned')
         else
           $table.data('data-state', 'no-pinned')
@@ -315,7 +320,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         if $table.data('data-state') == 'pinned'
           $clonedHeader.height($originalHeader.height())
           $clonedHeader.width($originalHeader.width())
-          $clonedHeader.css({ top: searchBarHeight });
 
           originalWidths = []
           $originalHeader.find('.BCK-headers-row').first().children('th').each( ->
@@ -332,8 +336,13 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           $table.find('.pinned-header').first().remove()
 
       @pinUnpinTableHeader = $.proxy(pinUnpinTableHeader, @)
+      @scrollTableHeader = $.proxy(scrollTableHeader, @)
+
       $win.scroll(@pinUnpinTableHeader)
-      $table.scroll(scrollTableHeader)
+      $table.scroll(@scrollTableHeader)
+
+      $win.resize(@pinUnpinTableHeader)
+      $win.resize(@scrollTableHeader)
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Static functions
