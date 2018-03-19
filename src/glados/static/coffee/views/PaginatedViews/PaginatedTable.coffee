@@ -139,6 +139,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @showHeaderContainer()
       @showFooterContainer()
       @checkIfTableNeedsToScroll()
+      if @pinUnpinTableHeader?
+         @pinUnpinTableHeader()
+
 
     sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
       if @shouldIgnoreContentChangeRequestWhileStreaming()
@@ -265,9 +268,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
         # now set up tha header fixation
         if !$specificElemContainer.attr('data-header-pinner-setup')
-          # delay this to wait for
           @setUpTableHeaderPinner($specificElemContainer)
           $specificElemContainer.attr('data-header-pinner-setup', true)
+        @pinUnpinTableHeader()
+
 
     # this sets up dor a table the additional scroller on top of the table
     setUpTopTableScroller: ($table) ->
@@ -290,14 +294,18 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         $pinnedHeader.offset({left: $table.offset().left - $table.scrollLeft()})
 
       pinUnpinTableHeader = ->
+
+        if !$table.is(":visible")
+          return
+
+        console.log 'pin unpin table header'
+        $win = $(window)
+        $table = $(@el).find('table.BCK-items-container')
         scroll = $win.scrollTop()
         $originalHeader = $table.find('.sticky-header').first()
         $clonedHeader = $originalHeader.clone().addClass('pinned-header')
         topTrigger = $scrollContainer.offset().top
         bottomTrigger = $table.find('.BCK-items-row').last().offset().top
-
-        if !$table.is(":visible")
-          return
 
         if scroll  >= topTrigger - 5 and  scroll  < bottomTrigger
 
@@ -323,7 +331,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
             $table.find('.pinned-header').first().remove()
             $table.data('data-state', 'no-pinned')
 
-      $win.scroll(pinUnpinTableHeader)
+      @pinUnpinTableHeader = $.proxy(pinUnpinTableHeader, @)
+      $win.scroll(@pinUnpinTableHeader)
       $table.scroll(scrollTableHeader)
 
 #-----------------------------------------------------------------------------------------------------------------------
