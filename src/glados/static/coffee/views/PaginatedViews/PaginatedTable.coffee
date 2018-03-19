@@ -296,18 +296,18 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       pinUnpinTableHeader = ->
 
         if !$table.is(":visible")
-          $table.data('data-state') == 'no-pinned'
           return
 
         $win = $(window)
         $table = $(@el).find('table.BCK-items-container')
-        scroll = $win.scrollTop()
         $originalHeader = $table.find('.sticky-header').first()
         $clonedHeader = $originalHeader.clone().addClass('pinned-header').attr('id','clonedHeader')
+        scroll = $win.scrollTop()
         topTrigger = $scrollContainer.offset().top
         bottomTrigger = $table.find('.BCK-items-row').last().offset().top
+        searchBarHeight = $('#chembl-header-container.pinned').find('.chembl-header').height()
 
-        if scroll >= topTrigger and scroll < bottomTrigger
+        if scroll >= topTrigger  -  searchBarHeight and scroll < bottomTrigger
           $table.data('data-state','pinned')
         else
           $table.data('data-state', 'no-pinned')
