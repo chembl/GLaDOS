@@ -284,8 +284,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       $win = $(window)
       $scrollContainer = $(@el).find('.BCK-top-scroller-container')
 
-      topTrigger = $scrollContainer.offset().top
-      bottomTrigger = $table.find('tr').last().offset().top
       stickyHeaderHeight = $table.find('.sticky-header').first().height()
       $table.data('data-state', 'no-pinned')
 
@@ -297,13 +295,13 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         scroll = $win.scrollTop()
         $originalHeader = $table.find('.sticky-header').first()
         $clonedHeader = $originalHeader.clone().addClass('pinned-header')
+        topTrigger = $scrollContainer.offset().top
+        bottomTrigger = $table.find('.BCK-items-row').last().offset().top
 
         if !$table.is(":visible")
           return
 
-        console.log $table.find('tr').last(), $table.parent().context.id
-#        console.log $table.parent().context.id, $table.data('data-state'), 'scroll: ', scroll, 'bottomTrigger: ' + bottomTrigger
-        if scroll  >= topTrigger - 5 and  scroll + stickyHeaderHeight/2 < bottomTrigger
+        if scroll  >= topTrigger - 5 and  scroll  < bottomTrigger
 
           if $table.data('data-state') == 'no-pinned'
             $clonedHeader.height($originalHeader.height())
