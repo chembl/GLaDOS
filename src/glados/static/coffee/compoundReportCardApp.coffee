@@ -761,10 +761,15 @@ class CompoundReportCardApp extends glados.ReportCardApp
     # in the future this should be taken form the collection instead of creating a new instance
     compound = new Compound
       molecule_chembl_id: chemblID
+
+    viewConfig =
+      is_outside_an_entity_report_card: true
+
     new CompoundFeaturesView
       model: compound
       el: $containerElem
       table_cell_mode: true
+      config: viewConfig
     compound.fetch()
 
   # --------------------------------------------------------------------------------------------------------------------

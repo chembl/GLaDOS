@@ -283,8 +283,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     setUpTableHeaderPinner: ($table) ->
       $win = $(window)
       $scrollContainer = $(@el).find('.BCK-top-scroller-container')
-
-      stickyHeaderHeight = $table.find('.sticky-header').first().height()
       $table.data('data-state', 'no-pinned')
 
       scrollTableHeader = ->
@@ -313,7 +311,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
             )
 
             $clonedHeader.find('.BCK-headers-row').first().children('th').each( (i) ->
-              $(@).width(originalWidths[i] + 9.5) # check where does this value exactly come from
+              $(@).width(originalWidths[i] + 9.5)
             )
 
             $table.prepend($clonedHeader)
