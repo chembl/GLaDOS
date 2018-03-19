@@ -3327,9 +3327,7 @@ $chevron-button-margin: 0px;
 
     .sticky-header.pinned-header {
       background-color: rgb(255, 255, 255);
-      overflow-x: scroll;
       position: fixed;
-      top: 3.5em;
       z-index: 2;
       border-bottom: solid 0.5px #f1f1f1;
     }

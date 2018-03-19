@@ -315,6 +315,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         if $table.data('data-state') == 'pinned'
           $clonedHeader.height($originalHeader.height())
           $clonedHeader.width($originalHeader.width())
+          $clonedHeader.css({ top: searchBarHeight });
 
           originalWidths = []
           $originalHeader.find('.BCK-headers-row').first().children('th').each( ->
