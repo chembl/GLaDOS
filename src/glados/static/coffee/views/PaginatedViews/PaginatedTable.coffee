@@ -296,40 +296,39 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       pinUnpinTableHeader = ->
 
         if !$table.is(":visible")
+          $table.data('data-state') == 'no-pinned'
           return
 
-        console.log 'pin unpin table header'
         $win = $(window)
         $table = $(@el).find('table.BCK-items-container')
         scroll = $win.scrollTop()
         $originalHeader = $table.find('.sticky-header').first()
-        $clonedHeader = $originalHeader.clone().addClass('pinned-header')
+        $clonedHeader = $originalHeader.clone().addClass('pinned-header').attr('id','clonedHeader')
         topTrigger = $scrollContainer.offset().top
         bottomTrigger = $table.find('.BCK-items-row').last().offset().top
 
-        if scroll  >= topTrigger - 5 and  scroll  < bottomTrigger
-
-          if $table.data('data-state') == 'no-pinned'
-            $clonedHeader.height($originalHeader.height())
-            $clonedHeader.width($originalHeader.width())
-
-            originalWidths = []
-            $originalHeader.find('.BCK-headers-row').first().children('th').each( ->
-             originalWidths.push($(@).width())
-            )
-
-            $clonedHeader.find('.BCK-headers-row').first().children('th').each( (i) ->
-              $(@).width(originalWidths[i] + 9.5)
-            )
-
-            $table.prepend($clonedHeader)
-            $table.data('data-state', 'pinned')
-
+        if scroll >= topTrigger and scroll < bottomTrigger
+          $table.data('data-state','pinned')
         else
+          $table.data('data-state', 'no-pinned')
 
-          if $table.data('data-state') == 'pinned'
-            $table.find('.pinned-header').first().remove()
-            $table.data('data-state', 'no-pinned')
+        if $table.data('data-state') == 'pinned'
+          $clonedHeader.height($originalHeader.height())
+          $clonedHeader.width($originalHeader.width())
+
+          originalWidths = []
+          $originalHeader.find('.BCK-headers-row').first().children('th').each( ->
+           originalWidths.push($(@).width())
+          )
+
+          $clonedHeader.find('.BCK-headers-row').first().children('th').each( (i) ->
+            $(@).width(originalWidths[i] + 9.5)
+          )
+
+          if $table.find('.pinned-header').length == 0
+            $table.prepend($clonedHeader)
+        else
+          $table.find('.pinned-header').first().remove()
 
       @pinUnpinTableHeader = $.proxy(pinUnpinTableHeader, @)
       $win.scroll(@pinUnpinTableHeader)
