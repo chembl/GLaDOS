@@ -47,7 +47,8 @@ $global-masthead-small-med-height: 49px;
 
 html {
   font-family: "ChEMBL_Verdana", Verdana, sans-serif;
-  color: $primary-color-dark
+  color: $primary-color-dark;
+  scroll-behavior: smooth;
 }
 
 h1 {
