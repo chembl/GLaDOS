@@ -111,7 +111,6 @@ glados.useNameSpace 'glados.views.SearchResults',
       @FORCE_DISPLAY = true
       @handleVisualisationStatus()
 
-
     initEmbedModal: ->
 
 
