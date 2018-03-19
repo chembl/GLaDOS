@@ -1,6 +1,6 @@
 {% block custom_handlebars %}{% endblock %}
 
-<div id='{% block card_id %}{% endblock %}' class="card visualisation-card grey lighten-5" >
+<div id='{% block card_id %}{% endblock %}' class="card visualisation-card grey lighten-5 BCK-Embed-ButtonContainer" >
 
 <!-- when it is dynamic it means that the information comes from the web services and backbone takes
 care of showing and hiding the preloader and error message-->
@@ -9,13 +9,6 @@ care of showing and hiding the preloader and error message-->
     {% include "glados/base/card_loaders.html" %}
   {% endblock %}
 
-  {% block embed_button %}
-    {% include "glados/base/embed_button.html" %}
-  {% endblock %}
-
-  {% block embed_modal %}
-    {% include "glados/base/embed_modal.html" %}
-  {% endblock %}
 {% endif %}
 
     <div class="card-content" {% if is_dynamic %}style="display:none"{% endif %}>
