@@ -8,47 +8,9 @@ glados.useNameSpace 'glados.helpers',
     # $parentElement is the parent element that contains the embed modal and trigger button
     @initEmbedModal = ($parentElement, embedURL)->
 
-      console.log 'INIT EMBED MODAL'
-      if EMBEDED?
-        # prevent unnecessary loops
-        $parentElement.find('.embed-modal-trigger').remove()
-        $parentElement.find('.embed-modal').remove()
-        return
+      embedModel = new glados.models.Embedding.EmbedModalModel
+        embed_url: embedURL
 
-      $modalTrigger = $parentElement.find('.embed-modal-trigger')
-      modalNumber = Math.floor((Math.random() * 1000000) + 1)
-      modalId = 'embed-modal-for-' + modalNumber
-
-      modalContent = glados.Utils.getContentFromTemplate('Handlebars-Common-EmbedModal', {modal_id: modalId })
-      $generatedModalsContainer = $('#BCK-GeneratedModalsContainer')
-      $generatedModalsContainer.append(modalContent)
-      $generatedModalsContainer.find("##{modalId}").modal()
-
-      $modalTrigger.attr('href', "##{modalId}" )
-      $modalTrigger.attr('rendered', 'false')
-
-      $modalTrigger.attr('data-embed-url', embedURL)
-      $modalTrigger.click @renderModalPreview
-
-    # this function is to be used for the click event in the embed modal button.
-    # it can get all the information needed from the clicked element, no closure is needed.
-    @renderModalPreview = ->
-
-      console.log 'render modal preview!!!'
-      $clicked = $(@)
-      if $clicked.attr('rendered') == 'true'
-        return
-
-      $modal = $($clicked.attr('href'))
-      $codeElem = $modal.find('code')
-      url = $clicked.attr('data-embed-url')
-      rendered = Handlebars.compile($('#Handlebars-Common-EmbedCode').html())
-        url: url
-      $codeElem.text(rendered)
-
-      $previewElem = $modal.find('.BCK-embed-preview')
-      $codeElem = $modal.find('code')
-      $codeToPreview = $codeElem.text()
-
-      $previewElem.html($codeToPreview)
-      $clicked.attr('rendered', 'true')
+      embedView = new glados.views.Embedding.EmbedModalView
+        model: embedModel
+        el: $parentElement
