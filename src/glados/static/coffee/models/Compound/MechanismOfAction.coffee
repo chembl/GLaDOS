@@ -13,6 +13,9 @@ glados.models.Compound.MechanismOfAction.COLUMNS =
   MECHANISM_OF_ACTION:
     name_to_show: 'Mechanism Of Action'
     comparator: 'mechanism_of_action'
+    sort_disabled: false
+    is_sorting: 0
+    sort_class: 'fa-sort'
   TARGET_CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: 'target_chembl_id'
     link_base:'target_link'
@@ -21,7 +24,7 @@ glados.models.Compound.MechanismOfAction.COLUMNS =
     comparator: 'mechanism_refs'
     multiple_links: true
     multiple_links_function: (refs) -> ({text:r.ref_type, url:r.ref_url} for r in refs)
-
+    sort_disabled: true
 
 glados.models.Compound.MechanismOfAction.ID_COLUMN = glados.models.Compound.MechanismOfAction.COLUMNS.MECH_ID
 
