@@ -151,7 +151,6 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @initMechanismOfAction = ->
 
-    console.log 'init mech of act!'
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewMechanismsOfActionList()
     list.initURL(chemblID)

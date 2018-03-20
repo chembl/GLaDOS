@@ -31,8 +31,14 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @collection.getMeta('total_pages') == 1
         @hidePaginators()
         @hideFooter()
-      @fillPageSizeSelectors()
-      @activateSelectors()
+      if @collection.getMeta('total_records') == 1
+        @hideHeaderContainer()
+      else
+        @fillPageSizeSelectors()
+        @activateSelectors()
+        @showHeaderContainer()
+        @showFooterContainer()
+
       @showPaginatedViewContent()
 
       if @collection.getMeta('fuzzy-results')? and @collection.getMeta('fuzzy-results') == true
@@ -135,8 +141,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       for i in [0..$elem.length - 1]
         @sendDataToTemplate $($elem[i]), allColumns
       @bindFunctionLinks()
-      @showHeaderContainer()
-      @showFooterContainer()
       @checkIfTableNeedsToScroll()
       if @pinUnpinTableHeader?
          @pinUnpinTableHeader()
