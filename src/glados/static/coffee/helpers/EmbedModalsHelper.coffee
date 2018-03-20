@@ -5,12 +5,15 @@ glados.useNameSpace 'glados.helpers',
   # --------------------------------------------------------------------------------------------------------------------
   EmbedModalsHelper: class EmbedModalsHelper
 
+    @viewsAndModels = {}
     # $parentElement is the parent element that contains the embed modal and trigger button
-    @initEmbedModal = ($parentElement, embedURL)->
+    @initEmbedModal = ($parentElement, embedURL) ->
 
       embedModel = new glados.models.Embedding.EmbedModalModel
         embed_url: embedURL
 
-      embedView = new glados.views.Embedding.EmbedModalView
+      new glados.views.Embedding.EmbedModalView
         model: embedModel
         el: $parentElement
+
+      return embedModel

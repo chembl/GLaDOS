@@ -218,7 +218,7 @@ glados.useNameSpace 'glados.views.Browsers',
       if !@allViewsPerType[viewType]?
 
         $viewContainer = $('#' + @viewContainerID)
-        $viewElement = $('<div>').attr('id', viewElementID)
+        $viewElement = $('<div>').attr('id', viewElementID).addClass('position-relative')
         templateName = 'Handlebars-Common-ESResultsList' + viewType + 'View'
         $viewElement.html Handlebars.compile($('#' + templateName).html())()
         $viewContainer.append($viewElement)

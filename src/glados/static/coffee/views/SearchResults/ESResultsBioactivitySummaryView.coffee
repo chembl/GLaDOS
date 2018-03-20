@@ -106,13 +106,19 @@ glados.useNameSpace 'glados.views.SearchResults',
     hideMatrix: -> $(@el).find('.BCK-CompTargetMatrix').hide()
     showMatrix: ->
       $(@el).find('.BCK-CompTargetMatrix').show()
+      @setUpEmbedModal()
 
     displayAnyway: ->
       @FORCE_DISPLAY = true
       @handleVisualisationStatus()
 
-    initEmbedModal: ->
+    setUpEmbedModal: ->
 
+      if not @embedModel?
+        @embedModel = glados.helpers.EmbedModalsHelper.initEmbedModal($(@el), 'hola')
+      else
+        @embedModel.set
+          embed_url: 'already_there'
 
     #-------------------------------------------------------------------------------------------------------------------
     # Get items to generate matrix
