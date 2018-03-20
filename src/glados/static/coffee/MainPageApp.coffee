@@ -305,4 +305,8 @@ class MainPageApp
       dots: true
     }
 
+    $carouselContainer.find('.slick-prev').addClass('material-icon')
+
+    console.log '$carouselContainer arrows', $carouselContainer.find('.slick-prev').addClass('material-icon')
+
 
