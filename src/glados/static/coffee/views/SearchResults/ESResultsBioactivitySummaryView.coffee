@@ -114,12 +114,14 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     setUpEmbedModal: ->
 
+      alert 'set up embed modal'
       if not @embedModel?
         @embedModel = glados.helpers.EmbedModalsHelper.initEmbedModal($(@el), 'hola')
       else
         @embedModel.set
           embed_url: 'already_there'
 
+      console.log 'collection: ', @collection
     #-------------------------------------------------------------------------------------------------------------------
     # Get items to generate matrix
     #-------------------------------------------------------------------------------------------------------------------
