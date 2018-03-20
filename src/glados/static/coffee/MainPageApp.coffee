@@ -26,9 +26,6 @@ class MainPageApp
     tweetsList.fetch()
 
     MainPageApp.initCentralCarousel()
-#    MainPageApp.initPapersPerYear()
-#    MainPageApp.initMaxPhaseForDisease()
-#    MainPageApp.initTargetsVisualisation()
 
 # ---------------- Aggregation -------------- #
   @getDocumentsPerYearAgg = (defaultInterval=1) ->
@@ -298,15 +295,15 @@ class MainPageApp
   @initCentralCarousel = ->
     $carouselContainer = $('.carousel-wrapper')
 
-#    Uses slick library for carousel
     $carouselContainer.slick {
       autoplay: true
       autoplaySpeed: 5000
       dots: true
     }
 
-    $carouselContainer.find('.slick-prev').addClass('material-icon')
+    MainPageApp.initPapersPerYear()
+    MainPageApp.initMaxPhaseForDisease()
+    MainPageApp.initTargetsVisualisation()
 
-    console.log '$carouselContainer arrows', $carouselContainer.find('.slick-prev').addClass('material-icon')
 
 

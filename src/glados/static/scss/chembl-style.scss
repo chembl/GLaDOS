@@ -3653,14 +3653,11 @@ $chembl-header-height: 52.245px;
 * Visualisation Cards
 * ----------------------------------------------------------------------------------------------------------------------
 */
-.tall {
-  .visualisation-card {
-    height: 55vh;
-  }
-}
+
 
 .visualisation-card {
-  height: 45vh;
+  //height: 45vh;
+  height: 100%;
   .card-content {
     padding: 5px;
     height: 100%;
@@ -3950,11 +3947,6 @@ $chembl-header-height: 52.245px;
 
 .carousel-wrapper {
   .carousel-item {
-    width: 80%;
-    height: 750px;
+    height: 80vh;
   }
-}
-
-.slick-prev:before, .slick-next:before {
-    color:red !important;
 }
