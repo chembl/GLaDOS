@@ -335,6 +335,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return list
 
+    getNewMechanismsOfActionList: ->
+
+      config = glados.models.paginatedCollections.Settings.WS_COLLECTIONS.MECHANISMS_OF_ACTIONS_LIST
+      console.log 'config: ', config
+
     getNewTweetsList: ->
 
       list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.TWEETS_LIST)

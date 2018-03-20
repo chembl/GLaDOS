@@ -153,6 +153,8 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     mechanismOfActionList = new MechanismOfActionList()
     mechanismOfActionList.url = glados.Settings.WS_BASE_URL + 'mechanism.json?molecule_chembl_id=' + glados.Utils.URLS.getCurrentModelChemblID()
+
+    console.log 'mechanismOfActionList: ', mechanismOfActionList
     new CompoundMechanismsOfActionView
       collection: mechanismOfActionList
       el: $('#MechOfActCard')
