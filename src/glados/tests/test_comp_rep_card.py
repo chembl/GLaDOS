@@ -407,38 +407,6 @@ class CompoundReportCardTest(ReportCardTester):
     self.assertIn(error_msg_p.text, ['No compound found with id CHEMBL7',
                                      'There was an error while loading the data (0 error)'])
 
-  def test_compound_report_card_scenario_10(self):
-
-    self.getURL(self.HOST + '/compound_report_card/CHEMBL17/')
-
-    # --------------------------------------
-    # Mechanism of action
-    # --------------------------------------
-
-    # 4 mechanisms of action
-    mechanisms_of_action_table = self.browser.find_element_by_id('MechOfActCard').find_element_by_tag_name('table')
-    mechanisms_of_action_trs = mechanisms_of_action_table.find_elements_by_tag_name('tr')
-
-    texts = [row.text for row in mechanisms_of_action_trs]
-
-    self.assertIn('Carbonic anhydrase I inhibitor CHEMBL261 PubMed', texts)
-    self.assertIn('Carbonic anhydrase II inhibitor CHEMBL205 PubMed', texts)
-    self.assertIn('Carbonic anhydrase XII inhibitor CHEMBL3242 PubMed', texts)
-    self.assertIn('Carbonic anhydrase IV inhibitor CHEMBL3729 PubMed', texts)
-
-    # test the collection view for mobile devices
-    mechanisms_of_action_collection = self.browser.find_element_by_id('MechOfActCard').find_element_by_tag_name('ul')
-    mechanisms_of_action_lis = mechanisms_of_action_collection.find_elements_by_tag_name('li')
-
-    # here inner html is used because element is not visible on this tests' screen size ( see setUp() )
-    # in the future, dedicated tests for mobile can be implemented
-    texts = '|'.join([li.get_attribute('innerHTML') for li in mechanisms_of_action_lis])
-
-    self.assertIn('Carbonic anhydrase I inhibitor', texts)
-    self.assertIn('Carbonic anhydrase II inhibitor', texts)
-    self.assertIn('Carbonic anhydrase XII inhibitor', texts)
-    self.assertIn('Carbonic anhydrase IV inhibitor', texts)
-
   def test_compound_report_card_scenario_11(self):
 
     self.getURL(self.HOST + '/compound_report_card/CHEMBL1201822/')

@@ -18,6 +18,7 @@ glados.useNameSpace 'glados.views.ReportCards',
 
     render: ->
 
+      console.log 'render PaginatedTableInCardView'
       if @collection.size() == 0 and !@collection.getMeta('force_show')
         return
 

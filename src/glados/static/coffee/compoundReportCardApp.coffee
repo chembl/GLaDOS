@@ -151,18 +151,24 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @initMechanismOfAction = ->
 
-    mechanismOfActionList = new MechanismOfActionList()
-    mechanismOfActionList.url = glados.Settings.WS_BASE_URL + 'mechanism.json?molecule_chembl_id=' + glados.Utils.URLS.getCurrentModelChemblID()
-    new CompoundMechanismsOfActionView
-      collection: mechanismOfActionList
+    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
+    list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewMechanismsOfActionList()
+    list.initURL(chemblID)
+
+    viewConfig =
+      embed_section_name: 'mechanism_of_action'
+      embed_identifier: chemblID
+
+    new glados.views.ReportCards.PaginatedTableInCardView
+      collection: list
       el: $('#MechOfActCard')
-      molecule_chembl_id: glados.Utils.URLS.getCurrentModelChemblID()
+      resource_type: gettext('glados_entities_compound_name')
       section_id: 'MechanismOfAction'
       section_label: 'Mechanism Of Action'
+      config: viewConfig
       report_card_app: @
 
-    console.log 'URL: ', mechanismOfActionList.url
-    mechanismOfActionList.fetch({reset: true})
+    list.fetch({reset: true})
 
   @initIndications = ->
 

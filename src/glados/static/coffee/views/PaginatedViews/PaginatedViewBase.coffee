@@ -376,6 +376,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     # Preloaders and content
     # ------------------------------------------------------------------------------------------------------------------
+    hidePageSizeSelectors: -> $(@el).find('.BCK-select-page-size-container').hide()
     showSuggestedLabel: () ->
       suggestedLabel = $(@el).find('.BCK-SuggestedLabel')
       suggestedLabel.show()
