@@ -347,6 +347,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @setMeta('base_url', @baseUrl, true)
         @initialiseUrl()
 
+      list.parse = (data) ->
+        data.page_meta.records_in_page = data.mechanisms.length
+        @setMeta('data_loaded', true)
+        @resetMeta(data.page_meta)
+        return data.mechanisms
 
       return list
 
