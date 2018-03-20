@@ -338,7 +338,17 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getNewMechanismsOfActionList: ->
 
       config = glados.models.paginatedCollections.Settings.WS_COLLECTIONS.MECHANISMS_OF_ACTIONS_LIST
-      console.log 'config: ', config
+      list = @getNewWSCollectionFor config
+
+      list.initURL = (chemblID) ->
+        console.log 'init url'
+        @baseUrl = "#{glados.Settings.WS_BASE_URL}mechanism.json?molecule_chembl_id=#{chemblID}"
+        console.log 'base url: ', @baseUrl
+        @setMeta('base_url', @baseUrl, true)
+        @initialiseUrl()
+
+
+      return list
 
     getNewTweetsList: ->
 
