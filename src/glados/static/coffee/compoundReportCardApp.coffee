@@ -151,20 +151,20 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @initMechanismOfAction = ->
 
-    mechanismOfActionList = new MechanismOfActionList()
-    mechanismOfActionList.url = glados.Settings.WS_BASE_URL + 'mechanism.json?molecule_chembl_id=' + glados.Utils.URLS.getCurrentModelChemblID()
-
-    console.log 'mechanismOfActionList: ', mechanismOfActionList
-    new CompoundMechanismsOfActionView
-      collection: mechanismOfActionList
-      el: $('#MechOfActCard')
-      molecule_chembl_id: glados.Utils.URLS.getCurrentModelChemblID()
-      section_id: 'MechanismOfAction'
-      section_label: 'Mechanism Of Action'
-      report_card_app: @
-
-    console.log 'URL: ', mechanismOfActionList.url
-    mechanismOfActionList.fetch({reset: true})
+#    mechanismOfActionList = new MechanismOfActionList()
+#    mechanismOfActionList.url = glados.Settings.WS_BASE_URL + 'mechanism.json?molecule_chembl_id=' + glados.Utils.URLS.getCurrentModelChemblID()
+#
+#    console.log 'mechanismOfActionList: ', mechanismOfActionList
+#    new CompoundMechanismsOfActionView
+#      collection: mechanismOfActionList
+#      el: $('#MechOfActCard')
+#      molecule_chembl_id: glados.Utils.URLS.getCurrentModelChemblID()
+#      section_id: 'MechanismOfAction'
+#      section_label: 'Mechanism Of Action'
+#      report_card_app: @
+#
+#    console.log 'URL: ', mechanismOfActionList.url
+#    mechanismOfActionList.fetch({reset: true})
 
   @initIndications = ->
 
