@@ -1,72 +1,7 @@
-{% block custom_models %}
+{% extends "glados/base/basic_table_card.html" %}
+
+{% block card_id %}MechOfActCard{% endblock %}
+
+{% block general_content %}
+{% include "glados/base/PaginatedCollections/DefaultTableContentB.html" %}
 {% endblock %}
-
-{% verbatim %}
-
-<script id="Handlebars-Compound-MechanismOfAction-tds" type="text/x-handlebars-template">
-
-  <td>{{mechanism_of_action}}</td>
-  <td>
-    <a href="https://www.ebi.ac.uk/chembl/target/inspect/{{target_chembl_id}}" target="_blank">
-      {{target_chembl_id}}
-    </a>
-  </td>
-  <td><a href="http://europepmc.org/abstract/MED/18336310">PubMed</a></td>
-</script>
-
-<script id="Handlebars-Compound-MechanismOfAction-collectionItem" type="text/x-handlebars-template">
-
-  <b>Mechanism Of Action:</b> {{mechanism_of_action}}
-  <br>
-  <b>ChEMBL Target: </b>
-  <a href="https://www.ebi.ac.uk/chembl/target/inspect/{{target_chembl_id}}" target="_blank">{{target_chembl_id}}</a>
-  <br>
-  <b>References:</b> <a href="http://europepmc.org/abstract/MED/18336310">PubMed</a>
-
-</script>
-
-{% endverbatim %}
-
-<div class="col s12 m12 l12">
-
-  <div id="MechOfActCard" class="card grey lighten-5">
-
-    <!-- modal trigger -->
-    {% block embed_button %}
-    {% include "glados/base/embed_button.html" %}
-    {% endblock %}
-
-    {% block card_loaders %}
-    {% include "glados/base/card_loaders.html" %}
-    {% endblock %}
-
-    <div class="card-content" style="display:none">
-
-      <table class="compact-table striped ebi-links hide-on-small-only">
-        <thead>
-        <tr>
-          <th>Mechanism Of Action</th>
-          <th>ChEMBL Target</th>
-          <th>References</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-        <!-- Backbone -->
-
-        </tbody>
-      </table>
-
-      <ul class="collection hide-on-med-and-up ebi-links">
-
-        <!-- Backbone -->
-
-      </ul>
-
-    </div>
-
-  </div>
-
-
-</div>

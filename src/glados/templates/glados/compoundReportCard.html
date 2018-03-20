@@ -92,9 +92,9 @@
 
                     <div class="row BCK-section-content">
 
-                        {% block mechanism_of_action %}
+                        {% with is_dynamic=True %}
                             {% include "glados/CompoundReportCardParts/MechanismOfAction.html" %}
-                        {% endblock %}
+                        {% endwith %}
 
 
                     </div>
