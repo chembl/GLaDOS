@@ -25,9 +25,9 @@ class MainPageApp
 
     tweetsList.fetch()
 
-    MainPageApp.initPapersPerYear()
-    MainPageApp.initMaxPhaseForDisease()
-    MainPageApp.initTargetsVisualisation()
+#    MainPageApp.initPapersPerYear()
+#    MainPageApp.initMaxPhaseForDisease()
+#    MainPageApp.initTargetsVisualisation()
 
 # ---------------- Aggregation -------------- #
   @getDocumentsPerYearAgg = (defaultInterval=1) ->
