@@ -3950,6 +3950,11 @@ $chembl-header-height: 52.245px;
 
 .carousel-wrapper {
   .carousel-item {
-    height: 500px;
+    width: 80%;
+    height: 750px;
   }
+}
+
+.slick-prev:before, .slick-next:before {
+    color:red !important;
 }

@@ -25,9 +25,10 @@ class MainPageApp
 
     tweetsList.fetch()
 
-    MainPageApp.initPapersPerYear()
-    MainPageApp.initMaxPhaseForDisease()
-    MainPageApp.initTargetsVisualisation()
+    MainPageApp.initCentralCarousel()
+#    MainPageApp.initPapersPerYear()
+#    MainPageApp.initMaxPhaseForDisease()
+#    MainPageApp.initTargetsVisualisation()
 
 # ---------------- Aggregation -------------- #
   @getDocumentsPerYearAgg = (defaultInterval=1) ->
@@ -293,3 +294,15 @@ class MainPageApp
       report_card_app: @
 
     targetHierarchy.fetch()
+
+  @initCentralCarousel = ->
+    $carouselContainer = $('.carousel-wrapper')
+
+#    Uses slick library for carousel
+    $carouselContainer.slick {
+      autoplay: true
+      autoplaySpeed: 5000
+      dots: true
+    }
+
+
