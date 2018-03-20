@@ -186,6 +186,12 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
   }
 }
 
+@media #{$medium-and-down}{
+  .z-depth-below-zero {
+    z-index: 998 !important;
+  }
+}
+
 .side-nav {
   border: none;
   width: $side-nav-width;
@@ -312,7 +318,11 @@ footer.z-depth-normal {
 
 footer.z-depth-on-top {
   z-index: 2000;
+  @media #{$medium-and-down}{
+    z-index: 996;
+  }
 }
+
 
 $chembl-nav-height: 56px;
 $chembl-nav-line-height: 61px;
