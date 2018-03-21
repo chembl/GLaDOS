@@ -650,7 +650,5 @@ for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MA
   val_i.PATH = '/'+val_i.INDEX_NAME
   val_i.PATH_IN_SETTINGS = "ES_INDEXES_NO_MAIN_SEARCH.#{key_i}"
 
-console.log 'pag coll settings: '
-console.log glados.models.paginatedCollections.Settings
 # Loads the Search results URL's including the ElasticSearch entities configuration
 glados.loadSearchResultsURLS()

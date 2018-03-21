@@ -17,4 +17,10 @@ describe "An elasticsearch collection initialised from a custom querystring", ->
 
   it 'generates a state object', ->
 
-    esList.getStateJSON()
+    state = esList.getStateJSON()
+
+    pathInSettingsMustBe = 'ES_INDEXES_NO_MAIN_SEARCH.ACTIVITY'
+    expect(state.path_in_settings).toBe(pathInSettingsMustBe)
+    queryStringMustBe = customQueryString
+    expect(state.query_string).toBe(queryStringMustBe)
+    expect(state.use_query_string).toBe(true)
