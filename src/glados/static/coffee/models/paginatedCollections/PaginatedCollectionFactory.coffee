@@ -189,6 +189,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       res_lists_dict = {}
       for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
         res_lists_dict[key_i] = @getNewESResultsListFor(val_i)
+        console.log 'es result list: ', val_i
       return res_lists_dict
 
     getNewESTargetsList: (customQueryString='*') ->
