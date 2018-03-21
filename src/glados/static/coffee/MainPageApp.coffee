@@ -302,8 +302,8 @@ class MainPageApp
     }
 
     MainPageApp.initPapersPerYear()
-    MainPageApp.initMaxPhaseForDisease()
-    MainPageApp.initTargetsVisualisation()
+#    MainPageApp.initMaxPhaseForDisease()
+#    MainPageApp.initTargetsVisualisation()
 
 
 

@@ -2816,25 +2816,14 @@ $vis-dark: #0D343A;
   overflow-y: scroll;
   margin: 15px;
   padding: 15px;
+
+  .legend-text{
+    font-size: 65%;
+    fill: #666;
+    font-family: "ChEMBL_Verdana", Verdana, sans-serif;
+  }
 }
 
-//  .axis-helper-line {
-//    stroke-width: 0.5;
-//    stroke: grey;
-//  }
-//  .rotated {
-//    font-size: 70%;
-//  }
-//}
-//path {
-//  display: none;
-//}
-//
-//text {
-//  fill: #666666;
-//}
-//    //
-//}
 
 /**
   * Scatter plot
