@@ -2,17 +2,17 @@
 
     <div id="MainPageCentralDiv" class="row">
         <div class="col l9 m12 s12 carousel-wrapper">
-{#            <div class="carousel-item">#}
-{#                {% with is_dynamic=False %}#}
-{#                    {% include "glados/MainPageParts/Visualizations/YourIdeaHereCard.html" %}#}
-{#                {% endwith %}#}
-{#            </div>#}
+            <div class="carousel-item">
+                {% with is_dynamic=False %}
+                    {% include "glados/MainPageParts/Visualizations/YourIdeaHereCard.html" %}
+                {% endwith %}
+            </div>
 
-{#            <div class="carousel-item">#}
-{#                {% with is_dynamic=True %}#}
-{#                    {% include "glados/MainPageParts/TargetBrowserParts/browse_as_circles.html" %}#}
-{#                {% endwith %}#}
-{#            </div>#}
+            <div class="carousel-item">
+                {% with is_dynamic=True %}
+                    {% include "glados/MainPageParts/TargetBrowserParts/browse_as_circles.html" %}
+                {% endwith %}
+            </div>
 
             <div class="carousel-item">
                 {% with is_dynamic=True %}
@@ -20,11 +20,11 @@
                 {% endwith %}
             </div>
 
-{#            <div class="carousel-item">#}
-{#                {% with is_dynamic=True %}#}
-{#                    {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}#}
-{#                {% endwith %}#}
-{#            </div>#}
+            <div class="carousel-item">
+                {% with is_dynamic=True %}
+                    {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
+                {% endwith %}
+            </div>
         </div>
 
         <div class="col s12 m6 l3 xl400 hide-on-small-only">

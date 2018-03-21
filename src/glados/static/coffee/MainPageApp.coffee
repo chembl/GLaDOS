@@ -281,7 +281,6 @@ class MainPageApp
 
     targetsHierarchyAgg = MainPageApp.getTargetsTreeAgg()
     targetsHierarchyAgg.fetch()
-#    #initialize browser targets viz
     targetBrowserView = TargetBrowserApp.initBrowserAsCircles(targetHierarchy, $('#BCK-TargetBrowserAsCircles'))
     targetHierarchy.fetch()
 
@@ -302,9 +301,9 @@ class MainPageApp
       dots: true
     }
 
-#    MainPageApp.initPapersPerYear()
+    MainPageApp.initPapersPerYear()
     MainPageApp.initMaxPhaseForDisease()
-#    MainPageApp.initTargetsVisualisation()
+    MainPageApp.initTargetsVisualisation()
 
 
 
