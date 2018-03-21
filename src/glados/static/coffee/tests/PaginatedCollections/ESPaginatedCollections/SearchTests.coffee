@@ -3,6 +3,7 @@ describe "An elasticsearch collection", ->
   glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND.KEY_NAME
   ]
 
+  esSearchQuery = JSON.parse('{"bool":{"boost":1,"must":{"bool":{"should":[{"multi_match":{"type":"most_fields","fields":["*.std_analyzed^1.6","*.eng_analyzed^0.8","*.ws_analyzed^1.4","*.keyword^2","*.lower_case_keyword^1.5","*.alphanumeric_lowercase_keyword^1.3"],"query":"Aspirin","fuzziness":0,"minimum_should_match":"100%","boost":10}},{"multi_match":{"type":"best_fields","fields":["*.std_analyzed^1.6","*.eng_analyzed^0.8","*.ws_analyzed^1.4","*.keyword^2","*.lower_case_keyword^1.5","*.alphanumeric_lowercase_keyword^1.3"],"query":"Aspirin","fuzziness":0,"minimum_should_match":"100%","boost":2}},{"multi_match":{"type":"phrase","fields":["*.std_analyzed^1.6","*.eng_analyzed^0.8","*.ws_analyzed^1.4","*.keyword^2","*.lower_case_keyword^1.5","*.alphanumeric_lowercase_keyword^1.3"],"query":"Aspirin","minimum_should_match":"100%","boost":1.5}},{"multi_match":{"type":"phrase_prefix","fields":["*.std_analyzed^1.6","*.eng_analyzed^0.8","*.ws_analyzed^1.4","*.keyword^2","*.lower_case_keyword^1.5","*.alphanumeric_lowercase_keyword^1.3"],"query":"Aspirin","minimum_should_match":"100%"}},{"multi_match":{"type":"most_fields","fields":["*.entity_id^2","*.id_reference^1.5","*.chembl_id^2","*.chembl_id_reference^1.5"],"query":"Aspirin","fuzziness":0,"boost":10}}],"must":[]}},"filter":[]}}')
 
   beforeEach (done) ->
     esList = glados.models.paginatedCollections.PaginatedCollectionFactory.getAllESResultsListDict()[\
@@ -13,7 +14,7 @@ describe "An elasticsearch collection", ->
     esList.setMeta('filter_terms', [])
     esList.resetSortData()
 
-    #
+    esList.setMeta('esSearchQuery', esSearchQuery)
     done()
 
   it "Sets initial parameters", ->
@@ -122,6 +123,23 @@ describe "An elasticsearch collection", ->
     sortingInfo = requestData.sort[0]
     expect(sortingInfo[sortingComparator]?).toBe(true)
     expect(sortingInfo[sortingComparator].order).toBe('desc')
+
+  #-------------------------------------------------------------------------------------------------------------------
+  # State saving
+  #-------------------------------------------------------------------------------------------------------------------
+  it "generates a state object", ->
+
+    state = esList.getStateJSON()
+
+    pathInSettingsMustBe = 'ES_INDEXES.COMPOUND'
+    expect(state.settings_path).toBe(pathInSettingsMustBe)
+    queryStringMustBe = "*"
+    expect(state.custom_query_string).toBe(queryStringMustBe)
+    expect(state.use_custom_query_string).toBe(false)
+    expect(state.sticky_query?).toBe(false)
+    expect(_.isEqual(state.esSearchQuery, esSearchQuery)).toBe(true)
+
+  it 'creates a list from a state object', -> TestsUtils.testRestoredListIsEqualToOriginal(esList)
 
   describe "Downloads", ->
 

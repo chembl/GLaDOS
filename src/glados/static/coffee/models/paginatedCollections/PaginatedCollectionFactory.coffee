@@ -10,18 +10,21 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 # creates a new instance of a Paginated Collection from Elastic Search
     getNewESResultsListFromState: (stateObject) ->
 
-      basicSettingsPath = stateObject.path_in_settings
+      basicSettingsPath = stateObject.settings_path
       settings = glados.Utils.getNestedValue(glados.models.paginatedCollections.Settings, basicSettingsPath)
-      queryString = stateObject.query_string
-      useQueryString = stateObject.use_query_string
+      queryString = stateObject.custom_query_string
+      useQueryString = stateObject.use_custom_query_string
+      esSearchQuery = stateObject.esSearchQuery
+      stickyQuery = stateObject.sticky_query
 
-      list = @getNewESResultsListFor(settings, queryString, useQueryString)
+      list = @getNewESResultsListFor(settings, queryString, useQueryString, itemsList=undefined,
+        contextualProperties=undefined, searchTerm=undefined, stickyQuery, esSearchQuery)
       return list
 
     getNewESResultsListFor: (esIndexSettings, customQueryString='*', useCustomQueryString=false, itemsList,
-      contextualProperties, searchTerm, stickyQuery) ->
+      contextualProperties, searchTerm, stickyQuery, esSearchQuery) ->
 
-      indexESPagQueryCollection = glados.models.paginatedCollections.ESPaginatedQueryCollection\
+      IndexESPagQueryCollection = glados.models.paginatedCollections.ESPaginatedQueryCollection\
       .extend(glados.models.paginatedCollections.SelectionFunctions)
       .extend(glados.models.paginatedCollections.SortingFunctions)
       .extend(glados.models.paginatedCollections.ReferenceStructureFunctions)
@@ -77,6 +80,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             disable_cache_on_download: esIndexSettings.DISABLE_CACHE_ON_DOWNLOAD
             custom_possible_card_sizes_struct: esIndexSettings.POSSIBLE_CARD_SIZES_STRUCT
             settings_path: esIndexSettings.PATH_IN_SETTINGS
+            esSearchQuery: esSearchQuery
 
           if @getMeta('enable_similarity_maps') or @getMeta('enable_substructure_highlighting')
             @initReferenceStructureFunctions()
@@ -85,8 +89,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             @initCache()
             @on 'reset update', @addModelsInCurrentPage, @
 
-
-      return new indexESPagQueryCollection
+      return new IndexESPagQueryCollection
 
 # creates a new instance of a Paginated Collection from Web Services
     getNewWSCollectionFor: (collectionSettings, filter='') ->
@@ -189,7 +192,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       res_lists_dict = {}
       for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
         res_lists_dict[key_i] = @getNewESResultsListFor(val_i)
-        console.log 'es result list: ', val_i
       return res_lists_dict
 
     getNewESTargetsList: (customQueryString='*') ->

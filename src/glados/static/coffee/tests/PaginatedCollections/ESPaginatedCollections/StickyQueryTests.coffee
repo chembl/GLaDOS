@@ -50,10 +50,12 @@ describe "A collection with a sticky query", ->
       state = list.getStateJSON()
 
       pathInSettingsMustBe = 'ES_INDEXES_NO_MAIN_SEARCH.DRUGS_LIST'
-      expect(state.path_in_settings).toBe(pathInSettingsMustBe)
+      expect(state.settings_path).toBe(pathInSettingsMustBe)
       queryStringMustBe = customQueryString
-      expect(state.query_string).toBe(queryStringMustBe)
-      expect(state.use_query_string).toBe(true)
+      expect(state.custom_query_string).toBe(queryStringMustBe)
+      expect(state.use_custom_query_string).toBe(true)
 
       stickyQueryGot = state.sticky_query
       expect(_.isEqual(stickyQueryGot, stickyQueryMustBe)).toBe(true)
+
+    it 'creates a list from a state object', -> TestsUtils.testRestoredListIsEqualToOriginal(list)

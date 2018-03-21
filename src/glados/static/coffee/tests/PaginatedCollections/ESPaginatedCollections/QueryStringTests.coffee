@@ -20,17 +20,9 @@ describe "An elasticsearch collection initialised from a custom querystring", ->
     state = esList.getStateJSON()
 
     pathInSettingsMustBe = 'ES_INDEXES_NO_MAIN_SEARCH.ACTIVITY'
-    expect(state.path_in_settings).toBe(pathInSettingsMustBe)
+    expect(state.settings_path).toBe(pathInSettingsMustBe)
     queryStringMustBe = customQueryString
-    expect(state.query_string).toBe(queryStringMustBe)
-    expect(state.use_query_string).toBe(true)
+    expect(state.custom_query_string).toBe(queryStringMustBe)
+    expect(state.use_custom_query_string).toBe(true)
 
-  it 'creates a list from a state object', ->
-
-    state = esList.getStateJSON()
-    list2 = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFromState(state)
-
-    for property in ['settings_path', 'custom_query_string', 'use_custom_query_string']
-      oldValue = esList.getMeta(property)
-      newValue = list2.getMeta(property)
-      expect(oldValue).toBe(newValue)
+  it 'creates a list from a state object', -> TestsUtils.testRestoredListIsEqualToOriginal(esList)

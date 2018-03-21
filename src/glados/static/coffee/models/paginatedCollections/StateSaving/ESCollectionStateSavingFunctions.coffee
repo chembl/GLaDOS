@@ -6,16 +6,15 @@ glados.useNameSpace 'glados.models.paginatedCollections.StateSaving',
     # transferred externally
     getStateJSON: ->
 
-      pathInSettings = @getMeta('settings_path')
-      queryString = @getMeta('custom_query_string')
-      useQueryString = @getMeta('use_custom_query_string')
-      sitckyQuery = @getMeta('sticky_query')
+      console.log 'generating state: ', @meta
 
-      state =
-        path_in_settings: pathInSettings
-        query_string: queryString
-        use_query_string: useQueryString
-        sticky_query: sitckyQuery
+      propertiesToSave = ['settings_path', 'custom_query_string', 'use_custom_query_string', 'sticky_query',
+        'esSearchQuery']
+
+      state = {}
+      for prop in propertiesToSave
+        value = @getMeta(prop)
+        state[prop] = value
 
       return state
 

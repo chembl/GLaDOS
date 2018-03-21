@@ -84,3 +84,18 @@ class TestsUtils
       else if _.isNumber(popVal) or _.isSring(propVal) or _.isBoolean(propVal)
         expect(response[propVal]).toBe(parsed[propVal])
       # propably later check objects and arrays
+
+  @testRestoredListIsEqualToOriginal = (list) ->
+
+    state = list.getStateJSON()
+    list2 = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFromState(state)
+
+    for property in ['settings_path', 'custom_query_string', 'use_custom_query_string', 'esSearchQuery', 'sticky_query']
+
+      oldValue = list.getMeta(property)
+      newValue = list2.getMeta(property)
+
+      if _.isObject(oldValue)
+        expect(_.isEqual(oldValue, newValue)).toBe(true)
+      else
+        expect(oldValue).toBe(newValue)
