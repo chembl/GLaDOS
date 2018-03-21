@@ -7,14 +7,15 @@ glados.useNameSpace 'glados.models.paginatedCollections.StateSaving',
     getStateJSON: ->
 
       pathInSettings = @getMeta('settings_path')
-
       queryString = @getMeta('custom_query_string')
       useQueryString = @getMeta('use_custom_query_string')
+      sitckyQuery = @getMeta('sticky_query')
 
       state =
         path_in_settings: pathInSettings
         query_string: queryString
         use_query_string: useQueryString
+        sticky_query: sitckyQuery
 
       return state
 
