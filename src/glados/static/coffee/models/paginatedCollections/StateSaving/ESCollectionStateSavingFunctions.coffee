@@ -2,9 +2,10 @@ glados.useNameSpace 'glados.models.paginatedCollections.StateSaving',
 
   ESCollectionStateSavingFunctions:
 
+    # Keep in mind that the state object needs to ALWAYS be serializable, because it will be included in urls and
+    # transferred externally
     getStateJSON: ->
 
-      console.log 'getting json state'
       pathInSettings = @getMeta('settings_path')
 
       queryString = @getMeta('custom_query_string')

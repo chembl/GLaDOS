@@ -8,6 +8,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 # --------------------------------------------------------------------------------------------------------------------
   PaginatedCollectionFactory:
 # creates a new instance of a Paginated Collection from Elastic Search
+    getNewESResultsListFromState: (stateObject) ->
+
+      basicSettingsPath = stateObject.path_in_settings
+      settings = glados.Utils.getNestedValue(glados.models.paginatedCollections.Settings, basicSettingsPath)
+      queryString = stateObject.query_string
+      useQueryString = stateObject.use_query_string
+
+      list = @getNewESResultsListFor(settings, queryString, useQueryString)
+      return list
+
     getNewESResultsListFor: (esIndexSettings, customQueryString='*', useCustomQueryString=false, itemsList,
       contextualProperties, searchTerm, stickyQuery) ->
 
