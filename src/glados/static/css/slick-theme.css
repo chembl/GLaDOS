@@ -133,9 +133,9 @@
 
     display: inline-block;
 
-    width: 20px;
-    height: 20px;
-    margin: 0 5px;
+    width: 15px;
+    height: 15px;
+    margin: 0 0;
     padding: 0;
 
     cursor: pointer;
@@ -147,9 +147,9 @@
 
     display: block;
 
-    width: 20px;
-    height: 20px;
-    padding: 5px;
+    width: 15px;
+    height: 15px;
+    padding: 0;
 
     cursor: pointer;
 
@@ -166,12 +166,12 @@
 .slick-dots li button:hover:before,
 .slick-dots li button:focus:before
 {
-    opacity: 1;
+    opacity: 0.5;
 }
 .slick-dots li button:before
 {
     font-size: 20px;
-    line-height: 20px;
+    line-height: 25px;
 
     position: absolute;
     top: 0;
@@ -184,7 +184,7 @@
     text-align: center;
 
     opacity: .25;
-    color: #a8a8a8;
+    color: #009688;
 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
