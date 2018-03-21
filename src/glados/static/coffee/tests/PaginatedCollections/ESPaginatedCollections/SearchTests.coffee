@@ -54,10 +54,7 @@ describe "An elasticsearch collection", ->
       esList.setMeta('page_size', pageSize)
       totalPages = Math.ceil(totalRecords / pageSize)
       esList.setMeta('total_pages', totalPages)
-      testIteratesPages(esList, pageSize)
-
-    #so it doesn't give the warning
-    expect(true).toBe(true)
+      testIteratesPages(esList, pageSize, totalPages)
 
   it 'updates the request data as the pagination moves', ->
 
