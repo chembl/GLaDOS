@@ -296,14 +296,18 @@ class MainPageApp
     $carouselContainer = $('.carousel-wrapper')
 
     $carouselContainer.slick {
-      autoplay: true
-      autoplaySpeed: 5000
+#      autoplay: true
+#      autoplaySpeed: 5000
       dots: true
     }
 
     MainPageApp.initPapersPerYear()
     MainPageApp.initMaxPhaseForDisease()
     MainPageApp.initTargetsVisualisation()
+
+
+
+
 
 
 

@@ -2,17 +2,6 @@
 @import "components/color";
 @import "components/variables";
 
-/*
-* ChEMBL custom style added to materialize
-*/
-
-/**
-* Fonts
-* NOTE: SCSS generated files are located under <static>/css/scss-gen
-* ----------------------------------------------------------------------------------------------------------------------
-*/
-
-
 
 /**
 * Typograhpy and colours
@@ -3654,9 +3643,14 @@ $chembl-header-height: 52.245px;
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
+.carousel-wrapper {
+  .carousel-item {
+    height: 80vh;
+  }
+}
+
 
 .visualisation-card {
-  //height: 45vh;
   height: 100%;
   .card-content {
     padding: 5px;
@@ -3945,8 +3939,3 @@ $chembl-header-height: 52.245px;
 }
 
 
-.carousel-wrapper {
-  .carousel-item {
-    height: 80vh;
-  }
-}
