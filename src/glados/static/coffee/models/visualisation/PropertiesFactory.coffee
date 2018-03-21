@@ -75,6 +75,23 @@ glados.useNameSpace 'glados.models.visualisation',
             '#e95f7e',
             '#cc4362'
           ]
+        DISEASE:
+          propName: '_metadata.drug_indications.efo_term'
+          label: 'Disease'
+          type: String
+          colourScaleType: glados.Visualisation.CATEGORICAL
+          coloursRange: [
+            '#0a585b',
+            '#077c80',
+            '#2ba3a5',
+            '#6fc7c6',
+            '#c4e6e5',
+            '#f1d6db',
+            '#fdabbc',
+            '#f9849d',
+            '#e95f7e',
+            '#cc4362'
+          ]
     DocumentAggregation:
       Properties:
         YEAR:
