@@ -639,13 +639,18 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 glados.models.paginatedCollections.Settings.ES_INDEX_2_GLADOS_SETTINGS= {}
 
 # fills the KEY_NAME for the ES_INDEXES object
+# fills the path in the settings for every object
 for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
   val_i.KEY_NAME = key_i
   val_i.PATH = '/'+val_i.INDEX_NAME
+  val_i.PATH_IN_SETTINGS = "ES_INDEXES.#{key_i}"
   glados.models.paginatedCollections.Settings.ES_INDEX_2_GLADOS_SETTINGS[val_i.INDEX_NAME] = val_i
 for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH
   val_i.KEY_NAME = key_i
   val_i.PATH = '/'+val_i.INDEX_NAME
+  val_i.PATH_IN_SETTINGS = "ES_INDEXES_NO_MAIN_SEARCH.#{key_i}"
 
+console.log 'pag coll settings: '
+console.log glados.models.paginatedCollections.Settings
 # Loads the Search results URL's including the ElasticSearch entities configuration
 glados.loadSearchResultsURLS()

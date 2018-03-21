@@ -14,3 +14,7 @@ describe "An elasticsearch collection initialised from a custom querystring", ->
 
     requestData = esList.getRequestData()
     expect(requestData.query.bool.must[0].query_string.query).toBe(customQueryString)
+
+  it 'generates a state object', ->
+
+    esList.getStateJSON()
