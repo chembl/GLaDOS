@@ -16,9 +16,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       useQueryString = stateObject.use_custom_query_string
       esSearchQuery = stateObject.esSearchQuery
       stickyQuery = stateObject.sticky_query
+      itemsList = stateObject.generator_items_list
+      contextualProperties = stateObject.contextual_properties
+      searchTerm = stateObject.search_term
 
-      list = @getNewESResultsListFor(settings, queryString, useQueryString, itemsList=undefined,
-        contextualProperties=undefined, searchTerm=undefined, stickyQuery, esSearchQuery)
+      list = @getNewESResultsListFor(settings, queryString, useQueryString, itemsList,
+        contextualProperties, searchTerm, stickyQuery, esSearchQuery)
       return list
 
     getNewESResultsListFor: (esIndexSettings, customQueryString='*', useCustomQueryString=false, itemsList,
