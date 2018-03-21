@@ -2418,6 +2418,9 @@ span.badge-primary-color-no-float {
 * Target Browser
 * ----------------------------------------------------------------------------------------------------------------------
 */
+
+$vis-teal: #09979B;
+$vis-dark: #0D343A;
 .small-input-wrapper {
   input {
     margin: 0px;
@@ -2458,17 +2461,17 @@ span.badge-primary-color-no-float {
       cursor: pointer;
       &.hoverable {
         stroke-width: 1px;
-        stroke: black;
+        stroke: $vis-teal;
         &:hover, &.force-hover {
-          stroke: color('green', 'base');
+          stroke: $vis-teal;
           stroke-width: 2px;
         }
       }
 
       &.selected {
-        stroke: color('green', 'base');
-        stroke-width: 1;
-        stroke-dasharray: 10;
+        stroke: $vis-teal;
+        stroke-width: 2px;
+        stroke-dasharray: 8;
       }
     }
 
@@ -2478,7 +2481,9 @@ span.badge-primary-color-no-float {
 
     .label {
       text-anchor: middle;
-      text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+      text-shadow: 0 0.8px 0 #fff, 0.8px 0 0 #fff, -0.8px 0 0 #fff, 0 -0.8px 0 #fff;
+      fill: $vis-dark;
+      font-family: 'Open Sans', sans-serif;
     }
 
     .label,
@@ -2487,7 +2492,7 @@ span.badge-primary-color-no-float {
     }
 
     .incomplete {
-      stroke: color('green', 'base');
+      stroke: $vis-teal;
       stroke-width: 2;
       stroke-dasharray: 10;
     }
