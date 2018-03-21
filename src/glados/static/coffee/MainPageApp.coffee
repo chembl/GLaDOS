@@ -121,6 +121,7 @@ class MainPageApp
       title: 'Max Phase for Disease'
       max_categories: 5
       stacked_donut: true
+      stacked_levels: 2
       hide_title: true
       properties:
         max_phase: maxPhaseProp
@@ -301,8 +302,8 @@ class MainPageApp
       dots: true
     }
 
-    MainPageApp.initPapersPerYear()
-#    MainPageApp.initMaxPhaseForDisease()
+#    MainPageApp.initPapersPerYear()
+    MainPageApp.initMaxPhaseForDisease()
 #    MainPageApp.initTargetsVisualisation()
 
 

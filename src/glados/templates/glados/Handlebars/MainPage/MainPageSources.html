@@ -14,17 +14,17 @@
 {#                {% endwith %}#}
 {#            </div>#}
 
-{#            <div class="carousel-item">#}
-{#                {% with is_dynamic=True %}#}
-{#                    {% include "glados/MainPageParts/Visualizations/MaxPhaseForDiseaseDonut.html" %}#}
-{#                {% endwith %}#}
-{#            </div>#}
-
             <div class="carousel-item">
                 {% with is_dynamic=True %}
-                    {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
+                    {% include "glados/MainPageParts/Visualizations/MaxPhaseForDiseaseDonut.html" %}
                 {% endwith %}
             </div>
+
+{#            <div class="carousel-item">#}
+{#                {% with is_dynamic=True %}#}
+{#                    {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}#}
+{#                {% endwith %}#}
+{#            </div>#}
         </div>
 
         <div class="col s12 m6 l3 xl400 hide-on-small-only">

@@ -2,7 +2,6 @@
 @import "components/color";
 @import "components/variables";
 
-
 /**
 * Typograhpy and colours
 * ----------------------------------------------------------------------------------------------------------------------
@@ -311,7 +310,6 @@ footer.z-depth-on-top {
     z-index: 996;
   }
 }
-
 
 $chembl-nav-height: 56px;
 $chembl-nav-line-height: 61px;
@@ -1561,14 +1559,17 @@ em.glados-result-highlight {
   }
 
 }
-.long-filter-content{
+
+.long-filter-content {
   max-height: 20vh;
   overflow: scroll;
 }
-.share-url{
+
+.share-url {
   padding: 4px;
   border: 1px solid $primary-color-dark;
 }
+
 /**
 * Acknowledgements
 * ----------------------------------------------------------------------------------------------------------------------
@@ -2817,13 +2818,12 @@ $vis-dark: #0D343A;
   margin: 15px;
   padding: 15px;
 
-  .legend-text{
+  .legend-text {
     font-size: 65%;
     fill: #666;
     font-family: "ChEMBL_Verdana", Verdana, sans-serif;
   }
 }
-
 
 /**
   * Scatter plot
@@ -3202,7 +3202,6 @@ $facets-width-large: 21%;
   }
 }
 
-
 /* carrousel with overlay buttons
 * --------------------------------------------
 */
@@ -3211,7 +3210,7 @@ $chevron-button-size: 40px;
 $chevron-button-margin: 0px;
 
 @media (max-width: 600px) {
-  #SimilarCompoundsCard, #AlternateFormsOfCompoundInChEMBL{
+  #SimilarCompoundsCard, #AlternateFormsOfCompoundInChEMBL {
     max-width: 500px !important;
   }
 
@@ -3563,10 +3562,16 @@ $chembl-header-height: 52.245px;
   .legend {
     width: 100%;
     margin-left: -10px;
-    margin-top: 0px;
+    margin-top: 40px;
     overflow-y: scroll;
     overflow-x: hidden !important;
+    .legend-text {
+      font-size: 65%;
+      fill: #666;
+      font-family: "ChEMBL_Verdana", Verdana, sans-serif;
+    }
   }
+
   .title {
     cursor: pointer;
     font-size: 90%;
@@ -3643,7 +3648,6 @@ $chembl-header-height: 52.245px;
   }
 }
 
-
 .visualisation-card {
   height: 100%;
   .card-content {
@@ -3707,8 +3711,6 @@ $chembl-header-height: 52.245px;
     }
   }
 }
-
-
 
 /**** CUSTOM RESPONSIVE SIZES FOR CAROUSEL CARDS ********/
 
@@ -3785,7 +3787,7 @@ $chembl-header-height: 52.245px;
 }
 
 @media #{$medium-and-up} {
-    .carousel-card.card-m1 {
+  .carousel-card.card-m1 {
     flex-grow: 0;
     flex-shrink: 0;
     flex-basis: calc(100% / (12 / 1));
