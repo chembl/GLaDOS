@@ -296,7 +296,7 @@ class MainPageApp
     $carouselContainer = $('.carousel-wrapper')
 
     $carouselContainer.slick {
-      autoplay: false
+      autoplay: true
       autoplaySpeed: 5000
       dots: true
     }
