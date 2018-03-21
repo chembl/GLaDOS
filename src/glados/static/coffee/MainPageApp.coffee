@@ -25,9 +25,7 @@ class MainPageApp
 
     tweetsList.fetch()
 
-    MainPageApp.initPapersPerYear()
-    MainPageApp.initMaxPhaseForDisease()
-    MainPageApp.initTargetsVisualisation()
+    MainPageApp.initCentralCarousel()
 
 # ---------------- Aggregation -------------- #
   @getDocumentsPerYearAgg = (defaultInterval=1) ->
@@ -123,6 +121,7 @@ class MainPageApp
       title: 'Max Phase for Disease'
       max_categories: 5
       stacked_donut: true
+      stacked_levels: 2
       hide_title: true
       properties:
         max_phase: maxPhaseProp
@@ -282,7 +281,6 @@ class MainPageApp
 
     targetsHierarchyAgg = MainPageApp.getTargetsTreeAgg()
     targetsHierarchyAgg.fetch()
-#    #initialize browser targets viz
     targetBrowserView = TargetBrowserApp.initBrowserAsCircles(targetHierarchy, $('#BCK-TargetBrowserAsCircles'))
     targetHierarchy.fetch()
 
@@ -293,3 +291,23 @@ class MainPageApp
       report_card_app: @
 
     targetHierarchy.fetch()
+
+  @initCentralCarousel = ->
+    $carouselContainer = $('.carousel-wrapper')
+
+    $carouselContainer.slick {
+      autoplay: false
+      autoplaySpeed: 5000
+      dots: true
+    }
+
+    MainPageApp.initPapersPerYear()
+    MainPageApp.initMaxPhaseForDisease()
+    MainPageApp.initTargetsVisualisation()
+
+
+
+
+
+
+

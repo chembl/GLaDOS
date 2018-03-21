@@ -289,12 +289,12 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
         .data(column)
         .enter()
         .append('text')
+        .classed('legend-text', true)
         .text((d) -> d)
         .attr('x', 15)
         .attr('y', (d, i) -> (i * ( radius * 3 )) + 4)
         .attr('transform', 'translate(' + columnWidth * a + ', 0)')
-        .style('font-size', '60%')
-        .style('fill', '#333')
+
 
 #   if the text is too long add ellipsis
     texts = legendG.selectAll('text')

@@ -2,18 +2,6 @@
 @import "components/color";
 @import "components/variables";
 
-/*
-* ChEMBL custom style added to materialize
-*/
-
-/**
-* Fonts
-* NOTE: SCSS generated files are located under <static>/css/scss-gen
-* ----------------------------------------------------------------------------------------------------------------------
-*/
-
-
-
 /**
 * Typograhpy and colours
 * ----------------------------------------------------------------------------------------------------------------------
@@ -184,7 +172,7 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
   .menu-logo {
     visibility: hidden;
   }
-}
+}ƒfon
 
 @media #{$medium-and-down}{
   .z-depth-below-zero {
@@ -322,7 +310,6 @@ footer.z-depth-on-top {
     z-index: 996;
   }
 }
-
 
 $chembl-nav-height: 56px;
 $chembl-nav-line-height: 61px;
@@ -1572,14 +1559,17 @@ em.glados-result-highlight {
   }
 
 }
-.long-filter-content{
+
+.long-filter-content {
   max-height: 20vh;
   overflow: scroll;
 }
-.share-url{
+
+.share-url {
   padding: 4px;
   border: 1px solid $primary-color-dark;
 }
+
 /**
 * Acknowledgements
 * ----------------------------------------------------------------------------------------------------------------------
@@ -2429,6 +2419,9 @@ span.badge-primary-color-no-float {
 * Target Browser
 * ----------------------------------------------------------------------------------------------------------------------
 */
+
+$vis-teal: #09979B;
+$vis-dark: #0D343A;
 .small-input-wrapper {
   input {
     margin: 0px;
@@ -2469,17 +2462,17 @@ span.badge-primary-color-no-float {
       cursor: pointer;
       &.hoverable {
         stroke-width: 1px;
-        stroke: black;
+        stroke: $vis-teal;
         &:hover, &.force-hover {
-          stroke: color('green', 'base');
+          stroke: $vis-teal;
           stroke-width: 2px;
         }
       }
 
       &.selected {
-        stroke: color('green', 'base');
-        stroke-width: 1;
-        stroke-dasharray: 10;
+        stroke: $vis-teal;
+        stroke-width: 2px;
+        stroke-dasharray: 8;
       }
     }
 
@@ -2489,7 +2482,9 @@ span.badge-primary-color-no-float {
 
     .label {
       text-anchor: middle;
-      text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+      text-shadow: 0 0.8px 0 #fff, 0.8px 0 0 #fff, -0.8px 0 0 #fff, 0 -0.8px 0 #fff;
+      fill: $vis-dark;
+      font-family: 'Open Sans', sans-serif;
     }
 
     .label,
@@ -2498,7 +2493,7 @@ span.badge-primary-color-no-float {
     }
 
     .incomplete {
-      stroke: color('green', 'base');
+      stroke: $vis-teal;
       stroke-width: 2;
       stroke-dasharray: 10;
     }
@@ -2822,25 +2817,13 @@ span.badge-primary-color-no-float {
   overflow-y: scroll;
   margin: 15px;
   padding: 15px;
-}
 
-//  .axis-helper-line {
-//    stroke-width: 0.5;
-//    stroke: grey;
-//  }
-//  .rotated {
-//    font-size: 70%;
-//  }
-//}
-//path {
-//  display: none;
-//}
-//
-//text {
-//  fill: #666666;
-//}
-//    //
-//}
+  .legend-text {
+    font-size: 65%;
+    fill: #666;
+    font-family: "ChEMBL_Verdana", Verdana, sans-serif;
+  }
+}
 
 /**
   * Scatter plot
@@ -3219,7 +3202,6 @@ $facets-width-large: 21%;
   }
 }
 
-
 /* carrousel with overlay buttons
 * --------------------------------------------
 */
@@ -3228,7 +3210,7 @@ $chevron-button-size: 40px;
 $chevron-button-margin: 0px;
 
 @media (max-width: 600px) {
-  #SimilarCompoundsCard, #AlternateFormsOfCompoundInChEMBL{
+  #SimilarCompoundsCard, #AlternateFormsOfCompoundInChEMBL {
     max-width: 500px !important;
   }
 
@@ -3580,10 +3562,16 @@ $chembl-header-height: 52.245px;
   .legend {
     width: 100%;
     margin-left: -10px;
-    margin-top: 0px;
+    margin-top: 40px;
     overflow-y: scroll;
     overflow-x: hidden !important;
+    .legend-text {
+      font-size: 65%;
+      fill: #666;
+      font-family: "ChEMBL_Verdana", Verdana, sans-serif;
+    }
   }
+
   .title {
     cursor: pointer;
     font-size: 90%;
@@ -3607,7 +3595,7 @@ $chembl-header-height: 52.245px;
   .arc {
     text {
       font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
-      font-size: 80%;
+      font-size: 100%;
     }
   }
 
@@ -3653,14 +3641,15 @@ $chembl-header-height: 52.245px;
 * Visualisation Cards
 * ----------------------------------------------------------------------------------------------------------------------
 */
-.tall {
-  .visualisation-card {
-    height: 55vh;
+
+.carousel-wrapper {
+  .carousel-item {
+    height: 80vh;
   }
 }
 
 .visualisation-card {
-  height: 45vh;
+  height: 100%;
   .card-content {
     padding: 5px;
     height: 100%;
@@ -3722,8 +3711,6 @@ $chembl-header-height: 52.245px;
     }
   }
 }
-
-
 
 /**** CUSTOM RESPONSIVE SIZES FOR CAROUSEL CARDS ********/
 
@@ -3800,7 +3787,7 @@ $chembl-header-height: 52.245px;
 }
 
 @media #{$medium-and-up} {
-    .carousel-card.card-m1 {
+  .carousel-card.card-m1 {
     flex-grow: 0;
     flex-shrink: 0;
     flex-basis: calc(100% / (12 / 1));
@@ -3946,4 +3933,5 @@ $chembl-header-height: 52.245px;
     flex-basis: calc(100% / (12 / 12));
   }
 }
+
 
