@@ -99,3 +99,16 @@ class TestsUtils
         expect(_.isEqual(oldValue, newValue)).toBe(true)
       else
         expect(oldValue).toBe(newValue)
+
+  @testSavesList = (list, pathInSettingsMustBe, queryStringMustBe, useQueryStringMustBe, stickyQueryMustBe,
+    esSearchQueryMustBe)->
+
+    state = list.getStateJSON()
+
+    expect(state.settings_path).toBe(pathInSettingsMustBe)
+    expect(state.custom_query_string).toBe(queryStringMustBe)
+    expect(state.use_custom_query_string).toBe(useQueryStringMustBe)
+
+    stickyQueryGot = state.sticky_query
+    expect(_.isEqual(stickyQueryGot, stickyQueryMustBe)).toBe(true)
+    expect(_.isEqual(state.esSearchQuery, esSearchQueryMustBe)).toBe(true)

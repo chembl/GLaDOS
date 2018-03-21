@@ -15,14 +15,9 @@ describe "An elasticsearch collection initialised from a custom querystring", ->
     requestData = esList.getRequestData()
     expect(requestData.query.bool.must[0].query_string.query).toBe(customQueryString)
 
-  it 'generates a state object', ->
-
-    state = esList.getStateJSON()
-
-    pathInSettingsMustBe = 'ES_INDEXES_NO_MAIN_SEARCH.ACTIVITY'
-    expect(state.settings_path).toBe(pathInSettingsMustBe)
-    queryStringMustBe = customQueryString
-    expect(state.custom_query_string).toBe(queryStringMustBe)
-    expect(state.use_custom_query_string).toBe(true)
+  it 'generates a state object', -> TestsUtils.testSavesList(esList,
+      pathInSettingsMustBe='ES_INDEXES_NO_MAIN_SEARCH.ACTIVITY',
+      queryStringMustBe=customQueryString,
+      useQueryStringMustBe=true)
 
   it 'creates a list from a state object', -> TestsUtils.testRestoredListIsEqualToOriginal(esList)

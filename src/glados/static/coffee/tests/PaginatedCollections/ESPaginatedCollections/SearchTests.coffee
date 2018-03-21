@@ -127,17 +127,12 @@ describe "An elasticsearch collection", ->
   #-------------------------------------------------------------------------------------------------------------------
   # State saving
   #-------------------------------------------------------------------------------------------------------------------
-  it "generates a state object", ->
-
-    state = esList.getStateJSON()
-
-    pathInSettingsMustBe = 'ES_INDEXES.COMPOUND'
-    expect(state.settings_path).toBe(pathInSettingsMustBe)
-    queryStringMustBe = "*"
-    expect(state.custom_query_string).toBe(queryStringMustBe)
-    expect(state.use_custom_query_string).toBe(false)
-    expect(state.sticky_query?).toBe(false)
-    expect(_.isEqual(state.esSearchQuery, esSearchQuery)).toBe(true)
+  it "generates a state object", -> TestsUtils.testSavesList(esList,
+      pathInSettingsMustBe='ES_INDEXES.COMPOUND',
+      queryStringMustBe="*",
+      useQueryStringMustBe=false,
+      stickyQueryMustBe=undefined,
+      esSearchQueryMustBe=esSearchQuery)
 
   it 'creates a list from a state object', -> TestsUtils.testRestoredListIsEqualToOriginal(esList)
 
