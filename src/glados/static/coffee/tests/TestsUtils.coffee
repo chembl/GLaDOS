@@ -101,6 +101,33 @@ class TestsUtils
       else
         expect(oldValue).toBe(newValue)
 
+    console.log 'list: ', list
+    console.log 'list2: ', list2
+
+    facetGroupsGot = list2.getFacetsGroups()
+    facetsState = state.facets_state
+
+    if not facetsState?
+      return
+    for facetGroupKey, fGroup of facetGroupsGot
+
+      facetingHandler = fGroup.faceting_handler
+      hasSelection = facetingHandler.hasSelection()
+
+      console.log 'facetGroupKey: ', facetGroupKey
+      console.log 'facetsState.selected[facetGroupKey]: ', facetsState.selected[facetGroupKey]
+      if hasSelection
+        console.log 'has selection'
+        selectedFacetsMustBe = facetsState.selected[facetGroupKey]
+        selectedFacetsGot = facetingHandler.getSelectedFacetsKeys()
+
+        console.log 'selectedFacetsMustBe: ', selectedFacetsMustBe
+        console.log 'selectedFacetsGot: ', selectedFacetsGot
+        expect(_.isEqual(selectedFacetsMustBe, selectedFacetsGot)).toBe(true)
+      else
+        console.log 'no selection'
+        expect(facetsState.selected[facetGroupKey]?).toBe(false)
+
   @testSavesList = (list, pathInSettingsMustBe, queryStringMustBe="*", useQueryStringMustBe=false, stickyQueryMustBe,
     esSearchQueryMustBe, searchTermMustBe, contextualColumnsMustBe, generatorListMustBe, facetsStateMustBe)->
 
@@ -123,4 +150,5 @@ class TestsUtils
     expect(_.isEqual(generatorListGot, generatorListMustBe)).toBe(true)
 
     facetsStateGot = state.facets_state
+    console.log 'facetsStateGot: ', facetsStateGot
     expect(_.isEqual(facetsStateGot, facetsStateMustBe)).toBe(true)

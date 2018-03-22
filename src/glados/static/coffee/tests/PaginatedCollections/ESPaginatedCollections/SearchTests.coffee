@@ -276,4 +276,6 @@ describe "An elasticsearch collection", ->
         facetsStateMustBe
       )
 
+      it 'creates a list from a state object', -> TestsUtils.testRestoredListIsEqualToOriginal(esList)
+
 

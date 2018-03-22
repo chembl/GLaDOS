@@ -57,16 +57,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
             )
           }
         throw 'ERROR: '+prop_name+' is not an aggregatable property!'
-      all_props = _.filter(_.keys(gs_data), (property_name)->
-        if not gs_data[property_name].aggregatable
-          return false
-        if exclude_patterns?
-          for exclude_pattern_i in exclude_patterns
-            exclude = exclude_pattern_i.test(property_name)
-            if exclude
-              return false
-        return true
-      )
+
       if defaults?
         for prop_i in defaults
           if _.isString(prop_i)
