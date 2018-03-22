@@ -202,6 +202,7 @@ describe "An elasticsearch collection", ->
 
       beforeEach ->
 
+        esList.setMeta('esSearchQuery', esSearchQuery)
         facetGroups = esList.getFacetsGroups()
         testFacetGroupKey = 'max_phase'
         testFacetKey = facetGroups[testFacetGroupKey].faceting_handler.faceting_keys_inorder[0]
@@ -221,7 +222,58 @@ describe "An elasticsearch collection", ->
 
         testIteratesPages(esList, pageSize, totalPages)
 
+        facetGroups = esList.getFacetsGroups()
+        testFacetGroupKey = 'max_phase'
+        testFacetKey = facetGroups[testFacetGroupKey].faceting_handler.faceting_keys_inorder[0]
+        expect(facetGroups[testFacetGroupKey].faceting_handler.faceting_data[testFacetKey].selected).toBe(true)
+
       it 'updates the request data as the pagination moves, with different pager sizes', ->
 
         totalRecords = 100
         testIteratesPagesWithDifferentPageSizes(esList, totalRecords)
+
+    describe 'After selecting multiple facets', ->
+
+      beforeAll ->
+
+        esList = glados.models.paginatedCollections.PaginatedCollectionFactory.getAllESResultsListDict()[\
+        glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND.KEY_NAME
+        ]
+
+      testFacetGroupKey1 = 'max_phase'
+      testFacetGroupKey2 = 'molecule_properties.num_ro5_violations'
+
+      facetsStateMustBe =
+        selected:
+          max_phase: ["0"]
+          'molecule_properties.num_ro5_violations': ["0"]
+
+      beforeEach ->
+
+        esList.setMeta('esSearchQuery', esSearchQuery)
+        facetGroups = esList.getFacetsGroups()
+
+        testFacetKey1 = facetGroups[testFacetGroupKey1].faceting_handler.faceting_keys_inorder[0]
+        facetingHandler = facetGroups[testFacetGroupKey1].faceting_handler
+        facetingHandler.toggleKeySelection(testFacetKey1)
+
+        testFacetKey2 = facetGroups[testFacetGroupKey2].faceting_handler.faceting_keys_inorder[0]
+        facetingHandler = facetGroups[testFacetGroupKey2].faceting_handler
+        facetingHandler.toggleKeySelection(testFacetKey2)
+
+        esList.setMeta('facets_changed', true)
+        esList.fetch(options=undefined, testMode=true)
+
+      it 'generates a state object', ->  TestsUtils.testSavesList(esList,
+        pathInSettingsMustBe='ES_INDEXES.COMPOUND',
+        queryStringMustBe=undefined,
+        useQueryStringMustBe=undefined,
+        stickyQueryMustBe=undefined,
+        esSearchQueryMustBe= esSearchQuery,
+        searchTermMustBe=undefined,
+        contextualColumnsMustBe=undefined,
+        generatorListMustBe=undefined,
+        facetsStateMustBe
+      )
+
+

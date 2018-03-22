@@ -101,8 +101,8 @@ class TestsUtils
       else
         expect(oldValue).toBe(newValue)
 
-  @testSavesList = (list, pathInSettingsMustBe, queryStringMustBe, useQueryStringMustBe, stickyQueryMustBe,
-    esSearchQueryMustBe, searchTermMustBe, contextualColumnsMustBe, generatorListMustBe)->
+  @testSavesList = (list, pathInSettingsMustBe, queryStringMustBe="*", useQueryStringMustBe=false, stickyQueryMustBe,
+    esSearchQueryMustBe, searchTermMustBe, contextualColumnsMustBe, generatorListMustBe, facetsStateMustBe)->
 
     state = list.getStateJSON()
 
@@ -121,3 +121,6 @@ class TestsUtils
 
     generatorListGot = state.generator_items_list
     expect(_.isEqual(generatorListGot, generatorListMustBe)).toBe(true)
+
+    facetsStateGot = state.facets_state
+    expect(_.isEqual(facetsStateGot, facetsStateMustBe)).toBe(true)

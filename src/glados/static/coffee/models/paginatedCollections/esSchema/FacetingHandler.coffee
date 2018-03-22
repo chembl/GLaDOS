@@ -374,6 +374,17 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
             return true
       return false
 
+    getSelectedFacetsKeys: ->
+
+      selectedKeys = []
+
+      if @faceting_data
+        for facet_key, facet_data of @faceting_data
+          if facet_data.selected
+            selectedKeys.push facet_key
+
+      return selectedKeys
+
     getSelectedFacetsFilterQuery: ()->
       selected_query = {
         bool:{ should:[] }
