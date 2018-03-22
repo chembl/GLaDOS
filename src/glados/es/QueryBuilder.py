@@ -1,4 +1,5 @@
-import json
+from glados.es_models import ElasticSearchMultiSearchQuery, do_multi_search
+
 
 # ----------------------------------------------------------------------------------------------------------------------
 # This class implements the functionalities to build an Elastic Search query
@@ -29,7 +30,7 @@ class QueryBuilder:
                     'type': 'most_fields',
                     'fields': QueryBuilder.TEXT_FIELDS_BOOSTS,
                     'query': query_string,
-                    'minimum_should_match': minimum_should_match,
+                    'minimum_should_match': '{0}%'.format(minimum_should_match),
                     'boost': 10,
                     'fuzziness': 'AUTO' if fuzzy else 0
                 }
@@ -39,7 +40,7 @@ class QueryBuilder:
                     'type': 'best_fields',
                     'fields': QueryBuilder.TEXT_FIELDS_BOOSTS,
                     'query': query_string,
-                    'minimum_should_match': minimum_should_match,
+                    'minimum_should_match': '{0}%'.format(minimum_should_match),
                     'boost': 2,
                     'fuzziness': 'AUTO' if fuzzy else 0
                 }
@@ -52,7 +53,7 @@ class QueryBuilder:
                         'type': 'phrase',
                         'fields': QueryBuilder.TEXT_FIELDS_BOOSTS,
                         'query': query_string,
-                        'minimum_should_match': minimum_should_match,
+                        'minimum_should_match': '{0}%'.format(minimum_should_match),
                         'boost': 1.5
                     }
                 }
@@ -63,7 +64,7 @@ class QueryBuilder:
                         'type': 'phrase_prefix',
                         'fields': QueryBuilder.TEXT_FIELDS_BOOSTS,
                         'query': query_string,
-                        'minimum_should_match': minimum_should_match
+                        'minimum_should_match': '{0}%'.format(minimum_should_match)
                     }
                 }
             )
@@ -90,7 +91,6 @@ class QueryBuilder:
     @staticmethod
     def get_es_query_for(chembl_ids, terms, filter_terms, sub_queries, fuzzy, minimum_should_match,
                          boosted_es_keys, cur_es_key, is_or=True):
-        delta = 0.3/len(chembl_ids)
         query_string = ' '.join(terms)
         filter_terms_joined = ' AND '.join(filter_terms)
         query = {
@@ -101,8 +101,7 @@ class QueryBuilder:
                         'should': [],
                         'must': []
                     },
-                },
-                'filter': []
+                }
             }
         }
         bool_query = 'should' if is_or else 'must'
@@ -114,22 +113,26 @@ class QueryBuilder:
                 terms, fuzzy, minimum_should_match
             )
 
-        chembl_ids_et = []
-        for c_id_i, i in chembl_ids:
-            chembl_ids_et.append('"'+c_id_i+'"'+'^'+(1.3-i*delta))
-        if len(chembl_ids_et) > 0:
-            query['bool']['must']['bool'][bool_query].append(
-                {
-                    'query_string': {
-                        'fields': QueryBuilder.TEXT_FIELDS_BOOSTS + QueryBuilder.ID_FIELDS_BOOSTS,
-                        'query': ' '.join(chembl_ids_et),
-                        'allow_leading_wildcard': False,
-                        'fuzziness': 0,
-                        'use_dis_max': False,
+        if chembl_ids:
+            delta = 0.3/len(chembl_ids)
+            chembl_ids_et = []
+            for c_id_i, i in chembl_ids:
+                chembl_ids_et.append('"'+c_id_i+'"'+'^'+(1.3-i*delta))
+            if len(chembl_ids_et) > 0:
+                query['bool']['must']['bool'][bool_query].append(
+                    {
+                        'query_string': {
+                            'fields': QueryBuilder.TEXT_FIELDS_BOOSTS + QueryBuilder.ID_FIELDS_BOOSTS,
+                            'query': ' '.join(chembl_ids_et),
+                            'allow_leading_wildcard': False,
+                            'fuzziness': 0,
+                            'use_dis_max': False,
+                        }
                     }
-                }
-            )
+                )
+
         if filter_terms_joined:
+            query['bool']['filter'] = []
             query['bool']['filter'].append(
                 {
                     'query_string': {
@@ -174,10 +177,10 @@ class QueryBuilder:
 
         next_terms = []
         cur_type = None
-        if _.has(cur_parsed_query, 'or'):
+        if 'or' in cur_parsed_query:
             next_terms = cur_parsed_query['or']
             cur_type = 'or'
-        if _.has(cur_parsed_query, 'and'):
+        if 'and' in cur_parsed_query:
             next_terms = cur_parsed_query['and']
             cur_type = 'and'
 
@@ -194,12 +197,12 @@ class QueryBuilder:
         )
 
     @staticmethod
-    def get_es_query_for_json_query(json_query, cur_es_key='', fuzzy=False, minimum_should_match='100%'):
+    def get_es_query_for_json_query(json_query, cur_es_key='', fuzzy=False, minimum_should_match=100):
         chembl_ids = []
         terms = []
         filter_terms = []
         boosted_es_keys = set()
-        es_query= QueryBuilder.build_parsed_query_recursive(
+        es_query = QueryBuilder.build_parsed_query_recursive(
             json_query, chembl_ids, terms, filter_terms, fuzzy, minimum_should_match, boosted_es_keys, cur_es_key
         )
         if not es_query:
@@ -208,4 +211,43 @@ class QueryBuilder:
             )
         return es_query
 
+    @staticmethod
+    def get_best_es_query(json_query, indexes: list, cur_es_key=None):
+        es_base_queries = []
+        cur_min_should_match = 100
 
+        while cur_min_should_match > 0:
+            es_query_i = QueryBuilder.get_es_query_for_json_query(json_query, cur_es_key, False,
+                                                                  cur_min_should_match)
+            es_base_queries.append(es_query_i)
+            cur_min_should_match -= 20
+
+        es_base_queries.append(
+            QueryBuilder.get_es_query_for_json_query(
+                json_query, cur_es_key, True, 40
+            )
+        )
+        queries = []
+        for index in indexes:
+            for es_query_i in es_base_queries:
+                queries.append(ElasticSearchMultiSearchQuery(index, {
+                    'size': 0,
+                    'query': es_query_i
+                }))
+        import time
+        t_ini = time.time()
+        print('Starting!')
+        results = do_multi_search(queries)['responses']
+        print(time.time()-t_ini)
+        best_queries = {}
+        for i, es_index_i in enumerate(indexes):
+            best_query_i = None
+            j = 0
+            while best_query_i is None and j < len(es_base_queries):
+                if results[i*len(es_base_queries) + j]['hits']['total'] > 0:
+                    best_query_i = es_base_queries[j]
+                j += 1
+            if best_query_i is None:
+                best_query_i = es_base_queries[0]
+            best_queries[es_index_i] = best_query_i
+        return best_queries
