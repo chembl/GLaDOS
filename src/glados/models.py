@@ -1,5 +1,5 @@
 from django.db import models
-from .es_models import TinyURLIndex
+from glados.es_models import TinyURLIndex
 
 
 class Acknowledgement(models.Model):
@@ -28,6 +28,7 @@ class Acknowledgement(models.Model):
 
   def __str__(self):
     return '%s: %s' % (self.dates, self.content)
+
 
 class FaqCategory(models.Model):
 
@@ -64,6 +65,7 @@ class Faq(models.Model):
   def __str__(self):
     return '%s' % (self.question)
 
+
 class WizardStep(models.Model):
 
   title = models.CharField(max_length=100)
@@ -72,6 +74,7 @@ class WizardStep(models.Model):
 class WizardOptionType(models.Model):
 
   name = models.CharField(max_length=20)
+
 
 class WizardOption(models.Model):
 
@@ -83,6 +86,7 @@ class WizardOption(models.Model):
   type = models.ForeignKey(WizardOptionType)
   image_url = models.CharField(max_length=400)
 
+
 class TinyURL(models.Model):
 
   long_url = models.TextField()
@@ -90,11 +94,11 @@ class TinyURL(models.Model):
 
   def indexing(self):
     obj = TinyURLIndex(
-      meta={'id': self.id},
+      meta={'id': self.hash},
       long_url=self.long_url,
       hash=self.hash,
     )
-    obj.save()
+    obj.save(refresh='wait_for')
     return obj.to_dict(include_meta=True)
 
 
