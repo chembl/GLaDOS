@@ -219,7 +219,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       if testMode or @getMeta('test_mode')
         return requestData
 
-      console.log 'FETCH!!!'
       # Call Backbone's fetch
       return Backbone.Collection.prototype.fetch.call(this, fetchESOptions)
 

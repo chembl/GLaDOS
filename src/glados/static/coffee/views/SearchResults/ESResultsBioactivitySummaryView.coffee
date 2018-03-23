@@ -115,11 +115,17 @@ glados.useNameSpace 'glados.views.SearchResults',
     setUpEmbedModal: ->
 
       alert 'set up embed modal'
+      currentStateString = JSON.stringify(@collection.getStateJSON())
+      base64StateString = btoa(currentStateString)
+
+      embedURLRelative = glados.views.SearchResults.ESResultsBioactivitySummaryView.EMBED_PATH_RELATIVE_GENERATOR
+        state: base64StateString
+      embedURL = "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#{embedURLRelative}"
       if not @embedModel?
-        @embedModel = glados.helpers.EmbedModalsHelper.initEmbedModal($(@el), 'hola')
+        @embedModel = glados.helpers.EmbedModalsHelper.initEmbedModal($(@el), embedURL)
       else
         @embedModel.set
-          embed_url: 'already_there'
+          embed_url: embedURL
 
       console.log 'collection: ', @collection
     #-------------------------------------------------------------------------------------------------------------------
@@ -172,5 +178,5 @@ glados.useNameSpace 'glados.views.SearchResults',
       @hideProgressElement()
 
 
-
+glados.views.SearchResults.ESResultsBioactivitySummaryView.EMBED_PATH_RELATIVE_GENERATOR = Handlebars.compile('#heatmap/state/{{state}}')
 
