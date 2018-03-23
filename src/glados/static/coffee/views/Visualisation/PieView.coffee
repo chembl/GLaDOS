@@ -326,60 +326,103 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 # RENDER SIMPLE PIE
 # -----------------------------------------------------------------------------------------------------------------
   renderSimplePie: (buckets) ->
-    values = []
-    labels = []
+    console.log 'buckets: ', buckets
+    thisView = @
 
-    bucketsIndex = _.indexBy(buckets, 'key')
-    for bucket in buckets
-      values.push bucket.doc_count
-      labels.push bucket.key
+    VISUALISATION_WIDTH = $(@el).width()
+    VISUALISATION_HEIGHT = VISUALISATION_WIDTH
+    MAX_VIS_WIDTH = Math.min(VISUALISATION_WIDTH, VISUALISATION_HEIGHT)
+    X_CENTER = VISUALISATION_WIDTH / 2
+    Y_CENTER = VISUALISATION_HEIGHT / 2
+    RADIUS = MAX_VIS_WIDTH / 2
 
-      col = [
-            glados.Settings.VIS_COLORS.TEAL3,
-            glados.Settings.VIS_COLORS.TEAL4,
-            glados.Settings.VIS_COLORS.TEAL5,
-            glados.Settings.VIS_COLORS.RED2,
-            glados.Settings.VIS_COLORS.RED3,
-            glados.Settings.VIS_COLORS.RED4,
-            glados.Settings.VIS_COLORS.PURPLE2,
-            glados.Settings.VIS_COLORS.BLUE2,
-            glados.Settings.VIS_COLORS.BLUE3,
-            glados.Settings.VIS_COLORS.BLUE4
-      ]
+    mainContainer = d3.select(@$vis_elem.get(0))
+    mainSVGContainer = mainContainer
+      .append('svg')
+        .attr('class', 'mainSVGContainer')
+        .attr('width', VISUALISATION_WIDTH)
+        .attr('height', VISUALISATION_HEIGHT)
 
-    data1 =
-      values: values
-      labels: labels
-      type: 'pie'
-      textinfo:'value'
-      marker:
-        colors: col
+    arcsContainer = mainSVGContainer.append('g')
 
-    data = [data1]
-    width = @$vis_elem.width()
-    minWidth = 400
-    if width < minWidth
-      width = minWidth
+    arcsContainer.append('rect')
+        .attr('height', VISUALISATION_HEIGHT)
+        .attr('width', VISUALISATION_WIDTH)
+        .attr('fill', 'white')
+        .classed('arcs-background', true)
 
-    layout =
-      height: width * (3/5)
-      width: width
-      margin:
-        l: 5
-        r: 5
-        b: 5
-        t: 40
-        pad: 4
-      legend:
-        orientation: 'h'
-      font:
-        family: "ChEMBL_HelveticaNeueLTPRo"
+    bucketSizes = (b.doc_count for b in buckets)
 
-    pieDiv = @$vis_elem.get(0)
-    Plotly.newPlot pieDiv, data, layout
+    pie = d3.layout.pie()
+      .sort(null)
 
-    pieDiv.on('plotly_click', (eventInfo) ->
-      clickedKey = eventInfo.points[0].label
-      link = bucketsIndex[clickedKey].link
-      glados.Utils.URLS.shortenLinkIfTooLongAndOpen(link)
-    )
+    arc = d3.svg.arc()
+    .innerRadius(0)
+    .outerRadius(RADIUS)
+
+    bucketsData = pie(bucketSizes)
+    for i in [0..buckets.length-1]
+      currentDatum = bucketsData[i]
+      currentBucket = buckets[i]
+      _.extend(currentDatum, currentBucket)
+
+
+
+
+#    values = []
+#    labels = []
+#
+#    bucketsIndex = _.indexBy(buckets, 'key')
+#    for bucket in buckets
+#      values.push bucket.doc_count
+#      labels.push bucket.key
+#
+#      col = [
+#            glados.Settings.VIS_COLORS.TEAL3,
+#            glados.Settings.VIS_COLORS.TEAL4,
+#            glados.Settings.VIS_COLORS.TEAL5,
+#            glados.Settings.VIS_COLORS.RED2,
+#            glados.Settings.VIS_COLORS.RED3,
+#            glados.Settings.VIS_COLORS.RED4,
+#            glados.Settings.VIS_COLORS.PURPLE2,
+#            glados.Settings.VIS_COLORS.BLUE2,
+#            glados.Settings.VIS_COLORS.BLUE3,
+#            glados.Settings.VIS_COLORS.BLUE4
+#      ]
+#
+#    data1 =
+#      values: values
+#      labels: labels
+#      type: 'pie'
+#      textinfo:'value'
+#      marker:
+#        colors: col
+#
+#    data = [data1]
+#    width = @$vis_elem.width()
+#    minWidth = 400
+#    if width < minWidth
+#      width = minWidth
+#
+#    layout =
+#      height: width * (3/5)
+#      width: width
+#      margin:
+#        l: 5
+#        r: 5
+#        b: 5
+#        t: 40
+#        pad: 4
+#      legend:
+#        orientation: 'h'
+#      font:
+#        family: "ChEMBL_HelveticaNeueLTPRo"
+#
+#    pieDiv = @$vis_elem.get(0)
+#    Plotly.newPlot pieDiv, data, layout
+#
+#    pieDiv.on('plotly_click', (eventInfo) ->
+#      clickedKey = eventInfo.points[0].label
+#      link = bucketsIndex[clickedKey].link
+#      glados.Utils.URLS.shortenLinkIfTooLongAndOpen(link)
+#    )
