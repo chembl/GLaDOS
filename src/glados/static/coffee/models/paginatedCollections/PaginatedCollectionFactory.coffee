@@ -24,13 +24,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         contextualProperties, searchTerm, stickyQuery, esSearchQuery)
 
       facetGroups = list.getFacetsGroups()
-
       facetsState = stateObject.facets_state
+
       if facetsState?
-        for fGroupKey, selectedKeys of facetsState.selected
+        for fGroupKey, selectedKeys of facetsState
+
+          originalFGroupState = facetsState[fGroupKey]
           facetingHandler = facetGroups[fGroupKey].faceting_handler
-          for key in selectedKeys
-            facetingHandler.toggleKeySelection(key)
+          facetingHandler.loadState(originalFGroupState)
 
       return list
 

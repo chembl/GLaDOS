@@ -37,19 +37,14 @@ class TestsUtils
   # it is meant to work only for a ES compound list
   @simulateFacetsESList = (list, dataURL, done) ->
 
-    console.log 'simulate facets es list'
-
     $.get dataURL, (testData) ->
 
-      console.log 'data received!'
       for item in testData
         aggData = item.aggData
         firstCall = item.firstCall
         for facetGroupKey, facetGroup of list.getFacetsGroups()
 
           facetGroup.faceting_handler.parseESResults(aggData, firstCall)
-
-      console.log 'list after data received! ', list
 
       done()
 
@@ -106,8 +101,7 @@ class TestsUtils
       else
         expect(oldValue).toBe(newValue)
 
-    console.log 'list: ', list
-    console.log 'list2: ', list2
+    facetGroupsMustBe = list.getFacetsGroups()
 
     facetGroupsGot = list2.getFacetsGroups()
     facetsState = state.facets_state
@@ -117,21 +111,12 @@ class TestsUtils
     for facetGroupKey, fGroup of facetGroupsGot
 
       facetingHandler = fGroup.faceting_handler
-      hasSelection = facetingHandler.hasSelection()
+      facetingHandlerStateGot = facetingHandler.getStateJSON()
 
-      console.log 'facetGroupKey: ', facetGroupKey
-      console.log 'facetsState.selected[facetGroupKey]: ', facetsState.selected[facetGroupKey]
-      if hasSelection
-        console.log 'has selection'
-        selectedFacetsMustBe = facetsState.selected[facetGroupKey]
-        selectedFacetsGot = facetingHandler.getSelectedFacetsKeys()
+      originalFacetingHandler = facetGroupsMustBe[facetGroupKey].faceting_handler
+      facetingHandlerStateMustBe = originalFacetingHandler.getStateJSON()
 
-        console.log 'selectedFacetsMustBe: ', selectedFacetsMustBe
-        console.log 'selectedFacetsGot: ', selectedFacetsGot
-        expect(_.isEqual(selectedFacetsMustBe, selectedFacetsGot)).toBe(true)
-      else
-        console.log 'no selection'
-        expect(facetsState.selected[facetGroupKey]?).toBe(false)
+      expect(_.isEqual(facetingHandlerStateGot, facetingHandlerStateMustBe)).toBe(true)
 
   @testSavesList = (list, pathInSettingsMustBe, queryStringMustBe="*", useQueryStringMustBe=false, stickyQueryMustBe,
     esSearchQueryMustBe, searchTermMustBe, contextualColumnsMustBe, generatorListMustBe)->
