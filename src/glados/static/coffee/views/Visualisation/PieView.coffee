@@ -275,31 +275,6 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
               x: 5
 
 # ----------------------------------------------------------------------------------------------------------------------
-#  qtips inner slices
-# ----------------------------------------------------------------------------------------------------------------------
-    arcs.each (d) ->
-      propName = thisView.xAxisPropName.label
-      for bucket in buckets
-        if bucket.doc_count == d.value
-           bucketCount = bucket.doc_count
-           bucketName = bucket.key
-
-      text = '<b>' + propName + '</b>' + ":  " + bucketName + \
-        '<br>' + '<b>' + "Count:  " + '</b>' + bucketCount
-      $(@).qtip
-        content:
-          text: text
-        style:
-          classes:'qtip-light'
-        position:
-          my: 'bottom left'
-          at: 'top right'
-          target: 'mouse'
-          adjust:
-            y: -5
-            x: 5
-
-# ----------------------------------------------------------------------------------------------------------------------
 #  legend
 # ----------------------------------------------------------------------------------------------------------------------
     legendConfig =
@@ -368,7 +343,6 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     bucketKeys = (b.key for b in buckets)
 
     pie = d3.layout.pie()
-      .sort(null)
 
     arc = d3.svg.arc()
     .innerRadius(0)
@@ -401,12 +375,35 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('class', 'arc-text')
       .attr('text-anchor', 'middle')
       .attr('alignment-baseline', 'middle')
-      .text((d) ->
-        console.log 'd: ', d.doc_count
-        d.doc_count
-      )
+      .text((d) -> d.doc_count )
       .attr('transform', (d) ->
         angle = Math.PI/2 + (d.endAngle + d.startAngle)/2
         x = -Math.cos(angle) * 2 * RADIUS / 3
         y = -Math.sin(angle) * 2 * RADIUS / 3
         'translate(' + x + ', ' + y + ')')
+
+# ----------------------------------------------------------------------------------------------------------------------
+#  qtips inner slices
+# ----------------------------------------------------------------------------------------------------------------------
+    arcs.each (d) ->
+      console.log 'd: ', d.endAngle - d.startAngle
+      key = d.key
+      count = d.doc_count
+      percentage = ((d.endAngle - d.startAngle) * 15.91549430919).toFixed(2);
+
+
+      text = '<b>' + percentage + '%: '+ key + '</b>' +
+        '<br>' + '<b>' + "Count:  " + '</b>' + count +
+        '<br>' + '<b>' + "Percentage:  " + '</b>' + percentage + '%'
+      $(@).qtip
+        content:
+          text: text
+        style:
+          classes:'qtip-light'
+        position:
+          my: 'bottom left'
+          at: 'top right'
+          target: 'mouse'
+          adjust:
+            y: -5
+            x: 5
