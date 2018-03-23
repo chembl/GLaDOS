@@ -114,6 +114,9 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     setUpEmbedModal: ->
 
+      if GlobalVariables['EMBEDED']
+        return
+        
       alert 'set up embed modal'
       currentStateString = JSON.stringify(@collection.getStateJSON())
       base64StateString = btoa(currentStateString)
@@ -121,6 +124,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       embedURLRelative = glados.views.SearchResults.ESResultsBioactivitySummaryView.EMBED_PATH_RELATIVE_GENERATOR
         state: base64StateString
       embedURL = "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#{embedURLRelative}"
+
       if not @embedModel?
         @embedModel = glados.helpers.EmbedModalsHelper.initEmbedModal($(@el), embedURL)
       else
@@ -178,5 +182,22 @@ glados.useNameSpace 'glados.views.SearchResults',
       @hideProgressElement()
 
 
-glados.views.SearchResults.ESResultsBioactivitySummaryView.EMBED_PATH_RELATIVE_GENERATOR = Handlebars.compile('#heatmap/state/{{state}}')
+glados.views.SearchResults.ESResultsBioactivitySummaryView.EMBED_PATH_RELATIVE_GENERATOR = Handlebars.compile('#view_for_collection/heatmap/state/{{state}}')
+
+glados.views.SearchResults.ESResultsBioactivitySummaryView.initEmbedded = (initFunctionParams) ->
+
+  console.log 'init embedded '
+  console.log 'initFunctionParams: ', initFunctionParams
+  encodedState = initFunctionParams.state
+  state = JSON.parse(atob(encodedState))
+
+  console.log 'state: ', state
+
+  list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFromState(state)
+  console.log 'list: ', list
+  new glados.views.SearchResults.ESResultsBioactivitySummaryView
+    collection: list
+    el: $('#BCK-embedded-content')
+
+  list.fetch()
 

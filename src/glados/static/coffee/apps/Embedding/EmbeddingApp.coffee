@@ -22,19 +22,21 @@ glados.useNameSpace 'glados.apps.Embedding',
         else
           successCallBack()
 
-    @loadHTMLSectionInScript: (inScriptConfig, initFunction) ->
+    @loadHTMLSectionInScript: (inScriptConfig, initFunction, initFunctionParams) ->
 
-      console.log 'HTML FROM SCRIPT'
       templateToLoad = inScriptConfig.script_id
       $contentFromScriptsContainer = $('#BCK-content-from-scripts')
       glados.Utils.fillContentForElement $contentFromScriptsContainer, {}, templateToLoad
       itemFromTemplateID = inScriptConfig.elem_id
-      $baseElement = $contentFromScriptsContainer.find("##{itemFromTemplateID}")
+      if not itemFromTemplateID?
+        $baseElement = $($contentFromScriptsContainer.html())
+      else
+        $baseElement = $contentFromScriptsContainer.find("##{itemFromTemplateID}")
 
       $embedContentContainer = $('#BCK-embedded-content')
       $embedContentContainer.append($baseElement)
 
-      initFunction()
+      initFunction(initFunctionParams)
       return
 
     @compoundReportCardBaseTemplate = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{Compound.reportCardPath}{{chembl_id}}"
@@ -212,22 +214,7 @@ glados.useNameSpace 'glados.apps.Embedding',
           template: "#{@tissueReportCardBaseTemplate} #TiAssociatedCompoundsCard"
           initFunction: TissueReportCardApp.initAssociatedCompounds
 
-    @requiredHTMLTemplatesURLSVisualisations:
-      documents_by_year_histogram:
-        initFunction: MainPageApp.initPapersPerYear
-        in_script:
-          script_id: 'Handlebars-MainPageLayout'
-          elem_id: 'PapersPerYearHistogram'
-      targets_by_protein_class:
-        initFunction: MainPageApp.initTargetsVisualisation
-        in_script:
-          script_id: 'Handlebars-MainPageLayout'
-          elem_id: 'BCK-TargetBrowserAsCircles'
-      max_phase_for_disease:
-        initFunction: MainPageApp.initMaxPhaseForDisease
-        in_script:
-          script_id: 'Handlebars-MainPageLayout'
-          elem_id: 'MaxPhaseForDisease'
+
 
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
@@ -247,6 +234,23 @@ glados.useNameSpace 'glados.apps.Embedding',
       'frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>'
       $embedContentContainer.html(mySong)
 
+    @requiredHTMLTemplatesURLSVisualisations:
+      documents_by_year_histogram:
+        initFunction: MainPageApp.initPapersPerYear
+        in_script:
+          script_id: 'Handlebars-MainPageLayout'
+          elem_id: 'PapersPerYearHistogram'
+      targets_by_protein_class:
+        initFunction: MainPageApp.initTargetsVisualisation
+        in_script:
+          script_id: 'Handlebars-MainPageLayout'
+          elem_id: 'BCK-TargetBrowserAsCircles'
+      max_phase_for_disease:
+        initFunction: MainPageApp.initMaxPhaseForDisease
+        in_script:
+          script_id: 'Handlebars-MainPageLayout'
+          elem_id: 'MaxPhaseForDisease'
+
     @initVisualisation: (visualisationPath) ->
 
       #I will use a template, just in case we need something more complex in the future
@@ -260,4 +264,20 @@ glados.useNameSpace 'glados.apps.Embedding',
         @loadHTMLSection(requiredHTMLURL, initFunction)
       else
         @loadHTMLSectionInScript(inScriptConfig, initFunction)
+
+    @requiredHTMLTemplatesURLSVisualisationsForCollection:
+      heatmap:
+        initFunction: glados.views.SearchResults.ESResultsBioactivitySummaryView.initEmbedded
+        in_script:
+          script_id: 'Handlebars-Common-ESResultsListBioactivityView'
+
+    @initVIewForCollection: (viewType, state) ->
+
+      embedConfig = @requiredHTMLTemplatesURLSVisualisationsForCollection[viewType]
+      initFunction = embedConfig.initFunction
+      inScriptConfig = embedConfig.in_script
+      initFunctionParams =
+        state: state
+
+      @loadHTMLSectionInScript(inScriptConfig, initFunction, initFunctionParams)
 
