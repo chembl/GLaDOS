@@ -17,22 +17,17 @@ glados.useNameSpace 'glados.models.paginatedCollections.StateSaving',
       #now add a serializable structure for the facets
       includeFacetsState = false
       facetGroups = @getFacetsGroups()
-      facetsState = {
-        selected: {}
-      }
+      facetsState = {}
 
       for facetGroupKey, fGroup of facetGroups
 
         facetingHandler = fGroup.faceting_handler
         hasSelection = facetingHandler.hasSelection()
-        if not hasSelection
-          continue
-
-        facetsState.selected[facetGroupKey] = facetingHandler.getSelectedFacetsKeys()
-        includeFacetsState = true
+        facetsState[facetGroupKey] = facetingHandler.getStateJSON()
+        includeFacetsState |= hasSelection
 
       if includeFacetsState
-        state.facets_state =  facetsState
+        state.facets_state = facetsState
 
       return state
 

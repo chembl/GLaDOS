@@ -112,11 +112,6 @@ describe "An elasticsearch collection", ->
       testFacetGroupKey1 = 'max_phase'
       testFacetGroupKey2 = 'molecule_properties.num_ro5_violations'
 
-      facetsStateMustBe =
-        selected:
-          max_phase: ["0"]
-          'molecule_properties.num_ro5_violations': ["0"]
-
       beforeEach ->
 
         esList.setMeta('esSearchQuery', esSearchQuery)
@@ -142,7 +137,6 @@ describe "An elasticsearch collection", ->
         searchTermMustBe=undefined,
         contextualColumnsMustBe=undefined,
         generatorListMustBe=undefined,
-        facetsStateMustBe
       )
 
       it 'creates a list from a state object', -> TestsUtils.testRestoredListIsEqualToOriginal(esList)

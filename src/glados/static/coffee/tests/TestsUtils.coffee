@@ -134,7 +134,7 @@ class TestsUtils
         expect(facetsState.selected[facetGroupKey]?).toBe(false)
 
   @testSavesList = (list, pathInSettingsMustBe, queryStringMustBe="*", useQueryStringMustBe=false, stickyQueryMustBe,
-    esSearchQueryMustBe, searchTermMustBe, contextualColumnsMustBe, generatorListMustBe, facetsStateMustBe)->
+    esSearchQueryMustBe, searchTermMustBe, contextualColumnsMustBe, generatorListMustBe)->
 
     state = list.getStateJSON()
 
@@ -155,8 +155,14 @@ class TestsUtils
     expect(_.isEqual(generatorListGot, generatorListMustBe)).toBe(true)
 
     facetsStateGot = state.facets_state
-    console.log 'facetsStateGot: ', facetsStateGot
-    expect(_.isEqual(facetsStateGot, facetsStateMustBe)).toBe(true)
+    originalFacetGroups = list.getFacetsGroups()
+
+    if facetsStateGot?
+      for fGroupKey, fGroupState of facetsStateGot
+        originalFacetingHandler = originalFacetGroups[fGroupKey].faceting_handler
+
+        fGroupStateMustBe = originalFacetingHandler.getStateJSON()
+        expect(_.isEqual(fGroupState, fGroupStateMustBe)).toBe(true)
 
   @testIteratesPages = (esList, pageSize, totalPages) ->
 

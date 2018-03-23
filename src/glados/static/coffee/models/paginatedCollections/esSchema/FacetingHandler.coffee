@@ -146,6 +146,19 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       @intervalsLimits = null
 
     # ------------------------------------------------------------------------------------------------------------------
+    # State Saving
+    # ------------------------------------------------------------------------------------------------------------------
+    getStateJSON: ->
+      console.log 'get faceting handler state!'
+      console.log @
+      console.log JSON.stringify(@)
+      console.log JSON.parse(JSON.stringify(@))
+      console.log '^^^'
+
+      state = JSON.parse(JSON.stringify(@))
+      return state
+
+    # ------------------------------------------------------------------------------------------------------------------
     # Query and Parse Facets to/from Elasticsearch
     # ------------------------------------------------------------------------------------------------------------------
 

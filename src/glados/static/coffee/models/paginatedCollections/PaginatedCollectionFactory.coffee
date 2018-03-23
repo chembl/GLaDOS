@@ -22,6 +22,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       list = @getNewESResultsListFor(settings, queryString, useQueryString, itemsList,
         contextualProperties, searchTerm, stickyQuery, esSearchQuery)
+
+      facetGroups = list.getFacetsGroups()
+
+      facetsState = stateObject.facets_state
+      if facetsState?
+        for fGroupKey, selectedKeys of facetsState.selected
+          facetingHandler = facetGroups[fGroupKey].faceting_handler
+          for key in selectedKeys
+            facetingHandler.toggleKeySelection(key)
+
       return list
 
     getNewESResultsListFor: (esIndexSettings, customQueryString='*', useCustomQueryString=false, itemsList,
