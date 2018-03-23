@@ -326,15 +326,28 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 # RENDER SIMPLE PIE
 # -----------------------------------------------------------------------------------------------------------------
   renderSimplePie: (buckets) ->
-    console.log 'buckets: ', buckets
+    thisView = @
+    thisView.$vis_elem.empty()
 
     VISUALISATION_WIDTH = $(@el).width()
     VISUALISATION_HEIGHT = VISUALISATION_WIDTH
     MAX_VIS_WIDTH = Math.min(VISUALISATION_WIDTH, VISUALISATION_HEIGHT)
     X_CENTER = VISUALISATION_WIDTH / 2
     Y_CENTER = VISUALISATION_HEIGHT / 2
-    PADDING = 100
+    PADDING = MAX_VIS_WIDTH * 0.1
     RADIUS = (MAX_VIS_WIDTH / 2) - PADDING
+    COLORS = [
+      glados.Settings.VIS_COLORS.TEAL3,
+      glados.Settings.VIS_COLORS.TEAL4,
+      glados.Settings.VIS_COLORS.TEAL5,
+      glados.Settings.VIS_COLORS.RED2,
+      glados.Settings.VIS_COLORS.RED3,
+      glados.Settings.VIS_COLORS.RED4,
+      glados.Settings.VIS_COLORS.PURPLE2,
+      glados.Settings.VIS_COLORS.BLUE2,
+      glados.Settings.VIS_COLORS.BLUE3,
+      glados.Settings.VIS_COLORS.BLUE4
+    ]
 
     mainContainer = d3.select(@$vis_elem.get(0))
     mainSVGContainer = mainContainer
@@ -352,6 +365,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
         .classed('arcs-background', true)
 
     bucketSizes = (b.doc_count for b in buckets)
+    bucketKeys = (b.key for b in buckets)
 
     pie = d3.layout.pie()
       .sort(null)
@@ -359,6 +373,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     arc = d3.svg.arc()
     .innerRadius(0)
     .outerRadius(RADIUS)
+
 
     bucketsData = pie(bucketSizes)
     for i in [0..buckets.length-1]
@@ -374,70 +389,12 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('transform', 'translate(' + X_CENTER + ', ' + Y_CENTER + ')')
         .on('click', (d) -> glados.Utils.URLS.shortenLinkIfTooLongAndOpen d.link)
 
+    color = d3.scale.ordinal()
+      .domain(bucketKeys)
+      .range(COLORS)
+
     arcs.append('path')
-    .attr('fill', 'red')
+    .attr('fill', (d) -> color(d.key))
     .attr('stroke-width', 1)
     .attr('stroke', 'white')
     .attr('d', arc)
-
-
-
-
-
-#    values = []
-#    labels = []
-#
-#    bucketsIndex = _.indexBy(buckets, 'key')
-#    for bucket in buckets
-#      values.push bucket.doc_count
-#      labels.push bucket.key
-#
-#      col = [
-#            glados.Settings.VIS_COLORS.TEAL3,
-#            glados.Settings.VIS_COLORS.TEAL4,
-#            glados.Settings.VIS_COLORS.TEAL5,
-#            glados.Settings.VIS_COLORS.RED2,
-#            glados.Settings.VIS_COLORS.RED3,
-#            glados.Settings.VIS_COLORS.RED4,
-#            glados.Settings.VIS_COLORS.PURPLE2,
-#            glados.Settings.VIS_COLORS.BLUE2,
-#            glados.Settings.VIS_COLORS.BLUE3,
-#            glados.Settings.VIS_COLORS.BLUE4
-#      ]
-#
-#    data1 =
-#      values: values
-#      labels: labels
-#      type: 'pie'
-#      textinfo:'value'
-#      marker:
-#        colors: col
-#
-#    data = [data1]
-#    width = @$vis_elem.width()
-#    minWidth = 400
-#    if width < minWidth
-#      width = minWidth
-#
-#    layout =
-#      height: width * (3/5)
-#      width: width
-#      margin:
-#        l: 5
-#        r: 5
-#        b: 5
-#        t: 40
-#        pad: 4
-#      legend:
-#        orientation: 'h'
-#      font:
-#        family: "ChEMBL_HelveticaNeueLTPRo"
-#
-#    pieDiv = @$vis_elem.get(0)
-#    Plotly.newPlot pieDiv, data, layout
-#
-#    pieDiv.on('plotly_click', (eventInfo) ->
-#      clickedKey = eventInfo.points[0].label
-#      link = bucketsIndex[clickedKey].link
-#      glados.Utils.URLS.shortenLinkIfTooLongAndOpen(link)
-#    )
