@@ -396,3 +396,17 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     arcs.append('path')
     .attr('fill', (d) -> color(d.key))
     .attr('d', arc)
+
+    arcs.append('text')
+      .attr('class', 'arc-text')
+      .attr('text-anchor', 'middle')
+      .attr('alignment-baseline', 'middle')
+      .text((d) ->
+        console.log 'd: ', d.doc_count
+        d.doc_count
+      )
+      .attr('transform', (d) ->
+        angle = Math.PI/2 + (d.endAngle + d.startAngle)/2
+        x = -Math.cos(angle) * 2 * RADIUS / 3
+        y = -Math.sin(angle) * 2 * RADIUS / 3
+        'translate(' + x + ', ' + y + ')')
