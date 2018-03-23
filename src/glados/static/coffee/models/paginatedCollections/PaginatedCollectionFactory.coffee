@@ -14,14 +14,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       settings = glados.Utils.getNestedValue(glados.models.paginatedCollections.Settings, basicSettingsPath)
       queryString = stateObject.custom_query_string
       useQueryString = stateObject.use_custom_query_string
-      esSearchQuery = stateObject.esSearchQuery
+      searchESQuery = stateObject.searchESQuery
       stickyQuery = stateObject.sticky_query
       itemsList = stateObject.generator_items_list
       contextualProperties = stateObject.contextual_properties
       searchTerm = stateObject.search_term
 
       list = @getNewESResultsListFor(settings, queryString, useQueryString, itemsList,
-        contextualProperties, searchTerm, stickyQuery, esSearchQuery)
+        contextualProperties, searchTerm, stickyQuery, searchESQuery)
 
       facetGroups = list.getFacetsGroups()
       facetsState = stateObject.facets_state
@@ -36,7 +36,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return list
 
     getNewESResultsListFor: (esIndexSettings, customQueryString='*', useCustomQueryString=false, itemsList,
-      contextualProperties, searchTerm, stickyQuery, esSearchQuery) ->
+      contextualProperties, searchTerm, stickyQuery, searchESQuery) ->
 
       IndexESPagQueryCollection = glados.models.paginatedCollections.ESPaginatedQueryCollection\
       .extend(glados.models.paginatedCollections.SelectionFunctions)
@@ -93,7 +93,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             disable_cache_on_download: esIndexSettings.DISABLE_CACHE_ON_DOWNLOAD
             custom_possible_card_sizes_struct: esIndexSettings.POSSIBLE_CARD_SIZES_STRUCT
             settings_path: esIndexSettings.PATH_IN_SETTINGS
-            esSearchQuery: esSearchQuery
+            searchESQuery: searchESQuery
 
           if @getMeta('enable_similarity_maps') or @getMeta('enable_substructure_highlighting')
             @initReferenceStructureFunctions()

@@ -273,6 +273,7 @@ glados.useNameSpace 'glados.apps.Embedding',
 
     @initVIewForCollection: (viewType, state) ->
 
+      console.log 'AAA received state: ', state
       embedConfig = @requiredHTMLTemplatesURLSVisualisationsForCollection[viewType]
       initFunction = embedConfig.initFunction
       inScriptConfig = embedConfig.in_script

@@ -116,15 +116,19 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       if GlobalVariables['EMBEDED']
         return
-        
+
       alert 'set up embed modal'
+      console.log 'AAA STATE: ', @collection.getStateJSON()
+      console.log 'AAA list: ', @collection
       currentStateString = JSON.stringify(@collection.getStateJSON())
       base64StateString = btoa(currentStateString)
 
       embedURLRelative = glados.views.SearchResults.ESResultsBioactivitySummaryView.EMBED_PATH_RELATIVE_GENERATOR
-        state: base64StateString
+        state: encodeURIComponent(base64StateString)
       embedURL = "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#{embedURLRelative}"
 
+      console.log 'AAA base64StateString: ', base64StateString
+      console.log 'AAA embedURL: ', embedURL
       if not @embedModel?
         @embedModel = glados.helpers.EmbedModalsHelper.initEmbedModal($(@el), embedURL)
       else

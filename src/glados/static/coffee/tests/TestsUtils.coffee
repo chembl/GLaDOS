@@ -129,7 +129,7 @@ class TestsUtils
 
     stickyQueryGot = state.sticky_query
     expect(_.isEqual(stickyQueryGot, stickyQueryMustBe)).toBe(true)
-    expect(_.isEqual(state.esSearchQuery, esSearchQueryMustBe)).toBe(true)
+    expect(_.isEqual(state.searchESQuery, esSearchQueryMustBe)).toBe(true)
 
     expect(state.search_term).toBe(searchTermMustBe)
 

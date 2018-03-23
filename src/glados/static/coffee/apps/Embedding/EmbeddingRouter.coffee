@@ -13,4 +13,4 @@ glados.useNameSpace 'glados.apps.Embedding',
     initVisualisation: (visualisationPath) ->
       glados.apps.Embedding.EmbeddingApp.initVisualisation(visualisationPath)
     initVIewForCollection: (viewType, state) ->
-      glados.apps.Embedding.EmbeddingApp.initVIewForCollection(viewType, state)
+      glados.apps.Embedding.EmbeddingApp.initVIewForCollection(viewType, decodeURIComponent(state))
