@@ -21,8 +21,6 @@ describe "An elasticsearch collection", ->
     it 'starts with all facets unselected', ->
 
       facetGroups = esList.getFacetsGroups()
-      console.log 'facetGroups: ', facetGroups
-      console.log 'esList: ', esList
 
       for fGroupKey, fGroup of facetGroups
 
@@ -109,10 +107,7 @@ describe "An elasticsearch collection", ->
     describe 'After selecting multiple facets', ->
 
       beforeAll ->
-
-        esList = glados.models.paginatedCollections.PaginatedCollectionFactory.getAllESResultsListDict()[\
-        glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND.KEY_NAME
-        ]
+        esList.clearAllFacetsSelections()
 
       testFacetGroupKey1 = 'max_phase'
       testFacetGroupKey2 = 'molecule_properties.num_ro5_violations'
