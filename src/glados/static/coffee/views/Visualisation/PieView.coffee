@@ -327,14 +327,14 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 # -----------------------------------------------------------------------------------------------------------------
   renderSimplePie: (buckets) ->
     console.log 'buckets: ', buckets
-    thisView = @
 
     VISUALISATION_WIDTH = $(@el).width()
     VISUALISATION_HEIGHT = VISUALISATION_WIDTH
     MAX_VIS_WIDTH = Math.min(VISUALISATION_WIDTH, VISUALISATION_HEIGHT)
     X_CENTER = VISUALISATION_WIDTH / 2
     Y_CENTER = VISUALISATION_HEIGHT / 2
-    RADIUS = MAX_VIS_WIDTH / 2
+    PADDING = 100
+    RADIUS = (MAX_VIS_WIDTH / 2) - PADDING
 
     mainContainer = d3.select(@$vis_elem.get(0))
     mainSVGContainer = mainContainer
@@ -365,6 +365,21 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       currentDatum = bucketsData[i]
       currentBucket = buckets[i]
       _.extend(currentDatum, currentBucket)
+
+    arcs = arcsContainer.selectAll('g.arc')
+      .data(bucketsData)
+      .enter()
+      .append('g')
+      .attr('class', 'arc')
+        .attr('transform', 'translate(' + X_CENTER + ', ' + Y_CENTER + ')')
+        .on('click', (d) -> glados.Utils.URLS.shortenLinkIfTooLongAndOpen d.link)
+
+    arcs.append('path')
+    .attr('fill', 'red')
+    .attr('stroke-width', 1)
+    .attr('stroke', 'white')
+    .attr('d', arc)
+
 
 
 
