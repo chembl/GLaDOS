@@ -395,6 +395,4 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     arcs.append('path')
     .attr('fill', (d) -> color(d.key))
-    .attr('stroke-width', 1)
-    .attr('stroke', 'white')
     .attr('d', arc)
