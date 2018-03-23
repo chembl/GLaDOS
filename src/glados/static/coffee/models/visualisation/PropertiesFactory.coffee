@@ -121,6 +121,12 @@ glados.useNameSpace 'glados.models.visualisation',
     Target:
       esIndex:'chembl_target'
       Properties:
+        ACTIVITY_TYPES:
+          propName: 'type'
+          label: 'Types'
+        ASSOCIATED_ASSAYS:
+          propName: 'type'
+          label: 'Types'
         CHEMBL_ID:
           propName:'target_chembl_id'
           label: 'CHEMBL_ID'

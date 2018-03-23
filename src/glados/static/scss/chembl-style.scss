@@ -3557,24 +3557,31 @@ $chembl-header-height: 52.245px;
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
-.pie-content {
-  .arc {
-    text {
-      fill: #494949;
-      font-size: 80%;
-      font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif
+.simple-pie-container {
+  .pie-content {
+    margin: 0;
+    background-color: white;
+    .arc {
+      text {
+        fill: #494949;
+        font-size: 80%;
+        font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif
+      }
+    }
+    .arc:hover {
+      path {
+        opacity: 0.7;
+        stroke: white;
+        stroke-width: 2px;
+        transition: all 100ms ease-in-out;
+      }
+      text {
+        font-size: 100%;
+      }
     }
   }
-  .arc:hover {
-    path {
-      opacity: 0.7;
-      stroke: white;
-      stroke-width: 2px;
-      transition: all 100ms ease-in-out;
-    }
-    text {
-      font-size: 100%;
-    }
+  .simple-pie-legend {
+    border: solid 1px red;
   }
 }
 

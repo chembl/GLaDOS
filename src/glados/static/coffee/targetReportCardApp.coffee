@@ -133,11 +133,14 @@ class TargetReportCardApp extends glados.ReportCardApp
 
     targetChemblID = glados.Utils.URLS.getCurrentModelChemblID()
     bioactivities = TargetReportCardApp.getAssociatedBioactivitiesAgg(targetChemblID)
+    bioactivitiesProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Target', 'ACTIVITY_TYPES')
 
     pieConfig =
       x_axis_prop_name: 'types'
       title: gettext('glados_target__associated_activities_pie_title_base') + targetChemblID
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
+      properties:
+        bioactivities: bioactivitiesProp
 
 
     viewConfig =
@@ -163,12 +166,14 @@ class TargetReportCardApp extends glados.ReportCardApp
 
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     associatedAssays = TargetReportCardApp.getAssociatedAssaysAgg(chemblID)
-    console.log chemblID
+    associatedAssaysProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Target', 'ASSOCIATED_ASSAYS')
 
     pieConfig =
       x_axis_prop_name: 'types'
       title: gettext('glados_target__associated_assays_pie_title_base') + chemblID
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
+      properties:
+        associated_assays: associatedAssaysProp
 
     viewConfig =
       pie_config: pieConfig

@@ -5,6 +5,8 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     @config = arguments[0].config
     @xAxisAggName = @config.x_axis_prop_name
+#    @xAxisProp = @config.properties[@xAxisAggName]
+    console.log '@xAxisAggName: ', @xAxisAggName
     @model.on 'change', @render, @
     @$vis_elem = $(@el).find('.BCK-pie-container')
     updateViewProxy = @setUpResponsiveRender()
@@ -304,6 +306,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     thisView = @
     thisView.$vis_elem.empty()
 
+
     VISUALISATION_WIDTH = $(@el).width()
     VISUALISATION_HEIGHT = VISUALISATION_WIDTH
     MAX_VIS_WIDTH = Math.min(VISUALISATION_WIDTH, VISUALISATION_HEIGHT)
@@ -333,16 +336,11 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     arcsContainer = mainSVGContainer.append('g')
 
-    arcsContainer.append('rect')
-        .attr('height', VISUALISATION_HEIGHT)
-        .attr('width', VISUALISATION_WIDTH)
-        .attr('fill', 'white')
-        .classed('arcs-background', true)
-
     bucketSizes = (b.doc_count for b in buckets)
     bucketKeys = (b.key for b in buckets)
 
     pie = d3.layout.pie()
+      .sort(null)
 
     arc = d3.svg.arc()
     .innerRadius(0)
@@ -386,13 +384,11 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 #  qtips inner slices
 # ----------------------------------------------------------------------------------------------------------------------
     arcs.each (d) ->
-      console.log 'd: ', d.endAngle - d.startAngle
       key = d.key
       count = d.doc_count
       percentage = ((d.endAngle - d.startAngle) * 15.91549430919).toFixed(2);
 
-
-      text = '<b>' + percentage + '%: '+ key + '</b>' +
+      text = '<b>' + key + '</b>' +
         '<br>' + '<b>' + "Count:  " + '</b>' + count +
         '<br>' + '<b>' + "Percentage:  " + '</b>' + percentage + '%'
       $(@).qtip
@@ -407,3 +403,15 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
           adjust:
             y: -5
             x: 5
+
+# ----------------------------------------------------------------------------------------------------------------------
+#  legend
+# ----------------------------------------------------------------------------------------------------------------------
+    legendConfig =
+      columns_layout: true
+      hide_title: true
+
+    legendElem = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
+#    glados.Utils.renderLegendForProperty(@splitSeriesPropName, undefined, legendElem, enableSelection=false, legendConfig)
+    $(thisView.el).find('.BCK-CompResultsGraphLegendContainer').css('max-height', VISUALISATION_WIDTH * 0.2);
+
