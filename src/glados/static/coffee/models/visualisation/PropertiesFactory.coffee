@@ -3,6 +3,15 @@ glados.useNameSpace 'glados.models.visualisation',
     Compound:
       esIndex:'chembl_molecule'
       Properties:
+        RELATED_ASSAYS:
+          propName: 'type'
+          label: 'Types'
+        RELATED_TARGETS:
+          propName: 'type'
+          label: 'Types'
+        RELATED_ACTIVITIES:
+          propName: 'type'
+          label: 'Types'
         CHEMBL_ID:
           propName:'molecule_chembl_id'
           label: 'CHEMBL_ID'
