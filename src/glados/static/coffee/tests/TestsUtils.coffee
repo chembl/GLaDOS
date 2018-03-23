@@ -37,14 +37,19 @@ class TestsUtils
   # it is meant to work only for a ES compound list
   @simulateFacetsESList = (list, dataURL, done) ->
 
+    console.log 'simulate facets es list'
+
     $.get dataURL, (testData) ->
 
+      console.log 'data received!'
       for item in testData
         aggData = item.aggData
         firstCall = item.firstCall
         for facetGroupKey, facetGroup of list.getFacetsGroups()
 
           facetGroup.faceting_handler.parseESResults(aggData, firstCall)
+
+      console.log 'list after data received! ', list
 
       done()
 
@@ -152,3 +157,19 @@ class TestsUtils
     facetsStateGot = state.facets_state
     console.log 'facetsStateGot: ', facetsStateGot
     expect(_.isEqual(facetsStateGot, facetsStateMustBe)).toBe(true)
+
+  @testIteratesPages = (esList, pageSize, totalPages) ->
+
+    for pageNumber in [1..totalPages]
+      requestData = esList.setPage(pageNumber, doFetch=true, testMode=true)
+      expect(requestData['from']).toBe(pageSize * (pageNumber - 1))
+      expect(requestData['size']).toBe(pageSize)
+
+  @testIteratesPagesWithDifferentPageSizes = (esList, totalRecords) ->
+    esList.setMeta('total_records', totalRecords)
+
+    for pageSize in [1..totalRecords]
+      esList.setMeta('page_size', pageSize)
+      totalPages = Math.ceil(totalRecords / pageSize)
+      esList.setMeta('total_pages', totalPages)
+      TestsUtils.testIteratesPages(esList, pageSize, totalPages)

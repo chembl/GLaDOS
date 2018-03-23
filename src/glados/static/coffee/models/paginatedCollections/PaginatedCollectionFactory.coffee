@@ -35,7 +35,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       .extend(glados.models.paginatedCollections.StateSaving.ESCollectionStateSavingFunctions).extend
         model: esIndexSettings.MODEL
 
-
         initialize: ->
 
           @meta =
@@ -47,7 +46,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             current_page: 1
             to_show: []
             id_column: esIndexSettings.ID_COLUMN
-            facets_groups: esIndexSettings.FACETS_GROUPS
+            facets_groups: glados.models.paginatedCollections.esSchema.FacetingHandler.initFacetGroups(esIndexSettings.FACETS_GROUPS)
             columns: esIndexSettings.COLUMNS
             download_columns: esIndexSettings.DOWNLOAD_COLUMNS
             columns_description: esIndexSettings.COLUMNS_DESCRIPTION

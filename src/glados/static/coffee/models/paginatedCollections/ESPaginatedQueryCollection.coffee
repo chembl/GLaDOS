@@ -190,6 +190,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     # Prepares an Elastic Search query to search in all the fields of a document in a specific index
     fetch: (options, testMode=false) ->
+
       @trigger('before_fetch_elastic')
       @url = @getURL()
 
@@ -215,9 +216,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         _.extend(fetchESOptions, options)
       @loadFacetGroups() unless testMode or @isStreaming()
 
-      if testMode
+      if testMode or @getMeta('test_mode')
         return requestData
 
+      console.log 'FETCH!!!'
       # Call Backbone's fetch
       return Backbone.Collection.prototype.fetch.call(this, fetchESOptions)
 
