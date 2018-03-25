@@ -154,7 +154,6 @@ class QueryBuilder:
             # if cur_parsed_query['chembl_entity'] and cur_parsed_query['chembl_entity'] in 'glados.Settings.SEARCH_PATH_2_ES_KEY':
             #     boosted_es_keys.add('glados.Settings.SEARCH_PATH_2_ES_KEY[cur_parsed_query['chembl_entity']]')
             #     return None
-            print(cur_parsed_query.keys())
             if cur_parsed_query['include_in_query']:
                 if cur_parsed_query['exact_match_term']:
                     terms.append(cur_parsed_query['term'])
@@ -230,24 +229,33 @@ class QueryBuilder:
         queries = []
         for index in indexes:
             for es_query_i in es_base_queries:
+                # it is necessary to request at least 1 document to get the max_score value
                 queries.append(ElasticSearchMultiSearchQuery(index, {
-                    'size': 0,
+                    'size': 1,
+                    '_source': ['_id'],
                     'query': es_query_i
                 }))
-        import time
-        t_ini = time.time()
-        print('Starting!')
         results = do_multi_search(queries)['responses']
-        print(time.time()-t_ini)
         best_queries = {}
         for i, es_index_i in enumerate(indexes):
             best_query_i = None
+            best_query_i_total = 0
+            best_query_i_score = 0
             j = 0
             while best_query_i is None and j < len(es_base_queries):
                 if results[i*len(es_base_queries) + j]['hits']['total'] > 0:
                     best_query_i = es_base_queries[j]
+                    best_query_i_total = results[i * len(es_base_queries) + j]['hits']['total']
+                    best_query_i_score = results[i * len(es_base_queries) + j]['hits']['max_score']
                 j += 1
             if best_query_i is None:
                 best_query_i = es_base_queries[0]
-            best_queries[es_index_i] = best_query_i
+            best_queries[es_index_i] = {
+                'query': best_query_i,
+                'total': best_query_i_total,
+                'max_score': best_query_i_score
+            }
+        sorted_keys_by_score = sorted(best_queries.items(), key=lambda k_v: k_v[1]['max_score'], reverse=True)
+        import pprint
+        pprint.pprint(sorted_keys_by_score)
         return best_queries
