@@ -198,27 +198,38 @@ SearchModel = Backbone.Model.extend
     
   parseQueryString: (rawQueryString)->
 
-    done_callback = (parsedQueryJsonStr)->
-      parsedQuery = {'or':[]}
-      if parsedQueryJsonStr.trim()
-        parsedQuery = JSON.parse(parsedQueryJsonStr)
+    done_callback = (serverJsonResponse)->
+      jsonResponse = JSON.parse(serverJsonResponse)
+      parsedQuery = jsonResponse['parsed_query']
+      bestESQueries = jsonResponse['best_es_base_queries']
       expressionStr = @readParsedQueryRecursive(parsedQuery)
       @set('queryString', expressionStr)
       @set('jsonQuery', parsedQuery)
+      @set('bestESQueries', bestESQueries)
+
+    indexes_names = []
+    for resource_name, resource_es_collection of @getResultsListsDict()
+      indexes_names.push resource_es_collection.getMeta('index_name')
+
 
     ajaxDeferred = glados.doCSRFPost glados.Settings.SEARCH_RESULTS_PARSER_ENDPOINT, {
         query_string: rawQueryString
+        es_indexes: indexes_names.join(',')
+        selected_es_index: null
     }
     ajaxDeferred.done(done_callback.bind(@))
     return ajaxDeferred
 
   __search: ()->
+    bestESQueries = @get('bestESQueries')
     rls_dict = @getResultsListsDict()
     for resource_name, resource_es_collection of rls_dict
-      # Skips the search on non selected entities
-      if @selected_es_entity and @selected_es_entity != resource_name
-        continue
-      resource_es_collection.search(@get('jsonQuery'))
+      indexName = resource_es_collection.getMeta('index_name')
+      resource_es_collection.search bestESQueries[indexName].query
+      resource_es_collection.setMeta('max_score', bestESQueries[indexName].max_score)
+      resource_es_collection.setMeta('total_records', bestESQueries[indexName].total)
+      console.warn(resource_es_collection.getMeta('max_score'), resource_es_collection.getMeta('total_records'))
+    @trigger('updated_search_and_scores')
 
   # coordinates the search across the different results lists
   search: (rawQueryString, selected_es_entity) ->
