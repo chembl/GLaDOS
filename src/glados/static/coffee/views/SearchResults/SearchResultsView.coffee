@@ -40,8 +40,8 @@ glados.useNameSpace 'glados.views.SearchResults',
           resultsBrowserI.render()
           @browsersDict[resourceName] = resultsBrowserI
           @$searchResultsListsContainersDict[resourceName] = $('#'+resultsListViewID + '-container')
-          resultsListsDict[resourceName].on('score_and_records_update', @sortResultsListsViews, @)
-          resultsListsDict[resourceName].on('score_and_records_update', @renderTabs, @)
+      @model.on('updated_search_scores', @sortResultsListsViews, @)
+      @model.on('updated_search_scores', @renderTabs, @)
 
       @renderTabs()
       @showSelectedResourceOnly()
