@@ -587,9 +587,7 @@ class TermsVisitor(PTNodeVisitor):
 def parse_query_str(query_string: str):
     if len(query_string.strip()) == 0:
         return {}
-    print(query_string)
     query_string = re.sub(r'[\s&&[^\n]]+', ' ', query_string)
-    print(query_string)
     pt = parser.parse(query_string)
     result = arpeggio.visit_parse_tree(pt, TermsVisitor())
     return result
@@ -603,11 +601,11 @@ def parse_url_search(request):
         indexes_str = request.POST.get('es_indexes', '')
         indexes = indexes_str.split(',')
         selected_es_index = request.POST.get('selected_es_index', None)
-        json_parsed_query = parse_query_str(query_string)
-        best_queries = QueryBuilder.get_best_es_query(json_parsed_query, indexes, selected_es_index)
+        parsed_query = parse_query_str(query_string)
+        best_queries = QueryBuilder.get_best_es_query(parsed_query, indexes, selected_es_index)
 
         response_dict = {
-            'json_parsed_query': json_parsed_query,
+            'parsed_query': parsed_query,
             'best_es_base_queries': best_queries
         }
 
