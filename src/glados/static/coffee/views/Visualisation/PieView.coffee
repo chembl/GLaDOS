@@ -297,11 +297,10 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
 
     VISUALISATION_WIDTH = $(@el).width()
-    TITLE_Y = 60
-    VISUALISATION_HEIGHT = (VISUALISATION_WIDTH / 2) + TITLE_Y
+    VISUALISATION_HEIGHT = VISUALISATION_WIDTH * 0.7
     MAX_VIS_WIDTH = Math.min(VISUALISATION_WIDTH, VISUALISATION_HEIGHT)
     X_CENTER = VISUALISATION_WIDTH / 2
-    Y_CENTER = (VISUALISATION_HEIGHT / 2) + TITLE_Y
+    Y_CENTER = (VISUALISATION_HEIGHT / 2)
     PADDING = MAX_VIS_WIDTH * 0.1
     RADIUS = (MAX_VIS_WIDTH / 2) - PADDING
 
@@ -318,7 +317,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       .append('svg')
         .attr('class', 'mainSVGContainer')
         .attr('width', VISUALISATION_WIDTH)
-        .attr('height', VISUALISATION_HEIGHT + TITLE_Y)
+        .attr('height', VISUALISATION_HEIGHT)
 
     arcsContainer = mainSVGContainer.append('g')
 
