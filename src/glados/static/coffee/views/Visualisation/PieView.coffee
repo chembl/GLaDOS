@@ -357,7 +357,9 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     .attr('fill', (d) -> color(d.key))
     .attr('d', arc)
 
-    arcs.append('text')
+
+#   labels on slices
+    texts = arcs.append('text')
       .attr('class', 'arc-text')
       .attr('text-anchor', 'middle')
       .attr('alignment-baseline', 'middle')
@@ -367,6 +369,8 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
         x = -Math.cos(angle) * 2 * RADIUS / 3
         y = -Math.sin(angle) * 2 * RADIUS / 3
         'translate(' + x + ', ' + y + ')')
+
+    thisView.checkIfNeedsToHideText(arcs, texts)
 
 #   legend
     legendConfig =
@@ -399,5 +403,12 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
             y: -5
             x: 5
 
+  checkIfNeedsToHideText: (arcs, texts) ->
+    arcs = arcs[0]
+    texts = texts[0]
+
+    for i in [0..arcs.length - 1]
+      if texts[i].getBBox().width >= arcs[i].getBBox().width * 0.3
+        console.log 'texto por borrar', $(arcs[i]).find('text').hide()
 
 
