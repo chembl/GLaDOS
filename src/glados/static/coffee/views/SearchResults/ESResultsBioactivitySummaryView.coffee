@@ -116,10 +116,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       if GlobalVariables['EMBEDED']
         return
-
-      alert 'set up embed modal'
-      console.log 'AAA STATE: ', @collection.getStateJSON()
-      console.log 'AAA list: ', @collection
+        
       currentStateString = JSON.stringify(@collection.getStateJSON())
       base64StateString = btoa(currentStateString)
 
@@ -127,15 +124,21 @@ glados.useNameSpace 'glados.views.SearchResults',
         state: encodeURIComponent(base64StateString)
       embedURL = "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#{embedURLRelative}"
 
-      console.log 'AAA base64StateString: ', base64StateString
-      console.log 'AAA embedURL: ', embedURL
       if not @embedModel?
         @embedModel = glados.helpers.EmbedModalsHelper.initEmbedModal($(@el), embedURL)
       else
         @embedModel.set
           embed_url: embedURL
 
-      console.log 'collection: ', @collection
+      # shorten the url, but in any case the original one is already shown
+      getShortenedURL = glados.Utils.URLS.getShortenedEmbebURLPromise(embedURL)
+      thisView = @
+      getShortenedURL.then (data) ->
+        newEmbedURL = glados.Settings.SHORTENED_EMBED_URL_GENERATOR
+          hash: encodeURIComponent(data.hash)
+        thisView.embedModel.set
+          embed_url: newEmbedURL
+
     #-------------------------------------------------------------------------------------------------------------------
     # Get items to generate matrix
     #-------------------------------------------------------------------------------------------------------------------

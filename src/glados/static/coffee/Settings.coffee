@@ -297,6 +297,9 @@ glados.loadSearchResultsURLS = ()->
   glados.Settings.SHORTENED_URL_GENERATOR =
   Handlebars.compile("#{glados.Settings.GLADOS_BASE_PATH_REL}#{glados.Settings.NO_SIDE_NAV_PLACEHOLDER}/tiny/{{{hash}}}")
 
+  glados.Settings.SHORTENED_EMBED_URL_GENERATOR =
+  Handlebars.compile("#{glados.Settings.GLADOS_BASE_URL_FULL}embed/tiny/{{{hash}}}")
+
   glados.Settings.ENTITY_BROWSERS_URL_TEMPLATE = glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL +
     "browse/{{entity}}{{#if filter}}/filter/{{filter}}{{/if}}"
   glados.Settings.ENTITY_BROWSERS_URL_GENERATOR = Handlebars.compile(glados.Settings.ENTITY_BROWSERS_URL_TEMPLATE)

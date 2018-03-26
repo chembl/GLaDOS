@@ -669,11 +669,16 @@ glados.useNameSpace 'glados',
             checkIfURLReady = $.getJSON("#{glados.Settings.EXTEND_URLS_ENDPOINT_URL}/#{hashGot}")
             checkIfURLReady.then openIfReady
 
-
-
-
         else
           window.open url
+
+      getShortenedEmbebURLPromise: (url) ->
+
+        urlToShorten = url.match(glados.Settings.SHORTENING_MATCH_REPEXG)[0]
+        paramsDict =
+          long_url: urlToShorten
+
+        return glados.doCSRFPost(glados.Settings.SHORTEN_URLS_ENDPOINT, paramsDict)
 
       shortenHTMLLinkIfNecessary: ($anchor) ->
         if $anchor.attr('data-shortening-checked') != 'yes'
