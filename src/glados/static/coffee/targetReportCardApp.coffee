@@ -140,7 +140,7 @@ class TargetReportCardApp extends glados.ReportCardApp
       title: gettext('glados_target__associated_activities_pie_title_base') + targetChemblID
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
       properties:
-        bioactivities: bioactivitiesProp
+        types: bioactivitiesProp
 
 
     viewConfig =
@@ -173,7 +173,7 @@ class TargetReportCardApp extends glados.ReportCardApp
       title: gettext('glados_target__associated_assays_pie_title_base') + chemblID
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
       properties:
-        associated_assays: associatedAssaysProp
+        types: associatedAssaysProp
 
     viewConfig =
       pie_config: pieConfig

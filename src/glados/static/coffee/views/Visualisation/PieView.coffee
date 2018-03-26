@@ -5,8 +5,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     @config = arguments[0].config
     @xAxisAggName = @config.x_axis_prop_name
-#    @xAxisProp = @config.properties[@xAxisAggName]
-    console.log '@xAxisAggName: ', @xAxisAggName
+    @xAxisPropName = @config.properties[@xAxisAggName]
     @model.on 'change', @render, @
     @$vis_elem = $(@el).find('.BCK-pie-container')
     updateViewProxy = @setUpResponsiveRender()
@@ -308,7 +307,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
 
     VISUALISATION_WIDTH = $(@el).width()
-    VISUALISATION_HEIGHT = VISUALISATION_WIDTH
+    VISUALISATION_HEIGHT = VISUALISATION_WIDTH / 2
     MAX_VIS_WIDTH = Math.min(VISUALISATION_WIDTH, VISUALISATION_HEIGHT)
     X_CENTER = VISUALISATION_WIDTH / 2
     Y_CENTER = VISUALISATION_HEIGHT / 2
@@ -411,7 +410,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       columns_layout: true
       hide_title: true
 
-    legendElem = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
+#    legendElem = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
 #    glados.Utils.renderLegendForProperty(@splitSeriesPropName, undefined, legendElem, enableSelection=false, legendConfig)
-    $(thisView.el).find('.BCK-CompResultsGraphLegendContainer').css('max-height', VISUALISATION_WIDTH * 0.2);
+#    $(thisView.el).find('.BCK-CompResultsGraphLegendContainer').css('max-height', VISUALISATION_WIDTH * 0.2);
 

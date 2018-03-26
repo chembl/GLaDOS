@@ -300,7 +300,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       title: gettext('glados_compound__associated_activities_pie_title_base') + chemblID
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
       properties:
-        relatedActivities: relatedActivitiesProp
+        types: relatedActivitiesProp
 
     viewConfig =
       pie_config: pieConfig
@@ -384,7 +384,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       title: gettext('glados_compound__associated_assays_pie_title_base') + chemblID
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
       properties:
-        relatedAssays:relatedAssaysProp
+        types: relatedAssaysProp
 
 
 
@@ -418,7 +418,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       custom_empty_message: "No target classification data available for compound #{chemblID} (all may be non-protein targets)"
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
       properties:
-        relatedTargets: relatedTargetsProp
+        classes: relatedTargetsProp
 
     viewConfig =
       pie_config: pieConfig
