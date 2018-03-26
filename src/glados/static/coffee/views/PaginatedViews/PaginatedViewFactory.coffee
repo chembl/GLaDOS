@@ -45,7 +45,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       .extend(glados.views.PaginatedViews.SelectionFunctions)\
       .extend(glados.views.PaginatedViews.PaginatedTable)
 
-    getNewCardsPaginatedView: (collection, el, customRenderEvents)->
+    getNewCardsPaginatedView: (collection, el, customRenderEvents, config)->
 
       View = glados.views.PaginatedViews.PaginatedViewFactory.Cards
 
@@ -54,6 +54,20 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         el: el
         type: glados.views.PaginatedViews.PaginatedViewFactory.CARDS_TYPE
         custom_render_evts: customRenderEvents
+        config: config
+
+    initPaginatedCardsEmbedded: (initFunctionParams) ->
+
+      encodedState = initFunctionParams.state
+      state = JSON.parse(atob(encodedState))
+      list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFromState(state)
+
+      viewConfig =
+        embedded: true
+      glados.views.PaginatedViews.PaginatedViewFactory.getNewCardsPaginatedView(list, $('#BCK-embedded-content'),
+        viewConfig)
+
+      list.fetch()
 
     getNewCardsCarouselView: (collection, el, customRenderEvents, config)->
 

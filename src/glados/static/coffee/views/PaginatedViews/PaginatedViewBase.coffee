@@ -168,6 +168,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     renderViewState: ->
       @stampViewIDOnEventsTriggerers()
       @fillTemplates()
+      @setUpEmbedModal() unless not @config.show_embed_button
 
     sleepView: ->
     wakeUpView: ->
@@ -639,3 +640,15 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       $errorMessagesContainer = $(@el).find('.BCK-ErrorMessagesContainer')
       $errorMessagesContainer.html glados.Utils.ErrorMessages.getCollectionErrorContent(jqXHR)
       $errorMessagesContainer.show()
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Embed modal
+    # ------------------------------------------------------------------------------------------------------------------
+    setUpEmbedModal: ->
+
+      urlGenerator = switch
+        when @type == glados.views.PaginatedViews.PaginatedViewFactory.CARDS_TYPE then \
+          urlGenerator = glados.views.PaginatedViews.PaginatedCards.EMBED_PATH_RELATIVE_GENERATOR
+
+
+      glados.helpers.EmbedModalsHelper.initEmbedModalForCollectionView(urlGenerator, @)

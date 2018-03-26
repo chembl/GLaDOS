@@ -4,7 +4,8 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     initialize: ->
 
-      config = arguments[0].config
+      @config = arguments[0].config
+      @config ?= {}
       @collection.on 'reset do-repaint', @fetchInfoForGraph, @
 
       config = {
@@ -33,7 +34,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         collection: @collection
         config: config
 
-      @fetchInfoForGraph() unless config.embedded
+      @fetchInfoForGraph() unless @config.embedded
 
     fetchInfoForGraph: ->
 
@@ -93,7 +94,6 @@ glados.views.SearchResults.ESResultsGraphView.initEmbedded = (initFunctionParams
 
   encodedState = initFunctionParams.state
   state = JSON.parse(atob(encodedState))
-
   list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFromState(state)
 
   viewConfig =

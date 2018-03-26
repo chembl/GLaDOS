@@ -117,4 +117,4 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       else
         return @getPreviousSize(@CURRENT_CARD_SIZES.large) == @CURRENT_CARD_SIZES.large
 
-    isCardsZoomEnabled: -> @collection.getMeta('enable_cards_zoom')
+    isCardsZoomEnabled: -> @config.enable_cards_zoom == true

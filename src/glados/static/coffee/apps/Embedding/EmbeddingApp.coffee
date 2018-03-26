@@ -10,6 +10,7 @@ glados.useNameSpace 'glados.apps.Embedding',
       if shortenedURL != ''
 
         Backbone.history.start({silent: true})
+        window.history.pushState({}, '', "#{glados.Settings.GLADOS_BASE_PATH_REL}embed/")
         embedRouter.navigate(shortenedURL, {trigger: true})
       else
         Backbone.history.start()
@@ -282,6 +283,10 @@ glados.useNameSpace 'glados.apps.Embedding',
         initFunction: glados.views.SearchResults.ESResultsGraphView.initEmbedded
         in_script:
           script_id: 'Handlebars-Common-ESResultsListGraphView'
+      cards:
+        initFunction: glados.views.PaginatedViews.PaginatedViewFactory.initPaginatedCardsEmbedded
+        in_script:
+          script_id: 'Handlebars-Common-ESResultsListCardsView'
 
     @initVIewForCollection: (viewType, state) ->
 

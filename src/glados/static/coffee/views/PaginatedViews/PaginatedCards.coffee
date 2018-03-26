@@ -82,3 +82,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         _.filter(@collection.getMeta('complicate_card_columns'), -> true)
       else
         glados.views.PaginatedViews.PaginatedViewBase.getVisibleColumns.call(@)
+
+    #-------------------------------------------------------------------------------------------------------------------
+    # Embedding
+    #-------------------------------------------------------------------------------------------------------------------
+    EMBED_PATH_RELATIVE_GENERATOR: Handlebars.compile('#view_for_collection/cards/state/{{state}}')
+
