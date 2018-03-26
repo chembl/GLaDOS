@@ -312,6 +312,22 @@ glados.useNameSpace 'glados.models.visualisation',
     Activity:
       esIndex:'chembl_activity'
       Properties:
+        RELATED_TARGETS:
+          propName: 'type'
+          label: 'Types'
+          coloursRange: [
+            glados.Settings.VIS_COLORS.TEAL3,
+            glados.Settings.VIS_COLORS.TEAL4,
+            glados.Settings.VIS_COLORS.TEAL5,
+            glados.Settings.VIS_COLORS.RED2,
+            glados.Settings.VIS_COLORS.RED3,
+            glados.Settings.VIS_COLORS.RED4,
+            glados.Settings.VIS_COLORS.PURPLE2,
+            glados.Settings.VIS_COLORS.BLUE2,
+            glados.Settings.VIS_COLORS.BLUE3,
+            glados.Settings.VIS_COLORS.BLUE4
+          ]
+          colourScaleType: glados.Visualisation.CATEGORICAL
         LIGAND_EFFICIENCY_SEI:
           propName: 'ligand_efficiency.sei'
           label: 'Surface Efficiency index (SEI)'
