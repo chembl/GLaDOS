@@ -4,6 +4,8 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     initialize: ->
 
+      @config = arguments[0].config
+      @config ?= {}
       @collection.on 'reset do-repaint', @fetchInfoForGraph, @
 
       config = {
@@ -32,7 +34,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         collection: @collection
         config: config
 
-      @fetchInfoForGraph()
+      @fetchInfoForGraph() unless @config.embedded
 
     fetchInfoForGraph: ->
 
@@ -50,7 +52,7 @@ glados.useNameSpace 'glados.views.SearchResults',
           return
 
         $progressElement.html ''
-        thisView.compResGraphView.render()
+        thisView.showPlot()
       ).fail( (msg) ->
 
         if $progressElement?
@@ -65,8 +67,41 @@ glados.useNameSpace 'glados.views.SearchResults',
     wakeUpView: ->
 
       if @collection.DOWNLOADED_ITEMS_ARE_VALID
-        @compResGraphView.render()
+        @showPlot()
       else
         @fetchInfoForGraph()
 
-    handleManualResize: -> @compResGraphView.render()
+    handleManualResize: -> @showPlot()
+
+    showPlot: ->
+      @compResGraphView.render()
+      @setUpEmbedModal()
+
+    #-------------------------------------------------------------------------------------------------------------------
+    # Embedding
+    #-------------------------------------------------------------------------------------------------------------------
+    setUpEmbedModal: ->
+
+      glados.helpers.EmbedModalsHelper.initEmbedModalForCollectionView(
+        glados.views.SearchResults.ESResultsGraphView.EMBED_PATH_RELATIVE_GENERATOR,
+        @
+      )
+
+
+glados.views.SearchResults.ESResultsGraphView.EMBED_PATH_RELATIVE_GENERATOR = Handlebars.compile('#view_for_collection/plot/state/{{state}}')
+
+glados.views.SearchResults.ESResultsGraphView.initEmbedded = (initFunctionParams) ->
+
+  encodedState = initFunctionParams.state
+  state = JSON.parse(atob(encodedState))
+  list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFromState(state)
+
+  viewConfig =
+    embedded: true
+
+  new glados.views.SearchResults.ESResultsGraphView
+    collection: list
+    el: $('#BCK-embedded-content')
+    config: viewConfig
+
+  list.fetch()

@@ -190,6 +190,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     # Prepares an Elastic Search query to search in all the fields of a document in a specific index
     fetch: (options, testMode=false) ->
+
       @trigger('before_fetch_elastic')
       @url = @getURL()
 
@@ -215,7 +216,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         _.extend(fetchESOptions, options)
       @loadFacetGroups() unless testMode or @isStreaming()
 
-      if testMode
+      if testMode or @getMeta('test_mode')
         return requestData
 
       # Call Backbone's fetch
@@ -766,11 +767,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       if not totalRecords?
         url = @getURL()
         requestData = JSON.stringify(thisCollection.getRequestData(1, 1))
-        $.post(url, requestData).done((response) ->
+        restartGetAllResults = $.post(url, requestData).done((response) ->
           thisCollection.setMeta('total_records', response.hits.total)
           thisCollection.getAllResults($progressElement, askingForOnlySelected)
         )
-        return
+        return [restartGetAllResults]
 
       pageSize = if totalRecords <= 100 then totalRecords else 100
 

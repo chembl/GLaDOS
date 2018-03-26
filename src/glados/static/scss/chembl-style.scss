@@ -969,6 +969,9 @@ div#CompoundNameAndClassification .comp-phase-0 {
 
 }
 
+.position-relative{
+  position: relative;
+}
 .embed-btn {
   position: absolute;
   color: white;
@@ -3318,6 +3321,9 @@ $chembl-header-height: 52.245px;
 .paginated-collection {
   padding: 4px;
 
+  .paginator-row{
+    margin-top: 20px;
+  }
   .pg-table {
     margin-left: 8px;
 

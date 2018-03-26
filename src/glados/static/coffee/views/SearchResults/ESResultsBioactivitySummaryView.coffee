@@ -106,13 +106,18 @@ glados.useNameSpace 'glados.views.SearchResults',
     hideMatrix: -> $(@el).find('.BCK-CompTargetMatrix').hide()
     showMatrix: ->
       $(@el).find('.BCK-CompTargetMatrix').show()
+      @setUpEmbedModal()
 
     displayAnyway: ->
       @FORCE_DISPLAY = true
       @handleVisualisationStatus()
 
-    initEmbedModal: ->
+    setUpEmbedModal: ->
 
+      glados.helpers.EmbedModalsHelper.initEmbedModalForCollectionView(
+        glados.views.SearchResults.ESResultsBioactivitySummaryView.EMBED_PATH_RELATIVE_GENERATOR,
+        @
+      )
 
     #-------------------------------------------------------------------------------------------------------------------
     # Get items to generate matrix
@@ -164,5 +169,19 @@ glados.useNameSpace 'glados.views.SearchResults',
       @hideProgressElement()
 
 
+glados.views.SearchResults.ESResultsBioactivitySummaryView.EMBED_PATH_RELATIVE_GENERATOR =
+Handlebars.compile('#view_for_collection/heatmap/state/{{state}}')
 
+glados.views.SearchResults.ESResultsBioactivitySummaryView.initEmbedded = (initFunctionParams) ->
+
+  encodedState = initFunctionParams.state
+  state = JSON.parse(atob(encodedState))
+
+  list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFromState(state)
+
+  new glados.views.SearchResults.ESResultsBioactivitySummaryView
+    collection: list
+    el: $('#BCK-embedded-content')
+
+  list.fetch()
 

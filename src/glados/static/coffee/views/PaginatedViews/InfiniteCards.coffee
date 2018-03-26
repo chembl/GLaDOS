@@ -80,5 +80,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     getDefaultColumns: -> @collection.getMeta('columns_description').Infinite.Default
     getAdditionalColumns: -> @collection.getMeta('columns_description').Infinite.Additional
 
+    #-------------------------------------------------------------------------------------------------------------------
+    # Embedding
+    #-------------------------------------------------------------------------------------------------------------------
+    EMBED_PATH_RELATIVE_GENERATOR: Handlebars.compile('#view_for_collection/cards/state/{{state}}')
 
 

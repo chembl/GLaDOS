@@ -45,7 +45,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       .extend(glados.views.PaginatedViews.SelectionFunctions)\
       .extend(glados.views.PaginatedViews.PaginatedTable)
 
-    getNewCardsPaginatedView: (collection, el, customRenderEvents)->
+    getNewCardsPaginatedView: (collection, el, customRenderEvents, config)->
 
       View = glados.views.PaginatedViews.PaginatedViewFactory.Cards
 
@@ -54,6 +54,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         el: el
         type: glados.views.PaginatedViews.PaginatedViewFactory.CARDS_TYPE
         custom_render_evts: customRenderEvents
+        config: config
 
     getNewCardsCarouselView: (collection, el, customRenderEvents, config)->
 
@@ -118,3 +119,62 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     getInfiniteConstructor: ->
       return glados.views.PaginatedViews.PaginatedViewFactory\
         .getTypeConstructor(glados.views.PaginatedViews.PaginatedViewFactory.INFINITE_TYPE)
+
+    #-------------------------------------------------------------------------------------------------------------------
+    # Embedding
+    #-------------------------------------------------------------------------------------------------------------------
+    CARDS_EMBED_URL: 'cards'
+    CAROUSEL_EMBED_URL: 'carousel'
+    INFINITE_EMBED_URL: 'infinite'
+    TABLE_EMBED_URL: 'table'
+
+    getEmbedURLGeneratorFor: (type) ->
+
+      embedViewTypeURL = switch
+        when type == glados.views.PaginatedViews.PaginatedViewFactory.CARDS_TYPE then \
+          glados.views.PaginatedViews.PaginatedViewFactory.CARDS_EMBED_URL
+        when type == glados.views.PaginatedViews.PaginatedViewFactory.INFINITE_TYPE then \
+          glados.views.PaginatedViews.PaginatedViewFactory.INFINITE_EMBED_URL
+        when type == glados.views.PaginatedViews.PaginatedViewFactory.TABLE_TYPE then \
+          glados.views.PaginatedViews.PaginatedViewFactory.TABLE_EMBED_URL
+
+      return Handlebars.compile("#view_for_collection/#{embedViewTypeURL}/state/{{state}}")
+
+    initPaginatedCardsEmbedded: (initFunctionParams) ->
+
+      encodedState = initFunctionParams.state
+      state = JSON.parse(atob(encodedState))
+      list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFromState(state)
+
+      viewConfig =
+        embedded: true
+      glados.views.PaginatedViews.PaginatedViewFactory.getNewCardsPaginatedView(list, $('#BCK-embedded-content'),
+        undefined, viewConfig)
+
+      list.fetch()
+
+    initInfiniteCardsEmbedded: (initFunctionParams) ->
+
+      encodedState = initFunctionParams.state
+      state = JSON.parse(atob(encodedState))
+      list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFromState(state)
+
+      viewConfig =
+        embedded: true
+      glados.views.PaginatedViews.PaginatedViewFactory.getNewInfinitePaginatedView(list, $('#BCK-embedded-content'),
+        undefined, viewConfig)
+
+      list.fetch()
+
+    initInfiniteTableEmbedded: (initFunctionParams) ->
+
+      encodedState = initFunctionParams.state
+      state = JSON.parse(atob(encodedState))
+      list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFromState(state)
+
+      viewConfig =
+        embedded: true
+      glados.views.PaginatedViews.PaginatedViewFactory.getNewTablePaginatedView(list, $('#BCK-embedded-content'),
+        undefined, viewConfig)
+
+      list.fetch()

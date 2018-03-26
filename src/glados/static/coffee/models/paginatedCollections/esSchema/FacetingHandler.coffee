@@ -27,6 +27,26 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         return null
       return all_facets_query
 
+    # this takes some facet settings and initializes new facets group structure with a new faceting handler for
+    # every facet group, independent from any other copy of facets generated usin the same settings object
+    @initFacetGroups: (facetGroupsConfig) ->
+
+      newFacets = $.extend({}, facetGroupsConfig)
+
+      for fGroupKey, fGroup of newFacets
+
+        esIndex = facetGroupsConfig[fGroupKey].es_index
+        propName = facetGroupsConfig[fGroupKey].prop_name
+        initialSort = facetGroupsConfig[fGroupKey].initial_sort
+        initialIntervals = facetGroupsConfig[fGroupKey].initial_intervals
+        reportCardEntity = facetGroupsConfig[fGroupKey].report_card_entity
+
+        fGroup.faceting_handler = glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
+          esIndex, propName, initialSort, initialIntervals, reportCardEntity
+        )
+
+      return newFacets
+
     @generateFacetsForIndex: (es_index, defaults, defaults_hidden, exclude_patterns)->
       facets = {}
       if not _.has(glados.models.paginatedCollections.esSchema.GLaDOS_es_GeneratedSchema, es_index)
@@ -52,21 +72,14 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
             label_mini: django.gettext(gs_data[prop_name].label_mini_id)
             show: false
             position: cur_pos++
-            faceting_handler: glados.models.paginatedCollections.esSchema.FacetingHandler.getNewFacetingHandler(
-              es_index, prop_name, sort, intervals, report_card_entity
-            )
+            es_index: es_index
+            prop_name: prop_name
+            initial_sort: sort
+            initial_intervals: intervals
+            report_card_entity: report_card_entity
           }
         throw 'ERROR: '+prop_name+' is not an aggregatable property!'
-      all_props = _.filter(_.keys(gs_data), (property_name)->
-        if not gs_data[property_name].aggregatable
-          return false
-        if exclude_patterns?
-          for exclude_pattern_i in exclude_patterns
-            exclude = exclude_pattern_i.test(property_name)
-            if exclude
-              return false
-        return true
-      )
+
       if defaults?
         for prop_i in defaults
           if _.isString(prop_i)
@@ -131,6 +144,19 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       @faceting_keys_inorder = null
       @faceting_data = null
       @intervalsLimits = null
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # State Saving
+    # ------------------------------------------------------------------------------------------------------------------
+    getStateJSON: ->
+
+      state = JSON.parse(JSON.stringify(@))
+      return state
+
+    loadState: (stateJSON) ->
+
+      $.extend(@, stateJSON)
+
 
     # ------------------------------------------------------------------------------------------------------------------
     # Query and Parse Facets to/from Elasticsearch
@@ -373,6 +399,17 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           if facet_data.selected
             return true
       return false
+
+    getSelectedFacetsKeys: ->
+
+      selectedKeys = []
+
+      if @faceting_data
+        for facet_key, facet_data of @faceting_data
+          if facet_data.selected
+            selectedKeys.push facet_key
+
+      return selectedKeys
 
     getSelectedFacetsFilterQuery: ()->
       selected_query = {

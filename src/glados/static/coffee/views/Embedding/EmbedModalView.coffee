@@ -30,7 +30,7 @@ glados.useNameSpace 'glados.views.Embedding',
       @$modalTrigger.attr('href', "##{@modalId}" )
       @$modalTrigger.attr('rendered', 'false')
 
-      @model.on 'change', @updateTriggerURL
+      @model.on 'change', @updateTriggerURL, @
       @updateTriggerURL() unless not @model.get('embed_url')?
       @$modalTrigger.click @renderModalPreview
 

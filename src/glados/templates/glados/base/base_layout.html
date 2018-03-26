@@ -86,7 +86,7 @@
 
     {% block content %}{% endblock %}
             
-    <div id='GladosShortenedParamsContainer' data-shortened-params='{{shortened_params}}'></div>
+    {% include "glados/base/shortened_params.html" %}
 
     <div id='GladosMainContent' style="display: none">
     </div>

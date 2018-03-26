@@ -218,21 +218,32 @@ glados.useNameSpace 'glados.views.Browsers',
       if !@allViewsPerType[viewType]?
 
         $viewContainer = $('#' + @viewContainerID)
-        $viewElement = $('<div>').attr('id', viewElementID)
+        $viewElement = $('<div>').attr('id', viewElementID).addClass('position-relative')
         templateName = 'Handlebars-Common-ESResultsList' + viewType + 'View'
         $viewElement.html Handlebars.compile($('#' + templateName).html())()
         $viewContainer.append($viewElement)
 
-        # Instantiates the results list view for each ES entity and links them with the html component
-        newView = new @DEFAULT_RESULTS_VIEWS_BY_TYPE[viewType]
-          collection: @collection
-          el: $viewElement
-          custom_render_evts: undefined
-          render_at_init: true
-          zoom_controls_container: @toolBarView.getZoomControlsContainer()
-          special_structures_toggler: @toolBarView.getSpecialStructureControlsContainer()
-          attributes:
-            include_search_results_highlight: @attributes?.include_search_results_highlight || false
+        if viewType == 'Bioactivity' or viewType == 'Graph'
+          newView = new @DEFAULT_RESULTS_VIEWS_BY_TYPE[viewType]
+            collection: @collection
+            el: $viewElement
+        else
+
+          viewConfig =
+            show_embed_button: true
+            enable_cards_zoom: true
+          # Instantiates the results list view for each ES entity and links them with the html component
+          newView = new @DEFAULT_RESULTS_VIEWS_BY_TYPE[viewType]
+            collection: @collection
+            el: $viewElement
+            # this is used for paginated cards and table only
+            custom_render_evts: undefined
+            render_at_init: true
+            zoom_controls_container: @toolBarView.getZoomControlsContainer()
+            special_structures_toggler: @toolBarView.getSpecialStructureControlsContainer()
+            attributes:
+              include_search_results_highlight: @attributes?.include_search_results_highlight || false
+            config: viewConfig
 
         @allViewsPerType[viewType] = newView
 

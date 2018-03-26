@@ -84,3 +84,83 @@ class TestsUtils
       else if _.isNumber(popVal) or _.isSring(propVal) or _.isBoolean(propVal)
         expect(response[propVal]).toBe(parsed[propVal])
       # propably later check objects and arrays
+
+  @testRestoredListIsEqualToOriginal = (list) ->
+
+    state = list.getStateJSON()
+    list2 = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFromState(state)
+
+    for property in ['settings_path', 'custom_query_string', 'use_custom_query_string', 'esSearchQuery', 'sticky_query',
+      'esSearchQuery', 'search_term', 'contextual_properties', 'generator_items_list']
+
+      oldValue = list.getMeta(property)
+      newValue = list2.getMeta(property)
+
+      if _.isObject(oldValue)
+        expect(_.isEqual(oldValue, newValue)).toBe(true)
+      else
+        expect(oldValue).toBe(newValue)
+
+    facetGroupsMustBe = list.getFacetsGroups()
+
+    facetGroupsGot = list2.getFacetsGroups()
+    facetsState = state.facets_state
+
+    if not facetsState?
+      return
+    for facetGroupKey, fGroup of facetGroupsGot
+
+      facetingHandler = fGroup.faceting_handler
+      facetingHandlerStateGot = facetingHandler.getStateJSON()
+
+      originalFacetingHandler = facetGroupsMustBe[facetGroupKey].faceting_handler
+      facetingHandlerStateMustBe = originalFacetingHandler.getStateJSON()
+
+      expect(_.isEqual(facetingHandlerStateGot, facetingHandlerStateMustBe)).toBe(true)
+
+  @testSavesList = (list, pathInSettingsMustBe, queryStringMustBe="*", useQueryStringMustBe=false, stickyQueryMustBe,
+    esSearchQueryMustBe, searchTermMustBe, contextualColumnsMustBe, generatorListMustBe)->
+
+    state = list.getStateJSON()
+
+    expect(state.settings_path).toBe(pathInSettingsMustBe)
+    expect(state.custom_query_string).toBe(queryStringMustBe)
+    expect(state.use_custom_query_string).toBe(useQueryStringMustBe)
+
+    stickyQueryGot = state.sticky_query
+    expect(_.isEqual(stickyQueryGot, stickyQueryMustBe)).toBe(true)
+    expect(_.isEqual(state.searchESQuery, esSearchQueryMustBe)).toBe(true)
+
+    expect(state.search_term).toBe(searchTermMustBe)
+
+    contextualColumnsGot = state.contextual_properties
+    expect(_.isEqual(contextualColumnsGot, contextualColumnsMustBe)).toBe(true)
+
+    generatorListGot = state.generator_items_list
+    expect(_.isEqual(generatorListGot, generatorListMustBe)).toBe(true)
+
+    facetsStateGot = state.facets_state
+    originalFacetGroups = list.getFacetsGroups()
+
+    if facetsStateGot?
+      for fGroupKey, fGroupState of facetsStateGot
+        originalFacetingHandler = originalFacetGroups[fGroupKey].faceting_handler
+
+        fGroupStateMustBe = originalFacetingHandler.getStateJSON()
+        expect(_.isEqual(fGroupState, fGroupStateMustBe)).toBe(true)
+
+  @testIteratesPages = (esList, pageSize, totalPages) ->
+
+    for pageNumber in [1..totalPages]
+      requestData = esList.setPage(pageNumber, doFetch=true, testMode=true)
+      expect(requestData['from']).toBe(pageSize * (pageNumber - 1))
+      expect(requestData['size']).toBe(pageSize)
+
+  @testIteratesPagesWithDifferentPageSizes = (esList, totalRecords) ->
+    esList.setMeta('total_records', totalRecords)
+
+    for pageSize in [1..totalRecords]
+      esList.setMeta('page_size', pageSize)
+      totalPages = Math.ceil(totalRecords / pageSize)
+      esList.setMeta('total_pages', totalPages)
+      TestsUtils.testIteratesPages(esList, pageSize, totalPages)

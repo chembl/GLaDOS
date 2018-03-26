@@ -8,14 +8,42 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 # --------------------------------------------------------------------------------------------------------------------
   PaginatedCollectionFactory:
 # creates a new instance of a Paginated Collection from Elastic Search
-    getNewESResultsListFor: (esIndexSettings, customQueryString='*', useCustomQueryString=false, itemsList,
-      contextualProperties, searchTerm, stickyQuery) ->
+    getNewESResultsListFromState: (stateObject) ->
 
-      indexESPagQueryCollection = glados.models.paginatedCollections.ESPaginatedQueryCollection\
+      basicSettingsPath = stateObject.settings_path
+      settings = glados.Utils.getNestedValue(glados.models.paginatedCollections.Settings, basicSettingsPath)
+      queryString = stateObject.custom_query_string
+      useQueryString = stateObject.use_custom_query_string
+      searchESQuery = stateObject.searchESQuery
+      stickyQuery = stateObject.sticky_query
+      itemsList = stateObject.generator_items_list
+      contextualProperties = stateObject.contextual_properties
+      searchTerm = stateObject.search_term
+
+      list = @getNewESResultsListFor(settings, queryString, useQueryString, itemsList,
+        contextualProperties, searchTerm, stickyQuery, searchESQuery)
+
+      facetGroups = list.getFacetsGroups()
+      facetsState = stateObject.facets_state
+
+      if facetsState?
+        for fGroupKey, selectedKeys of facetsState
+
+          originalFGroupState = facetsState[fGroupKey]
+          facetingHandler = facetGroups[fGroupKey].faceting_handler
+          facetingHandler.loadState(originalFGroupState)
+
+      return list
+
+    getNewESResultsListFor: (esIndexSettings, customQueryString='*', useCustomQueryString=false, itemsList,
+      contextualProperties, searchTerm, stickyQuery, searchESQuery) ->
+
+      IndexESPagQueryCollection = glados.models.paginatedCollections.ESPaginatedQueryCollection\
       .extend(glados.models.paginatedCollections.SelectionFunctions)
       .extend(glados.models.paginatedCollections.SortingFunctions)
       .extend(glados.models.paginatedCollections.ReferenceStructureFunctions)
-      .extend(glados.models.paginatedCollections.CacheFunctions).extend
+      .extend(glados.models.paginatedCollections.CacheFunctions)
+      .extend(glados.models.paginatedCollections.StateSaving.ESCollectionStateSavingFunctions).extend
         model: esIndexSettings.MODEL
 
         initialize: ->
@@ -28,9 +56,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             available_page_sizes: glados.Settings.CARD_PAGE_SIZES
             current_page: 1
             to_show: []
-            facets: esIndexSettings.FACETS
             id_column: esIndexSettings.ID_COLUMN
-            facets_groups: esIndexSettings.FACETS_GROUPS
+            facets_groups: glados.models.paginatedCollections.esSchema.FacetingHandler.initFacetGroups(esIndexSettings.FACETS_GROUPS)
             columns: esIndexSettings.COLUMNS
             download_columns: esIndexSettings.DOWNLOAD_COLUMNS
             columns_description: esIndexSettings.COLUMNS_DESCRIPTION
@@ -65,6 +92,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             enable_collection_caching: esIndexSettings.ENABLE_COLLECTION_CACHING
             disable_cache_on_download: esIndexSettings.DISABLE_CACHE_ON_DOWNLOAD
             custom_possible_card_sizes_struct: esIndexSettings.POSSIBLE_CARD_SIZES_STRUCT
+            settings_path: esIndexSettings.PATH_IN_SETTINGS
+            searchESQuery: searchESQuery
 
           if @getMeta('enable_similarity_maps') or @getMeta('enable_substructure_highlighting')
             @initReferenceStructureFunctions()
@@ -73,8 +102,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             @initCache()
             @on 'reset update', @addModelsInCurrentPage, @
 
-
-      return new indexESPagQueryCollection
+      return new IndexESPagQueryCollection
 
 # creates a new instance of a Paginated Collection from Web Services
     getNewWSCollectionFor: (collectionSettings, filter='') ->
