@@ -243,10 +243,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('stroke', 'white')
         .attr('d', outerArc)
 
-
-# ----------------------------------------------------------------------------------------------------------------------
-#  qtips outter slices
-# ----------------------------------------------------------------------------------------------------------------------
+#     qtips outter slices
       for subArc, i in subArcs[0]
         parentPropName = thisView.xAxisPropName.label
         propName = thisView.splitSeriesPropName.label
@@ -271,9 +268,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
               y: -5
               x: 5
 
-# ----------------------------------------------------------------------------------------------------------------------
-#  legend
-# ----------------------------------------------------------------------------------------------------------------------
+#   legend
     legendConfig =
               columns_layout: true
               hide_title: true
@@ -283,9 +278,8 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     glados.Utils.renderLegendForProperty(@splitSeriesPropName, undefined, legendElem, enableSelection=false, legendConfig)
     $(thisView.el).find('.BCK-CompResultsGraphLegendContainer').css('max-height', VISUALISATION_HEIGHT);
 
-# -----------------------------------------------------------------------------------------------------------------
-# title
-# -----------------------------------------------------------------------------------------------------------------
+
+#   title
     mainSVGContainer.append('text')
       .text(@config.title)
       .attr('x', VISUALISATION_WIDTH/2)
@@ -303,7 +297,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
 
     VISUALISATION_WIDTH = $(@el).width()
-    TITLE_Y = 40
+    TITLE_Y = 60
     VISUALISATION_HEIGHT = (VISUALISATION_WIDTH / 2) + TITLE_Y
     MAX_VIS_WIDTH = Math.min(VISUALISATION_WIDTH, VISUALISATION_HEIGHT)
     X_CENTER = VISUALISATION_WIDTH / 2
@@ -326,13 +320,11 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('width', VISUALISATION_WIDTH)
         .attr('height', VISUALISATION_HEIGHT + TITLE_Y)
 
-# -----------------------------------------------------------------------------------------------------------------
-# title
-# -----------------------------------------------------------------------------------------------------------------
+#   title
     mainSVGContainer.append('text')
       .text(@config.title)
       .attr('x', VISUALISATION_WIDTH/2)
-      .attr('y', TITLE_Y)
+      .attr('y', TITLE_Y / 2)
       .attr('text-anchor', 'middle')
       .classed('title', 'true')
       .on('click', -> glados.Utils.URLS.shortenLinkIfTooLongAndOpen thisView.config.title_link_url)
@@ -376,9 +368,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
         y = -Math.sin(angle) * 2 * RADIUS / 3
         'translate(' + x + ', ' + y + ')')
 
-  # ----------------------------------------------------------------------------------------------------------------------
-  #  legend
-  # ----------------------------------------------------------------------------------------------------------------------
+#   legend
     legendConfig =
       columns_layout: true
       hide_title: true
@@ -386,9 +376,8 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     $legendElem = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
     glados.Utils.renderLegendForProperty(@xAxisPropName, undefined, $legendElem, enableSelection=false, legendConfig)
 
-# ----------------------------------------------------------------------------------------------------------------------
-#  qtips inner slices
-# ----------------------------------------------------------------------------------------------------------------------
+
+#   qtips
     arcs.each (d) ->
       key = d.key
       count = d.doc_count
