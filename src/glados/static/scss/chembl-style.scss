@@ -3537,7 +3537,6 @@ $chembl-header-height: 52.245px;
                 height: 100%;
                 .valign-wrapper {
                   height: 100%;
-                  padding: 40px;
                   text-align: center;
                 }
               }
@@ -3558,15 +3557,14 @@ $chembl-header-height: 52.245px;
 */
 
 .principal-pie-container {
-  //height: 100%;
+  height: 100%;
+  //background-color: white;
 }
 
 .simple-pie-container {
-  //height: 100%;
   background-color: white;
-
   .pie-title {
-    padding-top: 10px;
+    //padding-top: 10px;
     a {
       cursor: pointer;
       font-size: 85%;
