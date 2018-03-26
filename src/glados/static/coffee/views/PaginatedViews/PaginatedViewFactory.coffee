@@ -130,13 +130,15 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     getEmbedURLGeneratorFor: (type) ->
 
-      embedURL = switch
+      embedViewTypeURL = switch
         when type == glados.views.PaginatedViews.PaginatedViewFactory.CARDS_TYPE then \
-          urlGenerator = glados.views.PaginatedViews.PaginatedViewFactory.CARDS_EMBED_URL
+          glados.views.PaginatedViews.PaginatedViewFactory.CARDS_EMBED_URL
         when type == glados.views.PaginatedViews.PaginatedViewFactory.INFINITE_TYPE then \
-          urlGenerator = glados.views.PaginatedViews.PaginatedViewFactory.INFINITE_EMBED_URL
+          glados.views.PaginatedViews.PaginatedViewFactory.INFINITE_EMBED_URL
+        when type == glados.views.PaginatedViews.PaginatedViewFactory.TABLE_TYPE then \
+          glados.views.PaginatedViews.PaginatedViewFactory.TABLE_EMBED_URL
 
-      return Handlebars.compile("#view_for_collection/#{embedURL}/state/{{state}}")
+      return Handlebars.compile("#view_for_collection/#{embedViewTypeURL}/state/{{state}}")
 
     initPaginatedCardsEmbedded: (initFunctionParams) ->
 
@@ -160,6 +162,19 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       viewConfig =
         embedded: true
       glados.views.PaginatedViews.PaginatedViewFactory.getNewInfinitePaginatedView(list, $('#BCK-embedded-content'),
+        undefined, viewConfig)
+
+      list.fetch()
+
+    initInfiniteTableEmbedded: (initFunctionParams) ->
+
+      encodedState = initFunctionParams.state
+      state = JSON.parse(atob(encodedState))
+      list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFromState(state)
+
+      viewConfig =
+        embedded: true
+      glados.views.PaginatedViews.PaginatedViewFactory.getNewTablePaginatedView(list, $('#BCK-embedded-content'),
         undefined, viewConfig)
 
       list.fetch()

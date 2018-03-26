@@ -291,6 +291,10 @@ glados.useNameSpace 'glados.apps.Embedding',
         initFunction: glados.views.PaginatedViews.PaginatedViewFactory.initInfiniteCardsEmbedded
         in_script:
           script_id: 'Handlebars-Common-ESResultsListInfiniteView'
+      table:
+        initFunction: glados.views.PaginatedViews.PaginatedViewFactory.initInfiniteTableEmbedded
+        in_script:
+          script_id: 'Handlebars-Common-ESResultsListTableView'
 
     @initVIewForCollection: (viewType, state) ->
 
