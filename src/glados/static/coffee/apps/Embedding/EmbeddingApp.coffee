@@ -3,8 +3,16 @@ glados.useNameSpace 'glados.apps.Embedding',
 
     @init = ->
 
-      new glados.apps.Embedding.EmbeddingRouter
-      Backbone.history.start()
+      embedRouter = new glados.apps.Embedding.EmbeddingRouter
+
+      #check if there are shortened params
+      shortenedURL = $('#GladosShortenedParamsContainer').attr('data-shortened-params')
+      if shortenedURL != ''
+
+        Backbone.history.start({silent: true})
+        embedRouter.navigate(shortenedURL, {trigger: true})
+      else
+        Backbone.history.start()
 
     @loadHTMLSection: (sectionLoadURL, successCallBack) ->
 
