@@ -18,6 +18,7 @@ glados.useNameSpace 'glados.models.visualisation',
             glados.Settings.VIS_COLORS.BLUE3,
             glados.Settings.VIS_COLORS.BLUE4
           ]
+          colourScaleType: glados.Visualisation.CATEGORICAL
         RELATED_TARGETS:
           propName: 'type'
           label: 'Types'
@@ -33,6 +34,7 @@ glados.useNameSpace 'glados.models.visualisation',
             glados.Settings.VIS_COLORS.BLUE3,
             glados.Settings.VIS_COLORS.BLUE4
           ]
+          colourScaleType: glados.Visualisation.CATEGORICAL
         RELATED_ACTIVITIES:
           propName: 'type'
           label: 'Types'
@@ -48,6 +50,7 @@ glados.useNameSpace 'glados.models.visualisation',
             glados.Settings.VIS_COLORS.BLUE3,
             glados.Settings.VIS_COLORS.BLUE4
           ]
+          colourScaleType: glados.Visualisation.CATEGORICAL
         CHEMBL_ID:
           propName:'molecule_chembl_id'
           label: 'CHEMBL_ID'
@@ -181,6 +184,7 @@ glados.useNameSpace 'glados.models.visualisation',
             glados.Settings.VIS_COLORS.BLUE3,
             glados.Settings.VIS_COLORS.BLUE4
           ]
+          colourScaleType: glados.Visualisation.CATEGORICAL
         ASSOCIATED_ASSAYS:
           propName: 'type'
           label: 'Types'
@@ -196,6 +200,7 @@ glados.useNameSpace 'glados.models.visualisation',
             glados.Settings.VIS_COLORS.BLUE3,
             glados.Settings.VIS_COLORS.BLUE4
           ]
+          colourScaleType: glados.Visualisation.CATEGORICAL
         CHEMBL_ID:
           propName:'target_chembl_id'
           label: 'CHEMBL_ID'

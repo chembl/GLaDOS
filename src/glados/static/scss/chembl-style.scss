@@ -3581,7 +3581,12 @@ $chembl-header-height: 52.245px;
     }
   }
   .simple-pie-legend {
-    border: solid 1px red;
+    background-color: white;
+    .legend-text {
+      font-size: 65%;
+      fill: #666;
+      font-family: "ChEMBL_Verdana", Verdana, sans-serif;
+    }
   }
 }
 

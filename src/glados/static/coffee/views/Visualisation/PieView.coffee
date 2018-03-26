@@ -338,13 +338,16 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     bucketSizes = (b.doc_count for b in buckets)
     bucketKeys = (b.key for b in buckets)
 
+    thisView.xAxisPropName.domain = bucketKeys
+    glados.models.visualisation.PropertiesFactory.generateColourScale(thisView.xAxisPropName)
+    color = @xAxisPropName.colourScale
+
     pie = d3.layout.pie()
       .sort(null)
 
     arc = d3.svg.arc()
     .innerRadius(0)
     .outerRadius(RADIUS)
-
 
     bucketsData = pie(bucketSizes)
     for i in [0..buckets.length-1]
@@ -359,10 +362,6 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('class', 'arc')
         .attr('transform', 'translate(' + X_CENTER + ', ' + Y_CENTER + ')')
         .on('click', (d) -> glados.Utils.URLS.shortenLinkIfTooLongAndOpen d.link)
-
-    color = d3.scale.ordinal()
-      .domain(bucketKeys)
-      .range(COLORS)
 
     arcs.append('path')
     .attr('fill', (d) -> color(d.key))
@@ -412,5 +411,4 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     legendElem = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
     glados.Utils.renderLegendForProperty(@xAxisPropName, undefined, legendElem, enableSelection=false, legendConfig)
-    $(thisView.el).find('.BCK-CompResultsGraphLegendContainer').css('max-height', VISUALISATION_HEIGHT * 0.2);
 
