@@ -646,9 +646,5 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     setUpEmbedModal: ->
 
-      urlGenerator = switch
-        when @type == glados.views.PaginatedViews.PaginatedViewFactory.CARDS_TYPE then \
-          urlGenerator = glados.views.PaginatedViews.PaginatedCards.EMBED_PATH_RELATIVE_GENERATOR
-
-
+      urlGenerator = glados.views.PaginatedViews.PaginatedViewFactory.getEmbedURLGeneratorFor(@type)
       glados.helpers.EmbedModalsHelper.initEmbedModalForCollectionView(urlGenerator, @)
