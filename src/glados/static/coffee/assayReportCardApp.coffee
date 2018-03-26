@@ -62,7 +62,7 @@ class AssayReportCardApp extends glados.ReportCardApp
 
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     bioactivities = AssayReportCardApp.getAssociatedBioactivitiesAgg(chemblID)
-    bioactivitiesProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Activity', 'RELATED_TARGETS')
+    bioactivitiesProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Assay', 'RELATED_TARGETS')
 
     pieConfig =
       x_axis_prop_name: 'types'
