@@ -293,11 +293,15 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     relatedActivities = CompoundReportCardApp.getRelatedActivitiesAgg(chemblID)
+    relatedActivitiesProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RELATED_ACTIVITIES')
 
     pieConfig =
       x_axis_prop_name: 'types'
       title: gettext('glados_compound__associated_activities_pie_title_base') + chemblID
+      title_link_url: Activity.getActivitiesListURL('molecule_chembl_id:' + chemblID)
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
+      properties:
+        types: relatedActivitiesProp
 
     viewConfig =
       pie_config: pieConfig
@@ -322,7 +326,6 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     allDocumentsByYear = CompoundReportCardApp.getPapersPerYearAgg(chemblID)
-    console.log 'allDocumentsByYear: ', allDocumentsByYear
 
     yearProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('DocumentAggregation',
       'YEAR')
@@ -375,11 +378,17 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     relatedAssays = CompoundReportCardApp.getRelatedAssaysAgg(chemblID)
+    relatedAssaysProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RELATED_ASSAYS')
 
     pieConfig =
       x_axis_prop_name: 'types'
       title: gettext('glados_compound__associated_assays_pie_title_base') + chemblID
+      title_link_url: Assay.getAssaysListURL('_metadata.related_compounds.chembl_ids.\\*:' + chemblID)
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
+      properties:
+        types: relatedAssaysProp
+
+
 
     viewConfig =
       pie_config: pieConfig
@@ -403,12 +412,16 @@ class CompoundReportCardApp extends glados.ReportCardApp
   @initTargetSummary = ->
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     relatedTargets = CompoundReportCardApp.getRelatedTargetsAggByClass(chemblID)
+    relatedTargetsProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RELATED_TARGETS')
 
     pieConfig =
       x_axis_prop_name: 'classes'
       title: gettext('glados_compound__associated_targets_by_class_pie_title_base') + chemblID
+      title_link_url: Target.getTargetsListURL('_metadata.related_compounds.chembl_ids.\\*:' + chemblID)
       custom_empty_message: "No target classification data available for compound #{chemblID} (all may be non-protein targets)"
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
+      properties:
+        classes: relatedTargetsProp
 
     viewConfig =
       pie_config: pieConfig

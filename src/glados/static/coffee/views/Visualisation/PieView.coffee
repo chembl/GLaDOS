@@ -5,6 +5,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     @config = arguments[0].config
     @xAxisAggName = @config.x_axis_prop_name
+    @xAxisPropName = @config.properties[@xAxisAggName]
     @model.on 'change', @render, @
     @$vis_elem = $(@el).find('.BCK-pie-container')
     updateViewProxy = @setUpResponsiveRender()
@@ -51,6 +52,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       $titleContainer = $(@el).find('.BCK-pie-title')
       glados.Utils.fillContentForElement $titleContainer,
         title: @config.title
+        title_url: @config.title_link_url
 
     if @config.stacked_donut
       @renderStackedDonut(buckets, maxCategories)
@@ -173,11 +175,6 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       for subBucket in subBuckets
         totalBucketCount += subBucket.doc_count
 
-#      maxCategories = 0
-#      for bucket in subBuckets
-#        if bucket.doc_count > (totalBucketCount * 0.05)
-#          maxCategories += 1
-
       maxCategories = 0
       for subBucket in subBuckets
 
@@ -246,10 +243,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('stroke', 'white')
         .attr('d', outerArc)
 
-
-# ----------------------------------------------------------------------------------------------------------------------
-#  qtips outter slices
-# ----------------------------------------------------------------------------------------------------------------------
+#     qtips outter slices
       for subArc, i in subArcs[0]
         parentPropName = thisView.xAxisPropName.label
         propName = thisView.splitSeriesPropName.label
@@ -274,18 +268,117 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
               y: -5
               x: 5
 
-# ----------------------------------------------------------------------------------------------------------------------
-#  qtips inner slices
-# ----------------------------------------------------------------------------------------------------------------------
-    arcs.each (d) ->
-      propName = thisView.xAxisPropName.label
-      for bucket in buckets
-        if bucket.doc_count == d.value
-           bucketCount = bucket.doc_count
-           bucketName = bucket.key
+#   legend
+    legendConfig =
+              columns_layout: true
+              hide_title: true
+              side_legend: @config.side_legend
 
-      text = '<b>' + propName + '</b>' + ":  " + bucketName + \
-        '<br>' + '<b>' + "Count:  " + '</b>' + bucketCount
+    legendElem = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
+    glados.Utils.renderLegendForProperty(@splitSeriesPropName, undefined, legendElem, enableSelection=false, legendConfig)
+    $(thisView.el).find('.BCK-CompResultsGraphLegendContainer').css('max-height', VISUALISATION_HEIGHT);
+
+
+#   title
+    mainSVGContainer.append('text')
+      .text(@config.title)
+      .attr('x', VISUALISATION_WIDTH/2)
+      .attr('y', TITLE_Y)
+      .attr('text-anchor', 'middle')
+      .classed('title', 'true')
+      .on('click', -> glados.Utils.URLS.shortenLinkIfTooLongAndOpen thisView.config.title_link_url)
+
+# -----------------------------------------------------------------------------------------------------------------
+# RENDER SIMPLE PIE
+# -----------------------------------------------------------------------------------------------------------------
+  renderSimplePie: (buckets) ->
+    thisView = @
+    thisView.$vis_elem.empty()
+
+
+    VISUALISATION_WIDTH = $(@el).width()
+    VISUALISATION_HEIGHT = VISUALISATION_WIDTH * 0.65
+    MAX_VIS_WIDTH = Math.min(VISUALISATION_WIDTH, VISUALISATION_HEIGHT)
+    X_CENTER = VISUALISATION_WIDTH / 2
+    Y_CENTER = (VISUALISATION_HEIGHT / 2)
+    PADDING = MAX_VIS_WIDTH * 0.1
+    RADIUS = (MAX_VIS_WIDTH / 2) - PADDING
+
+
+    bucketSizes = (b.doc_count for b in buckets)
+    bucketKeys = (b.key for b in buckets)
+
+    thisView.xAxisPropName.domain = bucketKeys
+    glados.models.visualisation.PropertiesFactory.generateColourScale(thisView.xAxisPropName)
+    color = @xAxisPropName.colourScale
+
+    mainContainer = d3.select(@$vis_elem.get(0))
+    mainSVGContainer = mainContainer
+      .append('svg')
+        .attr('class', 'mainSVGContainer')
+        .attr('width', VISUALISATION_WIDTH)
+        .attr('height', VISUALISATION_HEIGHT)
+
+    arcsContainer = mainSVGContainer.append('g')
+
+    pie = d3.layout.pie()
+      .sort(null)
+
+    arc = d3.svg.arc()
+    .innerRadius(0)
+    .outerRadius(RADIUS)
+
+    bucketsData = pie(bucketSizes)
+    for i in [0..buckets.length-1]
+      currentDatum = bucketsData[i]
+      currentBucket = buckets[i]
+      _.extend(currentDatum, currentBucket)
+
+    arcs = arcsContainer.selectAll('g.arc')
+      .data(bucketsData)
+      .enter()
+      .append('g')
+      .attr('class', 'arc')
+        .attr('transform', 'translate(' + X_CENTER + ', ' + Y_CENTER + ')')
+        .on('click', (d) -> glados.Utils.URLS.shortenLinkIfTooLongAndOpen d.link)
+
+    arcs.append('path')
+    .attr('fill', (d) -> color(d.key))
+    .attr('d', arc)
+
+
+#   labels on slices
+    texts = arcs.append('text')
+      .attr('class', 'arc-text')
+      .attr('text-anchor', 'middle')
+      .attr('alignment-baseline', 'middle')
+      .text((d) -> d.doc_count )
+      .attr('transform', (d) ->
+        angle = Math.PI/2 + (d.endAngle + d.startAngle)/2
+        x = -Math.cos(angle) * 2.2 * RADIUS / 3
+        y = -Math.sin(angle) * 2.2 * RADIUS / 3
+        'translate(' + x + ', ' + y + ')')
+
+    thisView.checkIfNeedsToHideText(arcs, texts)
+
+#   legend
+    legendConfig =
+      columns_layout: true
+      hide_title: true
+
+    $legendElem = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
+    glados.Utils.renderLegendForProperty(@xAxisPropName, undefined, $legendElem, enableSelection=false, legendConfig)
+
+
+#   qtips
+    arcs.each (d) ->
+      key = d.key
+      count = d.doc_count
+      percentage = ((d.endAngle - d.startAngle) * 15.91549430919).toFixed(2);
+
+      text = '<b>' + key + '</b>' +
+        '<br>' + '<b>' + "Count:  " + '</b>' + count +
+        '<br>' + '<b>' + "Percentage:  " + '</b>' + percentage + '%'
       $(@).qtip
         content:
           text: text
@@ -299,87 +392,13 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
             y: -5
             x: 5
 
-# ----------------------------------------------------------------------------------------------------------------------
-#  legend
-# ----------------------------------------------------------------------------------------------------------------------
-    legendConfig =
-              columns_layout: true
-              hide_title: true
-              side_legend: @config.side_legend
+  checkIfNeedsToHideText: (arcs, texts) ->
+    arcs = arcs[0]
+    texts = texts[0]
 
-    legendElem = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
-    glados.Utils.renderLegendForProperty(@splitSeriesPropName, undefined, legendElem, enableSelection=false, legendConfig)
-    $(thisView.el).find('.BCK-CompResultsGraphLegendContainer').css('max-height', VISUALISATION_HEIGHT);
+    for i in [0..arcs.length - 1]
+      if texts[i].getBBox().width >= arcs[i].getBBox().width * 0.5
+        $(arcs[i]).find('text').hide()
 
-# -----------------------------------------------------------------------------------------------------------------
-# title
-# -----------------------------------------------------------------------------------------------------------------
-    mainSVGContainer.append('text')
-      .text(@config.title)
-      .attr('x', VISUALISATION_WIDTH/2)
-      .attr('y', TITLE_Y)
-      .attr('text-anchor', 'middle')
-      .classed('title', 'true')
-      .on('click', -> glados.Utils.URLS.shortenLinkIfTooLongAndOpen thisView.config.title_link_url)
 
-# -----------------------------------------------------------------------------------------------------------------
-# RENDER SIMPLE PIE
-# -----------------------------------------------------------------------------------------------------------------
-  renderSimplePie: (buckets) ->
-    values = []
-    labels = []
 
-    bucketsIndex = _.indexBy(buckets, 'key')
-    for bucket in buckets
-      values.push bucket.doc_count
-      labels.push bucket.key
-
-      col = [
-            glados.Settings.VIS_COLORS.TEAL3,
-            glados.Settings.VIS_COLORS.TEAL4,
-            glados.Settings.VIS_COLORS.TEAL5,
-            glados.Settings.VIS_COLORS.RED2,
-            glados.Settings.VIS_COLORS.RED3,
-            glados.Settings.VIS_COLORS.RED4,
-            glados.Settings.VIS_COLORS.PURPLE2,
-            glados.Settings.VIS_COLORS.BLUE2,
-            glados.Settings.VIS_COLORS.BLUE3,
-            glados.Settings.VIS_COLORS.BLUE4
-      ]
-
-    data1 =
-      values: values
-      labels: labels
-      type: 'pie'
-      textinfo:'value'
-      marker:
-        colors: col
-
-    data = [data1]
-    width = @$vis_elem.width()
-    minWidth = 400
-    if width < minWidth
-      width = minWidth
-
-    layout =
-      height: width * (3/5)
-      width: width
-      margin:
-        l: 5
-        r: 5
-        b: 5
-        t: 40
-        pad: 4
-      legend:
-        orientation: 'h'
-      font:
-        family: "ChEMBL_HelveticaNeueLTPRo"
-
-    pieDiv = @$vis_elem.get(0)
-    Plotly.newPlot pieDiv, data, layout
-
-    pieDiv.on('plotly_click', (eventInfo) ->
-      clickedKey = eventInfo.points[0].label
-      link = bucketsIndex[clickedKey].link
-      glados.Utils.URLS.shortenLinkIfTooLongAndOpen(link)
-    )
