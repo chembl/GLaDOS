@@ -6,12 +6,48 @@ glados.useNameSpace 'glados.models.visualisation',
         RELATED_ASSAYS:
           propName: 'type'
           label: 'Types'
+          coloursRange: [
+            glados.Settings.VIS_COLORS.TEAL3,
+            glados.Settings.VIS_COLORS.TEAL4,
+            glados.Settings.VIS_COLORS.TEAL5,
+            glados.Settings.VIS_COLORS.RED2,
+            glados.Settings.VIS_COLORS.RED3,
+            glados.Settings.VIS_COLORS.RED4,
+            glados.Settings.VIS_COLORS.PURPLE2,
+            glados.Settings.VIS_COLORS.BLUE2,
+            glados.Settings.VIS_COLORS.BLUE3,
+            glados.Settings.VIS_COLORS.BLUE4
+          ]
         RELATED_TARGETS:
           propName: 'type'
           label: 'Types'
+          coloursRange: [
+            glados.Settings.VIS_COLORS.TEAL3,
+            glados.Settings.VIS_COLORS.TEAL4,
+            glados.Settings.VIS_COLORS.TEAL5,
+            glados.Settings.VIS_COLORS.RED2,
+            glados.Settings.VIS_COLORS.RED3,
+            glados.Settings.VIS_COLORS.RED4,
+            glados.Settings.VIS_COLORS.PURPLE2,
+            glados.Settings.VIS_COLORS.BLUE2,
+            glados.Settings.VIS_COLORS.BLUE3,
+            glados.Settings.VIS_COLORS.BLUE4
+          ]
         RELATED_ACTIVITIES:
           propName: 'type'
           label: 'Types'
+          coloursRange: [
+            glados.Settings.VIS_COLORS.TEAL3,
+            glados.Settings.VIS_COLORS.TEAL4,
+            glados.Settings.VIS_COLORS.TEAL5,
+            glados.Settings.VIS_COLORS.RED2,
+            glados.Settings.VIS_COLORS.RED3,
+            glados.Settings.VIS_COLORS.RED4,
+            glados.Settings.VIS_COLORS.PURPLE2,
+            glados.Settings.VIS_COLORS.BLUE2,
+            glados.Settings.VIS_COLORS.BLUE3,
+            glados.Settings.VIS_COLORS.BLUE4
+          ]
         CHEMBL_ID:
           propName:'molecule_chembl_id'
           label: 'CHEMBL_ID'
@@ -133,9 +169,33 @@ glados.useNameSpace 'glados.models.visualisation',
         ACTIVITY_TYPES:
           propName: 'type'
           label: 'Types'
+          coloursRange: [
+            glados.Settings.VIS_COLORS.TEAL3,
+            glados.Settings.VIS_COLORS.TEAL4,
+            glados.Settings.VIS_COLORS.TEAL5,
+            glados.Settings.VIS_COLORS.RED2,
+            glados.Settings.VIS_COLORS.RED3,
+            glados.Settings.VIS_COLORS.RED4,
+            glados.Settings.VIS_COLORS.PURPLE2,
+            glados.Settings.VIS_COLORS.BLUE2,
+            glados.Settings.VIS_COLORS.BLUE3,
+            glados.Settings.VIS_COLORS.BLUE4
+          ]
         ASSOCIATED_ASSAYS:
           propName: 'type'
           label: 'Types'
+          coloursRange: [
+            glados.Settings.VIS_COLORS.TEAL3,
+            glados.Settings.VIS_COLORS.TEAL4,
+            glados.Settings.VIS_COLORS.TEAL5,
+            glados.Settings.VIS_COLORS.RED2,
+            glados.Settings.VIS_COLORS.RED3,
+            glados.Settings.VIS_COLORS.RED4,
+            glados.Settings.VIS_COLORS.PURPLE2,
+            glados.Settings.VIS_COLORS.BLUE2,
+            glados.Settings.VIS_COLORS.BLUE3,
+            glados.Settings.VIS_COLORS.BLUE4
+          ]
         CHEMBL_ID:
           propName:'target_chembl_id'
           label: 'CHEMBL_ID'

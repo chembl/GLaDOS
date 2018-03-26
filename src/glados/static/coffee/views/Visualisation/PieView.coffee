@@ -410,7 +410,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       columns_layout: true
       hide_title: true
 
-#    legendElem = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
-#    glados.Utils.renderLegendForProperty(@splitSeriesPropName, undefined, legendElem, enableSelection=false, legendConfig)
-#    $(thisView.el).find('.BCK-CompResultsGraphLegendContainer').css('max-height', VISUALISATION_WIDTH * 0.2);
+    legendElem = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
+    glados.Utils.renderLegendForProperty(@xAxisPropName, undefined, legendElem, enableSelection=false, legendConfig)
+    $(thisView.el).find('.BCK-CompResultsGraphLegendContainer').css('max-height', VISUALISATION_HEIGHT * 0.2);
 

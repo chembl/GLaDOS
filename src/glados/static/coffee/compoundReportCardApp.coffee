@@ -293,7 +293,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     relatedActivities = CompoundReportCardApp.getRelatedActivitiesAgg(chemblID)
-    relatedActivitiesProp = relatedAssaysProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RELATED_ACTIVITIES')
+    relatedActivitiesProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RELATED_ACTIVITIES')
 
     pieConfig =
       x_axis_prop_name: 'types'
