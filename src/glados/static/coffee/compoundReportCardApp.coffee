@@ -298,6 +298,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     pieConfig =
       x_axis_prop_name: 'types'
       title: gettext('glados_compound__associated_activities_pie_title_base') + chemblID
+      title_link_url: Activity.getActivitiesListURL('molecule_chembl_id:' + chemblID)
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
       properties:
         types: relatedActivitiesProp
@@ -382,6 +383,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     pieConfig =
       x_axis_prop_name: 'types'
       title: gettext('glados_compound__associated_assays_pie_title_base') + chemblID
+      title_link_url: Assay.getAssaysListURL('_metadata.related_compounds.chembl_ids.\\*:' + chemblID)
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
       properties:
         types: relatedAssaysProp
@@ -415,6 +417,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     pieConfig =
       x_axis_prop_name: 'classes'
       title: gettext('glados_compound__associated_targets_by_class_pie_title_base') + chemblID
+      title_link_url: Target.getTargetsListURL('_metadata.related_compounds.chembl_ids.\\*:' + chemblID)
       custom_empty_message: "No target classification data available for compound #{chemblID} (all may be non-protein targets)"
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
       properties:

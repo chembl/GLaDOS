@@ -307,33 +307,14 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
 
 
     VISUALISATION_WIDTH = $(@el).width()
-    VISUALISATION_HEIGHT = VISUALISATION_WIDTH / 2
+    TITLE_Y = 40
+    VISUALISATION_HEIGHT = (VISUALISATION_WIDTH / 2) + TITLE_Y
     MAX_VIS_WIDTH = Math.min(VISUALISATION_WIDTH, VISUALISATION_HEIGHT)
     X_CENTER = VISUALISATION_WIDTH / 2
-    Y_CENTER = VISUALISATION_HEIGHT / 2
+    Y_CENTER = (VISUALISATION_HEIGHT / 2) + TITLE_Y
     PADDING = MAX_VIS_WIDTH * 0.1
     RADIUS = (MAX_VIS_WIDTH / 2) - PADDING
-    COLORS = [
-      glados.Settings.VIS_COLORS.TEAL3,
-      glados.Settings.VIS_COLORS.TEAL4,
-      glados.Settings.VIS_COLORS.TEAL5,
-      glados.Settings.VIS_COLORS.RED2,
-      glados.Settings.VIS_COLORS.RED3,
-      glados.Settings.VIS_COLORS.RED4,
-      glados.Settings.VIS_COLORS.PURPLE2,
-      glados.Settings.VIS_COLORS.BLUE2,
-      glados.Settings.VIS_COLORS.BLUE3,
-      glados.Settings.VIS_COLORS.BLUE4
-    ]
 
-    mainContainer = d3.select(@$vis_elem.get(0))
-    mainSVGContainer = mainContainer
-      .append('svg')
-        .attr('class', 'mainSVGContainer')
-        .attr('width', VISUALISATION_WIDTH)
-        .attr('height', VISUALISATION_HEIGHT)
-
-    arcsContainer = mainSVGContainer.append('g')
 
     bucketSizes = (b.doc_count for b in buckets)
     bucketKeys = (b.key for b in buckets)
@@ -341,6 +322,27 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     thisView.xAxisPropName.domain = bucketKeys
     glados.models.visualisation.PropertiesFactory.generateColourScale(thisView.xAxisPropName)
     color = @xAxisPropName.colourScale
+
+    mainContainer = d3.select(@$vis_elem.get(0))
+    mainSVGContainer = mainContainer
+      .append('svg')
+        .attr('class', 'mainSVGContainer')
+        .attr('width', VISUALISATION_WIDTH)
+        .attr('height', VISUALISATION_HEIGHT + TITLE_Y)
+
+# -----------------------------------------------------------------------------------------------------------------
+# title
+# -----------------------------------------------------------------------------------------------------------------
+    mainSVGContainer.append('text')
+      .text(@config.title)
+      .attr('x', VISUALISATION_WIDTH/2)
+      .attr('y', TITLE_Y)
+      .attr('text-anchor', 'middle')
+      .classed('title', 'true')
+      .on('click', -> glados.Utils.URLS.shortenLinkIfTooLongAndOpen thisView.config.title_link_url)
+
+
+    arcsContainer = mainSVGContainer.append('g')
 
     pie = d3.layout.pie()
       .sort(null)
@@ -378,6 +380,16 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
         y = -Math.sin(angle) * 2 * RADIUS / 3
         'translate(' + x + ', ' + y + ')')
 
+  # ----------------------------------------------------------------------------------------------------------------------
+  #  legend
+  # ----------------------------------------------------------------------------------------------------------------------
+    legendConfig =
+      columns_layout: true
+      hide_title: true
+
+    $legendElem = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
+    glados.Utils.renderLegendForProperty(@xAxisPropName, undefined, $legendElem, enableSelection=false, legendConfig)
+
 # ----------------------------------------------------------------------------------------------------------------------
 #  qtips inner slices
 # ----------------------------------------------------------------------------------------------------------------------
@@ -402,13 +414,5 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
             y: -5
             x: 5
 
-# ----------------------------------------------------------------------------------------------------------------------
-#  legend
-# ----------------------------------------------------------------------------------------------------------------------
-    legendConfig =
-      columns_layout: true
-      hide_title: true
 
-    legendElem = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
-    glados.Utils.renderLegendForProperty(@xAxisPropName, undefined, legendElem, enableSelection=false, legendConfig)
 

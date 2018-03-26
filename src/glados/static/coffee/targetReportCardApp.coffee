@@ -138,6 +138,7 @@ class TargetReportCardApp extends glados.ReportCardApp
     pieConfig =
       x_axis_prop_name: 'types'
       title: gettext('glados_target__associated_activities_pie_title_base') + targetChemblID
+      title_link_url: Activity.getActivitiesListURL('target_chembl_id:' + targetChemblID)
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
       properties:
         types: bioactivitiesProp
@@ -171,6 +172,7 @@ class TargetReportCardApp extends glados.ReportCardApp
     pieConfig =
       x_axis_prop_name: 'types'
       title: gettext('glados_target__associated_assays_pie_title_base') + chemblID
+      title_link_url: Assay.getAssaysListURL('target_chembl_id:' + chemblID)
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
       properties:
         types: associatedAssaysProp
