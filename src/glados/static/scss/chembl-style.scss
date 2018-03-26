@@ -3562,9 +3562,11 @@ $chembl-header-height: 52.245px;
 }
 
 .simple-pie-container {
+  height: 100%;
+  background-color: white;
+  
   .pie-content {
     margin: 0;
-    background-color: white;
     .title {
       cursor: pointer;
       font-size: 90%;
@@ -3595,7 +3597,6 @@ $chembl-header-height: 52.245px;
     }
   }
   .simple-pie-legend {
-    background-color: white;
     .legend-text {
       font-size: 65%;
       fill: #666;
