@@ -48,6 +48,11 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     if buckets.length > maxCategories
       buckets = glados.Utils.Buckets.mergeBuckets(buckets, maxCategories, @model, @config.x_axis_prop_name)
 
+    if not @config.hide_title
+      $titleContainer = $(@el).find('.BCK-pie-title')
+      glados.Utils.fillContentForElement $titleContainer,
+        title: @config.title
+        title_url: @config.title_link_url
 
     if @config.stacked_donut
       @renderStackedDonut(buckets, maxCategories)
@@ -169,11 +174,6 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       totalBucketCount = 0
       for subBucket in subBuckets
         totalBucketCount += subBucket.doc_count
-
-#      maxCategories = 0
-#      for bucket in subBuckets
-#        if bucket.doc_count > (totalBucketCount * 0.05)
-#          maxCategories += 1
 
       maxCategories = 0
       for subBucket in subBuckets
@@ -320,16 +320,6 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
         .attr('width', VISUALISATION_WIDTH)
         .attr('height', VISUALISATION_HEIGHT + TITLE_Y)
 
-#   title
-    mainSVGContainer.append('text')
-      .text(@config.title)
-      .attr('x', VISUALISATION_WIDTH/2)
-      .attr('y', TITLE_Y / 2)
-      .attr('text-anchor', 'middle')
-      .classed('title', 'true')
-      .on('click', -> glados.Utils.URLS.shortenLinkIfTooLongAndOpen thisView.config.title_link_url)
-
-
     arcsContainer = mainSVGContainer.append('g')
 
     pie = d3.layout.pie()
@@ -366,8 +356,8 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       .text((d) -> d.doc_count )
       .attr('transform', (d) ->
         angle = Math.PI/2 + (d.endAngle + d.startAngle)/2
-        x = -Math.cos(angle) * 2 * RADIUS / 3
-        y = -Math.sin(angle) * 2 * RADIUS / 3
+        x = -Math.cos(angle) * 2.2 * RADIUS / 3
+        y = -Math.sin(angle) * 2.2 * RADIUS / 3
         'translate(' + x + ', ' + y + ')')
 
     thisView.checkIfNeedsToHideText(arcs, texts)
@@ -408,7 +398,8 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     texts = texts[0]
 
     for i in [0..arcs.length - 1]
-      if texts[i].getBBox().width >= arcs[i].getBBox().width * 0.3
-        console.log 'texto por borrar', $(arcs[i]).find('text').hide()
+      if texts[i].getBBox().width >= arcs[i].getBBox().width * 0.5
+        $(arcs[i]).find('text').hide()
+
 
 

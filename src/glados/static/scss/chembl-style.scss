@@ -3564,19 +3564,19 @@ $chembl-header-height: 52.245px;
 .simple-pie-container {
   height: 100%;
   background-color: white;
-
-  .pie-content {
-    margin: 0;
-    .title {
+  .pie-title {
       cursor: pointer;
       font-size: 90%;
       font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
       fill: #5e5e5e;
     }
 
-    .title:hover {
+    .pie-title:hover {
       fill: color('teal', 'accent-4');
     }
+
+  .pie-content {
+    margin: 0;
     .arc {
       text {
         fill: #494949;
