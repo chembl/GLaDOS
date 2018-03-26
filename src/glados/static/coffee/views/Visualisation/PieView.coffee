@@ -48,10 +48,6 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     if buckets.length > maxCategories
       buckets = glados.Utils.Buckets.mergeBuckets(buckets, maxCategories, @model, @config.x_axis_prop_name)
 
-    if not @config.hide_title
-      $titleContainer = $(@el).find('.BCK-pie-title')
-      glados.Utils.fillContentForElement $titleContainer,
-        title: @config.title
 
     if @config.stacked_donut
       @renderStackedDonut(buckets, maxCategories)

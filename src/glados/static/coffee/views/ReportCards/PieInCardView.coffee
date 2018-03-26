@@ -24,7 +24,7 @@ glados.useNameSpace 'glados.views.ReportCards',
       @model.get('state') == glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE
         return
 
-      $linkToActivities = $(@el).find('.BCK-all-sources-link')
-      glados.Utils.fillContentForElement $linkToActivities,
-        link_text: @config.link_to_all.link_text
-        url: @config.link_to_all.url
+#      $linkToActivities = $(@el).find('.BCK-all-sources-link')
+#      glados.Utils.fillContentForElement $linkToActivities,
+#        link_text: @config.link_to_all.link_text
+#        url: @config.link_to_all.url
