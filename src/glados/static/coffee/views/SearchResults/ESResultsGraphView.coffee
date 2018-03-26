@@ -81,30 +81,10 @@ glados.useNameSpace 'glados.views.SearchResults',
     #-------------------------------------------------------------------------------------------------------------------
     setUpEmbedModal: ->
 
-      if GlobalVariables['EMBEDED']
-        return
-
-      currentStateString = JSON.stringify(@collection.getStateJSON())
-      base64StateString = btoa(currentStateString)
-
-      embedURLRelative = glados.views.SearchResults.ESResultsGraphView.EMBED_PATH_RELATIVE_GENERATOR
-        state: encodeURIComponent(base64StateString)
-      embedURL = "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#{embedURLRelative}"
-
-      if not @embedModel?
-        @embedModel = glados.helpers.EmbedModalsHelper.initEmbedModal($(@el), embedURL)
-      else
-        @embedModel.set
-          embed_url: embedURL
-
-      # shorten the url, but in any case the original one is already shown
-      getShortenedURL = glados.Utils.URLS.getShortenedEmbebURLPromise(embedURL)
-      thisView = @
-      getShortenedURL.then (data) ->
-        newEmbedURL = glados.Settings.SHORTENED_EMBED_URL_GENERATOR
-          hash: encodeURIComponent(data.hash)
-        thisView.embedModel.set
-          embed_url: newEmbedURL
+      glados.helpers.EmbedModalsHelper.initEmbedModalForCollectionView(
+        glados.views.SearchResults.ESResultsGraphView.EMBED_PATH_RELATIVE_GENERATOR,
+        @
+      )
 
 
 glados.views.SearchResults.ESResultsGraphView.EMBED_PATH_RELATIVE_GENERATOR = Handlebars.compile('#view_for_collection/plot/state/{{state}}')
