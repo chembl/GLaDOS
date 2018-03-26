@@ -227,6 +227,7 @@ glados.useNameSpace 'glados.views.Browsers',
         newView = new @DEFAULT_RESULTS_VIEWS_BY_TYPE[viewType]
           collection: @collection
           el: $viewElement
+          # this is used for paginated cards and table only
           custom_render_evts: undefined
           render_at_init: true
           zoom_controls_container: @toolBarView.getZoomControlsContainer()

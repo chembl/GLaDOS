@@ -159,9 +159,6 @@ def render_params_from_hash(request, hash):
 
 def render_params_from_hash_when_embedded(request, hash):
 
-  print('EMBEDDED AND TINY')
-  print(hash)
-  print(url_shortener.get_original_url(hash))
   context = {
     'shortened_params': url_shortener.get_original_url(hash)
   }

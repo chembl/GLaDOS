@@ -278,10 +278,13 @@ glados.useNameSpace 'glados.apps.Embedding',
         initFunction: glados.views.SearchResults.ESResultsBioactivitySummaryView.initEmbedded
         in_script:
           script_id: 'Handlebars-Common-ESResultsListBioactivityView'
+      plot:
+        initFunction: glados.views.SearchResults.ESResultsGraphView.initEmbedded
+        in_script:
+          script_id: 'Handlebars-Common-ESResultsListGraphView'
 
     @initVIewForCollection: (viewType, state) ->
 
-      console.log 'AAA received state: ', state
       embedConfig = @requiredHTMLTemplatesURLSVisualisationsForCollection[viewType]
       initFunction = embedConfig.initFunction
       inScriptConfig = embedConfig.in_script

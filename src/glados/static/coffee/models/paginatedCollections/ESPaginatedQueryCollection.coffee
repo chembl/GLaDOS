@@ -767,11 +767,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       if not totalRecords?
         url = @getURL()
         requestData = JSON.stringify(thisCollection.getRequestData(1, 1))
-        $.post(url, requestData).done((response) ->
+        restartGetAllResults = $.post(url, requestData).done((response) ->
           thisCollection.setMeta('total_records', response.hits.total)
           thisCollection.getAllResults($progressElement, askingForOnlySelected)
         )
-        return
+        return [restartGetAllResults]
 
       pageSize = if totalRecords <= 100 then totalRecords else 100
 
