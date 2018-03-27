@@ -43,8 +43,6 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
       for col in allColumns
         col.modal_id = @modalId
 
-      console.log 'DEBUG!!!'
-      console.log '$(@el): ', $(@el)
       glados.Utils.fillContentForElement $(@el),
         all_selected: _.reduce((col.show for col in allColumns), (a,b) -> a and b)
         random_num: (new Date()).getTime()

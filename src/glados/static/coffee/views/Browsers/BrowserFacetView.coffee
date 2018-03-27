@@ -195,7 +195,6 @@ glados.useNameSpace 'glados.views.Browsers',
       glados.Utils.fillContentForElement $titleContainer, templateParams
 
       $modalContentContainer = $("##{modalID}")
-      console.log '$modalContentContainer: ', $modalContentContainer
       new glados.views.PaginatedViews.ColumnsHandling.ColumnsHandlerView
         model: @facetsVisibilityHandler
         el: $modalContentContainer

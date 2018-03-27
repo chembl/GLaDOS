@@ -20,7 +20,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @disableColumnsSelection = arguments[0].disable_columns_selection
       @disableItemsSelection = arguments[0].disable_items_selection
       @viewID = (new Date()).getTime().toString()
-
       @initColumnsHandler()
 
       if @isTable()
@@ -306,12 +305,15 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
 
     fillSelectAllContainer: ->
+
       $selectAllContainer = $(@el).find('.BCK-selectAll-container')
       if $selectAllContainer.length == 0
         return
       glados.Utils.fillContentForElement $selectAllContainer,
         base_check_box_id: @getBaseSelectAllCheckBoxID()
         all_items_selected: @collection.getMeta('all_items_selected') and not @collection.thereAreExceptions()
+
+      $selectAllContainer.show()
 
     fillNumResults: ->
       glados.Utils.fillContentForElement $(@el).find('.num-results'),
