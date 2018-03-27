@@ -230,24 +230,23 @@
 </script>
 
 
-<script id="Handlebars-Common-EditFiltersModal" type="text/x-handlebars-template">
+<script id="Handlebars-Common-EditFiltersTitle" type="text/x-handlebars-template">
 
-  <div class="center-align filters-title">
-      <b class="title">Filters</b>
-      <a class="BCK-Filters-Settings-Trigger menu-button modal-trigger" href="#{{modal_id}}">
-        <i class="fa fa-lg fa-cogs"></i>
-      </a>
-  </div>
-
-  <div class="BCK-ModalContent-container">
-    <div id="{{modal_id}}" class="modal bottom-sheet BCK-ModalContent"
-         data-hb-template="Handlebars-Common-ShowHideColumnsDropdown-content">
-
+    <div class="center-align filters-title">
+        <b class="title">Filters</b>
+        <a class="BCK-Filters-Settings-Trigger menu-button modal-trigger" href="#{{modal_id}}">
+            <i class="fa fa-lg fa-cogs"></i>
+        </a>
     </div>
-  </div>
-
-
 </script>
+
+<script id="Handlebars-Common-EditFiltersModal" type="text/x-handlebars-template">
+        <div id="{{modal_id}}" class="modal bottom-sheet BCK-ModalContent"
+             data-hb-template="Handlebars-Common-ShowHideColumnsDropdown-content">
+        </div>
+</script>
+
+
 
 <script id="Handlebars-Common-CollectionErrorMsg" type="text/x-handlebars-template">
   {{#if custom_explanation}} {{custom_explanation}} <br> {{/if}}

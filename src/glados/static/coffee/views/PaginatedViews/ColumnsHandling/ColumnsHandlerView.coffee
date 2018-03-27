@@ -20,15 +20,7 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
       'click .BCK-show-hide-column': 'showHideColumn'
 
     render: ->
-
-      if not @facetsMode
-        @renderModalTrigger()
       @renderModalContent()
-
-    renderModalTrigger: ->
-
-      glados.Utils.fillContentForElement $(@el).find('.BCK-ModalTrigger'),
-        modal_id: @modalId
 
     getAllColumnsFromFacets: -> @model.getAllFacetsGroupsAsList()
 
@@ -51,7 +43,9 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
       for col in allColumns
         col.modal_id = @modalId
 
-      glados.Utils.fillContentForElement $(@el).find('.BCK-ModalContent'),
+      console.log 'DEBUG!!!'
+      console.log '$(@el): ', $(@el)
+      glados.Utils.fillContentForElement $(@el),
         all_selected: _.reduce((col.show for col in allColumns), (a,b) -> a and b)
         random_num: (new Date()).getTime()
         all_columns: allColumns
