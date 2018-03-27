@@ -292,7 +292,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     setUpTableHeaderPinner: ($table) ->
       $win = $(window)
-      $scrollContainer = $(@el).find('.BCK-top-scroller-container')
       $table.data('data-state', 'no-pinned')
 
       scrollTableHeader = ->
@@ -307,13 +306,12 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
         $win = $(window)
         $table = $(@el).find('table.BCK-items-container')
-        $originalHeader = $table.find('.sticky-header').first()
+        $originalHeader = $table.find('#sticky-header').first()
         $clonedHeader = $originalHeader.clone().addClass('pinned-header').attr('id','clonedHeader')
         scroll = $win.scrollTop()
-        topTrigger = $scrollContainer.offset().top
+        topTrigger = $originalHeader.offset().top
         bottomTrigger = $table.find('.BCK-items-row').last().offset().top
         searchBarHeight = $('#chembl-header-container.pinned').find('.chembl-header').height()
-
 
         if scroll >= topTrigger  -  searchBarHeight and scroll < bottomTrigger
           @scrollTableHeader()
