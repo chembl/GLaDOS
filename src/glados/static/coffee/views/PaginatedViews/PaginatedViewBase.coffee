@@ -265,6 +265,14 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           if templateParams.img_url? and (@hasStructureHighlightingEnabled() or @hasSimilarityMapsEnabled())
             @createDeferredView(model, $newItemElem)
 
+          viewConfig =
+            invert_trigger_colours: true
+
+          embedURL = glados.ReportCardApp.EMBED_MINI_REPORT_CARD_URL_GENERATOR
+            entity_type: item.entityName
+            id: idValue
+          glados.helpers.EmbedModalsHelper.initEmbedModal($newItemElem, embedURL, viewConfig)
+
       @fixCardHeight($appendTo)
 
     fixCardHeight: ($appendTo) ->

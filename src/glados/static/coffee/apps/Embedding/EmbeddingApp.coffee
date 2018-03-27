@@ -306,3 +306,15 @@ glados.useNameSpace 'glados.apps.Embedding',
 
       @loadHTMLSectionInScript(inScriptConfig, initFunction, initFunctionParams)
 
+
+    @initMiniReportCard: (entityType, chemblID) ->
+
+      Entity = undefined
+      AvailableEntities = [Compound, Target, Assay, Document, CellLine, glados.models.Tissue]
+      for CurrentEntity in AvailableEntities
+        if entityType == CurrentEntity.prototype.entityName
+          Entity = CurrentEntity
+
+      $embedContentContainer = $('#BCK-embedded-content')
+      glados.ReportCardApp.initMiniReportCard(Entity, $embedContentContainer, chemblID)
+

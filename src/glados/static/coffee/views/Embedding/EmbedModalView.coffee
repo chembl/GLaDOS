@@ -3,6 +3,8 @@ glados.useNameSpace 'glados.views.Embedding',
 
     initialize: ->
 
+      @config = arguments[0].config
+      @config ?= {}
       $parentElement = $(@el)
 
       if EMBEDED?
@@ -12,15 +14,22 @@ glados.useNameSpace 'glados.views.Embedding',
         return
 
       $triggerButtonContainer = $parentElement.find('.BCK-Embed-ButtonContainer')
-      if $triggerButtonContainer.length == 0
+      if $triggerButtonContainer.length == 0 or @config.force_parent_as_container
         $triggerButtonContainer = $parentElement
 
       triggerButtonContent = glados.Utils.getContentFromTemplate('Handlebars-Common-EmbedTrigger')
       $triggerButtonContainer.append(triggerButtonContent)
 
-      @$modalTrigger = $parentElement.find('.embed-modal-trigger')
+      # search for triggers that have nor already been claimed
+      @$modalTrigger = $parentElement.find('.embed-modal-trigger:not([data-view-id])')
       modalNumber = Math.floor((Math.random() * 1000000) + 1)
       @modalId = 'embed-modal-for-' + modalNumber
+      @viewID = "EmbedModalView-#{@modalId}"
+      @$modalTrigger.attr('data-view-id', @viewID)
+
+      if @config.invert_trigger_colours
+        @$modalTrigger.removeClass('teal')
+        @$modalTrigger.addClass('inverted')
 
       modalContent = glados.Utils.getContentFromTemplate('Handlebars-Common-EmbedModal', {modal_id: @modalId })
       $generatedModalsContainer = $('#BCK-GeneratedModalsContainer')

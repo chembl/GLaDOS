@@ -978,6 +978,9 @@ div#CompoundNameAndClassification .comp-phase-0 {
   padding: 0 4px;
   top: -3px;
   right: 0px;
+  &.inverted{
+    color: $primary-color-dark
+  }
 }
 
 .embed-preview {
@@ -1535,8 +1538,21 @@ em.glados-result-highlight {
       vertical-align: middle;
     }
   }
+  .embed-btn-in-card{
+    position: absolute;
+    bottom: 18px;
+    right: 0px;
+  }
 }
 
+.card {
+  &.vertical {
+    .embed-btn-in-card{
+      position: absolute;
+      left: 20px;
+    }
+  }
+}
 /**
 * Charts
 * ----------------------------------------------------------------------------------------------------------------------

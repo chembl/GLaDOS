@@ -2,7 +2,8 @@ Assay = Backbone.Model.extend
 
   entityName: 'Assay'
   idAttribute: 'assay_chembl_id'
-
+  defaults:
+    fetch_from_elastic: true
   initialize: ->
 
     id = @get('id')
@@ -10,26 +11,35 @@ Assay = Backbone.Model.extend
     @set('id', id)
     @set('assay_chembl_id', id)
 
-    @url = glados.Settings.WS_BASE_URL + 'assay/' + @get('assay_chembl_id') + '.json'
+    if @get('fetch_from_elastic')
+      @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_assay/assay/' + id
+    else
+      @url = glados.Settings.WS_BASE_URL + 'assay/' + id + '.json'
 
-  parse: (data) ->
-    parsed = data
-    parsed.target = data.assay_chembl_id
+  parse: (response) ->
 
-    parsed.report_card_url = Assay.get_report_card_url(parsed.assay_chembl_id )
-    parsed.document_link = Document.get_report_card_url(parsed.document_chembl_id)
-    parsed.tissue_link = glados.models.Tissue.get_report_card_url(parsed.tissue_chembl_id)
+    # get data when it comes from elastic
+    if response._source?
+      objData = response._source
+    else
+      objData = response
 
-    filterForCompounds = '_metadata.related_assays.chembl_ids.\\*:' + parsed.assay_chembl_id
-    parsed.compounds_url = Compound.getCompoundsListURL(filterForCompounds)
+    objData.target = response.assay_chembl_id
 
-    filterForActivities = 'assay_chembl_id:' + parsed.assay_chembl_id
-    parsed.activities_url = Activity.getActivitiesListURL(filterForActivities)
+    objData.report_card_url = Assay.get_report_card_url(objData.assay_chembl_id )
+    objData.document_link = Document.get_report_card_url(objData.document_chembl_id)
+    objData.tissue_link = glados.models.Tissue.get_report_card_url(objData.tissue_chembl_id)
 
-    parsed.target_link = Target.get_report_card_url(parsed.target_chembl_id)
-    parsed.cell_link = CellLine.get_report_card_url(parsed.cell_chembl_id)
+    filterForCompounds = '_metadata.related_assays.chembl_ids.\\*:' + objData.assay_chembl_id
+    objData.compounds_url = Compound.getCompoundsListURL(filterForCompounds)
 
-    return parsed;
+    filterForActivities = 'assay_chembl_id:' + objData.assay_chembl_id
+    objData.activities_url = Activity.getActivitiesListURL(filterForActivities)
+
+    objData.target_link = Target.get_report_card_url(objData.target_chembl_id)
+    objData.cell_link = CellLine.get_report_card_url(objData.cell_chembl_id)
+
+    return objData;
 
 # Constant definition for ReportCardEntity model functionalities
 _.extend(Assay, glados.models.base.ReportCardEntity)
@@ -138,4 +148,4 @@ Assay.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS = _.union(Assay.COLUMNS_SETTINGS
 Assay.MINI_REPORT_CARD =
   LOADING_TEMPLATE: 'Handlebars-Common-MiniRepCardPreloader'
   TEMPLATE: 'Handlebars-Common-MiniReportCard'
-  COLUMNS: Assay.COLUMNS_SETTINGS.RESULTS_LIST_CARD
+  COLUMNS: Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
