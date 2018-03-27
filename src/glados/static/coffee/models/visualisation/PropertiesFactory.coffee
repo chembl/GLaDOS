@@ -16,7 +16,7 @@ glados.useNameSpace 'glados.models.visualisation',
             glados.Settings.VIS_COLORS.PURPLE2,
             glados.Settings.VIS_COLORS.BLUE2,
             glados.Settings.VIS_COLORS.BLUE3,
-            glados.Settings.VIS_COLORS.BLUE4
+            glados.Settings.VIS_COLORS.GREY2
           ]
           colourScaleType: glados.Visualisation.CATEGORICAL
         RELATED_TARGETS:
@@ -32,7 +32,7 @@ glados.useNameSpace 'glados.models.visualisation',
             glados.Settings.VIS_COLORS.PURPLE2,
             glados.Settings.VIS_COLORS.BLUE2,
             glados.Settings.VIS_COLORS.BLUE3,
-            glados.Settings.VIS_COLORS.BLUE4
+            glados.Settings.VIS_COLORS.GREY2
           ]
           colourScaleType: glados.Visualisation.CATEGORICAL
         RELATED_ACTIVITIES:
@@ -48,7 +48,7 @@ glados.useNameSpace 'glados.models.visualisation',
             glados.Settings.VIS_COLORS.PURPLE2,
             glados.Settings.VIS_COLORS.BLUE2,
             glados.Settings.VIS_COLORS.BLUE3,
-            glados.Settings.VIS_COLORS.BLUE4
+            glados.Settings.VIS_COLORS.GREY2
           ]
           colourScaleType: glados.Visualisation.CATEGORICAL
         CHEMBL_ID:
@@ -181,7 +181,7 @@ glados.useNameSpace 'glados.models.visualisation',
             glados.Settings.VIS_COLORS.PURPLE2,
             glados.Settings.VIS_COLORS.BLUE2,
             glados.Settings.VIS_COLORS.BLUE3,
-            glados.Settings.VIS_COLORS.BLUE4
+            glados.Settings.VIS_COLORS.GREY2
           ]
           colourScaleType: glados.Visualisation.CATEGORICAL
         RELATED_ASSAYS:
@@ -197,7 +197,7 @@ glados.useNameSpace 'glados.models.visualisation',
             glados.Settings.VIS_COLORS.PURPLE2,
             glados.Settings.VIS_COLORS.BLUE2,
             glados.Settings.VIS_COLORS.BLUE3,
-            glados.Settings.VIS_COLORS.BLUE4
+            glados.Settings.VIS_COLORS.GREY2
           ]
           colourScaleType: glados.Visualisation.CATEGORICAL
         RELATED_ACTIVITIES:
@@ -213,7 +213,7 @@ glados.useNameSpace 'glados.models.visualisation',
             glados.Settings.VIS_COLORS.PURPLE2,
             glados.Settings.VIS_COLORS.BLUE2,
             glados.Settings.VIS_COLORS.BLUE3,
-            glados.Settings.VIS_COLORS.BLUE4
+            glados.Settings.VIS_COLORS.GREY2
           ]
           colourScaleType: glados.Visualisation.CATEGORICAL
     Target:
@@ -232,7 +232,7 @@ glados.useNameSpace 'glados.models.visualisation',
             glados.Settings.VIS_COLORS.PURPLE2,
             glados.Settings.VIS_COLORS.BLUE2,
             glados.Settings.VIS_COLORS.BLUE3,
-            glados.Settings.VIS_COLORS.BLUE4
+            glados.Settings.VIS_COLORS.GREY2
           ]
           colourScaleType: glados.Visualisation.CATEGORICAL
         ASSOCIATED_ASSAYS:
@@ -248,7 +248,7 @@ glados.useNameSpace 'glados.models.visualisation',
             glados.Settings.VIS_COLORS.PURPLE2,
             glados.Settings.VIS_COLORS.BLUE2,
             glados.Settings.VIS_COLORS.BLUE3,
-            glados.Settings.VIS_COLORS.BLUE4
+            glados.Settings.VIS_COLORS.GREY2
           ]
           colourScaleType: glados.Visualisation.CATEGORICAL
         CHEMBL_ID:
@@ -325,7 +325,7 @@ glados.useNameSpace 'glados.models.visualisation',
             glados.Settings.VIS_COLORS.PURPLE2,
             glados.Settings.VIS_COLORS.BLUE2,
             glados.Settings.VIS_COLORS.BLUE3,
-            glados.Settings.VIS_COLORS.BLUE4
+            glados.Settings.VIS_COLORS.GREY2
           ]
           colourScaleType: glados.Visualisation.CATEGORICAL
         RELATED_ACTIVITIES:
@@ -341,7 +341,7 @@ glados.useNameSpace 'glados.models.visualisation',
             glados.Settings.VIS_COLORS.PURPLE2,
             glados.Settings.VIS_COLORS.BLUE2,
             glados.Settings.VIS_COLORS.BLUE3,
-            glados.Settings.VIS_COLORS.BLUE4
+            glados.Settings.VIS_COLORS.GREY2
           ]
           colourScaleType: glados.Visualisation.CATEGORICAL
     Tissue:
@@ -360,7 +360,7 @@ glados.useNameSpace 'glados.models.visualisation',
             glados.Settings.VIS_COLORS.PURPLE2,
             glados.Settings.VIS_COLORS.BLUE2,
             glados.Settings.VIS_COLORS.BLUE3,
-            glados.Settings.VIS_COLORS.BLUE4
+            glados.Settings.VIS_COLORS.GREY2
           ]
           colourScaleType: glados.Visualisation.CATEGORICAL
         RELATED_ACTIVITIES:
@@ -376,7 +376,7 @@ glados.useNameSpace 'glados.models.visualisation',
             glados.Settings.VIS_COLORS.PURPLE2,
             glados.Settings.VIS_COLORS.BLUE2,
             glados.Settings.VIS_COLORS.BLUE3,
-            glados.Settings.VIS_COLORS.BLUE4
+            glados.Settings.VIS_COLORS.GREY2
           ]
           colourScaleType: glados.Visualisation.CATEGORICAL
     Assay:
@@ -395,7 +395,7 @@ glados.useNameSpace 'glados.models.visualisation',
             glados.Settings.VIS_COLORS.PURPLE2,
             glados.Settings.VIS_COLORS.BLUE2,
             glados.Settings.VIS_COLORS.BLUE3,
-            glados.Settings.VIS_COLORS.BLUE4
+            glados.Settings.VIS_COLORS.GREY2
           ]
           colourScaleType: glados.Visualisation.CATEGORICAL
     Activity:
