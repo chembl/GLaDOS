@@ -2,7 +2,8 @@ CellLine = Backbone.Model.extend
 
   entityName: 'Cell Line'
   idAttribute:'cell_chembl_id'
-
+  defaults:
+    fetch_from_elastic: true
   initialize: ->
 
     id = @get('id')
@@ -10,19 +11,28 @@ CellLine = Backbone.Model.extend
     @set('id', id)
     @set('cell_chembl_id', id)
 
-    @url = glados.Settings.WS_BASE_URL + 'cell_line/' + @get('cell_chembl_id') + '.json'
+    if @get('fetch_from_elastic')
+      @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_cell_line/cell_line/' + id
+    else
+      @url = glados.Settings.WS_BASE_URL + 'cell_line/' + id + '.json'
 
-  parse: (data) ->
-    parsed = data
-    parsed.report_card_url = CellLine.get_report_card_url(parsed.cell_chembl_id)
 
-    filterForActivities = '_metadata.assay_data.cell_chembl_id:' + parsed.cell_chembl_id
-    parsed.activities_url = Activity.getActivitiesListURL(filterForActivities)
+  parse: (response) ->
 
-    filterForCompounds = '_metadata.related_cell_lines.chembl_ids.\\*:' + parsed.cell_chembl_id
-    parsed.compounds_url = Compound.getCompoundsListURL(filterForCompounds)
+    if response._source?
+      objData = response._source
+    else
+      objData = response
 
-    return parsed;
+    objData.report_card_url = CellLine.get_report_card_url(objData.cell_chembl_id)
+
+    filterForActivities = '_metadata.assay_data.cell_chembl_id:' + objData.cell_chembl_id
+    objData.activities_url = Activity.getActivitiesListURL(filterForActivities)
+
+    filterForCompounds = '_metadata.related_cell_lines.chembl_ids.\\*:' + objData.cell_chembl_id
+    objData.compounds_url = Compound.getCompoundsListURL(filterForCompounds)
+
+    return objData;
 
 # Constant definition for ReportCardEntity model functionalities
 _.extend(CellLine, glados.models.base.ReportCardEntity)
