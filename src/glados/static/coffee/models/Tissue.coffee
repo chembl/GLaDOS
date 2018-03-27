@@ -3,7 +3,8 @@ glados.useNameSpace 'glados.models',
 
     entityName: 'Tissue'
     idAttribute:'tissue_chembl_id'
-
+    defaults:
+      fetch_from_elastic: true
     initialize: ->
 
       id = @get('id')
@@ -11,19 +12,27 @@ glados.useNameSpace 'glados.models',
       @set('id', id)
       @set('tissue_chembl_id', id)
 
-      @url = glados.Settings.WS_BASE_URL + 'tissue/' + @get('tissue_chembl_id') + '.json'
+      if @get('fetch_from_elastic')
+        @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_tissue/tissue/' + id
+      else
+        @url = glados.Settings.WS_BASE_URL + 'tissue/' + id + '.json'
 
     parse: (response) ->
 
-      response.report_card_url = glados.models.Tissue.get_report_card_url(response.tissue_chembl_id )
+      if response._source?
+        objData = response._source
+      else
+        objData = response
 
-      filterForActivities = '_metadata.assay_data.tissue_chembl_id:' + response.tissue_chembl_id
-      response.activities_url = Activity.getActivitiesListURL(filterForActivities)
+      objData.report_card_url = glados.models.Tissue.get_report_card_url(objData.tissue_chembl_id )
 
-      filterForCompounds = '_metadata.related_tissues.chembl_ids.\\*:' + response.tissue_chembl_id
-      response.compounds_url = Compound.getCompoundsListURL(filterForCompounds)
+      filterForActivities = '_metadata.assay_data.tissue_chembl_id:' + objData.tissue_chembl_id
+      objData.activities_url = Activity.getActivitiesListURL(filterForActivities)
 
-      return response;
+      filterForCompounds = '_metadata.related_tissues.chembl_ids.\\*:' + objData.tissue_chembl_id
+      objData.compounds_url = Compound.getCompoundsListURL(filterForCompounds)
+
+      return objData;
 
 # Constant definition for ReportCardEntity model functionalities
 _.extend(glados.models.Tissue, glados.models.base.ReportCardEntity)
