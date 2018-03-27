@@ -172,7 +172,9 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
   .menu-logo {
     visibility: hidden;
   }
-}ƒfon
+}
+
+ƒfon
 
 @media #{$medium-and-down}{
   .z-depth-below-zero {
@@ -969,9 +971,10 @@ div#CompoundNameAndClassification .comp-phase-0 {
 
 }
 
-.position-relative{
+.position-relative {
   position: relative;
 }
+
 .embed-btn {
   position: absolute;
   color: white;
@@ -3321,7 +3324,7 @@ $chembl-header-height: 52.245px;
 .paginated-collection {
   padding: 4px;
 
-  .paginator-row{
+  .paginator-row {
     margin-top: 20px;
   }
   .pg-table {
@@ -3582,9 +3585,9 @@ $chembl-header-height: 52.245px;
     }
   }
 
-    .pie-title a:hover {
-      color : color('teal', 'accent-4');
-    }
+  .pie-title a:hover {
+    color: color('teal', 'accent-4');
+  }
 
   .pie-content {
     margin: 0;
@@ -3615,7 +3618,6 @@ $chembl-header-height: 52.245px;
     }
   }
 }
-
 
 /**
 * stacked donut pie-chart

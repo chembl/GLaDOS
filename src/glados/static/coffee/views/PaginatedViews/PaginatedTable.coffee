@@ -113,13 +113,26 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     initialiseColumnsModal: ->
 
-      $modalContainer = $(@el).find('.BCK-show-hide-columns-container')
+      now = Date.now()
+      modalID = @collection.getMeta('id_name') + 'show-hide-columns-modal' + now
+
+      glados.Utils.fillContentForElement $(@el).find('.BCK-ModalTrigger'),
+        modal_id: modalID
+
+      templateParams =
+        modal_id: modalID
+
+      $('#BCK-GeneratedModalsContainer').append($(glados.Utils.getContentFromTemplate(
+        'Handlebars-Common-EditFiltersModal', templateParams)))
+
+      $modalContentContainer = $("##{modalID}")
 
       new glados.views.PaginatedViews.ColumnsHandling.ColumnsHandlerView
         model: @columnsHandler
-        el: $modalContainer
+        el: $modalContentContainer
+        modal_id: modalID
 
-      $modalContainer.find('.modal').modal()
+      $modalContentContainer.modal()
 
     # ------------------------------------------------------------------------------------------------------------------
     # Fill Templates

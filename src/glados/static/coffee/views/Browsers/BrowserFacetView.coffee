@@ -173,9 +173,16 @@ glados.useNameSpace 'glados.views.Browsers',
     # ------------------------------------------------------------------------------------------------------------------
     initialiseTitle: ->
 
-      $titleAndModalContainer = $(@el).find('.BCK-show-hide-filters-modal-container')
+
+      $titleContainer = $(@el).find('.BCK-show-hide-filters-modal-container')
       now = Date.now()
       modalID = @collection.getMeta('id_name') + 'edit-filters-modal-' + now
+
+      templateParams =
+        modal_id: modalID
+
+      $('#BCK-GeneratedModalsContainer').append($(glados.Utils.getContentFromTemplate(
+        'Handlebars-Common-EditFiltersModal', templateParams)))
 
       filters = []
       for fGroupKey, fGroup of @collection.getFacetsGroups(undefined, onlyVisible=false)
@@ -185,17 +192,17 @@ glados.useNameSpace 'glados.views.Browsers',
           key: fGroupKey
           checked: fGroup.show
 
-      glados.Utils.fillContentForElement $titleAndModalContainer,
-        modal_id: modalID
+      glados.Utils.fillContentForElement $titleContainer, templateParams
 
-      $modalContentContainer = $titleAndModalContainer.find('.BCK-ModalContent-container')
+      $modalContentContainer = $("##{modalID}")
+      console.log '$modalContentContainer: ', $modalContentContainer
       new glados.views.PaginatedViews.ColumnsHandling.ColumnsHandlerView
         model: @facetsVisibilityHandler
         el: $modalContentContainer
         modal_id: modalID
         facets_mode: true
 
-      $(@el).find('#' + modalID).modal()
+      $modalContentContainer.modal()
 
 
     # ------------------------------------------------------------------------------------------------------------------
