@@ -265,7 +265,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           if templateParams.img_url? and (@hasStructureHighlightingEnabled() or @hasSimilarityMapsEnabled())
             @createDeferredView(model, $newItemElem)
 
-          glados.helpers.EmbedModalsHelper.initEmbedModal($newItemElem, 'holaaa')
+          viewConfig =
+            invert_trigger_colours: true
+          glados.helpers.EmbedModalsHelper.initEmbedModal($newItemElem, 'holaaa', viewConfig)
 
       @fixCardHeight($appendTo)
 

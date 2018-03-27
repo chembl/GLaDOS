@@ -27,6 +27,10 @@ glados.useNameSpace 'glados.views.Embedding',
       @viewID = "EmbedModalView-#{@modalId}"
       @$modalTrigger.attr('data-view-id', @viewID)
 
+      if @config.invert_trigger_colours
+        @$modalTrigger.removeClass('teal')
+        @$modalTrigger.addClass('inverted')
+
       modalContent = glados.Utils.getContentFromTemplate('Handlebars-Common-EmbedModal', {modal_id: @modalId })
       $generatedModalsContainer = $('#BCK-GeneratedModalsContainer')
       $generatedModalsContainer.append(modalContent)

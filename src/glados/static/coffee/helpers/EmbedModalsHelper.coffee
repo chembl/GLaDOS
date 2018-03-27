@@ -33,7 +33,6 @@ glados.useNameSpace 'glados.helpers',
       if not parentView.embedModel?
         viewConfig =
           force_parent_as_container: true
-          invert_trigger_colours: true
         parentView.embedModel = glados.helpers.EmbedModalsHelper.initEmbedModal($(parentView.el), embedURL, viewConfig)
       else
         parentView.embedModel.set

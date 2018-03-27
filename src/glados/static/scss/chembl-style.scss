@@ -991,6 +991,9 @@ div#CompoundNameAndClassification .comp-phase-0 {
   padding: 0 4px;
   top: -3px;
   right: 0px;
+  &.inverted{
+    color: $primary-color-dark
+  }
 }
 
 .embed-preview {
