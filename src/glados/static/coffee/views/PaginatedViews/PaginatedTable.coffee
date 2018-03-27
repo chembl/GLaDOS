@@ -25,8 +25,12 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     renderViewState: ->
 
+
       @clearContentContainer()
       @fillSelectAllContainer() unless @disableItemsSelection
+      if @disableItemsSelection
+        @removeSelectAllContainer()
+
       @fillPaginators()
       if @collection.getMeta('total_pages') == 1
         @hidePaginators()
@@ -47,6 +51,12 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         @hideSuggestedLabel()
 
       glados.views.PaginatedViews.PaginatedViewBase.renderViewState.call(@)
+
+
+    removeSelectAllContainer: ->
+      $selectAllContainer = $(@el).find('.BCK-selectAll-container')
+      $selectAllContainer.hide()
+
 
     # ------------------------------------------------------------------------------------------------------------------
     # Columns handling
