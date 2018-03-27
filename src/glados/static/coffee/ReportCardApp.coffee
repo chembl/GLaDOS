@@ -55,4 +55,5 @@ glados.useNameSpace 'glados',
     # ------------------------------------------------------------------------------------------------------------------
     # Embedding
     # ------------------------------------------------------------------------------------------------------------------
-    @EMBED_MINI_REPORT_CARD_URL_GENERATOR = Handlebars.compile('#mini_report_card/{{entity_type}}/{{id}}')
+    @EMBED_MINI_REPORT_CARD_URL_GENERATOR =
+    Handlebars.compile("#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#mini_report_card/{{entity_type}}/{{id}}")

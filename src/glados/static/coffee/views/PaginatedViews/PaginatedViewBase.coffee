@@ -267,7 +267,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
           viewConfig =
             invert_trigger_colours: true
-          glados.helpers.EmbedModalsHelper.initEmbedModal($newItemElem, 'holaaa', viewConfig)
+
+          embedURL = glados.ReportCardApp.EMBED_MINI_REPORT_CARD_URL_GENERATOR
+            entity_type: item.entityName
+            id: idValue
+          glados.helpers.EmbedModalsHelper.initEmbedModal($newItemElem, embedURL, viewConfig)
 
       @fixCardHeight($appendTo)
 
