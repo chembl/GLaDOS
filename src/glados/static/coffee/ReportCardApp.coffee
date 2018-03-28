@@ -15,10 +15,12 @@ glados.useNameSpace 'glados',
 
 
     @hideSection = (sectionID) ->
+      console.log 'HIDE:', sectionID
       @scrollSpyHandler.hideSection(sectionID)
       $('#' + sectionID).hide()
 
     @showSection = (sectionID) ->
+      console.log 'SHOW:', sectionID
       @scrollSpyHandler.showSection(sectionID)
       $('#' + sectionID).show()
 
@@ -31,6 +33,8 @@ glados.useNameSpace 'glados',
       new glados.views.ReportCards.SectionView
         el: $('#' + sectionID)
         model:sectionModel
+
+      @hideSection(sectionID)
 
     # you can provide chembld iD or a model already created
     @initMiniReportCard = (Entity, $containerElem, chemblID, model, customTemplate, additionalTemplateParams={},
