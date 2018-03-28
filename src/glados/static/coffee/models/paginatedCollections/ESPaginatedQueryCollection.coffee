@@ -696,26 +696,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @setMeta('ignore_score', true)
       @fetch()
 
-#TODO implement sorting
-
-    resetSortData: ->
-#TODO implement sorting
-
-
-# sets the term to search in the collection
-# when the collection is server side, the corresponding column and type are required.
-# This is because the web services don't provide a search with OR
-# for client side, it can be null, but for example for server side
-# for chembl25, term will be 'chembl25', column will be 'molecule_chembl_id', and type will be 'text'
-# the url will be generated taking into account this terms.
-    setSearch: (term, column, type)->
-#TODO Check if this is required
-
-# from all the comparators, returns the one that is being used for sorting.
-# if none is being used for sorting returns undefined
-    getCurrentSortingComparator: () ->
-#TODO implement sorting
-
     # ------------------------------------------------------------------------------------------------------------------
     # Download functions
     # ------------------------------------------------------------------------------------------------------------------
@@ -954,7 +934,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           $progressElement.html Handlebars.compile($('#Handlebars-Common-CollectionErrorMsg').html())
             msg: msg
       )
-  ,
+      
     HIGHLIGHT_SUFFIXES_TO_REMOVE: [
       'eng_analyzed', 'ws_analyzed', 'std_analyzed', 'alphanumeric_lowercase_keyword', /\.\d*$/
     ]
