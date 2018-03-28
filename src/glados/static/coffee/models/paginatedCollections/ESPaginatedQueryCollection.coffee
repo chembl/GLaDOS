@@ -4,7 +4,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
   # This class implements the pagination, sorting and searching for a collection in ElasticSearch
   # extend it to get a collection with the extra capabilities
   # --------------------------------------------------------------------------------------------------------------------
-  ESPaginatedQueryCollection: Backbone.Collection.extend
+  ESPaginatedQueryCollection:
     # ------------------------------------------------------------------------------------------------------------------
     # Backbone Override
     # ------------------------------------------------------------------------------------------------------------------

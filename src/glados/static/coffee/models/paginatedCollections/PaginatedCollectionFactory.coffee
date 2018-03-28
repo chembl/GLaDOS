@@ -38,7 +38,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getNewESResultsListFor: (esIndexSettings, customQueryString='*', useCustomQueryString=false, itemsList,
       contextualProperties, searchTerm, stickyQuery, searchESQuery) ->
 
-      IndexESPagQueryCollection = glados.models.paginatedCollections.ESPaginatedQueryCollection\
+      IndexESPagQueryCollection = glados.models.paginatedCollections.PaginatedCollectionBase\
+      .extend(glados.models.paginatedCollections.ESPaginatedQueryCollection)
       .extend(glados.models.paginatedCollections.SelectionFunctions)
       .extend(glados.models.paginatedCollections.SortingFunctions)
       .extend(glados.models.paginatedCollections.ReferenceStructureFunctions)
@@ -107,7 +108,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
 # creates a new instance of a Paginated Collection from Web Services
     getNewWSCollectionFor: (collectionSettings, filter='') ->
-      wsPagCollection = glados.models.paginatedCollections.WSPaginatedCollection\
+      wsPagCollection = glados.models.paginatedCollections.PaginatedCollectionBase\
+      .extend(glados.models.paginatedCollections.WSPaginatedCollection)
       .extend(glados.models.paginatedCollections.SelectionFunctions)
       .extend(glados.models.paginatedCollections.SortingFunctions)
       .extend(glados.models.paginatedCollections.CacheFunctions).extend
@@ -143,7 +145,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 # the collection gets all the data is in one call and the full list is in the client all the time.
     getNewClientSideCollectionFor: (collectionSettings, generator) ->
 
-      collection = glados.models.paginatedCollections.ClientSidePaginatedCollection\
+      collection = glados.models.paginatedCollections.PaginatedCollectionBase\
+      .extend(glados.models.paginatedCollections.ClientSidePaginatedCollection)
       .extend(glados.models.paginatedCollections.SelectionFunctions)
       .extend(glados.models.paginatedCollections.SortingFunctions).extend
 

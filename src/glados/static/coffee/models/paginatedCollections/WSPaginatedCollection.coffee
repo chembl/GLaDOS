@@ -4,13 +4,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
   # This class implements the pagination, sorting and searching for a collection using the Web Services
   # extend it to get a collection with the extra capabilities
   # --------------------------------------------------------------------------------------------------------------------
-  WSPaginatedCollection: Backbone.Collection.extend
+  WSPaginatedCollection:
 
     # ------------------------------------------------------------------------------------------------------------------
     # URL handling
     # ------------------------------------------------------------------------------------------------------------------
     initialiseUrl: ->
-      console.log 'setting url'
       @url = @getPaginatedURL()
 
     getPaginatedURL: (customPageSize, customPageNum) ->
