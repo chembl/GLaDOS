@@ -5,13 +5,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     initialize: ->
 
       if @islinkToAllActivitiesEnabled()
-        console.log 'LINK TO ALL ACTIVITIES ENABLED'
-#        @on glados.Events.Collections.SELECTION_UPDATED,
+        @on glados.Events.Collections.SELECTION_UPDATED, @resetLinkToAllActivities, @
 
     islinkToAllActivitiesEnabled: -> @getMeta('enable_activities_link_for_selected_entities') == true
 
     # ------------------------------------------------------------------------------------------------------------------
     # Link to all activities
     # ------------------------------------------------------------------------------------------------------------------
-    resetLinkToAllActivities: -> @setMeta('enable_activities_link_for_selected_entities', undefined)
+    resetLinkToAllActivities: -> @setMeta('all_activities_link_cache', undefined)
 

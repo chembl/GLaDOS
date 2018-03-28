@@ -104,6 +104,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             @initCache()
             @on 'reset update', @addModelsInCurrentPage, @
 
+          glados.models.paginatedCollections.PaginatedCollectionBase.prototype.initialize.call(@)
+
       return new IndexESPagQueryCollection
 
 # creates a new instance of a Paginated Collection from Web Services
@@ -138,6 +140,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           if @getMeta('enable_collection_caching')
             @initCache()
             @on 'reset', @addModelsInCurrentPage, @
+
+          glados.models.paginatedCollections.PaginatedCollectionBase.prototype.initialize.call(@)
 
       return new wsPagCollection
 
@@ -198,6 +202,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
               @setMeta('data_loaded', true)
               @reset(parsedModels)
             ), @
+
+          glados.models.paginatedCollections.PaginatedCollectionBase.prototype.initialize.call(@)
 
       return new collection
 

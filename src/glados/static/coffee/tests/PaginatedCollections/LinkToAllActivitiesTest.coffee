@@ -13,7 +13,7 @@ describe "Paginated Collections", ->
     beforeEach ->
       list.unSelectAll()
 
-    it 'generates the link after selecting one item', ->
+    it 'produces the link cache after selecting one item', ->
 
       allItemsIDs = TestsUtils.getAllItemsIDs(list)
       itemToSelect = allItemsIDs[0]
