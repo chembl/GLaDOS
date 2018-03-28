@@ -37,6 +37,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           3: 24
           2: 96
           1: 192
+        ENABLE_ACTIVITIES_LINK_FOR_SELECTED_ENTITIES: true
         ENABLE_CARDS_ZOOM: true
         CUSTOM_CARDS_TEMPLATE: 'Handlebars-Common-Paginated-Card-Compound'
         CUSTOM_CARDS_ITEM_VIEW: glados.views.PaginatedViews.ItemCardView
@@ -277,6 +278,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Bioactivity]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
         ENABLE_COLLECTION_CACHING: true
+        ENABLE_ACTIVITIES_LINK_FOR_SELECTED_ENTITIES: true
       COMPOUND_SUBSTRUCTURE_HIGHLIGHTING:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCompound'

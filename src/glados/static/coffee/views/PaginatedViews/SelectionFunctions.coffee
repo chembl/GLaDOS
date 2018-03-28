@@ -35,3 +35,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         for itemID in detail
           endingID = itemID + '-select'
           $(@el).find('[id$=' + endingID + ']').prop('checked', true)
+
+      # show link to all activities if set
+      if @islinkToAllActivitiesEnabled()
+        console.log 'selection changed, paint link'

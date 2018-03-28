@@ -124,6 +124,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return itemsList
 
+
+    getSelectedItemsIDsPromise: ->
+      
     selectAll: ->
 
       @setMeta('all_items_selected', true)

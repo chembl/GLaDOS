@@ -94,6 +94,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             custom_possible_card_sizes_struct: esIndexSettings.POSSIBLE_CARD_SIZES_STRUCT
             settings_path: esIndexSettings.PATH_IN_SETTINGS
             searchESQuery: searchESQuery
+            enable_activities_link_for_selected_entities: esIndexSettings.ENABLE_ACTIVITIES_LINK_FOR_SELECTED_ENTITIES
 
           if @getMeta('enable_similarity_maps') or @getMeta('enable_substructure_highlighting')
             @initReferenceStructureFunctions()
@@ -165,6 +166,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             selection_exceptions: {}
             data_loaded: false
             model: collectionSettings.MODEL
+            is_client_side: true
 
           @on 'reset', @resetMeta, @
 

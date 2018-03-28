@@ -656,3 +656,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       urlGenerator = glados.views.PaginatedViews.PaginatedViewFactory.getEmbedURLGeneratorFor(@type)
       glados.helpers.EmbedModalsHelper.initEmbedModalForCollectionView(urlGenerator, @)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Link to all activities
+    # ------------------------------------------------------------------------------------------------------------------
+    islinkToAllActivitiesEnabled: -> @collection.getMeta('enable_activities_link_for_selected_entities') == true
