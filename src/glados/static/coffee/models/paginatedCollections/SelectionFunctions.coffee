@@ -127,6 +127,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     getSelectedItemsIDsPromise: ->
 
+      selectedIDs = @getSelectedItemsIDs()
+
+      if selectedIDs == glados.Settings.INCOMPLETE_SELECTION_LIST_LABEL
+        console.log 'MAKE PROMISE'
+      else
+        return Promise.resolve(selectedIDs)
+
     selectAll: ->
 
       @setMeta('all_items_selected', true)

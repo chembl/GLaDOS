@@ -13,11 +13,19 @@ describe "Paginated Collections", ->
     beforeEach ->
       list.unSelectAll()
 
-    it 'produces the link cache after selecting one item', ->
+    it 'produces the link cache after selecting one item', (done) ->
 
       allItemsIDs = TestsUtils.getAllItemsIDs(list)
       itemToSelect = allItemsIDs[0]
       list.selectItem(itemToSelect)
 
+      linkToActPromise = list.getLinkToAllActivitiesPromise()
+      filterToActsMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.prototype\
+        .ENTITY_NAME_TO_FILTER_GENERATOR.Compound
+          ids: [itemToSelect]
 
-#      expect(list.getSelectedItemsIDs()).toContain(itemToSelect)
+      linkToActsMustBe = Activity.getActivitiesListURL(filterToActsMustBe)
+
+      linkToActPromise.then (linkGot) ->
+        expect(linkToActsMustBe).toBe(linkGot)
+        done()
