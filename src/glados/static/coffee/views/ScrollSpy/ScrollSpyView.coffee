@@ -6,6 +6,8 @@ glados.useNameSpace 'glados.views.ScrollSpy',
       @model.on 'change:sections', @render, @
       $('.scrollspy').scrollSpy()
 
+      console.log 'render scrollspy'
+
     render: ->
 
       sections = (s for s in _.values(@model.get('sections')) \
