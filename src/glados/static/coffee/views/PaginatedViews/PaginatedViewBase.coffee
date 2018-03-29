@@ -168,6 +168,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     renderViewState: ->
       @stampViewIDOnEventsTriggerers()
       @fillTemplates()
+      @renderLinkToAllActivities() unless not @islinkToAllActivitiesEnabled()
       @setUpEmbedModal() unless not @config.show_embed_button
 
     sleepView: ->
@@ -661,3 +662,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # Link to all activities
     # ------------------------------------------------------------------------------------------------------------------
     islinkToAllActivitiesEnabled: -> @collection.getMeta('enable_activities_link_for_selected_entities') == true
+
+    renderLinkToAllActivities: ->
+
+      linkToActPromise = @collection.getLinkToAllActivitiesPromise()
+      linkToActPromise.then (linkGot) ->
+        console.log 'renderLinkToAllActivities: '
+        console.log linkGot
