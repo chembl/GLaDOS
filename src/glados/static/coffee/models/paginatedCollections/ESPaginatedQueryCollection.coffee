@@ -712,6 +712,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 # without requesting again to the server.
 # you can use a progress element to show the progress if you want.
     getAllResults: ($progressElement, askingForOnlySelected = false) ->
+      # this really needs to be refactored!
 
       if $progressElement?
         $progressElement.empty()
@@ -726,6 +727,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         iNeedToGetEverything = true
         iNeedToGetEverythingExceptSome = false
         iNeedToGetOnlySome = false
+
+      currentDownloadObj = @getMeta('current_download_obj')
+      if currentDownloadObj?
+        if iNeedToGetEverything and currentDownloadObj.iNeedToGetEverything
+          return currentDownloadObj.deferreds
 
       #if they want the selected ones only, and I already have them all just pick them from the list
       if askingForOnlySelected and @allResults? and @DOWNLOADED_ITEMS_ARE_VALID
@@ -847,11 +853,20 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         f = $.proxy(@makeSelectedSameAsAllResults, @)
         $.when.apply($, deferreds).done -> f()
 
+      currentDownloadObj =
+        iNeedToGetEverything: iNeedToGetEverything
+        iNeedToGetEverythingExceptSome: iNeedToGetEverythingExceptSome
+        iNeedToGetOnlySome: iNeedToGetOnlySome
+        deferreds: deferreds
+
+      @setMeta('current_download_obj', currentDownloadObj)
+
       return deferreds
 
     setValidDownload: ->
       @DOWNLOADED_ITEMS_ARE_VALID = true
       @DOWNLOAD_ERROR_STATE = false
+      @setMeta('current_download_obj', undefined)
       @trigger(glados.Events.Collections.ALL_ITEMS_DOWNLOADED)
       # If the downloaded items are all of the collection use them as cache
       if @getMeta('enable_collection_caching') and not @getMeta('disable_cache_on_download')

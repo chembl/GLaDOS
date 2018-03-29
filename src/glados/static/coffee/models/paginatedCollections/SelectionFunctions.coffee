@@ -142,7 +142,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       if idsList == glados.Settings.INCOMPLETE_SELECTION_LIST_LABEL
 
-
         deferreds = @getAllResults($progressElement=undefined, askingForOnlySelected=true)
         thisCollection = @
         $.when.apply($, deferreds).done ->
