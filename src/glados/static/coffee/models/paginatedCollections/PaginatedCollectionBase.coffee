@@ -26,11 +26,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       linkPromise = jQuery.Deferred()
 
-      # if all items are un selected the link must be done with all of them. 
-      if @allItemsAreUnselected()
-        iDsPromise = @getAllItemsIDsPromise()
-      else
-        iDsPromise = @getSelectedItemsIDsPromise()
+      # if all items are un selected the link must be done with all of them.
+      iDsPromise = @getItemsIDsPromise(onlySelected=(not @allItemsAreUnselected()))
 
       thisCollection = @
       iDsPromise.then (selectedIDs) ->

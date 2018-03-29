@@ -96,7 +96,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         return
 
       @setProgressMessage('Filtering activities...')
-      selectedIDs = @collection.getSelectedItemsIDs()
+      selectedIDs = @collection.getItemsIDs()
       @getChemblIDsAndFetchFromSelection(selectedIDs)
 
       return
@@ -158,7 +158,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
         thisView = @
         f = $.proxy(@getChemblIDsAndFetchFromSelection, @)
-        $.when.apply($, deferreds).done( -> f(thisView.collection.getSelectedItemsIDs()))
+        $.when.apply($, deferreds).done( -> f(thisView.collection.getItemsIDs()))
         .fail( (msg) -> thisView.setProgressMessage('Error: ', msg) )
         return
 

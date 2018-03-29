@@ -109,54 +109,41 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       allAreSelected = @getMeta('all_items_selected')
       return isSelectionException != allAreSelected
 
-    getSelectedItemsIDs: ->
+    getItemsIDs: (onlySelected=true) ->
 
       idProperty = @getMeta('id_column').comparator
       itemsList = []
 
       if @allResults?
-        itemsList = (model[idProperty] for model in @allResults when @itemIsSelected(model[idProperty]) )
+        if onlySelected
+          itemsList = (model[idProperty] for model in @allResults when @itemIsSelected(model[idProperty]) )
+        else
+          itemsList = (model[idProperty] for model in @allResults)
       else
-        itemsList = (model.attributes[idProperty] for model in @.models when @itemIsSelected(model.attributes[idProperty]) )
+        if onlySelected
+          itemsList = (model.attributes[idProperty] for model in @.models when @itemIsSelected(model.attributes[idProperty]) )
+        else
+          itemsList = (model.attributes[idProperty] for model in @.models)
 
-      if itemsList.length != @getNumberOfSelectedItems()
+      if onlySelected
+        incompleteCondition = itemsList.length != @getNumberOfSelectedItems()
+      else
+        incompleteCondition = itemsList.length != @getTotalRecords()
+
+      if incompleteCondition
         return glados.Settings.INCOMPLETE_SELECTION_LIST_LABEL
 
       return itemsList
 
 
-    getAllItemsIDs: ->
+    getItemsIDsPromise: (onlySelected=true) ->
 
-      idProperty = @getMeta('id_column').comparator
-      itemsList = []
+      idsList = @getItemsIDs(onlySelected)
 
-      if @allResults?
-        itemsList = (model[idProperty] for model in @allResults)
-      else
-        itemsList = (model.attributes[idProperty] for model in @.models)
-
-      if itemsList.length != @getTotalRecords()
-        return glados.Settings.INCOMPLETE_SELECTION_LIST_LABEL
-
-      return itemsList
-
-    getAllItemsIDsPromise: ->
-
-      allIds = @getAllItemsIDs()
-
-      if allIds == glados.Settings.INCOMPLETE_SELECTION_LIST_LABEL
+      if idsList == glados.Settings.INCOMPLETE_SELECTION_LIST_LABEL
         console.log 'MAKE PROMISE'
       else
-        return Promise.resolve(allIds)
-
-    getSelectedItemsIDsPromise: ->
-
-      selectedIDs = @getSelectedItemsIDs()
-
-      if selectedIDs == glados.Settings.INCOMPLETE_SELECTION_LIST_LABEL
-        console.log 'MAKE PROMISE'
-      else
-        return Promise.resolve(selectedIDs)
+        return Promise.resolve(idsList)
 
     selectAll: ->
 

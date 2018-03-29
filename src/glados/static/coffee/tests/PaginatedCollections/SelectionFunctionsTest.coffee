@@ -14,13 +14,13 @@ describe "Paginated Collections", ->
       list.selectItem(itemToSelect)
       expect(list.itemIsSelected(itemToSelect)).toBe(true)
       expect(list.itemIsSelected(itemNotSelected)).toBe(false)
-      expect(list.getSelectedItemsIDs()).toContain(itemToSelect)
+      expect(list.getItemsIDs()).toContain(itemToSelect)
 
     testSelectsAllItems = (list) ->
       allItemsIDs = TestsUtils.getAllItemsIDs(list)
       list.selectAll()
       selectedItemsShouldBe = allItemsIDs
-      selectedItemsGot = list.getSelectedItemsIDs()
+      selectedItemsGot = list.getItemsIDs()
 
       for item in selectedItemsShouldBe
         expect(selectedItemsGot).toContain(item)
@@ -33,14 +33,14 @@ describe "Paginated Collections", ->
 
       list.unSelectItem(itemToUnselect)
       expect(list.itemIsSelected(itemToUnselect)).toBe(false)
-      expect(list.getSelectedItemsIDs()).not.toContain(itemToUnselect)
+      expect(list.getItemsIDs()).not.toContain(itemToUnselect)
 
     testUnselectsAllItems = (list) ->
       allItemsIDs = TestsUtils.getAllItemsIDs(list)
 
       list.unSelectAll()
       selectedItemsShouldNotBe = allItemsIDs
-      selectedItemsGot = list.getSelectedItemsIDs()
+      selectedItemsGot = list.getItemsIDs()
 
       for item in selectedItemsShouldNotBe
         expect(selectedItemsGot).not.toContain(item)
@@ -112,7 +112,7 @@ describe "Paginated Collections", ->
         selectedItemsShouldBe = (model.attributes.molecule_chembl_id for model in list.models\
           when model.attributes.molecule_chembl_id != exception)
 
-      selectedItemsGot = list.getSelectedItemsIDs()
+      selectedItemsGot = list.getItemsIDs()
 
       for item in selectedItemsShouldBe
         expect(selectedItemsGot).toContain(item)
@@ -136,7 +136,7 @@ describe "Paginated Collections", ->
         selectedItemsShouldNOTBe = (model.attributes.molecule_chembl_id for model in list.models\
           when model.attributes.molecule_chembl_id != exception)
 
-      selectedItemsGot = list.getSelectedItemsIDs()
+      selectedItemsGot = list.getItemsIDs()
       for item in selectedItemsShouldNOTBe
         expect(selectedItemsGot).not.toContain(item)
         expect(list.itemIsSelected(item)).toBe(false)
@@ -153,7 +153,7 @@ describe "Paginated Collections", ->
 
       expect(list.itemIsSelected(allItemsIDs)).toBe(true)
       selectedItemsShouldBe = allItemsIDs
-      selectedItemsGot = list.getSelectedItemsIDs()
+      selectedItemsGot = list.getItemsIDs()
 
       for item in selectedItemsShouldBe
         expect(selectedItemsGot).toContain(item)
@@ -169,7 +169,7 @@ describe "Paginated Collections", ->
       expect(list.itemIsSelected(itemToUnselect)).toBe(false)
 
       selectedItemsShouldNotBe = allItemsIDs
-      selectedItemsGot = list.getSelectedItemsIDs()
+      selectedItemsGot = list.getItemsIDs()
 
       for item in selectedItemsShouldNotBe
         expect(selectedItemsGot).not.toContain(item)
@@ -245,7 +245,7 @@ describe "Paginated Collections", ->
       list.selectItems(itemsToSelect)
 
       expect(list.getMeta('all_items_selected')).toBe(false)
-      selectedItemsGot = list.getSelectedItemsIDs()
+      selectedItemsGot = list.getItemsIDs()
 
       for itemID in itemsToSelect
         expect(selectedItemsGot).toContain(itemID)
@@ -260,7 +260,7 @@ describe "Paginated Collections", ->
       list.selectItems(itemsToSelectA)
       list.selectItems(itemsToSelectB)
 
-      selectedItemsGot = list.getSelectedItemsIDs()
+      selectedItemsGot = list.getItemsIDs()
       expect(list.getMeta('all_items_selected')).toBe(true)
       expect(list.thereAreExceptions()).toBe(false)
 
@@ -281,7 +281,7 @@ describe "Paginated Collections", ->
       list.unSelectItems(itemsToUnSelect)
 
       expect(list.getMeta('all_items_selected')).toBe(true)
-      selectedItemsGot = list.getSelectedItemsIDs()
+      selectedItemsGot = list.getItemsIDs()
 
       for itemID in itemsToUnSelect
         expect(selectedItemsGot).not.toContain(itemID)
@@ -303,7 +303,7 @@ describe "Paginated Collections", ->
       list.unSelectItems(itemsToUnSelectA)
       list.unSelectItems(itemsToUnSelectB)
 
-      selectedItemsGot = list.getSelectedItemsIDs()
+      selectedItemsGot = list.getItemsIDs()
       expect(list.getMeta('all_items_selected')).toBe(false)
       expect(list.thereAreExceptions()).toBe(false)
 
