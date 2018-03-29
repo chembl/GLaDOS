@@ -665,6 +665,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     renderLinkToAllActivities: ->
 
+      console.log 'TRIGGER RENDER TO ALL ACTS!'
       linkToActPromise = @collection.getLinkToAllActivitiesPromise()
       linkToActPromise.then (linkGot) ->
         console.log 'renderLinkToAllActivities: '

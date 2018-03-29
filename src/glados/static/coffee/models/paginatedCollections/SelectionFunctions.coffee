@@ -114,7 +114,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       idProperty = @getMeta('id_column').comparator
       itemsList = []
 
-      if @allResults?
+      if @downloadIsValidAndReady()
         if onlySelected
           itemsList = (model[idProperty] for model in @allResults when @itemIsSelected(model[idProperty]) )
         else
@@ -135,15 +135,25 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return itemsList
 
-
     getItemsIDsPromise: (onlySelected=true) ->
 
       idsList = @getItemsIDs(onlySelected)
+      idsPromise = jQuery.Deferred()
 
       if idsList == glados.Settings.INCOMPLETE_SELECTION_LIST_LABEL
-        console.log 'MAKE PROMISE'
+
+
+        deferreds = @getAllResults($progressElement=undefined, askingForOnlySelected=true)
+        thisCollection = @
+        $.when.apply($, deferreds).done ->
+          idsList = thisCollection.getItemsIDs(onlySelected)
+          idsPromise.resolve(idsList)
+
       else
-        return Promise.resolve(idsList)
+
+        idsPromise.resolve(idsList)
+
+      return idsPromise
 
     selectAll: ->
 

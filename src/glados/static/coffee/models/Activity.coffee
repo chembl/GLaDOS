@@ -15,7 +15,8 @@ Activity = Backbone.Model.extend
     response.target_link = Target.get_report_card_url(response.target_chembl_id)
     response.assay_link = Assay.get_report_card_url(response.assay_chembl_id )
     response.document_link = Document.get_report_card_url(response.document_chembl_id)
-    response.tissue_link = glados.models.Tissue.get_report_card_url(response._metadata.assay_data.tissue_chembl_id)
+    if response._metadata?
+      response.tissue_link = glados.models.Tissue.get_report_card_url(response._metadata.assay_data.tissue_chembl_id)
     return response
 
 Activity.indexName = 'chembl_activity'

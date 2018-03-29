@@ -739,7 +739,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         return [jQuery.Deferred().resolve()]
 
       # check if I already have all the results and they are valid
-      if @allResults? and @DOWNLOADED_ITEMS_ARE_VALID
+      if @downloadIsValidAndReady()
         return [jQuery.Deferred().resolve()]
 
       totalRecords = @getMeta('total_records')
@@ -799,7 +799,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           data = JSON.stringify(thisCollection.getRequestData(currentPage, pageSize))
 
         return $.post(url, data).done((response) ->
-
           #I know that I must be receiving currentPage.
           newItems = (item._source for item in response.hits.hits)
           # now I add them in the corresponding position in the items array

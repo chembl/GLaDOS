@@ -11,6 +11,23 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     getTotalRecords: -> @getMeta('total_records')
     # ------------------------------------------------------------------------------------------------------------------
+    # Downloads
+    # ------------------------------------------------------------------------------------------------------------------
+    downloadIsValidAndReady: ->
+
+      if not @allResults?
+        return false
+
+      if not @DOWNLOADED_ITEMS_ARE_VALID
+        return false
+
+      for result in @allResults
+        if not result?
+          return false
+
+      return true
+
+    # ------------------------------------------------------------------------------------------------------------------
     # Link to all activities
     # ------------------------------------------------------------------------------------------------------------------
     ALL_ACTIVITIES_LINK_CACHE_PROP_NAME: 'all_activities_link_cache'
