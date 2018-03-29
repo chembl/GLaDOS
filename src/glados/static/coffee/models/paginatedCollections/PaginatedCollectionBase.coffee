@@ -9,6 +9,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     islinkToAllActivitiesEnabled: -> @getMeta('enable_activities_link_for_selected_entities') == true
 
+    getTotalRecords: -> @getMeta('total_records')
     # ------------------------------------------------------------------------------------------------------------------
     # Link to all activities
     # ------------------------------------------------------------------------------------------------------------------
@@ -25,9 +26,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       linkPromise = jQuery.Deferred()
 
-      selectedIDsPromise = @getSelectedItemsIDsPromise()
+      # if all items are un selected the link must be done with all of them. 
+      if @allItemsAreUnselected()
+        iDsPromise = @getAllItemsIDsPromise()
+      else
+        iDsPromise = @getSelectedItemsIDsPromise()
+
       thisCollection = @
-      selectedIDsPromise.then (selectedIDs) ->
+      iDsPromise.then (selectedIDs) ->
 
         link = thisCollection.getLinkToAllActivities(selectedIDs)
         thisCollection.setMeta(thisCollection.ALL_ACTIVITIES_LINK_CACHE_PROP_NAME, link)

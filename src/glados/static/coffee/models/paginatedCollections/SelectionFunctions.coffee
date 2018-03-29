@@ -125,6 +125,30 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return itemsList
 
 
+    getAllItemsIDs: ->
+
+      idProperty = @getMeta('id_column').comparator
+      itemsList = []
+
+      if @allResults?
+        itemsList = (model[idProperty] for model in @allResults)
+      else
+        itemsList = (model.attributes[idProperty] for model in @.models)
+
+      if itemsList.length != @getTotalRecords()
+        return glados.Settings.INCOMPLETE_SELECTION_LIST_LABEL
+
+      return itemsList
+
+    getAllItemsIDsPromise: ->
+
+      allIds = @getAllItemsIDs()
+
+      if allIds == glados.Settings.INCOMPLETE_SELECTION_LIST_LABEL
+        console.log 'MAKE PROMISE'
+      else
+        return Promise.resolve(allIds)
+
     getSelectedItemsIDsPromise: ->
 
       selectedIDs = @getSelectedItemsIDs()
@@ -160,6 +184,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @setMeta('all_items_selected', false)
         @setMeta('selection_exceptions', {})
         @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.ALL_UNSELECTED)
+
+    allItemsAreUnselected: -> not (@getMeta('all_items_selected') or @thereAreExceptions())
 
     selectByPropertyValue: (propName, value) ->
 

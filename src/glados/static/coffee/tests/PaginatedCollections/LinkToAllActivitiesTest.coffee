@@ -50,6 +50,37 @@ describe "Paginated Collections", ->
         expect(linkToActsMustBe).toBe(linkGot)
         done()
 
+    it 'produces the link after selecting all items', (done) ->
+
+      allItemsIDs = TestsUtils.getAllItemsIDs(list)
+      list.selectAll()
+
+      linkToActPromise = list.getLinkToAllActivitiesPromise()
+      filterToActsMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.prototype\
+        .ENTITY_NAME_TO_FILTER_GENERATOR.Compound
+          ids: allItemsIDs
+
+      linkToActsMustBe = Activity.getActivitiesListURL(filterToActsMustBe)
+
+      linkToActPromise.then (linkGot) ->
+        expect(linkToActsMustBe).toBe(linkGot)
+        done()
+
+    it 'produces the link after selecting no items', (done) ->
+
+      allItemsIDs = TestsUtils.getAllItemsIDs(list)
+
+      linkToActPromise = list.getLinkToAllActivitiesPromise()
+      filterToActsMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.prototype\
+        .ENTITY_NAME_TO_FILTER_GENERATOR.Compound
+          ids: allItemsIDs
+
+      linkToActsMustBe = Activity.getActivitiesListURL(filterToActsMustBe)
+
+      linkToActPromise.then (linkGot) ->
+        expect(linkGot).toBe(linkToActsMustBe)
+        done()
+
     it 'sets the link cache', (done) ->
 
       allItemsIDs = TestsUtils.getAllItemsIDs(list)
