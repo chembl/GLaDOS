@@ -353,7 +353,6 @@ glados.setupOnLoadAfterJS = () ->
           # Double check that ajax truly stopped
           if glados.ajax_count == 0
             $('#GLaDOS-page-loaded').html('YES')
-            $('#GladosMainSplashScreen').hide()
         , 500
       )
 

@@ -665,7 +665,12 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     renderLinkToAllActivities: ->
 
-      console.log 'TRIGGER RENDER TO ALL ACTS!'
+
+      numSelectedItems = @collection.getNumberOfSelectedItems()
+      numItemsForLink = if numSelectedItems == 0 then @collection.getTotalRecords() else numSelectedItems
+      if numItemsForLink >= glados.Settings.VIEW_SELECTION_THRESHOLDS.Bioactivity[1]
+        console.log 'too many items for link!'
+        return
       linkToActPromise = @collection.getLinkToAllActivitiesPromise()
       linkToActPromise.then (linkGot) ->
         console.log 'renderLinkToAllActivities: '
