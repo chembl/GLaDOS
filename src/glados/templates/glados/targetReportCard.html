@@ -69,18 +69,18 @@
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
                     <div class="row piechart-group BCK-section-content">
-                        <div class="col m12 l6 piechart-col">
+                        <div class="col s12 m6 piechart-col">
                             <div id="TargetAssociatedBioactivities" class="section piechart-section">
-                                <h4 class="center-align">Target Associated Bioactivities</h4>
+                                <h4 class="center-align">Associated Bioactivities</h4>
                                 {% with is_dynamic=True %}
                                     {% include "glados/TargetReportCardParts/AssociatedBioactivities.html" %}
                                 {% endwith %}
                             </div>
                         </div>
 
-                        <div class="col m12 l6 piechart-col">
+                        <div class="col s12 m6 piechart-col">
                             <div id="TargetAssociatedAssays" class="section piechart-section">
-                                <h4 class="center-align">Target Associated Assays</h4>
+                                <h4 class="center-align">Associated Assays</h4>
                                 {% with is_dynamic=True %}
                                     {% include "glados/TargetReportCardParts/AssociatedAssays.html" %}
                                 {% endwith %}

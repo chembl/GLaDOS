@@ -1,16 +1,18 @@
 <div class="BCK-Main-Pie-container principal-pie-container">
-    <div class="valign-wrapper">
-        <div class="row BCK-VisualisationMessages" data-hb-template="Handlebars-Pie-Warning"></div>
-    </div>
 
-    <div class="BCK-pie-title" data-hb-template="Handlebars-Common-Pie-External-Title"></div>
+    <div class="BCK-VisualisationMessages valign-wrapper" data-hb-template="Handlebars-Pie-Warning"></div>
+
     {% if side_legend %}
         <div class="main-pie-container">
             <div class="BCK-pie-container row pie-content"></div>
-            <div class="BCK-CompResultsGraphLegendContainer legend pie-legend"></div>
+            <div class="BCK-CompResultsGraphLegendContainer legend pie-legend valign-wrapper"></div>
         </div>
     {% else %}
-        <div class="BCK-pie-container row pie-content"></div>
+        <div class="simple-pie-container">
+            <div class="BCK-pie-title pie-title center" data-hb-template="Handlebars-Common-Pie-External-Title"></div>
+            <div class="BCK-pie-container row pie-content"></div>
+            <div class="BCK-CompResultsGraphLegendContainer legend simple-pie-legend"></div>
+        </div>
     {% endif %}
 
 </div>

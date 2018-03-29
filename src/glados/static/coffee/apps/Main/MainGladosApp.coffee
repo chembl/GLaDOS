@@ -16,7 +16,7 @@ glados.useNameSpace 'glados.apps.Main',
 
       mainRouter = glados.routers.MainGladosRouter.getInstance()
 
-      #now if there are shortened params
+      #check if there are shortened params
       shortenedURL = $('#GladosShortenedParamsContainer').attr('data-shortened-params')
       if shortenedURL != ''
 

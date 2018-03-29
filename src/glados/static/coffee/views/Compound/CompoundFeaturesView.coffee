@@ -4,6 +4,7 @@ CompoundFeaturesView = CardView.extend
 
   initialize: ->
 
+    @config = arguments[0].config
     CardView.prototype.initialize.call(@, arguments)
     @tableCellMode = arguments[0].table_cell_mode
 
@@ -22,7 +23,7 @@ CompoundFeaturesView = CardView.extend
     if not isDrug
       return
 
-    @showSection()
+    @showSection() unless @config.is_outside_an_entity_report_card
     @renderProperty('Bck-MolType', 'molecule_type')
     @renderProperty('Bck-RuleOfFive', 'ro5')
     @renderProperty('Bck-FirstInClass', 'first_in_class')

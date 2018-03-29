@@ -74,6 +74,7 @@ urlpatterns += [
   url(r'^embed/$',
       xframe_options_exempt(DirectTemplateView.as_view(template_name="glados/Embedding/embed_base.html")), ),
 
+  url(r'^embed/tiny/(?P<hash>.*?)$', views.render_params_from_hash_when_embedded, name='embed-tiny'),
   # --------------------------------------------------------------------------------------------------------------------
   # Compounds
   # --------------------------------------------------------------------------------------------------------------------

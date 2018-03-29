@@ -2,10 +2,9 @@
 
 <script id="Handlebars-Common-Paginated-Header-large" type="text/x-handlebars-template">
 
+    <thead id="sticky-header">
 
-    <thead>
-
-        <tr class="BCK-headers-row" >
+        <tr class="BCK-headers-row">
 
             {{#unless selection_disabled}}
                 <th>
@@ -19,7 +18,6 @@
             {% endverbatim %}
             {% include "glados/Handlebars/ColumnsTableHeadersSource.html" with for_table=True %}
             {% verbatim %}
-
         </tr>
 
     </thead>

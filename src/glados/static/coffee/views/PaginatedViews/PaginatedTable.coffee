@@ -25,14 +25,24 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     renderViewState: ->
 
+
       @clearContentContainer()
       @fillSelectAllContainer() unless @disableItemsSelection
+      if @disableItemsSelection
+        @removeSelectAllContainer()
+
       @fillPaginators()
       if @collection.getMeta('total_pages') == 1
         @hidePaginators()
         @hideFooter()
-      @fillPageSizeSelectors()
-      @activateSelectors()
+      if @collection.getMeta('total_records') == 1
+        @hideHeaderContainer()
+      else
+        @fillPageSizeSelectors()
+        @activateSelectors()
+        @showHeaderContainer()
+        @showFooterContainer()
+
       @showPaginatedViewContent()
 
       if @collection.getMeta('fuzzy-results')? and @collection.getMeta('fuzzy-results') == true
@@ -41,6 +51,12 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         @hideSuggestedLabel()
 
       glados.views.PaginatedViews.PaginatedViewBase.renderViewState.call(@)
+
+
+    removeSelectAllContainer: ->
+      $selectAllContainer = $(@el).find('.BCK-selectAll-container')
+      $selectAllContainer.hide()
+
 
     # ------------------------------------------------------------------------------------------------------------------
     # Columns handling
@@ -102,19 +118,31 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         $currentItem.append $divs
 
 
-
     # ------------------------------------------------------------------------------------------------------------------
     # Add Remove Columns
     # ------------------------------------------------------------------------------------------------------------------
     initialiseColumnsModal: ->
 
-      $modalContainer = $(@el).find('.BCK-show-hide-columns-container')
+      now = Date.now()
+      modalID = @collection.getMeta('id_name') + 'show-hide-columns-modal' + now
+
+      glados.Utils.fillContentForElement $(@el).find('.BCK-ModalTrigger'),
+        modal_id: modalID
+
+      templateParams =
+        modal_id: modalID
+
+      $('#BCK-GeneratedModalsContainer').append($(glados.Utils.getContentFromTemplate(
+        'Handlebars-Common-EditFiltersModal', templateParams)))
+
+      $modalContentContainer = $("##{modalID}")
 
       new glados.views.PaginatedViews.ColumnsHandling.ColumnsHandlerView
         model: @columnsHandler
-        el: $modalContainer
+        el: $modalContentContainer
+        modal_id: modalID
 
-      $modalContainer.find('.modal').modal()
+      $modalContentContainer.modal()
 
     # ------------------------------------------------------------------------------------------------------------------
     # Fill Templates
@@ -136,9 +164,12 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       for i in [0..$elem.length - 1]
         @sendDataToTemplate $($elem[i]), allColumns
       @bindFunctionLinks()
-      @showHeaderContainer()
-      @showFooterContainer()
       @checkIfTableNeedsToScroll()
+      if @pinUnpinTableHeader?
+         @pinUnpinTableHeader()
+      if @scrollTableHeader?
+        @scrollTableHeader()
+
 
     sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
       if @shouldIgnoreContentChangeRequestWhileStreaming()
@@ -265,10 +296,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
         # now set up tha header fixation
         if !$specificElemContainer.attr('data-header-pinner-setup')
-
-          # delay this to wait for
           @setUpTableHeaderPinner($specificElemContainer)
           $specificElemContainer.attr('data-header-pinner-setup', true)
+        @pinUnpinTableHeader()
+        @scrollTableHeader()
+
 
     # this sets up dor a table the additional scroller on top of the table
     setUpTopTableScroller: ($table) ->
@@ -282,23 +314,60 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # Table header pinner
     # ------------------------------------------------------------------------------------------------------------------
     setUpTableHeaderPinner: ($table) ->
-
-      #use the top scroller to trigger the pin
-      $scrollContainer = $(@el).find('.BCK-top-scroller-container')
-      $firstTableRow = $table.find('tr').first()
-
       $win = $(window)
-      topTrigger = $scrollContainer.offset().top
+      $table.data('data-state', 'no-pinned')
+
+      scrollTableHeader = ->
+        $table = $(@el).find('table.BCK-items-container')
+        $pinnedHeader = $table.find('.pinned-header').first()
+        $pinnedHeader.offset({left: $table.offset().left - $table.scrollLeft()})
 
       pinUnpinTableHeader = ->
 
-        # don't bother if table is not shown
         if !$table.is(":visible")
           return
 
-        #TODO: complete this function!
+        $win = $(window)
+        $table = $(@el).find('table.BCK-items-container')
+        $originalHeader = $table.find('#sticky-header').first()
+        $clonedHeader = $originalHeader.clone().addClass('pinned-header').attr('id','clonedHeader')
+        scroll = $win.scrollTop()
+        topTrigger = $originalHeader.offset().top
+        bottomTrigger = $table.find('.BCK-items-row').last().offset().top
+        searchBarHeight = $('#chembl-header-container.pinned').find('.chembl-header').height()
 
-        $win.scroll _.throttle(pinUnpinTableHeader, 200)
+        if scroll >= topTrigger  -  searchBarHeight and scroll < bottomTrigger
+          @scrollTableHeader()
+          $table.data('data-state','pinned')
+        else
+          $table.data('data-state', 'no-pinned')
+
+        if $table.data('data-state') == 'pinned'
+          $clonedHeader.height($originalHeader.height())
+          $clonedHeader.width($originalHeader.width())
+
+          originalWidths = []
+          $originalHeader.find('.BCK-headers-row').first().children('th').each( ->
+           originalWidths.push($(@).width())
+          )
+
+          $clonedHeader.find('.BCK-headers-row').first().children('th').each( (i) ->
+            $(@).width(originalWidths[i] + 9.5)
+          )
+
+          if $table.find('.pinned-header').length == 0
+            $table.prepend($clonedHeader)
+        else
+          $table.find('.pinned-header').first().remove()
+
+      @pinUnpinTableHeader = $.proxy(pinUnpinTableHeader, @)
+      @scrollTableHeader = $.proxy(scrollTableHeader, @)
+
+      $win.scroll(@pinUnpinTableHeader)
+      $table.scroll(@scrollTableHeader)
+
+      $win.resize(@pinUnpinTableHeader)
+      $win.resize(@scrollTableHeader)
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Static functions

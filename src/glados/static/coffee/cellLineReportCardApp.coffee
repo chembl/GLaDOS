@@ -59,11 +59,15 @@ class CellLineReportCardApp extends glados.ReportCardApp
 
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     associatedAssays = CellLineReportCardApp.getAssociatedAssaysAgg(chemblID)
+    associatedAssaysProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Cell', 'RELATED_ASSAYS')
 
     pieConfig =
       x_axis_prop_name: 'types'
       title: gettext('glados_cell_line__associated_assays_pie_title_base') + chemblID
+      title_link_url: Assay.getAssaysListURL('cell_chembl_id:' + chemblID)
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
+      properties:
+        types: associatedAssaysProp
 
     viewConfig =
       pie_config: pieConfig
@@ -89,11 +93,15 @@ class CellLineReportCardApp extends glados.ReportCardApp
 
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     bioactivities = CellLineReportCardApp.getAssociatedBioactivitiesAgg(chemblID)
+    bioactivitiesProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Cell', 'RELATED_ACTIVITIES')
 
     pieConfig =
       x_axis_prop_name: 'types'
       title: gettext('glados_cell_line__bioactivities_pie_title_base') + chemblID
+      title_link_url: Activity.getActivitiesListURL('_metadata.assay_data.cell_chembl_id:' + chemblID)
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
+      properties:
+        types: bioactivitiesProp
 
     viewConfig =
       pie_config: pieConfig

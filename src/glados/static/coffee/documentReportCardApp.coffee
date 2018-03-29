@@ -128,12 +128,16 @@ class DocumentReportCardApp extends glados.ReportCardApp
 
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     relatedTargets = DocumentReportCardApp.getRelatedTargetsAggByClass(chemblID)
+    relatedTargetsProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Document', 'RELATED_TARGETS')
 
     pieConfig =
       x_axis_prop_name: 'classes'
       title: gettext('glados_compound__associated_targets_by_class_pie_title_base') + chemblID
+      title_link_url: Target.getTargetsListURL('_metadata.related_documents.chembl_ids.\\*:' + chemblID)
       custom_empty_message: "No target classification data available for document #{chemblID} (all may be non-protein targets)"
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
+      properties:
+        classes: relatedTargetsProp
 
     viewConfig =
       pie_config: pieConfig
@@ -158,11 +162,16 @@ class DocumentReportCardApp extends glados.ReportCardApp
 
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     relatedAssays = DocumentReportCardApp.getRelatedAssaysAgg(chemblID)
+    relatedAssaysProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Document', 'RELATED_ASSAYS')
 
     pieConfig =
       x_axis_prop_name: 'types'
       title: gettext('glados_document__associated_assays_pie_title_base') + chemblID
+      title_link_url: Assay.getAssaysListURL('document_chembl_id:' + chemblID)
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
+      properties:
+        types: relatedAssaysProp
+
 
     viewConfig =
       pie_config: pieConfig
@@ -187,11 +196,15 @@ class DocumentReportCardApp extends glados.ReportCardApp
 
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     relatedActivities = DocumentReportCardApp.getRelatedActivitiesAgg(chemblID)
+    relatedActivitiesProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Document', 'RELATED_ACTIVITIES')
 
     pieConfig =
       x_axis_prop_name: 'types'
       title: gettext('glados_document__associated_activities_pie_title_base') + chemblID
+      title_link_url: Activity.getActivitiesListURL('document_chembl_id:' + chemblID)
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
+      properties:
+        types: relatedActivitiesProp
 
     viewConfig =
       pie_config: pieConfig

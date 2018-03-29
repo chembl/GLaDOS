@@ -355,10 +355,10 @@ msgstr "There are no filters available."
 # Target Report Card
 #-----------------------------------------------------------------------------------------------------------------------
 msgid "glados_target__associated_assays_pie_title_base"
-msgstr "ChEMBL Assays for Target "
+msgstr "Assays for Target "
 
 msgid "glados_target__associated_activities_pie_title_base"
-msgstr "ChEMBL Activity Types for Target "
+msgstr "Activity Types for Target "
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Main Entities
@@ -388,16 +388,16 @@ msgid "glados_compound__sources_pie_title_base"
 msgstr "Sources for Compound"
 
 msgid "glados_compound__associated_targets_by_class_pie_title_base"
-msgstr "ChEMBL Target Classes for Compound "
+msgstr "Target Classes for Compound "
 
 msgid "glados_compound__associated_targets_pie_title_base"
-msgstr "ChEMBL Target Types for Compound "
+msgstr "Target Types for Compound "
 
 msgid "glados_compound__associated_assays_pie_title_base"
-msgstr "ChEMBL Assays for Compound "
+msgstr "Assays for Compound "
 
 msgid "glados_compound__associated_activities_pie_title_base"
-msgstr "ChEMBL Activity Types for Compound "
+msgstr " Activity Types for Compound "
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Assay Report Card

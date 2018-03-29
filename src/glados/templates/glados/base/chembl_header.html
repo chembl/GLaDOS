@@ -1,7 +1,7 @@
 {% load static %}
 <div class="chembl-header row ">
     <div class="inner-row">
-        <div class="col l2 m4 s10 hide-on-small-pinned">
+        <div class="col l3 m3 s10 hide-on-small-pinned">
             <ul>
                 {% if hide_side_nav %}
                     <li>
@@ -10,7 +10,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{% url 'main' %}" class="waves-effect waves-light">
+                        <a href="{% url 'main' %}">
                             <img title="Go to the ChEMBL homepage"
                                  class="chembl-logo-header"
                                  alt="ChEMBL logo" src="{% static 'img/chembl_logo.png' %}"/>
@@ -34,15 +34,10 @@
                     {% endif %}
                 {% endif %}
                 <li>
-                    <a href="{% url 'main' %}" class="waves-effect waves-light long-link l2">
+                    <a href="{% url 'main' %}" class="long-link l2">
                         <div>
                             <span>ChEMBL</span>
-
-                            {% if hide_side_nav %}
-                                <span class="beta-sign">BETA</span>
-                            {% else %}
-                                <span class="icon icon-generic" data-icon="&gt;"></span>
-                            {% endif %}
+                            <span class="icon icon-generic" data-icon="&gt;"></span>
                         </div>
                     </a>
                 </li>
@@ -50,11 +45,11 @@
         </div>
 
         {% if main_page %}
-            <div class=" col push-l2 l8 m8 hide-on-small-only hide-on-pinned main-page-search-bar">
+            <div class=" col right l7 m8 hide-on-small-only hide-on-pinned main-page-search-bar">
                 {% include "glados/SearchResultsParts/SearchBar.html" %}
             </div>
         {% endif %}
-        <div class="col l1 push-l9 m1 push-m6 s2 hide-on-small-pinned {% if main_page %}hide-on-pin-top{% endif %}">
+        <div class="col l1 right m1 s2 hide-on-small-pinned {% if main_page %}hide-on-pin-top{% endif %}">
             <ul class="right-align-content">
                 <li>
                     <a href="#download-db-modal"

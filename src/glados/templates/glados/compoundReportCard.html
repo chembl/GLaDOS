@@ -92,9 +92,9 @@
 
                     <div class="row BCK-section-content">
 
-                        {% block mechanism_of_action %}
+                        {% with is_dynamic=True %}
                             {% include "glados/CompoundReportCardParts/MechanismOfAction.html" %}
-                        {% endblock %}
+                        {% endwith %}
 
 
                     </div>
@@ -182,9 +182,9 @@
                 <div id="ActivityCharts" class="scrollspy">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
                     <div class="row piechart-group BCK-section-content">
-                        <div class="col m12 l6 piechart-col">
+                        <div class="col s12 m6 l4  piechart-col">
                             <div id="CompoundBioactivitySummary" class="section piechart-section">
-                                <h4 class="center-align">Compound Bioactivity Summary</h4>
+                                <h4 class="center-align">Bioactivity Summary</h4>
                                 {% block bioactivity_summary %}
                                     {% with is_dynamic=True %}
                                         {% include "glados/CompoundReportCardParts/BioactivitySummary.html" %}
@@ -193,23 +193,23 @@
                             </div>
                         </div>
 
-                        <div class="col m12 l6 piechart-col">
+                        <div class="col s12 m6 l4 piechart-col">
                             <div id="CompoundAssaySummary" class="section piechart-section">
-                                <h4 class="center-align">Compound Assay Summary</h4>
+                                <h4 class="center-align">Assay Summary</h4>
                                 {% with is_dynamic=True %}
                                     {% include "glados/CompoundReportCardParts/AssaySummary.html" %}
                                 {% endwith %}
                             </div>
                         </div>
-                        <div class="col m12 l6 piechart-col">
+                        <div class="col s12 m6 l4  piechart-col">
                             <div id="CompoundTargetSummary" class="section piechart-section">
-                                <h4 class="center-align">Compound Target Summary</h4>
+                                <h4 class="center-align">Target Summary</h4>
                                 {% with is_dynamic=True %}
                                     {% include "glados/CompoundReportCardParts/TargetSummary.html" %}
                                 {% endwith %}
                             </div>
                         </div>
-                        <div class="col m12 l6 piechart-col"></div>
+                        <div class="s12 m6 l4 piechart-col"></div>
                     </div>
                 </div>
 

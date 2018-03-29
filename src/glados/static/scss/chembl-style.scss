@@ -2,18 +2,6 @@
 @import "components/color";
 @import "components/variables";
 
-/*
-* ChEMBL custom style added to materialize
-*/
-
-/**
-* Fonts
-* NOTE: SCSS generated files are located under <static>/css/scss-gen
-* ----------------------------------------------------------------------------------------------------------------------
-*/
-
-
-
 /**
 * Typograhpy and colours
 * ----------------------------------------------------------------------------------------------------------------------
@@ -47,7 +35,8 @@ $global-masthead-small-med-height: 49px;
 
 html {
   font-family: "ChEMBL_Verdana", Verdana, sans-serif;
-  color: $primary-color-dark
+  color: $primary-color-dark;
+  scroll-behavior: smooth;
 }
 
 h1 {
@@ -185,6 +174,14 @@ $hexagon-lateral-distance-proportion: 0.0669872981;
   }
 }
 
+ƒfon
+
+@media #{$medium-and-down}{
+  .z-depth-below-zero {
+    z-index: 998 !important;
+  }
+}
+
 .side-nav {
   border: none;
   width: $side-nav-width;
@@ -311,6 +308,9 @@ footer.z-depth-normal {
 
 footer.z-depth-on-top {
   z-index: 2000;
+  @media #{$medium-and-down}{
+    z-index: 996;
+  }
 }
 
 $chembl-nav-height: 56px;
@@ -971,12 +971,19 @@ div#CompoundNameAndClassification .comp-phase-0 {
 
 }
 
+.position-relative {
+  position: relative;
+}
+
 .embed-btn {
   position: absolute;
   color: white;
   padding: 0 4px;
   top: -3px;
   right: 0px;
+  &.inverted{
+    color: $primary-color-dark
+  }
 }
 
 .embed-preview {
@@ -1534,8 +1541,21 @@ em.glados-result-highlight {
       vertical-align: middle;
     }
   }
+  .embed-btn-in-card{
+    position: absolute;
+    bottom: 18px;
+    right: 0px;
+  }
 }
 
+.card {
+  &.vertical {
+    .embed-btn-in-card{
+      position: absolute;
+      left: 20px;
+    }
+  }
+}
 /**
 * Charts
 * ----------------------------------------------------------------------------------------------------------------------
@@ -1561,14 +1581,17 @@ em.glados-result-highlight {
   }
 
 }
-.long-filter-content{
+
+.long-filter-content {
   max-height: 20vh;
   overflow: scroll;
 }
-.share-url{
+
+.share-url {
   padding: 4px;
   border: 1px solid $primary-color-dark;
 }
+
 /**
 * Acknowledgements
 * ----------------------------------------------------------------------------------------------------------------------
@@ -2418,6 +2441,9 @@ span.badge-primary-color-no-float {
 * Target Browser
 * ----------------------------------------------------------------------------------------------------------------------
 */
+
+$vis-teal: #09979B;
+$vis-dark: #0D343A;
 .small-input-wrapper {
   input {
     margin: 0px;
@@ -2458,17 +2484,17 @@ span.badge-primary-color-no-float {
       cursor: pointer;
       &.hoverable {
         stroke-width: 1px;
-        stroke: black;
+        stroke: $vis-teal;
         &:hover, &.force-hover {
-          stroke: color('green', 'base');
+          stroke: $vis-teal;
           stroke-width: 2px;
         }
       }
 
       &.selected {
-        stroke: color('green', 'base');
-        stroke-width: 1;
-        stroke-dasharray: 10;
+        stroke: $vis-teal;
+        stroke-width: 2px;
+        stroke-dasharray: 8;
       }
     }
 
@@ -2478,7 +2504,9 @@ span.badge-primary-color-no-float {
 
     .label {
       text-anchor: middle;
-      text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+      text-shadow: 0 0.8px 0 #fff, 0.8px 0 0 #fff, -0.8px 0 0 #fff, 0 -0.8px 0 #fff;
+      fill: $vis-dark;
+      font-family: 'Open Sans', sans-serif;
     }
 
     .label,
@@ -2487,7 +2515,7 @@ span.badge-primary-color-no-float {
     }
 
     .incomplete {
-      stroke: color('green', 'base');
+      stroke: $vis-teal;
       stroke-width: 2;
       stroke-dasharray: 10;
     }
@@ -2811,25 +2839,13 @@ span.badge-primary-color-no-float {
   overflow-y: scroll;
   margin: 15px;
   padding: 15px;
-}
 
-//  .axis-helper-line {
-//    stroke-width: 0.5;
-//    stroke: grey;
-//  }
-//  .rotated {
-//    font-size: 70%;
-//  }
-//}
-//path {
-//  display: none;
-//}
-//
-//text {
-//  fill: #666666;
-//}
-//    //
-//}
+  .legend-text {
+    font-size: 65%;
+    fill: #666;
+    font-family: "ChEMBL_Verdana", Verdana, sans-serif;
+  }
+}
 
 /**
   * Scatter plot
@@ -2980,6 +2996,7 @@ $browser-tool-bar-width: 55px;
   padding: 0 !important;
   background-color: color('grey', 'lighten-2');
   min-height: $browser-tools-height !important;
+  z-index: 3;
 
   .tool-bar {
     padding-top: 1px;
@@ -3065,7 +3082,7 @@ $facets-width-large: 21%;
 }
 
 .facets {
-
+  z-index: 3;
   @media #{$medium-only} {
     width: $facets-width-medium;
   }
@@ -3207,7 +3224,6 @@ $facets-width-large: 21%;
   }
 }
 
-
 /* carrousel with overlay buttons
 * --------------------------------------------
 */
@@ -3216,7 +3232,7 @@ $chevron-button-size: 40px;
 $chevron-button-margin: 0px;
 
 @media (max-width: 600px) {
-  #SimilarCompoundsCard, #AlternateFormsOfCompoundInChEMBL{
+  #SimilarCompoundsCard, #AlternateFormsOfCompoundInChEMBL {
     max-width: 500px !important;
   }
 
@@ -3301,6 +3317,9 @@ $chevron-button-margin: 0px;
 * Paginated Collections
 * ----------------------------------------------------------------------------------------------------------------------
 */
+
+$chembl-header-height: 52.245px;
+
 .pagination {
   margin: 0;
   a {
@@ -3320,8 +3339,20 @@ $chevron-button-margin: 0px;
 
 .paginated-collection {
   padding: 4px;
+
+  .paginator-row {
+    margin-top: 20px;
+  }
   .pg-table {
     margin-left: 8px;
+
+    .pinned-header {
+      background-color: rgb(255, 255, 255);
+      position: fixed;
+      z-index: 2;
+      top: 3.2em;
+      border-bottom: solid 0.5px #f1f1f1;
+    }
 
     .hidden_header, .hidden_cell {
       display: none;
@@ -3531,7 +3562,6 @@ $chevron-button-margin: 0px;
                 height: 100%;
                 .valign-wrapper {
                   height: 100%;
-                  padding: 40px;
                   text-align: center;
                 }
               }
@@ -3547,6 +3577,65 @@ $chevron-button-margin: 0px;
 }
 
 /**
+* d3 simple pie-chart
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+
+.principal-pie-container {
+  height: 100%;
+  //background-color: white;
+}
+
+.simple-pie-container {
+  background-color: white;
+  .pie-title {
+    //padding-top: 10px;
+    a {
+      cursor: pointer;
+      font-size: 85%;
+      font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+      color: #5e5e5e;
+      text-align: center;
+
+      width: 100%;
+    }
+  }
+
+  .pie-title a:hover {
+    color: color('teal', 'accent-4');
+  }
+
+  .pie-content {
+    margin: 0;
+    .arc {
+      text {
+        fill: #494949;
+        font-size: 70%;
+        font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif
+      }
+    }
+    .arc:hover {
+      path {
+        opacity: 0.7;
+        stroke: white;
+        stroke-width: 2px;
+        transition: all 100ms ease-in-out;
+      }
+      text {
+        font-size: 80%;
+      }
+    }
+  }
+  .simple-pie-legend {
+    .legend-text {
+      font-size: 65%;
+      fill: #666;
+      font-family: "ChEMBL_Verdana", Verdana, sans-serif;
+    }
+  }
+}
+
+/**
 * stacked donut pie-chart
 * ----------------------------------------------------------------------------------------------------------------------
 */
@@ -3556,10 +3645,16 @@ $chevron-button-margin: 0px;
   .legend {
     width: 100%;
     margin-left: -10px;
-    margin-top: 0px;
+    margin-top: 40px;
     overflow-y: scroll;
     overflow-x: hidden !important;
+    .legend-text {
+      font-size: 65%;
+      fill: #666;
+      font-family: "ChEMBL_Verdana", Verdana, sans-serif;
+    }
   }
+
   .title {
     cursor: pointer;
     font-size: 90%;
@@ -3583,7 +3678,7 @@ $chevron-button-margin: 0px;
   .arc {
     text {
       font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
-      font-size: 80%;
+      font-size: 100%;
     }
   }
 
@@ -3629,14 +3724,15 @@ $chevron-button-margin: 0px;
 * Visualisation Cards
 * ----------------------------------------------------------------------------------------------------------------------
 */
-.tall {
-  .visualisation-card {
-    height: 55vh;
+
+.carousel-wrapper {
+  .carousel-item {
+    height: 80vh;
   }
 }
 
 .visualisation-card {
-  height: 45vh;
+  height: 100%;
   .card-content {
     padding: 5px;
     height: 100%;
@@ -3698,8 +3794,6 @@ $chevron-button-margin: 0px;
     }
   }
 }
-
-
 
 /**** CUSTOM RESPONSIVE SIZES FOR CAROUSEL CARDS ********/
 
@@ -3776,7 +3870,7 @@ $chevron-button-margin: 0px;
 }
 
 @media #{$medium-and-up} {
-    .carousel-card.card-m1 {
+  .carousel-card.card-m1 {
     flex-grow: 0;
     flex-shrink: 0;
     flex-basis: calc(100% / (12 / 1));
@@ -3922,4 +4016,5 @@ $chevron-button-margin: 0px;
     flex-basis: calc(100% / (12 / 12));
   }
 }
+
 

@@ -20,7 +20,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @disableColumnsSelection = arguments[0].disable_columns_selection
       @disableItemsSelection = arguments[0].disable_items_selection
       @viewID = (new Date()).getTime().toString()
-
       @initColumnsHandler()
 
       if @isTable()
@@ -168,6 +167,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     renderViewState: ->
       @stampViewIDOnEventsTriggerers()
       @fillTemplates()
+      @setUpEmbedModal() unless not @config.show_embed_button
 
     sleepView: ->
     wakeUpView: ->
@@ -264,6 +264,14 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           if templateParams.img_url? and (@hasStructureHighlightingEnabled() or @hasSimilarityMapsEnabled())
             @createDeferredView(model, $newItemElem)
 
+          viewConfig =
+            invert_trigger_colours: true
+
+          embedURL = glados.ReportCardApp.EMBED_MINI_REPORT_CARD_URL_GENERATOR
+            entity_type: item.entityName
+            id: idValue
+          glados.helpers.EmbedModalsHelper.initEmbedModal($newItemElem, embedURL, viewConfig)
+
       @fixCardHeight($appendTo)
 
     fixCardHeight: ($appendTo) ->
@@ -297,12 +305,15 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
 
     fillSelectAllContainer: ->
+
       $selectAllContainer = $(@el).find('.BCK-selectAll-container')
       if $selectAllContainer.length == 0
         return
       glados.Utils.fillContentForElement $selectAllContainer,
         base_check_box_id: @getBaseSelectAllCheckBoxID()
         all_items_selected: @collection.getMeta('all_items_selected') and not @collection.thereAreExceptions()
+
+      $selectAllContainer.show()
 
     fillNumResults: ->
       glados.Utils.fillContentForElement $(@el).find('.num-results'),
@@ -376,6 +387,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     # Preloaders and content
     # ------------------------------------------------------------------------------------------------------------------
+    hidePageSizeSelectors: -> $(@el).find('.BCK-select-page-size-container').hide()
     showSuggestedLabel: () ->
       suggestedLabel = $(@el).find('.BCK-SuggestedLabel')
       suggestedLabel.show()
@@ -638,3 +650,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       $errorMessagesContainer = $(@el).find('.BCK-ErrorMessagesContainer')
       $errorMessagesContainer.html glados.Utils.ErrorMessages.getCollectionErrorContent(jqXHR)
       $errorMessagesContainer.show()
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Embed modal
+    # ------------------------------------------------------------------------------------------------------------------
+    setUpEmbedModal: ->
+
+      urlGenerator = glados.views.PaginatedViews.PaginatedViewFactory.getEmbedURLGeneratorFor(@type)
+      glados.helpers.EmbedModalsHelper.initEmbedModalForCollectionView(urlGenerator, @)

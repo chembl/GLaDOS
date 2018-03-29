@@ -25,9 +25,7 @@ class MainPageApp
 
     tweetsList.fetch()
 
-    MainPageApp.initPapersPerYear()
-    MainPageApp.initMaxPhaseForDisease()
-    MainPageApp.initTargetsVisualisation()
+    MainPageApp.initCentralCarousel()
 
 # ---------------- Aggregation -------------- #
   @getDocumentsPerYearAgg = (defaultInterval=1) ->
@@ -91,11 +89,11 @@ class MainPageApp
           aggs:
             split_series_agg:
               type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
-              field: 'indication_class'
-              size: 10
+              field: '_metadata.drug_indications.efo_term'
+              size: 12
               bucket_links:
                 bucket_filter_template: '_metadata.drug.is_drug:true AND ' +
-                                        'max_phase :{{max_phase}} AND indication_class:("{{bucket_key}}"' +
+                                        'max_phase :{{max_phase}} AND _metadata.drug_indications.efo_term:("{{bucket_key}}"' +
                                         '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
                 template_data:
                   max_phase: 'BUCKET.parent_key'
@@ -114,7 +112,7 @@ class MainPageApp
   @initMaxPhaseForDisease = ->
     maxPhaseForDisease = MainPageApp.getMaxPhaseForDiseaseAgg()
     maxPhaseProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'MAX_PHASE', true)
-    indicationClassProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'INDICATION_CLASS')
+    diseaseClassProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'DISEASE')
 
     pieConfig =
       side_legend: true
@@ -123,12 +121,13 @@ class MainPageApp
       title: 'Max Phase for Disease'
       max_categories: 5
       stacked_donut: true
+      stacked_levels: 2
       hide_title: true
       properties:
         max_phase: maxPhaseProp
-        indication_class: indicationClassProp
+        disease_class: diseaseClassProp
       initial_property_x: 'max_phase'
-      initial_property_z: 'indication_class'
+      initial_property_z: 'disease_class'
       title_link_url: Drug.getDrugsListURL()
 
     config =
@@ -282,7 +281,6 @@ class MainPageApp
 
     targetsHierarchyAgg = MainPageApp.getTargetsTreeAgg()
     targetsHierarchyAgg.fetch()
-#    #initialize browser targets viz
     targetBrowserView = TargetBrowserApp.initBrowserAsCircles(targetHierarchy, $('#BCK-TargetBrowserAsCircles'))
     targetHierarchy.fetch()
 
@@ -293,3 +291,23 @@ class MainPageApp
       report_card_app: @
 
     targetHierarchy.fetch()
+
+  @initCentralCarousel = ->
+    $carouselContainer = $('.carousel-wrapper')
+
+    $carouselContainer.slick {
+      autoplay: true
+      autoplaySpeed: 5000
+      dots: true
+    }
+
+    MainPageApp.initPapersPerYear()
+    MainPageApp.initMaxPhaseForDisease()
+    MainPageApp.initTargetsVisualisation()
+
+
+
+
+
+
+

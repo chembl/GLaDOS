@@ -1,7 +1,7 @@
 <div class="col s12 m12 l12">
 
   <!-- Card Start -->
-  <div id="CNCCard" class="card grey lighten-5">
+  <div id="CNCCard" class="card grey lighten-5 BCK-Embed-ButtonContainer">
 
     {% verbatim %}
 
@@ -18,6 +18,8 @@
       <span class="chembl-help">
         <sub><span class="icon icon-generic tooltipped indigo-text" data-tooltip="{{tooltip}}"
                          data-icon='i' data-position="top"></span></sub>
+        {{#if withdrawn}}<sub><a href= "#WithdrawnInfo"><span class="icon icon-chembl-2 tooltipped text-darken-2 yellow-text" data-tooltip="{{withdrawn_text}}"
+                          data-icon='w' data-position="top"></span></a></sub>{{/if}}
       </span>
 
     </script>
@@ -40,27 +42,13 @@
 
     {% endverbatim %}
 
-    <!-- modal trigger -->
-    {% block embed_button %}
-      {% include "glados/base/embed_button.html" %}
-    {% endblock %}
-
     {% block card_loaders %}
       {% include "glados/base/card_loaders.html" %}
     {% endblock %}
 
-     <!-- Embed Modal Structure -->
-    {% block embed_modal %}
-      {% include "glados/base/embed_modal.html" %}
-    {% endblock %}
-
-
     <div class="card-content" style="display:none">
 
       <div class="row">
-
-
-
 
       <!-- Coumpound Image -->
       <div class="col s6 m4 offset-s3">

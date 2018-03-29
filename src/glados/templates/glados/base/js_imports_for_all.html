@@ -19,6 +19,7 @@
   {% block common_js_libs %}
 
     <script type="text/javascript" src="{% static 'js/api/jquery-2.2.0.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/api/slick.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/api/jquery.number.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/api/materialize.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/api/underscore.js' %}"></script>
@@ -162,12 +163,11 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/Activity.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/CompoundList.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/MechanismOfAction.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/MechanismOfActionList.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound/Metabolism.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound/StructuralAlertSet.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound/StructuralAlert.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound/DrugIndication.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound/MechanismOfAction.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound/TargetPrediction.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Compound/CompoundNameClassificationView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Compound/CompoundImageView.js' %}"></script>
@@ -243,6 +243,7 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/DocumentSchema.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/CellLineSchema.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/TissueSchema.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/StateSaving/ESCollectionStateSavingFunctions.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/ColumnsHandler.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/FacetGroupVisibilityHandler.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/ESPaginatedQueryCollection.js' %}"></script>
@@ -313,6 +314,9 @@
     <!-- Embedder -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/apps/Embedding/EmbeddingRouter.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/apps/Embedding/EmbeddingApp.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'js/coffee-gen/models/Embedding/EmbedModalModel.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Embedding/EmbedModalView.js' %}"></script>
 
     <!-- Routing -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/routers/MainGladosRouter.js' %}"></script>

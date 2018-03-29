@@ -50,6 +50,7 @@ CompoundNameClassificationView = CardView.extend
 
   renderMaxPhase: ->
     phase = @model.get('max_phase')
+    withdrawn = @model.get('withdrawn_flag')
     phase_class = 'comp-phase-' + phase
 
     description = switch
@@ -74,6 +75,8 @@ CompoundNameClassificationView = CardView.extend
       else
         'Undefined'
 
+    withdrawn_text = 'The compound has been withdrawn in some countries. Click to see more'
+
 
     template = Handlebars.compile($('#Handlebars-Compound-NameAndClassification-renderMaxPhase').html())
     rendered = template
@@ -81,6 +84,9 @@ CompoundNameClassificationView = CardView.extend
       text: phase
       desc: description
       tooltip: tooltip_text
+      withdrawn: withdrawn
+      withdrawn_text: withdrawn_text
+
 
     $(@el).find('#Bck-MAX_PHASE').html(rendered)
     #Initialize materialize tooltip

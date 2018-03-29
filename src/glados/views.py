@@ -157,6 +157,14 @@ def render_params_from_hash(request, hash):
   }
   return render(request, 'glados/mainGladosNoBar.html', context)
 
+def render_params_from_hash_when_embedded(request, hash):
+
+  context = {
+    'shortened_params': url_shortener.get_original_url(hash)
+  }
+  return render(request, 'glados/Embedding/embed_base.html', context)
+
+
 def shorten_url(request):
 
   if request.method == "POST":

@@ -6,45 +6,43 @@ glados.useNameSpace 'glados.helpers',
   EmbedModalsHelper: class EmbedModalsHelper
 
     # $parentElement is the parent element that contains the embed modal and trigger button
-    @initEmbedModal = ($parentElement, embedURL)->
-      
-      if EMBEDED?
-        # prevent unnecessary loops
-        $parentElement.find('.embed-modal-trigger').remove()
-        $parentElement.find('.embed-modal').remove()
+    @initEmbedModal = ($parentElement, embedURL, viewConfig) ->
+
+      embedModel = new glados.models.Embedding.EmbedModalModel
+        embed_url: embedURL
+
+      new glados.views.Embedding.EmbedModalView
+        model: embedModel
+        el: $parentElement
+        config: viewConfig
+
+      return embedModel
+
+    @initEmbedModalForCollectionView: (embedURLGenerator, parentView) ->
+
+      if GlobalVariables['EMBEDED']
         return
 
-      $modalTrigger = $parentElement.find('.embed-modal-trigger')
-      $modal = $parentElement.find('.embed-modal')
+      currentStateString = JSON.stringify(parentView.collection.getStateJSON())
+      base64StateString = btoa(currentStateString)
 
-      modalNumber = Math.floor((Math.random() * 1000000) + 1)
+      embedURLRelative = embedURLGenerator
+        state: encodeURIComponent(base64StateString)
+      embedURL = "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#{embedURLRelative}"
 
-      modalId = 'embed-modal-for-' + modalNumber
-      $modal.attr('id', modalId)
-      $modalTrigger.attr('href', "##{modalId}" )
-      $modalTrigger.attr('rendered', 'false')
+      if not parentView.embedModel?
+        viewConfig =
+          force_parent_as_container: true
+        parentView.embedModel = glados.helpers.EmbedModalsHelper.initEmbedModal($(parentView.el), embedURL, viewConfig)
+      else
+        parentView.embedModel.set
+          embed_url: embedURL
 
-      $modalTrigger.attr('data-embed-url', embedURL)
-      $modalTrigger.click @renderModalPreview
-
-    # this function is to be used for the click event in the embed modal button.
-    # it can get all the information needed from the clicked element, no closure is needed.
-    @renderModalPreview = ->
-
-      $clicked = $(@)
-      if $clicked.attr('rendered') == 'true'
-        return
-
-      $modal = $($clicked.attr('href'))
-      $codeElem = $modal.find('code')
-      url = $clicked.attr('data-embed-url')
-      rendered = Handlebars.compile($('#Handlebars-Common-EmbedCode').html())
-        url: url
-      $codeElem.text(rendered)
-
-      $previewElem = $modal.find('.BCK-embed-preview')
-      $codeElem = $modal.find('code')
-      $codeToPreview = $codeElem.text()
-
-      $previewElem.html($codeToPreview)
-      $clicked.attr('rendered', 'true')
+      # shorten the url, but in any case the original one is already shown
+      getShortenedURL = glados.Utils.URLS.getShortenedEmbebURLPromise(embedURL)
+      thisView = parentView
+      getShortenedURL.then (data) ->
+        newEmbedURL = glados.Settings.SHORTENED_EMBED_URL_GENERATOR
+          hash: encodeURIComponent(data.hash)
+        thisView.embedModel.set
+          embed_url: newEmbedURL
