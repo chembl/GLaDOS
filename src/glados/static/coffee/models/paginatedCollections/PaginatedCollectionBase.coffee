@@ -12,10 +12,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
     # Link to all activities
     # ------------------------------------------------------------------------------------------------------------------
-    resetLinkToAllActivitiesCache: -> @setMeta('all_activities_link_cache', undefined)
+    ALL_ACTIVITIES_LINK_CACHE_PROP_NAME: 'all_activities_link_cache'
+
+    resetLinkToAllActivitiesCache: -> @setMeta(@ALL_ACTIVITIES_LINK_CACHE_PROP_NAME, undefined)
     # because of the paginated nature of the collections, it could happen that in order to get
     # all the selected ids, it has to download all the results, this is why it returns a promise.
     getLinkToAllActivitiesPromise: ->
+
+      cache = @getMeta(@ALL_ACTIVITIES_LINK_CACHE_PROP_NAME)
+      if cache?
+        return jQuery.Deferred().resolve(cache)
 
       linkPromise = jQuery.Deferred()
 
@@ -24,6 +30,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       selectedIDsPromise.then (selectedIDs) ->
 
         link = thisCollection.getLinkToAllActivities(selectedIDs)
+        thisCollection.setMeta(thisCollection.ALL_ACTIVITIES_LINK_CACHE_PROP_NAME, link)
         linkPromise.resolve(link)
 
       return linkPromise
