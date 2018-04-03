@@ -38,7 +38,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getNewESResultsListFor: (esIndexSettings, customQueryString='*', useCustomQueryString=false, itemsList,
       contextualProperties, searchTerm, stickyQuery, searchESQuery) ->
 
-      IndexESPagQueryCollection = glados.models.paginatedCollections.ESPaginatedQueryCollection\
+      IndexESPagQueryCollection = glados.models.paginatedCollections.PaginatedCollectionBase\
+      .extend(glados.models.paginatedCollections.ESPaginatedQueryCollection)
       .extend(glados.models.paginatedCollections.SelectionFunctions)
       .extend(glados.models.paginatedCollections.SortingFunctions)
       .extend(glados.models.paginatedCollections.ReferenceStructureFunctions)
@@ -94,6 +95,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             custom_possible_card_sizes_struct: esIndexSettings.POSSIBLE_CARD_SIZES_STRUCT
             settings_path: esIndexSettings.PATH_IN_SETTINGS
             searchESQuery: searchESQuery
+            enable_activities_link_for_selected_entities: esIndexSettings.ENABLE_ACTIVITIES_LINK_FOR_SELECTED_ENTITIES
 
           if @getMeta('enable_similarity_maps') or @getMeta('enable_substructure_highlighting')
             @initReferenceStructureFunctions()
@@ -102,11 +104,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             @initCache()
             @on 'reset update', @addModelsInCurrentPage, @
 
+          glados.models.paginatedCollections.PaginatedCollectionBase.prototype.initialize.call(@)
+
       return new IndexESPagQueryCollection
 
 # creates a new instance of a Paginated Collection from Web Services
     getNewWSCollectionFor: (collectionSettings, filter='') ->
-      wsPagCollection = glados.models.paginatedCollections.WSPaginatedCollection\
+      wsPagCollection = glados.models.paginatedCollections.PaginatedCollectionBase\
+      .extend(glados.models.paginatedCollections.WSPaginatedCollection)
       .extend(glados.models.paginatedCollections.SelectionFunctions)
       .extend(glados.models.paginatedCollections.SortingFunctions)
       .extend(glados.models.paginatedCollections.CacheFunctions).extend
@@ -136,13 +141,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             @initCache()
             @on 'reset', @addModelsInCurrentPage, @
 
+          glados.models.paginatedCollections.PaginatedCollectionBase.prototype.initialize.call(@)
+
       return new wsPagCollection
 
 # creates a new instance of a Client Side Paginated Collection from either Web Services or elasticsearch, This means that
 # the collection gets all the data is in one call and the full list is in the client all the time.
     getNewClientSideCollectionFor: (collectionSettings, generator) ->
 
-      collection = glados.models.paginatedCollections.ClientSidePaginatedCollection\
+      collection = glados.models.paginatedCollections.PaginatedCollectionBase\
+      .extend(glados.models.paginatedCollections.ClientSidePaginatedCollection)
       .extend(glados.models.paginatedCollections.SelectionFunctions)
       .extend(glados.models.paginatedCollections.SortingFunctions).extend
 
@@ -165,6 +173,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             selection_exceptions: {}
             data_loaded: false
             model: collectionSettings.MODEL
+            is_client_side: true
 
           @on 'reset', @resetMeta, @
 
@@ -193,6 +202,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
               @setMeta('data_loaded', true)
               @reset(parsedModels)
             ), @
+
+          glados.models.paginatedCollections.PaginatedCollectionBase.prototype.initialize.call(@)
 
       return new collection
 

@@ -27,6 +27,9 @@ class TestsUtils
     $.get dataURL, (testData) ->
       list.allResults = testData
       list.setMeta('total_records', testData.length)
+      Entity = list.getMeta('model')
+      models = (new Entity(Entity.prototype.parse(result)) for result in testData)
+      list.reset(models)
       done()
 
   @simulateDataModel = (model, dataURL, done) ->

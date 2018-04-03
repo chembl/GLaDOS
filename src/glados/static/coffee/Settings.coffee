@@ -171,14 +171,14 @@ glados.useNameSpace 'glados',
       'Table': 'Table'
       'Cards': 'Cards'
       'Infinite': 'Infinite'
-      Bioactivity: 'Bioactivity'
+      Heatmap: 'Heatmap'
     DEFAULT_RESULTS_VIEWS_ICONS:
       'Matrix': 'fa-th'
       'Graph': 'fa-area-chart'
       'Table': 'fa-table'
       'Cards': 'fa-newspaper-o'
       'Infinite': 'fa-ellipsis-v'
-      Bioactivity: 'fa-th'
+      Heatmap: 'fa-th'
     DEFAULT_NULL_VALUE_LABEL: 'No Data'
     DEFAULT_NULL_VALUE_LABEL_LEGEND: '---'
     INCOMPLETE_SELECTION_LIST_LABEL: 'INCOMPLETE_SELECTION_LIST'
@@ -353,7 +353,6 @@ glados.setupOnLoadAfterJS = () ->
           # Double check that ajax truly stopped
           if glados.ajax_count == 0
             $('#GLaDOS-page-loaded').html('YES')
-            $('#GladosMainSplashScreen').hide()
         , 500
       )
 

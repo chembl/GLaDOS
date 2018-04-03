@@ -278,7 +278,7 @@ glados.useNameSpace 'glados.apps.Embedding',
       heatmap:
         initFunction: glados.views.SearchResults.ESResultsBioactivitySummaryView.initEmbedded
         in_script:
-          script_id: 'Handlebars-Common-ESResultsListBioactivityView'
+          script_id: 'Handlebars-Common-ESResultsListHeatmapView'
       plot:
         initFunction: glados.views.SearchResults.ESResultsGraphView.initEmbedded
         in_script:

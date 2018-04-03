@@ -35,4 +35,27 @@
     </div>
 
 </script>
+
+<script id="Handlebars-Common-LinearPreloader" type="text/x-handlebars-template">
+
+
+  {{#if msg}}
+  <div class="center-align">
+    {{msg}}
+  </div>
+  {{/if}}
+
+
+    <div class="progress">
+      <div class="indeterminate"></div>
+    </div>
+
+
+
+</script>
+
+<script id="Handlebars-Common-MiniPreloader" type="text/x-handlebars-template">
+     <i class="fa fa-cog fa-spin fa-fw"></i> (loading...)
+</script>
+
 {% endverbatim %}

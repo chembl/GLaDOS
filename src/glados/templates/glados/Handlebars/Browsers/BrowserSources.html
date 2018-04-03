@@ -41,7 +41,7 @@
 {% verbatim %}
 </script>
 
-<script id="Handlebars-Common-ESResultsListBioactivityView" type="text/x-handlebars-template">
+<script id="Handlebars-Common-ESResultsListHeatmapView" type="text/x-handlebars-template">
 
   <span class="load-messages-container">
   </span>
@@ -81,7 +81,9 @@
     <div class="selection-information">
 
       <b>{{#if out_of_n}}first {{/if}}{{total_items}} {{entity_label}}{{#if out_of_n}} out of <span class="teal-text tooltipped" data-position="bottom" data-tooltip="Please narrow your search.">{{out_of_n}}</span> found{{/if}}</b><br>
-      {{num_selected}} Selected
+      {{num_selected}} Selected <div class="BCK-LinkToAllActivitiesContainer link-to-all-activities-container"
+                                     data-hb-template="Handlebars-LinkToAllActivities"
+                                     data-hb-preloader-template="Handlebars-Common-MiniPreloader"> </div>
     </div>
 
     <div class="selection-button-container">
@@ -96,6 +98,15 @@
 
   </div>
 
+</script>
+
+<script id="Handlebars-LinkToAllActivities" type="text/x-handlebars-template">
+-
+{{#if too_many_items}}
+<a target="_blank" class="disabled">Browse Activities</a>
+{{else}}
+<a target="_blank" href="{{url}}">Browse Activities</a>
+{{/if}}
 </script>
 
 <script id="Handlebars-ESResultsList" type="text/x-handlebars-template">
@@ -123,6 +134,21 @@
     {% verbatim %}
   </div>
 
+</script>
+
+<script id="Handlebars-BrowserMenuContent" type="text/x-handlebars-template">
+  <div class="col s12 m5 l5 BCK-changeView-btns-container view-menu"
+       data-hb-template="Handlebars-SwitchColViewButtons">
+    <!-- backbone fills this -->
+  </div>
+
+  <div class="col s12 m3 l3 BCK-selection-menu-container" data-hb-template="Handlebars-SelectionMenu">
+    <!-- backbone fills this -->
+  </div>
+
+  <div class="col s12 m4 l4 BCK-download-btns-container download-menu valign-wrapper" data-hb-template="Handlebars-DownloadColButtons">
+    <!-- backbone fills this -->
+  </div>
 </script>
 
 {% endverbatim %}

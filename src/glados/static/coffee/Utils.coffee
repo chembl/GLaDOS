@@ -306,12 +306,15 @@ glados.useNameSpace 'glados',
 
     cachedTemplateFunctions: {}
     # the element must define a data-hb-template, which is the id of the handlebars template to be used
-    fillContentForElement: ($element, paramsObj={}, customTemplate)->
+    fillContentForElement: ($element, paramsObj={}, customTemplate, fillWithPreloader=false)->
 
       if customTemplate?
         templateSelector = '#' + customTemplate
       else
-        templateSelector = '#' + $element.attr('data-hb-template')
+        if fillWithPreloader
+          templateSelector = '#' + $element.attr('data-hb-preloader-template')
+        else
+          templateSelector = '#' + $element.attr('data-hb-template')
 
       if not glados.Utils.cachedTemplateFunctions[templateSelector]?
         templateFunction = Handlebars.compile($(templateSelector).html())

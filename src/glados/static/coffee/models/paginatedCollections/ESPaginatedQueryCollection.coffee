@@ -4,7 +4,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
   # This class implements the pagination, sorting and searching for a collection in ElasticSearch
   # extend it to get a collection with the extra capabilities
   # --------------------------------------------------------------------------------------------------------------------
-  ESPaginatedQueryCollection: Backbone.Collection.extend
+  ESPaginatedQueryCollection:
     # ------------------------------------------------------------------------------------------------------------------
     # Backbone Override
     # ------------------------------------------------------------------------------------------------------------------
@@ -696,26 +696,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @setMeta('ignore_score', true)
       @fetch()
 
-#TODO implement sorting
-
-    resetSortData: ->
-#TODO implement sorting
-
-
-# sets the term to search in the collection
-# when the collection is server side, the corresponding column and type are required.
-# This is because the web services don't provide a search with OR
-# for client side, it can be null, but for example for server side
-# for chembl25, term will be 'chembl25', column will be 'molecule_chembl_id', and type will be 'text'
-# the url will be generated taking into account this terms.
-    setSearch: (term, column, type)->
-#TODO Check if this is required
-
-# from all the comparators, returns the one that is being used for sorting.
-# if none is being used for sorting returns undefined
-    getCurrentSortingComparator: () ->
-#TODO implement sorting
-
     # ------------------------------------------------------------------------------------------------------------------
     # Download functions
     # ------------------------------------------------------------------------------------------------------------------
@@ -732,6 +712,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 # without requesting again to the server.
 # you can use a progress element to show the progress if you want.
     getAllResults: ($progressElement, askingForOnlySelected = false) ->
+      # this really needs to be refactored!
 
       if $progressElement?
         $progressElement.empty()
@@ -747,6 +728,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         iNeedToGetEverythingExceptSome = false
         iNeedToGetOnlySome = false
 
+      currentDownloadObj = @getMeta('current_download_obj')
+      if currentDownloadObj?
+        if iNeedToGetEverything and currentDownloadObj.iNeedToGetEverything
+          return currentDownloadObj.deferreds
+
       #if they want the selected ones only, and I already have them all just pick them from the list
       if askingForOnlySelected and @allResults? and @DOWNLOADED_ITEMS_ARE_VALID
         if not @thereAreExceptions()
@@ -759,7 +745,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         return [jQuery.Deferred().resolve()]
 
       # check if I already have all the results and they are valid
-      if @allResults? and @DOWNLOADED_ITEMS_ARE_VALID
+      if @downloadIsValidAndReady()
         return [jQuery.Deferred().resolve()]
 
       totalRecords = @getMeta('total_records')
@@ -819,7 +805,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           data = JSON.stringify(thisCollection.getRequestData(currentPage, pageSize))
 
         return $.post(url, data).done((response) ->
-
           #I know that I must be receiving currentPage.
           newItems = (item._source for item in response.hits.hits)
           # now I add them in the corresponding position in the items array
@@ -868,11 +853,20 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         f = $.proxy(@makeSelectedSameAsAllResults, @)
         $.when.apply($, deferreds).done -> f()
 
+      currentDownloadObj =
+        iNeedToGetEverything: iNeedToGetEverything
+        iNeedToGetEverythingExceptSome: iNeedToGetEverythingExceptSome
+        iNeedToGetOnlySome: iNeedToGetOnlySome
+        deferreds: deferreds
+
+      @setMeta('current_download_obj', currentDownloadObj)
+
       return deferreds
 
     setValidDownload: ->
       @DOWNLOADED_ITEMS_ARE_VALID = true
       @DOWNLOAD_ERROR_STATE = false
+      @setMeta('current_download_obj', undefined)
       @trigger(glados.Events.Collections.ALL_ITEMS_DOWNLOADED)
       # If the downloaded items are all of the collection use them as cache
       if @getMeta('enable_collection_caching') and not @getMeta('disable_cache_on_download')
@@ -954,7 +948,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           $progressElement.html Handlebars.compile($('#Handlebars-Common-CollectionErrorMsg').html())
             msg: msg
       )
-  ,
+      
     HIGHLIGHT_SUFFIXES_TO_REMOVE: [
       'eng_analyzed', 'ws_analyzed', 'std_analyzed', 'alphanumeric_lowercase_keyword', /\.\d*$/
     ]
