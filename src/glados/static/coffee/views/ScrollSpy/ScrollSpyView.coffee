@@ -22,7 +22,7 @@ glados.useNameSpace 'glados.views.ScrollSpy',
         sections =  _.values(@model.get('sections'))
         for s, i in sections
           waiting = true if s.decided_state == false
-        console.log 'WAITING: ', waiting
+#        console.log 'WAITING: ', waiting
 
         @scrollSpyState = glados.views.ScrollSpy.ScrollSpyView.STATE.SHOWING if waiting == false
 
