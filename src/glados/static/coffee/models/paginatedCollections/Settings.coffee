@@ -50,7 +50,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Graph'],
-          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Bioactivity]
+          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Heatmap]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
         ENABLE_COLLECTION_CACHING: true
         POSSIBLE_CARD_SIZES_STRUCT:
@@ -99,7 +99,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'], glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite'],
-          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Bioactivity]
+          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Heatmap]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
         ENABLE_COLLECTION_CACHING: true
         ENABLE_ACTIVITIES_LINK_FOR_SELECTED_ENTITIES: true
@@ -279,7 +279,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Graph'],
-          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Bioactivity]
+          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Heatmap]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
         ENABLE_COLLECTION_CACHING: true
         ENABLE_ACTIVITIES_LINK_FOR_SELECTED_ENTITIES: true
@@ -314,7 +314,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Graph'],
-          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Bioactivity]
+          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Heatmap]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
         ENABLE_SUBSTRUCTURE_HIGHLIGHTING: true
         SHOW_SUBSTRUCTURE_HIGHLIGHTING: true
@@ -352,7 +352,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Graph'],
-          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Bioactivity]
+          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Heatmap]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
         ENABLE_SIMILARITY_MAPS: true
         SHOW_SIMILARITY_MAPS: true
@@ -392,7 +392,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Graph'],
-          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Bioactivity]
+          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Heatmap]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
         ENABLE_COLLECTION_CACHING: true
         DISABLE_CACHE_ON_DOWNLOAD: true

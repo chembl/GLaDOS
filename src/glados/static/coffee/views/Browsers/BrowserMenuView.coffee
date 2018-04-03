@@ -7,7 +7,7 @@ glados.useNameSpace 'glados.views.Browsers',
       'Table': glados.views.PaginatedViews.PaginatedViewFactory.getTableConstructor()
       'Cards': glados.views.PaginatedViews.PaginatedViewFactory.getCardsConstructor()
       'Infinite': glados.views.PaginatedViews.PaginatedViewFactory.getInfiniteConstructor()
-      'Bioactivity': glados.views.SearchResults.ESResultsBioactivitySummaryView
+      Heatmap: glados.views.SearchResults.ESResultsBioactivitySummaryView
 
     events:
       'click .BCK-download-btn-for-format': 'triggerAllItemsDownload'
