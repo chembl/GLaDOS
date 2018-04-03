@@ -240,13 +240,13 @@ class QueryBuilder:
         for i, es_index_i in enumerate(indexes):
             best_query_i = None
             best_query_i_total = 0
-            best_query_i_score = 0
+            best_query_i_score = 0 + (len(indexes)-i)/(10**(len(es_base_queries)+1))
             j = 0
             while best_query_i is None and j < len(es_base_queries):
                 if results[i*len(es_base_queries) + j]['hits']['total'] > 0:
                     best_query_i = es_base_queries[j]
                     best_query_i_total = results[i * len(es_base_queries) + j]['hits']['total']
-                    best_query_i_score = results[i * len(es_base_queries) + j]['hits']['max_score']
+                    best_query_i_score += results[i * len(es_base_queries) + j]['hits']['max_score']/(10**j)
                 j += 1
             if best_query_i is None:
                 best_query_i = es_base_queries[0]
@@ -255,7 +255,10 @@ class QueryBuilder:
                 'total': best_query_i_total,
                 'max_score': best_query_i_score
             }
-        sorted_keys_by_score = sorted(best_queries.items(), key=lambda k_v: k_v[1]['max_score'], reverse=True)
-        import pprint
-        pprint.pprint(sorted_keys_by_score)
-        return best_queries
+
+        sorted_keys_by_score = sorted(best_queries.keys(), key=lambda key: best_queries[key]['max_score'], reverse=True)
+        for i, es_index_i in enumerate(indexes):
+            best_queries[es_index_i]['max_score'] -= (len(indexes)-i)/(10**(len(es_base_queries)+1))
+            best_queries[es_index_i]['max_score'] = round(best_queries[es_index_i]['max_score'], len(es_base_queries))
+
+        return best_queries, sorted_keys_by_score
