@@ -172,6 +172,17 @@ glados.useNameSpace 'glados.views.Browsers',
         glados.Utils.fillContentForElement $linkToAllContainer,
           too_many_items: true
 
+        qtipText = "PLease select or filter less than #{glados.Settings.VIEW_SELECTION_THRESHOLDS.Bioactivity[1]} " +
+        "items to activate this link."
+        $linkToAllContainer.qtip
+          content:
+            text: qtipText
+          style:
+            classes:'qtip-light'
+          position:
+            my: 'top middle'
+            at: 'bottom middle'
+
         return
 
       glados.Utils.fillContentForElement($linkToAllContainer, paramsObj={}, customTemplate=undefined,
