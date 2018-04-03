@@ -7,7 +7,7 @@ glados.useNameSpace 'glados.views.Browsers',
       'Table': glados.views.PaginatedViews.PaginatedViewFactory.getTableConstructor()
       'Cards': glados.views.PaginatedViews.PaginatedViewFactory.getCardsConstructor()
       'Infinite': glados.views.PaginatedViews.PaginatedViewFactory.getInfiniteConstructor()
-      'Bioactivity': glados.views.SearchResults.ESResultsBioactivitySummaryView
+      Heatmap: glados.views.SearchResults.ESResultsBioactivitySummaryView
 
     events:
       'click .BCK-download-btn-for-format': 'triggerAllItemsDownload'
@@ -16,6 +16,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
     initialize: ->
 
+      @showPreloader()
       @collection.on 'reset do-repaint sort', @render, @
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @handleSelection, @
 
@@ -56,6 +57,7 @@ glados.useNameSpace 'glados.views.Browsers',
       if not $(@el).is(":visible")
         return
 
+      @renderMenuContent()
       if @collection.getMeta('total_records') != 0
 
         $downloadBtnsContainer = $(@el).find('.BCK-download-btns-container')
@@ -74,6 +76,17 @@ glados.useNameSpace 'glados.views.Browsers',
         @selectButton @currentViewType
 
       @addRemoveQtipToButtons()
+
+    renderMenuContent: ->
+
+      $menuContainer = $(@el).find('.BCK-Browser-Menu-Container')
+      glados.Utils.fillContentForElement($menuContainer)
+
+    showPreloader: ->
+
+      $menuContainer = $(@el).find('.BCK-Browser-Menu-Container')
+      glados.Utils.fillContentForElement($menuContainer, paramsObj={msg:'Loading Menu...'}, customTemplate=undefined,
+        fillWithPreloader=true)
 
     #--------------------------------------------------------------------------------------
     # Filters
@@ -142,7 +155,44 @@ glados.useNameSpace 'glados.views.Browsers',
         else
           @enableButton(viewLabel)
 
+      @renderLinkToAll() unless not @collection.islinkToAllActivitiesEnabled()
+
     toggleClearSelections: -> @collection.toggleClearSelections()
+
+    renderLinkToAll: ->
+
+      if @collection.getTotalRecords() == 0
+        return
+
+      $selectionMenuContainer = $(@el).find('.BCK-selection-menu-container')
+      $linkToAllContainer = $selectionMenuContainer.find('.BCK-LinkToAllActivitiesContainer')
+
+      if @collection.thereAreTooManyItemsForActivitiesLink()
+
+        glados.Utils.fillContentForElement $linkToAllContainer,
+          too_many_items: true
+
+        qtipText = "PLease select or filter less than #{glados.Settings.VIEW_SELECTION_THRESHOLDS.Bioactivity[1]} " +
+        "items to activate this link."
+        $linkToAllContainer.qtip
+          content:
+            text: qtipText
+          style:
+            classes:'qtip-light'
+          position:
+            my: 'top middle'
+            at: 'bottom middle'
+
+        return
+
+      glados.Utils.fillContentForElement($linkToAllContainer, paramsObj={}, customTemplate=undefined,
+        fillWithPreloader=true)
+
+      linkToActPromise = @collection.getLinkToAllActivitiesPromise()
+      linkToActPromise.then (linkGot) ->
+        glados.Utils.fillContentForElement $linkToAllContainer,
+          url: linkGot
+
 
     #--------------------------------------------------------------------------------------
     # Download Buttons

@@ -167,6 +167,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     renderViewState: ->
       @stampViewIDOnEventsTriggerers()
       @fillTemplates()
+      @renderLinkToAllActivities() unless not @islinkToAllActivitiesEnabled()
       @setUpEmbedModal() unless not @config.show_embed_button
 
     sleepView: ->
@@ -658,3 +659,18 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       urlGenerator = glados.views.PaginatedViews.PaginatedViewFactory.getEmbedURLGeneratorFor(@type)
       glados.helpers.EmbedModalsHelper.initEmbedModalForCollectionView(urlGenerator, @)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Link to all activities
+    # ------------------------------------------------------------------------------------------------------------------
+    islinkToAllActivitiesEnabled: -> @collection.getMeta('enable_activities_link_for_selected_entities') == true
+
+    renderLinkToAllActivities: ->
+
+      if @collection.thereAreTooManyItemsForActivitiesLink()
+        console.log 'too many items for link!'
+        return
+      linkToActPromise = @collection.getLinkToAllActivitiesPromise()
+      linkToActPromise.then (linkGot) ->
+        console.log 'renderLinkToAllActivities: '
+        console.log linkGot

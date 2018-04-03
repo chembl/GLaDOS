@@ -109,20 +109,50 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       allAreSelected = @getMeta('all_items_selected')
       return isSelectionException != allAreSelected
 
-    getSelectedItemsIDs: ->
+    getItemsIDs: (onlySelected=true) ->
 
       idProperty = @getMeta('id_column').comparator
       itemsList = []
 
-      if @allResults?
-        itemsList = (model[idProperty] for model in @allResults when @itemIsSelected(model[idProperty]) )
+      if @downloadIsValidAndReady()
+        if onlySelected
+          itemsList = (model[idProperty] for model in @allResults when @itemIsSelected(model[idProperty]) )
+        else
+          itemsList = (model[idProperty] for model in @allResults)
       else
-        itemsList = (model.attributes[idProperty] for model in @.models when @itemIsSelected(model.attributes[idProperty]) )
+        if onlySelected
+          itemsList = (model.attributes[idProperty] for model in @.models when @itemIsSelected(model.attributes[idProperty]) )
+        else
+          itemsList = (model.attributes[idProperty] for model in @.models)
 
-      if itemsList.length != @getNumberOfSelectedItems()
+      if onlySelected
+        incompleteCondition = itemsList.length != @getNumberOfSelectedItems()
+      else
+        incompleteCondition = itemsList.length != @getTotalRecords()
+
+      if incompleteCondition
         return glados.Settings.INCOMPLETE_SELECTION_LIST_LABEL
 
       return itemsList
+
+    getItemsIDsPromise: (onlySelected=true) ->
+
+      idsList = @getItemsIDs(onlySelected)
+      idsPromise = jQuery.Deferred()
+
+      if idsList == glados.Settings.INCOMPLETE_SELECTION_LIST_LABEL
+
+        deferreds = @getAllResults($progressElement=undefined, askingForOnlySelected=true)
+        thisCollection = @
+        $.when.apply($, deferreds).done ->
+          idsList = thisCollection.getItemsIDs(onlySelected)
+          idsPromise.resolve(idsList)
+
+      else
+
+        idsPromise.resolve(idsList)
+
+      return idsPromise
 
     selectAll: ->
 
@@ -150,6 +180,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @setMeta('all_items_selected', false)
         @setMeta('selection_exceptions', {})
         @trigger(glados.Events.Collections.SELECTION_UPDATED, glados.Events.Collections.Params.ALL_UNSELECTED)
+
+    allItemsAreUnselected: -> not (@getMeta('all_items_selected') or @thereAreExceptions())
 
     selectByPropertyValue: (propName, value) ->
 

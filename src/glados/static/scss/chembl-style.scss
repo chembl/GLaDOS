@@ -134,12 +134,15 @@ main {
 }
 
 $modals-height: 80%;
-
-/** make sure all links hav the hand pointer even with no href */
-a:hover {
-  cursor: pointer;
+a{
+  &.disabled{
+    color: color('grey', 'base')
+  }
+  /** make sure all links hav the hand pointer even with no href */
+  &:hover{
+    cursor: pointer;
+  }
 }
-
 .no-margin {
   margin: 0 !important;
 }
@@ -2173,6 +2176,9 @@ span.badge-primary-color-no-float {
       font-size: 0.8em;
     }
 
+    .link-to-all-activities-container{
+      display: inline;
+    }
   }
   .title {
     position: absolute;

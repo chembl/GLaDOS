@@ -6,7 +6,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
   # a Client Side collection means that all the information is in the client all the time. it is downloaded in one single
   # call, the pagination is made by limiting the access to the collection items
   # --------------------------------------------------------------------------------------------------------------------
-  ClientSidePaginatedCollection: Backbone.Collection.extend
+  ClientSidePaginatedCollection:
 
     init: ->
       @on 'reset', @resetMeta, @

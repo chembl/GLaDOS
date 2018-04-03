@@ -100,7 +100,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         return
 
 
-      selectedIDs = @collection.getSelectedItemsIDs()
+      selectedIDs = @collection.getItemsIDs()
 
       IDsListAttrName = 'origin_chembl_ids'
       originChemblIDS = @activitiesSummarylist.getMeta(IDsListAttrName)
@@ -127,7 +127,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
         thisView = @
         f = $.proxy(@getChemblIDsAndFetchFromSelection, @)
-        $.when.apply($, deferreds).done( -> f(thisView.collection.getSelectedItemsIDs()))
+        $.when.apply($, deferreds).done( -> f(thisView.collection.getItemsIDs()))
         .fail( (msg) -> thisView.setProgressMessage('Error: ', msg) )
         return
 
