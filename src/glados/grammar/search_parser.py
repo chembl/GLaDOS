@@ -602,11 +602,12 @@ def parse_url_search(request):
         indexes = indexes_str.split(',')
         selected_es_index = request.POST.get('selected_es_index', None)
         parsed_query = parse_query_str(query_string)
-        best_queries = QueryBuilder.get_best_es_query(parsed_query, indexes, selected_es_index)
+        best_queries, sorted_keys_by_score = QueryBuilder.get_best_es_query(parsed_query, indexes, selected_es_index)
 
         response_dict = {
             'parsed_query': parsed_query,
-            'best_es_base_queries': best_queries
+            'best_es_base_queries': best_queries,
+            'sorted_keys_by_score': sorted_keys_by_score
         }
 
         return HttpResponse(json.dumps(response_dict))
