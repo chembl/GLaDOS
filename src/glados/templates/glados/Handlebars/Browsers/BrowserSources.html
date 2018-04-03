@@ -81,7 +81,9 @@
     <div class="selection-information">
 
       <b>{{#if out_of_n}}first {{/if}}{{total_items}} {{entity_label}}{{#if out_of_n}} out of <span class="teal-text tooltipped" data-position="bottom" data-tooltip="Please narrow your search.">{{out_of_n}}</span> found{{/if}}</b><br>
-      {{num_selected}} Selected
+      {{num_selected}} Selected <div class="BCK-LinkToAllActivitiesContainer link-to-all-activities-container"
+                                     data-hb-template="Handlebars-LinkToAllActivities"
+                                     data-hb-preloader-template="Handlebars-Common-MiniPreloader"> </div>
     </div>
 
     <div class="selection-button-container">
@@ -96,6 +98,10 @@
 
   </div>
 
+</script>
+
+<script id="Handlebars-LinkToAllActivities" type="text/x-handlebars-template">
+- <a target="_blank" href="{{url}}">Browse Activities</a>
 </script>
 
 <script id="Handlebars-ESResultsList" type="text/x-handlebars-template">

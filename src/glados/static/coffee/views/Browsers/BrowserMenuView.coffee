@@ -155,7 +155,24 @@ glados.useNameSpace 'glados.views.Browsers',
         else
           @enableButton(viewLabel)
 
+      @renderLinkToAll() unless not @collection.islinkToAllActivitiesEnabled()
+
     toggleClearSelections: -> @collection.toggleClearSelections()
+
+    renderLinkToAll: ->
+
+      $selectionMenuContainer = $(@el).find('.BCK-selection-menu-container')
+      $linkToAllContainer = $selectionMenuContainer.find('.BCK-LinkToAllActivitiesContainer')
+      console.log '$linkToAllContainer: ', $linkToAllContainer
+
+      glados.Utils.fillContentForElement($linkToAllContainer, paramsObj={}, customTemplate=undefined,
+        fillWithPreloader=true)
+
+      linkToActPromise = @collection.getLinkToAllActivitiesPromise()
+      linkToActPromise.then (linkGot) ->
+        glados.Utils.fillContentForElement $linkToAllContainer,
+          url: linkGot
+
 
     #--------------------------------------------------------------------------------------
     # Download Buttons
