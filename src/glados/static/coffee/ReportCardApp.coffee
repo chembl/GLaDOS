@@ -17,12 +17,15 @@ glados.useNameSpace 'glados',
     @hideSection = (sectionID) ->
       @scrollSpyHandler.hideSection(sectionID)
       $('#' + sectionID).hide()
+      $('#' + sectionID).addClass('hidden-section')
 
 
     @showSection = (sectionID) ->
+#      console.log ' :) add scrollspy for: ', sectionID
       @scrollSpyHandler.showSection(sectionID)
       $('#' + sectionID).show()
-      $('#' + sectionID).addClass('wiiiiiiii')
+      $('#' + sectionID).addClass('section')
+      $('#' + sectionID).addClass('scrollspy')
 
     @registerSection = (sectionID, sectionLabel) ->
       @scrollSpyHandler.registerSection(sectionID, sectionLabel)
@@ -34,7 +37,6 @@ glados.useNameSpace 'glados',
         el: $('#' + sectionID)
         model:sectionModel
 
-      @hideSection(sectionID)
 
     # you can provide chembld iD or a model already created
     @initMiniReportCard = (Entity, $containerElem, chemblID, model, customTemplate, additionalTemplateParams={},

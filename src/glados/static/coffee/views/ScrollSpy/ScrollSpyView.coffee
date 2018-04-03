@@ -7,7 +7,6 @@ glados.useNameSpace 'glados.views.ScrollSpy',
       $('.scrollspy').scrollSpy()
 
     render: ->
-
       sections = (s for s in _.values(@model.get('sections')) \
       when s.state == glados.models.ScrollSpy.ScrollSpyHandler.SECTION_STATES.SHOW).sort (a, b) ->
         return a.position - b.position
@@ -20,3 +19,7 @@ glados.useNameSpace 'glados.views.ScrollSpy',
     hidePreloader: ->
       $(@el).find('.BKC-preolader-to-hide').hide()
 
+glados.models.ScrollSpy.ScrollSpyView.STATE =
+  INITIAL: 'INITIAL'
+  WAITING_DECISION: 'WAITING DECISION'
+  SHOWING: 'SHOWING'
