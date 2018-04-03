@@ -23,9 +23,6 @@ class AssayReportCardApp extends glados.ReportCardApp
 
     assay.fetch()
 
-    $('.scrollspy').scrollSpy();
-    ScrollSpyHelper.initializeScrollSpyPinner();
-
   # -------------------------------------------------------------
   # Specific section initialization
   # this is functions only initialize a section of the report card

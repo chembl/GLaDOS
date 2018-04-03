@@ -20,9 +20,9 @@ class DocumentReportCardApp extends glados.ReportCardApp
     DocumentReportCardApp.initRelatedDocuments()
     DocumentReportCardApp.initWordCloud()
     DocumentReportCardApp.initAssayNetwork()
+    DocumentReportCardApp.initActivitySummary()
     DocumentReportCardApp.initTargetSummary()
     DocumentReportCardApp.initAssaySummary()
-    DocumentReportCardApp.initActivitySummary()
     DocumentReportCardApp.initCompoundSummary()
 
     document.fetch()
