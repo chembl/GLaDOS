@@ -2,24 +2,45 @@ glados.useNameSpace 'glados.views.ScrollSpy',
   ScrollSpyView: Backbone.View.extend
 
     initialize: ->
-
+      @scrollSpyState = glados.views.ScrollSpy.ScrollSpyView.STATE.INITIAL
       @model.on 'change:sections', @render, @
       $('.scrollspy').scrollSpy()
 
     render: ->
-      sections = (s for s in _.values(@model.get('sections')) \
-      when s.state == glados.models.ScrollSpy.ScrollSpyHandler.SECTION_STATES.SHOW).sort (a, b) ->
-        return a.position - b.position
+      sections =  _.values(@model.get('sections'))
+      waiting = false
 
-      @hidePreloader()
-      $contentContainer = $(@el).find('.BCK-ScrollSpyContent')
-      glados.Utils.fillContentForElement $contentContainer,
-        sections: sections
+      if @scrollSpyState == glados.views.ScrollSpy.ScrollSpyView.STATE.INITIAL
+        console.log 'scrollSpyState:  ', @scrollSpyState
+
+        for s, i in sections
+          @scrollSpyState = glados.views.ScrollSpy.ScrollSpyView.STATE.WAITING_DECISION if s.decided_state == true
+
+      else if @scrollSpyState == glados.views.ScrollSpy.ScrollSpyView.STATE.WAITING_DECISION
+        console.log 'scrollSpyState:  ', @scrollSpyState
+
+        sections =  _.values(@model.get('sections'))
+        for s, i in sections
+          waiting = true if s.decided_state == false
+        console.log 'WAITING: ', waiting
+
+        @scrollSpyState = glados.views.ScrollSpy.ScrollSpyView.STATE.SHOWING if waiting == false
+
+      else if @scrollSpyState == glados.views.ScrollSpy.ScrollSpyView.SHOWING
+        console.log 'scrollSpyState:  ', @scrollSpyState
+        sections = (s for s in _.values(@model.get('sections')) \
+        when s.state == glados.models.ScrollSpy.ScrollSpyHandler.SECTION_STATES.SHOW).sort (a, b) ->
+          return a.position - b.position
+
+        @hidePreloader()
+        $contentContainer = $(@el).find('.BCK-ScrollSpyContent')
+        glados.Utils.fillContentForElement $contentContainer,
+          sections: sections
 
     hidePreloader: ->
       $(@el).find('.BKC-preolader-to-hide').hide()
 
-glados.models.ScrollSpy.ScrollSpyView.STATE =
+glados.views.ScrollSpy.ScrollSpyView.STATE =
   INITIAL: 'INITIAL'
   WAITING_DECISION: 'WAITING DECISION'
   SHOWING: 'SHOWING'

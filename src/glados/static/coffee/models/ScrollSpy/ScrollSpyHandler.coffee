@@ -4,7 +4,6 @@ glados.useNameSpace 'glados.models.ScrollSpy',
 
     initialize: ->
       @set('sections', {})
-      @set('sectionsQueue', {})
 
     registerSection: (sectionName, sectionLabel) ->
       sections = @get('sections')
@@ -15,8 +14,7 @@ glados.useNameSpace 'glados.models.ScrollSpy',
         state: glados.models.ScrollSpy.ScrollSpyHandler.SECTION_STATES.NOT_AVAILABLE
         position: _.keys(sections).length
         decided_state: false
-
-      @trigger('change:sections')
+#      @trigger('change:sections')
 
     showSection: (sectionName) ->
       sections = @get('sections')

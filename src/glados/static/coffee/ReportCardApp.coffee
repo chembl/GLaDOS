@@ -13,7 +13,6 @@ glados.useNameSpace 'glados',
         model: @scrollSpyHandler
       glados.Utils.checkReportCardByChemblId(GlobalVariables.CHEMBL_ID)
 
-
     @hideSection = (sectionID) ->
       @scrollSpyHandler.hideSection(sectionID)
       $('#' + sectionID).hide()
@@ -21,7 +20,6 @@ glados.useNameSpace 'glados',
 
 
     @showSection = (sectionID) ->
-#      console.log ' :) add scrollspy for: ', sectionID
       @scrollSpyHandler.showSection(sectionID)
       $('#' + sectionID).show()
       $('#' + sectionID).addClass('section')
@@ -36,7 +34,6 @@ glados.useNameSpace 'glados',
       new glados.views.ReportCards.SectionView
         el: $('#' + sectionID)
         model:sectionModel
-
 
     # you can provide chembld iD or a model already created
     @initMiniReportCard = (Entity, $containerElem, chemblID, model, customTemplate, additionalTemplateParams={},
