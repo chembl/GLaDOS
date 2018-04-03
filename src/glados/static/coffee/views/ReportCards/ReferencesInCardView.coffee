@@ -23,6 +23,7 @@ glados.useNameSpace 'glados.views.ReportCards',
 
       if @config.refs_config.is_unichem
         if not @model.get('_metadata').unichem?
+          @hideSection()
           return
 
       @showSection()

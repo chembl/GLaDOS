@@ -4,7 +4,7 @@ glados.useNameSpace 'glados.views.ScrollSpy',
     initialize: ->
       @scrollSpyState = glados.views.ScrollSpy.ScrollSpyView.STATE.INITIAL
       @model.on 'change:sections', @render, @
-      $('.scrollspy').scrollSpy()
+
 
     render: ->
       sections =  _.values(@model.get('sections'))
@@ -26,8 +26,9 @@ glados.useNameSpace 'glados.views.ScrollSpy',
 
         @scrollSpyState = glados.views.ScrollSpy.ScrollSpyView.STATE.SHOWING if waiting == false
 
-      else if @scrollSpyState == glados.views.ScrollSpy.ScrollSpyView.SHOWING
+      if @scrollSpyState == glados.views.ScrollSpy.ScrollSpyView.STATE.SHOWING
         console.log 'scrollSpyState:  ', @scrollSpyState
+        $('.scrollspy').scrollSpy()
         sections = (s for s in _.values(@model.get('sections')) \
         when s.state == glados.models.ScrollSpy.ScrollSpyHandler.SECTION_STATES.SHOW).sort (a, b) ->
           return a.position - b.position

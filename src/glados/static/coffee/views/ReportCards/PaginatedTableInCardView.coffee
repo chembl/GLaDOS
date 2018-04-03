@@ -19,6 +19,7 @@ glados.useNameSpace 'glados.views.ReportCards',
     render: ->
 
       if @collection.size() == 0 and !@collection.getMeta('force_show')
+        @hideSection()
         return
 
       linkToAllText = @config.link_to_all_text

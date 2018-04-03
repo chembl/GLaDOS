@@ -18,6 +18,7 @@ glados.useNameSpace 'glados.views.ReportCards',
       numNodes = @model.get('graph').nodes.length
 
       if numEdges == 0 and numNodes == 0
+        @hideSection()
         return
 
       @showSection()
