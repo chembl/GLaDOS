@@ -665,7 +665,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     renderLinkToAllActivities: ->
 
-
       numSelectedItems = @collection.getNumberOfSelectedItems()
       numItemsForLink = if numSelectedItems == 0 then @collection.getTotalRecords() else numSelectedItems
       if numItemsForLink >= glados.Settings.VIEW_SELECTION_THRESHOLDS.Bioactivity[1]

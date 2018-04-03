@@ -16,6 +16,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
     initialize: ->
 
+      @showPreloader()
       @collection.on 'reset do-repaint sort', @render, @
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @handleSelection, @
 
@@ -56,6 +57,7 @@ glados.useNameSpace 'glados.views.Browsers',
       if not $(@el).is(":visible")
         return
 
+      @renderMenuContent()
       if @collection.getMeta('total_records') != 0
 
         $downloadBtnsContainer = $(@el).find('.BCK-download-btns-container')
@@ -74,6 +76,17 @@ glados.useNameSpace 'glados.views.Browsers',
         @selectButton @currentViewType
 
       @addRemoveQtipToButtons()
+
+    renderMenuContent: ->
+
+      $menuContainer = $(@el).find('.BCK-Browser-Menu-Container')
+      glados.Utils.fillContentForElement($menuContainer)
+
+    showPreloader: ->
+
+      $menuContainer = $(@el).find('.BCK-Browser-Menu-Container')
+      glados.Utils.fillContentForElement($menuContainer, paramsObj={msg:'Loading Menu...'}, customTemplate=undefined,
+        fillWithPreloader=true)
 
     #--------------------------------------------------------------------------------------
     # Filters
