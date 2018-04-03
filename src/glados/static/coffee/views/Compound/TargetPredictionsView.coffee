@@ -45,8 +45,10 @@ glados.useNameSpace 'glados.views.Compound',
 
       rawTargetPredidctions = @model.get('_metadata').target_predictions
       if not rawTargetPredidctions?
+        @hideSection()
         return
       if rawTargetPredidctions.length == 0
+        @hideSection()
         return
 
       @showCardContent()

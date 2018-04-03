@@ -21,6 +21,7 @@ CompoundFeaturesView = CardView.extend
     metadata = @model.get('_metadata')
     isDrug = glados.Utils.getNestedValue(metadata, 'drug.is_drug')
     if not isDrug
+      @hideSection()
       return
 
     @showSection() unless @config.is_outside_an_entity_report_card

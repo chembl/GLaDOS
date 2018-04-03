@@ -11,10 +11,10 @@ DocumentAssayNetworkView = CardView.extend(ResponsiviseViewExt).extend(DANViewEx
     @setUpResponsiveRender()
     @model.on 'change', @render, @
     @resource_type = 'Document'
+    @showSection()
 
   render: ->
 
-    @showSection()
     @showCardContent()
     @hideResponsiveViewPreloader()
     @addFSLinkAndInfo()
