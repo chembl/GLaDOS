@@ -23,9 +23,15 @@ glados.useNameSpace 'glados.views.ReportCards',
 
 
       if @config.refs_config.is_unichem
-        if not @model.get('_metadata').unichem?
-          @hideSection()
-          return
+        thereAreNoReferences = not @model.get('_metadata').unichem?
+      else
+        thereAreNoReferences = @model.get('cross_references').length == 0
+
+      console.log 'references: ', thereAreNoReferences
+
+      if thereAreNoReferences
+        @hideSection()
+        return
 
       @showSection()
       @showCardContent()

@@ -11,13 +11,11 @@ glados.useNameSpace 'glados.views.ScrollSpy',
       waiting = false
 
       if @scrollSpyState == glados.views.ScrollSpy.ScrollSpyView.STATE.INITIAL
-        console.log 'scrollSpyState:  ', @scrollSpyState
 
         for s, i in sections
           @scrollSpyState = glados.views.ScrollSpy.ScrollSpyView.STATE.WAITING_DECISION if s.decided_state == true
 
       else if @scrollSpyState == glados.views.ScrollSpy.ScrollSpyView.STATE.WAITING_DECISION
-        console.log 'scrollSpyState:  ', @scrollSpyState
 
         sections =  _.values(@model.get('sections'))
         for s, i in sections
@@ -26,7 +24,6 @@ glados.useNameSpace 'glados.views.ScrollSpy',
         @scrollSpyState = glados.views.ScrollSpy.ScrollSpyView.STATE.SHOWING if waiting == false
 
       if @scrollSpyState == glados.views.ScrollSpy.ScrollSpyView.STATE.SHOWING
-        console.log 'scrollSpyState:  ', @scrollSpyState
 
         sections = (s for s in _.values(@model.get('sections')) \
         when s.state == glados.models.ScrollSpy.ScrollSpyHandler.SECTION_STATES.SHOW).sort (a, b) ->
@@ -37,8 +34,6 @@ glados.useNameSpace 'glados.views.ScrollSpy',
         $contentContainer = $(@el).find('.BCK-ScrollSpyContent')
         glados.Utils.fillContentForElement $contentContainer,
           sections: sections
-
-
 
     hidePreloader: ->
       $(@el).find('.BKC-preolader-to-hide').hide()
