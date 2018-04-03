@@ -161,9 +161,18 @@ glados.useNameSpace 'glados.views.Browsers',
 
     renderLinkToAll: ->
 
+      if @collection.getTotalRecords() == 0
+        return
+
       $selectionMenuContainer = $(@el).find('.BCK-selection-menu-container')
       $linkToAllContainer = $selectionMenuContainer.find('.BCK-LinkToAllActivitiesContainer')
-      console.log '$linkToAllContainer: ', $linkToAllContainer
+
+      if @collection.thereAreTooManyItemsForActivitiesLink()
+
+        glados.Utils.fillContentForElement $linkToAllContainer,
+          too_many_items: true
+
+        return
 
       glados.Utils.fillContentForElement($linkToAllContainer, paramsObj={}, customTemplate=undefined,
         fillWithPreloader=true)

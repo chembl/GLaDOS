@@ -101,7 +101,12 @@
 </script>
 
 <script id="Handlebars-LinkToAllActivities" type="text/x-handlebars-template">
-- <a target="_blank" href="{{url}}">Browse Activities</a>
+-
+{{#if too_many_items}}
+<a target="_blank" class="disabled">Browse Activities</a>
+{{else}}
+<a target="_blank" href="{{url}}">Browse Activities</a>
+{{/if}}
 </script>
 
 <script id="Handlebars-ESResultsList" type="text/x-handlebars-template">

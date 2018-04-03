@@ -9,7 +9,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     islinkToAllActivitiesEnabled: -> @getMeta('enable_activities_link_for_selected_entities') == true
 
-    getTotalRecords: -> @getMeta('total_records')
+    getTotalRecords: ->
+      totalRecords = @getMeta('total_records')
+      totalRecords ?= 0
+      return totalRecords
     # ------------------------------------------------------------------------------------------------------------------
     # Downloads
     # ------------------------------------------------------------------------------------------------------------------
@@ -31,6 +34,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # Link to all activities
     # ------------------------------------------------------------------------------------------------------------------
     ALL_ACTIVITIES_LINK_CACHE_PROP_NAME: 'all_activities_link_cache'
+
+    thereAreTooManyItemsForActivitiesLink: ->
+
+      numSelectedItems = @getNumberOfSelectedItems()
+      numItemsForLink = if numSelectedItems == 0 then @getTotalRecords() else numSelectedItems
+      if numItemsForLink >= glados.Settings.VIEW_SELECTION_THRESHOLDS.Bioactivity[1]
+        return true
+      return false
 
     resetLinkToAllActivitiesCache: -> @setMeta(@ALL_ACTIVITIES_LINK_CACHE_PROP_NAME, undefined)
     # because of the paginated nature of the collections, it could happen that in order to get
