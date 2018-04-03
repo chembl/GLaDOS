@@ -27,17 +27,22 @@ class CompoundReportCardApp extends glados.ReportCardApp
     CompoundReportCardApp.initClinicalData()
     CompoundReportCardApp.initSimilarCompounds()
     CompoundReportCardApp.initMetabolism()
-    CompoundReportCardApp.initHELMNotation()
     CompoundReportCardApp.initBioSeq()
+    CompoundReportCardApp.initHELMNotation()
     CompoundReportCardApp.initActivitySummary()
-    CompoundReportCardApp.initPapersAboutCompound()
     CompoundReportCardApp.initAssaySummary()
     CompoundReportCardApp.initTargetSummary()
+    CompoundReportCardApp.initPapersAboutCompound()
     CompoundReportCardApp.initTargetPredictions()
     CompoundReportCardApp.initCalculatedCompoundParentProperties()
     CompoundReportCardApp.initStructuralAlerts()
     CompoundReportCardApp.initCrossReferences()
     CompoundReportCardApp.initUniChemCrossReferences()
+
+
+
+
+
 
 
     compound.fetch()
