@@ -81,13 +81,8 @@
     <div class="selection-information">
 
       <b>{{#if out_of_n}}first {{/if}}{{total_items}} {{entity_label}}{{#if out_of_n}} out of <span class="teal-text tooltipped" data-position="bottom" data-tooltip="Please narrow your search.">{{out_of_n}}</span> found{{/if}}</b><br>
-      {{num_selected}} Selected <div class="BCK-LinkToAllActivitiesContainer link-to-all-activities-container"
-                                     data-hb-template="Handlebars-LinkToAllActivities"
-                                     data-hb-preloader-template="Handlebars-Common-MiniPreloader"> </div>
-    </div>
-
-    <div class="selection-button-container">
-      <a class="menu-button mini BCK-toggle-clear-selections">
+      {{num_selected}} Selected -
+      <a class="BCK-toggle-clear-selections">
         {{#if none_is_selected}}
         Select All
         {{else}}
@@ -96,12 +91,15 @@
       </a>
     </div>
 
+    <div class="BCK-LinkToAllActivitiesContainer link-to-all-activities-container"
+                                     data-hb-template="Handlebars-LinkToAllActivities"
+                                     data-hb-preloader-template="Handlebars-Common-MiniPreloader"> </div>
+
   </div>
 
 </script>
 
 <script id="Handlebars-LinkToAllActivities" type="text/x-handlebars-template">
--
 {{#if too_many_items}}
 <a target="_blank" class="disabled">Browse Activities</a>
 {{else}}
