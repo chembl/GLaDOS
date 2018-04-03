@@ -37,7 +37,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           3: 24
           2: 96
           1: 192
-        ENABLE_ACTIVITIES_LINK_FOR_SELECTED_ENTITIES: true
         ENABLE_CARDS_ZOOM: true
         CUSTOM_CARDS_TEMPLATE: 'Handlebars-Common-Paginated-Card-Compound'
         CUSTOM_CARDS_ITEM_VIEW: glados.views.PaginatedViews.ItemCardView
@@ -73,7 +72,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           12:
             previous: 6
             next: 12
-
+        ENABLE_ACTIVITIES_LINK_FOR_SELECTED_ENTITIES: true
       TARGET:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESTarget'
@@ -103,6 +102,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Bioactivity]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
         ENABLE_COLLECTION_CACHING: true
+        ENABLE_ACTIVITIES_LINK_FOR_SELECTED_ENTITIES: true
       ASSAY:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESAssay'
@@ -131,6 +131,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'], glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite']]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
         ENABLE_COLLECTION_CACHING: true
+        ENABLE_ACTIVITIES_LINK_FOR_SELECTED_ENTITIES: true
       DOCUMENT:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESDocument'
@@ -159,6 +160,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'], glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite']]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
         ENABLE_COLLECTION_CACHING: true
+        ENABLE_ACTIVITIES_LINK_FOR_SELECTED_ENTITIES: true
       CELL_LINE:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCellLine'
@@ -187,6 +189,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'], glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite']]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
         ENABLE_COLLECTION_CACHING: true
+        ENABLE_ACTIVITIES_LINK_FOR_SELECTED_ENTITIES: true
       TISSUE:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESTissue'
@@ -215,6 +218,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'], glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite']]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
         ENABLE_COLLECTION_CACHING: true
+        ENABLE_ACTIVITIES_LINK_FOR_SELECTED_ENTITIES: true
     ES_INDEXES_NO_MAIN_SEARCH:
       ACTIVITY:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
@@ -316,6 +320,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         SHOW_SUBSTRUCTURE_HIGHLIGHTING: true
         ENABLE_COLLECTION_CACHING: true
         DISABLE_CACHE_ON_DOWNLOAD: true
+        ENABLE_ACTIVITIES_LINK_FOR_SELECTED_ENTITIES: true
       COMPOUND_SIMILARITY_MAPS:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCompound'
@@ -353,6 +358,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         SHOW_SIMILARITY_MAPS: true
         ENABLE_COLLECTION_CACHING: true
         DISABLE_CACHE_ON_DOWNLOAD: true
+        ENABLE_ACTIVITIES_LINK_FOR_SELECTED_ENTITIES: true
       DRUGS_LIST:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESDrugs'
@@ -390,6 +396,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
         ENABLE_COLLECTION_CACHING: true
         DISABLE_CACHE_ON_DOWNLOAD: true
+        ENABLE_ACTIVITIES_LINK_FOR_SELECTED_ENTITIES: true
     WS_COLLECTIONS:
       ACTIVITIES_LIST:
         MODEL: Activity

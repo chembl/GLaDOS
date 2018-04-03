@@ -76,4 +76,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     ENTITY_NAME_TO_FILTER_GENERATOR:
       "#{Compound.prototype.entityName}":\
       Handlebars.compile('molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
-
+      "#{Target.prototype.entityName}":\
+      Handlebars.compile('target_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
+      "#{Document.prototype.entityName}":\
+      Handlebars.compile('document_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
+      "#{Assay.prototype.entityName}":\
+      Handlebars.compile('assay_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
+      "#{CellLine.prototype.entityName}":\
+      Handlebars.compile('_metadata.assay_data.cell_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
+      "#{glados.models.Tissue.prototype.entityName}":\
+      Handlebars.compile('_metadata.assay_data.tissue_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
+      "#{glados.models.Compound.Drug}":\
+      Handlebars.compile('molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
