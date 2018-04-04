@@ -39,12 +39,6 @@ class CompoundReportCardApp extends glados.ReportCardApp
     CompoundReportCardApp.initCrossReferences()
     CompoundReportCardApp.initUniChemCrossReferences()
 
-
-
-
-
-
-
     compound.fetch()
 
     ButtonsHelper.initCroppedContainers()

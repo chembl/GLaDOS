@@ -308,6 +308,7 @@ glados.useNameSpace 'glados',
     # the element must define a data-hb-template, which is the id of the handlebars template to be used
     fillContentForElement: ($element, paramsObj={}, customTemplate, fillWithPreloader=false)->
 
+
       if customTemplate?
         templateSelector = '#' + customTemplate
       else

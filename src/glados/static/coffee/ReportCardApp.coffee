@@ -16,14 +16,12 @@ glados.useNameSpace 'glados',
     @hideSection = (sectionID) ->
       @scrollSpyHandler.hideSection(sectionID)
       $('#' + sectionID).hide()
-      $('#' + sectionID).addClass('hidden-section')
-
 
     @showSection = (sectionID) ->
-      @scrollSpyHandler.showSection(sectionID)
-      $('#' + sectionID).show()
       $('#' + sectionID).addClass('section')
       $('#' + sectionID).addClass('scrollspy')
+      @scrollSpyHandler.showSection(sectionID)
+      $('#' + sectionID).show()
 
     @registerSection = (sectionID, sectionLabel) ->
       @scrollSpyHandler.registerSection(sectionID, sectionLabel)
