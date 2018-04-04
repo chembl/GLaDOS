@@ -107,6 +107,19 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @setMeta('facets_fetching_state',
         glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.INITIAL_STATE)
 
+    itemsAreReady: ->
+
+      itemsAreReady = @getMeta('items_fetching_state') == \
+      glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.ITEMS_READY
+      console.log 'itemsAreReady: ', itemsAreReady
+      return itemsAreReady
+
+    collectionIsReady: ->
+      console.log 'itemsAreReady: ', @itemsAreReady()
+      facetsAreReady = @getMeta('facets_fetching_state') == \
+      glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.FACETS_READY
+      console.log 'facetsAreReady: ', facetsAreReady
+
 glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS =
   ITEMS_FETCHING_STATE_CHANGED: 'ITEMS_FETCHING_STATE_CHANGED'
   FACETS_FETCHING_STATE_CHANGED: 'FACETS_FETCHING_STATE_CHANGED'

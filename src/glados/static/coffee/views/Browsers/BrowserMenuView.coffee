@@ -17,7 +17,7 @@ glados.useNameSpace 'glados.views.Browsers',
     initialize: ->
 
       @showPreloader()
-      @collection.on 'reset do-repaint sort', @render, @
+      @collection.on 'reset do-repaint sort', @renderViewState, @
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @handleSelection, @
 
       @currentViewType = @collection.getMeta('default_view')
@@ -52,7 +52,7 @@ glados.useNameSpace 'glados.views.Browsers',
       if $currentViewInstance.wakeUpView?
         $currentViewInstance.wakeUpView()
 
-    render: ->
+    renderViewState: ->
 
       if not $(@el).is(":visible")
         return
@@ -136,6 +136,9 @@ glados.useNameSpace 'glados.views.Browsers',
       return false
 
     handleSelection: ->
+
+      if not @collection.itemsAreReady()
+        return
 
       $selectionMenuContainer = $(@el).find('.BCK-selection-menu-container')
       out_of_n = @collection.getMeta('out_of_n')
