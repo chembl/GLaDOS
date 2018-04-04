@@ -1,51 +1,29 @@
 {% load static %}
-<div class="chembl-header row ">
-    <div class="inner-row">
-        <div class="col l3 m3 s10 hide-on-small-pinned">
-            <ul>
-                <li>
-                    <a data-activates="slide-out" class="button-collapse waves-effect waves-light">
-                        <i class="material-icons">menu</i>
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'main' %}">
-                        <img title="Go to the ChEMBL homepage"
-                             class="chembl-logo-header"
-                             alt="ChEMBL logo" src="{% static 'img/chembl_logo.png' %}"/>
-                    </a>
-                </li>
+<div class="chembl-header row">
 
-                <li>
-                    <a href="{% url 'main' %}" class="long-link l2">
-                        <div>
-                            <span>ChEMBL</span>
-                            <span class="icon icon-generic" data-icon="&gt;"></span>
-                        </div>
-                    </a>
-                </li>
-            </ul>
+        <div class="chembl-logo col ">
         </div>
 
-        <div class="col l1 right m1 s2 hide-on-small-pinned">
-            <ul class="right-align-content">
-                <li>
-                    <a href="#download-db-modal"
-                        class="modal-trigger-safe tooltipped  waves-effect waves-light download-button"
-                        data-position="bottom" data-tooltip="Download">
-                        <p>
-                            <i class="fa fa-download" aria-hidden="true"></i>
-                        </p>
-                        <p class="hide-on-pinned hide-on-med-and-down">
-                            <small>Download</small>
-                        </p>
+{#        <div class="chembl-logo col ">#}
+{#            <a href="{% url 'main' %}">#}
+{#                <img class="responsive-img" src="{% static 'img/chembl_logo.png' %}"/>#}
+{##}
+{#            </a>#}
+{#            <span class="hide-on-med-and-down"> ChEMBL </span>#}
+{#        </div>#}
 
-                    </a>
-                </li>
-            </ul>
-        </div>
-        {% block header_search_bar %}
-          {% include "glados/SearchResultsParts/SearchBar.html" %}
-        {% endblock %}
-    </div>
+{#        <div class="nav-links">#}
+{#            <!--here will go the navigation links -->#}
+{#        </div>#}
+{##}
+{#        <div class="search-bar">#}
+{#            {% include "glados/SearchResultsParts/SearchBar.html" %}#}
+{#        </div>#}
+{##}
+{#        <div class="options-button col s1">#}
+{#            <a>#}
+{#                <i class="material-icons white-text">menu</i>#}
+{#            </a>#}
+{#        </div>#}
 </div>
+
