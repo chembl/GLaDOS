@@ -95,13 +95,21 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
     getItemsFetchingState: -> @getMeta('items_fetching_state')
     getFacetsFetchingState: -> @getMeta('facets_fetching_state')
-    setItemsFetchingState: (newFetchingState) -> @setMeta('items_fetching_state', newFetchingState)
-    setFacetsFetchingState: (newFetchingState) -> @setMeta('facets_fetching_state', newFetchingState)
+    setItemsFetchingState: (newFetchingState) ->
+      @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.ITEMS_FETCHING_STATE_CHANGED)
+      @setMeta('items_fetching_state', newFetchingState)
+    setFacetsFetchingState: (newFetchingState) ->
+      @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_FETCHING_STATE_CHANGED)
+      @setMeta('facets_fetching_state', newFetchingState)
     setInitialFetchingState: ->
       @setMeta('items_fetching_state',
         glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.INITIAL_STATE)
       @setMeta('facets_fetching_state',
         glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.INITIAL_STATE)
+
+glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS =
+  ITEMS_FETCHING_STATE_CHANGED: 'ITEMS_FETCHING_STATE_CHANGED'
+  FACETS_FETCHING_STATE_CHANGED: 'FACETS_FETCHING_STATE_CHANGED'
 
 glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES =
   INITIAL_STATE: 'INITIAL_STATE'

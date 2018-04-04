@@ -80,3 +80,20 @@ describe "An elasticsearch collection", ->
 
         done()
 
+    it 'triggers the correct event when changing items fetching state', ->
+
+      eventTriggered = false
+      esList.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.ITEMS_FETCHING_STATE_CHANGED,
+      (-> eventTriggered = true)
+
+      esList.setItemsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.INITIAL_STATE)
+      expect(eventTriggered).toBe(true)
+
+    it 'triggers the correct event when changing facets fetching state', ->
+
+      eventTriggered = false
+      esList.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_FETCHING_STATE_CHANGED,
+      (-> eventTriggered = true)
+
+      esList.setFacetsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.INITIAL_STATE)
+      expect(eventTriggered).toBe(true)
