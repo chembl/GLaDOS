@@ -11,7 +11,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       @config = arguments[0].config
       @config ?= {}
-      @setInitialState()
 
       # @collection - must be provided in the constructor call
       @include_search_results_highlight = @attributes?.include_search_results_highlight || false
@@ -675,9 +674,3 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       linkToActPromise.then (linkGot) ->
         console.log 'renderLinkToAllActivities: '
         console.log linkGot
-
-    # ------------------------------------------------------------------------------------------------------------------
-    # Sets the initial state
-    # ------------------------------------------------------------------------------------------------------------------
-    setInitialState: ->
-      

@@ -4,6 +4,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     initialize: ->
 
+      @setInitialFetchingState()
       if @islinkToAllActivitiesEnabled()
         @on glados.Events.Collections.SELECTION_UPDATED, @resetLinkToAllActivitiesCache, @
 
@@ -88,3 +89,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       Handlebars.compile('_metadata.assay_data.tissue_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
       "#{glados.models.Compound.Drug}":\
       Handlebars.compile('molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Fetching state handling
+    # ------------------------------------------------------------------------------------------------------------------
+    getFetchingState: -> @getMeta('fetching_state')
+    setInitialFetchingState: ->
+      @setMeta('fetching_state',
+        glados.models.paginatedCollections.PaginatedCollectionBase.FETCHING_STATES.INITIAL_STATE)
+
+glados.models.paginatedCollections.PaginatedCollectionBase.FETCHING_STATES =
+  INITIAL_STATE: 'INITIAL_STATE'
