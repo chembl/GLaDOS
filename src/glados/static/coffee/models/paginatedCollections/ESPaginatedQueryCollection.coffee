@@ -202,9 +202,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @setMeta('current_page', 1)
         @setMeta('facets_changed', false)
         @setMeta('ignore_score', true)
-        @setFecthingState(glados.models.paginatedCollections.PaginatedCollectionBase.FETCHING_STATES.FILTERING_ITEMS)
-      else
-        @setFecthingState(glados.models.paginatedCollections.PaginatedCollectionBase.FETCHING_STATES.FETCHING_ITEMS)
+
+      @setItemsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.FETCHING_ITEMS)
       # Creates the Elastic Search Query parameters and serializes them
       requestData = @getRequestData()
       esJSONRequest = JSON.stringify(@getRequestData())
@@ -493,7 +492,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       else
         runPromise.bind(@)()
 
-    loadFacetGroups: ()->
+    loadFacetGroups: ->
+
+      @setFacetsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.FETCHING_FACETS)
+
+      if @getMeta('test_mode')
+        return
+
       if not @__debouncedLoadFacetGroups?
         @__debouncedLoadFacetGroups = _.debounce(@__loadFacetGroups, 10)
       @__debouncedLoadFacetGroups()

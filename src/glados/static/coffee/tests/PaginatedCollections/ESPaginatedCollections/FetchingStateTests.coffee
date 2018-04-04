@@ -21,15 +21,19 @@ describe "An elasticsearch collection", ->
 
     it 'sets the initial fecthing state', ->
 
-      stateGot = esList.getFetchingState()
-      stateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.FETCHING_STATES.INITIAL_STATE
-      expect(stateGot).toBe(stateMustBe)
+      itemsStateGot = esList.getItemsFetchingState()
+      itemsStateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.INITIAL_STATE
+      expect(itemsStateGot).toBe(itemsStateMustBe)
+
+      facetsStateGot = esList.getFacetsFetchingState()
+      facetsStateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.INITIAL_STATE
+      expect(facetsStateGot).toBe(facetsStateMustBe)
 
     it 'sets the correct state when fetching items', ->
 
       esList.fetch()
-      stateGot = esList.getFetchingState()
-      stateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.FETCHING_STATES.FETCHING_ITEMS
+      stateGot = esList.getItemsFetchingState()
+      stateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.FETCHING_ITEMS
       expect(stateGot).toBe(stateMustBe)
 
     it 'sets the correct state when filtering items (selecting a facet)', ->
@@ -38,7 +42,12 @@ describe "An elasticsearch collection", ->
       testFacetGroupKey = 'max_phase'
       testFacetKey = facetGroups[testFacetGroupKey].faceting_handler.faceting_keys_inorder[0]
       esList.toggleFacetAndFetch(testFacetGroupKey, testFacetKey)
-      stateGot = esList.getFetchingState()
+      itemsStateGot = esList.getItemsFetchingState()
 
-      stateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.FETCHING_STATES.FILTERING_ITEMS
-      expect(stateGot).toBe(stateMustBe)
+      itemsStateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.FETCHING_ITEMS
+      expect(itemsStateGot).toBe(itemsStateMustBe)
+
+      esList.loadFacetGroups()
+      facetsStateGot = esList.getFacetsFetchingState()
+      facetsStateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.FETCHING_FACETS
+      expect(facetsStateGot).toBe(facetsStateMustBe)

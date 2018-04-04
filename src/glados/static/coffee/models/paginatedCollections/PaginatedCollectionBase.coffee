@@ -93,13 +93,20 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
     # Fetching state handling
     # ------------------------------------------------------------------------------------------------------------------
-    getFetchingState: -> @getMeta('fetching_state')
-    setFecthingState: (newFetchingState) -> @setMeta('fetching_state', newFetchingState)
+    getItemsFetchingState: -> @getMeta('items_fetching_state')
+    getFacetsFetchingState: -> @getMeta('facets_fetching_state')
+    setItemsFetchingState: (newFetchingState) -> @setMeta('items_fetching_state', newFetchingState)
+    setFacetsFetchingState: (newFetchingState) -> @setMeta('facets_fetching_state', newFetchingState)
     setInitialFetchingState: ->
-      @setMeta('fetching_state',
-        glados.models.paginatedCollections.PaginatedCollectionBase.FETCHING_STATES.INITIAL_STATE)
+      @setMeta('items_fetching_state',
+        glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.INITIAL_STATE)
+      @setMeta('facets_fetching_state',
+        glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.INITIAL_STATE)
 
-glados.models.paginatedCollections.PaginatedCollectionBase.FETCHING_STATES =
+glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES =
   INITIAL_STATE: 'INITIAL_STATE'
   FETCHING_ITEMS: 'FETCHING_ITEMS'
-  FILTERING_ITEMS: 'FILTERING_ITEMS'
+
+glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES =
+  INITIAL_STATE: 'INITIAL_STATE'
+  FETCHING_FACETS: 'FETCHING_FACETS'
