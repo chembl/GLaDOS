@@ -237,6 +237,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       if _.isUndefined(facets_data.aggregations)
         for facet_group_key, facet_group of @getFacetsGroups(true)
           facet_group.faceting_handler.parseESResults(facets_data.aggregations)
+        @setFacetsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.FACETS_READY)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Elastic Search Query structure

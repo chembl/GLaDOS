@@ -111,3 +111,4 @@ glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES
 glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES =
   INITIAL_STATE: 'INITIAL_STATE'
   FETCHING_FACETS: 'FETCHING_FACETS'
+  FACETS_READY: 'FACETS_READY'
