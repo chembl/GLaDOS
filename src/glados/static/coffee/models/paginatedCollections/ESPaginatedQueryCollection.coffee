@@ -226,19 +226,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       # Call Backbone's fetch
       return Backbone.Collection.prototype.fetch.call(this, fetchESOptions)
-
-
-    # ------------------------------------------------------------------------------------------------------------------
-    # Parse/Fetch Facets Groups data
-    # ------------------------------------------------------------------------------------------------------------------
     
-    # Parses the facets groups aggregations data
-    parseFacetsGroups: (facets_data)->
-      if _.isUndefined(facets_data.aggregations)
-        for facet_group_key, facet_group of @getFacetsGroups(true)
-          facet_group.faceting_handler.parseESResults(facets_data.aggregations)
-        @setFacetsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.FACETS_READY)
-
     # ------------------------------------------------------------------------------------------------------------------
     # Elastic Search Query structure
     # ------------------------------------------------------------------------------------------------------------------

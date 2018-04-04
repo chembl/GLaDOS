@@ -18,6 +18,12 @@ glados.useNameSpace 'glados.views.Browsers',
 
       @showPreloader()
       @collection.on 'reset do-repaint sort', @renderViewState, @
+      @collection.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_FETCHING_STATE_CHANGED,
+      (->
+        console.log 'AAA FETCHING STATE CHANGED'
+        console.log 'AAA' + @collection.getFacetsFetchingState()
+      ),
+      @
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @handleSelection, @
 
       @currentViewType = @collection.getMeta('default_view')
