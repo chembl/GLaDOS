@@ -6,7 +6,6 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
   RENDERER_3D_SPECK_NAME:  '3DSpeck'
 
   initialize: ->
-    console.log 'my view', $(@el)
     @model.on 'change', @.render, @
 
 

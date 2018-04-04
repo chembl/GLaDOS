@@ -22,9 +22,6 @@ class TissueReportCardApp extends glados.ReportCardApp
     TissueReportCardApp.initAssociatedCompounds()
     tissue.fetch()
 
-    $('.scrollspy').scrollSpy()
-    ScrollSpyHelper.initializeScrollSpyPinner()
-
   # -------------------------------------------------------------
   # Tissue
   # -------------------------------------------------------------

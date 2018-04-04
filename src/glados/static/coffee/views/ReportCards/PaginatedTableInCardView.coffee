@@ -18,8 +18,8 @@ glados.useNameSpace 'glados.views.ReportCards',
 
     render: ->
 
-      console.log 'render PaginatedTableInCardView'
       if @collection.size() == 0 and !@collection.getMeta('force_show')
+        @hideSection()
         return
 
       linkToAllText = @config.link_to_all_text

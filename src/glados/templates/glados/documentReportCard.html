@@ -12,7 +12,7 @@
 
                 <h2>Document Report Card</h2>
 
-                <div id="BasicInformation" class="section scrollspy">
+                <div id="BasicInformation">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
                     <div class="row BCK-section-content">
@@ -27,7 +27,7 @@
 
                 </div>
 
-                <div id="RelatedDocuments" class="section scrollspy" style="display: none">
+                <div id="RelatedDocuments">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
                     <div class="row BCK-section-content">
@@ -40,7 +40,7 @@
 
                 </div>
 
-                <div id="WordCloud" class="section scrollspy">
+                <div id="WordCloud">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
                     <div class="row BCK-section-content">
@@ -53,7 +53,7 @@
 
                 </div>
 
-                <div id="AssayNetwork" class="section scrollspy" style="display: none">
+                <div id="AssayNetwork">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
                     <div class="row BCK-section-content">
@@ -68,7 +68,7 @@
 
                 </div>
 
-                <div id="ActivityCharts" class="scrollspy">
+                <div id="ActivityCharts">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
                     <div class="row piechart-group BCK-section-content">
@@ -103,9 +103,9 @@
                 </div>
 
 
-                <div id="CompoundSummaries" class="section scrollspy">
+                <div id="CompoundSummaries">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
-                    <div class="BCK-section-content">
+                    <div class="row BCK-section-content">
                         {% with is_dynamic=True %}
                             {% include "glados/DocumentReportCardParts/CompoundSummary.html" %}
                         {% endwith %}

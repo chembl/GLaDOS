@@ -13,6 +13,7 @@ glados.useNameSpace 'glados.views.ReportCards',
     render: ->
       show = @config.show_if(@model)
       if not show
+        @hideSection()
         return
       propertiesToShow = @config.properties_to_show
       [columnsWithValues, highlights] = glados.Utils.getColumnsWithValuesAndHighlights(propertiesToShow, @model)

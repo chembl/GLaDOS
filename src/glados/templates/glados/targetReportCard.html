@@ -13,7 +13,7 @@
 
                 <h2>Target Report Card</h2>
 
-                <div id="TargetNameAndClassification" class="section scrollspy">
+                <div id="TargetNameAndClassification">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
                     <div class="row BCK-section-content">
@@ -25,7 +25,7 @@
                     </div>
                 </div>
 
-                <div id="TargetComponents" class="section scrollspy" style="display: none;">
+                <div id="TargetComponents" style="display: none;">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
                     <div class="row BCK-section-content">
@@ -37,7 +37,7 @@
                     </div>
                 </div>
 
-                <div id="TargetRelations" class="section scrollspy" style="display: none;">
+                <div id="TargetRelations" style="display: none;">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
                     <div class="row BCK-section-content">
@@ -50,7 +50,7 @@
 
                 </div>
 
-                <div id="ApprovedDrugsAndClinicalCandidates" class="section scrollspy" style="display: none;">
+                <div id="ApprovedDrugsAndClinicalCandidates" style="display: none;">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
                     <div class="row BCK-section-content">
@@ -65,7 +65,7 @@
                 
                 </div>
 
-                <div id="ActivityCharts" class="section scrollspy">
+                <div id="ActivityCharts">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
                     <div class="row piechart-group BCK-section-content">
@@ -90,10 +90,10 @@
 
                 </div>
 
-                <div id="TargetLigandEfficiencies" class="section scrollspy">
+                <div id="TargetLigandEfficiencies">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-                    <div class="BCK-section-content">
+                    <div class="row BCK-section-content">
                         {% with is_dynamic=True %}
                             {% include "glados/TargetReportCardParts/LigandEfficiencies.html" %}
                         {% endwith %}
@@ -102,10 +102,10 @@
 
                 </div>
 
-                <div id="TargetAssociatedCompoundProperties" class="section scrollspy">
+                <div id="TargetAssociatedCompoundProperties">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
-                    <div class="BCK-section-content">
+                    <div class="row BCK-section-content">
                         {% with is_dynamic=True %}
                             {% include "glados/TargetReportCardParts/AssociatedCompounds.html" %}
                         {% endwith %}
@@ -114,7 +114,7 @@
 
                 </div>
 
-                <div id="TargetCrossReferencesGene" class="section scrollspy">
+                <div id="TargetCrossReferencesGene">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
                     <div class="row BCK-section-content">
@@ -127,7 +127,7 @@
 
                 </div>
 
-                <div id="TargetCrossReferencesProtein" class="section scrollspy">
+                <div id="TargetCrossReferencesProtein">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
                     <div class="row BCK-section-content">
@@ -140,7 +140,7 @@
 
                 </div>
 
-                <div id="TargetCrossReferencesDomain" class="section scrollspy">
+                <div id="TargetCrossReferencesDomain">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
                     <div class="row BCK-section-content">
@@ -152,7 +152,7 @@
 
                 </div>
 
-                <div id="TargetCrossReferencesStructure" class="section scrollspy">
+                <div id="TargetCrossReferencesStructure">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
                     <div class="row BCK-section-content">

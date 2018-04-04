@@ -25,6 +25,7 @@ glados.useNameSpace 'glados.views.ReportCards',
     render: ->
 
       if @collection.size() == 0
+        @hideSection()
         return
 
       glados.Utils.fillContentForElement $(@el).find('.BCK-CarouselTitle'),

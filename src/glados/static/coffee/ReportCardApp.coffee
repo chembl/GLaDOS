@@ -13,14 +13,17 @@ glados.useNameSpace 'glados',
         model: @scrollSpyHandler
       glados.Utils.checkReportCardByChemblId(GlobalVariables.CHEMBL_ID)
 
-
     @hideSection = (sectionID) ->
       @scrollSpyHandler.hideSection(sectionID)
       $('#' + sectionID).hide()
+      $('#' + sectionID).addClass('hidden-section')
+
 
     @showSection = (sectionID) ->
       @scrollSpyHandler.showSection(sectionID)
       $('#' + sectionID).show()
+      $('#' + sectionID).addClass('section')
+      $('#' + sectionID).addClass('scrollspy')
 
     @registerSection = (sectionID, sectionLabel) ->
       @scrollSpyHandler.registerSection(sectionID, sectionLabel)

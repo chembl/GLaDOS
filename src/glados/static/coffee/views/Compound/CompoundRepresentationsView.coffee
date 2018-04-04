@@ -12,6 +12,7 @@ CompoundRepresentationsView = CardView.extend
     @molecule_structures = @model.get('molecule_structures')
 
     if not @molecule_structures?
+      @hideSection()
       return
 
     @showSection()

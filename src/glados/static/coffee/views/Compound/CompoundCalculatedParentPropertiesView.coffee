@@ -12,6 +12,7 @@ CompoundCalculatedParentPropertiesView = CardView.extend(DownloadViewExt).extend
   render: ->
 
     if not @model.get('molecule_properties')?
+      @hideSection()
       return
     @showSection()
 
