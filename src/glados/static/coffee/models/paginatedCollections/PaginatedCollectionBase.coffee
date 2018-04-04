@@ -94,9 +94,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # Fetching state handling
     # ------------------------------------------------------------------------------------------------------------------
     getFetchingState: -> @getMeta('fetching_state')
+    setFecthingState: (newFetchingState) -> @setMeta('fetching_state', newFetchingState)
     setInitialFetchingState: ->
       @setMeta('fetching_state',
         glados.models.paginatedCollections.PaginatedCollectionBase.FETCHING_STATES.INITIAL_STATE)
 
 glados.models.paginatedCollections.PaginatedCollectionBase.FETCHING_STATES =
   INITIAL_STATE: 'INITIAL_STATE'
+  FETCHING_ITEMS: 'FETCHING_ITEMS'

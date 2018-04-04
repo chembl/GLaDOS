@@ -191,6 +191,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # Prepares an Elastic Search query to search in all the fields of a document in a specific index
     fetch: (options, testMode=false) ->
 
+      testMode |= @getMeta('test_mode')
       @trigger('before_fetch_elastic')
       @url = @getURL()
 
@@ -201,7 +202,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @setMeta('current_page', 1)
         @setMeta('facets_changed', false)
         @setMeta('ignore_score', true)
-
+      else
+        @setFecthingState(glados.models.paginatedCollections.PaginatedCollectionBase.FETCHING_STATES.FETCHING_ITEMS)
       # Creates the Elastic Search Query parameters and serializes them
       requestData = @getRequestData()
       esJSONRequest = JSON.stringify(@getRequestData())

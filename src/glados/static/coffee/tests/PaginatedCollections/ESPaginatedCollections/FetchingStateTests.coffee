@@ -15,12 +15,19 @@ describe "An elasticsearch collection", ->
       TestsUtils.simulateFacetsESList(esList, glados.Settings.STATIC_URL + 'testData/FacetsTestData.json', done)
 
     beforeEach ->
+      esList.setInitialFetchingState()
       esList.setMeta('test_mode', true)
       esList.clearAllFacetsSelections()
-
 
     it 'sets the initial fecthing state', ->
 
       stateGot = esList.getFetchingState()
       stateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.FETCHING_STATES.INITIAL_STATE
+      expect(stateGot).toBe(stateMustBe)
+
+    it 'sets the correct state when fetching items', ->
+
+      esList.fetch()
+      stateGot = esList.getFetchingState()
+      stateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.FETCHING_STATES.FETCHING_ITEMS
       expect(stateGot).toBe(stateMustBe)
