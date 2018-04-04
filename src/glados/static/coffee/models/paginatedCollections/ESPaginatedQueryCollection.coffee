@@ -202,6 +202,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @setMeta('current_page', 1)
         @setMeta('facets_changed', false)
         @setMeta('ignore_score', true)
+        @setFecthingState(glados.models.paginatedCollections.PaginatedCollectionBase.FETCHING_STATES.FILTERING_ITEMS)
       else
         @setFecthingState(glados.models.paginatedCollections.PaginatedCollectionBase.FETCHING_STATES.FETCHING_ITEMS)
       # Creates the Elastic Search Query parameters and serializes them
@@ -521,6 +522,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       for fGroupKey, fGroup of @getFacetsGroups(true, onlyVisible=false)
         fGroup.faceting_handler.clearSelections()
 
+      if @getMeta('test_mode')
+        return
       @setMeta('facets_changed', true)
       @fetch()
 

@@ -31,3 +31,14 @@ describe "An elasticsearch collection", ->
       stateGot = esList.getFetchingState()
       stateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.FETCHING_STATES.FETCHING_ITEMS
       expect(stateGot).toBe(stateMustBe)
+
+    it 'sets the correct state when filtering items (selecting a facet)', ->
+
+      facetGroups = esList.getFacetsGroups()
+      testFacetGroupKey = 'max_phase'
+      testFacetKey = facetGroups[testFacetGroupKey].faceting_handler.faceting_keys_inorder[0]
+      esList.toggleFacetAndFetch(testFacetGroupKey, testFacetKey)
+      stateGot = esList.getFetchingState()
+
+      stateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.FETCHING_STATES.FILTERING_ITEMS
+      expect(stateGot).toBe(stateMustBe)
