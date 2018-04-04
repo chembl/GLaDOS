@@ -423,6 +423,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
     # Elastic Search Facets request
     # ------------------------------------------------------------------------------------------------------------------
+    # returns true if the final state of the facet is selected, false otherwise
+    toggleFacetAndFetch: (fGroupKey, fKey) ->
+
+      facetsGroups = @getFacetsGroups()
+      facetingHandler = facetsGroups[fGroupKey].faceting_handler
+      isSelected = facetingHandler.toggleKeySelection(fKey)
+      @setMeta('facets_changed', true)
+      @fetch()
+
+      return isSelected
 
     __requestFacetsGroupsData: (first_call)->
       es_url = @getURL()

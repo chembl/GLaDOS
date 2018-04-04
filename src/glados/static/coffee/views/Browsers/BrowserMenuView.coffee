@@ -57,6 +57,7 @@ glados.useNameSpace 'glados.views.Browsers',
       if not $(@el).is(":visible")
         return
 
+      console.log 'AAA RENDER MENU VIEW' + (new Date())
       @renderMenuContent()
       if @collection.getMeta('total_records') != 0
 
@@ -164,6 +165,7 @@ glados.useNameSpace 'glados.views.Browsers',
       if @collection.getTotalRecords() == 0
         return
 
+      console.log 'AAA RENDER LINK TO ALL' + (new Date())
       $selectionMenuContainer = $(@el).find('.BCK-selection-menu-container')
       $linkToAllContainer = $selectionMenuContainer.find('.BCK-LinkToAllActivitiesContainer')
 
