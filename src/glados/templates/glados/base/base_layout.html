@@ -43,26 +43,19 @@
     </div>
 
     <header>
+        <!-- EBI Header -->
         <div id="masthead-contaniner" class="row">
-
             {% block header %}
                 {% include "glados/base/header.html" %}
             {% endblock %}
-
         </div>
 
-        {% block chembl_header %}
-            {% if not hide_side_nav %}
-                <div id="chembl-header-sidenav-pushpin-container">
-            {% endif %}
+        <!-- ChEMBL Header -->
         <div id="chembl-header-container">
-            {% include "glados/base/chembl_header.html" %}
+            {% block chembl_header %}
+                {% include "glados/base/chembl_header.html" %}
+            {% endblock %}
         </div>
-        {% if not hide_side_nav %}
-            </div>
-        {% endif %}
-            <div id="chembl-header-container-spacer" class="{{ hide_side_nav|yesno:',side-nav-padding' }}"></div>
-        {% endblock %}
 
     </header>
 
@@ -74,15 +67,10 @@
     {% endblock %}
 
     {% block main_start_tag %}
-        <main class="with-sidenav {{ hide_side_nav|yesno:',side-nav-padding' }}">
+        <main>
     {% endblock %}
 
     {% include "glados/base/modals/generated_modals_container.html" %}
-
-    <!-- Side Navbar-->
-    {% block side_nav %}
-        {% include "glados/base/side_nav.html" %}
-    {% endblock %}
 
     {% block content %}{% endblock %}
             
