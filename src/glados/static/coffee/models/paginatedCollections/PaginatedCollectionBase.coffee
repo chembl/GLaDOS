@@ -106,6 +106,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES =
   INITIAL_STATE: 'INITIAL_STATE'
   FETCHING_ITEMS: 'FETCHING_ITEMS'
+  ITEMS_READY: 'ITEMS_READY'
 
 glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES =
   INITIAL_STATE: 'INITIAL_STATE'

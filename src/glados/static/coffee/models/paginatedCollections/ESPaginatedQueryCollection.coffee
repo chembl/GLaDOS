@@ -186,6 +186,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       @setMeta('last_page_results_ids', curPageResultsIds)
 
+      #if this causes problems this can be moved to a custom reset function
+      @setItemsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.ITEMS_READY)
+
       return jsonResultsList
 
     # Prepares an Elastic Search query to search in all the fields of a document in a specific index
