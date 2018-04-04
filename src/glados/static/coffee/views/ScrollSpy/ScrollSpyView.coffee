@@ -8,18 +8,18 @@ glados.useNameSpace 'glados.views.ScrollSpy',
 
     render: ->
       sections =  _.values(@model.get('sections'))
-      waiting = false
 
       if @scrollSpyState == glados.views.ScrollSpy.ScrollSpyView.STATE.INITIAL
 
-        for s, i in sections
-          @scrollSpyState = glados.views.ScrollSpy.ScrollSpyView.STATE.WAITING_DECISION if s.decided_state == true
+        for section, i in sections
+          @scrollSpyState = glados.views.ScrollSpy.ScrollSpyView.STATE.WAITING_DECISION if section.decided_state == true
 
       else if @scrollSpyState == glados.views.ScrollSpy.ScrollSpyView.STATE.WAITING_DECISION
 
         sections =  _.values(@model.get('sections'))
-        for s, i in sections
-          waiting = true if s.decided_state == false
+        waiting = false
+        for section, i in sections
+          waiting = true if section.decided_state == false
 
         @scrollSpyState = glados.views.ScrollSpy.ScrollSpyView.STATE.SHOWING if waiting == false
 
@@ -29,11 +29,11 @@ glados.useNameSpace 'glados.views.ScrollSpy',
         when s.state == glados.models.ScrollSpy.ScrollSpyHandler.SECTION_STATES.SHOW).sort (a, b) ->
           return a.position - b.position
 
-        $('.scrollspy').scrollSpy()
         @hidePreloader()
         $contentContainer = $(@el).find('.BCK-ScrollSpyContent')
         glados.Utils.fillContentForElement $contentContainer,
           sections: sections
+        $('.scrollspy').scrollSpy()
 
     hidePreloader: ->
       $(@el).find('.BKC-preolader-to-hide').hide()

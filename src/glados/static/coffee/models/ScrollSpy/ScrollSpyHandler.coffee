@@ -14,7 +14,6 @@ glados.useNameSpace 'glados.models.ScrollSpy',
         state: glados.models.ScrollSpy.ScrollSpyHandler.SECTION_STATES.NOT_AVAILABLE
         position: _.keys(sections).length
         decided_state: false
-#      @trigger('change:sections')
 
     showSection: (sectionName) ->
       sections = @get('sections')

@@ -27,8 +27,6 @@ glados.useNameSpace 'glados.views.ReportCards',
       else
         thereAreNoReferences = @model.get('cross_references').length == 0
 
-      console.log 'references: ', thereAreNoReferences
-
       if thereAreNoReferences
         @hideSection()
         return
