@@ -199,7 +199,7 @@ glados.useNameSpace 'glados.apps.Main',
       promise = @prepareContentFor('unichem_connectivity')
 
       promise.then ->
-        console.log 'initCompoundUnichemConnectivity ', inchiKey
+        glados.apps.ReportCards.Compound.UnichemConnectivityApp.init()
 
 
 
