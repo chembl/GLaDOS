@@ -85,6 +85,7 @@ glados.useNameSpace 'glados.views.Browsers',
             label: viewLabel,
             icon_class: glados.Settings.DEFAULT_RESULTS_VIEWS_ICONS[viewLabel]
             is_disabled: @checkIfViewMustBeDisabled(viewLabel)[0]
+            disable_reason: @checkIfViewMustBeDisabled(viewLabel)[1]
           } for viewLabel in @collection.getMeta('available_views'))
 
         @selectButton @currentViewType
@@ -138,8 +139,10 @@ glados.useNameSpace 'glados.views.Browsers',
     #--------------------------------------------------------------------------------------
     checkIfViewMustBeDisabled: (viewLabel) ->
 
+      if @collection.isStreaming() and (viewLabel in glados.Settings.VIEWS_DISABLED_WHILE_STREAMING)
+        return [true, glados.views.Browsers.BrowserMenuView.DISABLE_BUTTON_REASONS.IS_STREAMING]
+
       if glados.Settings.VIEW_SELECTION_THRESHOLDS[viewLabel]?
-        console.log 'AAA checking threshold'
         numSelectedItems = @collection.getNumberOfSelectedItems()
         threshold = glados.Settings.VIEW_SELECTION_THRESHOLDS[viewLabel]
         if threshold[0] <= numSelectedItems <= threshold[1]
@@ -168,8 +171,9 @@ glados.useNameSpace 'glados.views.Browsers',
         $selectionMenuContainer.find('.tooltipped').tooltip()
 
       for viewLabel in @collection.getMeta('available_views')
-        if @checkIfViewMustBeDisabled(viewLabel)[0]
-          @disableButton(viewLabel)
+        [viewMustBeDisabled, reason] = @checkIfViewMustBeDisabled(viewLabel)
+        if viewMustBeDisabled
+          @disableButton(viewLabel, reason)
         else
           @enableButton(viewLabel)
 
@@ -255,9 +259,10 @@ glados.useNameSpace 'glados.views.Browsers',
     selectButton: (type) ->
       $(@el).find('[data-view=' + type + ']').addClass('selected')
 
-    disableButton: (type) ->
+    disableButton: (type, reason) ->
       $buttonToDisable = $(@el).find('[data-view=' + type + ']')
       $buttonToDisable.addClass('disabled')
+      $buttonToDisable.attr('data-disabled-reason', reason)
       @addRemoveQtipToButtons()
 
     enableButton: (type) ->
@@ -367,3 +372,4 @@ glados.useNameSpace 'glados.views.Browsers',
 
 glados.views.Browsers.BrowserMenuView.DISABLE_BUTTON_REASONS =
   TOO_MANY_ITEMS: 'TOO_MANY_ITEMS'
+  IS_STREAMING: 'IS_STREAMING'

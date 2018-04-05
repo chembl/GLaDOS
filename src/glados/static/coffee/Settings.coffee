@@ -186,6 +186,7 @@ glados.useNameSpace 'glados',
     # ranges include both numbers
     VIEW_SELECTION_THRESHOLDS:
       Heatmap: [0,1024, 300]
+    VIEWS_DISABLED_WHILE_STREAMING: ['Heatmap', 'Graph']
     TOOLTIPS:
       DEFAULT_MERCY_TIME: 100
   Events:
