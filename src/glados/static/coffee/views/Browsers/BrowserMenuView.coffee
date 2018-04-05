@@ -60,14 +60,10 @@ glados.useNameSpace 'glados.views.Browsers',
       if not $(@el).is(":visible")
         return
 
-      console.log 'AAA RENDER VIEW STATE'
-      console.log 'AAA IS STREAMING: ', @collection.isStreaming()
-      console.log 'AAA  coll is ready: ', @collection.isReady()
       if not @collection.isReady() and not @collection.isStreaming()
         @showPreloader()
         return
 
-      console.log 'AAA RENDER MENU VIEW' + (new Date())
       @renderMenuContent()
       if @collection.getMeta('total_records') != 0
 
@@ -267,7 +263,6 @@ glados.useNameSpace 'glados.views.Browsers',
 
     getDisableReasonMessage: (disableReason, viewLabel) ->
 
-      console.log 'AAA GET DISABLE REASON MESSAGE: ', disableReason
       if disableReason == glados.views.Browsers.BrowserMenuView.DISABLE_BUTTON_REASONS.TOO_MANY_ITEMS
 
         threshold = 'some'
