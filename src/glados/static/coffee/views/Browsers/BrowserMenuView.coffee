@@ -75,13 +75,16 @@ glados.useNameSpace 'glados.views.Browsers',
         $downloadBtnsContainer.html Handlebars.compile($('#' + $downloadBtnsContainer.attr('data-hb-template')).html())
           formats: @collection.getMeta('download_formats')
 
+        for viewLabel in @collection.getMeta('available_views')
+          console.log 'AAA VIEW MUST BE DISABLED ' + viewLabel + '--' + @checkIfViewMustBeDisabled(viewLabel)
+
         @handleSelection()
         $changeViewBtnsContainer = $(@el).find('.BCK-changeView-btns-container')
         glados.Utils.fillContentForElement $changeViewBtnsContainer,
           options: ( {
             label: viewLabel,
             icon_class: glados.Settings.DEFAULT_RESULTS_VIEWS_ICONS[viewLabel]
-            is_disabled: @checkIfViewMustBeDisabled(viewLabel)
+            is_disabled: @checkIfViewMustBeDisabled(viewLabel)[0]
           } for viewLabel in @collection.getMeta('available_views'))
 
         @selectButton @currentViewType
@@ -136,14 +139,15 @@ glados.useNameSpace 'glados.views.Browsers',
     checkIfViewMustBeDisabled: (viewLabel) ->
 
       if glados.Settings.VIEW_SELECTION_THRESHOLDS[viewLabel]?
+        console.log 'AAA checking threshold'
         numSelectedItems = @collection.getNumberOfSelectedItems()
         threshold = glados.Settings.VIEW_SELECTION_THRESHOLDS[viewLabel]
         if threshold[0] <= numSelectedItems <= threshold[1]
-          return false
+          return [false]
         else
-          return true
+          return [true, glados.views.Browsers.BrowserMenuView.DISABLE_BUTTON_REASONS.TOO_MANY_ITEMS]
 
-      return false
+      return [false]
 
     handleSelection: ->
 
@@ -164,7 +168,7 @@ glados.useNameSpace 'glados.views.Browsers',
         $selectionMenuContainer.find('.tooltipped').tooltip()
 
       for viewLabel in @collection.getMeta('available_views')
-        if @checkIfViewMustBeDisabled(viewLabel)
+        if @checkIfViewMustBeDisabled(viewLabel)[0]
           @disableButton(viewLabel)
         else
           @enableButton(viewLabel)
@@ -188,7 +192,7 @@ glados.useNameSpace 'glados.views.Browsers',
         glados.Utils.fillContentForElement $linkToAllContainer,
           too_many_items: true
 
-        qtipText = "PLease select or filter less than #{glados.Settings.VIEW_SELECTION_THRESHOLDS.Bioactivity[1]} " +
+        qtipText = "PLease select or filter less than #{glados.Settings.VIEW_SELECTION_THRESHOLDS.Heatmap[1]} " +
         "items to activate this link."
         $linkToAllContainer.qtip
           content:
@@ -242,7 +246,7 @@ glados.useNameSpace 'glados.views.Browsers',
           style:
             classes:'qtip-light'
           position:
-            my: 'top right'
+            my: 'top left'
             at: 'bottom middle'
 
     unSelectAllButtons: ->
@@ -361,4 +365,5 @@ glados.useNameSpace 'glados.views.Browsers',
     toggleShowSpecialStructure: (checked) -> @getCurrentViewInstance().toggleShowSpecialStructure(checked)
 
 
-
+glados.views.Browsers.BrowserMenuView.DISABLE_BUTTON_REASONS =
+  TOO_MANY_ITEMS: 'TOO_MANY_ITEMS'

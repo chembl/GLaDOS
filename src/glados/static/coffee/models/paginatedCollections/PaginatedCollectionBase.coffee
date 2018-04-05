@@ -40,7 +40,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       numSelectedItems = @getNumberOfSelectedItems()
       numItemsForLink = if numSelectedItems == 0 then @getTotalRecords() else numSelectedItems
-      if numItemsForLink >= glados.Settings.VIEW_SELECTION_THRESHOLDS.Bioactivity[1]
+      if numItemsForLink >= glados.Settings.VIEW_SELECTION_THRESHOLDS.Heatmap[1]
         return true
       return false
 
