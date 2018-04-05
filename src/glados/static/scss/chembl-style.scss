@@ -181,7 +181,10 @@ header .row {
     background-color: $header-color;
     position: relative;
     float: left;
-     margin-top: -5px;
+    margin-top: -5px;
+    display: flex;
+    justify-content: space-between;
+
 
     .chembl-logo {
       width: $chembl-header-height;
@@ -192,6 +195,15 @@ header .row {
         width: 30px;
         height: auto;
       }
+    }
+
+    .search-bar {
+      height: $chembl-header-height;
+      padding: 10px;
+      float: left;
+      border: solid red 1px;
+      background: none;
+      
     }
 
     .options-button {
@@ -218,6 +230,194 @@ header .row {
     margin-top: 0;
   }
 }
+
+//search bar
+//.search-bar {
+//  ul {
+//    margin: 0;
+//    display: flex;
+//    flex-direction: row;
+//    align-items: center;
+//    li {
+//      flex-grow: 1;
+//      flex-shrink: 0;
+//      text-align: center;
+//      max-width: 100%;
+//      margin-right: 0.2em;
+//      .chembl-search-bar-container {
+//        font-size: $search-bar-font-size;
+//        .search-bar-wrapper {
+//          position: relative;
+//          font-size: inherit;
+//          font-family: "ChEMBL_Verdana", Verdana, sans-serif;
+//          margin: 0 0 0.4em 0;
+//          background: white;
+//          $padding-search-bar: 0.5em;
+//          //border-radius: 0.2em;
+//          &.row {
+//            padding: 0;
+//          }
+//          .chembl-search-bar {
+//            font-size: inherit;
+//            color: black;
+//            display: inline-block;
+//            overflow: hidden;
+//            background-color: transparent;
+//            border: 0;
+//            padding: 0 $padding-search-bar 0 $padding-search-bar;
+//            width: calc(100% - #{$padding-search-bar*2});
+//            margin: 0.1em 0 0 0;
+//            outline: none;
+//            height: 2em;
+//            box-shadow: none;
+//          }
+//          .search-button {
+//            font-size: inherit;
+//            display: block;
+//            border-radius: 0.3em;
+//            margin: 0.2em;
+//            padding: 0.1em;
+//            height: 2em;
+//            i {
+//              font-weight: bold;
+//              font-size: 1.5em;
+//              padding: 0.2em;
+//            }
+//          }
+//
+//          .draw-structure {
+//            font-size: inherit;
+//            display: block;
+//            border-radius: 0.3em;
+//            margin: 0.2em;
+//            padding: 0.1em;
+//            height: 2em;
+//            i {
+//              font-weight: bold;
+//              font-size: 0.95em;
+//            }
+//          }
+//
+//        }
+//        .example-link-container {
+//          font-size: 0.9em;
+//          text-align: left;
+//          width: 100%;
+//          .example-link {
+//            display: inline;
+//            padding: 0.5em 0 0.5em 0;
+//            &:hover {
+//              text-decoration: underline;
+//            }
+//          }
+//        }
+//      }
+//      a {
+//        display: block;
+//        color: white;
+//        padding: 0.5em;
+//        .chembl-logo-header {
+//          display: block;
+//          height: 5em;
+//          width: 5em;
+//          //margin: 0 #{-4em*$hexagon-lateral-distance-proportion-0.5em} 0 #{-4em*$hexagon-lateral-distance-proportion-0.5em} !important;
+//          margin: auto
+//        }
+//        i {
+//          display: block;
+//          &.material-icons {
+//            font-size: 2.5em;
+//          }
+//        }
+//        &.download-button {
+//          font-size: 1em;
+//          p {
+//            font-size: 1.4em;
+//            margin: 0;
+//          }
+//          i {
+//            font-size: 2em;
+//          }
+//          a {
+//            color: white;
+//            padding: 0.1em;
+//            border-radius: $default-btn-border-radius;
+//          }
+//        }
+//        &.long-link {
+//          flex-grow: 3;
+//          padding: 0 0 0.2em 0;
+//          margin-left: 10px;
+//
+//          max-height: 5em;
+//          overflow-x: hidden;
+//          overflow-y: hidden;
+//
+//          div {
+//            font-size: 3.5em;
+//            position: relative;
+//            top: 0.15em;
+//            display: block;
+//            .beta-sign {
+//              font-size: 0.3em;
+//            }
+//            .icon-generic {
+//              font-size: 0.6em;
+//            }
+//          }
+//        }
+//      }
+//    }
+//    &::after {
+//      display: block;
+//      content: "";
+//      flex-grow: 10000;
+//      flex-shrink: 0;
+//      text-align: center;
+//      height: $chembl-header-height;
+//    }
+//    &.right-align-content {
+//      li {
+//        margin-left: 0.2em;
+//        margin-right: 0;
+//
+//      }
+//      &::after {
+//        display: none;
+//      }
+//      &::before {
+//        display: block;
+//        content: "";
+//        flex-grow: 10000;
+//        flex-shrink: 0;
+//        text-align: center;
+//        height: $chembl-header-height;
+//      }
+//    }
+//    &.max-expand-content {
+//      li {
+//        margin-left: 0;
+//        margin-right: 0;
+//      }
+//      &::after {
+//        display: block;
+//        content: "";
+//        flex-grow: 0.01;
+//        flex-shrink: 0;
+//        text-align: center;
+//        height: $chembl-header-height;
+//      }
+//      &::before {
+//        display: block;
+//        content: "";
+//        flex-grow: 0.01;
+//        flex-shrink: 0;
+//        text-align: center;
+//        height: $chembl-header-height;
+//      }
+//    }
+//  }
+//}
 
 //#chembl-header-container {
 //  height: 0;
@@ -347,193 +547,7 @@ header .row {
 //  }
 //}
 
-//search bar
-.search-bar {
-  ul {
-    margin: 0;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    li {
-      flex-grow: 1;
-      flex-shrink: 0;
-      text-align: center;
-      max-width: 100%;
-      margin-right: 0.2em;
-      .chembl-search-bar-container {
-        font-size: $search-bar-font-size;
-        .search-bar-wrapper {
-          position: relative;
-          font-size: inherit;
-          font-family: "ChEMBL_Verdana", Verdana, sans-serif;
-          margin: 0 0 0.4em 0;
-          background: white;
-          $padding-search-bar: 0.5em;
-          //border-radius: 0.2em;
-          &.row {
-            padding: 0;
-          }
-          .chembl-search-bar {
-            font-size: inherit;
-            color: black;
-            display: inline-block;
-            overflow: hidden;
-            background-color: transparent;
-            border: 0;
-            padding: 0 $padding-search-bar 0 $padding-search-bar;
-            width: calc(100% - #{$padding-search-bar*2});
-            margin: 0.1em 0 0 0;
-            outline: none;
-            height: 2em;
-            box-shadow: none;
-          }
-          .search-button {
-            font-size: inherit;
-            display: block;
-            border-radius: 0.3em;
-            margin: 0.2em;
-            padding: 0.1em;
-            height: 2em;
-            i {
-              font-weight: bold;
-              font-size: 1.5em;
-              padding: 0.2em;
-            }
-          }
 
-          .draw-structure {
-            font-size: inherit;
-            display: block;
-            border-radius: 0.3em;
-            margin: 0.2em;
-            padding: 0.1em;
-            height: 2em;
-            i {
-              font-weight: bold;
-              font-size: 0.95em;
-            }
-          }
-
-        }
-        .example-link-container {
-          font-size: 0.9em;
-          text-align: left;
-          width: 100%;
-          .example-link {
-            display: inline;
-            padding: 0.5em 0 0.5em 0;
-            &:hover {
-              text-decoration: underline;
-            }
-          }
-        }
-      }
-      a {
-        display: block;
-        color: white;
-        padding: 0.5em;
-        .chembl-logo-header {
-          display: block;
-          height: 5em;
-          width: 5em;
-          //margin: 0 #{-4em*$hexagon-lateral-distance-proportion-0.5em} 0 #{-4em*$hexagon-lateral-distance-proportion-0.5em} !important;
-          margin: auto
-        }
-        i {
-          display: block;
-          &.material-icons {
-            font-size: 2.5em;
-          }
-        }
-        &.download-button {
-          font-size: 1em;
-          p {
-            font-size: 1.4em;
-            margin: 0;
-          }
-          i {
-            font-size: 2em;
-          }
-          a {
-            color: white;
-            padding: 0.1em;
-            border-radius: $default-btn-border-radius;
-          }
-        }
-        &.long-link {
-          flex-grow: 3;
-          padding: 0 0 0.2em 0;
-          margin-left: 10px;
-
-          max-height: 5em;
-          overflow-x: hidden;
-          overflow-y: hidden;
-
-          div {
-            font-size: 3.5em;
-            position: relative;
-            top: 0.15em;
-            display: block;
-            .beta-sign {
-              font-size: 0.3em;
-            }
-            .icon-generic {
-              font-size: 0.6em;
-            }
-          }
-        }
-      }
-    }
-    &::after {
-      display: block;
-      content: "";
-      flex-grow: 10000;
-      flex-shrink: 0;
-      text-align: center;
-      height: $chembl-header-height;
-    }
-    &.right-align-content {
-      li {
-        margin-left: 0.2em;
-        margin-right: 0;
-
-      }
-      &::after {
-        display: none;
-      }
-      &::before {
-        display: block;
-        content: "";
-        flex-grow: 10000;
-        flex-shrink: 0;
-        text-align: center;
-        height: $chembl-header-height;
-      }
-    }
-    &.max-expand-content {
-      li {
-        margin-left: 0;
-        margin-right: 0;
-      }
-      &::after {
-        display: block;
-        content: "";
-        flex-grow: 0.01;
-        flex-shrink: 0;
-        text-align: center;
-        height: $chembl-header-height;
-      }
-      &::before {
-        display: block;
-        content: "";
-        flex-grow: 0.01;
-        flex-shrink: 0;
-        text-align: center;
-        height: $chembl-header-height;
-      }
-    }
-  }
-}
 
 /**
 * Scroll spy
