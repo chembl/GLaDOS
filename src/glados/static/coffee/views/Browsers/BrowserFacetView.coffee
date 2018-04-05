@@ -479,20 +479,18 @@ glados.useNameSpace 'glados.views.Browsers',
     # ------------------------------------------------------------------------------------------------------------------
     # FacetSelection
     # ------------------------------------------------------------------------------------------------------------------
-    toggleSelectFacet: (facet_group_key, facet_key) ->
+    toggleSelectFacet: (fGroupKey, fKey) ->
       @showPreloader()
       facetsGroups = @facetsVisibilityHandler.getAllFacetsGroups()
-      facetingHandler = facetsGroups[facet_group_key].faceting_handler
-      if facetingHandler.faceting_data[facet_key].count == 0
+      facetingHandler = facetsGroups[fGroupKey].faceting_handler
+      if facetingHandler.faceting_data[fKey].count == 0
         return
 
-      isSelected = facetingHandler.toggleKeySelection(facet_key)
-      $selectedSVGGroup = $(@el).find("[data-facet-group-key='" + facet_group_key + "']")\
-        .find("[data-bucket-key='" + facet_key + "']")
+      isSelected = @collection.toggleFacetAndFetch(fGroupKey, fKey)
+      $selectedSVGGroup = $(@el).find("[data-facet-group-key='" + fGroupKey + "']")\
+        .find("[data-bucket-key='" + fKey + "']")
       $selectedSVGGroup.toggleClass('selected', isSelected)
 
-      @collection.setMeta('facets_changed', true)
-      @collection.fetch()
       @WAITING_FOR_FACETS = true
 
     clearFacetsSelection: ->

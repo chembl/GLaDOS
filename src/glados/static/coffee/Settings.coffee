@@ -185,7 +185,8 @@ glados.useNameSpace 'glados',
      # If there is a value here, it means that the view is enable only if there is a certain number of items selected.
     # ranges include both numbers
     VIEW_SELECTION_THRESHOLDS:
-      'Bioactivity': [0,1024, 300]
+      Heatmap: [0,1024, 300]
+    VIEWS_DISABLED_WHILE_STREAMING: ['Heatmap', 'Graph']
     TOOLTIPS:
       DEFAULT_MERCY_TIME: 100
   Events:

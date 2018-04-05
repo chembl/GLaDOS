@@ -40,7 +40,7 @@ class TestsUtils
   # it is meant to work only for a ES compound list
   @simulateFacetsESList = (list, dataURL, done) ->
 
-    $.get dataURL, (testData) ->
+    return $.get dataURL, (testData) ->
 
       for item in testData
         aggData = item.aggData
@@ -48,7 +48,7 @@ class TestsUtils
         for facetGroupKey, facetGroup of list.getFacetsGroups()
 
           facetGroup.faceting_handler.parseESResults(aggData, firstCall)
-
+      list.setFacetsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.FACETS_READY)
       done()
 
   @generateListOfRandomValues = (minVal, maxVal) ->

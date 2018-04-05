@@ -67,7 +67,9 @@
 <script id="Handlebars-SwitchColViewButtons" type="text/x-handlebars-template">
 
   <div class="summary-tabs">
-    {{#each options}}<a class="section-item BCK-btn-switch-view {{#if is_disabled}}disabled{{/if}}" data-view="{{this.label}}">
+    {{#each options}}<a class="section-item BCK-btn-switch-view {{#if is_disabled}}disabled{{/if}}"
+      data-view="{{this.label}}"
+      data-disabled-reason="{{this.disable_reason}}">
       <p class="icon"><i class="fa {{this.icon_class}}"></i></p>
       <p class="label">{{this.label}}</p>
     </a>{{/each}}
@@ -92,19 +94,15 @@
     </div>
 
     <div class="BCK-LinkToAllActivitiesContainer link-to-all-activities-container"
-                                     data-hb-template="Handlebars-LinkToAllActivities"
-                                     data-hb-preloader-template="Handlebars-Common-MiniPreloader"> </div>
+                                     data-hb-template="Handlebars-LinkToAllActivities"> </div>
 
   </div>
 
 </script>
 
 <script id="Handlebars-LinkToAllActivities" type="text/x-handlebars-template">
-{{#if too_many_items}}
-<a target="_blank" class="disabled">Browse Activities</a>
-{{else}}
-<a target="_blank" href="{{url}}">Browse Activities</a>
-{{/if}}
+<a target="_blank" class="BCK-LinkToAllActivities {{#if too_many_items}}disabled{{/if}}">Browse Activities</a>
+<i class="BCK-preloader fa fa-cog fa-spin fa-fw" style="display: none"></i>
 </script>
 
 <script id="Handlebars-ESResultsList" type="text/x-handlebars-template">

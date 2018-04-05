@@ -17,7 +17,10 @@ glados.useNameSpace 'glados.views.Browsers',
     initialize: ->
 
       @showPreloader()
-      @collection.on 'reset do-repaint sort', @render, @
+      @collection.on 'reset do-repaint sort', @renderViewState, @
+      @collection.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_FETCHING_STATE_CHANGED,
+      @renderViewState, @
+
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @handleSelection, @
 
       @currentViewType = @collection.getMeta('default_view')
@@ -52,9 +55,13 @@ glados.useNameSpace 'glados.views.Browsers',
       if $currentViewInstance.wakeUpView?
         $currentViewInstance.wakeUpView()
 
-    render: ->
+    renderViewState: ->
 
       if not $(@el).is(":visible")
+        return
+
+      if not @collection.isReady() and not @collection.isStreaming()
+        @showPreloader()
         return
 
       @renderMenuContent()
@@ -70,7 +77,8 @@ glados.useNameSpace 'glados.views.Browsers',
           options: ( {
             label: viewLabel,
             icon_class: glados.Settings.DEFAULT_RESULTS_VIEWS_ICONS[viewLabel]
-            is_disabled: @checkIfViewMustBeDisabled(viewLabel)
+            is_disabled: @checkIfViewMustBeDisabled(viewLabel)[0]
+            disable_reason: @checkIfViewMustBeDisabled(viewLabel)[1]
           } for viewLabel in @collection.getMeta('available_views'))
 
         @selectButton @currentViewType
@@ -124,17 +132,23 @@ glados.useNameSpace 'glados.views.Browsers',
     #--------------------------------------------------------------------------------------
     checkIfViewMustBeDisabled: (viewLabel) ->
 
+      if @collection.isStreaming() and (viewLabel in glados.Settings.VIEWS_DISABLED_WHILE_STREAMING)
+        return [true, glados.views.Browsers.BrowserMenuView.DISABLE_BUTTON_REASONS.IS_STREAMING]
+
       if glados.Settings.VIEW_SELECTION_THRESHOLDS[viewLabel]?
         numSelectedItems = @collection.getNumberOfSelectedItems()
         threshold = glados.Settings.VIEW_SELECTION_THRESHOLDS[viewLabel]
         if threshold[0] <= numSelectedItems <= threshold[1]
-          return false
+          return [false]
         else
-          return true
+          return [true, glados.views.Browsers.BrowserMenuView.DISABLE_BUTTON_REASONS.TOO_MANY_ITEMS]
 
-      return false
+      return [false]
 
     handleSelection: ->
+
+      if not @collection.itemsAreReady()
+        return
 
       $selectionMenuContainer = $(@el).find('.BCK-selection-menu-container')
       out_of_n = @collection.getMeta('out_of_n')
@@ -150,8 +164,9 @@ glados.useNameSpace 'glados.views.Browsers',
         $selectionMenuContainer.find('.tooltipped').tooltip()
 
       for viewLabel in @collection.getMeta('available_views')
-        if @checkIfViewMustBeDisabled(viewLabel)
-          @disableButton(viewLabel)
+        [viewMustBeDisabled, reason] = @checkIfViewMustBeDisabled(viewLabel)
+        if viewMustBeDisabled
+          @disableButton(viewLabel, reason)
         else
           @enableButton(viewLabel)
 
@@ -167,13 +182,23 @@ glados.useNameSpace 'glados.views.Browsers',
       $selectionMenuContainer = $(@el).find('.BCK-selection-menu-container')
       $linkToAllContainer = $selectionMenuContainer.find('.BCK-LinkToAllActivitiesContainer')
 
-      if @collection.thereAreTooManyItemsForActivitiesLink()
+      tooManyItems = @collection.thereAreTooManyItemsForActivitiesLink()
+      isStreaming = @collection.isStreaming()
+      needsToBeDisabled = tooManyItems or isStreaming
+
+      if needsToBeDisabled
 
         glados.Utils.fillContentForElement $linkToAllContainer,
           too_many_items: true
 
-        qtipText = "PLease select or filter less than #{glados.Settings.VIEW_SELECTION_THRESHOLDS.Bioactivity[1]} " +
-        "items to activate this link."
+
+        qtipText = switch
+          when isStreaming then \
+          "Please wait until the download is complete"
+          when tooManyItems then \
+          "Please select or filter less than #{glados.Settings.VIEW_SELECTION_THRESHOLDS.Heatmap[1]} " +
+          "items to activate this link."
+
         $linkToAllContainer.qtip
           content:
             text: qtipText
@@ -185,14 +210,24 @@ glados.useNameSpace 'glados.views.Browsers',
 
         return
 
-      glados.Utils.fillContentForElement($linkToAllContainer, paramsObj={}, customTemplate=undefined,
-        fillWithPreloader=true)
+      glados.Utils.fillContentForElement($linkToAllContainer)
+
+      $link = $linkToAllContainer.find('.BCK-LinkToAllActivities')
+      $link.click $.proxy(@handleLinkToAllActivitiesClick, @)
+
+
+    handleLinkToAllActivitiesClick: ->
+
+      $selectionMenuContainer = $(@el).find('.BCK-selection-menu-container')
+      $linkToAllContainer = $selectionMenuContainer.find('.BCK-LinkToAllActivitiesContainer')
+      $preloader = $linkToAllContainer.find('.BCK-preloader')
+      $preloader.show()
 
       linkToActPromise = @collection.getLinkToAllActivitiesPromise()
-      linkToActPromise.then (linkGot) ->
-        glados.Utils.fillContentForElement $linkToAllContainer,
-          url: linkGot
 
+      linkToActPromise.then (linkGot) ->
+        glados.Utils.URLS.shortenLinkIfTooLongAndOpen(linkGot)
+        $preloader.hide()
 
     #--------------------------------------------------------------------------------------
     # Download Buttons
@@ -215,19 +250,31 @@ glados.useNameSpace 'glados.views.Browsers',
 
         $currentElem = $(@)
         viewLabel = $currentElem.attr('data-view')
+        disableReason = $currentElem.attr('data-disabled-reason')
+
+        $currentElem.qtip
+          content:
+            text: thisView.getDisableReasonMessage(disableReason, viewLabel)
+          style:
+            classes:'qtip-light'
+          position:
+            my: 'top left'
+            at: 'bottom middle'
+
+    getDisableReasonMessage: (disableReason, viewLabel) ->
+
+      if disableReason == glados.views.Browsers.BrowserMenuView.DISABLE_BUTTON_REASONS.TOO_MANY_ITEMS
+
         threshold = 'some'
         if glados.Settings.VIEW_SELECTION_THRESHOLDS[viewLabel]?
           thresholdNum = glados.Settings.VIEW_SELECTION_THRESHOLDS[viewLabel]
           threshold = 'from ' + thresholdNum[0] + ' to ' + thresholdNum[1]
 
-        $currentElem.qtip
-          content:
-            text: 'Select ' + threshold + ' items to activate this view.'
-          style:
-            classes:'qtip-light'
-          position:
-            my: 'top right'
-            at: 'bottom middle'
+        return "Select #{threshold} items to activate this view."
+
+      if disableReason == glados.views.Browsers.BrowserMenuView.DISABLE_BUTTON_REASONS.IS_STREAMING
+
+        return "Please wait until the download is complete to activate this view."
 
     unSelectAllButtons: ->
       $(@el).find('.BCK-btn-switch-view').removeClass('selected')
@@ -235,9 +282,10 @@ glados.useNameSpace 'glados.views.Browsers',
     selectButton: (type) ->
       $(@el).find('[data-view=' + type + ']').addClass('selected')
 
-    disableButton: (type) ->
+    disableButton: (type, reason) ->
       $buttonToDisable = $(@el).find('[data-view=' + type + ']')
       $buttonToDisable.addClass('disabled')
+      $buttonToDisable.attr('data-disabled-reason', reason)
       @addRemoveQtipToButtons()
 
     enableButton: (type) ->
@@ -345,4 +393,6 @@ glados.useNameSpace 'glados.views.Browsers',
     toggleShowSpecialStructure: (checked) -> @getCurrentViewInstance().toggleShowSpecialStructure(checked)
 
 
-
+glados.views.Browsers.BrowserMenuView.DISABLE_BUTTON_REASONS =
+  TOO_MANY_ITEMS: 'TOO_MANY_ITEMS'
+  IS_STREAMING: 'IS_STREAMING'

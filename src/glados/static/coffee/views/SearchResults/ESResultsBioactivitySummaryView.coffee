@@ -71,7 +71,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       numSelectedItems = @collection.getNumberOfSelectedItems()
       thereIsSelection = numSelectedItems > 0
-      threshold = glados.Settings.VIEW_SELECTION_THRESHOLDS['Bioactivity']
+      threshold = glados.Settings.VIEW_SELECTION_THRESHOLDS['Heatmap']
       numWorkingItems = if thereIsSelection then numSelectedItems else numTotalItems
 
       if numWorkingItems > threshold[1]

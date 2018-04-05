@@ -85,7 +85,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         return
 
       numSelectedItems = @collection.getNumberOfSelectedItems()
-      threshold = glados.Settings.VIEW_SELECTION_THRESHOLDS['Bioactivity']
+      threshold = glados.Settings.VIEW_SELECTION_THRESHOLDS['Heatmap']
 
       if numSelectedItems < threshold[0]
         @setProgressMessage('Please select at least ' + threshold[0] + ' target to show this visualisation.',
