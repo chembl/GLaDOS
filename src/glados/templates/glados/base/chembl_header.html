@@ -1,8 +1,9 @@
 {% load static %}
 <div class="chembl-header">
+
     <a class="header-button chembl-logo left" href="{% url 'main' %}">
         <img src="{% static 'img/icons/chembl_logo_white.png' %}"/>
-        {#            <span class="hide-on-med-and-down"> ChEMBL </span>#}
+        <span class="hide-on-med-and-down white-text"> ChEMBL </span>
     </a>
 
     <div class="search-bar">
@@ -12,5 +13,6 @@
     <a class="header-button options-button right" href="#">
         <img src="{% static 'img/icons/options_button.png' %}"/>
     </a>
+
 </div>
 

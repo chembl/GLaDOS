@@ -59,6 +59,11 @@ header .row {
           width: 30px;
           height: auto;
         }
+        span {
+          -webkit-transition: display 200ms ease-in; /* Safari */
+          transition: display 200ms ease-in;
+        }
+
       }
 
       &.options-button {
@@ -84,7 +89,7 @@ header .row {
         background-color: white;
         display: flex;
 
-        -webkit-transition: height 100ms ease-in; /* Safari */
+        -webkit-transition: height 100ms ease-in;
         transition: height 100ms ease-in;
 
         .chembl-search-bar {
@@ -102,7 +107,6 @@ header .row {
           align-items: center;
 
           img {
-            //width: 15px;
             height: auto;
           }
 
@@ -129,9 +133,11 @@ header .row {
 
   .bar-wrapper {
     height: $search-bar-height;
+
     .chembl-search-bar {
       font-size: $search-bar-font-size-small;
     }
+
     .bar-button {
       img {
         width: 15px;
@@ -152,12 +158,25 @@ header .row {
       font-size: $search-bar-font-size-big;
     }
 
-     .bar-button {
+    .bar-button {
       img {
         width: 22px;
       }
     }
   }
+}
 
+/* -------- BREAKPOINT > 992px -------- */
+@media (min-width: 992px) {
+  
+  .chembl-logo {
+    width: fit-content !important;
+    span {
+      font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+      font-size: 2em;
+      padding-top: 0.25em;
+      padding-left: $chembl-header-padding;
+    }
+  }
 
 }
