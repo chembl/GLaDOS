@@ -147,12 +147,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
 # creates a new instance of a Client Side Paginated Collection from either Web Services or elasticsearch, This means that
 # the collection gets all the data is in one call and the full list is in the client all the time.
-    getNewClientSideCollectionFor: (collectionSettings, generator) ->
+    getNewClientSideCollectionFor: (collectionSettings, generator, flavour={}) ->
 
       collection = glados.models.paginatedCollections.PaginatedCollectionBase\
       .extend(glados.models.paginatedCollections.ClientSidePaginatedCollection)
       .extend(glados.models.paginatedCollections.SelectionFunctions)
-      .extend(glados.models.paginatedCollections.SortingFunctions).extend
+      .extend(glados.models.paginatedCollections.SortingFunctions)
+      .extend(flavour).extend
 
         model: collectionSettings.MODEL
 
@@ -608,6 +609,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return list
 
+    getNewUnichemConnectivityList: ->
+
+      config = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.UNICHEM_CONNECTIVITY_LIST
+      flavour = glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList
+      list = @getNewClientSideCollectionFor config, generator=undefined, flavour
+      return list
+
     getNewRelatedDocumentsList: ->
 
       config = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.SIMILAR_DOCUMENTS_IN_REPORT_CARD
@@ -926,6 +934,3 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
 
       return list
-
-
-

@@ -546,6 +546,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           Carousel:
             Default: Document.COLUMNS_SETTINGS.SEARCH_BY_TERM_RESULTS
     CLIENT_SIDE_WS_COLLECTIONS:
+      UNICHEM_CONNECTIVITY_LIST:
+        MODEL: glados.models.Compound.TargetPrediction
+        DEFAULT_PAGE_SIZE: 5
+        ID_COLUMN: glados.models.Compound.TargetPrediction.ID_COLUMN
+        COLUMNS: glados.models.Compound.TargetPrediction.COLUMNS_SETTINGS.ALL_COLUMNS
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: glados.models.Compound.TargetPrediction.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+            ConditionalRowFormatting: glados.models.Compound.TargetPrediction.CONDITIONAL_ROW_FORMATS.COMPOUND_REPORT_CARD
+            remove_striping: true
       TARGET_PREDICTIONS:
         MODEL: glados.models.Compound.TargetPrediction
         DEFAULT_PAGE_SIZE: 5
