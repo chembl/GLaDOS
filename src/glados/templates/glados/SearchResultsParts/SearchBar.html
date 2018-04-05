@@ -1,6 +1,6 @@
-<!-- ChEMBL Header SearchBar -->
 {% load static %}
-<div id="chembl-header-search-bar-container" class="bar-wrapper">
+<div id="chembl-header-search-bar-container" class="bar-wrapper z-depth-1-half">
+
     {% block autocomplete_chembl_header %}
         {% include "glados/SearchResultsParts/SearchBarAutocomplete.html" %}
     {% endblock %}
@@ -12,7 +12,7 @@
         <img src="{% static 'img/icons/structure_icon.png' %}"/>
     </a>
 
-    <a class="bar-button  draw-structure tooltipped hide-on-med-and-up"  href="{% url 'main' %}marvin_search_fullscreen/"
+    <a class="bar-button draw-structure tooltipped hide-on-med-and-up"  href="{% url 'main' %}marvin_search_fullscreen/"
                                 data-position="left" data-delay="50" data-tooltip="Draw a structure">
         <img src="{% static 'img/icons/structure_icon.png' %}"/>
     </a>
@@ -22,16 +22,15 @@
     </a>
 </div>
 
-{#                    <div class="example-link-container teal-text lighten-5">#}
-{#                        <b class="white-text lighten-5">Examples: </b>#}
-{#                        <a class="example-link" href="{% url 'main' %}g/#search_results/Dopamine" >Dopamine</a>,#}
-{#                        <span class="hide-on-small-only" ><a class="example-link" href="{% url 'main' %}g/#search_results/Aspirin">Aspirin</a>,</span>#}
-{#                        <a class="example-link" href="{% url 'main' %}g/#search_results/NCCc1ccc(O)c(O)c1"  >NCCc1ccc(O)c(O)c1</a><span class="hide-on-small-only no-padding no-margin">,</span>#}
-{#                        <span class="hide-on-small-only" ><a class="example-link hide-on-small-only" href="{% url 'main' %}g/#search_results/Liver">Liver</a></span>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </li>#}
-{#    </ul>#}
+{##}
+{#<div class="example-link-container teal-text lighten-5">#}
+{#    <b class="white-text lighten-5">Examples: </b>#}
+{#    <a class="example-link" href="{% url 'main' %}g/#search_results/Dopamine">Dopamine</a>,#}
+{#    <span class="hide-on-small-only"><a class="example-link"#}
+{#                                        href="{% url 'main' %}g/#search_results/Aspirin">Aspirin</a>,</span>#}
+{#    <a class="example-link" href="{% url 'main' %}g/#search_results/NCCc1ccc(O)c(O)c1">NCCc1ccc(O)c(O)c1</a><span#}
+{#        class="hide-on-small-only no-padding no-margin">,</span>#}
+{#    <span class="hide-on-small-only"><a class="example-link hide-on-small-only"#}
+{#                                        href="{% url 'main' %}g/#search_results/Liver">Liver</a></span>#}
 {#</div>#}
-
+{##}
