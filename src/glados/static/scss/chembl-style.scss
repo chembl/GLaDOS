@@ -153,13 +153,13 @@ a {
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
-$chembl-header-height: 50px;
+$chembl-header-height: 54px;
 $header-color: #62b7bd;
 $header-darker: #09979B;
 $chembl-header-padding: 10px;
 $search-bar-font-size-small: 0.8em;
 $search-bar-font: helvetica, Arial, sans-serif;
-
+$search-bar-max-width: 900px;
 
 $search-bar-font-size: 1em;
 $chembl-header-shrink-ratio: 0.65;
@@ -187,21 +187,33 @@ header .row {
     display: flex;
     justify-content: space-between;
 
-    .chembl-logo {
+    .header-button {
       width: $chembl-header-height;
       height: $chembl-header-height;
-      padding: 10px;
+      padding: $chembl-header-padding;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-      img {
-        width: 30px;
-        height: auto;
+      &.chembl-logo {
+        img {
+          width: 30px;
+          height: auto;
+        }
+      }
+
+      &.options-button {
+        img {
+          width: 20px;
+          height: 20px;
+        }
       }
     }
 
     .search-bar {
       height: $chembl-header-height;
-      max-width: 920px;
-      padding: 10px;
+      padding: $chembl-header-padding;
+      max-width: $search-bar-max-width;
       float: left;
       background: none;
       flex-grow: 2;
@@ -215,40 +227,27 @@ header .row {
         display: flex;
 
         .chembl-search-bar {
-          margin: 0;
-          height: 100%;
           font-family: $search-bar-font;
           font-size: $search-bar-font-size-small;
-          padding-left: 10px;
+          padding-left: $chembl-header-padding;
+          margin: 0;
+          height: 100%;
         }
 
         .bar-button {
+          padding: $chembl-header-padding/2;
           height: 100%;
-          padding: 5px;
+
           img {
             width: 15px;
             height: auto;
           }
+
           &.search-button {
             background-color: $header-darker;
 
           }
         }
-      }
-    }
-
-    .options-button {
-      width: $chembl-header-height;
-      height: $chembl-header-height;
-      padding: 10px;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      img {
-        width: 20px;
-        height: 20px;
       }
     }
   }
@@ -261,9 +260,6 @@ header .row {
     margin-top: 0;
   }
 }
-
-
-
 
 /**
 * Scroll spy
@@ -1116,6 +1112,7 @@ em.glados-result-highlight {
     }
   }
 }
+
 /**
 * Charts
 * ----------------------------------------------------------------------------------------------------------------------
