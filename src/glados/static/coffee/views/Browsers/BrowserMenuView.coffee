@@ -75,9 +75,6 @@ glados.useNameSpace 'glados.views.Browsers',
         $downloadBtnsContainer.html Handlebars.compile($('#' + $downloadBtnsContainer.attr('data-hb-template')).html())
           formats: @collection.getMeta('download_formats')
 
-        for viewLabel in @collection.getMeta('available_views')
-          console.log 'AAA VIEW MUST BE DISABLED ' + viewLabel + '--' + @checkIfViewMustBeDisabled(viewLabel)
-
         @handleSelection()
         $changeViewBtnsContainer = $(@el).find('.BCK-changeView-btns-container')
         glados.Utils.fillContentForElement $changeViewBtnsContainer,
@@ -239,19 +236,32 @@ glados.useNameSpace 'glados.views.Browsers',
 
         $currentElem = $(@)
         viewLabel = $currentElem.attr('data-view')
-        threshold = 'some'
-        if glados.Settings.VIEW_SELECTION_THRESHOLDS[viewLabel]?
-          thresholdNum = glados.Settings.VIEW_SELECTION_THRESHOLDS[viewLabel]
-          threshold = 'from ' + thresholdNum[0] + ' to ' + thresholdNum[1]
+        disableReason = $currentElem.attr('data-disabled-reason')
 
         $currentElem.qtip
           content:
-            text: 'Select ' + threshold + ' items to activate this view.'
+            text: thisView.getDisableReasonMessage(disableReason, viewLabel)
           style:
             classes:'qtip-light'
           position:
             my: 'top left'
             at: 'bottom middle'
+
+    getDisableReasonMessage: (disableReason, viewLabel) ->
+
+      console.log 'AAA GET DISABLE REASON MESSAGE: ', disableReason
+      if disableReason == glados.views.Browsers.BrowserMenuView.DISABLE_BUTTON_REASONS.TOO_MANY_ITEMS
+
+        threshold = 'some'
+        if glados.Settings.VIEW_SELECTION_THRESHOLDS[viewLabel]?
+          thresholdNum = glados.Settings.VIEW_SELECTION_THRESHOLDS[viewLabel]
+          threshold = 'from ' + thresholdNum[0] + ' to ' + thresholdNum[1]
+
+        return "Select #{threshold} items to activate this view."
+
+      if disableReason == glados.views.Browsers.BrowserMenuView.DISABLE_BUTTON_REASONS.IS_STREAMING
+
+        return "Please wait until the download is complete to activate this view."
 
     unSelectAllButtons: ->
       $(@el).find('.BCK-btn-switch-view').removeClass('selected')
