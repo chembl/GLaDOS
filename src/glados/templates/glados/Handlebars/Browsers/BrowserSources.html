@@ -94,8 +94,7 @@
     </div>
 
     <div class="BCK-LinkToAllActivitiesContainer link-to-all-activities-container"
-                                     data-hb-template="Handlebars-LinkToAllActivities"
-                                     data-hb-preloader-template="Handlebars-Common-MiniPreloader"> </div>
+                                     data-hb-template="Handlebars-LinkToAllActivities"> </div>
 
   </div>
 
@@ -103,6 +102,7 @@
 
 <script id="Handlebars-LinkToAllActivities" type="text/x-handlebars-template">
 <a target="_blank" class="BCK-LinkToAllActivities {{#if too_many_items}}disabled{{/if}}">Browse Activities</a>
+<i class="BCK-preloader fa fa-cog fa-spin fa-fw" style="display: none"></i>
 </script>
 
 <script id="Handlebars-ESResultsList" type="text/x-handlebars-template">

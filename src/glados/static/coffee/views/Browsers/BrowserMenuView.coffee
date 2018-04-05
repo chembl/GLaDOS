@@ -218,14 +218,20 @@ glados.useNameSpace 'glados.views.Browsers',
 
       $link = $linkToAllContainer.find('.BCK-LinkToAllActivities')
       $link.click $.proxy(@handleLinkToAllActivitiesClick, @)
-      return
-      linkToActPromise = @collection.getLinkToAllActivitiesPromise()
-      linkToActPromise.then (linkGot) ->
-        glados.Utils.fillContentForElement $linkToAllContainer,
-          url: linkGot
+
 
     handleLinkToAllActivitiesClick: ->
-      console.log 'handleLinkToAllActivitiesClick'
+
+      $selectionMenuContainer = $(@el).find('.BCK-selection-menu-container')
+      $linkToAllContainer = $selectionMenuContainer.find('.BCK-LinkToAllActivitiesContainer')
+      $preloader = $linkToAllContainer.find('.BCK-preloader')
+      $preloader.show()
+
+      linkToActPromise = @collection.getLinkToAllActivitiesPromise()
+
+      linkToActPromise.then (linkGot) ->
+        glados.Utils.URLS.shortenLinkIfTooLongAndOpen(linkGot)
+        $preloader.hide()
 
     #--------------------------------------------------------------------------------------
     # Download Buttons
