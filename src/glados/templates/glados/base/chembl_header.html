@@ -1,29 +1,25 @@
 {% load static %}
 <div class="chembl-header row">
-
-        <div class="chembl-logo col ">
+    <div class="inner-row col s12">
+        <div class="chembl-logo left">
+            <a href="{% url 'main' %}">
+                <img src="{% static 'img/icons/logo_white_1.png' %}"/>
+                {#            <span class="hide-on-med-and-down"> ChEMBL </span>#}
+            </a>
         </div>
 
-{#        <div class="chembl-logo col ">#}
-{#            <a href="{% url 'main' %}">#}
-{#                <img class="responsive-img" src="{% static 'img/chembl_logo.png' %}"/>#}
-{##}
-{#            </a>#}
-{#            <span class="hide-on-med-and-down"> ChEMBL </span>#}
-{#        </div>#}
 
-{#        <div class="nav-links">#}
-{#            <!--here will go the navigation links -->#}
-{#        </div>#}
-{##}
-{#        <div class="search-bar">#}
-{#            {% include "glados/SearchResultsParts/SearchBar.html" %}#}
-{#        </div>#}
-{##}
-{#        <div class="options-button col s1">#}
-{#            <a>#}
-{#                <i class="material-icons white-text">menu</i>#}
-{#            </a>#}
-{#        </div>#}
+        {#        <div class="nav-links">#}
+        {#            <!--here will go the navigation links -->#}
+        {#        </div>#}
+        {##}
+        {#        <div class="search-bar">#}
+        {#            {% include "glados/SearchResultsParts/SearchBar.html" %}#}
+        {#        </div>#}
+        {##}
+        <div class="options-button right">
+            <img src="{% static 'img/icons/menu-button.png' %}"/>
+        </div>
+    </div>
 </div>
 

@@ -154,7 +154,7 @@ a{
 
 
 $chembl-header-height: 50px;
-$header-color: #009688;
+$header-color: #62b7bd;
 $chembl-header-padding: 10px;
 
 $search-bar-font-size: 1em;
@@ -175,17 +175,42 @@ header .row {
   z-index: 5;
 
   .chembl-header {
-    padding-top: $chembl-header-padding;
-    padding-bottom: $chembl-header-padding;
     width: 100%;
     height: $chembl-header-height;
     position: relative;
     background-color: $header-color;
 
+    .inner-row {
+      padding: 0;
+      float: left;
+
+      .chembl-logo {
+        width: 50px;
+        padding: 10px;
+        height: 50px;
+        img {
+          width: 30px;
+          height: auto;
+        }
+      }
+
+      .options-button {
+        width: 50px;
+        padding: 10px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
 
   }
 }
-
 
 //#chembl-header-container {
 //  height: 0;
