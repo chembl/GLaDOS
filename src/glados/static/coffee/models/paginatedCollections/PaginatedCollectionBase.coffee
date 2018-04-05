@@ -8,6 +8,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       if @islinkToAllActivitiesEnabled()
         @on glados.Events.Collections.SELECTION_UPDATED, @resetLinkToAllActivitiesCache, @
 
+        @on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_FETCHING_STATE_CHANGED,
+        @resetLinkToAllActivitiesCache, @
+
     islinkToAllActivitiesEnabled: -> @getMeta('enable_activities_link_for_selected_entities') == true
 
     getTotalRecords: ->
