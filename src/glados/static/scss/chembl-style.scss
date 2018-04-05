@@ -134,15 +134,16 @@ main {
 }
 
 $modals-height: 80%;
-a{
-  &.disabled{
+a {
+  &.disabled {
     color: color('grey', 'base')
   }
   /** make sure all links hav the hand pointer even with no href */
-  &:hover{
+  &:hover {
     cursor: pointer;
   }
 }
+
 .no-margin {
   margin: 0 !important;
 }
@@ -151,7 +152,6 @@ a{
 * Chembl bar & and Side nav bar
 * ----------------------------------------------------------------------------------------------------------------------
 */
-
 
 $chembl-header-height: 50px;
 $header-color: #62b7bd;
@@ -169,6 +169,7 @@ header .row {
   margin-bottom: 0;
 }
 
+//PIN TOP AND SMALLEST SCREEN SIZE
 #chembl-header-container {
   height: 0;
   width: 100%;
@@ -177,38 +178,44 @@ header .row {
   .chembl-header {
     width: 100%;
     height: $chembl-header-height;
-    position: relative;
     background-color: $header-color;
+    position: relative;
+    float: left;
+     margin-top: -5px;
 
-    .inner-row {
-      padding: 0;
-      float: left;
+    .chembl-logo {
+      width: $chembl-header-height;
+      height: $chembl-header-height;
+      padding: 10px;
 
-      .chembl-logo {
-        width: 50px;
-        padding: 10px;
-        height: 50px;
-        img {
-          width: 30px;
-          height: auto;
-        }
-      }
-
-      .options-button {
-        width: 50px;
-        padding: 10px;
-        height: 50px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        img {
-          width: 20px;
-          height: 20px;
-        }
+      img {
+        width: 30px;
+        height: auto;
       }
     }
 
+    .options-button {
+      width: $chembl-header-height;
+      height: $chembl-header-height;
+      padding: 10px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+}
+
+//PINNED AND SMALLEST SCREEN SIZE
+#chembl-header-container.pinned {
+
+  .chembl-header {
+    margin-top: 0;
   }
 }
 
@@ -804,7 +811,7 @@ div#CompoundNameAndClassification .comp-phase-0 {
   padding: 0 4px;
   top: -3px;
   right: 0px;
-  &.inverted{
+  &.inverted {
     color: $primary-color-dark
   }
 }
@@ -1364,7 +1371,7 @@ em.glados-result-highlight {
       vertical-align: middle;
     }
   }
-  .embed-btn-in-card{
+  .embed-btn-in-card {
     position: absolute;
     bottom: 18px;
     right: 0px;
@@ -1373,7 +1380,7 @@ em.glados-result-highlight {
 
 .card {
   &.vertical {
-    .embed-btn-in-card{
+    .embed-btn-in-card {
       position: absolute;
       left: 20px;
     }
@@ -1464,8 +1471,6 @@ em.glados-result-highlight {
     color: #6c6c6c;
   }
 
-  //border: 2px solid $primary-color;
-  //border-radius: 5px;
   background-color: white;
 
 }
@@ -1729,7 +1734,6 @@ $max_chembl_logo_height: 60px;
     .version-number-logo {
 
       width: $max_chembl_logo_width;
-      width: $max_chembl_logo_height;
     }
   }
 }
@@ -1996,7 +2000,7 @@ span.badge-primary-color-no-float {
       font-size: 0.8em;
     }
 
-    .link-to-all-activities-container{
+    .link-to-all-activities-container {
       display: inline;
     }
   }
@@ -3842,5 +3846,3 @@ $chembl-header-height: 52.245px;
     flex-basis: calc(100% / (12 / 12));
   }
 }
-
-
