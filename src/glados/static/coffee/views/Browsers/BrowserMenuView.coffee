@@ -183,18 +183,26 @@ glados.useNameSpace 'glados.views.Browsers',
       if @collection.getTotalRecords() == 0
         return
 
-      return
-      console.log 'AAA RENDER LINK TO ALL' + (new Date())
       $selectionMenuContainer = $(@el).find('.BCK-selection-menu-container')
       $linkToAllContainer = $selectionMenuContainer.find('.BCK-LinkToAllActivitiesContainer')
 
-      if @collection.thereAreTooManyItemsForActivitiesLink()
+      tooManyItems = @collection.thereAreTooManyItemsForActivitiesLink()
+      isStreaming = @collection.isStreaming()
+      needsToBeDisabled = tooManyItems or isStreaming
+
+      if needsToBeDisabled
 
         glados.Utils.fillContentForElement $linkToAllContainer,
           too_many_items: true
 
-        qtipText = "PLease select or filter less than #{glados.Settings.VIEW_SELECTION_THRESHOLDS.Heatmap[1]} " +
-        "items to activate this link."
+
+        qtipText = switch
+          when isStreaming then \
+          "Please wait until the download is complete"
+          when tooManyItems then \
+          "Please select or filter less than #{glados.Settings.VIEW_SELECTION_THRESHOLDS.Heatmap[1]} " +
+          "items to activate this link."
+
         $linkToAllContainer.qtip
           content:
             text: qtipText
@@ -206,14 +214,18 @@ glados.useNameSpace 'glados.views.Browsers',
 
         return
 
-      glados.Utils.fillContentForElement($linkToAllContainer, paramsObj={}, customTemplate=undefined,
-        fillWithPreloader=true)
+      glados.Utils.fillContentForElement($linkToAllContainer)
 
+      $link = $linkToAllContainer.find('.BCK-LinkToAllActivities')
+      $link.click $.proxy(@handleLinkToAllActivitiesClick, @)
+      return
       linkToActPromise = @collection.getLinkToAllActivitiesPromise()
       linkToActPromise.then (linkGot) ->
         glados.Utils.fillContentForElement $linkToAllContainer,
           url: linkGot
 
+    handleLinkToAllActivitiesClick: ->
+      console.log 'handleLinkToAllActivitiesClick'
 
     #--------------------------------------------------------------------------------------
     # Download Buttons

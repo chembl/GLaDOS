@@ -666,11 +666,3 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     islinkToAllActivitiesEnabled: -> @collection.getMeta('enable_activities_link_for_selected_entities') == true
 
     renderLinkToAllActivities: ->
-
-      if @collection.thereAreTooManyItemsForActivitiesLink()
-        console.log 'too many items for link!'
-        return
-      linkToActPromise = @collection.getLinkToAllActivitiesPromise()
-      linkToActPromise.then (linkGot) ->
-        console.log 'renderLinkToAllActivities: '
-        console.log linkGot
