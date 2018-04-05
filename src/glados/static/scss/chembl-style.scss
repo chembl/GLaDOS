@@ -156,14 +156,15 @@ a {
 $chembl-header-height: 50px;
 $header-color: #62b7bd;
 $chembl-header-padding: 10px;
+$search-bar-font-size-small: 0.8em;
+$search-bar-font: helvetica, Arial, sans-serif;
+
 
 $search-bar-font-size: 1em;
-$search-bar-font-size-small: 1.3em;
 $chembl-header-shrink-ratio: 0.65;
 $large-font-size: 0.9rem;
 $medium-font-size: 0.8rem;
 $small-font-size: 0.7rem;
-$hexagon-lateral-distance-proportion: 0.0669872981;
 
 header .row {
   margin-bottom: 0;
@@ -215,8 +216,10 @@ header .row {
 
         .chembl-search-bar {
           margin: 0;
-          border: solid red 1px;
           height: 100%;
+          font-family: $search-bar-font;
+          font-size: $search-bar-font-size-small;
+          padding-left: 10px;
         }
 
         .bar-button {
@@ -1564,7 +1567,7 @@ $search-items-height: 35px;
   &:focus {
     background: none;
     border: none;
-    outline-style: dashed lighten($primary-color, 10%) 2px !important;
+    outline-style: dashed lighten($primary-color, 40%) 2px !important;
   }
   &:hover {
     background: none;
