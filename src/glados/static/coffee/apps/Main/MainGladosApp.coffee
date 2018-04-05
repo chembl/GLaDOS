@@ -12,6 +12,7 @@ glados.useNameSpace 'glados.apps.Main',
       search_results: 'Handlebars-SearchResultsLayout'
       structure_search_results: 'Handlebars-SubstructureSearchResultsLayout'
       browser: 'Handlebars-MainBrowserContent'
+      unichem_connectivity: 'Handlebars-MainUnichemConnectivityContent'
 
     @init = ->
 
@@ -192,6 +193,13 @@ glados.useNameSpace 'glados.apps.Main',
     @initReportCard = (entityName, chemblID) ->
 
       console.log 'INIT REPORT CARD'
+
+    @initCompoundUnichemConnectivity = (inchiKey) ->
+
+      promise = @prepareContentFor('unichem_connectivity')
+
+      promise.then ->
+        console.log 'initCompoundUnichemConnectivity ', inchiKey
 
 
 
