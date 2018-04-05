@@ -1,11 +1,18 @@
 <!-- ChEMBL Header SearchBar -->
-<div id="chembl-header-search-bar-container">
+{% load static %}
+<div id="chembl-header-search-bar-container" class="bar-wrapper">
     {% block autocomplete_chembl_header %}
         {% include "glados/SearchResultsParts/SearchBarAutocomplete.html" %}
     {% endblock %}
-    <div class="bar-wrapper">
-        <input type="search" value="" name="search-str" class="chembl-search-bar">
-    </div>
+
+    <input type="search" value="" name="search-str" class="chembl-search-bar">
+
+    <a class="bar-button">
+        <img src="{% static 'img/icons/structure_icon.png' %}"/>
+    </a>
+    <a class="bar-button">
+        <img src="{% static 'img/icons/search_icon.png' %}"/>
+    </a>
 </div>
 {#    <div class="max-expand-content">#}
 {#        <li>#}
