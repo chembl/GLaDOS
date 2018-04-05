@@ -96,11 +96,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getItemsFetchingState: -> @getMeta('items_fetching_state')
     getFacetsFetchingState: -> @getMeta('facets_fetching_state')
     setItemsFetchingState: (newFetchingState) ->
-      @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.ITEMS_FETCHING_STATE_CHANGED)
       @setMeta('items_fetching_state', newFetchingState)
+      @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.ITEMS_FETCHING_STATE_CHANGED)
     setFacetsFetchingState: (newFetchingState) ->
-      @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_FETCHING_STATE_CHANGED)
       @setMeta('facets_fetching_state', newFetchingState)
+      @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_FETCHING_STATE_CHANGED)
     setInitialFetchingState: ->
       @setMeta('items_fetching_state',
         glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.INITIAL_STATE)
@@ -111,14 +111,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       itemsAreReady = @getMeta('items_fetching_state') == \
       glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.ITEMS_READY
-      console.log 'itemsAreReady: ', itemsAreReady
       return itemsAreReady
 
-    collectionIsReady: ->
-      console.log 'itemsAreReady: ', @itemsAreReady()
+    facetsAreReady: ->
+
       facetsAreReady = @getMeta('facets_fetching_state') == \
       glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.FACETS_READY
-      console.log 'facetsAreReady: ', facetsAreReady
+      return facetsAreReady
+
+    isReady: -> @itemsAreReady() and @facetsAreReady()
 
 glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS =
   ITEMS_FETCHING_STATE_CHANGED: 'ITEMS_FETCHING_STATE_CHANGED'

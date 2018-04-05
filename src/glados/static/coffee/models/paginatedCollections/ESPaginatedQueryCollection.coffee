@@ -226,7 +226,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       # Call Backbone's fetch
       return Backbone.Collection.prototype.fetch.call(this, fetchESOptions)
-    
+
     # ------------------------------------------------------------------------------------------------------------------
     # Elastic Search Query structure
     # ------------------------------------------------------------------------------------------------------------------
@@ -477,6 +477,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @__last_facets_promise = new Promise(promiseFunc.bind(@))
         triggerEvent = ()->
           @trigger('facets-changed')
+          @setFacetsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.FACETS_READY)
         @__last_facets_promise.then(triggerEvent.bind(@))
 
       if @__last_facets_promise?

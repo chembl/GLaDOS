@@ -19,11 +19,8 @@ glados.useNameSpace 'glados.views.Browsers',
       @showPreloader()
       @collection.on 'reset do-repaint sort', @renderViewState, @
       @collection.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_FETCHING_STATE_CHANGED,
-      (->
-        console.log 'AAA FETCHING STATE CHANGED'
-        console.log 'AAA' + @collection.getFacetsFetchingState()
-      ),
-      @
+      @renderViewState, @
+
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @handleSelection, @
 
       @currentViewType = @collection.getMeta('default_view')
@@ -61,6 +58,13 @@ glados.useNameSpace 'glados.views.Browsers',
     renderViewState: ->
 
       if not $(@el).is(":visible")
+        return
+
+      console.log 'AAA RENDER VIEW STATE'
+      console.log 'AAA IS STREAMING: ', @collection.isStreaming()
+      console.log 'AAA  coll is ready: ', @collection.isReady()
+      if not @collection.isReady() and not @collection.isStreaming()
+        @showPreloader()
         return
 
       console.log 'AAA RENDER MENU VIEW' + (new Date())
@@ -174,6 +178,7 @@ glados.useNameSpace 'glados.views.Browsers',
       if @collection.getTotalRecords() == 0
         return
 
+      return
       console.log 'AAA RENDER LINK TO ALL' + (new Date())
       $selectionMenuContainer = $(@el).find('.BCK-selection-menu-container')
       $linkToAllContainer = $selectionMenuContainer.find('.BCK-LinkToAllActivitiesContainer')
