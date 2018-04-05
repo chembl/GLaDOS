@@ -7,25 +7,25 @@
 //@import "components/variables";
 
 /* -------- VARIABLES -------- */
+
+//header
 $chembl-header-height: 54px;
 $chembl-header-padding: 10px;
 
+//colors
 $primary-color: #62b7bd;
 $header-darker: #09979B;
 
+//search bar
 $search-bar-height: 25px;
-
+$search-bar-height-wider: 30px;
 $search-bar-font-size-small: 0.8em;
+$search-bar-font-size-big: 1em;
 $search-bar-font: helvetica, Arial, sans-serif;
 $search-bar-max-width: 600px;
 
-$search-bar-font-size: 1em;
-$chembl-header-shrink-ratio: 0.65;
-$large-font-size: 0.9rem;
-$medium-font-size: 0.8rem;
-$small-font-size: 0.7rem;
 
-/* -------- PIN TOP AND SMALLEST SCREEN SIZE -------- */
+/* -------- PIN TOP AND DEFAULT STYLES -------- */
 
 header .row {
   margin-bottom: 0;
@@ -80,28 +80,29 @@ header .row {
       align-items: center;
 
       .bar-wrapper {
-        height: $search-bar-height;
         width: 100%;
         background-color: white;
         display: flex;
 
+        -webkit-transition: height 100ms ease-in; /* Safari */
+        transition: height 100ms ease-in;
+
         .chembl-search-bar {
           font-family: $search-bar-font;
-          font-size: $search-bar-font-size-small;
           padding-left: $chembl-header-padding;
           margin: 0;
           height: 100%;
         }
 
         .bar-button {
-          padding: $chembl-header-padding/2;
+          padding: $chembl-header-padding;
           height: 100%;
           display: flex;
           justify-content: center;
           align-items: center;
 
           img {
-            width: 15px;
+            //width: 15px;
             height: auto;
           }
 
@@ -123,13 +124,40 @@ header .row {
   }
 }
 
+/* -------- SMALL DEVICES <748px -------- */
+@media (max-width: 748px) {
 
-/* SMALL BREAKPOINT */
-$search-bar-height-wider: 25px;
-$small-screen-up: 602px !default;
-@media only screen and (min-width: $small-screen-up) {
+  .bar-wrapper {
+    height: $search-bar-height;
+    .chembl-search-bar {
+      font-size: $search-bar-font-size-small;
+    }
+    .bar-button {
+      img {
+        width: 15px;
+      }
+    }
+  }
+}
+
+
+/* -------- SMALL BREAKPOINT >748px -------- */
+
+@media (min-width: 749px) {
+
   .bar-wrapper {
     height: $search-bar-height-wider;
-    background-color: red;
+
+    .chembl-search-bar {
+      font-size: $search-bar-font-size-big;
+    }
+
+     .bar-button {
+      img {
+        width: 22px;
+      }
+    }
   }
+
+
 }
