@@ -78,6 +78,9 @@ header .row {
       display: flex;
       align-items: center;
 
+       -webkit-transition: max-width 300ms ease-in;
+        transition: max-width 300ms ease-in;
+
       .bar-wrapper {
         width: 100%;
         background-color: white;
@@ -188,8 +191,8 @@ header .row {
 
 }
 
-/* -------- BREAKPOINT XL > 1200px -------- */
-@media (max-width: 1200px) {
+/* -------- BREAKPOINT XL > 1300px -------- */
+@media (max-width: 1300px) {
 
   .search-bar {
     max-width: $search-bar-max-width;
@@ -197,9 +200,13 @@ header .row {
 
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1300px) {
 
   .search-bar {
     max-width: $search-bar-max-width-xl;
+
+    .search-button{
+      width: 100px;
+    }
   }
 }
