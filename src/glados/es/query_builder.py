@@ -256,9 +256,9 @@ class QueryBuilder:
                 'max_score': best_query_i_score
             }
 
-        sorted_keys_by_score = sorted(best_queries.keys(), key=lambda key: best_queries[key]['max_score'], reverse=True)
+        sorted_indexes_by_score = sorted(best_queries.keys(), key=lambda key: best_queries[key]['max_score'], reverse=True)
         for i, es_index_i in enumerate(indexes):
             best_queries[es_index_i]['max_score'] -= (len(indexes)-i)/(10**(len(es_base_queries)+1))
             best_queries[es_index_i]['max_score'] = round(best_queries[es_index_i]['max_score'], len(es_base_queries))
 
-        return best_queries, sorted_keys_by_score
+        return best_queries, sorted_indexes_by_score

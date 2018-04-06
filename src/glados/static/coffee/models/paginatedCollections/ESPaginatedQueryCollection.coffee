@@ -183,7 +183,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     # Prepares an Elastic Search query to search in all the fields of a document in a specific index
     fetch: (options, testMode=false) ->
-
+      stack = new Error().stack
+      console.error("PRINTING CALL STACK")
+      console.error( stack )
       @trigger('before_fetch_elastic')
       @url = @getURL()
 

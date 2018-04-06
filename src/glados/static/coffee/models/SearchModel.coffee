@@ -198,18 +198,24 @@ SearchModel = Backbone.Model.extend
     
   parseQueryString: (rawQueryString)->
 
+    indexName2ResourceName = {}
     done_callback = (serverJsonResponse)->
       jsonResponse = JSON.parse(serverJsonResponse)
       parsedQuery = jsonResponse['parsed_query']
       bestESQueries = jsonResponse['best_es_base_queries']
+      sortedIndexesByScore = jsonResponse['sorted_indexes_by_score']
+      sortedResourceNamesByScore = (indexName2ResourceName[indexName] for indexName in sortedIndexesByScore)
       expressionStr = @readParsedQueryRecursive(parsedQuery)
       @set('queryString', expressionStr)
       @set('jsonQuery', parsedQuery)
       @set('bestESQueries', bestESQueries)
+      @set('sortedResourceNamesByScore', sortedResourceNamesByScore)
 
     indexes_names = []
     for resource_name, resource_es_collection of @getResultsListsDict()
-      indexes_names.push resource_es_collection.getMeta('index_name')
+      idxName = resource_es_collection.getMeta('index_name')
+      indexName2ResourceName[idxName] = resource_name
+      indexes_names.push idxName
 
 
     ajaxDeferred = glados.doCSRFPost glados.Settings.SEARCH_RESULTS_PARSER_ENDPOINT, {
@@ -228,7 +234,7 @@ SearchModel = Backbone.Model.extend
       resource_es_collection.search bestESQueries[indexName].query
       resource_es_collection.setMeta('max_score', bestESQueries[indexName].max_score)
       resource_es_collection.setMeta('total_records', bestESQueries[indexName].total)
-      console.warn(resource_es_collection.getMeta('max_score'), resource_es_collection.getMeta('total_records'))
+      console.warn(resource_name, resource_es_collection.getMeta('max_score'), resource_es_collection.getMeta('total_records'))
     @trigger('updated_search_and_scores')
 
   # coordinates the search across the different results lists

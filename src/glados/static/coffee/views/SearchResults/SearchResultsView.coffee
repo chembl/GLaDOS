@@ -10,24 +10,24 @@ glados.useNameSpace 'glados.views.SearchResults',
       @$searchResultsListsContainersDict = {}
       @selected_es_entity = @attributes?.selected_es_entity || null
 
-      $listsContainer = $(@el).find('.BCK-ESResults-lists')
+      @$listsContainer = $(@el).find('.BCK-ESResults-lists')
       # @model.getResultsListsDict() and glados.models.paginatedCollections.Settings.ES_INDEXES
       # Share the same keys to access different objects
       @model.resetSearchResultsListsDict()
       resultsListsDict = @model.getResultsListsDict()
 
-      $listsContainer.empty()
+      @$listsContainer.empty()
       for resourceName, resultsListSettings of glados.models.paginatedCollections.Settings.ES_INDEXES
 
         if resultsListsDict[resourceName]?
           resultsListViewID = @getBCKListContainerBaseID(resourceName)
-          $container = $('<div id="' + resultsListViewID + '-container">')
+          $container = $('<div class="' + resultsListViewID + '-container">')
           glados.Utils.fillContentForElement($container, {
               entity_name: glados.models.paginatedCollections.Settings.ES_INDEXES[resourceName].LABEL
             },
             'Handlebars-ESResultsList'
           )
-          $listsContainer.append($container)
+          @$listsContainer.append($container)
 
           # Initialises a Menu view which will be in charge of handling the menu bar,
           # Remember that this is the one that creates, shows and hides the Results lists views! (Matrix, Table, Graph, etc)
@@ -40,11 +40,12 @@ glados.useNameSpace 'glados.views.SearchResults',
           resultsBrowserI.render()
           @browsersDict[resourceName] = resultsBrowserI
           @$searchResultsListsContainersDict[resourceName] = $('#'+resultsListViewID + '-container')
-      @model.on('updated_search_scores', @sortResultsListsViews, @)
-      @model.on('updated_search_scores', @renderTabs, @)
 
       @renderTabs()
       @showSelectedResourceOnly()
+
+      @model.on('updated_search_and_scores', @sortResultsListsViews, @)
+      @model.on('updated_search_and_scores', @renderTabs, @)
 
     # ------------------------------------------------------------------------------------------------------------------
     # sort Elements
@@ -52,38 +53,13 @@ glados.useNameSpace 'glados.views.SearchResults',
     sortResultsListsViews: ->
       # If an entity is selected the ordering is skipped
       if not @selected_es_entity
-        sorted_scores = []
-        insert_score_in_order = (_score)->
-          inserted = false
-          for score_i, i in sorted_scores
-            if score_i < _score
-              sorted_scores.splice(i,0,_score)
-              inserted = true
-              break
-          if not inserted
-            sorted_scores.push(_score)
-        resources_names_by_score = {}
-        srl_dict = @model.getResultsListsDict()
-        for key_i, val_i of glados.models.paginatedCollections.Settings.ES_INDEXES
-          if _.has(srl_dict, key_i)
-            score_i = srl_dict[key_i].getMeta("max_score")
-            total_records = srl_dict[key_i].getMeta("total_records")
-            if not score_i
-              score_i = 0
-            if not total_records
-              total_records = 0
-
-            if not _.has(resources_names_by_score,score_i)
-              resources_names_by_score[score_i] = []
-            resources_names_by_score[score_i].push(key_i)
-            insert_score_in_order(score_i)
-
-        $listsContainer = $(@el).find('.BCK-ESResults-lists')
-        for score_i in sorted_scores
-          for resource_name in resources_names_by_score[score_i]
-            idToMove =  @getBCKListContainerBaseID(resource_name) + '-container'
-            $div_key_i = $('#' + idToMove)
-            $listsContainer.append($div_key_i)
+        sortedResourceNamesByScore = @model.get('sortedResourceNamesByScore')
+        for resource_name in sortedResourceNamesByScore
+          console.warn 'resource name:', resource_name
+          idToMove =  @getBCKListContainerBaseID(resource_name) + '-container'
+          $div_key_i = @$listsContainer.find('.' + idToMove)
+          @$listsContainer.append($div_key_i)
+          console.warn 'APENDING', idToMove, $div_key_i.length
 
     # ------------------------------------------------------------------------------------------------------------------
     # Tabs Handling
