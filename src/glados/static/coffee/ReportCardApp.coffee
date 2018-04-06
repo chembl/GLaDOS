@@ -5,6 +5,8 @@ glados.useNameSpace 'glados',
 
       glados.apps.Main.MainGladosApp.hideMainSplashScreen()
 
+      @sectionModels = {}
+
       GlobalVariables.CHEMBL_ID = glados.Utils.URLS.getCurrentModelChemblID()
       @scrollSpyHandler = new glados.models.ScrollSpy.ScrollSpyHandler
       ScrollSpyHelper.initializeScrollSpyPinner()
@@ -12,6 +14,12 @@ glados.useNameSpace 'glados',
         el: $('.BCK-ScrollSpy')
         model: @scrollSpyHandler
       glados.Utils.checkReportCardByChemblId(GlobalVariables.CHEMBL_ID)
+
+    @updateSectionTitle = (sectionID, newTitle) ->
+
+      sectionModel = @sectionModels[sectionID]
+      sectionModel.set('title', newTitle)
+      @scrollSpyHandler.updateSectionTitle(sectionID, newTitle)
 
     @hideSection = (sectionID) ->
       @scrollSpyHandler.hideSection(sectionID)
@@ -31,7 +39,9 @@ glados.useNameSpace 'glados',
 
       new glados.views.ReportCards.SectionView
         el: $('#' + sectionID)
-        model:sectionModel
+        model: sectionModel
+
+      @sectionModels[sectionID] = sectionModel
 
     # you can provide chembld iD or a model already created
     @initMiniReportCard = (Entity, $containerElem, chemblID, model, customTemplate, additionalTemplateParams={},

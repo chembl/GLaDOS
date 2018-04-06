@@ -55,4 +55,14 @@ describe 'Scroll Spy Handler', ->
 
     expect(sections[sectionName].state).toBe(glados.models.ScrollSpy.ScrollSpyHandler.SECTION_STATES.SHOW)
 
+  it 'Changes the details of a section', ->
 
+    sectionTitle = 'Section1'
+    sectionID = 'id1'
+    scrollSpyHandler.registerSection(sectionID, sectionTitle)
+
+    newTitle = 'newTitle'
+    scrollSpyHandler.updateSectionTitle(sectionID, newTitle)
+
+    sections = scrollSpyHandler.get('sections')
+    expect(sections[sectionID].label).toBe(newTitle)
