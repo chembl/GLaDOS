@@ -10,9 +10,8 @@
 
 //header
 $chembl-header-height: 54px;
-$chembl-header-height-pintop: 120px;
+$chembl-header-height-pintop: 140px;
 $chembl-header-padding: 10px;
-$chembl-name-font: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
 $side-buttons-width-big: 180px;
 
 //colors
@@ -24,9 +23,13 @@ $search-bar-height: 25px;
 $search-bar-height-wider: 30px;
 $search-bar-font-size-small: 0.8em;
 $search-bar-font-size-big: 1em;
-$search-bar-font: helvetica, Arial, sans-serif;
 $search-bar-max-width: 600px;
 $search-bar-max-width-xl: 1000px;
+
+//fonts
+$chembl-name-font: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+$search-bar-font: helvetica, Arial, sans-serif;
+$verdana: "ChEMBL_Verdana", Verdana, sans-serif;
 
 /* -------- DEFAULT STYLES -------- */
 header .row {
@@ -46,8 +49,8 @@ header .row {
     float: left;
     margin-top: -5px;
 
-    -webkit-transition: height 200ms ease-out;
-    transition: height 200ms ease-in;
+    -webkit-transition: all 200ms ease-out;
+    transition: all 200ms ease-in;
 
     .inner-row {
       display: flex;
@@ -192,6 +195,9 @@ header .row {
     width: $side-buttons-width-big;
   }
 
+  .search-button {
+      width: 100px;
+    }
 }
 
 /* -------- BREAKPOINT XL > 1300px -------- */
@@ -207,27 +213,63 @@ header .row {
   .search-bar {
     max-width: $search-bar-max-width-xl;
 
-    .search-button {
-      width: 100px;
-    }
   }
 }
 
 /* -------- UNPINNED HEADER > 992px -------- */
+
+@media (min-width: 992px) {
+  .inner-row {
+    width: 100%;
+  }
+}
+
 @media (min-width: 992px) {
 
   #chembl-header-container.pin-top {
 
     .chembl-header {
       height: $chembl-header-height-pintop;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
 
       .inner-row {
-        max-width: 1048px;
-        padding-top: 15px;
+        width: 95%;
+        max-width: 1548px;
+        padding-top: 20px;
 
         &.nav-links-wrapper {
-          position: absolute;
-          bottom: 0;
+
+          .header-nav-links {
+            margin-top: 0;
+            margin-bottom: 0;
+            display: flex;
+
+            .nav-link {
+              font-size: 0.8em;
+              font-family: $verdana;
+              letter-spacing: 0.1em;
+
+
+              padding: 5px 20px 5px 20px;
+              margin-right: 2px;
+              border-right: solid white 1.5px;
+
+              a {
+                color: white;
+              }
+            }
+
+          }
+
+        }
+        .search-bar {
+          max-width: 50%;
+
+          .search-button {
+            width: 100px;
+          }
         }
       }
 
