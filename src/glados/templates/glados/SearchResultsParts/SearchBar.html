@@ -1,38 +1,36 @@
 {% load static %}
-<div id="chembl-header-search-bar-container" class="bar-wrapper">
+<div class="search-bar-container">
+    <div id="chembl-header-search-bar-container" class="bar-wrapper">
 
-    {% block autocomplete_chembl_header %}
-        {% include "glados/SearchResultsParts/SearchBarAutocomplete.html" %}
-    {% endblock %}
+        {% block autocomplete_chembl_header %}
+            {% include "glados/SearchResultsParts/SearchBarAutocomplete.html" %}
+        {% endblock %}
 
-    <input type="search" value="" name="search-str" class="chembl-search-bar" placeholder="Search in ChEMBL">
+        <input type="search" value="" name="search-str" class="chembl-search-bar" placeholder="Search in ChEMBL">
 
-    <a class="bar-button draw-structure tooltipped hide-on-small-only"
-                                data-position="left" data-delay="50" data-tooltip="Draw a structure">
-        <img src="{% static 'img/icons/structure_icon2.png' %}"/>
-    </a>
+        <a class="bar-button draw-structure tooltipped hide-on-small-only"
+           data-position="left" data-delay="50" data-tooltip="Draw a structure">
+            <img src="{% static 'img/icons/structure_icon2.png' %}"/>
+        </a>
 
-    <a class="bar-button draw-structure tooltipped hide-on-med-and-up"  href="{% url 'main' %}marvin_search_fullscreen/"
-                                data-position="left" data-delay="50" data-tooltip="Draw a structure">
-        <img src="{% static 'img/icons/structure_icon2.png' %}"/>
+        <a class="bar-button draw-structure tooltipped hide-on-med-and-up"
+           href="{% url 'main' %}marvin_search_fullscreen/"
+           data-position="left" data-delay="50" data-tooltip="Draw a structure">
+            <img src="{% static 'img/icons/structure_icon2.png' %}"/>
 
-    </a>
+        </a>
 
 
-    <a class="bar-button search-button">
-        <img src="{% static 'img/icons/search_icon.png' %}"/>
-    </a>
+        <a class="bar-button search-button">
+            <img src="{% static 'img/icons/search_icon.png' %}"/>
+        </a>
+    </div>
+
+    <div class="search-examples show-on-large-pin-top" style="display: none">
+        Example:
+        <a href="{% url 'main' %}g/#search_results/Dopamine">Dopamine</a>,
+        <a href="{% url 'main' %}g/#search_results/Aspirin">Aspirin</a>,
+        <a href="{% url 'main' %}g/#search_results/NCCc1ccc(O)c(O)c1">NCCc1ccc(O)c(O)c1</a>,
+        <a href="{% url 'main' %}g/#search_results/Liver">Liver</a>
+    </div>
 </div>
-
-{##}
-{#<div class="example-link-container teal-text lighten-5">#}
-{#    <b class="white-text lighten-5">Examples: </b>#}
-{#    <a class="example-link" href="{% url 'main' %}g/#search_results/Dopamine">Dopamine</a>,#}
-{#    <span class="hide-on-small-only"><a class="example-link"#}
-{#                                        href="{% url 'main' %}g/#search_results/Aspirin">Aspirin</a>,</span>#}
-{#    <a class="example-link" href="{% url 'main' %}g/#search_results/NCCc1ccc(O)c(O)c1">NCCc1ccc(O)c(O)c1</a><span#}
-{#        class="hide-on-small-only no-padding no-margin">,</span>#}
-{#    <span class="hide-on-small-only"><a class="example-link hide-on-small-only"#}
-{#                                        href="{% url 'main' %}g/#search_results/Liver">Liver</a></span>#}
-{#</div>#}
-{##}

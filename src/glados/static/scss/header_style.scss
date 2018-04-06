@@ -94,37 +94,54 @@ header .row {
         -webkit-transition: max-width 200ms ease-in;
         transition: max-width 200ms ease-in;
 
-        .bar-wrapper {
-          width: 100%;
-          background-color: white;
-          display: flex;
+        .search-bar-container {
+          width:100%;
 
-          -webkit-transition: height 200ms ease-in;
-          transition: height 200ms ease-in;
-
-          .chembl-search-bar {
-            font-family: $search-bar-font;
-            padding-left: $chembl-header-padding;
-            margin: 0;
-            height: 100%;
-          }
-
-          .bar-button {
-            padding: $chembl-header-padding;
-            height: 100%;
+          .bar-wrapper {
+            width: 100%;
+            background-color: white;
             display: flex;
-            justify-content: center;
-            align-items: center;
 
-            img {
-              height: auto;
-              -webkit-transition: height, width 200ms ease-in;
-              transition: height, width 200ms ease-in;
+            -webkit-transition: height 200ms ease-in;
+            transition: height 200ms ease-in;
+
+            .chembl-search-bar {
+              font-family: $search-bar-font;
+              padding-left: $chembl-header-padding;
+              margin: 0;
+              height: 100%;
             }
 
-            &.search-button {
-              background-color: $header-darker;
+            .bar-button {
+              padding: $chembl-header-padding;
+              height: 100%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
 
+              img {
+                height: auto;
+                -webkit-transition: height, width 200ms ease-in;
+                transition: height, width 200ms ease-in;
+              }
+
+              &.search-button {
+                background-color: $header-darker;
+
+              }
+            }
+          }
+
+          .search-examples {
+            color: white;
+            font-family: $chembl-name-font;
+            font-size: 0.8em;
+            margin-top: 0.5em;
+            letter-spacing: 0.05em;
+
+            a {
+              color: white;
+              text-decoration: underline;
             }
           }
         }
@@ -218,11 +235,6 @@ header .row {
 
 /* -------- UNPINNED HEADER > 992px -------- */
 
-@media (min-width: 992px) {
-  .inner-row {
-    width: 100%;
-  }
-}
 
 @media (min-width: 992px) {
 
@@ -278,7 +290,7 @@ header .row {
       }
 
       .show-on-large-pin-top {
-        visibility: visible !important;
+        display: flex !important;
       }
     }
   }
