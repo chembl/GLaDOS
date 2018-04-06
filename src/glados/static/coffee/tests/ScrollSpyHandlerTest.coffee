@@ -55,4 +55,5 @@ describe 'Scroll Spy Handler', ->
 
     expect(sections[sectionName].state).toBe(glados.models.ScrollSpy.ScrollSpyHandler.SECTION_STATES.SHOW)
 
+  it 'Changes the details of a section', ->
 

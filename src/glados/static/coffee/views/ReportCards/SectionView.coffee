@@ -5,7 +5,10 @@ glados.useNameSpace 'glados.views.ReportCards',
       'click .BCK-toggle-expand-collapse': 'toggleExpandCollapse'
 
     initialize: ->
+      @model.on 'change', @render, @
+      @render()
 
+    render: ->
       $sectionHeader = $(@el).find('.BCK-Section-header')
       glados.Utils.fillContentForElement $sectionHeader,
         title: @model.get('title')
