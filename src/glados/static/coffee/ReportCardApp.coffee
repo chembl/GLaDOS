@@ -20,7 +20,8 @@ glados.useNameSpace 'glados',
       console.log 'AAA updateSectionTitle: ', sectionID, ' : ', newTitle
       sectionModel = @sectionModels[sectionID]
       sectionModel.set('title', newTitle)
-      
+      @scrollSpyHandler.updateSectionTitle(sectionID, newTitle)
+
     @hideSection = (sectionID) ->
       @scrollSpyHandler.hideSection(sectionID)
       $('#' + sectionID).hide()

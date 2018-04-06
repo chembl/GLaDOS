@@ -57,3 +57,12 @@ describe 'Scroll Spy Handler', ->
 
   it 'Changes the details of a section', ->
 
+    sectionTitle = 'Section1'
+    sectionID = 'id1'
+    scrollSpyHandler.registerSection(sectionID, sectionTitle)
+
+    newTitle = 'newTitle'
+    scrollSpyHandler.updateSectionTitle(sectionID, newTitle)
+
+    sections = scrollSpyHandler.get('sections')
+    expect(sections[sectionID].label).toBe(newTitle)
