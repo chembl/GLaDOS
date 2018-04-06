@@ -97,6 +97,7 @@ CompoundNameClassificationView = CardView.extend
       $(@el).find('#Bck-MOLFORMULA').parent().parent().hide()
     else
       $(@el).find('#Bck-MOLFORMULA').text(@model.get('molecule_properties')['full_molformula'])
+      $(@el).find('#Bck-FULLMWT').text("- #{@model.get('molecule_properties')['full_mwt']}")
 
   renderSynonymsAndTradeNames: ->
     all_syns = @model.get('molecule_synonyms')
