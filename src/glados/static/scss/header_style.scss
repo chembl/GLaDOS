@@ -25,6 +25,7 @@ $search-bar-font-size-small: 0.8em;
 $search-bar-font-size-big: 1em;
 $search-bar-font: helvetica, Arial, sans-serif;
 $search-bar-max-width: 600px;
+$search-bar-max-width-xl: 1000px;
 
 
 /* -------- DEFAULT STYLES -------- */
@@ -47,38 +48,30 @@ header .row {
     display: flex;
     justify-content: space-between;
 
-    .header-button {
+    .burger-button, .chembl-logo {
       height: $chembl-header-height;
       padding: $chembl-header-padding;
       display: flex;
       justify-content: flex-end;
       align-items: center;
+    }
 
-      &.chembl-logo {
-        img {
-          width: 30px;
-          height: auto;
-        }
-        span {
-          padding-left: $chembl-header-padding;
-          padding-top: $chembl-header-padding;
-          font-family: $chembl-name-font;
-          font-size: 30px;
-        }
+    .chembl-logo {
+      img {
+        width: 30px;
+        height: auto;
       }
-
-      &.options-button {
-        img {
-          width: 20px;
-          height: 20px;
-        }
+      span {
+        padding-left: $chembl-header-padding;
+        padding-top: $chembl-header-padding;
+        font-family: $chembl-name-font;
+        font-size: 30px;
       }
     }
 
     .search-bar {
       height: $chembl-header-height;
       padding: $chembl-header-padding;
-      max-width: $search-bar-max-width;
       float: left;
       background: none;
       flex-grow: 2;
@@ -109,6 +102,7 @@ header .row {
 
           img {
             height: auto;
+            transition: height, width 100ms ease-in;
           }
 
           &.search-button {
@@ -145,11 +139,17 @@ header .row {
       }
     }
   }
+
+  .burger-button {
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
 }
 
 
-/* -------- SMALL BREAKPOINT >748px -------- */
-
+/* -------- SMALL BREAKPOINT SM >748px -------- */
 @media (min-width: 749px) {
 
   .bar-wrapper {
@@ -169,20 +169,37 @@ header .row {
       }
     }
   }
+
+  .burger-button {
+    img {
+      margin-right: 10px;
+      width: 30px;
+      height: 30px;
+    }
+  }
 }
 
 /* -------- BREAKPOINT L > 992px -------- */
 @media (min-width: 992px) {
 
-  .header-button  {
+  .chembl-logo {
     width: $side-buttons-width-big;
   }
+
 }
 
 /* -------- BREAKPOINT XL > 1200px -------- */
+@media (max-width: 1200px) {
+
+  .search-bar {
+    max-width: $search-bar-max-width;
+  }
+
+}
+
 @media (min-width: 1200px) {
 
-  .header-button  {
-    width: $side-buttons-width-big;
+  .search-bar {
+    max-width: $search-bar-max-width-xl;
   }
 }
