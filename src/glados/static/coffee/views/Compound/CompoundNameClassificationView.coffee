@@ -93,11 +93,17 @@ CompoundNameClassificationView = CardView.extend
     $(@el).find('#Bck-MAX_PHASE').find('.tooltipped').tooltip()
 
   renderMolFormula: ->
+
     if @model.get('structure_type') == 'SEQ' or @model.get('structure_type') == 'NONE'
       $(@el).find('#Bck-MOLFORMULA').parent().parent().hide()
     else
-      $(@el).find('#Bck-MOLFORMULA').text(@model.get('molecule_properties')['full_molformula'])
-      $(@el).find('#Bck-FULLMWT').text("- #{@model.get('molecule_properties')['full_mwt']}")
+      molformula = @model.get('molecule_properties')['full_molformula']
+      $(@el).find('#Bck-MOLFORMULA').text(molformula)
+      molWt = @model.get('molecule_properties')['full_mwt']
+      $(@el).find('#Bck-FULLMWT').text("- #{molWt}")
+
+      console.log 'molformula: ', molformula
+      console.log 'molWt: ', molWt
 
   renderSynonymsAndTradeNames: ->
     all_syns = @model.get('molecule_synonyms')

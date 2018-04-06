@@ -15,7 +15,13 @@ CompoundCalculatedParentPropertiesView = CardView.extend(DownloadViewExt).extend
       @hideSection()
       return
 
-    @updateSectionTitle('holaa')
+
+    molHierarchy = @model.get('molecule_hierarchy')
+    if molHierarchy?
+      #is salt?
+      if molHierarchy.molecule_chembl_id != molHierarchy.parent_chembl_id
+        @updateSectionTitle('Calculated Parent Properties')
+
     @showSection()
 
     thisView = @

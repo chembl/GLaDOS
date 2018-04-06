@@ -17,7 +17,6 @@ glados.useNameSpace 'glados',
 
     @updateSectionTitle = (sectionID, newTitle) ->
 
-      console.log 'AAA updateSectionTitle: ', sectionID, ' : ', newTitle
       sectionModel = @sectionModels[sectionID]
       sectionModel.set('title', newTitle)
       @scrollSpyHandler.updateSectionTitle(sectionID, newTitle)
