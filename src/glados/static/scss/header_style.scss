@@ -11,6 +11,8 @@
 //header
 $chembl-header-height: 54px;
 $chembl-header-padding: 10px;
+$chembl-name-font: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+$side-buttons-width-big: 180px;
 
 //colors
 $primary-color: #62b7bd;
@@ -25,8 +27,7 @@ $search-bar-font: helvetica, Arial, sans-serif;
 $search-bar-max-width: 600px;
 
 
-/* -------- PIN TOP AND DEFAULT STYLES -------- */
-
+/* -------- DEFAULT STYLES -------- */
 header .row {
   margin-bottom: 0;
 }
@@ -47,11 +48,10 @@ header .row {
     justify-content: space-between;
 
     .header-button {
-      width: $chembl-header-height;
       height: $chembl-header-height;
       padding: $chembl-header-padding;
       display: flex;
-      justify-content: center;
+      justify-content: flex-end;
       align-items: center;
 
       &.chembl-logo {
@@ -60,10 +60,11 @@ header .row {
           height: auto;
         }
         span {
-          -webkit-transition: display 200ms ease-in; /* Safari */
-          transition: display 200ms ease-in;
+          padding-left: $chembl-header-padding;
+          padding-top: $chembl-header-padding;
+          font-family: $chembl-name-font;
+          font-size: 30px;
         }
-
       }
 
       &.options-button {
@@ -120,7 +121,7 @@ header .row {
   }
 }
 
-//PINNED AND SMALLEST SCREEN SIZE
+/* -------- PINNED DEFAULTS -------- */
 #chembl-header-container.pinned {
 
   .chembl-header {
@@ -154,6 +155,10 @@ header .row {
   .bar-wrapper {
     height: $search-bar-height-wider;
 
+    .header-button {
+      width: $chembl-header-height;
+    }
+
     .chembl-search-bar {
       font-size: $search-bar-font-size-big;
     }
@@ -166,17 +171,18 @@ header .row {
   }
 }
 
-/* -------- BREAKPOINT > 992px -------- */
+/* -------- BREAKPOINT L > 992px -------- */
 @media (min-width: 992px) {
-  
-  .chembl-logo {
-    width: fit-content !important;
-    span {
-      font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
-      font-size: 2em;
-      padding-top: 0.25em;
-      padding-left: $chembl-header-padding;
-    }
-  }
 
+  .header-button  {
+    width: $side-buttons-width-big;
+  }
+}
+
+/* -------- BREAKPOINT XL > 1200px -------- */
+@media (min-width: 1200px) {
+
+  .header-button  {
+    width: $side-buttons-width-big;
+  }
 }
