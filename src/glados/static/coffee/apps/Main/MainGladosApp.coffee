@@ -194,7 +194,7 @@ glados.useNameSpace 'glados.apps.Main',
 
       console.log 'INIT REPORT CARD'
 
-    @initCompoundUnichemConnectivity = (inchiKey) ->
+    @initCompoundUnichemConnectivity = (chemblID) ->
 
       promise = @prepareContentFor('unichem_connectivity')
 
