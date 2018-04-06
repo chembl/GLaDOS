@@ -13,6 +13,7 @@ $chembl-header-height: 54px;
 $chembl-header-height-pintop: 140px;
 $chembl-header-padding: 10px;
 $side-buttons-width-big: 180px;
+$logo-height-xl: 40px;
 
 //colors
 $primary-color: #62b7bd;
@@ -47,7 +48,6 @@ header .row {
     background-color: $primary-color;
     position: relative;
     float: left;
-    margin-top: -5px;
 
     -webkit-transition: all 200ms ease-out;
     transition: all 200ms ease-in;
@@ -74,6 +74,7 @@ header .row {
           width: 30px;
           height: auto;
         }
+
         span {
           padding-left: $chembl-header-padding;
           padding-top: $chembl-header-padding;
@@ -95,7 +96,7 @@ header .row {
         transition: max-width 200ms ease-in;
 
         .search-bar-container {
-          width:100%;
+          width: 100%;
 
           .bar-wrapper {
             width: 100%;
@@ -127,7 +128,6 @@ header .row {
 
               &.search-button {
                 background-color: $header-darker;
-
               }
             }
           }
@@ -141,7 +141,10 @@ header .row {
 
             a {
               color: white;
-              text-decoration: underline;
+
+              &:hover {
+                text-decoration: underline;
+              }
             }
           }
         }
@@ -161,6 +164,7 @@ header .row {
     }
 
     .bar-button {
+
       img {
         width: 15px;
       }
@@ -168,6 +172,7 @@ header .row {
   }
 
   .burger-button {
+
     img {
       width: 20px;
       height: 20px;
@@ -190,6 +195,7 @@ header .row {
     }
 
     .bar-button {
+
       img {
         width: 22px;
       }
@@ -197,8 +203,9 @@ header .row {
   }
 
   .burger-button {
+
     img {
-      margin-right: 10px;
+      margin-right: $chembl-header-padding;
       width: 30px;
       height: 30px;
     }
@@ -208,13 +215,9 @@ header .row {
 /* -------- BREAKPOINT L > 992px -------- */
 @media (min-width: 992px) {
 
-  .chembl-logo {
-    width: $side-buttons-width-big;
-  }
-
   .search-button {
-      width: 100px;
-    }
+    width: 100px;
+  }
 }
 
 /* -------- BREAKPOINT XL > 1300px -------- */
@@ -227,15 +230,22 @@ header .row {
 }
 
 @media (min-width: 1300px) {
+
   .search-bar {
     max-width: $search-bar-max-width-xl;
 
   }
 }
 
+/* -------- UNPINNED DEFAULT STYLES -------- */
+#chembl-header-container.pin-top {
+
+  .chembl-header {
+    margin-top: -5px;
+  }
+}
+
 /* -------- UNPINNED HEADER > 992px -------- */
-
-
 @media (min-width: 992px) {
 
   #chembl-header-container.pin-top {
@@ -248,25 +258,42 @@ header .row {
 
       .inner-row {
         width: 95%;
+        height: $logo-height-xl;
         max-width: 1548px;
         padding-top: 20px;
 
+        .chembl-logo {
+          padding-left: 20px;
+
+          img {
+            width: $logo-height-xl;
+            height: auto;
+          }
+          
+          span {
+            padding-left: $chembl-header-padding;
+            padding-top: $chembl-header-padding;
+            font-family: $chembl-name-font;
+            font-size: $logo-height-xl;
+          }
+        }
+
         &.nav-links-wrapper {
+          padding-top: $chembl-header-padding;
 
           .header-nav-links {
             margin-top: 0;
             margin-bottom: 0;
             display: flex;
 
-            .nav-link {
+            li {
               font-size: 0.8em;
               font-family: $verdana;
               letter-spacing: 0.1em;
 
-
               padding: 5px 20px 5px 20px;
               margin-right: 2px;
-              border-right: solid white 1.5px;
+              border-right: solid white 1px;
 
               a {
                 color: white;
