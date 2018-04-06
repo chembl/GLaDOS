@@ -30,7 +30,7 @@ CompoundNameClassificationView = CardView.extend
 
     # this is required to render correctly the molecular formulas.
     # it comes from the easychem.js library
-#    ChemJQ.autoCompile()
+    ChemJQ.autoCompile()
 
   renderTitle: ->
     $(@el).find('#Bck-CHEMBL_ID').text(@model.get('molecule_chembl_id'))
@@ -100,10 +100,6 @@ CompoundNameClassificationView = CardView.extend
       $(@el).find('#Bck-MOLFORMULA').text(molformula)
       molWt = @model.get('molecule_properties')['full_mwt']
       $(@el).find('#Bck-FULLMWT').text("- #{molWt}")
-
-      console.log 'molformula: ', molformula
-      console.log 'molWt: ', molWt
-      console.log 'COMPILE TEST: ', ChemSys.compile(molformula)
 
   renderSynonymsAndTradeNames: ->
     all_syns = @model.get('molecule_synonyms')

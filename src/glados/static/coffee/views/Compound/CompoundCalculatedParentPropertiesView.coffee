@@ -15,7 +15,6 @@ CompoundCalculatedParentPropertiesView = CardView.extend(DownloadViewExt).extend
       @hideSection()
       return
 
-
     molHierarchy = @model.get('molecule_hierarchy')
     if molHierarchy?
       #is salt?
