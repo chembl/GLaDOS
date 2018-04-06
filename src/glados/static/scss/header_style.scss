@@ -4,8 +4,6 @@
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
-//@import "components/variables";
-
 /* -------- VARIABLES -------- */
 
 //header
@@ -16,8 +14,10 @@ $side-buttons-width-big: 180px;
 $logo-height-xl: 40px;
 
 //colors
-$primary-color: #62b7bd;
-$header-darker: #09979B;
+//$primary-color: #009688;
+$lighter-color: #62b7bd;
+$primary-color: #09979B;
+$header-darker: #0d595f;
 
 //search bar
 $search-bar-height: 25px;
@@ -35,6 +35,20 @@ $verdana: "ChEMBL_Verdana", Verdana, sans-serif;
 /* -------- DEFAULT STYLES -------- */
 header .row {
   margin-bottom: 0;
+}
+
+.draw-structure:hover {
+  background-color: $lighter-color;
+}
+
+.header-button:hover {
+  background-color: $lighter-color;
+}
+
+.header-nav-links {
+  li:hover {
+    background-color: $lighter-color;
+  }
 }
 
 #chembl-header-container {
@@ -67,6 +81,8 @@ header .row {
         display: flex;
         justify-content: flex-end;
         align-items: center;
+
+        transition: background-color 200ms ease-in-out;
       }
 
       .chembl-logo {
@@ -119,6 +135,8 @@ header .row {
               display: flex;
               justify-content: center;
               align-items: center;
+
+              transition: background-color 200ms ease-in-out;
 
               img {
                 height: auto;
@@ -206,6 +224,7 @@ header .row {
 
     img {
       margin-right: $chembl-header-padding;
+      margin-left: $chembl-header-padding;
       width: 30px;
       height: 30px;
     }
@@ -269,7 +288,7 @@ header .row {
             width: $logo-height-xl;
             height: auto;
           }
-          
+
           span {
             padding-left: $chembl-header-padding;
             padding-top: $chembl-header-padding;
@@ -291,9 +310,9 @@ header .row {
               font-family: $verdana;
               letter-spacing: 0.1em;
 
-              padding: 5px 20px 5px 20px;
-              margin-right: 2px;
+              padding: 7px 20px 5px 20px;
               border-right: solid white 1px;
+              transition: background-color 200ms ease-in-out;
 
               a {
                 color: white;
