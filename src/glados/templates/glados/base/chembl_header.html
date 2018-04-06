@@ -1,18 +1,25 @@
 {% load static %}
 <div class="chembl-header">
+    <div class="inner-row">
+        <a class="header-button chembl-logo left" href="{% url 'main' %}">
+            <img src="{% static 'img/icons/chembl_logo_white.png' %}"/>
+            <span class="hide-on-med-and-down white-text"> ChEMBL </span>
+        </a>
 
-    <a class="header-button chembl-logo left" href="{% url 'main' %}">
-        <img src="{% static 'img/icons/chembl_logo_white.png' %}"/>
-        <span class="hide-on-med-and-down white-text"> ChEMBL </span>
-    </a>
+        <div class="search-bar">
+            {% include "glados/SearchResultsParts/SearchBar.html" %}
+        </div>
 
-    <div class="search-bar">
-        {% include "glados/SearchResultsParts/SearchBar.html" %}
+        <a class="header-button burger-button right hide-on-large-pin-top" href="#">
+            <img src="{% static 'img/icons/options_button.png' %}"/>
+        </a>
     </div>
 
-    <a class="header-button burger-button right" href="#">
-        <img src="{% static 'img/icons/options_button.png' %}"/>
-    </a>
+    <div class="inner-row nav-links-wrapper">
+        <div class="header-nav-links show-on-large-pin-top" style="visibility: hidden">
+            holaaaabvkasjbdva'oshv'
+        </div>
+    </div>
 
 </div>
 

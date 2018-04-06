@@ -10,6 +10,7 @@
 
 //header
 $chembl-header-height: 54px;
+$chembl-header-height-pintop: 120px;
 $chembl-header-padding: 10px;
 $chembl-name-font: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
 $side-buttons-width-big: 180px;
@@ -26,7 +27,6 @@ $search-bar-font-size-big: 1em;
 $search-bar-font: helvetica, Arial, sans-serif;
 $search-bar-max-width: 600px;
 $search-bar-max-width-xl: 1000px;
-
 
 /* -------- DEFAULT STYLES -------- */
 header .row {
@@ -45,84 +45,88 @@ header .row {
     position: relative;
     float: left;
     margin-top: -5px;
-    display: flex;
-    justify-content: space-between;
 
-    .burger-button, .chembl-logo {
-      height: $chembl-header-height;
-      padding: $chembl-header-padding;
+    -webkit-transition: height 200ms ease-out;
+    transition: height 200ms ease-in;
+
+    .inner-row {
       display: flex;
-      justify-content: flex-end;
-      align-items: center;
-    }
+      justify-content: space-between;
+      margin-left: auto;
+      margin-right: auto;
 
-    .chembl-logo {
-      img {
-        width: 30px;
-        height: auto;
-      }
-      span {
-        padding-left: $chembl-header-padding;
-        padding-top: $chembl-header-padding;
-        font-family: $chembl-name-font;
-        font-size: 30px;
-      }
-    }
+      -webkit-transition: all 200ms ease-in;
+      transition: all 200ms ease-in;
 
-    .search-bar {
-      height: $chembl-header-height;
-      padding: $chembl-header-padding;
-      float: left;
-      background: none;
-      flex-grow: 2;
-      display: flex;
-      align-items: center;
-
-       -webkit-transition: max-width 300ms ease-in;
-        transition: max-width 300ms ease-in;
-
-      .bar-wrapper {
-        width: 100%;
-        background-color: white;
+      .burger-button, .chembl-logo {
+        height: $chembl-header-height;
+        padding: $chembl-header-padding;
         display: flex;
+        justify-content: flex-end;
+        align-items: center;
+      }
 
-        -webkit-transition: height 100ms ease-in;
-        transition: height 100ms ease-in;
-
-        .chembl-search-bar {
-          font-family: $search-bar-font;
-          padding-left: $chembl-header-padding;
-          margin: 0;
-          height: 100%;
+      .chembl-logo {
+        img {
+          width: 30px;
+          height: auto;
         }
+        span {
+          padding-left: $chembl-header-padding;
+          padding-top: $chembl-header-padding;
+          font-family: $chembl-name-font;
+          font-size: 30px;
+        }
+      }
 
-        .bar-button {
-          padding: $chembl-header-padding;
-          height: 100%;
+      .search-bar {
+        height: $chembl-header-height;
+        padding: $chembl-header-padding;
+        float: left;
+        background: none;
+        flex-grow: 2;
+        display: flex;
+        align-items: center;
+
+        -webkit-transition: max-width 200ms ease-in;
+        transition: max-width 200ms ease-in;
+
+        .bar-wrapper {
+          width: 100%;
+          background-color: white;
           display: flex;
-          justify-content: center;
-          align-items: center;
 
-          img {
-            height: auto;
-            transition: height, width 100ms ease-in;
+          -webkit-transition: height 200ms ease-in;
+          transition: height 200ms ease-in;
+
+          .chembl-search-bar {
+            font-family: $search-bar-font;
+            padding-left: $chembl-header-padding;
+            margin: 0;
+            height: 100%;
           }
 
-          &.search-button {
-            background-color: $header-darker;
+          .bar-button {
+            padding: $chembl-header-padding;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
+            img {
+              height: auto;
+              -webkit-transition: height, width 200ms ease-in;
+              transition: height, width 200ms ease-in;
+            }
+
+            &.search-button {
+              background-color: $header-darker;
+
+            }
           }
         }
       }
     }
-  }
-}
-
-/* -------- PINNED DEFAULTS -------- */
-#chembl-header-container.pinned {
-
-  .chembl-header {
-    margin-top: 0;
   }
 }
 
@@ -150,7 +154,6 @@ header .row {
     }
   }
 }
-
 
 /* -------- SMALL BREAKPOINT SM >748px -------- */
 @media (min-width: 749px) {
@@ -201,12 +204,40 @@ header .row {
 }
 
 @media (min-width: 1300px) {
-
   .search-bar {
     max-width: $search-bar-max-width-xl;
 
-    .search-button{
+    .search-button {
       width: 100px;
+    }
+  }
+}
+
+/* -------- UNPINNED HEADER > 992px -------- */
+@media (min-width: 992px) {
+
+  #chembl-header-container.pin-top {
+
+    .chembl-header {
+      height: $chembl-header-height-pintop;
+
+      .inner-row {
+        max-width: 1048px;
+        padding-top: 15px;
+
+        &.nav-links-wrapper {
+          position: absolute;
+          bottom: 0;
+        }
+      }
+
+      .hide-on-large-pin-top {
+        display: none;
+      }
+
+      .show-on-large-pin-top {
+        visibility: visible !important;
+      }
     }
   }
 }
