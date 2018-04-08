@@ -39,12 +39,6 @@ class CompoundReportCardApp extends glados.ReportCardApp
     CompoundReportCardApp.initCrossReferences()
     CompoundReportCardApp.initUniChemCrossReferences()
 
-
-
-
-
-
-
     compound.fetch()
 
     ButtonsHelper.initCroppedContainers()
@@ -148,7 +142,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       model: compound
       el: $('#CalculatedParentPropertiesCard')
       section_id: 'CalculatedCompoundParentProperties'
-      section_label: 'Calculated Parent Properties'
+      section_label: 'Calculated Properties'
       report_card_app: @
 
     if GlobalVariables['EMBEDED']

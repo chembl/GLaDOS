@@ -14,6 +14,13 @@ CompoundCalculatedParentPropertiesView = CardView.extend(DownloadViewExt).extend
     if not @model.get('molecule_properties')?
       @hideSection()
       return
+
+    molHierarchy = @model.get('molecule_hierarchy')
+    if molHierarchy?
+      #is salt?
+      if molHierarchy.molecule_chembl_id != molHierarchy.parent_chembl_id
+        @updateSectionTitle('Calculated Parent Properties')
+
     @showSection()
 
     thisView = @
@@ -27,7 +34,7 @@ CompoundCalculatedParentPropertiesView = CardView.extend(DownloadViewExt).extend
     @showCardContent()
 
   mol_properties:
-    'full_mwt': 'Bck-CalcCompProp-MolWt'
+    'mw_freebase': 'Bck-CalcCompProp-MolWt'
     'mw_monoisotopic': 'Bck-CalcCompProp-MolWtM'
     'alogp':'Bck-CalcCompProp-ALogP'
     'rtb': 'Bck-CalcCompProp-RotBonds'

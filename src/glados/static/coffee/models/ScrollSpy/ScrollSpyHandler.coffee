@@ -1,7 +1,6 @@
 glados.useNameSpace 'glados.models.ScrollSpy',
   ScrollSpyHandler: Backbone.Model.extend
 
-
     initialize: ->
       @set('sections', {})
 
@@ -14,7 +13,6 @@ glados.useNameSpace 'glados.models.ScrollSpy',
         state: glados.models.ScrollSpy.ScrollSpyHandler.SECTION_STATES.NOT_AVAILABLE
         position: _.keys(sections).length
         decided_state: false
-#      @trigger('change:sections')
 
     showSection: (sectionName) ->
       sections = @get('sections')
@@ -30,6 +28,12 @@ glados.useNameSpace 'glados.models.ScrollSpy',
 
     resetSections: ->
       @set('sections', {})
+
+    updateSectionTitle: (sectionID, sectionTitle) ->
+
+      sections = @get('sections')
+      sections[sectionID].label = sectionTitle
+      @trigger('change:sections')
 
 glados.models.ScrollSpy.ScrollSpyHandler.SECTION_STATES =
   NOT_AVAILABLE: 'NOT_AVAILABLE'

@@ -179,6 +179,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       @setMeta('last_page_results_ids', curPageResultsIds)
 
+      #if this causes problems this can be moved to a custom reset function
+      @setItemsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.ITEMS_READY)
+
       return jsonResultsList
 
     # Prepares an Elastic Search query to search in all the fields of a document in a specific index
@@ -186,6 +189,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       stack = new Error().stack
       console.error("PRINTING CALL STACK")
       console.error( stack )
+
+      testMode |= @getMeta('test_mode')
       @trigger('before_fetch_elastic')
       @url = @getURL()
 
@@ -196,6 +201,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @setMeta('current_page', 1)
         @setMeta('facets_changed', false)
 
+      @setItemsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.FETCHING_ITEMS)
       # Creates the Elastic Search Query parameters and serializes them
       requestData = @getRequestData()
       esJSONRequest = JSON.stringify(@getRequestData())
@@ -215,17 +221,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       # Call Backbone's fetch
       return Backbone.Collection.prototype.fetch.call(this, fetchESOptions)
-
-
-    # ------------------------------------------------------------------------------------------------------------------
-    # Parse/Fetch Facets Groups data
-    # ------------------------------------------------------------------------------------------------------------------
-    
-    # Parses the facets groups aggregations data
-    parseFacetsGroups: (facets_data)->
-      if _.isUndefined(facets_data.aggregations)
-        for facet_group_key, facet_group of @getFacetsGroups(true)
-          facet_group.faceting_handler.parseESResults(facets_data.aggregations)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Elastic Search Query structure
@@ -409,6 +404,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
     # Elastic Search Facets request
     # ------------------------------------------------------------------------------------------------------------------
+    # returns true if the final state of the facet is selected, false otherwise
+    toggleFacetAndFetch: (fGroupKey, fKey) ->
+
+      facetsGroups = @getFacetsGroups()
+      facetingHandler = facetsGroups[fGroupKey].faceting_handler
+      isSelected = facetingHandler.toggleKeySelection(fKey)
+      @setMeta('facets_changed', true)
+      @fetch()
+
+      return isSelected
 
     __requestFacetsGroupsData: (first_call)->
       es_url = @getURL()
@@ -459,6 +464,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @__last_facets_promise = new Promise(promiseFunc.bind(@))
         triggerEvent = ()->
           @trigger('facets-changed')
+          @setFacetsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.FACETS_READY)
         @__last_facets_promise.then(triggerEvent.bind(@))
 
       if @__last_facets_promise?
@@ -466,7 +472,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       else
         runPromise.bind(@)()
 
-    loadFacetGroups: ()->
+    loadFacetGroups: ->
+
+      @setFacetsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.FETCHING_FACETS)
+
+      if @getMeta('test_mode')
+        return
+
       if not @__debouncedLoadFacetGroups?
         @__debouncedLoadFacetGroups = _.debounce(@__loadFacetGroups, 10)
       @__debouncedLoadFacetGroups()
@@ -495,6 +507,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       for fGroupKey, fGroup of @getFacetsGroups(true, onlyVisible=false)
         fGroup.faceting_handler.clearSelections()
 
+      if @getMeta('test_mode')
+        return
       @setMeta('facets_changed', true)
       @fetch()
 
