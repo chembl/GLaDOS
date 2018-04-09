@@ -38,6 +38,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     CompoundReportCardApp.initStructuralAlerts()
     CompoundReportCardApp.initCrossReferences()
     CompoundReportCardApp.initUniChemCrossReferences()
+    CompoundReportCardApp.initUnichemConnectivityMatches()
 
     compound.fetch()
 
@@ -495,6 +496,13 @@ class CompoundReportCardApp extends glados.ReportCardApp
       report_card_app: @
       config:
         refs_config: refsConfig
+
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
+
+  @initUnichemConnectivityMatches = ->
+
+    compound = CompoundReportCardApp.getCurrentCompound()
 
     if GlobalVariables['EMBEDED']
       compound.fetch()
