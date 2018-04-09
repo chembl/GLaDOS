@@ -26,6 +26,20 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
         headers:
           'Accept':'application/json'
 
+    parse: (response) ->
+
+      console.log 'PARSING: ', response
+      matchesReceived = response[1]
+      parsedMatches = []
+      for match in matchesReceived
+        console.log 'parsing match: ', match
+
+        parsedMatches.push
+          src_name: match.name_label
+          scr_url: match.src_URL
+
+      return parsedMatches
+
 
 
 glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList.UNICHEM_CALLBACK_KEY = 'UNICHEM_CALLBACK'
