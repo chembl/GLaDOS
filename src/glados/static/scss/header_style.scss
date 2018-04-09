@@ -14,7 +14,6 @@ $side-buttons-width-big: 180px;
 $logo-height-xl: 40px;
 
 //colors
-//$primary-color: #009688;
 $lighter-color: #62b7bd;
 $primary-color: #09979B;
 $darker-color: #0d595f;
@@ -33,6 +32,11 @@ $search-bar-font: helvetica, Arial, sans-serif;
 $verdana: "ChEMBL_Verdana", Verdana, sans-serif;
 
 /* -------- DEFAULT STYLES -------- */
+
+.disable-scroll {
+  overflow-y: hidden;
+}
+
 header .row {
   margin-bottom: 0;
 }
@@ -53,15 +57,14 @@ header .row {
 
 .burger-dropdown {
   li:hover {
-    background-color: $primary-color;
+    background-color: $lighter-color;
   }
 }
 
 #chembl-header-container {
   height: 0;
   width: 100%;
-  z-index: 5;
-
+  z-index: -1;
   .chembl-header {
     width: 100%;
     height: $chembl-header-height;
@@ -69,7 +72,7 @@ header .row {
     position: relative;
     float: left;
 
-    -webkit-transition: all 200ms ease-out;
+    -webkit-transition: all 200ms ease-in;
     transition: all 200ms ease-in;
 
     .inner-row {
@@ -116,8 +119,8 @@ header .row {
         display: flex;
         align-items: center;
 
-        -webkit-transition: max-width 200ms ease-in;
-        transition: max-width 200ms ease-in;
+        -webkit-transition: max-width 300ms ease-in;
+        transition: max-width 300ms ease-in;
 
         .search-bar-container {
           width: 100%;
@@ -320,6 +323,9 @@ header .row {
               font-family: $verdana;
               letter-spacing: 0.1em;
 
+              -webkit-transition: background-color 400ms ease-in-out;
+              transition: background-color 400ms ease-in-out;
+
               a {
                 display: block;
                 width: 100%;
@@ -327,9 +333,6 @@ header .row {
 
                 color: white;
                 padding: 5px 20px;
-
-                -webkit-transition: background-color 200ms ease-in-out;
-                transition: background-color 200ms ease-in-out;
 
               }
             }
@@ -360,25 +363,27 @@ header .row {
 .dropdown {
   position: relative;
 
-
   .dropdown-contents {
     z-index: -1;
-    background-color: $darker-color;
+    background-color: $primary-color;
     min-width: 200px;
     position: absolute;
     top: 30px;
     left: 0;
 
-    margin-top: -32em;
+    margin-top: -46em;
 
     transition: margin-top 600ms ease-in-out;
     -webkit-transition: margin-top 700ms ease-in-out;
 
     li.dropdown-item {
 
-      border-bottom: white solid 1px;
+      border-bottom: $lighter-color solid 1px;
       border-right: none;
       height: 40px;
+
+      -webkit-transition: background-color 400ms ease-in-out;
+      transition: background-color 400ms ease-in-out;
 
       a {
         display: block;
@@ -387,10 +392,11 @@ header .row {
 
         padding: 11px 20px !important;
 
-        -webkit-transition: background-color 600ms ease-in-out;
-        transition: background-color 600ms ease-in-out;
-
       }
+    }
+
+    li:first-child {
+      border-top: $lighter-color solid 1px;
     }
 
     li:last-child {
@@ -405,49 +411,50 @@ header .row {
       position: fixed;
       left: 0;
       width: 100%;
+      overflow-y: scroll !important;
 
       transition: margin-top 500ms ease-in-out;
       -webkit-transition: margin-top 500ms ease-in-out;
 
       li.dropdown-item {
-        height: 54px;
-        -webkit-transition: background-color 500ms ease-in-out;
-        transition: background-color 500ms ease-in-out;
+        height: 46px;
 
         a {
           color: white;
+          font-size: 0.8em;
           padding: 15px 20px !important;
           text-align: center;
         }
-      }
-      li:first-child {
-        border-top: white solid 1px;
       }
     }
   }
 }
 
- /* -------- TOGGLE DROPDOWNS  -------- */
+/* -------- TOGGLE DROPDOWNS  -------- */
 .dropdown:hover {
-  .dropdown-contents {
-    margin-top: 15px;
-    //display: block;
+  .dropdown-contents.more-section {
+    margin-top: 0;
   }
 }
 
+.burger-dropdown.active {
+  background-color: $lighter-color;
+}
 
- /* -------- FIX DROPDOWN TOP IN DIFFERENT SIZES  -------- */
+.burger-dropdown-contents.active {
+  margin-top: 15px;
+}
+
+/* -------- FIX DROPDOWN TOP IN DIFFERENT SIZES  -------- */
 
 #chembl-header-container.pinned {
   .burger-dropdown {
 
     .dropdown-contents {
-      //top: 10px;
       top: 39px;
     }
   }
 }
-
 
 @media (min-width: 640px) and (max-width: 992px) {
 
@@ -461,13 +468,13 @@ header .row {
   }
 }
 
-@media (max-width: 640px)  {
+@media (max-width: 640px) {
 
   #chembl-header-container.pin-top {
     .burger-dropdown {
 
       .dropdown-contents {
-        top: 89px;
+        top: 88px;
       }
     }
   }
