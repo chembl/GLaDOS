@@ -510,7 +510,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       section_id: 'UniChemConnectivityMatches'
       section_label: 'UniChem Connectivity Layer Cross References'
       report_card_app: @
-      embed_section_name: 'unichem_matches'
+      embed_section_name: 'unichem_connectivity_matches'
       embed_identifier: glados.Utils.URLS.getCurrentModelChemblID()
 
     if GlobalVariables['EMBEDED']

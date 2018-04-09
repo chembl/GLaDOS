@@ -13,6 +13,11 @@ glados.useNameSpace 'glados.views.Compound',
 
     render: ->
 
+      thereAreNoReferences = not @model.get('_metadata').unichem?
+      if thereAreNoReferences
+        @hideSection()
+        return
+
       @showCardContent()
       @showSection()
 
