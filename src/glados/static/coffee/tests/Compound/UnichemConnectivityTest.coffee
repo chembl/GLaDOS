@@ -12,7 +12,13 @@ describe 'Unichem Connectivity List', ->
 
   it 'initialises the links correctly', ->
 
-    urlMustBe = "#{glados.ChemUtils.UniChem.connectivity_url}#{parentInchiKey}/0/0/4?callback=xyz"
-    urlGot = list.getURLForParent()
+    uCBKey = glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList.UNICHEM_CALLBACK_KEY
+    urlMustBe = "#{glados.ChemUtils.UniChem.connectivity_url}#{parentInchiKey}/0/0/4?callback=#{uCBKey}"
+    urlGot = list.getURLForInchi(parentInchiKey)
 
     expect(urlGot).toBe(urlMustBe)
+
+  it 'parses the response from the parent correctly', ->
+
+    list.fetchDataForInchiKey(parentInchiKey)
+
