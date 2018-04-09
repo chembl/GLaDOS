@@ -2,18 +2,29 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
 
   UnichemConnectivityRefsList:
 
+    setCompound: (compound) -> @setMeta('original_compound', compound)
     setInchiKeys: (keysStructure) -> @setMeta('keys_structure', keysStructure)
     getURLForInchi: (inchiKey) ->
 
       uCBKey = glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList.UNICHEM_CALLBACK_KEY
       return "#{glados.ChemUtils.UniChem.connectivity_url}#{encodeURI(inchiKey)}/0/0/4?callback=#{uCBKey}"
 
+    #-------------------------------------------------------------------------------------------------------------------
+    # Fetching
+    #-------------------------------------------------------------------------------------------------------------------
+    fetch: ->
+      keysStructure = @getMeta('keys_structure')
+      parentInchiKey = keysStructure.parent_key
+      @fetchDataForInchiKey(parentInchiKey)
+
     fetchDataForInchiKey: (inchiKey) ->
 
+      thisList = @
       callbackUnichem = (ucJSONResponse) ->
 
-        console.log 'RESPONSE GOT: ', ucJSONResponse
-        console.log JSON.stringify(ucJSONResponse)
+        thisList.reset(thisList.parse(ucJSONResponse))
+        # replace with items ready thing!!!
+        thisList.setMeta('data_loaded', true)
 
       uCBKey = glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList.UNICHEM_CALLBACK_KEY
       window[uCBKey] = callbackUnichem
@@ -26,6 +37,9 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
         headers:
           'Accept':'application/json'
 
+    #-------------------------------------------------------------------------------------------------------------------
+    # Parsing
+    #-------------------------------------------------------------------------------------------------------------------
     parse: (response) ->
 
       console.log 'PARSING: ', response

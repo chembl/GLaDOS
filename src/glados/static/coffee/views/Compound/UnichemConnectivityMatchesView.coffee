@@ -18,6 +18,19 @@ glados.useNameSpace 'glados.views.Compound',
         @hideSection()
         return
 
-      @showCardContent()
+      list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewUnichemConnectivityList()
+      list.setCompound(@model)
+      # this will be done directly from the info in the compounds
+      parentInchiKey = 'BSYNRYMUTXBXSQ-UHFFFAOYSA-N'
+      list.setInchiKeys
+        parent_key: parentInchiKey
+
+      glados.views.PaginatedViews.PaginatedViewFactory.getNewTablePaginatedView(
+        list, $(@el).find('.BCK-MatchesTable'), customRenderEvent=undefined, disableColumnsSelection=true)
+
+      #show preloader!
+      list.fetch()
+
       @showSection()
+      @showCardContent()
 
