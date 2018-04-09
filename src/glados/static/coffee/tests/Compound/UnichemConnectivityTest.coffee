@@ -1,15 +1,18 @@
 describe 'Unichem Connectivity List', ->
 
-  unichemConnectivityList = undefined
+  list = undefined
+  parentInchiKey = 'BSYNRYMUTXBXSQ-UHFFFAOYSA-N'
 
   beforeAll ->
 
-    unichemConnectivityList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewUnichemConnectivityList()
+    list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewUnichemConnectivityList()
+    # this will be done directly from the info in the compounds
+    list.setInchiKeys
+      parent_key: parentInchiKey
 
-  it 'initialises from a Parent Compound', ->
+  it 'initialises the links correctly', ->
 
-    urlMustBe = "https://www.ebi.ac.uk/unichem/rest/key_search/BSYNRYMUTXBXSQ-UHFFFAOYSA-N/0/0/4?callback=xyz"
-    console.log 'urlMustBe: ', urlMustBe
-    console.log 'unichemConnectivityList: ', unichemConnectivityList
+    urlMustBe = "#{glados.ChemUtils.UniChem.connectivity_url}#{parentInchiKey}/0/0/4?callback=xyz"
+    urlGot = list.getURLForParent()
 
-    #https://github.com/chembl/GLaDOS/blob/7d700baf02c129c27840bc6663e0b4f5dfd04163/src/glados/static/coffee/models/SearchModel.coffee#L31
+    expect(urlGot).toBe(urlMustBe)
