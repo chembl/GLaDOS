@@ -1075,7 +1075,7 @@ em.glados-result-highlight {
   input:focus {
 
     border-bottom: 0px;
-    color: #6c6c6c;
+    color: rgba(8, 46, 52, 0.81);
 
   }
 
@@ -1083,7 +1083,7 @@ em.glados-result-highlight {
   input[type=search]:focus {
     border-bottom: 0;
     box-shadow: none;
-    color: #6c6c6c;
+    color: rgba(8, 46, 52, 0.81);
   }
 
   background-color: white;
