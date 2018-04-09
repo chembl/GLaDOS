@@ -51,6 +51,12 @@ header .row {
   }
 }
 
+.burger-dropdown {
+  li:hover {
+    background-color: $primary-color;
+  }
+}
+
 #chembl-header-container {
   height: 0;
   width: 100%;
@@ -78,10 +84,12 @@ header .row {
       .burger-button, .chembl-logo {
         height: $chembl-header-height;
         padding: $chembl-header-padding;
+        position: relative;
         display: flex;
         justify-content: flex-end;
         align-items: center;
 
+        -webkit-transition: background-color 200ms ease-in-out;
         transition: background-color 200ms ease-in-out;
       }
 
@@ -136,6 +144,7 @@ header .row {
               justify-content: center;
               align-items: center;
 
+              -webkit-transition: background-color 200ms ease-in-out;
               transition: background-color 200ms ease-in-out;
 
               img {
@@ -306,18 +315,23 @@ header .row {
             display: flex;
 
             li.nav-link {
+              border-right: solid white 1px;
               font-size: 0.8em;
               font-family: $verdana;
               letter-spacing: 0.1em;
 
-              padding: 7px 20px 5px 20px;
-              border-right: solid white 1px;
-              transition: background-color 200ms ease-in-out;
-
               a {
-                color: white;
-              }
+                display: block;
+                width: 100%;
+                height: 100%;
 
+                color: white;
+                padding: 5px 20px;
+
+                -webkit-transition: background-color 200ms ease-in-out;
+                transition: background-color 200ms ease-in-out;
+
+              }
             }
           }
         }
@@ -346,26 +360,35 @@ header .row {
 .dropdown {
   position: relative;
 
+
   .dropdown-contents {
+    z-index: -1;
     background-color: $darker-color;
-    opacity: 0;
     min-width: 200px;
     position: absolute;
     top: 30px;
     left: 0;
 
-    transition: opacity 200ms ease-in-out;
-    -webkit-transition: opacity 200ms ease-in-out;
+    margin-top: -32em;
+
+    transition: margin-top 600ms ease-in-out;
+    -webkit-transition: margin-top 700ms ease-in-out;
 
     li.dropdown-item {
-      height: 40px;
-      padding: 10px 20px;
 
       border-bottom: white solid 1px;
       border-right: none;
+      height: 40px;
 
       a {
-        height: fit-content;
+        display: block;
+        width: 100%;
+        height: 100%;
+
+        padding: 11px 20px !important;
+
+        -webkit-transition: background-color 600ms ease-in-out;
+        transition: background-color 600ms ease-in-out;
 
       }
     }
@@ -374,10 +397,78 @@ header .row {
       border: none;
     }
   }
+
+  /* -------- BURGER DROPDOWN MENU  -------- */
+  &.burger-dropdown {
+
+    .dropdown-contents {
+      position: fixed;
+      left: 0;
+      width: 100%;
+
+      transition: margin-top 500ms ease-in-out;
+      -webkit-transition: margin-top 500ms ease-in-out;
+
+      li.dropdown-item {
+        height: 54px;
+        -webkit-transition: background-color 500ms ease-in-out;
+        transition: background-color 500ms ease-in-out;
+
+        a {
+          color: white;
+          padding: 15px 20px !important;
+          text-align: center;
+        }
+      }
+      li:first-child {
+        border-top: white solid 1px;
+      }
+    }
+  }
 }
 
+ /* -------- TOGGLE DROPDOWNS  -------- */
 .dropdown:hover {
   .dropdown-contents {
-    opacity: 1;
+    margin-top: 15px;
+    //display: block;
+  }
+}
+
+
+ /* -------- FIX DROPDOWN TOP IN DIFFERENT SIZES  -------- */
+
+#chembl-header-container.pinned {
+  .burger-dropdown {
+
+    .dropdown-contents {
+      //top: 10px;
+      top: 39px;
+    }
+  }
+}
+
+
+@media (min-width: 640px) and (max-width: 992px) {
+
+  #chembl-header-container.pin-top {
+    .burger-dropdown {
+
+      .dropdown-contents {
+        top: 70px;
+      }
+    }
+  }
+}
+
+@media (max-width: 640px)  {
+
+  #chembl-header-container.pin-top {
+    .burger-dropdown {
+
+      .dropdown-contents {
+        top: 89px;
+      }
+    }
   }
 }
