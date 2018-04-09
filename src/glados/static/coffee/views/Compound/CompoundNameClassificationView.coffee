@@ -95,11 +95,12 @@ CompoundNameClassificationView = CardView.extend
 
     if @model.get('structure_type') == 'SEQ' or @model.get('structure_type') == 'NONE'
       $(@el).find('#Bck-MOLFORMULA').parent().parent().hide()
+      $(@el).find('#Bck-FULLMWT').parent().parent().hide()
     else
       molformula = @model.get('molecule_properties')['full_molformula']
       $(@el).find('#Bck-MOLFORMULA').text(molformula)
       molWt = @model.get('molecule_properties')['full_mwt']
-      $(@el).find('#Bck-FULLMWT').text("- #{molWt}")
+      $(@el).find('#Bck-FULLMWT').text("#{molWt}")
 
   renderSynonymsAndTradeNames: ->
     all_syns = @model.get('molecule_synonyms')
