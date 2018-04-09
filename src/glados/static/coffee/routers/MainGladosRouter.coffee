@@ -8,7 +8,6 @@ glados.useNameSpace 'glados.routers',
       'flexmatch_search_results/:search_term': 'initFlexmatchSearchResults'
       'browse/:entity_name(/filter/:filter)(/state/:state)': 'initBrowser'
       'report_card/:entity_name/:chembl_id': 'initReportCard'
-      'report_card/compound/:chembl_id/unichem_connectivity': 'initCompoundUnichemConnectivity'
 
     execute: (callback, args, name) ->
       # Always reset the value of this variable on navigation
@@ -42,10 +41,6 @@ glados.useNameSpace 'glados.routers',
     #-------------------------------------------------------------------------------------------------------------------
     initReportCard: (entityName, chemblID) ->
       glados.apps.Main.MainGladosApp.initReportCard(entityName, chemblID)
-
-    initCompoundUnichemConnectivity: (chemblID) ->
-      glados.apps.Main.MainGladosApp.initCompoundUnichemConnectivity(chemblID)
-
   ,
     #-------------------------------------------------------------------------------------------------------------------
     # STATIC CONTEXT

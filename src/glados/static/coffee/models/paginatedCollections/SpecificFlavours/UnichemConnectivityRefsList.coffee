@@ -13,6 +13,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
       callbackUnichem = (ucJSONResponse) ->
 
         console.log 'RESPONSE GOT: ', ucJSONResponse
+        console.log JSON.stringify(ucJSONResponse)
 
       uCBKey = glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList.UNICHEM_CALLBACK_KEY
       window[uCBKey] = callbackUnichem

@@ -194,13 +194,6 @@ glados.useNameSpace 'glados.apps.Main',
 
       console.log 'INIT REPORT CARD'
 
-    @initCompoundUnichemConnectivity = (chemblID) ->
-
-      promise = @prepareContentFor('unichem_connectivity')
-
-      promise.then ->
-        glados.apps.ReportCards.Compound.UnichemConnectivityApp.init()
-
 
 
 
