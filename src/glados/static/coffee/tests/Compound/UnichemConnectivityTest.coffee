@@ -27,13 +27,19 @@ describe 'Unichem Connectivity List', ->
   it 'parses the response from the parent correctly', ->
 
     parsedData = list.parse(parentDataToParse)
-
+    matchesGotIndex = _.indexBy(parsedData, 'src_name')
     console.log 'parsedData: ', parsedData
+    console.log 'matchesGotIndex: ', matchesGotIndex
 
     for matchMustBe in parentDataToParse[1]
 
-      srcNameMustBe = matchMustBe.src_name
-      srcNameGot = matchMustBe.src_name
-      expect(srcNameGot).toBe(srcNameMustBe)
+      nameMustBe = matchMustBe.name_label
+      matchGot = matchesGotIndex[nameMustBe]
+      mustBeVsGot =
+        "#{matchMustBe.name_label}": matchGot.src_name
+        "#{matchMustBe.src_URL}": matchGot.scr_url
+
+      for mustBe, got of mustBeVsGot
+        expect(got).toBe(mustBe)
 
 
