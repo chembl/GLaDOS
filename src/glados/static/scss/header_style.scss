@@ -17,7 +17,7 @@ $logo-height-xl: 40px;
 //$primary-color: #009688;
 $lighter-color: #62b7bd;
 $primary-color: #09979B;
-$header-darker: #0d595f;
+$darker-color: #0d595f;
 
 //search bar
 $search-bar-height: 25px;
@@ -145,7 +145,7 @@ header .row {
               }
 
               &.search-button {
-                background-color: $header-darker;
+                background-color: $darker-color;
               }
             }
           }
@@ -347,7 +347,7 @@ header .row {
   position: relative;
 
   .dropdown-contents {
-    background-color: $header-darker;
+    background-color: $darker-color;
     opacity: 0;
     min-width: 200px;
     position: absolute;
