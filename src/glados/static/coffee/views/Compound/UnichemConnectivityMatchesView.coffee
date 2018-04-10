@@ -18,6 +18,8 @@ glados.useNameSpace 'glados.views.Compound',
         @hideSection()
         return
 
+      $descriptionContainer = $(@el).find('.BCK-DescriptionContainer')
+      glados.Utils.fillContentForElement($descriptionContainer)
       $legendContainer = $(@el).find('.BCK-LegendContainer')
       glados.Utils.fillContentForElement($legendContainer)
 
