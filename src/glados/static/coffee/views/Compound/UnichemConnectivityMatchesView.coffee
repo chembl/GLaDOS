@@ -28,8 +28,8 @@ glados.useNameSpace 'glados.views.Compound',
       glados.views.PaginatedViews.PaginatedViewFactory.getNewTablePaginatedView(
         list, $(@el).find('.BCK-MatchesTable'), customRenderEvent=undefined, disableColumnsSelection=true)
 
-      #show preloader!
-#      list.fetch()
+      list.fetch()
+      console.log 'LIST: ', list
 
       @showSection()
       @showCardContent()

@@ -22,9 +22,9 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
       thisList = @
       callbackUnichem = (ucJSONResponse) ->
 
+        thisList.setMeta('data_loaded', true)
         thisList.reset(thisList.parse(ucJSONResponse))
         # replace with items ready thing!!!
-        thisList.setMeta('data_loaded', true)
 
       uCBKey = glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList.UNICHEM_CALLBACK_KEY
       window[uCBKey] = callbackUnichem
