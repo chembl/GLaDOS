@@ -18,6 +18,9 @@ glados.useNameSpace 'glados.views.Compound',
         @hideSection()
         return
 
+      $legendContainer = $(@el).find('.BCK-LegendContainer')
+      glados.Utils.fillContentForElement($legendContainer)
+
       list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewUnichemConnectivityList()
       list.setCompound(@model)
       # this will be done directly from the info in the compounds
