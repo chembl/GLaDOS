@@ -4,7 +4,8 @@ glados.useNameSpace 'glados.models.Compound',
 glados.models.Compound.UnichemConnectivityMatch.COLUMNS =
   SOURCE:
     name_to_show: 'Source'
-    comparator: 'source'
+    comparator: 'src_name'
+    link_base: 'scr_url'
 
 glados.models.Compound.UnichemConnectivityMatch.ID_COLUMN = glados.models.Compound.UnichemConnectivityMatch.COLUMNS.SOURCE
 
