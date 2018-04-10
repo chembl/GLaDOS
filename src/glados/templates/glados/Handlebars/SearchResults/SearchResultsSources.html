@@ -1,8 +1,10 @@
 <script id='Handlebars-SearchResultsLayout' type="text/x-handlebars-template">
 
-    {% include "glados/SearchResultsParts/SearchBar.html" %}
-
     <div class="container main-container">
+
+        {% block query_explain %}
+            {% include "glados/SearchResultsParts/ESQueryExplain.html" %}
+        {% endblock %}
 
         <div class="BCK-SearchResultsContainer">
 
