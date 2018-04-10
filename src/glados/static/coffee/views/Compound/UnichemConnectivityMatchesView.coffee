@@ -22,6 +22,8 @@ glados.useNameSpace 'glados.views.Compound',
       glados.Utils.fillContentForElement($descriptionContainer)
       $legendContainer = $(@el).find('.BCK-LegendContainer')
       glados.Utils.fillContentForElement($legendContainer)
+      $includeSaltsButtonContainer = $(@el).find('.BCK-LoadAlternativeSaltsButtonContainer')
+      glados.Utils.fillContentForElement($includeSaltsButtonContainer)
 
       list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewUnichemConnectivityList()
       list.setCompound(@model)
