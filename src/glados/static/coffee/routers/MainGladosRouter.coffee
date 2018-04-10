@@ -35,6 +35,12 @@ glados.useNameSpace 'glados.routers',
 
     initBrowser: (entityName, filter, state) ->
       glados.apps.Main.MainGladosApp.initBrowserForEntity(entityName, filter, state)
+
+    #-------------------------------------------------------------------------------------------------------------------
+    # Report Cards
+    #-------------------------------------------------------------------------------------------------------------------
+    initReportCard: (entityName, chemblID) ->
+      glados.apps.Main.MainGladosApp.initReportCard(entityName, chemblID)
   ,
     #-------------------------------------------------------------------------------------------------------------------
     # STATIC CONTEXT
@@ -104,6 +110,4 @@ glados.useNameSpace 'glados.routers',
           searchTerm = tab
       return [selectedESEntity, searchTerm, state]
 
-    initReportCard: (entityName, chemblID) ->
-      glados.apps.Main.MainGladosApp.initReportCard(entityName, chemblID)
 

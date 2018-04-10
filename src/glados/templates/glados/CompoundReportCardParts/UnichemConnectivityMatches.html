@@ -1,0 +1,16 @@
+{% extends "glados/base/basic_table_card.html" %}
+
+{% block card_id %}CUnichemConnectivityMatchesCard{% endblock %}
+
+{% block general_content %}
+
+    <div class="BCK-DescriptionContainer" data-hb-template="Handlebars-UnichemConnectivityDescription"></div>
+    <div class="BCK-LegendContainer" data-hb-template="Handlebars-UnichemConnectivityLegend">
+    </div>
+
+    <div class="BCK-LoadAlternativeSaltsButtonContainer" data-hb-template="Handlebars-LoadAlternativeSaltsButton"></div>
+    <div class="BCK-MatchesTable">
+    {% include "glados/base/PaginatedCollections/DefaultTableContentB.html" %}
+    </div>
+
+{% endblock %}

@@ -546,6 +546,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           Carousel:
             Default: Document.COLUMNS_SETTINGS.SEARCH_BY_TERM_RESULTS
     CLIENT_SIDE_WS_COLLECTIONS:
+      UNICHEM_CONNECTIVITY_LIST:
+        MODEL: glados.models.Compound.UnichemConnectivityMatch
+        DEFAULT_PAGE_SIZE: 5
+        ID_COLUMN: glados.models.Compound.UnichemConnectivityMatch.ID_COLUMN
+        COLUMNS: glados.models.Compound.UnichemConnectivityMatch.COLUMNS_SETTINGS.ALL_COLUMNS
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: glados.models.Compound.UnichemConnectivityMatch.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
       TARGET_PREDICTIONS:
         MODEL: glados.models.Compound.TargetPrediction
         DEFAULT_PAGE_SIZE: 5

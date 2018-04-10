@@ -12,6 +12,7 @@ glados.useNameSpace 'glados.apps.Main',
       search_results: 'Handlebars-SearchResultsLayout'
       structure_search_results: 'Handlebars-SubstructureSearchResultsLayout'
       browser: 'Handlebars-MainBrowserContent'
+      unichem_connectivity: 'Handlebars-MainUnichemConnectivityContent'
 
     @init = ->
 

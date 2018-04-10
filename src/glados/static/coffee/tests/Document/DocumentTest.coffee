@@ -45,7 +45,6 @@ describe 'Document Model', ->
         parsed = document.parse(wsResponse)
         done()
 
-
     it 'generates the web services url', ->
 
       urlMustBe = glados.Settings.WS_BASE_URL + 'document/' + chemblID + '.json'

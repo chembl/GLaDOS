@@ -38,6 +38,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     CompoundReportCardApp.initStructuralAlerts()
     CompoundReportCardApp.initCrossReferences()
     CompoundReportCardApp.initUniChemCrossReferences()
+    CompoundReportCardApp.initUnichemConnectivityMatches()
 
     compound.fetch()
 
@@ -495,6 +496,22 @@ class CompoundReportCardApp extends glados.ReportCardApp
       report_card_app: @
       config:
         refs_config: refsConfig
+
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
+
+  @initUnichemConnectivityMatches = ->
+
+    compound = CompoundReportCardApp.getCurrentCompound()
+
+    new glados.views.Compound.UnichemConnectivityMatchesView
+      model: compound
+      el: $('#CUnichemConnectivityMatchesCard')
+      section_id: 'UniChemConnectivityMatches'
+      section_label: 'UniChem Connectivity Layer Cross References'
+      report_card_app: @
+      embed_section_name: 'unichem_connectivity_matches'
+      embed_identifier: glados.Utils.URLS.getCurrentModelChemblID()
 
     if GlobalVariables['EMBEDED']
       compound.fetch()

@@ -53,6 +53,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @numVisibleColumnsList = []
       if @renderAtInit
         @render()
+      else
+        @showPreloaderHideOthers()
 
       @initPageQueue()
 
@@ -145,7 +147,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     render: ->
 
-      if not @collection.getMeta('data_loaded')
+      if not (@collection.getMeta('data_loaded') or @collection.itemsAreReady())
         return
 
       # don't force to show content when element is not visible.
