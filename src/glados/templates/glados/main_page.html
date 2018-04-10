@@ -1,0 +1,108 @@
+{% extends "glados/base/base_layout.html" %}
+
+{% block title %}Compound Report Card{% endblock %}
+
+{% block content %}
+
+    <div class="main-page-container">
+
+        <!-- Carousel and Text about ChEMBL section-->
+        <div class="main-page-section">
+            <div class="container row main-container-row">
+                <div class="col l6 s12 section-col yellow">
+
+                    <!-- Carousel wrapper-->
+                    <div class="carousel-wrapper">
+
+                        <div class="carousel-item">
+                            {% with is_dynamic=False %}
+                                {% include "glados/MainPageParts/Visualizations/YourIdeaHereCard.html" %}
+                            {% endwith %}
+                        </div>
+
+                        <div class="carousel-item">
+
+                            {% with is_dynamic=True %}
+                                {% include "glados/MainPageParts/TargetBrowserParts/browse_as_circles.html" %}
+                            {% endwith %}
+                        </div>
+
+                        <div class="carousel-item">
+                            {% with is_dynamic=True %}
+                                {% include "glados/MainPageParts/Visualizations/MaxPhaseForDiseaseDonut.html" %}
+                            {% endwith %}
+                        </div>
+
+                        <div class="carousel-item">
+                            {% with is_dynamic=True %}
+                                {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
+                            {% endwith %}
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Text about ChEMBL-->
+                <div class="col l6 s12 section-col valign-wrapper">
+
+                    <div class="chembl-text">
+
+                        <h2>ChEMBL</h2>
+
+                        <p> Is a manually curated chemical database of bioactive molecules with drug-like properties.
+                            It
+                            is maintained by the European Bioinformatics Institute (EBI), of the European Molecular
+                            Biology
+                            Laboratory (EMBL), based at the Wellcome Trust Genome Campus, Hinxton, UK.</p>
+
+                        <a class="btn-chembl" href="https://www.ebi.ac.uk/chembl/downloads" target="_blank">
+                            Download ChEMBL
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Tweets and database summary section-->
+        <div class="main-page-section">
+            <div class="container row main-container-row">
+                <div class="col l6 s12 section-col">
+                    {% block tweets %}
+                        {% include "glados/MainPageParts/tweets.html" %}
+                    {% endblock %}
+                </div>
+
+                <div class="col l6 s12 section-col">
+                    {% block database_info %}
+                        {% include "glados/MainPageParts/database_info.html" %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+
+        <div class="main-page-section blue">
+            <div class="container">
+            </div>
+        </div>
+
+        <div class="main-page-section red">
+            <div class="container">
+            </div>
+        </div>
+
+        <div class="main-page-section teal">
+            <div class="container">
+            </div>
+        </div>
+
+    </div>
+
+
+
+{% endblock %}
+
+{% block custom_js_inline %}
+    MainPageApp.init();
+{% endblock %}

@@ -30,9 +30,10 @@ urlpatterns += [
   # --------------------------------------------------------------------------------------------------------------------
   # Main Pages
   # --------------------------------------------------------------------------------------------------------------------
-  url(r'^$', views.main_html_base, name='main'),
-
   url(r'^g/$', views.main_html_base_no_bar, name='no_bar'),
+
+  url(r'^$',
+    DirectTemplateView.as_view(template_name="glados/main_page.html"), name='main'),
 
   url(r'^tweets/$', views.get_latest_tweets_json, name='tweets'),
 

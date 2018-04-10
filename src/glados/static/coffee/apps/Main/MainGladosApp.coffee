@@ -4,7 +4,7 @@ glados.useNameSpace 'glados.apps.Main',
     @showMainSplashScreen = -> $('#GladosMainSplashScreen').show()
     @hideMainSplashScreen = -> $('#GladosMainSplashScreen').hide()
     @showMainGladosContent = ->
-#      $('#GladosMainContent').show()
+      $('#GladosMainContent').show()
       @hideMainSplashScreen()
       
     @baseTemplates:
@@ -79,11 +79,12 @@ glados.useNameSpace 'glados.apps.Main',
     # ------------------------------------------------------------------------------------------------------------------
     @initMainPage = ->
 
-      glados.apps.BreadcrumbApp.setBreadCrumb([], undefined, hideShareButton=true)
-      promise = @prepareContentFor('main_page')
-
-      promise.then ->
-        MainPageApp.init()
+#      window.location.href = '/main'
+#      glados.apps.BreadcrumbApp.setBreadCrumb([], undefined, hideShareButton=true)
+#      promise = @prepareContentFor('main_page')
+#
+#      promise.then ->
+#        MainPageApp.init()
 
     # ------------------------------------------------------------------------------------------------------------------
     # Search Results

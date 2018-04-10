@@ -1,9 +1,56 @@
-.main-page-section{
-  height: 80vh;
-  .container {
+/*colours from materialize*/
+@import "components/color";
+@import "components/variables";
+
+
+
+/* -------- VARIABLES -------- */
+
+//fonts
+$chembl-helvetica: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+$helvetica: helvetica, Arial, sans-serif;
+$verdana: "ChEMBL_Verdana", Verdana, sans-serif;
+
+//colors
+$lighter-color: #62b7bd;
+$primary-color: #09979B;
+$darker-color: #0d595f;
+
+/* -------- DEFAULT STYLES -------- */
+.main-page-section {
+  //border: yellow solid 2px;
+
+  .main-container-row {
     height: 100%;
     width: 95%;
-    border: white solid 5px;
+    //border: red solid 2px;
     padding: 5vh 0;
+    margin-bottom: 0;
+
+  }
+  .section-col {
+    height: 60vh;
+    //border: blue solid 2px;
+  }
+}
+
+
+.chembl-text {
+  padding-left: 50px;
+  font-family: Helvetica, Arial, FreeSans, "Liberation Sans", sans-serif;
+  font-size: 1em;
+
+  h2 {
+    color: $darker-color;
+    margin-bottom: 0 !important;
+  }
+
+  p {
+    margin-bottom: 4px;
+    color: #383E40
+  }
+
+  a {
+    background-color: $darker-color;
   }
 }

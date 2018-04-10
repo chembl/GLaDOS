@@ -7,25 +7,22 @@ class MainPageApp
 
   @init = ->
 
-    new glados.views.MainPage.CentralCardView
-      el: $('.BCK-Central-Card')
+    glados.apps.Main.MainGladosApp.hideMainSplashScreen()
+    MainPageApp.initCentralCarousel()
 
+#   Init database summary
     databaseInfo = new glados.models.MainPage.DatabaseSummaryInfo()
-
     new glados.views.MainPage.DatabaseSummaryView
       model: databaseInfo
       el: $('.BCK-Database-summary-info')
-
     databaseInfo.fetch()
 
+#   Init tweet box
     tweetsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewTweetsList()
     tweetsList.initURL()
     $tweetsElem = $('.BCK-Tweets-container')
     glados.views.PaginatedViews.PaginatedViewFactory.getNewInfinitePaginatedView(tweetsList, $tweetsElem, 'do-repaint')
-
     tweetsList.fetch()
-
-    MainPageApp.initCentralCarousel()
 
 # ---------------- Aggregation -------------- #
   @getDocumentsPerYearAgg = (defaultInterval=1) ->
