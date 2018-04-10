@@ -2,8 +2,6 @@
 @import "components/color";
 @import "components/variables";
 
-
-
 /* -------- VARIABLES -------- */
 
 //fonts
@@ -11,46 +9,83 @@ $chembl-helvetica: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
 $helvetica: helvetica, Arial, sans-serif;
 $verdana: "ChEMBL_Verdana", Verdana, sans-serif;
 
+$font-size-big: 1.2em;
+$font-size-small: 1em;
+
 //colors
 $lighter-color: #62b7bd;
 $primary-color: #09979B;
 $darker-color: #0d595f;
 
+//heights and other
+$chembl-header-height: 54px;
+$ebi-nav-height: 50px;
+$full-header-height: $chembl-header-height + $ebi-nav-height;
+
 /* -------- DEFAULT STYLES -------- */
 .main-page-section {
-  //border: yellow solid 2px;
 
   .main-container-row {
     height: 100%;
-    width: 95%;
-    //border: red solid 2px;
-    padding: 5vh 0;
+    width: 100%;
     margin-bottom: 0;
-
   }
   .section-col {
-    height: 60vh;
-    //border: blue solid 2px;
+    height: calc(100vh - #{$full-header-height});
+    border: blue solid 2px;
   }
 }
 
+/* -------- Make sure carousel takes full height of container-------- */
+.carousel-wrapper {
+  height: 100%;
 
+  .slick-list {
+    height: 100%;
+  }
+
+  .slick-track {
+    height: 100%;
+  }
+  .carousel-item {
+    height: 100%;
+  }
+}
+
+/* -------- CHEMBL TEXT -------- */
 .chembl-text {
-  padding-left: 50px;
-  font-family: Helvetica, Arial, FreeSans, "Liberation Sans", sans-serif;
-  font-size: 1em;
+  font-family: $helvetica;
+  text-align: center;
 
   h2 {
+    font-size: 3em;
     color: $darker-color;
-    margin-bottom: 0 !important;
+    margin: 0;
   }
 
   p {
-    margin-bottom: 4px;
+    font-size: 1.25em;
+    margin: 0;
     color: #383E40
   }
 
-  a {
-    background-color: $darker-color;
+  .small-text {
+    font-size: 0.9em;
+    margin-top: 20px;
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .btn-container {
+    margin-top: 25px;
+    font-size: 1.1em;
+    a {
+      background-color: $primary-color;
+
+      &:hover {
+        background-color: $darker-color;
+      }
+    }
   }
 }
