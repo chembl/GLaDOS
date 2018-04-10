@@ -29,7 +29,7 @@ glados.useNameSpace 'glados.views.Compound',
         list, $(@el).find('.BCK-MatchesTable'), customRenderEvent=undefined, disableColumnsSelection=true)
 
       #show preloader!
-      list.fetch()
+#      list.fetch()
 
       @showSection()
       @showCardContent()

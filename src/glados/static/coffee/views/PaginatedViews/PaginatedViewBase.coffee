@@ -53,6 +53,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @numVisibleColumnsList = []
       if @renderAtInit
         @render()
+      else
+        @showPreloaderHideOthers()
 
       @initPageQueue()
 
