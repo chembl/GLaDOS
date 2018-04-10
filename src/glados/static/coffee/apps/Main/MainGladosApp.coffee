@@ -4,7 +4,7 @@ glados.useNameSpace 'glados.apps.Main',
     @showMainSplashScreen = -> $('#GladosMainSplashScreen').show()
     @hideMainSplashScreen = -> $('#GladosMainSplashScreen').hide()
     @showMainGladosContent = ->
-      $('#GladosMainContent').show()
+#      $('#GladosMainContent').show()
       @hideMainSplashScreen()
       
     @baseTemplates:

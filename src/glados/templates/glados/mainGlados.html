@@ -1,6 +1,35 @@
 {% extends "glados/base/base_layout.html" %}
 {% block title %}ChEMBL{% endblock %}
 
+{% block content %}
+
+    <div class="main-page-container">
+
+        <div class="main-page-section yellow">
+            <div class="container">
+            </div>
+        </div>
+
+        <div class="main-page-section blue">
+            <div class="container">
+            </div>
+        </div>
+
+        <div class="main-page-section red">
+            <div class="container">
+            </div>
+        </div>
+
+        <div class="main-page-section teal">
+            <div class="container">
+            </div>
+        </div>
+
+    </div>
+
+
+{% endblock %}
+
 {% block custom_js_inline %}
     glados.apps.Main.MainGladosApp.init();
 {% endblock %}
