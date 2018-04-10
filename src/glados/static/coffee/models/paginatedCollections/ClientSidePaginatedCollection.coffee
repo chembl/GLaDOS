@@ -21,13 +21,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     #  records_in_page -- How many records are in the current page
     #  sorting data per column.
     #
-    setMeta: (attr, value, storeAsString, trackPreviousVale=false) ->
-
-      if _.isString(value) and !storeAsString
-        value = parseInt(value)
-
-      if trackPreviousVale
-        @meta[attr + '_previous'] = @meta[attr]
+    setMeta: (attr, value, storeAsString) ->
 
       @meta[attr] = value
       @trigger('meta-changed')

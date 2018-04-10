@@ -176,6 +176,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             model: collectionSettings.MODEL
             is_client_side: true
 
+          @on 'reset', (->
+            @setItemsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.ITEMS_READY)
+          ), @
           @on 'reset', @resetMeta, @
 
           if @config.preexisting_models?
@@ -200,7 +203,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
                 parsedModel = BaseModel.prototype.parse model
                 parsedModels.push parsedModel
 
-              @setMeta('data_loaded', true)
+              @setItemsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.ITEMS_READY)
               @reset(parsedModels)
             ), @
 

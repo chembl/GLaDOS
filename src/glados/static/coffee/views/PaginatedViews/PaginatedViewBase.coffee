@@ -147,8 +147,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     render: ->
 
-      console.log 'RENDER PAG VIEW'
-      if not @collection.getMeta('data_loaded')
+      if not (@collection.getMeta('data_loaded') or @collection.itemsAreReady())
         return
 
       # don't force to show content when element is not visible.
