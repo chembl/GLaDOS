@@ -411,7 +411,9 @@ header .row {
       position: fixed;
       left: 0;
       width: 100%;
-      overflow-y: scroll !important;
+      max-height: 100vh;
+      overflow-y: scroll;
+
 
       transition: margin-top 500ms ease-in-out;
       -webkit-transition: margin-top 500ms ease-in-out;
