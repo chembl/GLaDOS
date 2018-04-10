@@ -1,7 +1,8 @@
 describe 'Unichem Connectivity List', ->
 
   list = undefined
-  parentInchiKey = 'BSYNRYMUTXBXSQ-UHFFFAOYSA-N'
+  #CHEMBL2296002
+  parentInchiKey = 'JJBCTCGUOQYZHK-ZSCHJXSPSA-N'
   parentDataToParse = undefined
 
   beforeAll (done) ->
@@ -11,7 +12,7 @@ describe 'Unichem Connectivity List', ->
     list.setInchiKeys
       parent_key: parentInchiKey
 
-    dataURL = glados.Settings.STATIC_URL + 'testData/Compounds/UnichemConnectivity/CHEMBL25UnichemResponseToParse.json'
+    dataURL = glados.Settings.STATIC_URL + 'testData/Compounds/UnichemConnectivity/JJBCTCGUOQYZHK-ZSCHJXSPSA-N_UnichemResponseToParse.json'
     $.get dataURL, (testData) ->
       parentDataToParse = testData
       done()
