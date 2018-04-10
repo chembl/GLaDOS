@@ -65,10 +65,11 @@ header .row {
   height: 0;
   width: 100%;
   z-index: -1;
+
   .chembl-header {
-    width: 100%;
     height: $chembl-header-height;
     background-color: $primary-color;
+    width: 100%;
     position: relative;
     float: left;
 
@@ -110,6 +111,7 @@ header .row {
         }
       }
 
+      /* -------- SEARCH BAR -------- */
       .search-bar {
         height: $chembl-header-height;
         padding: $chembl-header-padding;
@@ -163,8 +165,8 @@ header .row {
           }
 
           .search-examples {
-            color: white;
             font-family: $chembl-name-font;
+            color: white;
             font-size: 0.8em;
             margin-top: 0.5em;
             letter-spacing: 0.05em;
@@ -268,14 +270,6 @@ header .row {
   }
 }
 
-/* -------- UNPINNED DEFAULT STYLES -------- */
-#chembl-header-container.pin-top {
-
-  .chembl-header {
-    margin-top: -5px;
-  }
-}
-
 /* -------- UNPINNED HEADER > 992px -------- */
 @media (min-width: 992px) {
 
@@ -333,7 +327,6 @@ header .row {
 
                 color: white;
                 padding: 5px 20px;
-
               }
             }
           }
@@ -364,20 +357,18 @@ header .row {
   position: relative;
 
   .dropdown-contents {
-    z-index: -1;
     background-color: $primary-color;
+    z-index: -1;
     min-width: 200px;
     position: absolute;
+    margin-top: -46em;
     top: 30px;
     left: 0;
-
-    margin-top: -46em;
 
     transition: margin-top 600ms ease-in-out;
     -webkit-transition: margin-top 700ms ease-in-out;
 
     li.dropdown-item {
-
       border-bottom: $lighter-color solid 1px;
       border-right: none;
       height: 40px;
@@ -389,7 +380,6 @@ header .row {
         display: block;
         width: 100%;
         height: 100%;
-
         padding: 11px 20px !important;
 
       }
@@ -413,7 +403,6 @@ header .row {
       width: 100%;
       max-height: 100vh;
       overflow-y: scroll;
-
 
       transition: margin-top 500ms ease-in-out;
       -webkit-transition: margin-top 500ms ease-in-out;
@@ -439,6 +428,10 @@ header .row {
   }
 }
 
+.burger-button.active {
+  background-color: $lighter-color;
+}
+
 .burger-dropdown.active {
   background-color: $lighter-color;
 }
@@ -448,7 +441,6 @@ header .row {
 }
 
 /* -------- FIX DROPDOWN TOP IN DIFFERENT SIZES  -------- */
-
 #chembl-header-container.pinned {
   .burger-dropdown {
 
@@ -464,7 +456,7 @@ header .row {
     .burger-dropdown {
 
       .dropdown-contents {
-        top: 70px;
+        top: 69px;
       }
     }
   }
@@ -476,7 +468,7 @@ header .row {
     .burger-dropdown {
 
       .dropdown-contents {
-        top: 88px;
+        top: 84px;
       }
     }
   }
