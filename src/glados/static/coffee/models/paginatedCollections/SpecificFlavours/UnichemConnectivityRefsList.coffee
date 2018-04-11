@@ -22,7 +22,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
       thisList = @
       callbackUnichem = (ucJSONResponse) ->
 
-        thisList.reset(thisList.parse(ucJSONResponse))
+        thisList.setModelsAfterParse(thisList.parse(ucJSONResponse))
 
       uCBKey = glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList.UNICHEM_CALLBACK_KEY
       window[uCBKey] = callbackUnichem
@@ -38,6 +38,14 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
     #-------------------------------------------------------------------------------------------------------------------
     # Parsing
     #-------------------------------------------------------------------------------------------------------------------
+    setModelsAfterParse: (parsedList) ->
+      @setMeta('original_raw_models', parsedList)
+      modelsToShow = _.filter parsedList, (source) ->
+        allMatches = source.all_matches
+        return _.find(allMatches, (match) -> match.show)?
+
+      @reset(modelsToShow)
+
     parse: (response) ->
 
       matchesSourcesReceived = response[1]
@@ -55,6 +63,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
         spMatches = []
         siMatches = []
         sipMatches = []
+        allMatches = []
 
         for match in matches
 
@@ -63,13 +72,14 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
 
           for compare in match.match_compare
 
-            console.log 'compare: ', compare
             isToggeable = compare.C > 0
             newRef =
               ref_url: matchURL
               ref_id: srcCompoundID
               is_toggleable: isToggeable
               show: not isToggeable
+
+            allMatches.push newRef
 
             # this logic has been copied from https://github.com/chembl/chembl_interface/blob/master/system/application/views/application/compound/report_card/unichem_connectivity.php
             isS = (parseInt(compare.b) == 1 or parseInt(compare.m) == 1 \
@@ -100,6 +110,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
           sp_matches: spMatches
           si_matches: siMatches
           sip_matches: sipMatches
+          all_matches: allMatches
 
 
       return parsedSourcesWithMatches

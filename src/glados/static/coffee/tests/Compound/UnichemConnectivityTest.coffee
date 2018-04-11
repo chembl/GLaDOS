@@ -5,11 +5,13 @@ describe 'Unichem Connectivity List', ->
   inchiKey = 'JJBCTCGUOQYZHK-ZSCHJXSPSA-N'
   parentDataToParse = undefined
 
-  beforeAll (done) ->
+  beforeEach ->
 
     list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewUnichemConnectivityList()
     # this will be done directly from the info in the compounds
     list.setInchiKey inchiKey
+
+  beforeAll (done) ->
 
     dataURL = glados.Settings.STATIC_URL + 'testData/Compounds/UnichemConnectivity/JJBCTCGUOQYZHK-ZSCHJXSPSA-N_UnichemResponseToParse.json'
     $.get dataURL, (testData) ->
@@ -60,6 +62,7 @@ describe 'Unichem Connectivity List', ->
       spMatchesGot = sourceGot.sp_matches
       siMatchesGot = sourceGot.si_matches
       sipMatchesGot = sourceGot.sip_matches
+      allMatchesGot = sourceGot.all_matches
 
       for matchMustBe in matchesMustBe
 
@@ -91,12 +94,18 @@ describe 'Unichem Connectivity List', ->
           expect(refGot.ref_id).toBe(refIDMustBe)
           expect(refGot.ref_url).toBe(refURLMustBe)
 
+          #expect to always find it in all matches
+          refGot2 = _.find(allMatchesGot, (ref) -> ref.ref_id == refIDMustBe)
+          expect(refGot2?).toBe(true)
+          expect(refGot2.ref_id).toBe(refIDMustBe)
+          expect(refGot2.ref_url).toBe(refURLMustBe)
+
+
 
   it 'parses the response from the parent correctly (toggleability)', ->
 
     parsedData = list.parse(parentDataToParse)
     sourcesGotIndex = _.indexBy(parsedData, 'src_name')
-    console.log 'parsedData: ', parsedData
 
     for sourceMustBe in parentDataToParse[1]
 
@@ -121,3 +130,12 @@ describe 'Unichem Connectivity List', ->
           expect(refGot?).toBe(true)
           expect(refGot.is_toggleable).toBe(isToggleable)
           expect(refGot.show).toBe(not isToggleable)
+
+  it 'gives only the rows that are not empty', ->
+
+    parsedData = list.parse(parentDataToParse)
+    list.setModelsAfterParse(parsedData)
+    modelsToShow = list.models
+    for model in modelsToShow
+      allMatches = model.get('all_matches')
+      expect(_.find(allMatches, (match) -> match.show)?).toBe(true)
