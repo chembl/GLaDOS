@@ -66,7 +66,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       if new_page_size == ''
         return
 
-      @setMeta('page_size', new_page_size)
+      @setMeta('page_size', parseInt(new_page_size))
       @setMeta('current_page', 1)
       @calculateTotalPages()
       @calculateHowManyInCurrentPage()
