@@ -14,7 +14,7 @@ $font-size-small: 1em;
 
 //colors
 $lighter-color: #62b7bd;
-$primary-color: #09979B;
+$primary-color: #09979b;
 $darker-color: #0d595f;
 
 //heights
@@ -54,7 +54,6 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
 .btn-container {
   padding: 30px 0 20px 0;
 
-
   .button {
     font-size: 1em;
     padding: 10px 20px;
@@ -72,7 +71,6 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
   }
 
   .hollow-button {
-    font-size: 0.8em;
     padding: 8px 12px;
     background-color: white;
     color: $primary-color;
@@ -80,13 +78,11 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
     border-radius: 1px;
     letter-spacing: 0.02em;
 
-    -webkit-transition: background-color, border, color 200ms ease;
-    transition: background-color, border, color 200ms ease;
+    -webkit-transition: letter-spacing 200ms ease;
+    transition: letter-spacing 200ms ease;
 
     &:hover {
-      background-color: $primary-color;
-      color: white;
-      border: solid $primary-color 2px;
+      letter-spacing: 0.04em;
     }
   }
 }
@@ -167,6 +163,11 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
   .chembl-text {
     padding: 0 10%;
   }
+
+  .explore-database {
+    margin-top: 5%;
+  }
+
 }
 
 /* -------- LARGE SCREEN -------- */
