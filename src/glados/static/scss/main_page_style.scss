@@ -25,16 +25,12 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
 /* -------- DEFAULT STYLES -------- */
 
 .main-page-section {
-
-  &:first-child{
-    height: calc(100vh - #{$full-header-height});
-  }
-
-  height: calc(100vh - #{$chembl-header-height});
+  height: calc(100vh - #{$full-header-height});
   max-height: 800px;
   margin-bottom: 0;
+  //border: blue solid 2px;
 
-  &.half-height{
+  &.half-height {
     height: 40vh;
   }
 
@@ -57,9 +53,10 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
 
 .btn-container {
   padding: 30px 0 20px 0;
-  font-size: 1.1em;
+
 
   .button {
+    font-size: 1em;
     padding: 10px 20px;
     background-color: $primary-color;
     color: white;
@@ -73,20 +70,36 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
       background-color: $darker-color;
     }
   }
+
+  .hollow-button {
+    font-size: 0.8em;
+    padding: 8px 12px;
+    background-color: white;
+    color: $primary-color;
+    border: solid $primary-color 2px;
+    border-radius: 1px;
+    letter-spacing: 0.02em;
+
+    -webkit-transition: background-color, border, color 200ms ease;
+    transition: background-color, border, color 200ms ease;
+
+    &:hover {
+      background-color: $primary-color;
+      color: white;
+      border: solid $primary-color 2px;
+    }
+  }
 }
 
 /* -------- Make sure carousel takes full height of container-------- */
 .carousel-wrapper {
-  height: calc(100% - 40px); //40px for slick dots
+  height: calc(100% - 40px); //50px for slick dots
 
   .slick-list {
     height: 100%;
   }
 
   .slick-track {
-    height: 100%;
-  }
-  .carousel-item {
     height: 100%;
   }
 }
@@ -121,9 +134,31 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
   }
 }
 
+/* -------- EXPLORE THE DATABASE -------- */
+.explore-database {
+  text-align: center;
+  margin-bottom: 20px;
+
+  h2 {
+    margin-bottom: 10px;
+    color: $darker-color;
+    font-size: 3em;
+  }
+
+  .btn-container {
+    padding-top: 15px;
+  }
+}
+
 /* ------------------- MEDIA QUERIES ------------------- */
 
 /* -------- MEDIUM SCREEN -------- */
+@media (max-width: 600px) {
+  .smaller-on-small {
+    height: 60vh;
+  }
+}
+
 @media (min-width: 600px) and (max-width: 992px) {
   .smaller-on-med {
     height: 50vh;

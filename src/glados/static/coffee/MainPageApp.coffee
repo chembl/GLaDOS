@@ -6,27 +6,25 @@ class MainPageApp
   # --------------------------------------------------------------------------------------------------------------------
 
   @init = ->
-
     glados.apps.Main.MainGladosApp.hideMainSplashScreen()
     MainPageApp.initCentralCarousel()
 
-#   Init database summary
+    #   Init database summary
     databaseInfo = new glados.models.MainPage.DatabaseSummaryInfo()
     new glados.views.MainPage.DatabaseSummaryView
       model: databaseInfo
       el: $('.BCK-Database-summary-info')
     databaseInfo.fetch()
 
-#   Init tweet box
+    #   Init tweet box
     tweetsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewTweetsList()
     tweetsList.initURL()
     $tweetsElem = $('.BCK-Tweets-container')
     glados.views.PaginatedViews.PaginatedViewFactory.getNewInfinitePaginatedView(tweetsList, $tweetsElem, 'do-repaint')
     tweetsList.fetch()
 
-# ---------------- Aggregation -------------- #
-  @getDocumentsPerYearAgg = (defaultInterval=1) ->
-
+  # ---------------- Aggregation -------------- #
+  @getDocumentsPerYearAgg = (defaultInterval = 1) ->
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
       query_string_template: '*'
@@ -47,9 +45,8 @@ class MainPageApp
               field: 'journal'
               size: 10
               bucket_links:
-
                 bucket_filter_template: 'year:{{year}} AND journal:("{{bucket_key}}"' +
-                                        '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
+                  '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
                 template_data:
                   year: 'BUCKET.parsed_parent_key'
                   bucket_key: 'BUCKET.key'
@@ -78,7 +75,7 @@ class MainPageApp
           size: 5
           bucket_links:
             bucket_filter_template: '_metadata.drug.is_drug:true AND ' +
-                                    'max_phase:{{bucket_key}}'
+              'max_phase:{{bucket_key}}'
             template_data:
               bucket_key: 'BUCKET.key'
 
@@ -90,8 +87,8 @@ class MainPageApp
               size: 12
               bucket_links:
                 bucket_filter_template: '_metadata.drug.is_drug:true AND ' +
-                                        'max_phase :{{max_phase}} AND _metadata.drug_indications.efo_term:("{{bucket_key}}"' +
-                                        '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
+                  'max_phase :{{max_phase}} AND _metadata.drug_indications.efo_term:("{{bucket_key}}"' +
+                  '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
                 template_data:
                   max_phase: 'BUCKET.parent_key'
                   bucket_key: 'BUCKET.key'
@@ -144,7 +141,6 @@ class MainPageApp
     maxPhaseForDisease.fetch()
 
   @getTargetsTreeAgg = ->
-
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
       query_string_template: '*'
@@ -221,9 +217,7 @@ class MainPageApp
     return targetsTreeAgg
 
 
-
   @initPapersPerYear = ->
-
     allDocumentsByYear = MainPageApp.getDocumentsPerYearAgg()
     yearProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('DocumentAggregation',
       'YEAR')
@@ -268,7 +262,6 @@ class MainPageApp
     allDocumentsByYear.fetch()
 
   @initTargetsVisualisation = ->
-
     targetHierarchy = TargetBrowserApp.initTargetHierarchyTree()
 
     config =
@@ -291,12 +284,22 @@ class MainPageApp
 
   @initCentralCarousel = ->
     $carouselContainer = $('.carousel-wrapper')
+    $linksCarousel = $('.links-carousel')
 
     $carouselContainer.slick {
-      arrows : false
+      asNavFor: $linksCarousel
+      arrows: false
       autoplay: true
-      autoplaySpeed: 5000
+      autoplaySpeed: 3000
       dots: true
+    }
+
+    console.log '$linksCarousel: ', $linksCarousel
+    $linksCarousel.slick {
+      useCSS: false
+      fade: true
+      arrows: false
+      dots: false
     }
 
     MainPageApp.initPapersPerYear()
