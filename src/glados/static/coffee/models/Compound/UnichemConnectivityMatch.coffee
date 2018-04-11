@@ -2,7 +2,9 @@ glados.useNameSpace 'glados.models.Compound',
   UnichemConnectivityMatch: Backbone.Model.extend {}
 
 glados.models.Compound.UnichemConnectivityMatch.REF_TEMPLATE =
-'{{#each val}}<a target="_blank" href="{{this.ref_url}}">{{this.ref_id}}</a>{{#unless @last}}, {{/unless}}{{/each}}'
+'{{#each val}}' +
+'{{#if this.show}}<a target="_blank" href="{{this.ref_url}}">{{this.ref_id}}</a> {{else}} {{/if}}' +
+'{{/each}}'
 
 glados.models.Compound.UnichemConnectivityMatch.COLUMNS =
   SOURCE:

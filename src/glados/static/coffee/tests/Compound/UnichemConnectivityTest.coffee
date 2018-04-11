@@ -120,4 +120,4 @@ describe 'Unichem Connectivity List', ->
           refGot = _.find(allMatches, (ref) -> ref.ref_id == refIDMustBe)
           expect(refGot?).toBe(true)
           expect(refGot.is_toggleable).toBe(isToggleable)
-          expect(refGot.show).toBe(false)
+          expect(refGot.show).toBe(not isToggleable)
