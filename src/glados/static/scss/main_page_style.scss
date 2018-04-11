@@ -24,15 +24,13 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
 
 /* -------- DEFAULT STYLES -------- */
 .main-page-section {
-  height: 100%;
-  width: 100%;
+
+  height: calc(100vh - #{$full-header-height});
   margin-bottom: 0;
 
   .section-col {
-    height: calc(100vh - #{$full-header-height});
-    border: blue solid 2px;
-    margin:  0 10px; //margin for small size
-
+    height: 100%;
+    //border: blue solid 2px;
   }
 }
 
@@ -78,8 +76,11 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
 
   .small-text {
     font-size: 0.9em;
-    a:hover {
-      text-decoration: underline;
+    a {
+      color: $primary-color;
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 
@@ -98,5 +99,16 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
         background-color: $darker-color;
       }
     }
+  }
+}
+
+/* -------- MEDIA QUERIES -------- */
+@media (min-width: 600px) and (max-width: 992px) {
+  .smaller-on-med {
+    height: 50vh;
+  }
+
+  .chembl-text {
+    padding: 0 10%;
   }
 }

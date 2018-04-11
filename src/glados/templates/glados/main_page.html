@@ -6,69 +6,80 @@
 
     <div class="main-page-container">
 
-    <!-------------- Text about ChEMBL section -------------->
-    <div class="main-page-section">
+        <!-------------- Text about ChEMBL section -------------->
+        <div class="row">
+            <div class="main-page-section col s12 l6 right smaller-on-med">
 
-        <div class="section-col s12 valign-wrapper">
+                <div class="section-col valign-wrapper">
 
-            <div class="chembl-text">
+                    <div class="chembl-text">
 
-                <h2>ChEMBL</h2>
+                        <h2>ChEMBL</h2>
 
-                <p>
-                    A manually curated chemical database of bioactive molecules with drug-like properties.
-                    It
-                    is maintained by the European Bioinformatics Institute, of the European Molecular
-                    Biology Laboratory
-                </p>
+                        <p>
+                            A manually curated chemical database of bioactive molecules with drug-like properties.
+                            It
+                            is maintained by the European Bioinformatics Institute, of the European Molecular
+                            Biology Laboratory
+                        </p>
 
 
-                <div class="btn-container">
+                        <div class="btn-container">
 
-                    <a class="button" href="https://www.ebi.ac.uk/chembl/downloads" target="_blank">
+                            <a class="button" href="https://www.ebi.ac.uk/chembl/downloads" target="_blank">
 
-                        <i class="fa fa-download"></i>
+                                <i class="fa fa-download"></i>
 
-                        Download ChEMBL
-                    </a>
+                                Download ChEMBL
+                            </a>
+
+                        </div>
+
+                        <p class="small-text"> Or use ChEMBL <a> Web Services </a></p>
+
+                    </div>
 
                 </div>
 
-                <p class="small-text"> Or use ChEMBL <a> Web Services </a></p>
+            </div>
+
+            <div class="divider hide-on-large-only"></div>
+
+            <!-------------- Visualisation Carousel Section -------------->
+            <div class="main-page-section col s12 l6">
+
+                <div class="section-col">
+
+                    <div class="carousel-wrapper">
+
+                        <div class="carousel-item">
+                            {% with is_dynamic=True %}
+                                {% include "glados/MainPageParts/TargetBrowserParts/browse_as_circles.html" %}
+                            {% endwith %}
+                        </div>
+
+                        <div class="carousel-item">
+                            {% with is_dynamic=True %}
+                                {% include "glados/MainPageParts/Visualizations/MaxPhaseForDiseaseDonut.html" %}
+                            {% endwith %}
+                        </div>
+
+                        <div class="carousel-item">
+                            {% with is_dynamic=True %}
+                                {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
+                            {% endwith %}
+                        </div>
+
+                    </div>
+
+                </div>
 
             </div>
 
         </div>
+
     </div>
 
-    <div class="divider"></div>
-
-    <!-------------- Visualisation Carousel Section -------------->
-    <div class="main-page-section">
-        <div class="section-col s12 carousel-append">
-            <div class="carousel-wrapper">
-
-                <div class="carousel-item">
-                    {% with is_dynamic=True %}
-                        {% include "glados/MainPageParts/TargetBrowserParts/browse_as_circles.html" %}
-                    {% endwith %}
-                </div>
-
-                <div class="carousel-item">
-                    {% with is_dynamic=True %}
-                        {% include "glados/MainPageParts/Visualizations/MaxPhaseForDiseaseDonut.html" %}
-                    {% endwith %}
-                </div>
-
-                <div class="carousel-item">
-                    {% with is_dynamic=True %}
-                        {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
-                    {% endwith %}
-                </div>
-
-            </div>
-        </div>
-    </div>
 
 
 {% endblock %}
