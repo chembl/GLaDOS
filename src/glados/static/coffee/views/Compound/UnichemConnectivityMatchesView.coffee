@@ -18,19 +18,19 @@ glados.useNameSpace 'glados.views.Compound',
         @hideSection()
         return
 
+      inchiKey = @model.get('molecule_structures').standard_inchi_key
+
       $descriptionContainer = $(@el).find('.BCK-DescriptionContainer')
-      glados.Utils.fillContentForElement($descriptionContainer)
+      glados.Utils.fillContentForElement $descriptionContainer,
+        inchi_key: inchiKey
+
       $legendContainer = $(@el).find('.BCK-LegendContainer')
       glados.Utils.fillContentForElement($legendContainer)
       $includeSaltsButtonContainer = $(@el).find('.BCK-LoadAlternativeSaltsButtonContainer')
       glados.Utils.fillContentForElement($includeSaltsButtonContainer)
 
       list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewUnichemConnectivityList()
-      list.setCompound(@model)
-      # this will be done directly from the info in the compounds
-      parentInchiKey = 'BSYNRYMUTXBXSQ-UHFFFAOYSA-N'
-      list.setInchiKeys
-        parent_key: parentInchiKey
+      list.setInchiKey(inchiKey)
 
       glados.views.PaginatedViews.PaginatedViewFactory.getNewTablePaginatedView(
         list, $(@el).find('.BCK-MatchesTable'), customRenderEvent=undefined, disableColumnsSelection=true)
