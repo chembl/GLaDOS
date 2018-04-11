@@ -37,7 +37,7 @@
 
                         </div>
 
-                        <p class="small-text"> Or use ChEMBL <a> Web Services </a></p>
+                        <p class="small-text"> Or use ChEMBL <a href=""> Web Services </a></p>
 
                     </div>
 
@@ -81,7 +81,32 @@
         </div>
 
         <div class="divider"></div>
+
+        <!-- ROW for database summary + tweets -->
         <div class="row container">
+
+            <!-- Database summary section -->
+            <div class="main-page-section col s12 m6 l4 half-height">
+
+                <div class="section-col">
+                    {% block database_info %}
+                        {% include "glados/MainPageParts/database_info.html" %}
+                    {% endblock %}
+                </div>
+
+            </div>
+
+            <!-- Tweets section -->
+            <div class="main-page-section col s12 m6 l4 half-height">
+
+                <div class="section-col">
+                    {% block tweets %}
+                        {% include "glados/MainPageParts/tweets.html" %}
+                    {% endblock %}
+                </div>
+
+            </div>
+
         </div>
 
     </div>
@@ -93,21 +118,3 @@
 {% block custom_js_inline %}
     MainPageApp.init();
 {% endblock %}
-
-
-{#        <!-- Tweets and database summary section-->#}
-{#        <div class="main-page-section">#}
-{#            <div class="main-container-row container row">#}
-{#                <div class="section-col col l6 s12">#}
-{#                    {% block tweets %}#}
-{#                        {% include "glados/MainPageParts/tweets.html" %}#}
-{#                    {% endblock %}#}
-{#                </div>#}
-{##}
-{#                <div class="section-col col l6 s12">#}
-{#                    {% block database_info %}#}
-{#                        {% include "glados/MainPageParts/database_info.html" %}#}
-{#                    {% endblock %}#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
