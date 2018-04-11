@@ -40,6 +40,30 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
   margin-right: auto;
 }
 
+.container {
+  width: 90%;
+}
+
+.btn-container {
+  padding: 30px 0 20px 0;
+  font-size: 1.1em;
+
+  .button {
+    padding: 10px 20px;
+    background-color: $primary-color;
+    color: white;
+    border-radius: 1px;
+    letter-spacing: 0.02em;
+
+    -webkit-transition: background-color 100ms ease;
+    transition: background-color 100ms ease;
+
+    &:hover {
+      background-color: $darker-color;
+    }
+  }
+}
+
 /* -------- Make sure carousel takes full height of container-------- */
 .carousel-wrapper {
   height: calc(100% - 40px); //40px for slick dots
@@ -78,31 +102,17 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
     font-size: 0.9em;
     a {
       color: $primary-color;
+
       &:hover {
         text-decoration: underline;
-      }
-    }
-  }
-
-  .btn-container {
-    padding: 30px 0 20px 0;
-    font-size: 1.1em;
-
-    .button {
-      padding: 10px 20px;
-      background-color: $primary-color;
-      color: white;
-      border-radius: 1px;
-      letter-spacing: 0.02em;
-
-      &:hover {
-        background-color: $darker-color;
       }
     }
   }
 }
 
 /* -------- MEDIA QUERIES -------- */
+
+/* -------- MEDIUM SCREEN -------- */
 @media (min-width: 600px) and (max-width: 992px) {
   .smaller-on-med {
     height: 50vh;
@@ -110,5 +120,21 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
 
   .chembl-text {
     padding: 0 10%;
+  }
+}
+
+/* -------- LARGE SCREEN -------- */
+@media (min-width: 992px) {
+  .chembl-text {
+    text-align: left;
+    padding-left: 40px;
+
+    p {
+      font-size: 1.1em;
+    }
+  }
+
+  .btn-container {
+    font-size: 1em;
   }
 }
