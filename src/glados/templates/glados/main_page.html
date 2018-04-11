@@ -1,0 +1,188 @@
+{% extends "glados/base/base_layout.html" %}
+
+{% block title %}Compound Report Card{% endblock %}
+
+{% block content %}
+
+    <div class="main-page-container">
+
+        <!-------------- ROW for text about chembl + carousel -------------->
+        <div class="row container">
+
+            <!-------------- Text about ChEMBL SECTION -------------->
+            <div class="main-page-section col s12 l6 right smaller-on-med">
+
+                <div class="section-col valign-wrapper">
+
+                    <div class="chembl-text">
+
+                        <h2>ChEMBL</h2>
+
+                        <p>
+                            A manually curated chemical database of bioactive molecules with drug-like properties.
+                            It
+                            is maintained by the European Bioinformatics Institute, of the European Molecular
+                            Biology Laboratory
+                        </p>
+
+
+                        <div class="btn-container">
+
+                            <a class="button" href="https://www.ebi.ac.uk/chembl/downloads" target="_blank">
+
+                                <i class="fa fa-download"></i>
+
+                                Download ChEMBL
+                            </a>
+
+                        </div>
+
+                        <p class="small-text"> Or use ChEMBL <a href=""> Web Services </a></p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="divider hide-on-large-only"></div>
+
+
+            <!-------------- Explore the database SECTION -------------->
+            <div class="col s12 l6 hide-on-large-only explore-database">
+
+                <h2> Explore the database </h2>
+
+                <div class="links-carousel">
+
+                    <div class="carousel-item">
+
+                        <div class="btn-container">
+
+                            <a class="hollow-button" href="/g/#browse/targets" target="_blank">
+                                Browse all Targets
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="carousel-item">
+
+                        <div class="btn-container">
+
+                            <a class="hollow-button" href="/g/#browse/drugs" target="_blank">
+                                Browse all Drugs
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="carousel-item">
+
+                        <div class="btn-container">
+
+                            <a class="hollow-button" href="/g/#browse/documents" target="_blank">
+                                Browse all Documents
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-------------- Visualisation Carousel SECTION -------------->
+            <div class="main-page-section col s12 l6 smaller-on-small">
+
+                <div class="section-col">
+
+                    <div class="carousel-wrapper">
+
+                        <div class="carousel-item">
+                            {% with is_dynamic=True %}
+                                {% include "glados/MainPageParts/TargetBrowserParts/browse_as_circles.html" %}
+                            {% endwith %}
+
+                            <div class="btn-container hide-on-med-and-down">
+                                <a class="hollow-button" href="/g/#browse/targets" target="_blank">
+                                    Browse all Targets
+                                </a>
+                            </div>
+
+                        </div>
+
+                        <div class="carousel-item">
+                            {% with is_dynamic=True %}
+                                {% include "glados/MainPageParts/Visualizations/MaxPhaseForDiseaseDonut.html" %}
+                            {% endwith %}
+
+                            <div class="btn-container hide-on-med-and-down">
+                                <a class="hollow-button" href="/g/#browse/drugs" target="_blank">
+                                    Browse all Drugs
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="carousel-item">
+                            {% with is_dynamic=True %}
+                                {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
+                            {% endwith %}
+
+                            <div class="btn-container hide-on-med-and-down">
+                                <a class="hollow-button" href="/g/#browse/documents" target="_blank">
+                                    Browse all Documents
+                                </a>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- ROW for database summary + tweets -->
+        <div class="row container">
+
+            <!-- Database summary SECTION -->
+            <div class="main-page-section col s12 m6 l4 half-height">
+
+                <div class="section-col">
+                    {% block database_info %}
+                        {% include "glados/MainPageParts/database_info.html" %}
+                    {% endblock %}
+                </div>
+
+            </div>
+
+            <!-- Tweets SECTION -->
+            <div class="main-page-section col s12 m6 l4 half-height">
+
+                <div class="section-col">
+                    {% block tweets %}
+                        {% include "glados/MainPageParts/tweets.html" %}
+                    {% endblock %}
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+{% endblock %}
+
+{% block custom_js_inline %}
+    MainPageApp.init();
+{% endblock %}
