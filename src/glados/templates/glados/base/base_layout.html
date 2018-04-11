@@ -62,9 +62,11 @@
 
             <!-- Breadcrumbs -->
             {% block breadcrumb %}
-                <div class="container main-container" {% if main_page %} style="display: none" {% endif %}>
-                    {% include "glados/base/breadcrumb.html" %}
-                </div>
+                {% if not main_page %}
+                    <div class="container main-container">
+                        {% include "glados/base/breadcrumb.html" %}
+                    </div>
+                {% endif %}
             {% endblock %}
 
             <!-- Main -->

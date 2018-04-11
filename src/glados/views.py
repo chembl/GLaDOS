@@ -140,7 +140,10 @@ def replace_urls_from_entinies(html, urls):
 
 
 def main_page(request):
-  return render(request, 'glados/mainPage.html')
+  context = {
+    'main_page': True
+  }
+  return render(request, 'glados/main_page.html', context)
 
 def main_html_base(request):
 
