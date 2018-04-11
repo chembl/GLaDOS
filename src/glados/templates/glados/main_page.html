@@ -6,102 +6,69 @@
 
     <div class="main-page-container">
 
-        <!-- Carousel and Text about ChEMBL section-->
-        <div class="main-page-section">
+    <!-------------- Text about ChEMBL section -------------->
+    <div class="main-page-section">
 
-            <div class="main-container-row container row ">
+        <div class="section-col s12 valign-wrapper">
 
-                <!-- Text about ChEMBL-->
-                <div class="section-col col l6 s12 valign-wrapper right">
+            <div class="chembl-text">
 
-                    <div class="chembl-text">
+                <h2>ChEMBL</h2>
 
-                        <h2>ChEMBL</h2>
+                <p>
+                    A manually curated chemical database of bioactive molecules with drug-like properties.
+                    It
+                    is maintained by the European Bioinformatics Institute, of the European Molecular
+                    Biology Laboratory
+                </p>
 
-                        <p> A manually curated chemical database of bioactive molecules with drug-like properties.
-                            It
-                            is maintained by the European Bioinformatics Institute (EBI), of the European Molecular
-                            Biology Laboratory
-                        </p>
 
-                        <div class="btn-container">
-                            <a class="btn-chembl" href="https://www.ebi.ac.uk/chembl/downloads" target="_blank">
-                                <i class="fa fa-download"></i>
-                                Download ChEMBL
-                            </a>
-                        </div>
-                        <p class="small-text"> Or use ChEMBL <a> Web Services </a></p>
+                <div class="btn-container">
 
-                    </div>
+                    <a class="button" href="https://www.ebi.ac.uk/chembl/downloads" target="_blank">
+
+                        <i class="fa fa-download"></i>
+
+                        Download ChEMBL
+                    </a>
 
                 </div>
-            
-                <!-- Carousel wrapper-->
-                <div class="section-col col l6 s12">
 
-                    <div class="carousel-wrapper">
+                <p class="small-text"> Or use ChEMBL <a> Web Services </a></p>
 
-                        <div class="carousel-item">
-                            {% with is_dynamic=True %}
-                                {% include "glados/MainPageParts/TargetBrowserParts/browse_as_circles.html" %}
-                            {% endwith %}
-                        </div>
-
-                        <div class="carousel-item">
-                            {% with is_dynamic=True %}
-                                {% include "glados/MainPageParts/Visualizations/MaxPhaseForDiseaseDonut.html" %}
-                            {% endwith %}
-                        </div>
-
-                        <div class="carousel-item">
-                            {% with is_dynamic=True %}
-                                {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
-                            {% endwith %}
-                        </div>
-                    </div>
-
-                </div>
             </div>
+
         </div>
-
-        <div class="divider"></div>
-
-        <!-- Tweets and database summary section-->
-        <div class="main-page-section">
-            <div class="main-container-row container row">
-                <div class="section-col col l6 s12">
-                    {% block tweets %}
-                        {% include "glados/MainPageParts/tweets.html" %}
-                    {% endblock %}
-                </div>
-
-                <div class="section-col col l6 s12">
-                    {% block database_info %}
-                        {% include "glados/MainPageParts/database_info.html" %}
-                    {% endblock %}
-                </div>
-            </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="main-page-section blue">
-            <div class="container">
-            </div>
-        </div>
-
-        <div class="main-page-section red">
-            <div class="container">
-            </div>
-        </div>
-
-        <div class="main-page-section teal">
-            <div class="container">
-            </div>
-        </div>
-
     </div>
 
+    <div class="divider"></div>
+
+    <!-------------- Visualisation Carousel Section -------------->
+    <div class="main-page-section">
+        <div class="section-col s12 carousel-append">
+            <div class="carousel-wrapper">
+
+                <div class="carousel-item">
+                    {% with is_dynamic=True %}
+                        {% include "glados/MainPageParts/TargetBrowserParts/browse_as_circles.html" %}
+                    {% endwith %}
+                </div>
+
+                <div class="carousel-item">
+                    {% with is_dynamic=True %}
+                        {% include "glados/MainPageParts/Visualizations/MaxPhaseForDiseaseDonut.html" %}
+                    {% endwith %}
+                </div>
+
+                <div class="carousel-item">
+                    {% with is_dynamic=True %}
+                        {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
+                    {% endwith %}
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 
 {% endblock %}
@@ -109,3 +76,21 @@
 {% block custom_js_inline %}
     MainPageApp.init();
 {% endblock %}
+
+
+{#        <!-- Tweets and database summary section-->#}
+{#        <div class="main-page-section">#}
+{#            <div class="main-container-row container row">#}
+{#                <div class="section-col col l6 s12">#}
+{#                    {% block tweets %}#}
+{#                        {% include "glados/MainPageParts/tweets.html" %}#}
+{#                    {% endblock %}#}
+{#                </div>#}
+{##}
+{#                <div class="section-col col l6 s12">#}
+{#                    {% block database_info %}#}
+{#                        {% include "glados/MainPageParts/database_info.html" %}#}
+{#                    {% endblock %}#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}

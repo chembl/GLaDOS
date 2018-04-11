@@ -68,13 +68,13 @@
 
 .slick-prev
 {
-    left: 10px;
+    left: 0;
     border-radius: 0 80px 80px 0;
     box-shadow: 2px 0 2px 0px rgba(169, 169, 169, 0.38);
 }
 [dir='rtl'] .slick-prev
 {
-    right: 10px;
+    right: 0;
     left: auto;
 }
 .slick-prev:before
@@ -88,7 +88,7 @@
 
 .slick-next
 {
-    right: 10px;
+    right: 0;
     border-radius: 80px 0 0 80px;
     box-shadow: -2px 0 2px 0px rgba(169, 169, 169, 0.38);
 }

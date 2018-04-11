@@ -24,21 +24,27 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
 
 /* -------- DEFAULT STYLES -------- */
 .main-page-section {
+  height: 100%;
+  width: 100%;
+  margin-bottom: 0;
 
-  .main-container-row {
-    height: 100%;
-    width: 100%;
-    margin-bottom: 0;
-  }
   .section-col {
     height: calc(100vh - #{$full-header-height});
     border: blue solid 2px;
+    margin:  0 10px; //margin for small size
+
   }
+}
+
+.divider {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* -------- Make sure carousel takes full height of container-------- */
 .carousel-wrapper {
-  height: 100%;
+  height: calc(100% - 40px); //40px for slick dots
 
   .slick-list {
     height: 100%;
@@ -61,27 +67,32 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
     font-size: 3em;
     color: $darker-color;
     margin: 0;
+    padding-bottom: 10px;
   }
 
   p {
     font-size: 1.25em;
     margin: 0;
-    color: #383E40
+    color: #4d5456;
   }
 
   .small-text {
     font-size: 0.9em;
-    margin-top: 20px;
     a:hover {
       text-decoration: underline;
     }
   }
 
   .btn-container {
-    margin-top: 25px;
+    padding: 30px 0 20px 0;
     font-size: 1.1em;
-    a {
+
+    .button {
+      padding: 10px 20px;
       background-color: $primary-color;
+      color: white;
+      border-radius: 1px;
+      letter-spacing: 0.02em;
 
       &:hover {
         background-color: $darker-color;
