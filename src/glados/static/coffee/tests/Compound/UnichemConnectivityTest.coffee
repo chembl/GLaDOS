@@ -2,15 +2,14 @@ describe 'Unichem Connectivity List', ->
 
   list = undefined
   #CHEMBL2296002
-  parentInchiKey = 'JJBCTCGUOQYZHK-ZSCHJXSPSA-N'
+  inchiKey = 'JJBCTCGUOQYZHK-ZSCHJXSPSA-N'
   parentDataToParse = undefined
 
   beforeAll (done) ->
 
     list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewUnichemConnectivityList()
     # this will be done directly from the info in the compounds
-    list.setInchiKeys
-      parent_key: parentInchiKey
+    list.setInchiKey inchiKey
 
     dataURL = glados.Settings.STATIC_URL + 'testData/Compounds/UnichemConnectivity/JJBCTCGUOQYZHK-ZSCHJXSPSA-N_UnichemResponseToParse.json'
     $.get dataURL, (testData) ->
@@ -20,8 +19,8 @@ describe 'Unichem Connectivity List', ->
   it 'initialises the links correctly', ->
 
     uCBKey = glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList.UNICHEM_CALLBACK_KEY
-    urlMustBe = "#{glados.ChemUtils.UniChem.connectivity_url}#{parentInchiKey}/0/0/4?callback=#{uCBKey}"
-    urlGot = list.getURLForInchi(parentInchiKey)
+    urlMustBe = "#{glados.ChemUtils.UniChem.connectivity_url}#{inchiKey}/0/0/4?callback=#{uCBKey}"
+    urlGot = list.getURLForInchi(inchiKey)
 
     expect(urlGot).toBe(urlMustBe)
 

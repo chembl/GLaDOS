@@ -1,0 +1,225 @@
+{
+  "_index": "chembl_molecule",
+  "_type": "molecule",
+  "_id": "CHEMBL2296002",
+  "_version": 8,
+  "found": true,
+  "_source": {
+    "withdrawn_year": null,
+    "usan_stem_definition": null,
+    "inorganic_flag": "-1",
+    "polymer_flag": false,
+    "biotherapeutic": null,
+    "black_box_warning": "0",
+    "oral": false,
+    "pref_name": null,
+    "cross_references": [
+
+    ],
+    "structure_type": "MOL",
+    "dosed_ingredient": false,
+    "molecule_structures": {
+      "canonical_smiles": "CC(=O)Oc1ccccc1C(=O)O.NCCCC[C@H](N)C(=O)O",
+      "standard_inchi_key": "JJBCTCGUOQYZHK-ZSCHJXSPSA-N",
+      "standard_inchi": "InChI=1S/C9H8O4.C6H14N2O2/c1-6(10)13-8-5-3-2-4-7(8)9(11)12;7-4-2-1-3-5(8)6(9)10/h2-5H,1H3,(H,11,12);5H,1-4,7-8H2,(H,9,10)/t;5-/m.0/s1"
+    },
+    "_metadata": {
+      "disease_name": [
+
+      ],
+      "es_completion": [
+        {
+          "input": "CHEMBL25",
+          "weight": 5
+        },
+        {
+          "input": "C15H22N2O6",
+          "weight": 90
+        },
+        {
+          "input": "JJBCTCGUOQYZHK-ZSCHJXSPSA-N",
+          "weight": 30
+        },
+        {
+          "input": "CC(=O)Oc1ccccc1C(=O)O.NCCCC[C@H](N)C(=O)O",
+          "weight": 30
+        },
+        {
+          "input": "InChI=1S/C9H8O4.C6H14N2O2/c1-6(10)13-8-5-3-2-4-7(8)9(11)12;7-4-2-1-3-5(8)6(9)10/h2-5H,1H3,(H,11,12);5H,1-4,7-8H2,(H,9,10)/t;5-/m.0/s1",
+          "weight": 30
+        },
+        {
+          "input": "CHEMBL2296002",
+          "weight": 10
+        }
+      ],
+      "related_targets": {
+        "chembl_ids": {
+          "0": [
+            "CHEMBL375"
+          ],
+          "1": [
+
+          ],
+          "2": [
+
+          ]
+        },
+        "count": 1
+      },
+      "compound_records": [
+        {
+          "src_description": "Scientific Literature",
+          "src_id": 1,
+          "src_short_name": "LITERATURE",
+          "compound_name": "(S)-2,6-diaminohexanoic acid 2-acetoxybenzoic acid",
+          "compound_key": "ASL"
+        },
+        {
+          "src_description": "HeCaToS Compounds",
+          "src_id": 35,
+          "src_short_name": "HECATOS",
+          "compound_key": "LYSINE ACETYLSALICYLATE"
+        }
+      ],
+      "activity_count": 0,
+      "tags": [
+
+      ],
+      "drug": {
+        "is_drug": false,
+        "drug_data": null
+      },
+      "unichem": [
+        {
+          "src_url": "https://www.emolecules.com/",
+          "link": "https://www.emolecules.com/cgi-bin/more?vid=10446249",
+          "id": "10446249",
+          "src_name": "eMolecules"
+        },
+        {
+          "src_url": "http://fdasis.nlm.nih.gov/srs/srs.jsp",
+          "link": "http://fdasis.nlm.nih.gov/srs/ProxyServlet?mergeData=true&objectHandle=DBMaint&APPLICATION_NAME=fdasrs&actionHandle=default&nextPage=jsp/srs/ResultScreen.jsp&TXTSUPERLISTID=XAN4V337CI",
+          "id": "XAN4V337CI",
+          "src_name": "FDA SRS"
+        },
+        {
+          "src_url": "https://www.surechembl.org/search/",
+          "link": "https://www.surechembl.org/chemical/SCHEMBL25878",
+          "id": "SCHEMBL25878",
+          "src_name": "SureChEMBL"
+        },
+        {
+          "src_url": "http://www.thomson-pharma.com/",
+          "link": "http://pubchem.ncbi.nlm.nih.gov/substance/15323239",
+          "id": "15323239",
+          "src_name": "PubChem: Thomson Pharma "
+        },
+        {
+          "src_url": "http://pubchem.ncbi.nlm.nih.gov",
+          "link": "http://pubchem.ncbi.nlm.nih.gov/compound/91626",
+          "id": "91626",
+          "src_name": "PubChem"
+        },
+        {
+          "src_url": "https://actor.epa.gov",
+          "link": "http://actor.epa.gov/actor/chemical.xhtml?casrn=37933-78-1",
+          "id": "37933-78-1",
+          "src_name": "ACToR"
+        }
+      ],
+      "compound_generated": {
+        "chirality_label": "Unknown",
+        "availability_type_label": "Unknown"
+      },
+      "related_documents": {
+        "count": 1,
+        "chembl_ids": {
+          "0": [
+            "CHEMBL3046683"
+          ]
+        }
+      },
+      "related_assays": {
+        "count": 2,
+        "chembl_ids": {
+          "0": [
+            "CHEMBL3075809",
+            "CHEMBL3074909"
+          ]
+        }
+      },
+      "related_activities": {
+        "count": 2
+      },
+      "related_cell_lines": {
+        "count": 0,
+        "chembl_ids": {
+
+        }
+      },
+      "related_tissues": {
+        "count": 0,
+        "chembl_ids": {
+
+        }
+      }
+    },
+    "max_phase": 0,
+    "withdrawn_country": null,
+    "atc_classifications": [
+
+    ],
+    "therapeutic_flag": false,
+    "usan_stem": null,
+    "indication_class": null,
+    "topical": false,
+    "parenteral": false,
+    "first_approval": null,
+    "molecule_type": "Small molecule",
+    "availability_type": "-1",
+    "helm_notation": null,
+    "natural_product": "-1",
+    "molecule_hierarchy": {
+      "molecule_chembl_id": "CHEMBL2296002",
+      "parent_chembl_id": "CHEMBL25"
+    },
+    "usan_substem": null,
+    "withdrawn_flag": false,
+    "chirality": "-1",
+    "first_in_class": "-1",
+    "molecule_synonyms": [
+
+    ],
+    "usan_year": null,
+    "molecule_chembl_id": "CHEMBL2296002",
+    "withdrawn_reason": null,
+    "chebi_par_id": null,
+    "prodrug": "-1",
+    "molecule_properties": {
+      "qed_weighted": "0.56",
+      "num_lipinski_ro5_violations": 0,
+      "psa": "63.6",
+      "heavy_atoms": 13,
+      "alogp": "1.23",
+      "num_alerts": 2,
+      "acd_most_apka": "3.48",
+      "hba": 4,
+      "aromatic_rings": 1,
+      "hbd_lipinski": 1,
+      "acd_most_bpka": null,
+      "mw_monoisotopic": "180.0423",
+      "molecular_species": "ACID",
+      "ro3_pass": "N",
+      "hba_lipinski": 4,
+      "full_molformula": "C15H22N2O6",
+      "rtb": 3,
+      "hbd": 1,
+      "acd_logp": "1.4",
+      "acd_logd": "-1.68",
+      "full_mwt": "326.34",
+      "mw_freebase": "180.16",
+      "num_ro5_violations": 0
+    }
+  }
+}

@@ -3,7 +3,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
   UnichemConnectivityRefsList:
 
     setCompound: (compound) -> @setMeta('original_compound', compound)
-    setInchiKeys: (keysStructure) -> @setMeta('keys_structure', keysStructure)
+    setInchiKey: (key) -> @setMeta('inchi_key', key)
     getURLForInchi: (inchiKey) ->
 
       uCBKey = glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList.UNICHEM_CALLBACK_KEY
@@ -13,9 +13,9 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
     # Fetching
     #-------------------------------------------------------------------------------------------------------------------
     fetch: ->
-      keysStructure = @getMeta('keys_structure')
-      parentInchiKey = keysStructure.parent_key
-      @fetchDataForInchiKey(parentInchiKey)
+
+      inchiKey = @getMeta('inchi_key')
+      @fetchDataForInchiKey(inchiKey)
 
     fetchDataForInchiKey: (inchiKey) ->
 
@@ -23,7 +23,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
       callbackUnichem = (ucJSONResponse) ->
 
         thisList.reset(thisList.parse(ucJSONResponse))
-        # replace with items ready thing!!!
 
       uCBKey = glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList.UNICHEM_CALLBACK_KEY
       window[uCBKey] = callbackUnichem

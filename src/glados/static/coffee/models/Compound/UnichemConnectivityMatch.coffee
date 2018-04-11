@@ -8,7 +8,8 @@ glados.models.Compound.UnichemConnectivityMatch.COLUMNS =
     link_base: 'scr_url'
   IDENTICAL_COMPONENT_MATCHES:
     name_to_show: 'Identical Component'
-    comparator: ''
+    comparator: 'identical_matches'
+    custom_field_template: '<a>hola</a>'
   S:
     name_to_show: 'S'
     comparator: ''
