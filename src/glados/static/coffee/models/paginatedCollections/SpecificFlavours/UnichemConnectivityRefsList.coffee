@@ -63,9 +63,12 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
 
           for compare in match.match_compare
 
+            console.log 'compare: ', compare
             newRef =
               ref_url: matchURL
               ref_id: srcCompoundID
+              is_toggleable: compare.C > 0
+              show: false
 
             # this logic has been copied from https://github.com/chembl/chembl_interface/blob/master/system/application/views/application/compound/report_card/unichem_connectivity.php
             isS = (parseInt(compare.b) == 1 or parseInt(compare.m) == 1 \

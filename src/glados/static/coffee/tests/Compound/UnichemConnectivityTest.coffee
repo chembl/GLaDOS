@@ -43,7 +43,6 @@ describe 'Unichem Connectivity List', ->
   it 'parses the response from the parent correctly (match classification)', ->
 
     parsedData = list.parse(parentDataToParse)
-    console.log 'parsedData: ', parsedData
     sourcesGotIndex = _.indexBy(parsedData, 'src_name')
 
     for sourceMustBe in parentDataToParse[1]
@@ -93,3 +92,32 @@ describe 'Unichem Connectivity List', ->
           expect(refGot.ref_url).toBe(refURLMustBe)
 
 
+  it 'parses the response from the parent correctly (toggleability)', ->
+
+    parsedData = list.parse(parentDataToParse)
+    sourcesGotIndex = _.indexBy(parsedData, 'src_name')
+    console.log 'parsedData: ', parsedData
+
+    for sourceMustBe in parentDataToParse[1]
+
+      matchesMustBe = sourceMustBe.src_matches
+      nameMustBe = sourceMustBe.name_label
+      sourceGot = sourcesGotIndex[nameMustBe]
+
+      allMatches = _.union(sourceGot.identical_matches, sourceGot.identical_matches, sourceGot.s_matches,
+        sourceGot.p_matches, sourceGot.i_matches, sourceGot.ip_matches, sourceGot.sp_matches, sourceGot.si_matches,
+        sourceGot.sip_matches)
+
+      for matchMustBe in matchesMustBe
+
+        srcCompoundIDMustBe = matchMustBe.src_compound_id
+
+        for compareMustBe in matchMustBe.match_compare
+
+          refIDMustBe = srcCompoundIDMustBe
+          isToggleable = compareMustBe.C > 0
+
+          refGot = _.find(allMatches, (ref) -> ref.ref_id == refIDMustBe)
+          expect(refGot?).toBe(true)
+          expect(refGot.is_toggleable).toBe(isToggleable)
+          expect(refGot.show).toBe(false)
