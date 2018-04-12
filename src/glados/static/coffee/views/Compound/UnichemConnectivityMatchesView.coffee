@@ -7,9 +7,13 @@ glados.useNameSpace 'glados.views.Compound',
       @model.on 'change', @render, @
       @model.on 'error', @showCompoundErrorCard, @
       @resource_type = 'Compound'
+      @collectionFetched = false
 
       @initEmbedModal(arguments[0].embed_section_name, arguments[0].embed_identifier)
       @activateModals()
+
+    events:
+      'click .BCK-ToggleAlternateForms': 'toogleAlternateForms'
 
     render: ->
 
@@ -19,6 +23,10 @@ glados.useNameSpace 'glados.views.Compound',
         return
 
       inchiKey = @model.get('molecule_structures').standard_inchi_key
+      if not @collection?
+        @collection = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewUnichemConnectivityList()
+        @collection.setInchiKey(inchiKey)
+        @collection.on 'reset',  @render, @
 
       $descriptionContainer = $(@el).find('.BCK-DescriptionContainer')
       glados.Utils.fillContentForElement $descriptionContainer,
@@ -27,17 +35,21 @@ glados.useNameSpace 'glados.views.Compound',
       $legendContainer = $(@el).find('.BCK-LegendContainer')
       glados.Utils.fillContentForElement($legendContainer)
       $includeSaltsButtonContainer = $(@el).find('.BCK-LoadAlternativeSaltsButtonContainer')
-      glados.Utils.fillContentForElement($includeSaltsButtonContainer)
+      glados.Utils.fillContentForElement $includeSaltsButtonContainer,
+        include: @collection.isShowingAlternativeForms()
 
-      list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewUnichemConnectivityList()
-      list.setInchiKey(inchiKey)
+      if not @tableView?
+        @tableView = glados.views.PaginatedViews.PaginatedViewFactory.getNewTablePaginatedView(
+          @collection, $(@el).find('.BCK-MatchesTable'), customRenderEvent=undefined, disableColumnsSelection=true)
 
-      glados.views.PaginatedViews.PaginatedViewFactory.getNewTablePaginatedView(
-        list, $(@el).find('.BCK-MatchesTable'), customRenderEvent=undefined, disableColumnsSelection=true)
-
-      list.fetch()
-      console.log 'LIST: ', list
+      if not @collectionFetched
+        @collection.fetch()
+        @collectionFetched = true
 
       @showSection()
       @showCardContent()
 
+    toogleAlternateForms: ->
+
+      @tableView.resetPageNumber()
+      @collection.toggleAlternativeSaltsAndMixtures()
