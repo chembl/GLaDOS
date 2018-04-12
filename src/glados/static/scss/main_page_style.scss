@@ -22,6 +22,7 @@ $grey-dark: #4d5456;
 $chembl-header-height: 54px;
 $ebi-nav-height: 50px;
 $full-header-height: $chembl-header-height + $ebi-nav-height;
+$full-header-height-large: 180px;
 
 /* -------- DEFAULT STYLES -------- */
 
@@ -272,6 +273,9 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
 
   /* -------- LARGE SCREEN -------- */
   @media (min-width: 992px) {
+    .main-page-section {
+      height: calc(100vh - #{$full-header-height-large})
+    }
     .chembl-text {
       text-align: left;
       padding-left: 40px;

@@ -1,177 +1,181 @@
 <!DOCTYPE html>
 {% load static %}
 
-    <html>
+<html>
 
-        <head>
+<head>
 
-            <meta charset="UTF-8">
-            <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon"/>
-            <title>{% block title %}{% endblock %}</title>
-            {% block analytics %}
-                {% include "glados/base/hotjar_analytics.html" %}
-            {% endblock %}
-            {% load compress %}
-            <!-- Imports used by all the templates-->
-            <!-- only use this if absolutely necessary, it can complicate the css imports -->
-            {% block common_css %}
-                {% include "glados/base/css_imports_for_all.html" %}
-            {% endblock %}
+    <meta charset="UTF-8">
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon"/>
+    <title>{% block title %}{% endblock %}</title>
+    {% block analytics %}
+        {% include "glados/base/hotjar_analytics.html" %}
+    {% endblock %}
+    {% load compress %}
+    <!-- Imports used by all the templates-->
+    <!-- only use this if absolutely necessary, it can complicate the css imports -->
+    {% block common_css %}
+        {% include "glados/base/css_imports_for_all.html" %}
+    {% endblock %}
 
 
-            <!-- Imports used by the current template -->
-            {% block stylesheets %}{% endblock %}
+    <!-- Imports used by the current template -->
+    {% block stylesheets %}{% endblock %}
 
-        </head>
+</head>
 
-        <!-- Header -->
-        <header>
+<!-- Header -->
+<header>
 
-            <div id="masthead-contaniner" class="row">
-                {% block header %}
-                    {% include "glados/base/header.html" %}
-                {% endblock %}
+    <div id="masthead-contaniner" class="row">
+        {% block header %}
+            {% include "glados/base/header.html" %}
+        {% endblock %}
+    </div>
+    <div id="chembl-header-container">
+        {% block chembl_header %}
+            {% include "glados/base/chembl_header.html" %}
+        {% endblock %}
+    </div>
+
+{#    <div class="chembl-header-spacer">#}
+{#    </div>#}
+
+
+</header>
+
+<body>
+
+<!-- Splash screen -->
+<div id='GladosMainSplashScreen' class="loader-background">
+    <div class="card splash-card">
+        <div class="loader-container">
+            <div class="spinner">
+                <div class="ball ball-1"></div>
+                <div class="ball ball-2"></div>
+                <div class="ball ball-3"></div>
+                <div class="ball ball-4"></div>
+                <div class="ball ball-5"></div>
+                <div class="ball ball-6"></div>
             </div>
-            <div id="chembl-header-container">
-                {% block chembl_header %}
-                    {% include "glados/base/chembl_header.html" %}
-                {% endblock %}
-            </div>
+            <span class="chembl-logo center-align"> ChEMBL </span>
+            <span class="center-align loading-msg"> Loading... </span>
+        </div>
+    </div>
+</div>
 
-        </header>
+<!-- Breadcrumbs -->
+{% block breadcrumb %}
+    {% if not main_page %}
+        <div class="container main-container">
+            {% include "glados/base/breadcrumb.html" %}
+        </div>
+    {% endif %}
+{% endblock %}
 
-        <body>
+<!-- Main -->
+<main>
 
-            <!-- Splash screen -->
-            <div id='GladosMainSplashScreen' class="loader-background">
-                <div class="card splash-card">
-                    <div class="loader-container">
-                        <div class="spinner">
-                            <div class="ball ball-1"></div>
-                            <div class="ball ball-2"></div>
-                            <div class="ball ball-3"></div>
-                            <div class="ball ball-4"></div>
-                            <div class="ball ball-5"></div>
-                            <div class="ball ball-6"></div>
-                        </div>
-                        <span class="chembl-logo center-align"> ChEMBL </span>
-                        <span class="center-align loading-msg"> Loading... </span>
-                    </div>
-                </div>
-            </div>
+    {% include "glados/base/modals/generated_modals_container.html" %}
 
-            <!-- Breadcrumbs -->
-            {% block breadcrumb %}
-                {% if not main_page %}
-                    <div class="container main-container">
-                        {% include "glados/base/breadcrumb.html" %}
-                    </div>
-                {% endif %}
-            {% endblock %}
+    {% block content %}{% endblock %}
 
-            <!-- Main -->
-            <main>
+    {% include "glados/base/shortened_params.html" %}
 
-                {% include "glados/base/modals/generated_modals_container.html" %}
+    <div id='GladosMainContent' style="display: none"></div>
 
-                {% block content %}{% endblock %}
+    {% block download_db_menu %}
+        {% include "glados/MainPageParts/download_db_menu.html" %}
+    {% endblock %}
 
-                {% include "glados/base/shortened_params.html" %}
+</main>
 
-                <div id='GladosMainContent' style="display: none"></div>
+<!-- Footer -->
+<footer class="page-footer">
 
-                {% block download_db_menu %}
-                    {% include "glados/MainPageParts/download_db_menu.html" %}
-                {% endblock %}
+    {% block footer %}
+        {% include "glados/base/footer.html" %}
+    {% endblock %}
 
-            </main>
+</footer>
 
-            <!-- Footer -->
-            <footer class="page-footer">
+<!-- - - - - - - - - - - - - - - - - - - - -->
+<!-- APIs -->
+<!-- - - - - - - - - - - - - - - - - - - - -->
 
-                {% block footer %}
-                    {% include "glados/base/footer.html" %}
-                {% endblock %}
+<!-- common imports for all templates -->
+{% include "glados/base/js_imports_for_all.html" %}
 
-            </footer>
+<!-- custom js imports that each template decides to load -->
+<!-- only use this if absolutely necessary, it can complicate the js imports -->
+{% compress js %}
+    {% block custom_js %}{% endblock %}
+{% endcompress %}
 
-            <!-- - - - - - - - - - - - - - - - - - - - -->
-            <!-- APIs -->
-            <!-- - - - - - - - - - - - - - - - - - - - -->
+<!-- handlebars templates -->
+{% block common_handlebars %}
+    {% include "glados/Handlebars/CommonSources.html" %}
+    {% include "glados/Handlebars/DownloadWizard/Hbs-WizardStep.html" %}
+{% endblock %}
 
-            <!-- common imports for all templates -->
-            {% include "glados/base/js_imports_for_all.html" %}
+{% block custom_handlebars %}
+{% endblock %}
 
-            <!-- custom js imports that each template decides to load -->
-            <!-- only use this if absolutely necessary, it can complicate the js imports -->
-            {% compress js %}
-                {% block custom_js %}{% endblock %}
-            {% endcompress %}
+<!-- inline javascript -->
+{% compress js %}
+    <script type="text/javascript" charset="utf-8">
 
-            <!-- handlebars templates -->
-            {% block common_handlebars %}
-                {% include "glados/Handlebars/CommonSources.html" %}
-                {% include "glados/Handlebars/DownloadWizard/Hbs-WizardStep.html" %}
-            {% endblock %}
+        $(document).ready(function () {
+            glados.helpers.HeaderHelper.initializeHeader();
+            glados.helpers.SideMenuHelper.initializeSideMenu();
+            glados.views.SearchResults.SearchBarView.createInstances();
+            //the initialization of modals needs to be as specific as possible to avoid issues with all the other modals
+            $('#download-db-modal').modal();
 
-            {% block custom_handlebars %}
-            {% endblock %}
+            var baseMenuItem = DownloadWizardApp.initWizardStep();
+            DownloadWizardApp.initBaseWizardStepView(baseMenuItem, $('#download-wizard'));
+            baseMenuItem.fetch();
 
-            <!-- inline javascript -->
-            {% compress js %}
-                <script type="text/javascript" charset="utf-8">
+            {% block custom_js_inline %}{% endblock %}
+        });
+    </script>
+{% endcompress %}
 
-                    $(document).ready(function () {
-                        glados.helpers.HeaderHelper.initializeHeader();
-                        glados.helpers.SideMenuHelper.initializeSideMenu();
-                        glados.views.SearchResults.SearchBarView.createInstances();
-                        //the initialization of modals needs to be as specific as possible to avoid issues with all the other modals
-                        $('#download-db-modal').modal();
+<!-- a function to be called after the content is rendered  -->
+{% compress js %}
+    <script type="text/javascript" charset="utf-8">
 
-                        var baseMenuItem = DownloadWizardApp.initWizardStep();
-                        DownloadWizardApp.initBaseWizardStepView(baseMenuItem, $('#download-wizard'));
-                        baseMenuItem.fetch();
+        afterRender = function () {
 
-                        {% block custom_js_inline %}{% endblock %}
-                    });
-                </script>
-            {% endcompress %}
+            {% block custom_afterRender %}{% endblock %}
 
-            <!-- a function to be called after the content is rendered  -->
-            {% compress js %}
-                <script type="text/javascript" charset="utf-8">
+        }
 
-                    afterRender = function () {
+    </script>
+{% endcompress %}
 
-                        {% block custom_afterRender %}{% endblock %}
+{% load static %}
 
-                    }
+<!-- common imports for all templates that need to be last -->
+{% compress js %}
 
-                </script>
-            {% endcompress %}
+    <!-- this sets up the styles for the chemical formulas after they have been rendered in the page-->
+    <script type="text/javascript" src="{% static 'js/api/easychem.js' %}"></script>
 
-            {% load static %}
+{% endcompress %}
 
-            <!-- common imports for all templates that need to be last -->
-            {% compress js %}
+<div id="glados-messages" class="modal">
+    <div class="modal-content"></div>
+    <div class="modal-footer"></div>
+</div>
 
-                <!-- this sets up the styles for the chemical formulas after they have been rendered in the page-->
-                <script type="text/javascript" src="{% static 'js/api/easychem.js' %}"></script>
+<script type="application/javascript">
+    $('#glados-messages').modal({
+        dismissible: false,
+        opacity: .5
+    });
+</script>
 
-            {% endcompress %}
+</body>
 
-            <div id="glados-messages" class="modal">
-                <div class="modal-content"></div>
-                <div class="modal-footer"></div>
-            </div>
-
-            <script type="application/javascript">
-                $('#glados-messages').modal({
-                    dismissible: false,
-                    opacity: .5
-                });
-            </script>
-
-        </body>
-
-    </html>
+</html>
