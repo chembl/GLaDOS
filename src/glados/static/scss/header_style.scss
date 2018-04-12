@@ -17,6 +17,7 @@ $logo-height-xl: 40px;
 $lighter-color: #62b7bd;
 $primary-color: #09979B;
 $darker-color: #0d595f;
+$grey: #858585;
 
 //search bar
 $search-bar-height: 25px;
@@ -57,7 +58,9 @@ header .row {
 
 .burger-dropdown {
   li:hover {
-    background-color: $lighter-color;
+    a {
+      color: $primary-color !important;
+    }
   }
 }
 
@@ -403,18 +406,24 @@ header .row {
       width: 100%;
       max-height: 100vh;
       overflow-y: scroll;
+      background-color: white;
+      box-shadow: 0 1px 4px 0 #e4e4e4;
 
       transition: margin-top 700ms ease-in-out;
       -webkit-transition: margin-top 700ms ease-in-out;
 
       li.dropdown-item {
         height: 50px;
+        border-bottom-color: #e4e4e4;
 
         a {
-          color: white;
+          color: $grey;
           font-size: 0.9em;
           padding: 15px !important;
           text-align: center;
+
+          transition: color 200ms ease-in-out;
+          -webkit-transition: color 200ms ease-in-out;
         }
       }
     }
