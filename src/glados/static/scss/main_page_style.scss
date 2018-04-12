@@ -24,178 +24,189 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
 
 /* -------- DEFAULT STYLES -------- */
 
-.main-page-section {
-  height: calc(100vh - #{$full-header-height});
-  max-height: 800px;
-  margin-bottom: 0;
-  //border: blue solid 2px;
-
-  &.half-height {
-    height: 40vh;
+.main-page-container {
+  .container {
+    width: 90%;
+    max-width: 1280px;
   }
 
-  .section-col {
-    height: 100%;
+  .main-page-section {
+    height: calc(100vh - #{$full-header-height});
+    max-height: 800px;
+    margin-bottom: 0;
     //border: blue solid 2px;
-  }
 
-}
-
-.divider {
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.container {
-  width: 90%;
-}
-
-.btn-container {
-  padding: 30px 0 20px 0;
-
-  .button {
-    font-size: 1em;
-    padding: 10px 20px;
-    background-color: $primary-color;
-    color: white;
-    border-radius: 1px;
-    letter-spacing: 0.02em;
-
-    -webkit-transition: background-color 100ms ease;
-    transition: background-color 100ms ease;
-
-    &:hover {
-      background-color: $darker-color;
+    &.half-height {
+      height: 40vh;
     }
+
+    .section-col {
+      height: 100%;
+      //border: blue solid 2px;
+    }
+
   }
 
-  .hollow-button {
-    padding: 8px 12px;
-    background-color: white;
-    color: $primary-color;
-    border: solid $primary-color 2px;
-    border-radius: 1px;
-    letter-spacing: 0.02em;
+  .divider {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-    -webkit-transition: letter-spacing 200ms ease;
-    transition: letter-spacing 200ms ease;
+  .btn-container {
+    padding: 30px 0 20px 0;
 
-    &:hover {
-      letter-spacing: 0.04em;
+    .button {
+      font-size: 1em;
+      padding: 10px 20px;
+      background-color: $primary-color;
+      color: white;
+      border-radius: 1px;
+      letter-spacing: 0.02em;
+
+      -webkit-transition: background-color 100ms ease;
+      transition: background-color 100ms ease;
+
+      &:hover {
+        background-color: $darker-color;
+      }
+    }
+
+    .hollow-button {
+      padding: 8px 12px;
+      background-color: white;
+      color: $primary-color;
+      border: solid $primary-color 2px;
+      border-radius: 1px;
+      letter-spacing: 0.02em;
+
+      -webkit-transition: letter-spacing 200ms ease;
+      transition: letter-spacing 200ms ease;
+
+      &:hover {
+        letter-spacing: 0.04em;
+      }
     }
   }
 }
 
 /* -------- Make sure carousel takes full height of container-------- */
-.carousel-wrapper {
-  height: calc(100% - 40px); //50px for slick dots
+.main-page-container {
+  .carousel-wrapper {
+    height: calc(100% - 40px); //50px for slick dots
 
-  .slick-list {
-    height: 100%;
-  }
+    .slick-list {
+      height: 100%;
+    }
 
-  .slick-track {
-    height: calc(100% - 30px);
-  }
+    .slick-track {
+      height: calc(100% - 30px);
+    }
 
-  .btn-container {
-    display: flex;
-    justify-content: center;
-    padding: 0;
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      padding: 0;
 
-    .hollow-button {
-      border: none;
+      .hollow-button {
+        border: none;
+      }
     }
   }
 }
 
 /* -------- CHEMBL TEXT -------- */
-.chembl-text {
-  font-family: $helvetica;
-  text-align: center;
+.main-page-container {
+  .chembl-text {
+    font-family: $helvetica;
+    text-align: center;
 
-  h2 {
-    font-size: 3em;
-    color: $darker-color;
-    margin: 0;
-    padding-bottom: 10px;
-  }
+    h2 {
+      font-size: 3em;
+      color: $darker-color;
+      margin: 0;
+      padding-bottom: 10px;
+    }
 
-  p {
-    font-size: 1.25em;
-    margin: 0;
-    color: #4d5456;
-  }
+    p {
+      font-size: 1.25em;
+      margin: 0;
+      color: #4d5456;
+    }
 
-  .small-text {
-    font-size: 0.9em;
-    a {
-      color: $primary-color;
+    .small-text {
+      font-size: 0.9em;
+      a {
+        color: $primary-color;
 
-      &:hover {
-        text-decoration: underline;
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
   }
 }
 
 /* -------- EXPLORE THE DATABASE -------- */
-.explore-database {
-  text-align: center;
-  margin-bottom: 20px;
+.main-page-container {
+  .explore-database {
+    text-align: center;
+    margin-bottom: 20px;
 
-  h2 {
-    margin-bottom: 10px;
-    color: $darker-color;
-    font-size: 3em;
-  }
+    h2 {
+      margin-bottom: 10px;
+      color: $darker-color;
+      font-size: 3em;
+    }
 
-  .btn-container {
-    padding-top: 15px;
+    .btn-container {
+      padding-top: 15px;
+    }
   }
 }
 
 /* ------------------- MEDIA QUERIES ------------------- */
 
 /* -------- MEDIUM SCREEN -------- */
-@media (max-width: 600px) {
-  .smaller-on-small {
-    height: 60vh;
-  }
-}
-
-@media (min-width: 600px) and (max-width: 992px) {
-  .smaller-on-med {
-    height: 50vh;
-  }
-
-  .chembl-text {
-    padding: 0 10%;
-  }
-
-  .explore-database {
-    margin-top: 5%;
-  }
-
-}
-
-/* -------- LARGE SCREEN -------- */
-@media (min-width: 992px) {
-  .chembl-text {
-    text-align: left;
-    padding-left: 40px;
-
-    p {
-      font-size: 1.1em;
+.main-page-container {
+  @media (max-width: 600px) {
+    .smaller-on-small {
+      height: 60vh;
     }
   }
 
-  .btn-container {
-    font-size: 1em;
+  @media (min-width: 600px) and (max-width: 992px) {
+    .smaller-on-med {
+      height: 50vh;
+    }
+
+    .chembl-text {
+      padding: 0 10%;
+    }
+
+    .explore-database {
+      margin-top: 5%;
+    }
+
   }
 
-  .carousel-wrapper {
-    padding-top: 10%;
+  /* -------- LARGE SCREEN -------- */
+  @media (min-width: 992px) {
+    .chembl-text {
+      text-align: left;
+      padding-left: 40px;
+
+      p {
+        font-size: 1.1em;
+      }
+    }
+
+    .btn-container {
+      font-size: 1em;
+    }
+
+    .carousel-wrapper {
+      padding-top: 10%;
+    }
   }
 }
