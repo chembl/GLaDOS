@@ -63,8 +63,11 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
 
     parse: (response) ->
 
+      console.log 'parsing response: ', response
       matchesSourcesReceived = response[1]
       parsedSourcesWithMatches = []
+      matchClasses = {}
+      classNumber = 0
       for source in matchesSourcesReceived
 
         baseItemURL = source.base_id_url
@@ -80,6 +83,12 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
         sipMatches = []
         allMatches = []
 
+        fullQueryInchi = source['Full Query InChI']
+        console.log 'fullQueryInchi: ', fullQueryInchi
+        if not matchClasses[fullQueryInchi]?
+          matchClasses[fullQueryInchi] = "class#{classNumber}"
+          classNumber++
+
         for match in matches
 
           srcCompoundID = match.src_compound_id
@@ -87,12 +96,18 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
 
           for compare in match.match_compare
 
+            matchingQueryInchi = compare['Matching_Query_InChI']
+            if not matchClasses[matchingQueryInchi]?
+              matchClasses[matchingQueryInchi] = "class#{classNumber}"
+              classNumber++
+
             isToggeable = compare.C > 0
             newRef =
               ref_url: matchURL
               ref_id: srcCompoundID
               is_toggleable: isToggeable
               show: not isToggeable
+              colour_class: matchClasses[matchingQueryInchi]
 
             allMatches.push newRef
 
@@ -126,7 +141,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
           si_matches: siMatches
           sip_matches: sipMatches
           all_matches: allMatches
-
 
       return parsedSourcesWithMatches
 

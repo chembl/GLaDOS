@@ -131,6 +131,55 @@ describe 'Unichem Connectivity List', ->
           expect(refGot.is_toggleable).toBe(isToggleable)
           expect(refGot.show).toBe(not isToggleable)
 
+  it 'parses the response from the parent correctly (colours)', ->
+
+    parsedData = list.parse(parentDataToParse)
+    sourcesGotIndex = _.indexBy(parsedData, 'src_name')
+
+    # first, calculate how the classes must be
+    matchClassesMustBe = {}
+    classNumber = 0
+    for sourceMustBe in parentDataToParse[1]
+
+      fullQueryInchi = sourceMustBe['Full Query InChI']
+      if not matchClassesMustBe[fullQueryInchi]?
+        matchClassesMustBe[fullQueryInchi] = "class#{classNumber}"
+        classNumber++
+
+      matchesMustBe = sourceMustBe.src_matches
+      for matchMustBe in matchesMustBe
+
+        for compareMustBe in matchMustBe.match_compare
+
+          matchingQueryInchi = compareMustBe['Matching_Query_InChI']
+          if not matchClassesMustBe[matchingQueryInchi]?
+            matchClassesMustBe[matchingQueryInchi] = "class#{classNumber}"
+            classNumber++
+
+    # now check if the classes are correct for every match
+    for sourceMustBe in parentDataToParse[1]
+
+      matchesMustBe = sourceMustBe.src_matches
+      nameMustBe = sourceMustBe.name_label
+      sourceGot = sourcesGotIndex[nameMustBe]
+
+      allMatches = _.union(sourceGot.identical_matches, sourceGot.identical_matches, sourceGot.s_matches,
+        sourceGot.p_matches, sourceGot.i_matches, sourceGot.ip_matches, sourceGot.sp_matches, sourceGot.si_matches,
+        sourceGot.sip_matches)
+
+      for matchMustBe in matchesMustBe
+
+        srcCompoundIDMustBe = matchMustBe.src_compound_id
+
+        for compareMustBe in matchMustBe.match_compare
+
+          refIDMustBe = srcCompoundIDMustBe
+          matchingQueryInchi = compareMustBe['Matching_Query_InChI']
+          refGot = _.find(allMatches, (ref) -> ref.ref_id == refIDMustBe)
+          classMustBe = matchClassesMustBe[matchingQueryInchi]
+          classGot = refGot.colour_class
+          expect(classGot).toBe(classMustBe)
+
   it 'gives only the rows that are not empty', ->
 
     parsedData = list.parse(parentDataToParse)
@@ -175,5 +224,3 @@ describe 'Unichem Connectivity List', ->
     for model in modelsToShow
       allMatches = model.get('all_matches')
       expect(_.find(allMatches, (match) -> match.show)?).toBe(true)
-
-
