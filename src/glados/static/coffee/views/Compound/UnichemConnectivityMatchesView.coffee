@@ -52,6 +52,10 @@ glados.useNameSpace 'glados.views.Compound',
 
         $toggleAltFormsBtn.qtip qtipConfig
 
+      $restServiceCallContainer = $(@el).find('.BCK-RESTServiceCallContainer')
+      glados.Utils.fillContentForElement $restServiceCallContainer,
+        url: @collection.getUnichemURL().replace(/\?callback.*$/g, '')
+
       if not @tableView?
         @tableView = glados.views.PaginatedViews.PaginatedViewFactory.getNewTablePaginatedView(
           @collection, $(@el).find('.BCK-MatchesTable'), customRenderEvent=undefined, disableColumnsSelection=true)

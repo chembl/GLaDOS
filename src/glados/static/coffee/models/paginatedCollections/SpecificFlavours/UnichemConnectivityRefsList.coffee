@@ -18,6 +18,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
       uCBKey = glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList.UNICHEM_CALLBACK_KEY
       return "#{glados.ChemUtils.UniChem.connectivity_url}#{encodeURI(inchiKey)}/0/0/4?callback=#{uCBKey}"
 
+    getUnichemURL: -> @getURLForInchi(@getMeta('inchi_key'))
     #-------------------------------------------------------------------------------------------------------------------
     # Fetching
     #-------------------------------------------------------------------------------------------------------------------
