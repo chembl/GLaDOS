@@ -41,6 +41,7 @@ $full-header-height-large: 180px;
 
     &.half-height {
       height: 40vh;
+      min-height: 400px;
     }
 
     &.fit-height {
@@ -208,16 +209,20 @@ $full-header-height-large: 180px;
         font-family: $chembl-helvetica;
 
 
+
         h4 {
           margin-bottom: 0;
           font-size: 2.5em;
           color: $darker-color;
+          text-anchor: middle;
           transition: letter-spacing 200ms ease-in;
         }
 
         p {
           margin-top: 0;
           color: $grey-dark;
+          text-anchor: middle;
+
           transition: letter-spacing 200ms ease-in;
         }
 

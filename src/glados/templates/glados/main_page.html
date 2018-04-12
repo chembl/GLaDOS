@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}Compound Report Card{% endblock %}
+{% block title %} ChEMBL Dtatabase {% endblock %}
 
 {% block content %}
 
@@ -168,20 +168,25 @@
 
         </div>
 
-            <!-- Tweets SECTION -->
-            {#            <div class="main-page-section col s12 m6 l4 half-height">#}
-            {##}
-            {#                <div class="section-col">#}
-            {#                    {% block tweets %}#}
-            {#                        {% include "glados/MainPageParts/tweets.html" %}#}
-            {#                    {% endblock %}#}
-            {#                </div>#}
-            {##}
-            {#            </div>#}
+        <div class="divider"></div>
 
-{#        </div>#}
+        <div class="row container">
+
+            <!-- Tweets SECTION -->
+            <div class="main-page-section col s12 m6 half-height">
+
+                <div class="section-col">
+                    {% block tweets %}
+                        {% include "glados/MainPageParts/tweets.html" %}
+                    {% endblock %}
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
+
 
 
 {% endblock %}

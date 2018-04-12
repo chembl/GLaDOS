@@ -64,11 +64,6 @@ header .row {
   }
 }
 
-.chembl-header-spacer {
- height: 140px;
-  pointer-events: none
-}
-
 #chembl-header-container {
   height: 0;
   width: 100%;
@@ -279,7 +274,18 @@ header .row {
 }
 
 /* -------- UNPINNED HEADER > 992px -------- */
+@media (max-width: 992px) {
+  .chembl-header-spacer {
+    height: 54px;
+    pointer-events: none
+  }
+}
+
 @media (min-width: 992px) {
+  .chembl-header-spacer {
+    height: 140px;
+    pointer-events: none
+  }
 
   #chembl-header-container.pin-top {
 

@@ -10,7 +10,7 @@ class ScrollSpyHelper
     pinScrollSpy = ->
 
       # this is the sum of heights of the top menu bar and the banner.
-      startFixation = 122
+      startFixation = 120
       top = win.scrollTop()
 
       if (top > startFixation) and (scrollspy_wrapper.css('position') != 'fixed')

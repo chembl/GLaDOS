@@ -156,15 +156,16 @@ a {
 
 .scrollspy-wrapper {
   position: relative;
+  &.pin-top {
+    margin-top: 40px;
+  }
+
+  &.pinned {
+    top: 40px;
+  }
 }
 
-//.pin-top {
-//  margin-top: 40px;
-//}
-//
-//.pinned {
-//  top: 40px;
-//}
+
 
 .table-of-contents a.active {
   border-left: 2px solid $h3-color;
