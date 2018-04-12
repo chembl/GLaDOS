@@ -16,11 +16,13 @@ $font-size-small: 1em;
 $lighter-color: #62b7bd;
 $primary-color: #09979b;
 $darker-color: #0d595f;
+$grey-dark: #4d5456;
 
 //heights
 $chembl-header-height: 54px;
 $ebi-nav-height: 50px;
 $full-header-height: $chembl-header-height + $ebi-nav-height;
+$full-header-height-large: 180px;
 
 /* -------- DEFAULT STYLES -------- */
 
@@ -32,25 +34,30 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
 
   .main-page-section {
     height: calc(100vh - #{$full-header-height});
-    max-height: 800px;
-    margin-bottom: 0;
+    min-height: 400px;
+    max-height: 900px;
+
     //border: blue solid 2px;
 
     &.half-height {
       height: 40vh;
+      min-height: 400px;
+    }
+
+    &.fit-height {
+      height: fit-content;
+      min-height: 300px;
+      max-height: none;
     }
 
     .section-col {
       height: 100%;
-      //border: blue solid 2px;
     }
-
   }
 
   .divider {
     width: 90%;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 60px auto;
   }
 
   .btn-container {
@@ -88,10 +95,25 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
       }
     }
   }
+
+  .small-text {
+    font-family: $helvetica;
+    font-size: 0.9em;
+    color: $grey-dark;
+
+    a {
+      color: $primary-color;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 }
 
 /* -------- Make sure carousel takes full height of container-------- */
 .main-page-container {
+
   .carousel-wrapper {
     height: calc(100% - 40px); //50px for slick dots
 
@@ -117,6 +139,7 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
 
 /* -------- CHEMBL TEXT -------- */
 .main-page-container {
+
   .chembl-text {
     font-family: $helvetica;
     text-align: center;
@@ -131,24 +154,18 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
     p {
       font-size: 1.25em;
       margin: 0;
-      color: #4d5456;
+      color: $grey-dark;
     }
 
     .small-text {
       font-size: 0.9em;
-      a {
-        color: $primary-color;
-
-        &:hover {
-          text-decoration: underline;
-        }
-      }
     }
   }
 }
 
 /* -------- EXPLORE THE DATABASE -------- */
 .main-page-container {
+
   .explore-database {
     text-align: center;
     margin-bottom: 20px;
@@ -161,6 +178,75 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
 
     .btn-container {
       padding-top: 15px;
+    }
+  }
+}
+
+/* -------- DATABASE SUMMARY-------- */
+.main-page-container {
+
+  .database-summary {
+    text-align: center;
+
+    h3 {
+      color: $grey-dark;
+      margin: 0;
+      padding-top: 10px;
+    }
+
+    .small-text {
+      margin-top: 0;
+    }
+
+    .db-records {
+      margin: auto;
+      max-width: 1200px;
+      position: relative;
+
+
+      .db-record-item {
+        padding: 20px 40px;
+        font-family: $chembl-helvetica;
+
+
+
+        h4 {
+          margin-bottom: 0;
+          font-size: 2.5em;
+          color: $darker-color;
+          text-anchor: middle;
+          transition: letter-spacing 200ms ease-in;
+        }
+
+        p {
+          margin-top: 0;
+          color: $grey-dark;
+          text-anchor: middle;
+
+          transition: letter-spacing 200ms ease-in;
+        }
+
+        img {
+          padding: 5px;
+          width: 150px;
+          height: auto;
+          transition: padding 200ms ease-in;
+        }
+
+        &:hover {
+          p {
+            letter-spacing: 0.01em;
+          }
+
+          h4 {
+            letter-spacing: 0.01em;
+          }
+
+          img {
+            padding: 0;
+          }
+        }
+      }
     }
   }
 }
@@ -192,6 +278,9 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
 
   /* -------- LARGE SCREEN -------- */
   @media (min-width: 992px) {
+    .main-page-section {
+      height: calc(100vh - #{$full-header-height-large})
+    }
     .chembl-text {
       text-align: left;
       padding-left: 40px;
