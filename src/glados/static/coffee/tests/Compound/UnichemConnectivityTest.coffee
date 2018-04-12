@@ -139,3 +139,41 @@ describe 'Unichem Connectivity List', ->
     for model in modelsToShow
       allMatches = model.get('all_matches')
       expect(_.find(allMatches, (match) -> match.show)?).toBe(true)
+
+  it 'toggles the inclusion of salts and mixtures', ->
+
+    parsedData = list.parse(parentDataToParse)
+    list.setModelsAfterParse(parsedData)
+    expect(list.isShowingAlternativeForms()).toBe(false)
+
+    list.toggleAlternativeSaltsAndMixtures()
+    # now everything is shown
+
+    originalRawModels = list.getMeta('original_raw_models')
+    modelsToShow = list.models
+    modelsAttributes = (m.attributes for m in modelsToShow)
+    expect(_.isEqual(originalRawModels, modelsAttributes)).toBe(true)
+
+    list.toggleAlternativeSaltsAndMixtures()
+    # now alternative salts are hidden
+    modelsToShow = list.models
+    modelsAttributes = (m.attributes for m in modelsToShow)
+
+    expect(modelsAttributes.length < originalRawModels.length).toBe(true)
+
+    modelsToShowLengthMustBe = 0
+
+    _.map originalRawModels, (rawModel) ->
+
+      allMatches = rawModel.all_matches
+      isShown = _.find(allMatches, (match) -> match.show)?
+      if isShown
+        modelsToShowLengthMustBe++
+
+    expect(modelsToShowLengthMustBe).toBe(modelsAttributes.length)
+
+    for model in modelsToShow
+      allMatches = model.get('all_matches')
+      expect(_.find(allMatches, (match) -> match.show)?).toBe(true)
+
+

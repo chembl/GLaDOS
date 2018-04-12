@@ -2,6 +2,14 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
 
   UnichemConnectivityRefsList:
 
+    #-------------------------------------------------------------------------------------------------------------------
+    # Initialization
+    #-------------------------------------------------------------------------------------------------------------------
+    initialize: ->
+      @setMeta('show_alternate_forms_state',
+      glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList.ALTERNATIVE_FORMS_STATES\
+      .HIDING_ALTERNATIVE_FORMS)
+
     setCompound: (compound) -> @setMeta('original_compound', compound)
     setInchiKey: (key) -> @setMeta('inchi_key', key)
     getURLForInchi: (inchiKey) ->
@@ -42,7 +50,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
       @setMeta('original_raw_models', parsedList)
       modelsToShow = _.filter parsedList, (source) ->
         allMatches = source.all_matches
-        return _.find(allMatches, (match) -> match.show)?
+        return _.findWhere(allMatches, {show: true})?
 
       @reset(modelsToShow)
 
@@ -115,6 +123,40 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
 
       return parsedSourcesWithMatches
 
+    #-------------------------------------------------------------------------------------------------------------------
+    # Show/hide alternative salts and mixtures
+    #-------------------------------------------------------------------------------------------------------------------
+    isShowingAlternativeForms: -> @getMeta('show_alternate_forms_state') == \
+    glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList.ALTERNATIVE_FORMS_STATES\
+      .SHOWING_ALTERNATIVE_FORMS
+
+    setIsShowingAlternativeFormsState: (showing) ->
+      if showing
+        @setMeta('show_alternate_forms_state',
+        glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList.ALTERNATIVE_FORMS_STATES\
+          .SHOWING_ALTERNATIVE_FORMS)
+      else
+        @setMeta('show_alternate_forms_state',
+        glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList.ALTERNATIVE_FORMS_STATES\
+          .HIDING_ALTERNATIVE_FORMS)
+
+    toggleAlternativeSaltsAndMixtures: ->
+
+      originalRawModels = @getMeta('original_raw_models')
+      newState = not @isShowingAlternativeForms()
+      for source in originalRawModels
+        allMatches = source.all_matches
+        for match in allMatches
+          if match.is_toggleable
+            match.show = newState
+
+      @setIsShowingAlternativeFormsState(newState)
+      @setModelsAfterParse(originalRawModels)
+
 
 
 glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList.UNICHEM_CALLBACK_KEY = 'UNICHEM_CALLBACK'
+glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList.ALTERNATIVE_FORMS_STATES =
+  SHOWING_ALTERNATIVE_FORMS: 'SHOWING_ALTERNATIVE_FORMS'
+  HIDING_ALTERNATIVE_FORMS: 'HIDING_ALTERNATIVE_FORMS'
+

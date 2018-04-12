@@ -208,6 +208,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             ), @
 
           glados.models.paginatedCollections.PaginatedCollectionBase.prototype.initialize.call(@)
+          if flavour.initialize?
+            flavour.initialize.call(@)
 
       return new collection
 
