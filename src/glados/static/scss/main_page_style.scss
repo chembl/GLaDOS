@@ -17,6 +17,8 @@ $lighter-color: #62b7bd;
 $primary-color: #09979b;
 $darker-color: #0d595f;
 
+$grey-dark: #4d5456;
+
 //heights
 $chembl-header-height: 54px;
 $ebi-nav-height: 50px;
@@ -41,7 +43,7 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
     }
 
     &.fit-height {
-      height:fit-content;
+      height: fit-content;
       min-height: 300px;
     }
 
@@ -49,12 +51,11 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
       height: 100%;
     }
 
-    .divider {
-      width: 90%;
-      margin-left: auto;
-      margin-right: auto;
-    }
+  }
 
+  .divider {
+    width: 90%;
+    margin: 50px auto;
   }
 
   .btn-container {
@@ -89,6 +90,19 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
 
       &:hover {
         letter-spacing: 0.04em;
+      }
+    }
+  }
+
+  .small-text {
+    font-family: $helvetica;
+    font-size: 0.9em;
+    color: $grey-dark;
+    a {
+      color: $primary-color;
+
+      &:hover {
+        text-decoration: underline;
       }
     }
   }
@@ -142,13 +156,6 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
 
     .small-text {
       font-size: 0.9em;
-      a {
-        color: $primary-color;
-
-        &:hover {
-          text-decoration: underline;
-        }
-      }
     }
   }
 }
@@ -176,33 +183,44 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
 .main-page-container {
 
   .database-summary {
-
+    text-align: center;
 
     h3 {
+      color: $grey-dark;
       margin: 0;
-      padding: 40px 0;
-      text-align: center;
-      color: $primary-color;
+      padding-top: 10px;
+    }
+
+    .small-text {
+      margin-top: 0;
     }
 
     .db-records {
+      margin: auto;
+      max-width: 1200px;
 
       .db-record-item {
-        border: blue solid 2px;
-        padding: 20px;
-        display: flex;
-        justify-content: space-between;
+        padding: 20px 40px;
+        font-family: $chembl-helvetica;
 
-        img {
-          flex-shrink: 0;
+        h4 {
+          margin-bottom: 0;
+          font-size: 2.5em;
+          color: $darker-color;
         }
-        .text-wrapper{
 
+        p {
+          margin-top: 0;
+          color: $grey-dark;
         }
+      }
+
+      img {
+        width: 150px;
+        height: auto;
       }
     }
   }
-
 }
 
 /* ------------------- MEDIA QUERIES ------------------- */

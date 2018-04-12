@@ -151,26 +151,42 @@
 
         </div>
 
+
+        <div class="divider"></div>
+
         <!-------------- Database Summary SECTION -------------->
-        <div class="main-page-section col s12 database-summary fit-height teal lighten-5">
+
+        <div class="main-page-section col s12 database-summary fit-height">
             <div class="row container">
-                <h3> Current Release: ChEMBL_23 </h3>
+
+                <h3> Current Release: ChEMBL_23</h3>
+                <p class="small-text"> Last Update on 01/05/2017  | <a> Release notes</a> </p>
+
                 <div class="db-records row">
-                    <div class="col s12 m3 db-record-item">
-                        <img src="{% static 'img/icons/doc_icon.svg' %}"/>
-                        <div class="text-wrapper">
-                            <h4>11,538</h4>
-                            <h4>Targets</h4>
-                        </div>
+
+                    <div class="col s12 m6 l3 db-record-item">
+
+                        <img src="{% static 'img/icons/target_icon.png' %}"/>
+
+                        <h4>11,538</h4>
+                        <p>Targets</p>
+
                     </div>
-                    <div class="col s12 m3 db-record-item">
-                        <img src="{% static 'img/icons/doc_icon.svg' %}"/>
+
+                    <div class="col s12 m6 l3 db-record-item">
+                        <img src="{% static 'img/icons/compound_icon.png' %}"/>
+                        <h4>11,538</h4>
+                        <p>Targets</p>
                     </div>
-                    <div class="col s12 m3 db-record-item">
-                        <img src="{% static 'img/icons/doc_icon.svg' %}"/>
+                    <div class="col s12 m6 l3 db-record-item">
+                        <img src="{% static 'img/icons/activity_icon.png' %}"/>
+                        <h4>11,538</h4>
+                        <p>Targets</p>
                     </div>
-                    <div class="col s12 m3 db-record-item">
-                        <img src="{% static 'img/icons/doc_icon.svg' %}"/>
+                    <div class="col s12 m6 l3 db-record-item">
+                        <img src="{% static 'img/icons/document_icon.png' %}"/>
+                        <h4>11,538</h4>
+                        <p>Targets</p>
                     </div>
 
 
@@ -193,15 +209,15 @@
             {#            </div>#}
 
             <!-- Tweets SECTION -->
-            <div class="main-page-section col s12 m6 l4 half-height">
-
-                <div class="section-col">
-                    {% block tweets %}
-                        {% include "glados/MainPageParts/tweets.html" %}
-                    {% endblock %}
-                </div>
-
-            </div>
+            {#            <div class="main-page-section col s12 m6 l4 half-height">#}
+            {##}
+            {#                <div class="section-col">#}
+            {#                    {% block tweets %}#}
+            {#                        {% include "glados/MainPageParts/tweets.html" %}#}
+            {#                    {% endblock %}#}
+            {#                </div>#}
+            {##}
+            {#            </div>#}
 
         </div>
 
