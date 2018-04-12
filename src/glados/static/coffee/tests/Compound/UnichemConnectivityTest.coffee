@@ -28,8 +28,8 @@ describe 'Unichem Connectivity List', ->
 
   it 'parses the response from the parent correctly (source urls)', ->
 
-    parsedData = list.parse(parentDataToParse)
-    sourcesGotIndex = _.indexBy(parsedData, 'src_name')
+    parsedList = list.parse(parentDataToParse).list
+    sourcesGotIndex = _.indexBy(parsedList, 'src_name')
 
     for sourceMustBe in parentDataToParse[1]
 
@@ -44,8 +44,8 @@ describe 'Unichem Connectivity List', ->
 
   it 'parses the response from the parent correctly (match classification)', ->
 
-    parsedData = list.parse(parentDataToParse)
-    sourcesGotIndex = _.indexBy(parsedData, 'src_name')
+    parsedList = list.parse(parentDataToParse).list
+    sourcesGotIndex = _.indexBy(parsedList, 'src_name')
 
     for sourceMustBe in parentDataToParse[1]
 
@@ -104,8 +104,8 @@ describe 'Unichem Connectivity List', ->
 
   it 'parses the response from the parent correctly (toggleability)', ->
 
-    parsedData = list.parse(parentDataToParse)
-    sourcesGotIndex = _.indexBy(parsedData, 'src_name')
+    parsedList = list.parse(parentDataToParse).list
+    sourcesGotIndex = _.indexBy(parsedList, 'src_name')
 
     for sourceMustBe in parentDataToParse[1]
 
@@ -134,7 +134,8 @@ describe 'Unichem Connectivity List', ->
   it 'parses the response from the parent correctly (colours)', ->
 
     parsedData = list.parse(parentDataToParse)
-    sourcesGotIndex = _.indexBy(parsedData, 'src_name')
+    parsedList = parsedData.list
+    sourcesGotIndex = _.indexBy(parsedList, 'src_name')
 
     # first, calculate how the classes must be
     matchClassesMustBe = {}
@@ -155,6 +156,11 @@ describe 'Unichem Connectivity List', ->
           if not matchClassesMustBe[matchingQueryInchi]?
             matchClassesMustBe[matchingQueryInchi] = "class#{classNumber}"
             classNumber++
+
+    # and check that the macthes are correct
+    list.setListDataAfterParse(parsedData)
+    matchesGot = list.getInchiMatchClasses()
+    expect(_.isEqual(matchesGot, matchClassesMustBe)).toBe(true)
 
     # now check if the classes are correct for every match
     for sourceMustBe in parentDataToParse[1]
@@ -183,7 +189,7 @@ describe 'Unichem Connectivity List', ->
   it 'gives only the rows that are not empty', ->
 
     parsedData = list.parse(parentDataToParse)
-    list.setModelsAfterParse(parsedData)
+    list.setListDataAfterParse(parsedData)
     modelsToShow = list.models
     for model in modelsToShow
       allMatches = model.get('all_matches')
@@ -192,7 +198,7 @@ describe 'Unichem Connectivity List', ->
   it 'toggles the inclusion of salts and mixtures', ->
 
     parsedData = list.parse(parentDataToParse)
-    list.setModelsAfterParse(parsedData)
+    list.setListDataAfterParse(parsedData)
     expect(list.isShowingAlternativeForms()).toBe(false)
 
     list.toggleAlternativeSaltsAndMixtures()

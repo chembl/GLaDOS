@@ -32,7 +32,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
       thisList = @
       callbackUnichem = (ucJSONResponse) ->
 
-        thisList.setModelsAfterParse(thisList.parse(ucJSONResponse), true)
+        thisList.setListDataAfterParse(thisList.parse(ucJSONResponse), true)
 
       uCBKey = glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList.UNICHEM_CALLBACK_KEY
       window[uCBKey] = callbackUnichem
@@ -48,13 +48,20 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
     #-------------------------------------------------------------------------------------------------------------------
     # Parsing
     #-------------------------------------------------------------------------------------------------------------------
-    setModelsAfterParse: (parsedList, dataWasJustReceived=false) ->
-      @setMeta('original_raw_models', parsedList)
-      modelsToShow = _.filter parsedList, (source) ->
+    getInchiMatchClasses: -> @getMeta('inchi_matches')
+    setListDataAfterParse: (parsed, dataWasJustReceived=false) ->
+
+      @setMeta('inchi_matches', parsed.inchi_match_classes)
+      @setModelsAfterParse(parsed.list, dataWasJustReceived)
+
+    setModelsAfterParse: (rawModelsList, dataWasJustReceived=false) ->
+
+      @setMeta('original_raw_models', rawModelsList)
+      modelsToShow = _.filter rawModelsList, (source) ->
         allMatches = source.all_matches
         return _.findWhere(allMatches, {show: true})?
 
-      if (parsedList.length == modelsToShow.length) and dataWasJustReceived
+      if (rawModelsList.length == modelsToShow.length) and dataWasJustReceived
         @setMeta('no_alternative_forms_to_show', true)
       else
         @setMeta('no_alternative_forms_to_show', false)
@@ -140,7 +147,10 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
           sip_matches: sipMatches
           all_matches: allMatches
 
-      return parsedSourcesWithMatches
+      return {
+        list: parsedSourcesWithMatches
+        inchi_match_classes: matchClasses
+      }
 
     #-------------------------------------------------------------------------------------------------------------------
     # Show/hide alternative salts and mixtures
