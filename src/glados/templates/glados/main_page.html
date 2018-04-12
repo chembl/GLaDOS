@@ -1,8 +1,11 @@
 {% extends "glados/base/base_layout.html" %}
 
+{% load static %}
+
 {% block title %}Compound Report Card{% endblock %}
 
 {% block content %}
+
 
     <div class="main-page-container">
 
@@ -148,21 +151,46 @@
 
         </div>
 
-{#        <div class="divider"></div>#}
+        <!-------------- Database Summary SECTION -------------->
+        <div class="main-page-section col s12 database-summary fit-height teal lighten-5">
+            <div class="row container">
+                <h3> Current Release: ChEMBL_23 </h3>
+                <div class="db-records row">
+                    <div class="col s12 m3 db-record-item">
+                        <img src="{% static 'img/icons/doc_icon.svg' %}"/>
+                        <div class="text-wrapper">
+                            <h4>11,538</h4>
+                            <h4>Targets</h4>
+                        </div>
+                    </div>
+                    <div class="col s12 m3 db-record-item">
+                        <img src="{% static 'img/icons/doc_icon.svg' %}"/>
+                    </div>
+                    <div class="col s12 m3 db-record-item">
+                        <img src="{% static 'img/icons/doc_icon.svg' %}"/>
+                    </div>
+                    <div class="col s12 m3 db-record-item">
+                        <img src="{% static 'img/icons/doc_icon.svg' %}"/>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
 
         <!-- ROW for database summary + tweets -->
         <div class="row container">
 
-            <!-- Database summary SECTION -->
-            <div class="main-page-section col s12 m6 l4 half-height">
-
-                <div class="section-col">
-                    {% block database_info %}
-                        {% include "glados/MainPageParts/database_info.html" %}
-                    {% endblock %}
-                </div>
-
-            </div>
+            {#            <!-- Database summary SECTION -->#}
+            {#            <div class="main-page-section col s12 m6 l4 half-height">#}
+            {##}
+            {#                <div class="section-col">#}
+            {#                    {% block database_info %}#}
+            {#                        {% include "glados/MainPageParts/database_info.html" %}#}
+            {#                    {% endblock %}#}
+            {#                </div>#}
+            {##}
+            {#            </div>#}
 
             <!-- Tweets SECTION -->
             <div class="main-page-section col s12 m6 l4 half-height">
@@ -178,7 +206,6 @@
         </div>
 
     </div>
-
 
 
 {% endblock %}
