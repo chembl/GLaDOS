@@ -63,7 +63,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
 
     parse: (response) ->
 
-      console.log 'parsing response: ', response
       matchesSourcesReceived = response[1]
       parsedSourcesWithMatches = []
       matchClasses = {}
@@ -84,7 +83,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
         allMatches = []
 
         fullQueryInchi = source['Full Query InChI']
-        console.log 'fullQueryInchi: ', fullQueryInchi
         if not matchClasses[fullQueryInchi]?
           matchClasses[fullQueryInchi] = "class#{classNumber}"
           classNumber++
