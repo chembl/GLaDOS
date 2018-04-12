@@ -34,6 +34,7 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
 
   .main-page-section {
     height: calc(100vh - #{$full-header-height});
+    min-height: 400px;
     max-height: 800px;
     margin-bottom: 0;
     //border: blue solid 2px;
