@@ -16,7 +16,6 @@ $font-size-small: 1em;
 $lighter-color: #62b7bd;
 $primary-color: #09979b;
 $darker-color: #0d595f;
-
 $grey-dark: #4d5456;
 
 //heights
@@ -36,6 +35,7 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
     height: calc(100vh - #{$full-header-height});
     min-height: 400px;
     max-height: 800px;
+
     //border: blue solid 2px;
 
     &.half-height {
@@ -45,17 +45,17 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
     &.fit-height {
       height: fit-content;
       min-height: 300px;
+      max-height: none;
     }
 
     .section-col {
       height: 100%;
     }
-
   }
 
   .divider {
     width: 90%;
-    margin: 50px auto;
+    margin: 60px auto;
   }
 
   .btn-container {
@@ -73,7 +73,7 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
       transition: background-color 100ms ease;
 
       &:hover {
-        background-color: $primary-color;
+        background-color: $darker-color;
       }
     }
 
@@ -98,6 +98,7 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
     font-family: $helvetica;
     font-size: 0.9em;
     color: $grey-dark;
+
     a {
       color: $primary-color;
 
@@ -151,7 +152,7 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
     p {
       font-size: 1.25em;
       margin: 0;
-      color: #4d5456;
+      color: $grey-dark;
     }
 
     .small-text {
@@ -198,27 +199,47 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
     .db-records {
       margin: auto;
       max-width: 1200px;
+      position: relative;
+
 
       .db-record-item {
         padding: 20px 40px;
         font-family: $chembl-helvetica;
 
+
         h4 {
           margin-bottom: 0;
           font-size: 2.5em;
           color: $darker-color;
+          transition: letter-spacing 200ms ease-in;
         }
 
         p {
-
           margin-top: 0;
           color: $grey-dark;
+          transition: letter-spacing 200ms ease-in;
         }
-      }
 
-      img {
-        width: 150px;
-        height: auto;
+        img {
+          padding: 5px;
+          width: 150px;
+          height: auto;
+          transition: padding 200ms ease-in;
+        }
+
+        &:hover {
+          p {
+            letter-spacing: 0.01em;
+          }
+
+          h4 {
+            letter-spacing: 0.01em;
+          }
+
+          img {
+            padding: 0;
+          }
+        }
       }
     }
   }
