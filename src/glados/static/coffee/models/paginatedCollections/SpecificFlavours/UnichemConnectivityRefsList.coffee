@@ -9,6 +9,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
       @setMeta('show_alternate_forms_state',
       glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList.ALTERNATIVE_FORMS_STATES\
       .HIDING_ALTERNATIVE_FORMS)
+      @setMeta('no_alternative_forms_to_show', true)
 
     setCompound: (compound) -> @setMeta('original_compound', compound)
     setInchiKey: (key) -> @setMeta('inchi_key', key)
@@ -30,7 +31,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
       thisList = @
       callbackUnichem = (ucJSONResponse) ->
 
-        thisList.setModelsAfterParse(thisList.parse(ucJSONResponse))
+        thisList.setModelsAfterParse(thisList.parse(ucJSONResponse), true)
 
       uCBKey = glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList.UNICHEM_CALLBACK_KEY
       window[uCBKey] = callbackUnichem
@@ -46,11 +47,16 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
     #-------------------------------------------------------------------------------------------------------------------
     # Parsing
     #-------------------------------------------------------------------------------------------------------------------
-    setModelsAfterParse: (parsedList) ->
+    setModelsAfterParse: (parsedList, dataWasJustReceived=false) ->
       @setMeta('original_raw_models', parsedList)
       modelsToShow = _.filter parsedList, (source) ->
         allMatches = source.all_matches
         return _.findWhere(allMatches, {show: true})?
+
+      if (parsedList.length == modelsToShow.length) and dataWasJustReceived
+        @setMeta('no_alternative_forms_to_show', true)
+      else
+        @setMeta('no_alternative_forms_to_show', false)
 
       @reset(modelsToShow)
 
@@ -140,6 +146,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
         glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList.ALTERNATIVE_FORMS_STATES\
           .HIDING_ALTERNATIVE_FORMS)
 
+    thereAreNoAlternateFormsToShow: -> @getMeta('no_alternative_forms_to_show')
     toggleAlternativeSaltsAndMixtures: ->
 
       originalRawModels = @getMeta('original_raw_models')

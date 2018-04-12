@@ -19,7 +19,7 @@
 
 <script id="Handlebars-LoadAlternativeSaltsButton" type="text/x-handlebars-template">
     <div class="row">
-       <a class="BCK-ToggleAlternateForms menu-button">
+       <a class="{{#if disabled}}disabled{{/if}} BCK-ToggleAlternateForms menu-button">
            {{#if include}}Exclude{{else}}Include{{/if}} Alternative Salts and Mixtures
        </a>
     </div>

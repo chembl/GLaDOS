@@ -37,6 +37,20 @@ glados.useNameSpace 'glados.views.Compound',
       $includeSaltsButtonContainer = $(@el).find('.BCK-LoadAlternativeSaltsButtonContainer')
       glados.Utils.fillContentForElement $includeSaltsButtonContainer,
         include: @collection.isShowingAlternativeForms()
+        disabled: @collection.thereAreNoAlternateFormsToShow()
+
+      if @collection.thereAreNoAlternateFormsToShow()
+        $toggleAltFormsBtn = $includeSaltsButtonContainer.find('.BCK-ToggleAlternateForms')
+
+        $qtipContent = $('<div>There is no additional information from alternative salts and mixtures to show.</div>')
+        qtipConfig =
+            content:
+              text: $qtipContent
+            style:
+              classes:'matrix-qtip qtip-light qtip-shadow'
+            position: glados.Utils.Tooltips.getQltipSafePostion($toggleAltFormsBtn, $qtipContent)
+
+        $toggleAltFormsBtn.qtip qtipConfig
 
       if not @tableView?
         @tableView = glados.views.PaginatedViews.PaginatedViewFactory.getNewTablePaginatedView(
@@ -49,7 +63,11 @@ glados.useNameSpace 'glados.views.Compound',
       @showSection()
       @showCardContent()
 
-    toogleAlternateForms: ->
+    toogleAlternateForms: (event) ->
+
+      $clickedElem = $(event.currentTarget)
+      if $clickedElem.hasClass('disabled')
+        return
 
       @tableView.resetPageNumber()
       @collection.toggleAlternativeSaltsAndMixtures()
