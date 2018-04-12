@@ -1,21 +1,33 @@
 {% verbatim %}
 
 <script id="Handlebars-UnichemConnectivityDescription" type="text/x-handlebars-template">
-    <b>UniChem Connectivity Layer Cross References for structure with InChI Key:</b>
-    <ul>
-        <li>{{inchi_key}}</li>
-    </ul>
+    <div class="row">
+        <div class="col s12">
+            <b>UniChem Connectivity Layer Cross References for structure with InChI Key:</b>
+            <div>{{inchi_key}}</div>
+        </div>
+        <div class="col s12">
+            <b>Full InChI:</b>
+            <div>{{full_inchi}}</div>
+        </div>
+    </div>
 </script>
 
 <script id="Handlebars-UnichemConnectivityLegend" type="text/x-handlebars-template">
-    <b>Legend:</b>
+    <b>Columns Legend:</b>
+
     <ul>
         <li>S = stereochemical difference.</li>
         <li>I = isotopic difference.</li>
         <li>P = protonation differences identified.</li>
     </ul>
 
+
 </script>
+<script id="Handlebars-UnichemConnectivityColoursLegend" type="text/x-handlebars-template">
+    <b>Colours Legend:</b>
+</script>
+
 
 <script id="Handlebars-LoadAlternativeSaltsButton" type="text/x-handlebars-template">
     <div class="row">

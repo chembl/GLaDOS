@@ -52,6 +52,9 @@ glados.useNameSpace 'glados.views.Compound',
 
         $toggleAltFormsBtn.qtip qtipConfig
 
+      if @collection.isShowingAlternativeForms()
+        @renderColoursLegend()
+
       $restServiceCallContainer = $(@el).find('.BCK-RESTServiceCallContainer')
       glados.Utils.fillContentForElement $restServiceCallContainer,
         url: @collection.getUnichemURL().replace(/\?callback.*$/g, '')
@@ -66,6 +69,12 @@ glados.useNameSpace 'glados.views.Compound',
 
       @showSection()
       @showCardContent()
+
+    renderColoursLegend: ->
+
+      $container = $(@el).find('.BCK-ColoursLegendContainer')
+      glados.Utils.fillContentForElement($container)
+
 
     toogleAlternateForms: (event) ->
 

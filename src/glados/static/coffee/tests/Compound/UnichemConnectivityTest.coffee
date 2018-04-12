@@ -198,6 +198,7 @@ describe 'Unichem Connectivity List', ->
   it 'toggles the inclusion of salts and mixtures', ->
 
     parsedData = list.parse(parentDataToParse)
+    console.log 'parentDataToParse: ', parentDataToParse
     list.setListDataAfterParse(parsedData)
     expect(list.isShowingAlternativeForms()).toBe(false)
 
