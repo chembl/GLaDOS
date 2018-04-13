@@ -27,6 +27,11 @@ $full-header-height-large: 180px;
 /* -------- DEFAULT STYLES -------- */
 
 .main-page-container {
+  .color-row {
+    padding: 60px 0;
+    margin-top: 60px;
+  }
+
   .container {
     width: 90%;
     max-width: 1280px;
@@ -37,10 +42,8 @@ $full-header-height-large: 180px;
     min-height: 400px;
     max-height: 900px;
 
-
     &.half-height {
       height: 40vh;
-      min-height: 400px;
     }
 
     &.fit-height {
@@ -51,6 +54,7 @@ $full-header-height-large: 180px;
 
     .section-col {
       height: 100%;
+      border: #ff3d00 solid 1px;
     }
   }
 
@@ -108,6 +112,7 @@ $full-header-height-large: 180px;
       }
     }
   }
+
 }
 
 /* -------- Make sure carousel takes full height of container-------- */
@@ -244,6 +249,61 @@ $full-header-height-large: 180px;
         }
       }
     }
+  }
+}
+
+/* -------- TWEETS -------- */
+
+.tweet-box {
+  height: 100%;
+
+  .tweet-header {
+    margin-bottom: 10px;
+  }
+
+  .tweet-list-container {
+    max-height: 100%;
+    overflow: scroll;
+
+    .tweet {
+      border: 1px solid $primary-color;
+      margin-bottom: 25px;
+      padding: 10px;
+      width: 100%;
+      margin-top: -20px;
+
+    }
+
+    .row {
+      margin: 0;
+    }
+
+    .tweet-content {
+      font-size: 1em;
+      word-wrap: break-word;
+    }
+  }
+
+}
+
+.tweet-info {
+  span {
+    font-size: 15px;
+    margin-right: 10px;
+    color: #009688;
+  }
+
+  .s4 {
+    padding-left: 10px;
+  }
+
+  a {
+    color: #d1d1d1;
+    padding-right: 10px;
+  }
+
+  a:hover {
+    color: #009688;
   }
 }
 

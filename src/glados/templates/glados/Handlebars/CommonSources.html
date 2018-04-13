@@ -611,22 +611,7 @@ There are no {{#if is_unichem}}UniChem {{/if}}cross references for {{chembl_id}}
 <!-- tweet box template -------------------------------------------------------------------------------------------------->
 
 <script id='Handlebars-Common-Paginated-Card-Tweet' type="text/x-handlebars-template">
-    <div class="tweet grey lighten-5">
-
-        <a href="https://twitter.com/{{columns_by_comparator.user__screenName.value}}/status/{{columns_by_comparator.id.value}}"
-           target="_blank">
-
-            <div class="row valign-wrapper">
-                <div class="col s2">
-                    <img class="responsive-img valign circle" src="{{columns_by_comparator.user__profileImgUrl.value}}" alt="">
-                </div>
-
-                <div class="col s10 tweet-profile-name">
-                    <p><b>ChEMBL</b></p>
-                </div>
-            </div>
-
-        </a>
+    <div class="tweet white">
 
         <div class="row">
             <div class="flow-text">
@@ -650,7 +635,7 @@ There are no {{#if is_unichem}}UniChem {{/if}}cross references for {{chembl_id}}
                 </a>
             </div>
             <div class="col s8 right-align">
-                 <span>{{columns_by_comparator.createdAt.value}}</span>
+                <span>{{columns_by_comparator.createdAt.value}}</span>
             </div>
         </div>
     </div>
