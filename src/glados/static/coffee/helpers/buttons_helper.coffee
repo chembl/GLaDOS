@@ -55,6 +55,7 @@ class ButtonsHelper
       copy_btn_id: copyButtonID
       value: value
 
+    ButtonsHelper.initCroppedTextFields($containerElem)
     ButtonsHelper.initDownloadBtn($containerElem.find("##{downloadBtnID}"), downloadFilename, downloadTooltip, downloadValue)
     $copyBtn = $containerElem.find("##{copyButtonID}")
     ButtonsHelper.initCopyButton($copyBtn, copyTooltip, value)
@@ -310,9 +311,9 @@ class ButtonsHelper
     *  Initializes the cropped container on the elements of the class 'cropped-text-field'
     * It is based on an input field to show the information
   ###
-  @initCroppedTextFields = ->
+  @initCroppedTextFields = ($container) ->
 
-    $('.cropped-text-field').each ->
+    $container.find('.cropped-text-field').each ->
 
       currentDiv = $(this)
       input_field = $(this).find('input')
