@@ -28,9 +28,7 @@ glados.useNameSpace 'glados.views.Compound',
         @collection.setInchiKey(inchiKey)
         @collection.on 'reset',  @render, @
 
-      $descriptionContainer = $(@el).find('.BCK-DescriptionContainer')
-      glados.Utils.fillContentForElement $descriptionContainer,
-        inchi_key: inchiKey
+      @renderDescription()
 
       $legendContainer = $(@el).find('.BCK-LegendContainer')
       glados.Utils.fillContentForElement($legendContainer)
@@ -72,6 +70,22 @@ glados.useNameSpace 'glados.views.Compound',
       @showSection()
       @showCardContent()
 
+    #-------------------------------------------------------------------------------------------------------------------
+    # Description
+    #-------------------------------------------------------------------------------------------------------------------
+    renderDescription: ->
+
+      inchiKey = @model.get('molecule_structures').standard_inchi_key
+      standardInchi = @model.get('molecule_structures').standard_inchi
+
+      $descriptionContainer = $(@el).find('.BCK-DescriptionContainer')
+      glados.Utils.fillContentForElement $descriptionContainer,
+        inchi_key: inchiKey
+        standard_inchi: standardInchi
+
+    #-------------------------------------------------------------------------------------------------------------------
+    # Colours Legend
+    #-------------------------------------------------------------------------------------------------------------------
     renderColoursLegend: ->
 
       $container = $(@el).find('.BCK-ColoursLegendContainer')

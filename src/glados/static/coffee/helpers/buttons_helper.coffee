@@ -38,6 +38,28 @@ class ButtonsHelper
     return $newModal
 
   # ------------------------------------------------------------
+  # Cropped Container
+  # ------------------------------------------------------------
+  @initCroppedContainer: ($containerElem, config) ->
+
+    downloadBtnID = config.download.btn_id
+    copyButtonID = config.copy.btn_id
+    value = config.value
+    downloadFilename = config.download.filename
+    downloadValue = config.download.value
+    downloadTooltip = config.download.tooltip
+    copyTooltip = config.copy.tooltip
+
+    glados.Utils.fillContentForElement $containerElem,
+      dwnld_btn_id: downloadBtnID
+      copy_btn_id: copyButtonID
+      value: value
+
+    ButtonsHelper.initDownloadBtn($containerElem.find("##{downloadBtnID}"), downloadFilename, downloadTooltip, downloadValue)
+    $copyBtn = $containerElem.find("##{copyButtonID}")
+    ButtonsHelper.initCopyButton($copyBtn, copyTooltip, value)
+
+  # ------------------------------------------------------------
   # Download buttons
   # ------------------------------------------------------------
 

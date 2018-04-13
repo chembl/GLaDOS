@@ -75,52 +75,7 @@
 
           <tr>
             <td class="td-oneline fixed-width-column-12"><b>Canonical SMILES:</b></td>
-            <td>
-
-              <div class="cropped-text-field">
-
-                <table>
-
-                  <tr>
-
-                    <td>
-
-                      <div class="cropped-text-field-input">
-                        <input id="CompReps-canonicalSmiles" type="text">
-                        <!--Backbone-->
-                      </div>
-
-                    </td>
-
-                    <td class="cropped-text-field-btns-cell">
-
-                      <div class="cropped-text-field-btns">
-
-                        {% block CompReps-canonicalSmiles-dnld %}
-                          {% with btn_id='CompReps-canonicalSmiles-dnld' %}
-                            {% include "glados/base/btn_download_only_small.html" %}
-                          {% endwith %}
-                        {% endblock %}
-
-                        {% block CompReps-canonicalSmiles-copy %}
-                          {% with btn_id='CompReps-canonicalSmiles-copy' %}
-                            {% include "glados/base/btn_copy_small.html" %}
-                          {% endwith %}
-                        {% endblock %}
-
-
-                      </div>
-
-                    </td>
-
-                  </tr>
-
-                </table>
-
-
-              </div>
-
-            </td>
+            <td class="BCK-CanonicalSmiles" data-hb-template="Handlebars-Common-CroppedContainer"></td>
           </tr>
 
           <tr>
@@ -277,45 +232,7 @@
 
           <tr>
 
-            <td colspan="2">
-              <div class="cropped-text-field">
-
-                <table>
-                  <tr>
-
-                    <td>
-                      <div class="cropped-text-field-input">
-                        <input id="CompReps-canonicalSmiles-small" type="text">
-                        <!--Backbone-->
-                      </div>
-                    </td>
-
-                    <td class="cropped-text-field-btns-cell">
-
-                      <div class="cropped-text-field-btns">
-
-                        {% block CompReps-canonicalSmiles-small-dnld %}
-                          {% with btn_id='CompReps-canonicalSmiles-small-dnld' %}
-                            {% include "glados/base/btn_download_only_small.html" %}
-                          {% endwith %}
-                        {% endblock %}
-
-                        {% block CompReps-canonicalSmiles-small-copy %}
-                          {% with btn_id='CompReps-canonicalSmiles-small-copy' %}
-                            {% include "glados/base/btn_copy_small.html" %}
-                          {% endwith %}
-                        {% endblock %}
-
-
-
-                      </div>
-
-                    </td>
-
-                  </tr>
-
-                </table>
-              </div>
+            <td colspan="2" class="BCK-CanonicalSmiles-Small" data-hb-template="Handlebars-Common-CroppedContainer">
             </td>
           </tr>
 

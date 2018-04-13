@@ -1,0 +1,46 @@
+{% verbatim %}
+
+<script id='Handlebars-Common-CroppedContainer' type="text/x-handlebars-template">
+    <div class="cropped-text-field">
+
+        <table>
+
+            <tr>
+
+                <td>
+
+                    <div class="cropped-text-field-input">
+                        <input id="CompReps-canonicalSmiles" type="text" value="{{value}}">
+
+                    </div>
+
+                </td>
+
+                <td class="cropped-text-field-btns-cell">
+
+                    <div class="cropped-text-field-btns">
+
+                        <a id='{{dwnld_btn_id}}'
+                           class="waves-effect waves-light teal btn-mini download-text {{additional_classes}} tooltipped
+                           BCK-open-download-options BCK-Dwnld-btn"
+                           data-position="bottom"
+                           data-tooltip="Download">
+                          <i class="fa fa-download"></i>
+                        </a>
+
+                        <a id='{{copy_btn_id}}' class="waves-effect waves-light teal btn-mini BCK-Copy-btn">
+                          <i class="fa fa-clipboard"></i>
+                        </a>
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+        </table>
+
+
+    </div>
+</script>
+{% endverbatim %}

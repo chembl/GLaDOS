@@ -78,15 +78,29 @@ CompoundRepresentationsView = CardView.extend
     )
 
   renderCanonicalSmiles: ->
-    $(@el).find('#CompReps-canonicalSmiles, #CompReps-canonicalSmiles-small').attr('value',
-      @molecule_structures['canonical_smiles'])
 
-    ButtonsHelper.initDownloadBtn($(@el).find('#CompReps-canonicalSmiles-dnld, #CompReps-canonicalSmiles-small-dnld'),
-      GlobalVariables.CHEMBL_ID + '.smi', 'Download SMILES file.',
-      @molecule_structures['canonical_smiles'] + '%20'+ @model.get('molecule_chembl_id'))
+    $containerElem = $(@el).find('.BCK-CanonicalSmiles')
 
-    copy_btn = $(@el).find('#CompReps-canonicalSmiles-copy, #CompReps-canonicalSmiles-small-copy')
-    ButtonsHelper.initCopyButton(copy_btn, 'Copy to Clipboard', @molecule_structures['canonical_smiles'])
+    config =
+      value: @molecule_structures['canonical_smiles']
+      download:
+        btn_id: 'CompReps-canonicalSmiles-dnld'
+        filename: "#{@model.get('molecule_chembl_id')}.smi"
+        value: "#{@molecule_structures['canonical_smiles'] + '%20'+ @model.get('molecule_chembl_id')}"
+        tooltip: 'Download SMILES file.'
+      copy:
+        btn_id: 'CompReps-canonicalSmiles-copy'
+        tooltip: 'Copy to Clipboard'
+
+    ButtonsHelper.initCroppedContainer($containerElem, config)
+
+    $containerElemSmall = $(@el).find('.BCK-CanonicalSmiles-Small')
+
+    configSmall = config
+    configSmall.download.btn_id = 'CompReps-canonicalSmiles-small-dnld'
+    configSmall.copy.btn_id = 'CompReps-canonicalSmiles-small-copy'
+
+    ButtonsHelper.initCroppedContainer($containerElemSmall, configSmall)
 
   renderStandardInchi: ->
     $(@el).find('#CompReps-standardInchi, #CompReps-standardInchi-small').attr('value',
