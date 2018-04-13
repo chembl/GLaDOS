@@ -42,13 +42,13 @@ class ButtonsHelper
   # ------------------------------------------------------------
   @initCroppedContainer: ($containerElem, config) ->
 
-    downloadBtnID = config.download.btn_id
-    copyButtonID = config.copy.btn_id
+    downloadBtnID = "DownloadBtn-#{(new Date()).getTime()}"
+    copyButtonID = "CopyBtn-#{(new Date()).getTime()}"
     value = config.value
     downloadFilename = config.download.filename
     downloadValue = config.download.value
     downloadTooltip = config.download.tooltip
-    copyTooltip = config.copy.tooltip
+    copyTooltip = 'Copy to Clipboard'
 
     glados.Utils.fillContentForElement $containerElem,
       dwnld_btn_id: downloadBtnID

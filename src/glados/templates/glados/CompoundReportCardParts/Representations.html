@@ -80,95 +80,12 @@
 
           <tr>
             <td class="td-oneline fixed-width-column-12"><b>Standard InChI:</b></td>
-            <td>
-
-              <div class="cropped-text-field">
-
-                <table>
-
-                  <tr>
-
-                    <td>
-                      <div class="cropped-text-field-input">
-                        <input id="CompReps-standardInchi" type="text">
-                        <!--Backbone-->
-                      </div>
-
-                    </td>
-
-                    <td class="cropped-text-field-btns-cell">
-                      <div class="cropped-text-field-btns">
-
-                        {% block CompReps-standardInchi-dnld %}
-                          {% with btn_id='CompReps-standardInchi-dnld' %}
-                            {% include "glados/base/btn_download_only_small.html" %}
-                          {% endwith %}
-                        {% endblock %}
-
-                        {% block CompReps-standardInchi-copy %}
-                          {% with btn_id='CompReps-standardInchi-copy' %}
-                            {% include "glados/base/btn_copy_small.html" %}
-                          {% endwith %}
-                        {% endblock %}
-
-                      </div>
-
-                    </td>
-
-                  </tr>
-                </table>
-
-              </div>
-
-            </td>
+            <td class="BCK-StandardInchi" data-hb-template="Handlebars-Common-CroppedContainer"></td>
           </tr>
 
           <tr>
             <td class="td-oneline fixed-width-column-12"><b>Standard InChI Key:</b></td>
-            <td>
-
-              <div class="cropped-text-field">
-
-                <table>
-
-                  <tr>
-
-                    <td>
-
-                      <div class="cropped-text-field-input">
-                        <input id="CompReps-standardInchiKey" type="text">
-                        <!--Backbone-->
-                      </div>
-
-                    </td>
-
-                    <td class="cropped-text-field-btns-cell">
-
-                      <div class="cropped-text-field-btns">
-
-                        {% block CompReps-standardInchiKey-dnld %}
-                          {% with btn_id='CompReps-standardInchiKey-dnld' %}
-                            {% include "glados/base/btn_download_only_small.html" %}
-                          {% endwith %}
-                        {% endblock %}
-
-
-                        {% block CompReps-standardInchiKey-copy %}
-                          {% with btn_id='CompReps-standardInchiKey-copy' %}
-                            {% include "glados/base/btn_copy_small.html" %}
-                          {% endwith %}
-                        {% endblock %}
-
-                      </div>
-
-                    </td>
-
-                  </tr>
-                </table>
-
-              </div>
-
-            </td>
+            <td class="BCK-StandardInchiKey" data-hb-template="Handlebars-Common-CroppedContainer"></td>
           </tr>
 
           </tbody>
@@ -242,52 +159,7 @@
 
           <tr>
 
-            <td colspan="2">
-
-              <div class="cropped-text-field">
-
-                <table>
-
-                  <tr>
-
-                    <td>
-
-                      <div class="cropped-text-field-input">
-                        <input id="CompReps-standardInchi-small" type="text">
-                        <!--Backbone-->
-                      </div>
-
-                    </td>
-
-                    <td class="cropped-text-field-btns-cell">
-
-                      <div class="cropped-text-field-btns">
-
-                        {% block CompReps-standardInchi-small-dnld %}
-                          {% with btn_id='CompReps-standardInchi-small-dnld' %}
-                            {% include "glados/base/btn_download_only_small.html" %}
-                          {% endwith %}
-                        {% endblock %}
-
-
-                        {% block CompReps-standardInchi-small-copy %}
-                          {% with btn_id='CompReps-standardInchi-small-copy' %}
-                            {% include "glados/base/btn_copy_small.html" %}
-                          {% endwith %}
-                        {% endblock %}
-
-                      </div>
-
-                    </td>
-
-
-                  </tr>
-
-                </table>
-
-              </div>
-
-            </td>
+            <td colspan="2" class="BCK-StandardInchi-Small" data-hb-template="Handlebars-Common-CroppedContainer"></td>
           </tr>
 
           <tr>
