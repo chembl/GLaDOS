@@ -638,22 +638,21 @@ class CompoundReportCardApp extends glados.ReportCardApp
         return true
       properties_to_show: Compound.COLUMNS_SETTINGS.BIOCOMPONENTS_SECTION
       after_render: (thisView) ->
-        ButtonsHelper.initCroppedTextFields()
 
-        $buttonsContainers = $(thisView.el).find('.BCK-ButtonsContainer')
-
+        $buttonsContainers = $(thisView.el).find('.BCK-BioCompCroppedContainer')
         $buttonsContainers.each (i, div) ->
 
-          $div = $(div)
-          $copyBtn = $div.find('.BCK-Copy-btn')
+          $container = $(div)
 
-          ButtonsHelper.initCopyButton($copyBtn, 'Copy to Clipboard',
-            $div.attr('data-value'))
+          config =
+            value: $container.attr('data-value')
+            download:
+              filename: "#{thisView.model.get('molecule_chembl_id')}-Biocomp-#{$container.attr('data-description')}.txt"
+              value: $container.attr('data-value')
+              tooltip: 'Download'
 
-          $downloadBtn = $div.find('.BCK-Dwnld-btn')
-          ButtonsHelper.initDownloadBtn($downloadBtn,
-            "#{thisView.model.get('molecule_chembl_id')}-Biocomp-#{$div.attr('data-description')}.txt",
-            'Download', $div.attr('data-value'))
+          ButtonsHelper.initCroppedContainer($container, config)
+          return
 
     new glados.views.ReportCards.EntityDetailsInCardView
       model: compound
@@ -665,8 +664,6 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     if GlobalVariables['EMBEDED']
       compound.fetch()
-
-
 
   # -------------------------------------------------------------
   # Function Cells
