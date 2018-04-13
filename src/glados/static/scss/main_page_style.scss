@@ -37,7 +37,6 @@ $full-header-height-large: 180px;
     min-height: 400px;
     max-height: 900px;
 
-    //border: blue solid 2px;
 
     &.half-height {
       height: 40vh;
@@ -57,7 +56,7 @@ $full-header-height-large: 180px;
 
   .divider {
     width: 90%;
-    margin: 60px auto;
+    margin: 55px auto;
   }
 
   .btn-container {
@@ -225,7 +224,7 @@ $full-header-height-large: 180px;
 
         img {
           padding: 5px;
-          width: 150px;
+          width: 145px;
           height: auto;
           transition: padding 200ms ease-in;
         }
@@ -303,7 +302,6 @@ $full-header-height-large: 180px;
 
   @media (max-width: 992px) {
     .db-records {
-
       display: block;
     }
   }
