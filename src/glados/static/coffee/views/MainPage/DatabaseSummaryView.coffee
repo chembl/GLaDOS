@@ -27,6 +27,7 @@ glados.useNameSpace 'glados.views.MainPage',
         num_datasets: $.number('158')
         release_notes_link: releaseNotesLink
 
+      @showContent()
     showContent: ->
       $(@el).find('.card-preolader-to-hide').hide()
       $(@el).find('.BCK-content').show()
