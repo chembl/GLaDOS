@@ -199,20 +199,17 @@ $full-header-height-large: 180px;
     }
 
     .db-records {
-      margin: auto;
+      margin: 0 auto;
+      padding-top: 30px;
       max-width: 1200px;
       position: relative;
 
-
       .db-record-item {
-        padding: 20px 40px;
         font-family: $chembl-helvetica;
-
-
 
         h4 {
           margin-bottom: 0;
-          font-size: 2.5em;
+          font-size: 2.2em;
           color: $darker-color;
           text-anchor: middle;
           transition: letter-spacing 200ms ease-in;
@@ -296,6 +293,18 @@ $full-header-height-large: 180px;
 
     .carousel-wrapper {
       padding-top: 10%;
+    }
+  }
+
+  .db-records {
+    align-content: space-between;
+    display: flex;
+  }
+
+  @media (max-width: 992px) {
+    .db-records {
+
+      display: block;
     }
   }
 }
