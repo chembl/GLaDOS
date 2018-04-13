@@ -54,6 +54,8 @@ glados.useNameSpace 'glados.views.Compound',
 
       if @collection.isShowingAlternativeForms()
         @renderColoursLegend()
+      else
+        @hideColoursLegend()
 
       $restServiceCallContainer = $(@el).find('.BCK-RESTServiceCallContainer')
       glados.Utils.fillContentForElement $restServiceCallContainer,
@@ -74,7 +76,10 @@ glados.useNameSpace 'glados.views.Compound',
 
       $container = $(@el).find('.BCK-ColoursLegendContainer')
       glados.Utils.fillContentForElement($container)
+      @showColoursLegend()
 
+    showColoursLegend: -> $(@el).find('.BCK-ColoursLegendContainer').show()
+    hideColoursLegend: -> $(@el).find('.BCK-ColoursLegendContainer').hide()
 
     toogleAlternateForms: (event) ->
 
