@@ -629,10 +629,14 @@ class CompoundReportCardApp extends glados.ReportCardApp
         biocomponents = glados.Utils.getNestedValue(model.attributes, Compound.COLUMNS.BIOCOMPONENTS.comparator,
           forceAsNumber=false, customNullValueLabel=undefined, returnUndefined=true)
 
+        console.log 'biocomponents: ', biocomponents
         if not biocomponents?
           return false
-        else
-          return true
+
+        if biocomponents.length == 0
+          return false
+          
+        return true
       properties_to_show: Compound.COLUMNS_SETTINGS.BIOCOMPONENTS_SECTION
       after_render: (thisView) ->
         ButtonsHelper.initCroppedTextFields()
