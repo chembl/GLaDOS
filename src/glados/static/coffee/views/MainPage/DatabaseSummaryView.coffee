@@ -24,9 +24,8 @@ glados.useNameSpace 'glados.views.MainPage',
         num_compounds: $.number(@model.get('disinct_compounds'))
         num_activities: $.number(@model.get('activities'))
         num_publications: $.number(@model.get('publications'))
+        num_datasets: $.number('158')
         release_notes_link: releaseNotesLink
-
-      @showContent()
 
     showContent: ->
       $(@el).find('.card-preolader-to-hide').hide()
