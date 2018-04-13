@@ -122,6 +122,6 @@ CompoundRepresentationsView = CardView.extend
 
     ButtonsHelper.initCroppedContainer($containerElem, config)
 
-    $containerElemSmall = $(@el).find('.BCK-StandardInchi-Small')
+    $containerElemSmall = $(@el).find('.BCK-StandardInchiKey-Small')
     ButtonsHelper.initCroppedContainer($containerElemSmall, config)
 

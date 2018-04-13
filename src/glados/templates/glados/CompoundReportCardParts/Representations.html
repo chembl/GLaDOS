@@ -168,50 +168,7 @@
 
           <tr>
 
-            <td colspan="2">
-
-              <div class="cropped-text-field">
-
-                <table>
-
-                  <tr>
-
-                    <td>
-                      <div class="cropped-text-field-input">
-                        <input id="CompReps-standardInchiKey-small" type="text">
-                        <!--Backbone-->
-                      </div>
-                    </td>
-
-                    <td class="cropped-text-field-btns-cell">
-
-
-
-                      <div class="cropped-text-field-btns">
-
-                        {% block CompReps-standardInchiKey-small-dnld %}
-                          {% with btn_id='CompReps-standardInchiKey-small-dnld' %}
-                            {% include "glados/base/btn_download_only_small.html" %}
-                          {% endwith %}
-                        {% endblock %}
-
-                        {% block CompReps-standardInchiKey-small-copy %}
-                          {% with btn_id='CompReps-standardInchiKey-small-copy' %}
-                            {% include "glados/base/btn_copy_small.html" %}
-                          {% endwith %}
-                        {% endblock %}
-
-                      </div>
-
-                    </td>
-
-                  </tr>
-
-                </table>
-
-              </div>
-
-            </td>
+            <td colspan="2" class="BCK-StandardInchiKey-Small" data-hb-template="Handlebars-Common-CroppedContainer"></td>
           </tr>
 
           </tbody>
