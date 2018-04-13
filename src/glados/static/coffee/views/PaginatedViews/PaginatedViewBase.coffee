@@ -249,6 +249,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           highlights: highlights
           selection_disabled: @disableItemsSelection
           columns_by_comparator: columnsByComparator
+          static_images_url: glados.Settings.STATIC_IMAGES_URL
 
         if (@isCards() or @isInfinite() or @isCarousel())
           templateParams.small_size = @CURRENT_CARD_SIZES.small

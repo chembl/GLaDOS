@@ -1,25 +1,16 @@
-<div class="BCK-Tweets-container">
-    <div class="card teal lighten-5 z-depth-0">
-        <div class="card-content tweet-content">
+<div class="BCK-Tweets-container card-content tweet-box">
 
-            <div class="col s12 tweet-header">
-                <p>
-                    <i class="fa fa-twitter" aria-hidden="true"></i>
-                    Tweets by <a target="_blank" href="https://twitter.com/chembl">@ChEMBL</a>
-                </p>
-            </div>
+    <h3 class="tweet-header">
 
-            <div class="tweets infinite-scroll-container">
-                {% include "glados/base/PaginatedCollections/DefaultInfinityBrowserContent.html" %}
-                <div class="row  center-align" style="display: none">
-                    <button class="waves-effect waves-light btn-chembl teal" onclick="funcioncargarmastweets">
-                        <i class="fa fa-spinner" aria-hidden="true"></i>
-                        Load more tweets
-                    </button>
-                </div>
-            </div>
+        Tweets by <a target="_blank" href="https://twitter.com/chembl"> @ChEMBL </a>
 
-        </div>
+    </h3>
+
+    <div class="tweet-list-container infinite-scroll-container">
+
+        {% include "glados/base/PaginatedCollections/DefaultInfinityBrowserContent.html" %}
+
     </div>
 
 </div>
+

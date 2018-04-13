@@ -152,11 +152,9 @@
         </div>
 
 
-
         <div class="divider"></div>
 
         <!-------------- Database Summary SECTION -------------->
-
         <div class="main-page-section col s12 database-summary fit-height">
 
             <div class="row container">
@@ -169,21 +167,32 @@
 
         </div>
 
-        <div class="divider"></div>
+        <div class="row color-row">
 
-        <div class="row container">
+            <div class="row container">
 
-            <!-- Tweets SECTION -->
-            <div class="main-page-section col s12 m6 half-height">
+                <!-- Tweets SECTION -->
+                <div class="main-page-section col s12 l6 half-height">
 
-                <div class="section-col">
-                    {% block tweets %}
-                        {% include "glados/MainPageParts/tweets.html" %}
-                    {% endblock %}
+                    <div class="section-col">
+
+                        {% block tweets %}
+                            {% include "glados/MainPageParts/tweets.html" %}
+                        {% endblock %}
+                    </div>
+
                 </div>
 
-            </div>
+{#                <!-- Tweets SECTION -->#}
+{#                <div class="main-page-section col s12 m6 half-height">#}
+{##}
+{#                    <div class="section-col">#}
+{##}
+{#                    </div>#}
+{##}
+{#                </div>#}
 
+            </div>
         </div>
 
     </div>
