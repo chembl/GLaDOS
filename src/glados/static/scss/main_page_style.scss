@@ -278,6 +278,7 @@ $full-header-height-large: 180px;
   .tweet-list-container {
     max-height: 100%;
     overflow: scroll;
+    border-radius: 10px;
 
     //Each tweet on the list
     .tweet {
