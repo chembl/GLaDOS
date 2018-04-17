@@ -24,8 +24,12 @@ class MainPageApp
     tweetsList.fetch()
 
     #   Init Blog entries
-    BlogEntriesList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewBlogEntriesList()
-    console.log 'list: ', BlogEntriesList
+    blogEntriesList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewBlogEntriesList()
+    blogEntriesList.initURL()
+    $blogEntriesElem = $('.BCK-Blog-Entries-container')
+    glados.views.PaginatedViews.PaginatedViewFactory.getNewInfinitePaginatedView(blogEntriesList, $blogEntriesElem, 'do-repaint')
+    blogEntriesList.fetch()
+
 #    BlogEntriesList.initURL()
 #    $tweetsElem = $('.BCK-Tweets-container')
 #    glados.views.PaginatedViews.PaginatedViewFactory.getNewInfinitePaginatedView(tweetsList, $tweetsElem, 'do-repaint')

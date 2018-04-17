@@ -132,7 +132,7 @@ def get_latest_blog_entries(request, pageToken):
     key = 'AIzaSyC8wiFE83tFlPASaKoGFdapehEwIrSt5mc'
     fetchBodies = False
     fetchImages = False
-    maxResults = 5
+    maxResults = 15
     orderBy = 'published'
     service = build('blogger', 'v3', developerKey=key)
     response = service.posts().list(blogId=blogId, orderBy=orderBy, pageToken=pageToken,

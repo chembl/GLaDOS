@@ -138,6 +138,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
           @initialiseUrl()
 
+          @on 'reset', (->
+            @setItemsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.ITEMS_READY)
+          ), @
+
           if @getMeta('enable_collection_caching')
             @initCache()
             @on 'reset', @addModelsInCurrentPage, @
@@ -404,11 +408,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       config = glados.models.paginatedCollections.Settings.WS_COLLECTIONS.BLOG_ENTRIES_LIST
       flavour = glados.models.paginatedCollections.SpecificFlavours.BlogEntriesList
       list = @getNewWSCollectionFor(config, filter='', flavour)
-      list.initURL()
-#      BlogEntriesList.setDataFromResponse(data)
-      console.log "data", data
 
-      console.log 'LIST: ', list
       return list
 
     getNewTweetsList: ->

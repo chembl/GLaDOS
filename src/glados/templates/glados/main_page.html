@@ -195,11 +195,15 @@
 
                             </h3>
 
-{#                            <div class="tweet-list-container infinite-scroll-container">#}
-{##}
-{#                                {% include "glados/base/PaginatedCollections/DefaultInfinityBrowserContent.html" %}#}
-{##}
-{#                            </div>#}
+                            {% block blog_entries %}
+                                {% include "glados/MainPageParts/blogEntries.html" %}
+                            {% endblock %}
+
+                            {#                            <div class="tweet-list-container infinite-scroll-container">#}
+                            {##}
+                            {#                                {% include "glados/base/PaginatedCollections/DefaultInfinityBrowserContent.html" %}#}
+                            {##}
+                            {#                            </div>#}
 
                         </div>
 
@@ -212,7 +216,7 @@
         </div>
 
     </div>
-    
+
 
 {% endblock %}
 

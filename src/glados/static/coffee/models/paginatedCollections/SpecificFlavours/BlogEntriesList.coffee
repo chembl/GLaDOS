@@ -1,17 +1,20 @@
 glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
 
   BlogEntriesList:
-
     initURL: ->
-
       @baseUrl = "#{glados.Settings.GLADOS_BASE_PATH_REL}blog_entries"
       @setMeta('base_url', @baseUrl, true)
+      @url = @getPaginatedURL()
       return @baseUrl
+
+    parse: (response) ->
+      @setDataFromResponse(response)
 
     setDataFromResponse: (response) ->
       @setMeta('next_page_token', response.nextPageToken, true)
       @setMeta('total_count', response.totalCount, true)
       entries = response.entries
+      @resetMeta(entries)
       @reset(entries)
 
     getNextPageToken: ->
@@ -30,16 +33,25 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
       else
         return "#{@baseUrl}/#{nextPageToken}"
 
+    resetMeta: (entries) ->
+      pageSize = glados.models.paginatedCollections.SpecificFlavours.BlogEntriesList.DEFAULT_PAGE_SIZE
+
+      @setMeta('total_records', @getNumberOfRecords())
+      @setMeta('page_size', pageSize)
+      @setMeta('total_pages', @getNumberOfRecords() / pageSize)
+      @setMeta('records_in_page', entries.length)
+
+
+  #-------------------------------------------------------------------------------------------------------------------
+  # fetching...
+  #-------------------------------------------------------------------------------------------------------------------
+
+    setPage: (newPageNum) ->
+      @setMeta('current_page', newPageNum)
+      glados.models.paginatedCollections.WSPaginatedCollection.setPage.call(@, newPageNum)
+
 ##   Currently the api doesnt return this data
-    resetMeta: (page_meta) ->
-
-      @setMeta('total_records', getNumberOfRecords())
-      @setMeta('page_size', 15)
-      @setMeta('current_page', 1)
-      @setMeta('total_pages', getNumberOfRecords()/15)
-      @setMeta('records_in_page', page_meta.records_in_page )
 
 
 
-
-
+glados.models.paginatedCollections.SpecificFlavours.BlogEntriesList.DEFAULT_PAGE_SIZE = 15

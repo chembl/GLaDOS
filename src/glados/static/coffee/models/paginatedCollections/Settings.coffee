@@ -480,7 +480,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       BLOG_ENTRIES_LIST:
         MODEL: glados.models.MainPage.BlogEntry
         BASE_URL: 'base_url is set by initURL'
-        DEFAULT_PAGE_SIZE: 5
+        DEFAULT_PAGE_SIZE: 15
         COLUMNS: glados.models.MainPage.BlogEntry.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Infinite:
