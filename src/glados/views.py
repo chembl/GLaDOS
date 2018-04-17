@@ -128,6 +128,12 @@ def get_latest_tweets_json(request):
 
     return JsonResponse(tweets)
 
+def get_latest_blog_entries(request, nextPageToken):
+    text = {
+        'hola': 'mundo'
+    }
+    return JsonResponse(text)
+
 def replace_urls_from_entinies(html, urls):
   """
   :return: the html with the corresponding links from the entities
