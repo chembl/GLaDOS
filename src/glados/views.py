@@ -137,7 +137,9 @@ def get_latest_blog_entries(request, pageToken):
     service = build('blogger', 'v3', developerKey=key)
     response = service.posts().list(blogId=blogId, orderBy=orderBy, pageToken=pageToken,
                                     fetchBodies=fetchBodies, fetchImages=fetchImages, maxResults=maxResults).execute()
+    blogResponse = service.blogs().get(blogId=blogId).execute()
 
+    total_count = blogResponse['posts']['totalItems']
     latest_entries_items = response['items']
     next_page_token = response['nextPageToken']
 
@@ -154,7 +156,8 @@ def get_latest_blog_entries(request, pageToken):
 
     entries = {
         'entries': blog_entries,
-        'nextPageToken': next_page_token
+        'nextPageToken': next_page_token,
+        'totalCount': total_count
     }
 
     return JsonResponse(entries)

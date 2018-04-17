@@ -30,12 +30,7 @@ describe 'Blog Entries List', ->
     paginatedUrlMustBe = "#{glados.Settings.GLADOS_BASE_PATH_REL}blog_entries/#{sampleData.nextPageToken}"
     paginatedUrlGot = list.getPaginatedURL()
 
-    console.log 'paginatedUrlMustBe: ', paginatedUrlMustBe
-    console.log 'paginatedUrlGot: ', paginatedUrlGot
-
     expect(paginatedUrlGot).toBe(paginatedUrlMustBe)
-
-
 
 
   it 'saves next page token after receiving data', ->
@@ -56,9 +51,18 @@ describe 'Blog Entries List', ->
     for entryMustBe in blogEntriesMustBe
 
       titleMustBe = entryMustBe.title
-
       entryGot = list.findWhere { title: titleMustBe }
       expect(entryGot?).toBe(true)
+
+  it 'gets correct number of records', ->
+
+    list.setDataFromResponse(sampleData)
+
+    totalCountMustBe = sampleData.totalCount
+    totalCountGot = list.getNumberOfRecords()
+
+    expect(totalCountGot).toBe(totalCountMustBe)
+
 
 
 
