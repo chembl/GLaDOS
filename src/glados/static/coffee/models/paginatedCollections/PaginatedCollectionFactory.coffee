@@ -109,12 +109,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return new IndexESPagQueryCollection
 
 # creates a new instance of a Paginated Collection from Web Services
-    getNewWSCollectionFor: (collectionSettings, filter='') ->
+    getNewWSCollectionFor: (collectionSettings, filter='', flavour={}) ->
       wsPagCollection = glados.models.paginatedCollections.PaginatedCollectionBase\
       .extend(glados.models.paginatedCollections.WSPaginatedCollection)
       .extend(glados.models.paginatedCollections.SelectionFunctions)
       .extend(glados.models.paginatedCollections.SortingFunctions)
-      .extend(glados.models.paginatedCollections.CacheFunctions).extend
+      .extend(glados.models.paginatedCollections.CacheFunctions)
+      .extend(flavour).extend
 
         model: collectionSettings.MODEL
         initialize: ->
@@ -397,6 +398,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         return data.mechanisms
 
       return list
+
+    getNewBlogEntriesList: ->
+
+      console.log 'get new blog entries list'
 
     getNewTweetsList: ->
 
