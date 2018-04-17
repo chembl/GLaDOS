@@ -17,6 +17,15 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
       nextPageToken = @getMeta('next_page_token')
       return nextPageToken
 
+    getPaginatedURL: ->
+      nextPageToken = @getNextPageToken()
+
+      if not nextPageToken?
+        return @baseUrl
+      else
+        return "#{@baseUrl}/#{nextPageToken}"
+
+
 
 
 

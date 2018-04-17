@@ -18,8 +18,25 @@ describe 'Blog Entries List', ->
 
     urlMustBe = "#{glados.Settings.GLADOS_BASE_PATH_REL}blog_entries"
     urlGot = list.initURL()
-
     expect(urlGot).toBe(urlMustBe)
+
+    urlGot = list.getPaginatedURL()
+    expect(urlGot).toBe(urlMustBe)
+
+  it "generates url for next page", ->
+
+    list.setDataFromResponse(sampleData)
+
+    paginatedUrlMustBe = "#{glados.Settings.GLADOS_BASE_PATH_REL}blog_entries/#{sampleData.nextPageToken}"
+    paginatedUrlGot = list.getPaginatedURL()
+
+    console.log 'paginatedUrlMustBe: ', paginatedUrlMustBe
+    console.log 'paginatedUrlGot: ', paginatedUrlGot
+
+    expect(paginatedUrlGot).toBe(paginatedUrlMustBe)
+
+
+
 
   it 'saves next page token after receiving data', ->
 
@@ -42,5 +59,6 @@ describe 'Blog Entries List', ->
 
       entryGot = list.findWhere { title: titleMustBe }
       expect(entryGot?).toBe(true)
+
 
 
