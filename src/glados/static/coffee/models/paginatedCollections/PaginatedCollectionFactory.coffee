@@ -401,7 +401,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     getNewBlogEntriesList: ->
 
-      console.log 'get new blog entries list'
+      config = glados.models.paginatedCollections.Settings.WS_COLLECTIONS.BLOG_ENTRIES_LIST
+      flavour = glados.models.paginatedCollections.SpecificFlavours.BlogEntriesList
+      list = @getNewWSCollectionFor(config, filter='', flavour)
+      return list
+
 
     getNewTweetsList: ->
 
