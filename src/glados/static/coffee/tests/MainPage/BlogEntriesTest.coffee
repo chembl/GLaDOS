@@ -1,15 +1,18 @@
 describe 'Blog Entries List', ->
 
   list = undefined
-  sampleDataToParse = undefined
+  sampleData = undefined
 
   beforeAll (done) ->
 
     list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewBlogEntriesList()
     dataURL = glados.Settings.STATIC_URL + 'testData/MainPage/BlogEntries/sampleDataToParse.json'
     $.get dataURL, (testData) ->
-      sampleDataToParse = testData
+      sampleData = testData
       done()
+
+  beforeEach ->
+    list.reset()
 
   it 'generates initial url', ->
 
@@ -18,16 +21,26 @@ describe 'Blog Entries List', ->
 
     expect(urlGot).toBe(urlMustBe)
 
-  it 'parses data correctly', ->
+  it 'saves next page token after receiving data', ->
 
-    console.log 'sampleDataToParse: ', sampleDataToParse
+    list.setDataFromResponse(sampleData)
 
-    parsedDataGot = list.parse(sampleDataToParse)
-    list.setDataAfterParse(parsedDataGot)
-    nextPageTokenMustBe = parsedDataGot.nextPageToken
+    nextPageTokenMustBe = sampleData.nextPageToken
     nextPageTokenGot = list.getNextPageToken()
 
-    console.log 'nextPageTokenGot', nextPageTokenGot
-    console.log 'nextPageTokenMustBe', nextPageTokenMustBe
-
     expect(nextPageTokenGot).toBe(nextPageTokenMustBe)
+
+  it 'loads new items correctly', ->
+
+    list.setDataFromResponse(sampleData)
+
+    blogEntriesMustBe = sampleData.entries
+
+    for entryMustBe in blogEntriesMustBe
+
+      titleMustBe = entryMustBe.title
+
+      entryGot = list.findWhere { title: titleMustBe }
+      expect(entryGot?).toBe(true)
+
+
