@@ -3,7 +3,7 @@ glados.useNameSpace 'glados.models.Compound',
 
 glados.models.Compound.UnichemConnectivityMatch.REF_TEMPLATE =
 '{{#each val}}' +
-'{{#if this.show}}<a target="_blank" href="{{this.ref_url}}">{{this.ref_id}}</a> {{else}} {{/if}}' +
+  '{{#if this.show}}<a target="_blank" class="{{this.colour_class}}" href="{{this.ref_url}}">{{this.ref_id}}</a> {{else}} {{/if}}' +
 '{{/each}}'
 
 glados.models.Compound.UnichemConnectivityMatch.COLUMNS =
