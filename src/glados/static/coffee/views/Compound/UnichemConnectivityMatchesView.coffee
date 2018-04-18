@@ -82,6 +82,7 @@ glados.useNameSpace 'glados.views.Compound',
       glados.Utils.fillContentForElement $descriptionContainer,
         inchi_key: inchiKey
         standard_inchi: standardInchi
+        chembl_id: @model.get('molecule_chembl_id')
 
       $inchiKeyContainer = $descriptionContainer.find('.BCK-InchiKeyContainer')
 
@@ -89,9 +90,17 @@ glados.useNameSpace 'glados.views.Compound',
         value: inchiKey
         download:
           filename: "#{@model.get('molecule_chembl_id')}-INCHI_Key.txt"
-          value: inchiKey
 
       ButtonsHelper.initCroppedContainer($inchiKeyContainer, config)
+
+      $fullInchiContainer = $descriptionContainer.find('.BCK-FullInchiContainer')
+
+      config =
+        value: standardInchi
+        download:
+          filename: "#{@model.get('molecule_chembl_id')}-INCHI.txt"
+
+      ButtonsHelper.initCroppedContainer($fullInchiContainer, config)
 
 
     #-------------------------------------------------------------------------------------------------------------------
@@ -100,8 +109,39 @@ glados.useNameSpace 'glados.views.Compound',
     renderColoursLegend: ->
 
       $container = $(@el).find('.BCK-ColoursLegendContainer')
-      glados.Utils.fillContentForElement($container)
+      matchClasses = @collection.getInchiMatchClasses()
+      console.log 'matchCasses: ', matchClasses
+      matchClassesList = []
+      classPrefix = glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList.CLASS_PREFIX
+
+      for fullInchi, matchClass of matchClasses
+        matchNumber = matchClass.split(classPrefix)[1]
+
+        if matchNumber != "0"
+          matchClassesList.push
+            full_inchi: fullInchi
+            match_class: matchClass
+            match_number: matchNumber
+            download_filename: "UnichemConnectivityFor-#{@model.get('molecule_chembl_id')}-match#{matchNumber}-Inchi.txt"
+
+      console.log 'matchClassesList: ', matchClassesList
+      glados.Utils.fillContentForElement $container,
+        matched_inchis: matchClassesList
+
+      $croppedContainers = $(@el).find('.BCK-MatchedInchi')
+      $croppedContainers.each (i, div) ->
+
+          $container = $(div)
+
+          config =
+            value: $container.attr('data-value')
+            download:
+              filename: "#{$container.attr('data-download-filename')}"
+
+          ButtonsHelper.initCroppedContainer($container, config)
+
       @showColoursLegend()
+
 
     showColoursLegend: -> $(@el).find('.BCK-ColoursLegendContainer').show()
     hideColoursLegend: -> $(@el).find('.BCK-ColoursLegendContainer').hide()

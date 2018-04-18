@@ -47,6 +47,7 @@ class ButtonsHelper
     value = config.value
     downloadFilename = config.download.filename
     downloadValue = config.download.value
+    downloadValue ?= value
     downloadTooltip = config.download.tooltip
     downloadTooltip ?= 'Download'
     copyTooltip = 'Copy to Clipboard'

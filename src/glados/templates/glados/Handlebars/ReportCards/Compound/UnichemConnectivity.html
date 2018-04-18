@@ -3,22 +3,25 @@
 <script id="Handlebars-UnichemConnectivityDescription" type="text/x-handlebars-template">
     <div class="row">
         <div class="col s12">
-            <b>UniChem Connectivity Layer Cross References</b>
+            <b>UniChem Connectivity Layer Cross References for {{chembl_id}}</b>
             <table>
-
                 <tr>
                     <td class="BCK-InchiKeyContainer" data-hb-template="Handlebars-Common-CroppedContainer"
                                         data-value="{{inchi_key}}" >
-
                     </td>
                 </tr>
-
             </table>
 
         </div>
         <div class="col s12">
             <b>Full InChI:</b>
-            <div>{{standard_inchi}}</div>
+            <table>
+                <tr>
+                    <td class="BCK-FullInchiContainer" data-hb-template="Handlebars-Common-CroppedContainer"
+                                        data-value="{{standard_inchi}}" >
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </script>
@@ -36,6 +39,22 @@
 </script>
 <script id="Handlebars-UnichemConnectivityColoursLegend" type="text/x-handlebars-template">
     <b>Colours Legend:</b>
+
+    <table class="compact-table">
+
+        {{#each matched_inchis}}
+            <tr>
+                <td>
+                    <b>Match {{this.match_number}}:</b>
+                </td>
+                <td class="BCK-MatchedInchi" data-hb-template="Handlebars-Common-CroppedContainer"
+                    data-value="{{this.full_inchi}}" data-description="{{this.description}}"
+                    data-download-filename="{{this.download_filename}}">
+                </td>
+            </tr>
+        {{/each}}
+    </table>
+
 </script>
 
 

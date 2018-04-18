@@ -74,6 +74,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
       parsedSourcesWithMatches = []
       matchClasses = {}
       classNumber = 0
+      classPrefix = glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList.CLASS_PREFIX
       for source in matchesSourcesReceived
 
         baseItemURL = source.base_id_url
@@ -91,7 +92,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
 
         fullQueryInchi = source['Full Query InChI']
         if not matchClasses[fullQueryInchi]?
-          matchClasses[fullQueryInchi] = "class#{classNumber}"
+          matchClasses[fullQueryInchi] = "#{classPrefix}#{classNumber}"
           classNumber++
 
         for match in matches
@@ -103,7 +104,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
 
             matchingQueryInchi = compare['Matching_Query_InChI']
             if not matchClasses[matchingQueryInchi]?
-              matchClasses[matchingQueryInchi] = "class#{classNumber}"
+              matchClasses[matchingQueryInchi] = "#{classPrefix}#{classNumber}"
               classNumber++
 
             isToggeable = compare.C > 0
@@ -190,3 +191,4 @@ glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList.
   SHOWING_ALTERNATIVE_FORMS: 'SHOWING_ALTERNATIVE_FORMS'
   HIDING_ALTERNATIVE_FORMS: 'HIDING_ALTERNATIVE_FORMS'
 
+glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList.CLASS_PREFIX = 'class'
