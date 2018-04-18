@@ -1,25 +1,75 @@
 {% verbatim %}
 
 <script id="Handlebars-UnichemConnectivityDescription" type="text/x-handlebars-template">
-    <b>UniChem Connectivity Layer Cross References for structure with InChI Key:</b>
-    <ul>
-        <li>BSYNRYMUTXBXSQ-UHFFFAOYSA-N</li>
-    </ul>
+    <div class="row">
+        <div class="col s12">
+            <b>UniChem Connectivity Layer Cross References for {{chembl_id}}</b>
+            <table>
+                <tr>
+                    <td class="BCK-InchiKeyContainer" data-hb-template="Handlebars-Common-CroppedContainer"
+                                        data-value="{{inchi_key}}" >
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+        <div class="col s12">
+            <b>Full InChI:</b>
+            <table>
+                <tr>
+                    <td class="BCK-FullInchiContainer" data-hb-template="Handlebars-Common-CroppedContainer"
+                                        data-value="{{standard_inchi}}" >
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </script>
 
 <script id="Handlebars-UnichemConnectivityLegend" type="text/x-handlebars-template">
-    <b>Legend:</b>
+    <b>Columns Legend:</b>
+
     <ul>
         <li>S = stereochemical difference.</li>
         <li>I = isotopic difference.</li>
         <li>P = protonation differences identified.</li>
     </ul>
 
+
 </script>
+<script id="Handlebars-UnichemConnectivityColoursLegend" type="text/x-handlebars-template">
+    <b>Colours Legend:</b>
+
+    <table class="compact-table">
+
+        {{#each matched_inchis}}
+            <tr>
+                <td>
+                    <div class="{{this.match_class}}">Match {{this.match_number}}:</div>
+                </td>
+                <td class="BCK-MatchedInchi" data-hb-template="Handlebars-Common-CroppedContainer"
+                    data-value="{{this.full_inchi}}" data-description="{{this.description}}"
+                    data-download-filename="{{this.download_filename}}">
+                </td>
+            </tr>
+        {{/each}}
+    </table>
+
+</script>
+
 
 <script id="Handlebars-LoadAlternativeSaltsButton" type="text/x-handlebars-template">
     <div class="row">
-       <a class="menu-button">Include Alternative Salts and Mixtures</a>
+        <a class="{{#if disabled}}disabled{{/if}} BCK-ToggleAlternateForms menu-button">
+            {{#if include}}Exclude{{else}}Include{{/if}} Alternative Salts and Mixtures
+        </a>
     </div>
 </script>
+
+<script id="Handlebars-RESTServiceCallContent" type="text/x-handlebars-template">
+    <br><br>
+    UniChem REST Service Call:
+    <a href="{{url}}">{{url}}</a>
+</script>
+
 {% endverbatim %}

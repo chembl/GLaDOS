@@ -63,18 +63,6 @@ class TargetReportCardTest(ReportCardTester):
     self.assertEqual(specs_group.text, 'Yes')
 
     # --------------------------------------
-    # Target Components
-    # --------------------------------------
-
-    texts_should_be = ['DNA-directed RNA polymerase subunit alpha PROTEIN SUBUNIT P0A7Z4',
-                       'DNA-directed RNA polymerase subunit beta PROTEIN SUBUNIT P0A8V2',
-                       "DNA-directed RNA polymerase subunit beta' PROTEIN SUBUNIT P0A8T7",
-                       'DNA-directed RNA polymerase subunit omega PROTEIN SUBUNIT P0A800']
-
-    components_table = self.browser.find_element_by_id('BCK-TCompsTable-large')
-    self.assert_table_any_order(components_table, texts_should_be)
-
-    # --------------------------------------
     # Approved Drugs and Clinical Candidates
     # --------------------------------------
 

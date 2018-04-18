@@ -28,8 +28,6 @@ CompoundRepresentationsView = CardView.extend
     @activateTooltips()
     @activateModals()
 
-    afterRender()
-
   renderButtons: ->
     compound_model = @model
     thisView = @
@@ -78,35 +76,50 @@ CompoundRepresentationsView = CardView.extend
     )
 
   renderCanonicalSmiles: ->
-    $(@el).find('#CompReps-canonicalSmiles, #CompReps-canonicalSmiles-small').attr('value',
-      @molecule_structures['canonical_smiles'])
 
-    ButtonsHelper.initDownloadBtn($(@el).find('#CompReps-canonicalSmiles-dnld, #CompReps-canonicalSmiles-small-dnld'),
-      GlobalVariables.CHEMBL_ID + '.smi', 'Download SMILES file.',
-      @molecule_structures['canonical_smiles'] + '%20'+ @model.get('molecule_chembl_id'))
+    $containerElem = $(@el).find('.BCK-CanonicalSmiles')
 
-    copy_btn = $(@el).find('#CompReps-canonicalSmiles-copy, #CompReps-canonicalSmiles-small-copy')
-    ButtonsHelper.initCopyButton(copy_btn, 'Copy to Clipboard', @molecule_structures['canonical_smiles'])
+    config =
+      value: @molecule_structures['canonical_smiles']
+      download:
+        filename: "#{@model.get('molecule_chembl_id')}.smi"
+        value: "#{@molecule_structures['canonical_smiles'] + '%20'+ @model.get('molecule_chembl_id')}"
+        tooltip: 'Download SMILES file.'
+
+    ButtonsHelper.initCroppedContainer($containerElem, config)
+
+    $containerElemSmall = $(@el).find('.BCK-CanonicalSmiles-Small')
+    ButtonsHelper.initCroppedContainer($containerElemSmall, config)
 
   renderStandardInchi: ->
-    $(@el).find('#CompReps-standardInchi, #CompReps-standardInchi-small').attr('value',
-      @molecule_structures['standard_inchi'])
 
-    ButtonsHelper.initDownloadBtn($(@el).find('#CompReps-standardInchi-dnld, #CompReps-standardInchi-small-dnld'),
-      GlobalVariables.CHEMBL_ID + '-INCHI.txt', 'Download InChI.', @molecule_structures['standard_inchi'])
+    $containerElem = $(@el).find('.BCK-StandardInchi')
 
-    copy_btn = $(@el).find('#CompReps-standardInchi-copy, #CompReps-standardInchi-small-copy')
-    ButtonsHelper.initCopyButton(copy_btn, 'Copy to Clipboard', @molecule_structures['standard_inchi'])
+    config =
+      value: @molecule_structures['standard_inchi']
+      download:
+        filename: "#{@model.get('molecule_chembl_id')}-INCHI.txt"
+        value: "#{@molecule_structures['standard_inchi']}%20#{@model.get('molecule_chembl_id')}"
+        tooltip: 'Download INCHI file.'
+
+    ButtonsHelper.initCroppedContainer($containerElem, config)
+
+    $containerElemSmall = $(@el).find('.BCK-StandardInchi-Small')
+    ButtonsHelper.initCroppedContainer($containerElemSmall, config)
 
   renderStandardInchiKey: ->
-    $(@el).find('#CompReps-standardInchiKey, #CompReps-standardInchiKey-small').attr('value',
-      @molecule_structures['standard_inchi_key'])
 
-    ButtonsHelper.initDownloadBtn($(@el).find('#CompReps-standardInchiKey-dnld, #CompReps-standardInchiKey-small-dnld'),
-      GlobalVariables.CHEMBL_ID + '-INCHI_KEY.txt', 'Download InChI Key.', @molecule_structures['standard_inchi_key'])
+    $containerElem = $(@el).find('.BCK-StandardInchiKey')
 
-    copy_btn = $(@el).find('#CompReps-standardInchiKey-copy, #CompReps-standardInchiKey-small-copy')
-    ButtonsHelper.initCopyButton(copy_btn, 'Copy to Clipboard', @molecule_structures['standard_inchi_key'])
+    config =
+      value: @molecule_structures['standard_inchi_key']
+      download:
+        filename: "#{@model.get('molecule_chembl_id')}-INCHI_Key.txt"
+        value: "#{@molecule_structures['standard_inchi_key']}%20#{@model.get('molecule_chembl_id')}"
+        tooltip: 'Download INCHI Key file.'
 
+    ButtonsHelper.initCroppedContainer($containerElem, config)
 
+    $containerElemSmall = $(@el).find('.BCK-StandardInchiKey-Small')
+    ButtonsHelper.initCroppedContainer($containerElemSmall, config)
 
