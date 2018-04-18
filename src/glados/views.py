@@ -88,6 +88,7 @@ def get_latest_tweets(page_number=1, count=15):
         user_data = users[0]
         t_response = (tweets, user_data, user_data['statuses_count'])
         cache.set(cache_key, t_response, cache_time)
+
         return t_response
     except Exception as e:
         print_server_error(e)
@@ -128,12 +129,27 @@ def get_latest_tweets_json(request):
 
 
 def get_latest_blog_entries(request, pageToken):
+
     blogId = '2546008714740235720'
     key = 'AIzaSyC8wiFE83tFlPASaKoGFdapehEwIrSt5mc'
     fetchBodies = False
     fetchImages = False
     maxResults = 15
     orderBy = 'published'
+
+    cache_key = str(pageToken)
+    cache_time = 3600
+
+    # tries to get entries from cache
+    cache_response = cache.get(cache_key)
+
+    if cache_response != None:
+        print('Getting blog entries from cache :)')
+        return JsonResponse(cache_response)
+
+    print('Blog entries not found in cache!')
+
+    # gets blog entries from blogger api
     service = build('blogger', 'v3', developerKey=key)
     response = service.posts().list(blogId=blogId, orderBy=orderBy, pageToken=pageToken,
                                     fetchBodies=fetchBodies, fetchImages=fetchImages, maxResults=maxResults).execute()
@@ -159,6 +175,7 @@ def get_latest_blog_entries(request, pageToken):
         'nextPageToken': next_page_token,
         'totalCount': total_count
     }
+    cache.set(cache_key, entries, cache_time)
 
     return JsonResponse(entries)
 
