@@ -53,19 +53,16 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
 
       @setMeta('inchi_matches', parsed.inchi_match_classes)
       matchesStructure = parsed.inchi_match_classes
-      @setModelsAfterParse(parsed.list, dataWasJustReceived, matchesStructure)
+      @setModelsAfterParse(parsed.list, dataWasJustReceived)
 
-    setModelsAfterParse: (rawModelsList, dataWasJustReceived=false, matchesStructure={}) ->
+    setModelsAfterParse: (rawModelsList, dataWasJustReceived=false) ->
 
       @setMeta('original_raw_models', rawModelsList)
       modelsToShow = _.filter rawModelsList, (source) ->
         allMatches = source.all_matches
         return _.findWhere(allMatches, {show: true})?
 
-      matchesStructureKeys = _.keys(matchesStructure)
-      matchesStructureContainOnlyOne = (matchesStructureKeys.length == 1)
-
-      if ((rawModelsList.length == modelsToShow.length) or matchesStructureContainOnlyOne ) and dataWasJustReceived
+      if ((rawModelsList.length == modelsToShow.length) ) and dataWasJustReceived
         @setMeta('no_alternative_forms_to_show', true)
       else
         @setMeta('no_alternative_forms_to_show', false)
