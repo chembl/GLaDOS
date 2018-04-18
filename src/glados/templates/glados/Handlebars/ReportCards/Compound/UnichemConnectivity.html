@@ -45,7 +45,7 @@
         {{#each matched_inchis}}
             <tr>
                 <td>
-                    <b>Match {{this.match_number}}:</b>
+                    <div class="{{this.match_class}}">Match {{this.match_number}}:</div>
                 </td>
                 <td class="BCK-MatchedInchi" data-hb-template="Handlebars-Common-CroppedContainer"
                     data-value="{{this.full_inchi}}" data-description="{{this.description}}"
