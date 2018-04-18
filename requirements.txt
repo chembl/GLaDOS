@@ -11,5 +11,5 @@ whitenoise
 requests
 python-gettext
 elasticsearch-dsl>=6.1.0
-setuptools
+ez_setup
 google-api-python-client==1.6.6
