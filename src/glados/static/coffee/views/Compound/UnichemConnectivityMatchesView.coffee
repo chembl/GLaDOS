@@ -83,7 +83,17 @@ glados.useNameSpace 'glados.views.Compound',
         inchi_key: inchiKey
         standard_inchi: standardInchi
 
-      
+      $inchiKeyContainer = $descriptionContainer.find('.BCK-InchiKeyContainer')
+
+      config =
+        value: inchiKey
+        download:
+          filename: "#{@model.get('molecule_chembl_id')}-INCHI_Key.txt"
+          value: inchiKey
+
+      ButtonsHelper.initCroppedContainer($inchiKeyContainer, config)
+
+
     #-------------------------------------------------------------------------------------------------------------------
     # Colours Legend
     #-------------------------------------------------------------------------------------------------------------------

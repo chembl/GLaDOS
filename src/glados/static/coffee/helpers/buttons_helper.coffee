@@ -48,6 +48,7 @@ class ButtonsHelper
     downloadFilename = config.download.filename
     downloadValue = config.download.value
     downloadTooltip = config.download.tooltip
+    downloadTooltip ?= 'Download'
     copyTooltip = 'Copy to Clipboard'
 
     glados.Utils.fillContentForElement $containerElem,
