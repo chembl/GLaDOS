@@ -117,12 +117,11 @@ glados.useNameSpace 'glados.views.Compound',
       for fullInchi, matchClass of matchClasses
         matchNumber = matchClass.split(classPrefix)[1]
 
-        if matchNumber != "0"
-          matchClassesList.push
-            full_inchi: fullInchi
-            match_class: matchClass
-            match_number: matchNumber
-            download_filename: "UnichemConnectivityFor-#{@model.get('molecule_chembl_id')}-match#{matchNumber}-Inchi.txt"
+        matchClassesList.push
+          full_inchi: fullInchi
+          match_class: matchClass
+          match_number: matchNumber
+          download_filename: "UnichemConnectivityFor-#{@model.get('molecule_chembl_id')}-match#{matchNumber}-Inchi.txt"
 
       console.log 'matchClassesList: ', matchClassesList
       glados.Utils.fillContentForElement $container,
