@@ -42,11 +42,11 @@ glados.useNameSpace 'glados.views.Compound',
 
         $qtipContent = $('<div>There is no additional information from alternative salts and mixtures to show.</div>')
         qtipConfig =
-            content:
-              text: $qtipContent
-            style:
-              classes:'matrix-qtip qtip-light qtip-shadow'
-            position: glados.Utils.Tooltips.getQltipSafePostion($toggleAltFormsBtn, $qtipContent)
+          content:
+            text: $qtipContent
+          style:
+            classes:'matrix-qtip qtip-light qtip-shadow'
+          position: glados.Utils.Tooltips.getQltipSafePostion($toggleAltFormsBtn, $qtipContent)
 
         $toggleAltFormsBtn.qtip qtipConfig
 

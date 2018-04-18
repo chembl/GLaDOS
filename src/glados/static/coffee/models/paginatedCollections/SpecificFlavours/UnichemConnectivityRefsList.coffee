@@ -52,16 +52,20 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
     setListDataAfterParse: (parsed, dataWasJustReceived=false) ->
 
       @setMeta('inchi_matches', parsed.inchi_match_classes)
-      @setModelsAfterParse(parsed.list, dataWasJustReceived)
+      matchesStructure = parsed.inchi_match_classes
+      @setModelsAfterParse(parsed.list, dataWasJustReceived, matchesStructure)
 
-    setModelsAfterParse: (rawModelsList, dataWasJustReceived=false) ->
+    setModelsAfterParse: (rawModelsList, dataWasJustReceived=false, matchesStructure={}) ->
 
       @setMeta('original_raw_models', rawModelsList)
       modelsToShow = _.filter rawModelsList, (source) ->
         allMatches = source.all_matches
         return _.findWhere(allMatches, {show: true})?
 
-      if (rawModelsList.length == modelsToShow.length) and dataWasJustReceived
+      matchesStructureKeys = _.keys(matchesStructure)
+      matchesStructureContainOnlyOne = (matchesStructureKeys.length == 1)
+
+      if ((rawModelsList.length == modelsToShow.length) or matchesStructureContainOnlyOne ) and dataWasJustReceived
         @setMeta('no_alternative_forms_to_show', true)
       else
         @setMeta('no_alternative_forms_to_show', false)
