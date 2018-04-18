@@ -9,62 +9,61 @@
         </div>
     </div>
     {{#if redirect_link}}
-    <div class="card-panel">
-        <p class="center-align Bck-errormsg">
-            Please Wait, you will be redirected shortly . . . <span class="redirect-time"></span><br>
-            If you are not redirected, please
-            <a class="error-redirect-link" href="{{redirect_link}}">click here</a>.
-        </p>
-    </div>
+        <div class="card-panel">
+            <p class="center-align Bck-errormsg">
+                Please Wait, you will be redirected shortly .  . . <span class="redirect-time"></span><br>
+                If you are not redirected, please
+                <a class="error-redirect-link" href="{{redirect_link}}">click here</a>.
+            </p>
+        </div>
     {{/if}}
 </script>
 
 <script id="Handlebars-Common-ErrorInCard" type="text/x-handlebars-template">
-    <div class="card grey lighten-5">
-        <div class="card-content">
-            <i class="fa fa-exclamation-triangle"></i> <b>Error:</b> {{msg}}
-        </div>
+  <div class="card grey lighten-5">
+    <div class="card-content">
+      <i class="fa fa-exclamation-triangle"></i> <b>Error:</b> {{msg}}
     </div>
+  </div>
 </script>
 
 <script id="Handlebars-Common-ErrorInImage" type="text/x-handlebars-template">
 
-    <i class="fa fa-exclamation-triangle"></i> <b>Error:</b> {{msg}}
+  <i class="fa fa-exclamation-triangle"></i> <b>Error:</b> {{msg}}
 
 </script>
 
 <script id="Handlebars-Common-SelectAll" type="text/x-handlebars-template">
-    <input type="checkbox" class="filled-in BCK-toggle-select-all"
-           id="BCK-list-{{base_check_box_id}}-selectAll"
-           {{#if all_items_selected}}checked="checked" {{/if}}/>
-    <label for="BCK-list-{{base_check_box_id}}-selectAll">Select All</label>
+  <input type="checkbox" class="filled-in BCK-toggle-select-all"
+         id="BCK-list-{{base_check_box_id}}-selectAll"
+    {{#if all_items_selected}}checked="checked"{{/if}}/>
+  <label for="BCK-list-{{base_check_box_id}}-selectAll">Select All</label>
 </script>
 
 <script id="Handlebars-Common-Paginated-UL" type="text/x-handlebars-template">
 
-    <div class="col s12 m4 l6">
-        Showing {{records_showing}} out of {{total_records}} records
-    </div>
-    <div class="col s12 m8 l6">
-        <ul class="pagination right-align">
-            <li class="page-selector" data-page='previous'><a><i class="material-icons">chevron_left</i></a></li>
+  <div class="col s12 m4 l6">
+    Showing {{records_showing}} out of {{total_records}} records
+  </div>
+  <div class="col s12 m8 l6">
+    <ul class="pagination right-align">
+      <li class="page-selector" data-page='previous'><a><i class="material-icons">chevron_left</i></a></li>
 
-            {{#if show_previous_ellipsis}}
-            <li class="disabled">...</li>
-            {{/if}}
+        {{#if show_previous_ellipsis}}
+          <li class="disabled" >...</li>
+        {{/if}}
 
-            {{#each pages}}
-            <li class="waves-effect page-selector active" data-page='{{this}}'><a>{{this}}</a></li>
-            {{/each}}
-            {{#if show_next_ellipsis}}
-            <li class="disabled">...</li>
-            {{/if}}
+        {{#each pages}}
+          <li class="waves-effect page-selector active" data-page='{{this}}' ><a>{{this}}</a></li>
+        {{/each}}
+        {{#if show_next_ellipsis}}
+          <li class="disabled" >...</li>
+        {{/if}}
 
-            <li class="waves-effect page-selector" data-page='next'><a><i class="material-icons">chevron_right</i></a>
-            </li>
-        </ul>
+      <li class="waves-effect page-selector" data-page='next' ><a><i class="material-icons">chevron_right</i></a></li>
+    </ul>
 
-    </div>
+  </div>
 
 </script>
 
@@ -80,86 +79,83 @@
 </script>
 
 <script id='Handlebars-Common-Paginated-Card-TabContent' type="text/x-handlebars-template">
-    <div class="BCK-tab-content" data-tab-id='{{tab_id}}'>{{tab_id}}</div>
+  <div class="BCK-tab-content" data-tab-id='{{tab_id}}'>{{tab_id}}</div>
 </script>
 
 <script id="Handlebars-Common-SortSelect" type="text/x-handlebars-template">
 
-    <select class="{{#if custom_class }} {{custom_class}} {{else}} select-sort {{/if}}">
-        <option value="" disabled {{#unless this.one_selected}} selected {{
-        /unless}}>Choose a field</option>
-        {{#each columns}}
-        <option value="{{this.comparator}}" {{#if this.selected}} selected {{
-        /if}}>{{this.label}}</option>
-        {{/each}}
-    </select>
-    <label>{{#if custom_label }} {{custom_label}} {{else}} Sort by: {{/if}}</label>
+  <select class="{{#if custom_class }} {{custom_class}} {{else}} select-sort {{/if}}">
+    <option value="" disabled {{#unless this.one_selected}} selected {{/unless}}>Choose a field</option>
+    {{#each columns}}
+      <option value="{{this.comparator}}" {{#if this.selected}} selected {{/if}}>{{this.label}}</option>
+    {{/each}}
+  </select>
+  <label>{{#if custom_label }} {{custom_label}} {{else}} Sort by: {{/if}}</label>
 
 </script>
 
 <script id="Handlebars-Common-SortDirectionBtn" type="text/x-handlebars-template">
 
-    <a class="waves-effect waves-light btn-mini teal btn-sort-direction" {{#if disabled}} disabled {{/if}}
-    data-target-property="{{target_property}}">
+  <a class="waves-effect waves-light btn-mini teal btn-sort-direction" {{#if disabled}} disabled {{/if}}
+  data-target-property="{{target_property}}">
     <i class="fa {{sort_class}}" aria-hidden="true"></i>
     {{text}}
-    </a>
+  </a>
 
 </script>
 
 <script id="Handlebars-Common-Paginated-NumResults" type="text/x-handlebars-template">
-    {{num_results}} Results
+  {{num_results}} Results
 </script>
 
 
 <script id="Handlebars-Common-SelectPageSizeContainer" type="text/x-handlebars-template">
 
-    <div class="input-field">
+  <div class="input-field">
 
-        <select class="change-page-size">
+      <select class="change-page-size">
 
-            {{#each items}}
+        {{#each items}}
 
-            <option value="{{this.number}}" {{#if this.is_selected}}selected{{
-            /if}}>{{this.number}}</option>
+        <option value="{{this.number}}" {{#if this.is_selected}}selected{{/if}}>{{this.number}}</option>
 
-            {{/each}}
+        {{/each}}
 
-        </select>
-        <label>Records per page:</label>
+      </select>
+      <label>Records per page:</label>
     </div>
 
 </script>
 
 <script id="Handlebars-Common-CardsZoom" type="text/x-handlebars-template">
 
-    <div class="buttons-wrapper">
-        <a class="BCK-zoom-in zoom-btn {{#if disable_zoom_in}}disabled{{/if}}"><i class="fa fa-lg fa-plus"></i></a>
-        <a class="BCK-reset-zoom zoom-btn {{#if disable_reset}}disabled{{/if}}"><i class="fa fa-lg fa-home"></i></a>
-        <a class="BCK-zoom-out  zoom-btn {{#if disable_zoom_out}}disabled{{/if}}"><i class="fa fa-lg fa-minus"></i></a>
-    </div>
+  <div class="buttons-wrapper">
+    <a class="BCK-zoom-in zoom-btn {{#if disable_zoom_in}}disabled{{/if}}"><i class="fa fa-lg fa-plus"></i></a>
+    <a class="BCK-reset-zoom zoom-btn {{#if disable_reset}}disabled{{/if}}" ><i class="fa fa-lg fa-home"></i></a>
+    <a class="BCK-zoom-out  zoom-btn {{#if disable_zoom_out}}disabled{{/if}}" ><i class="fa fa-lg fa-minus"></i></a>
+  </div>
 
 </script>
 
 <script id="Handlebars-Common-SpecialStructuresControls" type="text/x-handlebars-template">
 
-    <div class="tool-title">{{title}}</div>
-    <div class="switch">
-        <label>
-            On
-            <input class="BCK-toggle-SimMaps" {{#if checked}}checked{{/if}} type="checkbox">
-            <span class="lever"></span>
-            Off
-        </label>
-    </div>
+<div class="tool-title">{{title}}</div>
+<div class="switch">
+    <label>
+      On
+      <input class="BCK-toggle-SimMaps" {{#if checked}}checked{{/if}} type="checkbox">
+      <span class="lever"></span>
+      Off
+    </label>
+</div>
 
 </script>
 <script id="Handlebars-Common-ShowHideColumnsDropdown-trigger" type="text/x-handlebars-template">
-    <a class='menu-button' href="#{{modal_id}}">Show/Hide Columns</a>
+  <a class='menu-button' href="#{{modal_id}}">Show/Hide Columns</a>
 
-    <div id="{{modal_id}}" class="modal bottom-sheet BCK-ModalContent"
-         data-hb-template="Handlebars-Common-ShowHideColumnsDropdown-content">
-    </div>
+  <div id="{{modal_id}}" class="modal bottom-sheet BCK-ModalContent"
+       data-hb-template="Handlebars-Common-ShowHideColumnsDropdown-content">
+  </div>
 
 </script>
 
@@ -168,65 +164,67 @@
     <div class="modal-content left-align div-cover-wrapper">
 
 
-        <div class="show-hide-columns">
+      <div class="show-hide-columns">
 
-            <div class="row">
-                You may need to scroll the table horizontally to see all columns. Drag and drop items to change their
-                order.
-            </div>
+        <div class="row">
+          You may need to scroll the table horizontally to see all columns. Drag and drop items to change their order.
+        </div>
 
-            <div class="row center-align">
+        <div class="row center-align">
 
-                <input type="checkbox" class="BCK-show-hide-column filled-in"
-                       data-comparator='SELECT-ALL' id="check-{{random_num}}"
-                       {{#if all_selected}} checked="checked" {{/if}}
-                />
-                <label for="check-{{random_num}}">Select All</label>
-
-            </div>
-
-            <div class="row BCK-draggable-container sortable-items-container">
-
-                {{#each all_columns}}
-
-                <div class="col s6 m3 l2 drag-dummy BCK-drag-dummy" data-comparator='{{this.comparator}}'>
-                </div>
-
-                <div class="col s6 m3 l2 sortable-item BCK-draggable" draggable='true'
-                     data-comparator='{{this.comparator}}'>
-
-                    <div class="item-content">
-
-                        <div class="item-checkbox">
-
-                            <input type="checkbox" class="BCK-show-hide-column filled-in"
-                                   id="{{this.modal_id}}-check-{{this.comparator}}"
-                                   data-comparator='{{this.comparator}}'
-                                   {{#if this.show}} checked="checked" {{/if}}
-                            />
-
-                            <label for="{{this.modal_id}}-check-{{this.comparator}}">
-                                {{this.position}}.
-                            </label>
-
-
-                        </div>
-
-
-                        <div class="property-name">{{this.name_to_show}}</div>
-
-
-                    </div>
-
-                </div>
-
-                {{/each}}
-            </div>
+            <input type="checkbox" class="BCK-show-hide-column filled-in"
+                   data-comparator='SELECT-ALL' id="check-{{random_num}}"
+                   {{#if all_selected}} checked="checked" {{/if}}
+            />
+            <label for="check-{{random_num}}">Select All</label>
 
         </div>
 
-        <div class='chembl-modal-cover BCK-loading-cover'> Loading...</div>
+        <div class="row BCK-draggable-container sortable-items-container">
+
+          {{#each all_columns}}
+
+          <div class="col s6 m3 l2 drag-dummy BCK-drag-dummy" data-comparator='{{this.comparator}}'>
+          </div>
+
+          <div class="col s6 m3 l2 sortable-item BCK-draggable" draggable='true' data-comparator='{{this.comparator}}'>
+
+            <div class="item-content">
+
+              <div class="item-checkbox">
+
+                  <input type="checkbox" class="BCK-show-hide-column filled-in"
+                       id="{{this.modal_id}}-check-{{this.comparator}}"
+                       data-comparator='{{this.comparator}}'
+                       {{#if this.show}} checked="checked" {{/if}}
+                />
+
+                  <label for="{{this.modal_id}}-check-{{this.comparator}}">
+                  {{this.position}}.
+                  </label>
+
+
+
+
+              </div>
+
+
+              <div class="property-name">{{this.name_to_show}}</div>
+
+
+
+            </div>
+
+          </div>
+
+          {{/each}}
+        </div>
+
+      </div>
+
+      <div class='chembl-modal-cover BCK-loading-cover'> Loading... </div>
     </div>
+
 
 
 </script>
@@ -243,369 +241,357 @@
 </script>
 
 <script id="Handlebars-Common-EditFiltersModal" type="text/x-handlebars-template">
-    <div id="{{modal_id}}" class="modal bottom-sheet BCK-ModalContent"
-         data-hb-template="Handlebars-Common-ShowHideColumnsDropdown-content">
-    </div>
+        <div id="{{modal_id}}" class="modal bottom-sheet BCK-ModalContent"
+             data-hb-template="Handlebars-Common-ShowHideColumnsDropdown-content">
+        </div>
 </script>
+
 
 
 <script id="Handlebars-Common-CollectionErrorMsg" type="text/x-handlebars-template">
-    {{#if custom_explanation}} {{custom_explanation}} <br> {{/if}}
-    <i class="fa fa-exclamation-circle"></i> Error: {{msg}}
-    <a> <i class="fa fa-times" aria-hidden="true" onclick="$(this).parent().parent().empty();"></i></a>
+  {{#if custom_explanation}} {{custom_explanation}} <br> {{/if}}
+  <i class="fa fa-exclamation-circle"></i> Error: {{msg}}
+  <a> <i class="fa fa-times" aria-hidden="true" onclick="$(this).parent().parent().empty();"></i></a>
 </script>
 
 <script id="Handlebars-Common-DownloadColMessages0" type="text/x-handlebars-template">
-    <i class="fa fa-cog fa-spin fa-fw"></i>
-    {{#if custom_base_progress_text }}{{custom_base_progress_text}}{{else}} Collecting Items... {{/if}} {{percentage}}%
-    <div class="progress">
-        <div class="determinate" style="width: {{percentage}}%"></div>
-    </div>
+  <i class="fa fa-cog fa-spin fa-fw"></i>
+  {{#if custom_base_progress_text }}{{custom_base_progress_text}}{{else}} Collecting Items... {{/if}} {{percentage}}%
+  <div class="progress">
+      <div class="determinate" style="width: {{percentage}}%"></div>
+  </div>
 </script>
 
 <script id="Handlebars-Common-DownloadColMessages1" type="text/x-handlebars-template">
-    <i class="fa fa-cog fa-spin fa-fw"></i> Generating File...
+  <i class="fa fa-cog fa-spin fa-fw"></i> Generating File...
 </script>
 
 <script id="Handlebars-Common-DownloadColMessages2" type="text/x-handlebars-template">
-    <i class="fa fa-cog fa-spin fa-fw"></i> Done! Final file has {{num_compounds}} compounds
+  <i class="fa fa-cog fa-spin fa-fw"></i> Done! Final file has {{num_compounds}} compounds
 </script>
 
 <script id="Handlebars-Common-DownloadColMessages3" type="text/x-handlebars-template">
-    <i class="fa fa-cog fa-spin fa-fw"></i> Generating File... {{percentage}}%
+  <i class="fa fa-cog fa-spin fa-fw"></i> Generating File... {{percentage}}%
 </script>
 
 <script id="Handlebars-Common-VisualisationProgress" type="text/x-handlebars-template">
-    {{#unless hide_cog}}<i class="fa fa-cog fa-spin fa-fw"></i>{{/unless}}
-    {{#if show_warning_icon}} <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{/if}}
-    {{message}}
-    {{#if link_url}}
+  {{#unless hide_cog}}<i class="fa fa-cog fa-spin fa-fw"></i>{{/unless}}
+  {{#if show_warning_icon}} <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{/if}}
+  {{message}}
+  {{#if link_url}}
     <a target="_blank" href="{{link_url}}">{{link_text}}</a>
-    {{/if}}
+  {{/if}}
 </script>
 
 <script id="Handlebars-Common-PlotError" type="text/x-handlebars-template">
-    <br><br>
-    <img class="responsive-img" src="{{static_images_url}}plot_error.png">
+  <br><br>
+  <img class="responsive-img" src="{{static_images_url}}plot_error.png">
 </script>
 
 <script id="Handlebars-Common-MatrixError" type="text/x-handlebars-template">
-    <br><br>
-    <img class="responsive-img" src="{{static_images_url}}matrix_error.png">
+  <br><br>
+  <img class="responsive-img" src="{{static_images_url}}matrix_error.png">
 </script>
 
 <script id="Handlebars-Common-DownloadErrorModal" type="text/x-handlebars-template">
 
-    <div id="{{modal_id}}" class="modal">
-        <div class="modal-content">
-            <h4>Error</h4>
-            <p>{{msg}}</p>
-        </div>
-        <div class="modal-footer">
-            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">OK</a>
-        </div>
+  <div id="{{modal_id}}" class="modal">
+    <div class="modal-content">
+      <h4>Error</h4>
+      <p>{{msg}}</p>
     </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">OK</a>
+    </div>
+  </div>
 
 </script>
 
 <script id="Handlebars-Common-ESResultsPlot-axesOptions" type="text/x-handlebars-template">
-    <span class="hide-on-med-and-down">Summary:</span>
-    {{#each options}}
-    <option value="{{this.id}}" {{#if this.selected}}selected{{/if}}>{{this.label}}</option>
-    {{/each}}
+  <span class="hide-on-med-and-down">Summary:</span>
+  {{#each options}}
+  <option value="{{this.id}}" {{#if this.selected}}selected{{/if}}>{{this.label}}</option>
+  {{/each}}
 </script>
 
 <script id="Handlebars-Common-Histogram-numbars" type="text/x-handlebars-template">
-    <p>
-        <small>Number of bins: <b>{{current_value}}</b></small>
-    </p></p>
-    <p class="range-field">
-        <input type="range" min="{{min_value}}" max="{{max_value}}" value="{{current_value}}"/>
-    </p>
+  <p><small>Number of bins: <b>{{current_value}}</b></small></p></p>
+  <p class="range-field">
+    <input type="range" min="{{min_value}}" max="{{max_value}}" value="{{current_value}}"/>
+  </p>
 </script>
 
 <script id="Handlebars-Common-Histogram-binsize" type="text/x-handlebars-template">
-    <p>
-        <small>Bin size: <b>{{current_value}}</b></small>
-    </p></p>
-    <p class="range-field">
-        <input type="range" min="{{min_value}}" max="{{max_value}}" value="{{current_value}}"/>
-    </p>
+  <p><small>Bin size: <b>{{current_value}}</b></small></p></p>
+  <p class="range-field">
+    <input type="range" min="{{min_value}}" max="{{max_value}}" value="{{current_value}}"/>
+  </p>
 </script>
 
 <script id="Handlebars-Common-ESResultsPlot-rejectedResults" type="text/x-handlebars-template">
-    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> The following results were excluded from the plot
-    because in any of the shown axes their value is null: <br>
-    {{#each rejected}}
-    <a href="/compound_report_card/{{id}}" target="_blank" {{#if selected}}class="green lighten-5" {{/if}}>{{id}}</a>
-    {{/each}}
+  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> The following results were excluded from the plot
+  because in any of the shown axes their value is null: <br>
+  {{#each rejected}}
+    <a href="/compound_report_card/{{id}}" target="_blank" {{#if selected}}class="green lighten-5"{{/if}}>{{id}}</a>
+  {{/each}}
 </script>
 
 
 <script id="Handlebars-Common-ESResultsMatrix-ZoomOptions" type="text/x-handlebars-template">
     <div class="matrix-vis-options grey lighten-3">
         <a class="BCK-reset-zoom-btn"><i class="fa fa-lg fa-home tooltipped" aria-hidden="true" href=""
-                                         data-position="bottom" data-tooltip="Reset zoom"></i></a>
-        <a class="BCK-zoom-in-btn"><i class="fa fa-lg fa-search-plus tooltipped" aria-hidden="true"
-                                      data-position="bottom"
-                                      data-tooltip="Zoom in"></i></a>
-        <a class="BCK-zoom-out-btn"><i class="fa fa-lg fa-search-minus tooltipped" aria-hidden="true"
-                                       data-position="bottom"
-                                       data-tooltip="Zoom out"></i></a>
-        <a class="BCK-toggle-grab"><i class="fa fa-lg fa-hand-paper-o tooltipped" aria-hidden="true"
-                                      data-position="bottom"
-                                      data-tooltip="Grab"></i></a>
-        <a class="BCK-open-full-screen"><i class="fa fa-lg fa-arrows-alt tooltipped" aria-hidden="true"
-                                           data-position="bottom"
-                                           data-tooltip="Open in full screen"></i></a>
+              data-position="bottom" data-tooltip="Reset zoom"></i></a>
+        <a class="BCK-zoom-in-btn"><i class="fa fa-lg fa-search-plus tooltipped" aria-hidden="true" data-position="bottom"
+              data-tooltip="Zoom in" ></i></a>
+        <a class="BCK-zoom-out-btn"><i class="fa fa-lg fa-search-minus tooltipped" aria-hidden="true" data-position="bottom"
+              data-tooltip="Zoom out"></i></a>
+        <a class="BCK-toggle-grab"><i class="fa fa-lg fa-hand-paper-o tooltipped" aria-hidden="true" data-position="bottom"
+              data-tooltip="Grab"></i></a>
+        <a class="BCK-open-full-screen"><i class="fa fa-lg fa-arrows-alt tooltipped" aria-hidden="true" data-position="bottom"
+              data-tooltip="Open in full screen"></i></a>
     </div>
 </script>
 
 <script id="Handlebars-Common-totalItems" type="text/x-handlebars-template">
-    <small>
-        Total items: {{num_items}}
-    </small>
+<small>
+  Total items: {{num_items}}
+</small>
 </script>
 
 <script id="Handlebars-Common-PieAllSourcesLink" type="text/x-handlebars-template">
-    <a target='_blank' href="{{url}}"> {{link_text}}</a>
+<a target='_blank' href="{{url}}" > {{link_text}}</a>
 </script>
 
 <script id="Handlebars-Common-MiniHistogramContainer" type="text/x-handlebars-template">
-    <div class="BCK-VisualisationMessages"></div>
-    <div class="BCK-HistogramContainer histogram mini"></div>
+  <div class="BCK-VisualisationMessages"></div>
+  <div class="BCK-HistogramContainer histogram mini"></div>
 </script>
 
 <script id="Handlebars-Common-Bioactivity-Columns-Selector-Container" type="text/x-handlebars-template">
 
-    {{#each columnsDescriptions}}
+  {{#each columnsDescriptions}}
     <div class="input-field col l3 m4 s6">
-        <select class="BCK-Bioactivity-column-select">
-            {{#each this.fields}}
-            <option value='{{this.value}}' {{#if this.is_selected}}selected='selected' {{
-            /if}}
-            >{{this.name_to_show}}</option>
-            {{/each}}
-        </select>
-        <label>Column {{this.columnNumber}}:</label>
+      <select class="BCK-Bioactivity-column-select">
+        {{#each this.fields}}
+          <option value='{{this.value}}'  {{#if this.is_selected}}selected='selected'{{/if}}
+          >{{this.name_to_show}}</option>
+        {{/each}}
+      </select>
+      <label>Column {{this.columnNumber}}:</label>
     </div>
-    {{/each}}
+  {{/each}}
 
 </script>
 
 <script id="Handlebars-Common-SeeMatrixAllActivites" type="text/x-handlebars-template">
-    <a target="_blank" href="{{url}}">Click here to browse all activities used in this visualisation.</a>
+ <a target="_blank" href="{{url}}">Click here to browse all activities used in this visualisation.</a>
 </script>
 
 
 <script id="Handlebars-Common-FacetsList" type="text/x-handlebars-template">
 
-    <div class='BCK-Preloader-Container' data-hb-template="Handlebars-Common-Preloader">
+  <div class='BCK-Preloader-Container' data-hb-template="Handlebars-Common-Preloader" >
+  </div>
+
+  <div class='BCK-FacetsContent'>
+    <div class="BCK-clearFiltersButtonContainer">
+      <div class="clear-filters-button center-align">
+        <a class="menu-button BCK-clear-facets">Clear Filters</a>
+      </div>
     </div>
 
-    <div class='BCK-FacetsContent'>
-        <div class="BCK-clearFiltersButtonContainer">
-            <div class="clear-filters-button center-align">
-                <a class="menu-button BCK-clear-facets">Clear Filters</a>
-            </div>
-        </div>
+    <ul class="collapsible z-depth-0 BCK-facets-collapsible" data-collapsible="expandable">
+      {{#each facets}}
+        <li data-facet-group-key="{{this.key}}" class="BCK-facet-li">
+          <div class="BCK-collapsible-header collapsible-header {{#unless closed}}active{{/unless}}">
+            <i class="BCK-open-close-icon material-icons">arrow_drop_up</i>{{this.label}}</div>
+          <div class="collapsible-body">
+            <div class="BCK-facet-group-histogram histogram-container" data-facet-group-key="{{this.key}}"></div>
+          </div>
+        </li>
+      {{/each}}
 
-        <ul class="collapsible z-depth-0 BCK-facets-collapsible" data-collapsible="expandable">
-            {{#each facets}}
-            <li data-facet-group-key="{{this.key}}" class="BCK-facet-li">
-                <div class="BCK-collapsible-header collapsible-header {{#unless closed}}active{{/unless}}">
-                    <i class="BCK-open-close-icon material-icons">arrow_drop_up</i>{{this.label}}
-                </div>
-                <div class="collapsible-body">
-                    <div class="BCK-facet-group-histogram histogram-container"
-                         data-facet-group-key="{{this.key}}"></div>
-                </div>
-            </li>
-            {{/each}}
-
-        </ul>
-    </div>
+    </ul>
+  </div>
 </script>
 
 <script id="Handlebars-Common-StructureQuery" type="text/x-handlebars-template">
 
-    <div class="card-panel z-depth-0 green lighten-5">
-        <img src="{{image_url}}" height="150"><br>
-        <b>Query:</b>
-        {{search_term}}
-        {{#if similarity}}
-        <b>Threshold:</b> {{similarity}}%
-        {{/if}}
-        <a class="menu-button BCK-Edit-Query">Edit Search</a>
-    </div>
+ <div class="card-panel z-depth-0 green lighten-5">
+  <img src="{{image_url}}" height="150"><br>
+  <b>Query:</b>
+  {{search_term}}
+  {{#if similarity}}
+    <b>Threshold:</b> {{similarity}}%
+  {{/if}}
+  <a class="menu-button BCK-Edit-Query">Edit Search</a>
+ </div>
 
 </script>
 
 <script id="Handlebars-Marvin-Similarity-Percentage" type="text/x-handlebars-template">
-    >= {{percentage}}%
+  >= {{percentage}}%
 </script>
 <script id="Handlebars-Marvin-Similarity-PercentageSlider" type="text/x-handlebars-template">
-    <input class="similarity-search-threshold-input" type="range" id="test5" min="70" max="100" value="{{percentage}}"/>
+  <input class="similarity-search-threshold-input" type="range" id="test5" min="70" max="100" value="{{percentage}}"/>
 </script>
 
 <script id="Handlebars-Compound-MoleculeFeaturesGrid" type="text/x-handlebars-template">
 
-    <div class="mol-features-grid white-text">
+<div class="mol-features-grid white-text">
 
-        <div class="row center-align first-row">
+            <div class="row center-align first-row">
 
-            <div id='Bck-MolType' data-feature-name='Bck-MolType'
-                 class="col s2 {{#unless table_cell_mode}}offset-s1{{/unless}}"
-                 data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
-
-                <!-- Backbone -->
-
-            </div>
-            <div id='Bck-RuleOfFive' data-feature-name='Bck-RuleOfFive' class="col s2"
-                 data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+              <div id='Bck-MolType' data-feature-name='Bck-MolType' class="col s2 {{#unless table_cell_mode}}offset-s1{{/unless}}"
+               data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
 
                 <!-- Backbone -->
 
-            </div>
-            <div id='Bck-FirstInClass' data-feature-name='Bck-FirstInClass' class="col s2"
-                 data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+              </div>
+              <div id='Bck-RuleOfFive' data-feature-name='Bck-RuleOfFive' class="col s2"
+                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
 
                 <!-- Backbone -->
 
-            </div>
-
-            <div id='Bck-Chirality' data-feature-name='Bck-Chirality' class="col s2"
-                 data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
-
-                <!-- Backbone -->
-
-            </div>
-            <div id='Bck-Prodrug' data-feature-name='Bck-Prodrug' class="col s2"
-                 data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+              </div>
+              <div id='Bck-FirstInClass' data-feature-name='Bck-FirstInClass' class="col s2"
+                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
 
                 <!-- Backbone -->
 
-            </div>
+              </div>
 
-        </div>
-
-        <div class="row center-align second-row">
-
-            <div id='Bck-Oral' data-feature-name='Bck-Oral'
-                 class="col s2 {{#unless table_cell_mode}}offset-s1{{/unless}}"
-                 data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+              <div id='Bck-Chirality' data-feature-name='Bck-Chirality' class="col s2"
+                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
 
                 <!-- Backbone -->
 
-            </div>
-            <div id='Bck-Parenteral' data-feature-name='Bck-Parenteral' class="col s2"
-                 data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+              </div>
+              <div id='Bck-Prodrug' data-feature-name='Bck-Prodrug' class="col s2"
+                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
 
                 <!-- Backbone -->
 
+              </div>
+
             </div>
-            <div id='Bck-Topical' data-feature-name='Bck-Topical' class="col s2"
-                 data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+
+            <div class="row center-align second-row">
+
+              <div id='Bck-Oral' data-feature-name='Bck-Oral' class="col s2 {{#unless table_cell_mode}}offset-s1{{/unless}}"
+                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
 
                 <!-- Backbone -->
 
-            </div>
-            <div id='Bck-BlackBox' data-feature-name='Bck-BlackBox' class="col s2"
-                 data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+              </div>
+              <div id='Bck-Parenteral' data-feature-name='Bck-Parenteral' class="col s2"
+                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
 
                 <!-- Backbone -->
 
-            </div>
-            <div id='Bck-Availability' data-feature-name='Bck-Availability' class="col s2"
-                 data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+              </div>
+              <div id='Bck-Topical' data-feature-name='Bck-Topical' class="col s2"
+                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
 
                 <!-- Backbone -->
 
+              </div>
+              <div id='Bck-BlackBox' data-feature-name='Bck-BlackBox' class="col s2"
+                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+
+                <!-- Backbone -->
+
+              </div>
+              <div id='Bck-Availability' data-feature-name='Bck-Availability' class="col s2"
+                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
+
+                <!-- Backbone -->
+
+              </div>
+
             </div>
 
-        </div>
 
-
-    </div>
+          </div>
 
 </script>
 
 <script id="Handlebars-Compound-MoleculeFeatures-IconContainer" type="text/x-handlebars-template">
-    <!-- the django like variables inside the verbatim are rendered with handlebars, not by django -->
-    <div class="feat-icon {{active_class}}">
-        <div class="valign-wrapper">
-            <i class="valign icon {{icon_class}} tooltipped {{#unless table_cell_mode}}table_cell_icon{{/unless}}"
-               data-icon="{{data_icon}}"
-               data-position="{{tooltip_position}}"
-               data-tooltip="{{tooltip}}" data-tooltip="{{tooltip}}"></i>
-        </div>
+  <!-- the django like variables inside the verbatim are rendered with handlebars, not by django -->
+  <div class="feat-icon {{active_class}}">
+    <div class="valign-wrapper">
+      <i class="valign icon {{icon_class}} tooltipped {{#unless table_cell_mode}}table_cell_icon{{/unless}}"
+         data-icon="{{data_icon}}"
+         data-position="{{tooltip_position}}"
+         data-tooltip="{{tooltip}}" data-tooltip="{{tooltip}}"></i>
     </div>
+  </div>
 </script>
 
 <script id="Handlebars-ScrollSpyContent" type="text/x-handlebars-template">
-    <ul class="section table-of-contents">
-        {{#each sections}}
-        <li><a href="#{{this.name}}">
-            <small>{{this.label}}</small>
+<ul class="section table-of-contents">
+  {{#each sections}}
+    <li><a href="#{{this.name}}">
+        <small>{{this.label}}</small>
         </a>
-        </li>
-        {{/each}}
-    </ul>
+    </li>
+  {{/each}}
+</ul>
 </script>
 
 <script id="Handlebars-Common-References-Table" type="text/x-handlebars-template">
 
-    <table class="bordered striped">
+ <table class="bordered striped">
 
-        {{#each references_groups}}
+ {{#each references_groups}}
 
-        <tr>
-            <th>
-                <a target="_blank" href="{{this.src_url}}" class="ref-source-link">
-                    {{this.src_name}}
-                </a>
+   <tr>
+      <th>
+        <a target="_blank" href="{{this.src_url}}" class="ref-source-link">
+          {{this.src_name}}
+        </a>
 
-            </th>
-            <td>
+      </th>
+      <td >
 
-                {{#each this.ref_items}}
+        {{#each this.ref_items}}
 
-                {{#if this.is_atc}}
-                <ul>
-                    {{#each this.levels_refs}}
-                    <li>
-                        {{this.name}} - <a target='_blank' href="{{this.link}}">{{this.description}}</a>
-                    </li>
-                    {{/each}}
-                </ul>
-                {{else}}
+          {{#if this.is_atc}}
+            <ul>
+              {{#each this.levels_refs}}
+              <li>
+                {{this.name}} - <a target='_blank' href="{{this.link}}">{{this.description}}</a>
+              </li>
+              {{/each}}
+            </ul>
+          {{else}}
 
-                <a target='_blank' href="{{this.link}}">{{this.id}}</a>{{#unless @last }}, {{/unless}}
+          <a target='_blank' href="{{this.link}}">{{this.id}}</a>{{#unless @last }}, {{/unless}}
 
-                {{/if}}
-                {{/each}}
-
-            </td>
-
-        </tr>
-
+            {{/if}}
         {{/each}}
 
+      </td>
 
-    </table>
+   </tr>
+
+ {{/each}}
+
+
+ </table>
 
 </script>
 
 <script id="Handlebars-Common-No-References" type="text/x-handlebars-template">
 
-    There are no {{#if is_unichem}}UniChem {{/if}}cross references for {{chembl_id}}.
+There are no {{#if is_unichem}}UniChem {{/if}}cross references for {{chembl_id}}.
 
 </script>
 
 <script id="Handlebars-Common-DefaultCarouselContent" type="text/x-handlebars-template">
-    {% endverbatim %}
-    {% include "glados/base/PaginatedCollections/DefaultCarouselContent.html" %}
-    {% verbatim %}
+{% endverbatim %}
+{% include "glados/base/PaginatedCollections/DefaultCarouselContent.html" %}
+{% verbatim %}
 </script>
 
 <script id="Handlebars-Common-Pie-External-Title" type="text/x-handlebars-template">
@@ -615,11 +601,11 @@
 </script>
 
 <script id="Handlebars-Pie-Warning" type="text/x-handlebars-template">
-    <div class="card yellow lighten-4">
-        <div class="card-content">
-            <i class="fa fa-exclamation-triangle"></i> <b>Warning:</b> {{msg}}
-        </div>
+  <div class="card yellow lighten-4">
+    <div class="card-content">
+      <i class="fa fa-exclamation-triangle"></i> <b>Warning:</b> {{msg}}
     </div>
+  </div>
 </script>
 
 <!-- tweet box template -------------------------------------------------------------------------------------------------->
@@ -695,6 +681,7 @@
     </div>
 
 </script>
+
 
 {% endverbatim %}
 
