@@ -96,15 +96,6 @@ class CompoundReportCardTest(ReportCardTester):
     # Compound Representations
     # --------------------------------------
 
-    # normal canonical smiles
-    self.assert_compound_representation('CompReps-canonicalSmiles', 'CC(=O)Oc1ccccc1C(=O)O')
-    self.assert_compound_representation('CompReps-canonicalSmiles-small', 'CC(=O)Oc1ccccc1C(=O)O')
-    self.assert_compound_rep_download_btn('CompReps-canonicalSmiles-dnld', 'CHEMBL25.smi', 'Download SMILES file.',
-                                          'data:text/html,CC(=O)Oc1ccccc1C(=O)O%20CHEMBL25')
-    self.assert_compound_rep_download_btn('CompReps-canonicalSmiles-small-dnld', 'CHEMBL25.smi',
-                                          'Download SMILES file.',
-                                          'data:text/html,CC(=O)Oc1ccccc1C(=O)O%20CHEMBL25')
-
     self.assert_copy_button('CompReps-canonicalSmiles-copy', 'Copy to Clipboard', 'CC(=O)Oc1ccccc1C(=O)O')
     self.assert_copy_button('CompReps-canonicalSmiles-small-copy', 'Copy to Clipboard', 'CC(=O)Oc1ccccc1C(=O)O')
 
