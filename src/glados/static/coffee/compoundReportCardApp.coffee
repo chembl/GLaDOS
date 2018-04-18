@@ -598,6 +598,19 @@ class CompoundReportCardApp extends glados.ReportCardApp
           return true
       properties_to_show: Compound.COLUMNS_SETTINGS.HELM_NOTATION_SECTION
       after_render: (thisView) ->
+
+        $container = $(thisView.el).find('.BCK-HELMNotationContainer')
+
+        config =
+            value: $container.attr('data-value')
+            download:
+              filename: "#{thisView.model.get('molecule_chembl_id')}-HELMNotation.txt"
+              value: $container.attr('data-value')
+              tooltip: 'Download'
+
+        ButtonsHelper.initCroppedContainer($container, config)
+
+        return
         ButtonsHelper.initCroppedTextFields()
         $copyBtn = $(thisView.el).find('.BCK-Copy-btn')
         ButtonsHelper.initCopyButton($copyBtn, 'Copy to Clipboard', thisView.model.get('helm_notation'))

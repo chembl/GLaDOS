@@ -7,39 +7,12 @@
             <table>
 
                 <tr>
-
-                    <td>
-
-                        <div class="cropped-text-field-input">
-                            <input id="CompReps-standardInchiKey" type="text">
-                            <!--Backbone-->
-                        </div>
+                    <td class="BCK-HELMNotationContainer" data-hb-template="Handlebars-Common-CroppedContainer"
+                                        data-value="{{helm_notation.value}}" >
 
                     </td>
-
-                    <td class="cropped-text-field-btns-cell">
-
-                        <div class="cropped-text-field-btns">
-
-                            {% endverbatim %}
-
-
-                            {% with btn_id='CompReps-standardInchiKey-dnld' %}
-                            {% include "glados/base/btn_download_only_small.html" %}
-                            {% endwith %}
-
-                            {% with btn_id='CompReps-standardInchiKey-copy' %}
-                            {% include "glados/base/btn_copy_small.html" %}
-                            {% endwith %}
-
-                            {% verbatim %}
-
-
-                        </div>
-
-                    </td>
-
                 </tr>
+
             </table>
 
             <div>{{inchi_key}}</div>

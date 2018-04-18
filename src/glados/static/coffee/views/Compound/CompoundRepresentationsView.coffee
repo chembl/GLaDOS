@@ -28,8 +28,6 @@ CompoundRepresentationsView = CardView.extend
     @activateTooltips()
     @activateModals()
 
-    afterRender()
-
   renderButtons: ->
     compound_model = @model
     thisView = @
