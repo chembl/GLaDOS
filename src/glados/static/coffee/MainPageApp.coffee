@@ -23,6 +23,13 @@ class MainPageApp
     glados.views.PaginatedViews.PaginatedViewFactory.getNewInfinitePaginatedView(tweetsList, $tweetsElem, 'do-repaint')
     tweetsList.fetch()
 
+    #   Init Blog entries
+    blogEntriesList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewBlogEntriesList()
+    blogEntriesList.initURL()
+    $blogEntriesElem = $('.BCK-Blog-Entries-container')
+    glados.views.PaginatedViews.PaginatedViewFactory.getNewInfinitePaginatedView(blogEntriesList, $blogEntriesElem, 'do-repaint')
+    blogEntriesList.fetch()
+
   # ---------------- Aggregation -------------- #
   @getDocumentsPerYearAgg = (defaultInterval = 1) ->
     queryConfig =

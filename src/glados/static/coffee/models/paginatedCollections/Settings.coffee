@@ -477,6 +477,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Default: glados.models.MainPage.Tweet.COLUMNS_SETTINGS.INFINITE_VIEW
             CustomItemTemplate: 'Handlebars-Common-Paginated-Card-Tweet'
         ID_COLUMN: glados.models.MainPage.Tweet.ID_COLUMN
+      BLOG_ENTRIES_LIST:
+        MODEL: glados.models.MainPage.BlogEntry
+        BASE_URL: 'base_url is set by initURL'
+        DEFAULT_PAGE_SIZE: 15
+        COLUMNS: glados.models.MainPage.BlogEntry.COLUMNS_SETTINGS.ALL_COLUMNS
+        COLUMNS_DESCRIPTION:
+          Infinite:
+            Default: glados.models.MainPage.BlogEntry.COLUMNS_SETTINGS.INFINITE_VIEW
+            CustomItemTemplate: 'Handlebars-Common-Paginated-Card-Blog-Entry'
+        ID_COLUMN: glados.models.MainPage.BlogEntry.ID_COLUMN
       SIMILARITY_RESULTS_LIST:
         MODEL: Compound
         BASE_URL: 'base_url is set by initURL'

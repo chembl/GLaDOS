@@ -641,6 +641,48 @@ There are no {{#if is_unichem}}UniChem {{/if}}cross references for {{chembl_id}}
 
 </script>
 
+
+<!-- Blog entries template  -------------------------------------------------------------------------------------------------->
+
+<script id='Handlebars-Common-Paginated-Card-Blog-Entry' type="text/x-handlebars-template">
+
+    <div class="row tweet white">
+
+        <h5>
+
+            <a href="{{{columns_by_comparator.url.value}}}" target="_blank">
+
+                {{{columns_by_comparator.title.value}}}
+
+            </a>
+
+        </h5>
+
+        <p class="tweet-content content">
+
+            {{{columns_by_comparator.content.value}}}
+
+            <a href="{{{columns_by_comparator.url.value}}}" target="_blank">
+
+                Read More
+
+            </a>
+
+        </p>
+
+        <p class="tweet-extras">
+
+            By {{{columns_by_comparator.author.value}}}
+
+            on {{{columns_by_comparator.date.value}}}
+
+        </p>
+
+    </div>
+
+</script>
+
+
 {% endverbatim %}
 
 

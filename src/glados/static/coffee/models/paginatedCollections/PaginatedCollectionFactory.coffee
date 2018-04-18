@@ -109,12 +109,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return new IndexESPagQueryCollection
 
 # creates a new instance of a Paginated Collection from Web Services
-    getNewWSCollectionFor: (collectionSettings, filter='') ->
+    getNewWSCollectionFor: (collectionSettings, filter='', flavour={}) ->
       wsPagCollection = glados.models.paginatedCollections.PaginatedCollectionBase\
       .extend(glados.models.paginatedCollections.WSPaginatedCollection)
       .extend(glados.models.paginatedCollections.SelectionFunctions)
       .extend(glados.models.paginatedCollections.SortingFunctions)
-      .extend(glados.models.paginatedCollections.CacheFunctions).extend
+      .extend(glados.models.paginatedCollections.CacheFunctions)
+      .extend(flavour).extend
 
         model: collectionSettings.MODEL
         initialize: ->
@@ -136,6 +137,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             enable_collection_caching: collectionSettings.ENABLE_COLLECTION_CACHING
 
           @initialiseUrl()
+
+          @on 'reset', (->
+            @setItemsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.ITEMS_READY)
+          ), @
 
           if @getMeta('enable_collection_caching')
             @initCache()
@@ -397,6 +402,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @setMeta('data_loaded', true)
         @resetMeta(data.page_meta)
         return data.mechanisms
+
+      return list
+
+    getNewBlogEntriesList: ->
+
+      config = glados.models.paginatedCollections.Settings.WS_COLLECTIONS.BLOG_ENTRIES_LIST
+      flavour = glados.models.paginatedCollections.SpecificFlavours.BlogEntriesList
+      list = @getNewWSCollectionFor(config, filter='', flavour)
 
       return list
 

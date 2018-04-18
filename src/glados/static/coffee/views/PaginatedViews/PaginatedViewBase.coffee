@@ -147,6 +147,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     render: ->
 
+      console.log 'RENDER'
+      console.log '@collection: ', @collection
+
       if not (@collection.getMeta('data_loaded') or @collection.itemsAreReady())
         return
 

@@ -6,7 +6,6 @@
 
 {% block content %}
 
-
     <div class="main-page-container">
 
         <!-------------- ROW for text about chembl + carousel -------------->
@@ -176,28 +175,30 @@
 
                     <div class="section-col">
 
-                        {% block tweets %}
-                            {% include "glados/MainPageParts/tweets.html" %}
-                        {% endblock %}
+                        {% include "glados/MainPageParts/tweets.html" %}
+
                     </div>
 
                 </div>
 
-{#                <!-- Tweets SECTION -->#}
-{#                <div class="main-page-section col s12 m6 half-height">#}
-{##}
-{#                    <div class="section-col">#}
-{##}
-{#                    </div>#}
-{##}
-{#                </div>#}
+                <!-- Blog Entries SECTION -->
+                <div class="main-page-section col s12 l6 half-height">
+
+                    <div class="section-col">
+
+                            {% include "glados/MainPageParts/blogEntries.html" %}
+
+                        </div>
+
+                    </div>
+
+                </div>
 
             </div>
+
         </div>
 
     </div>
-
-
 
 {% endblock %}
 
