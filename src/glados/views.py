@@ -11,6 +11,7 @@ from django.http import JsonResponse
 import glados.url_shortener.url_shortener as url_shortener
 from apiclient.discovery import build
 from googleapiclient import *
+import re
 
 
 # Returns all acknowledgements grouped by current and old
@@ -132,7 +133,7 @@ def get_latest_blog_entries(request, pageToken):
 
     blogId = '2546008714740235720'
     key = 'AIzaSyC8wiFE83tFlPASaKoGFdapehEwIrSt5mc'
-    fetchBodies = False
+    fetchBodies = True
     fetchImages = False
     maxResults = 15
     orderBy = 'published'
@@ -143,9 +144,8 @@ def get_latest_blog_entries(request, pageToken):
     # tries to get entries from cache
     cache_response = cache.get(cache_key)
 
-    if cache_response != None:
-        print('Getting blog entries from cache :)')
-        return JsonResponse(cache_response)
+    # if cache_response != None:
+    #     return JsonResponse(cache_response)
 
     print('Blog entries not found in cache!')
 
@@ -162,12 +162,22 @@ def get_latest_blog_entries(request, pageToken):
     blog_entries = []
 
     for blog_entry in latest_entries_items:
+
+        date = blog_entry['published'].split('T')[0]
+        content = blog_entry['content']
+
+        clean = re.compile(r'<[^>]+>')
+        content = re.sub(clean, '', content)
+        content = content.replace('\n', '')
+
         blog_entries.append({
             'title': blog_entry['title'],
             'url': blog_entry['url'],
             'author': blog_entry['author']['displayName'],
             'author_url': blog_entry['author']['url'],
-            'date': blog_entry['published'],
+            'date': date,
+            'content': content
+
         })
 
     entries = {
