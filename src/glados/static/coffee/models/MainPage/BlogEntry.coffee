@@ -4,7 +4,7 @@ glados.useNameSpace 'glados.models.MainPage',
 glados.models.MainPage.BlogEntry.COLUMNS =
   TITLE:
     name_to_show: 'TITLE'
-    comparator: ''
+    comparator: 'title'
 
 glados.models.MainPage.BlogEntry.COLUMNS_SETTINGS =
   ALL_COLUMNS: (->

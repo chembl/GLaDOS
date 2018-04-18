@@ -6,7 +6,6 @@
 
 {% block content %}
 
-
     <div class="main-page-container">
 
         <!-------------- ROW for text about chembl + carousel -------------->
@@ -176,15 +175,14 @@
 
                     <div class="section-col">
 
-                        {% block tweets %}
-                            {% include "glados/MainPageParts/tweets.html" %}
-                        {% endblock %}
+                        {% include "glados/MainPageParts/tweets.html" %}
+
                     </div>
 
                 </div>
 
                 <!-- Blog Entries SECTION -->
-                <div class="main-page-section col s12 m6 half-height">
+                <div class="main-page-section col s12 l6 half-height">
 
                     <div class="section-col yellow lighten-5">
                         <div class="card-content tweet-box">
@@ -195,15 +193,7 @@
 
                             </h3>
 
-                            {% block blog_entries %}
-                                {% include "glados/MainPageParts/blogEntries.html" %}
-                            {% endblock %}
-
-                            {#                            <div class="tweet-list-container infinite-scroll-container">#}
-                            {##}
-                            {#                                {% include "glados/base/PaginatedCollections/DefaultInfinityBrowserContent.html" %}#}
-                            {##}
-                            {#                            </div>#}
+                            {% include "glados/MainPageParts/blogEntries.html" %}
 
                         </div>
 
@@ -216,7 +206,6 @@
         </div>
 
     </div>
-
 
 {% endblock %}
 
