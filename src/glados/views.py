@@ -132,7 +132,7 @@ def get_latest_tweets_json(request):
 def get_latest_blog_entries(request, pageToken):
 
     blogId = '2546008714740235720'
-    key = 'AIzaSyC8wiFE83tFlPASaKoGFdapehEwIrSt5mc'
+    key = settings.BLOGGER_KEY
     fetchBodies = True
     fetchImages = False
     maxResults = 15
@@ -166,12 +166,14 @@ def get_latest_blog_entries(request, pageToken):
         date = blog_entry['published'].split('T')[0]
         content = blog_entry['content']
 
-        clean2 = re.compile(r'<!--(.*?)-->')
-        clean = re.compile(r'<[^>]+>')
+        html_comment = re.compile(r'<!--(.*?)-->')
+        html = re.compile(r'<[^>]+>')
+        url = re.compile(r'(http|ftp|https)://([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?')
 
-        content = content.replace('\n', '')
-        content = re.sub(clean2, '', content)
-        content = re.sub(clean, '', content)
+        content = content.replace('\n', ' ')
+        content = re.sub(html_comment, ' ', content)
+        content = re.sub(html, ' ', content)
+        content = re.sub(url, ' ', content)
         content = ' '.join(content.split())
         content = content[:125] + (content[125:] and '...')
 

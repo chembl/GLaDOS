@@ -330,6 +330,33 @@ $full-header-height-large: 180px;
   }
 }
 
+/* -------- BLOG ENTRIES (like tweets but with some tweaks) -------- */
+
+.blog-box {
+
+  h5 {
+    margin: 5px 0 !important;
+
+    a {
+      color: $primary-color;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .tweet-content {
+    margin: 5px 0 !important;
+  }
+
+  .tweet-extras {
+    color: #a8a8a8;
+    margin: 0 !important;
+
+  }
+}
+
 /* ------------------- MEDIA QUERIES ------------------- */
 
 /* -------- MEDIUM SCREEN -------- */
