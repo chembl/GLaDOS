@@ -166,9 +166,14 @@ def get_latest_blog_entries(request, pageToken):
         date = blog_entry['published'].split('T')[0]
         content = blog_entry['content']
 
+        clean2 = re.compile(r'<!--(.*?)-->')
         clean = re.compile(r'<[^>]+>')
-        content = re.sub(clean, '', content)
+
         content = content.replace('\n', '')
+        content = re.sub(clean2, '', content)
+        content = re.sub(clean, '', content)
+        content = ' '.join(content.split())
+        content = content[:125] + (content[125:] and '...')
 
         blog_entries.append({
             'title': blog_entry['title'],
