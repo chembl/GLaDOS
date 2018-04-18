@@ -650,24 +650,16 @@ There are no {{#if is_unichem}}UniChem {{/if}}cross references for {{chembl_id}}
 
         <p class="tweet-content">
 
-            {{{columns_by_comparator.text.value}}}
+            {{{columns_by_comparator.title.value}}}
+            {{{columns_by_comparator.url.value}}}
+            {{{columns_by_comparator.author.value}}}
+            {{{columns_by_comparator.author_url.value}}}
+            {{{columns_by_comparator.date.value}}}
 
         </p>
 
         <div class="row tweet-extras">
 
-            <a href="https://twitter.com/{{columns_by_comparator.user__screenName.value}}/status/{{columns_by_comparator.id.value}}"
-               target="_blank">
-                <span class="left">{{columns_by_comparator.createdAt.value}}</span>
-            </a>
-
-            <a onclick="window.open('https://twitter.com/intent/retweet?tweet_id={{columns_by_comparator.id.value}}','retweet {{columns_by_comparator.id.value}}','width=600,height=400')">
-                <img src="/static/img/icons/retweet_icon.png">
-            </a>
-
-            <a onclick="window.open('https://twitter.com/intent/like?tweet_id={{columns_by_comparator.id.value}}','like {{columns_by_comparator.id.value}}','width=600,height=400')">
-                <img src="/static/img/icons/fav_icon.png">
-            </a>
 
         </div>
 
