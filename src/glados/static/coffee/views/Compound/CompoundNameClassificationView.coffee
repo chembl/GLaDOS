@@ -104,6 +104,11 @@ CompoundNameClassificationView = CardView.extend
 
   renderSynonymsAndTradeNames: ->
 
+    @renderSynonyms()
+    @renderTradeNames()
+
+  renderSynonyms: ->
+
     onlySynonymsList = @model.getSynonyms()
 
     if onlySynonymsList.length == 0
@@ -117,6 +122,7 @@ CompoundNameClassificationView = CardView.extend
 
       $(@el).find('#CompNameClass-synonyms').html(syn_rendered)
 
+  renderTradeNames: ->
 
     onlyTradeNamesList = @model.getTradenames()
 
