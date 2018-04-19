@@ -17,6 +17,7 @@ $lighter-color: #62b7bd;
 $primary-color: #09979b;
 $darker-color: #0d595f;
 $grey-dark: #4d5456;
+$grey-light: #e9e9e9;
 
 //heights
 $chembl-header-height: 54px;
@@ -34,7 +35,9 @@ $full-header-height-large: 180px;
 
   p {
     color: $grey-dark;
+    font-family: $helvetica;
   }
+
   .color-row {
     padding: 40px 0;
     margin-bottom: 0;
@@ -112,6 +115,10 @@ $full-header-height-large: 180px;
     }
   }
 
+  .chembl-text {
+    font-family: $helvetica;
+  }
+
   .small-text {
     font-family: $helvetica;
     font-size: 0.9em;
@@ -158,7 +165,6 @@ $full-header-height-large: 180px;
 .main-page-container {
 
   .chembl-text {
-    font-family: $helvetica;
     text-align: center;
 
     h2 {
@@ -290,7 +296,7 @@ $full-header-height-large: 180px;
 
     //Each tweet on the list
     .tweet {
-      border: 1px solid #e9e9e9;
+      border: 1px solid $grey-light;
       border-radius: 3px;
       padding: 12px 10px;
       width: 100%;
@@ -369,32 +375,60 @@ $full-header-height-large: 180px;
 /* -------- ASSOCIATED RESOURCES -------- */
 .associated-resources {
   height: fit-content !important;
+  max-height: none !important;
   .container {
     height: 100%;
 
     .chembl-text {
       text-align: center;
+
+      h3 {
+        color: $grey-dark;
+        margin: 0;
+      }
     }
 
     .resources-container {
+      padding: 50px 0;
 
       .col {
-        border: solid 1px green;
         height: 100% !important;
       }
 
       .resource-card {
-        border: solid 1px orange;
-        padding: 20px;
-        margin: 20px 0;
+        border-radius: 3px;
+        padding: 15px 0;
+        margin: 0;
+        border: solid 1px white;
+        display: flex;
+        align-items: center;
 
-        h5 {
-          margin-bottom: 2px;
-          color: $grey-dark;
-          font-weight: bolder;
+        .resource-content {
+          padding: 0;
+
+          h5 {
+            color: $primary-color;
+            font-weight: bolder;
+          }
+
+          p {
+            font-size: 1.1em;
+            color: $grey-dark;
+            margin-top: 0;
+
+            i {
+              color: $primary-color;
+            }
+          }
         }
-        p {
-          margin: 0;
+        i {
+          color: $grey-dark;
+        }
+
+        transition: all 200ms ease-in;
+
+        &:hover {
+          box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
         }
       }
     }
