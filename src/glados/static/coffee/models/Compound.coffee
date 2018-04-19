@@ -128,20 +128,22 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     if @isParent()
 
       console.log 'is parent'
-#      childrenSourcesList = (c.sources for c in metadata.hierarchy.children)
-#      uniqueSourcesObj = {}
-#      sourcesFromChildren = []
-#      for sourcesObj in childrenSourcesList
-#        for source in _.values(sourcesObj)
-#          srcDescription = source.src_description
-#          if not uniqueSourcesObj[srcDescription]?
-#            uniqueSourcesObj[srcDescription] = true
-#            sourcesFromChildren.push(srcDescription)
-#
-#      additionalSources = _.difference(sourcesFromChildren, ownSources)
+      rawChildrenSynonymsAndTradeNamesLists = (c.synonyms for c in metadata.hierarchy.children)
+      console.log 'rawChildrenSynonymsAndTradeNamesLists: ', rawChildrenSynonymsAndTradeNamesLists
+      rawChildrenSynonyms = []
+      for rawSynAndTNList in rawChildrenSynonymsAndTradeNamesLists
+        for syn in rawSynAndTNList
+          rawChildrenSynonyms.push(syn)
+
+      [synsFromChildren, tnsFromChildren] = @separateSynonymsAndTradeNames(rawChildrenSynonyms)
+      console.log 'tnsFromChildren: ', tnsFromChildren
+      additionalSynsList = _.difference(synsFromChildren, uniqueSynonymsList)
+      additionalTnsList = _.difference(tnsFromChildren, uniqueTradeNamesList)
+
     else
       rawSynonymsAndTradeNamesFromParent = _.values(metadata.hierarchy.parent.synonyms)
       [synsFromParent, tnsFromParent] = @separateSynonymsAndTradeNames(rawSynonymsAndTradeNamesFromParent)
+
       additionalSynsList = _.difference(synsFromParent, uniqueSynonymsList)
       additionalTnsList = _.difference(tnsFromParent, uniqueTradeNamesList)
 
