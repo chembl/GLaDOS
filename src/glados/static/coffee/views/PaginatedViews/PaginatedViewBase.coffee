@@ -528,7 +528,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       # the advancer function requests always the next page
       advancer = $.proxy ->
         #destroy waypoint to avoid issues with triggering more page requests.
-        Waypoint.destroyAll()
+        @destroyAllWaypoints()
+
         # dont' bother if already on last page
         if @collection.currentlyOnLastPage()
           return
@@ -537,13 +538,13 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       , @
 
       # destroy all waypoints before assigning the new one.
-      Waypoint.destroyAll()
+      @destroyAllWaypoints()
       scroll_container = null
       $scroll_containers = $(@el).find('.infinite-scroll-container')
       if $scroll_containers.length == 1
         scroll_container = $scroll_containers[0]
 
-      waypoint = new Waypoint(
+      @waypoint = new Waypoint(
         element: wayPointCard
         context: if scroll_container? then scroll_container else window
         handler: (direction) ->
@@ -552,7 +553,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       )
 
-    destroyAllWaypoints: -> Waypoint.destroyAll()
+    destroyAllWaypoints: -> @waypoint.destroy() unless not @waypoint?
     # checks if there are more page and hides the preloader if there are no more.
     hidePreloaderIfNoNextItems: ->
 
