@@ -44,8 +44,7 @@ $full-header-height-large: 180px;
     max-height: 900px;
 
     &.half-height {
-      height: 50vh;
-      padding: 0 30px;
+      padding: 0 30px 20px 30px;
     }
 
     &.fit-height {
@@ -59,8 +58,13 @@ $full-header-height-large: 180px;
     }
   }
 
+  .col-divider {
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 50px 0;
+
+  }
   .divider {
-    //width: 90%;
     margin: 55px auto;
   }
 
@@ -388,7 +392,11 @@ $full-header-height-large: 180px;
   /* -------- LARGE SCREEN -------- */
   @media (min-width: 992px) {
     .main-page-section {
-      height: calc(100vh - #{$full-header-height-large})
+      height: calc(100vh - #{$full-header-height-large});
+
+      &.half-height {
+        height: 50vh !important;
+      }
     }
     .chembl-text {
       text-align: left;
@@ -417,5 +425,8 @@ $full-header-height-large: 180px;
     .db-records {
       display: block;
     }
+    &.half-height {
+        height: 80vh;
+      }
   }
 }
