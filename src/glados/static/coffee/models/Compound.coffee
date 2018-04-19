@@ -93,7 +93,6 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
   # --------------------------------------------------------------------------------------------------------------------
   calculateSynonymsAndTradeNames: ->
 
-    console.log 'calculateSynonymsAndTradeNames: '
     allRawSynonymsAndTradeNames = @get('molecule_synonyms')
     uniqueSynonymsObj = {}
     uniqueSynonymsList = []
@@ -104,7 +103,6 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     for rawItem in allRawSynonymsAndTradeNames
 
       itemName = rawItem.synonyms
-      console.log 'itemName: ', itemName
       # is this a proper synonym?
       if rawItem.syn_type != 'TRADE_NAME'
 
@@ -117,10 +115,6 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
         if not uniqueTradeNamesObj[itemName]?
           uniqueTradeNamesObj[itemName] = true
           uniqueTradeNamesList.push(itemName)
-
-    console.log 'allRawSynonymsAndTradeNames: ', allRawSynonymsAndTradeNames
-    console.log 'uniqueSynonymsList: ', uniqueSynonymsList
-    console.log 'uniqueTradeNamesList: ', uniqueTradeNamesList
 
     @set
       only_synonyms: uniqueSynonymsList
