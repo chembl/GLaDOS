@@ -4,6 +4,13 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
   idAttribute: 'molecule_chembl_id'
   defaults:
     fetch_from_elastic: true
+  isParent: ->
+
+    molHierarchy = @.get('molecule_hierarchy')
+    isParent = false
+    if molHierarchy?
+      isParent = molHierarchy.molecule_chembl_id == molHierarchy.parent_chembl_id
+    return isParent
   initialize: ->
 
     id = @get('id')
@@ -707,18 +714,11 @@ Compound.COLUMNS = {
     id: 'additional_sources_list'
     comparator: '_metadata.compound_records'
     name_to_show_function: (model) ->
+      
+      switch model.isParent()
+        when true then return 'Additional Sources From Alternate Forms:'
+        when false then return 'Additional Sources From Parent:'
 
-      attributes = model.attributes
-      molHierarchy = attributes.molecule_hierarchy
-      isParent = false
-      if molHierarchy?
-        isParent = molHierarchy.molecule_chembl_id == molHierarchy.parent_chembl_id
-
-      nameToShow = switch isParent
-        when true then 'Additional Sources From Alternate Forms:'
-        when false then 'Additional Sources From Parent:'
-
-      return nameToShow
     parse_function: (values) -> _.unique(v.src_description for v in values)
   WITHDRAWN_YEAR: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     comparator: 'withdrawn_year'
