@@ -183,6 +183,21 @@ glados.useNameSpace 'glados',
         return @getNestedValue(newObj, nestedComparatorsList.join('.'))
 
 
+    Columns:
+      addColID: (returnCol, colDescription)->
+
+        returnCol.id = colDescription.id
+        if returnCol.id?
+          returnCol.template_id = returnCol.id.replace(/\./g, '_dot_')
+
+      addNameToShow: (returnCol, colDescription) ->
+
+        returnCol.name_to_show = colDescription['name_to_show']
+        if colDescription.name_to_show_short?
+          returnCol.name_to_show_short = colDescription.name_to_show_short
+        else
+          returnCol.name_to_show_short = colDescription.name_to_show
+
     # given an model and a list of columns to show, it gives an object ready to be passed to a
     # handlebars template, with the corresponding values for each column
     # handlebars only allow very simple logic, we have to help the template here and
@@ -202,15 +217,10 @@ glados.useNameSpace 'glados',
       columnsToReturn = columns.map (colDescription) ->
 
         returnCol = {}
-        returnCol.id = colDescription.id
-        if returnCol.id?
-          returnCol.template_id = returnCol.id.replace(/\./g, '_dot_')
+        glados.Utils.Columns.addColID(returnCol, colDescription)
+        glados.Utils.Columns.addNameToShow(returnCol, colDescription)
 
-        returnCol.name_to_show = colDescription['name_to_show']
-        if colDescription.name_to_show_short?
-          returnCol.name_to_show_short = colDescription.name_to_show_short
-        else
-          returnCol.name_to_show_short = colDescription.name_to_show
+
         returnCol.show = colDescription.show
         returnCol.search_hit_highlight_column = colDescription.search_hit_highlight_column || false
         returnCol.comparator = colDescription.comparator

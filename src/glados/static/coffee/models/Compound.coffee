@@ -703,6 +703,11 @@ Compound.COLUMNS = {
     comparator: '_metadata.compound_records'
     name_to_show: 'Compound Sources'
     parse_function: (values) -> _.unique(v.src_description for v in values)
+  ADDITIONAL_SOURCES_LIST: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
+    id: 'additional_sources_list'
+    comparator: '_metadata.compound_records'
+    name_to_show: 'Compound Sources'
+    parse_function: (values) -> _.unique(v.src_description for v in values)
   WITHDRAWN_YEAR: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     comparator: 'withdrawn_year'
   WITHDRAWN_COUNTRY: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
@@ -800,6 +805,7 @@ Compound.COLUMNS_SETTINGS = {
   ]
   COMPOUND_SOURCES_SECTION: [
     Compound.COLUMNS.COMPOUND_SOURCES_LIST
+    Compound.COLUMNS.ADDITIONAL_SOURCES_LIST
   ]
   WITHDRAWN_INFO_SECTION: [
     Compound.COLUMNS.WITHDRAWN_YEAR
