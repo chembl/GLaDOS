@@ -4,6 +4,35 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
   idAttribute: 'molecule_chembl_id'
   defaults:
     fetch_from_elastic: true
+  initialize: ->
+
+    id = @get('id')
+    id ?= @get('molecule_chembl_id')
+    @set('id', id)
+    @set('molecule_chembl_id', id)
+
+    if @get('fetch_from_elastic')
+      @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_molecule/molecule/' + id
+    else
+      @url = glados.Settings.WS_BASE_URL + 'molecule/' + id + '.json'
+
+    if @get('enable_similarity_map')
+      @set('loading_similarity_map', true)
+      @loadSimilarityMap()
+
+      @on 'change:molecule_chembl_id', @loadSimilarityMap, @
+      @on 'change:reference_smiles', @loadSimilarityMap, @
+      @on 'change:reference_smiles_error', @loadSimilarityMap, @
+
+    if @get('enable_substructure_highlighting')
+      @set('loading_substructure_highlight', true)
+      @loadStructureHighlight()
+
+      @on 'change:molecule_chembl_id', @loadStructureHighlight, @
+      @on 'change:reference_ctab', @loadStructureHighlight, @
+      @on 'change:reference_smarts', @loadStructureHighlight, @
+      @on 'change:reference_smiles_error', @loadStructureHighlight, @
+
   isParent: ->
 
     molHierarchy = @.get('molecule_hierarchy')
@@ -12,6 +41,9 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
       isParent = molHierarchy.molecule_chembl_id == molHierarchy.parent_chembl_id
     return isParent
 
+  # --------------------------------------------------------------------------------------------------------------------
+  # Sources
+  # --------------------------------------------------------------------------------------------------------------------
   hasAdditionalSources: ->
 
     additionalSourcesState = @get('has_additional_sources')
@@ -55,34 +87,63 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
     @set({additional_sources: additionalSources}, {silent:true})
     return additionalSources
-  initialize: ->
 
-    id = @get('id')
-    id ?= @get('molecule_chembl_id')
-    @set('id', id)
-    @set('molecule_chembl_id', id)
+  # --------------------------------------------------------------------------------------------------------------------
+  # Synonyms and trade names
+  # --------------------------------------------------------------------------------------------------------------------
+  calculateSynonymsAndTradeNames: ->
 
-    if @get('fetch_from_elastic')
-      @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_molecule/molecule/' + id
-    else
-      @url = glados.Settings.WS_BASE_URL + 'molecule/' + id + '.json'
+    console.log 'calculateSynonymsAndTradeNames: '
+    allRawSynonymsAndTradeNames = @get('molecule_synonyms')
+    uniqueSynonymsObj = {}
+    uniqueSynonymsList = []
 
-    if @get('enable_similarity_map')
-      @set('loading_similarity_map', true)
-      @loadSimilarityMap()
+    uniqueTradeNamesObj = {}
+    uniqueTradeNamesList = []
 
-      @on 'change:molecule_chembl_id', @loadSimilarityMap, @
-      @on 'change:reference_smiles', @loadSimilarityMap, @
-      @on 'change:reference_smiles_error', @loadSimilarityMap, @
+    for rawItem in allRawSynonymsAndTradeNames
 
-    if @get('enable_substructure_highlighting')
-      @set('loading_substructure_highlight', true)
-      @loadStructureHighlight()
+      itemName = rawItem.synonyms
+      console.log 'itemName: ', itemName
+      # is this a proper synonym?
+      if rawItem.syn_type != 'TRADE_NAME'
 
-      @on 'change:molecule_chembl_id', @loadStructureHighlight, @
-      @on 'change:reference_ctab', @loadStructureHighlight, @
-      @on 'change:reference_smarts', @loadStructureHighlight, @
-      @on 'change:reference_smiles_error', @loadStructureHighlight, @
+        if not uniqueSynonymsObj[itemName]?
+          uniqueSynonymsObj[itemName] = true
+          uniqueSynonymsList.push(itemName)
+      #or is is a tradename?
+      else
+
+        if not uniqueTradeNamesObj[itemName]?
+          uniqueTradeNamesObj[itemName] = true
+          uniqueTradeNamesList.push(itemName)
+
+    console.log 'allRawSynonymsAndTradeNames: ', allRawSynonymsAndTradeNames
+    console.log 'uniqueSynonymsList: ', uniqueSynonymsList
+    console.log 'uniqueTradeNamesList: ', uniqueTradeNamesList
+
+    @set
+      only_synonyms: uniqueSynonymsList
+      only_trade_names: uniqueTradeNamesList
+    ,
+      silent: true
+
+  getSynonyms: ->
+
+    cache = @get('only_synonyms')
+    if not cache?
+      @calculateSynonymsAndTradeNames()
+    cache = @get('only_synonyms')
+    return cache
+
+  getTradenames: ->
+
+    cache = @get('only_trade_names')
+    if not cache?
+      @calculateSynonymsAndTradeNames()
+    cache = @get('only_trade_names')
+    return cache
+
 
   loadSimilarityMap:  ->
 
