@@ -190,9 +190,15 @@ glados.useNameSpace 'glados',
         if returnCol.id?
           returnCol.template_id = returnCol.id.replace(/\./g, '_dot_')
 
-      addNameToShow: (returnCol, colDescription) ->
+      addNameToShow: (returnCol, colDescription, model) ->
 
-        returnCol.name_to_show = colDescription['name_to_show']
+
+        nameToShowFunction = colDescription.name_to_show_function
+        if nameToShowFunction?
+          returnCol.name_to_show = nameToShowFunction(model)
+        else
+          returnCol.name_to_show = colDescription['name_to_show']
+
         if colDescription.name_to_show_short?
           returnCol.name_to_show_short = colDescription.name_to_show_short
         else
@@ -218,7 +224,7 @@ glados.useNameSpace 'glados',
 
         returnCol = {}
         glados.Utils.Columns.addColID(returnCol, colDescription)
-        glados.Utils.Columns.addNameToShow(returnCol, colDescription)
+        glados.Utils.Columns.addNameToShow(returnCol, colDescription, model)
 
 
         returnCol.show = colDescription.show
