@@ -11,6 +11,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     if molHierarchy?
       isParent = molHierarchy.molecule_chembl_id == molHierarchy.parent_chembl_id
     return isParent
+  hasAdditionalSources: -> @get('has_additional_sources') == true
   initialize: ->
 
     id = @get('id')
@@ -742,8 +743,16 @@ Compound.COLUMNS = {
         sourcesFromParent = (v.src_description for v in _.values(metadata.hierarchy.parent.sources))
         additionalSources = _.difference(sourcesFromParent, ownSources)
 
-      return additionalSources
+      if additionalSources.length == 0
+        model.set({has_additional_sources: false}, {silent:true})
+      else
+        model.set({has_additional_sources: true}, {silent:true})
 
+      additionalSources.sort()
+      return additionalSources
+    show_function: (model) ->
+      console.log 'model:' , model.hasAdditionalSources()
+      model.hasAdditionalSources()
   WITHDRAWN_YEAR: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     comparator: 'withdrawn_year'
   WITHDRAWN_COUNTRY: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
