@@ -144,8 +144,8 @@ def get_latest_blog_entries(request, pageToken):
     # tries to get entries from cache
     cache_response = cache.get(cache_key)
 
-    # if cache_response != None:
-    #     return JsonResponse(cache_response)
+    if cache_response != None:
+        return JsonResponse(cache_response)
 
     print('Blog entries not found in cache!')
 
@@ -175,7 +175,7 @@ def get_latest_blog_entries(request, pageToken):
         content = re.sub(html, ' ', content)
         content = re.sub(url, ' ', content)
         content = ' '.join(content.split())
-        content = content[:125] + (content[125:] and '...')
+        content = content[:100] + (content[100:] and '...')
 
         blog_entries.append({
             'title': blog_entry['title'],
