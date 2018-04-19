@@ -144,8 +144,8 @@ def get_latest_blog_entries(request, pageToken):
     # tries to get entries from cache
     cache_response = cache.get(cache_key)
 
-    # if cache_response != None:
-    #     return JsonResponse(cache_response)
+    if cache_response != None:
+        return JsonResponse(cache_response)
 
     print('Blog entries not found in cache!')
 
