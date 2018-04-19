@@ -11,12 +11,23 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     if molHierarchy?
       isParent = molHierarchy.molecule_chembl_id == molHierarchy.parent_chembl_id
     return isParent
-  hasAdditionalSources: -> @get('has_additional_sources')
+    
+  hasAdditionalSources: ->
+
+    additionalSourcesState = @get('has_additional_sources')
+    if not additionalSourcesState?
+      @getAdditionalSources()
+    additionalSourcesState = @get('has_additional_sources')
+    return additionalSourcesState
+
   getAdditionalSources: ->
 
+    console.log 'getAdditionalSources'
     aditionalSourcesCache = @get('additional_sources')
     if aditionalSourcesCache?
+      console.log 'using cache!'
       return aditionalSourcesCache
+    console.log 'not using cache'
 
     metadata = @get('_metadata')
     ownSources = _.unique(v.src_description for v in metadata.compound_records)
