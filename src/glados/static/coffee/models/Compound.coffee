@@ -140,14 +140,10 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 #
 #      additionalSources = _.difference(sourcesFromChildren, ownSources)
     else
-      console.log 'is kid'
       rawSynonymsAndTradeNamesFromParent = _.values(metadata.hierarchy.parent.synonyms)
-      console.log 'rawSynonymsAndTradeNamesFromParent: ', rawSynonymsAndTradeNamesFromParent
       [synsFromParent, tnsFromParent] = @separateSynonymsAndTradeNames(rawSynonymsAndTradeNamesFromParent)
-      console.log 'tnsFromParent: ', tnsFromParent
       additionalSynsList = _.difference(synsFromParent, uniqueSynonymsList)
       additionalTnsList = _.difference(tnsFromParent, uniqueTradeNamesList)
-
 
     @set
       only_synonyms: uniqueSynonymsList
