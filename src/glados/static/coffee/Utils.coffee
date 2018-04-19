@@ -183,63 +183,104 @@ glados.useNameSpace 'glados',
         return @getNestedValue(newObj, nestedComparatorsList.join('.'))
 
 
+    Columns:
+      getHighlights: (model)->
+
+        included = new Set()
+
+        highlights = null
+        if model.get('_highlights')? and included.size == 0
+          highlights = []
+          for comparator, hlData of model.get('_highlights')
+            if not included.has(comparator)
+              highlights.push hlData
+              if highlights.length >= 1
+                break
+
+        return [highlights, included]
+
+      addColID: (returnCol, colDescription)->
+
+        returnCol.id = colDescription.id
+        if returnCol.id?
+          returnCol.template_id = returnCol.id.replace(/\./g, '_dot_')
+
+      addNameToShow: (returnCol, colDescription, model) ->
+
+        nameToShowFunction = colDescription.name_to_show_function
+        if nameToShowFunction?
+          returnCol.name_to_show = nameToShowFunction(model)
+        else
+          returnCol.name_to_show = colDescription['name_to_show']
+
+        if colDescription.name_to_show_short?
+          returnCol.name_to_show_short = colDescription.name_to_show_short
+        else
+          returnCol.name_to_show_short = colDescription.name_to_show
+
+      getColValue: (colDescription, model, highlights) ->
+
+        colValueFunction = colDescription.col_value_function
+        if colValueFunction?
+          return colValueFunction(model)
+
+        if colDescription.search_hit_highlight_column
+          colValue = highlights
+        else
+          colValue = glados.Utils.getNestedValue(model.attributes, colDescription.comparator, forceAsNumber=false,\
+            customNullValueLabel=colDescription.custom_null_vale_label)
+
+        if colDescription.num_decimals? and colDescription.format_as_number\
+        and colValue != glados.Settings.DEFAULT_NULL_VALUE_LABEL
+
+          colValue = colValue.toFixed(colDescription.num_decimals)
+
+        return colValue
+
+      addShowStatus: (returnCol, colDescription, model) ->
+
+        showFunction = colDescription.show_function
+        if showFunction?
+          returnCol.show = showFunction(model)
+        else
+          returnCol.show = colDescription.show
+
     # given an model and a list of columns to show, it gives an object ready to be passed to a
     # handlebars template, with the corresponding values for each column
     # handlebars only allow very simple logic, we have to help the template here and
     # give it everything as ready as possible
     getColumnsWithValuesAndHighlights: (columns, model) ->
-      included = new Set()
 
-      highlights = null
-      if model.get('_highlights')? and included.size == 0
-        highlights = []
-        for comparator, hlData of model.get('_highlights')
-          if not included.has(comparator)
-            highlights.push hlData
-            if highlights.length >= 1
-              break
+
+      [highlights, included] = glados.Utils.Columns.getHighlights(model)
 
       columnsToReturn = columns.map (colDescription) ->
 
         returnCol = {}
-        returnCol.id = colDescription.id
-        if returnCol.id?
-          returnCol.template_id = returnCol.id.replace(/\./g, '_dot_')
+        glados.Utils.Columns.addColID(returnCol, colDescription)
+        glados.Utils.Columns.addNameToShow(returnCol, colDescription, model)
+        glados.Utils.Columns.addShowStatus(returnCol, colDescription, model)
 
-        returnCol.name_to_show = colDescription['name_to_show']
-        if colDescription.name_to_show_short?
-          returnCol.name_to_show_short = colDescription.name_to_show_short
-        else
-          returnCol.name_to_show_short = colDescription.name_to_show
-        returnCol.show = colDescription.show
         returnCol.search_hit_highlight_column = colDescription.search_hit_highlight_column || false
         returnCol.comparator = colDescription.comparator
-        if colDescription.search_hit_highlight_column
-          col_value = highlights
-        else
-          col_value = glados.Utils.getNestedValue(model.attributes, colDescription.comparator, forceAsNumber=false,\
-            customNullValueLabel=colDescription.custom_null_vale_label)
-
         returnCol['format_class'] = colDescription.format_class
 
-        if colDescription.num_decimals? and colDescription.format_as_number\
-        and col_value != glados.Settings.DEFAULT_NULL_VALUE_LABEL
+        colValue = glados.Utils.Columns.getColValue(colDescription, model, highlights)
 
-          col_value = col_value.toFixed(colDescription.num_decimals)
-
-        if _.isBoolean(col_value)
-          returnCol['value'] = if col_value then 'Yes' else 'No'
+        # this will now be 'setColValue'
+        if _.isBoolean(colValue)
+          returnCol['value'] = if colValue then 'Yes' else 'No'
         else
-          returnCol['value'] = col_value
+          returnCol['value'] = colValue
 
         if _.has(colDescription, 'parse_function')
-          returnCol['value'] = colDescription['parse_function'](col_value)
+          returnCol['value'] = colDescription['parse_function'](colValue)
 
         if _.has(colDescription, 'additional_parsing')
 
           for key in Object.keys(colDescription.additional_parsing)
             parserFunction = colDescription.additional_parsing[key]
-            returnCol[key] = parserFunction col_value
+            returnCol[key] = parserFunction colValue
 
         returnCol['has_link'] = _.has(colDescription, 'link_base') or _.has(colDescription, 'link_function')
         returnCol['has_multiple_links'] = colDescription.multiple_links == true
@@ -270,10 +311,10 @@ glados.useNameSpace 'glados',
           if colDescription['link_base']?
             returnCol['link_url'] = model.get(colDescription['link_base'])
           if colDescription['link_function']?
-            returnCol['link_url'] = colDescription['link_function'] col_value
+            returnCol['link_url'] = colDescription['link_function'] colValue
 
         else if returnCol['has_multiple_links']
-          returnCol['links_values'] = colDescription['multiple_links_function'] col_value
+          returnCol['links_values'] = colDescription['multiple_links_function'] colValue
 
         if _.has(colDescription, 'image_base_url')
           img_url = model.get(colDescription['image_base_url'])

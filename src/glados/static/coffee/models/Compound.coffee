@@ -4,6 +4,57 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
   idAttribute: 'molecule_chembl_id'
   defaults:
     fetch_from_elastic: true
+  isParent: ->
+
+    molHierarchy = @.get('molecule_hierarchy')
+    isParent = false
+    if molHierarchy?
+      isParent = molHierarchy.molecule_chembl_id == molHierarchy.parent_chembl_id
+    return isParent
+
+  hasAdditionalSources: ->
+
+    additionalSourcesState = @get('has_additional_sources')
+    if not additionalSourcesState?
+      @getAdditionalSources()
+    additionalSourcesState = @get('has_additional_sources')
+    return additionalSourcesState
+
+  getAdditionalSources: ->
+
+    aditionalSourcesCache = @get('additional_sources')
+    if aditionalSourcesCache?
+      return aditionalSourcesCache
+
+    metadata = @get('_metadata')
+    ownSources = _.unique(v.src_description for v in metadata.compound_records)
+
+    if @isParent()
+
+      childrenSourcesList = (c.sources for c in metadata.hierarchy.children)
+      uniqueSourcesObj = {}
+      sourcesFromChildren = []
+      for sourcesObj in childrenSourcesList
+        for source in _.values(sourcesObj)
+          srcDescription = source.src_description
+          if not uniqueSourcesObj[srcDescription]?
+            uniqueSourcesObj[srcDescription] = true
+            sourcesFromChildren.push(srcDescription)
+
+      additionalSources = _.difference(sourcesFromChildren, ownSources)
+    else
+      sourcesFromParent = (v.src_description for v in _.values(metadata.hierarchy.parent.sources))
+      additionalSources = _.difference(sourcesFromParent, ownSources)
+
+    if additionalSources.length == 0
+      @set({has_additional_sources: false}, {silent:true})
+    else
+      @set({has_additional_sources: true}, {silent:true})
+
+    additionalSources.sort()
+
+    @set({additional_sources: additionalSources}, {silent:true})
+    return additionalSources
   initialize: ->
 
     id = @get('id')
@@ -703,6 +754,17 @@ Compound.COLUMNS = {
     comparator: '_metadata.compound_records'
     name_to_show: 'Compound Sources'
     parse_function: (values) -> _.unique(v.src_description for v in values)
+  ADDITIONAL_SOURCES_LIST: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
+    id: 'additional_sources_list'
+    comparator: '_metadata.compound_records'
+    name_to_show_function: (model) ->
+
+      switch model.isParent()
+        when true then return 'Additional Sources From Alternate Forms:'
+        when false then return 'Additional Sources From Parent:'
+
+    col_value_function: (model) -> model.getAdditionalSources()
+    show_function: (model) -> model.hasAdditionalSources()
   WITHDRAWN_YEAR: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     comparator: 'withdrawn_year'
   WITHDRAWN_COUNTRY: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
@@ -800,6 +862,7 @@ Compound.COLUMNS_SETTINGS = {
   ]
   COMPOUND_SOURCES_SECTION: [
     Compound.COLUMNS.COMPOUND_SOURCES_LIST
+    Compound.COLUMNS.ADDITIONAL_SOURCES_LIST
   ]
   WITHDRAWN_INFO_SECTION: [
     Compound.COLUMNS.WITHDRAWN_YEAR
