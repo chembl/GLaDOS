@@ -368,12 +368,35 @@ $full-header-height-large: 180px;
 
 /* -------- ASSOCIATED RESOURCES -------- */
 .associated-resources {
-
+  height: fit-content !important;
   .container {
     height: 100%;
 
     .chembl-text {
       text-align: center;
+    }
+
+    .resources-container {
+
+      .col {
+        border: solid 1px green;
+        height: 100% !important;
+      }
+
+      .resource-card {
+        border: solid 1px orange;
+        padding: 20px;
+        margin: 20px 0;
+
+        h5 {
+          margin-bottom: 2px;
+          color: $grey-dark;
+          font-weight: bolder;
+        }
+        p {
+          margin: 0;
+        }
+      }
     }
   }
 }
