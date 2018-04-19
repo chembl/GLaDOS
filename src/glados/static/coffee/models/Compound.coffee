@@ -91,16 +91,15 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
   # --------------------------------------------------------------------------------------------------------------------
   # Synonyms and trade names
   # --------------------------------------------------------------------------------------------------------------------
-  calculateSynonymsAndTradeNames: ->
+  separateSynonymsAndTradeNames: (rawSynonymsAndTradeNames) ->
 
-    allRawSynonymsAndTradeNames = @get('molecule_synonyms')
     uniqueSynonymsObj = {}
     uniqueSynonymsList = []
 
     uniqueTradeNamesObj = {}
     uniqueTradeNamesList = []
 
-    for rawItem in allRawSynonymsAndTradeNames
+    for rawItem in rawSynonymsAndTradeNames
 
       itemName = rawItem.synonyms
       # is this a proper synonym?
@@ -116,27 +115,58 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
           uniqueTradeNamesObj[itemName] = true
           uniqueTradeNamesList.push(itemName)
 
+    return [uniqueSynonymsList, uniqueTradeNamesList]
+
+  calculateSynonymsAndTradeNames: ->
+
+    rawSynonymsAndTradeNames = @get('molecule_synonyms')
+    console.log 'rawSynonymsAndTradeNames: ', rawSynonymsAndTradeNames
+    [uniqueSynonymsList, uniqueTradeNamesList] = @separateSynonymsAndTradeNames(rawSynonymsAndTradeNames)
+
+    console.log 'uniqueSynonymsList: ', uniqueSynonymsList
+    metadata = @get('_metadata')
+    if @isParent()
+
+      console.log 'is parent'
+#      childrenSourcesList = (c.sources for c in metadata.hierarchy.children)
+#      uniqueSourcesObj = {}
+#      sourcesFromChildren = []
+#      for sourcesObj in childrenSourcesList
+#        for source in _.values(sourcesObj)
+#          srcDescription = source.src_description
+#          if not uniqueSourcesObj[srcDescription]?
+#            uniqueSourcesObj[srcDescription] = true
+#            sourcesFromChildren.push(srcDescription)
+#
+#      additionalSources = _.difference(sourcesFromChildren, ownSources)
+    else
+      console.log 'is kid'
+      rawSynonymsAndTradeNamesFromParent = _.values(metadata.hierarchy.parent.synonyms)
+      console.log 'rawSynonymsAndTradeNamesFromParent: ', rawSynonymsAndTradeNamesFromParent
+      [synsFromParent, tnsFromParent] = @separateSynonymsAndTradeNames(rawSynonymsAndTradeNamesFromParent)
+      console.log 'synsFromParent: ', synsFromParent
+      additionalSynsList = _.difference(synsFromParent, uniqueSynonymsList)
+      console.log 'additionalSynsList: ', additionalSynsList
+
+
     @set
       only_synonyms: uniqueSynonymsList
+      additional_only_synonyms: additionalSynsList
       only_trade_names: uniqueTradeNamesList
     ,
       silent: true
 
-  getSynonyms: ->
+  getWithCache: (propName, generator) ->
 
-    cache = @get('only_synonyms')
+    cache = @get(propName)
     if not cache?
-      @calculateSynonymsAndTradeNames()
-    cache = @get('only_synonyms')
+      generator()
+    cache = @get(propName)
     return cache
 
-  getTradenames: ->
-
-    cache = @get('only_trade_names')
-    if not cache?
-      @calculateSynonymsAndTradeNames()
-    cache = @get('only_trade_names')
-    return cache
+  getSynonyms: -> @getWithCache('only_synonyms', @calculateSynonymsAndTradeNames.bind(@))
+  getTradenames: -> @getWithCache('only_trade_names', @calculateSynonymsAndTradeNames.bind(@))
+  getAdditionalSynonyms: -> @getWithCache('additional_only_synonyms', @calculateSynonymsAndTradeNames.bind(@))
 
 
   loadSimilarityMap:  ->

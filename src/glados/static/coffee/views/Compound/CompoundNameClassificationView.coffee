@@ -107,6 +107,9 @@ CompoundNameClassificationView = CardView.extend
     synsList = @model.getSynonyms()
     @renderSynOrTNRow(synsList, '#CompNameClass-synonyms')
 
+    additionalSynsList = @model.getAdditionalSynonyms()
+    @renderSynOrTNRow(additionalSynsList, '#CompNameClass-additional-synonyms')
+
     tnList = @model.getTradenames()
     @renderSynOrTNRow(tnList, '#CompNameClass-tradenames')
 
