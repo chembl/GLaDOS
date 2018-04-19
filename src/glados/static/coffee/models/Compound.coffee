@@ -11,7 +11,42 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     if molHierarchy?
       isParent = molHierarchy.molecule_chembl_id == molHierarchy.parent_chembl_id
     return isParent
-  hasAdditionalSources: -> @get('has_additional_sources') == true
+  hasAdditionalSources: -> @get('has_additional_sources')
+  getAdditionalSources: ->
+
+    aditionalSourcesCache = @get('additional_sources')
+    if aditionalSourcesCache?
+      return aditionalSourcesCache
+
+    metadata = @get('_metadata')
+    ownSources = _.unique(v.src_description for v in metadata.compound_records)
+
+    if @isParent()
+
+      childrenSourcesList = (c.sources for c in metadata.hierarchy.children)
+      uniqueSourcesObj = {}
+      sourcesFromChildren = []
+      for sourcesObj in childrenSourcesList
+        for source in _.values(sourcesObj)
+          srcDescription = source.src_description
+          if not uniqueSourcesObj[srcDescription]?
+            uniqueSourcesObj[srcDescription] = true
+            sourcesFromChildren.push(srcDescription)
+
+      additionalSources = _.difference(sourcesFromChildren, ownSources)
+    else
+      sourcesFromParent = (v.src_description for v in _.values(metadata.hierarchy.parent.sources))
+      additionalSources = _.difference(sourcesFromParent, ownSources)
+
+    if additionalSources.length == 0
+      @set({has_additional_sources: false}, {silent:true})
+    else
+      @set({has_additional_sources: true}, {silent:true})
+
+    additionalSources.sort()
+
+    @set({additional_sources: additionalSources}, {silent:true})
+    return additionalSources
   initialize: ->
 
     id = @get('id')
@@ -720,36 +755,7 @@ Compound.COLUMNS = {
         when true then return 'Additional Sources From Alternate Forms:'
         when false then return 'Additional Sources From Parent:'
 
-    col_value_function: (model) ->
-
-      metadata = model.get('_metadata')
-      ownSources = _.unique(v.src_description for v in metadata.compound_records)
-
-      if model.isParent()
-
-        childrenSourcesList = (c.sources for c in metadata.hierarchy.children)
-        uniqueSourcesObj = {}
-        sourcesFromChildren = []
-        for sourcesObj in childrenSourcesList
-          for source in _.values(sourcesObj)
-            srcDescription = source.src_description
-            console.log 'checking: ', srcDescription
-            if not uniqueSourcesObj[srcDescription]?
-              uniqueSourcesObj[srcDescription] = true
-              sourcesFromChildren.push(srcDescription)
-
-        additionalSources = _.difference(sourcesFromChildren, ownSources)
-      else
-        sourcesFromParent = (v.src_description for v in _.values(metadata.hierarchy.parent.sources))
-        additionalSources = _.difference(sourcesFromParent, ownSources)
-
-      if additionalSources.length == 0
-        model.set({has_additional_sources: false}, {silent:true})
-      else
-        model.set({has_additional_sources: true}, {silent:true})
-
-      additionalSources.sort()
-      return additionalSources
+    col_value_function: (model) -> model.getAdditionalSources()
     show_function: (model) ->
       console.log 'model:' , model.hasAdditionalSources()
       model.hasAdditionalSources()
