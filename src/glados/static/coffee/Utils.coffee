@@ -220,6 +220,10 @@ glados.useNameSpace 'glados',
 
       getColValue: (colDescription, model, highlights) ->
 
+        colValueFunction = colDescription.col_value_function
+        if colValueFunction?
+          return colValueFunction(model)
+
         if colDescription.search_hit_highlight_column
           colValue = highlights
         else

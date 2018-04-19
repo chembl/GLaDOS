@@ -714,12 +714,36 @@ Compound.COLUMNS = {
     id: 'additional_sources_list'
     comparator: '_metadata.compound_records'
     name_to_show_function: (model) ->
-      
+
       switch model.isParent()
         when true then return 'Additional Sources From Alternate Forms:'
         when false then return 'Additional Sources From Parent:'
 
-    parse_function: (values) -> _.unique(v.src_description for v in values)
+    col_value_function: (model) ->
+
+      metadata = model.get('_metadata')
+      ownSources = _.unique(v.src_description for v in metadata.compound_records)
+
+      if model.isParent()
+        console.log 'metadata: ', metadata
+
+        childrenSourcesList = (c.sources for c in metadata.hierarchy.children)
+        uniqueSourcesObj = {}
+        sourcesFromChildren = []
+        for sourcesObj in childrenSourcesList
+          for source in _.values(sourcesObj)
+            srcDescription = source.src_description
+            console.log 'checking: ', srcDescription
+            if not uniqueSourcesObj[srcDescription]?
+              uniqueSourcesObj[srcDescription] = true
+              sourcesFromChildren.push(srcDescription)
+
+        additionalSources = _.difference(sourcesFromChildren, ownSources)
+      else
+        sourcesFromParent = (v.src_description for v in _.values(metadata.hierarchy.parent.sources))
+        additionalSources = _.difference(sourcesFromParent, ownSources)
+
+      return additionalSources
   WITHDRAWN_YEAR: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     comparator: 'withdrawn_year'
   WITHDRAWN_COUNTRY: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
