@@ -7,10 +7,19 @@
 <script id='Handlebars-CompoundSources' type="text/x-handlebars-template">
 
     <b>Sources:</b>
-
+    <br>
     {{#each compound_sources_list.value}}
         <div class="chip">{{this}}</div>
     {{/each}}
+
+    {{#if additional_sources_list.show}}
+        <br>
+        <b>{{additional_sources_list.name_to_show}}</b>
+        <br>
+        {{#each additional_sources_list.value}}
+            <div class="chip">{{this}}</div>
+        {{/each}}
+    {{/if}}
 
 </script>
 {% endverbatim %}
