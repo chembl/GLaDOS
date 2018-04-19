@@ -27,6 +27,14 @@ $full-header-height-large: 180px;
 /* -------- DEFAULT STYLES -------- */
 
 .main-page-container {
+  h2 {
+    color: $darker-color;
+    font-size: 3em;
+  }
+
+  p {
+    color: $grey-dark;
+  }
   .color-row {
     padding: 40px 0;
     margin-bottom: 0;
@@ -120,7 +128,7 @@ $full-header-height-large: 180px;
 
 }
 
-/* -------- Make sure carousel takes full height of container-------- */
+/* -------- Make sure carousel takes full height of container -------- */
 .main-page-container {
 
   .carousel-wrapper {
@@ -154,8 +162,6 @@ $full-header-height-large: 180px;
     text-align: center;
 
     h2 {
-      font-size: 3em;
-      color: $darker-color;
       margin: 0;
       padding-bottom: 10px;
     }
@@ -163,7 +169,6 @@ $full-header-height-large: 180px;
     p {
       font-size: 1.25em;
       margin: 0;
-      color: $grey-dark;
     }
 
     .small-text {
@@ -181,8 +186,6 @@ $full-header-height-large: 180px;
 
     h2 {
       margin-bottom: 10px;
-      color: $darker-color;
-      font-size: 3em;
     }
 
     .btn-container {
@@ -191,7 +194,7 @@ $full-header-height-large: 180px;
   }
 }
 
-/* -------- DATABASE SUMMARY-------- */
+/* -------- DATABASE SUMMARY -------- */
 .main-page-container {
 
   .database-summary {
@@ -226,7 +229,6 @@ $full-header-height-large: 180px;
 
         p {
           margin-top: 0;
-          color: $grey-dark;
           text-anchor: middle;
 
           transition: letter-spacing 200ms ease-in;
@@ -364,6 +366,18 @@ $full-header-height-large: 180px;
   }
 }
 
+/* -------- ASSOCIATED RESOURCES -------- */
+.associated-resources {
+
+  .container {
+    height: 100%;
+
+    .chembl-text {
+      text-align: center;
+    }
+  }
+}
+
 /* ------------------- MEDIA QUERIES ------------------- */
 
 /* -------- MEDIUM SCREEN -------- */
@@ -426,7 +440,7 @@ $full-header-height-large: 180px;
       display: block;
     }
     &.half-height {
-        height: 80vh;
-      }
+      height: 80vh;
+    }
   }
 }
