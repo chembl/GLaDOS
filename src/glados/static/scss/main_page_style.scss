@@ -45,6 +45,7 @@ $full-header-height-large: 180px;
 
     &.half-height {
       height: 50vh;
+      padding: 0 30px;
     }
 
     &.fit-height {
@@ -264,6 +265,7 @@ $full-header-height-large: 180px;
   }
 
   .tweet-header {
+    padding-left: 5px;
     font-family: $chembl-helvetica;
     color: $grey-dark;
     a {
@@ -335,7 +337,8 @@ $full-header-height-large: 180px;
 .blog-box {
 
   h5 {
-    margin: 5px 0 !important;
+    margin: 0 !important;
+    font-size: 1.3em;
 
     a {
       color: $primary-color;
