@@ -725,7 +725,6 @@ Compound.COLUMNS = {
       ownSources = _.unique(v.src_description for v in metadata.compound_records)
 
       if model.isParent()
-        console.log 'metadata: ', metadata
 
         childrenSourcesList = (c.sources for c in metadata.hierarchy.children)
         uniqueSourcesObj = {}
@@ -744,6 +743,7 @@ Compound.COLUMNS = {
         additionalSources = _.difference(sourcesFromParent, ownSources)
 
       return additionalSources
+
   WITHDRAWN_YEAR: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     comparator: 'withdrawn_year'
   WITHDRAWN_COUNTRY: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,

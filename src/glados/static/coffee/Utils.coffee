@@ -237,6 +237,13 @@ glados.useNameSpace 'glados',
 
         return colValue
 
+      addShowStatus: (returnCol, colDescription, model) ->
+
+        showFunction = colDescription.show_function
+        if showFunction?
+          returnCol.show = showFunction(model)
+        else
+          returnCol.show = colDescription.show
 
     # given an model and a list of columns to show, it gives an object ready to be passed to a
     # handlebars template, with the corresponding values for each column
@@ -252,15 +259,13 @@ glados.useNameSpace 'glados',
         returnCol = {}
         glados.Utils.Columns.addColID(returnCol, colDescription)
         glados.Utils.Columns.addNameToShow(returnCol, colDescription, model)
+        glados.Utils.Columns.addShowStatus(returnCol, colDescription, model)
 
-
-        returnCol.show = colDescription.show
         returnCol.search_hit_highlight_column = colDescription.search_hit_highlight_column || false
         returnCol.comparator = colDescription.comparator
         returnCol['format_class'] = colDescription.format_class
 
         colValue = glados.Utils.Columns.getColValue(colDescription, model, highlights)
-
 
         # this will now be 'setColValue'
         if _.isBoolean(colValue)
