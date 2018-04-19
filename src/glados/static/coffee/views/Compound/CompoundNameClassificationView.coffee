@@ -104,28 +104,19 @@ CompoundNameClassificationView = CardView.extend
 
   renderSynonymsAndTradeNames: ->
 
-    @renderSynonyms()
-    @renderTradeNames()
+    synsList = @model.getSynonyms()
+    @renderSynOrTNRow(synsList, '#CompNameClass-synonyms')
 
-  renderSynonyms: ->
+    tnList = @model.getTradenames()
+    @renderSynOrTNRow(tnList, '#CompNameClass-tradenames')
 
-    onlySynonymsList = @model.getSynonyms()
-    $container = $(@el).find('#CompNameClass-synonyms')
 
-    if onlySynonymsList.length == 0
+  renderSynOrTNRow: (list, cellSelector) ->
+
+    $container = $(@el).find("#{cellSelector}")
+
+    if list.length == 0
       $container.parent().parent().parent().hide()
     else
       glados.Utils.fillContentForElement $container,
-        items: onlySynonymsList
-
-
-  renderTradeNames: ->
-
-    onlyTradeNamesList = @model.getTradenames()
-    $container = $(@el).find('#CompNameClass-tradenames')
-
-    if onlyTradeNamesList.length == 0
-      $container.parent().parent().parent().hide()
-    else
-      glados.Utils.fillContentForElement $container,
-        items: onlyTradeNamesList
+        items: list
