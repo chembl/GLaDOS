@@ -184,6 +184,21 @@ glados.useNameSpace 'glados',
 
 
     Columns:
+      getHighlights: (model)->
+
+        included = new Set()
+
+        highlights = null
+        if model.get('_highlights')? and included.size == 0
+          highlights = []
+          for comparator, hlData of model.get('_highlights')
+            if not included.has(comparator)
+              highlights.push hlData
+              if highlights.length >= 1
+                break
+
+        return [highlights, included]
+
       addColID: (returnCol, colDescription)->
 
         returnCol.id = colDescription.id
@@ -191,7 +206,6 @@ glados.useNameSpace 'glados',
           returnCol.template_id = returnCol.id.replace(/\./g, '_dot_')
 
       addNameToShow: (returnCol, colDescription, model) ->
-
 
         nameToShowFunction = colDescription.name_to_show_function
         if nameToShowFunction?
@@ -209,16 +223,9 @@ glados.useNameSpace 'glados',
     # handlebars only allow very simple logic, we have to help the template here and
     # give it everything as ready as possible
     getColumnsWithValuesAndHighlights: (columns, model) ->
-      included = new Set()
 
-      highlights = null
-      if model.get('_highlights')? and included.size == 0
-        highlights = []
-        for comparator, hlData of model.get('_highlights')
-          if not included.has(comparator)
-            highlights.push hlData
-            if highlights.length >= 1
-              break
+
+      [highlights, included] = glados.Utils.Columns.getHighlights(model)
 
       columnsToReturn = columns.map (colDescription) ->
 
@@ -230,13 +237,13 @@ glados.useNameSpace 'glados',
         returnCol.show = colDescription.show
         returnCol.search_hit_highlight_column = colDescription.search_hit_highlight_column || false
         returnCol.comparator = colDescription.comparator
+        returnCol['format_class'] = colDescription.format_class
+
         if colDescription.search_hit_highlight_column
           col_value = highlights
         else
           col_value = glados.Utils.getNestedValue(model.attributes, colDescription.comparator, forceAsNumber=false,\
             customNullValueLabel=colDescription.custom_null_vale_label)
-
-        returnCol['format_class'] = colDescription.format_class
 
         if colDescription.num_decimals? and colDescription.format_as_number\
         and col_value != glados.Settings.DEFAULT_NULL_VALUE_LABEL
