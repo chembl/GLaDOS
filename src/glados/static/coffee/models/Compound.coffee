@@ -144,15 +144,16 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
       rawSynonymsAndTradeNamesFromParent = _.values(metadata.hierarchy.parent.synonyms)
       console.log 'rawSynonymsAndTradeNamesFromParent: ', rawSynonymsAndTradeNamesFromParent
       [synsFromParent, tnsFromParent] = @separateSynonymsAndTradeNames(rawSynonymsAndTradeNamesFromParent)
-      console.log 'synsFromParent: ', synsFromParent
+      console.log 'tnsFromParent: ', tnsFromParent
       additionalSynsList = _.difference(synsFromParent, uniqueSynonymsList)
-      console.log 'additionalSynsList: ', additionalSynsList
+      additionalTnsList = _.difference(tnsFromParent, uniqueTradeNamesList)
 
 
     @set
       only_synonyms: uniqueSynonymsList
       additional_only_synonyms: additionalSynsList
       only_trade_names: uniqueTradeNamesList
+      additional_trade_names: additionalTnsList
     ,
       silent: true
 
@@ -167,6 +168,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
   getSynonyms: -> @getWithCache('only_synonyms', @calculateSynonymsAndTradeNames.bind(@))
   getTradenames: -> @getWithCache('only_trade_names', @calculateSynonymsAndTradeNames.bind(@))
   getAdditionalSynonyms: -> @getWithCache('additional_only_synonyms', @calculateSynonymsAndTradeNames.bind(@))
+  getAdditionalTradenames: -> @getWithCache('additional_trade_names', @calculateSynonymsAndTradeNames.bind(@))
 
 
   loadSimilarityMap:  ->

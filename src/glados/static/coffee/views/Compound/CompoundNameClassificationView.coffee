@@ -113,6 +113,10 @@ CompoundNameClassificationView = CardView.extend
     tnList = @model.getTradenames()
     @renderSynOrTNRow(tnList, '#CompNameClass-tradenames')
 
+    additionalTnList = @model.getAdditionalTradenames()
+    @renderSynOrTNRow(additionalTnList, '#CompNameClass-additional-tradenames')
+
+
 
   renderSynOrTNRow: (list, cellSelector) ->
 
