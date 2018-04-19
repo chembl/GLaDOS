@@ -29,7 +29,6 @@ glados.useNameSpace 'glados.views.ReportCards',
             protertiesWithValuesIndex[property.id].value = valueNames
 
       $containerElem = $(@el).find('.BCK-Details-Container')
-      console.log 'protertiesWithValuesIndex: ', protertiesWithValuesIndex
       glados.Utils.fillContentForElement $containerElem, protertiesWithValuesIndex
 
       @showSection()
