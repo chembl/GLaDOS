@@ -24,10 +24,12 @@ glados.useNameSpace 'glados.views.MainPage',
         num_compounds: $.number(@model.get('disinct_compounds'))
         num_activities: $.number(@model.get('activities'))
         num_publications: $.number(@model.get('publications'))
-        num_datasets: $.number('158')
+        num_datasets: glados.views.MainPage.DatabaseSummaryView.LOADING_LABEL
         release_notes_link: releaseNotesLink
 
       @showContent()
+      @fetchDatasets()
+
     showContent: ->
       $(@el).find('.card-preolader-to-hide').hide()
       $(@el).find('.BCK-content').show()
@@ -37,4 +39,9 @@ glados.useNameSpace 'glados.views.MainPage',
       glados.Utils.ErrorMessages.fillErrorForElement($contentElement)
       @showContent()
 
+    fetchDatasets: ->
+      
 
+
+
+glados.views.MainPage.DatabaseSummaryView.LOADING_LABEL = 'LOADING...'
