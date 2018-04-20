@@ -196,6 +196,13 @@ def get_latest_blog_entries(request, pageToken):
 
     return JsonResponse(entries)
 
+def get_database_summary(request):
+
+    response = {
+        'num_datasets' : '158'
+    }
+
+    return JsonResponse(response)
 
 def replace_urls_from_entinies(html, urls):
     """
