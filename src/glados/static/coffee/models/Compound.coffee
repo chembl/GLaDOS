@@ -4,6 +4,35 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
   idAttribute: 'molecule_chembl_id'
   defaults:
     fetch_from_elastic: true
+  initialize: ->
+
+    id = @get('id')
+    id ?= @get('molecule_chembl_id')
+    @set('id', id)
+    @set('molecule_chembl_id', id)
+
+    if @get('fetch_from_elastic')
+      @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_molecule/molecule/' + id
+    else
+      @url = glados.Settings.WS_BASE_URL + 'molecule/' + id + '.json'
+
+    if @get('enable_similarity_map')
+      @set('loading_similarity_map', true)
+      @loadSimilarityMap()
+
+      @on 'change:molecule_chembl_id', @loadSimilarityMap, @
+      @on 'change:reference_smiles', @loadSimilarityMap, @
+      @on 'change:reference_smiles_error', @loadSimilarityMap, @
+
+    if @get('enable_substructure_highlighting')
+      @set('loading_substructure_highlight', true)
+      @loadStructureHighlight()
+
+      @on 'change:molecule_chembl_id', @loadStructureHighlight, @
+      @on 'change:reference_ctab', @loadStructureHighlight, @
+      @on 'change:reference_smarts', @loadStructureHighlight, @
+      @on 'change:reference_smiles_error', @loadStructureHighlight, @
+
   isParent: ->
 
     molHierarchy = @.get('molecule_hierarchy')
@@ -12,6 +41,9 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
       isParent = molHierarchy.molecule_chembl_id == molHierarchy.parent_chembl_id
     return isParent
 
+  # --------------------------------------------------------------------------------------------------------------------
+  # Sources
+  # --------------------------------------------------------------------------------------------------------------------
   hasAdditionalSources: ->
 
     additionalSourcesState = @get('has_additional_sources')
@@ -55,34 +87,87 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
     @set({additional_sources: additionalSources}, {silent:true})
     return additionalSources
-  initialize: ->
 
-    id = @get('id')
-    id ?= @get('molecule_chembl_id')
-    @set('id', id)
-    @set('molecule_chembl_id', id)
+  # --------------------------------------------------------------------------------------------------------------------
+  # Synonyms and trade names
+  # --------------------------------------------------------------------------------------------------------------------
+  separateSynonymsAndTradeNames: (rawSynonymsAndTradeNames) ->
 
-    if @get('fetch_from_elastic')
-      @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_molecule/molecule/' + id
+    uniqueSynonymsObj = {}
+    uniqueSynonymsList = []
+
+    uniqueTradeNamesObj = {}
+    uniqueTradeNamesList = []
+
+    for rawItem in rawSynonymsAndTradeNames
+
+      itemName = rawItem.synonyms
+      # is this a proper synonym?
+      if rawItem.syn_type != 'TRADE_NAME'
+
+        if not uniqueSynonymsObj[itemName]?
+          uniqueSynonymsObj[itemName] = true
+          uniqueSynonymsList.push(itemName)
+      #or is is a tradename?
+      else
+
+        if not uniqueTradeNamesObj[itemName]?
+          uniqueTradeNamesObj[itemName] = true
+          uniqueTradeNamesList.push(itemName)
+
+    return [uniqueSynonymsList, uniqueTradeNamesList]
+
+  calculateSynonymsAndTradeNames: ->
+
+    rawSynonymsAndTradeNames = @get('molecule_synonyms')
+    console.log 'rawSynonymsAndTradeNames: ', rawSynonymsAndTradeNames
+    [uniqueSynonymsList, uniqueTradeNamesList] = @separateSynonymsAndTradeNames(rawSynonymsAndTradeNames)
+
+    console.log 'uniqueSynonymsList: ', uniqueSynonymsList
+    metadata = @get('_metadata')
+    if @isParent()
+
+      console.log 'is parent'
+      rawChildrenSynonymsAndTradeNamesLists = (c.synonyms for c in metadata.hierarchy.children)
+      console.log 'rawChildrenSynonymsAndTradeNamesLists: ', rawChildrenSynonymsAndTradeNamesLists
+      rawChildrenSynonyms = []
+      for rawSynAndTNList in rawChildrenSynonymsAndTradeNamesLists
+        for syn in rawSynAndTNList
+          rawChildrenSynonyms.push(syn)
+
+      [synsFromChildren, tnsFromChildren] = @separateSynonymsAndTradeNames(rawChildrenSynonyms)
+      console.log 'tnsFromChildren: ', tnsFromChildren
+      additionalSynsList = _.difference(synsFromChildren, uniqueSynonymsList)
+      additionalTnsList = _.difference(tnsFromChildren, uniqueTradeNamesList)
+
     else
-      @url = glados.Settings.WS_BASE_URL + 'molecule/' + id + '.json'
+      rawSynonymsAndTradeNamesFromParent = _.values(metadata.hierarchy.parent.synonyms)
+      [synsFromParent, tnsFromParent] = @separateSynonymsAndTradeNames(rawSynonymsAndTradeNamesFromParent)
 
-    if @get('enable_similarity_map')
-      @set('loading_similarity_map', true)
-      @loadSimilarityMap()
+      additionalSynsList = _.difference(synsFromParent, uniqueSynonymsList)
+      additionalTnsList = _.difference(tnsFromParent, uniqueTradeNamesList)
 
-      @on 'change:molecule_chembl_id', @loadSimilarityMap, @
-      @on 'change:reference_smiles', @loadSimilarityMap, @
-      @on 'change:reference_smiles_error', @loadSimilarityMap, @
+    @set
+      only_synonyms: uniqueSynonymsList
+      additional_only_synonyms: additionalSynsList
+      only_trade_names: uniqueTradeNamesList
+      additional_trade_names: additionalTnsList
+    ,
+      silent: true
 
-    if @get('enable_substructure_highlighting')
-      @set('loading_substructure_highlight', true)
-      @loadStructureHighlight()
+  getWithCache: (propName, generator) ->
 
-      @on 'change:molecule_chembl_id', @loadStructureHighlight, @
-      @on 'change:reference_ctab', @loadStructureHighlight, @
-      @on 'change:reference_smarts', @loadStructureHighlight, @
-      @on 'change:reference_smiles_error', @loadStructureHighlight, @
+    cache = @get(propName)
+    if not cache?
+      generator()
+    cache = @get(propName)
+    return cache
+
+  getSynonyms: -> @getWithCache('only_synonyms', @calculateSynonymsAndTradeNames.bind(@))
+  getTradenames: -> @getWithCache('only_trade_names', @calculateSynonymsAndTradeNames.bind(@))
+  getAdditionalSynonyms: -> @getWithCache('additional_only_synonyms', @calculateSynonymsAndTradeNames.bind(@))
+  getAdditionalTradenames: -> @getWithCache('additional_trade_names', @calculateSynonymsAndTradeNames.bind(@))
+
 
   loadSimilarityMap:  ->
 
