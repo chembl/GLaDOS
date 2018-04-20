@@ -40,14 +40,21 @@ glados.useNameSpace 'glados.views.MainPage',
       @showContent()
 
     fetchDatasets: ->
-      databaseInfoEsURL = "#{glados.Settings.GLADOS_BASE_PATH_REL}jijijiu"
-      fetchDatabasePromise = $.get(databaseInfoEsURL)
+      databaseInfoEsURL = "#{glados.Settings.GLADOS_BASE_PATH_REL}database_summary"
+      fetchDatabasePromise = $.getJSON(databaseInfoEsURL)
 
       thisView = @
       fetchDatabasePromise.fail ->
 
         $container = $(thisView.el).find('.BCK-num-datasets')
         $container.text(glados.views.MainPage.DatabaseSummaryView.ERROR_LABEL)
+
+      fetchDatabasePromise.done (response) ->
+
+        $container = $(thisView.el).find('.BCK-num-datasets')
+        $container.text(response.num_datasets)
+
+
 
 
 
