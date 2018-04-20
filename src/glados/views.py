@@ -221,21 +221,18 @@ def get_database_summary(request):
 
     }
 
-    # tries to get entries from cache
+    # tries to get number from cache
     cache_response = cache.get(cache_key)
 
     if cache_response != None:
-        print('datasets are in cache!!')
+        print('datasets are in cache')
         return JsonResponse(cache_response)
-    print('datasets are not  cache!! :(((((')
+
+    print('datasets are not in cache')
 
     s = Search(index="chembl_document").query(q)
     response = s.execute()
-
-    response = {
-        'num_datasets': response.hits.total
-    }
-
+    response = { 'num_datasets': response.hits.total }
     cache.set(cache_key, response, cache_time)
 
     return JsonResponse(response)
