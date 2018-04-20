@@ -7,5 +7,21 @@ glados.useNameSpace 'glados.views.MainPage',
 
     render: ->
       console.log 'I will render chembl associated resources :)'
+#      $defaultImageToShow = $(@el).find('#base-img')
+#      @showItem($defaultImageToShow)
+
+    events:
+      'mouseover #ntd-link': "showItem"
+      'mouseover #sure-link': "showItem"
+      'mouseover #uni-link': "showItem"
+
+    showItem: (event) ->
+      console.log 'Element: ', event
+
+
+
+
+
+
 
 
