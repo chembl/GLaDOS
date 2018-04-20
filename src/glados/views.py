@@ -200,6 +200,8 @@ def get_latest_blog_entries(request, pageToken):
 
 def get_database_summary(request):
 
+    cache_key = 'deposited_datasets'
+    cache_time = 604800
     q = {
 
         "bool": {
@@ -219,11 +221,22 @@ def get_database_summary(request):
 
     }
 
+    # tries to get entries from cache
+    cache_response = cache.get(cache_key)
+
+    if cache_response != None:
+        print('datasets are in cache!!')
+        return JsonResponse(cache_response)
+    print('datasets are not  cache!! :(((((')
+
     s = Search(index="chembl_document").query(q)
     response = s.execute()
+
     response = {
         'num_datasets': response.hits.total
     }
+
+    cache.set(cache_key, response, cache_time)
 
     return JsonResponse(response)
 
