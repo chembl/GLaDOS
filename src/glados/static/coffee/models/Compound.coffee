@@ -183,6 +183,32 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     metadata = @get('_metadata')
     return metadata.hierarchy.parent.chembl_id
 
+  calculateAdditionalIDs: ->
+    metadata = @get('_metadata')
+    additionalIDs = []
+
+    if metadata.hierarchy?
+      if @.isParent()
+        childrenIDs = @getChildrenIDs()
+        for childID in childrenIDs
+          additionalIDs.push childID
+      else
+        parentID = @getParentID()
+        additionalIDs.push parentID
+
+    @set
+      additional_ids: additionalIDs
+    ,
+      silent: true
+
+  getOwnAndAdditionalIDs: ->
+    ownID = @get('id')
+    ids = [ownID]
+    additionalIDs = @getWithCache('additional_ids', @calculateAdditionalIDs.bind(@))
+    for id in additionalIDs
+      ids.push id
+    return ids
+
   loadSimilarityMap:  ->
 
     if @get('reference_smiles_error')

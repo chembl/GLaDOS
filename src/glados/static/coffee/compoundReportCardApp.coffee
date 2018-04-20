@@ -299,26 +299,23 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
       model: compound
       agg_generator_function: (model) ->
-        chemblID = model.get('id')
-        metadata = model.get('_metadata')
-        chemblIDs = [chemblID]
-        if metadata.hierarchy?
-          if model.isParent()
-            childrenIDs = model.getChildrenIDs()
-            for childID in childrenIDs
-              chemblIDs.push childID
-          else
-            parentID = model.getParentID()
-            chemblIDs.push parentID
+        chemblIDs = model.getOwnAndAdditionalIDs()
         CompoundReportCardApp.getRelatedActivitiesAgg(chemblIDs)
       pie_config_generator_function: (model) ->
         chemblID = model.get('id')
 
+        titleAdditionalText = switch model.isParent()
+          when true then ' (including alternate forms)'
+          else ' (including parent)'
+
+        titleLinkFilter = Handlebars.compile('molecule_chembl_id:({{#each molecule_chembl_ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
+          molecule_chembl_ids: model.getOwnAndAdditionalIDs()
+
         relatedActivitiesProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RELATED_ACTIVITIES')
         pieConfig =
           x_axis_prop_name: 'types'
-          title: "#{gettext('glados_compound__associated_activities_pie_title_base')}#{chemblID}"
-          title_link_url: Activity.getActivitiesListURL('molecule_chembl_id:' + chemblID)
+          title: "#{gettext('glados_compound__associated_activities_pie_title_base')}#{chemblID}#{titleAdditionalText}"
+          title_link_url: Activity.getActivitiesListURL(titleLinkFilter)
           max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
           properties:
             types: relatedActivitiesProp
