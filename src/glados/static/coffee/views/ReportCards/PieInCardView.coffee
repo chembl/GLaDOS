@@ -4,17 +4,31 @@ glados.useNameSpace 'glados.views.ReportCards',
     initialize: ->
       @config = arguments[0].config
       CardView.prototype.initialize.call(@, arguments)
-      @model.on 'change', @render, @
       @resource_type = @config.resource_type
+
+      @initAggViewAndBinding()
+
+      @initEmbedModal(@config.embed_section_name, @config.embed_identifier)
+      @activateModals()
+
+    #-------------------------------------------------------------------------------------------------------------------
+    # Events binding
+    #-------------------------------------------------------------------------------------------------------------------
+    initAggViewAndBinding: ->
+
+      @model.on 'change', @render, @
+      @createPieView()
+      
+    createPieView: ->
 
       @paginatedView = new PieView
         model: @model
         el: $(@el).find('.BCK-Main-Pie-container')
         config: @config.pie_config
 
-      @initEmbedModal(@config.embed_section_name, @config.embed_identifier)
-      @activateModals()
-
+    #-------------------------------------------------------------------------------------------------------------------
+    # Render
+    #-------------------------------------------------------------------------------------------------------------------
     render: ->
 
       @showSection() unless @config.is_outside_an_entity_report_card
