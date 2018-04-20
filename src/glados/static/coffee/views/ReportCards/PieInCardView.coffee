@@ -9,9 +9,10 @@ glados.useNameSpace 'glados.views.ReportCards',
       initAggFromModelEvent = @config.init_agg_from_model_event?
       if initAggFromModelEvent
         generatorModel = @config.init_agg_from_model_event.model
-        generatorModel.on 'change', @initAggAndBind, @
+        generatorModel.on 'change', @initAggAndBindFromGenModel, @
       else
-        @initAggAndBind()
+        @createPieView()
+        @bindAgg()
 
       @initEmbedModal(@config.embed_section_name, @config.embed_identifier)
       @activateModals()
@@ -21,24 +22,26 @@ glados.useNameSpace 'glados.views.ReportCards',
     #-------------------------------------------------------------------------------------------------------------------
     initAggFromModel: ->
 
-      console.log 'initAggFromModel: '
       generatorModel = @config.init_agg_from_model_event.model
       chemblID = generatorModel.get('id')
-      console.log 'chemblID: ', chemblID
+
       aggGeneratorFunction = @config.init_agg_from_model_event.agg_generator_function
       @model = aggGeneratorFunction(generatorModel)
-      console.log '@model: ', @model
 
-    initAggAndBind: ->
+      pieConfigGeneratorFunction = @config.init_agg_from_model_event.pie_config_generator_function
+      pieConfig = pieConfigGeneratorFunction(generatorModel)
+      @config.pie_config = pieConfig
 
-      console.log 'INIT AGG VIEW AND BINDING!'
+    bindAgg: -> @model.on 'change', @render, @
+
+    initAggAndBindFromGenModel: ->
+
       initAggFromModelEvent = @config.init_agg_from_model_event?
       if initAggFromModelEvent
         @initAggFromModel()
-        return
-      console.log 'GOING TO BIND EVENTS FOR AGG'
-      @model.on 'change', @render, @
-      @createPieView()
+        @createPieView()
+        @bindAgg()
+        @model.fetch()
 
     createPieView: ->
 

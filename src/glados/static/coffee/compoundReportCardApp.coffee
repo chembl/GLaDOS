@@ -295,27 +295,26 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
 
+    aggGenerationConfig =
 
-
-    relatedActivities = CompoundReportCardApp.getRelatedActivitiesAgg(chemblID)
-    relatedActivitiesProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RELATED_ACTIVITIES')
-
-    pieConfig =
-      x_axis_prop_name: 'types'
-      title: gettext('glados_compound__associated_activities_pie_title_base') + chemblID
-      title_link_url: Activity.getActivitiesListURL('molecule_chembl_id:' + chemblID)
-      max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
-      properties:
-        types: relatedActivitiesProp
+      model: compound
+      agg_generator_function: (model) ->
+        chemblID = model.get('id')
+        CompoundReportCardApp.getRelatedActivitiesAgg(chemblID)
+      pie_config_generator_function: (model) ->
+        chemblID = model.get('id')
+        relatedActivitiesProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RELATED_ACTIVITIES')
+        pieConfig =
+          x_axis_prop_name: 'types'
+          title: gettext('glados_compound__associated_activities_pie_title_base') + chemblID
+          title_link_url: Activity.getActivitiesListURL('molecule_chembl_id:' + chemblID)
+          max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
+          properties:
+            types: relatedActivitiesProp
+        return pieConfig
 
     viewConfig =
-      init_agg_from_model_event:
-        model: compound
-        agg_generator_function: (model) ->
-          chemblID = model.get('id')
-          CompoundReportCardApp.getRelatedActivitiesAgg(chemblID)
-
-      pie_config: pieConfig
+      init_agg_from_model_event: aggGenerationConfig
       resource_type: gettext('glados_entities_compound_name')
       embed_section_name: 'related_activities'
       embed_identifier: chemblID
@@ -329,8 +328,6 @@ class CompoundReportCardApp extends glados.ReportCardApp
       section_id: 'ActivityCharts'
       section_label: 'Activity Charts'
       report_card_app: @
-
-    relatedActivities.fetch()
 
     if GlobalVariables['EMBEDED']
       compound.fetch()
