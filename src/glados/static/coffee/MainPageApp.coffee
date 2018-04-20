@@ -16,6 +16,11 @@ class MainPageApp
       el: $('.BCK-Database-summary-info')
     databaseInfo.fetch()
 
+    #   Init Associated resources
+    associatedResources = new glados.views.MainPage.AssociatedResourcesView
+      el: $('.BCK-Associated-resources')
+
+
     #   Init tweet box
     tweetsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewTweetsList()
     tweetsList.initURL()

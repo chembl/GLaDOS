@@ -1,6 +1,11 @@
 glados.useNameSpace 'glados.views.MainPage',
-  AssociatedResourcesViewView: Backbone.View.extend
+  AssociatedResourcesView: Backbone.View.extend
 
     initialize: ->
-      console.log 'Im the associated resources view !!!!'
+      console.log 'im the associated resources view !!!!'
+      @render()
+
+    render: ->
+      console.log 'I will render chembl associated resources :)'
+
 
