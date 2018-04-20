@@ -291,7 +291,12 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @initActivitySummary = ->
 
+    compound = CompoundReportCardApp.getCurrentCompound()
+
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
+
+
+
     relatedActivities = CompoundReportCardApp.getRelatedActivitiesAgg(chemblID)
     relatedActivitiesProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RELATED_ACTIVITIES')
 
@@ -304,6 +309,12 @@ class CompoundReportCardApp extends glados.ReportCardApp
         types: relatedActivitiesProp
 
     viewConfig =
+      init_agg_from_model_event:
+        model: compound
+        agg_generator_function: (model) ->
+          chemblID = model.get('id')
+          CompoundReportCardApp.getRelatedActivitiesAgg(chemblID)
+
       pie_config: pieConfig
       resource_type: gettext('glados_entities_compound_name')
       embed_section_name: 'related_activities'
@@ -313,7 +324,6 @@ class CompoundReportCardApp extends glados.ReportCardApp
         url: Activity.getActivitiesListURL('molecule_chembl_id:' + chemblID)
 
     new glados.views.ReportCards.PieInCardView
-      model: relatedActivities
       el: $('#CAssociatedActivitiesCard')
       config: viewConfig
       section_id: 'ActivityCharts'
@@ -321,6 +331,9 @@ class CompoundReportCardApp extends glados.ReportCardApp
       report_card_app: @
 
     relatedActivities.fetch()
+
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
 
   @initPapersAboutCompound = ->
 

@@ -6,7 +6,12 @@ glados.useNameSpace 'glados.views.ReportCards',
       CardView.prototype.initialize.call(@, arguments)
       @resource_type = @config.resource_type
 
-      @initAggViewAndBinding()
+      initAggFromModelEvent = @config.init_agg_from_model_event?
+      if initAggFromModelEvent
+        generatorModel = @config.init_agg_from_model_event.model
+        generatorModel.on 'change', @initAggAndBind, @
+      else
+        @initAggAndBind()
 
       @initEmbedModal(@config.embed_section_name, @config.embed_identifier)
       @activateModals()
@@ -14,11 +19,27 @@ glados.useNameSpace 'glados.views.ReportCards',
     #-------------------------------------------------------------------------------------------------------------------
     # Events binding
     #-------------------------------------------------------------------------------------------------------------------
-    initAggViewAndBinding: ->
+    initAggFromModel: ->
 
+      console.log 'initAggFromModel: '
+      generatorModel = @config.init_agg_from_model_event.model
+      chemblID = generatorModel.get('id')
+      console.log 'chemblID: ', chemblID
+      aggGeneratorFunction = @config.init_agg_from_model_event.agg_generator_function
+      @model = aggGeneratorFunction(generatorModel)
+      console.log '@model: ', @model
+
+    initAggAndBind: ->
+
+      console.log 'INIT AGG VIEW AND BINDING!'
+      initAggFromModelEvent = @config.init_agg_from_model_event?
+      if initAggFromModelEvent
+        @initAggFromModel()
+        return
+      console.log 'GOING TO BIND EVENTS FOR AGG'
       @model.on 'change', @render, @
       @createPieView()
-      
+
     createPieView: ->
 
       @paginatedView = new PieView
