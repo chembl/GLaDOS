@@ -374,17 +374,24 @@ $full-header-height-large: 180px;
 
 /* -------- ASSOCIATED RESOURCES -------- */
 .associated-resources {
-  height: fit-content !important;
-  max-height: none !important;
+
+  //height: fit-content !important;
+  //max-height: none !important;
   .container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     height: 100%;
+    max-width: 1000px;
 
     .chembl-text {
+      padding: 20px 0 0 0;
       text-align: center;
 
-      h3 {
+      h2 {
         color: $grey-dark;
         margin: 0;
+        padding: 0;
       }
     }
 
@@ -406,7 +413,7 @@ $full-header-height-large: 180px;
         .resource-content {
           padding: 0;
 
-          h5 {
+          h6 {
             color: $primary-color;
             font-weight: bolder;
           }
@@ -414,7 +421,7 @@ $full-header-height-large: 180px;
           p {
             font-size: 1.1em;
             color: $grey-dark;
-            margin-top: 0;
+            margin: 0;
 
             i {
               color: $primary-color;
