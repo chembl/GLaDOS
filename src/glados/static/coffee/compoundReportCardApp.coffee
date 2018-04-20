@@ -300,7 +300,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       model: compound
       agg_generator_function: (model) ->
         chemblIDs = model.getOwnAndAdditionalIDs()
-        CompoundReportCardApp.getRelatedActivitiesAgg(chemblIDs)
+        return CompoundReportCardApp.getRelatedActivitiesAgg(chemblIDs)
       pie_config_generator_function: (model) ->
         chemblID = model.get('id')
 
