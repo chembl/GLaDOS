@@ -922,13 +922,15 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     return assays
 
-  @getRelatedActivitiesAgg = (chemblID) ->
+  @getRelatedActivitiesAgg = (chemblIDs) ->
 
+    chemblIDs = ['CHEMBL59', 'CHEMBL25']
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
-      query_string_template: 'molecule_chembl_id:{{molecule_chembl_id}}'
+      query_string_template:\
+      'molecule_chembl_id:({{#each molecule_chembl_ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})'
       template_data:
-        molecule_chembl_id: 'molecule_chembl_id'
+        molecule_chembl_ids: 'molecule_chembl_ids'
 
     aggsConfig =
       aggs:
@@ -938,11 +940,12 @@ class CompoundReportCardApp extends glados.ReportCardApp
           size: 20
           bucket_links:
 
-            bucket_filter_template: 'molecule_chembl_id:{{molecule_chembl_id}} ' +
-                                    'AND standard_type:("{{bucket_key}}"' +
-                                    '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
+            bucket_filter_template: 'molecule_chembl_id:' +
+              '({{#each molecule_chembl_ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}}) ' +
+              'AND standard_type:("{{bucket_key}}"' +
+              '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
             template_data:
-              molecule_chembl_id: 'molecule_chembl_id'
+              molecule_chembl_ids: 'molecule_chembl_ids'
               bucket_key: 'BUCKET.key'
               extra_buckets: 'EXTRA_BUCKETS.key'
 
@@ -951,7 +954,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     bioactivities = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.ACTIVITY_INDEX_URL
       query_config: queryConfig
-      molecule_chembl_id: chemblID
+      molecule_chembl_ids: chemblIDs
       aggs_config: aggsConfig
 
     return bioactivities

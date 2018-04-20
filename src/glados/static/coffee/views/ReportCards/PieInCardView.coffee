@@ -40,6 +40,7 @@ glados.useNameSpace 'glados.views.ReportCards',
         @initAggFromModel()
         @createPieView()
         @bindAgg()
+        console.log 'agg: ', @model
         @model.fetch()
 
     createPieView: ->
