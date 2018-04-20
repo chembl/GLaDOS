@@ -25,10 +25,10 @@ glados.useNameSpace 'glados.views.ReportCards',
       generatorModel = @config.init_agg_from_model_event.model
 
       aggGeneratorFunction = @config.init_agg_from_model_event.agg_generator_function
-      @model = aggGeneratorFunction(generatorModel)
+      @model = aggGeneratorFunction(generatorModel, @)
 
       pieConfigGeneratorFunction = @config.init_agg_from_model_event.pie_config_generator_function
-      pieConfig = pieConfigGeneratorFunction(generatorModel)
+      pieConfig = pieConfigGeneratorFunction(generatorModel, @)
       @config.pie_config = pieConfig
 
     bindAgg: -> @model.on 'change', @render, @
