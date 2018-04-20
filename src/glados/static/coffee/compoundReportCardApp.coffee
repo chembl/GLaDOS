@@ -293,8 +293,6 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     compound = CompoundReportCardApp.getCurrentCompound()
 
-    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
-
     aggGenerationConfig =
 
       model: compound
@@ -318,9 +316,6 @@ class CompoundReportCardApp extends glados.ReportCardApp
       resource_type: gettext('glados_entities_compound_name')
       embed_section_name: 'related_activities'
       embed_identifier: chemblID
-      link_to_all:
-        link_text: 'See all activities related to ' + chemblID + ' used in this visualisation.'
-        url: Activity.getActivitiesListURL('molecule_chembl_id:' + chemblID)
 
     new glados.views.ReportCards.PieInCardView
       el: $('#CAssociatedActivitiesCard')

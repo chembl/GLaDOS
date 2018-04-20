@@ -23,7 +23,6 @@ glados.useNameSpace 'glados.views.ReportCards',
     initAggFromModel: ->
 
       generatorModel = @config.init_agg_from_model_event.model
-      chemblID = generatorModel.get('id')
 
       aggGeneratorFunction = @config.init_agg_from_model_event.agg_generator_function
       @model = aggGeneratorFunction(generatorModel)
