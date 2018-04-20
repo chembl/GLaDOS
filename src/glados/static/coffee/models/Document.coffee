@@ -1,10 +1,9 @@
 Document = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
   entityName: 'Document'
-  idAttribute:'document_chembl_id'
+  idAttribute: 'document_chembl_id'
 
   initialize: ->
-
     id = @get('id')
     id ?= @get('document_chembl_id')
     @set('id', id)
@@ -16,7 +15,6 @@ Document = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
       @url = glados.Settings.WS_BASE_URL + 'document/' + id + '.json'
 
   parse: (response) ->
-
     if response._source?
       objData = response._source
     else
@@ -53,16 +51,16 @@ Document.COLUMNS = {
   SOURCE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
     comparator: '_metadata.source'
     parse_function: (values) -> (v.src_description for v in values).join(', ')
-  # this is shown when searching documents by terms.
+# this is shown when searching documents by terms.
   SCORE: {
-      'name_to_show': 'Score'
-      'comparator': 'score'
-      'sort_disabled': false
-      'is_sorting': 0
-      'sort_class': 'fa-sort'
-      'custom_field_template': '<b>Score: </b>{{val}}'
+    'name_to_show': 'Score'
+    'comparator': 'score'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'custom_field_template': '<b>Score: </b>{{val}}'
   }
-  # this is shown when showing related documents in a report card
+# this is shown when showing related documents in a report card
   TARGET_TANIMOTO: {
     name_to_show: 'Target Similarity'
     comparator: 'tid_tani'
@@ -82,7 +80,7 @@ Document.COLUMNS = {
     link_function: (id) -> 'http://europepmc.org/abstract/MED/' + encodeURIComponent(id)
   DOI: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
     comparator: 'doi'
-    link_function: (id) -> 'http://dx.doi.org/'+ encodeURIComponent(id)
+    link_function: (id) -> 'http://dx.doi.org/' + encodeURIComponent(id)
   PATENT_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
     comparator: 'patent_id'
   JOURNAL: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
@@ -187,9 +185,11 @@ Document.MINI_REPORT_CARD =
   TEMPLATE: 'Handlebars-Common-MiniReportCard'
   COLUMNS: Document.COLUMNS_SETTINGS.RESULTS_LIST_CARD
 
-
 Document.getDocumentsListURL = (filter) ->
-
   glados.Settings.ENTITY_BROWSERS_URL_GENERATOR
     entity: 'documents'
     filter: encodeURIComponent(filter) unless not filter?
+
+Document.DEPOSITED_DATASETS_FILTER = 'doc_type:"DATASET" AND NOT(_metadata.source.src_id:(
+"1" OR "7" OR "8" OR "9" OR "11" OR "12" OR "13" OR "15" OR "18" OR "25" OR "26" OR "28" OR "31" OR "35" OR "37" OR "38"
+ OR "39" OR "41" OR  "42"))'
