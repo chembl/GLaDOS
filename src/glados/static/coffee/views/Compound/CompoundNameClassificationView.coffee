@@ -110,11 +110,23 @@ CompoundNameClassificationView = CardView.extend
     additionalSynsList = @model.getAdditionalSynonyms()
     @renderSynOrTNRow(additionalSynsList, '#CompNameClass-additional-synonyms')
 
+    rowTitle = switch @model.isParent()
+      when true then 'Synonyms From Alternate Forms:'
+      else 'Synonyms From Parent:'
+    $(@el).find('#CompNameClass-additional-synonymsTitle').text(rowTitle)
+
     tnList = @model.getTradenames()
     @renderSynOrTNRow(tnList, '#CompNameClass-tradenames')
 
     additionalTnList = @model.getAdditionalTradenames()
     @renderSynOrTNRow(additionalTnList, '#CompNameClass-additional-tradenames')
+
+    rowTitle = switch @model.isParent()
+      when true then 'Trade Names From Alternate Forms:'
+      else 'Trade Names From Parent:'
+
+    console.log 'rowTitle: ', rowTitle
+    $(@el).find('#CompNameClass-additional-tradenamesTitle').text(rowTitle)
 
 
 
