@@ -12,6 +12,9 @@ import glados.url_shortener.url_shortener as url_shortener
 from apiclient.discovery import build
 from googleapiclient import *
 import re
+from elasticsearch_dsl import Search
+
+
 
 
 # Returns all acknowledgements grouped by current and old
@@ -130,7 +133,6 @@ def get_latest_tweets_json(request):
 
 
 def get_latest_blog_entries(request, pageToken):
-
     blogId = '2546008714740235720'
     key = settings.BLOGGER_KEY
     fetchBodies = True
@@ -162,7 +164,6 @@ def get_latest_blog_entries(request, pageToken):
     blog_entries = []
 
     for blog_entry in latest_entries_items:
-
         date = blog_entry['published'].split('T')[0]
         content = blog_entry['content']
 
@@ -196,6 +197,45 @@ def get_latest_blog_entries(request, pageToken):
 
     return JsonResponse(entries)
 
+
+def get_database_summary(request):
+
+    cache_key = 'deposited_datasets'
+    cache_time = 604800
+    q = {
+
+        "bool": {
+            "filter": {
+                "term": {
+                    "doc_type": "DATASET"
+                }
+            },
+            "must_not": {
+                "terms": {
+                    "_metadata.source.src_id": [1, 7, 8, 9, 7, 8, 9, 11, 12, 13, 15, 18, 25, 26, 28, 31,
+                                                35, 37, 38,
+                                                39, 41, 42]
+                }
+            }
+        }
+
+    }
+
+    # tries to get number from cache
+    cache_response = cache.get(cache_key)
+
+    if cache_response != None:
+        print('datasets are in cache')
+        return JsonResponse(cache_response)
+
+    print('datasets are not in cache')
+
+    s = Search(index="chembl_document").query(q)
+    response = s.execute()
+    response = { 'num_datasets': response.hits.total }
+    cache.set(cache_key, response, cache_time)
+
+    return JsonResponse(response)
 
 def replace_urls_from_entinies(html, urls):
     """

@@ -76,13 +76,13 @@
 
         <div class="col s12 m6 l2 db-record-item">
 
-            <a href="/g/#browse/documents/filter/doc_type:%22DATASET%22">
+            <a href="{{ datasets_url }}">
 
                 {% endverbatim %}
                     <img src="{% static 'img/icons/database_icon.png' %}"/>
                 {% verbatim %}
 
-                <h4>{{num_datasets}}</h4>
+                <h4 class="BCK-num-datasets">{{num_datasets}}</h4>
 
                 <p>Deposited Datasets</p>
 

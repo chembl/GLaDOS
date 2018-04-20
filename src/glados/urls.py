@@ -37,6 +37,8 @@ urlpatterns += [
 
   url(r'^tweets/$', views.get_latest_tweets_json, name='tweets'),
 
+  url(r'^database_summary/$', views.get_database_summary, name='database_summary'),
+
   url(r'^blog_entries/(?P<pageToken>.+)?$', views.get_latest_blog_entries, name='blog_entries'),
 
   url(r'^marvin_search_fullscreen/$',
