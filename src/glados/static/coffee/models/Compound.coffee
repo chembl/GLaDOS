@@ -150,6 +150,14 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     ,
       silent: true
 
+  getSynonyms: -> @getWithCache('only_synonyms', @calculateSynonymsAndTradeNames.bind(@))
+  getTradenames: -> @getWithCache('only_trade_names', @calculateSynonymsAndTradeNames.bind(@))
+  getAdditionalSynonyms: -> @getWithCache('additional_only_synonyms', @calculateSynonymsAndTradeNames.bind(@))
+  getAdditionalTradenames: -> @getWithCache('additional_trade_names', @calculateSynonymsAndTradeNames.bind(@))
+
+  # --------------------------------------------------------------------------------------------------------------------
+  # instance cache
+  # --------------------------------------------------------------------------------------------------------------------
   getWithCache: (propName, generator) ->
 
     cache = @get(propName)
@@ -158,11 +166,22 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     cache = @get(propName)
     return cache
 
-  getSynonyms: -> @getWithCache('only_synonyms', @calculateSynonymsAndTradeNames.bind(@))
-  getTradenames: -> @getWithCache('only_trade_names', @calculateSynonymsAndTradeNames.bind(@))
-  getAdditionalSynonyms: -> @getWithCache('additional_only_synonyms', @calculateSynonymsAndTradeNames.bind(@))
-  getAdditionalTradenames: -> @getWithCache('additional_trade_names', @calculateSynonymsAndTradeNames.bind(@))
+  # --------------------------------------------------------------------------------------------------------------------
+  # Family ids
+  # --------------------------------------------------------------------------------------------------------------------
+  calculateChildrenIDs: ->
 
+    metadata = @get('_metadata')
+    childrenIDs = (c.chembl_id for c in metadata.hierarchy.children)
+    @set
+      children_ids: childrenIDs
+    ,
+      silent: true
+
+  getChildrenIDs: -> @getWithCache('children_ids', @calculateChildrenIDs.bind(@))
+  getParentID: ->
+    metadata = @get('_metadata')
+    return metadata.hierarchy.parent.chembl_id
 
   loadSimilarityMap:  ->
 

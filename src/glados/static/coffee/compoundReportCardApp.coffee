@@ -304,20 +304,20 @@ class CompoundReportCardApp extends glados.ReportCardApp
         chemblIDs = [chemblID]
         if metadata.hierarchy?
           if model.isParent()
-            childrenIDs = (c.chembl_id for c in metadata.hierarchy.children)
+            childrenIDs = model.getChildrenIDs()
             for childID in childrenIDs
               chemblIDs.push childID
           else
-            parentID = metadata.hierarchy.parent.chembl_id
+            parentID = model.getParentID()
             chemblIDs.push parentID
-
         CompoundReportCardApp.getRelatedActivitiesAgg(chemblIDs)
       pie_config_generator_function: (model) ->
         chemblID = model.get('id')
+
         relatedActivitiesProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RELATED_ACTIVITIES')
         pieConfig =
           x_axis_prop_name: 'types'
-          title: gettext('glados_compound__associated_activities_pie_title_base') + chemblID
+          title: "#{gettext('glados_compound__associated_activities_pie_title_base')}#{chemblID}"
           title_link_url: Activity.getActivitiesListURL('molecule_chembl_id:' + chemblID)
           max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
           properties:
