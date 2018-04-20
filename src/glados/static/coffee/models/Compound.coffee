@@ -120,23 +120,18 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
   calculateSynonymsAndTradeNames: ->
 
     rawSynonymsAndTradeNames = @get('molecule_synonyms')
-    console.log 'rawSynonymsAndTradeNames: ', rawSynonymsAndTradeNames
     [uniqueSynonymsList, uniqueTradeNamesList] = @separateSynonymsAndTradeNames(rawSynonymsAndTradeNames)
 
-    console.log 'uniqueSynonymsList: ', uniqueSynonymsList
     metadata = @get('_metadata')
     if @isParent()
 
-      console.log 'is parent'
       rawChildrenSynonymsAndTradeNamesLists = (c.synonyms for c in metadata.hierarchy.children)
-      console.log 'rawChildrenSynonymsAndTradeNamesLists: ', rawChildrenSynonymsAndTradeNamesLists
       rawChildrenSynonyms = []
       for rawSynAndTNList in rawChildrenSynonymsAndTradeNamesLists
         for syn in rawSynAndTNList
           rawChildrenSynonyms.push(syn)
 
       [synsFromChildren, tnsFromChildren] = @separateSynonymsAndTradeNames(rawChildrenSynonyms)
-      console.log 'tnsFromChildren: ', tnsFromChildren
       additionalSynsList = _.difference(synsFromChildren, uniqueSynonymsList)
       additionalTnsList = _.difference(tnsFromChildren, uniqueTradeNamesList)
 

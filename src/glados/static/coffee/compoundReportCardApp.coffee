@@ -293,6 +293,8 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     compound = CompoundReportCardApp.getCurrentCompound()
 
+    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
+
     aggGenerationConfig =
 
       model: compound
