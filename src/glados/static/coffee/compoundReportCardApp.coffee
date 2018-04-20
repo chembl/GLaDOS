@@ -300,7 +300,18 @@ class CompoundReportCardApp extends glados.ReportCardApp
       model: compound
       agg_generator_function: (model) ->
         chemblID = model.get('id')
-        CompoundReportCardApp.getRelatedActivitiesAgg(chemblID)
+        metadata = model.get('_metadata')
+        chemblIDs = [chemblID]
+        if metadata.hierarchy?
+          if model.isParent()
+            childrenIDs = (c.chembl_id for c in metadata.hierarchy.children)
+            for childID in childrenIDs
+              chemblIDs.push childID
+          else
+            parentID = metadata.hierarchy.parent.chembl_id
+            chemblIDs.push parentID
+
+        CompoundReportCardApp.getRelatedActivitiesAgg(chemblIDs)
       pie_config_generator_function: (model) ->
         chemblID = model.get('id')
         relatedActivitiesProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RELATED_ACTIVITIES')
@@ -924,7 +935,6 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @getRelatedActivitiesAgg = (chemblIDs) ->
 
-    chemblIDs = ['CHEMBL59', 'CHEMBL25']
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
       query_string_template:\
