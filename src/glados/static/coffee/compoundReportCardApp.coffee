@@ -342,8 +342,12 @@ class CompoundReportCardApp extends glados.ReportCardApp
       alternate_forms:
         include_alternate_forms: true
       action_button:
-        toggle_alternate_forms_btn:
-          text_function: -> 'Hola!'
+        text_function: (thisView) ->
+          config = thisView.config
+          includeExclude = switch config.alternate_forms.include_alternate_forms
+            when true then 'Exclude '
+            else 'Include '
+          return "#{includeExclude} Alternate Forms"
 
     new glados.views.ReportCards.PieInCardView
       el: $('#CAssociatedActivitiesCard')

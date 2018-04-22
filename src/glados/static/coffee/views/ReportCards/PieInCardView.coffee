@@ -68,4 +68,6 @@ glados.useNameSpace 'glados.views.ReportCards',
 
       if actionButtonToRender
         $actionButtonContainer = $(@el).find('.BCK-action-buttons-container')
-        glados.Utils.fillContentForElement($actionButtonContainer)
+        buttonTextFunction = @config.action_button.text_function
+        glados.Utils.fillContentForElement $actionButtonContainer,
+          btn_text: buttonTextFunction(@)
