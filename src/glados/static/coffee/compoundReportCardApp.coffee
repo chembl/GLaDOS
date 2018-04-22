@@ -341,6 +341,9 @@ class CompoundReportCardApp extends glados.ReportCardApp
       embed_identifier: chemblID
       alternate_forms:
         include_alternate_forms: true
+      action_button:
+        toggle_alternate_forms_btn:
+          text_function: -> 'Hola!'
 
     new glados.views.ReportCards.PieInCardView
       el: $('#CAssociatedActivitiesCard')

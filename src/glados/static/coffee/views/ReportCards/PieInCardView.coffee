@@ -54,6 +54,7 @@ glados.useNameSpace 'glados.views.ReportCards',
     #-------------------------------------------------------------------------------------------------------------------
     render: ->
 
+      @renderActionButton()
       @showSection() unless @config.is_outside_an_entity_report_card
       @showCardContent()
 
@@ -61,3 +62,10 @@ glados.useNameSpace 'glados.views.ReportCards',
       @model.get('state') == glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE
         return
 
+    renderActionButton: ->
+
+      actionButtonToRender = @config.action_button?
+
+      if actionButtonToRender
+        $actionButtonContainer = $(@el).find('.BCK-action-buttons-container')
+        glados.Utils.fillContentForElement($actionButtonContainer)
