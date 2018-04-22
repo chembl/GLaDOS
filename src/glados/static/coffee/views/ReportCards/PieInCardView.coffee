@@ -71,3 +71,7 @@ glados.useNameSpace 'glados.views.ReportCards',
         buttonTextFunction = @config.action_button.text_function
         glados.Utils.fillContentForElement $actionButtonContainer,
           btn_text: buttonTextFunction(@)
+
+        actionFunction = @config.action_button.action_function
+        $actionButton = $(@el).find('.BCK-ToggleAlternateForms')
+        $actionButton.click(actionFunction.bind(@))
