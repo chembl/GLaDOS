@@ -102,47 +102,7 @@
 
                 <div class="section-col">
 
-                    <div class="carousel-wrapper">
-
-                        <div class="carousel-item">
-                            {% with is_dynamic=True %}
-                                {% include "glados/MainPageParts/TargetBrowserParts/browse_as_circles.html" %}
-                            {% endwith %}
-
-                            <div class="btn-container hide-on-med-and-down">
-                                <a class="hollow-button" href="/g/#browse/targets" target="_blank">
-                                    Browse all Targets
-                                </a>
-                            </div>
-
-                        </div>
-
-                        <div class="carousel-item">
-                            {% with is_dynamic=True %}
-                                {% include "glados/MainPageParts/Visualizations/MaxPhaseForDiseaseDonut.html" %}
-                            {% endwith %}
-
-                            <div class="btn-container hide-on-med-and-down">
-                                <a class="hollow-button" href="/g/#browse/drugs" target="_blank">
-                                    Browse all Drugs
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="carousel-item">
-                            {% with is_dynamic=True %}
-                                {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
-                            {% endwith %}
-
-                            <div class="btn-container hide-on-med-and-down">
-                                <a class="hollow-button" href="/g/#browse/documents" target="_blank">
-                                    Browse all Documents
-                                </a>
-                            </div>
-
-                        </div>
-
-                    </div>
+                    {% include "glados/MainPageParts/main_carousel.html" %}
 
                 </div>
 
