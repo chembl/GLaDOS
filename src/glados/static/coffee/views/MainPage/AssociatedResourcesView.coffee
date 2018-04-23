@@ -7,8 +7,12 @@ glados.useNameSpace 'glados.views.MainPage',
 
     render: ->
       console.log 'I will render chembl associated resources :)'
-#      $defaultImageToShow = $(@el).find('#base-img')
-#      @showItem($defaultImageToShow)
+      #      $defaultImageToShow = $(@el).find('#base-img')
+      #      @showItem($defaultImageToShow)
+
+      $contentElement = $(@el).find('.BCK-associated-resources-img')
+      glados.Utils.fillContentForElement $contentElement,
+        img_url: 'img/icons/res_img/base.png'
 
     events:
       'mouseover #ntd-link': "showItem"
@@ -16,7 +20,10 @@ glados.useNameSpace 'glados.views.MainPage',
       'mouseover #uni-link': "showItem"
 
     showItem: (event) ->
-      console.log 'Element: ', event
+      console.log 'Element: ', event.target.id
+
+
+
 
 
 

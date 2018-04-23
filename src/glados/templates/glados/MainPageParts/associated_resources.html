@@ -1,0 +1,103 @@
+{% load static %}
+
+<div class="chembl-text row">
+
+    <h2> Associated resources </h2>
+
+    <p class="col s12 l8 push-l2">
+        In addition to the database, we have developed a series of thematic portals to the underlying
+        ChEMBL data for users with a particular focus to their research
+    </p>
+
+</div>
+
+<div class="resources-container row valign-wrapper">
+
+    <div class="col l5 m8 s12">
+
+        <a href="https://www.ebi.ac.uk/chemblntd" target="_blank">
+
+            <div class="resource-card col s12" id="ntd-link">
+
+                <div class="col s10 resource-content">
+
+                    <h6> Chembl NTD </h6>
+
+                    <p>
+                        A repository for Open Access primary screening and medicinal chemistry data
+                        directed at neglected tropical diseases.
+
+                    </p>
+
+                </div>
+
+                <div class="col s1 valign-wrapper">
+
+                    <i class="material-icons">chevron_right</i>
+
+                </div>
+
+            </div>
+        </a>
+
+        <a href="https://www.ebi.ac.uk/unichem" target="_blank">
+
+            <div class="resource-card col s12" id="unichem-link">
+
+                <div class="col s10 resource-content">
+
+                    <h6> UniChem </h6>
+
+                    <p>
+                        A simple system that produces cross-references between chemical structure
+                        identifiers from different databases.
+
+                    </p>
+
+                </div>
+
+                <div class="col s1 valign-wrapper">
+
+                    <i class="material-icons">chevron_right</i>
+
+                </div>
+
+            </div>
+        </a>
+
+        <a href="https://www.surechembl.org/search/" target="_blank" id="sure-link">
+
+            <div class="resource-card col s12" id="sure-link">
+
+                <div class="col s10 resource-content">
+
+                    <h6> SureChEMBL </h6>
+
+                    <p>
+                        A publicly available large-scale resource containing compounds extracted from
+                        patent documents.
+
+                    </p>
+
+                </div>
+
+                <div class="col s1 valign-wrapper">
+
+                    <i class="material-icons">chevron_right</i>
+
+                </div>
+
+            </div>
+        </a>
+
+    </div>
+
+    <div class="col l7 hide-on-med-and-down">
+{#        <img class="responsive-img BCK-associated-resources-img" src="{% static {{ img_url }} %}"/>#}
+        <img id="base-img" class="responsive-img" src="{% static 'img/icons/res_img/base.png' %}"/>
+        {#                        <img id="unichem-img" class="responsive-img" src="{% static 'img/icons/res_img/uni.png' %}"/>#}
+        {#                        <img id="chembl-ntd-img" class="responsive-img" src="{% static 'img/icons/res_img/ntd.png' %}"/>#}
+        {#                        <img id="sure-img" class="responsive-img" src="{% static 'img/icons/res_img/sure.png' %}"/>#}
+    </div>
+
+</div>
