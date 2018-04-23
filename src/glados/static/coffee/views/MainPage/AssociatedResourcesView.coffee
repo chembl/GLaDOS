@@ -2,27 +2,29 @@ glados.useNameSpace 'glados.views.MainPage',
   AssociatedResourcesView: Backbone.View.extend
 
     initialize: ->
-      @baseImgUrl = 'base.png'
+      @baseID = '.base'
       @render()
 
     render: ->
-      @showItem(@baseImgUrl)
+      @showItem(@baseID)
 
     events:
-      'mouseover #ntd-link': -> @showItem('ntd.png')
-      'mouseover #sure-link': -> @showItem('sure.png')
-      'mouseover #uni-link': -> @showItem('uni.png')
+      'mouseover #ntd-link': -> @showItem('.ntd')
+      'mouseover #sure-link': -> @showItem('.sure')
+      'mouseover #uni-link': -> @showItem('.uni')
 
-      'mouseout #ntd-link': -> @showItem(@baseImgUrl)
-      'mouseout #sure-link': -> @showItem(@baseImgUrl)
-      'mouseout #uni-link': -> @showItem(@baseImgUrl)
+      'mouseout #ntd-link': -> @showItem(@baseID)
+      'mouseout #sure-link': -> @showItem(@baseID)
+      'mouseout #uni-link': -> @showItem(@baseID)
 
-    showItem: (imgUrl) ->
-      imgName = imgUrl
+    showItem: (id) ->
 
       $contentElement = $(@el).find('.BCK-associated-resources-img')
-      glados.Utils.fillContentForElement $contentElement,
-        img_url: glados.Settings.STATIC_IMAGES_URL + 'icons/smaller/' + imgName
+      glados.Utils.fillContentForElement $contentElement
+
+      if id != @baseID
+        $contentElement.find(id).show()
+        $contentElement.find(@baseID).hide()
 
 
 

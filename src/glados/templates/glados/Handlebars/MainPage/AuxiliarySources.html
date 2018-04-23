@@ -15,7 +15,7 @@
             <a href="/g/#browse/targets">
 
                 {% endverbatim %}
-                    <img src="{% static 'img/icons/target_icon.png' %}"/>
+                <img src="{% static 'img/icons/target_icon.png' %}"/>
                 {% verbatim %}
 
                 <h4>{{num_targets}}</h4>
@@ -31,7 +31,7 @@
             <a href="/g/#browse/compounds">
 
                 {% endverbatim %}
-                    <img src="{% static 'img/icons/compound_icon.png' %}"/>
+                <img src="{% static 'img/icons/compound_icon.png' %}"/>
                 {% verbatim %}
 
 
@@ -48,7 +48,7 @@
             <a href="/g/#browse/activities">
 
                 {% endverbatim %}
-                    <img src="{% static 'img/icons/activity_icon.png' %}"/>
+                <img src="{% static 'img/icons/activity_icon.png' %}"/>
                 {% verbatim %}
 
                 <h4>{{num_activities}}</h4>
@@ -63,7 +63,7 @@
 
             <a href="/g/#browse/documents">
                 {% endverbatim %}
-                    <img src="{% static 'img/icons/document_icon.png' %}"/>
+                <img src="{% static 'img/icons/document_icon.png' %}"/>
                 {% verbatim %}
 
                 <h4>{{num_publications}}</h4>
@@ -79,7 +79,7 @@
             <a href="/g/#browse/documents/filter/doc_type:%22DATASET%22">
 
                 {% endverbatim %}
-                    <img src="{% static 'img/icons/database_icon.png' %}"/>
+                <img src="{% static 'img/icons/database_icon.png' %}"/>
                 {% verbatim %}
 
                 <h4>{{num_datasets}}</h4>
@@ -104,7 +104,22 @@
 
 <script id="Handlebars-AssociatedResourcesImage" type="text/x-handlebars-template">
 
-    <img class="responsive-img " src="{{ img_url }}"/>
+    <img class="responsive-img base"
+         {% endverbatim %} src="{% static 'img/icons/smaller/base.png' %}" {% verbatim %}
+    />
+
+    <img class="responsive-img ntd"
+         {% endverbatim %} src="{% static 'img/icons/smaller/ntd.png' %}" {% verbatim %}
+         style="display:none;"/>
+
+    <img class="responsive-img uni"
+         {% endverbatim %} src="{% static 'img/icons/smaller/uni.png' %}" {% verbatim %}
+         style="display:none;"/>
+
+    <img class="responsive-img sure"
+         {% endverbatim %} src="{% static 'img/icons/smaller/sure.png' %}" {% verbatim %}
+         style="display:none;"/>
+
 
 </script>
 
