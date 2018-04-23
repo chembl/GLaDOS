@@ -129,6 +129,7 @@ $full-header-height-large: 180px;
 }
 
 /* -------- Make sure carousel takes full height of container -------- */
+
 /* -------- VISUALISATIONS CAROUSEL -------- */
 .main-page-container {
 
@@ -449,6 +450,16 @@ $full-header-height-large: 180px;
         margin-left: auto;
       }
     }
+  }
+}
+
+/* -------- VISUALISATIONS CAROUSEL -------- */
+.know-more{
+  background-color: white;
+  border: solid 1px blue;
+
+  .more-container{
+    border: solid 1px red;
   }
 }
 
