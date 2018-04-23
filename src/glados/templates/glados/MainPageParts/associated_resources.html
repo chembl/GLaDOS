@@ -92,12 +92,8 @@
 
     </div>
 
-    <div class="col l7 hide-on-med-and-down">
-{#        <img class="responsive-img BCK-associated-resources-img" src="{% static {{ img_url }} %}"/>#}
-        <img id="base-img" class="responsive-img" src="{% static 'img/icons/res_img/base.png' %}"/>
-        {#                        <img id="unichem-img" class="responsive-img" src="{% static 'img/icons/res_img/uni.png' %}"/>#}
-        {#                        <img id="chembl-ntd-img" class="responsive-img" src="{% static 'img/icons/res_img/ntd.png' %}"/>#}
-        {#                        <img id="sure-img" class="responsive-img" src="{% static 'img/icons/res_img/sure.png' %}"/>#}
-    </div>
+    <div class="col l7 hide-on-med-and-down BCK-associated-resources-img" data-hb-template="Handlebars-AssociatedResourcesImage"
+       data-hb-error-template="Handlebars-DatabaseInfoError">
+        </div>
 
 </div>

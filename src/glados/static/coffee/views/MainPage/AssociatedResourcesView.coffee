@@ -12,7 +12,7 @@ glados.useNameSpace 'glados.views.MainPage',
 
       $contentElement = $(@el).find('.BCK-associated-resources-img')
       glados.Utils.fillContentForElement $contentElement,
-        img_url: 'img/icons/res_img/base.png'
+        img_url: glados.Settings.STATIC_IMAGES_URL + 'icons/res_img/base.png'
 
     events:
       'mouseover #ntd-link': "showItem"
