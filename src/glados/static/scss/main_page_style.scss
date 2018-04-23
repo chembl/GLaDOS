@@ -72,7 +72,6 @@ $full-header-height-large: 180px;
   .col-divider {
     height: 1px;
     background-color: #e0e0e0;
-    margin: 50px 0;
 
   }
   .divider {
@@ -380,7 +379,7 @@ $full-header-height-large: 180px;
     justify-content: center;
     flex-direction: column;
     height: 100%;
-    max-width: 1280px;
+    max-width: 1200px;
 
     .chembl-text {
       padding: 20px 0 0 0;
@@ -436,8 +435,7 @@ $full-header-height-large: 180px;
             color: $grey-dark;
           }
 
-          transition: all 200ms ease-in;
-
+          transition: box-shadow 100ms ease-in;
           &:hover {
             box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
 
@@ -472,8 +470,20 @@ $full-header-height-large: 180px;
     .smaller-on-small {
       height: 60vh;
     }
-    .imgs-column {
-      display: none !important;
+
+    .associated-resources {
+      .chembl-text{
+        h2 {
+          font-size: 2em;
+        }
+
+        p{
+          font-size: 1.25em;
+        }
+      }
+      .imgs-column {
+        display: none !important;
+      }
     }
   }
 
