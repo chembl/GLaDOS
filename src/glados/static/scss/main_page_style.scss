@@ -375,8 +375,6 @@ $full-header-height-large: 180px;
 /* -------- ASSOCIATED RESOURCES -------- */
 .associated-resources {
 
-  //height: fit-content !important;
-  //max-height: none !important;
   .container {
     display: flex;
     justify-content: center;
@@ -396,49 +394,66 @@ $full-header-height-large: 180px;
     }
 
     .resources-container {
-      padding: 50px 0;
+      margin-bottom: 50px;
+      //border: solid red 1px;
+      display: flex;
+      align-items: stretch;
 
-      .col {
-        height: 100% !important;
-      }
-
-      .resource-card {
-        border-radius: 3px;
-        padding: 15px 0;
-        margin: 0;
-        border: solid 1px white;
+      .cards-column {
         display: flex;
-        align-items: center;
+        flex-direction: column;
+        justify-content: center;
 
-        .resource-content {
-          padding: 0;
+        .resource-card {
+          border-radius: 3px;
+          padding: 15px 0;
+          margin: 5px 0;
+          border: solid 1px white;
+          display: flex;
+          align-items: center;
 
-          h6 {
-            color: $primary-color;
-            font-weight: bolder;
-          }
+          .resource-content {
+            padding: 0;
 
-          p {
-            font-size: 1.1em;
-            color: $grey-dark;
-            margin: 0;
+            h6 {
+              color: $primary-color;
+              font-weight: bolder;
+            }
 
-            i {
+            p {
+              font-size: 1.1em;
+              color: $grey-dark;
+              margin: 0;
+            }
+
+            span {
               color: $primary-color;
             }
           }
-        }
-        i {
-          color: $grey-dark;
-        }
 
-        transition: all 200ms ease-in;
+          .chevron-icon {
+            margin: 0;
+            padding: 0;
+            color: $grey-dark;
+          }
 
-        &:hover {
-          box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+          transition: all 200ms ease-in;
+
+          &:hover {
+            box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+
+            .chevron-icon {
+              color: $primary-color;
+            }
+
+          }
         }
       }
     }
+
+    .res-img {
+    }
+
   }
 }
 
