@@ -395,7 +395,6 @@ $full-header-height-large: 180px;
 
     .resources-container {
       margin-bottom: 50px;
-      //border: solid red 1px;
       display: flex;
       align-items: stretch;
 
@@ -451,9 +450,17 @@ $full-header-height-large: 180px;
       }
     }
 
-    .res-img {
-    }
+    .imgs-column {
+      flex-direction: column;
+      justify-content: center;
+      padding: 30px 0;
 
+      img {
+        width: 150px;
+        height: auto;
+        margin-left: auto;
+      }
+    }
   }
 }
 
@@ -464,6 +471,9 @@ $full-header-height-large: 180px;
   @media (max-width: 600px) {
     .smaller-on-small {
       height: 60vh;
+    }
+    .imgs-column {
+      display: none !important;
     }
   }
 
@@ -479,7 +489,6 @@ $full-header-height-large: 180px;
     .explore-database {
       margin-top: 5%;
     }
-
   }
 
   /* -------- LARGE SCREEN -------- */

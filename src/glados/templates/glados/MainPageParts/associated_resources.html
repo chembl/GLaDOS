@@ -13,7 +13,15 @@
 
 <div class="resources-container row valign-wrapper">
 
-    <div class="col l6 m6 s12 cards-column">
+    <!-- Images for medium screen -->
+    <div class="col m3 imgs-column hide-on-large-only">
+        <img class="responsive-img" src= {% static  'img/icons/ntd_icon.png' %}/>
+        <img class="responsive-img" src= {% static  'img/icons/unichem_icon.png' %}/>
+        <img class="responsive-img" src= {% static  'img/icons/surechembl_icon.png' %}/>
+    </div>
+
+    <div class="col l6 m8 s12 cards-column">
+
 
         <a href="https://www.ebi.ac.uk/chemblntd" target="_blank">
 
@@ -92,9 +100,10 @@
 
     </div>
 
-    <div class="col m6 l6 push l1 hide-on-small-only BCK-associated-resources-img res-img" data-hb-template="Handlebars-AssociatedResourcesImage"
-       data-hb-error-template="Handlebars-DatabaseInfoError">
+    <!-- Interactive image for big screens -->
+    <div class="col  l6 push l1 hide-on-med-and-down BCK-associated-resources-img res-img"
+         data-hb-template="Handlebars-AssociatedResourcesImage"
+         data-hb-error-template="Handlebars-DatabaseInfoError">
 
     </div>
-
 </div>
