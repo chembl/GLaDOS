@@ -17,6 +17,7 @@ $lighter-color: #62b7bd;
 $primary-color: #09979b;
 $darker-color: #0d595f;
 $grey-dark: #4d5456;
+$grey-light: #e9e9e9;
 
 //heights
 $chembl-header-height: 54px;
@@ -27,9 +28,19 @@ $full-header-height-large: 180px;
 /* -------- DEFAULT STYLES -------- */
 
 .main-page-container {
+  h2 {
+    color: $darker-color;
+    font-size: 3em;
+  }
+
+  p {
+    color: $grey-dark;
+    font-family: $helvetica;
+  }
+
   .color-row {
     padding: 40px 0;
-    margin-top: 60px;
+    margin-bottom: 0;
     background: linear-gradient(to bottom right, #fcfcfc, #f5f5f5);
   }
 
@@ -61,7 +72,6 @@ $full-header-height-large: 180px;
   .col-divider {
     height: 1px;
     background-color: #e0e0e0;
-    margin: 50px 0;
 
   }
   .divider {
@@ -104,6 +114,10 @@ $full-header-height-large: 180px;
     }
   }
 
+  .chembl-text {
+    font-family: $helvetica;
+  }
+
   .small-text {
     font-family: $helvetica;
     font-size: 0.9em;
@@ -120,7 +134,7 @@ $full-header-height-large: 180px;
 
 }
 
-/* -------- Make sure carousel takes full height of container-------- */
+/* -------- Make sure carousel takes full height of container -------- */
 .main-page-container {
 
   .carousel-wrapper {
@@ -150,12 +164,9 @@ $full-header-height-large: 180px;
 .main-page-container {
 
   .chembl-text {
-    font-family: $helvetica;
     text-align: center;
 
     h2 {
-      font-size: 3em;
-      color: $darker-color;
       margin: 0;
       padding-bottom: 10px;
     }
@@ -163,7 +174,6 @@ $full-header-height-large: 180px;
     p {
       font-size: 1.25em;
       margin: 0;
-      color: $grey-dark;
     }
 
     .small-text {
@@ -181,8 +191,6 @@ $full-header-height-large: 180px;
 
     h2 {
       margin-bottom: 10px;
-      color: $darker-color;
-      font-size: 3em;
     }
 
     .btn-container {
@@ -191,7 +199,7 @@ $full-header-height-large: 180px;
   }
 }
 
-/* -------- DATABASE SUMMARY-------- */
+/* -------- DATABASE SUMMARY -------- */
 .main-page-container {
 
   .database-summary {
@@ -226,7 +234,6 @@ $full-header-height-large: 180px;
 
         p {
           margin-top: 0;
-          color: $grey-dark;
           text-anchor: middle;
 
           transition: letter-spacing 200ms ease-in;
@@ -288,7 +295,7 @@ $full-header-height-large: 180px;
 
     //Each tweet on the list
     .tweet {
-      border: 1px solid #e9e9e9;
+      border: 1px solid $grey-light;
       border-radius: 3px;
       padding: 12px 10px;
       width: 100%;
@@ -364,6 +371,97 @@ $full-header-height-large: 180px;
   }
 }
 
+/* -------- ASSOCIATED RESOURCES -------- */
+.associated-resources {
+
+  .container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    max-width: 1200px;
+
+    .chembl-text {
+      padding: 20px 0 0 0;
+      text-align: center;
+
+      h2 {
+        color: $grey-dark;
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    .resources-container {
+      margin-bottom: 50px;
+      display: flex;
+      align-items: stretch;
+
+      .cards-column {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .resource-card {
+          border-radius: 3px;
+          padding: 15px 0 20px 0;
+          margin: 5px 0;
+          border: solid 1px white;
+          display: flex;
+          align-items: center;
+
+          .resource-content {
+            padding: 0;
+
+            h6 {
+              color: $primary-color;
+              font-weight: bolder;
+            }
+
+            p {
+              font-size: 1.1em;
+              color: $grey-dark;
+              margin: 0;
+            }
+
+            span {
+              color: $primary-color;
+            }
+          }
+
+          .chevron-icon {
+            margin: 0;
+            padding: 0;
+            color: $grey-dark;
+          }
+
+          transition: box-shadow 100ms ease-in;
+          &:hover {
+            box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+
+            .chevron-icon {
+              color: $primary-color;
+            }
+
+          }
+        }
+      }
+    }
+
+    .imgs-column {
+      flex-direction: column;
+      justify-content: center;
+      padding: 30px 0;
+
+      img {
+        width: 150px;
+        height: auto;
+        margin-left: auto;
+      }
+    }
+  }
+}
+
 /* ------------------- MEDIA QUERIES ------------------- */
 
 /* -------- MEDIUM SCREEN -------- */
@@ -371,6 +469,21 @@ $full-header-height-large: 180px;
   @media (max-width: 600px) {
     .smaller-on-small {
       height: 60vh;
+    }
+
+    .associated-resources {
+      .chembl-text{
+        h2 {
+          font-size: 2em;
+        }
+
+        p{
+          font-size: 1.25em;
+        }
+      }
+      .imgs-column {
+        display: none !important;
+      }
     }
   }
 
@@ -386,7 +499,6 @@ $full-header-height-large: 180px;
     .explore-database {
       margin-top: 5%;
     }
-
   }
 
   /* -------- LARGE SCREEN -------- */
@@ -426,7 +538,7 @@ $full-header-height-large: 180px;
       display: block;
     }
     &.half-height {
-        height: 80vh;
-      }
+      height: 80vh;
+    }
   }
 }

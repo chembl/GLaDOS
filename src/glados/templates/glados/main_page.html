@@ -22,9 +22,8 @@
 
                         <p>
                             A manually curated chemical database of bioactive molecules with drug-like properties.
-                            It
-                            is maintained by the European Bioinformatics Institute, of the European Molecular
-                            Biology Laboratory
+                            It brings together chemical, bioactivity and genomic data to aid the translation of genomic
+                            information into effective new drugs.
                         </p>
 
 
@@ -47,7 +46,7 @@
 
             </div>
 
-            <div class="divider hide-on-large-only"></div>
+            <div class="col-divider col s12 hide-on-large-only"></div>
 
 
             <!-------------- Explore the database SECTION -------------->
@@ -102,47 +101,7 @@
 
                 <div class="section-col">
 
-                    <div class="carousel-wrapper">
-
-                        <div class="carousel-item">
-                            {% with is_dynamic=True %}
-                                {% include "glados/MainPageParts/TargetBrowserParts/browse_as_circles.html" %}
-                            {% endwith %}
-
-                            <div class="btn-container hide-on-med-and-down">
-                                <a class="hollow-button" href="/g/#browse/targets" target="_blank">
-                                    Browse all Targets
-                                </a>
-                            </div>
-
-                        </div>
-
-                        <div class="carousel-item">
-                            {% with is_dynamic=True %}
-                                {% include "glados/MainPageParts/Visualizations/MaxPhaseForDiseaseDonut.html" %}
-                            {% endwith %}
-
-                            <div class="btn-container hide-on-med-and-down">
-                                <a class="hollow-button" href="/g/#browse/drugs" target="_blank">
-                                    Browse all Drugs
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="carousel-item">
-                            {% with is_dynamic=True %}
-                                {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
-                            {% endwith %}
-
-                            <div class="btn-container hide-on-med-and-down">
-                                <a class="hollow-button" href="/g/#browse/documents" target="_blank">
-                                    Browse all Documents
-                                </a>
-                            </div>
-
-                        </div>
-
-                    </div>
+                    {% include "glados/MainPageParts/main_carousel.html" %}
 
                 </div>
 
@@ -158,9 +117,20 @@
 
             <div class="row container">
 
-                {% block database_info %}
-                    {% include "glados/MainPageParts/database_info.html" %}
-                {% endblock %}
+                {% include "glados/MainPageParts/database_info.html" %}
+
+            </div>
+
+        </div>
+
+        <div class="divider"></div>
+
+        <!-------------- Associated Resources SECTION -------------->
+        <div class="main-page-section col s12 fit-height associated-resources BCK-Associated-resources">
+
+            <div class="container">
+
+                {% include "glados/MainPageParts/associated_resources.html" %}
 
             </div>
 
@@ -188,9 +158,7 @@
 
                     <div class="section-col">
 
-                            {% include "glados/MainPageParts/blogEntries.html" %}
-
-                        </div>
+                        {% include "glados/MainPageParts/blogEntries.html" %}
 
                     </div>
 
@@ -199,6 +167,8 @@
             </div>
 
         </div>
+
+    </div>
 
     </div>
 
