@@ -105,12 +105,6 @@ $full-header-height-large: 180px;
       border-radius: 1px;
       letter-spacing: 0.02em;
 
-      -webkit-transition: letter-spacing 200ms ease;
-      transition: letter-spacing 200ms ease;
-
-      &:hover {
-        letter-spacing: 0.04em;
-      }
     }
   }
 
@@ -135,6 +129,7 @@ $full-header-height-large: 180px;
 }
 
 /* -------- Make sure carousel takes full height of container -------- */
+/* -------- VISUALISATIONS CAROUSEL -------- */
 .main-page-container {
 
   .carousel-wrapper {
@@ -153,8 +148,11 @@ $full-header-height-large: 180px;
       justify-content: center;
       padding: 0;
 
-      .hollow-button {
-        border: none;
+      a {
+        &:hover {
+          color: $primary-color;
+          text-decoration: underline;
+        }
       }
     }
   }
@@ -229,31 +227,23 @@ $full-header-height-large: 180px;
           font-size: 2.2em;
           color: $darker-color;
           text-anchor: middle;
-          transition: letter-spacing 200ms ease-in;
+          transition: letter-spacing 100ms ease-in;
         }
 
         p {
           margin-top: 0;
           text-anchor: middle;
 
-          transition: letter-spacing 200ms ease-in;
         }
 
         img {
           padding: 5px;
           width: 145px;
           height: auto;
-          transition: padding 200ms ease-in;
+          transition: padding 100ms ease-in;
         }
 
         &:hover {
-          p {
-            letter-spacing: 0.01em;
-          }
-
-          h4 {
-            letter-spacing: 0.01em;
-          }
 
           img {
             padding: 0;
@@ -472,13 +462,13 @@ $full-header-height-large: 180px;
     }
 
     .associated-resources {
-      .chembl-text{
+      .chembl-text {
         h2 {
           font-size: 2em;
         }
 
-        p{
-          font-size: 1.25em;
+        p {
+          font-size: 1.1em;
         }
       }
       .imgs-column {
