@@ -62,6 +62,7 @@ $full-header-height-large: 180px;
       height: fit-content;
       min-height: 300px;
       max-height: none;
+      height: -moz-fit-content;
     }
 
     .section-col {
@@ -461,6 +462,7 @@ $full-header-height-large: 180px;
 
   .container {
     max-width: 900px;
+    margin-bottom: 0;
 
     h3 {
       color: $grey-dark;
