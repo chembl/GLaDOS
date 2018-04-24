@@ -62,6 +62,7 @@ $full-header-height-large: 180px;
       height: fit-content;
       min-height: 300px;
       max-height: none;
+      height: -moz-fit-content;
     }
 
     .section-col {
@@ -241,13 +242,11 @@ $full-header-height-large: 180px;
           padding: 5px;
           width: 145px;
           height: auto;
-          transition: padding 100ms ease-in;
         }
 
         &:hover {
-
           img {
-            padding: 0;
+            padding: 2px;
           }
         }
       }
@@ -370,7 +369,6 @@ $full-header-height-large: 180px;
     justify-content: center;
     flex-direction: column;
     height: 100%;
-    max-width: 1200px;
 
     .chembl-text {
       padding: 20px 0 0 0;
@@ -458,9 +456,11 @@ $full-header-height-large: 180px;
   background: #f5f5f5;
   min-height: 1px !important;
   padding-top: 40px;
+  padding-bottom: 20px;
 
   .container {
     max-width: 900px;
+    margin-bottom: 0;
 
     h3 {
       color: $grey-dark;
