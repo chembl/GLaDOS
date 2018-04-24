@@ -242,13 +242,11 @@ $full-header-height-large: 180px;
           padding: 5px;
           width: 145px;
           height: auto;
-          transition: padding 100ms ease-in;
         }
 
         &:hover {
-
           img {
-            padding: 0;
+            padding: 2px;
           }
         }
       }
