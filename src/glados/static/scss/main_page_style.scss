@@ -578,8 +578,16 @@ $full-header-height-large: 180px;
     .db-records {
       display: block;
     }
-    &.half-height {
-      height: 80vh;
+
+    .half-height {
+      height: 50vh;
+    }
+
+    .color-row {
+
+      .col-divider {
+        margin: 50px 0;
+      }
     }
   }
 }
