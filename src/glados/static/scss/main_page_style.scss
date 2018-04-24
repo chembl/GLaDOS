@@ -474,13 +474,14 @@ $full-header-height-large: 180px;
       .more-img {
         width: 110px;
         height: auto;
+        border-radius: 100%;
+
       }
 
       .title {
         color: $grey-dark;
         font-size: 1.1em;
       }
-
     }
   }
 }

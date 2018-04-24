@@ -76,55 +76,7 @@
 
             <div class="row container">
 
-                <h3 class="center"> Want to know more? </h3>
-
-                <div class=" col l2 m4 s6 more-container center-align">
-
-                    <img class="more-img" src="{% static 'img/icons/more/faq_icon.png' %}">
-
-                    <h6 class="title center-align">FAQs</h6>
-
-                </div>
-
-                <div class=" col l2 m4 s6 more-container center-align">
-
-                    <img class="more-img" src="{% static 'img/icons/more/stats_icon.png' %}">
-
-                    <h6 class="title center-align">Status</h6>
-
-                </div>
-
-                <div class=" col l2 m4 s6 more-container center-align">
-
-                    <img class="more-img" src="{% static 'img/icons/more/funding_icon.png' %}">
-
-                    <h6 class="title center-align">Funding</h6>
-
-                </div>
-
-                <div class=" col l2 m4 s6 more-container center-align">
-
-                    <img class="more-img" src="{% static 'img/icons/more/scheme_icon.png' %}">
-
-                    <h6 class="title center-align">Database Schema</h6>
-
-                </div>
-
-                <div class=" col l2 m4 s6 more-container center-align">
-
-                    <img class="more-img" src="{% static 'img/icons/more/rdf_icon.png' %}">
-
-                    <h6 class="title center-align">EBI RDF Platform</h6>
-
-                </div>
-
-                <div class=" col l2 m4 s6  more-container center-align">
-
-                    <img class="more-img" src="{% static 'img/icons/more/internships_icon.png' %}">
-
-                    <h6 class="title center-align">Internships</h6>
-
-                </div>
+                {% include "glados/MainPageParts/want_to_know_more.html" %}
 
             </div>
 
