@@ -179,7 +179,23 @@ $full-header-height-large: 180px;
     .small-text {
       font-size: 0.9em;
     }
+
+    .social-media {
+      margin-top: 15px;
+
+      img {
+        width: 30px;
+        height: auto;
+        opacity: 0.7;
+
+        &:hover{
+          opacity: 1;
+        }
+      }
+    }
   }
+
+
 }
 
 /* -------- EXPLORE THE DATABASE -------- */
