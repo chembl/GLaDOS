@@ -129,6 +129,7 @@ $full-header-height-large: 180px;
 }
 
 /* -------- Make sure carousel takes full height of container -------- */
+
 /* -------- VISUALISATIONS CAROUSEL -------- */
 .main-page-container {
 
@@ -447,6 +448,39 @@ $full-header-height-large: 180px;
         width: 150px;
         height: auto;
         margin-left: auto;
+      }
+    }
+  }
+}
+
+/* -------- VISUALISATIONS CAROUSEL -------- */
+.know-more {
+  background: #f5f5f5;
+  min-height: 1px !important;
+  padding-top: 40px;
+
+  .container {
+    max-width: 900px;
+
+    h3 {
+      color: $grey-dark;
+      margin-top: 10px;
+      margin-bottom: 30px;
+    }
+
+    .more-container {
+      padding-bottom: 20px;
+
+      .more-img {
+        width: 110px;
+        height: auto;
+        border-radius: 100%;
+
+      }
+
+      .title {
+        color: $grey-dark;
+        font-size: 1.1em;
       }
     }
   }
