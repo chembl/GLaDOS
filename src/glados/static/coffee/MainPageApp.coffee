@@ -127,7 +127,7 @@ class MainPageApp
     $carouselContainer.slick {
       asNavFor: $linksCarousel
       arrows: true
-      autoplay: true
+      autoplay: false
       autoplaySpeed: 3000
       dots: true
     }
@@ -146,7 +146,12 @@ class MainPageApp
     MainPageApp.initBrowseEntities()
 
   @initBrowseEntities = ->
-    console.log " ----- LETS BROWSE SOME ENTITIES ----- "
+
+    console.log " ----- LETS BROWSE SOME ENTITIES :) ----- "
+
+    new glados.views.MainPage.BrowseEntitiesAsCirclesView
+      el: $('#BCK-BrowseEntitiesAsCircles')
+
 
   @initDatabaseSummary = ->
     databaseInfo = new glados.models.MainPage.DatabaseSummaryInfo()
