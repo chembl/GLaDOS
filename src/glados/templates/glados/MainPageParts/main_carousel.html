@@ -1,7 +1,9 @@
 <div class="carousel-wrapper">
 
-    <div class="carousel-item red">
-        browse entities!!!
+    <div class="carousel-item yellow">
+        {% with is_dynamic=True %}
+            {% include "glados/MainPageParts/Visualizations/browse_entities.html" %}
+        {% endwith %}
     </div>
 
     <div class="carousel-item">
