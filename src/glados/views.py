@@ -237,6 +237,15 @@ def get_database_summary(request):
 
     return JsonResponse(response)
 
+def get_entities_records(request):
+    print('lets get some entities')
+    response = {
+        'hola': 'mundo'
+    }
+
+    return JsonResponse(response)
+
+
 def replace_urls_from_entinies(html, urls):
     """
     :return: the html with the corresponding links from the entities
