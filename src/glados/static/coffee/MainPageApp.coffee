@@ -109,7 +109,7 @@ class MainPageApp
 
     targetsHierarchyAgg = MainPageApp.getTargetsTreeAgg()
     targetsHierarchyAgg.fetch()
-    targetBrowserView = TargetBrowserApp.initBrowserAsCircles(targetHierarchy, $('#BCK-TargetBrowserAsCircles'))
+    TargetBrowserApp.initBrowserAsCircles(targetHierarchy, $('#BCK-TargetBrowserAsCircles'))
     targetHierarchy.fetch()
 
     new glados.views.ReportCards.VisualisationInCardView
@@ -143,6 +143,10 @@ class MainPageApp
     MainPageApp.initPapersPerYear()
     MainPageApp.initMaxPhaseForDisease()
     MainPageApp.initTargetsVisualisation()
+    MainPageApp.initBrowseEntities()
+
+  @initBrowseEntities = ->
+    console.log " ----- LETS BROWSE SOME ENTITIES ----- "
 
   @initDatabaseSummary = ->
     databaseInfo = new glados.models.MainPage.DatabaseSummaryInfo()
