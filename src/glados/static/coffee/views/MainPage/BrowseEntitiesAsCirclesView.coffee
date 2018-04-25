@@ -1,9 +1,15 @@
 glados.useNameSpace 'glados.views.MainPage',
-  BrowseEntitiesAsCirclesView: Backbone.View.extend
+  BrowseEntitiesAsCirclesView: Backbone.View.extend(ResponsiviseViewExt).extend
 
     initialize: ->
-      console.log "I'm initializing this View :)"
+      console.log "Init :)"
+      @$vis_elem = $(@el).find('.BCK-circles-Container')
+      @setUpResponsiveRender()
       @render()
 
     render: ->
-      console.log 'AAAAND I will render it!!! :)'
+      console.log 'Render :)'
+
+
+
+

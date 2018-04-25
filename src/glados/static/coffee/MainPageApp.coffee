@@ -150,8 +150,7 @@ class MainPageApp
     console.log " ----- LETS BROWSE SOME ENTITIES :) ----- "
 
     new glados.views.MainPage.BrowseEntitiesAsCirclesView
-      el: $('#BCK-BrowseEntitiesAsCircles')
-
+      el: $('#BrowseEntitiesAsCircles')
 
   @initDatabaseSummary = ->
     databaseInfo = new glados.models.MainPage.DatabaseSummaryInfo()
