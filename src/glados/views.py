@@ -238,9 +238,27 @@ def get_database_summary(request):
     return JsonResponse(response)
 
 def get_entities_records(request):
+
     print('lets get some entities')
+
+    q = {
+        "query_string": {
+            "query": "*"
+        }
+    }
+
+
+    drug_query = Search(index="chembl_drug").query(q)
+    drugs = drug_query.execute()
+
+    cell_query = Search(index="chembl_cell_line").query(q)
+    cells = cell_query.execute()
+
+
     response = {
-        'hola': 'mundo'
+        'drugs': drugs.hits.total,
+        'cell_lines: ': cells.hits.total
+
     }
 
     return JsonResponse(response)

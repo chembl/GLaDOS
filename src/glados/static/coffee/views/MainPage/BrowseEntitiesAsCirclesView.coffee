@@ -16,6 +16,7 @@ glados.useNameSpace 'glados.views.MainPage',
         drugs: 0
         documents: $.number(@model.get('publications'))
         targets: $.number(@model.get('targets'))
+        assays: 0
         cells: 0
         tissues: 0
 
