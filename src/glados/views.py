@@ -254,7 +254,7 @@ def get_entities_records(request):
 
     status_r = requests.get('https://www.ebi.ac.uk/chembl/api/data/status.json').json()
     drug_r = requests.get('https://www.ebi.ac.uk/chembl/api/data/drug.json').json()
-    assays_r = requests.get('https://www.ebi.ac.uk/chembl/api/data/drug.json').json()
+    assays_r = requests.get('https://www.ebi.ac.uk/chembl/api/data/assay.json').json()
     cells_r = requests.get('https://www.ebi.ac.uk/chembl/api/data/cell_line.json').json()
     tissues_r = requests.get('https://www.ebi.ac.uk/chembl/api/data/tissue.json').json()
 
