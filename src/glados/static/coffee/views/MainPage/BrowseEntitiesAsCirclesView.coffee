@@ -24,6 +24,7 @@ glados.useNameSpace 'glados.views.MainPage',
 
       @$vis_elem.empty()
 
+      PADDING = 100
       VIS_WIDTH = $(@el).width()
       VIS_HEIGHT = VIS_WIDTH
 
@@ -53,12 +54,24 @@ glados.useNameSpace 'glados.views.MainPage',
       console.log 'bubbleData: ', bubbleData
 
       pack = d3.layout.pack()
-       .size([VIS_WIDTH, VIS_HEIGHT])
+       .size([VIS_WIDTH - PADDING, VIS_HEIGHT - PADDING])
        .padding(1.5)
 
-      root = pack(bubbleData)
+      nodes = pack.nodes(bubbleData)
 
-      console.log 'root:', root
+
+      console.log '--Nodes:', nodes
+
+      node = mainContainer.selectAll('circle')
+        .data(nodes)
+        .enter()
+        .append('circle')
+          .attr('cx', (d) -> d.x)
+          .attr('cy', (d) -> d.y)
+          .attr('r', (d) -> d.r)
+          .attr('stroke', 'orange')
+          .attr('fill', 'none')
+
 
 
 
