@@ -146,9 +146,6 @@ class MainPageApp
     MainPageApp.initBrowseEntities()
 
   @initBrowseEntities = ->
-
-    console.log " ----- LETS BROWSE SOME ENTITIES :) ----- "
-
     new glados.views.MainPage.BrowseEntitiesAsCirclesView
       el: $('#BrowseEntitiesAsCircles')
 
