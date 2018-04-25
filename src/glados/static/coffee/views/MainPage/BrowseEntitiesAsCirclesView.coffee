@@ -24,41 +24,81 @@ glados.useNameSpace 'glados.views.MainPage',
 
       @$vis_elem.empty()
 
-      VISUALISATION_WIDTH = $(@el).width()
-      VISUALISATION_HEIGHT = VISUALISATION_WIDTH
-      MIN_CIRCLE_VALUE = 5
-      MAX_CIRCLE_VALUE = 20
+      VIS_WIDTH = $(@el).width()
+      VIS_HEIGHT = VIS_WIDTH
+
 
       mainContainer = d3.select(@$vis_elem.get(0))
         .append('svg')
-          .attr('class', 'mainSVGContaineraa')
-          .attr('width', VISUALISATION_WIDTH)
-          .attr('height', VISUALISATION_HEIGHT)
+          .attr('class', 'mainSVGCirclesContainer')
+          .attr('width', VIS_WIDTH)
+          .attr('height', VIS_HEIGHT)
 
       sizes = []
       names = []
-      dataList = []
+      bubbleData =
+        'children': []
+
       for key, value of data
 
         dataItem = {}
-        dataItem.key = key
-        dataItem.value = value
+        dataItem.entity = key
+        dataItem.count = value
 
-        dataList.push dataItem
         names.push key
         sizes.push value
+        bubbleData.children.push(dataItem)
+
+      console.log 'bubbleData: ', bubbleData
+
+      bubble = d3.layout.pack()
+       .size([VIS_WIDTH, VIS_HEIGHT])
+       .padding(1.5)
+
+      nodes = bubble.nodes(bubbleData)
+
+      console.log 'nodes:', nodes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
 
 #      dataMin= d3.min sizes
 #      dataMax = d3.max sizes
+#
+#      tam =  d3.scale.ordinal()
+#        .domain([dataList])
+#        .range([10, 20, 30, 40, 50, 60, 70])
+#
+#      pack = d3.layout.pack()
+#        .size([VIS_WIDTH, VIS_HEIGHT])
+#        .padding(1.5)
+#
+#
+#
+#      mainContainer.selectAll('circle')
+#        .data(dataList)
+#        .enter()
+#        .append('circle')
+#          .attr('transform', 'translate(0, 0)')
+#          .attr('cx', (d, i) -> 50 + i * 80)
+#          .attr('cy', 400)
+#          .attr('r', 30)
+#          .attr('fill', 'orange')
 
-#      tam =  d3.scale.linear()
-#        .domain(dataMin, dataMax)
-#        .range(MIN_CIRCLE_VALUE, MAX_CIRCLE_VALUE)
-
-      mainContainer.selectAll('rect')
-        .data(dataList)
-        .enter()
-        .append('rect')
 
 
 

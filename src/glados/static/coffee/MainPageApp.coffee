@@ -142,7 +142,7 @@ class MainPageApp
 
     MainPageApp.initPapersPerYear()
     MainPageApp.initMaxPhaseForDisease()
-    MainPageApp.initTargetsVisualisation()
+#    MainPageApp.initTargetsVisualisation()
     MainPageApp.initBrowseEntities()
 
   @initBrowseEntities = ->
