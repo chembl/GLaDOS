@@ -24,9 +24,10 @@ glados.useNameSpace 'glados.views.MainPage',
 
       @$vis_elem.empty()
 
-      PADDING = 100
+      PADDING = 20
       VIS_WIDTH = $(@el).width()
-      VIS_HEIGHT = VIS_WIDTH
+      VIS_HEIGHT = $(@el).height()
+
 
 
       mainContainer = d3.select(@$vis_elem.get(0))
@@ -54,9 +55,11 @@ glados.useNameSpace 'glados.views.MainPage',
 
 
 #     pack layout
+      diameter = Math.min(VIS_HEIGHT, VIS_WIDTH)
       pack = d3.layout.pack()
-       .size([VIS_WIDTH - PADDING, VIS_HEIGHT - PADDING])
-       .padding(20)
+       .size([VIS_WIDTH - PADDING , VIS_HEIGHT - PADDING ])
+       .padding(PADDING)
+
 
       nodes = pack.nodes(bubbleData)
 
@@ -72,56 +75,12 @@ glados.useNameSpace 'glados.views.MainPage',
           .attr('cy', (d) -> d.y + PADDING/2)
           .attr('r', (d) -> d.r )
           .attr('stroke', 'orange')
-          .attr('fill', 'orange')
+          .attr('fill', 'none')
 
 #     make first node transparent
       firstNode = d3.select('.node')
       .style('fill', 'none')
       .style('stroke', 'none')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#      dataMin= d3.min sizes
-#      dataMax = d3.max sizes
-#
-#      tam =  d3.scale.ordinal()
-#        .domain([dataList])
-#        .range([10, 20, 30, 40, 50, 60, 70])
-#
-#      pack = d3.layout.pack()
-#        .size([VIS_WIDTH, VIS_HEIGHT])
-#        .padding(1.5)
-#
-#
-#
-#      mainContainer.selectAll('circle')
-#        .data(dataList)
-#        .enter()
-#        .append('circle')
-#          .attr('transform', 'translate(0, 0)')
-#          .attr('cx', (d, i) -> 50 + i * 80)
-#          .attr('cy', 400)
-#          .attr('r', 30)
-#          .attr('fill', 'orange')
-
-
-
 
 
 
