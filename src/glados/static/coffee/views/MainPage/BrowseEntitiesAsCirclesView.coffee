@@ -41,6 +41,7 @@ glados.useNameSpace 'glados.views.MainPage',
         'name': 'entities'
         'children': []
 
+#     Get data in correct format
       for key, value of data
 
         dataItem = {}
@@ -51,26 +52,32 @@ glados.useNameSpace 'glados.views.MainPage',
         sizes.push value
         bubbleData.children.push(dataItem)
 
-      console.log 'bubbleData: ', bubbleData
 
+#     pack layout
       pack = d3.layout.pack()
        .size([VIS_WIDTH - PADDING, VIS_HEIGHT - PADDING])
-       .padding(1.5)
+       .padding(20)
 
       nodes = pack.nodes(bubbleData)
 
-
       console.log '--Nodes:', nodes
 
+#     draw circles
       node = mainContainer.selectAll('circle')
         .data(nodes)
         .enter()
         .append('circle')
-          .attr('cx', (d) -> d.x)
-          .attr('cy', (d) -> d.y)
-          .attr('r', (d) -> d.r)
+          .attr('class', 'node')
+          .attr('cx', (d) -> d.x + PADDING/2)
+          .attr('cy', (d) -> d.y + PADDING/2)
+          .attr('r', (d) -> d.r )
           .attr('stroke', 'orange')
-          .attr('fill', 'none')
+          .attr('fill', 'orange')
+
+#     make first node transparent
+      firstNode = d3.select('.node')
+      .style('fill', 'none')
+      .style('stroke', 'none')
 
 
 
