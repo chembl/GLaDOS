@@ -47,73 +47,76 @@ SearchModel = Backbone.Model.extend
   __requestAutocompleteSuggestions: ()->
     allSuggestions = []
     allSuggestionsScores = []
-    done_callback = (esData)->
-      suggestions = []
-      groupedSuggestions = {}
-      for suggI in esData.suggest.autocomplete
-        for optionJ in suggI.options
-          suggestionI = {
-            chembl_id_link: glados.models.paginatedCollections.Settings.ES_INDEX_2_GLADOS_SETTINGS[optionJ._index]\
-              .MODEL.get_colored_report_card_url(optionJ._id)
-            header: false
-            entityKey: glados.models.paginatedCollections.Settings.ES_INDEX_2_GLADOS_SETTINGS[optionJ._index]\
-              .KEY_NAME
-            entityLabel: glados.models.paginatedCollections.Settings.ES_INDEX_2_GLADOS_SETTINGS[optionJ._index]\
-              .LABEL
-            score: optionJ._score
-            text: optionJ.text
-            highlightedText: ''
-            highlights: [
-              {
-                offset: suggI.offset
-                length: suggI.length
-              }
-            ]
+    getDoneCallBack = (es_index)->
+
+      done_callback = (esData)->
+        suggestions = []
+        groupedSuggestions = {}
+        for suggI in esData.suggest.autocomplete
+          for optionJ in suggI.options
+            suggestionI = {
+              chembl_id_link: glados.models.paginatedCollections.Settings.ES_INDEX_2_GLADOS_SETTINGS[es_index]\
+                .MODEL.get_colored_report_card_url(optionJ._id)
+              header: false
+              entityKey: glados.models.paginatedCollections.Settings.ES_INDEX_2_GLADOS_SETTINGS[es_index]\
+                .KEY_NAME
+              entityLabel: glados.models.paginatedCollections.Settings.ES_INDEX_2_GLADOS_SETTINGS[es_index]\
+                .LABEL
+              score: optionJ._score
+              text: optionJ.text
+              highlightedText: ''
+              highlights: [
+                {
+                  offset: suggI.offset
+                  length: suggI.length
+                }
+              ]
+            }
+            highlightedTextI = suggestionI.text
+            for highlightJ in suggestionI.highlights
+              posEnd = highlightJ.offset+highlightJ.length
+              highlightedTextI = highlightedTextI.slice(0, posEnd)+'</b></big>'+highlightedTextI.slice(posEnd)
+              highlightedTextI = \
+                highlightedTextI.slice(0, highlightJ.offset)+'<big><b>'+highlightedTextI.slice(highlightJ.offset)
+            suggestionI.highlightedText = highlightedTextI
+            if not _.has(groupedSuggestions, optionJ.text)
+              groupedSuggestions[optionJ.text] = []
+            groupedSuggestions[optionJ.text].push suggestionI
+
+        sortedSuggestions = _.keys(groupedSuggestions).sort().slice 0, 5
+        suggestions = []
+
+        if sortedSuggestions.length > 0
+          suggestions.push {
+            color: groupedSuggestions[sortedSuggestions[0]][0].chembl_id_link.color
+            header: true
+            title: groupedSuggestions[sortedSuggestions[0]][0].entityLabel
+            maxScore: groupedSuggestions[sortedSuggestions[0]][0].score
           }
-          highlightedTextI = suggestionI.text
-          for highlightJ in suggestionI.highlights
-            posEnd = highlightJ.offset+highlightJ.length
-            highlightedTextI = highlightedTextI.slice(0, posEnd)+'</b></big>'+highlightedTextI.slice(posEnd)
-            highlightedTextI = \
-              highlightedTextI.slice(0, highlightJ.offset)+'<big><b>'+highlightedTextI.slice(highlightJ.offset)
-          suggestionI.highlightedText = highlightedTextI
-          if not _.has(groupedSuggestions, optionJ.text)
-            groupedSuggestions[optionJ.text] = []
-          groupedSuggestions[optionJ.text].push suggestionI
+          maxScore = 0
+          for suggestionI in sortedSuggestions
+            docsSuggested = groupedSuggestions[suggestionI]
+            for docI in docsSuggested
+              if docI.maxScore > maxScore
+                maxScore = docI.maxScore
+            if docsSuggested.length == 1
+              suggestions.push docsSuggested[0]
+            else
+              suggestionI = docsSuggested[0]
+              suggestionI.chembl_id_link.href = glados.routers.MainGladosRouter.getSearchURL(
+                suggestionI.entityKey, suggestionI.text
+              )
+              suggestionI.chembl_id_link.text = 'Multiple '+suggestionI.entityLabel
+              suggestions.push suggestionI
 
-      sortedSuggestions = _.keys(groupedSuggestions).sort().slice 0, 5
-      suggestions = []
-
-      if sortedSuggestions.length > 0
-        suggestions.push {
-          color: groupedSuggestions[sortedSuggestions[0]][0].chembl_id_link.color
-          header: true
-          title: groupedSuggestions[sortedSuggestions[0]][0].entityLabel
-          maxScore: groupedSuggestions[sortedSuggestions[0]][0].score
-        }
-        maxScore = 0
-        for suggestionI in sortedSuggestions
-          docsSuggested = groupedSuggestions[suggestionI]
-          for docI in docsSuggested
-            if docI.maxScore > maxScore
-              maxScore = docI.maxScore
-          if docsSuggested.length == 1
-            suggestions.push docsSuggested[0]
-          else
-            suggestionI = docsSuggested[0]
-            suggestionI.chembl_id_link.href = glados.routers.MainGladosRouter.getSearchURL(
-              suggestionI.entityKey, suggestionI.text
-            )
-            suggestionI.chembl_id_link.text = 'Multiple '+suggestionI.entityLabel
-            suggestions.push suggestionI
-
-        insertAt = 0
-        for scoreI in allSuggestionsScores
-          if maxScore > scoreI
-            break
-          insertAt++
-        allSuggestionsScores.splice(insertAt, 0, suggestions[0].maxScore)
-        allSuggestions.splice(insertAt, 0, suggestions)
+          insertAt = 0
+          for scoreI in allSuggestionsScores
+            if maxScore > scoreI
+              break
+            insertAt++
+          allSuggestionsScores.splice(insertAt, 0, suggestions[0].maxScore)
+          allSuggestions.splice(insertAt, 0, suggestions)
+      return done_callback.bind(@)
 
     then_callback = ()->
       concatenatedSuggestions = []
@@ -138,7 +141,7 @@ SearchModel = Backbone.Model.extend
         glados.models.paginatedCollections.Settings.ES_BASE_URL + es_index_i.PATH + '/_search',
         JSON.stringify(esQuery)
       )
-      deferred_i.done(done_callback.bind(@))
+      deferred_i.done(getDoneCallBack(es_index_i.INDEX_NAME))
       deferreds.push(deferred_i)
     $.when.apply($, deferreds).then(then_callback.bind(@), then_callback.bind(@))
 
