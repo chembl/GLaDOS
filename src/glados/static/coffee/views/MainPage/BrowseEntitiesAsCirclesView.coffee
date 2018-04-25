@@ -37,13 +37,14 @@ glados.useNameSpace 'glados.views.MainPage',
       sizes = []
       names = []
       bubbleData =
+        'name': 'entities'
         'children': []
 
       for key, value of data
 
         dataItem = {}
-        dataItem.entity = key
-        dataItem.count = value
+        dataItem.key = key
+        dataItem.value = value
 
         names.push key
         sizes.push value
@@ -51,15 +52,13 @@ glados.useNameSpace 'glados.views.MainPage',
 
       console.log 'bubbleData: ', bubbleData
 
-      bubble = d3.layout.pack()
+      pack = d3.layout.pack()
        .size([VIS_WIDTH, VIS_HEIGHT])
        .padding(1.5)
 
-      nodes = bubble.nodes(bubbleData)
+      root = pack(bubbleData)
 
-      console.log 'nodes:', nodes
-
-
+      console.log 'root:', root
 
 
 
@@ -74,7 +73,9 @@ glados.useNameSpace 'glados.views.MainPage',
 
 
 
-      
+
+
+
 
 #      dataMin= d3.min sizes
 #      dataMax = d3.max sizes
