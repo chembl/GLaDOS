@@ -4,7 +4,6 @@ glados.useNameSpace 'glados.views.MainPage',
     initialize: ->
       console.log "Init :)"
       @$vis_elem = $(@el).find('.BCK-circles-Container')
-      @model.on 'change', @render, @
       @setUpResponsiveRender()
       @render()
 
@@ -12,10 +11,10 @@ glados.useNameSpace 'glados.views.MainPage',
       console.log 'Render :)'
 
       entities_info =
-        compounds: $.number(@model.get('disinct_compounds'))
+        compounds: 0
         drugs: 0
-        documents: $.number(@model.get('publications'))
-        targets: $.number(@model.get('targets'))
+        documents: 0
+        targets: 0
         assays: 0
         cells: 0
         tissues: 0
