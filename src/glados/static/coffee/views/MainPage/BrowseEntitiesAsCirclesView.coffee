@@ -47,16 +47,23 @@ glados.useNameSpace 'glados.views.MainPage',
         .attr('width', VIS_WIDTH)
         .attr('height', VIS_HEIGHT)
 
-      colours = [
-        '#084044',
-        '#0d595f',
-        '#FE7F9D',
-        '#D33C60',
-        '#09979B',
-        '#75D8D5',
-        '#8E122F',
+      DARKEST_GREEN = '#084044'
+      DARK_GREEN = '#0d595f'
+      TEAL = '#09979B'
+      LIGHT_TEAL = '#75D8D5'
+      DARK_RED = '#8E122F'
+      RED = '#D33C60'
+      PINK = '#FE7F9D'
 
-      ]
+      colours = {
+        Documents: LIGHT_TEAL
+        Drugs: DARK_GREEN
+        Tissues: DARK_RED
+        Cells: TEAL
+        Assays: RED
+        Compounds: DARKEST_GREEN
+        Targets: PINK
+      }
 
       sizes = []
       names = []
@@ -77,17 +84,17 @@ glados.useNameSpace 'glados.views.MainPage',
         .range([4, 200])
         .domain([min, max])
 
-      i = 0
       for key, value of data
         dataItem = {}
         dataItem.name = key
         dataItem.value = sizeScale(value)
         dataItem.count = value
         dataItem.link = thisView.links[key]
-        dataItem.colour = colours[i]
-        i++
+        dataItem.colour = colours[key]
 
         bubbleData.children.push(dataItem)
+
+      console.log 'bubbleData: ', bubbleData
 
 #     pack layout
       diameter = Math.min(VIS_HEIGHT, VIS_WIDTH)
