@@ -19,7 +19,8 @@ glados.useNameSpace 'glados.views.MainPage',
         thisView.renderCircles(response)
 
     renderCircles: (data) ->
-      @$vis_elem.empty()
+      thisView = @
+      thisView.$vis_elem.empty()
 
       VIS_WIDTH = $(@el).width()
       VIS_HEIGHT = $(@el).height()
@@ -27,9 +28,9 @@ glados.useNameSpace 'glados.views.MainPage',
 
       mainContainer = d3.select(@$vis_elem.get(0))
         .append('svg')
-          .attr('class', 'mainSVGCirclesContainer')
-          .attr('width', VIS_WIDTH)
-          .attr('height', VIS_HEIGHT)
+        .attr('class', 'mainSVGCirclesContainer')
+        .attr('width', VIS_WIDTH)
+        .attr('height', VIS_HEIGHT)
 
       sizes = []
       names = []
@@ -59,8 +60,8 @@ glados.useNameSpace 'glados.views.MainPage',
         bubbleData.children.push(dataItem)
 
       colour = d3.scale.ordinal()
-       .domain(sizes)
-       .range([
+        .domain(sizes)
+        .range([
           '#D33C60',
           '#084044',
           '#8E122F',
@@ -68,14 +69,14 @@ glados.useNameSpace 'glados.views.MainPage',
           '#0d595f',
           '#09979B',
           '#FE7F9D',
-      ])
+        ])
 
 #     pack layout
       diameter = Math.min(VIS_HEIGHT, VIS_WIDTH)
       pack = d3.layout.pack()
-       .size([VIS_WIDTH  , VIS_HEIGHT ])
-       .padding(PADDING)
-       .sort((a, b) -> (a.value - b.value*0.4))
+        .size([VIS_WIDTH, VIS_HEIGHT])
+        .padding(PADDING)
+        .sort((a, b) -> (a.value - b.value * 0.4))
 
       nodes = pack.nodes(bubbleData)
 
@@ -86,63 +87,56 @@ glados.useNameSpace 'glados.views.MainPage',
         .data(nodes)
         .enter()
         .append('circle')
-          .attr('class', 'node')
-          .attr('cx', (d) -> d.x + PADDING/2)
-          .attr('cy', (d) -> d.y + PADDING/2)
-          .attr('r', (d) -> d.r )
-          .attr('fill', (d) -> colour(d.value))
+        .attr('class', 'node')
+        .attr('cx', (d) -> d.x + PADDING / 2)
+        .attr('cy', (d) -> d.y + PADDING / 2)
+        .attr('r', (d) -> d.r)
+        .attr('fill', (d) -> colour(d.value))
 
       counts = mainContainer.selectAll('.count')
         .data(nodes)
         .enter()
         .append('text')
-          .text((d) -> d.count)
-          .attr('class', 'count')
-          .attr('x', (d) -> d.x + PADDING/2)
-          .attr('y', (d) -> d.y + PADDING/2 )
-          .attr('fill', 'white')
+        .text((d) -> thisView.formatNumber(d.count))
+        .attr('class', 'count')
+        .attr('x', (d) -> d.x + PADDING / 2)
+        .attr('y', (d) -> d.y + PADDING / 2)
+        .attr('fill', 'white')
 
       labels = mainContainer.selectAll('.label')
         .data(nodes)
         .enter()
         .append('text')
-          .text((d) -> d.name)
-          .attr('class', 'label')
-          .attr('x', (d) -> d.x + PADDING/2)
-          .attr('y', (d) -> d.y + PADDING/2 + 15)
-          .attr('fill', 'white')
+        .text((d) -> d.name)
+        .attr('class', 'label')
+        .attr('x', (d) -> d.x + PADDING / 2)
+        .attr('y', (d) -> d.y + PADDING / 2 + 15)
+        .attr('fill', 'white')
 
 
 #     make first node transparent
       firstNode = d3.select('.node')
-      .style('fill', 'none')
-      .style('stroke', 'none')
+        .style('fill', 'none')
+        .style('stroke', 'none')
 
-#     make first text transparent
       firstcount = d3.select('.count')
         .style('fill', 'none')
         .style('stroke', 'none')
 
-#     make first text transparent
-      firstcount = d3.select('.label')
+      firstlabel = d3.select('.label')
         .style('fill', 'none')
         .style('stroke', 'none')
 
+    formatNumber: (number) ->
+      formatted = number
 
+      if number >= 1.0e+9
+        formatted = number.toPrecision(2) / 1.0e+9 + "B"
 
-    formatNumbers: (number) ->
+      else if number >= 1.0e+6
+        formatted = number.toPrecision(2) / 1.0e+6 + "M"
 
+      else if number >= 1.0e+3
+        formatted = number.toPrecision(2) / 1.0e+3 + "K"
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+      return formatted
