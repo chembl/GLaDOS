@@ -21,9 +21,9 @@ glados.useNameSpace 'glados.views.MainPage',
     renderCircles: (data) ->
       @$vis_elem.empty()
 
-      PADDING = 20
       VIS_WIDTH = $(@el).width()
       VIS_HEIGHT = $(@el).height()
+      PADDING = VIS_WIDTH * 0.05
 
       mainContainer = d3.select(@$vis_elem.get(0))
         .append('svg')
@@ -45,7 +45,7 @@ glados.useNameSpace 'glados.views.MainPage',
 
 #     Scale the sizes
       sizeScale = d3.scale.sqrt()
-        .range([0, 100])
+        .range([0, 150])
         .domain([min, max])
 
       for key, value of data
@@ -55,14 +55,13 @@ glados.useNameSpace 'glados.views.MainPage',
 
         bubbleData.children.push(dataItem)
 
-      console.log 'bubbleData: ', bubbleData
-
-
 #     pack layout
       diameter = Math.min(VIS_HEIGHT, VIS_WIDTH)
       pack = d3.layout.pack()
        .size([VIS_WIDTH - PADDING , VIS_HEIGHT - PADDING ])
        .padding(PADDING)
+#       .sort (a,b) -> ( a.value*-1 - b.value )
+
 
       nodes = pack.nodes(bubbleData)
       children = nodes[0].children
