@@ -17,6 +17,8 @@ glados.useNameSpace 'glados.views.MainPage',
 
     render: () ->
       thisView = @
+
+
       infoURL = "#{glados.Settings.GLADOS_BASE_PATH_REL}entities_records"
 
       fetchDatabasePromise = $.getJSON(infoURL)
@@ -25,11 +27,16 @@ glados.useNameSpace 'glados.views.MainPage',
         console.log 'Fetching entities info from web services failed :('
 
       fetchDatabasePromise.done (response) ->
+        console.log 'render :)'
         thisView.renderCircles(response)
 
     renderCircles: (data) ->
+      $(@el).find('.card-preolader-to-hide').hide()
+      $(@el).find('.card-content').show()
+
       thisView = @
       thisView.$vis_elem.empty()
+
 
       VIS_WIDTH = $(@el).width()
       VIS_HEIGHT = $(@el).height()
@@ -135,7 +142,7 @@ glados.useNameSpace 'glados.views.MainPage',
           .on('click', (d) -> glados.Utils.URLS.shortenLinkIfTooLongAndOpen d.link )
           .on("mouseover", (d, i) ->
 
-            ADD = PADDING/2 - 2
+            ADD = PADDING/2 - 5
 
             d3.select('.nod' + i).transition()
               .ease("cubic-out")
