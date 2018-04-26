@@ -53,8 +53,9 @@ glados.useNameSpace 'glados.views.MainPage',
         '#D33C60',
         '#FE7F9D',
         '#09979B',
-        '#8E122F',
         '#75D8D5',
+        '#8E122F',
+
       ]
 
       sizes = []
