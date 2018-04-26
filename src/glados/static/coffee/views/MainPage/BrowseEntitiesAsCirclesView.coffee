@@ -63,10 +63,10 @@ glados.useNameSpace 'glados.views.MainPage',
         .domain(sizes)
         .range([
           '#FE7F9D',
-          '#084044',
+          '#0d595f',
           '#8E122F',
           '#75D8D5',
-          '#0d595f',
+          '#084044',
           '#09979B',
           '#D33C60',
         ])
@@ -85,13 +85,11 @@ glados.useNameSpace 'glados.views.MainPage',
         .data(nodes)
         .enter()
         .append('circle')
-          .attr('class', 'node')
+          .attr('class', (d, i) -> 'node' + i )
           .attr('cx', (d) -> d.x + PADDING / 2)
           .attr('cy', (d) -> d.y + PADDING / 2)
           .attr('r', (d) -> d.r)
           .attr('fill', (d) -> colour(d.value))
-        .on("mouseover", (d) ->  thisView.mouseOnAction(d))
-        .on("mouseout", (d) ->  thisView.mouseOutAction(d))
 
       counts = mainContainer.selectAll('.count')
         .data(nodes)
@@ -99,11 +97,10 @@ glados.useNameSpace 'glados.views.MainPage',
         .append('text')
           .text((d) -> thisView.formatNumber(d.count))
           .attr('font-size', (d) -> d.r / 2)
-          .attr('class', 'count')
+          .attr('class', (d, i) -> 'count' + i)
           .attr('x', (d) -> d.x + PADDING / 2)
           .attr('y', (d) -> d.y + PADDING / 2)
           .attr('fill', 'white')
-        
 
       labels = mainContainer.selectAll('.label')
         .data(nodes)
@@ -111,38 +108,86 @@ glados.useNameSpace 'glados.views.MainPage',
         .append('text')
           .attr('font-size', (d) -> d.r / 3)
           .text((d) -> d.name)
-          .attr('class', 'label')
+          .attr('class', (d, i) -> 'label' + i)
           .attr('x', (d) -> d.x + PADDING / 2)
           .attr('y', (d) -> d.y + PADDING / 2 + d.r / 3)
           .attr('fill', 'white')
 
+      circlesForHover = mainContainer.selectAll('.invisible')
+        .data(nodes)
+        .enter()
+        .append('circle')
+          .attr('class', 'invisible')
+          .attr('class', (d, i) -> 'hover' + i )
+          .attr('cx', (d) -> d.x + PADDING / 2)
+          .attr('cy', (d) -> d.y + PADDING / 2)
+          .attr('r', (d) -> d.r)
+          .attr('fill', 'black')
+          .attr('opacity', 0)
+          .on("mouseover", (d, i) ->
+
+            ADD = PADDING/2 - 2
+
+            d3.select('.node' + i).transition()
+              .ease("cubic-out")
+              .delay("10")
+              .duration("200")
+              .attr("r", d.r + ADD)
+
+            d3.select('.count' + i).transition()
+              .ease("cubic-out")
+              .delay("10")
+              .duration("200")
+              .attr('font-size', (d.r + ADD)/ 2 )
+
+            d3.select('.label' + i).transition()
+              .ease("cubic-out")
+              .delay("10")
+              .duration("200")
+              .attr('font-size', (d.r + ADD)/ 3 )
+              .attr('y', d.y + PADDING / 2 + (d.r + ADD) / 3)
+          )
+
+          .on("mouseout", (d, i) ->
+
+            d3.select('.node' + i).transition()
+              .ease("quad")
+              .delay("400")
+              .duration("300")
+              .attr("r", d.r )
+
+            d3.select('.count' + i).transition()
+              .ease("quad")
+              .delay("400")
+              .duration("300")
+              .attr('font-size', d.r/ 2 )
+
+            d3.select('.label' + i).transition()
+              .ease("quad")
+              .delay("400")
+              .duration("300")
+              .attr('font-size', d.r/ 3)
+              .attr('y', d.y + PADDING / 2 + d.r / 3)
+          )
+
 #     make first node transparent
-      firstNode = d3.select('.node')
+      firstNode = d3.select('.node0')
         .style('fill', 'none')
         .style('stroke', 'none')
 
-      firstcount = d3.select('.count')
+      firstcount = d3.select('.count0')
         .style('fill', 'none')
         .style('stroke', 'none')
 
-      firstlabel = d3.select('.label')
+      firstlabel = d3.select('.label0')
         .style('fill', 'none')
         .style('stroke', 'none')
 
-#      handling mouse in and mouse out
-      thisView.mouseOnAction: (d) ->
-        d3.select(@).transition()
-          .ease("cubic-out")
-          .delay("10")
-          .duration("200")
-          .attr("r", d.r + PADDING/2)
+      firstHover = d3.select('.hover0')
+        .style('fill', 'none')
+        .style('stroke', 'none')
 
-      thisView.mouseOutAction: (d) ->
-        d3.select(@).transition()
-          .ease("quad")
-          .delay("300")
-          .duration("200")
-          .attr("r", d.r )
+
 
 
     formatNumber: (number) ->
