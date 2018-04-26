@@ -45,7 +45,7 @@ glados.useNameSpace 'glados.views.MainPage',
 
 #     Scale the sizes
       sizeScale = d3.scale.sqrt()
-        .range([0, 150])
+        .range([5, 150])
         .domain([min, max])
 
       for key, value of data
@@ -58,13 +58,10 @@ glados.useNameSpace 'glados.views.MainPage',
 #     pack layout
       diameter = Math.min(VIS_HEIGHT, VIS_WIDTH)
       pack = d3.layout.pack()
-       .size([VIS_WIDTH - PADDING , VIS_HEIGHT - PADDING ])
+       .size([VIS_WIDTH  , VIS_HEIGHT ])
        .padding(PADDING)
-#       .sort (a,b) -> ( a.value*-1 - b.value )
-
 
       nodes = pack.nodes(bubbleData)
-      children = nodes[0].children
 
 #     draw circles
       node = mainContainer.selectAll('circle')
@@ -76,7 +73,7 @@ glados.useNameSpace 'glados.views.MainPage',
           .attr('cy', (d) -> d.y + PADDING/2)
           .attr('r', (d) -> d.r )
           .attr('stroke', 'orange')
-          .attr('fill', 'none')
+          .attr('fill', 'orange')
 
 #     make first node transparent
       firstNode = d3.select('.node')
