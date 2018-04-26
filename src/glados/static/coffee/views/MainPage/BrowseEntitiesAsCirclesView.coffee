@@ -18,17 +18,12 @@ glados.useNameSpace 'glados.views.MainPage',
       fetchDatabasePromise.done (response) ->
         thisView.renderCircles(response)
 
-
     renderCircles: (data) ->
-      console.log 'data: ', data
-
       @$vis_elem.empty()
 
       PADDING = 20
       VIS_WIDTH = $(@el).width()
       VIS_HEIGHT = $(@el).height()
-
-
 
       mainContainer = d3.select(@$vis_elem.get(0))
         .append('svg')
@@ -37,21 +32,30 @@ glados.useNameSpace 'glados.views.MainPage',
           .attr('height', VIS_HEIGHT)
 
       sizes = []
-      names = []
       bubbleData =
         'name': 'entities'
         'children': []
 
-#     Get data in correct format
+#     Get an array with the sizes
       for key, value of data
+        sizes.push value
 
+      min = d3.min(sizes)
+      max = d3.max(sizes)
+
+#     Scale the sizes
+      sizeScale = d3.scale.sqrt()
+        .range([0, 100])
+        .domain([min, max])
+
+      for key, value of data
         dataItem = {}
         dataItem.key = key
-        dataItem.value = value
+        dataItem.value = sizeScale(value)
 
-        names.push key
-        sizes.push value
         bubbleData.children.push(dataItem)
+
+      console.log 'bubbleData: ', bubbleData
 
 
 #     pack layout
@@ -60,10 +64,8 @@ glados.useNameSpace 'glados.views.MainPage',
        .size([VIS_WIDTH - PADDING , VIS_HEIGHT - PADDING ])
        .padding(PADDING)
 
-
       nodes = pack.nodes(bubbleData)
-
-      console.log '--Nodes:', nodes
+      children = nodes[0].children
 
 #     draw circles
       node = mainContainer.selectAll('circle')
