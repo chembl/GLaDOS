@@ -149,7 +149,6 @@ class MainPageApp
     new glados.views.MainPage.BrowseEntitiesAsCirclesView
       el: $('#BrowseEntitiesAsCircles')
 
-
   @initDatabaseSummary = ->
     databaseInfo = new glados.models.MainPage.DatabaseSummaryInfo()
     new glados.views.MainPage.DatabaseSummaryView

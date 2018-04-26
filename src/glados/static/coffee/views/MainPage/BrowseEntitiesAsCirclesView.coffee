@@ -28,7 +28,6 @@ glados.useNameSpace 'glados.views.MainPage',
         thisView.renderCircles(response)
 
     renderCircles: (data) ->
-      console.log 'data: ', data
       thisView = @
       thisView.$vis_elem.empty()
 
@@ -36,9 +35,9 @@ glados.useNameSpace 'glados.views.MainPage',
       VIS_HEIGHT = $(@el).height()
       PADDING = VIS_WIDTH * 0.05
 
-      mainContainer = d3.select(@$vis_elem.get(0))
+      mainEntitiesContainer = d3.select(@$vis_elem.get(0))
         .append('svg')
-        .attr('class', 'mainSVGCirclesContainer')
+        .attr('class', 'mainEntitiesContainer')
         .attr('width', VIS_WIDTH)
         .attr('height', VIS_HEIGHT)
 
@@ -92,7 +91,7 @@ glados.useNameSpace 'glados.views.MainPage',
       nodes = pack.nodes(bubbleData)
 
 #     draw circles
-      circles = mainContainer.selectAll('circle')
+      circles = mainEntitiesContainer .selectAll('.node')
         .data(nodes)
         .enter()
         .append('circle')
@@ -102,7 +101,7 @@ glados.useNameSpace 'glados.views.MainPage',
           .attr('r', (d) -> d.r)
           .attr('fill', (d) -> colour(d.value))
 
-      counts = mainContainer.selectAll('.count')
+      counts = mainEntitiesContainer .selectAll('.count')
         .data(nodes)
         .enter()
         .append('text')
@@ -112,7 +111,7 @@ glados.useNameSpace 'glados.views.MainPage',
           .attr('x', (d) -> d.x + PADDING / 2)
           .attr('y', (d) -> d.y + PADDING / 2)
 
-      labels = mainContainer.selectAll('.label')
+      labels = mainEntitiesContainer .selectAll('.label')
         .data(nodes)
         .enter()
         .append('text')
@@ -122,7 +121,7 @@ glados.useNameSpace 'glados.views.MainPage',
           .attr('x', (d) -> d.x + PADDING / 2)
           .attr('y', (d) -> d.y + PADDING / 2 + d.r / 3)
 
-      circlesForHover = mainContainer.selectAll('.invisible')
+      circlesForHover = mainEntitiesContainer.selectAll('.invisible')
         .data(nodes)
         .enter()
         .append('circle')
