@@ -127,8 +127,8 @@ class MainPageApp
     $carouselContainer.slick {
       asNavFor: $linksCarousel
       arrows: true
-      autoplay: false
-      autoplaySpeed: 3000
+      autoplay: true
+      autoplaySpeed: 4000
       dots: true
     }
 

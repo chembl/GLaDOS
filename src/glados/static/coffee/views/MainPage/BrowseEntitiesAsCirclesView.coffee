@@ -17,19 +17,27 @@ glados.useNameSpace 'glados.views.MainPage',
 
     render: () ->
       thisView = @
+
+
       infoURL = "#{glados.Settings.GLADOS_BASE_PATH_REL}entities_records"
 
+      console.log 'going to get data'
       fetchDatabasePromise = $.getJSON(infoURL)
 
       fetchDatabasePromise.fail ->
         console.log 'Fetching entities info from web services failed :('
 
       fetchDatabasePromise.done (response) ->
+        console.log 'got data!'
         thisView.renderCircles(response)
 
     renderCircles: (data) ->
+      $(@el).find('.card-preolader-to-hide').hide()
+      $(@el).find('.card-content').show()
+
       thisView = @
       thisView.$vis_elem.empty()
+
 
       VIS_WIDTH = $(@el).width()
       VIS_HEIGHT = $(@el).height()
@@ -70,15 +78,15 @@ glados.useNameSpace 'glados.views.MainPage',
         bubbleData.children.push(dataItem)
 
       colour = d3.scale.ordinal()
-        .domain(sizes)
+        .domain(names)
         .range([
-          '#FE7F9D',
-          '#0d595f',
-          '#8E122F',
           '#75D8D5',
           '#084044',
-          '#09979B',
+          '#0d595f',
           '#D33C60',
+          '#FE7F9D',
+          '#09979B',
+          '#8E122F',
         ])
 
 #     pack layout
@@ -135,7 +143,7 @@ glados.useNameSpace 'glados.views.MainPage',
           .on('click', (d) -> glados.Utils.URLS.shortenLinkIfTooLongAndOpen d.link )
           .on("mouseover", (d, i) ->
 
-            ADD = PADDING/2 - 2
+            ADD = PADDING/2 - 5
 
             d3.select('.nod' + i).transition()
               .ease("cubic-out")
@@ -216,6 +224,10 @@ glados.useNameSpace 'glados.views.MainPage',
 
       else if number >= 1.0e+6
         formatted = number.toPrecision(2) / 1.0e+6 + "M"
+
+      else if number >= 1.0e+4
+        numberFloor = Math.floor(number/1000)*1000
+        formatted = numberFloor.toPrecision(2) / 1.0e+3 + "K"
 
       else if number >= 1.0e+3
         formatted = number.toPrecision(2) / 1.0e+3 + "K"
