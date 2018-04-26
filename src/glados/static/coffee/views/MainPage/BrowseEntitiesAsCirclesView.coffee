@@ -4,6 +4,15 @@ glados.useNameSpace 'glados.views.MainPage',
     initialize: ->
       @$vis_elem = $(@el).find('.BCK-circles-Container')
       @setUpResponsiveRender()
+      @links =
+        Documents: Document.getDocumentsListURL()
+        Drugs: Drug.getDrugsListURL()
+        Tissues: glados.models.Tissue.getTissuesListURL()
+        Cells: CellLine.getCellsListURL()
+        Assays: Assay.getAssaysListURL()
+        Compounds: Compound.getCompoundsListURL()
+        Targets: Target.getTargetsListURL()
+
       @render()
 
     render: () ->
@@ -19,6 +28,7 @@ glados.useNameSpace 'glados.views.MainPage',
         thisView.renderCircles(response)
 
     renderCircles: (data) ->
+      console.log 'data: ', data
       thisView = @
       thisView.$vis_elem.empty()
 
@@ -56,6 +66,7 @@ glados.useNameSpace 'glados.views.MainPage',
         dataItem.name = key
         dataItem.value = sizeScale(value)
         dataItem.count = value
+        dataItem.link = thisView.links[key]
 
         bubbleData.children.push(dataItem)
 
@@ -100,7 +111,6 @@ glados.useNameSpace 'glados.views.MainPage',
           .attr('class', (d, i) -> 'count' + i)
           .attr('x', (d) -> d.x + PADDING / 2)
           .attr('y', (d) -> d.y + PADDING / 2)
-          .attr('fill', 'white')
 
       labels = mainContainer.selectAll('.label')
         .data(nodes)
@@ -111,7 +121,6 @@ glados.useNameSpace 'glados.views.MainPage',
           .attr('class', (d, i) -> 'label' + i)
           .attr('x', (d) -> d.x + PADDING / 2)
           .attr('y', (d) -> d.y + PADDING / 2 + d.r / 3)
-          .attr('fill', 'white')
 
       circlesForHover = mainContainer.selectAll('.invisible')
         .data(nodes)
@@ -124,11 +133,18 @@ glados.useNameSpace 'glados.views.MainPage',
           .attr('r', (d) -> d.r)
           .attr('fill', 'black')
           .attr('opacity', 0)
+          .on('click', (d) -> glados.Utils.URLS.shortenLinkIfTooLongAndOpen d.link )
           .on("mouseover", (d, i) ->
 
             ADD = PADDING/2 - 2
 
             d3.select('.node' + i).transition()
+              .ease("cubic-out")
+              .delay("10")
+              .duration("200")
+              .attr("r", d.r + ADD)
+
+            d3.select('.hover' + i).transition()
               .ease("cubic-out")
               .delay("10")
               .duration("200")
@@ -152,20 +168,26 @@ glados.useNameSpace 'glados.views.MainPage',
 
             d3.select('.node' + i).transition()
               .ease("quad")
-              .delay("400")
-              .duration("300")
+              .delay("300")
+              .duration("200")
+              .attr("r", d.r )
+
+            d3.select('.hover' + i).transition()
+              .ease("quad")
+              .delay("300")
+              .duration("200")
               .attr("r", d.r )
 
             d3.select('.count' + i).transition()
               .ease("quad")
-              .delay("400")
-              .duration("300")
+              .delay("300")
+              .duration("200")
               .attr('font-size', d.r/ 2 )
 
             d3.select('.label' + i).transition()
               .ease("quad")
-              .delay("400")
-              .duration("300")
+              .delay("300")
+              .duration("200")
               .attr('font-size', d.r/ 3)
               .attr('y', d.y + PADDING / 2 + d.r / 3)
           )
@@ -186,9 +208,6 @@ glados.useNameSpace 'glados.views.MainPage',
       firstHover = d3.select('.hover0')
         .style('fill', 'none')
         .style('stroke', 'none')
-
-
-
 
     formatNumber: (number) ->
       formatted = number

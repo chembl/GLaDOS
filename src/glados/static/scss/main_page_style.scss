@@ -493,9 +493,13 @@ $full-header-height-large: 180px;
 
 .circles-vis-container{
   //border: orange solid 1px;
+  circle {
+    cursor: pointer;
+  }
   text {
     font-family: $chembl-helvetica;
     text-anchor: middle;
+    fill: white;
   }
 
 }
