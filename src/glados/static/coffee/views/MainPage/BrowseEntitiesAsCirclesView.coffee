@@ -62,13 +62,13 @@ glados.useNameSpace 'glados.views.MainPage',
       colour = d3.scale.ordinal()
         .domain(sizes)
         .range([
-          '#D33C60',
+          '#FE7F9D',
           '#084044',
           '#8E122F',
           '#75D8D5',
           '#0d595f',
           '#09979B',
-          '#FE7F9D',
+          '#D33C60',
         ])
 
 #     pack layout
@@ -98,6 +98,7 @@ glados.useNameSpace 'glados.views.MainPage',
         .enter()
         .append('text')
         .text((d) -> thisView.formatNumber(d.count))
+        .attr('font-size', (d) -> d.r / 2)
         .attr('class', 'count')
         .attr('x', (d) -> d.x + PADDING / 2)
         .attr('y', (d) -> d.y + PADDING / 2)
@@ -107,10 +108,11 @@ glados.useNameSpace 'glados.views.MainPage',
         .data(nodes)
         .enter()
         .append('text')
+        .attr('font-size', (d) -> d.r / 3)
         .text((d) -> d.name)
         .attr('class', 'label')
         .attr('x', (d) -> d.x + PADDING / 2)
-        .attr('y', (d) -> d.y + PADDING / 2 + 15)
+        .attr('y', (d) -> d.y + PADDING / 2 + d.r / 3)
         .attr('fill', 'white')
 
 

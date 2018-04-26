@@ -259,13 +259,13 @@ def get_entities_records(request):
     tissues_r = requests.get('https://www.ebi.ac.uk/chembl/api/data/tissue.json').json()
 
     response = {
-        'compounds': status_r['disinct_compounds'],
-        'drugs': drug_r['page_meta']['total_count'],
-        'assays': assays_r['page_meta']['total_count'],
-        'documents': status_r['publications'],
-        'targets': status_r['targets'],
-        'cells': cells_r['page_meta']['total_count'],
-        'tissues': tissues_r['page_meta']['total_count']
+        'Compounds': status_r['disinct_compounds'],
+        'Drugs': drug_r['page_meta']['total_count'],
+        'Assays': assays_r['page_meta']['total_count'],
+        'Documents': status_r['publications'],
+        'Targets': status_r['targets'],
+        'Cells': cells_r['page_meta']['total_count'],
+        'Tissues': tissues_r['page_meta']['total_count']
     }
 
     cache.set(cache_key, response, cache_time)
