@@ -80,41 +80,41 @@ glados.useNameSpace 'glados.views.MainPage',
 
       nodes = pack.nodes(bubbleData)
 
-      console.log 'nodes', nodes
-
 #     draw circles
       circles = mainContainer.selectAll('circle')
         .data(nodes)
         .enter()
         .append('circle')
-        .attr('class', 'node')
-        .attr('cx', (d) -> d.x + PADDING / 2)
-        .attr('cy', (d) -> d.y + PADDING / 2)
-        .attr('r', (d) -> d.r)
-        .attr('fill', (d) -> colour(d.value))
+          .attr('class', 'node')
+          .attr('cx', (d) -> d.x + PADDING / 2)
+          .attr('cy', (d) -> d.y + PADDING / 2)
+          .attr('r', (d) -> d.r)
+          .attr('fill', (d) -> colour(d.value))
+        .on("mouseover", (d) ->  thisView.mouseOnAction(d))
+        .on("mouseout", (d) ->  thisView.mouseOutAction(d))
 
       counts = mainContainer.selectAll('.count')
         .data(nodes)
         .enter()
         .append('text')
-        .text((d) -> thisView.formatNumber(d.count))
-        .attr('font-size', (d) -> d.r / 2)
-        .attr('class', 'count')
-        .attr('x', (d) -> d.x + PADDING / 2)
-        .attr('y', (d) -> d.y + PADDING / 2)
-        .attr('fill', 'white')
+          .text((d) -> thisView.formatNumber(d.count))
+          .attr('font-size', (d) -> d.r / 2)
+          .attr('class', 'count')
+          .attr('x', (d) -> d.x + PADDING / 2)
+          .attr('y', (d) -> d.y + PADDING / 2)
+          .attr('fill', 'white')
+        
 
       labels = mainContainer.selectAll('.label')
         .data(nodes)
         .enter()
         .append('text')
-        .attr('font-size', (d) -> d.r / 3)
-        .text((d) -> d.name)
-        .attr('class', 'label')
-        .attr('x', (d) -> d.x + PADDING / 2)
-        .attr('y', (d) -> d.y + PADDING / 2 + d.r / 3)
-        .attr('fill', 'white')
-
+          .attr('font-size', (d) -> d.r / 3)
+          .text((d) -> d.name)
+          .attr('class', 'label')
+          .attr('x', (d) -> d.x + PADDING / 2)
+          .attr('y', (d) -> d.y + PADDING / 2 + d.r / 3)
+          .attr('fill', 'white')
 
 #     make first node transparent
       firstNode = d3.select('.node')
@@ -128,6 +128,22 @@ glados.useNameSpace 'glados.views.MainPage',
       firstlabel = d3.select('.label')
         .style('fill', 'none')
         .style('stroke', 'none')
+
+#      handling mouse in and mouse out
+      thisView.mouseOnAction: (d) ->
+        d3.select(@).transition()
+          .ease("cubic-out")
+          .delay("10")
+          .duration("200")
+          .attr("r", d.r + PADDING/2)
+
+      thisView.mouseOutAction: (d) ->
+        d3.select(@).transition()
+          .ease("quad")
+          .delay("300")
+          .duration("200")
+          .attr("r", d.r )
+
 
     formatNumber: (number) ->
       formatted = number
