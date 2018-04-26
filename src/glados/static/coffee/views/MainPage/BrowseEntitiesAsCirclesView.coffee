@@ -47,13 +47,14 @@ glados.useNameSpace 'glados.views.MainPage',
 
 #     Scale the sizes
       sizeScale = d3.scale.sqrt()
-        .range([2, 200])
+        .range([4, 200])
         .domain([min, max])
 
       for key, value of data
         dataItem = {}
-        dataItem.key = key
+        dataItem.name = key
         dataItem.value = sizeScale(value)
+        dataItem.count = value
 
         bubbleData.children.push(dataItem)
 
@@ -62,9 +63,9 @@ glados.useNameSpace 'glados.views.MainPage',
        .range([
           '#D33C60',
           '#084044',
-          '#0d595f',
-          '#75D8D5',
           '#8E122F',
+          '#75D8D5',
+          '#0d595f',
           '#09979B',
           '#FE7F9D',
       ])
@@ -78,7 +79,7 @@ glados.useNameSpace 'glados.views.MainPage',
 
       nodes = pack.nodes(bubbleData)
 
-      console.log 'nodes'
+      console.log 'nodes', nodes
 
 #     draw circles
       circles = mainContainer.selectAll('circle')
@@ -91,11 +92,45 @@ glados.useNameSpace 'glados.views.MainPage',
           .attr('r', (d) -> d.r )
           .attr('fill', (d) -> colour(d.value))
 
+      counts = mainContainer.selectAll('.count')
+        .data(nodes)
+        .enter()
+        .append('text')
+          .text((d) -> d.count)
+          .attr('class', 'count')
+          .attr('x', (d) -> d.x + PADDING/2)
+          .attr('y', (d) -> d.y + PADDING/2 )
+          .attr('fill', 'white')
+
+      labels = mainContainer.selectAll('.label')
+        .data(nodes)
+        .enter()
+        .append('text')
+          .text((d) -> d.name)
+          .attr('class', 'label')
+          .attr('x', (d) -> d.x + PADDING/2)
+          .attr('y', (d) -> d.y + PADDING/2 + 15)
+          .attr('fill', 'white')
+
 
 #     make first node transparent
       firstNode = d3.select('.node')
       .style('fill', 'none')
       .style('stroke', 'none')
+
+#     make first text transparent
+      firstcount = d3.select('.count')
+        .style('fill', 'none')
+        .style('stroke', 'none')
+
+#     make first text transparent
+      firstcount = d3.select('.label')
+        .style('fill', 'none')
+        .style('stroke', 'none')
+
+
+
+    formatNumbers: (number) ->
 
 
 

@@ -486,6 +486,20 @@ $full-header-height-large: 180px;
   }
 }
 
+/**
+* Browse entities
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+
+.circles-vis-container{
+  //border: orange solid 1px;
+  text {
+    font-family: $helvetica;
+    text-anchor: middle;
+  }
+}
+
+
 /* ------------------- MEDIA QUERIES ------------------- */
 
 /* -------- MEDIUM SCREEN -------- */
