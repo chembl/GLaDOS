@@ -13,6 +13,7 @@ from apiclient.discovery import build
 from googleapiclient import *
 import re
 from elasticsearch_dsl import Search
+import requests
 
 
 
@@ -236,6 +237,41 @@ def get_database_summary(request):
     cache.set(cache_key, response, cache_time)
 
     return JsonResponse(response)
+
+def get_entities_records(request):
+
+    cache_key = 'entities_records'
+    cache_time = 604800
+
+    # tries to get number from cache
+    cache_response = cache.get(cache_key)
+
+    if cache_response != None:
+        print('datasets are in cache')
+        return JsonResponse(cache_response)
+
+    print('datasets are not in cache')
+
+    status_r = requests.get('https://www.ebi.ac.uk/chembl/api/data/status.json').json()
+    drug_r = requests.get('https://www.ebi.ac.uk/chembl/api/data/drug.json').json()
+    assays_r = requests.get('https://www.ebi.ac.uk/chembl/api/data/assay.json').json()
+    cells_r = requests.get('https://www.ebi.ac.uk/chembl/api/data/cell_line.json').json()
+    tissues_r = requests.get('https://www.ebi.ac.uk/chembl/api/data/tissue.json').json()
+
+    response = {
+        'Compounds': status_r['disinct_compounds'],
+        'Drugs': drug_r['page_meta']['total_count'],
+        'Assays': assays_r['page_meta']['total_count'],
+        'Documents': status_r['publications'],
+        'Targets': status_r['targets'],
+        'Cells': cells_r['page_meta']['total_count'],
+        'Tissues': tissues_r['page_meta']['total_count']
+    }
+
+    cache.set(cache_key, response, cache_time)
+
+    return JsonResponse(response)
+
 
 def replace_urls_from_entinies(html, urls):
     """

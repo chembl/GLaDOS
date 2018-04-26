@@ -102,8 +102,11 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
         nodeElem = d3.select($(thisView.el)[0]).select("#circleFor-#{d.id}" for n in nodes)
         nodeElem.classed('force-hover', true)
 
-    circles = svg.selectAll('circle')
-      .data(nodes).enter().append('circle')
+    circles = svg.selectAll('.circle')
+      .data(nodes)
+      .enter()
+      .append('circle')
+      .attr('class', 'circle')
       .attr("class", (d) ->
         if d.parent then (if d.children then 'node' else 'node node--leaf') else 'node node--root')
       .attr("id", (d) ->
@@ -113,9 +116,10 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
       .on("click", handleClickOnNode)
       .on('mouseover', handleNodeMouseOver)
 
-    text = svg.selectAll('text')
+    text = svg.selectAll('.label')
       .data(nodes)
-      .enter().append('text')
+      .enter()
+      .append('text')
       .attr("class", "label")
       .attr('text-anchor', 'middle')
       .style("fill-opacity", (d) ->
@@ -159,7 +163,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     thisView = @
     nodes_dict = @model.get('all_nodes_dict')
 
-    $(@el).find('circle').each ->
+    $(@el).find('.circle').each ->
 
       circle = $(@)
       nodeModelID = circle.attr('id').replace('circleFor-', '')
@@ -183,7 +187,9 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     @currentViewFrame = newViewFrame
 
-    svg = d3.select("svg")
+    $svg = $(@el).find('svg')
+    svg = d3.select($svg[0])
+
     circles = svg.selectAll("circle,text")
 
     k = @diameter / newViewFrame[2];

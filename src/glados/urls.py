@@ -39,6 +39,8 @@ urlpatterns += [
 
   url(r'^database_summary/$', views.get_database_summary, name='database_summary'),
 
+  url(r'^entities_records/$', views.get_entities_records, name='entities_records'),
+
   url(r'^blog_entries/(?P<pageToken>.+)?$', views.get_latest_blog_entries, name='blog_entries'),
 
   url(r'^marvin_search_fullscreen/$',

@@ -1,6 +1,12 @@
 <div class="carousel-wrapper">
 
     <div class="carousel-item">
+        {% with is_dynamic=False %}
+            {% include "glados/MainPageParts/Visualizations/browse_entities.html" %}
+        {% endwith %}
+    </div>
+
+    <div class="carousel-item">
         {% with is_dynamic=True %}
             {% include "glados/MainPageParts/TargetBrowserParts/browse_as_circles.html" %}
         {% endwith %}
@@ -12,7 +18,6 @@
         </div>
 
     </div>
-
     <div class="carousel-item">
         {% with is_dynamic=True %}
             {% include "glados/MainPageParts/Visualizations/MaxPhaseForDiseaseDonut.html" %}

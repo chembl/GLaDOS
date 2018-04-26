@@ -1,41 +1,183 @@
 # Class in charge of rendering the index page of the ChEMBL web ui
 class MainPageApp
 
-  # --------------------------------------------------------------------------------------------------------------------
-  # Initialization
-  # --------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# Initialization
+# ----------------------------------------------------------------------------------------------------------------------
 
   @init = ->
     glados.apps.Main.MainGladosApp.hideMainSplashScreen()
-    MainPageApp.initCentralCarousel()
 
-    #   Init database summary
+    MainPageApp.initCentralCarousel()
+    MainPageApp.initDatabaseSummary()
+    MainPageApp.initAssociatedResources()
+    MainPageApp.initTweets()
+    MainPageApp.initBlogEntries()
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Init functions
+# ----------------------------------------------------------------------------------------------------------------------
+
+  @initMaxPhaseForDisease = ->
+    maxPhaseForDisease = MainPageApp.getMaxPhaseForDiseaseAgg()
+    maxPhaseProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'MAX_PHASE', true)
+    diseaseClassProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'DISEASE')
+
+    pieConfig =
+      side_legend: true
+      x_axis_prop_name: 'maxPhaseForDisease'
+      split_series_prop_name: 'split_series_agg'
+      title: 'Max Phase for Disease'
+      max_categories: 5
+      stacked_donut: true
+      stacked_levels: 2
+      hide_title: true
+      properties:
+        max_phase: maxPhaseProp
+        disease_class: diseaseClassProp
+      initial_property_x: 'max_phase'
+      initial_property_z: 'disease_class'
+      title_link_url: Drug.getDrugsListURL()
+
+    config =
+      pie_config: pieConfig
+      is_outside_an_entity_report_card: true
+      embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#max_phase_for_disease"
+      link_to_all:
+        link_text: 'See all drug Compounds in ChEMBL'
+        url: Drug.getDrugsListURL()
+
+    new glados.views.ReportCards.PieInCardView
+      el: $('#MaxPhaseForDisease')
+      model: maxPhaseForDisease
+      config: config
+      report_card_app: @
+
+    maxPhaseForDisease.fetch()
+
+  @initPapersPerYear = ->
+    allDocumentsByYear = MainPageApp.getDocumentsPerYearAgg()
+    yearProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('DocumentAggregation',
+      'YEAR')
+    journalNameProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('DocumentAggregation',
+      'JOURNAL_NAME')
+    barsColourScale = journalNameProp.colourScale
+
+    histogramConfig =
+      bars_colour_scale: barsColourScale
+      stacked_histogram: true
+      rotate_x_axis_if_needed: false
+      hide_x_axis_title: true
+      legend_vertical: true
+      big_size: true
+      paint_axes_selectors: true
+      properties:
+        year: yearProp
+        journal: journalNameProp
+      initial_property_x: 'year'
+      initial_property_z: 'journal'
+      x_axis_options: ['count']
+      x_axis_min_columns: 1
+      x_axis_max_columns: 40
+      x_axis_initial_num_columns: 40
+      x_axis_prop_name: 'documentsPerYear'
+      title: 'Documents by Year'
+      title_link_url: Document.getDocumentsListURL()
+      max_z_categories: 7
+      title_link_url: Document.getDocumentsListURL()
+
+    config =
+      histogram_config: histogramConfig
+      is_outside_an_entity_report_card: true
+      embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#documents_by_year_histogram"
+
+    new glados.views.ReportCards.HistogramInCardView
+      el: $('#PapersPerYearHistogram')
+      model: allDocumentsByYear
+      config: config
+      report_card_app: @
+
+    allDocumentsByYear.fetch()
+
+  @initTargetsVisualisation = ->
+    targetHierarchy = TargetBrowserApp.initTargetHierarchyTree()
+
+    config =
+      is_outside_an_entity_report_card: true
+      embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#targets_by_protein_class"
+      view_class: BrowseTargetAsCirclesView
+
+    targetsHierarchyAgg = MainPageApp.getTargetsTreeAgg()
+    targetsHierarchyAgg.fetch()
+    TargetBrowserApp.initBrowserAsCircles(targetHierarchy, $('#BCK-TargetBrowserAsCircles'))
+    targetHierarchy.fetch()
+
+    new glados.views.ReportCards.VisualisationInCardView
+      el: $('#BCK-TargetBrowserAsCircles')
+      model: targetHierarchy
+      config: config
+      report_card_app: @
+
+    targetHierarchy.fetch()
+
+  @initCentralCarousel = ->
+    $carouselContainer = $('.carousel-wrapper')
+    $linksCarousel = $('.links-carousel')
+
+    $carouselContainer.slick {
+      asNavFor: $linksCarousel
+      arrows: true
+      autoplay: false
+      autoplaySpeed: 3000
+      dots: true
+    }
+
+    $linksCarousel.slick {
+      useCSS: false
+      fade: true
+      arrows: false
+      dots: false
+    }
+
+    MainPageApp.initPapersPerYear()
+    MainPageApp.initMaxPhaseForDisease()
+    MainPageApp.initTargetsVisualisation()
+    MainPageApp.initBrowseEntities()
+
+  @initBrowseEntities = ->
+    new glados.views.MainPage.BrowseEntitiesAsCirclesView
+      el: $('#BrowseEntitiesAsCircles')
+
+  @initDatabaseSummary = ->
     databaseInfo = new glados.models.MainPage.DatabaseSummaryInfo()
     new glados.views.MainPage.DatabaseSummaryView
       model: databaseInfo
       el: $('.BCK-Database-summary-info')
     databaseInfo.fetch()
 
-    #   Init Associated resources
-    associatedResources = new glados.views.MainPage.AssociatedResourcesView
+  @initAssociatedResources = ->
+    new glados.views.MainPage.AssociatedResourcesView
       el: $('.BCK-Associated-resources')
 
-
-    #   Init tweet box
+  @initTweets = ->
     tweetsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewTweetsList()
     tweetsList.initURL()
     $tweetsElem = $('.BCK-Tweets-container')
     glados.views.PaginatedViews.PaginatedViewFactory.getNewInfinitePaginatedView(tweetsList, $tweetsElem, 'do-repaint')
     tweetsList.fetch()
 
-    #   Init Blog entries
+  @initBlogEntries = ->
     blogEntriesList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewBlogEntriesList()
     blogEntriesList.initURL()
     $blogEntriesElem = $('.BCK-Blog-Entries-container')
     glados.views.PaginatedViews.PaginatedViewFactory.getNewInfinitePaginatedView(blogEntriesList, $blogEntriesElem, 'do-repaint')
     blogEntriesList.fetch()
 
-  # ---------------- Aggregation -------------- #
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Aggregations
+# ----------------------------------------------------------------------------------------------------------------------
+
   @getDocumentsPerYearAgg = (defaultInterval = 1) ->
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
@@ -115,43 +257,6 @@ class MainPageApp
 
     return MaxPhaseForDisease
 
-  @initMaxPhaseForDisease = ->
-    maxPhaseForDisease = MainPageApp.getMaxPhaseForDiseaseAgg()
-    maxPhaseProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'MAX_PHASE', true)
-    diseaseClassProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'DISEASE')
-
-    pieConfig =
-      side_legend: true
-      x_axis_prop_name: 'maxPhaseForDisease'
-      split_series_prop_name: 'split_series_agg'
-      title: 'Max Phase for Disease'
-      max_categories: 5
-      stacked_donut: true
-      stacked_levels: 2
-      hide_title: true
-      properties:
-        max_phase: maxPhaseProp
-        disease_class: diseaseClassProp
-      initial_property_x: 'max_phase'
-      initial_property_z: 'disease_class'
-      title_link_url: Drug.getDrugsListURL()
-
-    config =
-      pie_config: pieConfig
-      is_outside_an_entity_report_card: true
-      embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#max_phase_for_disease"
-      link_to_all:
-        link_text: 'See all drug Compounds in ChEMBL'
-        url: Drug.getDrugsListURL()
-
-    new glados.views.ReportCards.PieInCardView
-      el: $('#MaxPhaseForDisease')
-      model: maxPhaseForDisease
-      config: config
-      report_card_app: @
-
-    maxPhaseForDisease.fetch()
-
   @getTargetsTreeAgg = ->
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
@@ -227,100 +332,3 @@ class MainPageApp
       aggs_config: aggsConfig
 
     return targetsTreeAgg
-
-
-  @initPapersPerYear = ->
-    allDocumentsByYear = MainPageApp.getDocumentsPerYearAgg()
-    yearProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('DocumentAggregation',
-      'YEAR')
-    journalNameProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('DocumentAggregation',
-      'JOURNAL_NAME')
-    barsColourScale = journalNameProp.colourScale
-
-    histogramConfig =
-      bars_colour_scale: barsColourScale
-      stacked_histogram: true
-      rotate_x_axis_if_needed: false
-      hide_x_axis_title: true
-      legend_vertical: true
-      big_size: true
-      paint_axes_selectors: true
-      properties:
-        year: yearProp
-        journal: journalNameProp
-      initial_property_x: 'year'
-      initial_property_z: 'journal'
-      x_axis_options: ['count']
-      x_axis_min_columns: 1
-      x_axis_max_columns: 40
-      x_axis_initial_num_columns: 40
-      x_axis_prop_name: 'documentsPerYear'
-      title: 'Documents by Year'
-      title_link_url: Document.getDocumentsListURL()
-      max_z_categories: 7
-      title_link_url: Document.getDocumentsListURL()
-
-    config =
-      histogram_config: histogramConfig
-      is_outside_an_entity_report_card: true
-      embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#documents_by_year_histogram"
-
-    new glados.views.ReportCards.HistogramInCardView
-      el: $('#PapersPerYearHistogram')
-      model: allDocumentsByYear
-      config: config
-      report_card_app: @
-
-    allDocumentsByYear.fetch()
-
-  @initTargetsVisualisation = ->
-    targetHierarchy = TargetBrowserApp.initTargetHierarchyTree()
-
-    config =
-      is_outside_an_entity_report_card: true
-      embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#targets_by_protein_class"
-      view_class: BrowseTargetAsCirclesView
-
-    targetsHierarchyAgg = MainPageApp.getTargetsTreeAgg()
-    targetsHierarchyAgg.fetch()
-    targetBrowserView = TargetBrowserApp.initBrowserAsCircles(targetHierarchy, $('#BCK-TargetBrowserAsCircles'))
-    targetHierarchy.fetch()
-
-    new glados.views.ReportCards.VisualisationInCardView
-      el: $('#BCK-TargetBrowserAsCircles')
-      model: targetHierarchy
-      config: config
-      report_card_app: @
-
-    targetHierarchy.fetch()
-
-  @initCentralCarousel = ->
-    $carouselContainer = $('.carousel-wrapper')
-    $linksCarousel = $('.links-carousel')
-
-    $carouselContainer.slick {
-      asNavFor: $linksCarousel
-      arrows: true
-      autoplay: true
-      autoplaySpeed: 3000
-      dots: true
-    }
-
-
-    $linksCarousel.slick {
-      useCSS: false
-      fade: true
-      arrows: false
-      dots: false
-    }
-
-    MainPageApp.initPapersPerYear()
-    MainPageApp.initMaxPhaseForDisease()
-    MainPageApp.initTargetsVisualisation()
-
-
-
-
-
-
-
