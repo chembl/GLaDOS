@@ -21,14 +21,12 @@ glados.useNameSpace 'glados.views.MainPage',
 
       infoURL = "#{glados.Settings.GLADOS_BASE_PATH_REL}entities_records"
 
-      console.log 'going to get data'
       fetchDatabasePromise = $.getJSON(infoURL)
 
       fetchDatabasePromise.fail ->
         console.log 'Fetching entities info from web services failed :('
 
       fetchDatabasePromise.done (response) ->
-        console.log 'got data!'
         thisView.renderCircles(response)
 
     renderCircles: (data) ->
@@ -49,6 +47,16 @@ glados.useNameSpace 'glados.views.MainPage',
         .attr('width', VIS_WIDTH)
         .attr('height', VIS_HEIGHT)
 
+      colours = [
+        '#084044',
+        '#0d595f',
+        '#D33C60',
+        '#FE7F9D',
+        '#09979B',
+        '#8E122F',
+        '#75D8D5',
+      ]
+
       sizes = []
       names = []
       bubbleData =
@@ -68,26 +76,17 @@ glados.useNameSpace 'glados.views.MainPage',
         .range([4, 200])
         .domain([min, max])
 
+      i = 0
       for key, value of data
         dataItem = {}
         dataItem.name = key
         dataItem.value = sizeScale(value)
         dataItem.count = value
         dataItem.link = thisView.links[key]
+        dataItem.colour = colours[i]
+        i++
 
         bubbleData.children.push(dataItem)
-
-      colour = d3.scale.ordinal()
-        .domain(names)
-        .range([
-          '#75D8D5',
-          '#084044',
-          '#0d595f',
-          '#D33C60',
-          '#FE7F9D',
-          '#09979B',
-          '#8E122F',
-        ])
 
 #     pack layout
       diameter = Math.min(VIS_HEIGHT, VIS_WIDTH)
@@ -107,7 +106,7 @@ glados.useNameSpace 'glados.views.MainPage',
           .attr('cx', (d) -> d.x + PADDING / 2)
           .attr('cy', (d) -> d.y + PADDING / 2)
           .attr('r', (d) -> d.r)
-          .attr('fill', (d) -> colour(d.value))
+          .attr('fill', (d) -> d.colour )
 
       counts = mainEntitiesContainer .selectAll('.count')
         .data(bubbleNodes)
