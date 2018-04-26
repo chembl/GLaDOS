@@ -132,7 +132,6 @@ class MainPageApp
       dots: true
     }
 
-
     $linksCarousel.slick {
       useCSS: false
       fade: true
@@ -142,7 +141,7 @@ class MainPageApp
 
     MainPageApp.initPapersPerYear()
     MainPageApp.initMaxPhaseForDisease()
-#    MainPageApp.initTargetsVisualisation()
+    MainPageApp.initTargetsVisualisation()
     MainPageApp.initBrowseEntities()
 
   @initBrowseEntities = ->

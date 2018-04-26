@@ -35,7 +35,7 @@ glados.useNameSpace 'glados.views.MainPage',
       VIS_HEIGHT = $(@el).height()
       PADDING = VIS_WIDTH * 0.05
 
-      mainEntitiesContainer = d3.select(@$vis_elem.get(0))
+      mainEntitiesContainer = d3.select @$vis_elem[0]
         .append('svg')
         .attr('class', 'mainEntitiesContainer')
         .attr('width', VIS_WIDTH)
@@ -83,26 +83,26 @@ glados.useNameSpace 'glados.views.MainPage',
 
 #     pack layout
       diameter = Math.min(VIS_HEIGHT, VIS_WIDTH)
-      pack = d3.layout.pack()
+      bubble = d3.layout.pack()
         .size([VIS_WIDTH, VIS_HEIGHT])
         .padding(PADDING)
         .sort((a, b) -> (a.value - b.value * 0.4))
 
-      nodes = pack.nodes(bubbleData)
+      bubbleNodes = bubble.nodes(bubbleData)
 
 #     draw circles
-      circles = mainEntitiesContainer .selectAll('.node')
-        .data(nodes)
+      circles = mainEntitiesContainer .selectAll('.nod')
+        .data(bubbleNodes)
         .enter()
         .append('circle')
-          .attr('class', (d, i) -> 'node' + i )
+          .attr('class', (d, i) -> 'nod' + i )
           .attr('cx', (d) -> d.x + PADDING / 2)
           .attr('cy', (d) -> d.y + PADDING / 2)
           .attr('r', (d) -> d.r)
           .attr('fill', (d) -> colour(d.value))
 
       counts = mainEntitiesContainer .selectAll('.count')
-        .data(nodes)
+        .data(bubbleNodes)
         .enter()
         .append('text')
           .text((d) -> thisView.formatNumber(d.count))
@@ -111,18 +111,18 @@ glados.useNameSpace 'glados.views.MainPage',
           .attr('x', (d) -> d.x + PADDING / 2)
           .attr('y', (d) -> d.y + PADDING / 2)
 
-      labels = mainEntitiesContainer .selectAll('.label')
-        .data(nodes)
+      labels = mainEntitiesContainer .selectAll('.lab')
+        .data(bubbleNodes)
         .enter()
         .append('text')
           .attr('font-size', (d) -> d.r / 3)
           .text((d) -> d.name)
-          .attr('class', (d, i) -> 'label' + i)
+          .attr('class', (d, i) -> 'lab' + i)
           .attr('x', (d) -> d.x + PADDING / 2)
           .attr('y', (d) -> d.y + PADDING / 2 + d.r / 3)
 
       circlesForHover = mainEntitiesContainer.selectAll('.invisible')
-        .data(nodes)
+        .data(bubbleNodes)
         .enter()
         .append('circle')
           .attr('class', 'invisible')
@@ -137,7 +137,7 @@ glados.useNameSpace 'glados.views.MainPage',
 
             ADD = PADDING/2 - 2
 
-            d3.select('.node' + i).transition()
+            d3.select('.nod' + i).transition()
               .ease("cubic-out")
               .delay("10")
               .duration("200")
@@ -155,7 +155,7 @@ glados.useNameSpace 'glados.views.MainPage',
               .duration("200")
               .attr('font-size', (d.r + ADD)/ 2 )
 
-            d3.select('.label' + i).transition()
+            d3.select('.lab' + i).transition()
               .ease("cubic-out")
               .delay("10")
               .duration("200")
@@ -165,7 +165,7 @@ glados.useNameSpace 'glados.views.MainPage',
 
           .on("mouseout", (d, i) ->
 
-            d3.select('.node' + i).transition()
+            d3.select('.nod' + i).transition()
               .ease("quad")
               .delay("300")
               .duration("200")
@@ -183,7 +183,7 @@ glados.useNameSpace 'glados.views.MainPage',
               .duration("200")
               .attr('font-size', d.r/ 2 )
 
-            d3.select('.label' + i).transition()
+            d3.select('.lab' + i).transition()
               .ease("quad")
               .delay("300")
               .duration("200")
@@ -192,7 +192,7 @@ glados.useNameSpace 'glados.views.MainPage',
           )
 
 #     make first node transparent
-      firstNode = d3.select('.node0')
+      firstNode = d3.select('.nod0')
         .style('fill', 'none')
         .style('stroke', 'none')
 
@@ -200,7 +200,7 @@ glados.useNameSpace 'glados.views.MainPage',
         .style('fill', 'none')
         .style('stroke', 'none')
 
-      firstlabel = d3.select('.label0')
+      firstlabel = d3.select('.lab0')
         .style('fill', 'none')
         .style('stroke', 'none')
 
