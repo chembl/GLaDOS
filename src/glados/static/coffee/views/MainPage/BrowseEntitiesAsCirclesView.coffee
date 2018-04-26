@@ -226,6 +226,10 @@ glados.useNameSpace 'glados.views.MainPage',
       else if number >= 1.0e+6
         formatted = number.toPrecision(2) / 1.0e+6 + "M"
 
+      else if number >= 1.0e+4
+        numberFloor = Math.floor(number/1000)*1000
+        formatted = numberFloor.toPrecision(2) / 1.0e+3 + "K"
+
       else if number >= 1.0e+3
         formatted = number.toPrecision(2) / 1.0e+3 + "K"
 
