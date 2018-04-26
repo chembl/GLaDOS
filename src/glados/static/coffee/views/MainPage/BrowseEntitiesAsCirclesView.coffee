@@ -76,16 +76,18 @@ glados.useNameSpace 'glados.views.MainPage',
 
         bubbleData.children.push(dataItem)
 
+      console.log 'names', names
+
       colour = d3.scale.ordinal()
-        .domain(sizes)
+        .domain(names)
         .range([
-          '#FE7F9D',
-          '#0d595f',
-          '#8E122F',
           '#75D8D5',
           '#084044',
-          '#09979B',
+          '#0d595f',
           '#D33C60',
+          '#FE7F9D',
+          '#09979B',
+          '#8E122F',
         ])
 
 #     pack layout
