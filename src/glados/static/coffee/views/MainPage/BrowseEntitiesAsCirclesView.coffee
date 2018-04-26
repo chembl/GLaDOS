@@ -21,13 +21,14 @@ glados.useNameSpace 'glados.views.MainPage',
 
       infoURL = "#{glados.Settings.GLADOS_BASE_PATH_REL}entities_records"
 
+      console.log 'going to get data'
       fetchDatabasePromise = $.getJSON(infoURL)
 
       fetchDatabasePromise.fail ->
         console.log 'Fetching entities info from web services failed :('
 
       fetchDatabasePromise.done (response) ->
-        console.log 'render :)'
+        console.log 'got data!'
         thisView.renderCircles(response)
 
     renderCircles: (data) ->
@@ -75,8 +76,6 @@ glados.useNameSpace 'glados.views.MainPage',
         dataItem.link = thisView.links[key]
 
         bubbleData.children.push(dataItem)
-
-      console.log 'names', names
 
       colour = d3.scale.ordinal()
         .domain(names)
