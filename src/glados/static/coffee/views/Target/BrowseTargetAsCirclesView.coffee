@@ -54,10 +54,15 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     .attr("transform", "translate(" + @VISUALISATION_WIDTH / 2 + "," + @VISUALISATION_HEIGHT / 2 + ")")
 
     # use plain version
+
     @root = @model.get('plain')
+
     focus = @root
     nodes = pack.nodes(@root)
     @currentViewFrame = undefined
+
+    for node in nodes
+      node.link = '#'
 
     #get depth domain in tree
     getNodeNumChildren = (node) -> if not node.children? then 0 else node.children.length
@@ -83,6 +88,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       if focus != d
         thisView.focusTo(thisView.currentHover)
+        console.log 'thisView.currentHover: ', thisView.currentHover
 
     # -----------------------------------------
     # Node hover handler function
