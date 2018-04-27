@@ -30,11 +30,14 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     $mainPieContainer = $(@el)
     $mainPieContainer.addClass('pie-with-error')
 
-  emptyPieContainer: ->@$vis_elem.empty()
+  emptyPie: ->
+    $titleContainer = $(@el).find('.BCK-pie-title')
+    $titleContainer.empty()
+    @$vis_elem.empty()
 
   render: ->
 
-    @emptyPieContainer()
+    @emptyPie()
     if @model.get('state') == glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE
       @showNoDataFoundMessage()
       return
@@ -55,6 +58,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       buckets = glados.Utils.Buckets.mergeBuckets(buckets, maxCategories, @model, @config.x_axis_prop_name)
 
     if not @config.hide_title
+      console.log 'render pie title'
       $titleContainer = $(@el).find('.BCK-pie-title')
       glados.Utils.fillContentForElement $titleContainer,
         title: @config.title
