@@ -39,7 +39,7 @@ glados.useNameSpace 'glados.views.MainPage',
 
       VIS_WIDTH = $(@el).width()
       VIS_HEIGHT = $(@el).height()
-      PADDING = VIS_WIDTH * 0.05
+      PADDING = 10
 
       mainEntitiesContainer = d3.select @$vis_elem[0]
         .append('svg')
@@ -143,7 +143,7 @@ glados.useNameSpace 'glados.views.MainPage',
           .on('click', (d) -> glados.Utils.URLS.shortenLinkIfTooLongAndOpen d.link )
           .on("mouseover", (d, i) ->
 
-            ADD = PADDING/2 - 5
+            ADD = PADDING/2 - 2
 
             d3.select('.nod' + i).transition()
               .ease("cubic-out")
