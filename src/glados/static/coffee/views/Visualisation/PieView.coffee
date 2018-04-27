@@ -30,10 +30,16 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     $mainPieContainer = $(@el)
     $mainPieContainer.addClass('pie-with-error')
 
+  emptyPieContainer: ->@$vis_elem.empty()
+
   render: ->
 
+    @emptyPieContainer()
     if @model.get('state') == glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE
       @showNoDataFoundMessage()
+      return
+
+    if @model.get('state') == glados.models.Aggregations.Aggregation.States.LOADING_BUCKETS
       return
 
     if @model.get('state') != glados.models.Aggregations.Aggregation.States.INITIAL_STATE

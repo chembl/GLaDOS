@@ -11,4 +11,19 @@ glados.useNameSpace 'glados.configs.ReportCards.Compound',
       action_function: (event) ->
 
         @showCardPreloader()
-        @config.alternate_forms.include_alternate_forms = not @config.alternate_forms.include_alternate_forms
+        includeAlternateForms = not @config.alternate_forms.include_alternate_forms
+        @config.alternate_forms.include_alternate_forms = includeAlternateForms
+
+        generatorModel = @config.init_agg_from_model_event.model
+
+        if includeAlternateForms
+          chemblIDs = generatorModel.getOwnAndAdditionalIDs()
+        else
+          chemblIDs = [generatorModel.get('id')]
+
+        @model.set
+          molecule_chembl_ids: chemblIDs
+        ,
+          silent: true
+
+        @model.fetch()
