@@ -6,7 +6,7 @@ class MainPageApp
 # ----------------------------------------------------------------------------------------------------------------------
 
   @init = ->
-    glados.apps.Main.MainGladosApp.hideMainSplashScreen()
+#    glados.apps.Main.MainGladosApp.hideMainSplashScreen()
 
     MainPageApp.initCentralCarousel()
     MainPageApp.initDatabaseSummary()
