@@ -6,6 +6,7 @@ TargetHierarchyTree = Backbone.Model.extend
 
   initialize: ->
     @on 'change', @initHierarchy, @
+    console.log 'THIS', @
 
 
   initHierarchy: ->
