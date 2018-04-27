@@ -101,7 +101,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
         thisView.currentHover = d
         isPressingCtrl = d3.event.ctrlKey
-        thisView.fillInstructionsTemplate d.name, isPressingCtrl
+        thisView.fillInstructionsTemplate d.name + d.link, isPressingCtrl
 
         allNodes = d3.select($(thisView.el)[0]).selectAll('.node')
         allNodes.classed('force-hover', false)
@@ -264,10 +264,14 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     $div = $(@el).find('.instructions')
     template = $('#' + $div.attr('data-hb-template'))
 
+    $link = $.find('.BCK-browse-targets-link')
+    $link_template = $('#Handlebars-Targets-Browser-link')
+
+    $link.html Handlebars.compile($link_template.html())
+
     $div.html Handlebars.compile(template.html())
       node_name: nodeName
       is_pressing_ctrl: isPressingCtrl
-
 
   handleKeyDown: (event) ->
 
