@@ -57,3 +57,38 @@ glados.useNameSpace 'glados.configs.ReportCards.Compound',
 
 
       return viewConfig
+
+    #-------------------------------------------------------------------------------------------------------------------
+    # Agg config
+    #-------------------------------------------------------------------------------------------------------------------
+    @getQueryConfig: ->
+
+      queryConfig =
+        type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
+        query_string_template:\
+        'molecule_chembl_id:({{#each molecule_chembl_ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})'
+        template_data:
+          molecule_chembl_ids: 'molecule_chembl_ids'
+      return queryConfig
+
+    @getAggConfig: ->
+
+      aggsConfig =
+        aggs:
+          types:
+            type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+            field: 'standard_type'
+            size: 20
+            bucket_links:
+
+              bucket_filter_template: 'molecule_chembl_id:' +
+                '({{#each molecule_chembl_ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}}) ' +
+                'AND standard_type:("{{bucket_key}}"' +
+                '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
+              template_data:
+                molecule_chembl_ids: 'molecule_chembl_ids'
+                bucket_key: 'BUCKET.key'
+                extra_buckets: 'EXTRA_BUCKETS.key'
+
+              link_generator: Activity.getActivitiesListURL
+      return aggsConfig

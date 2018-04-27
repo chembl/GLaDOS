@@ -901,31 +901,8 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @getRelatedActivitiesAgg = (chemblIDs) ->
 
-    queryConfig =
-      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
-      query_string_template:\
-      'molecule_chembl_id:({{#each molecule_chembl_ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})'
-      template_data:
-        molecule_chembl_ids: 'molecule_chembl_ids'
-
-    aggsConfig =
-      aggs:
-        types:
-          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
-          field: 'standard_type'
-          size: 20
-          bucket_links:
-
-            bucket_filter_template: 'molecule_chembl_id:' +
-              '({{#each molecule_chembl_ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}}) ' +
-              'AND standard_type:("{{bucket_key}}"' +
-              '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
-            template_data:
-              molecule_chembl_ids: 'molecule_chembl_ids'
-              bucket_key: 'BUCKET.key'
-              extra_buckets: 'EXTRA_BUCKETS.key'
-
-            link_generator: Activity.getActivitiesListURL
+    queryConfig = glados.configs.ReportCards.Compound.ActivityPieSummaryConfig.getQueryConfig()
+    aggsConfig = glados.configs.ReportCards.Compound.ActivityPieSummaryConfig.getAggConfig()
 
     bioactivities = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.ACTIVITY_INDEX_URL

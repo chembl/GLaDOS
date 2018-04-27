@@ -12,4 +12,3 @@ glados.useNameSpace 'glados.configs.ReportCards.Compound',
 
         @showCardPreloader()
         @config.alternate_forms.include_alternate_forms = not @config.alternate_forms.include_alternate_forms
-        @initAggAndBindFromGenModel()

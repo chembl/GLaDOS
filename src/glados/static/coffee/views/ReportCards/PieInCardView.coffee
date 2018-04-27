@@ -31,6 +31,11 @@ glados.useNameSpace 'glados.views.ReportCards',
       pieConfig = pieConfigGeneratorFunction(generatorModel, @)
       @config.pie_config = pieConfig
 
+    # this should work with change instead of deleting.
+#    deleteModel: -> delete @model
+#    deleteView: -> delete @pieView
+#    emptyPieContent: -> @(el).find('.BCK-Main-Pie-container')
+#    unBindAgg: -> @model.off 'change'
     bindAgg: -> @model.on 'change', @render, @
 
     initAggAndBindFromGenModel: ->
@@ -44,7 +49,7 @@ glados.useNameSpace 'glados.views.ReportCards',
 
     createPieView: ->
 
-      @paginatedView = new PieView
+      @pieView = new PieView
         model: @model
         el: $(@el).find('.BCK-Main-Pie-container')
         config: @config.pie_config
@@ -53,7 +58,7 @@ glados.useNameSpace 'glados.views.ReportCards',
     # Render
     #-------------------------------------------------------------------------------------------------------------------
     render: ->
-
+      console.log 'RENDER'
       @renderActionButton()
       @showSection() unless @config.is_outside_an_entity_report_card
       @showCardContent()
