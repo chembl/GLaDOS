@@ -31,7 +31,6 @@ glados.useNameSpace 'glados.configs.ReportCards.Compound',
         newPieViewConfig = pieConfigGeneratorFunction(generatorModel, @)
 
         # for now, the only thing that changes is the title
-        pieViewConfig.title = newPieViewConfig.title
-        pieViewConfig.title_link_url = newPieViewConfig.title_link_url
+        pieViewConfig = newPieViewConfig
 
         @model.fetch()

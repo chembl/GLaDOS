@@ -31,9 +31,13 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     $mainPieContainer.addClass('pie-with-error')
 
   emptyPie: ->
+
     $titleContainer = $(@el).find('.BCK-pie-title')
     $titleContainer.empty()
     @$vis_elem.empty()
+
+    $legendElem = $(@el).find('.BCK-CompResultsGraphLegendContainer')
+    $legendElem.empty()
 
   render: ->
 
@@ -58,7 +62,6 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       buckets = glados.Utils.Buckets.mergeBuckets(buckets, maxCategories, @model, @config.x_axis_prop_name)
 
     if not @config.hide_title
-      console.log 'render pie title'
       $titleContainer = $(@el).find('.BCK-pie-title')
       glados.Utils.fillContentForElement $titleContainer,
         title: @config.title
@@ -377,8 +380,8 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       hide_title: true
 
     $legendElem = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
-    glados.Utils.renderLegendForProperty(@xAxisPropName, undefined, $legendElem, enableSelection=false, legendConfig)
-
+    glados.Utils.renderLegendForProperty(@xAxisPropName, undefined, $legendElem, enableSelection=false, legendConfig,
+      reset=true)
 
 #   qtips
     arcs.each (d) ->
