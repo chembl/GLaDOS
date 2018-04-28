@@ -26,12 +26,10 @@ glados.useNameSpace 'glados.configs.ReportCards.Compound',
         ,
           silent: true
 
-        pieViewConfig = @pieView.config
         pieConfigGeneratorFunction = @config.init_agg_from_model_event.pie_config_generator_function
         newPieViewConfig = pieConfigGeneratorFunction(generatorModel, @)
 
-        # for now, the only thing that changes is the title
-        pieViewConfig = newPieViewConfig
+        @pieView.config = newPieViewConfig
 
         @model.fetch()
 
