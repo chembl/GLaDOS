@@ -868,28 +868,8 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @getRelatedAssaysAgg = (chemblID) ->
 
-    queryConfig =
-      type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
-      queryValueField: 'molecule_chembl_id'
-      fields: ['_metadata.related_compounds.chembl_ids.*']
-
-    aggsConfig =
-      aggs:
-        types:
-          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
-          field: '_metadata.assay_generated.type_label'
-          size: 20
-          bucket_links:
-
-            bucket_filter_template: '_metadata.related_compounds.chembl_ids.\\*:{{molecule_chembl_id}} ' +
-                                    'AND _metadata.assay_generated.type_label:("{{bucket_key}}"' +
-                                    '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
-            template_data:
-              molecule_chembl_id: 'molecule_chembl_id'
-              bucket_key: 'BUCKET.key'
-              extra_buckets: 'EXTRA_BUCKETS.key'
-
-            link_generator: Assay.getAssaysListURL
+    queryConfig = glados.configs.ReportCards.Compound.AssaySummaryPieConfig.getQueryConfig()
+    aggsConfig = glados.configs.ReportCards.Compound.AssaySummaryPieConfig.getAggConfig()
 
     assays = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.ASSAY_INDEX_URL
