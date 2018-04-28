@@ -39,6 +39,12 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     $legendElem = $(@el).find('.BCK-CompResultsGraphLegendContainer')
     $legendElem.empty()
 
+    $visualisationMessages = $(@el).find('.BCK-VisualisationMessages')
+    $visualisationMessages.empty()
+
+    $mainPieContainer = $(@el)
+    $mainPieContainer.removeClass('pie-with-error')
+
   render: ->
 
     @emptyPie()
