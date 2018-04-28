@@ -360,6 +360,11 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @initAssaySummary = ->
 
+    compound = CompoundReportCardApp.getCurrentCompound()
+    configGenerator = new glados.configs.ReportCards.Compound.AssaySummaryPieConfig(compound)
+    viewConfig = configGenerator.getViewConfig()
+
+
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     relatedAssays = CompoundReportCardApp.getRelatedAssaysAgg(chemblID)
     relatedAssaysProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RELATED_ASSAYS')
@@ -392,6 +397,9 @@ class CompoundReportCardApp extends glados.ReportCardApp
       report_card_app: @
 
     relatedAssays.fetch()
+
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
 
   @initTargetSummary = ->
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()

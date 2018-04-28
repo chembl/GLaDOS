@@ -34,3 +34,27 @@ glados.useNameSpace 'glados.configs.ReportCards.Compound',
         pieViewConfig = newPieViewConfig
 
         @model.fetch()
+
+    aggGeneratorFunction: (model, thisView) ->
+
+      if thisView.config.alternate_forms.include_alternate_forms
+        chemblIDs = model.getOwnAndAdditionalIDs()
+      else
+        chemblIDs = [model.get('id')]
+      return CompoundReportCardApp.getRelatedActivitiesAgg(chemblIDs)
+
+    @getChemblIDsAndTitleAdditionalText: (model, thisView) ->
+
+      if thisView.config.alternate_forms.include_alternate_forms
+
+        chemblIDs = model.getOwnAndAdditionalIDs()
+        titleAdditionalText = switch model.isParent()
+          when true then ' (including alternate forms)'
+          else ' (including parent)'
+
+      else
+
+        chemblIDs = [model.get('id')]
+        titleAdditionalText = ''
+
+      return [chemblIDs, titleAdditionalText]

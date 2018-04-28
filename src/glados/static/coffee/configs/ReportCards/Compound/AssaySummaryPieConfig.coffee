@@ -3,6 +3,18 @@ glados.useNameSpace 'glados.configs.ReportCards.Compound',
 
     constructor: (@compound) ->
 
+    getViewConfig: ->
+
+      chemblID = @compound.get('id')
+
+      aggGenerationConfig =
+
+        model: @compound
+        agg_generator_function: @aggGeneratorFunction
+
+        pie_config_generator_function: (model, thisView) ->
+          chemblID = model.get('id')
+
     #-------------------------------------------------------------------------------------------------------------------
     # Agg config
     #-------------------------------------------------------------------------------------------------------------------

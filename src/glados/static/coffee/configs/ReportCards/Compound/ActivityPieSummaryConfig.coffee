@@ -10,28 +10,13 @@ glados.useNameSpace 'glados.configs.ReportCards.Compound',
       aggGenerationConfig =
 
         model: @compound
-        agg_generator_function: (model, thisView) ->
-
-          if thisView.config.alternate_forms.include_alternate_forms
-            chemblIDs = model.getOwnAndAdditionalIDs()
-          else
-            chemblIDs = [model.get('id')]
-          return CompoundReportCardApp.getRelatedActivitiesAgg(chemblIDs)
+        agg_generator_function: @aggGeneratorFunction
 
         pie_config_generator_function: (model, thisView) ->
           chemblID = model.get('id')
 
-          if thisView.config.alternate_forms.include_alternate_forms
-
-            chemblIDs = model.getOwnAndAdditionalIDs()
-            titleAdditionalText = switch model.isParent()
-              when true then ' (including alternate forms)'
-              else ' (including parent)'
-
-          else
-
-            chemblIDs = [model.get('id')]
-            titleAdditionalText = ''
+          [chemblIDs, titleAdditionalText] = glados.configs.ReportCards.Compound.ToggleAlternateFormsInPieConfig\
+          .getChemblIDsAndTitleAdditionalText(model, thisView)
 
           titleLinkFilter = Handlebars.compile('molecule_chembl_id:({{#each molecule_chembl_ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
             molecule_chembl_ids: chemblIDs
