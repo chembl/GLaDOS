@@ -365,38 +365,36 @@ class CompoundReportCardApp extends glados.ReportCardApp
     viewConfig = configGenerator.getViewConfig()
 
 
-    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
-    relatedAssays = CompoundReportCardApp.getRelatedAssaysAgg(chemblID)
-    relatedAssaysProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RELATED_ASSAYS')
-
-    pieConfig =
-      x_axis_prop_name: 'types'
-      title: gettext('glados_compound__associated_assays_pie_title_base') + chemblID
-      title_link_url: Assay.getAssaysListURL('_metadata.related_compounds.chembl_ids.\\*:' + chemblID)
-      max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
-      properties:
-        types: relatedAssaysProp
-
-
-
-    viewConfig =
-      pie_config: pieConfig
-      resource_type: gettext('glados_entities_compound_name')
-      embed_section_name: 'related_assays'
-      embed_identifier: chemblID
-      link_to_all:
-        link_text: 'See all assays related to ' + chemblID + ' used in this visualisation.'
-        url: Assay.getAssaysListURL('_metadata.related_compounds.chembl_ids.\\*:' + chemblID)
+#    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
+#    relatedAssays = CompoundReportCardApp.getRelatedAssaysAgg(chemblID)
+#    relatedAssaysProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RELATED_ASSAYS')
+#
+#    pieConfig =
+#      x_axis_prop_name: 'types'
+#      title: gettext('glados_compound__associated_assays_pie_title_base') + chemblID
+#      title_link_url: Assay.getAssaysListURL('_metadata.related_compounds.chembl_ids.\\*:' + chemblID)
+#      max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
+#      properties:
+#        types: relatedAssaysProp
+#
+#
+#    viewConfig =
+#      pie_config: pieConfig
+#      resource_type: gettext('glados_entities_compound_name')
+#      embed_section_name: 'related_assays'
+#      embed_identifier: chemblID
+#      link_to_all:
+#        link_text: 'See all assays related to ' + chemblID + ' used in this visualisation.'
+#        url: Assay.getAssaysListURL('_metadata.related_compounds.chembl_ids.\\*:' + chemblID)
 
     new glados.views.ReportCards.PieInCardView
-      model: relatedAssays
       el: $('#CAssociatedAssaysCard')
       config: viewConfig
       section_id: 'ActivityCharts'
       section_label: 'Activity Charts'
       report_card_app: @
 
-    relatedAssays.fetch()
+#    relatedAssays.fetch()
 
     if GlobalVariables['EMBEDED']
       compound.fetch()
@@ -874,7 +872,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     return targetTypes
 
-  @getRelatedAssaysAgg = (chemblID) ->
+  @getRelatedAssaysAgg = (chemblIDs) ->
 
     queryConfig = glados.configs.ReportCards.Compound.AssaySummaryPieConfig.getQueryConfig()
     aggsConfig = glados.configs.ReportCards.Compound.AssaySummaryPieConfig.getAggConfig()
@@ -882,7 +880,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     assays = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.ASSAY_INDEX_URL
       query_config: queryConfig
-      molecule_chembl_id: chemblID
+      molecule_chembl_ids: chemblIDs
       aggs_config: aggsConfig
 
     return assays

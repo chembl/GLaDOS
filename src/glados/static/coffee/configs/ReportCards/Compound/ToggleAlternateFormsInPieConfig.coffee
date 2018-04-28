@@ -33,14 +33,6 @@ glados.useNameSpace 'glados.configs.ReportCards.Compound',
 
         @model.fetch()
 
-    aggGeneratorFunction: (model, thisView) ->
-
-      if thisView.config.alternate_forms.include_alternate_forms
-        chemblIDs = model.getOwnAndAdditionalIDs()
-      else
-        chemblIDs = [model.get('id')]
-      return CompoundReportCardApp.getRelatedActivitiesAgg(chemblIDs)
-
     @getChemblIDsAndTitleAdditionalText: (model, thisView) ->
 
       if thisView.config.alternate_forms.include_alternate_forms
