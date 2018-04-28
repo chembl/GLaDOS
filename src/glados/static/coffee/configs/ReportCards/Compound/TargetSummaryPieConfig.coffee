@@ -3,6 +3,54 @@ glados.useNameSpace 'glados.configs.ReportCards.Compound',
 
     constructor: (@compound) ->
 
+    getViewConfig: ->
+
+      chemblID = @compound.get('id')
+
+      aggGenerationConfig =
+
+        model: @compound
+        agg_generator_function: @aggGeneratorFunction
+
+      pie_config_generator_function: (model, thisView) ->
+        chemblID = model.get('id')
+
+        [chemblIDs, titleAdditionalText] = glados.configs.ReportCards.Compound.ToggleAlternateFormsInPieConfig\
+          .getChemblIDsAndTitleAdditionalText(model, thisView)
+
+        titleLinkFilter = Handlebars.compile('_metadata.related_compounds.chembl_ids.\\*:({{#each molecule_chembl_ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
+          molecule_chembl_ids: chemblIDs
+
+        relatedTargetsProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RELATED_TARGETS')
+
+        pieConfig =
+          x_axis_prop_name: 'classes'
+          title: "#{gettext('glados_compound__associated_targets_by_class_pie_title_base')}#{chemblID}#{titleAdditionalText}"
+          title_link_url: Target.getTargetsListURL(titleLinkFilter)
+          custom_empty_message: "No target classification data available for compound #{chemblID} (all may be non-protein targets)"
+          max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
+          properties:
+            classes: relatedTargetsProp
+        return pieConfig
+
+      viewConfig =
+        init_agg_from_model_event: aggGenerationConfig
+        resource_type: gettext('glados_entities_compound_name')
+        embed_section_name: 'related_targets'
+        embed_identifier: chemblID
+        alternate_forms:
+          include_alternate_forms: true
+        action_button: @getActionButtonConfig()
+
+      return viewConfig
+
+    aggGeneratorFunction: (model, thisView) ->
+
+      if thisView.config.alternate_forms.include_alternate_forms
+        chemblIDs = model.getOwnAndAdditionalIDs()
+      else
+        chemblIDs = [model.get('id')]
+      return CompoundReportCardApp.getRelatedTargetsAggByClass(chemblIDs)
     #-------------------------------------------------------------------------------------------------------------------
     # Agg config
     #-------------------------------------------------------------------------------------------------------------------

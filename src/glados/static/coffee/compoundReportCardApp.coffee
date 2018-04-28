@@ -375,6 +375,11 @@ class CompoundReportCardApp extends glados.ReportCardApp
       compound.fetch()
 
   @initTargetSummary = ->
+
+    compound = CompoundReportCardApp.getCurrentCompound()
+    configGenerator = new glados.configs.ReportCards.Compound.TargetSummaryPieConfig(compound)
+    viewConfig = configGenerator.getViewConfig()
+
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     relatedTargets = CompoundReportCardApp.getRelatedTargetsAggByClass(chemblID)
     relatedTargetsProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RELATED_TARGETS')
@@ -406,6 +411,9 @@ class CompoundReportCardApp extends glados.ReportCardApp
       report_card_app: @
 
     relatedTargets.fetch()
+
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
 
   @initTargetPredictions = ->
 
