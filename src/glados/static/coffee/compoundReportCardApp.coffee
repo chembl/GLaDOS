@@ -380,37 +380,36 @@ class CompoundReportCardApp extends glados.ReportCardApp
     configGenerator = new glados.configs.ReportCards.Compound.TargetSummaryPieConfig(compound)
     viewConfig = configGenerator.getViewConfig()
 
-    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
-    relatedTargets = CompoundReportCardApp.getRelatedTargetsAggByClass(chemblID)
-    relatedTargetsProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RELATED_TARGETS')
+#    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
+#    relatedTargets = CompoundReportCardApp.getRelatedTargetsAggByClass(chemblID)
+#    relatedTargetsProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RELATED_TARGETS')
 
-    pieConfig =
-      x_axis_prop_name: 'classes'
-      title: gettext('glados_compound__associated_targets_by_class_pie_title_base') + chemblID
-      title_link_url: Target.getTargetsListURL('_metadata.related_compounds.chembl_ids.\\*:' + chemblID)
-      custom_empty_message: "No target classification data available for compound #{chemblID} (all may be non-protein targets)"
-      max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
-      properties:
-        classes: relatedTargetsProp
-
-    viewConfig =
-      pie_config: pieConfig
-      resource_type: gettext('glados_entities_compound_name')
-      embed_section_name: 'related_targets'
-      embed_identifier: chemblID
-      link_to_all:
-        link_text: 'See all targets related to ' + chemblID + ' used in this visualisation.'
-        url: Target.getTargetsListURL('_metadata.related_compounds.chembl_ids.\\*:' + chemblID)
+#    pieConfig =
+#      x_axis_prop_name: 'classes'
+#      title: gettext('glados_compound__associated_targets_by_class_pie_title_base') + chemblID
+#      title_link_url: Target.getTargetsListURL('_metadata.related_compounds.chembl_ids.\\*:' + chemblID)
+#      custom_empty_message: "No target classification data available for compound #{chemblID} (all may be non-protein targets)"
+#      max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
+#      properties:
+#        classes: relatedTargetsProp
+#
+#    viewConfig =
+#      pie_config: pieConfig
+#      resource_type: gettext('glados_entities_compound_name')
+#      embed_section_name: 'related_targets'
+#      embed_identifier: chemblID
+#      link_to_all:
+#        link_text: 'See all targets related to ' + chemblID + ' used in this visualisation.'
+#        url: Target.getTargetsListURL('_metadata.related_compounds.chembl_ids.\\*:' + chemblID)
 
     new glados.views.ReportCards.PieInCardView
-      model: relatedTargets
       el: $('#CAssociatedTargetsCard')
       config: viewConfig
       section_id: 'ActivityCharts'
       section_label: 'Activity Charts'
       report_card_app: @
 
-    relatedTargets.fetch()
+#    relatedTargets.fetch()
 
     if GlobalVariables['EMBEDED']
       compound.fetch()
@@ -822,7 +821,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     return targetTypes
 
-  @getRelatedTargetsAggByClass = (chemblID) ->
+  @getRelatedTargetsAggByClass = (chemblIDs) ->
 
     queryConfig = glados.configs.ReportCards.Compound.TargetSummaryPieConfig.getQueryConfig()
     aggsConfig = glados.configs.ReportCards.Compound.TargetSummaryPieConfig.getAggConfig()
@@ -830,7 +829,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     targetTypes = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.TARGET_INDEX_URL
       query_config: queryConfig
-      molecule_chembl_id: chemblID
+      molecule_chembl_ids: chemblIDs
       aggs_config: aggsConfig
 
     return targetTypes

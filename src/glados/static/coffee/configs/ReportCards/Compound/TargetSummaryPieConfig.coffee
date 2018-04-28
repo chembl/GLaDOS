@@ -12,26 +12,26 @@ glados.useNameSpace 'glados.configs.ReportCards.Compound',
         model: @compound
         agg_generator_function: @aggGeneratorFunction
 
-      pie_config_generator_function: (model, thisView) ->
-        chemblID = model.get('id')
+        pie_config_generator_function: (model, thisView) ->
+          chemblID = model.get('id')
 
-        [chemblIDs, titleAdditionalText] = glados.configs.ReportCards.Compound.ToggleAlternateFormsInPieConfig\
-          .getChemblIDsAndTitleAdditionalText(model, thisView)
+          [chemblIDs, titleAdditionalText] = glados.configs.ReportCards.Compound.ToggleAlternateFormsInPieConfig\
+            .getChemblIDsAndTitleAdditionalText(model, thisView)
 
-        titleLinkFilter = Handlebars.compile('_metadata.related_compounds.chembl_ids.\\*:({{#each molecule_chembl_ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
-          molecule_chembl_ids: chemblIDs
+          titleLinkFilter = Handlebars.compile('_metadata.related_compounds.chembl_ids.\\*:({{#each molecule_chembl_ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
+            molecule_chembl_ids: chemblIDs
 
-        relatedTargetsProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RELATED_TARGETS')
+          relatedTargetsProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RELATED_TARGETS')
 
-        pieConfig =
-          x_axis_prop_name: 'classes'
-          title: "#{gettext('glados_compound__associated_targets_by_class_pie_title_base')}#{chemblID}#{titleAdditionalText}"
-          title_link_url: Target.getTargetsListURL(titleLinkFilter)
-          custom_empty_message: "No target classification data available for compound #{chemblID} (all may be non-protein targets)"
-          max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
-          properties:
-            classes: relatedTargetsProp
-        return pieConfig
+          pieConfig =
+            x_axis_prop_name: 'classes'
+            title: "#{gettext('glados_compound__associated_targets_by_class_pie_title_base')}#{chemblID}#{titleAdditionalText}"
+            title_link_url: Target.getTargetsListURL(titleLinkFilter)
+            custom_empty_message: "No target classification data available for compound #{chemblID} (all may be non-protein targets)"
+            max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
+            properties:
+              classes: relatedTargetsProp
+          return pieConfig
 
       viewConfig =
         init_agg_from_model_event: aggGenerationConfig
@@ -57,9 +57,11 @@ glados.useNameSpace 'glados.configs.ReportCards.Compound',
     @getQueryConfig: ->
 
       queryConfig =
-        type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
-        queryValueField: 'molecule_chembl_id'
-        fields: ['_metadata.related_compounds.chembl_ids.*']
+        type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
+        query_string_template:\
+        '_metadata.related_compounds.chembl_ids.\\*:({{#each molecule_chembl_ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})'
+        template_data:
+          molecule_chembl_ids: 'molecule_chembl_ids'
       return queryConfig
 
     @getAggConfig: ->
@@ -72,11 +74,12 @@ glados.useNameSpace 'glados.configs.ReportCards.Compound',
             size: 20
             bucket_links:
 
-              bucket_filter_template: '_metadata.related_compounds.chembl_ids.\\*:{{molecule_chembl_id}} ' +
+              bucket_filter_template: '_metadata.related_compounds.chembl_ids.\\*:' +
+                                      '({{#each molecule_chembl_ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}}) ' +
                                       'AND _metadata.protein_classification.l1:("{{bucket_key}}"' +
                                       '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
               template_data:
-                molecule_chembl_id: 'molecule_chembl_id'
+                molecule_chembl_ids: 'molecule_chembl_ids'
                 bucket_key: 'BUCKET.key'
                 extra_buckets: 'EXTRA_BUCKETS.key'
 
