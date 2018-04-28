@@ -30,10 +30,29 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
     $mainPieContainer = $(@el)
     $mainPieContainer.addClass('pie-with-error')
 
+  emptyPie: ->
+
+    $titleContainer = $(@el).find('.BCK-pie-title')
+    $titleContainer.empty()
+    @$vis_elem.empty()
+
+    $legendElem = $(@el).find('.BCK-CompResultsGraphLegendContainer')
+    $legendElem.empty()
+
+    $visualisationMessages = $(@el).find('.BCK-VisualisationMessages')
+    $visualisationMessages.empty()
+
+    $mainPieContainer = $(@el)
+    $mainPieContainer.removeClass('pie-with-error')
+
   render: ->
 
+    @emptyPie()
     if @model.get('state') == glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE
       @showNoDataFoundMessage()
+      return
+
+    if @model.get('state') == glados.models.Aggregations.Aggregation.States.LOADING_BUCKETS
       return
 
     if @model.get('state') != glados.models.Aggregations.Aggregation.States.INITIAL_STATE
@@ -367,8 +386,8 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       hide_title: true
 
     $legendElem = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
-    glados.Utils.renderLegendForProperty(@xAxisPropName, undefined, $legendElem, enableSelection=false, legendConfig)
-
+    glados.Utils.renderLegendForProperty(@xAxisPropName, undefined, $legendElem, enableSelection=false, legendConfig,
+      reset=true)
 
 #   qtips
     arcs.each (d) ->

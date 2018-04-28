@@ -413,15 +413,16 @@ glados.useNameSpace 'glados',
       else
         return (glados.Utils.getNestedValue(model.attributes, propertyName) for model in list.models)
 
-    renderLegendForProperty: (property, collection, $legendContainer, enableSelection=true, legendConfig) ->
+    renderLegendForProperty: (property, collection, $legendContainer, enableSelection=true, legendConfig,
+      reset=false) ->
 
-      if not property.legendModel?
+      if not property.legendModel? or reset
         property.legendModel = new glados.models.visualisation.LegendModel
           property: property
           collection: collection
           enable_selection: enableSelection
 
-      if not property.legendView?
+      if not property.legendView? or reset
         property.legendView = new LegendView
           model: property.legendModel
           el: $legendContainer

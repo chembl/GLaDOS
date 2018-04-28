@@ -2878,7 +2878,9 @@ $chembl-header-height: 52.245px;
 * d3 simple pie-chart
 * ----------------------------------------------------------------------------------------------------------------------
 */
-
+.pie-action-buttons-container{
+  text-align: center;
+}
 .principal-pie-container {
   height: 100%;
   //background-color: white;
