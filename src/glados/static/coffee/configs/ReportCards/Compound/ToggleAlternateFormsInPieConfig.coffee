@@ -35,6 +35,7 @@ glados.useNameSpace 'glados.configs.ReportCards.Compound',
 
     @getChemblIDsAndTitleAdditionalText: (model, thisView) ->
 
+      console.log 'getChemblIDsAndTitleAdditionalText'
       if thisView.config.alternate_forms.include_alternate_forms
 
         chemblIDs = model.getOwnAndAdditionalIDs()
