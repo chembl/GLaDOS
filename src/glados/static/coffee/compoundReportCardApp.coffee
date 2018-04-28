@@ -364,37 +364,12 @@ class CompoundReportCardApp extends glados.ReportCardApp
     configGenerator = new glados.configs.ReportCards.Compound.AssaySummaryPieConfig(compound)
     viewConfig = configGenerator.getViewConfig()
 
-
-#    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
-#    relatedAssays = CompoundReportCardApp.getRelatedAssaysAgg(chemblID)
-#    relatedAssaysProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RELATED_ASSAYS')
-#
-#    pieConfig =
-#      x_axis_prop_name: 'types'
-#      title: gettext('glados_compound__associated_assays_pie_title_base') + chemblID
-#      title_link_url: Assay.getAssaysListURL('_metadata.related_compounds.chembl_ids.\\*:' + chemblID)
-#      max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
-#      properties:
-#        types: relatedAssaysProp
-#
-#
-#    viewConfig =
-#      pie_config: pieConfig
-#      resource_type: gettext('glados_entities_compound_name')
-#      embed_section_name: 'related_assays'
-#      embed_identifier: chemblID
-#      link_to_all:
-#        link_text: 'See all assays related to ' + chemblID + ' used in this visualisation.'
-#        url: Assay.getAssaysListURL('_metadata.related_compounds.chembl_ids.\\*:' + chemblID)
-
     new glados.views.ReportCards.PieInCardView
       el: $('#CAssociatedAssaysCard')
       config: viewConfig
       section_id: 'ActivityCharts'
       section_label: 'Activity Charts'
       report_card_app: @
-
-#    relatedAssays.fetch()
 
     if GlobalVariables['EMBEDED']
       compound.fetch()
@@ -841,28 +816,8 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @getRelatedTargetsAggByClass = (chemblID) ->
 
-    queryConfig =
-      type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
-      queryValueField: 'molecule_chembl_id'
-      fields: ['_metadata.related_compounds.chembl_ids.*']
-
-    aggsConfig =
-      aggs:
-        classes:
-          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
-          field: '_metadata.protein_classification.l1'
-          size: 20
-          bucket_links:
-
-            bucket_filter_template: '_metadata.related_compounds.chembl_ids.\\*:{{molecule_chembl_id}} ' +
-                                    'AND _metadata.protein_classification.l1:("{{bucket_key}}"' +
-                                    '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
-            template_data:
-              molecule_chembl_id: 'molecule_chembl_id'
-              bucket_key: 'BUCKET.key'
-              extra_buckets: 'EXTRA_BUCKETS.key'
-
-            link_generator: Target.getTargetsListURL
+    queryConfig = glados.configs.ReportCards.Compound.TargetSummaryPieConfig.getQueryConfig()
+    aggsConfig = glados.configs.ReportCards.Compound.TargetSummaryPieConfig.getAggConfig()
 
     targetTypes = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.TARGET_INDEX_URL
