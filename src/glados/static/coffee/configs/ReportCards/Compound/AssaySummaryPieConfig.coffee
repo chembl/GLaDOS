@@ -57,9 +57,11 @@ glados.useNameSpace 'glados.configs.ReportCards.Compound',
     @getQueryConfig: ->
 
       queryConfig =
-        type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
-        queryValueField: 'molecule_chembl_ids'
-        fields: ['_metadata.related_compounds.chembl_ids.*']
+        type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
+        query_string_template:\
+        '_metadata.related_compounds.chembl_ids.\\*:({{#each molecule_chembl_ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})'
+        template_data:
+          molecule_chembl_ids: 'molecule_chembl_ids'
       return queryConfig
 
     @getAggConfig: ->
