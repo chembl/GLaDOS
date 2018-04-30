@@ -264,7 +264,7 @@ class MainPageApp
 
     aggsConfig =
       aggs:
-        l1_class:
+        children:
           type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
           field: '_metadata.protein_classification.l1'
           size: 100
@@ -274,7 +274,7 @@ class MainPageApp
               bucket_key: 'BUCKET.key'
             link_generator: Target.getTargetsListURL
           aggs:
-            l2_class:
+            children:
               type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
               field: '_metadata.protein_classification.l2'
               size: 100
@@ -284,7 +284,7 @@ class MainPageApp
                   bucket_key: 'BUCKET.key'
                 link_generator: Target.getTargetsListURL
               aggs:
-                l3_class:
+                children:
                   type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
                   field: '_metadata.protein_classification.l3'
                   size: 100
@@ -294,7 +294,7 @@ class MainPageApp
                       bucket_key: 'BUCKET.key'
                     link_generator: Target.getTargetsListURL
                   aggs:
-                    l4_class:
+                    children:
                       type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
                       field: '_metadata.protein_classification.l4'
                       size: 100
@@ -304,7 +304,7 @@ class MainPageApp
                           bucket_key: 'BUCKET.key'
                         link_generator: Target.getTargetsListURL
                       aggs:
-                        l5_class:
+                        children:
                           type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
                           field: '_metadata.protein_classification.l5'
                           size: 100
@@ -314,7 +314,7 @@ class MainPageApp
                               bucket_key: 'BUCKET.key'
                             link_generator: Target.getTargetsListURL
                           aggs:
-                            l6_class:
+                            children:
                               type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
                               field: '_metadata.protein_classification.l6'
                               size: 100

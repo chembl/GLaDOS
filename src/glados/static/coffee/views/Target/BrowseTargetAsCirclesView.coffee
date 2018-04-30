@@ -17,9 +17,18 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     @model.on 'change', @getBucketData, @
 
   getBucketData: ->
-    console.log 'I will get the bucket data'
+    console.log 'I will get the bucket data!'
+    root = @model.get 'bucket_data'
 
-    @render(bucketData)
+    if root?
+      root.depth = 0
+      root.name = 'root'
+
+      console.log 'ROOT ', root
+
+#    fillNode = (node)
+
+#    @render(bucketData)
 
   render: (bucketData = undefined) ->
 
@@ -59,7 +68,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     .attr("transform", "translate(" + @VISUALISATION_WIDTH / 2 + "," + @VISUALISATION_HEIGHT / 2 + ")")
 
     # use plain version
-    @root = @getBucketData(@model)
+    @root = bucketData
     focus = @root
     nodes = pack.nodes(@root)
     @currentViewFrame = undefined
