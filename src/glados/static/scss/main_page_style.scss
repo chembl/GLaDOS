@@ -151,9 +151,12 @@ $full-header-height-large: 180px;
       padding: 0;
 
       a {
+        border: 1px $grey-dark solid;
+        border-radius: 2px;
+        padding: 2px 10px;
         &:hover {
           color: $primary-color;
-          text-decoration: underline;
+          border-color: $primary-color;
         }
       }
     }
