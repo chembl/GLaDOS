@@ -61,6 +61,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     nodes = pack.nodes(@root)
     @currentViewFrame = undefined
 
+#   should change this later
     for node in nodes
       node.link = '#'
 
