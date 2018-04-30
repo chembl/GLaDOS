@@ -12,16 +12,19 @@
 
    <script id="Handlebars-circles-browser-button" type="text/x-handlebars-template">
 
-        <a class="small-text" href="/g/#browse/targets" target="_blank">
+       {{#if node_name}}
 
-            Browse all
-            {{#if node_name}}
-                {{node_name}}
-            {{else}}
-                Targets
-            {{/if}}
+             <a class="small-text" href={{node_link}} target="_blank">
+                  Browse all {{node_name}} Targets
+             </a>
 
-        </a>
+       {{else}}
+
+            <a class="small-text" href="/g/#browse/targets" target="_blank">
+                Browse all Targets
+            </a>
+
+       {{/if}}
 
    </script>
 
