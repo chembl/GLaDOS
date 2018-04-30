@@ -7,7 +7,6 @@ TargetHierarchyTree = Backbone.Model.extend
   initialize: ->
     @on 'change', @initHierarchy, @
 
-
   initHierarchy: ->
 
     # save the plain object version before doing the modifications
@@ -51,7 +50,6 @@ TargetHierarchyTree = Backbone.Model.extend
       if node_obj.children?
         for child_obj in node_obj.children
           addOneNode(child_obj, grand_children_coll, new_node, my_depth)
-
 
     for node in @.get('children')
       if node?

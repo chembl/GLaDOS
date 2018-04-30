@@ -108,9 +108,7 @@ class MainPageApp
       view_class: BrowseTargetAsCirclesView
 
     targetsHierarchyAgg = MainPageApp.getTargetsTreeAgg()
-    targetsHierarchyAgg.fetch()
-    TargetBrowserApp.initBrowserAsCircles(targetHierarchy, $('#BCK-TargetBrowserAsCircles'))
-    targetHierarchy.fetch()
+    TargetBrowserApp.initBrowserAsCircles(targetsHierarchyAgg, $('#BCK-TargetBrowserAsCircles'))
 
     new glados.views.ReportCards.VisualisationInCardView
       el: $('#BCK-TargetBrowserAsCircles')
@@ -119,6 +117,7 @@ class MainPageApp
       report_card_app: @
 
     targetHierarchy.fetch()
+    targetsHierarchyAgg.fetch()
 
   @initCentralCarousel = ->
     $carouselContainer = $('.carousel-wrapper')

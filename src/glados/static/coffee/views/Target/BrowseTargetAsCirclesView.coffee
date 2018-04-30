@@ -14,9 +14,14 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     @$vis_elem = $(@el).find('.vis-container')
     @showResponsiveViewPreloader()
     @setUpResponsiveRender()
-    @model.on 'change', @render, @
+    @model.on 'change', @getBucketData, @
 
-  render: ->
+  getBucketData: ->
+    console.log 'I will get the bucket data'
+
+    @render(bucketData)
+
+  render: (bucketData = undefined) ->
 
     @$vis_elem.empty()
     thisView = @
@@ -54,16 +59,14 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     .attr("transform", "translate(" + @VISUALISATION_WIDTH / 2 + "," + @VISUALISATION_HEIGHT / 2 + ")")
 
     # use plain version
-
-    @root = @model.get('plain')
-
+    @root = @getBucketData(@model)
     focus = @root
     nodes = pack.nodes(@root)
     @currentViewFrame = undefined
 
 #   should change this later
-    for node in nodes
-      node.link = '#'
+#    for node in nodes
+#      node.link = '#'
 
     #get depth domain in tree
     getNodeNumChildren = (node) -> if not node.children? then 0 else node.children.length
