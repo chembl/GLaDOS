@@ -8,6 +8,22 @@
         <i class="icon icon-functional" data-icon="3"></i> Click to focus on {{node_name}}
       {{/if}}
     {{/if}}
-
   </script>
+
+   <script id="Handlebars-circles-browser-button" type="text/x-handlebars-template">
+
+        <a class="small-text" href="/g/#browse/targets" target="_blank">
+
+            Browse all
+            {{#if node_name}}
+                {{node_name}}
+            {{else}}
+                Targets
+            {{/if}}
+
+        </a>
+
+   </script>
+
+
 {% endverbatim %}

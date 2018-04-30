@@ -264,10 +264,12 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     $div = $(@el).find('.instructions')
     template = $('#' + $div.attr('data-hb-template'))
 
-    $link = $.find('.BCK-browse-targets-link')
-    $link_template = $('#Handlebars-Targets-Browser-link')
+    $button = $('.BCK-browse-button')
+    button_template = $('#' + $button.attr('data-hb-template'))
+    console.log 'button_template: ', $button.attr('data-hb-template')
 
-    $link.html Handlebars.compile($link_template.html())
+    $button.html Handlebars.compile(button_template.html())
+      node_name: nodeName
 
     $div.html Handlebars.compile(template.html())
       node_name: nodeName
@@ -284,12 +286,3 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     if event.which == @CTRL_KEY_NUMBER
 
       @fillInstructionsTemplate(@currentHover.name, false) unless not @currentHover?
-
-
-
-
-
-
-
-
-
