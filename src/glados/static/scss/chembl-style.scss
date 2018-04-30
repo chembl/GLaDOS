@@ -1778,6 +1778,13 @@ $vis-dark: #0D343A;
   }
 
   .browser-as-circles {
+    position: relative;
+
+    .instructions {
+      position: absolute;
+      pointer-events: none;
+    }
+
     .node {
       cursor: pointer;
       &.hoverable {

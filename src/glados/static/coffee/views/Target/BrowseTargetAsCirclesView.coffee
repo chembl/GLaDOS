@@ -88,7 +88,8 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       if focus != d
         thisView.focusTo(thisView.currentHover)
-        console.log 'thisView.currentHover: ', thisView.currentHover
+        thisView.fillBrowseButtonTemplate thisView.currentHover.name, thisView.currentHover.link
+
 
     # -----------------------------------------
     # Node hover handler function
@@ -101,7 +102,8 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
         thisView.currentHover = d
         isPressingCtrl = d3.event.ctrlKey
-        thisView.fillInstructionsTemplate d.name + d.link, isPressingCtrl
+        thisView.fillInstructionsTemplate d.name, isPressingCtrl
+#        thisView.fillBrowseButtonTemplate d.name, d.link
 
         allNodes = d3.select($(thisView.el)[0]).selectAll('.node')
         allNodes.classed('force-hover', false)
@@ -264,16 +266,17 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     $div = $(@el).find('.instructions')
     template = $('#' + $div.attr('data-hb-template'))
 
-    $button = $('.BCK-browse-button')
-    button_template = $('#' + $button.attr('data-hb-template'))
-    console.log 'button_template: ', $button.attr('data-hb-template')
-
-    $button.html Handlebars.compile(button_template.html())
-      node_name: nodeName
-
     $div.html Handlebars.compile(template.html())
       node_name: nodeName
       is_pressing_ctrl: isPressingCtrl
+
+  fillBrowseButtonTemplate: (nodeName, nodeLink) ->
+    $button = $('.BCK-browse-button')
+    button_template = $('#' + $button.attr('data-hb-template'))
+
+    $button.html Handlebars.compile(button_template.html())
+      node_name: nodeName
+      node_link: nodeLink
 
   handleKeyDown: (event) ->
 
