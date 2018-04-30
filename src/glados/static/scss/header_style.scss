@@ -1,0 +1,495 @@
+/*
+* ----------------------------------------------------------------------------------------------------------------------
+* CHEMBL HEADER STYLES
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+
+/* -------- VARIABLES -------- */
+
+//header
+$chembl-header-height: 54px;
+$chembl-header-height-pintop: 140px;
+$chembl-header-padding: 10px;
+$side-buttons-width-big: 180px;
+$logo-height-xl: 40px;
+
+//colors
+$lighter-color: #62b7bd;
+$primary-color: #09979B;
+$darker-color: #0d595f;
+$grey: #858585;
+
+//search bar
+$search-bar-height: 25px;
+$search-bar-height-wider: 30px;
+$search-bar-font-size-small: 0.8em;
+$search-bar-font-size-big: 1em;
+$search-bar-max-width: 600px;
+$search-bar-max-width-xl: 1000px;
+
+//fonts
+$chembl-name-font: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+$search-bar-font: helvetica, Arial, sans-serif;
+$verdana: "ChEMBL_Verdana", Verdana, sans-serif;
+
+/* -------- DEFAULT STYLES -------- */
+
+.disable-scroll {
+  overflow-y: hidden;
+}
+
+header .row {
+  margin-bottom: 0;
+}
+
+.draw-structure:hover {
+  background-color: $lighter-color;
+}
+
+.header-button:hover {
+  background-color: $lighter-color;
+}
+
+.header-nav-links {
+  li:hover {
+    background-color: $lighter-color;
+  }
+}
+
+.burger-dropdown {
+  li:hover {
+    a {
+      color: $primary-color !important;
+    }
+  }
+}
+
+#chembl-header-container {
+  height: 0;
+  width: 100%;
+  z-index: -1;
+
+  .chembl-header {
+    height: $chembl-header-height;
+    background-color: $primary-color;
+    width: 100%;
+    position: relative;
+    float: left;
+
+    -webkit-transition: all 200ms ease-in;
+    transition: all 200ms ease-in;
+
+    .inner-row {
+      display: flex;
+      justify-content: space-between;
+      margin-left: auto;
+      margin-right: auto;
+
+      -webkit-transition: all 200ms ease-in;
+      transition: all 200ms ease-in;
+
+      .burger-button, .chembl-logo {
+        height: $chembl-header-height;
+        padding: $chembl-header-padding;
+        position: relative;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        -webkit-transition: background-color 200ms ease-in-out;
+        transition: background-color 200ms ease-in-out;
+      }
+
+      .chembl-logo {
+        img {
+          width: 30px;
+          height: auto;
+        }
+
+        span {
+          padding-left: $chembl-header-padding;
+          padding-top: $chembl-header-padding;
+          font-family: $chembl-name-font;
+          font-size: 30px;
+        }
+      }
+
+      /* -------- SEARCH BAR -------- */
+      .search-bar {
+        height: $chembl-header-height;
+        padding: $chembl-header-padding;
+        float: left;
+        background: none;
+        flex-grow: 2;
+        display: flex;
+        align-items: center;
+
+        -webkit-transition: max-width 300ms ease-in;
+        transition: max-width 300ms ease-in;
+
+        .search-bar-container {
+          width: 100%;
+
+          .bar-wrapper {
+            width: 100%;
+            background-color: white;
+            display: flex;
+
+            -webkit-transition: height 200ms ease-in;
+            transition: height 200ms ease-in;
+
+            .chembl-search-bar {
+              font-family: $search-bar-font;
+              padding-left: $chembl-header-padding;
+              margin: 0;
+              height: 100%;
+            }
+
+            .bar-button {
+              padding: $chembl-header-padding;
+              height: 100%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              -webkit-transition: background-color 200ms ease-in-out;
+              transition: background-color 200ms ease-in-out;
+
+              img {
+                height: auto;
+                -webkit-transition: height, width 200ms ease-in;
+                transition: height, width 200ms ease-in;
+              }
+
+              &.search-button {
+                background-color: $darker-color;
+              }
+            }
+          }
+
+          .search-examples {
+            font-family: $chembl-name-font;
+            color: white;
+            font-size: 0.8em;
+            margin-top: 0.5em;
+            letter-spacing: 0.05em;
+
+            a {
+              color: white;
+
+              &:hover {
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* -------- SMALL DEVICES <748px -------- */
+@media (max-width: 748px) {
+
+  .bar-wrapper {
+    height: $search-bar-height;
+
+    .chembl-search-bar {
+      font-size: $search-bar-font-size-small;
+    }
+
+    .bar-button {
+
+      img {
+        width: 15px;
+      }
+    }
+  }
+
+  .burger-button {
+
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+/* -------- SMALL BREAKPOINT SM >748px -------- */
+@media (min-width: 749px) {
+
+  .bar-wrapper {
+    height: $search-bar-height-wider;
+
+    .header-button {
+      width: $chembl-header-height;
+    }
+
+    .chembl-search-bar {
+      font-size: $search-bar-font-size-big;
+    }
+
+    .bar-button {
+
+      img {
+        width: 22px;
+      }
+    }
+  }
+
+  .burger-button {
+
+    img {
+      margin-right: $chembl-header-padding;
+      margin-left: $chembl-header-padding;
+      width: 30px;
+      height: 30px;
+    }
+  }
+}
+
+/* -------- BREAKPOINT L > 992px -------- */
+@media (min-width: 992px) {
+
+  .search-button {
+    width: 100px;
+  }
+}
+
+/* -------- BREAKPOINT XL > 1300px -------- */
+@media (max-width: 1300px) {
+
+  .search-bar {
+    max-width: $search-bar-max-width;
+  }
+
+}
+
+@media (min-width: 1300px) {
+
+  .search-bar {
+    max-width: $search-bar-max-width-xl;
+
+  }
+}
+
+/* -------- UNPINNED HEADER > 992px -------- */
+@media (max-width: 992px) {
+  .chembl-header-spacer {
+    height: 54px;
+    pointer-events: none
+  }
+}
+
+@media (min-width: 992px) {
+  .chembl-header-spacer {
+    height: 140px;
+    pointer-events: none
+  }
+
+  #chembl-header-container.pin-top {
+
+    .chembl-header {
+      height: $chembl-header-height-pintop;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .inner-row {
+        width: 95%;
+        height: $logo-height-xl;
+        max-width: 1548px;
+        padding-top: 20px;
+
+        .chembl-logo {
+          padding-left: 20px;
+
+          img {
+            width: $logo-height-xl;
+            height: auto;
+          }
+
+          span {
+            padding-left: $chembl-header-padding;
+            padding-top: $chembl-header-padding;
+            font-family: $chembl-name-font;
+            font-size: $logo-height-xl;
+          }
+        }
+
+        &.nav-links-wrapper {
+          padding-top: $chembl-header-padding;
+
+          .header-nav-links {
+            margin-top: 0;
+            margin-bottom: 0;
+            display: flex;
+
+            li.nav-link {
+              border-right: solid white 1px;
+              font-size: 0.8em;
+              font-family: $verdana;
+              letter-spacing: 0.1em;
+
+              -webkit-transition: background-color 400ms ease-in-out;
+              transition: background-color 400ms ease-in-out;
+
+              a {
+                display: block;
+                width: 100%;
+                height: 100%;
+
+                color: white;
+                padding: 5px 20px;
+              }
+            }
+          }
+        }
+        .search-bar {
+          max-width: 50%;
+
+          .search-button {
+            width: 100px;
+          }
+        }
+      }
+
+      .hide-on-large-pin-top {
+        display: none;
+      }
+
+      .show-on-large-pin-top {
+        display: flex !important;
+      }
+    }
+  }
+}
+
+/* -------- DROPDOWN MENU (MORE) -------- */
+
+.dropdown {
+  position: relative;
+
+  .dropdown-contents {
+    background-color: $primary-color;
+    z-index: -1;
+    min-width: 200px;
+    position: absolute;
+    margin-top: -46em;
+    top: 30px;
+    left: 0;
+
+    transition: margin-top 600ms ease-in-out;
+    -webkit-transition: margin-top 700ms ease-in-out;
+
+    li.dropdown-item {
+      border-bottom: $lighter-color solid 1px;
+      border-right: none;
+      height: 40px;
+
+      -webkit-transition: background-color 400ms ease-in-out;
+      transition: background-color 400ms ease-in-out;
+
+      a {
+        display: block;
+        width: 100%;
+        height: 100%;
+        padding: 11px 20px !important;
+
+      }
+    }
+
+    li:first-child {
+      border-top: $lighter-color solid 1px;
+    }
+
+    li:last-child {
+      border: none;
+    }
+  }
+
+  /* -------- BURGER DROPDOWN MENU  -------- */
+  &.burger-dropdown {
+
+    .dropdown-contents {
+      position: fixed;
+      left: 0;
+      width: 100%;
+      max-height: 100vh;
+      overflow-y: scroll;
+      background-color: white;
+      box-shadow: 0 1px 4px 0 #e4e4e4;
+
+      transition: margin-top 700ms ease-in-out;
+      -webkit-transition: margin-top 700ms ease-in-out;
+
+      li.dropdown-item {
+        height: 50px;
+        border-bottom-color: #e4e4e4;
+
+        a {
+          color: $grey;
+          font-size: 0.9em;
+          padding: 15px !important;
+          text-align: center;
+
+          transition: color 200ms ease-in-out;
+          -webkit-transition: color 200ms ease-in-out;
+        }
+      }
+    }
+  }
+}
+
+/* -------- TOGGLE DROPDOWNS  -------- */
+.dropdown:hover {
+  .dropdown-contents.more-section {
+    margin-top: 0;
+  }
+}
+
+.burger-button.active {
+  background-color: $lighter-color;
+}
+
+.burger-dropdown.active {
+  background-color: $lighter-color;
+}
+
+.burger-dropdown-contents.active {
+  margin-top: 15px;
+}
+
+/* -------- FIX DROPDOWN TOP IN DIFFERENT SIZES  -------- */
+#chembl-header-container.pinned {
+  .burger-dropdown {
+
+    .dropdown-contents {
+      top: 39px;
+    }
+  }
+}
+
+@media (min-width: 640px) and (max-width: 992px) {
+
+  #chembl-header-container.pin-top {
+    .burger-dropdown {
+
+      .dropdown-contents {
+        top: 69px;
+      }
+    }
+  }
+}
+
+@media (max-width: 640px) {
+
+  #chembl-header-container.pin-top {
+    .burger-dropdown {
+
+      .dropdown-contents {
+        top: 84px;
+      }
+    }
+  }
+}

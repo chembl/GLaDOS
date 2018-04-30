@@ -1,0 +1,43 @@
+/*
+* Unichem connectivity matches
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+.unichem_connectivity_matches{
+
+  .class0 {
+    color: #025C5E;
+    &:hover{
+      color: #09979B;
+    }
+  }
+  .class1 {
+    color: #D33C60;
+    &:hover{
+      color: #FE7F9D;
+    }
+  }
+  .class2 {
+    color: #0F77C9;
+    &:hover{
+      color: #4EB1FF;
+    }
+  }
+  .class3 {
+    color: #EE4F4F;
+    &:hover{
+      color: #FE7F9D;
+    }
+  }
+  .class4 {
+    color: #FFC107;
+    &:hover{
+      color: #FFDE7C;
+    }
+  }
+  .class5 {
+    color: #8795E8;
+    &:hover{
+      color: #C0E3FF;
+    }
+  }
+}

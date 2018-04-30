@@ -1,82 +1,35 @@
-<div class="container main-container">
-  {% if not hide_side_nav %}
-    <div id="BCK-SRB-wrapper">
-      {% block autocomplete_BCK_SRB %}
-        {% include "glados/SearchResultsParts/SearchBarAutocomplete.html" %}
-      {% endblock %}
-      <div class="hide-on-small-only" >
+{% load static %}
+<div class="search-bar-container">
+    <div id="chembl-header-search-bar-container" class="bar-wrapper">
 
-        <div class="search-banner">
-            <div class="card-content">
+        {% block autocomplete_chembl_header %}
+            {% include "glados/SearchResultsParts/SearchBarAutocomplete.html" %}
+        {% endblock %}
 
-              <div class="section">
+        <input type="search" value="" name="search-str" class="chembl-search-bar" placeholder="Search in ChEMBL">
 
-                  <div class="row">
+        <a class="bar-button draw-structure tooltipped hide-on-small-only"
+           data-position="left" data-delay="50" data-tooltip="Draw a structure">
+            <img src="{% static 'img/icons/structure_icon.png' %}"/>
+        </a>
 
-                    <div class="col m12">
+        <a class="bar-button draw-structure tooltipped hide-on-med-and-up"
+           href="{% url 'main' %}marvin_search_fullscreen/"
+           data-position="left" data-delay="50" data-tooltip="Draw a structure">
+            <img src="{% static 'img/icons/structure_icon.png' %}"/>
 
-                      <div class="search-bar full-height">
+        </a>
 
-                        <div class="search-bar-help hide-on-med-and-down">
-                          Example:
-                            <a class="example-link" href="{% url 'main' %}g/#search_results/Dopamine">Dopamine</a>,
-                            <a class="example-link" href="{% url 'main' %}g/#search_results/Aspirin" >Aspirin</a>,
-                            <a class="example-link" href="{% url 'main' %}g/#search_results/NCCc1ccc(O)c(O)c1">NCCc1ccc(O)c(O)c1</a>,
-                            <a class="example-link" href="{% url 'main' %}g/#search_results/Liver">Liver</a>
-                        </div>
-
-                        <div class="col m5 l8">
-
-                          <div class="search-input-wrapper" >
-                            <input type="search" value="" name="search-str"
-                                   placeholder="Search in ChEMBL!" class="chembl-search-bar"/>
-                          </div>
-
-                        </div>
-                        <div class="col m7 l4">
-                            <div class="row no-margin">
-                                <div class="col m5 draw-and-search-wrapper">
-
-                                  <a onclick="this.blur();" class="draw-structure draw-st-btn col m12 tooltipped hide-on-small-only"
-                                        data-position="left" data-delay="50" data-tooltip="Draw a structure">
-                                    <span>
-                                      <i class="icon icon-conceptual icon-c6" data-icon="b">  </i> Draw
-                                    </span>
-                                  </a>
-
-                                </div>
-
-                                <div class="col m7">
-
-                                  <button onclick="this.blur();" class="search-button search-btn col m12 tooltipped"
-                                        data-position="left" data-delay="50" data-tooltip="Search">
-                                    <span>
-                                      <i class="icon icon-functional" data-icon="1"></i> Search
-                                    </span>
-                                  </button>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-
-                      </div>
-
-                    </div>
-
-                  </div>
-
-              </div>
-
-            </div>
-
-          </div>
-      </div>
-
+        <a class="bar-button search-button">
+            <img src="{% static 'img/icons/search_icon.png' %}"/>
+        </a>
     </div>
-  {% endif %}
-  {% block query_explain %}
-    {% include "glados/SearchResultsParts/ESQueryExplain.html" %}
-  {% endblock %}
+
+    <div class="search-examples show-on-large-pin-top" style="display: none">
+        Example: &nbsp;
+        <a href="{% url 'main' %}g/#search_results/Dopamine">Dopamine</a> &nbsp;
+        <a href="{% url 'main' %}g/#search_results/Aspirin"> Aspirin</a> &nbsp;
+        <a href="{% url 'main' %}g/#search_results/NCCc1ccc(O)c(O)c1"> NCCc1ccc(O)c(O)c1</a> &nbsp;
+        <a href="{% url 'main' %}g/#search_results/Liver"> Liver</a>
+    </div>
 </div>

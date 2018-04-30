@@ -1,0 +1,612 @@
+/*colours from materialize*/
+@import "components/color";
+@import "components/variables";
+
+/* -------- VARIABLES -------- */
+
+//fonts
+$chembl-helvetica: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+$helvetica: helvetica, Arial, sans-serif;
+$verdana: "ChEMBL_Verdana", Verdana, sans-serif;
+
+$font-size-big: 1.2em;
+$font-size-small: 1em;
+
+//colors
+$lighter-color: #62b7bd;
+$primary-color: #09979b;
+$darker-color: #0d595f;
+$grey-dark: #4d5456;
+$grey-light: #e9e9e9;
+
+//heights
+$chembl-header-height: 54px;
+$ebi-nav-height: 50px;
+$full-header-height: $chembl-header-height + $ebi-nav-height;
+$full-header-height-large: 180px;
+
+/* -------- DEFAULT STYLES -------- */
+
+.main-page-container {
+  h2 {
+    color: $darker-color;
+    font-size: 3em;
+  }
+
+  p {
+    color: $grey-dark;
+    font-family: $helvetica;
+  }
+
+  .color-row {
+    padding: 40px 0;
+    margin-bottom: 0;
+    background: linear-gradient(to bottom right, #fcfcfc, #f5f5f5);
+  }
+
+  .container {
+    width: 90%;
+    max-width: 1280px;
+  }
+
+  .main-page-section {
+    height: calc(100vh - #{$full-header-height});
+    min-height: 400px;
+    max-height: 900px;
+
+    &.half-height {
+      padding: 0 30px 20px 30px;
+    }
+
+    &.fit-height {
+      height: fit-content;
+      min-height: 300px;
+      max-height: none;
+      height: -moz-fit-content;
+    }
+
+    .section-col {
+      height: 100%;
+    }
+  }
+
+  .col-divider {
+    height: 1px;
+    background-color: #e0e0e0;
+
+  }
+  .divider {
+    margin: 55px auto;
+  }
+
+  .btn-container {
+    padding: 30px 0 20px 0;
+
+    .button {
+      font-size: 1em;
+      padding: 10px 20px;
+      background-color: $primary-color;
+      color: white;
+      border-radius: 1px;
+      letter-spacing: 0.02em;
+
+      -webkit-transition: background-color 100ms ease;
+      transition: background-color 100ms ease;
+
+      &:hover {
+        background-color: $darker-color;
+      }
+    }
+
+    .hollow-button {
+      padding: 8px 12px;
+      background-color: white;
+      color: $primary-color;
+      border: solid $primary-color 2px;
+      border-radius: 1px;
+      letter-spacing: 0.02em;
+
+    }
+  }
+
+  .chembl-text {
+    font-family: $helvetica;
+  }
+
+  .small-text {
+    font-family: $helvetica;
+    font-size: 0.9em;
+    color: $grey-dark;
+
+    a {
+      color: $primary-color;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+}
+
+/* -------- Make sure carousel takes full height of container -------- */
+
+/* -------- VISUALISATIONS CAROUSEL -------- */
+.main-page-container {
+
+  .carousel-wrapper {
+    height: calc(100% - 40px); //50px for slick dots
+
+    .slick-list {
+      height: 100%;
+    }
+
+    .slick-track {
+      height: calc(100% - 30px);
+    }
+
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      padding: 0;
+
+      a {
+        &:hover {
+          color: $primary-color;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+/* -------- CHEMBL TEXT -------- */
+.main-page-container {
+
+  .chembl-text {
+    text-align: center;
+
+    h2 {
+      margin: 0;
+      padding-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.25em;
+      margin: 0;
+    }
+
+    .small-text {
+      font-size: 0.9em;
+    }
+
+    .social-media {
+      margin-top: 15px;
+
+      img {
+        width: 30px;
+        height: auto;
+        opacity: 0.7;
+
+        &:hover{
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+
+}
+
+/* -------- EXPLORE THE DATABASE -------- */
+.main-page-container {
+
+  .explore-database {
+    text-align: center;
+    margin-bottom: 20px;
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    .btn-container {
+      padding-top: 15px;
+    }
+  }
+}
+
+/* -------- DATABASE SUMMARY -------- */
+.main-page-container {
+
+  .database-summary {
+    text-align: center;
+
+    h3 {
+      color: $grey-dark;
+      margin: 0;
+      padding-top: 10px;
+    }
+
+    .small-text {
+      margin-top: 0;
+    }
+
+    .db-records {
+      margin: 0 auto;
+      padding-top: 30px;
+      max-width: 1200px;
+      position: relative;
+
+      .db-record-item {
+        font-family: $chembl-helvetica;
+
+        h4 {
+          margin-bottom: 0;
+          font-size: 2.2em;
+          color: $darker-color;
+          text-anchor: middle;
+          transition: letter-spacing 100ms ease-in;
+        }
+
+        p {
+          margin-top: 0;
+          text-anchor: middle;
+
+        }
+
+        img {
+          padding: 5px;
+          width: 145px;
+          height: auto;
+        }
+
+        &:hover {
+          img {
+            padding: 2px;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* -------- TWEETS -------- */
+
+.tweet-box {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .num-results {
+    display: none;
+  }
+
+  .tweet-header {
+    padding-left: 5px;
+    font-family: $chembl-helvetica;
+    color: $grey-dark;
+    a {
+      color: $primary-color;
+    }
+  }
+
+  .row {
+    margin: 0;
+  }
+
+  .tweet-list-container {
+    max-height: 100%;
+    overflow: scroll;
+    border-radius: 10px;
+
+    //Each tweet on the list
+    .tweet {
+      border: 1px solid $grey-light;
+      border-radius: 3px;
+      padding: 12px 10px;
+      width: 100%;
+      margin: 7px 0;
+
+      .tweet-content {
+        font-size: 1em;
+        word-wrap: break-word;
+        color: $grey-dark;
+        margin: 0;
+
+        a {
+          color: $primary-color;
+        }
+
+      }
+
+      .tweet-extras {
+        margin-top: 5px;
+        font-size: 0.9em;
+        font-family: $verdana;
+
+        span {
+          margin-right: 10px;
+          color: #a8a8a8;
+
+          &:hover {
+            text-decoration: underline;
+          }
+
+        }
+        img {
+          width: 22px;
+          height: auto;
+          float: right;
+          margin-right: 10px;
+          padding: 1px;
+
+          &:hover {
+            padding: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* -------- BLOG ENTRIES (like tweets but with some tweaks) -------- */
+
+.blog-box {
+
+  h5 {
+    margin: 0 !important;
+    font-size: 1.3em;
+
+    a {
+      color: $primary-color;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .tweet-content {
+    margin: 5px 0 !important;
+  }
+
+  .tweet-extras {
+    color: #a8a8a8;
+    margin: 0 !important;
+
+  }
+}
+
+/* -------- ASSOCIATED RESOURCES -------- */
+.associated-resources {
+  padding: 30px 0;
+
+  .container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+
+    .chembl-text {
+      padding: 0 0 30px 0;
+      text-align: center;
+
+      h2 {
+        color: $grey-dark;
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    .resources-container {
+      margin-bottom: 50px;
+      display: flex;
+      align-items: stretch;
+
+      .cards-column {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .resource-card {
+          border-radius: 3px;
+          padding: 15px 0 20px 0;
+          margin: 5px 0;
+          border: solid 1px white;
+          display: flex;
+          align-items: center;
+
+          .resource-content {
+            padding: 0;
+
+            h6 {
+              color: $primary-color;
+              font-weight: bolder;
+            }
+
+            p {
+              font-size: 1.1em;
+              color: $grey-dark;
+              margin: 0;
+            }
+
+            span {
+              color: $primary-color;
+            }
+          }
+
+          .chevron-icon {
+            margin: 0;
+            padding: 0;
+            color: $grey-dark;
+          }
+
+          transition: box-shadow 100ms ease-in;
+          &:hover {
+            box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+
+            .chevron-icon {
+              color: $primary-color;
+            }
+
+          }
+        }
+      }
+    }
+
+    .imgs-column {
+      flex-direction: column;
+      justify-content: center;
+      padding: 30px 0;
+
+      img {
+        width: 150px;
+        height: auto;
+        margin-left: auto;
+      }
+    }
+  }
+}
+
+/* -------- VISUALISATIONS CAROUSEL -------- */
+.know-more {
+  background: #f5f5f5;
+  min-height: 1px !important;
+  padding-top: 40px;
+  padding-bottom: 20px;
+
+  .container {
+    max-width: 900px;
+    margin-bottom: 0;
+
+    h3 {
+      color: $grey-dark;
+      margin-top: 10px;
+      margin-bottom: 30px;
+    }
+
+    .more-container {
+      padding-bottom: 20px;
+
+      .more-img {
+        width: 110px;
+        height: auto;
+        border-radius: 100%;
+
+      }
+
+      .title {
+        color: $grey-dark;
+        font-size: 1.1em;
+      }
+    }
+  }
+}
+
+/**
+* Browse entities
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+
+.circles-vis-container{
+  //border: orange solid 1px;
+  circle {
+    cursor: pointer;
+  }
+  text {
+    font-family: $chembl-helvetica;
+    text-anchor: middle;
+    fill: white;
+  }
+
+}
+
+
+/* ------------------- MEDIA QUERIES ------------------- */
+
+/* -------- MEDIUM SCREEN -------- */
+.main-page-container {
+  @media (max-width: 600px) {
+    .smaller-on-small {
+      height: 60vh;
+    }
+
+    .associated-resources {
+      .chembl-text {
+        h2 {
+          font-size: 2em;
+        }
+
+        p {
+          font-size: 1.1em;
+        }
+      }
+      .imgs-column {
+        display: none !important;
+      }
+    }
+  }
+
+  @media (min-width: 600px) and (max-width: 992px) {
+    .smaller-on-med {
+      height: 50vh;
+    }
+
+    .chembl-text {
+      padding: 0 10%;
+    }
+
+    .explore-database {
+      margin-top: 5%;
+    }
+  }
+
+  /* -------- LARGE SCREEN -------- */
+  @media (min-width: 992px) {
+    .main-page-section {
+      height: calc(100vh - #{$full-header-height-large});
+
+      &.half-height {
+        height: 50vh !important;
+      }
+    }
+    .chembl-text {
+      text-align: left;
+      padding-left: 40px;
+
+      p {
+        font-size: 1.1em;
+      }
+    }
+
+    .btn-container {
+      font-size: 1em;
+    }
+
+    .carousel-wrapper {
+      padding-top: 10%;
+    }
+  }
+
+  .db-records {
+    align-content: space-between;
+    display: flex;
+  }
+
+  @media (max-width: 992px) {
+    .db-records {
+      display: block;
+    }
+
+    .half-height {
+      height: 50vh;
+    }
+
+    .color-row {
+
+      .col-divider {
+        margin: 50px 0;
+      }
+    }
+  }
+}

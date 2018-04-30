@@ -38,6 +38,31 @@ class ButtonsHelper
     return $newModal
 
   # ------------------------------------------------------------
+  # Cropped Container
+  # ------------------------------------------------------------
+  @initCroppedContainer: ($containerElem, config) ->
+
+    downloadBtnID = "DownloadBtn-#{(new Date()).getTime()}"
+    copyButtonID = "CopyBtn-#{(new Date()).getTime()}"
+    value = config.value
+    downloadFilename = config.download.filename
+    downloadValue = config.download.value
+    downloadValue ?= value
+    downloadTooltip = config.download.tooltip
+    downloadTooltip ?= 'Download'
+    copyTooltip = 'Copy to Clipboard'
+
+    glados.Utils.fillContentForElement $containerElem,
+      dwnld_btn_id: downloadBtnID
+      copy_btn_id: copyButtonID
+      value: value
+
+    ButtonsHelper.initCroppedTextFields($containerElem)
+    ButtonsHelper.initDownloadBtn($containerElem.find("##{downloadBtnID}"), downloadFilename, downloadTooltip, downloadValue)
+    $copyBtn = $containerElem.find("##{copyButtonID}")
+    ButtonsHelper.initCopyButton($copyBtn, copyTooltip, value)
+
+  # ------------------------------------------------------------
   # Download buttons
   # ------------------------------------------------------------
 
@@ -288,9 +313,9 @@ class ButtonsHelper
     *  Initializes the cropped container on the elements of the class 'cropped-text-field'
     * It is based on an input field to show the information
   ###
-  @initCroppedTextFields = ->
+  @initCroppedTextFields = ($container) ->
 
-    $('.cropped-text-field').each ->
+    $container.find('.cropped-text-field').each ->
 
       currentDiv = $(this)
       input_field = $(this).find('input')

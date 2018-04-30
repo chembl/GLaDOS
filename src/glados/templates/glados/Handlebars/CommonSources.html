@@ -596,7 +596,7 @@ There are no {{#if is_unichem}}UniChem {{/if}}cross references for {{chembl_id}}
 
 <script id="Handlebars-Common-Pie-External-Title" type="text/x-handlebars-template">
 
-    <a href="{{ title_url }}">{{ title }}</a>
+    <a target="_blank" href="{{ title_url }}">{{ title }}</a>
 
 </script>
 
@@ -611,57 +611,84 @@ There are no {{#if is_unichem}}UniChem {{/if}}cross references for {{chembl_id}}
 <!-- tweet box template -------------------------------------------------------------------------------------------------->
 
 <script id='Handlebars-Common-Paginated-Card-Tweet' type="text/x-handlebars-template">
-    <div class="tweet grey lighten-5">
 
-        <a href="https://twitter.com/{{columns_by_comparator.user__screenName.value}}/status/{{columns_by_comparator.id.value}}"
-           target="_blank">
+    <div class="row tweet white">
 
-            <div class="row valign-wrapper">
-                <div class="col s2">
-                    <img class="responsive-img valign circle" src="{{columns_by_comparator.user__profileImgUrl.value}}" alt="">
-                </div>
+        <p class="tweet-content">
 
-                <div class="col s10 tweet-profile-name">
-                    <p><b>ChEMBL</b></p>
-                </div>
-            </div>
+            {{{columns_by_comparator.text.value}}}
 
-        </a>
+        </p>
 
-        <div class="row">
-            <div class="flow-text">
-                <div class="tweet-content">
-                    <p>
-                        {{{columns_by_comparator.text.value}}}
-                    </p>
-                </div>
-            </div>
+        <div class="row tweet-extras">
+
+            <a href="https://twitter.com/{{columns_by_comparator.user__screenName.value}}/status/{{columns_by_comparator.id.value}}"
+               target="_blank">
+                <span class="left">{{columns_by_comparator.createdAt.value}}</span>
+            </a>
+
+            <a onclick="window.open('https://twitter.com/intent/retweet?tweet_id={{columns_by_comparator.id.value}}','retweet {{columns_by_comparator.id.value}}','width=600,height=400')">
+                <img src="/static/img/icons/retweet_icon.png">
+            </a>
+
+            <a onclick="window.open('https://twitter.com/intent/like?tweet_id={{columns_by_comparator.id.value}}','like {{columns_by_comparator.id.value}}','width=600,height=400')">
+                <img src="/static/img/icons/fav_icon.png">
+            </a>
+
         </div>
 
-        <div class="row tweet-info">
-            <div class="col s4">
-                <a href="#"
-                   onclick="window.open('https://twitter.com/intent/like?tweet_id={{columns_by_comparator.id.value}}','like {{columns_by_comparator.id.value}}','width=600,height=400')">
-                    <i class="fa fa-heart" aria-hidden="true"></i>
-                </a>
-                <a href="#"
-                   onclick="window.open('https://twitter.com/intent/retweet?tweet_id={{columns_by_comparator.id.value}}','retweet {{columns_by_comparator.id.value}}','width=600,height=400')">
-                    <i class="fa fa-retweet" aria-hidden="true"></i>
-                </a>
-            </div>
-            <div class="col s8 right-align">
-                 <span>{{columns_by_comparator.createdAt.value}}</span>
-            </div>
-        </div>
     </div>
+
 </script>
+
+
+<!-- Blog entries template  -------------------------------------------------------------------------------------------------->
+
+<script id='Handlebars-Common-Paginated-Card-Blog-Entry' type="text/x-handlebars-template">
+
+    <div class="row tweet white">
+
+        <h5>
+
+            <a href="{{{columns_by_comparator.url.value}}}" target="_blank">
+
+                {{{columns_by_comparator.title.value}}}
+
+            </a>
+
+        </h5>
+
+        <p class="tweet-content content">
+
+            {{{columns_by_comparator.content.value}}}
+
+            <a href="{{{columns_by_comparator.url.value}}}" target="_blank">
+
+                Read More
+
+            </a>
+
+        </p>
+
+        <p class="tweet-extras">
+
+            By {{{columns_by_comparator.author.value}}}
+
+            on {{{columns_by_comparator.date.value}}}
+
+        </p>
+
+    </div>
+
+</script>
+
 
 {% endverbatim %}
 
 
 {% include "glados/Handlebars/CardSources.html" %}
 {% include "glados/Handlebars/TableSources.html" %}
-{% include "glados/Handlebars/ReportCardTemplates.html" %}
+{% include "glados/Handlebars/ReportCards/ReportCardTemplates.html" %}
 {% include "glados/Handlebars/PreloaderSources.html" %}
 {% include "glados/Handlebars/ErrorSources.html" %}
 {% include "glados/Handlebars/EmbeddingSources.html" %}
@@ -672,3 +699,4 @@ There are no {{#if is_unichem}}UniChem {{/if}}cross references for {{chembl_id}}
 {% include "glados/Handlebars/SearchResults/SearchResultsSources.html" %}
 {% include "glados/Handlebars/SubstructureSearchResults/SubstructureSearchResultsSources.html" %}
 {% include "glados/Handlebars/Browsers/BrowserSources.html" %}
+{% include "glados/Handlebars/CroppedContainers.html" %}

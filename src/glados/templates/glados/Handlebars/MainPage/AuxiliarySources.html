@@ -2,76 +2,125 @@
 {% verbatim %}
 <script id="Handlebars-DatabaseInfo" type="text/x-handlebars-template">
 
-  <div class="card-content">
+    <h3> Current Release: {{chembl_db_version}}</h3>
 
-      <div class="release-wrapper">
-          <div class="row valign-wrapper">
+    <p class="small-text"> Last Update on {{chembl_release_date}} &nbsp|&nbsp
+        <a href="{{release_notes_link}}"> Release notes </a>
+    </p>
 
+    <div class="db-records row">
 
-              <div class="col s12 logo-and-info">
+        <div class="col s6 m6 l2 db-record-item">
 
-                  <div class="version-number-logo">
-                      {% endverbatim %}
-                      <img src="{% static 'img/chembl_logo.png' %}" class="responsive-img">
-                      {% verbatim %}
-                  </div>
+            <a href="/g/#browse/targets">
 
+                {% endverbatim %}
+                <img src="{% static 'img/icons/target_icon.png' %}"/>
+                {% verbatim %}
 
-                  <div class="release-info">
-                      <p><b>DB: {{chembl_db_version}}</b></p>
-                      <p>{{chembl_release_date}}</p>
-                  </div>
+                <h4>{{num_targets}}</h4>
 
-              </div>
+                <p>Targets</p>
 
-
-          </div>
-
-          <div class="row">
-
-              <div class="database-stats">
-
-                  <ul>
-                      <li>Targets: <a href="/g/#browse/targets"> <span class="teal-text">{{num_targets}}</span></a></li>
-                      <li>Distinct compounds: <a href="/g/#browse/compounds"><span class="teal-text">{{num_compounds}}</span></a></li>
-                      <li>Activities: <a href="/g/#browse/activities"><span class="teal-text">{{num_activities}}</span></a></li>
-                      <li>Publications: <a href="/g/#browse/documents"><span class="teal-text">{{num_publications}}</span></a></li>
-                  </ul>
-
-              </div>
-
-
-
-          </div>
-      </div>
-
-      <div class="row">
-
-        <div class="col s12 center-align download-button">
-
-
-          <a href="#download-db-modal" class="modal-trigger-safe waves-effect waves-light btn-chembl teal"><i
-            class="fa fa-download" aria-hidden="true"></i>
-            Download</a>
-
-
-
-          <a target="_blank" class="rel-notes" href="{{release_notes_link}}">Release Notes</a>
-
+            </a>
 
         </div>
 
+        <div class="col s12 m6 l2 db-record-item">
 
-      </div>
+            <a href="/g/#browse/compounds">
+
+                {% endverbatim %}
+                <img src="{% static 'img/icons/compound_icon.png' %}"/>
+                {% verbatim %}
+
+
+                <h4>{{num_compounds}}</h4>
+
+                <p>Distinct compounds</p>
+
+            </a>
+
+        </div>
+
+        <div class="col s12 m6 l2 db-record-item">
+
+            <a href="/g/#browse/activities">
+
+                {% endverbatim %}
+                <img src="{% static 'img/icons/activity_icon.png' %}"/>
+                {% verbatim %}
+
+                <h4>{{num_activities}}</h4>
+
+                <p>Activities</p>
+
+            </a>
+
+        </div>
+
+        <div class="col s12 m6 l2 db-record-item">
+
+            <a href="/g/#browse/documents">
+                {% endverbatim %}
+                <img src="{% static 'img/icons/document_icon.png' %}"/>
+                {% verbatim %}
+
+                <h4>{{num_publications}}</h4>
+
+                <p>Publications</p>
+
+            </a>
+
+        </div>
+
+        <div class="col s12 m6 l2 db-record-item">
+
+            <a href="{{ datasets_url }}">
+
+                {% endverbatim %}
+                <img src="{% static 'img/icons/database_icon.png' %}"/>
+                {% verbatim %}
+
+                <h4 class="BCK-num-datasets">{{num_datasets}}</h4>
+
+                <p>Deposited Datasets</p>
+
+            </a>
+
+        </div>
 
     </div>
 
 </script>
 
 <script id="Handlebars-DatabaseInfoError" type="text/x-handlebars-template">
-  <div class="card-content">
-  There was an error while loading the database status. Click <a href="http://chembl.github.io/status/">here</a>
-  for more information.
-  </div>
+    <div>
+        There was an error while loading the database status. Click <a href="http://chembl.github.io/status/">here</a>
+        for more information.
+    </div>
 </script>
+
+
+<script id="Handlebars-AssociatedResourcesImage" type="text/x-handlebars-template">
+
+    <img class="responsive-img base"
+         {% endverbatim %} src="{% static 'img/icons/res_img/base.png' %}" {% verbatim %}
+    />
+
+    <img class="responsive-img ntd"
+         {% endverbatim %} src="{% static 'img/icons/res_img/ntd.png' %}" {% verbatim %}
+         style="display:none;"/>
+
+    <img class="responsive-img uni"
+         {% endverbatim %} src="{% static 'img/icons/res_img/uni.png' %}" {% verbatim %}
+         style="display:none;"/>
+
+    <img class="responsive-img sure"
+         {% endverbatim %} src="{% static 'img/icons/res_img/sure.png' %}" {% verbatim %}
+         style="display:none;"/>
+
+
+</script>
+
 {% endverbatim %}

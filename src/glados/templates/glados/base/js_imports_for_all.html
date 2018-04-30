@@ -159,6 +159,10 @@
 
     <!-- Compound Report Card -->
 
+    <script type="text/javascript" src="{% static 'js/coffee-gen/configs/ReportCards/Compound/ToggleAlternateFormsInPieConfig.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/configs/ReportCards/Compound/AssaySummaryPieConfig.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/configs/ReportCards/Compound/ActivityPieSummaryConfig.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/configs/ReportCards/Compound/TargetSummaryPieConfig.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/compoundReportCardApp.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/Activity.js' %}"></script>
@@ -169,6 +173,7 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound/DrugIndication.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound/MechanismOfAction.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound/TargetPrediction.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound/UnichemConnectivityMatch.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Compound/CompoundNameClassificationView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Compound/CompoundImageView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Compound/CompoundRepresentationsView.js' %}"></script>
@@ -185,6 +190,7 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/MechanismOfAction/CompoundMechanismsOfActionView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Compound/MetabolismView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Compound/TargetPredictionsView.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Compound/UnichemConnectivityMatchesView.js' %}"></script>
 
     <!-- Drug Browser -->
     <!-- The Drug.js file needs to be loaded after the Compound.js -->
@@ -255,6 +261,8 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/CacheFunctions.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/SortingFunctions.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/PaginatedCollectionFactory.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/SpecificFlavours/UnichemConnectivityRefsList.js' %}"></script>
     <!-- Visualisation -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/visualisation/PropertiesFactory.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Visualisation/PlotView.js' %}"></script>
@@ -293,7 +301,11 @@
 
     <!-- Main Page -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/MainPage/DatabaseSummaryInfo.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/views/MainPage/AssociatedResourcesView.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/views/MainPage/BrowseEntitiesAsCirclesView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/MainPage/Tweet.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/models/MainPage/BlogEntry.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/SpecificFlavours/BlogEntriesList.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/MainPage/DatabaseSummaryView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/MainPage/CentralCardView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/MainPageApp.js' %}"></script>

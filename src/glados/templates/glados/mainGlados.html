@@ -1,39 +1,8 @@
 {% extends "glados/base/base_layout.html" %}
-<!-- HIDE SIDE-NAV: Needs to call 3 blocks again FML -->
-{% block main_start_tag %}
-  {% with hide_side_nav=False %}
-    {{block.super}}
-  {% endwith %}
-{% endblock main_start_tag %}
-{% block chembl_header %}
-  {% with hide_side_nav=False main_page=True%}
-    {{block.super}}
-  {% endwith %}
-{% endblock chembl_header %}
-{% block side_nav %}
-  {% with hide_side_nav=False main_page=True%}
-    {{block.super}}
-  {% endwith %}
-{% endblock side_nav %}
-{% block breadcrumb %}
-  {% with hide_side_nav=False main_page=True%}
-    {{block.super}}
-  {% endwith %}
-{% endblock %}
-{% block footer %}
-    {% with main_page=True%}
-        {{block.super}}
-     {% endwith %}
-{% endblock %}
-
 {% block title %}ChEMBL{% endblock %}
 
-{% block content %}
-
-{% endblock %}
-
 {% block custom_js_inline %}
-glados.apps.Main.MainGladosApp.init();
+    glados.apps.Main.MainGladosApp.init();
 {% endblock %}
 
 

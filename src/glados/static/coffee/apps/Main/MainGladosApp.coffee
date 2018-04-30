@@ -12,6 +12,7 @@ glados.useNameSpace 'glados.apps.Main',
       search_results: 'Handlebars-SearchResultsLayout'
       structure_search_results: 'Handlebars-SubstructureSearchResultsLayout'
       browser: 'Handlebars-MainBrowserContent'
+      unichem_connectivity: 'Handlebars-MainUnichemConnectivityContent'
 
     @init = ->
 
@@ -79,11 +80,12 @@ glados.useNameSpace 'glados.apps.Main',
     # ------------------------------------------------------------------------------------------------------------------
     @initMainPage = ->
 
-      glados.apps.BreadcrumbApp.setBreadCrumb([], undefined, hideShareButton=true)
-      promise = @prepareContentFor('main_page')
-
-      promise.then ->
-        MainPageApp.init()
+#      window.location.href = '/main'
+#      glados.apps.BreadcrumbApp.setBreadCrumb([], undefined, hideShareButton=true)
+#      promise = @prepareContentFor('main_page')
+#
+#      promise.then ->
+#        MainPageApp.init()
 
     # ------------------------------------------------------------------------------------------------------------------
     # Search Results

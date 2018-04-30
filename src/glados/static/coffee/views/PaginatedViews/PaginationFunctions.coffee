@@ -2,6 +2,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
   PaginationFunctions:
 
     initPageNumber: -> @currentPageNum = 1
+    setPageNumber: (pageNum) -> @currentPageNum = pageNum
+    resetPageNumber: -> @setPageNumber(1)
     initAvailablePageSizes: ->
 
       @AVAILABLE_PAGE_SIZES ?= [5, 10, 20, 50, 100]

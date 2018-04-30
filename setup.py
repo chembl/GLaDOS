@@ -41,7 +41,9 @@ add_data_dir_recursive_as_package_data('glados', 'templates', package_data_desc)
 requirements_data = []
 with open('./requirements.txt', 'r') as req_f:
     for line in iter(req_f):
-        requirements_data.append(line[0:-1])
+        line = line.strip()
+        if line != "":
+            requirements_data.append(line)
 
 print('REQUIREMENTS:')
 print(requirements_data)

@@ -95,48 +95,47 @@ CompoundNameClassificationView = CardView.extend
 
     if @model.get('structure_type') == 'SEQ' or @model.get('structure_type') == 'NONE'
       $(@el).find('#Bck-MOLFORMULA').parent().parent().hide()
+      $(@el).find('#Bck-FULLMWT').parent().parent().hide()
     else
       molformula = @model.get('molecule_properties')['full_molformula']
       $(@el).find('#Bck-MOLFORMULA').text(molformula)
       molWt = @model.get('molecule_properties')['full_mwt']
-      $(@el).find('#Bck-FULLMWT').text("- #{molWt}")
+      $(@el).find('#Bck-FULLMWT').text("#{molWt}")
 
   renderSynonymsAndTradeNames: ->
-    all_syns = @model.get('molecule_synonyms')
-    unique_synonyms = {}
-    trade_names = {}
 
-    $.each all_syns, (index, value) ->
-      if value.syn_type == 'TRADE_NAME'
-        trade_names[value.synonyms] = value.synonyms
+    synsList = @model.getSynonyms()
+    @renderSynOrTNRow(synsList, '#CompNameClass-synonyms')
 
-    # I had to make 2 iterations because the keyword delete has some issues in coffesscript
-    $.each all_syns, (index, value) ->
-      if value.syn_type != 'TRADE_NAME' and not trade_names[value.synonyms]?
-        unique_synonyms[value.synonyms] = value.synonyms
+    additionalSynsList = @model.getAdditionalSynonyms()
+    @renderSynOrTNRow(additionalSynsList, '#CompNameClass-additional-synonyms')
 
-    if Object.keys(unique_synonyms).length == 0
+    rowTitle = switch @model.isParent()
+      when true then 'Synonyms From Alternate Forms:'
+      else 'Synonyms From Parent:'
+    $(@el).find('#CompNameClass-additional-synonymsTitle').text(rowTitle)
 
-      $(@el).find('#CompNameClass-synonyms').parent().parent().parent().hide()
+    tnList = @model.getTradenames()
+    @renderSynOrTNRow(tnList, '#CompNameClass-tradenames')
 
+    additionalTnList = @model.getAdditionalTradenames()
+    @renderSynOrTNRow(additionalTnList, '#CompNameClass-additional-tradenames')
+
+    rowTitle = switch @model.isParent()
+      when true then 'Trade Names From Alternate Forms:'
+      else 'Trade Names From Parent:'
+
+    console.log 'rowTitle: ', rowTitle
+    $(@el).find('#CompNameClass-additional-tradenamesTitle').text(rowTitle)
+
+
+
+  renderSynOrTNRow: (list, cellSelector) ->
+
+    $container = $(@el).find("#{cellSelector}")
+
+    if list.length == 0
+      $container.parent().parent().parent().hide()
     else
-      synonyms_source = '{{#each items}}' +
-        ' <span class="chip-syn">{{ this }}</span> ' +
-        '{{/each}}'
-
-      syn_rendered = Handlebars.compile($('#Handlebars-Compound-NameAndClassification-synonyms').html())
-        items: Object.keys(unique_synonyms)
-
-      $(@el).find('#CompNameClass-synonyms').html(syn_rendered)
-
-
-    if Object.keys(trade_names).length == 0
-
-      $(@el).find('#CompNameClass-tradenames').parent().parent().parent().hide()
-
-    else
-
-      tn_rendered = Handlebars.compile($('#Handlebars-Compound-NameAndClassification-tradenames').html())
-        items: Object.keys(trade_names)
-
-      $(@el).find('#CompNameClass-tradenames').html(tn_rendered)
+      glados.Utils.fillContentForElement $container,
+        items: list

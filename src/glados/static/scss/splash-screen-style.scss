@@ -6,6 +6,7 @@
 $splash-width: 60px;
 $splash-color1: #75D8D5;
 $splash-color2: #FE7F9D;
+$chembl-helvetica: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
 
 @keyframes one {
   0%, 5%, 95%, 100% {
@@ -76,8 +77,8 @@ $splash-color2: #FE7F9D;
   left: 0;
   bottom: 0;
   right: 0;
-  animation: ease-to-white 3s 1 ease-in;
-  background-color: rgba(0, 0, 0, 0.4);
+  //animation: ease-to-white 3s 1 ease-in;
+  background-color: rgba(0, 0, 0, 0.5);
 
   .splash-card {
     width: 30%;
@@ -86,6 +87,7 @@ $splash-color2: #FE7F9D;
     align-items: center;
     justify-content: center;
     background-color: #FAFAFA;
+    min-height: 200px;
   }
 
   .loader-container {
@@ -100,11 +102,13 @@ $splash-color2: #FE7F9D;
       color: #cacaca;
       font-size: 0.9em;
       margin-top: 10px;
+      font-family: $chembl-helvetica;
     }
 
     .chembl-logo {
       color: #cacaca;
       font-size: 1.8em;
+      font-family: $chembl-helvetica;
       background: none;
       margin-top: 20px;
     }

@@ -18,9 +18,6 @@ glados.models.MainPage.Tweet.COLUMNS =
     name_to_show: 'IMG URL'
     comparator: 'user.profileImgUrl'
 
-
-
-
 glados.models.MainPage.Tweet.COLUMNS_SETTINGS =
   ALL_COLUMNS: (->
     colsList = []

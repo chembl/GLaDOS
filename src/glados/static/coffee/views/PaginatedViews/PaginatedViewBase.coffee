@@ -53,6 +53,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @numVisibleColumnsList = []
       if @renderAtInit
         @render()
+      else
+        @showPreloaderHideOthers()
 
       @initPageQueue()
 
@@ -145,7 +147,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     render: ->
 
-      if not @collection.getMeta('data_loaded')
+      console.log 'RENDER'
+      console.log '@collection: ', @collection
+
+      if not (@collection.getMeta('data_loaded') or @collection.itemsAreReady())
         return
 
       # don't force to show content when element is not visible.
@@ -247,6 +252,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           highlights: highlights
           selection_disabled: @disableItemsSelection
           columns_by_comparator: columnsByComparator
+          static_images_url: glados.Settings.STATIC_IMAGES_URL
 
         if (@isCards() or @isInfinite() or @isCarousel())
           templateParams.small_size = @CURRENT_CARD_SIZES.small
@@ -522,7 +528,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       # the advancer function requests always the next page
       advancer = $.proxy ->
         #destroy waypoint to avoid issues with triggering more page requests.
-        Waypoint.destroyAll()
+        @destroyAllWaypoints()
+
         # dont' bother if already on last page
         if @collection.currentlyOnLastPage()
           return
@@ -531,13 +538,13 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       , @
 
       # destroy all waypoints before assigning the new one.
-      Waypoint.destroyAll()
+      @destroyAllWaypoints()
       scroll_container = null
       $scroll_containers = $(@el).find('.infinite-scroll-container')
       if $scroll_containers.length == 1
         scroll_container = $scroll_containers[0]
 
-      waypoint = new Waypoint(
+      @waypoint = new Waypoint(
         element: wayPointCard
         context: if scroll_container? then scroll_container else window
         handler: (direction) ->
@@ -546,7 +553,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       )
 
-    destroyAllWaypoints: -> Waypoint.destroyAll()
+    destroyAllWaypoints: -> @waypoint.destroy() unless not @waypoint?
     # checks if there are more page and hides the preloader if there are no more.
     hidePreloaderIfNoNextItems: ->
 

@@ -123,6 +123,9 @@ glados.useNameSpace 'glados.apps.Embedding',
         unichem_cross_refs:
           template: "#{@compoundReportCardBaseTemplate} #UniChemCrossReferencesCard"
           initFunction: CompoundReportCardApp.initUniChemCrossReferences
+        unichem_connectivity_matches:
+          template: "#{@compoundReportCardBaseTemplate} #CUnichemConnectivityMatchesCard"
+          initFunction: CompoundReportCardApp.initUnichemConnectivityMatches
       "#{Target.reportCardPath}":
         name_and_classification:
           template: "#{@targetReportCardBaseTemplate} #TNameClassificationCard"

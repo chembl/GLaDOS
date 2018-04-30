@@ -12,3 +12,5 @@ CompoundMetabolismFSView = Backbone.View.extend
     $(@el).find('.visualisation-title').html Handlebars.compile( $('#Handlebars-MetabolismVisualisationFS-Title').html() )
       chembl_id: GlobalVariables.CHEMBL_ID
 
+    glados.apps.Main.MainGladosApp.hideMainSplashScreen()
+

@@ -38,6 +38,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     CompoundReportCardApp.initStructuralAlerts()
     CompoundReportCardApp.initCrossReferences()
     CompoundReportCardApp.initUniChemCrossReferences()
+    CompoundReportCardApp.initUnichemConnectivityMatches()
 
     compound.fetch()
 
@@ -290,36 +291,20 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @initActivitySummary = ->
 
-    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
-    relatedActivities = CompoundReportCardApp.getRelatedActivitiesAgg(chemblID)
-    relatedActivitiesProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RELATED_ACTIVITIES')
+    compound = CompoundReportCardApp.getCurrentCompound()
 
-    pieConfig =
-      x_axis_prop_name: 'types'
-      title: gettext('glados_compound__associated_activities_pie_title_base') + chemblID
-      title_link_url: Activity.getActivitiesListURL('molecule_chembl_id:' + chemblID)
-      max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
-      properties:
-        types: relatedActivitiesProp
-
-    viewConfig =
-      pie_config: pieConfig
-      resource_type: gettext('glados_entities_compound_name')
-      embed_section_name: 'related_activities'
-      embed_identifier: chemblID
-      link_to_all:
-        link_text: 'See all activities related to ' + chemblID + ' used in this visualisation.'
-        url: Activity.getActivitiesListURL('molecule_chembl_id:' + chemblID)
+    configGenerator = new glados.configs.ReportCards.Compound.ActivityPieSummaryConfig(compound)
+    viewConfig = configGenerator.getViewConfig()
 
     new glados.views.ReportCards.PieInCardView
-      model: relatedActivities
       el: $('#CAssociatedActivitiesCard')
       config: viewConfig
       section_id: 'ActivityCharts'
       section_label: 'Activity Charts'
       report_card_app: @
 
-    relatedActivities.fetch()
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
 
   @initPapersAboutCompound = ->
 
@@ -375,71 +360,35 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @initAssaySummary = ->
 
-    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
-    relatedAssays = CompoundReportCardApp.getRelatedAssaysAgg(chemblID)
-    relatedAssaysProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RELATED_ASSAYS')
-
-    pieConfig =
-      x_axis_prop_name: 'types'
-      title: gettext('glados_compound__associated_assays_pie_title_base') + chemblID
-      title_link_url: Assay.getAssaysListURL('_metadata.related_compounds.chembl_ids.\\*:' + chemblID)
-      max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
-      properties:
-        types: relatedAssaysProp
-
-
-
-    viewConfig =
-      pie_config: pieConfig
-      resource_type: gettext('glados_entities_compound_name')
-      embed_section_name: 'related_assays'
-      embed_identifier: chemblID
-      link_to_all:
-        link_text: 'See all assays related to ' + chemblID + ' used in this visualisation.'
-        url: Assay.getAssaysListURL('_metadata.related_compounds.chembl_ids.\\*:' + chemblID)
+    compound = CompoundReportCardApp.getCurrentCompound()
+    configGenerator = new glados.configs.ReportCards.Compound.AssaySummaryPieConfig(compound)
+    viewConfig = configGenerator.getViewConfig()
 
     new glados.views.ReportCards.PieInCardView
-      model: relatedAssays
       el: $('#CAssociatedAssaysCard')
       config: viewConfig
       section_id: 'ActivityCharts'
       section_label: 'Activity Charts'
       report_card_app: @
 
-    relatedAssays.fetch()
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
 
   @initTargetSummary = ->
-    chemblID = glados.Utils.URLS.getCurrentModelChemblID()
-    relatedTargets = CompoundReportCardApp.getRelatedTargetsAggByClass(chemblID)
-    relatedTargetsProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RELATED_TARGETS')
 
-    pieConfig =
-      x_axis_prop_name: 'classes'
-      title: gettext('glados_compound__associated_targets_by_class_pie_title_base') + chemblID
-      title_link_url: Target.getTargetsListURL('_metadata.related_compounds.chembl_ids.\\*:' + chemblID)
-      custom_empty_message: "No target classification data available for compound #{chemblID} (all may be non-protein targets)"
-      max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
-      properties:
-        classes: relatedTargetsProp
-
-    viewConfig =
-      pie_config: pieConfig
-      resource_type: gettext('glados_entities_compound_name')
-      embed_section_name: 'related_targets'
-      embed_identifier: chemblID
-      link_to_all:
-        link_text: 'See all targets related to ' + chemblID + ' used in this visualisation.'
-        url: Target.getTargetsListURL('_metadata.related_compounds.chembl_ids.\\*:' + chemblID)
+    compound = CompoundReportCardApp.getCurrentCompound()
+    configGenerator = new glados.configs.ReportCards.Compound.TargetSummaryPieConfig(compound)
+    viewConfig = configGenerator.getViewConfig()
 
     new glados.views.ReportCards.PieInCardView
-      model: relatedTargets
       el: $('#CAssociatedTargetsCard')
       config: viewConfig
       section_id: 'ActivityCharts'
       section_label: 'Activity Charts'
       report_card_app: @
 
-    relatedTargets.fetch()
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
 
   @initTargetPredictions = ->
 
@@ -495,6 +444,22 @@ class CompoundReportCardApp extends glados.ReportCardApp
       report_card_app: @
       config:
         refs_config: refsConfig
+
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
+
+  @initUnichemConnectivityMatches = ->
+
+    compound = CompoundReportCardApp.getCurrentCompound()
+
+    new glados.views.Compound.UnichemConnectivityMatchesView
+      model: compound
+      el: $('#CUnichemConnectivityMatchesCard')
+      section_id: 'UniChemConnectivityMatches'
+      section_label: 'UniChem Connectivity Layer Cross References'
+      report_card_app: @
+      embed_section_name: 'unichem_connectivity_matches'
+      embed_identifier: glados.Utils.URLS.getCurrentModelChemblID()
 
     if GlobalVariables['EMBEDED']
       compound.fetch()
@@ -581,13 +546,19 @@ class CompoundReportCardApp extends glados.ReportCardApp
           return true
       properties_to_show: Compound.COLUMNS_SETTINGS.HELM_NOTATION_SECTION
       after_render: (thisView) ->
-        ButtonsHelper.initCroppedTextFields()
-        $copyBtn = $(thisView.el).find('.BCK-Copy-btn')
-        ButtonsHelper.initCopyButton($copyBtn, 'Copy to Clipboard', thisView.model.get('helm_notation'))
 
-        $downloadBtn = $(thisView.el).find('.BCK-Dwnld-btn')
-        ButtonsHelper.initDownloadBtn($downloadBtn, "#{thisView.model.get('molecule_chembl_id')}-HELM.txt",
-          'Download', thisView.model.get('helm_notation'))
+        $container = $(thisView.el).find('.BCK-HELMNotationContainer')
+
+        config =
+            value: $container.attr('data-value')
+            download:
+              filename: "#{thisView.model.get('molecule_chembl_id')}-HELMNotation.txt"
+              value: $container.attr('data-value')
+              tooltip: 'Download'
+
+        ButtonsHelper.initCroppedContainer($container, config)
+
+        return
 
     new glados.views.ReportCards.EntityDetailsInCardView
       model: compound
@@ -614,26 +585,28 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
         if not biocomponents?
           return false
-        else
-          return true
+
+        if biocomponents.length == 0
+          return false
+
+        return true
       properties_to_show: Compound.COLUMNS_SETTINGS.BIOCOMPONENTS_SECTION
       after_render: (thisView) ->
-        ButtonsHelper.initCroppedTextFields()
 
-        $buttonsContainers = $(thisView.el).find('.BCK-ButtonsContainer')
-
+        $buttonsContainers = $(thisView.el).find('.BCK-BioCompCroppedContainer')
         $buttonsContainers.each (i, div) ->
 
-          $div = $(div)
-          $copyBtn = $div.find('.BCK-Copy-btn')
+          $container = $(div)
 
-          ButtonsHelper.initCopyButton($copyBtn, 'Copy to Clipboard',
-            $div.attr('data-value'))
+          config =
+            value: $container.attr('data-value')
+            download:
+              filename: "#{thisView.model.get('molecule_chembl_id')}-Biocomp-#{$container.attr('data-description')}.txt"
+              value: $container.attr('data-value')
+              tooltip: 'Download'
 
-          $downloadBtn = $div.find('.BCK-Dwnld-btn')
-          ButtonsHelper.initDownloadBtn($downloadBtn,
-            "#{thisView.model.get('molecule_chembl_id')}-Biocomp-#{$div.attr('data-description')}.txt",
-            'Download', $div.attr('data-value'))
+          ButtonsHelper.initCroppedContainer($container, config)
+          return
 
     new glados.views.ReportCards.EntityDetailsInCardView
       model: compound
@@ -645,8 +618,6 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     if GlobalVariables['EMBEDED']
       compound.fetch()
-
-
 
   # -------------------------------------------------------------
   # Function Cells
@@ -826,102 +797,41 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     return targetTypes
 
-  @getRelatedTargetsAggByClass = (chemblID) ->
+  @getRelatedTargetsAggByClass = (chemblIDs) ->
 
-    queryConfig =
-      type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
-      queryValueField: 'molecule_chembl_id'
-      fields: ['_metadata.related_compounds.chembl_ids.*']
-
-    aggsConfig =
-      aggs:
-        classes:
-          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
-          field: '_metadata.protein_classification.l1'
-          size: 20
-          bucket_links:
-
-            bucket_filter_template: '_metadata.related_compounds.chembl_ids.\\*:{{molecule_chembl_id}} ' +
-                                    'AND _metadata.protein_classification.l1:("{{bucket_key}}"' +
-                                    '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
-            template_data:
-              molecule_chembl_id: 'molecule_chembl_id'
-              bucket_key: 'BUCKET.key'
-              extra_buckets: 'EXTRA_BUCKETS.key'
-
-            link_generator: Target.getTargetsListURL
+    queryConfig = glados.configs.ReportCards.Compound.TargetSummaryPieConfig.getQueryConfig()
+    aggsConfig = glados.configs.ReportCards.Compound.TargetSummaryPieConfig.getAggConfig()
 
     targetTypes = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.TARGET_INDEX_URL
       query_config: queryConfig
-      molecule_chembl_id: chemblID
+      molecule_chembl_ids: chemblIDs
       aggs_config: aggsConfig
 
     return targetTypes
 
-  @getRelatedAssaysAgg = (chemblID) ->
+  @getRelatedAssaysAgg = (chemblIDs) ->
 
-    queryConfig =
-      type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
-      queryValueField: 'molecule_chembl_id'
-      fields: ['_metadata.related_compounds.chembl_ids.*']
-
-    aggsConfig =
-      aggs:
-        types:
-          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
-          field: '_metadata.assay_generated.type_label'
-          size: 20
-          bucket_links:
-
-            bucket_filter_template: '_metadata.related_compounds.chembl_ids.\\*:{{molecule_chembl_id}} ' +
-                                    'AND _metadata.assay_generated.type_label:("{{bucket_key}}"' +
-                                    '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
-            template_data:
-              molecule_chembl_id: 'molecule_chembl_id'
-              bucket_key: 'BUCKET.key'
-              extra_buckets: 'EXTRA_BUCKETS.key'
-
-            link_generator: Assay.getAssaysListURL
+    queryConfig = glados.configs.ReportCards.Compound.AssaySummaryPieConfig.getQueryConfig()
+    aggsConfig = glados.configs.ReportCards.Compound.AssaySummaryPieConfig.getAggConfig()
 
     assays = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.ASSAY_INDEX_URL
       query_config: queryConfig
-      molecule_chembl_id: chemblID
+      molecule_chembl_ids: chemblIDs
       aggs_config: aggsConfig
 
     return assays
 
-  @getRelatedActivitiesAgg = (chemblID) ->
+  @getRelatedActivitiesAgg = (chemblIDs) ->
 
-    queryConfig =
-      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
-      query_string_template: 'molecule_chembl_id:{{molecule_chembl_id}}'
-      template_data:
-        molecule_chembl_id: 'molecule_chembl_id'
-
-    aggsConfig =
-      aggs:
-        types:
-          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
-          field: 'standard_type'
-          size: 20
-          bucket_links:
-
-            bucket_filter_template: 'molecule_chembl_id:{{molecule_chembl_id}} ' +
-                                    'AND standard_type:("{{bucket_key}}"' +
-                                    '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
-            template_data:
-              molecule_chembl_id: 'molecule_chembl_id'
-              bucket_key: 'BUCKET.key'
-              extra_buckets: 'EXTRA_BUCKETS.key'
-
-            link_generator: Activity.getActivitiesListURL
+    queryConfig = glados.configs.ReportCards.Compound.ActivityPieSummaryConfig.getQueryConfig()
+    aggsConfig = glados.configs.ReportCards.Compound.ActivityPieSummaryConfig.getAggConfig()
 
     bioactivities = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.ACTIVITY_INDEX_URL
       query_config: queryConfig
-      molecule_chembl_id: chemblID
+      molecule_chembl_ids: chemblIDs
       aggs_config: aggsConfig
 
     return bioactivities

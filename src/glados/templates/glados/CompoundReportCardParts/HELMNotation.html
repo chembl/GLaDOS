@@ -10,41 +10,9 @@
 
     <table class="compact-table">
         <tr>
-            <td>
-                <div class="cropped-text-field">
-                    <table>
-                        <tr>
-                            <td>
-                                <div class="cropped-text-field-input">
-                                    <input id="CompReps-canonicalSmiles" type="text" value='{{helm_notation.value}}'>
-                                </div>
-                            </td>
-                            <td class="cropped-text-field-btns-cell">
+            <td class="BCK-HELMNotationContainer" data-hb-template="Handlebars-Common-CroppedContainer"
+                                data-value="{{helm_notation.value}}" >
 
-                              <div class="cropped-text-field-btns">
-
-                                  {% endverbatim %}
-                                    {% block CompReps-canonicalSmiles-dnld %}
-                                      {% with btn_id='HELMNotation-dnld' %}
-                                        {% include "glados/base/btn_download_only_small.html" %}
-                                      {% endwith %}
-                                    {% endblock %}
-
-                                    {% block CompReps-canonicalSmiles-copy %}
-                                      {% with btn_id='HELMNotation-copy' %}
-                                        {% include "glados/base/btn_copy_small.html" %}
-                                      {% endwith %}
-                                    {% endblock %}
-                                  {% verbatim %}
-
-                              </div>
-
-                            </td>
-
-                        </tr>
-                    </table>
-
-                </div>
             </td>
         </tr>
     </table>

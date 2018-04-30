@@ -15,6 +15,7 @@ glados.useNameSpace 'glados',
       key_regex: /^[A-Z]{14}-[A-Z]{10}-[A-Z]$/
     UniChem:
       orphaned_id_url: 'https://www.ebi.ac.uk/unichem/rest/orphanIdMap/'
+      connectivity_url: 'https://www.ebi.ac.uk/unichem/rest/key_search/'
     DOI:
       regex: new RegExp('^(10[.][0-9]{4,}(?:[.][0-9]+)*/(?:(?!["&\'<>|])\\S)+)$')
     CHEMBL:

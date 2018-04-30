@@ -447,7 +447,7 @@ glados.useNameSpace 'glados.models.Aggregations',
       aggsConfig = @get('aggs_config')
       @addAggregationsData(aggsData, aggsConfig)
 
-
+      @loadQuery()
       queryData = @get('query')
 
       return {

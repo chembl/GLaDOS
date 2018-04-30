@@ -1,0 +1,26 @@
+{% extends "glados/base/basic_table_card.html" %}
+
+{% block card_id %}CUnichemConnectivityMatchesCard{% endblock %}
+
+{% block general_content %}
+<div class="unichem_connectivity_matches">
+    <div class="BCK-DescriptionContainer" data-hb-template="Handlebars-UnichemConnectivityDescription"></div>
+    <div class="row">
+        <div class="col s12">
+            <div class="BCK-LegendContainer" data-hb-template="Handlebars-UnichemConnectivityLegend">
+            </div>
+        </div>
+        <div class="col s12">
+            <div class="BCK-ColoursLegendContainer" data-hb-template="Handlebars-UnichemConnectivityColoursLegend">
+            </div>
+        </div>
+    </div>
+
+    <div class="BCK-LoadAlternativeSaltsButtonContainer" data-hb-template="Handlebars-LoadAlternativeSaltsButton"></div>
+    <div class="BCK-MatchesTable">
+    {% include "glados/base/PaginatedCollections/DefaultTableContentB.html" %}
+    </div>
+
+    <div class="BCK-RESTServiceCallContainer" data-hb-template="Handlebars-RESTServiceCallContent"></div>
+</div>
+{% endblock %}

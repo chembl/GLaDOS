@@ -30,11 +30,18 @@ urlpatterns += [
   # --------------------------------------------------------------------------------------------------------------------
   # Main Pages
   # --------------------------------------------------------------------------------------------------------------------
-  url(r'^$', views.main_html_base, name='main'),
-
   url(r'^g/$', views.main_html_base_no_bar, name='no_bar'),
 
+  url(r'^$',
+      views.main_page, name='main'),
+
   url(r'^tweets/$', views.get_latest_tweets_json, name='tweets'),
+
+  url(r'^database_summary/$', views.get_database_summary, name='database_summary'),
+
+  url(r'^entities_records/$', views.get_entities_records, name='entities_records'),
+
+  url(r'^blog_entries/(?P<pageToken>.+)?$', views.get_latest_blog_entries, name='blog_entries'),
 
   url(r'^marvin_search_fullscreen/$',
       DirectTemplateView.as_view(template_name="glados/marvin_search_fullscreen.html"), ),

@@ -1,73 +1,187 @@
 {% load static %}
-<div class="chembl-header row ">
+
+<div class="chembl-header">
+
     <div class="inner-row">
-        <div class="col l3 m3 s10 hide-on-small-pinned">
-            <ul>
-                {% if hide_side_nav %}
-                    <li>
-                        <a data-activates="slide-out" class="button-collapse waves-effect waves-light">
-                            <i class="material-icons">menu</i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{% url 'main' %}">
-                            <img title="Go to the ChEMBL homepage"
-                                 class="chembl-logo-header"
-                                 alt="ChEMBL logo" src="{% static 'img/chembl_logo.png' %}"/>
-                        </a>
-                    </li>
-                {% else %}
-                    <li>
-                        <a data-activates="slide-out"
-                           class="button-collapse  waves-effect waves-light hide-on-large-only">
-                            <i class="material-icons">menu</i>
-                        </a>
-                    </li>
-                    {% if main_page %}
-                        <li class="menu-logo side-nav-width hide-on-med-and-down ">
-                            <a class=" {% if main_page %}main-page-menu-logo {% endif %}"
-                               href="{% url 'main' %}">
-                                <img title="Go to the ChEMBL homepage" class="chembl-logo-header" alt="ChEMBL logo"
-                                     src="{% static 'img/chembl_logo.png' %}"/>
-                            </a>
-                        </li>
-                    {% endif %}
-                {% endif %}
-                <li>
-                    <a href="{% url 'main' %}" class="long-link l2">
-                        <div>
-                            <span>ChEMBL</span>
-                            <span class="icon icon-generic" data-icon="&gt;"></span>
-                        </div>
-                    </a>
-                </li>
-            </ul>
+
+        <!-- Chembl Logo -->
+        <a class="header-button chembl-logo left" href="{% url 'main' %}">
+
+            <img src="{% static 'img/icons/chembl_logo_pink.png' %}">
+
+            <span class="hide-on-med-and-down white-text"> ChEMBL </span>
+
+        </a>
+
+        <!-- Search Bar -->
+        <div class="search-bar">
+
+            {% include "glados/SearchResultsParts/SearchBar.html" %}
+
         </div>
 
-        {% if main_page %}
-            <div class=" col right l7 m8 hide-on-small-only hide-on-pinned main-page-search-bar">
-                {% include "glados/SearchResultsParts/SearchBar.html" %}
-            </div>
-        {% endif %}
-        <div class="col l1 right m1 s2 hide-on-small-pinned {% if main_page %}hide-on-pin-top{% endif %}">
-            <ul class="right-align-content">
-                <li>
-                    <a href="#download-db-modal"
-                        class="modal-trigger-safe tooltipped  waves-effect waves-light download-button"
-                        data-position="bottom" data-tooltip="Download">
-                        <p>
-                            <i class="fa fa-download" aria-hidden="true"></i>
-                        </p>
-                        <p class="hide-on-pinned hide-on-med-and-down">
-                            <small>Download</small>
-                        </p>
+        <!-- Drop Down Menu -->
+        <div class="dropdown nav-link burger-dropdown  hide-on-large-pin-top">
 
-                    </a>
+            <a class="header-button burger-button right ">
+
+                <img src="{% static 'img/icons/options_button.png' %}">
+
+            </a>
+
+            <ul class='dropdown-contents burger-dropdown-contents'>
+
+                <li class="dropdown-item">
+
+                    <a href="https://www.ebi.ac.uk/chembl/downloads" target="_blank">Downloads</a>
+
                 </li>
+
+                <li class="dropdown-item">
+
+                    <a href="https://www.ebi.ac.uk/chembl/ws" target="_blank"> Web Services </a>
+
+                </li>
+
+                <li class="dropdown-item">
+
+                    <a href="https://www.ebi.ac.uk/unichem" target="_blank"> UniChem </a>
+
+                </li>
+
+                <li class="dropdown-item">
+
+                    <a href="https://www.ebi.ac.uk/chemblntd" target="_blank"> ChEMBL-NTD </a>
+
+                </li>
+
+                <li class="dropdown-item">
+                    <a href="https://www.surechembl.org" target="_blank"> SureChEMBL </a>
+                </li>
+
+                <li class="dropdown-item">
+
+                    <a href="https://www.ebi.ac.uk/rdf" target="_blank">EBI RDF Platform</a>
+
+                </li>
+
+                <li class="dropdown-item">
+
+                    <a href="{% url 'db_schema' %}" target="_blank">Schema Diagram</a>
+
+                </li>
+
+                <li class="dropdown-item">
+
+                    <a href="{% url 'ws_schema' %}" target="_blank">WS Diagram</a>
+
+                </li>
+
+                <li class="dropdown-item">
+
+                    <a href="{% url 'acks' %}" target="_blank">Acknowledgements</a>
+
+                </li>
+
+                <li class="dropdown-item">
+
+                    <a href="http://chembl.github.io/status" target="_blank">Statistics</a>
+
+                </li>
+
+                <li class="dropdown-item">
+
+                    <a href="{% url 'faqs' %}" target="_blank">FAQ</a>
+
+                </li>
+
+                <li class="dropdown-item">
+
+                    <a href="https://chembl.blogspot.co.uk" target="_blank">Blog</a>
+
+                </li>
+
             </ul>
+
         </div>
-        {% block header_search_bar %}
-          {% include "glados/SearchResultsParts/SearchBarChEMBLHeader.html" %}
-        {% endblock %}
+
     </div>
+
+    <!-- Nav links -->
+    <div class="inner-row nav-links-wrapper">
+
+        <ul class="header-nav-links show-on-large-pin-top" style="display: none">
+
+            <li class="nav-link"><a href="https://www.ebi.ac.uk/unichem" target="_blank"> UniChem </a></li>
+
+            <li class="nav-link"><a href="https://www.ebi.ac.uk/chemblntd" target="_blank"> ChEMBL-NTD </a></li>
+
+            <li class="nav-link"><a href="https://www.surechembl.org" target="_blank"> SureChEMBL </a></li>
+
+            <li class="nav-link"><a href="https://www.ebi.ac.uk/chembl/downloads" target="_blank">Downloads</a></li>
+
+            <!-- More Links -->
+            <li class="dropdown nav-link">
+
+                <a href='#'>More</a>
+
+                <ul class='dropdown-contents more-section'>
+
+                    <li class="dropdown-item">
+
+                        <a href="https://www.ebi.ac.uk/chembl/ws" target="_blank"> Web Services </a>
+
+                    </li>
+
+                    <li class="dropdown-item">
+
+                        <a href="https://www.ebi.ac.uk/rdf" target="_blank">EBI RDF Platform</a>
+
+                    </li>
+
+                    <li class="dropdown-item">
+
+                        <a href="{% url 'db_schema' %}" target="_blank">Schema Diagram</a>
+
+                    </li>
+
+                    <li class="dropdown-item">
+
+                        <a href="{% url 'ws_schema' %}" target="_blank">WS Diagram</a>
+
+                    </li>
+
+                    <li class="dropdown-item">
+
+                        <a href="{% url 'acks' %}" target="_blank">Acknowledgements</a>
+
+                    </li>
+
+                    <li class="dropdown-item">
+
+                        <a href="http://chembl.github.io/status" target="_blank">Statistics</a>
+
+                    </li>
+
+                    <li class="dropdown-item">
+
+                        <a href="{% url 'faqs' %}" target="_blank">FAQ</a>
+
+                    </li>
+
+                    <li class="dropdown-item">
+
+                        <a href="https://chembl.blogspot.co.uk" target="_blank">Blog</a>
+
+                    </li>
+
+                </ul>
+
+            </li>
+
+        </ul>
+
+    </div>
+
 </div>
+

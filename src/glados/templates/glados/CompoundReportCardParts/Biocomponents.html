@@ -17,44 +17,8 @@
                 </td>
             </tr>
             <tr>
-                <td>
-
-                    <div class="cropped-text-field">
-                    <table>
-                        <tr>
-                            <td>
-                                <div class="cropped-text-field-input">
-                                    <input id="CompReps-canonicalSmiles" type="text" value='{{this.sequence}}'>
-                                </div>
-                            </td>
-                            <td class="cropped-text-field-btns-cell">
-
-                              <div class="cropped-text-field-btns BCK-ButtonsContainer"
-                                   data-description="{{this.description}}" data-value='{{this.sequence}}'>
-
-                                  {% endverbatim %}
-                                    {% block CompReps-canonicalSmiles-dnld %}
-                                      {% with btn_id='HELMNotation-dnld' %}
-                                        {% include "glados/base/btn_download_only_small.html" %}
-                                      {% endwith %}
-                                    {% endblock %}
-
-                                    {% block CompReps-canonicalSmiles-copy %}
-                                      {% with btn_id='HELMNotation-copy' %}
-                                        {% include "glados/base/btn_copy_small.html" %}
-                                      {% endwith %}
-                                    {% endblock %}
-                                  {% verbatim %}
-
-                              </div>
-
-                            </td>
-
-                        </tr>
-                    </table>
-
-                </div>
-
+                <td class="BCK-BioCompCroppedContainer" data-hb-template="Handlebars-Common-CroppedContainer"
+                    data-value="{{this.sequence}}" data-description="{{this.description}}">
                 </td>
             </tr>
         {{/each}}

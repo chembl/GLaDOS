@@ -61,6 +61,7 @@ glados.useNameSpace 'glados',
     PIECHARTS:
       MAX_CATEGORIES: 10
     VIS_COLORS:
+
       TEAL1: '#0D343A'
       TEAL2: '#025C5E'
       TEAL3: '#09979B'

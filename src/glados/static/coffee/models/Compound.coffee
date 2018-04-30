@@ -33,6 +33,182 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
       @on 'change:reference_smarts', @loadStructureHighlight, @
       @on 'change:reference_smiles_error', @loadStructureHighlight, @
 
+  isParent: ->
+
+    molHierarchy = @.get('molecule_hierarchy')
+    isParent = false
+    if molHierarchy?
+      isParent = molHierarchy.molecule_chembl_id == molHierarchy.parent_chembl_id
+    return isParent
+
+  # --------------------------------------------------------------------------------------------------------------------
+  # Sources
+  # --------------------------------------------------------------------------------------------------------------------
+  hasAdditionalSources: ->
+
+    additionalSourcesState = @get('has_additional_sources')
+    if not additionalSourcesState?
+      @getAdditionalSources()
+    additionalSourcesState = @get('has_additional_sources')
+    return additionalSourcesState
+
+  getAdditionalSources: ->
+
+    aditionalSourcesCache = @get('additional_sources')
+    if aditionalSourcesCache?
+      return aditionalSourcesCache
+
+    metadata = @get('_metadata')
+    ownSources = _.unique(v.src_description for v in metadata.compound_records)
+
+    if @isParent()
+
+      childrenSourcesList = (c.sources for c in metadata.hierarchy.children)
+      uniqueSourcesObj = {}
+      sourcesFromChildren = []
+      for sourcesObj in childrenSourcesList
+        for source in _.values(sourcesObj)
+          srcDescription = source.src_description
+          if not uniqueSourcesObj[srcDescription]?
+            uniqueSourcesObj[srcDescription] = true
+            sourcesFromChildren.push(srcDescription)
+
+      additionalSources = _.difference(sourcesFromChildren, ownSources)
+    else
+      sourcesFromParent = (v.src_description for v in _.values(metadata.hierarchy.parent.sources))
+      additionalSources = _.difference(sourcesFromParent, ownSources)
+
+    if additionalSources.length == 0
+      @set({has_additional_sources: false}, {silent:true})
+    else
+      @set({has_additional_sources: true}, {silent:true})
+
+    additionalSources.sort()
+
+    @set({additional_sources: additionalSources}, {silent:true})
+    return additionalSources
+
+  # --------------------------------------------------------------------------------------------------------------------
+  # Synonyms and trade names
+  # --------------------------------------------------------------------------------------------------------------------
+  separateSynonymsAndTradeNames: (rawSynonymsAndTradeNames) ->
+
+    uniqueSynonymsObj = {}
+    uniqueSynonymsList = []
+
+    uniqueTradeNamesObj = {}
+    uniqueTradeNamesList = []
+
+    for rawItem in rawSynonymsAndTradeNames
+
+      itemName = rawItem.synonyms
+      # is this a proper synonym?
+      if rawItem.syn_type != 'TRADE_NAME'
+
+        if not uniqueSynonymsObj[itemName]?
+          uniqueSynonymsObj[itemName] = true
+          uniqueSynonymsList.push(itemName)
+      #or is is a tradename?
+      else
+
+        if not uniqueTradeNamesObj[itemName]?
+          uniqueTradeNamesObj[itemName] = true
+          uniqueTradeNamesList.push(itemName)
+
+    return [uniqueSynonymsList, uniqueTradeNamesList]
+
+  calculateSynonymsAndTradeNames: ->
+
+    rawSynonymsAndTradeNames = @get('molecule_synonyms')
+    [uniqueSynonymsList, uniqueTradeNamesList] = @separateSynonymsAndTradeNames(rawSynonymsAndTradeNames)
+
+    metadata = @get('_metadata')
+    if @isParent()
+
+      rawChildrenSynonymsAndTradeNamesLists = (c.synonyms for c in metadata.hierarchy.children)
+      rawChildrenSynonyms = []
+      for rawSynAndTNList in rawChildrenSynonymsAndTradeNamesLists
+        for syn in rawSynAndTNList
+          rawChildrenSynonyms.push(syn)
+
+      [synsFromChildren, tnsFromChildren] = @separateSynonymsAndTradeNames(rawChildrenSynonyms)
+      additionalSynsList = _.difference(synsFromChildren, uniqueSynonymsList)
+      additionalTnsList = _.difference(tnsFromChildren, uniqueTradeNamesList)
+
+    else
+      rawSynonymsAndTradeNamesFromParent = _.values(metadata.hierarchy.parent.synonyms)
+      [synsFromParent, tnsFromParent] = @separateSynonymsAndTradeNames(rawSynonymsAndTradeNamesFromParent)
+
+      additionalSynsList = _.difference(synsFromParent, uniqueSynonymsList)
+      additionalTnsList = _.difference(tnsFromParent, uniqueTradeNamesList)
+
+    @set
+      only_synonyms: uniqueSynonymsList
+      additional_only_synonyms: additionalSynsList
+      only_trade_names: uniqueTradeNamesList
+      additional_trade_names: additionalTnsList
+    ,
+      silent: true
+
+  getSynonyms: -> @getWithCache('only_synonyms', @calculateSynonymsAndTradeNames.bind(@))
+  getTradenames: -> @getWithCache('only_trade_names', @calculateSynonymsAndTradeNames.bind(@))
+  getAdditionalSynonyms: -> @getWithCache('additional_only_synonyms', @calculateSynonymsAndTradeNames.bind(@))
+  getAdditionalTradenames: -> @getWithCache('additional_trade_names', @calculateSynonymsAndTradeNames.bind(@))
+
+  # --------------------------------------------------------------------------------------------------------------------
+  # instance cache
+  # --------------------------------------------------------------------------------------------------------------------
+  getWithCache: (propName, generator) ->
+
+    cache = @get(propName)
+    if not cache?
+      generator()
+    cache = @get(propName)
+    return cache
+
+  # --------------------------------------------------------------------------------------------------------------------
+  # Family ids
+  # --------------------------------------------------------------------------------------------------------------------
+  calculateChildrenIDs: ->
+
+    metadata = @get('_metadata')
+    childrenIDs = (c.chembl_id for c in metadata.hierarchy.children)
+    @set
+      children_ids: childrenIDs
+    ,
+      silent: true
+
+  getChildrenIDs: -> @getWithCache('children_ids', @calculateChildrenIDs.bind(@))
+  getParentID: ->
+    metadata = @get('_metadata')
+    return metadata.hierarchy.parent.chembl_id
+
+  calculateAdditionalIDs: ->
+    metadata = @get('_metadata')
+    additionalIDs = []
+
+    if metadata.hierarchy?
+      if @.isParent()
+        childrenIDs = @getChildrenIDs()
+        for childID in childrenIDs
+          additionalIDs.push childID
+      else
+        parentID = @getParentID()
+        additionalIDs.push parentID
+
+    @set
+      additional_ids: additionalIDs
+    ,
+      silent: true
+
+  getOwnAndAdditionalIDs: ->
+    ownID = @get('id')
+    ids = [ownID]
+    additionalIDs = @getWithCache('additional_ids', @calculateAdditionalIDs.bind(@))
+    for id in additionalIDs
+      ids.push id
+    return ids
+
   loadSimilarityMap:  ->
 
     if @get('reference_smiles_error')
@@ -703,6 +879,17 @@ Compound.COLUMNS = {
     comparator: '_metadata.compound_records'
     name_to_show: 'Compound Sources'
     parse_function: (values) -> _.unique(v.src_description for v in values)
+  ADDITIONAL_SOURCES_LIST: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
+    id: 'additional_sources_list'
+    comparator: '_metadata.compound_records'
+    name_to_show_function: (model) ->
+
+      switch model.isParent()
+        when true then return 'Additional Sources From Alternate Forms:'
+        when false then return 'Additional Sources From Parent:'
+
+    col_value_function: (model) -> model.getAdditionalSources()
+    show_function: (model) -> model.hasAdditionalSources()
   WITHDRAWN_YEAR: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     comparator: 'withdrawn_year'
   WITHDRAWN_COUNTRY: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
@@ -800,6 +987,7 @@ Compound.COLUMNS_SETTINGS = {
   ]
   COMPOUND_SOURCES_SECTION: [
     Compound.COLUMNS.COMPOUND_SOURCES_LIST
+    Compound.COLUMNS.ADDITIONAL_SOURCES_LIST
   ]
   WITHDRAWN_INFO_SECTION: [
     Compound.COLUMNS.WITHDRAWN_YEAR
