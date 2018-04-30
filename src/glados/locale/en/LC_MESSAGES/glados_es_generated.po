@@ -166,6 +166,14 @@ msgid "glados_es_gs__activity__data_validity_comment__label__mini"
 msgstr "Data Vald. Comn."
 
 
+msgid "glados_es_gs__activity__data_validity_description__label"
+msgstr "Data Validity Description"
+
+
+msgid "glados_es_gs__activity__data_validity_description__label__mini"
+msgstr "Data Vald. Desc."
+
+
 msgid "glados_es_gs__activity__document_chembl_id__label"
 msgstr "Document ChEMBL ID"
 
@@ -804,6 +812,78 @@ msgstr "Document ChEMBL ID"
 
 msgid "glados_es_gs__assay__document_chembl_id__label__mini"
 msgstr "Docmnt. ChEMBL ID"
+
+
+msgid "glados_es_gs__assay__document_data___doi__label"
+msgstr "Document Data Doi"
+
+
+msgid "glados_es_gs__assay__document_data___doi__label__mini"
+msgstr "Docmnt. Data Doi"
+
+
+msgid "glados_es_gs__assay__document_data___first_page__label"
+msgstr "Document Data First Page"
+
+
+msgid "glados_es_gs__assay__document_data___first_page__label__mini"
+msgstr "Docm. Data Firs. Page"
+
+
+msgid "glados_es_gs__assay__document_data___journal__label"
+msgstr "Document Data Journal"
+
+
+msgid "glados_es_gs__assay__document_data___journal__label__mini"
+msgstr "Docm. Data Jorn."
+
+
+msgid "glados_es_gs__assay__document_data___last_page__label"
+msgstr "Document Data Last Page"
+
+
+msgid "glados_es_gs__assay__document_data___last_page__label__mini"
+msgstr "Docm. Data Last Page"
+
+
+msgid "glados_es_gs__assay__document_data___pubmed_id__label"
+msgstr "Document Data Pubmed ID"
+
+
+msgid "glados_es_gs__assay__document_data___pubmed_id__label__mini"
+msgstr "Docm. Data Pubm. ID"
+
+
+msgid "glados_es_gs__assay__document_data___title__label"
+msgstr "Document Data Title"
+
+
+msgid "glados_es_gs__assay__document_data___title__label__mini"
+msgstr "Docmnt. Data Title"
+
+
+msgid "glados_es_gs__assay__document_data___volume__label"
+msgstr "Document Data Volume"
+
+
+msgid "glados_es_gs__assay__document_data___volume__label__mini"
+msgstr "Docmnt. Data Volume"
+
+
+msgid "glados_es_gs__assay__document_data___year__label"
+msgstr "Document Data Year"
+
+
+msgid "glados_es_gs__assay__document_data___year__label__mini"
+msgstr "Docmnt. Data Year"
+
+
+msgid "glados_es_gs__assay__document_data__label"
+msgstr "Document Data"
+
+
+msgid "glados_es_gs__assay__document_data__label__mini"
+msgstr "Document Data"
 
 
 msgid "glados_es_gs__assay__es_completion__label"
@@ -1598,6 +1678,38 @@ msgid "glados_es_gs__document__similar_documents___document_chembl_id__label__mi
 msgstr "Siml. Docm. ChEMBL ID"
 
 
+msgid "glados_es_gs__document__similar_documents___doi__label"
+msgstr "Similar Documents Doi"
+
+
+msgid "glados_es_gs__document__similar_documents___doi__label__mini"
+msgstr "Siml. Docm. Doi"
+
+
+msgid "glados_es_gs__document__similar_documents___first_page__label"
+msgstr "Similar Documents First Page"
+
+
+msgid "glados_es_gs__document__similar_documents___first_page__label__mini"
+msgstr "Siml. Docm. Firs. Page"
+
+
+msgid "glados_es_gs__document__similar_documents___journal__label"
+msgstr "Similar Documents Journal"
+
+
+msgid "glados_es_gs__document__similar_documents___journal__label__mini"
+msgstr "Siml. Docm. Jorn."
+
+
+msgid "glados_es_gs__document__similar_documents___last_page__label"
+msgstr "Similar Documents Last Page"
+
+
+msgid "glados_es_gs__document__similar_documents___last_page__label__mini"
+msgstr "Siml. Docm. Last Page"
+
+
 msgid "glados_es_gs__document__similar_documents___mol_tani__label"
 msgstr "Similar Documents Mol Tani"
 
@@ -1606,12 +1718,44 @@ msgid "glados_es_gs__document__similar_documents___mol_tani__label__mini"
 msgstr "Siml. Docm. Mol Tani"
 
 
+msgid "glados_es_gs__document__similar_documents___pubmed_id__label"
+msgstr "Similar Documents Pubmed ID"
+
+
+msgid "glados_es_gs__document__similar_documents___pubmed_id__label__mini"
+msgstr "Siml. Docm. Pubm. ID"
+
+
 msgid "glados_es_gs__document__similar_documents___tid_tani__label"
 msgstr "Similar Documents Tid Tani"
 
 
 msgid "glados_es_gs__document__similar_documents___tid_tani__label__mini"
 msgstr "Siml. Docm. Tid Tani"
+
+
+msgid "glados_es_gs__document__similar_documents___title__label"
+msgstr "Similar Documents Title"
+
+
+msgid "glados_es_gs__document__similar_documents___title__label__mini"
+msgstr "Siml. Docm. Titl."
+
+
+msgid "glados_es_gs__document__similar_documents___volume__label"
+msgstr "Similar Documents Volume"
+
+
+msgid "glados_es_gs__document__similar_documents___volume__label__mini"
+msgstr "Siml. Docm. Volm."
+
+
+msgid "glados_es_gs__document__similar_documents___year__label"
+msgstr "Similar Documents Year"
+
+
+msgid "glados_es_gs__document__similar_documents___year__label__mini"
+msgstr "Siml. Docm. Year"
 
 
 msgid "glados_es_gs__document__similar_documents__label"
@@ -1692,6 +1836,22 @@ msgstr "Activity Count"
 
 msgid "glados_es_gs__molecule__activity_count__label__mini"
 msgstr "Activity Count"
+
+
+msgid "glados_es_gs__molecule__all_family___chembl_id__label"
+msgstr "All Family ChEMBL ID"
+
+
+msgid "glados_es_gs__molecule__all_family___chembl_id__label__mini"
+msgstr "All Family ChEMBL ID"
+
+
+msgid "glados_es_gs__molecule__all_family___inchi_key__label"
+msgstr "All Family Inchi Key"
+
+
+msgid "glados_es_gs__molecule__all_family___inchi_key__label__mini"
+msgstr "All Family Inchi Key"
 
 
 msgid "glados_es_gs__molecule__applicants__label"
@@ -1932,6 +2092,30 @@ msgstr "Chebi Par ID"
 
 msgid "glados_es_gs__molecule__chebi_par_id__label__mini"
 msgstr "Chebi Par ID"
+
+
+msgid "glados_es_gs__molecule__children___chembl_id__label"
+msgstr "Children ChEMBL ID"
+
+
+msgid "glados_es_gs__molecule__children___chembl_id__label__mini"
+msgstr "Chldrn. ChEMBL ID"
+
+
+msgid "glados_es_gs__molecule__children___sources__label"
+msgstr "Children Sources"
+
+
+msgid "glados_es_gs__molecule__children___sources__label__mini"
+msgstr "Chldrn. Sorcs."
+
+
+msgid "glados_es_gs__molecule__children___synonyms__label"
+msgstr "Children Synonyms"
+
+
+msgid "glados_es_gs__molecule__children___synonyms__label__mini"
+msgstr "Chldrn. Synms."
 
 
 msgid "glados_es_gs__molecule__chirality__label"
@@ -2228,6 +2412,54 @@ msgstr "Helm Notation"
 
 msgid "glados_es_gs__molecule__helm_notation__label__mini"
 msgstr "Helm Notation"
+
+
+msgid "glados_es_gs__molecule__hierarchy___all_family__label"
+msgstr "Hierarchy All Family"
+
+
+msgid "glados_es_gs__molecule__hierarchy___all_family__label__mini"
+msgstr "Hirch. All Family"
+
+
+msgid "glados_es_gs__molecule__hierarchy___children__label"
+msgstr "Hierarchy Children"
+
+
+msgid "glados_es_gs__molecule__hierarchy___children__label__mini"
+msgstr "Hirch. Chldrn."
+
+
+msgid "glados_es_gs__molecule__hierarchy___is_approved_drug__label"
+msgstr "Hierarchy Is Approved Drug"
+
+
+msgid "glados_es_gs__molecule__hierarchy___is_approved_drug__label__mini"
+msgstr "Hirc. Is Aprv. Drug"
+
+
+msgid "glados_es_gs__molecule__hierarchy___is_usan__label"
+msgstr "Hierarchy Is USAN"
+
+
+msgid "glados_es_gs__molecule__hierarchy___is_usan__label__mini"
+msgstr "Hirch. Is USAN"
+
+
+msgid "glados_es_gs__molecule__hierarchy___parent__label"
+msgstr "Hierarchy Parent"
+
+
+msgid "glados_es_gs__molecule__hierarchy___parent__label__mini"
+msgstr "Hirch. Parent"
+
+
+msgid "glados_es_gs__molecule__hierarchy__label"
+msgstr "Hierarchy"
+
+
+msgid "glados_es_gs__molecule__hierarchy__label__mini"
+msgstr "Hierarchy"
 
 
 msgid "glados_es_gs__molecule__indication_class__label"
@@ -2598,6 +2830,30 @@ msgid "glados_es_gs__molecule__oral__label__mini"
 msgstr "Oral"
 
 
+msgid "glados_es_gs__molecule__parent___chembl_id__label"
+msgstr "Parent ChEMBL ID"
+
+
+msgid "glados_es_gs__molecule__parent___chembl_id__label__mini"
+msgstr "Parent ChEMBL ID"
+
+
+msgid "glados_es_gs__molecule__parent___sources__label"
+msgstr "Parent Sources"
+
+
+msgid "glados_es_gs__molecule__parent___sources__label__mini"
+msgstr "Parent Sources"
+
+
+msgid "glados_es_gs__molecule__parent___synonyms__label"
+msgstr "Parent Synonyms"
+
+
+msgid "glados_es_gs__molecule__parent___synonyms__label__mini"
+msgstr "Parent Synonyms"
+
+
 msgid "glados_es_gs__molecule__parenteral__label"
 msgstr "Parenteral"
 
@@ -2790,12 +3046,60 @@ msgid "glados_es_gs__molecule__sc_patent__label__mini"
 msgstr "Sc Patent"
 
 
+msgid "glados_es_gs__molecule__sources___src_description__label"
+msgstr "Sources Src Description"
+
+
+msgid "glados_es_gs__molecule__sources___src_description__label__mini"
+msgstr "Sorc. Src Desc."
+
+
+msgid "glados_es_gs__molecule__sources___src_id__label"
+msgstr "Sources Src ID"
+
+
+msgid "glados_es_gs__molecule__sources___src_id__label__mini"
+msgstr "Sources Src ID"
+
+
+msgid "glados_es_gs__molecule__sources___src_short_name__label"
+msgstr "Sources Src Short Name"
+
+
+msgid "glados_es_gs__molecule__sources___src_short_name__label__mini"
+msgstr "Sorc. Src Shrt. Name"
+
+
 msgid "glados_es_gs__molecule__structure_type__label"
 msgstr "Structure Type"
 
 
 msgid "glados_es_gs__molecule__structure_type__label__mini"
 msgstr "Structure Type"
+
+
+msgid "glados_es_gs__molecule__synonyms___molecule_synonym__label"
+msgstr "Synonyms"
+
+
+msgid "glados_es_gs__molecule__synonyms___molecule_synonym__label__mini"
+msgstr "Synonyms"
+
+
+msgid "glados_es_gs__molecule__synonyms___syn_type__label"
+msgstr "Synonyms Syn Type"
+
+
+msgid "glados_es_gs__molecule__synonyms___syn_type__label__mini"
+msgstr "Synms. Syn Type"
+
+
+msgid "glados_es_gs__molecule__synonyms___synonyms__label"
+msgstr "Synonyms Synonyms"
+
+
+msgid "glados_es_gs__molecule__synonyms___synonyms__label__mini"
+msgstr "Synms. Synms."
 
 
 msgid "glados_es_gs__molecule__synonyms__label"
@@ -2900,14 +3204,6 @@ msgstr "Target Predictions"
 
 msgid "glados_es_gs__molecule__target_predictions__label__mini"
 msgstr "Target Prdctn."
-
-
-msgid "glados_es_gs__molecule__target_pref_name__label"
-msgstr "Target Name"
-
-
-msgid "glados_es_gs__molecule__target_pref_name__label__mini"
-msgstr "Target Name"
 
 
 msgid "glados_es_gs__molecule__therapeutic_flag__label"
@@ -3502,6 +3798,14 @@ msgid "glados_es_gs__target__target_component___target_component_synonyms__label
 msgstr "Compnt. Synms."
 
 
+msgid "glados_es_gs__target__target_component___target_component_xrefs__label"
+msgstr "Component Xrefs"
+
+
+msgid "glados_es_gs__target__target_component___target_component_xrefs__label__mini"
+msgstr "Component Xrefs"
+
+
 msgid "glados_es_gs__target__target_component___targets__label"
 msgstr "Component Targets"
 
@@ -3540,6 +3844,46 @@ msgstr "Component Synonyms Syn Type"
 
 msgid "glados_es_gs__target__target_component_synonyms___syn_type__label__mini"
 msgstr "Comp. Synm. Syn Type"
+
+
+msgid "glados_es_gs__target__target_component_xrefs___xref_id__label"
+msgstr "Component Xrefs ID"
+
+
+msgid "glados_es_gs__target__target_component_xrefs___xref_id__label__mini"
+msgstr "Compnt. Xrefs ID"
+
+
+msgid "glados_es_gs__target__target_component_xrefs___xref_name__label"
+msgstr "Component Xrefs Name"
+
+
+msgid "glados_es_gs__target__target_component_xrefs___xref_name__label__mini"
+msgstr "Compnt. Xrefs Name"
+
+
+msgid "glados_es_gs__target__target_component_xrefs___xref_src_db__label"
+msgstr "Component Xrefs Src Db"
+
+
+msgid "glados_es_gs__target__target_component_xrefs___xref_src_db__label__mini"
+msgstr "Comp. Xrfs. Src Db"
+
+
+msgid "glados_es_gs__target__target_component_xrefs___xref_src_url__label"
+msgstr "Component Xrefs Src Url"
+
+
+msgid "glados_es_gs__target__target_component_xrefs___xref_src_url__label__mini"
+msgstr "Comp. Xrfs. Src Url"
+
+
+msgid "glados_es_gs__target__target_component_xrefs___xref_url__label"
+msgstr "Component Xrefs Url"
+
+
+msgid "glados_es_gs__target__target_component_xrefs___xref_url__label__mini"
+msgstr "Compnt. Xrefs Url"
 
 
 msgid "glados_es_gs__target__target_components___accession__label"
@@ -3588,6 +3932,14 @@ msgstr "Components Synonyms"
 
 msgid "glados_es_gs__target__target_components___target_component_synonyms__label__mini"
 msgstr "Compnt. Synms."
+
+
+msgid "glados_es_gs__target__target_components___target_component_xrefs__label"
+msgstr "Components Xrefs"
+
+
+msgid "glados_es_gs__target__target_components___target_component_xrefs__label__mini"
+msgstr "Compnt. Xrefs"
 
 
 msgid "glados_es_gs__target__target_components__label"

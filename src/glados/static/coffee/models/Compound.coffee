@@ -120,23 +120,18 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
   calculateSynonymsAndTradeNames: ->
 
     rawSynonymsAndTradeNames = @get('molecule_synonyms')
-    console.log 'rawSynonymsAndTradeNames: ', rawSynonymsAndTradeNames
     [uniqueSynonymsList, uniqueTradeNamesList] = @separateSynonymsAndTradeNames(rawSynonymsAndTradeNames)
 
-    console.log 'uniqueSynonymsList: ', uniqueSynonymsList
     metadata = @get('_metadata')
     if @isParent()
 
-      console.log 'is parent'
       rawChildrenSynonymsAndTradeNamesLists = (c.synonyms for c in metadata.hierarchy.children)
-      console.log 'rawChildrenSynonymsAndTradeNamesLists: ', rawChildrenSynonymsAndTradeNamesLists
       rawChildrenSynonyms = []
       for rawSynAndTNList in rawChildrenSynonymsAndTradeNamesLists
         for syn in rawSynAndTNList
           rawChildrenSynonyms.push(syn)
 
       [synsFromChildren, tnsFromChildren] = @separateSynonymsAndTradeNames(rawChildrenSynonyms)
-      console.log 'tnsFromChildren: ', tnsFromChildren
       additionalSynsList = _.difference(synsFromChildren, uniqueSynonymsList)
       additionalTnsList = _.difference(tnsFromChildren, uniqueTradeNamesList)
 
@@ -155,6 +150,14 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     ,
       silent: true
 
+  getSynonyms: -> @getWithCache('only_synonyms', @calculateSynonymsAndTradeNames.bind(@))
+  getTradenames: -> @getWithCache('only_trade_names', @calculateSynonymsAndTradeNames.bind(@))
+  getAdditionalSynonyms: -> @getWithCache('additional_only_synonyms', @calculateSynonymsAndTradeNames.bind(@))
+  getAdditionalTradenames: -> @getWithCache('additional_trade_names', @calculateSynonymsAndTradeNames.bind(@))
+
+  # --------------------------------------------------------------------------------------------------------------------
+  # instance cache
+  # --------------------------------------------------------------------------------------------------------------------
   getWithCache: (propName, generator) ->
 
     cache = @get(propName)
@@ -163,11 +166,48 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     cache = @get(propName)
     return cache
 
-  getSynonyms: -> @getWithCache('only_synonyms', @calculateSynonymsAndTradeNames.bind(@))
-  getTradenames: -> @getWithCache('only_trade_names', @calculateSynonymsAndTradeNames.bind(@))
-  getAdditionalSynonyms: -> @getWithCache('additional_only_synonyms', @calculateSynonymsAndTradeNames.bind(@))
-  getAdditionalTradenames: -> @getWithCache('additional_trade_names', @calculateSynonymsAndTradeNames.bind(@))
+  # --------------------------------------------------------------------------------------------------------------------
+  # Family ids
+  # --------------------------------------------------------------------------------------------------------------------
+  calculateChildrenIDs: ->
 
+    metadata = @get('_metadata')
+    childrenIDs = (c.chembl_id for c in metadata.hierarchy.children)
+    @set
+      children_ids: childrenIDs
+    ,
+      silent: true
+
+  getChildrenIDs: -> @getWithCache('children_ids', @calculateChildrenIDs.bind(@))
+  getParentID: ->
+    metadata = @get('_metadata')
+    return metadata.hierarchy.parent.chembl_id
+
+  calculateAdditionalIDs: ->
+    metadata = @get('_metadata')
+    additionalIDs = []
+
+    if metadata.hierarchy?
+      if @.isParent()
+        childrenIDs = @getChildrenIDs()
+        for childID in childrenIDs
+          additionalIDs.push childID
+      else
+        parentID = @getParentID()
+        additionalIDs.push parentID
+
+    @set
+      additional_ids: additionalIDs
+    ,
+      silent: true
+
+  getOwnAndAdditionalIDs: ->
+    ownID = @get('id')
+    ids = [ownID]
+    additionalIDs = @getWithCache('additional_ids', @calculateAdditionalIDs.bind(@))
+    for id in additionalIDs
+      ids.push id
+    return ids
 
   loadSimilarityMap:  ->
 

@@ -70,7 +70,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         'ligand_efficiency.lle',
         'ligand_efficiency.sei',
         'potential_duplicate',
-        '_metadata.activity_generated.short_data_validity_comment',
+        'data_validity_comment',
         '_metadata.protein_classification.l1'
       ],
       [
