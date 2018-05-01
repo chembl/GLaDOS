@@ -25,6 +25,7 @@ class TargetBrowserApp
   # This initialises the view of the tree as a circles
   @initBrowserAsCircles = (model, top_level_elem) ->
 
+    console.log 'MODEL: ', model
     asCirclesView = new BrowseTargetAsCirclesView
       model: model
       el: top_level_elem

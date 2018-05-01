@@ -37,10 +37,10 @@ class MainPageApp
       dots: false
     }
 
-    MainPageApp.initPapersPerYear()
-    MainPageApp.initMaxPhaseForDisease()
+#    MainPageApp.initPapersPerYear()
+#    MainPageApp.initMaxPhaseForDisease()
     MainPageApp.initTargetsVisualisation()
-    MainPageApp.initBrowseEntities()
+#    MainPageApp.initBrowseEntities()
 
   @initMaxPhaseForDisease = ->
     maxPhaseForDisease = MainPageApp.getMaxPhaseForDiseaseAgg()
@@ -125,14 +125,16 @@ class MainPageApp
 
   @initTargetsVisualisation = ->
     targetHierarchy = TargetBrowserApp.initTargetHierarchyTree()
+    targetHierarchyAgg = MainPageApp.getTargetsTreeAgg()
+    targetHierarchy.fetch()
+    targetHierarchyAgg.fetch()
+
+    TargetBrowserApp.initBrowserAsCircles(targetHierarchyAgg, $('#BCK-TargetBrowserAsCircles'))
 
     config =
       is_outside_an_entity_report_card: true
       embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#targets_by_protein_class"
       view_class: BrowseTargetAsCirclesView
-
-    targetsHierarchyAgg = MainPageApp.getTargetsTreeAgg()
-    TargetBrowserApp.initBrowserAsCircles(targetsHierarchyAgg, $('#BCK-TargetBrowserAsCircles'))
 
     new glados.views.ReportCards.VisualisationInCardView
       el: $('#BCK-TargetBrowserAsCircles')
@@ -140,8 +142,6 @@ class MainPageApp
       config: config
       report_card_app: @
 
-    targetHierarchy.fetch()
-    targetsHierarchyAgg.fetch()
 
   @initBrowseEntities = ->
     new glados.views.MainPage.BrowseEntitiesAsCirclesView
