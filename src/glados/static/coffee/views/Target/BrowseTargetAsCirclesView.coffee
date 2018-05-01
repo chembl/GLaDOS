@@ -18,15 +18,29 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   getBucketData: ->
     console.log 'I will get the bucket data!'
-    root = @model.get 'bucket_data'
+    receivedBuckets = @model.get 'bucket_data'
+    root = {}
 
-    if root?
+
+    fillNode = (node, parent_id, parent_depth) ->
+      console.log 'Node: ', node
+
+      if node.children?
+        console.log 'i have children'
+#        for bucket in node.children['buckets']
+#          fillNode(bucket)
+
+
+    if receivedBuckets?
+      root.children = receivedBuckets.children
       root.depth = 0
       root.name = 'root'
+      root.id = '0'
 
-      console.log 'ROOT ', root
+      fillNode(root, root.id, root.depth)
 
-#    fillNode = (node)
+
+
 
 #    @render(bucketData)
 
