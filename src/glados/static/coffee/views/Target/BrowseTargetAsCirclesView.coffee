@@ -32,13 +32,10 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
         node.id = id
         node.depth = parent_depth + 1
 
-
-
         delete(node.key)
         delete(node.doc_count)
         delete(node.parent_key)
         delete(node.parsed_parent_key)
-#        delete(node.link)
 
         if node.children?
           node.children = node.children['buckets']
@@ -59,21 +56,15 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
   render: ->
 
     if @model.get('state') == glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE
-      console.log 'no data found'
       return
 
     if @model.get('state') == glados.models.Aggregations.Aggregation.States.LOADING_BUCKETS
-      console.log 'Loading buckets'
       return
 
     if @model.get('state') != glados.models.Aggregations.Aggregation.States.INITIAL_STATE
-      console.log 'No data yet'
       return
 
-    console.log  'Data is ready!!!'
     @root = @getBucketData()
-    console.log 'ROOT: ', @root
-
 
     @$vis_elem.empty()
     thisView = @
