@@ -37,10 +37,10 @@ class MainPageApp
       dots: false
     }
 
-#    MainPageApp.initPapersPerYear()
-#    MainPageApp.initMaxPhaseForDisease()
+    MainPageApp.initPapersPerYear()
+    MainPageApp.initMaxPhaseForDisease()
     MainPageApp.initTargetsVisualisation()
-#    MainPageApp.initBrowseEntities()
+    MainPageApp.initBrowseEntities()
 
   @initMaxPhaseForDisease = ->
     maxPhaseForDisease = MainPageApp.getMaxPhaseForDiseaseAgg()
