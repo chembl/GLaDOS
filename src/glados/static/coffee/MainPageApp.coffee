@@ -18,6 +18,30 @@ class MainPageApp
 # Init functions
 # ----------------------------------------------------------------------------------------------------------------------
 
+  @initCentralCarousel = ->
+    $carouselContainer = $('.carousel-wrapper')
+    $linksCarousel = $('.links-carousel')
+
+    $carouselContainer.slick {
+      asNavFor: $linksCarousel
+      arrows: true
+      autoplay: true
+      autoplaySpeed: 4000
+      dots: true
+    }
+
+    $linksCarousel.slick {
+      useCSS: false
+      fade: true
+      arrows: false
+      dots: false
+    }
+
+    MainPageApp.initPapersPerYear()
+    MainPageApp.initMaxPhaseForDisease()
+    MainPageApp.initTargetsVisualisation()
+    MainPageApp.initBrowseEntities()
+
   @initMaxPhaseForDisease = ->
     maxPhaseForDisease = MainPageApp.getMaxPhaseForDiseaseAgg()
     maxPhaseProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'MAX_PHASE', true)
@@ -118,30 +142,6 @@ class MainPageApp
 
     targetHierarchy.fetch()
     targetsHierarchyAgg.fetch()
-
-  @initCentralCarousel = ->
-    $carouselContainer = $('.carousel-wrapper')
-    $linksCarousel = $('.links-carousel')
-
-    $carouselContainer.slick {
-      asNavFor: $linksCarousel
-      arrows: true
-      autoplay: true
-      autoplaySpeed: 4000
-      dots: true
-    }
-
-    $linksCarousel.slick {
-      useCSS: false
-      fade: true
-      arrows: false
-      dots: false
-    }
-
-    MainPageApp.initPapersPerYear()
-    MainPageApp.initMaxPhaseForDisease()
-    MainPageApp.initTargetsVisualisation()
-    MainPageApp.initBrowseEntities()
 
   @initBrowseEntities = ->
     new glados.views.MainPage.BrowseEntitiesAsCirclesView
