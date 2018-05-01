@@ -47,7 +47,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
       root.name = 'root'
       root.id = id
 
-      if receivedBuckets.children['buckets']?
+      if receivedBuckets.children?
         root.children = receivedBuckets.children['buckets']
         fillNode(root, root.id, root.depth, root.children)
 
