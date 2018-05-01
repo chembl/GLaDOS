@@ -18,7 +18,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   getBucketData: ->
     receivedBuckets = @model.get 'bucket_data'
-
     id = 0
 
     fillNode = (parent_node, parent_id, parent_depth, children_nodes) ->
@@ -44,7 +43,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
           node.children = node.children['buckets']
           fillNode(node, node.id, node.depth, node.children)
 
-
     if receivedBuckets?
       root = {}
       root.depth = 0
@@ -57,21 +55,25 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     return root
 
-
   render: ->
 
-    # use plain version
-    @root = @getBucketData()
-    console.log 'ROOT: ', @root
-    console.log 'exists?', @root?
-
-    if not @root?
+    if @model.get('state') == glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE
+      console.log 'no data found'
       return
-      
-    focus = @root
-    nodes = pack.nodes(@root)
 
-    @currentViewFrame = undefined
+    if @model.get('state') == glados.models.Aggregations.Aggregation.States.LOADING_BUCKETS
+      console.log 'loading buckets'
+      return
+
+    if @model.get('state') != glados.models.Aggregations.Aggregation.States.INITIAL_STATE
+      console.log 'no data yet'
+      return
+
+    console.log 'Data is ready!!!'
+
+
+    @root = @getBucketData()
+    console.log '@root: ', @root
 
     @$vis_elem.empty()
     thisView = @
@@ -107,6 +109,11 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     .attr("height", @VISUALISATION_HEIGHT)
     .append("g")
     .attr("transform", "translate(" + @VISUALISATION_WIDTH / 2 + "," + @VISUALISATION_HEIGHT / 2 + ")")
+
+    # use plain version
+    focus = @root
+    nodes = pack.nodes(@root)
+    @currentViewFrame = undefined
 
 
     #get depth domain in tree
