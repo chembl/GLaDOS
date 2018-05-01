@@ -20,26 +20,24 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     receivedBuckets = @model.get 'bucket_data'
     id = 0
 
-    fillNode = (parent_node, parent_id, parent_depth, children_nodes) ->
+    fillNode = (parent_node, input_node) ->
 
-      for node in children_nodes
+      node = {}
+      node.name = input_node.key
+      node.size = input_node.doc_count
+      node.parent_id = parent_node.id
+      node.id = id
+      node.link = input_node.link
+      node.depth = parent_node.depth + 1
 
-        id++
+      parent_node.children.push(node)
 
-        node.name = node.key
-        node.size = node.doc_count
-        node.parent_id = parent_id
-        node.id = id
-        node.depth = parent_depth + 1
+      if input_node.children?
+        node.children = []
+        for child in input_node.children['buckets']
+          id++
+          fillNode(node, child)
 
-        delete(node.key)
-        delete(node.doc_count)
-        delete(node.parent_key)
-        delete(node.parsed_parent_key)
-
-        if node.children?
-          node.children = node.children['buckets']
-          fillNode(node, node.id, node.depth, node.children)
 
     if receivedBuckets?
       root = {}
@@ -48,9 +46,12 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
       root.id = id
 
       if receivedBuckets.children?
-        root.children = receivedBuckets.children['buckets']
-        fillNode(root, root.id, root.depth, root.children)
+        root.children = []
+        for node in receivedBuckets.children['buckets']
+          id++
+          fillNode(root, node)
 
+    console.log 'ROOT: ', root
     return root
 
   render: ->
@@ -65,6 +66,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
       return
 
     @root = @getBucketData()
+    
 
     @$vis_elem.empty()
     thisView = @
