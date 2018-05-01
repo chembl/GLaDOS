@@ -269,25 +269,61 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @initAlternateForms = ->
 
+    compound = CompoundReportCardApp.getCurrentCompound()
+
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
-    moleculeFormsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewAlternateFormsListForCarousel()
-    moleculeFormsList.initURL chemblID
+#    moleculeFormsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewAlternateFormsListForCarousel()
+#    moleculeFormsList.initURL chemblID
+#
+#    viewConfig =
+#      embed_section_name: 'alternate_forms'
+#      embed_identifier: chemblID
+#      title: "Alternative forms of compound #{chemblID}:"
 
-    viewConfig =
-      embed_section_name: 'alternate_forms'
-      embed_identifier: chemblID
-      title: "Alternative forms of compound #{chemblID}:"
+#    new glados.views.ReportCards.CarouselInCardView
+#      collection: moleculeFormsList
+#      el: $('#AlternateFormsCard')
+#      resource_type: gettext('glados_entities_compound_name')
+#      section_id: 'AlternateFormsOfCompoundInChEMBL'
+#      section_label: 'Alternative Forms'
+#      config: viewConfig
+#      report_card_app: @
 
-    new glados.views.ReportCards.CarouselInCardView
-      collection: moleculeFormsList
-      el: $('#AlternateFormsCard')
-      resource_type: gettext('glados_entities_compound_name')
-      section_id: 'AlternateFormsOfCompoundInChEMBL'
-      section_label: 'Alternative Forms'
-      config: viewConfig
-      report_card_app: @
+#    moleculeFormsList.fetch({reset: true})
 
-    moleculeFormsList.fetch({reset: true})
+    initAlternateFormsList = ->
+
+      console.log 'initAlternateFormsList: '
+      console.log 'compound: ', compound
+      parentID = compound.getParentID()
+      filter = "molecule_hierarchy.parent_chembl_id:(\"#{parentID}\")"
+      console.log 'parentID: ', parentID
+      console.log 'filter: ', filter
+      alternateFormsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(filter,
+      itemsList=undefined, contextualProperties=undefined,
+      settings=settings=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_ES_RESULTS_LIST_CAROUSEL)
+      console.log 'alternateFormsList:', alternateFormsList
+
+      viewConfig =
+        embed_section_name: 'alternate_forms'
+        embed_identifier: chemblID
+        title: "Alternative forms of compound #{chemblID}:"
+
+      new glados.views.ReportCards.CarouselInCardView
+        collection: alternateFormsList
+        el: $('#AlternateFormsCard')
+        resource_type: gettext('glados_entities_compound_name')
+        section_id: 'AlternateFormsOfCompoundInChEMBL'
+        section_label: 'Alternative Forms'
+        config: viewConfig
+        report_card_app: @
+
+      alternateFormsList.fetch()
+
+    compound.on 'change', initAlternateFormsList, @
+
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
 
   @initActivitySummary = ->
 

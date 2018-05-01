@@ -181,7 +181,10 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
   getChildrenIDs: -> @getWithCache('children_ids', @calculateChildrenIDs.bind(@))
   getParentID: ->
     metadata = @get('_metadata')
-    return metadata.hierarchy.parent.chembl_id
+    if @isParent()
+      return @get('id')
+    else
+      return metadata.hierarchy.parent.chembl_id
 
   calculateAdditionalIDs: ->
     metadata = @get('_metadata')
