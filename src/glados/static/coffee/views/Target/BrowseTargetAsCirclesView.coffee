@@ -20,31 +20,45 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     console.log 'I will get the bucket data!'
     receivedBuckets = @model.get 'bucket_data'
     root = {}
+    id = 0
+
+    fillNode = (parent_node, parent_id, parent_depth, children_nodes) ->
+
+      for node in children_nodes
+
+        id++
+
+        node.name = node.key
+        node.size = node.doc_count
+        node.parent_id = parent_id
+        node.id = id
+        node.depth = parent_depth + 1
 
 
-    fillNode = (node, parent_id, parent_depth) ->
-      console.log 'Node: ', node
+        delete(node.key)
+        delete(node.doc_count)
+        delete(node.parent_key)
+        delete(node.parsed_parent_key)
+        delete(node.link)
 
-      if node.children?
-        console.log 'i have children'
-#        for bucket in node.children['buckets']
-#          fillNode(bucket)
+        if node.children?
+          node.children = node.children['buckets']
+          fillNode(node, node.id, node.depth, node.children)
 
 
     if receivedBuckets?
-      root.children = receivedBuckets.children
+      root.children = receivedBuckets.children['buckets']
       root.depth = 0
       root.name = 'root'
-      root.id = '0'
+      root.id = id
 
-      fillNode(root, root.id, root.depth)
+      fillNode(root, root.id, root.depth, root.children)
 
+    console.log 'ROOT: ', root
+    if root?
+      @render(root)
 
-
-
-#    @render(bucketData)
-
-  render: (bucketData = undefined) ->
+  render: (root) ->
 
     @$vis_elem.empty()
     thisView = @
@@ -82,7 +96,8 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     .attr("transform", "translate(" + @VISUALISATION_WIDTH / 2 + "," + @VISUALISATION_HEIGHT / 2 + ")")
 
     # use plain version
-    @root = bucketData
+    @root = root
+    console.log 'ROOT: ', root
     focus = @root
     nodes = pack.nodes(@root)
     @currentViewFrame = undefined
