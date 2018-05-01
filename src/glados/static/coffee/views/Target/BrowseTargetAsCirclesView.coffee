@@ -14,12 +14,11 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     @$vis_elem = $(@el).find('.vis-container')
     @showResponsiveViewPreloader()
     @setUpResponsiveRender()
-    @model.on 'change', @getBucketData, @
+    @model.on 'change', @render, @
 
   getBucketData: ->
-    console.log 'I will get the bucket data!'
     receivedBuckets = @model.get 'bucket_data'
-    root = {}
+
     id = 0
 
     fillNode = (parent_node, parent_id, parent_depth, children_nodes) ->
@@ -47,18 +46,32 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
 
     if receivedBuckets?
-      root.children = receivedBuckets.children['buckets']
+      root = {}
       root.depth = 0
       root.name = 'root'
       root.id = id
 
-      fillNode(root, root.id, root.depth, root.children)
+      if receivedBuckets.children['buckets']?
+        root.children = receivedBuckets.children['buckets']
+        fillNode(root, root.id, root.depth, root.children)
 
-    console.log 'ROOT: ', root
-    if root?
-      @render(root)
+    return root
 
-  render: (root) ->
+
+  render: ->
+
+    # use plain version
+    @root = @getBucketData()
+    console.log 'ROOT: ', @root
+    console.log 'exists?', @root?
+
+    if not @root?
+      return
+      
+    focus = @root
+    nodes = pack.nodes(@root)
+
+    @currentViewFrame = undefined
 
     @$vis_elem.empty()
     thisView = @
@@ -95,16 +108,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     .append("g")
     .attr("transform", "translate(" + @VISUALISATION_WIDTH / 2 + "," + @VISUALISATION_HEIGHT / 2 + ")")
 
-    # use plain version
-    @root = root
-    console.log 'ROOT: ', root
-    focus = @root
-    nodes = pack.nodes(@root)
-    @currentViewFrame = undefined
-
-#   should change this later
-#    for node in nodes
-#      node.link = '#'
 
     #get depth domain in tree
     getNodeNumChildren = (node) -> if not node.children? then 0 else node.children.length
