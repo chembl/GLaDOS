@@ -76,6 +76,8 @@ Document.COLUMNS = {
     name_to_show: 'Reference'
     parse_function: (model) -> Document.getFormattedReference model.attributes
     parse_from_model: true
+    link_function: (model) -> 'http://dx.doi.org/' + encodeURIComponent(model.attributes.doi)
+    get_link_from_model: true
   PUBMED_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
     comparator: 'pubmed_id'
     link_function: (id) -> 'http://europepmc.org/abstract/MED/' + encodeURIComponent(id)
