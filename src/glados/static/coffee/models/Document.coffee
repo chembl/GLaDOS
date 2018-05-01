@@ -71,10 +71,13 @@ Document.COLUMNS = {
     comparator: 'mol_tani'
     parse_function: (value) -> "#{parseFloat(value) * 100}%"
   }
-  REFERENCE: {
+  REFERENCE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
+    comparator: '_metadata.similar_documents'
     name_to_show: 'Reference'
-    comparator: 'reference'
-  }
+    parse_function: (value) ->
+
+      console.log 'PARSING VALUE: ', value
+
   PUBMED_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
     comparator: 'pubmed_id'
     link_function: (id) -> 'http://europepmc.org/abstract/MED/' + encodeURIComponent(id)

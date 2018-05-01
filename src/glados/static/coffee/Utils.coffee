@@ -245,6 +245,23 @@ glados.useNameSpace 'glados',
         else
           returnCol.show = colDescription.show
 
+      parseColValue: (returnCol, colDescription, colValue) ->
+
+        if _.isBoolean(colValue)
+          returnCol['value'] = if colValue then 'Yes' else 'No'
+        else
+          returnCol['value'] = colValue
+
+        if _.has(colDescription, 'parse_function')
+          returnCol['value'] = colDescription['parse_function'](colValue)
+
+        if _.has(colDescription, 'additional_parsing')
+
+          for key in Object.keys(colDescription.additional_parsing)
+            parserFunction = colDescription.additional_parsing[key]
+            returnCol[key] = parserFunction colValue
+
+
     # given an model and a list of columns to show, it gives an object ready to be passed to a
     # handlebars template, with the corresponding values for each column
     # handlebars only allow very simple logic, we have to help the template here and
@@ -266,21 +283,7 @@ glados.useNameSpace 'glados',
         returnCol['format_class'] = colDescription.format_class
 
         colValue = glados.Utils.Columns.getColValue(colDescription, model, highlights)
-
-        # this will now be 'setColValue'
-        if _.isBoolean(colValue)
-          returnCol['value'] = if colValue then 'Yes' else 'No'
-        else
-          returnCol['value'] = colValue
-
-        if _.has(colDescription, 'parse_function')
-          returnCol['value'] = colDescription['parse_function'](colValue)
-
-        if _.has(colDescription, 'additional_parsing')
-
-          for key in Object.keys(colDescription.additional_parsing)
-            parserFunction = colDescription.additional_parsing[key]
-            returnCol[key] = parserFunction colValue
+        glados.Utils.Columns.parseColValue(returnCol, colDescription, colValue)
 
         returnCol['has_link'] = _.has(colDescription, 'link_base') or _.has(colDescription, 'link_function')
         returnCol['has_multiple_links'] = colDescription.multiple_links == true
