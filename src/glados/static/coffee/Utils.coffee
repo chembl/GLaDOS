@@ -245,7 +245,7 @@ glados.useNameSpace 'glados',
         else
           returnCol.show = colDescription.show
 
-      parseColValue: (returnCol, colDescription, colValue) ->
+      parseColValue: (returnCol, colDescription, colValue, model) ->
 
         if _.isBoolean(colValue)
           returnCol['value'] = if colValue then 'Yes' else 'No'
@@ -253,7 +253,13 @@ glados.useNameSpace 'glados',
           returnCol['value'] = colValue
 
         if _.has(colDescription, 'parse_function')
-          returnCol['value'] = colDescription['parse_function'](colValue)
+          parseFromModel = colDescription.parse_from_model
+          parserFunction = colDescription.parse_function
+
+          if parseFromModel
+            returnCol.value = parserFunction(model)
+          else
+            returnCol.value = parserFunction(colValue)
 
         if _.has(colDescription, 'additional_parsing')
 
@@ -283,7 +289,7 @@ glados.useNameSpace 'glados',
         returnCol['format_class'] = colDescription.format_class
 
         colValue = glados.Utils.Columns.getColValue(colDescription, model, highlights)
-        glados.Utils.Columns.parseColValue(returnCol, colDescription, colValue)
+        glados.Utils.Columns.parseColValue(returnCol, colDescription, colValue, model)
 
         returnCol['has_link'] = _.has(colDescription, 'link_base') or _.has(colDescription, 'link_function')
         returnCol['has_multiple_links'] = colDescription.multiple_links == true

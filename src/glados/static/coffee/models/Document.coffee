@@ -74,10 +74,8 @@ Document.COLUMNS = {
   REFERENCE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
     comparator: '_metadata.similar_documents'
     name_to_show: 'Reference'
-    parse_function: (value) ->
-
-      console.log 'PARSING VALUE: ', value
-
+    parse_function: (model) -> Document.getFormattedReference model.attributes
+    parse_from_model: true
   PUBMED_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
     comparator: 'pubmed_id'
     link_function: (id) -> 'http://europepmc.org/abstract/MED/' + encodeURIComponent(id)
@@ -196,3 +194,12 @@ Document.getDocumentsListURL = (filter) ->
 Document.DEPOSITED_DATASETS_FILTER = 'doc_type:"DATASET" AND NOT(_metadata.source.src_id:(
 "1" OR "7" OR "8" OR "9" OR "11" OR "12" OR "13" OR "15" OR "18" OR "25" OR "26" OR "28" OR "31" OR "35" OR "37" OR "38"
  OR "39" OR "41" OR  "42"))'
+
+Document.getFormattedReference = (docAttributes) ->
+
+  journal = if docAttributes.journal? then docAttributes.journal else ""
+  year = if docAttributes.year? then "(#{docAttributes.year})" else ""
+  volume = if docAttributes.volume? then "#{docAttributes.volume}:" else ""
+  firstPage = if docAttributes.first_page? then docAttributes.first_page else ""
+  lastPage = if docAttributes.last_page? then docAttributes.last_page else ""
+  return "#{journal} #{year} #{volume}#{firstPage}-#{lastPage}"
