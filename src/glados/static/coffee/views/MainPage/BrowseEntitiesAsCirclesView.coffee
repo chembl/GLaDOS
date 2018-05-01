@@ -94,8 +94,6 @@ glados.useNameSpace 'glados.views.MainPage',
 
         bubbleData.children.push(dataItem)
 
-      console.log 'bubbleData: ', bubbleData
-
 #     pack layout
       diameter = Math.min(VIS_HEIGHT, VIS_WIDTH)
       bubble = d3.layout.pack()

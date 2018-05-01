@@ -16,7 +16,56 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     @setUpResponsiveRender()
     @model.on 'change', @render, @
 
+  getBucketData: ->
+    receivedBuckets = @model.get 'bucket_data'
+    id = 0
+
+    fillNode = (parent_node, input_node) ->
+
+      node = {}
+      node.name = input_node.key
+      node.size = input_node.doc_count
+      node.parent_id = parent_node.id
+      node.id = id
+      node.link = input_node.link
+      node.depth = parent_node.depth + 1
+      node.parent = parent_node
+
+      parent_node.children.push(node)
+
+      if input_node.children?
+        node.children = []
+        for child in input_node.children['buckets']
+          id++
+          fillNode(node, child)
+
+    if receivedBuckets?
+      root = {}
+      root.depth = 0
+      root.name = 'root'
+      root.id = id
+
+      if receivedBuckets.children?
+        root.children = []
+        for node in receivedBuckets.children['buckets']
+          id++
+          fillNode(root, node)
+
+    console.log 'root: ', root
+    return root
+
   render: ->
+
+    if @model.get('state') == glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE
+      return
+
+    if @model.get('state') == glados.models.Aggregations.Aggregation.States.LOADING_BUCKETS
+      return
+
+    if @model.get('state') != glados.models.Aggregations.Aggregation.States.INITIAL_STATE
+      return
+
+    @root = @getBucketData()
 
     @$vis_elem.empty()
     thisView = @
@@ -53,17 +102,11 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     .append("g")
     .attr("transform", "translate(" + @VISUALISATION_WIDTH / 2 + "," + @VISUALISATION_HEIGHT / 2 + ")")
 
-    # use plain version
-
-    @root = @model.get('plain')
 
     focus = @root
     nodes = pack.nodes(@root)
     @currentViewFrame = undefined
 
-#   should change this later
-    for node in nodes
-      node.link = '#'
 
     #get depth domain in tree
     getNodeNumChildren = (node) -> if not node.children? then 0 else node.children.length

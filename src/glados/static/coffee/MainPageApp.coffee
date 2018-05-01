@@ -18,6 +18,30 @@ class MainPageApp
 # Init functions
 # ----------------------------------------------------------------------------------------------------------------------
 
+  @initCentralCarousel = ->
+    $carouselContainer = $('.carousel-wrapper')
+    $linksCarousel = $('.links-carousel')
+
+    $carouselContainer.slick {
+      asNavFor: $linksCarousel
+      arrows: true
+      autoplay: true
+      autoplaySpeed: 4000
+      dots: true
+    }
+
+    $linksCarousel.slick {
+      useCSS: false
+      fade: true
+      arrows: false
+      dots: false
+    }
+
+    MainPageApp.initPapersPerYear()
+    MainPageApp.initMaxPhaseForDisease()
+    MainPageApp.initTargetsVisualisation()
+    MainPageApp.initBrowseEntities()
+
   @initMaxPhaseForDisease = ->
     maxPhaseForDisease = MainPageApp.getMaxPhaseForDiseaseAgg()
     maxPhaseProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'MAX_PHASE', true)
@@ -101,16 +125,16 @@ class MainPageApp
 
   @initTargetsVisualisation = ->
     targetHierarchy = TargetBrowserApp.initTargetHierarchyTree()
+    targetHierarchyAgg = MainPageApp.getTargetsTreeAgg()
+    targetHierarchy.fetch()
+    targetHierarchyAgg.fetch()
+
+    TargetBrowserApp.initBrowserAsCircles(targetHierarchyAgg, $('#BCK-TargetBrowserAsCircles'))
 
     config =
       is_outside_an_entity_report_card: true
       embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#targets_by_protein_class"
       view_class: BrowseTargetAsCirclesView
-
-    targetsHierarchyAgg = MainPageApp.getTargetsTreeAgg()
-    targetsHierarchyAgg.fetch()
-    TargetBrowserApp.initBrowserAsCircles(targetHierarchy, $('#BCK-TargetBrowserAsCircles'))
-    targetHierarchy.fetch()
 
     new glados.views.ReportCards.VisualisationInCardView
       el: $('#BCK-TargetBrowserAsCircles')
@@ -118,31 +142,6 @@ class MainPageApp
       config: config
       report_card_app: @
 
-    targetHierarchy.fetch()
-
-  @initCentralCarousel = ->
-    $carouselContainer = $('.carousel-wrapper')
-    $linksCarousel = $('.links-carousel')
-
-    $carouselContainer.slick {
-      asNavFor: $linksCarousel
-      arrows: true
-      autoplay: true
-      autoplaySpeed: 4000
-      dots: true
-    }
-
-    $linksCarousel.slick {
-      useCSS: false
-      fade: true
-      arrows: false
-      dots: false
-    }
-
-    MainPageApp.initPapersPerYear()
-    MainPageApp.initMaxPhaseForDisease()
-    MainPageApp.initTargetsVisualisation()
-    MainPageApp.initBrowseEntities()
 
   @initBrowseEntities = ->
     new glados.views.MainPage.BrowseEntitiesAsCirclesView
@@ -265,7 +264,7 @@ class MainPageApp
 
     aggsConfig =
       aggs:
-        l1_class:
+        children:
           type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
           field: '_metadata.protein_classification.l1'
           size: 100
@@ -275,7 +274,7 @@ class MainPageApp
               bucket_key: 'BUCKET.key'
             link_generator: Target.getTargetsListURL
           aggs:
-            l2_class:
+            children:
               type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
               field: '_metadata.protein_classification.l2'
               size: 100
@@ -285,7 +284,7 @@ class MainPageApp
                   bucket_key: 'BUCKET.key'
                 link_generator: Target.getTargetsListURL
               aggs:
-                l3_class:
+                children:
                   type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
                   field: '_metadata.protein_classification.l3'
                   size: 100
@@ -295,7 +294,7 @@ class MainPageApp
                       bucket_key: 'BUCKET.key'
                     link_generator: Target.getTargetsListURL
                   aggs:
-                    l4_class:
+                    children:
                       type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
                       field: '_metadata.protein_classification.l4'
                       size: 100
@@ -305,7 +304,7 @@ class MainPageApp
                           bucket_key: 'BUCKET.key'
                         link_generator: Target.getTargetsListURL
                       aggs:
-                        l5_class:
+                        children:
                           type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
                           field: '_metadata.protein_classification.l5'
                           size: 100
@@ -315,7 +314,7 @@ class MainPageApp
                               bucket_key: 'BUCKET.key'
                             link_generator: Target.getTargetsListURL
                           aggs:
-                            l6_class:
+                            children:
                               type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
                               field: '_metadata.protein_classification.l6'
                               size: 100
