@@ -24,11 +24,19 @@ AssayBasicInformationView = CardView.extend
 
     $elem = $(@el).find('#' + div_id)
 
+    console.log 'fillTemplate: '
+    documentAttributes = @model.get('_metadata').document_data
+    referenceText = Document.getFormattedReference(documentAttributes)
+    referenceLink = 'http://dx.doi.org/' + encodeURIComponent(documentAttributes.doi)
+    console.log 'documentAttributes: ', documentAttributes
+
     glados.Utils.fillContentForElement $elem,
       chembl_id: @model.get('assay_chembl_id')
       type: @model.get('assay_type_description')
       description: @model.get('description')
       format: @model.get('bao_format')
+      reference_text: referenceText
+      reference_link: referenceLink
       organism: @model.get('assay_organism')
       strain: @model.get('assay_strain')
       tissue: @model.get('assay_tissue')
