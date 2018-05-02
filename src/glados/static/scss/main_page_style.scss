@@ -130,7 +130,6 @@ $full-header-height-large: 180px;
 
 }
 
-/* -------- Make sure carousel takes full height of container -------- */
 
 /* -------- VISUALISATIONS CAROUSEL -------- */
 .main-page-container {
@@ -163,6 +162,22 @@ $full-header-height-large: 180px;
     }
   }
 }
+
+/* --- Browse Entties Visualisation --- */
+
+.circles-vis-container {
+
+  circle {
+    cursor: pointer;
+  }
+  text {
+    font-family: $chembl-helvetica;
+    text-anchor: middle;
+    fill: white;
+  }
+
+}
+
 
 /* -------- CHEMBL TEXT -------- */
 .main-page-container {
@@ -257,7 +272,6 @@ $full-header-height-large: 180px;
         p {
           margin-top: 0;
           text-anchor: middle;
-
         }
 
         img {
@@ -276,84 +290,6 @@ $full-header-height-large: 180px;
   }
 }
 
-/* -------- TWEETS -------- */
-
-.tweet-box {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-
-  .num-results {
-    display: none;
-  }
-
-  .tweet-header {
-    padding-left: 5px;
-    font-family: $chembl-helvetica;
-    color: $grey-dark;
-    a {
-      color: $primary-color;
-    }
-  }
-
-  .row {
-    margin: 0;
-  }
-
-  .tweet-list-container {
-    max-height: 100%;
-    overflow: scroll;
-    border-radius: 10px;
-
-    //Each tweet on the list
-    .tweet {
-      border: 1px solid $grey-light;
-      border-radius: 3px;
-      padding: 12px 10px;
-      width: 100%;
-      margin: 7px 0;
-
-      .tweet-content {
-        font-size: 1em;
-        word-wrap: break-word;
-        color: $grey-dark;
-        margin: 0;
-
-        a {
-          color: $primary-color;
-        }
-
-      }
-
-      .tweet-extras {
-        margin-top: 5px;
-        font-size: 0.9em;
-        font-family: $verdana;
-
-        span {
-          margin-right: 10px;
-          color: #a8a8a8;
-
-          &:hover {
-            text-decoration: underline;
-          }
-
-        }
-        img {
-          width: 22px;
-          height: auto;
-          float: right;
-          margin-right: 10px;
-          padding: 1px;
-
-          &:hover {
-            padding: 0;
-          }
-        }
-      }
-    }
-  }
-}
 
 /* -------- BLOG ENTRIES (like tweets but with some tweaks) -------- */
 
@@ -518,22 +454,83 @@ $full-header-height-large: 180px;
   }
 }
 
-/**
-* Browse entities
-* ----------------------------------------------------------------------------------------------------------------------
-*/
+/* -------- TWEETS -------- */
 
-.circles-vis-container{
-  //border: orange solid 1px;
-  circle {
-    cursor: pointer;
+.tweet-box {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .num-results {
+    display: none;
   }
-  text {
+
+  .tweet-header {
+    padding-left: 5px;
     font-family: $chembl-helvetica;
-    text-anchor: middle;
-    fill: white;
+    color: $grey-dark;
+    a {
+      color: $primary-color;
+    }
   }
 
+  .row {
+    margin: 0;
+  }
+
+  .tweet-list-container {
+    max-height: 100%;
+    overflow: scroll;
+    border-radius: 10px;
+
+    //Each tweet on the list
+    .tweet {
+      border: 1px solid $grey-light;
+      border-radius: 3px;
+      padding: 12px 10px;
+      width: 100%;
+      margin: 7px 0;
+
+      .tweet-content {
+        font-size: 1em;
+        word-wrap: break-word;
+        color: $grey-dark;
+        margin: 0;
+
+        a {
+          color: $primary-color;
+        }
+
+      }
+
+      .tweet-extras {
+        margin-top: 5px;
+        font-size: 0.9em;
+        font-family: $verdana;
+
+        span {
+          margin-right: 10px;
+          color: #a8a8a8;
+
+          &:hover {
+            text-decoration: underline;
+          }
+
+        }
+        img {
+          width: 22px;
+          height: auto;
+          float: right;
+          margin-right: 10px;
+          padding: 1px;
+
+          &:hover {
+            padding: 0;
+          }
+        }
+      }
+    }
+  }
 }
 
 
