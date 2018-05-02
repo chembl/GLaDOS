@@ -233,7 +233,7 @@ $full-header-height-large: 180px;
   .database-summary {
     padding-bottom: 55px;
     text-align: center;
-    border-bottom: 1px $divider-grey solid;
+    //border-bottom: 1px $divider-grey solid;
 
     h3 {
       color: $grey-dark;
@@ -287,12 +287,12 @@ $full-header-height-large: 180px;
 .papers {
   background: white;
   padding-top: 150px;
-  padding-bottom: 140px;
+  padding-bottom: 150px ;
 
   .row {
     background: #f9f9f9;
+    //background: rgba(237, 243, 242, 0.57);
     max-width: none;
-    //border: 1px red solid;
     height: 50%;
     margin: 0;
   }
@@ -304,12 +304,11 @@ $full-header-height-large: 180px;
     .responsive-img {
       max-width: 230px;
       position: absolute;
-      //border: 1px red solid;
+      padding: 0px;
     }
 
     .pub-container {
-      //border: 1px red solid;
-      padding: 20px 0;
+      padding: 0 0 20px 0;
 
       h3 {
         color: $grey-dark;
@@ -319,6 +318,9 @@ $full-header-height-large: 180px;
 
       h6 {
         font-size: 1.5em;
+        line-height: 1.2em;
+        letter-spacing: 0.03em;
+
         a {
           color: $primary-color;
 
@@ -328,12 +330,8 @@ $full-header-height-large: 180px;
         }
       }
 
-      p {
-        color: $grey-dark;
-        margin: 0;
-      }
-
       .small-text {
+        margin: 0;
         font-family: $chembl-helvetica;
         color: #aeaeae;
       }
