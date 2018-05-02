@@ -302,7 +302,7 @@ $full-header-height-large: 180px;
     .responsive-img {
       max-width: 230px;
       position: absolute;
-      padding: 0px;
+      padding: 0;
     }
 
     .pub-container {
@@ -619,11 +619,11 @@ $full-header-height-large: 180px;
       padding-bottom: 150px;
 
       h3 {
-        font-size: 2em;
+        font-size: 1.8em;
       }
 
       h6 {
-        font-size: 1.5em;
+        font-size: 1.3em;
         line-height: 1.2em;
         letter-spacing: 0.03em;
       }
