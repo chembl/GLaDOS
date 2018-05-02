@@ -27,7 +27,6 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
 $full-header-height-large: 180px;
 
 /* -------- DEFAULT STYLES -------- */
-
 .main-page-container {
   h2 {
     color: $darker-color;
@@ -42,7 +41,7 @@ $full-header-height-large: 180px;
   .color-row {
     padding: 40px 0;
     margin-bottom: 0;
-    background: linear-gradient(to bottom right, #fcfcfc, #f5f5f5);
+    background: #f9f9f9;
   }
 
   .container {
@@ -127,9 +126,7 @@ $full-header-height-large: 180px;
       }
     }
   }
-
 }
-
 
 /* -------- VISUALISATIONS CAROUSEL -------- */
 .main-page-container {
@@ -163,21 +160,19 @@ $full-header-height-large: 180px;
   }
 }
 
-/* --- Browse Entties Visualisation --- */
-
+/* --- Browse Entities Visualisation --- */
 .circles-vis-container {
 
   circle {
     cursor: pointer;
   }
+
   text {
     font-family: $chembl-helvetica;
     text-anchor: middle;
     fill: white;
   }
-
 }
-
 
 /* -------- CHEMBL TEXT -------- */
 .main-page-container {
@@ -213,8 +208,6 @@ $full-header-height-large: 180px;
       }
     }
   }
-
-
 }
 
 /* -------- EXPLORE THE DATABASE -------- */
@@ -240,7 +233,6 @@ $full-header-height-large: 180px;
   .database-summary {
     padding-bottom: 55px;
     text-align: center;
-    border-bottom: solid 1px $divider-grey;
 
     h3 {
       color: $grey-dark;
@@ -287,6 +279,22 @@ $full-header-height-large: 180px;
         }
       }
     }
+  }
+}
+
+/* -------- PAPERS BY CHEMBL -------- */
+.papers {
+  background: #f9f9f9;
+  padding-top: 50px;
+  padding-bottom: 40px;
+
+  .row {
+    max-width: 1200px;
+    height: 100%;
+  }
+
+  .pub-container {
+    border: 1px red solid;
   }
 }
 
@@ -362,7 +370,6 @@ $full-header-height-large: 180px;
             .chevron-icon {
               color: $primary-color;
             }
-
           }
         }
       }
@@ -382,20 +389,14 @@ $full-header-height-large: 180px;
   }
 }
 
-/* -------- PAPERS BY CHEMBL -------- */
-.papers{
-  //background: #f5f5f5;
-  //background: #fcfcfc;
-  border-top: 1px solid $divider-grey;
-  border-bottom: 1px solid $divider-grey;
-}
 
 /* -------- WANT TO KNOW MORE SECTION-------- */
 .know-more {
-  background: white;
+  background: #f9f9f9;
   min-height: 1px !important;
   padding-top: 50px;
   padding-bottom: 40px;
+  border-bottom: 1px solid $grey-light;
 
   .container {
     max-width: 1000px;
@@ -414,7 +415,6 @@ $full-header-height-large: 180px;
         width: 110px;
         height: auto;
         border-radius: 100%;
-
       }
 
       .title {
@@ -531,7 +531,6 @@ $full-header-height-large: 180px;
 
   }
 }
-
 
 /* ------------------- MEDIA QUERIES ------------------- */
 
