@@ -290,35 +290,6 @@ $full-header-height-large: 180px;
   }
 }
 
-
-/* -------- BLOG ENTRIES (like tweets but with some tweaks) -------- */
-
-.blog-box {
-
-  h5 {
-    margin: 0 !important;
-    font-size: 1.3em;
-
-    a {
-      color: $primary-color;
-
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-  }
-
-  .tweet-content {
-    margin: 5px 0 !important;
-  }
-
-  .tweet-extras {
-    color: #a8a8a8;
-    margin: 0 !important;
-
-  }
-}
-
 /* -------- ASSOCIATED RESOURCES -------- */
 .associated-resources {
   padding-top: 85px;
@@ -530,6 +501,34 @@ $full-header-height-large: 180px;
         }
       }
     }
+  }
+}
+
+/* -------- BLOG ENTRIES (like tweets but with some tweaks) -------- */
+
+.blog-box {
+
+  h5 {
+    margin: 0 !important;
+    font-size: 1.3em;
+
+    a {
+      color: $primary-color;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .tweet-content {
+    margin: 5px 0 !important;
+  }
+
+  .tweet-extras {
+    color: #a8a8a8;
+    margin: 0 !important;
+
   }
 }
 
