@@ -233,6 +233,7 @@ $full-header-height-large: 180px;
   .database-summary {
     padding-bottom: 55px;
     text-align: center;
+    border-bottom: 1px $divider-grey solid;
 
     h3 {
       color: $grey-dark;
@@ -284,17 +285,59 @@ $full-header-height-large: 180px;
 
 /* -------- PAPERS BY CHEMBL -------- */
 .papers {
-  background: #f9f9f9;
-  padding-top: 50px;
-  padding-bottom: 40px;
+  background: white;
+  padding-top: 150px;
+  padding-bottom: 140px;
 
   .row {
-    max-width: 1200px;
-    height: 100%;
+    background: #f9f9f9;
+    max-width: none;
+    //border: 1px red solid;
+    height: 50%;
+    margin: 0;
   }
 
-  .pub-container {
-    border: 1px red solid;
+  .container {
+    position: relative;
+    max-width: 1200px;
+
+    .responsive-img {
+      max-width: 230px;
+      position: absolute;
+      //border: 1px red solid;
+    }
+
+    .pub-container {
+      //border: 1px red solid;
+      padding: 20px 0;
+
+      h3 {
+        color: $grey-dark;
+        font-size: 2em;
+        margin-bottom: 0;
+      }
+
+      h6 {
+        font-size: 1.5em;
+        a {
+          color: $primary-color;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+
+      p {
+        color: $grey-dark;
+        margin: 0;
+      }
+
+      .small-text {
+        font-family: $chembl-helvetica;
+        color: #aeaeae;
+      }
+    }
   }
 }
 
