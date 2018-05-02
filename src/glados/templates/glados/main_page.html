@@ -60,45 +60,9 @@
         <!-------------- Latest papers  SECTION -------------->
         <div class="main-page-section col s12 papers fit-height">
 
-            <div class="row">
-
-                <div class="container valign-wrapper">
-
-                    <img class="col push-l1 l4 m4 s3 responsive-img hide-on-small-and-down"
-                         src=" {% static 'img/icons/paper_img_grey.png' %}">
-
-                    <div class="col l8 m8 s12 pub-container ">
-
-                        <h3> Latest Paper by ChEMBL </h3>
-
-                        <h6>
-
-                            <a href="http://europepmc.org/abstract/MED/28602100" target="_blank">
-                                Using ChEMBL web services for building applications and data processing workflows
-                                relevant to drug discovery.
-                            </a>
-
-                        </h6>
-
-                        <p class="small-text truncate">Nowotka MM, Gaulton A, Mendez D, Bento AP, Hersey A, Leach A.</p>
-
-                        <p class="small-text truncate">
-
-                            <em>
-
-                                — Expert Opinion on Drug Discovery Volume 12 (2017) p.757-767
-
-                            </em>
-
-                        </p>
-
-                    </div>
-
-                </div>
-            </div>
+            {% include "glados/MainPageParts/latest_papers.html" %}
 
         </div>
-
 
         <!-------------- Associated Resources SECTION -------------->
         <div class="main-page-section col s12 fit-height associated-resources BCK-Associated-resources">
