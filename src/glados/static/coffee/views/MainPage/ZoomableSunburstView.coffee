@@ -2,13 +2,11 @@ glados.useNameSpace 'glados.views.MainPage',
   ZoomableSunburstView: Backbone.View.extend(ResponsiviseViewExt).extend
 
     initialize: ->
-      console.log 'IM THE ZOOMABLE SUNBURST VIEW :)'
       @$vis_elem = $(@el).find('.BCK-sunburst-container')
       @setUpResponsiveRender()
       @model.on 'change', @render, @
 
     render: ->
-
       thisView = @
 
       if @model.get('state') == glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE
@@ -27,8 +25,6 @@ glados.useNameSpace 'glados.views.MainPage',
       @VIS_WIDTH = $(@el).width() - 10
       @VIS_HEIGHT = $(@el).height() - 15
       @RADIUS = (Math.min(@VIS_WIDTH, @VIS_HEIGHT) / 2)
-
-
 
       formatNumber = d3.format(",d")
 
@@ -49,7 +45,6 @@ glados.useNameSpace 'glados.views.MainPage',
         .innerRadius (d) -> return Math.max(0, y(d.y))
         .outerRadius (d) -> return Math.max(0, y(d.y + d.dy))
 
-
       nodes = partition.nodes(@ROOT)
 
       mainSunburstContainer = d3.select @$vis_elem[0]
@@ -65,22 +60,21 @@ glados.useNameSpace 'glados.views.MainPage',
         .data(nodes)
         .enter().append("path")
         .attr("d", arc)
-        .style("fill", '#09979B')
+        .style("fill", '#D33C60')
         .style("stroke", 'white')
-        .on('click', click)
+        .on('click', (d) -> thisView.click(d, sunburstGroup))
 
-
-#      click = (d) ->
-#        console.log 'click'
-#        sunburstGroup.transition()
-#          .duration(750)
-#          .tween("scale", () ->
-#            xd = d3.interpolate x.domain(), [d.x, d.x + d.dx]
-#            yd = d3.interpolate y.domain(), [d.y, 1]
-#            yr = d3.interpolate y.range(), [d.y ? 20 : 0, radius]
+    click: (d, group) ->
+      console.log 'click'
+#      d3.select(group).transition()
+#        .duration(750)
+#        .tween("scale", () ->
+#          xd = d3.interpolate x.domain(), [d.x, d.x + d.dx]
+#          yd = d3.interpolate y.domain(), [d.y, 1]
+#          yr = d3.interpolate y.range(), [d.y ? 20 : 0, radius]
 #
-#            return (t) -> x.domain(xd(t)); y.domain(yd(t)).range(yr(t))
-#        )
+#          return (t) -> x.domain(xd(t)); y.domain(yd(t)).range(yr(t))
+#      )
 
     getBucketData: ->
       receivedBuckets = @model.get 'bucket_data'
