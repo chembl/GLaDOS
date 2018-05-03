@@ -3,11 +3,21 @@ from elasticsearch_dsl import DocType, Text
 from django.conf import settings
 from typing import List
 
+
+connection_tuple = None
 if settings.ELASTICSEARCH_PASSWORD is None:
-  connections.create_connection(hosts=[settings.ELASTICSEARCH_HOST])
-else:
-  connections.create_connection(hosts=[settings.ELASTICSEARCH_HOST],
-                                http_auth=(settings.ELASTICSEARCH_USERNAME, settings.ELASTICSEARCH_PASSWORD))
+  connection_tuple = (settings.ELASTICSEARCH_USERNAME, settings.ELASTICSEARCH_PASSWORD)
+
+keyword_args = {
+  "hosts": [settings.ELASTICSEARCH_HOST],
+  "timeout": 30,
+  "retry_on_timeout": True
+}
+
+if connection_tuple:
+  keyword_args["http_auth"] = connection_tuple
+
+connections.create_connection(**keyword_args)
 
 
 class TinyURLIndex(DocType):
