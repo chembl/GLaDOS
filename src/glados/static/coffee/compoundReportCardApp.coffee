@@ -275,17 +275,21 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     initAlternateFormsList = ->
 
-      console.log 'prop config: ', Compound.COLUMNS.IS_PARENT_CAROUSEL
       parentID = compound.getParentID()
       filter = "molecule_hierarchy.parent_chembl_id:(\"#{parentID}\") OR molecule_chembl_id:(\"#{parentID}\")^100"
       alternateFormsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(filter,
       itemsList=undefined, contextualProperties=undefined,
       settings=settings=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_ES_RESULTS_LIST_CAROUSEL)
 
+      if compound.isParent()
+        parentText = '(Parent)'
+      else
+        parentText = "(Parent is #{parentID})"
+
       viewConfig =
         embed_section_name: 'alternate_forms'
         embed_identifier: chemblID
-        title: "Alternative forms of compound #{chemblID}:"
+        title: "Alternative forms of compound #{chemblID} #{parentText}:"
 
       new glados.views.ReportCards.CarouselInCardView
         collection: alternateFormsList
