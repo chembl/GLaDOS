@@ -296,7 +296,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       console.log 'initAlternateFormsList: '
       console.log 'compound: ', compound
       parentID = compound.getParentID()
-      filter = "molecule_hierarchy.parent_chembl_id:(\"#{parentID}\")"
+      filter = "molecule_hierarchy.parent_chembl_id:(\"#{parentID}\") OR molecule_chembl_id:(\"#{parentID}\")^100"
       console.log 'parentID: ', parentID
       console.log 'filter: ', filter
       alternateFormsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(filter,
