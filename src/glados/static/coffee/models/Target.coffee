@@ -89,7 +89,25 @@ Target = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     objData.activities_url = Activity.getActivitiesListURL(filterForActivities)
     filterForCompounds = '_metadata.related_targets.chembl_ids.\\*:' + objData.target_chembl_id
     objData.compounds_url = Compound.getCompoundsListURL(filterForCompounds)
-    return objData;
+
+    console.log 'PARSING TARGET: ', objData
+
+    originalRefs = objData.cross_references
+    refsIndex = _.indexBy(originalRefs, (item) -> "#{item.xref_src}-#{item.xref_id}")
+    targetComponents = objData.target_components
+
+    for component in targetComponents
+      componentXrefs = component.target_component_xrefs
+      for xref in componentXrefs
+        refIdentifier = "#{xref.xref_src_db}-#{xref.xref_id}"
+        # just in case to avoid duplicates
+        if not refsIndex[refIdentifier]?
+          xref.xref_src = xref.xref_src_db
+          originalRefs.push xref
+          refsIndex[refIdentifier] = xref
+
+
+    return objData
 
   fetchFromAssayChemblID: ->
 
