@@ -41,6 +41,13 @@ class MainPageApp
     MainPageApp.initMaxPhaseForDisease()
     MainPageApp.initTargetsVisualisation()
     MainPageApp.initBrowseEntities()
+    MainPageApp.initZoomableSunburst()
+
+  @initZoomableSunburst = ->
+    console.log 'I will initialize the zoomable sunburst :)'
+
+    new glados.views.MainPage.ZoomableSunburstView
+      el: $('BCK-zoomable-sunburst')
 
   @initMaxPhaseForDisease = ->
     maxPhaseForDisease = MainPageApp.getMaxPhaseForDiseaseAgg()

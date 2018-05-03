@@ -51,7 +51,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
           id++
           fillNode(root, node)
 
-    console.log 'root: ', root
     return root
 
   render: ->
