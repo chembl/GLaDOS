@@ -24,8 +24,42 @@ glados.useNameSpace 'glados.views.MainPage',
       @$vis_elem.empty()
 
       @ROOT = @getBucketData()
-      @VISUALISATION_WIDTH = $(@el).width()
-      @VISUALISATION_HEIGHT = @VISUALISATION_WIDTH
+      @VIS_WIDTH = $(@el).width()
+      @VIS_HEIGHT = @VIS_WIDTH
+      @RADIUS = (Math.min(@VIS_WIDTH, @VIS_HEIGHT) / 2) - 10;
+
+      console.log 'ROOT: ', @ROOT
+
+      formatNumber = d3.format(",d")
+
+      x = d3.scale.linear()
+        .range([0, 2 * Math.PI])
+
+      y = d3.scale.sqrt()
+        .range([0, @RADIUS])
+
+      color = d3.scale.category20c();
+
+      partition = d3.layout.partition()
+        .value (d) -> d.size
+
+      arc = d3.svg.arc()
+        .startAngle (d) ->  return Math.max(0, Math.min(2 * Math.PI, x(d.x)))
+        .endAngle (d) -> return Math.max(0, Math.min(2 * Math.PI, x(d.x + d.dx)))
+        .innerRadius (d) -> return Math.max(0, y(d.y))
+        .outerRadius (d) -> return Math.max(0, y(d.y + d.dy))
+
+      mainSunburstContainer = d3.select @$vis_elem[0]
+        .append('svg')
+          .attr('class', 'mainEntitiesContainer')
+          .attr('width', @VIS_WIDTH)
+          .attr('height', @VIS_HEIGHT)
+
+      sunburstGroup = mainSunburstContainer.append("g")
+        .attr("transform", "translate(" + @VIS_WIDTH / 2 + "," + (@VIS_HEIGHT / 2) + ")")
+
+
+
 
     getBucketData: ->
       receivedBuckets = @model.get 'bucket_data'
