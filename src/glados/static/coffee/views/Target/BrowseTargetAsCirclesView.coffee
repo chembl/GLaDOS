@@ -74,7 +74,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     @hideResponsiveViewPreloader()
     @margin = 20
 
-    @VISUALISATION_WIDTH = $(@el).width()
+    @VISUALISATION_WIDTH = $(@el).width() - 10
     @VISUALISATION_HEIGHT = @VISUALISATION_WIDTH
     @diameter = @VISUALISATION_WIDTH
 
