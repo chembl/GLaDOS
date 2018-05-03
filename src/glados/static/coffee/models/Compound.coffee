@@ -906,7 +906,6 @@ Compound.COLUMNS = {
   IS_PARENT_CAROUSEL:
     hide_label: true
     comparator: 'is_parent'
-    show_function: (model) -> model.isParent()
     col_value_function: (model) ->
       switch model.isParent()
         when true then return 'Parent'
