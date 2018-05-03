@@ -52,10 +52,6 @@ glados.useNameSpace 'glados.views.MainPage',
 
       nodes = partition.nodes(@ROOT)
 
-      console.log 'nodes: ', nodes
-
-
-
       mainSunburstContainer = d3.select @$vis_elem[0]
         .append('svg')
           .attr('class', 'mainEntitiesContainer')
@@ -65,10 +61,26 @@ glados.useNameSpace 'glados.views.MainPage',
       sunburstGroup = mainSunburstContainer.append("g")
         .attr("transform", "translate(" + @VIS_WIDTH / 2 + "," + (@VIS_HEIGHT / 2) + ")")
 
+      sunburstGroup.selectAll("path")
+        .data(nodes)
+        .enter().append("path")
+        .attr("d", arc)
+        .style("fill", '#09979B')
+        .style("stroke", 'white')
+        .on('click', click)
 
 
-
-
+#      click = (d) ->
+#        console.log 'click'
+#        sunburstGroup.transition()
+#          .duration(750)
+#          .tween("scale", () ->
+#            xd = d3.interpolate x.domain(), [d.x, d.x + d.dx]
+#            yd = d3.interpolate y.domain(), [d.y, 1]
+#            yr = d3.interpolate y.range(), [d.y ? 20 : 0, radius]
+#
+#            return (t) -> x.domain(xd(t)); y.domain(yd(t)).range(yr(t))
+#        )
 
     getBucketData: ->
       receivedBuckets = @model.get 'bucket_data'
