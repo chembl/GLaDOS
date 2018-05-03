@@ -18,6 +18,7 @@ $primary-color: #09979b;
 $darker-color: #0d595f;
 $grey-dark: #4d5456;
 $grey-light: #e9e9e9;
+$divider-grey: #e0e0e0;
 
 //heights
 $chembl-header-height: 54px;
@@ -26,7 +27,6 @@ $full-header-height: $chembl-header-height + $ebi-nav-height;
 $full-header-height-large: 180px;
 
 /* -------- DEFAULT STYLES -------- */
-
 .main-page-container {
   h2 {
     color: $darker-color;
@@ -41,7 +41,7 @@ $full-header-height-large: 180px;
   .color-row {
     padding: 40px 0;
     margin-bottom: 0;
-    background: linear-gradient(to bottom right, #fcfcfc, #f5f5f5);
+    background: #f9f9f9;
   }
 
   .container {
@@ -72,7 +72,7 @@ $full-header-height-large: 180px;
 
   .col-divider {
     height: 1px;
-    background-color: #e0e0e0;
+    background-color: $divider-grey;
 
   }
   .divider {
@@ -126,10 +126,7 @@ $full-header-height-large: 180px;
       }
     }
   }
-
 }
-
-/* -------- Make sure carousel takes full height of container -------- */
 
 /* -------- VISUALISATIONS CAROUSEL -------- */
 .main-page-container {
@@ -160,6 +157,20 @@ $full-header-height-large: 180px;
         }
       }
     }
+  }
+}
+
+/* --- Browse Entities Visualisation --- */
+.circles-vis-container {
+
+  circle {
+    cursor: pointer;
+  }
+
+  text {
+    font-family: $chembl-helvetica;
+    text-anchor: middle;
+    fill: white;
   }
 }
 
@@ -197,8 +208,6 @@ $full-header-height-large: 180px;
       }
     }
   }
-
-
 }
 
 /* -------- EXPLORE THE DATABASE -------- */
@@ -222,7 +231,9 @@ $full-header-height-large: 180px;
 .main-page-container {
 
   .database-summary {
+    padding-bottom: 55px;
     text-align: center;
+    //border-bottom: 1px $divider-grey solid;
 
     h3 {
       color: $grey-dark;
@@ -254,7 +265,6 @@ $full-header-height-large: 180px;
         p {
           margin-top: 0;
           text-anchor: middle;
-
         }
 
         img {
@@ -268,6 +278,183 @@ $full-header-height-large: 180px;
             padding: 2px;
           }
         }
+      }
+    }
+  }
+}
+
+/* -------- PAPERS BY CHEMBL -------- */
+.papers {
+  background: white;
+  min-height: 1px !important;
+
+  .row {
+    background: #f9f9f9;
+    max-width: none;
+    height: 50%;
+    margin: 0;
+  }
+
+  .container {
+    position: relative;
+    max-width: 1200px;
+
+    .responsive-img {
+      max-width: 230px;
+      position: absolute;
+      padding: 0;
+    }
+
+    .pub-container {
+      padding: 0 0 20px 0;
+
+      h3 {
+        color: $grey-dark;
+        margin-bottom: 0;
+      }
+
+      h6 {
+
+        a {
+          color: $primary-color;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+
+      .small-text {
+        margin: 0;
+        font-family: $chembl-helvetica;
+        color: #aeaeae;
+      }
+    }
+  }
+}
+
+/* -------- ASSOCIATED RESOURCES -------- */
+.associated-resources {
+  padding-top: 85px;
+  padding-bottom: 30px;
+
+  .container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+
+    .chembl-text {
+      padding: 0 0 30px 0;
+      text-align: center;
+
+      h2 {
+        color: $grey-dark;
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    .resources-container {
+      margin-bottom: 50px;
+      display: flex;
+      align-items: stretch;
+
+      .cards-column {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .resource-card {
+          border-radius: 3px;
+          padding: 15px 0 20px 0;
+          margin: 5px 0;
+          border: solid 1px white;
+          display: flex;
+          align-items: center;
+
+          .resource-content {
+            padding: 0;
+
+            h6 {
+              color: $primary-color;
+              font-weight: bolder;
+            }
+
+            p {
+              font-size: 1.1em;
+              color: $grey-dark;
+              margin: 0;
+            }
+
+            span {
+              color: $primary-color;
+            }
+          }
+
+          .chevron-icon {
+            margin: 0;
+            padding: 0;
+            color: $grey-dark;
+          }
+
+          transition: box-shadow 100ms ease-in;
+          &:hover {
+            box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+
+            .chevron-icon {
+              color: $primary-color;
+            }
+          }
+        }
+      }
+    }
+
+    .imgs-column {
+      flex-direction: column;
+      justify-content: center;
+      padding: 30px 0;
+
+      img {
+        width: 150px;
+        height: auto;
+        margin-left: auto;
+      }
+    }
+  }
+}
+
+
+/* -------- WANT TO KNOW MORE SECTION-------- */
+.know-more {
+  background: #f9f9f9;
+  min-height: 1px !important;
+  padding-top: 50px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid $grey-light;
+
+  .container {
+    max-width: 1000px;
+    margin-bottom: 0;
+
+    h3 {
+      color: $grey-dark;
+      margin-top: 10px;
+      margin-bottom: 30px;
+    }
+
+    .more-container {
+      padding-bottom: 20px;
+
+      .more-img {
+        width: 110px;
+        height: auto;
+        border-radius: 100%;
+      }
+
+      .title {
+        color: $grey-dark;
+        font-size: 1.1em;
       }
     }
   }
@@ -380,156 +567,31 @@ $full-header-height-large: 180px;
   }
 }
 
-/* -------- ASSOCIATED RESOURCES -------- */
-.associated-resources {
-  padding: 30px 0;
-
-  .container {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    height: 100%;
-
-    .chembl-text {
-      padding: 0 0 30px 0;
-      text-align: center;
-
-      h2 {
-        color: $grey-dark;
-        margin: 0;
-        padding: 0;
-      }
-    }
-
-    .resources-container {
-      margin-bottom: 50px;
-      display: flex;
-      align-items: stretch;
-
-      .cards-column {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-
-        .resource-card {
-          border-radius: 3px;
-          padding: 15px 0 20px 0;
-          margin: 5px 0;
-          border: solid 1px white;
-          display: flex;
-          align-items: center;
-
-          .resource-content {
-            padding: 0;
-
-            h6 {
-              color: $primary-color;
-              font-weight: bolder;
-            }
-
-            p {
-              font-size: 1.1em;
-              color: $grey-dark;
-              margin: 0;
-            }
-
-            span {
-              color: $primary-color;
-            }
-          }
-
-          .chevron-icon {
-            margin: 0;
-            padding: 0;
-            color: $grey-dark;
-          }
-
-          transition: box-shadow 100ms ease-in;
-          &:hover {
-            box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
-
-            .chevron-icon {
-              color: $primary-color;
-            }
-
-          }
-        }
-      }
-    }
-
-    .imgs-column {
-      flex-direction: column;
-      justify-content: center;
-      padding: 30px 0;
-
-      img {
-        width: 150px;
-        height: auto;
-        margin-left: auto;
-      }
-    }
-  }
-}
-
-/* -------- VISUALISATIONS CAROUSEL -------- */
-.know-more {
-  background: #f5f5f5;
-  min-height: 1px !important;
-  padding-top: 40px;
-  padding-bottom: 20px;
-
-  .container {
-    max-width: 900px;
-    margin-bottom: 0;
-
-    h3 {
-      color: $grey-dark;
-      margin-top: 10px;
-      margin-bottom: 30px;
-    }
-
-    .more-container {
-      padding-bottom: 20px;
-
-      .more-img {
-        width: 110px;
-        height: auto;
-        border-radius: 100%;
-
-      }
-
-      .title {
-        color: $grey-dark;
-        font-size: 1.1em;
-      }
-    }
-  }
-}
-
-/**
-* Browse entities
-* ----------------------------------------------------------------------------------------------------------------------
-*/
-
-.circles-vis-container{
-  //border: orange solid 1px;
-  circle {
-    cursor: pointer;
-  }
-  text {
-    font-family: $chembl-helvetica;
-    text-anchor: middle;
-    fill: white;
-  }
-
-}
-
-
 /* ------------------- MEDIA QUERIES ------------------- */
 
 /* -------- MEDIUM SCREEN -------- */
 .main-page-container {
   @media (max-width: 600px) {
+
+    .papers {
+      padding: 0;
+      text-align: center;
+
+      .row {
+        padding: 30px 0;
+      }
+
+      h3 {
+        font-size: 1.8em;
+      }
+
+      h6 {
+        font-size: 1.5em;
+        line-height: 1.2em;
+        letter-spacing: 0.03em;
+      }
+    }
+
     .smaller-on-small {
       height: 60vh;
     }
@@ -546,6 +608,24 @@ $full-header-height-large: 180px;
       }
       .imgs-column {
         display: none !important;
+      }
+    }
+  }
+
+  @media (min-width: 600px){
+
+    .papers {
+      padding-top: 150px;
+      padding-bottom: 150px;
+
+      h3 {
+        font-size: 1.8em;
+      }
+
+      h6 {
+        font-size: 1.3em;
+        line-height: 1.2em;
+        letter-spacing: 0.03em;
       }
     }
   }
