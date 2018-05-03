@@ -1,5 +1,8 @@
 glados.useNameSpace 'glados.views.MainPage',
   ZoomableSunburstView: Backbone.View.extend(ResponsiviseViewExt).extend
 
-  initialize: ->
-    console.log 'IM THE ZOOMABLE SUNBURST VIEW :)'
+    initialize: ->
+      console.log 'IM THE ZOOMABLE SUNBURST VIEW :)'
+      @$vis_elem = $(@el).find('.BCK-sunburst-container')
+
+

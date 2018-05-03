@@ -44,10 +44,17 @@ class MainPageApp
     MainPageApp.initZoomableSunburst()
 
   @initZoomableSunburst = ->
-    console.log 'I will initialize the zoomable sunburst :)'
+    targetHierarchyAgg = MainPageApp.getTargetsTreeAgg()
 
     new glados.views.MainPage.ZoomableSunburstView
-      el: $('BCK-zoomable-sunburst')
+      el: $('#BCK-zoomable-sunburst')
+      model: targetHierarchyAgg
+
+    targetHierarchyAgg.fetch()
+
+  @initBrowseEntities = ->
+    new glados.views.MainPage.BrowseEntitiesAsCirclesView
+      el: $('#BrowseEntitiesAsCircles')
 
   @initMaxPhaseForDisease = ->
     maxPhaseForDisease = MainPageApp.getMaxPhaseForDiseaseAgg()
@@ -148,11 +155,6 @@ class MainPageApp
       model: targetHierarchy
       config: config
       report_card_app: @
-
-
-  @initBrowseEntities = ->
-    new glados.views.MainPage.BrowseEntitiesAsCirclesView
-      el: $('#BrowseEntitiesAsCircles')
 
   @initDatabaseSummary = ->
     databaseInfo = new glados.models.MainPage.DatabaseSummaryInfo()
