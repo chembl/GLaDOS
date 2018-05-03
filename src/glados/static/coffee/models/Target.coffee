@@ -116,15 +116,18 @@ Target = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
       for xref in componentXrefs
 
         addXrefToOriginalRefs(xref, refsIndex, originalRefs)
-        console.log 'added: ', xref
+        console.log 'added: ', xref.xref_src_db
         # check if it needs to duplicate it
-        if xref.xref_src == 'Ensembl'
+        if xref.xref_src == 'EnsemblGene'
 
-          console.log 'DUPLICATING: ', xref
+          console.log 'DUPLICATING: ', xref.xref_src_db
           newXref = $.extend {}, xref,
             xref_src_db: 'ArrayExpress'
+            xref_src_url: 'http://www.ebi.ac.uk/arrayexpress/'
+            xref_url: "http://www.ebi.ac.uk/gxa/genes/#{xref.xref_id}"
 
           addXrefToOriginalRefs(newXref, refsIndex, originalRefs)
+          console.log 'newXref: ', newXref
 
 
 
