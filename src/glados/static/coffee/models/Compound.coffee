@@ -903,6 +903,15 @@ Compound.COLUMNS = {
     comparator: 'helm_notation'
   BIOCOMPONENTS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     comparator: 'biotherapeutic.biocomponents'
+  IS_PARENT_CAROUSEL:
+    hide_label: true
+    comparator: 'is_parent'
+    show_function: (model) -> model.isParent()
+    col_value_function: (model) ->
+      switch model.isParent()
+        when true then return 'Parent'
+        else return 'Alternate Form'
+
 }
 
 Compound.ID_COLUMN = Compound.COLUMNS.CHEMBL_ID
@@ -982,6 +991,7 @@ Compound.COLUMNS_SETTINGS = {
   ]
   RESULTS_LIST_REPORT_CARD_CAROUSEL: [
     Compound.COLUMNS.CHEMBL_ID,
+    Compound.COLUMNS.IS_PARENT_CAROUSEL
   ]
   TEST: [
     Compound.COLUMNS.CHEMBL_ID,

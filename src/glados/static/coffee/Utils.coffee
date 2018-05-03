@@ -245,6 +245,8 @@ glados.useNameSpace 'glados',
         else
           returnCol.show = colDescription.show
 
+        console.log 'addShowStatus: ', returnCol.show
+
       parseColValue: (returnCol, colDescription, colValue, model) ->
 
         if _.isBoolean(colValue)
