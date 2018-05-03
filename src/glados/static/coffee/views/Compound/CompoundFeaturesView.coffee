@@ -69,7 +69,7 @@ CompoundFeaturesView = CardView.extend
     'molecule_type':
       'Small molecule': ['active', 'l', 'Drug Type: Synthetic Small Molecule','top', 'icon-chembl']
       'Natural product': ['active', 'R', 'Drug Type: natural product','top', 'icon-generic']
-      'Small molecule polymer': ['active', 'A', 'Drug Type: small molecule polymer','top', 'icon-species']
+      'Small molecule polymer': ['active', 'p', 'Drug Type: small molecule polymer','top', 'icon-chembl-2']
       'Antibody': ['active', 'a', 'Molecule Type: Antibody', 'top', 'icon-chembl']
       'Enzyme': ['active', 'e', 'Molecule Type: Enzyme', 'top', 'icon-chembl']
       'Oligosaccharide': ['active', 'A', 'Molecule Type: Oligosaccharide', 'top', 'icon-species']
