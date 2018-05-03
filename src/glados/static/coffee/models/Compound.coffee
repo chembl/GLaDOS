@@ -181,7 +181,10 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
   getChildrenIDs: -> @getWithCache('children_ids', @calculateChildrenIDs.bind(@))
   getParentID: ->
     metadata = @get('_metadata')
-    return metadata.hierarchy.parent.chembl_id
+    if @isParent()
+      return @get('id')
+    else
+      return metadata.hierarchy.parent.chembl_id
 
   calculateAdditionalIDs: ->
     metadata = @get('_metadata')
@@ -978,7 +981,7 @@ Compound.COLUMNS_SETTINGS = {
     Compound.COLUMNS.PREF_NAME,
   ]
   RESULTS_LIST_REPORT_CARD_CAROUSEL: [
-    Compound.COLUMNS.CHEMBL_ID,
+    Compound.COLUMNS.CHEMBL_ID
   ]
   TEST: [
     Compound.COLUMNS.CHEMBL_ID,

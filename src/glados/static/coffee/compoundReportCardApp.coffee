@@ -269,25 +269,43 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @initAlternateForms = ->
 
+    compound = CompoundReportCardApp.getCurrentCompound()
+
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
-    moleculeFormsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewAlternateFormsListForCarousel()
-    moleculeFormsList.initURL chemblID
 
-    viewConfig =
-      embed_section_name: 'alternate_forms'
-      embed_identifier: chemblID
-      title: "Alternative forms of compound #{chemblID}:"
+    initAlternateFormsList = ->
 
-    new glados.views.ReportCards.CarouselInCardView
-      collection: moleculeFormsList
-      el: $('#AlternateFormsCard')
-      resource_type: gettext('glados_entities_compound_name')
-      section_id: 'AlternateFormsOfCompoundInChEMBL'
-      section_label: 'Alternative Forms'
-      config: viewConfig
-      report_card_app: @
+      parentID = compound.getParentID()
+      filter = "molecule_hierarchy.parent_chembl_id:(\"#{parentID}\") OR molecule_chembl_id:(\"#{parentID}\")^100"
+      alternateFormsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(filter,
+      itemsList=undefined, contextualProperties=undefined,
+      settings=settings=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_ES_RESULTS_LIST_CAROUSEL)
 
-    moleculeFormsList.fetch({reset: true})
+      if compound.isParent()
+        parentText = '(Parent)'
+      else
+        parentText = "(Parent is #{parentID})"
+
+      viewConfig =
+        embed_section_name: 'alternate_forms'
+        embed_identifier: chemblID
+        title: "Alternative forms of compound #{chemblID} #{parentText}:"
+
+      new glados.views.ReportCards.CarouselInCardView
+        collection: alternateFormsList
+        el: $('#AlternateFormsCard')
+        resource_type: gettext('glados_entities_compound_name')
+        section_id: 'AlternateFormsOfCompoundInChEMBL'
+        section_label: 'Alternative Forms'
+        config: viewConfig
+        report_card_app: @
+
+      alternateFormsList.fetch()
+
+    compound.on 'change', initAlternateFormsList, @
+
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
 
   @initActivitySummary = ->
 
