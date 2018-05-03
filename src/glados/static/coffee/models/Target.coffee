@@ -76,6 +76,9 @@ Target = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
           () -> console.log('failed!')
         )
 
+  # --------------------------------------------------------------------------------------------------------------------
+  # Parsing
+  # --------------------------------------------------------------------------------------------------------------------
   parse: (response) ->
 
     # get data when it comes from elastic
@@ -90,24 +93,41 @@ Target = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     filterForCompounds = '_metadata.related_targets.chembl_ids.\\*:' + objData.target_chembl_id
     objData.compounds_url = Compound.getCompoundsListURL(filterForCompounds)
 
-    console.log 'PARSING TARGET: ', objData
+    @parseXrefs(objData)
+    return objData
+
+  parseXrefs: (objData) ->
 
     originalRefs = objData.cross_references
     refsIndex = _.indexBy(originalRefs, (item) -> "#{item.xref_src}-#{item.xref_id}")
     targetComponents = objData.target_components
 
+    addXrefToOriginalRefs = (xref, refsIndex, originalRefs) ->
+
+      refIdentifier = "#{xref.xref_src_db}-#{xref.xref_id}"
+      xref.xref_src = xref.xref_src_db
+      # just in case to avoid duplicates
+      if not refsIndex[refIdentifier]?
+        originalRefs.push xref
+        refsIndex[refIdentifier] = xref
+
     for component in targetComponents
       componentXrefs = component.target_component_xrefs
       for xref in componentXrefs
-        refIdentifier = "#{xref.xref_src_db}-#{xref.xref_id}"
-        # just in case to avoid duplicates
-        if not refsIndex[refIdentifier]?
-          xref.xref_src = xref.xref_src_db
-          originalRefs.push xref
-          refsIndex[refIdentifier] = xref
+
+        addXrefToOriginalRefs(xref, refsIndex, originalRefs)
+        console.log 'added: ', xref
+        # check if it needs to duplicate it
+        if xref.xref_src == 'Ensembl'
+
+          console.log 'DUPLICATING: ', xref
+          newXref = $.extend {}, xref,
+            xref_src_db: 'ArrayExpress'
+
+          addXrefToOriginalRefs(newXref, refsIndex, originalRefs)
 
 
-    return objData
+
 
   fetchFromAssayChemblID: ->
 
