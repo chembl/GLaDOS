@@ -310,28 +310,32 @@ $full-header-height-large: 180px;
     }
 
     .pub-container {
-      padding: 0 0 20px 0;
+      padding: 20px 0 20px 0;
 
       h3 {
         color: $grey-dark;
-        margin-bottom: 0;
+        margin-bottom: 20px;
       }
 
-      h6 {
+      .chembl-paper {
+        margin-bottom: 30px;
 
-        a {
-          color: $primary-color;
+        h6 {
 
-          &:hover {
-            text-decoration: underline;
+          a {
+            color: $primary-color;
+
+            &:hover {
+              text-decoration: underline;
+            }
           }
         }
-      }
 
-      .small-text {
-        margin: 0;
-        font-family: $chembl-helvetica;
-        color: #aeaeae;
+        .small-text {
+          margin: 0;
+          font-family: $chembl-helvetica;
+          color: #aeaeae;
+        }
       }
     }
   }
