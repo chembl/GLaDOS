@@ -283,8 +283,6 @@ class TargetReportCardApp extends glados.ReportCardApp
       filter: (ref) ->
         refsInThisSection = ['canSAR-Target', 'CGD', 'ComplexPortal', 'Human Protein Atlas', 'IntAct',
           'GuideToPHARMACOLOGY', 'MICAD', 'PharmGKB', 'Pharos', 'Reactome', 'TIMBAL', 'UniProt', 'Open Targets']
-        console.log 'FILTERING: ', ref.xref_src
-        console.log ref.xref_src in refsInThisSection
         return ref.xref_src in refsInThisSection
 
     new glados.views.ReportCards.ReferencesInCardView

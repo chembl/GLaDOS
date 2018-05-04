@@ -45,10 +45,13 @@ glados.useNameSpace 'glados.views.References',
           for ref in refsList
             ref.src_url = ref.xref_src_url
             ref.link = ref.xref_url
+
+#            if refKey in []
             ref.id = ref.xref_name
             ref.id ?= ref.xref_id
+
             ref.is_atc = refKey == 'ATC'
-            ref.vertical_list = refKey in ['GoComponent']
+            ref.vertical_list = refKey in ['GoComponent', 'GoFunction', 'GoProcess', 'InterPro', 'Pfam']
 
           refsGroups.push
             src_name: refKey
