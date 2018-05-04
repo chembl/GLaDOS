@@ -62,13 +62,13 @@ glados.useNameSpace 'glados.views.MainPage',
         .attr("d", arc)
         .style("fill", '#D33C60')
         .style("stroke", 'white')
-        .on('click', (d) -> thisView.click(d, sunburstGroup, x, y, @RADIUS, arc))
+        .on('click', (d) -> thisView.click(d, sunburstGroup, x, y, @RADIUS, arc, @))
 
-#   TODO: finish click interactions
-#--------------#
-    click: (d, group, x, y,radius, arc) ->
-      group.transition()
-        .duration(750)
+
+    click: (d, group, x, y,radius, arc, path) ->
+      d3.select(path).transition()
+        .duration(250)
+        .style('fill', 'blue')
         .tween("scale", () ->
           xd = d3.interpolate x.domain(), [d.x, d.x + d.dx]
           yd = d3.interpolate y.domain(), [d.y, 1]
@@ -77,12 +77,9 @@ glados.useNameSpace 'glados.views.MainPage',
           return (t) -> x.domain(xd(t)); y.domain(yd(t)).range(yr(t))
       )
 
-      group.selectAll("path")
-        .transition()
-          .attrTween("d", (d) -> () -> arc(d))
-
-#--------------#
-
+#      group.selectAll("path")
+#        .transition()
+#          .attrTween("d", (d) -> () -> arc(d))
 
     getBucketData: ->
       receivedBuckets = @model.get 'bucket_data'
