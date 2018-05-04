@@ -281,8 +281,10 @@ class TargetReportCardApp extends glados.ReportCardApp
     refsConfig =
       is_unichem: false
       filter: (ref) ->
-        refsInThisSection = ['canSAR-Target', 'CGD', 'ComplexPortal', 'HumanProteinAtlas', 'IntAct',
-          'GuideToPHARMACOLOGY', 'MICAD', 'EnsemblGene', 'PharmGKB', 'Pharos', 'Reactome', 'TIMBAL', 'UniProt']
+        refsInThisSection = ['canSAR-Target', 'CGD', 'ComplexPortal', 'Human Protein Atlas', 'IntAct',
+          'GuideToPHARMACOLOGY', 'MICAD', 'PharmGKB', 'Pharos', 'Reactome', 'TIMBAL', 'UniProt', 'Open Targets']
+        console.log 'FILTERING: ', ref.xref_src
+        console.log ref.xref_src in refsInThisSection
         return ref.xref_src in refsInThisSection
 
     new glados.views.ReportCards.ReferencesInCardView

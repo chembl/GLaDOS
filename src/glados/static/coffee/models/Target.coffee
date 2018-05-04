@@ -116,19 +116,38 @@ Target = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
       for xref in componentXrefs
 
         addXrefToOriginalRefs(xref, refsIndex, originalRefs)
-        console.log 'added: ', xref.xref_src_db
         # check if it needs to duplicate it
         if xref.xref_src == 'EnsemblGene'
 
-          console.log 'DUPLICATING: ', xref.xref_src_db
           newXref = $.extend {}, xref,
             xref_src_db: 'ArrayExpress'
             xref_src_url: 'http://www.ebi.ac.uk/arrayexpress/'
             xref_url: "http://www.ebi.ac.uk/gxa/genes/#{xref.xref_id}"
 
           addXrefToOriginalRefs(newXref, refsIndex, originalRefs)
-          console.log 'newXref: ', newXref
 
+          newXref = $.extend {}, xref,
+            xref_src_db: 'Human Protein Atlas'
+            xref_src_url: 'http://www.proteinatlas.org/'
+            xref_url: "http://www.proteinatlas.org/#{xref.xref_id}"
+
+          addXrefToOriginalRefs(newXref, refsIndex, originalRefs)
+
+          newXref = $.extend {}, xref,
+            xref_src_db: 'Open Targets'
+            xref_src_url: 'https://www.targetvalidation.org/'
+            xref_url: "https://www.targetvalidation.org/target/#{xref.xref_id}/associations"
+
+          addXrefToOriginalRefs(newXref, refsIndex, originalRefs)
+
+        if xref.xref_src == 'PDBe'
+
+          newXref = $.extend {}, xref,
+            xref_src_db: 'CREDO'
+            xref_src_url: 'http://marid.bioc.cam.ac.uk/credo'
+            xref_url: "http://marid.bioc.cam.ac.uk/credo/structures/#{xref.xref_id}"
+
+          addXrefToOriginalRefs(newXref, refsIndex, originalRefs)
 
 
 
