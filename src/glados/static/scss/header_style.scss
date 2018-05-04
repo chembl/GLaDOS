@@ -312,7 +312,7 @@ header .row {
 
           span {
             padding-left: $chembl-header-padding * 2;
-            padding-top: $chembl-header-padding;
+            padding-top: $chembl-header-padding + 5;
             font-family: $chembl-name-font;
             font-size: $logo-height-xl;
           }
