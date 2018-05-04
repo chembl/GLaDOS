@@ -301,37 +301,45 @@ $full-header-height-large: 180px;
 
   .container {
     position: relative;
-    max-width: 1200px;
+    max-width: 1100px;
 
     .responsive-img {
-      max-width: 230px;
+      max-width: 280px;
       position: absolute;
       padding: 0;
     }
 
     .pub-container {
-      padding: 0 0 20px 0;
+      padding: 0;
 
       h3 {
         color: $grey-dark;
-        margin-bottom: 0;
+        margin-bottom: 10px;
       }
 
-      h6 {
+      .chembl-paper {
+        margin-bottom: 20px;
 
-        a {
-          color: $primary-color;
+        &:last-child {
+          margin-bottom: 15px;
+        }
 
-          &:hover {
-            text-decoration: underline;
+        h6 {
+
+          a {
+            color: $primary-color;
+
+            &:hover {
+              text-decoration: underline;
+            }
           }
         }
-      }
 
-      .small-text {
-        margin: 0;
-        font-family: $chembl-helvetica;
-        color: #aeaeae;
+        .small-text {
+          margin: 0;
+          font-family: $chembl-helvetica;
+          color: #aeaeae;
+        }
       }
     }
   }
@@ -600,6 +608,7 @@ $full-header-height-large: 180px;
     }
 
     .associated-resources {
+
       .chembl-text {
         h2 {
           font-size: 2em;
@@ -609,6 +618,7 @@ $full-header-height-large: 180px;
           font-size: 1.1em;
         }
       }
+
       .imgs-column {
         display: none !important;
       }
@@ -618,8 +628,6 @@ $full-header-height-large: 180px;
   @media (min-width: 600px) {
 
     .papers {
-      padding-top: 150px;
-      padding-bottom: 150px;
 
       h3 {
         font-size: 1.8em;
@@ -634,6 +642,12 @@ $full-header-height-large: 180px;
   }
 
   @media (min-width: 600px) and (max-width: 992px) {
+
+    .papers {
+      padding-top: 50px;
+      padding-bottom: 50px;
+    }
+
     .smaller-on-med {
       height: 50vh;
     }
@@ -649,6 +663,7 @@ $full-header-height-large: 180px;
 
   /* -------- LARGE SCREEN -------- */
   @media (min-width: 992px) {
+
     .main-page-section {
       height: calc(100vh - #{$full-header-height-large});
 
@@ -671,6 +686,15 @@ $full-header-height-large: 180px;
 
     .carousel-wrapper {
       padding-top: 10%;
+    }
+
+    .papers {
+      padding-top: 120px;
+      padding-bottom: 120px;
+
+      img {
+        margin-left: 40px !important;
+      }
     }
   }
 
