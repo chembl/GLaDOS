@@ -113,6 +113,10 @@ Target = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
     for component in targetComponents
       componentXrefs = component.target_component_xrefs
+
+      if not componentXrefs?
+        continue
+
       for xref in componentXrefs
 
         addXrefToOriginalRefs(xref, refsIndex, originalRefs)
