@@ -48,6 +48,7 @@ glados.useNameSpace 'glados.views.References',
             ref.id = ref.xref_name
             ref.id ?= ref.xref_id
             ref.is_atc = refKey == 'ATC'
+            ref.vertical_list = refKey in ['GoComponent']
 
           refsGroups.push
             src_name: refKey

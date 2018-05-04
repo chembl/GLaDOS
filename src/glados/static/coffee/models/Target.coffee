@@ -149,8 +149,6 @@ Target = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
           addXrefToOriginalRefs(newXref, refsIndex, originalRefs)
 
-
-
   fetchFromAssayChemblID: ->
 
     assayUrl = glados.Settings.WS_BASE_URL + 'assay/' + @get('assay_chembl_id') + '.json'

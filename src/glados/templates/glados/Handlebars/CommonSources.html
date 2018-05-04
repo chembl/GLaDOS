@@ -554,6 +554,10 @@
       </th>
       <td >
 
+        {{#if this.vertical_list}}
+          <ul>
+        {{/if}}
+
         {{#each this.ref_items}}
 
           {{#if this.is_atc}}
@@ -564,12 +568,20 @@
               </li>
               {{/each}}
             </ul>
+          {{else if this.vertical_list}}
+              <li>
+                  <a target='_blank' href="{{this.link}}">{{this.xref_id}}</a> ({{this.id}})
+              </li>
           {{else}}
 
           <a target='_blank' href="{{this.link}}">{{this.id}}</a>{{#unless @last }}, {{/unless}}
 
             {{/if}}
         {{/each}}
+
+        {{#if this.vertical_list}}
+          </ul>
+        {{/if}}
 
       </td>
 
