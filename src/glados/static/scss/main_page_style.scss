@@ -235,9 +235,8 @@ $full-header-height-large: 180px;
 .main-page-container {
 
   .database-summary {
-    padding-bottom: 55px;
+    padding-bottom: 25px;
     text-align: center;
-    //border-bottom: 1px $divider-grey solid;
 
     h3 {
       color: $grey-dark;
@@ -257,10 +256,10 @@ $full-header-height-large: 180px;
 
       .db-record-item {
         font-family: $chembl-helvetica;
+        padding-bottom: 30px;
 
         h4 {
           margin-bottom: 0;
-          font-size: 2.2em;
           color: $darker-color;
           text-anchor: middle;
           transition: letter-spacing 100ms ease-in;
@@ -273,8 +272,9 @@ $full-header-height-large: 180px;
 
         img {
           padding: 5px;
-          width: 145px;
           height: auto;
+
+          transition: width 200ms ease-in;
         }
 
         &:hover {
@@ -411,9 +411,8 @@ $full-header-height-large: 180px;
           }
 
           transition: box-shadow 100ms ease-in;
-          &:hover {
-            box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
 
+          &:hover {
             .chevron-icon {
               color: $primary-color;
             }
@@ -586,7 +585,6 @@ $full-header-height-large: 180px;
 
     .papers {
       padding: 0;
-      text-align: center;
 
       .row {
         padding: 30px 0;
@@ -594,6 +592,8 @@ $full-header-height-large: 180px;
 
       h3 {
         font-size: 1.8em;
+        text-align: center;
+        padding-bottom: 20px;
       }
 
       h6 {
@@ -623,9 +623,51 @@ $full-header-height-large: 180px;
         display: none !important;
       }
     }
+
+    .db-record-item {
+
+      img {
+        width: 110px;
+      }
+
+      h4 {
+        font-size: 1.6em;
+      }
+    }
+
+    #tweets-section {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    #blog-section {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
   }
 
   @media (min-width: 600px) {
+
+    .db-record-item {
+
+      img {
+        width: 145px;
+      }
+
+      h4 {
+        font-size: 2.2em;
+      }
+    }
+
+    .resource-card {
+
+      &:hover {
+
+        box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+
+      }
+    }
 
     .papers {
 
@@ -644,8 +686,8 @@ $full-header-height-large: 180px;
   @media (min-width: 600px) and (max-width: 992px) {
 
     .papers {
-      padding-top: 50px;
-      padding-bottom: 50px;
+      padding-top: 80px;
+      padding-bottom: 80px;
     }
 
     .smaller-on-med {
@@ -719,4 +761,5 @@ $full-header-height-large: 180px;
       }
     }
   }
+
 }

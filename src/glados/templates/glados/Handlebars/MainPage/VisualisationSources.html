@@ -28,5 +28,23 @@
 
    </script>
 
+   <script id="Handlebars-circles-browser-button-medium" type="text/x-handlebars-template">
+
+       {{#if node_name}}
+
+             <a class="hollow-button" href={{node_link}} target="_blank">
+                  Browse all {{node_name}} Targets
+             </a>
+
+       {{else}}
+
+            <a class="hollow-button" href="/g/#browse/targets" target="_blank">
+                Browse all Targets
+            </a>
+
+       {{/if}}
+
+   </script>
+
 
 {% endverbatim %}
