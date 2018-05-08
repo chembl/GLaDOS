@@ -25,6 +25,7 @@ glados.useNameSpace 'glados.views.MainPage',
       @VIS_WIDTH = $(@el).width() - 10
       @VIS_HEIGHT = $(@el).height() - 15
       @RADIUS = (Math.min(@VIS_WIDTH, @VIS_HEIGHT) / 2)
+      @FOCUS = @ROOT
 
       formatNumber = d3.format(",d")
 
@@ -42,7 +43,6 @@ glados.useNameSpace 'glados.views.MainPage',
             '#2ba3a5',
             '#6fc7c6',
             '#c4e6e5',
-            '#f1d6db',
             '#fdabbc',
             '#f9849d',
             '#e95f7e',
@@ -73,7 +73,7 @@ glados.useNameSpace 'glados.views.MainPage',
 
       # --- click transition --- #
       click = (d) ->
-
+        # transition
         sunburstGroup.transition()
           .duration(700)
           .tween('scale', ->
@@ -88,7 +88,7 @@ glados.useNameSpace 'glados.views.MainPage',
             ])
 
             yr = d3.interpolate(y.range(), [
-              if d.y then 20 else 0
+              if d.y then 15 else 0
               thisView.RADIUS
             ])
 
@@ -100,10 +100,16 @@ glados.useNameSpace 'glados.views.MainPage',
               ->
                 arc d
 
+        # update focus
+        if thisView.FOCUS != d
+          thisView.FOCUS = d
+          thisView.fillBrowseButton(d)
+
 #     paint arcs
       arcs = sunburstGroup.selectAll("path")
         .data(nodes)
         .enter().append("path")
+        .classed('sunburst-arc', true)
         .attr("d", arc)
         .style 'fill', (d) ->
           color (if d.children then d else d.parent).name
@@ -137,6 +143,20 @@ glados.useNameSpace 'glados.views.MainPage',
               adjust:
                 y: -5
                 x: 5
+
+    fillBrowseButton: (d) ->
+      $button = $('.BCK-browse-button')
+
+      button_template = $('#' + $button.attr('data-hb-template'))
+
+      if d.name == 'root'
+        $button.html Handlebars.compile(button_template.html())
+          node_name: ''
+          node_link: '/g/#browse/targets'
+      else
+        $button.html Handlebars.compile(button_template.html())
+          node_name: d.name
+          node_link: d.link
 
     getBucketData: ->
       receivedBuckets = @model.get 'bucket_data'

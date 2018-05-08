@@ -39,16 +39,20 @@ class MainPageApp
 
     MainPageApp.initPapersPerYear()
     MainPageApp.initMaxPhaseForDisease()
-    MainPageApp.initTargetsVisualisation()
+#    MainPageApp.initTargetsVisualisation()
     MainPageApp.initBrowseEntities()
     MainPageApp.initZoomableSunburst()
 
   @initZoomableSunburst = ->
     targetHierarchyAgg = MainPageApp.getTargetsTreeAgg()
 
+    config =
+      browse_all_link: "#{glados.Settings.GLADOS_BASE_URL_FULL}/g/#browse/targets"
+
     new glados.views.MainPage.ZoomableSunburstView
       el: $('#BCK-zoomable-sunburst')
       model: targetHierarchyAgg
+      config: config
 
     targetHierarchyAgg.fetch()
 
