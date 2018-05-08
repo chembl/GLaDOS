@@ -36,6 +36,23 @@ glados.useNameSpace 'glados.views.MainPage',
 
       color = d3.scale.category10()
 
+      color = d3.scale.ordinal()
+        .range([
+            '#0d343a',
+            '#0a585b',
+            '#077c80',
+            '#2ba3a5',
+            '#6fc7c6',
+            '#c4e6e5',
+            '#fdabbc',
+            '#f1d6db',
+            '#f9849d',
+            '#e95f7e',
+            '#cc4362',
+            '#a03a50',
+            '#a03a50'
+      ])
+
       partition = d3.layout.partition()
         .value (d) -> d.size
 
@@ -88,7 +105,8 @@ glados.useNameSpace 'glados.views.MainPage',
         .data(nodes)
         .enter().append("path")
         .attr("d", arc)
-        .style("fill", (d) -> color(d.name) )
+        .style 'fill', (d) ->
+          color (if d.children then d else d.parent).name
         .style("stroke", 'white')
         .on('click',  click)
 
