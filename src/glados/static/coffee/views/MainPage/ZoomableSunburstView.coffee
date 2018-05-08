@@ -27,8 +27,6 @@ glados.useNameSpace 'glados.views.MainPage',
       @RADIUS = (Math.min(@VIS_WIDTH, @VIS_HEIGHT) / 2)
       @FOCUS = @ROOT
 
-      formatNumber = d3.format(",d")
-
       x = d3.scale.linear()
         .range([0, 2 * Math.PI])
 
@@ -70,7 +68,7 @@ glados.useNameSpace 'glados.views.MainPage',
       sunburstGroup = mainSunburstContainer.append("g")
         .attr("transform", "translate(" + @VIS_WIDTH / 2 + "," + (@VIS_HEIGHT / 2) + ")")
 
-      # --- click transition --- #
+      # --- click handling --- #
       click = (d) ->
         # transition
         sunburstGroup.transition()
@@ -116,9 +114,26 @@ glados.useNameSpace 'glados.views.MainPage',
         .style("stroke-width", '0.8px')
         .on('click',  click)
 
+#     texts
+      texts = sunburstGroup.selectAll("text")
+        .data(nodes)
+        .enter().append("text")
+        .classed('sunburst-text', true)
+        .attr('fill', 'black')
+        .attr('font-size', '8px')
+        .attr('alignment-baseline', 'middle')
+        .attr('x', (d) -> y(d.y))
+        .attr("transform", (d) ->
+          console.log 'd: ', arc(d)
+          return "rotate(" + d.x + ")")
+        .text((d) -> d.name)
+
 #     first circle
       sunburstGroup.select("path")
         .style('fill', '#6fc7c6')
+
+      sunburstGroup.select("text")
+        .style('opacity', 0)
 
 #     qtips
       arcs.each (d) ->
@@ -142,7 +157,7 @@ glados.useNameSpace 'glados.views.MainPage',
               adjust:
                 y: -5
                 x: 5
-
+                
     fillBrowseButton: (d) ->
       $button = $('.BCK-browse-button')
 
