@@ -19,8 +19,9 @@ CompoundFeaturesView = CardView.extend
   render: ->
 
     metadata = @model.get('_metadata')
-    isDrug = glados.Utils.getNestedValue(metadata, 'drug.is_drug')
-    if not isDrug
+    isUsan = glados.Utils.getNestedValue(metadata, 'hierarchy.is_usan')
+    isApprovedDrug = glados.Utils.getNestedValue(metadata, 'hierarchy.is_approved_drug')
+    if not (isUsan or isApprovedDrug)
       @hideSection()
       return
 
