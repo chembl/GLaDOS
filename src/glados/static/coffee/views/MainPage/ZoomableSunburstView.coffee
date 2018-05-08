@@ -59,7 +59,7 @@ glados.useNameSpace 'glados.views.MainPage',
       click = (d) ->
 
         sunburstGroup.transition()
-          .duration(750)
+          .duration(200)
           .tween('scale', ->
             xd = d3.interpolate(x.domain(), [
               d.x
