@@ -1,8 +1,14 @@
 {% verbatim %}{{#each columns}}{% endverbatim %}
 
+    {% if ignore_show_status %}
+    {% else %}
+
     {% verbatim %}
     {{#if this.show}}
     {% endverbatim %}
+
+    {% endif %}
+
 
         {% if for_table %}
             {% verbatim %}
@@ -141,8 +147,13 @@
             </td>
         {% endif %}
 
+    {% if ignore_show_status %}
+    {% else %}
+
     {% verbatim %}
     {{/if}}
     {% endverbatim %}
+
+    {% endif %}
 
 {% verbatim %}{{/each}}{% endverbatim %}

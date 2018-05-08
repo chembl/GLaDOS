@@ -19,7 +19,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       inferredProperties.name_to_show_short = gettext(gladosConfig.label_mini_id)
       inferredProperties.id = gettext(baseConfig.comparator)
 
-      finalConfig = _.extend({}, gladosConfig, inferredProperties, baseConfig)
+      finalConfig = _.extend({show:true}, gladosConfig, inferredProperties, baseConfig)
       return finalConfig
 
     getSearchResultsHighlightColumn: () ->
