@@ -1023,7 +1023,13 @@ Compound.COLUMNS_SETTINGS = {
           ownAndAdditionalsynonyms = model.getOwnAndAdditionalSynonyms()
           ownAndAdditionalTradenames = model.getOwnAndAdditionalTradenames()
           fullList = _.union(ownAndAdditionalsynonyms, ownAndAdditionalTradenames)
-          return _.uniq(v for v in fullList).join(' OR ')
+          linkText = _.uniq(v for v in fullList).join(' OR ')
+
+          maxTextLength = 100
+          if linkText.length > maxTextLength
+            linkText = "#{linkText.substring(0, (maxTextLength-3))}..."
+
+          return linkText
         encoded_search_term: (model) ->
           ownAndAdditionalsynonyms = model.getOwnAndAdditionalSynonyms()
           ownAndAdditionalTradenames = model.getOwnAndAdditionalTradenames()
