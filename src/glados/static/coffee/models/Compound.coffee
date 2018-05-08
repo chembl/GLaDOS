@@ -152,13 +152,16 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
   getSynonyms: -> @getWithCache('only_synonyms', @calculateSynonymsAndTradeNames.bind(@))
   getTradenames: -> @getWithCache('only_trade_names', @calculateSynonymsAndTradeNames.bind(@))
+  getAdditionalSynonyms: -> @getWithCache('additional_only_synonyms', @calculateSynonymsAndTradeNames.bind(@))
+  getAdditionalTradenames: -> @getWithCache('additional_trade_names', @calculateSynonymsAndTradeNames.bind(@))
   getOwnAndAdditionalSynonyms: ->
     synonyms = @getSynonyms()
     additionalSynonyms = @getAdditionalSynonyms()
     return _.union(synonyms, additionalSynonyms)
-  getAdditionalSynonyms: -> @getWithCache('additional_only_synonyms', @calculateSynonymsAndTradeNames.bind(@))
-  getAdditionalTradenames: -> @getWithCache('additional_trade_names', @calculateSynonymsAndTradeNames.bind(@))
-
+  getOwnAndAdditionalTradenames: ->
+    tradenames = @getTradenames()
+    additionalTradenames = @getAdditionalTradenames()
+    return _.union(tradenames, additionalTradenames)
   # --------------------------------------------------------------------------------------------------------------------
   # instance cache
   # --------------------------------------------------------------------------------------------------------------------
@@ -1018,10 +1021,14 @@ Compound.COLUMNS_SETTINGS = {
       additional_parsing:
         search_term: (model) ->
           ownAndAdditionalsynonyms = model.getOwnAndAdditionalSynonyms()
-          return _.uniq(v for v in ownAndAdditionalsynonyms).join(' OR ')
+          ownAndAdditionalTradenames = model.getOwnAndAdditionalTradenames()
+          fullList = _.union(ownAndAdditionalsynonyms, ownAndAdditionalTradenames)
+          return _.uniq(v for v in fullList).join(' OR ')
         encoded_search_term: (model) ->
           ownAndAdditionalsynonyms = model.getOwnAndAdditionalSynonyms()
-          return encodeURIComponent(_.uniq(v for v in ownAndAdditionalsynonyms).join(' OR '))
+          ownAndAdditionalTradenames = model.getOwnAndAdditionalTradenames()
+          fullList = _.union(ownAndAdditionalsynonyms, ownAndAdditionalTradenames)
+          return encodeURIComponent(_.uniq(v for v in fullList).join(' OR '))
 
   ]
 }
