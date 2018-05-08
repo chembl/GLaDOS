@@ -34,8 +34,6 @@ glados.useNameSpace 'glados.views.MainPage',
       y = d3.scale.sqrt()
         .range([0, @RADIUS])
 
-      color = d3.scale.category10()
-
       color = d3.scale.ordinal()
         .range([
             '#0d343a',
@@ -44,14 +42,14 @@ glados.useNameSpace 'glados.views.MainPage',
             '#2ba3a5',
             '#6fc7c6',
             '#c4e6e5',
-            '#fdabbc',
             '#f1d6db',
+            '#fdabbc',
             '#f9849d',
             '#e95f7e',
             '#cc4362',
             '#a03a50',
             '#a03a50'
-      ])
+        ])
 
       partition = d3.layout.partition()
         .value (d) -> d.size
@@ -73,6 +71,7 @@ glados.useNameSpace 'glados.views.MainPage',
       sunburstGroup = mainSunburstContainer.append("g")
         .attr("transform", "translate(" + @VIS_WIDTH / 2 + "," + (@VIS_HEIGHT / 2) + ")")
 
+#     click transition
       click = (d) ->
 
         sunburstGroup.transition()
@@ -101,6 +100,7 @@ glados.useNameSpace 'glados.views.MainPage',
               ->
                 arc d
 
+#     paint arcs
       sunburstGroup.selectAll("path")
         .data(nodes)
         .enter().append("path")
@@ -108,9 +108,12 @@ glados.useNameSpace 'glados.views.MainPage',
         .style 'fill', (d) ->
           color (if d.children then d else d.parent).name
         .style("stroke", 'white')
+        .style("stroke-width", '0.8px')
         .on('click',  click)
 
-      d3.select('.BCK-sunburst-container').style("height", @VIS_HEIGHT + "px")
+#     first circle
+      sunburstGroup.select("path")
+        .style('fill', '#6fc7c6')
 
     getBucketData: ->
       receivedBuckets = @model.get 'bucket_data'
