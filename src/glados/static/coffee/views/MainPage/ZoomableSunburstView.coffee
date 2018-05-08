@@ -59,7 +59,7 @@ glados.useNameSpace 'glados.views.MainPage',
       click = (d) ->
 
         sunburstGroup.transition()
-          .duration(200)
+          .duration(700)
           .tween('scale', ->
             xd = d3.interpolate(x.domain(), [
               d.x
@@ -79,12 +79,10 @@ glados.useNameSpace 'glados.views.MainPage',
             return (t) ->
               x.domain xd(t)
               y.domain(yd(t)).range yr(t)
-          )
-
-        sunburstGroup.selectAll('path').transition()
-          .attrTween 'd', (d) ->
-            ->
-              arc d
+          ).selectAll('path')
+            .attrTween 'd', (d) ->
+              ->
+                arc d
 
       sunburstGroup.selectAll("path")
         .data(nodes)
