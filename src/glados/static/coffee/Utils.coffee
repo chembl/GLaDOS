@@ -252,8 +252,9 @@ glados.useNameSpace 'glados',
         else
           returnCol['value'] = colValue
 
+        parseFromModel = colDescription.parse_from_model
+
         if _.has(colDescription, 'parse_function')
-          parseFromModel = colDescription.parse_from_model
           parserFunction = colDescription.parse_function
 
           if parseFromModel
@@ -265,7 +266,10 @@ glados.useNameSpace 'glados',
 
           for key in Object.keys(colDescription.additional_parsing)
             parserFunction = colDescription.additional_parsing[key]
-            returnCol[key] = parserFunction colValue
+            if parseFromModel
+              returnCol[key] = parserFunction model
+            else
+              returnCol[key] = parserFunction colValue
 
       addLink: (returnCol, colDescription, colValue, model) ->
 

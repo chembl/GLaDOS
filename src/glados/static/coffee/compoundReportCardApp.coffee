@@ -81,9 +81,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     if GlobalVariables['EMBEDED']
       compound.fetch()
 
-      ButtonsHelper.initCroppedContainers()
       ButtonsHelper.initExpendableMenus()
-
 
   @initRepresentations = ->
 
