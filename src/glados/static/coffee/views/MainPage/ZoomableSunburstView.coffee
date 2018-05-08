@@ -58,7 +58,7 @@ glados.useNameSpace 'glados.views.MainPage',
 
       click = (d) ->
 
-        arcTransition = sunburstGroup.transition()
+        sunburstGroup.transition()
           .duration(750)
           .tween('scale', ->
             xd = d3.interpolate(x.domain(), [
@@ -74,19 +74,14 @@ glados.useNameSpace 'glados.views.MainPage',
             yr = d3.interpolate(y.range(), [
               if d.y then 20 else 0
               thisView.RADIUS
-
             ])
 
             return (t) ->
               x.domain xd(t)
               y.domain(yd(t)).range yr(t)
-#
-#              console.log 'X DOMAIN ', x.domain()
-#              console.log 'Y DOMAIN ', y.domain()
-#              console.log 'Y RANGE ', y.range()
           )
 
-        sunburstGroup.selectAll('path').transition(arcTransition)
+        sunburstGroup.selectAll('path').transition()
           .attrTween 'd', (d) ->
             ->
               arc d
@@ -99,7 +94,7 @@ glados.useNameSpace 'glados.views.MainPage',
         .style("stroke", 'white')
         .on('click',  click)
 
-      d3.select(self.frameElement).style("height", @VIS_HEIGHT + "px");
+      d3.select('.BCK-sunburst-container').style("height", @VIS_HEIGHT + "px")
 
     getBucketData: ->
       receivedBuckets = @model.get 'bucket_data'
