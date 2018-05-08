@@ -1020,9 +1020,9 @@ Compound.COLUMNS_SETTINGS = {
       parse_from_model: true
       additional_parsing:
         search_term: (model) ->
-          ownAndAdditionalsynonyms = model.getOwnAndAdditionalSynonyms()
-          ownAndAdditionalTradenames = model.getOwnAndAdditionalTradenames()
-          fullList = _.union(ownAndAdditionalsynonyms, ownAndAdditionalTradenames)
+          synonyms = if model.isParent() then model.getOwnAndAdditionalSynonyms() else model.getSynonyms()
+          tradenames = if model.isParent() then model.getOwnAndAdditionalTradenames() else model.getTradenames()
+          fullList = _.union(synonyms, tradenames)
           linkText = _.uniq(v for v in fullList).join(' OR ')
 
           maxTextLength = 100
@@ -1031,9 +1031,9 @@ Compound.COLUMNS_SETTINGS = {
 
           return linkText
         encoded_search_term: (model) ->
-          ownAndAdditionalsynonyms = model.getOwnAndAdditionalSynonyms()
-          ownAndAdditionalTradenames = model.getOwnAndAdditionalTradenames()
-          fullList = _.union(ownAndAdditionalsynonyms, ownAndAdditionalTradenames)
+          synonyms = if model.isParent() then model.getOwnAndAdditionalSynonyms() else model.getSynonyms()
+          tradenames = if model.isParent() then model.getOwnAndAdditionalTradenames() else model.getTradenames()
+          fullList = _.union(synonyms, tradenames)
           return encodeURIComponent(_.uniq(v for v in fullList).join(' OR '))
 
   ]
