@@ -37,9 +37,9 @@ glados.useNameSpace 'glados.views.MainPage',
 
       color = d3.scale.ordinal()
         .range([
-            '#0d343a',
             '#0a585b',
             '#077c80',
+            '#0d343a',
             '#2ba3a5',
             '#6fc7c6',
             '#c4e6e5',
@@ -47,7 +47,6 @@ glados.useNameSpace 'glados.views.MainPage',
             '#f9849d',
             '#e95f7e',
             '#cc4362',
-            '#a03a50',
             '#a03a50'
         ])
 
