@@ -21,21 +21,32 @@ CompoundFeaturesView = CardView.extend
     metadata = @model.get('_metadata')
     isUsan = glados.Utils.getNestedValue(metadata, 'hierarchy.is_usan')
     isApprovedDrug = glados.Utils.getNestedValue(metadata, 'hierarchy.is_approved_drug')
-    if not (isUsan or isApprovedDrug)
+    showFirstRow = isUsan
+    showSecondRow = isApprovedDrug
+
+    if not (showFirstRow or showSecondRow)
       @hideSection()
       return
 
     @showSection() unless @config.is_outside_an_entity_report_card
-    @renderProperty('Bck-MolType', 'molecule_type')
-    @renderProperty('Bck-RuleOfFive', 'ro5')
-    @renderProperty('Bck-FirstInClass', 'first_in_class')
-    @renderProperty('Bck-Chirality', 'chirality')
-    @renderProperty('Bck-Prodrug', 'prodrug')
-    @renderProperty('Bck-Oral', 'oral')
-    @renderProperty('Bck-Parenteral', 'parenteral')
-    @renderProperty('Bck-Topical', 'topical')
-    @renderProperty('Bck-BlackBox', 'black_box_warning')
-    @renderProperty('Bck-Availability', 'availability_type')
+
+    if showFirstRow
+      @renderProperty('Bck-MolType', 'molecule_type')
+      @renderProperty('Bck-RuleOfFive', 'ro5')
+      @renderProperty('Bck-FirstInClass', 'first_in_class')
+      @renderProperty('Bck-Chirality', 'chirality')
+      @renderProperty('Bck-Prodrug', 'prodrug')
+    else
+      @hideFirstRow()
+
+    if showSecondRow
+      @renderProperty('Bck-Oral', 'oral')
+      @renderProperty('Bck-Parenteral', 'parenteral')
+      @renderProperty('Bck-Topical', 'topical')
+      @renderProperty('Bck-BlackBox', 'black_box_warning')
+      @renderProperty('Bck-Availability', 'availability_type')
+    else
+      @hideSecondRow()
 
     # until here, all the visible content has been rendered.
     @showCardContent()
@@ -44,6 +55,9 @@ CompoundFeaturesView = CardView.extend
     @activateModals()
 
     @activateTooltips()
+
+  hideFirstRow: -> $(@el).find('.BCK-first-row').hide()
+  hideSecondRow: -> $(@el).find('.BCK-second-row').hide()
 
   renderProperty: (featureName, property) ->
     $propertyDiv = $(@el).find('[data-feature-name="' + featureName + '"]')
