@@ -152,6 +152,10 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
   getSynonyms: -> @getWithCache('only_synonyms', @calculateSynonymsAndTradeNames.bind(@))
   getTradenames: -> @getWithCache('only_trade_names', @calculateSynonymsAndTradeNames.bind(@))
+  getOwnAndAdditionalSynonyms: ->
+    synonyms = @getSynonyms()
+    additionalSynonyms = @getTradenames()
+    return _.union(synonyms, additionalSynonyms)
   getAdditionalSynonyms: -> @getWithCache('additional_only_synonyms', @calculateSynonymsAndTradeNames.bind(@))
   getAdditionalTradenames: -> @getWithCache('additional_trade_names', @calculateSynonymsAndTradeNames.bind(@))
 
@@ -1009,10 +1013,15 @@ Compound.COLUMNS_SETTINGS = {
     _.extend Compound.COLUMNS.PREF_NAME,
       additional_parsing:
         encoded_value: (value) -> value.replace(/[ ]/g, '+')
-    _.extend Compound.COLUMNS.SYNONYMS,
+    _.extend {}, Compound.COLUMNS.SYNONYMS,
+      parse_from_model: true
       additional_parsing:
-        search_term: (values) -> _.uniq(v.molecule_synonym for v in values).join(' OR ')
-        encoded_search_term: (values) -> _.uniq(v.molecule_synonym for v in values).join(' OR ')
+        search_term: (model) ->
+          ownAndAdditionalsynonyms = model.getOwnAndAdditionalSynonyms()
+          return _.uniq(v for v in ownAndAdditionalsynonyms).join(' OR ')
+        encoded_search_term: (model) ->
+          return 'holi'
+
   ]
 }
 
