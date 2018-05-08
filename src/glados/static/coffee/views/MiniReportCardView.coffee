@@ -14,6 +14,7 @@ glados.useNameSpace 'glados.views',
 
     render: ->
 
+      console.log 'RENDER MINI REPORT CARD: '
       templateID = @customTemplate
       templateID ?= @entity.MINI_REPORT_CARD.TEMPLATE
       templateCont = $('#' + templateID).html()
