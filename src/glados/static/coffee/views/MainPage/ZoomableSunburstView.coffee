@@ -34,7 +34,7 @@ glados.useNameSpace 'glados.views.MainPage',
       y = d3.scale.sqrt()
         .range([0, @RADIUS])
 
-      color = d3.scale.category20c()
+      color = d3.scale.category10()
 
       partition = d3.layout.partition()
         .value (d) -> d.size
@@ -56,30 +56,50 @@ glados.useNameSpace 'glados.views.MainPage',
       sunburstGroup = mainSunburstContainer.append("g")
         .attr("transform", "translate(" + @VIS_WIDTH / 2 + "," + (@VIS_HEIGHT / 2) + ")")
 
+      click = (d) ->
+
+        arcTransition = sunburstGroup.transition()
+          .duration(750)
+          .tween('scale', ->
+            xd = d3.interpolate(x.domain(), [
+              d.x
+              d.x + d.dx
+            ])
+
+            yd = d3.interpolate(y.domain(), [
+              d.y
+              1
+            ])
+
+            yr = d3.interpolate(y.range(), [
+              if d.y then 20 else 0
+              thisView.RADIUS
+
+            ])
+
+            return (t) ->
+              x.domain xd(t)
+              y.domain(yd(t)).range yr(t)
+#
+#              console.log 'X DOMAIN ', x.domain()
+#              console.log 'Y DOMAIN ', y.domain()
+#              console.log 'Y RANGE ', y.range()
+          )
+
+        sunburstGroup.selectAll('path').transition(arcTransition)
+          .attrTween 'd', (d) ->
+            ->
+              arc d
+
       sunburstGroup.selectAll("path")
         .data(nodes)
         .enter().append("path")
         .attr("d", arc)
-        .style("fill", '#D33C60')
+        .style("fill", (d) -> color(d.name) )
         .style("stroke", 'white')
-        .on('click', (d) -> thisView.click(d, sunburstGroup, x, y, @RADIUS, arc, @))
+        .on('click',  click)
 
-
-    click: (d, group, x, y,radius, arc, path) ->
-      d3.select(path).transition()
-        .duration(250)
-        .style('fill', 'blue')
-        .tween("scale", () ->
-          xd = d3.interpolate x.domain(), [d.x, d.x + d.dx]
-          yd = d3.interpolate y.domain(), [d.y, 1]
-          yr = d3.interpolate y.range(), [d.y ? 20 : 0, radius]
-
-          return (t) -> x.domain(xd(t)); y.domain(yd(t)).range(yr(t))
-      )
-
-#      group.selectAll("path")
-#        .transition()
-#          .attrTween("d", (d) -> () -> arc(d))
+      d3.select(self.frameElement).style("height", @VIS_HEIGHT + "px");
 
     getBucketData: ->
       receivedBuckets = @model.get 'bucket_data'
@@ -118,8 +138,6 @@ glados.useNameSpace 'glados.views.MainPage',
 
       return root
 
-
     showCardContent: ->
       $(@el).find('.card-preolader-to-hide').hide()
       $(@el).find('.card-content').show()
-
