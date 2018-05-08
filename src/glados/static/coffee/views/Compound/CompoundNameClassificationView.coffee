@@ -135,7 +135,7 @@ CompoundNameClassificationView = CardView.extend
     $container = $(@el).find("#{cellSelector}")
 
     if list.length == 0
-      $container.parent().parent().parent().hide()
+      $container.parent().parent().hide()
     else
       glados.Utils.fillContentForElement $container,
         items: list
