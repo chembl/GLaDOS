@@ -154,7 +154,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
   getTradenames: -> @getWithCache('only_trade_names', @calculateSynonymsAndTradeNames.bind(@))
   getOwnAndAdditionalSynonyms: ->
     synonyms = @getSynonyms()
-    additionalSynonyms = @getTradenames()
+    additionalSynonyms = @getAdditionalSynonyms()
     return _.union(synonyms, additionalSynonyms)
   getAdditionalSynonyms: -> @getWithCache('additional_only_synonyms', @calculateSynonymsAndTradeNames.bind(@))
   getAdditionalTradenames: -> @getWithCache('additional_trade_names', @calculateSynonymsAndTradeNames.bind(@))
@@ -1020,7 +1020,8 @@ Compound.COLUMNS_SETTINGS = {
           ownAndAdditionalsynonyms = model.getOwnAndAdditionalSynonyms()
           return _.uniq(v for v in ownAndAdditionalsynonyms).join(' OR ')
         encoded_search_term: (model) ->
-          return 'holi'
+          ownAndAdditionalsynonyms = model.getOwnAndAdditionalSynonyms()
+          return encodeURIComponent(_.uniq(v for v in ownAndAdditionalsynonyms).join(' OR '))
 
   ]
 }
