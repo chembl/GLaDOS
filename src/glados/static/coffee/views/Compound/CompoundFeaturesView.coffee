@@ -19,10 +19,8 @@ CompoundFeaturesView = CardView.extend
   render: ->
 
     metadata = @model.get('_metadata')
-    isUsan = glados.Utils.getNestedValue(metadata, 'hierarchy.is_usan')
-    isApprovedDrug = glados.Utils.getNestedValue(metadata, 'hierarchy.is_approved_drug')
-    showFirstRow = isUsan
-    showSecondRow = isApprovedDrug
+    showFirstRow = glados.Utils.getNestedValue(metadata, 'hierarchy.is_usan')
+    showSecondRow = glados.Utils.getNestedValue(metadata, 'hierarchy.is_approved_drug')
 
     if not (showFirstRow or showSecondRow)
       @hideSection()
