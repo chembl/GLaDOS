@@ -71,7 +71,7 @@ glados.useNameSpace 'glados.views.MainPage',
       sunburstGroup = mainSunburstContainer.append("g")
         .attr("transform", "translate(" + @VIS_WIDTH / 2 + "," + (@VIS_HEIGHT / 2) + ")")
 
-#     click transition
+      # --- click transition --- #
       click = (d) ->
 
         sunburstGroup.transition()
@@ -101,7 +101,7 @@ glados.useNameSpace 'glados.views.MainPage',
                 arc d
 
 #     paint arcs
-      sunburstGroup.selectAll("path")
+      arcs = sunburstGroup.selectAll("path")
         .data(nodes)
         .enter().append("path")
         .attr("d", arc)
@@ -114,6 +114,29 @@ glados.useNameSpace 'glados.views.MainPage',
 #     first circle
       sunburstGroup.select("path")
         .style('fill', '#6fc7c6')
+
+#     qtips
+      arcs.each (d) ->
+        name = d.name
+        count = d.size
+
+        text = '<b>' + name + '</b>' +
+          '<br>' + '<b>' + "Count:  " + '</b>' + count
+
+        if name != 'root'
+
+          $(@).qtip
+            content:
+              text: text
+            style:
+              classes:'qtip-light'
+            position:
+              my: 'bottom left'
+              at: 'top right'
+              target: 'mouse'
+              adjust:
+                y: -5
+                x: 5
 
     getBucketData: ->
       receivedBuckets = @model.get 'bucket_data'
