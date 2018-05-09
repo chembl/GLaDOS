@@ -30,7 +30,8 @@ glados.useNameSpace 'glados.views.MainPage',
       x = d3.scale.linear()
         .range([0, 2 * Math.PI])
 
-      y = d3.scale.sqrt()
+      y = d3.scale.pow()
+        .exponent(0.9)
         .range([0, @RADIUS])
 
       color = d3.scale.ordinal()
@@ -70,7 +71,7 @@ glados.useNameSpace 'glados.views.MainPage',
 
       # --- click handling --- #
       click = (d) ->
-        # transition
+        # arcs transition
         sunburstGroup.transition()
           .duration(700)
           .tween('scale', ->
@@ -114,19 +115,19 @@ glados.useNameSpace 'glados.views.MainPage',
         .style("stroke-width", '0.8px')
         .on('click',  click)
 
-#     texts
+#     paint labels
       texts = sunburstGroup.selectAll("text")
         .data(nodes)
         .enter().append("text")
         .classed('sunburst-text', true)
         .attr('fill', 'black')
-        .attr('font-size', '8px')
-        .attr('alignment-baseline', 'middle')
-        .attr('x', (d) -> y(d.y))
-        .attr("transform", (d) ->
-          console.log 'd: ', arc(d)
-          return "rotate(" + d.x + ")")
+        .attr('font-size', '7px')
+        .attr('dx', '3')
+        .attr('dy', '.4em')
+        .attr('x', (d) -> y (d.y))
         .text((d) -> d.name)
+        .attr('transform', (d) ->
+          'rotate(' + thisView.computeTextRotation(d, x) + ')')
 
 #     first circle
       sunburstGroup.select("path")
@@ -157,7 +158,10 @@ glados.useNameSpace 'glados.views.MainPage',
               adjust:
                 y: -5
                 x: 5
-                
+
+    computeTextRotation: (d, x) ->
+      (x(d.x + d.dx / 2) - (Math.PI / 2)) / Math.PI * 180
+
     fillBrowseButton: (d) ->
       $button = $('.BCK-browse-button')
 
