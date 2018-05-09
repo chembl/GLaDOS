@@ -92,37 +92,39 @@ glados.useNameSpace 'glados.views.MainPage',
 
 #     --- click handling --- #
       click = (d) ->
-        # arcs transition
-        sunburstGroup.transition()
-          .duration(700)
-          .tween('scale', ->
-            xd = d3.interpolate(x.domain(), [
-              d.x
-              d.x + d.dx
-            ])
-
-            yd = d3.interpolate(y.domain(), [
-              d.y
-              1
-            ])
-
-            yr = d3.interpolate(y.range(), [
-              if d.y then 15 else 0
-              thisView.RADIUS
-            ])
-
-            return (t) ->
-              x.domain xd(t)
-              y.domain(yd(t)).range yr(t)
-          ).selectAll('path')
-            .attrTween 'd', (d) ->
-              ->
-                arc d
 
         # update focus
         if thisView.FOCUS != d
+          texts.transition().attr("opacity", 0)
           thisView.FOCUS = d
           thisView.fillBrowseButton(d)
+
+#       interpolate scales
+        arcTween  = (d) ->
+          xd = d3.interpolate(x.domain(), [d.x, d.x + d.dx])
+          yd = d3.interpolate(y.domain(), [d.y, 1])
+          yr = d3.interpolate(y.range(), [ (if d.y then 15 else 0), thisView.RADIUS])
+
+          return (d, i) ->
+            if i then ((t) -> arc d)
+            else ((t) ->
+              x.domain xd(t)
+              y.domain(yd(t)).range yr(t)
+              return arc d
+            )
+
+        # arcs and text transition
+        paths.transition()
+          .duration(700)
+          .attrTween('d', arcTween(d))
+          .each 'end', (e, i) ->
+            if e.x >= d.x and e.x < d.x + d.dx
+              arcText = d3.select(@parentNode).select('.sunburst-text')
+              arcText.transition().duration(400).attr('opacity', 1).attr('transform', ->
+                'rotate(' + thisView.computeTextRotation(e, x) + ')'
+              ).attr 'x', (d) ->
+                y d.y
+            return
 
       paths.on('click',  click)
 
