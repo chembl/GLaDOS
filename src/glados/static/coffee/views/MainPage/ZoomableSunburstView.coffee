@@ -65,11 +65,32 @@ glados.useNameSpace 'glados.views.MainPage',
           .attr('class', 'mainEntitiesContainer')
           .attr('width', @VIS_WIDTH)
           .attr('height', @VIS_HEIGHT)
+          .append("g")
+            .attr("transform", "translate(" + @VIS_WIDTH / 2 + "," + (@VIS_HEIGHT / 2) + ")")
 
-      sunburstGroup = mainSunburstContainer.append("g")
-        .attr("transform", "translate(" + @VIS_WIDTH / 2 + "," + (@VIS_HEIGHT / 2) + ")")
+      sunburstGroup = mainSunburstContainer.selectAll('g')
+        .data(nodes)
+        .enter().append('g')
 
-      # --- click handling --- #
+      paths = sunburstGroup.append('path')
+        .attr('d', arc)
+        .style("stroke", 'white')
+        .style("stroke-width", '0.8px')
+        .style 'fill', (d) ->
+          color (if d.children then d else d.parent).name
+
+      texts = sunburstGroup.append('text')
+        .classed('sunburst-text', true)
+          .attr('fill', 'black')
+          .attr('font-size', '7px')
+          .attr('dx', '3')
+          .attr('dy', '.4em')
+          .attr('x', (d) -> y (d.y))
+          .text((d) -> d.name)
+          .attr('transform', (d) ->
+            'rotate(' + thisView.computeTextRotation(d, x) + ')')
+
+#     --- click handling --- #
       click = (d) ->
         # arcs transition
         sunburstGroup.transition()
@@ -103,61 +124,7 @@ glados.useNameSpace 'glados.views.MainPage',
           thisView.FOCUS = d
           thisView.fillBrowseButton(d)
 
-#     paint arcs
-      arcs = sunburstGroup.selectAll("path")
-        .data(nodes)
-        .enter().append("path")
-        .classed('sunburst-arc', true)
-        .attr("d", arc)
-        .style 'fill', (d) ->
-          color (if d.children then d else d.parent).name
-        .style("stroke", 'white')
-        .style("stroke-width", '0.8px')
-        .on('click',  click)
-
-#     paint labels
-      texts = sunburstGroup.selectAll("text")
-        .data(nodes)
-        .enter().append("text")
-        .classed('sunburst-text', true)
-        .attr('fill', 'black')
-        .attr('font-size', '7px')
-        .attr('dx', '3')
-        .attr('dy', '.4em')
-        .attr('x', (d) -> y (d.y))
-        .text((d) -> d.name)
-        .attr('transform', (d) ->
-          'rotate(' + thisView.computeTextRotation(d, x) + ')')
-
-#     first circle
-      sunburstGroup.select("path")
-        .style('fill', '#6fc7c6')
-
-      sunburstGroup.select("text")
-        .style('opacity', 0)
-
-#     qtips
-      arcs.each (d) ->
-        name = d.name
-        count = d.size
-
-        text = '<b>' + name + '</b>' +
-          '<br>' + '<b>' + "Count:  " + '</b>' + count
-
-        if name != 'root'
-
-          $(@).qtip
-            content:
-              text: text
-            style:
-              classes:'qtip-light'
-            position:
-              my: 'bottom left'
-              at: 'top right'
-              target: 'mouse'
-              adjust:
-                y: -5
-                x: 5
+      paths.on('click',  click)
 
     computeTextRotation: (d, x) ->
       (x(d.x + d.dx / 2) - (Math.PI / 2)) / Math.PI * 180
