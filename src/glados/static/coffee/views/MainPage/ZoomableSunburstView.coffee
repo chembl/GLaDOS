@@ -79,23 +79,32 @@ glados.useNameSpace 'glados.views.MainPage',
         .style 'fill', (d) ->
           color (if d.children then d else d.parent).name
 
-      texts = sunburstGroup.append('text')
-        .classed('sunburst-text', true)
+      sunburstGroup.each ->
+        w = 9
+        path = d3.select(@)
+        pathSize = Math.min(path.node().getBBox().height, path.node().getBBox().width)
+
+        text = path.append('text')
+          .classed('sunburst-text', true)
           .attr('fill', 'black')
-          .attr('font-size', '7px')
-          .attr('dx', '3')
+          .attr('font-size', w + 'px')
+          .attr('dx', '5px')
           .attr('dy', '.4em')
           .attr('x', (d) -> y (d.y))
           .text((d) -> d.name)
           .attr('transform', (d) ->
             'rotate(' + thisView.computeTextRotation(d, x) + ')')
 
+        if pathSize < w
+          text.attr('opacity', 0)
+
+
 #     --- click handling --- #
       click = (d) ->
 
         # update focus
         if thisView.FOCUS != d
-          texts.transition().attr("opacity", 0)
+          d3.selectAll('.sunburst-text').transition().attr("opacity", 0)
           thisView.FOCUS = d
           thisView.fillBrowseButton(d)
 
@@ -118,13 +127,23 @@ glados.useNameSpace 'glados.views.MainPage',
           .duration(700)
           .attrTween('d', arcTween(d))
           .each 'end', (e, i) ->
-            if e.x >= d.x and e.x < d.x + d.dx
+            w = 15
+            path = d3.select(@)
+            pathSize = Math.min(path.node().getBBox().height, path.node().getBBox().width)
+
+            if e.depth >= thisView.FOCUS.depth and e.x >= d.x and e.x < (d.x + d.dx) and pathSize > w
+
               arcText = d3.select(@parentNode).select('.sunburst-text')
-              arcText.transition().duration(400).attr('opacity', 1).attr('transform', ->
-                'rotate(' + thisView.computeTextRotation(e, x) + ')'
-              ).attr 'x', (d) ->
-                y d.y
-            return
+
+              arcText.transition()
+                .duration(400)
+                .attr('opacity', 1)
+                .attr('transform', ->
+                  'rotate(' + thisView.computeTextRotation(e, x) + ')'
+                ).attr 'x', (d) ->
+                  y d.y
+
+              return
 
       paths.on('click',  click)
 
