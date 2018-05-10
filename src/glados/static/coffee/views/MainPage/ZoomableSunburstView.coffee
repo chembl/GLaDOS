@@ -26,6 +26,9 @@ glados.useNameSpace 'glados.views.MainPage',
       @VIS_HEIGHT = $(@el).height() - 15
       @RADIUS = (Math.min(@VIS_WIDTH, @VIS_HEIGHT) / 2)
       @FOCUS = @ROOT
+      @MAX_LINE_HEIGHT = 15
+
+      # ------------ helper functions --------------- #
 
       wrapText = (d) ->
         self = d3.select(@)
@@ -35,6 +38,10 @@ glados.useNameSpace 'glados.views.MainPage',
 
         wrappedText = glados.Utils.Text.getTextForEllipsis(text, textLength, arcWidth)
         self.text wrappedText
+
+      # ------------ end of helper functions --------------- #
+
+      # ------------ scales --------------- #
 
       x = d3.scale.linear()
         .range([0, 2 * Math.PI])
@@ -67,6 +74,8 @@ glados.useNameSpace 'glados.views.MainPage',
         .innerRadius (d) -> return Math.max(0, y(d.y))
         .outerRadius (d) -> return Math.max(0, y(d.y + d.dy))
 
+      # ------------ end of scales --------------- #
+
       nodes = partition.nodes(@ROOT)
 
       mainSunburstContainer = d3.select @$vis_elem[0]
@@ -82,23 +91,19 @@ glados.useNameSpace 'glados.views.MainPage',
         .enter().append('g')
 
       paths = sunburstGroup.append('path')
+        .classed('arc-path', true)
         .attr('d', arc)
-        .style("stroke", 'white')
-        .style("stroke-width", '0.8px')
         .style 'fill', (d) ->
           color (if d.children then d else d.parent).name
 
       sunburstGroup.each (d) ->
 
         if d.depth - thisView.FOCUS.depth <= 3
-          maxWidth = 15
           path = d3.select(@)
           arcHeight = y(d.y) * x(d.dx)
 
           text = path.append('text')
             .classed('sunburst-text', true)
-            .attr('fill', 'black')
-            .attr('font-size', '9px')
             .attr('dx', '5px')
             .attr('dy', '.4em')
             .attr('x', (d) -> y (d.y))
@@ -107,12 +112,12 @@ glados.useNameSpace 'glados.views.MainPage',
               'rotate(' + thisView.computeTextRotation(d, x) + ')'
             )
 
-          if arcHeight < maxWidth
+          if arcHeight < thisView.MAX_LINE_HEIGHT
             text.attr('opacity', 0)
 
           text.each(wrapText)
 
-#     --- click handling --- #
+      # --- click handling --- #
       click = (d) ->
 
         # update focus
@@ -139,8 +144,6 @@ glados.useNameSpace 'glados.views.MainPage',
 
                 text = path.append('text')
                   .classed('sunburst-text', true)
-                  .attr('fill', 'black')
-                  .attr('font-size', '9px')
                   .attr('dx', '5px')
                   .attr('dy', '.4em')
                   .attr('x', (d) -> y (d.y))
@@ -193,6 +196,8 @@ glados.useNameSpace 'glados.views.MainPage',
                   y d.y
 
               return
+
+      # --- end of click handling --- #
 
       paths.on('click',  click)
 
