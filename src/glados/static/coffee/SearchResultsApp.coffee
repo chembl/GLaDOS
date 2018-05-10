@@ -9,6 +9,8 @@ class SearchResultsApp
       el: $('#es-query-explain-wrapper')
 
     $searchResultsContainer = $('.BCK-SearchResultsContainer')
+    # removes all the events of the model
+    SearchModel.getInstance().off()
     new glados.views.SearchResults.SearchResultsView
       el: $searchResultsContainer
       model: SearchModel.getInstance()
