@@ -27,6 +27,15 @@ glados.useNameSpace 'glados.views.MainPage',
       @RADIUS = (Math.min(@VIS_WIDTH, @VIS_HEIGHT) / 2)
       @FOCUS = @ROOT
 
+      wrapText = (d) ->
+        self = d3.select(@)
+        textLength = self.node().getComputedTextLength()
+        text = self.text()
+        arcWidth = y(d.y + d.dy) - y(d.y) - 5
+
+        wrappedText = glados.Utils.Text.getTextForEllipsis(text, textLength, arcWidth)
+        self.text wrappedText
+
       x = d3.scale.linear()
         .range([0, 2 * Math.PI])
 
@@ -82,9 +91,9 @@ glados.useNameSpace 'glados.views.MainPage',
       sunburstGroup.each (d) ->
 
         if d.depth - thisView.FOCUS.depth <= 3
-          w = 15
+          maxWidth = 15
           path = d3.select(@)
-          pathSize = Math.min(path.node().getBBox().height, path.node().getBBox().width)
+          arcHeight = y(d.y) * x(d.dx)
 
           text = path.append('text')
             .classed('sunburst-text', true)
@@ -98,21 +107,10 @@ glados.useNameSpace 'glados.views.MainPage',
               'rotate(' + thisView.computeTextRotation(d, x) + ')'
             )
 
-          if pathSize < w
+          if arcHeight < maxWidth
             text.attr('opacity', 0)
 
-          wrap = (d) ->
-            self = d3.select(@)
-            textLength = self.node().getComputedTextLength()
-            text = self.text()
-            arcWidth = y(d.y + d.dy) - y(d.y) - 5
-
-            while textLength > arcWidth and text.length > 0
-              text = text.slice(0, -1)
-              self.text text
-              textLength = self.node().getComputedTextLength()
-
-          text.each(wrap)
+          text.each(wrapText)
 
 #     --- click handling --- #
       click = (d) ->
@@ -126,12 +124,16 @@ glados.useNameSpace 'glados.views.MainPage',
           #create labels if focus changes
           sunburstGroup.each (d) ->
             f = thisView.FOCUS
-            w = 15
+            maxWidth = 15
             path = d3.select(@)
             text = path.select('.sunburst-text')
-            pathSize = Math.min(path.node().getBBox().height, path.node().getBBox().width)
 
-            if d.depth - f.depth <= 3 and pathSize > w and d.x >= f.x and d.x < (f.x + f.dx)
+
+            maxWidth = 15
+            path = d3.select(@)
+            arcHeight = y(d.y) * x(d.dx)
+
+            if d.depth - f.depth <= 3 and arcHeight > maxWidth and d.x >= f.x and d.x < (f.x + f.dx)
 
               if text.empty()
 
@@ -148,18 +150,7 @@ glados.useNameSpace 'glados.views.MainPage',
                     'rotate(' + thisView.computeTextRotation(d, x) + ')'
                   )
 
-              wrap = (d) ->
-                self = d3.select(@)
-                textLength = self.node().getComputedTextLength()
-                text = self.text()
-                arcWidth = y(d.y + d.dy) - y(d.y) - 5
-
-                while textLength > arcWidth and text.length > 0
-                  text = text.slice(0, -1)
-                  self.text text
-                  textLength = self.node().getComputedTextLength()
-
-              text.each(wrap)
+              text.each(wrapText)
 
 #       interpolate scales
         arcTween  = (d) ->
@@ -187,22 +178,11 @@ glados.useNameSpace 'glados.views.MainPage',
 
             if e.depth >= f.depth and e.depth - f.depth <= 3 and  e.x >= d.x and e.x < (d.x + d.dx) and pathSize > w
 
-              wrap = (d) ->
-                self = d3.select(@)
-                textLength = self.node().getComputedTextLength()
-                text = self.text()
-                arcWidth = y(d.y + d.dy) - y(d.y) - 5
-
-                while textLength > arcWidth and text.length > 0
-                  text = text.slice(0, -1)
-                  self.text text
-                  textLength = self.node().getComputedTextLength()
-
               arcText = d3.select(@parentNode).select('.sunburst-text')
 
               if not arcText.empty()
                 arcText.text((d) -> d.name)
-                  .each(wrap)
+                  .each(wrapText)
 
               arcText.transition()
                 .duration(400)
