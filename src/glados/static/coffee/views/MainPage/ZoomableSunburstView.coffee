@@ -27,6 +27,7 @@ glados.useNameSpace 'glados.views.MainPage',
       @RADIUS = (Math.min(@VIS_WIDTH, @VIS_HEIGHT) / 2)
       @FOCUS = @ROOT
       @MAX_LINE_HEIGHT = 15
+      @LABEL_LEVELS_TO_SHOW = 3
 
       # ------------ helper functions --------------- #
 
@@ -38,6 +39,26 @@ glados.useNameSpace 'glados.views.MainPage',
 
         wrappedText = glados.Utils.Text.getTextForEllipsis(text, textLength, arcWidth)
         self.text wrappedText
+
+      appendLabelText = (d, parent) ->
+
+        path = d3.select(parent)
+        arcHeight = getRadius(d.y) * getAngle(d.dx)
+
+        text = path.append('text')
+          .classed('sunburst-text', true)
+          .attr('dx', '5px')
+          .attr('dy', '.4em')
+          .attr('x', (d) -> getRadius(d.y))
+          .text((d) -> d.name)
+          .attr('transform', (d) ->
+            'rotate(' + thisView.computeTextRotation(d, getAngle) + ')'
+          )
+
+        if arcHeight < thisView.MAX_LINE_HEIGHT
+          text.attr('opacity', 0)
+
+        text.each(wrapText)
 
       # ------------ end of helper functions --------------- #
 
@@ -74,8 +95,6 @@ glados.useNameSpace 'glados.views.MainPage',
         .innerRadius (d) -> return Math.max(0, getRadius(d.y))
         .outerRadius (d) -> return Math.max(0, getRadius(d.y + d.dy))
 
-      # ------------ end of scales --------------- #
-
       nodes = partition.nodes(@ROOT)
 
       mainSunburstContainer = d3.select @$vis_elem[0]
@@ -96,63 +115,33 @@ glados.useNameSpace 'glados.views.MainPage',
         .style 'fill', (d) ->
           color (if d.children then d else d.parent).name
 
+#     append labels
       sunburstGroup.each (d) ->
 
-        if d.depth - thisView.FOCUS.depth <= 3
-          path = d3.select(@)
-          arcHeight = getRadius(d.y) * getAngle(d.dx)
+        shouldCreateLabel = d.depth - thisView.FOCUS.depth <= thisView.LABEL_LEVELS_TO_SHOW
 
-          text = path.append('text')
-            .classed('sunburst-text', true)
-            .attr('dx', '5px')
-            .attr('dy', '.4em')
-            .attr('x', (d) -> getRadius(d.y))
-            .text((d) -> d.name)
-            .attr('transform', (d) ->
-              'rotate(' + thisView.computeTextRotation(d, getAngle) + ')'
-            )
-
-          if arcHeight < thisView.MAX_LINE_HEIGHT
-            text.attr('opacity', 0)
-
-          text.each(wrapText)
+        if shouldCreateLabel
+          appendLabelText(d, @)
 
       # --- click handling --- #
       click = (d) ->
 
         # update focus
         if thisView.FOCUS != d
+
           d3.selectAll('.sunburst-text').transition().attr("opacity", 0)
           thisView.FOCUS = d
           thisView.fillBrowseButton(d)
 
           #create labels if focus changes
           sunburstGroup.each (d) ->
+
             f = thisView.FOCUS
-            maxWidth = 15
-            path = d3.select(@)
-            text = path.select('.sunburst-text')
+            text = d3.select(@).select('.sunburst-text')
+            shouldCreateLabel = d.depth - f.depth <= thisView.LABEL_LEVELS_TO_SHOW and d.x >= f.x and d.x < (f.x + f.dx) and text.empty()
 
-            maxWidth = 15
-            path = d3.select(@)
-            arcHeight = getRadius(d.y) * getAngle(d.dx)
-
-            if d.depth - f.depth <= 3 and arcHeight > maxWidth and d.x >= f.x and d.x < (f.x + f.dx)
-
-              if text.empty()
-
-                text = path.append('text')
-                  .classed('sunburst-text', true)
-                  .attr('dx', '5px')
-                  .attr('dy', '.4em')
-                  .attr('x', (d) -> getRadius(d.y))
-                  .text((d) -> d.name)
-                  .attr('opacity', 0)
-                  .attr('transform', (d) ->
-                    'rotate(' + thisView.computeTextRotation(d, getAngle) + ')'
-                  )
-
-              text.each(wrapText)
+            if shouldCreateLabel
+              appendLabelText(d, @)
 
 #       interpolate scales
         arcTween  = (d) ->
