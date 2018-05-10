@@ -34,7 +34,7 @@ glados.useNameSpace 'glados.views.MainPage',
         self = d3.select(@)
         textLength = self.node().getComputedTextLength()
         text = self.text()
-        arcWidth = y(d.y + d.dy) - y(d.y) - 5
+        arcWidth = getRadius(d.y + d.dy) - getRadius(d.y) - 5
 
         wrappedText = glados.Utils.Text.getTextForEllipsis(text, textLength, arcWidth)
         self.text wrappedText
@@ -43,10 +43,10 @@ glados.useNameSpace 'glados.views.MainPage',
 
       # ------------ scales --------------- #
 
-      x = d3.scale.linear()
+      getAngle = d3.scale.linear()
         .range([0, 2 * Math.PI])
 
-      y = d3.scale.pow()
+      getRadius = d3.scale.pow()
         .exponent(0.5)
         .range([0, @RADIUS])
 
@@ -69,10 +69,10 @@ glados.useNameSpace 'glados.views.MainPage',
         .value (d) -> d.size
 
       arc = d3.svg.arc()
-        .startAngle (d) ->  return Math.max(0, Math.min(2 * Math.PI, x(d.x)))
-        .endAngle (d) -> return Math.max(0, Math.min(2 * Math.PI, x(d.x + d.dx)))
-        .innerRadius (d) -> return Math.max(0, y(d.y))
-        .outerRadius (d) -> return Math.max(0, y(d.y + d.dy))
+        .startAngle (d) ->  return Math.max(0, Math.min(2 * Math.PI, getAngle(d.x)))
+        .endAngle (d) -> return Math.max(0, Math.min(2 * Math.PI, getAngle(d.x + d.dx)))
+        .innerRadius (d) -> return Math.max(0, getRadius(d.y))
+        .outerRadius (d) -> return Math.max(0, getRadius(d.y + d.dy))
 
       # ------------ end of scales --------------- #
 
@@ -100,16 +100,16 @@ glados.useNameSpace 'glados.views.MainPage',
 
         if d.depth - thisView.FOCUS.depth <= 3
           path = d3.select(@)
-          arcHeight = y(d.y) * x(d.dx)
+          arcHeight = getRadius(d.y) * getAngle(d.dx)
 
           text = path.append('text')
             .classed('sunburst-text', true)
             .attr('dx', '5px')
             .attr('dy', '.4em')
-            .attr('x', (d) -> y (d.y))
+            .attr('x', (d) -> getRadius(d.y))
             .text((d) -> d.name)
             .attr('transform', (d) ->
-              'rotate(' + thisView.computeTextRotation(d, x) + ')'
+              'rotate(' + thisView.computeTextRotation(d, getAngle) + ')'
             )
 
           if arcHeight < thisView.MAX_LINE_HEIGHT
@@ -133,10 +133,9 @@ glados.useNameSpace 'glados.views.MainPage',
             path = d3.select(@)
             text = path.select('.sunburst-text')
 
-
             maxWidth = 15
             path = d3.select(@)
-            arcHeight = y(d.y) * x(d.dx)
+            arcHeight = getRadius(d.y) * getAngle(d.dx)
 
             if d.depth - f.depth <= 3 and arcHeight > maxWidth and d.x >= f.x and d.x < (f.x + f.dx)
 
@@ -146,26 +145,26 @@ glados.useNameSpace 'glados.views.MainPage',
                   .classed('sunburst-text', true)
                   .attr('dx', '5px')
                   .attr('dy', '.4em')
-                  .attr('x', (d) -> y (d.y))
+                  .attr('x', (d) -> getRadius(d.y))
                   .text((d) -> d.name)
                   .attr('opacity', 0)
                   .attr('transform', (d) ->
-                    'rotate(' + thisView.computeTextRotation(d, x) + ')'
+                    'rotate(' + thisView.computeTextRotation(d, getAngle) + ')'
                   )
 
               text.each(wrapText)
 
 #       interpolate scales
         arcTween  = (d) ->
-          xd = d3.interpolate(x.domain(), [d.x, d.x + d.dx])
-          yd = d3.interpolate(y.domain(), [d.y, 1])
-          yr = d3.interpolate(y.range(), [ (if d.y then 15 else 0), thisView.RADIUS])
+          xd = d3.interpolate(getAngle.domain(), [d.x, d.x + d.dx])
+          yd = d3.interpolate(getRadius.domain(), [d.y, 1])
+          yr = d3.interpolate(getRadius.range(), [ (if d.y then 15 else 0), thisView.RADIUS])
 
           return (d, i) ->
             if i then ((t) -> arc d)
             else ((t) ->
-              x.domain xd(t)
-              y.domain(yd(t)).range yr(t)
+              getAngle.domain xd(t)
+              getRadius.domain(yd(t)).range yr(t)
               return arc d
             )
 
@@ -191,9 +190,9 @@ glados.useNameSpace 'glados.views.MainPage',
                 .duration(400)
                 .attr('opacity', 1)
                 .attr('transform', ->
-                  'rotate(' + thisView.computeTextRotation(e, x) + ')'
+                  'rotate(' + thisView.computeTextRotation(e, getAngle) + ')'
                 ).attr 'x', (d) ->
-                  y d.y
+                  getRadius(d.y)
 
               return
 
@@ -201,8 +200,8 @@ glados.useNameSpace 'glados.views.MainPage',
 
       paths.on('click',  click)
 
-    computeTextRotation: (d, x) ->
-      (x(d.x + d.dx / 2) - (Math.PI / 2)) / Math.PI * 180
+    computeTextRotation: (d, getAngle) ->
+      (getAngle(d.x + d.dx / 2) - (Math.PI / 2)) / Math.PI * 180
 
     fillBrowseButton: (d) ->
       $button = $('.BCK-browse-button')
