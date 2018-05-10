@@ -26,7 +26,7 @@ glados.useNameSpace 'glados.views.MainPage',
       @VIS_HEIGHT = $(@el).height() - 15
       @RADIUS = (Math.min(@VIS_WIDTH, @VIS_HEIGHT) / 2)
       @FOCUS = @ROOT
-      @MAX_LINE_HEIGHT = 15
+      @MAX_LINE_HEIGHT = 12
       @LABEL_LEVELS_TO_SHOW = 3
 
       # ------------ helper functions --------------- #
@@ -35,7 +35,7 @@ glados.useNameSpace 'glados.views.MainPage',
         self = d3.select(@)
         textLength = self.node().getComputedTextLength()
         text = self.text()
-        arcWidth = getRadius(d.y + d.dy) - getRadius(d.y) - 5
+        arcWidth = getRadius(d.y + d.dy) - getRadius(d.y) - 2
 
         wrappedText = glados.Utils.Text.getTextForEllipsis(text, textLength, arcWidth)
         self.text wrappedText
@@ -59,8 +59,8 @@ glados.useNameSpace 'glados.views.MainPage',
         text.each(wrapText)
 
       textFitsInArc = (d) ->
-        arcHeight = getRadius(d.y) * getAngle(d.dx)
-        return arcHeight > thisView.MAX_LINE_HEIGHT
+        arcLength = getRadius(d.y) * getAngle(d.dx)
+        return arcLength > thisView.MAX_LINE_HEIGHT
 
       # ------------ end of helper functions --------------- #
 
@@ -119,7 +119,6 @@ glados.useNameSpace 'glados.views.MainPage',
 
 #     append labels
       sunburstGroup.each (d) ->
-
         shouldCreateLabel = d.depth - thisView.FOCUS.depth <= thisView.LABEL_LEVELS_TO_SHOW
 
         if shouldCreateLabel
@@ -130,17 +129,18 @@ glados.useNameSpace 'glados.views.MainPage',
 
         # if focus changes
         if thisView.FOCUS != d
+
           d3.selectAll('.sunburst-text').transition().attr("opacity", 0)
           thisView.FOCUS = d
           thisView.fillBrowseButton(d)
 
           #create labels if focus changes
           sunburstGroup.each (d) ->
-
             f = thisView.FOCUS
             text = d3.select(@).select('.sunburst-text')
+            shouldCreateLabels = text.empty() and d.depth - f.depth <= thisView.LABEL_LEVELS_TO_SHOW and d.x >= f.x and d.x < (f.x + f.dx)
 
-            if text.empty()
+            if shouldCreateLabels
               appendLabelText(d, @)
 
 #       function for interpolating scales
@@ -161,9 +161,10 @@ glados.useNameSpace 'glados.views.MainPage',
         paths.transition()
           .duration(700)
           .attrTween('d', arcTween(d))
-          .each 'end', (e, i) ->
+          .each 'end', (e) ->
             f = thisView.FOCUS
-            shouldDoTransition = e.depth >= f.depth and e.depth - f.depth <= 3 and  e.x >= d.x and e.x < (d.x + d.dx)
+
+            shouldDoTransition = e.depth >= f.depth and e.depth - f.depth <= thisView.LABEL_LEVELS_TO_SHOW and  e.x >= d.x and e.x < (d.x + d.dx)
 
             if shouldDoTransition
 
@@ -180,7 +181,6 @@ glados.useNameSpace 'glados.views.MainPage',
                 ).attr 'x', (d) ->
                   getRadius(d.y)
               return
-
 
       # --- end of click handling --- #
 
