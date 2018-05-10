@@ -124,7 +124,42 @@ glados.useNameSpace 'glados.views.MainPage',
           thisView.fillBrowseButton(d)
 
           #create labels if focus changes
+          sunburstGroup.each (d) ->
+            f = thisView.FOCUS
+            w = 15
+            path = d3.select(@)
+            text = path.select('.sunburst-text')
+            pathSize = Math.min(path.node().getBBox().height, path.node().getBBox().width)
 
+            if d.depth - f.depth <= 3 and pathSize > w and d.x >= f.x and d.x < (f.x + f.dx)
+
+              if text.empty()
+
+                text = path.append('text')
+                  .classed('sunburst-text', true)
+                  .attr('fill', 'black')
+                  .attr('font-size', '9px')
+                  .attr('dx', '5px')
+                  .attr('dy', '.4em')
+                  .attr('x', (d) -> y (d.y))
+                  .text((d) -> d.name)
+                  .attr('opacity', 0)
+                  .attr('transform', (d) ->
+                    'rotate(' + thisView.computeTextRotation(d, x) + ')'
+                  )
+
+              wrap = (d) ->
+                self = d3.select(@)
+                textLength = self.node().getComputedTextLength()
+                text = self.text()
+                arcWidth = y(d.y + d.dy) - y(d.y) - 5
+
+                while textLength > arcWidth and text.length > 0
+                  text = text.slice(0, -1)
+                  self.text text
+                  textLength = self.node().getComputedTextLength()
+
+              text.each(wrap)
 
 #       interpolate scales
         arcTween  = (d) ->
@@ -145,11 +180,12 @@ glados.useNameSpace 'glados.views.MainPage',
           .duration(700)
           .attrTween('d', arcTween(d))
           .each 'end', (e, i) ->
+            f = thisView.FOCUS
             w = 15
             path = d3.select(@)
             pathSize = Math.min(path.node().getBBox().height, path.node().getBBox().width)
 
-            if e.depth >= thisView.FOCUS.depth and e.x >= d.x and e.x < (d.x + d.dx) and pathSize > w
+            if e.depth >= f.depth and e.depth - f.depth <= 3 and  e.x >= d.x and e.x < (d.x + d.dx) and pathSize > w
 
               wrap = (d) ->
                 self = d3.select(@)
@@ -164,7 +200,7 @@ glados.useNameSpace 'glados.views.MainPage',
 
               arcText = d3.select(@parentNode).select('.sunburst-text')
 
-              if d.depth - thisView.FOCUS.depth <= 3
+              if not arcText.empty()
                 arcText.text((d) -> d.name)
                   .each(wrap)
 
