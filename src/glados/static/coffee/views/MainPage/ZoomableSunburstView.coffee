@@ -41,9 +41,7 @@ glados.useNameSpace 'glados.views.MainPage',
         self.text wrappedText
 
       appendLabelText = (d, parent) ->
-
         path = d3.select(parent)
-        arcHeight = getRadius(d.y) * getAngle(d.dx)
 
         text = path.append('text')
           .classed('sunburst-text', true)
@@ -55,10 +53,14 @@ glados.useNameSpace 'glados.views.MainPage',
             'rotate(' + thisView.computeTextRotation(d, getAngle) + ')'
           )
 
-        if arcHeight < thisView.MAX_LINE_HEIGHT
+        if not textFitsInArc(d)
           text.attr('opacity', 0)
 
         text.each(wrapText)
+
+      textFitsInArc = (d) ->
+        arcHeight = getRadius(d.y) * getAngle(d.dx)
+        return arcHeight > thisView.MAX_LINE_HEIGHT
 
       # ------------ end of helper functions --------------- #
 
@@ -126,7 +128,7 @@ glados.useNameSpace 'glados.views.MainPage',
       # --- click handling --- #
       click = (d) ->
 
-        # update focus
+        # if focus changes
         if thisView.FOCUS != d
 
           d3.selectAll('.sunburst-text').transition().attr("opacity", 0)
@@ -143,7 +145,7 @@ glados.useNameSpace 'glados.views.MainPage',
             if shouldCreateLabel
               appendLabelText(d, @)
 
-#       interpolate scales
+#       function for interpolating scales
         arcTween  = (d) ->
           xd = d3.interpolate(getAngle.domain(), [d.x, d.x + d.dx])
           yd = d3.interpolate(getRadius.domain(), [d.y, 1])
@@ -163,11 +165,9 @@ glados.useNameSpace 'glados.views.MainPage',
           .attrTween('d', arcTween(d))
           .each 'end', (e, i) ->
             f = thisView.FOCUS
-            w = 15
             path = d3.select(@)
-            pathSize = Math.min(path.node().getBBox().height, path.node().getBBox().width)
 
-            if e.depth >= f.depth and e.depth - f.depth <= 3 and  e.x >= d.x and e.x < (d.x + d.dx) and pathSize > w
+            if e.depth >= f.depth and e.depth - f.depth <= 3 and  e.x >= d.x and e.x < (d.x + d.dx)
 
               arcText = d3.select(@parentNode).select('.sunburst-text')
 
@@ -175,15 +175,15 @@ glados.useNameSpace 'glados.views.MainPage',
                 arcText.text((d) -> d.name)
                   .each(wrapText)
 
-              arcText.transition()
-                .duration(400)
-                .attr('opacity', 1)
-                .attr('transform', ->
-                  'rotate(' + thisView.computeTextRotation(e, getAngle) + ')'
-                ).attr 'x', (d) ->
-                  getRadius(d.y)
-
-              return
+              if textFitsInArc(e)
+                arcText.transition()
+                  .duration(400)
+                  .attr('opacity', 1)
+                  .attr('transform', ->
+                    'rotate(' + thisView.computeTextRotation(e, getAngle) + ')'
+                  ).attr 'x', (d) ->
+                    getRadius(d.y)
+                return
 
       # --- end of click handling --- #
 
