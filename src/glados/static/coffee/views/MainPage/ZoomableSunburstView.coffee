@@ -123,9 +123,32 @@ glados.useNameSpace 'glados.views.MainPage',
 
         if shouldCreateLabel
           appendLabelText(d, @)
+#     qtips
+      sunburstGroup.each (d) ->
+        name = d.name
+        count = d.size
+
+        text = '<b>' + name + '</b>' +
+          '<br>' + '<b>' + "Count:  " + '</b>' + count
+
+        if name != 'root'
+
+          $(@).qtip
+            content:
+              text: text
+            style:
+              classes:'qtip-light'
+            position:
+              my: 'bottom left'
+              at: 'top right'
+              target: 'mouse'
+              adjust:
+                y: -5
+                x: 5
 
       # --- click handling --- #
       click = (d) ->
+        console.log '----'
 
         # if focus changes
         if thisView.FOCUS != d
@@ -162,9 +185,8 @@ glados.useNameSpace 'glados.views.MainPage',
           .duration(700)
           .attrTween('d', arcTween(d))
           .each 'end', (e) ->
-            f = thisView.FOCUS
 
-            shouldDoTransition = e.depth >= f.depth and e.depth - f.depth <= thisView.LABEL_LEVELS_TO_SHOW and  e.x >= d.x and e.x < (d.x + d.dx)
+            shouldDoTransition = e.depth - d.depth <= thisView.LABEL_LEVELS_TO_SHOW and  e.x >= d.x and e.x < (d.x + d.dx)
 
             if shouldDoTransition
 
@@ -175,12 +197,15 @@ glados.useNameSpace 'glados.views.MainPage',
 
               arcText.transition()
                 .duration(400)
-                .attr('opacity', 1)
-                .attr('transform', ->
+                .attr('opacity', (e) ->
+                  if textFitsInArc(e) then 1 else 0
+                ).attr('transform', ->
                   'rotate(' + thisView.computeTextRotation(e, getAngle) + ')'
                 ).attr 'x', (d) ->
                   getRadius(d.y)
-              return
+
+            arcText.attr('opacity', (e) ->
+              if textFitsInArc(e) then 1 else 0
 
       # --- end of click handling --- #
 
