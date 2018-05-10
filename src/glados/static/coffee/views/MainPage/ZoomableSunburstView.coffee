@@ -79,38 +79,40 @@ glados.useNameSpace 'glados.views.MainPage',
         .style 'fill', (d) ->
           color (if d.children then d else d.parent).name
 
-      sunburstGroup.each ->
-        w = 9
-        path = d3.select(@)
-        pathSize = Math.min(path.node().getBBox().height, path.node().getBBox().width)
+      sunburstGroup.each (d) ->
 
-        text = path.append('text')
-          .classed('sunburst-text', true)
-          .attr('fill', 'black')
-          .attr('font-size', w + 'px')
-          .attr('dx', '5px')
-          .attr('dy', '.4em')
-          .attr('x', (d) -> y (d.y))
-          .text((d) -> d.name)
-          .attr('transform', (d) ->
-            'rotate(' + thisView.computeTextRotation(d, x) + ')'
-          )
+        if d.depth - thisView.FOCUS.depth <= 3
+          w = 9
+          path = d3.select(@)
+          pathSize = Math.min(path.node().getBBox().height, path.node().getBBox().width)
 
-        if pathSize < w
-          text.attr('opacity', 0)
+          text = path.append('text')
+            .classed('sunburst-text', true)
+            .attr('fill', 'black')
+            .attr('font-size', w + 'px')
+            .attr('dx', '5px')
+            .attr('dy', '.4em')
+            .attr('x', (d) -> y (d.y))
+            .text((d) -> d.name)
+            .attr('transform', (d) ->
+              'rotate(' + thisView.computeTextRotation(d, x) + ')'
+            )
 
-        wrap = (d) ->
-          self = d3.select(@)
-          textLength = self.node().getComputedTextLength()
-          text = self.text()
-          arcWidth = y(d.y + d.dy) - y(d.y) - 5
+          if pathSize < w
+            text.attr('opacity', 0)
 
-          while textLength > arcWidth and text.length > 0
-            text = text.slice(0, -1)
-            self.text text
+          wrap = (d) ->
+            self = d3.select(@)
             textLength = self.node().getComputedTextLength()
+            text = self.text()
+            arcWidth = y(d.y + d.dy) - y(d.y) - 5
 
-        text.each(wrap)
+            while textLength > arcWidth and text.length > 0
+              text = text.slice(0, -1)
+              self.text text
+              textLength = self.node().getComputedTextLength()
+
+          text.each(wrap)
 
 #     --- click handling --- #
       click = (d) ->
