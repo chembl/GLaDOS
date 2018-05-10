@@ -116,8 +116,8 @@ class QueryBuilder:
         if chembl_ids:
             delta = 0.3/len(chembl_ids)
             chembl_ids_et = []
-            for c_id_i, i in chembl_ids:
-                chembl_ids_et.append('"'+c_id_i+'"'+'^'+(1.3-i*delta))
+            for i, c_id_i in enumerate(chembl_ids):
+                chembl_ids_et.append('"{0}"^{1}'.format(c_id_i, (1.3-i*delta)))
             if len(chembl_ids_et) > 0:
                 query['bool']['must']['bool'][bool_query].append(
                     {
@@ -247,6 +247,10 @@ class QueryBuilder:
                     best_query_i = es_base_queries[j]
                     best_query_i_total = results[i * len(es_base_queries) + j]['hits']['total']
                     best_query_i_score += results[i * len(es_base_queries) + j]['hits']['max_score']/(10**j)
+                    if es_index_i == 'chembl_target':
+                        best_query_i_score *= 100
+                    if es_index_i == 'chembl_molecule':
+                        best_query_i_score *= 1000
                 j += 1
             if best_query_i is None:
                 best_query_i = es_base_queries[0]
