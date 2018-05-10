@@ -82,14 +82,14 @@ glados.useNameSpace 'glados.views.MainPage',
       sunburstGroup.each (d) ->
 
         if d.depth - thisView.FOCUS.depth <= 3
-          w = 9
+          w = 15
           path = d3.select(@)
           pathSize = Math.min(path.node().getBBox().height, path.node().getBBox().width)
 
           text = path.append('text')
             .classed('sunburst-text', true)
             .attr('fill', 'black')
-            .attr('font-size', w + 'px')
+            .attr('font-size', '9px')
             .attr('dx', '5px')
             .attr('dy', '.4em')
             .attr('x', (d) -> y (d.y))
@@ -119,9 +119,12 @@ glados.useNameSpace 'glados.views.MainPage',
 
         # update focus
         if thisView.FOCUS != d
-#          d3.selectAll('.sunburst-text').transition().attr("opacity", 0)
+          d3.selectAll('.sunburst-text').transition().attr("opacity", 0)
           thisView.FOCUS = d
           thisView.fillBrowseButton(d)
+
+          #create labels if focus changes
+
 
 #       interpolate scales
         arcTween  = (d) ->
@@ -161,11 +164,13 @@ glados.useNameSpace 'glados.views.MainPage',
 
               arcText = d3.select(@parentNode).select('.sunburst-text')
 
-              arcText.text((d) -> d.name)
-                .each(wrap)
+              if d.depth - thisView.FOCUS.depth <= 3
+                arcText.text((d) -> d.name)
+                  .each(wrap)
 
               arcText.transition()
                 .duration(400)
+                .attr('opacity', 1)
                 .attr('transform', ->
                   'rotate(' + thisView.computeTextRotation(e, x) + ')'
                 ).attr 'x', (d) ->
@@ -174,7 +179,6 @@ glados.useNameSpace 'glados.views.MainPage',
               return
 
       paths.on('click',  click)
-
 
     computeTextRotation: (d, x) ->
       (x(d.x + d.dx / 2) - (Math.PI / 2)) / Math.PI * 180
