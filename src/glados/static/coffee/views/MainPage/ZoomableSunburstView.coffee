@@ -103,7 +103,7 @@ glados.useNameSpace 'glados.views.MainPage',
           self = d3.select(@)
           textLength = self.node().getComputedTextLength()
           text = self.text()
-          arcWidth = y(d.y + d.dy) - y(d.y)
+          arcWidth = y(d.y + d.dy) - y(d.y) - 5
 
           while textLength > arcWidth and text.length > 0
             text = text.slice(0, -1)
@@ -117,7 +117,7 @@ glados.useNameSpace 'glados.views.MainPage',
 
         # update focus
         if thisView.FOCUS != d
-          d3.selectAll('.sunburst-text').transition().attr("opacity", 0)
+#          d3.selectAll('.sunburst-text').transition().attr("opacity", 0)
           thisView.FOCUS = d
           thisView.fillBrowseButton(d)
 
@@ -146,11 +146,24 @@ glados.useNameSpace 'glados.views.MainPage',
 
             if e.depth >= thisView.FOCUS.depth and e.x >= d.x and e.x < (d.x + d.dx) and pathSize > w
 
+              wrap = (d) ->
+                self = d3.select(@)
+                textLength = self.node().getComputedTextLength()
+                text = self.text()
+                arcWidth = y(d.y + d.dy) - y(d.y) - 5
+
+                while textLength > arcWidth and text.length > 0
+                  text = text.slice(0, -1)
+                  self.text text
+                  textLength = self.node().getComputedTextLength()
+
               arcText = d3.select(@parentNode).select('.sunburst-text')
+
+              arcText.text((d) -> d.name)
+                .each(wrap)
 
               arcText.transition()
                 .duration(400)
-                .attr('opacity', 1)
                 .attr('transform', ->
                   'rotate(' + thisView.computeTextRotation(e, x) + ')'
                 ).attr 'x', (d) ->
