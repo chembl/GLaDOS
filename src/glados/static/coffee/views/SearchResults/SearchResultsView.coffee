@@ -41,7 +41,7 @@ glados.useNameSpace 'glados.views.SearchResults',
           @browsersDict[resourceName] = resultsBrowserI
           @$searchResultsListsContainersDict[resourceName] = $('#'+resultsListViewID + '-container')
 
-      @renderTabs()
+#      @renderTabs()
       @showSelectedResourceOnly()
 
       @model.on('updated_search_and_scores', @sortResultsListsViews, @)
@@ -51,15 +51,14 @@ glados.useNameSpace 'glados.views.SearchResults',
     # sort Elements
     # ------------------------------------------------------------------------------------------------------------------
     sortResultsListsViews: ->
+      console.warn('SORITNG!')
       # If an entity is selected the ordering is skipped
       if not @selected_es_entity
         sortedResourceNamesByScore = @model.get('sortedResourceNamesByScore')
         for resource_name in sortedResourceNamesByScore
-          console.warn 'resource name:', resource_name
           idToMove =  @getBCKListContainerBaseID(resource_name) + '-container'
           $div_key_i = @$listsContainer.find('.' + idToMove)
           @$listsContainer.append($div_key_i)
-          console.warn 'APENDING', idToMove, $div_key_i.length
 
     # ------------------------------------------------------------------------------------------------------------------
     # Tabs Handling
@@ -67,6 +66,7 @@ glados.useNameSpace 'glados.views.SearchResults',
     destroyAllTooltips: -> glados.Utils.Tooltips.destroyAllTooltips($(@el))
 
     renderTabs: ->
+      console.warn('RENDERING TABS!')
       @destroyAllTooltips()
       # Always generate chips for the results summary
       chipStruct = []
