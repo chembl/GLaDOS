@@ -130,7 +130,6 @@ glados.useNameSpace 'glados.views.MainPage',
 
         # if focus changes
         if thisView.FOCUS != d
-
           d3.selectAll('.sunburst-text').transition().attr("opacity", 0)
           thisView.FOCUS = d
           thisView.fillBrowseButton(d)
@@ -140,9 +139,8 @@ glados.useNameSpace 'glados.views.MainPage',
 
             f = thisView.FOCUS
             text = d3.select(@).select('.sunburst-text')
-            shouldCreateLabel = d.depth - f.depth <= thisView.LABEL_LEVELS_TO_SHOW and d.x >= f.x and d.x < (f.x + f.dx) and text.empty()
 
-            if shouldCreateLabel
+            if text.empty()
               appendLabelText(d, @)
 
 #       function for interpolating scales
@@ -165,25 +163,24 @@ glados.useNameSpace 'glados.views.MainPage',
           .attrTween('d', arcTween(d))
           .each 'end', (e, i) ->
             f = thisView.FOCUS
-            path = d3.select(@)
+            shouldDoTransition = e.depth >= f.depth and e.depth - f.depth <= 3 and  e.x >= d.x and e.x < (d.x + d.dx)
 
-            if e.depth >= f.depth and e.depth - f.depth <= 3 and  e.x >= d.x and e.x < (d.x + d.dx)
+            if shouldDoTransition
 
               arcText = d3.select(@parentNode).select('.sunburst-text')
 
-              if not arcText.empty()
-                arcText.text((d) -> d.name)
+              arcText.text((d) -> d.name)
                   .each(wrapText)
 
-              if textFitsInArc(e)
-                arcText.transition()
-                  .duration(400)
-                  .attr('opacity', 1)
-                  .attr('transform', ->
-                    'rotate(' + thisView.computeTextRotation(e, getAngle) + ')'
-                  ).attr 'x', (d) ->
-                    getRadius(d.y)
-                return
+              arcText.transition()
+                .duration(400)
+                .attr('opacity', 1)
+                .attr('transform', ->
+                  'rotate(' + thisView.computeTextRotation(e, getAngle) + ')'
+                ).attr 'x', (d) ->
+                  getRadius(d.y)
+              return
+
 
       # --- end of click handling --- #
 
