@@ -31,7 +31,7 @@ glados.useNameSpace 'glados.views.MainPage',
         .range([0, 2 * Math.PI])
 
       y = d3.scale.pow()
-        .exponent(0.9)
+        .exponent(0.5)
         .range([0, @RADIUS])
 
       color = d3.scale.ordinal()
@@ -93,11 +93,24 @@ glados.useNameSpace 'glados.views.MainPage',
           .attr('x', (d) -> y (d.y))
           .text((d) -> d.name)
           .attr('transform', (d) ->
-            'rotate(' + thisView.computeTextRotation(d, x) + ')')
+            'rotate(' + thisView.computeTextRotation(d, x) + ')'
+          )
 
         if pathSize < w
           text.attr('opacity', 0)
 
+        wrap = (d) ->
+          self = d3.select(@)
+          textLength = self.node().getComputedTextLength()
+          text = self.text()
+          arcWidth = y(d.y + d.dy) - y(d.y)
+
+          while textLength > arcWidth and text.length > 0
+            text = text.slice(0, -1)
+            self.text text
+            textLength = self.node().getComputedTextLength()
+
+        text.each(wrap)
 
 #     --- click handling --- #
       click = (d) ->
@@ -146,6 +159,7 @@ glados.useNameSpace 'glados.views.MainPage',
               return
 
       paths.on('click',  click)
+
 
     computeTextRotation: (d, x) ->
       (x(d.x + d.dx / 2) - (Math.PI / 2)) / Math.PI * 180
