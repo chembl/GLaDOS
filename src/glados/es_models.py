@@ -5,8 +5,6 @@ from typing import List
 
 
 connection_tuple = None
-if settings.ELASTICSEARCH_PASSWORD is None:
-  connection_tuple = (settings.ELASTICSEARCH_USERNAME, settings.ELASTICSEARCH_PASSWORD)
 
 keyword_args = {
   "hosts": [settings.ELASTICSEARCH_HOST],
@@ -14,8 +12,8 @@ keyword_args = {
   "retry_on_timeout": True
 }
 
-if connection_tuple:
-  keyword_args["http_auth"] = connection_tuple
+if settings.ELASTICSEARCH_PASSWORD is not None:
+  keyword_args["http_auth"] = (settings.ELASTICSEARCH_USERNAME, settings.ELASTICSEARCH_PASSWORD)
 
 connections.create_connection(**keyword_args)
 
