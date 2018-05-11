@@ -59,12 +59,10 @@ glados.useNameSpace 'glados.views.MainPage',
         text.each(wrapText)
 
       textFitsInArc = (d) ->
-        arcLength = getRadius(d.y) * getAngle(d.dx)
+        arcLength = Math.abs(getRadius(d.y) * getAngle(d.dx))
         return arcLength > thisView.MAX_LINE_HEIGHT
 
       # ------------ end of helper functions --------------- #
-
-      # ------------ scales --------------- #
 
       getAngle = d3.scale.linear()
         .range([0, 2 * Math.PI])
@@ -123,32 +121,9 @@ glados.useNameSpace 'glados.views.MainPage',
 
         if shouldCreateLabel
           appendLabelText(d, @)
-#     qtips
-      sunburstGroup.each (d) ->
-        name = d.name
-        count = d.size
-
-        text = '<b>' + name + '</b>' +
-          '<br>' + '<b>' + "Count:  " + '</b>' + count
-
-        if name != 'root'
-
-          $(@).qtip
-            content:
-              text: text
-            style:
-              classes:'qtip-light'
-            position:
-              my: 'bottom left'
-              at: 'top right'
-              target: 'mouse'
-              adjust:
-                y: -5
-                x: 5
 
       # --- click handling --- #
       click = (d) ->
-        console.log '----'
 
         # if focus changes
         if thisView.FOCUS != d
@@ -203,11 +178,6 @@ glados.useNameSpace 'glados.views.MainPage',
                   'rotate(' + thisView.computeTextRotation(e, getAngle) + ')'
                 ).attr 'x', (d) ->
                   getRadius(d.y)
-
-            arcText.attr('opacity', (e) ->
-              if textFitsInArc(e) then 1 else 0
-
-      # --- end of click handling --- #
 
       paths.on('click',  click)
 
