@@ -73,7 +73,8 @@ CompoundFeaturesView = CardView.extend
       @molFeatures[feature]['Natural product'][position]
     else if feature == 'molecule_type' and @model.get('polymer_flag') == true
       @molFeatures[feature]['Small molecule polymer'][position]
-
+    else if feature == 'molecule_type' and parseInt(@model.get('inorganic_flag')) == 1
+      @molFeatures[feature]['Inorganic'][position]
     else
       return @molFeatures[feature][@model.get(feature)][position]
 
@@ -91,6 +92,7 @@ CompoundFeaturesView = CardView.extend
       'Cell': ['active', 'c', 'Drug Type: Cell Based', 'top', 'icon-chembl-2']
       'Unknown': ['active', '?', 'Drug Type: Unknown', 'top', 'icon-generic']
       'Unclassified': ['active', '?', 'Drug Type: Unclassified', 'top', 'icon-generic']
+      'Inorganic': ['active', 'v', 'Drug Type: Inorganic','top', 'icon-generic']
     'first_in_class':
       '-1': ['', 'r', 'First in Class: Undefined', 'top', 'icon-chembl']
       '0': ['', 'r', 'First in Class: No', 'top', 'icon-chembl']
