@@ -198,6 +198,14 @@ $full-header-height-large: 180px;
       font-size: 0.9em;
     }
 
+    .btn-container {
+
+      .btn-separator {
+        height: 20px;
+      }
+
+    }
+
     .social-media {
       margin-top: 15px;
 
@@ -667,6 +675,10 @@ $full-header-height-large: 180px;
         box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
 
       }
+    }
+
+    .ws-button {
+      margin-left: 10px;
     }
 
     .papers {
