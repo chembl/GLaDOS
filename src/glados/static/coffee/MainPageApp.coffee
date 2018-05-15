@@ -25,7 +25,7 @@ class MainPageApp
     $carouselContainer.slick {
       asNavFor: $linksCarousel
       arrows: true
-      autoplay: true
+      autoplay: false
       autoplaySpeed: 4000
       dots: true
     }
@@ -105,7 +105,7 @@ class MainPageApp
       x_axis_max_columns: 40
       x_axis_initial_num_columns: 40
       x_axis_prop_name: 'documentsPerYear'
-      title: 'Documents by Year'
+      title: 'Drug Usan Year By Development Phase'
       title_link_url: Document.getDocumentsListURL()
       max_z_categories: 7
       title_link_url: Document.getDocumentsListURL()
@@ -187,7 +187,7 @@ class MainPageApp
       aggs:
         documentsPerYear:
           type: glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
-          field: 'year'
+          field: 'usan_year'
           default_interval_size: defaultInterval
           min_interval_size: 1
           max_interval_size: 10
@@ -195,7 +195,7 @@ class MainPageApp
           aggs:
             split_series_agg:
               type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
-              field: 'journal'
+              field: 'development_phase'
               size: 10
               bucket_links:
                 bucket_filter_template: 'year:{{year}} AND journal:("{{bucket_key}}"' +
@@ -205,10 +205,10 @@ class MainPageApp
                   bucket_key: 'BUCKET.key'
                   extra_buckets: 'EXTRA_BUCKETS.key'
 
-                link_generator: Document.getDocumentsListURL
+                link_generator: Drug.getDrugsListURL
 
     allDocumentsByYear = new glados.models.Aggregations.Aggregation
-      index_url: glados.models.Aggregations.Aggregation.DOCUMENT_INDEX_URL
+      index_url: glados.models.Aggregations.Aggregation.DRUG_INDEX_URL
       query_config: queryConfig
       aggs_config: aggsConfig
 
