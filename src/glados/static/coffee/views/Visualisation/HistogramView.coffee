@@ -521,7 +521,7 @@ glados.useNameSpace 'glados.views.Visualisation',
           keyName = thisView.currentZAxisProperty.label
 
           text = '<b>' + keyName + '</b>' + ":  " + key + \
-            '<br>' + '<b>' + "Documents:  " + '</b>' + docCount + \
+            '<br>' + '<b>' + "Count:  " + '</b>' + docCount + \
             '<br>' + '<b>' + barName + ":  "  + '</b>' +  barText
           $(@).qtip
             content:

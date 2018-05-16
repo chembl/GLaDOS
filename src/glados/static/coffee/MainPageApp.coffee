@@ -37,7 +37,7 @@ class MainPageApp
       dots: false
     }
 
-    MainPageApp.initPapersPerYear()
+    MainPageApp.initDrugsPerUsanYear()
     MainPageApp.initMaxPhaseForDisease()
     MainPageApp.initTargetsVisualisation()
     MainPageApp.initBrowseEntities()
@@ -79,13 +79,14 @@ class MainPageApp
 
     maxPhaseForDisease.fetch()
 
-  @initPapersPerYear = ->
-    allDocumentsByYear = MainPageApp.getDocumentsPerYearAgg()
-    yearProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('DocumentAggregation',
-      'YEAR')
-    journalNameProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('DocumentAggregation',
-      'JOURNAL_NAME')
-    barsColourScale = journalNameProp.colourScale
+  @initDrugsPerUsanYear = ->
+    allDrugsByYear = MainPageApp.getYearByMaxPhaseAgg()
+
+    usanYearProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound',
+      'USAN_YEAR')
+    maxPhaseProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'MAX_PHASE', true)
+
+    barsColourScale = maxPhaseProp.colourScale
 
     histogramConfig =
       bars_colour_scale: barsColourScale
@@ -96,19 +97,17 @@ class MainPageApp
       big_size: true
       paint_axes_selectors: true
       properties:
-        year: yearProp
-        journal: journalNameProp
+        year: usanYearProp
+        max_phase: maxPhaseProp
       initial_property_x: 'year'
-      initial_property_z: 'journal'
+      initial_property_z: 'max_phase'
       x_axis_options: ['count']
       x_axis_min_columns: 1
       x_axis_max_columns: 40
       x_axis_initial_num_columns: 40
-      x_axis_prop_name: 'documentsPerYear'
-      title: 'Drug Usan Year By Development Phase'
-      title_link_url: Document.getDocumentsListURL()
-      max_z_categories: 7
-      title_link_url: Document.getDocumentsListURL()
+      x_axis_prop_name: 'yearByMaxPhase'
+      title: 'Drugs by Usan Year'
+      title_link_url: Drug.getDrugsListURL()
 
     config =
       histogram_config: histogramConfig
@@ -117,11 +116,11 @@ class MainPageApp
 
     new glados.views.ReportCards.HistogramInCardView
       el: $('#PapersPerYearHistogram')
-      model: allDocumentsByYear
+      model: allDrugsByYear
       config: config
       report_card_app: @
 
-    allDocumentsByYear.fetch()
+    allDrugsByYear.fetch()
 
   @initTargetsVisualisation = ->
     targetHierarchy = TargetBrowserApp.initTargetHierarchyTree()
@@ -177,7 +176,7 @@ class MainPageApp
 # Aggregations
 # ----------------------------------------------------------------------------------------------------------------------
 
-  @getDocumentsPerYearAgg = (defaultInterval = 1) ->
+  @getYearByMaxPhaseAgg = (defaultInterval = 1) ->
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
       query_string_template: '_metadata.drug.is_drug:true'
@@ -185,7 +184,7 @@ class MainPageApp
 
     aggsConfig =
       aggs:
-        documentsPerYear:
+        yearByMaxPhase:
           type: glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
           field: 'usan_year'
           default_interval_size: defaultInterval
@@ -193,7 +192,7 @@ class MainPageApp
           max_interval_size: 10
           bucket_key_parse_function: (key) -> key.replace(/\.0/i, '')
           aggs:
-            split_series_agg:
+            max_phase:
               type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
               field: 'max_phase'
               size: 10
@@ -205,12 +204,12 @@ class MainPageApp
 
                 link_generator: Compound.getCompoundsListURL
 
-    allDocumentsByYear = new glados.models.Aggregations.Aggregation
+    yearByMaxPhase = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
       query_config: queryConfig
       aggs_config: aggsConfig
 
-    return allDocumentsByYear
+    return yearByMaxPhase
 
   @getMaxPhaseForDiseaseAgg = () ->
     queryConfig =

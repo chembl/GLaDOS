@@ -3,6 +3,9 @@ glados.useNameSpace 'glados.models.visualisation',
     Compound:
       esIndex:'chembl_molecule'
       Properties:
+        USAN_YEAR:
+          propName: 'usan_year'
+          label: 'Year'
         RELATED_ASSAYS:
           propName: 'type'
           label: 'Types'
@@ -99,11 +102,11 @@ glados.useNameSpace 'glados.models.visualisation',
           label: 'Max phase'
           domain: [ 0, 1, 2, 3, 4]
           coloursRange: [
-            glados.Settings.VIS_COLORS.TEAL5,
-            glados.Settings.VIS_COLORS.TEAL4,
-            glados.Settings.VIS_COLORS.TEAL3,
-            glados.Settings.VIS_COLORS.TEAL2,
             glados.Settings.VIS_COLORS.TEAL1,
+            glados.Settings.VIS_COLORS.TEAL2,
+            glados.Settings.VIS_COLORS.TEAL3,
+            glados.Settings.VIS_COLORS.TEAL4,
+            glados.Settings.VIS_COLORS.TEAL5,
           ]
           colourScaleType: glados.Visualisation.CATEGORICAL
         INDICATION_CLASS:

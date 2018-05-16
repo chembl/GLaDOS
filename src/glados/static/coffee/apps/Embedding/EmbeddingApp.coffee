@@ -248,7 +248,7 @@ glados.useNameSpace 'glados.apps.Embedding',
 
     @requiredHTMLTemplatesURLSVisualisations:
       documents_by_year_histogram:
-        initFunction: MainPageApp.initPapersPerYear
+        initFunction: MainPageApp.initDrugsPerUsanYear
         in_script:
           script_id: 'Handlebars-MainPageLayout'
           elem_id: 'PapersPerYearHistogram'
