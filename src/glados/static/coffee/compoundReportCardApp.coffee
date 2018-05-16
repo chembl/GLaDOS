@@ -868,7 +868,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
           max_interval_size: 10
           bucket_key_parse_function: (key) -> key.replace(/\.0/i, '')
           aggs:
-            split_series_agg:
+            journal:
               type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
               field: 'journal'
               size: 10

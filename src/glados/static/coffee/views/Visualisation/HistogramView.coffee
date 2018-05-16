@@ -271,14 +271,14 @@ glados.useNameSpace 'glados.views.Visualisation',
         .scale(thisView.getXForBucket)
 
       elemWidth = $(@el).width()
-      xAxisTickInterval = 3
+      xAxisTickInterval = 4
 
       if elemWidth < 500
-        xAxisTickInterval = 4
-      if elemWidth < 400
         xAxisTickInterval = 5
-      if elemWidth < 300
+      if elemWidth < 400
         xAxisTickInterval = 6
+      if elemWidth < 300
+        xAxisTickInterval = 7
 
       if @config.stacked_histogram
         formatAsYear = d3.format("1999")
@@ -462,10 +462,11 @@ glados.useNameSpace 'glados.views.Visualisation',
           totalCount += bucket.doc_count
 
 #       get number of max categories for each bar group
-        maxCategories = 0
-        for bucket in subBuckets
-          if bucket.doc_count > (totalCount * 0.02)
-            maxCategories += 1
+        if thisView.config.max_categories?
+          maxCategories = 0
+          for bucket in subBuckets
+            if bucket.doc_count > (totalCount * 0.02)
+              maxCategories += 1
 
 #        there should be at least 2 categories for the merge to work
         if maxCategories <= 1
@@ -521,7 +522,7 @@ glados.useNameSpace 'glados.views.Visualisation',
           keyName = thisView.currentZAxisProperty.label
 
           text = '<b>' + keyName + '</b>' + ":  " + key + \
-            '<br>' + '<b>' + "Documents:  " + '</b>' + docCount + \
+            '<br>' + '<b>' + "Count:  " + '</b>' + docCount + \
             '<br>' + '<b>' + barName + ":  "  + '</b>' +  barText
           $(@).qtip
             content:
@@ -539,5 +540,8 @@ glados.useNameSpace 'glados.views.Visualisation',
       noOtherScaleDomains = []
       for key, value of noOthersBucket
           noOtherScaleDomains.push(key)
-      noOtherScaleDomains.push('Other')
+
+#     add 'other' to legend domain if there is a max number of categories
+      if thisView.config.max_categories?
+        noOtherScaleDomains.push('Other')
       @currentZAxisProperty.domain = noOtherScaleDomains

@@ -472,6 +472,9 @@ glados.models.Aggregations.Aggregation.ASSAY_INDEX_URL = glados.models.paginated
 glados.models.Aggregations.Aggregation.DOCUMENT_INDEX_URL = glados.models.paginatedCollections.Settings.ES_BASE_URL\
 + '/chembl_document/_search'
 
+glados.models.Aggregations.Aggregation.DRUG_INDEX_URL = glados.models.paginatedCollections.Settings.ES_BASE_URL\
++ '/chembl_drug/_search'
+
 glados.models.Aggregations.Aggregation.States =
   INITIAL_STATE: 'INITIAL_STATE'
   LOADING_MIN_MAX: 'LOADING_MIN_MAX'
