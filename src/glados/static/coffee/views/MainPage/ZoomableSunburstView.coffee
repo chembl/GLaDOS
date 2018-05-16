@@ -59,7 +59,14 @@ glados.useNameSpace 'glados.views.MainPage',
         text.each(wrapText)
 
       textFitsInArc = (d) ->
-        arcLength = Math.abs(getRadius(d.y) * getAngle(d.dx))
+        
+        startAngle =  arc.startAngle() (d)
+        endAngle = arc.endAngle() (d)
+        angle = endAngle - startAngle
+
+        radius = arc.innerRadius() (d)
+        arcLength = angle * radius
+
         return arcLength > thisView.MAX_LINE_HEIGHT
 
       # ------------ end of helper functions --------------- #
