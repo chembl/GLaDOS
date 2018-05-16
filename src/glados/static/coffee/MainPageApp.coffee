@@ -107,7 +107,7 @@ class MainPageApp
       x_axis_max_columns: 40
       x_axis_initial_num_columns: 40
       x_axis_prop_name: 'yearByMaxPhase'
-      title: 'Drugs Usan Year By Max Phase'
+      title: 'Drugs by Usan Year'
       title_link_url: Drug.getDrugsListURL('_metadata.compound_records.src_id:13 AND _exists_:usan_year')
 
     config =
