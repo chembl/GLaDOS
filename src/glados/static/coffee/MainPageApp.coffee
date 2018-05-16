@@ -107,7 +107,7 @@ class MainPageApp
       x_axis_initial_num_columns: 40
       x_axis_prop_name: 'yearByMaxPhase'
       title: 'Drugs Usan Year By Max Phase'
-      title_link_url: Drug.getDrugsListURL()
+      title_link_url: Drug.getDrugsListURL('_metadata.compound_records.src_id:13 AND _exists_:usan_year')
 
     config =
       histogram_config: histogramConfig
@@ -179,7 +179,7 @@ class MainPageApp
   @getYearByMaxPhaseAgg = (defaultInterval = 1) ->
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
-      query_string_template: '_metadata.drug.is_drug:true'
+      query_string_template: '_metadata.drug.is_drug:true AND _metadata.compound_records.src_id:13 AND _exists_:usan_year'
       template_data: {}
 
     aggsConfig =
