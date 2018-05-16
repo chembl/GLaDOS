@@ -150,7 +150,7 @@ glados.useNameSpace 'glados.models.visualisation',
           label: 'Year'
           type: Number
         JOURNAL_NAME:
-          propName: 'split_series_agg'
+          propName: 'journal'
           label: 'Journal'
           type: Number
           colourScaleType: glados.Visualisation.CATEGORICAL
