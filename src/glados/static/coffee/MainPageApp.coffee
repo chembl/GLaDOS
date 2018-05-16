@@ -91,6 +91,7 @@ class MainPageApp
     histogramConfig =
       bars_colour_scale: barsColourScale
       stacked_histogram: true
+      sort_by_key: true
       rotate_x_axis_if_needed: false
       hide_x_axis_title: true
       legend_vertical: true
