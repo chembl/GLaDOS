@@ -540,5 +540,8 @@ glados.useNameSpace 'glados.views.Visualisation',
       noOtherScaleDomains = []
       for key, value of noOthersBucket
           noOtherScaleDomains.push(key)
-      noOtherScaleDomains.push('Other')
+          
+#     add 'other' to legend domain if there is a max number of categories
+      if thisView.config.max_categories?
+        noOtherScaleDomains.push('Other')
       @currentZAxisProperty.domain = noOtherScaleDomains
