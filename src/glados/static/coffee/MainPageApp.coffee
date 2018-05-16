@@ -202,7 +202,7 @@ class MainPageApp
                   year: 'BUCKET.parsed_parent_key'
                   bucket_key: 'BUCKET.key'
 
-                link_generator: Compound.getCompoundsListURL
+                link_generator: Drug.getDrugsListURL
 
     yearByMaxPhase = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
