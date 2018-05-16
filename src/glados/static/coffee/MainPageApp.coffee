@@ -180,7 +180,7 @@ class MainPageApp
   @getDocumentsPerYearAgg = (defaultInterval = 1) ->
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
-      query_string_template: '*'
+      query_string_template: '_metadata.drug.is_drug:true'
       template_data: {}
 
     aggsConfig =
@@ -195,7 +195,7 @@ class MainPageApp
           aggs:
             split_series_agg:
               type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
-              field: 'development_phase'
+              field: 'max_phase'
               size: 10
               bucket_links:
                 bucket_filter_template: 'year:{{year}} AND journal:("{{bucket_key}}"' +
@@ -203,12 +203,11 @@ class MainPageApp
                 template_data:
                   year: 'BUCKET.parsed_parent_key'
                   bucket_key: 'BUCKET.key'
-                  extra_buckets: 'EXTRA_BUCKETS.key'
 
-                link_generator: Drug.getDrugsListURL
+                link_generator: Compound.getCompoundsListURL
 
     allDocumentsByYear = new glados.models.Aggregations.Aggregation
-      index_url: glados.models.Aggregations.Aggregation.DRUG_INDEX_URL
+      index_url: glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
       query_config: queryConfig
       aggs_config: aggsConfig
 
