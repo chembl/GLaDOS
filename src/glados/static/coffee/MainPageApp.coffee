@@ -198,7 +198,7 @@ class MainPageApp
               field: 'max_phase'
               size: 10
               bucket_links:
-                bucket_filter_template: 'usan_year:{{year}} AND max_phase:{{bucket_key}}'
+                bucket_filter_template: '_metadata.compound_records.src_id:13 AND usan_year:{{year}} AND max_phase:{{bucket_key}}'
                 template_data:
                   year: 'BUCKET.parsed_parent_key'
                   bucket_key: 'BUCKET.key'
