@@ -198,8 +198,7 @@ class MainPageApp
               field: 'max_phase'
               size: 10
               bucket_links:
-                bucket_filter_template: 'year:{{year}} AND journal:("{{bucket_key}}"' +
-                  '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
+                bucket_filter_template: 'usan_year:{{year}} AND max_phase:{{bucket_key}}'
                 template_data:
                   year: 'BUCKET.parsed_parent_key'
                   bucket_key: 'BUCKET.key'
