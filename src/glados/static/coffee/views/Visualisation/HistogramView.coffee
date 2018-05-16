@@ -462,10 +462,11 @@ glados.useNameSpace 'glados.views.Visualisation',
           totalCount += bucket.doc_count
 
 #       get number of max categories for each bar group
-        maxCategories = 0
-        for bucket in subBuckets
-          if bucket.doc_count > (totalCount * 0.02)
-            maxCategories += 1
+        if thisView.config.max_categories?
+          maxCategories = 0
+          for bucket in subBuckets
+            if bucket.doc_count > (totalCount * 0.02)
+              maxCategories += 1
 
 #        there should be at least 2 categories for the merge to work
         if maxCategories <= 1
