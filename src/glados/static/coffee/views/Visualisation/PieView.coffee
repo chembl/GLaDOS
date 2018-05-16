@@ -170,12 +170,7 @@ PieView = Backbone.View.extend(ResponsiviseViewExt).extend
       .attr('text-anchor', 'middle')
       .attr('alignment-baseline', 'middle')
       .text((d, i) -> i)
-      .attr('fill', (d, i) ->
-        if i == 1 or i == 0
-          return '#025C5E'
-        else
-          return 'white'
-      )
+      .attr('fill', 'white')
       .attr('transform', (d) ->
         angle = Math.PI/2 + (d.endAngle + d.startAngle)/2
         x = -Math.cos(angle) * RADIUS*3
