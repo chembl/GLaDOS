@@ -485,7 +485,11 @@ glados.useNameSpace 'glados.views.Visualisation',
           if bucket.key != glados.Visualisation.Activity.OTHERS_LABEL
             bucket.pos = subBucketsOrder[bucket.key].pos
             bucket.parent_key = d.key.split(".")[0]
-        subBuckets = _.sortBy(subBuckets, (item) -> item.pos)
+
+            if thisView.config.sort_by_key
+              subBuckets = _.sortBy(subBuckets, (item) -> item.key)
+            else
+              subBuckets = _.sortBy(subBuckets, (item) -> item.pos)
 
         previousHeight = thisView.BARS_CONTAINER_HEIGHT
         for bucket in subBuckets

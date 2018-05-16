@@ -91,6 +91,7 @@ class MainPageApp
     histogramConfig =
       bars_colour_scale: barsColourScale
       stacked_histogram: true
+      sort_by_key: true
       rotate_x_axis_if_needed: false
       hide_x_axis_title: true
       legend_vertical: true
@@ -106,8 +107,8 @@ class MainPageApp
       x_axis_max_columns: 40
       x_axis_initial_num_columns: 40
       x_axis_prop_name: 'yearByMaxPhase'
-      title: 'Drugs by Usan Year'
-      title_link_url: Drug.getDrugsListURL()
+      title: 'Drugs Usan Year By Max Phase'
+      title_link_url: Drug.getDrugsListURL('_metadata.compound_records.src_id:13 AND _exists_:usan_year')
 
     config =
       histogram_config: histogramConfig
@@ -179,7 +180,7 @@ class MainPageApp
   @getYearByMaxPhaseAgg = (defaultInterval = 1) ->
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
-      query_string_template: '_metadata.drug.is_drug:true'
+      query_string_template: '_metadata.drug.is_drug:true AND _metadata.compound_records.src_id:13 AND _exists_:usan_year'
       template_data: {}
 
     aggsConfig =
@@ -202,7 +203,7 @@ class MainPageApp
                   year: 'BUCKET.parsed_parent_key'
                   bucket_key: 'BUCKET.key'
 
-                link_generator: Compound.getCompoundsListURL
+                link_generator: Drug.getDrugsListURL
 
     yearByMaxPhase = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
