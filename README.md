@@ -47,4 +47,3 @@ Here you can find some informal diagrams that help to understand how some compon
 
 
 
-
