@@ -59,7 +59,7 @@ glados.useNameSpace 'glados.views.MainPage',
         text.each(wrapText)
 
       textFitsInArc = (d) ->
-        
+
         startAngle =  arc.startAngle() (d)
         endAngle = arc.endAngle() (d)
         angle = endAngle - startAngle
@@ -129,7 +129,57 @@ glados.useNameSpace 'glados.views.MainPage',
         if shouldCreateLabel
           appendLabelText(d, @)
 
+##     qtips
+#      sunburstGroup.each (d) ->
+#        name = d.name
+#        count = d.size
+#
+#        text = '<b>' + name + '</b>' +
+#          '<br>' + '<b>' + "Count:  " + '</b>' + count
+#
+#        if name != 'root'
+#
+#          $(@).qtip
+#            content:
+#              text: text
+#            style:
+#              classes:'qtip-light'
+#            position:
+#              my: 'bottom left'
+#              at: 'top right'
+#              target: 'mouse'
+#              adjust:
+#                y: -5
+#                x: 5
+
+
       # --- click handling --- #
+      renderQTip = (d) ->
+
+        name = d.name
+        count = d.size
+
+        text = '<b>' + name + '</b>' +
+          '<br>' + '<b>' + "Count:  " + '</b>' + count
+
+        if name != 'root'
+
+          console.log 'hover! ', name
+          console.log 'this: ',  $(@)
+
+          $(@).qtip
+            content:
+              text: text
+            style:
+              classes:'qtip-light'
+            position:
+              my: 'bottom left'
+              at: 'top right'
+              target: 'mouse'
+              adjust:
+                y: -5
+                x: 5
+
       click = (d) ->
 
         # if focus changes
@@ -187,6 +237,7 @@ glados.useNameSpace 'glados.views.MainPage',
                   getRadius(d.y)
 
       paths.on('click',  click)
+      paths.on('mouseover', renderQTip)
 
     computeTextRotation: (d, getAngle) ->
       (getAngle(d.x + d.dx / 2) - (Math.PI / 2)) / Math.PI * 180
