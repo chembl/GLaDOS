@@ -35,26 +35,66 @@ glados.useNameSpace 'glados.views.MainPage',
         self = d3.select(@)
         textLength = self.node().getComputedTextLength()
         text = self.text()
-        arcWidth = getRadius(d.y + d.dy) - getRadius(d.y) - 2
+        textLimit = self.attr('data-limit-for-text')
 
-        wrappedText = glados.Utils.Text.getTextForEllipsis(text, textLength, arcWidth)
+        wrappedText = glados.Utils.Text.getTextForEllipsis(text, textLength, textLimit)
         self.text wrappedText
 
       appendLabelText = (d, parent) ->
-        path = d3.select(parent)
+        console.log 'DEBUG'
+        group = d3.select(parent)
+        path = d3.select(parent).select('.text-path')
+        pathID = path.attr('id')
 
-        text = path.append('text')
-          .classed('sunburst-text', true)
-          .attr('dx', '5px')
-          .attr('dy', '.4em')
-          .attr('x', (d) -> getRadius(d.y))
-          .text((d) -> d.name)
-          .attr('transform', (d) ->
-            'rotate(' + thisView.computeTextRotation(d, getAngle) + ')'
-          )
 
-        if not textFitsInArc(d)
-          text.attr('opacity', 0)
+        innerRadius = arc.innerRadius() (d)
+        outerRadius = arc.outerRadius() (d)
+        arcRadius = outerRadius - innerRadius
+
+        startAngle =  textArc.startAngle() (d)
+        endAngle = textArc.endAngle() (d)
+        textArcAngle = endAngle - startAngle
+        textArcRadius = textArc.innerRadius() (d)
+
+        arcLength = textArcAngle * textArcRadius
+
+#        console.log d.name
+#        console.log 'arcRadius: ', arcRadius
+#        console.log 'arcLength: ', arcLength
+
+        paintAlongArc = arcLength > arcRadius
+        limitForText =  if paintAlongArc then arcLength else arcRadius
+
+        if limitForText < 10
+          return
+
+        if paintAlongArc
+
+          text = group.append('text')
+            .classed('sunburst-text', true)
+            .append('textPath')
+            .attr('startOffset', '25%')
+            .style("text-anchor","middle")
+            .attr("xlink:href", "##{pathID}")
+            .attr("href", "##{pathID}")
+            .text((d) -> d.name)
+            .attr('data-limit-for-text', limitForText)
+
+        else
+
+          text = group.append('text')
+            .classed('sunburst-text', true)
+            .attr('dx', '5px')
+            .attr('dy', '.4em')
+            .attr('x', (d) -> getRadius(d.y))
+            .text((d) -> d.name)
+            .attr('data-limit-for-text', limitForText)
+            .attr('transform', (d) ->
+              'rotate(' + thisView.computeTextRotation(d, getAngle) + ')'
+            )
+
+          if not textFitsInArc(d)
+            text.attr('opacity', 0)
 
         text.each(wrapText)
 
@@ -102,6 +142,12 @@ glados.useNameSpace 'glados.views.MainPage',
         .innerRadius (d) -> return Math.max(0, getRadius(d.y))
         .outerRadius (d) -> return Math.max(0, getRadius(d.y + d.dy))
 
+      textArc = d3.svg.arc()
+        .startAngle (d) ->  return Math.max(0, Math.min(2 * Math.PI, getAngle(d.x)))
+        .endAngle (d) -> return Math.max(0, Math.min(2 * Math.PI, getAngle(d.x + d.dx)))
+        .innerRadius (d) -> return Math.max(0, getRadius(d.y + d.dy/2))
+        .outerRadius (d) -> return Math.max(0, getRadius(d.y + d.dy/2))
+
       nodes = partition.nodes(@ROOT)
 
       mainSunburstContainer = d3.select @$vis_elem[0]
@@ -121,6 +167,13 @@ glados.useNameSpace 'glados.views.MainPage',
         .attr('d', arc)
         .style 'fill', (d) ->
           color (if d.children then d else d.parent).name
+
+      textPaths = sunburstGroup.append('path')
+        .classed('text-path', true)
+        .attr('id', (d, i) -> "text-path-#{i}")
+        .classed('text-path', true)
+        .attr('d', textArc)
+        .style('stroke', 'none')
 
 #     append labels
       sunburstGroup.each (d) ->
@@ -165,8 +218,6 @@ glados.useNameSpace 'glados.views.MainPage',
           $elem.qtip(qtipConfig)
           $elem.attr('data-qtip-configured', 'yes')
           thisView.numTooltips++
-          console.log 'numTooltips: ', thisView.numTooltips
-
           $elem.trigger('mouseover')
 
         return
