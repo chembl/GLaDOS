@@ -131,8 +131,13 @@ glados.useNameSpace 'glados.views.MainPage',
 
 
 #     --- hover handling --- #
+      @numTooltips = 0
       renderQTip = ($elem, d, i) ->
         qtipConfigured = $elem.attr('data-qtip-configured') == 'yes'
+
+        if thisView.numTooltips > 10
+          glados.Utils.Tooltips.destroyAllTooltips(thisView.$vis_elem)
+          thisView.numTooltips = 0
 
         if not qtipConfigured
 
@@ -159,6 +164,9 @@ glados.useNameSpace 'glados.views.MainPage',
 
           $elem.qtip(qtipConfig)
           $elem.attr('data-qtip-configured', 'yes')
+          thisView.numTooltips++
+          console.log 'numTooltips: ', thisView.numTooltips
+
           $elem.trigger('mouseover')
 
         return
