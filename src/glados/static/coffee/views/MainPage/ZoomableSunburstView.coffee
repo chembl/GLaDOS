@@ -129,57 +129,59 @@ glados.useNameSpace 'glados.views.MainPage',
         if shouldCreateLabel
           appendLabelText(d, @)
 
-##     qtips
+#     qtips
 #      sunburstGroup.each (d) ->
+#
 #        name = d.name
 #        count = d.size
-#
 #        text = '<b>' + name + '</b>' +
 #          '<br>' + '<b>' + "Count:  " + '</b>' + count
 #
-#        if name != 'root'
+#        qtipConfig =
+#          content:
+#            text: text
+#          style:
+#            classes:'qtip-light'
+#          position:
+#            my: 'bottom left'
+#            at: 'top right'
+#            target: 'mouse'
+#            adjust:
+#              y: -5
+#              x: 5
 #
-#          $(@).qtip
-#            content:
-#              text: text
-#            style:
-#              classes:'qtip-light'
-#            position:
-#              my: 'bottom left'
-#              at: 'top right'
-#              target: 'mouse'
-#              adjust:
-#                y: -5
-#                x: 5
+#        $(@).qtip qtipConfig
+#
 
+       # --- hover handling --- #
+      renderQTip = ($clickedElem, d) ->
 
-      # --- click handling --- #
-      renderQTip = (d) ->
+        console.log 'hover!', $clickedElem, d.name
 
         name = d.name
         count = d.size
-
         text = '<b>' + name + '</b>' +
           '<br>' + '<b>' + "Count:  " + '</b>' + count
 
-        if name != 'root'
+        qtipConfig =
+          content:
+            text: text
+          style:
+            classes:'qtip-light'
+          position:
+            my: 'bottom left'
+            at: 'top right'
+            target: 'mouse'
+            adjust:
+              y: -5
+              x: 5
 
-          console.log 'hover! ', name
-          console.log 'this: ',  $(@)
+        $clickedElem.qtip(qtipConfig)
+        $clickedElem.qtip('api').show()
 
-          $(@).qtip
-            content:
-              text: text
-            style:
-              classes:'qtip-light'
-            position:
-              my: 'bottom left'
-              at: 'top right'
-              target: 'mouse'
-              adjust:
-                y: -5
-                x: 5
+      sunburstGroup.on 'mouseover', (d) -> renderQTip($(@), d)
 
+      # --- click handling --- #
       click = (d) ->
 
         # if focus changes
@@ -236,8 +238,7 @@ glados.useNameSpace 'glados.views.MainPage',
                 ).attr 'x', (d) ->
                   getRadius(d.y)
 
-      paths.on('click',  click)
-      paths.on('mouseover', renderQTip)
+      sunburstGroup.on('click',  click)
 
     computeTextRotation: (d, getAngle) ->
       (getAngle(d.x + d.dx / 2) - (Math.PI / 2)) / Math.PI * 180
