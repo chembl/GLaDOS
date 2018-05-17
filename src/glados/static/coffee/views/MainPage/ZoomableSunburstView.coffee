@@ -151,35 +151,40 @@ glados.useNameSpace 'glados.views.MainPage',
 #              x: 5
 #
 #        $(@).qtip qtipConfig
-#
+
 
        # --- hover handling --- #
-      renderQTip = ($clickedElem, d) ->
+      renderQTip = ($elem, d, i) ->
+        qtipConfigured = $elem.attr('data-qtip-configured') == 'yes'
 
-        console.log 'hover!', $clickedElem, d.name
+        if not qtipConfigured
 
-        name = d.name
-        count = d.size
-        text = '<b>' + name + '</b>' +
-          '<br>' + '<b>' + "Count:  " + '</b>' + count
+          name = d.name
+          count = d.size
+          text = '<b>' + name + '</b>' +
+            '<br>' + '<b>' + "Count:  " + '</b>' + count
 
-        qtipConfig =
-          content:
-            text: text
-          style:
-            classes:'qtip-light'
-          position:
-            my: 'bottom left'
-            at: 'top right'
-            target: 'mouse'
-            adjust:
-              y: -5
-              x: 5
+          qtipConfig =
+            id: 'tooltip-' + i
+            content:
+              text: text
+            show:
+              solo: true
+            style:
+              classes:'qtip-light'
+            position:
+              my: 'bottom left'
+              at: 'top right'
+              target: 'mouse'
+              adjust:
+                y: -5
+                x: 5
 
-        $clickedElem.qtip(qtipConfig)
-        $clickedElem.qtip('api').show()
+          $elem.qtip(qtipConfig)
+          $elem.attr('data-qtip-configured', 'yes')
+          $elem.trigger('mouseover')
 
-      sunburstGroup.on 'mouseover', (d) -> renderQTip($(@), d)
+        return
 
       # --- click handling --- #
       click = (d) ->
@@ -239,6 +244,7 @@ glados.useNameSpace 'glados.views.MainPage',
                   getRadius(d.y)
 
       sunburstGroup.on('click',  click)
+      sunburstGroup.on 'mouseover', (d, i) -> renderQTip($(@), d, i)
 
     computeTextRotation: (d, getAngle) ->
       (getAngle(d.x + d.dx / 2) - (Math.PI / 2)) / Math.PI * 180
