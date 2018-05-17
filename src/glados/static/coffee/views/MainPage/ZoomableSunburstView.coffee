@@ -129,31 +129,8 @@ glados.useNameSpace 'glados.views.MainPage',
         if shouldCreateLabel
           appendLabelText(d, @)
 
-#     qtips
-#      sunburstGroup.each (d) ->
-#
-#        name = d.name
-#        count = d.size
-#        text = '<b>' + name + '</b>' +
-#          '<br>' + '<b>' + "Count:  " + '</b>' + count
-#
-#        qtipConfig =
-#          content:
-#            text: text
-#          style:
-#            classes:'qtip-light'
-#          position:
-#            my: 'bottom left'
-#            at: 'top right'
-#            target: 'mouse'
-#            adjust:
-#              y: -5
-#              x: 5
-#
-#        $(@).qtip qtipConfig
 
-
-       # --- hover handling --- #
+#     --- hover handling --- #
       renderQTip = ($elem, d, i) ->
         qtipConfigured = $elem.attr('data-qtip-configured') == 'yes'
 
