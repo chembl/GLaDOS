@@ -41,11 +41,9 @@ glados.useNameSpace 'glados.views.MainPage',
         self.text wrappedText
 
       appendLabelText = (d, parent) ->
-        console.log 'DEBUG'
         group = d3.select(parent)
         path = d3.select(parent).select('.text-path')
         pathID = path.attr('id')
-
 
         innerRadius = arc.innerRadius() (d)
         outerRadius = arc.outerRadius() (d)
@@ -57,10 +55,6 @@ glados.useNameSpace 'glados.views.MainPage',
         textArcRadius = textArc.innerRadius() (d)
 
         arcLength = textArcAngle * textArcRadius
-
-#        console.log d.name
-#        console.log 'arcRadius: ', arcRadius
-#        console.log 'arcLength: ', arcLength
 
         paintAlongArc = arcLength > arcRadius
         limitForText =  if paintAlongArc then arcLength else arcRadius
@@ -78,7 +72,7 @@ glados.useNameSpace 'glados.views.MainPage',
             .attr("xlink:href", "##{pathID}")
             .attr("href", "##{pathID}")
             .text((d) -> d.name)
-            .attr('data-limit-for-text', limitForText)
+            .attr('data-limit-for-text', limitForText - 4)
 
         else
 
@@ -145,8 +139,8 @@ glados.useNameSpace 'glados.views.MainPage',
       textArc = d3.svg.arc()
         .startAngle (d) ->  return Math.max(0, Math.min(2 * Math.PI, getAngle(d.x)))
         .endAngle (d) -> return Math.max(0, Math.min(2 * Math.PI, getAngle(d.x + d.dx)))
-        .innerRadius (d) -> return Math.max(0, getRadius(d.y + d.dy/2))
-        .outerRadius (d) -> return Math.max(0, getRadius(d.y + d.dy/2))
+        .innerRadius (d) -> return Math.max(0, getRadius(d.y + d.dy/3))
+        .outerRadius (d) -> return Math.max(0, getRadius(d.y + d.dy/3))
 
       nodes = partition.nodes(@ROOT)
 
@@ -173,7 +167,7 @@ glados.useNameSpace 'glados.views.MainPage',
         .attr('id', (d, i) -> "text-path-#{i}")
         .classed('text-path', true)
         .attr('d', textArc)
-        .style('stroke', 'none')
+        .style('stroke', 'grey')
 
 #     append labels
       sunburstGroup.each (d) ->
