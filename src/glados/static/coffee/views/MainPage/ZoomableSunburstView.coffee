@@ -40,6 +40,10 @@ glados.useNameSpace 'glados.views.MainPage',
         self.text wrappedText
 
       appendLabelText = (d, parent) ->
+
+        if d.name == 'root'
+          return
+
         group = d3.select(parent)
         path = d3.select(parent).select('.text-path')
         pathID = path.attr('id')
@@ -178,6 +182,9 @@ glados.useNameSpace 'glados.views.MainPage',
       @numTooltips = 0
       renderQTip = (d, i) ->
 
+        if d.name == 'root'
+          return
+
         $elem = $(@)
         qtipConfigured = $elem.attr('data-qtip-configured') == 'yes'
 
@@ -213,7 +220,6 @@ glados.useNameSpace 'glados.views.MainPage',
           thisView.numTooltips++
           $elem.trigger('mouseover')
 
-        return
 
       # --- click handling --- #
       click = (d) ->
