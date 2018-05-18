@@ -170,7 +170,7 @@ glados.useNameSpace 'glados.views.MainPage',
         .attr('id', (d, i) -> "text-path-#{i}")
         .classed('text-path', true)
         .attr('d', textArc)
-        .style('stroke', 'grey')
+        .style('stroke', 'none')
 
 #     append labels
       sunburstGroup.each (d) ->
@@ -222,36 +222,33 @@ glados.useNameSpace 'glados.views.MainPage',
       click = (d) ->
 
 #       function for interpolating scales in arc
-        arcTween  = (d) ->
+        scaleTween  = (d, scale) ->
           xd = d3.interpolate(getAngle.domain(), [d.x, d.x + d.dx])
           yd = d3.interpolate(getRadius.domain(), [d.y, 1])
           yr = d3.interpolate(getRadius.range(), [ (if d.y then 15 else 0), thisView.RADIUS])
 
           return (d, i) ->
-            if i then ((t) -> arc d)
+            if i then ((t) -> scale d)
             else ((t) ->
               getAngle.domain xd(t)
               getRadius.domain(yd(t)).range yr(t)
-              return arc d
+              return scale d
             )
 
-#       function for interpolating scales in textarc
-        textArcTween  = (d) ->
-          xd = d3.interpolate(getAngle.domain(), [d.x, d.x + d.dx])
-          yd = d3.interpolate(getRadius.domain(), [d.y, 1])
-          yr = d3.interpolate(getRadius.range(), [ (if d.y then 15 else 0), thisView.RADIUS])
+#       appends labels when transitions are over
+        appendLabels = (flag1, flag2) ->
 
-          return (d, i) ->
-            if i then ((t) -> textArc d)
-            else ((t) ->
-              getAngle.domain xd(t)
-              getRadius.domain(yd(t)).range yr(t)
-              return textArc d
-            )
+          if flag1 and flag2
+            f = thisView.FOCUS
+            shouldCreateLabels = d.depth - f.depth <= thisView.LABEL_LEVELS_TO_SHOW and d.x >= f.x and d.x < (f.x + f.dx)
+
+            if shouldCreateLabels
+              sunburstGroup.each (d) ->
+                appendLabelText(d, @)
 
 #       if focus changes
-
         if thisView.FOCUS != d
+
           d3.selectAll('.sunburst-text').remove()
           thisView.fillBrowseButton(d)
 
@@ -260,36 +257,31 @@ glados.useNameSpace 'glados.views.MainPage',
           textPathsSize = textPaths.transition().size()
           arcPathsSize = paths.transition().size()
 
-          # arcs transition
+#         arcs transition
           textPaths.transition()
             .duration(700)
-            .attrTween('d', textArcTween(d))
+            .attrTween('d', scaleTween(d, textArc))
             .each('end', ->
               textPathsSize--
               if textPathsSize == 0
-                textPathsTransitionisDone = true)
+                textPathsTransitionisDone = true
+                appendLabels(textPathsTransitionisDone, arcPathsTransitionisDone)
+            )
 
           paths.transition()
             .duration(700)
-            .attrTween('d', arcTween(d))
+            .attrTween('d', scaleTween(d, arc))
             .each('end', ->
               arcPathsSize--
               if arcPathsSize == 0
-                arcPathsTransitionisDone = true)
+                arcPathsTransitionisDone = true
+                appendLabels(textPathsTransitionisDone, arcPathsTransitionisDone)
+            )
 
+#         update focus
           thisView.FOCUS = d
 
-        console.log 'ready to append labels'
-
-#f = thisView.FOCUS
-#
-#              shouldCreateLabels = d.depth - f.depth <= thisView.LABEL_LEVELS_TO_SHOW and d.x >= f.x and d.x < (f.x + f.dx)
-#
-#              if shouldCreateLabels
-#                parent = @parentNode
-#                appendLabelText(d, parent)
-
-
+#     trigger events
       sunburstGroup.on('click',  click)
       sunburstGroup.on 'mouseover', (d, i) -> renderQTip($(@), d, i)
 
