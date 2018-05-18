@@ -1,6 +1,14 @@
 <div class="carousel-wrapper">
 
     <div class="carousel-item">
+
+        {% with is_dynamic=True %}
+            {% include "glados/MainPageParts/Visualizations/browse_entities.html" %}
+        {% endwith %}
+
+    </div>
+
+    <div class="carousel-item">
         {% with is_dynamic=True %}
             {% include "glados/MainPageParts/Visualizations/zoomable_sunburst.html" %}
         {% endwith %}
@@ -17,14 +25,6 @@
         </div>
 
     </div>
-
-{#    <div class="carousel-item">#}
-{##}
-{#        {% with is_dynamic=True %}#}
-{#            {% include "glados/MainPageParts/Visualizations/browse_entities.html" %}#}
-{#        {% endwith %}#}
-{##}
-{#    </div>#}
 
     {#    <div class="carousel-item">#}
     {##}

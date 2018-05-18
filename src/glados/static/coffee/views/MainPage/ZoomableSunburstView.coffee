@@ -117,7 +117,7 @@ glados.useNameSpace 'glados.views.MainPage',
             '#f9849d',
             '#e95f7e',
             '#cc4362',
-            '#a03a50',
+
         ])
 
       partition = d3.layout.partition()
@@ -287,15 +287,25 @@ glados.useNameSpace 'glados.views.MainPage',
 
     fillBrowseButton: (d) ->
       $button = $('.BCK-browse-button')
+      $button_medium = $('.BCK-browse-button-medium')
 
       button_template = $('#' + $button.attr('data-hb-template'))
+      button_medium_template = $('#' + $button_medium.attr('data-hb-template'))
 
       if d.name == 'root'
         $button.html Handlebars.compile(button_template.html())
           node_name: ''
           node_link: '/g/#browse/targets'
+
+        $button_medium.html Handlebars.compile(button_medium_template.html())
+          node_name: ''
+          node_link: '/g/#browse/targets'
       else
         $button.html Handlebars.compile(button_template.html())
+          node_name: d.name
+          node_link: d.link
+
+        $button_medium.html Handlebars.compile(button_medium_template.html())
           node_name: d.name
           node_link: d.link
 
