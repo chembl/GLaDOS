@@ -58,7 +58,7 @@ glados.useNameSpace 'glados.views.MainPage',
         paintAlongArc = arcLength > arcRadius
         limitForText =  if paintAlongArc then arcLength else arcRadius
 
-        if limitForText < @MAX_LINE_HEIGHT
+        if limitForText < 12
           return
 
         if paintAlongArc
@@ -71,7 +71,7 @@ glados.useNameSpace 'glados.views.MainPage',
             .attr("xlink:href", "##{pathID}")
             .attr("href", "##{pathID}")
             .text((d) -> d.name)
-            .attr('data-limit-for-text', limitForText - 5)
+            .attr('data-limit-for-text', limitForText - 12)
 
         else
 
@@ -176,7 +176,9 @@ glados.useNameSpace 'glados.views.MainPage',
 
 #     --- hover handling --- #
       @numTooltips = 0
-      renderQTip = ($elem, d, i) ->
+      renderQTip = (d, i) ->
+
+        $elem = $(@)
         qtipConfigured = $elem.attr('data-qtip-configured') == 'yes'
 
         if thisView.numTooltips > 10
@@ -277,8 +279,8 @@ glados.useNameSpace 'glados.views.MainPage',
           thisView.FOCUS = d
 
 #     trigger events
-      sunburstGroup.on('click',  click)
-      sunburstGroup.on 'mouseover', (d, i) -> renderQTip($(@), d, i)
+      sunburstGroup.on 'click',  click
+      sunburstGroup.on 'mouseover', renderQTip
 
     computeTextRotation: (d, getAngle) ->
       (getAngle(d.x + d.dx / 2) - (Math.PI / 2)) / Math.PI * 180
