@@ -314,8 +314,8 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
       is_pressing_ctrl: isPressingCtrl
 
   fillBrowseButtonTemplate: (nodeName, nodeLink) ->
-    $button = $('.BCK-browse-button-sunburst')
-    $button_medium = $('.BCK-browse-button-medium-sunburst')
+    $button = $('.BCK-browse-button')
+    $button_medium = $('.BCK-browse-button-medium')
 
     button_medium_template = $('#' + $button_medium.attr('data-hb-template'))
     button_template = $('#' + $button.attr('data-hb-template'))
