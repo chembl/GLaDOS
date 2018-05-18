@@ -235,7 +235,7 @@ glados.useNameSpace 'glados.views.MainPage',
             if shouldCreateLabels
               appendLabelText(d, @)
 
-#       function for interpolating scales
+#       function for interpolating scales in arc
         arcTween  = (d) ->
           xd = d3.interpolate(getAngle.domain(), [d.x, d.x + d.dx])
           yd = d3.interpolate(getRadius.domain(), [d.y, 1])
@@ -249,7 +249,25 @@ glados.useNameSpace 'glados.views.MainPage',
               return arc d
             )
 
+#       function for interpolating scales in arc
+        textArcTween  = (d) ->
+          xd = d3.interpolate(getAngle.domain(), [d.x, d.x + d.dx])
+          yd = d3.interpolate(getRadius.domain(), [d.y, 1])
+          yr = d3.interpolate(getRadius.range(), [ (if d.y then 15 else 0), thisView.RADIUS])
+
+          return (d, i) ->
+            if i then ((t) -> textArc d)
+            else ((t) ->
+              getAngle.domain xd(t)
+              getRadius.domain(yd(t)).range yr(t)
+              return textArc d
+            )
+
         # arcs and text transition
+        textPaths.transition()
+          .duration(700)
+          .attrTween('d', textArcTween(d))
+
         paths.transition()
           .duration(700)
           .attrTween('d', arcTween(d))
