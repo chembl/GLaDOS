@@ -113,17 +113,17 @@ glados.useNameSpace 'glados.views.MainPage',
 
       color = d3.scale.ordinal()
         .range([
-            '#0a585b',
-            '#077c80',
-            '#0d343a',
-            '#2ba3a5',
-            '#6fc7c6',
+            '#0b4d56',
+            '#066c70',
+            '#088d91',
+            '#41aeaf',
+            '#79cccb',
             '#c4e6e5',
             '#fdabbc',
             '#f9849d',
             '#e95f7e',
             '#cc4362',
-            '#a03a50'
+            '#a03a50',
         ])
 
       partition = d3.layout.partition()
