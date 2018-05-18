@@ -30,7 +30,6 @@ glados.useNameSpace 'glados.views.MainPage',
       @LABEL_LEVELS_TO_SHOW = 3
 
       # ------------ helper functions --------------- #
-
       wrapText = (d) ->
         self = d3.select(@)
         textLength = self.node().getComputedTextLength()
@@ -58,6 +57,10 @@ glados.useNameSpace 'glados.views.MainPage',
 
         paintAlongArc = arcLength > arcRadius
         limitForText =  if paintAlongArc then arcLength else arcRadius
+
+#        console.log 'pathID: ' , pathID
+#        console.log 'arcLength: ', arcLength
+#        console.log 'arcLength: ', arcRadius
 
         if limitForText < 10
           return
@@ -247,27 +250,44 @@ glados.useNameSpace 'glados.views.MainPage',
             )
 
 #       if focus changes
+
         if thisView.FOCUS != d
           d3.selectAll('.sunburst-text').remove()
           thisView.fillBrowseButton(d)
-          # arcs and text transition
 
+          textPathsTransitionisDone = false
+          arcPathsTransitionisDone = false
+          textPathsSize = textPaths.transition().size()
+          arcPathsSize = paths.transition().size()
+
+          # arcs transition
           textPaths.transition()
             .duration(700)
             .attrTween('d', textArcTween(d))
+            .each('end', ->
+              textPathsSize--
+              if textPathsSize == 0
+                textPathsTransitionisDone = true)
 
           paths.transition()
             .duration(700)
             .attrTween('d', arcTween(d))
+            .each('end', ->
+              arcPathsSize--
+              if arcPathsSize == 0
+                arcPathsTransitionisDone = true)
 
           thisView.FOCUS = d
 
-#        sunburstGroup.each (d) ->
-#          f = thisView.FOCUS
-#          shouldCreateLabels = d.depth - f.depth <= thisView.LABEL_LEVELS_TO_SHOW and d.x >= f.x and d.x < (f.x + f.dx)
+        console.log 'ready to append labels'
+
+#f = thisView.FOCUS
 #
-#          if shouldCreateLabels
-#            appendLabelText(d, @)
+#              shouldCreateLabels = d.depth - f.depth <= thisView.LABEL_LEVELS_TO_SHOW and d.x >= f.x and d.x < (f.x + f.dx)
+#
+#              if shouldCreateLabels
+#                parent = @parentNode
+#                appendLabelText(d, parent)
 
 
       sunburstGroup.on('click',  click)
