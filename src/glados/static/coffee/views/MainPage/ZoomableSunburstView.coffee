@@ -88,7 +88,7 @@ glados.useNameSpace 'glados.views.MainPage',
             )
 
           if not textFitsInArc(d)
-            text.attr('opacity', 0)
+            text.remove()
 
         text.each(wrapText)
 
@@ -176,7 +176,6 @@ glados.useNameSpace 'glados.views.MainPage',
         if shouldCreateLabel
           appendLabelText(d, @)
 
-
 #     --- hover handling --- #
       @numTooltips = 0
       renderQTip = ($elem, d, i) ->
@@ -219,22 +218,6 @@ glados.useNameSpace 'glados.views.MainPage',
       # --- click handling --- #
       click = (d) ->
 
-        # if focus changes
-        if thisView.FOCUS != d
-
-          d3.selectAll('.sunburst-text').transition().attr("opacity", 0)
-          thisView.FOCUS = d
-          thisView.fillBrowseButton(d)
-
-          #create labels if focus changes
-          sunburstGroup.each (d) ->
-            f = thisView.FOCUS
-            text = d3.select(@).select('.sunburst-text')
-            shouldCreateLabels = text.empty() and d.depth - f.depth <= thisView.LABEL_LEVELS_TO_SHOW and d.x >= f.x and d.x < (f.x + f.dx)
-
-            if shouldCreateLabels
-              appendLabelText(d, @)
-
 #       function for interpolating scales in arc
         arcTween  = (d) ->
           xd = d3.interpolate(getAngle.domain(), [d.x, d.x + d.dx])
@@ -249,7 +232,7 @@ glados.useNameSpace 'glados.views.MainPage',
               return arc d
             )
 
-#       function for interpolating scales in arc
+#       function for interpolating scales in textarc
         textArcTween  = (d) ->
           xd = d3.interpolate(getAngle.domain(), [d.x, d.x + d.dx])
           yd = d3.interpolate(getRadius.domain(), [d.y, 1])
@@ -263,33 +246,29 @@ glados.useNameSpace 'glados.views.MainPage',
               return textArc d
             )
 
-        # arcs and text transition
-        textPaths.transition()
-          .duration(700)
-          .attrTween('d', textArcTween(d))
+#       if focus changes
+        if thisView.FOCUS != d
+          d3.selectAll('.sunburst-text').remove()
+          thisView.fillBrowseButton(d)
+          # arcs and text transition
 
-        paths.transition()
-          .duration(700)
-          .attrTween('d', arcTween(d))
-          .each 'end', (e) ->
+          textPaths.transition()
+            .duration(700)
+            .attrTween('d', textArcTween(d))
 
-            shouldDoTransition = e.depth - d.depth <= thisView.LABEL_LEVELS_TO_SHOW and  e.x >= d.x and e.x < (d.x + d.dx)
+          paths.transition()
+            .duration(700)
+            .attrTween('d', arcTween(d))
 
-            if shouldDoTransition
+          thisView.FOCUS = d
 
-              arcText = d3.select(@parentNode).select('.sunburst-text')
+#        sunburstGroup.each (d) ->
+#          f = thisView.FOCUS
+#          shouldCreateLabels = d.depth - f.depth <= thisView.LABEL_LEVELS_TO_SHOW and d.x >= f.x and d.x < (f.x + f.dx)
+#
+#          if shouldCreateLabels
+#            appendLabelText(d, @)
 
-              arcText.text((d) -> d.name)
-                  .each(wrapText)
-
-              arcText.transition()
-                .duration(400)
-                .attr('opacity', (e) ->
-                  if textFitsInArc(e) then 1 else 0
-                ).attr('transform', ->
-                  'rotate(' + thisView.computeTextRotation(e, getAngle) + ')'
-                ).attr 'x', (d) ->
-                  getRadius(d.y)
 
       sunburstGroup.on('click',  click)
       sunburstGroup.on 'mouseover', (d, i) -> renderQTip($(@), d, i)
