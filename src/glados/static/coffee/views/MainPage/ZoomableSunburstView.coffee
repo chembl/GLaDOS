@@ -58,11 +58,7 @@ glados.useNameSpace 'glados.views.MainPage',
         paintAlongArc = arcLength > arcRadius
         limitForText =  if paintAlongArc then arcLength else arcRadius
 
-#        console.log 'pathID: ' , pathID
-#        console.log 'arcLength: ', arcLength
-#        console.log 'arcLength: ', arcRadius
-
-        if limitForText < 10
+        if limitForText < @MAX_LINE_HEIGHT
           return
 
         if paintAlongArc
@@ -75,7 +71,7 @@ glados.useNameSpace 'glados.views.MainPage',
             .attr("xlink:href", "##{pathID}")
             .attr("href", "##{pathID}")
             .text((d) -> d.name)
-            .attr('data-limit-for-text', limitForText - 4)
+            .attr('data-limit-for-text', limitForText - 5)
 
         else
 
@@ -168,7 +164,6 @@ glados.useNameSpace 'glados.views.MainPage',
       textPaths = sunburstGroup.append('path')
         .classed('text-path', true)
         .attr('id', (d, i) -> "text-path-#{i}")
-        .classed('text-path', true)
         .attr('d', textArc)
         .style('stroke', 'none')
 
@@ -236,14 +231,14 @@ glados.useNameSpace 'glados.views.MainPage',
             )
 
 #       appends labels when transitions are over
-        appendLabels = (flag1, flag2) ->
+        appendLabels = (isDone1, isDone2) ->
 
-          if flag1 and flag2
+          if isDone1 and isDone2
             f = thisView.FOCUS
-            shouldCreateLabels = d.depth - f.depth <= thisView.LABEL_LEVELS_TO_SHOW and d.x >= f.x and d.x < (f.x + f.dx)
+            sunburstGroup.each (d) ->
 
-            if shouldCreateLabels
-              sunburstGroup.each (d) ->
+              shouldCreateLabels = d.depth - f.depth <= thisView.LABEL_LEVELS_TO_SHOW and d.x >= f.x and d.x < (f.x + f.dx)
+              if shouldCreateLabels
                 appendLabelText(d, @)
 
 #       if focus changes
