@@ -90,24 +90,14 @@ glados.useNameSpace 'glados.views.MainPage',
               'rotate(' + thisView.computeTextRotation(d, getAngle) + ')'
             )
 
-          if not textFitsInArc(d)
+          if arcLength < thisView.MAX_LINE_HEIGHT
             text.remove()
 
         text.each(wrapText)
 
-      textFitsInArc = (d) ->
-
-        startAngle =  arc.startAngle() (d)
-        endAngle = arc.endAngle() (d)
-        angle = endAngle - startAngle
-
-        radius = arc.innerRadius() (d)
-        arcLength = angle * radius
-
-        return arcLength > thisView.MAX_LINE_HEIGHT
-
       # ------------ end of helper functions --------------- #
 
+#     scales
       getAngle = d3.scale.linear()
         .range([0, 2 * Math.PI])
 
@@ -147,6 +137,7 @@ glados.useNameSpace 'glados.views.MainPage',
 
       nodes = partition.nodes(@ROOT)
 
+#     create main svg
       mainSunburstContainer = d3.select @$vis_elem[0]
         .append('svg')
           .attr('class', 'mainEntitiesContainer')
@@ -155,16 +146,19 @@ glados.useNameSpace 'glados.views.MainPage',
           .append("g")
             .attr("transform", "translate(" + @VIS_WIDTH / 2 + "," + (@VIS_HEIGHT / 2) + ")")
 
+#     append group for arcs and texts
       sunburstGroup = mainSunburstContainer.selectAll('g')
         .data(nodes)
         .enter().append('g')
 
+#     append arcs
       paths = sunburstGroup.append('path')
         .classed('arc-path', true)
         .attr('d', arc)
         .style 'fill', (d) ->
           color (if d.children then d else d.parent).name
 
+#     append paths for text
       textPaths = sunburstGroup.append('path')
         .classed('text-path', true)
         .attr('id', (d, i) -> "text-path-#{i}")
