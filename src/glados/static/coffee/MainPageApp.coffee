@@ -279,7 +279,7 @@ class MainPageApp
         children:
           type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
           field: '_metadata.organism_taxonomy.l1'
-          size: 100
+          size: 50
           bucket_links:
             bucket_filter_template: '_metadata.organism_taxonomy.l1:("{{bucket_key}}")'
             template_data:
@@ -289,7 +289,7 @@ class MainPageApp
             children:
               type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
               field: '_metadata.organism_taxonomy.l2'
-              size: 100
+              size: 50
               bucket_links:
                 bucket_filter_template: '_metadata.organism_taxonomy.l2:("{{bucket_key}}")'
                 template_data:
@@ -299,7 +299,7 @@ class MainPageApp
                 children:
                   type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
                   field: '_metadata.organism_taxonomy.l3'
-                  size: 100
+                  size: 50
                   bucket_links:
                     bucket_filter_template: '_metadata.protein_classification.l3:("{{bucket_key}}")'
                     template_data:
@@ -309,7 +309,7 @@ class MainPageApp
                     children:
                       type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
                       field: '_metadata.organism_taxonomy.l3'
-                      size: 100
+                      size: 50
                       bucket_links:
                         bucket_filter_template: '_metadata.protein_classification.l4:("{{bucket_key}}")'
                         template_data:
@@ -319,7 +319,7 @@ class MainPageApp
                         children:
                           type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
                           field: '_metadata.organism_taxonomy.l4_synonyms'
-                          size: 100
+                          size: 50
                           bucket_links:
                             bucket_filter_template: '_metadata.organism_taxonomy.l4_synonyms:("{{bucket_key}}")'
                             template_data:

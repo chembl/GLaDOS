@@ -101,7 +101,8 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     .append("g")
     .attr("transform", "translate(" + @VISUALISATION_WIDTH / 2 + "," + @VISUALISATION_HEIGHT / 2 + ")")
 
-    focusName = @root
+    @focusNode = @root
+    console.log 'focusNode: ', @focusNode
     @originalNodes = pack.nodes(@root)
     @currentViewFrame = undefined
 
@@ -127,10 +128,13 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
       if d3.event.ctrlKey
         return
 
-      if focusName != d
+      console.log 'focusnode: ', thisView.focusNode.name
+      console.log 'd: ', d.name
+      if thisView.focusNode != d
         thisView.focusTo(thisView.currentHover)
         thisView.drawMissingCircles(thisView.currentHover)
         thisView.fillBrowseButtonTemplate thisView.currentHover.name, thisView.currentHover.link
+
 
     # -----------------------------------------
     # Node hover handler function
@@ -162,9 +166,9 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
           if d.parent then (if d.children then 'node' else 'node node--leaf') else 'node node--root')
         .attr("id", (d) ->
           if d.parent then 'circleFor-' + d.id else 'circleFor-Root')
-        .style('stroke', 'white')
-        .style("fill", (d) ->
-          if d.children then color(d.depth) else glados.Settings.VIS_COLORS.WHITE)
+        .style('stroke', 'black')
+        .style("fill", (d) -> 'transparent')
+#          if d.children then color(d.depth) else glados.Settings.VIS_COLORS.WHITE)
         .on("click", handleClickOnNode)
         .on('mouseover', handleNodeMouseOver)
 
@@ -174,8 +178,8 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
         .append('text')
         .attr("class", "label")
         .attr('text-anchor', 'middle')
-        .style("fill-opacity", (d) ->
-          if d.parent == thisView.root then 1 else 0)
+        .style("fill-opacity", (d) -> 1)
+#          if d.parent == thisView.root then 1 else 0)
         .style("display", (d) ->
           if d.parent == thisView.root then 'inline' else 'none')
         .text((d) -> return d.name + " (" + d.size + ")" )
@@ -184,6 +188,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
             return "#{textSize(d.children.length)}%"
           else return "#{textSize(0)}%"
         )
+
 
     nodes = @originalNodes.filter((d) -> d.depth < 3 )
     @renderedNodes = nodes
@@ -240,8 +245,8 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
   drawMissingCircles: (node) ->
 
     newNodesToRender = @originalNodes.filter((d) -> d.parent_id == node.id )
-    @renderedNodes.concat newNodesToRender
-    @appendCirclesAndTexts(newNodesToRender)
+    @renderedNodes = @renderedNodes.concat newNodesToRender
+    @appendCirclesAndTexts(@renderedNodes)
 
   zoomTo: (newViewFrame) ->
 
@@ -259,7 +264,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
   focusTo: (node) ->
 
     thisView = @
-    focus = node
+    thisView.focusNode = node
     @removeHoverabilityToAll()
     ancestry = []
     currentParent = node.parent
@@ -278,31 +283,31 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     transition = d3.transition()
       .duration(1000)
       .tween("zoom", (d) ->
-          i = d3.interpolateZoom(thisView.currentViewFrame, [focus.x, focus.y, focus.r * 2 + thisView.margin])
+          i = d3.interpolateZoom(thisView.currentViewFrame, [thisView.focusNode.x, thisView.focusNode.y, thisView.focusNode.r * 2 + thisView.margin])
           return (t) -> thisView.zoomTo(i(t))
       )
 
-    transition.selectAll("text")
-      .filter( (d) ->
-        if d?
-          d == focus or d.parent == focus or @style.display == 'inline')
-      .style('fill-opacity', (d) ->
-        if d.parent == focus then 1 else 0)
-      .each('start', (d) ->
-        if d.parent == focus
-          @style.display = 'inline'
-        return )
-      .each('end', (d) ->
-
-        # if you focus a leaf I  won't hide the label
-        if d == focus and !d.children?
-          @style.display = 'inline'
-          @style['fill-opacity'] = 1
-          return
-
-        if d.parent != focus
-          @style.display = 'none'
-        return)
+#    transition.selectAll("text")
+#      .filter( (d) ->
+#        if d?
+#          d == focus or d.parent == focus or @style.display == 'inline')
+#      .style('fill-opacity', (d) ->
+#        if d.parent == focus then 1 else 0)
+#      .each('start', (d) ->
+#        if d.parent == focus
+#          @style.display = 'inline'
+#        return )
+#      .each('end', (d) ->
+#
+#        # if you focus a leaf I  won't hide the label
+#        if d == focus and !d.children?
+#          @style.display = 'inline'
+#          @style['fill-opacity'] = 1
+#          return
+#
+#        if d.parent != focus
+#          @style.display = 'none'
+#        return)
 
 
   #----------------------------------------------------------
