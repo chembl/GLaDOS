@@ -128,8 +128,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
       if d3.event.ctrlKey
         return
 
-      console.log 'focusnode: ', thisView.focusNode.name
-      console.log 'd: ', d.name
       if thisView.focusNode != d
         thisView.focusTo(thisView.currentHover)
         thisView.drawMissingCircles(thisView.currentHover)
@@ -178,10 +176,10 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
         .append('text')
         .attr("class", "label")
         .attr('text-anchor', 'middle')
-        .style("fill-opacity", (d) -> 1)
-#          if d.parent == thisView.root then 1 else 0)
+        .style("fill-opacity", (d) ->
+          if d.parent == thisView.focusNode then 1 else 0)
         .style("display", (d) ->
-          if d.parent == thisView.root then 'inline' else 'none')
+          if d.parent == thisView.focusNode then 'inline' else 'none')
         .text((d) -> return d.name + " (" + d.size + ")" )
         .attr('font-size', (d) ->
           if d.children?
@@ -287,27 +285,27 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
           return (t) -> thisView.zoomTo(i(t))
       )
 
-#    transition.selectAll("text")
-#      .filter( (d) ->
-#        if d?
-#          d == focus or d.parent == focus or @style.display == 'inline')
-#      .style('fill-opacity', (d) ->
-#        if d.parent == focus then 1 else 0)
-#      .each('start', (d) ->
-#        if d.parent == focus
-#          @style.display = 'inline'
-#        return )
-#      .each('end', (d) ->
-#
-#        # if you focus a leaf I  won't hide the label
-#        if d == focus and !d.children?
-#          @style.display = 'inline'
-#          @style['fill-opacity'] = 1
-#          return
-#
-#        if d.parent != focus
-#          @style.display = 'none'
-#        return)
+    transition.selectAll("text")
+      .filter( (d) ->
+        if d?
+          d == thisView.focusNode or d.parent == thisView.focusNode or @style.display == 'inline')
+      .style('fill-opacity', (d) ->
+        if d.parent == thisView.focusNode then 1 else 0)
+      .each('start', (d) ->
+        if d.parent == thisView.focusNode
+          @style.display = 'inline'
+        return )
+      .each('end', (d) ->
+
+        # if you focus a leaf I  won't hide the label
+        if d == thisView.focusNode and !d.children?
+          @style.display = 'inline'
+          @style['fill-opacity'] = 1
+          return
+
+        if d.parent != thisView.focusNode
+          @style.display = 'none'
+        return)
 
 
   #----------------------------------------------------------
