@@ -269,7 +269,6 @@ LegendView = Backbone.View.extend(ResponsiviseViewExt).extend
       domainGroups.push column
       i+=columnSize
 
-    console.log  'domainGroups: ', domainGroups
     for column, a in domainGroups
       legendG.selectAll('.circle-' + a )
         .data(column)

@@ -153,8 +153,11 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
         nodeElem = d3.select($(thisView.el)[0]).select("#circleFor-#{d.id}" for n in nodes)
         nodeElem.classed('force-hover', true)
 
+
+    nodes = nodes.filter((d) -> d.depth < 3 )
+
     circles = svg.selectAll('.circle')
-      .data(nodes.filter((d) -> d.depth < 3 ))
+      .data(nodes)
       .enter()
       .append('circle')
       .attr('class', 'circle')
@@ -168,7 +171,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
       .on('mouseover', handleNodeMouseOver)
 
     text = svg.selectAll('.label')
-      .data(nodes.filter((d) -> d.depth < 3 ))
+      .data(nodes)
       .enter()
       .append('text')
       .attr("class", "label")
