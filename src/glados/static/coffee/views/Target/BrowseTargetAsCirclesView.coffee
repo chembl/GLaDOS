@@ -164,10 +164,9 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
           if d.parent then (if d.children then 'node' else 'node node--leaf') else 'node node--root')
         .attr("id", (d) ->
           if d.parent then 'circleFor-' + d.id else 'circleFor-Root')
-        .style('stroke', 'black')
-        .style("fill", (d) -> 'transparent')
-#          if d.children then color(d.depth) else glados.Settings.VIS_COLORS.WHITE)
-        .on("click", handleClickOnNode)
+        .style("fill", (d) ->
+          if d.children then color(d.depth) else glados.Settings.VIS_COLORS.WHITE)
+        .on('click', handleClickOnNode)
         .on('mouseover', handleNodeMouseOver)
 
       texts = svg.selectAll('.label')
@@ -306,7 +305,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
         if d.parent != thisView.focusNode
           @style.display = 'none'
         return)
-
 
   #----------------------------------------------------------
   # Instructions
