@@ -103,7 +103,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
 
     focusName = @root
-    nodes = pack.nodes(@root)
+    @originalNodes = pack.nodes(@root)
     @currentViewFrame = undefined
 
 
@@ -130,6 +130,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
         return
 
       if focusName != d
+        thisView.drawMissingCircles(thisView.currentHover)
         thisView.focusTo(thisView.currentHover)
         thisView.fillBrowseButtonTemplate thisView.currentHover.name, thisView.currentHover.link
 
@@ -153,26 +154,21 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
         nodeElem = d3.select($(thisView.el)[0]).select("#circleFor-#{d.id}" for n in nodes)
         nodeElem.classed('force-hover', true)
 
+    appendCircles = (group) ->
+      group.enter()
+        .append('circle')
+        .attr('class', 'circle')
+        .attr("class", (d) ->
+          if d.parent then (if d.children then 'node' else 'node node--leaf') else 'node node--root')
+        .attr("id", (d) ->
+          if d.parent then 'circleFor-' + d.id else 'circleFor-Root')
+        .style("fill", (d) ->
+          if d.children then color(d.depth) else glados.Settings.VIS_COLORS.WHITE)
+        .on("click", handleClickOnNode)
+        .on('mouseover', handleNodeMouseOver)
 
-    nodes = nodes.filter((d) -> d.depth < 3 )
-
-    circles = svg.selectAll('.circle')
-      .data(nodes)
-      .enter()
-      .append('circle')
-      .attr('class', 'circle')
-      .attr("class", (d) ->
-        if d.parent then (if d.children then 'node' else 'node node--leaf') else 'node node--root')
-      .attr("id", (d) ->
-        if d.parent then 'circleFor-' + d.id else 'circleFor-Root')
-      .style("fill", (d) ->
-        if d.children then color(d.depth) else glados.Settings.VIS_COLORS.WHITE)
-      .on("click", handleClickOnNode)
-      .on('mouseover', handleNodeMouseOver)
-
-    text = svg.selectAll('.label')
-      .data(nodes)
-      .enter()
+    appendTexts = (group) ->
+      group.enter()
       .append('text')
       .attr("class", "label")
       .attr('text-anchor', 'middle')
@@ -186,6 +182,17 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
           return "#{textSize(d.children.length)}%"
         else return "#{textSize(0)}%"
       )
+
+    nodes = @originalNodes.filter((d) -> d.depth < 3 )
+
+    circles = svg.selectAll('.circle')
+      .data(nodes)
+
+    texts = svg.selectAll('.label')
+      .data(nodes)
+
+    appendCircles(circles)
+    appendTexts(texts)
 
     #Select circles to create the views
 #    @createCircleViews()
@@ -237,6 +244,10 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
   #----------------------------------------------------------
   # Zoom and focus
   #----------------------------------------------------------
+
+  drawMissingCircles: (node) ->
+    console.log 'i will draw the missing circles'
+
   zoomTo: (newViewFrame) ->
 
     @currentViewFrame = newViewFrame
