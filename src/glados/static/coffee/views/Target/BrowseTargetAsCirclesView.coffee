@@ -102,7 +102,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     .attr("transform", "translate(" + @VISUALISATION_WIDTH / 2 + "," + @VISUALISATION_HEIGHT / 2 + ")")
 
 
-    focus = @root
+    focusName = @root
     nodes = pack.nodes(@root)
     @currentViewFrame = undefined
 
@@ -129,7 +129,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
       if d3.event.ctrlKey
         return
 
-      if focus != d
+      if focusName != d
         thisView.focusTo(thisView.currentHover)
         thisView.fillBrowseButtonTemplate thisView.currentHover.name, thisView.currentHover.link
 
@@ -154,7 +154,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
         nodeElem.classed('force-hover', true)
 
     circles = svg.selectAll('.circle')
-      .data(nodes)
+      .data(nodes.filter((d) -> d.depth < 3 ))
       .enter()
       .append('circle')
       .attr('class', 'circle')
@@ -168,7 +168,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
       .on('mouseover', handleNodeMouseOver)
 
     text = svg.selectAll('.label')
-      .data(nodes)
+      .data(nodes.filter((d) -> d.depth < 3 ))
       .enter()
       .append('text')
       .attr("class", "label")
