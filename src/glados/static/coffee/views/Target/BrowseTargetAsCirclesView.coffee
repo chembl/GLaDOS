@@ -101,11 +101,9 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     .append("g")
     .attr("transform", "translate(" + @VISUALISATION_WIDTH / 2 + "," + @VISUALISATION_HEIGHT / 2 + ")")
 
-
     focusName = @root
     @originalNodes = pack.nodes(@root)
     @currentViewFrame = undefined
-
 
     #get depth domain in tree
     getNodeNumChildren = (node) -> if not node.children? then 0 else node.children.length
@@ -130,10 +128,9 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
         return
 
       if focusName != d
-        thisView.drawMissingCircles(thisView.currentHover)
         thisView.focusTo(thisView.currentHover)
+        thisView.drawMissingCircles(thisView.currentHover)
         thisView.fillBrowseButtonTemplate thisView.currentHover.name, thisView.currentHover.link
-
 
     # -----------------------------------------
     # Node hover handler function
@@ -154,7 +151,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
         nodeElem = d3.select($(thisView.el)[0]).select("#circleFor-#{d.id}" for n in nodes)
         nodeElem.classed('force-hover', true)
 
-    appendCirclesAndTexts = (nodesToRender) ->
+    @appendCirclesAndTexts = (nodesToRender) ->
 
       circles = svg.selectAll('.circle')
         .data(nodesToRender)
@@ -165,6 +162,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
           if d.parent then (if d.children then 'node' else 'node node--leaf') else 'node node--root')
         .attr("id", (d) ->
           if d.parent then 'circleFor-' + d.id else 'circleFor-Root')
+        .style('stroke', 'white')
         .style("fill", (d) ->
           if d.children then color(d.depth) else glados.Settings.VIS_COLORS.WHITE)
         .on("click", handleClickOnNode)
@@ -188,11 +186,8 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
         )
 
     nodes = @originalNodes.filter((d) -> d.depth < 3 )
-    appendCirclesAndTexts(nodes)
-
-
-    #Select circles to create the views
-#    @createCircleViews()
+    @renderedNodes = nodes
+    @appendCirclesAndTexts(@renderedNodes)
 
     d3.select(container)
       .on("click", () -> thisView.focusTo(thisView.root) )
@@ -243,7 +238,10 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
   #----------------------------------------------------------
 
   drawMissingCircles: (node) ->
-    console.log 'i will draw the missing circles'
+
+    newNodesToRender = @originalNodes.filter((d) -> d.parent_id == node.id )
+    @renderedNodes.concat newNodesToRender
+    @appendCirclesAndTexts(newNodesToRender)
 
   zoomTo: (newViewFrame) ->
 
