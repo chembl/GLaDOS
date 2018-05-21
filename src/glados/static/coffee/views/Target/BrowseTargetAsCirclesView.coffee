@@ -154,8 +154,11 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
         nodeElem = d3.select($(thisView.el)[0]).select("#circleFor-#{d.id}" for n in nodes)
         nodeElem.classed('force-hover', true)
 
-    appendCircles = (group) ->
-      group.enter()
+    appendCirclesAndTexts = (nodesToRender) ->
+
+      circles = svg.selectAll('.circle')
+        .data(nodesToRender)
+        .enter()
         .append('circle')
         .attr('class', 'circle')
         .attr("class", (d) ->
@@ -167,32 +170,26 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
         .on("click", handleClickOnNode)
         .on('mouseover', handleNodeMouseOver)
 
-    appendTexts = (group) ->
-      group.enter()
-      .append('text')
-      .attr("class", "label")
-      .attr('text-anchor', 'middle')
-      .style("fill-opacity", (d) ->
-        if d.parent == thisView.root then 1 else 0)
-      .style("display", (d) ->
-        if d.parent == thisView.root then 'inline' else 'none')
-      .text((d) -> return d.name + " (" + d.size + ")" )
-      .attr('font-size', (d) ->
-        if d.children?
-          return "#{textSize(d.children.length)}%"
-        else return "#{textSize(0)}%"
-      )
+      texts = svg.selectAll('.label')
+        .data(nodesToRender)
+        .enter()
+        .append('text')
+        .attr("class", "label")
+        .attr('text-anchor', 'middle')
+        .style("fill-opacity", (d) ->
+          if d.parent == thisView.root then 1 else 0)
+        .style("display", (d) ->
+          if d.parent == thisView.root then 'inline' else 'none')
+        .text((d) -> return d.name + " (" + d.size + ")" )
+        .attr('font-size', (d) ->
+          if d.children?
+            return "#{textSize(d.children.length)}%"
+          else return "#{textSize(0)}%"
+        )
 
     nodes = @originalNodes.filter((d) -> d.depth < 3 )
+    appendCirclesAndTexts(nodes)
 
-    circles = svg.selectAll('.circle')
-      .data(nodes)
-
-    texts = svg.selectAll('.label')
-      .data(nodes)
-
-    appendCircles(circles)
-    appendTexts(texts)
 
     #Select circles to create the views
 #    @createCircleViews()
