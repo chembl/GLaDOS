@@ -128,8 +128,9 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
         return
 
       if thisView.focusNode != d
-        thisView.focusTo(thisView.currentHover)
-        thisView.drawMissingCircles(thisView.currentHover)
+        if d.children?
+          thisView.focusTo(thisView.currentHover)
+          thisView.drawMissingCircles(thisView.currentHover)
         thisView.fillBrowseButtonTemplate thisView.currentHover.name, thisView.currentHover.link
 
 
