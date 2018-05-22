@@ -117,11 +117,13 @@ glados.useNameSpace 'glados.models.visualisation',
           label: 'Molecule Type'
           domain: [ 0, 1, 2, 3, 4]
           coloursRange: [
-            glados.Settings.VIS_COLORS.RED5,
+            glados.Settings.VIS_COLORS.TEAL5,
+            glados.Settings.VIS_COLORS.TEAL4,
+            glados.Settings.VIS_COLORS.TEAL3,
             glados.Settings.VIS_COLORS.RED4,
             glados.Settings.VIS_COLORS.RED3,
             glados.Settings.VIS_COLORS.RED2,
-            glados.Settings.VIS_COLORS.RED1,
+            glados.Settings.VIS_COLORS.RED1
           ]
           colourScaleType: glados.Visualisation.CATEGORICAL
         INDICATION_CLASS:
