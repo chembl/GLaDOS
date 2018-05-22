@@ -157,7 +157,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       circles = svg.selectAll('circle')
         .data(nodesToRender)
-
       circles.exit().remove()
 
       circles.enter()
@@ -172,9 +171,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
         .on('click', handleClickOnNode)
         .on('mouseover', handleNodeMouseOver)
 
-#     remove all texts so that they are rendered on top of the circles
       texts = svg.selectAll('text').remove()
-
       texts = svg.selectAll('text')
         .data(nodesToRender)
 
@@ -183,7 +180,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
         .classed('label', true)
         .attr('text-anchor', 'middle')
         .style("fill-opacity", (d) ->
-          focusIsleaf = if d == thisView.focusNode and not d.children?
+          focusIsleaf = d == thisView.focusNode and not d.children?
           if d.parent == thisView.focusNode or focusIsleaf then 1 else 0
         ).style("display", (d) ->
           if d.parent == thisView.focusNode or not d.children? then 'inline' else 'none'
