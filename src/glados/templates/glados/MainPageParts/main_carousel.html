@@ -84,5 +84,24 @@
 
     </div>
 
+    <div class="carousel-item">
+
+        {% with is_dynamic=True %}
+
+            {% include "glados/MainPageParts/Visualizations/first_approval_histogram.html" %}
+
+        {% endwith %}
+
+        <div class="btn-container hide-on-med-and-down">
+
+            <a class="small-text" href="/g/#browse/drugs" target="_blank">
+
+                Browse all Drugs
+
+            </a>
+
+        </div>
+
+    </div>
 
 </div>

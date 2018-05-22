@@ -100,15 +100,55 @@ class MainPageApp
 
     maxPhaseForDisease.fetch()
 
+  @initFirstApprovalByMoleculeType = ->
+    console.log 'init percentage histogram :)'
+    drugsByMoleculeType = MainPageApp.getFirstApprovalPercentage()
+
+    usanYearProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'USAN_YEAR')
+    maxPhaseProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'MAX_PHASE', true)
+    barsColourScale = maxPhaseProp.colourScale
+
+    histogramConfig =
+      bars_colour_scale: barsColourScale
+      stacked_histogram: true
+      sort_by_key: false
+      rotate_x_axis_if_needed: false
+      hide_x_axis_title: true
+      legend_vertical: true
+      big_size: true
+      paint_axes_selectors: true
+      properties:
+        year: usanYearProp
+        max_phase: maxPhaseProp
+      initial_property_x: 'year'
+      initial_property_z: 'max_phase'
+      x_axis_options: ['count']
+      x_axis_min_columns: 1
+      x_axis_max_columns: 40
+      x_axis_initial_num_columns: 40
+      x_axis_prop_name: 'yearByMaxPhase'
+      title: 'Drugs by Usan Year'
+      title_link_url: Drug.getDrugsListURL('_metadata.compound_records.src_id:13 AND _exists_:usan_year')
+
+    config =
+      histogram_config: histogramConfig
+      is_outside_an_entity_report_card: true
+      embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#documents_by_year_histogram"
+
+    new glados.views.ReportCards.HistogramInCardView
+      el: $('#BCK-FirstApprovalHistogram')
+      model: drugsByMoleculeType
+      config: config
+      report_card_app: @
+
+    drugsByMoleculeType.fetch()
+
   @initDrugsPerUsanYear = ->
 
-    allDrugsByYear = MainPageApp.getFirstApprovalPercentage()
-#    allDrugsByYear = MainPageApp.getYearByMaxPhaseAgg()
+    allDrugsByYear = MainPageApp.getYearByMaxPhaseAgg()
 
-    usanYearProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound',
-      'USAN_YEAR')
+    usanYearProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'USAN_YEAR')
     maxPhaseProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'MAX_PHASE', true)
-
     barsColourScale = maxPhaseProp.colourScale
 
     histogramConfig =
@@ -164,9 +204,6 @@ class MainPageApp
       model: targetHierarchy
       config: config
       report_card_app: @
-
-  @initFirstApprovalByMoleculeType = ->
-    console.log 'init percentage histogram :)'
 
   @initDatabaseSummary = ->
     databaseInfo = new glados.models.MainPage.DatabaseSummaryInfo()
