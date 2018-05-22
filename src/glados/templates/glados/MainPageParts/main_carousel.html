@@ -3,11 +3,19 @@
     <div class="carousel-item">
 
         {% with is_dynamic=True %}
-            {% include "glados/MainPageParts/TargetBrowserParts/browse_as_circles.html" %}
+            {% include "glados/MainPageParts/Visualizations/browse_entities.html" %}
         {% endwith %}
 
-            <div class="BCK-browse-button btn-container hide-on-med-and-down"
-                 data-hb-template="Handlebars-circles-browser-button">
+    </div>
+
+    <div class="carousel-item">
+
+        {% with is_dynamic=True %}
+            {% include "glados/MainPageParts/Visualizations/zoomable_sunburst.html" %}
+        {% endwith %}
+
+        <div class="BCK-browse-button btn-container hide-on-med-and-down"
+             data-hb-template="Handlebars-circles-browser-button">
 
             <a class="small-text" href="/g/#browse/targets" target="_blank">
 
@@ -22,18 +30,10 @@
     <div class="carousel-item">
 
         {% with is_dynamic=True %}
-            {% include "glados/MainPageParts/Visualizations/browse_entities.html" %}
+            {% include "glados/MainPageParts/TargetBrowserParts/browse_as_circles.html" %}
         {% endwith %}
 
-    </div>
-
-    <div class="carousel-item">
-
-        {% with is_dynamic=True %}
-            {% include "glados/MainPageParts/Visualizations/zoomable_sunburst.html" %}
-        {% endwith %}
-
-        <div class="BCK-browse-button btn-container hide-on-med-and-down"
+        <div class="BCK-browse-button-circles btn-container hide-on-med-and-down"
              data-hb-template="Handlebars-circles-browser-button">
 
             <a class="small-text" href="/g/#browse/targets" target="_blank">

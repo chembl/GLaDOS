@@ -2,6 +2,7 @@
 
 <div class="links-carousel">
 
+    <!-- Button for browse entities as circles -->
     <div class="carousel-item">
 
         <div class="btn-container">
@@ -16,6 +17,7 @@
 
     </div>
 
+    <!-- Button for zoomable sunburst -->
     <div class="carousel-item">
 
         <div class="BCK-browse-button-medium btn-container"
@@ -31,24 +33,45 @@
 
     </div>
 
+    <!-- Button for browse as circles view -->
     <div class="carousel-item">
 
-        <div class="btn-container">
+        <div class="BCK-browse-button-medium-circles btn-container"
+             data-hb-template="Handlebars-circles-browser-button-medium">
 
-            <a class="hollow-button" href="/g/#browse/drugs" target="_blank">
-                Browse all Drugs
+            <a class="hollow-button" href="/g/#browse/targets" target="_blank">
+
+                Browse all Targets
+
             </a>
 
         </div>
 
     </div>
 
+    <!-- Button for main histogram -->
     <div class="carousel-item">
 
         <div class="btn-container">
 
-            <a class="hollow-button" href="/g/#browse/drugs/filter/_metadata.compound_records.src_id:13" target="_blank">
+            <a class="hollow-button" href="/g/#browse/drugs/filter/_metadata.compound_records.src_id:13"
+               target="_blank">
+
                 Browse all USAN Drugs
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- Button for donut chart -->
+    <div class="carousel-item">
+
+        <div class="btn-container">
+
+            <a class="hollow-button" href="/g/#browse/drugs" target="_blank">
+                Browse all Drugs
             </a>
 
         </div>
