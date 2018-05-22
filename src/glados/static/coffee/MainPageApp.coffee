@@ -25,7 +25,7 @@ class MainPageApp
     $carouselContainer.slick {
       asNavFor: $linksCarousel
       arrows: true
-      autoplay: true
+      autoplay: false
       autoplaySpeed: 4000
       dots: true
     }
@@ -43,8 +43,6 @@ class MainPageApp
     MainPageApp.initTargetsVisualisation()
     MainPageApp.initMaxPhaseForDisease()
     MainPageApp.initFirstApprovalByMoleculeType()
-
-
 
   @initZoomableSunburst = ->
     targetHierarchyAgg = MainPageApp.getTargetsTreeAgg()
@@ -104,9 +102,9 @@ class MainPageApp
     console.log 'init percentage histogram :)'
     drugsByMoleculeType = MainPageApp.getFirstApprovalPercentage()
 
-    usanYearProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'USAN_YEAR')
-    maxPhaseProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'MAX_PHASE', true)
-    barsColourScale = maxPhaseProp.colourScale
+    approvalDateProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'FIRST_APPROVAL')
+    moleculeTypeProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'MOLECULE_TYPE', true)
+    barsColourScale = moleculeTypeProp.colourScale
 
     histogramConfig =
       bars_colour_scale: barsColourScale
@@ -118,17 +116,17 @@ class MainPageApp
       big_size: true
       paint_axes_selectors: true
       properties:
-        year: usanYearProp
-        max_phase: maxPhaseProp
+        year: approvalDateProp
+        molecule_type: moleculeTypeProp
       initial_property_x: 'year'
-      initial_property_z: 'max_phase'
+      initial_property_z: 'molecule_type'
       x_axis_options: ['count']
       x_axis_min_columns: 1
       x_axis_max_columns: 40
       x_axis_initial_num_columns: 40
-      x_axis_prop_name: 'yearByMaxPhase'
-      title: 'Drugs by Usan Year'
-      title_link_url: Drug.getDrugsListURL('_metadata.compound_records.src_id:13 AND _exists_:usan_year')
+      x_axis_prop_name: 'firstApprovalByMoleculeType'
+      title: 'Molecule Type by Approval Date'
+      title_link_url: Compound.getCompoundsListURL()
 
     config =
       histogram_config: histogramConfig
@@ -279,7 +277,7 @@ class MainPageApp
 
     aggsConfig =
       aggs:
-        yearByMaxPhase:
+        firstApprovalByMoleculeType:
           type: glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
           field: 'first_approval'
           default_interval_size: defaultInterval
@@ -287,7 +285,7 @@ class MainPageApp
           max_interval_size: 10
           bucket_key_parse_function: (key) -> key.replace(/\.0/i, '')
           aggs:
-            max_phase:
+            molecule_type:
               type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
               field: 'molecule_type'
               size: 10

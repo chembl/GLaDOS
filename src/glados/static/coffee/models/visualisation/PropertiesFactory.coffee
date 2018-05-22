@@ -6,6 +6,9 @@ glados.useNameSpace 'glados.models.visualisation',
         USAN_YEAR:
           propName: 'usan_year'
           label: 'Year'
+        FIRST_APPROVAL:
+          propName: 'first_approval'
+          label: 'Year'
         RELATED_ASSAYS:
           propName: 'type'
           label: 'Types'
@@ -107,6 +110,18 @@ glados.useNameSpace 'glados.models.visualisation',
             glados.Settings.VIS_COLORS.TEAL3,
             glados.Settings.VIS_COLORS.TEAL4,
             glados.Settings.VIS_COLORS.TEAL5,
+          ]
+          colourScaleType: glados.Visualisation.CATEGORICAL
+        MOLECULE_TYPE:
+          propName: 'molecule_type'
+          label: 'Molecule Type'
+          domain: [ 0, 1, 2, 3, 4]
+          coloursRange: [
+            glados.Settings.VIS_COLORS.RED5,
+            glados.Settings.VIS_COLORS.RED4,
+            glados.Settings.VIS_COLORS.RED3,
+            glados.Settings.VIS_COLORS.RED2,
+            glados.Settings.VIS_COLORS.RED1,
           ]
           colourScaleType: glados.Visualisation.CATEGORICAL
         INDICATION_CLASS:
