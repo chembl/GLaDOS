@@ -128,6 +128,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
         return
 
       if thisView.focusNode != d
+
         thisView.focusTo(thisView.currentHover)
         thisView.drawMissingCircles(thisView.currentHover)
         thisView.fillBrowseButtonTemplate thisView.currentHover.name, thisView.currentHover.link
@@ -156,7 +157,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       circles = svg.selectAll('circle')
         .data(nodesToRender)
-
       circles.exit().remove()
 
       circles.enter()
@@ -171,9 +171,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
         .on('click', handleClickOnNode)
         .on('mouseover', handleNodeMouseOver)
 
-#     remove all texts so that they are rendered on top of the circles
       texts = svg.selectAll('text').remove()
-
       texts = svg.selectAll('text')
         .data(nodesToRender)
 
@@ -182,10 +180,11 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
         .classed('label', true)
         .attr('text-anchor', 'middle')
         .style("fill-opacity", (d) ->
-          if d.parent == thisView.focusNode then 1 else 0)
-        .style("display", (d) ->
-          if d.parent == thisView.focusNode then 'inline' else 'none')
-        .text((d) -> return d.name + " (" + d.size + ")" )
+          focusIsleaf = d == thisView.focusNode and not d.children?
+          if d.parent == thisView.focusNode or focusIsleaf then 1 else 0
+        ).style("display", (d) ->
+          if d.parent == thisView.focusNode or not d.children? then 'inline' else 'none'
+        ).text((d) -> return d.name + " (" + d.size + ")" )
         .attr('font-size', (d) ->
           if d.children?
             return "#{textSize(d.children.length)}%"
