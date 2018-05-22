@@ -193,6 +193,10 @@ glados.useNameSpace 'glados.views.Visualisation',
         .domain([0, _.max(bucketSizes)])
         .range([BARS_MIN_HEIGHT, @BARS_CONTAINER_HEIGHT])
 
+      thisView.FlattenHeighttoPrecentage = d3.scale.linear()
+        .range([0, @BARS_CONTAINER_HEIGHT])
+
+
       if @config.stacked_histogram
         @renderStackedHistogramBars(barsContainerG, buckets)
       else
@@ -494,6 +498,9 @@ glados.useNameSpace 'glados.views.Visualisation',
         previousHeight = thisView.BARS_CONTAINER_HEIGHT
         for bucket in subBuckets
           bucket.posY =  previousHeight - thisView.getHeightForBucket(bucket.doc_count)
+          if thisView.config.y_scale_mode == 'percentage'
+            bucket.posY =  previousHeight - thisView.FlattenHeighttoPrecentage(bucket.doc_count)
+
           previousHeight = bucket.posY
 
 #       stacked bars
@@ -506,8 +513,13 @@ glados.useNameSpace 'glados.views.Visualisation',
           .classed('bar-group', true)
 
         stackedBarsGroups.append('rect')
-          .attr('height', (b) -> thisView.getHeightForBucket(b.doc_count))
-          .attr('width', thisView.getXForBucket.rangeBand())
+          .attr('height', (b) ->
+
+            if thisView.config.y_scale_mode == 'percentage'
+              thisView.FlattenHeighttoPrecentage(bucket.doc_count)
+            else
+              thisView.getHeightForBucket(b.doc_count)
+          ).attr('width', thisView.getXForBucket.rangeBand())
           .attr('fill', (b) ->
             if b.key == 'Other'
               return glados.Settings.VIS_COLORS.GREY2

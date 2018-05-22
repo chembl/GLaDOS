@@ -125,6 +125,7 @@ class MainPageApp
       x_axis_max_columns: 40
       x_axis_initial_num_columns: 40
       x_axis_prop_name: 'firstApprovalByMoleculeType'
+      y_scale_mode: 'percentage'
       title: 'Molecule Type by Approval Date'
       title_link_url: Compound.getCompoundsListURL()
 
