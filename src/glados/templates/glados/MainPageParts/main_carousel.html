@@ -30,24 +30,6 @@
     <div class="carousel-item">
 
         {% with is_dynamic=True %}
-            {% include "glados/MainPageParts/Visualizations/MaxPhaseForDiseaseDonut.html" %}
-        {% endwith %}
-
-        <div class="btn-container hide-on-med-and-down">
-
-            <a class="small-text" href="/g/#browse/drugs" target="_blank">
-
-                Browse all Drugs
-
-            </a>
-
-        </div>
-
-    </div>
-
-    <div class="carousel-item">
-
-        {% with is_dynamic=True %}
 
             {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
 
@@ -64,5 +46,43 @@
         </div>
 
     </div>
+
+    <div class="carousel-item">
+
+        {% with is_dynamic=True %}
+            {% include "glados/MainPageParts/TargetBrowserParts/browse_as_circles.html" %}
+        {% endwith %}
+
+        <div class="BCK-browse-button-circles btn-container hide-on-med-and-down"
+             data-hb-template="Handlebars-circles-browser-button">
+
+            <a class="small-text" href="/g/#browse/targets" target="_blank">
+
+                Browse all Targets
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="carousel-item">
+
+        {% with is_dynamic=True %}
+            {% include "glados/MainPageParts/Visualizations/MaxPhaseForDiseaseDonut.html" %}
+        {% endwith %}
+
+        <div class="btn-container hide-on-med-and-down">
+
+            <a class="small-text" href="/g/#browse/drugs" target="_blank">
+
+                Browse all Drugs
+
+            </a>
+
+        </div>
+
+    </div>
+
 
 </div>
