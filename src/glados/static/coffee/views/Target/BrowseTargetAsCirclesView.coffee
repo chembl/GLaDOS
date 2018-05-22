@@ -128,9 +128,9 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
         return
 
       if thisView.focusNode != d
-        if d.children?
-          thisView.focusTo(thisView.currentHover)
-          thisView.drawMissingCircles(thisView.currentHover)
+
+        thisView.focusTo(thisView.currentHover)
+        thisView.drawMissingCircles(thisView.currentHover)
         thisView.fillBrowseButtonTemplate thisView.currentHover.name, thisView.currentHover.link
 
 
@@ -183,10 +183,11 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
         .classed('label', true)
         .attr('text-anchor', 'middle')
         .style("fill-opacity", (d) ->
-          if d.parent == thisView.focusNode then 1 else 0)
-        .style("display", (d) ->
-          if d.parent == thisView.focusNode then 'inline' else 'none')
-        .text((d) -> return d.name + " (" + d.size + ")" )
+          focusIsleaf = if d == thisView.focusNode and not d.children?
+          if d.parent == thisView.focusNode or focusIsleaf then 1 else 0
+        ).style("display", (d) ->
+          if d.parent == thisView.focusNode or not d.children? then 'inline' else 'none'
+        ).text((d) -> return d.name + " (" + d.size + ")" )
         .attr('font-size', (d) ->
           if d.children?
             return "#{textSize(d.children.length)}%"
