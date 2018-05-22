@@ -30,6 +30,26 @@
     <div class="carousel-item">
 
         {% with is_dynamic=True %}
+
+            {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
+
+        {% endwith %}
+
+        <div class="btn-container hide-on-med-and-down">
+
+            <a class="small-text" href="/g/#browse/drugs/filter/_metadata.compound_records.src_id:13" target="_blank">
+
+                Browse all USAN Drugs
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="carousel-item">
+
+        {% with is_dynamic=True %}
             {% include "glados/MainPageParts/TargetBrowserParts/browse_as_circles.html" %}
         {% endwith %}
 
@@ -64,24 +84,5 @@
 
     </div>
 
-    <div class="carousel-item">
-
-        {% with is_dynamic=True %}
-
-            {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
-
-        {% endwith %}
-
-        <div class="btn-container hide-on-med-and-down">
-
-            <a class="small-text" href="/g/#browse/drugs/filter/_metadata.compound_records.src_id:13" target="_blank">
-
-                Browse all USAN Drugs
-
-            </a>
-
-        </div>
-
-    </div>
 
 </div>
