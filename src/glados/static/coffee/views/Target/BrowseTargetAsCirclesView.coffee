@@ -190,7 +190,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
           else return "#{textSize(0)}%"
         )
 
-
     nodes = @originalNodes.filter((d) -> d.depth < 3 )
     @renderedNodes = nodes
     @appendCirclesAndTexts(@renderedNodes)
@@ -246,9 +245,9 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
   drawMissingCircles: (node) ->
 
     newNodesToRender = @originalNodes.filter((d) -> d.parent_id == node.id )
-    nodes = @originalNodes.filter((d) -> d.depth < 3)
-    nodes = nodes.concat newNodesToRender
-    @appendCirclesAndTexts(nodes)
+    @renderedNodes = _.uniq( @renderedNodes.concat newNodesToRender)
+    
+    @appendCirclesAndTexts(@renderedNodes)
 
   zoomTo: (newViewFrame) ->
 
