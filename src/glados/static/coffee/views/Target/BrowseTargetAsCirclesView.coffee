@@ -157,10 +157,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
       circles = svg.selectAll('circle')
         .data(nodesToRender)
 
-      texts = svg.selectAll('text')
-        .data(nodesToRender)
-
-      texts.exit().remove()
       circles.exit().remove()
 
       circles.enter()
@@ -174,6 +170,12 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
           if d.children then color(d.depth) else glados.Settings.VIS_COLORS.WHITE)
         .on('click', handleClickOnNode)
         .on('mouseover', handleNodeMouseOver)
+
+#     remove all texts so that they are rendered on top of the circles
+      texts = svg.selectAll('text').remove()
+
+      texts = svg.selectAll('text')
+        .data(nodesToRender)
 
       texts.enter()
         .append('text')
@@ -246,7 +248,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     newNodesToRender = @originalNodes.filter((d) -> d.parent_id == node.id )
     @renderedNodes = _.uniq( @renderedNodes.concat newNodesToRender)
-    
+
     @appendCirclesAndTexts(@renderedNodes)
 
   zoomTo: (newViewFrame) ->
