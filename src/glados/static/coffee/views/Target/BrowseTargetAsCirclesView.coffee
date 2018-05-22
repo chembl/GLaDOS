@@ -102,7 +102,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     .attr("transform", "translate(" + @VISUALISATION_WIDTH / 2 + "," + @VISUALISATION_HEIGHT / 2 + ")")
 
     @focusNode = @root
-    console.log 'focusNode: ', @focusNode
     @originalNodes = pack.nodes(@root)
     @currentViewFrame = undefined
 
@@ -155,11 +154,18 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
     @appendCirclesAndTexts = (nodesToRender) ->
 
-      circles = svg.selectAll('.circle')
+      circles = svg.selectAll('circle')
         .data(nodesToRender)
-        .enter()
+
+      texts = svg.selectAll('text')
+        .data(nodesToRender)
+
+      texts.exit().remove()
+      circles.exit().remove()
+
+      circles.enter()
         .append('circle')
-        .attr('class', 'circle')
+        .classed('circle', true)
         .attr("class", (d) ->
           if d.parent then (if d.children then 'node' else 'node node--leaf') else 'node node--root')
         .attr("id", (d) ->
@@ -169,11 +175,9 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
         .on('click', handleClickOnNode)
         .on('mouseover', handleNodeMouseOver)
 
-      texts = svg.selectAll('.label')
-        .data(nodesToRender)
-        .enter()
+      texts.enter()
         .append('text')
-        .attr("class", "label")
+        .classed('label', true)
         .attr('text-anchor', 'middle')
         .style("fill-opacity", (d) ->
           if d.parent == thisView.focusNode then 1 else 0)
@@ -242,8 +246,9 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
   drawMissingCircles: (node) ->
 
     newNodesToRender = @originalNodes.filter((d) -> d.parent_id == node.id )
-    @renderedNodes = @renderedNodes.concat newNodesToRender
-    @appendCirclesAndTexts(@renderedNodes)
+    nodes = @originalNodes.filter((d) -> d.depth < 3)
+    nodes = nodes.concat newNodesToRender
+    @appendCirclesAndTexts(nodes)
 
   zoomTo: (newViewFrame) ->
 
