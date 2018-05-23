@@ -521,7 +521,7 @@ glados.useNameSpace 'glados',
         return buckets
 
 #     returns ordered list of sub buckets odc count
-      getSubBucketsOrder: (buckets, subBucketsAggName) ->
+      getSubBucketsOrder: (buckets, subBucketsAggName, ascendant = false ) ->
         internalBucketsCounts = {}
 
         for bucket in buckets
@@ -543,7 +543,10 @@ glados.useNameSpace 'glados',
             key: key
             count: value
 
-        sortedList = _.sortBy sortingList, (item) -> -item.count
+        if ascendant
+          sortedList = _.sortBy sortingList, (item) -> item.count
+        else
+          sortedList = _.sortBy sortingList, (item) -> -item.count
 
         InternalBucketsWithPosition = {}
         for item, pos in sortedList

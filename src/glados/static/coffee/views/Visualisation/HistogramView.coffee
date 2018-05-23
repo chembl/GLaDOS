@@ -446,10 +446,9 @@ glados.useNameSpace 'glados.views.Visualisation',
     #-------------------------------------------------------------------------------------------------------------------
 
     renderStackedHistogramBars: (barsContainerG, buckets) ->
-
-      subBucketsOrder = glados.Utils.Buckets.getSubBucketsOrder(buckets, @subBucketsAggName)
       thisView = @
-
+      subBucketsOrder = glados.Utils.Buckets.getSubBucketsOrder(buckets, @subBucketsAggName, thisView.config.y_scale_mode == 'percentage')
+      
       zScaleDomains = []
       for key, value of subBucketsOrder
           zScaleDomains.push(key)

@@ -115,15 +115,16 @@ glados.useNameSpace 'glados.models.visualisation',
         MOLECULE_TYPE:
           propName: 'molecule_type'
           label: 'Molecule Type'
-          domain: [ 0, 1, 2, 3, 4]
+          domain: [ 'Small molecule', 'Protein', 'Antibody', 'Unknown',
+            'Oligosaccharide', 'Enzyme', 'Oligonucleotide']
           coloursRange: [
-            glados.Settings.VIS_COLORS.TEAL5,
-            glados.Settings.VIS_COLORS.TEAL4,
-            glados.Settings.VIS_COLORS.TEAL3,
-            glados.Settings.VIS_COLORS.RED4,
-            glados.Settings.VIS_COLORS.RED3,
+            glados.Settings.VIS_COLORS.RED1,
             glados.Settings.VIS_COLORS.RED2,
-            glados.Settings.VIS_COLORS.RED1
+            glados.Settings.VIS_COLORS.RED3,
+            glados.Settings.VIS_COLORS.RED4,
+            glados.Settings.VIS_COLORS.TEAL3,
+            glados.Settings.VIS_COLORS.TEAL4,
+            glados.Settings.VIS_COLORS.TEAL5
           ]
           colourScaleType: glados.Visualisation.CATEGORICAL
         INDICATION_CLASS:
