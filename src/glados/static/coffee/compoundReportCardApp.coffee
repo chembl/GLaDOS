@@ -336,6 +336,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     histogramConfig =
       bars_colour_scale: barsColourScale
       stacked_histogram: true
+      y_scale_mode: 'normal'
       rotate_x_axis_if_needed: false
       legend_vertical: true
       big_size: true

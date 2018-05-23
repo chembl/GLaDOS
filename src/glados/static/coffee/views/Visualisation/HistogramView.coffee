@@ -313,10 +313,11 @@ glados.useNameSpace 'glados.views.Visualisation',
         .tickSize(-@BARS_CONTAINER_WIDTH, 0)
         .orient('left')
 
-      if @config.y_scale_mode =='percentage'
+      if @config.y_scale_mode == 'percentage'
+
         scaleForYAxis = d3.scale.linear()
-          .domain([0, 100])
-          .range([@BARS_CONTAINER_WIDTH, 0])
+          .domain([100, 0])
+          .range([0, @BARS_CONTAINER_WIDTH])
 
         yAxis = d3.svg.axis()
           .scale(scaleForYAxis)
@@ -448,7 +449,7 @@ glados.useNameSpace 'glados.views.Visualisation',
     renderStackedHistogramBars: (barsContainerG, buckets) ->
       thisView = @
       subBucketsOrder = glados.Utils.Buckets.getSubBucketsOrder(buckets, @subBucketsAggName, thisView.config.y_scale_mode == 'percentage')
-      
+
       zScaleDomains = []
       for key, value of subBucketsOrder
           zScaleDomains.push(key)
@@ -528,10 +529,11 @@ glados.useNameSpace 'glados.views.Visualisation',
 
         stackedBarsGroups.append('rect')
           .attr('height', (b) ->
-            thisView.getHeightForBucket(b.doc_count)
-
+            
             if thisView.config.y_scale_mode == 'percentage'
               thisView.flattenHeighttoPrecentage(b.doc_count)
+            else
+              thisView.getHeightForBucket(b.doc_count)
 
           ).attr('width', thisView.getXForBucket.rangeBand())
           .attr('fill', (b) ->

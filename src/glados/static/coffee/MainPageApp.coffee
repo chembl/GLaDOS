@@ -156,6 +156,7 @@ class MainPageApp
       sort_by_key: true
       rotate_x_axis_if_needed: false
       hide_x_axis_title: true
+      y_scale_mode: 'normal'
       legend_vertical: true
       big_size: true
       paint_axes_selectors: true
