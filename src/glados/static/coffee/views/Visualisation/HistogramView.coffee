@@ -289,7 +289,6 @@ glados.useNameSpace 'glados.views.Visualisation',
         xAxis.tickFormat(formatAsYear)
             .tickValues thisView.getXForBucket.domain().filter((d, i) -> !(i % xAxisTickInterval))
 
-
       xAxisContainerG.call(xAxis)
 
       if @config.rotate_x_axis_if_needed
@@ -317,15 +316,16 @@ glados.useNameSpace 'glados.views.Visualisation',
 
         scaleForYAxis = d3.scale.linear()
           .domain([100, 0])
-          .range([0, @BARS_CONTAINER_WIDTH])
+          .range([0, @BARS_CONTAINER_HEIGHT])
 
         yAxis = d3.svg.axis()
           .scale(scaleForYAxis)
-          .tickSize(-@BARS_CONTAINER_WIDTH, 0)
+          .tickSize(-@BARS_CONTAINER_HEIGHT, 0)
           .orient('left')
 
 
       yAxisContainerG.call(yAxis)
+
       if @config.stacked_histogram
         yAxisContainerG.selectAll('.tick line').style('display', 'none')
       else
@@ -529,7 +529,7 @@ glados.useNameSpace 'glados.views.Visualisation',
 
         stackedBarsGroups.append('rect')
           .attr('height', (b) ->
-            
+
             if thisView.config.y_scale_mode == 'percentage'
               thisView.flattenHeighttoPrecentage(b.doc_count)
             else
