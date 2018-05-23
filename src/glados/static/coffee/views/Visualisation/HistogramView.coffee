@@ -543,6 +543,9 @@ glados.useNameSpace 'glados.views.Visualisation',
               return zScale(b.key)
           )
           .on('click', (b) -> glados.Utils.URLS.shortenLinkIfTooLongAndOpen(b.link))
+          .on('mouseover', -> d3.select(@).classed('hovered', true))
+          .on('mouseout', -> d3.select(@).classed('hovered', false))
+
 
 #       qtips
         stackedBarsGroups.each (d) ->
