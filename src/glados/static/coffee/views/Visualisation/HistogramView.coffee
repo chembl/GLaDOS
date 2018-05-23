@@ -322,7 +322,7 @@ glados.useNameSpace 'glados.views.Visualisation',
           .scale(scaleForYAxis)
           .tickSize(-@BARS_CONTAINER_HEIGHT, 0)
           .orient('left')
-
+          .tickFormat((d) -> d + '%')
 
       yAxisContainerG.call(yAxis)
 
@@ -543,6 +543,9 @@ glados.useNameSpace 'glados.views.Visualisation',
               return zScale(b.key)
           )
           .on('click', (b) -> glados.Utils.URLS.shortenLinkIfTooLongAndOpen(b.link))
+          .on('mouseover', -> d3.select(@).classed('hovered', true))
+          .on('mouseout', -> d3.select(@).classed('hovered', false))
+
 
 #       qtips
         stackedBarsGroups.each (d) ->
