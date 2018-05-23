@@ -25,7 +25,7 @@ class MainPageApp
     $carouselContainer.slick {
       asNavFor: $linksCarousel
       arrows: true
-      autoplay: true
+      autoplay: false
       autoplaySpeed: 4000
       dots: true
     }
@@ -382,20 +382,10 @@ class MainPageApp
                   field: '_metadata.organism_taxonomy.l3'
                   size: 50
                   bucket_links:
-                    bucket_filter_template: '_metadata.protein_classification.l3:("{{bucket_key}}")'
+                    bucket_filter_template: '_metadata.organism_taxonomy.l3:("{{bucket_key}}")'
                     template_data:
                       bucket_key: 'BUCKET.key'
                     link_generator: Target.getTargetsListURL
-                  aggs:
-                    children:
-                      type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
-                      field: '_metadata.organism_taxonomy.l3'
-                      size: 50
-                      bucket_links:
-                        bucket_filter_template: '_metadata.protein_classification.l4:("{{bucket_key}}")'
-                        template_data:
-                          bucket_key: 'BUCKET.key'
-                        link_generator: Target.getTargetsListURL
 
     organismTreeAgg = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.TARGET_INDEX_URL

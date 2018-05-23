@@ -130,7 +130,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
       if thisView.focusNode != d
 
         thisView.focusTo(thisView.currentHover)
-        thisView.drawMissingCircles(thisView.currentHover)
+#        thisView.drawMissingCircles(thisView.currentHover)
         thisView.fillBrowseButtonTemplate thisView.currentHover.name, thisView.currentHover.link
 
 
@@ -191,7 +191,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
           else return "#{textSize(0)}%"
         )
 
-    nodes = @originalNodes.filter((d) -> d.depth < 5 )
+    nodes = @originalNodes.filter((d) -> d.depth < 4 )
     @renderedNodes = nodes
     @appendCirclesAndTexts(@renderedNodes)
 
