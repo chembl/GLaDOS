@@ -322,7 +322,7 @@ glados.useNameSpace 'glados.views.Visualisation',
           .scale(scaleForYAxis)
           .tickSize(-@BARS_CONTAINER_HEIGHT, 0)
           .orient('left')
-
+          .tickFormat((d) -> d + '%')
 
       yAxisContainerG.call(yAxis)
 
