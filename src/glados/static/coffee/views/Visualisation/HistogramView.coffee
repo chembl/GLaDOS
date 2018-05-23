@@ -193,6 +193,10 @@ glados.useNameSpace 'glados.views.Visualisation',
         .domain([0, _.max(bucketSizes)])
         .range([BARS_MIN_HEIGHT, @BARS_CONTAINER_HEIGHT])
 
+      thisView.flattenHeighttoPrecentage = d3.scale.linear()
+        .range([0, @BARS_CONTAINER_HEIGHT])
+
+
       if @config.stacked_histogram
         @renderStackedHistogramBars(barsContainerG, buckets)
       else
@@ -285,7 +289,6 @@ glados.useNameSpace 'glados.views.Visualisation',
         xAxis.tickFormat(formatAsYear)
             .tickValues thisView.getXForBucket.domain().filter((d, i) -> !(i % xAxisTickInterval))
 
-
       xAxisContainerG.call(xAxis)
 
       if @config.rotate_x_axis_if_needed
@@ -309,7 +312,20 @@ glados.useNameSpace 'glados.views.Visualisation',
         .tickSize(-@BARS_CONTAINER_WIDTH, 0)
         .orient('left')
 
+      if @config.y_scale_mode == 'percentage'
+
+        scaleForYAxis = d3.scale.linear()
+          .domain([100, 0])
+          .range([0, @BARS_CONTAINER_HEIGHT])
+
+        yAxis = d3.svg.axis()
+          .scale(scaleForYAxis)
+          .tickSize(-@BARS_CONTAINER_HEIGHT, 0)
+          .orient('left')
+
+
       yAxisContainerG.call(yAxis)
+
       if @config.stacked_histogram
         yAxisContainerG.selectAll('.tick line').style('display', 'none')
       else
@@ -390,11 +406,11 @@ glados.useNameSpace 'glados.views.Visualisation',
         valueBars.attr('fill', glados.Settings.VIS_COLORS.TEAL3)
 
         frontBar.on('mouseover', (d, i)->
-          esto = d3.select(valueBars[0][i])
-          esto.attr('fill', glados.Settings.VIS_COLORS.RED2))
+          self = d3.select(valueBars[0][i])
+          self.attr('fill', glados.Settings.VIS_COLORS.RED2))
         .on('mouseout', (d, i)->
-          esto = d3.select(valueBars[0][i])
-          esto.attr('fill', glados.Settings.VIS_COLORS.TEAL3))
+          self = d3.select(valueBars[0][i])
+          self.attr('fill', glados.Settings.VIS_COLORS.TEAL3))
 
       #-----------------------------------------------------------------------------------------------------------------
       # qtips
@@ -431,9 +447,8 @@ glados.useNameSpace 'glados.views.Visualisation',
     #-------------------------------------------------------------------------------------------------------------------
 
     renderStackedHistogramBars: (barsContainerG, buckets) ->
-
-      subBucketsOrder = glados.Utils.Buckets.getSubBucketsOrder(buckets, @subBucketsAggName)
       thisView = @
+      subBucketsOrder = glados.Utils.Buckets.getSubBucketsOrder(buckets, @subBucketsAggName, thisView.config.y_scale_mode == 'percentage')
 
       zScaleDomains = []
       for key, value of subBucketsOrder
@@ -492,8 +507,15 @@ glados.useNameSpace 'glados.views.Visualisation',
               subBuckets = _.sortBy(subBuckets, (item) -> item.pos)
 
         previousHeight = thisView.BARS_CONTAINER_HEIGHT
+
+        thisView.flattenHeighttoPrecentage.domain([0, d.doc_count])
+
         for bucket in subBuckets
           bucket.posY =  previousHeight - thisView.getHeightForBucket(bucket.doc_count)
+
+          if thisView.config.y_scale_mode == 'percentage'
+            bucket.posY =  previousHeight - thisView.flattenHeighttoPrecentage(bucket.doc_count)
+
           previousHeight = bucket.posY
 
 #       stacked bars
@@ -506,8 +528,14 @@ glados.useNameSpace 'glados.views.Visualisation',
           .classed('bar-group', true)
 
         stackedBarsGroups.append('rect')
-          .attr('height', (b) -> thisView.getHeightForBucket(b.doc_count))
-          .attr('width', thisView.getXForBucket.rangeBand())
+          .attr('height', (b) ->
+
+            if thisView.config.y_scale_mode == 'percentage'
+              thisView.flattenHeighttoPrecentage(b.doc_count)
+            else
+              thisView.getHeightForBucket(b.doc_count)
+
+          ).attr('width', thisView.getXForBucket.rangeBand())
           .attr('fill', (b) ->
             if b.key == 'Other'
               return glados.Settings.VIS_COLORS.GREY2

@@ -37,11 +37,12 @@ class MainPageApp
       dots: false
     }
 
-    MainPageApp.initDrugsPerUsanYear()
-    MainPageApp.initMaxPhaseForDisease()
-    MainPageApp.initTargetsVisualisation()
     MainPageApp.initBrowseEntities()
     MainPageApp.initZoomableSunburst()
+    MainPageApp.initDrugsPerUsanYear()
+    MainPageApp.initTargetsVisualisation()
+    MainPageApp.initMaxPhaseForDisease()
+    MainPageApp.initFirstApprovalByMoleculeType()
 
   @initZoomableSunburst = ->
     targetHierarchyAgg = MainPageApp.getTargetsTreeAgg()
@@ -97,13 +98,56 @@ class MainPageApp
 
     maxPhaseForDisease.fetch()
 
+  @initFirstApprovalByMoleculeType = ->
+    console.log 'init percentage histogram :)'
+    drugsByMoleculeType = MainPageApp.getFirstApprovalPercentage()
+
+    approvalDateProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'FIRST_APPROVAL')
+    moleculeTypeProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'MOLECULE_TYPE', true)
+    barsColourScale = moleculeTypeProp.colourScale
+
+    histogramConfig =
+      bars_colour_scale: barsColourScale
+      stacked_histogram: true
+      sort_by_key: false
+      rotate_x_axis_if_needed: false
+      hide_x_axis_title: true
+      legend_vertical: true
+      big_size: true
+      paint_axes_selectors: true
+      properties:
+        year: approvalDateProp
+        molecule_type: moleculeTypeProp
+      initial_property_x: 'year'
+      initial_property_z: 'molecule_type'
+      x_axis_options: ['count']
+      x_axis_min_columns: 1
+      x_axis_max_columns: 40
+      x_axis_initial_num_columns: 40
+      x_axis_prop_name: 'firstApprovalByMoleculeType'
+      y_scale_mode: 'percentage'
+      title: 'Molecule Type by First Approval'
+      title_link_url: Compound.getCompoundsListURL('_exists_:first_approval')
+
+    config =
+      histogram_config: histogramConfig
+      is_outside_an_entity_report_card: true
+      embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#documents_by_year_histogram"
+
+    new glados.views.ReportCards.HistogramInCardView
+      el: $('#BCK-FirstApprovalHistogram')
+      model: drugsByMoleculeType
+      config: config
+      report_card_app: @
+
+    drugsByMoleculeType.fetch()
+
   @initDrugsPerUsanYear = ->
+
     allDrugsByYear = MainPageApp.getYearByMaxPhaseAgg()
 
-    usanYearProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound',
-      'USAN_YEAR')
+    usanYearProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'USAN_YEAR')
     maxPhaseProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'MAX_PHASE', true)
-
     barsColourScale = maxPhaseProp.colourScale
 
     histogramConfig =
@@ -112,6 +156,7 @@ class MainPageApp
       sort_by_key: true
       rotate_x_axis_if_needed: false
       hide_x_axis_title: true
+      y_scale_mode: 'normal'
       legend_vertical: true
       big_size: true
       paint_axes_selectors: true
@@ -224,6 +269,42 @@ class MainPageApp
       aggs_config: aggsConfig
 
     return yearByMaxPhase
+
+  @getFirstApprovalPercentage = (defaultInterval = 1) ->
+
+    queryConfig =
+      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
+      query_string_template: '*'
+      template_data: {}
+
+    aggsConfig =
+      aggs:
+        firstApprovalByMoleculeType:
+          type: glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
+          field: 'first_approval'
+          default_interval_size: defaultInterval
+          min_interval_size: 1
+          max_interval_size: 10
+          bucket_key_parse_function: (key) -> key.replace(/\.0/i, '')
+          aggs:
+            molecule_type:
+              type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+              field: 'molecule_type'
+              size: 10
+              bucket_links:
+                bucket_filter_template: 'first_approval:{{year}} AND molecule_type:{{bucket_key}}'
+                template_data:
+                  year: 'BUCKET.parsed_parent_key'
+                  bucket_key: 'BUCKET.key'
+
+                link_generator: Drug.getDrugsListURL
+
+    moleculeTypeByYear = new glados.models.Aggregations.Aggregation
+      index_url: glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
+      query_config: queryConfig
+      aggs_config: aggsConfig
+
+    return moleculeTypeByYear
 
   @getMaxPhaseForDiseaseAgg = () ->
     queryConfig =
