@@ -191,7 +191,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
           else return "#{textSize(0)}%"
         )
 
-    nodes = @originalNodes.filter((d) -> d.depth < 3 )
+    nodes = @originalNodes.filter((d) -> d.depth < 5 )
     @renderedNodes = nodes
     @appendCirclesAndTexts(@renderedNodes)
 

@@ -396,16 +396,6 @@ class MainPageApp
                         template_data:
                           bucket_key: 'BUCKET.key'
                         link_generator: Target.getTargetsListURL
-                      aggs:
-                        children:
-                          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
-                          field: '_metadata.organism_taxonomy.l4_synonyms'
-                          size: 50
-                          bucket_links:
-                            bucket_filter_template: '_metadata.organism_taxonomy.l4_synonyms:("{{bucket_key}}")'
-                            template_data:
-                              bucket_key: 'BUCKET.key'
-                            link_generator: Target.getTargetsListURL
 
     organismTreeAgg = new glados.models.Aggregations.Aggregation
       index_url: glados.models.Aggregations.Aggregation.TARGET_INDEX_URL
