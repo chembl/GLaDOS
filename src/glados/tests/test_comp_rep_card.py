@@ -30,18 +30,20 @@ class CompoundReportCardTest(ReportCardTester):
 
     molecule_type_div = self.browser.find_element_by_id(elem_id)
     icon_div = molecule_type_div.find_element_by_class_name('feat-icon')
-
+    
     if should_be_active:
       self.assertIn('active', icon_div.get_attribute('class'))
     else:
       self.assertNotIn('active', icon_div.get_attribute('class'))
 
     icon = molecule_type_div.find_element_by_tag_name('i')
-    self.assertEqual(icon.get_attribute('data-icon'),
+    parent_el = icon.find_element_by_xpath("..")
+
+    self.assertEqual(parent_el.get_attribute('data-icon'),
                      data_icon)
-    self.assertEqual(icon.get_attribute('data-tooltip'),
+    self.assertEqual(parent_el.get_attribute('data-tooltip'),
                      img_tooltip),
-    self.assertEqual(icon.get_attribute('data-position'),
+    self.assertEqual(parent_el.get_attribute('data-position'),
                      tooltip_position)
 
   def assert_alternate_forms(self, chembl_ids_list):
