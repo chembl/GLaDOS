@@ -439,11 +439,13 @@
 <script id="Handlebars-Compound-MoleculeFeatures-IconContainer" type="text/x-handlebars-template">
   <!-- the django like variables inside the verbatim are rendered with handlebars, not by django -->
   <div class="feat-icon {{active_class}}">
-    <div class="valign-wrapper">
-      <i class="valign icon {{icon_class}} tooltipped {{#unless table_cell_mode}}table_cell_icon{{/unless}}"
-         data-icon="{{data_icon}}"
+    <div class="valign-wrapper tooltipped"
          data-position="{{tooltip_position}}"
-         data-tooltip="{{tooltip}}" data-tooltip="{{tooltip}}"></i>
+         data-tooltip="{{tooltip}}"
+         data-tooltip="{{tooltip}}">
+      <i class="valign icon {{icon_class}} {{#unless table_cell_mode}}table_cell_icon{{/unless}}"
+         data-icon="{{data_icon}}">
+      </i>
     </div>
   </div>
 </script>
