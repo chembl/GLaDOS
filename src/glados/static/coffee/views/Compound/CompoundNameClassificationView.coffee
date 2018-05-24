@@ -53,7 +53,7 @@ CompoundNameClassificationView = CardView.extend
     phase_class = 'comp-phase-' + phase
 
     description = switch
-      when phase == 0 then 'Preclinical'
+      when phase == 0 then 'Research'
       when phase == 1 then 'Phase I'
       when phase == 2 then 'Phase II'
       when phase == 3 then 'Phase III'
