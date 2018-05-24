@@ -34,7 +34,7 @@ GLADOS_ROOT = os.path.dirname(os.path.abspath(glados.__file__))
 
 
 # For usage behind proxies eg: 'chembl/beta/'
-SERVER_BASE_PATH = 'chembl/beta/'
+SERVER_BASE_PATH = ''
 
 # ----------------------------------------------------------------------------------------------------------------------
 # SECURITY WARNING: keep the secret key used in production secret!
