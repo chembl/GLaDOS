@@ -68,7 +68,7 @@ glados.useNameSpace 'glados',
             message += correctEntity.prototype.entityName + '.'
             glados.Utils.showErrorModalMessage(
               message,
-              glados.Settings.GLADOS_BASE_URL_FULL+rcUrl.substring(1)
+              glados.Settings.GLADOS_BASE_URL_DOMAIN+rcUrl.substring(1)
             )
 
     getEntityByReportCardURL: (reportCardURL=window.location.pathname)->
