@@ -9,7 +9,22 @@ from django.contrib import admin
 import glados.grammar.search_parser
 from django.views.i18n import JavaScriptCatalog
 
+
+
 common_urls = [
+  # --------------------------------------------------------------------------------------------------------------------
+  # Translation for Javascript
+  # --------------------------------------------------------------------------------------------------------------------
+
+  url(r'^glados_jsi18n/glados$',
+    JavaScriptCatalog.as_view(packages=['glados'], domain='glados'),
+    name='js-glados-catalog'),
+  url(r'^glados_jsi18n/glados_es_generated$',
+    JavaScriptCatalog.as_view(packages=['glados'], domain='glados_es_generated'),
+    name='js-glados_es_generated-catalog'),
+  url(r'^glados_jsi18n/glados_es_override$',
+    JavaScriptCatalog.as_view(packages=['glados'], domain='glados_es_override'),
+    name='js-glados_es_override-catalog'),
 
   # --------------------------------------------------------------------------------------------------------------------
   # Main Pages
@@ -134,31 +149,13 @@ common_urls = [
 ]
 
 # ----------------------------------------------------------------------------------------------------------------------
-# Static Files
-# ----------------------------------------------------------------------------------------------------------------------
-
-common_urls += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
-# ----------------------------------------------------------------------------------------------------------------------
 # SERVER BASE PATH DEFINITION
 # ----------------------------------------------------------------------------------------------------------------------
 
 urlpatterns = [url(r'^'+settings.SERVER_BASE_PATH, include(common_urls))]
 
 # ----------------------------------------------------------------------------------------------------------------------
-# Translation for Javascript
+# Static Files
 # ----------------------------------------------------------------------------------------------------------------------
 
-urlpatterns += \
-  i18n_patterns(
-    url(r'^{0}glados_jsi18n/glados$'.format(settings.SERVER_BASE_PATH),
-        JavaScriptCatalog.as_view(packages=['glados'], domain='glados'),
-        name='js-glados-catalog'),
-    url(r'^{0}glados_jsi18n/glados_es_generated$'.format(settings.SERVER_BASE_PATH),
-        JavaScriptCatalog.as_view(packages=['glados'], domain='glados_es_generated'),
-        name='js-glados_es_generated-catalog'),
-    url(r'^{0}glados_jsi18n/glados_es_override$'.format(settings.SERVER_BASE_PATH),
-        JavaScriptCatalog.as_view(packages=['glados'], domain='glados_es_override'),
-        name='js-glados_es_override-catalog'),
-  )
-
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
