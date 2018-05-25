@@ -180,7 +180,7 @@ LOCALE_PATHS = [
 
 USE_X_FORWARDED_HOST = True
 
-STATIC_URL = '/{0}static/'.format(SERVER_BASE_PATH)
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
   os.path.join(GLADOS_ROOT, 'static/'),
