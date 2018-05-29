@@ -25,7 +25,7 @@ class CompoundReportCardTest(ReportCardTester):
     href = canonical_smiles_dwnld_btn.get_attribute('href')
     self.assertEqual(href, data)
 
-  def assert_molecule_feature(self, elem_id, should_be_active, data_icon, img_tooltip,
+  def assert_molecule_feature(self, elem_id, should_be_active, icon_class, img_tooltip,
                               tooltip_position):
 
     molecule_type_div = self.browser.find_element_by_id(elem_id)
@@ -39,8 +39,8 @@ class CompoundReportCardTest(ReportCardTester):
     icon = molecule_type_div.find_element_by_tag_name('i')
     parent_el = icon.find_element_by_xpath("..")
 
-    self.assertEqual(icon.get_attribute('data-icon'),
-                     data_icon)
+    self.assertIn(icon_class, icon.get_attribute('class')),
+
     self.assertEqual(parent_el.get_attribute('data-tooltip'),
                      img_tooltip),
     self.assertEqual(parent_el.get_attribute('data-position'),
@@ -108,34 +108,34 @@ class CompoundReportCardTest(ReportCardTester):
     # --------------------------------------
 
     # this is a small molecule
-    self.assert_molecule_feature('Bck-MolType', True, 'l',
+    self.assert_molecule_feature('Bck-MolType', True, 'small-molecule',
                                  'Drug Type: Synthetic Small Molecule', 'top')
     # Rule of five: No. false
-    self.assert_molecule_feature('Bck-RuleOfFive', True, '5',
+    self.assert_molecule_feature('Bck-RuleOfFive', True, 'rule_of_five',
                                  'Rule Of Five: Yes', 'top')
 
     # this compound is not first in class
-    self.assert_molecule_feature('Bck-FirstInClass', False, 'r',
+    self.assert_molecule_feature('Bck-FirstInClass', False, 'first_in_class',
                                  'First in Class: No', 'top')
 
     # Chirality: single stereoisomer: 1
-    self.assert_molecule_feature('Bck-Chirality', True, 'o',
+    self.assert_molecule_feature('Bck-Chirality', True, 'chirally_pure',
                                  'Chirality: Single Stereoisomer', 'top')
 
-    # Ora yes: 'true'
-    self.assert_molecule_feature('Bck-Oral', True, 'u',
+    # Oral yes: 'true'
+    self.assert_molecule_feature('Bck-Oral', True, 'oral',
                                  'Oral: Yes', 'bottom')
 
     # Topical No: false
-    self.assert_molecule_feature('Bck-Topical', False, 'm',
+    self.assert_molecule_feature('Bck-Topical', False, 'topical',
                                  'Topical: No', 'bottom')
 
     # Black Box No: 0
-    self.assert_molecule_feature('Bck-BlackBox', False, 'b',
+    self.assert_molecule_feature('Bck-BlackBox', False, 'black_box',
                                  'Black Box: No',  'bottom')
 
     # Availability Type: Over the counter: 2
-    self.assert_molecule_feature('Bck-Availability', True, 't',
+    self.assert_molecule_feature('Bck-Availability', True, 'otc',
                                  'Availability: Over the Counter', 'bottom')
 
     # --------------------------------------
@@ -176,19 +176,19 @@ class CompoundReportCardTest(ReportCardTester):
     # --------------------------------------
 
     # First in class is undefined: -1
-    self.assert_molecule_feature('Bck-FirstInClass', False, 'r',
+    self.assert_molecule_feature('Bck-FirstInClass', False, 'first_in_class',
                                  'First in Class: Undefined', 'top')
 
     # Chirality Undefined: -1
-    self.assert_molecule_feature('Bck-Chirality', False, '3',
+    self.assert_molecule_feature('Bck-Chirality', False, 'racemic_mixture',
                                  'Chirality: Undefined', 'top')
 
     # Prodrug Undefined: -1
-    self.assert_molecule_feature('Bck-Prodrug', False, 'c',
+    self.assert_molecule_feature('Bck-Prodrug', False, 'prodrug',
                                  'Prodrug: Undefined', 'top')
 
     # Availability Type is Undefined: -1
-    self.assert_molecule_feature('Bck-Availability', False, '1',
+    self.assert_molecule_feature('Bck-Availability', False, 'prescription',
                                  'Availability: Undefined', 'bottom')
 
   def test_compund_report_card_scenario_3(self):
@@ -205,7 +205,7 @@ class CompoundReportCardTest(ReportCardTester):
     # --------------------------------------
 
     # this is an Antibody
-    self.assert_molecule_feature('Bck-MolType', True, 'a',
+    self.assert_molecule_feature('Bck-MolType', True, 'antibody',
                                  'Molecule Type: Antibody', 'top')
 
   def test_compound_report_card_scenario_4(self):
@@ -257,7 +257,7 @@ class CompoundReportCardTest(ReportCardTester):
     # --------------------------------------
 
     # Rule of five: No. false
-    self.assert_molecule_feature('Bck-RuleOfFive', False, '5',
+    self.assert_molecule_feature('Bck-RuleOfFive', False, 'rule_of_five',
                                  'Rule Of Five: No', 'top')
 
   def test_compound_report_card_scenario_6(self):
@@ -324,23 +324,23 @@ class CompoundReportCardTest(ReportCardTester):
     # --------------------------------------
 
     # Chirality: achiral molecule: 2
-    self.assert_molecule_feature('Bck-Chirality', False, 'o',
+    self.assert_molecule_feature('Bck-Chirality', False, 'chirally_pure',
                                  'Chirality: Achiral Molecule', 'top')
 
     # Oral No: false
-    self.assert_molecule_feature('Bck-Oral', False, 'u',
+    self.assert_molecule_feature('Bck-Oral', False, 'oral',
                                  'Oral: No', 'bottom')
 
     # Parenteral Yes: true
-    self.assert_molecule_feature('Bck-Parenteral', True, 's',
+    self.assert_molecule_feature('Bck-Parenteral', True, 'parenteral',
                                  'Parenteral: Yes', 'bottom')
 
     # Topical Yes: true
-    self.assert_molecule_feature('Bck-Topical', True, 'm',
+    self.assert_molecule_feature('Bck-Topical', True, 'topical',
                                  'Topical: Yes', 'bottom')
 
     # Availability Type: Prescription Only: 1
-    self.assert_molecule_feature('Bck-Availability', True, '1',
+    self.assert_molecule_feature('Bck-Availability', True, 'prescription',
                                  'Availability: Prescription Only', 'bottom')
 
   def test_compound_report_card_scenario_9(self):
@@ -379,11 +379,11 @@ class CompoundReportCardTest(ReportCardTester):
     # --------------------------------------
 
     # this is an Enzyme
-    self.assert_molecule_feature('Bck-MolType', True, 'e',
+    self.assert_molecule_feature('Bck-MolType', True, 'enzyme',
                                  'Molecule Type: Enzyme', 'top')
 
     # Availability Type: Discontinued: 0
-    self.assert_molecule_feature('Bck-Availability', True, '1',
+    self.assert_molecule_feature('Bck-Availability', True, 'prescription',
                                  'Availability: Prescription Only', 'bottom')
 
     #since no structure is available, the following buttons must not be found in the page
@@ -409,7 +409,7 @@ class CompoundReportCardTest(ReportCardTester):
     # --------------------------------------
 
     # this compound is first in class
-    self.assert_molecule_feature('Bck-FirstInClass', True, 'r',
+    self.assert_molecule_feature('Bck-FirstInClass', True, 'first_in_class',
                                  'First in Class: Yes', 'top')
 
   def test_compound_report_card_scenario_13(self):
@@ -421,11 +421,11 @@ class CompoundReportCardTest(ReportCardTester):
     # --------------------------------------
 
     # Chirality: achiral molecule: 0
-    self.assert_molecule_feature('Bck-Chirality', True, '3',
+    self.assert_molecule_feature('Bck-Chirality', True, 'racemic_mixture',
                                  'Chirality: Racemic Mixture', 'top')
 
     # Is no prodrug: 0
-    self.assert_molecule_feature('Bck-Prodrug', False, 'c',
+    self.assert_molecule_feature('Bck-Prodrug', False, 'prodrug',
                                  'Prodrug: No', 'top')
 
   def test_compound_report_card_scenario_14(self):
@@ -437,7 +437,7 @@ class CompoundReportCardTest(ReportCardTester):
     # --------------------------------------
 
     # Is prodrug: 1
-    self.assert_molecule_feature('Bck-Prodrug', True, 'c',
+    self.assert_molecule_feature('Bck-Prodrug', True, 'prodrug',
                                  'Prodrug: Yes', 'top')
 
   def test_compound_report_card_scenario_15(self):
@@ -449,7 +449,7 @@ class CompoundReportCardTest(ReportCardTester):
     # --------------------------------------
 
     # Black Box No: 0
-    self.assert_molecule_feature('Bck-BlackBox', True, 'b',
+    self.assert_molecule_feature('Bck-BlackBox', True, 'black_box',
                                  'Black Box: Yes', 'bottom')
 
   def test_compund_report_card_scenario_16(self):
@@ -462,7 +462,7 @@ class CompoundReportCardTest(ReportCardTester):
     # --------------------------------------
 
     # this is an natural product
-    self.assert_molecule_feature('Bck-MolType', True, 'R',
+    self.assert_molecule_feature('Bck-MolType', True, 'natural',
                                  'Drug Type: natural product', 'top')
 
   def test_compund_report_card_scenario_17(self):
@@ -475,5 +475,5 @@ class CompoundReportCardTest(ReportCardTester):
     # --------------------------------------
 
     # the molecule type is unknown
-    self.assert_molecule_feature('Bck-MolType', True, '?',
+    self.assert_molecule_feature('Bck-MolType', True, 'unknown',
                                  'Drug Type: Unknown', 'top')
