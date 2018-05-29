@@ -104,12 +104,12 @@ CompoundFeaturesView = CardView.extend
     'prodrug':
       '-1': ['off', 'Prodrug: Undefined', 'top', 'prodrug'],
       '0': ['off', 'Prodrug: No', 'top', 'prodrug']
-      '1': ['off', 'Prodrug: Yes',  'top', 'prodrug']
+      '1': ['active', 'Prodrug: Yes',  'top', 'prodrug']
     'oral':
-      'true': ['off', 'Oral: Yes', 'bottom', 'oral']
+      'true': ['active', 'Oral: Yes', 'bottom', 'oral']
       'false': ['off', 'Oral: No', 'bottom', 'oral']
     'parenteral':
-      'true': ['off', 'Parenteral: Yes', 'bottom', 'parenteral']
+      'true': ['active', 'Parenteral: Yes', 'bottom', 'parenteral']
       'false': ['off', 'Parenteral: No', 'bottom', 'parenteral']
     'topical':
       'true': ['active', 'Topical: Yes', 'bottom', 'topical']
