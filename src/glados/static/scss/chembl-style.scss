@@ -906,13 +906,11 @@ em.glados-result-highlight {
 
 .mol-features-grid {
   .col {
-    border: 1px solid #fafafa;
     padding: 2px;
-    background-color: #e0e0e0;
   }
 
   .row {
-    margin-bottom: 0;
+    margin-bottom: 0 !important;
   }
 
   .mol-features-grid {
@@ -920,27 +918,43 @@ em.glados-result-highlight {
   }
 
   .feat-icon {
+    padding: 5px;
+    border-radius: 2px;
 
     i {
-      font-size: 2em;
+      font-size: 2.5em;
       margin: auto;
 
       &.table_cell_icon {
-        font-size: 1.6em;
+        font-size: 2.5em;
       }
     }
   }
 
+  .inactive {
+     background-color: #E0E0E0; //grey
+    .feature-icon{
+        color: #9a9a9a; //dark grey
+      }
+  }
+
   .first-row {
     .active {
-      background-color: #73b360;
-      opacity: 0.9
+      background-color: #6CCF6C; //GREEN
+
+      .feature-icon{
+        color: white; //light green
+      }
     }
   }
 
   .second-row {
     .active {
-      background-color: #02355C; //BLUE
+      background-color: #75D8D5; //BLUE
+
+      .feature-icon{
+        color: #38576F; //dark blue
+      }
     }
   }
 

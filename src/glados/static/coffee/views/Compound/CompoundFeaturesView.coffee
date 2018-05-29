@@ -60,16 +60,6 @@ CompoundFeaturesView = CardView.extend
   renderProperty: (featureName, property) ->
     $propertyDiv = $(@el).find('[data-feature-name="' + featureName + '"]')
 
-    console.log featureName, ': ', property
-
-    console.log 'active-class: ', @getMolFeatureDetails(property, 0)
-    console.log 'tooltip: ', @getMolFeatureDetails(property, 1)
-    console.log 'tooltip: ', @getMolFeatureDetails(property, 2)
-    console.log 'icon_class: ', @getMolFeatureDetails(property, 3)
-    console.log 'table_cell_mode: ', @tableCellMode
-
-    console.log '-------'
-
     glados.Utils.fillContentForElement $propertyDiv,
       active_class: @getMolFeatureDetails(property, 0)
       tooltip: @getMolFeatureDetails(property, 1)
@@ -103,36 +93,36 @@ CompoundFeaturesView = CardView.extend
       'Unclassified': ['active', 'Drug Type: Unclassified', 'top', 'unknown']
       'Inorganic': ['active', 'Drug Type: Inorganic','top', 'inorganic']
     'first_in_class':
-      '-1': ['', 'First in Class: Undefined', 'top', 'first_in_class']
-      '0': ['', 'First in Class: No', 'top', 'first_in_class']
+      '-1': ['inactive', 'First in Class: Undefined', 'top', 'first_in_class']
+      '0': ['inactive', 'First in Class: No', 'top', 'first_in_class']
       '1': ['active', 'First in Class: Yes', 'top', 'first_in_class']
     'chirality':
-      '-1': ['', 'Chirality: Undefined', 'top', 'racemic_mixture']
+      '-1': ['inactive', 'Chirality: Undefined', 'top', 'racemic_mixture']
       '0': ['active', 'Chirality: Racemic Mixture', 'top', 'racemic_mixture']
       '1': ['active', 'Chirality: Single Stereoisomer', 'top', 'chirally_pure']
-      '2': ['', 'Chirality: Achiral Molecule', 'top', 'chirally_pure']
+      '2': ['inactive', 'Chirality: Achiral Molecule', 'top', 'chirally_pure']
     'prodrug':
-      '-1': ['', 'Prodrug: Undefined', 'top', 'prodrug'],
-      '0': ['', 'Prodrug: No', 'top', 'prodrug']
-      '1': ['active', 'Prodrug: Yes',  'top', 'prodrug']
+      '-1': ['inactive', 'Prodrug: Undefined', 'top', 'prodrug'],
+      '0': ['inactive', 'Prodrug: No', 'top', 'prodrug']
+      '1': ['inactive', 'Prodrug: Yes',  'top', 'prodrug']
     'oral':
-      'true': ['active', 'Oral: Yes', 'bottom', 'oral']
-      'false': ['', 'Oral: No', 'bottom', 'oral']
+      'true': ['inactive', 'Oral: Yes', 'bottom', 'oral']
+      'false': ['inactive', 'Oral: No', 'bottom', 'oral']
     'parenteral':
-      'true': ['active', 'Parenteral: Yes', 'bottom', 'parenteral']
-      'false': ['', 'Parenteral: No', 'bottom', 'parenteral']
+      'true': ['inactive', 'Parenteral: Yes', 'bottom', 'parenteral']
+      'false': ['inactive', 'Parenteral: No', 'bottom', 'parenteral']
     'topical':
       'true': ['active', 'Topical: Yes', 'bottom', 'topical']
-      'false': ['', 'Topical: No', 'bottom', 'topical']
+      'false': ['inactive', 'Topical: No', 'bottom', 'topical']
     'black_box_warning':
-      '0': ['', 'Black Box: No', 'bottom', 'black_box']
+      '0': ['inactive', 'Black Box: No', 'bottom', 'black_box']
       '1': ['active', 'Black Box: Yes', 'bottom', 'black_box']
     'availability_type':
       '-2': ['active', 'Availability: Withdrawn', 'bottom', 'withdrawn']
-      '-1': ['', 'Availability: Undefined', 'bottom', 'prescription']
+      '-1': ['inactive', 'Availability: Undefined', 'bottom', 'prescription']
       '0': ['active', 'Availability: Discontinued', 'bottom', 'discontinued']
       '1': ['active', 'Availability: Prescription Only', 'bottom', 'prescription']
       '2': ['active', 'Availability: Over the Counter', 'bottom', 'otc']
     'ro5':
       'true': ['active', 'Rule Of Five: Yes', 'top', 'rule_of_five']
-      'false': ['', 'Rule Of Five: No', 'top', 'rule_of_five']
+      'false': ['inactive', 'Rule Of Five: No', 'top', 'rule_of_five']
