@@ -93,36 +93,36 @@ CompoundFeaturesView = CardView.extend
       'Unclassified': ['active', 'Drug Type: Unclassified', 'top', 'unknown']
       'Inorganic': ['active', 'Drug Type: Inorganic','top', 'inorganic']
     'first_in_class':
-      '-1': ['inactive', 'First in Class: Undefined', 'top', 'first_in_class']
-      '0': ['inactive', 'First in Class: No', 'top', 'first_in_class']
+      '-1': ['off', 'First in Class: Undefined', 'top', 'first_in_class']
+      '0': ['off', 'First in Class: No', 'top', 'first_in_class']
       '1': ['active', 'First in Class: Yes', 'top', 'first_in_class']
     'chirality':
-      '-1': ['inactive', 'Chirality: Undefined', 'top', 'racemic_mixture']
+      '-1': ['off', 'Chirality: Undefined', 'top', 'racemic_mixture']
       '0': ['active', 'Chirality: Racemic Mixture', 'top', 'racemic_mixture']
       '1': ['active', 'Chirality: Single Stereoisomer', 'top', 'chirally_pure']
-      '2': ['inactive', 'Chirality: Achiral Molecule', 'top', 'chirally_pure']
+      '2': ['off', 'Chirality: Achiral Molecule', 'top', 'chirally_pure']
     'prodrug':
-      '-1': ['inactive', 'Prodrug: Undefined', 'top', 'prodrug'],
-      '0': ['inactive', 'Prodrug: No', 'top', 'prodrug']
-      '1': ['inactive', 'Prodrug: Yes',  'top', 'prodrug']
+      '-1': ['off', 'Prodrug: Undefined', 'top', 'prodrug'],
+      '0': ['off', 'Prodrug: No', 'top', 'prodrug']
+      '1': ['off', 'Prodrug: Yes',  'top', 'prodrug']
     'oral':
-      'true': ['inactive', 'Oral: Yes', 'bottom', 'oral']
-      'false': ['inactive', 'Oral: No', 'bottom', 'oral']
+      'true': ['off', 'Oral: Yes', 'bottom', 'oral']
+      'false': ['off', 'Oral: No', 'bottom', 'oral']
     'parenteral':
-      'true': ['inactive', 'Parenteral: Yes', 'bottom', 'parenteral']
-      'false': ['inactive', 'Parenteral: No', 'bottom', 'parenteral']
+      'true': ['off', 'Parenteral: Yes', 'bottom', 'parenteral']
+      'false': ['off', 'Parenteral: No', 'bottom', 'parenteral']
     'topical':
       'true': ['active', 'Topical: Yes', 'bottom', 'topical']
-      'false': ['inactive', 'Topical: No', 'bottom', 'topical']
+      'false': ['off', 'Topical: No', 'bottom', 'topical']
     'black_box_warning':
-      '0': ['inactive', 'Black Box: No', 'bottom', 'black_box']
+      '0': ['off', 'Black Box: No', 'bottom', 'black_box']
       '1': ['active', 'Black Box: Yes', 'bottom', 'black_box']
     'availability_type':
       '-2': ['active', 'Availability: Withdrawn', 'bottom', 'withdrawn']
-      '-1': ['inactive', 'Availability: Undefined', 'bottom', 'prescription']
+      '-1': ['off', 'Availability: Undefined', 'bottom', 'prescription']
       '0': ['active', 'Availability: Discontinued', 'bottom', 'discontinued']
       '1': ['active', 'Availability: Prescription Only', 'bottom', 'prescription']
       '2': ['active', 'Availability: Over the Counter', 'bottom', 'otc']
     'ro5':
       'true': ['active', 'Rule Of Five: Yes', 'top', 'rule_of_five']
-      'false': ['inactive', 'Rule Of Five: No', 'top', 'rule_of_five']
+      'false': ['off', 'Rule Of Five: No', 'top', 'rule_of_five']
