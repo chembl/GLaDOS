@@ -26,89 +26,67 @@
 
 .antibody:before {
   content: "\e900";
-  color: #7a7a7a;
 }
 .black_box:before {
   content: "\e901";
-  color: #7a7a7a;
 }
 .chirally_pure:before {
   content: "\e902";
-  color: #7a7a7a;
 }
 .discontinued:before {
   content: "\e903";
-  color: #7a7a7a;
 }
 .enzyme:before {
   content: "\e904";
-  color: #7a7a7a;
 }
 .first_in_class:before {
   content: "\e905";
-  color: #7a7a7a;
 }
 .inorganic:before {
   content: "\e906";
-  color: #7a7a7a;
 }
 .natural:before {
   content: "\e907";
-  color: #7a7a7a;
 }
 .oligonucleotide:before {
   content: "\e908";
-  color: #7a7a7a;
 }
 .oligosaccharide:before {
   content: "\e909";
-  color: #7a7a7a;
 }
 .oral:before {
   content: "\e90a";
-  color: #7a7a7a;
 }
 .otc:before {
   content: "\e90b";
-  color: #7a7a7a;
 }
 .parenteral:before {
   content: "\e90c";
-  color: #7a7a7a;
 }
 .polymer:before {
   content: "\e90d";
-  color: #7a7a7a;
 }
 .prescription:before {
   content: "\e90e";
-  color: #7a7a7a;
 }
 .prodrug:before {
   content: "\e90f";
-  color: #7a7a7a;
 }
 .protein:before {
   content: "\e910";
-  color: #7a7a7a;
 }
 .racemic_mixture:before {
   content: "\e911";
-  color: #7a7a7a;
 }
 .small-molecule:before {
   content: "\e912";
-  color: #7a7a7a;
 }
 .topical:before {
   content: "\e913";
-  color: #7a7a7a;
 }
 .unknown:before {
   content: "\e914";
-  color: #7a7a7a;
 }
 .withdrawn:before {
   content: "\e915";
-  color: #7a7a7a;
 }
