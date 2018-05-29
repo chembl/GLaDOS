@@ -904,13 +904,18 @@ em.glados-result-highlight {
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
+#MoleculeFeaturesCard{
+   .row {
+    margin-bottom: 0;
+  }
+}
 .mol-features-grid {
   .col {
     padding: 2px;
   }
 
   .row {
-    margin-bottom: 0 !important;
+    margin-bottom: 0;
   }
 
   .mol-features-grid {
@@ -932,7 +937,7 @@ em.glados-result-highlight {
   }
 
   .inactive {
-     background-color: #E0E0E0; //grey
+     background-color: #e6e6e6; //grey
     .feature-icon{
         color: #9a9a9a; //dark grey
       }
