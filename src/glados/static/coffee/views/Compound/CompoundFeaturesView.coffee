@@ -102,7 +102,7 @@ CompoundFeaturesView = CardView.extend
       '1': ['active', 'Chirality: Single Stereoisomer', 'top', 'chirally_pure']
       '2': ['off', 'Chirality: Achiral Molecule', 'top', 'chirally_pure']
     'prodrug':
-      '-1': ['off', 'Prodrug: Undefined', 'top', 'prodrug'],
+      '-1': ['off', 'Prodrug: Undefined', 'top', 'prodrug']
       '0': ['off', 'Prodrug: No', 'top', 'prodrug']
       '1': ['active', 'Prodrug: Yes',  'top', 'prodrug']
     'oral':
