@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'molecule-feature';
-  src:  url('fonts/molecule-feature.eot?sssie1');
-  src:  url('fonts/molecule-feature.eot?sssie1#iefix') format('embedded-opentype'),
-    url('fonts/molecule-feature.ttf?sssie1') format('truetype'),
-    url('fonts/molecule-feature.woff?sssie1') format('woff'),
-    url('fonts/molecule-feature.svg?sssie1#molecule-feature') format('svg');
+  src:  url('../font/molecule-feature-icons/molecule-feature.eot?sssie1');
+  src:  url('../font/molecule-feature-icons/molecule-feature.eot?sssie1#iefix') format('embedded-opentype'),
+    url('../font/molecule-feature-icons/molecule-feature.ttf?sssie1') format('truetype'),
+    url('../font/molecule-feature-icons/molecule-feature.woff?sssie1') format('woff'),
+    url('../font/molecule-feature-icons/molecule-feature.svg?sssie1#molecule-feature') format('svg');
   font-weight: normal;
   font-style: normal;
 }
