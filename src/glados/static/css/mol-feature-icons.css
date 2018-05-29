@@ -24,6 +24,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.rule_of_five:before {
+  content: "\e916";
+}
+.cell:before {
+  content: "\63";
+}
 .antibody:before {
   content: "\e900";
 }
