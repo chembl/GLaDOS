@@ -38,9 +38,9 @@ class CompoundReportCardTest(ReportCardTester):
 
     icon = molecule_type_div.find_element_by_tag_name('i')
     parent_el = icon.find_element_by_xpath("..")
+    classes = icon.get_attribute('class')
 
-    self.assertEqual(icon.get_attribute('class'),
-                     icon_class)
+    self.assertTrue(classes.find(icon_class) != -1, msg='classes dont match' )
     self.assertEqual(parent_el.get_attribute('data-tooltip'),
                      img_tooltip),
     self.assertEqual(parent_el.get_attribute('data-position'),
