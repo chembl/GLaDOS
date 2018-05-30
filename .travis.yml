@@ -5,19 +5,14 @@ addons:
     packages:
     - bsdtar
     - gettext
+    - chromium-chromedriver
   chrome: stable
 language: python
 python:
   - "3.5"
 install:
-# Install cromedriver
-  - "sudo chown root /opt/google/chrome/chrome-sandbox"
-  - "sudo chmod 4755 /opt/google/chrome/chrome-sandbox"
-  - "export PLATFORM=linux64"
-  - "VERSION=$(curl http://chromedriver.storage.googleapis.com/LATEST_RELEASE)"
-  - "sudo curl http://chromedriver.storage.googleapis.com/$VERSION/chromedriver_$PLATFORM.zip | sudo bsdtar -xvf - -C /usr/local/bin"
-  - "sudo chown root /usr/local/bin/chromedriver"
-  - "sudo chmod 4755 /usr/local/bin/chromedriver"
+# Install chromedriver
+  - ln -s /usr/lib/chromium-browser/chromedriver ~/bin/chromedriver
 # Install GLaDOS
   - "pip install -r requirements.txt"
   - python setup.py install
