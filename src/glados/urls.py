@@ -40,6 +40,8 @@ common_urls = [
 
   url(r'^entities_records/$', views.get_entities_records, name='entities_records'),
 
+  url(r'^github_details/$', views.get_github_details, name='github_details'),
+
   url(r'^blog_entries/(?P<pageToken>.+)?$', views.get_latest_blog_entries, name='blog_entries'),
 
   url(r'^marvin_search_fullscreen/$',
