@@ -477,10 +477,13 @@ $full-header-height-large: 180px;
     max-width: 1000px;
   }
 
-  span {
-      margin-right: 25px;
-      margin-left: 25px;
+  .btn-container {
+    padding: 0;
   }
+  //span {
+  //    margin-right: 25px;
+  //    margin-left: 25px;
+  //}
 }
 
 /* -------- WANT TO KNOW MORE SECTION-------- */

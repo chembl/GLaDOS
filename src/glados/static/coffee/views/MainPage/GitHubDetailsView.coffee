@@ -14,7 +14,6 @@ glados.useNameSpace 'glados.views.MainPage',
         thisView.render(response)
 
     render: (response) ->
-      console.log 'render: ', response
 
       glados.Utils.fillContentForElement $(@el),
         time_ago : response.time_ago

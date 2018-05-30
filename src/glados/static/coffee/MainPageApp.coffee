@@ -231,11 +231,8 @@ class MainPageApp
     blogEntriesList.fetch()
 
   @initGithubDetails = ->
-    console.log 'init github details'
     new glados.views.MainPage.GitHubDetailsView
       el: $('.BCK-github-details')
-
-
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Aggregations
