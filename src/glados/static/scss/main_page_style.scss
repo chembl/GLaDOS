@@ -468,22 +468,19 @@ $full-header-height-large: 180px;
 
 /* -------- GITHUB DETAILS-------- */
 .github-details {
-  border-top: 1px solid $divider-grey;
-  border-bottom: 1px solid $divider-grey;
+  border-top: 1px solid $grey-light;
+
   padding-top: 30px;
   padding-bottom: 30px;
 
   .container {
-    max-width: 1100px;
+    max-width: 1000px;
   }
 
   span {
-    margin-right: 50px;
-    &.small-text{
-
-    }
+      margin-right: 25px;
+      margin-left: 25px;
   }
-
 }
 
 /* -------- WANT TO KNOW MORE SECTION-------- */
