@@ -65,8 +65,16 @@ $full-header-height-large: 180px;
       height: -moz-fit-content;
     }
 
+    &.min-height {
+      height: fit-content;
+      min-height: 1px;
+      max-height: none;
+      height: -moz-fit-content;
+    }
+
     .section-col {
       height: 100%;
+
     }
   }
 
@@ -87,7 +95,7 @@ $full-header-height-large: 180px;
       padding: 10px 20px;
       background-color: $primary-color;
       color: white;
-      border-radius: 1px;
+      border-radius: 4px;
       letter-spacing: 0.02em;
 
       -webkit-transition: background-color 100ms ease;
@@ -456,6 +464,26 @@ $full-header-height-large: 180px;
       }
     }
   }
+}
+
+/* -------- GITHUB DETAILS-------- */
+.github-details {
+  border-top: 1px solid $divider-grey;
+  border-bottom: 1px solid $divider-grey;
+  padding-top: 30px;
+  padding-bottom: 30px;
+
+  .container {
+    max-width: 1100px;
+  }
+
+  span {
+    margin-right: 50px;
+    &.small-text{
+
+    }
+  }
+
 }
 
 /* -------- WANT TO KNOW MORE SECTION-------- */

@@ -14,5 +14,6 @@ glados.useNameSpace 'glados.views.MainPage',
 
       fetchDatabasePromise.done (response) ->
         console.log 'response: ', response
+#        fillContentForElement(el, response)
 
 
