@@ -14,7 +14,8 @@ from googleapiclient import *
 import re
 from elasticsearch_dsl import Search
 import requests
-
+import datetime
+import timeago
 
 
 
@@ -279,6 +280,11 @@ def get_github_details(request):
     cache_time = 7200
     cache_response = cache.get(cache_key)
 
+    now = datetime.datetime.now()
+    date = last_commit['commit']['author']['date'][:-1]
+    date = datetime.datetime.strptime(date, '%Y-%m-%dT%H:%M:%S')
+    time_ago = timeago.format(date, now)
+
     if cache_response != None:
         print('github details are in cache')
         return JsonResponse(cache_response)
@@ -288,7 +294,7 @@ def get_github_details(request):
     response = {
         'url': last_commit['html_url'],
         'author': last_commit['commit']['author']['name'],
-        'date': last_commit['commit']['author']['date'],
+        'time_ago': time_ago,
         'message': last_commit['commit']['message']
     }
 
