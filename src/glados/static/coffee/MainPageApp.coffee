@@ -233,7 +233,7 @@ class MainPageApp
   @initGithubDetails = ->
     console.log 'init github details'
     new glados.views.MainPage.GitHubDetailsView
-#      el: $('.BCK-github-details')
+      el: $('.BCK-github-details')
 
 
 
