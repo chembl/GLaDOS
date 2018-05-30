@@ -300,7 +300,7 @@ def get_github_details(request):
 
     cache.set(cache_key, response, cache_time)
 
-    return JsonResponse(response)
+    return JsonResponse(last_commit)
 
 def replace_urls_from_entinies(html, urls):
     """
