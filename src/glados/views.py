@@ -18,6 +18,7 @@ import requests
 
 
 
+
 # Returns all acknowledgements grouped by current and old
 def acks(request):
     ack_list = Acknowledgement.objects.order_by('id')
@@ -242,8 +243,6 @@ def get_entities_records(request):
 
     cache_key = 'entities_records'
     cache_time = 604800
-
-    # tries to get number from cache
     cache_response = cache.get(cache_key)
 
     if cache_response != None:
@@ -276,7 +275,16 @@ def get_github_details(request):
 
     last_commit = requests.get('https://api.github.com/repos/chembl/GLaDOS/commits/master').json()
 
-    print('I will get the chembl github details')
+    cache_key = 'github_details'
+    cache_time = 7200
+    cache_response = cache.get(cache_key)
+
+    if cache_response != None:
+        print('github details are in cache')
+        return JsonResponse(cache_response)
+
+    print('github details are not in cache')
+
     response = {
         'url': last_commit['html_url'],
         'author': last_commit['commit']['author']['name'],
@@ -284,8 +292,9 @@ def get_github_details(request):
         'message': last_commit['commit']['message']
     }
 
-    return JsonResponse(response)
+    cache.set(cache_key, response, cache_time)
 
+    return JsonResponse(response)
 
 def replace_urls_from_entinies(html, urls):
     """
