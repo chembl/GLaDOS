@@ -13,7 +13,12 @@ glados.useNameSpace 'glados.views.MainPage',
         console.log 'Fetching github details failed :('
 
       fetchDatabasePromise.done (response) ->
-        console.log 'response: ', response
+
+        time_ago = response.time_ago
+        message = response.message
+        commit_url = response.url
+
+        console.log message, time_ago, commit_url
 #        fillContentForElement(el, response)
 
 
