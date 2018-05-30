@@ -272,6 +272,20 @@ def get_entities_records(request):
 
     return JsonResponse(response)
 
+def get_github_details(request):
+
+    last_commit = requests.get('https://api.github.com/repos/chembl/GLaDOS/commits/master').json()
+
+    print('I will get the chembl github details')
+    response = {
+        'url': last_commit['html_url'],
+        'author': last_commit['commit']['author']['name'],
+        'date': last_commit['commit']['author']['date'],
+        'message': last_commit['commit']['message']
+    }
+
+    return JsonResponse(response)
+
 
 def replace_urls_from_entinies(html, urls):
     """
