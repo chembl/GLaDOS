@@ -469,21 +469,26 @@ $full-header-height-large: 180px;
 /* -------- GITHUB DETAILS-------- */
 .github-details {
   border-top: 1px solid $grey-light;
-
   padding-top: 30px;
   padding-bottom: 30px;
+
+  .row {
+    margin-bottom: 0;
+  }
 
   .container {
     max-width: 1000px;
   }
 
+
   .btn-container {
     padding: 0;
   }
-  //span {
-  //    margin-right: 25px;
-  //    margin-left: 25px;
-  //}
+
+  .spacer-div {
+    height: 3.2em;
+  }
+
 }
 
 /* -------- WANT TO KNOW MORE SECTION-------- */

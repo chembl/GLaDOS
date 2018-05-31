@@ -79,7 +79,7 @@ def get_latest_tweets(page_number=1, count=15):
 
     # If they are found in the cache, just return them
     if t_cached_response and isinstance(t_cached_response, tuple) and len(t_cached_response) == 3:
-        print('Using cached tweets!')
+        print('Tweets are in cache')
         return t_cached_response
 
     print('tweets not found in cache!')
@@ -150,6 +150,7 @@ def get_latest_blog_entries(request, pageToken):
     cache_response = cache.get(cache_key)
 
     if cache_response != None:
+        print('blog entries are in cache')
         return JsonResponse(cache_response)
 
     print('Blog entries not found in cache!')
@@ -247,10 +248,10 @@ def get_entities_records(request):
     cache_response = cache.get(cache_key)
 
     if cache_response != None:
-        print('datasets are in cache')
+        print('records are in cache')
         return JsonResponse(cache_response)
 
-    print('datasets are not in cache')
+    print('records are not in cache')
 
     status_r = requests.get('https://www.ebi.ac.uk/chembl/api/data/status.json').json()
     drug_r = requests.get('https://www.ebi.ac.uk/chembl/api/data/drug.json').json()
