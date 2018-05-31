@@ -49,6 +49,7 @@ Here you can find some informal diagrams that help to understand how some compon
 
 * [All Features](https://drive.google.com/file/d/17t61ULFxI5OznryZTwzedBuaWOiC-qHz/view?usp=sharing)
 * [SVG Icons](https://drive.google.com/open?id=1ZFjAxhsA_PrIgBLvGqbZT8ijofdUSuK2)
+* [Icon Credits](https://sites.google.com/view/icon-credits/home)
 
 
 
