@@ -480,13 +480,16 @@ $full-header-height-large: 180px;
     max-width: 1000px;
   }
 
-
   .btn-container {
     padding: 0;
   }
 
   .spacer-div {
-    height: 3.2em;
+    height: 1.5em;
+  }
+
+  h6 {
+    color: $grey-dark;
   }
 
 }

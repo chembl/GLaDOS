@@ -135,53 +135,59 @@
 
 <script id="Handlebars-github-details" type="text/x-handlebars-template">
 
-        <span class="col s12 m4 l3 small-text center">
+    <span class="col s12 m3 l3 small-text center hide-on-small-only">
 
-            Latest Commit on GitHub:
+        Latest Commit on GitHub:
 
-        </span>
+    </span>
 
-        <span class="col s12 m4 l2 small-text center truncate">
+    <span class="col s12 m3 l3 small-text center hide-on-med-and-up">
 
-            <a href="{{ commit_url }}" target="_blank">
+        <h6> Latest Commit on GitHub: </h6>
 
-                {{ message }}
+    </span>
 
-            </a>
+    <span class="col s8 m2 l2 small-text center truncate">
 
-        </span>
+        <a href="{{ commit_url }}" target="_blank">
 
-        <span class="col s12 m4 l2 small-text grey-light center">
+            {{ message }}
 
-            {{ time_ago }}
+        </a>
 
-        </span>
+    </span>
 
-        <div class="spacer-div hide-on-large-only"> </div>
+    <span class="col s4 m2 l2 small-text grey-light center">
 
-        <div class ="col s12 m3 l1"> </div>
+        {{ time_ago }}
 
-        <span class="col s12 m3 l2 small-text center">
+    </span>
 
-            <a href="https://github.com/chembl/GLaDOS/issues/new" target="_blank">
+    <div class="col s12 spacer-div hide-on-med-and-up"> </div>
 
-                Report a bug
+    <div class ="col s2 m1 l1"> </div>
 
-            </a>
+    <span class="col s4 m2 l2 small-text center">
 
-        </span>
+        <a href="https://github.com/chembl/GLaDOS/issues/new" target="_blank">
 
-        <span class="col s12 m3 l1 btn-container center">
+            Report a bug
 
-            <a class="button" href="https://github.com/chembl/GLaDOS" target="_blank">
+        </a>
 
-               GitHub
+    </span>
 
-            </a>
+    <span class="col s4 m1 l1 btn-container center">
 
-         </span>
+        <a class="button" href="https://github.com/chembl/GLaDOS" target="_blank">
 
-        <div class ="col s12 m3"> </div>
+           GitHub
+
+        </a>
+
+     </span>
+
+    <div class ="col m3 s2"> </div>
 
 </script>
 
