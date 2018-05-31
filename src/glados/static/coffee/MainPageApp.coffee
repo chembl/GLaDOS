@@ -13,6 +13,7 @@ class MainPageApp
     MainPageApp.initAssociatedResources()
     MainPageApp.initTweets()
     MainPageApp.initBlogEntries()
+    MainPageApp.initGithubDetails()
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Init functions
@@ -25,7 +26,7 @@ class MainPageApp
     $carouselContainer.slick {
       asNavFor: $linksCarousel
       arrows: true
-      autoplay: false
+      autoplay: true
       autoplaySpeed: 4000
       dots: true
     }
@@ -99,7 +100,6 @@ class MainPageApp
     maxPhaseForDisease.fetch()
 
   @initFirstApprovalByMoleculeType = ->
-    console.log 'init percentage histogram :)'
     drugsByMoleculeType = MainPageApp.getFirstApprovalPercentage()
 
     approvalDateProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'FIRST_APPROVAL')
@@ -230,6 +230,9 @@ class MainPageApp
     glados.views.PaginatedViews.PaginatedViewFactory.getNewInfinitePaginatedView(blogEntriesList, $blogEntriesElem, 'do-repaint')
     blogEntriesList.fetch()
 
+  @initGithubDetails = ->
+    new glados.views.MainPage.GitHubDetailsView
+      el: $('.BCK-github-details')
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Aggregations

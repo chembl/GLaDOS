@@ -14,6 +14,8 @@ from googleapiclient import *
 import re
 from elasticsearch_dsl import Search
 import requests
+import datetime
+import timeago
 
 
 
@@ -77,7 +79,7 @@ def get_latest_tweets(page_number=1, count=15):
 
     # If they are found in the cache, just return them
     if t_cached_response and isinstance(t_cached_response, tuple) and len(t_cached_response) == 3:
-        print('Using cached tweets!')
+        print('Tweets are in cache')
         return t_cached_response
 
     print('tweets not found in cache!')
@@ -148,6 +150,7 @@ def get_latest_blog_entries(request, pageToken):
     cache_response = cache.get(cache_key)
 
     if cache_response != None:
+        print('blog entries are in cache')
         return JsonResponse(cache_response)
 
     print('Blog entries not found in cache!')
@@ -242,15 +245,13 @@ def get_entities_records(request):
 
     cache_key = 'entities_records'
     cache_time = 604800
-
-    # tries to get number from cache
     cache_response = cache.get(cache_key)
 
     if cache_response != None:
-        print('datasets are in cache')
+        print('records are in cache')
         return JsonResponse(cache_response)
 
-    print('datasets are not in cache')
+    print('records are not in cache')
 
     status_r = requests.get('https://www.ebi.ac.uk/chembl/api/data/status.json').json()
     drug_r = requests.get('https://www.ebi.ac.uk/chembl/api/data/drug.json').json()
@@ -272,6 +273,35 @@ def get_entities_records(request):
 
     return JsonResponse(response)
 
+def get_github_details(request):
+
+    last_commit = requests.get('https://api.github.com/repos/chembl/GLaDOS/commits/master').json()
+
+    cache_key = 'github_details'
+    cache_time = 7200
+    cache_response = cache.get(cache_key)
+
+    now = datetime.datetime.now()
+    date = last_commit['commit']['author']['date'][:-1]
+    date = datetime.datetime.strptime(date, '%Y-%m-%dT%H:%M:%S')
+    time_ago = timeago.format(date, now)
+
+    if cache_response != None:
+        print('github details are in cache')
+        return JsonResponse(cache_response)
+
+    print('github details are not in cache')
+
+    response = {
+        'url': last_commit['html_url'],
+        'author': last_commit['commit']['author']['name'],
+        'time_ago': time_ago,
+        'message': last_commit['commit']['message']
+    }
+
+    cache.set(cache_key, response, cache_time)
+
+    return JsonResponse(last_commit)
 
 def replace_urls_from_entinies(html, urls):
     """

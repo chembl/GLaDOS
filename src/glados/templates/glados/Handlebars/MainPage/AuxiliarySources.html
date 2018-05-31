@@ -133,4 +133,63 @@
 
 </script>
 
+<script id="Handlebars-github-details" type="text/x-handlebars-template">
+
+    <span class="col s12 m3 l3 small-text center hide-on-small-only">
+
+        Latest Commit on GitHub:
+
+    </span>
+
+    <span class="col s12 m3 l3 small-text center hide-on-med-and-up">
+
+        <h6> Latest Commit on GitHub: </h6>
+
+    </span>
+
+    <span class="col s8 m2 l2 small-text center truncate">
+
+        <a href="{{ commit_url }}" target="_blank">
+
+            {{ message }}
+
+        </a>
+
+    </span>
+
+    <span class="col s4 m2 l2 small-text grey-light center">
+
+        {{ time_ago }}
+
+    </span>
+
+    <div class="col s12 spacer-div hide-on-med-and-up"> </div>
+
+    <div class ="col s2 m1 l1"> </div>
+
+    <span class="col s4 m2 l2 small-text center">
+
+        <a href="https://github.com/chembl/GLaDOS/issues/new" target="_blank">
+
+            Report a bug
+
+        </a>
+
+    </span>
+
+    <span class="col s4 m1 l1 btn-container center">
+
+        <a class="button" href="https://github.com/chembl/GLaDOS" target="_blank">
+
+           GitHub
+
+        </a>
+
+     </span>
+
+    <div class ="col m3 s2"> </div>
+
+</script>
+
+
 {% endverbatim %}
