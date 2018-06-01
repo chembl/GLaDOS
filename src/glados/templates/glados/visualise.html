@@ -8,6 +8,11 @@
 
         <h2> DATA VISUALISATIONS PAGE</h2>
 
+        {% with is_dynamic=True %}
+            {% include "glados/MainPageParts/Visualizations/zoomable_sunburst.html" %}
+        {% endwith %}
+
+
     </div>
 
 {% endblock %}
