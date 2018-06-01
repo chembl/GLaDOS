@@ -1,3 +1,4 @@
+{% load static %}
 {% verbatim %}
 
 <script id="Handlebars-Common-RedCardError" type="text/x-handlebars-template">
@@ -559,11 +560,15 @@ There are no {{#if is_unichem}}UniChem {{/if}}cross references for {{chembl_id}}
             </a>
 
             <a onclick="window.open('https://twitter.com/intent/retweet?tweet_id={{columns_by_comparator.id.value}}','retweet {{columns_by_comparator.id.value}}','width=600,height=400')">
+                {% endverbatim %}
                 <img src="{% static 'img/icons/retweet_icon.png' %}">
+                {% verbatim %}
             </a>
 
             <a onclick="window.open('https://twitter.com/intent/like?tweet_id={{columns_by_comparator.id.value}}','like {{columns_by_comparator.id.value}}','width=600,height=400')">
+                {% endverbatim %}
                 <img src="{% static 'img/icons/fav_icon.png' %}">
+                {% verbatim %}
             </a>
 
         </div>
