@@ -1,3 +1,19 @@
-<div>
-    <h1> DATA VISUALISATIONS PAGE</h1>
-</div>
+{% extends "glados/base/base_layout.html" %}
+
+{% block title %}Visualise ChEMBL {% endblock %}
+
+{% block content %}
+
+    <div class="container">
+
+        <h2> DATA VISUALISATIONS PAGE</h2>
+
+    </div>
+
+{% endblock %}
+
+{% block custom_js_inline %}
+
+    glados.apps.Main.MainGladosApp.hideMainSplashScreen()
+
+{% endblock %}

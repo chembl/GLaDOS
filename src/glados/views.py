@@ -22,8 +22,11 @@ import timeago
 
 # Returns all acknowledgements grouped by current and old
 def visualise(request):
+    context = {
+        'hide_breadcrumbs': True
+    }
 
-    return render(request, 'glados/visualise.html')
+    return render(request, 'glados/visualise.html', context)
 
 def acks(request):
     ack_list = Acknowledgement.objects.order_by('id')
@@ -320,7 +323,8 @@ def replace_urls_from_entinies(html, urls):
 
 def main_page(request):
     context = {
-        'main_page': True
+        'main_page': True,
+        'hide_breadcrumbs': True
     }
     return render(request, 'glados/main_page.html', context)
 

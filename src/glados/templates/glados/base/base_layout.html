@@ -67,7 +67,7 @@
 
 <!-- Breadcrumbs -->
 {% block breadcrumb %}
-    {% if not main_page %}
+    {% if not hide_breadcrumbs %}
         <div class="container main-container">
             {% include "glados/base/breadcrumb.html" %}
         </div>
