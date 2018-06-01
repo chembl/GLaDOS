@@ -5,6 +5,7 @@ glados.useNameSpace 'glados.apps',
       glados.apps.Main.MainGladosApp.hideMainSplashScreen()
 
       VisualisePageApp.initZoomableSunburst()
+      VisualisePageApp.initStackedHistogram()
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Init Visualisations
@@ -17,15 +18,12 @@ glados.useNameSpace 'glados.apps',
         browse_all_link: "#{glados.Settings.GLADOS_BASE_URL_FULL}/g/#browse/targets"
         browse_button: false
 
-      console.log 'config: ', config
-
       new glados.views.MainPage.ZoomableSunburstView
         el: $('#BCK-zoomable-sunburst')
         model: aggregation
         config: config
 
       aggregation.fetch()
-
 
     @initStackedHistogram = ->
       aggregation = VisualisePageApp.getYearByMaxPhaseAgg()
@@ -62,12 +60,12 @@ glados.useNameSpace 'glados.apps',
         embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#documents_by_year_histogram"
 
       new glados.views.ReportCards.HistogramInCardView
-        el: $('#BCK-stacked-histogram')
+        el: $('#PapersPerYearHistogram')
         model: aggregation
         config: config
         report_card_app: @
 
-      allDrugsByYear.fetch()
+      aggregation.fetch()
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Aggregations
@@ -183,4 +181,3 @@ glados.useNameSpace 'glados.apps',
         aggs_config: aggsConfig
 
       return yearByMaxPhase
-
