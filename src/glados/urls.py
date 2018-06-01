@@ -48,6 +48,8 @@ common_urls = [
 
   url(r'^blog_entries/(?P<pageToken>.+)?$', views.get_latest_blog_entries, name='blog_entries'),
 
+  url(r'^visualise/$', views.visualise, name='visualise ChEMBL'),
+
   url(r'^marvin_search_fullscreen/$',
       DirectTemplateView.as_view(template_name="glados/marvin_search_fullscreen.html"), ),
 
