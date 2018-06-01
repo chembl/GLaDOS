@@ -4,6 +4,25 @@
 
 {% block content %}
 
+    <div class="text-section vis-section container valign-wrapper row">
+
+        <h2 class="col l12 center">
+
+            Visualise ChEMBL
+
+        </h2>
+
+        <p class ="col l12 center">
+            Text about what this page is about bla bla balas
+            Lorem ipsum dolor sit amet, consectetur adipiscing
+            elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua
+        </p>
+
+    </div>
+
+    <div class="divider"></div>
+
     <div class="vis-section container">
 
         {% with is_dynamic=True %}
@@ -31,6 +50,18 @@
     {% endwith %}
 
     </div>
+
+    <div class="divider"></div>
+
+    <div class="vis-section container">
+
+        {% with is_dynamic=True %}
+                {% include "glados/MainPageParts/Visualizations/MaxPhaseForDiseaseDonut.html" %}
+        {% endwith %}
+
+    </div>
+
+
 
 {% endblock %}
 
