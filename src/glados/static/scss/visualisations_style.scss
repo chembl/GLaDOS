@@ -2,7 +2,7 @@
 @import "components/variables";
 
 
-/* ----------------------------------------------------------------------------------------------------------------------
+/* ---------------------------------------------------------------------------------------------------------------------
  Browse as circles
 ----------------------------------------------------------------------------------------------------------------------*/
 $vis-teal: #09979B;
@@ -18,9 +18,11 @@ $vis-dark: #0D343A;
 
   .node {
     cursor: pointer;
+
     &.hoverable {
       stroke-width: 1px;
       stroke: $vis-teal;
+
       &:hover, &.force-hover {
         stroke: $vis-teal;
         stroke-width: 2px;
@@ -67,6 +69,7 @@ $vis-dark: #0D343A;
 
   .vis-container {
     cursor: context-menu;
+
     &:hover {
       stroke-width: 2;
       stroke: black;
@@ -82,15 +85,17 @@ $vis-dark: #0D343A;
     user-select: none;
 
     a {
+
       &.disabled {
         color: $button-disabled-color;
       }
+
       &:not(.disabled):hover {
         color: color("teal", "accent-4");
       }
     }
-
   }
+
   .rows-text, .columns-text {
     font-weight: bold;
   }
@@ -98,28 +103,34 @@ $vis-dark: #0D343A;
   .columns-text {
     text-decoration: underline;
     cursor: pointer;
+
     &:hover {
       fill: color("teal", "accent-4");
     }
   }
-  .headers-text, .footers-text {
 
+  .headers-text, .footers-text {
     text-decoration: underline;
     cursor: pointer;
+
     &:hover {
       fill: color("teal", "accent-4");
     }
+
     &.emphasis {
       font-weight: bold;
     }
   }
+
   .cells-container-g {
+
     &.grab-activated {
       cursor: move; /* fallback if grab cursor is unsupported */
       cursor: grab;
       cursor: -moz-grab;
       cursor: -webkit-grab;
     }
+
     &.grabbing {
       cursor: grabbing;
       cursor: -moz-grabbing;
@@ -128,6 +139,7 @@ $vis-dark: #0D343A;
   }
 
   .square2-g {
+
     .divider-triangle {
       fill: white;
     }
@@ -136,6 +148,7 @@ $vis-dark: #0D343A;
 
 .simple-qtip {
   max-width: 1000px !important;
+
   .qtip-content {
     max-width: 1000px !important;
     margin: 0;
@@ -155,8 +168,400 @@ $vis-dark: #0D343A;
   }
   .card {
     margin: 0;
+
     .card-content {
       padding: 12px;
+    }
+  }
+}
+
+/* ----------------------------------------------------------------------------------------------------------------------
+ Word Cloud
+----------------------------------------------------------------------------------------------------------------------*/
+
+.wordcloud-word:hover {
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: all .15s ease-in-out;
+  color: #D33C60 !important;
+}
+
+/* ----------------------------------------------------------------------------------------------------------------------
+ Legend
+----------------------------------------------------------------------------------------------------------------------*/
+
+.legend {
+
+  .legend-rect:hover {
+    stroke: color('teal', 'accent-4');
+  }
+
+  .legend-rect.selected {
+    stroke: color('green', 'base');
+  }
+
+  .legend-range-selector:hover {
+    cursor: -webkit-grab;
+    cursor: grab;
+
+    .legend-rect {
+      stroke: color('teal', 'accent-4');
+    }
+  }
+
+  .legend-range-selector:active {
+    cursor: -webkit-grabbing;
+    cursor: grabbing;
+
+    .legend-rect {
+      stroke: color('teal', 'accent-4');
+    }
+  }
+
+  .tick {
+
+    text {
+      font-size: 80%
+    }
+  }
+}
+
+.histogram-legend {
+  max-height: 100px;
+  overflow-y: scroll;
+  margin: 15px;
+  padding: 15px;
+
+  .legend-text {
+    font-size: 65%;
+    fill: #666;
+    font-family: "ChEMBL_Verdana", Verdana, sans-serif;
+  }
+}
+
+/* ----------------------------------------------------------------------------------------------------------------------
+ Scatter plot
+----------------------------------------------------------------------------------------------------------------------*/
+
+.plot {
+
+  .plot-container {
+    position: relative;
+  }
+
+  .total-items {
+    position: absolute;
+    bottom: 0;
+    left: 2px;
+  }
+
+  .tooltip-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    .tooltip-background {
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      opacity: 0.4;
+    }
+
+    .tooltip-item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 40%;
+      margin: auto;
+      transform: translate(50%, 50%);
+
+    }
+  }
+}
+
+/* ----------------------------------------------------------------------------------------------------------------------
+ Mini Histograms
+----------------------------------------------------------------------------------------------------------------------*/
+.histogram {
+
+  .mainSVGContainer {
+    background-color: white;
+  }
+
+  &.mini {
+
+    .mainSVGContainer {
+      background-color: transparent;
+    }
+
+    .title {
+      text-decoration: underline;
+      font-size: 80%;
+    }
+  }
+
+  .title {
+    cursor: pointer;
+    font-size: 90%;
+    font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+    fill: #5e5e5e;
+  }
+
+  .title:hover {
+    fill: color('teal', 'accent-4');
+  }
+
+  .bars-background {
+    fill: white;
+    opacity: 0;
+  }
+
+  .bar-group {
+
+    .background-bar {
+      fill: white;
+      opacity: 0;
+    }
+
+    .front-bar {
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .front-bar:hover {
+      stroke-width: 1;
+      stroke: black;
+      fill: black;
+      opacity: 0.07;
+    }
+
+    .hovered {
+      opacity: 0.7;
+      stroke: #5cb7b4;
+      stroke-width: 2px;
+
+    }
+  }
+
+  .x-axis, .y-axis {
+
+    .axis-line {
+      stroke-width: 0.5;
+      stroke: grey;
+    }
+
+    .property-label {
+      font-size: 80%;
+    }
+
+    .tick {
+      font-size: 60%;
+
+      .axis-helper-line {
+        stroke-width: 0.5;
+        stroke: grey;
+      }
+
+      .rotated {
+        font-size: 70%;
+      }
+    }
+
+    path {
+      display: none;
+    }
+
+    text {
+      fill: #666666;
+    }
+  }
+
+  .y-axis {
+
+    .tick {
+
+
+      line {
+        stroke-width: 0.1;
+        stroke: color('grey', 'lighten-1');
+      }
+    }
+  }
+}
+
+
+/* ---------------------------------------------------------------------------------------------------------------------
+ Report card Piechart
+----------------------------------------------------------------------------------------------------------------------*/
+
+.piechart-group {
+  display: flex;
+  flex-flow: wrap;
+
+  .piechart-col {
+    display: flex;
+
+    .piechart-section {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      width: 100%;
+
+      .layout {
+        display: flex;
+        flex-grow: 1;
+
+        .chembl-card {
+          display: flex;
+          flex-grow: 1;
+          width: 100%;
+
+          .card-content {
+            width: 100%;
+
+            .container {
+              display: flex;
+              flex-direction: column;
+              height: 100%;
+
+              .pie-with-error {
+                height: 100%;
+
+                .valign-wrapper {
+                  height: 100%;
+                  text-align: center;
+                }
+              }
+
+              .pie-content {
+                overflow: scroll;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------------------------------------------------------
+ Simple Piechart
+----------------------------------------------------------------------------------------------------------------------*/
+
+.pie-action-buttons-container{
+  text-align: center;
+}
+
+.principal-pie-container {
+  height: 100%;
+}
+
+.simple-pie-container {
+  background-color: white;
+
+  .pie-title {
+
+    a {
+      cursor: pointer;
+      font-size: 85%;
+      font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+      color: #5e5e5e;
+      text-align: center;
+      width: 100%;
+    }
+  }
+
+  .pie-title a:hover {
+    color: color('teal', 'accent-4');
+  }
+
+  .pie-content {
+    margin: 0;
+
+    .arc {
+
+      text {
+        fill: #494949;
+        font-size: 70%;
+        font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif
+      }
+    }
+
+    .arc:hover {
+
+      path {
+        opacity: 0.7;
+        stroke: white;
+        stroke-width: 2px;
+        transition: all 100ms ease-in-out;
+      }
+
+      text {
+        font-size: 80%;
+      }
+    }
+  }
+
+  .simple-pie-legend {
+
+    .legend-text {
+      font-size: 65%;
+      fill: #666;
+      font-family: "ChEMBL_Verdana", Verdana, sans-serif;
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------------------------------------------------------
+ Stacked donut Piechart
+----------------------------------------------------------------------------------------------------------------------*/
+
+.main-pie-container {
+  display: flex !important;
+  background-color: white;
+
+  .legend {
+    width: 100%;
+    margin-left: -10px;
+    margin-top: 40px;
+    overflow-y: scroll;
+    overflow-x: hidden !important;
+
+    .legend-text {
+      font-size: 65%;
+      fill: #666;
+      font-family: "ChEMBL_Verdana", Verdana, sans-serif;
+    }
+  }
+
+  .title {
+    cursor: pointer;
+    font-size: 90%;
+    font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+    fill: #5e5e5e;
+  }
+
+  .title:hover {
+    fill: color('teal', 'accent-4');
+  }
+
+  .sub-arc:hover {
+    fill-opacity: 0.7;
+    cursor: pointer;
+  }
+
+  .arc:hover {
+    cursor: pointer;
+  }
+
+  .arc {
+
+    text {
+      font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+      font-size: 100%;
     }
   }
 }
