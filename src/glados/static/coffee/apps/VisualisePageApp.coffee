@@ -11,11 +11,13 @@ glados.useNameSpace 'glados.apps',
 # ----------------------------------------------------------------------------------------------------------------------
 
     @initZoomableSunburst = ->
-      console.log 'init zoomable sunburst'
       aggregation = VisualisePageApp.getTargetsTreeAgg()
 
       config =
         browse_all_link: "#{glados.Settings.GLADOS_BASE_URL_FULL}/g/#browse/targets"
+        browse_button: false
+
+      console.log 'config: ', config
 
       new glados.views.MainPage.ZoomableSunburstView
         el: $('#BCK-zoomable-sunburst')

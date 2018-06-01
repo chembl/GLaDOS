@@ -2,6 +2,7 @@ glados.useNameSpace 'glados.views.MainPage',
   ZoomableSunburstView: Backbone.View.extend(ResponsiviseViewExt).extend
 
     initialize: ->
+      @config = arguments[0].config
       @$vis_elem = $(@el).find('.BCK-sunburst-container')
       @setUpResponsiveRender()
       @model.on 'change', @render, @
@@ -247,7 +248,9 @@ glados.useNameSpace 'glados.views.MainPage',
         if thisView.FOCUS != d
 
           d3.selectAll('.sunburst-text').remove()
-          thisView.fillBrowseButton(d)
+
+          if thisView.config.browse_button
+            thisView.fillBrowseButton(d)
 
           textPathsTransitionisDone = false
           arcPathsTransitionisDone = false
