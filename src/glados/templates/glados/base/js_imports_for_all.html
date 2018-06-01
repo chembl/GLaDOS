@@ -77,7 +77,7 @@
 <script type="text/javascript" src="{% static 'js/coffee-gen/GlobalVariables.js' %}"></script>
 
 <!-- SECOND COMPRESS: loads the rest of the coffee script -->
-{% compress js %}
+{%  compress js %}
   {% block common_js_coffee_gen %}
     <!-- Helpers -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/URLProcessor.js' %}"></script>
@@ -116,8 +116,6 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/PaginatedViews/PaginatedViewFactory.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/PaginatedViews/ItemCardView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/PaginatedViews/ColumnsHandling/ColumnsHandlerView.js' %}"></script>
-    <!-- Data visualisations -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/visualisation/LegendModel.js' %}"></script>
 
     <!-- Download Wizard -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/WizardStep.js' %}"></script>
@@ -264,6 +262,8 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/PaginatedCollectionFactory.js' %}"></script>
 
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/SpecificFlavours/UnichemConnectivityRefsList.js' %}"></script>
+
+
     <!-- Visualisation -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/visualisation/PropertiesFactory.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Visualisation/PlotView.js' %}"></script>
@@ -271,6 +271,10 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Visualisation/LegendView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Visualisation/PieView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Visualisation/HistogramView.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/models/visualisation/LegendModel.js' %}"></script>
+
+    <!-- Visualisations Page -->
+    <script type="text/javascript" src="{% static 'js/coffee-gen/apps/VisualisePageApp.js' %}"></script>
 
     <!-- Browsers -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/apps/Browsers/BrowserRouter.js' %}"></script>
