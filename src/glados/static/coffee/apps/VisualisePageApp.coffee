@@ -6,6 +6,7 @@ glados.useNameSpace 'glados.apps',
 
       VisualisePageApp.initZoomableSunburst()
       VisualisePageApp.initStackedHistogram()
+      VisualisePageApp.initBubbleHierarchyChart()
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Init Visualisations
@@ -66,6 +67,25 @@ glados.useNameSpace 'glados.apps',
         report_card_app: @
 
       aggregation.fetch()
+
+    @initBubbleHierarchyChart = ->
+      targetHierarchy = TargetBrowserApp.initTargetHierarchyTree()
+      targetHierarchyAgg = MainPageApp.getTargetsOrganismTreeAgg()
+      targetHierarchy.fetch()
+      targetHierarchyAgg.fetch()
+
+      TargetBrowserApp.initBrowserAsCircles(targetHierarchyAgg, $('#BCK-TargetBrowserAsCircles'))
+
+      config =
+        is_outside_an_entity_report_card: true
+        embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#targets_by_protein_class"
+        view_class: BrowseTargetAsCirclesView
+
+      new glados.views.ReportCards.VisualisationInCardView
+        el: $('#BCK-TargetBrowserAsCircles')
+        model: targetHierarchy
+        config: config
+        report_card_app: @
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Aggregations
@@ -181,3 +201,49 @@ glados.useNameSpace 'glados.apps',
         aggs_config: aggsConfig
 
       return yearByMaxPhase
+
+    @getTargetsOrganismTreeAgg = ->
+
+      queryConfig =
+        type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
+        query_string_template: '*'
+        template_data: {}
+
+      aggsConfig =
+        aggs:
+          children:
+            type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+            field: '_metadata.organism_taxonomy.l1'
+            size: 50
+            bucket_links:
+              bucket_filter_template: '_metadata.organism_taxonomy.l1:("{{bucket_key}}")'
+              template_data:
+                bucket_key: 'BUCKET.key'
+              link_generator: Target.getTargetsListURL
+            aggs:
+              children:
+                type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+                field: '_metadata.organism_taxonomy.l2'
+                size: 50
+                bucket_links:
+                  bucket_filter_template: '_metadata.organism_taxonomy.l2:("{{bucket_key}}")'
+                  template_data:
+                    bucket_key: 'BUCKET.key'
+                  link_generator: Target.getTargetsListURL
+                aggs:
+                  children:
+                    type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+                    field: '_metadata.organism_taxonomy.l3'
+                    size: 50
+                    bucket_links:
+                      bucket_filter_template: '_metadata.organism_taxonomy.l3:("{{bucket_key}}")'
+                      template_data:
+                        bucket_key: 'BUCKET.key'
+                      link_generator: Target.getTargetsListURL
+
+      organismTreeAgg = new glados.models.Aggregations.Aggregation
+        index_url: glados.models.Aggregations.Aggregation.TARGET_INDEX_URL
+        query_config: queryConfig
+        aggs_config: aggsConfig
+
+      return organismTreeAgg

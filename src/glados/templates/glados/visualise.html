@@ -4,28 +4,31 @@
 
 {% block content %}
 
-    <div class="container">
-
-        <h2> DATA VISUALISATIONS PAGE</h2>
-
-        <div class="vis-section">
-
-            {% with is_dynamic=True %}
-                {% include "glados/MainPageParts/Visualizations/zoomable_sunburst.html" %}
-            {% endwith %}
-
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="vis-section">
+    <div class="vis-section container">
 
         {% with is_dynamic=True %}
-            {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
+            {% include "glados/MainPageParts/Visualizations/zoomable_sunburst.html" %}
         {% endwith %}
 
-        </div>
+    </div>
 
+    <div class="divider"></div>
+
+    <div class="vis-section container">
+
+    {% with is_dynamic=True %}
+        {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
+    {% endwith %}
+
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="vis-section container">
+
+    {% with is_dynamic=True %}
+        {% include "glados/MainPageParts/TargetBrowserParts/browse_as_circles.html" %}
+    {% endwith %}
 
     </div>
 
