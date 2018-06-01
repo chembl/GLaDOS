@@ -1,0 +1,162 @@
+@import "components/color";
+@import "components/variables";
+
+
+/* ----------------------------------------------------------------------------------------------------------------------
+ Browse as circles
+----------------------------------------------------------------------------------------------------------------------*/
+$vis-teal: #09979B;
+$vis-dark: #0D343A;
+
+.browser-as-circles {
+  position: relative;
+
+  .instructions {
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .node {
+    cursor: pointer;
+    &.hoverable {
+      stroke-width: 1px;
+      stroke: $vis-teal;
+      &:hover, &.force-hover {
+        stroke: $vis-teal;
+        stroke-width: 2px;
+      }
+    }
+
+    &.selected {
+      stroke: $vis-teal;
+      stroke-width: 2px;
+      stroke-dasharray: 8;
+    }
+  }
+
+  .node--leaf {
+    fill: white;
+  }
+
+  .label {
+    text-anchor: middle;
+    text-shadow: 0 0.8px 0 #fff, 0.8px 0 0 #fff, -0.8px 0 0 #fff, 0 -0.8px 0 #fff;
+    fill: $vis-dark;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  .label,
+  .node--root {
+    pointer-events: none;
+  }
+
+  .incomplete {
+    stroke: $vis-teal;
+    stroke-width: 2;
+    stroke-dasharray: 10;
+  }
+
+}
+
+/* ----------------------------------------------------------------------------------------------------------------------
+ Matrix Visualisation
+----------------------------------------------------------------------------------------------------------------------*/
+
+.es-results-matrix {
+  position: relative;
+
+  .vis-container {
+    cursor: context-menu;
+    &:hover {
+      stroke-width: 2;
+      stroke: black;
+    }
+  }
+
+  .matrix-vis-options {
+    position: absolute;
+    right: 20px;
+    top: 0;
+    padding: 5px;
+    opacity: 0.8;
+    user-select: none;
+
+    a {
+      &.disabled {
+        color: $button-disabled-color;
+      }
+      &:not(.disabled):hover {
+        color: color("teal", "accent-4");
+      }
+    }
+
+  }
+  .rows-text, .columns-text {
+    font-weight: bold;
+  }
+
+  .columns-text {
+    text-decoration: underline;
+    cursor: pointer;
+    &:hover {
+      fill: color("teal", "accent-4");
+    }
+  }
+  .headers-text, .footers-text {
+
+    text-decoration: underline;
+    cursor: pointer;
+    &:hover {
+      fill: color("teal", "accent-4");
+    }
+    &.emphasis {
+      font-weight: bold;
+    }
+  }
+  .cells-container-g {
+    &.grab-activated {
+      cursor: move; /* fallback if grab cursor is unsupported */
+      cursor: grab;
+      cursor: -moz-grab;
+      cursor: -webkit-grab;
+    }
+    &.grabbing {
+      cursor: grabbing;
+      cursor: -moz-grabbing;
+      cursor: -webkit-grabbing;
+    }
+  }
+
+  .square2-g {
+    .divider-triangle {
+      fill: white;
+    }
+  }
+}
+
+.simple-qtip {
+  max-width: 1000px !important;
+  .qtip-content {
+    max-width: 1000px !important;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.matrix-full-screen {
+  margin-top: 20px;
+}
+
+.matrix-qtip {
+
+  .qtip-content {
+    padding: 0;
+    font-size: 120%;
+  }
+  .card {
+    margin: 0;
+    .card-content {
+      padding: 12px;
+    }
+  }
+}
