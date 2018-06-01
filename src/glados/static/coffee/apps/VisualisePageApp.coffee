@@ -3,3 +3,4 @@ glados.useNameSpace 'glados.apps',
 
     @init = ->
       console.log 'init visualisations page'
+      glados.apps.Main.MainGladosApp.hideMainSplashScreen()
