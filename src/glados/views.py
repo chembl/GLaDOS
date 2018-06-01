@@ -22,11 +22,8 @@ import timeago
 
 # Returns all acknowledgements grouped by current and old
 def visualise(request):
-    response = {
-        'hola': 'mundo'
-    }
 
-    return JsonResponse(response)
+    return render(request, 'glados/visualise.html')
 
 def acks(request):
     ack_list = Acknowledgement.objects.order_by('id')
