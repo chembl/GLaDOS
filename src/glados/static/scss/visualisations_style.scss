@@ -572,7 +572,7 @@ $vis-dark: #0D343A;
 ----------------------------------------------------------------------------------------------------------------------*/
 
 .vis-section{
-  height: 90vh;
+  height: 80vh;
   box-sizing: content-box;
   padding-top: 50px;
   padding-bottom: 70px;
@@ -583,6 +583,36 @@ $vis-dark: #0D343A;
   justify-content: center;
   flex-direction: column;
 
-  height: 50vh !important;
+  height: 40vh !important;
 
 }
+
+.btn-container {
+    padding: 30px 0 20px 0;
+
+    .button {
+      font-size: 1em;
+      padding: 10px 20px;
+      background-color: $vis-teal;
+      color: white;
+      border-radius: 4px;
+      letter-spacing: 0.02em;
+
+      -webkit-transition: background-color 100ms ease;
+      transition: background-color 100ms ease;
+
+      &:hover {
+        background-color: $vis-dark;
+      }
+    }
+
+    .hollow-button {
+      padding: 8px 12px;
+      background-color: white;
+      color: $vis-teal;
+      border: solid $vis-teal 2px;
+      border-radius: 1px;
+      letter-spacing: 0.02em;
+
+    }
+  }
