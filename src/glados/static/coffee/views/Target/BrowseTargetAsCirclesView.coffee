@@ -339,9 +339,10 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
       node_name: nodeName
       node_link: nodeLink
 
-    $button_medium.html Handlebars.compile(button_medium_template.html())
-      node_name: nodeName
-      node_link: nodeLink
+    if $button_medium.length > 0
+      $button_medium.html Handlebars.compile(button_medium_template.html())
+        node_name: nodeName
+        node_link: nodeLink
 
   handleKeyDown: (event) ->
 

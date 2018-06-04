@@ -571,9 +571,65 @@ $vis-dark: #0D343A;
  Visualisations Page
 ----------------------------------------------------------------------------------------------------------------------*/
 
-.vis-section{
-  height: 90vh;
-  padding-top: 50px;
-  padding-bottom: 50px;
+.color-block {
+  background: #f9f9f9;
 
+  h2 {
+    margin-bottom: 0;
+  }
+}
+
+.vis-section{
+  height: 80vh;
+  box-sizing: content-box;
+  padding-top: 50px;
+  padding-bottom: 70px;
+
+}
+
+.text-section {
+  flex-direction: column;
+  height: fit-content !important;
+}
+
+.btn-container {
+    padding: 30px 0 50px 0;
+
+  .button {
+    font-size: 1em;
+    padding: 10px 20px;
+    background-color: $vis-teal;
+    color: white;
+    border-radius: 4px;
+    letter-spacing: 0.02em;
+
+    -webkit-transition: background-color 100ms ease;
+    transition: background-color 100ms ease;
+
+    &:hover {
+      background-color: $vis-dark;
+    }
+  }
+
+  .hollow-button {
+    padding: 8px 12px;
+    background-color: white;
+    color: $vis-teal;
+    border: solid $vis-teal 2px;
+    border-radius: 1px;
+    letter-spacing: 0.02em;
+
+  }
+}
+
+.header-dark-grey {
+  color: #4d5456;
+}
+
+.dark-green-header{
+  color: #0d595f;
+}
+
+.vis-paragraph {
+  color: #4d5456;
 }
