@@ -330,18 +330,18 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   fillBrowseButtonTemplate: (nodeName, nodeLink) ->
     $button = $('.BCK-browse-button-circles')
-    $button_medium = $('.BCK-browse-button-medium-circles')
+#    $button_medium = $('.BCK-browse-button-medium-circles')
 
-    button_medium_template = $('#' + $button_medium.attr('data-hb-template'))
+#    button_medium_template = $('#' + $button_medium.attr('data-hb-template'))
     button_template = $('#' + $button.attr('data-hb-template'))
 
     $button.html Handlebars.compile(button_template.html())
       node_name: nodeName
       node_link: nodeLink
 
-    $button_medium.html Handlebars.compile(button_medium_template.html())
-      node_name: nodeName
-      node_link: nodeLink
+#    $button_medium.html Handlebars.compile(button_medium_template.html())
+#      node_name: nodeName
+#      node_link: nodeLink
 
   handleKeyDown: (event) ->
 
