@@ -571,6 +571,14 @@ $vis-dark: #0D343A;
  Visualisations Page
 ----------------------------------------------------------------------------------------------------------------------*/
 
+.color-block {
+  background: #f9f9f9;
+
+  h2 {
+    margin-bottom: 0;
+  }
+}
+
 .vis-section{
   height: 80vh;
   box-sizing: content-box;
@@ -581,13 +589,11 @@ $vis-dark: #0D343A;
 
 .text-section {
   flex-direction: column;
-
   height: fit-content !important;
-
 }
 
 .btn-container {
-    padding: 30px 0 20px 0;
+    padding: 30px 0 50px 0;
 
   .button {
     font-size: 1em;
