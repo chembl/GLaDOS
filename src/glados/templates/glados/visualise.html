@@ -4,28 +4,28 @@
 
 {% block content %}
 
-    <div class="container">
+    <div class="container vis-container">
 
         <div class="text-section vis-section valign-wrapper row">
 
-            <h2 class="col l12 center">
+            <h2 class="col l12 dark-green-header">
 
                 Visualise ChEMBL
 
             </h2>
 
-            <p class ="col l12 center">
-                Text about what this page is about bla bla balas
-                Lorem ipsum dolor sit amet, consectetur adipiscing
-                elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua
+            <p class ="col l12 vis-paragraph">
+                    A closer look at the database data, so that you get a general idea
+                    Lorem ipsum dolor sit amet, consectetur adipiscing
+                    elit, sed do eiusmod tempor incididunt ut labore et
+                    dolore magna aliqua
             </p>
 
         </div>
 
         <div class="vis-section">
 
-            <h3>  Protein Target Classification  </h3>
+            <h3 class="header-dark-grey">  Protein Target Classification  </h3>
 
             {% with is_dynamic=True %}
                 {% include "glados/MainPageParts/Visualizations/zoomable_sunburst.html" %}
@@ -44,11 +44,15 @@
 
         </div>
 
+    </div>
+
+    <div class="container">
+
         <div class="divider"></div>
 
         <div class="vis-section">
 
-            <h3> Drugs by Max Phase and Usan Year </h3>
+            <h3 class="header-dark-grey"> Drugs by Max Phase and Usan Year </h3>
 
             {% with is_dynamic=True %}
                 {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
@@ -67,11 +71,15 @@
 
         </div>
 
+    </div>
+
         <div class="divider"></div>
+
+    <div class="container">
 
         <div class="vis-section">
 
-            <h3> Organism Taxonomy Classification </h3>
+            <h3 class="header-dark-grey"> Organism Taxonomy Classification </h3>
 
             {% with is_dynamic=True %}
                 {% include "glados/MainPageParts/TargetBrowserParts/browse_as_circles.html" %}
@@ -90,11 +98,15 @@
 
         </div>
 
+    </div>
+
         <div class="divider"></div>
+
+    <div class="container">
 
         <div class="vis-section">
 
-            <h3> Drugs By Max Phase and Disease</h3>
+            <h3 class="header-dark-grey"> Drugs By Max Phase and Disease</h3>
 
             {% with is_dynamic=True %}
                     {% include "glados/MainPageParts/Visualizations/MaxPhaseForDiseaseDonut.html" %}
