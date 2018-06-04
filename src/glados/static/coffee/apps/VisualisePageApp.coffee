@@ -18,7 +18,7 @@ glados.useNameSpace 'glados.apps',
 
       config =
         browse_all_link: "#{glados.Settings.GLADOS_BASE_URL_FULL}/g/#browse/targets"
-        browse_button: false
+        browse_button: true
 
       new glados.views.MainPage.ZoomableSunburstView
         el: $('#BCK-zoomable-sunburst')
