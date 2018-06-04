@@ -573,8 +573,13 @@ $vis-dark: #0D343A;
 
 .vis-section{
   height: 90vh;
+  box-sizing: content-box;
   padding-top: 50px;
-  padding-bottom: 50px;
+  padding-bottom: 70px;
+
+  .card-content {
+    height: 80%;
+  }
 
 }
 

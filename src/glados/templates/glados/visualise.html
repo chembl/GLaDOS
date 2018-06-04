@@ -1,73 +1,81 @@
 {% extends "glados/base/base_layout.html" %}
 
-{% block title %}Visualise ChEMBL {% endblock %}
+{% block title %} Visualise ChEMBL {% endblock %}
 
 {% block content %}
 
-    <div class="text-section vis-section container valign-wrapper row">
+    <div class="container">
 
-        <h2 class="col l12 center">
+        <div class="text-section vis-section valign-wrapper row">
 
-            Visualise ChEMBL
+            <h2 class="col l12 center">
 
-        </h2>
+                Visualise ChEMBL
 
-        <p class ="col l12 center">
-            Text about what this page is about bla bla balas
-            Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua
-        </p>
+            </h2>
 
-    </div>
+            <p class ="col l12 center">
+                Text about what this page is about bla bla balas
+                Lorem ipsum dolor sit amet, consectetur adipiscing
+                elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua
+            </p>
 
-    <div class="divider"></div>
+        </div>
 
+        <div class="vis-section container">
 
-    <div class="vis-section container">
+            <h3>  Protein Target Classification  </h3>
 
-        <h3> Visualisation title </h3>
+            {% with is_dynamic=True %}
+                {% include "glados/MainPageParts/Visualizations/zoomable_sunburst.html" %}
+            {% endwith %}
 
-        {% with is_dynamic=True %}
-            {% include "glados/MainPageParts/Visualizations/zoomable_sunburst.html" %}
-        {% endwith %}
+        </div>
 
-    </div>
+        <div class="btn-container">
 
-    <div class="divider"></div>
+                <a class="hollow-button" href="/g/#browse/targets" target="_blank">
+                    Browse all Targets
+                </a>
 
-    <div class="vis-section container">
+        </div>
 
-        <h3> Visualisation title </h3>
+        <div class="divider"></div>
 
-        {% with is_dynamic=True %}
-            {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
-        {% endwith %}
+        <div class="vis-section container">
 
-    </div>
+            <h3> Drugs by Max Phase and Usan Year </h3>
 
-    <div class="divider"></div>
+            {% with is_dynamic=True %}
+                {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
+            {% endwith %}
 
-    <div class="vis-section container">
+        </div>
 
-        <h3> Visualisation title </h3>
+        <div class="divider"></div>
 
-        {% with is_dynamic=True %}
-            {% include "glados/MainPageParts/TargetBrowserParts/browse_as_circles.html" %}
-        {% endwith %}
+        <div class="vis-section container">
 
-    </div>
+            <h3> Organism Taxonomy Classification </h3>
 
-    <div class="divider"></div>
+            {% with is_dynamic=True %}
+                {% include "glados/MainPageParts/TargetBrowserParts/browse_as_circles.html" %}
+            {% endwith %}
 
-    <div class="vis-section container">
+        </div>
 
-        <h3> Visualisation title </h3>
+        <div class="divider"></div>
 
-        {% with is_dynamic=True %}
-                {% include "glados/MainPageParts/Visualizations/MaxPhaseForDiseaseDonut.html" %}
-        {% endwith %}
+        <div class="vis-section container">
 
+            <h3> Drugs By Max Phase and Disease</h3>
+
+            {% with is_dynamic=True %}
+                    {% include "glados/MainPageParts/Visualizations/MaxPhaseForDiseaseDonut.html" %}
+            {% endwith %}
+
+        </div>
     </div>
 
 
