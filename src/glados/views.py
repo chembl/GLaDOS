@@ -387,10 +387,21 @@ def extend_url(request, hash):
 # ----------------------------------------------------------------------------------------------------------------------
 
 def compound_report_card(request, chembl_id):
+    s = "pref_name"
+    q = {
+        "term": {
+          "_id": {
+            "value": "CHEMBL25"
+          }
+        }
+    }
+    get_name_query = Search(index="chembl_molecule").query(q).source(s)
+
+    name = get_name_query.execute()['hits']['hits'][0]['_source']['pref_name']
     context = {
         'og_tags': {
             'chembl_id': chembl_id,
-            'name': 'Aspirin'
+            'name': name
         }
     }
 
