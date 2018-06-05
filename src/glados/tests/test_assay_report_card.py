@@ -95,7 +95,7 @@ class AssayReportCardTest(ReportCardTester):
     self.assertEqual(tissue_field.text, 'Liver')
 
     strain_field = self.browser.find_element_by_id('Bck-Assay_SubCellFrac')
-    self.assertEqual(strain_field.text, 'Microsomes')
+    self.assertEqual(strain_field.text, 'Microsome')
 
   def test_assay_report_card_scenario_5(self):
 
