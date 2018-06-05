@@ -195,7 +195,7 @@ Document.getDocumentsListURL = (filter) ->
 
 Document.DEPOSITED_DATASETS_FILTER = 'doc_type:"DATASET" AND NOT(_metadata.source.src_id:(
 "1" OR "7" OR "8" OR "9" OR "11" OR "12" OR "13" OR "15" OR "18" OR "25" OR "26" OR "28" OR "31" OR "35" OR "37" OR "38"
- OR "39" OR "41" OR  "42"))'
+ OR "39" OR "41" OR  "42")) AND _metadata.related_activities.count:>0'
 
 Document.getFormattedReference = (docAttributes) ->
 
