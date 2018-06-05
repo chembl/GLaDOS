@@ -157,11 +157,6 @@ common_urls = [
   url(r'^shorten_url', views.shorten_url, name='shorten'),
   url(r'^extend_url/(?P<hash>.*?)$', views.extend_url, name='extend'),
 
-  url(r'^robots.txt', lambda x: HttpResponse(
-        "User-Agent: *\nDisallow: / \nUser-Agent: Twitterbot\nAllow: http://www.ebi.ac.uk/chembl/api/data/image",
-        content_type="text/plain"),
-        name="robots_file")
-
 ]
 
 # ----------------------------------------------------------------------------------------------------------------------
