@@ -120,7 +120,7 @@ class CompoundReportCardTest(ReportCardTester):
 
     # Chirality: single stereoisomer: 1
     self.assert_molecule_feature('Bck-Chirality', True, 'chirally_pure',
-                                 'Chirality: Single Stereoisomer', 'top')
+                                 'Chirality: Achiral Molecule', 'top')
 
     # Oral yes: 'true'
     self.assert_molecule_feature('Bck-Oral', True, 'oral',
