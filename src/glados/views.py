@@ -395,9 +395,10 @@ def compound_report_card(request, chembl_id):
           }
         }
     }
-    get_name_query = Search(index="chembl_molecule").query(q).source(s)
+    response = Search(index="chembl_molecule").query(q).source(s).execute()
 
-    name = get_name_query.execute()['hits']['hits'][0]['_source']['pref_name']
+    name = response['hits']['hits'][0]['_source']['pref_name']
+
     context = {
         'og_tags': {
             'chembl_id': chembl_id,
