@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 {% load static %}
 
-<html prefix="og: https://ogp.me/ns#">
+<html prefix="og: http://ogp.me/ns#">
 
 <head>
 
     <meta charset="UTF-8">
 
-    <meta name="twitter:card" content="summary" />
     <meta property="og:title" content="CHEMBL25"/>
     <meta property="og:description" content="Aspirin"/>
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="{% url 'main' %}compound_report_card/CHEMBL25/"/>
-    <meta property="og:image" content="http://www.ebi.ac.uk/chembl/api/data/image/CHEMBL25.svg?engine=indigo" />
-    <meta name="twitter:image:src" content="http://www.ebi.ac.uk/chembl/api/data/image/CHEMBL25.svg?engine=indigo">
+    <meta property="og:url" content="https://chembl-glados.herokuapp.com/compound_report_card/CHEMBL25" />
+    <meta property="og:image" content="https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL25.png" />
+    <meta property="og:image:secure_url" content="https://www.ebi.ac.uk/chembl/api/data/image/CHEMBL25.png" />
+    <meta property="og:image:type" content="image/png" />
 
 
     <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon"/>
