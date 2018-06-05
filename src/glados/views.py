@@ -382,6 +382,22 @@ def extend_url(request, hash):
 
     return JsonResponse(resp_data)
 
+# ----------------------------------------------------------------------------------------------------------------------
+# Report Cards
+# ----------------------------------------------------------------------------------------------------------------------
+
+def compound_report_card(request, chembl_id):
+    context = {
+        'og_tags': {
+            'chembl_id': chembl_id,
+            'name': 'Aspirin'
+        }
+    }
+
+    return render(request, 'glados/compoundReportCard.html', context)
+
+
+
 
 def wizard_step_json(request, step_id):
     """

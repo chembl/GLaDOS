@@ -96,8 +96,8 @@ common_urls = [
   # Compounds
   # --------------------------------------------------------------------------------------------------------------------
 
-  url(r'^compound_report_card/(?P<chembl_id>\w+)/$',
-      DirectTemplateView.as_view(template_name="glados/compoundReportCard.html"), ),
+  url(r'^compound_report_card/(?P<chembl_id>\w+)/$', views.compound_report_card,
+      name='compound_report_card'),
 
   url(r'^compound_metabolism/(?P<chembl_id>\w+)$', xframe_options_exempt(
     DirectTemplateView.as_view(
