@@ -9,6 +9,9 @@ from django.contrib import admin
 import glados.grammar.search_parser
 from django.views.i18n import javascript_catalog
 
+from django.conf.urls import url
+from django.http import HttpResponse
+
 
 
 common_urls = [
@@ -152,7 +155,12 @@ common_urls = [
   # --------------------------------------------------------------------------------------------------------------------
   url(r'^g/tiny/(?P<hash>.*?)$', views.render_params_from_hash, name='tiny'),
   url(r'^shorten_url', views.shorten_url, name='shorten'),
-  url(r'^extend_url/(?P<hash>.*?)$', views.extend_url, name='extend')
+  url(r'^extend_url/(?P<hash>.*?)$', views.extend_url, name='extend'),
+
+  url(r'^robots.txt', lambda x: HttpResponse(
+        "User-Agent: *\nDisallow: / \nUser-Agent: Twitterbot\nAllow: https://www.ebi.ac.uk/chembl/api/data/image",
+        content_type="text/plain"),
+        name="robots_file")
 
 ]
 
@@ -167,3 +175,4 @@ urlpatterns = [url(r'^'+settings.SERVER_BASE_PATH, include(common_urls))]
 # ----------------------------------------------------------------------------------------------------------------------
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
