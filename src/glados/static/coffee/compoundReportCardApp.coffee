@@ -641,7 +641,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
   # -------------------------------------------------------------
   @initMiniBioactivitiesHistogram = ($containerElem, chemblID) ->
 
-    bioactivities = CompoundReportCardApp.getRelatedActivitiesAgg(chemblID)
+    bioactivities = CompoundReportCardApp.getRelatedActivitiesAgg([chemblID])
 
     stdTypeProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Activity', 'STANDARD_TYPE',
       withColourScale=true)
