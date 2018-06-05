@@ -215,10 +215,18 @@ def get_database_summary(request):
     cache_time = 604800
     q = {
 
+
         "bool": {
             "filter": {
                 "term": {
                     "doc_type": "DATASET"
+                }
+            },
+            "must": {
+                "range": {
+                    "_metadata.related_activities.count": {
+                        "gt": 0
+                    }
                 }
             },
             "must_not": {
