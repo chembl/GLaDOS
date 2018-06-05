@@ -158,7 +158,7 @@ common_urls = [
   url(r'^extend_url/(?P<hash>.*?)$', views.extend_url, name='extend'),
 
   url(r'^robots.txt', lambda x: HttpResponse(
-        "User-Agent: *\nDisallow: / \nUser-Agent: Twitterbot\nAllow: http://www.ebi.ac.uk/chembl/api/data/image",
+        "User-Agent: *\nDisallow: / \nUser-Agent: Twitterbot\nAllow: {0}img".format(settings.STATIC_URL),
         content_type="text/plain"),
         name="robots_file")
 
