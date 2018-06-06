@@ -422,6 +422,8 @@ def check_fasta(term_dict: dict):
         )
         json_response = response.json()
         if 'error_message' in json_response:
+            if len(term_dict['term']) < 30:
+                term_dict['include_in_query'] = True
             return None
 
         for key_id in json_response['targets']:
@@ -455,7 +457,12 @@ def check_fasta(term_dict: dict):
                     'chembl_entity': 'compound'
                 }
             )
+        if len(json_response['targets']) + len(json_response['compounds']) == 0:
+            if len(term_dict['term']) < 30:
+                term_dict['include_in_query'] = True
     except:
+        if len(term_dict['term']) < 30:
+            term_dict['include_in_query'] = True
         traceback.print_exc()
 
 
