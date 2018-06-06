@@ -296,7 +296,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       queryString = "_metadata.all_molecule_chembl_ids:#{chemblID}"
       config = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.DRUG_INDICATIONS_LIST
-      list = @getNewESResultsListFor config, customQueryString=queryString
+      list = @getNewESResultsListFor config, customQueryString=queryString, useCustomQueryString=true
+
       return list
 
     getNewActivitiesList: (filter='') ->
