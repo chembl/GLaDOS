@@ -5,12 +5,8 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
     #-------------------------------------------------------------------------------------------------------------------
     # Initialization
     #-------------------------------------------------------------------------------------------------------------------
-    initialize: ->
-
     initURL: (chemblID) ->
-      console.log 'init url'
       @baseUrl = "#{glados.models.paginatedCollections.Settings.ES_BASE_URL}/chembl_drug_indication/_search?q=_metadata.all_molecule_chembl_ids:#{chemblID}"
-      console.log 'base url: ', @baseUrl
       @setMeta('base_url', @baseUrl, true)
       @initialiseUrl()
 

@@ -419,7 +419,25 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         ENABLE_COLLECTION_CACHING: true
         DISABLE_CACHE_ON_DOWNLOAD: true
         ENABLE_ACTIVITIES_LINK_FOR_SELECTED_ENTITIES: true
+      DRUG_INDICATIONS_LIST:
+        MODEL: glados.models.Compound.DrugIndication
+        BASE_URL: 'base_url is set by initURL'
+        DEFAULT_PAGE_SIZE: 5
+        COLUMNS: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.ALL_COLUMNS
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+        ID_COLUMN: glados.models.Compound.DrugIndication.ID_COLUMN
     WS_COLLECTIONS:
+      MECHANISMS_OF_ACTIONS_LIST:
+        MODEL: glados.models.Compound.MechanismOfAction
+        BASE_URL: 'base_url is set by initURL'
+        DEFAULT_PAGE_SIZE: 5
+        COLUMNS: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.ALL_COLUMNS
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+        ID_COLUMN: glados.models.Compound.MechanismOfAction.ID_COLUMN
       ACTIVITIES_LIST:
         MODEL: Activity
         BASE_URL: glados.Settings.WS_DEV_BASE_URL + 'activity.json'
@@ -526,24 +544,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_SIMILARITY
         ID_COLUMN: Compound.ID_COLUMN
         ADDITIONAL_COLUMNS:[]
-      DRUG_INDICATIONS_LIST:
-        MODEL: glados.models.Compound.DrugIndication
-        BASE_URL: 'base_url is set by initURL'
-        DEFAULT_PAGE_SIZE: 5
-        COLUMNS: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-        ID_COLUMN: glados.models.Compound.DrugIndication.ID_COLUMN
-      MECHANISMS_OF_ACTIONS_LIST:
-        MODEL: glados.models.Compound.MechanismOfAction
-        BASE_URL: 'base_url is set by initURL'
-        DEFAULT_PAGE_SIZE: 5
-        COLUMNS: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-        ID_COLUMN: glados.models.Compound.MechanismOfAction.ID_COLUMN
       COMPOUND_WS_RESULTS_LIST_CAROUSEL:
         MODEL: Compound
         BASE_URL: 'base_url is set by initURL'

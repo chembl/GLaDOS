@@ -367,7 +367,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     getNewDrugIndicationsList: ->
 
-      config = glados.models.paginatedCollections.Settings.WS_COLLECTIONS.DRUG_INDICATIONS_LIST
+      config = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.DRUG_INDICATIONS_LIST
       flavour = glados.models.paginatedCollections.SpecificFlavours.DrugIndicationsList
       list = @getNewWSCollectionFor config, filter=undefined, flavour
       return list
