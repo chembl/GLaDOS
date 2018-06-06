@@ -387,7 +387,18 @@ def extend_url(request, hash):
 # ----------------------------------------------------------------------------------------------------------------------
 
 def compound_report_card(request, chembl_id):
-    s = "pref_name"
+
+    cache_key = chembl_id + 'compound_report_card'
+    cache_time = 604800
+    cache_context = cache.get(cache_key)
+
+    if cache_context != None:
+        print('og tags for ' + chembl_id + ' are in cache')
+        return render(request, 'glados/compoundReportCard.html', cache_context)
+
+    print('og tags for ' + chembl_id + ' are not in cache')
+
+    s = 'pref_name'
     q = {
         "term": {
           "_id": {
@@ -405,6 +416,8 @@ def compound_report_card(request, chembl_id):
             'name': name
         }
     }
+
+    cache.set(cache_key, context, cache_time)
 
     return render(request, 'glados/compoundReportCard.html', context)
 
