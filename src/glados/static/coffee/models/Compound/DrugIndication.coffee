@@ -54,6 +54,9 @@ glados.models.Compound.DrugIndication.COLUMNS =
   MOLECULE_CHEMBL_ID:
     name_to_show: 'ChEMBL ID'
     comparator: 'molecule_chembl_id'
+    sort_disabled: false
+    is_sorting: 0
+    sort_class: 'fa-sort'
     link_function: (value) -> Compound.get_report_card_url(value)
 
 
