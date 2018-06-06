@@ -391,7 +391,7 @@ def compound_report_card(request, chembl_id):
     q = {
         "term": {
           "_id": {
-            "value": "CHEMBL25"
+            "value": chembl_id
           }
         }
     }
