@@ -528,6 +528,43 @@ def tissue_report_card(request, chembl_id):
 
     return render(request, 'glados/tissueReportCard.html', context)
 
+def target_report_card(request, chembl_id):
+
+    cache_key = chembl_id + '_target_report_card'
+    cache_time = 604800
+    cache_context = cache.get(cache_key)
+
+    if cache_context != None:
+        print('og tags for ' + chembl_id + ' are in cache')
+        return render(request, 'glados/targetReportCard.html', cache_context)
+
+    print('og tags for ' + chembl_id + ' are not in cache')
+
+    s = ['pref_name', 'target_type']
+    q = {
+        "term": {
+          "_id": {
+            "value": chembl_id
+          }
+        }
+    }
+    response = Search(index="chembl_target").query(q).source(s).execute()
+
+    name = response['hits']['hits'][0]['_source']['pref_name']
+    type = response['hits']['hits'][0]['_source']['target_type']
+
+    context = {
+        'og_tags': {
+            'chembl_id': chembl_id,
+            'type': type,
+            'name': name
+        }
+    }
+
+    cache.set(cache_key, context, cache_time)
+
+    return render(request, 'glados/targetReportCard.html', context)
+
 def wizard_step_json(request, step_id):
     """
     :param request: http request

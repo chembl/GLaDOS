@@ -108,7 +108,7 @@ common_urls = [
   # --------------------------------------------------------------------------------------------------------------------
 
   url(r'^target_report_card/(?P<chembl_id>\w+)/$',
-      DirectTemplateView.as_view(template_name="glados/targetReportCard.html"), ),
+      views.target_report_card, name='target_report_card'),
 
   # --------------------------------------------------------------------------------------------------------------------
   # Assays
