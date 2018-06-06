@@ -1,44 +1,115 @@
 <div class="carousel-wrapper">
 
     <div class="carousel-item">
+
         {% with is_dynamic=True %}
             {% include "glados/MainPageParts/Visualizations/browse_entities.html" %}
         {% endwith %}
+
+        <div class="btn-container hide-on-med-and-down">
+
+            <a class="small-text" href="{% url 'javascript_routing' %}#search_results/all" target="_blank">
+
+                Browse all ChEMBL
+
+            </a>
+
+        </div>
+
     </div>
 
     <div class="carousel-item">
+
+        {% with is_dynamic=True %}
+            {% include "glados/MainPageParts/Visualizations/zoomable_sunburst.html" %}
+        {% endwith %}
+
+        <div class="BCK-browse-button btn-container hide-on-med-and-down"
+             data-hb-template="Handlebars-circles-browser-button">
+
+            <a class="small-text" href="{% url 'javascript_routing' %}#browse/targets" target="_blank">
+
+                Browse all Targets
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="carousel-item">
+
+        {% with is_dynamic=True %}
+
+            {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
+
+        {% endwith %}
+
+        <div class="btn-container hide-on-med-and-down">
+
+            <a class="small-text" href="{% url 'javascript_routing' %}#browse/drugs/filter/_metadata.compound_records.src_id:13" target="_blank">
+
+                Browse all USAN Drugs
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="carousel-item">
+
         {% with is_dynamic=True %}
             {% include "glados/MainPageParts/TargetBrowserParts/browse_as_circles.html" %}
         {% endwith %}
 
-        <div class="btn-container hide-on-med-and-down">
-            <a class="small-text" href="/g/#browse/targets" target="_blank">
+        <div class="BCK-browse-button-circles btn-container hide-on-med-and-down"
+             data-hb-template="Handlebars-circles-browser-button">
+
+            <a class="small-text" href="{% url 'javascript_routing' %}#browse/targets" target="_blank">
+
                 Browse all Targets
+
             </a>
+
         </div>
 
     </div>
+
     <div class="carousel-item">
+
         {% with is_dynamic=True %}
             {% include "glados/MainPageParts/Visualizations/MaxPhaseForDiseaseDonut.html" %}
         {% endwith %}
 
         <div class="btn-container hide-on-med-and-down">
-            <a class="small-text" href="/g/#browse/drugs" target="_blank">
+
+            <a class="small-text" href="{% url 'javascript_routing' %}#browse/drugs" target="_blank">
+
                 Browse all Drugs
+
             </a>
+
         </div>
+
     </div>
 
     <div class="carousel-item">
+
         {% with is_dynamic=True %}
-            {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
+
+            {% include "glados/MainPageParts/Visualizations/first_approval_histogram.html" %}
+
         {% endwith %}
 
         <div class="btn-container hide-on-med-and-down">
-            <a class="small-text" href="/g/#browse/documents" target="_blank">
-                Browse all Documents
+
+            <a class="small-text" href="{% url 'javascript_routing' %}#browse/compounds/filter/_exists_%3Afirst_approval" target="_blank">
+
+                Browse all Approved Compounds
+
             </a>
+
         </div>
 
     </div>

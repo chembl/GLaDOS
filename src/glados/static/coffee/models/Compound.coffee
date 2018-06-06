@@ -154,7 +154,14 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
   getTradenames: -> @getWithCache('only_trade_names', @calculateSynonymsAndTradeNames.bind(@))
   getAdditionalSynonyms: -> @getWithCache('additional_only_synonyms', @calculateSynonymsAndTradeNames.bind(@))
   getAdditionalTradenames: -> @getWithCache('additional_trade_names', @calculateSynonymsAndTradeNames.bind(@))
-
+  getOwnAndAdditionalSynonyms: ->
+    synonyms = @getSynonyms()
+    additionalSynonyms = @getAdditionalSynonyms()
+    return _.union(synonyms, additionalSynonyms)
+  getOwnAndAdditionalTradenames: ->
+    tradenames = @getTradenames()
+    additionalTradenames = @getAdditionalTradenames()
+    return _.union(tradenames, additionalTradenames)
   # --------------------------------------------------------------------------------------------------------------------
   # instance cache
   # --------------------------------------------------------------------------------------------------------------------
@@ -181,7 +188,10 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
   getChildrenIDs: -> @getWithCache('children_ids', @calculateChildrenIDs.bind(@))
   getParentID: ->
     metadata = @get('_metadata')
-    return metadata.hierarchy.parent.chembl_id
+    if @isParent()
+      return @get('id')
+    else
+      return metadata.hierarchy.parent.chembl_id
 
   calculateAdditionalIDs: ->
     metadata = @get('_metadata')
@@ -978,7 +988,7 @@ Compound.COLUMNS_SETTINGS = {
     Compound.COLUMNS.PREF_NAME,
   ]
   RESULTS_LIST_REPORT_CARD_CAROUSEL: [
-    Compound.COLUMNS.CHEMBL_ID,
+    Compound.COLUMNS.CHEMBL_ID
   ]
   TEST: [
     Compound.COLUMNS.CHEMBL_ID,
@@ -1006,10 +1016,26 @@ Compound.COLUMNS_SETTINGS = {
     _.extend Compound.COLUMNS.PREF_NAME,
       additional_parsing:
         encoded_value: (value) -> value.replace(/[ ]/g, '+')
-    _.extend Compound.COLUMNS.SYNONYMS,
+    _.extend {}, Compound.COLUMNS.SYNONYMS,
+      parse_from_model: true
       additional_parsing:
-        search_term: (values) -> _.uniq(v.molecule_synonym for v in values).join(' OR ')
-        encoded_search_term: (values) -> _.uniq(v.molecule_synonym for v in values).join(' OR ')
+        search_term: (model) ->
+          synonyms = if model.isParent() then model.getOwnAndAdditionalSynonyms() else model.getSynonyms()
+          tradenames = if model.isParent() then model.getOwnAndAdditionalTradenames() else model.getTradenames()
+          fullList = _.union(synonyms, tradenames)
+          linkText = _.uniq(v for v in fullList).join(' OR ')
+
+          maxTextLength = 100
+          if linkText.length > maxTextLength
+            linkText = "#{linkText.substring(0, (maxTextLength-3))}..."
+
+          return linkText
+        encoded_search_term: (model) ->
+          synonyms = if model.isParent() then model.getOwnAndAdditionalSynonyms() else model.getSynonyms()
+          tradenames = if model.isParent() then model.getOwnAndAdditionalTradenames() else model.getTradenames()
+          fullList = _.union(synonyms, tradenames)
+          return encodeURIComponent(_.uniq(v for v in fullList).join(' OR '))
+
   ]
 }
 

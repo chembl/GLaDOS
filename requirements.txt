@@ -1,6 +1,6 @@
 Arpeggio
-django==1.11
-django-compressor>=2.0
+django==1.9.13
+django-compressor>=2.2
 selenium==3.8.1
 twitter
 python3-memcached
@@ -12,3 +12,4 @@ requests
 python-gettext
 elasticsearch-dsl>=6.1.0
 google-api-python-client==1.6.6
+timeago==1.0.8

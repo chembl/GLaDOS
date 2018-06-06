@@ -36,7 +36,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return list
 
     getNewESResultsListFor: (esIndexSettings, customQueryString='*', useCustomQueryString=false, itemsList,
-      contextualProperties, searchTerm, stickyQuery, searchESQuery) ->
+      contextualProperties, searchTerm, stickyQuery, searchESQuery, flavour) ->
 
       IndexESPagQueryCollection = glados.models.paginatedCollections.PaginatedCollectionBase\
       .extend(glados.models.paginatedCollections.ESPaginatedQueryCollection)
@@ -44,7 +44,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       .extend(glados.models.paginatedCollections.SortingFunctions)
       .extend(glados.models.paginatedCollections.ReferenceStructureFunctions)
       .extend(glados.models.paginatedCollections.CacheFunctions)
-      .extend(glados.models.paginatedCollections.StateSaving.ESCollectionStateSavingFunctions).extend
+      .extend(glados.models.paginatedCollections.StateSaving.ESCollectionStateSavingFunctions)
+      .extend(flavour).extend
         model: esIndexSettings.MODEL
 
         initialize: ->
@@ -291,6 +292,18 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         contextualProperties, searchTerm, stickyQuery)
       return list
 
+    getNewDrugIndicationsList: (chemblID) ->
+
+      console.log 'getNewDrugIndicationsList: ', chemblID
+      queryString = "_metadata.all_molecule_chembl_ids:#{chemblID}"
+      config = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.DRUG_INDICATIONS_LIST
+      flavour = glados.models.paginatedCollections.SpecificFlavours.DrugIndicationsList
+      list = @getNewESResultsListFor config, customQueryString=queryString, useCustomQueryString=true, itemsList=undefined,
+        contextualProperties=undefined, searchTerm=undefined, stickyQuery=undefined, searchESQuery=undefined,
+        flavour=flavour
+
+      return list
+
     getNewActivitiesList: (filter='') ->
 
       list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.ACTIVITIES_LIST, filter)
@@ -362,26 +375,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @resetMeta(data.page_meta)
 
         return data.molecules
-
-      return list
-    getNewDrugIndicationsList: ->
-
-      config = glados.models.paginatedCollections.Settings.WS_COLLECTIONS.DRUG_INDICATIONS_LIST
-      list = @getNewWSCollectionFor config
-
-      list.initURL = (chemblID) ->
-        console.log 'init url'
-        @baseUrl = "#{glados.Settings.WS_BASE_URL}drug_indication.json?molecule_chembl_id=#{chemblID}"
-        console.log 'base url: ', @baseUrl
-        @setMeta('base_url', @baseUrl, true)
-        @initialiseUrl()
-
-      list.parse = (data) ->
-        data.page_meta.records_in_page = data.drug_indications.length
-        @setMeta('data_loaded', true)
-        @resetMeta(data.page_meta)
-
-        return _.sortBy(data.drug_indications, (di) -> return -di.max_phase_for_ind)
 
       return list
 

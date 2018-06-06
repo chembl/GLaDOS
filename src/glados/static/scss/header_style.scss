@@ -11,7 +11,8 @@ $chembl-header-height: 54px;
 $chembl-header-height-pintop: 140px;
 $chembl-header-padding: 10px;
 $side-buttons-width-big: 180px;
-$logo-height-xl: 40px;
+$row-height-xl: 40px;
+$logo-height-xl: 50px;
 
 //colors
 $lighter-color: #62b7bd;
@@ -32,7 +33,7 @@ $chembl-name-font: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
 $search-bar-font: helvetica, Arial, sans-serif;
 $verdana: "ChEMBL_Verdana", Verdana, sans-serif;
 
-/* -------- DEFAULT STYLES -------- */
+/* -------- DEFAULT STYLES PINNED HEADER -------- */
 
 .disable-scroll {
   overflow-y: hidden;
@@ -102,7 +103,7 @@ header .row {
 
       .chembl-logo {
         img {
-          width: 30px;
+          width: 35px;
           height: auto;
         }
 
@@ -110,7 +111,7 @@ header .row {
           padding-left: $chembl-header-padding;
           padding-top: $chembl-header-padding;
           font-family: $chembl-name-font;
-          font-size: 30px;
+          font-size: 35px;
         }
       }
 
@@ -209,8 +210,8 @@ header .row {
   .burger-button {
 
     img {
-      width: 20px;
-      height: 20px;
+      width: 30px;
+      height: 30px;
     }
   }
 }
@@ -242,8 +243,8 @@ header .row {
     img {
       margin-right: $chembl-header-padding;
       margin-left: $chembl-header-padding;
-      width: 30px;
-      height: 30px;
+      width: 35px;
+      height: 35px;
     }
   }
 }
@@ -297,7 +298,7 @@ header .row {
 
       .inner-row {
         width: 95%;
-        height: $logo-height-xl;
+        height: $row-height-xl;
         max-width: 1548px;
         padding-top: 20px;
 
@@ -310,8 +311,8 @@ header .row {
           }
 
           span {
-            padding-left: $chembl-header-padding;
-            padding-top: $chembl-header-padding;
+            padding-left: $chembl-header-padding * 2;
+            padding-top: $chembl-header-padding + 5;
             font-family: $chembl-name-font;
             font-size: $logo-height-xl;
           }

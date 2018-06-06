@@ -29,6 +29,14 @@ GLADOS_ROOT = os.path.dirname(os.path.abspath(glados.__file__))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # ----------------------------------------------------------------------------------------------------------------------
+# SERVER BASE PATH
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+# For usage behind proxies eg: 'chembl/beta/'
+SERVER_BASE_PATH = ''
+
+# ----------------------------------------------------------------------------------------------------------------------
 # SECURITY WARNING: keep the secret key used in production secret!
 # ----------------------------------------------------------------------------------------------------------------------
 SECRET_KEY = 'Cake, and grief counseling, will be available at the conclusion of the test.'
@@ -172,7 +180,7 @@ LOCALE_PATHS = [
 
 USE_X_FORWARDED_HOST = True
 
-STATIC_URL = '/static/'
+STATIC_URL = '/{0}static/'.format(SERVER_BASE_PATH)
 
 STATICFILES_DIRS = (
   os.path.join(GLADOS_ROOT, 'static/'),

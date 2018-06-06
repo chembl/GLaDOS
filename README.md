@@ -32,7 +32,6 @@ Here you can find some informal diagrams that help to understand how some compon
 * [Client Downloads] (https://docs.google.com/drawings/d/1M4o1h0dTCg5yDuYx-sDVb3pZCX0RFd5byoERSPRriDA/edit?usp=sharing)
 * [Elasticsearch Collection Downloads](https://docs.google.com/drawings/d/1lh6IDZYGL8Ga3-anTwrRgfTXiURzE1-Sp-c9I_WOyQA/edit?usp=sharing)
 
-
 ### Searching
 
 * [Search Basic Workflow] (https://docs.google.com/drawings/d/1eR5cyfc8pR5iDjD7qUQGzy-Nb8R0ixpmiva8pNEm5cU/edit?usp=sharing)
@@ -45,6 +44,12 @@ Here you can find some informal diagrams that help to understand how some compon
 ### Visualisations
 
 * [Matrix (heatmap)](https://docs.google.com/drawings/d/1_K7JTZDZYPw0i_hLy-ApYsNI264edBrJmoDetG2FgVw/edit?usp=sharing)
+
+### Molecule Features Icons
+
+* [All Features](https://drive.google.com/file/d/17t61ULFxI5OznryZTwzedBuaWOiC-qHz/view?usp=sharing)
+* [SVG Icons](https://drive.google.com/open?id=1ZFjAxhsA_PrIgBLvGqbZT8ijofdUSuK2)
+* [Icon Credits](https://sites.google.com/view/icon-credits/home)
 
 
 

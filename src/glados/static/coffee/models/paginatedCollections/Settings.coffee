@@ -241,7 +241,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           Infinite:
             Default: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
           Carousel:
-            Default: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
         DOWNLOAD_COLUMNS: Activity.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.ActivitySchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
@@ -249,6 +249,28 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite']]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
+      COMPOUND_ES_RESULTS_LIST_CAROUSEL:
+        # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
+        ID_NAME: 'ESCompound'
+        LABEL: 'Compounds'
+        INDEX_NAME: 'chembl_molecule'
+        # PATH: Assigned after this declaration using the INDEX_NAME
+        MODEL: Compound
+        BASE_URL: 'base_url is set by initURL'
+        DEFAULT_PAGE_SIZE: "needs to be set up outside, for some reason it doesn't work"
+        AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
+        COLUMNS: Compound.COLUMNS_SETTINGS.ALL_COLUMNS
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
+          Cards:
+            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
+          Infinite:
+            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
+          Carousel:
+            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
+        ID_COLUMN: Compound.ID_COLUMN
+        IS_CAROUSEL: true
       COMPOUND_COOL_CARDS:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCompound'
@@ -397,7 +419,30 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         ENABLE_COLLECTION_CACHING: true
         DISABLE_CACHE_ON_DOWNLOAD: true
         ENABLE_ACTIVITIES_LINK_FOR_SELECTED_ENTITIES: true
+      DRUG_INDICATIONS_LIST:
+        ID_NAME: 'ESDrugIndications'
+        LABEL: 'Drug Indications'
+        INDEX_NAME: 'chembl_drug_indication'
+        # PATH: Assigned after this declaration using the INDEX_NAME
+        #BROWSE_LIST_URL: Drug.getDrugsListURL
+        MODEL: glados.models.Compound.DrugIndication
+        BASE_URL: 'base_url is set by initURL'
+        DEFAULT_PAGE_SIZE: 5
+        COLUMNS: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.ALL_COLUMNS
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+        ID_COLUMN: glados.models.Compound.DrugIndication.ID_COLUMN
     WS_COLLECTIONS:
+      MECHANISMS_OF_ACTIONS_LIST:
+        MODEL: glados.models.Compound.MechanismOfAction
+        BASE_URL: 'base_url is set by initURL'
+        DEFAULT_PAGE_SIZE: 5
+        COLUMNS: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.ALL_COLUMNS
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+        ID_COLUMN: glados.models.Compound.MechanismOfAction.ID_COLUMN
       ACTIVITIES_LIST:
         MODEL: Activity
         BASE_URL: glados.Settings.WS_DEV_BASE_URL + 'activity.json'
@@ -504,24 +549,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_SIMILARITY
         ID_COLUMN: Compound.ID_COLUMN
         ADDITIONAL_COLUMNS:[]
-      DRUG_INDICATIONS_LIST:
-        MODEL: glados.models.Compound.DrugIndication
-        BASE_URL: 'base_url is set by initURL'
-        DEFAULT_PAGE_SIZE: 5
-        COLUMNS: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-        ID_COLUMN: glados.models.Compound.DrugIndication.ID_COLUMN
-      MECHANISMS_OF_ACTIONS_LIST:
-        MODEL: glados.models.Compound.MechanismOfAction
-        BASE_URL: 'base_url is set by initURL'
-        DEFAULT_PAGE_SIZE: 5
-        COLUMNS: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-        ID_COLUMN: glados.models.Compound.MechanismOfAction.ID_COLUMN
       COMPOUND_WS_RESULTS_LIST_CAROUSEL:
         MODEL: Compound
         BASE_URL: 'base_url is set by initURL'

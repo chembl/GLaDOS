@@ -1,132 +1,159 @@
 {% verbatim %}{{#each columns}}{% endverbatim %}
 
-    {% if for_table %}
-        {% verbatim %}
-        <td class="{{#if this.img_url}}center-align{{/if}} {{format_class}}
-            {{#unless this.show}}hidden_cell{{/unless}} BCK-sortable-pag-table-cell"
-            data-comparator="{{this.comparator}}">
-        {% endverbatim %}
-    {% elif for_table_as_card %}
-        {% verbatim %}
-        <div class="{{#unless this.show}}hidden_list_prop{{/unless}} BCK-sortable-pag-list-prop"
-            data-comparator="{{this.comparator}}">
-            <b>{{this.name_to_show}}:</b>
-        {% endverbatim %}
-    {% elif for_card %}
-        {% verbatim %}
-            {{#unless this.hide_label}}
-                <small>
-            {{/unless}}
-            <div class="css-tooltipped" onmouseover="glados.Utils.Tooltips.cssTooltippedOnOverflownOnly(this);">
-                <p class="p-oneline">
-            {{#unless this.hide_label}}
-                <b>{{this.name_to_show_short}}:</b>
-            {{/unless}}
-        {% endverbatim %}
+    {% if ignore_show_status %}
+    {% else %}
+
+    {% verbatim %}
+    {{#if this.show}}
+    {% endverbatim %}
+
     {% endif %}
 
 
-    {% verbatim %}
+        {% if for_table %}
+            {% verbatim %}
+            <td class="{{#if this.img_url}}center-align{{/if}} {{format_class}}
+                {{#unless this.show}}hidden_cell{{/unless}} BCK-sortable-pag-table-cell"
+                data-comparator="{{this.comparator}}">
+            {% endverbatim %}
+        {% elif for_table_as_card %}
+            {% verbatim %}
+            <div class="{{#unless this.show}}hidden_list_prop{{/unless}} BCK-sortable-pag-list-prop"
+                data-comparator="{{this.comparator}}">
+                <b>{{this.name_to_show}}:</b>
+            {% endverbatim %}
+        {% elif for_card %}
 
-    {% endverbatim %}{% if not for_card %}{% verbatim %}
-    {{#if this.img_url}}
-        <img src="{{this.img_url}}" height="75px" width="75px"/><br/>
-    {{/if}}
-    {% endverbatim %}{% endif %}{% verbatim %}
+            {% verbatim %}
 
-    {{#if this.search_hit_highlight_column}}
-        {{#each this.value}}
-            <p class="css-tooltipped{{#if this.active_tooltip}} active-tooltip{{/if}}">
-                <b>{{{this.label_mini}}}:</b> {{{this.value_mini}}}
-                <span class="css-tooltip z-depth-5">
-                    <b>{{{this.label}}}:</b> {{{this.value}}}
-                </span>
-            </p>
-        {{/each}}
-    {{else if this.has_highlight}}
-        {{#if this.has_link}}
-            <a href="{{this.link_url}}" target="_blank">{{{this.highlighted_value}}}</a>
-        {{else}}
-            {{{this.highlighted_value}}}
-        {{/if}}
-    {{else if this.has_link}}
-        <a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
-    {{else if this.has_multiple_links}}
-        {{#each this.links_values}}
-            <a href="{{this.url}}" target="_blank">{{this.text}}</a>{{#unless @last }}, {{/unless}}
-        {{/each}}
-    {{else if this.custom_html}}
-        {{{this.custom_html}}}
-    {{else}}
-        {{#unless this.hide_value}}
-            {{this.value}}
-        {{/unless}}
-    {{/if}}
-
-    {% endverbatim %}{% if for_card %}{% verbatim %}
-    {{#if @first}}
-        {{#if ../highlights}}
-                </p>
-                <p class="css-tooltip z-depth-5">
-                    {{#if this.has_highlight}}
-                        {{#if this.has_link}}
-                            <a href="{{this.link_url}}" target="_blank">{{{this.highlighted_value}}}</a>
-                        {{else}}
-                            {{{this.highlighted_value}}}
-                        {{/if}}
-                    {{else if this.has_link}}
-                        <a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
-                    {{/if}}
-                </p>
-                </div>
-            {{#each ../highlights}}
-                <div class="css-tooltipped{{#if this.active_tooltip}} active-tooltip{{/if}}">
+                {{#unless this.hide_label}}
                     <small>
-                        <p><b>{{{this.label_mini}}}:</b> {{{this.value_mini}}}</p>
-                        <p class="css-tooltip z-depth-5">
-                            <b>{{{this.label}}}:</b> {{{this.value}}}
-                        </p>
-                    </small>
-            {{/each}}
-        {{/if}}
-    {{else}}
-        </p>
-        <p class="css-tooltip z-depth-5">
-            <b>{{{this.name_to_show}}}:</b> {{{this.value}}}
-        </p>
-    {{/if}}
-    {% endverbatim %}{% endif %}{% verbatim %}
+                {{/unless}}
+                <div class="css-tooltipped" onmouseover="glados.Utils.Tooltips.cssTooltippedOnOverflownOnly(this);">
+                    <p class="p-oneline">
+                {{#unless this.hide_label}}
+                    <b>{{this.name_to_show_short}}:</b>
+                {{/unless}}
 
-    {% endverbatim %}{% if not for_card %}{% verbatim %}
-    {{#if this.is_function_link}}
-        {{#unless this.hide_value}}<br>{{/unless}}
-        <div>
-            <a class="BCK-function-link" data-function-paramaters="{{this.function_parameters}}"
-                data-function_constant_parameters="{{this.function_constant_parameters}}"
-                data-function_object_parameter="{{this.function_object_parameter}}"
-                data-function-key="{{this.function_key}}">
-                <i class="fa fa-bar-chart" aria-hidden="true"></i>{{this.value}}
-            </a>
-        </div>
-    {{/if}}
-    {% endverbatim %}{% endif %}{% verbatim %}
+            {% endverbatim %}
 
-    {% endverbatim %}
-
-
-    {% if for_card %}
+        {% endif %}
 
 
         {% verbatim %}
-            </div>
-            {{#unless this.hide_label}}
-                </small>
+
+        {% endverbatim %}{% if not for_card %}{% verbatim %}
+        {{#if this.img_url}}
+            <img src="{{this.img_url}}" height="75px" width="75px"/><br/>
+        {{/if}}
+        {% endverbatim %}{% endif %}{% verbatim %}
+
+        {{#if this.search_hit_highlight_column}}
+            {{#each this.value}}
+                <p class="css-tooltipped{{#if this.active_tooltip}} active-tooltip{{/if}}">
+                    <b>{{{this.label_mini}}}:</b> {{{this.value_mini}}}
+                    <span class="css-tooltip z-depth-5">
+                        <b>{{{this.label}}}:</b> {{{this.value}}}
+                    </span>
+                </p>
+            {{/each}}
+        {{else if this.has_highlight}}
+            {{#if this.has_link}}
+                <a href="{{this.link_url}}" target="_blank">{{{this.highlighted_value}}}</a>
+            {{else}}
+                {{{this.highlighted_value}}}
+            {{/if}}
+        {{else if this.has_link}}
+            <a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
+        {{else if this.has_multiple_links}}
+            {{#each this.links_values}}
+                <a href="{{this.url}}" target="_blank">{{this.text}}</a>{{#unless @last }}, {{/unless}}
+            {{/each}}
+        {{else if this.custom_html}}
+            {{{this.custom_html}}}
+        {{else}}
+            {{#unless this.hide_value}}
+                {{this.value}}
             {{/unless}}
+        {{/if}}
+
+        {% endverbatim %}{% if for_card %}{% verbatim %}
+
+
+        {{#if @first}}
+            {{#if ../highlights}}
+                    </p>
+                    <p class="css-tooltip z-depth-5">
+                        {{#if this.has_highlight}}
+                            {{#if this.has_link}}
+                                <a href="{{this.link_url}}" target="_blank">{{{this.highlighted_value}}}</a>
+                            {{else}}
+                                {{{this.highlighted_value}}}
+                            {{/if}}
+                        {{else if this.has_link}}
+                            <a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
+                        {{/if}}
+                    </p>
+                    </div>
+                {{#each ../highlights}}
+                    <div class="css-tooltipped{{#if this.active_tooltip}} active-tooltip{{/if}}">
+                        <small>
+                            <p><b>{{{this.label_mini}}}:</b> {{{this.value_mini}}}</p>
+                            <p class="css-tooltip z-depth-5">
+                                <b>{{{this.label}}}:</b> {{{this.value}}}
+                            </p>
+                        </small>
+                {{/each}}
+            {{/if}}
+        {{else}}
+            </p>
+            <p class="css-tooltip z-depth-5">
+                <b>{{{this.name_to_show}}}:</b> {{{this.value}}}
+            </p>
+        {{/if}}
+
+
+        {% endverbatim %}{% endif %}{% verbatim %}
+
+        {% endverbatim %}{% if not for_card %}{% verbatim %}
+        {{#if this.is_function_link}}
+            {{#unless this.hide_value}}<br>{{/unless}}
+            <div>
+                <a class="BCK-function-link" data-function-paramaters="{{this.function_parameters}}"
+                    data-function_constant_parameters="{{this.function_constant_parameters}}"
+                    data-function_object_parameter="{{this.function_object_parameter}}"
+                    data-function-key="{{this.function_key}}">
+                    <i class="fa fa-bar-chart" aria-hidden="true"></i>{{this.value}}
+                </a>
+            </div>
+        {{/if}}
+        {% endverbatim %}{% endif %}{% verbatim %}
+
         {% endverbatim %}
-    {% elif for_table_as_card %}
-        </div>
-    {% elif for_table %}
-        </td>
+
+
+        {% if for_card %}
+
+
+            {% verbatim %}
+                </div>
+                {{#unless this.hide_label}}
+                    </small>
+                {{/unless}}
+            {% endverbatim %}
+        {% elif for_table_as_card %}
+            </div>
+        {% elif for_table %}
+            </td>
+        {% endif %}
+
+    {% if ignore_show_status %}
+    {% else %}
+
+    {% verbatim %}
+    {{/if}}
+    {% endverbatim %}
+
     {% endif %}
 
 {% verbatim %}{{/each}}{% endverbatim %}

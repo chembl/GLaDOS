@@ -20,12 +20,16 @@ glados.useNameSpace 'glados.views.MainPage',
         chembl_db_version: chemblDBVersion.replace('_', ' ')
         chembl_release_date: @model.get('chembl_release_date')
         num_targets: $.number(@model.get('targets'))
+        targets_url: Target.getTargetsListURL()
         num_compound_records: $.number(@model.get('compound_records'))
         num_compounds: $.number(@model.get('disinct_compounds'))
+        compounds_url: Compound.getCompoundsListURL()
         num_activities: $.number(@model.get('activities'))
+        activities_url: Activity.getActivitiesListURL()
         num_publications: $.number(@model.get('publications'))
-        datasets_url: Document.getDocumentsListURL(Document.DEPOSITED_DATASETS_FILTER)
+        docs_url: Document.getDocumentsListURL()
         num_datasets: glados.views.MainPage.DatabaseSummaryView.LOADING_LABEL
+        datasets_url: Document.getDocumentsListURL(Document.DEPOSITED_DATASETS_FILTER)
         release_notes_link: releaseNotesLink
 
       @showContent()

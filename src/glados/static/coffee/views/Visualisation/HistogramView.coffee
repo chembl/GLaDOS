@@ -193,6 +193,10 @@ glados.useNameSpace 'glados.views.Visualisation',
         .domain([0, _.max(bucketSizes)])
         .range([BARS_MIN_HEIGHT, @BARS_CONTAINER_HEIGHT])
 
+      thisView.flattenHeighttoPrecentage = d3.scale.linear()
+        .range([0, @BARS_CONTAINER_HEIGHT])
+
+
       if @config.stacked_histogram
         @renderStackedHistogramBars(barsContainerG, buckets)
       else
@@ -271,20 +275,19 @@ glados.useNameSpace 'glados.views.Visualisation',
         .scale(thisView.getXForBucket)
 
       elemWidth = $(@el).width()
-      xAxisTickInterval = 3
+      xAxisTickInterval = 4
 
       if elemWidth < 500
-        xAxisTickInterval = 4
-      if elemWidth < 400
         xAxisTickInterval = 5
-      if elemWidth < 300
+      if elemWidth < 400
         xAxisTickInterval = 6
+      if elemWidth < 300
+        xAxisTickInterval = 7
 
       if @config.stacked_histogram
         formatAsYear = d3.format("1999")
         xAxis.tickFormat(formatAsYear)
             .tickValues thisView.getXForBucket.domain().filter((d, i) -> !(i % xAxisTickInterval))
-
 
       xAxisContainerG.call(xAxis)
 
@@ -309,7 +312,20 @@ glados.useNameSpace 'glados.views.Visualisation',
         .tickSize(-@BARS_CONTAINER_WIDTH, 0)
         .orient('left')
 
+      if @config.y_scale_mode == 'percentage'
+
+        scaleForYAxis = d3.scale.linear()
+          .domain([100, 0])
+          .range([0, @BARS_CONTAINER_HEIGHT])
+
+        yAxis = d3.svg.axis()
+          .scale(scaleForYAxis)
+          .tickSize(-@BARS_CONTAINER_HEIGHT, 0)
+          .orient('left')
+          .tickFormat((d) -> d + '%')
+
       yAxisContainerG.call(yAxis)
+
       if @config.stacked_histogram
         yAxisContainerG.selectAll('.tick line').style('display', 'none')
       else
@@ -390,11 +406,11 @@ glados.useNameSpace 'glados.views.Visualisation',
         valueBars.attr('fill', glados.Settings.VIS_COLORS.TEAL3)
 
         frontBar.on('mouseover', (d, i)->
-          esto = d3.select(valueBars[0][i])
-          esto.attr('fill', glados.Settings.VIS_COLORS.RED2))
+          self = d3.select(valueBars[0][i])
+          self.attr('fill', glados.Settings.VIS_COLORS.RED2))
         .on('mouseout', (d, i)->
-          esto = d3.select(valueBars[0][i])
-          esto.attr('fill', glados.Settings.VIS_COLORS.TEAL3))
+          self = d3.select(valueBars[0][i])
+          self.attr('fill', glados.Settings.VIS_COLORS.TEAL3))
 
       #-----------------------------------------------------------------------------------------------------------------
       # qtips
@@ -431,9 +447,8 @@ glados.useNameSpace 'glados.views.Visualisation',
     #-------------------------------------------------------------------------------------------------------------------
 
     renderStackedHistogramBars: (barsContainerG, buckets) ->
-
-      subBucketsOrder = glados.Utils.Buckets.getSubBucketsOrder(buckets, @subBucketsAggName)
       thisView = @
+      subBucketsOrder = glados.Utils.Buckets.getSubBucketsOrder(buckets, @subBucketsAggName, thisView.config.y_scale_mode == 'percentage')
 
       zScaleDomains = []
       for key, value of subBucketsOrder
@@ -462,10 +477,11 @@ glados.useNameSpace 'glados.views.Visualisation',
           totalCount += bucket.doc_count
 
 #       get number of max categories for each bar group
-        maxCategories = 0
-        for bucket in subBuckets
-          if bucket.doc_count > (totalCount * 0.02)
-            maxCategories += 1
+        if thisView.config.max_categories?
+          maxCategories = 0
+          for bucket in subBuckets
+            if bucket.doc_count > (totalCount * 0.02)
+              maxCategories += 1
 
 #        there should be at least 2 categories for the merge to work
         if maxCategories <= 1
@@ -484,11 +500,22 @@ glados.useNameSpace 'glados.views.Visualisation',
           if bucket.key != glados.Visualisation.Activity.OTHERS_LABEL
             bucket.pos = subBucketsOrder[bucket.key].pos
             bucket.parent_key = d.key.split(".")[0]
-        subBuckets = _.sortBy(subBuckets, (item) -> item.pos)
+
+            if thisView.config.sort_by_key
+              subBuckets = _.sortBy(subBuckets, (item) -> item.key)
+            else
+              subBuckets = _.sortBy(subBuckets, (item) -> item.pos)
 
         previousHeight = thisView.BARS_CONTAINER_HEIGHT
+
+        thisView.flattenHeighttoPrecentage.domain([0, d.doc_count])
+
         for bucket in subBuckets
           bucket.posY =  previousHeight - thisView.getHeightForBucket(bucket.doc_count)
+
+          if thisView.config.y_scale_mode == 'percentage'
+            bucket.posY =  previousHeight - thisView.flattenHeighttoPrecentage(bucket.doc_count)
+
           previousHeight = bucket.posY
 
 #       stacked bars
@@ -501,8 +528,14 @@ glados.useNameSpace 'glados.views.Visualisation',
           .classed('bar-group', true)
 
         stackedBarsGroups.append('rect')
-          .attr('height', (b) -> thisView.getHeightForBucket(b.doc_count))
-          .attr('width', thisView.getXForBucket.rangeBand())
+          .attr('height', (b) ->
+
+            if thisView.config.y_scale_mode == 'percentage'
+              thisView.flattenHeighttoPrecentage(b.doc_count)
+            else
+              thisView.getHeightForBucket(b.doc_count)
+
+          ).attr('width', thisView.getXForBucket.rangeBand())
           .attr('fill', (b) ->
             if b.key == 'Other'
               return glados.Settings.VIS_COLORS.GREY2
@@ -510,6 +543,9 @@ glados.useNameSpace 'glados.views.Visualisation',
               return zScale(b.key)
           )
           .on('click', (b) -> glados.Utils.URLS.shortenLinkIfTooLongAndOpen(b.link))
+          .on('mouseover', -> d3.select(@).classed('hovered', true))
+          .on('mouseout', -> d3.select(@).classed('hovered', false))
+
 
 #       qtips
         stackedBarsGroups.each (d) ->
@@ -521,7 +557,7 @@ glados.useNameSpace 'glados.views.Visualisation',
           keyName = thisView.currentZAxisProperty.label
 
           text = '<b>' + keyName + '</b>' + ":  " + key + \
-            '<br>' + '<b>' + "Documents:  " + '</b>' + docCount + \
+            '<br>' + '<b>' + "Count:  " + '</b>' + docCount + \
             '<br>' + '<b>' + barName + ":  "  + '</b>' +  barText
           $(@).qtip
             content:
@@ -539,5 +575,8 @@ glados.useNameSpace 'glados.views.Visualisation',
       noOtherScaleDomains = []
       for key, value of noOthersBucket
           noOtherScaleDomains.push(key)
-      noOtherScaleDomains.push('Other')
+
+#     add 'other' to legend domain if there is a max number of categories
+      if thisView.config.max_categories?
+        noOtherScaleDomains.push('Other')
       @currentZAxisProperty.domain = noOtherScaleDomains

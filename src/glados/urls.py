@@ -7,30 +7,36 @@ from django.conf import settings
 from . import views
 from django.contrib import admin
 import glados.grammar.search_parser
-from django.views.i18n import JavaScriptCatalog
+from django.views.i18n import javascript_catalog
 
-# ----------------------------------------------------------------------------------------------------------------------
-# Translation for Javascript
-# ----------------------------------------------------------------------------------------------------------------------
-urlpatterns = \
-  i18n_patterns(
-    url(r'^glados_jsi18n/glados$',
-        JavaScriptCatalog.as_view(packages=['glados'], domain='glados'),
-        name='js-glados-catalog'),
-    url(r'^glados_jsi18n/glados_es_generated$',
-        JavaScriptCatalog.as_view(packages=['glados'], domain='glados_es_generated'),
-        name='js-glados_es_generated-catalog'),
-    url(r'^glados_jsi18n/glados_es_override$',
-        JavaScriptCatalog.as_view(packages=['glados'], domain='glados_es_override'),
-        name='js-glados_es_override-catalog'),
-  )
+from django.conf.urls import url
+from django.http import HttpResponse
 
-urlpatterns += [
 
+
+common_urls = [
+  # --------------------------------------------------------------------------------------------------------------------
+  # Translation for Javascript
+  # --------------------------------------------------------------------------------------------------------------------
+  url(r'^glados_jsi18n/glados$', javascript_catalog, {
+      'packages': ('glados',),
+      'domain': 'glados',
+
+    }, name='js-glados-catalog'),
+  url(r'^glados_jsi18n/glados_es_generated$', javascript_catalog, {
+      'packages': ('glados',),
+      'domain': 'glados_es_generated',
+
+    }, name='js-glados_es_generated-catalog'),
+  url(r'^glados_jsi18n/glados_es_override$', javascript_catalog, {
+      'packages': ('glados',),
+      'domain': 'glados_es_override',
+
+    }, name='js-glados_es_override-catalog'),
   # --------------------------------------------------------------------------------------------------------------------
   # Main Pages
   # --------------------------------------------------------------------------------------------------------------------
-  url(r'^g/$', views.main_html_base_no_bar, name='no_bar'),
+  url(r'^g/$', views.main_html_base_no_bar, name='javascript_routing'),
 
   url(r'^$',
       views.main_page, name='main'),
@@ -41,7 +47,11 @@ urlpatterns += [
 
   url(r'^entities_records/$', views.get_entities_records, name='entities_records'),
 
+  url(r'^github_details/$', views.get_github_details, name='github_details'),
+
   url(r'^blog_entries/(?P<pageToken>.+)?$', views.get_latest_blog_entries, name='blog_entries'),
+
+  url(r'^visualise/$', views.visualise, name='visualise ChEMBL'),
 
   url(r'^marvin_search_fullscreen/$',
       DirectTemplateView.as_view(template_name="glados/marvin_search_fullscreen.html"), ),
@@ -145,12 +155,24 @@ urlpatterns += [
   # --------------------------------------------------------------------------------------------------------------------
   url(r'^g/tiny/(?P<hash>.*?)$', views.render_params_from_hash, name='tiny'),
   url(r'^shorten_url', views.shorten_url, name='shorten'),
-  url(r'^extend_url/(?P<hash>.*?)$', views.extend_url, name='extend')
+  url(r'^extend_url/(?P<hash>.*?)$', views.extend_url, name='extend'),
+
+  url(r'^robots.txt', lambda x: HttpResponse(
+        "User-Agent: *\nDisallow: / \nUser-Agent: Twitterbot\nAllow: {0}img".format(settings.STATIC_URL),
+        content_type="text/plain"),
+        name="robots_file")
 
 ]
+
+# ----------------------------------------------------------------------------------------------------------------------
+# SERVER BASE PATH DEFINITION
+# ----------------------------------------------------------------------------------------------------------------------
+
+urlpatterns = [url(r'^'+settings.SERVER_BASE_PATH, include(common_urls))]
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Static Files
 # ----------------------------------------------------------------------------------------------------------------------
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+

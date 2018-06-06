@@ -7,7 +7,7 @@ class DownloadWizardApp
   @initWizardStep = ->
     menuItem = new WizardStep
 
-    menuItem.url = '/download_wizard/first'
+    menuItem.url = glados.Settings.GLADOS_BASE_URL_FULL+'download_wizard/first'
 
     return menuItem
 

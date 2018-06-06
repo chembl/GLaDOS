@@ -1,3 +1,4 @@
+{% load static %}
 {% verbatim %}
 
 <script id="Handlebars-Common-RedCardError" type="text/x-handlebars-template">
@@ -436,94 +437,13 @@
   <input class="similarity-search-threshold-input" type="range" id="test5" min="70" max="100" value="{{percentage}}"/>
 </script>
 
-<script id="Handlebars-Compound-MoleculeFeaturesGrid" type="text/x-handlebars-template">
-
-<div class="mol-features-grid white-text">
-
-            <div class="row center-align first-row">
-
-              <div id='Bck-MolType' data-feature-name='Bck-MolType' class="col s2 {{#unless table_cell_mode}}offset-s1{{/unless}}"
-               data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
-
-                <!-- Backbone -->
-
-              </div>
-              <div id='Bck-RuleOfFive' data-feature-name='Bck-RuleOfFive' class="col s2"
-                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
-
-                <!-- Backbone -->
-
-              </div>
-              <div id='Bck-FirstInClass' data-feature-name='Bck-FirstInClass' class="col s2"
-                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
-
-                <!-- Backbone -->
-
-              </div>
-
-              <div id='Bck-Chirality' data-feature-name='Bck-Chirality' class="col s2"
-                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
-
-                <!-- Backbone -->
-
-              </div>
-              <div id='Bck-Prodrug' data-feature-name='Bck-Prodrug' class="col s2"
-                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
-
-                <!-- Backbone -->
-
-              </div>
-
-            </div>
-
-            <div class="row center-align second-row">
-
-              <div id='Bck-Oral' data-feature-name='Bck-Oral' class="col s2 {{#unless table_cell_mode}}offset-s1{{/unless}}"
-                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
-
-                <!-- Backbone -->
-
-              </div>
-              <div id='Bck-Parenteral' data-feature-name='Bck-Parenteral' class="col s2"
-                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
-
-                <!-- Backbone -->
-
-              </div>
-              <div id='Bck-Topical' data-feature-name='Bck-Topical' class="col s2"
-                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
-
-                <!-- Backbone -->
-
-              </div>
-              <div id='Bck-BlackBox' data-feature-name='Bck-BlackBox' class="col s2"
-                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
-
-                <!-- Backbone -->
-
-              </div>
-              <div id='Bck-Availability' data-feature-name='Bck-Availability' class="col s2"
-                data-hb-template="Handlebars-Compound-MoleculeFeatures-IconContainer">
-
-                <!-- Backbone -->
-
-              </div>
-
-            </div>
-
-
-          </div>
-
-</script>
-
 <script id="Handlebars-Compound-MoleculeFeatures-IconContainer" type="text/x-handlebars-template">
   <!-- the django like variables inside the verbatim are rendered with handlebars, not by django -->
   <div class="feat-icon {{active_class}}">
-    <div class="valign-wrapper">
-      <i class="valign icon {{icon_class}} tooltipped {{#unless table_cell_mode}}table_cell_icon{{/unless}}"
-         data-icon="{{data_icon}}"
+    <div class= "valign-wrapper icon-wrapper tooltipped"
          data-position="{{tooltip_position}}"
-         data-tooltip="{{tooltip}}" data-tooltip="{{tooltip}}"></i>
+         data-tooltip="{{tooltip}}">
+      <i class="valign feature-icon {{icon_class}} {{#unless table_cell_mode}} table_cell_icon {{/unless}}"></i>
     </div>
   </div>
 </script>
@@ -554,6 +474,10 @@
       </th>
       <td >
 
+        {{#if this.vertical_list}}
+          <ul>
+        {{/if}}
+
         {{#each this.ref_items}}
 
           {{#if this.is_atc}}
@@ -564,12 +488,20 @@
               </li>
               {{/each}}
             </ul>
+          {{else if this.vertical_list}}
+              <li>
+                  <a target='_blank' href="{{this.link}}">{{this.xref_id}}</a> ({{this.id}})
+              </li>
           {{else}}
 
           <a target='_blank' href="{{this.link}}">{{this.id}}</a>{{#unless @last }}, {{/unless}}
 
             {{/if}}
         {{/each}}
+
+        {{#if this.vertical_list}}
+          </ul>
+        {{/if}}
 
       </td>
 
@@ -628,11 +560,15 @@ There are no {{#if is_unichem}}UniChem {{/if}}cross references for {{chembl_id}}
             </a>
 
             <a onclick="window.open('https://twitter.com/intent/retweet?tweet_id={{columns_by_comparator.id.value}}','retweet {{columns_by_comparator.id.value}}','width=600,height=400')">
-                <img src="/static/img/icons/retweet_icon.png">
+                {% endverbatim %}
+                <img src="{% static 'img/icons/retweet_icon.png' %}">
+                {% verbatim %}
             </a>
 
             <a onclick="window.open('https://twitter.com/intent/like?tweet_id={{columns_by_comparator.id.value}}','like {{columns_by_comparator.id.value}}','width=600,height=400')">
-                <img src="/static/img/icons/fav_icon.png">
+                {% endverbatim %}
+                <img src="{% static 'img/icons/fav_icon.png' %}">
+                {% verbatim %}
             </a>
 
         </div>

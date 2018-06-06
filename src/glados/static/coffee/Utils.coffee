@@ -68,7 +68,7 @@ glados.useNameSpace 'glados',
             message += correctEntity.prototype.entityName + '.'
             glados.Utils.showErrorModalMessage(
               message,
-              glados.Settings.GLADOS_BASE_URL_FULL+rcUrl.substring(1)
+              glados.Settings.GLADOS_BASE_URL_DOMAIN+rcUrl.substring(1)
             )
 
     getEntityByReportCardURL: (reportCardURL=window.location.pathname)->
@@ -245,42 +245,33 @@ glados.useNameSpace 'glados',
         else
           returnCol.show = colDescription.show
 
-    # given an model and a list of columns to show, it gives an object ready to be passed to a
-    # handlebars template, with the corresponding values for each column
-    # handlebars only allow very simple logic, we have to help the template here and
-    # give it everything as ready as possible
-    getColumnsWithValuesAndHighlights: (columns, model) ->
+      parseColValue: (returnCol, colDescription, colValue, model) ->
 
-
-      [highlights, included] = glados.Utils.Columns.getHighlights(model)
-
-      columnsToReturn = columns.map (colDescription) ->
-
-        returnCol = {}
-        glados.Utils.Columns.addColID(returnCol, colDescription)
-        glados.Utils.Columns.addNameToShow(returnCol, colDescription, model)
-        glados.Utils.Columns.addShowStatus(returnCol, colDescription, model)
-
-        returnCol.search_hit_highlight_column = colDescription.search_hit_highlight_column || false
-        returnCol.comparator = colDescription.comparator
-        returnCol['format_class'] = colDescription.format_class
-
-        colValue = glados.Utils.Columns.getColValue(colDescription, model, highlights)
-
-        # this will now be 'setColValue'
         if _.isBoolean(colValue)
           returnCol['value'] = if colValue then 'Yes' else 'No'
         else
           returnCol['value'] = colValue
 
+        parseFromModel = colDescription.parse_from_model
+
         if _.has(colDescription, 'parse_function')
-          returnCol['value'] = colDescription['parse_function'](colValue)
+          parserFunction = colDescription.parse_function
+
+          if parseFromModel
+            returnCol.value = parserFunction(model)
+          else
+            returnCol.value = parserFunction(colValue)
 
         if _.has(colDescription, 'additional_parsing')
 
           for key in Object.keys(colDescription.additional_parsing)
             parserFunction = colDescription.additional_parsing[key]
-            returnCol[key] = parserFunction colValue
+            if parseFromModel
+              returnCol[key] = parserFunction model
+            else
+              returnCol[key] = parserFunction colValue
+
+      addLink: (returnCol, colDescription, colValue, model) ->
 
         returnCol['has_link'] = _.has(colDescription, 'link_base') or _.has(colDescription, 'link_function')
         returnCol['has_multiple_links'] = colDescription.multiple_links == true
@@ -311,10 +302,40 @@ glados.useNameSpace 'glados',
           if colDescription['link_base']?
             returnCol['link_url'] = model.get(colDescription['link_base'])
           if colDescription['link_function']?
-            returnCol['link_url'] = colDescription['link_function'] colValue
+
+            getLinkFromModel = colDescription.get_link_from_model
+            linkFunction = colDescription.link_function
+            if getLinkFromModel
+              returnCol.link_url = linkFunction model
+            else
+              returnCol.link_url = linkFunction colValue
 
         else if returnCol['has_multiple_links']
           returnCol['links_values'] = colDescription['multiple_links_function'] colValue
+
+    # given an model and a list of columns to show, it gives an object ready to be passed to a
+    # handlebars template, with the corresponding values for each column
+    # handlebars only allow very simple logic, we have to help the template here and
+    # give it everything as ready as possible
+    getColumnsWithValuesAndHighlights: (columns, model) ->
+
+
+      [highlights, included] = glados.Utils.Columns.getHighlights(model)
+
+      columnsToReturn = columns.map (colDescription) ->
+
+        returnCol = {}
+        glados.Utils.Columns.addColID(returnCol, colDescription)
+        glados.Utils.Columns.addNameToShow(returnCol, colDescription, model)
+        glados.Utils.Columns.addShowStatus(returnCol, colDescription, model)
+
+        returnCol.search_hit_highlight_column = colDescription.search_hit_highlight_column || false
+        returnCol.comparator = colDescription.comparator
+        returnCol['format_class'] = colDescription.format_class
+
+        colValue = glados.Utils.Columns.getColValue(colDescription, model, highlights)
+        glados.Utils.Columns.parseColValue(returnCol, colDescription, colValue, model)
+        glados.Utils.Columns.addLink(returnCol, colDescription, colValue, model)
 
         if _.has(colDescription, 'image_base_url')
           img_url = model.get(colDescription['image_base_url'])
@@ -500,7 +521,7 @@ glados.useNameSpace 'glados',
         return buckets
 
 #     returns ordered list of sub buckets odc count
-      getSubBucketsOrder: (buckets, subBucketsAggName) ->
+      getSubBucketsOrder: (buckets, subBucketsAggName, ascendant = false ) ->
         internalBucketsCounts = {}
 
         for bucket in buckets
@@ -522,7 +543,10 @@ glados.useNameSpace 'glados',
             key: key
             count: value
 
-        sortedList = _.sortBy sortingList, (item) -> -item.count
+        if ascendant
+          sortedList = _.sortBy sortingList, (item) -> item.count
+        else
+          sortedList = _.sortBy sortingList, (item) -> -item.count
 
         InternalBucketsWithPosition = {}
         for item, pos in sortedList

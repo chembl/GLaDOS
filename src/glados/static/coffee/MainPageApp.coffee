@@ -13,10 +13,55 @@ class MainPageApp
     MainPageApp.initAssociatedResources()
     MainPageApp.initTweets()
     MainPageApp.initBlogEntries()
+    MainPageApp.initGithubDetails()
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Init functions
 # ----------------------------------------------------------------------------------------------------------------------
+
+  @initCentralCarousel = ->
+    $carouselContainer = $('.carousel-wrapper')
+    $linksCarousel = $('.links-carousel')
+
+    $carouselContainer.slick {
+      asNavFor: $linksCarousel
+      arrows: true
+      autoplay: true
+      autoplaySpeed: 4000
+      dots: true
+    }
+
+    $linksCarousel.slick {
+      useCSS: false
+      fade: true
+      arrows: false
+      dots: false
+    }
+
+    MainPageApp.initBrowseEntities()
+    MainPageApp.initZoomableSunburst()
+    MainPageApp.initDrugsPerUsanYear()
+    MainPageApp.initTargetsVisualisation()
+    MainPageApp.initMaxPhaseForDisease()
+    MainPageApp.initFirstApprovalByMoleculeType()
+
+  @initZoomableSunburst = ->
+    targetHierarchyAgg = MainPageApp.getTargetsTreeAgg()
+
+    config =
+      browse_all_link: "#{glados.Settings.GLADOS_BASE_URL_FULL}/g/#browse/targets"
+      browse_button: true
+
+    new glados.views.MainPage.ZoomableSunburstView
+      el: $('#BCK-zoomable-sunburst')
+      model: targetHierarchyAgg
+      config: config
+
+    targetHierarchyAgg.fetch()
+
+  @initBrowseEntities = ->
+    new glados.views.MainPage.BrowseEntitiesAsCirclesView
+      el: $('#BrowseEntitiesAsCircles')
 
   @initMaxPhaseForDisease = ->
     maxPhaseForDisease = MainPageApp.getMaxPhaseForDiseaseAgg()
@@ -55,36 +100,79 @@ class MainPageApp
 
     maxPhaseForDisease.fetch()
 
-  @initPapersPerYear = ->
-    allDocumentsByYear = MainPageApp.getDocumentsPerYearAgg()
-    yearProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('DocumentAggregation',
-      'YEAR')
-    journalNameProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('DocumentAggregation',
-      'JOURNAL_NAME')
-    barsColourScale = journalNameProp.colourScale
+  @initFirstApprovalByMoleculeType = ->
+    drugsByMoleculeType = MainPageApp.getFirstApprovalPercentage()
+
+    approvalDateProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'FIRST_APPROVAL')
+    moleculeTypeProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'MOLECULE_TYPE', true)
+    barsColourScale = moleculeTypeProp.colourScale
 
     histogramConfig =
       bars_colour_scale: barsColourScale
       stacked_histogram: true
+      sort_by_key: false
       rotate_x_axis_if_needed: false
       hide_x_axis_title: true
       legend_vertical: true
       big_size: true
       paint_axes_selectors: true
       properties:
-        year: yearProp
-        journal: journalNameProp
+        year: approvalDateProp
+        molecule_type: moleculeTypeProp
       initial_property_x: 'year'
-      initial_property_z: 'journal'
+      initial_property_z: 'molecule_type'
       x_axis_options: ['count']
       x_axis_min_columns: 1
       x_axis_max_columns: 40
       x_axis_initial_num_columns: 40
-      x_axis_prop_name: 'documentsPerYear'
-      title: 'Documents by Year'
-      title_link_url: Document.getDocumentsListURL()
-      max_z_categories: 7
-      title_link_url: Document.getDocumentsListURL()
+      x_axis_prop_name: 'firstApprovalByMoleculeType'
+      y_scale_mode: 'percentage'
+      title: 'Molecule Type by First Approval'
+      title_link_url: Compound.getCompoundsListURL('_exists_:first_approval')
+
+    config =
+      histogram_config: histogramConfig
+      is_outside_an_entity_report_card: true
+      embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#documents_by_year_histogram"
+
+    new glados.views.ReportCards.HistogramInCardView
+      el: $('#BCK-FirstApprovalHistogram')
+      model: drugsByMoleculeType
+      config: config
+      report_card_app: @
+
+    drugsByMoleculeType.fetch()
+
+  @initDrugsPerUsanYear = ->
+
+    allDrugsByYear = MainPageApp.getYearByMaxPhaseAgg()
+
+    usanYearProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'USAN_YEAR')
+    maxPhaseProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'MAX_PHASE', true)
+    barsColourScale = maxPhaseProp.colourScale
+
+    histogramConfig =
+      bars_colour_scale: barsColourScale
+      stacked_histogram: true
+      sort_by_key: true
+      rotate_x_axis_if_needed: false
+      hide_x_axis_title: true
+      y_scale_mode: 'normal'
+      legend_vertical: true
+      big_size: true
+      paint_axes_selectors: true
+      properties:
+        year: usanYearProp
+        max_phase: maxPhaseProp
+      initial_property_x: 'year'
+      initial_property_z: 'max_phase'
+      x_axis_options: ['count']
+      x_axis_min_columns: 1
+      x_axis_max_columns: 40
+      x_axis_initial_num_columns: 40
+      x_axis_prop_name: 'yearByMaxPhase'
+      title: 'Drugs by Usan Year'
+      title_link_url: Drug.getDrugsListURL('_metadata.compound_records.src_id:13 AND _exists_:usan_year')
 
     config =
       histogram_config: histogramConfig
@@ -93,60 +181,30 @@ class MainPageApp
 
     new glados.views.ReportCards.HistogramInCardView
       el: $('#PapersPerYearHistogram')
-      model: allDocumentsByYear
+      model: allDrugsByYear
       config: config
       report_card_app: @
 
-    allDocumentsByYear.fetch()
+    allDrugsByYear.fetch()
 
   @initTargetsVisualisation = ->
     targetHierarchy = TargetBrowserApp.initTargetHierarchyTree()
+    targetHierarchyAgg = MainPageApp.getTargetsOrganismTreeAgg()
+    targetHierarchy.fetch()
+    targetHierarchyAgg.fetch()
+
+    TargetBrowserApp.initBrowserAsCircles(targetHierarchyAgg, $('#BCK-TargetBrowserAsCircles'))
 
     config =
       is_outside_an_entity_report_card: true
       embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#targets_by_protein_class"
       view_class: BrowseTargetAsCirclesView
 
-    targetsHierarchyAgg = MainPageApp.getTargetsTreeAgg()
-    targetsHierarchyAgg.fetch()
-    TargetBrowserApp.initBrowserAsCircles(targetHierarchy, $('#BCK-TargetBrowserAsCircles'))
-    targetHierarchy.fetch()
-
     new glados.views.ReportCards.VisualisationInCardView
       el: $('#BCK-TargetBrowserAsCircles')
       model: targetHierarchy
       config: config
       report_card_app: @
-
-    targetHierarchy.fetch()
-
-  @initCentralCarousel = ->
-    $carouselContainer = $('.carousel-wrapper')
-    $linksCarousel = $('.links-carousel')
-
-    $carouselContainer.slick {
-      asNavFor: $linksCarousel
-      arrows: true
-      autoplay: true
-      autoplaySpeed: 4000
-      dots: true
-    }
-
-    $linksCarousel.slick {
-      useCSS: false
-      fade: true
-      arrows: false
-      dots: false
-    }
-
-    MainPageApp.initPapersPerYear()
-    MainPageApp.initMaxPhaseForDisease()
-    MainPageApp.initTargetsVisualisation()
-    MainPageApp.initBrowseEntities()
-
-  @initBrowseEntities = ->
-    new glados.views.MainPage.BrowseEntitiesAsCirclesView
-      el: $('#BrowseEntitiesAsCircles')
 
   @initDatabaseSummary = ->
     databaseInfo = new glados.models.MainPage.DatabaseSummaryInfo()
@@ -173,12 +231,51 @@ class MainPageApp
     glados.views.PaginatedViews.PaginatedViewFactory.getNewInfinitePaginatedView(blogEntriesList, $blogEntriesElem, 'do-repaint')
     blogEntriesList.fetch()
 
+  @initGithubDetails = ->
+    new glados.views.MainPage.GitHubDetailsView
+      el: $('.BCK-github-details')
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Aggregations
 # ----------------------------------------------------------------------------------------------------------------------
 
-  @getDocumentsPerYearAgg = (defaultInterval = 1) ->
+  @getYearByMaxPhaseAgg = (defaultInterval = 1) ->
+    queryConfig =
+      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
+      query_string_template: '_metadata.drug.is_drug:true AND _metadata.compound_records.src_id:13 AND _exists_:usan_year'
+      template_data: {}
+
+    aggsConfig =
+      aggs:
+        yearByMaxPhase:
+          type: glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
+          field: 'usan_year'
+          default_interval_size: defaultInterval
+          min_interval_size: 1
+          max_interval_size: 10
+          bucket_key_parse_function: (key) -> key.replace(/\.0/i, '')
+          aggs:
+            max_phase:
+              type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+              field: 'max_phase'
+              size: 10
+              bucket_links:
+                bucket_filter_template: '_metadata.compound_records.src_id:13 AND usan_year:{{year}} AND max_phase:{{bucket_key}}'
+                template_data:
+                  year: 'BUCKET.parsed_parent_key'
+                  bucket_key: 'BUCKET.key'
+
+                link_generator: Drug.getDrugsListURL
+
+    yearByMaxPhase = new glados.models.Aggregations.Aggregation
+      index_url: glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
+      query_config: queryConfig
+      aggs_config: aggsConfig
+
+    return yearByMaxPhase
+
+  @getFirstApprovalPercentage = (defaultInterval = 1) ->
+
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
       query_string_template: '*'
@@ -186,34 +283,32 @@ class MainPageApp
 
     aggsConfig =
       aggs:
-        documentsPerYear:
+        firstApprovalByMoleculeType:
           type: glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
-          field: 'year'
+          field: 'first_approval'
           default_interval_size: defaultInterval
           min_interval_size: 1
           max_interval_size: 10
           bucket_key_parse_function: (key) -> key.replace(/\.0/i, '')
           aggs:
-            split_series_agg:
+            molecule_type:
               type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
-              field: 'journal'
+              field: 'molecule_type'
               size: 10
               bucket_links:
-                bucket_filter_template: 'year:{{year}} AND journal:("{{bucket_key}}"' +
-                  '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
+                bucket_filter_template: 'first_approval:{{year}} AND molecule_type:{{bucket_key}}'
                 template_data:
                   year: 'BUCKET.parsed_parent_key'
                   bucket_key: 'BUCKET.key'
-                  extra_buckets: 'EXTRA_BUCKETS.key'
 
-                link_generator: Document.getDocumentsListURL
+                link_generator: Drug.getDrugsListURL
 
-    allDocumentsByYear = new glados.models.Aggregations.Aggregation
-      index_url: glados.models.Aggregations.Aggregation.DOCUMENT_INDEX_URL
+    moleculeTypeByYear = new glados.models.Aggregations.Aggregation
+      index_url: glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
       query_config: queryConfig
       aggs_config: aggsConfig
 
-    return allDocumentsByYear
+    return moleculeTypeByYear
 
   @getMaxPhaseForDiseaseAgg = () ->
     queryConfig =
@@ -257,6 +352,52 @@ class MainPageApp
 
     return MaxPhaseForDisease
 
+  @getTargetsOrganismTreeAgg = ->
+
+    queryConfig =
+      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
+      query_string_template: '*'
+      template_data: {}
+
+    aggsConfig =
+      aggs:
+        children:
+          type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+          field: '_metadata.organism_taxonomy.l1'
+          size: 50
+          bucket_links:
+            bucket_filter_template: '_metadata.organism_taxonomy.l1:("{{bucket_key}}")'
+            template_data:
+              bucket_key: 'BUCKET.key'
+            link_generator: Target.getTargetsListURL
+          aggs:
+            children:
+              type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+              field: '_metadata.organism_taxonomy.l2'
+              size: 50
+              bucket_links:
+                bucket_filter_template: '_metadata.organism_taxonomy.l2:("{{bucket_key}}")'
+                template_data:
+                  bucket_key: 'BUCKET.key'
+                link_generator: Target.getTargetsListURL
+              aggs:
+                children:
+                  type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+                  field: '_metadata.organism_taxonomy.l3'
+                  size: 50
+                  bucket_links:
+                    bucket_filter_template: '_metadata.organism_taxonomy.l3:("{{bucket_key}}")'
+                    template_data:
+                      bucket_key: 'BUCKET.key'
+                    link_generator: Target.getTargetsListURL
+
+    organismTreeAgg = new glados.models.Aggregations.Aggregation
+      index_url: glados.models.Aggregations.Aggregation.TARGET_INDEX_URL
+      query_config: queryConfig
+      aggs_config: aggsConfig
+
+    return organismTreeAgg
+
   @getTargetsTreeAgg = ->
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
@@ -265,7 +406,7 @@ class MainPageApp
 
     aggsConfig =
       aggs:
-        l1_class:
+        children:
           type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
           field: '_metadata.protein_classification.l1'
           size: 100
@@ -275,7 +416,7 @@ class MainPageApp
               bucket_key: 'BUCKET.key'
             link_generator: Target.getTargetsListURL
           aggs:
-            l2_class:
+            children:
               type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
               field: '_metadata.protein_classification.l2'
               size: 100
@@ -285,7 +426,7 @@ class MainPageApp
                   bucket_key: 'BUCKET.key'
                 link_generator: Target.getTargetsListURL
               aggs:
-                l3_class:
+                children:
                   type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
                   field: '_metadata.protein_classification.l3'
                   size: 100
@@ -295,7 +436,7 @@ class MainPageApp
                       bucket_key: 'BUCKET.key'
                     link_generator: Target.getTargetsListURL
                   aggs:
-                    l4_class:
+                    children:
                       type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
                       field: '_metadata.protein_classification.l4'
                       size: 100
@@ -305,7 +446,7 @@ class MainPageApp
                           bucket_key: 'BUCKET.key'
                         link_generator: Target.getTargetsListURL
                       aggs:
-                        l5_class:
+                        children:
                           type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
                           field: '_metadata.protein_classification.l5'
                           size: 100
@@ -315,7 +456,7 @@ class MainPageApp
                               bucket_key: 'BUCKET.key'
                             link_generator: Target.getTargetsListURL
                           aggs:
-                            l6_class:
+                            children:
                               type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
                               field: '_metadata.protein_classification.l6'
                               size: 100

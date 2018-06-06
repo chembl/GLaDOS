@@ -2,6 +2,19 @@
 
 {% load static %}
 
+{% block open_graph_tags %}
+    <meta property="og:title" content="ChEMBL Database"/>
+    <meta property="og:description" content="A manually curated database of bioactive molecules with drug-like properties"/>
+    <meta property="og:type" content="object" />
+    <meta property="og:url" content="{{request.build_absolute_uri }}" />
+    <meta property="og:image" content="https://{{ request.get_host }}{% static 'img/og_main.png' %}" />
+    <meta property="og:image:secure_url" content="https://{{ request.get_host }}{% static 'img/og_main.png' %}" />
+    <meta property="og:image:type" content="image/png" />
+
+    <meta property="og:image:width" content="300" />
+    <meta property="og:image:height" content="300" />
+{% endblock %}
+
 {% block title %} ChEMBL Database {% endblock %}
 
 {% block content %}
@@ -23,7 +36,6 @@
             </div>
 
             <div class="col-divider col s12 hide-on-large-only"></div>
-
 
             <!-------------- Explore the database SECTION -------------->
             <div class="col s12 l6 hide-on-large-only explore-database">
@@ -58,7 +70,12 @@
 
         </div>
 
-        <div class="divider"></div>
+        <!-------------- Latest papers  SECTION -------------->
+        <div class="main-page-section col s12 papers fit-height">
+
+            {% include "glados/MainPageParts/latest_papers.html" %}
+
+        </div>
 
         <!-------------- Associated Resources SECTION -------------->
         <div class="main-page-section col s12 fit-height associated-resources BCK-Associated-resources">
@@ -68,6 +85,13 @@
                 {% include "glados/MainPageParts/associated_resources.html" %}
 
             </div>
+
+        </div>
+
+        <!-------------- Github Details SECTION -------------->
+        <div class="main-page-section col s12 min-height github-details">
+
+            {%  include "glados/MainPageParts/github_details.html"  %}
 
         </div>
 
@@ -87,7 +111,7 @@
             <div class="row container">
 
                 <!-------------- Tweets SECTION -------------->
-                <div class="main-page-section col s12 l6 half-height">
+                <div class="main-page-section col s12 l6 half-height" id="tweets-section">
 
                     <div class="section-col">
 
@@ -100,7 +124,7 @@
                 <div class="col-divider col s12 hide-on-large-only"></div>
 
                 <!-------------- Blog Entries SECTION -------------->
-                <div class="main-page-section col s12 l6 half-height">
+                <div class="main-page-section col s12 l6 half-height" id="blog-section">
 
                     <div class="section-col">
 

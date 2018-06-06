@@ -47,7 +47,8 @@ WizardStepView = Backbone.View.extend
   goToStep: (event) ->
 
     @setPreloader()
-    next_url = '/download_wizard/' + $(event.currentTarget).attr('href').substring(1)
+    next_url = glados.Settings.GLADOS_BASE_URL_FULL+\
+      'download_wizard/' + $(event.currentTarget).attr('href').substring(1)
     @model.url = next_url
     @model.fetch()
 

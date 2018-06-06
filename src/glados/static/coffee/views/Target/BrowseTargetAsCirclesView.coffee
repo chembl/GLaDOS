@@ -16,7 +16,55 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     @setUpResponsiveRender()
     @model.on 'change', @render, @
 
+  getBucketData: ->
+    receivedBuckets = @model.get 'bucket_data'
+    id = 0
+
+    fillNode = (parent_node, input_node) ->
+
+      node = {}
+      node.name = input_node.key
+      node.size = input_node.doc_count
+      node.parent_id = parent_node.id
+      node.id = id
+      node.link = input_node.link
+      node.depth = parent_node.depth + 1
+      node.parent = parent_node
+
+      parent_node.children.push(node)
+
+      if input_node.children?
+        node.children = []
+        for child in input_node.children['buckets']
+          id++
+          fillNode(node, child)
+
+    if receivedBuckets?
+      root = {}
+      root.depth = 0
+      root.name = 'root'
+      root.id = id
+
+      if receivedBuckets.children?
+        root.children = []
+        for node in receivedBuckets.children['buckets']
+          id++
+          fillNode(root, node)
+
+    return root
+
   render: ->
+
+    if @model.get('state') == glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE
+      return
+
+    if @model.get('state') == glados.models.Aggregations.Aggregation.States.LOADING_BUCKETS
+      return
+
+    if @model.get('state') != glados.models.Aggregations.Aggregation.States.INITIAL_STATE
+      return
+
+    @root = @getBucketData()
 
     @$vis_elem.empty()
     thisView = @
@@ -25,7 +73,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     @hideResponsiveViewPreloader()
     @margin = 20
 
-    @VISUALISATION_WIDTH = $(@el).width()
+    @VISUALISATION_WIDTH = $(@el).width() - 10
     @VISUALISATION_HEIGHT = @VISUALISATION_WIDTH
     @diameter = @VISUALISATION_WIDTH
 
@@ -53,10 +101,8 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     .append("g")
     .attr("transform", "translate(" + @VISUALISATION_WIDTH / 2 + "," + @VISUALISATION_HEIGHT / 2 + ")")
 
-    # use plain version
-    @root = @model.get('plain')
-    focus = @root
-    nodes = pack.nodes(@root)
+    @focusNode = @root
+    @originalNodes = pack.nodes(@root)
     @currentViewFrame = undefined
 
     #get depth domain in tree
@@ -81,8 +127,12 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
       if d3.event.ctrlKey
         return
 
-      if focus != d
+      if thisView.focusNode != d
+
         thisView.focusTo(thisView.currentHover)
+#        thisView.drawMissingCircles(thisView.currentHover)
+        thisView.fillBrowseButtonTemplate thisView.currentHover.name, thisView.currentHover.link
+
 
     # -----------------------------------------
     # Node hover handler function
@@ -96,45 +146,54 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
         thisView.currentHover = d
         isPressingCtrl = d3.event.ctrlKey
         thisView.fillInstructionsTemplate d.name, isPressingCtrl
+#        thisView.fillBrowseButtonTemplate d.name, d.link
 
         allNodes = d3.select($(thisView.el)[0]).selectAll('.node')
         allNodes.classed('force-hover', false)
         nodeElem = d3.select($(thisView.el)[0]).select("#circleFor-#{d.id}" for n in nodes)
         nodeElem.classed('force-hover', true)
 
-    circles = svg.selectAll('.circle')
-      .data(nodes)
-      .enter()
-      .append('circle')
-      .attr('class', 'circle')
-      .attr("class", (d) ->
-        if d.parent then (if d.children then 'node' else 'node node--leaf') else 'node node--root')
-      .attr("id", (d) ->
-        if d.parent then 'circleFor-' + d.id else 'circleFor-Root')
-      .style("fill", (d) ->
-        if d.children then color(d.depth) else glados.Settings.VIS_COLORS.WHITE)
-      .on("click", handleClickOnNode)
-      .on('mouseover', handleNodeMouseOver)
+    @appendCirclesAndTexts = (nodesToRender) ->
 
-    text = svg.selectAll('.label')
-      .data(nodes)
-      .enter()
-      .append('text')
-      .attr("class", "label")
-      .attr('text-anchor', 'middle')
-      .style("fill-opacity", (d) ->
-        if d.parent == thisView.root then 1 else 0)
-      .style("display", (d) ->
-        if d.parent == thisView.root then 'inline' else 'none')
-      .text((d) -> return d.name + " (" + d.size + ")" )
-      .attr('font-size', (d) ->
-        if d.children?
-          return "#{textSize(d.children.length)}%"
-        else return "#{textSize(0)}%"
-      )
+      circles = svg.selectAll('circle')
+        .data(nodesToRender)
+      circles.exit().remove()
 
-    #Select circles to create the views
-#    @createCircleViews()
+      circles.enter()
+        .append('circle')
+        .classed('circle', true)
+        .attr("class", (d) ->
+          if d.parent then (if d.children then 'node' else 'node node--leaf') else 'node node--root')
+        .attr("id", (d) ->
+          if d.parent then 'circleFor-' + d.id else 'circleFor-Root')
+        .style("fill", (d) ->
+          if d.children then color(d.depth) else glados.Settings.VIS_COLORS.WHITE)
+        .on('click', handleClickOnNode)
+        .on('mouseover', handleNodeMouseOver)
+
+      texts = svg.selectAll('text').remove()
+      texts = svg.selectAll('text')
+        .data(nodesToRender)
+
+      texts.enter()
+        .append('text')
+        .classed('label', true)
+        .attr('text-anchor', 'middle')
+        .style("fill-opacity", (d) ->
+          focusIsleaf = d == thisView.focusNode and not d.children?
+          if d.parent == thisView.focusNode or focusIsleaf then 1 else 0
+        ).style("display", (d) ->
+          if d.parent == thisView.focusNode or not d.children? then 'inline' else 'none'
+        ).text((d) -> return d.name + " (" + d.size + ")" )
+        .attr('font-size', (d) ->
+          if d.children?
+            return "#{textSize(d.children.length)}%"
+          else return "#{textSize(0)}%"
+        )
+
+    nodes = @originalNodes.filter((d) -> d.depth < 4 )
+    @renderedNodes = nodes
+    @appendCirclesAndTexts(@renderedNodes)
 
     d3.select(container)
       .on("click", () -> thisView.focusTo(thisView.root) )
@@ -183,6 +242,14 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
   #----------------------------------------------------------
   # Zoom and focus
   #----------------------------------------------------------
+
+  drawMissingCircles: (node) ->
+
+    newNodesToRender = @originalNodes.filter((d) -> d.parent_id == node.id )
+    @renderedNodes = _.uniq( @renderedNodes.concat newNodesToRender)
+
+    @appendCirclesAndTexts(@renderedNodes)
+
   zoomTo: (newViewFrame) ->
 
     @currentViewFrame = newViewFrame
@@ -199,7 +266,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
   focusTo: (node) ->
 
     thisView = @
-    focus = node
+    thisView.focusNode = node
     @removeHoverabilityToAll()
     ancestry = []
     currentParent = node.parent
@@ -218,32 +285,31 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     transition = d3.transition()
       .duration(1000)
       .tween("zoom", (d) ->
-          i = d3.interpolateZoom(thisView.currentViewFrame, [focus.x, focus.y, focus.r * 2 + thisView.margin])
+          i = d3.interpolateZoom(thisView.currentViewFrame, [thisView.focusNode.x, thisView.focusNode.y, thisView.focusNode.r * 2 + thisView.margin])
           return (t) -> thisView.zoomTo(i(t))
       )
 
     transition.selectAll("text")
       .filter( (d) ->
         if d?
-          d == focus or d.parent == focus or @style.display == 'inline')
+          d == thisView.focusNode or d.parent == thisView.focusNode or @style.display == 'inline')
       .style('fill-opacity', (d) ->
-        if d.parent == focus then 1 else 0)
+        if d.parent == thisView.focusNode then 1 else 0)
       .each('start', (d) ->
-        if d.parent == focus
+        if d.parent == thisView.focusNode
           @style.display = 'inline'
         return )
       .each('end', (d) ->
 
         # if you focus a leaf I  won't hide the label
-        if d == focus and !d.children?
+        if d == thisView.focusNode and !d.children?
           @style.display = 'inline'
           @style['fill-opacity'] = 1
           return
 
-        if d.parent != focus
+        if d.parent != thisView.focusNode
           @style.display = 'none'
         return)
-
 
   #----------------------------------------------------------
   # Instructions
@@ -262,6 +328,21 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
       node_name: nodeName
       is_pressing_ctrl: isPressingCtrl
 
+  fillBrowseButtonTemplate: (nodeName, nodeLink) ->
+    $button = $('.BCK-browse-button-circles')
+    $button_medium = $('.BCK-browse-button-medium-circles')
+
+    button_medium_template = $('#' + $button_medium.attr('data-hb-template'))
+    button_template = $('#' + $button.attr('data-hb-template'))
+
+    $button.html Handlebars.compile(button_template.html())
+      node_name: nodeName
+      node_link: nodeLink
+
+    if $button_medium.length > 0
+      $button_medium.html Handlebars.compile(button_medium_template.html())
+        node_name: nodeName
+        node_link: nodeLink
 
   handleKeyDown: (event) ->
 
@@ -274,12 +355,3 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     if event.which == @CTRL_KEY_NUMBER
 
       @fillInstructionsTemplate(@currentHover.name, false) unless not @currentHover?
-
-
-
-
-
-
-
-
-

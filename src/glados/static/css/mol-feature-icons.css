@@ -1,0 +1,98 @@
+@font-face {
+  font-family: 'molecule-feature';
+  src:  url('../font/molecule-feature-icons/molecule-feature.eot?sssie1');
+  src:  url('../font/molecule-feature-icons/molecule-feature.eot?sssie1#iefix') format('embedded-opentype'),
+    url('../font/molecule-feature-icons/molecule-feature.ttf?sssie1') format('truetype'),
+    url('../font/molecule-feature-icons/molecule-feature.woff?sssie1') format('woff'),
+    url('../font/molecule-feature-icons/molecule-feature.svg?sssie1#molecule-feature') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.feature-icon {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'molecule-feature' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.rule_of_five:before {
+  content: "\e916";
+}
+.cell:before {
+  content: "\63";
+}
+.antibody:before {
+  content: "\e900";
+}
+.black_box:before {
+  content: "\e901";
+}
+.chirally_pure:before {
+  content: "\e902";
+}
+.discontinued:before {
+  content: "\e903";
+}
+.enzyme:before {
+  content: "\e904";
+}
+.first_in_class:before {
+  content: "\e905";
+}
+.inorganic:before {
+  content: "\e906";
+}
+.natural:before {
+  content: "\e907";
+}
+.oligonucleotide:before {
+  content: "\e908";
+}
+.oligosaccharide:before {
+  content: "\e909";
+}
+.oral:before {
+  content: "\e90a";
+}
+.otc:before {
+  content: "\e90b";
+}
+.parenteral:before {
+  content: "\e90c";
+}
+.polymer:before {
+  content: "\e90d";
+}
+.prescription:before {
+  content: "\e90e";
+}
+.prodrug:before {
+  content: "\e90f";
+}
+.protein:before {
+  content: "\e910";
+}
+.racemic_mixture:before {
+  content: "\e911";
+}
+.small-molecule:before {
+  content: "\e912";
+}
+.topical:before {
+  content: "\e913";
+}
+.unknown:before {
+  content: "\e914";
+}
+.withdrawn:before {
+  content: "\e915";
+}

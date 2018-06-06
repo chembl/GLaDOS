@@ -81,9 +81,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     if GlobalVariables['EMBEDED']
       compound.fetch()
 
-      ButtonsHelper.initCroppedContainers()
       ButtonsHelper.initExpendableMenus()
-
 
   @initRepresentations = ->
 
@@ -173,8 +171,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
   @initIndications = ->
 
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
-    drugIndicationsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugIndicationsList()
-    drugIndicationsList.initURL(chemblID)
+    drugIndicationsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugIndicationsList(chemblID)
 
     viewConfig =
       embed_section_name: 'drug_indications'
@@ -269,25 +266,43 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @initAlternateForms = ->
 
+    compound = CompoundReportCardApp.getCurrentCompound()
+
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
-    moleculeFormsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewAlternateFormsListForCarousel()
-    moleculeFormsList.initURL chemblID
 
-    viewConfig =
-      embed_section_name: 'alternate_forms'
-      embed_identifier: chemblID
-      title: "Alternative forms of compound #{chemblID}:"
+    initAlternateFormsList = ->
 
-    new glados.views.ReportCards.CarouselInCardView
-      collection: moleculeFormsList
-      el: $('#AlternateFormsCard')
-      resource_type: gettext('glados_entities_compound_name')
-      section_id: 'AlternateFormsOfCompoundInChEMBL'
-      section_label: 'Alternative Forms'
-      config: viewConfig
-      report_card_app: @
+      parentID = compound.getParentID()
+      filter = "molecule_hierarchy.parent_chembl_id:(\"#{parentID}\") OR molecule_chembl_id:(\"#{parentID}\")^100"
+      alternateFormsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(filter,
+      itemsList=undefined, contextualProperties=undefined,
+      settings=settings=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_ES_RESULTS_LIST_CAROUSEL)
 
-    moleculeFormsList.fetch({reset: true})
+      if compound.isParent()
+        parentText = '(Parent)'
+      else
+        parentText = "(Parent is #{parentID})"
+
+      viewConfig =
+        embed_section_name: 'alternate_forms'
+        embed_identifier: chemblID
+        title: "Alternative forms of compound #{chemblID} #{parentText}:"
+
+      new glados.views.ReportCards.CarouselInCardView
+        collection: alternateFormsList
+        el: $('#AlternateFormsCard')
+        resource_type: gettext('glados_entities_compound_name')
+        section_id: 'AlternateFormsOfCompoundInChEMBL'
+        section_label: 'Alternative Forms'
+        config: viewConfig
+        report_card_app: @
+
+      alternateFormsList.fetch()
+
+    compound.on 'change', initAlternateFormsList, @
+
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
 
   @initActivitySummary = ->
 
@@ -320,6 +335,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     histogramConfig =
       bars_colour_scale: barsColourScale
       stacked_histogram: true
+      y_scale_mode: 'normal'
       rotate_x_axis_if_needed: false
       legend_vertical: true
       big_size: true
@@ -624,7 +640,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
   # -------------------------------------------------------------
   @initMiniBioactivitiesHistogram = ($containerElem, chemblID) ->
 
-    bioactivities = CompoundReportCardApp.getRelatedActivitiesAgg(chemblID)
+    bioactivities = CompoundReportCardApp.getRelatedActivitiesAgg([chemblID])
 
     stdTypeProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Activity', 'STANDARD_TYPE',
       withColourScale=true)
@@ -852,7 +868,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
           max_interval_size: 10
           bucket_key_parse_function: (key) -> key.replace(/\.0/i, '')
           aggs:
-            split_series_agg:
+            journal:
               type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
               field: 'journal'
               size: 10

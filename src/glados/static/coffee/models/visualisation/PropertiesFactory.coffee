@@ -3,6 +3,12 @@ glados.useNameSpace 'glados.models.visualisation',
     Compound:
       esIndex:'chembl_molecule'
       Properties:
+        USAN_YEAR:
+          propName: 'usan_year'
+          label: 'Year'
+        FIRST_APPROVAL:
+          propName: 'first_approval'
+          label: 'Year'
         RELATED_ASSAYS:
           propName: 'type'
           label: 'Types'
@@ -99,11 +105,26 @@ glados.useNameSpace 'glados.models.visualisation',
           label: 'Max phase'
           domain: [ 0, 1, 2, 3, 4]
           coloursRange: [
-            glados.Settings.VIS_COLORS.TEAL5,
-            glados.Settings.VIS_COLORS.TEAL4,
-            glados.Settings.VIS_COLORS.TEAL3,
-            glados.Settings.VIS_COLORS.TEAL2,
             glados.Settings.VIS_COLORS.TEAL1,
+            glados.Settings.VIS_COLORS.TEAL2,
+            glados.Settings.VIS_COLORS.TEAL3,
+            glados.Settings.VIS_COLORS.TEAL4,
+            glados.Settings.VIS_COLORS.TEAL5,
+          ]
+          colourScaleType: glados.Visualisation.CATEGORICAL
+        MOLECULE_TYPE:
+          propName: 'molecule_type'
+          label: 'Molecule Type'
+          domain: [ 'Small molecule', 'Protein', 'Antibody', 'Unknown',
+            'Oligosaccharide', 'Enzyme', 'Oligonucleotide']
+          coloursRange: [
+            glados.Settings.VIS_COLORS.RED1,
+            glados.Settings.VIS_COLORS.RED2,
+            glados.Settings.VIS_COLORS.RED3,
+            glados.Settings.VIS_COLORS.RED4,
+            glados.Settings.VIS_COLORS.TEAL3,
+            glados.Settings.VIS_COLORS.TEAL4,
+            glados.Settings.VIS_COLORS.TEAL5
           ]
           colourScaleType: glados.Visualisation.CATEGORICAL
         INDICATION_CLASS:
@@ -147,7 +168,7 @@ glados.useNameSpace 'glados.models.visualisation',
           label: 'Year'
           type: Number
         JOURNAL_NAME:
-          propName: 'split_series_agg'
+          propName: 'journal'
           label: 'Journal'
           type: Number
           colourScaleType: glados.Visualisation.CATEGORICAL
