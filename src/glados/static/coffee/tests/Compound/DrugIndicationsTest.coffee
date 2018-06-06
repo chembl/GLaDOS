@@ -20,15 +20,11 @@ describe 'Drug Indications List', ->
     testChemblID = 'CHEMBL1094636'
     drugIndicationsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugIndicationsList(testChemblID)
 
-    return
+    queryStringMustBe = "_metadata.all_molecule_chembl_ids:#{testChemblID}"
+    queryStringGot = drugIndicationsList.getMeta('custom_query_string')
 
-    drugIndicationsList.initURL(testChemblID)
+    expect(queryStringGot).toBe(queryStringMustBe)
 
-    baseUrlMustBe = "#{glados.models.paginatedCollections.Settings.ES_BASE_URL}/chembl_drug_indication/_search?q=_metadata.all_molecule_chembl_ids:#{testChemblID}"
-    console.log 'baseUrlMustBe: ', baseUrlMustBe
-    baseURLGot = drugIndicationsList.getMeta('base_url')
-
-    expect(baseURLGot).toBe(baseUrlMustBe)
 
   sampleDataToParse = undefined
   testChemblID = undefined

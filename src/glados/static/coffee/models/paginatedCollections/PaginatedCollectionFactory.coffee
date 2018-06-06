@@ -295,10 +295,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getNewDrugIndicationsList: (chemblID) ->
 
       console.log 'getNewDrugIndicationsList: ', chemblID
-      queryString =
+      queryString = "_metadata.all_molecule_chembl_ids:#{chemblID}"
       config = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.DRUG_INDICATIONS_LIST
       flavour = glados.models.paginatedCollections.SpecificFlavours.DrugIndicationsList
-      list = @getNewESResultsListFor config, customQueryString='*', useCustomQueryString=false, itemsList=undefined,
+      list = @getNewESResultsListFor config, customQueryString=queryString, useCustomQueryString=false, itemsList=undefined,
         contextualProperties=undefined, searchTerm=undefined, stickyQuery=undefined, searchESQuery=undefined,
         flavour=flavour
 
