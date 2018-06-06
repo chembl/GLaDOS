@@ -122,7 +122,7 @@ common_urls = [
   # --------------------------------------------------------------------------------------------------------------------
 
   url(r'^document_report_card/(?P<chembl_id>\w+)/$',
-      DirectTemplateView.as_view(template_name="glados/documentReportCard.html"), ),
+      views.document_report_card, name='document_report_card'),
 
   url(r'^document_assay_network/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/DocumentAssayNetwork/DocumentAssayNetwork.html"), ),

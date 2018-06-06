@@ -565,6 +565,41 @@ def target_report_card(request, chembl_id):
 
     return render(request, 'glados/targetReportCard.html', context)
 
+def document_report_card(request, chembl_id):
+
+    cache_key = chembl_id + '_document_report_card'
+    cache_time = 604800
+    cache_context = cache.get(cache_key)
+
+    if cache_context != None:
+        print('og tags for ' + chembl_id + ' are in cache')
+        return render(request, 'glados/documentReportCard.html', cache_context)
+
+    print('og tags for ' + chembl_id + ' are not in cache')
+
+    s = 'title'
+    q = {
+        "term": {
+          "_id": {
+            "value": chembl_id
+          }
+        }
+    }
+    response = Search(index="chembl_document").query(q).source(s).execute()
+
+    title = response['hits']['hits'][0]['_source']['title']
+
+    context = {
+        'og_tags': {
+            'chembl_id': chembl_id,
+            'title': title
+        }
+    }
+
+    cache.set(cache_key, context, cache_time)
+
+    return render(request, 'glados/documentReportCard.html', context)
+
 def wizard_step_json(request, step_id):
     """
     :param request: http request
