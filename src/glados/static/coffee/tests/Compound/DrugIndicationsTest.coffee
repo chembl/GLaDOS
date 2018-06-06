@@ -25,6 +25,8 @@ describe 'Drug Indications List', ->
 
     expect(queryStringGot).toBe(queryStringMustBe)
 
+    drugIndicationsList.fetch()
+
 
   sampleDataToParse = undefined
   testChemblID = undefined
