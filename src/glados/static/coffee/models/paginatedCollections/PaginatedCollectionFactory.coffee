@@ -377,20 +377,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getNewMechanismsOfActionList: ->
 
       config = glados.models.paginatedCollections.Settings.WS_COLLECTIONS.MECHANISMS_OF_ACTIONS_LIST
-      list = @getNewWSCollectionFor config
-
-      list.initURL = (chemblID) ->
-        console.log 'init url'
-        @baseUrl = "#{glados.Settings.WS_BASE_URL}mechanism.json?molecule_chembl_id=#{chemblID}"
-        console.log 'base url: ', @baseUrl
-        @setMeta('base_url', @baseUrl, true)
-        @initialiseUrl()
-
-      list.parse = (data) ->
-        data.page_meta.records_in_page = data.mechanisms.length
-        @setMeta('data_loaded', true)
-        @resetMeta(data.page_meta)
-        return data.mechanisms
+      flavour = glados.models.paginatedCollections.SpecificFlavours.MechanismsOfActionList
+      list = @getNewWSCollectionFor config, filter=undefined, flavour
 
       return list
 
