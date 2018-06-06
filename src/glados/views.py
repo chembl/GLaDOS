@@ -388,7 +388,7 @@ def extend_url(request, hash):
 
 def compound_report_card(request, chembl_id):
 
-    cache_key = chembl_id + 'compound_report_card'
+    cache_key = chembl_id + '_compound_report_card'
     cache_time = 604800
     cache_context = cache.get(cache_key)
 
@@ -420,6 +420,41 @@ def compound_report_card(request, chembl_id):
     cache.set(cache_key, context, cache_time)
 
     return render(request, 'glados/compoundReportCard.html', context)
+
+def assay_report_card(request, chembl_id):
+
+    cache_key = chembl_id + '_assay_report_card'
+    cache_time = 604800
+    cache_context = cache.get(cache_key)
+
+    if cache_context != None:
+        print('og tags for ' + chembl_id + ' are in cache')
+        return render(request, 'glados/assayReportCard.html', cache_context)
+
+    print('og tags for ' + chembl_id + ' are not in cache')
+
+    s = 'description'
+    q = {
+        "term": {
+          "_id": {
+            "value": chembl_id
+          }
+        }
+    }
+    response = Search(index="chembl_assay").query(q).source(s).execute()
+
+    description = response['hits']['hits'][0]['_source']['description']
+
+    context = {
+        'og_tags': {
+            'chembl_id': chembl_id,
+            'description': description
+        }
+    }
+
+    cache.set(cache_key, context, cache_time)
+
+    return render(request, 'glados/assayReportCard.html', context)
 
 
 
