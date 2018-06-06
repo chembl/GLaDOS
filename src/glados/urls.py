@@ -141,7 +141,7 @@ common_urls = [
   # Tissues
   # --------------------------------------------------------------------------------------------------------------------
   url(r'^tissue_report_card/(?P<chembl_id>\w+)/$',
-      DirectTemplateView.as_view(template_name="glados/tissueReportCard.html"), ),
+      views.tissue_report_card, name='tissue_report_card'),
 
   # --------------------------------------------------------------------------------------------------------------------
   # Search Results
