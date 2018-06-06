@@ -9,7 +9,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
 
     initURL: (chemblID) ->
       console.log 'init url'
-      @baseUrl = "#{glados.Settings.WS_BASE_URL}drug_indication.json?molecule_chembl_id=#{chemblID}"
+      @baseUrl = "#{glados.models.paginatedCollections.Settings.ES_BASE_URL}/chembl_drug_indication/_search?q=_metadata.all_molecule_chembl_ids:#{chemblID}"
       console.log 'base url: ', @baseUrl
       @setMeta('base_url', @baseUrl, true)
       @initialiseUrl()

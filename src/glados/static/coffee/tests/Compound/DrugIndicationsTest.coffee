@@ -6,7 +6,7 @@ describe 'Drug Indications List', ->
     drugIndicationsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugIndicationsList()
     drugIndicationsList.initURL(testChemblID)
 
-    baseUrlMustBe = "#{glados.Settings.WS_BASE_URL}drug_indication.json?molecule_chembl_id=#{testChemblID}"
+    baseUrlMustBe = "#{glados.models.paginatedCollections.Settings.ES_BASE_URL}/chembl_drug_indication/_search?q=_metadata.all_molecule_chembl_ids:#{testChemblID}"
     console.log 'baseUrlMustBe: ', baseUrlMustBe
     baseURLGot = drugIndicationsList.getMeta('base_url')
 

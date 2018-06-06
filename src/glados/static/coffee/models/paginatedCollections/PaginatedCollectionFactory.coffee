@@ -364,6 +364,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         return data.molecules
 
       return list
+
     getNewDrugIndicationsList: ->
 
       config = glados.models.paginatedCollections.Settings.WS_COLLECTIONS.DRUG_INDICATIONS_LIST
