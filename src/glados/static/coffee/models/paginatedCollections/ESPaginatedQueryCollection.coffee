@@ -209,6 +209,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @setItemsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.FETCHING_ITEMS)
       # Creates the Elastic Search Query parameters and serializes them
       requestData = @getRequestData()
+      console.log 'requestData: ', requestData
       esJSONRequest = JSON.stringify(@getRequestData())
       # Uses POST to prevent result caching
       fetchESOptions =

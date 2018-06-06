@@ -25,7 +25,9 @@ describe 'Drug Indications List', ->
 
     expect(queryStringGot).toBe(queryStringMustBe)
 
-    drugIndicationsList.fetch()
+    useCustomQueryStringMustBe = true
+    useCustomQueryStringGot = drugIndicationsList.getMeta('use_custom_query_string')
+    expect(useCustomQueryStringGot).toBe(useCustomQueryStringMustBe)
 
 
   sampleDataToParse = undefined
