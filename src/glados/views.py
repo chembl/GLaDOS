@@ -456,8 +456,42 @@ def assay_report_card(request, chembl_id):
 
     return render(request, 'glados/assayReportCard.html', context)
 
+def cell_line_report_card(request, chembl_id):
 
+    cache_key = chembl_id + '_cell_line_report_card'
+    cache_time = 604800
+    cache_context = cache.get(cache_key)
 
+    if cache_context != None:
+        print('og tags for ' + chembl_id + ' are in cache')
+        return render(request, 'glados/cellLineReportCard.html', cache_context)
+
+    print('og tags for ' + chembl_id + ' are not in cache')
+
+    s = ['cell_description', 'cell_name']
+    q = {
+        "term": {
+          "_id": {
+            "value": chembl_id
+          }
+        }
+    }
+    response = Search(index="chembl_cell_line").query(q).source(s).execute()
+
+    description = response['hits']['hits'][0]['_source']['cell_description']
+    name = response['hits']['hits'][0]['_source']['cell_name']
+
+    context = {
+        'og_tags': {
+            'chembl_id': chembl_id,
+            'name': name,
+            'description': description
+        }
+    }
+
+    cache.set(cache_key, context, cache_time)
+
+    return render(request, 'glados/cellLineReportCard.html', context)
 
 def wizard_step_json(request, step_id):
     """
