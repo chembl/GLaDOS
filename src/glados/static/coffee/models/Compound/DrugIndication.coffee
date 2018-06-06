@@ -51,6 +51,10 @@ glados.models.Compound.DrugIndication.COLUMNS =
     comparator: 'indication_refs'
     multiple_links: true
     multiple_links_function: (refs) -> ({text:r.ref_type, url:r.ref_url} for r in refs)
+  MOLECULE_CHEMBL_ID:
+    name_to_show: 'ChEMBL ID'
+    comparator: 'molecule_chembl_id'
+    link_function: (value) -> Compound.get_report_card_url(value)
 
 
 glados.models.Compound.DrugIndication.ID_COLUMN = glados.models.Compound.DrugIndication.COLUMNS.DRUG_IND_ID
@@ -69,5 +73,6 @@ glados.models.Compound.DrugIndication.COLUMNS_SETTINGS =
     glados.models.Compound.DrugIndication.COLUMNS.EFO_ID
     glados.models.Compound.DrugIndication.COLUMNS.IND_MAX_PHASE
     glados.models.Compound.DrugIndication.COLUMNS.REFERENCES
+    glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_CHEMBL_ID
   ]
 
