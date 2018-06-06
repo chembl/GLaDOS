@@ -349,7 +349,6 @@ glados.setupOnLoadAfterJS = () ->
 #    $('#GladosMainSplashScreen').show()
   $(document).ajaxStop () ->
     glados.ajax_count--
-    console.warn(glados.ajax_count)
     if glados.ajax_count == 0
       _.delay(
         () ->

@@ -177,13 +177,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         pageChanged = _.keys(lastPageResultsIds).length != _.keys(curPageResultsIds).length
       @setMeta('page_changed', pageChanged)
 
-
-      if not @getMeta('ignore_score')
-        #Triggers the event after the values have been updated
-        @trigger('score_and_records_update')
-      else
-        @setMeta('ignore_score', false)
-
       @setMeta('last_page_results_ids', curPageResultsIds)
 
       #if this causes problems this can be moved to a custom reset function
@@ -193,7 +186,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     # Prepares an Elastic Search query to search in all the fields of a document in a specific index
     fetch: (options, testMode=false) ->
-
       testMode |= @getMeta('test_mode')
       @trigger('before_fetch_elastic')
       @url = @getURL()
@@ -204,7 +196,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @unSelectAll()
         @setMeta('current_page', 1)
         @setMeta('facets_changed', false)
-        @setMeta('ignore_score', true)
 
       @setItemsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.FETCHING_ITEMS)
       # Creates the Elastic Search Query parameters and serializes them
@@ -406,14 +397,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           facet_group.faceting_handler.addQueryAggs(aggs_query, facets_first_call)
         return aggs_query
 
-    __requestCurrentQuerySize: ()->
-      es_url = @getURL()
-      # Creates the Elastic Search Query parameters and serializes them
-      esJSONRequestData = JSON.stringify(@getRequestData(1, 0,))
-      # Uses POST to prevent result caching
-      ajax_deferred = $.post(es_url, esJSONRequestData)
-      return ajax_deferred
-
     # ------------------------------------------------------------------------------------------------------------------
     # Elastic Search Facets request
     # ------------------------------------------------------------------------------------------------------------------
@@ -575,54 +558,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # Search functions
     # ------------------------------------------------------------------------------------------------------------------
 
-    search: (jsonQuery)->
-      final_callback = ()->
-        @resetCache() unless not @getMeta('enable_collection_caching')
-        @invalidateAllDownloadedResults()
-        @unSelectAll()
-        @clearAllResults()
-        @clearAllFacetsSelections()
-        @setPage(1, false)
-        @fetch()
-      final_callback = final_callback.bind(@)
-
-      esKeyName = @getMeta 'key_name'
-      curMinShouldMatch = 100
-      fuzzy = false
-      @setMeta('fuzzy-results', false)
-
-      searchESQuery = if not jsonQuery? then {bool:{should:[],filter:[]}} else glados.models\
-        .paginatedCollections.ESQueryBuilder.getESQueryForJsonQuery(jsonQuery, esKeyName, false, curMinShouldMatch+'%')
+    search: (searchESQuery)->
       @setMeta('searchESQuery', searchESQuery)
-      ajax_deferred =  @__requestCurrentQuerySize()
-
-      done_callback = (esData)->
-        if jsonQuery? and esData.hits? and esData.hits.total? and esData.hits.total == 0 and curMinShouldMatch > 40
-          curMinShouldMatch -= 30
-          @setMeta(
-            'searchESQuery',
-            glados.models.paginatedCollections.ESQueryBuilder\
-              .getESQueryForJsonQuery(jsonQuery, esKeyName, fuzzy, curMinShouldMatch+'%')
-          )
-          ajax_deferred =  @__requestCurrentQuerySize()
-          ajax_deferred.done(done_callback)
-        else if jsonQuery? and esData.hits? and esData.hits.total? and esData.hits.total == 0 and not fuzzy
-          fuzzy = true
-          @setMeta(
-            'searchESQuery',
-            glados.models.paginatedCollections.ESQueryBuilder\
-              .getESQueryForJsonQuery(jsonQuery, esKeyName, fuzzy, curMinShouldMatch+'%')
-          )
-          ajax_deferred =  @__requestCurrentQuerySize()
-          ajax_deferred.done(done_callback)
-          @setMeta('fuzzy-results', true)
-        else
-          final_callback()
-
-      done_callback = done_callback.bind(@)
-
-      ajax_deferred.done(done_callback)
-
+      @resetCache() unless not @getMeta('enable_collection_caching')
+      @invalidateAllDownloadedResults()
+      @unSelectAll()
+      @clearAllResults()
+      @clearAllFacetsSelections()
+      @setPage(1, false)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Pagination functions
@@ -631,7 +574,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     resetPageSize: (newPageSize) ->
       @setMeta('page_size', parseInt(newPageSize))
       @setPage(1)
-
 
     # Meta data values are:
     #  total_records
@@ -706,7 +648,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @setupColSorting(columns, comparator)
       @invalidateAllDownloadedResults()
       @setMeta('current_page', 1)
-      @setMeta('ignore_score', true)
       @fetch()
 
     # ------------------------------------------------------------------------------------------------------------------

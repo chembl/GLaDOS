@@ -18,6 +18,7 @@ import threading
 import sys
 
 from django.http import HttpResponse
+from glados.es.query_builder import QueryBuilder
 
 BASE_EBI_URL = 'https://www.ebi.ac.uk'
 BASE_EBI_DEV_URL = "https://wwwdev.ebi.ac.uk"
@@ -421,6 +422,8 @@ def check_fasta(term_dict: dict):
         )
         json_response = response.json()
         if 'error_message' in json_response:
+            if len(term_dict['term']) < 30:
+                term_dict['include_in_query'] = True
             return None
 
         for key_id in json_response['targets']:
@@ -454,7 +457,12 @@ def check_fasta(term_dict: dict):
                     'chembl_entity': 'compound'
                 }
             )
+        if len(json_response['targets']) + len(json_response['compounds']) == 0:
+            if len(term_dict['term']) < 30:
+                term_dict['include_in_query'] = True
     except:
+        if len(term_dict['term']) < 30:
+            term_dict['include_in_query'] = True
         traceback.print_exc()
 
 
@@ -586,133 +594,27 @@ class TermsVisitor(PTNodeVisitor):
 def parse_query_str(query_string: str):
     if len(query_string.strip()) == 0:
         return {}
-    print(query_string)
     query_string = re.sub(r'[\s&&[^\n]]+', ' ', query_string)
-    print(query_string)
     pt = parser.parse(query_string)
     result = arpeggio.visit_parse_tree(pt, TermsVisitor())
-    json_result = json.dumps(result, indent=4)
-    return json_result
+    return result
 
-
-# parse_query_str('[12H]-[He] [He]  [Cu]-[Zn]')
-
-# longest_chembl_smiles = r"CCCCCCCCCCCCCCCC[NH2+]OC(CO)C(O)C(OC1OC(CO)C(O)C(O)C1O)C(O)CO.CCCCCCCCCCCCCCCC[NH2+" \
-#                         r"]OC(CO)C(O)C(OC2OC(CO)C(O)C(O)C2O)C(O)CO.CCCCCCCCCCCCCCCC[NH2+]OC(CO)C(O)C(OC3OC(CO" \
-#                         r")C(O)C(O)C3O)C(O)CO.CCCCCCCCCCCCCCCC[NH2+]OC(CO)C(O)C(OC4OC(CO)C(O)C(O)C4O)C(O)CO.C" \
-#                         r"CCCCCCCCCCCCCCC[NH2+]OC(CO)C(O)C(OC5OC(CO)C(O)C(O)C5O)C(O)CO.CCCCCCCCCCCCCCCC[NH2+]" \
-#                         r"OC(CO)C(O)C(OC6OC(CO)C(O)C(O)C6O)C(O)CO.CCCCCCCCCCCCCCCC[NH2+]OC(CO)C(O)C(OC7OC(CO)" \
-#                         r"C(O)C(O)C7O)C(O)CO.CCCCCCCCCCCCCCCC[NH2+]OC(CO)C(O)C(OC8OC(CO)C(O)C(O)C8O)C(O)CO.CC" \
-#                         r"CCCCCCCCCCCCCC[NH2+]OC(CO)C(O)C(OC9OC(CO)C(O)C(O)C9O)C(O)CO.CCCCCCCCCCCCCCCC[NH2+]O" \
-#                         r"C(CO)C(O)C(OC%10OC(CO)C(O)C(O)C%10O)C(O)CO.CCCCCCCCCCCCCCCC[NH2+]OC(CO)C(O)C(OC%11O" \
-#                         r"C(CO)C(O)C(O)C%11O)C(O)CO.CCCCCCCCCCCCCCCC[NH2+]OC(CO)C(O)C(OC%12OC(CO)C(O)C(O)C%12" \
-#                         r"O)C(O)CO.CCCCCCCCCC(C(=O)NCCc%13ccc(OP(=S)(Oc%14ccc(CCNC(=O)C(CCCCCCCCC)P(=O)(O)[O-" \
-#                         r"])cc%14)N(C)\N=C\c%15ccc(Op%16(Oc%17ccc(\C=N\N(C)P(=S)(Oc%18ccc(CCNC(=O)C(CCCCCCCCC" \
-#                         r")P(=O)(O)[O-])cc%18)Oc%19ccc(CCNC(=O)C(CCCCCCCCC)P(=O)(O)[O-])cc%19)cc%17)np(Oc%20c" \
-#                         r"cc(\C=N\N(C)P(=S)(Oc%21ccc(CCNC(=O)C(CCCCCCCCC)P(=O)(O)[O-])cc%21)Oc%22ccc(CCNC(=O)" \
-#                         r"C(CCCCCCCCC)P(=O)(O)[O-])cc%22)cc%20)(Oc%23ccc(\C=N\N(C)P(=S)(Oc%24ccc(CCNC(=O)C(CC" \
-#                         r"CCCCCCC)P(=O)(O)[O-])cc%24)Oc%25ccc(CCNC(=O)C(CCCCCCCCC)P(=O)(O)[O-])cc%25)cc%23)np" \
-#                         r"(Oc%26ccc(\C=N\N(C)P(=S)(Oc%27ccc(CCNC(=O)C(CCCCCCCCC)P(=O)(O)[O-])cc%27)Oc%28ccc(C" \
-#                         r"CNC(=O)C(CCCCCCCCC)P(=O)(O)[O-])cc%28)cc%26)(Oc%29ccc(\C=N\N(C)P(=S)(Oc%30ccc(CCNC(" \
-#                         r"=O)C(CCCCCCCCC)P(=O)(O)[O-])cc%30)Oc%31ccc(CCNC(=O)C(CCCCCCCCC)P(=O)(O)[O-])cc%31)c" \
-#                         r"c%29)n%16)cc%15)cc%13)P(=O)(O)[O-]"
-
-
-# t_ini = time.time()
-# print(parse_query_str(
-#     """
-#     COc1ccc2[C@@H]3[C@H](COc2c1)C(C)(C)OC4=C3C(=O)C(=O)C5=C4OC(C)(C)[C@@H]6COc7cc(OC)ccc7[C@H]56
-#
-# AND C NCCc1ccc(O)c(O)c1
-#
-# C\C(=C\C(=O)O)\C=C\C=C(/C)\C=C\C1=C(C)CCCC1(C)C
-#
-# and ( COC1(CN2CCC1CC2)C#CC(C#N)(c3ccccc3)c4ccccc4 or CN1C\C(=C/c2ccc(C)cc2)\C3=C(C1)C(C(=C(N)O3)C#N)c4ccc(C)cc4 )
-#
-# COc1ccc2[C@@H]3[C@H](COc2c1)C(C)(C)OC4=C3C(=O)C(=O)C5=C4OC(C)(C)[C@@H]6COc7cc(OC)ccc7[C@H]56
-#
-# CC(C)C[C@H](NC(=O)[C@@H](NC(=O)[C@H](Cc1c[nH]c2ccccc12)NC(=O)[C@H]3CCCN3C(=O)C(CCCCN)CCCCN)C(C)(C)C)C(=O)O
-#
-#     (InChI=1/BrH/h1H/i1[-]1)
-#     ( Cc1nnc2CN=C(c3ccccc3)c4cc(Cl)ccc4-n12 or CN1C(=O)CN=C(c2ccccc2)c3cc(Cl)ccc13 and c and ccc cs or ccs or InChI=1s/BrH and c)
-#     CC(C)(N)Cc1ccccc1
-#     CCCc1nn(C)c2C(=O)NC(=Nc12)c3cc(ccc3OCC)S(=O)(=O)N4CCN(C)CC4.OC(=O)CC(O)(CC(=O)O)C(=O)O
-#
-#     VYFYYTLLBUKUHU-UHFFFAOYSA-N
-#
-#     Q86UW1
-#
-#     +json.port:\" asda asda asd \"
-#     _metadata.api.json:>=10
-#     _metadata.api.json:( 789 )
-#     +US-68921(123) 'yes search for this mofo!! () ' aspirin eugenol ester
-#
-#     ChEMBL(25)
-#
-#     vitamin a
-#
-#     InChI=1/BrH/h1H/i1+1
-#
-#     10.1021/jm900587h
-# InChI=1S/C20H28O2/c1-15(8-6-9-16(2)14-19(21)22)11-12-18-17(3)10-7-13-20(18,4)5/h6,8-9,11-12,14H,7,10,13H2,1-5H3,(H,21,22)/b9-6+,12-11+,15-8+,16-14+
-# 1
-#     """ + longest_chembl_smiles + " "+'C'*14+'-'+'C'*10+'-C'+"  ((CCO) or (C)C(O))"
-# ), time.time()-t_ini)
-
-# t_ini = time.time()
-# print(parse_query_str("CCO"), time.time()-t_ini)
-
-# req = requests.post(
-#     url="http://ves-hx2-5e.ebi.ac.uk:9200/chembl_molecule/_search",
-#     json=\
-#         {
-#             "size": 140,
-#             "_source": ["pref_name", "molecule_synonyms.*", "_metadata.compound_records.*"],
-#             "query": {
-#                 "multi_match": {
-#                     "query": "vitamin",
-#                     "fields": ["*.std_analyzed"],
-#                     "fuzziness": 0
-#                 }
-#             }
-#         }
-#
-# )
-#
-# json_doc = req.json()
-#
-# vitamins = []
-# for hit_i in json_doc['hits']['hits']:
-#     inner_group = set()
-#     inner_group.add(hit_i['_id'])
-#     if 'pref_name' in hit_i['_source'] and hit_i['_source']['pref_name'] is not None:
-#         inner_group.add(hit_i['_source']['pref_name'].lower())
-#     if 'molecule_synonyms' in hit_i['_source']:
-#         for synonym_i in hit_i['_source']['molecule_synonyms']:
-#             inner_group.add(synonym_i['synonyms'].lower())
-#             inner_group.add(synonym_i['molecule_synonym'].lower())
-#     if '_metadata' in hit_i['_source'] and 'compound_records' in hit_i['_source']['_metadata']:
-#         for cr_i in hit_i['_source']['_metadata']['compound_records']:
-#             if 'compound_name' in cr_i:
-#                 inner_group.add(cr_i['compound_name'].lower())
-#     to_remove = []
-#     for vit_i in inner_group:
-#         if vit_i.startswith('CHEMBL'):
-#             continue
-#         index = vit_i.find('vitamin')
-#         if index == -1:
-#             to_remove.append(vit_i)
-#     # for to_remove_i in to_remove:
-#     #     inner_group.remove(to_remove_i)
-#     vitamins.append(inner_group)
-#
-# for vit_i in vitamins:
-#     print("'"+"','".join(sorted(vit_i))+"'")
 
 def parse_url_search(request):
     if request.method == 'GET':
         return HttpResponse('INVALID USAGE! PLEASE USE POST!', status=400)
     elif request.method == 'POST':
         query_string = request.POST.get('query_string', '')
-        print(query_string)
-        return HttpResponse(parse_query_str(query_string))
+        indexes_str = request.POST.get('es_indexes', '')
+        indexes = indexes_str.split(',')
+        selected_es_index = request.POST.get('selected_es_index', None)
+        parsed_query = parse_query_str(query_string)
+        best_queries, sorted_indexes_by_score = QueryBuilder.get_best_es_query(parsed_query, indexes, selected_es_index)
+
+        response_dict = {
+            'parsed_query': parsed_query,
+            'best_es_base_queries': best_queries,
+            'sorted_indexes_by_score': sorted_indexes_by_score
+        }
+
+        return HttpResponse(json.dumps(response_dict))

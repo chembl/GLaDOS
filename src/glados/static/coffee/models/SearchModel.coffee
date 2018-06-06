@@ -201,27 +201,43 @@ SearchModel = Backbone.Model.extend
     
   parseQueryString: (rawQueryString)->
 
-    done_callback = (parsedQueryJsonStr)->
-      parsedQuery = {'or':[]}
-      if parsedQueryJsonStr.trim()
-        parsedQuery = JSON.parse(parsedQueryJsonStr)
+    indexName2ResourceName = {}
+    done_callback = (serverJsonResponse)->
+      jsonResponse = JSON.parse(serverJsonResponse)
+      parsedQuery = jsonResponse['parsed_query']
+      bestESQueries = jsonResponse['best_es_base_queries']
+      sortedIndexesByScore = jsonResponse['sorted_indexes_by_score']
+      sortedResourceNamesByScore = (indexName2ResourceName[indexName] for indexName in sortedIndexesByScore)
       expressionStr = @readParsedQueryRecursive(parsedQuery)
       @set('queryString', expressionStr)
       @set('jsonQuery', parsedQuery)
+      @set('bestESQueries', bestESQueries)
+      @set('sortedResourceNamesByScore', sortedResourceNamesByScore)
+
+    indexes_names = []
+    for resource_name, resource_es_collection of @getResultsListsDict()
+      idxName = resource_es_collection.getMeta('index_name')
+      indexName2ResourceName[idxName] = resource_name
+      indexes_names.push idxName
+
 
     ajaxDeferred = glados.doCSRFPost glados.Settings.SEARCH_RESULTS_PARSER_ENDPOINT, {
         query_string: rawQueryString
+        es_indexes: indexes_names.join(',')
+        selected_es_index: null
     }
     ajaxDeferred.done(done_callback.bind(@))
     return ajaxDeferred
 
   __search: ()->
+    bestESQueries = @get('bestESQueries')
     rls_dict = @getResultsListsDict()
     for resource_name, resource_es_collection of rls_dict
-      # Skips the search on non selected entities
-      if @selected_es_entity and @selected_es_entity != resource_name
-        continue
-      resource_es_collection.search(@get('jsonQuery'))
+      indexName = resource_es_collection.getMeta('index_name')
+      resource_es_collection.search bestESQueries[indexName].query
+      resource_es_collection.setMeta('max_score', bestESQueries[indexName].max_score)
+      resource_es_collection.setMeta('total_records', bestESQueries[indexName].total)
+    @trigger('updated_search_and_scores')
 
   # coordinates the search across the different results lists
   search: (rawQueryString, selected_es_entity) ->
