@@ -36,7 +36,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return list
 
     getNewESResultsListFor: (esIndexSettings, customQueryString='*', useCustomQueryString=false, itemsList,
-      contextualProperties, searchTerm, stickyQuery, searchESQuery) ->
+      contextualProperties, searchTerm, stickyQuery, searchESQuery, flavour) ->
 
       IndexESPagQueryCollection = glados.models.paginatedCollections.PaginatedCollectionBase\
       .extend(glados.models.paginatedCollections.ESPaginatedQueryCollection)
@@ -44,7 +44,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       .extend(glados.models.paginatedCollections.SortingFunctions)
       .extend(glados.models.paginatedCollections.ReferenceStructureFunctions)
       .extend(glados.models.paginatedCollections.CacheFunctions)
-      .extend(glados.models.paginatedCollections.StateSaving.ESCollectionStateSavingFunctions).extend
+      .extend(glados.models.paginatedCollections.StateSaving.ESCollectionStateSavingFunctions)
+      .extend(flavour).extend
         model: esIndexSettings.MODEL
 
         initialize: ->
@@ -291,6 +292,18 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         contextualProperties, searchTerm, stickyQuery)
       return list
 
+    getNewDrugIndicationsList: (chemblID) ->
+
+      console.log 'getNewDrugIndicationsList: ', chemblID
+      queryString =
+      config = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.DRUG_INDICATIONS_LIST
+      flavour = glados.models.paginatedCollections.SpecificFlavours.DrugIndicationsList
+      list = @getNewESResultsListFor config, customQueryString='*', useCustomQueryString=false, itemsList=undefined,
+        contextualProperties=undefined, searchTerm=undefined, stickyQuery=undefined, searchESQuery=undefined,
+        flavour=flavour
+
+      return list
+
     getNewActivitiesList: (filter='') ->
 
       list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.ACTIVITIES_LIST, filter)
@@ -363,13 +376,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
         return data.molecules
 
-      return list
-
-    getNewDrugIndicationsList: ->
-
-      config = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.DRUG_INDICATIONS_LIST
-      flavour = glados.models.paginatedCollections.SpecificFlavours.DrugIndicationsList
-      list = @getNewWSCollectionFor config, filter=undefined, flavour
       return list
 
     getNewMechanismsOfActionList: ->

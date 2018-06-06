@@ -420,6 +420,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DISABLE_CACHE_ON_DOWNLOAD: true
         ENABLE_ACTIVITIES_LINK_FOR_SELECTED_ENTITIES: true
       DRUG_INDICATIONS_LIST:
+        ID_NAME: 'ESDrugIndications'
+        LABEL: 'Drug Indications'
+        INDEX_NAME: 'chembl_drug_indication'
+        # PATH: Assigned after this declaration using the INDEX_NAME
+        #BROWSE_LIST_URL: Drug.getDrugsListURL
         MODEL: glados.models.Compound.DrugIndication
         BASE_URL: 'base_url is set by initURL'
         DEFAULT_PAGE_SIZE: 5
