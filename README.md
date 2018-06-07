@@ -29,7 +29,7 @@ Here you can find some informal diagrams that help to understand how some compon
 
 ### Downloads
 
-* [Client Downloads] (https://docs.google.com/drawings/d/1M4o1h0dTCg5yDuYx-sDVb3pZCX0RFd5byoERSPRriDA/edit?usp=sharing)
+* [Client Downloads](https://docs.google.com/drawings/d/1M4o1h0dTCg5yDuYx-sDVb3pZCX0RFd5byoERSPRriDA/edit?usp=sharing)
 * [Elasticsearch Collection Downloads](https://docs.google.com/drawings/d/1lh6IDZYGL8Ga3-anTwrRgfTXiURzE1-Sp-c9I_WOyQA/edit?usp=sharing)
 
 ### Searching
