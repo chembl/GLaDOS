@@ -48,3 +48,13 @@ describe 'Mechanisms of Action List', ->
         refInRefsGot = _.findWhere(refsGot, {ref_id: refMustBe.ref_id})?
         expect(refInRefsGot).toBe(true)
 
+  it 'sorts the mechanisms alphabetically by default', ->
+
+     parsedDataGot = list.parse(sampleDataToParse)
+
+     previousMech = 'A'
+     for mechanism in parsedDataGot
+       currentMech = mechanism.mechanism_of_action
+       expect(currentMech >= previousMech).toBe(true)
+       previousMech = currentMech
+
