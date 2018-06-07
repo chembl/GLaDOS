@@ -434,15 +434,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Default: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         ID_COLUMN: glados.models.Compound.DrugIndication.ID_COLUMN
     WS_COLLECTIONS:
-      MECHANISMS_OF_ACTIONS_LIST:
-        MODEL: glados.models.Compound.MechanismOfAction
-        BASE_URL: 'base_url is set by initURL'
-        DEFAULT_PAGE_SIZE: 5
-        COLUMNS: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-        ID_COLUMN: glados.models.Compound.MechanismOfAction.ID_COLUMN
       ACTIVITIES_LIST:
         MODEL: Activity
         BASE_URL: glados.Settings.WS_DEV_BASE_URL + 'activity.json'
@@ -583,6 +574,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           Carousel:
             Default: Document.COLUMNS_SETTINGS.SEARCH_BY_TERM_RESULTS
     CLIENT_SIDE_WS_COLLECTIONS:
+      MECHANISMS_OF_ACTIONS_LIST:
+        MODEL: glados.models.Compound.MechanismOfAction
+        DEFAULT_PAGE_SIZE: 5
+        COLUMNS: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.ALL_COLUMNS
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+        ID_COLUMN: glados.models.Compound.MechanismOfAction.ID_COLUMN
       UNICHEM_CONNECTIVITY_LIST:
         MODEL: glados.models.Compound.UnichemConnectivityMatch
         DEFAULT_PAGE_SIZE: 5
