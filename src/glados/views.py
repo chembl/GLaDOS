@@ -427,7 +427,7 @@ def tissue_report_card(request, chembl_id):
     return render(request, 'glados/tissueReportCard.html', context)
 
 def target_report_card(request, chembl_id):
-    
+
     context = {
         'og_tags': {
             'chembl_id': chembl_id
