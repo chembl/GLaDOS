@@ -25,5 +25,4 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
             if not currentRefs[newRefID]?
               mechanismsIndex[mechIdentifier].mechanism_refs.push newRef
 
-      console.log 'mechanismsIndex: ', mechanismsIndex
       return _.values(mechanismsIndex)

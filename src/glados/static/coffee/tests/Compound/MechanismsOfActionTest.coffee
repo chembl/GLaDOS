@@ -30,8 +30,7 @@ describe 'Mechanisms of Action List', ->
     parsedDataGot = list.parse(sampleDataToParse)
 
     mechanismsOfActionToParse = sampleDataToParse.hits.hits
-
-    mechanismsOfActionIndex = _.indexBy(parsedDataGot, 'mec_identifier')
+    mechanismsOfActionIndex = _.indexBy(parsedDataGot, 'mech_identifier')
 
     for mechMustBe in mechanismsOfActionToParse
 
@@ -41,4 +40,11 @@ describe 'Mechanisms of Action List', ->
       #there must be only one row
       expect(numRows).toBe(1)
 
-    return
+      # all the refs must be there
+      refsMustBe = mechMustBe._source.mechanism_refs
+      refsGot = mechanismsOfActionIndex[mechIdentifier].mechanism_refs
+
+      for refMustBe in refsMustBe
+        refInRefsGot = _.findWhere(refsGot, {ref_id: refMustBe.ref_id})?
+        expect(refInRefsGot).toBe(true)
+
