@@ -25,6 +25,14 @@ glados.models.Compound.MechanismOfAction.COLUMNS =
     multiple_links: true
     multiple_links_function: (refs) -> ({text:r.ref_type, url:r.ref_url} for r in refs)
     sort_disabled: true
+  COMPOUNDS:
+    name_to_show: 'Compounds'
+    comparator: 'molecule_chembl_ids'
+    sort_disabled: false
+    is_sorting: 0
+    sort_class: 'fa-sort'
+    multiple_links: true
+    multiple_links_function: (ids) -> ({text:id, url:Compound.get_report_card_url(id)} for id in ids)
 
 glados.models.Compound.MechanismOfAction.ID_COLUMN = glados.models.Compound.MechanismOfAction.COLUMNS.MECH_ID
 
@@ -39,4 +47,5 @@ glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS =
     glados.models.Compound.MechanismOfAction.COLUMNS.MECHANISM_OF_ACTION
     glados.models.Compound.MechanismOfAction.COLUMNS.TARGET_CHEMBL_ID
     glados.models.Compound.MechanismOfAction.COLUMNS.REFERENCES
+    glados.models.Compound.MechanismOfAction.COLUMNS.COMPOUNDS
   ]
