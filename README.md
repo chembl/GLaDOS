@@ -51,6 +51,10 @@ Here you can find some informal diagrams that help to understand how some compon
 * [SVG Icons](https://drive.google.com/open?id=1ZFjAxhsA_PrIgBLvGqbZT8ijofdUSuK2)
 * [Icon Credits](https://sites.google.com/view/icon-credits/home)
 
+### Interface Icons and Logo
+* [All Assets](https://drive.google.com/open?id=1PZQz6a-AU_NAPyIr7Z010qVVI6u4inwV)
+* [ChEMBL Logo Files](https://drive.google.com/open?id=1wScvQgSmJczsjYFF3Rr93xq6O2mZF7TQ)
+
 
 
 
