@@ -20,7 +20,7 @@ describe 'Mechanisms of Action List', ->
     list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewMechanismsOfActionList()
     list.initURL(testChemblID)
 
-    dataURL = "#{glados.Settings.STATIC_URL}testData/Compounds/MechanismOfAction/MechanismsOfActionForCHEMBL1946170esResponse.json"
+    dataURL = "#{glados.Settings.STATIC_URL}testData/Compounds/MechanismOfAction/MechanismsOfActionForCHEMBL190esResponse.json"
     $.get dataURL, (testData) ->
       sampleDataToParse = testData
       done()
@@ -28,6 +28,9 @@ describe 'Mechanisms of Action List', ->
   it 'parses the data correctly', ->
 
     parsedDataGot = list.parse(sampleDataToParse)
+
+    console.log 'parsedDataGot: ', parsedDataGot
+    return
 
     mechanismsOfActionIndex = _.indexBy(parsedDataGot, 'mec_id')
 

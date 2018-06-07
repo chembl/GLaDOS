@@ -1,0 +1,456 @@
+{
+  "took": 1,
+  "timed_out": false,
+  "_shards": {
+    "total": 1,
+    "successful": 1,
+    "failed": 0
+  },
+  "hits": {
+    "total": 9,
+    "max_score": 8.386522,
+    "hits": [
+      {
+        "_index": "chembl_24_0_mechanism",
+        "_type": "mechanism",
+        "_id": "1063",
+        "_score": 8.386522,
+        "_source": {
+          "molecular_mechanism": true,
+          "mechanism_refs": [
+            {
+              "ref_url": "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=25b2fdbe-2f18-4153-835a-7a67bff83ef8",
+              "ref_id": "setid=25b2fdbe-2f18-4153-835a-7a67bff83ef8",
+              "ref_type": "DailyMed"
+            },
+            {
+              "ref_url": "http://en.wikipedia.org/wiki/Theophylline#Mechanisms_of_action",
+              "ref_id": "Theophylline#Mechanisms_of_action",
+              "ref_type": "Wikipedia"
+            }
+          ],
+          "target_chembl_id": "CHEMBL2093863",
+          "action_type": "INHIBITOR",
+          "mechanism_comment": null,
+          "mechanism_of_action": "Phosphodiesterase 4 inhibitor",
+          "max_phase": 4,
+          "site_id": null,
+          "molecule_chembl_id": "CHEMBL190",
+          "mec_id": 1063,
+          "record_id": 1343085,
+          "disease_efficacy": true,
+          "binding_site_comment": null,
+          "direct_interaction": true,
+          "selectivity_comment": null,
+          "_metadata": {
+            "all_molecule_chembl_ids": [
+              "CHEMBL190",
+              "CHEMBL1355736",
+              "CHEMBL2104089",
+              "CHEMBL1370561",
+              "CHEMBL1200434",
+              "CHEMBL2107084"
+            ]
+          }
+        }
+      },
+      {
+        "_index": "chembl_24_0_mechanism",
+        "_type": "mechanism",
+        "_id": "1136",
+        "_score": 8.386522,
+        "_source": {
+          "molecular_mechanism": true,
+          "mechanism_refs": [
+            {
+              "ref_url": "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=25b2fdbe-2f18-4153-835a-7a67bff83ef8",
+              "ref_id": "setid=25b2fdbe-2f18-4153-835a-7a67bff83ef8",
+              "ref_type": "DailyMed"
+            },
+            {
+              "ref_url": "http://en.wikipedia.org/wiki/Theophylline#Mechanisms_of_action",
+              "ref_id": "Theophylline#Mechanisms_of_action",
+              "ref_type": "Wikipedia"
+            }
+          ],
+          "target_chembl_id": "CHEMBL2094125",
+          "action_type": "INHIBITOR",
+          "mechanism_comment": null,
+          "mechanism_of_action": "Phosphodiesterase 3 inhibitor",
+          "max_phase": 4,
+          "site_id": null,
+          "molecule_chembl_id": "CHEMBL190",
+          "mec_id": 1136,
+          "record_id": 1343085,
+          "disease_efficacy": true,
+          "binding_site_comment": null,
+          "direct_interaction": true,
+          "selectivity_comment": null,
+          "_metadata": {
+            "all_molecule_chembl_ids": [
+              "CHEMBL190",
+              "CHEMBL1355736",
+              "CHEMBL2104089",
+              "CHEMBL1370561",
+              "CHEMBL1200434",
+              "CHEMBL2107084"
+            ]
+          }
+        }
+      },
+      {
+        "_index": "chembl_24_0_mechanism",
+        "_type": "mechanism",
+        "_id": "1216",
+        "_score": 7.0920067,
+        "_source": {
+          "molecular_mechanism": true,
+          "mechanism_refs": [
+            {
+              "ref_url": "http://europepmc.org/abstract/MED/12954362",
+              "ref_id": "12954362",
+              "ref_type": "PubMed"
+            },
+            {
+              "ref_url": "http://europepmc.org/abstract/MED/14992338",
+              "ref_id": "14992338",
+              "ref_type": "PubMed"
+            },
+            {
+              "ref_url": "http://europepmc.org/abstract/MED/15980878",
+              "ref_id": "15980878",
+              "ref_type": "PubMed"
+            },
+            {
+              "ref_url": "http://europepmc.org/abstract/MED/3588607",
+              "ref_id": "3588607",
+              "ref_type": "PubMed"
+            },
+            {
+              "ref_url": "http://en.wikipedia.org/wiki/Theophylline#Mechanisms_of_action",
+              "ref_id": "Theophylline#Mechanisms_of_action",
+              "ref_type": "Wikipedia"
+            }
+          ],
+          "target_chembl_id": "CHEMBL2111329",
+          "action_type": "ANTAGONIST",
+          "mechanism_comment": null,
+          "mechanism_of_action": "Adenosine receptor antagonist",
+          "max_phase": 4,
+          "site_id": null,
+          "molecule_chembl_id": "CHEMBL190",
+          "mec_id": 1216,
+          "record_id": 1343085,
+          "disease_efficacy": true,
+          "binding_site_comment": null,
+          "direct_interaction": true,
+          "selectivity_comment": null,
+          "_metadata": {
+            "all_molecule_chembl_ids": [
+              "CHEMBL190",
+              "CHEMBL1355736",
+              "CHEMBL2104089",
+              "CHEMBL1370561",
+              "CHEMBL1200434",
+              "CHEMBL2107084"
+            ]
+          }
+        }
+      },
+      {
+        "_index": "chembl_24_0_mechanism",
+        "_type": "mechanism",
+        "_id": "1135",
+        "_score": 5.9369016,
+        "_source": {
+          "molecular_mechanism": true,
+          "mechanism_refs": [
+            {
+              "ref_url": "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=25b2fdbe-2f18-4153-835a-7a67bff83ef8",
+              "ref_id": "setid=25b2fdbe-2f18-4153-835a-7a67bff83ef8",
+              "ref_type": "DailyMed"
+            },
+            {
+              "ref_url": "http://en.wikipedia.org/wiki/Theophylline#Mechanisms_of_action",
+              "ref_id": "Theophylline#Mechanisms_of_action",
+              "ref_type": "Wikipedia"
+            }
+          ],
+          "target_chembl_id": "CHEMBL2094125",
+          "action_type": "INHIBITOR",
+          "mechanism_comment": null,
+          "mechanism_of_action": "Phosphodiesterase 3 inhibitor",
+          "max_phase": 4,
+          "site_id": null,
+          "molecule_chembl_id": "CHEMBL1370561",
+          "mec_id": 1135,
+          "record_id": 1343901,
+          "disease_efficacy": true,
+          "binding_site_comment": null,
+          "direct_interaction": true,
+          "selectivity_comment": null,
+          "_metadata": {
+            "all_molecule_chembl_ids": [
+              "CHEMBL190",
+              "CHEMBL1355736",
+              "CHEMBL2104089",
+              "CHEMBL1370561",
+              "CHEMBL1200434",
+              "CHEMBL2107084"
+            ]
+          }
+        }
+      },
+      {
+        "_index": "chembl_24_0_mechanism",
+        "_type": "mechanism",
+        "_id": "2388",
+        "_score": 5.9369016,
+        "_source": {
+          "molecular_mechanism": true,
+          "mechanism_refs": [
+            {
+              "ref_url": "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=25b2fdbe-2f18-4153-835a-7a67bff83ef8",
+              "ref_id": "setid=25b2fdbe-2f18-4153-835a-7a67bff83ef8",
+              "ref_type": "DailyMed"
+            },
+            {
+              "ref_url": "http://en.wikipedia.org/wiki/Theophylline#Mechanisms_of_action",
+              "ref_id": "Theophylline#Mechanisms_of_action",
+              "ref_type": "Wikipedia"
+            }
+          ],
+          "target_chembl_id": "CHEMBL2093863",
+          "action_type": "INHIBITOR",
+          "mechanism_comment": null,
+          "mechanism_of_action": "Phosphodiesterase 4 inhibitor",
+          "max_phase": 4,
+          "site_id": null,
+          "molecule_chembl_id": "CHEMBL1200434",
+          "mec_id": 2388,
+          "record_id": 1343411,
+          "disease_efficacy": true,
+          "binding_site_comment": null,
+          "direct_interaction": true,
+          "selectivity_comment": null,
+          "_metadata": {
+            "all_molecule_chembl_ids": [
+              "CHEMBL190",
+              "CHEMBL1355736",
+              "CHEMBL2104089",
+              "CHEMBL1370561",
+              "CHEMBL1200434",
+              "CHEMBL2107084"
+            ]
+          }
+        }
+      },
+      {
+        "_index": "chembl_24_0_mechanism",
+        "_type": "mechanism",
+        "_id": "1066",
+        "_score": 5.9369016,
+        "_source": {
+          "molecular_mechanism": true,
+          "mechanism_refs": [
+            {
+              "ref_url": "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=25b2fdbe-2f18-4153-835a-7a67bff83ef8",
+              "ref_id": "setid=25b2fdbe-2f18-4153-835a-7a67bff83ef8",
+              "ref_type": "DailyMed"
+            },
+            {
+              "ref_url": "http://en.wikipedia.org/wiki/Theophylline#Mechanisms_of_action",
+              "ref_id": "Theophylline#Mechanisms_of_action",
+              "ref_type": "Wikipedia"
+            }
+          ],
+          "target_chembl_id": "CHEMBL2093863",
+          "action_type": "INHIBITOR",
+          "mechanism_comment": null,
+          "mechanism_of_action": "Phosphodiesterase 4 inhibitor",
+          "max_phase": 4,
+          "site_id": null,
+          "molecule_chembl_id": "CHEMBL1370561",
+          "mec_id": 1066,
+          "record_id": 1343901,
+          "disease_efficacy": true,
+          "binding_site_comment": null,
+          "direct_interaction": true,
+          "selectivity_comment": null,
+          "_metadata": {
+            "all_molecule_chembl_ids": [
+              "CHEMBL190",
+              "CHEMBL1355736",
+              "CHEMBL2104089",
+              "CHEMBL1370561",
+              "CHEMBL1200434",
+              "CHEMBL2107084"
+            ]
+          }
+        }
+      },
+      {
+        "_index": "chembl_24_0_mechanism",
+        "_type": "mechanism",
+        "_id": "2389",
+        "_score": 5.9369016,
+        "_source": {
+          "molecular_mechanism": true,
+          "mechanism_refs": [
+            {
+              "ref_url": "http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=25b2fdbe-2f18-4153-835a-7a67bff83ef8",
+              "ref_id": "setid=25b2fdbe-2f18-4153-835a-7a67bff83ef8",
+              "ref_type": "DailyMed"
+            },
+            {
+              "ref_url": "http://en.wikipedia.org/wiki/Theophylline#Mechanisms_of_action",
+              "ref_id": "Theophylline#Mechanisms_of_action",
+              "ref_type": "Wikipedia"
+            }
+          ],
+          "target_chembl_id": "CHEMBL2094125",
+          "action_type": "INHIBITOR",
+          "mechanism_comment": null,
+          "mechanism_of_action": "Phosphodiesterase 3 inhibitor",
+          "max_phase": 4,
+          "site_id": null,
+          "molecule_chembl_id": "CHEMBL1200434",
+          "mec_id": 2389,
+          "record_id": 1343411,
+          "disease_efficacy": true,
+          "binding_site_comment": null,
+          "direct_interaction": true,
+          "selectivity_comment": null,
+          "_metadata": {
+            "all_molecule_chembl_ids": [
+              "CHEMBL190",
+              "CHEMBL1355736",
+              "CHEMBL2104089",
+              "CHEMBL1370561",
+              "CHEMBL1200434",
+              "CHEMBL2107084"
+            ]
+          }
+        }
+      },
+      {
+        "_index": "chembl_24_0_mechanism",
+        "_type": "mechanism",
+        "_id": "2390",
+        "_score": 4.717698,
+        "_source": {
+          "molecular_mechanism": true,
+          "mechanism_refs": [
+            {
+              "ref_url": "http://europepmc.org/abstract/MED/12954362",
+              "ref_id": "12954362",
+              "ref_type": "PubMed"
+            },
+            {
+              "ref_url": "http://europepmc.org/abstract/MED/14992338",
+              "ref_id": "14992338",
+              "ref_type": "PubMed"
+            },
+            {
+              "ref_url": "http://europepmc.org/abstract/MED/15980878",
+              "ref_id": "15980878",
+              "ref_type": "PubMed"
+            },
+            {
+              "ref_url": "http://europepmc.org/abstract/MED/3588607",
+              "ref_id": "3588607",
+              "ref_type": "PubMed"
+            },
+            {
+              "ref_url": "http://en.wikipedia.org/wiki/Theophylline#Mechanisms_of_action",
+              "ref_id": "Theophylline#Mechanisms_of_action",
+              "ref_type": "Wikipedia"
+            }
+          ],
+          "target_chembl_id": "CHEMBL2111329",
+          "action_type": "ANTAGONIST",
+          "mechanism_comment": null,
+          "mechanism_of_action": "Adenosine receptor antagonist",
+          "max_phase": 4,
+          "site_id": null,
+          "molecule_chembl_id": "CHEMBL1200434",
+          "mec_id": 2390,
+          "record_id": 1343411,
+          "disease_efficacy": true,
+          "binding_site_comment": null,
+          "direct_interaction": true,
+          "selectivity_comment": null,
+          "_metadata": {
+            "all_molecule_chembl_ids": [
+              "CHEMBL190",
+              "CHEMBL1355736",
+              "CHEMBL2104089",
+              "CHEMBL1370561",
+              "CHEMBL1200434",
+              "CHEMBL2107084"
+            ]
+          }
+        }
+      },
+      {
+        "_index": "chembl_24_0_mechanism",
+        "_type": "mechanism",
+        "_id": "1212",
+        "_score": 4.717698,
+        "_source": {
+          "molecular_mechanism": true,
+          "mechanism_refs": [
+            {
+              "ref_url": "http://europepmc.org/abstract/MED/12954362",
+              "ref_id": "12954362",
+              "ref_type": "PubMed"
+            },
+            {
+              "ref_url": "http://europepmc.org/abstract/MED/14992338",
+              "ref_id": "14992338",
+              "ref_type": "PubMed"
+            },
+            {
+              "ref_url": "http://europepmc.org/abstract/MED/15980878",
+              "ref_id": "15980878",
+              "ref_type": "PubMed"
+            },
+            {
+              "ref_url": "http://europepmc.org/abstract/MED/3588607",
+              "ref_id": "3588607",
+              "ref_type": "PubMed"
+            },
+            {
+              "ref_url": "http://en.wikipedia.org/wiki/Theophylline#Mechanisms_of_action",
+              "ref_id": "Theophylline#Mechanisms_of_action",
+              "ref_type": "Wikipedia"
+            }
+          ],
+          "target_chembl_id": "CHEMBL2111329",
+          "action_type": "ANTAGONIST",
+          "mechanism_comment": null,
+          "mechanism_of_action": "Adenosine receptor antagonist",
+          "max_phase": 4,
+          "site_id": null,
+          "molecule_chembl_id": "CHEMBL1370561",
+          "mec_id": 1212,
+          "record_id": 1343901,
+          "disease_efficacy": true,
+          "binding_site_comment": null,
+          "direct_interaction": true,
+          "selectivity_comment": null,
+          "_metadata": {
+            "all_molecule_chembl_ids": [
+              "CHEMBL190",
+              "CHEMBL1355736",
+              "CHEMBL2104089",
+              "CHEMBL1370561",
+              "CHEMBL1200434",
+              "CHEMBL2107084"
+            ]
+          }
+        }
+      }
+    ]
+  }
+}
