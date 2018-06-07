@@ -29,16 +29,16 @@ describe 'Mechanisms of Action List', ->
 
     parsedDataGot = list.parse(sampleDataToParse)
 
-    console.log 'parsedDataGot: ', parsedDataGot
+    mechanismsOfActionToParse = sampleDataToParse.hits.hits
+
+    mechanismsOfActionIndex = _.indexBy(parsedDataGot, 'mec_identifier')
+
+    for mechMustBe in mechanismsOfActionToParse
+
+      mechIdentifier = "#{mechMustBe._source.target_chembl_id}-#{mechMustBe._source.mechanism_of_action}"
+      numRows = _.countBy(parsedDataGot, (mech) -> mech.mech_identifier == mechIdentifier).true
+
+      #there must be only one row
+      expect(numRows).toBe(1)
+
     return
-
-    mechanismsOfActionIndex = _.indexBy(parsedDataGot, 'mec_id')
-
-    for mechOfActMustBe in sampleDataToParse.mechanisms
-
-      mechOfActID = mechOfActMustBe.mec_id
-      mechOfActGot = mechanismsOfActionIndex[mechOfActID]
-
-      expect(mechOfActGot?).toBe(true)
-      expect(mechOfActGot.mechanism_of_action).toBe(mechOfActMustBe.mechanism_of_action)
-      expect(mechOfActGot.target_chembl_id).toBe(mechOfActMustBe.target_chembl_id)

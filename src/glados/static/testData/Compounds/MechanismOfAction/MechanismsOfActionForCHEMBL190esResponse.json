@@ -365,6 +365,11 @@
               "ref_url": "http://en.wikipedia.org/wiki/Theophylline#Mechanisms_of_action",
               "ref_id": "Theophylline#Mechanisms_of_action",
               "ref_type": "Wikipedia"
+            },
+            {
+              "ref_url": "New Ref URL",
+              "ref_id": "Extra Ref",
+              "ref_type": "Extra"
             }
           ],
           "target_chembl_id": "CHEMBL2111329",
