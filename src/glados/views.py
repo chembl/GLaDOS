@@ -388,215 +388,61 @@ def extend_url(request, hash):
 
 def compound_report_card(request, chembl_id):
 
-    cache_key = chembl_id + '_compound_report_card'
-    cache_time = 604800
-    cache_context = cache.get(cache_key)
-
-    if cache_context != None:
-        print('og tags for ' + chembl_id + ' are in cache')
-        return render(request, 'glados/compoundReportCard.html', cache_context)
-
-    print('og tags for ' + chembl_id + ' are not in cache')
-
-    s = 'pref_name'
-    q = {
-        "term": {
-          "_id": {
-            "value": chembl_id
-          }
-        }
-    }
-    response = Search(index="chembl_molecule").query(q).source(s).execute()
-
-    name = response['hits']['hits'][0]['_source']['pref_name']
-
     context = {
         'og_tags': {
-            'chembl_id': chembl_id,
-            'name': name
+            'chembl_id': chembl_id
         }
     }
-
-    cache.set(cache_key, context, cache_time)
 
     return render(request, 'glados/compoundReportCard.html', context)
 
 def assay_report_card(request, chembl_id):
 
-    cache_key = chembl_id + '_assay_report_card'
-    cache_time = 604800
-    cache_context = cache.get(cache_key)
-
-    if cache_context != None:
-        print('og tags for ' + chembl_id + ' are in cache')
-        return render(request, 'glados/assayReportCard.html', cache_context)
-
-    print('og tags for ' + chembl_id + ' are not in cache')
-
-    s = 'description'
-    q = {
-        "term": {
-          "_id": {
-            "value": chembl_id
-          }
-        }
-    }
-    response = Search(index="chembl_assay").query(q).source(s).execute()
-
-    description = response['hits']['hits'][0]['_source']['description']
-
     context = {
         'og_tags': {
-            'chembl_id': chembl_id,
-            'description': description
+            'chembl_id': chembl_id
         }
     }
-
-    cache.set(cache_key, context, cache_time)
 
     return render(request, 'glados/assayReportCard.html', context)
 
 def cell_line_report_card(request, chembl_id):
 
-    cache_key = chembl_id + '_cell_line_report_card'
-    cache_time = 604800
-    cache_context = cache.get(cache_key)
-
-    if cache_context != None:
-        print('og tags for ' + chembl_id + ' are in cache')
-        return render(request, 'glados/cellLineReportCard.html', cache_context)
-
-    print('og tags for ' + chembl_id + ' are not in cache')
-
-    s = ['cell_description', 'cell_name']
-    q = {
-        "term": {
-          "_id": {
-            "value": chembl_id
-          }
-        }
-    }
-    response = Search(index="chembl_cell_line").query(q).source(s).execute()
-
-    description = response['hits']['hits'][0]['_source']['cell_description']
-    name = response['hits']['hits'][0]['_source']['cell_name']
-
     context = {
         'og_tags': {
-            'chembl_id': chembl_id,
-            'name': name,
-            'description': description
+            'chembl_id': chembl_id
         }
     }
-
-    cache.set(cache_key, context, cache_time)
 
     return render(request, 'glados/cellLineReportCard.html', context)
 
 def tissue_report_card(request, chembl_id):
 
-    cache_key = chembl_id + '_tissue_report_card'
-    cache_time = 604800
-    cache_context = cache.get(cache_key)
-
-    if cache_context != None:
-        print('og tags for ' + chembl_id + ' are in cache')
-        return render(request, 'glados/tissueReportCard.html', cache_context)
-
-    print('og tags for ' + chembl_id + ' are not in cache')
-
-    s = 'pref_name'
-    q = {
-        "term": {
-          "_id": {
-            "value": chembl_id
-          }
-        }
-    }
-    response = Search(index="chembl_tissue").query(q).source(s).execute()
-
-    name = response['hits']['hits'][0]['_source']['pref_name']
-
     context = {
         'og_tags': {
-            'chembl_id': chembl_id,
-            'name': name
+            'chembl_id': chembl_id
         }
     }
-
-    cache.set(cache_key, context, cache_time)
 
     return render(request, 'glados/tissueReportCard.html', context)
 
 def target_report_card(request, chembl_id):
-
-    cache_key = chembl_id + '_target_report_card'
-    cache_time = 604800
-    cache_context = cache.get(cache_key)
-
-    if cache_context != None:
-        print('og tags for ' + chembl_id + ' are in cache')
-        return render(request, 'glados/targetReportCard.html', cache_context)
-
-    print('og tags for ' + chembl_id + ' are not in cache')
-
-    s = ['pref_name', 'target_type']
-    q = {
-        "term": {
-          "_id": {
-            "value": chembl_id
-          }
-        }
-    }
-    response = Search(index="chembl_target").query(q).source(s).execute()
-
-    name = response['hits']['hits'][0]['_source']['pref_name']
-    type = response['hits']['hits'][0]['_source']['target_type']
-
+    
     context = {
         'og_tags': {
-            'chembl_id': chembl_id,
-            'type': type,
-            'name': name
+            'chembl_id': chembl_id
         }
     }
-
-    cache.set(cache_key, context, cache_time)
 
     return render(request, 'glados/targetReportCard.html', context)
 
 def document_report_card(request, chembl_id):
 
-    cache_key = chembl_id + '_document_report_card'
-    cache_time = 604800
-    cache_context = cache.get(cache_key)
-
-    if cache_context != None:
-        print('og tags for ' + chembl_id + ' are in cache')
-        return render(request, 'glados/documentReportCard.html', cache_context)
-
-    print('og tags for ' + chembl_id + ' are not in cache')
-
-    s = 'title'
-    q = {
-        "term": {
-          "_id": {
-            "value": chembl_id
-          }
-        }
-    }
-    response = Search(index="chembl_document").query(q).source(s).execute()
-
-    title = response['hits']['hits'][0]['_source']['title']
-
     context = {
         'og_tags': {
-            'chembl_id': chembl_id,
-            'title': title
+            'chembl_id': chembl_id
         }
     }
-
-    cache.set(cache_key, context, cache_time)
 
     return render(request, 'glados/documentReportCard.html', context)
 
