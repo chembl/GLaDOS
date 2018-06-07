@@ -3,7 +3,7 @@
 {% block open_graph_tags %}
 
     <meta property="og:title" content="{{ og_tags.chembl_id }}"/>
-    <meta property="og:description" content="Compound report card for {{ og_tags.chembl_id }}"/>
+    <meta property="og:description" content="Compound Report Card for {{ og_tags.chembl_id }}"/>
     <meta property="og:type" content="object" />
     <meta property="og:url" content="{{request.build_absolute_uri }}" />
     <meta property="og:image" content="https://www.ebi.ac.uk/chembl/api/data/image/{{ og_tags.chembl_id }}.png?bgColor=white" />
