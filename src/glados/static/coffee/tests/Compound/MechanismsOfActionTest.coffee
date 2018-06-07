@@ -42,11 +42,17 @@ describe 'Mechanisms of Action List', ->
 
       # all the refs must be there
       refsMustBe = mechMustBe._source.mechanism_refs
-      refsGot = mechanismsOfActionIndex[mechIdentifier].mechanism_refs
+      mechGot = mechanismsOfActionIndex[mechIdentifier]
+      refsGot = mechGot.mechanism_refs
 
       for refMustBe in refsMustBe
         refInRefsGot = _.findWhere(refsGot, {ref_id: refMustBe.ref_id})?
         expect(refInRefsGot).toBe(true)
+
+      chemblIDMustBe = mechMustBe._source.molecule_chembl_id
+      chemblIDsGot = mechGot.molecule_chembl_ids
+      currentChemblIDInIdsGot = _.contains(chemblIDsGot, chemblIDMustBe)
+      expect(currentChemblIDInIdsGot).toBe(true)
 
   it 'sorts the mechanisms alphabetically by default', ->
 

@@ -22,6 +22,12 @@ glados.useNameSpace 'glados.views.ReportCards',
         @hideSection()
         return
 
+      if @config.show_if?
+        show = @config.show_if(@model)
+        if not show
+          @hideSection()
+          return
+
       linkToAllText = @config.link_to_all_text
       linkToAllURL = @config.link_to_all_url
       if linkToAllText? and linkToAllURL?

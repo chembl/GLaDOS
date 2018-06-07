@@ -157,7 +157,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       embed_section_name: 'mechanism_of_action'
       embed_identifier: chemblID
 
-    new glados.views.ReportCards.PaginatedTableInCardView
+    tableView = new glados.views.ReportCards.PaginatedTableInCardView
       collection: list
       el: $('#MechOfActCard')
       resource_type: gettext('glados_entities_compound_name')
@@ -166,7 +166,18 @@ class CompoundReportCardApp extends glados.ReportCardApp
       config: viewConfig
       report_card_app: @
 
-    list.fetch({reset: true})
+    compound = CompoundReportCardApp.getCurrentCompound()
+
+    fetchList = ->
+      console.log 'fetch list!'
+      metadata = compound.get('_metadata')
+      isApprovedDrug = metadata.hierarchy.is_approved_drug
+      if isApprovedDrug
+        list.fetch({reset: true})
+      else
+        tableView.hideSection()
+
+    compound.on 'change', fetchList, @
 
   @initIndications = ->
 
