@@ -6,10 +6,10 @@ describe 'Mechanisms of Action List', ->
     list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewMechanismsOfActionList()
     list.initURL(testChemblID)
 
-    baseUrlMustBe = "#{glados.Settings.WS_BASE_URL}mechanism.json?molecule_chembl_id=#{testChemblID}"
-    baseURLGot = list.getMeta('base_url')
+    urlMustBe = "#{glados.models.paginatedCollections.Settings.ES_BASE_URL}/chembl_mechanism/_search?q=#{testChemblID}"
+    urlGot = list.url
 
-    expect(baseURLGot).toBe(baseUrlMustBe)
+    expect(urlGot).toBe(urlMustBe)
 
   sampleDataToParse = undefined
   testChemblID = 'CHEMBL1946170'

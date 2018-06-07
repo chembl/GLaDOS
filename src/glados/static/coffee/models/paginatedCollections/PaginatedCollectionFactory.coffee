@@ -378,7 +378,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       config = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.MECHANISMS_OF_ACTIONS_LIST
       flavour = glados.models.paginatedCollections.SpecificFlavours.MechanismsOfActionList
-      list = @getNewWSCollectionFor config, filter=undefined, flavour
+      list = @getNewClientSideCollectionFor config, generator=undefined, flavour
 
       return list
 

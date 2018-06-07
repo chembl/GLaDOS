@@ -3,11 +3,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
   MechanismsOfActionList:
 
     initURL: (chemblID) ->
-      console.log 'init url'
-      @baseUrl = "#{glados.Settings.WS_BASE_URL}mechanism.json?molecule_chembl_id=#{chemblID}"
-      console.log 'base url: ', @baseUrl
-      @setMeta('base_url', @baseUrl, true)
-      @initialiseUrl()
+      @url = "#{glados.models.paginatedCollections.Settings.ES_BASE_URL}/chembl_mechanism/_search?q=#{chemblID}"
 
     parse: (data) ->
       data.page_meta.records_in_page = data.mechanisms.length

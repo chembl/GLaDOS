@@ -576,7 +576,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     CLIENT_SIDE_WS_COLLECTIONS:
       MECHANISMS_OF_ACTIONS_LIST:
         MODEL: glados.models.Compound.MechanismOfAction
-        BASE_URL: 'base_url is set by initURL'
         DEFAULT_PAGE_SIZE: 5
         COLUMNS: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
