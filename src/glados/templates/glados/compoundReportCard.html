@@ -1,5 +1,21 @@
 {% extends "glados/base/base_layout.html" %}
 
+{% block open_graph_tags %}
+
+    <meta property="og:title" content="{{ og_tags.chembl_id }}"/>
+    <meta property="og:description" content="Compound report card for {{ og_tags.chembl_id }}"/>
+    <meta property="og:type" content="object" />
+    <meta property="og:url" content="{{request.build_absolute_uri }}" />
+    <meta property="og:image" content="https://www.ebi.ac.uk/chembl/api/data/image/{{ og_tags.chembl_id }}.png?bgColor=white" />
+    <meta property="og:image:secure_url" content="https://www.ebi.ac.uk/chembl/api/data/image/{{ og_tags.chembl_id }}.png?bgColor=white" />
+    <meta property="og:image:type" content="image/png" />
+
+    <meta property="og:image:width" content="300" />
+    <meta property="og:image:height" content="300" />
+
+{% endblock %}
+
+
 {% block title %}Compound Report Card{% endblock %}
 
 

@@ -96,8 +96,8 @@ common_urls = [
   # Compounds
   # --------------------------------------------------------------------------------------------------------------------
 
-  url(r'^compound_report_card/(?P<chembl_id>\w+)/$',
-      DirectTemplateView.as_view(template_name="glados/compoundReportCard.html"), ),
+  url(r'^compound_report_card/(?P<chembl_id>\w+)/$', views.compound_report_card,
+      name='compound_report_card'),
 
   url(r'^compound_metabolism/(?P<chembl_id>\w+)$', xframe_options_exempt(
     DirectTemplateView.as_view(
@@ -108,21 +108,21 @@ common_urls = [
   # --------------------------------------------------------------------------------------------------------------------
 
   url(r'^target_report_card/(?P<chembl_id>\w+)/$',
-      DirectTemplateView.as_view(template_name="glados/targetReportCard.html"), ),
+      views.target_report_card, name='target_report_card'),
 
   # --------------------------------------------------------------------------------------------------------------------
   # Assays
   # --------------------------------------------------------------------------------------------------------------------
 
   url(r'^assay_report_card/(?P<chembl_id>\w+)/$',
-      DirectTemplateView.as_view(template_name="glados/assayReportCard.html"), ),
+      views.assay_report_card, name='assay_report_card'),
 
   # --------------------------------------------------------------------------------------------------------------------
   # Documents
   # --------------------------------------------------------------------------------------------------------------------
 
   url(r'^document_report_card/(?P<chembl_id>\w+)/$',
-      DirectTemplateView.as_view(template_name="glados/documentReportCard.html"), ),
+      views.document_report_card, name='document_report_card'),
 
   url(r'^document_assay_network/(?P<chembl_id>\w+)/$',
       DirectTemplateView.as_view(template_name="glados/DocumentAssayNetwork/DocumentAssayNetwork.html"), ),
@@ -135,13 +135,13 @@ common_urls = [
   # --------------------------------------------------------------------------------------------------------------------
 
   url(r'^cell_line_report_card/(?P<chembl_id>\w+)/$',
-      DirectTemplateView.as_view(template_name="glados/cellLineReportCard.html"), ),
+      views.cell_line_report_card, name='cell_line_report_card'),
 
   # --------------------------------------------------------------------------------------------------------------------
   # Tissues
   # --------------------------------------------------------------------------------------------------------------------
   url(r'^tissue_report_card/(?P<chembl_id>\w+)/$',
-      DirectTemplateView.as_view(template_name="glados/tissueReportCard.html"), ),
+      views.tissue_report_card, name='tissue_report_card'),
 
   # --------------------------------------------------------------------------------------------------------------------
   # Search Results

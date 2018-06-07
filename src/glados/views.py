@@ -382,6 +382,69 @@ def extend_url(request, hash):
 
     return JsonResponse(resp_data)
 
+# ----------------------------------------------------------------------------------------------------------------------
+# Report Cards
+# ----------------------------------------------------------------------------------------------------------------------
+
+def compound_report_card(request, chembl_id):
+
+    context = {
+        'og_tags': {
+            'chembl_id': chembl_id
+        }
+    }
+
+    return render(request, 'glados/compoundReportCard.html', context)
+
+def assay_report_card(request, chembl_id):
+
+    context = {
+        'og_tags': {
+            'chembl_id': chembl_id
+        }
+    }
+
+    return render(request, 'glados/assayReportCard.html', context)
+
+def cell_line_report_card(request, chembl_id):
+
+    context = {
+        'og_tags': {
+            'chembl_id': chembl_id
+        }
+    }
+
+    return render(request, 'glados/cellLineReportCard.html', context)
+
+def tissue_report_card(request, chembl_id):
+
+    context = {
+        'og_tags': {
+            'chembl_id': chembl_id
+        }
+    }
+
+    return render(request, 'glados/tissueReportCard.html', context)
+
+def target_report_card(request, chembl_id):
+
+    context = {
+        'og_tags': {
+            'chembl_id': chembl_id
+        }
+    }
+
+    return render(request, 'glados/targetReportCard.html', context)
+
+def document_report_card(request, chembl_id):
+
+    context = {
+        'og_tags': {
+            'chembl_id': chembl_id
+        }
+    }
+
+    return render(request, 'glados/documentReportCard.html', context)
 
 def wizard_step_json(request, step_id):
     """
