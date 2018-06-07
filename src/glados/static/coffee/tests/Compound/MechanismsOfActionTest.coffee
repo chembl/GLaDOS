@@ -6,10 +6,10 @@ describe 'Mechanisms of Action List', ->
     list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewMechanismsOfActionList()
     list.initURL(testChemblID)
 
-    baseUrlMustBe = "#{glados.Settings.WS_BASE_URL}mechanism.json?molecule_chembl_id=#{testChemblID}"
-    baseURLGot = list.getMeta('base_url')
+    urlMustBe = "#{glados.models.paginatedCollections.Settings.ES_BASE_URL}/chembl_mechanism/_search?q=#{testChemblID}"
+    urlGot = list.url
 
-    expect(baseURLGot).toBe(baseUrlMustBe)
+    expect(urlGot).toBe(urlMustBe)
 
   sampleDataToParse = undefined
   testChemblID = 'CHEMBL1946170'
@@ -20,7 +20,7 @@ describe 'Mechanisms of Action List', ->
     list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewMechanismsOfActionList()
     list.initURL(testChemblID)
 
-    dataURL = "#{glados.Settings.STATIC_URL}testData/Compounds/MechanismOfAction/MechanismsOfActionForCHEMBL1946170esResponse.json"
+    dataURL = "#{glados.Settings.STATIC_URL}testData/Compounds/MechanismOfAction/MechanismsOfActionForCHEMBL190esResponse.json"
     $.get dataURL, (testData) ->
       sampleDataToParse = testData
       done()
@@ -29,13 +29,32 @@ describe 'Mechanisms of Action List', ->
 
     parsedDataGot = list.parse(sampleDataToParse)
 
-    mechanismsOfActionIndex = _.indexBy(parsedDataGot, 'mec_id')
+    mechanismsOfActionToParse = sampleDataToParse.hits.hits
+    mechanismsOfActionIndex = _.indexBy(parsedDataGot, 'mech_identifier')
 
-    for mechOfActMustBe in sampleDataToParse.mechanisms
+    for mechMustBe in mechanismsOfActionToParse
 
-      mechOfActID = mechOfActMustBe.mec_id
-      mechOfActGot = mechanismsOfActionIndex[mechOfActID]
+      mechIdentifier = "#{mechMustBe._source.target_chembl_id}-#{mechMustBe._source.mechanism_of_action}"
+      numRows = _.countBy(parsedDataGot, (mech) -> mech.mech_identifier == mechIdentifier).true
 
-      expect(mechOfActGot?).toBe(true)
-      expect(mechOfActGot.mechanism_of_action).toBe(mechOfActMustBe.mechanism_of_action)
-      expect(mechOfActGot.target_chembl_id).toBe(mechOfActMustBe.target_chembl_id)
+      #there must be only one row
+      expect(numRows).toBe(1)
+
+      # all the refs must be there
+      refsMustBe = mechMustBe._source.mechanism_refs
+      refsGot = mechanismsOfActionIndex[mechIdentifier].mechanism_refs
+
+      for refMustBe in refsMustBe
+        refInRefsGot = _.findWhere(refsGot, {ref_id: refMustBe.ref_id})?
+        expect(refInRefsGot).toBe(true)
+
+  it 'sorts the mechanisms alphabetically by default', ->
+
+     parsedDataGot = list.parse(sampleDataToParse)
+
+     previousMech = 'A'
+     for mechanism in parsedDataGot
+       currentMech = mechanism.mechanism_of_action
+       expect(currentMech >= previousMech).toBe(true)
+       previousMech = currentMech
+
