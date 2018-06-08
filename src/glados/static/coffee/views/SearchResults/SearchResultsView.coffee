@@ -50,7 +50,6 @@ glados.useNameSpace 'glados.views.SearchResults',
     # sort Elements
     # ------------------------------------------------------------------------------------------------------------------
     sortResultsListsViews: ->
-      console.warn('SORITNG!')
       # If an entity is selected the ordering is skipped
       if not @selected_es_entity
         sortedResourceNamesByScore = @model.get('sortedResourceNamesByScore')
@@ -99,10 +98,6 @@ glados.useNameSpace 'glados.views.SearchResults',
       $tabsContainer = $(@el).find('.BCK-summary-tabs-container')
       glados.Utils.fillContentForElement $tabsContainer,
         chips: chipStruct
-
-#      glados.Utils.overrideHrefNavigationUnlessTargetBlank(
-#        $('.BCK-summary-tabs-container').find('a'), @navigateTo.bind(@)
-#      )
 
     openTab: (event) ->
 

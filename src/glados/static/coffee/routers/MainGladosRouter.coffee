@@ -70,8 +70,9 @@ glados.useNameSpace 'glados.routers',
       return url
 
     updateSearchURL: (esEntityKey, searchTerm, currentState, trigger=false)->
+      console.log 'update search url'
       tabLabelPrefix = ''
-      if _.has glados.models.paginatedCollections.Settings.ES_INDEXES, esEntityKey
+      if glados.models.paginatedCollections.Settings.ES_INDEXES[esEntityKey]?
         tabLabelPrefix = glados.models.paginatedCollections.Settings.ES_INDEXES[esEntityKey].LABEL
       breadcrumbLinks = [
         {
