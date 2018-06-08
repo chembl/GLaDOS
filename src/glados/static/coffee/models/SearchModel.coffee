@@ -19,13 +19,13 @@ SearchModel = Backbone.Model.extend
   # --------------------------------------------------------------------------------------------------------------------
 
   # Lazily initialized CompoundResultsList
-  getResultsListsDict: () ->
+  getResultsListsDict: ->
     if not @has('resultsListsDict')
       @set('resultsListsDict',
           glados.models.paginatedCollections.PaginatedCollectionFactory.getAllESResultsListDict())
     return @get('resultsListsDict')
 
-  loadBase64Data: ()->
+  loadBase64Data: ->
     if @egData?
       return @egData
     base64Data = 'W3sidDEiOiAiU09EYUxHIiwidDIiOiAiIWV2aWxhIGxsaXRzIG1hIEkiLCJ0MyI6ICJTT0RhTEcvbGJtZWhjL21vYy5idWh0aW'+

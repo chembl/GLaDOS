@@ -64,7 +64,6 @@ glados.useNameSpace 'glados.views.SearchResults',
     destroyAllTooltips: -> glados.Utils.Tooltips.destroyAllTooltips($(@el))
 
     renderTabs: ->
-      console.warn('RENDERING TABS!')
       @destroyAllTooltips()
       # Always generate chips for the results summary
       chipStruct = []
@@ -110,7 +109,6 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     showSelectedResourceOnly: ->
 
-      console.log 'AAA show selected resource only'
       for currentKey, resultsListSettings of glados.models.paginatedCollections.Settings.ES_INDEXES
         # if there is a selection and this container is not selected it gets hidden if else it shows all resources
         if @selected_es_entity? and @selected_es_entity!= '' and @selected_es_entity != currentKey
