@@ -234,7 +234,7 @@ SearchModel = Backbone.Model.extend
     rls_dict = @getResultsListsDict()
     for resource_name, resource_es_collection of rls_dict
       indexName = resource_es_collection.getMeta('index_name')
-      resource_es_collection.search bestESQueries[indexName].query
+      resource_es_collection.search(bestESQueries[indexName].query, beLazy=true)
       resource_es_collection.setMeta('max_score', bestESQueries[indexName].max_score)
       resource_es_collection.setMeta('total_records', bestESQueries[indexName].total)
     @trigger('updated_search_and_scores')

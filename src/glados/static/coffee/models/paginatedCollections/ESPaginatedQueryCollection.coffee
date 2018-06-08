@@ -186,6 +186,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     # Prepares an Elastic Search query to search in all the fields of a document in a specific index
     fetch: (options, testMode=false) ->
+      console.log 'FETCH LIST: ', @getMeta('label')
       testMode |= @getMeta('test_mode')
       @trigger('before_fetch_elastic')
       @url = @getURL()
@@ -498,7 +499,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             subFacetGroups[facetGroupKey] = facetGroup
         return subFacetGroups
 
-    clearAllFacetsSelections: ->
+    clearAllFacetsSelections: (doFetch=true) ->
 
       for fGroupKey, fGroup of @getFacetsGroups(true, onlyVisible=false)
         fGroup.faceting_handler.clearSelections()
@@ -506,7 +507,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       if @getMeta('test_mode')
         return
       @setMeta('facets_changed', true)
-      @fetch()
+      @fetch() unless not doFetch
 
     # builds the url to do the request
     getURL: ->
@@ -558,13 +559,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # Search functions
     # ------------------------------------------------------------------------------------------------------------------
 
-    search: (searchESQuery)->
+    search: (searchESQuery, beLazy=false)->
+      console.log 'SEARCH LIST: ', @getMeta('label')
+      #beLazy means, set up all the list properties but don't fetch until waking up
       @setMeta('searchESQuery', searchESQuery)
       @resetCache() unless not @getMeta('enable_collection_caching')
       @invalidateAllDownloadedResults()
       @unSelectAll()
       @clearAllResults()
-      @clearAllFacetsSelections()
+      @clearAllFacetsSelections(doFetch=(not beLazy))
+      return
       @setPage(1, false)
 
     # ------------------------------------------------------------------------------------------------------------------
