@@ -15,3 +15,8 @@ describe 'Standard Strings', ->
     numStandardStringsGot = _.keys(standardStringsMustBe).length
 
     expect(numStandardStringsGot).toBe(numStandardStringsMusBe)
+
+  it 'The standard strings have not changed', ->
+
+    for key, value of standardStringsMustBe
+      expect(django.catalog[key]).toBe(value)
