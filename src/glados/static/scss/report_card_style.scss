@@ -545,5 +545,232 @@ div#CNC-zoom-modal {
   }
 }
 
+/**
+* Compound Representations
+* ----------------------------------------------------------------------------------------------------------------------
+*/
 
+.inline-block {
+  display: inline-block;
+  margin-top: 2px;
+}
 
+.inline {
+  display: inline;
+  margin-top: 2px;
+}
+
+.compact-table {
+  display: table;
+  overflow-x: inherit;
+
+  &.scrollable {
+    overflow-x: auto;
+  }
+
+  &.scrolling {
+    display: block;
+  }
+
+  [type="checkbox"] + label {
+    left: 10px;
+    top: 5px;
+  }
+
+  .headers-table {
+    border-collapse: separate;
+
+    &.sort {
+
+      .name-to-show {
+        cursor: pointer;
+      }
+
+      &:hover {
+
+        .sort-icon {
+          color: color($primary-color-name, "accent-4") !important;
+        }
+      }
+    }
+
+    .sort-icon {
+      font-size: 1.3em;
+      cursor: pointer;
+    }
+  }
+  td {
+
+    font-size: 80%;
+    padding: 5px;
+
+    &.number-cell {
+      text-align: right;
+    }
+
+    &.number-cell-center {
+      text-align: center;
+    }
+
+    .vis-container {
+      width: 150px;
+      padding: 5px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  th {
+    font-size: 0.9em;
+  }
+
+}
+
+.table-header-menu {
+
+  &.row {
+    margin-bottom: 0;
+  }
+
+  .buttons-container {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+}
+
+.table-top-scroller-container {
+  overflow-x: auto;
+}
+
+/**
+* Clinical Data
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+
+.ebi-links {
+
+  a {
+    border-bottom: 0 none;
+    color: color("teal", "base");
+  }
+
+  a:hover {
+
+    color: color("teal", "accent-4")
+  }
+
+  span {
+    border-bottom: 0 none;
+    color: color("teal", "base");
+    font-size: 70%;
+  }
+
+  .chembl-breadcrumbs {
+    width: fit-content;
+    display: inline;
+  }
+
+}
+
+.cropped-text-field {
+  position: relative;
+}
+
+.cropped-text-field-input {
+  position: relative;
+}
+
+.cropped-text-field-input {
+  font-family: 'Roboto Mono', 'Ubuntu Mono', courier, sans-serif;
+}
+
+.cropped-text-field-btns {
+  max-height: 32px;
+}
+
+.cropped-text-field-btns .btn-mini {
+  float: right;
+}
+
+.overflow-ellipsis {
+  text-overflow: ellipsis;
+}
+
+.cropped-text-field td {
+  padding: 0;
+}
+
+.cropped-text-field-btns-cell {
+  width: 75px;
+}
+
+/**
+* Molecule Features
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+
+#MoleculeFeaturesCard {
+
+   .row {
+    margin-bottom: 0;
+  }
+}
+
+.mol-features-grid {
+  .col {
+    padding: 2px;
+  }
+
+  .row {
+    margin-bottom: 0;
+  }
+
+  .mol-features-grid {
+    line-height: 1.5;
+  }
+
+  .feat-icon {
+    padding: 5px;
+    border-radius: 2px;
+
+    i {
+      font-size: 2.5em;
+      margin: auto;
+
+      &.table_cell_icon {
+        font-size: 2.5em;
+      }
+    }
+  }
+
+  .off {
+     background-color: #e6e6e6; //grey
+
+    .feature-icon {
+        color: #9a9a9a; //dark grey
+      }
+  }
+
+  .first-row {
+
+    .active {
+      background-color: #7FDBB1; //light green
+
+      .feature-icon {
+        color: #2F7071; //dark green
+        //color: #EEFFEE; //white green
+      }
+    }
+  }
+
+  .second-row {
+
+    .active {
+      background-color: #90CFDA; //LIGHT BLUE
+
+      .feature-icon{
+        color: #39576F; //dark blue
+      }
+    }
+  }
+}
