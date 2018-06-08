@@ -27,7 +27,9 @@
   }
 
   &.active-tooltip {
+
     &:hover {
+
       .css-tooltip {
         visibility: visible;
       }
@@ -60,6 +62,7 @@ a.error-redirect-link {
   font-size: 1.3em;
   color: $chembl-teal;
   text-decoration: underline;
+
   &:hover {
     color: color('teal', 'lighten-1');
     font-size: 1.3em;
@@ -101,7 +104,6 @@ a.error-redirect-link {
     overflow: hidden;
     line-height: 10px;
   }
-
 }
 
 .long-filter-content {
@@ -146,7 +148,6 @@ a.error-redirect-link {
       p {
         margin: 5px 0;
       }
-
     }
 
     img {
@@ -175,6 +176,7 @@ a.error-redirect-link {
       position: relative;
 
       .db-menu-option {
+
         .icon-chembl {
           font-size: 220%;
         }
@@ -338,8 +340,4 @@ a.error-redirect-link {
       }
     }
   }
-
 }
-
-
-

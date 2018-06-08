@@ -642,28 +642,35 @@ $vis-dark: #0D343A;
 
 .visualisation-card {
   height: 100%;
+
   .card-content {
     padding: 5px;
     height: 100%;
+
     .row {
       margin: 0;
     }
+
     .main-histogram-container {
       height: 100%;
       background-color: white;
+
       .histogram {
         height: calc(100% - 85px);
       }
+
       .histogram-legend {
         max-height: 80px;
         margin: 0;
-
       }
     }
+
     .principal-pie-container {
       height: calc(100% - 30px);
+
       .main-pie-container {
         height: 100%;
+
         .pie-content {
           height: 100%;
         }
@@ -672,8 +679,10 @@ $vis-dark: #0D343A;
 
     .target-browser {
       height: 100%;
+
       .browser-as-circles {
         height: 100%;
+
         .vis-container {
           height: calc(100% - 10px);
         }

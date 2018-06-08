@@ -2,16 +2,21 @@
 
 .cards-container {
   // Arrange materialize floating elements just in case flex does not work
+  display: flex;
+  flex-flow: row wrap;
+
   @media #{$small-and-down}{
     .col:nth-child(n+1) {
       clear: left;
     }
   }
+
   @media #{$medium-only}{
     .col:nth-child(2n+1) {
       clear: left;
     }
   }
+
   @media #{$large-and-up} {
     .col:nth-child(3n+1) {
       clear: left;
@@ -21,9 +26,6 @@
   &.infinite-cards {
     width: 100%;
   }
-
-  display: flex;
-  flex-flow: row wrap;
 
   .col {
 
@@ -109,8 +111,6 @@
   border-top: 2px solid color('cyan', 'lighten-3');
 }
 
-
-
 /*
 * Paginated Collections
 * ----------------------------------------------------------------------------------------------------------------------
@@ -129,7 +129,6 @@ $chembl-header-height: 52.245px;
 .number-of-results {
   margin-left: 30px !important;
 }
-
 
 .paginated-collection {
   padding: 4px;
@@ -152,7 +151,6 @@ $chembl-header-height: 52.245px;
     .hidden_header, .hidden_cell {
       display: none;
     }
-
   }
 
   .hidden_list_prop {
@@ -256,12 +254,6 @@ $chembl-header-height: 52.245px;
         }
       }
 
-      &.dragged-over {
-
-        .item-content {
-        }
-      }
-
       &.being-dragged {
         display: none;
       }
@@ -277,7 +269,6 @@ $chembl-header-height: 52.245px;
     }
   }
 }
-
 
 /**
 * Custom Tabs
@@ -322,7 +313,6 @@ $chevron-button-margin: 0px;
   #SimilarCompoundsCard, #AlternateFormsOfCompoundInChEMBL {
     max-width: 500px !important;
   }
-
 }
 
 .carousel-container {
@@ -349,6 +339,7 @@ $chevron-button-margin: 0px;
           color: #848484;
           font-size: 2.5em;
         }
+
         i:hover {
           transition: all 100ms ease-in-out;
           color: #4e4e4e;
@@ -357,22 +348,25 @@ $chevron-button-margin: 0px;
     }
 
     .page-selector.disabled a {
+      cursor: default;
+      pointer-events: none;
+
       i {
         color: #cccccc;
       }
-      cursor: default;
-      pointer-events: none;
     }
 
     .page-selector.right {
       border-radius: 80px 0 0 80px;
       box-shadow: -2px 0 2px 0px rgba(169, 169, 169, 0.38);
     }
+
     .page-selector.left {
       border-radius: 0 80px 80px 0;
       box-shadow: 2px 0 2px 0px rgba(169, 169, 169, 0.38);
     }
   }
+
   .items-container {
     margin-bottom: 0;
     margin-left: $chevron-button-margin;
@@ -382,6 +376,7 @@ $chevron-button-margin: 0px;
 
     .carousel-card {
       width: calc(100% - 10px);
+
       .card-container {
         width: 85%;
         margin-left: auto;
@@ -396,7 +391,5 @@ $chevron-button-margin: 0px;
         }
       }
     }
-
   }
 }
-

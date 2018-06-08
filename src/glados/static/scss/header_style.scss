@@ -270,7 +270,6 @@ header .row {
 
   .search-bar {
     max-width: $search-bar-max-width-xl;
-
   }
 }
 
@@ -444,6 +443,7 @@ header .row {
 
 /* -------- TOGGLE DROPDOWNS  -------- */
 .dropdown:hover {
+
   .dropdown-contents.more-section {
     margin-top: 0;
   }
@@ -463,6 +463,7 @@ header .row {
 
 /* -------- FIX DROPDOWN TOP IN DIFFERENT SIZES  -------- */
 #chembl-header-container.pinned {
+
   .burger-dropdown {
 
     .dropdown-contents {
@@ -474,6 +475,7 @@ header .row {
 @media (min-width: 640px) and (max-width: 992px) {
 
   #chembl-header-container.pin-top {
+
     .burger-dropdown {
 
       .dropdown-contents {
@@ -486,6 +488,7 @@ header .row {
 @media (max-width: 640px) {
 
   #chembl-header-container.pin-top {
+
     .burger-dropdown {
 
       .dropdown-contents {

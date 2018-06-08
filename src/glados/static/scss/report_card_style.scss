@@ -17,8 +17,6 @@
   }
 }
 
-
-
 .table-of-contents a.active {
   border-left: 2px solid $h3-color;
 }
@@ -251,9 +249,7 @@ div#CompoundNameAndClassification .comp-phase-0 {
 .CNC-expandable-content-left .container,
 .CNC-expandable-content-top .container,
 .CNC-expandable-content-bottom .container {
-
   width: 90%;
-
 }
 
 .position-relative {
@@ -265,7 +261,8 @@ div#CompoundNameAndClassification .comp-phase-0 {
   color: white;
   padding: 0 4px;
   top: -3px;
-  right: 0px;
+  right: 0;
+
   &.inverted {
     color: $primary-color-dark
   }
@@ -460,7 +457,9 @@ div#CNC-zoom-modal {
 */
 
 .section {
+
   .max-height-col {
+
     .card-content {
       max-height: 500px;
     }
