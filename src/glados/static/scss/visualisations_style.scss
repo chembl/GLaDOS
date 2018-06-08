@@ -634,3 +634,72 @@ $vis-dark: #0D343A;
 .vis-paragraph {
   color: #4d5456;
 }
+
+/**
+* Visualisation Cards
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+
+.visualisation-card {
+  height: 100%;
+  .card-content {
+    padding: 5px;
+    height: 100%;
+    .row {
+      margin: 0;
+    }
+    .main-histogram-container {
+      height: 100%;
+      background-color: white;
+      .histogram {
+        height: calc(100% - 85px);
+      }
+      .histogram-legend {
+        max-height: 80px;
+        margin: 0;
+
+      }
+    }
+    .principal-pie-container {
+      height: calc(100% - 30px);
+      .main-pie-container {
+        height: 100%;
+        .pie-content {
+          height: 100%;
+        }
+      }
+    }
+
+    .target-browser {
+      height: 100%;
+      .browser-as-circles {
+        height: 100%;
+        .vis-container {
+          height: calc(100% - 10px);
+        }
+      }
+    }
+  }
+}
+
+.all-sources-link {
+  font-size: 80%;
+}
+
+.about-chembl {
+  height: 100%;
+  p {
+
+    color: rgba(0, 133, 121, 0.91) !important;
+    font-family: "Sentinel SSm A", "Sentinel SSm B", "sans-serif";
+    font-style: italic;
+    line-height: 1.4em;
+    font-size: 1.2em;
+
+    margin: 0 10px 0 20px !important;
+
+    b {
+      color: rgba(0, 133, 121, 0.91) !important;
+    }
+  }
+}

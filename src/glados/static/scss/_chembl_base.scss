@@ -121,3 +121,68 @@ a {
 footer {
   padding-top: 0 !important;
 }
+
+
+
+/**
+* Buttons
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+
+.dotted-link {
+  border-bottom: 1px dotted;
+}
+
+.close-corner-button {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+}
+
+.btn-chembl {
+  color: #ffffff;
+  border-radius: $default-btn-border-radius;
+  padding: 10px 20px;
+  text-align: center;
+}
+
+.btn-small {
+  color: #ffffff;
+  border-radius: $default-btn-border-radius;
+  padding: 10px 6px 6px 6px;
+  text-align: center;
+  width: 60px;
+  line-height: 9px;
+  font-size: 9px;
+}
+
+.btn-mini i,
+.btn-small i {
+  font-size: 180%;
+}
+
+.btn-micro i {
+  font-size: 150%;
+}
+
+.btn-mini {
+  color: #ffffff;
+  border-radius: $default-btn-border-radius;
+  padding: 10px 3px 6px 3px;
+  text-align: center;
+  width: 30px;
+  line-height: 9px;
+  font-size: 9px;
+  margin-left: 4px;
+}
+
+.btn-micro {
+  color: #ffffff;
+  border-radius: $default-btn-border-radius;
+  padding: 8px 2px 4px 2px;
+  text-align: center;
+  width: 25px;
+  line-height: 9px;
+  font-size: 9px;
+  margin-left: 4px;
+}
