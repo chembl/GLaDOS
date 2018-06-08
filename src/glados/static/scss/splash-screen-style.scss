@@ -9,60 +9,73 @@ $splash-color2: #FE7F9D;
 $chembl-helvetica: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
 
 @keyframes one {
+
   0%, 5%, 95%, 100% {
     transform: translate($splash-width/2,0px) scale(1);
   }
+
   50%, 45%, 55% {
     transform: translate(0px,$splash-width/4) scale(0.6);
   }
 }
 
 @keyframes one-half {
+
   0%, 5%, 95%, 100% {
     transform: translate(0px,$splash-width/4) scale(1);
   }
+
   50%, 45%, 55% {
     transform: translate($splash-width/2,0px) scale(0.6);
   }
 }
 
 @keyframes two {
+
   0%, 5%, 95%, 100%{
     transform: translate(0px,3*$splash-width/4) scale(1);
   }
+
   50%, 45%, 55% {
     transform: translate($splash-width,$splash-width/4) scale(0.6);
   }
 }
 
 @keyframes two-half {
+
   0%, 5%, 95%, 100%{
     transform: translate($splash-width,$splash-width/4) scale(1);
   }
+
   50%, 45%, 55% {
     transform: translate(0px,3*$splash-width/4) scale(0.6);
   }
 }
 
 @keyframes three {
+
   0%, 5%, 95%, 100% {
     transform: translate($splash-width/2,$splash-width) scale(1);
   }
+
   50%, 45%, 55% {
     transform: translate($splash-width,3*$splash-width/4) scale(0.6);
   }
 }
 
 @keyframes three-half {
+
   0%, 5%, 95%, 100% {
     transform: translate($splash-width,3*$splash-width/4) scale(1);
   }
+
   50%, 45%, 55% {
     transform: translate($splash-width/2,$splash-width) scale(0.6);
   }
 }
 
 @keyframes ease-to-white {
+
   0% { background-color: rgba(0, 0, 0, 0.9); }
   100% { background-color: rgba(0, 0, 0, 0.4); }
 }

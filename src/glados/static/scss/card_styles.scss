@@ -1,0 +1,395 @@
+@import "chembl_base";
+
+.cards-container {
+  // Arrange materialize floating elements just in case flex does not work
+  display: flex;
+  flex-flow: row wrap;
+
+  @media #{$small-and-down}{
+    .col:nth-child(n+1) {
+      clear: left;
+    }
+  }
+
+  @media #{$medium-only}{
+    .col:nth-child(2n+1) {
+      clear: left;
+    }
+  }
+
+  @media #{$large-and-up} {
+    .col:nth-child(3n+1) {
+      clear: left;
+    }
+  }
+
+  &.infinite-cards {
+    width: 100%;
+  }
+
+  .col {
+
+    .card {
+
+      .checkbox-container {
+        z-index: 4;
+        position: absolute;
+        right: -15px;
+        top: 0;
+
+        [type="checkbox"].filled-in:not(:checked) + label:after {
+          border-color: color('grey', 'lighten-1')
+        }
+      }
+
+      .card-content {
+        position: relative;
+      }
+
+      .slide-more-info {
+        width: 100%;
+
+        a {
+          display: inline-block;
+          width: 100%;
+
+          &:hover {
+            background-color: color($primary-color-name, 'lighten-5');
+          }
+        }
+
+        &.opener {
+          position: absolute;
+          top: 0;
+          left: 0;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+      }
+
+      .details {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        bottom: 0;
+        left: 0;
+        display: none;
+
+        .details-content {
+          padding: 4px;
+        }
+
+        .tabs-container {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          margin-left: auto;
+          margin-right: auto;
+          width: 100%;
+
+        }
+
+        .tabs-contents {
+          height: calc(100% - 45px);
+          overflow-y: scroll;
+
+          .compound-details {
+            overflow-y: scroll;
+          }
+        }
+      }
+    }
+  }
+}
+
+.card {
+  position: relative;
+}
+
+.card-top-border {
+  border-top: 2px solid color('cyan', 'lighten-3');
+}
+
+/*
+* Paginated Collections
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+
+$chembl-header-height: 52.245px;
+
+.pagination {
+  margin: 0;
+
+  a {
+    font-size: 1em;
+  }
+}
+
+.number-of-results {
+  margin-left: 30px !important;
+}
+
+.paginated-collection {
+  padding: 4px;
+
+  .paginator-row {
+    margin-top: 20px;
+  }
+
+  .pg-table {
+    margin-left: 8px;
+
+    .pinned-header {
+      background-color: rgb(255, 255, 255);
+      position: fixed;
+      z-index: 2;
+      top: 3.2em;
+      border-bottom: solid 0.5px #f1f1f1;
+    }
+
+    .hidden_header, .hidden_cell {
+      display: none;
+    }
+  }
+
+  .hidden_list_prop {
+    display: none;
+  }
+
+  .pagination {
+    margin: 0;
+    li {
+      a {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .paginated-card {
+
+    .card-stacked {
+      width: 50%;
+
+      .card-content {
+        padding: 0.75em;
+      }
+    }
+  }
+}
+
+.row {
+
+  &.row-hidden {
+    margin-bottom: 0px;
+  }
+}
+
+.card-content {
+
+  .main-container-row {
+    margin-bottom: 0px;
+    height: 100%;
+  }
+}
+
+.mini-report-card {
+
+  .card-content {
+
+    &.has-img {
+      width: 60%
+    }
+  }
+
+  .empty-list-message {
+    margin-bottom: 0;
+
+    .h5 {
+      margin: 0;
+    }
+  }
+}
+
+.show-hide-columns {
+
+  .sortable-items-container {
+    position: relative;
+
+    .sortable-item {
+      padding: 0 0.25rem;
+
+      .item-content {
+        margin-top: 2px;
+        border-radius: $default-btn-border-radius;
+        white-space: nowrap;
+
+        input {
+          width: 0;
+          height: 0;
+        }
+
+        label {
+          margin-top: 1px;
+          padding-left: 25px;
+        }
+
+        .item-checkbox, .property-name {
+          display: inline-block;
+        }
+
+        .property-name {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          width: calc(100% - 50px);
+        }
+
+        &:hover {
+          background-color: color('grey', 'lighten-3');
+        }
+
+        [type="checkbox"] {
+          position: static;
+        }
+      }
+
+      &.being-dragged {
+        display: none;
+      }
+    }
+
+    .drag-dummy {
+      display: none;
+      background-color: color('grey', 'lighten-2');
+
+      &.show {
+        display: initial;
+      }
+    }
+  }
+}
+
+/**
+* Custom Tabs
+* ----------------------------------------------------------------------------------------------------------------------
+*/
+
+.card-tabs {
+  background-color: white;
+
+  .section-item {
+    padding: 10px 10px;
+    margin: 0px 0px;
+    color: color('grey', 'darken-2');
+    display: inline-block;
+
+    &.selected {
+      color: color('black', 'base');
+      border-bottom: 2px solid color($primary-color-name, 'base');
+      background-color: color('grey', 'lighten-5');
+    }
+
+    &:not(.selected):hover {
+      color: color('grey', 'darken-4');
+      border-bottom: 2px solid color($primary-color-name, 'lighten-3');
+    }
+  }
+
+  &.scrollable {
+    white-space: nowrap;
+    overflow-x: auto;
+  }
+}
+
+/* carrousel with overlay buttons
+* --------------------------------------------
+*/
+
+$chevron-button-size: 40px;
+$chevron-button-margin: 0px;
+
+@media (max-width: 600px) {
+  #SimilarCompoundsCard, #AlternateFormsOfCompoundInChEMBL {
+    max-width: 500px !important;
+  }
+}
+
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+
+  .chevron-container {
+    z-index: 10;
+    position: absolute;
+    top: 25%;
+    left: 0.75em;
+    width: 100%;
+
+    .page-selector {
+      background-color: rgba(250, 250, 250, 0.73) !important;
+      height: $chevron-button-size * 2;
+      width: $chevron-button-size;
+
+      a {
+        height: 2.5em;
+
+        i {
+          transition: all 100ms ease-in-out;
+          color: #848484;
+          font-size: 2.5em;
+        }
+
+        i:hover {
+          transition: all 100ms ease-in-out;
+          color: #4e4e4e;
+        }
+      }
+    }
+
+    .page-selector.disabled a {
+      cursor: default;
+      pointer-events: none;
+
+      i {
+        color: #cccccc;
+      }
+    }
+
+    .page-selector.right {
+      border-radius: 80px 0 0 80px;
+      box-shadow: -2px 0 2px 0px rgba(169, 169, 169, 0.38);
+    }
+
+    .page-selector.left {
+      border-radius: 0 80px 80px 0;
+      box-shadow: 2px 0 2px 0px rgba(169, 169, 169, 0.38);
+    }
+  }
+
+  .items-container {
+    margin-bottom: 0;
+    margin-left: $chevron-button-margin;
+    margin-right: $chevron-button-margin;
+    position: relative;
+    display: flex;
+
+    .carousel-card {
+      width: calc(100% - 10px);
+
+      .card-container {
+        width: 85%;
+        margin-left: auto;
+        margin-right: auto;
+
+        .card-content {
+          padding: 10px 10px 5px 10px;
+
+          .p-oneline a {
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+  }
+}

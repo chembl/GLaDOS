@@ -1,0 +1,223 @@
+/**** CUSTOM RESPONSIVE SIZES FOR CAROUSEL CARDS ********/
+
+.carousel-card.card-s1 {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(100% / (12 / 1));
+}
+
+.carousel-card.card-s2 {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(100% / (12 / 2));
+}
+
+.carousel-card.card-s3 {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(100% / (12 / 3));
+}
+
+.carousel-card.card-s4 {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(100% / (12 / 4));
+}
+
+.carousel-card.card-s5 {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(100% / (12 / 5));
+}
+
+.carousel-card.card-s6 {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(100% / (12 / 6));
+}
+
+.carousel-card.card-s7 {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(100% / (12 / 7));
+}
+
+.carousel-card.card-s8 {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(100% / (12 / 8));
+}
+
+.carousel-card.card-s9 {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(100% / (12 / 9));
+}
+
+.carousel-card.card-s10 {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(100% / (12 / 10));
+}
+
+.carousel-card.card-s11 {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: calc(100% / (12 / 11));
+}
+
+.carousel-card.card-s12 {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 100%;
+}
+
+@media (min-width: 601px) {
+
+  .carousel-card.card-m1 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 1));
+  }
+
+  .carousel-card.card-m2 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 2));
+  }
+
+  .carousel-card.card-m3 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 3));
+  }
+
+  .carousel-card.card-m4 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 4));
+  }
+
+  .carousel-card.card-m5 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 5));
+  }
+
+  .carousel-card.card-m6 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 6));
+  }
+
+  .carousel-card.card-m7 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 7));
+  }
+
+  .carousel-card.card-m8 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 8));
+  }
+
+  .carousel-card.card-m9 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 9));
+  }
+
+  .carousel-card.card-m10 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 10));
+  }
+
+  .carousel-card.card-m11 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 11));
+  }
+
+  .carousel-card.card-m12 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 12));
+  }
+}
+
+@media (min-width: 992px) {
+
+  .carousel-card.card-l1 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 1));
+  }
+
+  .carousel-card.card-l2 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 2));
+  }
+
+  .carousel-card.card-l3 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 3));
+  }
+
+  .carousel-card.card-l4 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 4));
+  }
+
+  .carousel-card.card-l5 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 5));
+  }
+
+  .carousel-card.card-l6 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 6));
+  }
+
+  .carousel-card.card-l7 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 7));
+  }
+
+  .carousel-card.card-l8 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 8));
+  }
+
+  .carousel-card.card-l9 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 9));
+  }
+
+  .carousel-card.card-l10 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 10));
+  }
+
+  .carousel-card.card-l11 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 11));
+  }
+
+  .carousel-card.card-l12 {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: calc(100% / (12 / 12));
+  }
+}

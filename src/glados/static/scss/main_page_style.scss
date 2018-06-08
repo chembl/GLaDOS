@@ -74,7 +74,6 @@ $full-header-height-large: 180px;
 
     .section-col {
       height: 100%;
-
     }
   }
 
@@ -309,6 +308,7 @@ $full-header-height-large: 180px;
         }
 
         &:hover {
+
           img {
             padding: 2px;
           }
@@ -444,6 +444,7 @@ $full-header-height-large: 180px;
           transition: box-shadow 100ms ease-in;
 
           &:hover {
+
             .chevron-icon {
               color: $primary-color;
             }
@@ -640,6 +641,7 @@ $full-header-height-large: 180px;
 
 /* -------- MEDIUM SCREEN -------- */
 .main-page-container {
+
   @media (max-width: 600px) {
 
     .papers {
@@ -703,7 +705,6 @@ $full-header-height-large: 180px;
       padding-left: 0;
       padding-right: 0;
     }
-
   }
 
   @media (min-width: 600px) {
@@ -824,5 +825,4 @@ $full-header-height-large: 180px;
       }
     }
   }
-
 }
