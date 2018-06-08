@@ -556,20 +556,25 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return _.has(@meta, attr)
 
     # ------------------------------------------------------------------------------------------------------------------
-    # Search functions
+    # Cleanup
     # ------------------------------------------------------------------------------------------------------------------
+    cleanUpList: (doFetch) ->
 
-    search: (searchESQuery, beLazy=false)->
-      console.log 'SEARCH LIST: ', @getMeta('label')
-      #beLazy means, set up all the list properties but don't fetch until waking up
-      @setMeta('searchESQuery', searchESQuery)
       @resetCache() unless not @getMeta('enable_collection_caching')
       @invalidateAllDownloadedResults()
       @unSelectAll()
       @clearAllResults()
-      @clearAllFacetsSelections(doFetch=(not beLazy))
-      return
-      @setPage(1, false)
+      @clearAllFacetsSelections(doFetch)
+      @setPage(1, doFetch)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Search functions
+    # ------------------------------------------------------------------------------------------------------------------
+
+    search: (searchESQuery, doFetch=false)->
+      console.log 'SEARCH LIST: ', @getMeta('label')
+      @setMeta('searchESQuery', searchESQuery)
+      @cleanUpList(doFetch)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Pagination functions
