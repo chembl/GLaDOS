@@ -7,8 +7,18 @@
  Typography and colours
 ----------------------------------------------------------------------------------------------------------------------*/
 
-$chembl-teal: color("teal", "darken-3");
+/* BASE COLOURS */
+
+$chembl-teal: color("teal", "base");
+$lighter-teal: color("teal", "lighten-3");
+$darker-teal: color("teal", "darken-3");
+
+$grey-light: #e9e9e9;
+$grey-medium: #707779;
+$grey-dark: #4d5456;
+
 $chembl-highlight: #FE7F9D;
+
 
 .chembl-teal {
   background-color: $chembl-teal !important;
@@ -18,12 +28,12 @@ $chembl-highlight: #FE7F9D;
   color: $chembl-teal !important;
 }
 
-$h1-color: #f7f7f7;
-$h2-color: $chembl-teal;
-$h3-color: #996a44;
-$h4-color: #222;
-$h5-color: #222;
-$h6-color: #222;
+$h1-color: $grey-light;
+$h2-color: $darker-teal;
+$h3-color: $grey-dark;
+$h4-color: $grey-medium;
+$h5-color: $grey-dark;
+$h6-color: $grey-dark;
 
 $synonyms-color: color('green', 'lighten-4');
 $tradenames-color: color('light-green', 'lighten-3');
@@ -70,7 +80,7 @@ h5 {
 }
 
 h6 {
-  color: $h5-color;
+  color: $h6-color;
   font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
   font-size: 123.1%;
 }
@@ -108,7 +118,6 @@ a {
     color: color('grey', 'base')
   }
 
-  /** make sure all links hav the hand pointer even with no href */
   &:hover {
     cursor: pointer;
   }
@@ -121,7 +130,6 @@ a {
 footer {
   padding-top: 0 !important;
 }
-
 
 
 /**

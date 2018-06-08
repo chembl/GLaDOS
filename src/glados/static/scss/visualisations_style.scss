@@ -1,12 +1,23 @@
-@import "components/color";
-@import "components/variables";
+@import "chembl_base";
 
 
 /* ---------------------------------------------------------------------------------------------------------------------
  Browse as circles
-----------------------------------------------------------------------------------------------------------------------*/
-$vis-teal: #09979B;
-$vis-dark: #0D343A;
+----------------------------------------------------------------------------------------------------------------------*/ $teal-3: #09979B;
+
+$teal-1: #0D343A;
+$teal-2: #025C5E;
+$teal-3: #09979B;
+$teal-4: #75D8D5;
+$teal-5: #C4E6E5;
+$teal-6: #D4FAF7;
+
+$red-1: #65323E;
+$red-2: #D33C60;
+$red-3: #FE7F9D;
+$red-4: #FFC0CB;
+$red-5: #F1D6DB;
+
 
 .browser-as-circles {
   position: relative;
@@ -21,16 +32,16 @@ $vis-dark: #0D343A;
 
     &.hoverable {
       stroke-width: 1px;
-      stroke: $vis-teal;
+      stroke: $teal-3;
 
       &:hover, &.force-hover {
-        stroke: $vis-teal;
+        stroke: $teal-3;
         stroke-width: 2px;
       }
     }
 
     &.selected {
-      stroke: $vis-teal;
+      stroke: $teal-3;
       stroke-width: 2px;
       stroke-dasharray: 8;
     }
@@ -43,7 +54,7 @@ $vis-dark: #0D343A;
   .label {
     text-anchor: middle;
     text-shadow: 0 0.8px 0 #fff, 0.8px 0 0 #fff, -0.8px 0 0 #fff, 0 -0.8px 0 #fff;
-    fill: $vis-dark;
+    fill: $teal-1;
     font-family: 'Open Sans', sans-serif;
   }
 
@@ -53,7 +64,7 @@ $vis-dark: #0D343A;
   }
 
   .incomplete {
-    stroke: $vis-teal;
+    stroke: $teal-3;
     stroke-width: 2;
     stroke-dasharray: 10;
   }
@@ -599,7 +610,7 @@ $vis-dark: #0D343A;
   .button {
     font-size: 1em;
     padding: 10px 20px;
-    background-color: $vis-teal;
+    background-color: $teal-3;
     color: white;
     border-radius: 4px;
     letter-spacing: 0.02em;
@@ -608,15 +619,15 @@ $vis-dark: #0D343A;
     transition: background-color 100ms ease;
 
     &:hover {
-      background-color: $vis-dark;
+      background-color: $teal-1;
     }
   }
 
   .hollow-button {
     padding: 8px 12px;
     background-color: white;
-    color: $vis-teal;
-    border: solid $vis-teal 2px;
+    color: $teal-3;
+    border: solid $teal-3 2px;
     border-radius: 1px;
     letter-spacing: 0.02em;
 
@@ -624,15 +635,15 @@ $vis-dark: #0D343A;
 }
 
 .header-dark-grey {
-  color: #4d5456;
+  color: $grey-dark;
 }
 
 .dark-green-header{
-  color: #0d595f;
+  color: $darker-teal;
 }
 
 .vis-paragraph {
-  color: #4d5456;
+  color: $grey-dark;
 }
 
 /**
