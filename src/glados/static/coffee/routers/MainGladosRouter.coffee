@@ -18,6 +18,7 @@ glados.useNameSpace 'glados.routers',
     initMainPage: -> glados.apps.Main.MainGladosApp.initMainPage()
 
     initSearchResults: (currentTab, searchTerm, currentState) ->
+
       [selectedESEntity, searchTerm, currentState] = \
         glados.routers.MainGladosRouter.validateAndParseSearchURL(currentTab, searchTerm, currentState)
       glados.routers.MainGladosRouter.updateSearchURL(selectedESEntity, searchTerm, currentState)
@@ -89,18 +90,12 @@ glados.useNameSpace 'glados.routers',
             truncate: true
           }
         )
-      # Do the navigation before setting up the breadcrumb so the share button has the right url
-      if trigger and not window.location.href.startsWith(glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL)
-        window.location.href = @getSearchURL(esEntityKey, searchTerm, currentState)
-      else
-        glados.routers.MainGladosRouter.getInstance().navigate(
-          @getSearchURL(esEntityKey, searchTerm, currentState, true),
-          {
-            'trigger': trigger
-          }
-        )
-        glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
 
+      # This makes sure that the url and the breadcrumbs are correct. It is the job of the SearchResultsView to
+      # to show the correct tab.
+      glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
+      newSearchURL = @getSearchURL(esEntityKey, searchTerm, currentState, true)
+      glados.routers.MainGladosRouter.getInstance().navigate(newSearchURL)
 
     validateAndParseSearchURL: (tab, searchTerm, state)->
       selectedESEntity = null
