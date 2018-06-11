@@ -5,6 +5,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     initialize: ->
 
       @setInitialFetchingState()
+      @setInitialSearchState()
       if @islinkToAllActivitiesEnabled()
         @on glados.Events.Collections.SELECTION_UPDATED, @resetLinkToAllActivitiesCache, @
 
@@ -130,9 +131,17 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     itemsAreInInitalState: -> @getMeta('items_fetching_state') == \
       glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.INITIAL_STATE
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # Searching state handling
+    # ------------------------------------------------------------------------------------------------------------------
+    getSearchState: -> @getMeta('search_state')
+    setInitialSearchState: -> @setMeta('search_state',
+      glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_UNDEFINED)
+
 glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS =
   ITEMS_FETCHING_STATE_CHANGED: 'ITEMS_FETCHING_STATE_CHANGED'
   FACETS_FETCHING_STATE_CHANGED: 'FACETS_FETCHING_STATE_CHANGED'
+#  SEAR
 
 glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES =
   INITIAL_STATE: 'INITIAL_STATE'
@@ -143,3 +152,6 @@ glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATE
   INITIAL_STATE: 'INITIAL_STATE'
   FETCHING_FACETS: 'FETCHING_FACETS'
   FACETS_READY: 'FACETS_READY'
+
+glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES =
+  SEARCH_UNDEFINED: 'SEARCH_UNDEFINED'

@@ -175,6 +175,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     sleepView: ->
     wakeUpView: ->
 
+      console.log 'collection: ', @collection
       console.log 'facets state: ', @collection.getMeta('facets_fetching_state')
       console.log 'items state: ', @collection.getMeta('items_fetching_state')
       console.log 'waking up view for collection: ', @collection.getMeta('label')
@@ -186,6 +187,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     checkIfNeedToAndFetchCollection: ->
       # This checks if the collection has not been fetched and it needs to be done
+      console.log 'list needs to be fetched'
       collNeedsToBeFetched = @collection.itemsAreInInitalState() and @collection.facetsAreInInitalState()
       if collNeedsToBeFetched
         @collection.fetch()
