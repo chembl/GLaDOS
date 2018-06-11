@@ -11,7 +11,6 @@ describe "An elasticsearch collection", ->
       esList = glados.models.paginatedCollections.PaginatedCollectionFactory.getAllESResultsListDict()[\
       glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND.KEY_NAME
       ]
-      esList.setMeta('searchESQuery', searchESQuery)
       esList.setMeta('test_mode', true)
       TestsUtils.simulateFacetsESList(esList, glados.Settings.STATIC_URL + 'testData/FacetsTestData.json', done)
 
@@ -40,3 +39,7 @@ describe "An elasticsearch collection", ->
       searchStateGot = esList.getSearchState()
       searchStateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_UNDEFINED
       expect(searchStateGot).toBe(searchStateMustBe)
+
+    it 'Sets the correct state when setting a search', ->
+
+#      esList
