@@ -124,7 +124,14 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     showAllTabs: ->
 
-      console.log 'show all tabs'
+      sortedResources = @model.get('sortedResourceNamesByScore')
+      firstResourceKey = sortedResources[0]
+
+      for currentKey, resultsListSettings of glados.models.paginatedCollections.Settings.ES_INDEXES
+        # if there is a selection and this container is not selected it gets hidden if else it shows all resources
+        if currentKey == firstResourceKey
+          @browsersDict[currentKey].wakeUp()
+        @$searchResultsListsContainersDict[currentKey].show()
 
     showSelectedTabOnly: ->
 
