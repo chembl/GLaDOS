@@ -42,4 +42,7 @@ describe "An elasticsearch collection", ->
 
     it 'Sets the correct state when setting a search', ->
 
-#      esList
+      esList.search(searchESQuery, doFetch=false)
+      searchStateGot = esList.getSearchState()
+      searchStateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_QUERY_SET
+      expect(searchStateGot).toBe(searchStateMustBe)

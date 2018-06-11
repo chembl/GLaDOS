@@ -575,6 +575,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     search: (searchESQuery, doFetch=false)->
       console.log 'SEARCH LIST: ', @getMeta('label')
       @setMeta('searchESQuery', searchESQuery)
+      @setSearchState(glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_QUERY_SET)
       @cleanUpList(doFetch)
 
     # ------------------------------------------------------------------------------------------------------------------
