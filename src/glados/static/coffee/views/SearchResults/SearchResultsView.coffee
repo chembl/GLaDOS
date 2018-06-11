@@ -41,7 +41,7 @@ glados.useNameSpace 'glados.views.SearchResults',
           @browsersDict[resourceName] = resultsBrowserI
           @$searchResultsListsContainersDict[resourceName] = $('#' + resultsListViewID + '-container')
 
-      @showSelectedResourceOnly()
+      @hideAllResources()
       @model.off('updated_search_and_scores')
       @model.on('updated_search_and_scores', @sortResultsListsViews, @)
       @model.on('updated_search_and_scores', @renderTabs, @)
@@ -50,13 +50,16 @@ glados.useNameSpace 'glados.views.SearchResults',
     # sort Elements
     # ------------------------------------------------------------------------------------------------------------------
     sortResultsListsViews: ->
+
       # If an entity is selected the ordering is skipped
       if not @selected_es_entity
         sortedResourceNamesByScore = @model.get('sortedResourceNamesByScore')
         for resource_name in sortedResourceNamesByScore
           idToMove =  @getBCKListContainerBaseID(resource_name) + '-container'
-          $div_key_i = @$listsContainer.find('.' + idToMove)
+          $div_key_i = @$listsContainer.find("##{idToMove}")
           @$listsContainer.append($div_key_i)
+
+      @showSelectedResourceOnly()
 
     # ------------------------------------------------------------------------------------------------------------------
     # Tabs Handling
@@ -118,7 +121,12 @@ glados.useNameSpace 'glados.views.SearchResults',
           @$searchResultsListsContainersDict[currentKey].show()
           @browsersDict[currentKey].wakeUp()
 
+    hideAllResources: ->
 
+      for currentKey, resultsListSettings of glados.models.paginatedCollections.Settings.ES_INDEXES
+
+        @$searchResultsListsContainersDict[currentKey].hide()
+        @browsersDict[currentKey].sleep()
     # ------------------------------------------------------------------------------------------------------------------
     # Helper functions
     # ------------------------------------------------------------------------------------------------------------------
