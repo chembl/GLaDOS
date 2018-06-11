@@ -566,6 +566,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @clearAllResults()
       @clearAllFacetsSelections(doFetch)
       @setPage(1, doFetch)
+      @setInitialFetchingState()
 
     # ------------------------------------------------------------------------------------------------------------------
     # Search functions

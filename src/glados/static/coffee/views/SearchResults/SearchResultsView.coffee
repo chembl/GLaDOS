@@ -115,6 +115,7 @@ glados.useNameSpace 'glados.views.SearchResults',
           @$searchResultsListsContainersDict[currentKey].hide()
         else
           @$searchResultsListsContainersDict[currentKey].show()
+          console.log 'GOING TO WAKE UP: ', currentKey
           @browsersDict[currentKey].wakeUp()
 
 

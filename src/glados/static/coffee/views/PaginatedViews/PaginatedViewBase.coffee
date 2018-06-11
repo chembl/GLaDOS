@@ -174,6 +174,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     sleepView: ->
     wakeUpView: ->
+      console.log 'waking up view for collection: ', @collection.getMeta('label')
       if @checkAndRenderIfNoItems()
         return
       @requestCurrentPage()
