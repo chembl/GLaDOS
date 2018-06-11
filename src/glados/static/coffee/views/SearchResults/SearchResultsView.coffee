@@ -16,6 +16,9 @@ glados.useNameSpace 'glados.views.SearchResults',
       @model.resetSearchResultsListsDict()
       resultsListsDict = @model.getResultsListsDict()
 
+      $tabsContainer = $(@el).find('.BCK-summary-tabs-container')
+      glados.Utils.fillContentForElement $tabsContainer, {}, customTemplate=undefined, fillWithPreloader=true
+
       @$listsContainer.empty()
       for resourceName, resultsListSettings of glados.models.paginatedCollections.Settings.ES_INDEXES
 
