@@ -53,4 +53,15 @@ describe "An elasticsearch collection", ->
       esList.sleep()
       expect(eventTriggered).toBe(true)
 
+    it 'does not trigger the change event after setting exactly the same state again', ->
+
+      esList.wakeUp()
+
+      eventTriggered = false
+      esList.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.AWAKE_STATE_CHANGED,
+      (-> eventTriggered = true)
+
+      esList.wakeUp()
+      expect(eventTriggered).toBe(false)
+
 

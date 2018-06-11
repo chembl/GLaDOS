@@ -115,9 +115,22 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     showSelectedResourceOnly: ->
 
+      console.log 'selected_es_entity: ', @selected_es_entity
+      # if you want to see all, only wake up the first one by default.
+      if not @selected_es_entity?
+        @showAllTabs()
+      else
+        @showSelectedTabOnly()
+
+    showAllTabs: ->
+
+      console.log 'show all tabs'
+
+    showSelectedTabOnly: ->
+
       for currentKey, resultsListSettings of glados.models.paginatedCollections.Settings.ES_INDEXES
         # if there is a selection and this container is not selected it gets hidden if else it shows all resources
-        if @selected_es_entity? and @selected_es_entity!= '' and @selected_es_entity != currentKey
+        if @selected_es_entity != currentKey
           @$searchResultsListsContainersDict[currentKey].hide()
           @browsersDict[currentKey].sleep()
         else

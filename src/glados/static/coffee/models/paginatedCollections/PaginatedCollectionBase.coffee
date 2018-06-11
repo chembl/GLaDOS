@@ -154,8 +154,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       glados.models.paginatedCollections.PaginatedCollectionBase.AWAKEN_STATES.AWAKEN
 
     setAwakenState: (newState) ->
+      oldState = @getAwakenState()
       @setMeta('awaken_state', newState)
-      @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.AWAKE_STATE_CHANGED)
+      if oldState != newState
+        @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.AWAKE_STATE_CHANGED)
     wakeUp: ->
       @setAwakenState(glados.models.paginatedCollections.PaginatedCollectionBase.AWAKEN_STATES.AWAKEN)
     sleep: ->
