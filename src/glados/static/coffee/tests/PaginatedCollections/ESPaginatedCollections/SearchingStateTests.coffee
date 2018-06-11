@@ -53,3 +53,12 @@ describe "An elasticsearch collection", ->
       searchStateGot = esList.getSearchState()
       searchStateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_IS_READY
       expect(searchStateGot).toBe(searchStateMustBe)
+
+    it 'triggers the correct event when changing searching state', ->
+
+      eventTriggered = false
+      esList.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.SEARCH_STATE_CHANGED,
+      (-> eventTriggered = true)
+
+      esList.setSearchState(glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_IS_READY)
+      expect(eventTriggered).toBe(true)
