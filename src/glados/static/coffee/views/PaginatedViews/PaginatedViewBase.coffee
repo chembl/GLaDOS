@@ -176,6 +176,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     wakeUpView: ->
 
       console.log 'collection: ', @collection
+      console.log 'SEARCH STATE: ', @collection.getSearchState()
       console.log 'facets state: ', @collection.getMeta('facets_fetching_state')
       console.log 'items state: ', @collection.getMeta('items_fetching_state')
       console.log 'waking up view for collection: ', @collection.getMeta('label')

@@ -62,3 +62,5 @@ describe "An elasticsearch collection", ->
 
       esList.setSearchState(glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_IS_READY)
       expect(eventTriggered).toBe(true)
+
+    it 'allows ', ->
