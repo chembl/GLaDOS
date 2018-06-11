@@ -16,7 +16,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
     # Parse/Fetch Collection data
     # ------------------------------------------------------------------------------------------------------------------
-
     simplifyHighlights: (highlights)->
       gs_data = glados.models.paginatedCollections.esSchema.GLaDOS_es_GeneratedSchema[@getMeta('index_name')]
       simplifiedHL = {}
@@ -579,6 +578,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @setMeta('searchESQuery', searchESQuery)
       @setSearchState(glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_QUERY_SET)
       @cleanUpList(doFetch)
+
+      if not doFetch
+        @doFetchWhenAwaken()
 
     # ------------------------------------------------------------------------------------------------------------------
     # Pagination functions

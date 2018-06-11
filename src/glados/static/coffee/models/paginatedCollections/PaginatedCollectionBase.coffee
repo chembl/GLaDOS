@@ -165,6 +165,19 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     doFetchWhenAwaken: ->
 
+      if @isAwaken()
+        @fetch()
+        return
+
+      fetchIfAwaken = ->
+
+        if @isAwaken()
+          alert('list was awaken: ' + @getMeta('label'))
+          @off glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.AWAKE_STATE_CHANGED, fetchIfAwaken, @
+          @fetch()
+
+      @on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.AWAKE_STATE_CHANGED, fetchIfAwaken, @
+
 
 
 glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS =
