@@ -320,13 +320,11 @@ glados.useNameSpace 'glados.views.Browsers',
     # if the view already exists, shows it, otherwise it creates it.
     showOrCreateView: (viewType) ->
 
-      console.log 'show or create view: ', viewType
       viewElementID = @viewContainerID + '-' + viewType
 
       # Does the view exist already?
       if !@allViewsPerType[viewType]?
         # No, it does not exist
-        console.log 'view does not exist yet'
 
         $viewContainer = $('#' + @viewContainerID)
         $viewElement = $('<div>').attr('id', viewElementID).addClass('position-relative')
@@ -361,7 +359,6 @@ glados.useNameSpace 'glados.views.Browsers',
       else
         # yes it already exists
         # wake up the view if necessary
-        console.log 'view already existed'
         @allViewsPerType[viewType].wakeUpView() unless not @allViewsPerType[viewType].wakeUpView?
 
       $('#' + viewElementID).show()

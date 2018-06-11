@@ -88,7 +88,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         contextual_properties: contextualProperties
         include_highlights_column: @include_search_results_highlight
 
-#      console.log 'columns handler: ', @columnsHandler
       @columnsHandler.on 'change:exit change:enter', @handleShowHideColumns, @
       @columnsHandler.on glados.models.paginatedCollections.ColumnsHandler.EVENTS.COLUMNS_ORDER_CHANGED,
         @handleColumnsOrderChange, @
@@ -173,16 +172,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @setUpEmbedModal() unless not @config.show_embed_button
 
     sleepView: ->
-      console.log 'SELLEPING FOR COLL: ', @collection
       @collection.sleep()
     wakeUpView: ->
 
       @collection.wakeUp()
-      console.log 'collection: ', @collection
-      console.log 'SEARCH STATE: ', @collection.getSearchState()
-      console.log 'facets state: ', @collection.getMeta('facets_fetching_state')
-      console.log 'items state: ', @collection.getMeta('items_fetching_state')
-      console.log 'waking up view for collection: ', @collection.getMeta('label')
       if not @collection.isReady()
         return
       if @checkAndRenderIfNoItems()

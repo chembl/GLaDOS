@@ -25,7 +25,6 @@ class ButtonsHelper
     modalId = customID
     modalId ?= 'modal-' + (new Date()).getTime()
     templateParams = _.extend({id: modalId}, templateParams)
-    console.log 'templateParams: ', templateParams
     $('#BCK-GeneratedModalsContainer').append($(glados.Utils.getContentFromTemplate(templateID, templateParams)))
     $newModal = $('#' + modalId)
     $newModal.modal options
