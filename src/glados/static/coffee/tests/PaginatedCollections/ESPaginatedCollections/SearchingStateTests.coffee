@@ -46,3 +46,10 @@ describe "An elasticsearch collection", ->
       searchStateGot = esList.getSearchState()
       searchStateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_QUERY_SET
       expect(searchStateGot).toBe(searchStateMustBe)
+
+    it 'sets the correct state after parsing items', ->
+
+      esList.reset(esList.parse(testDataToParse))
+      searchStateGot = esList.getSearchState()
+      searchStateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_IS_READY
+      expect(searchStateGot).toBe(searchStateMustBe)

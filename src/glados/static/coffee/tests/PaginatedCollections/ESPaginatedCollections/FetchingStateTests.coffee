@@ -68,7 +68,7 @@ describe "An elasticsearch collection", ->
       itemsStateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.ITEMS_READY
       expect(itemsStateGot).toBe(itemsStateMustBe)
 
-    it 'sets the correct state after parsing items', (done) ->
+    it 'sets the correct state after parsing items (facets)', (done) ->
 
       simulateFacets = TestsUtils.simulateFacetsESList(esList, glados.Settings.STATIC_URL + 'testData/FacetsTestData.json', ->)
 

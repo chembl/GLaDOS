@@ -139,6 +139,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_UNDEFINED)
     setSearchState: (newFetchingState) ->
       @setMeta('search_state', newFetchingState)
+    searchQueryIsSet: -> @getSearchState() ==\
+      glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_QUERY_SET
 
 glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS =
   ITEMS_FETCHING_STATE_CHANGED: 'ITEMS_FETCHING_STATE_CHANGED'
@@ -158,3 +160,4 @@ glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATE
 glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES =
   SEARCH_UNDEFINED: 'SEARCH_UNDEFINED'
   SEARCH_QUERY_SET: 'SEARCH_QUERY_SET'
+  SEARCH_IS_READY: 'SEARCH_IS_READY'
