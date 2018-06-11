@@ -137,8 +137,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getSearchState: -> @getMeta('search_state')
     setInitialSearchState: -> @setMeta('search_state',
       glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_UNDEFINED)
-    setSearchState: (newFetchingState) ->
-      @setMeta('search_state', newFetchingState)
+    setSearchState: (newState) ->
+      @setMeta('search_state', newState)
       @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.SEARCH_STATE_CHANGED)
     searchQueryIsSet: -> @getSearchState() ==\
       glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_QUERY_SET
@@ -152,7 +152,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       glados.models.paginatedCollections.PaginatedCollectionBase.AWAKEN_STATES.SLEEPING
     isAwaken: -> @getMeta('awaken_state') ==\
       glados.models.paginatedCollections.PaginatedCollectionBase.AWAKEN_STATES.AWAKEN
-    
+
+    setAwakenState: (newState) ->
+      @setMeta('awaken_state', newState)
+    wakeUp: ->
+      @setAwakenState(glados.models.paginatedCollections.PaginatedCollectionBase.AWAKEN_STATES.AWAKEN)
+    sleep: ->
+      @setAwakenState(glados.models.paginatedCollections.PaginatedCollectionBase.AWAKEN_STATES.SLEEPING)
+
+    awakenStateIsUnknown: -> not @getAwakenState()?
 
 glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS =
   ITEMS_FETCHING_STATE_CHANGED: 'ITEMS_FETCHING_STATE_CHANGED'
