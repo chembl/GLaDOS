@@ -128,8 +128,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.INITIAL_STATE
 
     itemsAreInInitalState: -> @getMeta('items_fetching_state') == \
-      glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.ITEMS_READY
-
+      glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.INITIAL_STATE
 
 glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS =
   ITEMS_FETCHING_STATE_CHANGED: 'ITEMS_FETCHING_STATE_CHANGED'
