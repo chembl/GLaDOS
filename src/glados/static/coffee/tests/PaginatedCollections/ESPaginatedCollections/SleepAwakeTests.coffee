@@ -35,4 +35,22 @@ describe "An elasticsearch collection", ->
       expect(esList.isSleeping()).toBe(true)
       expect(esList.isAwaken()).toBe(false)
 
+    it 'triggers the state correctly when awaken', ->
+
+      eventTriggered = false
+      esList.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.AWAKE_STATE_CHANGED,
+      (-> eventTriggered = true)
+
+      esList.wakeUp()
+      expect(eventTriggered).toBe(true)
+
+    it 'triggers the state correctly when put to sleep', ->
+
+      eventTriggered = false
+      esList.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.AWAKE_STATE_CHANGED,
+      (-> eventTriggered = true)
+
+      esList.sleep()
+      expect(eventTriggered).toBe(true)
+
 

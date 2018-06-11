@@ -155,6 +155,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     setAwakenState: (newState) ->
       @setMeta('awaken_state', newState)
+      @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.AWAKE_STATE_CHANGED)
     wakeUp: ->
       @setAwakenState(glados.models.paginatedCollections.PaginatedCollectionBase.AWAKEN_STATES.AWAKEN)
     sleep: ->
@@ -162,10 +163,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     awakenStateIsUnknown: -> not @getAwakenState()?
 
+    doFetchWhenAwaken: ->
+
+
+
 glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS =
   ITEMS_FETCHING_STATE_CHANGED: 'ITEMS_FETCHING_STATE_CHANGED'
   FACETS_FETCHING_STATE_CHANGED: 'FACETS_FETCHING_STATE_CHANGED'
   SEARCH_STATE_CHANGED: 'SEARCH_STATE_CHANGED'
+  AWAKE_STATE_CHANGED: 'AWAKE_STATE_CHANGED'
 
 glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES =
   INITIAL_STATE: 'INITIAL_STATE'
