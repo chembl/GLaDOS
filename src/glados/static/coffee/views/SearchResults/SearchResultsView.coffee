@@ -113,6 +113,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         # if there is a selection and this container is not selected it gets hidden if else it shows all resources
         if @selected_es_entity? and @selected_es_entity!= '' and @selected_es_entity != currentKey
           @$searchResultsListsContainersDict[currentKey].hide()
+          @browsersDict[currentKey].sleep()
         else
           @$searchResultsListsContainersDict[currentKey].show()
           console.log 'GOING TO WAKE UP: ', currentKey

@@ -49,11 +49,20 @@ glados.useNameSpace 'glados.views.Browsers',
       @facetsView.wakeUp()
       @wakeUpCurrentView()
 
+    sleep: ->
+      @sleepCurrentView()
+
     wakeUpCurrentView: ->
 
       $currentViewInstance = @getCurrentViewInstance()
       if $currentViewInstance.wakeUpView?
         $currentViewInstance.wakeUpView()
+
+    sleepCurrentView: ->
+
+      $currentViewInstance = @getCurrentViewInstance()
+      if $currentViewInstance.sleepView?
+        $currentViewInstance.sleepView()
 
     renderViewState: ->
 

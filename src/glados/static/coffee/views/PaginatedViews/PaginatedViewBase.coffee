@@ -173,8 +173,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @setUpEmbedModal() unless not @config.show_embed_button
 
     sleepView: ->
+      console.log 'SELLEPING FOR COLL: ', @collection
+      @collection.sleep()
     wakeUpView: ->
 
+      @collection.wakeUp()
       console.log 'collection: ', @collection
       console.log 'SEARCH STATE: ', @collection.getSearchState()
       console.log 'facets state: ', @collection.getMeta('facets_fetching_state')
