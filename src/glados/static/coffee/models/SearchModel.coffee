@@ -247,9 +247,16 @@ SearchModel = Backbone.Model.extend
     @selected_es_entity = if _.isUndefined(selected_es_entity) then null else selected_es_entity
     ajaxDeferred = @parseQueryString(rawQueryString)
     ajaxDeferred.then(@__search.bind(@))
+    @trigger(SearchModel.EVENTS.SEARCH_TERM_HAS_CHANGED)
 
   resetSearchResultsListsDict: ()->
     @unset('resultsListsDict')
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Events
+# ----------------------------------------------------------------------------------------------------------------------
+SearchModel.EVENTS =
+  SEARCH_TERM_HAS_CHANGED: 'SEARCH_TERM_HAS_CHANGED'
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Singleton pattern

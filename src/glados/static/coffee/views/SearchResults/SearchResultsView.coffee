@@ -11,13 +11,13 @@ glados.useNameSpace 'glados.views.SearchResults',
       @selected_es_entity = @attributes?.selected_es_entity || null
 
       @$listsContainer = $(@el).find('.BCK-ESResults-lists')
+      @model.on SearchModel.EVENTS.SEARCH_TERM_HAS_CHANGED, @showPreloader, @
       # @model.getResultsListsDict() and glados.models.paginatedCollections.Settings.ES_INDEXES
       # Share the same keys to access different objects
       @model.resetSearchResultsListsDict()
       resultsListsDict = @model.getResultsListsDict()
 
-      $tabsContainer = $(@el).find('.BCK-summary-tabs-container')
-      glados.Utils.fillContentForElement $tabsContainer, {}, customTemplate=undefined, fillWithPreloader=true
+      @showPreloader()
 
       @$listsContainer.empty()
       for resourceName, resultsListSettings of glados.models.paginatedCollections.Settings.ES_INDEXES
@@ -48,6 +48,15 @@ glados.useNameSpace 'glados.views.SearchResults',
       @model.off('updated_search_and_scores')
       @model.on('updated_search_and_scores', @sortResultsListsViews, @)
       @model.on('updated_search_and_scores', @renderTabs, @)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Preloader
+    # ------------------------------------------------------------------------------------------------------------------
+    showPreloader: ->
+
+      $tabsContainer = $(@el).find('.BCK-summary-tabs-container')
+      glados.Utils.fillContentForElement $tabsContainer, {}, customTemplate=undefined, fillWithPreloader=true
+      @hideAllResources()
 
     # ------------------------------------------------------------------------------------------------------------------
     # sort Elements
@@ -151,8 +160,11 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       for currentKey, resultsListSettings of glados.models.paginatedCollections.Settings.ES_INDEXES
 
-        @$searchResultsListsContainersDict[currentKey].hide()
-        @browsersDict[currentKey].sleep()
+        $listContainer = @$searchResultsListsContainersDict[currentKey]
+        $listContainer.hide() unless not $listContainer? #this can be called at a moment when the containers
+        # have not been created
+        browserView = @browsersDict[currentKey]
+        browserView.sleep() unless not browserView?
     # ------------------------------------------------------------------------------------------------------------------
     # Waking up on scroll
     # ------------------------------------------------------------------------------------------------------------------
