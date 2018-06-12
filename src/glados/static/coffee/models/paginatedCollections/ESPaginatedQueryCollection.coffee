@@ -180,7 +180,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       #if this causes problems this can be moved to a custom reset function
       @setItemsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.ITEMS_READY)
-      
+
       if @searchQueryIsSet()
         @setSearchState(glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_IS_READY)
 
@@ -574,9 +574,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
 
     search: (searchESQuery, doFetch=false)->
-      console.log 'search list', @getMeta('label')
       @setMeta('searchESQuery', searchESQuery)
       @setSearchState(glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_QUERY_SET)
+      @sleep()
       @cleanUpList(doFetch)
 
       if not doFetch

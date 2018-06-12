@@ -23,6 +23,9 @@ glados.useNameSpace 'glados.views.Browsers',
 
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @handleSelection, @
 
+      @collection.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.AWAKE_STATE_CHANGED,
+        @handleListAwakeState, @
+
       @currentViewType = @collection.getMeta('default_view')
 
       # This handles all the views this menu view handles, there is one view per view type, for example
@@ -47,6 +50,11 @@ glados.useNameSpace 'glados.views.Browsers',
     # ------------------------------------------------------------------------------------------------------------------
     # sleep awake view
     # ------------------------------------------------------------------------------------------------------------------
+    handleListAwakeState: ->
+
+      if @collection.isSleeping()
+        @showPreloader()
+
     wakeUp: ->
       @toolBarView.wakeUp()
       @facetsView.wakeUp()
