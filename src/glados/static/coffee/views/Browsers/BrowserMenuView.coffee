@@ -102,9 +102,6 @@ glados.useNameSpace 'glados.views.Browsers',
 
     renderViewState: ->
 
-      if not $(@el).is(":visible")
-        return
-
       if not @collection.isReady() and not @collection.isStreaming()
         @showPreloader()
         return
@@ -131,7 +128,6 @@ glados.useNameSpace 'glados.views.Browsers',
       @addRemoveQtipToButtons()
 
     renderMenuContent: ->
-
       $menuContainer = $(@el).find('.BCK-Browser-Menu-Container')
       glados.Utils.fillContentForElement($menuContainer)
 
