@@ -680,7 +680,7 @@ div#CNC-zoom-modal {
 }
 
 .cropped-text-field-input {
-  font-family: 'Roboto Mono', 'Ubuntu Mono', courier, sans-serif;
+  font-family: $roboto-mono;
 }
 
 .cropped-text-field-btns {
@@ -742,22 +742,28 @@ div#CNC-zoom-modal {
     }
   }
 
+  $off-base: #e6e6e6;
+  $off-accent: #9a9a9a;
+  $first-base: #7FDBB1;
+  $first-accent: #2F7071;
+  $second-base: #90CFDA;
+  $second-accent: #39576F;
+
   .off {
-     background-color: #e6e6e6; //grey
+     background-color: $off-base;
 
     .feature-icon {
-        color: #9a9a9a; //dark grey
+        color: $off-accent;
       }
   }
 
   .first-row {
 
     .active {
-      background-color: #7FDBB1; //light green
+      background-color: $first-base;
 
       .feature-icon {
-        color: #2F7071; //dark green
-        //color: #EEFFEE; //white green
+        color: $first-accent;
       }
     }
   }
@@ -765,10 +771,10 @@ div#CNC-zoom-modal {
   .second-row {
 
     .active {
-      background-color: #90CFDA; //LIGHT BLUE
+      background-color: $second-base;
 
       .feature-icon{
-        color: #39576F; //dark blue
+        color: $second-accent
       }
     }
   }

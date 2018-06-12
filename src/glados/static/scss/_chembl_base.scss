@@ -16,6 +16,7 @@ $darker-teal: color("teal", "darken-3");
 $teal-accent: color('teal', 'accent-4');
 
 $grey-light: #e9e9e9;
+$divider-grey: #e0e0e0;
 $grey-medium: #707779;
 $grey-dark: #4d5456;
 
@@ -55,12 +56,19 @@ $chembl-helvetica: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
 $helvetica: helvetica, Arial, sans-serif;
 $verdana: "ChEMBL_Verdana", Verdana, sans-serif;
 $open-sans: 'Open Sans', sans-serif;
+$roboto-mono: 'Roboto Mono', 'Ubuntu Mono', courier, sans-serif;
 
+
+/*
+----------------------------------------------------------------------------------------------------------------------
+ Global variables
+----------------------------------------------------------------------------------------------------------------------
+*/
 
 $global-masthead-large-height: 32px;
 $global-masthead-small-med-height: 49px;
 $default-btn-border-radius: 3px;
-
+$modals-height: 80%;
 
 .chembl-teal {
   background-color: $chembl-teal !important;
@@ -137,7 +145,6 @@ main {
   flex: 1 0 auto;
 }
 
-$modals-height: 80%;
 
 a {
 
@@ -175,14 +182,14 @@ footer {
 }
 
 .btn-chembl {
-  color: #ffffff;
+  color: white;
   border-radius: $default-btn-border-radius;
   padding: 10px 20px;
   text-align: center;
 }
 
 .btn-small {
-  color: #ffffff;
+  color: white;
   border-radius: $default-btn-border-radius;
   padding: 10px 6px 6px 6px;
   text-align: center;
@@ -201,7 +208,7 @@ footer {
 }
 
 .btn-mini {
-  color: #ffffff;
+  color: white;
   border-radius: $default-btn-border-radius;
   padding: 10px 3px 6px 3px;
   text-align: center;
@@ -212,7 +219,7 @@ footer {
 }
 
 .btn-micro {
-  color: #ffffff;
+  color: white;
   border-radius: $default-btn-border-radius;
   padding: 8px 2px 4px 2px;
   text-align: center;
