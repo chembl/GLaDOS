@@ -1,9 +1,4 @@
-  $off-base: #e6e6e6;
-  $off-accent: #9a9a9a;
-  $first-base: #7FDBB1;
-  $first-accent: #2F7071;
-  $second-base: #90CFDA;
-  $second-accent: #39576F;
+@import "chembl_base";
 
 #MoleculeFeaturesCard {
 
@@ -13,6 +8,7 @@
 }
 
 .mol-features-grid {
+
   .col {
     padding: 2px;
   }
