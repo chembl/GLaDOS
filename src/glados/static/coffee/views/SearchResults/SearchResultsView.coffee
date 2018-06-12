@@ -124,7 +124,6 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     showSelectedResourceOnly: ->
 
-      console.log 'selected_es_entity: ', @selected_es_entity
       # if you want to see all, only wake up the first one by default.
       if not @selected_es_entity? or @selected_es_entity == ''
         @showAllTabs()
@@ -133,7 +132,6 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     showAllTabs: ->
 
-      console.log 'show all tabs'
       sortedResources = @model.get('sortedResourceNamesByScore')
       firstResourceKey = sortedResources[0]
 
@@ -170,7 +168,6 @@ glados.useNameSpace 'glados.views.SearchResults',
     # ------------------------------------------------------------------------------------------------------------------
     setUpWakingUpWaypoint: (resourceKey)->
 
-      console.log 'setUpWakingUpWaypoint: ', resourceKey
       @browsersDict[resourceKey].setUpWakingUpWaypoint()
 
     # ------------------------------------------------------------------------------------------------------------------
