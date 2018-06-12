@@ -70,7 +70,8 @@ glados.useNameSpace 'glados.routers',
        url += "/state=#{currentState}"
       return url
 
-    updateSearchURL: (esEntityKey, searchTerm, currentState, trigger=false)->
+    updateSearchURL: (esEntityKey, searchTerm, currentState, trigger=false) ->
+
       console.log 'update search url'
       tabLabelPrefix = ''
       if glados.models.paginatedCollections.Settings.ES_INDEXES[esEntityKey]?
@@ -95,7 +96,15 @@ glados.useNameSpace 'glados.routers',
       # to show the correct tab.
       glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
       newSearchURL = @getSearchURL(esEntityKey, searchTerm, currentState, true)
-      glados.routers.MainGladosRouter.getInstance().navigate(newSearchURL)
+      window.history.pushState('page2', 'Title', newSearchURL)
+
+
+    triggerSearchURL: (esEntityKey, searchTerm, currentState) ->
+      #this puts the search url in the bar and navigates to it
+      newSearchURL = @getSearchURL(esEntityKey, searchTerm, currentState)
+      console.log 'newSearchURL: ', newSearchURL
+      window.history.pushState({}, 'Search Results', newSearchURL);
+      window.history.go()
 
     validateAndParseSearchURL: (tab, searchTerm, state)->
       selectedESEntity = null
