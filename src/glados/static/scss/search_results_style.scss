@@ -51,7 +51,7 @@ em.glados-result-highlight {
 .buttons-helper-expandable-input {
   color: $primary-color;
   resize: none;
-  z-index: 20;
+  z-index: $z-over-a-bit;
   line-height: 1.5;
   display: none;
   position: absolute;
@@ -241,7 +241,7 @@ $marvin-size-fullscreen: 91vh;
   position: relative;
 
   .div-cover {
-    z-index: 5;
+    z-index: $z-over-a-bit;
     position: absolute;
     top: 0 !important;
     left: 0;
@@ -285,7 +285,7 @@ $marvin-size-fullscreen: 91vh;
   .chembl-modal-cover {
     @extend .div-cover;
     display: block;
-    z-index: 99999;
+    z-index: $z-on-top-of-the-top;
   }
 }
 
@@ -572,7 +572,8 @@ $browser-tool-bar-width: 55px;
   padding: 0 !important;
   background-color: color('grey', 'lighten-2');
   min-height: $browser-tools-height !important;
-  z-index: 3;
+  z-index: 3; //dont change z -index
+
 
   .tool-bar {
     padding-top: 1px;
@@ -659,7 +660,7 @@ $facets-width-large: 21%;
 }
 
 .facets {
-  z-index: 3;
+  z-index: 3; //dont change z-index
   -webkit-transition: transform 0.5s, width 0.5s, opacity 0.5s cubic-bezier(1, 0, 1, 0);
   transition: transform 0.5s, width 0.5s, opacity 0.5s cubic-bezier(1, 0, 1, 0);
 
@@ -675,7 +676,7 @@ $facets-width-large: 21%;
     overflow: hidden;
     opacity: 0;
     width: 0;
-    z-index: -1;
+    z-index: $z-underlay;
     transform: translateX(-100%);
     -webkit-transition: transform 0.5s, width 0.5s, opacity 0.5s cubic-bezier(0, 1, 0, 1);
     transition: transform 0.5s, width 0.5s, opacity 0.5s cubic-bezier(0, 1, 0, 1);

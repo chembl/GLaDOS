@@ -1,8 +1,4 @@
-/*
-* ----------------------------------------------------------------------------------------------------------------------
-* CHEMBL HEADER STYLES
-* ----------------------------------------------------------------------------------------------------------------------
-*/
+@import "chembl_base";
 
 /* -------- VARIABLES -------- */
 
@@ -68,7 +64,7 @@ header .row {
 #chembl-header-container {
   height: 0;
   width: 100%;
-  z-index: -1;
+  z-index: $z-underlay;
 
   .chembl-header {
     height: $chembl-header-height;
@@ -372,7 +368,7 @@ header .row {
 
   .dropdown-contents {
     background-color: $primary-color;
-    z-index: -1;
+    z-index: $z-underlay;
     min-width: 200px;
     position: absolute;
     margin-top: -46em;

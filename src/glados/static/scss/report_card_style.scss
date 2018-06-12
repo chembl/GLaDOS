@@ -1,4 +1,4 @@
-
+@import "chembl_base";
 
 /**
 * Scroll spy
@@ -188,7 +188,7 @@ div#CompoundNameAndClassification .comp-phase-0 {
 .CNC-expandable-content-bottom {
   background-color: rgba(158, 158, 158, 0.6);
   position: absolute;
-  z-index: 990;
+  z-index: $z-overlay;
   width: 100%;
   overflow: hidden;
   display: none;

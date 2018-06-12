@@ -32,7 +32,7 @@
     .card {
 
       .checkbox-container {
-        z-index: 4;
+        z-index: $z-over-a-bit;
         position: absolute;
         right: -15px;
         top: 0;
@@ -143,7 +143,7 @@ $chembl-header-height: 52.245px;
     .pinned-header {
       background-color: rgb(255, 255, 255);
       position: fixed;
-      z-index: 2;
+      z-index: 2; //dont change this z-index
       top: 3.2em;
       border-bottom: solid 0.5px #f1f1f1;
     }
@@ -320,7 +320,7 @@ $chevron-button-margin: 0px;
   overflow: hidden;
 
   .chevron-container {
-    z-index: 10;
+    z-index: $z-over-a-bit;
     position: absolute;
     top: 25%;
     left: 0.75em;

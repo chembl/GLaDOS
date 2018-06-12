@@ -9,7 +9,6 @@
 ----------------------------------------------------------------------------------------------------------------------
 */
 
-// BASE COLOURS
 $chembl-teal: color("teal", "base");
 $lighter-teal: color("teal", "lighten-3");
 $darker-teal: color("teal", "darken-3");
@@ -40,7 +39,6 @@ $h4-color: $grey-medium;
 $h5-color: $grey-dark;
 $h6-color: $grey-dark;
 
-
 $off-base: #e6e6e6;
 $off-accent: #9a9a9a;
 $first-base: #7FDBB1;
@@ -48,14 +46,9 @@ $first-accent: #2F7071;
 $second-base: #90CFDA;
 $second-accent: #39576F;
 
-
-$synonyms-color: color('green', 'lighten-4');
-$tradenames-color: color('light-green', 'lighten-3');
-
 $synonyms-color: #bce2e9; //#90cfda
 $tradenames-color: #b1ebd1; //#7edcb1
 $prot-target-class-color: color('blue-grey', 'lighten-4');
-
 $chembl-highlight: #FE7F9D;
 
 
@@ -82,6 +75,28 @@ $global-masthead-large-height: 32px;
 $global-masthead-small-med-height: 49px;
 $default-btn-border-radius: 3px;
 $modals-height: 80%;
+
+
+/*
+----------------------------------------------------------------------------------------------------------------------
+ Layers
+----------------------------------------------------------------------------------------------------------------------
+*/
+
+$z-underlay: -1;
+$z-default: 1;
+$z-over-a-bit: 10;
+$z-overlay: 1000;
+$z-backdrop: 8000;
+$z-on-top-of-the-top: 9000;
+
+
+/*
+----------------------------------------------------------------------------------------------------------------------
+ BASIC STYLING
+----------------------------------------------------------------------------------------------------------------------
+*/
+
 
 .chembl-teal {
   background-color: $chembl-teal !important;
@@ -179,7 +194,7 @@ footer {
 }
 
 
-/**
+/*
 * Buttons
 * ----------------------------------------------------------------------------------------------------------------------
 */
@@ -241,3 +256,4 @@ footer {
   font-size: 9px;
   margin-left: 4px;
 }
+
