@@ -1,6 +1,6 @@
 describe "An elasticsearch collection", ->
 
-  describe 'Fetching State ', ->
+  describe 'Searching State', ->
 
     esList = undefined
     searchESQuery = JSON.parse('{"bool":{"boost":1,"must":{"bool":{"should":[{"multi_match":{"type":"most_fields","fields":["*.std_analyzed^1.6","*.eng_analyzed^0.8","*.ws_analyzed^1.4","*.keyword^2","*.lower_case_keyword^1.5","*.alphanumeric_lowercase_keyword^1.3"],"query":"Aspirin","fuzziness":0,"minimum_should_match":"100%","boost":10}},{"multi_match":{"type":"best_fields","fields":["*.std_analyzed^1.6","*.eng_analyzed^0.8","*.ws_analyzed^1.4","*.keyword^2","*.lower_case_keyword^1.5","*.alphanumeric_lowercase_keyword^1.3"],"query":"Aspirin","fuzziness":0,"minimum_should_match":"100%","boost":2}},{"multi_match":{"type":"phrase","fields":["*.std_analyzed^1.6","*.eng_analyzed^0.8","*.ws_analyzed^1.4","*.keyword^2","*.lower_case_keyword^1.5","*.alphanumeric_lowercase_keyword^1.3"],"query":"Aspirin","minimum_should_match":"100%","boost":1.5}},{"multi_match":{"type":"phrase_prefix","fields":["*.std_analyzed^1.6","*.eng_analyzed^0.8","*.ws_analyzed^1.4","*.keyword^2","*.lower_case_keyword^1.5","*.alphanumeric_lowercase_keyword^1.3"],"query":"Aspirin","minimum_should_match":"100%"}},{"multi_match":{"type":"most_fields","fields":["*.entity_id^2","*.id_reference^1.5","*.chembl_id^2","*.chembl_id_reference^1.5"],"query":"Aspirin","fuzziness":0,"boost":10}}],"must":[]}},"filter":[]}}')
@@ -11,7 +11,6 @@ describe "An elasticsearch collection", ->
       esList = glados.models.paginatedCollections.PaginatedCollectionFactory.getAllESResultsListDict()[\
       glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND.KEY_NAME
       ]
-      esList.setMeta('searchESQuery', searchESQuery)
       esList.setMeta('test_mode', true)
       TestsUtils.simulateFacetsESList(esList, glados.Settings.STATIC_URL + 'testData/FacetsTestData.json', done)
 
@@ -26,8 +25,9 @@ describe "An elasticsearch collection", ->
       esList.setInitialFetchingState()
       esList.setMeta('test_mode', true)
       esList.clearAllFacetsSelections()
+      esList.setInitialSearchState()
 
-    it 'sets the initial fecthing state', ->
+    it 'Sets the initial searching state, along with fetching and facets states', ->
 
       itemsStateGot = esList.getItemsFetchingState()
       itemsStateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.INITIAL_STATE
@@ -37,63 +37,41 @@ describe "An elasticsearch collection", ->
       facetsStateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.INITIAL_STATE
       expect(facetsStateGot).toBe(facetsStateMustBe)
 
-    it 'sets the correct state when fetching items', ->
+      searchStateGot = esList.getSearchState()
+      searchStateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_UNDEFINED
+      expect(searchStateGot).toBe(searchStateMustBe)
 
-      esList.fetch()
-      stateGot = esList.getItemsFetchingState()
-      stateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.FETCHING_ITEMS
-      expect(stateGot).toBe(stateMustBe)
+    it 'Sets the correct state when setting a search', ->
 
-    it 'sets the correct state when filtering items (selecting a facet)', ->
-
-      facetGroups = esList.getFacetsGroups()
-      testFacetGroupKey = 'max_phase'
-      testFacetKey = facetGroups[testFacetGroupKey].faceting_handler.faceting_keys_inorder[0]
-      esList.toggleFacetAndFetch(testFacetGroupKey, testFacetKey)
-      itemsStateGot = esList.getItemsFetchingState()
-
-      itemsStateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.FETCHING_ITEMS
-      expect(itemsStateGot).toBe(itemsStateMustBe)
-
-      esList.loadFacetGroups()
-      facetsStateGot = esList.getFacetsFetchingState()
-      facetsStateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.FETCHING_FACETS
-      expect(facetsStateGot).toBe(facetsStateMustBe)
+      esList.search(searchESQuery, doFetch=false)
+      searchStateGot = esList.getSearchState()
+      searchStateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_QUERY_SET
+      expect(searchStateGot).toBe(searchStateMustBe)
 
     it 'sets the correct state after parsing items', ->
 
+      esList.search(searchESQuery, doFetch=false)
       esList.reset(esList.parse(testDataToParse))
+      searchStateGot = esList.getSearchState()
+      searchStateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_IS_READY
+      expect(searchStateGot).toBe(searchStateMustBe)
 
-      itemsStateGot = esList.getItemsFetchingState()
-      itemsStateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.ITEMS_READY
-      expect(itemsStateGot).toBe(itemsStateMustBe)
-
-    it 'sets the correct state after parsing items (facets)', (done) ->
-
-      simulateFacets = TestsUtils.simulateFacetsESList(esList, glados.Settings.STATIC_URL + 'testData/FacetsTestData.json', ->)
-
-      simulateFacets.then ->
-
-        facetsStateGot = esList.getFacetsFetchingState()
-        facetsStateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.FACETS_READY
-        expect(facetsStateGot).toBe(facetsStateMustBe)
-
-        done()
-
-    it 'triggers the correct event when changing items fetching state', ->
+    it 'triggers the correct event when changing searching state', ->
 
       eventTriggered = false
-      esList.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.ITEMS_FETCHING_STATE_CHANGED,
+      esList.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.SEARCH_STATE_CHANGED,
       (-> eventTriggered = true)
 
-      esList.setItemsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.INITIAL_STATE)
+      esList.setSearchState(glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_IS_READY)
       expect(eventTriggered).toBe(true)
 
-    it 'triggers the correct event when changing facets fetching state', ->
+    it 'does not trigger the event chane after setting exactly the same state again', ->
+
+      esList.setSearchState(glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_QUERY_SET)
 
       eventTriggered = false
-      esList.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_FETCHING_STATE_CHANGED,
+      esList.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.SEARCH_STATE_CHANGED,
       (-> eventTriggered = true)
 
-      esList.setFacetsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.INITIAL_STATE)
-      expect(eventTriggered).toBe(true)
+      esList.setSearchState(glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_QUERY_SET)
+      expect(eventTriggered).toBe(false)

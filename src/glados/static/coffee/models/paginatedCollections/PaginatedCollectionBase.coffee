@@ -5,6 +5,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     initialize: ->
 
       @setInitialFetchingState()
+      @setInitialSearchState()
       if @islinkToAllActivitiesEnabled()
         @on glados.Events.Collections.SELECTION_UPDATED, @resetLinkToAllActivitiesCache, @
 
@@ -124,9 +125,70 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     isReady: -> @itemsAreReady() and @facetsAreReady()
 
+    facetsAreInInitalState: -> @getMeta('facets_fetching_state') == \
+      glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.INITIAL_STATE
+
+    itemsAreInInitalState: -> @getMeta('items_fetching_state') == \
+      glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.INITIAL_STATE
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Searching state handling
+    # ------------------------------------------------------------------------------------------------------------------
+    getSearchState: -> @getMeta('search_state')
+    setInitialSearchState: -> @setMeta('search_state',
+      glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_UNDEFINED)
+    setSearchState: (newState) ->
+      oldState = @getSearchState()
+      if oldState != newState
+        @setMeta('search_state', newState)
+        @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.SEARCH_STATE_CHANGED)
+    searchQueryIsSet: -> @getSearchState() ==\
+      glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_QUERY_SET
+    searchIsReady: -> @getMeta('search_state') ==\
+      glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_IS_READY
+
+    # ------------------------------------------------------------------------------------------------------------------ 
+    # Sleep/Awake states
+    # ------------------------------------------------------------------------------------------------------------------
+    getAwakenState: -> @getMeta('awaken_state')
+    isSleeping: -> @getMeta('awaken_state') ==\
+      glados.models.paginatedCollections.PaginatedCollectionBase.AWAKEN_STATES.SLEEPING
+    isAwaken: -> @getMeta('awaken_state') ==\
+      glados.models.paginatedCollections.PaginatedCollectionBase.AWAKEN_STATES.AWAKEN
+
+    setAwakenState: (newState) ->
+      oldState = @getAwakenState()
+      if oldState != newState
+        @setMeta('awaken_state', newState)
+        @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.AWAKE_STATE_CHANGED)
+    wakeUp: ->
+      @setAwakenState(glados.models.paginatedCollections.PaginatedCollectionBase.AWAKEN_STATES.AWAKEN)
+    sleep: ->
+      @setAwakenState(glados.models.paginatedCollections.PaginatedCollectionBase.AWAKEN_STATES.SLEEPING)
+
+    awakenStateIsUnknown: -> not @getAwakenState()?
+
+    doFetchWhenAwaken: ->
+
+      if @isAwaken()
+        @fetch()
+        return
+
+      fetchIfAwaken = ->
+
+        if @isAwaken()
+          @off glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.AWAKE_STATE_CHANGED, fetchIfAwaken, @
+          @fetch()
+
+      @on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.AWAKE_STATE_CHANGED, fetchIfAwaken, @
+
+
+
 glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS =
   ITEMS_FETCHING_STATE_CHANGED: 'ITEMS_FETCHING_STATE_CHANGED'
   FACETS_FETCHING_STATE_CHANGED: 'FACETS_FETCHING_STATE_CHANGED'
+  SEARCH_STATE_CHANGED: 'SEARCH_STATE_CHANGED'
+  AWAKE_STATE_CHANGED: 'AWAKE_STATE_CHANGED'
 
 glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES =
   INITIAL_STATE: 'INITIAL_STATE'
@@ -137,3 +199,13 @@ glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATE
   INITIAL_STATE: 'INITIAL_STATE'
   FETCHING_FACETS: 'FETCHING_FACETS'
   FACETS_READY: 'FACETS_READY'
+
+glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES =
+  SEARCH_UNDEFINED: 'SEARCH_UNDEFINED'
+  SEARCH_QUERY_SET: 'SEARCH_QUERY_SET' #this means that the esQuery is set and it is ready to be fetched, but fetching
+  # has not been done
+  SEARCH_IS_READY: 'SEARCH_IS_READY' # the fetch has been done, and the data has been received and parsed.
+
+glados.models.paginatedCollections.PaginatedCollectionBase.AWAKEN_STATES =
+  SLEEPING: 'SLEEPING'
+  AWAKEN: 'AWAKEN'

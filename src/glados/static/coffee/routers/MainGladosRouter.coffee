@@ -18,6 +18,7 @@ glados.useNameSpace 'glados.routers',
     initMainPage: -> glados.apps.Main.MainGladosApp.initMainPage()
 
     initSearchResults: (currentTab, searchTerm, currentState) ->
+
       [selectedESEntity, searchTerm, currentState] = \
         glados.routers.MainGladosRouter.validateAndParseSearchURL(currentTab, searchTerm, currentState)
       glados.routers.MainGladosRouter.updateSearchURL(selectedESEntity, searchTerm, currentState)
@@ -62,16 +63,17 @@ glados.useNameSpace 'glados.routers',
       url = ''
       if not fragmentOnly
         url += glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL
-      url += "search_results/#{tab}"
+      url += "#search_results/#{tab}"
       if searchTerm? and _.isString(searchTerm) and searchTerm.trim().length > 0
        url += "/query=" + encodeURIComponent(searchTerm)
       if currentState?
        url += "/state=#{currentState}"
       return url
 
-    updateSearchURL: (esEntityKey, searchTerm, currentState, trigger=false)->
+    updateSearchURL: (esEntityKey, searchTerm, currentState, trigger=false) ->
+
       tabLabelPrefix = ''
-      if _.has glados.models.paginatedCollections.Settings.ES_INDEXES, esEntityKey
+      if glados.models.paginatedCollections.Settings.ES_INDEXES[esEntityKey]?
         tabLabelPrefix = glados.models.paginatedCollections.Settings.ES_INDEXES[esEntityKey].LABEL
       breadcrumbLinks = [
         {
@@ -88,18 +90,18 @@ glados.useNameSpace 'glados.routers',
             truncate: true
           }
         )
-      # Do the navigation before setting up the breadcrumb so the share button has the right url
-      if trigger and not window.location.href.startsWith(glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL)
-        window.location.href = @getSearchURL(esEntityKey, searchTerm, currentState)
-      else
-        glados.routers.MainGladosRouter.getInstance().navigate(
-          @getSearchURL(esEntityKey, searchTerm, currentState, true),
-          {
-            'trigger': trigger
-          }
-        )
-        glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
 
+      # This makes sure that the url and the breadcrumbs are correct. It is the job of the SearchResultsView to
+      # to show the correct tab.
+      glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
+      newSearchURL = @getSearchURL(esEntityKey, searchTerm, currentState, true)
+      window.history.pushState({}, 'Search Results', newSearchURL)
+
+    triggerSearchURL: (esEntityKey, searchTerm, currentState) ->
+      #this puts the search url in the bar and navigates to it
+      newSearchURL = @getSearchURL(esEntityKey, searchTerm, currentState)
+      window.history.pushState({}, 'Search Results', newSearchURL);
+      window.history.go()
 
     validateAndParseSearchURL: (tab, searchTerm, state)->
       selectedESEntity = null

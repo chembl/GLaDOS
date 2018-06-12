@@ -175,7 +175,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @shouldIgnoreContentChangeRequestWhileStreaming()
         return
 
-      console.log 'visibleColumns: ', visibleColumns
       templateID = $specificElemContainer.attr('data-hb-template')
       applyTemplate = Handlebars.compile($('#' + templateID).html())
       $appendTo = $specificElemContainer

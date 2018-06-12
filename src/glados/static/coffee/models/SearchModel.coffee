@@ -19,13 +19,13 @@ SearchModel = Backbone.Model.extend
   # --------------------------------------------------------------------------------------------------------------------
 
   # Lazily initialized CompoundResultsList
-  getResultsListsDict: () ->
+  getResultsListsDict: ->
     if not @has('resultsListsDict')
       @set('resultsListsDict',
           glados.models.paginatedCollections.PaginatedCollectionFactory.getAllESResultsListDict())
     return @get('resultsListsDict')
 
-  loadBase64Data: ()->
+  loadBase64Data: ->
     if @egData?
       return @egData
     base64Data = 'W3sidDEiOiAiU09EYUxHIiwidDIiOiAiIWV2aWxhIGxsaXRzIG1hIEkiLCJ0MyI6ICJTT0RhTEcvbGJtZWhjL21vYy5idWh0aW'+
@@ -234,7 +234,8 @@ SearchModel = Backbone.Model.extend
     rls_dict = @getResultsListsDict()
     for resource_name, resource_es_collection of rls_dict
       indexName = resource_es_collection.getMeta('index_name')
-      resource_es_collection.search bestESQueries[indexName].query
+      # don't do fetch, it will be done only when the list is required by a tab
+      resource_es_collection.search(bestESQueries[indexName].query, doFetch=false)
       resource_es_collection.setMeta('max_score', bestESQueries[indexName].max_score)
       resource_es_collection.setMeta('total_records', bestESQueries[indexName].total)
     @trigger('updated_search_and_scores')
@@ -246,9 +247,16 @@ SearchModel = Backbone.Model.extend
     @selected_es_entity = if _.isUndefined(selected_es_entity) then null else selected_es_entity
     ajaxDeferred = @parseQueryString(rawQueryString)
     ajaxDeferred.then(@__search.bind(@))
+    @trigger(SearchModel.EVENTS.SEARCH_TERM_HAS_CHANGED)
 
   resetSearchResultsListsDict: ()->
     @unset('resultsListsDict')
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Events
+# ----------------------------------------------------------------------------------------------------------------------
+SearchModel.EVENTS =
+  SEARCH_TERM_HAS_CHANGED: 'SEARCH_TERM_HAS_CHANGED'
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Singleton pattern

@@ -23,6 +23,9 @@ glados.useNameSpace 'glados.views.Browsers',
 
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @handleSelection, @
 
+      @collection.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.AWAKE_STATE_CHANGED,
+        @handleListAwakeState, @
+
       @currentViewType = @collection.getMeta('default_view')
 
       # This handles all the views this menu view handles, there is one view per view type, for example
@@ -44,16 +47,58 @@ glados.useNameSpace 'glados.views.Browsers',
 
       @showOrCreateView @currentViewType
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # sleep awake view
+    # ------------------------------------------------------------------------------------------------------------------
+    handleListAwakeState: ->
+
+      if @collection.isSleeping()
+        @showPreloader()
+
     wakeUp: ->
       @toolBarView.wakeUp()
       @facetsView.wakeUp()
       @wakeUpCurrentView()
+
+    sleep: ->
+      @sleepCurrentView()
 
     wakeUpCurrentView: ->
 
       $currentViewInstance = @getCurrentViewInstance()
       if $currentViewInstance.wakeUpView?
         $currentViewInstance.wakeUpView()
+
+    sleepCurrentView: ->
+
+      $currentViewInstance = @getCurrentViewInstance()
+      if $currentViewInstance.sleepView?
+        $currentViewInstance.sleepView()
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Waking up on scroll
+    # ------------------------------------------------------------------------------------------------------------------
+    setUpWakingUpWaypoint: ->
+
+      # If search is ready I don't need to trigger fetch
+      if @collection.searchIsReady()
+        return
+
+      waypointElem = $(@el)[0]
+      thisView = @
+
+      currentWindowHeight = window.innerHeight
+
+      listenScroll = ->
+
+        elemOffset = waypointElem.getBoundingClientRect()
+
+        if elemOffset.top <= currentWindowHeight
+          $(window).off('scroll', debouncedListener)
+          thisView.wakeUp()
+
+      debouncedListener = _.debounce(listenScroll, 100)
+      $(window).scroll debouncedListener
 
     renderViewState: ->
 
@@ -313,7 +358,9 @@ glados.useNameSpace 'glados.views.Browsers',
 
       viewElementID = @viewContainerID + '-' + viewType
 
+      # Does the view exist already?
       if !@allViewsPerType[viewType]?
+        # No, it does not exist
 
         $viewContainer = $('#' + @viewContainerID)
         $viewElement = $('<div>').attr('id', viewElementID).addClass('position-relative')
@@ -345,10 +392,12 @@ glados.useNameSpace 'glados.views.Browsers',
 
         @allViewsPerType[viewType] = newView
 
-      $('#' + viewElementID).show()
-      # wake up the view if necessary
-      @allViewsPerType[viewType].wakeUpView() unless not @allViewsPerType[viewType].wakeUpView?
+      else
+        # yes it already exists
+        # wake up the view if necessary
+        @allViewsPerType[viewType].wakeUpView() unless not @allViewsPerType[viewType].wakeUpView?
 
+      $('#' + viewElementID).show()
       currentView = @allViewsPerType[viewType]
 
       showZoomControls = false

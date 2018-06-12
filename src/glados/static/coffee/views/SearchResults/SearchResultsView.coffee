@@ -11,17 +11,20 @@ glados.useNameSpace 'glados.views.SearchResults',
       @selected_es_entity = @attributes?.selected_es_entity || null
 
       @$listsContainer = $(@el).find('.BCK-ESResults-lists')
+      @model.on SearchModel.EVENTS.SEARCH_TERM_HAS_CHANGED, @showPreloader, @
       # @model.getResultsListsDict() and glados.models.paginatedCollections.Settings.ES_INDEXES
       # Share the same keys to access different objects
       @model.resetSearchResultsListsDict()
       resultsListsDict = @model.getResultsListsDict()
+
+      @showPreloader()
 
       @$listsContainer.empty()
       for resourceName, resultsListSettings of glados.models.paginatedCollections.Settings.ES_INDEXES
 
         if resultsListsDict[resourceName]?
           resultsListViewID = @getBCKListContainerBaseID(resourceName)
-          $container = $('<div class="' + resultsListViewID + '-container">')
+          $container = $('<div id="' + resultsListViewID + '-container">')
           glados.Utils.fillContentForElement($container, {
               entity_name: glados.models.paginatedCollections.Settings.ES_INDEXES[resourceName].LABEL
             },
@@ -39,25 +42,36 @@ glados.useNameSpace 'glados.views.SearchResults',
 
           resultsBrowserI.render()
           @browsersDict[resourceName] = resultsBrowserI
-          @$searchResultsListsContainersDict[resourceName] = $('#'+resultsListViewID + '-container')
+          @$searchResultsListsContainersDict[resourceName] = $('#' + resultsListViewID + '-container')
 
-      @showSelectedResourceOnly()
+      @hideAllResources()
       @model.off('updated_search_and_scores')
       @model.on('updated_search_and_scores', @sortResultsListsViews, @)
       @model.on('updated_search_and_scores', @renderTabs, @)
 
     # ------------------------------------------------------------------------------------------------------------------
+    # Preloader
+    # ------------------------------------------------------------------------------------------------------------------
+    showPreloader: ->
+
+      $tabsContainer = $(@el).find('.BCK-summary-tabs-container')
+      glados.Utils.fillContentForElement $tabsContainer, {}, customTemplate=undefined, fillWithPreloader=true
+      @hideAllResources()
+
+    # ------------------------------------------------------------------------------------------------------------------
     # sort Elements
     # ------------------------------------------------------------------------------------------------------------------
     sortResultsListsViews: ->
-      console.warn('SORITNG!')
+
       # If an entity is selected the ordering is skipped
       if not @selected_es_entity
         sortedResourceNamesByScore = @model.get('sortedResourceNamesByScore')
         for resource_name in sortedResourceNamesByScore
           idToMove =  @getBCKListContainerBaseID(resource_name) + '-container'
-          $div_key_i = @$listsContainer.find('.' + idToMove)
+          $div_key_i = @$listsContainer.find("##{idToMove}")
           @$listsContainer.append($div_key_i)
+
+      @showSelectedResourceOnly()
 
     # ------------------------------------------------------------------------------------------------------------------
     # Tabs Handling
@@ -65,7 +79,6 @@ glados.useNameSpace 'glados.views.SearchResults',
     destroyAllTooltips: -> glados.Utils.Tooltips.destroyAllTooltips($(@el))
 
     renderTabs: ->
-      console.warn('RENDERING TABS!')
       @destroyAllTooltips()
       # Always generate chips for the results summary
       chipStruct = []
@@ -100,30 +113,62 @@ glados.useNameSpace 'glados.views.SearchResults',
       glados.Utils.fillContentForElement $tabsContainer,
         chips: chipStruct
 
-#      glados.Utils.overrideHrefNavigationUnlessTargetBlank(
-#        $('.BCK-summary-tabs-container').find('a'), @navigateTo.bind(@)
-#      )
-
     openTab: (event) ->
 
       $clickedElem = $(event.currentTarget)
       @selected_es_entity = $clickedElem.attr('data-resource-key')
       $(@el).find('.BCK-select-results-entity').removeClass('selected')
-      @showSelectedResourceOnly()
       $clickedElem.addClass('selected')
       glados.routers.MainGladosRouter.updateSearchURL @selected_es_entity, @model.get('queryString')
+      @showSelectedResourceOnly()
 
+    showSelectedResourceOnly: ->
 
-    showSelectedResourceOnly: () ->
+      # if you want to see all, only wake up the first one by default.
+      if not @selected_es_entity? or @selected_es_entity == ''
+        @showAllTabs()
+      else
+        @showSelectedTabOnly()
+
+    showAllTabs: ->
+
+      sortedResources = @model.get('sortedResourceNamesByScore')
+      firstResourceKey = sortedResources[0]
 
       for currentKey, resultsListSettings of glados.models.paginatedCollections.Settings.ES_INDEXES
         # if there is a selection and this container is not selected it gets hidden if else it shows all resources
-        if @selected_es_entity? and @selected_es_entity!= '' and @selected_es_entity != currentKey
+        if currentKey == firstResourceKey
+          @browsersDict[currentKey].wakeUp()
+        else
+          @setUpWakingUpWaypoint(currentKey)
+        @$searchResultsListsContainersDict[currentKey].show()
+
+    showSelectedTabOnly: ->
+
+      for currentKey, resultsListSettings of glados.models.paginatedCollections.Settings.ES_INDEXES
+        # if there is a selection and this container is not selected it gets hidden if else it shows all resources
+        if @selected_es_entity != currentKey
           @$searchResultsListsContainersDict[currentKey].hide()
+          @browsersDict[currentKey].sleep()
         else
           @$searchResultsListsContainersDict[currentKey].show()
           @browsersDict[currentKey].wakeUp()
 
+    hideAllResources: ->
+
+      for currentKey, resultsListSettings of glados.models.paginatedCollections.Settings.ES_INDEXES
+
+        $listContainer = @$searchResultsListsContainersDict[currentKey]
+        $listContainer.hide() unless not $listContainer? #this can be called at a moment when the containers
+        # have not been created
+        browserView = @browsersDict[currentKey]
+        browserView.sleep() unless not browserView?
+    # ------------------------------------------------------------------------------------------------------------------
+    # Waking up on scroll
+    # ------------------------------------------------------------------------------------------------------------------
+    setUpWakingUpWaypoint: (resourceKey)->
+
+      @browsersDict[resourceKey].setUpWakingUpWaypoint()
 
     # ------------------------------------------------------------------------------------------------------------------
     # Helper functions

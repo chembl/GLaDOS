@@ -49,7 +49,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         @searchModel.search searchString, null
       else
         # Navigates to the specified URL
-        glados.routers.MainGladosRouter.updateSearchURL @selected_es_entity, searchString, null, true
+        glados.routers.MainGladosRouter.triggerSearchURL @selected_es_entity, searchString,
 
     searchAdvanced: () ->
       return
