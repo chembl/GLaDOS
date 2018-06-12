@@ -1,18 +1,5 @@
 @import "chembl_base";
 
-$teal-1: #0D343A;
-$teal-2: #025C5E;
-$teal-3: #09979B;
-$teal-4: #75D8D5;
-$teal-5: #C4E6E5;
-$teal-6: #D4FAF7;
-
-$red-1: #65323E;
-$red-2: #D33C60;
-$red-3: #FE7F9D;
-$red-4: #FFC0CB;
-$red-5: #F1D6DB;
-
 
 /* ---------------------------------------------------------------------------------------------------------------------
  Browse as circles
@@ -52,9 +39,9 @@ $red-5: #F1D6DB;
 
   .label {
     text-anchor: middle;
-    text-shadow: 0 0.8px 0 #fff, 0.8px 0 0 #fff, -0.8px 0 0 #fff, 0 -0.8px 0 #fff;
+    text-shadow: 0 0.8px 0 white, 0.8px 0 0 white, -0.8px 0 0 #fff, 0 -0.8px 0 white;
     fill: $teal-1;
-    font-family: 'Open Sans', sans-serif;
+    font-family: $open-sans;
   }
 
   .label,
@@ -101,7 +88,7 @@ $red-5: #F1D6DB;
       }
 
       &:not(.disabled):hover {
-        color: color("teal", "accent-4");
+        color: $teal-accent;
       }
     }
   }
@@ -115,7 +102,7 @@ $red-5: #F1D6DB;
     cursor: pointer;
 
     &:hover {
-      fill: color("teal", "accent-4");
+      fill: $teal-accent;
     }
   }
 
@@ -124,7 +111,7 @@ $red-5: #F1D6DB;
     cursor: pointer;
 
     &:hover {
-      fill: color("teal", "accent-4");
+      fill: $teal-accent;
     }
 
     &.emphasis {
@@ -203,7 +190,7 @@ $red-5: #F1D6DB;
 .legend {
 
   .legend-rect:hover {
-    stroke: color('teal', 'accent-4');
+    stroke: $teal-accent;
   }
 
   .legend-rect.selected {
@@ -215,7 +202,7 @@ $red-5: #F1D6DB;
     cursor: grab;
 
     .legend-rect {
-      stroke: color('teal', 'accent-4');
+      stroke: $teal-accent;
     }
   }
 
@@ -224,7 +211,7 @@ $red-5: #F1D6DB;
     cursor: grabbing;
 
     .legend-rect {
-      stroke: color('teal', 'accent-4');
+      stroke: $teal-accent;
     }
   }
 
@@ -246,7 +233,7 @@ $red-5: #F1D6DB;
   .legend-text {
     font-size: 65%;
     fill: $grey-dark;
-    font-family: "ChEMBL_Verdana", Verdana, sans-serif;
+    font-family: $verdana;
   }
 }
 
@@ -317,7 +304,7 @@ $red-5: #F1D6DB;
   .title {
     cursor: pointer;
     font-size: 90%;
-    font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+    font-family: $chembl-helvetica;
     fill: $grey-dark;
   }
 
@@ -497,7 +484,7 @@ $red-5: #F1D6DB;
       text {
         fill: $grey-dark;
         font-size: 70%;
-        font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif
+        font-family: $chembl-helvetica;
       }
     }
 
@@ -521,7 +508,7 @@ $red-5: #F1D6DB;
     .legend-text {
       font-size: 65%;
       fill: $grey-dark;
-      font-family: "ChEMBL_Verdana", Verdana, sans-serif;
+      font-family: $verdana;
     }
   }
 }
@@ -544,14 +531,14 @@ $red-5: #F1D6DB;
     .legend-text {
       font-size: 65%;
       fill: $grey-dark;
-      font-family: "ChEMBL_Verdana", Verdana, sans-serif;
+      font-family: $verdana;
     }
   }
 
   .title {
     cursor: pointer;
     font-size: 90%;
-    font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+    font-family: $chembl-helvetica;
     fill: $grey-dark;
   }
 
@@ -571,7 +558,7 @@ $red-5: #F1D6DB;
   .arc {
 
     text {
-      font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+      font-family: $chembl-helvetica;
       font-size: 100%;
     }
   }
