@@ -117,13 +117,14 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       console.log 'selected_es_entity: ', @selected_es_entity
       # if you want to see all, only wake up the first one by default.
-      if not @selected_es_entity?
+      if not @selected_es_entity? or @selected_es_entity == ''
         @showAllTabs()
       else
         @showSelectedTabOnly()
 
     showAllTabs: ->
 
+      console.log 'show all tabs'
       sortedResources = @model.get('sortedResourceNamesByScore')
       firstResourceKey = sortedResources[0]
 
@@ -131,6 +132,8 @@ glados.useNameSpace 'glados.views.SearchResults',
         # if there is a selection and this container is not selected it gets hidden if else it shows all resources
         if currentKey == firstResourceKey
           @browsersDict[currentKey].wakeUp()
+        else
+          @setUpWakingUpWaypoint(currentKey)
         @$searchResultsListsContainersDict[currentKey].show()
 
     showSelectedTabOnly: ->
@@ -150,6 +153,14 @@ glados.useNameSpace 'glados.views.SearchResults',
 
         @$searchResultsListsContainersDict[currentKey].hide()
         @browsersDict[currentKey].sleep()
+    # ------------------------------------------------------------------------------------------------------------------
+    # Waking up on scroll
+    # ------------------------------------------------------------------------------------------------------------------
+    setUpWakingUpWaypoint: (resourceKey)->
+
+      console.log 'setUpWakingUpWaypoint: ', resourceKey
+      @browsersDict[resourceKey].setUpWakingUpWaypoint()
+
     # ------------------------------------------------------------------------------------------------------------------
     # Helper functions
     # ------------------------------------------------------------------------------------------------------------------

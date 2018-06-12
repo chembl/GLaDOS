@@ -44,6 +44,9 @@ glados.useNameSpace 'glados.views.Browsers',
 
       @showOrCreateView @currentViewType
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # sleep awake view
+    # ------------------------------------------------------------------------------------------------------------------
     wakeUp: ->
       @toolBarView.wakeUp()
       @facetsView.wakeUp()
@@ -63,6 +66,31 @@ glados.useNameSpace 'glados.views.Browsers',
       $currentViewInstance = @getCurrentViewInstance()
       if $currentViewInstance.sleepView?
         $currentViewInstance.sleepView()
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Waking up on scroll
+    # ------------------------------------------------------------------------------------------------------------------
+    setUpWakingUpWaypoint: ->
+
+      # If search is ready I don't need to trigger fetch
+      if @collection.searchIsReady()
+        return
+
+      waypointElem = $(@el)[0]
+      thisView = @
+
+      currentWindowHeight = window.innerHeight
+
+      listenScroll = ->
+
+        elemOffset = waypointElem.getBoundingClientRect()
+
+        if elemOffset.top <= currentWindowHeight
+          $(window).off('scroll', debouncedListener)
+          thisView.wakeUp()
+
+      debouncedListener = _.debounce(listenScroll, 100)
+      $(window).scroll debouncedListener
 
     renderViewState: ->
 

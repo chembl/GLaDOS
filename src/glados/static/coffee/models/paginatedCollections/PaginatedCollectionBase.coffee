@@ -142,7 +142,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.SEARCH_STATE_CHANGED)
     searchQueryIsSet: -> @getSearchState() ==\
       glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_QUERY_SET
-    doFetchWhenSearchQueryIsReady: ->
+    searchIsReady: -> @getMeta('search_state') ==\
+      glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_IS_READY
 
     # ------------------------------------------------------------------------------------------------------------------ 
     # Sleep/Awake states
@@ -199,8 +200,9 @@ glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATE
 
 glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES =
   SEARCH_UNDEFINED: 'SEARCH_UNDEFINED'
-  SEARCH_QUERY_SET: 'SEARCH_QUERY_SET'
-  SEARCH_IS_READY: 'SEARCH_IS_READY'
+  SEARCH_QUERY_SET: 'SEARCH_QUERY_SET' #this means that the esQuery is set and it is ready to be fetched, but fetching
+  # has not been done
+  SEARCH_IS_READY: 'SEARCH_IS_READY' # the fetch has been done, and the data has been received and parsed.
 
 glados.models.paginatedCollections.PaginatedCollectionBase.AWAKEN_STATES =
   SLEEPING: 'SLEEPING'
