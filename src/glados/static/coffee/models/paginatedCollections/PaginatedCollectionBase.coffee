@@ -138,8 +138,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     setInitialSearchState: -> @setMeta('search_state',
       glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_UNDEFINED)
     setSearchState: (newState) ->
-      @setMeta('search_state', newState)
-      @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.SEARCH_STATE_CHANGED)
+      oldState = @getSearchState()
+      if oldState != newState
+        @setMeta('search_state', newState)
+        @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.SEARCH_STATE_CHANGED)
     searchQueryIsSet: -> @getSearchState() ==\
       glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_QUERY_SET
     searchIsReady: -> @getMeta('search_state') ==\

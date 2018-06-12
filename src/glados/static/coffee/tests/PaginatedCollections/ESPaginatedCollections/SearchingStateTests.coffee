@@ -25,6 +25,7 @@ describe "An elasticsearch collection", ->
       esList.setInitialFetchingState()
       esList.setMeta('test_mode', true)
       esList.clearAllFacetsSelections()
+      esList.setInitialSearchState()
 
     it 'Sets the initial searching state, along with fetching and facets states', ->
 
@@ -49,6 +50,7 @@ describe "An elasticsearch collection", ->
 
     it 'sets the correct state after parsing items', ->
 
+      esList.search(searchESQuery, doFetch=false)
       esList.reset(esList.parse(testDataToParse))
       searchStateGot = esList.getSearchState()
       searchStateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_IS_READY
@@ -62,3 +64,14 @@ describe "An elasticsearch collection", ->
 
       esList.setSearchState(glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_IS_READY)
       expect(eventTriggered).toBe(true)
+
+    it 'does not trigger the event chane after setting exactly the same state again', ->
+
+      esList.setSearchState(glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_QUERY_SET)
+
+      eventTriggered = false
+      esList.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.SEARCH_STATE_CHANGED,
+      (-> eventTriggered = true)
+
+      esList.setSearchState(glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_QUERY_SET)
+      expect(eventTriggered).toBe(false)
