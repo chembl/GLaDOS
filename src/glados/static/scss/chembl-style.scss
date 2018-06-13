@@ -111,12 +111,6 @@ footer {
   border-bottom: 1px dotted;
 }
 
-.close-corner-button {
-  position: absolute;
-  top: 2px;
-  right: 2px;
-}
-
 .btn-chembl {
   color: white;
   border-radius: $default-btn-border-radius;
@@ -127,11 +121,11 @@ footer {
 .btn-small {
   color: white;
   border-radius: $default-btn-border-radius;
-  padding: 10px 6px 6px 6px;
+  padding: 8px 14px;
   text-align: center;
   width: 60px;
-  line-height: 9px;
-  font-size: 9px;
+  line-height: 12px;
+  font-size: 12px;
 }
 
 .btn-mini i,
@@ -146,23 +140,41 @@ footer {
 .btn-mini {
   color: white;
   border-radius: $default-btn-border-radius;
-  padding: 10px 3px 6px 3px;
+  padding: 6px 10px;
   text-align: center;
   width: 30px;
-  line-height: 9px;
-  font-size: 9px;
+  line-height: 10px;
+  font-size: 10px;
   margin-left: 4px;
 }
 
 .btn-micro {
   color: white;
   border-radius: $default-btn-border-radius;
-  padding: 8px 2px 4px 2px;
+  padding: 6px 4px;
   text-align: center;
   width: 25px;
   line-height: 9px;
   font-size: 9px;
   margin-left: 4px;
+}
+
+.hollow-grey {
+  background-color: white;
+  color: $grey-dark !important;
+  border: 1px solid $grey-dark;
+}
+
+.hollow-teal {
+  background-color: white;
+  color: $chembl-teal !important;
+  border: 1px solid $chembl-teal;
+}
+
+.close-corner-button {
+  position: absolute;
+  top: 2px;
+  right: 2px;
 }
 
 
