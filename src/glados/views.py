@@ -336,6 +336,12 @@ def main_page(request):
     }
     return render(request, 'glados/main_page.html', context)
 
+def design_components(request):
+    context = {
+        'hide_breadcrumbs': True
+    }
+    return render(request, 'glados/base/design_components.html', context)
+
 
 
 def main_html_base(request):

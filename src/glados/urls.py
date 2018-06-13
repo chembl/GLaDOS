@@ -53,6 +53,8 @@ common_urls = [
 
   url(r'^visualise/$', views.visualise, name='visualise ChEMBL'),
 
+  url(r'^design_components/$', views.design_components , name='design_components'),
+
   url(r'^marvin_search_fullscreen/$',
       DirectTemplateView.as_view(template_name="glados/marvin_search_fullscreen.html"), ),
 

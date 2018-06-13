@@ -1,0 +1,38 @@
+{% extends "glados/base/base_layout.html" %}
+
+{% block title %} Design Components {% endblock %}
+
+{% block content %}
+    <div class="color-block">
+
+        <div class="container">
+
+            <div class="text-section vis-section valign-wrapper row">
+
+                <h2 class="col l12 header-dark-grey ">
+
+                    Design Components
+
+                </h2>
+
+                <p class ="col l12 vis-paragraph">
+                    Guide for common style and design elements used in the interface
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="container">
+
+        <h3>  COLOR </h3>
+
+    </div>
+
+{% endblock %}
+
+{% block custom_js_inline %}
+    glados.apps.Main.MainGladosApp.hideMainSplashScreen()
+{% endblock %}
