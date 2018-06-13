@@ -49,6 +49,7 @@ glados.models.Compound.DrugIndication.COLUMNS =
   REFERENCES:
     name_to_show: 'References'
     comparator: 'indication_refs'
+    sort_disabled: true
     multiple_links: true
     multiple_links_function: (refs) -> ({text:r.ref_type, url:r.ref_url} for r in refs)
   MOLECULE_CHEMBL_ID:
