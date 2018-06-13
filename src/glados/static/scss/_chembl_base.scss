@@ -1,14 +1,96 @@
-/*colours from materialize*/
 @import "components/color";
 @import "components/variables";
 
+/*
+----------------------------------------------------------------------------------------------------------------------
+ colours
+----------------------------------------------------------------------------------------------------------------------
+*/
 
-/* ----------------------------------------------------------------------------------------------------------------------
- Typography and colours
-----------------------------------------------------------------------------------------------------------------------*/
+$chembl-teal: color("teal", "base");
+$lighter-teal: color("teal", "lighten-3");
+$darker-teal: color("teal", "darken-3");
+$teal-accent: color('teal', 'accent-4');
 
-$chembl-teal: color("teal", "darken-3");
-$chembl-highlight: #FE7F9D;
+$grey-light: #e9e9e9;
+$divider-grey: #e0e0e0;
+$grey-medium: #707779;
+$grey-dark: #4d5456;
+
+$teal-1: #0D343A;
+$teal-2: #025C5E;
+$teal-3: #09979B;
+$teal-4: #75D8D5;
+$teal-5: #C4E6E5;
+$teal-6: #D4FAF7;
+
+$red-1: #65323E;
+$red-2: #D33C60;
+$red-3: #FE7F9D;
+$red-4: #FFC0CB;
+$red-5: #F1D6DB;
+
+$off-base: #e6e6e6;
+$off-accent: #9a9a9a;
+$first-base: #7FDBB1;
+$first-accent: #2F7071;
+$second-base: #90CFDA;
+$second-accent: #39576F;
+
+$synonyms-color: #bce2e9;
+$tradenames-color: #b1ebd1;
+$prot-target-class-color: #cfd8dc;
+
+$chembl-highlight: $red-3;
+
+$h1-color: $grey-light;
+$h2-color: $darker-teal;
+$h3-color: $grey-dark;
+$h4-color: $grey-medium;
+$h5-color: $grey-dark;
+$h6-color: $grey-dark;
+
+/*
+----------------------------------------------------------------------------------------------------------------------
+ Fonts
+----------------------------------------------------------------------------------------------------------------------
+*/
+
+$chembl-helvetica: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+$helvetica: helvetica, Arial, sans-serif;
+$verdana: "ChEMBL_Verdana", Verdana, sans-serif;
+$open-sans: 'Open Sans', sans-serif;
+$roboto-mono: 'Roboto Mono', 'Ubuntu Mono', courier, sans-serif;
+
+/*
+----------------------------------------------------------------------------------------------------------------------
+ Global variables
+----------------------------------------------------------------------------------------------------------------------
+*/
+
+$global-masthead-large-height: 32px;
+$global-masthead-small-med-height: 49px;
+$default-btn-border-radius: 3px;
+$modals-height: 80%;
+
+/*
+----------------------------------------------------------------------------------------------------------------------
+ Layers
+----------------------------------------------------------------------------------------------------------------------
+*/
+
+$z-underlay: -1;
+$z-default: 1;
+$z-over-a-bit: 10;
+$z-overlay: 1000;
+$z-backdrop: 8000;
+$z-on-top-of-the-top: 9000;
+
+/*
+----------------------------------------------------------------------------------------------------------------------
+ BASIC STYLING
+----------------------------------------------------------------------------------------------------------------------
+*/
 
 .chembl-teal {
   background-color: $chembl-teal !important;
@@ -18,60 +100,45 @@ $chembl-highlight: #FE7F9D;
   color: $chembl-teal !important;
 }
 
-$h1-color: #f7f7f7;
-$h2-color: $chembl-teal;
-$h3-color: #996a44;
-$h4-color: #222;
-$h5-color: #222;
-$h6-color: #222;
-
-$synonyms-color: color('green', 'lighten-4');
-$tradenames-color: color('light-green', 'lighten-3');
-$prot-target-class-color: color('blue-grey', 'lighten-4');
-$default-btn-border-radius: 3px;
-
-$global-masthead-large-height: 32px;
-$global-masthead-small-med-height: 49px;
-
 html {
-  font-family: "ChEMBL_Verdana", Verdana, sans-serif;
-  color: $primary-color-dark;
+  font-family: $verdana;
+  color: $grey-dark;
   scroll-behavior: smooth;
 }
 
 h1 {
   color: $h1-color;
-  font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+  font-family: $chembl-helvetica;
   font-size: 370%;
 }
 
 h2 {
   color: $h2-color;
-  font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+  font-family: $chembl-helvetica;
   font-size: 277%;
 }
 
 h3 {
   color: $h3-color;
-  font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+  font-family: $chembl-helvetica;
   font-size: 182%;
 }
 
 h4 {
   color: $h4-color;
-  font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+  font-family: $chembl-helvetica;
   font-size: 161.6%;
 }
 
 h5 {
   color: $h5-color;
-  font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+  font-family: $chembl-helvetica;
   font-size: 138.5%;
 }
 
 h6 {
-  color: $h5-color;
-  font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+  color: $h6-color;
+  font-family: $chembl-helvetica;
   font-size: 123.1%;
 }
 
@@ -80,11 +147,11 @@ strong {
   color: $primary-color-dark
 }
 
-
-/* ----------------------------------------------------------------------------------------------------------------------
- General Layout setup
-----------------------------------------------------------------------------------------------------------------------*/
-
+/*
+----------------------------------------------------------------------------------------------------------------------
+ GENERAL LAYOUT SETUP
+----------------------------------------------------------------------------------------------------------------------
+*/
 html, body {
   max-width: 100%;
   overflow-x: hidden;
@@ -100,7 +167,6 @@ main {
   flex: 1 0 auto;
 }
 
-$modals-height: 80%;
 
 a {
 
@@ -108,7 +174,6 @@ a {
     color: color('grey', 'base')
   }
 
-  /** make sure all links hav the hand pointer even with no href */
   &:hover {
     cursor: pointer;
   }
@@ -122,11 +187,10 @@ footer {
   padding-top: 0 !important;
 }
 
-
-
-/**
-* Buttons
-* ----------------------------------------------------------------------------------------------------------------------
+/*
+----------------------------------------------------------------------------------------------------------------------
+ BUTTONS
+----------------------------------------------------------------------------------------------------------------------
 */
 
 .dotted-link {
@@ -140,14 +204,14 @@ footer {
 }
 
 .btn-chembl {
-  color: #ffffff;
+  color: white;
   border-radius: $default-btn-border-radius;
   padding: 10px 20px;
   text-align: center;
 }
 
 .btn-small {
-  color: #ffffff;
+  color: white;
   border-radius: $default-btn-border-radius;
   padding: 10px 6px 6px 6px;
   text-align: center;
@@ -166,7 +230,7 @@ footer {
 }
 
 .btn-mini {
-  color: #ffffff;
+  color: white;
   border-radius: $default-btn-border-radius;
   padding: 10px 3px 6px 3px;
   text-align: center;
@@ -177,7 +241,7 @@ footer {
 }
 
 .btn-micro {
-  color: #ffffff;
+  color: white;
   border-radius: $default-btn-border-radius;
   padding: 8px 2px 4px 2px;
   text-align: center;

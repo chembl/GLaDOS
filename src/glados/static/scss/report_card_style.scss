@@ -188,7 +188,7 @@ div#CompoundNameAndClassification .comp-phase-0 {
 .CNC-expandable-content-bottom {
   background-color: rgba(158, 158, 158, 0.6);
   position: absolute;
-  z-index: 990;
+  z-index: $z-overlay;
   width: 100%;
   overflow: hidden;
   display: none;
@@ -328,7 +328,7 @@ div#CNC-zoom-modal {
 
 .SDF-raw-modal-content {
   display: inline-block;
-  font-family: 'Roboto Mono', 'Ubuntu Mono', courier, sans-serif;
+  font-family: $roboto-mono;
   text-align: left;
 }
 
@@ -444,7 +444,7 @@ div#CNC-zoom-modal {
 }
 
 .chembl-paginated-table .pagination li.active {
-  background-color: #009688;
+  background-color: $chembl-teal;
 }
 
 .inications-dowload {
@@ -486,13 +486,14 @@ div#CNC-zoom-modal {
 }
 
 .report-card-container {
-  max-width: 1280px + 200px;
+  max-width: 1480px;
 
 }
 
 
 .withdrawn-info {
   padding: 10px;
+
   .icon {
     font-size: 150%;
   }
@@ -529,7 +530,7 @@ div#CNC-zoom-modal {
   .embed-btn-in-card {
     position: absolute;
     bottom: 18px;
-    right: 0px;
+    right: 0;
   }
 }
 
@@ -588,7 +589,7 @@ div#CNC-zoom-modal {
       &:hover {
 
         .sort-icon {
-          color: color($primary-color-name, "accent-4") !important;
+          color: $chembl-teal !important;
         }
       }
     }
@@ -650,17 +651,17 @@ div#CNC-zoom-modal {
 
   a {
     border-bottom: 0 none;
-    color: color("teal", "base");
+    color: $chembl-teal;
   }
 
   a:hover {
 
-    color: color("teal", "accent-4")
+    color: $lighter-teal;
   }
 
   span {
     border-bottom: 0 none;
-    color: color("teal", "base");
+    color: $chembl-teal;
     font-size: 70%;
   }
 
@@ -680,7 +681,7 @@ div#CNC-zoom-modal {
 }
 
 .cropped-text-field-input {
-  font-family: 'Roboto Mono', 'Ubuntu Mono', courier, sans-serif;
+  font-family: $roboto-mono;
 }
 
 .cropped-text-field-btns {
@@ -703,73 +704,3 @@ div#CNC-zoom-modal {
   width: 75px;
 }
 
-/**
-* Molecule Features
-* ----------------------------------------------------------------------------------------------------------------------
-*/
-
-#MoleculeFeaturesCard {
-
-   .row {
-    margin-bottom: 0;
-  }
-}
-
-.mol-features-grid {
-  .col {
-    padding: 2px;
-  }
-
-  .row {
-    margin-bottom: 0;
-  }
-
-  .mol-features-grid {
-    line-height: 1.5;
-  }
-
-  .feat-icon {
-    padding: 5px;
-    border-radius: 2px;
-
-    i {
-      font-size: 2.5em;
-      margin: auto;
-
-      &.table_cell_icon {
-        font-size: 2.5em;
-      }
-    }
-  }
-
-  .off {
-     background-color: #e6e6e6; //grey
-
-    .feature-icon {
-        color: #9a9a9a; //dark grey
-      }
-  }
-
-  .first-row {
-
-    .active {
-      background-color: #7FDBB1; //light green
-
-      .feature-icon {
-        color: #2F7071; //dark green
-        //color: #EEFFEE; //white green
-      }
-    }
-  }
-
-  .second-row {
-
-    .active {
-      background-color: #90CFDA; //LIGHT BLUE
-
-      .feature-icon{
-        color: #39576F; //dark blue
-      }
-    }
-  }
-}

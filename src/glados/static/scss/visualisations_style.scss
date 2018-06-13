@@ -1,12 +1,9 @@
-@import "components/color";
-@import "components/variables";
+@import "chembl_base";
 
 
 /* ---------------------------------------------------------------------------------------------------------------------
  Browse as circles
 ----------------------------------------------------------------------------------------------------------------------*/
-$vis-teal: #09979B;
-$vis-dark: #0D343A;
 
 .browser-as-circles {
   position: relative;
@@ -21,16 +18,16 @@ $vis-dark: #0D343A;
 
     &.hoverable {
       stroke-width: 1px;
-      stroke: $vis-teal;
+      stroke: $teal-3;
 
       &:hover, &.force-hover {
-        stroke: $vis-teal;
+        stroke: $teal-3;
         stroke-width: 2px;
       }
     }
 
     &.selected {
-      stroke: $vis-teal;
+      stroke: $teal-3;
       stroke-width: 2px;
       stroke-dasharray: 8;
     }
@@ -42,9 +39,9 @@ $vis-dark: #0D343A;
 
   .label {
     text-anchor: middle;
-    text-shadow: 0 0.8px 0 #fff, 0.8px 0 0 #fff, -0.8px 0 0 #fff, 0 -0.8px 0 #fff;
-    fill: $vis-dark;
-    font-family: 'Open Sans', sans-serif;
+    text-shadow: 0 0.8px 0 white, 0.8px 0 0 white, -0.8px 0 0 #fff, 0 -0.8px 0 white;
+    fill: $teal-1;
+    font-family: $open-sans;
   }
 
   .label,
@@ -53,7 +50,7 @@ $vis-dark: #0D343A;
   }
 
   .incomplete {
-    stroke: $vis-teal;
+    stroke: $teal-3;
     stroke-width: 2;
     stroke-dasharray: 10;
   }
@@ -91,7 +88,7 @@ $vis-dark: #0D343A;
       }
 
       &:not(.disabled):hover {
-        color: color("teal", "accent-4");
+        color: $teal-accent;
       }
     }
   }
@@ -105,7 +102,7 @@ $vis-dark: #0D343A;
     cursor: pointer;
 
     &:hover {
-      fill: color("teal", "accent-4");
+      fill: $teal-accent;
     }
   }
 
@@ -114,7 +111,7 @@ $vis-dark: #0D343A;
     cursor: pointer;
 
     &:hover {
-      fill: color("teal", "accent-4");
+      fill: $teal-accent;
     }
 
     &.emphasis {
@@ -183,7 +180,7 @@ $vis-dark: #0D343A;
   cursor: pointer;
   letter-spacing: 0.5px;
   transition: all .15s ease-in-out;
-  color: #D33C60 !important;
+  color: $red-2 !important;
 }
 
 /* ----------------------------------------------------------------------------------------------------------------------
@@ -193,7 +190,7 @@ $vis-dark: #0D343A;
 .legend {
 
   .legend-rect:hover {
-    stroke: color('teal', 'accent-4');
+    stroke: $teal-accent;
   }
 
   .legend-rect.selected {
@@ -205,7 +202,7 @@ $vis-dark: #0D343A;
     cursor: grab;
 
     .legend-rect {
-      stroke: color('teal', 'accent-4');
+      stroke: $teal-accent;
     }
   }
 
@@ -214,7 +211,7 @@ $vis-dark: #0D343A;
     cursor: grabbing;
 
     .legend-rect {
-      stroke: color('teal', 'accent-4');
+      stroke: $teal-accent;
     }
   }
 
@@ -235,8 +232,8 @@ $vis-dark: #0D343A;
 
   .legend-text {
     font-size: 65%;
-    fill: #666;
-    font-family: "ChEMBL_Verdana", Verdana, sans-serif;
+    fill: $grey-dark;
+    font-family: $verdana;
   }
 }
 
@@ -307,12 +304,12 @@ $vis-dark: #0D343A;
   .title {
     cursor: pointer;
     font-size: 90%;
-    font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
-    fill: #5e5e5e;
+    font-family: $chembl-helvetica;
+    fill: $grey-dark;
   }
 
   .title:hover {
-    fill: color('teal', 'accent-4');
+    fill: $teal-accent;
   }
 
   .bars-background {
@@ -341,7 +338,7 @@ $vis-dark: #0D343A;
 
     .hovered {
       opacity: 0.7;
-      stroke: #5cb7b4;
+      stroke: $teal-4;
       stroke-width: 2px;
 
     }
@@ -363,7 +360,7 @@ $vis-dark: #0D343A;
 
       .axis-helper-line {
         stroke-width: 0.5;
-        stroke: grey;
+        stroke: $grey-medium;
       }
 
       .rotated {
@@ -376,7 +373,7 @@ $vis-dark: #0D343A;
     }
 
     text {
-      fill: #666666;
+      fill: $grey-medium;
     }
   }
 
@@ -469,14 +466,14 @@ $vis-dark: #0D343A;
       cursor: pointer;
       font-size: 85%;
       font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
-      color: #5e5e5e;
+      color: $grey-dark;
       text-align: center;
       width: 100%;
     }
   }
 
   .pie-title a:hover {
-    color: color('teal', 'accent-4');
+    color: $teal-accent;
   }
 
   .pie-content {
@@ -485,9 +482,9 @@ $vis-dark: #0D343A;
     .arc {
 
       text {
-        fill: #494949;
+        fill: $grey-dark;
         font-size: 70%;
-        font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif
+        font-family: $chembl-helvetica;
       }
     }
 
@@ -510,8 +507,8 @@ $vis-dark: #0D343A;
 
     .legend-text {
       font-size: 65%;
-      fill: #666;
-      font-family: "ChEMBL_Verdana", Verdana, sans-serif;
+      fill: $grey-dark;
+      font-family: $verdana;
     }
   }
 }
@@ -533,20 +530,20 @@ $vis-dark: #0D343A;
 
     .legend-text {
       font-size: 65%;
-      fill: #666;
-      font-family: "ChEMBL_Verdana", Verdana, sans-serif;
+      fill: $grey-dark;
+      font-family: $verdana;
     }
   }
 
   .title {
     cursor: pointer;
     font-size: 90%;
-    font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
-    fill: #5e5e5e;
+    font-family: $chembl-helvetica;
+    fill: $grey-dark;
   }
 
   .title:hover {
-    fill: color('teal', 'accent-4');
+    fill: $teal-accent;
   }
 
   .sub-arc:hover {
@@ -561,7 +558,7 @@ $vis-dark: #0D343A;
   .arc {
 
     text {
-      font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+      font-family: $chembl-helvetica;
       font-size: 100%;
     }
   }
@@ -599,7 +596,7 @@ $vis-dark: #0D343A;
   .button {
     font-size: 1em;
     padding: 10px 20px;
-    background-color: $vis-teal;
+    background-color: $teal-3;
     color: white;
     border-radius: 4px;
     letter-spacing: 0.02em;
@@ -608,15 +605,15 @@ $vis-dark: #0D343A;
     transition: background-color 100ms ease;
 
     &:hover {
-      background-color: $vis-dark;
+      background-color: $teal-1;
     }
   }
 
   .hollow-button {
     padding: 8px 12px;
     background-color: white;
-    color: $vis-teal;
-    border: solid $vis-teal 2px;
+    color: $teal-3;
+    border: solid $teal-3 2px;
     border-radius: 1px;
     letter-spacing: 0.02em;
 
@@ -624,15 +621,15 @@ $vis-dark: #0D343A;
 }
 
 .header-dark-grey {
-  color: #4d5456;
+  color: $grey-dark;
 }
 
 .dark-green-header{
-  color: #0d595f;
+  color: $darker-teal;
 }
 
 .vis-paragraph {
-  color: #4d5456;
+  color: $grey-dark;
 }
 
 /**

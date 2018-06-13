@@ -1,26 +1,5 @@
-/*colours from materialize*/
-@import "components/color";
-@import "components/variables";
+@import "chembl_base";
 
-/* -------- VARIABLES -------- */
-
-//fonts
-$chembl-helvetica: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
-$helvetica: helvetica, Arial, sans-serif;
-$verdana: "ChEMBL_Verdana", Verdana, sans-serif;
-
-$font-size-big: 1.2em;
-$font-size-small: 1em;
-
-//colors
-$lighter-color: #62b7bd;
-$primary-color: #09979b;
-$darker-color: #0d595f;
-$grey-dark: #4d5456;
-$grey-light: #e9e9e9;
-$divider-grey: #e0e0e0;
-
-//heights
 $chembl-header-height: 54px;
 $ebi-nav-height: 50px;
 $full-header-height: $chembl-header-height + $ebi-nav-height;
@@ -29,7 +8,7 @@ $full-header-height-large: 180px;
 /* -------- DEFAULT STYLES -------- */
 .main-page-container {
   h2 {
-    color: $darker-color;
+    color: $darker-teal;
     font-size: 3em;
   }
 
@@ -92,24 +71,24 @@ $full-header-height-large: 180px;
     .button {
       font-size: 1em;
       padding: 10px 20px;
-      background-color: $primary-color;
+      background-color: $chembl-teal;
       color: white;
-      border-radius: 4px;
+      border-radius: $default-btn-border-radius;
       letter-spacing: 0.02em;
 
       -webkit-transition: background-color 100ms ease;
       transition: background-color 100ms ease;
 
       &:hover {
-        background-color: $darker-color;
+        background-color: $chembl-teal;
       }
     }
 
     .hollow-button {
       padding: 8px 12px;
       background-color: white;
-      color: $primary-color;
-      border: solid $primary-color 2px;
+      color: $chembl-teal;
+      border: solid $chembl-teal 2px;
       border-radius: 1px;
       letter-spacing: 0.02em;
 
@@ -126,7 +105,7 @@ $full-header-height-large: 180px;
     color: $grey-dark;
 
     a {
-      color: $primary-color;
+      color: $chembl-teal;
 
       &:hover {
         text-decoration: underline;
@@ -163,8 +142,8 @@ $full-header-height-large: 180px;
         border-radius: 2px;
         padding: 2px 10px;
         &:hover {
-          color: $primary-color;
-          border-color: $primary-color;
+          color: $chembl-teal;
+          border-color: $chembl-teal;
         }
       }
     }
@@ -290,7 +269,7 @@ $full-header-height-large: 180px;
 
         h4 {
           margin-bottom: 0;
-          color: $darker-color;
+          color: $darker-teal;
           text-anchor: middle;
           transition: letter-spacing 100ms ease-in;
         }
@@ -409,7 +388,7 @@ $full-header-height-large: 180px;
         justify-content: center;
 
         .resource-card {
-          border-radius: 3px;
+          border-radius: $default-btn-border-radius;
           padding: 15px 0 20px 0;
           margin: 5px 0;
           border: solid 1px white;
@@ -420,7 +399,7 @@ $full-header-height-large: 180px;
             padding: 0;
 
             h6 {
-              color: $primary-color;
+              color: $chembl-teal;
               font-weight: bolder;
             }
 
@@ -431,7 +410,7 @@ $full-header-height-large: 180px;
             }
 
             span {
-              color: $primary-color;
+              color: $chembl-teal;
             }
           }
 
@@ -446,7 +425,7 @@ $full-header-height-large: 180px;
           &:hover {
 
             .chevron-icon {
-              color: $primary-color;
+              color: $chembl-teal;
             }
           }
         }
@@ -546,7 +525,7 @@ $full-header-height-large: 180px;
     font-family: $chembl-helvetica;
     color: $grey-dark;
     a {
-      color: $primary-color;
+      color: $chembl-teal;
     }
   }
 
@@ -562,7 +541,7 @@ $full-header-height-large: 180px;
     //Each tweet on the list
     .tweet {
       border: 1px solid $grey-light;
-      border-radius: 3px;
+      border-radius: $default-btn-border-radius;
       padding: 12px 10px;
       width: 100%;
       margin: 7px 0;
@@ -574,7 +553,7 @@ $full-header-height-large: 180px;
         margin: 0;
 
         a {
-          color: $primary-color;
+          color: $chembl-teal;
         }
 
       }
@@ -618,7 +597,7 @@ $full-header-height-large: 180px;
     font-size: 1.3em;
 
     a {
-      color: $primary-color;
+      color: $chembl-teal;
 
       &:hover {
         text-decoration: underline;

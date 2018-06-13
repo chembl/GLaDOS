@@ -1,12 +1,13 @@
+@import "chembl_base";
+
 /*
 * SPLASH SCREEN
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
 $splash-width: 60px;
-$splash-color1: #75D8D5;
-$splash-color2: #FE7F9D;
-$chembl-helvetica: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
+$splash-color1: $teal-4;
+$splash-color2: $red-3;
 
 @keyframes one {
 
@@ -84,7 +85,7 @@ $chembl-helvetica: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 5000;
+  z-index: 8000;
   position: fixed;
   top: 0;
   left: 0;
