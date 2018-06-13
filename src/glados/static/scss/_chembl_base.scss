@@ -1,7 +1,5 @@
-/*colours from materialize*/
 @import "components/color";
 @import "components/variables";
-
 
 /*
 ----------------------------------------------------------------------------------------------------------------------
@@ -32,13 +30,6 @@ $red-3: #FE7F9D;
 $red-4: #FFC0CB;
 $red-5: #F1D6DB;
 
-$h1-color: $grey-light;
-$h2-color: $darker-teal;
-$h3-color: $grey-dark;
-$h4-color: $grey-medium;
-$h5-color: $grey-dark;
-$h6-color: $grey-dark;
-
 $off-base: #e6e6e6;
 $off-accent: #9a9a9a;
 $first-base: #7FDBB1;
@@ -46,11 +37,18 @@ $first-accent: #2F7071;
 $second-base: #90CFDA;
 $second-accent: #39576F;
 
-$synonyms-color: #bce2e9; //#90cfda
-$tradenames-color: #b1ebd1; //#7edcb1
-$prot-target-class-color: color('blue-grey', 'lighten-4');
-$chembl-highlight: #FE7F9D;
+$synonyms-color: #bce2e9;
+$tradenames-color: #b1ebd1;
+$prot-target-class-color: #cfd8dc;
 
+$chembl-highlight: $red-3;
+
+$h1-color: $grey-light;
+$h2-color: $darker-teal;
+$h3-color: $grey-dark;
+$h4-color: $grey-medium;
+$h5-color: $grey-dark;
+$h6-color: $grey-dark;
 
 /*
 ----------------------------------------------------------------------------------------------------------------------
@@ -64,7 +62,6 @@ $verdana: "ChEMBL_Verdana", Verdana, sans-serif;
 $open-sans: 'Open Sans', sans-serif;
 $roboto-mono: 'Roboto Mono', 'Ubuntu Mono', courier, sans-serif;
 
-
 /*
 ----------------------------------------------------------------------------------------------------------------------
  Global variables
@@ -75,7 +72,6 @@ $global-masthead-large-height: 32px;
 $global-masthead-small-med-height: 49px;
 $default-btn-border-radius: 3px;
 $modals-height: 80%;
-
 
 /*
 ----------------------------------------------------------------------------------------------------------------------
@@ -90,13 +86,11 @@ $z-overlay: 1000;
 $z-backdrop: 8000;
 $z-on-top-of-the-top: 9000;
 
-
 /*
 ----------------------------------------------------------------------------------------------------------------------
  BASIC STYLING
 ----------------------------------------------------------------------------------------------------------------------
 */
-
 
 .chembl-teal {
   background-color: $chembl-teal !important;
@@ -114,37 +108,37 @@ html {
 
 h1 {
   color: $h1-color;
-  font-family: $chembl-helvetica, helvetica, Arial, sans-serif;
+  font-family: $chembl-helvetica;
   font-size: 370%;
 }
 
 h2 {
   color: $h2-color;
-  font-family: $chembl-helvetica, helvetica, Arial, sans-serif;
+  font-family: $chembl-helvetica;
   font-size: 277%;
 }
 
 h3 {
   color: $h3-color;
-  font-family: $chembl-helvetica, helvetica, Arial, sans-serif;
+  font-family: $chembl-helvetica;
   font-size: 182%;
 }
 
 h4 {
   color: $h4-color;
-  font-family: $chembl-helvetica, helvetica, Arial, sans-serif;
+  font-family: $chembl-helvetica;
   font-size: 161.6%;
 }
 
 h5 {
   color: $h5-color;
-  font-family: $chembl-helvetica, helvetica, Arial, sans-serif;
+  font-family: $chembl-helvetica;
   font-size: 138.5%;
 }
 
 h6 {
   color: $h6-color;
-  font-family: $chembl-helvetica, helvetica, Arial, sans-serif;
+  font-family: $chembl-helvetica;
   font-size: 123.1%;
 }
 
@@ -153,11 +147,11 @@ strong {
   color: $primary-color-dark
 }
 
-
-/* ----------------------------------------------------------------------------------------------------------------------
- General Layout setup
-----------------------------------------------------------------------------------------------------------------------*/
-
+/*
+----------------------------------------------------------------------------------------------------------------------
+ GENERAL LAYOUT SETUP
+----------------------------------------------------------------------------------------------------------------------
+*/
 html, body {
   max-width: 100%;
   overflow-x: hidden;
@@ -193,10 +187,10 @@ footer {
   padding-top: 0 !important;
 }
 
-
 /*
-* Buttons
-* ----------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
+ BUTTONS
+----------------------------------------------------------------------------------------------------------------------
 */
 
 .dotted-link {
@@ -256,4 +250,3 @@ footer {
   font-size: 9px;
   margin-left: 4px;
 }
-

@@ -10,12 +10,6 @@ $side-buttons-width-big: 180px;
 $row-height-xl: 40px;
 $logo-height-xl: 50px;
 
-//colors
-$lighter-color: #62b7bd;
-$primary-color: #09979B;
-$darker-color: #0d595f;
-$grey: #858585;
-
 //search bar
 $search-bar-height: 25px;
 $search-bar-height-wider: 30px;
@@ -23,11 +17,6 @@ $search-bar-font-size-small: 0.8em;
 $search-bar-font-size-big: 1em;
 $search-bar-max-width: 600px;
 $search-bar-max-width-xl: 1000px;
-
-//fonts
-$chembl-name-font: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
-$search-bar-font: helvetica, Arial, sans-serif;
-$verdana: "ChEMBL_Verdana", Verdana, sans-serif;
 
 /* -------- DEFAULT STYLES PINNED HEADER -------- */
 
@@ -40,23 +29,23 @@ header .row {
 }
 
 .draw-structure:hover {
-  background-color: $lighter-color;
+  background-color: $lighter-teal;
 }
 
 .header-button:hover {
-  background-color: $lighter-color;
+  background-color: $lighter-teal;
 }
 
 .header-nav-links {
   li:hover {
-    background-color: $lighter-color;
+    background-color: $lighter-teal;
   }
 }
 
 .burger-dropdown {
   li:hover {
     a {
-      color: $primary-color !important;
+      color: $chembl-teal !important;
     }
   }
 }
@@ -68,7 +57,7 @@ header .row {
 
   .chembl-header {
     height: $chembl-header-height;
-    background-color: $primary-color;
+    background-color: $chembl-teal;
     width: 100%;
     position: relative;
     float: left;
@@ -106,7 +95,7 @@ header .row {
         span {
           padding-left: $chembl-header-padding;
           padding-top: $chembl-header-padding;
-          font-family: $chembl-name-font;
+          font-family: $chembl-helvetica;
           font-size: 35px;
         }
       }
@@ -136,7 +125,7 @@ header .row {
             transition: height 200ms ease-in;
 
             .chembl-search-bar {
-              font-family: $search-bar-font;
+              font-family: $helvetica;
               padding-left: $chembl-header-padding;
               margin: 0;
               height: 100%;
@@ -159,13 +148,13 @@ header .row {
               }
 
               &.search-button {
-                background-color: $darker-color;
+                background-color: $darker-teal;
               }
             }
           }
 
           .search-examples {
-            font-family: $chembl-name-font;
+            font-family: $chembl-helvetica;
             color: white;
             font-size: 0.8em;
             margin-top: 0.5em;
@@ -308,7 +297,7 @@ header .row {
           span {
             padding-left: $chembl-header-padding * 2;
             padding-top: $chembl-header-padding + 5;
-            font-family: $chembl-name-font;
+            font-family: $chembl-helvetica;
             font-size: $logo-height-xl;
           }
         }
@@ -367,7 +356,7 @@ header .row {
   position: relative;
 
   .dropdown-contents {
-    background-color: $primary-color;
+    background-color: $chembl-teal;
     z-index: $z-underlay;
     min-width: 200px;
     position: absolute;
@@ -379,7 +368,7 @@ header .row {
     -webkit-transition: margin-top 700ms ease-in-out;
 
     li.dropdown-item {
-      border-bottom: $lighter-color solid 1px;
+      border-bottom: $lighter-teal solid 1px;
       border-right: none;
       height: 40px;
 
@@ -396,7 +385,7 @@ header .row {
     }
 
     li:first-child {
-      border-top: $lighter-color solid 1px;
+      border-top: $lighter-teal solid 1px;
     }
 
     li:last-child {
@@ -446,11 +435,11 @@ header .row {
 }
 
 .burger-button.active {
-  background-color: $lighter-color;
+  background-color: $lighter-teal;
 }
 
 .burger-dropdown.active {
-  background-color: $lighter-color;
+  background-color: $lighter-teal;
 }
 
 .burger-dropdown-contents.active {

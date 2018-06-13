@@ -1,6 +1,9 @@
 @import "chembl_base";
 
-/**
+$search-items-height: 35px;
+$marvin-size-fullscreen: 91vh;
+
+/*
 * highlight styles
 * ----------------------------------------------------------------------------------------------------------------------
 */
@@ -13,7 +16,7 @@ em.glados-result-highlight {
   border-radius: 3px;
 }
 
-/**
+/*
 * Search Bar and inputs
 * ----------------------------------------------------------------------------------------------------------------------
 */
@@ -32,11 +35,11 @@ em.glados-result-highlight {
     margin-left: 10px;
     margin-top: 0.5rem;
     width: 99% !important;
-    border-bottom: 0px;
+    border-bottom: 0;
   }
 
   input:focus {
-    border-bottom: 0px;
+    border-bottom: 0;
     color: rgba(8, 46, 52, 0.81);
   }
 
@@ -67,8 +70,6 @@ em.glados-result-highlight {
   display: table;
   clear: both;
 }
-
-$search-items-height: 35px;
 
 .search-input-wrapper, .search-opts, .search-btn, .draw-st-btn {
   height: $search-items-height;
@@ -211,8 +212,6 @@ $search-items-height: 35px;
 * ----------------------------------------------------------------------------------------------------------------------
 */
 
-$marvin-size-fullscreen: 91vh;
-
 .marvin-search-options {
   position: fixed;
   bottom: 0;
@@ -347,7 +346,7 @@ $marvin-size-fullscreen: 91vh;
 */
 
 span.badge-primary-color-no-float {
-  font-family: "ChEMBL_Verdana";
+  font-family: $verdana;
   display: inline-block;
   min-width: 2rem;
   // Padding to make Verdana font look centered
@@ -393,7 +392,7 @@ span.badge-primary-color-no-float {
     &.selected {
       background-color: color('grey', 'lighten-2');
       color: color('black', 'base');
-      border-bottom: 2px solid color($primary-color-name, 'base');
+      border-bottom: 2px solid $chembl-teal;
 
       .badge-primary-color-no-float {
         background-color: color('grey', 'lighten-5');
@@ -403,7 +402,7 @@ span.badge-primary-color-no-float {
     &:not(.selected):hover {
       background-color: color('grey', 'lighten-3');
       color: color('grey', 'darken-4');
-      border-bottom: 2px solid color($primary-color-name, 'lighten-3');
+      border-bottom: 2px solid $lighter-teal;
 
       .badge-primary-color-no-float {
         background-color: color('grey', 'lighten-4');
@@ -505,7 +504,7 @@ span.badge-primary-color-no-float {
 }
 
 .menu-button {
-  background-color: color($primary-color-name, 'base');
+  background-color: $chembl-teal;
   padding: 8px;
   color: white;
   font-size: 0.7em;
@@ -513,7 +512,7 @@ span.badge-primary-color-no-float {
   display: inline-block;
 
   &:hover {
-    background-color: color($primary-color-name, 'accent-4');
+    background-color: $teal-accent;
   }
 
   &.big {
@@ -539,7 +538,7 @@ span.badge-primary-color-no-float {
   */
 
 .es-collection-download-btn {
-  background-color: color('teal', 'base');
+  background-color: $chembl-teal;
 
   p {
     margin-top: 0px;
