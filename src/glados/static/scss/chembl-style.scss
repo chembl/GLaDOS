@@ -1,5 +1,215 @@
 @import "chembl_base";
 
+/*
+----------------------------------------------------------------------------------------------------------------------
+ BASIC STYLING
+----------------------------------------------------------------------------------------------------------------------
+*/
+
+.chembl-teal {
+  background-color: $chembl-teal !important;
+}
+
+.chembl-teal-text {
+  color: $chembl-teal !important;
+}
+
+html {
+  font-family: $verdana;
+  color: $grey-dark;
+  scroll-behavior: smooth;
+}
+
+h1 {
+  color: $h1-color;
+  font-family: $chembl-helvetica;
+  font-size: 370%;
+}
+
+h2 {
+  color: $h2-color;
+  font-family: $chembl-helvetica;
+  font-size: 277%;
+}
+
+h3 {
+  color: $h3-color;
+  font-family: $chembl-helvetica;
+  font-size: 182%;
+}
+
+h4 {
+  color: $h4-color;
+  font-family: $chembl-helvetica;
+  font-size: 161.6%;
+}
+
+h5 {
+  color: $h5-color;
+  font-family: $chembl-helvetica;
+  font-size: 138.5%;
+}
+
+h6 {
+  color: $h6-color;
+  font-family: $chembl-helvetica;
+  font-size: 123.1%;
+}
+
+b,
+strong {
+  color: $primary-color-dark
+}
+
+/*
+----------------------------------------------------------------------------------------------------------------------
+ GENERAL LAYOUT SETUP
+----------------------------------------------------------------------------------------------------------------------
+*/
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+
+a {
+
+  &.disabled {
+    color: color('grey', 'base')
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.no-margin {
+  margin: 0 !important;
+}
+
+footer {
+  padding-top: 0 !important;
+}
+
+/*
+----------------------------------------------------------------------------------------------------------------------
+ BUTTONS
+----------------------------------------------------------------------------------------------------------------------
+*/
+
+.dotted-link {
+  border-bottom: 1px dotted;
+}
+
+.btn-chembl {
+  color: white;
+  background-color: $chembl-teal;
+  border-radius: $default-btn-border-radius;
+  padding: 10px 20px;
+  text-align: center;
+
+  &:hover {
+    background-color: $teal-accent;
+  }
+}
+
+.btn-small {
+  color: white;
+  background-color: $chembl-teal;
+  border-radius: $default-btn-border-radius;
+  padding: 10px 6px 6px 6px;
+  text-align: center;
+  width: 60px;
+  line-height: 9px;
+  font-size: 9px;
+
+  &:hover {
+    background-color: $teal-accent;
+  }
+}
+
+.btn-mini i,
+.btn-small i {
+  font-size: 180%;
+}
+
+.btn-micro i {
+  font-size: 150%;
+}
+
+.btn-mini {
+  color: white;
+  background-color: $chembl-teal;
+  border-radius: $default-btn-border-radius;
+  padding: 10px 3px 6px 3px;
+  text-align: center;
+  width: 30px;
+  line-height: 9px;
+  font-size: 9px;
+  margin-left: 4px;
+
+  &:hover {
+    background-color: $teal-accent;
+  }
+}
+
+.btn-micro {
+  color: white;
+  background-color: $chembl-teal;
+  border-radius: $default-btn-border-radius;
+  padding: 6px 4px;
+  text-align: center;
+  width: 25px;
+  line-height: 9px;
+  font-size: 9px;
+  margin-left: 4px;
+
+  &:hover {
+    background-color: $teal-accent;
+  }
+}
+
+.hollow-grey {
+  background-color: white;
+  color: $grey-dark !important;
+  border: 1px solid $grey-dark;
+
+  &:hover {
+    color: $chembl-teal !important;
+    background-color: white;
+    border-color: $chembl-teal;
+
+  }
+}
+
+.hollow-teal {
+  background-color: white;
+  color: $chembl-teal !important;
+  border: 1px solid $chembl-teal;
+
+  &:hover {
+    background-color: white;
+    border-color: $teal-accent;
+    color: $teal-accent !important;
+  }
+}
+
+.close-corner-button {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+}
+
 
 /**
 * Custom elements
@@ -47,7 +257,7 @@
 @media only screen and (min-width: 601px) {
 
   .main-container {
-    width: 97.5%;
+    width: 95%;
     max-width: none;
   }
 }

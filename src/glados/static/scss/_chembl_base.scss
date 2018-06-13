@@ -17,18 +17,21 @@ $divider-grey: #e0e0e0;
 $grey-medium: #707779;
 $grey-dark: #4d5456;
 
+$chembl-red: #D33C60;
+
 $teal-1: #0D343A;
 $teal-2: #025C5E;
 $teal-3: #09979B;
 $teal-4: #75D8D5;
-$teal-5: #C4E6E5;
+$teal-5: #94F3EB;
 $teal-6: #D4FAF7;
 
 $red-1: #65323E;
 $red-2: #D33C60;
 $red-3: #FE7F9D;
 $red-4: #FFC0CB;
-$red-5: #F1D6DB;
+$red-5: #FFDEE4;
+$red-6: #FFF4F6;
 
 $off-base: #e6e6e6;
 $off-accent: #9a9a9a;
@@ -43,12 +46,12 @@ $prot-target-class-color: #cfd8dc;
 
 $chembl-highlight: $red-3;
 
-$h1-color: $grey-light;
+$h1-color: $darker-teal;
 $h2-color: $darker-teal;
 $h3-color: $grey-dark;
 $h4-color: $grey-medium;
-$h5-color: $grey-dark;
-$h6-color: $grey-dark;
+$h5-color: $grey-medium;
+$h6-color: $grey-medium;
 
 /*
 ----------------------------------------------------------------------------------------------------------------------
@@ -86,167 +89,3 @@ $z-overlay: 1000;
 $z-backdrop: 8000;
 $z-on-top-of-the-top: 9000;
 
-/*
-----------------------------------------------------------------------------------------------------------------------
- BASIC STYLING
-----------------------------------------------------------------------------------------------------------------------
-*/
-
-.chembl-teal {
-  background-color: $chembl-teal !important;
-}
-
-.chembl-teal-text {
-  color: $chembl-teal !important;
-}
-
-html {
-  font-family: $verdana;
-  color: $grey-dark;
-  scroll-behavior: smooth;
-}
-
-h1 {
-  color: $h1-color;
-  font-family: $chembl-helvetica;
-  font-size: 370%;
-}
-
-h2 {
-  color: $h2-color;
-  font-family: $chembl-helvetica;
-  font-size: 277%;
-}
-
-h3 {
-  color: $h3-color;
-  font-family: $chembl-helvetica;
-  font-size: 182%;
-}
-
-h4 {
-  color: $h4-color;
-  font-family: $chembl-helvetica;
-  font-size: 161.6%;
-}
-
-h5 {
-  color: $h5-color;
-  font-family: $chembl-helvetica;
-  font-size: 138.5%;
-}
-
-h6 {
-  color: $h6-color;
-  font-family: $chembl-helvetica;
-  font-size: 123.1%;
-}
-
-b,
-strong {
-  color: $primary-color-dark
-}
-
-/*
-----------------------------------------------------------------------------------------------------------------------
- GENERAL LAYOUT SETUP
-----------------------------------------------------------------------------------------------------------------------
-*/
-html, body {
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
-body {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-}
-
-main {
-  flex: 1 0 auto;
-}
-
-
-a {
-
-  &.disabled {
-    color: color('grey', 'base')
-  }
-
-  &:hover {
-    cursor: pointer;
-  }
-}
-
-.no-margin {
-  margin: 0 !important;
-}
-
-footer {
-  padding-top: 0 !important;
-}
-
-/*
-----------------------------------------------------------------------------------------------------------------------
- BUTTONS
-----------------------------------------------------------------------------------------------------------------------
-*/
-
-.dotted-link {
-  border-bottom: 1px dotted;
-}
-
-.close-corner-button {
-  position: absolute;
-  top: 2px;
-  right: 2px;
-}
-
-.btn-chembl {
-  color: white;
-  border-radius: $default-btn-border-radius;
-  padding: 10px 20px;
-  text-align: center;
-}
-
-.btn-small {
-  color: white;
-  border-radius: $default-btn-border-radius;
-  padding: 10px 6px 6px 6px;
-  text-align: center;
-  width: 60px;
-  line-height: 9px;
-  font-size: 9px;
-}
-
-.btn-mini i,
-.btn-small i {
-  font-size: 180%;
-}
-
-.btn-micro i {
-  font-size: 150%;
-}
-
-.btn-mini {
-  color: white;
-  border-radius: $default-btn-border-radius;
-  padding: 10px 3px 6px 3px;
-  text-align: center;
-  width: 30px;
-  line-height: 9px;
-  font-size: 9px;
-  margin-left: 4px;
-}
-
-.btn-micro {
-  color: white;
-  border-radius: $default-btn-border-radius;
-  padding: 8px 2px 4px 2px;
-  text-align: center;
-  width: 25px;
-  line-height: 9px;
-  font-size: 9px;
-  margin-left: 4px;
-}
