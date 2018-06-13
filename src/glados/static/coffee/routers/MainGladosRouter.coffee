@@ -100,8 +100,13 @@ glados.useNameSpace 'glados.routers',
     triggerSearchURL: (esEntityKey, searchTerm, currentState) ->
       #this puts the search url in the bar and navigates to it
       newSearchURL = @getSearchURL(esEntityKey, searchTerm, currentState)
-      window.history.pushState({}, 'Search Results', newSearchURL);
-      window.history.go()
+      window.history.pushState({}, 'Search Results', newSearchURL)
+
+      isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
+      if not isSafari
+        window.history.go()
+      else
+        location.reload(true)
 
     validateAndParseSearchURL: (tab, searchTerm, state)->
       selectedESEntity = null
