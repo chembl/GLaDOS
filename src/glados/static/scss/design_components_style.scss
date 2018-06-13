@@ -2,14 +2,15 @@
 
 .color-box {
   height: 150px;
+  font-family: $chembl-helvetica;
+
+  p {
+    margin: 0 auto;
+  }
 }
 
 .color-box-small {
   height: 80px;
-}
-
-.font-sample {
-  font-size: 1.5em;
 }
 
 .chembl-teal {
