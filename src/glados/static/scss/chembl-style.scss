@@ -113,19 +113,29 @@ footer {
 
 .btn-chembl {
   color: white;
+  background-color: $chembl-teal;
   border-radius: $default-btn-border-radius;
   padding: 10px 20px;
   text-align: center;
+
+  &:hover {
+    background-color: $teal-accent;
+  }
 }
 
 .btn-small {
   color: white;
+  background-color: $chembl-teal;
   border-radius: $default-btn-border-radius;
-  padding: 8px 14px;
+  padding: 10px 6px 6px 6px;
   text-align: center;
   width: 60px;
-  line-height: 12px;
-  font-size: 12px;
+  line-height: 9px;
+  font-size: 9px;
+
+  &:hover {
+    background-color: $teal-accent;
+  }
 }
 
 .btn-mini i,
@@ -139,17 +149,23 @@ footer {
 
 .btn-mini {
   color: white;
+  background-color: $chembl-teal;
   border-radius: $default-btn-border-radius;
-  padding: 6px 10px;
+  padding: 10px 3px 6px 3px;
   text-align: center;
   width: 30px;
-  line-height: 10px;
-  font-size: 10px;
+  line-height: 9px;
+  font-size: 9px;
   margin-left: 4px;
+
+  &:hover {
+    background-color: $teal-accent;
+  }
 }
 
 .btn-micro {
   color: white;
+  background-color: $chembl-teal;
   border-radius: $default-btn-border-radius;
   padding: 6px 4px;
   text-align: center;
@@ -157,18 +173,35 @@ footer {
   line-height: 9px;
   font-size: 9px;
   margin-left: 4px;
+
+  &:hover {
+    background-color: $teal-accent;
+  }
 }
 
 .hollow-grey {
   background-color: white;
   color: $grey-dark !important;
   border: 1px solid $grey-dark;
+
+  &:hover {
+    color: $chembl-teal !important;
+    background-color: white;
+    border-color: $chembl-teal;
+
+  }
 }
 
 .hollow-teal {
   background-color: white;
   color: $chembl-teal !important;
   border: 1px solid $chembl-teal;
+
+  &:hover {
+    background-color: white;
+    border-color: $teal-accent;
+    color: $teal-accent !important;
+  }
 }
 
 .close-corner-button {
