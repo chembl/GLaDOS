@@ -2,6 +2,14 @@
 
 .color-box {
   height: 150px;
+}
+
+.color-box-small {
+  height: 80px;
+}
+
+.color-box,
+.color-box-small {
   font-family: $chembl-helvetica;
 
   p {
@@ -9,9 +17,7 @@
   }
 }
 
-.color-box-small {
-  height: 80px;
-}
+
 
 .chembl-teal {
   background-color: $chembl-teal;
