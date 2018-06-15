@@ -117,7 +117,7 @@ $full-header-height-large: 180px;
 /* -------- VISUALISATIONS CAROUSEL -------- */
 .main-page-container {
 
-  .slick-slide:focus {
+  .slick-slide {
     outline: none !important;
   }
 
@@ -149,7 +149,6 @@ $full-header-height-large: 180px;
 
       a.no-border {
         border: none !important;
-        
       }
     }
   }
