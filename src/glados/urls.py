@@ -51,7 +51,7 @@ common_urls = [
 
   url(r'^blog_entries/(?P<pageToken>.+)?$', views.get_latest_blog_entries, name='blog_entries'),
 
-  url(r'^visualise/$', views.visualise, name='visualise ChEMBL'),
+  url(r'^visualise/$', views.visualise, name='visualise'),
 
   url(r'^design_components/$', views.design_components , name='design_components'),
 
