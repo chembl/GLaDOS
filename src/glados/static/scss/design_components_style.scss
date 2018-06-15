@@ -8,9 +8,16 @@
   height: 80px;
 }
 
-.font-sample {
-  font-size: 1.5em;
+.color-box,
+.color-box-small {
+  font-family: $chembl-helvetica;
+
+  p {
+    margin: 0 auto;
+  }
 }
+
+
 
 .chembl-teal {
   background-color: $chembl-teal;
