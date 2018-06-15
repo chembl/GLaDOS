@@ -6,7 +6,7 @@
             {% include "glados/MainPageParts/Visualizations/browse_entities.html" %}
         {% endwith %}
 
-        <div class="btn-container hide-on-med-and-down">
+        <span class="btn-container hide-on-med-and-down">
 
             <a class="small-text" href="{% url 'javascript_routing' %}#search_results/all" target="_blank">
 
@@ -14,7 +14,16 @@
 
             </a>
 
-        </div>
+            <a href="{% url 'visualise'%}" class="small-text no-border">
+
+                See all visualisations
+
+            </a>
+
+        </span>
+
+
+
 
     </div>
 
@@ -30,6 +39,12 @@
             <a class="small-text" href="{% url 'javascript_routing' %}#browse/targets" target="_blank">
 
                 Browse all Targets
+
+            </a>
+
+            <a href="{% url 'visualise'%}" class="small-text no-border">
+
+                See all visualisations
 
             </a>
 
@@ -53,6 +68,12 @@
 
             </a>
 
+            <a href="{% url 'visualise'%}" class="small-text no-border">
+
+                See all visualisations
+
+            </a>
+
         </div>
 
     </div>
@@ -69,6 +90,12 @@
             <a class="small-text" href="{% url 'javascript_routing' %}#browse/targets" target="_blank">
 
                 Browse all Targets
+
+            </a>
+
+            <a href="{% url 'visualise'%}" class="small-text no-border">
+
+                See all visualisations
 
             </a>
 
@@ -90,6 +117,12 @@
 
             </a>
 
+            <a href="{% url 'visualise'%}" class="small-text no-border">
+
+                See all visualisations
+
+            </a>
+
         </div>
 
     </div>
@@ -107,6 +140,12 @@
             <a class="small-text" href="{% url 'javascript_routing' %}#browse/compounds/filter/_exists_%3Afirst_approval" target="_blank">
 
                 Browse all Approved Compounds
+
+            </a>
+
+            <a href="{% url 'visualise'%}" class="small-text no-border">
+
+                See all visualisations
 
             </a>
 

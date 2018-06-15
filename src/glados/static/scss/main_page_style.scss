@@ -146,6 +146,11 @@ $full-header-height-large: 180px;
           border-color: $chembl-teal;
         }
       }
+
+      a.no-border {
+        border: none !important;
+        
+      }
     }
   }
 }
