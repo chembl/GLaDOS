@@ -33,39 +33,6 @@ def acks(request):
     return redirect("https://chembl.gitbook.io/chembl-interface-documentation/acknowledgments")
 
 
-# returns all Faqs grouped by category and subcategory
-def faqs(request):
-    # faqs_list = Faq.objects.all();
-    # the categories are ordered by the position theu should have in the page
-    categories = FaqCategory.objects.all();
-    subcategories = FaqSubcategory.objects.all();
-
-    faqs_structure = []
-
-    for cat in categories:
-
-        faqs_in_this_category = {}
-        faqs_in_this_category['category'] = cat
-        faqs_in_this_category['items'] = []
-        faqs_structure.append(faqs_in_this_category)
-
-        for subcat in subcategories:
-
-            faqs_in_this_subcategory = {}
-            faqs_in_this_subcategory['subcategory'] = subcat
-            faqs_in_this_subcategory['items'] = []
-            faqs_in_this_category['items'].append(faqs_in_this_subcategory)
-
-            questions_by_subcategory = Faq.objects.filter(category=cat, subcategory=subcat)
-
-            for q in questions_by_subcategory:
-                faqs_in_this_subcategory['items'].append(q)
-
-    context = {'faqs_structure': faqs_structure}
-
-    return render(request, 'glados/faqs.html', context)
-
-
 def get_latest_tweets(page_number=1, count=15):
     """
     Returns the latest tweets from chembl, It tries to find them in the cache first to avoid hammering twitter
