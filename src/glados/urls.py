@@ -63,7 +63,9 @@ common_urls = [
   url(r'^compound_3D_speck/$',
       DirectTemplateView.as_view(template_name="glados/comp_3D_view_speck_fullscreen.html"), ),
 
-  url(r'^acknowledgements/$', views.acks, name='acks'),
+  url(r'^acknowledgements/$',
+      RedirectView.as_view(url='https://chembl.gitbook.io/chembl-interface-documentation/acknowledgments',
+                           permanent=True), name='acks'),
 
   url(r'^faqs/$',
       RedirectView.as_view(url='https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions',

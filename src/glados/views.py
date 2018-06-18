@@ -28,10 +28,6 @@ def visualise(request):
 
     return render(request, 'glados/visualise.html', context)
 
-def acks(request):
-
-    return redirect("https://chembl.gitbook.io/chembl-interface-documentation/acknowledgments")
-
 
 def get_latest_tweets(page_number=1, count=15):
     """
