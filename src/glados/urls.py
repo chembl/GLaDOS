@@ -12,6 +12,8 @@ from django.views.i18n import javascript_catalog
 from django.conf.urls import url
 from django.http import HttpResponse
 
+from django.views.generic.base import RedirectView
+
 
 
 common_urls = [
@@ -61,9 +63,17 @@ common_urls = [
   url(r'^compound_3D_speck/$',
       DirectTemplateView.as_view(template_name="glados/comp_3D_view_speck_fullscreen.html"), ),
 
-  url(r'^acknowledgements/$', views.acks, name='acks'),
+  url(r'^acknowledgements/$',
+      RedirectView.as_view(url='https://chembl.gitbook.io/chembl-interface-documentation/acknowledgments',
+                           permanent=True), name='acks'),
 
-  url(r'^faqs/$', views.faqs, name='faqs'),
+  url(r'^faqs/$',
+      RedirectView.as_view(url='https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions',
+                           permanent=True), name='faqs'),
+
+  url(r'^downloads/$',
+      RedirectView.as_view(url='https://chembl.gitbook.io/chembl-interface-documentation/downloads',
+                           permanent=True), name='downloads'),
 
   url(r'^db_schema',
     DirectTemplateView.as_view(template_name="glados/database_schema.html"), name='db_schema'),
