@@ -29,12 +29,8 @@ def visualise(request):
     return render(request, 'glados/visualise.html', context)
 
 def acks(request):
-    ack_list = Acknowledgement.objects.order_by('id')
-    context = {
-        'current_acks': [ack for ack in ack_list if ack.is_current == 1],
-        'old_acks': [ack for ack in ack_list if ack.is_current != 1]
-    }
-    return render(request, 'glados/acknowledgements.html', context)
+
+    return redirect("https://chembl.gitbook.io/chembl-interface-documentation/acknowledgments")
 
 
 # returns all Faqs grouped by category and subcategory
