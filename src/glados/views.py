@@ -262,6 +262,7 @@ def get_github_details(request):
 
     if cache_response != None:
         print('github details are in cache')
+        cache_response['time_ago'] = time_ago
         return JsonResponse(cache_response)
 
     print('github details are not in cache')
