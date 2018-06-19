@@ -136,10 +136,6 @@
             //the initialization of modals needs to be as specific as possible to avoid issues with all the other modals
             $('#download-db-modal').modal();
 
-            var baseMenuItem = DownloadWizardApp.initWizardStep();
-            DownloadWizardApp.initBaseWizardStepView(baseMenuItem, $('#download-wizard'));
-            baseMenuItem.fetch();
-
             {% block custom_js_inline %}{% endblock %}
         });
     </script>

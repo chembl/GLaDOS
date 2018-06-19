@@ -1,1 +1,0 @@
-WizardOption = Backbone.Model.extend({})
