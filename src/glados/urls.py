@@ -81,8 +81,6 @@ common_urls = [
   url(r'^ws_schema',
     DirectTemplateView.as_view(template_name="glados/web_services_schema.html"), name='ws_schema'),
 
-  url(r'^download_wizard/(?P<step_id>\w+)$', views.wizard_step_json, name='wizard_step_json'),
-
   # --------------------------------------------------------------------------------------------------------------------
   # Tests
   # --------------------------------------------------------------------------------------------------------------------

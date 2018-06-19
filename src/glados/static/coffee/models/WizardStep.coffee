@@ -1,1 +1,0 @@
-WizardStep = Backbone.Model.extend({})
