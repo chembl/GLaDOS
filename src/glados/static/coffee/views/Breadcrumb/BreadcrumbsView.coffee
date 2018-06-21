@@ -46,6 +46,9 @@ glados.useNameSpace 'glados.views.Breadcrumb',
           shortenURL.then (data) ->
             newHref = glados.Settings.SHORTENED_URL_GENERATOR
               hash: data.hash
+            console.log 'AAA newHref:', newHref
+            console.log 'AAA base url full: ', glados.Settings.GLADOS_BASE_URL_FULL
+            console.log 'AAA full url', "#{glados.Settings.GLADOS_BASE_URL_FULL}#{newHref.slice(1)}"
             $linkToShareURL.text("#{glados.Settings.GLADOS_BASE_URL_FULL}#{newHref.slice(1)}")
         else
           $linkToShareURL.text(window.location.href)
