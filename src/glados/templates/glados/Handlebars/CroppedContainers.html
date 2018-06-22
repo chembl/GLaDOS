@@ -20,6 +20,7 @@
 
                     <div class="cropped-text-field-btns">
 
+                        {{#unless hide_download_btn}}
                         <a id='{{dwnld_btn_id}}'
                            class="waves-effect waves-light teal btn-mini download-text {{additional_classes}} tooltipped
                            BCK-open-download-options BCK-Dwnld-btn"
@@ -27,10 +28,12 @@
                            data-tooltip="Download">
                           <i class="fa fa-download"></i>
                         </a>
+                        {{/unless}}
 
                         <a id='{{copy_btn_id}}' class="waves-effect waves-light teal btn-mini BCK-Copy-btn">
                           <i class="fa fa-clipboard"></i>
                         </a>
+
 
                     </div>
 

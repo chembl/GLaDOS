@@ -28,8 +28,6 @@ glados.useNameSpace 'glados.views.Breadcrumb',
         $editorModal = ButtonsHelper.generateModalFromTemplate($modalTrigger, 'Handlebars-share-page-modal',
           startingTop=undefined , endingTop=undefined, customID=undefined, templateParams=templateParams)
 
-        $linkToShareURL = $editorModal.find('.BCK-link-to-share-url')
-
         needsShortening = glados.Utils.URLS.URLNeedsShortening(window.location.href, 100)
         match = window.location.href.match(glados.Settings.SHORTENING_MATCH_REPEXG)
 
@@ -37,13 +35,10 @@ glados.useNameSpace 'glados.views.Breadcrumb',
 
         config =
           value: window.location.href
-          download:
-            filename: "link"
-            value: "link"
-            tooltip: 'Download SMILES file.'
 
         console.log 'DEBUG: '
         ButtonsHelper.initCroppedContainer($inkToShareContainer, config)
+        return
 
         if needsShortening and match?
 
