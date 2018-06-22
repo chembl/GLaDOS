@@ -701,6 +701,9 @@ div#CNC-zoom-modal {
 }
 
 .cropped-text-field-btns-cell {
+  &.one-button{
+    width: 37.5px;
+  }
   width: 75px;
 }
 
