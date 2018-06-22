@@ -33,6 +33,17 @@ glados.useNameSpace 'glados.views.Breadcrumb',
         needsShortening = glados.Utils.URLS.URLNeedsShortening(window.location.href, 100)
         match = window.location.href.match(glados.Settings.SHORTENING_MATCH_REPEXG)
 
+        $inkToShareContainer = $editorModal.find('.BCK-LinkToShare')
+
+        config =
+          value: window.location.href
+          download:
+            filename: "link"
+            value: "link"
+            tooltip: 'Download SMILES file.'
+
+        console.log 'DEBUG: '
+        ButtonsHelper.initCroppedContainer($inkToShareContainer, config)
 
         if needsShortening and match?
 
