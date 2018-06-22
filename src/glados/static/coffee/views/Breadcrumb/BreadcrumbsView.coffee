@@ -36,12 +36,13 @@ glados.useNameSpace 'glados.views.Breadcrumb',
         config =
           value: window.location.href
 
-        console.log 'DEBUG: '
         ButtonsHelper.initCroppedContainer($inkToShareContainer, config)
-        return
 
         if needsShortening and match?
 
+          $shortenBtnContainer = $editorModal.find('.BCK-shortenBtnContainer')
+          glados.Utils.fillContentForElement($shortenBtnContainer)
+          return
           urlToShorten = window.location.href.match(glados.Settings.SHORTENING_MATCH_REPEXG)[0]
           $linkToShareURL.text('Loading...')
           paramsDict =
@@ -54,8 +55,7 @@ glados.useNameSpace 'glados.views.Breadcrumb',
               hash: data.hash
               absolute: true
             $linkToShareURL.text(newHref)
-        else
-          $linkToShareURL.text(window.location.href)
+
 
     events:
       'click .BCK-open-filter-explain': 'toggleFilterMenu'
