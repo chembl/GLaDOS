@@ -25,44 +25,70 @@ glados.useNameSpace 'glados.views.Breadcrumb',
 
         templateParams =
           link_to_share: @model.get('long_filter_url')
-        $editorModal = ButtonsHelper.generateModalFromTemplate($modalTrigger, 'Handlebars-share-page-modal',
+        @$sharePageModal = ButtonsHelper.generateModalFromTemplate($modalTrigger, 'Handlebars-share-page-modal',
           startingTop=undefined , endingTop=undefined, customID=undefined, templateParams=templateParams)
 
         needsShortening = glados.Utils.URLS.URLNeedsShortening(window.location.href, 100)
         match = window.location.href.match(glados.Settings.SHORTENING_MATCH_REPEXG)
 
-        $inkToShareContainer = $editorModal.find('.BCK-LinkToShare')
-
-        config =
-          value: window.location.href
-
-        ButtonsHelper.initCroppedContainer($inkToShareContainer, config)
+        @renderURLContainer(window.location.href)
 
         if needsShortening and match?
 
-          $shortenBtnContainer = $editorModal.find('.BCK-shortenBtnContainer')
+          $shortenBtnContainer = @$sharePageModal.find('.BCK-shortenBtnContainer')
           glados.Utils.fillContentForElement($shortenBtnContainer)
-          return
-          urlToShorten = window.location.href.match(glados.Settings.SHORTENING_MATCH_REPEXG)[0]
-          $linkToShareURL.text('Loading...')
-          paramsDict =
-            long_url: urlToShorten
-
-          shortenURL = glados.doCSRFPost(glados.Settings.SHORTEN_URLS_ENDPOINT, paramsDict)
-
-          shortenURL.then (data) ->
-            newHref = glados.Settings.SHORTENED_URL_GENERATOR
-              hash: data.hash
-              absolute: true
-            $linkToShareURL.text(newHref)
-
+          $shortenBTN = $shortenBtnContainer.find('.BCK-Shorten-link')
+          $shortenBTN.click(@shortenURL.bind(@))
 
     events:
       'click .BCK-open-filter-explain': 'toggleFilterMenu'
 
+    renderURLContainer: (link) ->
+
+      $inkToShareContainer = @$sharePageModal.find('.BCK-LinkToShare')
+
+      config =
+        value: link
+
+      ButtonsHelper.initCroppedContainer($inkToShareContainer, config, cleanup=true)
+
     toggleFilterMenu: -> $(@el).find('.BCK-filter-explain').slideToggle()
     openFilterMenu: -> $(@el).find('.BCK-filter-explain').show()
     hideFilterMenu: -> $(@el).find('.BCK-filter-explain').hide()
+
+    shortenURL: ->
+
+      $shorteningInfo = @$sharePageModal.find('.BCK-shortening-info')
+      $shortenBtnContainer = @$sharePageModal.find('.BCK-shortenBtnContainer')
+      $shortenBTN = $shortenBtnContainer.find('.BCK-Shorten-link')
+
+      if $shortenBTN.hasClass('disabled')
+        return
+
+      $shortenBTN.addClass('disabled')
+      glados.Utils.fillContentForElement($shorteningInfo, {}, customTemplate=undefined, fillWithPreloader=true)
+      urlToShorten = window.location.href.match(glados.Settings.SHORTENING_MATCH_REPEXG)[0]
+
+      paramsDict =
+        long_url: urlToShorten
+
+      alert('shortening url')
+      shortenURL = glados.doCSRFPost(glados.Settings.SHORTEN_URLS_ENDPOINT, paramsDict)
+
+      thisView = @
+      shortenURL.then (data) ->
+        newHref = glados.Settings.SHORTENED_URL_GENERATOR
+          hash: data.hash
+          absolute: true
+
+        $shortenBTN.removeClass('disabled')
+        $shorteningInfo.empty()
+        thisView.renderURLContainer(newHref)
+
+      shortenURL.fail  ->
+
+        glados.Utils.fillContentForElement($shorteningInfo, {msg: 'There was an error while shortening the URL.'})
+
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Singleton

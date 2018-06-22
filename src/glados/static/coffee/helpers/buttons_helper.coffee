@@ -39,10 +39,15 @@ class ButtonsHelper
   # ------------------------------------------------------------
   # Cropped Container
   # ------------------------------------------------------------
-  @initCroppedContainer: ($containerElem, config) ->
+  @initCroppedContainer: ($containerElem, config, cleanup=false) ->
+
+    # This can be used for when you need to reset the values of the cropped container
+    if cleanup
+      $containerElem.empty()
 
     copyButtonID = "CopyBtn-#{(new Date()).getTime()}"
     value = config.value
+    copyTooltip = 'Copy to Clipboard'
 
     if not config.download?
       hideDownloadButton = true
@@ -53,7 +58,6 @@ class ButtonsHelper
       downloadValue ?= value
       downloadTooltip = config.download.tooltip
       downloadTooltip ?= 'Download'
-      copyTooltip = 'Copy to Clipboard'
 
     downloadBtnID ?= ''
 
