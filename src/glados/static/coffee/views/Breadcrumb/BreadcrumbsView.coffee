@@ -38,7 +38,8 @@ glados.useNameSpace 'glados.views.Breadcrumb',
           $shortenBtnContainer = @$sharePageModal.find('.BCK-shortenBtnContainer')
           glados.Utils.fillContentForElement($shortenBtnContainer)
           $shortenBTN = $shortenBtnContainer.find('.BCK-Shorten-link')
-          $shortenBTN.click(@shortenURL.bind(@))
+          @shortenLinkBound = @shortenURL.bind(@)
+          $shortenBTN.click(@shortenLinkBound)
 
     events:
       'click .BCK-open-filter-explain': 'toggleFilterMenu'
@@ -65,6 +66,12 @@ glados.useNameSpace 'glados.views.Breadcrumb',
       if $shortenBTN.hasClass('disabled')
         return
 
+      if @shortenedURL?
+
+        @renderURLContainer(@shortenedURL)
+        @setButtonStatusAsExpanding()
+        return
+
       $shortenBTN.addClass('disabled')
       glados.Utils.fillContentForElement($shorteningInfo, {}, customTemplate=undefined, fillWithPreloader=true)
       urlToShorten = window.location.href.match(glados.Settings.SHORTENING_MATCH_REPEXG)[0]
@@ -72,7 +79,6 @@ glados.useNameSpace 'glados.views.Breadcrumb',
       paramsDict =
         long_url: urlToShorten
 
-      alert('shortening url')
       shortenURL = glados.doCSRFPost(glados.Settings.SHORTEN_URLS_ENDPOINT, paramsDict)
 
       thisView = @
@@ -81,13 +87,36 @@ glados.useNameSpace 'glados.views.Breadcrumb',
           hash: data.hash
           absolute: true
 
-        $shortenBTN.removeClass('disabled')
+        thisView.setButtonStatusAsExpanding()
+        thisView.shortenedURL = newHref
         $shorteningInfo.empty()
         thisView.renderURLContainer(newHref)
 
       shortenURL.fail  ->
 
         glados.Utils.fillContentForElement($shorteningInfo, {msg: 'There was an error while shortening the URL.'})
+
+    setButtonStatusAsExpanding: ->
+
+      $shortenBtnContainer = @$sharePageModal.find('.BCK-shortenBtnContainer')
+      $shortenBTN = $shortenBtnContainer.find('.BCK-Shorten-link')
+
+      $shortenBTN.removeClass('disabled')
+      $shortenBTN.text('Expand Link')
+      $shortenBTN.off('click', @shortenLinkBound)
+
+      @expandLinkBound = @expandURL.bind(@)
+      $shortenBTN.click(@expandLinkBound)
+
+
+    expandURL: ->
+
+      @renderURLContainer(window.location.href)
+      $shortenBtnContainer = @$sharePageModal.find('.BCK-shortenBtnContainer')
+      $shortenBTN = $shortenBtnContainer.find('.BCK-Shorten-link')
+      $shortenBTN.text('Shorten Link')
+      $shortenBTN.off('click', @expandLinkBound)
+      $shortenBTN.click(@shortenLinkBound)
 
 
 # ----------------------------------------------------------------------------------------------------------------------
