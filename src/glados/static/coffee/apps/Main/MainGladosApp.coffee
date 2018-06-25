@@ -111,7 +111,8 @@ glados.useNameSpace 'glados.apps.Main',
           }
         ]
 
-        glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
+        glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks, longFilter=undefined,
+          hideShareButton=false, askBeforeShortening=true)
         SearchResultsApp.initSubstructureSearchResults(searchTerm)
 
     @initSimilaritySearchResults = (searchTerm, threshold) ->
@@ -128,7 +129,8 @@ glados.useNameSpace 'glados.apps.Main',
           }
         ]
 
-        glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
+        glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks, longFilter=undefined,
+          hideShareButton=false, askBeforeShortening=true)
         SearchResultsApp.initSimilaritySearchResults(searchTerm, threshold)
 
     @initFlexmatchSearchResults = (searchTerm) ->
@@ -144,7 +146,8 @@ glados.useNameSpace 'glados.apps.Main',
             link: "#{glados.Settings.FLEXMATCH_SEARCH_RESULTS_PAGE}#{searchTerm}/#{searchTerm}"
           }
         ]
-        glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
+        glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks, longFilter=undefined,
+          hideShareButton=false, askBeforeShortening=true)
         SearchResultsApp.initFlexmatchSearchResults(searchTerm)
 
     # ------------------------------------------------------------------------------------------------------------------

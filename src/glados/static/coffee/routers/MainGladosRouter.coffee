@@ -93,9 +93,10 @@ glados.useNameSpace 'glados.routers',
 
       # This makes sure that the url and the breadcrumbs are correct. It is the job of the SearchResultsView to
       # to show the correct tab.
-      glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks)
       newSearchURL = @getSearchURL(esEntityKey, searchTerm, currentState, true)
       window.history.pushState({}, 'Search Results', newSearchURL)
+      glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks, longFilter=undefined,
+          hideShareButton=false, askBeforeShortening=true)
 
     triggerSearchURL: (esEntityKey, searchTerm, currentState) ->
       #this puts the search url in the bar and navigates to it

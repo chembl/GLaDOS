@@ -39,25 +39,37 @@ class ButtonsHelper
   # ------------------------------------------------------------
   # Cropped Container
   # ------------------------------------------------------------
-  @initCroppedContainer: ($containerElem, config) ->
+  @initCroppedContainer: ($containerElem, config, cleanup=false) ->
 
-    downloadBtnID = "DownloadBtn-#{(new Date()).getTime()}"
+    # This can be used for when you need to reset the values of the cropped container
+    if cleanup
+      $containerElem.empty()
+
     copyButtonID = "CopyBtn-#{(new Date()).getTime()}"
     value = config.value
-    downloadFilename = config.download.filename
-    downloadValue = config.download.value
-    downloadValue ?= value
-    downloadTooltip = config.download.tooltip
-    downloadTooltip ?= 'Download'
     copyTooltip = 'Copy to Clipboard'
+
+    if not config.download?
+      hideDownloadButton = true
+    else
+      downloadBtnID = "DownloadBtn-#{(new Date()).getTime()}"
+      downloadFilename = config.download.filename
+      downloadValue = config.download.value
+      downloadValue ?= value
+      downloadTooltip = config.download.tooltip
+      downloadTooltip ?= 'Download'
+
+    downloadBtnID ?= ''
 
     glados.Utils.fillContentForElement $containerElem,
       dwnld_btn_id: downloadBtnID
       copy_btn_id: copyButtonID
+      hide_download_btn: hideDownloadButton
       value: value
 
     ButtonsHelper.initCroppedTextFields($containerElem)
-    ButtonsHelper.initDownloadBtn($containerElem.find("##{downloadBtnID}"), downloadFilename, downloadTooltip, downloadValue)
+    ButtonsHelper.initDownloadBtn($containerElem.find("##{downloadBtnID}"), downloadFilename, downloadTooltip,
+      downloadValue) unless hideDownloadButton
     $copyBtn = $containerElem.find("##{copyButtonID}")
     ButtonsHelper.initCopyButton($copyBtn, copyTooltip, value)
 
