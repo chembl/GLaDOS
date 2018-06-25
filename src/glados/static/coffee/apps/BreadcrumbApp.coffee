@@ -3,8 +3,6 @@ glados.useNameSpace 'glados.apps',
 
     @setBreadCrumb = (breadcrumbsList=[], longFilter, hideShareButton=false, longFilterURL, askBeforeShortening=false)->
 
-      console.log 'SET BREADCRUMB'
-      console.log 'askBeforeShortening: ', askBeforeShortening
       # make sure that the view exists
       glados.views.Breadcrumb.BreadcrumbsView.getInstance()
 
