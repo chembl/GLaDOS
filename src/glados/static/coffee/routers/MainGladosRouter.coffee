@@ -96,7 +96,7 @@ glados.useNameSpace 'glados.routers',
       newSearchURL = @getSearchURL(esEntityKey, searchTerm, currentState, true)
       window.history.pushState({}, 'Search Results', newSearchURL)
       glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks, longFilter=undefined,
-          hideShareButton=false, askBeforeShortening=true)
+          hideShareButton=false,longFilterURL=undefined, askBeforeShortening=true)
 
     triggerSearchURL: (esEntityKey, searchTerm, currentState) ->
       #this puts the search url in the bar and navigates to it

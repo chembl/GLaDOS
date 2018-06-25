@@ -10,7 +10,7 @@ glados.useNameSpace 'glados.views.Breadcrumb',
       $breadcrumbsContainer = $(@el).find('.BCK-dynamic-breadcrumbs')
       breadcrumbsList = @model.get('breadcrumbs_list')
       hideShareButton = @model.get('hide_share_button')
-      askBeforeShortening = @model.get('hide_before_sortening')
+      askBeforeShortening = @model.get('ask_before_sortening')
       glados.Utils.fillContentForElement $breadcrumbsContainer,
         breadcrumbs: breadcrumbsList
         hide_share_button: hideShareButton
