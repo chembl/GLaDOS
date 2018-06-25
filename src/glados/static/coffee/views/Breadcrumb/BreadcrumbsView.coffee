@@ -6,6 +6,7 @@ glados.useNameSpace 'glados.views.Breadcrumb',
 
     render: ->
 
+      thisView.shortenedURL = undefined 
       $breadcrumbsContainer = $(@el).find('.BCK-dynamic-breadcrumbs')
       breadcrumbsList = @model.get('breadcrumbs_list')
       hideShareButton = @model.get('hide_share_button')
