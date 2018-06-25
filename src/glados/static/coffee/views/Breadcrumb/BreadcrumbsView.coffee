@@ -9,6 +9,7 @@ glados.useNameSpace 'glados.views.Breadcrumb',
       $breadcrumbsContainer = $(@el).find('.BCK-dynamic-breadcrumbs')
       breadcrumbsList = @model.get('breadcrumbs_list')
       hideShareButton = @model.get('hide_share_button')
+      askBeforeShortening = @model.get('hide_before_sortening')
       glados.Utils.fillContentForElement $breadcrumbsContainer,
         breadcrumbs: breadcrumbsList
         hide_share_button: hideShareButton
@@ -35,11 +36,30 @@ glados.useNameSpace 'glados.views.Breadcrumb',
 
         if needsShortening and match?
 
-          $shortenBtnContainer = @$sharePageModal.find('.BCK-shortenBtnContainer')
-          glados.Utils.fillContentForElement($shortenBtnContainer)
-          $shortenBTN = $shortenBtnContainer.find('.BCK-Shorten-link')
-          @shortenLinkBound = @shortenURL.bind(@)
-          $shortenBTN.click(@shortenLinkBound)
+          if askBeforeShortening
+            $shortenBtnContainer = @$sharePageModal.find('.BCK-shortenBtnContainer')
+            glados.Utils.fillContentForElement($shortenBtnContainer)
+            $shortenBTN = $shortenBtnContainer.find('.BCK-Shorten-link')
+            @shortenLinkBound = @shortenURL.bind(@)
+            $shortenBTN.click(@shortenLinkBound)
+          else
+
+            $shorteningInfo = @$sharePageModal.find('.BCK-shortening-info')
+
+            urlToShorten = window.location.href.match(glados.Settings.SHORTENING_MATCH_REPEXG)[0]
+            paramsDict =
+              long_url: urlToShorten
+            shortenURL = glados.doCSRFPost(glados.Settings.SHORTEN_URLS_ENDPOINT, paramsDict)
+
+            thisView = @
+            shortenURL.then (data) ->
+              newHref = glados.Settings.SHORTENED_URL_GENERATOR
+                hash: data.hash
+                absolute: true
+              glados.Utils.fillContentForElement($shorteningInfo, {}, customTemplate=undefined, fillWithPreloader=true)
+              $shorteningInfo.empty()
+              thisView.renderURLContainer(newHref)
+
 
     events:
       'click .BCK-open-filter-explain': 'toggleFilterMenu'
@@ -74,6 +94,7 @@ glados.useNameSpace 'glados.views.Breadcrumb',
 
       $shortenBTN.addClass('disabled')
       glados.Utils.fillContentForElement($shorteningInfo, {}, customTemplate=undefined, fillWithPreloader=true)
+
       urlToShorten = window.location.href.match(glados.Settings.SHORTENING_MATCH_REPEXG)[0]
 
       paramsDict =
