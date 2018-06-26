@@ -164,6 +164,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     wakeUp: ->
       @setAwakenState(glados.models.paginatedCollections.PaginatedCollectionBase.AWAKEN_STATES.AWAKEN)
     sleep: ->
+      console.log 'SLEEP COLLECTION'
       @setAwakenState(glados.models.paginatedCollections.PaginatedCollectionBase.AWAKEN_STATES.SLEEPING)
 
     awakenStateIsUnknown: -> not @getAwakenState()?

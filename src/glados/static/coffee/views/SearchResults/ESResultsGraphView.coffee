@@ -66,6 +66,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     wakeUpView: ->
 
+      @collection.wakeUp()
       if @collection.DOWNLOADED_ITEMS_ARE_VALID
         @showPlot()
       else

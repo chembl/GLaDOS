@@ -50,6 +50,8 @@ glados.useNameSpace 'glados.views.SearchResults',
     #-------------------------------------------------------------------------------------------------------------------
     getVisibleColumns: -> _.union(@collection.getMeta('columns'), @collection.getMeta('additional_columns'))
     wakeUpView: ->
+
+      @collection.wakeUp()
       @handleVisualisationStatus()
     sleepView: -> @ctmView.destroyAllTooltips()
     handleManualResize: -> @ctmView.render()
