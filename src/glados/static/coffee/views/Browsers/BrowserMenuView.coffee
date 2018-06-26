@@ -52,7 +52,6 @@ glados.useNameSpace 'glados.views.Browsers',
     # ------------------------------------------------------------------------------------------------------------------
     handleListAwakeState: ->
 
-      console.log 'HANDLE LIST AWAKE STATE'
       if @collection.isSleeping()
         @showPreloader()
       else
@@ -105,8 +104,6 @@ glados.useNameSpace 'glados.views.Browsers',
 
     renderViewState: ->
 
-      console.log 'BROSWER MENU VIEW: '
-      console.log 'renderViewState'
       if not @collection.isReady() and not @collection.isStreaming()
         @showPreloader()
         return
@@ -357,7 +354,6 @@ glados.useNameSpace 'glados.views.Browsers',
     # if the view already exists, shows it, otherwise it creates it.
     showOrCreateView: (viewType) ->
 
-      console.log 'showOrCreateView: ', viewType
       viewElementID = @viewContainerID + '-' + viewType
 
       # Does the view exist already?
@@ -395,7 +391,6 @@ glados.useNameSpace 'glados.views.Browsers',
         @allViewsPerType[viewType] = newView
 
 
-      console.log 'GOING TO WAKE UP OPENED VIEW'
       @allViewsPerType[viewType].wakeUpView() unless not @allViewsPerType[viewType].wakeUpView?
 
       $('#' + viewElementID).show()
@@ -424,7 +419,6 @@ glados.useNameSpace 'glados.views.Browsers',
 
     hideView: (viewType) ->
 
-      console.log 'HIDE VIEW'
       @allViewsPerType[viewType].sleepView() unless not @allViewsPerType[viewType].sleepView?
 
       viewElementID = @viewContainerID + '-' + viewType
