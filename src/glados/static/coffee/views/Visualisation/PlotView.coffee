@@ -74,7 +74,6 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
     # only bother if my element is visible
     if $(@el).is(":visible")
 
-      console.log 'RENDER GRAPH!'
       $messagesElement.html Handlebars.compile($('#' + $messagesElement.attr('data-hb-template')).html())
         message: 'Loading Visualisation...'
 
@@ -182,8 +181,7 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
 
       return false
     )
-    console.log 'shownElements: ', @shownElements
-    console.log 'rejectedElements: ', @rejectedElements
+
     @renderRejectedElements()
 
     if not @currentPropertyColour.colourScale?
@@ -204,7 +202,6 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
     else
       borderColours = 'black'
     borderWidths = @getBorderWidths(@shownElements)
-    console.log 'markers_border: ', @config.markers_border
 
     trace1 = {
       x: xValues,

@@ -54,6 +54,8 @@ glados.useNameSpace 'glados.views.Browsers',
 
       if @collection.isSleeping()
         @showPreloader()
+      else
+        @renderViewState()
 
     wakeUp: ->
       @toolBarView.wakeUp()
@@ -388,10 +390,8 @@ glados.useNameSpace 'glados.views.Browsers',
 
         @allViewsPerType[viewType] = newView
 
-      else
-        # yes it already exists
-        # wake up the view if necessary
-        @allViewsPerType[viewType].wakeUpView() unless not @allViewsPerType[viewType].wakeUpView?
+
+      @allViewsPerType[viewType].wakeUpView() unless not @allViewsPerType[viewType].wakeUpView?
 
       $('#' + viewElementID).show()
       currentView = @allViewsPerType[viewType]
