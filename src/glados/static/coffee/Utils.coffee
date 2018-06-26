@@ -720,24 +720,9 @@ glados.useNameSpace 'glados',
             newHref = glados.Settings.SHORTENED_URL_GENERATOR
                 hash: hashGot
 
-            # check until I am sure that the has is accessible
-            openLink = ->
-              $('#GladosMainSplashScreen').hide()
-              window.open newHref
 
-            openIfReady = (data) ->
-
-
-              if data.long_url?
-                setTimeout openLink, 2000
-              else
-                setTimeout ->
-                  checkIfURLReady = $.getJSON("#{glados.Settings.EXTEND_URLS_ENDPOINT_URL}/#{hashGot}")
-                  checkIfURLReady.then openIfReady
-                , 1000
-
-            checkIfURLReady = $.getJSON("#{glados.Settings.EXTEND_URLS_ENDPOINT_URL}/#{hashGot}")
-            checkIfURLReady.then openIfReady
+            $('#GladosMainSplashScreen').hide()
+            window.open newHref
 
         else
           window.open url
