@@ -20,8 +20,7 @@ describe 'Unichem Connectivity List', ->
 
   it 'initialises the links correctly', ->
 
-    uCBKey = glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList.UNICHEM_CALLBACK_KEY
-    urlMustBe = "#{glados.ChemUtils.UniChem.connectivity_url}#{inchiKey}/0/0/4?callback=#{uCBKey}"
+    urlMustBe = "#{glados.ChemUtils.UniChem.connectivity_url}#{inchiKey}/0/0/4"
     urlGot = list.getURLForInchi(inchiKey)
 
     expect(urlGot).toBe(urlMustBe)

@@ -32,19 +32,23 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
     fetchDataForInchiKey: (inchiKey) ->
 
       thisList = @
-      callbackUnichem = (ucJSONResponse) ->
-
-        console.log 'UNICHEM CALLBACK CALLED'
-        thisList.setListDataAfterParse(thisList.parse(ucJSONResponse), true)
+#      callbackUnichem = (ucJSONResponse) ->
+#
+#        console.log 'UNICHEM CALLBACK CALLED'
+#        thisList.setListDataAfterParse(thisList.parse(ucJSONResponse), true)
 
       uCBKey = glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList.UNICHEM_CALLBACK_KEY
-      window[uCBKey] = callbackUnichem
+#      window[uCBKey] = callbackUnichem
 
       jQueryPromise = $.ajax
         type: 'GET'
         url: @getURLForInchi(inchiKey)
         dataType: "jsonp"
-        jsonpCallback: uCBKey
+#        jsonpCallback: uCBKey
+        success: (ucJSONResponse) ->
+          console.log 'success unichem'
+          console.log ucJSONResponse
+          thisList.setListDataAfterParse(thisList.parse(ucJSONResponse), true)
         dataType: 'jsonp'
         headers:
           'Accept':'application/json'
