@@ -63,7 +63,9 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
       getUnichem.error (jqXHR)->
 
         console.log 'ERROR!'
-        console.log (jqXHR)
+        console.log jqXHR
+        console.log jqXHR.responseText
+
 
     #-------------------------------------------------------------------------------------------------------------------
     # Parsing
