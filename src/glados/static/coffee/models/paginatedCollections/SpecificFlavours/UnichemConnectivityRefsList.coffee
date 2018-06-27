@@ -34,6 +34,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
       thisList = @
       callbackUnichem = (ucJSONResponse) ->
 
+        console.log 'UNICHEM CALLBACK CALLED'
         thisList.setListDataAfterParse(thisList.parse(ucJSONResponse), true)
 
       uCBKey = glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList.UNICHEM_CALLBACK_KEY
