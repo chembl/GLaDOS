@@ -16,8 +16,8 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
     getURLForInchi: (inchiKey) ->
 
       uCBKey = glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList.UNICHEM_CALLBACK_KEY
-      console.log 'unichem urls is: ', "#{glados.ChemUtils.UniChem.connectivity_url}#{encodeURI(inchiKey)}/0/0/4?callback=#{uCBKey}"
-      return "#{glados.ChemUtils.UniChem.connectivity_url}#{encodeURI(inchiKey)}/0/0/4?callback=#{uCBKey}"
+      console.log 'unichem urls is: ', "#{glados.ChemUtils.UniChem.connectivity_url}#{encodeURI(inchiKey)}/0/0/4"
+      return "#{glados.ChemUtils.UniChem.connectivity_url}#{encodeURI(inchiKey)}/0/0/4"
 
     getUnichemURL: -> @getURLForInchi(@getMeta('inchi_key'))
     #-------------------------------------------------------------------------------------------------------------------
@@ -43,7 +43,8 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
       jQueryPromise = $.ajax
         type: 'GET'
         url: @getURLForInchi(inchiKey)
-        jsonp: uCBKey
+        dataType: "jsonp"
+        jsonpCallback: uCBKey
         dataType: 'jsonp'
         headers:
           'Accept':'application/json'
