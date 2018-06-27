@@ -31,27 +31,36 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
 
     fetchDataForInchiKey: (inchiKey) ->
 
+      if glados.isInEBIServers()
+        @fetchWithoutJSONP(inchiKey)
+      else
+        @fetchUsingJSONP(inchiKey)
+
+    fetchUsingJSONP: (inchiKey) ->
+
       thisList = @
-#      callbackUnichem = (ucJSONResponse) ->
-#
-#        console.log 'UNICHEM CALLBACK CALLED'
-#        thisList.setListDataAfterParse(thisList.parse(ucJSONResponse), true)
+
+      callbackUnichem = (ucJSONResponse) ->
+
+        console.log 'UNICHEM CALLBACK CALLED'
+        thisList.setListDataAfterParse(thisList.parse(ucJSONResponse), true)
+
 
       uCBKey = glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList.UNICHEM_CALLBACK_KEY
-#      window[uCBKey] = callbackUnichem
+      window[uCBKey] = callbackUnichem
 
       jQueryPromise = $.ajax
         type: 'GET'
         url: @getURLForInchi(inchiKey)
         dataType: "jsonp"
-#        jsonpCallback: uCBKey
-        success: (ucJSONResponse) ->
-          console.log 'success unichem'
-          console.log ucJSONResponse
-          thisList.setListDataAfterParse(thisList.parse(ucJSONResponse), true)
+        jsonpCallback: uCBKey
         dataType: 'jsonp'
         headers:
           'Accept':'application/json'
+
+    fetchWithoutJSONP: (inchiKey) ->
+
+      thisList = @
 
       console.log 'TRIGGERING NO JSONP UNICHEM'
       getUnichem = $.get(@getURLForInchi(inchiKey))
@@ -59,12 +68,15 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
         
         console.log 'success unichem no jsonp'
         console.log ucJSONResponse
+        thisList.setListDataAfterParse(thisList.parse(ucJSONResponse), true)
 
       getUnichem.error (jqXHR)->
 
         console.log 'ERROR!'
         console.log jqXHR
         console.log jqXHR.responseText
+        ucJSONResponse = JSON.parse(jqXHR.responseText)
+        thisList.setListDataAfterParse(thisList.parse(ucJSONResponse), true)
 
 
     #-------------------------------------------------------------------------------------------------------------------
