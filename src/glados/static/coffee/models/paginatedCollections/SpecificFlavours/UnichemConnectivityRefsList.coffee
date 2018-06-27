@@ -14,9 +14,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
     setCompound: (compound) -> @setMeta('original_compound', compound)
     setInchiKey: (key) -> @setMeta('inchi_key', key)
     getURLForInchi: (inchiKey) ->
-
-      uCBKey = glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList.UNICHEM_CALLBACK_KEY
-      console.log 'unichem urls is: ', "#{glados.ChemUtils.UniChem.connectivity_url}#{encodeURI(inchiKey)}/0/0/4"
       return "#{glados.ChemUtils.UniChem.connectivity_url}#{encodeURI(inchiKey)}/0/0/4"
 
     getUnichemURL: -> @getURLForInchi(@getMeta('inchi_key'))
@@ -25,7 +22,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
     #-------------------------------------------------------------------------------------------------------------------
     fetch: ->
 
-      console.log 'fetch unichem conn list'
       inchiKey = @getMeta('inchi_key')
       @fetchDataForInchiKey(inchiKey)
 
@@ -41,8 +37,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
       thisList = @
 
       callbackUnichem = (ucJSONResponse) ->
-
-        console.log 'UNICHEM CALLBACK CALLED'
         thisList.setListDataAfterParse(thisList.parse(ucJSONResponse), true)
 
 
@@ -54,7 +48,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
         url: @getURLForInchi(inchiKey)
         dataType: "jsonp"
         jsonpCallback: uCBKey
-        dataType: 'jsonp'
         headers:
           'Accept':'application/json'
 
@@ -62,19 +55,13 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
 
       thisList = @
 
-      console.log 'TRIGGERING NO JSONP UNICHEM'
       getUnichem = $.get(@getURLForInchi(inchiKey))
       getUnichem.done (ucJSONResponse) ->
-        
-        console.log 'success unichem no jsonp'
-        console.log ucJSONResponse
+
         thisList.setListDataAfterParse(thisList.parse(ucJSONResponse), true)
 
       getUnichem.error (jqXHR)->
 
-        console.log 'ERROR!'
-        console.log jqXHR
-        console.log jqXHR.responseText
         ucJSONResponse = JSON.parse(jqXHR.responseText)
         thisList.setListDataAfterParse(thisList.parse(ucJSONResponse), true)
 
@@ -105,7 +92,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
 
     parse: (response) ->
 
-      console.log 'PARSING RESPONSE: ', response
       matchesSourcesReceived = response[1]
       parsedSourcesWithMatches = []
       matchClasses = {}
