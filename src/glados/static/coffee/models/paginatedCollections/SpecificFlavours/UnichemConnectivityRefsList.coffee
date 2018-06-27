@@ -53,6 +53,11 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
         headers:
           'Accept':'application/json'
 
+      $.get(@getURLForInchi(inchiKey)).done (ucJSONResponse) ->
+        
+        console.log 'success unichem no jsonp'
+        console.log ucJSONResponse
+
     #-------------------------------------------------------------------------------------------------------------------
     # Parsing
     #-------------------------------------------------------------------------------------------------------------------
