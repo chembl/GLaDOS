@@ -16,6 +16,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
     getURLForInchi: (inchiKey) ->
 
       uCBKey = glados.models.paginatedCollections.SpecificFlavours.UnichemConnectivityRefsList.UNICHEM_CALLBACK_KEY
+      console.log 'unichem urls is: ', "#{glados.ChemUtils.UniChem.connectivity_url}#{encodeURI(inchiKey)}/0/0/4?callback=#{uCBKey}"
       return "#{glados.ChemUtils.UniChem.connectivity_url}#{encodeURI(inchiKey)}/0/0/4?callback=#{uCBKey}"
 
     getUnichemURL: -> @getURLForInchi(@getMeta('inchi_key'))
@@ -24,6 +25,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
     #-------------------------------------------------------------------------------------------------------------------
     fetch: ->
 
+      console.log 'fetch unichem conn list'
       inchiKey = @getMeta('inchi_key')
       @fetchDataForInchiKey(inchiKey)
 
@@ -71,6 +73,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
 
     parse: (response) ->
 
+      console.log 'PARSING RESPONSE: ', response
       matchesSourcesReceived = response[1]
       parsedSourcesWithMatches = []
       matchClasses = {}
