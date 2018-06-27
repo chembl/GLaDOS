@@ -473,10 +473,12 @@ class CompoundReportCardApp extends glados.ReportCardApp
         refs_config: refsConfig
 
     if GlobalVariables['EMBEDED']
+      console.log 'FETCHING COMPOUND!'
       compound.fetch()
 
   @initUnichemConnectivityMatches = ->
 
+    console.log '@initUnichemConnectivityMatches'
     compound = CompoundReportCardApp.getCurrentCompound()
 
     new glados.views.Compound.UnichemConnectivityMatchesView

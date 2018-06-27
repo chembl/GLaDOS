@@ -231,12 +231,14 @@ glados.useNameSpace 'glados.apps.Embedding',
 
     @initReportCardSection: (reportCardPath, chemblID, sectionName) ->
 
+      console.log 'initReportCardSection: ', "#{reportCardPath}, #{chemblID}, #{sectionName}"
       requiredHTMLURLTempl = @requiredHTMLTemplatesURLSReportCards["#{reportCardPath}/"][sectionName].template
       requiredHTMLURL = Handlebars.compile(requiredHTMLURLTempl)
         chembl_id: chemblID
       initFunction = @requiredHTMLTemplatesURLSReportCards["#{reportCardPath}/"][sectionName].initFunction
       GlobalVariables['CURRENT_MODEL_CHEMBL_ID'] = chemblID
 
+      console.log 'initFunction: ', initFunction
       @loadHTMLSection(requiredHTMLURL, initFunction)
 
     @summonMe: ->
