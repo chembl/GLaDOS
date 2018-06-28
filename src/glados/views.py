@@ -227,20 +227,22 @@ def get_entities_records(request):
 
     print('records are not in cache')
 
-    status_r = requests.get('https://www.ebi.ac.uk/chembl/api/data/status.json').json()
-    drug_r = requests.get('https://www.ebi.ac.uk/chembl/api/data/drug.json').json()
-    assays_r = requests.get('https://www.ebi.ac.uk/chembl/api/data/assay.json').json()
-    cells_r = requests.get('https://www.ebi.ac.uk/chembl/api/data/cell_line.json').json()
-    tissues_r = requests.get('https://www.ebi.ac.uk/chembl/api/data/tissue.json').json()
+    drugs_query = {
+
+        "term": {
+          "_metadata.drug.is_drug": True
+        }
+
+    }
 
     response = {
-        'Compounds': status_r['disinct_compounds'],
-        'Drugs': drug_r['page_meta']['total_count'],
-        'Assays': assays_r['page_meta']['total_count'],
-        'Documents': status_r['publications'],
-        'Targets': status_r['targets'],
-        'Cells': cells_r['page_meta']['total_count'],
-        'Tissues': tissues_r['page_meta']['total_count']
+        'Compounds': Search(index="chembl_molecule").execute().hits.total,
+        'Drugs': Search(index="chembl_molecule").query(drugs_query).execute().hits.total,
+        'Assays': Search(index="chembl_assay").execute().hits.total,
+        'Documents': Search(index="chembl_document").execute().hits.total,
+        'Targets': Search(index="chembl_target").execute().hits.total,
+        'Cells': Search(index="chembl_cell_line").execute().hits.total,
+        'Tissues': Search(index="chembl_tissue").execute().hits.total
     }
 
     cache.set(cache_key, response, cache_time)
