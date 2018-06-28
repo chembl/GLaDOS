@@ -342,6 +342,17 @@ def shorten_url(request):
     else:
         return JsonResponse({'error': 'this is only available via POST'})
 
+def elasticsearch_cache(request):
+    if request.method == "POST":
+
+        resp_data = {
+            'hello': 'world'
+        }
+        return JsonResponse(resp_data)
+
+    else:
+        return JsonResponse({'error': 'this is only available via POST'})
+
 
 def extend_url(request, hash):
     resp_data = {

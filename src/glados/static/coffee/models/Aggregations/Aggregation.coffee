@@ -114,6 +114,14 @@ glados.useNameSpace 'glados.models.Aggregations',
 
       esJSONRequest = JSON.stringify(@getRequestData())
 
+      console.log '@url', @url
+      console.log 'esJSONRequest', esJSONRequest
+
+      getFromCache = glados.doCSRFPost('elasticsearch_cache', {})
+      getFromCache.done (data) ->
+        console.log 'cache response', data
+
+
       fetchESOptions =
         url: @url
         data: esJSONRequest
