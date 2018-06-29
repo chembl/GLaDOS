@@ -81,6 +81,13 @@ glados.useNameSpace 'glados.models.Aggregations',
       aggConfig.intervals_set_by_bin_size = true
 
       @fetch() unless @get('test_mode')
+
+    #-------------------------------------------------------------------------------------------------------------------
+    # Fetching
+    #-------------------------------------------------------------------------------------------------------------------
+    getIndexName: ->
+
+      console.log 'get index name from url'
     #-------------------------------------------------------------------------------------------------------------------
     # Fetching
     #-------------------------------------------------------------------------------------------------------------------
@@ -117,9 +124,13 @@ glados.useNameSpace 'glados.models.Aggregations',
       console.log '@url', @url
       console.log 'esJSONRequest', esJSONRequest
 
-      getFromCache = glados.doCSRFPost('elasticsearch_cache', {})
+      esCacheData =
+        index_name: @get('index_url')
+      getFromCache = glados.doCSRFPost('elasticsearch_cache', esCacheData)
       getFromCache.done (data) ->
+        console.log 'esCacheData: ', esCacheData
         console.log 'cache response', data
+
 
 
       fetchESOptions =

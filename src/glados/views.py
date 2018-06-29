@@ -345,6 +345,8 @@ def shorten_url(request):
 def elasticsearch_cache(request):
     if request.method == "POST":
 
+        index_name = request.POST.get('index_name', '')
+        print('index_name: ', index_name)
         resp_data = {
             'hello': 'world'
         }
