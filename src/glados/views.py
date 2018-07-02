@@ -18,6 +18,8 @@ import requests
 import datetime
 import timeago
 import json
+import hashlib
+import base64
 
 
 keyword_args = {
@@ -358,9 +360,26 @@ def shorten_url(request):
 def elasticsearch_cache(request):
     if request.method == "POST":
 
+        print ('elasticsearch_cache')
         index_name = request.POST.get('index_name', '')
-        search_data = json.loads(request.POST.get('search_data', ''))
+        raw_search_data = request.POST.get('search_data', '')
+        search_data_digest = hashlib.md5(raw_search_data.encode('utf-8')).digest()
+        base64_search_data_hash = base64.b64encode(search_data_digest).decode('utf-8')
+        search_data = json.loads(raw_search_data)
+
+        cache_key = "{}-{}".format(index_name, base64_search_data_hash)
+        print('cache_key', cache_key)
+
+        cache_response = cache.get(cache_key)
+
+        if cache_response != None:
+            print('results are in cache')
+            return JsonResponse(cache_response)
+
+        print('results are NOT in cache')
         response = es.search(index=index_name, body=search_data)
+        cache_time = 3600
+        cache.set(cache_key, response, cache_time)
         return JsonResponse(response)
 
     else:
