@@ -83,11 +83,28 @@ glados.useNameSpace 'glados.models.Aggregations',
       @fetch() unless @get('test_mode')
 
     #-------------------------------------------------------------------------------------------------------------------
-    # Fetching
+    # Use of web server cache
     #-------------------------------------------------------------------------------------------------------------------
     getIndexName: ->
 
-      console.log 'get index name from url'
+      searchIndexes = glados.models.paginatedCollections.Settings.ES_INDEXES
+      noSearchIndexes = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH
+
+
+      return switch @url
+        when glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL then searchIndexes.COMPOUND.INDEX_NAME
+        when glados.models.Aggregations.Aggregation.TARGET_INDEX_URL then searchIndexes.TARGET.INDEX_NAME
+        when glados.models.Aggregations.Aggregation.ASSAY_INDEX_URL then searchIndexes.ASSAY.INDEX_NAME
+        when glados.models.Aggregations.Aggregation.DOCUMENT_INDEX_URL then searchIndexes.DOCUMENT.INDEX_NAME
+        when glados.models.Aggregations.Aggregation.ACTIVITY_INDEX_URL then noSearchIndexes.ACTIVITY.INDEX_NAME
+
+
+    getESCacheRequestData: ->
+
+      esCacheData =
+        index_name: @getIndexName()
+
+      return esCacheData
     #-------------------------------------------------------------------------------------------------------------------
     # Fetching
     #-------------------------------------------------------------------------------------------------------------------
@@ -124,8 +141,7 @@ glados.useNameSpace 'glados.models.Aggregations',
       console.log '@url', @url
       console.log 'esJSONRequest', esJSONRequest
 
-      esCacheData =
-        index_name: @get('index_url')
+      esCacheData = @getESCacheRequestData()
       getFromCache = glados.doCSRFPost('elasticsearch_cache', esCacheData)
       getFromCache.done (data) ->
         console.log 'esCacheData: ', esCacheData
@@ -493,6 +509,8 @@ glados.models.Aggregations.Aggregation.DOCUMENT_INDEX_URL = glados.models.pagina
 
 glados.models.Aggregations.Aggregation.DRUG_INDEX_URL = glados.models.paginatedCollections.Settings.ES_BASE_URL\
 + '/chembl_drug/_search'
+
+# do tests for cell lines and tissues if they are needed
 
 glados.models.Aggregations.Aggregation.States =
   INITIAL_STATE: 'INITIAL_STATE'
