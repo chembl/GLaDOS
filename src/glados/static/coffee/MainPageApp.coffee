@@ -274,7 +274,7 @@ class MainPageApp
 
     return yearByMaxPhase
 
-@getFirstApprovalPercentage = (defaultInterval = 1) ->
+  @getFirstApprovalPercentage = (defaultInterval = 1) ->
 
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
