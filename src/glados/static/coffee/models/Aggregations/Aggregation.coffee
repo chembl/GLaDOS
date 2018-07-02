@@ -103,6 +103,7 @@ glados.useNameSpace 'glados.models.Aggregations',
 
       esCacheData =
         index_name: @getIndexName()
+        search_data: JSON.stringify(@getRequestData())
 
       return esCacheData
     #-------------------------------------------------------------------------------------------------------------------
@@ -332,6 +333,7 @@ glados.useNameSpace 'glados.models.Aggregations',
 
     parse: (data) ->
 
+      console.log 'PARSING RESPONSE: ', data
       bucketsData = {}
       aggsConfig = @get('aggs_config')
       receivedAggsInfo = data.aggregations

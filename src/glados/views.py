@@ -12,12 +12,25 @@ import glados.url_shortener.url_shortener as url_shortener
 from apiclient.discovery import build
 from googleapiclient import *
 import re
+from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search
 import requests
 import datetime
 import timeago
+import json
 
 
+keyword_args = {
+  "hosts": [settings.ELASTICSEARCH_HOST],
+  "timeout": 30,
+  "retry_on_timeout": True
+}
+
+if settings.ELASTICSEARCH_PASSWORD is not None:
+  keyword_args["http_auth"] = (settings.ELASTICSEARCH_USERNAME, settings.ELASTICSEARCH_PASSWORD)
+
+
+es = Elasticsearch(**keyword_args)
 
 
 # Returns all acknowledgements grouped by current and old
@@ -346,11 +359,9 @@ def elasticsearch_cache(request):
     if request.method == "POST":
 
         index_name = request.POST.get('index_name', '')
-        print('index_name: ', index_name)
-        resp_data = {
-            'hello': 'world'
-        }
-        return JsonResponse(resp_data)
+        search_data = json.loads(request.POST.get('search_data', ''))
+        response = es.search(index=index_name, body=search_data)
+        return JsonResponse(response)
 
     else:
         return JsonResponse({'error': 'this is only available via POST'})
