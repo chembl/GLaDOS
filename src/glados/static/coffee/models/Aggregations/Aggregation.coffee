@@ -1,6 +1,8 @@
 glados.useNameSpace 'glados.models.Aggregations',
   Aggregation: Backbone.Model.extend
 
+    defaults:
+      use_web_server_cache: true
     #-------------------------------------------------------------------------------------------------------------------
     # Initialisation
     #-------------------------------------------------------------------------------------------------------------------
@@ -137,27 +139,23 @@ glados.useNameSpace 'glados.models.Aggregations',
         $progressElem.html 'Fetching Data...'
       @set('state', glados.models.Aggregations.Aggregation.States.LOADING_BUCKETS)
 
-      esJSONRequest = JSON.stringify(@getRequestData())
+      if @get('use_web_server_cache')
+        esCacheData = @getESCacheRequestData()
+        fetchPromise = glados.doCSRFPost('elasticsearch_cache', esCacheData)
+      else
 
-      console.log '@url', @url
-      console.log 'esJSONRequest', esJSONRequest
+        esJSONRequest = JSON.stringify(@getRequestData())
 
-      esCacheData = @getESCacheRequestData()
-      getFromCache = glados.doCSRFPost('elasticsearch_cache', esCacheData)
-      getFromCache.done (data) ->
-        console.log 'esCacheData: ', esCacheData
-        console.log 'cache response', data
+        fetchESOptions =
+          url: @url
+          data: esJSONRequest
+          type: 'POST'
+          reset: true
 
-
-
-      fetchESOptions =
-        url: @url
-        data: esJSONRequest
-        type: 'POST'
-        reset: true
+        fetchPromise = $.ajax(fetchESOptions)
 
       thisModel = @
-      $.ajax(fetchESOptions).done((data) ->
+      fetchPromise.done((data) ->
         if $progressElem?
           $progressElem.html ''
 
@@ -333,7 +331,6 @@ glados.useNameSpace 'glados.models.Aggregations',
 
     parse: (data) ->
 
-      console.log 'PARSING RESPONSE: ', data
       bucketsData = {}
       aggsConfig = @get('aggs_config')
       receivedAggsInfo = data.aggregations
