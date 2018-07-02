@@ -4,11 +4,11 @@ describe 'Aggregation', ->
 
     describe 'Using the Compound index', ->
 
-      targChemblID = 'CHEMBL2111359'
-      compoundsAgg = TargetReportCardApp.getAssociatedCompoundsAgg(targChemblID)
+      compoundsAgg = MainPageApp.getYearByMaxPhaseAgg()
 
       it 'Returns the correct index name', ->
 
+        console.log 'DEBUG'
         requestData = compoundsAgg.getESCacheRequestData()
         indexName = requestData.index_name
         expect(indexName).toBe(glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND.INDEX_NAME)
