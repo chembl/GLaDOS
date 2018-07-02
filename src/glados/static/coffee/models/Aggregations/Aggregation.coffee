@@ -108,6 +108,15 @@ glados.useNameSpace 'glados.models.Aggregations',
         search_data: JSON.stringify(@getRequestData())
 
       return esCacheData
+
+    getESCacheRequestDataFroMinAndMax: ->
+
+      esCacheData =
+        index_name: @getIndexName()
+        search_data: JSON.stringify(@getRequestMinMaxData())
+
+      return esCacheData
+
     #-------------------------------------------------------------------------------------------------------------------
     # Fetching
     #-------------------------------------------------------------------------------------------------------------------
@@ -141,7 +150,7 @@ glados.useNameSpace 'glados.models.Aggregations',
 
       if @get('use_web_server_cache')
         esCacheData = @getESCacheRequestData()
-        fetchPromise = glados.doCSRFPost('elasticsearch_cache', esCacheData)
+        fetchPromise = glados.doCSRFPost(glados.Settings.ELASTICSEARCH_CACHE, esCacheData)
       else
 
         esJSONRequest = JSON.stringify(@getRequestData())
@@ -175,14 +184,23 @@ glados.useNameSpace 'glados.models.Aggregations',
       $progressElem = @get('progress_elem')
       esJSONRequest = JSON.stringify(@getRequestMinMaxData())
 
-      fetchESOptions =
-        url: @url
-        data: esJSONRequest
-        type: 'POST'
-        reset: true
+      if @get('use_web_server_cache')
+
+        esCacheData = @getESCacheRequestDataFroMinAndMax()
+        fetchPromise = glados.doCSRFPost(glados.Settings.ELASTICSEARCH_CACHE, esCacheData)
+
+      else
+
+        fetchESOptions =
+          url: @url
+          data: esJSONRequest
+          type: 'POST'
+          reset: true
+
+        fetchPromise = $.ajax(fetchESOptions)
 
       thisModel = @
-      $.ajax(fetchESOptions).done((data) ->
+      fetchPromise.done((data) ->
 
         thisModel.set('aggs_config', thisModel.parseMinMax(data))
 
