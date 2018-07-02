@@ -8,7 +8,6 @@ describe 'Aggregation', ->
 
       it 'Returns the correct index name', ->
 
-        console.log 'DEBUG'
         requestData = compoundsAgg.getESCacheRequestData()
         indexName = requestData.index_name
         expect(indexName).toBe(glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND.INDEX_NAME)
