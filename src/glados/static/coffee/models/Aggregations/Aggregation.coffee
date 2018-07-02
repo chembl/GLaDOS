@@ -507,8 +507,6 @@ glados.models.Aggregations.Aggregation.ASSAY_INDEX_URL = glados.models.paginated
 glados.models.Aggregations.Aggregation.DOCUMENT_INDEX_URL = glados.models.paginatedCollections.Settings.ES_BASE_URL\
 + '/chembl_document/_search'
 
-glados.models.Aggregations.Aggregation.DRUG_INDEX_URL = glados.models.paginatedCollections.Settings.ES_BASE_URL\
-+ '/chembl_drug/_search'
 
 # do tests for cell lines and tissues if they are needed
 
