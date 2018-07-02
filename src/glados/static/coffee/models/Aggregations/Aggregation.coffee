@@ -278,6 +278,7 @@ glados.useNameSpace 'glados.models.Aggregations',
         # ---------------------------------------------------------------------
         if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE
 
+          bucketsList.sort (a, b) -> a.from - b.from
           currentNumCols = bucketsList.length
 
           currentMinValue = aggDescription.min_value

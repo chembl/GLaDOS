@@ -363,7 +363,7 @@ def elasticsearch_cache(request):
         print ('elasticsearch_cache')
         index_name = request.POST.get('index_name', '')
         raw_search_data = request.POST.get('search_data', '')
-        search_data_digest = hashlib.md5(raw_search_data.encode('utf-8')).digest()
+        search_data_digest = hashlib.sha256(raw_search_data.encode('utf-8')).digest()
         base64_search_data_hash = base64.b64encode(search_data_digest).decode('utf-8')
         search_data = json.loads(raw_search_data)
 
