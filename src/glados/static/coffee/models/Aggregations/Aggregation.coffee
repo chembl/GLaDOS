@@ -1,6 +1,8 @@
 glados.useNameSpace 'glados.models.Aggregations',
   Aggregation: Backbone.Model.extend
 
+    defaults:
+      use_web_server_cache: true
     #-------------------------------------------------------------------------------------------------------------------
     # Initialisation
     #-------------------------------------------------------------------------------------------------------------------
@@ -81,6 +83,40 @@ glados.useNameSpace 'glados.models.Aggregations',
       aggConfig.intervals_set_by_bin_size = true
 
       @fetch() unless @get('test_mode')
+
+    #-------------------------------------------------------------------------------------------------------------------
+    # Use of web server cache
+    #-------------------------------------------------------------------------------------------------------------------
+    getIndexName: ->
+
+      searchIndexes = glados.models.paginatedCollections.Settings.ES_INDEXES
+      noSearchIndexes = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH
+
+
+      return switch @url
+        when glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL then searchIndexes.COMPOUND.INDEX_NAME
+        when glados.models.Aggregations.Aggregation.TARGET_INDEX_URL then searchIndexes.TARGET.INDEX_NAME
+        when glados.models.Aggregations.Aggregation.ASSAY_INDEX_URL then searchIndexes.ASSAY.INDEX_NAME
+        when glados.models.Aggregations.Aggregation.DOCUMENT_INDEX_URL then searchIndexes.DOCUMENT.INDEX_NAME
+        when glados.models.Aggregations.Aggregation.ACTIVITY_INDEX_URL then noSearchIndexes.ACTIVITY.INDEX_NAME
+
+
+    getESCacheRequestData: ->
+
+      esCacheData =
+        index_name: @getIndexName()
+        search_data: JSON.stringify(@getRequestData())
+
+      return esCacheData
+
+    getESCacheRequestDataFroMinAndMax: ->
+
+      esCacheData =
+        index_name: @getIndexName()
+        search_data: JSON.stringify(@getRequestMinMaxData())
+
+      return esCacheData
+
     #-------------------------------------------------------------------------------------------------------------------
     # Fetching
     #-------------------------------------------------------------------------------------------------------------------
@@ -112,16 +148,23 @@ glados.useNameSpace 'glados.models.Aggregations',
         $progressElem.html 'Fetching Data...'
       @set('state', glados.models.Aggregations.Aggregation.States.LOADING_BUCKETS)
 
-      esJSONRequest = JSON.stringify(@getRequestData())
+      if @get('use_web_server_cache')
+        esCacheData = @getESCacheRequestData()
+        fetchPromise = glados.doCSRFPost(glados.Settings.ELASTICSEARCH_CACHE, esCacheData)
+      else
 
-      fetchESOptions =
-        url: @url
-        data: esJSONRequest
-        type: 'POST'
-        reset: true
+        esJSONRequest = JSON.stringify(@getRequestData())
+
+        fetchESOptions =
+          url: @url
+          data: esJSONRequest
+          type: 'POST'
+          reset: true
+
+        fetchPromise = $.ajax(fetchESOptions)
 
       thisModel = @
-      $.ajax(fetchESOptions).done((data) ->
+      fetchPromise.done((data) ->
         if $progressElem?
           $progressElem.html ''
 
@@ -141,14 +184,23 @@ glados.useNameSpace 'glados.models.Aggregations',
       $progressElem = @get('progress_elem')
       esJSONRequest = JSON.stringify(@getRequestMinMaxData())
 
-      fetchESOptions =
-        url: @url
-        data: esJSONRequest
-        type: 'POST'
-        reset: true
+      if @get('use_web_server_cache')
+
+        esCacheData = @getESCacheRequestDataFroMinAndMax()
+        fetchPromise = glados.doCSRFPost(glados.Settings.ELASTICSEARCH_CACHE, esCacheData)
+
+      else
+
+        fetchESOptions =
+          url: @url
+          data: esJSONRequest
+          type: 'POST'
+          reset: true
+
+        fetchPromise = $.ajax(fetchESOptions)
 
       thisModel = @
-      $.ajax(fetchESOptions).done((data) ->
+      fetchPromise.done((data) ->
 
         thisModel.set('aggs_config', thisModel.parseMinMax(data))
 
@@ -226,6 +278,7 @@ glados.useNameSpace 'glados.models.Aggregations',
         # ---------------------------------------------------------------------
         if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.RANGE
 
+          bucketsList.sort (a, b) -> a.from - b.from
           currentNumCols = bucketsList.length
 
           currentMinValue = aggDescription.min_value
@@ -472,8 +525,8 @@ glados.models.Aggregations.Aggregation.ASSAY_INDEX_URL = glados.models.paginated
 glados.models.Aggregations.Aggregation.DOCUMENT_INDEX_URL = glados.models.paginatedCollections.Settings.ES_BASE_URL\
 + '/chembl_document/_search'
 
-glados.models.Aggregations.Aggregation.DRUG_INDEX_URL = glados.models.paginatedCollections.Settings.ES_BASE_URL\
-+ '/chembl_drug/_search'
+
+# do tests for cell lines and tissues if they are needed
 
 glados.models.Aggregations.Aggregation.States =
   INITIAL_STATE: 'INITIAL_STATE'

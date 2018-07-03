@@ -12,12 +12,27 @@ import glados.url_shortener.url_shortener as url_shortener
 from apiclient.discovery import build
 from googleapiclient import *
 import re
+from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search
 import requests
 import datetime
 import timeago
+import json
+import hashlib
+import base64
 
 
+keyword_args = {
+  "hosts": [settings.ELASTICSEARCH_HOST],
+  "timeout": 30,
+  "retry_on_timeout": True
+}
+
+if settings.ELASTICSEARCH_PASSWORD is not None:
+  keyword_args["http_auth"] = (settings.ELASTICSEARCH_USERNAME, settings.ELASTICSEARCH_PASSWORD)
+
+
+es = Elasticsearch(**keyword_args)
 
 
 # Returns all acknowledgements grouped by current and old
@@ -227,20 +242,22 @@ def get_entities_records(request):
 
     print('records are not in cache')
 
-    status_r = requests.get('https://www.ebi.ac.uk/chembl/api/data/status.json').json()
-    drug_r = requests.get('https://www.ebi.ac.uk/chembl/api/data/drug.json').json()
-    assays_r = requests.get('https://www.ebi.ac.uk/chembl/api/data/assay.json').json()
-    cells_r = requests.get('https://www.ebi.ac.uk/chembl/api/data/cell_line.json').json()
-    tissues_r = requests.get('https://www.ebi.ac.uk/chembl/api/data/tissue.json').json()
+    drugs_query = {
+
+        "term": {
+          "_metadata.drug.is_drug": True
+        }
+
+    }
 
     response = {
-        'Compounds': status_r['disinct_compounds'],
-        'Drugs': drug_r['page_meta']['total_count'],
-        'Assays': assays_r['page_meta']['total_count'],
-        'Documents': status_r['publications'],
-        'Targets': status_r['targets'],
-        'Cells': cells_r['page_meta']['total_count'],
-        'Tissues': tissues_r['page_meta']['total_count']
+        'Compounds': Search(index="chembl_molecule").execute().hits.total,
+        'Drugs': Search(index="chembl_molecule").query(drugs_query).execute().hits.total,
+        'Assays': Search(index="chembl_assay").execute().hits.total,
+        'Documents': Search(index="chembl_document").execute().hits.total,
+        'Targets': Search(index="chembl_target").execute().hits.total,
+        'Cells': Search(index="chembl_cell_line").execute().hits.total,
+        'Tissues': Search(index="chembl_tissue").execute().hits.total
     }
 
     cache.set(cache_key, response, cache_time)
@@ -252,7 +269,7 @@ def get_github_details(request):
     last_commit = requests.get('https://api.github.com/repos/chembl/GLaDOS/commits/master').json()
 
     cache_key = 'github_details'
-    cache_time = 7200
+    cache_time = 300
     cache_response = cache.get(cache_key)
 
     now = datetime.datetime.now()
@@ -336,6 +353,34 @@ def shorten_url(request):
             'hash': short_url
         }
         return JsonResponse(resp_data)
+
+    else:
+        return JsonResponse({'error': 'this is only available via POST'})
+
+def elasticsearch_cache(request):
+    if request.method == "POST":
+
+        print ('elasticsearch_cache')
+        index_name = request.POST.get('index_name', '')
+        raw_search_data = request.POST.get('search_data', '')
+        search_data_digest = hashlib.sha256(raw_search_data.encode('utf-8')).digest()
+        base64_search_data_hash = base64.b64encode(search_data_digest).decode('utf-8')
+        search_data = json.loads(raw_search_data)
+
+        cache_key = "{}-{}".format(index_name, base64_search_data_hash)
+        print('cache_key', cache_key)
+
+        cache_response = cache.get(cache_key)
+
+        if cache_response != None:
+            print('results are in cache')
+            return JsonResponse(cache_response)
+
+        print('results are NOT in cache')
+        response = es.search(index=index_name, body=search_data)
+        cache_time = 3600
+        cache.set(cache_key, response, cache_time)
+        return JsonResponse(response)
 
     else:
         return JsonResponse({'error': 'this is only available via POST'})

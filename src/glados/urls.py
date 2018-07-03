@@ -170,7 +170,12 @@ common_urls = [
   url(r'^robots.txt', lambda x: HttpResponse(
         "User-Agent: *\nDisallow: / \nUser-Agent: Twitterbot\nAllow: {0}img".format(settings.STATIC_URL),
         content_type="text/plain"),
-        name="robots_file")
+        name="robots_file"),
+
+  # --------------------------------------------------------------------------------------------------------------------
+  # Elasticsearch cache
+  # --------------------------------------------------------------------------------------------------------------------
+  url(r'^elasticsearch_cache', views.elasticsearch_cache, name='elasticsearch_cache'),
 
 ]
 
