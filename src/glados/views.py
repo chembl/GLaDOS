@@ -21,7 +21,6 @@ import json
 import hashlib
 import base64
 
-
 keyword_args = {
   "hosts": [settings.ELASTICSEARCH_HOST],
   "timeout": 30,
@@ -31,9 +30,10 @@ keyword_args = {
 if settings.ELASTICSEARCH_PASSWORD is not None:
   keyword_args["http_auth"] = (settings.ELASTICSEARCH_USERNAME, settings.ELASTICSEARCH_PASSWORD)
 
-
-es = Elasticsearch(**keyword_args)
-
+try:
+    es = Elasticsearch(**keyword_args)
+except:
+    print ('connection error!')
 
 # Returns all acknowledgements grouped by current and old
 def visualise(request):
