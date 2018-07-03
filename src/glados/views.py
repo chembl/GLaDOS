@@ -367,7 +367,8 @@ def elasticsearch_cache(request):
         base64_search_data_hash = base64.b64encode(search_data_digest).decode('utf-8')
         search_data = json.loads(raw_search_data)
 
-        cache_key = "{}-{}".format(index_name, base64_search_data_hash)
+        # TODO: get the chembl version from elasticearch
+        cache_key = "chembl24-{}-{}".format(index_name, base64_search_data_hash)
         print('cache_key', cache_key)
 
         cache_response = cache.get(cache_key)
@@ -378,7 +379,7 @@ def elasticsearch_cache(request):
 
         print('results are NOT in cache')
         response = es.search(index=index_name, body=search_data)
-        cache_time = 3600
+        cache_time = 3000000
         cache.set(cache_key, response, cache_time)
         return JsonResponse(response)
 
