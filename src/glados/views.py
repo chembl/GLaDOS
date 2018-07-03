@@ -367,8 +367,7 @@ def elasticsearch_cache(request):
         base64_search_data_hash = base64.b64encode(search_data_digest).decode('utf-8')
         search_data = json.loads(raw_search_data)
 
-        # TODO: get the chembl version from elasticearch
-        cache_key = "chembl24-{}-{}".format(index_name, base64_search_data_hash)
+        cache_key = "{}-{}".format(index_name, base64_search_data_hash)
         print('cache_key', cache_key)
 
         cache_response = cache.get(cache_key)
