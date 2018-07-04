@@ -54,7 +54,7 @@ def get_latest_tweets(page_number=1, count=15):
     if not settings.TWITTER_ENABLED:
         return default_empty_response
     cache_key = str(page_number) + "-" + str(count)
-    cache_time = 3600  # time to live in seconds
+    cache_time = 300  # time to live in seconds
 
     t_cached_response = cache.get(cache_key)
 
@@ -125,7 +125,7 @@ def get_latest_blog_entries(request, pageToken):
     orderBy = 'published'
 
     cache_key = str(pageToken)
-    cache_time = 3600
+    cache_time = 300
 
     # tries to get entries from cache
     cache_response = cache.get(cache_key)
