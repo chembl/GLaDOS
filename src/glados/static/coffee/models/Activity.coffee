@@ -108,8 +108,6 @@ Activity.COLUMNS = {
     comparator: 'standard_flag'
   STANDARD_RELATION: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: 'standard_relation'
-  STANDARD_TYPE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'standard_type'
   STANDARD_UNITS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: 'standard_units'
   STANDARD_VALUE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,

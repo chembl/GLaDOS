@@ -28,6 +28,7 @@ GLADOS_ROOT = os.path.dirname(os.path.abspath(glados.__file__))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # ----------------------------------------------------------------------------------------------------------------------
 # SERVER BASE PATH
 # ----------------------------------------------------------------------------------------------------------------------
@@ -212,7 +213,7 @@ if COMPRESS_ENABLED:
     COMPRESS_URL = STATIC_URL
     COMPRESS_ROOT = STATIC_ROOT
     #COMPRESS_CLOSURE_COMPILER_BINARY = 'java -jar '+ os.path.join(BASE_DIR,
-    # 'tools/google_closure_compiler/compiler.jar')
+    #'external_tools/closure_compiler/closure-compiler-v20180610.jar')
 
 # ----------------------------------------------------------------------------------------------------------------------
 # HTTPS SSL PROXY HEADER

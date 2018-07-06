@@ -11,57 +11,62 @@
     {% csrf_token %}
 </div>
 
-<!-- Already compressed external files -->
-
 {% load compress %}
 <!-- FIRST COMPRESS: loads java script external libraries and glados settings -->
-{% compress js %}
-  {% block common_js_libs %}
 
-    <script type="text/javascript" src="{% static 'js/api/jquery-2.2.0.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/api/slick.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/api/jquery.number.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/api/materialize.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/api/underscore.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/api/backbone.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/api/handlebars-v4.0.5.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/api/clipboard.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/api/d3.v3.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/api/jquery.waypoints.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/api/nouislider.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/api/color.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/api/numeral/numeral.min.js' %}"></script>
-    <!-- https://github.com/eligrey/FileSaver.js' %}/ -->
-    <script type="text/javascript" src="{% static 'js/api/FileSaver.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/api/xlsx.full.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/api/jquery.materialize-autocomplete.min.js' %}"></script>
-    <!-- shim is a polyfill for xlsx.js' %} -->
-    <script type="text/javascript" src="{% static 'js/api/shim.js' %}"></script>
-    <!-- https://github.com/timdream/wordcloud2.js' %} -->
-    <script type="text/javascript" src="{% static 'js/api/wordcloud2.js' %}"></script>
+{% block common_js_libs %}
+    {% compress js %}
+        <script type="text/javascript" src="{% static 'js/api/jquery-2.2.0.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/api/slick.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/api/jquery.number.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/api/materialize.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/api/underscore.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/api/backbone.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/api/handlebars-v4.0.5.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/api/clipboard.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/api/d3.v3.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/api/jquery.waypoints.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/api/numeral/numeral.min.js' %}"></script>
 
-    <!-- App Settings and global variables object-->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/Settings.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/ChemUtils.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/Utils.js' %}"></script>
+        <!-- https://github.com/eligrey/FileSaver.js' %}/ -->
+        <script type="text/javascript" src="{% static 'js/api/FileSaver.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/api/xlsx.full.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/api/jquery.materialize-autocomplete.min.js' %}"></script>
+        <!-- shim is a polyfill for xlsx.js' %} -->
+        <script type="text/javascript" src="{% static 'js/api/shim.js' %}"></script>
+        <!-- https://github.com/timdream/wordcloud2.js' %} -->
+        <script type="text/javascript" src="{% static 'js/api/wordcloud2.js' %}"></script>
 
-    <!-- Connection to MArvin JS-->
-    <script type="text/javascript" src="{% static 'marvinjs/gui/lib/promise-1.0.0.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'marvinjs/js/marvinjslauncher.js' %}"></script>
+        <!-- App Settings and global variables object-->
+        <script type="text/javascript" src="{% static 'js/coffee-gen/Settings.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/ChemUtils.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/Utils.js' %}"></script>
 
-    <!-- Polyfill for cytoscape -->
-    <script type="text/javascript" src="{% static 'js/api/MetabolismVisualiser/browser-polyfill.min.js' %}"></script>
-    <!-- http://js.cytoscape.org/ -->
-    <script type="text/javascript" src="{% static 'js/api/cytoscape.js-2.7.13/cytoscape.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/api/MetabolismVisualiser/dagre.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/api/MetabolismVisualiser/cytoscape-dagre.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/api/JQueryPlugins/jquery.qtip-3.0.0.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/api/cytoscape.js-2.7.13/cytoscape-qtip.js' %}"></script>
+        <!-- Connection to MArvin JS-->
+        <script type="text/javascript" src="{% static 'marvinjs/gui/lib/promise-1.0.0.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'marvinjs/js/marvinjslauncher.js' %}"></script>
+
+    {% endcompress %}
+
+    {% compress js %}
+
+        <!-- Polyfill for cytoscape -->
+        <script type="text/javascript" src="{% static 'js/api/MetabolismVisualiser/browser-polyfill.min.js' %}"></script>
+        <!-- http://js.cytoscape.org/ -->
+        <script type="text/javascript" src="{% static 'js/api/cytoscape.js-2.7.13/cytoscape.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/api/MetabolismVisualiser/dagre.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/api/MetabolismVisualiser/cytoscape-dagre.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/api/JQueryPlugins/jquery.qtip-3.0.0.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/api/cytoscape.js-2.7.13/cytoscape-qtip.js' %}"></script>
+    {% endcompress %}
+
+    <!-- Plotly is already huge (2MB) -->
     <!-- https://plot.ly -->
     <script type="text/javascript" src="{% static 'js/api/plotly/plotly-latest.min.js' %}"></script>
 
-  {% endblock %}
-{% endcompress %}
+
+{% endblock %}
+
 
 
 
@@ -94,7 +99,6 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/base/DownloadModelOrCollectionExt.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/base/ReportCardEntity.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/base/ResponsiviseViewExt.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/base/DANViewExt.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/base/DownloadViewExt.js' %}"></script>
 
     <!-- Properties handling -->
@@ -224,11 +228,8 @@
     <!-- Document Report Card -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/documentReportCardApp.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/Document.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/DocumentAssayNetwork.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/DocumentTerms.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Document/DocumentBasicInformationView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Document/DocumentAssayNetworkView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Document/DocumentAssayNetworkFSView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Document/DocumentWordCloudView.js' %}"></script>
 
     <!-- Elastic Search Models -->
