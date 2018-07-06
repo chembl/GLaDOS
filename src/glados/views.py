@@ -269,7 +269,7 @@ def get_github_details(request):
     last_commit = requests.get('https://api.github.com/repos/chembl/GLaDOS/commits/master').json()
 
     cache_key = 'github_details'
-    cache_time = 300
+    cache_time = 1800
     cache_response = cache.get(cache_key)
 
     now = datetime.datetime.now()
