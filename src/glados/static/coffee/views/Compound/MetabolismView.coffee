@@ -30,7 +30,6 @@ glados.useNameSpace 'glados.views.Compound',
         return {
           selector: 'edge',
           style:
-            'width': 3,
             'line-color': glados.Settings.VIS_COLORS.TEAL5,
             'target-arrow-color': glados.Settings.VIS_COLORS.TEAL5,
             'target-arrow-shape': 'triangle',
