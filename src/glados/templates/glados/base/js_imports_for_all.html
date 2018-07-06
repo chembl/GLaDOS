@@ -12,7 +12,6 @@
 </div>
 
 <!-- Already compressed external files -->
-<script type="text/javascript" src="{% static 'js/api/color.min.js' %}"></script>
 
 {% load compress %}
 <!-- FIRST COMPRESS: loads java script external libraries and glados settings -->
@@ -95,7 +94,6 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/base/DownloadModelOrCollectionExt.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/base/ReportCardEntity.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/base/ResponsiviseViewExt.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/base/DANViewExt.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/base/DownloadViewExt.js' %}"></script>
 
     <!-- Properties handling -->
@@ -225,11 +223,8 @@
     <!-- Document Report Card -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/documentReportCardApp.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/Document.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/DocumentAssayNetwork.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/DocumentTerms.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Document/DocumentBasicInformationView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Document/DocumentAssayNetworkView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Document/DocumentAssayNetworkFSView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Document/DocumentWordCloudView.js' %}"></script>
 
     <!-- Elastic Search Models -->

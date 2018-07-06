@@ -19,7 +19,6 @@ class DocumentReportCardApp extends glados.ReportCardApp
     DocumentReportCardApp.initBasicInformation()
     DocumentReportCardApp.initRelatedDocuments()
     DocumentReportCardApp.initWordCloud()
-    DocumentReportCardApp.initAssayNetwork()
     DocumentReportCardApp.initActivitySummary()
     DocumentReportCardApp.initTargetSummary()
     DocumentReportCardApp.initAssaySummary()
@@ -95,20 +94,6 @@ class DocumentReportCardApp extends glados.ReportCardApp
 
     if GlobalVariables['EMBEDED']
       document.fetch()
-
-  @initAssayNetwork = ->
-
-    documentAssayNetwork = new DocumentAssayNetwork
-      document_chembl_id: glados.Utils.URLS.getCurrentModelChemblID()
-
-    new DocumentAssayNetworkView
-      model: documentAssayNetwork
-      el: $('#DAssayNetworkCard')
-      section_id: 'AssayNetwork'
-      section_label: 'Assay Network'
-      report_card_app: @
-
-    documentAssayNetwork.fetch()
 
   @initWordCloud = ->
 
