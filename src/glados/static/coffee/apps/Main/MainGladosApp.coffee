@@ -130,7 +130,7 @@ glados.useNameSpace 'glados.apps.Main',
         ]
 
         glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks, longFilter=undefined,
-          hideShareButton=false, longFilterURL=undefined. askBeforeShortening=true)
+          hideShareButton=false, longFilterURL=undefined, askBeforeShortening=true)
         SearchResultsApp.initSimilaritySearchResults(searchTerm, threshold)
 
     @initFlexmatchSearchResults = (searchTerm) ->
