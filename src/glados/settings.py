@@ -215,7 +215,6 @@ if COMPRESS_ENABLED:
     COMPRESS_CLOSURE_COMPILER_BINARY = 'java -jar '+ os.path.join(BASE_DIR,
     'external_tools/closure_compiler/closure-compiler-v20180610.jar')
 
-print('base dir: ', BASE_DIR)
 # ----------------------------------------------------------------------------------------------------------------------
 # HTTPS SSL PROXY HEADER
 # ----------------------------------------------------------------------------------------------------------------------
