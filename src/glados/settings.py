@@ -20,7 +20,7 @@ class RunEnvs(object):
     TEST = 'TEST'
     PROD = 'PROD'
 
-RUN_ENV = RunEnvs.PROD
+RUN_ENV = RunEnvs.DEV
 
 # Build paths inside the project like this: os.path.join(GLADOS_ROOT, ...)
 GLADOS_ROOT = os.path.dirname(os.path.abspath(glados.__file__))
