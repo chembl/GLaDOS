@@ -48,6 +48,10 @@
 
         <!-- Polyfill for cytoscape -->
         <script type="text/javascript" src="{% static 'js/api/MetabolismVisualiser/browser-polyfill.min.js' %}"></script>
+
+    {% endcompress %}
+    
+    {% compress js %}
         <!-- http://js.cytoscape.org/ -->
         <script type="text/javascript" src="{% static 'js/api/cytoscape.js-2.7.13/cytoscape.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/api/MetabolismVisualiser/dagre.min.js' %}"></script>
