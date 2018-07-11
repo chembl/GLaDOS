@@ -1,7 +1,3 @@
-from .models import Acknowledgement
-from .models import Faq
-from .models import FaqCategory
-from .models import FaqSubcategory
 from django.shortcuts import render
 from twitter import *
 from django.conf import settings
