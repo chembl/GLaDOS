@@ -79,6 +79,8 @@ Activity.COLUMNS = {
     comparator: 'ligand_efficiency.lle'
   LIGAND_EFFICIENCIES_SEI: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: 'ligand_efficiency.sei'
+  STANDARD_TYPE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: 'standard_type'
   PCHEMBL_VALUE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: 'pchembl_value'
   ACTIVITY_COMMENT: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
