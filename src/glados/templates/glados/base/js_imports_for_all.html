@@ -15,7 +15,7 @@
 <!-- FIRST COMPRESS: loads java script external libraries and glados settings -->
 
 {% block common_js_libs %}
-    {% compress js %}
+    {% compress js file base_js_libs %}
         <script type="text/javascript" src="{% static 'js/api/jquery-2.2.0.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/api/slick.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/api/jquery.number.js' %}"></script>
@@ -48,7 +48,7 @@
 
     {% endcompress %}
 
-    {% compress js %}
+    {% compress js file cytoscape_libs %}
 
         <!-- Polyfill for cytoscape -->
         <script type="text/javascript" src="{% static 'js/api/MetabolismVisualiser/browser-polyfill.min.js' %}"></script>
