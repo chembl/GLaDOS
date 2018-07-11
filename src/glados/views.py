@@ -16,6 +16,7 @@ import timeago
 import json
 import hashlib
 import base64
+from django.views.decorators.cache import cache_page
 
 keyword_args = {
   "hosts": [settings.ELASTICSEARCH_HOST],
@@ -31,7 +32,8 @@ try:
 except:
     print ('connection error!')
 
-# Returns all acknowledgements grouped by current and old
+
+@cache_page(60 * 60)
 def visualise(request):
     context = {
         'hide_breadcrumbs': True
@@ -301,7 +303,7 @@ def replace_urls_from_entinies(html, urls):
 
     return html
 
-
+@cache_page(60 * 60)
 def main_page(request):
     context = {
         'main_page': True,
@@ -315,12 +317,7 @@ def design_components(request):
     }
     return render(request, 'glados/base/design_components.html', context)
 
-
-
-def main_html_base(request):
-    return render(request, 'glados/mainGlados.html')
-
-
+@cache_page(60 * 60)
 def main_html_base_no_bar(request):
     return render(request, 'glados/mainGladosNoBar.html')
 
@@ -392,7 +389,6 @@ def extend_url(request, hash):
 # ----------------------------------------------------------------------------------------------------------------------
 # Report Cards
 # ----------------------------------------------------------------------------------------------------------------------
-
 def compound_report_card(request, chembl_id):
 
     context = {
