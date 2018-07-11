@@ -303,7 +303,6 @@ def replace_urls_from_entinies(html, urls):
 
     return html
 
-@cache_page(60 * 60)
 def main_page(request):
     context = {
         'main_page': True,
@@ -317,7 +316,6 @@ def design_components(request):
     }
     return render(request, 'glados/base/design_components.html', context)
 
-@cache_page(60 * 60)
 def main_html_base_no_bar(request):
     return render(request, 'glados/mainGladosNoBar.html')
 
