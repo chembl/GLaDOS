@@ -146,6 +146,13 @@ SearchModel = Backbone.Model.extend
     $.when.apply($, deferreds).then(then_callback.bind(@), then_callback.bind(@))
 
   requestAutocompleteSuggestions: (textQuery, caller)->
+
+    if not _.isString(textQuery)
+      return
+
+    if textQuery.length > 75
+      return
+
     @autocompleteQuery = textQuery
     @autocompleteCaller = caller
     if textQuery.startsWith('GLaDOS')
@@ -173,7 +180,7 @@ SearchModel = Backbone.Model.extend
             @set('autocompleteSuggestions', [result])
             return
     if not @debouncedAutocompleteRequest
-      @debouncedAutocompleteRequest = _.debounce(@__requestAutocompleteSuggestions.bind(@), 10)
+      @debouncedAutocompleteRequest = _.debounce(@__requestAutocompleteSuggestions.bind(@), 200)
     @debouncedAutocompleteRequest()
 
   readParsedQueryRecursive: (curParsedQuery, parentType='or')->
