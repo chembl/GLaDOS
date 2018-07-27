@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 import os
 import glados
 from django.utils.translation import ugettext_lazy as _
+import logging.config
 
 
 class RunEnvs(object):
@@ -64,7 +65,7 @@ BLOGGER_KEY = '<BLOGGER_API_KEY>'
 # ElasticSearch
 # ----------------------------------------------------------------------------------------------------------------------
 
-ELASTICSEARCH_HOST = 'http://wp-p2m-50.ebi.ac.uk:9200'
+# ELASTICSEARCH_HOST = 'http://wp-p2m-50.ebi.ac.uk:9200'
 ELASTICSEARCH_USERNAME = None
 ELASTICSEARCH_PASSWORD = None
 
@@ -231,3 +232,32 @@ CACHES = {
         'LOCATION': '127.0.0.1:11211',
     }
 }
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Logging
+# ----------------------------------------------------------------------------------------------------------------------
+
+LOGGING_CONFIG_DICT = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'glados.static_files_compiler': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'glados.es_connection': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    },
+}
+
+logging.config.dictConfig(LOGGING_CONFIG_DICT)
