@@ -25,12 +25,12 @@ keyword_args = {
 }
 
 if settings.ELASTICSEARCH_PASSWORD is not None:
-  keyword_args["http_auth"] = (settings.ELASTICSEARCH_USERNAME, settings.ELASTICSEARCH_PASSWORD)
+    keyword_args["http_auth"] = (settings.ELASTICSEARCH_USERNAME, settings.ELASTICSEARCH_PASSWORD)
 
 try:
     es = Elasticsearch(**keyword_args)
 except:
-    print ('connection error!')
+    print('connection error!')
 
 
 @cache_page(60 * 60)
@@ -228,6 +228,7 @@ def get_database_summary(request):
 
     return JsonResponse(response)
 
+
 def get_entities_records(request):
 
     cache_key = 'entities_records'
@@ -262,6 +263,7 @@ def get_entities_records(request):
 
     return JsonResponse(response)
 
+
 def get_github_details(request):
 
     last_commit = requests.get('https://api.github.com/repos/chembl/GLaDOS/commits/master').json()
@@ -293,6 +295,7 @@ def get_github_details(request):
 
     return JsonResponse(last_commit)
 
+
 def replace_urls_from_entinies(html, urls):
     """
     :return: the html with the corresponding links from the entities
@@ -303,6 +306,7 @@ def replace_urls_from_entinies(html, urls):
 
     return html
 
+
 def main_page(request):
     context = {
         'main_page': True,
@@ -310,11 +314,13 @@ def main_page(request):
     }
     return render(request, 'glados/main_page.html', context)
 
+
 def design_components(request):
     context = {
         'hide_breadcrumbs': True
     }
     return render(request, 'glados/base/design_components.html', context)
+
 
 def main_html_base_no_bar(request):
     return render(request, 'glados/mainGladosNoBar.html')
@@ -347,6 +353,7 @@ def shorten_url(request):
 
     else:
         return JsonResponse({'error': 'this is only available via POST'})
+
 
 def elasticsearch_cache(request):
     if request.method == "POST":
@@ -387,6 +394,8 @@ def extend_url(request, hash):
 # ----------------------------------------------------------------------------------------------------------------------
 # Report Cards
 # ----------------------------------------------------------------------------------------------------------------------
+
+
 def compound_report_card(request, chembl_id):
 
     context = {
@@ -396,6 +405,7 @@ def compound_report_card(request, chembl_id):
     }
 
     return render(request, 'glados/compoundReportCard.html', context)
+
 
 def assay_report_card(request, chembl_id):
 
@@ -407,6 +417,7 @@ def assay_report_card(request, chembl_id):
 
     return render(request, 'glados/assayReportCard.html', context)
 
+
 def cell_line_report_card(request, chembl_id):
 
     context = {
@@ -416,6 +427,7 @@ def cell_line_report_card(request, chembl_id):
     }
 
     return render(request, 'glados/cellLineReportCard.html', context)
+
 
 def tissue_report_card(request, chembl_id):
 
@@ -427,6 +439,7 @@ def tissue_report_card(request, chembl_id):
 
     return render(request, 'glados/tissueReportCard.html', context)
 
+
 def target_report_card(request, chembl_id):
 
     context = {
@@ -436,6 +449,7 @@ def target_report_card(request, chembl_id):
     }
 
     return render(request, 'glados/targetReportCard.html', context)
+
 
 def document_report_card(request, chembl_id):
 
