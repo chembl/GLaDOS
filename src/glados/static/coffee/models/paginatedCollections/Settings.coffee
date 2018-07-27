@@ -3,7 +3,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
   # Elastic Search specific configuration settings
   # --------------------------------------------------------------------------------------------------------------------
   Settings:
-    ES_BASE_URL: 'https://wwwdev.ebi.ac.uk/chembl/glados-es'
+    ES_BASE_URL: 'https://www.ebi.ac.uk/chembl/glados-es'
     ES_INDEXES:
       COMPOUND:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
@@ -436,7 +436,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     WS_COLLECTIONS:
       ACTIVITIES_LIST:
         MODEL: Activity
-        BASE_URL: glados.Settings.WS_DEV_BASE_URL + 'activity.json'
+        BASE_URL: glados.Settings.WS_BASE_URL + 'activity.json'
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         COLUMNS: Activity.COLUMNS_SETTINGS.ALL_COLUMNS

@@ -21,7 +21,6 @@ from django.http import HttpResponse
 from glados.es.query_builder import QueryBuilder
 
 BASE_EBI_URL = 'https://www.ebi.ac.uk'
-BASE_EBI_DEV_URL = "https://wwwdev.ebi.ac.uk"
 
 UNICHEM_DS = None
 UNICHEM_DS_LAST_LOAD = 0
@@ -262,7 +261,7 @@ def check_doi(term_dict: dict):
         try:
             chembl_ids = []
             response = requests.get(
-                BASE_EBI_DEV_URL + '/chembl/glados-es/chembl_document/_search',
+                BASE_EBI_URL + '/chembl/glados-es/chembl_document/_search',
                 json=
                 {
                     'size': 10,
@@ -298,7 +297,7 @@ def check_inchi(term_dict: dict, term_is_inchi_key=False):
     try:
         chembl_ids = []
         response = requests.get(
-            BASE_EBI_DEV_URL + '/chembl/glados-es/chembl_molecule/_search',
+            BASE_EBI_URL + '/chembl/glados-es/chembl_molecule/_search',
             json=
             {
                 'size': 10,
