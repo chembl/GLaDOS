@@ -9,8 +9,21 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 import math
 import logging
+import hashlib
 
 logger = logging.getLogger('glados.static_files_compiler')
+
+
+def enable_debug_logging():
+    logger.setLevel('DEBUG')
+
+
+def md5(f_name):
+    hash_md5 = hashlib.src_md5()
+    with open(f_name, "rb") as f:
+        for chunk in iter(lambda: f.read(4096), b""):
+            hash_md5.update(chunk)
+    return hash_md5.hexdigest()
 
 
 class FileCompilerEventHandler(FileSystemEventHandler):
@@ -95,7 +108,7 @@ class StaticFilesCompiler(object):
             if compiled_out_path is not None:
                 logger.debug("COMPILING: {0}\nINTO: {1}\n...".format(event.src_path, compiled_out_path))
                 compilation_stats = self.compile_and_save(event.src_path, compiled_out_path)
-                if compilation_stats[0] != 0:
+                if compilation_stats[1] == 1:
                     logger.error('THIS FILE SHOULD NOT BE PRECOMPILED!')
 
     def start_watchers(self):
@@ -103,23 +116,25 @@ class StaticFilesCompiler(object):
         self.observer.start()
 
     @staticmethod
-    def should_skip_compile(file_in, file_out):
-        exists_in = os.path.exists(file_in)
-        exists_out = os.path.exists(file_out)
-        if exists_in and exists_out:
-            m_time_in = os.path.getmtime(file_in)
-            m_time_out = os.path.getmtime(file_out)
-            return m_time_in < m_time_out
-        return not exists_in
+    def should_skip_compile(md5_file_in, file_out):
+        exists_out = os.path.exists(file_out + '.src_md5')
+        if exists_out:
+            with open(file_out + '.src_md5', 'r') as old_md5_file:
+                old_md5 = old_md5_file.read()
+                return md5_file_in == old_md5
+        return False
 
     def compile_and_save(self, file_in, file_out):
-        if self.should_skip_compile(file_in, file_out):
+        md5_file_in = md5(file_in)
+        if self.should_skip_compile(md5_file_in, file_out):
             logger.debug('SKIPPING COMPILATION: {0} compiled file already exists!'.format(file_in))
             return 0, 1
         try:
             compile_result = self.compiler_function(file_in)
             with open(file_out, 'w') as file_out_i:
                 file_out_i.write(compile_result)
+            with open(file_out + '.src_md5', 'w') as file_out_i:
+                file_out_i.write(md5_file_in)
             logger.debug('COMPILED: {0}'.format(file_in))
             return 1, 0
         except Exception as e:
