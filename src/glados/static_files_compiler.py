@@ -19,7 +19,7 @@ def enable_debug_logging():
 
 
 def md5(f_name):
-    hash_md5 = hashlib.src_md5()
+    hash_md5 = hashlib.md5()
     with open(f_name, "rb") as f:
         for chunk in iter(lambda: f.read(4096), b""):
             hash_md5.update(chunk)
