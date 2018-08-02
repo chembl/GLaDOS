@@ -97,6 +97,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             settings_path: esIndexSettings.PATH_IN_SETTINGS
             searchESQuery: searchESQuery
             enable_activities_link_for_selected_entities: esIndexSettings.ENABLE_ACTIVITIES_LINK_FOR_SELECTED_ENTITIES
+            enable_compounds_link_for_selected_entities: esIndexSettings.ENABLE_COMPOUNDS_LINK_FOR_SELECTED_ENTITIES
 
           if @getMeta('enable_similarity_maps') or @getMeta('enable_substructure_highlighting')
             @initReferenceStructureFunctions()
