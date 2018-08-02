@@ -15,7 +15,7 @@ describe "Paginated Collections", ->
       itemToSelect = allItemsIDs[0]
       list.selectItem(itemToSelect)
 
-      list.getLinkToOtherEntitiesPromise(destinationEntityName)
+      list.getLinkToRelatedEntitiesPromise(destinationEntityName)
 
       return
 

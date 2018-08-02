@@ -38,7 +38,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
     # Link to all activities and other entities
     # ------------------------------------------------------------------------------------------------------------------
-    LINKS_TO_OTHER_ENTITIES_CACHE_PROP_NAMES:
+    LINKS_TO_RELATED_ENTITIES_CACHE_PROP_NAMES:
       "#{Activity.prototype.entityName}": 'all_activities_link_cache'
       "#{Compound.prototype.entityName}": 'all_compounds_link_cache'
       "#{Target.prototype.entityName}": 'all_targets_link_cache'
@@ -87,13 +87,35 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return Activity.getActivitiesListURL(filter)
 
-    getLinkToOtherEntitiesPromise: (destinationEntityName) ->
+    getLinkToRelatedEntities: (itemsList, destinationEntityName) ->
+
+      sourceEntityName = @getMeta('model').prototype.entityName
+      filter = @ENTITY_NAME_TO_FILTER_GENERATOR[sourceEntityName][destinationEntityName]
+        ids: itemsList
+
+      return Activity.getActivitiesListURL(filter)
+
+    getLinkToRelatedEntitiesPromise: (destinationEntityName) ->
 
       console.log 'getLinkToOtherEntitiesPromise: ', destinationEntityName
 
-      if destinationEntityName == Activity.prototype.entityName
+      cachePropName = @LINKS_TO_RELATED_ENTITIES_CACHE_PROP_NAMES[destinationEntityName]
+      cache = @getMeta(cachePropName)
 
-        cache = @getMeta(@ALL_ACTIVITIES_LINK_CACHE_PROP_NAME)
+      if cache?
+        return jQuery.Deferred().resolve(cache)
+
+      linkPromise = jQuery.Deferred()
+
+      # if all items are un selected the link must be done with all of them.
+      iDsPromise = @getItemsIDsPromise(onlySelected=(not @allItemsAreUnselected()))
+
+      thisCollection = @
+      iDsPromise.then (selectedIDs) ->
+
+        link = thisCollection.getLinkToRelatedEntities(selectedIDs, destinationEntityName)
+        thisCollection.setMeta(cachePropName, link)
+        console.log 'link: ', link
 
 
 #        linkToOtherEntitiesPromise = @getLinkToOtherEntitiesPromise(destinationEntityName)
