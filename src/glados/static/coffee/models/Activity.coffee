@@ -1,5 +1,7 @@
 Activity = Backbone.Model.extend
 
+  entityName: 'Activity'
+
   initialize: ->
 
   parse: (response) ->

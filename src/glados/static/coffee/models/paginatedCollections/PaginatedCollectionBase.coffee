@@ -38,8 +38,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
     # Link to all activities and other entities
     # ------------------------------------------------------------------------------------------------------------------
-    ALL_ACTIVITIES_LINK_CACHE_PROP_NAME: 'all_activities_link_cache'
-    ALL_COMPOUNDS_LINK_CACHE_PROP_NAME: 'all_compounds_link_cache'
+    LINKS_TO_OTHER_ENTITIES_CACHE_PROP_NAMES:
+      "#{Activity.prototype.entityName}": 'all_activities_link_cache'
+      "#{Compound.prototype.entityName}": 'all_compounds_link_cache'
+      "#{Target.prototype.entityName}": 'all_targets_link_cache'
+      "#{Document.prototype.entityName}": 'all_documents_link_cache'
+      "#{Assay.prototype.entityName}": 'all_assays_link_cache'
+      "#{CellLine.prototype.entityName}": 'all_cell_lines_link_cache'
+      "#{glados.models.Tissue.prototype.entityName}": 'all_tissues_link_cache'
+
 
     thereAreTooManyItemsForActivitiesLink: ->
 
@@ -52,8 +59,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     resetLinkToAllActivitiesCache: -> @setMeta(@ALL_ACTIVITIES_LINK_CACHE_PROP_NAME, undefined)
     # because of the paginated nature of the collections, it could happen that in order to get
     # all the selected ids, it has to download all the results, this is why it returns a promise.
-    getLinkToAllActivitiesPromise: ->
+    getLinkToOtherEntitiesPromise: ->
 
+      return
       cache = @getMeta(@ALL_ACTIVITIES_LINK_CACHE_PROP_NAME)
       if cache?
         return jQuery.Deferred().resolve(cache)
@@ -79,21 +87,41 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return Activity.getActivitiesListURL(filter)
 
+    getLinkToOtherEntitiesPromise: (destinationEntityName) ->
+
+      console.log 'getLinkToOtherEntitiesPromise: ', destinationEntityName
+
+      if destinationEntityName == Activity.prototype.entityName
+
+        cache = @getMeta(@ALL_ACTIVITIES_LINK_CACHE_PROP_NAME)
+
+
+#        linkToOtherEntitiesPromise = @getLinkToOtherEntitiesPromise(destinationEntityName)
+
+    # This gives a filter from a source entity to a destination entity. For example if you want from the compounds
+    # to get the related activities you need ['Compound']['Activity']
     ENTITY_NAME_TO_FILTER_GENERATOR:
-      "#{Compound.prototype.entityName}":\
-      Handlebars.compile('molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
-      "#{Target.prototype.entityName}":\
-      Handlebars.compile('target_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
-      "#{Document.prototype.entityName}":\
-      Handlebars.compile('document_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
-      "#{Assay.prototype.entityName}":\
-      Handlebars.compile('assay_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
-      "#{CellLine.prototype.entityName}":\
-      Handlebars.compile('_metadata.assay_data.cell_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
-      "#{glados.models.Tissue.prototype.entityName}":\
-      Handlebars.compile('_metadata.assay_data.tissue_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
-      "#{glados.models.Compound.Drug}":\
-      Handlebars.compile('molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
+      "#{Compound.prototype.entityName}":
+        "#{Activity.prototype.entityName}":\
+          Handlebars.compile('molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
+      "#{Target.prototype.entityName}":
+        "#{Activity.prototype.entityName}":\
+          Handlebars.compile('target_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
+      "#{Document.prototype.entityName}":
+        "#{Activity.prototype.entityName}":\
+          Handlebars.compile('document_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
+      "#{Assay.prototype.entityName}":
+        "#{Activity.prototype.entityName}":\
+          Handlebars.compile('assay_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
+      "#{CellLine.prototype.entityName}":
+        "#{Activity.prototype.entityName}":\
+          Handlebars.compile('_metadata.assay_data.cell_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
+      "#{glados.models.Tissue.prototype.entityName}":
+        "#{Activity.prototype.entityName}":\
+          Handlebars.compile('_metadata.assay_data.tissue_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
+      "#{glados.models.Compound.Drug}":
+        "#{Activity.prototype.entityName}":
+          Handlebars.compile('molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
 
     # ------------------------------------------------------------------------------------------------------------------
     # Fetching state handling
