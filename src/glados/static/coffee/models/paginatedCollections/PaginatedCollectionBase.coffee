@@ -36,9 +36,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return true
 
     # ------------------------------------------------------------------------------------------------------------------
-    # Link to all activities
+    # Link to all activities and other entities
     # ------------------------------------------------------------------------------------------------------------------
     ALL_ACTIVITIES_LINK_CACHE_PROP_NAME: 'all_activities_link_cache'
+    ALL_COMPOUNDS_LINK_CACHE_PROP_NAME: 'all_compounds_link_cache'
 
     thereAreTooManyItemsForActivitiesLink: ->
 

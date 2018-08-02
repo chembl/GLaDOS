@@ -2,6 +2,9 @@ describe "Paginated Collections", ->
 
   describe "Links to other entities", ->
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # Generic tests
+    # ------------------------------------------------------------------------------------------------------------------
     describe "Links to all activities", ->
 
       list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFor(
