@@ -76,6 +76,23 @@ describe "Paginated Collections", ->
       linkToOtherEntitiesPromise.then (linkGot) ->
         expect(linkGot).toBe(linkToActsMustBe)
         done()
+
+    testLinksCacheIsSet = (list, destinationEntityName, done) ->
+
+      allItemsIDs = TestsUtils.getAllItemsIDs(list)
+      itemToSelect = allItemsIDs[0]
+      list.selectItem(itemToSelect)
+
+      cache = list.getMeta(list.LINKS_TO_RELATED_ENTITIES_CACHE_PROP_NAMES[destinationEntityName])
+      expect(cache?).toBe(false)
+
+      linkToOtherEntitiesPromise = list.getLinkToRelatedEntitiesPromise(destinationEntityName)
+
+      linkToOtherEntitiesPromise.then (linkGot) ->
+        cache = list.getMeta(list.LINKS_TO_RELATED_ENTITIES_CACHE_PROP_NAMES[destinationEntityName])
+        expect(cache).toBe(linkGot)
+        done()
+
     # ------------------------------------------------------------------------------------------------------------------
     # test cases
     # ------------------------------------------------------------------------------------------------------------------
@@ -108,19 +125,7 @@ describe "Paginated Collections", ->
 
         testLinkGenerationAfterSelectingNoItems(list, Activity.prototype.entityName, done)
 
-      it 'sets the link cache', (done) ->
-
-        allItemsIDs = TestsUtils.getAllItemsIDs(list)
-        itemToSelect = allItemsIDs[0]
-        list.selectItem(itemToSelect)
-        cache = list.getMeta(allActsLinkCachePropName)
-        expect(cache?).toBe(false)
-
-        linkToActPromise = list.getLinkToAllActivitiesPromise()
-        linkToActPromise.then (linkGot) ->
-          cache = list.getMeta(allActsLinkCachePropName)
-          expect(cache).toBe(linkGot)
-          done()
+      it 'sets the link cache', (done) -> testLinksCacheIsSet(list, Activity.prototype.entityName, done)
 
       it 'uses the link cache', (done) ->
 
