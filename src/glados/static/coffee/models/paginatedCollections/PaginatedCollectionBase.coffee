@@ -36,6 +36,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return true
 
     # ------------------------------------------------------------------------------------------------------------------
+    # Utils
+    # ------------------------------------------------------------------------------------------------------------------
+    getModelEntityName: -> @getMeta('model').prototype.entityName
+    # ------------------------------------------------------------------------------------------------------------------
     # Link to all activities and other entities
     # ------------------------------------------------------------------------------------------------------------------
     LINKS_TO_RELATED_ENTITIES_CACHE_PROP_NAMES:
@@ -89,15 +93,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     getLinkToRelatedEntities: (itemsList, destinationEntityName) ->
 
-      sourceEntityName = @getMeta('model').prototype.entityName
+      sourceEntityName = @getModelEntityName()
       filter = @ENTITY_NAME_TO_FILTER_GENERATOR[sourceEntityName][destinationEntityName]
         ids: itemsList
 
       return Activity.getActivitiesListURL(filter)
 
     getLinkToRelatedEntitiesPromise: (destinationEntityName) ->
-
-      console.log 'getLinkToOtherEntitiesPromise: ', destinationEntityName
 
       cachePropName = @LINKS_TO_RELATED_ENTITIES_CACHE_PROP_NAMES[destinationEntityName]
       cache = @getMeta(cachePropName)
@@ -115,10 +117,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
         link = thisCollection.getLinkToRelatedEntities(selectedIDs, destinationEntityName)
         thisCollection.setMeta(cachePropName, link)
-        console.log 'link: ', link
+        linkPromise.resolve(link)
 
-
-#        linkToOtherEntitiesPromise = @getLinkToOtherEntitiesPromise(destinationEntityName)
+      return linkPromise
 
     # This gives a filter from a source entity to a destination entity. For example if you want from the compounds
     # to get the related activities you need ['Compound']['Activity']
