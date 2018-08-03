@@ -43,6 +43,25 @@ describe "Paginated Collections", ->
         expect(linkToActsMustBe).toBe(linkGot)
         done()
 
+    testLinkGenerationAfterSelectingAllItems = (list, destinationEntityName, done) ->
+
+      allItemsIDs = TestsUtils.getAllItemsIDs(list)
+      list.selectAll()
+
+      linkToOtherEntitiesPromise = list.getLinkToRelatedEntitiesPromise(destinationEntityName)
+
+      sourceEntityName = list.getMeta('model').prototype.entityName
+      filterToActsMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.prototype\
+        .ENTITY_NAME_TO_FILTER_GENERATOR[sourceEntityName][destinationEntityName]
+          ids: allItemsIDs
+
+      linkToActsMustBe = Activity.getActivitiesListURL(filterToActsMustBe)
+      console.log 'linkToActsMustBe: ', linkToActsMustBe
+
+      linkToOtherEntitiesPromise.then (linkGot) ->
+        expect(linkToActsMustBe).toBe(linkGot)
+        done()
+
     # ------------------------------------------------------------------------------------------------------------------
     # test cases
     # ------------------------------------------------------------------------------------------------------------------
@@ -70,20 +89,7 @@ describe "Paginated Collections", ->
         testLinkGenerationAfterSelectingMultipleItems(list, Activity.prototype.entityName, done)
 
       it 'produces the link after selecting all items', (done) ->
-
-        allItemsIDs = TestsUtils.getAllItemsIDs(list)
-        list.selectAll()
-
-        linkToActPromise = list.getLinkToAllActivitiesPromise()
-        filterToActsMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.prototype\
-          .ENTITY_NAME_TO_FILTER_GENERATOR.Compound
-            ids: allItemsIDs
-
-        linkToActsMustBe = Activity.getActivitiesListURL(filterToActsMustBe)
-
-        linkToActPromise.then (linkGot) ->
-          expect(linkToActsMustBe).toBe(linkGot)
-          done()
+        testLinkGenerationAfterSelectingAllItems(list, Activity.prototype.entityName, done)
 
       it 'produces the link after selecting no items', (done) ->
 
