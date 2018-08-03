@@ -56,12 +56,26 @@ describe "Paginated Collections", ->
           ids: allItemsIDs
 
       linkToActsMustBe = Activity.getActivitiesListURL(filterToActsMustBe)
-      console.log 'linkToActsMustBe: ', linkToActsMustBe
 
       linkToOtherEntitiesPromise.then (linkGot) ->
         expect(linkToActsMustBe).toBe(linkGot)
         done()
 
+    testLinkGenerationAfterSelectingNoItems = (list, destinationEntityName, done) ->
+
+      allItemsIDs = TestsUtils.getAllItemsIDs(list)
+      linkToOtherEntitiesPromise = list.getLinkToRelatedEntitiesPromise(destinationEntityName)
+
+      sourceEntityName = list.getMeta('model').prototype.entityName
+      filterToActsMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.prototype\
+        .ENTITY_NAME_TO_FILTER_GENERATOR[sourceEntityName][destinationEntityName]
+          ids: allItemsIDs
+
+      linkToActsMustBe = Activity.getActivitiesListURL(filterToActsMustBe)
+
+      linkToOtherEntitiesPromise.then (linkGot) ->
+        expect(linkGot).toBe(linkToActsMustBe)
+        done()
     # ------------------------------------------------------------------------------------------------------------------
     # test cases
     # ------------------------------------------------------------------------------------------------------------------
@@ -84,7 +98,6 @@ describe "Paginated Collections", ->
       it 'produces the link after selecting one item', (done) -> testLinkGenerationAfterSelectingOneItem(list,
         Activity.prototype.entityName, done)
 
-
       it 'produces the link after selecting multiple items', (done) ->
         testLinkGenerationAfterSelectingMultipleItems(list, Activity.prototype.entityName, done)
 
@@ -93,18 +106,7 @@ describe "Paginated Collections", ->
 
       it 'produces the link after selecting no items', (done) ->
 
-        allItemsIDs = TestsUtils.getAllItemsIDs(list)
-
-        linkToActPromise = list.getLinkToAllActivitiesPromise()
-        filterToActsMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.prototype\
-          .ENTITY_NAME_TO_FILTER_GENERATOR.Compound
-            ids: allItemsIDs
-
-        linkToActsMustBe = Activity.getActivitiesListURL(filterToActsMustBe)
-
-        linkToActPromise.then (linkGot) ->
-          expect(linkGot).toBe(linkToActsMustBe)
-          done()
+        testLinkGenerationAfterSelectingNoItems(list, Activity.prototype.entityName, done)
 
       it 'sets the link cache', (done) ->
 
