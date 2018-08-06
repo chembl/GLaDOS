@@ -70,7 +70,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     resetLinkToOtherEntitiesCache: ->
 
-      console.log 'resetLinkToOtherEntitiesCache!'
       for entityName, propName of @LINKS_TO_RELATED_ENTITIES_CACHE_PROP_NAMES
         @setMeta(propName, undefined)
 

@@ -125,7 +125,6 @@ describe "Paginated Collections", ->
         cache = list.getMeta(cachePropName)
         expect(cache).toBe(linkGot)
 
-        console.log 'DEBUG'
         #now I selecct another item
         itemToSelect2 = allItemsIDs[1]
         list.selectItem(itemToSelect2)
@@ -133,28 +132,23 @@ describe "Paginated Collections", ->
         #cache must be undefined
         expect(cache?).toBe(false)
 
-        done()
-      return
+        linkToActPromise = list.getLinkToRelatedEntitiesPromise(destinationEntityName)
+        linkToActPromise.then (linkGot) ->
 
-      linkToActPromise = list.getLinkToAllActivitiesPromise()
-      linkToActPromise.then (linkGot) ->
+          linkToActPromise2 = list.getLinkToRelatedEntitiesPromise(destinationEntityName)
 
+          linkToActPromise2.then (linkGot2) ->
 
+            sourceEntityName = list.getMeta('model').prototype.entityName
+            filterToActsMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.prototype\
+            .ENTITY_NAME_TO_FILTER_GENERATOR[sourceEntityName][destinationEntityName]
+              ids: [itemToSelect, itemToSelect2]
 
+            linkToActsMustBe = Activity.getActivitiesListURL(filterToActsMustBe)
 
-
-        linkToActPromise2 = list.getLinkToAllActivitiesPromise()
-        linkToActPromise2.then (linkGot2) ->
-
-          filterToActsMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.prototype\
-          .ENTITY_NAME_TO_FILTER_GENERATOR.Compound
-            ids: [itemToSelect, itemToSelect2]
-
-          linkToActsMustBe = Activity.getActivitiesListURL(filterToActsMustBe)
-
-          #the link new link must be correct
-          expect(linkToActsMustBe).toBe(linkGot2)
-          done()
+            #the link new link must be correct
+            expect(linkToActsMustBe).toBe(linkGot2)
+            done()
 
     # ------------------------------------------------------------------------------------------------------------------
     # test cases
