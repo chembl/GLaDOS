@@ -7,10 +7,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @setInitialFetchingState()
       @setInitialSearchState()
       if @islinkToOtherEntitiesEnabled()
-        @on glados.Events.Collections.SELECTION_UPDATED, @resetLinkToAllActivitiesCache, @
+        @on glados.Events.Collections.SELECTION_UPDATED, @resetLinkToOtherEntitiesCache, @
 
         @on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_FETCHING_STATE_CHANGED,
-        @resetLinkToAllActivitiesCache, @
+        @resetLinkToOtherEntitiesCache, @
 
     islinkToOtherEntitiesEnabled: ->
 
@@ -68,41 +68,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         return true
       return false
 
-    resetLinkToAllActivitiesCache: ->
+    resetLinkToOtherEntitiesCache: ->
 
-      console.log 'resetLinkToAllActivitiesCache!'
+      console.log 'resetLinkToOtherEntitiesCache!'
       for entityName, propName of @LINKS_TO_RELATED_ENTITIES_CACHE_PROP_NAMES
         @setMeta(propName, undefined)
-
-    # because of the paginated nature of the collections, it could happen that in order to get
-    # all the selected ids, it has to download all the results, this is why it returns a promise.
-    getLinkToOtherEntitiesPromise: ->
-
-      return
-      cache = @getMeta(@ALL_ACTIVITIES_LINK_CACHE_PROP_NAME)
-      if cache?
-        return jQuery.Deferred().resolve(cache)
-
-      linkPromise = jQuery.Deferred()
-
-      # if all items are un selected the link must be done with all of them.
-      iDsPromise = @getItemsIDsPromise(onlySelected=(not @allItemsAreUnselected()))
-
-      thisCollection = @
-      iDsPromise.then (selectedIDs) ->
-
-        link = thisCollection.getLinkToAllActivities(selectedIDs)
-        thisCollection.setMeta(thisCollection.ALL_ACTIVITIES_LINK_CACHE_PROP_NAME, link)
-        linkPromise.resolve(link)
-
-      return linkPromise
-
-    getLinkToAllActivities: (itemsList) ->
-      entityName = @getMeta('model').prototype.entityName
-      filter = @ENTITY_NAME_TO_FILTER_GENERATOR[entityName]
-        ids: itemsList
-
-      return Activity.getActivitiesListURL(filter)
 
     getLinkToRelatedEntities: (itemsList, destinationEntityName) ->
 
