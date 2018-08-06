@@ -168,7 +168,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     renderViewState: ->
       @stampViewIDOnEventsTriggerers()
       @fillTemplates()
-      @renderLinkToAllActivities() unless not @islinkToAllActivitiesEnabled()
+      @renderLinkToAllActivities() unless not @islinkToOtherEntitiesEnabled()
       @setUpEmbedModal() unless not @config.show_embed_button
 
     sleepView: ->

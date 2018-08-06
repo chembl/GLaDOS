@@ -110,6 +110,52 @@ describe "Paginated Collections", ->
         expect(linkGot).toBe(cacheMustBe)
         done()
 
+    testResetsCacheIsReset = (list, destinationEntityName, done) ->
+
+      allItemsIDs = TestsUtils.getAllItemsIDs(list)
+      itemToSelect = allItemsIDs[0]
+      list.selectItem(itemToSelect)
+      cachePropName = list.LINKS_TO_RELATED_ENTITIES_CACHE_PROP_NAMES[destinationEntityName]
+
+      linkToOtherEntitiesPromise = list.getLinkToRelatedEntitiesPromise(destinationEntityName)
+
+      linkToOtherEntitiesPromise.then (linkGot) ->
+
+        #the cache must be as expected
+        cache = list.getMeta(cachePropName)
+        expect(cache).toBe(linkGot)
+
+        console.log 'DEBUG'
+        #now I selecct another item
+        itemToSelect2 = allItemsIDs[1]
+        list.selectItem(itemToSelect2)
+        cache = list.getMeta(cachePropName)
+        #cache must be undefined
+        expect(cache?).toBe(false)
+
+        done()
+      return
+
+      linkToActPromise = list.getLinkToAllActivitiesPromise()
+      linkToActPromise.then (linkGot) ->
+
+
+
+
+
+        linkToActPromise2 = list.getLinkToAllActivitiesPromise()
+        linkToActPromise2.then (linkGot2) ->
+
+          filterToActsMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.prototype\
+          .ENTITY_NAME_TO_FILTER_GENERATOR.Compound
+            ids: [itemToSelect, itemToSelect2]
+
+          linkToActsMustBe = Activity.getActivitiesListURL(filterToActsMustBe)
+
+          #the link new link must be correct
+          expect(linkToActsMustBe).toBe(linkGot2)
+          done()
+
     # ------------------------------------------------------------------------------------------------------------------
     # test cases
     # ------------------------------------------------------------------------------------------------------------------
@@ -134,47 +180,10 @@ describe "Paginated Collections", ->
 
       it 'produces the link after selecting multiple items', (done) ->
         testLinkGenerationAfterSelectingMultipleItems(list, Activity.prototype.entityName, done)
-
       it 'produces the link after selecting all items', (done) ->
         testLinkGenerationAfterSelectingAllItems(list, Activity.prototype.entityName, done)
-
       it 'produces the link after selecting no items', (done) ->
-
         testLinkGenerationAfterSelectingNoItems(list, Activity.prototype.entityName, done)
-
       it 'sets the link cache', (done) -> testLinksCacheIsSet(list, Activity.prototype.entityName, done)
-
       it 'uses the link cache', (done) -> testLinksCacheIsUsed(list, Activity.prototype.entityName, done)
-
-      it 'resets the link cache', (done) ->
-
-        allItemsIDs = TestsUtils.getAllItemsIDs(list)
-        itemToSelect = allItemsIDs[0]
-        list.selectItem(itemToSelect)
-
-        linkToActPromise = list.getLinkToAllActivitiesPromise()
-        linkToActPromise.then (linkGot) ->
-
-          #the cache must be as expected
-          cache = list.getMeta(allActsLinkCachePropName)
-          expect(cache).toBe(linkGot)
-
-          #now I selecct another item
-          itemToSelect2 = allItemsIDs[1]
-          list.selectItem(itemToSelect2)
-          cache = list.getMeta(allActsLinkCachePropName)
-          #cache must be undefined
-          expect(cache?).toBe(false)
-
-          linkToActPromise2 = list.getLinkToAllActivitiesPromise()
-          linkToActPromise2.then (linkGot2) ->
-
-            filterToActsMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.prototype\
-            .ENTITY_NAME_TO_FILTER_GENERATOR.Compound
-              ids: [itemToSelect, itemToSelect2]
-
-            linkToActsMustBe = Activity.getActivitiesListURL(filterToActsMustBe)
-
-            #the link new link must be correct
-            expect(linkToActsMustBe).toBe(linkGot2)
-            done()
+      it 'resets the link cache', (done) -> testResetsCacheIsReset(list, Activity.prototype.entityName, done)

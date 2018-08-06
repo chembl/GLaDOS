@@ -213,7 +213,7 @@ glados.useNameSpace 'glados.views.Browsers',
         else
           @enableButton(viewLabel)
 
-      @renderLinkToAll() unless not @collection.islinkToAllActivitiesEnabled()
+      @renderLinkToAll() unless not @collection.islinkToOtherEntitiesEnabled()
 
     toggleClearSelections: -> @collection.toggleClearSelections()
 

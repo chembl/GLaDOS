@@ -6,13 +6,21 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       @setInitialFetchingState()
       @setInitialSearchState()
-      if @islinkToAllActivitiesEnabled()
+      if @islinkToOtherEntitiesEnabled()
         @on glados.Events.Collections.SELECTION_UPDATED, @resetLinkToAllActivitiesCache, @
 
         @on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_FETCHING_STATE_CHANGED,
         @resetLinkToAllActivitiesCache, @
 
-    islinkToAllActivitiesEnabled: -> @getMeta('enable_activities_link_for_selected_entities') == true
+    islinkToOtherEntitiesEnabled: ->
+
+      linksToOtherEntities = @getMeta('links_to_other_entities')
+      if not linksToOtherEntities?
+        return false
+      if linksToOtherEntities.length == 0
+        return false
+
+      return true
 
     getTotalRecords: ->
       totalRecords = @getMeta('total_records')
@@ -60,7 +68,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         return true
       return false
 
-    resetLinkToAllActivitiesCache: -> @setMeta(@ALL_ACTIVITIES_LINK_CACHE_PROP_NAME, undefined)
+    resetLinkToAllActivitiesCache: ->
+
+      console.log 'resetLinkToAllActivitiesCache!'
+      for entityName, propName of @LINKS_TO_RELATED_ENTITIES_CACHE_PROP_NAMES
+        @setMeta(propName, undefined)
+
     # because of the paginated nature of the collections, it could happen that in order to get
     # all the selected ids, it has to download all the results, this is why it returns a promise.
     getLinkToOtherEntitiesPromise: ->
