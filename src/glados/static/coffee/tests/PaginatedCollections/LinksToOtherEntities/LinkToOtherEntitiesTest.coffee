@@ -3,6 +3,26 @@ describe "Paginated Collections", ->
   describe "Links to other entities", ->
 
     # ------------------------------------------------------------------------------------------------------------------
+    # Utils
+    # ------------------------------------------------------------------------------------------------------------------
+    getLinkMustBe = (destinationEntityName, filter) ->
+
+      if destinationEntityName == Activity.prototype.entityName
+        return Activity.getActivitiesListURL(filter)
+      else if destinationEntityName == Compound.prototype.entityName
+        return Compound.getCompoundsListURL(filter)
+      else if destinationEntityName == Target.prototype.entityName
+        return Target.getTargetsListURL(filter)
+      else if destinationEntityName == Document.prototype.entityName
+        return Document.getDocumentsListURL(filter)
+      else if destinationEntityName == Assay.prototype.entityName
+        return Assay.getAssaysListURL(filter)
+      else if destinationEntityName == CellLine.prototype.entityName
+        return CellLine.getCellsListURL(filter)
+      else if destinationEntityName == glados.models.Tissue.prototype.entityName
+        return glados.models.Tissue.getTissuesListURL(filter)
+
+    # ------------------------------------------------------------------------------------------------------------------
     # Generic test functions
     # ------------------------------------------------------------------------------------------------------------------
     testLinkGenerationAfterSelectingOneItem = (list, destinationEntityName, done) ->
@@ -18,7 +38,7 @@ describe "Paginated Collections", ->
         .ENTITY_NAME_TO_FILTER_GENERATOR[sourceEntityName][destinationEntityName]
           ids: [itemToSelect]
 
-      linkToActsMustBe = Activity.getActivitiesListURL(filterToActsMustBe)
+      linkToActsMustBe = getLinkMustBe(destinationEntityName, filterToActsMustBe)
 
       linkToOtherEntitiesPromise.then (linkGot) ->
         expect(linkToActsMustBe).toBe(linkGot)
@@ -37,7 +57,7 @@ describe "Paginated Collections", ->
         .ENTITY_NAME_TO_FILTER_GENERATOR[sourceEntityName][destinationEntityName]
           ids: itemsToSelect
 
-      linkToActsMustBe = Activity.getActivitiesListURL(filterToActsMustBe)
+      linkToActsMustBe = getLinkMustBe(destinationEntityName, filterToActsMustBe)
 
       linkToOtherEntitiesPromise.then (linkGot) ->
         expect(linkToActsMustBe).toBe(linkGot)
@@ -55,7 +75,7 @@ describe "Paginated Collections", ->
         .ENTITY_NAME_TO_FILTER_GENERATOR[sourceEntityName][destinationEntityName]
           ids: allItemsIDs
 
-      linkToActsMustBe = Activity.getActivitiesListURL(filterToActsMustBe)
+      linkToActsMustBe = getLinkMustBe(destinationEntityName, filterToActsMustBe)
 
       linkToOtherEntitiesPromise.then (linkGot) ->
         expect(linkToActsMustBe).toBe(linkGot)
@@ -71,7 +91,7 @@ describe "Paginated Collections", ->
         .ENTITY_NAME_TO_FILTER_GENERATOR[sourceEntityName][destinationEntityName]
           ids: allItemsIDs
 
-      linkToActsMustBe = Activity.getActivitiesListURL(filterToActsMustBe)
+      linkToActsMustBe = getLinkMustBe(destinationEntityName, filterToActsMustBe)
 
       linkToOtherEntitiesPromise.then (linkGot) ->
         expect(linkGot).toBe(linkToActsMustBe)
@@ -144,7 +164,7 @@ describe "Paginated Collections", ->
             .ENTITY_NAME_TO_FILTER_GENERATOR[sourceEntityName][destinationEntityName]
               ids: [itemToSelect, itemToSelect2]
 
-            linkToActsMustBe = Activity.getActivitiesListURL(filterToActsMustBe)
+            linkToActsMustBe = getLinkMustBe(destinationEntityName, filterToActsMustBe)
 
             #the link new link must be correct
             expect(linkToActsMustBe).toBe(linkGot2)
