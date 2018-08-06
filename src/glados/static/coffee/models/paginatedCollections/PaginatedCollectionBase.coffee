@@ -104,12 +104,22 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       linkPromise = jQuery.Deferred()
 
+      propertyToPluck = undefined
+      sourceEntityName = @getModelEntityName()
+      if sourceEntityName == Activity.prototype.entityName
+        console.log 'source is activity'
+        if destinationEntityName == Compound.prototype.entityName
+          propertyToPluck = Compound.prototype.idAttribute
+
+      console.log 'propertyToPluck: ', propertyToPluck
+
       # if all items are un selected the link must be done with all of them.
-      iDsPromise = @getItemsIDsPromise(onlySelected=(not @allItemsAreUnselected()))
+      iDsPromise = @getItemsIDsPromise(onlySelected=(not @allItemsAreUnselected()), propertyToPluck)
 
       thisCollection = @
       iDsPromise.then (selectedIDs) ->
 
+        console.log 'selectedIDs: ', selectedIDs
         link = thisCollection.getLinkToRelatedEntities(selectedIDs, destinationEntityName)
         thisCollection.setMeta(cachePropName, link)
         linkPromise.resolve(link)
@@ -139,6 +149,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           Handlebars.compile('_metadata.assay_data.tissue_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
       "#{glados.models.Compound.Drug}":
         "#{Activity.prototype.entityName}":
+          Handlebars.compile('molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
+      "#{Activity.prototype.entityName}":
+        "#{Compound.prototype.entityName}":
           Handlebars.compile('molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
 
     # ------------------------------------------------------------------------------------------------------------------

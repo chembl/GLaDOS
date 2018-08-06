@@ -188,7 +188,6 @@ describe "Paginated Collections", ->
 
       it 'produces the link after selecting one item', (done) -> testLinkGenerationAfterSelectingOneItem(list,
         Activity.prototype.entityName, done)
-
       it 'produces the link after selecting multiple items', (done) ->
         testLinkGenerationAfterSelectingMultipleItems(list, Activity.prototype.entityName, done)
       it 'produces the link after selecting all items', (done) ->
@@ -207,10 +206,13 @@ describe "Paginated Collections", ->
 
       beforeAll (done) ->
         TestsUtils.simulateDataESList(list,
-          glados.Settings.STATIC_URL + 'testData/Activity/activitySamplePagColl.json', done, rawES=true)
+          glados.Settings.STATIC_URL + 'testData/Activity/activitySamplePagColl.json', done)
 
 
       beforeEach ->
         list.unSelectAll()
 
-      it 'produces the link after selecting one item', ->
+      it 'produces the link after selecting one item', (done) -> testLinkGenerationAfterSelectingOneItem(list,
+        Compound.prototype.entityName, done)
+#      it 'produces the link after selecting multiple items', (done) ->
+#        testLinkGenerationAfterSelectingMultipleItems(list, Compound.prototype.entityName, done)

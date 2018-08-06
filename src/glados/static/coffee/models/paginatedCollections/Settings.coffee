@@ -250,6 +250,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite']]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
         LINKS_TO_OTHER_ENTITIES: [Compound.prototype.entityName]
+        ID_COLUMN: Activity.ID_COLUMN
       COMPOUND_ES_RESULTS_LIST_CAROUSEL:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCompound'
