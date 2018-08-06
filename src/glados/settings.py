@@ -21,6 +21,7 @@ class RunEnvs(object):
     TEST = 'TEST'
     PROD = 'PROD'
 
+
 RUN_ENV = RunEnvs.DEV
 
 # Build paths inside the project like this: os.path.join(GLADOS_ROOT, ...)
@@ -65,7 +66,7 @@ BLOGGER_KEY = '<BLOGGER_API_KEY>'
 # ElasticSearch
 # ----------------------------------------------------------------------------------------------------------------------
 
-# ELASTICSEARCH_HOST = 'http://wp-p2m-50.ebi.ac.uk:9200'
+ELASTICSEARCH_HOST = 'http://wp-p1m-50.ebi.ac.uk:9200'
 ELASTICSEARCH_USERNAME = None
 ELASTICSEARCH_PASSWORD = None
 
@@ -240,21 +241,31 @@ CACHES = {
 LOGGING_CONFIG_DICT = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'glados':{
+            'format': '%(asctime)s %(levelname)-8s %(name)-15s %(message)s',
+            'datefmt': '%Y-%m-%d %H:%M:%S'
+        }
+    },
     'handlers': {
         'console': {
-            'level': 'DEBUG',
+            'level': logging.DEBUG,
             'class': 'logging.StreamHandler',
+            'formatter': 'glados',
         },
     },
     'loggers': {
+        'elasticsearch': {
+            'level': logging.CRITICAL
+        },
         'glados.static_files_compiler': {
             'handlers': ['console'],
-            'level': 'INFO',
+            'level': logging.INFO,
             'propagate': True,
         },
         'glados.es_connection': {
             'handlers': ['console'],
-            'level': 'INFO',
+            'level': logging.INFO,
             'propagate': True,
         },
     },
