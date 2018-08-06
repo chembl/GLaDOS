@@ -153,14 +153,11 @@ describe "Paginated Collections", ->
     # ------------------------------------------------------------------------------------------------------------------
     # test cases
     # ------------------------------------------------------------------------------------------------------------------
-    describe "Links to all activities", ->
+    describe "Links to all activities from compound", ->
 
       list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFor(
           glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND
         )
-
-      allActsLinkCachePropName =
-      glados.models.paginatedCollections.PaginatedCollectionBase.prototype.ALL_ACTIVITIES_LINK_CACHE_PROP_NAME
 
       beforeAll (done) ->
         TestsUtils.simulateDataESList(list,
@@ -181,3 +178,18 @@ describe "Paginated Collections", ->
       it 'sets the link cache', (done) -> testLinksCacheIsSet(list, Activity.prototype.entityName, done)
       it 'uses the link cache', (done) -> testLinksCacheIsUsed(list, Activity.prototype.entityName, done)
       it 'resets the link cache', (done) -> testResetsCacheIsReset(list, Activity.prototype.entityName, done)
+
+    describe "Links to all compounds from activities", ->
+
+      list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFor(
+          glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.ACTIVITY
+        )
+
+      beforeAll (done) ->
+        TestsUtils.simulateDataESList(list,
+          glados.Settings.STATIC_URL + 'testData/Activity/activitySamplePagColl.json', done, rawES=true)
+
+
+      it 'works', ->
+
+        console.log 'list: ', list

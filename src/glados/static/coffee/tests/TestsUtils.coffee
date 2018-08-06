@@ -22,13 +22,17 @@ class TestsUtils
 
 
   # simulates only the data inside, nothing related with the elasticsearch query,
-  # initialises all results list only
-  @simulateDataESList = (list, dataURL, done) ->
+  @simulateDataESList = (list, dataURL, done, rawES=false) ->
     $.get dataURL, (testData) ->
-      list.allResults = testData
-      list.setMeta('total_records', testData.length)
+      console.log 'simulateDataESList'
+      if rawES
+        models = testData.hits.hits
+      else
+        models = testData
+      list.allResults = models
+      list.setMeta('total_records', models.length)
       Entity = list.getMeta('model')
-      models = (new Entity(Entity.prototype.parse(result)) for result in testData)
+      models = (new Entity(Entity.prototype.parse(result)) for result in models)
       list.reset(models)
       done()
 
