@@ -190,6 +190,7 @@ describe "Paginated Collections", ->
           glados.Settings.STATIC_URL + 'testData/Activity/activitySamplePagColl.json', done, rawES=true)
 
 
-      it 'works', ->
+      beforeEach ->
+        list.unSelectAll()
 
-        console.log 'list: ', list
+      it 'produces the link after selecting one item', ->

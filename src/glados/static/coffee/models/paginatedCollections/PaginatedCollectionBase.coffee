@@ -79,7 +79,20 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       filter = @ENTITY_NAME_TO_FILTER_GENERATOR[sourceEntityName][destinationEntityName]
         ids: itemsList
 
-      return Activity.getActivitiesListURL(filter)
+      if destinationEntityName == Activity.prototype.entityName
+        return Activity.getActivitiesListURL(filter)
+      else if destinationEntityName == Compound.prototype.entityName
+        return Compound.getCompoundsListURL(filter)
+      else if destinationEntityName == Target.prototype.entityName
+        return Target.getTargetsListURL(filter)
+      else if destinationEntityName == Document.prototype.entityName
+        return Document.getDocumentsListURL(filter)
+      else if destinationEntityName == Assay.prototype.entityName
+        return Assay.getAssaysListURL(filter)
+      else if destinationEntityName == CellLine.prototype.entityName
+        return CellLine.getCellsListURL(filter)
+      else if destinationEntityName == glados.models.Tissue.prototype.entityName
+        return glados.models.Tissue.getTissuesListURL(filter)
 
     getLinkToRelatedEntitiesPromise: (destinationEntityName) ->
 
