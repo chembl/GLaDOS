@@ -113,7 +113,7 @@ describe "Paginated Collections", ->
 
     testLinksCacheIsUsed = (list, destinationEntityName, done) ->
 
-      allItemsIDs = TestsUtils.getAllItemsIDs(list)
+      allItemsIDs = TestsUtils.getAllItemsIDs(list, list.getIDProperty())
       itemToSelect = allItemsIDs[0]
       list.selectItem(itemToSelect)
 
@@ -130,7 +130,8 @@ describe "Paginated Collections", ->
 
     testResetsCacheIsReset = (list, destinationEntityName, done) ->
 
-      allItemsIDs = TestsUtils.getAllItemsIDs(list)
+      console.log 'testResetsCacheIsReset'
+      allItemsIDs = TestsUtils.getAllItemsIDs(list, list.getIDProperty())
       itemToSelect = allItemsIDs[0]
       list.selectItem(itemToSelect)
       cachePropName = list.LINKS_TO_RELATED_ENTITIES_CACHE_PROP_NAMES[destinationEntityName]
@@ -157,11 +158,9 @@ describe "Paginated Collections", ->
 
           linkToActPromise2.then (linkGot2) ->
 
-            sourceEntityName = list.getMeta('model').prototype.entityName
-            filterToActsMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.prototype\
-            .ENTITY_NAME_TO_FILTER_GENERATOR[sourceEntityName][destinationEntityName]
-              ids: [itemToSelect, itemToSelect2]
-
+            selectedItems = [itemToSelect, itemToSelect2]
+            console.log 'selectedItems: ', selectedItems
+            filterToActsMustBe = getFilterMustBe(destinationEntityName, selectedItems, list)
             linkToActsMustBe = getLinkMustBe(destinationEntityName, filterToActsMustBe)
 
             #the link new link must be correct
@@ -228,3 +227,5 @@ describe "Paginated Collections", ->
       it 'produces the link after selecting no items', (done) ->
         testLinkGenerationAfterSelectingNoItems(list, Compound.prototype.entityName, done)
       it 'sets the link cache', (done) -> testLinksCacheIsSet(list, Compound.prototype.entityName, done)
+      it 'uses the link cache', (done) -> testLinksCacheIsUsed(list, Compound.prototype.entityName, done)
+      it 'resets the link cache', (done) -> testResetsCacheIsReset(list, Compound.prototype.entityName, done)
