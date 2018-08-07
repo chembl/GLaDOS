@@ -97,7 +97,7 @@ describe "Paginated Collections", ->
 
     testLinksCacheIsSet = (list, destinationEntityName, done) ->
 
-      allItemsIDs = TestsUtils.getAllItemsIDs(list)
+      allItemsIDs = TestsUtils.getAllItemsIDs(list, list.getIDProperty())
       itemToSelect = allItemsIDs[0]
       list.selectItem(itemToSelect)
 
@@ -227,3 +227,4 @@ describe "Paginated Collections", ->
         testLinkGenerationAfterSelectingAllItems(list, Compound.prototype.entityName, done)
       it 'produces the link after selecting no items', (done) ->
         testLinkGenerationAfterSelectingNoItems(list, Compound.prototype.entityName, done)
+      it 'sets the link cache', (done) -> testLinksCacheIsSet(list, Compound.prototype.entityName, done)
