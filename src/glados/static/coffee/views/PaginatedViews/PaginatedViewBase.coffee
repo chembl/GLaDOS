@@ -671,6 +671,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     # Link to all activities
     # ------------------------------------------------------------------------------------------------------------------
-    islinkToAllActivitiesEnabled: -> @collection.getMeta('enable_activities_link_for_selected_entities') == true
+    islinkToOtherEntitiesEnabled: -> @collection.getMeta('enable_activities_link_for_selected_entities') == true
 
     renderLinkToAllActivities: ->
