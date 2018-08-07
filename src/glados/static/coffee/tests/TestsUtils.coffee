@@ -5,13 +5,13 @@ class TestsUtils
       list.reset(testData)
       done()
 
-  @getAllItemsIDs = (list) ->
+  @getAllItemsIDs = (list, idProperty='molecule_chembl_id') ->
     #this can be done because of the simulation of data, remember that allResults is not always available for
     # Elasticsearch collections
     if list.allResults?
-      return (model.molecule_chembl_id for model in list.allResults)
+      return (model[idProperty] for model in list.allResults)
     else
-      return (model.attributes.molecule_chembl_id for model in list.models)
+      return (model.attributes[idProperty] for model in list.models)
 
   @pluckFromListItems = (list, propertyName) ->
 

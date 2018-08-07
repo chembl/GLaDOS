@@ -47,6 +47,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # Utils
     # ------------------------------------------------------------------------------------------------------------------
     getModelEntityName: -> @getMeta('model').prototype.entityName
+    getIDProperty: -> @getMeta('id_column').comparator
     # ------------------------------------------------------------------------------------------------------------------
     # Link to all activities and other entities
     # ------------------------------------------------------------------------------------------------------------------
@@ -107,11 +108,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       propertyToPluck = undefined
       sourceEntityName = @getModelEntityName()
       if sourceEntityName == Activity.prototype.entityName
-        console.log 'source is activity'
         if destinationEntityName == Compound.prototype.entityName
           propertyToPluck = Compound.prototype.idAttribute
 
-      console.log 'propertyToPluck: ', propertyToPluck
 
       # if all items are un selected the link must be done with all of them.
       iDsPromise = @getItemsIDsPromise(onlySelected=(not @allItemsAreUnselected()), propertyToPluck)
@@ -119,8 +118,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       thisCollection = @
       iDsPromise.then (selectedIDs) ->
 
-        console.log 'selectedIDs: ', selectedIDs
         link = thisCollection.getLinkToRelatedEntities(selectedIDs, destinationEntityName)
+        console.log 'link: ', link
         thisCollection.setMeta(cachePropName, link)
         linkPromise.resolve(link)
 

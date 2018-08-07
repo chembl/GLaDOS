@@ -22,26 +22,39 @@ describe "Paginated Collections", ->
       else if destinationEntityName == glados.models.Tissue.prototype.entityName
         return glados.models.Tissue.getTissuesListURL(filter)
 
+    getFilterMustBe = (destinationEntityName, selectedItems, list) ->
+
+      sourceEntityName = list.getMeta('model').prototype.entityName
+      idsList = selectedItems
+
+      if sourceEntityName == Activity.prototype.entityName
+        idsList = []
+        if destinationEntityName == Compound.prototype.entityName
+          for id in selectedItems
+            selectedModel = list.get(id)
+            idsList.push(selectedModel.get('molecule_chembl_id'))
+
+      return glados.models.paginatedCollections.PaginatedCollectionBase.prototype\
+        .ENTITY_NAME_TO_FILTER_GENERATOR[sourceEntityName][destinationEntityName]
+          ids: idsList
     # ------------------------------------------------------------------------------------------------------------------
     # Generic test functions
     # ------------------------------------------------------------------------------------------------------------------
     testLinkGenerationAfterSelectingOneItem = (list, destinationEntityName, done) ->
 
-      allItemsIDs = TestsUtils.getAllItemsIDs(list)
+      console.log 'testLinkGenerationAfterSelectingOneItem'
+      allItemsIDs = TestsUtils.getAllItemsIDs(list, list.getIDProperty())
+      console.log 'allItemsIDs: ', allItemsIDs
       itemToSelect = allItemsIDs[0]
       list.selectItem(itemToSelect)
 
       linkToOtherEntitiesPromise = list.getLinkToRelatedEntitiesPromise(destinationEntityName)
-
-      sourceEntityName = list.getMeta('model').prototype.entityName
-      filterToActsMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.prototype\
-        .ENTITY_NAME_TO_FILTER_GENERATOR[sourceEntityName][destinationEntityName]
-          ids: [itemToSelect]
-
-      linkToActsMustBe = getLinkMustBe(destinationEntityName, filterToActsMustBe)
+      filterMustBe = getFilterMustBe(destinationEntityName, [itemToSelect], list)
+      linkToActsMustBe = getLinkMustBe(destinationEntityName, filterMustBe)
 
       linkToOtherEntitiesPromise.then (linkGot) ->
-        expect(linkToActsMustBe).toBe(linkGot)
+
+        expect(linkGot).toBe(linkToActsMustBe)
         done()
 
     testLinkGenerationAfterSelectingMultipleItems = (list, destinationEntityName, done) ->
@@ -175,11 +188,14 @@ describe "Paginated Collections", ->
     # ------------------------------------------------------------------------------------------------------------------
     describe "Links to all activities from compound", ->
 
-      list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFor(
+      list = undefined
+
+      beforeAll (done) ->
+
+        list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFor(
           glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND
         )
 
-      beforeAll (done) ->
         TestsUtils.simulateDataESList(list,
           glados.Settings.STATIC_URL + 'testData/WSCollectionTestData2.json', done)
 
@@ -200,11 +216,14 @@ describe "Paginated Collections", ->
 
     describe "Links to all compounds from activities", ->
 
-      list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFor(
+      list = undefined
+
+      beforeAll (done) ->
+
+        list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFor(
           glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.ACTIVITY
         )
 
-      beforeAll (done) ->
         TestsUtils.simulateDataESList(list,
           glados.Settings.STATIC_URL + 'testData/Activity/activitySamplePagColl.json', done)
 

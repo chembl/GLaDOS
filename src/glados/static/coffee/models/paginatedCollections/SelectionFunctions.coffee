@@ -116,29 +116,18 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       itemsList = []
 
-      console.log 'getItemsIDs'
-      console.log 'propertyToPluck: ', propertyToPluck
-      console.log 'idProperty: ', idProperty
-      console.log '@allResults: ', @allResults
       if @downloadIsValidAndReady()
         if onlySelected
-          console.log '1'
           itemsList = (model[propertyToPluck] for model in @allResults when @itemIsSelected(model[idProperty]) )
         else
-          console.log '2'
           itemsList = (model[propertyToPluck] for model in @allResults)
       else
-        console.log '3'
-        console.log '@models: ', @models
-        for model in @models
-          console.log @itemIsSelected(model.attributes[idProperty])
 
         if onlySelected
           itemsList = (model.attributes[propertyToPluck] for model in @models when @itemIsSelected(model.attributes[idProperty]) )
         else
           itemsList = (model.attributes[propertyToPluck] for model in @models)
 
-      console.log 'itemsList: ', itemsList
       if onlySelected
         incompleteCondition = itemsList.length != @getNumberOfSelectedItems()
       else

@@ -142,6 +142,7 @@ Activity.COLUMNS = {
 }
 
 Activity.ID_COLUMN = Activity.COLUMNS.ACTIVITY_ID
+Activity = Activity.extend({idAttribute: Activity.ID_COLUMN.comparator})
 
 Activity.COLUMNS_SETTINGS = {
   ALL_COLUMNS: (->
