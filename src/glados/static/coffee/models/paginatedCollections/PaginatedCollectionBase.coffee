@@ -119,7 +119,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       iDsPromise.then (selectedIDs) ->
 
         link = thisCollection.getLinkToRelatedEntities(selectedIDs, destinationEntityName)
-        console.log 'link: ', link
         thisCollection.setMeta(cachePropName, link)
         linkPromise.resolve(link)
 

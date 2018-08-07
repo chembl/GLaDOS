@@ -59,18 +59,13 @@ describe "Paginated Collections", ->
 
     testLinkGenerationAfterSelectingMultipleItems = (list, destinationEntityName, done) ->
 
-      allItemsIDs = TestsUtils.getAllItemsIDs(list)
+      allItemsIDs = TestsUtils.getAllItemsIDs(list, list.getIDProperty())
       itemsToSelect = allItemsIDs[0..(allItemsIDs.length - 1)]
       list.selectItems(itemsToSelect)
 
       linkToOtherEntitiesPromise = list.getLinkToRelatedEntitiesPromise(destinationEntityName)
-
-      sourceEntityName = list.getMeta('model').prototype.entityName
-      filterToActsMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.prototype\
-        .ENTITY_NAME_TO_FILTER_GENERATOR[sourceEntityName][destinationEntityName]
-          ids: itemsToSelect
-
-      linkToActsMustBe = getLinkMustBe(destinationEntityName, filterToActsMustBe)
+      filterMustBe = getFilterMustBe(destinationEntityName, itemsToSelect, list)
+      linkToActsMustBe = getLinkMustBe(destinationEntityName, filterMustBe)
 
       linkToOtherEntitiesPromise.then (linkGot) ->
         expect(linkToActsMustBe).toBe(linkGot)
@@ -233,5 +228,5 @@ describe "Paginated Collections", ->
 
       it 'produces the link after selecting one item', (done) -> testLinkGenerationAfterSelectingOneItem(list,
         Compound.prototype.entityName, done)
-#      it 'produces the link after selecting multiple items', (done) ->
-#        testLinkGenerationAfterSelectingMultipleItems(list, Compound.prototype.entityName, done)
+      it 'produces the link after selecting multiple items', (done) ->
+        testLinkGenerationAfterSelectingMultipleItems(list, Compound.prototype.entityName, done)
