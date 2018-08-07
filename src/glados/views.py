@@ -6,10 +6,8 @@ from django.core.cache import cache
 from django.http import JsonResponse
 import glados.url_shortener.url_shortener as url_shortener
 from apiclient.discovery import build
-from googleapiclient import *
 import re
-from elasticsearch import Elasticsearch
-from elasticsearch_dsl import Search
+from elasticsearch_dsl import Search, connections
 import requests
 import datetime
 import timeago
@@ -17,20 +15,6 @@ import json
 import hashlib
 import base64
 from django.views.decorators.cache import cache_page
-
-keyword_args = {
-  "hosts": [settings.ELASTICSEARCH_HOST],
-  "timeout": 30,
-  "retry_on_timeout": True
-}
-
-if settings.ELASTICSEARCH_PASSWORD is not None:
-    keyword_args["http_auth"] = (settings.ELASTICSEARCH_USERNAME, settings.ELASTICSEARCH_PASSWORD)
-
-try:
-    es = Elasticsearch(**keyword_args)
-except:
-    print('connection error!')
 
 
 @cache_page(60 * 60)
@@ -138,9 +122,9 @@ def get_latest_blog_entries(request, pageToken):
     service = build('blogger', 'v3', developerKey=key)
     response = service.posts().list(blogId=blogId, orderBy=orderBy, pageToken=pageToken,
                                     fetchBodies=fetchBodies, fetchImages=fetchImages, maxResults=maxResults).execute()
-    blogResponse = service.blogs().get(blogId=blogId).execute()
+    blog_response = service.blogs().get(blogId=blogId).execute()
 
-    total_count = blogResponse['posts']['totalItems']
+    total_count = blog_response['posts']['totalItems']
     latest_entries_items = response['items']
     next_page_token = response['nextPageToken']
 
@@ -355,10 +339,11 @@ def shorten_url(request):
         return JsonResponse({'error': 'this is only available via POST'})
 
 
+# noinspection PyBroadException
 def elasticsearch_cache(request):
     if request.method == "POST":
 
-        print ('elasticsearch_cache')
+        print('elasticsearch_cache')
         index_name = request.POST.get('index_name', '')
         raw_search_data = request.POST.get('search_data', '')
         search_data_digest = hashlib.sha256(raw_search_data.encode('utf-8')).digest()
@@ -368,20 +353,28 @@ def elasticsearch_cache(request):
         cache_key = "{}-{}".format(index_name, base64_search_data_hash)
         print('cache_key', cache_key)
 
-        cache_response = cache.get(cache_key)
+        cache_response = None
 
-        if cache_response != None:
+        try:
+            cache_response = cache.get(cache_key)
+        except Exception as e:
+            print('Error searching in cache!')
+
+        if cache_response is not None:
             print('results are in cache')
             return JsonResponse(cache_response)
 
         print('results are NOT in cache')
-        response = es.search(index=index_name, body=search_data)
-        cache_time = 3000000
-        cache.set(cache_key, response, cache_time)
-        return JsonResponse(response)
+        response = connections.get_connection().search(index=index_name, body=search_data)
 
+        try:
+            cache_time = 3000000
+            cache.set(cache_key, response, cache_time)
+        except Exception as e:
+            print('Error saving in the cache!')
+        return JsonResponse(response)
     else:
-        return JsonResponse({'error': 'this is only available via POST'})
+        return JsonResponse({'error': 'this is only available via POST! You crazy hacker! :P'})
 
 
 def extend_url(request, hash):
