@@ -101,8 +101,23 @@
 </script>
 
 <script id="Handlebars-LinkToAllActivities" type="text/x-handlebars-template">
-<a target="_blank" class="BCK-LinkToAllActivities {{#if too_many_items}}disabled{{/if}}">Browse Related Activities</a>
-<i class="BCK-preloader fa fa-cog fa-spin fa-fw" style="display: none"></i>
+
+    <div >
+        <div class="col s2">
+            <i class="BCK-preloader fa fa-bars"></i>
+        </div>
+        <div class="col s6">
+            <a target="_blank" class="BCK-LinkToAllActivities {{#if too_many_items}}disabled{{/if}} link-to-other-entities">
+                Related Activities
+            </a>
+        </div>
+        <div class="col s2">
+            <i class="BCK-preloader fa fa-cog fa-spin fa-fw"></i>
+        </div>
+        <div class="col s2">
+            <i class="BCK-preloader fa fa-question-circle"></i>
+        </div>
+    </div>
 </script>
 
 <script id="Handlebars-ESResultsList" type="text/x-handlebars-template">

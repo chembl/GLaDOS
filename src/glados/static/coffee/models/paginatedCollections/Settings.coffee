@@ -306,7 +306,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Heatmap]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
         ENABLE_COLLECTION_CACHING: true
-        ENABLE_ACTIVITIES_LINK_FOR_SELECTED_ENTITIES: true
+        LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
       COMPOUND_SUBSTRUCTURE_HIGHLIGHTING:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCompound'

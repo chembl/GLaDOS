@@ -213,12 +213,14 @@ glados.useNameSpace 'glados.views.Browsers',
         else
           @enableButton(viewLabel)
 
-      @renderLinkToAll() unless not @collection.islinkToOtherEntitiesEnabled()
+      console.log '@collection.islinkToOtherEntitiesEnabled() ', @collection.islinkToOtherEntitiesEnabled()
+      @renderLinkToOtherEntities() unless not @collection.islinkToOtherEntitiesEnabled()
 
     toggleClearSelections: -> @collection.toggleClearSelections()
 
-    renderLinkToAll: ->
+    renderLinkToOtherEntities: ->
 
+      console.log 'render link to all'
       if @collection.getTotalRecords() == 0
         return
 
@@ -256,10 +258,10 @@ glados.useNameSpace 'glados.views.Browsers',
       glados.Utils.fillContentForElement($linkToAllContainer)
 
       $link = $linkToAllContainer.find('.BCK-LinkToAllActivities')
-      $link.click $.proxy(@handleLinkToAllActivitiesClick, @)
+      $link.click $.proxy(@handleLinkToOtherEntitiesClick, @)
 
 
-    handleLinkToAllActivitiesClick: ->
+    handleLinkToOtherEntitiesClick: ->
 
       $selectionMenuContainer = $(@el).find('.BCK-selection-menu-container')
       $linkToAllContainer = $selectionMenuContainer.find('.BCK-LinkToAllActivitiesContainer')
