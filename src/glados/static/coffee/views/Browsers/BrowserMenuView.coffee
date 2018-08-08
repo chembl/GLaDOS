@@ -225,7 +225,7 @@ glados.useNameSpace 'glados.views.Browsers',
         return
 
       $selectionMenuContainer = $(@el).find('.BCK-selection-menu-container')
-      $linkToAllContainer = $selectionMenuContainer.find('.BCK-LinkToAllActivitiesContainer')
+      $linkToAllContainer = $selectionMenuContainer.find('.BCK-LinkToOtherEntitiesContainer')
 
       tooManyItems = @collection.thereAreTooManyItemsForActivitiesLink()
       isStreaming = @collection.isStreaming()
@@ -244,7 +244,8 @@ glados.useNameSpace 'glados.views.Browsers',
           "Please select or filter less than #{glados.Settings.VIEW_SELECTION_THRESHOLDS.Heatmap[1]} " +
           "items to activate this link."
 
-        $linkToAllContainer.qtip
+        $linksToOtherEntities = $linkToAllContainer.find('.BCK-LinkToOtherEntities')
+        $linksToOtherEntities.qtip
           content:
             text: qtipText
           style:
@@ -257,14 +258,14 @@ glados.useNameSpace 'glados.views.Browsers',
 
       glados.Utils.fillContentForElement($linkToAllContainer)
 
-      $link = $linkToAllContainer.find('.BCK-LinkToAllActivities')
+      $link = $linkToAllContainer.find('.BCK-LinkToOtherEntities')
       $link.click $.proxy(@handleLinkToOtherEntitiesClick, @)
 
 
     handleLinkToOtherEntitiesClick: ->
 
       $selectionMenuContainer = $(@el).find('.BCK-selection-menu-container')
-      $linkToAllContainer = $selectionMenuContainer.find('.BCK-LinkToAllActivitiesContainer')
+      $linkToAllContainer = $selectionMenuContainer.find('.BCK-LinkToOtherEntitiesContainer')
       $preloader = $linkToAllContainer.find('.BCK-preloader')
       $preloader.show()
 

@@ -93,7 +93,7 @@
       </a>
     </div>
 
-    <div class="BCK-LinkToAllActivitiesContainer link-to-all-activities-container"
+    <div class="BCK-LinkToOtherEntitiesContainer link-to-other-entities-container"
                                      data-hb-template="Handlebars-LinkToAllActivities"> </div>
 
   </div>
@@ -102,22 +102,15 @@
 
 <script id="Handlebars-LinkToAllActivities" type="text/x-handlebars-template">
 
-    <div >
-        <div class="col s2">
-            <i class="BCK-preloader fa fa-bars"></i>
-        </div>
-        <div class="col s6">
-            <a target="_blank" class="BCK-LinkToAllActivities {{#if too_many_items}}disabled{{/if}} link-to-other-entities">
-                Related Activities
-            </a>
-        </div>
-        <div class="col s2">
-            <i class="BCK-preloader fa fa-cog fa-spin fa-fw"></i>
-        </div>
-        <div class="col s2">
-            <i class="BCK-preloader fa fa-question-circle"></i>
-        </div>
+    <div class="link-to-other-entities">
+        <i class="BCK-preloader fa fa-bars" ></i>
+        <i class="BCK-preloader fa fa-cog fa-spin fa-fw"></i>
+        <a target="_blank" class="BCK-LinkToOtherEntities {{#if too_many_items}}disabled{{/if}}">
+            Browse Activities
+        </a>
+        <i class="BCK-preloader fa fa-question-circle" ></i>
     </div>
+
 </script>
 
 <script id="Handlebars-ESResultsList" type="text/x-handlebars-template">
@@ -153,7 +146,7 @@
     <!-- backbone fills this -->
   </div>
 
-  <div class="col s12 m3 l3 BCK-selection-menu-container" data-hb-template="Handlebars-SelectionMenu">
+  <div class="col s12 m3 l3 BCK-selection-menu-container selection-menu-container" data-hb-template="Handlebars-SelectionMenu">
     <!-- backbone fills this -->
   </div>
 
