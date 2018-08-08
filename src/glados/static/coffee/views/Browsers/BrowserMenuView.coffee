@@ -240,10 +240,8 @@ glados.useNameSpace 'glados.views.Browsers',
 
       firstDestinationEntityName = availableDestinationEntities[0]
       restOfDestinationEntityNames = availableDestinationEntities[1..]
-      console.log 'availableDestinationEntities: ', availableDestinationEntities
-      console.log 'firstDestinationEntityName: ', firstDestinationEntityName
-      console.log 'restOfDestinationEntityNames: ', restOfDestinationEntityNames
-      console.log 'plural name: ', glados.Settings.ENTITY_NAME_TO_ENTITY['Activity'].prototype.entityNamePlural
+
+      $links = $linkToAllContainer.find('.BCK-LinkToOtherEntities')
       if needsToBeDisabled
 
         glados.Utils.fillContentForElement $linkToAllContainer,
@@ -259,8 +257,7 @@ glados.useNameSpace 'glados.views.Browsers',
           "Please select or filter less than #{glados.Settings.VIEW_SELECTION_THRESHOLDS.Heatmap[1]} " +
           "items to activate this link."
 
-        $linksToOtherEntities = $linkToAllContainer.find('.BCK-LinkToOtherEntities')
-        $linksToOtherEntities.qtip
+        $links.qtip
           content:
             text: qtipText
           style:
@@ -275,19 +272,21 @@ glados.useNameSpace 'glados.views.Browsers',
         first_entity: firstDestinationEntityName
         rest_of_entities: restOfDestinationEntityNames
 
-      $link = $linkToAllContainer.find('.BCK-LinkToOtherEntities')
-      $link.click $.proxy(@handleLinkToOtherEntitiesClick, @)
+      $links = $linkToAllContainer.find('.BCK-LinkToOtherEntities')
+      $links.click $.proxy(@handleLinkToOtherEntitiesClick, @)
 
 
-    handleLinkToOtherEntitiesClick: ->
+    handleLinkToOtherEntitiesClick: (event) ->
+
+      $clickedElem = $(event.currentTarget)
+      destinationEntityName = $clickedElem.attr('data-destination-entity')
 
       $selectionMenuContainer = $(@el).find('.BCK-selection-menu-container')
       $linkToAllContainer = $selectionMenuContainer.find('.BCK-LinkToOtherEntitiesContainer')
-      $preloader = $linkToAllContainer.find('.BCK-preloader')
+      $preloader = $linkToAllContainer.find(".BCK-preloader[data-destination-entity='#{destinationEntityName}']")
       $preloader.show()
 
-      return
-      linkToActPromise = @collection.getLinkToAllActivitiesPromise()
+      linkToActPromise = @collection.getLinkToRelatedEntitiesPromise(destinationEntityName)
 
       linkToActPromise.then (linkGot) ->
         glados.Utils.URLS.shortenLinkIfTooLongAndOpen(linkGot)
