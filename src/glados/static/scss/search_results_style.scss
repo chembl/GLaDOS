@@ -379,7 +379,6 @@ span.badge-primary-color-no-float {
     margin: 0px 0px;
     color: color('grey', 'darken-2');
     display: inline-block;
-    border-bottom: 1px solid color('grey', 'lighten-1');
 
     .badge-primary-color-no-float {
       background-color: color('grey', 'lighten-2');
@@ -476,11 +475,33 @@ span.badge-primary-color-no-float {
       .link-to-other-entities-container {
         width: 100%;
         display: inline-block;
-        .link-to-other-entities {
-          display: block;
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
+
+        .menu-and-main-link-container{
+          .menu-opener{
+
+            position: relative;
+            display: inline;
+            .hollow-teal{
+              border: none;
+              background-color: color('grey', 'lighten-4');
+            }
+            .btn-micro{
+              margin-left: 0;
+            }
+
+            .additional-links{
+              position: absolute;
+              left: 15px;
+            }
+
+          }
+
+          .link-container{
+            display: inline;
+            overflow-x: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
         }
 
       }

@@ -269,6 +269,7 @@ glados.useNameSpace 'glados.views.Browsers',
       $preloader = $linkToAllContainer.find('.BCK-preloader')
       $preloader.show()
 
+      return
       linkToActPromise = @collection.getLinkToAllActivitiesPromise()
 
       linkToActPromise.then (linkGot) ->

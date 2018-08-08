@@ -102,13 +102,29 @@
 
 <script id="Handlebars-LinkToAllActivities" type="text/x-handlebars-template">
 
-    <div class="link-to-other-entities">
-        <i class="BCK-preloader fa fa-bars" ></i>
-        <i class="BCK-preloader fa fa-cog fa-spin fa-fw"></i>
-        <a target="_blank" class="BCK-LinkToOtherEntities {{#if too_many_items}}disabled{{/if}}">
-            Browse Activities
-        </a>
-        <i class="BCK-preloader fa fa-question-circle" ></i>
+
+    <div class="menu-and-main-link-container">
+
+        <div class="menu-opener">
+            <a class="BCK-open-more-links btn-micro hollow-teal">
+            <i class="fa fa-ellipsis-v" ></i>
+            </a>
+
+            <div class="additional-links">
+                <a>Browse Targets</a>
+            </div>
+
+        </div>
+
+        <div class="link-container" style="display: inline;">
+            <i class="BCK-preloader fa fa-cog fa-spin fa-fw" ></i>
+            <a target="_blank" class="BCK-LinkToOtherEntities {{#if too_many_items}}disabled{{/if}}">
+                Browse Activities
+            </a>
+            <a>
+                <i class="BCK-preloader fa fa-question-circle" ></i>
+            </a>
+        </div>
     </div>
 
 </script>
