@@ -42,9 +42,7 @@ describe "Paginated Collections", ->
     # ------------------------------------------------------------------------------------------------------------------
     testLinkGenerationAfterSelectingOneItem = (list, destinationEntityName, done) ->
 
-      console.log 'testLinkGenerationAfterSelectingOneItem'
       allItemsIDs = TestsUtils.getAllItemsIDs(list, list.getIDProperty())
-      console.log 'allItemsIDs: ', allItemsIDs
       itemToSelect = allItemsIDs[0]
       list.selectItem(itemToSelect)
 
@@ -198,7 +196,7 @@ describe "Paginated Collections", ->
       it 'uses the link cache', (done) -> testLinksCacheIsUsed(list, Activity.prototype.entityName, done)
       it 'resets the link cache', (done) -> testResetsCacheIsReset(list, Activity.prototype.entityName, done)
 
-    describe "Links to all compounds from activities", ->
+    describe "Links to other entities from activities", ->
 
       list = undefined
 
@@ -218,14 +216,23 @@ describe "Paginated Collections", ->
       # ------------------------------------------------------------------------------------------------------------------
       # tes links for all the possible entities
       # ------------------------------------------------------------------------------------------------------------------
-      it 'produces the link after selecting one item', (done) -> testLinkGenerationAfterSelectingOneItem(list,
-        Compound.prototype.entityName, done)
-      it 'produces the link after selecting multiple items', (done) ->
-        testLinkGenerationAfterSelectingMultipleItems(list, Compound.prototype.entityName, done)
-      it 'produces the link after selecting all items', (done) ->
-        testLinkGenerationAfterSelectingAllItems(list, Compound.prototype.entityName, done)
-      it 'produces the link after selecting no items', (done) ->
-        testLinkGenerationAfterSelectingNoItems(list, Compound.prototype.entityName, done)
-      it 'sets the link cache', (done) -> testLinksCacheIsSet(list, Compound.prototype.entityName, done)
-      it 'uses the link cache', (done) -> testLinksCacheIsUsed(list, Compound.prototype.entityName, done)
-      it 'resets the link cache', (done) -> testResetsCacheIsReset(list, Compound.prototype.entityName, done)
+#      for entityName in [Compound.prototype.entityName, Target.prototype.entityName]
+
+      entityName = 'Compound'
+
+      it "For #{entityName} produces the link after selecting one item", (done) -> testLinkGenerationAfterSelectingOneItem(list,
+        entityName, done)
+      it "For #{entityName} produces the link after selecting multiple items", (done) ->
+        testLinkGenerationAfterSelectingMultipleItems(list, entityName, done)
+      it "For #{entityName} produces the link after selecting all items", (done) ->
+        testLinkGenerationAfterSelectingAllItems(list, entityName, done)
+      it "For #{entityName} produces the link after selecting no items", (done) ->
+        testLinkGenerationAfterSelectingNoItems(list, entityName, done)
+      it "For #{entityName} sets the link cache", (done) -> testLinksCacheIsSet(list, entityName, done)
+      it "For #{entityName} uses the link cache", (done) -> testLinksCacheIsUsed(list, entityName, done)
+      it "For #{entityName} resets the link cache", (done) -> testResetsCacheIsReset(list, entityName, done)
+
+#      entityName = 'Target'
+#
+#      it "For #{entityName} produces the link after selecting one item", (done) -> testLinkGenerationAfterSelectingOneItem(list,
+#        entityName, done)

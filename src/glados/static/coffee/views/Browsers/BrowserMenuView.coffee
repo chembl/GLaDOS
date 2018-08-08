@@ -278,6 +278,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
     handleLinkToOtherEntitiesClick: (event) ->
 
+      console.log 'handleLinkToOtherEntitiesClick'
       $clickedElem = $(event.currentTarget)
       destinationEntityName = $clickedElem.attr('data-destination-entity')
 

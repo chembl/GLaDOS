@@ -108,9 +108,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       propertyToPluck = undefined
       sourceEntityName = @getModelEntityName()
       if sourceEntityName == Activity.prototype.entityName
-        if destinationEntityName == Compound.prototype.entityName
-          propertyToPluck = Compound.prototype.idAttribute
-
+        propertyToPluck = glados.Settings.ENTITY_NAME_TO_ENTITY[destinationEntityName].prototype.idAttribute
 
       # if all items are un selected the link must be done with all of them.
       iDsPromise = @getItemsIDsPromise(onlySelected=(not @allItemsAreUnselected()), propertyToPluck)
@@ -151,6 +149,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       "#{Activity.prototype.entityName}":
         "#{Compound.prototype.entityName}":
           Handlebars.compile('molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
+        "#{Target.prototype.entityName}":
+          Handlebars.compile('target_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
 
     # ------------------------------------------------------------------------------------------------------------------
     # Fetching state handling
