@@ -429,10 +429,14 @@ span.badge-primary-color-no-float {
 }
 
 .browser-menu {
-  background-color: color('grey', 'lighten-4');
+
+  $browser-background-colour: color('grey', 'lighten-4');
+  $browser-border: 1px solid color('grey', 'lighten-1');
+
+  background-color: $browser-background-colour;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  border-bottom: 1px solid color('grey', 'lighten-1');
+  border-bottom: $browser-border;
 
   &.row {
     margin-bottom: 2px;
@@ -479,11 +483,12 @@ span.badge-primary-color-no-float {
         .menu-and-main-link-container{
           .menu-opener{
 
+
             position: relative;
             display: inline;
             .hollow-teal{
               border: none;
-              background-color: color('grey', 'lighten-4');
+              background-color: $browser-background-colour;
             }
             .btn-micro{
               margin-left: 0;
@@ -491,7 +496,12 @@ span.badge-primary-color-no-float {
 
             .additional-links{
               position: absolute;
-              left: 15px;
+              left: 13px;
+              width: 200px;
+              background-color: $browser-background-colour;
+              text-align: left;
+              border: $browser-border;
+              border-radius: 5px;
             }
 
           }
