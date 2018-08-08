@@ -1,6 +1,7 @@
 Assay = Backbone.Model.extend
 
   entityName: 'Assay'
+  entityNamePlural: 'Assays'
   idAttribute: 'assay_chembl_id'
   defaults:
     fetch_from_elastic: true

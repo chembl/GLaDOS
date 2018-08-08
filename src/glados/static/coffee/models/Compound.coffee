@@ -1,6 +1,7 @@
 Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
   entityName: 'Compound'
+  entityNamePlural: 'Compounds'
   idAttribute: 'molecule_chembl_id'
   defaults:
     fetch_from_elastic: true

@@ -231,10 +231,25 @@ glados.useNameSpace 'glados.views.Browsers',
       isStreaming = @collection.isStreaming()
       needsToBeDisabled = tooManyItems or isStreaming
 
+      availableDestinationEntities = []
+
+      for entityName in @collection.getMeta('links_to_other_entities')
+        availableDestinationEntities.push
+          singular: entityName
+          plural: glados.Settings.ENTITY_NAME_TO_ENTITY[entityName].prototype.entityNamePlural
+
+      firstDestinationEntityName = availableDestinationEntities[0]
+      restOfDestinationEntityNames = availableDestinationEntities[1..]
+      console.log 'availableDestinationEntities: ', availableDestinationEntities
+      console.log 'firstDestinationEntityName: ', firstDestinationEntityName
+      console.log 'restOfDestinationEntityNames: ', restOfDestinationEntityNames
+      console.log 'plural name: ', glados.Settings.ENTITY_NAME_TO_ENTITY['Activity'].prototype.entityNamePlural
       if needsToBeDisabled
 
         glados.Utils.fillContentForElement $linkToAllContainer,
           too_many_items: true
+          first_entity: firstDestinationEntityName
+          rest_of_entities: ($.extend(n, {too_many_items: true}) for n in restOfDestinationEntityNames)
 
 
         qtipText = switch
@@ -256,7 +271,9 @@ glados.useNameSpace 'glados.views.Browsers',
 
         return
 
-      glados.Utils.fillContentForElement($linkToAllContainer)
+      glados.Utils.fillContentForElement $linkToAllContainer,
+        first_entity: firstDestinationEntityName
+        rest_of_entities: restOfDestinationEntityNames
 
       $link = $linkToAllContainer.find('.BCK-LinkToOtherEntities')
       $link.click $.proxy(@handleLinkToOtherEntitiesClick, @)
