@@ -239,7 +239,6 @@ glados.useNameSpace 'glados.views.Browsers',
       firstDestinationEntityName = availableDestinationEntities[0]
       restOfDestinationEntityNames = availableDestinationEntities[1..]
 
-      $links = $linkToAllContainer.find('.BCK-LinkToOtherEntities')
       baseID = (new Date()).getTime()
       noAdditionalLinks = restOfDestinationEntityNames.length == 0
 
@@ -253,6 +252,7 @@ glados.useNameSpace 'glados.views.Browsers',
           generated_id_base: baseID
           no_additional_links: noAdditionalLinks
 
+        $links = $linkToAllContainer.find('.BCK-LinkToOtherEntities')
 
         qtipText = switch
           when isStreaming then \
