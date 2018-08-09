@@ -106,9 +106,12 @@
     <div class="menu-and-main-link-container">
 
         <div class="menu-opener">
+
+            {{#unless no_additional_links }}
             <a class="BCK-open-more-links btn-micro hollow-teal">
             <i class="fa fa-ellipsis-v" ></i>
             </a>
+            {{/unless }}
 
             <div class="BCK-additional-links-container additional-links" style="display: none"
             data-id="{{ generated_id_base }}">

@@ -241,6 +241,9 @@ glados.useNameSpace 'glados.views.Browsers',
 
       $links = $linkToAllContainer.find('.BCK-LinkToOtherEntities')
       baseID = (new Date()).getTime()
+      noAdditionalLinks = restOfDestinationEntityNames.length == 0
+
+
       if needsToBeDisabled
 
         glados.Utils.fillContentForElement $linkToAllContainer,
@@ -248,6 +251,7 @@ glados.useNameSpace 'glados.views.Browsers',
           first_entity: firstDestinationEntityName
           rest_of_entities: ($.extend(n, {too_many_items: true}) for n in restOfDestinationEntityNames)
           generated_id_base: baseID
+          no_additional_links: noAdditionalLinks
 
 
         qtipText = switch
@@ -272,12 +276,14 @@ glados.useNameSpace 'glados.views.Browsers',
           first_entity: firstDestinationEntityName
           rest_of_entities: restOfDestinationEntityNames
           generated_id_base: baseID
+          no_additional_links: noAdditionalLinks
 
         $links = $linkToAllContainer.find('.BCK-LinkToOtherEntities')
         $links.click $.proxy(@handleLinkToOtherEntitiesClick, @)
 
-      $additionalLinksOpener = $linkToAllContainer.find('.BCK-open-more-links')
-      $additionalLinksOpener.click $.proxy(@toggleAdditionalLinks, @)
+      unless noAdditionalLinks
+        $additionalLinksOpener = $linkToAllContainer.find('.BCK-open-more-links')
+        $additionalLinksOpener.click $.proxy(@toggleAdditionalLinks, @)
 
     toggleAdditionalLinks: ->
 
