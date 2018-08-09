@@ -29,10 +29,10 @@ describe "Paginated Collections", ->
 
       if sourceEntityName == Activity.prototype.entityName
         idsList = []
-        if destinationEntityName == Compound.prototype.entityName
-          for id in selectedItems
-            selectedModel = list.get(id)
-            idsList.push(selectedModel.get('molecule_chembl_id'))
+        propertyToPluck = glados.Settings.ENTITY_NAME_TO_ENTITY[destinationEntityName].prototype.idAttribute
+        for id in selectedItems
+          selectedModel = list.get(id)
+          idsList.push(selectedModel.get(propertyToPluck))
 
       return glados.models.paginatedCollections.PaginatedCollectionBase.prototype\
         .ENTITY_NAME_TO_FILTER_GENERATOR[sourceEntityName][destinationEntityName]
@@ -128,7 +128,6 @@ describe "Paginated Collections", ->
 
     testResetsCacheIsReset = (list, destinationEntityName, done) ->
 
-      console.log 'testResetsCacheIsReset'
       allItemsIDs = TestsUtils.getAllItemsIDs(list, list.getIDProperty())
       itemToSelect = allItemsIDs[0]
       list.selectItem(itemToSelect)
@@ -157,7 +156,6 @@ describe "Paginated Collections", ->
           linkToActPromise2.then (linkGot2) ->
 
             selectedItems = [itemToSelect, itemToSelect2]
-            console.log 'selectedItems: ', selectedItems
             filterToActsMustBe = getFilterMustBe(destinationEntityName, selectedItems, list)
             linkToActsMustBe = getLinkMustBe(destinationEntityName, filterToActsMustBe)
 
@@ -216,23 +214,22 @@ describe "Paginated Collections", ->
       # ------------------------------------------------------------------------------------------------------------------
       # tes links for all the possible entities
       # ------------------------------------------------------------------------------------------------------------------
-#      for entityName in [Compound.prototype.entityName, Target.prototype.entityName]
+      for entityName in [Compound.prototype.entityName, Target.prototype.entityName, Assay.prototype.entityName,
+      Document.prototype.entityName]
 
-      entityName = 'Compound'
+        test = (entityName) ->
 
-      it "For #{entityName} produces the link after selecting one item", (done) -> testLinkGenerationAfterSelectingOneItem(list,
-        entityName, done)
-      it "For #{entityName} produces the link after selecting multiple items", (done) ->
-        testLinkGenerationAfterSelectingMultipleItems(list, entityName, done)
-      it "For #{entityName} produces the link after selecting all items", (done) ->
-        testLinkGenerationAfterSelectingAllItems(list, entityName, done)
-      it "For #{entityName} produces the link after selecting no items", (done) ->
-        testLinkGenerationAfterSelectingNoItems(list, entityName, done)
-      it "For #{entityName} sets the link cache", (done) -> testLinksCacheIsSet(list, entityName, done)
-      it "For #{entityName} uses the link cache", (done) -> testLinksCacheIsUsed(list, entityName, done)
-      it "For #{entityName} resets the link cache", (done) -> testResetsCacheIsReset(list, entityName, done)
+          it "For #{entityName} produces the link after selecting one item", (done) ->
+            console.log 'entityName: ', entityName
+            testLinkGenerationAfterSelectingOneItem(list, entityName, done)
+          it "For #{entityName} produces the link after selecting multiple items", (done) ->
+            testLinkGenerationAfterSelectingMultipleItems(list, entityName, done)
+          it "For #{entityName} produces the link after selecting all items", (done) ->
+            testLinkGenerationAfterSelectingAllItems(list, entityName, done)
+          it "For #{entityName} produces the link after selecting no items", (done) ->
+            testLinkGenerationAfterSelectingNoItems(list, entityName, done)
+          it "For #{entityName} sets the link cache", (done) -> testLinksCacheIsSet(list, entityName, done)
+          it "For #{entityName} uses the link cache", (done) -> testLinksCacheIsUsed(list, entityName, done)
+          it "For #{entityName} resets the link cache", (done) -> testResetsCacheIsReset(list, entityName, done)
 
-#      entityName = 'Target'
-#
-#      it "For #{entityName} produces the link after selecting one item", (done) -> testLinkGenerationAfterSelectingOneItem(list,
-#        entityName, done)
+        test(entityName)

@@ -501,6 +501,7 @@ span.badge-primary-color-no-float {
               background-color: $browser-background-colour;
               text-align: left;
               border: $browser-border;
+              z-index: $z-over-a-bit;
             }
 
           }

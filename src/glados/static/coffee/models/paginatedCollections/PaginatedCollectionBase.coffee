@@ -151,6 +151,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           Handlebars.compile('molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
         "#{Target.prototype.entityName}":
           Handlebars.compile('target_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
+        "#{Assay.prototype.entityName}":
+          Handlebars.compile('assay_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
+        "#{Document.prototype.entityName}":
+          Handlebars.compile('document_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
 
     # ------------------------------------------------------------------------------------------------------------------
     # Fetching state handling
