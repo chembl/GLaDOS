@@ -303,7 +303,6 @@ describe "Paginated Collections", ->
       list.unSelectItems(itemsToUnSelectA)
       list.unSelectItems(itemsToUnSelectB)
 
-      selectedItemsGot = list.getItemsIDs()
       expect(list.getMeta('all_items_selected')).toBe(false)
       expect(list.thereAreExceptions()).toBe(false)
 

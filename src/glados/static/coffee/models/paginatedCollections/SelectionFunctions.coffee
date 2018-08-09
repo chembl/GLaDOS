@@ -109,21 +109,24 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       allAreSelected = @getMeta('all_items_selected')
       return isSelectionException != allAreSelected
 
-    getItemsIDs: (onlySelected=true) ->
+    getItemsIDs: (onlySelected=true, propertyToPluck) ->
 
       idProperty = @getMeta('id_column').comparator
+      propertyToPluck ?= idProperty
+
       itemsList = []
 
       if @downloadIsValidAndReady()
         if onlySelected
-          itemsList = (model[idProperty] for model in @allResults when @itemIsSelected(model[idProperty]) )
+          itemsList = (model[propertyToPluck] for model in @allResults when @itemIsSelected(model[idProperty]) )
         else
-          itemsList = (model[idProperty] for model in @allResults)
+          itemsList = (model[propertyToPluck] for model in @allResults)
       else
+
         if onlySelected
-          itemsList = (model.attributes[idProperty] for model in @.models when @itemIsSelected(model.attributes[idProperty]) )
+          itemsList = (model.attributes[propertyToPluck] for model in @models when @itemIsSelected(model.attributes[idProperty]) )
         else
-          itemsList = (model.attributes[idProperty] for model in @.models)
+          itemsList = (model.attributes[propertyToPluck] for model in @models)
 
       if onlySelected
         incompleteCondition = itemsList.length != @getNumberOfSelectedItems()
@@ -135,9 +138,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return itemsList
 
-    getItemsIDsPromise: (onlySelected=true) ->
+    getItemsIDsPromise: (onlySelected=true, propertyToPluck) ->
 
-      idsList = @getItemsIDs(onlySelected)
+      idsList = @getItemsIDs(onlySelected, propertyToPluck)
       idsPromise = jQuery.Deferred()
 
       if idsList == glados.Settings.INCOMPLETE_SELECTION_LIST_LABEL
@@ -145,7 +148,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         deferreds = @getAllResults($progressElement=undefined, askingForOnlySelected=true)
         thisCollection = @
         $.when.apply($, deferreds).done ->
-          idsList = thisCollection.getItemsIDs(onlySelected)
+          idsList = thisCollection.getItemsIDs(onlySelected, propertyToPluck)
           idsPromise.resolve(idsList)
 
       else

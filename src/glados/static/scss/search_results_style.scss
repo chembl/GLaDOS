@@ -379,7 +379,6 @@ span.badge-primary-color-no-float {
     margin: 0px 0px;
     color: color('grey', 'darken-2');
     display: inline-block;
-    border-bottom: 1px solid color('grey', 'lighten-1');
 
     .badge-primary-color-no-float {
       background-color: color('grey', 'lighten-2');
@@ -430,10 +429,14 @@ span.badge-primary-color-no-float {
 }
 
 .browser-menu {
-  background-color: color('grey', 'lighten-4');
+
+  $browser-background-colour: color('grey', 'lighten-4');
+  $browser-border: 1px solid color('grey', 'lighten-1');
+
+  background-color: $browser-background-colour;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  border-bottom: 1px solid color('grey', 'lighten-1');
+  border-bottom: $browser-border;
 
   &.row {
     margin-bottom: 2px;
@@ -442,6 +445,7 @@ span.badge-primary-color-no-float {
   .view-menu {
     padding-left: 0;
     position: relative;
+
   }
 
   .download-menu {
@@ -456,19 +460,64 @@ span.badge-primary-color-no-float {
     }
   }
 
-  .selection-menu {
-    text-align: center;
+  .selection-menu-container{
 
-    @media #{$small-and-down} {
-      margin-bottom: 5px;
-    }
+    padding-left: 0;
+    padding-right: 0;
 
-    .selection-information {
-      font-size: 0.8em;
-    }
+    .selection-menu {
+      text-align: center;
 
-    .link-to-all-activities-container {
-      display: inline;
+      @media #{$small-and-down} {
+        margin-bottom: 5px;
+      }
+
+      .selection-information {
+        font-size: 0.8em;
+      }
+
+      .link-to-other-entities-container {
+        width: 100%;
+        display: inline-block;
+
+        .menu-and-main-link-container{
+          .menu-opener{
+
+
+            position: relative;
+            display: inline;
+            .hollow-teal{
+              border: none;
+              background-color: $browser-background-colour;
+            }
+            .btn-micro{
+              margin-left: 0;
+            }
+
+            .additional-links{
+              position: absolute;
+              left: 8px;
+              width: 200px;
+              background-color: $browser-background-colour;
+              text-align: left;
+              border: $browser-border;
+              z-index: $z-over-a-bit;
+              .link-row{
+                padding: 2px 5px;
+              }
+            }
+
+          }
+
+          .link-container{
+            display: inline;
+            overflow-x: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+        }
+
+      }
     }
   }
 

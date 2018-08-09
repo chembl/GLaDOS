@@ -72,7 +72,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           12:
             previous: 6
             next: 12
-        ENABLE_ACTIVITIES_LINK_FOR_SELECTED_ENTITIES: true
+        LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
       TARGET:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESTarget'
@@ -102,7 +102,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Heatmap]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
         ENABLE_COLLECTION_CACHING: true
-        ENABLE_ACTIVITIES_LINK_FOR_SELECTED_ENTITIES: true
+        LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
       ASSAY:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESAssay'
@@ -131,7 +131,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'], glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite']]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
         ENABLE_COLLECTION_CACHING: true
-        ENABLE_ACTIVITIES_LINK_FOR_SELECTED_ENTITIES: true
+        LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
       DOCUMENT:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESDocument'
@@ -160,7 +160,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'], glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite']]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
         ENABLE_COLLECTION_CACHING: true
-        ENABLE_ACTIVITIES_LINK_FOR_SELECTED_ENTITIES: true
+        LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
       CELL_LINE:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCellLine'
@@ -189,7 +189,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'], glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite']]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
         ENABLE_COLLECTION_CACHING: true
-        ENABLE_ACTIVITIES_LINK_FOR_SELECTED_ENTITIES: true
+        LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
       TISSUE:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESTissue'
@@ -218,7 +218,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'], glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite']]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
         ENABLE_COLLECTION_CACHING: true
-        ENABLE_ACTIVITIES_LINK_FOR_SELECTED_ENTITIES: true
+        LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
     ES_INDEXES_NO_MAIN_SEARCH:
       ACTIVITY:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
@@ -249,6 +249,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite']]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
+        LINKS_TO_OTHER_ENTITIES: [Compound.prototype.entityName, Target.prototype.entityName,
+          Assay.prototype.entityName, Document.prototype.entityName]
+        ID_COLUMN: Activity.ID_COLUMN
       COMPOUND_ES_RESULTS_LIST_CAROUSEL:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCompound'
@@ -304,7 +307,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Heatmap]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
         ENABLE_COLLECTION_CACHING: true
-        ENABLE_ACTIVITIES_LINK_FOR_SELECTED_ENTITIES: true
+        LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
       COMPOUND_SUBSTRUCTURE_HIGHLIGHTING:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCompound'

@@ -37,4 +37,4 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           $(@el).find('[id$=' + endingID + ']').prop('checked', true)
 
       # show link to all activities if set
-      @renderLinkToAllActivities() unless not @islinkToAllActivitiesEnabled()
+      @renderLinkToAllActivities() unless not @islinkToOtherEntitiesEnabled()
