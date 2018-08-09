@@ -496,12 +496,15 @@ span.badge-primary-color-no-float {
 
             .additional-links{
               position: absolute;
-              left: 13px;
+              left: 8px;
               width: 200px;
               background-color: $browser-background-colour;
               text-align: left;
               border: $browser-border;
               z-index: $z-over-a-bit;
+              .link-row{
+                padding: 2px 5px;
+              }
             }
 
           }

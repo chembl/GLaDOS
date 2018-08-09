@@ -110,10 +110,11 @@
             <i class="fa fa-ellipsis-v" ></i>
             </a>
 
-            <div class="additional-links ">
+            <div class="BCK-additional-links-container additional-links" style="display: none"
+            data-id="{{ generated_id_base }}">
 
                 {{#each rest_of_entities}}
-                    <div>
+                    <div class="link-row">
                         <i class="BCK-preloader fa fa-cog fa-spin fa-fw" data-destination-entity="{{ this.singular }}"
                         style="display: none">
                         </i>

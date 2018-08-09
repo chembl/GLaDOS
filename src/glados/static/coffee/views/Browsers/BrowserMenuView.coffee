@@ -213,14 +213,12 @@ glados.useNameSpace 'glados.views.Browsers',
         else
           @enableButton(viewLabel)
 
-      console.log '@collection.islinkToOtherEntitiesEnabled() ', @collection.islinkToOtherEntitiesEnabled()
       @renderLinkToOtherEntities() unless not @collection.islinkToOtherEntitiesEnabled()
 
     toggleClearSelections: -> @collection.toggleClearSelections()
 
     renderLinkToOtherEntities: ->
 
-      console.log 'render link to all'
       if @collection.getTotalRecords() == 0
         return
 
@@ -242,12 +240,14 @@ glados.useNameSpace 'glados.views.Browsers',
       restOfDestinationEntityNames = availableDestinationEntities[1..]
 
       $links = $linkToAllContainer.find('.BCK-LinkToOtherEntities')
+      baseID = (new Date()).getTime()
       if needsToBeDisabled
 
         glados.Utils.fillContentForElement $linkToAllContainer,
           too_many_items: true
           first_entity: firstDestinationEntityName
           rest_of_entities: ($.extend(n, {too_many_items: true}) for n in restOfDestinationEntityNames)
+          generated_id_base: baseID
 
 
         qtipText = switch
@@ -266,19 +266,46 @@ glados.useNameSpace 'glados.views.Browsers',
             my: 'top middle'
             at: 'bottom middle'
 
-        return
+      else
 
-      glados.Utils.fillContentForElement $linkToAllContainer,
-        first_entity: firstDestinationEntityName
-        rest_of_entities: restOfDestinationEntityNames
+        glados.Utils.fillContentForElement $linkToAllContainer,
+          first_entity: firstDestinationEntityName
+          rest_of_entities: restOfDestinationEntityNames
+          generated_id_base: baseID
 
-      $links = $linkToAllContainer.find('.BCK-LinkToOtherEntities')
-      $links.click $.proxy(@handleLinkToOtherEntitiesClick, @)
+        $links = $linkToAllContainer.find('.BCK-LinkToOtherEntities')
+        $links.click $.proxy(@handleLinkToOtherEntitiesClick, @)
 
+      $additionalLinksOpener = $linkToAllContainer.find('.BCK-open-more-links')
+      $additionalLinksOpener.click $.proxy(@toggleAdditionalLinks, @)
+
+    toggleAdditionalLinks: ->
+
+      $selectionMenuContainer = $(@el).find('.BCK-selection-menu-container')
+      $linkToAllContainer = $selectionMenuContainer.find('.BCK-LinkToOtherEntitiesContainer')
+      $additionalLinksContainer = $linkToAllContainer.find(".BCK-additional-links-container")
+
+      if $additionalLinksContainer.attr('data-is-open') == 'yes'
+        $additionalLinksContainer.hide()
+        $additionalLinksContainer.attr('data-is-open', 'no')
+      else
+        $additionalLinksContainer.show()
+        $additionalLinksContainer.attr('data-is-open', 'yes')
+
+        closeAdditionalLinks = (event) ->
+
+          isOutside = not $linkToAllContainer.is(event.target) and \
+            $linkToAllContainer.has(event.target).length == 0
+
+          if isOutside
+            $additionalLinksContainer.hide()
+            $additionalLinksContainer.attr('data-is-open', 'no')
+            $(document).off 'mouseup', closeAdditionalLinks
+
+        $(document).mouseup closeAdditionalLinks
 
     handleLinkToOtherEntitiesClick: (event) ->
 
-      console.log 'handleLinkToOtherEntitiesClick'
       $clickedElem = $(event.currentTarget)
       destinationEntityName = $clickedElem.attr('data-destination-entity')
 
