@@ -139,7 +139,8 @@
             data-destination-entity="{{ first_entity.singular }}">
                 Browse {{ first_entity.plural }}
             </a>
-            <a>
+            
+            <a {% endverbatim %}href="{%  url 'faqs_browsing_related_entities' %}"{% verbatim %} target="_blank">
                 <i class="BCK-preloader fa fa-question-circle" ></i>
             </a>
         </div>
