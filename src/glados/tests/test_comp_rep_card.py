@@ -70,69 +70,6 @@ class CompoundReportCardTest(ReportCardTester):
     actual_links_texts = [link.text for link in actual_links]
     self.assertEqual(sorted(actual_links_texts), sorted(chembl_ids_list))
 
-  def test_compound_report_card_scenario_2(self):
-
-    # annoying CORS issue
-    return
-    self.getURL(self.HOST + '/compound_report_card/CHEMBL6963')
-
-    # --------------------------------------
-    # Compound Name and Classification
-    # --------------------------------------
-
-    # Max Phase 0
-    phase_td = self.browser.find_element_by_id('Bck-MAX_PHASE')
-    self.assertEqual('0', phase_td.text)
-
-    # --------------------------------------
-    # Compound Representations
-    # --------------------------------------
-
-    # compound_representations is null, the section must not be shown
-    comp_reps_div = self.browser.find_element_by_id('CompoundRepresentations')
-    self.assertFalse(comp_reps_div.is_displayed())
-
-    # there are not mechanisms of action, the section must not be shown
-    mech_act_div = self.browser.find_element_by_id('MechanismOfAction')
-    self.assertFalse(mech_act_div.is_displayed())
-
-    # --------------------------------------
-    # Molecule Features
-    # --------------------------------------
-
-    # First in class is undefined: -1
-    self.assert_molecule_feature('Bck-FirstInClass', False, 'first_in_class',
-                                 'First in Class: Undefined', 'top')
-
-    # Chirality Undefined: -1
-    self.assert_molecule_feature('Bck-Chirality', False, 'racemic_mixture',
-                                 'Chirality: Undefined', 'top')
-
-    # Prodrug Undefined: -1
-    self.assert_molecule_feature('Bck-Prodrug', False, 'prodrug',
-                                 'Prodrug: Undefined', 'top')
-
-    # Availability Type is Undefined: -1
-    self.assert_molecule_feature('Bck-Availability', False, 'prescription',
-                                 'Availability: Undefined', 'bottom')
-
-  def test_compund_report_card_scenario_3(self):
-
-    self.getURL(self.HOST + '/compound_report_card/CHEMBL2108680')
-
-    # --------------------------------------
-    # Compound Name and Classification
-    # --------------------------------------
-
-  
-    # --------------------------------------
-    # Molecule Features
-    # --------------------------------------
-
-    # this is an Antibody
-    self.assert_molecule_feature('Bck-MolType', True, 'antibody',
-                                 'Molecule Type: Antibody', 'top')
-
   def test_compound_report_card_scenario_4(self):
 
     self.getURL(self.HOST + '/compound_report_card/CHEMBL6939')
