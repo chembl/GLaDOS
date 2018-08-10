@@ -256,7 +256,7 @@ glados.loadURLPaths = (request_root, app_root, static_root)->
   glados.Settings.SHORTENING_MATCH_REPEXG = new RegExp("#.*$")
 
 # tells if the page is being run from ebi servers
-glados.isInEBIServers = -> glados.Settings.GLADOS_BASE_URL_DOMAIN.match(/http[s]?:\/\/.*\.ebi\.ac\.uk\//g)?
+glados.isInEBIProdServers = -> glados.Settings.GLADOS_BASE_URL_DOMAIN.match(/http[s]?:\/\/www\.ebi\.ac\.uk\//g)?
 
 # Loads the GLaDOS Top S3cre7 data, do not remove or js calls to post method in the django server will fail
 glados.loadGLaDOSTopS3cre7 = ()->
