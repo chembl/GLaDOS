@@ -78,26 +78,6 @@ class CompoundReportCardTest(ReportCardTester):
 
     self.getURL(self.HOST + '/compound_report_card/CHEMBL25')
 
-    # --------------------------------------
-    # Compound Name and Classification
-    # --------------------------------------
-
-    # Normal compound name
-    name_td = self.browser.find_element_by_id('Bck-PREF_NAME')
-    self.assertEqual('ASPIRIN', name_td.text)
-
-    # Max Phase 4
-    phase_td = self.browser.find_element_by_id('Bck-MAX_PHASE')
-    self.assertEqual('4 Approved', phase_td.text)
-
-    # Normal molecular formula (C9H8O4)
-    molformula_td = self.browser.find_element_by_id('Bck-MOLFORMULA')
-    self.assertEqual('C9H8O4', molformula_td.text)
-
-    # --------------------------------------
-    # Compound Representations
-    # --------------------------------------
-
 
     # --------------------------------------
     # Calculated Compound Parent Properties
