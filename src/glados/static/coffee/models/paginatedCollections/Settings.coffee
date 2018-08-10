@@ -345,7 +345,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         SHOW_SUBSTRUCTURE_HIGHLIGHTING: true
         ENABLE_COLLECTION_CACHING: true
         DISABLE_CACHE_ON_DOWNLOAD: true
-        ENABLE_ACTIVITIES_LINK_FOR_SELECTED_ENTITIES: true
+        LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
       COMPOUND_SIMILARITY_MAPS:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCompound'
@@ -383,7 +383,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         SHOW_SIMILARITY_MAPS: true
         ENABLE_COLLECTION_CACHING: true
         DISABLE_CACHE_ON_DOWNLOAD: true
-        ENABLE_ACTIVITIES_LINK_FOR_SELECTED_ENTITIES: true
+        LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
       DRUGS_LIST:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESDrugs'
