@@ -328,14 +328,8 @@ def render_params_from_hash(request, hash):
 
 
 def render_params_from_hash_when_embedded(request, hash):
-    print('---')
-    print('resolve small url (embedded)')
-    print('hash: ', hash)
-    original_url = url_shortener.get_original_url(hash)
-    print('original_url: ', original_url)
-    print('^^^')
     context = {
-        'shortened_params': original_url
+        'shortened_params': url_shortener.get_original_url(hash)
     }
     return render(request, 'glados/Embedding/embed_base.html', context)
 
