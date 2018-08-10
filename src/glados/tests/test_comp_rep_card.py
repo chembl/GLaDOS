@@ -70,61 +70,6 @@ class CompoundReportCardTest(ReportCardTester):
     actual_links_texts = [link.text for link in actual_links]
     self.assertEqual(sorted(actual_links_texts), sorted(chembl_ids_list))
 
-  # --------------------------------------------------------------------------------------
-  # Scenarios
-  # --------------------------------------------------------------------------------------
-
-  def test_compound_report_card_scenario_1(self):
-
-    self.getURL(self.HOST + '/compound_report_card/CHEMBL25')
-
-
-    # --------------------------------------
-    # Calculated Compound Parent Properties
-    # --------------------------------------
-
-    # --------------------------------------
-    # Molecule Features
-    # --------------------------------------
-
-    # this is a small molecule
-    self.assert_molecule_feature('Bck-MolType', True, 'small-molecule',
-                                 'Drug Type: Synthetic Small Molecule', 'top')
-    # Rule of five: No. false
-    self.assert_molecule_feature('Bck-RuleOfFive', True, 'rule_of_five',
-                                 'Rule Of Five: Yes', 'top')
-
-    # this compound is not first in class
-    self.assert_molecule_feature('Bck-FirstInClass', False, 'first_in_class',
-                                 'First in Class: No', 'top')
-
-    # Chirality: single stereoisomer: 1
-    self.assert_molecule_feature('Bck-Chirality', False, 'chirally_pure',
-                                 'Chirality: Achiral Molecule', 'top')
-
-    # Oral yes: 'true'
-    self.assert_molecule_feature('Bck-Oral', True, 'oral',
-                                 'Oral: Yes', 'bottom')
-
-    # Topical No: false
-    self.assert_molecule_feature('Bck-Topical', False, 'topical',
-                                 'Topical: No', 'bottom')
-
-    # Black Box No: 0
-    self.assert_molecule_feature('Bck-BlackBox', False, 'black_box',
-                                 'Black Box: No',  'bottom')
-
-    # Availability Type: Over the counter: 2
-    self.assert_molecule_feature('Bck-Availability', True, 'otc',
-                                 'Availability: Over the Counter', 'bottom')
-
-    # --------------------------------------
-    # Alternate Forms of Compound in ChEMBL
-    # --------------------------------------
-
-    self.assert_alternate_forms(['CHEMBL25', 'CHEMBL2296002', 'CHEMBL1697753'])
-
-
   def test_compound_report_card_scenario_2(self):
 
     # annoying CORS issue
