@@ -36,11 +36,10 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
   isParent: ->
 
-    molHierarchy = @.get('molecule_hierarchy')
-    isParent = false
-    if molHierarchy?
-      isParent = molHierarchy.molecule_chembl_id == molHierarchy.parent_chembl_id
-    return isParent
+    metadata = @get('_metadata')
+    if not metadata.hierarchy.parent?
+      return true
+    else return false
 
   # --------------------------------------------------------------------------------------------------------------------
   # Sources
@@ -137,6 +136,8 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
       additionalTnsList = _.difference(tnsFromChildren, uniqueTradeNamesList)
 
     else
+
+      console.log 'metadata: ', metadata
       rawSynonymsAndTradeNamesFromParent = _.values(metadata.hierarchy.parent.synonyms)
       [synsFromParent, tnsFromParent] = @separateSynonymsAndTradeNames(rawSynonymsAndTradeNamesFromParent)
 
