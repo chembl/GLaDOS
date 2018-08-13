@@ -278,7 +278,7 @@ class MainPageApp
 
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
-      query_string_template: '*'
+      query_string_template: '_metadata.drug.is_drug:true'
       template_data: {}
 
     aggsConfig =
