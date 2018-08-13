@@ -1,0 +1,1375 @@
+{
+  "_index": "chembl_24_1_molecule",
+  "_type": "molecule",
+  "_id": "CHEMBL2111124",
+  "_version": 5,
+  "found": true,
+  "_source": {
+    "chirality": "0",
+    "molecule_structures": {
+      "standard_inchi": "InChI=1S/C16H21N/c1-2-7-14(8-3-1)13-15-9-4-5-10-16(15)17-11-6-12-17/h1-3,7-8,13,16H,4-6,9-12H2/b15-13+",
+      "canonical_smiles": "C1CC\\C(=C/c2ccccc2)\\C(C1)N3CCC3",
+      "standard_inchi_key": "DOWWDQZIFWLREB-FYWRMAATSA-N"
+    },
+    "natural_product": "0",
+    "withdrawn_year": null,
+    "cross_references": [
+
+    ],
+    "usan_stem": "-adol-",
+    "polymer_flag": false,
+    "usan_year": 1985,
+    "first_approval": null,
+    "availability_type": "-1",
+    "pref_name": "TAZADOLENE",
+    "withdrawn_class": null,
+    "inorganic_flag": "0",
+    "structure_type": "MOL",
+    "biotherapeutic": null,
+    "molecule_synonyms": [
+      {
+        "syn_type": "INN",
+        "synonyms": "TAZADOLENE",
+        "molecule_synonym": "Tazadolene"
+      }
+    ],
+    "first_in_class": "0",
+    "atc_classifications": [
+
+    ],
+    "usan_substem": "-adol-",
+    "withdrawn_reason": null,
+    "parenteral": false,
+    "molecule_chembl_id": "CHEMBL2111124",
+    "helm_notation": null,
+    "molecule_properties": {
+      "full_mwt": "227.35",
+      "ro3_pass": "N",
+      "acd_logd": "0.95",
+      "hba_lipinski": 1,
+      "acd_most_bpka": "9.98",
+      "psa": "3.24",
+      "aromatic_rings": 1,
+      "hbd_lipinski": 0,
+      "qed_weighted": "0.74",
+      "hba": 1,
+      "acd_logp": "3.41",
+      "mw_freebase": "227.35",
+      "num_lipinski_ro5_violations": 0,
+      "alogp": "3.72",
+      "hbd": 0,
+      "molecular_species": "BASE",
+      "full_molformula": "C16H21N",
+      "mw_monoisotopic": "227.1674",
+      "rtb": 2,
+      "heavy_atoms": 17,
+      "acd_most_apka": null,
+      "num_ro5_violations": 0
+    },
+    "_metadata": {
+      "drug": {
+        "is_drug": true,
+        "drug_data": {
+          "prodrug": false,
+          "development_phase": 0,
+          "topical": false,
+          "molecule_structures": {
+            "standard_inchi": "InChI=1S/C16H21N/c1-2-7-14(8-3-1)13-15-9-4-5-10-16(15)17-11-6-12-17/h1-3,7-8,13,16H,4-6,9-12H2/b15-13+",
+            "canonical_smiles": "C1CC\\C(=C/c2ccccc2)\\C(C1)N3CCC3",
+            "standard_inchi_key": "DOWWDQZIFWLREB-FYWRMAATSA-N"
+          },
+          "atc_code_description": null,
+          "usan_stem_substem": "-adol-(-adol-)",
+          "applicants": null,
+          "molecule_properties": {
+            "full_mwt": "227.35",
+            "rtb": 2,
+            "num_lipinski_ro5_violations": 0,
+            "qed_weighted": "0.74",
+            "full_molformula": "C16H21N",
+            "alogp": "3.72",
+            "acd_logp": "3.41",
+            "hba": 1,
+            "hba_lipinski": 1,
+            "hbd": 0,
+            "molecular_species": "BASE",
+            "mw_freebase": "227.35",
+            "acd_logd": "0.95",
+            "num_ro5_violations": 0,
+            "ro3_pass": "N",
+            "mw_monoisotopic": "227.1674",
+            "aromatic_rings": 1,
+            "acd_most_apka": null,
+            "hbd_lipinski": 0,
+            "heavy_atoms": 17,
+            "acd_most_bpka": "9.98",
+            "psa": "3.24"
+          },
+          "withdrawn_class": null,
+          "withdrawn_country": null,
+          "biotherapeutic": null,
+          "indication_class": "Analgesic",
+          "drug_type": "1",
+          "sc_patent": null,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "withdrawn_year": null,
+          "withdrawn_reason": null,
+          "usan_year": 1985,
+          "chirality": "0",
+          "black_box": false,
+          "synonyms": [
+            "Tazadolene Succinate (USAN)",
+            ""
+          ],
+          "first_in_class": false,
+          "usan_stem_definition": "analgesics (mixed opiate receptor agonists/antagonists)",
+          "helm_notation": null,
+          "research_codes": [
+            "U-53996H"
+          ],
+          "molecule_synonyms": [
+            {
+              "synonyms": "TAZADOLENE",
+              "molecule_synonym": "Tazadolene",
+              "syn_type": "INN"
+            }
+          ],
+          "usan_stem": "-adol-",
+          "rule_of_five": true,
+          "ob_patent": null,
+          "parenteral": false,
+          "availability_type": "-1",
+          "first_approval": null,
+          "oral": false
+        }
+      },
+      "activity_count": 0,
+      "compound_records": [
+
+      ],
+      "tags": [
+
+      ],
+      "disease_name": [
+
+      ],
+      "related_targets": {
+        "chembl_ids": {
+
+        },
+        "count": 0
+      },
+      "es_completion": [
+        {
+          "input": "TAZADOLENE",
+          "weight": 100
+        },
+        {
+          "input": "InChI=1S/C16H21N/c1-2-7-14(8-3-1)13-15-9-4-5-10-16(15)17-11-6-12-17/h1-3,7-8,13,16H,4-6,9-12H2/b15-13+",
+          "weight": 30
+        },
+        {
+          "input": "analgesics (mixed opiate receptor agonists/antagonists)",
+          "weight": 40
+        },
+        {
+          "input": "Tazadolene",
+          "weight": 75
+        },
+        {
+          "input": "CHEMBL2111124",
+          "weight": 10
+        },
+        {
+          "input": "C1CC\\C(=C/c2ccccc2)\\C(C1)N3CCC3",
+          "weight": 30
+        },
+        {
+          "input": "C16H21N",
+          "weight": 90
+        },
+        {
+          "input": "DOWWDQZIFWLREB-FYWRMAATSA-N",
+          "weight": 30
+        }
+      ],
+      "unichem": [
+        {
+          "src_url": "https://www.surechembl.org/search/",
+          "link": "https://www.surechembl.org/chemical/SCHEMBL489212",
+          "id": "SCHEMBL489212",
+          "src_name": "SureChEMBL"
+        },
+        {
+          "src_url": "http://pubchem.ncbi.nlm.nih.gov",
+          "link": "http://pubchem.ncbi.nlm.nih.gov/compound/6435466",
+          "id": "6435466",
+          "src_name": "PubChem"
+        }
+      ],
+      "compound_generated": {
+        "chirality_label": "Racemic Mixture",
+        "availability_type_label": "Unknown"
+      },
+      "target_predictions": [
+        {
+          "target_organism": "Rattus norvegicus",
+          "in_training": "0",
+          "probability": "0.35202306533",
+          "target_tax_id": "10116",
+          "target_chembl_id": "CHEMBL313",
+          "target_accession": "P31652",
+          "pred_id": 346052,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.1393225372",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL233",
+          "target_accession": "P35372",
+          "pred_id": 346055,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Cavia porcellus",
+          "in_training": "0",
+          "probability": "0.12248847378",
+          "target_tax_id": "10141",
+          "target_chembl_id": "CHEMBL3952",
+          "target_accession": "P41144",
+          "pred_id": 346056,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.07223608267",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL216",
+          "target_accession": "P11229",
+          "pred_id": 346059,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.02517736041",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL1293255",
+          "target_accession": "P15428",
+          "pred_id": 346061,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Mus musculus",
+          "in_training": "0",
+          "probability": "0.02048204953",
+          "target_tax_id": "10090",
+          "target_chembl_id": "CHEMBL2370",
+          "target_accession": "O55192",
+          "pred_id": 346062,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.01894659459",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL289",
+          "target_accession": "P10635",
+          "pred_id": 346063,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Rattus norvegicus",
+          "in_training": "0",
+          "probability": "0.01698841791",
+          "target_tax_id": "10116",
+          "target_chembl_id": "CHEMBL265",
+          "target_accession": "P18901",
+          "pred_id": 346065,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00889474127",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL1942",
+          "target_accession": "P18089",
+          "pred_id": 346067,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Torpedo californica",
+          "in_training": "0",
+          "probability": "0.00599837756",
+          "target_tax_id": "7787",
+          "target_chembl_id": "CHEMBL3313",
+          "target_accession": "P81721",
+          "pred_id": 346072,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Rattus norvegicus",
+          "in_training": "0",
+          "probability": "0.00344035001",
+          "target_tax_id": "10116",
+          "target_chembl_id": "CHEMBL276",
+          "target_accession": "P08482",
+          "pred_id": 346076,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00256625418",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL2487",
+          "target_accession": "P05067",
+          "pred_id": 346077,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Rattus norvegicus",
+          "in_training": "0",
+          "probability": "0.00153689472",
+          "target_tax_id": "10116",
+          "target_chembl_id": "CHEMBL3614",
+          "target_accession": "P34975",
+          "pred_id": 346079,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00127716165",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL236",
+          "target_accession": "P41143",
+          "pred_id": 346080,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Escherichia coli K-12",
+          "in_training": "0",
+          "probability": "0.00108281694",
+          "target_tax_id": "83333",
+          "target_chembl_id": "CHEMBL2026",
+          "target_accession": "P00811",
+          "pred_id": 346081,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00056837924",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL3577",
+          "target_accession": "P00352",
+          "pred_id": 346088,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00051916142",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL3060",
+          "target_accession": "Q9Y345",
+          "pred_id": 346090,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00044643909",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL1902",
+          "target_accession": "P62942",
+          "pred_id": 346091,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00039960586",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL1287622",
+          "target_accession": "Q9Y468",
+          "pred_id": 346092,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00030962381",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL1821",
+          "target_accession": "P08173",
+          "pred_id": 346095,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Mus musculus",
+          "in_training": "0",
+          "probability": "0.00029606249",
+          "target_tax_id": "10090",
+          "target_chembl_id": "CHEMBL1293231",
+          "target_accession": "P51450",
+          "pred_id": 346097,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Rattus norvegicus",
+          "in_training": "0",
+          "probability": "0.00025884707",
+          "target_tax_id": "10116",
+          "target_chembl_id": "CHEMBL320",
+          "target_accession": "P08483",
+          "pred_id": 346098,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Rattus norvegicus",
+          "in_training": "0",
+          "probability": "0.99755889118",
+          "target_tax_id": "10116",
+          "target_chembl_id": "CHEMBL304",
+          "target_accession": "Q9WTR4",
+          "pred_id": 346051,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Rattus norvegicus",
+          "in_training": "0",
+          "probability": "0.25749078946",
+          "target_tax_id": "10116",
+          "target_chembl_id": "CHEMBL338",
+          "target_accession": "P23977",
+          "pred_id": 346053,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Mus musculus",
+          "in_training": "0",
+          "probability": "0.16599001911",
+          "target_tax_id": "10090",
+          "target_chembl_id": "CHEMBL2799",
+          "target_accession": "Q61327",
+          "pred_id": 346054,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Rattus norvegicus",
+          "in_training": "0",
+          "probability": "0.1023563254",
+          "target_tax_id": "10116",
+          "target_chembl_id": "CHEMBL2125",
+          "target_accession": "Q62666",
+          "pred_id": 346057,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Cavia porcellus",
+          "in_training": "0",
+          "probability": "0.08262800472",
+          "target_tax_id": "10141",
+          "target_chembl_id": "CHEMBL4153",
+          "target_accession": "Q60492",
+          "pred_id": 346058,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.04900448728",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL1916",
+          "target_accession": "P18825",
+          "pred_id": 346060,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Rattus norvegicus",
+          "in_training": "0",
+          "probability": "0.01848289153",
+          "target_tax_id": "10116",
+          "target_chembl_id": "CHEMBL401",
+          "target_accession": "Q00961",
+          "pred_id": 346064,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.01116192446",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL237",
+          "target_accession": "P41145",
+          "pred_id": 346066,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.0086134608",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL4521",
+          "target_accession": "Q07973",
+          "pred_id": 346068,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00859919144",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL1867",
+          "target_accession": "P08913",
+          "pred_id": 346069,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Cavia porcellus",
+          "in_training": "0",
+          "probability": "0.00782135432",
+          "target_tax_id": "10141",
+          "target_chembl_id": "CHEMBL4354",
+          "target_accession": "P97266",
+          "pred_id": 346070,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00773134362",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL231",
+          "target_accession": "P35367",
+          "pred_id": 346071,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00499457511",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL287",
+          "target_accession": "Q99720",
+          "pred_id": 346073,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Bos taurus",
+          "in_training": "0",
+          "probability": "0.00459667594",
+          "target_tax_id": "9913",
+          "target_chembl_id": "CHEMBL3769",
+          "target_accession": "P00760",
+          "pred_id": 346074,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.0038184549",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL2337",
+          "target_accession": "P48067",
+          "pred_id": 346075,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00180153691",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL4767",
+          "target_accession": "Q16572",
+          "pred_id": 346078,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00101258548",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL1963",
+          "target_accession": "P16473",
+          "pred_id": 346082,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00083230372",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL2392",
+          "target_accession": "P06746",
+          "pred_id": 346083,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00079923061",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL1075138",
+          "target_accession": "Q9NUW8",
+          "pred_id": 346084,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00072384424",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL1293299",
+          "target_accession": "Q03164",
+          "pred_id": 346085,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Mus musculus",
+          "in_training": "0",
+          "probability": "0.00064411491",
+          "target_tax_id": "10090",
+          "target_chembl_id": "CHEMBL4329",
+          "target_accession": "P33534",
+          "pred_id": 346086,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Rattus norvegicus",
+          "in_training": "0",
+          "probability": "0.00058189271",
+          "target_tax_id": "10116",
+          "target_chembl_id": "CHEMBL309",
+          "target_accession": "P10980",
+          "pred_id": 346087,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00054663413",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL3251",
+          "target_accession": "P19838",
+          "pred_id": 346089,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.0003522056",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL2014",
+          "target_accession": "P41146",
+          "pred_id": 346093,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Rattus norvegicus",
+          "in_training": "0",
+          "probability": "0.00033824932",
+          "target_tax_id": "10116",
+          "target_chembl_id": "CHEMBL270",
+          "target_accession": "P33535",
+          "pred_id": 346094,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00030862726",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL4478",
+          "target_accession": "Q00975",
+          "pred_id": 346096,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Rattus norvegicus",
+          "in_training": "0",
+          "probability": "0.0002347752",
+          "target_tax_id": "10116",
+          "target_chembl_id": "CHEMBL311",
+          "target_accession": "Q00960",
+          "pred_id": 346099,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Rattus norvegicus",
+          "in_training": "0",
+          "probability": "0.00020752684",
+          "target_tax_id": "10116",
+          "target_chembl_id": "CHEMBL4828",
+          "target_accession": "Q01827",
+          "pred_id": 346100,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 1
+        },
+        {
+          "target_organism": "Rattus norvegicus",
+          "in_training": "0",
+          "probability": "0.7320906891",
+          "target_tax_id": "10116",
+          "target_chembl_id": "CHEMBL313",
+          "target_accession": "P31652",
+          "pred_id": 725702,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Rattus norvegicus",
+          "in_training": "0",
+          "probability": "0.4706819071",
+          "target_tax_id": "10116",
+          "target_chembl_id": "CHEMBL338",
+          "target_accession": "P23977",
+          "pred_id": 725703,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.15441637351",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL287",
+          "target_accession": "Q99720",
+          "pred_id": 725706,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Cavia porcellus",
+          "in_training": "0",
+          "probability": "0.13445606013",
+          "target_tax_id": "10141",
+          "target_chembl_id": "CHEMBL3952",
+          "target_accession": "P41144",
+          "pred_id": 725707,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Rattus norvegicus",
+          "in_training": "0",
+          "probability": "0.08544468482",
+          "target_tax_id": "10116",
+          "target_chembl_id": "CHEMBL401",
+          "target_accession": "Q00961",
+          "pred_id": 725708,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.06420045697",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL233",
+          "target_accession": "P35372",
+          "pred_id": 725709,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.03059359424",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL216",
+          "target_accession": "P11229",
+          "pred_id": 725712,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.01499473315",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL3251",
+          "target_accession": "P19838",
+          "pred_id": 725714,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.01402411255",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL1293255",
+          "target_accession": "P15428",
+          "pred_id": 725715,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Rattus norvegicus",
+          "in_training": "0",
+          "probability": "0.01015644605",
+          "target_tax_id": "10116",
+          "target_chembl_id": "CHEMBL4828",
+          "target_accession": "Q01827",
+          "pred_id": 725716,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00666204227",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL1942",
+          "target_accession": "P18089",
+          "pred_id": 725719,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Cavia porcellus",
+          "in_training": "0",
+          "probability": "0.00594657574",
+          "target_tax_id": "10141",
+          "target_chembl_id": "CHEMBL4354",
+          "target_accession": "P97266",
+          "pred_id": 725720,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Rattus norvegicus",
+          "in_training": "0",
+          "probability": "0.00289552795",
+          "target_tax_id": "10116",
+          "target_chembl_id": "CHEMBL265",
+          "target_accession": "P18901",
+          "pred_id": 725725,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Torpedo californica",
+          "in_training": "0",
+          "probability": "0.00282837549",
+          "target_tax_id": "7787",
+          "target_chembl_id": "CHEMBL3313",
+          "target_accession": "P81721",
+          "pred_id": 725726,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00229799579",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL1287622",
+          "target_accession": "Q9Y468",
+          "pred_id": 725727,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00180204767",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL1902",
+          "target_accession": "P62942",
+          "pred_id": 725729,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00166919672",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL1293299",
+          "target_accession": "Q03164",
+          "pred_id": 725730,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Schistosoma mansoni",
+          "in_training": "0",
+          "probability": "0.00158176679",
+          "target_tax_id": "6183",
+          "target_chembl_id": "CHEMBL6110",
+          "target_accession": "Q962Y6",
+          "pred_id": 725732,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Escherichia coli K-12",
+          "in_training": "0",
+          "probability": "0.00142262608",
+          "target_tax_id": "83333",
+          "target_chembl_id": "CHEMBL2026",
+          "target_accession": "P00811",
+          "pred_id": 725734,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Rattus norvegicus",
+          "in_training": "0",
+          "probability": "0.0011667852",
+          "target_tax_id": "10116",
+          "target_chembl_id": "CHEMBL3614",
+          "target_accession": "P34975",
+          "pred_id": 725737,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00110810611",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL5162",
+          "target_accession": "Q6W5P4",
+          "pred_id": 725738,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00107716569",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL4767",
+          "target_accession": "Q16572",
+          "pred_id": 725739,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00107692129",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL3797",
+          "target_accession": "Q13315",
+          "pred_id": 725740,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00068641476",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL231",
+          "target_accession": "P35367",
+          "pred_id": 725743,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Trypanosoma cruzi",
+          "in_training": "0",
+          "probability": "0.00062313566",
+          "target_tax_id": "5693",
+          "target_chembl_id": "CHEMBL3563",
+          "target_accession": "P25779",
+          "pred_id": 725744,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.0004941992",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL3060",
+          "target_accession": "Q9Y345",
+          "pred_id": 725746,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00034252732",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL1741179",
+          "target_accession": "P31941",
+          "pred_id": 725750,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Rattus norvegicus",
+          "in_training": "0",
+          "probability": "0.98071731352",
+          "target_tax_id": "10116",
+          "target_chembl_id": "CHEMBL304",
+          "target_accession": "Q9WTR4",
+          "pred_id": 725701,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Mus musculus",
+          "in_training": "0",
+          "probability": "0.23286834395",
+          "target_tax_id": "10090",
+          "target_chembl_id": "CHEMBL2799",
+          "target_accession": "Q61327",
+          "pred_id": 725704,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Rattus norvegicus",
+          "in_training": "0",
+          "probability": "0.18528360679",
+          "target_tax_id": "10116",
+          "target_chembl_id": "CHEMBL2125",
+          "target_accession": "Q62666",
+          "pred_id": 725705,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Cavia porcellus",
+          "in_training": "0",
+          "probability": "0.05446083513",
+          "target_tax_id": "10141",
+          "target_chembl_id": "CHEMBL4153",
+          "target_accession": "Q60492",
+          "pred_id": 725710,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Rattus norvegicus",
+          "in_training": "0",
+          "probability": "0.03806698201",
+          "target_tax_id": "10116",
+          "target_chembl_id": "CHEMBL276",
+          "target_accession": "P08482",
+          "pred_id": 725711,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Mus musculus",
+          "in_training": "0",
+          "probability": "0.01748013985",
+          "target_tax_id": "10090",
+          "target_chembl_id": "CHEMBL2370",
+          "target_accession": "O55192",
+          "pred_id": 725713,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00791724111",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL4521",
+          "target_accession": "Q07973",
+          "pred_id": 725717,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00681645551",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL1916",
+          "target_accession": "P18825",
+          "pred_id": 725718,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00538525656",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL237",
+          "target_accession": "P41145",
+          "pred_id": 725721,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.0053627653",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL236",
+          "target_accession": "P41143",
+          "pred_id": 725722,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00399028733",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL289",
+          "target_accession": "P10635",
+          "pred_id": 725723,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00369292545",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL3577",
+          "target_accession": "P00352",
+          "pred_id": 725724,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00196349317",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL1977",
+          "target_accession": "P11473",
+          "pred_id": 725728,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Equus caballus",
+          "in_training": "0",
+          "probability": "0.00162383683",
+          "target_tax_id": "9796",
+          "target_chembl_id": "CHEMBL5763",
+          "target_accession": "P81908",
+          "pred_id": 725731,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00152228116",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL2487",
+          "target_accession": "P05067",
+          "pred_id": 725733,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00135087686",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL1867",
+          "target_accession": "P08913",
+          "pred_id": 725735,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Mus musculus",
+          "in_training": "0",
+          "probability": "0.00131400075",
+          "target_tax_id": "10090",
+          "target_chembl_id": "CHEMBL1293231",
+          "target_accession": "P51450",
+          "pred_id": 725736,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00078442778",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL2337",
+          "target_accession": "P48067",
+          "pred_id": 725741,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Rattus norvegicus",
+          "in_training": "0",
+          "probability": "0.00078307635",
+          "target_tax_id": "10116",
+          "target_chembl_id": "CHEMBL311",
+          "target_accession": "Q00960",
+          "pred_id": 725742,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Rattus norvegicus",
+          "in_training": "0",
+          "probability": "0.0005979814",
+          "target_tax_id": "10116",
+          "target_chembl_id": "CHEMBL4980",
+          "target_accession": "Q05941",
+          "pred_id": 725745,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00048587979",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL2608",
+          "target_accession": "P10253",
+          "pred_id": 725747,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00046023849",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL4478",
+          "target_accession": "Q00975",
+          "pred_id": 725748,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        },
+        {
+          "target_organism": "Homo sapiens",
+          "in_training": "0",
+          "probability": "0.00035112971",
+          "target_tax_id": "9606",
+          "target_chembl_id": "CHEMBL340",
+          "target_accession": "P08684",
+          "pred_id": 725749,
+          "molecule_chembl_id": "CHEMBL2111124",
+          "value": 10
+        }
+      ],
+      "hierarchy": {
+        "children": [
+          {
+            "sources": [
+              {
+                "src_description": "USP Dictionary of USAN and International Drug Names",
+                "src_id": 13,
+                "src_short_name": "USP/USAN"
+              }
+            ],
+            "synonyms": [
+              {
+                "synonyms": "TAZADOLENE SUCCINATE",
+                "molecule_synonym": "Tazadolene Succinate",
+                "syn_type": "OTHER"
+              },
+              {
+                "synonyms": "TAZADOLENE SUCCINATE",
+                "molecule_synonym": "Tazadolene Succinate",
+                "syn_type": "USAN"
+              },
+              {
+                "synonyms": "U-53,996H",
+                "molecule_synonym": "U-53996H",
+                "syn_type": "RESEARCH_CODE"
+              }
+            ],
+            "chembl_id": "CHEMBL2107468"
+          }
+        ],
+        "all_family": [
+          {
+            "inchi_key": "DOWWDQZIFWLREB-FYWRMAATSA-N",
+            "chembl_id": "CHEMBL2111124"
+          },
+          {
+            "inchi_key": "IEXXCIWKNWOEKZ-GVYCEHEKSA-N",
+            "chembl_id": "CHEMBL2107468"
+          }
+        ],
+        "is_usan": true,
+        "is_approved_drug": false
+      }
+    },
+    "usan_stem_definition": "analgesics (mixed opiate receptor agonists/antagonists)",
+    "oral": false,
+    "molecule_type": "Small molecule",
+    "chebi_par_id": null,
+    "therapeutic_flag": false,
+    "max_phase": 0,
+    "indication_class": "Analgesic",
+    "black_box_warning": "0",
+    "dosed_ingredient": false,
+    "molecule_hierarchy": null,
+    "withdrawn_country": null,
+    "topical": false,
+    "withdrawn_flag": false,
+    "prodrug": "0"
+  }
+}
