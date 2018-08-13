@@ -15,6 +15,7 @@ import json
 import hashlib
 import base64
 from django.views.decorators.cache import cache_page
+from glados.models import ESCachedRequest
 
 
 @cache_page(60 * 60)
@@ -350,6 +351,9 @@ def elasticsearch_cache(request):
         base64_search_data_hash = base64.b64encode(search_data_digest).decode('utf-8')
         search_data = json.loads(raw_search_data)
 
+        if not isinstance(search_data, dict):
+            search_data = {}
+
         cache_key = "{}-{}".format(index_name, base64_search_data_hash)
         print('cache_key', cache_key)
 
@@ -360,18 +364,39 @@ def elasticsearch_cache(request):
         except Exception as e:
             print('Error searching in cache!')
 
+        response = None
         if cache_response is not None:
             print('results are in cache')
-            return JsonResponse(cache_response)
-
-        print('results are NOT in cache')
-        response = connections.get_connection().search(index=index_name, body=search_data)
+            response = JsonResponse(cache_response)
+        else:
+            print('results are NOT in cache')
+            response = connections.get_connection().search(index=index_name, body=search_data)
+            try:
+                cache_time = 3000000
+                cache.set(cache_key, response, cache_time)
+            except Exception as e:
+                traceback.print_exc()
+                print('Error saving in the cache!')
 
         try:
-            cache_time = 3000000
-            cache.set(cache_key, response, cache_time)
-        except Exception as e:
-            print('Error saving in the cache!')
+            es_query = search_data.get('query', None)
+            if es_query:
+                es_query = json.dumps(es_query)
+            es_aggs = search_data.get('aggs', None)
+            if es_aggs:
+                es_aggs = json.dumps(es_aggs)
+            es_cache_req_data = ESCachedRequest(
+                es_index=index_name,
+                es_query=es_query,
+                es_aggs=es_aggs,
+                es_request_digest=base64_search_data_hash,
+                is_cached=cache_response is not None
+            )
+            es_cache_req_data.indexing()
+        except:
+            traceback.print_exc()
+            print('Error saving in elastic!')
+
         return JsonResponse(response)
     else:
         return JsonResponse({'error': 'this is only available via POST! You crazy hacker! :P'})
