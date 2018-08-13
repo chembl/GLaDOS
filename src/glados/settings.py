@@ -238,19 +238,20 @@ CACHES = {
 # Logging
 # ----------------------------------------------------------------------------------------------------------------------
 
+
 LOGGING_CONFIG_DICT = {
     'version': 1,
     'disable_existing_loggers': False,
     'formatters': {
-        'glados':{
-            'format': '%(asctime)s %(levelname)-8s %(name)-15s %(message)s',
+        'glados': {
+            'format': '%(asctime)s %(levelname)-8s %(message)s',
             'datefmt': '%Y-%m-%d %H:%M:%S'
         }
     },
     'handlers': {
         'console': {
             'level': logging.DEBUG,
-            'class': 'logging.StreamHandler',
+            'class': 'glados.logging_helper.ColoredConsoleHandler',
             'formatter': 'glados',
         },
     },
