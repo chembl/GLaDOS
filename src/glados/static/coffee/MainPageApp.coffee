@@ -128,7 +128,7 @@ class MainPageApp
       x_axis_prop_name: 'firstApprovalByMoleculeType'
       y_scale_mode: 'percentage'
       title: 'Molecule Type by First Approval'
-      title_link_url: Compound.getCompoundsListURL('_exists_:first_approval')
+      title_link_url: Drug.getDrugsListURL('_exists_:first_approval')
 
     config =
       histogram_config: histogramConfig
