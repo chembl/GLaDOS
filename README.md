@@ -1,6 +1,26 @@
+
+## Jenkins
+
 [![Build Status](https://travis-ci.org/chembl/GLaDOS.svg?branch=master)](https://travis-ci.org/chembl/GLaDOS)
-[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/chembl/GLaDOS.svg)](http://isitmaintained.com/project/chembl/GLaDOS "Average time to resolve an issue")
-[![Percentage of issues still open](http://isitmaintained.com/badge/open/chembl/GLaDOS.svg)](http://isitmaintained.com/project/chembl/GLaDOS "Percentage of issues still open")
+
+## Ghost Inspector
+
+ [![ChEMBL New UI (Basic)](https://api.ghostinspector.com/v1/suites/5b59d19924a45131ae3c2a6a/status-badge
+)](https://api.ghostinspector.com/v1/suites/5b59d19924a45131ae3c2a6a/status-badge
+ "ChEMBL New UI (Basic)")
+ 
+ [![ChEMBL New UI (Report Cards)](https://api.ghostinspector.com/v1/suites/5b5b1a1e24a45131ae42101a/status-badge
+)](https://api.ghostinspector.com/v1/suites/5b5b1a1e24a45131ae42101a/status-badge
+ "ChEMBL New UI (Report Cards)")
+ 
+[![(ReportCards - Compound)](https://api.ghostinspector.com/v1/suites/5b717147f818e30945119296/status-badge
+)](https://api.ghostinspector.com/v1/suites/5b717147f818e30945119296/status-badge
+ "ReportCards - Compound")
+ 
+
+
+
+
 
 # I think we can put our differences behind us... for science...
 ![](https://upload.wikimedia.org/wikipedia/en/b/bf/Glados.png)
