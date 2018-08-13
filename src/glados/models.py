@@ -1,5 +1,7 @@
 from django.db import models
-from glados.es_models import TinyURLIndex
+from glados.es_models import TinyURLIndex, ESCachedRequestIndex
+import datetime
+import time
 
 
 class Acknowledgement(models.Model):
@@ -102,3 +104,24 @@ class TinyURL(models.Model):
     return obj.to_dict(include_meta=True)
 
 
+class ESCachedRequest(models.Model):
+  es_index = models.CharField(max_length=200)
+  es_query = models.TextField()
+  es_aggs = models.TextField()
+  es_request_digest = models.TextField()
+  is_cached = models.BooleanField()
+
+  def indexing(self):
+    today = datetime.datetime.today()
+    obj = ESCachedRequestIndex(
+      es_index=self.es_index,
+      es_query=self.es_query,
+      es_aggs=self.es_aggs,
+      es_request_digest=self.es_request_digest,
+      is_cached=self.is_cached,
+      request_date=int(time.time()*1000)
+    )
+    print('TIME IS ' + today.strftime('%Y-%m-%d %H:%M:%S'))
+    print(int(time.time()*1000))
+    obj.save()
+    return obj.to_dict(include_meta=True)
