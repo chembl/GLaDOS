@@ -75,6 +75,10 @@ common_urls = [
       RedirectView.as_view(url='https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions',
                            permanent=True), name='faqs'),
 
+  url(r'^faqs_browsing_related_entities/$',
+      RedirectView.as_view(url='https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions/chembl-interface-questions#browsing-related-entities',
+                           permanent=True), name='faqs_browsing_related_entities'),
+
   url(r'^contact_us/$',
       RedirectView.as_view(url='https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions/general-questions#how-do-i-report-errors-or-make-suggestions-for-the-interface',
                            permanent=True), name='contact_us'),

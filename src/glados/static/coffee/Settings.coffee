@@ -256,7 +256,7 @@ glados.loadURLPaths = (request_root, app_root, static_root)->
   glados.Settings.SHORTENING_MATCH_REPEXG = new RegExp("#.*$")
 
 # tells if the page is being run from ebi servers
-glados.isInEBIServers = -> glados.Settings.GLADOS_BASE_URL_DOMAIN.match(/http[s]?:\/\/.*\.ebi\.ac\.uk\//g)?
+glados.isInEBIProdServers = -> glados.Settings.GLADOS_BASE_URL_DOMAIN.match(/http[s]?:\/\/www\.ebi\.ac\.uk\//g)?
 
 # Loads the GLaDOS Top S3cre7 data, do not remove or js calls to post method in the django server will fail
 glados.loadGLaDOSTopS3cre7 = ()->
@@ -291,6 +291,10 @@ glados.loadSearchResultsURLS = ()->
     elastic_search_paths.push(path_i)
     glados.Settings.SEARCH_PATH_2_ES_KEY[path_i] = key_i
     glados.Settings.ES_KEY_2_SEARCH_PATH[key_i] = path_i
+
+  glados.Settings.ENTITY_NAME_TO_ENTITY = {}
+  for Entity in [Compound, Target, Assay, Document, CellLine, glados.models.Tissue, Assay, Activity]
+    glados.Settings.ENTITY_NAME_TO_ENTITY[Entity.prototype.entityName] = Entity
 
   glados.Settings.SEARCH_RESULTS_PARSER_ENDPOINT = 'search_results_parser'
   glados.Settings.SHORTEN_URLS_ENDPOINT = 'shorten_url'

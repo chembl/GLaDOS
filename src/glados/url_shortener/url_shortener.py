@@ -7,7 +7,11 @@ from elasticsearch_dsl import Search
 def shorten_url(long_url):
 
   hex_digest = hashlib.md5(long_url.encode('utf-8')).digest()
-  hash = base64.b64encode(hex_digest).decode('utf-8')
+  # replace / and + to avoid routing problems
+  hash = base64.b64encode(hex_digest).decode('utf-8').replace('/', '_').replace('+', '-')
+  print('shorten url')
+  print('long_url: ', long_url)
+  print('hash: ', hash)
   # save this in elastic if it doesn't exist
   s = Search().filter('query_string', query='"' + hash + '"')
   response = s.execute()

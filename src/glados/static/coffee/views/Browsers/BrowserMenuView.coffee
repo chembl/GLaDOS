@@ -213,27 +213,46 @@ glados.useNameSpace 'glados.views.Browsers',
         else
           @enableButton(viewLabel)
 
-      @renderLinkToAll() unless not @collection.islinkToAllActivitiesEnabled()
+      @renderLinkToOtherEntities() unless not @collection.islinkToOtherEntitiesEnabled()
 
     toggleClearSelections: -> @collection.toggleClearSelections()
 
-    renderLinkToAll: ->
+    renderLinkToOtherEntities: ->
 
       if @collection.getTotalRecords() == 0
         return
 
       $selectionMenuContainer = $(@el).find('.BCK-selection-menu-container')
-      $linkToAllContainer = $selectionMenuContainer.find('.BCK-LinkToAllActivitiesContainer')
+      $linkToAllContainer = $selectionMenuContainer.find('.BCK-LinkToOtherEntitiesContainer')
 
       tooManyItems = @collection.thereAreTooManyItemsForActivitiesLink()
       isStreaming = @collection.isStreaming()
       needsToBeDisabled = tooManyItems or isStreaming
 
+      availableDestinationEntities = []
+
+      for entityName in @collection.getMeta('links_to_other_entities')
+        availableDestinationEntities.push
+          singular: entityName
+          plural: glados.Settings.ENTITY_NAME_TO_ENTITY[entityName].prototype.entityNamePlural
+
+      firstDestinationEntityName = availableDestinationEntities[0]
+      restOfDestinationEntityNames = availableDestinationEntities[1..]
+
+      baseID = (new Date()).getTime()
+      noAdditionalLinks = restOfDestinationEntityNames.length == 0
+
+
       if needsToBeDisabled
 
         glados.Utils.fillContentForElement $linkToAllContainer,
           too_many_items: true
+          first_entity: firstDestinationEntityName
+          rest_of_entities: ($.extend(n, {too_many_items: true}) for n in restOfDestinationEntityNames)
+          generated_id_base: baseID
+          no_additional_links: noAdditionalLinks
 
+        $links = $linkToAllContainer.find('.BCK-LinkToOtherEntities')
 
         qtipText = switch
           when isStreaming then \
@@ -242,7 +261,7 @@ glados.useNameSpace 'glados.views.Browsers',
           "Please select or filter less than #{glados.Settings.VIEW_SELECTION_THRESHOLDS.Heatmap[1]} " +
           "items to activate this link."
 
-        $linkToAllContainer.qtip
+        $links.qtip
           content:
             text: qtipText
           style:
@@ -251,22 +270,57 @@ glados.useNameSpace 'glados.views.Browsers',
             my: 'top middle'
             at: 'bottom middle'
 
-        return
+      else
 
-      glados.Utils.fillContentForElement($linkToAllContainer)
+        glados.Utils.fillContentForElement $linkToAllContainer,
+          first_entity: firstDestinationEntityName
+          rest_of_entities: restOfDestinationEntityNames
+          generated_id_base: baseID
+          no_additional_links: noAdditionalLinks
 
-      $link = $linkToAllContainer.find('.BCK-LinkToAllActivities')
-      $link.click $.proxy(@handleLinkToAllActivitiesClick, @)
+        $links = $linkToAllContainer.find('.BCK-LinkToOtherEntities')
+        $links.click $.proxy(@handleLinkToOtherEntitiesClick, @)
 
+      unless noAdditionalLinks
+        $additionalLinksOpener = $linkToAllContainer.find('.BCK-open-more-links')
+        $additionalLinksOpener.click $.proxy(@toggleAdditionalLinks, @)
 
-    handleLinkToAllActivitiesClick: ->
+    toggleAdditionalLinks: ->
 
       $selectionMenuContainer = $(@el).find('.BCK-selection-menu-container')
-      $linkToAllContainer = $selectionMenuContainer.find('.BCK-LinkToAllActivitiesContainer')
-      $preloader = $linkToAllContainer.find('.BCK-preloader')
+      $linkToAllContainer = $selectionMenuContainer.find('.BCK-LinkToOtherEntitiesContainer')
+      $additionalLinksContainer = $linkToAllContainer.find(".BCK-additional-links-container")
+
+      if $additionalLinksContainer.attr('data-is-open') == 'yes'
+        $additionalLinksContainer.hide()
+        $additionalLinksContainer.attr('data-is-open', 'no')
+      else
+        $additionalLinksContainer.show()
+        $additionalLinksContainer.attr('data-is-open', 'yes')
+
+        closeAdditionalLinks = (event) ->
+
+          isOutside = not $linkToAllContainer.is(event.target) and \
+            $linkToAllContainer.has(event.target).length == 0
+
+          if isOutside
+            $additionalLinksContainer.hide()
+            $additionalLinksContainer.attr('data-is-open', 'no')
+            $(document).off 'mouseup', closeAdditionalLinks
+
+        $(document).mouseup closeAdditionalLinks
+
+    handleLinkToOtherEntitiesClick: (event) ->
+
+      $clickedElem = $(event.currentTarget)
+      destinationEntityName = $clickedElem.attr('data-destination-entity')
+
+      $selectionMenuContainer = $(@el).find('.BCK-selection-menu-container')
+      $linkToAllContainer = $selectionMenuContainer.find('.BCK-LinkToOtherEntitiesContainer')
+      $preloader = $linkToAllContainer.find(".BCK-preloader[data-destination-entity='#{destinationEntityName}']")
       $preloader.show()
 
-      linkToActPromise = @collection.getLinkToAllActivitiesPromise()
+      linkToActPromise = @collection.getLinkToRelatedEntitiesPromise(destinationEntityName)
 
       linkToActPromise.then (linkGot) ->
         glados.Utils.URLS.shortenLinkIfTooLongAndOpen(linkGot)

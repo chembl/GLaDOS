@@ -27,7 +27,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
 
     fetchDataForInchiKey: (inchiKey) ->
 
-      if glados.isInEBIServers()
+      if glados.isInEBIProdServers()
         @fetchWithoutJSONP(inchiKey)
       else
         @fetchUsingJSONP(inchiKey)

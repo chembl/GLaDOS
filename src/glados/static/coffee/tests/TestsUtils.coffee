@@ -5,13 +5,13 @@ class TestsUtils
       list.reset(testData)
       done()
 
-  @getAllItemsIDs = (list) ->
+  @getAllItemsIDs = (list, idProperty='molecule_chembl_id') ->
     #this can be done because of the simulation of data, remember that allResults is not always available for
     # Elasticsearch collections
     if list.allResults?
-      return (model.molecule_chembl_id for model in list.allResults)
+      return (model[idProperty] for model in list.allResults)
     else
-      return (model.attributes.molecule_chembl_id for model in list.models)
+      return (model.attributes[idProperty] for model in list.models)
 
   @pluckFromListItems = (list, propertyName) ->
 
@@ -22,13 +22,21 @@ class TestsUtils
 
 
   # simulates only the data inside, nothing related with the elasticsearch query,
-  # initialises all results list only
   @simulateDataESList = (list, dataURL, done) ->
+
     $.get dataURL, (testData) ->
-      list.allResults = testData
-      list.setMeta('total_records', testData.length)
+
+      if testData.hits?
+        rawModels = (h._source for h in testData.hits.hits)
+      else
+        rawModels = testData
+
+      list.allResults = rawModels
+
+      list.setMeta('total_records', rawModels.length)
       Entity = list.getMeta('model')
-      models = (new Entity(Entity.prototype.parse(result)) for result in testData)
+      models = (new Entity(Entity.prototype.parse(result)) for result in rawModels)
+
       list.reset(models)
       done()
 

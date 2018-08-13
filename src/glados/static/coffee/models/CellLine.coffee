@@ -1,6 +1,7 @@
 CellLine = Backbone.Model.extend
 
   entityName: 'Cell Line'
+  entityNamePlural: 'Cell Lines'
   idAttribute:'cell_chembl_id'
   defaults:
     fetch_from_elastic: true
