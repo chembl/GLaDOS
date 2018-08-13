@@ -421,7 +421,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
         ENABLE_COLLECTION_CACHING: true
         DISABLE_CACHE_ON_DOWNLOAD: true
-        ENABLE_ACTIVITIES_LINK_FOR_SELECTED_ENTITIES: true
+        LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
       DRUG_INDICATIONS_LIST:
         ID_NAME: 'ESDrugIndications'
         LABEL: 'Drug Indications'
