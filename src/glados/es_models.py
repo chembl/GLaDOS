@@ -1,4 +1,4 @@
-from elasticsearch_dsl import DocType, Text, connections
+from elasticsearch_dsl import DocType, Text, Keyword, Boolean, Integer, connections
 from typing import List
 
 
@@ -8,6 +8,20 @@ class TinyURLIndex(DocType):
 
     class Meta:
         index = 'chembl_glados_tiny_url'
+
+
+class ESCachedRequestIndex(DocType):
+    es_index = Keyword()
+    es_query = Keyword()
+    es_aggs = Keyword()
+    es_request_digest = Keyword()
+    is_cached = Boolean()
+    # Do not use elasticsearch_dsl Date type, it does not serializes correctly
+    request_date = Integer()
+
+    class Meta:
+        index = 'chembl_glados_es_cache_usage'
+        doc_type = 'es_cached_request'
 
 
 class ElasticSearchMultiSearchQuery:
@@ -27,4 +41,3 @@ def do_multi_search(queries: List[ElasticSearchMultiSearchQuery]):
         return conn.msearch(body=multi_search_body)
     except Exception as e:
         raise Exception('ERROR: can\'t retrieve elastic search data!')
-
