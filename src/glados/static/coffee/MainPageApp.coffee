@@ -127,7 +127,7 @@ class MainPageApp
       x_axis_initial_num_columns: 40
       x_axis_prop_name: 'firstApprovalByMoleculeType'
       y_scale_mode: 'percentage'
-      title: 'Molecule Type by First Approval'
+      title: 'Drugs By Molecule Type and First Approval'
       title_link_url: Drug.getDrugsListURL('_exists_:first_approval')
 
     config =
