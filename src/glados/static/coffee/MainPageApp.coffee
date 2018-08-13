@@ -101,7 +101,7 @@ class MainPageApp
     maxPhaseForDisease.fetch()
 
   @initFirstApprovalByMoleculeType = ->
-    drugsByMoleculeType = MainPageApp.getFirstApprovalPercentage()
+    drugsByMoleculeTypeAgg = MainPageApp.getFirstApprovalPercentage()
 
     approvalDateProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'FIRST_APPROVAL')
     moleculeTypeProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'MOLECULE_TYPE', true)
@@ -137,11 +137,11 @@ class MainPageApp
 
     new glados.views.ReportCards.HistogramInCardView
       el: $('#BCK-FirstApprovalHistogram')
-      model: drugsByMoleculeType
+      model: drugsByMoleculeTypeAgg
       config: config
       report_card_app: @
 
-    drugsByMoleculeType.fetch()
+    drugsByMoleculeTypeAgg.fetch()
 
   @initDrugsPerUsanYear = ->
 
@@ -296,7 +296,7 @@ class MainPageApp
               field: 'molecule_type'
               size: 10
               bucket_links:
-                bucket_filter_template: 'first_approval:{{year}} AND molecule_type:{{bucket_key}}'
+                bucket_filter_template: 'first_approval:{{year}} AND molecule_type:"{{bucket_key}}"'
                 template_data:
                   year: 'BUCKET.parsed_parent_key'
                   bucket_key: 'BUCKET.key'
