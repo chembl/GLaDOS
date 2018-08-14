@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 import os
 import glados
 from django.utils.translation import ugettext_lazy as _
-import logging.config
+import logging
 
 
 class RunEnvs(object):
@@ -239,7 +239,7 @@ CACHES = {
 # ----------------------------------------------------------------------------------------------------------------------
 
 
-LOGGING_CONFIG_DICT = {
+LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'formatters': {
@@ -256,6 +256,10 @@ LOGGING_CONFIG_DICT = {
         },
     },
     'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+        },
         'elasticsearch': {
             'level': logging.CRITICAL
         },
@@ -271,5 +275,3 @@ LOGGING_CONFIG_DICT = {
         },
     },
 }
-
-logging.config.dictConfig(LOGGING_CONFIG_DICT)
