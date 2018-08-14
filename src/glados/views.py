@@ -381,7 +381,11 @@ def elasticsearch_cache(request):
         try:
             es_query = search_data.get('query', None)
             if es_query:
-                es_query = json.dumps(es_query)
+                if isinstance(es_query, dict) and len(es_query) == 1 and \
+                        'query_string' in es_query and 'query' in es_query['query_string']:
+                    es_query = es_query['query_string']['query'].strip()
+                else:
+                    es_query = json.dumps(es_query)
             es_aggs = search_data.get('aggs', None)
             if es_aggs:
                 es_aggs = json.dumps(es_aggs)
