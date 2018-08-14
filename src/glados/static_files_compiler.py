@@ -14,10 +14,6 @@ import hashlib
 logger = logging.getLogger('glados.static_files_compiler')
 
 
-def enable_debug_logging():
-    logger.setLevel('DEBUG')
-
-
 def md5(f_name):
     hash_md5 = hashlib.md5()
     with open(f_name, "rb") as f:
@@ -60,7 +56,7 @@ class StaticFilesCompiler(object):
     @staticmethod
     def compile_coffee():
         logger.warning(
-            "If coffee static files compilation takes longer than 30 seconds,\n"
+            "If coffee static files compilation takes longer than 30 seconds, "
             "please install nodejs to increase compilation speed!"
         )
         compiler = StaticFilesCompiler(
