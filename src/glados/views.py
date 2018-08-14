@@ -6,10 +6,8 @@ from django.core.cache import cache
 from django.http import JsonResponse
 import glados.url_shortener.url_shortener as url_shortener
 from apiclient.discovery import build
-from googleapiclient import *
 import re
-from elasticsearch import Elasticsearch
-from elasticsearch_dsl import Search
+from elasticsearch_dsl import Search, connections
 import requests
 import datetime
 import timeago
@@ -17,20 +15,7 @@ import json
 import hashlib
 import base64
 from django.views.decorators.cache import cache_page
-
-keyword_args = {
-  "hosts": [settings.ELASTICSEARCH_HOST],
-  "timeout": 30,
-  "retry_on_timeout": True
-}
-
-if settings.ELASTICSEARCH_PASSWORD is not None:
-  keyword_args["http_auth"] = (settings.ELASTICSEARCH_USERNAME, settings.ELASTICSEARCH_PASSWORD)
-
-try:
-    es = Elasticsearch(**keyword_args)
-except:
-    print ('connection error!')
+from glados.models import ESCachedRequest
 
 
 @cache_page(60 * 60)
@@ -138,9 +123,9 @@ def get_latest_blog_entries(request, pageToken):
     service = build('blogger', 'v3', developerKey=key)
     response = service.posts().list(blogId=blogId, orderBy=orderBy, pageToken=pageToken,
                                     fetchBodies=fetchBodies, fetchImages=fetchImages, maxResults=maxResults).execute()
-    blogResponse = service.blogs().get(blogId=blogId).execute()
+    blog_response = service.blogs().get(blogId=blogId).execute()
 
-    total_count = blogResponse['posts']['totalItems']
+    total_count = blog_response['posts']['totalItems']
     latest_entries_items = response['items']
     next_page_token = response['nextPageToken']
 
@@ -228,6 +213,7 @@ def get_database_summary(request):
 
     return JsonResponse(response)
 
+
 def get_entities_records(request):
 
     cache_key = 'entities_records'
@@ -262,6 +248,7 @@ def get_entities_records(request):
 
     return JsonResponse(response)
 
+
 def get_github_details(request):
 
     last_commit = requests.get('https://api.github.com/repos/chembl/GLaDOS/commits/master').json()
@@ -293,6 +280,7 @@ def get_github_details(request):
 
     return JsonResponse(last_commit)
 
+
 def replace_urls_from_entinies(html, urls):
     """
     :return: the html with the corresponding links from the entities
@@ -303,6 +291,7 @@ def replace_urls_from_entinies(html, urls):
 
     return html
 
+
 def main_page(request):
     context = {
         'main_page': True,
@@ -310,11 +299,13 @@ def main_page(request):
     }
     return render(request, 'glados/main_page.html', context)
 
+
 def design_components(request):
     context = {
         'hide_breadcrumbs': True
     }
     return render(request, 'glados/base/design_components.html', context)
+
 
 def main_html_base_no_bar(request):
     return render(request, 'glados/mainGladosNoBar.html')
@@ -348,33 +339,67 @@ def shorten_url(request):
     else:
         return JsonResponse({'error': 'this is only available via POST'})
 
+
+# noinspection PyBroadException
 def elasticsearch_cache(request):
     if request.method == "POST":
 
-        print ('elasticsearch_cache')
+        print('elasticsearch_cache')
         index_name = request.POST.get('index_name', '')
         raw_search_data = request.POST.get('search_data', '')
         search_data_digest = hashlib.sha256(raw_search_data.encode('utf-8')).digest()
         base64_search_data_hash = base64.b64encode(search_data_digest).decode('utf-8')
         search_data = json.loads(raw_search_data)
 
+        if not isinstance(search_data, dict):
+            search_data = {}
+
         cache_key = "{}-{}".format(index_name, base64_search_data_hash)
         print('cache_key', cache_key)
 
-        cache_response = cache.get(cache_key)
+        cache_response = None
 
-        if cache_response != None:
+        try:
+            cache_response = cache.get(cache_key)
+        except Exception as e:
+            print('Error searching in cache!')
+
+        response = None
+        if cache_response is not None:
             print('results are in cache')
-            return JsonResponse(cache_response)
+            response = JsonResponse(cache_response)
+        else:
+            print('results are NOT in cache')
+            response = connections.get_connection().search(index=index_name, body=search_data)
+            try:
+                cache_time = 3000000
+                cache.set(cache_key, response, cache_time)
+            except Exception as e:
+                traceback.print_exc()
+                print('Error saving in the cache!')
 
-        print('results are NOT in cache')
-        response = es.search(index=index_name, body=search_data)
-        cache_time = 3000000
-        cache.set(cache_key, response, cache_time)
+        try:
+            es_query = search_data.get('query', None)
+            if es_query:
+                es_query = json.dumps(es_query)
+            es_aggs = search_data.get('aggs', None)
+            if es_aggs:
+                es_aggs = json.dumps(es_aggs)
+            es_cache_req_data = ESCachedRequest(
+                es_index=index_name,
+                es_query=es_query,
+                es_aggs=es_aggs,
+                es_request_digest=base64_search_data_hash,
+                is_cached=cache_response is not None
+            )
+            es_cache_req_data.indexing()
+        except:
+            traceback.print_exc()
+            print('Error saving in elastic!')
+
         return JsonResponse(response)
-
     else:
-        return JsonResponse({'error': 'this is only available via POST'})
+        return JsonResponse({'error': 'this is only available via POST! You crazy hacker! :P'})
 
 
 def extend_url(request, hash):
@@ -387,6 +412,8 @@ def extend_url(request, hash):
 # ----------------------------------------------------------------------------------------------------------------------
 # Report Cards
 # ----------------------------------------------------------------------------------------------------------------------
+
+
 def compound_report_card(request, chembl_id):
 
     context = {
@@ -396,6 +423,7 @@ def compound_report_card(request, chembl_id):
     }
 
     return render(request, 'glados/compoundReportCard.html', context)
+
 
 def assay_report_card(request, chembl_id):
 
@@ -407,6 +435,7 @@ def assay_report_card(request, chembl_id):
 
     return render(request, 'glados/assayReportCard.html', context)
 
+
 def cell_line_report_card(request, chembl_id):
 
     context = {
@@ -416,6 +445,7 @@ def cell_line_report_card(request, chembl_id):
     }
 
     return render(request, 'glados/cellLineReportCard.html', context)
+
 
 def tissue_report_card(request, chembl_id):
 
@@ -427,6 +457,7 @@ def tissue_report_card(request, chembl_id):
 
     return render(request, 'glados/tissueReportCard.html', context)
 
+
 def target_report_card(request, chembl_id):
 
     context = {
@@ -436,6 +467,7 @@ def target_report_card(request, chembl_id):
     }
 
     return render(request, 'glados/targetReportCard.html', context)
+
 
 def document_report_card(request, chembl_id):
 
