@@ -20,10 +20,9 @@ REQUIRED_INDEXES = [
                     'es_index': KEYWORD_TYPE,
                     'es_query': KEYWORD_TYPE,
                     'es_aggs': KEYWORD_TYPE,
-                    'es_request_digest': {
-                        'index': False,
-                        'type': 'keyword'
-                    },
+                    'es_request_digest': KEYWORD_TYPE,
+                    'host': KEYWORD_TYPE,
+                    'run_env_type': KEYWORD_TYPE,
                     'is_cached': {
                         'type': 'boolean'
                     },
