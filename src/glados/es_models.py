@@ -15,6 +15,8 @@ class ESCachedRequestIndex(DocType):
     es_query = Keyword()
     es_aggs = Keyword()
     es_request_digest = Keyword()
+    host = Keyword()
+    run_env_type = Keyword()
     is_cached = Boolean()
     # Do not use elasticsearch_dsl Date type, it does not serializes correctly
     request_date = Integer()

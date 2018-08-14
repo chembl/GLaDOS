@@ -1,7 +1,8 @@
 from django.db import models
 from glados.es_models import TinyURLIndex, ESCachedRequestIndex
-import datetime
 import time
+import socket
+from django.conf import settings
 
 
 class Acknowledgement(models.Model):
@@ -110,18 +111,19 @@ class ESCachedRequest(models.Model):
   es_aggs = models.TextField()
   es_request_digest = models.TextField()
   is_cached = models.BooleanField()
+  host = models.TextField()
+  run_env_type = models.TextField()
 
   def indexing(self):
-    today = datetime.datetime.today()
     obj = ESCachedRequestIndex(
       es_index=self.es_index,
       es_query=self.es_query,
       es_aggs=self.es_aggs,
       es_request_digest=self.es_request_digest,
+      host=socket.gethostname(),
+      run_env_type=settings.RUN_ENV,
       is_cached=self.is_cached,
       request_date=int(time.time()*1000)
     )
-    print('TIME IS ' + today.strftime('%Y-%m-%d %H:%M:%S'))
-    print(int(time.time()*1000))
     obj.save()
     return obj.to_dict(include_meta=True)
