@@ -3,7 +3,7 @@ from twitter import *
 from django.conf import settings
 from glados.utils import *
 from django.core.cache import cache
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 import glados.url_shortener.url_shortener as url_shortener
 from apiclient.discovery import build
 import re
@@ -367,7 +367,7 @@ def elasticsearch_cache(request):
         response = None
         if cache_response is not None:
             print('results are in cache')
-            response = JsonResponse(cache_response)
+            response = cache_response
         else:
             print('results are NOT in cache')
             response = connections.get_connection().search(index=index_name, body=search_data)
@@ -396,6 +396,9 @@ def elasticsearch_cache(request):
         except:
             traceback.print_exc()
             print('Error saving in elastic!')
+
+        if response is None:
+            return HttpResponse('ELASTIC SEARCH RESPONSE IS EMPTY!', status=500)
 
         return JsonResponse(response)
     else:
