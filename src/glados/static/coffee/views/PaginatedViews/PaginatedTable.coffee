@@ -322,6 +322,39 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         $pinnedHeader = $table.find('.pinned-header').first()
         $pinnedHeader.offset({left: $table.offset().left - $table.scrollLeft()})
 
+      pinTableHeader = ($table) ->
+
+        $originalHeader = $table.find('#sticky-header').first()
+        $clonedHeader = $originalHeader.clone().addClass('pinned-header').attr('id','clonedHeader')
+
+        $clonedHeader.height($originalHeader.height())
+        $clonedHeader.width($originalHeader.width())
+
+        originalWidths = []
+        $originalHeader.find('.BCK-headers-row').first().children('th').each( ->
+         originalWidths.push($(@).width())
+        )
+
+        $clonedHeader.find('.BCK-headers-row').first().children('th').each( (i) ->
+          $(@).width(originalWidths[i] + 9.5)
+        )
+
+        if GlobalVariables['EMBEDED']
+          $clonedHeader.addClass('is-embedded')
+
+        if $table.find('.pinned-header').length == 0
+          $table.prepend($clonedHeader)
+        @scrollTableHeader()
+        $table.data('data-state','pinned')
+
+      unPinTableHeader = ($table) ->
+
+        $table.find('.pinned-header').first().remove()
+        $table.data('data-state', 'no-pinned')
+
+
+      @scrollTableHeader = $.proxy(scrollTableHeader, @)
+
       pinUnpinTableHeader = ->
 
         if !$table.is(":visible")
@@ -329,45 +362,36 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
         $win = $(window)
         $table = $(@el).find('table.BCK-items-container')
-        $originalHeader = $table.find('#sticky-header').first()
-        $clonedHeader = $originalHeader.clone().addClass('pinned-header').attr('id','clonedHeader')
         scroll = $win.scrollTop()
+        $originalHeader = $table.find('#sticky-header').first()
         topTrigger = $originalHeader.offset().top
-        bottomTrigger = $table.find('.BCK-items-row').last().offset().top
+        bottomTrigger = $table.find('.BCK-items-row').last().offset().top - $originalHeader.height()
         searchBarHeight = $('#chembl-header-container.pinned').find('.chembl-header').height()
 
-        if scroll >= topTrigger  -  searchBarHeight and scroll < bottomTrigger
-          @scrollTableHeader()
-          $table.data('data-state','pinned')
+        if GlobalVariables['EMBEDED']
+          isInPinnedRange = scroll >= topTrigger and scroll < bottomTrigger
         else
-          $table.data('data-state', 'no-pinned')
+          isInPinnedRange = scroll >= topTrigger - searchBarHeight and scroll < bottomTrigger
 
-        if $table.data('data-state') == 'pinned'
-          $clonedHeader.height($originalHeader.height())
-          $clonedHeader.width($originalHeader.width())
+        bodyIsBiggerThanHeader = $table.find('tbody').height() > $originalHeader.height()
 
-          originalWidths = []
-          $originalHeader.find('.BCK-headers-row').first().children('th').each( ->
-           originalWidths.push($(@).width())
-          )
+        if isInPinnedRange and bodyIsBiggerThanHeader
 
-          $clonedHeader.find('.BCK-headers-row').first().children('th').each( (i) ->
-            $(@).width(originalWidths[i] + 9.5)
-          )
+          if $table.data('data-state') != 'pinned'
+            pinTableHeader.call(@, $table)
+            $table.scroll(@scrollTableHeader)
+            $win.resize(@scrollTableHeader)
 
-          if $table.find('.pinned-header').length == 0
-            $table.prepend($clonedHeader)
         else
-          $table.find('.pinned-header').first().remove()
+
+          if $table.data('data-state') != 'no-pinned'
+            unPinTableHeader.call(@, $table)
+            $table.off 'scroll', @scrollTableHeader
+            $win.off 'scroll', @scrollTableHeader
 
       @pinUnpinTableHeader = $.proxy(pinUnpinTableHeader, @)
-      @scrollTableHeader = $.proxy(scrollTableHeader, @)
-
       $win.scroll(@pinUnpinTableHeader)
-      $table.scroll(@scrollTableHeader)
-
       $win.resize(@pinUnpinTableHeader)
-      $win.resize(@scrollTableHeader)
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Static functions
