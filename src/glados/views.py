@@ -7,7 +7,8 @@ from django.http import JsonResponse, HttpResponse
 import glados.url_shortener.url_shortener as url_shortener
 from apiclient.discovery import build
 import re
-from elasticsearch_dsl import Search, connections
+from elasticsearch_dsl import Search
+from elasticsearch_dsl.connections import connections
 import requests
 import datetime
 import timeago

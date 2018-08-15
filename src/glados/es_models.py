@@ -1,5 +1,7 @@
-from elasticsearch_dsl import DocType, Text, Keyword, Boolean, Integer, connections
+from elasticsearch_dsl import DocType, Text, Keyword, Boolean, Integer
+from elasticsearch_dsl.connections import connections
 from typing import List
+import traceback
 
 
 class TinyURLIndex(DocType):
@@ -42,4 +44,5 @@ def do_multi_search(queries: List[ElasticSearchMultiSearchQuery]):
             multi_search_body.append(query_i.body)
         return conn.msearch(body=multi_search_body)
     except Exception as e:
+        traceback.print_exc()
         raise Exception('ERROR: can\'t retrieve elastic search data!')
