@@ -366,7 +366,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         scroll = $win.scrollTop()
         $originalHeader = $table.find('#sticky-header').first()
         topTrigger = $originalHeader.offset().top
-        bottomTrigger = $table.find('.BCK-items-row').last().offset().top
+        bottomTrigger = $table.find('.BCK-items-row').last().offset().top - $originalHeader.height()
         searchBarHeight = $('#chembl-header-container.pinned').find('.chembl-header').height()
 
         isInPinnedRange = scroll >= topTrigger - searchBarHeight and scroll < bottomTrigger
