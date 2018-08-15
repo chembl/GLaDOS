@@ -352,6 +352,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         $table.find('.pinned-header').first().remove()
         $table.data('data-state', 'no-pinned')
 
+
+      @scrollTableHeader = $.proxy(scrollTableHeader, @)
+
       pinUnpinTableHeader = ->
 
         console.log 'pinUnpinTableHeader'
@@ -372,23 +375,23 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           if $table.data('data-state') != 'pinned'
             alert 'STATE CHANGED!'
             pinTableHeader.call(@, $table)
+            $table.scroll(@scrollTableHeader)
+            $win.resize(@scrollTableHeader)
 
         else
 
           if $table.data('data-state') != 'no-pinned'
             alert 'STATE CHANGED!'
             unPinTableHeader.call(@, $table)
+            $table.off 'scroll', @scrollTableHeader
+            $win.off 'scroll', @scrollTableHeader
 
         console.log '$table: ', $table
 
       @pinUnpinTableHeader = $.proxy(pinUnpinTableHeader, @)
-      @scrollTableHeader = $.proxy(scrollTableHeader, @)
-
       $win.scroll(@pinUnpinTableHeader)
-      $table.scroll(@scrollTableHeader)
-
       $win.resize(@pinUnpinTableHeader)
-      $win.resize(@scrollTableHeader)
+
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Static functions
