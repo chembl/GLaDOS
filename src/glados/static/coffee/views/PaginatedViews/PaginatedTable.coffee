@@ -322,6 +322,36 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         $pinnedHeader = $table.find('.pinned-header').first()
         $pinnedHeader.offset({left: $table.offset().left - $table.scrollLeft()})
 
+      pinTableHeader = ($table) ->
+
+        alert '---SETTING UP pinned table'
+
+        $originalHeader = $table.find('#sticky-header').first()
+        $clonedHeader = $originalHeader.clone().addClass('pinned-header').attr('id','clonedHeader')
+
+        $clonedHeader.height($originalHeader.height())
+        $clonedHeader.width($originalHeader.width())
+
+        originalWidths = []
+        $originalHeader.find('.BCK-headers-row').first().children('th').each( ->
+         originalWidths.push($(@).width())
+        )
+
+        $clonedHeader.find('.BCK-headers-row').first().children('th').each( (i) ->
+          $(@).width(originalWidths[i] + 9.5)
+        )
+
+        if $table.find('.pinned-header').length == 0
+          $table.prepend($clonedHeader)
+        @scrollTableHeader()
+        $table.data('data-state','pinned')
+
+      unPinTableHeader = ($table) ->
+
+        alert '---UNSETTING pinned table'
+        $table.find('.pinned-header').first().remove()
+        $table.data('data-state', 'no-pinned')
+
       pinUnpinTableHeader = ->
 
         console.log 'pinUnpinTableHeader'
@@ -330,9 +360,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
         $win = $(window)
         $table = $(@el).find('table.BCK-items-container')
-        $originalHeader = $table.find('#sticky-header').first()
-        $clonedHeader = $originalHeader.clone().addClass('pinned-header').attr('id','clonedHeader')
         scroll = $win.scrollTop()
+        $originalHeader = $table.find('#sticky-header').first()
         topTrigger = $originalHeader.offset().top
         bottomTrigger = $table.find('.BCK-items-row').last().offset().top
         searchBarHeight = $('#chembl-header-container.pinned').find('.chembl-header').height()
@@ -342,30 +371,13 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           console.log 'PIN TABLE HEADER', (new Date()).getTime()
           if $table.data('data-state') != 'pinned'
             alert 'STATE CHANGED!'
-            alert '---SETTING UP pinned table'
-            $clonedHeader.height($originalHeader.height())
-            $clonedHeader.width($originalHeader.width())
+            pinTableHeader.call(@, $table)
 
-            originalWidths = []
-            $originalHeader.find('.BCK-headers-row').first().children('th').each( ->
-             originalWidths.push($(@).width())
-            )
-
-            $clonedHeader.find('.BCK-headers-row').first().children('th').each( (i) ->
-              $(@).width(originalWidths[i] + 9.5)
-            )
-
-            if $table.find('.pinned-header').length == 0
-              $table.prepend($clonedHeader)
-            @scrollTableHeader()
-            $table.data('data-state','pinned')
         else
-          
+
           if $table.data('data-state') != 'no-pinned'
             alert 'STATE CHANGED!'
-            alert '---UNSETTING pinned table'
-            $table.find('.pinned-header').first().remove()
-            $table.data('data-state', 'no-pinned')
+            unPinTableHeader.call(@, $table)
 
         console.log '$table: ', $table
 
