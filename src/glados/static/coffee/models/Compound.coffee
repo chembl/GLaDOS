@@ -718,7 +718,11 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
   #---------------------------------------------------------------------------------------------------------------------
   # instance urls
   #---------------------------------------------------------------------------------------------------------------------
-  getSimilaritySearchURL: (threshold=glados.Settings.DEFAULT_SIMILARITY_THRESHOLD) -> "/g/#similarity_search_results/#{@get('id')}/#{threshold}"
+  getSimilaritySearchURL: (threshold=glados.Settings.DEFAULT_SIMILARITY_THRESHOLD) ->
+
+    glados.Settings.SIMILARITY_URL_GENERATOR
+      term: @get('id')
+      threshold: threshold
 
 #-----------------------------------------------------------------------------------------------------------------------
 # 3D SDF Constants

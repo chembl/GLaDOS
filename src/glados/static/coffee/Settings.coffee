@@ -312,6 +312,10 @@ glados.loadSearchResultsURLS = ()->
     "browse/{{entity}}{{#if filter}}/filter/{{filter}}{{/if}}"
   glados.Settings.ENTITY_BROWSERS_URL_GENERATOR = Handlebars.compile(glados.Settings.ENTITY_BROWSERS_URL_TEMPLATE)
 
+  glados.Settings.SIMILARITY_URL_TEMPLATE = glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL +
+    "similarity_search_results/{{{term}}}/{{{threshold}}}"
+  glados.Settings.SIMILARITY_URL_GENERATOR = Handlebars.compile(glados.Settings.SIMILARITY_URL_TEMPLATE)
+
 # Logs the JavaScript environment details
 glados.logGladosSettings = () ->
   if glados.Settings.DEBUG
