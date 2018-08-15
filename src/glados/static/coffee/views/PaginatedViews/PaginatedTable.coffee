@@ -324,8 +324,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       pinTableHeader = ($table) ->
 
-#        alert '---SETTING UP pinned table'
-
         $originalHeader = $table.find('#sticky-header').first()
         $clonedHeader = $originalHeader.clone().addClass('pinned-header').attr('id','clonedHeader')
 
@@ -341,6 +339,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           $(@).width(originalWidths[i] + 9.5)
         )
 
+        if GlobalVariables['EMBEDED']
+          $clonedHeader.addClass('is-embedded')
+
         if $table.find('.pinned-header').length == 0
           $table.prepend($clonedHeader)
         @scrollTableHeader()
@@ -348,7 +349,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       unPinTableHeader = ($table) ->
 
-#        alert '---UNSETTING pinned table'
         $table.find('.pinned-header').first().remove()
         $table.data('data-state', 'no-pinned')
 
@@ -357,7 +357,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       pinUnpinTableHeader = ->
 
-        console.log 'pinUnpinTableHeader'
         if !$table.is(":visible")
           return
 
@@ -369,14 +368,16 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         bottomTrigger = $table.find('.BCK-items-row').last().offset().top - $originalHeader.height()
         searchBarHeight = $('#chembl-header-container.pinned').find('.chembl-header').height()
 
-        isInPinnedRange = scroll >= topTrigger - searchBarHeight and scroll < bottomTrigger
+        if GlobalVariables['EMBEDED']
+          isInPinnedRange = scroll >= topTrigger and scroll < bottomTrigger
+        else
+          isInPinnedRange = scroll >= topTrigger - searchBarHeight and scroll < bottomTrigger
+
         bodyIsBiggerThanHeader = $table.find('tbody').height() > $originalHeader.height()
 
         if isInPinnedRange and bodyIsBiggerThanHeader
 
-          console.log 'PIN TABLE HEADER', (new Date()).getTime()
           if $table.data('data-state') != 'pinned'
-#            alert 'STATE CHANGED!'
             pinTableHeader.call(@, $table)
             $table.scroll(@scrollTableHeader)
             $win.resize(@scrollTableHeader)
@@ -384,7 +385,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         else
 
           if $table.data('data-state') != 'no-pinned'
-#            alert 'STATE CHANGED!'
             unPinTableHeader.call(@, $table)
             $table.off 'scroll', @scrollTableHeader
             $win.off 'scroll', @scrollTableHeader
@@ -392,7 +392,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @pinUnpinTableHeader = $.proxy(pinUnpinTableHeader, @)
       $win.scroll(@pinUnpinTableHeader)
       $win.resize(@pinUnpinTableHeader)
-
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Static functions
