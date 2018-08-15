@@ -324,7 +324,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       pinTableHeader = ($table) ->
 
-        alert '---SETTING UP pinned table'
+#        alert '---SETTING UP pinned table'
 
         $originalHeader = $table.find('#sticky-header').first()
         $clonedHeader = $originalHeader.clone().addClass('pinned-header').attr('id','clonedHeader')
@@ -348,7 +348,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       unPinTableHeader = ($table) ->
 
-        alert '---UNSETTING pinned table'
+#        alert '---UNSETTING pinned table'
         $table.find('.pinned-header').first().remove()
         $table.data('data-state', 'no-pinned')
 
@@ -369,11 +369,14 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         bottomTrigger = $table.find('.BCK-items-row').last().offset().top
         searchBarHeight = $('#chembl-header-container.pinned').find('.chembl-header').height()
 
-        if scroll >= topTrigger - searchBarHeight and scroll < bottomTrigger
+        isInPinnedRange = scroll >= topTrigger - searchBarHeight and scroll < bottomTrigger
+        bodyIsBiggerThanHeader = $table.find('tbody').height() > $originalHeader.height()
+
+        if isInPinnedRange and bodyIsBiggerThanHeader
 
           console.log 'PIN TABLE HEADER', (new Date()).getTime()
           if $table.data('data-state') != 'pinned'
-            alert 'STATE CHANGED!'
+#            alert 'STATE CHANGED!'
             pinTableHeader.call(@, $table)
             $table.scroll(@scrollTableHeader)
             $win.resize(@scrollTableHeader)
@@ -381,12 +384,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         else
 
           if $table.data('data-state') != 'no-pinned'
-            alert 'STATE CHANGED!'
+#            alert 'STATE CHANGED!'
             unPinTableHeader.call(@, $table)
             $table.off 'scroll', @scrollTableHeader
             $win.off 'scroll', @scrollTableHeader
-
-        console.log '$table: ', $table
 
       @pinUnpinTableHeader = $.proxy(pinUnpinTableHeader, @)
       $win.scroll(@pinUnpinTableHeader)
