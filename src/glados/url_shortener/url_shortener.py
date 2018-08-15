@@ -18,6 +18,7 @@ def shorten_url(long_url):
   if response.hits.total == 0:
     tinyURL = TinyURL(long_url=long_url, hash=hash)
     tinyURL.indexing()
+    print('has not been saved before!')
 
   return hash
 

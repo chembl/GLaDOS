@@ -14,6 +14,10 @@ from django.http import HttpResponse
 
 from django.views.generic.base import RedirectView
 
+import glados.es_connection
+
+# Setup Elastic Search Connection here only once
+glados.es_connection.setup_glados_es_connection()
 
 
 common_urls = [
@@ -204,4 +208,3 @@ urlpatterns = [url(r'^'+settings.SERVER_BASE_PATH, include(common_urls))]
 # ----------------------------------------------------------------------------------------------------------------------
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
