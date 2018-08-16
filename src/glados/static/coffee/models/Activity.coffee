@@ -121,6 +121,8 @@ Activity.COLUMNS = {
     comparator: 'target_organism'
   TARGET_PREF_NAME: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: 'target_pref_name'
+  TARGET_TYPE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
+    comparator: '_metadata.target_data.target_type'
   UO_UNITS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: 'uo_units'
   DOC_COUNT: {
@@ -166,6 +168,7 @@ Activity.COLUMNS_SETTINGS = {
     Activity.COLUMNS.TARGET_CHEMBL_ID
     Activity.COLUMNS.TARGET_PREF_NAME
     Activity.COLUMNS.TARGET_ORGANISM
+    Activity.COLUMNS.TARGET_TYPE
     Activity.COLUMNS.DOCUMENT_CHEMBL_ID
     Activity.COLUMNS.SRC_DESCRIPTION
   ]
