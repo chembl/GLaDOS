@@ -95,3 +95,4 @@ gecko_bin/*
 
 # MAC OSX files
 .DS_Store
+.vscode

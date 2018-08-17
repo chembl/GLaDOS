@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% load static %}
+<html prefix="og: https://ogp.me/ns#">
+   <head>
+      <meta charset="UTF-8">
+      {% block open_graph_tags %}{% endblock %}
+      <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon"/>
+      <title>{% block title %}{% endblock %}</title>
+      {% block analytics %}
+      {% include "glados/base/hotjar_analytics.html" %}
+      {% endblock %}
+      {% include "glados/base/data_protection_banner.html" %}
+      {% load compress %}
+      <!-- Imports used by all the templates-->
+      <!-- only use this if absolutely necessary, it can complicate the css imports -->
+      {% block common_css %}
+      {% include "glados/base/css_imports_for_all.html" %}
+      {% endblock %}
+      <!-- Imports used by the current template -->
+      {% block stylesheets %}{% endblock %}
+   </head>
+   <!-- Header -->
+   <header>
+      <div id="masthead-contaniner" class="row">
+         {% block header %}
+         {% include "glados/base/header.html" %}
+         {% endblock %}
+      </div>
+      <div class="chembl-header-spacer">
+      </div>
+   </header>
+   <body>
+      <!-- Splash screen -->
+      <div id='GladosMainSplashScreen' class="loader-background">
+         <div class="card splash-card z-depth-0">
+            <div class="loader-container">
+               <div class="spinner">
+                  <div class="ball ball-1"></div>
+                  <div class="ball ball-2"></div>
+                  <div class="ball ball-3"></div>
+                  <div class="ball ball-4"></div>
+                  <div class="ball ball-5"></div>
+                  <div class="ball ball-6"></div>
+               </div>
+               <span class="chembl-logo center-align"> ChEMBL </span>
+               <span class="center-align loading-msg"> Loading... </span>
+            </div>
+         </div>
+      </div>
+      <!-- Main -->
+      <main>
+         {% block content %}{% endblock %}
+      </main>
+      <!-- Footer -->
+      <footer class="page-footer">
+         {% block footer %}
+         {% include "glados/base/footer.html" %}
+         {% endblock %}
+      </footer>
+   </body>
+</html>
