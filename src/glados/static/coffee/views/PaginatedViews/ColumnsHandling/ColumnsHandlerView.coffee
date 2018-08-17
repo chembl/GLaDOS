@@ -54,6 +54,24 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
         col.modal_id = undefined
 
       @initDragging()
+      $propertyItems = $(@el).find('.BCK-propertyItem')
+      $propertyItems.one 'mouseover', ->
+        if @offsetWidth < @scrollWidth
+          $elem = $(@)
+          if $elem.data('tooltip-set-up') != 'yes'
+            qtipConfig =
+              content:
+                text: @textContent
+              show:
+                ready: true
+                solo: true
+              style:
+                classes:'qtip-light qtip-shadow'
+              position: glados.Utils.Tooltips.getQltipSafePostion($elem)
+
+            $elem.qtip qtipConfig
+            $elem.data('tooltip-set-up', 'yes')
+
       @hidePreloader()
 
     showHideColumn: (event) ->
