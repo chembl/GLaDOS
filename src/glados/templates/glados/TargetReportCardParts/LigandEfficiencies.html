@@ -3,9 +3,21 @@
 {% block card_id %}TLigandEfficienciesCard{% endblock %}
 
 {% block general_content %}
-<span class="load-messages-container">
-</span>
-<span class="BCK-all-sources-link" data-hb-template="Handlebars-Common-PieAllSourcesLink">
-</span>
-{% include "glados/base/Visualisation/DefaultScatterPLotContent.html" %}
+
+    <span class="load-messages-container">
+    </span>
+    <span class="BCK-all-sources-link" data-hb-template="Handlebars-Common-PieAllSourcesLink">
+    </span>
+    {% include "glados/base/Visualisation/DefaultScatterPLotContent.html" %}
+    <div>
+        The Ligand Efficiency chart plots Binding Efficiency Index (BEI) against Surface Efficiency Index (SEI), where:
+        <ul>
+            <li>
+                <b>SEI</b> = (-log10(Standard Value*10^-9))*100/PSA
+            </li>
+            <li>
+                <b>BEI</b> = (-log10(Standard Value*10^-9))*1000/MWT
+            </li>
+        </ul>
+    </div>
 {% endblock %}
