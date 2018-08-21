@@ -2,8 +2,9 @@ describe "An elasticsearch collection initialised from a custom query (full)", -
 
   esQuery = {
     "query": {
-      "match": {
-        "molecule_chembl_id": "CHEMBL25"
+      "multi_match" : {
+        "query":    "CHEMBL5607",
+        "fields": "_metadata.related_targets.chembl_ids.*"
       }
     }
   }
