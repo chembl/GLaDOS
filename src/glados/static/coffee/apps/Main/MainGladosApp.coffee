@@ -178,7 +178,7 @@ glados.useNameSpace 'glados.apps.Main',
             link: listConfig.BROWSE_LIST_URL()
           }
           {
-            label: query
+            label: 'Query'
             link: listConfig.BROWSE_LIST_URL(query)
             is_filter_link: true
             truncate: true
