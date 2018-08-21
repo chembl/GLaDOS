@@ -87,8 +87,8 @@ class StaticFilesCompiler(object):
             "If coffee static files compilation takes longer than 30 seconds, "
             "please install nodejs to increase compilation speed!"
         )
-        compiled_all_coffee_correctly = coffee_compiler.self.compile_all()
-        compiled_all_scss_correctly = scss_compiler.self.compile_all()
+        compiled_all_coffee_correctly = coffee_compiler.compile_all()
+        compiled_all_scss_correctly = scss_compiler.compile_all()
         if start_watchers:
             # Change logging logging to DEBUG if the file watcher is running
             logger.setLevel(logging.DEBUG)
@@ -133,6 +133,7 @@ class StaticFilesCompiler(object):
         observer.daemon = True
         observer.schedule(file_event_handler, self.src_path, recursive=True)
         observer.start()
+        logger.debug('File watcher started for {} files at {}'.format(self.ext_to_compile, self.src_path))
 
     @staticmethod
     def should_skip_compile(md5_file_in, file_out):
