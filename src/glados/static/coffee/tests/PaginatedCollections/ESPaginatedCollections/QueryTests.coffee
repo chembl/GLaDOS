@@ -12,6 +12,8 @@ describe "An elasticsearch collection initialised from a custom query (full)", -
 
   it 'Sets initial parameters', ->
 
+    console.log 'esQuery: ', JSON.stringify(esQuery)
+    console.log 'query: ', Compound.getCompoundsListURL(JSON.stringify(esQuery))
     expect(esList.getMeta('id_name')).toBe("ESCompound")
     expect(esList.getMeta('index')).toBe("/chembl_molecule")
     expect(esList.getMeta('key_name')).toBe("COMPOUND_COOL_CARDS")

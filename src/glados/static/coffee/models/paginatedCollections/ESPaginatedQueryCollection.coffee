@@ -297,6 +297,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       }
       return $.extend(baseEsQuery, JSON.parse(customQuery))
 
+
     # generates an object with the data necessary to do the ES request
     # customPage: set a customPage if you want a page different than the one set as current
     # the same for customPageSize
@@ -343,19 +344,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       else
         es_query.query.bool.must = @getMeta('searchESQuery')
       # Includes the selected facets filter
-      if facets_filtered
-        filter_query = @getFacetFilterQuery()
-        if _.isArray(filter_query) and filter_query.length > 0
-          es_query.query.bool.filter = _.union es_query.query.bool.filter, filter_query
-        else if filter_query? and not _.isArray(filter_query)
-          es_query.query.bool.filter.push filter_query
-
-      if request_facets
-        if not facets_first_call?
-          throw "ERROR! If the request includes the facets the parameter facets_first_call should be defined!"
-        facets_query = @getFacetsGroupsAggsQuery(facets_first_call)
-        if facets_query
-          es_query.aggs = facets_query
+      @addFacetsToQuery(es_query, facets_filtered, request_facets, facets_first_call)
 
       stickyQuery = @getMeta('sticky_query')
       if stickyQuery?
@@ -382,6 +371,23 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         fields:
           '*': {}
       }
+
+    addFacetsToQuery: (esQuery, facetsFiltered, requestFacets, facetsFirstCall) ->
+
+      # Includes the selected facets filter
+      if facetsFiltered
+        filter_query = @getFacetFilterQuery()
+        if _.isArray(filter_query) and filter_query.length > 0
+          esQuery.query.bool.filter = _.union esQuery.query.bool.filter, filter_query
+        else if filter_query? and not _.isArray(filter_query)
+          esQuery.query.bool.filter.push filter_query
+
+      if requestFacets
+        if not facetsFirstCall?
+          throw "ERROR! If the request includes the facets the parameter facets_first_call should be defined!"
+        facets_query = @getFacetsGroupsAggsQuery(facetsFirstCall)
+        if facets_query
+          esQuery.aggs = facets_query
 
     addSortingToQuery: (esQuery) ->
       sortList = []
