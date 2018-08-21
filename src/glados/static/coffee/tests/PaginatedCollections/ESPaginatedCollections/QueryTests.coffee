@@ -32,3 +32,5 @@ describe "An elasticsearch collection initialised from a custom query (full)", -
       pathInSettingsMustBe='ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_COOL_CARDS',
       queryStringMustBe=JSON.stringify(esQuery),
       useQueryStringMustBe=true)
+
+  it 'creates a list from a state object', -> TestsUtils.testRestoredListIsEqualToOriginal(esList)
