@@ -287,7 +287,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       catch error
         return false
 
-    getPreparedCustomQuery: (pageSize, page) ->
+    getPreparedCustomQuery: (pageSize, page, facetsFiltered, requestFacets, facetsFirstCall) ->
 
       customQuery = @getMeta('custom_query')
 
@@ -295,24 +295,26 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         size: pageSize,
         from: ((page - 1) * pageSize)
       }
+
+      @addFacetsToQuery(baseEsQuery, facetsFiltered, requestFacets, facetsFirstCall)
       return $.extend(baseEsQuery, JSON.parse(customQuery))
 
 
     # generates an object with the data necessary to do the ES request
     # customPage: set a customPage if you want a page different than the one set as current
     # the same for customPageSize
-    getRequestData: (customPage, customPageSize, request_facets=false, facets_first_call) ->
+    getRequestData: (customPage, customPageSize, requestFacets=false, facetsFirstCall) ->
       # If facets are requested the facet filters are excluded from the query
-      facets_filtered = true
+      facetsFiltered = true
       page = if customPage? then customPage else @getMeta('current_page')
       pageSize = if customPageSize? then customPageSize else @getMeta('page_size')
 
       useCustomQuery = @getMeta('use_custom_query')
       if useCustomQuery and @customQueryIsFullQuery()
-        return @getPreparedCustomQuery(pageSize, page)
+        return @getPreparedCustomQuery(pageSize, page, facetsFiltered, requestFacets, facetsFirstCall)
 
       # Base Elastic query
-      es_query = {
+      esQuery = {
         size: pageSize,
         from: ((page - 1) * pageSize)
         _source:
@@ -323,14 +325,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             must: []
             filter: []
       }
-      @addSortingToQuery(es_query)
-      @addHighlightsToQuery(es_query)
+      @addSortingToQuery(esQuery)
+      @addHighlightsToQuery(esQuery)
 
       # Custom query String query
       customQueryString = @getMeta('custom_query')
       generatorList = @getMeta('generator_items_list')
       if useCustomQuery
-        es_query.query.bool.must = [{
+        esQuery.query.bool.must = [{
 
           query_string:
             analyze_wildcard: true
@@ -339,19 +341,19 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       # Normal Search query
       else if generatorList?
         glq = @getQueryForGeneratorList()
-        es_query.query.bool.must.push glq.must_query
-        es_query.query.bool.filter.push glq.filter_query
+        esQuery.query.bool.must.push glq.must_query
+        esQuery.query.bool.filter.push glq.filter_query
       else
-        es_query.query.bool.must = @getMeta('searchESQuery')
+        esQuery.query.bool.must = @getMeta('searchESQuery')
       # Includes the selected facets filter
-      @addFacetsToQuery(es_query, facets_filtered, request_facets, facets_first_call)
+      @addFacetsToQuery(esQuery, facetsFiltered, requestFacets, facetsFirstCall)
 
       stickyQuery = @getMeta('sticky_query')
       if stickyQuery?
-        es_query.query.bool.must = [] unless es_query.query.bool.must?
-        es_query.query.bool.must.push stickyQuery
+        esQuery.query.bool.must = [] unless esQuery.query.bool.must?
+        esQuery.query.bool.must.push stickyQuery
 
-      return es_query
+      return esQuery
 
     getAllColumns: ->
 
