@@ -15,6 +15,5 @@ describe "An elasticsearch collection initialised from a custom query (full)", -
     expect(esList.getMeta('id_name')).toBe("ESCompound")
     expect(esList.getMeta('index')).toBe("/chembl_molecule")
     expect(esList.getMeta('key_name')).toBe("COMPOUND_COOL_CARDS")
-    console.log 'custom_query: ', esList.getMeta('custom_query')
-
-#    expect(esList.getMeta('custom_query')).toBe(customQueryString)
+    esQueryGot = esList.getMeta('custom_query')
+    expect(_.isEqual(esQueryGot, esQuery)).toBe(true)
