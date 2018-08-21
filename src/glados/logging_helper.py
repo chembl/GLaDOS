@@ -22,3 +22,11 @@ class ColoredConsoleHandler(logging.StreamHandler):
             color = '\x1b[0m'  # normal
         myrecord.msg = color + str(myrecord.msg) + '\x1b[0m'  # normal
         logging.StreamHandler.emit(self, myrecord)
+
+
+class MultiLineFormatter(logging.Formatter):
+    def format(self, record):
+        log_text = logging.Formatter.format(self, record)
+        header, footer = log_text.split(record.message)
+        log_text = log_text.replace('\n', '\n' + ' ' * len(header))
+        return log_text
