@@ -80,6 +80,7 @@ class StaticFilesCompiler(object):
 
     @classmethod
     def compile_all_known_compilers(cls, start_watchers=settings.WATCH_AND_UPDATE_STATIC_COMPILED_FILES):
+        logger.setLevel(logging.INFO)
         coffee_compiler = cls.get_coffee_compiler()
         scss_compiler = cls.get_scss_compiler()
         # Print this warning for coffee compiling
@@ -158,8 +159,16 @@ class StaticFilesCompiler(object):
             logger.debug('COMPILED: {0}'.format(file_in))
             return 1, 0
         except Exception as e:
-            logger.warning("WARNING: Failed to compile file: {0}".format(file_in))
-            logger.warning(e)
+            try:
+                os.remove(file_out)
+            except Exception as e:
+                logger.error('COMPILATION FAILED: it was not possible to remove previous file!')
+            try:
+                os.remove(file_out + '.src_md5')
+            except Exception as e:
+                logger.error('COMPILATION FAILED: it was not possible to remove previous MD5 file!')
+            logger.error("Failed to compile file: {0}".format(file_in))
+            logger.error(e)
             return 0, 0
 
     def get_compiled_path(self, dir_path):
