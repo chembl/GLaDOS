@@ -36,6 +36,7 @@ glados.useNameSpace 'glados.routers',
       glados.apps.Main.MainGladosApp.initFlexmatchSearchResults(searchTerm)
 
     initBrowser: (entityName, query, state) ->
+#      console.log
       glados.apps.Main.MainGladosApp.initBrowserForEntity(entityName, query, state)
 
     #-------------------------------------------------------------------------------------------------------------------
