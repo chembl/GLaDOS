@@ -297,7 +297,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       }
 
       @addFacetsToQuery(baseEsQuery, facetsFiltered, requestFacets, facetsFirstCall)
-      return $.extend(baseEsQuery, JSON.parse(customQuery))
+      $.extend(baseEsQuery, JSON.parse(customQuery))
+      @addStickyQuery(baseEsQuery)
+      return baseEsQuery
 
 
     # generates an object with the data necessary to do the ES request
@@ -347,11 +349,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         esQuery.query.bool.must = @getMeta('searchESQuery')
       # Includes the selected facets filter
       @addFacetsToQuery(esQuery, facetsFiltered, requestFacets, facetsFirstCall)
-
-      stickyQuery = @getMeta('sticky_query')
-      if stickyQuery?
-        esQuery.query.bool.must = [] unless esQuery.query.bool.must?
-        esQuery.query.bool.must.push stickyQuery
+      @addStickyQuery(esQuery)
 
       return esQuery
 
@@ -360,6 +358,19 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       defaultColumns = @getMeta('columns')
       contextualColumns = @getMeta('contextual_properties')
       return _.union(defaultColumns, contextualColumns)
+
+    addStickyQuery: (esQuery) ->
+
+      stickyQuery = @getMeta('sticky_query')
+
+      stickyQueryOBJ =
+        bool:
+          must: [stickyQuery]
+
+      if esQuery.query?
+        stickyQueryOBJ.bool.must.push esQuery.query
+
+      esQuery.query = stickyQueryOBJ
 
     addHighlightsToQuery: (esQuery)->
       esQuery.highlight = {
