@@ -10,6 +10,10 @@ describe "An elasticsearch collection initialised from a custom querystring", ->
     expect(esList.getMeta('key_name')).toBe("ACTIVITY")
     expect(esList.getMeta('custom_query')).toBe(customQueryString)
 
+  it 'Distinguishes between a query string and a full query', ->
+
+    expect(esList.customQueryIsFullQuery()).toBe(false)
+
   it 'Generates the correct request object', ->
 
     requestData = esList.getRequestData()

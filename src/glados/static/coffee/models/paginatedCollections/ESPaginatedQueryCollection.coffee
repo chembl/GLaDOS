@@ -278,6 +278,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           query_fgl
       }
 
+    customQueryIsFullQuery: ->
+
+      customQuery = @getMeta('custom_query')
+      try
+        JSON.parse(customQuery)
+        return true
+      catch error
+        return false
+
     # generates an object with the data necessary to do the ES request
     # customPage: set a customPage if you want a page different than the one set as current
     # the same for customPageSize
