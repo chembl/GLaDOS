@@ -244,6 +244,7 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'glados': {
+            'class': 'glados.logging_helper.MultiLineFormatter',
             'format': '%(asctime)s %(levelname)-8s %(message)s',
             'datefmt': '%Y-%m-%d %H:%M:%S'
         }
@@ -265,7 +266,7 @@ LOGGING = {
         },
         'glados.static_files_compiler': {
             'handlers': ['console'],
-            'level': logging.INFO,
+            'level': logging.DEBUG if WATCH_AND_UPDATE_STATIC_COMPILED_FILES else logging.INFO,
             'propagate': True,
         },
         'glados.es_connection': {
