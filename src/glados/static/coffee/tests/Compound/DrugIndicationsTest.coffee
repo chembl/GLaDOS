@@ -25,8 +25,8 @@ describe 'Drug Indications List', ->
 
     expect(queryStringGot).toBe(queryStringMustBe)
 
-    useCustomQueryStringMustBe = true
-    useCustomQueryStringGot = drugIndicationsList.getMeta('use_custom_query')
-    expect(useCustomQueryStringGot).toBe(useCustomQueryStringMustBe)
+    useCustomQueryMustBe = true
+    useCustomQueryGot = drugIndicationsList.getMeta('use_custom_query')
+    expect(useCustomQueryGot).toBe(useCustomQueryMustBe)
 
 

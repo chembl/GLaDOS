@@ -8,7 +8,7 @@ describe "A collection with a sticky query", ->
   list = undefined
   beforeAll ->
     list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFor(settings,
-      customQueryString=undefined, useCustomQueryString=false, itemsList=undefined, contextualProperties=undefined,
+      customQueryString=undefined, useCustomQuery=false, itemsList=undefined, contextualProperties=undefined,
       searchTerm=undefined, stickyQueryMustBe)
 
   it "sets the initial parameters", ->
@@ -29,7 +29,7 @@ describe "A collection with a sticky query", ->
     list = undefined
     beforeAll ->
       list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFor(settings,
-        customQueryString, useCustomQueryString=true, itemsList=undefined, contextualProperties=undefined,
+        customQueryString, useCustomQuery=true, itemsList=undefined, contextualProperties=undefined,
         searchTerm=undefined, stickyQueryMustBe)
 
     it 'sets the initial parameters', ->

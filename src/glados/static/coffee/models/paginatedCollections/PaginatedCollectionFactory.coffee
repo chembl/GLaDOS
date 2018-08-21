@@ -35,7 +35,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return list
 
-    getNewESResultsListFor: (esIndexSettings, customQuery='*', useCustomQueryString=false, itemsList,
+    getNewESResultsListFor: (esIndexSettings, customQuery='*', useCustomQuery=false, itemsList,
       contextualProperties, searchTerm, stickyQuery, searchESQuery, flavour) ->
 
       IndexESPagQueryCollection = glados.models.paginatedCollections.PaginatedCollectionBase\
@@ -80,7 +80,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             all_items_selected: false
             selection_exceptions: {}
             custom_query: customQuery
-            use_custom_query: useCustomQueryString
+            use_custom_query: useCustomQuery
             model: esIndexSettings.MODEL
             generator_items_list: itemsList
             contextual_properties: contextualProperties
@@ -232,40 +232,40 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     getNewESTargetsList: (customQueryString='*') ->
       list = @getNewESResultsListFor(glados.models.paginatedCollections.Settings.ES_INDEXES.TARGET,
-        customQueryString, useCustomQueryString=true)
+        customQueryString, useCustomQuery=true)
       return list
 
     getNewESCompoundsList: (customQuery='*', itemsList, contextualProperties,
       settings=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_COOL_CARDS,
       searchTerm) ->
 
-      list = @getNewESResultsListFor(settings, customQuery, useCustomQueryString=(not itemsList?), itemsList,
+      list = @getNewESResultsListFor(settings, customQuery, useCustomQuery=(not itemsList?), itemsList,
         contextualProperties, searchTerm)
       return list
 
     getNewESActivitiesList: (customQuery='*') ->
       list = @getNewESResultsListFor(glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.ACTIVITY,
-        customQuery, useCustomQueryString=true)
+        customQuery, useCustomQuery=true)
       return list
 
     getNewESDocumentsList: (customQuery='*') ->
       list = @getNewESResultsListFor(glados.models.paginatedCollections.Settings.ES_INDEXES.DOCUMENT,
-        customQuery, useCustomQueryString=true)
+        customQuery, useCustomQuery=true)
       return list
 
     getNewESCellsList: (customQuery='*') ->
       list = @getNewESResultsListFor(glados.models.paginatedCollections.Settings.ES_INDEXES.CELL_LINE,
-        customQuery, useCustomQueryString=true)
+        customQuery, useCustomQuery=true)
       return list
 
     getNewESTissuesList: (customQuery='*') ->
       list = @getNewESResultsListFor(glados.models.paginatedCollections.Settings.ES_INDEXES.TISSUE,
-        customQuery, useCustomQueryString=true)
+        customQuery, useCustomQuery=true)
       return list
 
     getNewESAssaysList: (customQuery='*') ->
       list = @getNewESResultsListFor(glados.models.paginatedCollections.Settings.ES_INDEXES.ASSAY,
-        customQuery, useCustomQueryString=true)
+        customQuery, useCustomQuery=true)
       return list
 
     getNewAssaysList: (filter='') ->
@@ -287,7 +287,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         term:
           "_metadata.drug.is_drug": true
 
-      list = @getNewESResultsListFor(settings, customQuery, useCustomQueryString=(not itemsList?), itemsList,
+      list = @getNewESResultsListFor(settings, customQuery, useCustomQuery=(not itemsList?), itemsList,
         contextualProperties, searchTerm, stickyQuery)
       return list
 
@@ -295,7 +295,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       queryString = "_metadata.all_molecule_chembl_ids:#{chemblID}"
       config = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.DRUG_INDICATIONS_LIST
-      list = @getNewESResultsListFor config, customQueryString=queryString, useCustomQueryString=true
+      list = @getNewESResultsListFor config, customQueryString=queryString, useCustomQuery=true
 
       return list
 
