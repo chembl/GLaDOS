@@ -287,6 +287,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       catch error
         return false
 
+    getPreparedCustomQuery: (pageSize, page) ->
+
+      customQuery = @getMeta('custom_query')
+
+      baseEsQuery = {
+        size: pageSize,
+        from: ((page - 1) * pageSize)
+      }
+      return $.extend(baseEsQuery, JSON.parse(customQuery))
+
     # generates an object with the data necessary to do the ES request
     # customPage: set a customPage if you want a page different than the one set as current
     # the same for customPageSize
@@ -295,6 +305,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       facets_filtered = true
       page = if customPage? then customPage else @getMeta('current_page')
       pageSize = if customPageSize? then customPageSize else @getMeta('page_size')
+
+      useCustomQuery = @getMeta('use_custom_query')
+      if useCustomQuery and @customQueryIsFullQuery()
+        return @getPreparedCustomQuery(pageSize, page)
 
       # Base Elastic query
       es_query = {
@@ -314,7 +328,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       # Custom query String query
       customQueryString = @getMeta('custom_query')
       generatorList = @getMeta('generator_items_list')
-      if @getMeta('use_custom_query')
+      if useCustomQuery
         es_query.query.bool.must = [{
 
           query_string:

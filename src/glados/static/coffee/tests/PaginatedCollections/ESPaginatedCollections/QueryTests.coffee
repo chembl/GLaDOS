@@ -22,8 +22,13 @@ describe "An elasticsearch collection initialised from a custom query (full)", -
 
     expect(esList.customQueryIsFullQuery()).toBe(true)
 
+  it 'Generates the correct request object', ->
 
-#  it 'Generates the correct request object', ->
+    requestDataMustBe = $.extend({"size": 24, "from":0}, esQuery)
+    requestDataGot = esList.getRequestData()
+    expect(_.isEqual(requestDataGot, requestDataMustBe)).toBe(true)
 
-#    requestData = esList.getRequestData()
-#    console.log 'requestData: ', requestData
+  it 'generates a state object', -> TestsUtils.testSavesList(esList,
+      pathInSettingsMustBe='ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_COOL_CARDS',
+      queryStringMustBe=JSON.stringify(esQuery),
+      useQueryStringMustBe=true)
