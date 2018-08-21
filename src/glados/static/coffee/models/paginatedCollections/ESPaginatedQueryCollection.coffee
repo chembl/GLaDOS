@@ -303,9 +303,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @addHighlightsToQuery(es_query)
 
       # Custom query String query
-      customQueryString = @getMeta('custom_query_string')
+      customQueryString = @getMeta('custom_query')
       generatorList = @getMeta('generator_items_list')
-      if @getMeta('use_custom_query_string')
+      if @getMeta('use_custom_query')
         es_query.query.bool.must = [{
 
           query_string:

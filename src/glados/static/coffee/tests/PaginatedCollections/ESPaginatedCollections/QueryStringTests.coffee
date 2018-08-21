@@ -8,7 +8,7 @@ describe "An elasticsearch collection initialised from a custom querystring", ->
     expect(esList.getMeta('id_name')).toBe("ESActivitity")
     expect(esList.getMeta('index')).toBe("/chembl_activity")
     expect(esList.getMeta('key_name')).toBe("ACTIVITY")
-    expect(esList.getMeta('custom_query_string')).toBe(customQueryString)
+    expect(esList.getMeta('custom_query')).toBe(customQueryString)
 
   it 'Generates the correct request object', ->
 

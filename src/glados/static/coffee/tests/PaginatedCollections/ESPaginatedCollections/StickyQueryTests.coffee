@@ -34,7 +34,7 @@ describe "A collection with a sticky query", ->
 
     it 'sets the initial parameters', ->
 
-      expect(list.getMeta('custom_query_string')).toBe(customQueryString)
+      expect(list.getMeta('custom_query')).toBe(customQueryString)
       stickyQueryGot = list.getMeta('sticky_query')
       expect(_.isEqual(stickyQueryMustBe, stickyQueryGot)).toBe(true)
 

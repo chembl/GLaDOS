@@ -12,8 +12,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       basicSettingsPath = stateObject.settings_path
       settings = glados.Utils.getNestedValue(glados.models.paginatedCollections.Settings, basicSettingsPath)
-      queryString = stateObject.custom_query_string
-      useQueryString = stateObject.use_custom_query_string
+      queryString = stateObject.custom_query
+      useQueryString = stateObject.use_custom_query
       searchESQuery = stateObject.searchESQuery
       stickyQuery = stateObject.sticky_query
       itemsList = stateObject.generator_items_list
@@ -35,7 +35,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return list
 
-    getNewESResultsListFor: (esIndexSettings, customQueryString='*', useCustomQueryString=false, itemsList,
+    getNewESResultsListFor: (esIndexSettings, customQuery='*', useCustomQueryString=false, itemsList,
       contextualProperties, searchTerm, stickyQuery, searchESQuery, flavour) ->
 
       IndexESPagQueryCollection = glados.models.paginatedCollections.PaginatedCollectionBase\
@@ -79,8 +79,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             default_view: esIndexSettings.DEFAULT_VIEW
             all_items_selected: false
             selection_exceptions: {}
-            custom_query_string: customQueryString
-            use_custom_query_string: useCustomQueryString
+            custom_query: customQuery
+            use_custom_query: useCustomQueryString
             model: esIndexSettings.MODEL
             generator_items_list: itemsList
             contextual_properties: contextualProperties
