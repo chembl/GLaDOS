@@ -39,43 +39,66 @@ class FileCompilerEventHandler(FileSystemEventHandler):
 
 class StaticFilesCompiler(object):
 
+    # ------------------------------------------------------------------------------------------------------------------
+    #  Predefined static files compilers
+    # ------------------------------------------------------------------------------------------------------------------
+
     GLADOS_ROOT = os.path.dirname(os.path.abspath(glados.__file__))
-    COFFEE_PATH = os.path.join(GLADOS_ROOT, 'static/coffee')
-    COFFEE_GEN_PATH = os.path.join(GLADOS_ROOT, 'static/js/coffee-gen')
 
     @staticmethod
     def compile_coffee_bare(file_path):
         return coffeescript.compile_file(file_path, bare=True)
 
-    COFFEE_COMPILE_FUNC = compile_coffee_bare
+    __COFFEE_COMPILER_INSTANCE = None
+    __SCSS_COMPILER_INSTANCE = None
 
-    SCSS_PATH = os.path.join(GLADOS_ROOT, 'static/scss')
-    SCSS_GEN_PATH = os.path.join(GLADOS_ROOT, 'static/css/scss-gen')
-    SCSS_COMPILE_FUNC = scss.Compiler().compile
+    @classmethod
+    def get_coffee_compiler(cls):
+        if cls.__COFFEE_COMPILER_INSTANCE is None:
+            cls.__COFFEE_COMPILER_INSTANCE = StaticFilesCompiler(
+                cls.compile_coffee_bare,
+                os.path.join(cls.GLADOS_ROOT, 'static/coffee'),
+                os.path.join(cls.GLADOS_ROOT, 'static/js/coffee-gen'),
+                '.coffee', '.js'
+            )
+        return cls.__COFFEE_COMPILER_INSTANCE
 
-    @staticmethod
-    def compile_coffee():
+    @classmethod
+    def get_scss_compiler(cls):
+        if cls.__SCSS_COMPILER_INSTANCE is None:
+            cls.__SCSS_COMPILER_INSTANCE = StaticFilesCompiler(
+                scss.Compiler().compile,
+                os.path.join(cls.GLADOS_ROOT, 'static/scss'),
+                os.path.join(cls.GLADOS_ROOT, 'static/css/scss-gen'),
+                '.scss', '.css', exclude_regex_str=r'^_.*'
+            )
+        return cls.__SCSS_COMPILER_INSTANCE
+
+    # ------------------------------------------------------------------------------------------------------------------
+    #  Compile all known compilers
+    # ------------------------------------------------------------------------------------------------------------------
+
+    @classmethod
+    def compile_all_known_compilers(cls, start_watchers=settings.WATCH_AND_UPDATE_STATIC_COMPILED_FILES):
+        coffee_compiler = cls.get_coffee_compiler()
+        scss_compiler = cls.get_scss_compiler()
+        # Print this warning for coffee compiling
         logger.warning(
             "If coffee static files compilation takes longer than 30 seconds, "
             "please install nodejs to increase compilation speed!"
         )
-        compiler = StaticFilesCompiler(
-            StaticFilesCompiler.COFFEE_COMPILE_FUNC,
-            StaticFilesCompiler.COFFEE_PATH,
-            StaticFilesCompiler.COFFEE_GEN_PATH,
-            '.coffee', '.js'
-        )
-        return compiler.compiled_all_correctly_on_start
+        compiled_all_coffee_correctly = coffee_compiler.self.compile_all()
+        compiled_all_scss_correctly = scss_compiler.self.compile_all()
+        if start_watchers:
+            # Change logging logging to DEBUG if the file watcher is running
+            logger.setLevel(logging.DEBUG)
+            coffee_compiler.start_watcher()
+            scss_compiler.start_watcher()
+        return compiled_all_coffee_correctly and compiled_all_scss_correctly
 
-    @staticmethod
-    def compile_scss():
-        compiler = StaticFilesCompiler(
-            StaticFilesCompiler.SCSS_COMPILE_FUNC,
-            StaticFilesCompiler.SCSS_PATH,
-            StaticFilesCompiler.SCSS_GEN_PATH,
-            '.scss', '.css', exclude_regex_str=r'^_.*'
-        )
-        return compiler.compiled_all_correctly_on_start
+    # ------------------------------------------------------------------------------------------------------------------
+    #  Constructor
+    # ------------------------------------------------------------------------------------------------------------------
 
     def __init__(self, compiler_function, src_path, out_path, ext_to_compile, ext_replace, exclude_regex_str=None):
         self.compiler_function = compiler_function
@@ -89,14 +112,10 @@ class StaticFilesCompiler(object):
         self.exclude_regex = None
         if self.exclude_regex_str:
             self.exclude_regex = re.compile(self.exclude_regex_str)
-        self.compiled_all_correctly_on_start = self.compile_all()
-        self.watch = settings.WATCH_AND_UPDATE_STATIC_COMPILED_FILES
-        if self.watch:
-            self.file_event_handler = FileCompilerEventHandler(self.watchdog_event_handler)
-            self.observer = Observer()
-            self.observer.daemon = True
-            logger.setLevel(logging.DEBUG)
-            self.start_watchers()
+
+    # ------------------------------------------------------------------------------------------------------------------
+    #  Methods
+    # ------------------------------------------------------------------------------------------------------------------
 
     def watchdog_event_handler(self, event):
         if not event.is_directory:
@@ -108,9 +127,12 @@ class StaticFilesCompiler(object):
                 if compilation_stats[1] == 1:
                     logger.error('THIS FILE SHOULD NOT BE PRECOMPILED!')
 
-    def start_watchers(self):
-        self.observer.schedule(self.file_event_handler, self.src_path, recursive=True)
-        self.observer.start()
+    def start_watcher(self):
+        file_event_handler = FileCompilerEventHandler(self.watchdog_event_handler)
+        observer = Observer()
+        observer.daemon = True
+        observer.schedule(file_event_handler, self.src_path, recursive=True)
+        observer.start()
 
     @staticmethod
     def should_skip_compile(md5_file_in, file_out):
