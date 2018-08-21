@@ -95,6 +95,7 @@ class StaticFilesCompiler(object):
             self.file_event_handler = FileCompilerEventHandler(self.watchdog_event_handler)
             self.observer = Observer()
             self.observer.daemon = True
+            logger.setLevel(logging.DEBUG)
             self.start_watchers()
 
     def watchdog_event_handler(self, event):
