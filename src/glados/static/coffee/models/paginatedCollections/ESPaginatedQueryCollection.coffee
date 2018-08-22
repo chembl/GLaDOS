@@ -292,7 +292,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # the same for customPageSize
     getRequestData: (customPage, customPageSize, requestFacets=false, facetsFirstCall) ->
 
-      console.log 'getRequestData: '
       # If facets are requested the facet filters are excluded from the query
       facetsFiltered = true
       page = if customPage? then customPage else @getMeta('current_page')
@@ -320,11 +319,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       @addSortingToQuery(esQuery)
 
-      console.log '@customQueryIsFullQuery(): ', customQueryIsFullQuery
       generatorList = @getMeta('generator_items_list')
       searchESQuery = @getMeta('searchESQuery')
       if useCustomQuery and not customQueryIsFullQuery
-        console.log 'add query string'
         @addCustomQueryString(esQuery)
       # Normal Search query
       else if generatorList?
@@ -358,23 +355,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     addStickyQuery: (esQuery) ->
 
-      console.log 'esQuery: ', esQuery
       stickyQuery = @getMeta('sticky_query')
-      if not stickyQuery?
-        return
-
-      if esQuery.query.bool.must?
-
-        esQuery.bool.must.push stickyQuery
-
-      if esQuery.query?
-
-        stickyQueryOBJ =
-          bool:
-            must: [stickyQuery]
-        stickyQueryOBJ.bool.must.push esQuery.query
-
-      esQuery.query = stickyQueryOBJ
+      if stickyQuery?
+        esQuery.query.bool.must = [] unless esQuery.query.bool.must?
+        esQuery.query.bool.must.push stickyQuery
 
     addHighlightsToQuery: (esQuery)->
       esQuery.highlight = {
