@@ -15,11 +15,7 @@ describe "An elasticsearch collection initialised from a custom query (full)", -
     }
   }
 
-  esList = undefined
-
-  beforeAll ->
-
-    esList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(JSON.stringify(esQuery))
+  esList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(JSON.stringify(esQuery))
 
   it 'Sets initial parameters', ->
     console.log 'esQuery: ', JSON.stringify(esQuery)
@@ -36,6 +32,7 @@ describe "An elasticsearch collection initialised from a custom query (full)", -
   it 'Generates the correct request object', ->
 
     console.log 'test generates correct request object'
+    console.log 'esList: ', esList
 
     requestDataMustBe = {
       "size": 24,
@@ -58,6 +55,7 @@ describe "An elasticsearch collection initialised from a custom query (full)", -
     }
 
     requestDataGot = esList.getRequestData()
+    requestDataGot.sort = []
     expect(_.isEqual(requestDataGot, requestDataMustBe)).toBe(true)
 
   it 'generates a state object', -> TestsUtils.testSavesList(esList,
