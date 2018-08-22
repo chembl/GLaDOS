@@ -31,9 +31,6 @@ describe "An elasticsearch collection initialised from a custom query (full)", -
 
   it 'Generates the correct request object', ->
 
-    console.log 'test generates correct request object'
-    console.log 'esList: ', esList
-
     requestDataMustBe = {
       "size": 24,
       "from": 0,
