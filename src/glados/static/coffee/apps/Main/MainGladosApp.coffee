@@ -153,7 +153,7 @@ glados.useNameSpace 'glados.apps.Main',
     # ------------------------------------------------------------------------------------------------------------------
     # Entity Browsers
     # ------------------------------------------------------------------------------------------------------------------
-    @initBrowserForEntity = (entityName, filter, state) ->
+    @initBrowserForEntity = (entityName, query, state) ->
 
       promise = @prepareContentFor('browser')
 
@@ -178,18 +178,18 @@ glados.useNameSpace 'glados.apps.Main',
             link: listConfig.BROWSE_LIST_URL()
           }
           {
-            label: filter
-            link: listConfig.BROWSE_LIST_URL(filter)
+            label: 'Query'
+            link: listConfig.BROWSE_LIST_URL(query)
             is_filter_link: true
             truncate: true
           }
         ]
 
         glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks,
-          longFilter=filter,
+          longFilter=query,
           hideShareButton=false,
-          longFilterURL=listConfig.BROWSE_LIST_URL(filter))
-        glados.apps.Browsers.BrowserApp.initBrowserForEntity(entityName, filter, state)
+          longFilterURL=listConfig.BROWSE_LIST_URL(query))
+        glados.apps.Browsers.BrowserApp.initBrowserForEntity(entityName, query, state)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Report Cards
