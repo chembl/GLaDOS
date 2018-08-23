@@ -24,7 +24,9 @@ SearchModel = Backbone.Model.extend
     url = ''
     if not fragmentOnly
       url += glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL
-    url += "search_results/#{tab}"
+      url += "search_results/#{tab}"
+    else
+      url += "#search_results/#{tab}"
     if searchTerm? and _.isString(searchTerm) and searchTerm.trim().length > 0
      url += "/query=" + encodeURIComponent(searchTerm)
     if currentState?
