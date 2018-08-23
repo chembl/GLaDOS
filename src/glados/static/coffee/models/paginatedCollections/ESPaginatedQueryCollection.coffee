@@ -763,14 +763,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       if totalRecords >= 10000 and not iNeedToGetOnlySome
         msg = 'It is still not supported to process 10000 items or more! (' + totalRecords + ' requested)'
         @DOWNLOAD_ERROR_STATE = true
-#        errorModalID = 'error-' + parseInt(Math.random() * 1000)
-#        $newModal = $(Handlebars.compile($('#Handlebars-Common-DownloadErrorModal').html())
-#          modal_id: errorModalID
-#          msg: msg
-#        )
-#        $('#BCK-GeneratedModalsContainer').append($newModal)
-#        $newModal.modal()
-#        $newModal.modal('open')
         return [jQuery.Deferred().reject(msg)]
       else if totalRecords == 0
         msg = 'There are no items to process'
