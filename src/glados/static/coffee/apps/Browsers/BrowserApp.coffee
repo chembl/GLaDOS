@@ -84,7 +84,8 @@ glados.useNameSpace 'glados.apps.Browsers',
 
       if state? and isFullState
         decodedState = JSON.parse(atob(state))
-        list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFromState(decodedState)
+        listState = decodedState.list
+        list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFromState(listState)
       else
         initListFunction = @entityListsInitFunctions[entityName]
         list = initListFunction(query)
