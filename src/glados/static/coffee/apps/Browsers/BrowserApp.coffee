@@ -36,7 +36,7 @@ glados.useNameSpace 'glados.apps.Browsers',
       drugs: 'Drugs'
       activities: 'Activities'
 
-    @initBrowserForEntity = (entityName, query, state) ->
+    @initBrowserForEntity = (entityName, query, state, isFullState=false) ->
 
       $mainContainer = $('.BCK-main-container')
       $mainContainer.show()
@@ -82,8 +82,12 @@ glados.useNameSpace 'glados.apps.Browsers',
       $matrixFSContainer.hide()
       # -----------------learn to handle the state!----------------
 
-      initListFunction = @entityListsInitFunctions[entityName]
-      list = initListFunction(query)
+      if state? and isFullState
+        decodedState = JSON.parse(atob(state))
+        list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFromState(decodedState)
+      else
+        initListFunction = @entityListsInitFunctions[entityName]
+        list = initListFunction(query)
 
       $browserContainer = $browserWrapper.find('.BCK-BrowserContainer')
 
