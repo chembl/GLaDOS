@@ -153,7 +153,7 @@ glados.useNameSpace 'glados.apps.Main',
     # ------------------------------------------------------------------------------------------------------------------
     # Entity Browsers
     # ------------------------------------------------------------------------------------------------------------------
-    @initBrowserForEntity = (entityName, query, state) ->
+    @initBrowserForEntity = (entityName, query, state, isFullState=false) ->
 
       promise = @prepareContentFor('browser')
 
@@ -189,7 +189,7 @@ glados.useNameSpace 'glados.apps.Main',
           longFilter=query,
           hideShareButton=false,
           longFilterURL=listConfig.BROWSE_LIST_URL(query))
-        glados.apps.Browsers.BrowserApp.initBrowserForEntity(entityName, query, state)
+        glados.apps.Browsers.BrowserApp.initBrowserForEntity(entityName, query, state, isFullState)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Report Cards
