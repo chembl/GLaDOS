@@ -87,7 +87,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         prepend_br: false
         total_records: 0
         label: 'All Results'
-        url_path: glados.routers.MainGladosRouter.getSearchURL(null, @model.get('queryString'), null)
+        url_path: SearchModel.getInstance().getSearchURL(null, @model.get('queryString'), null)
         selected: if @selected_es_entity then false else true
       })
 
@@ -105,7 +105,7 @@ glados.useNameSpace 'glados.views.SearchResults',
           total_records: totalRecords
           label:resourceLabel
           key: key_i
-          url_path: glados.routers.MainGladosRouter.getSearchURL(key_i, @model.get('queryString'), null)
+          url_path: SearchModel.getInstance().getSearchURL(key_i, @model.get('queryString'), null)
           selected: @selected_es_entity == key_i
         })
 

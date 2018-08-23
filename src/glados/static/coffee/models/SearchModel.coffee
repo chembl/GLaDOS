@@ -122,7 +122,7 @@ SearchModel = Backbone.Model.extend
               suggestions.push docsSuggested[0]
             else
               suggestionI = docsSuggested[0]
-              suggestionI.chembl_id_link.href = glados.routers.MainGladosRouter.getSearchURL(
+              suggestionI.chembl_id_link.href = SearchModel.getInstance().getSearchURL(
                 suggestionI.entityKey, suggestionI.text
               )
               suggestionI.chembl_id_link.text = 'Multiple '+suggestionI.entityLabel
