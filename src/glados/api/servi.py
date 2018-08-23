@@ -1,14 +1,13 @@
+from django.core import serializers
 from django.http import HttpResponse
 import cx_Oracle
 import time
+from glados.models import Country
+import json
 
 def test(request):
     
-    dsnStr = cx_Oracle.makedsn("oradb", 1521, "xe")
-    connection = cx_Oracle.connect(user="hr", password="hr", dsn=dsnStr)
-    cursor = connection.cursor()
-    cursor.execute("select sysdate from dual")
-    today, = cursor.fetchone()
+    countries = Country.objects.all()
+    response = serializers.serialize("json", countries)
     
-    
-    return HttpResponse('hello {}'.format(today))
+    return HttpResponse(response, content_type="application/json")

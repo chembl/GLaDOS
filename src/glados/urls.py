@@ -14,8 +14,6 @@ from django.http import HttpResponse
 
 from django.views.generic.base import RedirectView
 
-
-
 common_urls = [
   # --------------------------------------------------------------------------------------------------------------------
   # Translation for Javascript

@@ -126,9 +126,15 @@ TEMPLATES = [
 # ----------------------------------------------------------------------------------------------------------------------
 
 DATABASES = {
-  'default': {
+  'ligth': {
     'ENGINE': 'django.db.backends.sqlite3',
     'NAME': os.path.join(GLADOS_ROOT, 'db/db.sqlite3'),
+  },
+  'default': {
+    'ENGINE':   'django.db.backends.oracle',
+    'NAME':     'oradb/xe',
+    'USER':     'hr',
+    'PASSWORD': 'hr',
   }
 }
 
