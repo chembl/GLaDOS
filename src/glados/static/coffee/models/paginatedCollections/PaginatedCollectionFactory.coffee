@@ -12,8 +12,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       basicSettingsPath = stateObject.settings_path
       settings = glados.Utils.getNestedValue(glados.models.paginatedCollections.Settings, basicSettingsPath)
-      queryString = stateObject.custom_query_string
-      useQueryString = stateObject.use_custom_query_string
+      queryString = stateObject.custom_query
+      useQueryString = stateObject.use_custom_query
       searchESQuery = stateObject.searchESQuery
       stickyQuery = stateObject.sticky_query
       itemsList = stateObject.generator_items_list
@@ -35,7 +35,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return list
 
-    getNewESResultsListFor: (esIndexSettings, customQueryString='*', useCustomQueryString=false, itemsList,
+    getNewESResultsListFor: (esIndexSettings, customQuery='*', useCustomQuery=false, itemsList,
       contextualProperties, searchTerm, stickyQuery, searchESQuery, flavour) ->
 
       IndexESPagQueryCollection = glados.models.paginatedCollections.PaginatedCollectionBase\
@@ -79,8 +79,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             default_view: esIndexSettings.DEFAULT_VIEW
             all_items_selected: false
             selection_exceptions: {}
-            custom_query_string: customQueryString
-            use_custom_query_string: useCustomQueryString
+            custom_query: customQuery
+            use_custom_query: useCustomQuery
             model: esIndexSettings.MODEL
             generator_items_list: itemsList
             contextual_properties: contextualProperties
@@ -96,7 +96,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             custom_possible_card_sizes_struct: esIndexSettings.POSSIBLE_CARD_SIZES_STRUCT
             settings_path: esIndexSettings.PATH_IN_SETTINGS
             searchESQuery: searchESQuery
-            enable_activities_link_for_selected_entities: esIndexSettings.ENABLE_ACTIVITIES_LINK_FOR_SELECTED_ENTITIES
+            links_to_other_entities: esIndexSettings.LINKS_TO_OTHER_ENTITIES
 
           if @getMeta('enable_similarity_maps') or @getMeta('enable_substructure_highlighting')
             @initReferenceStructureFunctions()
@@ -232,41 +232,40 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     getNewESTargetsList: (customQueryString='*') ->
       list = @getNewESResultsListFor(glados.models.paginatedCollections.Settings.ES_INDEXES.TARGET,
-        customQueryString, useCustomQueryString=true)
+        customQueryString, useCustomQuery=true)
       return list
 
-    getNewESCompoundsList: (customQueryString='*', itemsList, contextualProperties,
+    getNewESCompoundsList: (customQuery='*', itemsList, contextualProperties,
       settings=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_COOL_CARDS,
       searchTerm) ->
 
-
-      list = @getNewESResultsListFor(settings, customQueryString, useCustomQueryString=(not itemsList?), itemsList,
+      list = @getNewESResultsListFor(settings, customQuery, useCustomQuery=(not itemsList?), itemsList,
         contextualProperties, searchTerm)
       return list
 
-    getNewESActivitiesList: (customQueryString='*') ->
+    getNewESActivitiesList: (customQuery='*') ->
       list = @getNewESResultsListFor(glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.ACTIVITY,
-        customQueryString, useCustomQueryString=true)
+        customQuery, useCustomQuery=true)
       return list
 
-    getNewESDocumentsList: (customQueryString='*') ->
+    getNewESDocumentsList: (customQuery='*') ->
       list = @getNewESResultsListFor(glados.models.paginatedCollections.Settings.ES_INDEXES.DOCUMENT,
-        customQueryString, useCustomQueryString=true)
+        customQuery, useCustomQuery=true)
       return list
 
-    getNewESCellsList: (customQueryString='*') ->
+    getNewESCellsList: (customQuery='*') ->
       list = @getNewESResultsListFor(glados.models.paginatedCollections.Settings.ES_INDEXES.CELL_LINE,
-        customQueryString, useCustomQueryString=true)
+        customQuery, useCustomQuery=true)
       return list
 
-    getNewESTissuesList: (customQueryString='*') ->
+    getNewESTissuesList: (customQuery='*') ->
       list = @getNewESResultsListFor(glados.models.paginatedCollections.Settings.ES_INDEXES.TISSUE,
-        customQueryString, useCustomQueryString=true)
+        customQuery, useCustomQuery=true)
       return list
 
-    getNewESAssaysList: (customQueryString='*') ->
+    getNewESAssaysList: (customQuery='*') ->
       list = @getNewESResultsListFor(glados.models.paginatedCollections.Settings.ES_INDEXES.ASSAY,
-        customQueryString, useCustomQueryString=true)
+        customQuery, useCustomQuery=true)
       return list
 
     getNewAssaysList: (filter='') ->
@@ -280,7 +279,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return list
 
-    getNewESDrugsList: (customQueryString='*', itemsList, contextualProperties,
+    getNewESDrugsList: (customQuery='*', itemsList, contextualProperties,
       settings=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.DRUGS_LIST,
       searchTerm) ->
 
@@ -288,7 +287,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         term:
           "_metadata.drug.is_drug": true
 
-      list = @getNewESResultsListFor(settings, customQueryString, useCustomQueryString=(not itemsList?), itemsList,
+      list = @getNewESResultsListFor(settings, customQuery, useCustomQuery=(not itemsList?), itemsList,
         contextualProperties, searchTerm, stickyQuery)
       return list
 
@@ -296,7 +295,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       queryString = "_metadata.all_molecule_chembl_ids:#{chemblID}"
       config = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.DRUG_INDICATIONS_LIST
-      list = @getNewESResultsListFor config, customQueryString=queryString, useCustomQueryString=true
+      list = @getNewESResultsListFor config, customQueryString=queryString, useCustomQuery=true
 
       return list
 

@@ -278,17 +278,30 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           query_fgl
       }
 
+    customQueryIsFullQuery: ->
+
+      customQuery = @getMeta('custom_query')
+      try
+        JSON.parse(customQuery)
+        return true
+      catch error
+        return false
+
     # generates an object with the data necessary to do the ES request
     # customPage: set a customPage if you want a page different than the one set as current
     # the same for customPageSize
-    getRequestData: (customPage, customPageSize, request_facets=false, facets_first_call) ->
+    getRequestData: (customPage, customPageSize, requestFacets=false, facetsFirstCall) ->
+
       # If facets are requested the facet filters are excluded from the query
-      facets_filtered = true
+      facetsFiltered = true
       page = if customPage? then customPage else @getMeta('current_page')
       pageSize = if customPageSize? then customPageSize else @getMeta('page_size')
 
-      # Base Elastic query
-      es_query = {
+      useCustomQuery = @getMeta('use_custom_query')
+      customQueryIsFullQuery = @customQueryIsFullQuery()
+
+      # Base Elasticsearch query
+      esQuery = {
         size: pageSize,
         from: ((page - 1) * pageSize)
         _source:
@@ -299,53 +312,53 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             must: []
             filter: []
       }
-      @addSortingToQuery(es_query)
-      @addHighlightsToQuery(es_query)
 
-      # Custom query String query
-      customQueryString = @getMeta('custom_query_string')
+      if useCustomQuery and customQueryIsFullQuery
+        customQuery = JSON.parse(@getMeta('custom_query'))
+        esQuery = $.extend(esQuery, customQuery)
+
+      @addSortingToQuery(esQuery)
+
       generatorList = @getMeta('generator_items_list')
-      if @getMeta('use_custom_query_string')
-        es_query.query.bool.must = [{
-
-          query_string:
-            analyze_wildcard: true
-            query: customQueryString
-        }]
+      searchESQuery = @getMeta('searchESQuery')
+      if useCustomQuery and not customQueryIsFullQuery
+        @addCustomQueryString(esQuery)
       # Normal Search query
       else if generatorList?
         glq = @getQueryForGeneratorList()
-        es_query.query.bool.must.push glq.must_query
-        es_query.query.bool.filter.push glq.filter_query
-      else
-        es_query.query.bool.must = @getMeta('searchESQuery')
+        esQuery.query.bool.must.push glq.must_query
+        esQuery.query.bool.filter.push glq.filter_query
+      else if searchESQuery?
+        esQuery.query.bool.must = searchESQuery
+        @addHighlightsToQuery(esQuery)
       # Includes the selected facets filter
-      if facets_filtered
-        filter_query = @getFacetFilterQuery()
-        if _.isArray(filter_query) and filter_query.length > 0
-          es_query.query.bool.filter = _.union es_query.query.bool.filter, filter_query
-        else if filter_query? and not _.isArray(filter_query)
-          es_query.query.bool.filter.push filter_query
+      @addFacetsToQuery(esQuery, facetsFiltered, requestFacets, facetsFirstCall)
+      @addStickyQuery(esQuery)
 
-      if request_facets
-        if not facets_first_call?
-          throw "ERROR! If the request includes the facets the parameter facets_first_call should be defined!"
-        facets_query = @getFacetsGroupsAggsQuery(facets_first_call)
-        if facets_query
-          es_query.aggs = facets_query
-
-      stickyQuery = @getMeta('sticky_query')
-      if stickyQuery?
-        es_query.query.bool.must = [] unless es_query.query.bool.must?
-        es_query.query.bool.must.push stickyQuery
-
-      return es_query
+      return esQuery
 
     getAllColumns: ->
 
       defaultColumns = @getMeta('columns')
       contextualColumns = @getMeta('contextual_properties')
       return _.union(defaultColumns, contextualColumns)
+
+    addCustomQueryString: (esQuery) ->
+
+      customQuery = @getMeta('custom_query')
+
+      esQuery.query.bool.must = [{
+        query_string:
+          analyze_wildcard: true
+          query: customQuery
+      }]
+
+    addStickyQuery: (esQuery) ->
+
+      stickyQuery = @getMeta('sticky_query')
+      if stickyQuery?
+        esQuery.query.bool.must = [] unless esQuery.query.bool.must?
+        esQuery.query.bool.must.push stickyQuery
 
     addHighlightsToQuery: (esQuery)->
       esQuery.highlight = {
@@ -359,6 +372,23 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         fields:
           '*': {}
       }
+
+    addFacetsToQuery: (esQuery, facetsFiltered, requestFacets, facetsFirstCall) ->
+
+      # Includes the selected facets filter
+      if facetsFiltered
+        filter_query = @getFacetFilterQuery()
+        if _.isArray(filter_query) and filter_query.length > 0
+          esQuery.query.bool.filter = _.union esQuery.query.bool.filter, filter_query
+        else if filter_query? and not _.isArray(filter_query)
+          esQuery.query.bool.filter.push filter_query
+
+      if requestFacets
+        if not facetsFirstCall?
+          throw "ERROR! If the request includes the facets the parameter facets_first_call should be defined!"
+        facets_query = @getFacetsGroupsAggsQuery(facetsFirstCall)
+        if facets_query
+          esQuery.aggs = facets_query
 
     addSortingToQuery: (esQuery) ->
       sortList = []

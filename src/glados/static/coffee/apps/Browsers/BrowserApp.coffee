@@ -36,7 +36,7 @@ glados.useNameSpace 'glados.apps.Browsers',
       drugs: 'Drugs'
       activities: 'Activities'
 
-    @initBrowserForEntity = (entityName, filter, state) ->
+    @initBrowserForEntity = (entityName, query, state, isFullState=false) ->
 
       $mainContainer = $('.BCK-main-container')
       $mainContainer.show()
@@ -64,7 +64,7 @@ glados.useNameSpace 'glados.apps.Browsers',
             aggList = ['molecule_chembl_id', 'target_chembl_id']
 
           ctm = new glados.models.Activity.ActivityAggregationMatrix
-            query_string: filter
+            query_string: query
             filter_property: filterProperty
             aggregations: aggList
 
@@ -82,8 +82,13 @@ glados.useNameSpace 'glados.apps.Browsers',
       $matrixFSContainer.hide()
       # -----------------learn to handle the state!----------------
 
-      initListFunction = @entityListsInitFunctions[entityName]
-      list = initListFunction(filter)
+      if state? and isFullState
+        decodedState = JSON.parse(atob(state))
+        listState = decodedState.list
+        list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFromState(listState)
+      else
+        initListFunction = @entityListsInitFunctions[entityName]
+        list = initListFunction(query)
 
       $browserContainer = $browserWrapper.find('.BCK-BrowserContainer')
 

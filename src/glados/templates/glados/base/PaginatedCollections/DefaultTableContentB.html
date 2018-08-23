@@ -1,3 +1,5 @@
+<div class="paginated-collection">
+
 <div class="row BCK-PreloaderContainer">
   {% block card_loaders %}
   {% include "glados/base/card_loaders.html" %}
@@ -26,7 +28,7 @@
   </div>
 </div>
 
-<table class="BCK-items-container compact-table scrollable striped hide-on-small-only ebi-links"
+<table class="BCK-items-container pg-table compact-table scrollable striped hide-on-small-only ebi-links"
        data-hb-template="Handlebars-Common-Paginated-Row-large"
        data-hb-header-template="Handlebars-Common-Paginated-Header-large">
 
@@ -48,3 +50,5 @@
    <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
 
 </ul>
+
+</div>

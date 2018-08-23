@@ -14,6 +14,12 @@ from django.http import HttpResponse
 
 from django.views.generic.base import RedirectView
 
+import glados.es_connection
+
+# Setup Elastic Search Connection here only once
+glados.es_connection.setup_glados_es_connection()
+
+
 common_urls = [
   # --------------------------------------------------------------------------------------------------------------------
   # Translation for Javascript
@@ -68,6 +74,10 @@ common_urls = [
   url(r'^faqs/$',
       RedirectView.as_view(url='https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions',
                            permanent=True), name='faqs'),
+
+  url(r'^faqs_browsing_related_entities/$',
+      RedirectView.as_view(url='https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions/chembl-interface-questions#browsing-related-entities',
+                           permanent=True), name='faqs_browsing_related_entities'),
 
   url(r'^contact_us/$',
       RedirectView.as_view(url='https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions/general-questions#how-do-i-report-errors-or-make-suggestions-for-the-interface',
@@ -207,4 +217,3 @@ urlpatterns = [url(r'^'+settings.SERVER_BASE_PATH, include(common_urls))]
 # ----------------------------------------------------------------------------------------------------------------------
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-

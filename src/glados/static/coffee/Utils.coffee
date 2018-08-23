@@ -796,7 +796,6 @@ glados.useNameSpace 'glados',
           $clickedElem.qtip('api').show()
           $clickedElem.attr('data-qtip-configured', 'yes')
 
-
       URLNeedsShortening: (url='', customMaxLength) ->
 
         maxLength = customMaxLength

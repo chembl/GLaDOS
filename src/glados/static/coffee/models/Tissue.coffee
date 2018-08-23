@@ -2,6 +2,7 @@ glados.useNameSpace 'glados.models',
   Tissue: Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
     entityName: 'Tissue'
+    entityNamePlural: 'Tissues'
     idAttribute:'tissue_chembl_id'
     defaults:
       fetch_from_elastic: true

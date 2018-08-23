@@ -21,12 +21,12 @@ describe 'Drug Indications List', ->
     drugIndicationsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugIndicationsList(testChemblID)
 
     queryStringMustBe = "_metadata.all_molecule_chembl_ids:#{testChemblID}"
-    queryStringGot = drugIndicationsList.getMeta('custom_query_string')
+    queryStringGot = drugIndicationsList.getMeta('custom_query')
 
     expect(queryStringGot).toBe(queryStringMustBe)
 
-    useCustomQueryStringMustBe = true
-    useCustomQueryStringGot = drugIndicationsList.getMeta('use_custom_query_string')
-    expect(useCustomQueryStringGot).toBe(useCustomQueryStringMustBe)
+    useCustomQueryMustBe = true
+    useCustomQueryGot = drugIndicationsList.getMeta('use_custom_query')
+    expect(useCustomQueryGot).toBe(useCustomQueryMustBe)
 
 

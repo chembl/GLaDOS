@@ -48,5 +48,5 @@ glados.useNameSpace 'glados.views.Target',
         $linkToActivities = $(@el).find('.BCK-all-sources-link')
         glados.Utils.fillContentForElement $linkToActivities,
           link_text: 'See all bioactivities for target ' + @target_chembl_id + ' used in this visualisation'
-          url: Activity.getActivitiesListURL(@collection.getMeta('custom_query_string'))
+          url: Activity.getActivitiesListURL(@collection.getMeta('custom_query'))
 

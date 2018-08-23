@@ -27,6 +27,8 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       ],
       # Default Hidden
       [
+        '_metadata.protein_classification.l3',
+        '_metadata.protein_classification.l4',
       ],
       [
 

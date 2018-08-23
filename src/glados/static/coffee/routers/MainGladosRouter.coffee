@@ -7,6 +7,8 @@ glados.useNameSpace 'glados.routers',
       'similarity_search_results/:search_term/:threshold': 'initSimilaritySearchResults'
       'flexmatch_search_results/:search_term': 'initFlexmatchSearchResults'
       'browse/:entity_name(/filter/:filter)(/state/:state)': 'initBrowser'
+      'browse/:entity_name(/query/:query)(/state/:state)': 'initBrowser'
+      'browse/:entity_name(/full_state/:encoded_state)': 'initBrowserFullState'
       'report_card/:entity_name/:chembl_id': 'initReportCard'
 
     execute: (callback, args, name) ->
@@ -34,8 +36,12 @@ glados.useNameSpace 'glados.routers',
     initFlexmatchSearchResults: (searchTerm) ->
       glados.apps.Main.MainGladosApp.initFlexmatchSearchResults(searchTerm)
 
-    initBrowser: (entityName, filter, state) ->
-      glados.apps.Main.MainGladosApp.initBrowserForEntity(entityName, filter, state)
+    initBrowser: (entityName, query, state) ->
+      glados.apps.Main.MainGladosApp.initBrowserForEntity(entityName, query, state)
+
+    initBrowserFullState: (entityName, encodedState) ->
+      glados.apps.Main.MainGladosApp.initBrowserForEntity(entityName, query=undefined, state=encodedState,
+        isFullState=true)
 
     #-------------------------------------------------------------------------------------------------------------------
     # Report Cards

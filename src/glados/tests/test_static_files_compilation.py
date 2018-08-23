@@ -14,9 +14,9 @@ class StaticFilesCompilerTester(unittest.TestCase):
         print('Test {0}'.format('Passed!' if self._outcome.success else 'Failed!'))
 
     def test_compiling_scss(self):
-        compiled_correctly = glados.static_files_compiler.StaticFilesCompiler.compile_scss()
+        compiled_correctly = glados.static_files_compiler.StaticFilesCompiler.get_scss_compiler().compile_all()
         self.assertTrue(compiled_correctly, 'Some SCSS files failed to compile correctly!')
 
     def test_compiling_coffee(self):
-        compiled_correctly = glados.static_files_compiler.StaticFilesCompiler.compile_coffee()
+        compiled_correctly = glados.static_files_compiler.StaticFilesCompiler.get_coffee_compiler().compile_all()
         self.assertTrue(compiled_correctly, 'Some CoffeeScript files failed to compile correctly!')

@@ -1,6 +1,7 @@
 Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
   entityName: 'Compound'
+  entityNamePlural: 'Compounds'
   idAttribute: 'molecule_chembl_id'
   defaults:
     fetch_from_elastic: true
@@ -35,11 +36,10 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
   isParent: ->
 
-    molHierarchy = @.get('molecule_hierarchy')
-    isParent = false
-    if molHierarchy?
-      isParent = molHierarchy.molecule_chembl_id == molHierarchy.parent_chembl_id
-    return isParent
+    metadata = @get('_metadata')
+    if not metadata.hierarchy.parent?
+      return true
+    else return false
 
   # --------------------------------------------------------------------------------------------------------------------
   # Sources
@@ -136,6 +136,8 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
       additionalTnsList = _.difference(tnsFromChildren, uniqueTradeNamesList)
 
     else
+
+      console.log 'metadata: ', metadata
       rawSynonymsAndTradeNamesFromParent = _.values(metadata.hierarchy.parent.synonyms)
       [synsFromParent, tnsFromParent] = @separateSynonymsAndTradeNames(rawSynonymsAndTradeNamesFromParent)
 
@@ -716,7 +718,11 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
   #---------------------------------------------------------------------------------------------------------------------
   # instance urls
   #---------------------------------------------------------------------------------------------------------------------
-  getSimilaritySearchURL: (threshold=glados.Settings.DEFAULT_SIMILARITY_THRESHOLD) -> "/g/#similarity_search_results/#{@get('id')}/#{threshold}"
+  getSimilaritySearchURL: (threshold=glados.Settings.DEFAULT_SIMILARITY_THRESHOLD) ->
+
+    glados.Settings.SIMILARITY_URL_GENERATOR
+      term: @get('id')
+      threshold: threshold
 
 #-----------------------------------------------------------------------------------------------------------------------
 # 3D SDF Constants
