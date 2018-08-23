@@ -61,8 +61,8 @@ glados.useNameSpace 'glados.routers',
     #-------------------------------------------------------------------------------------------------------------------
     # SEARCH HELPERS
     #-------------------------------------------------------------------------------------------------------------------
-
-    getSearchURL: (esEntityKey, searchTerm, currentState, fragmentOnly=false)->
+    getSearchURL: (esEntityKey, searchTerm, currentState, fragmentOnly=false) ->
+      console.log 'getSearchURL: ', esEntityKey, searchTerm, currentState, fragmentOnly
       tab = 'all'
       if esEntityKey? and _.has(glados.Settings.ES_KEY_2_SEARCH_PATH, esEntityKey)
         tab = glados.Settings.ES_KEY_2_SEARCH_PATH[esEntityKey]
