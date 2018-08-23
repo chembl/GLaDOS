@@ -17,21 +17,17 @@ SearchModel = Backbone.Model.extend
   # --------------------------------------------------------------------------------------------------------------------
   # URLS generation
   # --------------------------------------------------------------------------------------------------------------------
-  getSearchURL: (esEntityKey, searchTerm, currentState, fragmentOnly=false)->
+  getSearchURL: (esEntityKey, searchTerm, currentState, fragmentOnly=false) ->
+
     tab = 'all'
-    if esEntityKey? and _.has(glados.Settings.ES_KEY_2_SEARCH_PATH, esEntityKey)
+    if esEntityKey? and glados.Settings.ES_KEY_2_SEARCH_PATH[esEntityKey]?
       tab = glados.Settings.ES_KEY_2_SEARCH_PATH[esEntityKey]
-    url = ''
-    if not fragmentOnly
-      url += glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL
-      url += "search_results/#{tab}"
-    else
-      url += "#search_results/#{tab}"
-    if searchTerm? and _.isString(searchTerm) and searchTerm.trim().length > 0
-     url += "/query=" + encodeURIComponent(searchTerm)
-    if currentState?
-     url += "/state=#{currentState}"
-    return url
+
+    return glados.Settings.SEARCH_URL_GENERATOR
+      base_url: if fragmentOnly then '#' else glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL
+      tab: tab
+      query: if searchTerm? then encodeURIComponent(searchTerm) else undefined
+      state: currentState
 
   # --------------------------------------------------------------------------------------------------------------------
   # Models

@@ -1,6 +1,6 @@
 describe 'Search URLs', ->
 
-  entityKeys = _.keys(glados.Settings.SEARCH_PATH_2_ES_KEY)
+  entityKeys = _.keys(glados.Settings.ES_KEY_2_SEARCH_PATH)
   entityKeys.unshift('all')
   for entityKey in entityKeys
 

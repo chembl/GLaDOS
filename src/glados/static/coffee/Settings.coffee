@@ -316,6 +316,11 @@ glados.loadSearchResultsURLS = ()->
     "similarity_search_results/{{{term}}}/{{{threshold}}}"
   glados.Settings.SIMILARITY_URL_GENERATOR = Handlebars.compile(glados.Settings.SIMILARITY_URL_TEMPLATE)
 
+  glados.Settings.SEARCH_URL_TEMPLATE = "{{base_url}}search_results/{{tab}}" +
+    "{{#if query}}/query={{query}}{{/if}}" +
+    "{{#if state}}/state={{state}}{{/if}}"
+  glados.Settings.SEARCH_URL_GENERATOR = Handlebars.compile(glados.Settings.SEARCH_URL_TEMPLATE)
+
 # Logs the JavaScript environment details
 glados.logGladosSettings = () ->
   if glados.Settings.DEBUG
