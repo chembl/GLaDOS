@@ -19,6 +19,7 @@ SearchModel = Backbone.Model.extend
   # --------------------------------------------------------------------------------------------------------------------
   getSearchURL: (esEntityKey, searchTerm, currentState, fragmentOnly=false) ->
 
+
     tab = 'all'
     if esEntityKey? and glados.Settings.ES_KEY_2_SEARCH_PATH[esEntityKey]?
       tab = glados.Settings.ES_KEY_2_SEARCH_PATH[esEntityKey]
