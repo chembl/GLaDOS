@@ -280,6 +280,7 @@ SearchModel = Backbone.Model.extend
 # ----------------------------------------------------------------------------------------------------------------------
 SearchModel.EVENTS =
   SEARCH_TERM_HAS_CHANGED: 'SEARCH_TERM_HAS_CHANGED'
+  SEARCH_PARAMS_HAVE_CHANGED: 'SEARCH_PARAMS_HAVE_CHANGED'
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Singleton pattern

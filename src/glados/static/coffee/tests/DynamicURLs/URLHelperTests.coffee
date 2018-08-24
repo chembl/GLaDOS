@@ -6,6 +6,7 @@ describe 'URL Helper', ->
   # ------------------------------------------------------------------------------------------------------------------
   testInitialisation = (currentMode) ->
 
+    console.log 'currentMode: ', currentMode
     exceptionThrown = false
     try
       glados.helpers.URLHelper.initInstance()
@@ -28,14 +29,36 @@ describe 'URL Helper', ->
     expect(modeGot).toBe(currentMode)
 
 
+  # ------------------------------------------------------------------------------------------------------------------
+  # Specific tests
+  # ------------------------------------------------------------------------------------------------------------------
   describe 'Search Results Mode', ->
 
     currentMode = glados.helpers.URLHelper.MODES.SEARCH_RESULTS
     it 'initialises the instance', -> testInitialisation(currentMode)
 
+    urlHelper = undefined
+
+    beforeAll ->
+      glados.helpers.URLHelper.initInstance(currentMode, true)
+      urlHelper = glados.helpers.URLHelper.getInstance()
+
+    it 'updates the search url', ->
+
+      esEntityKey = 'compounds'
+      searchTerm = 'dopamine'
+      currentState = 'someState'
+      [breadcrumbs, urlGot] = urlHelper.updateSearchURL(esEntityKey, searchTerm, currentState)
+      urlMustBe = '#search_results/all/query=dopamine/state=someState'
+
+      expect(urlMustBe).toBe(urlGot)
+
   describe 'Entity Browsing Mode', ->
 
     currentMode = glados.helpers.URLHelper.MODES.BROWSE_ENTITY
     it 'initialises the instance', -> testInitialisation(currentMode)
+    beforeAll ->
+      glados.helpers.URLHelper.initInstance(currentMode, true)
+    it 'works', ->
 
 
