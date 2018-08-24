@@ -3,6 +3,7 @@ glados.useNameSpace 'glados.helpers',
 
     @MODES:
       SEARCH_RESULTS: 'SEARCH_RESULTS'
+      BROWSE_ENTITY: 'BROWSE_ENTITY'
 
     constructor: (@mode) ->
 
