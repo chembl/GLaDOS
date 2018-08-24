@@ -160,13 +160,17 @@ class StaticFilesCompiler(object):
             return 1, 0
         except Exception as e:
             try:
-                os.remove(file_out)
-            except Exception as e:
+                if os.path.isfile(file_out):
+                    os.remove(file_out)
+            except Exception as e1:
                 logger.error('COMPILATION FAILED: it was not possible to remove previous file!')
+                logger.error(e1)
             try:
-                os.remove(file_out + '.src_md5')
-            except Exception as e:
+                if os.path.isfile(file_out + '.src_md5'):
+                    os.remove(file_out + '.src_md5')
+            except Exception as e2:
                 logger.error('COMPILATION FAILED: it was not possible to remove previous MD5 file!')
+                logger.error(e2)
             logger.error("Failed to compile file: {0}".format(file_in))
             logger.error(e)
             return 0, 0
