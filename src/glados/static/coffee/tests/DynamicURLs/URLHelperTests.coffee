@@ -38,10 +38,12 @@ describe 'URL Helper', ->
     it 'initialises the instance', -> testInitialisation(currentMode)
 
     urlHelper = undefined
+    searchModel = undefined
 
     beforeAll ->
       glados.helpers.URLHelper.initInstance(currentMode, true)
       urlHelper = glados.helpers.URLHelper.getInstance()
+      searchModel = SearchModel.getInstance()
 
     it 'updates the search url', ->
 
@@ -63,6 +65,15 @@ describe 'URL Helper', ->
       expect(urlHelper.esEntityKey).toBe(esEntityKey)
       expect(urlHelper.searchTerm).toBe(searchTerm)
       expect(urlHelper.currentState).toBe(currentState)
+
+    it 'responds to the SEARCH PARAMS UPDATED event', ->
+
+      spyOn(urlHelper, 'updateSearchURL')
+      esEntityKey = 'compounds'
+      searchTerm = 'dopamine'
+      currentState = 'someState'
+      searchModel.trigger(SearchModel.EVENTS.SEARCH_PARAMS_HAVE_CHANGED, esEntityKey, searchTerm, currentState)
+      expect(urlHelper.updateSearchURL).toHaveBeenCalled()
 
   describe 'Entity Browsing Mode', ->
 

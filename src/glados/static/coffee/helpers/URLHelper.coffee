@@ -1,6 +1,9 @@
 glados.useNameSpace 'glados.helpers',
   URLHelper: class URLHelper
 
+    @EVENTS:
+      SEARCH_PARAMS_UPDATED: ''
+    @VALUE_UNCHANGED: '__VALUE_UNCHANGED__'
     @MODES:
       SEARCH_RESULTS: 'SEARCH_RESULTS'
       BROWSE_ENTITY: 'BROWSE_ENTITY'
@@ -9,7 +12,11 @@ glados.useNameSpace 'glados.helpers',
 
       searchModel = SearchModel.getInstance()
       if @mode == URLHelper.MODES.SEARCH_RESULTS
-        searchModel.on SearchModel.EVENTS.SEARCH_PARAMS_HAVE_CHANGED, @updateSearchURL, @
+        searchModel.on SearchModel.EVENTS.SEARCH_PARAMS_HAVE_CHANGED, @triggerUpdateSearchURL, @
+
+    triggerUpdateSearchURL: (esEntityKey, searchTerm, currentState) ->
+
+      @updateSearchURL(esEntityKey, searchTerm, currentState)
 
     updateSearchURL: (esEntityKey, searchTerm, currentState) ->
 
@@ -23,7 +30,7 @@ glados.useNameSpace 'glados.helpers',
       breadcrumbLinks = [
         {
           label: (tabLabelPrefix+' Search Results').trim()
-          link: SearchModel.getInstance().getSearchURL(esEntityKey, null, null)
+          link: SearchModel.getInstance().getSearchURL(@esEntityKey, null, null)
           truncate: true
         }
       ]
@@ -31,12 +38,12 @@ glados.useNameSpace 'glados.helpers',
         breadcrumbLinks.push(
           {
             label: searchTerm
-            link: SearchModel.getInstance().getSearchURL(esEntityKey, searchTerm, null)
+            link: SearchModel.getInstance().getSearchURL(@esEntityKey, @searchTerm, null)
             truncate: true
           }
         )
 
-      newSearchURL = SearchModel.getInstance().getSearchURL(esEntityKey, searchTerm, currentState, true)
+      newSearchURL = SearchModel.getInstance().getSearchURL(@esEntityKey, @searchTerm, @currentState, true)
 
       if @testMode
         return [breadcrumbLinks, newSearchURL]
