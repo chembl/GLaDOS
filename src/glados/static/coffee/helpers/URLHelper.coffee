@@ -11,7 +11,7 @@ glados.useNameSpace 'glados.helpers',
     constructor: (@mode, @testMode=false) ->
 
       searchModel = SearchModel.getInstance()
-      if @mode == URLHelper.MODES.SEARCH_RESULTS
+      if @mode == glados.helpers.URLHelper.MODES.SEARCH_RESULTS
         searchModel.on SearchModel.EVENTS.SEARCH_PARAMS_HAVE_CHANGED, @triggerUpdateSearchURL, @
 
     triggerUpdateSearchURL: (esEntityKey, searchTerm, currentState) ->
@@ -20,9 +20,12 @@ glados.useNameSpace 'glados.helpers',
 
     updateSearchURL: (esEntityKey, searchTerm, currentState) ->
 
-      @esEntityKey = esEntityKey
-      @searchTerm = searchTerm
-      @currentState = currentState
+      if esEntityKey != glados.helpers.URLHelper.VALUE_UNCHANGED
+        @esEntityKey = esEntityKey
+      if searchTerm != glados.helpers.URLHelper.VALUE_UNCHANGED
+        @searchTerm = searchTerm
+      if currentState != glados.helpers.URLHelper.VALUE_UNCHANGED
+        @currentState = currentState
 
       tabLabelPrefix = ''
       if glados.models.paginatedCollections.Settings.ES_INDEXES[esEntityKey]?
@@ -69,3 +72,4 @@ glados.helpers.URLHelper.initInstance = (mode, testMode) ->
   glados.helpers.URLHelper.__model_instance = new glados.helpers.URLHelper(mode, testMode)
 
 glados.helpers.URLHelper.getInstance = -> glados.helpers.URLHelper.__model_instance
+glados.helpers.URLHelper.deleteInstance = -> glados.helpers.URLHelper.__model_instance = null

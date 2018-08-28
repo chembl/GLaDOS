@@ -6,7 +6,6 @@ describe 'URL Helper', ->
   # ------------------------------------------------------------------------------------------------------------------
   testInitialisation = (currentMode) ->
 
-    console.log 'currentMode: ', currentMode
     exceptionThrown = false
     try
       glados.helpers.URLHelper.initInstance()
@@ -23,7 +22,7 @@ describe 'URL Helper', ->
 
     expect(exceptionThrown).toBe(true)
 
-    glados.helpers.URLHelper.initInstance(currentMode)
+    glados.helpers.URLHelper.initInstance(currentMode, true)
     urlHelper = glados.helpers.URLHelper.getInstance()
     modeGot = urlHelper.mode
     expect(modeGot).toBe(currentMode)
@@ -41,6 +40,7 @@ describe 'URL Helper', ->
     searchModel = undefined
 
     beforeAll ->
+      glados.helpers.URLHelper.deleteInstance()
       glados.helpers.URLHelper.initInstance(currentMode, true)
       urlHelper = glados.helpers.URLHelper.getInstance()
       searchModel = SearchModel.getInstance()
@@ -75,11 +75,27 @@ describe 'URL Helper', ->
       searchModel.trigger(SearchModel.EVENTS.SEARCH_PARAMS_HAVE_CHANGED, esEntityKey, searchTerm, currentState)
       expect(urlHelper.updateSearchURL).toHaveBeenCalled()
 
+    it 'allows to call updateSearchURL defining unchanged params', ->
+
+      esEntityKey = 'compounds'
+      searchTerm = 'dopamine'
+      currentState = 'someState'
+      urlHelper.updateSearchURL(esEntityKey, searchTerm, currentState)
+      [breadcrumbs, urlGot] = urlHelper.updateSearchURL(esEntityKey, glados.helpers.URLHelper.VALUE_UNCHANGED,
+        glados.helpers.URLHelper.VALUE_UNCHANGED)
+
+      expect(urlHelper.esEntityKey).toBe(esEntityKey)
+      expect(urlHelper.searchTerm).toBe(searchTerm)
+      expect(urlHelper.currentState).toBe(currentState)
+      urlMustBe = '#search_results/all/query=dopamine/state=someState'
+      expect(urlMustBe).toBe(urlGot)
+
   describe 'Entity Browsing Mode', ->
 
     currentMode = glados.helpers.URLHelper.MODES.BROWSE_ENTITY
     it 'initialises the instance', -> testInitialisation(currentMode)
     beforeAll ->
+      glados.helpers.URLHelper.deleteInstance()
       glados.helpers.URLHelper.initInstance(currentMode, true)
     it 'works', ->
 
