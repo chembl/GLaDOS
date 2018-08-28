@@ -169,41 +169,46 @@ em.glados-result-highlight {
   }
 }
 
-.autocomplete-option {
-  @extend .clean-button;
-  text-align: left;
-  font-size: 1.05em;
+.search-bar-autocomplete-wrapper {
 
-  &:active, &:target {
-    background-color: darken(white, 3%) !important;
-    font-size: 1.1em;
-  }
+  font-size: 0.75rem;
+  position: absolute;
+  display: none;
+  z-index: $z-on-top-of-the-top;
+  overflow: scroll;
+  border: solid 1px $off-accent;
+  width: 100%;
+  left: 0;
 
-  &:focus {
-    outline: none !important;
-    background-color: darken(white, 10%) !important;
-    font-size: 1.15em;
-  }
+  .search-bar-autocomplete-content {
+    .autocomplete-option {
+      @extend .clean-button;
+      border-radius: 0;
+      text-align: left;
+      font-size: 1.05em;
+      padding: 0.15em 1em !important;
 
-  &:hover {
-    font-size: 1.2em;
-  }
-}
+      &:active, &:target {
+        background-color: $teal-4 !important;
+      }
 
-.autocomplete-option-rc-link {
-  font-size: 1.1em;
+      &:focus {
+        outline: none !important;
+        background-color: $teal-4 !important;
+      }
 
-  &:active, &:target {
-    font-size: 1.15em;
-  }
+      &:hover {
+        background-color: $teal-4 !important;
+      }
+    }
 
-  &:focus {
-    outline: none !important;
-    font-size: 1.3em;
-  }
+    .autocomplete-option-rc-link {
+      font-size: 0.95em;
+      &:focus {
+        outline: none !important;
+      }
 
-  &:hover {
-    font-size: 1.4em;
+    }
   }
 }
 
