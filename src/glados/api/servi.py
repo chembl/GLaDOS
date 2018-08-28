@@ -7,7 +7,7 @@ import json
 
 def test(request):
     
-    countries = Country.objects.all()
+    countries = Country.objects.using('oradb').all()
     response = serializers.serialize("json", countries)
     
     return HttpResponse(response, content_type="application/json")
