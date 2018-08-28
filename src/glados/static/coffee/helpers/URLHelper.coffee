@@ -1,18 +1,25 @@
 glados.useNameSpace 'glados.helpers',
   URLHelper: class URLHelper
 
-    @EVENTS:
-      SEARCH_PARAMS_UPDATED: ''
     @VALUE_UNCHANGED: '__VALUE_UNCHANGED__'
     @MODES:
       SEARCH_RESULTS: 'SEARCH_RESULTS'
       BROWSE_ENTITY: 'BROWSE_ENTITY'
 
-    constructor: (@mode, @testMode=false) ->
+    constructor: ->
 
+      @testMode = glados.helpers.URLHelper.testMode
+      # set a default mode just in case
+      @setMode(URLHelper.MODES.SEARCH_RESULTS)
+
+    setMode: (currentMode) ->
+
+      @mode = currentMode
       searchModel = SearchModel.getInstance()
-      if @mode == glados.helpers.URLHelper.MODES.SEARCH_RESULTS
+      if @mode == URLHelper.MODES.SEARCH_RESULTS
         searchModel.on SearchModel.EVENTS.SEARCH_PARAMS_HAVE_CHANGED, @triggerUpdateSearchURL, @
+      else
+        searchModel.off SearchModel.EVENTS.SEARCH_PARAMS_HAVE_CHANGED, @triggerUpdateSearchURL
 
     triggerUpdateSearchURL: (esEntityKey, searchTerm, currentState) ->
 
@@ -56,20 +63,11 @@ glados.useNameSpace 'glados.helpers',
           hideShareButton=false,longFilterURL=undefined, askBeforeShortening=true)
 
 
-
-
 # ----------------------------------------------------------------------------------------------------------------------
 # Singleton pattern
 # ----------------------------------------------------------------------------------------------------------------------
-glados.helpers.URLHelper.initInstance = (mode, testMode) ->
+glados.helpers.URLHelper.getInstance = ->
 
-  if not mode?
-    throw "You must specify a mode!"
-
-  if not (mode in _.keys(@MODES))
-    throw "Mode '#{mode}' is not valid"
-
-  glados.helpers.URLHelper.__model_instance = new glados.helpers.URLHelper(mode, testMode)
-
-glados.helpers.URLHelper.getInstance = -> glados.helpers.URLHelper.__model_instance
-glados.helpers.URLHelper.deleteInstance = -> glados.helpers.URLHelper.__model_instance = null
+  if not glados.helpers.URLHelper.__model_instance?
+    glados.helpers.URLHelper.__model_instance = new glados.helpers.URLHelper()
+  return glados.helpers.URLHelper.__model_instance
