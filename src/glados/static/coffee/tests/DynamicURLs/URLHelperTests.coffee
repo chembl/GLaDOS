@@ -53,6 +53,17 @@ describe 'URL Helper', ->
 
       expect(urlMustBe).toBe(urlGot)
 
+    it 'saves the latest data after updating the url', ->
+
+      esEntityKey = 'compounds'
+      searchTerm = 'dopamine'
+      currentState = 'someState'
+      [breadcrumbs, urlGot] = urlHelper.updateSearchURL(esEntityKey, searchTerm, currentState)
+
+      expect(urlHelper.esEntityKey).toBe(esEntityKey)
+      expect(urlHelper.searchTerm).toBe(searchTerm)
+      expect(urlHelper.currentState).toBe(currentState)
+
   describe 'Entity Browsing Mode', ->
 
     currentMode = glados.helpers.URLHelper.MODES.BROWSE_ENTITY

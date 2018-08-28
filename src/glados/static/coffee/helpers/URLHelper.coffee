@@ -13,6 +13,10 @@ glados.useNameSpace 'glados.helpers',
 
     updateSearchURL: (esEntityKey, searchTerm, currentState) ->
 
+      @esEntityKey = esEntityKey
+      @searchTerm = searchTerm
+      @currentState = currentState
+
       tabLabelPrefix = ''
       if glados.models.paginatedCollections.Settings.ES_INDEXES[esEntityKey]?
         tabLabelPrefix = glados.models.paginatedCollections.Settings.ES_INDEXES[esEntityKey].LABEL
