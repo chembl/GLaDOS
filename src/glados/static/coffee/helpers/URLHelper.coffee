@@ -12,9 +12,13 @@ glados.useNameSpace 'glados.helpers',
       # set a default mode just in case
       @setMode(URLHelper.MODES.SEARCH_RESULTS)
 
-    setMode: (currentMode) ->
+    setMode: (newMode) ->
 
-      @mode = currentMode
+      #don't do anything if the mode is exactly the same as before
+      if newMode == @mode
+        return
+
+      @mode = newMode
       searchModel = SearchModel.getInstance()
       if @mode == URLHelper.MODES.SEARCH_RESULTS
         searchModel.on SearchModel.EVENTS.SEARCH_PARAMS_HAVE_CHANGED, @triggerUpdateSearchURL, @

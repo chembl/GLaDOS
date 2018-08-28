@@ -21,7 +21,8 @@ glados.useNameSpace 'glados.routers',
 
     initSearchResults: (currentTab, searchTerm, currentState) ->
 
-      glados.helpers.URLHelper.initInstance(glados.helpers.URLHelper.MODES.SEARCH_RESULTS)
+      glados.helpers.URLHelper.getInstance().setMode(glados.helpers.URLHelper.MODES.SEARCH_RESULTS)
+
       [selectedESEntity, searchTerm, currentState] = \
         glados.routers.MainGladosRouter.validateAndParseSearchURL(currentTab, searchTerm, currentState)
       SearchModel.getInstance().trigger(SearchModel.EVENTS.SEARCH_PARAMS_HAVE_CHANGED, selectedESEntity, searchTerm, currentState)
