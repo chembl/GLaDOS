@@ -84,12 +84,14 @@ INSTALLED_APPS = [
   'django.contrib.sessions',
   'django.contrib.messages',
   'django.contrib.staticfiles',
+  'corsheaders',
   'glados',
   'compressor',
   'twitter'
 ]
 
 MIDDLEWARE_CLASSES = [
+  'corsheaders.middleware.CorsMiddleware',    
   'django.middleware.security.SecurityMiddleware',
   'django.contrib.sessions.middleware.SessionMiddleware',
   'django.middleware.locale.LocaleMiddleware',
@@ -101,6 +103,9 @@ MIDDLEWARE_CLASSES = [
   'django.middleware.clickjacking.XFrameOptionsMiddleware',
   'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
+
+CORS_URLS_REGEX = r'^/api/.*$'
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'glados.urls'
 

@@ -3,9 +3,8 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link href='https://fonts.googleapis.com/css?family=product+sans|Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
     {% block open_graph_tags %}{% endblock %}
+    <link href='https://fonts.googleapis.com/css?family=product+sans|Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
     <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon"/>
     <title>Unichem SSS</title>
     {% block analytics %}
@@ -15,7 +14,7 @@
     <!-- Imports used by all the templates-->
     <!-- only use this if absolutely necessary, it can complicate the css imports -->
     {% block common_css %}
-    {% include "glados/base/css_imports_for_all.html" %}
+    {% include "glados/base/css_imports_for_unichem.html" %}
     {% endblock %}
     <!-- Imports used by the current template -->
     {% block stylesheets %}{% endblock %}    
@@ -25,8 +24,6 @@
         {% block header %}
         {% include "glados/base/header.html" %}
         {% endblock %}
-    </div>
-    <div class="chembl-header-spacer">
     </div>
 </header>
 <body>

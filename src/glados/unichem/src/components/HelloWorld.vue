@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container fluid class="container-story">
     <v-slide-y-transition mode="out-in">
       <v-layout align-start justify-start column>
         <h2>妙な話</h2>
@@ -56,6 +56,11 @@ li {
 }
 a {
   color: #42b983;
+}
+
+.container-story {
+  max-height: 100vh;
+  overflow: auto;
 }
 </style>
 

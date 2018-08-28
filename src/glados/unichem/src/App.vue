@@ -7,8 +7,8 @@
       :clipped="clipped"
       v-model="drawer"
       enable-resize-watcher
-      absolute
       fixed
+      absolute
       app
     >
       <v-list>
@@ -28,20 +28,20 @@
     </v-navigation-drawer>
     <v-toolbar
       app
-      absolute
       :clipped-left="clipped"
-      fixed
       dark
       color="primary"
+      height="70"
+      absolute
     >
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-btn icon @click.stop="miniVariant = !miniVariant">
         <v-icon v-html="miniVariant ? 'chevron_right' : 'chevron_left'"></v-icon>
       </v-btn>
+      <div class="brand-icon ma-2 pt-1">
+        <img src="@/assets/unichem_logo.png" alt="">
+      </div>      
       <v-toolbar-title v-text="title"></v-toolbar-title>
-      <div class="brand-icon">
-        <img src="assets/unichem_logo.png" alt="">
-      </div>
     </v-toolbar>    
     <!-- Splash screen -->
     <div v-if="splashScreen" id='GladosMainSplashScreen' class="loader-background">
@@ -68,6 +68,16 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+nav {
+  height: initial;
+  line-height: initial;
+
+  i {
+    height: initial;
+    line-height: initial;
+  }
+}
+
 h1, h2 {
   font-weight: normal;
 }
@@ -85,7 +95,7 @@ a {
 
 .brand-icon {
   img {
-    width: 5em;
+    width: 3em;
   }
 }
 </style>
@@ -94,6 +104,7 @@ a {
 export default {
   data () {
     return {
+      topval: '10px',
       splashScreen: false,
       clipped: false,
       drawer: true,
@@ -113,7 +124,7 @@ export default {
       miniVariant: true,
       right: false,
       rightDrawer: false,
-      title: 'Unichem'
+      title: 'UNICHEM'
     }
   },
   temp_proteins: [],
