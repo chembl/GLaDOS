@@ -8,7 +8,7 @@ glados.useNameSpace 'glados.models.base',
       return {
         'color': @color
         'href': @get_report_card_url(chembl_id)
-        'text': (if _.has(@prototype, 'entityName') then @prototype.entityName + ' ' else '') + chembl_id
+        'text': 'Go to '+(if _.has(@prototype, 'entityName') then @prototype.entityName + ' ' else '') + chembl_id
       }
 
 
