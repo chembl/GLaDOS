@@ -21,9 +21,11 @@ glados.useNameSpace 'glados.routers',
 
     initSearchResults: (currentTab, searchTerm, currentState) ->
 
+      glados.helpers.URLHelper.getInstance().setMode(glados.helpers.URLHelper.MODES.SEARCH_RESULTS)
+
       [selectedESEntity, searchTerm, currentState] = \
         glados.routers.MainGladosRouter.validateAndParseSearchURL(currentTab, searchTerm, currentState)
-      glados.routers.MainGladosRouter.updateSearchURL(selectedESEntity, searchTerm, currentState)
+      SearchModel.getInstance().trigger(SearchModel.EVENTS.SEARCH_PARAMS_HAVE_CHANGED, selectedESEntity, searchTerm, currentState)
       GlobalVariables.atSearchResultsPage = true
       glados.apps.Main.MainGladosApp.initSearchResults(selectedESEntity, searchTerm, currentState)
 
@@ -61,35 +63,8 @@ glados.useNameSpace 'glados.routers',
     #-------------------------------------------------------------------------------------------------------------------
     # SEARCH HELPERS
     #-------------------------------------------------------------------------------------------------------------------
-    updateSearchURL: (esEntityKey, searchTerm, currentState, trigger=false) ->
-
-      tabLabelPrefix = ''
-      if glados.models.paginatedCollections.Settings.ES_INDEXES[esEntityKey]?
-        tabLabelPrefix = glados.models.paginatedCollections.Settings.ES_INDEXES[esEntityKey].LABEL
-      breadcrumbLinks = [
-        {
-          label: (tabLabelPrefix+' Search Results').trim()
-          link: SearchModel.getInstance().getSearchURL(esEntityKey, null, null)
-          truncate: true
-        }
-      ]
-      if searchTerm?
-        breadcrumbLinks.push(
-          {
-            label: searchTerm
-            link: SearchModel.getInstance().getSearchURL(esEntityKey, searchTerm, null)
-            truncate: true
-          }
-        )
-
-      # This makes sure that the url and the breadcrumbs are correct. It is the job of the SearchResultsView to
-      # to show the correct tab.
-      newSearchURL = SearchModel.getInstance().getSearchURL(esEntityKey, searchTerm, currentState, true)
-      window.history.pushState({}, 'Search Results', newSearchURL)
-      glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks, longFilter=undefined,
-          hideShareButton=false,longFilterURL=undefined, askBeforeShortening=true)
-
     triggerSearchURL: (esEntityKey, searchTerm, currentState) ->
+
       #this puts the search url in the bar and navigates to it
       newSearchURL = SearchModel.getInstance().getSearchURL(esEntityKey, searchTerm, currentState)
       window.history.pushState({}, 'Search Results', newSearchURL)

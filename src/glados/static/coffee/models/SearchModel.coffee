@@ -19,6 +19,7 @@ SearchModel = Backbone.Model.extend
   # --------------------------------------------------------------------------------------------------------------------
   getSearchURL: (esEntityKey, searchTerm, currentState, fragmentOnly=false) ->
 
+
     tab = 'all'
     if esEntityKey? and glados.Settings.ES_KEY_2_SEARCH_PATH[esEntityKey]?
       tab = glados.Settings.ES_KEY_2_SEARCH_PATH[esEntityKey]
@@ -279,6 +280,7 @@ SearchModel = Backbone.Model.extend
 # ----------------------------------------------------------------------------------------------------------------------
 SearchModel.EVENTS =
   SEARCH_TERM_HAS_CHANGED: 'SEARCH_TERM_HAS_CHANGED'
+  SEARCH_PARAMS_HAVE_CHANGED: 'SEARCH_PARAMS_HAVE_CHANGED'
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Singleton pattern
