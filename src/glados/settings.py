@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+import sys
 import glados
 from django.utils.translation import ugettext_lazy as _
 import logging
@@ -135,16 +136,25 @@ TEMPLATES = [
 DATABASES = {
   'default': {
     'ENGINE': 'django.db.backends.sqlite3',
-    'NAME': os.path.join(GLADOS_ROOT, 'db/db.sqlite3'),
+    'NAME': os.path.join(GLADOS_ROOT, 'db/db.sqlite3')
   },
   'oradb': {
     'ENGINE':   'django.db.backends.oracle',
     'NAME':     'oradb/xe',
     'USER':     'hr',
-    'PASSWORD': 'hr',
+    'PASSWORD': 'hr'
   }
 }
 
+if 'test' in sys.argv:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(GLADOS_ROOT, 'db/db.sqlite3')
+        }        
+    }
+
+DATABASE_ROUTERS = ['glados.db.APIDatabaseRouter.APIDatabaseRouter']
 # ----------------------------------------------------------------------------------------------------------------------
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
