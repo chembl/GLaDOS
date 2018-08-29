@@ -41,4 +41,13 @@ describe "An elasticsearch collection", ->
 
       expect(eventTriggered).toBe(true)
 
+    it 'Triggers the event after clearing facets selections', ->
+
+      eventTriggered = false
+      esList.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.STATE_OBJECT_CHANGED,
+      (-> eventTriggered = true)
+
+      esList.clearAllFacetsSelections()
+      expect(eventTriggered).toBe(true)
+
 
