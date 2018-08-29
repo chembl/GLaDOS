@@ -93,7 +93,9 @@ describe 'URL Helper', ->
       esList.setMeta('test_mode', true)
       TestsUtils.simulateFacetsESList(esList, glados.Settings.STATIC_URL + 'testData/FacetsTestData.json', done)
 
-
     it 'initialises the instance', -> testModeSetting(currentMode)
+
+    it 'updates the search url', ->
+
 
 
