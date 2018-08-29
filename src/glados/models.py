@@ -28,7 +28,6 @@ class Acknowledgement(models.Model):
 
   class Meta:
     db_table = 'acknowledgements'
-    managed = False
 
   def __str__(self):
     return '%s: %s' % (self.dates, self.content)
@@ -42,7 +41,6 @@ class FaqCategory(models.Model):
 
   class Meta:
     db_table = 'faq_categories'
-    managed = False
 
   def __str__(self):
     return '%s' % (self.category_name)
@@ -54,7 +52,6 @@ class FaqSubcategory(models.Model):
 
   class Meta:
     db_table = 'faq_subcategories'
-    managed = False
     
   def __str__(self):
     return '%s' % (self.subcategory_name)
@@ -67,10 +64,7 @@ class Faq(models.Model):
   question = models.CharField(max_length=4000, blank=True, null=True, unique=True)
   answer = models.TextField(blank=True, null=True, unique=True)
   deleted = models.BooleanField(default=False)
-  
-  class Meta:
-    managed = False
-    
+      
   def __str__(self):
     return '%s' % (self.question)
 
@@ -79,17 +73,11 @@ class WizardStep(models.Model):
 
   title = models.CharField(max_length=100)
   
-  class Meta:
-    managed = False
-
 
 class WizardOptionType(models.Model):
 
   name = models.CharField(max_length=20)
   
-  class Meta:
-    managed = False
-
 
 class WizardOption(models.Model):
 
@@ -101,17 +89,11 @@ class WizardOption(models.Model):
   type = models.ForeignKey(WizardOptionType)
   image_url = models.CharField(max_length=400)
 
-  class Meta:
-    managed = False
-
 
 class TinyURL(models.Model):
 
   long_url = models.TextField()
   hash = models.CharField(max_length=100)
-
-  class Meta:
-    managed = False
 
   def indexing(self):
     obj = TinyURLIndex(
