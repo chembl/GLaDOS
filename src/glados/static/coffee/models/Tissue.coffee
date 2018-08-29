@@ -114,8 +114,13 @@ glados.models.Tissue.MINI_REPORT_CARD =
   TEMPLATE: 'Handlebars-Common-MiniReportCard'
   COLUMNS: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
 
-glados.models.Tissue.getTissuesListURL = (filter) ->
+glados.models.Tissue.getTissuesListURL = (filter, isFullState=false, fragmentOnly=false) ->
 
-  glados.Settings.ENTITY_BROWSERS_URL_GENERATOR
+  if isFullState
+    filter = btoa(JSON.stringify(filter))
+
+  return glados.Settings.ENTITY_BROWSERS_URL_GENERATOR
+    fragment_only: fragmentOnly
     entity: 'tissues'
     filter: encodeURIComponent(filter) unless not filter?
+    is_full_state: isFullState

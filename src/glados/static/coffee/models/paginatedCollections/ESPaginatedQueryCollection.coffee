@@ -439,6 +439,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       facetingHandler = facetsGroups[fGroupKey].faceting_handler
       isSelected = facetingHandler.toggleKeySelection(fKey)
       @setMeta('facets_changed', true)
+      @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.STATE_OBJECT_CHANGED)
       @fetch()
 
       return isSelected
@@ -535,6 +536,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       for fGroupKey, fGroup of @getFacetsGroups(true, onlyVisible=false)
         fGroup.faceting_handler.clearSelections()
 
+      @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.STATE_OBJECT_CHANGED)
       if @getMeta('test_mode')
         return
       @setMeta('facets_changed', true)

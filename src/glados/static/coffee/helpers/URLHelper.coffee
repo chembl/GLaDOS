@@ -2,6 +2,8 @@ glados.useNameSpace 'glados.helpers',
   URLHelper: class URLHelper
 
     @VALUE_UNCHANGED: '__VALUE_UNCHANGED__'
+    @EVENTS:
+      HASH_CHANGED: 'HASH_CHANGED'
     @MODES:
       SEARCH_RESULTS: 'SEARCH_RESULTS'
       BROWSE_ENTITY: 'BROWSE_ENTITY'
@@ -22,6 +24,7 @@ glados.useNameSpace 'glados.helpers',
       searchModel = SearchModel.getInstance()
       if @mode == URLHelper.MODES.SEARCH_RESULTS
         searchModel.on SearchModel.EVENTS.SEARCH_PARAMS_HAVE_CHANGED, @triggerUpdateSearchURL, @
+        @unsetList()
       else
         searchModel.off SearchModel.EVENTS.SEARCH_PARAMS_HAVE_CHANGED, @triggerUpdateSearchURL
 
@@ -29,6 +32,9 @@ glados.useNameSpace 'glados.helpers',
 
       @updateSearchURL(esEntityKey, searchTerm, currentState)
 
+    #-------------------------------------------------------------------------------------------------------------------
+    # Search results mode
+    #-------------------------------------------------------------------------------------------------------------------
     updateSearchURL: (esEntityKey, searchTerm, currentState) ->
 
       if esEntityKey != glados.helpers.URLHelper.VALUE_UNCHANGED
@@ -66,7 +72,34 @@ glados.useNameSpace 'glados.helpers',
       glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks, longFilter=undefined,
           hideShareButton=false,longFilterURL=undefined, askBeforeShortening=true)
 
+    #-------------------------------------------------------------------------------------------------------------------
+    # Search results mode
+    #-------------------------------------------------------------------------------------------------------------------
+    unsetList: ->
 
+      if @list?
+        @list.off glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.STATE_OBJECT_CHANGED,
+          @triggerUpdateBrowserURL
+
+    setList: (@list) ->
+
+      @list.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.STATE_OBJECT_CHANGED,
+        @triggerUpdateBrowserURL, @
+
+    triggerUpdateBrowserURL: -> @updateBrowserURL(@list)
+
+    updateBrowserURL: (list) ->
+
+      fullState =
+        list: list.getStateJSON()
+
+      newURL = list.getLinkToListFunction()(fullState, isFullState=true, fragmentOnly=true)
+      if @testMode
+        return newURL
+
+      window.history.pushState({}, 'Browse', newURL)
+      breadcrumbsView = glados.views.Breadcrumb.BreadcrumbsView.getInstance()
+      breadcrumbsView.renderShareComponent.call(breadcrumbsView)
 # ----------------------------------------------------------------------------------------------------------------------
 # Singleton pattern
 # ----------------------------------------------------------------------------------------------------------------------

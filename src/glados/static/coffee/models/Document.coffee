@@ -189,10 +189,16 @@ Document.MINI_REPORT_CARD =
   TEMPLATE: 'Handlebars-Common-MiniReportCard'
   COLUMNS: Document.COLUMNS_SETTINGS.RESULTS_LIST_CARD
 
-Document.getDocumentsListURL = (filter) ->
-  glados.Settings.ENTITY_BROWSERS_URL_GENERATOR
+Document.getDocumentsListURL = (filter, isFullState=false, fragmentOnly=false) ->
+
+  if isFullState
+    filter = btoa(JSON.stringify(filter))
+
+  return glados.Settings.ENTITY_BROWSERS_URL_GENERATOR
+    fragment_only: fragmentOnly
     entity: 'documents'
     filter: encodeURIComponent(filter) unless not filter?
+    is_full_state: isFullState
 
 Document.DEPOSITED_DATASETS_FILTER = 'doc_type:"DATASET" AND NOT(_metadata.source.src_id:(
 "1" OR "7" OR "8" OR "9" OR "11" OR "12" OR "13" OR "15" OR "18" OR "25" OR "26" OR "28" OR "31" OR "35" OR "37" OR "38"

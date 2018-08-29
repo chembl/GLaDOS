@@ -115,15 +115,12 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     openTab: (event) ->
 
-      console.log 'openTab: '
       $clickedElem = $(event.currentTarget)
       @selected_es_entity = $clickedElem.attr('data-resource-key')
       $(@el).find('.BCK-select-results-entity').removeClass('selected')
       $clickedElem.addClass('selected')
       SearchModel.getInstance().trigger SearchModel.EVENTS.SEARCH_PARAMS_HAVE_CHANGED, @selected_es_entity,
         @model.get('queryString')
-      console.log 'event triggered'
-      console.log 'SearchModel.getInstance(): ', SearchModel.getInstance()
       @showSelectedResourceOnly()
 
     showSelectedResourceOnly: ->
