@@ -41,7 +41,6 @@ describe "An elasticsearch collection", ->
 
       for fGroupKey, fGroup of facetGroups
         for fKey, fData of fGroup.faceting_handler.faceting_data
-          console.log "DEBUGGING", fData
           expect(fData.selected).toBe(false)
 
     it 'selects one facet', ->
