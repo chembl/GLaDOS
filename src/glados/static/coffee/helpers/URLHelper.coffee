@@ -29,6 +29,9 @@ glados.useNameSpace 'glados.helpers',
 
       @updateSearchURL(esEntityKey, searchTerm, currentState)
 
+    #-------------------------------------------------------------------------------------------------------------------
+    # Search results mode
+    #-------------------------------------------------------------------------------------------------------------------
     updateSearchURL: (esEntityKey, searchTerm, currentState) ->
 
       if esEntityKey != glados.helpers.URLHelper.VALUE_UNCHANGED
@@ -65,6 +68,13 @@ glados.useNameSpace 'glados.helpers',
       window.history.pushState({}, 'Search Results', newSearchURL)
       glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks, longFilter=undefined,
           hideShareButton=false,longFilterURL=undefined, askBeforeShortening=true)
+
+    #-------------------------------------------------------------------------------------------------------------------
+    # Search results mode
+    #-------------------------------------------------------------------------------------------------------------------
+    updateBrowserURL: (listState) ->
+
+      console.log 'updateBrowserURL'
 
 
 # ----------------------------------------------------------------------------------------------------------------------
