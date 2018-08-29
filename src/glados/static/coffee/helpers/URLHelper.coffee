@@ -74,7 +74,10 @@ glados.useNameSpace 'glados.helpers',
     #-------------------------------------------------------------------------------------------------------------------
     updateBrowserURL: (list) ->
 
-      newURL = list.getLinkToListFunction()(list.getStateJSON(), isFullState=true, fragmentOnly=true)
+      fullState =
+        list: list.getStateJSON()
+
+      newURL = list.getLinkToListFunction()(fullState, isFullState=true, fragmentOnly=true)
       if @testMode
         return newURL
 

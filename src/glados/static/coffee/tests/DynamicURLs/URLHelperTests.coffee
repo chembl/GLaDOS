@@ -102,6 +102,7 @@ describe 'URL Helper', ->
 
       urlMustBe = Compound.getCompoundsListURL(fullState, isFullState=true, fragmentOnly=true)
       urlGot = urlHelper.updateBrowserURL(esList)
+
       expect(urlGot).toBe(urlMustBe)
 
 
