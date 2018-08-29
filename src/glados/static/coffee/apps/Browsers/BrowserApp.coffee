@@ -90,8 +90,8 @@ glados.useNameSpace 'glados.apps.Browsers',
         initListFunction = @entityListsInitFunctions[entityName]
         list = initListFunction(query)
 
+      glados.helpers.URLHelper.getInstance().setList(list)
       $browserContainer = $browserWrapper.find('.BCK-BrowserContainer')
-
       new glados.views.Browsers.BrowserMenuView
         collection: list
         el: $browserContainer

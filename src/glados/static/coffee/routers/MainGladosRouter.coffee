@@ -39,9 +39,11 @@ glados.useNameSpace 'glados.routers',
       glados.apps.Main.MainGladosApp.initFlexmatchSearchResults(searchTerm)
 
     initBrowser: (entityName, query, state) ->
+      glados.helpers.URLHelper.getInstance().setMode(glados.helpers.URLHelper.MODES.BROWSE_ENTITY)
       glados.apps.Main.MainGladosApp.initBrowserForEntity(entityName, query, state)
 
     initBrowserFullState: (entityName, encodedState) ->
+      glados.helpers.URLHelper.getInstance().setMode(glados.helpers.URLHelper.MODES.BROWSE_ENTITY)
       glados.apps.Main.MainGladosApp.initBrowserForEntity(entityName, query=undefined, state=encodedState,
         isFullState=true)
 

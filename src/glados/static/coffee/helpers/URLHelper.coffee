@@ -2,6 +2,8 @@ glados.useNameSpace 'glados.helpers',
   URLHelper: class URLHelper
 
     @VALUE_UNCHANGED: '__VALUE_UNCHANGED__'
+    @EVENTS:
+      HASH_CHANGED: 'HASH_CHANGED'
     @MODES:
       SEARCH_RESULTS: 'SEARCH_RESULTS'
       BROWSE_ENTITY: 'BROWSE_ENTITY'
@@ -96,7 +98,8 @@ glados.useNameSpace 'glados.helpers',
         return newURL
 
       window.history.pushState({}, 'Browse', newURL)
-
+      breadcrumbsView = glados.views.Breadcrumb.BreadcrumbsView.getInstance()
+      breadcrumbsView.renderShareComponent.call(breadcrumbsView)
 # ----------------------------------------------------------------------------------------------------------------------
 # Singleton pattern
 # ----------------------------------------------------------------------------------------------------------------------
