@@ -17,7 +17,6 @@ glados.useNameSpace 'glados.views.SearchResults',
       @$optionsReportCards = []
       @numSuggestions = 0
       @autocompleteSuggestions = []
-      @linkWindowScrollResize()
 
     attachSearchBar: (searchBarView)->
       @searchBarView = searchBarView
@@ -30,9 +29,32 @@ glados.useNameSpace 'glados.views.SearchResults',
         'keydown',
         @barKeydownHandler.bind(@)
       )
+      @$barElem.bind(
+        'blur',
+        @barBlurHandler.bind(@)
+      )
+      @$barElem.bind(
+        'focus',
+        @barFocusHandler.bind(@)
+      )
       @$barElem.parent().append('<div class="search-bar-autocomplete-wrapper"/>')
       @$autocompleteWrapperDiv = @$barElem.parent().find('.search-bar-autocomplete-wrapper')
       @registerRecalculatePositioningEvents()
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Bar Event Handling
+    # ------------------------------------------------------------------------------------------------------------------
+
+    barFocusHandler: (event)->
+      if @$autocompleteWrapperDiv?
+        if @numSuggestions == 0
+          @$autocompleteWrapperDiv.hide()
+        else
+          @$autocompleteWrapperDiv.show()
+
+    barBlurHandler: (event)->
+      if @$autocompleteWrapperDiv?
+        @$autocompleteWrapperDiv.hide()
 
     barKeydownHandler: (keyEvent)->
       # Up key code
@@ -53,37 +75,19 @@ glados.useNameSpace 'glados.views.SearchResults',
       else
         @searchModel.set 'autocompleteSuggestions',[]
 
-    getDebouncedResizeHandler: ()->
-      handler = ()->
-        return
-      handler = handler.bind(@)
-      return _.debounce(handler, 200)
-
-    linkTooltipOptions: (event, api)->
-      @currentWindowOffset = $(window).scrollTop()
-
-    unlinkTooltipOptions: (event, api)->
-      @$options = null
-
-    linkWindowScrollResize: ->
-      thisView = @
-      scrollNResize = ()->
-        hideOnScroll = thisView.currentWindowOffset? and
-          Math.abs(thisView.currentWindowOffset-$(window).scrollTop()) > 100
-        if thisView.hideQtip? and hideOnScroll
-          thisView.hideQtip()
-      $(window).scroll scrollNResize
-      $(window).resize scrollNResize
-
     registerRecalculatePositioningEvents: ()->
       bindedCall = @recalculatePositioning.bind(@)
       $(window).scroll bindedCall
       $(window).resize bindedCall
       @$barElem.resize bindedCall
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # Bar Event Handling
+    # ------------------------------------------------------------------------------------------------------------------
 
     recalculatePositioning: ()->
       if not _.has(@, '__recalculatePositioning')
+        console.debug('Creating new debounced __recalculatePositioning function')
         debouncedCall = ()->
           if @$autocompleteWrapperDiv?
             barPos = @$barElem.position()
@@ -109,6 +113,7 @@ glados.useNameSpace 'glados.views.SearchResults',
           textSearch: @lastSearch
         @$autocompleteWrapperDiv.html(@$autoccompleteDiv)
         @recalculatePositioning()
-        @$autocompleteWrapperDiv.show()
-
-glados.views.SearchResults.SearchBarAutocompleteView.ID_COUNT = 0
+        if @numSuggestions == 0
+          @$autocompleteWrapperDiv.hide()
+        else
+          @$autocompleteWrapperDiv.show()
