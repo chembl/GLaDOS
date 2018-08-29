@@ -26,6 +26,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       totalRecords = @getMeta('total_records')
       totalRecords ?= 0
       return totalRecords
+
+    getLinkToListFunction: -> @getMeta('browse_list_url')
     # ------------------------------------------------------------------------------------------------------------------
     # Downloads
     # ------------------------------------------------------------------------------------------------------------------

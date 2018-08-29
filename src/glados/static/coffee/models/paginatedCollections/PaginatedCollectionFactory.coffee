@@ -58,6 +58,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             available_page_sizes: glados.Settings.CARD_PAGE_SIZES
             current_page: 1
             to_show: []
+            browse_list_url: esIndexSettings.BROWSE_LIST_URL
             id_column: esIndexSettings.ID_COLUMN
             facets_groups: glados.models.paginatedCollections.esSchema.FacetingHandler.initFacetGroups(esIndexSettings.FACETS_GROUPS)
             columns: esIndexSettings.COLUMNS

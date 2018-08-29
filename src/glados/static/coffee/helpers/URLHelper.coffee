@@ -72,9 +72,13 @@ glados.useNameSpace 'glados.helpers',
     #-------------------------------------------------------------------------------------------------------------------
     # Search results mode
     #-------------------------------------------------------------------------------------------------------------------
-    updateBrowserURL: (listState) ->
+    updateBrowserURL: (list) ->
 
-      console.log 'updateBrowserURL'
+      newURL = list.getLinkToListFunction()(list.getStateJSON(), isFullState=true, fragmentOnly=true)
+      if @testMode
+        return newURL
+
+      window.history.pushState({}, 'Browse', newURL)
 
 
 # ----------------------------------------------------------------------------------------------------------------------
