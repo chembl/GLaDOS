@@ -33,7 +33,7 @@ describe "An elasticsearch collection", ->
       eventTriggered = false
       esList.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.STATE_OBJECT_CHANGED,
       (-> eventTriggered = true)
-      
+
       facetGroups = esList.getFacetsGroups()
       testFacetGroupKey = 'max_phase'
       testFacetKey = facetGroups[testFacetGroupKey].faceting_handler.faceting_keys_inorder[0]

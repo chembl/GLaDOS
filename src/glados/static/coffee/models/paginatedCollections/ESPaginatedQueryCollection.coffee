@@ -440,7 +440,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       isSelected = facetingHandler.toggleKeySelection(fKey)
       @setMeta('facets_changed', true)
       @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.STATE_OBJECT_CHANGED)
-      console.log 'EVENT TRIGGERED'
       @fetch()
 
       return isSelected
