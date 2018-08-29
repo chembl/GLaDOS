@@ -22,6 +22,7 @@ glados.useNameSpace 'glados.helpers',
       searchModel = SearchModel.getInstance()
       if @mode == URLHelper.MODES.SEARCH_RESULTS
         searchModel.on SearchModel.EVENTS.SEARCH_PARAMS_HAVE_CHANGED, @triggerUpdateSearchURL, @
+        @unsetList()
       else
         searchModel.off SearchModel.EVENTS.SEARCH_PARAMS_HAVE_CHANGED, @triggerUpdateSearchURL
 
@@ -72,6 +73,19 @@ glados.useNameSpace 'glados.helpers',
     #-------------------------------------------------------------------------------------------------------------------
     # Search results mode
     #-------------------------------------------------------------------------------------------------------------------
+    unsetList: ->
+
+      if @list?
+        @list.off glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.STATE_OBJECT_CHANGED,
+          @triggerUpdateBrowserURL
+
+    setList: (@list) ->
+
+      @list.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.STATE_OBJECT_CHANGED,
+        @triggerUpdateBrowserURL, @
+
+    triggerUpdateBrowserURL: -> @updateBrowserURL(@list)
+
     updateBrowserURL: (list) ->
 
       fullState =
@@ -82,7 +96,6 @@ glados.useNameSpace 'glados.helpers',
         return newURL
 
       window.history.pushState({}, 'Browse', newURL)
-
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Singleton pattern

@@ -82,16 +82,17 @@ describe 'URL Helper', ->
 
     beforeAll (done) ->
 
-      glados.helpers.URLHelper.testMode = true
-      urlHelper = glados.helpers.URLHelper.getInstance()
-      urlHelper.setMode(currentMode)
-
       esList = glados.models.paginatedCollections.PaginatedCollectionFactory.getAllESResultsListDict()[\
       glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND.KEY_NAME
       ]
       esList.setMeta('searchESQuery', searchESQuery)
       esList.setMeta('test_mode', true)
       TestsUtils.simulateFacetsESList(esList, glados.Settings.STATIC_URL + 'testData/FacetsTestData.json', done)
+
+      glados.helpers.URLHelper.testMode = true
+      urlHelper = glados.helpers.URLHelper.getInstance()
+      urlHelper.setMode(currentMode)
+      urlHelper.setList(esList)
 
     it 'initialises the instance', -> testModeSetting(currentMode)
 
@@ -105,5 +106,8 @@ describe 'URL Helper', ->
 
       expect(urlGot).toBe(urlMustBe)
 
+    it 'responds to the STATE_OBJECT_CHANGED event', ->
 
-
+      spyOn(urlHelper, 'updateBrowserURL')
+      esList.trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.STATE_OBJECT_CHANGED)
+      expect(urlHelper.updateBrowserURL).toHaveBeenCalled()
