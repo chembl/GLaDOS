@@ -13,8 +13,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       @$barElem = null
       @$autocompleteWrapperDiv = null
       @lastSearch = null
-      @$options = []
-      @$optionsReportCards = []
+      @currentSelection = -1
       @numSuggestions = 0
       @autocompleteSuggestions = []
 
@@ -46,6 +45,7 @@ glados.useNameSpace 'glados.views.SearchResults',
     # ------------------------------------------------------------------------------------------------------------------
 
     barFocusHandler: (event)->
+      @updateSelectedCss true
       if @$autocompleteWrapperDiv?
         if @numSuggestions == 0
           @$autocompleteWrapperDiv.hide()
@@ -53,17 +53,26 @@ glados.useNameSpace 'glados.views.SearchResults',
           @$autocompleteWrapperDiv.show()
 
     barBlurHandler: (event)->
+      @updateSelectedCss true
       if @$autocompleteWrapperDiv?
         @$autocompleteWrapperDiv.hide()
 
     barKeydownHandler: (keyEvent)->
       # Up key code
       if keyEvent.which == 38
-        down = false
+        if @currentSelection == - 1
+          @currentSelection = @autocompleteSuggestions.length - 1
+        else
+          @currentSelection--
+        @updateSelectedCss()
         keyEvent.preventDefault()
       # Down key code
       else if keyEvent.which == 40
-        down = true
+        if @currentSelection == @autocompleteSuggestions.length - 1
+          @currentSelection = -1
+        else
+          @currentSelection++
+        @updateSelectedCss()
         keyEvent.preventDefault()
 
     barKeyupHandler: (keyEvent)->
@@ -82,8 +91,21 @@ glados.useNameSpace 'glados.views.SearchResults',
       @$barElem.resize bindedCall
 
     # ------------------------------------------------------------------------------------------------------------------
-    # Bar Event Handling
+    # style helpers
     # ------------------------------------------------------------------------------------------------------------------
+
+    updateSelectedCss: (reset=false)->
+      if reset
+        @currentSelection = -1
+        @$autocompleteWrapperDiv.scrollTop 0
+      allAtcDivs = @$autocompleteWrapperDiv.find('.autocomplete-option')
+      allAtcDivs.removeClass 'selected'
+      if @currentSelection >= 0 and @currentSelection < @autocompleteSuggestions.length
+        $selectedDiv = $(allAtcDivs[@currentSelection])
+        divH = $selectedDiv.height()
+        $selectedDiv.addClass 'selected'
+        @$autocompleteWrapperDiv.scrollTop @currentSelection*divH
+
 
     recalculatePositioning: ()->
       if not _.has(@, '__recalculatePositioning')
@@ -92,7 +114,6 @@ glados.useNameSpace 'glados.views.SearchResults',
           if @$autocompleteWrapperDiv?
             barPos = @$barElem.position()
             barH = @$barElem.height()
-            barW = @$barElem.parent().width()
             @$autocompleteWrapperDiv.css
               top: (barPos.top+barH)+'px'
               'max-height': (window.innerHeight*3/4)+'px'
@@ -100,12 +121,17 @@ glados.useNameSpace 'glados.views.SearchResults',
         @__recalculatePositioning = debouncedCall
       @__recalculatePositioning()
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # Callback from model
+    # ------------------------------------------------------------------------------------------------------------------
+
     updateAutocomplete: ()->
       if not @$barElem? or not @$barElem.is(":visible")
         return
       if @searchModel.autocompleteCaller != @
         return
       if @$autocompleteWrapperDiv?
+        @updateSelectedCss true
         @autocompleteSuggestions = @searchModel.get('autocompleteSuggestions')
         @numSuggestions = @autocompleteSuggestions.length
         @$autoccompleteDiv = @suggestionsTemplate
