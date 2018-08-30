@@ -188,16 +188,8 @@ em.glados-result-highlight {
       font-size: 1.05em;
       padding: 0.15em 1em !important;
 
-      &:active, &:target {
-        background-color: $teal-4 !important;
-      }
-
-      &:focus {
+      &:active, &:target, &:focus, &:hover, &.selected {
         outline: none !important;
-        background-color: $teal-4 !important;
-      }
-
-      &:hover {
         background-color: $teal-4 !important;
       }
     }
