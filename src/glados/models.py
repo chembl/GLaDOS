@@ -52,7 +52,7 @@ class FaqSubcategory(models.Model):
 
   class Meta:
     db_table = 'faq_subcategories'
-
+    
   def __str__(self):
     return '%s' % (self.subcategory_name)
 
@@ -64,7 +64,7 @@ class Faq(models.Model):
   question = models.CharField(max_length=4000, blank=True, null=True, unique=True)
   answer = models.TextField(blank=True, null=True, unique=True)
   deleted = models.BooleanField(default=False)
-
+      
   def __str__(self):
     return '%s' % (self.question)
 
@@ -72,12 +72,12 @@ class Faq(models.Model):
 class WizardStep(models.Model):
 
   title = models.CharField(max_length=100)
-
+  
 
 class WizardOptionType(models.Model):
 
   name = models.CharField(max_length=20)
-
+  
 
 class WizardOption(models.Model):
 
@@ -105,6 +105,17 @@ class TinyURL(models.Model):
     return obj.to_dict(include_meta=True)
 
 
+class Country(models.Model):
+    country_id = models.CharField(max_length=30, primary_key=True)
+    country_name = models.CharField(max_length=35)
+    region_id = models.IntegerField(null=True, blank=True)
+    class Meta:
+        db_table = u'COUNTRIES'
+        managed = False
+
+    def __str__(self):
+        return self.country_name
+        
 class ESCachedRequest(models.Model):
   es_index = models.CharField(max_length=200)
   es_query = models.TextField()
