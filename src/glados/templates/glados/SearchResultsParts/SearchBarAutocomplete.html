@@ -7,17 +7,16 @@
           <li class="collection-item no-margin no-padding">
             <div class="row no-margin no-padding relative-wrapper">
               {{#if header}}
-                <div class="col s12 autocomplete-option autocomplete-option-{{@index}}" autocomplete-text="{{title}} {{../textSearch}}">
+                <div class="col s12 autocomplete-option">
                   Search for <b>"{{../textSearch}}"</b> in all <span class="chip-syn {{color}} darken-2 white-text right-align">{{title}}</span>
                 </div>
               {{else}}
-                <div class="col s12 autocomplete-option autocomplete-option-{{@index}}"
-                    autocomplete-text="{{entityLabel}} {{text}}">
+                <div class="col s12 autocomplete-option">
                   {{{highlightedText}}}
                 </div>
                 {{#if chembl_id_link}}
                   <div class="absolute-right">
-                    <a class="chip-syn {{chembl_id_link.color}} darken-2 white-text right-align hoverable autocomplete-option-rc-link autocomplete-option-rc-link-{{@index}}"
+                    <a class="chip-syn {{chembl_id_link.color}} darken-2 white-text right-align hoverable autocomplete-option-rc-link"
                       href="{{chembl_id_link.href}}">
                       {{chembl_id_link.text}}
                     </a>
