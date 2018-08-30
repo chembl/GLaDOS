@@ -21,9 +21,11 @@ glados.useNameSpace 'glados.routers',
 
     initSearchResults: (currentTab, searchTerm, currentState) ->
 
+      glados.helpers.URLHelper.getInstance().setMode(glados.helpers.URLHelper.MODES.SEARCH_RESULTS)
+
       [selectedESEntity, searchTerm, currentState] = \
         glados.routers.MainGladosRouter.validateAndParseSearchURL(currentTab, searchTerm, currentState)
-      glados.routers.MainGladosRouter.updateSearchURL(selectedESEntity, searchTerm, currentState)
+      SearchModel.getInstance().trigger(SearchModel.EVENTS.SEARCH_PARAMS_HAVE_CHANGED, selectedESEntity, searchTerm, currentState)
       GlobalVariables.atSearchResultsPage = true
       glados.apps.Main.MainGladosApp.initSearchResults(selectedESEntity, searchTerm, currentState)
 
@@ -37,9 +39,11 @@ glados.useNameSpace 'glados.routers',
       glados.apps.Main.MainGladosApp.initFlexmatchSearchResults(searchTerm)
 
     initBrowser: (entityName, query, state) ->
+      glados.helpers.URLHelper.getInstance().setMode(glados.helpers.URLHelper.MODES.BROWSE_ENTITY)
       glados.apps.Main.MainGladosApp.initBrowserForEntity(entityName, query, state)
 
     initBrowserFullState: (entityName, encodedState) ->
+      glados.helpers.URLHelper.getInstance().setMode(glados.helpers.URLHelper.MODES.BROWSE_ENTITY)
       glados.apps.Main.MainGladosApp.initBrowserForEntity(entityName, query=undefined, state=encodedState,
         isFullState=true)
 
@@ -61,52 +65,10 @@ glados.useNameSpace 'glados.routers',
     #-------------------------------------------------------------------------------------------------------------------
     # SEARCH HELPERS
     #-------------------------------------------------------------------------------------------------------------------
-
-    getSearchURL: (esEntityKey, searchTerm, currentState, fragmentOnly=false)->
-      tab = 'all'
-      if esEntityKey? and _.has(glados.Settings.ES_KEY_2_SEARCH_PATH, esEntityKey)
-        tab = glados.Settings.ES_KEY_2_SEARCH_PATH[esEntityKey]
-      url = ''
-      if not fragmentOnly
-        url += glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL
-      url += "#search_results/#{tab}"
-      if searchTerm? and _.isString(searchTerm) and searchTerm.trim().length > 0
-       url += "/query=" + encodeURIComponent(searchTerm)
-      if currentState?
-       url += "/state=#{currentState}"
-      return url
-
-    updateSearchURL: (esEntityKey, searchTerm, currentState, trigger=false) ->
-
-      tabLabelPrefix = ''
-      if glados.models.paginatedCollections.Settings.ES_INDEXES[esEntityKey]?
-        tabLabelPrefix = glados.models.paginatedCollections.Settings.ES_INDEXES[esEntityKey].LABEL
-      breadcrumbLinks = [
-        {
-          label: (tabLabelPrefix+' Search Results').trim()
-          link: @getSearchURL(esEntityKey, null, null)
-          truncate: true
-        }
-      ]
-      if searchTerm?
-        breadcrumbLinks.push(
-          {
-            label: searchTerm
-            link: @getSearchURL(esEntityKey, searchTerm, null)
-            truncate: true
-          }
-        )
-
-      # This makes sure that the url and the breadcrumbs are correct. It is the job of the SearchResultsView to
-      # to show the correct tab.
-      newSearchURL = @getSearchURL(esEntityKey, searchTerm, currentState, true)
-      window.history.pushState({}, 'Search Results', newSearchURL)
-      glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks, longFilter=undefined,
-          hideShareButton=false,longFilterURL=undefined, askBeforeShortening=true)
-
     triggerSearchURL: (esEntityKey, searchTerm, currentState) ->
+
       #this puts the search url in the bar and navigates to it
-      newSearchURL = @getSearchURL(esEntityKey, searchTerm, currentState)
+      newSearchURL = SearchModel.getInstance().getSearchURL(esEntityKey, searchTerm, currentState)
       window.history.pushState({}, 'Search Results', newSearchURL)
 
       isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent)

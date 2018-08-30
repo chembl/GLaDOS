@@ -41,7 +41,6 @@ describe "An elasticsearch collection", ->
 
       for fGroupKey, fGroup of facetGroups
         for fKey, fData of fGroup.faceting_handler.faceting_data
-          console.log "DEBUGGING", fData
           expect(fData.selected).toBe(false)
 
     it 'selects one facet', ->
@@ -69,9 +68,7 @@ describe "An elasticsearch collection", ->
 
         esList.setMeta('searchESQuery', searchESQuery)
         facetGroups = esList.getFacetsGroups()
-        console.log 'facetGroups: ', facetGroups
         testFacetGroupKey = 'max_phase'
-        console.log 'faceting_keys_inorder: ', facetGroups[testFacetGroupKey].faceting_handler.faceting_keys_inorder
         testFacetKey = facetGroups[testFacetGroupKey].faceting_handler.faceting_keys_inorder[0]
         facetingHandler = facetGroups[testFacetGroupKey].faceting_handler
         facetingHandler.toggleKeySelection(testFacetKey)

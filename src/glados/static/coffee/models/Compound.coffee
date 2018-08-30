@@ -1055,8 +1055,13 @@ Compound.MINI_REPORT_CARD =
   TEMPLATE: 'Handlebars-Common-MiniReportCard'
   COLUMNS: Compound.COLUMNS_SETTINGS.MINI_REPORT_CARD
 
-Compound.getCompoundsListURL = (filter) ->
+Compound.getCompoundsListURL = (filter, isFullState=false, fragmentOnly=false) ->
 
-  glados.Settings.ENTITY_BROWSERS_URL_GENERATOR
+  if isFullState
+    filter = btoa(JSON.stringify(filter))
+
+  return glados.Settings.ENTITY_BROWSERS_URL_GENERATOR
+    fragment_only: fragmentOnly
     entity: 'compounds'
     filter: encodeURIComponent(filter) unless not filter?
+    is_full_state: isFullState

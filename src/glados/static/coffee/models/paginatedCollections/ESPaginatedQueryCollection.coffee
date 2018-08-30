@@ -439,6 +439,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       facetingHandler = facetsGroups[fGroupKey].faceting_handler
       isSelected = facetingHandler.toggleKeySelection(fKey)
       @setMeta('facets_changed', true)
+      @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.STATE_OBJECT_CHANGED)
       @fetch()
 
       return isSelected
@@ -535,6 +536,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       for fGroupKey, fGroup of @getFacetsGroups(true, onlyVisible=false)
         fGroup.faceting_handler.clearSelections()
 
+      @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.STATE_OBJECT_CHANGED)
       if @getMeta('test_mode')
         return
       @setMeta('facets_changed', true)
@@ -763,14 +765,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       if totalRecords >= 10000 and not iNeedToGetOnlySome
         msg = 'It is still not supported to process 10000 items or more! (' + totalRecords + ' requested)'
         @DOWNLOAD_ERROR_STATE = true
-#        errorModalID = 'error-' + parseInt(Math.random() * 1000)
-#        $newModal = $(Handlebars.compile($('#Handlebars-Common-DownloadErrorModal').html())
-#          modal_id: errorModalID
-#          msg: msg
-#        )
-#        $('#BCK-GeneratedModalsContainer').append($newModal)
-#        $newModal.modal()
-#        $newModal.modal('open')
         return [jQuery.Deferred().reject(msg)]
       else if totalRecords == 0
         msg = 'There are no items to process'

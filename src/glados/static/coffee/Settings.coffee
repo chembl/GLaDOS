@@ -308,13 +308,22 @@ glados.loadSearchResultsURLS = ()->
   glados.Settings.SHORTENED_EMBED_URL_GENERATOR =
   Handlebars.compile("#{glados.Settings.GLADOS_BASE_URL_FULL}embed/tiny/{{{hash}}}")
 
-  glados.Settings.ENTITY_BROWSERS_URL_TEMPLATE = glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL +
-    "browse/{{entity}}{{#if filter}}/filter/{{filter}}{{/if}}"
+  glados.Settings.ENTITY_BROWSERS_URL_TEMPLATE = "{{#if fragment_only}}\#{{else}}#{glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL}{{/if}}" +
+    "browse/{{entity}}" +
+    "{{#if filter}}" +
+      "{{#if is_full_state}}/full_state/{{else}}/filter/{{/if}}" +
+    "{{filter}}" +
+    "{{/if}}"
   glados.Settings.ENTITY_BROWSERS_URL_GENERATOR = Handlebars.compile(glados.Settings.ENTITY_BROWSERS_URL_TEMPLATE)
 
   glados.Settings.SIMILARITY_URL_TEMPLATE = glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL +
     "similarity_search_results/{{{term}}}/{{{threshold}}}"
   glados.Settings.SIMILARITY_URL_GENERATOR = Handlebars.compile(glados.Settings.SIMILARITY_URL_TEMPLATE)
+
+  glados.Settings.SEARCH_URL_TEMPLATE = "{{base_url}}search_results/{{tab}}" +
+    "{{#if query}}/query={{query}}{{/if}}" +
+    "{{#if state}}/state={{state}}{{/if}}"
+  glados.Settings.SEARCH_URL_GENERATOR = Handlebars.compile(glados.Settings.SEARCH_URL_TEMPLATE)
 
 # Logs the JavaScript environment details
 glados.logGladosSettings = () ->

@@ -6,11 +6,11 @@ glados.useNameSpace 'glados.views.Breadcrumb',
 
     render: ->
 
+      console.log 'RENDER BREADCRUMBS'
       @shortenedURL = undefined 
       $breadcrumbsContainer = $(@el).find('.BCK-dynamic-breadcrumbs')
       breadcrumbsList = @model.get('breadcrumbs_list')
       hideShareButton = @model.get('hide_share_button')
-      askBeforeShortening = @model.get('ask_before_sortening')
       glados.Utils.fillContentForElement $breadcrumbsContainer,
         breadcrumbs: breadcrumbsList
         hide_share_button: hideShareButton
@@ -21,14 +21,22 @@ glados.useNameSpace 'glados.views.Breadcrumb',
         long_filter: longFilter
 
       @hideFilterMenu()
+      @renderShareComponent()
+
+    renderShareComponent: ->
+      console.log 'RENDER SHARE COMPONENT', @
+      hideShareButton = @model.get('hide_share_button')
+      askBeforeShortening = @model.get('ask_before_sortening')
 
       if not hideShareButton
         $modalTrigger = $(@el).find('.BCK-open-share-modal')
 
         templateParams =
           link_to_share: @model.get('long_filter_url')
-        @$sharePageModal = ButtonsHelper.generateModalFromTemplate($modalTrigger, 'Handlebars-share-page-modal',
-          startingTop=undefined , endingTop=undefined, customID=undefined, templateParams=templateParams)
+
+        if not @$sharePageModal?
+          @$sharePageModal = ButtonsHelper.generateModalFromTemplate($modalTrigger, 'Handlebars-share-page-modal',
+            startingTop=undefined , endingTop=undefined, customID=undefined, templateParams=templateParams)
 
         needsShortening = glados.Utils.URLS.URLNeedsShortening(window.location.href, 100)
         match = window.location.href.match(glados.Settings.SHORTENING_MATCH_REPEXG)
@@ -60,7 +68,6 @@ glados.useNameSpace 'glados.views.Breadcrumb',
               glados.Utils.fillContentForElement($shorteningInfo, {}, customTemplate=undefined, fillWithPreloader=true)
               $shorteningInfo.empty()
               thisView.renderURLContainer(newHref)
-
 
     events:
       'click .BCK-open-filter-explain': 'toggleFilterMenu'

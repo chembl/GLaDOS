@@ -26,6 +26,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       totalRecords = @getMeta('total_records')
       totalRecords ?= 0
       return totalRecords
+
+    getLinkToListFunction: -> @getMeta('browse_list_url')
     # ------------------------------------------------------------------------------------------------------------------
     # Downloads
     # ------------------------------------------------------------------------------------------------------------------
@@ -251,6 +253,7 @@ glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS =
   FACETS_FETCHING_STATE_CHANGED: 'FACETS_FETCHING_STATE_CHANGED'
   SEARCH_STATE_CHANGED: 'SEARCH_STATE_CHANGED'
   AWAKE_STATE_CHANGED: 'AWAKE_STATE_CHANGED'
+  STATE_OBJECT_CHANGED: 'STATE_OBJECT_CHANGED'
 
 glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES =
   INITIAL_STATE: 'INITIAL_STATE'

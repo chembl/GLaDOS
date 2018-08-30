@@ -45,7 +45,8 @@ glados.useNameSpace 'glados.views.SearchResults',
     search: () ->
       searchString = @expandable_search_bar.val()
       if GlobalVariables.atSearchResultsPage
-        glados.routers.MainGladosRouter.updateSearchURL @selected_es_entity, searchString
+        SearchModel.getInstance().trigger(SearchModel.EVENTS.SEARCH_PARAMS_HAVE_CHANGED, @selected_es_entity,
+          searchString)
         @searchModel.search searchString, null
       else
         # Navigates to the specified URL

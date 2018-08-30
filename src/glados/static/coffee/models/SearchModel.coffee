@@ -15,6 +15,22 @@ SearchModel = Backbone.Model.extend
     autocompleteQuery: ''
 
   # --------------------------------------------------------------------------------------------------------------------
+  # URLS generation
+  # --------------------------------------------------------------------------------------------------------------------
+  getSearchURL: (esEntityKey, searchTerm, currentState, fragmentOnly=false) ->
+
+
+    tab = 'all'
+    if esEntityKey? and glados.Settings.ES_KEY_2_SEARCH_PATH[esEntityKey]?
+      tab = glados.Settings.ES_KEY_2_SEARCH_PATH[esEntityKey]
+
+    return glados.Settings.SEARCH_URL_GENERATOR
+      base_url: if fragmentOnly then '#' else glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL
+      tab: tab
+      query: if searchTerm? then encodeURIComponent(searchTerm) else undefined
+      state: currentState
+
+  # --------------------------------------------------------------------------------------------------------------------
   # Models
   # --------------------------------------------------------------------------------------------------------------------
 
@@ -103,7 +119,7 @@ SearchModel = Backbone.Model.extend
               suggestions.push docsSuggested[0]
             else
               suggestionI = docsSuggested[0]
-              suggestionI.chembl_id_link.href = glados.routers.MainGladosRouter.getSearchURL(
+              suggestionI.chembl_id_link.href = SearchModel.getInstance().getSearchURL(
                 suggestionI.entityKey, suggestionI.text
               )
               suggestionI.chembl_id_link.text = 'Multiple '+suggestionI.entityLabel
@@ -264,6 +280,7 @@ SearchModel = Backbone.Model.extend
 # ----------------------------------------------------------------------------------------------------------------------
 SearchModel.EVENTS =
   SEARCH_TERM_HAS_CHANGED: 'SEARCH_TERM_HAS_CHANGED'
+  SEARCH_PARAMS_HAVE_CHANGED: 'SEARCH_PARAMS_HAVE_CHANGED'
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Singleton pattern
