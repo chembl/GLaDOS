@@ -92,10 +92,19 @@ glados.useNameSpace 'glados.helpers',
 
     updateBrowserURL: (list) ->
 
-      fullState =
-        list: list.getStateJSON()
+      console.log 'updateBrowserURL'
 
-      newURL = list.getLinkToListFunction()(fullState, isFullState=true, fragmentOnly=true)
+      if @mode == glados.helpers.URLHelper.MODES.BROWSE_ENTITY
+        fullState =
+          list: list.getStateJSON()
+
+        newURL = list.getLinkToListFunction()(fullState, isFullState=true, fragmentOnly=true)
+      else if @mode == glados.helpers.URLHelper.MODES.SEARCH_RESULTS
+
+        console.log 'search results mode!!!'
+        return
+
+      console.log 'fullState: ', fullState
       if @testMode
         return newURL
 
