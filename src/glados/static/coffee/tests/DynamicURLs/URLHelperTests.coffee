@@ -92,7 +92,7 @@ describe 'URL Helper', ->
       glados.helpers.URLHelper.testMode = true
       urlHelper = glados.helpers.URLHelper.getInstance()
       urlHelper.setMode(currentMode)
-      urlHelper.setList(esList)
+      urlHelper.listenToList(esList)
 
     it 'initialises the instance', -> testModeSetting(currentMode)
 

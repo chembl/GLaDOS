@@ -10,6 +10,7 @@ glados.useNameSpace 'glados.helpers',
 
     constructor: ->
 
+      @listenedLists = []
       @testMode = glados.helpers.URLHelper.testMode
       # set a default mode just in case
       @setMode(URLHelper.MODES.SEARCH_RESULTS)
@@ -20,11 +21,11 @@ glados.useNameSpace 'glados.helpers',
       if newMode == @mode
         return
 
+      @unbindLists()
       @mode = newMode
       searchModel = SearchModel.getInstance()
       if @mode == URLHelper.MODES.SEARCH_RESULTS
         searchModel.on SearchModel.EVENTS.SEARCH_PARAMS_HAVE_CHANGED, @triggerUpdateSearchURL, @
-        @unsetList()
       else
         searchModel.off SearchModel.EVENTS.SEARCH_PARAMS_HAVE_CHANGED, @triggerUpdateSearchURL
 
@@ -75,15 +76,16 @@ glados.useNameSpace 'glados.helpers',
     #-------------------------------------------------------------------------------------------------------------------
     # Search results mode
     #-------------------------------------------------------------------------------------------------------------------
-    unsetList: ->
+    unbindLists: ->
 
-      if @list?
-        @list.off glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.STATE_OBJECT_CHANGED,
+      for list in @listenedLists
+        list.off glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.STATE_OBJECT_CHANGED,
           @triggerUpdateBrowserURL
 
-    setList: (@list) ->
+    listenToList: (list) ->
 
-      @list.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.STATE_OBJECT_CHANGED,
+      @listenedLists.push(list)
+      list.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.STATE_OBJECT_CHANGED,
         @triggerUpdateBrowserURL, @
 
     triggerUpdateBrowserURL: -> @updateBrowserURL(@list)
