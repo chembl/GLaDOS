@@ -46,5 +46,5 @@ export DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 export PYTHONPATH=${DIR}/src:${PYTHONPATH}
 echo "PYTHONPATH:$PYTHONPATH"
-python -m glados.tests.run_tests
+python -m glados.tests.run_tests test
 rc=$?; if [[ ${rc} != 0 ]]; then exit ${rc}; fi
