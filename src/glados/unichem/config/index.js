@@ -50,7 +50,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../../static'),
     assetsSubDirectory: 'unichem_gen',
-    assetsPublicPath: '/static/',
+    assetsPublicPath: 'static/',
 
     /**
      * Source Maps
