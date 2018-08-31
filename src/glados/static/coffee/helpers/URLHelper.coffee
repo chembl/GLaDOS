@@ -12,6 +12,7 @@ glados.useNameSpace 'glados.helpers',
 
       @listenedLists = []
       @testMode = glados.helpers.URLHelper.testMode
+      @fullStateOBJ = {}
       # set a default mode just in case
       @setMode(URLHelper.MODES.SEARCH_RESULTS)
 
@@ -21,6 +22,7 @@ glados.useNameSpace 'glados.helpers',
       if newMode == @mode
         return
 
+      @currentState = {}
       @unbindLists()
       @mode = newMode
       searchModel = SearchModel.getInstance()
@@ -36,13 +38,17 @@ glados.useNameSpace 'glados.helpers',
     #-------------------------------------------------------------------------------------------------------------------
     # Search results mode
     #-------------------------------------------------------------------------------------------------------------------
+    # current state is always a string, fullStateOBJ is an object.
     updateSearchURL: (esEntityKey, searchTerm, currentState) ->
 
-      if esEntityKey != glados.helpers.URLHelper.VALUE_UNCHANGED
+      console.log 'updateSearchURL'
+      if esEntityKey != glados.helpers.URLHelper.VALUE_UNCHANGED and esEntityKey != @esEntityKey
         @esEntityKey = esEntityKey
-      if searchTerm != glados.helpers.URLHelper.VALUE_UNCHANGED
+      if searchTerm != glados.helpers.URLHelper.VALUE_UNCHANGED and searchTerm != @searchTerm
         @searchTerm = searchTerm
-      if currentState != glados.helpers.URLHelper.VALUE_UNCHANGED
+        #when search term changes the full state is void
+        @fullStateOBJ = {}
+      if currentState != glados.helpers.URLHelper.VALUE_UNCHANGED and currentState != @currentState
         @currentState = currentState
 
       tabLabelPrefix = ''
@@ -88,7 +94,7 @@ glados.useNameSpace 'glados.helpers',
       list.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.STATE_OBJECT_CHANGED,
         @triggerUpdateBrowserURL, @
 
-    triggerUpdateBrowserURL: -> @updateBrowserURL(@list)
+    triggerUpdateBrowserURL: (list) -> @updateBrowserURL(list)
 
     updateBrowserURL: (list) ->
 
@@ -101,10 +107,17 @@ glados.useNameSpace 'glados.helpers',
         newURL = list.getLinkToListFunction()(fullState, isFullState=true, fragmentOnly=true)
       else if @mode == glados.helpers.URLHelper.MODES.SEARCH_RESULTS
 
-        console.log 'search results mode!!!'
-        return
+        if not @fullStateOBJ.lists_states?
+          @fullStateOBJ.lists_states = {}
 
-      console.log 'fullState: ', fullState
+        @fullStateOBJ.lists_states[list.getMeta('key_name')] = list.getStateJSON()
+
+        console.log '@fullStateOBJ: ', @fullStateOBJ
+        stringState = btoa(JSON.stringify(@fullStateOBJ))
+        @currentState = stringState
+
+        newURL = SearchModel.getInstance().getSearchURL(@esEntityKey, @searchTerm, @currentState, true)
+
       if @testMode
         return newURL
 
