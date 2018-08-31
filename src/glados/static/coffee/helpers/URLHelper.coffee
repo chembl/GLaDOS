@@ -11,6 +11,8 @@ glados.useNameSpace 'glados.helpers',
     constructor: ->
 
       @listenedLists = []
+      if glados.JS_TEST_MODE
+        glados.helpers.URLHelper.testMode = true
       @testMode = glados.helpers.URLHelper.testMode
       @fullStateOBJ = {}
       # set a default mode just in case
