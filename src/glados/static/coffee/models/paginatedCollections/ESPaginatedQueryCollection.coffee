@@ -14,6 +14,39 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @reset()
 
     # ------------------------------------------------------------------------------------------------------------------
+    # State handling
+    # ------------------------------------------------------------------------------------------------------------------
+    loadStateForSearchList: (stateObject) ->
+
+      queryString = stateObject.custom_query
+      useQueryString = stateObject.use_custom_query
+      searchESQuery = stateObject.searchESQuery
+      stickyQuery = stateObject.sticky_query
+      itemsList = stateObject.generator_items_list
+      contextualProperties = stateObject.contextual_properties
+      searchTerm = stateObject.search_term
+
+      @setMeta('custom_query', queryString)
+      @setMeta('use_custom_query', useQueryString)
+      @setMeta('searchESQuery', searchESQuery)
+      @setMeta('sticky_query', stickyQuery)
+      @setMeta('generator_items_list', itemsList)
+      @setMeta('contextual_properties', contextualProperties)
+      @setMeta('search_term', searchTerm)
+      @setMeta('at_least_one_facet_is_selected', stateObject.at_least_one_facet_is_selected)
+
+      facetGroups = @getFacetsGroups()
+      facetsState = stateObject.facets_state
+
+      if facetsState?
+        for fGroupKey, fGroupState of facetsState
+
+          originalFGroupState = facetsState[fGroupKey]
+          facetingHandler = facetGroups[fGroupKey].faceting_handler
+          facetingHandler.loadState(originalFGroupState)
+
+
+    # ------------------------------------------------------------------------------------------------------------------
     # Parse/Fetch Collection data
     # ------------------------------------------------------------------------------------------------------------------
     simplifyHighlights: (highlights)->
@@ -182,6 +215,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @setItemsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.ITEMS_READY)
 
       if @searchQueryIsSet()
+        console.log 'SEARCH IS READY'
         @setSearchState(glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_IS_READY)
 
       return jsonResultsList
@@ -439,7 +473,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       facetingHandler = facetsGroups[fGroupKey].faceting_handler
       isSelected = facetingHandler.toggleKeySelection(fKey)
       @setMeta('facets_changed', true)
-      @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.STATE_OBJECT_CHANGED)
+      @setMeta('at_least_one_facet_is_selected', true)
+      @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.STATE_OBJECT_CHANGED, @)
       @fetch()
 
       return isSelected
@@ -536,7 +571,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       for fGroupKey, fGroup of @getFacetsGroups(true, onlyVisible=false)
         fGroup.faceting_handler.clearSelections()
 
-      @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.STATE_OBJECT_CHANGED)
+      if @getMeta('at_least_one_facet_is_selected')
+        @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.STATE_OBJECT_CHANGED, @)
+      @setMeta('at_least_one_facet_is_selected', false)
+
       if @getMeta('test_mode')
         return
       @setMeta('facets_changed', true)
@@ -593,6 +631,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
     cleanUpList: (doFetch) ->
 
+
       @resetCache() unless not @getMeta('enable_collection_caching')
       @invalidateAllDownloadedResults()
       @unSelectAll()
@@ -605,11 +644,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # Search functions
     # ------------------------------------------------------------------------------------------------------------------
 
-    search: (searchESQuery, doFetch=false)->
+    search: (searchESQuery=@getMeta('searchESQuery'), doFetch=false, cleanUpBeforeFetch=true)->
       @setMeta('searchESQuery', searchESQuery)
       @setSearchState(glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_QUERY_SET)
       @sleep()
-      @cleanUpList(doFetch)
+
+      if cleanUpBeforeFetch
+        @cleanUpList(doFetch)
 
       if not doFetch
         @doFetchWhenAwaken()

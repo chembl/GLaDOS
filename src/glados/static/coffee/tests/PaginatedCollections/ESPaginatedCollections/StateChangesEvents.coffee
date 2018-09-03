@@ -43,6 +43,11 @@ describe "An elasticsearch collection", ->
 
     it 'Triggers the event after clearing facets selections', ->
 
+      facetGroups = esList.getFacetsGroups()
+      testFacetGroupKey = 'max_phase'
+      testFacetKey = facetGroups[testFacetGroupKey].faceting_handler.faceting_keys_inorder[0]
+      esList.toggleFacetAndFetch(testFacetGroupKey, testFacetKey)
+
       eventTriggered = false
       esList.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.STATE_OBJECT_CHANGED,
       (-> eventTriggered = true)

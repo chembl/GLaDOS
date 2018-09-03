@@ -6,7 +6,6 @@ glados.useNameSpace 'glados.views.Breadcrumb',
 
     render: ->
 
-      console.log 'RENDER BREADCRUMBS'
       @shortenedURL = undefined 
       $breadcrumbsContainer = $(@el).find('.BCK-dynamic-breadcrumbs')
       breadcrumbsList = @model.get('breadcrumbs_list')
@@ -24,7 +23,6 @@ glados.useNameSpace 'glados.views.Breadcrumb',
       @renderShareComponent()
 
     renderShareComponent: ->
-      console.log 'RENDER SHARE COMPONENT', @
       hideShareButton = @model.get('hide_share_button')
       askBeforeShortening = @model.get('ask_before_sortening')
 
