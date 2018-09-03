@@ -101,6 +101,7 @@ glados.useNameSpace 'glados.helpers',
     updateBrowserURL: (list) ->
 
       console.log 'updateBrowserURL'
+      console.log 'list: ', list
 
       if @mode == glados.helpers.URLHelper.MODES.BROWSE_ENTITY
         fullState =

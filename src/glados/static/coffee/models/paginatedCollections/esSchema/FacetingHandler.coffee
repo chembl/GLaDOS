@@ -155,7 +155,12 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
     loadState: (stateJSON) ->
 
+      if stateJSON.es_property_name == 'max_phase'
+        console.log 'load faceting state: ', stateJSON
       $.extend(@, stateJSON)
+
+      if stateJSON.es_property_name == 'max_phase'
+        console.log 'my new state: ', @
 
 
     # ------------------------------------------------------------------------------------------------------------------

@@ -2,7 +2,7 @@ glados.useNameSpace 'glados.routers',
   MainGladosRouter: Backbone.Router.extend
     routes:
       '': 'initMainPage'
-      'search_results(/:current_tab)(/query=:search_term)(/state=:search_term)': 'initSearchResults'
+      'search_results(/:current_tab)(/query=:search_term)(/state=:state)': 'initSearchResults'
       'substructure_search_results/:search_term': 'initSubstructureSearchResults'
       'similarity_search_results/:search_term/:threshold': 'initSimilaritySearchResults'
       'flexmatch_search_results/:search_term': 'initFlexmatchSearchResults'

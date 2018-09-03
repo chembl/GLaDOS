@@ -27,7 +27,7 @@ SearchModel = Backbone.Model.extend
       base_url: if fragmentOnly then '#' else glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL
       tab: tab
       query: if searchTerm? then encodeURIComponent(searchTerm) else undefined
-      state: currentState
+      state: if currentState? then encodeURIComponent(currentState) else undefined
 
   # --------------------------------------------------------------------------------------------------------------------
   # Models
@@ -251,24 +251,46 @@ SearchModel = Backbone.Model.extend
     ajaxDeferred.done(done_callback.bind(@))
     return ajaxDeferred
 
-  __search: ()->
+  __search: (stateObject) ->
     bestESQueries = @get('bestESQueries')
+    console.log 'bestESQueries: ', bestESQueries
+    console.log 'stateObject: ', stateObject
     rls_dict = @getResultsListsDict()
-    for resource_name, resource_es_collection of rls_dict
-      indexName = resource_es_collection.getMeta('index_name')
-      # don't do fetch, it will be done only when the list is required by a tab
-      resource_es_collection.search(bestESQueries[indexName].query, doFetch=false)
-      resource_es_collection.setMeta('max_score', bestESQueries[indexName].max_score)
-      resource_es_collection.setMeta('total_records', bestESQueries[indexName].total)
+    for resource_name, currentEsList of rls_dict
+      indexName = currentEsList.getMeta('index_name')
+
+      currentKeyName = currentEsList.getMeta('key_name')
+      previousState = if stateObject? then stateObject.lists_states[currentKeyName] else undefined
+      console.log 'currentKeyName: ', currentKeyName
+      if previousState?
+        console.log 'I have a previous state'
+        currentEsList.loadStateForSearchList(previousState)
+        console.log 'loaded searchESQuery: ', currentEsList.getMeta('searchESQuery')
+        currentEsList.search(undefined, doFetch=false, cleanUpBeforeFetch=false)
+        console.log 'currentEsList: ', currentEsList
+      else
+        # don't do fetch, it will be done only when the list is required by a tab
+        currentEsList.search(bestESQueries[indexName].query, doFetch=false)
+        currentEsList.setMeta('max_score', bestESQueries[indexName].max_score)
+        currentEsList.setMeta('total_records', bestESQueries[indexName].total)
     @trigger('updated_search_and_scores')
 
   # coordinates the search across the different results lists
-  search: (rawQueryString, selected_es_entity) ->
+  # you can also pass a state object, the state object can have states for some, all, or no lists.
+  # for every list that has a predefined state, it doesn't ask the server for the search ES query, it just
+  # restores the list from the state
+  search: (rawQueryString, selected_es_entity, stateObject) ->
+
+    console.log 'search, state obj:', stateObject
     if not rawQueryString?
       rawQueryString = ''
     @selected_es_entity = if _.isUndefined(selected_es_entity) then null else selected_es_entity
     ajaxDeferred = @parseQueryString(rawQueryString)
-    ajaxDeferred.then(@__search.bind(@))
+
+    thisModel = @
+    ajaxDeferred.then ->
+      thisModel.__search(stateObject)
+
     @trigger(SearchModel.EVENTS.SEARCH_TERM_HAS_CHANGED)
 
   resetSearchResultsListsDict: ()->
