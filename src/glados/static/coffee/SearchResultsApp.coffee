@@ -16,12 +16,7 @@ class SearchResultsApp
         selected_es_entity: selectedESEntity
         state: currentState
 
-    console.log 'selectedESEntity: ', selectedESEntity
-    console.log 'searchTerm: ', searchTerm
-    console.log 'currentState: ', currentState
-
     stateObject = if currentState? then JSON.parse(atob(currentState)) else undefined
-    console.log 'stateObject: ', stateObject
     SearchModel.getInstance().search(searchTerm, selectedESEntity, stateObject)
 
   # --------------------------------------------------------------------------------------------------------------------

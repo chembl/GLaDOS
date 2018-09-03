@@ -264,6 +264,14 @@ SearchModel = Backbone.Model.extend
 
         currentEsList.loadStateForSearchList(previousState)
         currentEsList.search(undefined, doFetch=false, cleanUpBeforeFetch=false)
+        thisView = @
+        updateSearchTabs = ->
+          thisView.trigger('updated_search_and_scores')
+        currentEsList.once(
+          glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.SEARCH_STATE_CHANGED,
+          updateSearchTabs
+        )
+
       else
         # don't do fetch, it will be done only when the list is required by a tab
         currentEsList.search(bestESQueries[indexName].query, doFetch=false)

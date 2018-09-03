@@ -18,11 +18,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
     loadStateForSearchList: (stateObject) ->
 
-      console.log 'loadStateForSearchList: ', stateObject
-
-#      basicSettingsPath = stateObject.settings_path
-#      settings = glados.Utils.getNestedValue(glados.models.paginatedCollections.Settings, basicSettingsPath)
-
       queryString = stateObject.custom_query
       useQueryString = stateObject.use_custom_query
       searchESQuery = stateObject.searchESQuery
@@ -38,10 +33,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @setMeta('generator_items_list', itemsList)
       @setMeta('contextual_properties', contextualProperties)
       @setMeta('search_term', searchTerm)
+      @setMeta('at_least_one_facet_is_selected', stateObject.at_least_one_facet_is_selected)
 
       facetGroups = @getFacetsGroups()
       facetsState = stateObject.facets_state
-      console.log 'facetsState: ', facetsState
 
       if facetsState?
         for fGroupKey, fGroupState of facetsState
@@ -220,6 +215,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @setItemsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.ITEMS_READY)
 
       if @searchQueryIsSet()
+        console.log 'SEARCH IS READY'
         @setSearchState(glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_IS_READY)
 
       return jsonResultsList
