@@ -253,21 +253,17 @@ SearchModel = Backbone.Model.extend
 
   __search: (stateObject) ->
     bestESQueries = @get('bestESQueries')
-    console.log 'bestESQueries: ', bestESQueries
-    console.log 'stateObject: ', stateObject
     rls_dict = @getResultsListsDict()
     for resource_name, currentEsList of rls_dict
       indexName = currentEsList.getMeta('index_name')
 
       currentKeyName = currentEsList.getMeta('key_name')
       previousState = if stateObject? then stateObject.lists_states[currentKeyName] else undefined
-      console.log 'currentKeyName: ', currentKeyName
+
       if previousState?
-        console.log 'I have a previous state'
+
         currentEsList.loadStateForSearchList(previousState)
-        console.log 'loaded searchESQuery: ', currentEsList.getMeta('searchESQuery')
         currentEsList.search(undefined, doFetch=false, cleanUpBeforeFetch=false)
-        console.log 'currentEsList: ', currentEsList
       else
         # don't do fetch, it will be done only when the list is required by a tab
         currentEsList.search(bestESQueries[indexName].query, doFetch=false)
@@ -281,7 +277,6 @@ SearchModel = Backbone.Model.extend
   # restores the list from the state
   search: (rawQueryString, selected_es_entity, stateObject) ->
 
-    console.log 'search, state obj:', stateObject
     if not rawQueryString?
       rawQueryString = ''
     @selected_es_entity = if _.isUndefined(selected_es_entity) then null else selected_es_entity

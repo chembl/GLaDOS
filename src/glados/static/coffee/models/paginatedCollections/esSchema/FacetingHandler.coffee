@@ -153,15 +153,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       state = JSON.parse(JSON.stringify(@))
       return state
 
-    loadState: (stateJSON) ->
-
-      if stateJSON.es_property_name == 'max_phase'
-        console.log 'load faceting state: ', stateJSON
-      $.extend(@, stateJSON)
-
-      if stateJSON.es_property_name == 'max_phase'
-        console.log 'my new state: ', @
-
+    loadState: (stateJSON) -> $.extend(@, stateJSON)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Query and Parse Facets to/from Elasticsearch
