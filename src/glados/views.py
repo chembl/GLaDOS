@@ -15,11 +15,9 @@ import timeago
 import json
 import hashlib
 import base64
-from django.views.decorators.cache import cache_page
 from glados.models import ESCachedRequest
 
 
-@cache_page(60 * 60)
 def visualise(request):
     context = {
         'hide_breadcrumbs': True
