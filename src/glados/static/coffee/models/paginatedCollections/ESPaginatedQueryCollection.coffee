@@ -654,6 +654,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       if not doFetch
         @doFetchWhenAwaken()
+      else
+        @fetch()
 
     # ------------------------------------------------------------------------------------------------------------------
     # Pagination functions

@@ -72,7 +72,7 @@ glados.useNameSpace 'glados.helpers',
       if searchTerm?
         breadcrumbLinks.push(
           {
-            label: searchTerm
+            label: @searchTerm
             link: SearchModel.getInstance().getSearchURL(@esEntityKey, @searchTerm, null)
             truncate: true
           }
