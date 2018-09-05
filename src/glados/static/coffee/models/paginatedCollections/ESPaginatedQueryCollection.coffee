@@ -215,7 +215,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @setItemsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.ITEMS_READY)
 
       if @searchQueryIsSet()
-        console.log 'SEARCH IS READY'
         @setSearchState(glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_IS_READY)
 
       return jsonResultsList

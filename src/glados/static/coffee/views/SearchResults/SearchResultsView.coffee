@@ -115,8 +115,6 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     openTab: (event) ->
 
-      console.log 'OPEN TAB'
-      console.log 'glados.helpers.URLHelper.VALUE_UNCHANGED: ', glados.helpers.URLHelper.VALUE_UNCHANGED
       $clickedElem = $(event.currentTarget)
       @selected_es_entity = $clickedElem.attr('data-resource-key')
       $(@el).find('.BCK-select-results-entity').removeClass('selected')
