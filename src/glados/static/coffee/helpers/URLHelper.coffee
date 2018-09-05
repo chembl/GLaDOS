@@ -30,6 +30,7 @@ glados.useNameSpace 'glados.helpers',
 
     triggerUpdateSearchURL: (esEntityKey, searchTerm, currentState) ->
 
+      console.log 'triggerUpdateSearchURL'
       @updateSearchURL(esEntityKey, searchTerm, currentState)
 
     bindSearchEvents: ->
@@ -45,6 +46,10 @@ glados.useNameSpace 'glados.helpers',
     # current state is always a string, fullStateOBJ is an object.
     updateSearchURL: (esEntityKey, searchTerm, currentState) ->
 
+      console.log 'UPDATE SEARCH URL'
+      console.log 'PARAM: esEntityKey ', esEntityKey
+      console.log 'PARAM: searchTerm ', searchTerm
+      console.log 'PARAM: currentState ', currentState
       if esEntityKey != glados.helpers.URLHelper.VALUE_UNCHANGED and esEntityKey != @esEntityKey
         @esEntityKey = esEntityKey
       if searchTerm != glados.helpers.URLHelper.VALUE_UNCHANGED and searchTerm != @searchTerm
