@@ -12,7 +12,11 @@
 
     {{/each}}
 
-    {{#unless hide_share_button}}<a class="BCK-open-share-modal"><i class="fa fa-share-alt"></i></a>{{/unless}}
+    {{#unless hide_share_button}}
+        <a class="BCK-open-share-modal" href="#{{ share_modal_id }}">
+            <i class="fa fa-share-alt"></i>
+        </a>
+    {{/unless}}
 </script>
 
 <script id="Handlebars-FilterExplainContent" type="text/x-handlebars-template">
