@@ -263,7 +263,7 @@ SearchModel = Backbone.Model.extend
       if previousState?
 
         currentEsList.loadStateForSearchList(previousState)
-        currentEsList.search(undefined, doFetch=false, cleanUpBeforeFetch=false)
+        currentEsList.search(undefined, doFetch=true, cleanUpBeforeFetch=false)
         thisView = @
         updateSearchTabs = ->
           thisView.trigger('updated_search_and_scores')

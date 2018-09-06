@@ -119,8 +119,8 @@ glados.useNameSpace 'glados.views.SearchResults',
       @selected_es_entity = $clickedElem.attr('data-resource-key')
       $(@el).find('.BCK-select-results-entity').removeClass('selected')
       $clickedElem.addClass('selected')
-      SearchModel.getInstance().trigger SearchModel.EVENTS.SEARCH_PARAMS_HAVE_CHANGED, @selected_es_entity,
-        @model.get('queryString')
+      SearchModel.getInstance().trigger SearchModel.EVENTS.SEARCH_PARAMS_HAVE_CHANGED, esEntityKey=@selected_es_entity,
+        searchTerm=glados.helpers.URLHelper.VALUE_UNCHANGED, currentState=glados.helpers.URLHelper.VALUE_UNCHANGED
       @showSelectedResourceOnly()
 
     showSelectedResourceOnly: ->

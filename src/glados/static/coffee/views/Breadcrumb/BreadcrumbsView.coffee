@@ -13,6 +13,7 @@ glados.useNameSpace 'glados.views.Breadcrumb',
       glados.Utils.fillContentForElement $breadcrumbsContainer,
         breadcrumbs: breadcrumbsList
         hide_share_button: hideShareButton
+        share_modal_id: @shareModalID
 
       $longFilterContent = $(@el).find('.BCK-filter-explain')
       longFilter = @model.get('long_filter')
@@ -23,6 +24,7 @@ glados.useNameSpace 'glados.views.Breadcrumb',
       @renderShareComponent()
 
     renderShareComponent: ->
+
       hideShareButton = @model.get('hide_share_button')
       askBeforeShortening = @model.get('ask_before_sortening')
 
@@ -35,6 +37,7 @@ glados.useNameSpace 'glados.views.Breadcrumb',
         if not @$sharePageModal?
           @$sharePageModal = ButtonsHelper.generateModalFromTemplate($modalTrigger, 'Handlebars-share-page-modal',
             startingTop=undefined , endingTop=undefined, customID=undefined, templateParams=templateParams)
+          @shareModalID = @$sharePageModal.attr('id')
 
         needsShortening = glados.Utils.URLS.URLNeedsShortening(window.location.href, 100)
         match = window.location.href.match(glados.Settings.SHORTENING_MATCH_REPEXG)

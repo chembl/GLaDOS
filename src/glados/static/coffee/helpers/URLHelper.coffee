@@ -67,7 +67,7 @@ glados.useNameSpace 'glados.helpers',
       if searchTerm?
         breadcrumbLinks.push(
           {
-            label: searchTerm
+            label: @searchTerm
             link: SearchModel.getInstance().getSearchURL(@esEntityKey, @searchTerm, null)
             truncate: true
           }
@@ -118,7 +118,6 @@ glados.useNameSpace 'glados.helpers',
 
         @fullStateOBJ.lists_states[list.getMeta('key_name')] = list.getStateJSON()
 
-        console.log '@fullStateOBJ: ', @fullStateOBJ
         stringState = btoa(JSON.stringify(@fullStateOBJ))
         @currentState = stringState
 
