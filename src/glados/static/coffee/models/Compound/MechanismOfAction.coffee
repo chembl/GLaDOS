@@ -54,6 +54,11 @@ glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS =
     glados.models.Compound.MechanismOfAction.COLUMNS.TARGET_CHEMBL_ID
     glados.models.Compound.MechanismOfAction.COLUMNS.REFERENCES
   ]
+  DOWNLOAD_COLUMNS: [
+    glados.models.Compound.MechanismOfAction.COLUMNS.MECHANISM_OF_ACTION
+    glados.models.Compound.MechanismOfAction.COLUMNS.TARGET_CHEMBL_ID
+    glados.models.Compound.MechanismOfAction.COLUMNS.REFERENCES
+  ]
 
 
 glados.models.Compound.MechanismOfAction.getListURL = (filter) ->
