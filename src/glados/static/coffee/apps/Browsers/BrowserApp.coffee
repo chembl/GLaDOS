@@ -36,9 +36,11 @@ glados.useNameSpace 'glados.apps.Browsers',
       tissues: 'Tissues'
       drugs: 'Drugs'
       activities: 'Activities'
+      mechanisms_of_action: 'Mechanisms of Action'
 
     @initBrowserForEntity = (entityName, query, state, isFullState=false) ->
 
+      console.log 'initBrowserForEntity'
       $mainContainer = $('.BCK-main-container')
       $mainContainer.show()
 
@@ -88,7 +90,6 @@ glados.useNameSpace 'glados.apps.Browsers',
         listState = decodedState.list
         list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFromState(listState)
       else
-        console.log 'entityName: ', entityName
         initListFunction = @entityListsInitFunctions[entityName]
         list = initListFunction(query)
 

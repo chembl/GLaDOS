@@ -16,6 +16,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
     initialize: ->
 
+      console.log 'INITIALISE VIEW'
       @showPreloader()
       @collection.on 'reset do-repaint sort', @renderViewState, @
       @collection.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_FETCHING_STATE_CHANGED,
@@ -27,6 +28,7 @@ glados.useNameSpace 'glados.views.Browsers',
         @handleListAwakeState, @
 
       @currentViewType = @collection.getMeta('default_view')
+      @currentViewType ?= @collection.getMeta('available_views')[0]
 
       # This handles all the views this menu view handles, there is one view per view type, for example
       # {'Table': <instance of table view>}

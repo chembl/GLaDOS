@@ -56,6 +56,7 @@ glados.useNameSpace 'glados.apps.Main',
       @showMainSplashScreen()
 
       promiseFunc = (resolve, reject)->
+        console.log 'CONTENT PREPARED'
         templateName = @baseTemplates[pageName]
         $gladosMainContent = $('#GladosMainContent')
         $gladosMainContent.empty()
@@ -155,7 +156,6 @@ glados.useNameSpace 'glados.apps.Main',
     # ------------------------------------------------------------------------------------------------------------------
     @initBrowserForEntity = (entityName, query, state, isFullState=false) ->
 
-      console.log 'initBrowserForEntity'
       promise = @prepareContentFor('browser')
 
       promise.then ->
@@ -191,6 +191,7 @@ glados.useNameSpace 'glados.apps.Main',
           longFilter=query,
           hideShareButton=false,
           longFilterURL=listConfig.BROWSE_LIST_URL(query))
+        console.log 'before initBrowserForEntity'
         glados.apps.Browsers.BrowserApp.initBrowserForEntity(entityName, query, state, isFullState)
 
     # ------------------------------------------------------------------------------------------------------------------

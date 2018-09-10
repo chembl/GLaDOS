@@ -49,3 +49,10 @@ glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS =
     glados.models.Compound.MechanismOfAction.COLUMNS.REFERENCES
     glados.models.Compound.MechanismOfAction.COLUMNS.COMPOUNDS
   ]
+
+
+glados.models.Compound.MechanismOfAction.getListURL = (filter) ->
+
+  glados.Settings.ENTITY_BROWSERS_URL_GENERATOR
+    entity: 'mechanisms_of_action'
+    filter: encodeURIComponent(filter) unless not filter?
