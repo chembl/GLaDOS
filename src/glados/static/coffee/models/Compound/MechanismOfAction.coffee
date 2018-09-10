@@ -46,7 +46,7 @@ glados.models.Compound.MechanismOfAction.COLUMNS =
     multiple_links: true
     multiple_links_function: (ids) -> ({text:id, url:Compound.get_report_card_url(id)} for id in ids)
   MOLECULE_CHEMBL_ID:
-    name_to_show: 'Mechanism Of Action'
+    name_to_show: 'Molecule'
     comparator: 'molecule_chembl_id'
     link_base: 'molecule_link'
 
