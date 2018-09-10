@@ -177,6 +177,8 @@ class CompoundReportCardApp extends glados.ReportCardApp
         tableView.hideSection()
 
     compound.on 'change', fetchList, @
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
 
   @initIndications = ->
 
