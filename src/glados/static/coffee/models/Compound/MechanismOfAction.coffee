@@ -16,6 +16,18 @@ glados.models.Compound.MechanismOfAction.COLUMNS =
     sort_disabled: false
     is_sorting: -1
     sort_class: 'fa-sort-desc'
+  ACTION_TYPE:
+    name_to_show: 'Action Type'
+    comparator: 'action_type'
+    sort_disabled: false
+    is_sorting: 0
+    sort_class: 'fa-sort'
+  MAX_PHASE:
+    name_to_show: 'Phase'
+    comparator: 'max_phase'
+    sort_disabled: false
+    is_sorting: 0
+    sort_class: 'fa-sort'
   TARGET_CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: 'target_chembl_id'
     link_base:'target_link'
@@ -33,6 +45,10 @@ glados.models.Compound.MechanismOfAction.COLUMNS =
     sort_class: 'fa-sort'
     multiple_links: true
     multiple_links_function: (ids) -> ({text:id, url:Compound.get_report_card_url(id)} for id in ids)
+  MOLECULE_CHEMBL_ID:
+    name_to_show: 'Mechanism Of Action'
+    comparator: 'molecule_chembl_id'
+    link_base: 'molecule_link'
 
 glados.models.Compound.MechanismOfAction.ID_COLUMN = glados.models.Compound.MechanismOfAction.COLUMNS.MECH_ID
 
@@ -50,13 +66,19 @@ glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS =
     glados.models.Compound.MechanismOfAction.COLUMNS.COMPOUNDS
   ]
   RESULTS_LIST_TABLE: [
+    glados.models.Compound.MechanismOfAction.COLUMNS.MOLECULE_CHEMBL_ID
+    glados.models.Compound.MechanismOfAction.COLUMNS.ACTION_TYPE
     glados.models.Compound.MechanismOfAction.COLUMNS.MECHANISM_OF_ACTION
     glados.models.Compound.MechanismOfAction.COLUMNS.TARGET_CHEMBL_ID
+    glados.models.Compound.MechanismOfAction.COLUMNS.MAX_PHASE
     glados.models.Compound.MechanismOfAction.COLUMNS.REFERENCES
   ]
   DOWNLOAD_COLUMNS: [
+    glados.models.Compound.MechanismOfAction.COLUMNS.MOLECULE_CHEMBL_ID
+    glados.models.Compound.MechanismOfAction.COLUMNS.ACTION_TYPE
     glados.models.Compound.MechanismOfAction.COLUMNS.MECHANISM_OF_ACTION
     glados.models.Compound.MechanismOfAction.COLUMNS.TARGET_CHEMBL_ID
+    glados.models.Compound.MechanismOfAction.COLUMNS.MAX_PHASE
     glados.models.Compound.MechanismOfAction.COLUMNS.REFERENCES
   ]
 
