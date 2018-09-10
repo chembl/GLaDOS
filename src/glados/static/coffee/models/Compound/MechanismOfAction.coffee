@@ -43,11 +43,16 @@ glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS =
       colsList.push value
     return colsList
   )()
-  RESULTS_LIST_TABLE: [
+  RESULTS_LIST_TABLE_REPORT_CARD: [
     glados.models.Compound.MechanismOfAction.COLUMNS.MECHANISM_OF_ACTION
     glados.models.Compound.MechanismOfAction.COLUMNS.TARGET_CHEMBL_ID
     glados.models.Compound.MechanismOfAction.COLUMNS.REFERENCES
     glados.models.Compound.MechanismOfAction.COLUMNS.COMPOUNDS
+  ]
+  RESULTS_LIST_TABLE: [
+    glados.models.Compound.MechanismOfAction.COLUMNS.MECHANISM_OF_ACTION
+    glados.models.Compound.MechanismOfAction.COLUMNS.TARGET_CHEMBL_ID
+    glados.models.Compound.MechanismOfAction.COLUMNS.REFERENCES
   ]
 
 
