@@ -432,6 +432,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         INDEX_NAME: 'chembl_drug_indication'
         # PATH: Assigned after this declaration using the INDEX_NAME
         #BROWSE_LIST_URL: Drug.getDrugsListURL
+        BROWSE_LIST_URL: glados.models.Compound.DrugIndication.getListURL
         MODEL: glados.models.Compound.DrugIndication
         BASE_URL: 'base_url is set by initURL'
         DEFAULT_PAGE_SIZE: 5
@@ -440,6 +441,17 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           Table:
             Default: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         ID_COLUMN: glados.models.Compound.DrugIndication.ID_COLUMN
+      MECHANISMS_OF_ACTION:
+        ID_NAME: 'ESMechsOfAction'
+        LABEL: 'Mechanisms of Action'
+        INDEX_NAME: 'chembl_mechanism'
+        MODEL: glados.models.Compound.MechanismOfAction
+        DEFAULT_PAGE_SIZE: 5
+        COLUMNS: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.ALL_COLUMNS
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+        ID_COLUMN: glados.models.Compound.MechanismOfAction.ID_COLUMN
     WS_COLLECTIONS:
       ACTIVITIES_LIST:
         MODEL: Activity

@@ -23,7 +23,8 @@ glados.useNameSpace 'glados.apps.Browsers',
         .bind(glados.models.paginatedCollections.PaginatedCollectionFactory)
       activities: glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESActivitiesList\
         .bind(glados.models.paginatedCollections.PaginatedCollectionFactory)
-
+      mechanisms_of_action: glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESMechanismsOfActionList\
+        .bind(glados.models.paginatedCollections.PaginatedCollectionFactory)
 
     # TODO: standardise the entity names from the models
     @entityNames:
@@ -87,6 +88,7 @@ glados.useNameSpace 'glados.apps.Browsers',
         listState = decodedState.list
         list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFromState(listState)
       else
+        console.log 'entityName: ', entityName
         initListFunction = @entityListsInitFunctions[entityName]
         list = initListFunction(query)
 

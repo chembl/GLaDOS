@@ -80,3 +80,8 @@ glados.models.Compound.DrugIndication.COLUMNS_SETTINGS =
     glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_CHEMBL_ID
   ]
 
+glados.models.Compound.DrugIndication.getListURL = (filter) ->
+  
+  glados.Settings.ENTITY_BROWSERS_URL_GENERATOR
+    entity: 'mechanisms_of_action'
+    filter: encodeURIComponent(filter) unless not filter?

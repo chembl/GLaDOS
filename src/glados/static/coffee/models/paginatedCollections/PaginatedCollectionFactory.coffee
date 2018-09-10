@@ -271,6 +271,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         customQuery, useCustomQuery=true)
       return list
 
+    getNewESMechanismsOfActionList: (customQuery='*', itemsList, contextualProperties,
+      settings=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.MECHANISMS_OF_ACTION,
+      searchTerm) ->
+
+      list = @getNewESResultsListFor(settings, customQuery, useCustomQuery=(not itemsList?), itemsList,
+        contextualProperties, searchTerm)
+      return list
+
     getNewAssaysList: (filter='') ->
 
       list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.ASSAYS_LIST, filter)

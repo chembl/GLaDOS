@@ -1,5 +1,5 @@
 glados.useNameSpace 'glados.apps.Main',
-  MainGladosApp: class ActivitiesBrowserApp
+  MainGladosApp: class MainGladosApp
 
     @showMainSplashScreen = -> $('#GladosMainSplashScreen').show()
     @hideMainSplashScreen = -> $('#GladosMainSplashScreen').hide()
@@ -155,6 +155,7 @@ glados.useNameSpace 'glados.apps.Main',
     # ------------------------------------------------------------------------------------------------------------------
     @initBrowserForEntity = (entityName, query, state, isFullState=false) ->
 
+      console.log 'initBrowserForEntity'
       promise = @prepareContentFor('browser')
 
       promise.then ->
@@ -164,10 +165,11 @@ glados.useNameSpace 'glados.apps.Main',
 
         reverseDict.activities = 'ACTIVITY'
         reverseDict.drugs = 'DRUGS_LIST'
+        reverseDict.mechanisms_of_action = 'MECHANISMS_OF_ACTION'
         # use dict created by jf
         dictKey = reverseDict[entityName]
 
-        if entityName != 'activities' and entityName != 'drugs'
+        if entityName != 'activities' and entityName != 'drugs' and entityName != 'mechanisms_of_action'
           listConfig = glados.models.paginatedCollections.Settings.ES_INDEXES[dictKey]
         else
           listConfig = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH[dictKey]
