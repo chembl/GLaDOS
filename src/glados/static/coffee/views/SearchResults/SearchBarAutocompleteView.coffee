@@ -39,6 +39,8 @@ glados.useNameSpace 'glados.views.SearchResults',
       )
       @$barElem.parent().append('<div class="search-bar-autocomplete-wrapper"/>')
       @$autocompleteWrapperDiv = @$barElem.parent().find('.search-bar-autocomplete-wrapper')
+      # Override the default on enter of the search bar
+      @searchBarView.expandable_search_bar.onEnter(@barOnEnterCallback.bind(@))
       @registerRecalculatePositioningEvents()
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -96,13 +98,36 @@ glados.useNameSpace 'glados.views.SearchResults',
       @$barElem.resize bindedCall
 
     # ------------------------------------------------------------------------------------------------------------------
-    # Autocomplete divs Event Handling
+    # Autocomplete Navigation on Enter or Click
     # ------------------------------------------------------------------------------------------------------------------
 
-    getAutocompleteOptionOnClick: (option_index)->
+    getSuggestion: (suggIndex)->
+      if @autocompleteSuggestions? and suggIndex >= 0 and suggIndex < @autocompleteSuggestions.length
+        return @autocompleteSuggestions[suggIndex]
+      return null
+
+    getAutocompleteOptionOnClick: (optionIndex)->
       onClickCall = ()->
+        suggestion = @getSuggestion(optionIndex)
+        @search suggestion
+      return onClickCall.bind(@)
 
+    search: (suggestion=undefined)->
+      searchText = @lastSearch
+      selectedEntity = suggestion?.entityKey
+      if suggestion?
+        if not suggestion.multiple_documents
+          console.debug('SHOULD NAVIGATE TO URL')
+          return
+        else if not suggestion.header
+          searchText = suggestion.text
+      console.warn(searchText, selectedEntity)
+      @searchBarView.search(searchText, selectedEntity)
 
+    barOnEnterCallback: ()->
+      suggestion = @getSuggestion(@currentSelection)
+      console.warn(suggestion, @currentSelection)
+      @search suggestion
 
     # ------------------------------------------------------------------------------------------------------------------
     # style helpers
