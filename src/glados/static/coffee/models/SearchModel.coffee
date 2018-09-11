@@ -118,6 +118,7 @@ SearchModel = Backbone.Model.extend
               if docI.maxScore > maxScore
                 maxScore = docI.maxScore
             if docsSuggested.length == 1
+              docsSuggested[0].multiple_documents = false
               suggestions.push docsSuggested[0]
             else
               suggestionI = docsSuggested[0]
@@ -125,6 +126,7 @@ SearchModel = Backbone.Model.extend
                 suggestionI.entityKey, suggestionI.text
               )
               suggestionI.chembl_id_link.text = 'Multiple '+suggestionI.entityLabel
+              suggestionI.multiple_documents = true
               suggestions.push suggestionI
 
           insertAt = 0
@@ -197,7 +199,7 @@ SearchModel = Backbone.Model.extend
             }
             @set('autocompleteSuggestions', [result])
             return
-    if not @debouncedAutocompleteRequest
+    if not @debouncedAutocompleteRequest?
       @debouncedAutocompleteRequest = _.debounce(@__requestAutocompleteSuggestions.bind(@), 200)
     @debouncedAutocompleteRequest()
 
