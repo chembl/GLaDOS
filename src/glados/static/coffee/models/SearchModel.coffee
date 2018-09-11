@@ -221,7 +221,7 @@ SearchModel = Backbone.Model.extend
         expressionStr = '('+expressionStr+')'
       return expressionStr
     
-  parseQueryString: (rawQueryString)->
+  parseQueryString: (rawQueryString, selectedESEntity)->
 
     indexName2ResourceName = {}
     done_callback = (serverJsonResponse)->
@@ -232,6 +232,7 @@ SearchModel = Backbone.Model.extend
       sortedResourceNamesByScore = (indexName2ResourceName[indexName] for indexName in sortedIndexesByScore)
       expressionStr = @readParsedQueryRecursive(parsedQuery)
       @set('queryString', expressionStr)
+      @set('selectedESEntity', selectedESEntity)
       @set('jsonQuery', parsedQuery)
       @set('bestESQueries', bestESQueries)
       @set('sortedResourceNamesByScore', sortedResourceNamesByScore)
@@ -283,12 +284,11 @@ SearchModel = Backbone.Model.extend
   # you can also pass a state object, the state object can have states for some, all, or no lists.
   # for every list that has a predefined state, it doesn't ask the server for the search ES query, it just
   # restores the list from the state
-  search: (rawQueryString, selected_es_entity, stateObject) ->
-
+  search: (rawQueryString, selectedESEntity, stateObject) ->
     if not rawQueryString?
       rawQueryString = ''
-    @selected_es_entity = if _.isUndefined(selected_es_entity) then null else selected_es_entity
-    ajaxDeferred = @parseQueryString(rawQueryString)
+    selectedESEntity = (if selectedESEntity? then selectedESEntity else null)
+    ajaxDeferred = @parseQueryString(rawQueryString, selectedESEntity)
 
     thisModel = @
     ajaxDeferred.then ->
