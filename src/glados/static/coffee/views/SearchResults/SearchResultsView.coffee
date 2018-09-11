@@ -8,7 +8,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       @browsersDict = {}
       @$searchResultsListsContainersDict = {}
-      @selected_es_entity = @attributes?.selected_es_entity || null
+      @selectedESEntity = @attributes?.selectedESEntity || null
 
       @$listsContainer = $(@el).find('.BCK-ESResults-lists')
       @model.on SearchModel.EVENTS.SEARCH_TERM_HAS_CHANGED, @showPreloader, @
@@ -52,8 +52,8 @@ glados.useNameSpace 'glados.views.SearchResults',
     # ------------------------------------------------------------------------------------------------------------------
     # Preloader
     # ------------------------------------------------------------------------------------------------------------------
-    showPreloader: ->
 
+    showPreloader: ->
       $tabsContainer = $(@el).find('.BCK-summary-tabs-container')
       glados.Utils.fillContentForElement $tabsContainer, {}, customTemplate=undefined, fillWithPreloader=true
       @hideAllResources()
@@ -64,7 +64,7 @@ glados.useNameSpace 'glados.views.SearchResults',
     sortResultsListsViews: ->
 
       # If an entity is selected the ordering is skipped
-      if not @selected_es_entity
+      if not @selectedESEntity
         sortedResourceNamesByScore = @model.get('sortedResourceNamesByScore')
         for resource_name in sortedResourceNamesByScore
           idToMove =  @getBCKListContainerBaseID(resource_name) + '-container'
@@ -88,7 +88,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         total_records: 0
         label: 'All Results'
         url_path: SearchModel.getInstance().getSearchURL(null, @model.get('queryString'), null)
-        selected: if @selected_es_entity then false else true
+        selected: if @selectedESEntity then false else true
       })
 
       resultsListDict = @model.getResultsListsDict()
@@ -106,7 +106,7 @@ glados.useNameSpace 'glados.views.SearchResults',
           label:resourceLabel
           key: key_i
           url_path: SearchModel.getInstance().getSearchURL(key_i, @model.get('queryString'), null)
-          selected: @selected_es_entity == key_i
+          selected: @selectedESEntity == key_i
         })
 
       $tabsContainer = $(@el).find('.BCK-summary-tabs-container')
@@ -116,17 +116,17 @@ glados.useNameSpace 'glados.views.SearchResults',
     openTab: (event) ->
 
       $clickedElem = $(event.currentTarget)
-      @selected_es_entity = $clickedElem.attr('data-resource-key')
+      @selectedESEntity = $clickedElem.attr('data-resource-key')
       $(@el).find('.BCK-select-results-entity').removeClass('selected')
       $clickedElem.addClass('selected')
-      SearchModel.getInstance().trigger SearchModel.EVENTS.SEARCH_PARAMS_HAVE_CHANGED, esEntityKey=@selected_es_entity,
+      SearchModel.getInstance().trigger SearchModel.EVENTS.SEARCH_PARAMS_HAVE_CHANGED, esEntityKey=@selectedESEntity,
         searchTerm=glados.helpers.URLHelper.VALUE_UNCHANGED, currentState=glados.helpers.URLHelper.VALUE_UNCHANGED
       @showSelectedResourceOnly()
 
     showSelectedResourceOnly: ->
 
       # if you want to see all, only wake up the first one by default.
-      if not @selected_es_entity? or @selected_es_entity == ''
+      if not @selectedESEntity? or @selectedESEntity == ''
         @showAllTabs()
       else
         @showSelectedTabOnly()
@@ -148,7 +148,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       for currentKey, resultsListSettings of glados.models.paginatedCollections.Settings.ES_INDEXES
         # if there is a selection and this container is not selected it gets hidden if else it shows all resources
-        if @selected_es_entity != currentKey
+        if @selectedESEntity != currentKey
           @$searchResultsListsContainersDict[currentKey].hide()
           @browsersDict[currentKey].sleep()
         else
