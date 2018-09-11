@@ -89,7 +89,8 @@ glados.useNameSpace 'glados.views.SearchResults',
           @searchModel.requestAutocompleteSuggestions searchText, @
       else
         @searchModel.set('autocompleteSuggestions', [])
-      @lastSearch = searchText
+      if not isUpOrDown
+        @lastSearch = searchText
 
     registerRecalculatePositioningEvents: ()->
       bindedCall = @recalculatePositioning.bind(@)
