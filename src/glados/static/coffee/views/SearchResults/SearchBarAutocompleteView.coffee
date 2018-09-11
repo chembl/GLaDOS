@@ -126,6 +126,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     barOnEnterCallback: ()->
       suggestion = @getSuggestion(@currentSelection)
+      @$autocompleteWrapperDiv.hide()
       @search suggestion
 
     # ------------------------------------------------------------------------------------------------------------------
