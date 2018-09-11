@@ -80,16 +80,16 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     barKeyupHandler: (keyEvent)->
       searchText = @$barElem.val().trim()
-      isUpOrDown = keyEvent.which == 38 or keyEvent.which == 40
-      if not isUpOrDown
+      isUpOrDownOrEnter = keyEvent.which == 38 or keyEvent.which == 40 or keyEvent.which  == 13
+      if not isUpOrDownOrEnter
         @$autocompleteWrapperDiv.hide()
       if searchText.length >= 3
         # only submit the search if the text changes and is not on a selection doing up or down
-        if @lastSearch != searchText and (@currentSelection == -1 or not isUpOrDown)
+        if @lastSearch != searchText and (@currentSelection == -1 or not isUpOrDownOrEnter)
           @searchModel.requestAutocompleteSuggestions searchText, @
       else
         @searchModel.set('autocompleteSuggestions', [])
-      if not isUpOrDown
+      if not isUpOrDownOrEnter
         @lastSearch = searchText
 
     registerRecalculatePositioningEvents: ()->
@@ -126,6 +126,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     barOnEnterCallback: ()->
       suggestion = @getSuggestion(@currentSelection)
+      @$barElem.blur()
       @$autocompleteWrapperDiv.hide()
       @search suggestion
 
