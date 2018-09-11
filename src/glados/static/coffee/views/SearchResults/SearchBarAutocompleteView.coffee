@@ -46,7 +46,7 @@ glados.useNameSpace 'glados.views.SearchResults',
     # ------------------------------------------------------------------------------------------------------------------
 
     barFocusHandler: (event)->
-      @updateSelectedCss true
+      @updateSelected true
       if @$autocompleteWrapperDiv?
         if @numSuggestions == 0
           @$autocompleteWrapperDiv.hide()
@@ -54,7 +54,7 @@ glados.useNameSpace 'glados.views.SearchResults',
           @$autocompleteWrapperDiv.show()
 
     barBlurHandler: (event)->
-      @updateSelectedCss true
+      @updateSelected true
       if @$autocompleteWrapperDiv?
         @$autocompleteWrapperDiv.hide()
 
@@ -65,7 +65,7 @@ glados.useNameSpace 'glados.views.SearchResults',
           @currentSelection = @autocompleteSuggestions.length - 1
         else
           @currentSelection--
-        @updateSelectedCss()
+        @updateSelected()
         keyEvent.preventDefault()
       # Down key code
       else if keyEvent.which == 40
@@ -73,17 +73,21 @@ glados.useNameSpace 'glados.views.SearchResults',
           @currentSelection = -1
         else
           @currentSelection++
-        @updateSelectedCss()
+        @updateSelected()
         keyEvent.preventDefault()
 
     barKeyupHandler: (keyEvent)->
-      if @$barElem.val().length >= 3
-        searchText = @$barElem.val().trim()
-        if @lastSearch != searchText
+      searchText = @$barElem.val().trim()
+      isUpOrDown = keyEvent.which == 38 or keyEvent.which == 40
+      if not isUpOrDown
+        @$autocompleteWrapperDiv.hide()
+      if searchText.length >= 3
+        # only submit the search if the text changes and is not on a selection doing up or down
+        if @lastSearch != searchText and (@currentSelection == -1 or not isUpOrDown)
           @searchModel.requestAutocompleteSuggestions searchText, @
-          @lastSearch = searchText
       else
-        @searchModel.set 'autocompleteSuggestions',[]
+        @searchModel.set('autocompleteSuggestions', [])
+      @lastSearch = searchText
 
     registerRecalculatePositioningEvents: ()->
       bindedCall = @recalculatePositioning.bind(@)
@@ -104,7 +108,7 @@ glados.useNameSpace 'glados.views.SearchResults',
     # style helpers
     # ------------------------------------------------------------------------------------------------------------------
 
-    updateSelectedCss: (reset=false)->
+    updateSelected: (reset=false)->
       if reset
         @currentSelection = -1
         @$autocompleteWrapperDiv.scrollTop 0
@@ -115,6 +119,9 @@ glados.useNameSpace 'glados.views.SearchResults',
         divH = $selectedDiv.height()
         $selectedDiv.addClass 'selected'
         @$autocompleteWrapperDiv.scrollTop @currentSelection*divH
+        @searchBarView.expandable_search_bar.val(@autocompleteSuggestions[@currentSelection].text)
+      else if not reset
+        @searchBarView.expandable_search_bar.val(@lastSearch)
 
 
     recalculatePositioning: ()->
@@ -141,7 +148,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       if @searchModel.autocompleteCaller != @
         return
       if @$autocompleteWrapperDiv?
-        @updateSelectedCss true
+        @updateSelected true
         @autocompleteSuggestions = @searchModel.get('autocompleteSuggestions')
         @numSuggestions = @autocompleteSuggestions.length
         @$autoccompleteDiv = @suggestionsTemplate
@@ -149,7 +156,8 @@ glados.useNameSpace 'glados.views.SearchResults',
           textSearch: @lastSearch
         @$autocompleteWrapperDiv.html(@$autoccompleteDiv)
         @recalculatePositioning()
-        if @numSuggestions == 0
+        # Additional check to make sure the shown suggestions belong to the currently displayed text
+        if @numSuggestions == 0 or @autocompleteSuggestions[0].autocompleteQuery != @lastSearch
           @$autocompleteWrapperDiv.hide()
         else
           @$autocompleteWrapperDiv.show()
