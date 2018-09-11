@@ -10,6 +10,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       @searchModel = SearchModel.getInstance()
       @showAdvanced = false
 
+      @selectedESEntity = null
       @expandable_search_bar = ButtonsHelper.createExpandableInput($(@el).find('.chembl-search-bar'))
       @expandable_search_bar.onEnter(@search.bind(@))
       # Rendering and resize events
@@ -37,20 +38,23 @@ glados.useNameSpace 'glados.views.SearchResults',
     updateSearchBarFromModel: (e) ->
       if @expandable_search_bar
         @expandable_search_bar.val(@searchModel.get('queryString'))
+        @selectedESEntity = @searchModel.get('selectedESEntity')
 
     # ------------------------------------------------------------------------------------------------------------------
     # Additional Functionalities
     # ------------------------------------------------------------------------------------------------------------------
 
-    search: () ->
-      searchString = @expandable_search_bar.val()
+    search: (customSearchString=null, customSelectedEntity=null) ->
+      if customSelectedEntity?
+        @selectedESEntity = customSelectedEntity
+      searchString = if customSearchString? then customSearchString else @expandable_search_bar.val()
       if GlobalVariables.atSearchResultsPage
-        SearchModel.getInstance().trigger(SearchModel.EVENTS.SEARCH_PARAMS_HAVE_CHANGED, @selected_es_entity,
+        SearchModel.getInstance().trigger(SearchModel.EVENTS.SEARCH_PARAMS_HAVE_CHANGED, @selectedESEntity,
           searchString)
         @searchModel.search searchString, null
       else
         # Navigates to the specified URL
-        glados.routers.MainGladosRouter.triggerSearchURL @selected_es_entity, searchString,
+        glados.routers.MainGladosRouter.triggerSearchURL @selectedESEntity, searchString,
 
     searchAdvanced: () ->
       return
