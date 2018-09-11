@@ -87,7 +87,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         prepend_br: false
         total_records: 0
         label: 'All Results'
-        url_path: glados.routers.MainGladosRouter.getSearchURL(null, @model.get('queryString'), null)
+        url_path: SearchModel.getInstance().getSearchURL(null, @model.get('queryString'), null)
         selected: if @selected_es_entity then false else true
       })
 
@@ -105,7 +105,7 @@ glados.useNameSpace 'glados.views.SearchResults',
           total_records: totalRecords
           label:resourceLabel
           key: key_i
-          url_path: glados.routers.MainGladosRouter.getSearchURL(key_i, @model.get('queryString'), null)
+          url_path: SearchModel.getInstance().getSearchURL(key_i, @model.get('queryString'), null)
           selected: @selected_es_entity == key_i
         })
 
@@ -119,7 +119,8 @@ glados.useNameSpace 'glados.views.SearchResults',
       @selected_es_entity = $clickedElem.attr('data-resource-key')
       $(@el).find('.BCK-select-results-entity').removeClass('selected')
       $clickedElem.addClass('selected')
-      glados.routers.MainGladosRouter.updateSearchURL @selected_es_entity, @model.get('queryString')
+      SearchModel.getInstance().trigger SearchModel.EVENTS.SEARCH_PARAMS_HAVE_CHANGED, esEntityKey=@selected_es_entity,
+        searchTerm=glados.helpers.URLHelper.VALUE_UNCHANGED, currentState=glados.helpers.URLHelper.VALUE_UNCHANGED
       @showSelectedResourceOnly()
 
     showSelectedResourceOnly: ->

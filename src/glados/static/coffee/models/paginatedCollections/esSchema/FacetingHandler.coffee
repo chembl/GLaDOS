@@ -153,10 +153,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       state = JSON.parse(JSON.stringify(@))
       return state
 
-    loadState: (stateJSON) ->
-
-      $.extend(@, stateJSON)
-
+    loadState: (stateJSON) -> $.extend(@, stateJSON)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Query and Parse Facets to/from Elasticsearch

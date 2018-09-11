@@ -219,8 +219,13 @@ Activity.COLUMNS_SETTINGS = {
 Activity.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS = _.union(Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_TABLE,
   Activity.COLUMNS_SETTINGS.RESULTS_LIST_TABLE_ADDITIONAL)
 
-Activity.getActivitiesListURL = (filter) ->
+Activity.getActivitiesListURL = (filter, isFullState=false, fragmentOnly=false) ->
 
-  glados.Settings.ENTITY_BROWSERS_URL_GENERATOR
+  if isFullState
+    filter = btoa(JSON.stringify(filter))
+
+  return glados.Settings.ENTITY_BROWSERS_URL_GENERATOR
+    fragment_only: fragmentOnly
     entity: 'activities'
     filter: encodeURIComponent(filter) unless not filter?
+    is_full_state: isFullState

@@ -6,8 +6,9 @@ glados.useNameSpace 'glados.models.paginatedCollections.StateSaving',
     # transferred externally
     getStateJSON: ->
 
-      propertiesToSave = ['settings_path', 'custom_query_string', 'use_custom_query_string', 'sticky_query',
-        'searchESQuery', 'search_term', 'contextual_properties', 'generator_items_list']
+      propertiesToSave = ['settings_path', 'custom_query', 'use_custom_query', 'sticky_query',
+        'searchESQuery', 'search_term', 'contextual_properties', 'generator_items_list',
+        'at_least_one_facet_is_selected']
 
       state = {}
       for prop in propertiesToSave

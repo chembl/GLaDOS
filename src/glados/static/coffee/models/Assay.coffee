@@ -47,11 +47,16 @@ _.extend(Assay, glados.models.base.ReportCardEntity)
 Assay.color = 'amber'
 Assay.reportCardPath = 'assay_report_card/'
 
-Assay.getAssaysListURL = (filter) ->
+Assay.getAssaysListURL = (filter, isFullState=false, fragmentOnly=false) ->
 
-  glados.Settings.ENTITY_BROWSERS_URL_GENERATOR
+  if isFullState
+    filter = btoa(JSON.stringify(filter))
+
+  return glados.Settings.ENTITY_BROWSERS_URL_GENERATOR
+    fragment_only: fragmentOnly
     entity: 'assays'
     filter: encodeURIComponent(filter) unless not filter?
+    is_full_state: isFullState
 
 Assay.INDEX_NAME = 'chembl_assay'
 Assay.COLUMNS = {

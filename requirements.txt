@@ -1,6 +1,7 @@
 Arpeggio
 django==1.9.13
 django-compressor>=2.2
+django-cors-headers==2.4.0
 selenium==3.8.1
 twitter
 python3-memcached
@@ -15,3 +16,4 @@ elasticsearch==5.3.0
 elasticsearch-dsl==5.3.0
 google-api-python-client==1.6.6
 timeago==1.0.8
+cx-Oracle==6.4.1

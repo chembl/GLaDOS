@@ -265,8 +265,13 @@ Target.MINI_REPORT_CARD =
   TEMPLATE: 'Handlebars-Common-MiniReportCard'
   COLUMNS: Target.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
 
-Target.getTargetsListURL = (filter) ->
+Target.getTargetsListURL = (filter, isFullState=false, fragmentOnly=false) ->
 
-  glados.Settings.ENTITY_BROWSERS_URL_GENERATOR
+  if isFullState
+    filter = btoa(JSON.stringify(filter))
+
+  return glados.Settings.ENTITY_BROWSERS_URL_GENERATOR
+    fragment_only: fragmentOnly
     entity: 'targets'
     filter: encodeURIComponent(filter) unless not filter?
+    is_full_state: isFullState

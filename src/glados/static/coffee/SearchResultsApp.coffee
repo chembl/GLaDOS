@@ -16,7 +16,8 @@ class SearchResultsApp
         selected_es_entity: selectedESEntity
         state: currentState
 
-    SearchModel.getInstance().search(searchTerm)
+    stateObject = if currentState? then JSON.parse(atob(currentState)) else undefined
+    SearchModel.getInstance().search(searchTerm, selectedESEntity, stateObject)
 
   # --------------------------------------------------------------------------------------------------------------------
   # Views
