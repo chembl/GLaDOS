@@ -3,7 +3,7 @@ describe 'Drug Indications List', ->
   it 'Sets up the list properties correctly', ->
 
     testChemblID = 'CHEMBL1094636'
-    drugIndicationsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugIndicationsListReportCard(testChemblID)
+    drugIndicationsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugIndicationsListRepCard(testChemblID)
 
     propertiesMustBe =
       id_name: 'ESDrugIndications'
@@ -18,7 +18,7 @@ describe 'Drug Indications List', ->
   it 'Sets up the query string correctly', ->
 
     testChemblID = 'CHEMBL1094636'
-    drugIndicationsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugIndicationsListReportCard(testChemblID)
+    drugIndicationsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugIndicationsListRepCard(testChemblID)
 
     queryStringMustBe = "_metadata.all_molecule_chembl_ids:#{testChemblID}"
     queryStringGot = drugIndicationsList.getMeta('custom_query')
