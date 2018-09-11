@@ -70,7 +70,7 @@ glados.models.Compound.DrugIndication.COLUMNS_SETTINGS =
       colsList.push value
     return colsList
   )()
-  RESULTS_LIST_TABLE: [
+  RESULTS_LIST_TABLE_REPORT_CARD: [
     glados.models.Compound.DrugIndication.COLUMNS.MESH_HEADING
     glados.models.Compound.DrugIndication.COLUMNS.MESH_ID
     glados.models.Compound.DrugIndication.COLUMNS.EFO_TERM

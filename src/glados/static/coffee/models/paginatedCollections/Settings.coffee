@@ -426,7 +426,21 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         ENABLE_COLLECTION_CACHING: true
         DISABLE_CACHE_ON_DOWNLOAD: true
         LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
-      DRUG_INDICATIONS_LIST:
+      DRUG_INDICATIONS:
+        ID_NAME: 'ESDrugIndications'
+        LABEL: 'Drug Indications'
+        INDEX_NAME: 'chembl_drug_indication'
+        # PATH: Assigned after this declaration using the INDEX_NAME
+        #BROWSE_LIST_URL: Drug.getDrugsListURL
+        BROWSE_LIST_URL: glados.models.Compound.DrugIndication.getListURL
+        MODEL: glados.models.Compound.DrugIndication
+        DEFAULT_PAGE_SIZE: 5
+        COLUMNS: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.ALL_COLUMNS
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.RESULTS_LIST_TABLE_REPORT_CARD
+        ID_COLUMN: glados.models.Compound.DrugIndication.ID_COLUMN
+      DRUG_INDICATIONS_REPORT_CARD:
         ID_NAME: 'ESDrugIndications'
         LABEL: 'Drug Indications'
         INDEX_NAME: 'chembl_drug_indication'
@@ -439,7 +453,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
-            Default: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+            Default: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.RESULTS_LIST_TABLE_REPORT_CARD
         ID_COLUMN: glados.models.Compound.DrugIndication.ID_COLUMN
       MECHANISMS_OF_ACTION:
         ID_NAME: 'ESMechsOfAction'
