@@ -127,7 +127,6 @@ glados.useNameSpace 'glados.views.SearchResults',
     getAutocompleteOptionOnClick: (optionIndex)->
       onClickCall = ()->
         suggestion = @getSuggestion(optionIndex)
-        console.warn(optionIndex, suggestion)
         @$barElem.blur()
         @$autocompleteWrapperDiv.hide()
         @search suggestion
