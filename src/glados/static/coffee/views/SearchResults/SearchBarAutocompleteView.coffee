@@ -144,9 +144,12 @@ glados.useNameSpace 'glados.views.SearchResults',
         divH = $selectedDiv.height()
         $selectedDiv.addClass 'selected'
         @$autocompleteWrapperDiv.scrollTop @currentSelection*divH
-        @searchBarView.expandable_search_bar.val(@autocompleteSuggestions[@currentSelection].text)
+        if @autocompleteSuggestions[@currentSelection].header
+          @searchBarView.expandable_search_bar.val @lastSearch
+        else
+          @searchBarView.expandable_search_bar.val @autocompleteSuggestions[@currentSelection].text
       else if not reset
-        @searchBarView.expandable_search_bar.val(@lastSearch)
+        @searchBarView.expandable_search_bar.val @lastSearch
 
 
     recalculatePositioning: ()->
