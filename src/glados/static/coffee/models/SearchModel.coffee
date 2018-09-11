@@ -62,6 +62,7 @@ SearchModel = Backbone.Model.extend
   __requestAutocompleteSuggestions: ()->
     allSuggestions = []
     allSuggestionsScores = []
+    autocompleteQueryText = @autocompleteQuery
     getDoneCallBack = (es_index)->
 
       done_callback = (esData)->
@@ -70,6 +71,7 @@ SearchModel = Backbone.Model.extend
         for suggI in esData.suggest.autocomplete
           for optionJ in suggI.options
             suggestionI = {
+              autocompleteQuery: autocompleteQueryText
               chembl_id_link: glados.models.paginatedCollections.Settings.ES_INDEX_2_GLADOS_SETTINGS[es_index]\
                 .MODEL.get_colored_report_card_url(optionJ._id)
               header: false
@@ -105,6 +107,7 @@ SearchModel = Backbone.Model.extend
           suggestions.push {
             color: groupedSuggestions[sortedSuggestions[0]][0].chembl_id_link.color
             header: true
+            autocompleteQuery: autocompleteQueryText
             title: groupedSuggestions[sortedSuggestions[0]][0].entityLabel
             maxScore: groupedSuggestions[sortedSuggestions[0]][0].score
           }
