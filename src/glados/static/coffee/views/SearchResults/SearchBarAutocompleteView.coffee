@@ -16,12 +16,13 @@ glados.useNameSpace 'glados.views.SearchResults',
       @currentSelection = -1
       @numSuggestions = 0
       @autocompleteSuggestions = []
+      @searchBarView = null
 
     attachSearchBar: (searchBarView)->
       @searchBarView = searchBarView
       @$barElem = $(searchBarView.el).find('.chembl-search-bar')
       @$barElem.bind(
-        'keyup',
+        'keyup',@searchBarView
         @barKeyupHandler.bind(@)
       )
       @$barElem.bind(
@@ -89,6 +90,15 @@ glados.useNameSpace 'glados.views.SearchResults',
       $(window).scroll bindedCall
       $(window).resize bindedCall
       @$barElem.resize bindedCall
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Autocomplete divs Event Handling
+    # ------------------------------------------------------------------------------------------------------------------
+
+    getAutocompleteOptionOnClick: (option_index)->
+      onClickCall = ()->
+
+
 
     # ------------------------------------------------------------------------------------------------------------------
     # style helpers
