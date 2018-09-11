@@ -168,7 +168,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     renderViewState: ->
       @stampViewIDOnEventsTriggerers()
       @fillTemplates()
-      @renderLinkToAllActivities() unless not @islinkToOtherEntitiesEnabled()
+      @renderLinkToAllItems() unless not @config.full_list_url?
       @setUpEmbedModal() unless not @config.show_embed_button
 
     sleepView: ->
@@ -673,4 +673,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     islinkToOtherEntitiesEnabled: -> @collection.getMeta('enable_activities_link_for_selected_entities') == true
 
-    renderLinkToAllActivities: ->
+    renderLinkToAllItems: ->
+
+      $linkToAllContainer = $(@el).find('.BCK-LinkToBrowseAllItems')
+      glados.Utils.fillContentForElement $linkToAllContainer,
+        url: @config.full_list_url
