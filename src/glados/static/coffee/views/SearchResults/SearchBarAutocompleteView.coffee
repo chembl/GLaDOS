@@ -122,12 +122,10 @@ glados.useNameSpace 'glados.views.SearchResults',
           return
         else if not suggestion.header
           searchText = suggestion.text
-      console.warn(searchText, selectedEntity)
       @searchBarView.search(searchText, selectedEntity)
 
     barOnEnterCallback: ()->
       suggestion = @getSuggestion(@currentSelection)
-      console.warn(suggestion, @currentSelection)
       @search suggestion
 
     # ------------------------------------------------------------------------------------------------------------------
