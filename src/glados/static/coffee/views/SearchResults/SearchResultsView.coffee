@@ -46,8 +46,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       @hideAllResources()
       @model.off('updated_search_and_scores')
-      @model.on('updated_search_and_scores', @sortResultsListsViews, @)
-      @model.on('updated_search_and_scores', @renderTabs, @)
+      @model.on('updated_search_and_scores', @onUpdatedSearchAndScores, @)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Preloader
@@ -59,10 +58,19 @@ glados.useNameSpace 'glados.views.SearchResults',
       @hideAllResources()
 
     # ------------------------------------------------------------------------------------------------------------------
+    # Search Model Callback
+    # ------------------------------------------------------------------------------------------------------------------
+
+    onUpdatedSearchAndScores: ->
+      @selectedESEntity = @model.get('selectedESEntity')
+      @sortResultsListsViews()
+      @renderTabs()
+
+    # ------------------------------------------------------------------------------------------------------------------
     # sort Elements
     # ------------------------------------------------------------------------------------------------------------------
-    sortResultsListsViews: ->
 
+    sortResultsListsViews: ->
       # If an entity is selected the ordering is skipped
       if not @selectedESEntity
         sortedResourceNamesByScore = @model.get('sortedResourceNamesByScore')
