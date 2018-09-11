@@ -47,14 +47,16 @@ glados.useNameSpace 'glados.views.SearchResults',
     search: (customSearchString=null, customSelectedEntity=null) ->
       if customSelectedEntity?
         @selectedESEntity = customSelectedEntity
+      if not @selectedESEntity in glados.models.paginatedCollections.Settings.ES_INDEXES
+        @selectedESEntity = null
       searchString = if customSearchString? then customSearchString else @expandable_search_bar.val()
       if GlobalVariables.atSearchResultsPage
         SearchModel.getInstance().trigger(SearchModel.EVENTS.SEARCH_PARAMS_HAVE_CHANGED, @selectedESEntity,
           searchString)
-        @searchModel.search searchString, null
+        @searchModel.search(searchString, @selectedESEntity)
       else
         # Navigates to the specified URL
-        glados.routers.MainGladosRouter.triggerSearchURL @selectedESEntity, searchString,
+        glados.routers.MainGladosRouter.triggerSearchURL(@selectedESEntity, searchString)
 
     searchAdvanced: () ->
       return
