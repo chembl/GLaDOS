@@ -116,7 +116,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       searchText = @lastSearch
       selectedEntity = suggestion?.entityKey
       if suggestion?
-        if not suggestion.multiple_documents
+        if not suggestion.header and not suggestion.multiple_documents
           console.debug('SHOULD NAVIGATE TO URL')
           return
         else if not suggestion.header
