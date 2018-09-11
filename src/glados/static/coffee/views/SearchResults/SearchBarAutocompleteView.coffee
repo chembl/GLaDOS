@@ -57,7 +57,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     barBlurHandler: (event)->
       @updateSelected true
-      if @$autocompleteWrapperDiv?
+      if @$autocompleteWrapperDiv? and not @$autocompleteWrapperDiv.is(":hover")
         @$autocompleteWrapperDiv.hide()
 
     barKeydownHandler: (keyEvent)->
@@ -107,12 +107,6 @@ glados.useNameSpace 'glados.views.SearchResults',
         return @autocompleteSuggestions[suggIndex]
       return null
 
-    getAutocompleteOptionOnClick: (optionIndex)->
-      onClickCall = ()->
-        suggestion = @getSuggestion(optionIndex)
-        @search suggestion
-      return onClickCall.bind(@)
-
     search: (suggestion=undefined)->
       searchText = @lastSearch
       selectedEntity = suggestion?.entityKey
@@ -129,6 +123,21 @@ glados.useNameSpace 'glados.views.SearchResults',
       @$barElem.blur()
       @$autocompleteWrapperDiv.hide()
       @search suggestion
+
+    getAutocompleteOptionOnClick: (optionIndex)->
+      onClickCall = ()->
+        suggestion = @getSuggestion(optionIndex)
+        console.warn(optionIndex, suggestion)
+        @$barElem.blur()
+        @$autocompleteWrapperDiv.hide()
+        @search suggestion
+      return onClickCall.bind(@)
+
+    assignOnclickCallbacks: ()->
+      if @autocompleteSuggestions?
+        for suggestionI, i in @autocompleteSuggestions
+          clickDiv = @$autocompleteWrapperDiv.find('.ac-option-'+i)
+          clickDiv[0].onclick = @getAutocompleteOptionOnClick(i)
 
     # ------------------------------------------------------------------------------------------------------------------
     # style helpers
@@ -151,7 +160,6 @@ glados.useNameSpace 'glados.views.SearchResults',
           @searchBarView.expandable_search_bar.val @autocompleteSuggestions[@currentSelection].text
       else if not reset
         @searchBarView.expandable_search_bar.val @lastSearch
-
 
     recalculatePositioning: ()->
       if not _.has(@, '__recalculatePositioning')
@@ -184,6 +192,7 @@ glados.useNameSpace 'glados.views.SearchResults',
           suggestions: @autocompleteSuggestions
           textSearch: @lastSearch
         @$autocompleteWrapperDiv.html(@$autoccompleteDiv)
+        @assignOnclickCallbacks()
         @recalculatePositioning()
         # Additional check to make sure the shown suggestions belong to the currently displayed text
         if @numSuggestions == 0 or @autocompleteSuggestions[0].autocompleteQuery != @lastSearch
