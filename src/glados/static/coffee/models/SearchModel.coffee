@@ -62,6 +62,7 @@ SearchModel = Backbone.Model.extend
   __requestAutocompleteSuggestions: ()->
     allSuggestions = []
     allSuggestionsScores = []
+    autocompleteQueryText = @autocompleteQuery
     getDoneCallBack = (es_index)->
 
       done_callback = (esData)->
@@ -70,6 +71,7 @@ SearchModel = Backbone.Model.extend
         for suggI in esData.suggest.autocomplete
           for optionJ in suggI.options
             suggestionI = {
+              autocompleteQuery: autocompleteQueryText
               chembl_id_link: glados.models.paginatedCollections.Settings.ES_INDEX_2_GLADOS_SETTINGS[es_index]\
                 .MODEL.get_colored_report_card_url(optionJ._id)
               header: false
@@ -105,6 +107,8 @@ SearchModel = Backbone.Model.extend
           suggestions.push {
             color: groupedSuggestions[sortedSuggestions[0]][0].chembl_id_link.color
             header: true
+            autocompleteQuery: autocompleteQueryText
+            entityKey: groupedSuggestions[sortedSuggestions[0]][0].entityKey
             title: groupedSuggestions[sortedSuggestions[0]][0].entityLabel
             maxScore: groupedSuggestions[sortedSuggestions[0]][0].score
           }
@@ -115,6 +119,7 @@ SearchModel = Backbone.Model.extend
               if docI.maxScore > maxScore
                 maxScore = docI.maxScore
             if docsSuggested.length == 1
+              docsSuggested[0].multiple_documents = false
               suggestions.push docsSuggested[0]
             else
               suggestionI = docsSuggested[0]
@@ -122,6 +127,7 @@ SearchModel = Backbone.Model.extend
                 suggestionI.entityKey, suggestionI.text
               )
               suggestionI.chembl_id_link.text = 'Multiple '+suggestionI.entityLabel
+              suggestionI.multiple_documents = true
               suggestions.push suggestionI
 
           insertAt = 0
@@ -194,7 +200,7 @@ SearchModel = Backbone.Model.extend
             }
             @set('autocompleteSuggestions', [result])
             return
-    if not @debouncedAutocompleteRequest
+    if not @debouncedAutocompleteRequest?
       @debouncedAutocompleteRequest = _.debounce(@__requestAutocompleteSuggestions.bind(@), 200)
     @debouncedAutocompleteRequest()
 
@@ -221,7 +227,7 @@ SearchModel = Backbone.Model.extend
         expressionStr = '('+expressionStr+')'
       return expressionStr
     
-  parseQueryString: (rawQueryString)->
+  parseQueryString: (rawQueryString, selectedESEntity)->
 
     indexName2ResourceName = {}
     done_callback = (serverJsonResponse)->
@@ -232,6 +238,7 @@ SearchModel = Backbone.Model.extend
       sortedResourceNamesByScore = (indexName2ResourceName[indexName] for indexName in sortedIndexesByScore)
       expressionStr = @readParsedQueryRecursive(parsedQuery)
       @set('queryString', expressionStr)
+      @set('selectedESEntity', selectedESEntity)
       @set('jsonQuery', parsedQuery)
       @set('bestESQueries', bestESQueries)
       @set('sortedResourceNamesByScore', sortedResourceNamesByScore)
@@ -283,12 +290,11 @@ SearchModel = Backbone.Model.extend
   # you can also pass a state object, the state object can have states for some, all, or no lists.
   # for every list that has a predefined state, it doesn't ask the server for the search ES query, it just
   # restores the list from the state
-  search: (rawQueryString, selected_es_entity, stateObject) ->
-
+  search: (rawQueryString, selectedESEntity, stateObject) ->
     if not rawQueryString?
       rawQueryString = ''
-    @selected_es_entity = if _.isUndefined(selected_es_entity) then null else selected_es_entity
-    ajaxDeferred = @parseQueryString(rawQueryString)
+    selectedESEntity = (if selectedESEntity? then selectedESEntity else null)
+    ajaxDeferred = @parseQueryString(rawQueryString, selectedESEntity)
 
     thisModel = @
     ajaxDeferred.then ->
