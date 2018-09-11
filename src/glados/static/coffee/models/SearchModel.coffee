@@ -108,6 +108,7 @@ SearchModel = Backbone.Model.extend
             color: groupedSuggestions[sortedSuggestions[0]][0].chembl_id_link.color
             header: true
             autocompleteQuery: autocompleteQueryText
+            entityKey: groupedSuggestions[sortedSuggestions[0]][0].entityKey
             title: groupedSuggestions[sortedSuggestions[0]][0].entityLabel
             maxScore: groupedSuggestions[sortedSuggestions[0]][0].score
           }
