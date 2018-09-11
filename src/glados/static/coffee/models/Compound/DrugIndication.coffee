@@ -79,6 +79,15 @@ glados.models.Compound.DrugIndication.COLUMNS_SETTINGS =
     glados.models.Compound.DrugIndication.COLUMNS.REFERENCES
     glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_CHEMBL_ID
   ]
+  DOWNLOAD_COLUMNS: [
+    glados.models.Compound.DrugIndication.COLUMNS.MESH_HEADING
+    glados.models.Compound.DrugIndication.COLUMNS.MESH_ID
+    glados.models.Compound.DrugIndication.COLUMNS.EFO_TERM
+    glados.models.Compound.DrugIndication.COLUMNS.EFO_ID
+    glados.models.Compound.DrugIndication.COLUMNS.IND_MAX_PHASE
+    glados.models.Compound.DrugIndication.COLUMNS.REFERENCES
+    glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_CHEMBL_ID
+  ]
 
 glados.models.Compound.DrugIndication.getListURL = (filter) ->
   

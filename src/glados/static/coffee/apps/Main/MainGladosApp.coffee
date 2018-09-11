@@ -166,10 +166,12 @@ glados.useNameSpace 'glados.apps.Main',
         reverseDict.activities = 'ACTIVITY'
         reverseDict.drugs = 'DRUGS_LIST'
         reverseDict.mechanisms_of_action = 'MECHANISMS_OF_ACTION'
+        reverseDict.drug_indications = 'DRUG_INDICATIONS'
         # use dict created by jf
         dictKey = reverseDict[entityName]
 
-        if entityName != 'activities' and entityName != 'drugs' and entityName != 'mechanisms_of_action'
+        if entityName != 'activities' and entityName != 'drugs' and entityName != 'mechanisms_of_action' \
+        and entityName != 'drug_indications'
           listConfig = glados.models.paginatedCollections.Settings.ES_INDEXES[dictKey]
         else
           listConfig = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH[dictKey]

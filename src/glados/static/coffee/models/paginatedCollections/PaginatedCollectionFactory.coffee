@@ -304,7 +304,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         contextualProperties, searchTerm, stickyQuery)
       return list
 
-    getNewDrugIndicationsListReportCard: (chemblID) ->
+    getNewESDrugIndicationsList: (customQuery='*') ->
+
+      config = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.DRUG_INDICATIONS
+      list = @getNewESResultsListFor config, customQuery, useCustomQuery=true
+
+      return list
+
+    getNewDrugIndicationsListRepCard: (chemblID) ->
+
 
       queryString = "_metadata.all_molecule_chembl_ids:#{chemblID}"
       config = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.DRUG_INDICATIONS_REPORT_CARD

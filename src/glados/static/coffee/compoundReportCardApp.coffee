@@ -190,6 +190,8 @@ class CompoundReportCardApp extends glados.ReportCardApp
     viewConfig =
       embed_section_name: 'drug_indications'
       embed_identifier: chemblID
+      table_config:
+        full_list_url: glados.models.Compound.DrugIndication.getListURL("_metadata.all_molecule_chembl_ids:(#{chemblID})")
 
     new glados.views.ReportCards.PaginatedTableInCardView
       collection: drugIndicationsList
@@ -201,6 +203,8 @@ class CompoundReportCardApp extends glados.ReportCardApp
       report_card_app: @
 
     drugIndicationsList.fetch({reset: true})
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
 
   @initMoleculeFeatures = ->
 
