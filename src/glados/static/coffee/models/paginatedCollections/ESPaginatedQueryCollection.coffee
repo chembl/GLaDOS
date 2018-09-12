@@ -368,6 +368,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @addFacetsToQuery(esQuery, facetsFiltered, requestFacets, facetsFirstCall)
       @addStickyQuery(esQuery)
 
+      @setMeta('latest_request_data', esQuery)
       return esQuery
 
     getAllColumns: ->

@@ -1,0 +1,26 @@
+{% verbatim %}
+
+<script id="Handlebars-Common-QueryEditor" type="text/x-handlebars-template">
+
+<div class="query-editor" >
+    <div>
+        <a class="dotted-link">Show Full Query</a>
+    </div>
+    <div>
+        <div>Menu</div>
+        <div class="query-container BCK-query-container">
+            <!--- template is defined by view depending on the case -->
+        </div>
+    </div>
+
+</div>
+
+</script>
+
+<script id="Handlebars-Common-QueryEditor-Query" type="text/x-handlebars-template">
+<pre>
+    {{ query }}
+</pre>
+</script>
+
+{% endverbatim %}
