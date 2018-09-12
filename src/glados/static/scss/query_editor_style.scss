@@ -1,0 +1,11 @@
+@import "chembl_base";
+
+.query-editor{
+  .query-container{
+    background-color: $grey-light;
+    height: 20vh;
+    overflow-y: scroll;
+    resize: vertical;
+  }
+  margin-bottom: 5px;
+}
