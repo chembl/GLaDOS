@@ -8,6 +8,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
     events:
       'click .BCK-toggle-query-container': 'toggleQueryContainer'
+      'change .BCK-code-style-selector': 'selectCodeStyle'
 
     codeStyles:
       RAW: 'Raw'
@@ -16,14 +17,25 @@ glados.useNameSpace 'glados.views.Browsers',
     renderBaseStructure: ->
 
       codeStyles = _.values(@codeStyles)
+      @selectedCodeStyle = codeStyles[0]
       glados.Utils.fillContentForElement $(@el),
-        selected_code_style: codeStyles[0]
+        selected_code_style: @selectedCodeStyle
         code_styles: codeStyles[1..]
 
       $(@el).find('select').material_select()
 
+    selectCodeStyle: (event) ->
+
+      selectionValue = $(event.currentTarget).val()
+      if selectionValue == ''
+        return
+
+      console.log $(event.currentTarget).val()
+      @updateRenderedQuery()
+
     updateRenderedQuery: ->
 
+      console.log 'UPDATE RENDERED QUERY'
       $queryContainer = $(@el).find('.BCK-query')
       latestRequest = @collection.getMeta('latest_request_data')
       latestRequestStr = JSON.stringify(latestRequest, null, 2)
