@@ -13,7 +13,7 @@ class SearchResultsApp
       el: $searchResultsContainer
       model: SearchModel.getInstance()
       attributes:
-        selected_es_entity: selectedESEntity
+        selectedESEntity: selectedESEntity
         state: currentState
 
     stateObject = if currentState? then JSON.parse(atob(currentState)) else undefined
