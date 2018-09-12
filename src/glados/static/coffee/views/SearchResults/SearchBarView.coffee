@@ -44,12 +44,12 @@ glados.useNameSpace 'glados.views.SearchResults',
     # Additional Functionalities
     # ------------------------------------------------------------------------------------------------------------------
 
-    search: (customSearchString=null, customSelectedEntity=null) ->
-      if customSelectedEntity?
+    search: (customSearchString=undefined, customSelectedEntity=undefined) ->
+      if customSelectedEntity? and _.isString(customSelectedEntity)
         @selectedESEntity = customSelectedEntity
       if not @selectedESEntity in glados.models.paginatedCollections.Settings.ES_INDEXES
         @selectedESEntity = null
-      searchString = if customSearchString? then customSearchString else @expandable_search_bar.val()
+      searchString = if customSearchString? and _.isString(customSearchString) then customSearchString else @expandable_search_bar.val()
       if GlobalVariables.atSearchResultsPage
         SearchModel.getInstance().trigger(SearchModel.EVENTS.SEARCH_PARAMS_HAVE_CHANGED, @selectedESEntity,
           searchString)
