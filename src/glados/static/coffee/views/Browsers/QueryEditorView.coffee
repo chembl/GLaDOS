@@ -30,12 +30,14 @@ glados.useNameSpace 'glados.views.Browsers',
       if selectionValue == ''
         return
 
+      @selectedCodeStyle = selectionValue
       console.log $(event.currentTarget).val()
       @updateRenderedQuery()
 
     updateRenderedQuery: ->
 
       console.log 'UPDATE RENDERED QUERY'
+
       $queryContainer = $(@el).find('.BCK-query')
       latestRequest = @collection.getMeta('latest_request_data')
       latestRequestStr = JSON.stringify(latestRequest, null, 2)
@@ -45,8 +47,8 @@ glados.useNameSpace 'glados.views.Browsers',
         query: latestRequestStr
       glados.Utils.fillContentForElement($queryContainer, templateParams, customTemplate='Handlebars-Common-QueryEditor-Query')
 
-      $toggleTrigger = $(@el).find('.BCK-toggle-query-container')
-      @queryContainerOpen = $toggleTrigger.is(':visible')
+      $queryContainer = $(@el).find('.BCK-toggle-query-container')
+      @queryContainerOpen = $queryContainer.is(':visible')
 
     toggleQueryContainer: ->
       $(@el).find('.BCK-query-container').slideToggle()
