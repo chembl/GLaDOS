@@ -16,8 +16,7 @@
                     {{/each}}
                 </select>
             </div>
-            <div class="col s6">
-                buttons
+            <div class="col s6 buttons-container BCK-buttons-container">
             </div>
         </div>
         <div class="BCK-query query">
@@ -39,9 +38,7 @@
 </script>
 
 <script id="Handlebars-Common-QueryEditor-CURL" type="text/x-handlebars-template">
-<pre>
-    curl -XPOST "{{ url }}" -H 'Content-Type: application/json' -d'{{ query }}'
-</pre>
+<pre>curl -XPOST "{{ url }}" -H 'Content-Type: application/json' -d'{{ query }}'</pre>
 </script>
 
 {% endverbatim %}

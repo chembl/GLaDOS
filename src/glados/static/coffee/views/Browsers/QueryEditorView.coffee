@@ -23,6 +23,8 @@ glados.useNameSpace 'glados.views.Browsers',
         code_styles: codeStyles[1..]
 
       $(@el).find('select').material_select()
+      $buttonsContainer = $(@el).find('.BCK-buttons-container')
+      @$copyButton = ButtonsHelper.createAndAppendCopyButton($buttonsContainer)
 
     selectCodeStyle: (event) ->
 
@@ -43,15 +45,18 @@ glados.useNameSpace 'glados.views.Browsers',
 
       if @selectedCodeStyle == @codeStyles.RAW
         console.log 'RAW'
-
+        indexName = @collection.getMeta('index_name')
         templateParams =
           index_name: @collection.getMeta('index_name')
           query: latestRequestStr
+
+        textToCopy = "Index Name: #{indexName}\nQuery:\n#{latestRequestStr}"
         glados.Utils.fillContentForElement($queryContainer, templateParams,
           customTemplate='Handlebars-Common-QueryEditor-Query')
 
         $queryContainer = $(@el).find('.BCK-toggle-query-container')
         @queryContainerOpen = $queryContainer.is(':visible')
+
       else
 
         templateParams =
@@ -60,8 +65,10 @@ glados.useNameSpace 'glados.views.Browsers',
 
         glados.Utils.fillContentForElement($queryContainer, templateParams,
           customTemplate='Handlebars-Common-QueryEditor-CURL')
-        console.log 'CURL'
 
+        textToCopy = $queryContainer.find('pre').text()
+
+      ButtonsHelper.updateCopyDataOfButton(@$copyButton, textToCopy)
 
     toggleQueryContainer: ->
       $(@el).find('.BCK-query-container').slideToggle()
