@@ -31,7 +31,6 @@ glados.useNameSpace 'glados.views.Browsers',
         return
 
       @selectedCodeStyle = selectionValue
-      console.log $(event.currentTarget).val()
       @updateRenderedQuery()
 
     updateRenderedQuery: ->
@@ -42,13 +41,27 @@ glados.useNameSpace 'glados.views.Browsers',
       latestRequest = @collection.getMeta('latest_request_data')
       latestRequestStr = JSON.stringify(latestRequest, null, 2)
 
-      templateParams =
-        index_name: @collection.getMeta('index_name')
-        query: latestRequestStr
-      glados.Utils.fillContentForElement($queryContainer, templateParams, customTemplate='Handlebars-Common-QueryEditor-Query')
+      if @selectedCodeStyle == @codeStyles.RAW
+        console.log 'RAW'
 
-      $queryContainer = $(@el).find('.BCK-toggle-query-container')
-      @queryContainerOpen = $queryContainer.is(':visible')
+        templateParams =
+          index_name: @collection.getMeta('index_name')
+          query: latestRequestStr
+        glados.Utils.fillContentForElement($queryContainer, templateParams,
+          customTemplate='Handlebars-Common-QueryEditor-Query')
+
+        $queryContainer = $(@el).find('.BCK-toggle-query-container')
+        @queryContainerOpen = $queryContainer.is(':visible')
+      else
+
+        templateParams =
+          url: @collection.getURL()
+          query: latestRequestStr
+
+        glados.Utils.fillContentForElement($queryContainer, templateParams,
+          customTemplate='Handlebars-Common-QueryEditor-CURL')
+        console.log 'CURL'
+
 
     toggleQueryContainer: ->
       $(@el).find('.BCK-query-container').slideToggle()
