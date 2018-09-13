@@ -323,7 +323,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # generates an object with the data necessary to do the ES request
     # customPage: set a customPage if you want a page different than the one set as current
     # the same for customPageSize
-    getRequestData: (customPage, customPageSize, requestFacets=false, facetsFirstCall) ->
+    getRequestData: (customPage, customPageSize, requestFacets=false, facetsFirstCall=true) ->
 
       # If facets are requested the facet filters are excluded from the query
       facetsFiltered = true
@@ -367,8 +367,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       # Includes the selected facets filter
       @addFacetsToQuery(esQuery, facetsFiltered, requestFacets, facetsFirstCall)
       @addStickyQuery(esQuery)
-
-      @setMeta('latest_request_data', esQuery)
+      # do not save request facets calls for the editor
+      @setMeta('latest_request_data', esQuery) unless requestFacets
       return esQuery
 
     getAllColumns: ->

@@ -29,9 +29,7 @@ describe "An elasticsearch collection initialised from a custom query (full)", -
   it 'Distinguishes between a query string and a full query', ->
     expect(esList.customQueryIsFullQuery()).toBe(true)
 
-  it 'Generates the correct request object', ->
-
-    requestDataMustBe = {
+  requestDataMustBe = {
       "size": 24,
       "from": 0,
       "_source": {
@@ -51,6 +49,8 @@ describe "An elasticsearch collection initialised from a custom query (full)", -
       "sort": []
     }
 
+  it 'Generates the correct request object', ->
+
     requestDataGot = esList.getRequestData()
     requestDataGot.sort = []
     expect(_.isEqual(requestDataGot, requestDataMustBe)).toBe(true)
@@ -61,3 +61,10 @@ describe "An elasticsearch collection initialised from a custom query (full)", -
     useQueryStringMustBe = true)
 
   it 'creates a list from a state object', -> TestsUtils.testRestoredListIsEqualToOriginal(esList)
+
+  it 'saves the correct last request to show in the query editor',  ->
+
+      esList.getRequestData()
+      lastRequestSaved = esList.getMeta('latest_request_data')
+      expect(_.isEqual(lastRequestSaved, requestDataMustBe)).toBe(true)
+
