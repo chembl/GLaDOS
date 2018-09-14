@@ -46,10 +46,11 @@ glados.useNameSpace 'glados.views.Browsers',
         el: @$facetsElem
         menu_view: @
 
-      @$queryEditorElem = $(@el).find('.BCK-query-editor')
-      @queryEditorView = new glados.views.Browsers.QueryEditorView
-        collection: @collection
-        el: @$queryEditorElem
+      unless @collection.getMeta('streaming_mode')
+        @$queryEditorElem = $(@el).find('.BCK-query-editor')
+        @queryEditorView = new glados.views.Browsers.QueryEditorView
+          collection: @collection
+          el: @$queryEditorElem
 
       @showOrCreateView @currentViewType
 
