@@ -55,7 +55,7 @@ glados.useNameSpace 'glados.views.Browsers',
           customTemplate='Handlebars-Common-QueryEditor-Query')
 
         $queryContainer = $(@el).find('.BCK-toggle-query-container')
-        @queryContainerOpen = $queryContainer.is(':visible')
+        @queryContainerOpen = $queryContainer.hasClass('open')
 
       else
 
@@ -71,14 +71,19 @@ glados.useNameSpace 'glados.views.Browsers',
       ButtonsHelper.updateCopyDataOfButton(@$copyButton, textToCopy)
 
     toggleQueryContainer: ->
-      $(@el).find('.BCK-query-container').slideToggle()
-      @queryContainerOpen = not @queryContainerOpen
 
-      $toggleTrigger = $(@el).find('.BCK-toggle-query-container')
+      $queryContainer = $(@el).find('.BCK-query-container')
+      @queryContainerOpen = not @queryContainerOpen
+      $toggler = $(@el).find('.BCK-toggle-query-container')
+
       if @queryContainerOpen
-        $toggleTrigger.text('Hide Full Query')
+        $queryContainer.removeClass('closed')
+        $queryContainer.addClass('open')
+        $toggler.text('Hide Full Query')
       else
-        $toggleTrigger.text('Show Full Query')
+        $queryContainer.removeClass('open')
+        $queryContainer.addClass('closed')
+        $toggler.text('Show Full Query')
 
 
 
