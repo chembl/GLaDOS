@@ -57,7 +57,7 @@ class TestsUtils
 
           facetGroup.faceting_handler.parseESResults(aggData, firstCall)
       list.setFacetsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.FACETS_READY)
-      done()
+      done() unless not done?
 
   @generateListOfRandomValues = (minVal, maxVal) ->
 

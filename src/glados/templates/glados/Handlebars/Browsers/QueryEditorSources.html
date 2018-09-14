@@ -1,0 +1,45 @@
+{% verbatim %}
+
+<script id="Handlebars-Common-QueryEditor" type="text/x-handlebars-template">
+
+<div class="query-editor" >
+    <div>
+        <a class="dotted-link BCK-toggle-query-container">Show Full Query</a>
+    </div>
+    <div class="BCK-query-container query-container closed">
+        <div class="query-menu-container row">
+            <div class="input-field col s2">
+                <select class="BCK-code-style-selector">
+                    <option value="{{selected_code_style}}" selected>{{selected_code_style}}</option>
+                    {{#each code_styles}}
+                    <option value="{{this}}">{{this}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="col s10 buttons-container BCK-buttons-container">
+                <div class="BCK-copy-button right"></div>
+            </div>
+        </div>
+        <div class="BCK-query query">
+            <!--- template is defined by view depending on the case -->
+        </div>
+    </div>
+
+</div>
+
+</script>
+
+<script id="Handlebars-Common-QueryEditor-Query" type="text/x-handlebars-template">
+<b>Index Name:</b> {{ index_name }}
+<br>
+<b>Query: </b>
+<pre>
+    {{ query }}
+</pre>
+</script>
+
+<script id="Handlebars-Common-QueryEditor-CURL" type="text/x-handlebars-template">
+<pre>curl -XPOST "{{ url }}" -H 'Content-Type: application/json' -d'{{ query }}'</pre>
+</script>
+
+{% endverbatim %}

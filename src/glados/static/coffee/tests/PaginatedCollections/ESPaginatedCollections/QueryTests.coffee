@@ -61,3 +61,4 @@ describe "An elasticsearch collection initialised from a custom query (full)", -
     useQueryStringMustBe = true)
 
   it 'creates a list from a state object', -> TestsUtils.testRestoredListIsEqualToOriginal(esList)
+
