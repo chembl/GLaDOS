@@ -11,8 +11,8 @@ glados.useNameSpace 'glados.views.Browsers',
       'change .BCK-code-style-selector': 'selectCodeStyle'
 
     codeStyles:
-      RAW: 'Raw'
       CURL: 'cURL'
+      RAW: 'Raw'
 
     renderBaseStructure: ->
 
@@ -23,8 +23,8 @@ glados.useNameSpace 'glados.views.Browsers',
         code_styles: codeStyles[1..]
 
       $(@el).find('select').material_select()
-      $buttonsContainer = $(@el).find('.BCK-buttons-container')
-      @$copyButton = ButtonsHelper.createAndAppendCopyButton($buttonsContainer)
+      $copyButtonContainer = $(@el).find('.BCK-copy-button')
+      @$copyButton = ButtonsHelper.createAndAppendCopyButton($copyButtonContainer)
 
     selectCodeStyle: (event) ->
 

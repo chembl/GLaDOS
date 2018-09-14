@@ -5,17 +5,21 @@
   .query-container{
 
     height: 40vh;
-    overflow-y: scroll;
+    overflow-y: hidden;
     resize: vertical;
-    border: 1px solid #09979b;
+    background-color: #f5f5f5;
+    margin-top: 10px;
 
     .query{
       padding: 10px;
+      overflow-y: scroll;
+      height: calc(100% - 60px);
     }
   }
   .query-menu-container{
     padding: 0 10px;
     margin-bottom: 0;
+    border-bottom: 1px solid $grey-light;
     .buttons-container{
       margin-top: 7px;
     }
