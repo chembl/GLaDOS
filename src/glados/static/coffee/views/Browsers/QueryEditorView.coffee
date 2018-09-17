@@ -8,6 +8,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
     events:
       'click .BCK-toggle-query-container': 'toggleQueryContainer'
+      'click .BCK-toggle-queryStringEditor': 'toggleQuerystringEditor'
       'change .BCK-code-style-selector': 'selectCodeStyle'
 
     codeStyles:
@@ -57,6 +58,9 @@ glados.useNameSpace 'glados.views.Browsers',
         $queryContainer = $(@el).find('.BCK-toggle-query-container')
         @queryContainerOpen = $queryContainer.hasClass('open')
 
+        $queryEditorContainer = $(@el).find('.BCK-querystring-container')
+        @queryStringEditorOpen = $queryEditorContainer.hasClass('open')
+        
       else
 
         templateParams =
@@ -70,20 +74,30 @@ glados.useNameSpace 'glados.views.Browsers',
 
       ButtonsHelper.updateCopyDataOfButton(@$copyButton, textToCopy)
 
+    toggleQuerystringEditor: ->
+
+      $container = $(@el).find('.BCK-querystring-container')
+      $toggler = $(@el).find('.BCK-toggle-queryStringEditor')
+      @queryStringEditorOpen = not @queryStringEditorOpen
+      @toggleContainer($container, @queryStringEditorOpen, 'Hide Full Query', 'Show Full Query', $toggler)
+
     toggleQueryContainer: ->
 
-      $queryContainer = $(@el).find('.BCK-query-container')
-      @queryContainerOpen = not @queryContainerOpen
+      $container = $(@el).find('.BCK-query-container')
       $toggler = $(@el).find('.BCK-toggle-query-container')
+      @queryContainerOpen = not @queryContainerOpen
+      @toggleContainer($container, @queryContainerOpen, 'Hide Full Query', 'Show Full Query', $toggler)
 
-      if @queryContainerOpen
-        $queryContainer.removeClass('closed')
-        $queryContainer.addClass('open')
-        $toggler.text('Hide Full Query')
+    toggleContainer: ($container, isNowOpen, hideText, showText, $toggler) ->
+
+      if isNowOpen
+        $container.removeClass('closed')
+        $container.addClass('open')
+        $toggler.text(hideText)
       else
-        $queryContainer.removeClass('open')
-        $queryContainer.addClass('closed')
-        $toggler.text('Show Full Query')
+        $container.removeClass('open')
+        $container.addClass('closed')
+        $toggler.text(showText)
 
 
 
