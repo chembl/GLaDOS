@@ -23,6 +23,12 @@ glados.useNameSpace 'glados.views.Browsers',
         selected_code_style: @selectedCodeStyle
         code_styles: codeStyles[1..]
 
+      $queryContainer = $(@el).find('.BCK-toggle-query-container')
+      @queryContainerOpen = $queryContainer.hasClass('open')
+
+      $queryEditorContainer = $(@el).find('.BCK-querystring-container')
+      @queryStringEditorOpen = $queryEditorContainer.hasClass('open')
+
       $(@el).find('select').material_select()
       $copyButtonContainer = $(@el).find('.BCK-copy-button')
       @$copyButton = ButtonsHelper.createAndAppendCopyButton($copyButtonContainer)
@@ -36,16 +42,17 @@ glados.useNameSpace 'glados.views.Browsers',
       @selectedCodeStyle = selectionValue
       @updateRenderedQuery()
 
-    updateRenderedQuery: ->
+    updateQueryString: ->
 
-      console.log 'UPDATE RENDERED QUERY'
+
+    updateRenderedQuery: ->
 
       $queryContainer = $(@el).find('.BCK-query')
       latestRequest = @collection.getMeta('latest_request_data')
       latestRequestStr = JSON.stringify(latestRequest, null, 2)
 
       if @selectedCodeStyle == @codeStyles.RAW
-        console.log 'RAW'
+
         indexName = @collection.getMeta('index_name')
         templateParams =
           index_name: @collection.getMeta('index_name')
@@ -55,12 +62,6 @@ glados.useNameSpace 'glados.views.Browsers',
         glados.Utils.fillContentForElement($queryContainer, templateParams,
           customTemplate='Handlebars-Common-QueryEditor-Query')
 
-        $queryContainer = $(@el).find('.BCK-toggle-query-container')
-        @queryContainerOpen = $queryContainer.hasClass('open')
-
-        $queryEditorContainer = $(@el).find('.BCK-querystring-container')
-        @queryStringEditorOpen = $queryEditorContainer.hasClass('open')
-        
       else
 
         templateParams =
@@ -79,7 +80,7 @@ glados.useNameSpace 'glados.views.Browsers',
       $container = $(@el).find('.BCK-querystring-container')
       $toggler = $(@el).find('.BCK-toggle-queryStringEditor')
       @queryStringEditorOpen = not @queryStringEditorOpen
-      @toggleContainer($container, @queryStringEditorOpen, 'Hide Full Query', 'Show Full Query', $toggler)
+      @toggleContainer($container, @queryStringEditorOpen, 'Hide Querystring', 'Edit Querystring', $toggler)
 
     toggleQueryContainer: ->
 
