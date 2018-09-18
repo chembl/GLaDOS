@@ -20,11 +20,15 @@ glados.useNameSpace 'glados.views.Browsers',
 
     renderBaseStructure: ->
 
+      showQueryStringEditor = @collection.getMeta('use_custom_query') and not @collection.customQueryIsFullQuery()
+      console.log 'showQueryStringEditor: ', showQueryStringEditor
+
       codeStyles = _.values(@codeStyles)
       @selectedCodeStyle = codeStyles[0]
       glados.Utils.fillContentForElement $(@el),
         selected_code_style: @selectedCodeStyle
         code_styles: codeStyles[1..]
+        show_querystring_editor: showQueryStringEditor
 
       $queryContainer = $(@el).find('.BCK-toggle-query-container')
       @queryContainerOpen = $queryContainer.hasClass('open')
