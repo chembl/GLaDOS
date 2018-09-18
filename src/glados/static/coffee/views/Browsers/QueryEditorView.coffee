@@ -21,7 +21,6 @@ glados.useNameSpace 'glados.views.Browsers',
     renderBaseStructure: ->
 
       showQueryStringEditor = @collection.getMeta('use_custom_query') and not @collection.customQueryIsFullQuery()
-      console.log 'showQueryStringEditor: ', showQueryStringEditor
 
       codeStyles = _.values(@codeStyles)
       @selectedCodeStyle = codeStyles[0]
@@ -108,7 +107,7 @@ glados.useNameSpace 'glados.views.Browsers',
       $applyChangesBtn = $(@el).find('.BCK-apply-changes')
       if $applyChangesBtn.hasClass('disabled')
         return
-      console.log 'APPLY QUERYSTRING CHANGES'
+
       $queryStringTextArea = $(@el).find('.BCK-querystring-text-area')
       currentValue =  $queryStringTextArea.val()
       @collection.setMeta('custom_query', currentValue)

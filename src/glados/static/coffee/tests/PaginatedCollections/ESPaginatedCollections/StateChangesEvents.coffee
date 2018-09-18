@@ -11,6 +11,7 @@ describe "An elasticsearch collection", ->
 
     beforeAll (done) ->
 
+      console.log 'url helper events disabled'
       esList = glados.models.paginatedCollections.PaginatedCollectionFactory.getAllESResultsListDict()[\
       glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND.KEY_NAME
       ]
@@ -54,5 +55,15 @@ describe "An elasticsearch collection", ->
 
       esList.clearAllFacetsSelections()
       expect(eventTriggered).toBe(true)
+
+    it 'Triggers the event after changing the querystring', ->
+
+      eventTriggered = false
+      esList.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.STATE_OBJECT_CHANGED,
+      (-> eventTriggered = true)
+
+      esList.setMeta('custom_query', 'new querystring')
+      expect(eventTriggered).toBe(true)
+
 
 

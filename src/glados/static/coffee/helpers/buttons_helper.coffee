@@ -153,7 +153,7 @@ class ButtonsHelper
     $copyBtn.tooltip()
 
   @createAndAppendCopyButton = ($container) ->
-    console.log 'createAndAppendCopyButton'
+
     $button = $(glados.Utils.getContentFromTemplate('Handlebars-Common-CopyButton'))
     @initCopyButton($button, null, '')
     $container.append($button)

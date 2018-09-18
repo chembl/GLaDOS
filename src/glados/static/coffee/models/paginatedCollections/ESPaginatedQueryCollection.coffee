@@ -618,6 +618,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     setMeta: (attr, value) ->
       @meta[attr] = value
+      if attr == 'custom_query'
+        @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.STATE_OBJECT_CHANGED, @)
       @trigger('meta-changed')
 
     getMeta: (attr) ->
