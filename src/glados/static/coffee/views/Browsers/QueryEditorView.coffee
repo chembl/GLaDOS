@@ -5,12 +5,14 @@ glados.useNameSpace 'glados.views.Browsers',
 
       @renderBaseStructure()
       @collection.on 'request', @updateRenderedQuery, @
+      @collection.on 'request', @updateQueryString, @
 
     events:
       'click .BCK-toggle-query-container': 'toggleQueryContainer'
       'click .BCK-toggle-queryStringEditor': 'toggleQuerystringEditor'
       'change .BCK-code-style-selector': 'selectCodeStyle'
       'input propertychange .BCK-querystring-text-area': 'handleQueryStringChange'
+      'click .BCK-apply-changes': 'applyQueryStringChanges'
 
     codeStyles:
       CURL: 'cURL'
@@ -38,15 +40,9 @@ glados.useNameSpace 'glados.views.Browsers',
       $queryStringTextArea.bind('input propertychange', @handleQueryStringChange.bind(@))
       @updateQueryString()
 
-    selectCodeStyle: (event) ->
-
-      selectionValue = $(event.currentTarget).val()
-      if selectionValue == ''
-        return
-
-      @selectedCodeStyle = selectionValue
-      @updateRenderedQuery()
-
+    #-------------------------------------------------------------------------------------------------------------------
+    # Query String
+    #-------------------------------------------------------------------------------------------------------------------
     handleQueryStringChange: ->
 
       $queryStringTextArea = $(@el).find('.BCK-querystring-text-area')
@@ -60,6 +56,8 @@ glados.useNameSpace 'glados.views.Browsers',
     updateQueryString: ->
 
       $queryStringTextArea = $(@el).find('.BCK-querystring-text-area')
+      $applyChangesBtn = $(@el).find('.BCK-apply-changes')
+      $applyChangesBtn.addClass('disabled')
       currentQueryString = @collection.getMeta('custom_query')
       @previousQueryString = currentQueryString
       $queryStringTextArea.val(currentQueryString)
@@ -100,6 +98,29 @@ glados.useNameSpace 'glados.views.Browsers',
       $toggler = $(@el).find('.BCK-toggle-queryStringEditor')
       @queryStringEditorOpen = not @queryStringEditorOpen
       @toggleContainer($container, @queryStringEditorOpen, 'Hide Querystring', 'Edit Querystring', $toggler)
+
+    applyQueryStringChanges: ->
+
+      $applyChangesBtn = $(@el).find('.BCK-apply-changes')
+      if $applyChangesBtn.hasClass('disabled')
+        return
+      console.log 'APPLY QUERYSTRING CHANGES'
+      $queryStringTextArea = $(@el).find('.BCK-querystring-text-area')
+      currentValue =  $queryStringTextArea.val()
+      @collection.setMeta('custom_query', currentValue)
+      @collection.fetch()
+
+    #-------------------------------------------------------------------------------------------------------------------
+    # Full Query
+    #-------------------------------------------------------------------------------------------------------------------
+    selectCodeStyle: (event) ->
+
+      selectionValue = $(event.currentTarget).val()
+      if selectionValue == ''
+        return
+
+      @selectedCodeStyle = selectionValue
+      @updateRenderedQuery()
 
     toggleQueryContainer: ->
 

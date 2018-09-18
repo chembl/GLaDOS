@@ -138,6 +138,7 @@ footer {
   }
   &.disabled{
     background-color: $grey-light;
+    cursor: default;
   }
 }
 
