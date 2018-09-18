@@ -10,6 +10,7 @@ glados.useNameSpace 'glados.views.Browsers',
       'click .BCK-toggle-query-container': 'toggleQueryContainer'
       'click .BCK-toggle-queryStringEditor': 'toggleQuerystringEditor'
       'change .BCK-code-style-selector': 'selectCodeStyle'
+      'input propertychange .BCK-querystring-text-area': 'handleQueryStringChange'
 
     codeStyles:
       CURL: 'cURL'
@@ -33,6 +34,10 @@ glados.useNameSpace 'glados.views.Browsers',
       $copyButtonContainer = $(@el).find('.BCK-copy-button')
       @$copyButton = ButtonsHelper.createAndAppendCopyButton($copyButtonContainer)
 
+      $queryStringTextArea = $(@el).find('.BCK-querystring-text-area')
+      $queryStringTextArea.bind('input propertychange', @handleQueryStringChange.bind(@))
+      @updateQueryString()
+
     selectCodeStyle: (event) ->
 
       selectionValue = $(event.currentTarget).val()
@@ -42,8 +47,22 @@ glados.useNameSpace 'glados.views.Browsers',
       @selectedCodeStyle = selectionValue
       @updateRenderedQuery()
 
+    handleQueryStringChange: ->
+
+      $queryStringTextArea = $(@el).find('.BCK-querystring-text-area')
+      currentValue =  $queryStringTextArea.val()
+      $applyChangesBtn = $(@el).find('.BCK-apply-changes')
+      if currentValue != @previousQueryString
+        $applyChangesBtn.removeClass('disabled')
+      else
+        $applyChangesBtn.addClass('disabled')
+
     updateQueryString: ->
 
+      $queryStringTextArea = $(@el).find('.BCK-querystring-text-area')
+      currentQueryString = @collection.getMeta('custom_query')
+      @previousQueryString = currentQueryString
+      $queryStringTextArea.val(currentQueryString)
 
     updateRenderedQuery: ->
 

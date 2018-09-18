@@ -24,7 +24,25 @@
       height: calc(100% - 60px);
     }
   }
-  
+  .query-stringcontainer {
+    .text-area-container {
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-top: 20px;
+      height: 85%;
+      textarea {
+        height: 100%;
+        resize: none;
+        background-color: white;
+        border: none;
+        border-bottom: 1px solid $chembl-teal;
+        outline: none;
+        &:focus{
+          border-bottom: 1px solid $teal-accent;
+        }
+      }
+    }
+  }
   .query-menu-container{
     padding: 0 10px;
     margin-bottom: 0;
