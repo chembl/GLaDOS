@@ -409,8 +409,6 @@ glados.useNameSpace 'glados.views.Browsers',
 
       desiredViewType = $clickedElem.attr('data-view')
 
-      console.log 'switchResultsView', desiredViewType
-      console.log @collection
       @unSelectAllButtons()
       @selectButton desiredViewType
 

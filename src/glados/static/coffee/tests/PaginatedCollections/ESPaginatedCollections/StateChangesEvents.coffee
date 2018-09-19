@@ -11,7 +11,6 @@ describe "An elasticsearch collection", ->
 
     beforeAll (done) ->
 
-      console.log 'url helper events disabled'
       esList = glados.models.paginatedCollections.PaginatedCollectionFactory.getAllESResultsListDict()[\
       glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND.KEY_NAME
       ]
