@@ -155,7 +155,6 @@ glados.useNameSpace 'glados.views.Browsers',
     #--------------------------------------------------------------------------------------
     hideFilters: ->
 
-      alert('HIDE FILTERS')
       $filtersContainer = $(@el).find('.BCK-Facets-Container')
       $filtersContainer.addClass('facets-hidden')
 
@@ -410,6 +409,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
       desiredViewType = $clickedElem.attr('data-view')
 
+      console.log 'switchResultsView', desiredViewType
       @unSelectAllButtons()
       @selectButton desiredViewType
 
