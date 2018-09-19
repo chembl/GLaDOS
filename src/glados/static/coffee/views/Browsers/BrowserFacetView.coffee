@@ -237,6 +237,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
     render: ->
 
+      console.log 'RENDER BROWSER FACETS VIEW'
       if @collection.isStreaming()
         @facetsStreamingCover.show()
       else

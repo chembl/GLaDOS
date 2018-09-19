@@ -118,6 +118,7 @@ glados.useNameSpace 'glados.views.Browsers',
       @renderMenuContent()
       if @collection.getMeta('total_records') != 0
 
+        @showMenuContainer()
         $downloadBtnsContainer = $(@el).find('.BCK-download-btns-container')
         $downloadBtnsContainer.html Handlebars.compile($('#' + $downloadBtnsContainer.attr('data-hb-template')).html())
           formats: @collection.getMeta('download_formats')
@@ -142,6 +143,7 @@ glados.useNameSpace 'glados.views.Browsers',
       glados.Utils.fillContentForElement($menuContainer)
 
     hideMenuContainer: -> $(@el).find('.BCK-Browser-Menu-Container').hide()
+    showMenuContainer: -> $(@el).find('.BCK-Browser-Menu-Container').show()
     showPreloader: ->
 
       $menuContainer = $(@el).find('.BCK-Browser-Menu-Container')
@@ -153,6 +155,7 @@ glados.useNameSpace 'glados.views.Browsers',
     #--------------------------------------------------------------------------------------
     hideFilters: ->
 
+      alert('HIDE FILTERS')
       $filtersContainer = $(@el).find('.BCK-Facets-Container')
       $filtersContainer.addClass('facets-hidden')
 
