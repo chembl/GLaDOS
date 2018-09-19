@@ -114,7 +114,7 @@ glados.useNameSpace 'glados.views.Browsers',
       console.log 'collection after custom query change', @collection
       console.log 'cache: '
       console.log JSON.stringify(@collection.getMeta('cache'))
-      @collection.fetch()
+      @collection.clearAllFacetsSelections() # remember that this clears the facets and then does the fetch
 
     #-------------------------------------------------------------------------------------------------------------------
     # Full Query
