@@ -146,6 +146,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     render: ->
 
+      console.log 'RENDER'
       if not (@collection.getMeta('data_loaded') or @collection.itemsAreReady())
         return
 
@@ -176,6 +177,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     wakeUpView: ->
 
       console.log 'WAKE UP VIEW'
+      $(@el).show()
       @collection.wakeUp()
       if not @collection.isReady()
         return
