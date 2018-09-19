@@ -175,11 +175,13 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @collection.sleep()
     wakeUpView: ->
 
+      console.log 'WAKE UP VIEW'
       @collection.wakeUp()
       if not @collection.isReady()
         return
       if @checkAndRenderIfNoItems()
         return
+      console.log 'REQUEST CURRENT PAGE'
       @requestCurrentPage()
 
     checkAndRenderIfNoItems: ->
