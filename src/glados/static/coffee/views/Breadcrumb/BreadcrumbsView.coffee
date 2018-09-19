@@ -2,7 +2,6 @@ glados.useNameSpace 'glados.views.Breadcrumb',
   BreadcrumbsView: Backbone.View.extend
     initialize: ->
       @model.on 'change', @render, @
-      @hideFilterMenu()
 
     render: ->
 
@@ -15,12 +14,6 @@ glados.useNameSpace 'glados.views.Breadcrumb',
         hide_share_button: hideShareButton
         share_modal_id: @shareModalID
 
-      $longFilterContent = $(@el).find('.BCK-filter-explain')
-      longFilter = @model.get('long_filter')
-      glados.Utils.fillContentForElement $longFilterContent,
-        long_filter: longFilter
-
-      @hideFilterMenu()
       @renderShareComponent()
 
     renderShareComponent: ->
@@ -70,9 +63,6 @@ glados.useNameSpace 'glados.views.Breadcrumb',
               $shorteningInfo.empty()
               thisView.renderURLContainer(newHref)
 
-    events:
-      'click .BCK-open-filter-explain': 'toggleFilterMenu'
-
     renderURLContainer: (link) ->
 
       $inkToShareContainer = @$sharePageModal.find('.BCK-LinkToShare')
@@ -81,10 +71,6 @@ glados.useNameSpace 'glados.views.Breadcrumb',
         value: link
 
       ButtonsHelper.initCroppedContainer($inkToShareContainer, config, cleanup=true)
-
-    toggleFilterMenu: -> $(@el).find('.BCK-filter-explain').slideToggle()
-    openFilterMenu: -> $(@el).find('.BCK-filter-explain').show()
-    hideFilterMenu: -> $(@el).find('.BCK-filter-explain').hide()
 
     shortenURL: ->
 

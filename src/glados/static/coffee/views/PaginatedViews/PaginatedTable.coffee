@@ -35,6 +35,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @collection.getMeta('total_pages') == 1
         @hidePaginators()
         @hideFooter()
+      else
+        @showPaginators()
+
       if @collection.getMeta('total_records') == 1
         @hideHeaderContainer()
       else

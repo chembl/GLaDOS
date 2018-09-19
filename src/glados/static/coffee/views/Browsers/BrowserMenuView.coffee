@@ -118,6 +118,7 @@ glados.useNameSpace 'glados.views.Browsers',
       @renderMenuContent()
       if @collection.getMeta('total_records') != 0
 
+        @showMenuContainer()
         $downloadBtnsContainer = $(@el).find('.BCK-download-btns-container')
         $downloadBtnsContainer.html Handlebars.compile($('#' + $downloadBtnsContainer.attr('data-hb-template')).html())
           formats: @collection.getMeta('download_formats')
@@ -133,13 +134,16 @@ glados.useNameSpace 'glados.views.Browsers',
           } for viewLabel in @collection.getMeta('available_views'))
 
         @selectButton @currentViewType
-
+      else
+        @hideMenuContainer()
       @addRemoveQtipToButtons()
 
     renderMenuContent: ->
       $menuContainer = $(@el).find('.BCK-Browser-Menu-Container')
       glados.Utils.fillContentForElement($menuContainer)
 
+    hideMenuContainer: -> $(@el).find('.BCK-Browser-Menu-Container').hide()
+    showMenuContainer: -> $(@el).find('.BCK-Browser-Menu-Container').show()
     showPreloader: ->
 
       $menuContainer = $(@el).find('.BCK-Browser-Menu-Container')

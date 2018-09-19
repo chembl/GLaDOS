@@ -107,6 +107,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       $elem.hide()
 
+    showPaginators: -> $(@el).find('.BCK-paginator-container').show()
     hideFooter: ->
 
       $elem = $(@el).find('.BCK-footer-container')

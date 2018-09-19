@@ -5,10 +5,14 @@ glados.useNameSpace 'glados.views.Browsers',
 
       @renderBaseStructure()
       @collection.on 'request', @updateRenderedQuery, @
+      @collection.on 'request', @updateQueryString, @
 
     events:
       'click .BCK-toggle-query-container': 'toggleQueryContainer'
+      'click .BCK-toggle-queryStringEditor': 'toggleQuerystringEditor'
       'change .BCK-code-style-selector': 'selectCodeStyle'
+      'input propertychange .BCK-querystring-text-area': 'handleQueryStringChange'
+      'click .BCK-apply-changes': 'applyQueryStringChanges'
 
     codeStyles:
       CURL: 'cURL'
@@ -16,35 +20,59 @@ glados.useNameSpace 'glados.views.Browsers',
 
     renderBaseStructure: ->
 
+      showQueryStringEditor = @collection.getMeta('use_custom_query') and not @collection.customQueryIsFullQuery()
+
       codeStyles = _.values(@codeStyles)
       @selectedCodeStyle = codeStyles[0]
       glados.Utils.fillContentForElement $(@el),
         selected_code_style: @selectedCodeStyle
         code_styles: codeStyles[1..]
+        show_querystring_editor: showQueryStringEditor
+
+      $queryContainer = $(@el).find('.BCK-toggle-query-container')
+      @queryContainerOpen = $queryContainer.hasClass('open')
+
+      $queryEditorContainer = $(@el).find('.BCK-querystring-container')
+      @queryStringEditorOpen = $queryEditorContainer.hasClass('open')
 
       $(@el).find('select').material_select()
       $copyButtonContainer = $(@el).find('.BCK-copy-button')
       @$copyButton = ButtonsHelper.createAndAppendCopyButton($copyButtonContainer)
 
-    selectCodeStyle: (event) ->
+      $queryStringTextArea = $(@el).find('.BCK-querystring-text-area')
+      $queryStringTextArea.bind('input propertychange', @handleQueryStringChange.bind(@))
+      @updateQueryString()
 
-      selectionValue = $(event.currentTarget).val()
-      if selectionValue == ''
-        return
+    #-------------------------------------------------------------------------------------------------------------------
+    # Query String
+    #-------------------------------------------------------------------------------------------------------------------
+    handleQueryStringChange: ->
 
-      @selectedCodeStyle = selectionValue
-      @updateRenderedQuery()
+      $queryStringTextArea = $(@el).find('.BCK-querystring-text-area')
+      currentValue =  $queryStringTextArea.val()
+      $applyChangesBtn = $(@el).find('.BCK-apply-changes')
+      if currentValue != @previousQueryString
+        $applyChangesBtn.removeClass('disabled')
+      else
+        $applyChangesBtn.addClass('disabled')
+
+    updateQueryString: ->
+
+      $queryStringTextArea = $(@el).find('.BCK-querystring-text-area')
+      $applyChangesBtn = $(@el).find('.BCK-apply-changes')
+      $applyChangesBtn.addClass('disabled')
+      currentQueryString = @collection.getMeta('custom_query')
+      @previousQueryString = currentQueryString
+      $queryStringTextArea.val(currentQueryString)
 
     updateRenderedQuery: ->
-
-      console.log 'UPDATE RENDERED QUERY'
 
       $queryContainer = $(@el).find('.BCK-query')
       latestRequest = @collection.getMeta('latest_request_data')
       latestRequestStr = JSON.stringify(latestRequest, null, 2)
 
       if @selectedCodeStyle == @codeStyles.RAW
-        console.log 'RAW'
+
         indexName = @collection.getMeta('index_name')
         templateParams =
           index_name: @collection.getMeta('index_name')
@@ -53,9 +81,6 @@ glados.useNameSpace 'glados.views.Browsers',
         textToCopy = "Index Name: #{indexName}\nQuery:\n#{latestRequestStr}"
         glados.Utils.fillContentForElement($queryContainer, templateParams,
           customTemplate='Handlebars-Common-QueryEditor-Query')
-
-        $queryContainer = $(@el).find('.BCK-toggle-query-container')
-        @queryContainerOpen = $queryContainer.hasClass('open')
 
       else
 
@@ -70,20 +95,56 @@ glados.useNameSpace 'glados.views.Browsers',
 
       ButtonsHelper.updateCopyDataOfButton(@$copyButton, textToCopy)
 
+    toggleQuerystringEditor: ->
+
+      $container = $(@el).find('.BCK-querystring-container')
+      $toggler = $(@el).find('.BCK-toggle-queryStringEditor')
+      @queryStringEditorOpen = not @queryStringEditorOpen
+      @toggleContainer($container, @queryStringEditorOpen, 'Hide Querystring', 'Edit Querystring', $toggler)
+
+    applyQueryStringChanges: ->
+
+      $applyChangesBtn = $(@el).find('.BCK-apply-changes')
+      if $applyChangesBtn.hasClass('disabled')
+        return
+
+      $queryStringTextArea = $(@el).find('.BCK-querystring-text-area')
+      currentValue =  $queryStringTextArea.val()
+      @collection.setMeta('custom_query', currentValue)
+      console.log 'collection after custom query change', @collection
+      console.log 'cache: '
+      console.log JSON.stringify(@collection.getMeta('cache'))
+      @collection.clearAllFacetsSelections() # remember that this clears the facets and then does the fetch
+
+    #-------------------------------------------------------------------------------------------------------------------
+    # Full Query
+    #-------------------------------------------------------------------------------------------------------------------
+    selectCodeStyle: (event) ->
+
+      selectionValue = $(event.currentTarget).val()
+      if selectionValue == ''
+        return
+
+      @selectedCodeStyle = selectionValue
+      @updateRenderedQuery()
+
     toggleQueryContainer: ->
 
-      $queryContainer = $(@el).find('.BCK-query-container')
-      @queryContainerOpen = not @queryContainerOpen
+      $container = $(@el).find('.BCK-query-container')
       $toggler = $(@el).find('.BCK-toggle-query-container')
+      @queryContainerOpen = not @queryContainerOpen
+      @toggleContainer($container, @queryContainerOpen, 'Hide Full Query', 'Show Full Query', $toggler)
 
-      if @queryContainerOpen
-        $queryContainer.removeClass('closed')
-        $queryContainer.addClass('open')
-        $toggler.text('Hide Full Query')
+    toggleContainer: ($container, isNowOpen, hideText, showText, $toggler) ->
+
+      if isNowOpen
+        $container.removeClass('closed')
+        $container.addClass('open')
+        $toggler.text(hideText)
       else
-        $queryContainer.removeClass('open')
-        $queryContainer.addClass('closed')
-        $toggler.text('Show Full Query')
+        $container.removeClass('open')
+        $container.addClass('closed')
+        $toggler.text(showText)
 
 
 

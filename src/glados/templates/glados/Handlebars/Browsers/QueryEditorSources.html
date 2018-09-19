@@ -3,8 +3,29 @@
 <script id="Handlebars-Common-QueryEditor" type="text/x-handlebars-template">
 
 <div class="query-editor" >
+
+    <!–– Query string editor -->
+    {{#if show_querystring_editor}}
+    <div>
+        <a class="dotted-link BCK-toggle-queryStringEditor">Edit Querystring</a>
+        <a> <i class="fa fa-question-circle"></i> </a>
+    </div>
+
+    <div class="BCK-querystring-container query-stringcontainer closed">
+        <div class="row text-area-container">
+            <textarea class="BCK-querystring-text-area"></textarea>
+        </div>
+        <div class="row">
+            <div class="col s12 center-align">
+                <a class="BCK-apply-changes btn-chembl disabled">Apply Changes</a>
+            </div>
+        </div>
+    </div>
+    {{/if}}
+    <!-- Query string editor -->
     <div>
         <a class="dotted-link BCK-toggle-query-container">Show Full Query</a>
+        <a href=""> <i class="fa fa-question-circle"></i> </a>
     </div>
     <div class="BCK-query-container query-container closed">
         <div class="query-menu-container row">

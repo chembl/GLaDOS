@@ -133,8 +133,12 @@ footer {
   padding: 10px 20px;
   text-align: center;
 
-  &:hover {
+  &:hover,:not(.disabled) {
     background-color: $teal-accent;
+  }
+  &.disabled{
+    background-color: $grey-light;
+    cursor: default;
   }
 }
 
