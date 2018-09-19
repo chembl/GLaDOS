@@ -133,13 +133,15 @@ glados.useNameSpace 'glados.views.Browsers',
           } for viewLabel in @collection.getMeta('available_views'))
 
         @selectButton @currentViewType
-
+      else
+        @hideMenuContainer()
       @addRemoveQtipToButtons()
 
     renderMenuContent: ->
       $menuContainer = $(@el).find('.BCK-Browser-Menu-Container')
       glados.Utils.fillContentForElement($menuContainer)
 
+    hideMenuContainer: -> $(@el).find('.BCK-Browser-Menu-Container').hide()
     showPreloader: ->
 
       $menuContainer = $(@el).find('.BCK-Browser-Menu-Container')
