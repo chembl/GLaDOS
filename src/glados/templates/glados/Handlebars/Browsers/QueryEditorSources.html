@@ -8,7 +8,9 @@
     {{#if show_querystring_editor}}
     <div>
         <a class="dotted-link BCK-toggle-queryStringEditor">Edit Querystring</a>
-        <a> <i class="fa fa-question-circle"></i> </a>
+        <a {% endverbatim %}href="{%  url 'faqs_edit_query_string' %}"{% verbatim %}>
+            <i class="fa fa-question-circle"></i> 
+        </a>
     </div>
 
     <div class="BCK-querystring-container query-stringcontainer closed">
@@ -22,10 +24,10 @@
         </div>
     </div>
     {{/if}}
-    <!-- Query string editor -->
+    <!-- See Full query -->
     <div>
         <a class="dotted-link BCK-toggle-query-container">Show Full Query</a>
-        <a href=""> <i class="fa fa-question-circle"></i> </a>
+        <a {% endverbatim %}href="{%  url 'faqs_see_full_query' %}"{% verbatim %} href=""> <i class="fa fa-question-circle"></i> </a>
     </div>
     <div class="BCK-query-container query-container closed">
         <div class="query-menu-container row">
