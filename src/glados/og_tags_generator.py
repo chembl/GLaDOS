@@ -216,3 +216,39 @@ def get_og_tags_for_tissue(chembl_id):
 
     return og_tags
 
+
+def get_og_tags_for_document(chembl_id):
+
+    q = {
+        "query_string": {
+            "default_field": "document_chembl_id",
+            "query": chembl_id
+        }
+    }
+
+    s = Search(index="chembl_document").query(q)
+    response = s.execute()
+
+    title = 'Document: ' + chembl_id
+    description = 'Document not found'
+    if response.hits.total == 1:
+        description = ''
+        description_items = []
+        item = response.hits[0]
+        # add the items to the description if they are available
+        doc_title = item['title']
+        if doc_title is not None:
+            title = 'Document: ' + doc_title
+
+        add_attribute_to_tescription(description_items, item, 'doc_type', 'Type')
+        add_attribute_to_tescription(description_items, item, 'abstract', 'Abstract')
+        add_attribute_to_tescription(description_items, item, 'journal', 'Journal')
+        add_attribute_to_tescription(description_items, item, 'authors', 'Authors')
+        description = ', '.join(description_items)
+
+    og_tags = {
+        'chembl_id': chembl_id,
+        'title': title,
+        'description': description
+    }
+    return og_tags
