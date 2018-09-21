@@ -161,7 +161,7 @@ def get_og_tags_for_cell_line(chembl_id):
     response = s.execute()
 
     title = 'Cell Line: ' + chembl_id
-    description = 'Target not found'
+    description = 'Cell Line not found'
     if response.hits.total == 1:
         description = ''
         description_items = []
@@ -183,3 +183,36 @@ def get_og_tags_for_cell_line(chembl_id):
     }
 
     return og_tags
+
+
+def get_og_tags_for_tissue(chembl_id):
+    q = {
+        "query_string": {
+            "default_field": "tissue_chembl_id",
+            "query": chembl_id
+        }
+    }
+
+    s = Search(index="chembl_tissue").query(q)
+    response = s.execute()
+
+    title = 'Tissue: ' + chembl_id
+    description = 'Tissue not found'
+    if response.hits.total == 1:
+        description = ''
+        description_items = []
+        item = response.hits[0]
+        # add the items to the description if they are available
+        pref_name = item['pref_name']
+        if pref_name is not None:
+            title = 'Tissue: ' + pref_name
+
+
+    og_tags = {
+        'chembl_id': chembl_id,
+        'title': title,
+        'description': ''
+    }
+
+    return og_tags
+
