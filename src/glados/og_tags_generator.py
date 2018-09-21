@@ -172,6 +172,8 @@ def get_og_tags_for_cell_line(chembl_id):
             title = 'Cell Line: ' + cell_name
 
         add_attribute_to_tescription(description_items, item, 'cell_source_organism', 'Source Organism')
+        add_attribute_to_tescription(description_items, item, 'cell_source_tissue', 'Source Tissue')
+        add_attribute_to_tescription(description_items, item, 'cell_description', 'Description')
         description = ', '.join(description_items)
 
     og_tags = {
