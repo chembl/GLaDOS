@@ -14,9 +14,7 @@ def get_og_tags_for_compound(chembl_id):
     s = Search(index="chembl_molecule").query(q)
     response = s.execute()
 
-    print('COMPOUND REPORT CARD')
-    print(response.hits.total)
-    title = chembl_id
+    title = 'Compound: '+ chembl_id
     description = 'Compound not found'
     if response.hits.total == 1:
         description = ''
@@ -25,7 +23,7 @@ def get_og_tags_for_compound(chembl_id):
         # add the items to the description if they are available
         pref_name = item['pref_name']
         if pref_name is not None:
-            title = pref_name
+            title = 'Compound: '+ pref_name
 
         molecule_type = item['molecule_type']
         if molecule_type is not None:
@@ -59,6 +57,45 @@ def get_og_tags_for_compound(chembl_id):
                 description_items.append("Trade Names: {}".format(";".join(tradenames)))
         description = ', '.join(description_items)
 
+    og_tags = {
+        'chembl_id': chembl_id,
+        'title': title,
+        'description': description
+    }
+    return og_tags
+
+def get_og_tags_for_target(chembl_id):
+
+    q = {
+        "query_string": {
+            "default_field": "target_chembl_id",
+            "query": chembl_id
+        }
+    }
+
+    s = Search(index="chembl_target").query(q)
+    response = s.execute()
+
+    title = 'Target: ' + chembl_id
+    description = 'Target not found'
+    if response.hits.total == 1:
+        description = ''
+        description_items = []
+        item = response.hits[0]
+        # add the items to the description if they are available
+        pref_name = item['pref_name']
+        if pref_name is not None:
+            title = 'Target: ' + pref_name
+
+        target_type = item['target_type']
+        if target_type is not None:
+            description_items.append("Type: {}".format(target_type))
+
+        organism = item['organism']
+        if organism is not None:
+            description_items.append("Type: {}".format(organism))
+
+        description = ', '.join(description_items)
 
     og_tags = {
         'chembl_id': chembl_id,
