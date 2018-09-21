@@ -431,9 +431,7 @@ def compound_report_card(request, chembl_id):
 def assay_report_card(request, chembl_id):
 
     context = {
-        'og_tags': {
-            'chembl_id': chembl_id
-        }
+        'og_tags': og_tags_generator.get_og_tags_for_assay(chembl_id)
     }
 
     return render(request, 'glados/assayReportCard.html', context)

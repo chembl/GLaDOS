@@ -103,3 +103,44 @@ def get_og_tags_for_target(chembl_id):
         'description': description
     }
     return og_tags
+
+def get_og_tags_for_assay(chembl_id):
+
+    q = {
+        "query_string": {
+            "default_field": "assay_chembl_id",
+            "query": chembl_id
+        }
+    }
+
+    s = Search(index="chembl_assay").query(q)
+    response = s.execute()
+
+    title = 'Assay: ' + chembl_id
+    description = 'Assay not found'
+    if response.hits.total == 1:
+        description = ''
+        description_items = []
+        item = response.hits[0]
+        # add the items to the description if they are available
+        assay_type = item['assay_type_description']
+        if assay_type is not None:
+            description_items.append("Type: {}".format(assay_type))
+
+        assay_organism = item['assay_organism']
+        if assay_organism is not None:
+            description_items.append("Organism: {}".format(assay_organism))
+
+        assay_description = item['description']
+        if assay_description is not None:
+            description_items.append("Description: {}".format(assay_description))
+
+        description = ', '.join(description_items)
+
+    og_tags = {
+        'chembl_id': chembl_id,
+        'title': title,
+        'description': description
+    }
+
+    return og_tags
