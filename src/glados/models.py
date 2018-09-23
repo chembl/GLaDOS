@@ -105,16 +105,13 @@ class TinyURL(models.Model):
     return obj.to_dict(include_meta=True)
 
 
-class Country(models.Model):
-    country_id = models.CharField(max_length=30, primary_key=True)
-    country_name = models.CharField(max_length=35)
-    region_id = models.IntegerField(null=True, blank=True)
+class Parentsmile(models.Model):
+    n_parent = models.IntegerField(primary_key=True)
+    parent_smiles = models.CharField(max_length=4000)
+    inchikey = models.CharField(max_length=30)
     class Meta:
-        db_table = u'COUNTRIES'
+        db_table = u'PARENTSMILES'
         managed = False
-
-    def __str__(self):
-        return self.country_name
         
 class ESCachedRequest(models.Model):
   es_index = models.CharField(max_length=200)

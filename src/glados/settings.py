@@ -140,9 +140,9 @@ DATABASES = {
   },
   'oradb': {
     'ENGINE':   'django.db.backends.oracle',
-    'NAME':     'oradb/xe',
-    'USER':     'hr',
-    'PASSWORD': 'hr'
+    'NAME':     'molpro',
+    'USER':     'leFakePass',
+    'PASSWORD': 'leFakePass'
   }
 }
 

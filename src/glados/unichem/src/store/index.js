@@ -7,29 +7,34 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
   state: {
     loading: true,
-    countries: []
+    similarCompounds: []
   },
   mutations: {
     SET_LOADING (state, flag) {
       state.loading = flag
     },
-    SET_COUNTRIES (state, countries) {
-      state.countries = countries
+    SET_SIMILAR_COMPOUNDS (state, similarCompounds) {
+      similarCompounds.map((similarCompounds, i) => {
+        similarCompounds.show = false
+        return similarCompounds
+      })
+      state.similarCompounds = similarCompounds
     }
   },
   actions: {
     loadCountries: function ({ commit }, payload) {
-      let params = payload.params
+      let body = payload.body
+      console.log(body)
       commit('SET_LOADING', true)
       Api()
-        .get('/test', { params })
-        .then(countries => {
-          commit('SET_COUNTRIES', countries)
+        .post('/test', body)
+        .then(similarCompounds => {
+          commit('SET_SIMILAR_COMPOUNDS', similarCompounds.data)
           commit('SET_LOADING', false)
         })
     }
   },
   getters: {
-    countries: state => state.countries
+    similarCompounds: state => state.similarCompounds
   }
 })
