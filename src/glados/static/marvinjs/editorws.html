@@ -24,7 +24,7 @@
 	// called when Sketchers JS loaded
 	function sketchOnLoad() {
 		if(marvin.Sketch.isSupported()) {
-		    marvin.Sketch.license('m4js');
+		    marvin.Sketch.license('https://www.ebi.ac.uk/chembl/js/m4js');
 			marvin.sketcherInstance = new marvin.Sketch("sketch");
 			marvin.sketcherInstance.setServices(getDefaultServices());
 		} else {
