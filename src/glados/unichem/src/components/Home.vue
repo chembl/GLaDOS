@@ -14,8 +14,15 @@
                 ></v-textarea>
                 <v-btn fab dark color="primary" v-on:click="loadCompounds">
                   <v-icon dark>add</v-icon>
-                </v-btn>                
+                </v-btn>
               </v-layout>
+    <v-progress-circular
+      v-if="isLoading"
+      :size="70"
+      :width="7"
+      color="purple"
+      indeterminate
+    ></v-progress-circular>              
               <v-layout align-space-around justify-center column fill-height>
                 <v-card 
                   v-for="(compound, index) in similarCompounds"
@@ -70,26 +77,30 @@ export default Vue.component('Home', {
   data () {
     return {
       page: 1,
-      ctabText: '',
-      similarCompounds: []
+      ctabText: ''
     }
   },
-  created () {},
+  created () {
+    this.$store.commit('SET_LOADING', false)
+  },
   // beforeCreate () {
   //   let body = this.ctabtext
   //   this.$store.dispatch('loadCountries', { body })
   // },
   computed: {
-    // similarCompounds () {
-    //   return this.$store.getters.similarCompounds
-    // }
+    similarCompounds () {
+      return this.$store.getters.similarCompounds
+    },
+    isLoading () {
+      return this.$store.getters.isLoading
+    }
   },
   methods: {
     loadCompounds () {
+      this.$store.commit('SET_LOADING', true)
       let body = this.ctabText
       this.$store.dispatch('loadCountries', { body })
-      this.similarCompounds = this.$store.getters.similarCompounds
-      console.log(this.similarCompounds)
+      console.log('LOADING... ', this.$store.state.loading)
     }
   },
   watch: {

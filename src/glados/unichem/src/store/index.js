@@ -26,15 +26,18 @@ export const store = new Vuex.Store({
       let body = payload.body
       console.log(body)
       commit('SET_LOADING', true)
+      console.log('State loading ', this.state.loading)
       Api()
         .post('/test', body)
         .then(similarCompounds => {
           commit('SET_SIMILAR_COMPOUNDS', similarCompounds.data)
           commit('SET_LOADING', false)
         })
+        .catch(error => console.log(error))
     }
   },
   getters: {
-    similarCompounds: state => state.similarCompounds
+    similarCompounds: state => state.similarCompounds,
+    isLoading: state => state.loading
   }
 })

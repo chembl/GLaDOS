@@ -42,6 +42,10 @@
         <img src="@/assets/unichem_logo.png" alt="">
       </div>      
       <v-toolbar-title v-text="title"></v-toolbar-title>
+      <v-spacer></v-spacer>
+      <div class="brand-icon ma-2 pt-1">
+        <a href="/"><img src="@/assets/chembl_logo_pink.png" alt=""></a>
+      </div>
     </v-toolbar>    
     <!-- Splash screen -->
     <div v-if="splashScreen" id='GladosMainSplashScreen' class="loader-background">
