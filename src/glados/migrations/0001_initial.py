@@ -15,14 +15,14 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Country',
+            name='Parentsmile',
             fields=[
-                ('country_id', models.CharField(max_length=30, primary_key=True, serialize=False)),
-                ('country_name', models.CharField(max_length=35)),
-                ('region_id', models.IntegerField(blank=True, null=True)),
+                ('n_parent', models.IntegerField(primary_key=True, serialize=False)),
+                ('parent_smiles', models.CharField(max_length=4000)),
+                ('inchikey', models.CharField(max_length=4000)),
             ],
             options={
-                'db_table': 'COUNTRIES',
+                'db_table': 'PARENTSMILES',
                 'managed': False,
             },
         ),
