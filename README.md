@@ -16,11 +16,6 @@
 [![(ReportCards - Compound)](https://api.ghostinspector.com/v1/suites/5b717147f818e30945119296/status-badge
 )](https://api.ghostinspector.com/v1/suites/5b717147f818e30945119296/status-badge
  "ReportCards - Compound")
- 
-
-
-
-
 
 # I think we can put our differences behind us... for science...
 ![](https://upload.wikimedia.org/wikipedia/en/b/bf/Glados.png)
@@ -47,7 +42,14 @@ Here you can find some informal diagrams that help to understand how some compon
 
 ### Visualisations
 
-* [Matrix (heatmap)](https://docs.google.com/drawings/d/1_K7JTZDZYPw0i_hLy-ApYsNI264edBrJmoDetG2FgVw/edit?usp=sharing)
+#### Heatmap
+
+* [ChEMBL Dasboard Basic Layout](https://docs.google.com/drawings/d/1fLOw-IBkRmQct4tv9WeoRjWc8mQnrOj50PAZ6JE2w4o/edit?usp=sharing)
+* [Heatmap Concpetual Design](https://docs.google.com/drawings/d/18dPoA2wI1q62aBWMOBYAVQ7TIza_Mbk28yxL6hK10nE/edit?usp=sharing)
+* [Heatmap Window System 1](https://docs.google.com/drawings/d/1hbmanZRe6VHKpHCoCtPfcCM3Er8d4TCeveOz2Rm3QaI/edit?usp=sharing)
+* [Heatmap Window System 2](https://docs.google.com/drawings/d/1XuJ9947pq0nkOBlixAWTiLaVRxN1mBYC--FUlDIXbyI/edit?usp=sharing)
+* [Heatmap Window System 3](https://docs.google.com/drawings/d/1QoG5OPFewKQ5I2N3-My83hKKQOScM8_Lc5SRAD1D7zM/edit?usp=sharing)
+* [Heatmap Visual Layout](https://docs.google.com/drawings/d/1_K7JTZDZYPw0i_hLy-ApYsNI264edBrJmoDetG2FgVw/edit?usp=sharing)
 
 ### Molecule Features Icons
 
