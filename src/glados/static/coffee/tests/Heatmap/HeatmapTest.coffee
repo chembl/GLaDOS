@@ -1,0 +1,3 @@
+describe "Heatmap", ->
+
+  it 'works', ->
