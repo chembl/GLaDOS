@@ -1,0 +1,66 @@
+{
+  "settings_path": "ES_INDEXES.COMPOUND",
+  "custom_query": "*",
+  "use_custom_query": false,
+  "searchESQuery": {
+    "bool": {
+      "must": {
+        "bool": {
+          "must": [],
+          "should": [
+            {
+              "multi_match": {
+                "fields": [
+                  "*.std_analyzed^1.6",
+                  "*.eng_analyzed^0.8",
+                  "*.ws_analyzed^1.4",
+                  "*.keyword^2",
+                  "*.lower_case_keyword^1.5",
+                  "*.alphanumeric_lowercase_keyword^1.3"
+                ],
+                "boost": 10,
+                "query": "Dopamine",
+                "minimum_should_match": "100%",
+                "type": "most_fields",
+                "fuzziness": 0
+              }
+            },
+            {
+              "multi_match": {
+                "fields": [
+                  "*.std_analyzed^1.6",
+                  "*.eng_analyzed^0.8",
+                  "*.ws_analyzed^1.4",
+                  "*.keyword^2",
+                  "*.lower_case_keyword^1.5",
+                  "*.alphanumeric_lowercase_keyword^1.3"
+                ],
+                "boost": 2,
+                "query": "Dopamine",
+                "minimum_should_match": "100%",
+                "type": "best_fields",
+                "fuzziness": 0
+              }
+            },
+            {
+              "multi_match": {
+                "fields": [
+                  "*.entity_id^2",
+                  "*.id_reference^1.5",
+                  "*.chembl_id^2",
+                  "*.chembl_id_reference^1.5"
+                ],
+                "boost": 10,
+                "type": "most_fields",
+                "query": "Dopamine",
+                "fuzziness": 0
+              }
+            }
+          ]
+        }
+      },
+      "boost": 1
+    }
+  },
+  "at_least_one_facet_is_selected": true
+}

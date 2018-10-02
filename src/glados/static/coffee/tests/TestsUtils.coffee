@@ -26,6 +26,7 @@ class TestsUtils
 
     $.get dataURL, (testData) ->
 
+      console.log 'SIMULATE DATA ES LIST'
       if testData.hits?
         rawModels = (h._source for h in testData.hits.hits)
       else
@@ -34,6 +35,7 @@ class TestsUtils
       list.allResults = rawModels
 
       list.setMeta('total_records', rawModels.length)
+
       Entity = list.getMeta('model')
       models = (new Entity(Entity.prototype.parse(result)) for result in rawModels)
 
