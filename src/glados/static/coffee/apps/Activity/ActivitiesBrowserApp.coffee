@@ -52,13 +52,13 @@ glados.useNameSpace 'glados.apps.Activity',
         filter_property: filterProperty
         aggregations: aggList
 
-      config = MatrixView.getDefaultConfig sourceEntity
+      config = glados.views.Visualisation.Heatmap.HeatmapView.getDefaultConfig sourceEntity
 
       $matrixContainer = $matrixFSContainer.find('.BCK-CompTargetMatrix')
       console.log('FS: init matrix from ' + sourceEntity)
       console.log 'config: ', config
       console.log 'filter: ', filter
-      new MatrixView
+      new glados.views.Visualisation.Heatmap.HeatmapView
         model: ctm
         el: $matrixContainer
         config: config

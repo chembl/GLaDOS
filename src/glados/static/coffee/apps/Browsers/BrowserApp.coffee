@@ -68,10 +68,10 @@ glados.useNameSpace 'glados.apps.Browsers',
             filter_property: filterProperty
             aggregations: aggList
 
-          config = MatrixView.getDefaultConfig sourceEntity
+          config = glados.views.Visualisation.Heatmap.HeatmapView.getDefaultConfig sourceEntity
 
           $matrixContainer = $matrixFSContainer.find('.BCK-CompTargetMatrix')
-          new MatrixView
+          new glados.views.Visualisation.Heatmap.HeatmapView
             model: ctm
             el: $matrixContainer
             config: config

@@ -18,13 +18,13 @@ glados.useNameSpace 'glados.views.SearchResults',
         filterProperty = 'molecule_chembl_id'
         aggList = ['molecule_chembl_id', 'target_chembl_id']
 
-      config = MatrixView.getDefaultConfig @sourceEntity
+      config = glados.views.Visualisation.Heatmap.HeatmapView.getDefaultConfig @sourceEntity
 
       @ctm = new glados.models.Activity.ActivityAggregationMatrix
         filter_property: filterProperty
         aggregations: aggList
 
-      @ctmView = new MatrixView
+      @ctmView = new glados.views.Visualisation.Heatmap.HeatmapView
         model: @ctm
         el: $(@el).find('.BCK-CompTargetMatrix')
         config: config
