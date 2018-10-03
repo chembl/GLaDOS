@@ -1,9 +1,11 @@
 # this view is in charge of rendering a heatmap
 # Given its complexity, it was split into several parts to make it easier to understand and maintain.
-
 glados.useNameSpace 'glados.views.Visualisation.Heatmap',
 
-  HeatmapView: Backbone.View.extend(ResponsiviseViewExt).extend
+  HeatmapView: Backbone.View\
+  .extend(ResponsiviseViewExt)\
+  .extend(glados.views.Visualisation.Heatmap.Parts.Controls)\
+  .extend
 
     REVERSE_POSITION_TOOLTIP_TH: 0.8
     COL_HEADER_TEXT_BASE_ID: 'cols-header-text-'
@@ -150,34 +152,34 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
 
       @$vis_elem.empty()
 
-    paintControls: ->
-
-      @paintSelect('.select-colouring-container',
-        (@config.properties[propID] for propID in @config.colour_properties),
-        @config.initial_colouring,
-        'select-colour-property',
-        'Colour by:' )
-
-      @paintSelect('.select-row-sort-container',
-        (@config.properties[propID] for propID in @config.row_sorting_properties),
-        @config.initial_row_sorting,
-        'select-row-sort',
-        'Sort rows by:' )
-
-      @paintSelect('.select-col-sort-container',
-        (@config.properties[propID] for propID in @config.col_sorting_properties)
-        @config.initial_col_sorting,
-        'select-col-sort',
-        'Sort columns by:' )
-
-      @paintSortDirection('.btn-row-sort-direction-container',
-        @config.initial_row_sorting_reverse,
-        'row')
-      @paintSortDirection('.btn-col-sort-direction-container',
-        @config.initial_col_sorting_reverse,
-        'col')
-
-      @paintZoomButtons()
+#    paintControls: ->
+#
+#      @paintSelect('.select-colouring-container',
+#        (@config.properties[propID] for propID in @config.colour_properties),
+#        @config.initial_colouring,
+#        'select-colour-property',
+#        'Colour by:' )
+#
+#      @paintSelect('.select-row-sort-container',
+#        (@config.properties[propID] for propID in @config.row_sorting_properties),
+#        @config.initial_row_sorting,
+#        'select-row-sort',
+#        'Sort rows by:' )
+#
+#      @paintSelect('.select-col-sort-container',
+#        (@config.properties[propID] for propID in @config.col_sorting_properties)
+#        @config.initial_col_sorting,
+#        'select-col-sort',
+#        'Sort columns by:' )
+#
+#      @paintSortDirection('.btn-row-sort-direction-container',
+#        @config.initial_row_sorting_reverse,
+#        'row')
+#      @paintSortDirection('.btn-col-sort-direction-container',
+#        @config.initial_col_sorting_reverse,
+#        'col')
+#
+#      @paintZoomButtons()
 
     paintZoomButtons: ->
 
