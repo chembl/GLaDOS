@@ -134,7 +134,6 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     getAllChemblIDsAndFetch: (requiredIDs) ->
 
-
       $messagesElement = $(@el).find('.BCK-ViewHandlerMessages').first()
       deferreds = @collection.getAllResults($messagesElement)
       @ctmView.clearVisualisation()

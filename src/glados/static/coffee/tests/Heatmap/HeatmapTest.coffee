@@ -8,16 +8,27 @@ describe "Heatmap", ->
 
   describe 'When x-axis list is the generator list', ->
 
+    # Start from the list created from the results of searching by dopamine
+
     generatorList = undefined
+    config = undefined
+    heatmap = undefined
 
     beforeAll (done) ->
 
       $.get (glados.Settings.STATIC_URL + 'testData/Heatmap/Case0/GeneratorList/state.json'), (state) ->
         generatorList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFromState(state)
 
+        config =
+          generator_list: generatorList
+
+        heatmap = new glados.models.Heatmap.Heatmap
+          config: config
+
         itemsURL = glados.Settings.STATIC_URL + 'testData/Heatmap/Case0/GeneratorList/items.json'
         TestsUtils.simulateDataESList(generatorList, itemsURL, done)
 
-    # Start from the list created from the results of searching by dopamine
     it 'generates the dependent lists from the generator list', ->
+
+      console.log 'heatmap: ', heatmap
 
