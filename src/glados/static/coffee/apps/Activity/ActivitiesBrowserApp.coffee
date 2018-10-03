@@ -67,6 +67,7 @@ glados.useNameSpace 'glados.apps.Activity',
 
     @initMatrixCellMiniReportCard: ($containerElem, d, compoundsAreRows=true) ->
 
+      return
       summary = new glados.models.Activity.ActivityAggregation
         activity_count: d.activity_count
         pchembl_value_avg: d.pchembl_value_avg

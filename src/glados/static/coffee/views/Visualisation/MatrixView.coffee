@@ -84,7 +84,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     if $(@el).is(":visible")
 
       @showRenderingMessage()
-      starTime = Date.now()
 
       $messagesElement = $(@el).find('.BCK-VisualisationMessages')
       $messagesElement.html Handlebars.compile($('#' + $messagesElement.attr('data-hb-template')).html())
@@ -99,9 +98,6 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
         $messagesElement.html ''
       else
         @setProgressMessage('(There are no activities for the ' + @config.rows_entity_name + ' requested.)', hideCog=true)
-
-      endTime = Date.now()
-      time = endTime - starTime
 
       $(@el).find('select').material_select()
       @hideRenderingMessage()
@@ -255,6 +251,7 @@ MatrixView = Backbone.View.extend(ResponsiviseViewExt).extend
     @RANGE_Y_END = @SIDE_SIZE * @NUM_ROWS
     @ROWS_HEADER_HEIGHT = @RANGE_Y_END
     @COLS_HEADER_WIDTH = @RANGE_X_END
+    # this is to standardise the names of the properties to be used in the DOM elements.
     BASE_X_TRANS_ATT = 'glados-baseXTrans'
     BASE_Y_TRANS_ATT = 'glados-baseYTrans'
     MOVE_X_ATT = 'glados-moveX'
