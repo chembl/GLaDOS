@@ -145,7 +145,7 @@ class MainPageApp
 
   @initDrugsPerUsanYear = ->
 
-    allDrugsByYear = MainPageApp.getYearByMaxPhaseAgg()
+    allDrugsByYear = glados.apps.VisualisePageApp.getYearByMaxPhaseAgg()
 
     usanYearProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'USAN_YEAR')
     maxPhaseProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'MAX_PHASE', true)
@@ -238,41 +238,6 @@ class MainPageApp
 # ----------------------------------------------------------------------------------------------------------------------
 # Aggregations
 # ----------------------------------------------------------------------------------------------------------------------
-
-  @getYearByMaxPhaseAgg = (defaultInterval = 1) ->
-    queryConfig =
-      type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
-      query_string_template: '_metadata.drug.is_drug:true AND _metadata.compound_records.src_id:13 AND _exists_:usan_year'
-      template_data: {}
-
-    aggsConfig =
-      aggs:
-        yearByMaxPhase:
-          type: glados.models.Aggregations.Aggregation.AggTypes.HISTOGRAM
-          field: 'usan_year'
-          default_interval_size: defaultInterval
-          min_interval_size: 1
-          max_interval_size: 10
-          bucket_key_parse_function: (key) -> key.replace(/\.0/i, '')
-          aggs:
-            max_phase:
-              type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
-              field: 'max_phase'
-              size: 10
-              bucket_links:
-                bucket_filter_template: '_metadata.compound_records.src_id:13 AND usan_year:{{year}} AND max_phase:{{bucket_key}}'
-                template_data:
-                  year: 'BUCKET.parsed_parent_key'
-                  bucket_key: 'BUCKET.key'
-
-                link_generator: Drug.getDrugsListURL
-
-    yearByMaxPhase = new glados.models.Aggregations.Aggregation
-      index_url: glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
-      query_config: queryConfig
-      aggs_config: aggsConfig
-
-    return yearByMaxPhase
 
   @getFirstApprovalPercentage = (defaultInterval = 1) ->
 
