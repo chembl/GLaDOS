@@ -29,7 +29,6 @@ glados.useNameSpace 'glados.apps',
 
     @initStackedHistogram = ->
       aggregation = VisualisePageApp.getYearByMaxPhaseAgg()
-      console.log 'aggregation: ', aggregation
       usanYearProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'USAN_YEAR')
       maxPhaseProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'MAX_PHASE', true)
       barsColourScale = maxPhaseProp.colourScale

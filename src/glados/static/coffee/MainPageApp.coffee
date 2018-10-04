@@ -111,7 +111,7 @@ class MainPageApp
       bars_colour_scale: barsColourScale
       stacked_histogram: true
       sort_by_key: false
-      rotate_x_axis_if_needed: false
+      rotate_x_axis_if_needed: true
       hide_x_axis_title: true
       legend_vertical: true
       big_size: true
@@ -255,6 +255,14 @@ class MainPageApp
           min_interval_size: 1
           max_interval_size: 10
           bucket_key_parse_function: (key) -> key.replace(/\.0/i, '')
+          bucket_sort_compare_function: (bucketA, bucketB) ->
+            yearA = parseFloat(bucketA.key)
+            yearB = parseFloat(bucketB.key)
+            if yearA < yearB
+              return -1
+            else if yearA > yearB
+              return 1
+            return 0
           aggs:
             molecule_type:
               type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
