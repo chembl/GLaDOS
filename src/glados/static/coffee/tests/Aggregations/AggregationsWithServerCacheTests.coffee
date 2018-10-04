@@ -4,7 +4,7 @@ describe 'Aggregation', ->
 
     describe 'Using the Compound index', ->
 
-      compoundsAgg = MainPageApp.getYearByMaxPhaseAgg()
+      compoundsAgg = glados.apps.VisualisePageApp.getYearByMaxPhaseAgg()
 
       it 'Returns the correct index name', ->
 
