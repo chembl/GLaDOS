@@ -7,6 +7,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
   .extend(glados.views.Visualisation.Heatmap.Parts.Controls)\
   .extend(glados.views.Visualisation.Heatmap.Parts.ZoomAndTranslation)\
   .extend(glados.views.Visualisation.Heatmap.Parts.CellsContainer)\
+  .extend(glados.views.Visualisation.Heatmap.Parts.RowsHeaderContainer)\
   .extend
 
     REVERSE_POSITION_TOOLTIP_TH: 0.8
@@ -281,20 +282,8 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
       # --------------------------------------
       # Cells container
       # --------------------------------------
-      cellsContainerG = mainGContainer.append('g')
-        .attr('data-section-name', 'cellsContainerG')
-        .attr(@BASE_X_TRANS_ATT, @ROWS_HEADER_WIDTH)
-        .attr(@BASE_Y_TRANS_ATT, @COLS_HEADER_HEIGHT)
-        .attr(@MOVE_X_ATT, @YES)
-        .attr(@MOVE_Y_ATT, @YES)
-        .classed('cells-container-g', true)
-
+      cellsContainerG = @initCellsContainer(mainGContainer, matrix)
       @cellsContainerG = cellsContainerG
-      cellsContainerG.append('rect')
-        .style("fill", glados.Settings.VIS_COLORS.WHITE)
-        .classed('background-rect', true)
-
-      @initCellsContainer(cellsContainerG, matrix)
       @applyZoomAndTranslation(cellsContainerG)
       @colourCells()
       # --------------------------------------
