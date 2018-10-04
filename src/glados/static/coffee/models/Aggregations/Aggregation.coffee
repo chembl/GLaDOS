@@ -262,7 +262,10 @@ glados.useNameSpace 'glados.models.Aggregations',
         else
           bucketsList = glados.Utils.Buckets.getBucketsList(currentBuckets)
 
-          #bucket_key_parse_function
+        bucketSortCompareFunction = aggDescription.bucket_sort_compare_function
+        if bucketSortCompareFunction?
+          bucketsList.sort(bucketSortCompareFunction)
+
         parseKeyFunction = aggDescription.bucket_key_parse_function
 
         for bucket in bucketsList

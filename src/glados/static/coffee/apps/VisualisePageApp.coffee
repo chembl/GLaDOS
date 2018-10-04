@@ -222,6 +222,14 @@ glados.useNameSpace 'glados.apps',
             min_interval_size: 1
             max_interval_size: 10
             bucket_key_parse_function: (key) -> key.replace(/\.0/i, '')
+            bucket_sort_compare_function: (bucketA, bucketB) ->
+              yearA = parseFloat(bucketA.key)
+              yearB = parseFloat(bucketB.key)
+              if yearA < yearB
+                return -1
+              else if yearA > yearB
+                return 1
+              return 0
             aggs:
               max_phase:
                 type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
