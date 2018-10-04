@@ -6,6 +6,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
   .extend(ResponsiviseViewExt)\
   .extend(glados.views.Visualisation.Heatmap.Parts.Controls)\
   .extend(glados.views.Visualisation.Heatmap.Parts.ZoomAndTranslation)\
+  .extend(glados.views.Visualisation.Heatmap.Parts.CellsContainer)\
   .extend
 
     REVERSE_POSITION_TOOLTIP_TH: 0.8
@@ -210,7 +211,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
       COLS_LABELS_ROTATION = 30
       BASE_LABELS_SIZE = 10
       @GRID_STROKE_WIDTH = 1
-      CELLS_PADDING = @GRID_STROKE_WIDTH
+      @CELLS_PADDING = @GRID_STROKE_WIDTH
       TRANSITIONS_DURATION = 1000
 
       elemWidth = $(@el).width()
@@ -289,59 +290,10 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
         .classed('cells-container-g', true)
 
       cellsContainerG.append('rect')
-        .style("fill", glados.Settings.VIS_COLORS.WHITE) #.style("fill", glados.Settings.VISUALISATION_GRID_NO_DATA)
+        .style("fill", glados.Settings.VIS_COLORS.WHITE)
         .classed('background-rect', true)
 
-      @updateCellsForWindow(cellsContainerG)
-
-      cellsContainerG.positionRows = (zoomScale, transitionDuration=0 ) ->
-
-        if transitionDuration == 0
-          cellsContainerG.selectAll(".vis-cell")
-            .attr("y", (d) ->
-              (thisView.getYCoord(matrix.rows_index[d.row_id].currentPosition) + CELLS_PADDING) * zoomScale
-            )
-        else
-          t = cellsContainerG.transition().duration(transitionDuration)
-          t.selectAll(".vis-cell")
-            .attr("y", (d) -> (thisView.getYCoord(matrix.rows_index[d.row_id].currentPosition) + CELLS_PADDING) * zoomScale)
-
-
-      cellsContainerG.positionCols = (zoomScale, transitionDuration=0 ) ->
-
-        if transitionDuration == 0
-          cellsContainerG.selectAll(".vis-cell")
-          .attr("x", (d) -> (thisView.getXCoord(matrix.columns_index[d.col_id].currentPosition) + CELLS_PADDING) * zoomScale)
-        else
-          t = cellsContainerG.transition().duration(transitionDuration)
-          t.selectAll(".vis-cell")
-            .attr("x", (d) -> (thisView.getXCoord(matrix.columns_index[d.col_id].currentPosition) + CELLS_PADDING) * zoomScale)
-
-      cellsContainerG.scaleSizes = (zoomScale) ->
-
-        cellsContainerG.select('.background-rect')
-          .attr('height', (thisView.ROWS_HEADER_HEIGHT * zoomScale))
-          .attr('width', (thisView.COLS_HEADER_WIDTH * zoomScale))
-
-        cellsContainerG.selectAll('.grid-horizontal-line')
-          .attr("x1", -> (thisView.getXCoord(thisView.WINDOW.min_col_num) * zoomScale))
-          .attr("y1", (d) -> (thisView.getYCoord(d + thisView.WINDOW.min_row_num) * zoomScale))
-          .attr("y2", (d) -> (thisView.getYCoord(d + thisView.WINDOW.min_row_num) * zoomScale) )
-          .attr("x2", (thisView.COLS_HEADER_WIDTH * zoomScale))
-
-        cellsContainerG.selectAll('.grid-vertical-line')
-          .attr("x1", (d) -> (thisView.getXCoord(d + thisView.WINDOW.min_col_num) * zoomScale))
-          .attr("y1", -> (thisView.getXCoord(thisView.WINDOW.min_row_num) * zoomScale))
-          .attr("x2", (d) -> (thisView.getXCoord(d + thisView.WINDOW.min_col_num) * zoomScale))
-          .attr("y2", (thisView.ROWS_HEADER_HEIGHT * zoomScale))
-
-        cellsContainerG.positionRows(zoomScale)
-        cellsContainerG.positionCols(zoomScale)
-
-        cellsContainerG.selectAll(".vis-cell")
-          .attr("width", (thisView.getXCoord.rangeBand() - 2 * CELLS_PADDING) * zoomScale)
-          .attr("height", (thisView.getYCoord.rangeBand() - 2 * CELLS_PADDING) * zoomScale)
-
+      @initCellsContainer(cellsContainerG, matrix)
       @applyZoomAndTranslation(cellsContainerG)
 
       fillColour = (d) ->
@@ -1514,70 +1466,6 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
       time = endTime - starTime
 
       return cellsInWindow
-
-    updateCellsForWindow: (cellsContainerG) ->
-
-      starTime = Date.now()
-
-      thisView = @
-      cellsInWindow = @CELLS_IN_WINDOW
-      rowsInWindow = @ROWS_IN_WINDOW
-      colsInWindow = @COLS_IN_WINDOW
-
-      # -------------------------------------------------------------------------------
-      # horizontal rectangles
-      # -------------------------------------------------------------------------------
-      if rowsInWindow.length <= 1
-        horizontalLinesData = []
-      else
-        horizontalLinesData = [1..rowsInWindow.length-1]
-
-      horizontalLines = cellsContainerG.selectAll('.grid-horizontal-line')
-        .data(horizontalLinesData)
-
-      horizontalLines.exit().remove()
-      horizontalLinesEnter = horizontalLines.enter()
-        .append("line")
-        .classed('grid-horizontal-line', true)
-        .style("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
-        .style('stroke-width', @GRID_STROKE_WIDTH)
-
-      # -------------------------------------------------------------------------------
-      # Vertical Lines
-      # -------------------------------------------------------------------------------
-      if colsInWindow.length <= 1
-        verticalLinesData = []
-      else
-        verticalLinesData = [1..colsInWindow.length-1]
-
-      verticalLines = cellsContainerG.selectAll('.grid-vertical-line')
-        .data(verticalLinesData)
-
-      verticalLines.exit().remove()
-
-      verticalLinesEnter = verticalLines.enter()
-        .append("line")
-        .classed('grid-vertical-line', true)
-        .attr("stroke", glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
-        .attr('stroke-width', @GRID_STROKE_WIDTH)
-      # -------------------------------------------------------------------------------
-      # Cells
-      # -------------------------------------------------------------------------------
-      cells = cellsContainerG.selectAll(".vis-cell")
-        .data(cellsInWindow, (d) -> d.id)
-
-      cells.exit().remove()
-      cellsEnter = cells.enter()
-        .append("rect")
-        .classed('vis-cell', true)
-        .attr('stroke-width', @GRID_STROKE_WIDTH)
-        .on('mouseover', $.proxy(@emphasizeFromCellHover, @))
-        .on('mouseout', $.proxy(@deEmphasizeFromCellHover, @))
-        .on('click', (d) -> thisView.showCellTooltip($(@), d))
-
-
-      endTime = Date.now()
-      time = endTime - starTime
 
     #---------------------------------------------------------------------------------------------------------------------
     # Cell Hovering
