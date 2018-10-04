@@ -208,9 +208,9 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
         .domain([0..(@NUM_COLUMNS-1)])
         .rangeBands([0, @RANGE_X_END])
 
-      LABELS_PADDING = 8
+      @LABELS_PADDING = 8
       COLS_LABELS_ROTATION = 30
-      BASE_LABELS_SIZE = 10
+      @BASE_LABELS_SIZE = 10
       @GRID_STROKE_WIDTH = 1
       @CELLS_PADDING = @GRID_STROKE_WIDTH
       TRANSITIONS_DURATION = 1000
@@ -289,44 +289,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
       # --------------------------------------
       # Rows Header Container
       # --------------------------------------
-      rowsHeaderG = mainGContainer.append('g')
-        .attr(@BASE_X_TRANS_ATT, 0)
-        .attr(@BASE_Y_TRANS_ATT, @COLS_HEADER_HEIGHT)
-        .attr(@MOVE_X_ATT, @NO)
-        .attr(@MOVE_Y_ATT, @YES)
-
-      rowsHeaderG.append('rect')
-        .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
-        .classed('background-rect', true)
-
-      rowHeadersEnter = @updateRowsHeadersForWindow(rowsHeaderG)
-
-      rowsHeaderG.positionRows = (zoomScale, transitionDuration=0 ) ->
-
-        t = rowsHeaderG.transition().duration(transitionDuration)
-        t.selectAll('.vis-row')
-          .attr('transform', (d) -> "translate(0, " + (thisView.getYCoord(d.currentPosition) * zoomScale) + ")")
-
-      rowsHeaderG.scaleSizes = (zoomScale) ->
-
-        rowsHeaderG.select('.background-rect')
-          .attr('height', (thisView.ROWS_HEADER_HEIGHT * zoomScale))
-          .attr('width', (thisView.ROWS_HEADER_WIDTH * zoomScale))
-
-        rowsHeaderG.positionRows(zoomScale)
-
-        rowsHeaderG.selectAll('.headers-background-rect')
-          .attr('height', (thisView.getYCoord.rangeBand() * zoomScale))
-          .attr('width', (thisView.ROWS_HEADER_WIDTH * zoomScale))
-
-        rowsHeaderG.selectAll('.headers-text')
-          .attr('x', (LABELS_PADDING * zoomScale))
-          .attr("y", (thisView.getYCoord.rangeBand() * (2/3) * zoomScale) )
-          .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale ) + 'px;')
-
-      @applyZoomAndTranslation(rowsHeaderG)
-      @setAllHeadersEllipsis(rowHeadersEnter, isCol=false)
-
+      rowsHeaderG = @initRowsHeaderContainer(mainGContainer)
       # --------------------------------------
       # Cols Header Container
       # --------------------------------------
@@ -374,7 +337,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
         colsHeaderG.selectAll('.headers-text')
           .attr("y", (thisView.getXCoord.rangeBand() * (2/3) * zoomScale ) )
           .attr('x', (-thisView.COLS_HEADER_HEIGHT * zoomScale))
-          .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale) + 'px;')
+          .attr('style', 'font-size:' + (thisView.BASE_LABELS_SIZE * zoomScale) + 'px;')
 
 
       @applyZoomAndTranslation(colsHeaderG)
@@ -421,9 +384,9 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
           .attr('width', (thisView.ROWS_FOOTER_WIDTH * zoomScale))
 
         rowsFooterG.selectAll('.footers-text')
-          .attr('x', ((thisView.ROWS_FOOTER_WIDTH - LABELS_PADDING) * zoomScale))
+          .attr('x', ((thisView.ROWS_FOOTER_WIDTH - thisView.LABELS_PADDING) * zoomScale))
           .attr("y", (thisView.getYCoord.rangeBand() * (2/3) * zoomScale) )
-          .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale ) + 'px;')
+          .attr('style', 'font-size:' + (thisView.BASE_LABELS_SIZE * zoomScale ) + 'px;')
 
       @applyZoomAndTranslation(rowsFooterG)
 
@@ -503,7 +466,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
           .attr('y2', triangleTop)
 
         # https://drive.google.com/file/d/1rEg1YNxzR6cB2upjRf7PtoIk08tyLapg/view?usp=sharing
-        tY = (3/2) * LABELS_PADDING
+        tY = (3/2) * thisView.LABELS_PADDING
         textY = (thisView.COLS_HEADER_HEIGHT + tY) * zoomScale
         tX = tY / SQ2_tanTirangleAlhpa
         textX = (tX + 2) * zoomScale # add a small padding because tX is always bound to triangle
@@ -518,7 +481,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
           .attr('data-text-width-limit', textWidthLimit)
 
         corner2G.select('.rows-sort-text')
-          .attr('style', 'font-size:' + ( (4/5) * BASE_LABELS_SIZE * zoomScale) + 'px;')
+          .attr('style', 'font-size:' + ( (4/5) * thisView.BASE_LABELS_SIZE * zoomScale) + 'px;')
           .attr('transform', "rotate(#{-SQ2_triangleAlpha}, 0, #{thisView.COLS_HEADER_HEIGHT * zoomScale})")
 
       @applyZoomAndTranslation(corner2G)
@@ -573,7 +536,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
 
         colsFooterG.selectAll('.footers-text')
           .attr("y", (-thisView.getXCoord.rangeBand() * (1/3) * zoomScale) )
-          .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale) + 'px;')
+          .attr('style', 'font-size:' + (thisView.BASE_LABELS_SIZE * zoomScale) + 'px;')
 
 
       @applyZoomAndTranslation(colsFooterG)
@@ -622,12 +585,12 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
           .attr('y2', thisView.COLS_HEADER_HEIGHT * zoomScale)
 
         corner1G.select('.columns-text')
-          .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale) + 'px;')
+          .attr('style', 'font-size:' + (thisView.BASE_LABELS_SIZE * zoomScale) + 'px;')
           .attr('transform', 'translate(' + (thisView.ROWS_HEADER_WIDTH * 2/3) * zoomScale + ',' +
             (thisView.COLS_HEADER_HEIGHT / 2) * zoomScale + ')' + 'rotate(' + corner1G.textRotationAngle + ' 0 0)')
 
         corner1G.select('.rows-text')
-          .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale) + 'px;')
+          .attr('style', 'font-size:' + (thisView.BASE_LABELS_SIZE * zoomScale) + 'px;')
           .attr('transform', 'translate(' + (thisView.ROWS_HEADER_WIDTH / 2) * zoomScale + ',' +
             (thisView.COLS_HEADER_HEIGHT * 2/3) * zoomScale + ')' + 'rotate(' + corner1G.textRotationAngle + ' 0 0)')
 
@@ -648,7 +611,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
         .classed('background-rect', true)
 
       corner3G.append('text')
-        .attr('x', LABELS_PADDING)
+        .attr('x', thisView.LABELS_PADDING)
         .attr('y', thisView.getYCoord.rangeBand())
         .classed('cols-sort-text', true)
 
@@ -667,7 +630,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
           .attr('width', (thisView.ROWS_HEADER_WIDTH * zoomScale))
 
         corner3G.select('.cols-sort-text')
-          .attr('style', 'font-size:' + ((4/5) * BASE_LABELS_SIZE * zoomScale) + 'px;')
+          .attr('style', 'font-size:' + ((4/5) * thisView.BASE_LABELS_SIZE * zoomScale) + 'px;')
 
       @applyZoomAndTranslation(corner3G)
       corner3G.assignTexts()
@@ -1027,25 +990,6 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
       glados.apps.Activity.ActivitiesBrowserApp.initMatrixCellMiniReportCard($newMiniReportCardContainer, d,
         @config.rows_entity_name == 'Compounds')
 
-    fillHeaderText: (d3TextElem, isCol=true) ->
-      thisView = @
-
-      propName = if isCol then thisView.currentColLabelProperty.propName else thisView.currentRowLabelProperty.propName
-      d3TextElem.text( (d) -> glados.Utils.getNestedValue(d, propName))
-
-      @setHeaderEllipsis(d3TextElem, isCol)
-
-    setHeaderEllipsis: (d3TextElem, isCol=true) ->
-
-      d3ContainerElem = d3.select(d3TextElem.node().parentNode).select('.headers-background-rect')
-      @setEllipsisIfOverlaps(d3ContainerElem, d3TextElem, limitByHeight=isCol)
-
-    setAllHeadersEllipsis: (d3Selecion, isCol=true) ->
-
-      thisView = @
-      d3Selecion.selectAll('text')
-        .each((d)-> thisView.setHeaderEllipsis(d3.select(@), isCol))
-
     # because normally container and text elem scale at the same rate on zoom, this can be done only one.
     # take this into account if there is a problem later.
     setEllipsisIfOverlaps: (d3ContainerElem, d3TextElem, limitByHeight=false, addFullTextQtip=false, customWidthLimit,
@@ -1336,39 +1280,6 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
         .on('click', thisView.handleRowHeaderClick)
 
       return rowHeadersEnter
-
-    updateRowsFootersForWindow: (rowsFooterG) ->
-
-      starTime = Date.now()
-
-      thisView = @
-      rowsInWindow = @ROWS_IN_WINDOW
-      # generate footer links for window
-      for rowObj in rowsInWindow
-        thisView.model.getRowFooterLink(rowObj.id)
-
-      rowFooters = rowsFooterG.selectAll('.vis-row-footer')
-        .data(rowsInWindow, (d) -> d.id)
-
-      rowFooters.exit().remove()
-      rowFootersEnter = rowFooters.enter()
-        .append('g').attr('class', 'vis-row-footer')
-
-      rowFootersEnter.append('rect')
-        .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
-        .style('stroke-width', @GRID_STROKE_WIDTH)
-        .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
-        .classed('footers-background-rect', true)
-
-      rowFootersEnter.append('text')
-        .classed('footers-text', true)
-        .attr('text-anchor', 'end')
-        .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
-        .attr('id', (d) -> thisView.ROW_FOOTER_TEXT_BASE_ID + d.id)
-        .on('click', thisView.handleRowFooterClick )
-
-      endTime = Date.now()
-      time = endTime - starTime
 
     getCellsInWindow: ->
 
