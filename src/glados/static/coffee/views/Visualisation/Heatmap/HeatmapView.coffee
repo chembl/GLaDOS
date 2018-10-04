@@ -5,6 +5,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
   HeatmapView: Backbone.View\
   .extend(ResponsiviseViewExt)\
   .extend(glados.views.Visualisation.Heatmap.Parts.Controls)\
+  .extend(glados.views.Visualisation.Heatmap.Parts.ZoomAndTranslation)\
   .extend
 
     REVERSE_POSITION_TOOLTIP_TH: 0.8
@@ -182,16 +183,17 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
       @ROWS_HEADER_HEIGHT = @RANGE_Y_END
       @COLS_HEADER_WIDTH = @RANGE_X_END
       # this is to standardise the names of the properties to be used in the DOM elements.
-      BASE_X_TRANS_ATT = 'glados-baseXTrans'
-      BASE_Y_TRANS_ATT = 'glados-baseYTrans'
-      MOVE_X_ATT = 'glados-moveX'
-      MOVE_Y_ATT = 'glados-moveY'
-      FIXED_TO_LEFT_ATT = 'glados-fixedToLeft'
-      FIXED_TO_BOTTOM_ATT = 'glados-fixedToBottom'
-      BASE_WIDTH_ATT = 'glados-baseWidth'
-      BASE_HEIGHT_ATT = 'glados-baseHeight'
-      YES = 'yes'
-      NO = 'no'
+      @BASE_X_TRANS_ATT = 'glados-baseXTrans'
+      @BASE_Y_TRANS_ATT = 'glados-baseYTrans'
+      @MOVE_X_ATT = 'glados-moveX'
+      @MOVE_Y_ATT = 'glados-moveY'
+      @FIXED_TO_LEFT_ATT = 'glados-fixedToLeft'
+      @FIXED_TO_BOTTOM_ATT = 'glados-fixedToBottom'
+      @BASE_WIDTH_ATT = 'glados-baseWidth'
+      @BASE_HEIGHT_ATT = 'glados-baseHeight'
+      @YES = 'yes'
+      @NO = 'no'
+      # --------
       CONTAINER_Y_PADDING = 0
       CONTAINER_X_PADDING = 0
       ZOOM_ACTIVATED = false
@@ -267,34 +269,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
         .attr('style', 'background-color: white;')
 
       mainSVGContainer = mainContainer.select('.mainSVGContainer')
-      # --------------------------------------
-      # Base translations
-      # --------------------------------------
-      applyZoomAndTranslation = (elem, translateX=0, translateY=0, zoomScale=1) ->
 
-        elem.scaleSizes(zoomScale) unless not elem.scaleSizes?
-
-        moveX = elem.attr(MOVE_X_ATT)
-        moveY = elem.attr(MOVE_Y_ATT)
-        translateX = 0 if moveX == NO
-        translateY = 0 if moveY == NO
-        fixedToLeft = elem.attr(FIXED_TO_LEFT_ATT) == YES
-        fixedToBottom = elem.attr(FIXED_TO_BOTTOM_ATT) == YES
-
-        if fixedToLeft
-          baseWidth = elem.attr(BASE_WIDTH_ATT)
-          newTransX = thisView.VISUALISATION_WIDTH - (baseWidth * zoomScale)
-        else
-          newTransX = (parseFloat(elem.attr(BASE_X_TRANS_ATT)) + translateX) * zoomScale
-
-        if fixedToBottom
-          baseHeight = elem.attr(BASE_HEIGHT_ATT)
-          newTransY = thisView.VISUALISATION_HEIGHT - (baseHeight * zoomScale)
-        else
-          newTransY = (parseFloat(elem.attr(BASE_Y_TRANS_ATT)) + translateY) * zoomScale
-
-
-        elem.attr('transform', 'translate(' + newTransX + ',' + newTransY + ')')
       # --------------------------------------
       # Add background MATRIX g
       # --------------------------------------
@@ -307,10 +282,10 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
       # --------------------------------------
       cellsContainerG = mainGContainer.append('g')
         .attr('data-section-name', 'cellsContainerG')
-        .attr(BASE_X_TRANS_ATT, @ROWS_HEADER_WIDTH)
-        .attr(BASE_Y_TRANS_ATT, @COLS_HEADER_HEIGHT)
-        .attr(MOVE_X_ATT, YES)
-        .attr(MOVE_Y_ATT, YES)
+        .attr(@BASE_X_TRANS_ATT, @ROWS_HEADER_WIDTH)
+        .attr(@BASE_Y_TRANS_ATT, @COLS_HEADER_HEIGHT)
+        .attr(@MOVE_X_ATT, @YES)
+        .attr(@MOVE_Y_ATT, @YES)
         .classed('cells-container-g', true)
 
       cellsContainerG.append('rect')
@@ -367,7 +342,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
           .attr("width", (thisView.getXCoord.rangeBand() - 2 * CELLS_PADDING) * zoomScale)
           .attr("height", (thisView.getYCoord.rangeBand() - 2 * CELLS_PADDING) * zoomScale)
 
-      applyZoomAndTranslation(cellsContainerG)
+      @applyZoomAndTranslation(cellsContainerG)
 
       fillColour = (d) ->
 
@@ -431,10 +406,10 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
       # Rows Header Container
       # --------------------------------------
       rowsHeaderG = mainGContainer.append('g')
-        .attr(BASE_X_TRANS_ATT, 0)
-        .attr(BASE_Y_TRANS_ATT, @COLS_HEADER_HEIGHT)
-        .attr(MOVE_X_ATT, NO)
-        .attr(MOVE_Y_ATT, YES)
+        .attr(@BASE_X_TRANS_ATT, 0)
+        .attr(@BASE_Y_TRANS_ATT, @COLS_HEADER_HEIGHT)
+        .attr(@MOVE_X_ATT, @NO)
+        .attr(@MOVE_Y_ATT, @YES)
 
       rowsHeaderG.append('rect')
         .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
@@ -465,17 +440,17 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
           .attr("y", (thisView.getYCoord.rangeBand() * (2/3) * zoomScale) )
           .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale ) + 'px;')
 
-      applyZoomAndTranslation(rowsHeaderG)
+      @applyZoomAndTranslation(rowsHeaderG)
       @setAllHeadersEllipsis(rowHeadersEnter, isCol=false)
 
       # --------------------------------------
       # Cols Header Container
       # --------------------------------------
       colsHeaderG = mainGContainer.append('g')
-        .attr(BASE_X_TRANS_ATT, @ROWS_HEADER_WIDTH)
-        .attr(BASE_Y_TRANS_ATT, 0)
-        .attr(MOVE_X_ATT, YES)
-        .attr(MOVE_Y_ATT, NO)
+        .attr(@BASE_X_TRANS_ATT, @ROWS_HEADER_WIDTH)
+        .attr(@BASE_Y_TRANS_ATT, 0)
+        .attr(@MOVE_X_ATT, @YES)
+        .attr(@MOVE_Y_ATT, @NO)
         .classed('BCK-ColsHeaderG', true)
 
       colsHeaderG.append('rect')
@@ -518,17 +493,17 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
           .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale) + 'px;')
 
 
-      applyZoomAndTranslation(colsHeaderG)
+      @applyZoomAndTranslation(colsHeaderG)
       @setAllHeadersEllipsis(colsHeadersEnter, isCol=true)
       # --------------------------------------
       # Rows Footer Container
       # --------------------------------------
       rowsFooterG = mainGContainer.append('g')
-        .attr(BASE_Y_TRANS_ATT, @COLS_HEADER_HEIGHT)
-        .attr(MOVE_X_ATT, NO)
-        .attr(MOVE_Y_ATT, YES)
-        .attr(FIXED_TO_LEFT_ATT, YES)
-        .attr(BASE_WIDTH_ATT, @ROWS_FOOTER_WIDTH)
+        .attr(@BASE_Y_TRANS_ATT, @COLS_HEADER_HEIGHT)
+        .attr(@MOVE_X_ATT, @NO)
+        .attr(@MOVE_Y_ATT, @YES)
+        .attr(@FIXED_TO_LEFT_ATT, @YES)
+        .attr(@BASE_WIDTH_ATT, @ROWS_FOOTER_WIDTH)
 
       rowsFooterG.append('rect')
         .style('fill', 'none')
@@ -566,17 +541,17 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
           .attr("y", (thisView.getYCoord.rangeBand() * (2/3) * zoomScale) )
           .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale ) + 'px;')
 
-      applyZoomAndTranslation(rowsFooterG)
+      @applyZoomAndTranslation(rowsFooterG)
 
       # --------------------------------------
       # Square 2
       # --------------------------------------
       corner2G = mainGContainer.append('g')
-        .attr(BASE_Y_TRANS_ATT, 0)
-        .attr(MOVE_X_ATT, NO)
-        .attr(MOVE_Y_ATT, NO)
-        .attr(FIXED_TO_LEFT_ATT, YES)
-        .attr(BASE_WIDTH_ATT, @ROWS_FOOTER_WIDTH)
+        .attr(@BASE_Y_TRANS_ATT, 0)
+        .attr(@MOVE_X_ATT, @NO)
+        .attr(@MOVE_Y_ATT, @NO)
+        .attr(@FIXED_TO_LEFT_ATT, @YES)
+        .attr(@BASE_WIDTH_ATT, @ROWS_FOOTER_WIDTH)
         .classed('square2-g', true)
 
       corner2G.append('rect')
@@ -662,18 +637,18 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
           .attr('style', 'font-size:' + ( (4/5) * BASE_LABELS_SIZE * zoomScale) + 'px;')
           .attr('transform', "rotate(#{-SQ2_triangleAlpha}, 0, #{thisView.COLS_HEADER_HEIGHT * zoomScale})")
 
-      applyZoomAndTranslation(corner2G)
+      @applyZoomAndTranslation(corner2G)
       corner2G.assignTexts()
 
       # --------------------------------------
       # Cols Footer Container
       # --------------------------------------
       colsFooterG = mainGContainer.append('g')
-        .attr(BASE_X_TRANS_ATT, @ROWS_HEADER_WIDTH)
-        .attr(MOVE_X_ATT, YES)
-        .attr(MOVE_Y_ATT, NO)
-        .attr(FIXED_TO_BOTTOM_ATT, YES)
-        .attr(BASE_HEIGHT_ATT, @COLS_FOOTER_HEIGHT)
+        .attr(@BASE_X_TRANS_ATT, @ROWS_HEADER_WIDTH)
+        .attr(@MOVE_X_ATT, @YES)
+        .attr(@MOVE_Y_ATT, @NO)
+        .attr(@FIXED_TO_BOTTOM_ATT, @YES)
+        .attr(@BASE_HEIGHT_ATT, @COLS_FOOTER_HEIGHT)
 
       colsFooterG.append('rect')
         .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
@@ -717,17 +692,17 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
           .attr('style', 'font-size:' + (BASE_LABELS_SIZE * zoomScale) + 'px;')
 
 
-      applyZoomAndTranslation(colsFooterG)
+      @applyZoomAndTranslation(colsFooterG)
       colsFooterG.assignTexts()
 
       # --------------------------------------
       # Square 1
       # --------------------------------------
       corner1G = mainGContainer.append('g')
-        .attr(BASE_X_TRANS_ATT, 0)
-        .attr(BASE_Y_TRANS_ATT, 0)
-        .attr(MOVE_X_ATT, NO)
-        .attr(MOVE_Y_ATT, NO)
+        .attr(@BASE_X_TRANS_ATT, 0)
+        .attr(@BASE_Y_TRANS_ATT, 0)
+        .attr(@MOVE_X_ATT, @NO)
+        .attr(@MOVE_Y_ATT, @NO)
 
       corner1G.append('rect')
         .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
@@ -772,17 +747,17 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
           .attr('transform', 'translate(' + (thisView.ROWS_HEADER_WIDTH / 2) * zoomScale + ',' +
             (thisView.COLS_HEADER_HEIGHT * 2/3) * zoomScale + ')' + 'rotate(' + corner1G.textRotationAngle + ' 0 0)')
 
-      applyZoomAndTranslation(corner1G)
+      @applyZoomAndTranslation(corner1G)
 
       # --------------------------------------
       # Square 3
       # --------------------------------------
       corner3G = mainGContainer.append('g')
-        .attr(BASE_X_TRANS_ATT, 0)
-        .attr(MOVE_X_ATT, NO)
-        .attr(MOVE_Y_ATT, NO)
-        .attr(FIXED_TO_BOTTOM_ATT, YES)
-        .attr(BASE_HEIGHT_ATT, @COLS_FOOTER_HEIGHT)
+        .attr(@BASE_X_TRANS_ATT, 0)
+        .attr(@MOVE_X_ATT, @NO)
+        .attr(@MOVE_Y_ATT, @NO)
+        .attr(@FIXED_TO_BOTTOM_ATT, @YES)
+        .attr(@BASE_HEIGHT_ATT, @COLS_FOOTER_HEIGHT)
 
       corner3G.append('rect')
         .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
@@ -810,18 +785,18 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
         corner3G.select('.cols-sort-text')
           .attr('style', 'font-size:' + ((4/5) * BASE_LABELS_SIZE * zoomScale) + 'px;')
 
-      applyZoomAndTranslation(corner3G)
+      @applyZoomAndTranslation(corner3G)
       corner3G.assignTexts()
       # --------------------------------------
       # Square 4
       # --------------------------------------
       corner4G = mainGContainer.append('g')
-        .attr(MOVE_X_ATT, NO)
-        .attr(MOVE_Y_ATT, NO)
-        .attr(FIXED_TO_LEFT_ATT, YES)
-        .attr(BASE_WIDTH_ATT, @ROWS_FOOTER_WIDTH)
-        .attr(FIXED_TO_BOTTOM_ATT, YES)
-        .attr(BASE_HEIGHT_ATT, (@COLS_FOOTER_HEIGHT))
+        .attr(@MOVE_X_ATT, @NO)
+        .attr(@MOVE_Y_ATT, @NO)
+        .attr(@FIXED_TO_LEFT_ATT, @YES)
+        .attr(@BASE_WIDTH_ATT, @ROWS_FOOTER_WIDTH)
+        .attr(@FIXED_TO_BOTTOM_ATT, @YES)
+        .attr(@BASE_HEIGHT_ATT, (@COLS_FOOTER_HEIGHT))
 
       corner4G.append('rect')
         .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
@@ -833,7 +808,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
           .attr('height', (thisView.COLS_FOOTER_HEIGHT * zoomScale))
           .attr('width', (thisView.ROWS_FOOTER_WIDTH * zoomScale))
 
-      applyZoomAndTranslation(corner4G)
+      @applyZoomAndTranslation(corner4G)
 
       # --------------------------------------
       # Zoom
@@ -878,15 +853,15 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
         console.log 'translateY: ', translateY
         console.log thisView.zoomScale
 
-        applyZoomAndTranslation(corner1G, translateX, translateY, thisView.zoomScale)
-        applyZoomAndTranslation(colsHeaderG, translateX, translateY, thisView.zoomScale)
-        applyZoomAndTranslation(corner2G, translateX, translateY, thisView.zoomScale)
-        applyZoomAndTranslation(rowsHeaderG, translateX, translateY, thisView.zoomScale)
-        applyZoomAndTranslation(cellsContainerG, translateX, translateY, thisView.zoomScale)
-        applyZoomAndTranslation(rowsFooterG, translateX, translateY, thisView.zoomScale)
-        applyZoomAndTranslation(corner3G, translateX, translateY, thisView.zoomScale)
-        applyZoomAndTranslation(colsFooterG, translateX, translateY, thisView.zoomScale)
-        applyZoomAndTranslation(corner4G, translateX, translateY, thisView.zoomScale)
+        thisView.applyZoomAndTranslation(corner1G, translateX, translateY, thisView.zoomScale)
+        thisView.applyZoomAndTranslation(colsHeaderG, translateX, translateY, thisView.zoomScale)
+        thisView.applyZoomAndTranslation(corner2G, translateX, translateY, thisView.zoomScale)
+        thisView.applyZoomAndTranslation(rowsHeaderG, translateX, translateY, thisView.zoomScale)
+        thisView.applyZoomAndTranslation(cellsContainerG, translateX, translateY, thisView.zoomScale)
+        thisView.applyZoomAndTranslation(rowsFooterG, translateX, translateY, thisView.zoomScale)
+        thisView.applyZoomAndTranslation(corner3G, translateX, translateY, thisView.zoomScale)
+        thisView.applyZoomAndTranslation(colsFooterG, translateX, translateY, thisView.zoomScale)
+        thisView.applyZoomAndTranslation(corner4G, translateX, translateY, thisView.zoomScale)
 
         # after adding elems to window, I need to check again for ellipsis
         if thisView.WINDOW.window_changed or forceSectionsUpdate
