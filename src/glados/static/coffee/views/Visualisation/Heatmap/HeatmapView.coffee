@@ -289,71 +289,14 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
         .attr(@MOVE_Y_ATT, @YES)
         .classed('cells-container-g', true)
 
+      @cellsContainerG = cellsContainerG
       cellsContainerG.append('rect')
         .style("fill", glados.Settings.VIS_COLORS.WHITE)
         .classed('background-rect', true)
 
       @initCellsContainer(cellsContainerG, matrix)
       @applyZoomAndTranslation(cellsContainerG)
-
-      fillColour = (d) ->
-
-
-        propValue = d[thisView.currentPropertyColour.propName]
-
-        if not propValue?
-
-          return glados.Settings.VISUALISATION_GRID_NO_DATA
-
-        thisView.getCellColour(d[thisView.currentPropertyColour.propName])
-
-
-      colourCells = (transitionDuration=0)->
-
-        starTime = Date.now()
-        if not thisView.currentPropertyColour.colourScale?
-
-          maxValCheatName = 'cell_max_' + thisView.currentPropertyColour.propName
-          minValCheatName = 'cell_min_' + thisView.currentPropertyColour.propName
-          maxValCheat = thisView.model.get('matrix')[maxValCheatName]
-          minValCheat = thisView.model.get('matrix')[minValCheatName]
-
-          if maxValCheat? and minValCheat?
-            thisView.currentPropertyColour.domain = [minValCheat, maxValCheat]
-
-          if not thisView.currentPropertyColour.domain?
-
-            colourValues = thisView.model.getValuesListForProperty(thisView.currentPropertyColour.propName)
-            glados.models.visualisation.PropertiesFactory.generateContinuousDomainFromValues(thisView.currentPropertyColour,
-              colourValues)
-
-          glados.models.visualisation.PropertiesFactory.generateColourScale(thisView.currentPropertyColour)
-
-        thisView.getCellColour = thisView.currentPropertyColour.colourScale
-
-
-        #asigns colors?
-        t = cellsContainerG.transition().duration(transitionDuration)
-        gladosColour = (d, i) ->
-          seed = glados.Utils.getRadiansFromDegrees(i)
-          return  "#" + (Math.round(Math.abs(Math.sin(seed)) * 0xFFFFFF)).toString(16)
-
-        if thisView.GLADOS_SUMMONED
-          t.selectAll(".vis-cell")
-            .style("fill", gladosColour)
-        else
-          t.selectAll(".vis-cell")
-            .style("fill", fillColour)
-
-        thisView.$legendContainer = $(thisView.el).find('.BCK-CompResultsGraphLegendContainer')
-        glados.Utils.renderLegendForProperty(thisView.currentPropertyColour, undefined, thisView.$legendContainer,
-          enableSelection=false)
-
-        endTime = Date.now()
-        time = endTime - starTime
-        console.log 'inside colour cells: ', time
-
-      colourCells()
+      @colourCells()
       # --------------------------------------
       # Rows Header Container
       # --------------------------------------
@@ -798,7 +741,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
           thisView.updateRowsFootersForWindow(rowsFooterG)
           rowsFooterG.assignTexts()
           thisView.updateCellsForWindow(cellsContainerG)
-          colourCells()
+          thisView.colourCells()
 
         console.log 'handle zoom'
         console.log 'translateX: ', translateX
@@ -915,7 +858,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
           return
 
         thisView.currentPropertyColour = thisView.config.properties[@value]
-        colourCells(TRANSITIONS_DURATION)
+        thisView.colourCells(TRANSITIONS_DURATION)
 
       # --------------------------------------
       # row sorting
