@@ -9,6 +9,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
   .extend(glados.views.Visualisation.Heatmap.Parts.CellsContainer)\
   .extend(glados.views.Visualisation.Heatmap.Parts.RowsHeaderContainer)\
   .extend(glados.views.Visualisation.Heatmap.Parts.ColsHeaderContainer)\
+  .extend(glados.views.Visualisation.Heatmap.Parts.Texts)\
   .extend
 
     REVERSE_POSITION_TOOLTIP_TH: 0.8
