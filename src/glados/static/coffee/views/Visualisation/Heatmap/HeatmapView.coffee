@@ -8,6 +8,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
   .extend(glados.views.Visualisation.Heatmap.Parts.ZoomAndTranslation)\
   .extend(glados.views.Visualisation.Heatmap.Parts.CellsContainer)\
   .extend(glados.views.Visualisation.Heatmap.Parts.RowsHeaderContainer)\
+  .extend(glados.views.Visualisation.Heatmap.Parts.ColsHeaderContainer)\
   .extend
 
     REVERSE_POSITION_TOOLTIP_TH: 0.8
@@ -209,7 +210,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
         .rangeBands([0, @RANGE_X_END])
 
       @LABELS_PADDING = 8
-      COLS_LABELS_ROTATION = 30
+      @COLS_LABELS_ROTATION = 30
       @BASE_LABELS_SIZE = 10
       @GRID_STROKE_WIDTH = 1
       @CELLS_PADDING = @GRID_STROKE_WIDTH
@@ -293,55 +294,8 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
       # --------------------------------------
       # Cols Header Container
       # --------------------------------------
-      colsHeaderG = mainGContainer.append('g')
-        .attr(@BASE_X_TRANS_ATT, @ROWS_HEADER_WIDTH)
-        .attr(@BASE_Y_TRANS_ATT, 0)
-        .attr(@MOVE_X_ATT, @YES)
-        .attr(@MOVE_Y_ATT, @NO)
-        .classed('BCK-ColsHeaderG', true)
+      colsHeaderG = @initColsHeaderContainer(mainGContainer)
 
-      colsHeaderG.append('rect')
-        .attr('height', @COLS_HEADER_HEIGHT)
-        .attr('width', @RANGE_X_END)
-        .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
-        .classed('background-rect', true)
-
-      colsHeadersEnter = @updateColsHeadersForWindow(colsHeaderG)
-
-      colsHeaderG.positionCols = (zoomScale, transitionDuration=0) ->
-
-        t = colsHeaderG.transition().duration(transitionDuration)
-        t.selectAll('.vis-column')
-          .attr("transform", ((d) -> "translate(" + (thisView.getXCoord(d.currentPosition) * zoomScale) +
-          ")rotate(" + COLS_LABELS_ROTATION + " " + (thisView.getXCoord.rangeBand() * zoomScale) +
-          " " + (thisView.COLS_HEADER_HEIGHT * zoomScale) + ")" ))
-
-      colsHeaderG.scaleSizes = (zoomScale) ->
-
-        colsHeaderG.select('.background-rect')
-          .attr('height', thisView.COLS_HEADER_HEIGHT * zoomScale)
-          .attr('width', thisView.COLS_HEADER_WIDTH * zoomScale)
-
-        colsHeaderG.positionCols(zoomScale)
-
-        colsHeaderG.selectAll('.headers-background-rect')
-          .attr('height', (thisView.COLS_HEADER_HEIGHT * zoomScale) )
-          .attr('width', (thisView.getXCoord.rangeBand() * zoomScale))
-
-        colsHeaderG.selectAll('.headers-divisory-line')
-          .attr('x1', (thisView.getXCoord.rangeBand() * zoomScale))
-          .attr('y1', (thisView.COLS_HEADER_HEIGHT * zoomScale))
-          .attr('x2', (thisView.getXCoord.rangeBand() * zoomScale))
-          .attr('y2', 0)
-
-        colsHeaderG.selectAll('.headers-text')
-          .attr("y", (thisView.getXCoord.rangeBand() * (2/3) * zoomScale ) )
-          .attr('x', (-thisView.COLS_HEADER_HEIGHT * zoomScale))
-          .attr('style', 'font-size:' + (thisView.BASE_LABELS_SIZE * zoomScale) + 'px;')
-
-
-      @applyZoomAndTranslation(colsHeaderG)
-      @setAllHeadersEllipsis(colsHeadersEnter, isCol=true)
       # --------------------------------------
       # Rows Footer Container
       # --------------------------------------
@@ -425,7 +379,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
         thisView.setEllipsisIfOverlaps(d3ContainerElem=undefined, d3TextElem, limitByHeight=false, addFullTextQtip=true,
           widthLimit, customTooltipPosition)
 
-      SQ2_triangleAlpha = 90 - COLS_LABELS_ROTATION
+      SQ2_triangleAlpha = 90 - thisView.COLS_LABELS_ROTATION
       SQ2_triangleAlphaRad = glados.Utils.getRadiansFromDegrees(SQ2_triangleAlpha)
       SQ2_tanTirangleAlhpa = Math.tan(SQ2_triangleAlphaRad)
 
@@ -508,7 +462,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
         t = colsFooterG.transition().duration(transitionDuration)
         t.selectAll('.vis-column-footer')
           .attr("transform", ((d) -> "translate(" + (thisView.getXCoord(d.currentPosition) * zoomScale) +
-          ")rotate(" + (-COLS_LABELS_ROTATION) + " " + (thisView.getXCoord.rangeBand() * zoomScale) + " 0)" ))
+          ")rotate(" + (-thisView.COLS_LABELS_ROTATION) + " " + (thisView.getXCoord.rangeBand() * zoomScale) + " 0)" ))
 
       colsFooterG.assignTexts = (transitionDuration=0) ->
 
@@ -1152,50 +1106,6 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
       time = endTime - starTime
 
       return (colsIndex[i] for i in [start..end])
-
-    updateColsHeadersForWindow: (colsHeaderG) ->
-
-      thisView = @
-      colsInWindow = @COLS_IN_WINDOW
-
-      for colObj in colsInWindow
-        thisView.model.getColHeaderLink(colObj.id)
-
-      colsHeaders = colsHeaderG.selectAll(".vis-column")
-        .data(colsInWindow, (d) -> d.id)
-
-      colsHeaders.exit().remove()
-      colsHeadersEnter = colsHeaders.enter()
-        .append("g")
-        .classed('vis-column', true)
-
-      colsHeadersEnter.append('rect')
-        .style('fill', 'none')
-        .style('fill-opacity', 0.5)
-        .classed('headers-background-rect', true)
-
-      colsHeadersEnter.append('line')
-        .style('stroke-width', @GRID_STROKE_WIDTH)
-        .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
-        .classed('headers-divisory-line', true)
-
-      if @config.cols_entity_name == 'Targets'
-        setUpColTooltip = @generateTooltipFunction('Target', @, isCol=true)
-      else
-        setUpColTooltip = @generateTooltipFunction('Compound', @, isCol=true)
-
-      colsHeadersEnter.append('text')
-        .classed('headers-text', true)
-        .attr('transform', 'rotate(-90)')
-        .attr('text-decoration', 'underline')
-        .attr('cursor', 'pointer')
-        .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
-        .on('mouseover', setUpColTooltip)
-        .each((d)-> thisView.fillHeaderText(d3.select(@)))
-        .attr('id', (d) -> thisView.COL_HEADER_TEXT_BASE_ID + d.id)
-        .on('click', thisView.handleColHeaderClick)
-
-      return colsHeadersEnter
 
     updateColsFootersForWindow: (colsFooterG) ->
 
