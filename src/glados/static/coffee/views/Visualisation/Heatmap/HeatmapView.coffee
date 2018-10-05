@@ -10,6 +10,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
   .extend(glados.views.Visualisation.Heatmap.Parts.RowsHeaderContainer)\
   .extend(glados.views.Visualisation.Heatmap.Parts.ColsHeaderContainer)\
   .extend(glados.views.Visualisation.Heatmap.Parts.Texts)\
+  .extend(glados.views.Visualisation.Heatmap.Parts.RowsFooterContainer)\
   .extend
 
     REVERSE_POSITION_TOOLTIP_TH: 0.8
@@ -296,55 +297,10 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
       # Cols Header Container
       # --------------------------------------
       colsHeaderG = @initColsHeaderContainer(mainGContainer)
-
       # --------------------------------------
       # Rows Footer Container
       # --------------------------------------
-      rowsFooterG = mainGContainer.append('g')
-        .attr(@BASE_Y_TRANS_ATT, @COLS_HEADER_HEIGHT)
-        .attr(@MOVE_X_ATT, @NO)
-        .attr(@MOVE_Y_ATT, @YES)
-        .attr(@FIXED_TO_LEFT_ATT, @YES)
-        .attr(@BASE_WIDTH_ATT, @ROWS_FOOTER_WIDTH)
-
-      rowsFooterG.append('rect')
-        .style('fill', 'none')
-        .classed('background-rect', true)
-
-      @updateRowsFootersForWindow(rowsFooterG)
-
-      rowsFooterG.assignTexts = (transitionDuration=0) ->
-
-        t = rowsFooterG.transition().duration(transitionDuration)
-        t.selectAll('.footers-text')
-          .text((d) -> glados.Utils.getNestedValue(d, thisView.currentRowSortingProperty.propName))
-
-      rowsFooterG.positionRows = (zoomScale, transitionDuration=0 ) ->
-
-        t = rowsFooterG.transition().duration(transitionDuration)
-        t.selectAll('.vis-row-footer')
-          .attr('transform', (d) -> "translate(0, " + (thisView.getYCoord(d.currentPosition) * zoomScale) + ")" )
-
-      rowsFooterG.scaleSizes = (zoomScale) ->
-
-        rowsFooterG.select('.background-rect')
-          .attr('height', (thisView.ROWS_HEADER_HEIGHT * zoomScale))
-          .attr('width', (thisView.ROWS_FOOTER_WIDTH * zoomScale))
-
-        rowsFooterG.positionRows(zoomScale)
-        rowsFooterG.assignTexts()
-
-        rowsFooterG.selectAll('.footers-background-rect')
-          .attr('height', (thisView.getYCoord.rangeBand() * zoomScale))
-          .attr('width', (thisView.ROWS_FOOTER_WIDTH * zoomScale))
-
-        rowsFooterG.selectAll('.footers-text')
-          .attr('x', ((thisView.ROWS_FOOTER_WIDTH - thisView.LABELS_PADDING) * zoomScale))
-          .attr("y", (thisView.getYCoord.rangeBand() * (2/3) * zoomScale) )
-          .attr('style', 'font-size:' + (thisView.BASE_LABELS_SIZE * zoomScale ) + 'px;')
-
-      @applyZoomAndTranslation(rowsFooterG)
-
+      rowsFooterG = @initRowsFooterContainer(mainGContainer)
       # --------------------------------------
       # Square 2
       # --------------------------------------
@@ -1156,41 +1112,6 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
       time = endTime - starTime
 
       return (rowsIndex[i] for i in [start..end])
-
-    updateRowsHeadersForWindow: (rowsHeaderG) ->
-
-      thisView = @
-      rowsInWindow = @ROWS_IN_WINDOW
-      for rowObj in rowsInWindow
-        thisView.model.getRowHeaderLink(rowObj.id)
-
-      rowHeaders = rowsHeaderG.selectAll('.vis-row')
-        .data(rowsInWindow, (d) -> d.id)
-
-      rowHeaders.exit().remove()
-      rowHeadersEnter = rowHeaders.enter()
-        .append('g').attr('class', 'vis-row')
-
-      rowHeadersEnter.append('rect')
-        .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
-        .style('stroke-width', @GRID_STROKE_WIDTH)
-        .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
-        .classed('headers-background-rect', true)
-
-      if @config.rows_entity_name == 'Compounds'
-        setUpRowTooltip = @generateTooltipFunction('Compound', @, isCol=false)
-      else
-        setUpRowTooltip = @generateTooltipFunction('Target', @, isCol=false)
-
-      rowHeadersEnter.append('text')
-        .classed('headers-text', true)
-        .each((d)-> thisView.fillHeaderText(d3.select(@), isCol=false))
-        .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
-        .on('mouseover', setUpRowTooltip)
-        .attr('id', (d) -> thisView.ROW_HEADER_TEXT_BASE_ID + d.id)
-        .on('click', thisView.handleRowHeaderClick)
-
-      return rowHeadersEnter
 
     getCellsInWindow: ->
 
