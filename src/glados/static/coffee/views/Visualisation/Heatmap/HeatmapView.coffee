@@ -14,6 +14,8 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
   .extend(glados.views.Visualisation.Heatmap.Parts.Square2)\
   .extend(glados.views.Visualisation.Heatmap.Parts.ColsFooter)\
   .extend(glados.views.Visualisation.Heatmap.Parts.Square1)\
+  .extend(glados.views.Visualisation.Heatmap.Parts.Square3)\
+  .extend(glados.views.Visualisation.Heatmap.Parts.Square4)\
   .extend
 
     REVERSE_POSITION_TOOLTIP_TH: 0.8
@@ -285,6 +287,8 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
         .attr('class', 'mainGContainer')
         .attr('transform', 'translate(' + CONTAINER_X_PADDING + ',' + CONTAINER_Y_PADDING + ')')
 
+      # Now starts the addition of each section. Remember that for svg elements the order in which elements are added
+      # determines their position in the z axis.
       # --------------------------------------
       # Cells container
       # --------------------------------------
@@ -319,63 +323,11 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
       # --------------------------------------
       # Square 3
       # --------------------------------------
-      corner3G = mainGContainer.append('g')
-        .attr(@BASE_X_TRANS_ATT, 0)
-        .attr(@MOVE_X_ATT, @NO)
-        .attr(@MOVE_Y_ATT, @NO)
-        .attr(@FIXED_TO_BOTTOM_ATT, @YES)
-        .attr(@BASE_HEIGHT_ATT, @COLS_FOOTER_HEIGHT)
-
-      corner3G.append('rect')
-        .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
-        .classed('background-rect', true)
-
-      corner3G.append('text')
-        .attr('x', thisView.LABELS_PADDING)
-        .attr('y', thisView.getYCoord.rangeBand())
-        .classed('cols-sort-text', true)
-
-      corner3G.assignTexts = ->
-
-        colsSortText = corner3G.select('.cols-sort-text')
-          .text(thisView.currentColSortingProperty.label + ':')
-        backgroundRect = corner3G.select('.background-rect')
-
-        thisView.setEllipsisIfOverlaps(backgroundRect, colsSortText, limitByHeight=false, addFullTextQtip=true)
-
-      corner3G.scaleSizes = (zoomScale) ->
-
-        corner3G.select('.background-rect')
-          .attr('height', (thisView.COLS_FOOTER_HEIGHT * zoomScale))
-          .attr('width', (thisView.ROWS_HEADER_WIDTH * zoomScale))
-
-        corner3G.select('.cols-sort-text')
-          .attr('style', 'font-size:' + ((4/5) * thisView.BASE_LABELS_SIZE * zoomScale) + 'px;')
-
-      @applyZoomAndTranslation(corner3G)
-      corner3G.assignTexts()
+      corner3G = @initSquare3(mainGContainer)
       # --------------------------------------
       # Square 4
       # --------------------------------------
-      corner4G = mainGContainer.append('g')
-        .attr(@MOVE_X_ATT, @NO)
-        .attr(@MOVE_Y_ATT, @NO)
-        .attr(@FIXED_TO_LEFT_ATT, @YES)
-        .attr(@BASE_WIDTH_ATT, @ROWS_FOOTER_WIDTH)
-        .attr(@FIXED_TO_BOTTOM_ATT, @YES)
-        .attr(@BASE_HEIGHT_ATT, (@COLS_FOOTER_HEIGHT))
-
-      corner4G.append('rect')
-        .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
-        .classed('background-rect', true)
-
-      corner4G.scaleSizes = (zoomScale) ->
-
-        corner4G.select('.background-rect')
-          .attr('height', (thisView.COLS_FOOTER_HEIGHT * zoomScale))
-          .attr('width', (thisView.ROWS_FOOTER_WIDTH * zoomScale))
-
-      @applyZoomAndTranslation(corner4G)
+      corner4G = @initSquare4(mainGContainer)
 
       # --------------------------------------
       # Zoom
