@@ -222,7 +222,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
       @BASE_LABELS_SIZE = 10
       @GRID_STROKE_WIDTH = 1
       @CELLS_PADDING = @GRID_STROKE_WIDTH
-      TRANSITIONS_DURATION = 1000
+      @TRANSITIONS_DURATION = 1000
 
       elemWidth = $(@el).width()
       width = elemWidth
@@ -338,38 +338,15 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
       # --------------------------------------
       corner4G = @initSquare4(mainGContainer)
       @corner4G = corner4G
-      # --------------------------------------
-      # Zoom
-      # --------------------------------------
+
       @initZoom(mainGContainer)
       @resetZoom()
-      # --------------------------------------
-      # Zoom Events
-      # --------------------------------------
       @initResetZoomBtn()
       @initZoomInBtn()
       @initZoomOutBtn()
-      # --------------------------------------
-      # Activate zoom and drag
-      # --------------------------------------
       @initToggleGrabBtn()
-
-      # --------------------------------------
-      # Open in full screen
-      # --------------------------------------
-      $(@el).find('.BCK-open-full-screen').click ->
-        glados.Utils.URLS.shortenLinkIfTooLongAndOpen(thisView.model.getLinkToFullScreen())
-      # --------------------------------------
-      # colour property selector
-      # --------------------------------------
-
-      $(@el).find(".select-colour-property").on "change", () ->
-
-        if !@value?
-          return
-
-        thisView.currentPropertyColour = thisView.config.properties[@value]
-        thisView.colourCells(TRANSITIONS_DURATION)
+      @initFullScreenBtn()
+      @initColourPropertySelector()
 
       # --------------------------------------
       # row sorting
