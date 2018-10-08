@@ -351,66 +351,9 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
       # --------------------------------------
       # row sorting
       # --------------------------------------
-      paintSortDirectionProxy = $.proxy(@paintSortDirection, @)
-      triggerRowSorting = ->
-
-        thisView.model.sortMatrixRowsBy thisView.currentRowSortingProperty.propName, thisView.currentRowSortingPropertyReverse
-        rowsFooterG.positionRows zoom.scale(), TRANSITIONS_DURATION
-        rowsFooterG.assignTexts TRANSITIONS_DURATION
-        cellsContainerG.positionRows zoom.scale(), TRANSITIONS_DURATION
-        rowsHeaderG.positionRows zoom.scale(), TRANSITIONS_DURATION
-        corner2G.assignTexts()
-        # add missing rows in window
-        setTimeout( (->handleZoom(ingoreActivation=true, forceSectionsUpdate=true)), TRANSITIONS_DURATION + 1)
-
-      triggerColSorting = ->
-
-        thisView.model.sortMatrixColsBy thisView.currentColSortingProperty.propName, thisView.currentColSortingPropertyReverse
-        colsFooterG.positionCols zoom.scale(), TRANSITIONS_DURATION
-        colsFooterG.assignTexts TRANSITIONS_DURATION
-        cellsContainerG.positionCols zoom.scale(), TRANSITIONS_DURATION
-        colsHeaderG.positionCols zoom.scale(), TRANSITIONS_DURATION
-        corner3G.assignTexts()
-        # add missing rows in window
-        setTimeout( (->handleZoom(ingoreActivation=true, forceSectionsUpdate=true)), TRANSITIONS_DURATION + 1)
-
-      $(@el).find(".select-row-sort").on "change", () ->
-
-        if !@value?
-          return
-
-        thisView.currentRowSortingProperty = thisView.config.properties[@value]
-        triggerRowSorting()
-
-      $(@el).find(".select-col-sort").on "change", () ->
-
-        if !@value?
-          return
-
-        thisView.currentColSortingProperty = thisView.config.properties[@value]
-        triggerColSorting()
-
-      handleSortDirClick = ->
-
-        targetDimension = $(@).attr('data-target-property')
-        if targetDimension == 'row'
-
-          thisView.currentRowSortingPropertyReverse = !thisView.currentRowSortingPropertyReverse
-          triggerRowSorting()
-          paintSortDirectionProxy('.btn-row-sort-direction-container', thisView.currentRowSortingPropertyReverse, 'row')
-
-        else if targetDimension == 'col'
-
-
-          thisView.currentColSortingPropertyReverse = !thisView.currentColSortingPropertyReverse
-          triggerColSorting()
-          paintSortDirectionProxy('.btn-col-sort-direction-container', thisView.currentColSortingPropertyReverse, 'col')
-
-        $(thisView.el).find('.btn-sort-direction').on 'click', handleSortDirClick
-
-      $(thisView.el).find('.btn-sort-direction').on 'click', handleSortDirClick
-
-      return
+      @initSortRowsBtn()
+      @initSortColBtn()
+      @initSortDirectionBtn()
 
     #---------------------------------------------------------------------------------------------------------------------
     # Rows /Cols Headers tooltips
