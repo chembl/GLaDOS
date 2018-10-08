@@ -66,6 +66,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
     # If the target prefered name comes in the index we don't need this anymore
     handleTargetPrefNameChange: (targetChemblID) ->
 
+      return
       # only bother if my element is visible, it must be re rendered on wake up anyway
       if not $(@el).is(":visible")
         return
@@ -291,14 +292,13 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
 
       # Now starts the addition of each section. Remember that for svg elements the order in which elements are added
       # determines their position in the z axis.
-      @cellsContainerG = @initCellsContainer(@mainGContainer, matrix)
-      @applyZoomAndTranslation(@cellsContainerG)
-      @colourCells()
+#      @cellsContainerG = @initCellsContainer(@mainGContainer, matrix)
+
       @rowsHeaderG = @initRowsHeaderContainer(@mainGContainer)
-      @colsHeaderG = @initColsHeaderContainer(@mainGContainer)
-      @rowsFooterG = @initRowsFooterContainer(@mainGContainer)
+#      @colsHeaderG = @initColsHeaderContainer(@mainGContainer)
+#      @rowsFooterG = @initRowsFooterContainer(@mainGContainer)
       @corner2G = @initSquare2(@mainGContainer)
-      @colsFooterG = @initColsFooter(@mainGContainer)
+#      @colsFooterG = @initColsFooter(@mainGContainer)
       @corner1G = @initSquare1(@mainGContainer)
       @corner3G = @initSquare3(@mainGContainer)
       @corner4G = @initSquare4(@mainGContainer)
