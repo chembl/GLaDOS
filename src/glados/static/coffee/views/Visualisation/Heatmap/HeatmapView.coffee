@@ -16,6 +16,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
   .extend(glados.views.Visualisation.Heatmap.Parts.Square1)\
   .extend(glados.views.Visualisation.Heatmap.Parts.Square3)\
   .extend(glados.views.Visualisation.Heatmap.Parts.Square4)\
+  .extend(glados.views.Visualisation.Heatmap.Parts.Window)\
   .extend
 
     REVERSE_POSITION_TOOLTIP_TH: 0.8
@@ -206,7 +207,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
       # --------
       CONTAINER_Y_PADDING = 0
       CONTAINER_X_PADDING = 0
-      ZOOM_ACTIVATED = false
+      @ZOOM_ACTIVATED = false
 
       @getYCoord = d3.scale.ordinal()
         .domain([0..(@NUM_ROWS-1)])
@@ -239,31 +240,31 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
       # --------------------------------------
       # Zoom
       # --------------------------------------
-      VISUALIZATION_PROPORTION = @VISUALISATION_HEIGHT / @VISUALISATION_WIDTH
+      @VISUALIZATION_PROPORTION = @VISUALISATION_HEIGHT / @VISUALISATION_WIDTH
       # THE MAXIMUM POSSIBLE ZOOM is the calculated for a matrix with 10 columns and the same proportion as the visualization
-      MIN_COLS_SEEN = 5
-      MIN_ROWS_SEEN = Math.floor(MIN_COLS_SEEN * VISUALIZATION_PROPORTION)
-      MAX_ZOOM = @calculateInitialZoom(MIN_COLS_SEEN, MIN_ROWS_SEEN)
+      @MIN_COLS_SEEN = 5
+      @MIN_ROWS_SEEN = Math.floor(@MIN_COLS_SEEN * @VISUALIZATION_PROPORTION)
+      @MAX_ZOOM = @calculateInitialZoom(@MIN_COLS_SEEN, @MIN_ROWS_SEEN)
 
       # for the minimum possible zoom I calculate the biggest rectangle that should be seen completely according
       # to the screen. Is calculated without taking into account the scaling of other parts for simplicity.
-      MIN_PIXELS_PER_SIDE = 5
-      MAX_COLS_SEEN = Math.ceil(@VISUALISATION_WIDTH / MIN_PIXELS_PER_SIDE)
-      MAX_COLS_SEEN = if MAX_COLS_SEEN < 30 then 30 else MAX_COLS_SEEN
-      MAX_ROWS_SEEN = Math.ceil(@VISUALISATION_HEIGHT / MIN_PIXELS_PER_SIDE)
-      MAX_ROWS_SEEN = if MAX_ROWS_SEEN < 30 then Math.floor(30 * VISUALIZATION_PROPORTION) else MAX_ROWS_SEEN
-      MIN_ZOOM = @calculateInitialZoom(MAX_COLS_SEEN, MAX_ROWS_SEEN)
+      @MIN_PIXELS_PER_SIDE = 5
+      @MAX_COLS_SEEN = Math.ceil(@VISUALISATION_WIDTH / @MIN_PIXELS_PER_SIDE)
+      @MAX_COLS_SEEN = if @MAX_COLS_SEEN < 30 then 30 else @MAX_COLS_SEEN
+      @MAX_ROWS_SEEN = Math.ceil(@VISUALISATION_HEIGHT / @MIN_PIXELS_PER_SIDE)
+      @MAX_ROWS_SEEN = if @MAX_ROWS_SEEN < 30 then Math.floor(30 * @VISUALIZATION_PROPORTION) else @MAX_ROWS_SEEN
+      @MIN_ZOOM = @calculateInitialZoom(@MAX_COLS_SEEN, @MAX_ROWS_SEEN)
 
       # calculate the initial zoom with the matrix I got
-      INITIAL_ZOOM = @calculateInitialZoom(@NUM_COLUMNS, @NUM_ROWS)
+      @INITIAL_ZOOM = @calculateInitialZoom(@NUM_COLUMNS, @NUM_ROWS)
 
       # never start with zoom less than 1
-      INITIAL_ZOOM = if INITIAL_ZOOM < 1 then 1 else INITIAL_ZOOM
-      @zoomScale = INITIAL_ZOOM
+      @INITIAL_ZOOM = if @INITIAL_ZOOM < 1 then 1 else @INITIAL_ZOOM
+      @zoomScale = @INITIAL_ZOOM
 
-      console.log 'MIN_ZOOM: ', MIN_ZOOM
-      console.log 'INITIAL_ZOOM: ', INITIAL_ZOOM
-      console.log 'MAX_ZOOM: ', MAX_ZOOM
+      console.log 'MIN_ZOOM: ', @MIN_ZOOM
+      console.log 'INITIAL_ZOOM: ', @INITIAL_ZOOM
+      console.log 'MAX_ZOOM: ', @MAX_ZOOM
       # --------------------------------------
       # Window
       # --------------------------------------
@@ -286,6 +287,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
       mainGContainer = mainSVGContainer.append("g")
         .attr('class', 'mainGContainer')
         .attr('transform', 'translate(' + CONTAINER_X_PADDING + ',' + CONTAINER_Y_PADDING + ')')
+      @mainGContainer = mainGContainer
 
       # Now starts the addition of each section. Remember that for svg elements the order in which elements are added
       # determines their position in the z axis.
@@ -300,172 +302,57 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
       # Rows Header Container
       # --------------------------------------
       rowsHeaderG = @initRowsHeaderContainer(mainGContainer)
+      @rowsHeaderG = rowsHeaderG
       # --------------------------------------
       # Cols Header Container
       # --------------------------------------
       colsHeaderG = @initColsHeaderContainer(mainGContainer)
+      @colsHeaderG = colsHeaderG
       # --------------------------------------
       # Rows Footer Container
       # --------------------------------------
       rowsFooterG = @initRowsFooterContainer(mainGContainer)
+      @rowsFooterG = rowsFooterG
       # --------------------------------------
       # Square 2
       # --------------------------------------
       corner2G = @initSquare2(mainGContainer)
+      @corner2G = corner2G
       # --------------------------------------
       # Cols Footer Container
       # --------------------------------------
       colsFooterG = @initColsFooter(mainGContainer)
+      @colsFooterG = colsFooterG
       # --------------------------------------
       # Square 1
       # --------------------------------------
       corner1G = @initSquare1(mainGContainer)
+      @corner1G = corner1G
       # --------------------------------------
       # Square 3
       # --------------------------------------
       corner3G = @initSquare3(mainGContainer)
+      @corner3G = corner3G
       # --------------------------------------
       # Square 4
       # --------------------------------------
       corner4G = @initSquare4(mainGContainer)
-
+      @corner4G = corner4G
       # --------------------------------------
       # Zoom
       # --------------------------------------
-      handleZoomStart = ->
-
-        if not ZOOM_ACTIVATED
-          return
-
-        cellsContainerG.classed('grabbing', true)
-
-      handleZoomEnd = ->
-
-        if not ZOOM_ACTIVATED
-          return
-
-        cellsContainerG.classed('grabbing', false)
-
-      handleZoom = (ingoreActivation=false, forceSectionsUpdate=false) ->
-
-        if not ZOOM_ACTIVATED and not ingoreActivation
-          return
-
-        thisView.destroyAllTooltips()
-        translateX = zoom.translate()[0]
-        translateY = zoom.translate()[1]
-        thisView.zoomScale = zoom.scale()
-        thisView.calculateCurrentWindow(thisView.zoomScale, translateX, translateY, forceSectionsUpdate)
-        if thisView.WINDOW.window_changed or forceSectionsUpdate
-          console.log 'WINDOW CHANGED!!!'
-          colsHeadersEnter = thisView.updateColsHeadersForWindow(colsHeaderG)
-          thisView.updateColsFootersForWindow(colsFooterG)
-          colsFooterG.assignTexts()
-          rowHeadersEnter = thisView.updateRowsHeadersForWindow(rowsHeaderG)
-          thisView.updateRowsFootersForWindow(rowsFooterG)
-          rowsFooterG.assignTexts()
-          thisView.updateCellsForWindow(cellsContainerG)
-          thisView.colourCells()
-
-        console.log 'handle zoom'
-        console.log 'translateX: ', translateX
-        console.log 'translateY: ', translateY
-        console.log thisView.zoomScale
-
-        thisView.applyZoomAndTranslation(corner1G, translateX, translateY, thisView.zoomScale)
-        thisView.applyZoomAndTranslation(colsHeaderG, translateX, translateY, thisView.zoomScale)
-        thisView.applyZoomAndTranslation(corner2G, translateX, translateY, thisView.zoomScale)
-        thisView.applyZoomAndTranslation(rowsHeaderG, translateX, translateY, thisView.zoomScale)
-        thisView.applyZoomAndTranslation(cellsContainerG, translateX, translateY, thisView.zoomScale)
-        thisView.applyZoomAndTranslation(rowsFooterG, translateX, translateY, thisView.zoomScale)
-        thisView.applyZoomAndTranslation(corner3G, translateX, translateY, thisView.zoomScale)
-        thisView.applyZoomAndTranslation(colsFooterG, translateX, translateY, thisView.zoomScale)
-        thisView.applyZoomAndTranslation(corner4G, translateX, translateY, thisView.zoomScale)
-
-        # after adding elems to window, I need to check again for ellipsis
-        if thisView.WINDOW.window_changed or forceSectionsUpdate
-          thisView.setAllHeadersEllipsis.call(thisView, rowHeadersEnter, isCol=false)
-          thisView.setAllHeadersEllipsis.call(thisView, colsHeadersEnter, isCol=true)
-
-        $zoomOutBtn = $(thisView.el).find(".BCK-zoom-out-btn")
-        if thisView.zoomScale <= MIN_ZOOM
-          $zoomOutBtn.addClass('disabled')
-        else
-          $zoomOutBtn.removeClass('disabled')
-
-        $zoomInBtn = $(thisView.el).find(".BCK-zoom-in-btn")
-        if thisView.zoomScale >= MAX_ZOOM
-          $zoomInBtn.addClass('disabled')
-        else
-          $zoomInBtn.removeClass('disabled')
-
-      ZOOM_STEP = 0.1
-      zoom = d3.behavior.zoom()
-        .scaleExtent([MIN_ZOOM, MAX_ZOOM])
-        .on("zoom", handleZoom)
-        .on('zoomstart', handleZoomStart)
-        .on('zoomend', handleZoomEnd)
-        .scale(@zoomScale)
-        .translate([0, 0])
-
-      mainGContainer.call zoom
+      @initZoom(mainGContainer)
+      @resetZoom()
       # --------------------------------------
       # Zoom Events
       # --------------------------------------
-      resetZoom = ->
-
-        console.log 'reseting zoom'
-        console.log 'INITIAL_ZOOM:', INITIAL_ZOOM
-        zoom.scale(INITIAL_ZOOM)
-        zoom.translate([0, 0])
-        handleZoom(ingoreActivation=true)
-
-      resetZoom()
-
-      $(@el).find(".BCK-reset-zoom-btn").click resetZoom
-
-
-      $(@el).find(".BCK-zoom-in-btn").click ->
-
-        #this buttons will always work
-        wasDeactivated = not ZOOM_ACTIVATED
-        ZOOM_ACTIVATED = true
-
-        zoom.scale( zoom.scale() + ZOOM_STEP )
-        mainGContainer.call zoom.event
-
-        if wasDeactivated
-          ZOOM_ACTIVATED = false
-
-
-      $(@el).find(".BCK-zoom-out-btn").click ->
-
-        #this buttons will always work
-        wasDeactivated = not ZOOM_ACTIVATED
-        ZOOM_ACTIVATED = true
-
-        zoom.scale( zoom.scale() - ZOOM_STEP )
-        mainGContainer.call zoom.event
-
-        if wasDeactivated
-          ZOOM_ACTIVATED = false
-
+      @initResetZoomBtn()
+      @initZoomInBtn()
+      @initZoomOutBtn()
       # --------------------------------------
       # Activate zoom and drag
       # --------------------------------------
-      $(@el).find('.BCK-toggle-grab').click ->
-
-        $targetBtnIcon = $(@).find('i')
-        if ZOOM_ACTIVATED
-          ZOOM_ACTIVATED = false
-          $targetBtnIcon.removeClass 'fa-hand-rock-o'
-          $targetBtnIcon.addClass 'fa-hand-paper-o'
-          cellsContainerG.classed('grab-activated', false)
-        else
-          ZOOM_ACTIVATED = true
-          $targetBtnIcon.removeClass 'fa-hand-paper-o'
-          $targetBtnIcon.addClass 'fa-hand-rock-o'
-          cellsContainerG.classed('grab-activated', true)
+      @initToggleGrabBtn()
 
       # --------------------------------------
       # Open in full screen
@@ -705,174 +592,9 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
         if addFullTextQtip
           $textElem.qtip('destroy', true)
 
-    #---------------------------------------------------------------------------------------------------------------------
-    # Initial Zoom Calculation
-    #---------------------------------------------------------------------------------------------------------------------
-    # Diagrams:
-    # https://drive.google.com/file/d/0BzECtlZ_ur1Ca0M4UllLdmNlMkU/view?usp=sharing
-    # https://drive.google.com/file/d/0BzECtlZ_ur1Cc0JoWkpVSWtKWGc/view?usp=sharing
-    # Calculator:
-    # https://docs.google.com/spreadsheets/d/1vg6JNcZcwo4uwR0zj3iWm8d-8jJaw4AVEZSeP7wZBO4/edit?usp=sharing
-    calculateInitialZoom: (numColumns, numRows) ->
-
-      baseMatrixWidth = @SIDE_SIZE * numColumns
-      baseMatrixHeight = @SIDE_SIZE * numRows
-
-      zoom = 0
-      zoomIsAcceptable = true
-      zoomIncrement = 0.05
-
-      while (zoomIsAcceptable)
-
-        newZoom = zoom + zoomIncrement
-
-        B = -@ROWS_HEADER_WIDTH - baseMatrixWidth - @ROWS_FOOTER_WIDTH
-        E1 = @VISUALISATION_WIDTH + (B * newZoom)
-        C = -@COLS_HEADER_HEIGHT - @COLS_FOOTER_HEIGHT
-        E2 = @VISUALISATION_HEIGHT + (C * newZoom)
-        D = -@ROWS_HEADER_WIDTH - @ROWS_FOOTER_WIDTH
-        E3 = @VISUALISATION_WIDTH + (D * newZoom)
-        E = -@COLS_FOOTER_HEIGHT - baseMatrixHeight - @COLS_HEADER_HEIGHT
-        E4 = @VISUALISATION_HEIGHT + (E * newZoom)
-
-        A1 = E1 * (E2 - E4)
-        A2 = E4 * E3
-        A = A1 + A2
-        zoomIsAcceptable = A1 > 0 and A2 > 0
-        if zoomIsAcceptable
-          zoom += zoomIncrement
-
-      return zoom
-
-    #---------------------------------------------------------------------------------------------------------------------
-    # Window
-    #---------------------------------------------------------------------------------------------------------------------
-    unsetWindow: ->
-
-      @PREVIOUS_WINDOW = null
-      @WINDOW = null
-      @COLS_IN_WINDOW = null
-      @ROWS_IN_WINDOW = null
-      @CELLS_IN_WINDOW = null
-
-    # Diagram: https://drive.google.com/file/d/0BzECtlZ_ur1CVkRJc2ZZcE1ncnM/view?usp=sharing
-    calculateCurrentWindow: (zoomScale=1, translateX=0, translateY=0, forceSectionsUpdate=false) ->
-
-      C = -@COLS_HEADER_HEIGHT - @COLS_FOOTER_HEIGHT
-      E2 = @VISUALISATION_HEIGHT + (C * zoomScale)
-      D = -@ROWS_HEADER_WIDTH - @ROWS_FOOTER_WIDTH
-      E3 = @VISUALISATION_WIDTH + (D * zoomScale)
-
-      winX = -translateX * zoomScale
-      winX = if winX < 0 then 0 else winX
-      winY = -translateY * zoomScale
-      winY = if winY < 0 then 0 else winY
-      winW = E3
-      winH = E2
-
-      #https://drive.google.com/file/d/0BzECtlZ_ur1CMjNkbExYQU5BMW8/view?usp=sharing
-      minRowNum = Math.floor(winY / (@SIDE_SIZE * zoomScale))
-      maxRowNum = Math.floor((winH + winY) / (@SIDE_SIZE * zoomScale))
-      minColNum = Math.floor(winX / (@SIDE_SIZE * zoomScale))
-      maxColNum = Math.floor((winW + winX) / (@SIDE_SIZE * zoomScale))
-
-      windowChanged = false
-      if not @PREVIOUS_WINDOW?
-        windowChanged = true
-      else if @PREVIOUS_WINDOW.min_row_num != minRowNum
-        windowChanged = true
-      else if @PREVIOUS_WINDOW.max_row_num != maxRowNum
-        windowChanged = true
-      else if @PREVIOUS_WINDOW.min_col_num != minColNum
-        windowChanged = true
-      else if @PREVIOUS_WINDOW.max_col_num != maxColNum
-        windowChanged = true
-
-      @WINDOW =
-        win_x: winX
-        win_y: winY
-        win_W: winW
-        win_H: winH
-        min_row_num: minRowNum
-        max_row_num: maxRowNum
-        min_col_num: minColNum
-        max_col_num: maxColNum
-        window_changed: windowChanged
-
-      @PREVIOUS_WINDOW = @WINDOW
-
-      windowIsUndefined = not @COLS_IN_WINDOW? and not @ROWS_IN_WINDOW? and not @CELLS_IN_WINDOW?
-
-      if @WINDOW.window_changed or forceSectionsUpdate or windowIsUndefined
-        @COLS_IN_WINDOW = @getColsInWindow()
-        @ROWS_IN_WINDOW = @getRowsInWindow()
-        @CELLS_IN_WINDOW = @getCellsInWindow()
-
-
-    getColsInWindow: ->
-
-      starTime = Date.now()
-
-      minColNum = @WINDOW.min_col_num
-      maxColNum = @WINDOW.max_col_num
-      colsList = @model.get('matrix').columns
-      end = if maxColNum >= colsList.length then colsList.length - 1 else maxColNum - 1
-      start = if minColNum >= colsList.length then end - 1 else minColNum
-      colsIndex = @model.get('matrix').columns_curr_position_index
-
-      endTime = Date.now()
-      time = endTime - starTime
-
-      return (colsIndex[i] for i in [start..end])
-
-    getRowsInWindow: ->
-
-      starTime = Date.now()
-
-      minRowNum = @WINDOW.min_row_num
-      maxRowNum = @WINDOW.max_row_num
-      rowsList = @model.get('matrix').rows
-      end = if maxRowNum >= rowsList.length then rowsList.length - 1 else maxRowNum - 1
-      start = if minRowNum >= rowsList.length then end - 1 else minRowNum
-      rowsIndex = @model.get('matrix').rows_curr_position_index
-
-      endTime = Date.now()
-      time = endTime - starTime
-
-      return (rowsIndex[i] for i in [start..end])
-
-    getCellsInWindow: ->
-
-      starTime = Date.now()
-
-      rowsInWindow = @ROWS_IN_WINDOW
-      colsInWindow = @COLS_IN_WINDOW
-
-      links = @model.get('matrix').links
-
-      cellsInWindow = []
-      for row in rowsInWindow
-        rowOIndex = row.originalIndex
-
-        rowContent = links[rowOIndex]
-        if not rowContent?
-          continue
-
-        for col in colsInWindow
-          colOIndex = col.originalIndex
-
-          cellObj = rowContent[colOIndex]
-          if cellObj?
-            cellsInWindow.push cellObj
-
-      endTime = Date.now()
-      time = endTime - starTime
-
-      return cellsInWindow
-
-    #---------------------------------------------------------------------------------------------------------------------
+    #-------------------------------------------------------------------------------------------------------------------
     # Cell Hovering
-    #---------------------------------------------------------------------------------------------------------------------
+    #-------------------------------------------------------------------------------------------------------------------
     emphasizeFromCellHover: (d) -> @applyEmphasisFromCellHover(d)
 
     deEmphasizeFromCellHover: (d) -> @applyEmphasisFromCellHover(d, false)
