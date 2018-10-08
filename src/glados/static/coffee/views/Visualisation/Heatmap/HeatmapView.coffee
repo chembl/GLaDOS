@@ -284,62 +284,25 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
       # --------------------------------------
       # Add background MATRIX g
       # --------------------------------------
-      mainGContainer = mainSVGContainer.append("g")
+      @mainGContainer = mainSVGContainer.append("g")
         .attr('class', 'mainGContainer')
         .attr('transform', 'translate(' + CONTAINER_X_PADDING + ',' + CONTAINER_Y_PADDING + ')')
-      @mainGContainer = mainGContainer
 
       # Now starts the addition of each section. Remember that for svg elements the order in which elements are added
       # determines their position in the z axis.
-      # --------------------------------------
-      # Cells container
-      # --------------------------------------
-      cellsContainerG = @initCellsContainer(mainGContainer, matrix)
-      @cellsContainerG = cellsContainerG
-      @applyZoomAndTranslation(cellsContainerG)
+      @cellsContainerG = @initCellsContainer(@mainGContainer, matrix)
+      @applyZoomAndTranslation(@cellsContainerG)
       @colourCells()
-      # --------------------------------------
-      # Rows Header Container
-      # --------------------------------------
-      rowsHeaderG = @initRowsHeaderContainer(mainGContainer)
-      @rowsHeaderG = rowsHeaderG
-      # --------------------------------------
-      # Cols Header Container
-      # --------------------------------------
-      colsHeaderG = @initColsHeaderContainer(mainGContainer)
-      @colsHeaderG = colsHeaderG
-      # --------------------------------------
-      # Rows Footer Container
-      # --------------------------------------
-      rowsFooterG = @initRowsFooterContainer(mainGContainer)
-      @rowsFooterG = rowsFooterG
-      # --------------------------------------
-      # Square 2
-      # --------------------------------------
-      corner2G = @initSquare2(mainGContainer)
-      @corner2G = corner2G
-      # --------------------------------------
-      # Cols Footer Container
-      # --------------------------------------
-      colsFooterG = @initColsFooter(mainGContainer)
-      @colsFooterG = colsFooterG
-      # --------------------------------------
-      # Square 1
-      # --------------------------------------
-      corner1G = @initSquare1(mainGContainer)
-      @corner1G = corner1G
-      # --------------------------------------
-      # Square 3
-      # --------------------------------------
-      corner3G = @initSquare3(mainGContainer)
-      @corner3G = corner3G
-      # --------------------------------------
-      # Square 4
-      # --------------------------------------
-      corner4G = @initSquare4(mainGContainer)
-      @corner4G = corner4G
+      @rowsHeaderG = @initRowsHeaderContainer(@mainGContainer)
+      @colsHeaderG = @initColsHeaderContainer(@mainGContainer)
+      @rowsFooterG = @initRowsFooterContainer(@mainGContainer)
+      @corner2G = @initSquare2(@mainGContainer)
+      @colsFooterG = @initColsFooter(@mainGContainer)
+      @corner1G = @initSquare1(@mainGContainer)
+      @corner3G = @initSquare3(@mainGContainer)
+      @corner4G = @initSquare4(@mainGContainer)
 
-      @initZoom(mainGContainer)
+      @initZoom(@mainGContainer)
       @resetZoom()
       @initResetZoomBtn()
       @initZoomInBtn()
@@ -347,10 +310,6 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
       @initToggleGrabBtn()
       @initFullScreenBtn()
       @initColourPropertySelector()
-
-      # --------------------------------------
-      # row sorting
-      # --------------------------------------
       @initSortRowsBtn()
       @initSortColBtn()
       @initSortDirectionBtn()
