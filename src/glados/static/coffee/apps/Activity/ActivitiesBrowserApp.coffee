@@ -47,7 +47,7 @@ glados.useNameSpace 'glados.apps.Activity',
         filterProperty = 'molecule_chembl_id'
         aggList = ['molecule_chembl_id', 'target_chembl_id']
 
-      ctm = new glados.models.Activity.ActivityAggregationMatrix
+      ctm = new glados.models.Heatmap.Heatmap
         query_string: filter
         filter_property: filterProperty
         aggregations: aggList

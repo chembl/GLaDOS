@@ -30,6 +30,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
 
     initialize: ->
 
+      console.log 'init heatmap view'
       @config = arguments[0].config
       @parentView = arguments[0].parent_view
 
@@ -55,13 +56,26 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
           alert "Oh, it’s you. It’s been a long time. How have you been? I’ve been really busy being dead."
           thisView.render()
       )
+      @handleMatrixState()
 
     handleMatrixState: ->
+
+      console.log 'handleMatrixState'
       state = @model.get('state')
+
+      console.log 'state: ', state
+      if state == glados.models.Heatmap.STATES.INITIAL_STATE
+        @setProgressMessage('Loading...')
+
+
+      return
+
       if state == glados.models.Aggregations.Aggregation.States.LOADING_BUCKETS
         @setProgressMessage('Loading Activity Data...')
       else if state == glados.models.Aggregations.Aggregation.States.INITIAL_STATE
-        @setProgressMessage('')
+        @setProgressMessage('Initial State')
+        console.log 'model: '
+        console.log JSON.stringify(@model.attributes)
 
     # If the target prefered name comes in the index we don't need this anymore
     handleTargetPrefNameChange: (targetChemblID) ->
@@ -326,7 +340,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
 #---------------------------------------------------------------------------------------------------------------------
 # Static Functions
 #---------------------------------------------------------------------------------------------------------------------
-glados.views.Visualisation.Heatmap.HeatmapView.getDefaultConfig = (sourceEntity='Compounds') ->
+glados.views.Visualisation.Heatmap.HeatmapView.getDefaultConfig = (sourceEntity='Compounds', generatorList) ->
 
   if sourceEntity == 'Targets'
     rowsEntityName = 'Targets'

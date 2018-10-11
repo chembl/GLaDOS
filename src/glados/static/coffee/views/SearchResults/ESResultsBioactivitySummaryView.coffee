@@ -18,9 +18,12 @@ glados.useNameSpace 'glados.views.SearchResults',
         filterProperty = 'molecule_chembl_id'
         aggList = ['molecule_chembl_id', 'target_chembl_id']
 
-      config = glados.views.Visualisation.Heatmap.HeatmapView.getDefaultConfig @sourceEntity
+      config = glados.views.Visualisation.Heatmap.HeatmapView.getDefaultConfig(@sourceEntity)
 
-      @ctm = new glados.models.Activity.ActivityAggregationMatrix
+      console.log 'config: ', config
+
+
+      @ctm = new glados.models.Heatmap.Heatmap
         filter_property: filterProperty
         aggregations: aggList
 
@@ -143,8 +146,8 @@ glados.useNameSpace 'glados.views.SearchResults',
         filterProperty = thisView.ctm.get('filter_property')
         # TODO: probably fix these cases in a better way. Also some actions should be disabled while loading
         allItemsIDs = (item[filterProperty] for item in thisView.collection.allResults when item?)
-        thisView.ctm.set('chembl_ids', allItemsIDs)
-        thisView.ctm.fetch()
+#        thisView.ctm.set('chembl_ids', allItemsIDs)
+#        thisView.ctm.fetch()
         thisView.setProgressMessage('', hideCog=true)
         thisView.hideProgressElement()
         thisView.showMatrix()
@@ -163,8 +166,8 @@ glados.useNameSpace 'glados.views.SearchResults',
         .fail( (msg) -> thisView.setProgressMessage('Error: ', msg) )
         return
 
-      @ctm.set('chembl_ids', selectedIDs, {silent:true})
-      @ctm.fetch()
+#      @ctm.set('chembl_ids', selectedIDs, {silent:true})
+#      @ctm.fetch()
       @showMatrix()
       @setProgressMessage('', hideCog=true)
       @hideProgressElement()

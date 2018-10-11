@@ -233,9 +233,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         glados.helpers.URLHelper.getInstance().listenToList(newList)
       return res_lists_dict
 
-    getNewESTargetsList: (customQueryString='*') ->
+    getNewESTargetsList: (customQuery='*', itemsList) ->
       list = @getNewESResultsListFor(glados.models.paginatedCollections.Settings.ES_INDEXES.TARGET,
-        customQueryString, useCustomQuery=true)
+        customQuery, useCustomQuery=(not itemsList?), itemsList)
       return list
 
     getNewESCompoundsList: (customQuery='*', itemsList, contextualProperties,

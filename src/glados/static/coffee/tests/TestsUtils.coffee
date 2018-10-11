@@ -33,6 +33,7 @@ class TestsUtils
         rawModels = testData
 
       list.allResults = rawModels
+      list.DOWNLOADED_ITEMS_ARE_VALID = true
 
       list.setMeta('total_records', rawModels.length)
 
