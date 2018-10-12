@@ -8,19 +8,9 @@ glados.useNameSpace 'glados.models.Heatmap',
     initialize: ->
 
       @config = arguments[0].config
+      testMode = @config.test_mode
       @set('state', glados.models.Heatmap.STATES.INITIAL_STATE)
-      @generateDependentLists()
-
-      queryString = @get('query_string')
-      if queryString?
-        filterProperty = @get('filter_property')
-        idsWrapperRegex = new RegExp(filterProperty + ':\(.*\)', 'g')
-        matches = queryString.match(idsWrapperRegex)
-        if matches.length > 0
-
-          idsText = matches[0].replace(filterProperty + ':(', '').replace(')', '').replace(/"/g, '')
-          ids = idsText.split(' OR ')
-          @set('chembl_ids', ids)
+      @generateDependentLists() unless testMode
 
     generateDependentLists: ->
 
@@ -30,23 +20,23 @@ glados.useNameSpace 'glados.models.Heatmap',
         @x_axis_list = @config.generator_list
 
 
-      console.log 'generateDependentLists: '
       if @config.generate_from_downloaded_items
-        console.log 'generate from downloaded items, going to download items'
 
         generatorFunction = @config.opposite_axis_generator_function
         collection = @config.generator_list
         deferreds = collection.getAllResults()
 
-        thisCollection = @
+        thisHeatmap = @
         $.when.apply($, deferreds).done ->
 
           itemsIds = collection.getItemsIDs(onlySelected=false)
 
-          generatorFunction(itemsIds)
-
-
-
+          if thisHeatmap.config.generator_axis == glados.models.Heatmap.AXES_NAMES.Y_AXIS
+            thisHeatmap.x_axis_list = generatorFunction(itemsIds)
+            thisHeatmap.set('state', glados.models.Heatmap.STATES.DEPENDENT_LISTS_CREATED)
+          else if thisHeatmap.config.generator_axis == glados.models.Heatmap.AXES_NAMES.X_AXIS
+            thisHeatmap.y_axis_list = generatorFunction(itemsIds)
+            thisHeatmap.set('state', glados.models.Heatmap.STATES.DEPENDENT_LISTS_CREATED)
 
 
     fetch: (options) ->
@@ -538,6 +528,9 @@ glados.models.Activity.ActivityAggregationMatrix.TARGET_PREF_NAMES_UPDATED_EVT =
 glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX = '_agg'
 glados.models.Heatmap.STATES =
   INITIAL_STATE: 'INITIAL_STATE'
+  DEPENDENT_LISTS_CREATED: 'DEPENDENT_LISTS_CREATED'
 glados.models.Heatmap.AXES_NAMES =
   Y_AXIS: 'Y_AXIS'
   X_AXIS: 'X_AXIS'
+
+glados.models.Heatmap.MAX_RELATED_IDS_LISTS = 79

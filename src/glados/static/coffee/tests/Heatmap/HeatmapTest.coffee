@@ -12,67 +12,43 @@ describe "Heatmap", ->
 
     generatorList = undefined
     config = undefined
-    heatmap = undefined
 
     beforeAll (done) ->
 
       $.get (glados.Settings.STATIC_URL + 'testData/Heatmap/Case0/GeneratorList/state.json'), (state) ->
         generatorList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFromState(state)
 
-        config =
-          generator_list: generatorList
-          generator_axis: glados.models.Heatmap.AXES_NAMES.Y_AXIS
-          generate_from_downloaded_items: true
-          opposite_axis_generator_function: (itemsIDS) ->
-
-
-            esQuery = {
-              "query": {
-                "bool": {
-                  "filter": {
-                    "bool": {
-                      "should": [
-                        {
-                          "multi_match": {
-                            "query": "CHEMBL25",
-                            "fields": "_metadata.related_compounds.chembl_ids.*"
-                          }
-                        },
-                        {
-                          "multi_match": {
-                            "query": "CHEMBL59",
-                            "fields": "_metadata.related_compounds.chembl_ids.*"
-                          }
-                        }
-                      ]
-
-                    }
-                  }
-                }
-              }
-            }
-            console.log('esQuery: ', esQuery)
-
-            targetsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESTargetsList(
-              JSON.stringify(esQuery)
-            )
-
-            targetsList.fetch()
-            console.log 'GENERATE OPPOSITE AXIS: ', itemsIDS
-            console.log 'targetsList: ', targetsList
-
-        heatmap = new glados.models.Heatmap.Heatmap
-          config: config
+        configGenerator = new glados.configs.ReportCards.Visualisation.Heatmaps.CompoundsVSTargetsHeatmap(generatorList)
+        config = configGenerator.getHeatmapModelConfig(generatorList)
+        config.test_mode = true
 
         itemsURL = glados.Settings.STATIC_URL + 'testData/Heatmap/Case0/GeneratorList/items.json'
         TestsUtils.simulateDataESList(generatorList, itemsURL, done)
 
     it 'is initialised with the initial state', ->
 
+      heatmap = new glados.models.Heatmap.Heatmap
+        config: config
+
       state = heatmap.get('state')
       expect(state).toBe(glados.models.Heatmap.STATES.INITIAL_STATE)
 
     it 'generates the dependent lists from the generator list', ->
 
-      console.log 'heatmap: ', heatmap
+      heatmap = new glados.models.Heatmap.Heatmap
+          config: config
+
+      heatmap.once 'change:state', ->
+        currentState = heatmap.get('state')
+        if currentState == glados.models.Heatmap.STATES.DEPENDENT_LISTS_CREATED
+          generatorIDs = (res.molecule_chembl_id for res in heatmap.y_axis_list.allResults)
+          i = 0
+          for boolQuery in heatmap.x_axis_list.getRequestData().query.bool.should
+            idsInQuery = boolQuery.bool.filter.terms["_metadata.related_compounds.chembl_ids.#{i}"]
+            expect(_.isEqual(idsInQuery, generatorIDs)).toBe(true)
+            i += 1
+
+      heatmap.generateDependentLists()
+
+
 
