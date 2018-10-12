@@ -19,7 +19,7 @@ describe "Heatmap", ->
         generatorList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFromState(state)
 
         configGenerator = new glados.configs.ReportCards.Visualisation.Heatmaps.CompoundsVSTargetsHeatmap(generatorList)
-        config = configGenerator.getHeatmapModelConfig(generatorList)
+        config = configGenerator.getHeatmapModelConfig()
         config.test_mode = true
 
         itemsURL = glados.Settings.STATIC_URL + 'testData/Heatmap/Case0/GeneratorList/items.json'

@@ -65,8 +65,9 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
 
       console.log 'state: ', state
       if state == glados.models.Heatmap.STATES.INITIAL_STATE
-        @setProgressMessage('Loading...')
-
+        @setProgressMessage('Step 1 of 3. Loading generator items...')
+      else if state == glados.models.Heatmap.STATES.DEPENDENT_LISTS_CREATED
+        @setProgressMessage('Step 2 of 3. Axes created...')
 
       return
 

@@ -18,19 +18,20 @@ glados.useNameSpace 'glados.views.SearchResults',
         filterProperty = 'molecule_chembl_id'
         aggList = ['molecule_chembl_id', 'target_chembl_id']
 
-      config = glados.views.Visualisation.Heatmap.HeatmapView.getDefaultConfig(@sourceEntity)
+      heatmapModelConfigGenerator = new glados.configs.ReportCards.Visualisation.Heatmaps.CompoundsVSTargetsHeatmap(@collection)
+      modelConfig = heatmapModelConfigGenerator.getHeatmapModelConfig()
+      viewConfig = glados.views.Visualisation.Heatmap.HeatmapView.getDefaultConfig(@sourceEntity)
 
-      console.log 'config: ', config
+      console.log 'viewConfig: ', viewConfig
 
 
       @ctm = new glados.models.Heatmap.Heatmap
-        filter_property: filterProperty
-        aggregations: aggList
+        config: modelConfig
 
       @ctmView = new glados.views.Visualisation.Heatmap.HeatmapView
         model: @ctm
         el: $(@el).find('.BCK-CompTargetMatrix')
-        config: config
+        config: viewConfig
         parent_view: @
 
     #-------------------------------------------------------------------------------------------------------------------
