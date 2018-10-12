@@ -1,6 +1,8 @@
 glados.useNameSpace 'glados.models.Heatmap',
   Heatmap: Backbone.Model.extend
 
+    # See
+    # https://drive.google.com/drive/folders/18PYFsg1D_EG911woYF45IsMfO1PIAzfg?usp=sharing
     defaults:
       filter_property: 'molecule_chembl_id'
       aggregations: ['molecule_chembl_id', 'target_chembl_id']
@@ -12,13 +14,15 @@ glados.useNameSpace 'glados.models.Heatmap',
       @set('state', glados.models.Heatmap.STATES.INITIAL_STATE)
       @generateDependentLists() unless testMode
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # Generate base structures
+    # ------------------------------------------------------------------------------------------------------------------
     generateDependentLists: ->
 
       if @config.generator_axis == glados.models.Heatmap.AXES_NAMES.Y_AXIS
         @y_axis_list = @config.generator_list
       else if @config.generator_axis == glados.models.Heatmap.AXES_NAMES.X_AXIS
         @x_axis_list = @config.generator_list
-
 
       if @config.generate_from_downloaded_items
 
@@ -33,11 +37,51 @@ glados.useNameSpace 'glados.models.Heatmap',
 
           if thisHeatmap.config.generator_axis == glados.models.Heatmap.AXES_NAMES.Y_AXIS
             thisHeatmap.x_axis_list = generatorFunction(itemsIds)
-            thisHeatmap.set('state', glados.models.Heatmap.STATES.DEPENDENT_LISTS_CREATED)
+            thisHeatmap.switchToState(glados.models.Heatmap.STATES.DEPENDENT_LISTS_CREATED)
           else if thisHeatmap.config.generator_axis == glados.models.Heatmap.AXES_NAMES.X_AXIS
             thisHeatmap.y_axis_list = generatorFunction(itemsIds)
-            thisHeatmap.set('state', glados.models.Heatmap.STATES.DEPENDENT_LISTS_CREATED)
+            thisHeatmap.switchToState(glados.models.Heatmap.STATES.DEPENDENT_LISTS_CREATED)
 
+    checkListLength: (list) ->
+
+      thisHeatmap = @
+
+      if list.getItemsFetchingState() \
+      != glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.ITEMS_READY
+
+        list.fetch()
+        list.once( glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.ITEMS_FETCHING_STATE_CHANGED,
+          ( -> thisHeatmap.checkListLength(list)))
+      else
+
+        # if both lists are ready, I can switch to the next state
+        xAxisListItemsReady = @x_axis_list.getItemsFetchingState() \
+          == glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.ITEMS_READY
+        yAxisListItemsReady = @y_axis_list.getItemsFetchingState() \
+          == glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.ITEMS_READY
+
+        if xAxisListItemsReady and yAxisListItemsReady
+          @switchToState(glados.models.Heatmap.STATES.HEATMAP_TOTAL_SIZE_KNOWN)
+
+    getTotalNumberOfRowsAndColumns: ->
+
+      @checkListLength(@y_axis_list)
+      @checkListLength(@x_axis_list)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # state changing
+    # ------------------------------------------------------------------------------------------------------------------
+    switchToState: (newState) ->
+
+      currentState = @get('state')
+      if currentState != newState
+        @set('state', newState)
+
+        if newState == glados.models.Heatmap.STATES.DEPENDENT_LISTS_CREATED
+          @getTotalNumberOfRowsAndColumns()
+        else if newState == glados.models.Heatmap.STATES.HEATMAP_TOTAL_SIZE_KNOWN
+          console.log 'CREATE MATRIX STRUCTURE'
+          console.log 'SET INITIAL WINDOW'
 
     fetch: (options) ->
 
@@ -529,6 +573,7 @@ glados.models.Activity.ActivityAggregationMatrix.AGG_SUFIX = '_agg'
 glados.models.Heatmap.STATES =
   INITIAL_STATE: 'INITIAL_STATE'
   DEPENDENT_LISTS_CREATED: 'DEPENDENT_LISTS_CREATED'
+  HEATMAP_TOTAL_SIZE_KNOWN: 'HEATMAP_TOTAL_SIZE_KNOWN'
 glados.models.Heatmap.AXES_NAMES =
   Y_AXIS: 'Y_AXIS'
   X_AXIS: 'X_AXIS'

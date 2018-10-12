@@ -68,6 +68,8 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
         @setProgressMessage('Step 1 of 3. Loading generator items...')
       else if state == glados.models.Heatmap.STATES.DEPENDENT_LISTS_CREATED
         @setProgressMessage('Step 2 of 3. Axes created...')
+      else if state == glados.models.Heatmap.STATES.HEATMAP_TOTAL_SIZE_KNOWN
+        @setProgressMessage('Step 3 of 3. Heatmap total size calculated...')
 
       return
 
@@ -77,6 +79,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
         @setProgressMessage('Initial State')
         console.log 'model: '
         console.log JSON.stringify(@model.attributes)
+
 
     # If the target prefered name comes in the index we don't need this anymore
     handleTargetPrefNameChange: (targetChemblID) ->
