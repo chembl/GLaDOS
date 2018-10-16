@@ -34,7 +34,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
       @config = arguments[0].config
       @parentView = arguments[0].parent_view
 
-      @model.on 'change:matrix', @render, @
+#      @model.on 'change:matrix', @render, @
       @model.on 'change:state', @handleMatrixState, @
       @model.on glados.models.Activity.ActivityAggregationMatrix.TARGET_PREF_NAMES_UPDATED_EVT, @handleTargetPrefNameChange, @
 
@@ -70,15 +70,12 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
         @setProgressMessage('Step 2 of 3. Axes created...')
       else if state == glados.models.Heatmap.STATES.HEATMAP_TOTAL_SIZE_KNOWN
         @setProgressMessage('Step 3 of 3. Heatmap total size calculated...')
+      else if state == glados.models.Heatmap.STATES.READY_TO_RENDER
+        @render()
+        @setProgressMessage()
 
       return
 
-      if state == glados.models.Aggregations.Aggregation.States.LOADING_BUCKETS
-        @setProgressMessage('Loading Activity Data...')
-      else if state == glados.models.Aggregations.Aggregation.States.INITIAL_STATE
-        @setProgressMessage('Initial State')
-        console.log 'model: '
-        console.log JSON.stringify(@model.attributes)
 
 
     # If the target prefered name comes in the index we don't need this anymore
@@ -118,33 +115,21 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
 
     render: ->
 
+      console.log 'RENDER'
       # only bother if my element is visible
       if $(@el).is(":visible")
 
         @showRenderingMessage()
-
-        $messagesElement = $(@el).find('.BCK-VisualisationMessages')
-        $messagesElement.html Handlebars.compile($('#' + $messagesElement.attr('data-hb-template')).html())
-          message: 'Loading Visualisation...'
-
-        numColumns = @model.get('matrix').columns.length
         @clearVisualisation()
-        if numColumns > 0
-          @paintControls()
-          @paintMatrix()
-          @parentView.fillLinkToAllActivities() unless not @parentView?
-          $messagesElement.html ''
-        else
-          @setProgressMessage('(There are no activities for the ' + @config.rows_entity_name + ' requested.)', hideCog=true)
-
-        $(@el).find('select').material_select()
+        @paintControls()
+        @paintMatrix()
         @hideRenderingMessage()
 
 
     showRenderingMessage: ->$(@el).find('.BCK-Rendering-preloader').show()
     hideRenderingMessage: ->$(@el).find('.BCK-Rendering-preloader').hide()
 
-    setProgressMessage: (msg, hideCog=false) ->
+    setProgressMessage: (msg='', hideCog=false) ->
 
       $messagesElement = $(@el).find('.BCK-VisualisationMessages')
 
@@ -248,8 +233,8 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
       width = elemWidth
       #since I know the side size and how many rows I have, I can calculate which should be the height of the container
       height = @SIDE_SIZE * @NUM_ROWS
-      # Anyway, I have to limit it so it is not too long.
-      if height > width
+      # Anyway, I have to limit it so it is not too long. If there are no rows I paint a square container as well.
+      if height > width or height == 0
         height = width
 
       mainContainer = d3.select(@$vis_elem.get(0))

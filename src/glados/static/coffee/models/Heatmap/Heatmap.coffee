@@ -80,8 +80,34 @@ glados.useNameSpace 'glados.models.Heatmap',
         if newState == glados.models.Heatmap.STATES.DEPENDENT_LISTS_CREATED
           @getTotalNumberOfRowsAndColumns()
         else if newState == glados.models.Heatmap.STATES.HEATMAP_TOTAL_SIZE_KNOWN
-          console.log 'CREATE MATRIX STRUCTURE'
-          console.log 'SET INITIAL WINDOW'
+          @createMatrixInitialStructure()
+          @setInitialWindow()
+
+    createMatrixInitialStructure: ->
+
+      console.log 'CREATE MATRIX STRUCTURE'
+
+      #base data structure
+      cleanMatrixStructure =
+        columns: []
+        rows: []
+        links: []
+        rows_index: []
+        rows_curr_position_index: {}
+        columns_index: {}
+        columns_curr_position_index: {}
+        cell_max_pchembl_value_avg: 0
+        cell_min_pchembl_value_avg: 0
+        cell_max_activity_count: 0
+        cell_min_activity_count: 0
+
+      console.log 'matrix: ', cleanMatrixStructure
+      @set('matrix', cleanMatrixStructure)
+
+    setInitialWindow: ->
+
+      console.log 'SET INITIAL WINDOW'
+      @switchToState(glados.models.Heatmap.STATES.READY_TO_RENDER)
 
     fetch: (options) ->
 
@@ -574,6 +600,7 @@ glados.models.Heatmap.STATES =
   INITIAL_STATE: 'INITIAL_STATE'
   DEPENDENT_LISTS_CREATED: 'DEPENDENT_LISTS_CREATED'
   HEATMAP_TOTAL_SIZE_KNOWN: 'HEATMAP_TOTAL_SIZE_KNOWN'
+  READY_TO_RENDER: 'READY_TO_RENDER'
 glados.models.Heatmap.AXES_NAMES =
   Y_AXIS: 'Y_AXIS'
   X_AXIS: 'X_AXIS'
