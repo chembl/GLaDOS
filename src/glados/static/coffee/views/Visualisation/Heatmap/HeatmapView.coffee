@@ -179,8 +179,8 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
       # --------------------------------------
       # Sort by default value
       # --------------------------------------
-      @model.sortMatrixRowsBy @currentRowSortingProperty.propName, @currentRowSortingPropertyReverse
-      @model.sortMatrixColsBy  @currentRowSortingProperty.propName, @currentRowSortingPropertyReverse
+#      @model.sortMatrixRowsBy @currentRowSortingProperty.propName, @currentRowSortingPropertyReverse
+#      @model.sortMatrixColsBy  @currentRowSortingProperty.propName, @currentRowSortingPropertyReverse
 
       # --------------------------------------
       # variable initialisation

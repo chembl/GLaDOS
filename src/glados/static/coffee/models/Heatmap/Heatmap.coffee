@@ -63,7 +63,7 @@ glados.useNameSpace 'glados.models.Heatmap',
         if xAxisListItemsReady and yAxisListItemsReady
           @switchToState(glados.models.Heatmap.STATES.HEATMAP_TOTAL_SIZE_KNOWN)
 
-    getTotalNumberOfRowsAndColumns: ->
+    fetchTotalNumberOfRowsAndColumns: ->
 
       @checkListLength(@y_axis_list)
       @checkListLength(@x_axis_list)
@@ -78,7 +78,7 @@ glados.useNameSpace 'glados.models.Heatmap',
         @set('state', newState)
 
         if newState == glados.models.Heatmap.STATES.DEPENDENT_LISTS_CREATED
-          @getTotalNumberOfRowsAndColumns()
+          @fetchTotalNumberOfRowsAndColumns()
         else if newState == glados.models.Heatmap.STATES.HEATMAP_TOTAL_SIZE_KNOWN
           @createMatrixInitialStructure()
           @setInitialWindow()
@@ -86,11 +86,22 @@ glados.useNameSpace 'glados.models.Heatmap',
     createMatrixInitialStructure: ->
 
       console.log 'CREATE MATRIX STRUCTURE'
+      totalNumRows = @y_axis_list.getTotalRecords()
 
+      baseRowList = []
+      for i in [0..totalNumRows-1]
+        console.log(i)
+        baseObj =
+          id: "TO_LOAD:#{i}"
+          loaded: false
+          currentPosition: i
+        baseRowList.push(baseObj)
+
+      console.log('baseRowList: ', baseRowList)
       #base data structure
       cleanMatrixStructure =
         columns: []
-        rows: []
+        rows: baseRowList
         links: []
         rows_index: []
         rows_curr_position_index: {}
