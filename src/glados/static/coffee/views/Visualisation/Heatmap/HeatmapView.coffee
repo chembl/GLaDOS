@@ -298,7 +298,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
 #      @cellsContainerG = @initCellsContainer(@mainGContainer, matrix)
 
       @rowsHeaderG = @initRowsHeaderContainer(@mainGContainer)
-#      @colsHeaderG = @initColsHeaderContainer(@mainGContainer)
+      @colsHeaderG = @initColsHeaderContainer(@mainGContainer)
 #      @rowsFooterG = @initRowsFooterContainer(@mainGContainer)
       @corner2G = @initSquare2(@mainGContainer)
 #      @colsFooterG = @initColsFooter(@mainGContainer)

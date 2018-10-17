@@ -83,24 +83,34 @@ glados.useNameSpace 'glados.models.Heatmap',
           @createMatrixInitialStructure()
           @setInitialWindow()
 
-    createMatrixInitialStructure: ->
+    generateBaseRowsORColsList: (totalNumItems, isCol=false) ->
 
-      console.log 'CREATE MATRIX STRUCTURE'
-      totalNumRows = @y_axis_list.getTotalRecords()
+      baseID = if isCol then 'COL_TO_LOAD' else 'ROW_TO_LOAD'
 
       baseRowList = []
-      for i in [0..totalNumRows-1]
+      for i in [0..totalNumItems-1]
         console.log(i)
         baseObj =
-          id: "TO_LOAD:#{i}"
+          id: "#{baseID}:#{i}"
           loaded: false
           currentPosition: i
         baseRowList.push(baseObj)
 
+      return baseRowList
+
+    createMatrixInitialStructure: ->
+
+      console.log 'CREATE MATRIX STRUCTURE'
+      totalNumRows = @y_axis_list.getTotalRecords()
+      baseRowList = @generateBaseRowsORColsList(totalNumRows, isCol=false)
+      totalNumCols = @x_axis_list.getTotalRecords()
+      baseColsList = @generateBaseRowsORColsList(totalNumCols, isCol=true)
+
       console.log('baseRowList: ', baseRowList)
+      console.log('baseColsList: ', baseColsList)
       #base data structure
       cleanMatrixStructure =
-        columns: []
+        columns: baseColsList
         rows: baseRowList
         links: []
         rows_index: []
