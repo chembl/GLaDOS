@@ -4,20 +4,20 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
 
   HeatmapView: Backbone.View\
   .extend(ResponsiviseViewExt)\
-  .extend(glados.views.Visualisation.Heatmap.Parts.Controls)\
-  .extend(glados.views.Visualisation.Heatmap.Parts.ZoomAndTranslation)\
-  .extend(glados.views.Visualisation.Heatmap.Parts.CellsContainer)\
-  .extend(glados.views.Visualisation.Heatmap.Parts.RowsHeaderContainer)\
-  .extend(glados.views.Visualisation.Heatmap.Parts.ColsHeaderContainer)\
-  .extend(glados.views.Visualisation.Heatmap.Parts.Texts)\
-  .extend(glados.views.Visualisation.Heatmap.Parts.RowsFooterContainer)\
-  .extend(glados.views.Visualisation.Heatmap.Parts.Square2)\
-  .extend(glados.views.Visualisation.Heatmap.Parts.ColsFooter)\
-  .extend(glados.views.Visualisation.Heatmap.Parts.Square1)\
-  .extend(glados.views.Visualisation.Heatmap.Parts.Square3)\
-  .extend(glados.views.Visualisation.Heatmap.Parts.Square4)\
-  .extend(glados.views.Visualisation.Heatmap.Parts.Window)\
-  .extend(glados.views.Visualisation.Heatmap.Parts.Tooltips)\
+  .extend(glados.views.Visualisation.Heatmap.Components.Controls)\
+  .extend(glados.views.Visualisation.Heatmap.Components.ZoomAndTranslation)\
+  .extend(glados.views.Visualisation.Heatmap.Components.CellsContainer)\
+  .extend(glados.views.Visualisation.Heatmap.Components.RowsHeaderContainer)\
+  .extend(glados.views.Visualisation.Heatmap.Components.ColsHeaderContainer)\
+  .extend(glados.views.Visualisation.Heatmap.Components.Texts)\
+  .extend(glados.views.Visualisation.Heatmap.Components.RowsFooterContainer)\
+  .extend(glados.views.Visualisation.Heatmap.Components.Square2)\
+  .extend(glados.views.Visualisation.Heatmap.Components.ColsFooter)\
+  .extend(glados.views.Visualisation.Heatmap.Components.Square1)\
+  .extend(glados.views.Visualisation.Heatmap.Components.Square3)\
+  .extend(glados.views.Visualisation.Heatmap.Components.Square4)\
+  .extend(glados.views.Visualisation.Heatmap.Components.Window)\
+  .extend(glados.views.Visualisation.Heatmap.Components.Tooltips)\
   .extend
 
     REVERSE_POSITION_TOOLTIP_TH: 0.8
