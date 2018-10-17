@@ -299,9 +299,9 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
 
       @rowsHeaderG = @initRowsHeaderContainer(@mainGContainer)
       @colsHeaderG = @initColsHeaderContainer(@mainGContainer)
-#      @rowsFooterG = @initRowsFooterContainer(@mainGContainer)
+      @rowsFooterG = @initRowsFooterContainer(@mainGContainer)
       @corner2G = @initSquare2(@mainGContainer)
-#      @colsFooterG = @initColsFooter(@mainGContainer)
+      @colsFooterG = @initColsFooter(@mainGContainer)
       @corner1G = @initSquare1(@mainGContainer)
       @corner3G = @initSquare3(@mainGContainer)
       @corner4G = @initSquare4(@mainGContainer)
