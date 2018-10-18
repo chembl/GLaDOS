@@ -69,7 +69,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
       colsInWindow = @COLS_IN_WINDOW
 
       for colObj in colsInWindow
-        if colObj.loaded
+        if colObj.load_state == glados.models.Heatmap.ITEM_LOAD_STATES.LOADED
           thisView.model.getColHeaderLink(colObj.id)
 
       colsHeaders = colsHeaderG.selectAll(".vis-column")

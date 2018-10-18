@@ -92,7 +92,7 @@ glados.useNameSpace 'glados.models.Heatmap',
         console.log(i)
         baseObj =
           id: "#{baseID}:#{i}"
-          loaded: false
+          load_state: glados.models.Heatmap.ITEM_LOAD_STATES.TO_LOAD
           currentPosition: i
         baseRowList.push(baseObj)
 
@@ -622,6 +622,11 @@ glados.models.Heatmap.STATES =
   DEPENDENT_LISTS_CREATED: 'DEPENDENT_LISTS_CREATED'
   HEATMAP_TOTAL_SIZE_KNOWN: 'HEATMAP_TOTAL_SIZE_KNOWN'
   READY_TO_RENDER: 'READY_TO_RENDER'
+glados.models.Heatmap.ITEM_LOAD_STATES =
+  TO_LOAD: 'TO_LOAD' # The item needs to be loaded
+  LOADING: 'LOADING' # The item is being fetched
+  LOADED: 'LOADED' # The item is loaded, the data was received
+  ERROR: 'ERROR' # There was an error while fetching the data for the item.
 glados.models.Heatmap.AXES_NAMES =
   Y_AXIS: 'Y_AXIS'
   X_AXIS: 'X_AXIS'

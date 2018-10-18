@@ -33,8 +33,8 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
         t = colsFooterG.transition().duration(transitionDuration)
         t.selectAll('.footers-text')
           .text((d) ->
-            if not d.loaded
-              glados.views.Visualisation.Heatmap.Components.Texts.LOADING_TEXT_MICRO
+            if d.load_state == glados.models.Heatmap.ITEM_LOAD_STATES.TO_LOAD
+              glados.views.Visualisation.Heatmap.Components.Texts.TO_LOAD_TEXT
             else
               glados.Utils.getNestedValue(d, thisView.currentColSortingProperty.propName)
         )
@@ -77,7 +77,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
 
       # generate footer links for window
       for colObj in colsInWindow
-        if colObj.loaded
+        if colObj.load_state == glados.models.Heatmap.ITEM_LOAD_STATES.LOADED
           thisView.model.getColFooterLink(colObj.id)
 
       colsFooters = colsFooterG.selectAll(".vis-column-footer")

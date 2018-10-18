@@ -2,6 +2,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
 
   Texts:
 
+    TO_LOAD_TEXT: '.'
     LOADING_TEXT: 'Loading...'
     LOADING_TEXT_MICRO: '...'
     fillHeaderText: (d3TextElem, isCol=true) ->
@@ -9,8 +10,8 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
 
       propName = if isCol then thisView.currentColLabelProperty.propName else thisView.currentRowLabelProperty.propName
       d3TextElem.text( (d) ->
-        if not d.loaded
-          glados.views.Visualisation.Heatmap.Components.Texts.LOADING_TEXT
+        if d.load_state == glados.models.Heatmap.ITEM_LOAD_STATES.TO_LOAD
+          glados.views.Visualisation.Heatmap.Components.Texts.TO_LOAD_TEXT
         else
           glados.Utils.getNestedValue(d, propName)
       )

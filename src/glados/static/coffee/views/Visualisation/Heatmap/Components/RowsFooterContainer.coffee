@@ -27,8 +27,8 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
         t = rowsFooterG.transition().duration(transitionDuration)
         t.selectAll('.footers-text')
           .text((d) ->
-            if not d.loaded
-              glados.views.Visualisation.Heatmap.Components.Texts.LOADING_TEXT_MICRO
+            if d.load_state == glados.models.Heatmap.ITEM_LOAD_STATES.TO_LOAD
+              glados.views.Visualisation.Heatmap.Components.Texts.TO_LOAD_TEXT
             else
               glados.Utils.getNestedValue(d, thisView.currentRowSortingProperty.propName)
         )
@@ -71,7 +71,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
       rowsInWindow = @ROWS_IN_WINDOW
       # generate footer links for window
       for rowObj in rowsInWindow
-        if rowObj.loaded
+        if rowObj.load_state == glados.models.Heatmap.ITEM_LOAD_STATES.LOADED
           thisView.model.getRowFooterLink(rowObj.id)
 
       rowFooters = rowsFooterG.selectAll('.vis-row-footer')
