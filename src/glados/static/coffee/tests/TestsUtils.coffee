@@ -26,7 +26,6 @@ class TestsUtils
 
     $.get dataURL, (testData) ->
 
-      console.log 'SIMULATE DATA ES LIST'
       if testData.hits?
         rawModels = (h._source for h in testData.hits.hits)
       else
