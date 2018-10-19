@@ -89,7 +89,6 @@ glados.useNameSpace 'glados.models.Heatmap',
 
       baseRowList = []
       for i in [0..totalNumItems-1]
-        console.log(i)
         baseObj =
           id: "#{baseID}:#{i}"
           load_state: glados.models.Heatmap.ITEM_LOAD_STATES.TO_LOAD
@@ -128,6 +127,17 @@ glados.useNameSpace 'glados.models.Heatmap',
     setInitialWindow: ->
 
       console.log 'SET INITIAL WINDOW'
+      loadWindowStruct =
+        x_axis:
+          loading_frontiers: []
+          loaded_frontiers: []
+          error_frontiers: []
+        y_axis:
+          loading_frontiers: []
+          loaded_frontiers: []
+          error_frontiers: []
+
+      @set('load_window_struct', loadWindowStruct)
       @switchToState(glados.models.Heatmap.STATES.READY_TO_RENDER)
 
     fetch: (options) ->
@@ -630,5 +640,8 @@ glados.models.Heatmap.ITEM_LOAD_STATES =
 glados.models.Heatmap.AXES_NAMES =
   Y_AXIS: 'Y_AXIS'
   X_AXIS: 'X_AXIS'
+
+glados.models.Heatmap.LOAD_WINDOW =
+  W_FACTOR: 2
 
 glados.models.Heatmap.MAX_RELATED_IDS_LISTS = 79

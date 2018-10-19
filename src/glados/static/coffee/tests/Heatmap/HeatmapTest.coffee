@@ -36,7 +36,7 @@ describe "Heatmap", ->
     it 'generates the dependent lists from the generator list', ->
 
       heatmap = new glados.models.Heatmap.Heatmap
-          config: config
+        config: config
 
       heatmap.once 'change:state', ->
         currentState = heatmap.get('state')
@@ -49,6 +49,19 @@ describe "Heatmap", ->
             i += 1
 
       heatmap.generateDependentLists()
+
+    it 'initialises the load Window Structure ', ->
+
+      heatmap = new glados.models.Heatmap.Heatmap
+        config: config
+
+      heatmap.setInitialWindow()
+      loadWindowStruct = heatmap.get('load_window_struct')
+      for axis in ['x_axis', 'y_axis']
+        expect(loadWindowStruct[axis].loading_frontiers.length).toBe(0)
+        expect(loadWindowStruct[axis].loaded_frontiers.length).toBe(0)
+        expect(loadWindowStruct[axis].error_frontiers.length).toBe(0)
+
 
 
 
