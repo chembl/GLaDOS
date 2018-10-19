@@ -82,6 +82,7 @@ glados.useNameSpace 'glados.models.Heatmap',
         else if newState == glados.models.Heatmap.STATES.HEATMAP_TOTAL_SIZE_KNOWN
           @createMatrixInitialStructure()
           @setInitialWindow()
+          @switchToState(glados.models.Heatmap.STATES.READY_TO_RENDER)
 
     generateBaseRowsORColsList: (totalNumItems, isCol=false) ->
 
@@ -124,21 +125,61 @@ glados.useNameSpace 'glados.models.Heatmap',
       console.log 'matrix: ', cleanMatrixStructure
       @set('matrix', cleanMatrixStructure)
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # Window
+    # ------------------------------------------------------------------------------------------------------------------
     setInitialWindow: ->
 
-      console.log 'SET INITIAL WINDOW'
       loadWindowStruct =
         x_axis:
+          to_load_frontiers: []
           loading_frontiers: []
           loaded_frontiers: []
           error_frontiers: []
         y_axis:
+          to_load_frontiers: []
           loading_frontiers: []
           loaded_frontiers: []
           error_frontiers: []
 
       @set('load_window_struct', loadWindowStruct)
-      @switchToState(glados.models.Heatmap.STATES.READY_TO_RENDER)
+
+    resetLoadWindow: -> @setInitialWindow()
+    informVisualWindowLimits: (axis, initialItemNumber, lastItemNumber) ->
+
+      if axis == glados.models.Heatmap.AXES_NAMES.X_AXIS
+        axisLength = @x_axis_list.getTotalRecords()
+      else if axis == glados.models.Heatmap.AXES_NAMES.Y_AXIS
+        axisLength = @y_axis_list.getTotalRecords()
+
+      visualWindowLength = lastItemNumber - initialItemNumber + 1
+      loadWindowLengthMustBe = visualWindowLength * glados.models.Heatmap.LOAD_WINDOW.W_FACTOR
+
+      frontierCandidateStart = initialItemNumber - Math.ceil((loadWindowLengthMustBe - visualWindowLength)/2)
+      frontierCandidateStart = 1 if frontierCandidateStart < 1
+      frontierCandidateStart = axisLength if frontierCandidateStart > axisLength
+
+      frontierCandidateEnd = lastItemNumber + Math.floor((loadWindowLengthMustBe - visualWindowLength)/2)
+      frontierCandidateEnd = 1 if frontierCandidateEnd < 1
+      frontierCandidateEnd = axisLength if frontierCandidateEnd > axisLength
+
+      loadingFrontierCandidate =
+        start: frontierCandidateStart
+        end: frontierCandidateEnd
+
+      loadWindowStruct = @get('load_window_struct')
+      axisPropName = glados.models.Heatmap.AXES_PROPERTY_NAMES[axis]
+
+      toLoadFrontiers = loadWindowStruct[axisPropName].to_load_frontiers
+      toLoadFrontiers.push loadingFrontierCandidate
+
+      @processLoadWindowStruct() unless @config.test_mode
+
+    processLoadWindowStruct: ->
+
+
+#      toLoadFrontiers =
+
 
     fetch: (options) ->
 
@@ -640,6 +681,9 @@ glados.models.Heatmap.ITEM_LOAD_STATES =
 glados.models.Heatmap.AXES_NAMES =
   Y_AXIS: 'Y_AXIS'
   X_AXIS: 'X_AXIS'
+glados.models.Heatmap.AXES_PROPERTY_NAMES =
+  Y_AXIS: 'y_axis'
+  X_AXIS: 'x_axis'
 
 glados.models.Heatmap.LOAD_WINDOW =
   W_FACTOR: 2
