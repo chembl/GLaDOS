@@ -204,13 +204,18 @@ glados.useNameSpace 'glados.models.Heatmap',
 
       console.log 'loadAxisFrontier: ', axisProp, start, end
       matrix = @get('matrix')
-      if axisProp = glados.models.Heatmap.AXES_PROPERTY_NAMES.X_AXIS
+      if axisProp == glados.models.Heatmap.AXES_PROPERTY_NAMES.X_AXIS
         items = matrix.columns
-      else if axisProp = glados.models.Heatmap.AXES_PROPERTY_NAMES.Y_AXIS
+      else if axisProp == glados.models.Heatmap.AXES_PROPERTY_NAMES.Y_AXIS
         items = matrix.rows
 
       for item in items[(start-1)..(end-1)]
         item.load_state = glados.models.Heatmap.ITEM_LOAD_STATES.LOADING
+
+      if axisProp == glados.models.Heatmap.AXES_PROPERTY_NAMES.X_AXIS
+
+        @trigger(glados.models.Heatmap.EVENTS.VISUAL_WINDOW.COLS_HEADERS_UPDATED)
+
 
 
     fetch: (options) ->
@@ -716,8 +721,9 @@ glados.models.Heatmap.AXES_NAMES =
 glados.models.Heatmap.AXES_PROPERTY_NAMES =
   Y_AXIS: 'y_axis'
   X_AXIS: 'x_axis'
-
 glados.models.Heatmap.LOAD_WINDOW =
   W_FACTOR: 2
-
+glados.models.Heatmap.EVENTS =
+  VISUAL_WINDOW:
+    COLS_HEADERS_UPDATED: 'COLS_HEADERS_UPDATED'
 glados.models.Heatmap.MAX_RELATED_IDS_LISTS = 79
