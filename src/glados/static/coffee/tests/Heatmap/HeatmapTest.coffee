@@ -89,6 +89,11 @@ describe "Heatmap", ->
           heatmap.generateDependentLists()
           heatmap.setInitialWindow()
 
+        beforeEach ->
+
+          heatmap.resetLoadWindow()
+          heatmap.createMatrixInitialStructure()
+
         it 'generates the correct frontier with no window movement, just window created at different points', ->
 
           axis = glados.models.Heatmap.AXES_NAMES.X_AXIS
@@ -124,21 +129,34 @@ describe "Heatmap", ->
 
         it 'processes the window structure, basic case', ->
 
-          heatmap.resetLoadWindow()
+          start = 1
+          end = 3
 
           loadWindow =
-            start: 1
-            end: 3
+            start: start
+            end: end
 
-          axis = glados.models.Heatmap.AXES_NAMES.X_AXIS
           loadWindowStruct = heatmap.get('load_window_struct')
           loadWindowStruct.x_axis.to_load_frontiers.push loadWindow
           heatmap.processLoadWindowStruct()
 
+          # the frontier should expand
           loadingFrontiersGot = loadWindowStruct.x_axis.loading_frontiers
           loadingFrontierGot = loadingFrontiersGot[0]
           expect(loadingFrontierGot.start).toBe(loadWindow.start)
           expect(loadingFrontierGot.end).toBe(loadWindow.end)
+
+          # the items new state should be marked
+          matrix = heatmap.get('matrix')
+          columns = matrix.columns
+
+          i = 1
+          for col in columns
+            if start <= i <= end
+              expect(col.load_state).toBe(glados.models.Heatmap.ITEM_LOAD_STATES.LOADING)
+            else
+              expect(col.load_state).toBe(glados.models.Heatmap.ITEM_LOAD_STATES.TO_LOAD)
+            i += 1
 
 
 

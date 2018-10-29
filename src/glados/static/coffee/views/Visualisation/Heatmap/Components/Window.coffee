@@ -115,3 +115,13 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
             cellsInWindow.push cellObj
 
       return cellsInWindow
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Communication with model
+    # ------------------------------------------------------------------------------------------------------------------
+    informVisualWindowLimitsToModel: ->
+
+      console.log 'informVisualWindowLimitsToModel '
+      console.log @WINDOW
+
+      @model.informVisualWindowLimits(glados.models.Heatmap.AXES_NAMES.X_AXIS, @WINDOW.min_col_num, @WINDOW.max_col_num)

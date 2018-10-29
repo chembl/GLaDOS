@@ -276,6 +276,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
       # now that I have the zoom, I can calculate the window
       @unsetWindow()
       @calculateCurrentWindow(@zoomScale)
+      @informVisualWindowLimitsToModel()
 
       mainSVGContainer = mainContainer
         .append('svg')

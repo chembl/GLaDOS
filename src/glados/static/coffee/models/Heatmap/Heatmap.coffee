@@ -203,6 +203,15 @@ glados.useNameSpace 'glados.models.Heatmap',
       loadingFrontiers.push(loadingWindow)
 
       console.log 'loadAxisFrontier: ', axisProp, start, end
+      matrix = @get('matrix')
+      if axisProp = glados.models.Heatmap.AXES_PROPERTY_NAMES.X_AXIS
+        items = matrix.columns
+      else if axisProp = glados.models.Heatmap.AXES_PROPERTY_NAMES.Y_AXIS
+        items = matrix.rows
+
+      for item in items[(start-1)..(end-1)]
+        item.load_state = glados.models.Heatmap.ITEM_LOAD_STATES.LOADING
+
 
     fetch: (options) ->
 
