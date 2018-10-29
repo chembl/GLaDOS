@@ -177,9 +177,32 @@ glados.useNameSpace 'glados.models.Heatmap',
 
     processLoadWindowStruct: ->
 
+      console.log 'processLoadWindowStruct: '
+      loadWindowStruct = @get('load_window_struct')
 
-#      toLoadFrontiers =
+      for axis in _.values(glados.models.Heatmap.AXES_PROPERTY_NAMES)
+        toLoadFrontiers = loadWindowStruct[axis].to_load_frontiers
 
+        console.log 'toLoadFrontiers: ', toLoadFrontiers
+
+        currentFrontier = toLoadFrontiers.shift()
+        while currentFrontier?
+          console.log 'currentFrontier: ', currentFrontier
+          @loadAxisFrontier(axis, currentFrontier.start, currentFrontier.end)
+          currentFrontier = toLoadFrontiers.shift()
+
+
+    loadAxisFrontier: (axisProp, start, end) ->
+
+      loadWindowStruct = @get('load_window_struct')
+      loadingFrontiers = loadWindowStruct[axisProp].loading_frontiers
+      loadingWindow =
+        start: start
+        end: end
+
+      loadingFrontiers.push(loadingWindow)
+
+      console.log 'loadAxisFrontier: ', axisProp, start, end
 
     fetch: (options) ->
 

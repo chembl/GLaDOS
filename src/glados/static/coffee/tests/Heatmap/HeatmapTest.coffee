@@ -122,7 +122,7 @@ describe "Heatmap", ->
 
               heatmap.resetLoadWindow()
 
-        it 'processes the window structure', ->
+        it 'processes the window structure, basic case', ->
 
           heatmap.resetLoadWindow()
 
@@ -133,7 +133,12 @@ describe "Heatmap", ->
           axis = glados.models.Heatmap.AXES_NAMES.X_AXIS
           loadWindowStruct = heatmap.get('load_window_struct')
           loadWindowStruct.x_axis.to_load_frontiers.push loadWindow
-
-          console.log 'loadWindowStruct: ', loadWindowStruct
           heatmap.processLoadWindowStruct()
+
+          loadingFrontiersGot = loadWindowStruct.x_axis.loading_frontiers
+          loadingFrontierGot = loadingFrontiersGot[0]
+          expect(loadingFrontierGot.start).toBe(loadWindow.start)
+          expect(loadingFrontierGot.end).toBe(loadWindow.end)
+
+
 
