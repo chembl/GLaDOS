@@ -96,6 +96,7 @@ describe "Heatmap", ->
 
         it 'generates the correct frontier with no window movement, just window created at different points', ->
 
+          console.log 'FAILING TEST'
           axis = glados.models.Heatmap.AXES_NAMES.X_AXIS
           axisLength = heatmap.x_axis_list.getTotalRecords()
 
@@ -122,6 +123,7 @@ describe "Heatmap", ->
               endMustBe = 1 if endMustBe < 1
               endMustBe = axisLength if endMustBe > axisLength
 
+              # load frontier is not produced in all cases
               expect(toLoadFrontierGot.start).toBe(startMustBe)
               expect(toLoadFrontierGot.end).toBe(endMustBe)
 
@@ -157,6 +159,66 @@ describe "Heatmap", ->
             else
               expect(col.load_state).toBe(glados.models.Heatmap.ITEM_LOAD_STATES.TO_LOAD)
             i += 1
+
+
+      describe 'workflow 1. Moving Window', ->
+
+        heatmap = undefined
+
+        beforeAll (done) ->
+
+          configGenerator = new glados.configs.ReportCards.Visualisation.Heatmaps.CompoundsVSTargetsHeatmap(generatorList)
+          config = configGenerator.getHeatmapModelConfig()
+          config.test_mode = true
+
+          heatmap = new glados.models.Heatmap.Heatmap
+            config: config
+
+          heatmap.once 'change:state', ->
+
+            #here the dependent list has been generated
+            dependentList = heatmap.x_axis_list
+
+            itemsURL = glados.Settings.STATIC_URL + 'testData/Heatmap/Case0/DependentList/items.json'
+            TestsUtils.simulateDataESList(dependentList, itemsURL, done)
+
+          heatmap.generateDependentLists()
+          heatmap.setInitialWindow()
+
+        beforeEach ->
+
+          heatmap.resetLoadWindow()
+          heatmap.createMatrixInitialStructure()
+
+        it 'Triggers the load of a new frontier when visual window touches load or loaded frontier limits (Moving to left)', ->
+
+          matrix = heatmap.get('matrix')
+          columns = matrix.columns
+          numColumns = columns.length
+          middlePoint = parseInt(numColumns / 2)
+          frontiersSize = 4
+          axis = glados.models.Heatmap.AXES_NAMES.X_AXIS
+
+          # create a loading frontier and a loaded frontier
+          loadingFrontier =
+            start: middlePoint - frontiersSize
+            end: middlePoint
+
+          loadedFrontier =
+            start: middlePoint + 1
+            end: middlePoint + frontiersSize
+
+          loadWindowStruct = heatmap.get('load_window_struct')
+          loadWindowStruct.x_axis.loading_frontiers.push loadingFrontier
+          loadWindowStruct.x_axis.loaded_frontiers.push loadedFrontier
+
+          # now inform the load window to the model, and move it to the left if it doesn't touch the frontier border,
+          # it doesn't do anything.
+          heatmap.informVisualWindowLimits(axis, visualWindowStart=105, visualWindowEnd=107)
+          toLoadFrontiers = loadWindowStruct.x_axis.to_load_frontiers
+          expect(toLoadFrontiers.length).toBe(0)
+          console.log 'AAA loadWindowStruct: ', loadWindowStruct
+
 
 
 

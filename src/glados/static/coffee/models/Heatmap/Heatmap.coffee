@@ -145,12 +145,32 @@ glados.useNameSpace 'glados.models.Heatmap',
       @set('load_window_struct', loadWindowStruct)
 
     resetLoadWindow: -> @setInitialWindow()
+
     informVisualWindowLimits: (axis, initialItemNumber, lastItemNumber) ->
 
       if axis == glados.models.Heatmap.AXES_NAMES.X_AXIS
         axisLength = @x_axis_list.getTotalRecords()
       else if axis == glados.models.Heatmap.AXES_NAMES.Y_AXIS
         axisLength = @y_axis_list.getTotalRecords()
+
+      axisPropName = glados.models.Heatmap.AXES_PROPERTY_NAMES[axis]
+      loadWindowStruct = @get('load_window_struct')
+
+      # Get current loading or loaded frontiers
+      loadingFrontiers = loadWindowStruct[axisPropName].loading_frontiers
+      loadedFrontiers = loadWindowStruct[axisPropName].loaded_frontiers
+      # -1 means not applicable, if I don't find current frontiers, the candidate is just generated in a straightforward way
+      loadingFrontierStart = Number.MIN_SAFE_INTEGER
+      for frontier in loadingFrontiers
+        if loadingFrontierStart == Number.MIN_SAFE_INTEGER
+          loadingFrontierStart = frontier.start
+          continue
+        if loadingFrontierStart < frontier.start
+          loadingFrontierStart = frontier.start
+
+      loadingFrontierStartIsValid = loadingFrontierStart != Number.MIN_SAFE_INTEGER
+      if (initialItemNumber >= loadingFrontierStart) and loadingFrontierStartIsValid
+        return
 
       visualWindowLength = lastItemNumber - initialItemNumber + 1
       loadWindowLengthMustBe = visualWindowLength * glados.models.Heatmap.LOAD_WINDOW.W_FACTOR
@@ -167,8 +187,7 @@ glados.useNameSpace 'glados.models.Heatmap',
         start: frontierCandidateStart
         end: frontierCandidateEnd
 
-      loadWindowStruct = @get('load_window_struct')
-      axisPropName = glados.models.Heatmap.AXES_PROPERTY_NAMES[axis]
+
 
       toLoadFrontiers = loadWindowStruct[axisPropName].to_load_frontiers
       toLoadFrontiers.push loadingFrontierCandidate
