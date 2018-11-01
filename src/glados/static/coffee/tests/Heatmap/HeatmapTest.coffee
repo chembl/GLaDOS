@@ -123,7 +123,6 @@ describe "Heatmap", ->
               endMustBe = 1 if endMustBe < 1
               endMustBe = axisLength if endMustBe > axisLength
 
-              # load frontier is not produced in all cases
               expect(toLoadFrontierGot.start).toBe(startMustBe)
               expect(toLoadFrontierGot.end).toBe(endMustBe)
 
@@ -212,12 +211,25 @@ describe "Heatmap", ->
           loadWindowStruct.x_axis.loading_frontiers.push loadingFrontier
           loadWindowStruct.x_axis.loaded_frontiers.push loadedFrontier
 
+          heatmap.informVisualWindowLimits(axis, 105, 108)
+
+          console.log 'AAA loadWindowStruct: ', loadWindowStruct
+
+          return
           # now inform the load window to the model, and move it to the left if it doesn't touch the frontier border,
           # it doesn't do anything.
-          heatmap.informVisualWindowLimits(axis, visualWindowStart=105, visualWindowEnd=107)
-          toLoadFrontiers = loadWindowStruct.x_axis.to_load_frontiers
-          expect(toLoadFrontiers.length).toBe(0)
+          for visualWindowStart in [(middlePoint - frontiersSize), middlePoint].reverse()
+            console.log 'AAA visualWindowStart: ', visualWindowStart
+            #                                                               this doesn't move
+            heatmap.informVisualWindowLimits(axis, visualWindowStart, visualWindowEnd=(middlePoint + 1))
+            toLoadFrontiers = loadWindowStruct.x_axis.to_load_frontiers
+            expect(toLoadFrontiers.length).toBe(0)
+
+          # here it must trigger
+          heatmap.informVisualWindowLimits(axis, (middlePoint - frontiersSize - 1), visualWindowEnd=(middlePoint + 1))
+
           console.log 'AAA loadWindowStruct: ', loadWindowStruct
+          console.log 'AAA end must be: ', (middlePoint - frontiersSize - 1)
 
 
 

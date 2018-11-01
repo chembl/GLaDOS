@@ -148,6 +148,9 @@ glados.useNameSpace 'glados.models.Heatmap',
 
     informVisualWindowLimits: (axis, initialItemNumber, lastItemNumber) ->
 
+      console.log 'AAA ---'
+      console.log 'AAA informVisualWindowLimits: ', axis, initialItemNumber, lastItemNumber
+
       if axis == glados.models.Heatmap.AXES_NAMES.X_AXIS
         axisLength = @x_axis_list.getTotalRecords()
       else if axis == glados.models.Heatmap.AXES_NAMES.Y_AXIS
@@ -155,22 +158,6 @@ glados.useNameSpace 'glados.models.Heatmap',
 
       axisPropName = glados.models.Heatmap.AXES_PROPERTY_NAMES[axis]
       loadWindowStruct = @get('load_window_struct')
-
-      # Get current loading or loaded frontiers
-      loadingFrontiers = loadWindowStruct[axisPropName].loading_frontiers
-      loadedFrontiers = loadWindowStruct[axisPropName].loaded_frontiers
-      # -1 means not applicable, if I don't find current frontiers, the candidate is just generated in a straightforward way
-      loadingFrontierStart = Number.MIN_SAFE_INTEGER
-      for frontier in loadingFrontiers
-        if loadingFrontierStart == Number.MIN_SAFE_INTEGER
-          loadingFrontierStart = frontier.start
-          continue
-        if loadingFrontierStart < frontier.start
-          loadingFrontierStart = frontier.start
-
-      loadingFrontierStartIsValid = loadingFrontierStart != Number.MIN_SAFE_INTEGER
-      if (initialItemNumber >= loadingFrontierStart) and loadingFrontierStartIsValid
-        return
 
       visualWindowLength = lastItemNumber - initialItemNumber + 1
       loadWindowLengthMustBe = visualWindowLength * glados.models.Heatmap.LOAD_WINDOW.W_FACTOR
@@ -187,10 +174,49 @@ glados.useNameSpace 'glados.models.Heatmap',
         start: frontierCandidateStart
         end: frontierCandidateEnd
 
+      loadingFrontiers = loadWindowStruct[axisPropName].loading_frontiers
+      loadedFrontiers = loadWindowStruct[axisPropName].loaded_frontiers
+      loadingOrLoadedFrontiers = _.union(loadingFrontiers, loadedFrontiers)
+      console.log 'AAA loadingOrLoadedFrontiers: ', loadingOrLoadedFrontiers
+      console.log 'AAA loadingFrontierCandidate: ', loadingFrontierCandidate
 
+      # Now that I have  candidate I chop it, I will create a structure full of trues for the candidate
+      loadingFrontierCandidateBools = {}
+      for i in [loadingFrontierCandidate.start..loadingFrontierCandidate.end]
+        loadingFrontierCandidateBools[i] = true
+      console.log 'AAA loadingFrontierCandidateBools: ', loadingFrontierCandidateBools
 
+      # Now I kill the the items based on the loading and loaded frontiers
+      for frontier in loadingOrLoadedFrontiers
+        for i in [frontier.start..frontier.end]
+          item = loadingFrontierCandidateBools[i]
+          if item?
+            loadingFrontierCandidateBools[i] = false
+
+      # now I create the loaded frontiers from the surviving item
+      candidateKeys = (parseInt(i) for i in _.keys(loadingFrontierCandidateBools)).sort( (a, b) -> a - b )
       toLoadFrontiers = loadWindowStruct[axisPropName].to_load_frontiers
-      toLoadFrontiers.push loadingFrontierCandidate
+
+      i = 0
+      creatingFrontier = false
+      newFrontier = {}
+      numCandidateKeys = candidateKeys.length
+      while i < numCandidateKeys
+        currentItemNumber = candidateKeys[i]
+        currentItemIsAlive = loadingFrontierCandidateBools[currentItemNumber] == true
+        iAmAtTheEnd = i == numCandidateKeys - 1
+        if not creatingFrontier and currentItemIsAlive
+          newFrontier.start = currentItemNumber
+          creatingFrontier = true
+
+        if (creatingFrontier and not currentItemIsAlive) or iAmAtTheEnd
+          newFrontier.end = currentItemNumber
+          console.log 'new frontier: start; ', newFrontier.start, 'end; ', newFrontier.end
+          toLoadFrontiers.push newFrontier
+          newFrontier = {}
+          creatingFrontier = false
+
+        i += 1
 
       @processLoadWindowStruct() unless @config.test_mode
 
