@@ -12,6 +12,10 @@ glados.useNameSpace 'glados.models.Heatmap',
       @config = arguments[0].config
       testMode = @config.test_mode
       @set('state', glados.models.Heatmap.STATES.INITIAL_STATE)
+      minWindowLoadSizeFactor = @config.custom_min_window_load_size_factor
+      minWindowLoadSizeFactor ?= glados.models.Heatmap.LOAD_WINDOW.MIN_LOAD_SIZE_WINDOW_FACTOR
+      @set('min_window_load_size_factor', minWindowLoadSizeFactor)
+
       @generateDependentLists() unless testMode
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -197,22 +201,30 @@ glados.useNameSpace 'glados.models.Heatmap',
       candidateKeys = (parseInt(i) for i in _.keys(loadingFrontierCandidateBools)).sort( (a, b) -> a - b )
       toLoadFrontiers = loadWindowStruct[axisPropName].to_load_frontiers
 
+      minFrontierSize = @get('min_window_load_size_factor') * visualWindowLength
+
       i = 0
       creatingFrontier = false
       newFrontier = {}
       numCandidateKeys = candidateKeys.length
       while i < numCandidateKeys
         currentItemNumber = candidateKeys[i]
+        nexItemNumber = candidateKeys[i + 1]
         currentItemIsAlive = loadingFrontierCandidateBools[currentItemNumber] == true
+        nexItemIsAlive = loadingFrontierCandidateBools[nexItemNumber] == true
+
         iAmAtTheEnd = i == numCandidateKeys - 1
         if not creatingFrontier and currentItemIsAlive
           newFrontier.start = currentItemNumber
           creatingFrontier = true
 
-        if (creatingFrontier and not currentItemIsAlive) or iAmAtTheEnd
+        if (creatingFrontier and not nexItemIsAlive) or iAmAtTheEnd
           newFrontier.end = currentItemNumber
-          console.log 'new frontier: start; ', newFrontier.start, 'end; ', newFrontier.end
-          toLoadFrontiers.push newFrontier
+          newFrontierSize = newFrontier.end - newFrontier.start + 1
+
+          if newFrontierSize > minFrontierSize
+            console.log 'new frontier: start; ', newFrontier.start, 'end; ', newFrontier.end
+            toLoadFrontiers.push newFrontier
           newFrontier = {}
           creatingFrontier = false
 
@@ -767,7 +779,13 @@ glados.models.Heatmap.AXES_PROPERTY_NAMES =
   Y_AXIS: 'y_axis'
   X_AXIS: 'x_axis'
 glados.models.Heatmap.LOAD_WINDOW =
-  W_FACTOR: 2
+  W_FACTOR: 2 # how big is the load window in comparison to the visual window. For example, if visual window is 2x2,
+  # with w_factor equal to 2, the load window will be 4x4.
+  MIN_LOAD_SIZE_WINDOW_FACTOR: 1 # as the visual window moves, the load candidates are not always of the full size, this
+  # tells which is the smallest size of chunks to load. for example, if the visual window is 2X2, and this factor is 1
+  # if will only trigger the load of at least 2 items per axis.
+  # This is important because without any limit, the heatmap could start to load the items one by one as the user
+  # moves the visualisation
 glados.models.Heatmap.EVENTS =
   VISUAL_WINDOW:
     COLS_HEADERS_UPDATED: 'COLS_HEADERS_UPDATED'

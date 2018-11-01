@@ -93,10 +93,13 @@ describe "Heatmap", ->
 
           heatmap.resetLoadWindow()
           heatmap.createMatrixInitialStructure()
+          heatmap.set('min_window_load_size_factor', glados.models.Heatmap.LOAD_WINDOW.MIN_LOAD_SIZE_WINDOW_FACTOR)
+
 
         it 'generates the correct frontier with no window movement, just window created at different points', ->
 
-          console.log 'FAILING TEST'
+          heatmap.set('min_window_load_size_factor', 0)
+
           axis = glados.models.Heatmap.AXES_NAMES.X_AXIS
           axisLength = heatmap.x_axis_list.getTotalRecords()
 
@@ -160,7 +163,7 @@ describe "Heatmap", ->
             i += 1
 
 
-      describe 'workflow 1. Moving Window', ->
+      describe 'Window chopping', ->
 
         heatmap = undefined
 
@@ -189,47 +192,62 @@ describe "Heatmap", ->
           heatmap.resetLoadWindow()
           heatmap.createMatrixInitialStructure()
 
-        it 'Triggers the load of a new frontier when visual window touches load or loaded frontier limits (Moving to left)', ->
+        # see https://docs.google.com/drawings/d/16w9CrAilksh9CGr1OTRLTl3pUvxhP7eLGGt4MrDzugU/edit?usp=sharing
+        it 'Chops correctly a load candidate, with no minimum load size', ->
 
+          heatmap.set('min_window_load_size_factor', 0)
           matrix = heatmap.get('matrix')
-          columns = matrix.columns
-          numColumns = columns.length
-          middlePoint = parseInt(numColumns / 2)
-          frontiersSize = 4
           axis = glados.models.Heatmap.AXES_NAMES.X_AXIS
 
-          # create a loading frontier and a loaded frontier
-          loadingFrontier =
-            start: middlePoint - frontiersSize
-            end: middlePoint
-
-          loadedFrontier =
-            start: middlePoint + 1
-            end: middlePoint + frontiersSize
-
           loadWindowStruct = heatmap.get('load_window_struct')
-          loadWindowStruct.x_axis.loading_frontiers.push loadingFrontier
-          loadWindowStruct.x_axis.loaded_frontiers.push loadedFrontier
+          # create frontiers like in the drawing
+          loadingFrontier1 =
+            start: 10
+            end: 13
+          loadWindowStruct.x_axis.loading_frontiers.push loadingFrontier1
 
-          heatmap.informVisualWindowLimits(axis, 105, 108)
+          loadingFrontier2 =
+            start: 21
+            end: 23
+          loadWindowStruct.x_axis.loading_frontiers.push loadingFrontier2
 
-          console.log 'AAA loadWindowStruct: ', loadWindowStruct
+          loadedFrontier1 =
+            start: 24
+            end: 25
+          loadWindowStruct.x_axis.loaded_frontiers.push loadedFrontier1
 
-          return
-          # now inform the load window to the model, and move it to the left if it doesn't touch the frontier border,
-          # it doesn't do anything.
-          for visualWindowStart in [(middlePoint - frontiersSize), middlePoint].reverse()
-            console.log 'AAA visualWindowStart: ', visualWindowStart
-            #                                                               this doesn't move
-            heatmap.informVisualWindowLimits(axis, visualWindowStart, visualWindowEnd=(middlePoint + 1))
-            toLoadFrontiers = loadWindowStruct.x_axis.to_load_frontiers
-            expect(toLoadFrontiers.length).toBe(0)
+          loadedFrontier2 =
+            start: 31
+            end: 35
+          loadWindowStruct.x_axis.loaded_frontiers.push loadedFrontier2
 
-          # here it must trigger
-          heatmap.informVisualWindowLimits(axis, (middlePoint - frontiersSize - 1), visualWindowEnd=(middlePoint + 1))
+          heatmap.informVisualWindowLimits(axis, 15, 29)
 
-          console.log 'AAA loadWindowStruct: ', loadWindowStruct
-          console.log 'AAA end must be: ', (middlePoint - frontiersSize - 1)
+          toLoadFrontiersGot = loadWindowStruct.x_axis.to_load_frontiers
+          toLoadFrontiersDict = _.indexBy(toLoadFrontiersGot, (f) -> "#{f.start}-#{f.end}")
+
+          toLoadFrontiersMustBe = []
+
+          toLoadFrontierMustBe1 =
+            start: 7
+            end: 9
+          toLoadFrontiersMustBe.push toLoadFrontierMustBe1
+
+          toLoadFrontierMustBe2 =
+            start: 14
+            end: 20
+          toLoadFrontiersMustBe.push toLoadFrontierMustBe2
+
+          toLoadFrontierMustBe3 =
+            start: 26
+            end: 30
+          toLoadFrontiersMustBe.push toLoadFrontierMustBe3
+
+          for frontier in toLoadFrontiersMustBe
+
+            toLoadFrontierGot = toLoadFrontiersDict["#{frontier.start}-#{frontier.end}"]
+            expect(toLoadFrontierGot?).toBe(true)
+
 
 
 
