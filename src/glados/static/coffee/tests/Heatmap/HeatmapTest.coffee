@@ -249,7 +249,7 @@ describe "Heatmap", ->
             expect(toLoadFrontierGot?).toBe(true)
 
 
-        it 'Chops correctly a load candidate', ->
+        it 'Chops correctly a load candidate with minimum load size', ->
 
           heatmap.set('min_window_load_size_factor', glados.models.Heatmap.LOAD_WINDOW.MIN_LOAD_SIZE_WINDOW_FACTOR)
           matrix = heatmap.get('matrix')
@@ -283,7 +283,92 @@ describe "Heatmap", ->
           #none of the frontiers should survive
           expect(toLoadFrontiersGot.length).toBe(0)
 
+        # https://docs.google.com/drawings/d/1SgJq0rUku8XHDGKYQdJWYJ57mosGATsi5cAfpivI3jI/edit?usp=sharing
+        it 'Joins correctly the gaps between the frontiers', ->
 
+          heatmap.set('min_window_load_size_factor', glados.models.Heatmap.LOAD_WINDOW.MIN_LOAD_SIZE_WINDOW_FACTOR)
+          matrix = heatmap.get('matrix')
+          axis = glados.models.Heatmap.AXES_NAMES.X_AXIS
 
+          loadWindowStruct = heatmap.get('load_window_struct')
+          # create frontiers like in the drawing
+          toLoadFrontier1 =
+            start: 7
+            end: 8
+          loadWindowStruct.x_axis.to_load_frontiers.push toLoadFrontier1
+
+          toLoadFrontier2 =
+            start: 14
+            end: 16
+          loadWindowStruct.x_axis.to_load_frontiers.push toLoadFrontier2
+
+          toLoadFrontier3 =
+            start: 20
+            end: 20
+          loadWindowStruct.x_axis.to_load_frontiers.push toLoadFrontier3
+
+          toLoadFrontier4 =
+            start: 26
+            end: 27
+          loadWindowStruct.x_axis.to_load_frontiers.push toLoadFrontier4
+
+          toLoadFrontier5 =
+            start: 30
+            end: 30
+          loadWindowStruct.x_axis.to_load_frontiers.push toLoadFrontier5
+
+          toLoadFrontier6 =
+            start: 36
+            end: 36
+          loadWindowStruct.x_axis.to_load_frontiers.push toLoadFrontier6
+
+          loadingFrontier1 =
+            start: 10
+            end: 13
+          loadWindowStruct.x_axis.loading_frontiers.push loadingFrontier1
+
+          loadingFrontier2 =
+            start: 21
+            end: 23
+          loadWindowStruct.x_axis.loading_frontiers.push loadingFrontier2
+
+          loadedFrontier1 =
+            start: 24
+            end: 25
+          loadWindowStruct.x_axis.loaded_frontiers.push loadedFrontier1
+
+          loadedFrontier2 =
+            start: 31
+            end: 35
+          loadWindowStruct.x_axis.loaded_frontiers.push loadedFrontier2
+
+          console.log 'loadWindowStruct: ', loadWindowStruct
+          heatmap.removeToLoadGaps()
+
+          toLoadFrontiersGot = loadWindowStruct.x_axis.to_load_frontiers
+          toLoadFrontiersDict = _.indexBy(toLoadFrontiersGot, (f) -> "#{f.start}-#{f.end}")
+          console.log 'toLoadFrontiersDict: ', toLoadFrontiersDict
+
+          toLoadFrontiersMustBe = []
+
+          toLoadFrontierMustBe1 =
+            start: 7
+            end: 9
+          toLoadFrontiersMustBe.push toLoadFrontierMustBe1
+
+          toLoadFrontierMustBe2 =
+            start: 14
+            end: 20
+          toLoadFrontiersMustBe.push toLoadFrontierMustBe2
+
+          toLoadFrontierMustBe3 =
+            start: 26
+            end: 30
+          toLoadFrontiersMustBe.push toLoadFrontierMustBe3
+
+          for frontier in toLoadFrontiersMustBe
+
+            toLoadFrontierGot = toLoadFrontiersDict["#{frontier.start}-#{frontier.end}"]
+            expect(toLoadFrontierGot?).toBe(true)
 
 

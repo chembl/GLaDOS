@@ -178,17 +178,23 @@ glados.useNameSpace 'glados.models.Heatmap',
         start: frontierCandidateStart
         end: frontierCandidateEnd
 
-      loadingFrontiers = loadWindowStruct[axisPropName].loading_frontiers
-      loadedFrontiers = loadWindowStruct[axisPropName].loaded_frontiers
-      loadingOrLoadedFrontiers = _.union(loadingFrontiers, loadedFrontiers)
-      console.log 'AAA loadingOrLoadedFrontiers: ', loadingOrLoadedFrontiers
-      console.log 'AAA loadingFrontierCandidate: ', loadingFrontierCandidate
-
       # Now that I have  candidate I chop it, I will create a structure full of trues for the candidate
       loadingFrontierCandidateBools = {}
       for i in [loadingFrontierCandidate.start..loadingFrontierCandidate.end]
         loadingFrontierCandidateBools[i] = true
       console.log 'AAA loadingFrontierCandidateBools: ', loadingFrontierCandidateBools
+
+      console.log 'AAA loadingFrontierCandidate: ', loadingFrontierCandidate
+      @chopLoadCandidate(axisPropName, loadingFrontierCandidateBools, visualWindowLength)
+      @processLoadWindowStruct() unless @config.test_mode
+
+    chopLoadCandidate: (axisPropName, loadingFrontierCandidateBools, visualWindowLength, ignoreMinToLoadLimit=false)->
+
+      loadWindowStruct = @get('load_window_struct')
+
+      loadingFrontiers = loadWindowStruct[axisPropName].loading_frontiers
+      loadedFrontiers = loadWindowStruct[axisPropName].loaded_frontiers
+      loadingOrLoadedFrontiers = _.union(loadingFrontiers, loadedFrontiers)
 
       # Now I kill the the items based on the loading and loaded frontiers
       for frontier in loadingOrLoadedFrontiers
@@ -222,7 +228,7 @@ glados.useNameSpace 'glados.models.Heatmap',
           newFrontier.end = currentItemNumber
           newFrontierSize = newFrontier.end - newFrontier.start + 1
 
-          if newFrontierSize > minFrontierSize
+          if (newFrontierSize > minFrontierSize) or ignoreMinToLoadLimit
             console.log 'new frontier: start; ', newFrontier.start, 'end; ', newFrontier.end
             toLoadFrontiers.push newFrontier
           newFrontier = {}
@@ -230,7 +236,43 @@ glados.useNameSpace 'glados.models.Heatmap',
 
         i += 1
 
-      @processLoadWindowStruct() unless @config.test_mode
+    # if the gaps are too big we can not include them, but for now this should work. 
+    removeToLoadGaps: ->
+
+      loadWindowStruct = @get('load_window_struct')
+
+      #First get absolute start and end for all frontiers, errors are just not taken to account here.
+      for axisPropName in _.values(glados.models.Heatmap.AXES_PROPERTY_NAMES)
+
+        toLoadFrontiers = loadWindowStruct[axisPropName].to_load_frontiers
+        loadingFrontiers = loadWindowStruct[axisPropName].loading_frontiers
+        loadedFrontiers = loadWindowStruct[axisPropName].loaded_frontiers
+
+        allFrontiers = _.union(toLoadFrontiers, loadingFrontiers, loadedFrontiers)
+        if allFrontiers.length == 0
+          continue
+
+        minStart = Number.MAX_SAFE_INTEGER
+        maxEnd = Number.MIN_SAFE_INTEGER
+
+        for frontier in allFrontiers
+          currentStart = frontier.start
+          currentEnd = frontier.end
+
+          if currentStart < minStart
+            minStart = currentStart
+
+          if currentEnd > maxEnd
+            maxEnd = currentEnd
+
+        # Now I create a load candidate from minStart to minEnd
+        loadingFrontierCandidateBools = {}
+        for i in [minStart..maxEnd]
+          loadingFrontierCandidateBools[i] = true
+
+        # visual window length doesn't matter here
+        @chopLoadCandidate(axisPropName, loadingFrontierCandidateBools, visualWindowLength=-1,
+          ignoreMinToLoadLimit=false)
 
     processLoadWindowStruct: ->
 
