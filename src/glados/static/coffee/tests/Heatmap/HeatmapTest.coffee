@@ -249,6 +249,41 @@ describe "Heatmap", ->
             expect(toLoadFrontierGot?).toBe(true)
 
 
+        it 'Chops correctly a load candidate', ->
+
+          heatmap.set('min_window_load_size_factor', glados.models.Heatmap.LOAD_WINDOW.MIN_LOAD_SIZE_WINDOW_FACTOR)
+          matrix = heatmap.get('matrix')
+          axis = glados.models.Heatmap.AXES_NAMES.X_AXIS
+
+          loadWindowStruct = heatmap.get('load_window_struct')
+          # create frontiers like in the drawing
+          loadingFrontier1 =
+            start: 10
+            end: 13
+          loadWindowStruct.x_axis.loading_frontiers.push loadingFrontier1
+
+          loadingFrontier2 =
+            start: 21
+            end: 23
+          loadWindowStruct.x_axis.loading_frontiers.push loadingFrontier2
+
+          loadedFrontier1 =
+            start: 24
+            end: 25
+          loadWindowStruct.x_axis.loaded_frontiers.push loadedFrontier1
+
+          loadedFrontier2 =
+            start: 31
+            end: 35
+          loadWindowStruct.x_axis.loaded_frontiers.push loadedFrontier2
+
+          heatmap.informVisualWindowLimits(axis, 15, 29)
+
+          toLoadFrontiersGot = loadWindowStruct.x_axis.to_load_frontiers
+          #none of the frontiers should survive
+          expect(toLoadFrontiersGot.length).toBe(0)
+
+
 
 
 
