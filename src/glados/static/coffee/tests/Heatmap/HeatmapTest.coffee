@@ -288,7 +288,6 @@ describe "Heatmap", ->
 
           heatmap.set('min_window_load_size_factor', glados.models.Heatmap.LOAD_WINDOW.MIN_LOAD_SIZE_WINDOW_FACTOR)
           matrix = heatmap.get('matrix')
-          axis = glados.models.Heatmap.AXES_NAMES.X_AXIS
 
           loadWindowStruct = heatmap.get('load_window_struct')
           # create frontiers like in the drawing
@@ -342,12 +341,10 @@ describe "Heatmap", ->
             end: 35
           loadWindowStruct.x_axis.loaded_frontiers.push loadedFrontier2
 
-          console.log 'loadWindowStruct: ', loadWindowStruct
           heatmap.removeToLoadGaps()
 
           toLoadFrontiersGot = loadWindowStruct.x_axis.to_load_frontiers
           toLoadFrontiersDict = _.indexBy(toLoadFrontiersGot, (f) -> "#{f.start}-#{f.end}")
-          console.log 'toLoadFrontiersDict: ', toLoadFrontiersDict
 
           toLoadFrontiersMustBe = []
 
@@ -371,4 +368,15 @@ describe "Heatmap", ->
             toLoadFrontierGot = toLoadFrontiersDict["#{frontier.start}-#{frontier.end}"]
             expect(toLoadFrontierGot?).toBe(true)
 
+        it 'Does not produce any to load frontier when no gaps', ->
+
+          heatmap.set('min_window_load_size_factor', glados.models.Heatmap.LOAD_WINDOW.MIN_LOAD_SIZE_WINDOW_FACTOR)
+          matrix = heatmap.get('matrix')
+
+          axis = glados.models.Heatmap.AXES_NAMES.X_AXIS
+          heatmap.informVisualWindowLimits(axis, 15, 29)
+
+          loadWindowStruct = heatmap.get('load_window_struct')
+          toLoadFrontiersGot = loadWindowStruct.x_axis.to_load_frontiers
+          expect(toLoadFrontiersGot.length).toBe(1)
 

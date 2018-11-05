@@ -4,7 +4,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
 
     initColsHeadersEvents: ->
 
-      @model.on glados.models.Heatmap.EVENTS.VISUAL_WINDOW.COLS_HEADERS_UPDATED, (-> alert 'UPDATE COLS HEADERS')
+      @model.on glados.models.Heatmap.EVENTS.VISUAL_WINDOW.COLS_HEADERS_UPDATED, (-> console.log 'BBB UPDATE COLS HEADERS')
 
     # ------------------------------------------------------------------------------------------------------------------
     # defining positioning and scaling functions for the cols headers

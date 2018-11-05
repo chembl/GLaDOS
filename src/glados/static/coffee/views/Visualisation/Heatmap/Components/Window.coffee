@@ -64,6 +64,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
         @COLS_IN_WINDOW = @getColsInWindow()
         @ROWS_IN_WINDOW = @getRowsInWindow()
         @CELLS_IN_WINDOW = @getCellsInWindow()
+        @informWindowLimitsIfTouchingBorder()
 
     getColsInWindow: ->
 
@@ -124,5 +125,50 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
       console.log 'informVisualWindowLimitsToModel '
       console.log @WINDOW
 
-      @model.informVisualWindowLimits(glados.models.Heatmap.AXES_NAMES.X_AXIS, @WINDOW.min_col_num, @WINDOW.max_col_num)
-      @model.informVisualWindowLimits(glados.models.Heatmap.AXES_NAMES.Y_AXIS, @WINDOW.min_row_num, @WINDOW.max_row_num)
+      minItemX = @WINDOW.min_col_num + 1
+      maxItemX = @WINDOW.max_col_num + 1
+      minItemY = @WINDOW.min_row_num + 1
+      maxItemY = @WINDOW.max_row_num + 1
+      @model.informVisualWindowLimits(glados.models.Heatmap.AXES_NAMES.X_AXIS, minItemX, maxItemX)
+      @model.informVisualWindowLimits(glados.models.Heatmap.AXES_NAMES.Y_AXIS, minItemY, maxItemY)
+
+    # informs the window limits only if the visual window is touching the current frontiers
+    informWindowLimitsIfTouchingBorder: ->
+
+      console.log 'BBB informWindowLimitsIfTouchingBorder '
+      console.log @WINDOW
+
+      minItemX = @WINDOW.min_col_num + 1
+      maxItemX = @WINDOW.max_col_num + 1
+      minItemY = @WINDOW.min_row_num + 1
+      maxItemY = @WINDOW.max_row_num + 1
+
+      loadWindowStruct = @model.get('load_window_struct')
+      console.log 'loadWindowStruct: ', loadWindowStruct
+      minStartX = loadWindowStruct[glados.models.Heatmap.AXES_PROPERTY_NAMES.X_AXIS].min_start
+      touchingLeft = (not minStartX?) or (1 < minItemX <= minStartX)
+      console.log 'minItemX: ', minItemX
+      console.log 'minStartX: ', minStartX
+      console.log 'touchingLeft: ', touchingLeft
+      maxEndX = loadWindowStruct[glados.models.Heatmap.AXES_PROPERTY_NAMES.X_AXIS].max_end
+      touchingRight = (not maxEndX?) or (maxEndX < maxItemX <= @NUM_COLUMNS )
+      console.log 'maxItemX: ', maxItemX
+      console.log 'maxEndX: ', maxEndX
+      console.log 'touchingRight: ', touchingRight
+      minStartY = loadWindowStruct[glados.models.Heatmap.AXES_PROPERTY_NAMES.Y_AXIS].min_start
+      touchingTop = (not minStartY?) or (1 < minItemY <= minStartY)
+      console.log 'minItemY: ', minItemY
+      console.log 'minStartY: ', minStartY
+      console.log 'touchingTop: ', touchingTop
+      maxEndY = loadWindowStruct[glados.models.Heatmap.AXES_PROPERTY_NAMES.Y_AXIS].max_end
+      touchingBottom = (not maxEndY?) or (maxEndY < maxItemY <= @NUM_ROWS)
+      console.log 'maxItemY: ', maxItemY
+      console.log 'maxEndY: ', maxEndY
+      console.log 'touchingBottom: ', touchingBottom
+
+      touchingBorder = touchingLeft or touchingRight or touchingTop or touchingBottom
+      if touchingBorder
+        console.log 'BBB touching border!!!'
+        @informVisualWindowLimitsToModel()
+
+
