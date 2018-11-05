@@ -125,3 +125,4 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
       console.log @WINDOW
 
       @model.informVisualWindowLimits(glados.models.Heatmap.AXES_NAMES.X_AXIS, @WINDOW.min_col_num, @WINDOW.max_col_num)
+      @model.informVisualWindowLimits(glados.models.Heatmap.AXES_NAMES.Y_AXIS, @WINDOW.min_row_num, @WINDOW.max_row_num)

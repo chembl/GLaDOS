@@ -29,6 +29,8 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
           .text((d) ->
             if d.load_state == glados.models.Heatmap.ITEM_LOAD_STATES.TO_LOAD
               glados.views.Visualisation.Heatmap.Components.Texts.TO_LOAD_TEXT
+            else if d.load_state == glados.models.Heatmap.ITEM_LOAD_STATES.LOADING
+              glados.views.Visualisation.Heatmap.Components.Texts.LOADING_TEXT_MICRO
             else
               glados.Utils.getNestedValue(d, thisView.currentRowSortingProperty.propName)
         )

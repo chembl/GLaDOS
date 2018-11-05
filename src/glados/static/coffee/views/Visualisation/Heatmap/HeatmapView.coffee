@@ -76,8 +76,6 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
 
       return
 
-
-
     # If the target prefered name comes in the index we don't need this anymore
     handleTargetPrefNameChange: (targetChemblID) ->
 
