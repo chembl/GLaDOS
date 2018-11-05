@@ -74,6 +74,7 @@ describe "Heatmap", ->
           configGenerator = new glados.configs.ReportCards.Visualisation.Heatmaps.CompoundsVSTargetsHeatmap(generatorList)
           config = configGenerator.getHeatmapModelConfig()
           config.test_mode = true
+          config.custom_w_factor = 2
 
           heatmap = new glados.models.Heatmap.Heatmap
             config: config
@@ -172,6 +173,7 @@ describe "Heatmap", ->
           configGenerator = new glados.configs.ReportCards.Visualisation.Heatmaps.CompoundsVSTargetsHeatmap(generatorList)
           config = configGenerator.getHeatmapModelConfig()
           config.test_mode = true
+          config.custom_w_factor = 2
 
           heatmap = new glados.models.Heatmap.Heatmap
             config: config
@@ -195,6 +197,7 @@ describe "Heatmap", ->
         # see https://docs.google.com/drawings/d/16w9CrAilksh9CGr1OTRLTl3pUvxhP7eLGGt4MrDzugU/edit?usp=sharing
         it 'Chops correctly a load candidate, with no minimum load size', ->
 
+          console.log 'FAILING TEST'
           heatmap.set('min_window_load_size_factor', 0)
           matrix = heatmap.get('matrix')
           axis = glados.models.Heatmap.AXES_NAMES.X_AXIS

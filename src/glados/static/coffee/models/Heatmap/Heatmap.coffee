@@ -14,7 +14,10 @@ glados.useNameSpace 'glados.models.Heatmap',
       @set('state', glados.models.Heatmap.STATES.INITIAL_STATE)
       minWindowLoadSizeFactor = @config.custom_min_window_load_size_factor
       minWindowLoadSizeFactor ?= glados.models.Heatmap.LOAD_WINDOW.MIN_LOAD_SIZE_WINDOW_FACTOR
+      wFactor = @config.custom_w_factor
+      wFactor ?= glados.models.Heatmap.LOAD_WINDOW.W_FACTOR
       @set('min_window_load_size_factor', minWindowLoadSizeFactor)
+      @set('w_factor', wFactor)
 
       @generateDependentLists() unless testMode
 
@@ -164,7 +167,7 @@ glados.useNameSpace 'glados.models.Heatmap',
       loadWindowStruct = @get('load_window_struct')
 
       visualWindowLength = lastItemNumber - initialItemNumber + 1
-      loadWindowLengthMustBe = visualWindowLength * glados.models.Heatmap.LOAD_WINDOW.W_FACTOR
+      loadWindowLengthMustBe = visualWindowLength * @get('w_factor')
 
       frontierCandidateStart = initialItemNumber - Math.ceil((loadWindowLengthMustBe - visualWindowLength)/2)
       frontierCandidateStart = 1 if frontierCandidateStart < 1
@@ -238,9 +241,9 @@ glados.useNameSpace 'glados.models.Heatmap',
         if (creatingFrontier and not nexItemIsAlive) or iAmAtTheEnd
           newFrontier.end = currentItemNumber
           newFrontierSize = newFrontier.end - newFrontier.start + 1
-          touchesAxisEnd = newFrontier.end >= axisLength
+          touchesAxisEnd = (newFrontier.end >= axisLength)
 
-          if (newFrontierSize > minFrontierSize) or ignoreMinToLoadLimit or touchesAxisEnd
+          if (newFrontierSize > minFrontierSize) or ignoreMinToLoadLimit
             console.log 'new frontier: start; ', newFrontier.start, 'end; ', newFrontier.end
             toLoadFrontiers.push newFrontier
           newFrontier = {}
