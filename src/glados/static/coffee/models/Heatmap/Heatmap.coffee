@@ -195,6 +195,11 @@ glados.useNameSpace 'glados.models.Heatmap',
 
     chopLoadCandidate: (axisPropName, loadingFrontierCandidateBools, visualWindowLength, ignoreMinToLoadLimit=false) ->
 
+      if axisPropName == glados.models.Heatmap.AXES_PROPERTY_NAMES.X_AXIS
+        axisLength = @x_axis_list.getTotalRecords()
+      else if axisPropName == glados.models.Heatmap.AXES_PROPERTY_NAMES.Y_AXIS
+        axisLength = @y_axis_list.getTotalRecords()
+
       loadWindowStruct = @get('load_window_struct')
 
       loadingFrontiers = loadWindowStruct[axisPropName].loading_frontiers
@@ -233,8 +238,9 @@ glados.useNameSpace 'glados.models.Heatmap',
         if (creatingFrontier and not nexItemIsAlive) or iAmAtTheEnd
           newFrontier.end = currentItemNumber
           newFrontierSize = newFrontier.end - newFrontier.start + 1
+          touchesAxisEnd = newFrontier.end >= axisLength
 
-          if (newFrontierSize > minFrontierSize) or ignoreMinToLoadLimit
+          if (newFrontierSize > minFrontierSize) or ignoreMinToLoadLimit or touchesAxisEnd
             console.log 'new frontier: start; ', newFrontier.start, 'end; ', newFrontier.end
             toLoadFrontiers.push newFrontier
           newFrontier = {}
