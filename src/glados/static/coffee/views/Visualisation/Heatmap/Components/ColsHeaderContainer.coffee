@@ -4,7 +4,13 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
 
     initColsHeadersEvents: ->
 
-      @model.on glados.models.Heatmap.EVENTS.VISUAL_WINDOW.COLS_HEADERS_UPDATED, (-> console.log 'BBB UPDATE COLS HEADERS')
+      thisView = @
+      @model.on(glados.models.Heatmap.EVENTS.VISUAL_WINDOW.COLS_HEADERS_UPDATED, ->
+
+        if thisView.colsHeaderG?
+          thisView.updateColsHeadersForWindow(thisView.colsHeaderG, stateChanged=true)
+
+      )
 
     # ------------------------------------------------------------------------------------------------------------------
     # defining positioning and scaling functions for the cols headers
@@ -68,8 +74,9 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
     # ------------------------------------------------------------------------------------------------------------------
     # update cols headers according to window
     # ------------------------------------------------------------------------------------------------------------------
-    updateColsHeadersForWindow: (colsHeaderG) ->
+    updateColsHeadersForWindow: (colsHeaderG, stateChanged=false) ->
 
+      console.log 'BBB updateColsHeadersForWindow:'
       thisView = @
       colsInWindow = @COLS_IN_WINDOW
 
@@ -85,12 +92,17 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
         .append("g")
         .classed('vis-column', true)
 
-      colsHeadersEnter.append('rect')
+      if stateChanged
+        headersToUpdate = colsHeaders
+      else
+        headersToUpdate = colsHeadersEnter
+
+      headersToUpdate.append('rect')
         .style('fill', 'none')
         .style('fill-opacity', 0.5)
         .classed('headers-background-rect', true)
 
-      colsHeadersEnter.append('line')
+      headersToUpdate.append('line')
         .style('stroke-width', @GRID_STROKE_WIDTH)
         .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
         .classed('headers-divisory-line', true)
@@ -100,7 +112,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
 #      else
 #        setUpColTooltip = @generateTooltipFunction('Compound', @, isCol=true)
 
-      colsHeadersEnter.append('text')
+      headersToUpdate.append('text')
         .classed('headers-text', true)
         .attr('transform', 'rotate(-90)')
         .attr('text-decoration', 'underline')
@@ -111,4 +123,4 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
         .attr('id', (d) -> thisView.COL_HEADER_TEXT_BASE_ID + d.id)
 #        .on('click', thisView.handleColHeaderClick)
 
-      return colsHeadersEnter
+      return headersToUpdate

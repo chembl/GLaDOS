@@ -122,7 +122,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
     # ------------------------------------------------------------------------------------------------------------------
     informVisualWindowLimitsToModel: ->
 
-      console.log 'informVisualWindowLimitsToModel '
+      console.log 'BBB informVisualWindowLimitsToModel '
       console.log @WINDOW
 
       minItemX = @WINDOW.min_col_num + 1
@@ -147,28 +147,29 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
       console.log 'loadWindowStruct: ', loadWindowStruct
       minStartX = loadWindowStruct[glados.models.Heatmap.AXES_PROPERTY_NAMES.X_AXIS].min_start
       touchingLeft = (not minStartX?) or (1 < minItemX <= minStartX)
-      console.log 'minItemX: ', minItemX
-      console.log 'minStartX: ', minStartX
-      console.log 'touchingLeft: ', touchingLeft
+      console.log 'BBB minItemX: ', minItemX
+      console.log 'BBB minStartX: ', minStartX
+      console.log 'BBB touchingLeft: ', touchingLeft
       maxEndX = loadWindowStruct[glados.models.Heatmap.AXES_PROPERTY_NAMES.X_AXIS].max_end
       touchingRight = (not maxEndX?) or (maxEndX < maxItemX <= @NUM_COLUMNS )
-      console.log 'maxItemX: ', maxItemX
-      console.log 'maxEndX: ', maxEndX
-      console.log 'touchingRight: ', touchingRight
+      console.log 'BBB maxItemX: ', maxItemX
+      console.log 'BBB maxEndX: ', maxEndX
+      console.log 'BBB touchingRight: ', touchingRight
       minStartY = loadWindowStruct[glados.models.Heatmap.AXES_PROPERTY_NAMES.Y_AXIS].min_start
       touchingTop = (not minStartY?) or (1 < minItemY <= minStartY)
-      console.log 'minItemY: ', minItemY
-      console.log 'minStartY: ', minStartY
-      console.log 'touchingTop: ', touchingTop
+      console.log 'BBB minItemY: ', minItemY
+      console.log 'BBB minStartY: ', minStartY
+      console.log 'BBB touchingTop: ', touchingTop
       maxEndY = loadWindowStruct[glados.models.Heatmap.AXES_PROPERTY_NAMES.Y_AXIS].max_end
       touchingBottom = (not maxEndY?) or (maxEndY < maxItemY <= @NUM_ROWS)
-      console.log 'maxItemY: ', maxItemY
-      console.log 'maxEndY: ', maxEndY
-      console.log 'touchingBottom: ', touchingBottom
+      console.log 'BBB maxItemY: ', maxItemY
+      console.log 'BBB maxEndY: ', maxEndY
+      console.log 'BBB touchingBottom: ', touchingBottom
 
       touchingBorder = touchingLeft or touchingRight or touchingTop or touchingBottom
       if touchingBorder
         console.log 'BBB touching border!!!'
+        console.log 'BBB loadWindowStruct', loadWindowStruct
         @informVisualWindowLimitsToModel()
 
 

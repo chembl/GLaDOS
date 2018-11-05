@@ -186,6 +186,7 @@ glados.useNameSpace 'glados.models.Heatmap',
 
       console.log 'AAA loadingFrontierCandidate: ', loadingFrontierCandidate
       @chopLoadCandidate(axisPropName, loadingFrontierCandidateBools, visualWindowLength)
+      @updateAbsoluteFrontierLimits()
       toLoadFrontiers = loadWindowStruct[axisPropName].to_load_frontiers
       # if there is only 1 to load frontier there can be no gaps
       if toLoadFrontiers.length > 1
@@ -241,12 +242,10 @@ glados.useNameSpace 'glados.models.Heatmap',
 
         i += 1
 
-    # if the gaps are too big we can not include them, but for now this should work.
-    removeToLoadGaps: ->
+    updateAbsoluteFrontierLimits: ->
 
       loadWindowStruct = @get('load_window_struct')
 
-      #First get absolute start and end for all frontiers, errors are just not taken to account here.
       for axisPropName in _.values(glados.models.Heatmap.AXES_PROPERTY_NAMES)
 
         toLoadFrontiers = loadWindowStruct[axisPropName].to_load_frontiers
@@ -274,6 +273,19 @@ glados.useNameSpace 'glados.models.Heatmap',
 
         loadWindowStruct[axisPropName].min_start = minStart
         loadWindowStruct[axisPropName].max_end = maxEnd
+
+
+    # if the gaps are too big we can not include them, but for now this should work.
+    removeToLoadGaps: ->
+
+      @updateAbsoluteFrontierLimits()
+      loadWindowStruct = @get('load_window_struct')
+
+      for axisPropName in _.values(glados.models.Heatmap.AXES_PROPERTY_NAMES)
+
+        minStart = loadWindowStruct[axisPropName].min_start
+        maxEnd = loadWindowStruct[axisPropName].max_end
+
         # Now I create a load candidate from minStart to minEnd
         loadingFrontierCandidateBools = {}
         for i in [minStart..maxEnd]
@@ -310,7 +322,7 @@ glados.useNameSpace 'glados.models.Heatmap',
 
       loadingFrontiers.push(loadingWindow)
 
-      console.log 'loadAxisFrontier: ', axisProp, start, end
+      console.log 'BBB loadAxisFrontier: ', axisProp, start, end
       matrix = @get('matrix')
       if axisProp == glados.models.Heatmap.AXES_PROPERTY_NAMES.X_AXIS
         items = matrix.columns
@@ -323,6 +335,8 @@ glados.useNameSpace 'glados.models.Heatmap',
       if axisProp == glados.models.Heatmap.AXES_PROPERTY_NAMES.X_AXIS
 
         @trigger(glados.models.Heatmap.EVENTS.VISUAL_WINDOW.COLS_HEADERS_UPDATED)
+
+      console.log 'BBB matrix: ', matrix
 
 
 
@@ -830,7 +844,7 @@ glados.models.Heatmap.AXES_PROPERTY_NAMES =
   Y_AXIS: 'y_axis'
   X_AXIS: 'x_axis'
 glados.models.Heatmap.LOAD_WINDOW =
-  W_FACTOR: 2 # how big is the load window in comparison to the visual window. For example, if visual window is 2x2,
+  W_FACTOR: 3 # how big is the load window in comparison to the visual window. For example, if visual window is 2x2,
   # with w_factor equal to 2, the load window will be 4x4.
   MIN_LOAD_SIZE_WINDOW_FACTOR: 1 # as the visual window moves, the load candidates are not always of the full size, this
   # tells which is the smallest size of chunks to load. for example, if the visual window is 2X2, and this factor is 1
