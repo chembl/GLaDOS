@@ -100,6 +100,7 @@ describe "Heatmap", ->
         it 'generates the correct frontier with no window movement, just window created at different points', ->
 
           heatmap.set('min_window_load_size_factor', 0)
+          currentWFactor = heatmap.get('w_factor')
 
           axis = glados.models.Heatmap.AXES_NAMES.X_AXIS
           axisLength = heatmap.x_axis_list.getTotalRecords()
@@ -117,12 +118,12 @@ describe "Heatmap", ->
               loadWindowStruct = heatmap.get('load_window_struct')
 
               toLoadFrontierGot = loadWindowStruct.x_axis.to_load_frontiers[0]
-              startMustBe = visualWindowStart - Math.ceil(((visualWindowLength * glados.models.Heatmap.LOAD_WINDOW.W_FACTOR)\
+              startMustBe = visualWindowStart - Math.ceil(((visualWindowLength * currentWFactor)\
                 - visualWindowLength)/2)
               startMustBe = 1 if startMustBe < 1
               startMustBe = axisLength if startMustBe > axisLength
 
-              endMustBe = visualWindowEnd + Math.floor(((visualWindowLength * glados.models.Heatmap.LOAD_WINDOW.W_FACTOR)\
+              endMustBe = visualWindowEnd + Math.floor(((visualWindowLength * currentWFactor)\
                 - visualWindowLength)/2)
               endMustBe = 1 if endMustBe < 1
               endMustBe = axisLength if endMustBe > axisLength
