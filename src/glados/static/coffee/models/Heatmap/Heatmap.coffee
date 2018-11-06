@@ -349,7 +349,7 @@ glados.useNameSpace 'glados.models.Heatmap',
       if axisProp == glados.models.Heatmap.AXES_PROPERTY_NAMES.Y_AXIS
 
         @trigger(glados.models.Heatmap.EVENTS.VISUAL_WINDOW.ROWS_HEADERS_UPDATED)
-#        @trigger(glados.models.Heatmap.EVENTS.VISUAL_WINDOW.COLS_FOOTERS_UPDATED)
+        @trigger(glados.models.Heatmap.EVENTS.VISUAL_WINDOW.ROWS_FOOTERS_UPDATED)
 
     fetch: (options) ->
 
@@ -867,4 +867,5 @@ glados.models.Heatmap.EVENTS =
     COLS_HEADERS_UPDATED: 'COLS_HEADERS_UPDATED'
     COLS_FOOTERS_UPDATED: 'COLS_FOOTERS_UPDATED'
     ROWS_HEADERS_UPDATED: 'ROWS_HEADERS_UPDATED'
+    ROWS_FOOTERS_UPDATED: 'ROWS_FOOTERS_UPDATED'
 glados.models.Heatmap.MAX_RELATED_IDS_LISTS = 79

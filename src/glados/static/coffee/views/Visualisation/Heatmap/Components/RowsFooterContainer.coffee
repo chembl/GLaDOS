@@ -2,6 +2,15 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
 
   RowsFooterContainer:
 
+    initRowsFooterEvents: ->
+
+      thisView = @
+      @model.on(glados.models.Heatmap.EVENTS.VISUAL_WINDOW.ROWS_FOOTERS_UPDATED, ->
+
+        if thisView.rowsFooterG?
+          thisView.updateRowsFootersForWindow(thisView.rowsFooterG, stateChanged=true)
+
+      )
     # ------------------------------------------------------------------------------------------------------------------
     # defining positioning and scaling functions
     # ------------------------------------------------------------------------------------------------------------------
@@ -60,14 +69,14 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
           .attr('style', 'font-size:' + (thisView.BASE_LABELS_SIZE * zoomScale ) + 'px;')
 
       @applyZoomAndTranslation(rowsFooterG)
+      @initRowsFooterEvents()
 
       return rowsFooterG
-
 
     # ------------------------------------------------------------------------------------------------------------------
     # update according to window
     # ------------------------------------------------------------------------------------------------------------------
-    updateRowsFootersForWindow: (rowsFooterG) ->
+    updateRowsFootersForWindow: (rowsFooterG, stateChanged=true) ->
 
       thisView = @
       rowsInWindow = @ROWS_IN_WINDOW
@@ -83,13 +92,18 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
       rowFootersEnter = rowFooters.enter()
         .append('g').attr('class', 'vis-row-footer')
 
-      rowFootersEnter.append('rect')
+      if stateChanged
+        rowFootersToUpdate = rowFooters
+      else
+        rowFootersToUpdate = rowFootersEnter
+
+      rowFootersToUpdate.append('rect')
         .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
         .style('stroke-width', @GRID_STROKE_WIDTH)
         .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
         .classed('footers-background-rect', true)
 
-      rowFootersEnter.append('text')
+      rowFootersToUpdate.append('text')
         .classed('footers-text', true)
         .attr('text-anchor', 'end')
         .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
