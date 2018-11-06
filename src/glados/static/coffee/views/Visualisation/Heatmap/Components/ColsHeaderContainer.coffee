@@ -93,16 +93,16 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
         .classed('vis-column', true)
 
       if stateChanged
-        headersToUpdate = colsHeaders
+        colsHeadersToUpdate = colsHeaders
       else
-        headersToUpdate = colsHeadersEnter
+        colsHeadersToUpdate = colsHeadersEnter
 
-      headersToUpdate.append('rect')
+      colsHeadersToUpdate.append('rect')
         .style('fill', 'none')
         .style('fill-opacity', 0.5)
         .classed('headers-background-rect', true)
 
-      headersToUpdate.append('line')
+      colsHeadersToUpdate.append('line')
         .style('stroke-width', @GRID_STROKE_WIDTH)
         .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
         .classed('headers-divisory-line', true)
@@ -112,7 +112,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
 #      else
 #        setUpColTooltip = @generateTooltipFunction('Compound', @, isCol=true)
 
-      headersToUpdate.append('text')
+      colsHeadersToUpdate.append('text')
         .classed('headers-text', true)
         .attr('transform', 'rotate(-90)')
         .attr('text-decoration', 'underline')
@@ -123,4 +123,4 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
         .attr('id', (d) -> thisView.COL_HEADER_TEXT_BASE_ID + d.id)
 #        .on('click', thisView.handleColHeaderClick)
 
-      return headersToUpdate
+      return colsHeadersToUpdate

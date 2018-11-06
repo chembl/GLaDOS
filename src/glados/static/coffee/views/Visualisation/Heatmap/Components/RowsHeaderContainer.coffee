@@ -2,6 +2,15 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
 
   RowsHeaderContainer:
 
+    initRowHeadersEvents: ->
+
+      thisView = @
+      @model.on(glados.models.Heatmap.EVENTS.VISUAL_WINDOW.ROWS_HEADERS_UPDATED, ->
+
+        if thisView.rowsHeaderG?
+          thisView.updateRowsHeadersForWindow(thisView.rowsHeaderG, stateChanged=true)
+
+      )
     # ------------------------------------------------------------------------------------------------------------------
     # defining positioning and scaling functions for the rows headers
     # ------------------------------------------------------------------------------------------------------------------
@@ -46,13 +55,14 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
 
       @applyZoomAndTranslation(rowsHeaderG)
       @setAllHeadersEllipsis(rowHeadersEnter, isCol=false)
+      @initRowHeadersEvents()
 
       return rowsHeaderG
 
     # ------------------------------------------------------------------------------------------------------------------
     # update rows headers according to window
     # ------------------------------------------------------------------------------------------------------------------
-    updateRowsHeadersForWindow: (rowsHeaderG) ->
+    updateRowsHeadersForWindow: (rowsHeaderG, stateChanged=false) ->
 
       console.log 'updateRowsHeadersForWindow'
       thisView = @
@@ -68,7 +78,12 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
       rowHeadersEnter = rowHeaders.enter()
         .append('g').attr('class', 'vis-row')
 
-      rowHeadersEnter.append('rect')
+      if stateChanged
+        rowHeadersToUpdate = rowHeaders
+      else
+        rowHeadersToUpdate = rowHeadersEnter
+
+      rowHeadersToUpdate.append('rect')
         .style('fill', glados.Settings.VISUALISATION_GRID_PANELS)
         .style('stroke-width', @GRID_STROKE_WIDTH)
         .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
@@ -79,7 +94,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
 #      else
 #        setUpRowTooltip = @generateTooltipFunction('Target', @, isCol=false)
 
-      rowHeadersEnter.append('text')
+      rowHeadersToUpdate.append('text')
         .classed('headers-text', true)
         .each((d)-> thisView.fillHeaderText(d3.select(@), isCol=false))
         .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
@@ -87,4 +102,4 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
         .attr('id', (d) -> thisView.ROW_HEADER_TEXT_BASE_ID + d.id)
 #        .on('click', thisView.handleRowHeaderClick)
 
-      return rowHeadersEnter
+      return rowHeadersToUpdate
