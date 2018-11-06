@@ -2,6 +2,16 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
 
   ColsFooter:
 
+    initColsFootersEvents: ->
+
+      thisView = @
+      @model.on(glados.models.Heatmap.EVENTS.VISUAL_WINDOW.COLS_FOOTERS_UPDATED, ->
+
+        if thisView.colsFooterG?
+          thisView.updateColsFootersForWindow(thisView.colsFooterG, stateChanged=true)
+
+      )
+
     # ------------------------------------------------------------------------------------------------------------------
     # defining positioning and scaling functions
     # ------------------------------------------------------------------------------------------------------------------
@@ -66,13 +76,14 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
 
       @applyZoomAndTranslation(colsFooterG)
       colsFooterG.assignTexts()
+      @initColsFootersEvents()
 
       return colsFooterG
 
     # ------------------------------------------------------------------------------------------------------------------
     # update according to window
     # ------------------------------------------------------------------------------------------------------------------
-    updateColsFootersForWindow: (colsFooterG) ->
+    updateColsFootersForWindow: (colsFooterG, stateChanged=false) ->
 
       thisView = @
       colsInWindow = @COLS_IN_WINDOW
@@ -90,16 +101,21 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
         .append("g")
         .classed('vis-column-footer', true)
 
-      colsFootersEnter.append('rect')
+      if stateChanged
+        colsToUpdate = colsFooters
+      else
+        colsToUpdate = colsFootersEnter
+
+      colsToUpdate.append('rect')
         .style('fill', 'none')
         .classed('footers-background-rect', true)
 
-      colsFootersEnter.append('line')
+      colsToUpdate.append('line')
         .style('stroke-width', @GRID_STROKE_WIDTH)
         .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
         .classed('footers-divisory-line', true)
 
-      colsFootersEnter.append('text')
+      colsToUpdate.append('text')
         .classed('footers-text', true)
         .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
         .attr('transform', 'rotate(90)')

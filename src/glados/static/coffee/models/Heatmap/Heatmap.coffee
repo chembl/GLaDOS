@@ -344,6 +344,7 @@ glados.useNameSpace 'glados.models.Heatmap',
       if axisProp == glados.models.Heatmap.AXES_PROPERTY_NAMES.X_AXIS
 
         @trigger(glados.models.Heatmap.EVENTS.VISUAL_WINDOW.COLS_HEADERS_UPDATED)
+        @trigger(glados.models.Heatmap.EVENTS.VISUAL_WINDOW.COLS_FOOTERS_UPDATED)
 
       console.log 'BBB matrix: ', matrix
 
@@ -863,4 +864,5 @@ glados.models.Heatmap.LOAD_WINDOW =
 glados.models.Heatmap.EVENTS =
   VISUAL_WINDOW:
     COLS_HEADERS_UPDATED: 'COLS_HEADERS_UPDATED'
+    COLS_FOOTERS_UPDATED: 'COLS_FOOTERS_UPDATED'
 glados.models.Heatmap.MAX_RELATED_IDS_LISTS = 79
