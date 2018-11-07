@@ -127,6 +127,6 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
 #        .on('mouseover', setUpColTooltip)
         .each((d)-> thisView.fillHeaderText(d3.select(@)))
         .attr('id', (d) -> thisView.COL_HEADER_TEXT_BASE_ID + d.id)
-#        .on('click', thisView.handleColHeaderClick)
+        .on('click', thisView.handleColHeaderClick)
 
       return colsHeadersToUpdate

@@ -9,6 +9,7 @@ glados.useNameSpace 'glados.configs.ReportCards.Visualisation.Heatmaps',
         generator_list: @generatorList
         generator_axis: glados.models.Heatmap.AXES_NAMES.Y_AXIS
         generate_from_downloaded_items: true
+        col_header_Link_generator: (colItem) -> Target.get_report_card_url(colItem.id)
         opposite_axis_generator_function: (itemsIDS) ->
 
           filteredTermsQueries = []
