@@ -355,12 +355,37 @@ glados.useNameSpace 'glados.models.Heatmap',
         @trigger(glados.models.Heatmap.EVENTS.VISUAL_WINDOW.ROWS_FOOTERS_UPDATED)
 
       if axisProp == glados.models.Heatmap.AXES_PROPERTY_NAMES.X_AXIS
+        thisModel = @
         list.fetchByItemNumber(start, end)
   #      list.resetPageSize(pageSizeForFetch)
   #      list.fetch(options=undefined, testMode=false, customESQuerySize=pageSizeForFetch, customESQueryFrom=start)
         console.log 'CCC list: ', list
+        list.once 'reset', ->
+
+          console.log 'CCC DATA WAS RECEIVED!'
+          thisModel.receiveItems(axisProp, start, end, list.models)
 
 
+    receiveItems: (axisProp, start, end, models) ->
+
+      console.log 'CCC RECEIVING ITEMS ', axisProp, start, end, models
+      matrix = @get('matrix')
+      if axisProp == glados.models.Heatmap.AXES_PROPERTY_NAMES.X_AXIS
+        itemsToUpdate = matrix.columns
+      else if axisProp == glados.models.Heatmap.AXES_PROPERTY_NAMES.Y_AXIS
+        itemsToUpdate = matrix.rows
+
+      console.log 'CCC matrix: ', matrix
+      for i in [start-1..end-1]
+        itemToUpdate = itemsToUpdate[i]
+        newAttributes = models[i].attributes
+        $.extend(itemToUpdate, newAttributes)
+        itemToUpdate.load_state = glados.models.Heatmap.ITEM_LOAD_STATES.LOADED
+
+      if axisProp == glados.models.Heatmap.AXES_PROPERTY_NAMES.X_AXIS
+
+        console.log 'CCC TRIGGERING UPDATE'
+        @trigger(glados.models.Heatmap.EVENTS.VISUAL_WINDOW.COLS_HEADERS_UPDATED)
 
 
 

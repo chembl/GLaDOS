@@ -764,6 +764,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @reset(objectsInCache)
       else
         console.log 'CCC NEED TO FETCH'
+        esQuerySize = endItem - startItem + 1
+        console.log 'CCC esQuerySize: ', esQuerySize
+        console.log 'CCC startItem: ', startItem
+        @resetPageSize(esQuerySize)
+        @fetch(options=undefined, testMode=false, customESQuerySize=esQuerySize, customESQueryFrom=startItem)
 
 
 
