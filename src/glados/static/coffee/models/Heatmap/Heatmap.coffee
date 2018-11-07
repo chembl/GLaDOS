@@ -372,8 +372,10 @@ glados.useNameSpace 'glados.models.Heatmap',
       matrix = @get('matrix')
       if axisProp == glados.models.Heatmap.AXES_PROPERTY_NAMES.X_AXIS
         itemsToUpdate = matrix.columns
+        indexToUpdate = matrix.columns_index
       else if axisProp == glados.models.Heatmap.AXES_PROPERTY_NAMES.Y_AXIS
         itemsToUpdate = matrix.rows
+        indexToUpdate = matrix.rows_index
 
       console.log 'CCC matrix: ', matrix
       for i in [start-1..end-1]
@@ -382,12 +384,25 @@ glados.useNameSpace 'glados.models.Heatmap',
         $.extend(itemToUpdate, newAttributes)
         itemToUpdate.load_state = glados.models.Heatmap.ITEM_LOAD_STATES.LOADED
 
+        indexToUpdate[itemToUpdate.id] = itemToUpdate
+
       if axisProp == glados.models.Heatmap.AXES_PROPERTY_NAMES.X_AXIS
 
         console.log 'CCC TRIGGERING UPDATE'
         @trigger(glados.models.Heatmap.EVENTS.VISUAL_WINDOW.COLS_HEADERS_UPDATED)
 
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # Headers/footers link
+    # ------------------------------------------------------------------------------------------------------------------
+    getColHeaderLink: (colID) ->
+
+      colsIndex = @get('matrix').columns_index
+      if colsIndex[colID].header_url?
+        return colsIndex[colID].header_url
+
+      url = 'faqs'
+      return url
 
     # ------------------------------------------------------------------------------------------------------------------
     # OLD CODE

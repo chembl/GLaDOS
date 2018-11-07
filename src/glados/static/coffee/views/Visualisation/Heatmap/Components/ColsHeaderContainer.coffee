@@ -76,7 +76,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
     # ------------------------------------------------------------------------------------------------------------------
     updateColsHeadersForWindow: (colsHeaderG, stateChanged=false) ->
 
-      console.log 'BBB updateColsHeadersForWindow:'
+      console.log 'CCC updateColsHeadersForWindow:'
       thisView = @
       colsInWindow = @COLS_IN_WINDOW
 
@@ -87,7 +87,8 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
       colsHeaders = colsHeaderG.selectAll(".vis-column")
         .data(colsInWindow, (d) -> d.id)
 
-      colsHeaders.exit().remove()
+      colsHeadersExit = colsHeaders.exit()
+      colsHeadersExit.remove()
       colsHeadersEnter = colsHeaders.enter()
         .append("g")
         .classed('vis-column', true)
