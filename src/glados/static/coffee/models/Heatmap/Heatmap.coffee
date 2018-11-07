@@ -379,8 +379,9 @@ glados.useNameSpace 'glados.models.Heatmap',
 
       console.log 'CCC matrix: ', matrix
       for i in [start-1..end-1]
+        positionInModels = i - start + 1
         itemToUpdate = itemsToUpdate[i]
-        newAttributes = models[i].attributes
+        newAttributes = models[positionInModels].attributes
         $.extend(itemToUpdate, newAttributes)
         itemToUpdate.load_state = glados.models.Heatmap.ITEM_LOAD_STATES.LOADED
 

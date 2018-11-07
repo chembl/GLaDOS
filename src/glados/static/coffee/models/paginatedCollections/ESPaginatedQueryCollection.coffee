@@ -164,6 +164,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # Parses the Elastic Search Response and resets the pagination metadata
     parse: (data) ->
 
+      console.log 'CCC parse: ', data
       lastPageResultsIds = null
       lastPageResultsIds = @getMeta('last_page_results_ids')
       if not lastPageResultsIds?
@@ -241,7 +242,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       requestData = @getRequestData(customPage=undefined, customPageSize=undefined,
         requestFacets=false, facetsFirstCall=true, customESQuerySize, customESQueryFrom)
       console.log 'CCC requestData: ', requestData
-      esJSONRequest = JSON.stringify(@getRequestData())
+      esJSONRequest = JSON.stringify(requestData)
       # Uses POST to prevent result caching
       fetchESOptions =
         data: esJSONRequest
@@ -346,7 +347,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       # Base Elasticsearch query
       esQuery = {
         size: size,
-        from: from
+        from: from,
         _source:
           includes: [ '*', '_metadata.*']
           excludes: [ '_metadata.related_targets.chembl_ids.*', '_metadata.related_compounds.chembl_ids.*']
@@ -756,6 +757,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       for item in objectsInCache
         if not item?
           cacheCanBeUsed = false
+          break
 
       console.log 'CCC objectsInCache: ', objectsInCache
       console.log 'CCC cacheCanBeUsed: ', cacheCanBeUsed
