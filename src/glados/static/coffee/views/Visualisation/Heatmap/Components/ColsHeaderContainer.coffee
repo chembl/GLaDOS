@@ -9,6 +9,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
 
         if thisView.colsHeaderG?
           thisView.updateColsHeadersForWindow(thisView.colsHeaderG, stateChanged=true)
+          thisView.handleZoom(ignoreActivation=true)
 
       )
 
@@ -76,13 +77,17 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
     # ------------------------------------------------------------------------------------------------------------------
     updateColsHeadersForWindow: (colsHeaderG, stateChanged=false) ->
 
-      console.log 'CCC updateColsHeadersForWindow:'
       thisView = @
       colsInWindow = @COLS_IN_WINDOW
 
       for colObj in colsInWindow
         if colObj.load_state == glados.models.Heatmap.ITEM_LOAD_STATES.LOADED
           thisView.model.getColHeaderLink(colObj.id)
+
+      if stateChanged
+        colsHeaders = colsHeaderG.selectAll(".vis-column")
+        .data([])
+        colsHeaders.exit().remove()
 
       colsHeaders = colsHeaderG.selectAll(".vis-column")
         .data(colsInWindow, (d) -> d.id)
