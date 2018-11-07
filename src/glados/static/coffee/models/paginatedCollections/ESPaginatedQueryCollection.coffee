@@ -217,10 +217,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       if @searchQueryIsSet()
         @setSearchState(glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_IS_READY)
 
+      console.log 'PARSING: '
+      console.log 'data: ', data
       return jsonResultsList
 
-    # Prepares an Elastic Search query to search in all the fields of a document in a specific index
-    fetch: (options, testMode=false) ->
+    fetch: (options, testMode=false, customESQuerySize, customESQueryFrom) ->
+      # Prepares an Elastic Search query to search in all the fields of a document in a specific index
+      # use customESQuerySize, customESQueryFrom to set directly the from and size parameters in the ES query
+
       testMode |= @getMeta('test_mode')
       @trigger('before_fetch_elastic')
       @url = @getURL()
@@ -234,7 +238,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       @setItemsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.FETCHING_ITEMS)
       # Creates the Elastic Search Query parameters and serializes them
-      requestData = @getRequestData()
+      requestData = @getRequestData(customPage=undefined, customPageSize=undefined,
+        requestFacets=false, facetsFirstCall=true, customESQuerySize, customESQueryFrom)
+      console.log 'CCC requestData: ', requestData
       esJSONRequest = JSON.stringify(@getRequestData())
       # Uses POST to prevent result caching
       fetchESOptions =
@@ -323,20 +329,24 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # generates an object with the data necessary to do the ES request
     # customPage: set a customPage if you want a page different than the one set as current
     # the same for customPageSize
-    getRequestData: (customPage, customPageSize, requestFacets=false, facetsFirstCall=true) ->
+    getRequestData: (customPage, customPageSize, requestFacets=false, facetsFirstCall=true,
+      customESQuerySize, customESQueryFrom) ->
 
       # If facets are requested the facet filters are excluded from the query
       facetsFiltered = true
       page = if customPage? then customPage else @getMeta('current_page')
       pageSize = if customPageSize? then customPageSize else @getMeta('page_size')
 
+      size = if customESQuerySize? then customESQuerySize else pageSize
+      from = if customESQueryFrom? then customESQueryFrom else ((page - 1) * pageSize)
+
       useCustomQuery = @getMeta('use_custom_query')
       customQueryIsFullQuery = @customQueryIsFullQuery()
 
       # Base Elasticsearch query
       esQuery = {
-        size: pageSize,
-        from: ((page - 1) * pageSize)
+        size: size,
+        from: from
         _source:
           includes: [ '*', '_metadata.*']
           excludes: [ '_metadata.related_targets.chembl_ids.*', '_metadata.related_compounds.chembl_ids.*']
@@ -704,6 +714,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return @models
 
     setPage: (newPageNum, doFetch=true, testMode=false, customPageSize) ->
+
       newPageNum = parseInt(newPageNum)
       if doFetch and 1 <= newPageNum and newPageNum <= @getMeta('total_pages')
         @setMeta('current_page', newPageNum)
@@ -726,11 +737,36 @@ glados.useNameSpace 'glados.models.paginatedCollections',
               @trigger('do-repaint')
               return
 
+        @setMeta('fetching_mode',
+          glados.models.paginatedCollections.ESPaginatedQueryCollection.FETCHING_MODES.BY_PAGES)
         @fetch(options=undefined, testMode)
 
      # tells if the current page is the las page
     currentlyOnLastPage: -> @getMeta('current_page') == @getMeta('total_pages')
-    
+
+    fetchByItemNumber: (startItem, endItem) ->
+
+      console.log 'CCC fetchByItemNumber: ', startItem, endItem
+      @setMeta('fetching_mode',
+        glados.models.paginatedCollections.ESPaginatedQueryCollection.FETCHING_MODES.BY_ITEM_NUMBERS)
+
+      objectsInCache = @getObjectsInCache(startItem, endItem)
+      # if cache is incomplete (some items are undefined) don't use it
+      cacheCanBeUsed = true
+      for item in objectsInCache
+        if not item?
+          cacheCanBeUsed = false
+
+      console.log 'CCC objectsInCache: ', objectsInCache
+      console.log 'CCC cacheCanBeUsed: ', cacheCanBeUsed
+      if cacheCanBeUsed
+        console.log 'CCC using cache'
+        @reset(objectsInCache)
+      else
+        console.log 'CCC NEED TO FETCH'
+
+
+
     # ------------------------------------------------------------------------------------------------------------------
     # Sorting functions
     # ------------------------------------------------------------------------------------------------------------------
@@ -999,3 +1035,7 @@ glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_OPEN_TAG
   glados.Utils.escapeRegExp glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_OPEN_TAG
 glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_CLOSE_TAG_REGEX_ESCAPED = \
   glados.Utils.escapeRegExp glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_CLOSE_TAG
+
+glados.models.paginatedCollections.ESPaginatedQueryCollection.FETCHING_MODES =
+  BY_PAGES: 'BY_PAGES'
+  BY_ITEM_NUMBERS: 'BY_ITEM_NUMBERS'

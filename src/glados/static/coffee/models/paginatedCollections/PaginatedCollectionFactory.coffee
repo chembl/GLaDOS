@@ -98,6 +98,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             settings_path: esIndexSettings.PATH_IN_SETTINGS
             searchESQuery: searchESQuery
             links_to_other_entities: esIndexSettings.LINKS_TO_OTHER_ENTITIES
+            fetching_mode: glados.models.paginatedCollections.ESPaginatedQueryCollection.FETCHING_MODES.BY_PAGES
 
           if @getMeta('enable_similarity_maps') or @getMeta('enable_substructure_highlighting')
             @initReferenceStructureFunctions()
@@ -137,6 +138,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             custom_filter: filter
             data_loaded: false
             enable_collection_caching: collectionSettings.ENABLE_COLLECTION_CACHING
+            fetching_mode: glados.models.paginatedCollections.ESPaginatedQueryCollection.FETCHING_MODES.BY_PAGES
 
           @initialiseUrl()
 

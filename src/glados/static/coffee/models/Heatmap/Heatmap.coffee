@@ -243,7 +243,7 @@ glados.useNameSpace 'glados.models.Heatmap',
           newFrontierSize = newFrontier.end - newFrontier.start + 1
           touchesAxisEnd = (newFrontier.end >= axisLength)
 
-          if (newFrontierSize > minFrontierSize) or ignoreMinToLoadLimit
+          if (newFrontierSize > minFrontierSize) or ignoreMinToLoadLimit or touchesAxisEnd
             console.log 'new frontier: start; ', newFrontier.start, 'end; ', newFrontier.end
             toLoadFrontiers.push newFrontier
           newFrontier = {}
@@ -331,12 +331,15 @@ glados.useNameSpace 'glados.models.Heatmap',
 
       loadingFrontiers.push(loadingWindow)
 
-      console.log 'BBB loadAxisFrontier: ', axisProp, start, end
+      console.log 'CCC ---'
+      console.log 'CCC loadAxisFrontier: ', axisProp, start, end
       matrix = @get('matrix')
       if axisProp == glados.models.Heatmap.AXES_PROPERTY_NAMES.X_AXIS
         items = matrix.columns
+        list = @x_axis_list
       else if axisProp == glados.models.Heatmap.AXES_PROPERTY_NAMES.Y_AXIS
         items = matrix.rows
+        list = @y_axis_list
 
       for item in items[(start-1)..(end-1)]
         item.load_state = glados.models.Heatmap.ITEM_LOAD_STATES.LOADING
@@ -351,6 +354,19 @@ glados.useNameSpace 'glados.models.Heatmap',
         @trigger(glados.models.Heatmap.EVENTS.VISUAL_WINDOW.ROWS_HEADERS_UPDATED)
         @trigger(glados.models.Heatmap.EVENTS.VISUAL_WINDOW.ROWS_FOOTERS_UPDATED)
 
+      if axisProp == glados.models.Heatmap.AXES_PROPERTY_NAMES.X_AXIS
+        list.fetchByItemNumber(start, end)
+  #      list.resetPageSize(pageSizeForFetch)
+  #      list.fetch(options=undefined, testMode=false, customESQuerySize=pageSizeForFetch, customESQueryFrom=start)
+        console.log 'CCC list: ', list
+
+
+
+
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # OLD CODE
+    # ------------------------------------------------------------------------------------------------------------------
     fetch: (options) ->
 
       cleanMatrixConfig =

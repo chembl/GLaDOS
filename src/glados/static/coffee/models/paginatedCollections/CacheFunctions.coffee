@@ -70,4 +70,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return answer
 
-    addModelsInCurrentPage: -> @addObjectsToCacheFromPage(@models, @getMeta('current_page'))
+    addModelsInCurrentPage: ->
+
+      # when fetching per item number the solution is not yet there.
+      if @getMeta('fetching_mode') ==\
+      glados.models.paginatedCollections.ESPaginatedQueryCollection.FETCHING_MODES.BY_PAGES
+
+        @addObjectsToCacheFromPage(@models, @getMeta('current_page'))
