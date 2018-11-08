@@ -18,6 +18,7 @@ glados.useNameSpace 'glados.models.Heatmap',
       wFactor ?= glados.models.Heatmap.LOAD_WINDOW.W_FACTOR
       @set('min_window_load_size_factor', minWindowLoadSizeFactor)
       @set('w_factor', wFactor)
+      @ignore_render = 0
 
       @generateDependentLists() unless testMode
 
@@ -351,7 +352,10 @@ glados.useNameSpace 'glados.models.Heatmap',
       list.once 'reset', ->
         console.log 'CCC DATA WAS RECEIVED! ', axisProp, start, end
         thisModel.receiveItems(axisProp, start, end, list.models)
+        list.disableFetchingForMatrixMode()
 
+      list.enableFetchingForMatrixMode()
+      # this really needs to be done in a better way by defining better events for the collections.
       list.fetchByItemNumber(start, end)
 
     receiveItems: (axisProp, start, end, models) ->

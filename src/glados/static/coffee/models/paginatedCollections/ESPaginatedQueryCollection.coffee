@@ -252,7 +252,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       # Use options if specified by caller
       if not _.isUndefined(options) and _.isObject(options)
         _.extend(fetchESOptions, options)
-      @loadFacetGroups() unless testMode or @isStreaming()
+
+      console.log 'CCC is fetching for matrix: ', @isFetchingForMatrix()
+      @loadFacetGroups() unless testMode or @isStreaming() or @isFetchingForMatrix()
 
       if testMode or @getMeta('test_mode')
         return requestData
@@ -619,6 +621,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     shouldIgnoreContentChangeRequestWhileStreaming: ->
       return @isStreaming() and not @getMeta('page_changed')
+
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Fetching for matrix Mode
+    # ------------------------------------------------------------------------------------------------------------------
+    enableFetchingForMatrixMode: -> @setMeta('fetching_for_matrix_mode', true)
+    disableFetchingForMatrixMode: -> delete @meta['fetching_for_matrix_mode']
+    isFetchingForMatrix: -> @getMeta('fetching_for_matrix_mode') == true
 
     # ------------------------------------------------------------------------------------------------------------------
     # Metadata Handlers for query and pagination

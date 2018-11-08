@@ -111,6 +111,9 @@ glados.useNameSpace 'glados.views.Browsers',
 
     renderViewState: ->
 
+      if @collection.isFetchingForMatrix()
+        return
+
       if not @collection.isReady() and not @collection.isStreaming()
         @showPreloader()
         return
