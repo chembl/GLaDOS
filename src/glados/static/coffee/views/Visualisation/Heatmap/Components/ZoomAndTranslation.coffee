@@ -156,7 +156,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
       console.log 'INITIAL_ZOOM:', @INITIAL_ZOOM
       @zoom.scale(@INITIAL_ZOOM)
       @zoom.translate([0, 0])
-      @handleZoom(ingoreActivation=true)
+      @handleZoom(ingoreActivation=true, forceSectionsUpdate=true, stateChanged=true)
 
 
 
