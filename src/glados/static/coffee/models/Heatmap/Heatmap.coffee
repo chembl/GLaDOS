@@ -344,15 +344,7 @@ glados.useNameSpace 'glados.models.Heatmap',
       for item in items[(start-1)..(end-1)]
         item.load_state = glados.models.Heatmap.ITEM_LOAD_STATES.LOADING
 
-      if axisProp == glados.models.Heatmap.AXES_PROPERTY_NAMES.X_AXIS
-
-        @trigger(glados.models.Heatmap.EVENTS.VISUAL_WINDOW.COLS_HEADERS_UPDATED)
-        @trigger(glados.models.Heatmap.EVENTS.VISUAL_WINDOW.COLS_FOOTERS_UPDATED)
-
-      if axisProp == glados.models.Heatmap.AXES_PROPERTY_NAMES.Y_AXIS
-
-        @trigger(glados.models.Heatmap.EVENTS.VISUAL_WINDOW.ROWS_HEADERS_UPDATED)
-        @trigger(glados.models.Heatmap.EVENTS.VISUAL_WINDOW.ROWS_FOOTERS_UPDATED)
+      @trigger(glados.models.Heatmap.EVENTS.VISUAL_WINDOW.ITEMS_STATE_UPDATED)
 
       if axisProp == glados.models.Heatmap.AXES_PROPERTY_NAMES.X_AXIS
         thisModel = @
@@ -387,10 +379,8 @@ glados.useNameSpace 'glados.models.Heatmap',
 
         indexToUpdate[itemToUpdate.id] = itemToUpdate
 
-      if axisProp == glados.models.Heatmap.AXES_PROPERTY_NAMES.X_AXIS
-
-        console.log 'CCC TRIGGERING UPDATE'
-        @trigger(glados.models.Heatmap.EVENTS.VISUAL_WINDOW.COLS_HEADERS_UPDATED)
+      console.log 'CCC TRIGGERING EVENT'
+      @trigger(glados.models.Heatmap.EVENTS.VISUAL_WINDOW.ITEMS_STATE_UPDATED)
 
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -939,4 +929,5 @@ glados.models.Heatmap.EVENTS =
     COLS_FOOTERS_UPDATED: 'COLS_FOOTERS_UPDATED'
     ROWS_HEADERS_UPDATED: 'ROWS_HEADERS_UPDATED'
     ROWS_FOOTERS_UPDATED: 'ROWS_FOOTERS_UPDATED'
+    ITEMS_STATE_UPDATED: 'ITEMS_STATE_UPDATED'
 glados.models.Heatmap.MAX_RELATED_IDS_LISTS = 79

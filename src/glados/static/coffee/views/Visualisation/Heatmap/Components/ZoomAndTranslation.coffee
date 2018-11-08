@@ -97,7 +97,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
 
 #      @cellsContainerG.classed('grabbing', false)
 
-    handleZoom: (ingoreActivation=false, forceSectionsUpdate=false) ->
+    handleZoom: (ingoreActivation=false, forceSectionsUpdate=false, stateChanged=false) ->
 
       if not @ZOOM_ACTIVATED and not ingoreActivation
         return
@@ -109,8 +109,8 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
       @calculateCurrentWindow(@zoomScale, @translateX, @translateY, forceSectionsUpdate)
       if @WINDOW.window_changed or forceSectionsUpdate
         console.log 'WINDOW CHANGED!!!'
-        colsHeadersEnter = @updateColsHeadersForWindow(@colsHeaderG)
-        @updateColsFootersForWindow(@colsFooterG)
+        colsHeadersEnter = @updateColsHeadersForWindow(@colsHeaderG, stateChanged)
+        @updateColsFootersForWindow(@colsFooterG, stateChanged)
         @colsFooterG.assignTexts()
         rowHeadersEnter = @updateRowsHeadersForWindow(@rowsHeaderG)
         @updateRowsFootersForWindow(@rowsFooterG)

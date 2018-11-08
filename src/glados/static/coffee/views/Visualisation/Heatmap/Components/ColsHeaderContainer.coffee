@@ -2,17 +2,6 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
 
   ColsHeaderContainer:
 
-    initColsHeadersEvents: ->
-
-      thisView = @
-      @model.on(glados.models.Heatmap.EVENTS.VISUAL_WINDOW.COLS_HEADERS_UPDATED, ->
-
-        if thisView.colsHeaderG?
-          thisView.updateColsHeadersForWindow(thisView.colsHeaderG, stateChanged=true)
-          thisView.handleZoom(ignoreActivation=true)
-
-      )
-
     # ------------------------------------------------------------------------------------------------------------------
     # defining positioning and scaling functions for the cols headers
     # ------------------------------------------------------------------------------------------------------------------
@@ -68,7 +57,6 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
 
       @applyZoomAndTranslation(colsHeaderG)
       @setAllHeadersEllipsis(colsHeadersEnter, isCol=true)
-      @initColsHeadersEvents()
 
       return colsHeaderG
 

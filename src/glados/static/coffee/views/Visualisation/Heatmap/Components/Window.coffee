@@ -118,6 +118,17 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
       return cellsInWindow
 
     # ------------------------------------------------------------------------------------------------------------------
+    # Events binding
+    # ------------------------------------------------------------------------------------------------------------------
+    initWindowUpdateEvents: ->
+
+      thisView = @
+      @model.on(glados.models.Heatmap.EVENTS.VISUAL_WINDOW.ITEMS_STATE_UPDATED, ->
+        console.log 'CCC REACTING TO EVENT'
+        thisView.handleZoom(ignoreActivation=true, forceSectionsUpdate=true, stateChanged=true)
+      )
+
+    # ------------------------------------------------------------------------------------------------------------------
     # Communication with model
     # ------------------------------------------------------------------------------------------------------------------
     informVisualWindowLimitsToModel: ->

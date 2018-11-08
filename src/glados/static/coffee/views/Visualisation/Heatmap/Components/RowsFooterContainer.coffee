@@ -2,15 +2,6 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
 
   RowsFooterContainer:
 
-    initRowsFooterEvents: ->
-
-      thisView = @
-      @model.on(glados.models.Heatmap.EVENTS.VISUAL_WINDOW.ROWS_FOOTERS_UPDATED, ->
-
-        if thisView.rowsFooterG?
-          thisView.updateRowsFootersForWindow(thisView.rowsFooterG, stateChanged=true)
-
-      )
     # ------------------------------------------------------------------------------------------------------------------
     # defining positioning and scaling functions
     # ------------------------------------------------------------------------------------------------------------------
@@ -69,7 +60,6 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
           .attr('style', 'font-size:' + (thisView.BASE_LABELS_SIZE * zoomScale ) + 'px;')
 
       @applyZoomAndTranslation(rowsFooterG)
-      @initRowsFooterEvents()
 
       return rowsFooterG
 

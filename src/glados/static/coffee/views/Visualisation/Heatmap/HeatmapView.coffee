@@ -316,6 +316,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
       @initSortRowsBtn()
       @initSortColBtn()
       @initSortDirectionBtn()
+      @initWindowUpdateEvents()
 
     #---------------------------------------------------------------------------------------------------------------------
     # Headers/Footers link

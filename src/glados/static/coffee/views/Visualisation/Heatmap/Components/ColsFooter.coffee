@@ -2,16 +2,6 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
 
   ColsFooter:
 
-    initColsFootersEvents: ->
-
-      thisView = @
-      @model.on(glados.models.Heatmap.EVENTS.VISUAL_WINDOW.COLS_FOOTERS_UPDATED, ->
-
-        if thisView.colsFooterG?
-          thisView.updateColsFootersForWindow(thisView.colsFooterG, stateChanged=true)
-
-      )
-
     # ------------------------------------------------------------------------------------------------------------------
     # defining positioning and scaling functions
     # ------------------------------------------------------------------------------------------------------------------
@@ -76,7 +66,6 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
 
       @applyZoomAndTranslation(colsFooterG)
       colsFooterG.assignTexts()
-      @initColsFootersEvents()
 
       return colsFooterG
 
@@ -93,10 +82,17 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
         if colObj.load_state == glados.models.Heatmap.ITEM_LOAD_STATES.LOADED
           thisView.model.getColFooterLink(colObj.id)
 
+      if stateChanged
+        colsFooters = colsFooterG.selectAll(".vis-column-footer")
+        .data([])
+        colsFooters.exit().remove()
+
+
       colsFooters = colsFooterG.selectAll(".vis-column-footer")
         .data(colsInWindow, (d) -> d.id)
 
-      colsFooters.exit().remove()
+      colFootersExit = colsFooters.exit()
+      colFootersExit.remove()
       colsFootersEnter = colsFooters.enter()
         .append("g")
         .classed('vis-column-footer', true)
