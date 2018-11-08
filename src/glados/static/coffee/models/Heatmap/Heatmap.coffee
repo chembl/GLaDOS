@@ -346,17 +346,13 @@ glados.useNameSpace 'glados.models.Heatmap',
 
       @trigger(glados.models.Heatmap.EVENTS.VISUAL_WINDOW.ITEMS_STATE_UPDATED)
 
-      if axisProp == glados.models.Heatmap.AXES_PROPERTY_NAMES.X_AXIS
-        thisModel = @
-        list.fetchByItemNumber(start, end)
-  #      list.resetPageSize(pageSizeForFetch)
-  #      list.fetch(options=undefined, testMode=false, customESQuerySize=pageSizeForFetch, customESQueryFrom=start)
-        console.log 'CCC list: ', list
-        list.once 'reset', ->
+      thisModel = @
+      console.log 'CCC list: ', list
+      list.once 'reset', ->
+        console.log 'CCC DATA WAS RECEIVED! ', axisProp, start, end
+        thisModel.receiveItems(axisProp, start, end, list.models)
 
-          console.log 'CCC DATA WAS RECEIVED!'
-          thisModel.receiveItems(axisProp, start, end, list.models)
-
+      list.fetchByItemNumber(start, end)
 
     receiveItems: (axisProp, start, end, models) ->
 
@@ -379,7 +375,7 @@ glados.useNameSpace 'glados.models.Heatmap',
 
         indexToUpdate[itemToUpdate.id] = itemToUpdate
 
-      console.log 'CCC TRIGGERING EVENT'
+      console.log 'CCC TRIGGERING ITEMS_STATE_UPDATED EVENT ', axisProp
       @trigger(glados.models.Heatmap.EVENTS.VISUAL_WINDOW.ITEMS_STATE_UPDATED)
 
 

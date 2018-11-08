@@ -34,9 +34,10 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
       @config = arguments[0].config
       @parentView = arguments[0].parent_view
 
+      @setInvalidRender()
 #      @model.on 'change:matrix', @render, @
       @model.on 'change:state', @handleMatrixState, @
-      @model.on glados.models.Activity.ActivityAggregationMatrix.TARGET_PREF_NAMES_UPDATED_EVT, @handleTargetPrefNameChange, @
+#      @model.on glados.models.Activity.ActivityAggregationMatrix.TARGET_PREF_NAMES_UPDATED_EVT, @handleTargetPrefNameChange, @
 
       $matrixContainer = $(@el).find('.BCK-CompTargMatrixContainer')
       $matrixContainer.mouseleave(@destroyAllTooltipsIfNecessary)
@@ -60,9 +61,9 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
 
     handleMatrixState: ->
 
-      console.log 'handleMatrixState'
       state = @model.get('state')
 
+      console.log 'CCC handleMatrixState'
       console.log 'state: ', state
       if state == glados.models.Heatmap.STATES.INITIAL_STATE
         @setProgressMessage('Step 1 of 3. Loading generator items...')
@@ -71,8 +72,10 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
       else if state == glados.models.Heatmap.STATES.HEATMAP_TOTAL_SIZE_KNOWN
         @setProgressMessage('Step 3 of 3. Heatmap total size calculated...')
       else if state == glados.models.Heatmap.STATES.READY_TO_RENDER
+        console.log 'CCC READY TO RENDER'
         @render()
         @setProgressMessage()
+        @setValidRender()
 
       return
 
@@ -113,7 +116,15 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
 
     render: ->
 
-      console.log 'RENDER'
+      console.log 'CCC TRY TO RENDER'
+      console.log 'CCC @currentRenderIsValid(): ', @currentRenderIsValid()
+      console.log 'CCC @IS_RESPONSIVE_RENDER: ', @IS_RESPONSIVE_RENDER
+      # do not do unnecessary re renders from other events
+      if @currentRenderIsValid() and not @IS_RESPONSIVE_RENDER
+        console.log 'CCC CAN NOT RENDER'
+        return
+
+      console.log 'CCC CAN RENDER'
       # only bother if my element is visible
       if $(@el).is(":visible")
 
@@ -123,7 +134,9 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
         @paintMatrix()
         @hideRenderingMessage()
 
-
+    setValidRender: -> @valid_render = true
+    setInvalidRender: -> @valid_render = false
+    currentRenderIsValid: -> @valid_render == true
     showRenderingMessage: ->$(@el).find('.BCK-Rendering-preloader').show()
     hideRenderingMessage: ->$(@el).find('.BCK-Rendering-preloader').hide()
 

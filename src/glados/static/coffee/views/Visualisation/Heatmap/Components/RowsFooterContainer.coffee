@@ -75,6 +75,11 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
         if rowObj.load_state == glados.models.Heatmap.ITEM_LOAD_STATES.LOADED
           thisView.model.getRowFooterLink(rowObj.id)
 
+      if stateChanged
+        rowFooters = rowsFooterG.selectAll('.vis-row-footer')
+        .data([])
+        rowFooters.exit().remove()
+
       rowFooters = rowsFooterG.selectAll('.vis-row-footer')
         .data(rowsInWindow, (d) -> d.id)
 

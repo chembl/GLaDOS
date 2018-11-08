@@ -61,6 +61,11 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
         if rowObj.load_state == glados.models.Heatmap.ITEM_LOAD_STATES.LOADED
           thisView.model.getRowHeaderLink(rowObj.id)
 
+      if stateChanged
+        rowHeaders = rowsHeaderG.selectAll('.vis-row')
+        .data([])
+        rowHeaders.exit().remove()
+
       rowHeaders = rowsHeaderG.selectAll('.vis-row')
         .data(rowsInWindow, (d) -> d.id)
 
