@@ -5,7 +5,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
     #-------------------------------------------------------------------------------------------------------------------
     # Rows /Cols Headers tooltips
     #-------------------------------------------------------------------------------------------------------------------
-    generateTooltipFunction: (sourceEntity, matrixView, isCol=true) ->
+    generateTooltipFunction: (matrixView, isCol=true) ->
 
       return (d) ->
 
@@ -45,10 +45,13 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
         $newMiniReportCardContainer.hover ->
           $clickedElem.attr('data-qtip-have-mercy', 'yes')
 
-        if sourceEntity == 'Target'
-          ReportCardApp.initMiniReportCard(Entity=Target, $newMiniReportCardContainer, chemblID)
+        if isCol
+          axisName = glados.models.Heatmap.AXES_NAMES.X_AXIS
         else
-          ReportCardApp.initMiniReportCard(Entity=Compound, $newMiniReportCardContainer, chemblID)
+          axisName = glados.models.Heatmap.AXES_NAMES.Y_AXIS
+
+        Entity = matrixView.model.getAxisEntity(axisName)
+        ReportCardApp.initMiniReportCard(Entity, $newMiniReportCardContainer, chemblID)
 
     destroyAllTooltipsIfNecessary: (event) ->
 

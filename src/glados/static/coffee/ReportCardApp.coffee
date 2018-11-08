@@ -43,7 +43,7 @@ glados.useNameSpace 'glados',
 
       @sectionModels[sectionID] = sectionModel
 
-    # you can provide chembld iD or a model already created
+    # you can provide either a chembld iD (so it will fetch the model) or a model already created
     @initMiniReportCard = (Entity, $containerElem, chemblID, model, customTemplate, additionalTemplateParams={},
     fetchModel=true, customColumns)->
 

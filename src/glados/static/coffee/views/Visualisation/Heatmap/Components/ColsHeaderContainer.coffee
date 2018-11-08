@@ -113,10 +113,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
         .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
         .classed('headers-divisory-line', true)
 
-#      if @config.cols_entity_name == 'Targets'
-#        setUpColTooltip = @generateTooltipFunction('Target', @, isCol=true)
-#      else
-#        setUpColTooltip = @generateTooltipFunction('Compound', @, isCol=true)
+      setUpColTooltip = @generateTooltipFunction(@, isCol=true)
 
       colsHeadersToUpdate.append('text')
         .classed('headers-text', true)
@@ -124,7 +121,7 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
         .attr('text-decoration', 'underline')
         .attr('cursor', 'pointer')
         .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
-#        .on('mouseover', setUpColTooltip)
+        .on('mouseover', setUpColTooltip)
         .each((d)-> thisView.fillHeaderText(d3.select(@)))
         .attr('id', (d) -> thisView.COL_HEADER_TEXT_BASE_ID + d.id)
         .on('click', thisView.handleColHeaderClick)

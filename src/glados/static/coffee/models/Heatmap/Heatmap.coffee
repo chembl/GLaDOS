@@ -410,6 +410,16 @@ glados.useNameSpace 'glados.models.Heatmap',
       return url
 
     # ------------------------------------------------------------------------------------------------------------------
+    # helpers for Tooltips
+    # ------------------------------------------------------------------------------------------------------------------
+    getAxisEntity: (axisName) ->
+
+      if axisName == glados.models.Heatmap.AXES_NAMES.X_AXIS
+        return @x_axis_list.getMeta('model')
+      else if axisName == glados.models.Heatmap.AXES_NAMES.Y_AXIS
+        return @y_axis_list.getMeta('model')
+
+    # ------------------------------------------------------------------------------------------------------------------
     # OLD CODE
     # ------------------------------------------------------------------------------------------------------------------
     fetch: (options) ->
