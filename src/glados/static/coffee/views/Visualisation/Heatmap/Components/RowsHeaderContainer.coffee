@@ -84,17 +84,15 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
         .style('stroke', glados.Settings.VISUALISATION_GRID_DIVIDER_LINES)
         .classed('headers-background-rect', true)
 
-#      if @config.rows_entity_name == 'Compounds'
-#        setUpRowTooltip = @generateTooltipFunction('Compound', @, isCol=false)
-#      else
-#        setUpRowTooltip = @generateTooltipFunction('Target', @, isCol=false)
+
+      setUpRowTooltip = @generateTooltipFunction(@, isCol=false)
 
       rowHeadersToUpdate.append('text')
         .classed('headers-text', true)
         .each((d)-> thisView.fillHeaderText(d3.select(@), isCol=false))
         .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
-#        .on('mouseover', setUpRowTooltip)
+        .on('mouseover', setUpRowTooltip)
         .attr('id', (d) -> thisView.ROW_HEADER_TEXT_BASE_ID + d.id)
-#        .on('click', thisView.handleRowHeaderClick)
+        .on('click', thisView.handleRowHeaderClick)
 
       return rowHeadersToUpdate

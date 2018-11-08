@@ -393,9 +393,21 @@ glados.useNameSpace 'glados.models.Heatmap',
       if colsIndex[colID].header_url?
         return colsIndex[colID].header_url
 
-      headerLinkGeneratorFunc = @config.col_header_Link_generator
-      url = headerLinkGeneratorFunc(colsIndex[colID])
+      linkGeneratorFunc = @config.col_header_Link_generator
+      url = linkGeneratorFunc(colsIndex[colID])
       colsIndex[colID].header_url = url
+
+      return url
+
+    getRowHeaderLink: (rowID) ->
+
+      rowsIndex = @get('matrix').rows_index
+      if rowsIndex[rowID].header_url?
+        return rowsIndex[rowID].header_url
+
+      linkGeneratorFunc = @config.row_header_Link_generator
+      url = linkGeneratorFunc(rowsIndex[rowID])
+      rowsIndex[rowID].header_url = url
 
       return url
 
@@ -598,22 +610,6 @@ glados.useNameSpace 'glados.models.Heatmap',
         newRow = @createNewRowObj(id, mockBucket, latestRowPos)
         rowsList.push(newRow)
         latestRowPos++
-
-    getRowHeaderLink: (rowID) ->
-
-      rowsIndex = @get('matrix').rows_index
-      if rowsIndex[rowID].header_url?
-        return rowsIndex[rowID].header_url
-
-      aggregations = @get('aggregations')
-      if aggregations[0] == 'target_chembl_id'
-        urlGenerator = $.proxy(Target.get_report_card_url, Target)
-      else
-        urlGenerator = $.proxy(Compound.get_report_card_url, Compound)
-
-      url = urlGenerator(rowID)
-      rowsIndex[rowID].header_url = url
-      return url
 
     getRowFooterLink: (rowID) ->
 
