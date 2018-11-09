@@ -25,6 +25,7 @@ glados.useNameSpace 'glados.models.Heatmap',
     # ------------------------------------------------------------------------------------------------------------------
     # Generate base structures
     # ------------------------------------------------------------------------------------------------------------------
+    startLoad: -> @generateDependentLists()
     generateDependentLists: ->
 
       if @config.generator_axis == glados.models.Heatmap.AXES_NAMES.Y_AXIS

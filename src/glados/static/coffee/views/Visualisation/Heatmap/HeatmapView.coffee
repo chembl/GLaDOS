@@ -144,7 +144,6 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
 
     clearVisualisation: ->
 
-      @parentView.hideLinkToAllActivities() unless not @parentView?
       @destroyAllTooltips()
       @clearControls()
       @clearMatrix()

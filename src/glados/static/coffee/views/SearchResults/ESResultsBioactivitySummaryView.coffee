@@ -13,13 +13,11 @@ glados.useNameSpace 'glados.views.SearchResults',
       modelConfig = heatmapModelConfigGenerator.getHeatmapModelConfig()
       viewConfig = glados.views.Visualisation.Heatmap.HeatmapView.getDefaultConfig(@sourceEntityName)
 
-      @ctm = new glados.models.Heatmap.Heatmap
+      @heatmap = new glados.models.Heatmap.Heatmap
         config: modelConfig
 
-      return
-
       @ctmView = new glados.views.Visualisation.Heatmap.HeatmapView
-        model: @ctm
+        model: @heatmap
         el: $(@el).find('.BCK-CompTargetMatrix')
         config: viewConfig
         parent_view: @
@@ -47,8 +45,10 @@ glados.useNameSpace 'glados.views.SearchResults',
       @collection.wakeUp()
       @handleVisualisationStatus()
 
-    sleepView: -> @ctmView.destroyAllTooltips()
-    handleManualResize: -> @ctmView.render()
+    sleepView: ->
+#      @ctmView.destroyAllTooltips()
+    handleManualResize: ->
+#      @ctmView.render()
 
     handleVisualisationStatus: ->
 
@@ -76,7 +76,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         @hideMatrix()
         return
 
-      @setProgressMessage('render heatmap', hideCog=true)
+      @heatmap.startLoad()
 
     showDisplayAnywayButton: -> $(@el).find('.BCK-ShowAnywayButtonContainer').show()
     hideDisplayAnywayButton: -> $(@el).find('.BCK-ShowAnywayButtonContainer').hide()
