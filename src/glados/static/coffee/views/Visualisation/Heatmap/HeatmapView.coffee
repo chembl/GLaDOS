@@ -158,7 +158,6 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
     paintMatrix: ->
 
       matrix = @model.get('matrix')
-      thisView = @
 
       # --------------------------------------
       # Sort properties
@@ -183,9 +182,8 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
       @NUM_COLUMNS = matrix.columns.length
       @NUM_ROWS = matrix.rows.length
 
-      # make sure all intersections are squared
       @SIDE_SIZE = 20
-      @ROWS_HEADER_WIDTH = 100
+      @ROWS_HEADER_WIDTH = 120
       @ROWS_FOOTER_WIDTH = 50
       @COLS_HEADER_HEIGHT = 150
       @COLS_FOOTER_HEIGHT = 50
