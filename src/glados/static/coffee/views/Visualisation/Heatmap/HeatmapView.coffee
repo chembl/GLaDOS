@@ -329,16 +329,16 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
 #---------------------------------------------------------------------------------------------------------------------
 glados.views.Visualisation.Heatmap.HeatmapView.getDefaultConfig = (sourceEntity='Compounds', generatorList) ->
 
-  if sourceEntity == 'Targets'
-    rowsEntityName = 'Targets'
+  if sourceEntity == Target.prototype.entityName
+    rowsEntityName = Compound.prototype.entityName
     rowsLabelProperty = 'target_pref_name'
     colsEntityName = 'Compounds'
     colsLabelProperty = 'molecule_chembl_id'
 
   else
-    rowsEntityName = 'Compounds'
+    rowsEntityName = Compound.prototype.entityName
     rowsLabelProperty = 'molecule_chembl_id'
-    colsEntityName = 'Targets'
+    colsEntityName = Target.prototype.entityName
     colsLabelProperty = 'target_pref_name'
 
   config = {

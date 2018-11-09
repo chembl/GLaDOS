@@ -18,8 +18,8 @@ glados.useNameSpace 'glados.models.Heatmap',
       wFactor ?= glados.models.Heatmap.LOAD_WINDOW.W_FACTOR
       @set('min_window_load_size_factor', minWindowLoadSizeFactor)
       @set('w_factor', wFactor)
-      @ignore_render = 0
 
+      return
       @generateDependentLists() unless testMode
 
     # ------------------------------------------------------------------------------------------------------------------
