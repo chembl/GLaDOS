@@ -180,7 +180,8 @@ glados.useNameSpace 'glados',
         if !newObj?
           return nullReturnVal
 
-        return @getNestedValue(newObj, nestedComparatorsList.join('.'))
+        return @getNestedValue(newObj, nestedComparatorsList.join('.'), forceAsNumber, customNullValueLabel,
+          returnUndefined)
 
 
     Columns:

@@ -9,9 +9,9 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       @sourceEntity = @collection.getMeta('model').prototype.entityName
 
-      heatmapModelConfigGenerator = new glados.configs.ReportCards.Visualisation.Heatmaps.CompoundsVSTargetsHeatmap(@collection)
-      modelConfig = heatmapModelConfigGenerator.getHeatmapModelConfig()
-      viewConfig = glados.views.Visualisation.Heatmap.HeatmapView.getDefaultConfig(@sourceEntityName)
+      heatmapConfigGenerator = new glados.configs.ReportCards.Visualisation.Heatmaps.CompoundsVSTargetsHeatmap(@collection)
+      modelConfig = heatmapConfigGenerator.getHeatmapModelConfig()
+      viewConfig = heatmapConfigGenerator.getViewConfig()
 
       @heatmap = new glados.models.Heatmap.Heatmap
         config: modelConfig

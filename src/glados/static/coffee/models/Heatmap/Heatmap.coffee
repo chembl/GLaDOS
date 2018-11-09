@@ -412,6 +412,18 @@ glados.useNameSpace 'glados.models.Heatmap',
 
       return url
 
+    getRowFooterLink: (colID) ->
+
+      colsIndex = @get('matrix').columns_index
+      if colsIndex[colID].footer_url?
+        return colsIndex[colID].footer_url
+
+      linkGeneratorFunc = @config.row_footer_Link_generator
+      url = linkGeneratorFunc(colsIndex[colID])
+      colsIndex[colID].footer_url = url
+
+      return url
+
     # ------------------------------------------------------------------------------------------------------------------
     # helpers for Tooltips
     # ------------------------------------------------------------------------------------------------------------------
@@ -644,6 +656,7 @@ glados.useNameSpace 'glados.models.Heatmap',
 #      url = urlGenerator(colID)
 #      colsIndex[colID].header_url = url
 #      return url
+
 
 
     getColFooterLink: (colID) ->

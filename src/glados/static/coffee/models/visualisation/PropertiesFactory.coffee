@@ -491,7 +491,7 @@ glados.useNameSpace 'glados.models.visualisation',
           label: 'PChEMBL Value Max'
           type: Number
         ACTIVITY_COUNT:
-          propName: 'activity_count'
+          propName: '_metadata.related_activities.count'
           label: 'Activity Count'
           type: Number
           coloursRange: [
@@ -500,6 +500,7 @@ glados.useNameSpace 'glados.models.visualisation',
           ]
           colourScaleType: glados.Visualisation.CONTINUOUS
           ticksNumber: 5
+          nullLabel: 0
         HIT_COUNT:
           propName: 'hit_count'
           label: 'Hit Count'

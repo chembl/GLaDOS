@@ -32,7 +32,9 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
             else if d.load_state == glados.models.Heatmap.ITEM_LOAD_STATES.LOADING
               glados.views.Visualisation.Heatmap.Components.Texts.LOADING_TEXT_MICRO
             else
-              glados.Utils.getNestedValue(d, thisView.currentRowSortingProperty.propName)
+              currentRowSortingProperty = thisView.currentRowSortingProperty
+              glados.Utils.getNestedValue(d, currentRowSortingProperty.propName, forceAsNumber=false,
+                customNullValueLabel=currentRowSortingProperty.nullLabel)
         )
 
       rowsFooterG.positionRows = (zoomScale, transitionDuration=0 ) ->
@@ -103,4 +105,4 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap.Components',
         .attr('text-anchor', 'end')
         .style("fill", glados.Settings.VISUALISATION_TEAL_MAX)
         .attr('id', (d) -> thisView.ROW_FOOTER_TEXT_BASE_ID + d.id)
-#        .on('click', thisView.handleRowFooterClick )
+        .on('click', thisView.handleRowFooterClick )
