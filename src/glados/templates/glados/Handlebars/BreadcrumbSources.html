@@ -12,18 +12,11 @@
 
     {{/each}}
 
-    {{#unless hide_share_button}}<a class="BCK-open-share-modal"><i class="fa fa-share-alt"></i></a>{{/unless}}
-</script>
-
-<script id="Handlebars-FilterExplainContent" type="text/x-handlebars-template">
-
-    <div class="card-panel z-depth-0 teal lighten-5">
-        <div class="long-filter-content">
-            <b>Filter:</b><br>
-            <code>{{long_filter}}</code>
-        </div>
-    </div>
-
+    {{#unless hide_share_button}}
+        <a class="BCK-open-share-modal" href="#{{ share_modal_id }}">
+            <i class="fa fa-share-alt"></i>
+        </a>
+    {{/unless}}
 </script>
 
 <script id="Handlebars-share-page-modal" type="text/x-handlebars-template" >

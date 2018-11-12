@@ -7,229 +7,194 @@ glados.useNameSpace 'glados.views.SearchResults',
     # ------------------------------------------------------------------------------------------------------------------
 
     initialize: () ->
-      @qtipId = 'autocomplete_tooltip__'+glados.views.SearchResults.SearchBarAutocompleteView.ID_COUNT
-      glados.views.SearchResults.SearchBarAutocompleteView.ID_COUNT += 1
       @suggestionsTemplate = Handlebars.compile $(@el).find('.Handlebars-search-bar-autocomplete').html()
       @searchModel = SearchModel.getInstance()
       @searchModel.on('change:autocompleteSuggestions', @updateAutocomplete.bind(@))
       @$barElem = null
+      @$autocompleteWrapperDiv = null
       @lastSearch = null
-      @qtipAPI = null
-      @$options = []
-      @$optionsReportCards = []
+      @currentSelection = -1
       @numSuggestions = 0
       @autocompleteSuggestions = []
-      @linkWindowScrollResize()
+      @searchBarView = null
 
     attachSearchBar: (searchBarView)->
       @searchBarView = searchBarView
       @$barElem = $(searchBarView.el).find('.chembl-search-bar')
       @$barElem.bind(
-        'keyup',
-        @getBarKeyupHandler()
+        'keyup',@searchBarView
+        @barKeyupHandler.bind(@)
       )
       @$barElem.bind(
         'keydown',
         @barKeydownHandler.bind(@)
       )
+      @$barElem.bind(
+        'blur',
+        @barBlurHandler.bind(@)
+      )
+      @$barElem.bind(
+        'focus',
+        @barFocusHandler.bind(@)
+      )
+      @$barElem.parent().append('<div class="search-bar-autocomplete-wrapper"/>')
+      @$autocompleteWrapperDiv = @$barElem.parent().find('.search-bar-autocomplete-wrapper')
+      # Override the default on enter of the search bar
+      @searchBarView.expandable_search_bar.onEnter(@barOnEnterCallback.bind(@))
+      @registerRecalculatePositioningEvents()
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Bar Event Handling
+    # ------------------------------------------------------------------------------------------------------------------
+
+    barFocusHandler: (event)->
+      @updateSelected true
+      if @$autocompleteWrapperDiv?
+        if @numSuggestions == 0
+          @$autocompleteWrapperDiv.hide()
+        else
+          @$autocompleteWrapperDiv.show()
+
+    barBlurHandler: (event)->
+      @updateSelected true
+      if @$autocompleteWrapperDiv? and not @$autocompleteWrapperDiv.is(":hover")
+        @$autocompleteWrapperDiv.hide()
 
     barKeydownHandler: (keyEvent)->
-      elementToFocus = null
       # Up key code
       if keyEvent.which == 38
-        if @numSuggestions > 0
-          elementToFocus = @$options[@numSuggestions-1]
+        if @currentSelection == - 1
+          @currentSelection = @autocompleteSuggestions.length - 1
+        else
+          @currentSelection--
+        @updateSelected()
         keyEvent.preventDefault()
       # Down key code
       else if keyEvent.which == 40
-        if @numSuggestions > 0
-          elementToFocus = @$options[0]
-        keyEvent.preventDefault()
-      else
-        elementToFocus = null
-      if elementToFocus
-        elementToFocus.focus()
-        @searchBarView.expandable_search_bar.val elementToFocus.attr("autocomplete-text")
-
-    __barKeyupHandler: (keyEvent)->
-      if @$barElem.val().length >= 3
-        searchText = @$barElem.val().trim()
-        if @lastSearch != searchText
-          @searchModel.requestAutocompleteSuggestions searchText, @
-          @lastSearch = searchText
-      else
-        @searchModel.set 'autocompleteSuggestions',[]
-
-    getBarKeyupHandler: ->
-      handler = (keyEvent)->
-        @__barKeyupHandler(keyEvent)
-      handler = handler.bind(@)
-      return _.debounce(handler, 200)
-
-    getKeydownListenerForSuggestionN: (n, reportCardLink=false)->
-      upElement = null
-      downElement = null
-      rightElement = null
-      leftElement = null
-      if not reportCardLink
-        if n == 0 and @numSuggestions > 0
-          upElement = @$barElem
-        else if n < @numSuggestions
-          upElement = @$options[n-1]
-
-        if n < @numSuggestions-1
-          downElement = @$options[n+1]
-        else if n == @numSuggestions-1
-          downElement = @$barElem
-
-        if @$optionsReportCards[n]
-          rightElement = @$optionsReportCards[n]
-          leftElement = rightElement
-      else
-        leftElement = @$options[n]
-        rightElement = leftElement
-        loopedOverCount = 0
-        curIndex = n
-        while loopedOverCount < 2
-          if curIndex == 0
-            curIndex = @numSuggestions - 1
-            loopedOverCount++
-          else
-            curIndex--
-          if @$optionsReportCards[curIndex]
-            upElement = @$optionsReportCards[curIndex]
-            break
-        loopedOverCount = 0
-        curIndex = n
-        while loopedOverCount < 2
-          if curIndex == @numSuggestions - 1
-            curIndex = 0
-            loopedOverCount++
-          else
-            curIndex++
-          if @$optionsReportCards[curIndex]
-            downElement = @$optionsReportCards[curIndex]
-            break
-
-      return (keyEvent)->
-        elementToFocus = null
-        # Up key code
-        if upElement and keyEvent.which == 38
-          elementToFocus = upElement
-          keyEvent.preventDefault()
-        # Down key code
-        else if downElement and keyEvent.which == 40
-          elementToFocus = downElement
-          keyEvent.preventDefault()
-        # Right key code
-        else if rightElement and keyEvent.which == 39
-          elementToFocus = rightElement
-          keyEvent.preventDefault()
-        # Left key code
-        else if leftElement and keyEvent.which == 37
-          elementToFocus = leftElement
-          keyEvent.preventDefault()
+        if @currentSelection == @autocompleteSuggestions.length - 1
+          @currentSelection = -1
         else
-          elementToFocus = null
-          keyEvent.preventDefault()
-          searchVal = @$barElem.val()
-          @$barElem.focus()
-          @searchBarView.expandable_search_bar.val searchVal
-        if elementToFocus
-          elementToFocus.focus()
-          @searchBarView.expandable_search_bar.val elementToFocus.attr("autocomplete-text")
+          @currentSelection++
+        @updateSelected()
+        keyEvent.preventDefault()
 
-    getClickListenerForSuggestionN: (n)->
-      return (clickEvent)->
-        @$barElem.focus()
-        @searchBarView.expandable_search_bar.val @$options[n].attr("autocomplete-text")
-        @searchBarView.search()
+    barKeyupHandler: (keyEvent)->
+      searchText = @$barElem.val().trim()
+      isUpOrDownOrEnter = keyEvent.which == 38 or keyEvent.which == 40 or keyEvent.which  == 13
+      if not isUpOrDownOrEnter
+        @$autocompleteWrapperDiv.hide()
+      if searchText.length >= 3
+        # only submit the search if the text changes and is not on a selection doing up or down
+        if @lastSearch != searchText and (@currentSelection == -1 or not isUpOrDownOrEnter)
+          @searchModel.requestAutocompleteSuggestions searchText, @
+      else
+        @searchModel.set('autocompleteSuggestions', [])
+      if not isUpOrDownOrEnter
+        @lastSearch = searchText
 
-    linkTooltipOptions: (event, api)->
-      @currentWindowOffset = $(window).scrollTop()
-      #AutoCompleteTooltip
-      $act = $('#qtip-'+@qtipId).find('.search-bar-autocomplete-tooltip')
-      @$options = []
-      @$optionsReportCards = []
-      @$barElem.attr("autocomplete-text", @lastSearch)
-      for n in [0..@numSuggestions]
-        $optionN = $act.find('.autocomplete-option-'+n)
-        @$options.push $optionN
-        $optionNReportCard = $act.find('.autocomplete-option-rc-link-'+n)
-        if $optionNReportCard.length == 0
-          $optionNReportCard = null
-        @$optionsReportCards.push $optionNReportCard
-      # Only bind the events after the arrays are full or there will be reference issues
-      for n in [0..@numSuggestions]
-        @$options[n].bind(
-          'keydown',
-          @getKeydownListenerForSuggestionN(n).bind(@)
-        )
-        @$options[n].bind(
-          'click',
-          @getClickListenerForSuggestionN(n).bind(@)
-        )
-        if @$optionsReportCards[n]
-          @$optionsReportCards[n].bind(
-            'keydown',
-            @getKeydownListenerForSuggestionN(n, true).bind(@)
-          )
+    registerRecalculatePositioningEvents: ()->
+      bindedCall = @recalculatePositioning.bind(@)
+      $(window).scroll bindedCall
+      $(window).resize bindedCall
+      @$barElem.resize bindedCall
 
-    unlinkTooltipOptions: (event, api)->
-      @$options = null
+    # ------------------------------------------------------------------------------------------------------------------
+    # Autocomplete Navigation on Enter or Click
+    # ------------------------------------------------------------------------------------------------------------------
 
-    linkWindowScrollResize: ->
-      thisView = @
-      scrollNResize = ()->
-        hideOnScroll = thisView.currentWindowOffset? and
-          Math.abs(thisView.currentWindowOffset-$(window).scrollTop()) > 100
-        if thisView.hideQtip? and hideOnScroll
-          thisView.hideQtip()
-      $(window).scroll scrollNResize
-      $(window).resize scrollNResize
+    getSuggestion: (suggIndex)->
+      if @autocompleteSuggestions? and suggIndex >= 0 and suggIndex < @autocompleteSuggestions.length
+        return @autocompleteSuggestions[suggIndex]
+      return null
+
+    search: (suggestion=undefined)->
+      searchText = @lastSearch
+      selectedEntity = suggestion?.entityKey
+      if suggestion?
+        if not suggestion.header and not suggestion.multiple_documents
+          window.location.href = suggestion.chembl_id_link.href
+          return
+        else if not suggestion.header
+          searchText = suggestion.text
+      @searchBarView.search(searchText, selectedEntity)
+
+    barOnEnterCallback: ()->
+      suggestion = @getSuggestion(@currentSelection)
+      @$barElem.blur()
+      @$autocompleteWrapperDiv.hide()
+      @search suggestion
+
+    getAutocompleteOptionOnClick: (optionIndex)->
+      onClickCall = ()->
+        suggestion = @getSuggestion(optionIndex)
+        @$barElem.blur()
+        @$autocompleteWrapperDiv.hide()
+        @search suggestion
+      return onClickCall.bind(@)
+
+    assignOnclickCallbacks: ()->
+      if @autocompleteSuggestions?
+        for suggestionI, i in @autocompleteSuggestions
+          clickDiv = @$autocompleteWrapperDiv.find('.ac-option-'+i)
+          clickDiv[0].onclick = @getAutocompleteOptionOnClick(i)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # style helpers
+    # ------------------------------------------------------------------------------------------------------------------
+
+    updateSelected: (reset=false)->
+      if reset
+        @currentSelection = -1
+        @$autocompleteWrapperDiv.scrollTop 0
+      allAtcDivs = @$autocompleteWrapperDiv.find('.autocomplete-option')
+      allAtcDivs.removeClass 'selected'
+      if @currentSelection >= 0 and @currentSelection < @autocompleteSuggestions.length
+        $selectedDiv = $(allAtcDivs[@currentSelection])
+        divH = $selectedDiv.height()
+        $selectedDiv.addClass 'selected'
+        @$autocompleteWrapperDiv.scrollTop @currentSelection*divH
+        if @autocompleteSuggestions[@currentSelection].header
+          @searchBarView.expandable_search_bar.val @lastSearch
+        else
+          @searchBarView.expandable_search_bar.val @autocompleteSuggestions[@currentSelection].text
+      else if not reset
+        @searchBarView.expandable_search_bar.val @lastSearch
+
+    recalculatePositioning: ()->
+      if not _.has(@, '__recalculatePositioning')
+        console.debug('Creating new debounced __recalculatePositioning function')
+        debouncedCall = ()->
+          if @$autocompleteWrapperDiv?
+            barPos = @$barElem.position()
+            barH = @$barElem.height()
+            @$autocompleteWrapperDiv.css
+              top: (barPos.top+barH)+'px'
+              'max-height': (window.innerHeight*3/4)+'px'
+        debouncedCall = _.debounce(debouncedCall.bind(@), 200)
+        @__recalculatePositioning = debouncedCall
+      @__recalculatePositioning()
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Callback from model
+    # ------------------------------------------------------------------------------------------------------------------
 
     updateAutocomplete: ()->
       if not @$barElem? or not @$barElem.is(":visible")
         return
       if @searchModel.autocompleteCaller != @
         return
-      $hoveredElem = @$barElem
-      @autocompleteSuggestions = @searchModel.get('autocompleteSuggestions')
-      @numSuggestions = @autocompleteSuggestions.length
-      if @autocompleteSuggestions.length > 0
-        if not @qtipAPI
-          qtipConfig =
-            id: @qtipId
-            content:
-              text: ''
-            events:
-              show: @linkTooltipOptions.bind(@)
-            hide:
-              event: 'unfocus'
-            position:
-              my: 'top left'
-              at: 'bottom left'
-            show:
-              solo: true
-            style:
-              width: $hoveredElem.parent().parent().parent().width()
-              classes:'simple-qtip qtip-light qtip-shadow'
-          $hoveredElem.qtip qtipConfig
-          @qtipAPI = $hoveredElem.qtip('api')
-          @hideQtip = ->
-            @$barElem.blur()
-            if $('#qtip-'+@qtipId).is(":visible")
-              @qtipAPI.hide()
-          @hideQtip = @hideQtip.bind(@)
-
-        @qtipAPI.enable()
-        $hoveredElem.qtip 'option', 'content.text', $(@suggestionsTemplate({
+      if @$autocompleteWrapperDiv?
+        @updateSelected true
+        @autocompleteSuggestions = @searchModel.get('autocompleteSuggestions')
+        @numSuggestions = @autocompleteSuggestions.length
+        @$autoccompleteDiv = @suggestionsTemplate
           suggestions: @autocompleteSuggestions
           textSearch: @lastSearch
-        }))
-        @qtipAPI.show()
-      else if @qtipAPI?
-        @qtipAPI.hide()
-        @qtipAPI.disable(true)
-
-glados.views.SearchResults.SearchBarAutocompleteView.ID_COUNT = 0
+        @$autocompleteWrapperDiv.html(@$autoccompleteDiv)
+        @assignOnclickCallbacks()
+        @recalculatePositioning()
+        # Additional check to make sure the shown suggestions belong to the currently displayed text
+        if @numSuggestions == 0 or @autocompleteSuggestions[0].autocompleteQuery != @lastSearch
+          @$autocompleteWrapperDiv.hide()
+        else
+          @$autocompleteWrapperDiv.show()

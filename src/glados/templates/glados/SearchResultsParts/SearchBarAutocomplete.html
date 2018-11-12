@@ -1,26 +1,25 @@
 {% verbatim %}
 <div class="autocomplete-hb" style="display: none">
   <script class="Handlebars-search-bar-autocomplete" type="text/x-handlebars-template" xmlns="http://www.w3.org/1999/html">
-    <div class="search-bar-autocomplete-tooltip qtip-content grey lighten-5">
+    <div class="search-bar-autocomplete-content grey lighten-5">
       <ul class="collection no-margin no-padding" >
         {{#each suggestions}}
           <li class="collection-item no-margin no-padding">
-            <div class="row no-margin no-padding">
+            <div class="row no-margin no-padding relative-wrapper">
               {{#if header}}
-                <button class="col s12 autocomplete-option autocomplete-option-{{@index}}" autocomplete-text="{{title}} {{../textSearch}}">
+                <div class="col s12 autocomplete-option ac-option-{{@index}}">
                   Search for <b>"{{../textSearch}}"</b> in all <span class="chip-syn {{color}} darken-2 white-text right-align">{{title}}</span>
-                </button>
+                </div>
               {{else}}
-                <button class="col s{{#if chembl_id_link}}9{{else}}12{{/if}} autocomplete-option autocomplete-option-{{@index}}"
-                    autocomplete-text="{{entityLabel}} {{text}}">
+                <div class="col s12 autocomplete-option ac-option-{{@index}}">
                   {{{highlightedText}}}
-                </button>
+                </div>
                 {{#if chembl_id_link}}
-                  <div class="col s3 right-align">
-                      <a class="chip-syn {{chembl_id_link.color}} darken-2 white-text right-align hoverable autocomplete-option-rc-link autocomplete-option-rc-link-{{@index}}"
-                         href="{{chembl_id_link.href}}" autocomplete-text="{{entityLabel}} {{chembl_id_link.text}}">
-                        {{chembl_id_link.text}}
-                      </a>
+                  <div class="absolute-right">
+                    <a class="chip-syn {{chembl_id_link.color}} darken-2 white-text right-align hoverable autocomplete-option-rc-link"
+                      href="{{chembl_id_link.href}}">
+                      {{chembl_id_link.text}}
+                    </a>
                   </div>
                 {{/if}}
               {{/if}}

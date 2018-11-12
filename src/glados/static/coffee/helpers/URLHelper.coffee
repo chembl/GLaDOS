@@ -24,26 +24,27 @@ glados.useNameSpace 'glados.helpers',
       if newMode == @mode
         return
 
-      @currentState = {}
-      @unbindLists()
+      @resetStateAndBindings()
       @mode = newMode
-      searchModel = SearchModel.getInstance()
-      if @mode == URLHelper.MODES.SEARCH_RESULTS
-        searchModel.on SearchModel.EVENTS.SEARCH_PARAMS_HAVE_CHANGED, @triggerUpdateSearchURL, @
-      else
-        searchModel.off SearchModel.EVENTS.SEARCH_PARAMS_HAVE_CHANGED, @triggerUpdateSearchURL
+      @bindSearchEvents()
 
     triggerUpdateSearchURL: (esEntityKey, searchTerm, currentState) ->
 
       @updateSearchURL(esEntityKey, searchTerm, currentState)
 
+    bindSearchEvents: ->
+
+      searchModel = SearchModel.getInstance()
+      if @mode == URLHelper.MODES.SEARCH_RESULTS
+        searchModel.on SearchModel.EVENTS.SEARCH_PARAMS_HAVE_CHANGED, @triggerUpdateSearchURL, @
+      else
+        searchModel.off SearchModel.EVENTS.SEARCH_PARAMS_HAVE_CHANGED, @triggerUpdateSearchURL
     #-------------------------------------------------------------------------------------------------------------------
     # Search results mode
     #-------------------------------------------------------------------------------------------------------------------
     # current state is always a string, fullStateOBJ is an object.
     updateSearchURL: (esEntityKey, searchTerm, currentState) ->
 
-      console.log 'updateSearchURL'
       if esEntityKey != glados.helpers.URLHelper.VALUE_UNCHANGED and esEntityKey != @esEntityKey
         @esEntityKey = esEntityKey
       if searchTerm != glados.helpers.URLHelper.VALUE_UNCHANGED and searchTerm != @searchTerm
@@ -66,7 +67,7 @@ glados.useNameSpace 'glados.helpers',
       if searchTerm?
         breadcrumbLinks.push(
           {
-            label: searchTerm
+            label: @searchTerm
             link: SearchModel.getInstance().getSearchURL(@esEntityKey, @searchTerm, null)
             truncate: true
           }
@@ -84,6 +85,11 @@ glados.useNameSpace 'glados.helpers',
     #-------------------------------------------------------------------------------------------------------------------
     # Search results mode
     #-------------------------------------------------------------------------------------------------------------------
+    resetStateAndBindings: ->
+
+      @currentState = {}
+      @unbindLists()
+
     unbindLists: ->
 
       for list in @listenedLists
@@ -96,12 +102,12 @@ glados.useNameSpace 'glados.helpers',
       list.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.STATE_OBJECT_CHANGED,
         @triggerUpdateBrowserURL, @
 
-    triggerUpdateBrowserURL: (list) -> @updateBrowserURL(list)
+    triggerUpdateBrowserURL: (list) ->
+
+      console.log 'triggerUpdateBrowserURL ', list
+      @updateBrowserURL(list)
 
     updateBrowserURL: (list) ->
-
-      console.log 'updateBrowserURL'
-      console.log 'list: ', list
 
       if @mode == glados.helpers.URLHelper.MODES.BROWSE_ENTITY
         fullState =
@@ -115,7 +121,6 @@ glados.useNameSpace 'glados.helpers',
 
         @fullStateOBJ.lists_states[list.getMeta('key_name')] = list.getStateJSON()
 
-        console.log '@fullStateOBJ: ', @fullStateOBJ
         stringState = btoa(JSON.stringify(@fullStateOBJ))
         @currentState = stringState
 

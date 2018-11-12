@@ -79,6 +79,14 @@ common_urls = [
       RedirectView.as_view(url='https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions/chembl-interface-questions#browsing-related-entities',
                            permanent=True), name='faqs_browsing_related_entities'),
 
+  url(r'^faqs_see_full_query/$',
+      RedirectView.as_view(url='https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions/chembl-interface-questions#i-am-seeing-a-list-of-compounds-or-targets-assays-etc-how-can-i-see-the-query-used',
+                           permanent=True), name='faqs_see_full_query'),
+
+  url(r'^faqs_edit_query_string/$',
+      RedirectView.as_view(url='https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions/chembl-interface-questions#can-i-edit-the-query-being-used',
+                           permanent=True), name='faqs_edit_query_string'),
+
   url(r'^contact_us/$',
       RedirectView.as_view(url='https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions/general-questions#how-do-i-report-errors-or-make-suggestions-for-the-interface',
                            permanent=True), name='contact_us'),

@@ -17,7 +17,9 @@ glados.useNameSpace 'glados.routers',
       if callback?
         callback.apply(@, args)
 
-    initMainPage: -> glados.apps.Main.MainGladosApp.initMainPage()
+    initMainPage: ->
+      glados.helpers.URLHelper.getInstance().resetStateAndBindings()
+      glados.apps.Main.MainGladosApp.initMainPage()
 
     initSearchResults: (currentTab, searchTerm, currentState) ->
 
@@ -30,12 +32,15 @@ glados.useNameSpace 'glados.routers',
       glados.apps.Main.MainGladosApp.initSearchResults(selectedESEntity, searchTerm, currentState)
 
     initSubstructureSearchResults: (searchTerm) ->
+      glados.helpers.URLHelper.getInstance().resetStateAndBindings()
       glados.apps.Main.MainGladosApp.initSubstructureSearchResults(searchTerm)
 
     initSimilaritySearchResults: (searchTerm, threshold) ->
+      glados.helpers.URLHelper.getInstance().resetStateAndBindings()
       glados.apps.Main.MainGladosApp.initSimilaritySearchResults(searchTerm, threshold)
 
     initFlexmatchSearchResults: (searchTerm) ->
+      glados.helpers.URLHelper.getInstance().resetStateAndBindings()
       glados.apps.Main.MainGladosApp.initFlexmatchSearchResults(searchTerm)
 
     initBrowser: (entityName, query, state) ->

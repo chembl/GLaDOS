@@ -2,7 +2,6 @@ glados.useNameSpace 'glados.views.Breadcrumb',
   BreadcrumbsView: Backbone.View.extend
     initialize: ->
       @model.on 'change', @render, @
-      @hideFilterMenu()
 
     render: ->
 
@@ -13,16 +12,12 @@ glados.useNameSpace 'glados.views.Breadcrumb',
       glados.Utils.fillContentForElement $breadcrumbsContainer,
         breadcrumbs: breadcrumbsList
         hide_share_button: hideShareButton
+        share_modal_id: @shareModalID
 
-      $longFilterContent = $(@el).find('.BCK-filter-explain')
-      longFilter = @model.get('long_filter')
-      glados.Utils.fillContentForElement $longFilterContent,
-        long_filter: longFilter
-
-      @hideFilterMenu()
       @renderShareComponent()
 
     renderShareComponent: ->
+
       hideShareButton = @model.get('hide_share_button')
       askBeforeShortening = @model.get('ask_before_sortening')
 
@@ -35,6 +30,7 @@ glados.useNameSpace 'glados.views.Breadcrumb',
         if not @$sharePageModal?
           @$sharePageModal = ButtonsHelper.generateModalFromTemplate($modalTrigger, 'Handlebars-share-page-modal',
             startingTop=undefined , endingTop=undefined, customID=undefined, templateParams=templateParams)
+          @shareModalID = @$sharePageModal.attr('id')
 
         needsShortening = glados.Utils.URLS.URLNeedsShortening(window.location.href, 100)
         match = window.location.href.match(glados.Settings.SHORTENING_MATCH_REPEXG)
@@ -67,9 +63,6 @@ glados.useNameSpace 'glados.views.Breadcrumb',
               $shorteningInfo.empty()
               thisView.renderURLContainer(newHref)
 
-    events:
-      'click .BCK-open-filter-explain': 'toggleFilterMenu'
-
     renderURLContainer: (link) ->
 
       $inkToShareContainer = @$sharePageModal.find('.BCK-LinkToShare')
@@ -78,10 +71,6 @@ glados.useNameSpace 'glados.views.Breadcrumb',
         value: link
 
       ButtonsHelper.initCroppedContainer($inkToShareContainer, config, cleanup=true)
-
-    toggleFilterMenu: -> $(@el).find('.BCK-filter-explain').slideToggle()
-    openFilterMenu: -> $(@el).find('.BCK-filter-explain').show()
-    hideFilterMenu: -> $(@el).find('.BCK-filter-explain').hide()
 
     shortenURL: ->
 

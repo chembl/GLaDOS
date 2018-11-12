@@ -80,6 +80,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     changePageSize: (event) ->
 
       selector = $(event.currentTarget)
+      # this is very important in order to be able to create a paginated view inside another one
       if not @eventForThisView(selector)
         return
 
@@ -106,6 +107,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       $elem.hide()
 
+    showPaginators: -> $(@el).find('.BCK-paginator-container').show()
     hideFooter: ->
 
       $elem = $(@el).find('.BCK-footer-container')
