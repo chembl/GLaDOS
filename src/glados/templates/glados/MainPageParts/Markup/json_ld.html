@@ -21,19 +21,55 @@
     },
     "schema:version": "{{ markup.latest_release_short }}",
     "schema:license": "Creative Commons Attribution-Share Alike 3.0 Unported License",
-    "schema:distribution": [
-        {% for format in markup.compressed_downloads %}
-            {
+    "schema:distribution": [{% for format in markup.compressed_downloads %}{
                 "@context": "http://schema.org/",
                 "@type": "DataDownload",
                 "name": "{{ markup.latest_release_short }}",
                 "encodingFormat": "application/gzip",
                 "contentURL": "ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/latest/{{ markup.latest_release_full }}{{format}}.gz",
                 "uploadDate": "{{ markup.downloads_uploaded_date }}",
-                "url": "https://chembl.gitbook.io/chembl-interface-documentation/downloads"
-            },
-        {% endfor %}
-
+                "url": "{{ markup.downloads_page_url}}"
+            },{% endfor %}{% for format in markup.text_downloads %}{
+                "@context": "http://schema.org/",
+                "@type": "DataDownload",
+                "name": "{{ markup.latest_release_short }}",
+                "encodingFormat": "text/plain",
+                "contentURL": "ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/latest/{{ markup.latest_release_full }}{{format}}.txt",
+                "uploadDate": "{{ markup.downloads_uploaded_date }}",
+                "url": "{{ markup.downloads_page_url}}"
+            },{% endfor %}{
+                "@context": "http://schema.org/",
+                "@type": "DataDownload",
+                "name": "{{ markup.latest_release_short }}",
+                "encodingFormat": "text/plain",
+                "contentURL": "ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/latest/chembl_uniprot_mapping.txt",
+                "uploadDate": "{{ markup.downloads_uploaded_date }}",
+                "url": "{{ markup.downloads_page_url}}"
+            },{
+                "@context": "http://schema.org/",
+                "@type": "DataDownload",
+                "name": "{{ markup.latest_release_short }}",
+                "encodingFormat": "text/html",
+                "contentURL": "ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/latest/{{ markup.latest_release_full }}_schema_documentation.html",
+                "uploadDate": "{{ markup.downloads_uploaded_date }}",
+                "url": "{{ markup.downloads_page_url}}"
+            },{
+                "@context": "http://schema.org/",
+                "@type": "DataDownload",
+                "name": "{{ markup.latest_release_short }}",
+                "encodingFormat": "image/png",
+                "contentURL": "ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/latest/{{ markup.latest_release_full }}_schema.png",
+                "uploadDate": "{{ markup.downloads_uploaded_date }}",
+                "url": "{{ markup.downloads_page_url}}"
+            },{
+                "@context": "http://schema.org/",
+                "@type": "DataDownload",
+                "name": "{{ markup.latest_release_short }}",
+                "encodingFormat": "application/xml",
+                "contentURL": "ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/latest/{{ markup.latest_release_full }}_monomer_library.xml",
+                "uploadDate": "{{ markup.downloads_uploaded_date }}",
+                "url": "{{ markup.downloads_page_url}}"
+            }
     ]
 }
 </script>

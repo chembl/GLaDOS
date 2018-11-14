@@ -300,8 +300,10 @@ def main_page(request):
         'latest_release_short': 'chembl_24',
         'latest_release_full': 'chembl_24_1',
         'downloads_uploaded_date': '2018-06-18',
-        'compressed_downloads':['.fa', '.fps', '.sdf', '_bio.fa', '_chemreps.txt', '_mysql.tar', 'oracle10g.tar',
-                                '_oracle11g.tar', '_oracle12g.tar', '_postgresql.tar', '_sqlite.tar']
+        'compressed_downloads':['.fa', '.fps', '.sdf', '_bio.fa', '_chemreps.txt', '_mysql.tar', '_oracle10g.tar',
+                                '_oracle11g.tar', '_oracle12c.tar', '_postgresql.tar', '_sqlite.tar'],
+        'text_downloads': ['_schema_documentation', '_release_notes'],
+        'downloads_page_url': 'https://chembl.gitbook.io/chembl-interface-documentation/downloads'
     }
     context = {
         'main_page': True,
