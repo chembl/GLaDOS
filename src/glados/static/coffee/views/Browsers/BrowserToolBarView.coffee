@@ -14,6 +14,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
       @browserView = arguments[0].menu_view
       @collection.on 'reset', @checkIfNoItems, @
+
       @checkIfNoFilters()
       @checkIfNoItems()
 
@@ -24,13 +25,21 @@ glados.useNameSpace 'glados.views.Browsers',
       $(@el).hide()
       @browserView.hideFilters()
 
+    showAll: ->
+
+      $(@el).show()
+      @browserView.showFilters()
+
     checkIfNoItems: ->
 
       totalRecords = @collection.getMeta('total_records')
       if totalRecords == 0
         @hideAll()
         return true
-      return false
+      else
+        @showAll() #make sure everything is shown when there are items.
+        @checkIfNoFilters()
+        return false
 
     wakeUp: ->
 

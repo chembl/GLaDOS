@@ -143,7 +143,7 @@ class ButtonsHelper
       setTimeout(reset_text, 1000)
 
 
-  @initCopyButton = (elem, tooltip, data) ->
+  @initCopyButton = (elem, tooltip='Copy', data) ->
 
     $copyBtn = elem
     $copyBtn.addClass('tooltipped')
@@ -151,6 +151,15 @@ class ButtonsHelper
     $copyBtn.attr('data-copy', data )
     $copyBtn.click ButtonsHelper.handleCopy
     $copyBtn.tooltip()
+
+  @createAndAppendCopyButton = ($container) ->
+
+    $button = $(glados.Utils.getContentFromTemplate('Handlebars-Common-CopyButton'))
+    @initCopyButton($button, null, '')
+    $container.append($button)
+    return $button
+
+  @updateCopyDataOfButton = ($button, newData) -> $button.attr('data-copy', newData)
 
   # ------------------------------------------------------------
   # Cropped container

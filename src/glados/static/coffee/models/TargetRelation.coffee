@@ -7,7 +7,7 @@ TargetRelation.COLUMNS = {
     'sort_disabled': false
     'is_sorting': 0
     'sort_class': 'fa-sort'
-    'link_base': 'report_card_url'
+    link_function: (chemblID) -> Target.get_report_card_url(chemblID)
   }
   RELATIONSHIP:{
     'name_to_show': 'Relationship'

@@ -175,6 +175,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @collection.sleep()
     wakeUpView: ->
 
+      $(@el).show()
       @collection.wakeUp()
       if not @collection.isReady()
         return

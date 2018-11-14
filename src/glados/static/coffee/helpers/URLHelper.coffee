@@ -102,7 +102,10 @@ glados.useNameSpace 'glados.helpers',
       list.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.STATE_OBJECT_CHANGED,
         @triggerUpdateBrowserURL, @
 
-    triggerUpdateBrowserURL: (list) -> @updateBrowserURL(list)
+    triggerUpdateBrowserURL: (list) ->
+
+      console.log 'triggerUpdateBrowserURL ', list
+      @updateBrowserURL(list)
 
     updateBrowserURL: (list) ->
 

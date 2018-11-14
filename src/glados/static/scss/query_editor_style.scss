@@ -1,0 +1,59 @@
+@import "chembl_base";
+
+.query-editor{
+  margin-bottom: 5px;
+  .query-container, .query-stringcontainer{
+
+    overflow-y: hidden;
+    background-color: #f5f5f5;
+    margin-top: 10px;
+
+    &.open{
+      height: 50vh;
+      -webkit-transition: height 0.5s; /* Safari */
+      transition: height 0.5s;
+    }
+    &.closed{
+      height: 0;
+      -webkit-transition: height 0.5s; /* Safari */
+      transition: height 0.5s;
+    }
+    .query{
+      padding: 10px;
+      overflow-y: scroll;
+      height: calc(100% - 60px);
+    }
+  }
+  .query-stringcontainer {
+    .text-area-container {
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-top: 20px;
+      height: 75%;
+      margin-left: 0;
+      margin-right: 0;
+      textarea {
+        height: 100%;
+        resize: none;
+        background-color: white;
+        border: none;
+        border-bottom: 1px solid $chembl-teal;
+        outline: none;
+        &:focus{
+          border-bottom: 1px solid $teal-accent;
+        }
+      }
+    }
+  }
+  .query-menu-container{
+    padding: 0 10px;
+    margin-bottom: 0;
+    border-bottom: 1px solid $grey-medium;
+    .buttons-container{
+      margin-top: 7px;
+    }
+    .input-field{
+      margin-top: 0;
+    }
+  }
+}

@@ -16,6 +16,7 @@ import json
 import hashlib
 import base64
 from glados.models import ESCachedRequest
+from . import og_tags_generator
 
 
 def visualise(request):
@@ -418,14 +419,10 @@ def extend_url(request, hash):
 # ----------------------------------------------------------------------------------------------------------------------
 # Report Cards
 # ----------------------------------------------------------------------------------------------------------------------
-
-
 def compound_report_card(request, chembl_id):
 
     context = {
-        'og_tags': {
-            'chembl_id': chembl_id
-        }
+        'og_tags': og_tags_generator.get_og_tags_for_compound(chembl_id)
     }
 
     return render(request, 'glados/compoundReportCard.html', context)
@@ -434,9 +431,7 @@ def compound_report_card(request, chembl_id):
 def assay_report_card(request, chembl_id):
 
     context = {
-        'og_tags': {
-            'chembl_id': chembl_id
-        }
+        'og_tags': og_tags_generator.get_og_tags_for_assay(chembl_id)
     }
 
     return render(request, 'glados/assayReportCard.html', context)
@@ -445,9 +440,7 @@ def assay_report_card(request, chembl_id):
 def cell_line_report_card(request, chembl_id):
 
     context = {
-        'og_tags': {
-            'chembl_id': chembl_id
-        }
+        'og_tags': og_tags_generator.get_og_tags_for_cell_line(chembl_id)
     }
 
     return render(request, 'glados/cellLineReportCard.html', context)
@@ -456,9 +449,7 @@ def cell_line_report_card(request, chembl_id):
 def tissue_report_card(request, chembl_id):
 
     context = {
-        'og_tags': {
-            'chembl_id': chembl_id
-        }
+        'og_tags': og_tags_generator.get_og_tags_for_tissue(chembl_id)
     }
 
     return render(request, 'glados/tissueReportCard.html', context)
@@ -467,9 +458,7 @@ def tissue_report_card(request, chembl_id):
 def target_report_card(request, chembl_id):
 
     context = {
-        'og_tags': {
-            'chembl_id': chembl_id
-        }
+        'og_tags': og_tags_generator.get_og_tags_for_target(chembl_id)
     }
 
     return render(request, 'glados/targetReportCard.html', context)
@@ -478,9 +467,7 @@ def target_report_card(request, chembl_id):
 def document_report_card(request, chembl_id):
 
     context = {
-        'og_tags': {
-            'chembl_id': chembl_id
-        }
+        'og_tags': og_tags_generator.get_og_tags_for_document(chembl_id)
     }
 
     return render(request, 'glados/documentReportCard.html', context)

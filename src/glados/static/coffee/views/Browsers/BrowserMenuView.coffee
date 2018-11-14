@@ -1,4 +1,5 @@
-# this view is in charge of handling the menu bar that appears on top of the results
+# this view is in charge of handling is the menu for a collection. It creates all the other subviews (filters, table view,
+# heatmap, etc.
 glados.useNameSpace 'glados.views.Browsers',
   BrowserMenuView: Backbone.View.extend
 
@@ -44,8 +45,14 @@ glados.useNameSpace 'glados.views.Browsers',
       @$facetsElem = $(@el).find('.BCK-Facets-Container')
       @facetsView = new glados.views.Browsers.BrowserFacetView
         collection: @collection
-        el: $(@el).find('.BCK-Facets-Container')
+        el: @$facetsElem
         menu_view: @
+
+      unless @collection.getMeta('streaming_mode')
+        @$queryEditorElem = $(@el).find('.BCK-query-editor')
+        @queryEditorView = new glados.views.Browsers.QueryEditorView
+          collection: @collection
+          el: @$queryEditorElem
 
       @showOrCreateView @currentViewType
 
@@ -113,6 +120,7 @@ glados.useNameSpace 'glados.views.Browsers',
       @renderMenuContent()
       if @collection.getMeta('total_records') != 0
 
+        @showMenuContainer()
         $downloadBtnsContainer = $(@el).find('.BCK-download-btns-container')
         $downloadBtnsContainer.html Handlebars.compile($('#' + $downloadBtnsContainer.attr('data-hb-template')).html())
           formats: @collection.getMeta('download_formats')
@@ -128,13 +136,16 @@ glados.useNameSpace 'glados.views.Browsers',
           } for viewLabel in @collection.getMeta('available_views'))
 
         @selectButton @currentViewType
-
+      else
+        @hideMenuContainer()
       @addRemoveQtipToButtons()
 
     renderMenuContent: ->
       $menuContainer = $(@el).find('.BCK-Browser-Menu-Container')
       glados.Utils.fillContentForElement($menuContainer)
 
+    hideMenuContainer: -> $(@el).find('.BCK-Browser-Menu-Container').hide()
+    showMenuContainer: -> $(@el).find('.BCK-Browser-Menu-Container').show()
     showPreloader: ->
 
       $menuContainer = $(@el).find('.BCK-Browser-Menu-Container')

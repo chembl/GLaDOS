@@ -16,11 +16,6 @@
 [![(ReportCards - Compound)](https://api.ghostinspector.com/v1/suites/5b717147f818e30945119296/status-badge
 )](https://api.ghostinspector.com/v1/suites/5b717147f818e30945119296/status-badge
  "ReportCards - Compound")
- 
-
-
-
-
 
 # I think we can put our differences behind us... for science...
 ![](https://upload.wikimedia.org/wikipedia/en/b/bf/Glados.png)
@@ -41,29 +36,20 @@ TWITTER_CONSUMER_SECRET = '<your twitter consumer secret'
 
 Here you can find some informal diagrams that help to understand how some components work
 
-### Target Browser
-
-* [General Workflow](https://docs.google.com/drawings/d/11WVrcOHXVr0LlZUd0AMRUcPCkL3TuJDcYmZfcUvDrC4/edit?usp=sharing)
-* [Backbone Models](https://docs.google.com/drawings/d/1abSTgJUhJh3bEx_DdHCHOrI_T1ayY52rCkRq5Qtq3Hw/edit?usp=sharing)
-* [Backbone Views](https://docs.google.com/drawings/d/1XyLlojtV63AERXPHXmfzw-F0TYjDVZw_yt2ZcHXI-A0/edit?usp=sharing)
-
-### Downloads
-
-* [Client Downloads](https://docs.google.com/drawings/d/1M4o1h0dTCg5yDuYx-sDVb3pZCX0RFd5byoERSPRriDA/edit?usp=sharing)
-* [Elasticsearch Collection Downloads](https://docs.google.com/drawings/d/1lh6IDZYGL8Ga3-anTwrRgfTXiURzE1-Sp-c9I_WOyQA/edit?usp=sharing)
-
-### Searching
-
-* [Search Basic Workflow](https://docs.google.com/drawings/d/1eR5cyfc8pR5iDjD7qUQGzy-Nb8R0ixpmiva8pNEm5cU/edit?usp=sharing)
-* [Elasticsearch Results Page Structure](https://docs.google.com/drawings/d/1Q458fWY9gTtTlsxbbSLRqf246oBFQEe543rFDv1SbJg/edit?usp=sharing)
-
 ### Paginated Collections
 
 * [Item Columns](https://docs.google.com/drawings/d/1RjgbMwToiI1m2rX-UM2QRy5_gBUk0iHZJ2frL5v6OIE/edit?usp=sharing)
 
 ### Visualisations
 
-* [Matrix (heatmap)](https://docs.google.com/drawings/d/1_K7JTZDZYPw0i_hLy-ApYsNI264edBrJmoDetG2FgVw/edit?usp=sharing)
+#### Heatmap
+
+* [ChEMBL Dasboard Basic Layout](https://docs.google.com/drawings/d/1fLOw-IBkRmQct4tv9WeoRjWc8mQnrOj50PAZ6JE2w4o/edit?usp=sharing)
+* [Heatmap Concpetual Design](https://docs.google.com/drawings/d/18dPoA2wI1q62aBWMOBYAVQ7TIza_Mbk28yxL6hK10nE/edit?usp=sharing)
+* [Heatmap Window System 1](https://docs.google.com/drawings/d/1hbmanZRe6VHKpHCoCtPfcCM3Er8d4TCeveOz2Rm3QaI/edit?usp=sharing)
+* [Heatmap Window System 2](https://docs.google.com/drawings/d/1XuJ9947pq0nkOBlixAWTiLaVRxN1mBYC--FUlDIXbyI/edit?usp=sharing)
+* [Heatmap Window System 3](https://docs.google.com/drawings/d/1QoG5OPFewKQ5I2N3-My83hKKQOScM8_Lc5SRAD1D7zM/edit?usp=sharing)
+* [Heatmap Visual Layout](https://docs.google.com/drawings/d/1_K7JTZDZYPw0i_hLy-ApYsNI264edBrJmoDetG2FgVw/edit?usp=sharing)
 
 ### Molecule Features Icons
 
