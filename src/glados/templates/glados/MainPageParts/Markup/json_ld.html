@@ -6,53 +6,34 @@
     "bs":"http://bioschemas.org/"
     },
     "@type": "schema:Dataset",
-    "@id": "https://www.ebi.ac.uk/chembl/beta/#dataset",
+    "@id": "{{request.build_absolute_uri }}#data",
     "schema:name": "ChEMBL",
     "schema:description": "A manually curated database of bioactive molecules with drug-like properties. It brings together chemical, bioactivity and genomic data to aid the translation of genomic information into effective new drugs.",
-    "schema:url": "https://www.ebi.ac.uk/chembl/beta/",
-    "schema:identifier": "http://doi.org/10.6019/CHEMBL.database.24.1",
+    "schema:url": "{{request.build_absolute_uri }}",
+    "schema:identifier": "{{ markup.doi }}",
     "schema:keywords": "database, molecule, chemical, curated, bioactivities",
-    "schema:includedInDataCatalog": "https://www.ebi.ac.uk/chembl/beta",
+    "schema:includedInDataCatalog": "{{request.build_absolute_uri }}",
     "schema:creator": {
         "@context": "http://schema.org/",
         "@type": "Organization",
         "name": "EMBL-EBI",
         "url": "https://www.ebi.ac.uk/"
     },
-    "schema:version": "chembl_24",
+    "schema:version": "{{ markup.latest_release_short }}",
     "schema:license": "Creative Commons Attribution-Share Alike 3.0 Unported License",
-    "schema:distribution": [{
-            "@context": "http://schema.org/",
-            "@type": "DataDownload",
-            "name": "chembl_24",
-            "fileFormat": "sdf",
-            "contentURL": "ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/latest/chembl_24_1.sdf.gz",
-            "uploadDate": "2018-06-18"
-        },
-        {
-            "@context": "http://schema.org/",
-            "@type": "DataDownload",
-            "name": "chembl_24",
-            "fileFormat": "dmp",
-            "contentURL": "ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/latest/chembl_24_1_oracle12c.tar.gz",
-            "uploadDate": "2018-06-18"
-        },
-        {
-            "@context": "http://schema.org/",
-            "@type": "DataDownload",
-            "name": "chembl_24",
-            "fileFormat": "sql",
-            "contentURL": "ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/latest/chembl_24_1_mysql.tar.gz",
-            "uploadDate": "2018-06-18"
-        },
-        {
-            "@context": "http://schema.org/",
-            "@type": "DataDownload",
-            "name": "chembl_24",
-            "fileFormat": "fa",
-            "contentURL": "ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/latest/chembl_24_1.fa.gz",
-            "uploadDate": "2018-06-18"
-        }
+    "schema:distribution": [
+        {% for format in markup.compressed_downloads %}
+            {
+                "@context": "http://schema.org/",
+                "@type": "DataDownload",
+                "name": "{{ markup.latest_release_short }}",
+                "encodingFormat": "application/gzip",
+                "contentURL": "ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/latest/{{ markup.latest_release_full }}{{format}}.gz",
+                "uploadDate": "{{ markup.downloads_uploaded_date }}",
+                "url": "https://chembl.gitbook.io/chembl-interface-documentation/downloads"
+            },
+        {% endfor %}
+
     ]
 }
 </script>

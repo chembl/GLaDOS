@@ -293,9 +293,20 @@ def replace_urls_from_entinies(html, urls):
 
 
 def main_page(request):
+
+    # This would preferably be included in elasticsearch and updated by the indexation process
+    markup = {
+        'doi': 'http://doi.org/10.6019/CHEMBL.database.24.1',
+        'latest_release_short': 'chembl_24',
+        'latest_release_full': 'chembl_24_1',
+        'downloads_uploaded_date': '2018-06-18',
+        'compressed_downloads':['.fa', '.fps', '.sdf', '_bio.fa', '_chemreps.txt', '_mysql.tar', 'oracle10g.tar',
+                                '_oracle11g.tar', '_oracle12g.tar', '_postgresql.tar', '_sqlite.tar']
+    }
     context = {
         'main_page': True,
-        'hide_breadcrumbs': True
+        'hide_breadcrumbs': True,
+        'markup': markup,
     }
     return render(request, 'glados/main_page.html', context)
 
