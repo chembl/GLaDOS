@@ -3,8 +3,8 @@ import os
 from glados import es_connection
 from glados import schema_tags_generator
 
-class MetadataGenerationTester(unittest.TestCase):
 
+class MetadataGenerationTester(unittest.TestCase):
 
     def setUp(self):
         os.environ['DJANGO_SETTINGS_MODULE'] = 'glados.settings'
@@ -19,7 +19,5 @@ class MetadataGenerationTester(unittest.TestCase):
     def test_metadata_is_not_produced_for_some_compound_types(self):
 
         # # not generated for compounds type unclassified
-        schema_obj_got = schema_tags_generator.get_schema_obj_for_compound('CHEMBL2108378')
-        print('schema_obj_got: ')
-        print(schema_obj_got)
-        pass
+        schema_obj_got = schema_tags_generator.get_schema_obj_for_compound('CHEMBL1256399')
+        self.assertFalse(schema_obj_got['metadata_generated'])
