@@ -17,6 +17,7 @@ import hashlib
 import base64
 from glados.models import ESCachedRequest
 from . import og_tags_generator
+from . import schema_tags_generator
 
 
 def visualise(request):
@@ -436,6 +437,7 @@ def compound_report_card(request, chembl_id):
 
     context = {
         'og_tags': og_tags_generator.get_og_tags_for_compound(chembl_id)
+        'schema_helper_obj': schema_tags_generator.get_schema_obj_for_compound(chembl_id)
     }
 
     return render(request, 'glados/compoundReportCard.html', context)
