@@ -28,7 +28,7 @@ def get_schema_obj_for_compound(chembl_id):
 
     item = response.hits[0]
     molecule_type = item['molecule_type']
-    do_not_generate_metadata = molecule_type in ['Unclassified']
+    do_not_generate_metadata = molecule_type in ['Unclassified', 'Cell', 'Antibody', 'Enzyme', 'Protein']
     if do_not_generate_metadata:
         return get_no_metadata_object()
 
