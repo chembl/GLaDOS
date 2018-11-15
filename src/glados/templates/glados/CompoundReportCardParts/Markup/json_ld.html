@@ -1,4 +1,5 @@
 <!--- data sets json_ld -->
+{% if schema_helper_obj.metadata_generated %}
 <script id='JSON_LD' type="application/ld+json">
 {
 	"@context": "http://schema.org",
@@ -99,3 +100,4 @@
 	]
 }
 </script>
+{% endif %}
