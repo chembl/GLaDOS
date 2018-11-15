@@ -15,28 +15,28 @@ class MetadataGenerationTester(unittest.TestCase):
 
     def test_metadata_is_not_produced_for_nonexistent_compounds(self):
 
-        schema_obj_got = schema_tags_generator.get_schema_obj_for_compound('nonexistent')
+        schema_obj_got = schema_tags_generator.get_schema_obj_for_compound('nonexistent', None)
         self.assertFalse(schema_obj_got['metadata_generated'])
 
     def test_metadata_is_not_produced_for_some_compound_types(self):
 
         # not generated for compounds type unclassified
-        schema_obj_got = schema_tags_generator.get_schema_obj_for_compound('CHEMBL1256399')
+        schema_obj_got = schema_tags_generator.get_schema_obj_for_compound('CHEMBL1256399', None)
         self.assertFalse(schema_obj_got['metadata_generated'])
 
         # not generated for compounds type cell, this should produce the schema for cells as defined in bioschemas
-        schema_obj_got = schema_tags_generator.get_schema_obj_for_compound('CHEMBL2108615')
+        schema_obj_got = schema_tags_generator.get_schema_obj_for_compound('CHEMBL2108615', None)
         self.assertFalse(schema_obj_got['metadata_generated'])
 
         # not generated for compounds type antibody, this should produce the schema for protein as defined in bioschemas
-        schema_obj_got = schema_tags_generator.get_schema_obj_for_compound('CHEMBL2108378')
+        schema_obj_got = schema_tags_generator.get_schema_obj_for_compound('CHEMBL2108378', None)
         self.assertFalse(schema_obj_got['metadata_generated'])
 
         # not generated for compounds type enzyme, this should produce the schema for enzyme as defined in bioschemas
-        schema_obj_got = schema_tags_generator.get_schema_obj_for_compound('CHEMBL2108476')
+        schema_obj_got = schema_tags_generator.get_schema_obj_for_compound('CHEMBL2108476', None)
         self.assertFalse(schema_obj_got['metadata_generated'])
 
         # not generated for compounds type protein, this should produce the schema for protein as defined in bioschemas
-        schema_obj_got = schema_tags_generator.get_schema_obj_for_compound('CHEMBL308896')
+        schema_obj_got = schema_tags_generator.get_schema_obj_for_compound('CHEMBL308896', None)
         self.assertFalse(schema_obj_got['metadata_generated'])
 

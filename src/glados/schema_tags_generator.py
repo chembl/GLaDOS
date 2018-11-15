@@ -1,5 +1,6 @@
 from elasticsearch_dsl import Search
 import json
+from django.contrib.staticfiles.templatetags.staticfiles import static
 # This uses elasticsearch to generate helper objects to generate the schema tags of the pages
 # ------------------------------------------------------------------------------------------------------------------
 # Helper functions
@@ -13,7 +14,7 @@ def get_no_metadata_object():
     return schema_obj
 
 
-def get_schema_obj_for_compound(chembl_id):
+def get_schema_obj_for_compound(chembl_id, request):
 
     q = {
         "query_string": {
@@ -36,7 +37,8 @@ def get_schema_obj_for_compound(chembl_id):
     metadata_obj = {
         "@context": "http://schema.org",
         "@type": "MolecularEntity",
-        "identifier": chembl_id
+        "identifier": chembl_id,
+        "url": request.build_absolute_uri(),
     }
 
     item_name = item['pref_name']
@@ -52,6 +54,14 @@ def get_schema_obj_for_compound(chembl_id):
     alternate_names = list(alternate_names_set)
     if len(alternate_names) > 0:
         metadata_obj['alternateName'] = alternate_names
+
+    try:
+        placeholder_image = item['_metadata']['compound_generated']['image_file']
+        host_url = request.get_host()
+        image_local_url = static("img/compound_placeholders/{}".format(placeholder_image))
+        metadata_obj['image'] = "{}{}".format(host_url, image_local_url)
+    except (KeyError, AttributeError, TypeError):
+        metadata_obj['image'] = "https://www.ebi.ac.uk/chembl/api/data/image/{}.svg?engine=indigo".format(chembl_id)
 
     schema_obj = {
         'metadata_generated': True,
