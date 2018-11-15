@@ -436,7 +436,7 @@ def extend_url(request, hash):
 def compound_report_card(request, chembl_id):
 
     context = {
-        'og_tags': og_tags_generator.get_og_tags_for_compound(chembl_id)
+        'og_tags': og_tags_generator.get_og_tags_for_compound(chembl_id),
         'schema_helper_obj': schema_tags_generator.get_schema_obj_for_compound(chembl_id)
     }
 
