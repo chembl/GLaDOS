@@ -63,6 +63,36 @@ def get_schema_obj_for_compound(chembl_id, request):
     except (KeyError, AttributeError, TypeError):
         metadata_obj['image'] = "https://www.ebi.ac.uk/chembl/api/data/image/{}.svg?engine=indigo".format(chembl_id)
 
+    try:
+        metadata_obj['molecularFormula'] = item['molecule_properties']['full_molformula']
+    except (KeyError, AttributeError, TypeError):
+        pass
+
+    try:
+        metadata_obj['molecularWeight'] = float(item['molecule_properties']['full_mwt'])
+    except (KeyError, AttributeError, TypeError):
+        pass
+
+    try:
+        metadata_obj['monoisotopicMolecularWeight'] = float(item['molecule_properties']['mw_monoisotopic'])
+    except (KeyError, AttributeError, TypeError):
+        pass
+
+    try:
+        metadata_obj['inChI'] = item['molecule_structures']['standard_inchi']
+    except (KeyError, AttributeError, TypeError):
+        pass
+
+    try:
+        metadata_obj['inChIKey'] = item['molecule_structures']['standard_inchi_key']
+    except (KeyError, AttributeError, TypeError):
+        pass
+
+    try:
+        metadata_obj['canonical_smiles'] = [item['molecule_structures']['canonical_smiles']]
+    except (KeyError, AttributeError, TypeError):
+        pass
+
     schema_obj = {
         'metadata_generated': True,
         'metadata_obj': json.dumps(metadata_obj, indent=2)
