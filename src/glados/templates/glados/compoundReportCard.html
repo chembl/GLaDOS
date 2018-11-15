@@ -15,6 +15,13 @@
 
 {% endblock %}
 
+{% block json_ld %}
+{% include "glados/CompoundReportCardParts/Markup/json_ld.html" %}
+{% endblock %}
+
+{% block link_to_rdf %}
+{% include "glados/CompoundReportCardParts/Markup/link_to_rdf.html" %}
+{% endblock %}
 
 {% block title %}Compound Report Card{% endblock %}
 
