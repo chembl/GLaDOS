@@ -437,7 +437,8 @@ def compound_report_card(request, chembl_id):
 
     context = {
         'og_tags': og_tags_generator.get_og_tags_for_compound(chembl_id),
-        'schema_helper_obj': schema_tags_generator.get_schema_obj_for_compound(chembl_id)
+        'schema_helper_obj': schema_tags_generator.get_schema_obj_for_compound(chembl_id),
+        'link_to_rdf': "http://rdf.ebi.ac.uk/resource/chembl/molecule/{}".format(chembl_id)
     }
 
     return render(request, 'glados/compoundReportCard.html', context)
