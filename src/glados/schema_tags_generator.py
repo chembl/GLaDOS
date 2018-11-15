@@ -1,6 +1,7 @@
 from elasticsearch_dsl import Search
 import json
 from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.conf import settings
 # This uses elasticsearch to generate helper objects to generate the schema tags of the pages
 # ------------------------------------------------------------------------------------------------------------------
 # Helper functions
@@ -59,7 +60,7 @@ def get_schema_obj_for_compound(chembl_id, request):
         placeholder_image = item['_metadata']['compound_generated']['image_file']
         host_url = request.get_host()
         image_local_url = static("img/compound_placeholders/{}".format(placeholder_image))
-        metadata_obj['image'] = "{}{}".format(host_url, image_local_url)
+        metadata_obj['image'] = "{}{}{}".format(host_url, settings.SERVER_BASE_PATH, image_local_url)
     except (KeyError, AttributeError, TypeError):
         metadata_obj['image'] = "https://www.ebi.ac.uk/chembl/api/data/image/{}.svg?engine=indigo".format(chembl_id)
 
@@ -92,6 +93,22 @@ def get_schema_obj_for_compound(chembl_id, request):
         metadata_obj['canonical_smiles'] = [item['molecule_structures']['canonical_smiles']]
     except (KeyError, AttributeError, TypeError):
         pass
+
+    # ['related_targets']['chembl_ids'][0][:5]
+    related_targets_ids = item['_metadata']['related_targets']['chembl_ids']['0'][:5]
+    related_targets_for_schema = []
+
+    for targ_id in related_targets_ids:
+        rel_target_obj = {
+            "@type": "BioChemEntity",
+            "identifier": targ_id,
+            "url": "{}{}/target_report_card/{}/".format(request.get_host(), settings.SERVER_BASE_PATH, targ_id)
+        }
+        related_targets_for_schema.append(rel_target_obj)
+    if len(related_targets_for_schema) == 0:
+        related_targets_for_schema = None
+    metadata_obj['biochemicalInteraction'] = related_targets_for_schema
+
 
     schema_obj = {
         'metadata_generated': True,
