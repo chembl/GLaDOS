@@ -1,4 +1,5 @@
 from elasticsearch_dsl import Search
+import json
 # This uses elasticsearch to generate helper objects to generate the schema tags of the pages
 # ------------------------------------------------------------------------------------------------------------------
 # Helper functions
@@ -32,12 +33,29 @@ def get_schema_obj_for_compound(chembl_id):
     if do_not_generate_metadata:
         return get_no_metadata_object()
 
-    molecule_type = response['hits']
-    print('molecule_type: ', molecule_type)
+    metadata_obj = {
+        "@context": "http://schema.org",
+        "@type": "MolecularEntity",
+        "identifier": chembl_id
+    }
 
+    item_name = item['pref_name']
+    if item_name is not None:
+        metadata_obj['name'] = item['pref_name']
+
+    alternate_names_set = set()
+    raw_synonyms = item['molecule_synonyms']
+    if raw_synonyms is not None:
+        for raw_syn in raw_synonyms:
+            alternate_names_set.add(raw_syn['molecule_synonym'])
+
+    alternate_names = list(alternate_names_set)
+    if len(alternate_names) > 0:
+        metadata_obj['alternateName'] = alternate_names
 
     schema_obj = {
         'metadata_generated': True,
-        'identifier': chembl_id
+        'metadata_obj': json.dumps(metadata_obj, indent=2)
+
     }
     return schema_obj
