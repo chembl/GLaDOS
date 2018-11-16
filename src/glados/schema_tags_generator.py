@@ -102,7 +102,7 @@ def get_schema_obj_for_compound(chembl_id, request):
             rel_target_obj = {
                 "@type": "BioChemEntity",
                 "identifier": targ_id,
-                "url": "{}{}target_report_card/{}/".format(request.get_host(), settings.SERVER_BASE_PATH, targ_id)
+                "url": "{}/{}target_report_card/{}/".format(request.get_host(), settings.SERVER_BASE_PATH, targ_id)
             }
             related_targets_for_schema.append(rel_target_obj)
         if len(related_targets_for_schema) == 0:
