@@ -30,25 +30,21 @@ describe 'Heatmap Aggregation', ->
 
   aggsConfig =
     aggs:
-      children:
+      y_axis:
         type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
-        field: '_metadata.protein_classification.l1'
-        size: 100
-        bucket_links:
-          bucket_filter_template: '_metadata.protein_classification.l1:("{{bucket_key}}")'
-          template_data:
-            bucket_key: 'BUCKET.key'
-          link_generator: Target.getTargetsListURL
-        aggs:
-          children:
-            type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
-            field: '_metadata.protein_classification.l2'
-            size: 100
-            bucket_links:
-              bucket_filter_template: '_metadata.protein_classification.l2:("{{bucket_key}}")'
-              template_data:
-                bucket_key: 'BUCKET.key'
-              link_generator: Target.getTargetsListURL
+        field: 'target_chembl_id'
+        size: 10000000
+
+#        aggs:
+#          children:
+#            type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+#            field: '_metadata.protein_classification.l2'
+#            size: 100
+#            bucket_links:
+#              bucket_filter_template: '_metadata.protein_classification.l2:("{{bucket_key}}")'
+#              template_data:
+#                bucket_key: 'BUCKET.key'
+#              link_generator: Target.getTargetsListURL
 
   heatmapAggregation = new glados.models.Aggregations.HeatmapAggregation
     index_name: indexName
@@ -69,5 +65,10 @@ describe 'Heatmap Aggregation', ->
     iDsGot = queryGot.bool.should.bool.filter.terms.molecule_chembl_id
     expect(_.isEqual(iDsGot, compoundIds)).toBe(true)
 
+  it 'generates the request data', ->
+
+    requestDataGot = heatmapAggregation.getRequestData()
+    fieldGot = requestDataGot.aggs.y_axis.terms.field
+    expect(fieldGot).toBe(aggsConfig.aggs.y_axis.field)
 
 
