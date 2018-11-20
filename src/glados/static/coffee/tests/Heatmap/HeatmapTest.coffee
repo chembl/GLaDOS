@@ -159,7 +159,10 @@ describe "Heatmap", ->
           i = 1
           for col in columns
             if start <= i <= end
-              expect(col.load_state).toBe(glados.models.Heatmap.ITEM_LOAD_STATES.LOADING)
+              # in case a fetch is triggered
+              isLoadingOrLoaded = col.load_state == glados.models.Heatmap.ITEM_LOAD_STATES.LOADING or\
+                col.load_state == glados.models.Heatmap.ITEM_LOAD_STATES.LOADED
+              expect(isLoadingOrLoaded).toBe(true)
             else
               expect(col.load_state).toBe(glados.models.Heatmap.ITEM_LOAD_STATES.TO_LOAD)
             i += 1
