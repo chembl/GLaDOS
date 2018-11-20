@@ -71,4 +71,8 @@ describe 'Heatmap Aggregation', ->
     fieldGot = requestDataGot.aggs.y_axis.terms.field
     expect(fieldGot).toBe(aggsConfig.aggs.y_axis.field)
 
+  it 'parses the min and max values of cells', ->
+
+    heatmapAggregation.requestInitInServer()
+
 
