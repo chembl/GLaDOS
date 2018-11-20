@@ -19,13 +19,15 @@ glados.useNameSpace 'glados.models.Heatmap',
       @set('min_window_load_size_factor', minWindowLoadSizeFactor)
       @set('w_factor', wFactor)
 
-      return
-      @generateDependentLists() unless testMode
-
     # ------------------------------------------------------------------------------------------------------------------
     # Generate base structures
     # ------------------------------------------------------------------------------------------------------------------
     startLoad: -> @generateDependentLists()
+    switchToErrorState: -> @switchToState(glados.models.Heatmap.STATES.ERROR)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # 1
+    # ------------------------------------------------------------------------------------------------------------------
     generateDependentLists: ->
 
       if @config.generator_axis == glados.models.Heatmap.AXES_NAMES.Y_AXIS
@@ -51,7 +53,12 @@ glados.useNameSpace 'glados.models.Heatmap',
             thisHeatmap.y_axis_list = generatorFunction(itemsIds)
             thisHeatmap.switchToState(glados.models.Heatmap.STATES.DEPENDENT_LISTS_CREATED)
 
+        $.when.apply($, deferreds).fail -> thisHeatmap.switchToErrorState()
+    # ------------------------------------------------------------------------------------------------------------------
+    # 2
+    # ------------------------------------------------------------------------------------------------------------------
     checkListLength: (list) ->
+      #Check if I have the list lenghts if not, request it
 
       thisHeatmap = @
 
@@ -61,6 +68,7 @@ glados.useNameSpace 'glados.models.Heatmap',
         list.fetch()
         list.once( glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.ITEMS_FETCHING_STATE_CHANGED,
           ( -> thisHeatmap.checkListLength(list)))
+        list.once 'error', (thisHeatmap.switchToErrorState())
       else
 
         # if both lists are ready, I can switch to the next state
@@ -78,6 +86,12 @@ glados.useNameSpace 'glados.models.Heatmap',
       @checkListLength(@x_axis_list)
 
     # ------------------------------------------------------------------------------------------------------------------
+    # 3
+    # ------------------------------------------------------------------------------------------------------------------
+    generateHelperAggregations: ->
+
+
+    # ------------------------------------------------------------------------------------------------------------------
     # state changing
     # ------------------------------------------------------------------------------------------------------------------
     switchToState: (newState) ->
@@ -89,10 +103,14 @@ glados.useNameSpace 'glados.models.Heatmap',
         if newState == glados.models.Heatmap.STATES.DEPENDENT_LISTS_CREATED
           @fetchTotalNumberOfRowsAndColumns()
         else if newState == glados.models.Heatmap.STATES.HEATMAP_TOTAL_SIZE_KNOWN
-          @createMatrixInitialStructure()
-          @setInitialWindow()
-          @switchToState(glados.models.Heatmap.STATES.READY_TO_RENDER)
+          @generateHelperAggregations()
+#          @createMatrixInitialStructure()
+#          @setInitialWindow()
+#          @switchToState(glados.models.Heatmap.STATES.READY_TO_RENDER)
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # Base Structure
+    # ------------------------------------------------------------------------------------------------------------------
     generateBaseRowsORColsList: (totalNumItems, isCol=false) ->
 
       baseID = if isCol then 'COL_TO_LOAD' else 'ROW_TO_LOAD'
@@ -914,6 +932,7 @@ glados.models.Heatmap.STATES =
   DEPENDENT_LISTS_CREATED: 'DEPENDENT_LISTS_CREATED'
   HEATMAP_TOTAL_SIZE_KNOWN: 'HEATMAP_TOTAL_SIZE_KNOWN'
   READY_TO_RENDER: 'READY_TO_RENDER'
+  ERROR: 'ERROR'
 glados.models.Heatmap.ITEM_LOAD_STATES =
   TO_LOAD: 'TO_LOAD' # The item needs to be loaded
   LOADING: 'LOADING' # The item is being fetched

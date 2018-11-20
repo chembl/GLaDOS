@@ -276,6 +276,12 @@
 </script>
 
 <script id="Handlebars-Common-VisualisationProgress" type="text/x-handlebars-template">
+
+  {{#if show_determinate_progress}}
+  <div class="progress">
+    <div class="determinate" style="width:{{progress_percentage}}%"></div>
+  </div>
+  {{/if}}
   {{#unless hide_cog}}<i class="fa fa-cog fa-spin fa-fw"></i>{{/unless}}
   {{#if show_warning_icon}} <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{/if}}
   {{message}}
