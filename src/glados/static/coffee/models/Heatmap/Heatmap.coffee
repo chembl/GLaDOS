@@ -68,7 +68,7 @@ glados.useNameSpace 'glados.models.Heatmap',
         list.fetch()
         list.once( glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.ITEMS_FETCHING_STATE_CHANGED,
           ( -> thisHeatmap.checkListLength(list)))
-        list.once 'error', (thisHeatmap.switchToErrorState())
+        list.once 'error', (-> thisHeatmap.switchToErrorState)
       else
 
         # if both lists are ready, I can switch to the next state

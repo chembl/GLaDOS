@@ -65,13 +65,14 @@ glados.useNameSpace 'glados.views.Visualisation.Heatmap',
       console.log 'CCC handleMatrixState'
       console.log 'state: ', state
       if state == glados.models.Heatmap.STATES.INITIAL_STATE
-        @setProgressMessage('Step 1 of 3. Loading Axes...', hideCog=false, showDeterminateProgress=true,
+        @setProgressMessage('Step 1 of 4. Loading Axes...', hideCog=false, showDeterminateProgress=true,
           progressPercentage=25)
       else if state == glados.models.Heatmap.STATES.DEPENDENT_LISTS_CREATED
-        @setProgressMessage('Step 2 of 3. Loading Heatmap Total Size...', hideCog=false, showDeterminateProgress=true,
+        @setProgressMessage('Step 2 of 4. Loading Heatmap Total Size...', hideCog=false, showDeterminateProgress=true,
           progressPercentage=50)
       else if state == glados.models.Heatmap.STATES.HEATMAP_TOTAL_SIZE_KNOWN
-        @setProgressMessage('Step 3 of 3. Heatmap total size calculated...')
+        @setProgressMessage('Step 3 of 4. Generating helper aggregation...', hideCog=false, showDeterminateProgress=true,
+          progressPercentage=75)
       else if state == glados.models.Heatmap.STATES.READY_TO_RENDER
         @render()
         @setProgressMessage()
