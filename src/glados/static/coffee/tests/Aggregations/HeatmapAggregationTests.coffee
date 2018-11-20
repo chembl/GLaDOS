@@ -1,12 +1,32 @@
 describe 'Heatmap Aggregation', ->
 
+  compoundIds = ['CHEMBL59, CHEMBL25', 'CHEMBL10']
   noSearchIndexes = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH
   indexName = noSearchIndexes.ACTIVITY.INDEX_NAME
 
+  generateQuery = (itemsIDS) ->
+
+    filteredTermsQuery = {
+      "bool": {
+        "filter":{
+          "terms": {
+            "molecule_chembl_id": itemsIDS
+          }
+        }
+      }
+    }
+
+    esQuery = {
+      "bool": {
+        "should": filteredTermsQuery
+      }
+    }
+    return esQuery
+
+
   queryConfig =
-    type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
-    query_string_template: '*'
-    template_data: {}
+    type: glados.models.Aggregations.Aggregation.QueryTypes.CUSTOM
+    query: generateQuery(compoundIds)
 
   aggsConfig =
     aggs:
@@ -42,7 +62,12 @@ describe 'Heatmap Aggregation', ->
     console.log 'heatmapAggregation: ', heatmapAggregation
 
     expect(heatmapAggregation.get('state'))\
-        .toBe(glados.models.Aggregations.HeatmapAggregation.States.INITIAL_STATE)
+      .toBe(glados.models.Aggregations.HeatmapAggregation.States.INITIAL_STATE)
+
+    queryGot = heatmapAggregation.get('query')
+    expect(queryGot?).toBe(true)
+    iDsGot = queryGot.bool.should.bool.filter.terms.molecule_chembl_id
+    expect(_.isEqual(iDsGot, compoundIds)).toBe(true)
 
 
 

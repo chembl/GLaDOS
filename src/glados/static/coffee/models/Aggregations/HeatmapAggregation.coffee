@@ -3,7 +3,7 @@ glados.useNameSpace 'glados.models.Aggregations',
 
     initialize: ->
       @set('state', glados.models.Aggregations.HeatmapAggregation.States.INITIAL_STATE)
-#      @loadQuery()
+      @loadQuery()
 
 glados.models.Aggregations.HeatmapAggregation.States =
   INITIAL_STATE: 'INITIAL_STATE'

@@ -34,6 +34,8 @@ glados.useNameSpace 'glados.models.Aggregations',
             query: queryString
             analyze_wildcard: true
         @set('query', query)
+      else if queryConfig.type == glados.models.Aggregations.Aggregation.QueryTypes.CUSTOM
+        @set('query', queryConfig.query)
 
     getAggregationConfig: (aggName) ->
 
@@ -536,6 +538,7 @@ glados.models.Aggregations.Aggregation.States =
 glados.models.Aggregations.Aggregation.QueryTypes =
    MULTIMATCH: 'MULTIMATCH'
    QUERY_STRING: 'QUERY_STRING'
+   CUSTOM: 'CUSTOM'
 
 glados.models.Aggregations.Aggregation.AggTypes =
    RANGE: 'RANGE'
