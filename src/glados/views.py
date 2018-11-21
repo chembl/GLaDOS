@@ -8,16 +8,13 @@ import glados.url_shortener.url_shortener as url_shortener
 from apiclient.discovery import build
 import re
 from elasticsearch_dsl import Search
-from elasticsearch_dsl.connections import connections
 import requests
 import datetime
 import timeago
-import json
-import hashlib
-import base64
 from . import og_tags_generator
 from . import schema_tags_generator
 from . import glados_server_statistics
+from . import heatmap_helper
 
 
 def visualise(request):
@@ -353,9 +350,21 @@ def shorten_url(request):
     else:
         return JsonResponse({'error': 'this is only available via POST'})
 
-def heatmap_helper(request):
+# ----------------------------------------------------------------------------------------------------------------------
+# Heatmap Helper
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+def request_heatmap_helper(request):
     if request.method != "POST":
         return JsonResponse({'error': 'this is only available via POST'})
+
+    index_name = request.POST.get('index_name', '')
+    raw_search_data = request.POST.get('search_data', '')
+    action = request.POST.get('action')
+
+    if action == 'GET_INITIAL_DATA':
+        heatmap_helper.generate_heatmap_initial_data(index_name, raw_search_data)
 
     return JsonResponse({'data': 'Data'})
 
@@ -367,40 +376,8 @@ def elasticsearch_cache(request):
         print('elasticsearch_cache')
         index_name = request.POST.get('index_name', '')
         raw_search_data = request.POST.get('search_data', '')
-        search_data_digest = hashlib.sha256(raw_search_data.encode('utf-8')).digest()
-        base64_search_data_hash = base64.b64encode(search_data_digest).decode('utf-8')
-        search_data = json.loads(raw_search_data)
 
-        if not isinstance(search_data, dict):
-            search_data = {}
-
-        cache_key = "{}-{}".format(index_name, base64_search_data_hash)
-        print('cache_key', cache_key)
-
-        cache_response = None
-
-        try:
-            cache_response = cache.get(cache_key)
-        except Exception as e:
-            print('Error searching in cache!')
-
-        response = None
-        if cache_response is not None:
-            print('results are in cache')
-            response = cache_response
-        else:
-            print('results are NOT in cache')
-            response = connections.get_connection().search(index=index_name, body=search_data)
-            try:
-                cache_time = 3000000
-                cache.set(cache_key, response, cache_time)
-            except Exception as e:
-                traceback.print_exc()
-                print('Error saving in the cache!')
-
-        glados_server_statistics.record_elasticsearch_cache_usage(index_name, search_data, base64_search_data_hash,
-                                                                  cache_response)
-
+        response = glados_server_statistics.get_and_record_es_cached_response(index_name, raw_search_data)
         if response is None:
             return HttpResponse('ELASTIC SEARCH RESPONSE IS EMPTY!', status=500)
 
