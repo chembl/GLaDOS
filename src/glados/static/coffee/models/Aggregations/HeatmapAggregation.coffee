@@ -15,6 +15,7 @@ glados.useNameSpace 'glados.models.Aggregations',
         index_name: @getIndexName()
         search_data: JSON.stringify(@getRequestData())
         action: 'GET_INITIAL_DATA'
+        cols_footers_counts: JSON.stringify(@get('cols_footers_counts_config'))
 
       return fullRequestData
 

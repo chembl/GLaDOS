@@ -1,6 +1,6 @@
 describe 'Heatmap Aggregation', ->
 
-  compoundIds = ['CHEMBL59, CHEMBL25', 'CHEMBL10']
+  compoundIds = ['CHEMBL59', 'CHEMBL25', 'CHEMBL10']
   noSearchIndexes = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH
   indexName = noSearchIndexes.ACTIVITY.INDEX_NAME
 
@@ -32,10 +32,17 @@ describe 'Heatmap Aggregation', ->
     aggs:
       y_axis:
         type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
-        field: 'target_chembl_id'
+        field: 'molecule_chembl_id'
         size: 10000000
+        aggs:
+          x_axis:
+            type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
+            field: 'target_chembl_id'
+            size: 10000000
 
-#        aggs:
+  colsFootersCountsConfig =
+    doc_count: 'activity_count'
+
 #          children:
 #            type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
 #            field: '_metadata.protein_classification.l2'
@@ -50,6 +57,7 @@ describe 'Heatmap Aggregation', ->
     index_name: indexName
     query_config: queryConfig
     aggs_config: aggsConfig
+    cols_footers_counts_config: colsFootersCountsConfig
 
   it 'initialises correctly', ->
 

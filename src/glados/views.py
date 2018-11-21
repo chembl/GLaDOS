@@ -348,11 +348,17 @@ def request_heatmap_helper(request):
     index_name = request.POST.get('index_name', '')
     raw_search_data = request.POST.get('search_data', '')
     action = request.POST.get('action')
+    raw_cols_footers_counts = request.POST.get('cols_footers_counts')
 
     if action == 'GET_INITIAL_DATA':
-        heatmap_helper.generate_heatmap_initial_data(index_name, raw_search_data)
 
-    return JsonResponse({'data': 'Data'})
+        try:
+            response = heatmap_helper.generate_heatmap_initial_data(index_name, raw_search_data,
+                                                                    raw_cols_footers_counts)
+        except heatmap_helper.HeatmapError as e:
+            response = {'error': repr(e)}
+
+    return JsonResponse(response)
 
 
 # noinspection PyBroadException

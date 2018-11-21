@@ -5,6 +5,7 @@ import hashlib
 import base64
 from elasticsearch_dsl.connections import connections
 from django.core.cache import cache
+import traceback
 
 
 def get_and_record_es_cached_response(index_name, raw_search_data):
