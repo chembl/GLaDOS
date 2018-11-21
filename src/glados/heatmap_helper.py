@@ -15,13 +15,14 @@ class HeatmapError(Exception):
 # ----------------------------------------------------------------------------------------------------------------------
 
 
-def generate_heatmap_initial_data(index_name, raw_search_data, raw_cols_footers_counts):
+def generate_heatmap_initial_data(index_name, raw_search_data, raw_cols_footers_counts, raw_rows_footers_counts):
 
     print('generate initial data')
     print('index_name: ', index_name)
     print('raw_search_data: ', raw_search_data)
 
     cols_footers_counts = json.loads(raw_cols_footers_counts)
+    rows_footers_counts = json.loads(raw_rows_footers_counts)
 
     # get aggregation from elasticsearch
     agg_response = glados_server_statistics.get_and_record_es_cached_response(index_name, raw_search_data)
@@ -41,13 +42,21 @@ def generate_heatmap_initial_data(index_name, raw_search_data, raw_cols_footers_
             y_item_key = y_axis_bckt['key']
             print('---')
             print('y_item_key: ', y_item_key)
+
             # get or create row
             current_row = rows_index.get(y_item_key)
             if current_row is None:
                 current_row = {
-                    'id': y_item_key
+                    'id': y_item_key,
+                    'footers_counts': {}
                 }
                 rows_index[y_item_key] = current_row
+
+            for y_agg_property in rows_footers_counts['from_y_agg']:
+                if y_agg_property['type'] == 'MAX':
+                    prop_name = y_agg_property['prop_name']
+                    value = y_axis_bckt[prop_name]['value']
+                    current_row['footers_counts'][prop_name] = value
 
             x_axis_buckets = y_axis_bckt['x_axis']['buckets']
             for x_axis_bckt in x_axis_buckets:
@@ -69,9 +78,23 @@ def generate_heatmap_initial_data(index_name, raw_search_data, raw_cols_footers_
 
                 # I know that this col has one more hit
                 current_col['footer_counts']['hit_count'] += 1
-                
+
                 # do the addition that corresponds to the property doc_count
                 current_col['footer_counts'][doc_count_property] += x_axis_bckt['doc_count']
+
+                print('x_axis_bckt: ', x_axis_bckt)
+                # process every value that comes from custom aggregations
+                for x_agg_property in cols_footers_counts['from_x_agg']:
+                    if x_agg_property['type'] == 'MAX':
+                        prop_name = x_agg_property['prop_name']
+                        value = x_axis_bckt[prop_name]['value']
+                        current_max_value = current_col['footer_counts'].get(prop_name)
+
+                        if current_max_value is None:
+                            current_col['footer_counts'][prop_name] = value
+                        elif value is not None:
+                            current_col['footer_counts'][prop_name] = max(value,
+                                                                          current_col['footer_counts'][prop_name])
 
             print()
     except KeyError as e:

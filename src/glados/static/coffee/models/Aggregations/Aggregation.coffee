@@ -484,6 +484,12 @@ glados.useNameSpace 'glados.models.Aggregations',
               interval: binSize
               keyed: true
 
+        else if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.MAX
+
+          aggsData[aggKey] =
+            max:
+              field: aggDescription.field
+
         #recursion
         internalAggs = aggDescription.aggs
 
@@ -542,3 +548,4 @@ glados.models.Aggregations.Aggregation.AggTypes =
    RANGE: 'RANGE'
    TERMS: 'TERMS'
    HISTOGRAM: 'HISTOGRAM'
+   MAX: 'MAX'

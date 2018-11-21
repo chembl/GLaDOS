@@ -349,12 +349,14 @@ def request_heatmap_helper(request):
     raw_search_data = request.POST.get('search_data', '')
     action = request.POST.get('action')
     raw_cols_footers_counts = request.POST.get('cols_footers_counts')
+    raw_rows_footers_counts_config = request.POST.get('rows_footers_counts_config')
 
     if action == 'GET_INITIAL_DATA':
 
         try:
             response = heatmap_helper.generate_heatmap_initial_data(index_name, raw_search_data,
-                                                                    raw_cols_footers_counts)
+                                                                    raw_cols_footers_counts,
+                                                                    raw_rows_footers_counts_config)
         except heatmap_helper.HeatmapError as e:
             response = {'error': repr(e)}
 

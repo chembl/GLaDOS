@@ -39,9 +39,30 @@ describe 'Heatmap Aggregation', ->
             type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
             field: 'target_chembl_id'
             size: 10000000
+            aggs:
+              max_pchembl_value:
+                type: glados.models.Aggregations.Aggregation.AggTypes.MAX
+                field: 'pchembl_value'
+          max_pchembl_value:
+            type: glados.models.Aggregations.Aggregation.AggTypes.MAX
+            field: 'pchembl_value'
 
   colsFootersCountsConfig =
     doc_count: 'activity_count'
+    from_x_agg: [
+      {
+        prop_name:'max_pchembl_value'
+        type: glados.models.Aggregations.Aggregation.AggTypes.MAX
+      }
+    ]
+
+  rowsFootersCountsConfig =
+    from_y_agg: [
+      {
+        prop_name:'max_pchembl_value'
+        type: glados.models.Aggregations.Aggregation.AggTypes.MAX
+      }
+    ]
 
 #          children:
 #            type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
@@ -58,6 +79,7 @@ describe 'Heatmap Aggregation', ->
     query_config: queryConfig
     aggs_config: aggsConfig
     cols_footers_counts_config: colsFootersCountsConfig
+    rows_footers_counts_config: rowsFootersCountsConfig
 
   it 'initialises correctly', ->
 
