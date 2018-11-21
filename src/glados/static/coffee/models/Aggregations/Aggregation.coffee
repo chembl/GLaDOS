@@ -487,6 +487,12 @@ glados.useNameSpace 'glados.models.Aggregations',
         else if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.MAX
 
           aggsData[aggKey] =
+            avg:
+              field: aggDescription.field
+
+        else if aggDescription.type == glados.models.Aggregations.Aggregation.AggTypes.AVG
+
+          aggsData[aggKey] =
             max:
               field: aggDescription.field
 
@@ -549,3 +555,4 @@ glados.models.Aggregations.Aggregation.AggTypes =
    TERMS: 'TERMS'
    HISTOGRAM: 'HISTOGRAM'
    MAX: 'MAX'
+   AVG: 'AVG'

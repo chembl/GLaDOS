@@ -43,6 +43,9 @@ describe 'Heatmap Aggregation', ->
               max_pchembl_value:
                 type: glados.models.Aggregations.Aggregation.AggTypes.MAX
                 field: 'pchembl_value'
+              avg_pchembl_value:
+                type: glados.models.Aggregations.Aggregation.AggTypes.AVG
+                field: 'pchembl_value'
           max_pchembl_value:
             type: glados.models.Aggregations.Aggregation.AggTypes.MAX
             field: 'pchembl_value'
@@ -64,6 +67,14 @@ describe 'Heatmap Aggregation', ->
       }
     ]
 
+  cellsDataConfig =
+    from_x_agg: [
+      {
+        prop_name:'avg_pchembl_value'
+        type: glados.models.Aggregations.Aggregation.AggTypes.AVG
+      }
+    ]
+
 #          children:
 #            type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
 #            field: '_metadata.protein_classification.l2'
@@ -80,6 +91,7 @@ describe 'Heatmap Aggregation', ->
     aggs_config: aggsConfig
     cols_footers_counts_config: colsFootersCountsConfig
     rows_footers_counts_config: rowsFootersCountsConfig
+    cells_data_config: cellsDataConfig
 
   it 'initialises correctly', ->
 

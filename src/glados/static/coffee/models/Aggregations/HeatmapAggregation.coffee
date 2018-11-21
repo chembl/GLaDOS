@@ -17,6 +17,7 @@ glados.useNameSpace 'glados.models.Aggregations',
         action: 'GET_INITIAL_DATA'
         cols_footers_counts: JSON.stringify(@get('cols_footers_counts_config'))
         rows_footers_counts_config: JSON.stringify(@get('rows_footers_counts_config'))
+        cells_data_config: JSON.stringify(@get('cells_data_config'))
 
       return fullRequestData
 
