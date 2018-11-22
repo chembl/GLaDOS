@@ -51,6 +51,7 @@ describe 'Heatmap Aggregation', ->
             field: 'pchembl_value'
 
   colsFootersCountsConfig =
+    index_name: 'chembl_target'
     doc_count: 'activity_count'
     from_x_agg: [
       {
@@ -60,6 +61,7 @@ describe 'Heatmap Aggregation', ->
     ]
 
   rowsFootersCountsConfig =
+    index_name: 'chembl_molecule'
     from_y_agg: [
       {
         prop_name:'max_pchembl_value'
