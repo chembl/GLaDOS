@@ -345,6 +345,8 @@ def request_heatmap_helper(request):
     if request.method != "POST":
         return JsonResponse({'error': 'this is only available via POST'})
 
+    start_time = datetime.datetime.now()
+
     index_name = request.POST.get('index_name', '')
     raw_search_data = request.POST.get('search_data', '')
     action = request.POST.get('action')
@@ -362,6 +364,9 @@ def request_heatmap_helper(request):
         except heatmap_helper.HeatmapError as e:
             response = {'error': repr(e)}
 
+    end_time = datetime.datetime.now()
+    total_time = end_time - start_time
+    print('total_time: ', total_time)
     return JsonResponse(response)
 
 

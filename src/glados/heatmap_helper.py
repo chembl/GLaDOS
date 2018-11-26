@@ -29,7 +29,7 @@ def get_item_updates(heatmap_id, items_list, add_related_ids, doc_type):
             '_type': doc_type,
             # 'script': 'ctx._source.remove("_heatmap")'
             'doc': {
-                '_heatmap_help': {
+                '_heatmap_help_test_0': {
                     "{}".format(heatmap_id): {
                         'related_ids': (item['related_ids'] if add_related_ids else None),
                         'footers_counts': item['footers_counts']
@@ -72,7 +72,7 @@ def update_heatmap_data_on_indexes(heatmap_id, heatmap_helper_struct):
 
         num_items = 0
         for ok, result in streaming_bulk(current_es_connection, updates, index=index_name, doc_type=doc_type,
-                                         chunk_size=10000):
+                                         chunk_size=100):
             action, result = result.popitem()
             doc_id = '/%s/doc/%s' % ('chembl_molecule', result['_id'])
 
@@ -91,7 +91,7 @@ def get_helper_structure(index_name, raw_search_data, aggregations, rows_footers
                          cells_data_config):
     search_data_digest = hashlib.sha256(raw_search_data.encode('utf-8')).digest()
     base64_search_data_hash = base64.b64encode(search_data_digest).decode('utf-8')
-    heatmap_id = "heatmap-test-2-{}-{}".format(index_name, base64_search_data_hash)
+    heatmap_id = "heatmap-test-3-{}-{}".format(index_name, base64_search_data_hash)
     print('heatmap_id:', heatmap_id)
 
     cache_response = None
