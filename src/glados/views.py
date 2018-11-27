@@ -368,6 +368,16 @@ def request_heatmap_helper(request):
 
     return JsonResponse({'data': 'Data'})
 
+# ----------------------------------------------------------------------------------------------------------------------
+# Downloads
+# ----------------------------------------------------------------------------------------------------------------------
+def generate_download(request):
+
+    if request.method != "POST":
+        return JsonResponse({'error': 'This is only available via POST'})
+
+    print('generate download!')
+
 
 # noinspection PyBroadException
 def elasticsearch_cache(request):
