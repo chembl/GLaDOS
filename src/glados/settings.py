@@ -88,7 +88,8 @@ INSTALLED_APPS = [
   'corsheaders',
   'glados',
   'compressor',
-  'twitter'
+  'twitter',
+  'django_rq'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -155,6 +156,17 @@ if 'test' in sys.argv:
     }
 
 DATABASE_ROUTERS = ['glados.db.APIDatabaseRouter.APIDatabaseRouter']
+# ----------------------------------------------------------------------------------------------------------------------
+# Django RQ
+# https://github.com/rq/django-rq
+# ----------------------------------------------------------------------------------------------------------------------
+RQ_QUEUES = {
+    'default': {
+        'HOST': 'localhost',
+        'DB': 0,
+    },
+}
+
 # ----------------------------------------------------------------------------------------------------------------------
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
