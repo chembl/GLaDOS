@@ -29,8 +29,6 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
 
   events: ->
     return _.extend {}, DownloadViewExt.events,
-#      "click #CNC-3d-modal-trigger": "initDefault3DView"
-#      "click #CNC-3d-modal-trigger-small": "initDefault3DView"
       "click a[href='#BCK-compound-3dview-3DMol']": "lazyInit3DView"
       "click a[href='#BCK-compound-3dview-LiteMol']": "lazyInit3DView"
       "click a[href='#BCK-compound-3dview-Speck']": "lazyInit3DView"
