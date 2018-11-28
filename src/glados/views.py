@@ -15,6 +15,7 @@ from . import og_tags_generator
 from . import schema_tags_generator
 from . import glados_server_statistics
 from . import heatmap_helper
+from . import dynamic_downloads_manager
 
 
 def visualise(request):
@@ -376,7 +377,11 @@ def generate_download(request):
     if request.method != "POST":
         return JsonResponse({'error': 'This is only available via POST'})
 
-    print('generate download!')
+    response = dynamic_downloads_manager.generate_download()
+    if response is None:
+        return HttpResponse('Internal Server Error', status=500)
+
+    return JsonResponse(response)
 
 
 # noinspection PyBroadException

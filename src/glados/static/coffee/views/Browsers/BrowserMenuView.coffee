@@ -356,7 +356,7 @@ glados.useNameSpace 'glados.views.Browsers',
           model: @downloadModel
           el: $downloadMessagesElem
 
-#      @downloadModel.startServerSideDownload()
+      @downloadModel.startServerSideDownload()
 
     #--------------------------------------------------------------------------------------
     # Switching Views
