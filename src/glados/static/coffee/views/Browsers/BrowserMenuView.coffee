@@ -350,9 +350,13 @@ glados.useNameSpace 'glados.views.Browsers',
         @downloadModel = new glados.models.Downloads.DownloadModel
           collection: @collection
 
-      @downloadModel.startServerSideDownload()
-#      $progressMessages = $(@el).find('.BCK-download-messages-container')
-#      @collection.downloadAllItems(desiredFormat, undefined, $progressMessages)
+      if not @downloadView?
+        $downloadMessagesElem = $(@el).find('.BCK-download-messages-container')
+        @downloadView = new glados.views.Downloads.ServerSideDownloadView
+          model: @downloadModel
+          el: $downloadMessagesElem
+
+#      @downloadModel.startServerSideDownload()
 
     #--------------------------------------------------------------------------------------
     # Switching Views
