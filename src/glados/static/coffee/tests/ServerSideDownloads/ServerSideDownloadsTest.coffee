@@ -11,7 +11,8 @@ describe "Server Side Downloads", ->
     ]
     esList.setMeta('searchESQuery', searchESQuery)
     esList.setMeta('test_mode', true)
-    TestsUtils.simulateFacetsESList(esList, glados.Settings.STATIC_URL + 'testData/FacetsTestData.json', done)
+    TestsUtils.simulateDataESList(esList,
+      glados.Settings.STATIC_URL + 'testData/SearchResultsAspirinTestData.json', done)
 
   beforeEach ->
 
@@ -23,3 +24,16 @@ describe "Server Side Downloads", ->
     stateMustBe = glados.models.Downloads.DownloadModel.states.INITIAL_STATE
     stateGot = downloadModel.getState()
     expect(stateGot).toBe(stateMustBe)
+
+  it 'generates the download params for all items', ->
+
+    requestData = esList.getRequestData()
+    downloadParamsGot = downloadModel.getDownloadParams()
+
+    queryGot = downloadParamsGot.query
+    queryMustBe = requestData.query
+    expect(_.isEqual(queryMustBe, queryGot)).toBe(true)
+
+    indexNameGot = downloadParamsGot.index_name
+    indexNameMustBe = esList.getMeta('index_name')
+    expect(indexNameGot).toBe(indexNameMustBe)
