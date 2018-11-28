@@ -345,6 +345,12 @@ glados.useNameSpace 'glados.views.Browsers',
       desiredFormat = $(event.currentTarget).attr('data-format')
 
       console.log 'going to generate download for: ', desiredFormat
+
+      if not @downloadModel?
+        @downloadModel = new glados.models.Downloads.DownloadModel
+          collection: @collection
+
+      @downloadModel.startServerSideDownload()
 #      $progressMessages = $(@el).find('.BCK-download-messages-container')
 #      @collection.downloadAllItems(desiredFormat, undefined, $progressMessages)
 
