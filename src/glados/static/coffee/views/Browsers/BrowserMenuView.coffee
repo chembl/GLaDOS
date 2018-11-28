@@ -343,8 +343,10 @@ glados.useNameSpace 'glados.views.Browsers',
 
     triggerAllItemsDownload: (event) ->
       desiredFormat = $(event.currentTarget).attr('data-format')
-      $progressMessages = $(@el).find('.download-messages-container')
-      @collection.downloadAllItems(desiredFormat, undefined, $progressMessages)
+
+      console.log 'going to generate download for: ', desiredFormat
+#      $progressMessages = $(@el).find('.BCK-download-messages-container')
+#      @collection.downloadAllItems(desiredFormat, undefined, $progressMessages)
 
     #--------------------------------------------------------------------------------------
     # Switching Views
