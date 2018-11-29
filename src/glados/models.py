@@ -20,15 +20,15 @@ class TinyURL(models.Model):
 
 
 class Country(models.Model):
-    country_id = models.CharField(max_length=30, primary_key=True)
-    country_name = models.CharField(max_length=35)
-    region_id = models.IntegerField(null=True, blank=True)
-    class Meta:
-        db_table = u'COUNTRIES'
-        managed = False
+  country_id = models.CharField(max_length=30, primary_key=True)
+  country_name = models.CharField(max_length=35)
+  region_id = models.IntegerField(null=True, blank=True)
+  class Meta:
+    db_table = u'COUNTRIES'
+    managed = False
 
-    def __str__(self):
-        return self.country_name
+  def __str__(self):
+    return self.country_name
         
 class ESCachedRequest(models.Model):
   es_index = models.CharField(max_length=200)
@@ -52,3 +52,6 @@ class ESCachedRequest(models.Model):
     )
     obj.save()
     return obj.to_dict(include_meta=True)
+
+
+
