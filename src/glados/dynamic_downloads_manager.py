@@ -17,7 +17,7 @@ def generate_download_file():
 def get_download_id(index_name, raw_query):
     latest_release_full = 'chembl_24_1'
     query_digest = hashlib.sha256(raw_query.encode('utf-8')).digest()
-    base64_query_digest = base64.b64encode(query_digest).decode('utf-8')
+    base64_query_digest = base64.b64encode(query_digest).decode('utf-8').replace('/', '_').replace('+', '-')
 
     download_id = "{}-{}-{}".format(latest_release_full, index_name, base64_query_digest)
     return download_id

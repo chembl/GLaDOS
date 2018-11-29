@@ -37,3 +37,13 @@ describe "Server Side Downloads", ->
     indexNameGot = downloadParamsGot.index_name
     indexNameMustBe = esList.getMeta('index_name')
     expect(indexNameGot).toBe(indexNameMustBe)
+
+  it 'generates the params to request the download status', ->
+
+    testDownloadID = 'someDownloadId'
+    progressURLGot = downloadModel.getProgressURL()
+    progressURLMustBe = "#{glados.Settings.GLADOS_BASE_PATH_REL}download-progress/"
+    console.log 'progressURLMustBe: ', progressURLMustBe
+
+
+
