@@ -222,7 +222,7 @@ common_urls = [
   # Downloads
   # --------------------------------------------------------------------------------------------------------------------
   url(r'^generate-download', views.generate_download, name='generate_download'),
-  # url(r'^download-progress', views.generate_download, name='generate_download'),
+  url(r'^download-progress/(?P<download_id>.*)$', views.get_download_status, name='get_download_status'),
 ]
 
 # ----------------------------------------------------------------------------------------------------------------------

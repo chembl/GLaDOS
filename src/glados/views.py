@@ -380,9 +380,22 @@ def generate_download(request):
 
     index_name = request.POST.get('index_name', '')
     raw_query = request.POST.get('query', '')
+    desired_format = request.POST.get('format', '')
 
     try:
-        response = dynamic_downloads_manager.generate_download(index_name, raw_query)
+        response = dynamic_downloads_manager.generate_download(index_name, raw_query, desired_format)
+        return JsonResponse(response)
+    except Exception as e:
+        traceback.print_exc()
+        return HttpResponse('Internal Server Error', status=500)
+
+def get_download_status(request, download_id):
+
+    if request.method != "GET":
+        return JsonResponse({'error': 'This is only available via GET'})
+
+    try:
+        response = dynamic_downloads_manager.get_download_status(download_id)
         return JsonResponse(response)
     except Exception as e:
         traceback.print_exc()
