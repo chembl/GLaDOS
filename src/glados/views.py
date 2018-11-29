@@ -377,6 +377,7 @@ def generate_download(request):
     if request.method != "POST":
         return JsonResponse({'error': 'This is only available via POST'})
 
+    
     response = dynamic_downloads_manager.generate_download()
     if response is None:
         return HttpResponse('Internal Server Error', status=500)

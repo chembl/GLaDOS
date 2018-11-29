@@ -31,8 +31,8 @@ describe "Server Side Downloads", ->
     downloadParamsGot = downloadModel.getDownloadParams()
 
     queryGot = downloadParamsGot.query
-    queryMustBe = requestData.query
-    expect(_.isEqual(queryMustBe, queryGot)).toBe(true)
+    queryMustBe = JSON.stringify(requestData.query)
+    expect(queryGot).toBe(queryMustBe)
 
     indexNameGot = downloadParamsGot.index_name
     indexNameMustBe = esList.getMeta('index_name')
