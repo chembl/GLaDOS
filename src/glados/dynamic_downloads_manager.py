@@ -4,4 +4,4 @@
 def generate_download():
 
     response = {}
-    return None
+    return response

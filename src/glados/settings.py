@@ -163,10 +163,12 @@ DATABASE_ROUTERS = ['glados.db.APIDatabaseRouter.APIDatabaseRouter']
 RQ_QUEUES = {
     'default': {
         'HOST': 'localhost',
+        'PORT': 6379,
         'DB': 0,
     },
 }
 
+print('squilte url: ', "sqlite://{}".format(os.path.join(GLADOS_ROOT, 'db/db.sqlite3')))
 # ----------------------------------------------------------------------------------------------------------------------
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
