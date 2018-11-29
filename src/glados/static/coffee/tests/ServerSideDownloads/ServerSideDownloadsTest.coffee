@@ -27,8 +27,9 @@ describe "Server Side Downloads", ->
 
   it 'generates the download params for all items', ->
 
+    desiredFormat = 'CSV'
     requestData = esList.getRequestData()
-    downloadParamsGot = downloadModel.getDownloadParams()
+    downloadParamsGot = downloadModel.getDownloadParams(desiredFormat)
 
     queryGot = downloadParamsGot.query
     queryMustBe = JSON.stringify(requestData.query)
@@ -37,6 +38,9 @@ describe "Server Side Downloads", ->
     indexNameGot = downloadParamsGot.index_name
     indexNameMustBe = esList.getMeta('index_name')
     expect(indexNameGot).toBe(indexNameMustBe)
+
+    formatGot = downloadParamsGot.format
+    expect(formatGot).toBe(desiredFormat)
 
   it 'generates the params to request the download status', ->
 
