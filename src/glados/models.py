@@ -29,7 +29,8 @@ class Country(models.Model):
 
     def __str__(self):
         return self.country_name
-        
+
+
 class ESCachedRequest(models.Model):
     es_index = models.CharField(max_length=200)
     es_query = models.TextField()
@@ -54,5 +55,9 @@ class ESCachedRequest(models.Model):
         return obj.to_dict(include_meta=True)
 
 
+# This is to keep track of the status of a download job
+class DownloadJob(models.Model):
+    job_id = models.TextField(primary_key=True)
+    progress = models.PositiveSmallIntegerField(default=0)
 
 

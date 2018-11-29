@@ -168,7 +168,6 @@ RQ_QUEUES = {
     },
 }
 
-print('squilte url: ', "sqlite://{}".format(os.path.join(GLADOS_ROOT, 'db/db.sqlite3')))
 # ----------------------------------------------------------------------------------------------------------------------
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
