@@ -340,11 +340,12 @@ glados.useNameSpace 'glados.views.Browsers',
     #--------------------------------------------------------------------------------------
     # Download Buttons
     #--------------------------------------------------------------------------------------
-
     triggerAllItemsDownload: (event) ->
-      desiredFormat = $(event.currentTarget).attr('data-format')
+      $clickedBtn = $(event.currentTarget)
+      if $clickedBtn.hasClass('disabled')
+        return
 
-      console.log 'going to generate download for: ', desiredFormat
+      desiredFormat = $clickedBtn.attr('data-format')
 
       if not @downloadModel?
         @downloadModel = new glados.models.Downloads.DownloadModel
@@ -356,7 +357,10 @@ glados.useNameSpace 'glados.views.Browsers',
           model: @downloadModel
           el: $downloadMessagesElem
 
-      @downloadModel.startServerSideDownload()
+      @downloadModel.startServerSideDownload(desiredFormat)
+      @disableOtherDownloadButtons()
+
+    disableOtherDownloadButtons: -> $(@el).find('.BCK-download-btn-for-format').addClass('disabled')
 
     #--------------------------------------------------------------------------------------
     # Switching Views
