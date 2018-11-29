@@ -16,6 +16,7 @@ from . import schema_tags_generator
 from . import glados_server_statistics
 from . import heatmap_helper
 from . import dynamic_downloads_manager
+import traceback
 
 
 def visualise(request):
@@ -377,12 +378,15 @@ def generate_download(request):
     if request.method != "POST":
         return JsonResponse({'error': 'This is only available via POST'})
 
-    
-    response = dynamic_downloads_manager.generate_download()
-    if response is None:
-        return HttpResponse('Internal Server Error', status=500)
+    index_name = request.POST.get('index_name', '')
+    raw_query = request.POST.get('query', '')
 
-    return JsonResponse(response)
+    try:
+        response = dynamic_downloads_manager.generate_download(index_name, raw_query)
+        return JsonResponse(response)
+    except Exception as e:
+        traceback.print_exc()
+        return HttpResponse('Internal Server Error', status=500)
 
 
 # noinspection PyBroadException

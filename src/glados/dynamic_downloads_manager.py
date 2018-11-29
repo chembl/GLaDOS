@@ -12,7 +12,7 @@ def generate_download_file():
         time.sleep(1)
 
 
-def generate_download():
+def generate_download(index_name, raw_query):
     generate_download_file.delay()
     response = {}
     return response
