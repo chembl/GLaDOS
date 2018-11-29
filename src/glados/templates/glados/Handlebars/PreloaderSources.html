@@ -45,12 +45,24 @@
   </div>
   {{/if}}
 
-
     <div class="progress">
       <div class="indeterminate"></div>
     </div>
 
+</script>
 
+<script id="Handlebars-Common-LinearPreloader-Determinate" type="text/x-handlebars-template">
+
+
+  {{#if msg}}
+  <div class="center-align">
+    {{msg}} ({{percentage}}%)
+  </div>
+  {{/if}}
+
+    <div class="progress">
+      <div class="determinate" style="width: {{percentage}}%"></div>
+    </div>
 
 </script>
 
