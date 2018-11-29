@@ -56,19 +56,6 @@
 </script>
 {% endcompress%}
 
-  <!-- a function to be called after the content is rendered  -->
-{% compress js %}
-  <script type="text/javascript" charset="utf-8">
-
-    afterRender = function (){
-
-      {% block custom_afterRender %}{% endblock %}
-
-    }
-
-  </script>
-  {% endcompress%}
-
 {% load static %}
 
 <!-- common imports for all templates that need to be last -->

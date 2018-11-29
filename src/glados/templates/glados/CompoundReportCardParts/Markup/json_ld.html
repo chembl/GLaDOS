@@ -1,0 +1,8 @@
+<!--- data sets json_ld -->
+{% if schema_helper_obj.metadata_generated %}
+<script id='JSON_LD' type="application/ld+json">
+{% autoescape off %}
+    {{ schema_helper_obj.metadata_obj }}
+{% endautoescape %}
+</script>
+{% endif %}
