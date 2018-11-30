@@ -157,7 +157,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       embed_section_name: 'mechanism_of_action'
       embed_identifier: chemblID
       table_config:
-        full_list_url: glados.models.Compound.MechanismOfAction.getListURL(chemblID)
+        full_list_url: glados.models.Compound.MechanismOfAction.getListURLByMoleculeChemblId(chemblID)
 
     tableView = new glados.views.ReportCards.PaginatedTableInCardView
       collection: list
