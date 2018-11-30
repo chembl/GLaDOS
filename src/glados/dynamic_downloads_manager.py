@@ -4,7 +4,10 @@ from django_rq import job
 import hashlib
 import base64
 from glados.models import DownloadJob
+from elasticsearch.helpers import scan
+from elasticsearch_dsl.connections import connections
 import json
+import traceback
 
 class DownloadError(Exception):
     """Base class for exceptions in this file."""
@@ -18,6 +21,18 @@ def generate_download_file(download_id):
     download_job.status = DownloadJob.PROCESSING
     download_job.save()
 
+    try:
+        es_conn = connections.get_connection()
+        scanner = scan(es_conn, index='chembl_molecule', size=1000, query={
+          "_source": ""
+        })
+
+    except:
+        download_job.status = DownloadJob.ERROR
+        download_job.save()
+        traceback.print_exc()
+        return
+
     num = 100
     for i in range(num + 1):
         print('i: ', i)
@@ -27,6 +42,12 @@ def generate_download_file(download_id):
 
     download_job.status = DownloadJob.FINISHED
     download_job.save()
+
+    print('---')
+    print('save to elasticsearch: ')
+    print('download_id: ', download_id)
+    print('date: ', time.time())
+    print('is_new: ', True)
 
 def get_download_id(index_name, raw_query, desired_format):
 
@@ -52,8 +73,15 @@ def generate_download(index_name, raw_query, desired_format):
     print('download_id: ', download_id)
 
     try:
-        DownloadJob.objects.get(job_id=download_id)
+        download_job = DownloadJob.objects.get(job_id=download_id)
         print('job already in queue')
+        if download_job.status == DownloadJob.ERROR:
+            print('job was in error, retrying')
+            download_job.progress = 0
+            download_job.status = DownloadJob.QUEUED
+            download_job.save()
+            generate_download_file.delay(download_id)
+
     except DownloadJob.DoesNotExist:
         download_job = DownloadJob(job_id=download_id)
         download_job.save()
