@@ -460,7 +460,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       MECHANISMS_OF_ACTION:
         ID_NAME: 'ESMechsOfAction'
         LABEL: 'Mechanisms of Action'
-        INDEX_NAME: 'chembl_mechanism'
+        INDEX_NAME: 'chembl_mechanism_by_parent_target'
         BROWSE_LIST_URL: glados.models.Compound.MechanismOfAction.getListURL
         MODEL: glados.models.Compound.MechanismOfAction
         COLUMNS: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.ALL_COLUMNS
