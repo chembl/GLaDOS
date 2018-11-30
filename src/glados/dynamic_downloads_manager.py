@@ -10,16 +10,22 @@ class DownloadError(Exception):
     pass
 
 @job
-def generate_download_file():
+def generate_download_file(download_id):
 
-    num = 10
+    print('generate_download_file: ', download_id)
+    download_job = DownloadJob.objects.get(job_id=download_id)
+
+    num = 100
     for i in range(num):
         print('i: ', i)
+        download_job.progress = i
+        download_job.save()
         time.sleep(1)
 
 
 def get_download_id(index_name, raw_query, desired_format):
 
+    print('rawy_query:', raw_query)
     parsed_desired_format = desired_format.lower()
     if parsed_desired_format not in ['csv', 'tsv', 'csv']:
         raise DownloadError("Format {} not supported".format(desired_format))
@@ -35,12 +41,16 @@ def get_download_id(index_name, raw_query, desired_format):
 def generate_download(index_name, raw_query, desired_format):
     response = {}
     download_id = get_download_id(index_name, raw_query, desired_format)
+    print('download_id: ', download_id)
 
     try:
         DownloadJob.objects.get(job_id=download_id)
+        print('job already in queue')
     except DownloadJob.DoesNotExist:
         download_job = DownloadJob(job_id=download_id)
         download_job.save()
+        generate_download_file.delay(download_id)
+        print('new job created')
 
     response['download_id'] = download_id
     return response
@@ -48,7 +58,11 @@ def generate_download(index_name, raw_query, desired_format):
 def get_download_status(download_id):
 
     try:
-        download_job = DownloadJob.objects.get(job_id='kklkl')
+        download_job = DownloadJob.objects.get(job_id=download_id)
+        response = {
+            'percentage': download_job.progress
+        }
+        return response
 
     except DownloadJob.DoesNotExist:
         print('does not exist!')

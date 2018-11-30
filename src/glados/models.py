@@ -61,3 +61,4 @@ class DownloadJob(models.Model):
     progress = models.PositiveSmallIntegerField(default=0)
 
 
+
