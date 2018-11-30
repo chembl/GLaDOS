@@ -60,5 +60,15 @@ class DownloadJob(models.Model):
     job_id = models.TextField(primary_key=True)
     progress = models.PositiveSmallIntegerField(default=0)
 
+    QUEUED = 'QUEUED'
+    PROCESSING = 'PROCESSING'
+    ERROR = 'ERROR'
+    STATUSES = (
+        (QUEUED, QUEUED),
+        (PROCESSING, PROCESSING),
+        (ERROR, ERROR),
+    )
+    status = models.CharField(max_length=20, choices=STATUSES, default=QUEUED)
+
 
 

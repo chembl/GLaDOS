@@ -15,6 +15,8 @@ def generate_download_file(download_id):
 
     print('generate_download_file: ', download_id)
     download_job = DownloadJob.objects.get(job_id=download_id)
+    download_job.status = DownloadJob.PROCESSING
+    download_job.save()
 
     num = 100
     for i in range(num):
@@ -64,7 +66,9 @@ def get_download_status(download_id):
     try:
         download_job = DownloadJob.objects.get(job_id=download_id)
         response = {
-            'percentage': download_job.progress
+            'percentage': download_job.progress,
+            'status': download_job.status
+
         }
         return response
 
