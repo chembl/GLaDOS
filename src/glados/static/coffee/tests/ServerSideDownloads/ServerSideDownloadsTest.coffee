@@ -45,9 +45,10 @@ describe "Server Side Downloads", ->
   it 'generates the params to request the download status', ->
 
     testDownloadID = 'someDownloadId'
+    downloadModel.set('download_id', testDownloadID)
     progressURLGot = downloadModel.getProgressURL()
-    progressURLMustBe = "#{glados.Settings.GLADOS_BASE_PATH_REL}download-progress/"
-    console.log 'progressURLMustBe: ', progressURLMustBe
+    progressURLMustBe = "#{glados.Settings.GLADOS_BASE_PATH_REL}download-progress/#{testDownloadID}"
+    expect(progressURLGot).toBe(progressURLMustBe)
 
 
 
