@@ -13,7 +13,8 @@ def get_and_record_es_cached_response(index_name, raw_search_data):
     # the usage in elasticsearch
 
     print('elasticsearch_cache')
-    search_data_digest = hashlib.sha256(raw_search_data.encode('utf-8')).digest()
+    stable_raw_search_data = json.dumps(json.loads(raw_search_data), sort_keys=True)
+    search_data_digest = hashlib.sha256(stable_raw_search_data.encode('utf-8')).digest()
     base64_search_data_hash = base64.b64encode(search_data_digest).decode('utf-8')
     search_data = json.loads(raw_search_data)
 

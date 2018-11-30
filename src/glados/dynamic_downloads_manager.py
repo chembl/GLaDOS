@@ -4,6 +4,7 @@ from django_rq import job
 import hashlib
 import base64
 from glados.models import DownloadJob
+import json
 
 class DownloadError(Exception):
     """Base class for exceptions in this file."""
@@ -25,13 +26,16 @@ def generate_download_file(download_id):
 
 def get_download_id(index_name, raw_query, desired_format):
 
-    print('rawy_query:', raw_query)
+    # make sure the string generated is stable
+    stable_raw_query = json.dumps(json.loads(raw_query), sort_keys=True)
+    print('stable_raw_query:', stable_raw_query)
+
     parsed_desired_format = desired_format.lower()
     if parsed_desired_format not in ['csv', 'tsv', 'csv']:
         raise DownloadError("Format {} not supported".format(desired_format))
 
     latest_release_full = 'chembl_24_1'
-    query_digest = hashlib.sha256(raw_query.encode('utf-8')).digest()
+    query_digest = hashlib.sha256(stable_raw_query.encode('utf-8')).digest()
     base64_query_digest = base64.b64encode(query_digest).decode('utf-8').replace('/', '_').replace('+', '-')
 
     download_id = "{}-{}-{}.{}".format(latest_release_full, index_name, base64_query_digest, parsed_desired_format)
