@@ -63,9 +63,11 @@ class DownloadJob(models.Model):
     QUEUED = 'QUEUED'
     PROCESSING = 'PROCESSING'
     ERROR = 'ERROR'
+    FINISHED = 'FINISHED'
     STATUSES = (
         (QUEUED, QUEUED),
         (PROCESSING, PROCESSING),
+        (FINISHED, FINISHED),
         (ERROR, ERROR),
     )
     status = models.CharField(max_length=20, choices=STATUSES, default=QUEUED)

@@ -19,12 +19,14 @@ def generate_download_file(download_id):
     download_job.save()
 
     num = 100
-    for i in range(num):
+    for i in range(num + 1):
         print('i: ', i)
         download_job.progress = i
         download_job.save()
         time.sleep(1)
 
+    download_job.status = DownloadJob.FINISHED
+    download_job.save()
 
 def get_download_id(index_name, raw_query, desired_format):
 
@@ -75,6 +77,7 @@ def get_download_status(download_id):
     except DownloadJob.DoesNotExist:
         print('does not exist!')
         response = {
-            'error': 'download does not exist!'
+            'msg': 'download does not exist!',
+            'status:': DownloadJob.ERROR
         }
         return response
