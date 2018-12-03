@@ -46,7 +46,7 @@ describe "Server Side Downloads", ->
     columnComparatorsMustBe = (col.comparator for col in downloadColumnsMustBe)
     columnLabelsMustBe = (col.name_to_show for col in downloadColumnsMustBe)
 
-    columnsGot = downloadParamsGot.columns
+    columnsGot = JSON.parse(downloadParamsGot.columns)
     columnComparatorsGot = (col.property_name for col in columnsGot)
     expect(_.isEqual(columnComparatorsGot, columnComparatorsMustBe)).toBe(true)
 

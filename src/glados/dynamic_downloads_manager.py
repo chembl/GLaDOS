@@ -34,19 +34,23 @@ def generate_download_file(download_id):
     download_job.status = DownloadJob.PROCESSING
     download_job.save()
 
+    index_name = download_job.index_name
+    raw_columns_to_download = download_job.raw_columns_to_download
+    cols_to_download = json.loads(raw_columns_to_download)
+    print('cols_to_download: ', cols_to_download)
+
     try:
         es_conn = connections.get_connection()
         query = {}
         print('searching...')
-        source_include = ['molecule_chembl_id']
-        search = Search(index="chembl_molecule").source(source_include)
+        search = Search(index=index_name).source([''])
         response = search.execute()
         total_items = response.hits.total
 
         print('size: ', total_items)
-
-        scanner = scan(es_conn, index='chembl_molecule', size=1000, query={
-            "_source": "molecule_chembl_id"
+        print('source', [col['property_name'] for col in cols_to_download])
+        scanner = scan(es_conn, index=index_name, size=1000, query={
+            "_source": [col['property_name'] for col in cols_to_download]
         })
 
         i = 0
@@ -95,7 +99,7 @@ def get_download_id(index_name, raw_query, desired_format):
     return download_id
 
 
-def generate_download(index_name, raw_query, desired_format):
+def generate_download(index_name, raw_query, desired_format, raw_columns_to_download):
     response = {}
     download_id = get_download_id(index_name, raw_query, desired_format)
     print('download_id: ', download_id)
@@ -111,13 +115,18 @@ def generate_download(index_name, raw_query, desired_format):
             generate_download_file.delay(download_id)
 
     except DownloadJob.DoesNotExist:
-        download_job = DownloadJob(job_id=download_id)
+        download_job = DownloadJob(
+            job_id=download_id,
+            index_name=index_name,
+            raw_columns_to_download=raw_columns_to_download
+        )
         download_job.save()
         generate_download_file.delay(download_id)
         print('new job created')
 
     response['download_id'] = download_id
     return response
+
 
 def get_download_status(download_id):
 

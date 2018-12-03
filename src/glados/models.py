@@ -59,6 +59,7 @@ class ESCachedRequest(models.Model):
 class DownloadJob(models.Model):
     job_id = models.TextField(primary_key=True)
     progress = models.PositiveSmallIntegerField(default=0)
+    raw_columns_to_download = models.TextField(null=True)
 
     QUEUED = 'QUEUED'
     PROCESSING = 'PROCESSING'
@@ -71,6 +72,5 @@ class DownloadJob(models.Model):
         (ERROR, ERROR),
     )
     status = models.CharField(max_length=20, choices=STATUSES, default=QUEUED)
-
-
+    index_name = models.CharField(max_length=200, null=True)
 

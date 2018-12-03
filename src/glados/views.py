@@ -373,6 +373,8 @@ def request_heatmap_helper(request):
 # ----------------------------------------------------------------------------------------------------------------------
 # Downloads
 # ----------------------------------------------------------------------------------------------------------------------
+
+
 def generate_download(request):
 
     if request.method != "POST":
@@ -381,13 +383,16 @@ def generate_download(request):
     index_name = request.POST.get('index_name', '')
     raw_query = request.POST.get('query', '')
     desired_format = request.POST.get('format', '')
+    raw_columns_to_download = request.POST.get('columns', '')
 
     print('index_name: ', index_name)
     print('raw_query: ', raw_query)
     print('desired_format: ', desired_format)
+    print('raw_columns_to_download: ', raw_columns_to_download)
 
     try:
-        response = dynamic_downloads_manager.generate_download(index_name, raw_query, desired_format)
+        response = dynamic_downloads_manager.generate_download(index_name, raw_query, desired_format,
+                                                               raw_columns_to_download)
         return JsonResponse(response)
     except Exception as e:
         traceback.print_exc()
