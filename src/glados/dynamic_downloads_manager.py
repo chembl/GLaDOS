@@ -4,18 +4,31 @@ from django_rq import job
 import hashlib
 import base64
 from glados.models import DownloadJob
+from elasticsearch_dsl import Search
 from elasticsearch.helpers import scan
 from elasticsearch_dsl.connections import connections
 import json
 import traceback
+from . import glados_server_statistics
 
 class DownloadError(Exception):
     """Base class for exceptions in this file."""
     pass
 
+
+def save_download_job_progress(download_job, progress_percentage):
+    download_job.progress = progress_percentage
+    download_job.save()
+
+
+def save_download_job_state(download_job, new_state):
+    download_job.status = new_state
+    download_job.save()
+
 @job
 def generate_download_file(download_id):
 
+    start_time = time.time()
     print('generate_download_file: ', download_id)
     download_job = DownloadJob.objects.get(job_id=download_id)
     download_job.status = DownloadJob.PROCESSING
@@ -23,31 +36,43 @@ def generate_download_file(download_id):
 
     try:
         es_conn = connections.get_connection()
+        query = {}
+        print('searching...')
+        source_include = ['molecule_chembl_id']
+        search = Search(index="chembl_molecule").source(source_include)
+        response = search.execute()
+        total_items = response.hits.total
+
+        print('size: ', total_items)
+
         scanner = scan(es_conn, index='chembl_molecule', size=1000, query={
-          "_source": ""
+            "_source": ""
         })
 
+        i = 0
+        previous_percentage = 0
+        for doc_i in scanner:
+
+            i += 1
+            percentage = int((i/total_items) * 100)
+            if percentage != previous_percentage:
+                previous_percentage = percentage
+                print('percentage: ', percentage)
+                save_download_job_progress(download_job, percentage)
+
+        save_download_job_state(download_job, DownloadJob.FINISHED)
+
+        end_time = time.time()
+        time_taken = start_time - end_time
+        date = time.time()
+        glados_server_statistics.record_download(download_id, date, time_taken, is_new=True)
+
     except:
-        download_job.status = DownloadJob.ERROR
-        download_job.save()
+        save_download_job_state(download_job, DownloadJob.ERROR)
         traceback.print_exc()
         return
 
-    num = 100
-    for i in range(num + 1):
-        print('i: ', i)
-        download_job.progress = i
-        download_job.save()
-        time.sleep(1)
 
-    download_job.status = DownloadJob.FINISHED
-    download_job.save()
-
-    print('---')
-    print('save to elasticsearch: ')
-    print('download_id: ', download_id)
-    print('date: ', time.time())
-    print('is_new: ', True)
 
 def get_download_id(index_name, raw_query, desired_format):
 

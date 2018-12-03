@@ -382,6 +382,10 @@ def generate_download(request):
     raw_query = request.POST.get('query', '')
     desired_format = request.POST.get('format', '')
 
+    print('index_name: ', index_name)
+    print('raw_query: ', raw_query)
+    print('desired_format: ', desired_format)
+
     try:
         response = dynamic_downloads_manager.generate_download(index_name, raw_query, desired_format)
         return JsonResponse(response)

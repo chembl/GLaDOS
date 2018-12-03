@@ -356,11 +356,14 @@ glados.useNameSpace 'glados.views.Browsers',
         @downloadView = new glados.views.Downloads.ServerSideDownloadView
           model: @downloadModel
           el: $downloadMessagesElem
+          menu_view: @
 
       @downloadModel.startServerSideDownload(desiredFormat)
-      @disableOtherDownloadButtons()
+      @disableDownloadButtons()
 
-    disableOtherDownloadButtons: -> $(@el).find('.BCK-download-btn-for-format').addClass('disabled')
+    disableDownloadButtons: -> $(@el).find('.BCK-download-btn-for-format').addClass('disabled')
+    enableDownloadButtons: -> $(@el).find('.BCK-download-btn-for-format').removeClass('disabled')
+
 
     #--------------------------------------------------------------------------------------
     # Switching Views

@@ -73,3 +73,12 @@ def record_elasticsearch_cache_usage(index_name, search_data, base64_search_data
     except:
         traceback.print_exc()
         print('Error saving in elastic!')
+
+
+def record_download(download_id, date, time_taken, is_new):
+    print('---')
+    print('save to elasticsearch: ')
+    print('download_id: ', download_id)
+    print('date: ', date)
+    print('time_taken: ', time_taken)
+    print('is_new: ', is_new)
