@@ -42,6 +42,17 @@ describe "Server Side Downloads", ->
     formatGot = downloadParamsGot.format
     expect(formatGot).toBe(desiredFormat)
 
+    downloadColumnsMustBe = esList.getMeta('download_columns')
+    columnComparatorsMustBe = (col.comparator for col in downloadColumnsMustBe)
+    columnLabelsMustBe = (col.name_to_show for col in downloadColumnsMustBe)
+
+    columnsGot = downloadParamsGot.columns
+    columnComparatorsGot = (col.property_name for col in columnsGot)
+    expect(_.isEqual(columnComparatorsGot, columnComparatorsMustBe)).toBe(true)
+
+    columnLabelsGot = (col.label for col in columnsGot)
+    expect(_.isEqual(columnLabelsGot, columnLabelsMustBe)).toBe(true)
+
   it 'generates the params to request the download status', ->
 
     testDownloadID = 'someDownloadId'

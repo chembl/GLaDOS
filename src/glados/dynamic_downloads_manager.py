@@ -46,14 +46,17 @@ def generate_download_file(download_id):
         print('size: ', total_items)
 
         scanner = scan(es_conn, index='chembl_molecule', size=1000, query={
-            "_source": ""
+            "_source": "molecule_chembl_id"
         })
 
         i = 0
         previous_percentage = 0
         for doc_i in scanner:
-
             i += 1
+
+            if i % 200000 == 0:
+                print('doc_i: ', doc_i)
+
             percentage = int((i/total_items) * 100)
             if percentage != previous_percentage:
                 previous_percentage = percentage
@@ -63,7 +66,7 @@ def generate_download_file(download_id):
         save_download_job_state(download_job, DownloadJob.FINISHED)
 
         end_time = time.time()
-        time_taken = start_time - end_time
+        time_taken = end_time - start_time
         date = time.time()
         glados_server_statistics.record_download(download_id, date, time_taken, is_new=True)
 
