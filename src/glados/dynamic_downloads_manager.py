@@ -15,6 +15,10 @@ class DownloadError(Exception):
     """Base class for exceptions in this file."""
     pass
 
+# ----------------------------------------------------------------------------------------------------------------------
+# Download jon helpers
+# ----------------------------------------------------------------------------------------------------------------------
+
 
 def save_download_job_progress(download_job, progress_percentage):
     download_job.progress = progress_percentage
@@ -24,6 +28,33 @@ def save_download_job_progress(download_job, progress_percentage):
 def save_download_job_state(download_job, new_state):
     download_job.status = new_state
     download_job.save()
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Writing csv and tsv files
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+def write_csv_or_tsv_file(scanner, download_job):
+    file_name = download_job.job_id
+    total_items = download_job.total_items
+    with open(file_name, 'w') as out_file:
+
+        out_file.write('hola')
+
+        i = 0
+        previous_percentage = 0
+        for doc_i in scanner:
+            i += 1
+
+            if i % 200000 == 0:
+                print('doc_i: ', doc_i)
+
+            percentage = int((i / total_items) * 100)
+            if percentage != previous_percentage:
+                previous_percentage = percentage
+                print('percentage: ', percentage)
+                save_download_job_progress(download_job, percentage)
+
 
 @job
 def generate_download_file(download_id):
@@ -53,20 +84,10 @@ def generate_download_file(download_id):
             "_source": [col['property_name'] for col in cols_to_download]
         })
 
-        i = 0
-        previous_percentage = 0
-        for doc_i in scanner:
-            i += 1
+        download_job.total_items = total_items
+        download_job.save()
 
-            if i % 200000 == 0:
-                print('doc_i: ', doc_i)
-
-            percentage = int((i/total_items) * 100)
-            if percentage != previous_percentage:
-                previous_percentage = percentage
-                print('percentage: ', percentage)
-                save_download_job_progress(download_job, percentage)
-
+        write_csv_or_tsv_file(scanner, download_job)
         save_download_job_state(download_job, DownloadJob.FINISHED)
 
         end_time = time.time()
