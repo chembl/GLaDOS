@@ -104,13 +104,14 @@ def parse_and_format_cell(original_value, index_name, property_name):
 # ----------------------------------------------------------------------------------------------------------------------
 
 
-def write_csv_or_tsv_file(scanner, download_job, cols_to_download, index_name):
+def write_csv_or_tsv_file(scanner, download_job, cols_to_download, index_name, desired_format):
     file_name = download_job.job_id + '.gz'
     total_items = download_job.total_items
+    separator = ',' if desired_format == 'csv' else '\t'
 
     with gzip.open(file_name, 'wt', encoding='utf-16-le') as out_file:
 
-        header_line = ','.join([format_cell(col['label']) for col in cols_to_download])
+        header_line = separator.join([format_cell(col['label']) for col in cols_to_download])
         out_file.write(header_line + '\n')
 
         i = 0
@@ -123,8 +124,35 @@ def write_csv_or_tsv_file(scanner, download_job, cols_to_download, index_name):
             properties_to_get = [col['property_name'] for col in cols_to_download]
             values = [parse_and_format_cell(dot_notation_getter.get_from_string(prop_name), index_name, prop_name) for
                       prop_name in properties_to_get]
-            item_line = ','.join(values)
+            item_line = separator.join(values)
             out_file.write(item_line + '\n')
+
+            percentage = int((i / total_items) * 100)
+            if percentage != previous_percentage:
+                previous_percentage = percentage
+                print('percentage: ', percentage)
+                save_download_job_progress(download_job, percentage)
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Writing sdf files
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+def write_sdf_file(scanner, download_job):
+    file_name = download_job.job_id + '.gz'
+    total_items = download_job.total_items
+    with gzip.open(file_name, 'wt') as out_file:
+
+        i = 0
+        previous_percentage = 0
+        for doc_i in scanner:
+            i += 1
+
+            doc_source = doc_i['_source']
+            dot_notation_getter = DotNotationGetter(doc_source)
+            sdf_value = dot_notation_getter.get_from_string('_metadata.compound_generated.sdf_data')
+            out_file.write(sdf_value)
+            out_file.write('$$$$\n')
 
             percentage = int((i / total_items) * 100)
             if percentage != previous_percentage:
@@ -148,6 +176,7 @@ def generate_download_file(download_id):
     cols_to_download = json.loads(raw_columns_to_download)
     raw_query = download_job.raw_query
     query = json.loads(raw_query)
+    desired_format = download_job.desired_format
     print('query: ', query)
     print('cols_to_download: ', cols_to_download)
 
@@ -160,15 +189,24 @@ def generate_download_file(download_id):
 
         print('size: ', total_items)
         print('source', [col['property_name'] for col in cols_to_download])
+        if desired_format in ['csv', 'tsv']:
+            source = [col['property_name'] for col in cols_to_download]
+        if desired_format == 'sdf':
+            source = ['_metadata.compound_generated.sdf_data']
+
         scanner = scan(es_conn, index=index_name, size=1000, query={
-            "_source": [col['property_name'] for col in cols_to_download],
+            "_source": source,
             "query": query
         })
 
         download_job.total_items = total_items
         download_job.save()
 
-        write_csv_or_tsv_file(scanner, download_job, cols_to_download, index_name)
+        if desired_format in ['csv', 'tsv']:
+            write_csv_or_tsv_file(scanner, download_job, cols_to_download, index_name, desired_format)
+        elif desired_format == 'sdf':
+            write_sdf_file(scanner, download_job)
+
         save_download_job_state(download_job, DownloadJob.FINISHED)
 
         end_time = time.time()
@@ -189,7 +227,7 @@ def get_download_id(index_name, raw_query, desired_format):
     print('stable_raw_query:', stable_raw_query)
 
     parsed_desired_format = desired_format.lower()
-    if parsed_desired_format not in ['csv', 'tsv', 'csv']:
+    if parsed_desired_format not in ['csv', 'tsv', 'sdf']:
         raise DownloadError("Format {} not supported".format(desired_format))
 
     latest_release_full = 'chembl_24_1'
@@ -204,6 +242,7 @@ def generate_download(index_name, raw_query, desired_format, raw_columns_to_down
     response = {}
     download_id = get_download_id(index_name, raw_query, desired_format)
     print('download_id: ', download_id)
+    parsed_desired_format = desired_format.lower()
 
     try:
         download_job = DownloadJob.objects.get(job_id=download_id)
@@ -220,7 +259,8 @@ def generate_download(index_name, raw_query, desired_format, raw_columns_to_down
             job_id=download_id,
             index_name=index_name,
             raw_columns_to_download=raw_columns_to_download,
-            raw_query=raw_query
+            raw_query=raw_query,
+            desired_format=parsed_desired_format
         )
         download_job.save()
         generate_download_file.delay(download_id)

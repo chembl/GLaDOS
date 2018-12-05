@@ -75,4 +75,5 @@ class DownloadJob(models.Model):
     )
     status = models.CharField(max_length=20, choices=STATUSES, default=QUEUED)
     index_name = models.CharField(max_length=200, null=True)
+    desired_format = models.CharField(max_length=200, null=True)
 
