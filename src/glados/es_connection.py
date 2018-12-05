@@ -7,7 +7,10 @@ import traceback
 
 logger = logging.getLogger('glados.es_connection')
 
-KEYWORD_TYPE = {'type': 'keyword'}
+KEYWORD_TYPE = {'type': 'keyword', 'ignore_above': 500}
+BOOLEAN_TYPE = {'type': 'boolean'}
+INTEGER_TYPE = {'type': 'integer'}
+LONG_TYPE = {'type': 'long'}
 
 REQUIRED_INDEXES = [
     {
@@ -23,9 +26,31 @@ REQUIRED_INDEXES = [
                     'es_request_digest': KEYWORD_TYPE,
                     'host': KEYWORD_TYPE,
                     'run_env_type': KEYWORD_TYPE,
-                    'is_cached': {
-                        'type': 'boolean'
-                    },
+                    'is_cached': BOOLEAN_TYPE,
+                    'request_date': {
+                        'type':   'date',
+                        'format': 'yyyy-MM-dd HH:mm:ss||epoch_millis'
+                    }
+                }
+            }
+        }
+    },
+    {
+        'idx_name': 'chembl_glados_es_download_record',
+        'shards': 7,
+        'replicas': 1,
+        'mappings': {
+            'es_download_record': {
+                'properties': {
+                    'download_id': KEYWORD_TYPE,
+                    'time_taken': INTEGER_TYPE,
+                    'is_new': BOOLEAN_TYPE,
+                    'file_size': LONG_TYPE,
+                    'es_index': KEYWORD_TYPE,
+                    'es_query': KEYWORD_TYPE,
+                    'run_env_type': KEYWORD_TYPE,
+                    'desired_format': KEYWORD_TYPE,
+                    'total_items': INTEGER_TYPE,
                     'request_date': {
                         'type':   'date',
                         'format': 'yyyy-MM-dd HH:mm:ss||epoch_millis'
