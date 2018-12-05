@@ -4,6 +4,7 @@ import time
 import socket
 from django.conf import settings
 
+
 class TinyURL(models.Model):
 
     long_url = models.TextField()
@@ -30,6 +31,10 @@ class Country(models.Model):
     def __str__(self):
         return self.country_name
 
+# ----------------------------------------------------------------------------------------------------------------------
+# Server Statistics
+# ----------------------------------------------------------------------------------------------------------------------
+
 
 class ESCachedRequest(models.Model):
     es_index = models.CharField(max_length=200)
@@ -54,6 +59,38 @@ class ESCachedRequest(models.Model):
         obj.save()
         return obj.to_dict(include_meta=True)
 
+
+class ESDownloadRecord(models.Model):
+    download_id = models.TextField()
+    time_taken = models.IntegerField(default=0)
+    is_new = models.BooleanField()
+    file_size = models.BigIntegerField()
+    es_index = models.CharField(max_length=200)
+    es_query = models.TextField()
+    run_env_type = models.TextField()
+    desired_format = models.CharField(max_length=20)
+    total_items = models.IntegerField(default=0)
+
+    def indexing(self):
+        obj = ESDownloadRecord(
+            download_id=self.download_id,
+            time_taken=self.time_taken,
+            is_new=self.is_new,
+            file_size=self.file_size,
+            es_index=self.es_index,
+            es_query=self.es_query,
+            desired_format=self.desired_format,
+            total_items=self.total_items,
+            host=socket.gethostname(),
+            run_env_type=settings.RUN_ENV,
+            request_date=int(time.time() * 1000)
+        )
+        obj.save()
+        return obj.to_dict(include_meta=True)
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Download Jobs
+# ----------------------------------------------------------------------------------------------------------------------
 
 # This is to keep track of the status of a download job
 class DownloadJob(models.Model):

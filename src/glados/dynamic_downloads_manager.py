@@ -11,6 +11,8 @@ import json
 import traceback
 from . import glados_server_statistics
 import gzip
+import os
+from django.conf import settings
 
 class DownloadError(Exception):
     """Base class for exceptions in this file."""
@@ -105,11 +107,11 @@ def parse_and_format_cell(original_value, index_name, property_name):
 
 
 def write_csv_or_tsv_file(scanner, download_job, cols_to_download, index_name, desired_format):
-    file_name = download_job.job_id + '.gz'
+    file_path = download_job.job_id + '.gz'
     total_items = download_job.total_items
     separator = ',' if desired_format == 'csv' else '\t'
 
-    with gzip.open(file_name, 'wt', encoding='utf-16-le') as out_file:
+    with gzip.open(file_path, 'wt', encoding='utf-16-le') as out_file:
 
         header_line = separator.join([format_cell(col['label']) for col in cols_to_download])
         out_file.write(header_line + '\n')
@@ -130,8 +132,10 @@ def write_csv_or_tsv_file(scanner, download_job, cols_to_download, index_name, d
             percentage = int((i / total_items) * 100)
             if percentage != previous_percentage:
                 previous_percentage = percentage
-                print('percentage: ', percentage)
                 save_download_job_progress(download_job, percentage)
+
+    file_size = os.path.getsize(file_path)
+    return file_size
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Writing sdf files
@@ -139,9 +143,9 @@ def write_csv_or_tsv_file(scanner, download_job, cols_to_download, index_name, d
 
 
 def write_sdf_file(scanner, download_job):
-    file_name = download_job.job_id + '.gz'
+    file_path = download_job.job_id + '.gz'
     total_items = download_job.total_items
-    with gzip.open(file_name, 'wt') as out_file:
+    with gzip.open(file_path, 'wt') as out_file:
 
         i = 0
         previous_percentage = 0
@@ -157,19 +161,21 @@ def write_sdf_file(scanner, download_job):
             percentage = int((i / total_items) * 100)
             if percentage != previous_percentage:
                 previous_percentage = percentage
-                print('percentage: ', percentage)
                 save_download_job_progress(download_job, percentage)
+
+    file_size = os.path.getsize(file_path)
+    return file_size
 
 
 @job
 def generate_download_file(download_id):
 
     start_time = time.time()
-    print('------------')
-    print('generate_download_file: ', download_id)
     download_job = DownloadJob.objects.get(job_id=download_id)
     download_job.status = DownloadJob.PROCESSING
     download_job.save()
+
+    print('processing job: ', download_job)
 
     index_name = download_job.index_name
     raw_columns_to_download = download_job.raw_columns_to_download
@@ -177,18 +183,13 @@ def generate_download_file(download_id):
     raw_query = download_job.raw_query
     query = json.loads(raw_query)
     desired_format = download_job.desired_format
-    print('query: ', query)
-    print('cols_to_download: ', cols_to_download)
 
     try:
         es_conn = connections.get_connection()
-        print('searching...')
         search = Search(index=index_name).source(['']).query(query)
         response = search.execute()
         total_items = response.hits.total
 
-        print('size: ', total_items)
-        print('source', [col['property_name'] for col in cols_to_download])
         if desired_format in ['csv', 'tsv']:
             source = [col['property_name'] for col in cols_to_download]
         if desired_format == 'sdf':
@@ -203,16 +204,25 @@ def generate_download_file(download_id):
         download_job.save()
 
         if desired_format in ['csv', 'tsv']:
-            write_csv_or_tsv_file(scanner, download_job, cols_to_download, index_name, desired_format)
+            file_size = write_csv_or_tsv_file(scanner, download_job, cols_to_download, index_name, desired_format)
         elif desired_format == 'sdf':
-            write_sdf_file(scanner, download_job)
+            file_size = write_sdf_file(scanner, download_job)
 
         save_download_job_state(download_job, DownloadJob.FINISHED)
 
+        # now save some statistics
         end_time = time.time()
         time_taken = end_time - start_time
-        date = time.time()
-        glados_server_statistics.record_download(download_id, date, time_taken, is_new=True)
+        glados_server_statistics.record_download(
+            download_id=download_id,
+            time_taken=time_taken,
+            is_new=True,
+            file_size=file_size,
+            es_index=index_name,
+            es_query=raw_query,
+            desired_format=desired_format,
+            total_items=total_items
+        )
 
     except:
         save_download_job_state(download_job, DownloadJob.ERROR)
@@ -224,7 +234,6 @@ def get_download_id(index_name, raw_query, desired_format):
 
     # make sure the string generated is stable
     stable_raw_query = json.dumps(json.loads(raw_query), sort_keys=True)
-    print('stable_raw_query:', stable_raw_query)
 
     parsed_desired_format = desired_format.lower()
     if parsed_desired_format not in ['csv', 'tsv', 'sdf']:
@@ -241,14 +250,11 @@ def get_download_id(index_name, raw_query, desired_format):
 def generate_download(index_name, raw_query, desired_format, raw_columns_to_download):
     response = {}
     download_id = get_download_id(index_name, raw_query, desired_format)
-    print('download_id: ', download_id)
     parsed_desired_format = desired_format.lower()
 
     try:
         download_job = DownloadJob.objects.get(job_id=download_id)
-        print('job already in queue')
         if download_job.status == DownloadJob.ERROR:
-            print('job was in error, retrying')
             download_job.progress = 0
             download_job.status = DownloadJob.QUEUED
             download_job.save()
@@ -264,7 +270,6 @@ def generate_download(index_name, raw_query, desired_format, raw_columns_to_down
         )
         download_job.save()
         generate_download_file.delay(download_id)
-        print('new job created')
 
     response['download_id'] = download_id
     return response
@@ -282,7 +287,6 @@ def get_download_status(download_id):
         return response
 
     except DownloadJob.DoesNotExist:
-        print('does not exist!')
         response = {
             'msg': 'download does not exist!',
             'status:': DownloadJob.ERROR
