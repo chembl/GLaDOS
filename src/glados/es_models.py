@@ -28,7 +28,7 @@ class ESCachedRequestIndex(DocType):
         doc_type = 'es_cached_request'
 
         
- class ESDownloadRecordIndex(DocType):
+class ESDownloadRecordIndex(DocType):
     download_id = Keyword()
     time_taken = Integer()
     is_new = Boolean()
