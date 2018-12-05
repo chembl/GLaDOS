@@ -1,5 +1,5 @@
 from django.db import models
-from glados.es_models import TinyURLIndex, ESCachedRequestIndex
+from glados.es_models import TinyURLIndex, ESCachedRequestIndex, ESDownloadRecordIndex
 import time
 import socket
 from django.conf import settings
@@ -72,7 +72,7 @@ class ESDownloadRecord(models.Model):
     total_items = models.IntegerField(default=0)
 
     def indexing(self):
-        obj = ESDownloadRecord(
+        obj = ESDownloadRecordIndex(
             download_id=self.download_id,
             time_taken=self.time_taken,
             is_new=self.is_new,
