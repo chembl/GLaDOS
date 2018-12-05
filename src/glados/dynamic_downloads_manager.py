@@ -10,13 +10,14 @@ from elasticsearch_dsl.connections import connections
 import json
 import traceback
 from . import glados_server_statistics
+import gzip
 
 class DownloadError(Exception):
     """Base class for exceptions in this file."""
     pass
 
 # ----------------------------------------------------------------------------------------------------------------------
-# Download jon helpers
+# Download job helpers
 # ----------------------------------------------------------------------------------------------------------------------
 
 
@@ -30,24 +31,100 @@ def save_download_job_state(download_job, new_state):
     download_job.save()
 
 # ----------------------------------------------------------------------------------------------------------------------
+# Property getter
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+class DotNotationGetter:
+
+    DEFAULT_NULL_LABEL = ''
+
+    def __init__(self, obj):
+        self.obj = obj
+
+    def get_property(self, obj, str_property):
+        prop_parts = str_property.split('.')
+        current_prop = prop_parts[0]
+        if len(prop_parts) > 1:
+            current_obj = obj.get(current_prop)
+            if current_obj is None:
+                return self.DEFAULT_NULL_LABEL
+            else:
+                return self.get_property(current_obj, '.'.join(prop_parts[1::]))
+        else:
+
+            value = obj.get(current_prop)
+            value = self.DEFAULT_NULL_LABEL if value is None else value
+            return value
+
+    def get_from_string(self, dot_notation_property):
+        return self.get_property(self.obj, dot_notation_property)
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Columns Parsing
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+class ColumnsParsing:
+
+    def static_parse_synonyms(raw_synonyms):
+        true_synonyms = set()
+        for raw_syn in raw_synonyms:
+            true_synonyms.add(raw_syn['synonyms'])
+        return '|'.join(true_synonyms)
+
+    def static_parse_property(original_value, index_name, property_name):
+
+        if index_name == 'chembl_molecule':
+            if property_name == 'molecule_synonyms':
+                value = ColumnsParsing.static_parse_synonyms(original_value)
+                return value
+            else:
+                return original_value
+        else:
+            return original_value
+
+
+def format_cell(original_value):
+
+    value = original_value
+    if isinstance(value, str):
+        value = value.replace('"', "'")
+
+    return '"{}"'.format(value)
+
+
+def parse_and_format_cell(original_value, index_name, property_name):
+
+    value = ColumnsParsing.static_parse_property(original_value, index_name, property_name)
+    return format_cell(value)
+
+# ----------------------------------------------------------------------------------------------------------------------
 # Writing csv and tsv files
 # ----------------------------------------------------------------------------------------------------------------------
 
 
-def write_csv_or_tsv_file(scanner, download_job):
-    file_name = download_job.job_id
+def write_csv_or_tsv_file(scanner, download_job, cols_to_download, index_name):
+    file_name = download_job.job_id + '.gz'
     total_items = download_job.total_items
-    with open(file_name, 'w') as out_file:
 
-        out_file.write('hola')
+    with gzip.open(file_name, 'wt', encoding='utf-16-le') as out_file:
+
+        header_line = ','.join([format_cell(col['label']) for col in cols_to_download])
+        out_file.write(header_line + '\n')
 
         i = 0
         previous_percentage = 0
         for doc_i in scanner:
             i += 1
 
-            if i % 200000 == 0:
-                print('doc_i: ', doc_i)
+            doc_source = doc_i['_source']
+            dot_notation_getter = DotNotationGetter(doc_source)
+            properties_to_get = [col['property_name'] for col in cols_to_download]
+            values = [parse_and_format_cell(dot_notation_getter.get_from_string(prop_name), index_name, prop_name) for
+                      prop_name in properties_to_get]
+            item_line = ','.join(values)
+            out_file.write(item_line + '\n')
 
             percentage = int((i / total_items) * 100)
             if percentage != previous_percentage:
@@ -87,7 +164,7 @@ def generate_download_file(download_id):
         download_job.total_items = total_items
         download_job.save()
 
-        write_csv_or_tsv_file(scanner, download_job)
+        write_csv_or_tsv_file(scanner, download_job, cols_to_download, index_name)
         save_download_job_state(download_job, DownloadJob.FINISHED)
 
         end_time = time.time()
