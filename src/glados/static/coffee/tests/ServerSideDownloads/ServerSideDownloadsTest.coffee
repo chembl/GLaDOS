@@ -61,5 +61,14 @@ describe "Server Side Downloads", ->
     progressURLMustBe = "#{glados.Settings.GLADOS_BASE_PATH_REL}download-progress/#{testDownloadID}"
     expect(progressURLGot).toBe(progressURLMustBe)
 
+  it 'generates the correct download url', ->
+
+    testDownloadID = 'someDownloadId'
+    downloadModel.set('download_id', testDownloadID)
+    downloadURLMustBe = "#{glados.Settings.GLADOS_BASE_PATH_REL}dynamic-downloads/#{testDownloadID}.gz"
+    downloadURLGot = downloadModel.getDownloadURL()
+
+    expect(downloadURLGot).toBe(downloadURLMustBe)
+
 
 
