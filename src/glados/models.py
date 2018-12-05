@@ -61,6 +61,7 @@ class DownloadJob(models.Model):
     progress = models.PositiveSmallIntegerField(default=0)
     total_items = models.PositiveIntegerField(default=0)
     raw_columns_to_download = models.TextField(null=True)
+    raw_query = models.TextField(null=True)
 
     QUEUED = 'QUEUED'
     PROCESSING = 'PROCESSING'

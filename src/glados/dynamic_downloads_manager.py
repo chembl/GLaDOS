@@ -137,6 +137,7 @@ def write_csv_or_tsv_file(scanner, download_job, cols_to_download, index_name):
 def generate_download_file(download_id):
 
     start_time = time.time()
+    print('------------')
     print('generate_download_file: ', download_id)
     download_job = DownloadJob.objects.get(job_id=download_id)
     download_job.status = DownloadJob.PROCESSING
@@ -145,20 +146,23 @@ def generate_download_file(download_id):
     index_name = download_job.index_name
     raw_columns_to_download = download_job.raw_columns_to_download
     cols_to_download = json.loads(raw_columns_to_download)
+    raw_query = download_job.raw_query
+    query = json.loads(raw_query)
+    print('query: ', query)
     print('cols_to_download: ', cols_to_download)
 
     try:
         es_conn = connections.get_connection()
-        query = {}
         print('searching...')
-        search = Search(index=index_name).source([''])
+        search = Search(index=index_name).source(['']).query(query)
         response = search.execute()
         total_items = response.hits.total
 
         print('size: ', total_items)
         print('source', [col['property_name'] for col in cols_to_download])
         scanner = scan(es_conn, index=index_name, size=1000, query={
-            "_source": [col['property_name'] for col in cols_to_download]
+            "_source": [col['property_name'] for col in cols_to_download],
+            "query": query
         })
 
         download_job.total_items = total_items
@@ -176,7 +180,6 @@ def generate_download_file(download_id):
         save_download_job_state(download_job, DownloadJob.ERROR)
         traceback.print_exc()
         return
-
 
 
 def get_download_id(index_name, raw_query, desired_format):
@@ -216,7 +219,8 @@ def generate_download(index_name, raw_query, desired_format, raw_columns_to_down
         download_job = DownloadJob(
             job_id=download_id,
             index_name=index_name,
-            raw_columns_to_download=raw_columns_to_download
+            raw_columns_to_download=raw_columns_to_download,
+            raw_query=raw_query
         )
         download_job.save()
         generate_download_file.delay(download_id)
