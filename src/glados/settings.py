@@ -16,7 +16,6 @@ import glados
 from django.utils.translation import ugettext_lazy as _
 import logging
 
-
 class RunEnvs(object):
     DEV = 'DEV'
     TEST = 'TEST'
