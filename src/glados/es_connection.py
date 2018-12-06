@@ -51,6 +51,7 @@ REQUIRED_INDEXES = [
                     'run_env_type': KEYWORD_TYPE,
                     'desired_format': KEYWORD_TYPE,
                     'total_items': INTEGER_TYPE,
+                    'host': KEYWORD_TYPE,
                     'request_date': {
                         'type':   'date',
                         'format': 'yyyy-MM-dd HH:mm:ss||epoch_millis'

@@ -70,6 +70,7 @@ class ESDownloadRecord(models.Model):
     run_env_type = models.TextField()
     desired_format = models.CharField(max_length=20)
     total_items = models.IntegerField(default=0)
+    host = models.TextField()
 
     def indexing(self):
         obj = ESDownloadRecordIndex(
@@ -91,6 +92,7 @@ class ESDownloadRecord(models.Model):
 # ----------------------------------------------------------------------------------------------------------------------
 # Download Jobs
 # ----------------------------------------------------------------------------------------------------------------------
+
 
 # This is to keep track of the status of a download job
 class DownloadJob(models.Model):

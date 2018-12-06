@@ -101,13 +101,16 @@ def parse_and_format_cell(original_value, index_name, property_name):
     value = ColumnsParsing.static_parse_property(original_value, index_name, property_name)
     return format_cell(value)
 
+
+def get_file_path(job_id):
+    return job_id + '.gz'
 # ----------------------------------------------------------------------------------------------------------------------
 # Writing csv and tsv files
 # ----------------------------------------------------------------------------------------------------------------------
 
 
 def write_csv_or_tsv_file(scanner, download_job, cols_to_download, index_name, desired_format):
-    file_path = download_job.job_id + '.gz'
+    file_path = get_file_path(download_job.job_id)
     total_items = download_job.total_items
     separator = ',' if desired_format == 'csv' else '\t'
 
@@ -143,7 +146,7 @@ def write_csv_or_tsv_file(scanner, download_job, cols_to_download, index_name, d
 
 
 def write_sdf_file(scanner, download_job):
-    file_path = download_job.job_id + '.gz'
+    file_path = get_file_path(download_job.job_id)
     total_items = download_job.total_items
     with gzip.open(file_path, 'wt') as out_file:
 
@@ -155,6 +158,9 @@ def write_sdf_file(scanner, download_job):
             doc_source = doc_i['_source']
             dot_notation_getter = DotNotationGetter(doc_source)
             sdf_value = dot_notation_getter.get_from_string('_metadata.compound_generated.sdf_data')
+            if sdf_value is None:
+                continue
+                
             out_file.write(sdf_value)
             out_file.write('$$$$\n')
 
@@ -175,7 +181,7 @@ def generate_download_file(download_id):
     download_job.status = DownloadJob.PROCESSING
     download_job.save()
 
-    print('processing job: ', download_job)
+    print('processing job: ', download_id)
 
     index_name = download_job.index_name
     raw_columns_to_download = download_job.raw_columns_to_download
@@ -255,10 +261,26 @@ def generate_download(index_name, raw_query, desired_format, raw_columns_to_down
     try:
         download_job = DownloadJob.objects.get(job_id=download_id)
         if download_job.status == DownloadJob.ERROR:
+            # if it was in error state, requeue it
             download_job.progress = 0
             download_job.status = DownloadJob.QUEUED
             download_job.save()
             generate_download_file.delay(download_id)
+        elif download_job.status == DownloadJob.FINISHED:
+            # if not, register the statistics
+            file_path = get_file_path(download_id)
+            file_size = os.path.getsize(file_path)
+
+            glados_server_statistics.record_download(
+                download_id=download_id,
+                time_taken=0,
+                is_new=False,
+                file_size=file_size,
+                es_index=index_name,
+                es_query=raw_query,
+                desired_format=desired_format,
+                total_items=download_job.total_items
+            )
 
     except DownloadJob.DoesNotExist:
         download_job = DownloadJob(
