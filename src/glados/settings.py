@@ -15,14 +15,30 @@ import sys
 import glados
 from django.utils.translation import ugettext_lazy as _
 import logging
+import yaml
+
+
+class GladosSettingsError(Exception):
+    """Base class for exceptions in GLaDOS configuration."""
+    pass
+
 
 class RunEnvs(object):
     DEV = 'DEV'
     TEST = 'TEST'
     PROD = 'PROD'
 
+# ----------------------------------------------------------------------------------------------------------------------
+# Read config file
+# ----------------------------------------------------------------------------------------------------------------------
+CONFIG_FILE_PATH = os.getenv("HOME") + '/.GLaDOS/config.yml'
+print('CONFIG_FILE_PATH: ', CONFIG_FILE_PATH)
+run_config = yaml.load(open(CONFIG_FILE_PATH, 'r'))
+print('run_config: ', run_config)
 
-RUN_ENV = RunEnvs.DEV
+RUN_ENV = run_config['run_env']
+if RUN_ENV not in [RunEnvs.DEV, RunEnvs.TEST, RunEnvs.PROD]:
+    raise GladosSettingsError("Run environment {} is not supported.".format(RUN_ENV))
 
 # Build paths inside the project like this: os.path.join(GLADOS_ROOT, ...)
 GLADOS_ROOT = os.path.dirname(os.path.abspath(glados.__file__))
