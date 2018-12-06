@@ -100,6 +100,14 @@ def get_latest_tweets_json(request):
 
 
 def get_latest_blog_entries(request, pageToken):
+
+    if not settings.BLOGGER_ENABLED:
+        default_empty_response = {
+            'entries': [],
+            'totalCount': 0
+        }
+        return JsonResponse(default_empty_response)
+
     blogId = '2546008714740235720'
     key = settings.BLOGGER_KEY
     fetchBodies = True

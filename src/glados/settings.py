@@ -64,7 +64,6 @@ SECRET_KEY = run_config.get('server_secret_key',
 # ----------------------------------------------------------------------------------------------------------------------
 # Twitter
 # ----------------------------------------------------------------------------------------------------------------------
-
 TWITTER_ENABLED = run_config.get('enable_twitter', False)
 
 if TWITTER_ENABLED:
@@ -81,8 +80,13 @@ if TWITTER_ENABLED:
 # ----------------------------------------------------------------------------------------------------------------------
 # Blogger
 # ----------------------------------------------------------------------------------------------------------------------
+BLOGGER_ENABLED = run_config.get('enable_blogger', False)
+if BLOGGER_ENABLED:
+    blogger_secrets = run_config.get('blogger_secrets')
+    if blogger_secrets is None:
+        raise GladosSettingsError("You must provide the blogger secrets ")
 
-BLOGGER_KEY = '<BLOGGER_API_KEY>'
+    BLOGGER_KEY = blogger_secrets.get('blogger_key', '')
 
 
 # ----------------------------------------------------------------------------------------------------------------------
