@@ -19,7 +19,7 @@ install:
 before_script:
 # Start server
   - python -m glados.manage compilemessages
-  - python -m glados.manage migrate
+  - python -m glados.manage makemigrations
   - python -m glados.manage migrate
   - python -m glados.manage runserver 8000  2>&1 | grep -v 200 | grep -v 304 &
   - sleep 60 # give Web server some time to bind to sockets, etc

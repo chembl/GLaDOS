@@ -70,7 +70,7 @@ class ESDownloadRecord(models.Model):
     run_env_type = models.TextField()
     desired_format = models.CharField(max_length=20)
     total_items = models.IntegerField(default=0)
-    host = models.TextField()
+    host = models.TextField(default='')
 
     def indexing(self):
         obj = ESDownloadRecordIndex(
