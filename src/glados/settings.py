@@ -52,24 +52,31 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # ----------------------------------------------------------------------------------------------------------------------
 
 
-# For usage behind proxies eg: 'chembl/beta/'
-SERVER_BASE_PATH = ''
+# For usage behind proxies eg: 'chembl/beta/', you don't need to care about this in DEV mode
+SERVER_BASE_PATH = run_config.get('server_base_path', '')
 
 # ----------------------------------------------------------------------------------------------------------------------
 # SECURITY WARNING: keep the secret key used in production secret!
 # ----------------------------------------------------------------------------------------------------------------------
-SECRET_KEY = 'Cake, and grief counseling, will be available at the conclusion of the test.'
+SECRET_KEY = run_config.get('server_secret_key',
+                            'Cake and grief counseling will be available at the conclusion of the test.')
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Twitter
 # ----------------------------------------------------------------------------------------------------------------------
 
-TWITTER_ENABLED = RUN_ENV == RunEnvs.PROD
+TWITTER_ENABLED = run_config.get('enable_twitter', False)
 
-TWITTER_ACCESS_TOKEN = '<TWITTER_ACCESS_TOKEN>'
-TWITTER_ACCESS_TOKEN_SECRET = '<TWITTER_ACCESS_TOKEN_SECRET>'
-TWITTER_CONSUMER_KEY = '<TWITTER_CONSUMER_KEY>'
-TWITTER_CONSUMER_SECRET = '<TWITTER_CONSUMER_SECRET>'
+if TWITTER_ENABLED:
+
+    twitter_secrets = run_config.get('twitter_secrets')
+    if twitter_secrets is None:
+        raise GladosSettingsError("You must provide the twitter secrets ")
+
+    TWITTER_ACCESS_TOKEN = twitter_secrets.get('twitter_access_token', '')
+    TWITTER_ACCESS_TOKEN_SECRET = twitter_secrets.get('twitter_access_token_secret', '')
+    TWITTER_CONSUMER_KEY = twitter_secrets.get('twitter_access_consumer_key', '')
+    TWITTER_CONSUMER_SECRET = twitter_secrets.get('twitter_access_consumer_secret', '')
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Blogger
