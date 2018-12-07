@@ -9,7 +9,6 @@ class MetadataGenerationTester(unittest.TestCase):
 
     def setUp(self):
         os.environ['DJANGO_SETTINGS_MODULE'] = 'glados.settings'
-        settings.ELASTICSEARCH_HOST = 'https://www.ebi.ac.uk/chembl/glados-es/'
         es_connection.setup_glados_es_connection()
         print('Running Test: {0}'.format(self._testMethodName))
 
