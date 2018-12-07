@@ -20,6 +20,7 @@ before_script:
 - "./manage_glados_no_install.sh makemigrations"
 - "./manage_glados_no_install.sh migrate"
 - "./manage_glados_no_install.sh compilemessages"
+- ""
 - "./manage_glados_no_install.sh runserver 8000  2>&1 | grep -v 200 | grep -v 304 &"
 - sleep 60
 script:
