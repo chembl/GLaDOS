@@ -1,6 +1,5 @@
 import unittest
 import os
-from glados import es_connection
 import glados.static_files_compiler
 
 
@@ -8,7 +7,6 @@ class StaticFilesCompilerTester(unittest.TestCase):
 
     def setUp(self):
         os.environ['DJANGO_SETTINGS_MODULE'] = 'glados.settings'
-        es_connection.setup_glados_es_connection()
         print('Running Test: {0}'.format(self._testMethodName))
 
     def tearDown(self):

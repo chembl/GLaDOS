@@ -69,6 +69,7 @@ REQUIRED_INDEXES = [
 
 
 def setup_glados_es_connection():
+    print('SET UP ES CONNECTION')
     if getattr(settings, 'ELASTICSEARCH_HOST', None) is None:
         logger.warning('The elastic search connection has not been defined!')
         logger.warning('Please use ELASTICSEARCH_HOST in the Django settings to define it.')
@@ -81,6 +82,15 @@ def setup_glados_es_connection():
                 "retry_on_timeout": True
             }
 
+            print('ELASTICSEARCH_HOST: ', settings.ELASTICSEARCH_HOST)
+            print('ELASTICSEARCH_USERNAME')
+            # for c in settings.ELASTICSEARCH_USERNAME:
+            #     print(c)
+            #
+            # print('ELASTICSEARCH_PASSWORD')
+            # for c in settings.ELASTICSEARCH_PASSWORD:
+            #     print(c)
+
             if settings.ELASTICSEARCH_PASSWORD is not None:
                 keyword_args["http_auth"] = (settings.ELASTICSEARCH_USERNAME, settings.ELASTICSEARCH_PASSWORD)
 
@@ -90,6 +100,8 @@ def setup_glados_es_connection():
             logger.info('PING to {0} was successful!'.format(settings.ELASTICSEARCH_HOST))
             create_indexes()
         except Exception as e:
+            print('CONNECTION NOT CREATED!')
+            traceback.print_exc()
             logger.warning('The elastic search connection has not been created!')
             logger.warning('please use ELASTICSEARCH_HOST, ELASTICSEARCH_USERNAME and ELASTICSEARCH_PASSWORD'
                            ' in the Django settings to define it.')
