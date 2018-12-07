@@ -12,6 +12,8 @@ glados.models.Compound.Drug.COLUMNS =
   CHEMBL_ID: _.extend({}, Compound.COLUMNS.CHEMBL_ID,
     'name_to_show': 'Parent Molecule')
   SYNONYMS: _.extend({}, Compound.COLUMNS.SYNONYMS,
+    'custom_field_template': '<ul class="no-margin" style="margin-left: 1rem !important;">' +
+      '{{#each val}}<li style="list-style-type: circle;">{{this}}</li>{{/each}}</ul>'
     'parse_function': (values) ->
 
       synonyms = {}
@@ -21,13 +23,14 @@ glados.models.Compound.Drug.COLUMNS =
             synonyms[v.molecule_synonym] = []
           synonyms[v.molecule_synonym].push v.syn_type
 
-      text = ""
+      values = []
       for key, types of synonyms
-        text += key + '(' + types.join(', ') + ')'
+        values.push key + ' (' + types.join(', ') + ')'
 
-      return text
+      return values
   )
   RESEARCH_CODES: _.extend({}, Compound.COLUMNS.SYNONYMS,
+    'name_to_show_short' : 'Research Codes'
     'name_to_show': 'Research Codes'
     'parse_function': (values) -> (v.molecule_synonym for v in values when v.syn_type == "RESEARCH_CODE").join(', ')
   )
