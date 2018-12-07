@@ -41,6 +41,9 @@ RUN_ENV = run_config['run_env']
 if RUN_ENV not in [RunEnvs.DEV, RunEnvs.TRAVIS, RunEnvs.TEST, RunEnvs.PROD]:
     raise GladosSettingsError("Run environment {} is not supported.".format(RUN_ENV))
 
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = RUN_ENV in [RunEnvs.DEV, RunEnvs.TRAVIS]
+
 # Build paths inside the project like this: os.path.join(GLADOS_ROOT, ...)
 GLADOS_ROOT = os.path.dirname(os.path.abspath(glados.__file__))
 
@@ -93,12 +96,24 @@ if BLOGGER_ENABLED:
 # ----------------------------------------------------------------------------------------------------------------------
 # ElasticSearch
 # ----------------------------------------------------------------------------------------------------------------------
-ELASTICSEARCH_HOST = 'http://wp-p1m-50.ebi.ac.uk:9200'
-ELASTICSEARCH_USERNAME = None
-ELASTICSEARCH_PASSWORD = None
+elasticsearch_config = run_config.get('elasticsearch')
+print('elasticsearch_config: ', elasticsearch_config)
+if elasticsearch_config is None:
+    raise GladosSettingsError("You must provide the elasticsearch configuration")
+else:
+    ELASTICSEARCH_HOST = elasticsearch_config.get('host')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = RUN_ENV == RunEnvs.DEV
+    if RUN_ENV == RunEnvs.TRAVIS:
+        ELASTICSEARCH_USERNAME = os.getenv('ELASTICSEARCH_USERNAME')
+        ELASTICSEARCH_PASSWORD = os.getenv('ELASTICSEARCH_PASSWORD')
+    else:
+        ELASTICSEARCH_USERNAME = elasticsearch_config.get('username')
+        ELASTICSEARCH_PASSWORD = elasticsearch_config.get('password')
+
+    print('ELASTICSEARCH_HOST: ', ELASTICSEARCH_HOST)
+    print('ELASTICSEARCH_USERNAME: ', ELASTICSEARCH_USERNAME)
+    print('ELASTICSEARCH_PASSWORD: ', ELASTICSEARCH_PASSWORD)
+
 
 ALLOWED_HOSTS = ['*']
 

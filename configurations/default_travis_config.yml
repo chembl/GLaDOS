@@ -1,1 +1,3 @@
 run_env: TRAVIS
+elasticsearch:
+  host: 'https://www.ebi.ac.uk/chembl/glados-es/__secret/'

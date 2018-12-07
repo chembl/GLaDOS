@@ -9,22 +9,22 @@ addons:
   chrome: stable
 language: python
 python:
-  - "3.5"
+- '3.5'
 install:
-# Install chromedriver
-  - ln -s /usr/lib/chromium-browser/chromedriver ~/bin/chromedriver
-# Install GLaDOS
-  - "pip install -r requirements.txt"
-  - python setup.py install
+- ln -s /usr/lib/chromium-browser/chromedriver ~/bin/chromedriver
+- pip install -r requirements.txt
+- python setup.py install
 before_script:
-# Set up glados config
-  - mkdir -p $HOME/.GLaDOS
-  - cp configurations/default_travis_config.yml $HOME/.GLaDOS/config.yml
-# Start server
-  - "./manage_glados_no_install.sh makemigrations"
-  - "./manage_glados_no_install.sh migrate"
-  - python -m glados.manage compilemessages
-  - python -m glados.manage runserver 8000  2>&1 | grep -v 200 | grep -v 304 &
-  - sleep 60 # give Web server some time to bind to sockets, etc
+- mkdir -p $HOME/.GLaDOS
+- cp configurations/default_travis_config.yml $HOME/.GLaDOS/config.yml
+- "./manage_glados_no_install.sh makemigrations"
+- "./manage_glados_no_install.sh migrate"
+- python -m glados.manage compilemessages
+- python -m glados.manage runserver 8000  2>&1 | grep -v 200 | grep -v 304 &
+- sleep 60
 script:
-  - "./run_tests_no_install.sh"
+- "./run_tests_no_install.sh"
+env:
+  global:
+  - secure: QXvtG0vo02Tc4x71JRC8UInMPyTJhwehkIQFxrhFQAH/HuBEGPWJmGQaR28OgzurUpWjtE3UkAUrbKxzpyggrqmLGc9fj9iltZSmkoglg9pS/eGHUztGo4hIRfX54hpSZkgND3PpGlRC8N5g3+qRM+Ghzla4ETIapHBvLDlU67ta3pwzKYAHUEO/ptO2BjgT/ruiqNcmcEo5VepGJyWjZ1bJs/wgGkndIwDxRuA7m99YjPE+tbyDQl3LbbxE/FvniA3sS/W30AWU/ciNxQIAOJREyE5rMVcN4va3T/ALFL9yEyB6V2OpkVSULGjzk21FmeJvkOvGMwrSoTX1ATM5q9x3DzAYqZaUXf5YIc3GjMVqKBoVHu+cEAixKPfq4zJelUm9PK8Yhd0odcHqx4qj6zl5Gjs48GTbBlC7cP/VWpr7AYZ7Ag7JAtpy2wn9JlkMhavv/pWCjJsL1bu8r8UoGkCwRWV7DucSPmqNGVQBsIz2MJJH6EtXBoNWLZpDvMPQB8I/YPCiCQu9NSz624SOjyM1lXgYx+qb2Zg62uJmhxZtqFK+1DtwahbJxMLpZRqxHtHwLaAqjdtj/6KNGCsCH0KtM7s/R8dg6uCgOyRU//yPaq5QVD2Z53y7J7lAQAo+qTMuCpT4tqfk8BSc2V7ArqMVf4zEQ0DWLf7Hd/DBWe0=
+  - secure: KD9j5b/5zF9Ye8ad6QAWRo+GOdLOLLNbp9MXAEHKvjimpHaTrDn9WcQYA4c6kVk0hg2gI6tlta5PoX+5OG7mePkfesGjAJzn8prabreWfnTyVHJ67PjrjoD23WOeXr5r7p/T44y9QW8hAb0t+mtyKONIVB+jiC/j4Bw7ZtGTqKgMb5uz80IbMpRTOKEvQJEAaCdWy/hdE1ApiUKrbzzuhVS76e3dmhBtP9YLFYqkHvQ5i8rWnL8YTyGvHv4tf9v//istmERU4j9o7+k9KddCCAYs/McIpPStvaChNQc7YUwhuFFDf8f9grisgEea4+PMaw5Jnw7HjybZV8RTsixhOhhJ5IghP8NHmhvTuF9qAvvA4F7GhuQgczba69h3ehhVY7pCV2MhYQ2Fg58+x7Tl+Ilj3M67efO6QI4ceAtap2+r7uhT62/3ILQp5El6P/fKpc5Wov//kNiAZ1tv/ZZE4vR3aubs7XcnsPphUHGDKGz2xFqZB63MP4kDCcLEkbMqYQLCO1/hAmxRiIZhyQ3C9W8oj92vcXfK9kappXKa1H/W3EWdX5hjXht6qSGhv48DvUTZ+V9PRVHHSC3KOmKNXPbc52E2QOC0C0sJXZCi9dh7GvqL0sCWY/aj45lT0foDbVuRzOxTklhC1fO059gsFDai4829NJMPROTwTCeplok=
