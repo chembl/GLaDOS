@@ -1,6 +1,5 @@
 import unittest
 import os
-from django.conf import settings
 from glados import es_connection
 from glados import schema_tags_generator
 
@@ -9,6 +8,7 @@ class MetadataGenerationTester(unittest.TestCase):
 
     def setUp(self):
         os.environ['DJANGO_SETTINGS_MODULE'] = 'glados.settings'
+        print('METADATA GENERATION TEST')
         es_connection.setup_glados_es_connection()
         print('Running Test: {0}'.format(self._testMethodName))
 
