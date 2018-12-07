@@ -15,7 +15,7 @@ install:
 - pip install -r requirements.txt
 - python setup.py install
 before_script:
-- mkdir -p $HOME/.GLaDOS
+- mkdir -p $HOME/.chembl-glados
 - cp configurations/default_travis_config.yml $HOME/.chembl-glados/config.yml
 - "./manage_glados_no_install.sh makemigrations"
 - "./manage_glados_no_install.sh migrate"
