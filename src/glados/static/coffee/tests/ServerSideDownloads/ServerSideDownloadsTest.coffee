@@ -16,12 +16,12 @@ describe "Server Side Downloads", ->
 
   beforeEach ->
 
-    downloadModel = new glados.models.Downloads.DownloadModel
+    downloadModel = new glados.models.ServerSideDownloads.DownloadModel
       collection: esList
 
   it 'starts at the initial state', ->
 
-    stateMustBe = glados.models.Downloads.DownloadModel.states.INITIAL_STATE
+    stateMustBe = glados.models.ServerSideDownloads.DownloadModel.states.INITIAL_STATE
     stateGot = downloadModel.getState()
     expect(stateGot).toBe(stateMustBe)
 

@@ -348,7 +348,7 @@ glados.useNameSpace 'glados.views.Browsers',
       desiredFormat = $clickedBtn.attr('data-format')
 
       if not @downloadModel?
-        @downloadModel = new glados.models.Downloads.DownloadModel
+        @downloadModel = new glados.models.ServerSideDownloads.DownloadModel
           collection: @collection
 
       if not @downloadView?
