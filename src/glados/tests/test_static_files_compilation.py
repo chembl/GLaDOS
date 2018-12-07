@@ -1,5 +1,6 @@
 import unittest
 import os
+from django.conf import settings
 
 import glados.static_files_compiler
 
@@ -8,6 +9,9 @@ class StaticFilesCompilerTester(unittest.TestCase):
 
     def setUp(self):
         os.environ['DJANGO_SETTINGS_MODULE'] = 'glados.settings'
+        print('ELASTICSEARCH_HOST', settings.ELASTICSEARCH_HOST)
+        print('ELASTICSEARCH_USERNAME', settings.ELASTICSEARCH_USERNAME)
+        print('ELASTICSEARCH_PASSWORD', settings.ELASTICSEARCH_PASSWORD)
         print('Running Test: {0}'.format(self._testMethodName))
 
     def tearDown(self):
