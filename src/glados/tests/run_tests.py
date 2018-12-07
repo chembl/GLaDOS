@@ -1,5 +1,7 @@
 import os
 
+print('RUN TESTS!!')
+
 if __name__ == "__main__" or __name__ == "glados.tests.run_tests":
   os.environ['DJANGO_SETTINGS_MODULE'] = 'glados.settings'
 
