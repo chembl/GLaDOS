@@ -17,6 +17,9 @@ install:
   - "pip install -r requirements.txt"
   - python setup.py install
 before_script:
+# Set up glados config
+  - ls $HOME
+  - ls
 # Start server
   - python -m glados.manage compilemessages
   - python -m glados.manage makemigrations

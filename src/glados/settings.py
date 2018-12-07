@@ -92,9 +92,6 @@ if BLOGGER_ENABLED:
 # ----------------------------------------------------------------------------------------------------------------------
 # ElasticSearch
 # ----------------------------------------------------------------------------------------------------------------------
-
-# not possible to make default config if no file, that host is for dev, travis needs the external one. 
-
 ELASTICSEARCH_HOST = 'http://wp-p1m-50.ebi.ac.uk:9200'
 ELASTICSEARCH_USERNAME = None
 ELASTICSEARCH_PASSWORD = None
