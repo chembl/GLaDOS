@@ -180,17 +180,19 @@ DATABASES = {
   'default': {
     'ENGINE': 'django.db.backends.sqlite3',
     'NAME': os.path.join(GLADOS_ROOT, 'db/db.sqlite3')
-  },
-  'oradb': {
-    'ENGINE':   'django.db.backends.oracle',
-    'NAME':     'oradb/xe',
-    'USER':     'hr',
-    'PASSWORD': 'hr'
   }
 }
 
-# review this when deploying
-DATABASE_ROUTERS = ['glados.db.APIDatabaseRouter.APIDatabaseRouter']
+if RUN_ENV != RunEnvs.TRAVIS:
+
+    DATABASES['oradb'] = {
+        'ENGINE': 'django.db.backends.oracle',
+        'NAME': 'oradb/xe',
+        'USER': 'hr',
+        'PASSWORD': 'hr'
+    }
+
+    DATABASE_ROUTERS = ['glados.db.APIDatabaseRouter.APIDatabaseRouter']
 # ----------------------------------------------------------------------------------------------------------------------
 # Django RQ
 # https://github.com/rq/django-rq
