@@ -58,6 +58,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # For usage behind proxies eg: 'chembl/beta/', you don't need to care about this in DEV mode
 SERVER_BASE_PATH = '' if os.getenv('SERVER_BASE_PATH') is None else os.getenv('SERVER_BASE_PATH')
+print('SERVER_BASE_PATH: ', SERVER_BASE_PATH)
 
 # ----------------------------------------------------------------------------------------------------------------------
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -188,14 +189,7 @@ DATABASES = {
   }
 }
 
-if 'test' in sys.argv:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(GLADOS_ROOT, 'db/db.sqlite3')
-        }        
-    }
-
+# review this when deploying
 DATABASE_ROUTERS = ['glados.db.APIDatabaseRouter.APIDatabaseRouter']
 # ----------------------------------------------------------------------------------------------------------------------
 # Django RQ
@@ -236,15 +230,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # ----------------------------------------------------------------------------------------------------------------------
 
 LANGUAGE_CODE = 'en'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
-
 LANGUAGES = [
     ('en', _('English')),
 ]
@@ -269,19 +258,17 @@ STATIC_ROOT = os.path.join(GLADOS_ROOT, 'static_root')
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
-    #'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    # other finders..
     'compressor.finders.CompressorFinder',
 )
 
-WATCH_AND_UPDATE_STATIC_COMPILED_FILES = RUN_ENV != RunEnvs.PROD
+WATCH_AND_UPDATE_STATIC_COMPILED_FILES = RUN_ENV == RunEnvs.TEST
 
 # ----------------------------------------------------------------------------------------------------------------------
 # File Compression (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 # ----------------------------------------------------------------------------------------------------------------------
 
-COMPRESS_ENABLED = RUN_ENV == RunEnvs.PROD
+COMPRESS_ENABLED = RUN_ENV in [RunEnvs.TEST, RunEnvs.PROD]
 
 if COMPRESS_ENABLED:
     COMPRESS_OFFLINE = True
