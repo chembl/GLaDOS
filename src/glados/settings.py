@@ -25,6 +25,7 @@ class GladosSettingsError(Exception):
 
 class RunEnvs(object):
     DEV = 'DEV'
+    TRAVIS = 'TRAVIS'
     TEST = 'TEST'
     PROD = 'PROD'
 
@@ -37,7 +38,7 @@ run_config = yaml.load(open(CONFIG_FILE_PATH, 'r'))
 print('run_config: ', run_config)
 
 RUN_ENV = run_config['run_env']
-if RUN_ENV not in [RunEnvs.DEV, RunEnvs.TEST, RunEnvs.PROD]:
+if RUN_ENV not in [RunEnvs.DEV, RunEnvs.TRAVIS, RunEnvs.TEST, RunEnvs.PROD]:
     raise GladosSettingsError("Run environment {} is not supported.".format(RUN_ENV))
 
 # Build paths inside the project like this: os.path.join(GLADOS_ROOT, ...)
