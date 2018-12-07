@@ -150,8 +150,9 @@ class CompoundReportCardApp extends glados.ReportCardApp
   @initMechanismOfAction = ->
 
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
-    list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewMechanismsOfActionList()
-    list.initURL(chemblID)
+    list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESMechanismsOfActionList(
+      "parent_molecule.molecule_chembl_id:#{chemblID}"
+    )
 
     viewConfig =
       embed_section_name: 'mechanism_of_action'
