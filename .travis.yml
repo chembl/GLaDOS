@@ -16,7 +16,7 @@ install:
 - python setup.py install
 before_script:
 - mkdir -p $HOME/.GLaDOS
-- cp configurations/default_travis_config.yml $HOME/.GLaDOS/config.yml
+- cp configurations/default_travis_config.yml $HOME/.chembl-glados/config.yml
 - "./manage_glados_no_install.sh makemigrations"
 - "./manage_glados_no_install.sh migrate"
 - python -m glados.manage compilemessages
