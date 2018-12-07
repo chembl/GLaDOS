@@ -105,6 +105,7 @@ else:
     ELASTICSEARCH_HOST = elasticsearch_config.get('host')
 
     if RUN_ENV == RunEnvs.TRAVIS:
+        print('is running in Travis!')
         ELASTICSEARCH_USERNAME = os.getenv('ELASTICSEARCH_USERNAME')
         ELASTICSEARCH_PASSWORD = os.getenv('ELASTICSEARCH_PASSWORD')
     else:
