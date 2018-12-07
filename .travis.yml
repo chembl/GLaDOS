@@ -18,6 +18,7 @@ install:
   - python setup.py install
 before_script:
 # Set up glados config
+  - mkdir -p $HOME/.GLaDOS
   - cp configurations/default_travis_config.yml $HOME/.GLaDOS/config.yml
 # Start server
   - python -m glados.manage compilemessages
