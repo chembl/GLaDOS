@@ -16,10 +16,13 @@ def main():
 
     # Compress files before server launch if compression is enabled
     if os.environ.get('RUN_MAIN') != 'true' and len(sys.argv) > 1 and sys.argv[1] == 'runserver' and settings.DEBUG:
+
+        if not os.path.exists(settings.DYNAMIC_DOWNLOADS_DIR):
+            print("Dynamic downloads dir ({}) didn't exist, I will create it".format(settings.DYNAMIC_DOWNLOADS_DIR))
+            os.mkdir(settings.DYNAMIC_DOWNLOADS_DIR)
+
         glados.static_files_compiler.StaticFilesCompiler.compile_all_known_compilers()
         execute_from_command_line([sys.argv[0], 'compilemessages'])
-
-        execute_from_command_line(sys.argv)
 
     elif os.environ.get('RUN_MAIN') != 'true' and len(sys.argv) > 1 and sys.argv[1] == 'collectstatic':
         
@@ -31,12 +34,13 @@ def main():
         if settings.COMPRESS_ENABLED and settings.COMPRESS_OFFLINE:
             execute_from_command_line([sys.argv[0], 'compress'])
 
-        execute_from_command_line(sys.argv)
-
     elif os.environ.get('RUN_MAIN') != 'true' and len(sys.argv) > 1 and sys.argv[1] == 'createapacheconfig':
 
         glados.apache_config_generator.generate_config()
 
+    execute_in_manage = sys.argv[1] != 'createapacheconfig'
+    if execute_in_manage:
+        execute_from_command_line(sys.argv)
 
 
 if __name__ == "__main__":
