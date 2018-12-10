@@ -46,6 +46,7 @@ DEBUG = RUN_ENV in [RunEnvs.DEV, RunEnvs.TRAVIS]
 
 # Build paths inside the project like this: os.path.join(GLADOS_ROOT, ...)
 GLADOS_ROOT = os.path.dirname(os.path.abspath(glados.__file__))
+DYNAMIC_DOWNLOADS_DIR = os.path.join(GLADOS_ROOT, 'dynamic-downloads')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
@@ -57,7 +58,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
 # For usage behind proxies eg: 'chembl/beta/', you don't need to care about this in DEV mode
-SERVER_BASE_PATH = '' if os.getenv('SERVER_BASE_PATH') is None else os.getenv('SERVER_BASE_PATH')
+SERVER_BASE_PATH = '' + '/' if os.getenv('SERVER_BASE_PATH') is None else os.getenv('SERVER_BASE_PATH')
 print('SERVER_BASE_PATH: ', SERVER_BASE_PATH)
 
 # ----------------------------------------------------------------------------------------------------------------------
