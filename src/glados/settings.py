@@ -32,7 +32,12 @@ class RunEnvs(object):
 # ----------------------------------------------------------------------------------------------------------------------
 # Read config file
 # ----------------------------------------------------------------------------------------------------------------------
-CONFIG_FILE_PATH = os.getenv("HOME") + '/.chembl-glados/config.yml'
+
+custom_config_file_path = os.getenv('CONFIG_FILE_PATH')
+if custom_config_file_path is not None:
+    CONFIG_FILE_PATH = custom_config_file_path
+else:
+    CONFIG_FILE_PATH = os.getenv("HOME") + '/.chembl-glados/config.yml'
 print('CONFIG_FILE_PATH: ', CONFIG_FILE_PATH)
 run_config = yaml.load(open(CONFIG_FILE_PATH, 'r'))
 print('run_config: ', run_config)
