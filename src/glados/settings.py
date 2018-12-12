@@ -63,7 +63,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
 # For usage behind proxies eg: 'chembl/beta/', you don't need to care about this in DEV mode
-SERVER_BASE_PATH = '' + '/' if os.getenv('SERVER_BASE_PATH') is None else os.getenv('SERVER_BASE_PATH')
+SERVER_BASE_PATH = '' if os.getenv('SERVER_BASE_PATH') is None else os.getenv('SERVER_BASE_PATH') + '/'
 print('SERVER_BASE_PATH: ', SERVER_BASE_PATH)
 
 # ----------------------------------------------------------------------------------------------------------------------
