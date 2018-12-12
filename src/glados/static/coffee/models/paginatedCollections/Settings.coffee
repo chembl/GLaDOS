@@ -468,6 +468,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS_DESCRIPTION:
           Table:
             Default: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.MechanismSchema.FACETS_GROUPS
         ID_COLUMN: glados.models.Compound.MechanismOfAction.ID_COLUMN
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
@@ -613,14 +614,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           Carousel:
             Default: Document.COLUMNS_SETTINGS.SEARCH_BY_TERM_RESULTS
     CLIENT_SIDE_WS_COLLECTIONS:
-      MECHANISMS_OF_ACTIONS_LIST:
-        MODEL: glados.models.Compound.MechanismOfAction
-        DEFAULT_PAGE_SIZE: 5
-        COLUMNS: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.RESULTS_LIST_TABLE_REPORT_CARD
-        ID_COLUMN: glados.models.Compound.MechanismOfAction.ID_COLUMN
       UNICHEM_CONNECTIVITY_LIST:
         MODEL: glados.models.Compound.UnichemConnectivityMatch
         DEFAULT_PAGE_SIZE: 5
