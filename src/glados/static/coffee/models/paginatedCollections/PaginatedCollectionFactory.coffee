@@ -275,10 +275,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       settings=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.MECHANISMS_OF_ACTION,
       searchTerm) ->
 
-      console.log 'GET NEW MECHANISMS OF ACTION LIST'
       list = @getNewESResultsListFor(settings, customQuery, useCustomQuery=(not itemsList?), itemsList,
         contextualProperties, searchTerm)
-      console.log 'list: ', list
       return list
 
     getNewAssaysList: (filter='') ->
@@ -391,14 +389,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @resetMeta(data.page_meta)
 
         return data.molecules
-
-      return list
-
-    getNewMechanismsOfActionList: ->
-
-      config = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.MECHANISMS_OF_ACTIONS_LIST
-      flavour = glados.models.paginatedCollections.SpecificFlavours.MechanismsOfActionList
-      list = @getNewClientSideCollectionFor config, generator=undefined, flavour
 
       return list
 
