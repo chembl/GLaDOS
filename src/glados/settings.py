@@ -52,6 +52,7 @@ DEBUG = RUN_ENV in [RunEnvs.DEV, RunEnvs.TRAVIS]
 # Build paths inside the project like this: os.path.join(GLADOS_ROOT, ...)
 GLADOS_ROOT = os.path.dirname(os.path.abspath(glados.__file__))
 DYNAMIC_DOWNLOADS_DIR = os.path.join(GLADOS_ROOT, 'dynamic-downloads')
+print('DYNAMIC_DOWNLOADS_DIR: ', DYNAMIC_DOWNLOADS_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
@@ -270,7 +271,7 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
-WATCH_AND_UPDATE_STATIC_COMPILED_FILES = RUN_ENV in [RunEnvs.TEST, RunEnvs.TRAVIS]
+WATCH_AND_UPDATE_STATIC_COMPILED_FILES = RUN_ENV in [RunEnvs.DEV, RunEnvs.TRAVIS]
 print('WATCH_AND_UPDATE_STATIC_COMPILED_FILES: ', WATCH_AND_UPDATE_STATIC_COMPILED_FILES)
 
 # ----------------------------------------------------------------------------------------------------------------------
