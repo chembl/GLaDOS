@@ -38,7 +38,11 @@ def main():
 
         glados.apache_config_generator.generate_config()
 
-    execute_in_manage = sys.argv[1] != 'createapacheconfig'
+    elif os.environ.get('RUN_MAIN') != 'true' and len(sys.argv) > 1 and sys.argv[1] == 'createdefaultadminuser':
+
+        print('CREATE DEFAULT ADMIN USER')
+
+    execute_in_manage = sys.argv[1] in ['createapacheconfig']
     if execute_in_manage:
         print('MANAGE EXECUTE IN COMMAND LINE')
         execute_from_command_line(sys.argv)

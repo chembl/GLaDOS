@@ -12,7 +12,11 @@ def generate_config():
     with open(template_file_path, 'r') as template_file:
 
         config_template = template_file.read()
-        output = config_template.format(SERVER_BASE_PATH=settings.SERVER_BASE_PATH,
+        server_base_path = settings.SERVER_BASE_PATH
+        if server_base_path.endswith('/'):
+            server_base_path = server_base_path[:-1]
+
+        output = config_template.format(SERVER_BASE_PATH=server_base_path,
                                         STATIC_DIR=settings.STATIC_ROOT,
                                         DYNAMIC_DOWNLOADS_DIR=settings.DYNAMIC_DOWNLOADS_DIR)
 
