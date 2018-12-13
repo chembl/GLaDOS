@@ -353,7 +353,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
       if not @downloadView?
         $downloadMessagesElem = $(@el).find('.BCK-download-messages-container')
-        @downloadView = new glados.views.Downloads.ServerSideDownloadView
+        @downloadView = new glados.views.ServerSideDownloads.ServerSideDownloadView
           model: @downloadModel
           el: $downloadMessagesElem
           menu_view: @

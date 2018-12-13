@@ -280,9 +280,11 @@ print('WATCH_AND_UPDATE_STATIC_COMPILED_FILES: ', WATCH_AND_UPDATE_STATIC_COMPIL
 # ----------------------------------------------------------------------------------------------------------------------
 
 COMPRESS_ENABLED = RUN_ENV in [RunEnvs.TEST, RunEnvs.PROD]
+print('COMPRESS_ENABLED: ', COMPRESS_ENABLED)
 
 if COMPRESS_ENABLED:
     COMPRESS_OFFLINE = True
+
     COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter',
                             'compressor.filters.cssmin.CSSMinFilter']
     COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']

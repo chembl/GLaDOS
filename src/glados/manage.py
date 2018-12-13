@@ -27,7 +27,7 @@ def main():
     elif os.environ.get('RUN_MAIN') != 'true' and len(sys.argv) > 1 and sys.argv[1] == 'collectstatic':
         
         # Builds static Unichem VueJS app
-        logging.info(subprocess.check_output(['npm', 'run', 'build'], cwd='src/glados/unichem'))
+        # logging.info(subprocess.check_output(['npm', 'run', 'build'], cwd='src/glados/unichem'))
         
         glados.static_files_compiler.StaticFilesCompiler.compile_all_known_compilers()
         execute_from_command_line([sys.argv[0], 'compilemessages', '--settings=glados'])
@@ -40,6 +40,7 @@ def main():
 
     execute_in_manage = sys.argv[1] != 'createapacheconfig'
     if execute_in_manage:
+        print('MANAGE EXECUTE IN COMMAND LINE')
         execute_from_command_line(sys.argv)
 
 
