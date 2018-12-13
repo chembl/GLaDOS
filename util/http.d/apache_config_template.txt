@@ -18,7 +18,7 @@ ProxyPassMatch /{SERVER_BASE_PATH}/(.*)$ http://localhost:8000/{SERVER_BASE_PATH
 ProxyPassReverse /{SERVER_BASE_PATH}/static/(.*)$ !
 ProxyPassReverse /{SERVER_BASE_PATH}/dynamic-downloads/(.*)$ !
 ProxyPassReverse /{SERVER_BASE_PATH}/(.*)$ http://localhost:8000/{SERVER_BASE_PATH}/$1
-
+q
 # serve directly static files
 Alias "/{SERVER_BASE_PATH}/static" "{STATIC_DIR}"
 <Directory "{STATIC_DIR}">

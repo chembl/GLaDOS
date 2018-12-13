@@ -103,7 +103,7 @@ def parse_and_format_cell(original_value, index_name, property_name):
 
 
 def get_file_path(job_id):
-    return job_id + '.gz'
+    return os.path.join(settings.DYNAMIC_DOWNLOADS_DIR, job_id + '.gz')
 # ----------------------------------------------------------------------------------------------------------------------
 # Writing csv and tsv files
 # ----------------------------------------------------------------------------------------------------------------------
