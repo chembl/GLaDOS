@@ -115,25 +115,27 @@ glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS =
   RESULTS_LIST_TABLE: [
     glados.models.Compound.MechanismOfAction.COLUMNS.MOLECULE_CHEMBL_ID
     glados.models.Compound.MechanismOfAction.COLUMNS.MOLECULE_PREF_NAME
-    glados.models.Compound.MechanismOfAction.COLUMNS.MOLECULE_DRUG_SYNONYMS
     glados.models.Compound.MechanismOfAction.COLUMNS.MOLECULE_TYPE
     glados.models.Compound.MechanismOfAction.COLUMNS.MOLECULE_FIRST_APPROVAL
     glados.models.Compound.MechanismOfAction.COLUMNS.MOLECULE_USAN_STEM
-    glados.models.Compound.MechanismOfAction.COLUMNS.MOLECULE_ATC_CODES
-    glados.models.Compound.MechanismOfAction.COLUMNS.MOLECULE_ATC_CODES_DESCRIPTION
     glados.models.Compound.MechanismOfAction.COLUMNS.MECHANISM_OF_ACTION
-    glados.models.Compound.MechanismOfAction.COLUMNS.MECHANISM_COMMENT
-    glados.models.Compound.MechanismOfAction.COLUMNS.MECHANISM_SELECTIVITY_COMMENT
-    glados.models.Compound.MechanismOfAction.COLUMNS.ACTION_TYPE
     glados.models.Compound.MechanismOfAction.COLUMNS.TARGET_CHEMBL_ID
     glados.models.Compound.MechanismOfAction.COLUMNS.TARGET_PREF_NAME
+    glados.models.Compound.MechanismOfAction.COLUMNS.ACTION_TYPE
     glados.models.Compound.MechanismOfAction.COLUMNS.TARGET_TYPE
     glados.models.Compound.MechanismOfAction.COLUMNS.TARGET_ORGANISM
     glados.models.Compound.MechanismOfAction.COLUMNS.BINDING_SITE_NAME
-    glados.models.Compound.MechanismOfAction.COLUMNS.BINDING_SITE_COMMENT
     glados.models.Compound.MechanismOfAction.COLUMNS.MAX_PHASE
     glados.models.Compound.MechanismOfAction.COLUMNS.REFERENCES
 
+  ]
+  RESULTS_LIST_REPORT_CARD_ADDITIONAL:[
+    glados.models.Compound.MechanismOfAction.COLUMNS.MOLECULE_DRUG_SYNONYMS
+    glados.models.Compound.MechanismOfAction.COLUMNS.MOLECULE_ATC_CODES
+    glados.models.Compound.MechanismOfAction.COLUMNS.MOLECULE_ATC_CODES_DESCRIPTION
+    glados.models.Compound.MechanismOfAction.COLUMNS.MECHANISM_COMMENT
+    glados.models.Compound.MechanismOfAction.COLUMNS.MECHANISM_SELECTIVITY_COMMENT
+    glados.models.Compound.MechanismOfAction.COLUMNS.BINDING_SITE_COMMENT
   ]
   DOWNLOAD_COLUMNS: [
     glados.models.Compound.MechanismOfAction.COLUMNS.MOLECULE_CHEMBL_ID
@@ -150,16 +152,6 @@ glados.models.Compound.MechanismOfAction.getListURL = (filter) ->
   glados.Settings.ENTITY_BROWSERS_URL_GENERATOR
     entity: 'mechanisms_of_action'
     filter: encodeURIComponent(filter) unless not filter?
-
-totalStr = ''
-for key, column of glados.models.Compound.MechanismOfAction.COLUMNS
-  totalStr += "msgid \"#{column.label_id}\"\n"
-  totalStr += "msgstr \"#{column.name_to_show}\"\n\n"
-  totalStr += "msgid \"#{column.label_mini_id}\"\n"
-  totalStr += "msgstr \"#{column.name_to_show_short}\"\n\n"
-
-console.error(totalStr)
-
 
 glados.models.Compound.MechanismOfAction.getListURLByMoleculeChemblId = (moleculeChemblId) ->
   filterStr = "mechanism_of_action._metadata.all_molecule_chembl_ids:#{moleculeChemblId}"

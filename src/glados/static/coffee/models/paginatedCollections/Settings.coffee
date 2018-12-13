@@ -429,7 +429,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       DRUG_INDICATIONS:
         ID_NAME: 'ESDrugIndications'
         LABEL: 'Drug Indications'
-        INDEX_NAME: 'chembl_drug_indication'
+        INDEX_NAME: 'chembl_drug_indication_by_parent'
         # PATH: Assigned after this declaration using the INDEX_NAME
         #BROWSE_LIST_URL: Drug.getDrugsListURL
         BROWSE_LIST_URL: glados.models.Compound.DrugIndication.getListURL
@@ -468,6 +468,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS_DESCRIPTION:
           Table:
             Default: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+            Additional: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.MechanismSchema.FACETS_GROUPS
         ID_COLUMN: glados.models.Compound.MechanismOfAction.ID_COLUMN
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
