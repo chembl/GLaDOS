@@ -11,11 +11,11 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
-import sys
 import glados
 from django.utils.translation import ugettext_lazy as _
 import logging
 import yaml
+from pymongo.read_preferences import ReadPreference
 
 
 class GladosSettingsError(Exception):
@@ -308,13 +308,33 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # ----------------------------------------------------------------------------------------------------------------------
 # Cache
 # ----------------------------------------------------------------------------------------------------------------------
+ENABLE_MONGO_DB_CACHE = run_config.get('enable_mongo_db_cache', False)
+print('ENABLE_MONGO_DB_CACHE: ', ENABLE_MONGO_DB_CACHE)
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': '127.0.0.1:11211',
+if not ENABLE_MONGO_DB_CACHE:
+
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+            'LOCATION': '127.0.0.1:11211',
+        }
     }
-}
+else:
+
+    mongo_db_cache_config = run_config.get('mongo_db_cache_config')
+
+    if mongo_db_cache_config is None:
+        raise GladosSettingsError('You must provide a mongdo db cache configuration!')
+
+    mongo_db_cache_config['OPTIONS']['READ_PREFERENCE'] = ReadPreference.SECONDARY_PREFERRED
+
+    CACHES = {
+        'default': mongo_db_cache_config
+    }
+
+    print('CACHES: ', CACHES)
+
+
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Logging
