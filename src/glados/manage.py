@@ -13,6 +13,7 @@ def main():
 
     import glados.static_files_compiler
     import glados.apache_config_generator
+    import glados.admin_user_generator
 
     # Compress files before server launch if compression is enabled
     if os.environ.get('RUN_MAIN') != 'true' and len(sys.argv) > 1 and sys.argv[1] == 'runserver' and settings.DEBUG:
@@ -40,9 +41,9 @@ def main():
 
     elif os.environ.get('RUN_MAIN') != 'true' and len(sys.argv) > 1 and sys.argv[1] == 'createdefaultadminuser':
 
-        print('CREATE DEFAULT ADMIN USER')
+        glados.admin_user_generator.generate_admin_user()
 
-    execute_in_manage = sys.argv[1] in ['createapacheconfig']
+    execute_in_manage = sys.argv[1] not in ['createapacheconfig', 'createdefaultadminuser']
     if execute_in_manage:
         print('MANAGE EXECUTE IN COMMAND LINE')
         execute_from_command_line(sys.argv)
