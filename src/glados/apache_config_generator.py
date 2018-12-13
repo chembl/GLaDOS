@@ -23,3 +23,9 @@ def generate_config():
         with open(output_file_path, 'w') as out_file:
             out_file.write(output)
         print('Config file generated in {}'.format(output_file_path))
+
+        # also create a test file to help in testing
+        test_file_path = os.path.join(settings.DYNAMIC_DOWNLOADS_DIR, 'test.txt')
+        with open(test_file_path, 'w') as out_file:
+            out_file.write('test file!')
+
