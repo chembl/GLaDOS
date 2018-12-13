@@ -47,7 +47,8 @@ if RUN_ENV not in [RunEnvs.DEV, RunEnvs.TRAVIS, RunEnvs.TEST, RunEnvs.PROD]:
     raise GladosSettingsError("Run environment {} is not supported.".format(RUN_ENV))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = RUN_ENV in [RunEnvs.DEV, RunEnvs.TRAVIS]
+DEBUG = RUN_ENV in [RunEnvs.DEV, RunEnvs.TRAVIS, RunEnvs.TEST]
+print('DEBUG: ', DEBUG)
 
 # Build paths inside the project like this: os.path.join(GLADOS_ROOT, ...)
 GLADOS_ROOT = os.path.dirname(os.path.abspath(glados.__file__))
