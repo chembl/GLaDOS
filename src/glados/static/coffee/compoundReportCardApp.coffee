@@ -331,6 +331,12 @@ class CompoundReportCardApp extends glados.ReportCardApp
       section_label: 'Activity Charts'
       report_card_app: @
 
+  @initAllActivityChartsWhenEmbedded = ->
+
+    CompoundReportCardApp.initActivitySummary()
+    CompoundReportCardApp.initAssaySummary()
+    CompoundReportCardApp.initTargetSummary()
+
   @initActivitySummary = ->
 
     compound = CompoundReportCardApp.getCurrentCompound()
