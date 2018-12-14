@@ -29,6 +29,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     CompoundReportCardApp.initMetabolism()
     CompoundReportCardApp.initBioSeq()
     CompoundReportCardApp.initHELMNotation()
+    CompoundReportCardApp.initActivityChartsEmbedder()
     CompoundReportCardApp.initActivitySummary()
     CompoundReportCardApp.initAssaySummary()
     CompoundReportCardApp.initTargetSummary()
@@ -313,6 +314,10 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     if GlobalVariables['EMBEDED']
       compound.fetch()
+
+  @initActivityChartsEmbedder = ->
+
+    
 
   @initActivitySummary = ->
 
