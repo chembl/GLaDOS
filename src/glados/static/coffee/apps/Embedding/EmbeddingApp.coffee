@@ -142,6 +142,9 @@ glados.useNameSpace 'glados.apps.Embedding',
         approved_drugs_clinical_candidates:
           template: "#{@targetReportCardBaseTemplate} #ApprovedDrugsAndClinicalCandidatesCard"
           initFunction: TargetReportCardApp.initApprovedDrugsClinicalCandidates
+        activity_charts:
+          template: "#{@targetReportCardBaseTemplate} #ActivityChartsGroup"
+          initFunction: TargetReportCardApp.initAllActivityChartsWhenEmbedded
         bioactivities:
           template: "#{@targetReportCardBaseTemplate} #TAssociatedBioactivitiesCard"
           initFunction: TargetReportCardApp.initBioactivities
