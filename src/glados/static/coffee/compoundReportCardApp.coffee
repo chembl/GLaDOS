@@ -319,7 +319,17 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     compound = CompoundReportCardApp.getCurrentCompound()
 
+    viewConfig =
+      resource_type: gettext('glados_entities_compound_name')
+      embed_identifier: compound.get('molecule_chembl_id')
 
+    new glados.views.ReportCards.FullSectionEmbedderView
+      model: compound
+      el: $('#ActivityChartsEmbedder')
+      config: viewConfig
+      section_id: 'ActivityCharts'
+      section_label: 'Activity Charts'
+      report_card_app: @
 
   @initActivitySummary = ->
 
