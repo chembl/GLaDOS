@@ -317,7 +317,9 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @initActivityChartsEmbedder = ->
 
-    
+    compound = CompoundReportCardApp.getCurrentCompound()
+
+
 
   @initActivitySummary = ->
 
