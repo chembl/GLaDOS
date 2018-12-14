@@ -15,6 +15,8 @@ from . import og_tags_generator
 from . import schema_tags_generator
 from . import glados_server_statistics
 from . import heatmap_helper
+from . import dynamic_downloads_manager
+import traceback
 
 
 def visualise(request):
@@ -98,6 +100,14 @@ def get_latest_tweets_json(request):
 
 
 def get_latest_blog_entries(request, pageToken):
+
+    if not settings.BLOGGER_ENABLED:
+        default_empty_response = {
+            'entries': [],
+            'totalCount': 0
+        }
+        return JsonResponse(default_empty_response)
+
     blogId = '2546008714740235720'
     key = settings.BLOGGER_KEY
     fetchBodies = True
@@ -367,6 +377,46 @@ def request_heatmap_helper(request):
         heatmap_helper.generate_heatmap_initial_data(index_name, raw_search_data)
 
     return JsonResponse({'data': 'Data'})
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Downloads
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+def generate_download(request):
+
+    if request.method != "POST":
+        return JsonResponse({'error': 'This is only available via POST'})
+
+    index_name = request.POST.get('index_name', '')
+    raw_query = request.POST.get('query', '')
+    desired_format = request.POST.get('format', '')
+    raw_columns_to_download = request.POST.get('columns', '')
+
+    print('index_name: ', index_name)
+    print('raw_query: ', raw_query)
+    print('desired_format: ', desired_format)
+    print('raw_columns_to_download: ', raw_columns_to_download)
+
+    try:
+        response = dynamic_downloads_manager.generate_download(index_name, raw_query, desired_format,
+                                                               raw_columns_to_download)
+        return JsonResponse(response)
+    except Exception as e:
+        traceback.print_exc()
+        return HttpResponse('Internal Server Error', status=500)
+
+def get_download_status(request, download_id):
+
+    if request.method != "GET":
+        return JsonResponse({'error': 'This is only available via GET'})
+
+    try:
+        response = dynamic_downloads_manager.get_download_status(download_id)
+        return JsonResponse(response)
+    except Exception as e:
+        traceback.print_exc()
+        return HttpResponse('Internal Server Error', status=500)
 
 
 # noinspection PyBroadException

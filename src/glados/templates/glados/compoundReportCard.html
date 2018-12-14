@@ -203,7 +203,10 @@
 
                 <div id="ActivityCharts" style="display: none;">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
-                    <div class="row piechart-group BCK-section-content">
+                    <div class="row">
+                        {% include "glados/base/ReportCards/Sections/FullSectionEmbedder.html" %}
+                    </div>
+                    <div id="ActivityChartsGroup" class="row piechart-group BCK-section-content">
                         <div class="col s12 m6 l4  piechart-col">
                             <div id="CompoundBioactivitySummary" class="section piechart-section">
                                 <h4 class="center-align">Bioactivity Summary</h4>

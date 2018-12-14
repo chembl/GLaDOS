@@ -4,55 +4,6 @@ describe "Downloads", ->
   aspirin = new Compound
   aspirin.set(data)
 
-  describe "A simple object download", ->
-
-    it 'A. generates a correct json file', (done) ->
-
-      fileStrContent = aspirin.downloadJSON('DownloadTestA.json')
-      testJSONFile(fileStrContent, glados.Settings.STATIC_URL+'testData/DownloadTestA.json', done)
-
-    it 'B. generates a correct csv file', (done) ->
-
-      expect(true).toBe(true) #TODO
-      done()
-#      fileStrContent = aspirin.downloadCSV('DownloadTestB.csv')
-#      testTextFile(fileStrContent, glados.Settings.STATIC_URL+'testData/DownloadTestB.csv', done)
-
-  describe "A model with custom download object", ->
-
-    downloadParserFunction = (attributes) ->
-      return [attributes.molecule_properties]
-
-    it 'D. generates a correct json file', (done) ->
-
-      fileStrContent = aspirin.downloadJSON('DownloadTestD.json', downloadParserFunction)
-      testJSONFile(fileStrContent, glados.Settings.STATIC_URL+'testData/DownloadTestD.json', done)
-
-    it 'E. generates a correct csv file', (done) ->
-
-      expect(true).toBe(true) #TODO
-      done()
-#      fileStrContent = aspirin.downloadCSV('DownloadTestE.csv', downloadParserFunction)
-#      testTextFile(fileStrContent, glados.Settings.STATIC_URL+'testData/DownloadTestE.csv', done)
-
-  describe "A sdf download from a file list", ->
-
-    DownloadModelOrCollectionExt.generateSDFFromChemblIDs ['CHEMBL59', 'CHEMBL251624', 'CHEMBL327561', 'CHEMBL465586' ]
-    #TODO Finish this test! it neets to wait for the file to be built
-
-
-  testTextFile = (currentContent, expectedFileUrl, done) ->
-    $.get expectedFileUrl, (expectedFileContent) ->
-
-      expect(currentContent).toBe(expectedFileContent)
-      done()
-
-  testJSONFile = (currentContent, expectedFileUrl, done) ->
-    $.get expectedFileUrl, (expectedFileContent) ->
-
-      expect(currentContent).toBe(JSON.stringify(expectedFileContent))
-      done()
-
   # this is to make sure that we don't accidentally change the configurations
   describe "Download Columns Configuration", ->
 

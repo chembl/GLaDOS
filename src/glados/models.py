@@ -1,108 +1,23 @@
 from django.db import models
-from glados.es_models import TinyURLIndex, ESCachedRequestIndex
+from glados.es_models import TinyURLIndex, ESCachedRequestIndex, ESDownloadRecordIndex
 import time
 import socket
 from django.conf import settings
 
 
-class Acknowledgement(models.Model):
-
-  FUNDING = 'FUNDING'
-  CATEGORY_CHOICES = (
-    (FUNDING, 'Funding'),
-  )
-
-  YES = '1'
-  NO = '0'
-  NA = '-1'
-  IS_CURRENT_CHOICES = (
-    ('1', 'Yes'),
-    ('0', 'No'),
-    ('-1', 'N/A')
-  )
-
-  category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default=FUNDING)
-  dates = models.CharField(max_length=400, blank=True, null=True)
-  content = models.CharField(max_length=400, blank=True, null=True)
-  is_current = models.IntegerField(choices=IS_CURRENT_CHOICES, default=YES)
-
-  class Meta:
-    db_table = 'acknowledgements'
-
-  def __str__(self):
-    return '%s: %s' % (self.dates, self.content)
-
-
-class FaqCategory(models.Model):
-
-  category_name = models.CharField(max_length=100, blank=True, null=True)
-  position = models.PositiveSmallIntegerField(default='0')
-  ordering = ['position']
-
-  class Meta:
-    db_table = 'faq_categories'
-
-  def __str__(self):
-    return '%s' % (self.category_name)
-
-
-class FaqSubcategory(models.Model):
-
-  subcategory_name = models.CharField(max_length=100, blank=True, null=True)
-
-  class Meta:
-    db_table = 'faq_subcategories'
-    
-  def __str__(self):
-    return '%s' % (self.subcategory_name)
-
-
-class Faq(models.Model):
-
-  category = models.ForeignKey(FaqCategory, on_delete=models.CASCADE)
-  subcategory = models.ForeignKey(FaqSubcategory, on_delete=models.CASCADE)
-  question = models.CharField(max_length=4000, blank=True, null=True, unique=True)
-  answer = models.TextField(blank=True, null=True, unique=True)
-  deleted = models.BooleanField(default=False)
-      
-  def __str__(self):
-    return '%s' % (self.question)
-
-
-class WizardStep(models.Model):
-
-  title = models.CharField(max_length=100)
-  
-
-class WizardOptionType(models.Model):
-
-  name = models.CharField(max_length=20)
-  
-
-class WizardOption(models.Model):
-
-  title = models.CharField(max_length=30)
-  icon = models.CharField(max_length=20)
-  description = models.CharField(max_length=40)
-  is_default = models.BooleanField(default=False)
-  parent_step = models.ForeignKey(WizardStep, on_delete=models.CASCADE)
-  type = models.ForeignKey(WizardOptionType)
-  image_url = models.CharField(max_length=400)
-
-
 class TinyURL(models.Model):
 
-  long_url = models.TextField()
-  hash = models.CharField(max_length=100)
+    long_url = models.TextField()
+    hash = models.CharField(max_length=100)
 
-  def indexing(self):
-    obj = TinyURLIndex(
-      meta={'id': self.hash},
-      long_url=self.long_url,
-      hash=self.hash,
-    )
-    obj.save(refresh='wait_for')
-    return obj.to_dict(include_meta=True)
+    def indexing(self):
+        obj = TinyURLIndex(
+            meta={'id': self.hash},
+            long_url=self.long_url,
+            hash=self.hash,
+        )
+        obj.save(refresh='wait_for')
+        return obj.to_dict(include_meta=True)
 
 
 class Country(models.Model):
@@ -115,26 +30,89 @@ class Country(models.Model):
 
     def __str__(self):
         return self.country_name
-        
-class ESCachedRequest(models.Model):
-  es_index = models.CharField(max_length=200)
-  es_query = models.TextField()
-  es_aggs = models.TextField()
-  es_request_digest = models.TextField()
-  is_cached = models.BooleanField()
-  host = models.TextField()
-  run_env_type = models.TextField()
 
-  def indexing(self):
-    obj = ESCachedRequestIndex(
-      es_index=self.es_index,
-      es_query=self.es_query,
-      es_aggs=self.es_aggs,
-      es_request_digest=self.es_request_digest,
-      host=socket.gethostname(),
-      run_env_type=settings.RUN_ENV,
-      is_cached=self.is_cached,
-      request_date=int(time.time()*1000)
+# ----------------------------------------------------------------------------------------------------------------------
+# Server Statistics
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+class ESCachedRequest(models.Model):
+    es_index = models.CharField(max_length=200)
+    es_query = models.TextField()
+    es_aggs = models.TextField()
+    es_request_digest = models.TextField()
+    is_cached = models.BooleanField()
+    host = models.TextField()
+    run_env_type = models.TextField()
+
+    def indexing(self):
+        obj = ESCachedRequestIndex(
+          es_index=self.es_index,
+          es_query=self.es_query,
+          es_aggs=self.es_aggs,
+          es_request_digest=self.es_request_digest,
+          host=socket.gethostname(),
+          run_env_type=settings.RUN_ENV,
+          is_cached=self.is_cached,
+          request_date=int(time.time()*1000)
+        )
+        obj.save()
+        return obj.to_dict(include_meta=True)
+
+
+class ESDownloadRecord(models.Model):
+    download_id = models.TextField()
+    time_taken = models.IntegerField(default=0)
+    is_new = models.BooleanField()
+    file_size = models.BigIntegerField()
+    es_index = models.CharField(max_length=200)
+    es_query = models.TextField()
+    run_env_type = models.TextField()
+    desired_format = models.CharField(max_length=20)
+    total_items = models.IntegerField(default=0)
+    host = models.TextField(default='')
+
+    def indexing(self):
+        obj = ESDownloadRecordIndex(
+            download_id=self.download_id,
+            time_taken=self.time_taken,
+            is_new=self.is_new,
+            file_size=self.file_size,
+            es_index=self.es_index,
+            es_query=self.es_query,
+            desired_format=self.desired_format,
+            total_items=self.total_items,
+            host=socket.gethostname(),
+            run_env_type=settings.RUN_ENV,
+            request_date=int(time.time() * 1000)
+        )
+        obj.save()
+        return obj.to_dict(include_meta=True)
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Download Jobs
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+# This is to keep track of the status of a download job
+class DownloadJob(models.Model):
+    job_id = models.TextField(primary_key=True)
+    progress = models.PositiveSmallIntegerField(default=0)
+    total_items = models.PositiveIntegerField(default=0)
+    raw_columns_to_download = models.TextField(null=True)
+    raw_query = models.TextField(null=True)
+
+    QUEUED = 'QUEUED'
+    PROCESSING = 'PROCESSING'
+    ERROR = 'ERROR'
+    FINISHED = 'FINISHED'
+    STATUSES = (
+        (QUEUED, QUEUED),
+        (PROCESSING, PROCESSING),
+        (FINISHED, FINISHED),
+        (ERROR, ERROR),
     )
-    obj.save()
-    return obj.to_dict(include_meta=True)
+    status = models.CharField(max_length=20, choices=STATUSES, default=QUEUED)
+    index_name = models.CharField(max_length=200, null=True)
+    desired_format = models.CharField(max_length=200, null=True)
+

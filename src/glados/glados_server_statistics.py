@@ -1,10 +1,12 @@
 # This saves server statisticsic elastic search, like the usage of the elasticsearch cache.
 from glados.models import ESCachedRequest
+from glados.models import ESDownloadRecord
 import json
 import hashlib
 import base64
 from elasticsearch_dsl.connections import connections
 from django.core.cache import cache
+import traceback
 
 
 def get_and_record_es_cached_response(index_name, raw_search_data):
@@ -12,7 +14,8 @@ def get_and_record_es_cached_response(index_name, raw_search_data):
     # the usage in elasticsearch
 
     print('elasticsearch_cache')
-    search_data_digest = hashlib.sha256(raw_search_data.encode('utf-8')).digest()
+    stable_raw_search_data = json.dumps(json.loads(raw_search_data), sort_keys=True)
+    search_data_digest = hashlib.sha256(stable_raw_search_data.encode('utf-8')).digest()
     base64_search_data_hash = base64.b64encode(search_data_digest).decode('utf-8')
     search_data = json.loads(raw_search_data)
 
@@ -70,4 +73,23 @@ def record_elasticsearch_cache_usage(index_name, search_data, base64_search_data
         es_cache_req_data.indexing()
     except:
         traceback.print_exc()
-        print('Error saving in elastic!')
+        print('Error saving cache record in elastic!')
+
+
+def record_download(download_id, time_taken, is_new, file_size, desired_format, es_index, es_query='',
+                    total_items=0):
+    try:
+        download_record = ESDownloadRecord(
+            download_id=download_id,
+            time_taken=time_taken,
+            is_new=is_new,
+            file_size=file_size,
+            desired_format=desired_format,
+            es_index=es_index,
+            es_query=es_query,
+            total_items=total_items
+        )
+        download_record.indexing()
+    except:
+        traceback.print_exc()
+        print('Error saving download record in elastic!')

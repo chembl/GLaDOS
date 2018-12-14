@@ -1,5 +1,5 @@
 # View that renders the Image of the compound for the Compound Name and Classification Section
-CompoundImageView = CardView.extend(DownloadViewExt).extend
+CompoundImageView = CardView.extend
 
   RENDERER_3D_LITEMOL_NAME:  '3DLiteMol'
   RENDERER_3D_3DMOL_NAME:  '3D3DMol'
@@ -29,8 +29,6 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
 
   events: ->
     return _.extend {}, DownloadViewExt.events,
-#      "click #CNC-3d-modal-trigger": "initDefault3DView"
-#      "click #CNC-3d-modal-trigger-small": "initDefault3DView"
       "click a[href='#BCK-compound-3dview-3DMol']": "lazyInit3DView"
       "click a[href='#BCK-compound-3dview-LiteMol']": "lazyInit3DView"
       "click a[href='#BCK-compound-3dview-Speck']": "lazyInit3DView"
@@ -62,6 +60,10 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
   initDownloadButtons: ->
     $dwn_png = $('.CNC-download-png')
     $dwn_svg = $('.CNC-download-svg')
+    $viewRawJsonBTN = $(@el).find('.BCK-trigger-download-JSON')
+    $viewRawJsonBTN.attr('href', @model.url)
+
+
     if @model.get('structure_image')
       $dwn_png.attr('href', @model.get('image_url_png'))
       $dwn_png.attr('download', @model.get('molecule_chembl_id') + '.png')
@@ -179,21 +181,6 @@ CompoundImageView = CardView.extend(DownloadViewExt).extend
             type: 'reduced'
 
     return @renderers3D[rendererName]
-
-  # --------------------------------------------------------------------
-  # Downloads
-  # --------------------------------------------------------------------
-
-  getFilename: (format) ->
-
-    if format == 'csv'
-      return @model.get('molecule_chembl_id') + 'NameAndClassification.csv'
-    else if format == 'json'
-      return @model.get('molecule_chembl_id') + 'NameAndClassification.json'
-    else if format == 'xlsx'
-      return @model.get('molecule_chembl_id') + 'NameAndClassification.xlsx'
-    else
-      return 'file.txt'
 
 
 

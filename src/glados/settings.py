@@ -11,22 +11,49 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
-import sys
 import glados
 from django.utils.translation import ugettext_lazy as _
 import logging
+import yaml
+from pymongo.read_preferences import ReadPreference
+
+
+class GladosSettingsError(Exception):
+    """Base class for exceptions in GLaDOS configuration."""
+    pass
 
 
 class RunEnvs(object):
     DEV = 'DEV'
+    TRAVIS = 'TRAVIS'
     TEST = 'TEST'
     PROD = 'PROD'
 
+# ----------------------------------------------------------------------------------------------------------------------
+# Read config file
+# ----------------------------------------------------------------------------------------------------------------------
 
-RUN_ENV = RunEnvs.DEV
+custom_config_file_path = os.getenv('CONFIG_FILE_PATH')
+if custom_config_file_path is not None:
+    CONFIG_FILE_PATH = custom_config_file_path
+else:
+    CONFIG_FILE_PATH = os.getenv("HOME") + '/.chembl-glados/config.yml'
+print('CONFIG_FILE_PATH: ', CONFIG_FILE_PATH)
+run_config = yaml.load(open(CONFIG_FILE_PATH, 'r'))
+print('run_config: ', run_config)
+
+RUN_ENV = run_config['run_env']
+if RUN_ENV not in [RunEnvs.DEV, RunEnvs.TRAVIS, RunEnvs.TEST, RunEnvs.PROD]:
+    raise GladosSettingsError("Run environment {} is not supported.".format(RUN_ENV))
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = RUN_ENV in [RunEnvs.DEV, RunEnvs.TRAVIS]
+print('DEBUG: ', DEBUG)
 
 # Build paths inside the project like this: os.path.join(GLADOS_ROOT, ...)
 GLADOS_ROOT = os.path.dirname(os.path.abspath(glados.__file__))
+DYNAMIC_DOWNLOADS_DIR = os.path.join(GLADOS_ROOT, 'dynamic-downloads')
+print('DYNAMIC_DOWNLOADS_DIR: ', DYNAMIC_DOWNLOADS_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
@@ -37,42 +64,71 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # ----------------------------------------------------------------------------------------------------------------------
 
 
-# For usage behind proxies eg: 'chembl/beta/'
-SERVER_BASE_PATH = ''
+# For usage behind proxies eg: 'chembl/beta/', you don't need to care about this in DEV mode
+SERVER_BASE_PATH = '' if os.getenv('SERVER_BASE_PATH') is None else os.getenv('SERVER_BASE_PATH') + '/'
+print('SERVER_BASE_PATH: ', SERVER_BASE_PATH)
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Admin user
+# ----------------------------------------------------------------------------------------------------------------------
+ADMIN_USER_CONFIG = run_config.get('admin_user')
 
 # ----------------------------------------------------------------------------------------------------------------------
 # SECURITY WARNING: keep the secret key used in production secret!
 # ----------------------------------------------------------------------------------------------------------------------
-SECRET_KEY = 'Cake, and grief counseling, will be available at the conclusion of the test.'
+SECRET_KEY = run_config.get('server_secret_key',
+                            'Cake and grief counseling will be available at the conclusion of the test.')
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Twitter
 # ----------------------------------------------------------------------------------------------------------------------
+TWITTER_ENABLED = run_config.get('enable_twitter', False)
 
-TWITTER_ENABLED = RUN_ENV == RunEnvs.PROD
+if TWITTER_ENABLED:
 
-TWITTER_ACCESS_TOKEN = '<TWITTER_ACCESS_TOKEN>'
-TWITTER_ACCESS_TOKEN_SECRET = '<TWITTER_ACCESS_TOKEN_SECRET>'
-TWITTER_CONSUMER_KEY = '<TWITTER_CONSUMER_KEY>'
-TWITTER_CONSUMER_SECRET = '<TWITTER_CONSUMER_SECRET>'
+    twitter_secrets = run_config.get('twitter_secrets')
+    if twitter_secrets is None:
+        raise GladosSettingsError("You must provide the twitter secrets ")
+
+    TWITTER_ACCESS_TOKEN = twitter_secrets.get('twitter_access_token', '')
+    TWITTER_ACCESS_TOKEN_SECRET = twitter_secrets.get('twitter_access_token_secret', '')
+    TWITTER_CONSUMER_KEY = twitter_secrets.get('twitter_access_consumer_key', '')
+    TWITTER_CONSUMER_SECRET = twitter_secrets.get('twitter_access_consumer_secret', '')
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Blogger
 # ----------------------------------------------------------------------------------------------------------------------
+BLOGGER_ENABLED = run_config.get('enable_blogger', False)
+if BLOGGER_ENABLED:
+    blogger_secrets = run_config.get('blogger_secrets')
+    if blogger_secrets is None:
+        raise GladosSettingsError("You must provide the blogger secrets ")
 
-BLOGGER_KEY = '<BLOGGER_API_KEY>'
+    BLOGGER_KEY = blogger_secrets.get('blogger_key', '')
 
 
 # ----------------------------------------------------------------------------------------------------------------------
 # ElasticSearch
 # ----------------------------------------------------------------------------------------------------------------------
+elasticsearch_config = run_config.get('elasticsearch')
+print('elasticsearch_config: ', elasticsearch_config)
+if elasticsearch_config is None:
+    raise GladosSettingsError("You must provide the elasticsearch configuration")
+else:
+    ELASTICSEARCH_HOST = elasticsearch_config.get('host')
 
-ELASTICSEARCH_HOST = 'http://wp-p1m-50.ebi.ac.uk:9200'
-ELASTICSEARCH_USERNAME = None
-ELASTICSEARCH_PASSWORD = None
+    if RUN_ENV == RunEnvs.TRAVIS:
+        print('is running in Travis!')
+        ELASTICSEARCH_USERNAME = os.getenv('ELASTICSEARCH_USERNAME')
+        ELASTICSEARCH_PASSWORD = os.getenv('ELASTICSEARCH_PASSWORD')
+    else:
+        ELASTICSEARCH_USERNAME = elasticsearch_config.get('username')
+        ELASTICSEARCH_PASSWORD = elasticsearch_config.get('password')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = RUN_ENV == RunEnvs.DEV
+    print('ELASTICSEARCH_HOST: ', ELASTICSEARCH_HOST)
+    print('ELASTICSEARCH_USERNAME: ', ELASTICSEARCH_USERNAME)
+    print('ELASTICSEARCH_PASSWORD: ', ELASTICSEARCH_PASSWORD)
+
 
 ALLOWED_HOSTS = ['*']
 
@@ -88,7 +144,8 @@ INSTALLED_APPS = [
   'corsheaders',
   'glados',
   'compressor',
-  'twitter'
+  'twitter',
+  'django_rq'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -137,24 +194,32 @@ DATABASES = {
   'default': {
     'ENGINE': 'django.db.backends.sqlite3',
     'NAME': os.path.join(GLADOS_ROOT, 'db/db.sqlite3')
-  },
-  'oradb': {
-    'ENGINE':   'django.db.backends.oracle',
-    'NAME':     'oradb/xe',
-    'USER':     'hr',
-    'PASSWORD': 'hr'
   }
 }
 
-if 'test' in sys.argv:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(GLADOS_ROOT, 'db/db.sqlite3')
-        }        
+if RUN_ENV != RunEnvs.TRAVIS:
+
+    DATABASES['oradb'] = {
+        'ENGINE': 'django.db.backends.oracle',
+        'NAME': 'oradb/xe',
+        'USER': 'hr',
+        'PASSWORD': 'hr'
     }
 
-DATABASE_ROUTERS = ['glados.db.APIDatabaseRouter.APIDatabaseRouter']
+    DATABASE_ROUTERS = ['glados.db.APIDatabaseRouter.APIDatabaseRouter']
+# ----------------------------------------------------------------------------------------------------------------------
+# Django RQ
+# https://github.com/rq/django-rq
+# ----------------------------------------------------------------------------------------------------------------------
+RQ_QUEUES = {
+    'default': {
+        'HOST': 'localhost',
+        'PORT': 6379,
+        'DB': 0,
+        'DEFAULT_TIMEOUT': 3600,
+    },
+}
+
 # ----------------------------------------------------------------------------------------------------------------------
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
@@ -181,15 +246,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # ----------------------------------------------------------------------------------------------------------------------
 
 LANGUAGE_CODE = 'en'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
-
 LANGUAGES = [
     ('en', _('English')),
 ]
@@ -214,22 +274,23 @@ STATIC_ROOT = os.path.join(GLADOS_ROOT, 'static_root')
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
-    #'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    # other finders..
     'compressor.finders.CompressorFinder',
 )
 
-WATCH_AND_UPDATE_STATIC_COMPILED_FILES = RUN_ENV != RunEnvs.PROD
+WATCH_AND_UPDATE_STATIC_COMPILED_FILES = RUN_ENV in [RunEnvs.DEV, RunEnvs.TRAVIS]
+print('WATCH_AND_UPDATE_STATIC_COMPILED_FILES: ', WATCH_AND_UPDATE_STATIC_COMPILED_FILES)
 
 # ----------------------------------------------------------------------------------------------------------------------
 # File Compression (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 # ----------------------------------------------------------------------------------------------------------------------
 
-COMPRESS_ENABLED = RUN_ENV == RunEnvs.PROD
+COMPRESS_ENABLED = RUN_ENV in [RunEnvs.TEST, RunEnvs.PROD]
+print('COMPRESS_ENABLED: ', COMPRESS_ENABLED)
 
 if COMPRESS_ENABLED:
     COMPRESS_OFFLINE = True
+
     COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter',
                             'compressor.filters.cssmin.CSSMinFilter']
     COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
@@ -247,13 +308,33 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # ----------------------------------------------------------------------------------------------------------------------
 # Cache
 # ----------------------------------------------------------------------------------------------------------------------
+ENABLE_MONGO_DB_CACHE = run_config.get('enable_mongo_db_cache', False)
+print('ENABLE_MONGO_DB_CACHE: ', ENABLE_MONGO_DB_CACHE)
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': '127.0.0.1:11211',
+if not ENABLE_MONGO_DB_CACHE:
+
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+            'LOCATION': '127.0.0.1:11211',
+        }
     }
-}
+else:
+
+    mongo_db_cache_config = run_config.get('mongo_db_cache_config')
+
+    if mongo_db_cache_config is None:
+        raise GladosSettingsError('You must provide a mongdo db cache configuration!')
+
+    mongo_db_cache_config['OPTIONS']['READ_PREFERENCE'] = ReadPreference.SECONDARY_PREFERRED
+
+    CACHES = {
+        'default': mongo_db_cache_config
+    }
+
+    print('CACHES: ', CACHES)
+
+
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Logging
