@@ -43,7 +43,18 @@ def main():
 
         glados.admin_user_generator.generate_admin_user()
 
-    execute_in_manage = sys.argv[1] not in ['createapacheconfig', 'createdefaultadminuser']
+    elif os.environ.get('RUN_MAIN') != 'true' and len(sys.argv) > 1 and sys.argv[1] == 'simulatedaemon':
+
+        import datetime
+        import time
+
+        while True:
+            now = datetime.datetime.now()
+            print('working...')
+            print(now)
+            time.sleep(1)
+
+    execute_in_manage = sys.argv[1] not in ['createapacheconfig', 'createdefaultadminuser', 'simulatedaemon']
     if execute_in_manage:
         print('MANAGE EXECUTE IN COMMAND LINE')
         execute_from_command_line(sys.argv)
