@@ -192,9 +192,7 @@ def generate_download_file(download_id):
 
     try:
         es_conn = connections.get_connection()
-        search = Search(index=index_name).source(['']).query(query)
-        response = search.execute()
-        total_items = response.hits.total
+        total_items = es_conn.search(index=index_name, body={'query': query})['hits']['total']
 
         if desired_format in ['csv', 'tsv']:
             source = [col['property_name'] for col in cols_to_download]
