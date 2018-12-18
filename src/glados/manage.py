@@ -56,7 +56,6 @@ def main():
 
     execute_in_manage = sys.argv[1] not in ['createapacheconfig', 'createdefaultadminuser', 'simulatedaemon']
     if execute_in_manage:
-        print('MANAGE EXECUTE IN COMMAND LINE')
         execute_from_command_line(sys.argv)
 
 

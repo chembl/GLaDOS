@@ -40,9 +40,12 @@ else:
     CONFIG_FILE_PATH = os.getenv("HOME") + '/.chembl-glados/config.yml'
 print('CONFIG_FILE_PATH: ', CONFIG_FILE_PATH)
 run_config = yaml.load(open(CONFIG_FILE_PATH, 'r'))
-print('run_config: ', run_config)
 
 RUN_ENV = run_config['run_env']
+
+if RUN_ENV == RunEnvs.DEV:
+    print('run_config: ', run_config)
+
 if RUN_ENV not in [RunEnvs.DEV, RunEnvs.TRAVIS, RunEnvs.TEST, RunEnvs.PROD]:
     raise GladosSettingsError("Run environment {} is not supported.".format(RUN_ENV))
 
@@ -111,24 +114,17 @@ if BLOGGER_ENABLED:
 # ElasticSearch
 # ----------------------------------------------------------------------------------------------------------------------
 elasticsearch_config = run_config.get('elasticsearch')
-print('elasticsearch_config: ', elasticsearch_config)
 if elasticsearch_config is None:
     raise GladosSettingsError("You must provide the elasticsearch configuration")
 else:
     ELASTICSEARCH_HOST = elasticsearch_config.get('host')
 
     if RUN_ENV == RunEnvs.TRAVIS:
-        print('is running in Travis!')
         ELASTICSEARCH_USERNAME = os.getenv('ELASTICSEARCH_USERNAME')
         ELASTICSEARCH_PASSWORD = os.getenv('ELASTICSEARCH_PASSWORD')
     else:
         ELASTICSEARCH_USERNAME = elasticsearch_config.get('username')
         ELASTICSEARCH_PASSWORD = elasticsearch_config.get('password')
-
-    print('ELASTICSEARCH_HOST: ', ELASTICSEARCH_HOST)
-    print('ELASTICSEARCH_USERNAME: ', ELASTICSEARCH_USERNAME)
-    print('ELASTICSEARCH_PASSWORD: ', ELASTICSEARCH_PASSWORD)
-
 
 ALLOWED_HOSTS = ['*']
 
@@ -309,7 +305,6 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Cache
 # ----------------------------------------------------------------------------------------------------------------------
 ENABLE_MONGO_DB_CACHE = run_config.get('enable_mongo_db_cache', False)
-print('ENABLE_MONGO_DB_CACHE: ', ENABLE_MONGO_DB_CACHE)
 
 if not ENABLE_MONGO_DB_CACHE:
 
@@ -331,8 +326,6 @@ else:
     CACHES = {
         'default': mongo_db_cache_config
     }
-
-    print('CACHES: ', CACHES)
 
 
 
