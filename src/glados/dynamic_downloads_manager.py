@@ -199,7 +199,7 @@ def generate_download_file(download_id):
         if desired_format == 'sdf':
             source = ['_metadata.compound_generated.sdf_data']
 
-        scanner = scan(es_conn, index=index_name, size=1000, query={
+        scanner = scan(es_conn, index=index_name, scroll=u'1m', size=1000, request_timeout=60, query={
             "_source": source,
             "query": query
         })
