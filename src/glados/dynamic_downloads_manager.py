@@ -192,16 +192,14 @@ def generate_download_file(download_id):
 
     try:
         es_conn = connections.get_connection()
-        search = Search(index=index_name).source(['']).query(query)
-        response = search.execute()
-        total_items = response.hits.total
+        total_items = es_conn.search(index=index_name, body={'query': query})['hits']['total']
 
         if desired_format in ['csv', 'tsv']:
             source = [col['property_name'] for col in cols_to_download]
         if desired_format == 'sdf':
             source = ['_metadata.compound_generated.sdf_data']
 
-        scanner = scan(es_conn, index=index_name, size=1000, query={
+        scanner = scan(es_conn, index=index_name, scroll=u'1m', size=1000, request_timeout=60, query={
             "_source": source,
             "query": query
         })
