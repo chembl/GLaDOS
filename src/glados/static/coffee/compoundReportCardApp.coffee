@@ -186,13 +186,14 @@ class CompoundReportCardApp extends glados.ReportCardApp
   @initIndications = ->
 
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
-    drugIndicationsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugIndicationsListRepCard(chemblID)
+    drugIndicationsList = glados.models.paginatedCollections.PaginatedCollectionFactory\
+      .getNewESDrugIndicationsList("drug_indication._metadata.all_molecule_chembl_ids:#{chemblID}")
 
     viewConfig =
       embed_section_name: 'drug_indications'
       embed_identifier: chemblID
       table_config:
-        full_list_url: glados.models.Compound.DrugIndication.getListURL("_metadata.all_molecule_chembl_ids:(#{chemblID})")
+        full_list_url: glados.models.Compound.DrugIndication.getListURLByMoleculeChemblId(chemblID)
 
     new glados.views.ReportCards.PaginatedTableInCardView
       collection: drugIndicationsList
