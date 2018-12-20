@@ -438,7 +438,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DOWNLOAD_COLUMNS: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.DOWNLOAD_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
-            Default: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.RESULTS_LIST_TABLE_REPORT_CARD
+            Default: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+            Additional: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.RESULTS_LIST_TABLE_ADDITIONAL
         ID_COLUMN: glados.models.Compound.DrugIndication.ID_COLUMN
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
@@ -455,7 +456,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
-            Default: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.RESULTS_LIST_TABLE_REPORT_CARD
+            Default: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+            Additional: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.RESULTS_LIST_TABLE_ADDITIONAL
         ID_COLUMN: glados.models.Compound.DrugIndication.ID_COLUMN
       MECHANISMS_OF_ACTION:
         ID_NAME: 'ESMechsOfAction'
@@ -468,7 +470,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS_DESCRIPTION:
           Table:
             Default: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-            Additional: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
+            Additional: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.RESULTS_LIST_TABLE_ADDITIONAL
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.MechanismSchema.FACETS_GROUPS
         ID_COLUMN: glados.models.Compound.MechanismOfAction.ID_COLUMN
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
