@@ -440,25 +440,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           Table:
             Default: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
             Additional: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.RESULTS_LIST_TABLE_ADDITIONAL
+        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.DrugIndicationSchema.FACETS_GROUPS
         ID_COLUMN: glados.models.Compound.DrugIndication.ID_COLUMN
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
-      DRUG_INDICATIONS_REPORT_CARD:
-        ID_NAME: 'ESDrugIndications'
-        LABEL: 'Drug Indications'
-        INDEX_NAME: 'chembl_drug_indication'
-        # PATH: Assigned after this declaration using the INDEX_NAME
-        #BROWSE_LIST_URL: Drug.getDrugsListURL
-        BROWSE_LIST_URL: glados.models.Compound.DrugIndication.getListURL
-        MODEL: glados.models.Compound.DrugIndication
-        DEFAULT_PAGE_SIZE: 5
-        COLUMNS: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-            Additional: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.RESULTS_LIST_TABLE_ADDITIONAL
-        ID_COLUMN: glados.models.Compound.DrugIndication.ID_COLUMN
       MECHANISMS_OF_ACTION:
         ID_NAME: 'ESMechsOfAction'
         LABEL: 'Mechanisms of Action'
