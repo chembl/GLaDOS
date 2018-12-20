@@ -129,7 +129,7 @@ glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS =
     glados.models.Compound.MechanismOfAction.COLUMNS.REFERENCES
 
   ]
-  RESULTS_LIST_REPORT_CARD_ADDITIONAL:[
+  RESULTS_LIST_TABLE_ADDITIONAL:[
     glados.models.Compound.MechanismOfAction.COLUMNS.MOLECULE_DRUG_SYNONYMS
     glados.models.Compound.MechanismOfAction.COLUMNS.MOLECULE_ATC_CODES
     glados.models.Compound.MechanismOfAction.COLUMNS.MOLECULE_ATC_CODES_DESCRIPTION
