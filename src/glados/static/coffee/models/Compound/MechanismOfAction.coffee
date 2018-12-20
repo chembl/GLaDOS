@@ -156,3 +156,7 @@ glados.models.Compound.MechanismOfAction.getListURL = (filter) ->
 glados.models.Compound.MechanismOfAction.getListURLByMoleculeChemblId = (moleculeChemblId) ->
   filterStr = "mechanism_of_action._metadata.all_molecule_chembl_ids:#{moleculeChemblId}"
   glados.models.Compound.MechanismOfAction.getListURL filterStr
+
+glados.models.Compound.MechanismOfAction.getListURLByTargetChemblId = (moleculeChemblId) ->
+  filterStr = "target.target_chembl_id:#{moleculeChemblId}"
+  glados.models.Compound.MechanismOfAction.getListURL filterStr
