@@ -27,12 +27,16 @@ glados.models.Compound.DrugIndication.COLUMNS =
   MESH_HEADING: generateDrugIndicationColumn
     comparator: 'drug_indication.mesh_heading'
   EFO_ID: generateDrugIndicationColumn
+    name_to_show: 'EFO ID'
+    name_to_show_short: 'EFO ID'
     comparator: 'drug_indication.efo'
     multiple_links: true
     multiple_links_function: (efos) ->
       ({text:efo.id, url:"http://www.ebi.ac.uk/efo/#{efo.id.replace(/:/g, '_')}"} for efo in efos)
   EFO_TERM: _.extend(
     {}, generateDrugIndicationColumn({comparator: 'drug_indication.efo'}),
+      name_to_show: 'EFO Term'
+      name_to_show_short: 'EFO Term'
       parse_function: (values) ->
         realValues = []
         for valI in values
@@ -111,11 +115,6 @@ glados.models.Compound.DrugIndication.getListURL = (filter) ->
     entity: 'drug_indications'
     filter: encodeURIComponent(filter) unless not filter?
 
-#totalStr = ''
-#for key, column of glados.models.Compound.DrugIndication.COLUMNS
-#  totalStr += "msgid \"#{column.label_id}\"\n"
-#  totalStr += "msgstr \"#{column.name_to_show}\"\n\n"
-#  totalStr += "msgid \"#{column.label_mini_id}\"\n"
-#  totalStr += "msgstr \"#{column.name_to_show_short}\"\n\n"
-#
-#console.error(totalStr)
+glados.models.Compound.DrugIndication.getListURLByMoleculeChemblId = (moleculeChemblId) ->
+  filterStr = "drug_indication._metadata.all_molecule_chembl_ids:#{moleculeChemblId}"
+  glados.models.Compound.DrugIndication.getListURL filterStr
