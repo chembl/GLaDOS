@@ -11,11 +11,7 @@ glados.useNameSpace 'glados.models.Compound',
       resp.molecule_link = Compound.get_report_card_url(resp.parent_molecule.molecule_chembl_id)
 
 
-      resp.mesh_url = "https://id.nlm.nih.gov/mesh/#{resp.mesh_id}.html"
-      if not resp.efo_id?
-        resp.efo_url = ''
-      else
-        resp.efo_url = "http://www.ebi.ac.uk/efo/#{resp.efo_id.replace(/:/g, '_')}"
+      resp.mesh_url = "https://id.nlm.nih.gov/mesh/#{resp.drug_indication.mesh_id}.html"
       return resp
 
 glados.models.Compound.DrugIndication.INDEX_NAME = 'chembl_drug_indication_by_parent'
@@ -31,18 +27,25 @@ glados.models.Compound.DrugIndication.COLUMNS =
   MESH_HEADING: generateDrugIndicationColumn
     comparator: 'drug_indication.mesh_heading'
   EFO_ID: generateDrugIndicationColumn
-    comparator: 'drug_indication.efo.id'
-    link_base: 'efo_url'
-  EFO_TERM: generateDrugIndicationColumn
-    comparator: 'drug_indication.efo.term'
+    comparator: 'drug_indication.efo'
+    multiple_links: true
+    multiple_links_function: (efos) ->
+      ({text:efo.id, url:"http://www.ebi.ac.uk/efo/#{efo.id.replace(/:/g, '_')}"} for efo in efos)
+  EFO_TERM: _.extend(
+    {}, generateDrugIndicationColumn({comparator: 'drug_indication.efo'}),
+      parse_function: (values) ->
+        realValues = []
+        for valI in values
+          if valI?.term?.trim().length > 0
+            realValues.push valI.term.trim()
+        return realValues.join(', ')
+  )
   INDICATION_MAX_PHASE: generateDrugIndicationColumn
     comparator: 'drug_indication.max_phase_for_ind'
 
 
-  INDICATION_REFERENCES:
-    name_to_show: 'References'
+  INDICATION_REFERENCES:generateDrugIndicationColumn
     comparator: 'drug_indication.indication_refs'
-    sort_disabled: true
     multiple_links: true
     multiple_links_function: (refs) -> ({text:r.ref_type, url:r.ref_url} for r in refs)
   MOLECULE_CHEMBL_ID: generateDrugIndicationColumn
