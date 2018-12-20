@@ -45,17 +45,39 @@
   </div>
   {{/if}}
 
-
     <div class="progress">
       <div class="indeterminate"></div>
     </div>
 
+</script>
 
+<script id="Handlebars-Common-LinearPreloader-Determinate" type="text/x-handlebars-template">
+
+
+  {{#if msg}}
+  <div class="center-align">
+    {{msg}} ({{percentage}}%)
+  </div>
+  {{/if}}
+
+    <div class="progress">
+      <div class="determinate" style="width: {{percentage}}%"></div>
+    </div>
 
 </script>
 
 <script id="Handlebars-Common-MiniPreloader" type="text/x-handlebars-template">
      <i class="fa fa-cog fa-spin fa-fw"></i> (loading...)
 </script>
+
+<script id="Handlebars-Common-DownloadProgressLink" type="text/x-handlebars-template">
+You can also check the progress <a href="{{url}}" target="_blank">here</a>.
+</script>
+
+<script id="Handlebars-Common-DownloadLink" type="text/x-handlebars-template">
+Click <a href="{{url}}" target="_blank">here</a> to download your file.
+</script>
+
+
 
 {% endverbatim %}

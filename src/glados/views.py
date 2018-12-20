@@ -8,15 +8,15 @@ import glados.url_shortener.url_shortener as url_shortener
 from apiclient.discovery import build
 import re
 from elasticsearch_dsl import Search
-from elasticsearch_dsl.connections import connections
 import requests
 import datetime
 import timeago
-import json
-import hashlib
-import base64
-from glados.models import ESCachedRequest
 from . import og_tags_generator
+from . import schema_tags_generator
+from . import glados_server_statistics
+from . import heatmap_helper
+from . import dynamic_downloads_manager
+import traceback
 
 
 def visualise(request):
@@ -100,6 +100,14 @@ def get_latest_tweets_json(request):
 
 
 def get_latest_blog_entries(request, pageToken):
+
+    if not settings.BLOGGER_ENABLED:
+        default_empty_response = {
+            'entries': [],
+            'totalCount': 0
+        }
+        return JsonResponse(default_empty_response)
+
     blogId = '2546008714740235720'
     key = settings.BLOGGER_KEY
     fetchBodies = True
@@ -295,9 +303,22 @@ def replace_urls_from_entinies(html, urls):
 
 
 def main_page(request):
+
+    # This would preferably be included in elasticsearch and updated by the indexation process
+    markup = {
+        'doi': 'http://doi.org/10.6019/CHEMBL.database.24.1',
+        'latest_release_short': 'chembl_24',
+        'latest_release_full': 'chembl_24_1',
+        'downloads_uploaded_date': '2018-06-18',
+        'compressed_downloads':['.fa', '.fps', '.sdf', '_bio.fa', '_chemreps.txt', '_mysql.tar', '_oracle10g.tar',
+                                '_oracle11g.tar', '_oracle12c.tar', '_postgresql.tar', '_sqlite.tar'],
+        'text_downloads': ['_schema_documentation', '_release_notes'],
+        'downloads_page_url': 'https://chembl.gitbook.io/chembl-interface-documentation/downloads'
+    }
     context = {
         'main_page': True,
-        'hide_breadcrumbs': True
+        'hide_breadcrumbs': True,
+        'markup': markup,
     }
     return render(request, 'glados/main_page.html', context)
 
@@ -341,6 +362,64 @@ def shorten_url(request):
     else:
         return JsonResponse({'error': 'this is only available via POST'})
 
+# ----------------------------------------------------------------------------------------------------------------------
+# Heatmap Helper
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+def request_heatmap_helper(request):
+    if request.method != "POST":
+        return JsonResponse({'error': 'this is only available via POST'})
+
+    index_name = request.POST.get('index_name', '')
+    raw_search_data = request.POST.get('search_data', '')
+    action = request.POST.get('action')
+
+    if action == 'GET_INITIAL_DATA':
+        heatmap_helper.generate_heatmap_initial_data(index_name, raw_search_data)
+
+    return JsonResponse({'data': 'Data'})
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Downloads
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+def generate_download(request):
+
+    if request.method != "POST":
+        return JsonResponse({'error': 'This is only available via POST'})
+
+    index_name = request.POST.get('index_name', '')
+    raw_query = request.POST.get('query', '')
+    desired_format = request.POST.get('format', '')
+    raw_columns_to_download = request.POST.get('columns', '')
+
+    print('index_name: ', index_name)
+    print('raw_query: ', raw_query)
+    print('desired_format: ', desired_format)
+    print('raw_columns_to_download: ', raw_columns_to_download)
+
+    try:
+        response = dynamic_downloads_manager.generate_download(index_name, raw_query, desired_format,
+                                                               raw_columns_to_download)
+        return JsonResponse(response)
+    except Exception as e:
+        traceback.print_exc()
+        return HttpResponse('Internal Server Error', status=500)
+
+def get_download_status(request, download_id):
+
+    if request.method != "GET":
+        return JsonResponse({'error': 'This is only available via GET'})
+
+    try:
+        response = dynamic_downloads_manager.get_download_status(download_id)
+        return JsonResponse(response)
+    except Exception as e:
+        traceback.print_exc()
+        return HttpResponse('Internal Server Error', status=500)
+
 
 # noinspection PyBroadException
 def elasticsearch_cache(request):
@@ -349,60 +428,8 @@ def elasticsearch_cache(request):
         print('elasticsearch_cache')
         index_name = request.POST.get('index_name', '')
         raw_search_data = request.POST.get('search_data', '')
-        search_data_digest = hashlib.sha256(raw_search_data.encode('utf-8')).digest()
-        base64_search_data_hash = base64.b64encode(search_data_digest).decode('utf-8')
-        search_data = json.loads(raw_search_data)
 
-        if not isinstance(search_data, dict):
-            search_data = {}
-
-        cache_key = "{}-{}".format(index_name, base64_search_data_hash)
-        print('cache_key', cache_key)
-
-        cache_response = None
-
-        try:
-            cache_response = cache.get(cache_key)
-        except Exception as e:
-            print('Error searching in cache!')
-
-        response = None
-        if cache_response is not None:
-            print('results are in cache')
-            response = cache_response
-        else:
-            print('results are NOT in cache')
-            response = connections.get_connection().search(index=index_name, body=search_data)
-            try:
-                cache_time = 3000000
-                cache.set(cache_key, response, cache_time)
-            except Exception as e:
-                traceback.print_exc()
-                print('Error saving in the cache!')
-
-        try:
-            es_query = search_data.get('query', None)
-            if es_query:
-                if isinstance(es_query, dict) and len(es_query) == 1 and \
-                        'query_string' in es_query and 'query' in es_query['query_string']:
-                    es_query = es_query['query_string']['query'].strip()
-                else:
-                    es_query = json.dumps(es_query)
-            es_aggs = search_data.get('aggs', None)
-            if es_aggs:
-                es_aggs = json.dumps(es_aggs)
-            es_cache_req_data = ESCachedRequest(
-                es_index=index_name,
-                es_query=es_query,
-                es_aggs=es_aggs,
-                es_request_digest=base64_search_data_hash,
-                is_cached=cache_response is not None
-            )
-            es_cache_req_data.indexing()
-        except:
-            traceback.print_exc()
-            print('Error saving in elastic!')
-
+        response = glados_server_statistics.get_and_record_es_cached_response(index_name, raw_search_data)
         if response is None:
             return HttpResponse('ELASTIC SEARCH RESPONSE IS EMPTY!', status=500)
 
@@ -424,7 +451,9 @@ def extend_url(request, hash):
 def compound_report_card(request, chembl_id):
 
     context = {
-        'og_tags': og_tags_generator.get_og_tags_for_compound(chembl_id)
+        'og_tags': og_tags_generator.get_og_tags_for_compound(chembl_id),
+        'schema_helper_obj': schema_tags_generator.get_schema_obj_for_compound(chembl_id, request),
+        'link_to_rdf': "http://rdf.ebi.ac.uk/resource/chembl/molecule/{}".format(chembl_id)
     }
 
     return render(request, 'glados/compoundReportCard.html', context)

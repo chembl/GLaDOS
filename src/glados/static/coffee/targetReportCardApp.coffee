@@ -20,6 +20,7 @@ class TargetReportCardApp extends glados.ReportCardApp
     TargetReportCardApp.initTargetComponents()
     TargetReportCardApp.initTargetRelations()
     TargetReportCardApp.initApprovedDrugsClinicalCandidates()
+    TargetReportCardApp.initActivityChartsEmbedder()
     TargetReportCardApp.initBioactivities()
     TargetReportCardApp.initAssociatedAssays()
     TargetReportCardApp.initLigandEfficiencies()
@@ -131,6 +132,27 @@ class TargetReportCardApp extends glados.ReportCardApp
       report_card_app: @
 
     list.fetch()
+
+  @initActivityChartsEmbedder = ->
+
+    target = TargetReportCardApp.getCurrentTarget()
+
+    viewConfig =
+      resource_type: gettext('glados_entities_target_name')
+      embed_identifier: target.get('id')
+
+    new glados.views.ReportCards.FullSectionEmbedderView
+      model: target
+      el: $('#ActivityChartsEmbedder')
+      config: viewConfig
+      section_id: 'ActivityCharts'
+      section_label: 'Activity Charts'
+      report_card_app: @
+
+  @initAllActivityChartsWhenEmbedded = ->
+
+    TargetReportCardApp.initBioactivities()
+    TargetReportCardApp.initAssociatedAssays()
 
   @initBioactivities = ->
 

@@ -99,6 +99,9 @@ glados.useNameSpace 'glados.apps.Embedding',
         biocomponents:
           template: "#{@compoundReportCardBaseTemplate} #CBioseqCard"
           initFunction: CompoundReportCardApp.initBioSeq
+        activity_charts:
+          template: "#{@compoundReportCardBaseTemplate} #ActivityChartsGroup"
+          initFunction: CompoundReportCardApp.initAllActivityChartsWhenEmbedded
         related_activities:
           template: "#{@compoundReportCardBaseTemplate} #CAssociatedActivitiesCard"
           initFunction: CompoundReportCardApp.initActivitySummary
@@ -139,6 +142,9 @@ glados.useNameSpace 'glados.apps.Embedding',
         approved_drugs_clinical_candidates:
           template: "#{@targetReportCardBaseTemplate} #ApprovedDrugsAndClinicalCandidatesCard"
           initFunction: TargetReportCardApp.initApprovedDrugsClinicalCandidates
+        activity_charts:
+          template: "#{@targetReportCardBaseTemplate} #ActivityChartsGroup"
+          initFunction: TargetReportCardApp.initAllActivityChartsWhenEmbedded
         bioactivities:
           template: "#{@targetReportCardBaseTemplate} #TAssociatedBioactivitiesCard"
           initFunction: TargetReportCardApp.initBioactivities

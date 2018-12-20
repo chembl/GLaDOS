@@ -21,10 +21,9 @@
     {% block common_css %}
         {% include "glados/base/css_imports_for_all.html" %}
     {% endblock %}
-
-
     <!-- Imports used by the current template -->
     {% block stylesheets %}{% endblock %}
+    {% block link_to_rdf %}{% endblock %}
 
 </head>
 
@@ -119,7 +118,6 @@
 <!-- handlebars templates -->
 {% block common_handlebars %}
     {% include "glados/Handlebars/CommonSources.html" %}
-    {% include "glados/Handlebars/DownloadWizard/Hbs-WizardStep.html" %}
 {% endblock %}
 
 {% block custom_handlebars %}
@@ -138,19 +136,6 @@
 
             {% block custom_js_inline %}{% endblock %}
         });
-    </script>
-{% endcompress %}
-
-<!-- a function to be called after the content is rendered  -->
-{% compress js %}
-    <script type="text/javascript" charset="utf-8">
-
-        afterRender = function () {
-
-            {% block custom_afterRender %}{% endblock %}
-
-        }
-
     </script>
 {% endcompress %}
 
@@ -175,6 +160,8 @@
         opacity: .5
     });
 </script>
+
+{% block json_ld %}{% endblock %}
 
 </body>
 

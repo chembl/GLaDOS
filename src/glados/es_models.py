@@ -1,4 +1,4 @@
-from elasticsearch_dsl import DocType, Text, Keyword, Boolean, Integer
+from elasticsearch_dsl import DocType, Text, Keyword, Boolean, Integer, Long
 from elasticsearch_dsl.connections import connections
 from typing import List
 import traceback
@@ -26,6 +26,24 @@ class ESCachedRequestIndex(DocType):
     class Meta:
         index = 'chembl_glados_es_cache_usage'
         doc_type = 'es_cached_request'
+
+        
+class ESDownloadRecordIndex(DocType):
+    download_id = Keyword()
+    time_taken = Integer()
+    is_new = Boolean()
+    file_size = Long()
+    es_index = Keyword()
+    es_query = Keyword()
+    run_env_type = Keyword()
+    desired_format = Keyword()
+    total_items = Integer()
+    # Do not use elasticsearch_dsl Date type, it does not serializes correctly
+    request_date = Integer()
+
+    class Meta:
+        index = 'chembl_glados_es_download_record'
+        doc_type = 'es_download_record'
 
 
 class ElasticSearchMultiSearchQuery:

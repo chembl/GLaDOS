@@ -342,11 +342,30 @@ glados.useNameSpace 'glados.views.Browsers',
     #--------------------------------------------------------------------------------------
     # Download Buttons
     #--------------------------------------------------------------------------------------
-
     triggerAllItemsDownload: (event) ->
-      desiredFormat = $(event.currentTarget).attr('data-format')
-      $progressMessages = $(@el).find('.download-messages-container')
-      @collection.downloadAllItems(desiredFormat, undefined, $progressMessages)
+      $clickedBtn = $(event.currentTarget)
+      if $clickedBtn.hasClass('disabled')
+        return
+
+      desiredFormat = $clickedBtn.attr('data-format')
+
+      if not @downloadModel?
+        @downloadModel = new glados.models.ServerSideDownloads.DownloadModel
+          collection: @collection
+
+      if not @downloadView?
+        $downloadMessagesElem = $(@el).find('.BCK-download-messages-container')
+        @downloadView = new glados.views.ServerSideDownloads.ServerSideDownloadView
+          model: @downloadModel
+          el: $downloadMessagesElem
+          menu_view: @
+
+      @downloadModel.startServerSideDownload(desiredFormat)
+      @disableDownloadButtons()
+
+    disableDownloadButtons: -> $(@el).find('.BCK-download-btn-for-format').addClass('disabled')
+    enableDownloadButtons: -> $(@el).find('.BCK-download-btn-for-format').removeClass('disabled')
+
 
     #--------------------------------------------------------------------------------------
     # Switching Views

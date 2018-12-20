@@ -29,6 +29,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     CompoundReportCardApp.initMetabolism()
     CompoundReportCardApp.initBioSeq()
     CompoundReportCardApp.initHELMNotation()
+    CompoundReportCardApp.initActivityChartsEmbedder()
     CompoundReportCardApp.initActivitySummary()
     CompoundReportCardApp.initAssaySummary()
     CompoundReportCardApp.initTargetSummary()
@@ -323,6 +324,28 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     if GlobalVariables['EMBEDED']
       compound.fetch()
+
+  @initActivityChartsEmbedder = ->
+
+    compound = CompoundReportCardApp.getCurrentCompound()
+
+    viewConfig =
+      resource_type: gettext('glados_entities_compound_name')
+      embed_identifier: compound.get('molecule_chembl_id')
+
+    new glados.views.ReportCards.FullSectionEmbedderView
+      model: compound
+      el: $('#ActivityChartsEmbedder')
+      config: viewConfig
+      section_id: 'ActivityCharts'
+      section_label: 'Activity Charts'
+      report_card_app: @
+
+  @initAllActivityChartsWhenEmbedded = ->
+
+    CompoundReportCardApp.initActivitySummary()
+    CompoundReportCardApp.initAssaySummary()
+    CompoundReportCardApp.initTargetSummary()
 
   @initActivitySummary = ->
 

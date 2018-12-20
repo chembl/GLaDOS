@@ -24,7 +24,6 @@
   <!-- handlebars templates -->
 {% block common_handlebars %}
   {% include "glados/Handlebars/CommonSources.html" %}
-  {% include "glados/Handlebars/DownloadWizard/Hbs-WizardStep.html" %}
 {% endblock %}
 
 <!-- - - - - - - - - - - - - - - - - -->
@@ -55,19 +54,6 @@
   });
 </script>
 {% endcompress%}
-
-  <!-- a function to be called after the content is rendered  -->
-{% compress js %}
-  <script type="text/javascript" charset="utf-8">
-
-    afterRender = function (){
-
-      {% block custom_afterRender %}{% endblock %}
-
-    }
-
-  </script>
-  {% endcompress%}
 
 {% load static %}
 

@@ -35,6 +35,9 @@ src/glados/static/css/scss-gen/*
 src/glados/static_root/*
 !src/glados/static_root/.gitkeep
 
+# generated apache config file
+util/http.d/glados.conf
+
 # PyInstaller
 #  Usually these files are written by a python script from a template
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
