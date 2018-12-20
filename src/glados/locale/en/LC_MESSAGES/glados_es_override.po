@@ -566,3 +566,79 @@ msgstr "Synonyms"
 
 msgid "glados_es_gs__mechanism_by_parent_target__synonyms__label__mini"
 msgstr "Synonyms"
+
+
+#-----------------------------------------------------------------------------------------------------------------------
+# Drug Indications Columns
+#-----------------------------------------------------------------------------------------------------------------------
+msgid "glados_es_gs__drug_indication_by_parent__drug_indication___mesh_id__label"
+msgstr "MESH ID"
+
+msgid "glados_es_gs__drug_indication_by_parent__drug_indication___mesh_id__label__mini"
+msgstr "MESH ID"
+
+msgid "glados_es_gs__drug_indication_by_parent__drug_indication___mesh_heading__label"
+msgstr "MESH Heading"
+
+msgid "glados_es_gs__drug_indication_by_parent__drug_indication___mesh_heading__label__mini"
+msgstr "MESH Heading"
+
+msgid "glados_es_gs__drug_indication_by_parent__drug_indication___efo__label"
+msgstr "EFO"
+
+msgid "glados_es_gs__drug_indication_by_parent__drug_indication___efo__label__mini"
+msgstr "EFO"
+
+msgid "glados_es_gs__drug_indication_by_parent__drug_indication___max_phase_for_ind__label"
+msgstr "Max Phase for Indication"
+
+msgid "glados_es_gs__drug_indication_by_parent__drug_indication___max_phase_for_ind__label__mini"
+msgstr "Max Phase for Indication"
+
+msgid "glados_es_gs__drug_indication_by_parent__drug_indication___indication_refs__label"
+msgstr "Indication References"
+
+msgid "glados_es_gs__drug_indication_by_parent__drug_indication___indication_refs__label__mini"
+msgstr "Indication Refs"
+
+msgid "glados_es_gs__drug_indication_by_parent__parent_molecule___molecule_chembl_id__label"
+msgstr "ChEMBL ID"
+
+msgid "glados_es_gs__drug_indication_by_parent__parent_molecule___molecule_chembl_id__label__mini"
+msgstr "ChEMBL ID"
+
+msgid "glados_es_gs__drug_indication_by_parent__parent_molecule___pref_name__label"
+msgstr "Molecule Name"
+
+msgid "glados_es_gs__drug_indication_by_parent__parent_molecule___pref_name__label__mini"
+msgstr "Molecule Name"
+
+msgid "glados_es_gs__drug_indication_by_parent__parent_molecule___molecule_type__label"
+msgstr "Molecule Type"
+
+msgid "glados_es_gs__drug_indication_by_parent__parent_molecule___molecule_type__label__mini"
+msgstr "Molecule Type"
+
+msgid "glados_es_gs__drug_indication_by_parent__parent_molecule___first_approval__label"
+msgstr "First Approval"
+
+msgid "glados_es_gs__drug_indication_by_parent__parent_molecule___first_approval__label__mini"
+msgstr "First Approval"
+
+msgid "glados_es_gs__drug_indication_by_parent__parent_molecule___usan_stem__label"
+msgstr "USAN Stem"
+
+msgid "glados_es_gs__drug_indication_by_parent__parent_molecule___usan_stem__label__mini"
+msgstr "USAN Stem"
+
+msgid "glados_es_gs__drug_indication_by_parent__parent_molecule___usan_year__label"
+msgstr "USAN Year"
+
+msgid "glados_es_gs__drug_indication_by_parent__parent_molecule___usan_year__label__mini"
+msgstr "USAN Year"
+
+msgid "glados_es_gs__drug_indication_by_parent__synonyms__label"
+msgstr "Synonyms"
+
+msgid "glados_es_gs__drug_indication_by_parent__synonyms__label__mini"
+msgstr "Synonyms"
