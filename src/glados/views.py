@@ -224,7 +224,7 @@ def get_database_summary(request):
 
 def get_entities_records(request):
 
-    cache_key = 'entities_records'
+    cache_key = 'entities_records_v2'
     cache_time = 604800
     cache_response = cache.get(cache_key)
 
@@ -249,7 +249,9 @@ def get_entities_records(request):
         'Documents': Search(index="chembl_document").execute().hits.total,
         'Targets': Search(index="chembl_target").execute().hits.total,
         'Cells': Search(index="chembl_cell_line").execute().hits.total,
-        'Tissues': Search(index="chembl_tissue").execute().hits.total
+        'Tissues': Search(index="chembl_tissue").execute().hits.total,
+        'Indications': Search(index="chembl_drug_indication_by_parent").execute().hits.total,
+        'Mechanisms': Search(index="chembl_mechanism_by_parent_target").execute().hits.total
     }
 
     cache.set(cache_key, response, cache_time)

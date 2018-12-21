@@ -271,6 +271,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         customQuery, useCustomQuery=true)
       return list
 
+    getNewESMechanismsOfActionList: (customQuery='*', itemsList, contextualProperties,
+      settings=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.MECHANISMS_OF_ACTION,
+      searchTerm) ->
+
+      list = @getNewESResultsListFor(settings, customQuery, useCustomQuery=(not itemsList?), itemsList,
+        contextualProperties, searchTerm)
+      return list
+
     getNewAssaysList: (filter='') ->
 
       list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.ASSAYS_LIST, filter)
@@ -294,11 +302,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         contextualProperties, searchTerm, stickyQuery)
       return list
 
-    getNewDrugIndicationsList: (chemblID) ->
+    getNewESDrugIndicationsList: (customQuery='*') ->
 
-      queryString = "_metadata.all_molecule_chembl_ids:#{chemblID}"
-      config = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.DRUG_INDICATIONS_LIST
-      list = @getNewESResultsListFor config, customQueryString=queryString, useCustomQuery=true
+      config = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.DRUG_INDICATIONS
+      list = @getNewESResultsListFor config, customQuery, useCustomQuery=true
 
       return list
 
@@ -373,14 +380,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @resetMeta(data.page_meta)
 
         return data.molecules
-
-      return list
-
-    getNewMechanismsOfActionList: ->
-
-      config = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.MECHANISMS_OF_ACTIONS_LIST
-      flavour = glados.models.paginatedCollections.SpecificFlavours.MechanismsOfActionList
-      list = @getNewClientSideCollectionFor config, generator=undefined, flavour
 
       return list
 

@@ -112,15 +112,18 @@ class TargetReportCardApp extends glados.ReportCardApp
   @initApprovedDrugsClinicalCandidates = ->
 
     targetChemblID = glados.Utils.URLS.getCurrentModelChemblID()
-    appDrugsClinCandsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewApprovedDrugsClinicalCandidatesList()
-    appDrugsClinCandsList.initURL(targetChemblID)
+    list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESMechanismsOfActionList(
+      "target.target_chembl_id:#{targetChemblID}"
+    )
 
     viewConfig =
       embed_section_name: 'approved_drugs_clinical_candidates'
       embed_identifier: targetChemblID
+      table_config:
+        full_list_url: glados.models.Compound.MechanismOfAction.getListURLByTargetChemblId(targetChemblID)
 
     new glados.views.ReportCards.PaginatedTableInCardView
-      collection: appDrugsClinCandsList
+      collection: list
       el: $('#ApprovedDrugsAndClinicalCandidatesCard')
       resource_type: gettext('glados_entities_target_name')
       section_id: 'ApprovedDrugsAndClinicalCandidates'
@@ -128,7 +131,7 @@ class TargetReportCardApp extends glados.ReportCardApp
       config: viewConfig
       report_card_app: @
 
-    appDrugsClinCandsList.fetch()
+    list.fetch()
 
   @initActivityChartsEmbedder = ->
 

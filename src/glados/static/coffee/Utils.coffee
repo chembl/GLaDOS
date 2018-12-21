@@ -300,7 +300,7 @@ glados.useNameSpace 'glados',
 
         if returnCol['has_link']
           if colDescription['link_base']?
-            returnCol['link_url'] = model.get(colDescription['link_base'])
+            returnCol.link_url = model.get(colDescription['link_base'])
           if colDescription['link_function']?
 
             getLinkFromModel = colDescription.get_link_from_model
@@ -309,7 +309,10 @@ glados.useNameSpace 'glados',
               returnCol.link_url = linkFunction model
             else
               returnCol.link_url = linkFunction colValue
-
+              
+          # If there is no url do not activate the link
+          if not returnCol.link_url
+            returnCol['has_link'] = false
         else if returnCol['has_multiple_links']
           returnCol['links_values'] = colDescription['multiple_links_function'] colValue
 

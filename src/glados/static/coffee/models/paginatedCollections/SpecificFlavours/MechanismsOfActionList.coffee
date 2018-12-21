@@ -1,5 +1,7 @@
 glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
 
+  # this list is intended to be client-side, it loads everything and processes the parent-salt logic to merge the rows
+  # in the report card table. For a normal browser this config is not used.
   MechanismsOfActionList:
 
     initURL: (chemblID) ->

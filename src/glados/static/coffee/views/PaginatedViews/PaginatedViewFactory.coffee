@@ -78,7 +78,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         custom_render_evts: customRenderEvents
 
     getNewTablePaginatedView: (collection, el, customRenderEvents,
-      disableColumnsSelection=false, disableItemSelection=true)->
+      disableColumnsSelection=false, disableItemSelection=true, config)->
 
       View = glados.views.PaginatedViews.PaginatedViewFactory.Table
 
@@ -89,7 +89,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         custom_render_evts: customRenderEvents
         disable_columns_selection: disableColumnsSelection
         disable_items_selection: disableItemSelection
-
+        config: config
 
     getTypeConstructor: (pagViewType)->
       viewClass = undefined

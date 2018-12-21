@@ -426,20 +426,42 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         ENABLE_COLLECTION_CACHING: true
         DISABLE_CACHE_ON_DOWNLOAD: true
         LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
-      DRUG_INDICATIONS_LIST:
+      DRUG_INDICATIONS:
         ID_NAME: 'ESDrugIndications'
         LABEL: 'Drug Indications'
-        INDEX_NAME: 'chembl_drug_indication'
+        INDEX_NAME: 'chembl_drug_indication_by_parent'
         # PATH: Assigned after this declaration using the INDEX_NAME
         #BROWSE_LIST_URL: Drug.getDrugsListURL
+        BROWSE_LIST_URL: glados.models.Compound.DrugIndication.getListURL
         MODEL: glados.models.Compound.DrugIndication
-        BASE_URL: 'base_url is set by initURL'
-        DEFAULT_PAGE_SIZE: 5
         COLUMNS: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.ALL_COLUMNS
+        DOWNLOAD_COLUMNS: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.DOWNLOAD_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
             Default: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+            Additional: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.RESULTS_LIST_TABLE_ADDITIONAL
+        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.DrugIndicationSchema.FACETS_GROUPS
         ID_COLUMN: glados.models.Compound.DrugIndication.ID_COLUMN
+        DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
+          glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
+        AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
+      MECHANISMS_OF_ACTION:
+        ID_NAME: 'ESMechsOfAction'
+        LABEL: 'Mechanisms of Action'
+        INDEX_NAME: 'chembl_mechanism_by_parent_target'
+        BROWSE_LIST_URL: glados.models.Compound.MechanismOfAction.getListURL
+        MODEL: glados.models.Compound.MechanismOfAction
+        COLUMNS: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.ALL_COLUMNS
+        DOWNLOAD_COLUMNS: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.DOWNLOAD_COLUMNS
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+            Additional: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.RESULTS_LIST_TABLE_ADDITIONAL
+        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.MechanismSchema.FACETS_GROUPS
+        ID_COLUMN: glados.models.Compound.MechanismOfAction.ID_COLUMN
+        DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
+          glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
+        AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
     WS_COLLECTIONS:
       ACTIVITIES_LIST:
         MODEL: Activity
@@ -581,14 +603,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           Carousel:
             Default: Document.COLUMNS_SETTINGS.SEARCH_BY_TERM_RESULTS
     CLIENT_SIDE_WS_COLLECTIONS:
-      MECHANISMS_OF_ACTIONS_LIST:
-        MODEL: glados.models.Compound.MechanismOfAction
-        DEFAULT_PAGE_SIZE: 5
-        COLUMNS: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-        ID_COLUMN: glados.models.Compound.MechanismOfAction.ID_COLUMN
       UNICHEM_CONNECTIVITY_LIST:
         MODEL: glados.models.Compound.UnichemConnectivityMatch
         DEFAULT_PAGE_SIZE: 5

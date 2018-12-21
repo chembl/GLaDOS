@@ -151,12 +151,15 @@ class CompoundReportCardApp extends glados.ReportCardApp
   @initMechanismOfAction = ->
 
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
-    list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewMechanismsOfActionList()
-    list.initURL(chemblID)
+    list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESMechanismsOfActionList(
+      "parent_molecule.molecule_chembl_id:#{chemblID}"
+    )
 
     viewConfig =
       embed_section_name: 'mechanism_of_action'
       embed_identifier: chemblID
+      table_config:
+        full_list_url: glados.models.Compound.MechanismOfAction.getListURLByMoleculeChemblId(chemblID)
 
     tableView = new glados.views.ReportCards.PaginatedTableInCardView
       collection: list
@@ -178,15 +181,20 @@ class CompoundReportCardApp extends glados.ReportCardApp
         tableView.hideSection()
 
     compound.on 'change', fetchList, @
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
 
   @initIndications = ->
 
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
-    drugIndicationsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugIndicationsList(chemblID)
+    drugIndicationsList = glados.models.paginatedCollections.PaginatedCollectionFactory\
+      .getNewESDrugIndicationsList("drug_indication._metadata.all_molecule_chembl_ids:#{chemblID}")
 
     viewConfig =
       embed_section_name: 'drug_indications'
       embed_identifier: chemblID
+      table_config:
+        full_list_url: glados.models.Compound.DrugIndication.getListURLByMoleculeChemblId(chemblID)
 
     new glados.views.ReportCards.PaginatedTableInCardView
       collection: drugIndicationsList
@@ -198,6 +206,8 @@ class CompoundReportCardApp extends glados.ReportCardApp
       report_card_app: @
 
     drugIndicationsList.fetch({reset: true})
+    if GlobalVariables['EMBEDED']
+      compound.fetch()
 
   @initMoleculeFeatures = ->
 

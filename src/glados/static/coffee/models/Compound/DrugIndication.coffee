@@ -1,67 +1,85 @@
 glados.useNameSpace 'glados.models.Compound',
   DrugIndication: Backbone.Model.extend
 
-    parse: (response) ->
-
-      response.mesh_url = "https://id.nlm.nih.gov/mesh/#{response.mesh_id}.html"
-      if not response.efo_id?
-        response.efo_url = ''
+    parse: (resp) ->
+      imageFile = glados.Utils.getNestedValue(resp, 'parent_molecule._metadata.compound_generated.image_file')
+      if imageFile != glados.Settings.DEFAULT_NULL_VALUE_LABEL
+        resp.parent_image_url = "#{glados.Settings.STATIC_IMAGES_URL}compound_placeholders/#{imageFile}"
       else
-        response.efo_url = "http://www.ebi.ac.uk/efo/#{response.efo_id.replace(/:/g, '_')}"
-      return response
+        resp.parent_image_url = \
+          "#{glados.Settings.WS_BASE_URL}image/#{resp.parent_molecule.molecule_chembl_id}.svg?engine=indigo"
+      resp.molecule_link = Compound.get_report_card_url(resp.parent_molecule.molecule_chembl_id)
+
+
+      resp.mesh_url = "https://id.nlm.nih.gov/mesh/#{resp.drug_indication.mesh_id}.html"
+      return resp
+
+glados.models.Compound.DrugIndication.INDEX_NAME = 'chembl_drug_indication_by_parent'
+
+generateDrugIndicationColumn = (columnMetadata)->
+  return glados.models.paginatedCollections.ColumnsFactory.generateColumn glados.models.Compound\
+    .DrugIndication.INDEX_NAME, columnMetadata
 
 glados.models.Compound.DrugIndication.COLUMNS =
-  DRUG_IND_ID:
-    name_to_show: 'ID'
-    comparator: 'drugind_id'
-  MESH_HEADING:
-    name_to_show: 'MESH Heading'
-    comparator: 'mesh_heading'
-    sort_disabled: false
-    is_sorting: 0
-    sort_class: 'fa-sort'
-  MESH_ID:
-    name_to_show: 'MESH ID'
-    comparator: 'mesh_id'
+  MESH_ID: generateDrugIndicationColumn
+    comparator: 'drug_indication.mesh_id'
     link_base: 'mesh_url'
-    sort_disabled: false
-    is_sorting: 0
-    sort_class: 'fa-sort'
-  EFO_TERM:
-    name_to_show: 'EFO Term'
-    comparator: 'efo_term'
-    sort_disabled: false
-    is_sorting: 0
-    sort_class: 'fa-sort'
-  EFO_ID:
+  MESH_HEADING: generateDrugIndicationColumn
+    comparator: 'drug_indication.mesh_heading'
+  EFO_ID: generateDrugIndicationColumn
     name_to_show: 'EFO ID'
-    comparator: 'efo_id'
-    link_base: 'efo_url'
-    sort_disabled: false
-    is_sorting: 0
-    sort_class: 'fa-sort'
-  IND_MAX_PHASE:
-    name_to_show: 'Max Phase'
-    comparator: 'max_phase_for_ind'
-    sort_disabled: false
-    is_sorting: -1
-    sort_class: 'fa-sort-desc'
-  REFERENCES:
-    name_to_show: 'References'
-    comparator: 'indication_refs'
-    sort_disabled: true
+    name_to_show_short: 'EFO ID'
+    comparator: 'drug_indication.efo'
+    multiple_links: true
+    multiple_links_function: (efos) ->
+      ({text:efo.id, url:"http://www.ebi.ac.uk/efo/#{efo.id.replace(/:/g, '_')}"} for efo in efos)
+  EFO_TERM: _.extend(
+    {}, generateDrugIndicationColumn({comparator: 'drug_indication.efo'}),
+      name_to_show: 'EFO Term'
+      name_to_show_short: 'EFO Term'
+      parse_function: (values) ->
+        realValues = []
+        for valI in values
+          if valI?.term?.trim().length > 0
+            realValues.push valI.term.trim()
+        return realValues.join(', ')
+  )
+  INDICATION_MAX_PHASE: generateDrugIndicationColumn
+    comparator: 'drug_indication.max_phase_for_ind'
+
+
+  INDICATION_REFERENCES:generateDrugIndicationColumn
+    comparator: 'drug_indication.indication_refs'
     multiple_links: true
     multiple_links_function: (refs) -> ({text:r.ref_type, url:r.ref_url} for r in refs)
-  MOLECULE_CHEMBL_ID:
-    name_to_show: 'Compound'
-    comparator: 'molecule_chembl_id'
-    sort_disabled: false
-    is_sorting: 0
-    sort_class: 'fa-sort'
-    link_function: (value) -> Compound.get_report_card_url(value)
+  MOLECULE_CHEMBL_ID: generateDrugIndicationColumn
+    comparator: 'parent_molecule.molecule_chembl_id'
+    image_base_url: 'parent_image_url'
+    link_base: 'molecule_link'
+  MOLECULE_PREF_NAME: generateDrugIndicationColumn
+    comparator: 'parent_molecule.pref_name'
+  MOLECULE_TYPE: generateDrugIndicationColumn
+    comparator: 'parent_molecule.molecule_type'
+  MOLECULE_FIRST_APPROVAL: generateDrugIndicationColumn
+    comparator: 'parent_molecule.first_approval'
+  MOLECULE_USAN_STEM: generateDrugIndicationColumn
+    comparator: 'parent_molecule.usan_stem'
+  MOLECULE_USAN_YEAR: generateDrugIndicationColumn
+    comparator: 'parent_molecule.usan_year'
+  MOLECULE_DRUG_SYNONYMS: _.extend(
+    {}, generateDrugIndicationColumn({comparator: 'parent_molecule._metadata.drug.drug_data.synonyms'}),
+      custom_field_template: '<ul class="no-margin" style="width: 15rem; margin-left: 1rem !important;">' +
+        '{{#each val}}<li style="list-style-type: circle;">{{this}}</li>{{/each}}</ul>'
+      parse_function: (values) ->
+        realValues = []
+        for valI in values
+          if valI?.trim().length > 0
+            realValues.push valI.trim()
+        return realValues
+  )
 
 
-glados.models.Compound.DrugIndication.ID_COLUMN = glados.models.Compound.DrugIndication.COLUMNS.DRUG_IND_ID
+glados.models.Compound.DrugIndication.ID_COLUMN = glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_CHEMBL_ID
 
 glados.models.Compound.DrugIndication.COLUMNS_SETTINGS =
   ALL_COLUMNS: (->
@@ -71,12 +89,32 @@ glados.models.Compound.DrugIndication.COLUMNS_SETTINGS =
     return colsList
   )()
   RESULTS_LIST_TABLE: [
-    glados.models.Compound.DrugIndication.COLUMNS.MESH_HEADING
+    glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_CHEMBL_ID
+    glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_PREF_NAME
+    glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_TYPE
+    glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_FIRST_APPROVAL
     glados.models.Compound.DrugIndication.COLUMNS.MESH_ID
-    glados.models.Compound.DrugIndication.COLUMNS.EFO_TERM
+    glados.models.Compound.DrugIndication.COLUMNS.MESH_HEADING
     glados.models.Compound.DrugIndication.COLUMNS.EFO_ID
-    glados.models.Compound.DrugIndication.COLUMNS.IND_MAX_PHASE
-    glados.models.Compound.DrugIndication.COLUMNS.REFERENCES
+    glados.models.Compound.DrugIndication.COLUMNS.EFO_TERM
+    glados.models.Compound.DrugIndication.COLUMNS.INDICATION_MAX_PHASE
+    glados.models.Compound.DrugIndication.COLUMNS.INDICATION_REFERENCES
+  ]
+  RESULTS_LIST_TABLE_ADDITIONAL: [
+    glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_DRUG_SYNONYMS
+    glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_USAN_STEM
+    glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_USAN_YEAR
+  ]
+  DOWNLOAD_COLUMNS: [
     glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_CHEMBL_ID
   ]
 
+glados.models.Compound.DrugIndication.getListURL = (filter) ->
+  
+  glados.Settings.ENTITY_BROWSERS_URL_GENERATOR
+    entity: 'drug_indications'
+    filter: encodeURIComponent(filter) unless not filter?
+
+glados.models.Compound.DrugIndication.getListURLByMoleculeChemblId = (moleculeChemblId) ->
+  filterStr = "drug_indication._metadata.all_molecule_chembl_ids:#{moleculeChemblId}"
+  glados.models.Compound.DrugIndication.getListURL filterStr
