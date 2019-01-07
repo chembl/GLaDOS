@@ -13,6 +13,11 @@ SearchModel = Backbone.Model.extend
     autocompleteSuggestions: []
     debouncedAutocompleteRequest: null
     autocompleteQuery: ''
+    test_mode: false
+
+  initialize: ->
+
+    @set('autosuggestion_state', SearchModel.AUTO_SUGGESTION_STATES.INITIAL_STATE)
 
   # --------------------------------------------------------------------------------------------------------------------
   # URLS generation
@@ -168,6 +173,7 @@ SearchModel = Backbone.Model.extend
 
   requestAutocompleteSuggestions: (textQuery, caller)->
 
+    console.log 'REQUESTING SUGGESTIONS'
     if not _.isString(textQuery)
       return
 
@@ -313,11 +319,18 @@ SearchModel.EVENTS =
   SEARCH_PARAMS_HAVE_CHANGED: 'SEARCH_PARAMS_HAVE_CHANGED'
 
 # ----------------------------------------------------------------------------------------------------------------------
+# Autosuggestion states
+# ----------------------------------------------------------------------------------------------------------------------
+SearchModel.AUTO_SUGGESTION_STATES =
+  INITIAL_STATE: 'INITIAL_STATE'
+
+# ----------------------------------------------------------------------------------------------------------------------
 # Singleton pattern
 # ----------------------------------------------------------------------------------------------------------------------
 
-SearchModel.getInstance = () ->
+SearchModel.getInstance = ->
   if not SearchModel.__model_instance
     SearchModel.__model_instance = new SearchModel
   return SearchModel.__model_instance
 
+SearchModel.getTestInstance = -> new SearchModel({test_mode:true})

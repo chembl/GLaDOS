@@ -323,7 +323,6 @@ describe "Legend Model", ->
             amountsPerRangeMustBe[ticks[i+1]]++
             break
 
-      timeEnd = (new Date()).getTime()
       amountsPerRangeGot = legendModel.get('amounts-per-range')
       for range, amount of amountsPerRangeMustBe
         expect(amountsPerRangeGot[range]).toBe(amountsPerRangeGot[range])

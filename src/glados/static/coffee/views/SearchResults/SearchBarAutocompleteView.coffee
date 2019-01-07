@@ -6,7 +6,8 @@ glados.useNameSpace 'glados.views.SearchResults',
     # Initialization
     # ------------------------------------------------------------------------------------------------------------------
 
-    initialize: () ->
+    initialize: ->
+      console.log 'INIT AUTOCOMPLETE VIEW'
       @suggestionsTemplate = Handlebars.compile $(@el).find('.Handlebars-search-bar-autocomplete').html()
       @searchModel = SearchModel.getInstance()
       @searchModel.on('change:autocompleteSuggestions', @updateAutocomplete.bind(@))
@@ -46,6 +47,9 @@ glados.useNameSpace 'glados.views.SearchResults',
     # ------------------------------------------------------------------------------------------------------------------
     # Bar Event Handling
     # ------------------------------------------------------------------------------------------------------------------
+    showPreloader: ->
+
+      console.log 'SHOW PRELOADER!!!'
 
     barFocusHandler: (event)->
       @updateSelected true
@@ -79,11 +83,14 @@ glados.useNameSpace 'glados.views.SearchResults',
         keyEvent.preventDefault()
 
     barKeyupHandler: (keyEvent)->
+
       searchText = @$barElem.val().trim()
       isUpOrDownOrEnter = keyEvent.which == 38 or keyEvent.which == 40 or keyEvent.which  == 13
       if not isUpOrDownOrEnter
         @$autocompleteWrapperDiv.hide()
+
       if searchText.length >= 3
+
         # only submit the search if the text changes and is not on a selection doing up or down
         if @lastSearch != searchText and (@currentSelection == -1 or not isUpOrDownOrEnter)
           @searchModel.requestAutocompleteSuggestions searchText, @
@@ -102,7 +109,7 @@ glados.useNameSpace 'glados.views.SearchResults',
     # Autocomplete Navigation on Enter or Click
     # ------------------------------------------------------------------------------------------------------------------
 
-    getSuggestion: (suggIndex)->
+    getSuggestion: (suggIndex) ->
       if @autocompleteSuggestions? and suggIndex >= 0 and suggIndex < @autocompleteSuggestions.length
         return @autocompleteSuggestions[suggIndex]
       return null
@@ -179,11 +186,14 @@ glados.useNameSpace 'glados.views.SearchResults',
     # ------------------------------------------------------------------------------------------------------------------
 
     updateAutocomplete: ()->
+      console.log 'UPDATE AUTOCOMPLETE'
       if not @$barElem? or not @$barElem.is(":visible")
         return
       if @searchModel.autocompleteCaller != @
         return
       if @$autocompleteWrapperDiv?
+        console.log 'THERE IS DIV'
+        console.log 'autocompleteSuggestions:', @searchModel.get('autocompleteSuggestions')
         @updateSelected true
         @autocompleteSuggestions = @searchModel.get('autocompleteSuggestions')
         @numSuggestions = @autocompleteSuggestions.length
