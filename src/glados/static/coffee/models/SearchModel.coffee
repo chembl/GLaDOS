@@ -151,6 +151,8 @@ SearchModel = Backbone.Model.extend
           concatenatedSuggestions.push(suggestionJ)
       @set('autocompleteSuggestions', concatenatedSuggestions)
 
+      console.log 'received suggestions: ', @get('autocompleteSuggestions')
+
     esQuery = {
       size: 0
       suggest:
@@ -174,6 +176,7 @@ SearchModel = Backbone.Model.extend
   requestAutocompleteSuggestions: (textQuery, caller)->
 
     console.log 'REQUESTING SUGGESTIONS'
+
     if not _.isString(textQuery)
       return
 
@@ -206,9 +209,12 @@ SearchModel = Backbone.Model.extend
             }
             @set('autocompleteSuggestions', [result])
             return
+
+
     if not @debouncedAutocompleteRequest?
       @debouncedAutocompleteRequest = _.debounce(@__requestAutocompleteSuggestions.bind(@), 200)
-    @debouncedAutocompleteRequest()
+    @debouncedAutocompleteRequest() unless @get('test_mode')
+    @set('autosuggestion_state', SearchModel.AUTO_SUGGESTION_STATES.REQUESTING_SUGGESTIONS)
 
   readParsedQueryRecursive: (curParsedQuery, parentType='or')->
       # Query tree leafs
@@ -323,6 +329,7 @@ SearchModel.EVENTS =
 # ----------------------------------------------------------------------------------------------------------------------
 SearchModel.AUTO_SUGGESTION_STATES =
   INITIAL_STATE: 'INITIAL_STATE'
+  REQUESTING_SUGGESTIONS: 'REQUESTING_SUGGESTIONS'
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Singleton pattern

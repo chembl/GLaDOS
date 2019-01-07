@@ -10,3 +10,11 @@ describe 'Search Autosuggestion', ->
     stateMustBe = SearchModel.AUTO_SUGGESTION_STATES.INITIAL_STATE
 
     expect(stateGot).toBe(stateMustBe)
+
+  it 'switches to requesting state after requesting suggestions', ->
+
+    searchModel.requestAutocompleteSuggestions('SomeTerm', @)
+    stateGot = searchModel.get('autosuggestion_state')
+    stateMustBe = SearchModel.AUTO_SUGGESTION_STATES.REQUESTING_SUGGESTIONS
+
+    expect(stateGot).toBe(stateMustBe)
