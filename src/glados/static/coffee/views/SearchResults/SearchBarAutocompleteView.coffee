@@ -10,7 +10,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       console.log 'INIT AUTOCOMPLETE VIEW'
       @suggestionsTemplate = Handlebars.compile $(@el).find('.Handlebars-search-bar-autocomplete').html()
       @searchModel = SearchModel.getInstance()
-      @searchModel.on('change:autocompleteSuggestions', @updateAutocomplete.bind(@))
+      @searchModel.on('change:autocompleteSuggestions', @updateAutocomplete, @)
       @$barElem = null
       @$autocompleteWrapperDiv = null
       @lastSearch = null
@@ -185,7 +185,7 @@ glados.useNameSpace 'glados.views.SearchResults',
     # Callback from model
     # ------------------------------------------------------------------------------------------------------------------
 
-    updateAutocomplete: ()->
+    updateAutocomplete: ->
       console.log 'UPDATE AUTOCOMPLETE'
       if not @$barElem? or not @$barElem.is(":visible")
         return
@@ -194,6 +194,11 @@ glados.useNameSpace 'glados.views.SearchResults',
       if @$autocompleteWrapperDiv?
         console.log 'THERE IS DIV'
         console.log 'autocompleteSuggestions:', @searchModel.get('autocompleteSuggestions')
+        autoSuggestionState = @searchModel.get('autosuggestion_state')
+        console.log 'autoSuggestionState: ', autoSuggestionState
+
+        return
+
         @updateSelected true
         @autocompleteSuggestions = @searchModel.get('autocompleteSuggestions')
         @numSuggestions = @autocompleteSuggestions.length

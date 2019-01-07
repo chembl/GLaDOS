@@ -18,3 +18,12 @@ describe 'Search Autosuggestion', ->
     stateMustBe = SearchModel.AUTO_SUGGESTION_STATES.REQUESTING_SUGGESTIONS
 
     expect(stateGot).toBe(stateMustBe)
+
+    # the final state can no t be tested easily.
+
+  it 'triggers the requesting event when suggestions are requested', ->
+
+    eventTriggered = false
+    searchModel.once SearchModel.EVENTS.SUGGESTIONS_REQUESTED, (-> eventTriggered = true)
+    searchModel.requestAutocompleteSuggestions('SomeTerm', @)
+    expect(eventTriggered).toBe(true)
