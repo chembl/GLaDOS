@@ -8,9 +8,9 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     initialize: ->
       console.log 'INIT AUTOCOMPLETE VIEW'
-      @suggestionsTemplate = Handlebars.compile $(@el).find('.Handlebars-search-bar-autocomplete').html()
       @searchModel = SearchModel.getInstance()
       @searchModel.on('change:autocompleteSuggestions', @updateAutocomplete, @)
+      @searchModel.on(SearchModel.EVENTS.SUGGESTIONS_REQUESTED, @updateAutocomplete, @)
       @$barElem = null
       @$autocompleteWrapperDiv = null
       @lastSearch = null
@@ -18,6 +18,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       @numSuggestions = 0
       @autocompleteSuggestions = []
       @searchBarView = null
+      @positioningDebounceTime = 200
 
     attachSearchBar: (searchBarView)->
       @searchBarView = searchBarView
@@ -47,10 +48,6 @@ glados.useNameSpace 'glados.views.SearchResults',
     # ------------------------------------------------------------------------------------------------------------------
     # Bar Event Handling
     # ------------------------------------------------------------------------------------------------------------------
-    showPreloader: ->
-
-      console.log 'SHOW PRELOADER!!!'
-
     barFocusHandler: (event)->
       @updateSelected true
       if @$autocompleteWrapperDiv?
@@ -177,13 +174,52 @@ glados.useNameSpace 'glados.views.SearchResults',
             @$autocompleteWrapperDiv.css
               top: (barPos.top+barH)+'px'
               'max-height': (window.innerHeight*3/4)+'px'
-        debouncedCall = _.debounce(debouncedCall.bind(@), 200)
+        debouncedCall = _.debounce(debouncedCall.bind(@), @positioningDebounceTime)
         @__recalculatePositioning = debouncedCall
       @__recalculatePositioning()
 
     # ------------------------------------------------------------------------------------------------------------------
     # Callback from model
     # ------------------------------------------------------------------------------------------------------------------
+    showPreloader: -> @renderMessageToUser('Loading suggestions...')
+
+    renderMessageToUser: (msg) ->
+
+      templateParams =
+        msg: msg
+
+      #avoid flashing unstyled content
+      @$autocompleteWrapperDiv.hide()
+
+      glados.Utils.fillContentForElement(
+        $element=@$autocompleteWrapperDiv,
+        paramsObj=templateParams,
+        customTemplate='Handlebars-search-bar-autocomplete-message'
+      )
+
+      @recalculatePositioning()
+      #wait until the position is set to show the div
+      thisView = @
+      setTimeout((-> thisView.$autocompleteWrapperDiv.show()), @positioningDebounceTime)
+
+    renderSuggestions: ->
+
+      templateID = 'Handlebars-search-bar-autocomplete'
+      templateParams =
+        suggestions: @autocompleteSuggestions
+        textSearch: @lastSearch
+
+      glados.Utils.fillContentForElement(
+        $element=@$autocompleteWrapperDiv,
+        paramsObj=templateParams,
+        customTemplate='Handlebars-search-bar-autocomplete'
+      )
+
+      @assignOnclickCallbacks()
+      @recalculatePositioning()
+      @$autocompleteWrapperDiv.show()
+
+    renderWhenNoSuggestions: -> @renderMessageToUser('No suggestions found for this term.')
 
     updateAutocomplete: ->
       console.log 'UPDATE AUTOCOMPLETE'
@@ -191,25 +227,30 @@ glados.useNameSpace 'glados.views.SearchResults',
         return
       if @searchModel.autocompleteCaller != @
         return
-      if @$autocompleteWrapperDiv?
-        console.log 'THERE IS DIV'
-        console.log 'autocompleteSuggestions:', @searchModel.get('autocompleteSuggestions')
-        autoSuggestionState = @searchModel.get('autosuggestion_state')
-        console.log 'autoSuggestionState: ', autoSuggestionState
 
+      if not @$autocompleteWrapperDiv?
         return
+
+      console.log 'THERE IS DIV'
+      console.log 'autocompleteSuggestions:', @searchModel.get('autocompleteSuggestions')
+
+      autoSuggestionState = @searchModel.get('autosuggestion_state')
+      console.log 'autoSuggestionState: ', autoSuggestionState
+      if autoSuggestionState == SearchModel.AUTO_SUGGESTION_STATES.REQUESTING_SUGGESTIONS
+        @showPreloader()
+      else if autoSuggestionState == SearchModel.AUTO_SUGGESTION_STATES.SUGGESTIONS_RECEIVED
+
+        console.log 'SUGGESTIONS RECEIVED'
 
         @updateSelected true
         @autocompleteSuggestions = @searchModel.get('autocompleteSuggestions')
         @numSuggestions = @autocompleteSuggestions.length
-        @$autoccompleteDiv = @suggestionsTemplate
-          suggestions: @autocompleteSuggestions
-          textSearch: @lastSearch
-        @$autocompleteWrapperDiv.html(@$autoccompleteDiv)
-        @assignOnclickCallbacks()
-        @recalculatePositioning()
-        # Additional check to make sure the shown suggestions belong to the currently displayed text
-        if @numSuggestions == 0 or @autocompleteSuggestions[0].autocompleteQuery != @lastSearch
-          @$autocompleteWrapperDiv.hide()
+        console.log '@numSuggestions: ', @numSuggestions
+        if @numSuggestions == 0
+          @renderWhenNoSuggestions()
         else
-          @$autocompleteWrapperDiv.show()
+          @renderSuggestions()
+
+
+
+
