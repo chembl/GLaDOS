@@ -1,17 +1,17 @@
 {% verbatim %}
 <div class="autocomplete-hb" style="display: none">
-  <script class="Handlebars-search-bar-autocomplete" type="text/x-handlebars-template" xmlns="http://www.w3.org/1999/html">
+  <script id="Handlebars-search-bar-autocomplete" type="text/x-handlebars-template" xmlns="http://www.w3.org/1999/html">
     <div class="search-bar-autocomplete-content grey lighten-5">
       <ul class="collection no-margin no-padding" >
         {{#each suggestions}}
           <li class="collection-item no-margin no-padding">
             <div class="row no-margin no-padding relative-wrapper">
               {{#if header}}
-                <div class="col s12 autocomplete-option ac-option-{{@index}}">
+                <div class="col s12 autocomplete-option ac-option-{{@index}} clickable">
                   Search for <b>"{{../textSearch}}"</b> in all <span class="chip-syn {{color}} darken-2 white-text right-align">{{title}}</span>
                 </div>
               {{else}}
-                <div class="col s12 autocomplete-option ac-option-{{@index}}">
+                <div class="col s12 autocomplete-option ac-option-{{@index}} clickable">
                   {{{highlightedText}}}
                 </div>
                 {{#if chembl_id_link}}
@@ -29,5 +29,40 @@
       </ul>
     </div>
   </script>
+
+<script id="Handlebars-search-bar-autocomplete-message" type="text/x-handlebars-template">
+
+     <div class="search-bar-autocomplete-content grey lighten-5">
+        <ul class="collection no-margin no-padding" >
+            <li class="collection-item no-margin no-padding">
+                <div class="row no-margin no-padding relative-wrapper">
+                     <div class="col s12 autocomplete-option">
+                         {{msg}}
+                     </div>
+                </div>
+            </li>
+        </ul>
+
+     </div>
+
+</script>
+
+<script id="Handlebars-search-bar-autocomplete-no-suggestions" type="text/x-handlebars-template">
+
+     <div class="search-bar-autocomplete-content grey lighten-5">
+        <ul class="collection no-margin no-padding" >
+            <li class="collection-item no-margin no-padding">
+                <div class="row no-margin no-padding relative-wrapper">
+                     <div class="col s12 autocomplete-option">
+                         {{msg}}
+                     </div>
+                </div>
+            </li>
+        </ul>
+
+     </div>
+
+</script>
+
 </div>
 {% endverbatim %}

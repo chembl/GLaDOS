@@ -13,6 +13,16 @@ SearchModel = Backbone.Model.extend
     autocompleteSuggestions: []
     debouncedAutocompleteRequest: null
     autocompleteQuery: ''
+    test_mode: false
+
+  initialize: ->
+
+    @resetAutoSuggestionState()
+
+  initAutoSuggestionState: -> @set('autosuggestion_state', SearchModel.AUTO_SUGGESTION_STATES.INITIAL_STATE)
+  resetAutoSuggestionState: ->
+    @set('autocompleteSuggestions', [])
+    @initAutoSuggestionState()
 
   # --------------------------------------------------------------------------------------------------------------------
   # URLS generation
@@ -145,6 +155,7 @@ SearchModel = Backbone.Model.extend
         for suggestionJ in suggestionsI
           concatenatedSuggestions.push(suggestionJ)
       @set('autocompleteSuggestions', concatenatedSuggestions)
+      @set('autosuggestion_state', SearchModel.AUTO_SUGGESTION_STATES.SUGGESTIONS_RECEIVED)
 
     esQuery = {
       size: 0
@@ -200,9 +211,13 @@ SearchModel = Backbone.Model.extend
             }
             @set('autocompleteSuggestions', [result])
             return
+
+
     if not @debouncedAutocompleteRequest?
       @debouncedAutocompleteRequest = _.debounce(@__requestAutocompleteSuggestions.bind(@), 200)
-    @debouncedAutocompleteRequest()
+    @debouncedAutocompleteRequest() unless @get('test_mode')
+    @set('autosuggestion_state', SearchModel.AUTO_SUGGESTION_STATES.REQUESTING_SUGGESTIONS)
+    @trigger(SearchModel.EVENTS.SUGGESTIONS_REQUESTED)
 
   readParsedQueryRecursive: (curParsedQuery, parentType='or')->
       # Query tree leafs
@@ -311,13 +326,23 @@ SearchModel = Backbone.Model.extend
 SearchModel.EVENTS =
   SEARCH_TERM_HAS_CHANGED: 'SEARCH_TERM_HAS_CHANGED'
   SEARCH_PARAMS_HAVE_CHANGED: 'SEARCH_PARAMS_HAVE_CHANGED'
+  SUGGESTIONS_REQUESTED: 'SUGGESTIONS_REQUESTED'
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Autosuggestion states
+# ----------------------------------------------------------------------------------------------------------------------
+SearchModel.AUTO_SUGGESTION_STATES =
+  INITIAL_STATE: 'INITIAL_STATE'
+  REQUESTING_SUGGESTIONS: 'REQUESTING_SUGGESTIONS'
+  SUGGESTIONS_RECEIVED: 'SUGGESTIONS_RECEIVED'
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Singleton pattern
 # ----------------------------------------------------------------------------------------------------------------------
 
-SearchModel.getInstance = () ->
+SearchModel.getInstance = ->
   if not SearchModel.__model_instance
     SearchModel.__model_instance = new SearchModel
   return SearchModel.__model_instance
 
+SearchModel.getTestInstance = -> new SearchModel({test_mode:true})
