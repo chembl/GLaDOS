@@ -7,16 +7,15 @@ glados.useNameSpace 'glados.views.SearchResults',
     # ------------------------------------------------------------------------------------------------------------------
 
     initialize: ->
-      console.log 'INIT AUTOCOMPLETE VIEW'
       @searchModel = SearchModel.getInstance()
-      @searchModel.on('change:autocompleteSuggestions', @updateAutocomplete, @)
+      @searchModel.on('change:autosuggestion_state', @updateAutocomplete, @)
       @searchModel.on(SearchModel.EVENTS.SUGGESTIONS_REQUESTED, @updateAutocomplete, @)
       @$barElem = null
       @$autocompleteWrapperDiv = null
       @lastSearch = null
       @currentSelection = -1
       @numSuggestions = 0
-      @autocompleteSuggestions = []
+      @autocompleteSuggestions = SearchModel.getInstance().get('autocompleteSuggestions')
       @searchBarView = null
       @positioningDebounceTime = 200
 
@@ -92,7 +91,8 @@ glados.useNameSpace 'glados.views.SearchResults',
         if @lastSearch != searchText and (@currentSelection == -1 or not isUpOrDownOrEnter)
           @searchModel.requestAutocompleteSuggestions searchText, @
       else
-        @searchModel.set('autocompleteSuggestions', [])
+        @searchModel.resetAutoSuggestionState()
+
       if not isUpOrDownOrEnter
         @lastSearch = searchText
 
@@ -222,7 +222,7 @@ glados.useNameSpace 'glados.views.SearchResults',
     renderWhenNoSuggestions: -> @renderMessageToUser('No suggestions found for this term.')
 
     updateAutocomplete: ->
-      console.log 'UPDATE AUTOCOMPLETE'
+
       if not @$barElem? or not @$barElem.is(":visible")
         return
       if @searchModel.autocompleteCaller != @
@@ -231,21 +231,15 @@ glados.useNameSpace 'glados.views.SearchResults',
       if not @$autocompleteWrapperDiv?
         return
 
-      console.log 'THERE IS DIV'
-      console.log 'autocompleteSuggestions:', @searchModel.get('autocompleteSuggestions')
-
       autoSuggestionState = @searchModel.get('autosuggestion_state')
-      console.log 'autoSuggestionState: ', autoSuggestionState
       if autoSuggestionState == SearchModel.AUTO_SUGGESTION_STATES.REQUESTING_SUGGESTIONS
         @showPreloader()
       else if autoSuggestionState == SearchModel.AUTO_SUGGESTION_STATES.SUGGESTIONS_RECEIVED
 
-        console.log 'SUGGESTIONS RECEIVED'
-
         @updateSelected true
         @autocompleteSuggestions = @searchModel.get('autocompleteSuggestions')
         @numSuggestions = @autocompleteSuggestions.length
-        console.log '@numSuggestions: ', @numSuggestions
+
         if @numSuggestions == 0
           @renderWhenNoSuggestions()
         else

@@ -17,7 +17,12 @@ SearchModel = Backbone.Model.extend
 
   initialize: ->
 
-    @set('autosuggestion_state', SearchModel.AUTO_SUGGESTION_STATES.INITIAL_STATE)
+    @resetAutoSuggestionState()
+
+  initAutoSuggestionState: -> @set('autosuggestion_state', SearchModel.AUTO_SUGGESTION_STATES.INITIAL_STATE)
+  resetAutoSuggestionState: ->
+    @set('autocompleteSuggestions', [])
+    @initAutoSuggestionState()
 
   # --------------------------------------------------------------------------------------------------------------------
   # URLS generation
@@ -149,9 +154,8 @@ SearchModel = Backbone.Model.extend
       for suggestionsI in allSuggestions
         for suggestionJ in suggestionsI
           concatenatedSuggestions.push(suggestionJ)
-      @set('autosuggestion_state', SearchModel.AUTO_SUGGESTION_STATES.SUGGESTIONS_RECEIVED)
       @set('autocompleteSuggestions', concatenatedSuggestions)
-
+      @set('autosuggestion_state', SearchModel.AUTO_SUGGESTION_STATES.SUGGESTIONS_RECEIVED)
 
     esQuery = {
       size: 0
