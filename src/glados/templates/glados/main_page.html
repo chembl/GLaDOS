@@ -23,10 +23,23 @@
 
     <div class="main-page-container">
 
-        <!-------------- ROW for text about chembl + carousel -------------->
+        <!-------------- What is ChEMBL and visualisations SECTION -------------->
         <div class="row container">
 
-            <!-------------- Text about ChEMBL SECTION -------------->
+            <div class="main-page-section col s12 l12" style="background-color: red;">
+
+                <div class="section-col" style="background-color: gray;">
+                    {% include "glados/MainPageParts/about_chembl.html" %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-------------- ROW for text about chembl + carousel TO DELETE -------------->
+        <div class="row container">
+
             <div class="main-page-section col s12 l12 right smaller-on-med">
 
                 <div class="section-col">
@@ -37,9 +50,7 @@
 
             </div>
 
-            <div class="col-divider col s12 hide-on-large-only"></div>
-
-            <!-------------- Explore the database SECTION -------------->
+            <!-------------- What is ChEMBL and visualisations SECTION -------------->
             <div class="col s12 l6 hide-on-large-only explore-database">
 
                 {% include "glados/MainPageParts/explore_the_database.html" %}

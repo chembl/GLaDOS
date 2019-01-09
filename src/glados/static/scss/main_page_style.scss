@@ -622,10 +622,15 @@ $full-header-height-large: 180px;
 
 /* ------------------- MEDIA QUERIES ------------------- */
 
-/* -------- MEDIUM SCREEN -------- */
+
 .main-page-container {
 
+  /* -------- SMALL SCREEN -------- */
   @media (max-width: 600px) {
+
+    .chembl-text {
+      padding: 10% 10%;
+    }
 
     .papers {
       padding: 0;
@@ -690,6 +695,7 @@ $full-header-height-large: 180px;
     }
   }
 
+  /* -------- MEDIUM SCREEN -------- */
   @media (min-width: 600px) {
 
     .db-record-item {
@@ -742,7 +748,7 @@ $full-header-height-large: 180px;
     }
 
     .chembl-text {
-      padding: 0 10%;
+      padding: 10% 10%;
     }
 
     .explore-database {
@@ -761,8 +767,8 @@ $full-header-height-large: 180px;
       }
     }
     .chembl-text {
-      text-align: left;
-      padding-left: 40px;
+
+      padding: 5% 5%;
 
       p {
         font-size: 1.1em;
