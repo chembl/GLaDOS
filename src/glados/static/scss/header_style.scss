@@ -401,7 +401,7 @@ header .row {
       position: fixed;
       left: 0;
       width: 100%;
-      max-height: 100vh;
+      max-height: calc(100vh - #{$chembl-header-height});
       overflow-y: scroll;
       background-color: white;
       box-shadow: 0 1px 4px 0 #e4e4e4;
