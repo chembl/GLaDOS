@@ -105,6 +105,25 @@ common_urls = [
       RedirectView.as_view(url='http://chembl.github.io/status/',
                            permanent=True), name='status'),
 
+  url(r'^ws_home/$',
+      RedirectView.as_view(url='https://www.ebi.ac.uk/chembl/ws',
+                           permanent=True), name='web_services_home'),
+
+  url(r'^unichem_home/$',
+      RedirectView.as_view(url='https://www.ebi.ac.uk/unichem',
+                           permanent=True), name='unichem_home'),
+
+  url(r'^surechembl/$',
+      RedirectView.as_view(url='https://www.surechembl.org',
+                           permanent=True), name='surechembl'),
+  url(r'^chembl_rdf/$',
+      RedirectView.as_view(url='https://www.ebi.ac.uk/rdf',
+                           permanent=True), name='chembl_rdf'),
+
+  url(r'^chembl_blog/$',
+      RedirectView.as_view(url='https://chembl.blogspot.co.uk',
+                           permanent=True), name='chembl_blog'),
+
   url(r'^db_schema',
     DirectTemplateView.as_view(template_name="glados/database_schema.html"), name='db_schema'),
 

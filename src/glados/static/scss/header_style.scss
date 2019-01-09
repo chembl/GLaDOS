@@ -43,7 +43,7 @@ header .row {
 }
 
 .burger-dropdown {
-  li:hover {
+  .dropdown-item:hover {
     a {
       color: $chembl-teal !important;
     }
@@ -404,6 +404,7 @@ header .row {
       position: fixed;
       left: 0;
       width: 100%;
+      margin-top: 15px;
       //Reduce the max height a bit less than the 'fitting size' to avoid issues with overflowing the viewport height
       max-height: calc(100vh - #{$chembl-header-height} - 40px);
       overflow-y: scroll;
@@ -416,11 +417,12 @@ header .row {
       -webkit-transition: transform 700ms ease-in-out;
       -webkit-transition: -webkit-transform 700ms ease-in-out;
 
-      li.dropdown-item {
+      .dropdown-item {
         height: 50px;
-        border-bottom-color: #e4e4e4;
+        border-bottom: solid 0.5px #e4e4e4;
 
         a {
+          display: block;
           color: $grey-medium;
           font-size: 0.9em;
           padding: 15px !important;
