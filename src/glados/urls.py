@@ -101,6 +101,10 @@ common_urls = [
       RedirectView.as_view(url='https://chembl.gitbook.io/chembl-ntd/',
                            permanent=True), name='chembl-ntd'),
 
+  url(r'^status/$',
+      RedirectView.as_view(url='http://chembl.github.io/status/',
+                           permanent=True), name='status'),
+
   url(r'^db_schema',
     DirectTemplateView.as_view(template_name="glados/database_schema.html"), name='db_schema'),
 
