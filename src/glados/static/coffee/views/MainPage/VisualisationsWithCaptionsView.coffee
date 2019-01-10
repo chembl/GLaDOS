@@ -21,10 +21,15 @@ glados.useNameSpace 'glados.views.MainPage',
       $carouselContainer = $(@el).find('.BCK-carousel-wrapper')
       $captionsCarousel = $(@el).find('.BCK-carousel-captions')
 
+      numSlides = 2
+      initialSlide = Math.floor(Math.random() * numSlides)
+      console.log 'initialSlide: ', initialSlide
+
       $carouselContainer.slick {
         asNavFor: $captionsCarousel
         arrows: true
         dots: true
+        initialSlide: initialSlide
       }
 
       $captionsCarousel.slick {
@@ -32,5 +37,6 @@ glados.useNameSpace 'glados.views.MainPage',
         fade: true
         arrows: false
         dots: false
+        initialSlide: initialSlide
       }
 
