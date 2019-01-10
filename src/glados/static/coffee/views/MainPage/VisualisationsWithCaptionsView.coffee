@@ -25,6 +25,13 @@ glados.useNameSpace 'glados.views.MainPage',
       initialSlide = Math.floor(Math.random() * numSlides)
       console.log 'initialSlide: ', initialSlide
 
+
+      glados.Utils.fillContentForElement $carouselContainer,
+        visualisations_ids: ({id:i, is_caption: false} for i in [0..numSlides-1])
+
+      glados.Utils.fillContentForElement $captionsCarousel,
+        visualisations_ids: ({id:i, is_caption: true} for i in [0..numSlides-1])
+
       $carouselContainer.slick {
         asNavFor: $captionsCarousel
         arrows: true

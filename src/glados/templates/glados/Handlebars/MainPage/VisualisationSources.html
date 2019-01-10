@@ -1,4 +1,15 @@
 {% verbatim %}
+
+  <script id="Handlebars-Carousel-items-bases" type="text/x-handlebars-template">
+
+        {{#each visualisations_ids}}
+            <div id="Carousel{{#if this.is_caption}}Caption{{else}}Visualisation{{/if}}{{this.id}}" class="carousel-item">
+                {{#if this.is_caption}}Caption{{else}}Visualisation{{/if}} {{this.id}}
+            </div>
+        {{/each}}
+
+  </script>
+
   <script id="Handlebars-CriclesBrowser-instructions" type="text/x-handlebars-template">
 
     {{#if node_name}}
