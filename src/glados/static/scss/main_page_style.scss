@@ -114,6 +114,52 @@ $full-header-height-large: 180px;
   }
 }
 
+/* -------- CAROUSEL WITH CAPTIONS WRAPPER -------- */
+.main-page-container {
+
+  .first-section {
+
+    .what-is-chembl{
+      height: 30%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .chembl-text{
+        padding: 0 10%;
+      }
+    }
+
+  }
+
+  .visualisations-with-captions-container {
+
+    background-color: DodgerBlue;
+    height: 70%;
+
+    .visualisations, .captions {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+
+     /* -------- SMALL SCREEN -------- */
+    @media (max-width: 600px) {
+
+
+    }
+
+    /* -------- MEDIUM SCREEN -------- */
+    @media (min-width: 600px) and (max-width: 992px) {
+
+    }
+
+     /* -------- LARGE SCREEN -------- */
+    @media (min-width: 992px) {
+
+    }
+
+  }
+}
+
 /* -------- VISUALISATIONS CAROUSEL -------- */
 .main-page-container {
 
@@ -628,9 +674,6 @@ $full-header-height-large: 180px;
   /* -------- SMALL SCREEN -------- */
   @media (max-width: 600px) {
 
-    .chembl-text {
-      padding: 10% 10%;
-    }
 
     .papers {
       padding: 0;
@@ -747,10 +790,6 @@ $full-header-height-large: 180px;
       height: 50vh;
     }
 
-    .chembl-text {
-      padding: 10% 10%;
-    }
-
     .explore-database {
       margin-top: 5%;
     }
@@ -767,8 +806,6 @@ $full-header-height-large: 180px;
       }
     }
     .chembl-text {
-
-      padding: 5% 5%;
 
       p {
         font-size: 1.1em;
