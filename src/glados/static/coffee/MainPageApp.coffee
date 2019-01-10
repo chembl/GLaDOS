@@ -8,12 +8,15 @@ class MainPageApp
   @init = ->
     glados.apps.Main.MainGladosApp.hideMainSplashScreen()
 
-    MainPageApp.initCentralCarousel()
-    MainPageApp.initDatabaseSummary()
-    MainPageApp.initAssociatedResources()
-    MainPageApp.initTweets()
-    MainPageApp.initBlogEntries()
-    MainPageApp.initGithubDetails()
+    new glados.views.MainPage.VisualisationsWithCaptionsView
+      el: $('.BCK-visualisations-with-captions')
+
+#    MainPageApp.initCentralCarousel()
+#    MainPageApp.initDatabaseSummary()
+#    MainPageApp.initAssociatedResources()
+#    MainPageApp.initTweets()
+#    MainPageApp.initBlogEntries()
+#    MainPageApp.initGithubDetails()
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Init functions
