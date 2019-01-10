@@ -127,6 +127,12 @@ $full-header-height-large: 180px;
       .chembl-text{
         padding: 0 10%;
       }
+
+      /* -------- SMALL SCREEN -------- */
+      @media (max-width: 600px) {
+        height: 100%;
+      }
+
     }
 
   }
@@ -136,24 +142,32 @@ $full-header-height-large: 180px;
     background-color: DodgerBlue;
     height: 70%;
 
-    .visualisations, .captions {
-      background-color: #f1f1f1;
-      height: 100%;
+    .visualisations{
+      background-color: #f17b84;
     }
-
-     /* -------- SMALL SCREEN -------- */
-    @media (max-width: 600px) {
-
-
+    .captions {
+      background-color: #f159c1;
     }
 
     /* -------- MEDIUM SCREEN -------- */
     @media (min-width: 600px) and (max-width: 992px) {
 
+      .visualisations, {
+        height: 60%;
+      }
+
+      .captions {
+        height: 40%;
+      }
+
     }
 
      /* -------- LARGE SCREEN -------- */
     @media (min-width: 992px) {
+
+      .visualisations, .captions {
+        height: 100%;
+      }
 
     }
 
