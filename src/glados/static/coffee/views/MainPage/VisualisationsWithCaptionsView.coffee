@@ -60,8 +60,27 @@ glados.useNameSpace 'glados.views.MainPage',
 
       if wasInitialised != 'yes'
 
+        visualisationConfig = glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_CONFIG[slideNumber]
+        console.log 'visualisationConfig: ', visualisationConfig
+        templateSourceURL = glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_HB_SOURCES
+        templateID = visualisationConfig.template_id
+        console.log 'templateID: ', templateID
+        loadPromise = glados.Utils.loadTemplateAndFillContentForElement(templateSourceURL, templateID, $containers)
+
         $containers.attr('data-initialised', 'yes')
-        console.log 'doing init process'
+
+#      console.log '$containers: ', $containers
+#      console.log 'length: ', $containers.length
 
 
 
+glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_HB_SOURCES =
+  "#{glados.Settings.GLADOS_BASE_PATH_REL}handlebars/visualisation_sources"
+
+glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_CONFIG =
+  0:
+    caption: 'Caption For 0'
+    template_id: 'Handlebars-Visualisations-BrowseEntitiesCircles'
+  1:
+    caption: 'Caption For 1'
+    template_id: 'Handlebars-Visualisations-ZoomableSunburst'

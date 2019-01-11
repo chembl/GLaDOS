@@ -370,6 +370,35 @@ glados.useNameSpace 'glados',
       return null
 
     cachedTemplateFunctions: {}
+
+    loadTemplateAndFillContentForElement: (templateSourceURL, templateID, $element, paramsObj={}) ->
+
+      console.log 'loadTemplateAndFillContentForElement: ', templateSourceURL, templateID, $element, paramsObj
+      $lazyTemplatesContainer = $('#glados-lazy-handlebars')
+      templateContainerID = "Lazy-#{templateID}"
+      templateContainerSelector = "##{templateContainerID}"
+      templateLoadURL = "#{templateSourceURL} ##{templateID}"
+      console.log 'templateLoadURL: ', templateLoadURL
+      console.log 'templateContainerSelector: ', templateContainerSelector
+      if $lazyTemplatesContainer.find("##{templateID}").length > 0
+        console.log 'template already loaded'
+        glados.Utils.fillContentForElement($element, paramsObj, templateID) 
+      else
+        $lazyTemplatesContainer.append("<div id='#{templateContainerID}'>")
+        $templateContainer = $lazyTemplatesContainer.find("##{templateContainerID}")
+
+        $templateContainer.load templateLoadURL, ( response, status, xhr ) ->
+          if ( status == "error" )
+            throw "ERROR: unable to load template #{templateID} from #{templateSourceURL}"
+          else
+            glados.Utils.fillContentForElement($element, paramsObj, templateID)
+
+        console.log 'template not loaded yet'
+        console.log '$lazyTemplatesContainer: ', $lazyTemplatesContainer
+        console.log '$templateContainer: ', $templateContainer
+        console.log '$element: ', $element
+        
+
     # the element must define a data-hb-template, which is the id of the handlebars template to be used
     fillContentForElement: ($element, paramsObj={}, customTemplate, fillWithPreloader=false)->
 

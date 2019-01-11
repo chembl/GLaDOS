@@ -32,6 +32,7 @@ class MainPageApp
       autoplay: true
       autoplaySpeed: 4000
       dots: true
+      infinite: false
     }
 
     $linksCarousel.slick {
@@ -39,6 +40,7 @@ class MainPageApp
       fade: true
       arrows: false
       dots: false
+      infinite: false
     }
 
     MainPageApp.initBrowseEntities()

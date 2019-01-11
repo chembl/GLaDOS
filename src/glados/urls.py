@@ -59,8 +59,11 @@ common_urls = [
 
   url(r'^visualise/$', views.visualise, name='visualise'),
 
-  url(r'^visualisation_sources/$',
-      xframe_options_exempt(DirectTemplateView.as_view(template_name="glados/MainPageParts/Visualizations/visualisations_html_sources.html")), ),
+  url(r'^handlebars/visualisation_sources/$',
+      xframe_options_exempt(
+          DirectTemplateView.as_view(
+              template_name="glados/Handlebars/LazilyLoaded/Visualisations/VisualisationsSources.html")
+      ), ),
 
   url(r'^design_components/$', views.design_components , name='design_components'),
 
