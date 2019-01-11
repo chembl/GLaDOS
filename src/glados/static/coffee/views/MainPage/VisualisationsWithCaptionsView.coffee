@@ -47,3 +47,21 @@ glados.useNameSpace 'glados.views.MainPage',
         initialSlide: initialSlide
       }
 
+      thisView = @
+      $carouselContainer.on 'setPosition', (event, slick) -> thisView.initSlide(slick.currentSlide)
+      @initSlide(initialSlide)
+
+    initSlide: (slideNumber) ->
+
+      console.log 'init slide: ', slideNumber
+      $containers = $(@el).find("[data-carousel-item-id='CarouselVisualisation#{slideNumber}']")
+      wasInitialised = $containers.attr('data-initialised')
+      console.log 'was initialised: ', wasInitialised
+
+      if wasInitialised != 'yes'
+
+        $containers.attr('data-initialised', 'yes')
+        console.log 'doing init process'
+
+
+

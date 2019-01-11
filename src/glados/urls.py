@@ -59,6 +59,9 @@ common_urls = [
 
   url(r'^visualise/$', views.visualise, name='visualise'),
 
+  url(r'^visualisation_sources/$',
+      xframe_options_exempt(DirectTemplateView.as_view(template_name="glados/MainPageParts/Visualizations/visualisations_html_sources.html")), ),
+
   url(r'^design_components/$', views.design_components , name='design_components'),
 
   url(r'^marvin_search_fullscreen/$',
