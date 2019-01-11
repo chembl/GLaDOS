@@ -54,8 +54,10 @@ glados.useNameSpace 'glados.views.MainPage',
     initSlide: (slideNumber) ->
 
       console.log 'init slide: ', slideNumber
-      $containers = $(@el).find("[data-carousel-item-id='CarouselVisualisation#{slideNumber}']")
-      wasInitialised = $containers.attr('data-initialised')
+      $vizContainers = $(@el).find("[data-carousel-item-id='CarouselVisualisation#{slideNumber}']")
+      $captionContainers = $(@el).find("[data-carousel-item-id='CarouselCaption#{slideNumber}']")
+
+      wasInitialised = $vizContainers.attr('data-initialised')
       console.log 'was initialised: ', wasInitialised
 
       if wasInitialised != 'yes'
@@ -64,10 +66,14 @@ glados.useNameSpace 'glados.views.MainPage',
         console.log 'visualisationConfig: ', visualisationConfig
         templateSourceURL = glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_HB_SOURCES
         templateID = visualisationConfig.template_id
+        caption = visualisationConfig.caption
         console.log 'templateID: ', templateID
-        loadPromise = glados.Utils.loadTemplateAndFillContentForElement(templateSourceURL, templateID, $containers)
+        loadPromise = glados.Utils.loadTemplateAndFillContentForElement(templateSourceURL, templateID, $vizContainers)
+        templateParams =
+          caption: caption
+        glados.Utils.fillContentForElement($captionContainers, templateParams, 'Handlebars-Carousel-items-caption')
 
-        $containers.attr('data-initialised', 'yes')
+        $vizContainers.attr('data-initialised', 'yes')
 
 #      console.log '$containers: ', $containers
 #      console.log 'length: ', $containers.length
