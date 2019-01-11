@@ -380,8 +380,10 @@ glados.useNameSpace 'glados',
       templateLoadURL = "#{templateSourceURL} ##{templateID}"
       console.log 'templateLoadURL: ', templateLoadURL
       console.log 'templateContainerSelector: ', templateContainerSelector
+
+      promise = jQuery.Deferred()
+
       if $lazyTemplatesContainer.find("##{templateID}").length > 0
-        console.log 'template already loaded'
         glados.Utils.fillContentForElement($element, paramsObj, templateID) 
       else
         $lazyTemplatesContainer.append("<div id='#{templateContainerID}'>")
@@ -389,15 +391,15 @@ glados.useNameSpace 'glados',
 
         $templateContainer.load templateLoadURL, ( response, status, xhr ) ->
           if ( status == "error" )
-            throw "ERROR: unable to load template #{templateID} from #{templateSourceURL}"
+            glados.Utils.fillContentForElement($element, {
+              msg: 'There was an error loading the html content'
+            }, 'Handlebars-Common-CardError')
+            promise.reject("ERROR: unable to load template #{templateID} from #{templateSourceURL}")
           else
             glados.Utils.fillContentForElement($element, paramsObj, templateID)
+            promise.resolve()
 
-        console.log 'template not loaded yet'
-        console.log '$lazyTemplatesContainer: ', $lazyTemplatesContainer
-        console.log '$templateContainer: ', $templateContainer
-        console.log '$element: ', $element
-        
+      return promise
 
     # the element must define a data-hb-template, which is the id of the handlebars template to be used
     fillContentForElement: ($element, paramsObj={}, customTemplate, fillWithPreloader=false)->

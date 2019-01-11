@@ -37,6 +37,7 @@ glados.useNameSpace 'glados.views.MainPage',
         arrows: true
         dots: true
         initialSlide: initialSlide
+        infinite: false
       }
 
       $captionsCarousel.slick {
@@ -69,16 +70,20 @@ glados.useNameSpace 'glados.views.MainPage',
         caption = visualisationConfig.caption
         console.log 'templateID: ', templateID
         loadPromise = glados.Utils.loadTemplateAndFillContentForElement(templateSourceURL, templateID, $vizContainers)
+
+        loadPromise.fail (msg) ->
+          throw msg
+
+        loadPromise.done ->
+          console.log 'going to execute load function'
+          initFunction = visualisationConfig.init_function
+          initFunction()
+
         templateParams =
           caption: caption
         glados.Utils.fillContentForElement($captionContainers, templateParams, 'Handlebars-Carousel-items-caption')
 
         $vizContainers.attr('data-initialised', 'yes')
-
-#      console.log '$containers: ', $containers
-#      console.log 'length: ', $containers.length
-
-
 
 glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_HB_SOURCES =
   "#{glados.Settings.GLADOS_BASE_PATH_REL}handlebars/visualisation_sources"
@@ -87,6 +92,8 @@ glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_CONFIG =
   0:
     caption: 'Caption For 0'
     template_id: 'Handlebars-Visualisations-BrowseEntitiesCircles'
+    init_function: MainPageApp.initBrowseEntities
   1:
     caption: 'Caption For 1'
     template_id: 'Handlebars-Visualisations-ZoomableSunburst'
+    init_function: MainPageApp.initZoomableSunburst
