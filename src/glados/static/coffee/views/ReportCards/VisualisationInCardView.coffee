@@ -9,8 +9,9 @@ glados.useNameSpace 'glados.views.ReportCards',
       @model.on 'change', @render, @
 
       @resource_type = @config.resource_type
-      @initEmbedModal(@config.embed_section_name, @config.embed_identifier)
-      @activateModals()
+      unless @config.disable_embedding
+        @initEmbedModal(@config.embed_section_name, @config.embed_identifier)
+        @activateModals()
 
       ViewClass = @config.view_class
 

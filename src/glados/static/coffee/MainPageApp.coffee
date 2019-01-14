@@ -58,6 +58,7 @@ class MainPageApp
     config =
       pie_config: pieConfig
       is_outside_an_entity_report_card: true
+      disable_embedding: true
       embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#max_phase_for_disease"
       link_to_all:
         link_text: 'See all drug Compounds in ChEMBL'
@@ -103,8 +104,9 @@ class MainPageApp
 
     config =
       histogram_config: histogramConfig
+      disable_embedding: true
       is_outside_an_entity_report_card: true
-      embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#documents_by_year_histogram"
+#      embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#documents_by_year_histogram"
 
     new glados.views.ReportCards.HistogramInCardView
       el: $('#BCK-FirstApprovalHistogram')
@@ -148,7 +150,8 @@ class MainPageApp
     config =
       histogram_config: histogramConfig
       is_outside_an_entity_report_card: true
-      embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#documents_by_year_histogram"
+      disable_embedding: true
+#      embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#documents_by_year_histogram"
 
     new glados.views.ReportCards.HistogramInCardView
       el: $('#PapersPerYearHistogram')
@@ -168,6 +171,7 @@ class MainPageApp
 
     config =
       is_outside_an_entity_report_card: true
+      disable_embedding: true
       embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#targets_by_protein_class"
       view_class: BrowseTargetAsCirclesView
 
