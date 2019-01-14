@@ -4,8 +4,6 @@ glados.useNameSpace 'glados.apps',
     @init = ->
       glados.apps.Main.MainGladosApp.hideMainSplashScreen()
 
-      new glados.views.Visualisation.VisualisationsPageHandlerView()
-
       VisualisePageApp.initZoomableSunburst()
       VisualisePageApp.initStackedHistogram()
       VisualisePageApp.initBubbleHierarchyChart()

@@ -141,6 +141,10 @@ $full-header-height-large: 180px;
 
     height: 70%;
 
+    .caption-text{
+      padding: 2%;
+    }
+
     /* -------- MEDIUM SCREEN -------- */
     @media (min-width: 600px) and (max-width: 992px) {
 
