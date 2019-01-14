@@ -8,6 +8,7 @@ class MainPageApp
   @init = ->
     glados.apps.Main.MainGladosApp.hideMainSplashScreen()
 
+
     new glados.views.MainPage.VisualisationsWithCaptionsView
       el: $('.BCK-visualisations-with-captions')
 
