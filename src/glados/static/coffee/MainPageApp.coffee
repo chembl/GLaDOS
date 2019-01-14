@@ -11,45 +11,11 @@ class MainPageApp
     new glados.views.MainPage.VisualisationsWithCaptionsView
       el: $('.BCK-visualisations-with-captions')
 
-#    MainPageApp.initCentralCarousel()
-#    MainPageApp.initDatabaseSummary()
-#    MainPageApp.initAssociatedResources()
-#    MainPageApp.initTweets()
-#    MainPageApp.initBlogEntries()
-#    MainPageApp.initGithubDetails()
+    @initAssociatedResources()
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Init functions
 # ----------------------------------------------------------------------------------------------------------------------
-
-  @initCentralCarousel = ->
-    $carouselContainer = $('.carousel-wrapper')
-    $linksCarousel = $('.links-carousel')
-
-    $carouselContainer.slick {
-      asNavFor: $linksCarousel
-      arrows: true
-      autoplay: true
-      autoplaySpeed: 4000
-      dots: true
-
-    }
-
-    $linksCarousel.slick {
-      useCSS: false
-      fade: true
-      arrows: false
-      dots: false
-      infinite: false
-    }
-
-    MainPageApp.initBrowseEntities()
-    MainPageApp.initZoomableSunburst()
-    MainPageApp.initDrugsPerUsanYear()
-    MainPageApp.initTargetsVisualisation()
-    MainPageApp.initMaxPhaseForDisease()
-    MainPageApp.initFirstApprovalByMoleculeType()
-
   @initZoomableSunburst = ->
     targetHierarchyAgg = MainPageApp.getTargetsTreeAgg()
 
