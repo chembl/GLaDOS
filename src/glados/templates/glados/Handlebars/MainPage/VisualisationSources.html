@@ -1,5 +1,19 @@
 {% verbatim %}
 
+    <script id="Handlebars-FullPage-visContainer" type="text/x-handlebars-template">
+
+        {{#each visualisations_ids}}
+            <div class="container">
+
+                <div class="vis-section" data-carousel-item-id="Visualisation{{this}}">
+                    <h3 class="header-dark-grey">  Protein Target Classification </h3>
+                </div>
+
+            </div>
+        {{/each}}
+
+  </script>
+
   <script id="Handlebars-Carousel-items-bases" type="text/x-handlebars-template">
 
         {{#each visualisations_ids}}
