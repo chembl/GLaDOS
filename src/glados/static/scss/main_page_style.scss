@@ -197,16 +197,39 @@ $full-header-height-large: 180px;
       height: 100%;
     }
 
-    .caption-text{
-      height: 90%;
-    }
     .caption-buttons{
-      height: 10%;
       display: flex;
       justify-content: center;
       align-items: center;
       text-align: center;
     }
+
+    /* -------- MEDIUM SCREEN -------- */
+    @media (min-width: 600px) and (max-width: 992px) {
+
+      .caption-text{
+        height: 80%;
+      }
+
+      .caption-buttons {
+        height: 20%;
+      }
+
+    }
+
+     /* -------- LARGE SCREEN -------- */
+    @media (min-width: 992px) {
+
+      .caption-text{
+        height: 90%;
+      }
+
+      .caption-buttons {
+        height: 10%;
+      }
+
+    }
+
   }
 }
 
