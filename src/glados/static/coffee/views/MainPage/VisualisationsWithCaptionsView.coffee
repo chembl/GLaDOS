@@ -47,6 +47,7 @@ glados.useNameSpace 'glados.views.MainPage',
         arrows: false
         dots: false
         initialSlide: initialSlide
+        infinite: false
       }
 
       thisView = @
