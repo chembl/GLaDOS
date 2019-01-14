@@ -181,9 +181,14 @@ $full-header-height-large: 180px;
     outline: none !important;
   }
 
+  .visualisations{
+    .carousel-wrapper {
+      height: calc(100% - 40px); //50px for slick dots
+    }
+  }
   .carousel-wrapper {
-    height: calc(100% - 40px); //50px for slick dots
 
+    height: 100%;
     .slick-list {
       height: 100%;
     }
@@ -192,24 +197,15 @@ $full-header-height-large: 180px;
       height: calc(100% - 30px);
     }
 
-    .btn-container {
+    .caption-text{
+      height: 90%;
+    }
+    .caption-buttons{
+      height: 10%;
       display: flex;
       justify-content: center;
-      padding: 0;
-
-      a {
-        border: 1px $grey-dark solid;
-        border-radius: 2px;
-        padding: 2px 10px;
-        &:hover {
-          color: $chembl-teal;
-          border-color: $chembl-teal;
-        }
-      }
-
-      a.no-border {
-        border: none !important;
-      }
+      align-items: center;
+      text-align: center;
     }
   }
 }

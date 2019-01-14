@@ -12,7 +12,30 @@
 
   <script id="Handlebars-Carousel-items-caption" type="text/x-handlebars-template">
 
-        Caption: {{ caption }}
+        <div class="caption-text">
+            Caption: {{ caption }}
+        </div>
+
+         <div class="caption-buttons">
+
+             <div class="col s6">
+                <a class="btn-chembl" href="{% url 'javascript_routing' %}#browse/drugs/filter/_exists_%3Afirst_approval"
+                   target="_blank">
+
+                    Browse all Approved Drugs
+
+                </a>
+             </div>
+
+             <div class="col s6">
+                <a href="{% url 'visualise'%}" class="btn-chembl">
+
+                    See all visualisations
+
+                </a>
+             </div>
+
+        </div>
 
   </script>
 
