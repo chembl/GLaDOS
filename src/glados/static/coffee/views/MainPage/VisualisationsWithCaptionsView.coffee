@@ -21,7 +21,8 @@ glados.useNameSpace 'glados.views.MainPage',
       $carouselContainer = $(@el).find('.BCK-carousel-wrapper')
       $captionsCarousel = $(@el).find('.BCK-carousel-captions')
 
-      numSlides = 2
+      visualisationsConfig = glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_CONFIG
+      numSlides = _.keys(visualisationsConfig).length
       initialSlide = Math.floor(Math.random() * numSlides)
       console.log 'initialSlide: ', initialSlide
 
@@ -97,3 +98,19 @@ glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_CONFIG =
     caption: 'Caption For 1'
     template_id: 'Handlebars-Visualisations-ZoomableSunburst'
     init_function: MainPageApp.initZoomableSunburst
+  2:
+    caption: 'Caption For 2'
+    template_id: 'Handlebars-Visualisations-DrugsPerUsanYear'
+    init_function: MainPageApp.initDrugsPerUsanYear
+  3:
+    caption: 'Caption For 3'
+    template_id: 'Handlebars-Visualisations-BrowseTargetsAsCircles'
+    init_function: MainPageApp.initTargetsVisualisation
+  4:
+    caption: 'Caption For 4'
+    template_id: 'Handlebars-Visualisations-MaxPhaseForDiseaseDonut'
+    init_function: MainPageApp.initMaxPhaseForDisease
+  5:
+    caption: 'Caption For 5'
+    template_id: 'Handlebars-Visualisations-DrugFirstApprovalHistogram'
+    init_function: MainPageApp.initFirstApprovalByMoleculeType
