@@ -19,16 +19,18 @@
          <div class="caption-buttons">
 
              <div class="col s6">
-                <a class="btn-chembl" href="{% url 'javascript_routing' %}#browse/drugs/filter/_exists_%3Afirst_approval"
-                   target="_blank">
 
-                    Browse all Approved Drugs
+                 <a class="btn-chembl" href="{{ link_url }}"
+                    target="_blank">
 
-                </a>
+                     {{ link_title }}
+                 </a>
              </div>
 
              <div class="col s6">
+                {% endverbatim %}
                 <a href="{% url 'visualise'%}" class="btn-chembl">
+                {% verbatim %}
 
                     See all visualisations
 

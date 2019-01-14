@@ -138,16 +138,8 @@ $full-header-height-large: 180px;
   }
 
   .visualisations-with-captions-container {
-
-    background-color: DodgerBlue;
+    
     height: 70%;
-
-    .visualisations{
-      background-color: #f17b84;
-    }
-    .captions {
-      background-color: #f159c1;
-    }
 
     /* -------- MEDIUM SCREEN -------- */
     @media (min-width: 600px) and (max-width: 992px) {
