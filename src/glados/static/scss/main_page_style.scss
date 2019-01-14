@@ -183,7 +183,7 @@ $full-header-height-large: 180px;
 
   .visualisations{
     .carousel-wrapper {
-      height: calc(100% - 40px); //50px for slick dots
+      height: calc(100% - 35px); //50px for slick dots
     }
   }
   .carousel-wrapper {
@@ -194,7 +194,7 @@ $full-header-height-large: 180px;
     }
 
     .slick-track {
-      height: calc(100% - 30px);
+      height: 100%;
     }
 
     .caption-text{
