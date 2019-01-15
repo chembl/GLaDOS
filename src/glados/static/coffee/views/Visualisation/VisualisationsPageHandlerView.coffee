@@ -3,18 +3,16 @@ glados.useNameSpace 'glados.views.Visualisation',
   # no carousel
   VisualisationsPageHandlerView: glados.views.MainPage.VisualisationsWithCaptionsView.extend
 
-    initialize: ->
-
-      console.log 'init glados.views.Visualisation.VisualisationsPageHandlerView'
-      @render()
-
+    initialize: -> @render()
     render: ->
 
       visualisationsConfig = glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_CONFIG
       numVisualisations = _.keys(visualisationsConfig).length
 
       glados.Utils.fillContentForElement $(@el),
-        visualisations_ids: ({id:i, vis_title:visualisationsConfig[i].vis_title} for i in [0..numVisualisations-1])
+        visualisations_ids: ({id:i, vis_title:visualisationsConfig[i].vis_title,\
+        link_title:visualisationsConfig[i].link_title, link_url:visualisationsConfig[i].link_url_function()} \
+        for i in [0..numVisualisations-1])
 
       @loadVisHTMLContent()
 
