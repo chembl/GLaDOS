@@ -373,13 +373,10 @@ glados.useNameSpace 'glados',
 
     loadTemplateAndFillContentForElement: (templateSourceURL, templateID, $element, paramsObj={}) ->
 
-      console.log 'loadTemplateAndFillContentForElement: ', templateSourceURL, templateID, $element, paramsObj
       $lazyTemplatesContainer = $('#glados-lazy-handlebars')
       templateContainerID = "Lazy-#{templateID}"
       templateContainerSelector = "##{templateContainerID}"
       templateLoadURL = "#{templateSourceURL} ##{templateID}"
-      console.log 'templateLoadURL: ', templateLoadURL
-      console.log 'templateContainerSelector: ', templateContainerSelector
 
       promise = jQuery.Deferred()
 
