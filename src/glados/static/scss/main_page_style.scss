@@ -198,6 +198,13 @@ $full-header-height-large: 180px;
       justify-content: center;
       align-items: center;
       text-align: center;
+      a{
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        display: inline-block;
+        max-width: 100%;
+        overflow: hidden;
+      }
     }
 
     /* -------- MEDIUM SCREEN -------- */

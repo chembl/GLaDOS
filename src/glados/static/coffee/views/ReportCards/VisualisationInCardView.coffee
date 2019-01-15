@@ -17,6 +17,7 @@ glados.useNameSpace 'glados.views.ReportCards',
       new ViewClass
         el: $(@el).find('.BCK-visualisation-container')
         model: @model
+        config: @config.view_config
 
     render: ->
 

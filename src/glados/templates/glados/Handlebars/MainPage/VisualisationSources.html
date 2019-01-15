@@ -13,7 +13,7 @@
                 </div>
 
                 <div class="BCK-browse-button btn-container center"
-                     data-hb-template="Handlebars-circles-browser-button-medium"
+                     data-hb-template="Handlebars-circles-browser-button"
                      data-viz-item-id="Visualisation{{this.id}}">
 
                     <a class="hollow-button" href="{{ this.link_url }}" target="_blank">
@@ -51,11 +51,16 @@
 
              <div class="col s6">
 
-                 <a class="btn-chembl" href="{{ link_url }}"
-                    target="_blank">
+                 <div class="BCK-browse-button"
+                    data-hb-template="Handlebars-main-page-browser-button"
+                    data-viz-item-id="Visualisation{{vis_id}}"
+                 >
+                     <a class="btn-chembl" href="{{ link_url }}"
+                        target="_blank">
 
-                     {{ link_title }}
-                 </a>
+                         {{ link_title }}
+                     </a>
+                 </div>
              </div>
 
              <div class="col s6">
@@ -83,6 +88,13 @@
     {{/if}}
   </script>
 
+    <script id="Handlebars-main-page-browser-button" type="text/x-handlebars-template">
+       <a class="btn-chembl" href="{{ link_url }}"
+            target="_blank">
+             {{ link_title }}
+        </a>
+   </script>
+
    <script id="Handlebars-circles-browser-button" type="text/x-handlebars-template">
 
        {{#if node_name}}
@@ -101,23 +113,6 @@
 
    </script>
 
-   <script id="Handlebars-circles-browser-button-medium" type="text/x-handlebars-template">
-
-       {{#if node_name}}
-
-             <a class="hollow-button" href={{node_link}} target="_blank">
-                  Browse all {{node_name}} Targets
-             </a>
-
-       {{else}}
-
-            <a class="hollow-button" href="{% url 'javascript_routing' %}#browse/targets" target="_blank">
-                Browse all Targets
-            </a>
-
-       {{/if}}
-
-   </script>
 
 
 {% endverbatim %}

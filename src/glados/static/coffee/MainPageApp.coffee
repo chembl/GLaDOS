@@ -162,7 +162,7 @@ class MainPageApp
 
     allDrugsByYear.fetch()
 
-  @initTargetsVisualisation = ->
+  @initTargetsVisualisation = ($browseButtonContainer) ->
 
     targetHierarchyAgg = MainPageApp.getTargetsOrganismTreeAgg()
 
@@ -171,6 +171,8 @@ class MainPageApp
       disable_embedding: true
       embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#targets_by_protein_class"
       view_class: BrowseTargetAsCirclesView
+      view_config:
+        browse_button_container: $browseButtonContainer
 
     new glados.views.ReportCards.VisualisationInCardView
       el: $('#BCK-TargetBrowserAsCircles')

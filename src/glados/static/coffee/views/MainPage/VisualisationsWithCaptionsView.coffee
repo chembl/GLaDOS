@@ -24,8 +24,6 @@ glados.useNameSpace 'glados.views.MainPage',
       visualisationsConfig = glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_CONFIG
       numSlides = _.keys(visualisationsConfig).length
       initialSlide = Math.floor(Math.random() * numSlides)
-      console.log 'initialSlide: ', initialSlide
-
 
       glados.Utils.fillContentForElement $carouselContainer,
         visualisations_ids: ({id:i, is_caption: false} for i in [0..numSlides-1])
@@ -56,26 +54,14 @@ glados.useNameSpace 'glados.views.MainPage',
 
     initSlide: (slideNumber) ->
 
-      console.log 'init slide: ', slideNumber
-      $vizContainers = $(@el).find("[data-carousel-item-id='CarouselVisualisation#{slideNumber}']")
-      $captionContainers = $(@el).find("[data-carousel-item-id='CarouselCaption#{slideNumber}']")
+      $vizContainer = $(@el).find("[data-carousel-item-id='CarouselVisualisation#{slideNumber}']")
+      $captionContainer = $(@el).find("[data-carousel-item-id='CarouselCaption#{slideNumber}']")
 
-      wasInitialised = $vizContainers.attr('data-initialised')
-      console.log 'was initialised: ', wasInitialised
+      wasInitialised = $vizContainer.attr('data-initialised')
 
       if wasInitialised != 'yes'
 
         visualisationConfig = glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_CONFIG[slideNumber]
-        console.log 'visualisationConfig: ', visualisationConfig
-        templateSourceURL = glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_HB_SOURCES
-        templateID = visualisationConfig.template_id
-        console.log 'templateID: ', templateID
-        loadPromise = glados.Utils.loadTemplateAndFillContentForElement(templateSourceURL, templateID, $vizContainers)
-
-        loadPromise.done ->
-          console.log 'going to execute load function'
-          initFunction = visualisationConfig.init_function
-          initFunction()
 
         caption = visualisationConfig.caption
         linkTitle = visualisationConfig.link_title
@@ -87,9 +73,24 @@ glados.useNameSpace 'glados.views.MainPage',
           link_title: linkTitle
           link_url: LinkFunction()
           vis_title: visTitle
-        glados.Utils.fillContentForElement($captionContainers, templateParams, 'Handlebars-Carousel-items-caption')
+          vis_id: slideNumber
+        glados.Utils.fillContentForElement($captionContainer, templateParams, 'Handlebars-Carousel-items-caption')
 
-        $vizContainers.attr('data-initialised', 'yes')
+        templateSourceURL = glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_HB_SOURCES
+        templateID = visualisationConfig.template_id
+        loadPromise = glados.Utils.loadTemplateAndFillContentForElement(templateSourceURL, templateID, $vizContainer)
+
+        thisView = @
+        loadPromise.done ->
+          initFunction = visualisationConfig.init_function
+          if visualisationConfig.uses_browse_button_dynamically
+            $browseButtonContainer =
+              $(thisView.el).find(".BCK-browse-button[data-viz-item-id='Visualisation#{slideNumber}']")
+            initFunction($browseButtonContainer)
+          else
+            initFunction()
+
+        $vizContainer.attr('data-initialised', 'yes')
 
 glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_HB_SOURCES =
   "#{glados.Settings.GLADOS_BASE_PATH_REL}handlebars/visualisation_sources"
@@ -124,6 +125,7 @@ glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_CONFIG =
     link_title: 'Browse all Targets'
     link_url_function: -> Target.getTargetsListURL()
     vis_title: 'Organism Taxonomy Classification'
+    uses_browse_button_dynamically: true
   4:
     caption: 'Caption For 4'
     template_id: 'Handlebars-Visualisations-MaxPhaseForDiseaseDonut'

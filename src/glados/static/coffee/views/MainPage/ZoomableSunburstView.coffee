@@ -294,12 +294,12 @@ glados.useNameSpace 'glados.views.MainPage',
 
       if d.name == 'root'
         glados.Utils.fillContentForElement $browseButtonContainer,
-          node_name: ''
-          node_link: Target.getTargetsListURL()
+          link_title: "Browse all Targets"
+          link_url: Target.getTargetsListURL()
       else
         glados.Utils.fillContentForElement $browseButtonContainer,
-          node_name: d.name
-          node_link: d.link
+          link_title: "Browse all #{d.name} Targets"
+          link_url: d.link
 
     getBucketData: ->
       receivedBuckets = @model.get 'bucket_data'
