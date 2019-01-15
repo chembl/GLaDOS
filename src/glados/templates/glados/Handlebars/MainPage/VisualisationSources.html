@@ -97,19 +97,9 @@
 
    <script id="Handlebars-circles-browser-button" type="text/x-handlebars-template">
 
-       {{#if node_name}}
-
-             <a class="small-text" href={{node_link}} target="_blank">
-                  Browse all {{node_name}} Targets
+             <a class="hollow-button" href="{{ link_url }}" target="_blank">
+                  {{ link_title }}
              </a>
-
-       {{else}}
-
-            <a class="small-text" href="{% url 'javascript_routing' %}#browse/targets" target="_blank">
-                Browse all Targets
-            </a>
-
-       {{/if}}
 
    </script>
 
