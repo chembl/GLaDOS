@@ -5,8 +5,22 @@
         {{#each visualisations_ids}}
             <div class="container">
 
-                <div class="vis-section" data-carousel-item-id="Visualisation{{this}}">
-                    <h3 class="header-dark-grey">  Protein Target Classification </h3>
+                <div class="vis-section" data-viz-item-id="Visualisation{{this.id}}">
+                    <h3 class="header-dark-grey">  {{ vis_title }} </h3>
+
+                    <div class="vis-container BCK-vis-container">
+                    </div>
+                </div>
+
+                <div class="BCK-browse-button btn-container center"
+                     data-hb-template="Handlebars-circles-browser-button-medium">
+
+                    <a class="hollow-button" href="{% url 'javascript_routing' %}#browse/targets" target="_blank">
+
+                        Browse all Targets
+
+                    </a>
+
                 </div>
 
             </div>

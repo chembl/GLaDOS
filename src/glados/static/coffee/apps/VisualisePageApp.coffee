@@ -7,10 +7,10 @@ glados.useNameSpace 'glados.apps',
       new glados.views.Visualisation.VisualisationsPageHandlerView
         el: $('.BCK-visualisations-with-captions')
 
-      VisualisePageApp.initZoomableSunburst()
-      VisualisePageApp.initStackedHistogram()
-      VisualisePageApp.initBubbleHierarchyChart()
-      VisualisePageApp.initDonutChart()
+#      VisualisePageApp.initZoomableSunburst()
+#      VisualisePageApp.initStackedHistogram()
+#      VisualisePageApp.initBubbleHierarchyChart()
+#      VisualisePageApp.initDonutChart()
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Init Visualisations

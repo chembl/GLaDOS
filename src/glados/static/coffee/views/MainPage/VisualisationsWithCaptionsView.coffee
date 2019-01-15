@@ -72,9 +72,6 @@ glados.useNameSpace 'glados.views.MainPage',
         console.log 'templateID: ', templateID
         loadPromise = glados.Utils.loadTemplateAndFillContentForElement(templateSourceURL, templateID, $vizContainers)
 
-        loadPromise.fail (msg) ->
-          throw msg
-
         loadPromise.done ->
           console.log 'going to execute load function'
           initFunction = visualisationConfig.init_function

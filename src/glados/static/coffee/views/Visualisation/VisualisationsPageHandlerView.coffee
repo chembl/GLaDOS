@@ -14,4 +14,25 @@ glados.useNameSpace 'glados.views.Visualisation',
       numVisualisations = _.keys(visualisationsConfig).length
 
       glados.Utils.fillContentForElement $(@el),
-        visualisations_ids: (i for i in [0..numVisualisations-1])
+        visualisations_ids: ({id:i, vis_title:visualisationsConfig[i].vis_title} for i in [0..numVisualisations-1])
+
+      @loadVisHTMLContent()
+
+    loadVisHTMLContent: ->
+
+      visualisationsConfig = glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_CONFIG
+      for index, config of visualisationsConfig
+
+        config = visualisationsConfig[index]
+
+        $vizContainer = $(@el).find("[data-viz-item-id='Visualisation#{index}']").find('.BCK-vis-container')
+        templateSourceURL = glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_HB_SOURCES
+        templateID = config.template_id
+        loadPromise = glados.Utils.loadTemplateAndFillContentForElement(templateSourceURL, templateID, $vizContainer)
+
+        loaderGenerator = (config) ->
+          return ->
+            initFunction = config.init_function
+            initFunction()
+
+        loadPromise.done loaderGenerator(config)

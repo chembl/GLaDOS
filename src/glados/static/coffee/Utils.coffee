@@ -399,6 +399,7 @@ glados.useNameSpace 'glados',
             glados.Utils.fillContentForElement($element, paramsObj, templateID)
             promise.resolve()
 
+      promise.fail ((msg) -> throw msg)
       return promise
 
     # the element must define a data-hb-template, which is the id of the handlebars template to be used
