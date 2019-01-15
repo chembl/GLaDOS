@@ -3,7 +3,6 @@ glados.useNameSpace 'glados.views.ReportCards',
 
     initialize: ->
 
-
       @config = arguments[0].config
       CardView.prototype.initialize.call(@, arguments)
       @model.on 'change', @render, @

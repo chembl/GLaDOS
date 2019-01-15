@@ -8,7 +8,6 @@ class MainPageApp
   @init = ->
     glados.apps.Main.MainGladosApp.hideMainSplashScreen()
 
-
     new glados.views.MainPage.VisualisationsWithCaptionsView
       el: $('.BCK-visualisations-with-captions')
 
@@ -17,12 +16,13 @@ class MainPageApp
 # ----------------------------------------------------------------------------------------------------------------------
 # Init functions
 # ----------------------------------------------------------------------------------------------------------------------
-  @initZoomableSunburst = ->
+  @initZoomableSunburst = ($browseButtonContainer) ->
     targetHierarchyAgg = MainPageApp.getTargetsTreeAgg()
 
     config =
       browse_all_link: "#{glados.Settings.GLADOS_BASE_URL_FULL}/g/#browse/targets"
       browse_button: true
+      browse_button_container: $browseButtonContainer
 
     new glados.views.MainPage.ZoomableSunburstView
       el: $('#BCK-zoomable-sunburst')
@@ -163,12 +163,8 @@ class MainPageApp
     allDrugsByYear.fetch()
 
   @initTargetsVisualisation = ->
-    targetHierarchy = TargetBrowserApp.initTargetHierarchyTree()
-    targetHierarchyAgg = MainPageApp.getTargetsOrganismTreeAgg()
-    targetHierarchy.fetch()
-    targetHierarchyAgg.fetch()
 
-    TargetBrowserApp.initBrowserAsCircles(targetHierarchyAgg, $('#BCK-TargetBrowserAsCircles'))
+    targetHierarchyAgg = MainPageApp.getTargetsOrganismTreeAgg()
 
     config =
       is_outside_an_entity_report_card: true
@@ -178,9 +174,11 @@ class MainPageApp
 
     new glados.views.ReportCards.VisualisationInCardView
       el: $('#BCK-TargetBrowserAsCircles')
-      model: targetHierarchy
+      model: targetHierarchyAgg
       config: config
       report_card_app: @
+
+    targetHierarchyAgg.fetch()
 
   @initDatabaseSummary = ->
     databaseInfo = new glados.models.MainPage.DatabaseSummaryInfo()

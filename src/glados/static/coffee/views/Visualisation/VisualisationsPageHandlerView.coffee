@@ -19,18 +19,25 @@ glados.useNameSpace 'glados.views.Visualisation',
     loadVisHTMLContent: ->
 
       visualisationsConfig = glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_CONFIG
+      thisView = @
       for index, config of visualisationsConfig
 
         config = visualisationsConfig[index]
 
-        $vizContainer = $(@el).find("[data-viz-item-id='Visualisation#{index}']").find('.BCK-vis-container')
+        visSectionSelector = "[data-viz-item-id='Visualisation#{index}']"
+        $vizContainer = $(@el).find(visSectionSelector).find('.BCK-vis-container')
         templateSourceURL = glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_HB_SOURCES
         templateID = config.template_id
         loadPromise = glados.Utils.loadTemplateAndFillContentForElement(templateSourceURL, templateID, $vizContainer)
 
-        loaderGenerator = (config) ->
+        loaderGenerator = (config, visSectionSelector) ->
           return ->
-            initFunction = config.init_function
-            initFunction()
 
-        loadPromise.done loaderGenerator(config)
+            initFunction = config.init_function
+            if config.uses_browse_button_dynamically
+              $browseButtonContainer = $(thisView.el).find(".BCK-browse-button#{visSectionSelector}")
+              initFunction($browseButtonContainer)
+            else
+              initFunction()
+
+        loadPromise.done loaderGenerator(config, visSectionSelector)

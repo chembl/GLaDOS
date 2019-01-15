@@ -109,6 +109,7 @@ glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_CONFIG =
     link_title: 'Browse all Targets'
     link_url_function: -> Target.getTargetsListURL()
     vis_title: 'Protein Target Classification'
+    uses_browse_button_dynamically: true
   2:
     caption: 'Caption For 2'
     template_id: 'Handlebars-Visualisations-DrugsPerUsanYear'

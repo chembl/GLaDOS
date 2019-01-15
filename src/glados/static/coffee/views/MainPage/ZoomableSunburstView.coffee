@@ -289,33 +289,17 @@ glados.useNameSpace 'glados.views.MainPage',
       (getAngle(d.x + d.dx / 2) - (Math.PI / 2)) / Math.PI * 180
 
     fillBrowseButton: (d) ->
-      $button = $('.BCK-browse-button')
-      $button_medium = $('.BCK-browse-button-medium')
 
-      button_template = $('#' + $button.attr('data-hb-template'))
-      button_medium_template = $('#' + $button_medium.attr('data-hb-template'))
-
-      console.log 'button_medium: ', $button_medium.length
+      $browseButtonContainer = @config.browse_button_container
 
       if d.name == 'root'
-        $button.html Handlebars.compile(button_template.html())
+        glados.Utils.fillContentForElement $browseButtonContainer,
           node_name: ''
-          node_link: '/g/#browse/targets'
-
-        if $button_medium.length > 0
-          $button_medium.html Handlebars.compile(button_medium_template.html())
-            node_name: ''
-            node_link: '/g/#browse/targets'
-
+          node_link: Target.getTargetsListURL()
       else
-
-        $button.html Handlebars.compile(button_template.html())
+        glados.Utils.fillContentForElement $browseButtonContainer,
           node_name: d.name
           node_link: d.link
-        if $button_medium.length > 0
-          $button_medium.html Handlebars.compile(button_medium_template.html())
-            node_name: d.name
-            node_link: d.link
 
     getBucketData: ->
       receivedBuckets = @model.get 'bucket_data'

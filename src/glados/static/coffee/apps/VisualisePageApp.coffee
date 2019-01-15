@@ -11,7 +11,7 @@ glados.useNameSpace 'glados.apps',
 # Aggregations
 # ----------------------------------------------------------------------------------------------------------------------
 
-    #TODO: move all the aggregations generators for the visualisations here. 
+    #TODO: move all the aggregations generators for the visualisations here.
     @getYearByMaxPhaseAgg = (defaultInterval = 1) ->
       queryConfig =
         type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
