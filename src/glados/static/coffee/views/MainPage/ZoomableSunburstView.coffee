@@ -1,8 +1,11 @@
 glados.useNameSpace 'glados.views.MainPage',
-  ZoomableSunburstView: Backbone.View.extend(ResponsiviseViewExt).extend
+  ZoomableSunburstView: Backbone.View\
+  .extend(ResponsiviseViewExt)\
+  .extend(glados.views.base.TrackView).extend
 
     initialize: ->
       @config = arguments[0].config
+      @initTracking('ZoomableSunburst')
       @$vis_elem = $(@el).find('.BCK-sunburst-container')
       @setUpResponsiveRender()
       @model.on 'change', @render, @
