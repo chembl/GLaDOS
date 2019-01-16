@@ -233,6 +233,11 @@ common_urls = [
   url(r'^elasticsearch_cache', views.elasticsearch_cache, name='elasticsearch_cache'),
 
   # --------------------------------------------------------------------------------------------------------------------
+  # Tracking cache
+  # --------------------------------------------------------------------------------------------------------------------
+  url(r'^register_usage', views.register_usage, name='register_usage'),
+
+  # --------------------------------------------------------------------------------------------------------------------
   # Unichem
   # --------------------------------------------------------------------------------------------------------------------
   url(r'^unichem_sss', DirectTemplateView.as_view(template_name="glados/Unichem/substructureSimilaritySearch.html"), name='unichem_sss'),

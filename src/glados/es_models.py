@@ -38,12 +38,23 @@ class ESDownloadRecordIndex(DocType):
     run_env_type = Keyword()
     desired_format = Keyword()
     total_items = Integer()
-    # Do not use elasticsearch_dsl Date type, it does not serializes correctly
+    # Do not use elasticsearch_dsl Date type, it does not serialize correctly
     request_date = Integer()
 
     class Meta:
         index = 'chembl_glados_es_download_record'
         doc_type = 'es_download_record'
+
+
+class ESViewRecordIndex(DocType):
+    view_name = Keyword()
+    run_env_type = Keyword()
+    host = Keyword()
+    request_date = Integer()
+
+    class Meta:
+        index = 'chembl_glados_es_view_record'
+        doc_type = 'es_view_record'
 
 
 class ElasticSearchMultiSearchQuery:

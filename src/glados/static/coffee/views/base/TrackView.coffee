@@ -9,4 +9,9 @@ glados.useNameSpace 'glados.views.base',
 
       return ->
 
-        console.log 'CLICKED: ', viewName
+        paramsDict =
+          view_name: viewName
+
+        registerUsage = glados.doCSRFPost(glados.Settings.REGISTER_USAGE_ENDPOINT, paramsDict)
+        registerUsage.then (data) -> console.debug "usage for #{viewName} registered"
+        registerUsage.fail (data) -> console.debug "usage registration for #{viewName} failed!"
