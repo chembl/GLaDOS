@@ -50,6 +50,7 @@ class TissueReportCardApp extends glados.ReportCardApp
       el: $('#TiBasicInformation')
       section_id: 'BasicInformation'
       section_label: 'Basic Information'
+      entity_name: glados.models.Tissue.prototype.entityName
       report_card_app: @
 
     if GlobalVariables['EMBEDED']
@@ -84,6 +85,7 @@ class TissueReportCardApp extends glados.ReportCardApp
       config: viewConfig
       section_id: 'ActivityCharts'
       section_label: 'Activity Charts'
+      entity_name: glados.models.Tissue.prototype.entityName
       report_card_app: @
 
     associatedAssays.fetch()
@@ -117,6 +119,7 @@ class TissueReportCardApp extends glados.ReportCardApp
       config: viewConfig
       section_id: 'ActivityCharts'
       section_label: 'Activity Charts'
+      entity_name: glados.models.Tissue.prototype.entityName
       report_card_app: @
 
     bioactivities.fetch()
@@ -156,6 +159,7 @@ class TissueReportCardApp extends glados.ReportCardApp
       config: config
       section_id: 'CompoundSummaries'
       section_label: 'Compound Summaries'
+      entity_name: glados.models.Tissue.prototype.entityName
       report_card_app: @
 
 

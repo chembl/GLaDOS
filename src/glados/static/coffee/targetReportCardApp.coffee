@@ -61,6 +61,7 @@ class TargetReportCardApp extends glados.ReportCardApp
       el: $('#TNameClassificationCard')
       section_id: 'TargetNameAndClassification'
       section_label: 'Name And Classification'
+      entity_name: Target.prototype.entityName
       report_card_app: @
 
     if GlobalVariables['EMBEDED']
@@ -82,6 +83,7 @@ class TargetReportCardApp extends glados.ReportCardApp
       resource_type: gettext('glados_entities_target_name')
       section_id: 'TargetComponents'
       section_label: 'Components'
+      entity_name: Target.prototype.entityName
       config: viewConfig
       report_card_app: @
 
@@ -103,6 +105,7 @@ class TargetReportCardApp extends glados.ReportCardApp
       resource_type: gettext('glados_entities_target_name')
       section_id: 'TargetRelations'
       section_label: 'Relations'
+      entity_name: Target.prototype.entityName
       config: viewConfig
       report_card_app: @
 
@@ -128,6 +131,7 @@ class TargetReportCardApp extends glados.ReportCardApp
       resource_type: gettext('glados_entities_target_name')
       section_id: 'ApprovedDrugsAndClinicalCandidates'
       section_label: 'Drugs And ClinicalCandidates'
+      entity_name: Target.prototype.entityName
       config: viewConfig
       report_card_app: @
 
@@ -147,6 +151,7 @@ class TargetReportCardApp extends glados.ReportCardApp
       config: viewConfig
       section_id: 'ActivityCharts'
       section_label: 'Activity Charts'
+      entity_name: Target.prototype.entityName
       report_card_app: @
 
   @initAllActivityChartsWhenEmbedded = ->
@@ -184,6 +189,7 @@ class TargetReportCardApp extends glados.ReportCardApp
       config: viewConfig
       section_id: 'ActivityCharts'
       section_label: 'Activity Charts'
+      entity_name: Target.prototype.entityName
       report_card_app: @
 
     bioactivities.fetch()
@@ -217,6 +223,7 @@ class TargetReportCardApp extends glados.ReportCardApp
       config: viewConfig
       section_id: 'ActivityCharts'
       section_label: 'Activity Charts'
+      entity_name: Target.prototype.entityName
       report_card_app: @
 
     associatedAssays.fetch()
@@ -234,6 +241,7 @@ class TargetReportCardApp extends glados.ReportCardApp
       target_chembl_id: targetChemblID
       section_id: 'TargetLigandEfficiencies'
       section_label: 'Ligand Efficiencies'
+      entity_name: Target.prototype.entityName
       report_card_app: @
 
   @initAssociatedCompounds = ->
@@ -272,6 +280,7 @@ class TargetReportCardApp extends glados.ReportCardApp
       config: config
       section_id: 'TargetAssociatedCompoundProperties'
       section_label: 'Associated Compounds'
+      entity_name: Target.prototype.entityName
       report_card_app: @
 
     associatedCompounds.fetch()
@@ -293,6 +302,7 @@ class TargetReportCardApp extends glados.ReportCardApp
       resource_type: gettext('glados_entities_target_name')
       section_id: 'TargetCrossReferencesGene'
       section_label: 'Gene Cross References'
+      entity_name: Target.prototype.entityName
       report_card_app: @
       config:
         refs_config: refsConfig
@@ -318,6 +328,7 @@ class TargetReportCardApp extends glados.ReportCardApp
       resource_type: gettext('glados_entities_target_name')
       section_id: 'TargetCrossReferencesProtein'
       section_label: 'Protein Cross References'
+      entity_name: Target.prototype.entityName
       report_card_app: @
       config:
         refs_config: refsConfig
@@ -342,6 +353,7 @@ class TargetReportCardApp extends glados.ReportCardApp
       resource_type: gettext('glados_entities_target_name')
       section_id: 'TargetCrossReferencesDomain'
       section_label: 'Domain Cross References'
+      entity_name: Target.prototype.entityName
       report_card_app: @
       config:
         refs_config: refsConfig
@@ -366,6 +378,7 @@ class TargetReportCardApp extends glados.ReportCardApp
       resource_type: gettext('glados_entities_target_name')
       section_id: 'TargetCrossReferencesStructure'
       section_label: 'Structure Cross References'
+      entity_name: Target.prototype.entityName
       report_card_app: @
       config:
         refs_config: refsConfig

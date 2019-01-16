@@ -36,6 +36,7 @@ class AssayReportCardApp extends glados.ReportCardApp
       el: $('#ABasicInformation')
       section_id: 'BasicInformation'
       section_label: 'Basic Information'
+      entity_name: Assay.prototype.entityName
       report_card_app: @
 
     if GlobalVariables['EMBEDED']
@@ -51,6 +52,7 @@ class AssayReportCardApp extends glados.ReportCardApp
       el: $('#ACurationSummaryCard')
       section_id: 'CurationSummary'
       section_label: 'Curation Summary'
+      entity_name: Assay.prototype.entityName
       report_card_app: @
 
     target.fetchFromAssayChemblID();
@@ -84,6 +86,7 @@ class AssayReportCardApp extends glados.ReportCardApp
       config: viewConfig
       section_id: 'ActivityCharts'
       section_label: 'Activity Charts'
+      entity_name: Assay.prototype.entityName
       report_card_app: @
 
     bioactivities.fetch()
@@ -123,6 +126,7 @@ class AssayReportCardApp extends glados.ReportCardApp
       config: config
       section_id: 'CompoundSummaries'
       section_label: 'Compound Summary'
+      entity_name: Assay.prototype.entityName
       report_card_app: @
 
     associatedCompounds.fetch()
