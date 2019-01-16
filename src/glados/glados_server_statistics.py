@@ -101,7 +101,11 @@ def record_view_usage(view_name):
         view_record = ESViewRecord(
             view_name=view_name,
         )
+        print('-------------------------------------------------')
+        print('server statistics')
         print('record_view_usage: ', view_name)
+        print('-------------------------------------------------')
+
     except:
         traceback.print_exc()
         print('Error saving view record in elastic!')

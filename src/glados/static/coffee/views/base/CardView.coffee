@@ -1,6 +1,6 @@
 # Base view for most of the cards in the page
 # make sure the handlebars templates are loaded!
-CardView = Backbone.View.extend
+CardView = Backbone.View.extend(glados.views.base.TrackView).extend
 
   initialize: (originalArguments) ->
     @config ?= {}
@@ -10,6 +10,14 @@ CardView = Backbone.View.extend
       @sectionLabel = originalArguments[0].section_label
       @reportCardApp = originalArguments[0].report_card_app
       @reportCardApp.registerSection(@sectionID, @sectionLabel)
+
+    if @config.view_name?
+      viewName = @config.view_name
+    else
+      @entityName = originalArguments[0].entity_name
+      viewName =  "#{@entityName}-#{@sectionID}"
+      @initTracking(viewName)
+      console.log 'viewName: ', viewName
 
   showSection: -> @reportCardApp.showSection(@sectionID) unless GlobalVariables['EMBEDED']
   hideSection: -> @reportCardApp.hideSection(@sectionID) unless GlobalVariables['EMBEDED']

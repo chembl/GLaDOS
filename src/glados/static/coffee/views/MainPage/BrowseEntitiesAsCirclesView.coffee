@@ -1,7 +1,10 @@
 glados.useNameSpace 'glados.views.MainPage',
-  BrowseEntitiesAsCirclesView: Backbone.View.extend(ResponsiviseViewExt).extend
+  BrowseEntitiesAsCirclesView: Backbone.View\
+  .extend(ResponsiviseViewExt)\
+  .extend(glados.views.base.TrackView).extend
 
     initialize: ->
+      @initTracking('BrowseEntitiesAsCircles')
       @$vis_elem = $(@el).find('.BCK-circles-Container')
       @setUpResponsiveRender()
       @links =

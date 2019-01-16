@@ -73,6 +73,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       el: $('#CNCCard')
       section_id: 'CompoundNameAndClassification'
       section_label: 'Name And Classification'
+      entity_name: Compound.prototype.entityName
       report_card_app: @
 
     new CompoundImageView
@@ -93,6 +94,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       el: $('#CompRepsCard')
       section_id: 'CompoundRepresentations'
       section_label: 'Representations'
+      entity_name: Compound.prototype.entityName
       report_card_app: @
 
     if GlobalVariables['EMBEDED']
@@ -129,6 +131,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       config: viewConfig
       section_id: 'CompoundSources'
       section_label: 'Sources'
+      entity_name: Compound.prototype.entityName
       report_card_app: @
 
     if GlobalVariables['EMBEDED']
@@ -143,6 +146,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       el: $('#CalculatedParentPropertiesCard')
       section_id: 'CalculatedCompoundParentProperties'
       section_label: 'Calculated Properties'
+      entity_name: Compound.prototype.entityName
       report_card_app: @
 
     if GlobalVariables['EMBEDED']
@@ -167,6 +171,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       resource_type: gettext('glados_entities_compound_name')
       section_id: 'MechanismOfAction'
       section_label: 'Mechanism Of Action'
+      entity_name: Compound.prototype.entityName
       config: viewConfig
       report_card_app: @
 
@@ -202,6 +207,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       resource_type: gettext('glados_entities_compound_name')
       section_id: 'Indications'
       section_label: 'Indications'
+      entity_name: Compound.prototype.entityName
       config: viewConfig
       report_card_app: @
 
@@ -217,6 +223,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       el: $('#MoleculeFeaturesCard')
       section_id: 'MoleculeFeatures'
       section_label: 'Molecule Features'
+      entity_name: Compound.prototype.entityName
       report_card_app: @
 
     if GlobalVariables['EMBEDED']
@@ -238,6 +245,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       config: viewConfig
       section_id: 'WithdrawnInfo'
       section_label: 'Withdrawal Information'
+      entity_name: Compound.prototype.entityName
       report_card_app: @
 
     if GlobalVariables['EMBEDED']
@@ -259,6 +267,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       config: viewConfig
       section_id: 'ClinicalData'
       section_label: 'Clinical Data'
+      entity_name: Compound.prototype.entityName
       report_card_app: @
 
     if GlobalVariables['EMBEDED']
@@ -280,6 +289,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       resource_type: gettext('glados_entities_compound_name')
       section_id: 'StructuralAlerts'
       section_label: 'Structural Alerts'
+      entity_name: Compound.prototype.entityName
       config: viewConfig
       report_card_app: @
 
@@ -315,6 +325,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
         resource_type: gettext('glados_entities_compound_name')
         section_id: 'AlternateFormsOfCompoundInChEMBL'
         section_label: 'Alternative Forms'
+        entity_name: Compound.prototype.entityName
         config: viewConfig
         report_card_app: @
 
@@ -339,6 +350,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       config: viewConfig
       section_id: 'ActivityCharts'
       section_label: 'Activity Charts'
+      entity_name: Compound.prototype.entityName
       report_card_app: @
 
   @initAllActivityChartsWhenEmbedded = ->
@@ -359,6 +371,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       config: viewConfig
       section_id: 'ActivityCharts'
       section_label: 'Activity Charts'
+      entity_name: Compound.prototype.entityName
       report_card_app: @
 
     if GlobalVariables['EMBEDED']
@@ -412,6 +425,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       compound_chembl_id: chemblID
       section_id: 'PapersAboutCompound'
       section_label: 'Literature'
+      entity_name: Compound.prototype.entityName
       report_card_app: @
 
     allDocumentsByYear.fetch()
@@ -428,6 +442,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       config: viewConfig
       section_id: 'ActivityCharts'
       section_label: 'Activity Charts'
+      entity_name: Compound.prototype.entityName
       report_card_app: @
 
     if GlobalVariables['EMBEDED']
@@ -444,6 +459,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       config: viewConfig
       section_id: 'ActivityCharts'
       section_label: 'Activity Charts'
+      entity_name: Compound.prototype.entityName
       report_card_app: @
 
     if GlobalVariables['EMBEDED']
@@ -458,6 +474,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       el: $('#CTargetPredictionsCard')
       section_id: 'TargetPredictions'
       section_label: 'Target Predictions'
+      entity_name: Compound.prototype.entityName
       report_card_app: @
       embed_section_name: 'target_predictions'
       embed_identifier: glados.Utils.URLS.getCurrentModelChemblID()
@@ -479,6 +496,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       resource_type: gettext('glados_entities_compound_name')
       section_id: 'CompoundCrossReferences'
       section_label: 'Cross References'
+      entity_name: Compound.prototype.entityName
       report_card_app: @
       config:
         refs_config: refsConfig
@@ -500,6 +518,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       resource_type: gettext('glados_entities_compound_name')
       section_id: 'UniChemCrossReferences'
       section_label: 'UniChem Cross References'
+      entity_name: Compound.prototype.entityName
       report_card_app: @
       config:
         refs_config: refsConfig
@@ -516,6 +535,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       el: $('#CUnichemConnectivityMatchesCard')
       section_id: 'UniChemConnectivityMatches'
       section_label: 'UniChem Connectivity Layer Cross References'
+      entity_name: Compound.prototype.entityName
       report_card_app: @
       embed_section_name: 'unichem_connectivity_matches'
       embed_identifier: glados.Utils.URLS.getCurrentModelChemblID()
@@ -555,6 +575,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       resource_type: gettext('glados_entities_compound_name')
       section_id: 'SimilarCompounds'
       section_label: 'Similar Compounds'
+      entity_name: Compound.prototype.entityName
       config: viewConfig
       report_card_app: @
 
@@ -583,6 +604,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       molecule_chembl_id: glados.Utils.URLS.getCurrentModelChemblID()
       section_id: 'Metabolism'
       section_label: 'Metabolism'
+      entity_name: Compound.prototype.entityName
       report_card_app: @
 
     compoundMetabolism.fetch()
@@ -625,6 +647,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       config: viewConfig
       section_id: 'CompoundHELMNotation'
       section_label: 'HELM Notation'
+      entity_name: Compound.prototype.entityName
       report_card_app: @
 
     if GlobalVariables['EMBEDED']
@@ -673,6 +696,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       config: viewConfig
       section_id: 'CompoundBIOLSeq'
       section_label: 'Biocomponents'
+      entity_name: Compound.prototype.entityName
       report_card_app: @
 
     if GlobalVariables['EMBEDED']
