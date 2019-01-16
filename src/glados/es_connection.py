@@ -61,6 +61,24 @@ REQUIRED_INDEXES = [
         }
     },
     {
+        'idx_name': 'chembl_glados_es_view_record',
+        'shards': 7,
+        'replicas': 1,
+        'mappings': {
+            'es_view_record': {
+                'properties': {
+                    'view_name': KEYWORD_TYPE,
+                    'run_env_type': KEYWORD_TYPE,
+                    'host': KEYWORD_TYPE,
+                    'request_date': {
+                        'type':   'date',
+                        'format': 'yyyy-MM-dd HH:mm:ss||epoch_millis'
+                    }
+                }
+            }
+        }
+    },
+    {
         'idx_name': 'chembl_glados_tiny_url',
         'shards': 7,
         'replicas': 1

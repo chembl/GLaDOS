@@ -16,6 +16,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     @showResponsiveViewPreloader()
     @setUpResponsiveRender()
     @model.on 'change', @render, @
+    @clickTracker = glados.views.base.TrackView.generateClickTracker('Visualisation-TargetBrowserAsCircles')
 
   getBucketData: ->
     receivedBuckets = @model.get 'bucket_data'
@@ -129,8 +130,9 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
         return
 
       if thisView.focusNode != d
-
         thisView.focusTo(thisView.currentHover)
+
+      thisView.clickTracker()
 
     # -----------------------------------------
     # Node hover handler function
@@ -330,7 +332,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
   fillBrowseButtonTemplate: (nodeName, nodeLink) ->
 
     $buttonContainer = @config.browse_button_container
-    console.log 'fillBrowseButtonTemplate: ', nodeName
 
     if nodeName == 'root'
       glados.Utils.fillContentForElement $buttonContainer,

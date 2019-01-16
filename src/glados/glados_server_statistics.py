@@ -105,7 +105,7 @@ def record_view_usage(view_name):
         print('server statistics')
         print('record_view_usage: ', view_name)
         print('-------------------------------------------------')
-
+        view_record.indexing()
     except:
         traceback.print_exc()
         print('Error saving view record in elastic!')

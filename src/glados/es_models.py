@@ -36,6 +36,7 @@ class ESDownloadRecordIndex(DocType):
     es_index = Keyword()
     es_query = Keyword()
     run_env_type = Keyword()
+    host = Keyword()
     desired_format = Keyword()
     total_items = Integer()
     # Do not use elasticsearch_dsl Date type, it does not serialize correctly
