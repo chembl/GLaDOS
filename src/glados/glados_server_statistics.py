@@ -105,5 +105,3 @@ def record_view_usage(view_name):
     except:
         traceback.print_exc()
         print('Error saving view record in elastic!')
-
-    pass
