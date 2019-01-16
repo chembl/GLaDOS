@@ -3,18 +3,19 @@ glados.useNameSpace 'glados.views.MainPage',
 
     initialize: ->
 
+      @views = {}
       @carouselInitialised = false
-      @setUpResponsiveRender()
+      @setUpResponsiveRender(emptyBeforeRender=false)
       @render()
+
+    hidePreloader: ->
+    showPreloader: ->
 
     render: ->
 
       if glados.getScreenType() != glados.Settings.SMALL_SCREEN
-
         if not @carouselInitialised
-
           @initCarousel()
-          @carouselInitialised = true
 
     initCarousel: ->
 
@@ -51,6 +52,7 @@ glados.useNameSpace 'glados.views.MainPage',
       thisView = @
       $carouselContainer.on 'setPosition', (event, slick) -> thisView.initSlide(slick.currentSlide)
       @initSlide(initialSlide)
+      @carouselInitialised = true
 
     initSlide: (slideNumber) ->
 
@@ -59,7 +61,7 @@ glados.useNameSpace 'glados.views.MainPage',
 
       wasInitialised = $vizContainer.attr('data-initialised')
 
-      if wasInitialised != 'yes'
+      if wasInitialised != 'yes' or @IS_RESPONSIVE_RENDER
 
         visualisationConfig = glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_CONFIG[slideNumber]
 
@@ -86,9 +88,9 @@ glados.useNameSpace 'glados.views.MainPage',
           if visualisationConfig.uses_browse_button_dynamically
             $browseButtonContainer =
               $(thisView.el).find(".BCK-browse-button[data-viz-item-id='Visualisation#{slideNumber}']")
-            initFunction($browseButtonContainer)
+            thisView.views[slideNumber] = initFunction($browseButtonContainer)
           else
-            initFunction()
+            thisView.views[slideNumber] = initFunction()
 
         $vizContainer.attr('data-initialised', 'yes')
 

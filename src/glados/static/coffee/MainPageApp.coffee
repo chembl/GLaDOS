@@ -24,15 +24,16 @@ class MainPageApp
       browse_button: true
       browse_button_container: $browseButtonContainer
 
-    new glados.views.MainPage.ZoomableSunburstView
+    view = new glados.views.MainPage.ZoomableSunburstView
       el: $('#BCK-zoomable-sunburst')
       model: targetHierarchyAgg
       config: config
 
     targetHierarchyAgg.fetch()
+    return view
 
   @initBrowseEntities = ->
-    new glados.views.MainPage.BrowseEntitiesAsCirclesView
+    return new glados.views.MainPage.BrowseEntitiesAsCirclesView
       el: $('#BrowseEntitiesAsCircles')
 
   @initMaxPhaseForDisease = ->
@@ -65,13 +66,14 @@ class MainPageApp
         link_text: 'See all drug Compounds in ChEMBL'
         url: Drug.getDrugsListURL()
 
-    new glados.views.ReportCards.PieInCardView
+    view = new glados.views.ReportCards.PieInCardView
       el: $('#MaxPhaseForDisease')
       model: maxPhaseForDisease
       config: config
       report_card_app: @
 
     maxPhaseForDisease.fetch()
+    return view
 
   @initFirstApprovalByMoleculeType = ->
     drugsByMoleculeTypeAgg = MainPageApp.getFirstApprovalPercentage()
@@ -109,13 +111,14 @@ class MainPageApp
       is_outside_an_entity_report_card: true
 #      embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#documents_by_year_histogram"
 
-    new glados.views.ReportCards.HistogramInCardView
+    view = new glados.views.ReportCards.HistogramInCardView
       el: $('#BCK-FirstApprovalHistogram')
       model: drugsByMoleculeTypeAgg
       config: config
       report_card_app: @
 
     drugsByMoleculeTypeAgg.fetch()
+    return view
 
   @initDrugsPerUsanYear = ->
 
@@ -154,13 +157,15 @@ class MainPageApp
       disable_embedding: true
 #      embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#documents_by_year_histogram"
 
-    new glados.views.ReportCards.HistogramInCardView
+    view = new glados.views.ReportCards.HistogramInCardView
       el: $('#PapersPerYearHistogram')
       model: allDrugsByYear
       config: config
       report_card_app: @
 
     allDrugsByYear.fetch()
+
+    return view
 
   @initTargetsVisualisation = ($browseButtonContainer) ->
 
@@ -174,13 +179,14 @@ class MainPageApp
       view_config:
         browse_button_container: $browseButtonContainer
 
-    new glados.views.ReportCards.VisualisationInCardView
+    view = new glados.views.ReportCards.VisualisationInCardView
       el: $('#BCK-TargetBrowserAsCircles')
       model: targetHierarchyAgg
       config: config
       report_card_app: @
 
     targetHierarchyAgg.fetch()
+    return view
 
   @initDatabaseSummary = ->
     databaseInfo = new glados.models.MainPage.DatabaseSummaryInfo()
