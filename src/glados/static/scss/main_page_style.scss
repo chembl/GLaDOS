@@ -33,6 +33,12 @@ $full-header-height-large: 180px;
     min-height: 400px;
     max-height: 900px;
 
+     /* -------- MEDIUM SCREEN -------- */
+    @media (min-width: 600px) and (max-width: 992px) {
+      min-height: 900px;
+      max-height: 1800px;
+    }
+
     &.half-height {
       padding: 0 30px 20px 30px;
     }
@@ -204,6 +210,11 @@ $full-header-height-large: 180px;
         display: inline-block;
         max-width: 100%;
         overflow: hidden;
+      }
+    }
+    .caption-text{
+      .description, .instructions{
+        text-align: justify;
       }
     }
 
