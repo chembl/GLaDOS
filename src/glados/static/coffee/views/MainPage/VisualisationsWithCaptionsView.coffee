@@ -115,7 +115,7 @@ glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_CONFIG =
     init_function: MainPageApp.initZoomableSunburst
     link_title: 'Browse all Targets'
     link_url_function: -> Target.getTargetsListURL()
-    vis_title: 'Explore Protein Targets'
+    vis_title: 'Protein Targets in ChEMBL'
     uses_browse_button_dynamically: true
   2:
     description: 'Bar chart showing the current maximum development phase for compounds and the year they were registered with a USAN (United States Adopted Name). Note: only shows compounds with a known USAN registration year.'
@@ -124,7 +124,7 @@ glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_CONFIG =
     init_function: MainPageApp.initDrugsPerUsanYear
     link_title: 'Browse all USAN Drugs'
     link_url_function: -> Drug.getDrugsListURL('_metadata.compound_records.src_id:13')
-    vis_title: 'Explore development phase and USAN Registration'
+    vis_title: 'Development Phase and USAN Registration'
   3:
     description: 'Representation of the taxonomy hierarchy used to classify the ChEMBL organisms'
     instructions: 'Click on a bubble to focus on a taxonomy class and then click on the browse button to start exploring the taxonomy class in more detail.'
@@ -132,7 +132,7 @@ glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_CONFIG =
     init_function: MainPageApp.initTargetsVisualisation
     link_title: 'Browse all Targets'
     link_url_function: -> Target.getTargetsListURL()
-    vis_title: 'Explore Taxonomy Tree'
+    vis_title: 'ChEMBL Taxonomy Tree'
     uses_browse_button_dynamically: true
   4:
     description: 'Distribution of drugs and clinical candidate development phases for the most frequent drug indications.  Note: less frequently occurring indications are not shown.'
@@ -141,7 +141,7 @@ glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_CONFIG =
     init_function: MainPageApp.initMaxPhaseForDisease
     link_title: 'Browse all Drugs'
     link_url_function: -> Drug.getDrugsListURL()
-    vis_title: 'Explore ChEMBL Indications for Drugs'
+    vis_title: 'ChEMBL Indications for Drugs'
   5:
     description: 'Bar chart showing the distribution of types of drugs (small molecules, antibodies etc) and the year they were approved for use.'
     instructions: 'Click on a bar to explore the drugs\' details.'
