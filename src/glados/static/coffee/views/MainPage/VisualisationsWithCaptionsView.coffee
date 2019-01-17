@@ -99,44 +99,50 @@ glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_HB_SOURCES =
 
 glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_CONFIG =
   0:
-    caption: 'Caption For 0'
+    caption: 'Shows a summary of the ChEMBL entities and quantities of data for each of them.' +
+      'Select a bubble to see a table of a specific ChEMBL entity and start exploring the data in more detail.'
     template_id: 'Handlebars-Visualisations-BrowseEntitiesCircles'
     init_function: MainPageApp.initBrowseEntities
     link_title: 'Browse all ChEMBL'
     link_url_function: -> SearchModel.getSearchURL()
     vis_title: 'Explore ChEMBL'
   1:
-    caption: 'Caption For 1'
+    caption: 'Representation of the ChEMBL protein target classification hierarchy.\n' +
+      'Click on a section to see more detail and then select the browse button to start exploring the target family in more detail.'
     template_id: 'Handlebars-Visualisations-ZoomableSunburst'
     init_function: MainPageApp.initZoomableSunburst
     link_title: 'Browse all Targets'
     link_url_function: -> Target.getTargetsListURL()
-    vis_title: 'Protein Target Classification'
+    vis_title: 'Explore Protein Targets'
     uses_browse_button_dynamically: true
   2:
-    caption: 'Caption For 2'
+    caption: 'Figure showing the current maximum development phase for compounds and the year they were registered with a USAN (United States Adopted Name). Note: only shows compounds with a known USAN registration year.\n' +
+      'Click on a bar to see the drugs details.'
     template_id: 'Handlebars-Visualisations-DrugsPerUsanYear'
     init_function: MainPageApp.initDrugsPerUsanYear
     link_title: 'Browse all USAN Drugs'
     link_url_function: -> Drug.getDrugsListURL('_metadata.compound_records.src_id:13')
-    vis_title: 'Drugs by Max Phase and Usan Year'
+    vis_title: 'Explore development phase and USAN Registration'
   3:
-    caption: 'Caption For 3'
+    caption: 'Representation of the taxonomy hierarchy used to classify the ChEMBL organisms.\n' +
+      ' Click on a bubble to focus on a taxonomy class and then click on the browse button to start exploring the taxonomy class in more detail'
     template_id: 'Handlebars-Visualisations-BrowseTargetsAsCircles'
     init_function: MainPageApp.initTargetsVisualisation
     link_title: 'Browse all Targets'
     link_url_function: -> Target.getTargetsListURL()
-    vis_title: 'Organism Taxonomy Classification'
+    vis_title: 'Explore Taxonomy Tree'
     uses_browse_button_dynamically: true
   4:
-    caption: 'Caption For 4'
+    caption: 'Distribution of drugs and clinical candidate development phases for the most frequent drug indications.  Note: less frequently occurring indications are not shown.\n' +
+      'Select a sector of the piechart to see compounds for that indication and development phase'
     template_id: 'Handlebars-Visualisations-MaxPhaseForDiseaseDonut'
     init_function: MainPageApp.initMaxPhaseForDisease
     link_title: 'Browse all Drugs'
     link_url_function: -> Drug.getDrugsListURL()
-    vis_title: 'Drugs By Max Phase and Disease'
+    vis_title: 'Explore ChEMBL Indications for Drugs'
   5:
-    caption: 'Caption For 5'
+    caption: 'Shows the distribution of types of drugs (small molecules, antibodies etc) and the year they were approved for use.\n' +
+      'Select a section to see drug details.'
     template_id: 'Handlebars-Visualisations-DrugFirstApprovalHistogram'
     init_function: MainPageApp.initFirstApprovalByMoleculeType
     link_title: 'Browse all Approved Drugs'
