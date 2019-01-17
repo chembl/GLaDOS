@@ -339,7 +339,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
         link_url: Target.getTargetsListURL()
     else
       glados.Utils.fillContentForElement $buttonContainer,
-        link_title: "Browse all #{nodeName} Targets"
+        link_title: "Browse #{nodeName} Class Targets"
         link_url: nodeLink
 
   handleKeyDown: (event) ->
