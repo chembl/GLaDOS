@@ -211,12 +211,14 @@ if ENABLE_MYSQL_DATABASE:
 
 else:
 
+    print('Using sqlite database: ', os.path.join(GLADOS_ROOT, 'db/db.sqlite3'))
     DATABASES['default'] = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(GLADOS_ROOT, 'db/db.sqlite3')
     }
 
-if RUN_ENV != RunEnvs.TRAVIS:
+ENABLE_UNICHEM_ORACLE_DB = run_config.get('enable_unichem_oracle_db', False)
+if ENABLE_UNICHEM_ORACLE_DB:
 
     DATABASES['oradb'] = {
         'ENGINE': 'django.db.backends.oracle',
