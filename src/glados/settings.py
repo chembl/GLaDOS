@@ -218,6 +218,7 @@ else:
     }
 
 ENABLE_UNICHEM_ORACLE_DB = run_config.get('enable_unichem_oracle_db', False)
+print('ENABLE_UNICHEM_ORACLE_DB: ', ENABLE_UNICHEM_ORACLE_DB)
 if ENABLE_UNICHEM_ORACLE_DB:
 
     DATABASES['oradb'] = {
