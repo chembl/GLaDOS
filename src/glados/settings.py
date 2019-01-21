@@ -185,15 +185,41 @@ TEMPLATES = [
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 # ----------------------------------------------------------------------------------------------------------------------
+DATABASES = {}
 
-DATABASES = {
-  'default': {
-    'ENGINE': 'django.db.backends.sqlite3',
-    'NAME': os.path.join(GLADOS_ROOT, 'db/db.sqlite3')
-  }
-}
+ENABLE_MYSQL_DATABASE = run_config.get('enable_mysql_database', False)
+print('ENABLE_MYSQL_DATABASE: ', ENABLE_MYSQL_DATABASE)
 
-if RUN_ENV != RunEnvs.TRAVIS:
+if ENABLE_MYSQL_DATABASE:
+
+    mysql_config = run_config.get('mysql_config')
+    if mysql_config is None:
+        raise GladosSettingsError("You must provide the mysql configuration")
+    else:
+        DATABASES['default'] = {
+            'ENGINE': 'mysql.connector.django',
+            'NAME': mysql_config.get('schema_name'),
+            'HOST': mysql_config.get('host'),
+            'PORT': mysql_config.get('port'),
+            'USER': mysql_config.get('user'),
+            'PASSWORD': mysql_config.get('password'),
+            'OPTIONS': {
+                'autocommit': True,
+            }
+
+        }
+
+else:
+
+    print('Using sqlite database: ', os.path.join(GLADOS_ROOT, 'db/db.sqlite3'))
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(GLADOS_ROOT, 'db/db.sqlite3')
+    }
+
+ENABLE_UNICHEM_ORACLE_DB = run_config.get('enable_unichem_oracle_db', False)
+print('ENABLE_UNICHEM_ORACLE_DB: ', ENABLE_UNICHEM_ORACLE_DB)
+if ENABLE_UNICHEM_ORACLE_DB:
 
     DATABASES['oradb'] = {
         'ENGINE': 'django.db.backends.oracle',

@@ -96,7 +96,7 @@ class ESDownloadRecord(models.Model):
 
 # This is to keep track of the status of a download job
 class DownloadJob(models.Model):
-    job_id = models.TextField(primary_key=True)
+    job_id = models.TextField(max_length=250)
     progress = models.PositiveSmallIntegerField(default=0)
     total_items = models.PositiveIntegerField(default=0)
     raw_columns_to_download = models.TextField(null=True)
