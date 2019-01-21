@@ -4,7 +4,6 @@ from django_rq import job
 import hashlib
 import base64
 from glados.models import DownloadJob
-from elasticsearch_dsl import Search
 from elasticsearch.helpers import scan
 from elasticsearch_dsl.connections import connections
 import json
@@ -13,6 +12,9 @@ from . import glados_server_statistics
 import gzip
 import os
 from django.conf import settings
+from glados.settings import RunEnvs
+import re
+import subprocess
 
 class DownloadError(Exception):
     """Base class for exceptions in this file."""
@@ -212,6 +214,8 @@ def generate_download_file(download_id):
         elif desired_format == 'sdf':
             file_size = write_sdf_file(scanner, download_job)
 
+        if settings.RUN_ENV == RunEnvs.PROD:
+            rsync_to_the_other_nfs(download_job)
         save_download_job_state(download_job, DownloadJob.FINISHED)
 
         # now save some statistics
@@ -232,6 +236,23 @@ def generate_download_file(download_id):
         save_download_job_state(download_job, DownloadJob.ERROR)
         traceback.print_exc()
         return
+
+
+def rsync_to_the_other_nfs(download_job):
+
+    hostname = 'wp-p2m-54'
+    if bool(re.match("wp-p1m.*", hostname)):
+        rsync_destination_server = 'wp-p2m-54'
+    else:
+        rsync_destination_server = 'wp-p1m-54'
+
+    file_path = get_file_path(download_job.job_id)
+    rsync_destination = "{server}:{path}".format(server=rsync_destination_server, path=file_path)
+    rsync_command = "rsync -v {source} {destination}".format(source=file_path, destination=rsync_destination)
+    rsync_command_parts = rsync_command.split(' ')
+
+    print('rsync_command_parts: ', rsync_command_parts)
+    subprocess.check_call(rsync_command_parts)
 
 
 def get_download_id(index_name, raw_query, desired_format):
