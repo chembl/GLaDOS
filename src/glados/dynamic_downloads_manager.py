@@ -265,20 +265,28 @@ def generate_download(index_name, raw_query, desired_format, raw_columns_to_down
             download_job.save()
             generate_download_file.delay(download_id)
         elif download_job.status == DownloadJob.FINISHED:
-            # if not, register the statistics
-            file_path = get_file_path(download_id)
-            file_size = os.path.getsize(file_path)
 
-            glados_server_statistics.record_download(
-                download_id=download_id,
-                time_taken=0,
-                is_new=False,
-                file_size=file_size,
-                es_index=index_name,
-                es_query=raw_query,
-                desired_format=desired_format,
-                total_items=download_job.total_items
-            )
+            # if not, register the statistics
+            try:
+                file_path = get_file_path(download_id)
+                file_size = os.path.getsize(file_path)
+
+                glados_server_statistics.record_download(
+                    download_id=download_id,
+                    time_taken=0,
+                    is_new=False,
+                    file_size=file_size,
+                    es_index=index_name,
+                    es_query=raw_query,
+                    desired_format=desired_format,
+                    total_items=download_job.total_items
+                )
+            except FileNotFoundError:
+                # if for some reason the file is not found. requeue que job
+                download_job.progress = 0
+                download_job.status = DownloadJob.QUEUED
+                download_job.save()
+                generate_download_file.delay(download_id)
 
     except DownloadJob.DoesNotExist:
         download_job = DownloadJob(
