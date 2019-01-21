@@ -233,15 +233,24 @@ if ENABLE_UNICHEM_ORACLE_DB:
 # Django RQ
 # https://github.com/rq/django-rq
 # ----------------------------------------------------------------------------------------------------------------------
-RQ_QUEUES = {
-    'default': {
-        'HOST': 'localhost',
-        'PORT': 6379,
-        'DB': 0,
-        'DEFAULT_TIMEOUT': 86400,
-    },
-}
+CUSTOM_RQ_QUEUES = run_config.get('custom_rq_queues_config')
 
+if CUSTOM_RQ_QUEUES is not None:
+
+    RQ_QUEUES = CUSTOM_RQ_QUEUES
+
+else:
+
+    RQ_QUEUES = {
+        'default': {
+            'HOST': 'localhost',
+            'PORT': 6379,
+            'DB': 0,
+            'DEFAULT_TIMEOUT': 86400,
+        },
+    }
+
+print('RQ_QUEUES: ', RQ_QUEUES)
 # ----------------------------------------------------------------------------------------------------------------------
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
