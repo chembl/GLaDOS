@@ -126,7 +126,7 @@ glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_CONFIG =
     link_url_function: -> Drug.getDrugsListURL('_metadata.compound_records.src_id:13')
     vis_title: 'Development Phase and USAN Registration'
   3:
-    description: 'Representation of the taxonomy hierarchy used to classify the ChEMBL organisms'
+    description: 'Representation of the taxonomy hierarchy used to classify the ChEMBL organisms.'
     instructions: 'Click on a bubble to focus on a taxonomy class and then click on the browse button to start exploring the taxonomy class in more detail.'
     template_id: 'Handlebars-Visualisations-BrowseTargetsAsCircles'
     init_function: MainPageApp.initTargetsVisualisation
