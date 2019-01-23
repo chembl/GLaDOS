@@ -12,6 +12,10 @@ class MainPageApp
       el: $('.BCK-visualisations-with-captions')
 
     @initAssociatedResources()
+    @initDatabaseSummary()
+    @initTweets()
+    @initBlogEntries()
+    @initGithubDetails()
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Init functions

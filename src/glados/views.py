@@ -261,30 +261,36 @@ def get_entities_records(request):
 
 def get_github_details(request):
 
-    last_commit = requests.get('https://api.github.com/repos/chembl/GLaDOS/commits/master').json()
-
     cache_key = 'github_details'
     cache_time = 1800
     cache_response = cache.get(cache_key)
 
-    now = datetime.datetime.now()
-    date = last_commit['commit']['author']['date'][:-1]
-    date = datetime.datetime.strptime(date, '%Y-%m-%dT%H:%M:%S')
-    time_ago = timeago.format(date, now)
-
-    if cache_response != None:
+    if cache_response is not None:
         print('github details are in cache')
+        now = datetime.datetime.now()
+        raw_commit_date = cache_response['raw_commit_date']
+        commit_date = datetime.datetime.strptime(raw_commit_date, '%Y-%m-%dT%H:%M:%S')
+        time_ago = timeago.format(commit_date, now)
         cache_response['time_ago'] = time_ago
         return JsonResponse(cache_response)
 
     print('github details are not in cache')
+    last_commit = requests.get('https://api.github.com/repos/chembl/GLaDOS/commits/master').json()
+
+    now = datetime.datetime.now()
+    raw_commit_date = last_commit['commit']['author']['date'][:-1]
+    commit_date = datetime.datetime.strptime(raw_commit_date, '%Y-%m-%dT%H:%M:%S')
+    time_ago = timeago.format(commit_date, now)
 
     response = {
         'url': last_commit['html_url'],
         'author': last_commit['commit']['author']['name'],
         'time_ago': time_ago,
+        'raw_commit_date': raw_commit_date,
         'message': last_commit['commit']['message']
     }
+
+    print('response: ', response)
 
     cache.set(cache_key, response, cache_time)
 
