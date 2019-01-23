@@ -43,7 +43,7 @@ header .row {
 }
 
 .burger-dropdown {
-  li:hover {
+  .dropdown-item:hover {
     a {
       color: $chembl-teal !important;
     }
@@ -361,12 +361,15 @@ header .row {
     z-index: $z-underlay;
     min-width: 200px;
     position: absolute;
-    margin-top: -46em;
+    transform: translateY(-120%);
+    -webkit-transform: translateY(-120%);
     top: 30px;
     left: 0;
 
-    transition: margin-top 600ms ease-in-out;
-    -webkit-transition: margin-top 700ms ease-in-out;
+    transition: transform 600ms ease-in-out;
+    transition: -webkit-transform 600ms ease-in-out;
+    -webkit-transition: transform 700ms ease-in-out;
+    -webkit-transition: -webkit-transform 700ms ease-in-out;
 
     li.dropdown-item {
       border-bottom: $lighter-teal solid 1px;
@@ -401,19 +404,25 @@ header .row {
       position: fixed;
       left: 0;
       width: 100%;
-      max-height: 100vh;
+      margin-top: 15px;
+      //Reduce the max height a bit less than the 'fitting size' to avoid issues with overflowing the viewport height
+      max-height: calc(100vh - #{$chembl-header-height} - 40px);
       overflow-y: scroll;
       background-color: white;
       box-shadow: 0 1px 4px 0 #e4e4e4;
 
-      transition: margin-top 700ms ease-in-out;
-      -webkit-transition: margin-top 700ms ease-in-out;
 
-      li.dropdown-item {
+      transition: transform 600ms ease-in-out;
+      transition: -webkit-transform 600ms ease-in-out;
+      -webkit-transition: transform 700ms ease-in-out;
+      -webkit-transition: -webkit-transform 700ms ease-in-out;
+
+      .dropdown-item {
         height: 50px;
-        border-bottom-color: #e4e4e4;
+        border-bottom: solid 0.5px #e4e4e4;
 
         a {
+          display: block;
           color: $grey-medium;
           font-size: 0.9em;
           padding: 15px !important;
@@ -431,7 +440,8 @@ header .row {
 .dropdown:hover {
 
   .dropdown-contents.more-section {
-    margin-top: 0;
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
   }
 }
 
@@ -444,7 +454,8 @@ header .row {
 }
 
 .burger-dropdown-contents.active {
-  margin-top: 15px;
+  transform: translateY(0);
+  -webkit-transform: translateY(0);
 }
 
 /* -------- FIX DROPDOWN TOP IN DIFFERENT SIZES  -------- */

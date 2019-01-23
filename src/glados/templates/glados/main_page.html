@@ -23,35 +23,15 @@
 
     <div class="main-page-container">
 
-        <!-------------- ROW for text about chembl + carousel -------------->
+        <!-------------- What is ChEMBL and visualisations SECTION -------------->
         <div class="row container">
 
-            <!-------------- Text about ChEMBL SECTION -------------->
-            <div class="main-page-section col s12 l6 right smaller-on-med">
+            <div class="main-page-section col s12 l12">
 
-                <div class="section-col valign-wrapper">
+                <div class="section-col first-section">
 
                     {% include "glados/MainPageParts/about_chembl.html" %}
-
-                </div>
-
-            </div>
-
-            <div class="col-divider col s12 hide-on-large-only"></div>
-
-            <!-------------- Explore the database SECTION -------------->
-            <div class="col s12 l6 hide-on-large-only explore-database">
-
-                {% include "glados/MainPageParts/explore_the_database.html" %}
-
-            </div>
-
-            <!-------------- Visualisation Carousel SECTION -------------->
-            <div class="main-page-section col s12 l6 smaller-on-small">
-
-                <div class="section-col">
-
-                    {% include "glados/MainPageParts/main_carousel.html" %}
+                    {% include "glados/MainPageParts/main_page_visualisations.html" %}
 
                 </div>
 
@@ -59,7 +39,7 @@
 
         </div>
 
-        <div class="divider"></div>
+
 
         <!-------------- Database Summary SECTION -------------->
         <div class="main-page-section col s12 database-summary fit-height">

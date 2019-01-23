@@ -33,6 +33,12 @@ $full-header-height-large: 180px;
     min-height: 400px;
     max-height: 900px;
 
+     /* -------- MEDIUM SCREEN -------- */
+    @media (min-width: 600px) and (max-width: 992px) {
+      min-height: 900px;
+      max-height: 1800px;
+    }
+
     &.half-height {
       padding: 0 30px 20px 30px;
     }
@@ -114,6 +120,62 @@ $full-header-height-large: 180px;
   }
 }
 
+/* -------- CAROUSEL WITH CAPTIONS WRAPPER -------- */
+.main-page-container {
+
+  .first-section {
+
+    .what-is-chembl{
+      height: 30%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .chembl-text{
+        padding: 0 10%;
+      }
+
+      /* -------- SMALL SCREEN -------- */
+      @media (max-width: 600px) {
+        height: 100%;
+      }
+
+    }
+
+  }
+
+  .visualisations-with-captions-container {
+
+    height: 70%;
+
+    .caption-text{
+      padding: 2%;
+    }
+
+    /* -------- MEDIUM SCREEN -------- */
+    @media (min-width: 600px) and (max-width: 992px) {
+
+      .visualisations, {
+        height: 60%;
+      }
+
+      .captions {
+        height: 40%;
+      }
+
+    }
+
+     /* -------- LARGE SCREEN -------- */
+    @media (min-width: 992px) {
+
+      .visualisations, .captions {
+        height: 100%;
+      }
+
+    }
+
+  }
+}
+
 /* -------- VISUALISATIONS CAROUSEL -------- */
 .main-page-container {
 
@@ -121,36 +183,67 @@ $full-header-height-large: 180px;
     outline: none !important;
   }
 
+  .visualisations{
+    .carousel-wrapper {
+      height: calc(100% - 35px); //50px for slick dots
+    }
+  }
   .carousel-wrapper {
-    height: calc(100% - 40px); //50px for slick dots
 
+    height: 100%;
     .slick-list {
       height: 100%;
     }
 
     .slick-track {
-      height: calc(100% - 30px);
+      height: 100%;
     }
 
-    .btn-container {
+    .caption-buttons{
       display: flex;
       justify-content: center;
-      padding: 0;
-
-      a {
-        border: 1px $grey-dark solid;
-        border-radius: 2px;
-        padding: 2px 10px;
-        &:hover {
-          color: $chembl-teal;
-          border-color: $chembl-teal;
-        }
-      }
-
-      a.no-border {
-        border: none !important;
+      align-items: center;
+      text-align: center;
+      a{
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        display: inline-block;
+        max-width: 100%;
+        overflow: hidden;
       }
     }
+    .caption-text{
+      .description, .instructions{
+        text-align: justify;
+      }
+    }
+
+    /* -------- MEDIUM SCREEN -------- */
+    @media (min-width: 600px) and (max-width: 992px) {
+
+      .caption-text{
+        height: 80%;
+      }
+
+      .caption-buttons {
+        height: 20%;
+      }
+
+    }
+
+     /* -------- LARGE SCREEN -------- */
+    @media (min-width: 992px) {
+
+      .caption-text{
+        height: 90%;
+      }
+
+      .caption-buttons {
+        height: 10%;
+      }
+
+    }
+
   }
 }
 
@@ -622,10 +715,12 @@ $full-header-height-large: 180px;
 
 /* ------------------- MEDIA QUERIES ------------------- */
 
-/* -------- MEDIUM SCREEN -------- */
+
 .main-page-container {
 
+  /* -------- SMALL SCREEN -------- */
   @media (max-width: 600px) {
+
 
     .papers {
       padding: 0;
@@ -690,6 +785,7 @@ $full-header-height-large: 180px;
     }
   }
 
+  /* -------- MEDIUM SCREEN -------- */
   @media (min-width: 600px) {
 
     .db-record-item {
@@ -741,10 +837,6 @@ $full-header-height-large: 180px;
       height: 50vh;
     }
 
-    .chembl-text {
-      padding: 0 10%;
-    }
-
     .explore-database {
       margin-top: 5%;
     }
@@ -761,8 +853,6 @@ $full-header-height-large: 180px;
       }
     }
     .chembl-text {
-      text-align: left;
-      padding-left: 40px;
 
       p {
         font-size: 1.1em;
@@ -771,10 +861,6 @@ $full-header-height-large: 180px;
 
     .btn-container {
       font-size: 1em;
-    }
-
-    .carousel-wrapper {
-      padding-top: 10%;
     }
 
     .papers {

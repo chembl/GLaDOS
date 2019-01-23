@@ -339,10 +339,15 @@ SearchModel.AUTO_SUGGESTION_STATES =
 # ----------------------------------------------------------------------------------------------------------------------
 # Singleton pattern
 # ----------------------------------------------------------------------------------------------------------------------
-
 SearchModel.getInstance = ->
   if not SearchModel.__model_instance
     SearchModel.__model_instance = new SearchModel
   return SearchModel.__model_instance
 
 SearchModel.getTestInstance = -> new SearchModel({test_mode:true})
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Helpers
+# ----------------------------------------------------------------------------------------------------------------------
+SearchModel.getSearchURL = (esEntityKey, searchTerm, currentState, fragmentOnly=false) ->
+  SearchModel.prototype.getSearchURL(esEntityKey, searchTerm, currentState, fragmentOnly=false)

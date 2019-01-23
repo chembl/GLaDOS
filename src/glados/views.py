@@ -446,6 +446,24 @@ def extend_url(request, hash):
     return JsonResponse(resp_data)
 
 # ----------------------------------------------------------------------------------------------------------------------
+# Tracking
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+def register_usage(request):
+
+    if request.method == "POST":
+        try:
+            view_name = request.POST.get('view_name', '')
+            glados_server_statistics.record_view_usage(view_name)
+            return JsonResponse({'success': 'registration successful!'})
+        except Exception as e:
+            print_server_error(e)
+            return HttpResponse('Internal Server Error', status=500)
+    else:
+        return JsonResponse({'error': 'this is only available via POST! You crazy hacker! :P'})
+
+# ----------------------------------------------------------------------------------------------------------------------
 # Report Cards
 # ----------------------------------------------------------------------------------------------------------------------
 def compound_report_card(request, chembl_id):

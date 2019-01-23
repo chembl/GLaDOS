@@ -1,6 +1,7 @@
 # This saves server statisticsic elastic search, like the usage of the elasticsearch cache.
 from glados.models import ESCachedRequest
 from glados.models import ESDownloadRecord
+from glados.models import ESViewRecord
 import json
 import hashlib
 import base64
@@ -93,3 +94,18 @@ def record_download(download_id, time_taken, is_new, file_size, desired_format, 
     except:
         traceback.print_exc()
         print('Error saving download record in elastic!')
+
+def record_view_usage(view_name):
+
+    try:
+        view_record = ESViewRecord(
+            view_name=view_name,
+        )
+        print('-------------------------------------------------')
+        print('server statistics')
+        print('record_view_usage: ', view_name)
+        print('-------------------------------------------------')
+        view_record.indexing()
+    except:
+        traceback.print_exc()
+        print('Error saving view record in elastic!')

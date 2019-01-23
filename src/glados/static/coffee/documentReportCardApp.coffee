@@ -55,6 +55,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
       el: $('#DBasicInformation')
       section_id: 'BasicInformation'
       section_label: 'Basic Information'
+      entity_name: Document.prototype.entityName
       report_card_app: @
 
     if GlobalVariables['EMBEDED']
@@ -79,6 +80,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
       resource_type: gettext('glados_entities_document_name')
       section_id: 'RelatedDocuments'
       section_label: 'Related Documents'
+      entity_name: Document.prototype.entityName
       config: viewConfig
       report_card_app: @
 
@@ -105,6 +107,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
       el: $('#DWordCloudCard')
       section_id: 'WordCloud'
       section_label: 'Word Cloud'
+      entity_name: Document.prototype.entityName
       report_card_app: @
 
     docTerms.fetch()
@@ -139,6 +142,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
       config: viewConfig
       section_id: 'ActivityCharts'
       section_label: 'Activity Charts'
+      entity_name: Document.prototype.entityName
       report_card_app: @
 
     relatedTargets.fetch()
@@ -173,6 +177,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
       config: viewConfig
       section_id: 'ActivityCharts'
       section_label: 'Activity Charts'
+      entity_name: Document.prototype.entityName
       report_card_app: @
 
     relatedAssays.fetch()
@@ -206,6 +211,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
       config: viewConfig
       section_id: 'ActivityCharts'
       section_label: 'Activity Charts'
+      entity_name: Document.prototype.entityName
       report_card_app: @
 
     relatedActivities.fetch()
@@ -245,6 +251,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
       config: config
       section_id: 'CompoundSummaries'
       section_label: 'Compound Summaries'
+      entity_name: Document.prototype.entityName
       report_card_app: @
 
 

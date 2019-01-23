@@ -29,91 +29,98 @@
 
             </a>
 
-            <ul class='dropdown-contents burger-dropdown-contents'>
+            <div class='dropdown-contents burger-dropdown-contents'>
 
-                <li class="dropdown-item">
+                <div class="row">
+                    <div class="col l4 m6 s12 dropdown-item">
 
-                    <a href="{% url 'downloads' %}" target="_blank">Downloads</a>
+                        <a href="{% url 'downloads' %}" target="_blank">Downloads</a>
 
-                </li>
+                    </div>
 
-                <li class="dropdown-item">
+                    <div class="col l4 m6 s12 dropdown-item">
 
-                    <a href="https://www.ebi.ac.uk/chembl/ws" target="_blank"> Web Services </a>
+                        <a href="{% url 'web_services_home' %}" target="_blank">Web Services</a>
 
-                </li>
+                    </div>
 
-                <li class="dropdown-item">
+                    <div class="col l4 m6 s12 dropdown-item">
 
-                    <a href="https://www.ebi.ac.uk/unichem" target="_blank"> UniChem </a>
+                        <a href="{% url 'unichem_home' %}" target="_blank">UniChem</a>
 
-                </li>
+                    </div>
 
-                <li class="dropdown-item">
+                    <div class="col l4 m6 s12 dropdown-item">
 
-                    <a href="{% url 'chembl-ntd' %}" target="_blank"> ChEMBL-NTD </a>
+                        <a href="{% url 'chembl-ntd' %}" target="_blank">ChEMBL-NTD</a>
 
-                </li>
+                    </div>
 
-                <li class="dropdown-item">
-                    <a href="https://www.surechembl.org" target="_blank"> SureChEMBL </a>
-                </li>
+                    <div class="col l4 m6 s12 dropdown-item">
 
-                <li class="dropdown-item">
+                        <a href="{% url 'surechembl' %}" target="_blank">SureChEMBL</a>
 
-                    <a href="https://www.ebi.ac.uk/rdf" target="_blank">EBI RDF Platform</a>
+                    </div>
 
-                </li>
+                    <div class="col l4 m6 s12 dropdown-item">
 
-                <li class="dropdown-item">
+                        <a href="{% url 'chembl_rdf' %}" target="_blank">EBI RDF Platform</a>
 
-                    <a href="{% url 'db_schema' %}" target="_blank">Schema Diagram</a>
+                    </div>
 
-                </li>
+                    <div class="col l4 m6 s12 dropdown-item">
 
-                <li class="dropdown-item">
+                        <a href="{% url 'db_schema' %}" target="_blank">Schema Diagram</a>
 
-                    <a href="{% url 'ws_schema' %}" target="_blank">WS Diagram</a>
+                    </div>
 
-                </li>
+                    <div class="col l4 m6 s12 dropdown-item">
 
-                <li class="dropdown-item">
+                        <a href="{% url 'ws_schema' %}" target="_blank">WS Diagram</a>
 
-                    <a href="{% url 'acks' %}" target="_blank">Acknowledgements</a>
+                    </div>
 
-                </li>
+                    <div class="col l4 m6 s12 dropdown-item">
 
-                <li class="dropdown-item">
+                        <a href="{% url 'acks' %}" target="_blank">Acknowledgements</a>
 
-                    <a href="{% url 'chembl-ntd' %}" target="_blank">Statistics</a>
+                    </div>
 
-                </li>
+                    <div class="col l4 m6 s12 dropdown-item">
 
-                <li class="dropdown-item">
+                        <a href="{% url 'status' %}" target="_blank">Status</a>
 
-                    <a href="{% url 'faqs' %}" target="_blank">FAQ</a>
+                    </div>
 
-                </li>
+                    <div class="col l4 m6 s12 dropdown-item">
 
-                <li class="dropdown-item">
+                        <a href="{% url 'faqs' %}" target="_blank">FAQ</a>
 
-                    <a href="https://chembl.blogspot.co.uk" target="_blank">Blog</a>
+                    </div>
 
-                </li>
+                    <div class="col l4 m6 s12 dropdown-item">
 
-                 <li class="dropdown-item">
+                        <a href="{% url 'chembl_blog' %}" target="_blank">Blog</a>
 
-                    <a href="{% url 'contact_us' %}" target="_blank">Contact Us</a>
+                    </div>
 
-                </li>
+                    <div class="col l4 m6 s12 dropdown-item">
 
-                <li class="dropdown-item">
+                        <a href="{% url 'contact_us' %}" target="_blank">Contact Us</a>
 
-                    <a href="{% url 'about_us' %}" target="_blank">About</a>
+                    </div>
 
-                </li>
+                    <div class="col l4 m6 s12 dropdown-item">
 
-            </ul>
+                        <a href="{% url 'about_us' %}" target="_blank">About</a>
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
 
         </div>
 
@@ -181,7 +188,7 @@
 
                     <li class="dropdown-item">
 
-                        <a href="http://chembl.github.io/status" target="_blank">Statistics</a>
+                        <a href="{% url 'status' %}" target="_blank">Status</a>
 
                     </li>
 

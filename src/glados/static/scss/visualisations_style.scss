@@ -582,7 +582,9 @@
   box-sizing: content-box;
   padding-top: 50px;
   padding-bottom: 70px;
-
+  .vis-container{
+    height: 100%;
+  }
 }
 
 .text-section {

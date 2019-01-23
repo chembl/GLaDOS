@@ -1,0 +1,53 @@
+{% verbatim %}
+
+<script id="Handlebars-Visualisations-BrowseEntitiesCircles" type="text/x-handlebars-template">
+
+    {% endverbatim %}
+    {% with is_dynamic=True %}
+        {% include "glados/MainPageParts/Visualizations/browse_entities.html" %}
+    {% endwith %}
+    {% verbatim %}
+</script>
+
+<script id="Handlebars-Visualisations-ZoomableSunburst" type="text/x-handlebars-template">
+    {% endverbatim %}
+    {% with is_dynamic=True %}
+        {% include "glados/MainPageParts/Visualizations/zoomable_sunburst.html" %}
+    {% endwith %}
+    {% verbatim %}
+</script>
+
+<script id="Handlebars-Visualisations-DrugsPerUsanYear" type="text/x-handlebars-template">
+    {% endverbatim %}
+    {% with is_dynamic=True %}
+        {% include "glados/MainPageParts/Visualizations/PapersPerYearHistogram.html" %}
+    {% endwith %}
+    {% verbatim %}
+</script>
+
+<script id="Handlebars-Visualisations-BrowseTargetsAsCircles" type="text/x-handlebars-template">
+    {% endverbatim %}
+     {% with is_dynamic=True %}
+            {% include "glados/MainPageParts/TargetBrowserParts/browse_as_circles.html" %}
+        {% endwith %}
+    {% verbatim %}
+</script>
+
+<script id="Handlebars-Visualisations-MaxPhaseForDiseaseDonut" type="text/x-handlebars-template">
+    {% endverbatim %}
+    {% with is_dynamic=True %}
+            {% include "glados/MainPageParts/Visualizations/MaxPhaseForDiseaseDonut.html" %}
+    {% endwith %}
+    {% verbatim %}
+</script>
+
+<script id="Handlebars-Visualisations-DrugFirstApprovalHistogram" type="text/x-handlebars-template">
+    {% endverbatim %}
+    {% with is_dynamic=True %}
+            {% include "glados/MainPageParts/Visualizations/first_approval_histogram.html" %}
+    {% endwith %}
+    {% verbatim %}
+</script>
+
+{% endverbatim %}
+

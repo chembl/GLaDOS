@@ -1,4 +1,84 @@
 {% verbatim %}
+
+    <script id="Handlebars-FullPage-visContainer" type="text/x-handlebars-template">
+
+        {{#each visualisations_ids}}
+            <div class="container">
+
+                <div class="vis-section" data-viz-item-id="Visualisation{{this.id}}">
+                    <h3 class="header-dark-grey">  {{ vis_title }} </h3>
+
+                    <div class="vis-container BCK-vis-container">
+                    </div>
+                </div>
+
+                <div class="BCK-browse-button btn-container center"
+                     data-hb-template="Handlebars-circles-browser-button"
+                     data-viz-item-id="Visualisation{{this.id}}">
+
+                    <a class="hollow-button" href="{{ this.link_url }}" target="_blank">
+
+                        {{ this.link_title }}
+
+                    </a>
+
+                </div>
+
+            </div>
+        {{/each}}
+
+  </script>
+
+  <script id="Handlebars-Carousel-items-bases" type="text/x-handlebars-template">
+
+        {{#each visualisations_ids}}
+            <div data-carousel-item-id="Carousel{{#if this.is_caption}}Caption{{else}}Visualisation{{/if}}{{this.id}}"
+                 class="carousel-item">
+            </div>
+        {{/each}}
+
+  </script>
+
+  <script id="Handlebars-Carousel-items-caption" type="text/x-handlebars-template">
+
+        <div class="caption-text">
+            <h3 class="header-dark-grey">{{ vis_title }}</h3>
+            <div class="description"><b>Description:</b> {{ description }}</div>
+            <br>
+            <div class="instructions"><b>Instructions:</b> {{ instructions }}</div>
+
+        </div>
+
+         <div class="caption-buttons">
+
+             <div class="col s6">
+
+                 <div class="BCK-browse-button"
+                    data-hb-template="Handlebars-main-page-browser-button"
+                    data-viz-item-id="Visualisation{{vis_id}}"
+                 >
+                     <a class="btn-chembl" href="{{ link_url }}"
+                        target="_blank">
+
+                         {{ link_title }}
+                     </a>
+                 </div>
+             </div>
+
+             <div class="col s6">
+                {% endverbatim %}
+                <a href="{% url 'visualise'%}" class="btn-chembl">
+                {% verbatim %}
+
+                    See all visualisations
+
+                </a>
+             </div>
+
+        </div>
+
+  </script>
+
   <script id="Handlebars-CriclesBrowser-instructions" type="text/x-handlebars-template">
 
     {{#if node_name}}
@@ -10,41 +90,21 @@
     {{/if}}
   </script>
 
+    <script id="Handlebars-main-page-browser-button" type="text/x-handlebars-template">
+       <a class="btn-chembl" href="{{ link_url }}"
+            target="_blank">
+             {{ link_title }}
+        </a>
+   </script>
+
    <script id="Handlebars-circles-browser-button" type="text/x-handlebars-template">
 
-       {{#if node_name}}
-
-             <a class="small-text" href={{node_link}} target="_blank">
-                  Browse all {{node_name}} Targets
+             <a class="hollow-button" href="{{ link_url }}" target="_blank">
+                  {{ link_title }}
              </a>
-
-       {{else}}
-
-            <a class="small-text" href="{% url 'javascript_routing' %}#browse/targets" target="_blank">
-                Browse all Targets
-            </a>
-
-       {{/if}}
 
    </script>
 
-   <script id="Handlebars-circles-browser-button-medium" type="text/x-handlebars-template">
-
-       {{#if node_name}}
-
-             <a class="hollow-button" href={{node_link}} target="_blank">
-                  Browse all {{node_name}} Targets
-             </a>
-
-       {{else}}
-
-            <a class="hollow-button" href="{% url 'javascript_routing' %}#browse/targets" target="_blank">
-                Browse all Targets
-            </a>
-
-       {{/if}}
-
-   </script>
 
 
 {% endverbatim %}

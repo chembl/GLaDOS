@@ -5,6 +5,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   initialize: ->
 
+    @config = arguments[0].config
     $(document).on("keydown", $.proxy(@handleKeyDown, @))
     $(document).on("keyup", $.proxy(@handleKeyUp, @))
 
@@ -15,6 +16,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     @showResponsiveViewPreloader()
     @setUpResponsiveRender()
     @model.on 'change', @render, @
+    @clickTracker = glados.views.base.TrackView.generateClickTracker('Visualisation-TargetBrowserAsCircles')
 
   getBucketData: ->
     receivedBuckets = @model.get 'bucket_data'
@@ -128,11 +130,9 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
         return
 
       if thisView.focusNode != d
-
         thisView.focusTo(thisView.currentHover)
-#        thisView.drawMissingCircles(thisView.currentHover)
-        thisView.fillBrowseButtonTemplate thisView.currentHover.name, thisView.currentHover.link
 
+      thisView.clickTracker()
 
     # -----------------------------------------
     # Node hover handler function
@@ -146,7 +146,6 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
         thisView.currentHover = d
         isPressingCtrl = d3.event.ctrlKey
         thisView.fillInstructionsTemplate d.name, isPressingCtrl
-#        thisView.fillBrowseButtonTemplate d.name, d.link
 
         allNodes = d3.select($(thisView.el)[0]).selectAll('.node')
         allNodes.classed('force-hover', false)
@@ -265,6 +264,8 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
 
   focusTo: (node) ->
 
+    @fillBrowseButtonTemplate node.name, node.link
+
     thisView = @
     thisView.focusNode = node
     @removeHoverabilityToAll()
@@ -329,20 +330,17 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
       is_pressing_ctrl: isPressingCtrl
 
   fillBrowseButtonTemplate: (nodeName, nodeLink) ->
-    $button = $('.BCK-browse-button-circles')
-    $button_medium = $('.BCK-browse-button-medium-circles')
 
-    button_medium_template = $('#' + $button_medium.attr('data-hb-template'))
-    button_template = $('#' + $button.attr('data-hb-template'))
+    $buttonContainer = @config.browse_button_container
 
-    $button.html Handlebars.compile(button_template.html())
-      node_name: nodeName
-      node_link: nodeLink
-
-    if $button_medium.length > 0
-      $button_medium.html Handlebars.compile(button_medium_template.html())
-        node_name: nodeName
-        node_link: nodeLink
+    if nodeName == 'root'
+      glados.Utils.fillContentForElement $buttonContainer,
+        link_title: "Browse all Targets"
+        link_url: Target.getTargetsListURL()
+    else
+      glados.Utils.fillContentForElement $buttonContainer,
+        link_title: "Browse #{nodeName} Class Targets"
+        link_url: nodeLink
 
   handleKeyDown: (event) ->
 

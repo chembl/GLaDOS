@@ -1,5 +1,5 @@
 from django.db import models
-from glados.es_models import TinyURLIndex, ESCachedRequestIndex, ESDownloadRecordIndex
+from glados.es_models import TinyURLIndex, ESCachedRequestIndex, ESDownloadRecordIndex, ESViewRecordIndex
 import time
 import socket
 from django.conf import settings
@@ -84,6 +84,27 @@ class ESDownloadRecord(models.Model):
             total_items=self.total_items,
             host=socket.gethostname(),
             run_env_type=settings.RUN_ENV,
+            request_date=int(time.time() * 1000)
+        )
+        obj.save()
+        return obj.to_dict(include_meta=True)
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Tracking
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+class ESViewRecord(models.Model):
+
+    view_name = models.CharField(max_length=20)
+    run_env_type = models.TextField()
+    host = models.TextField(default='')
+
+    def indexing(self):
+        obj = ESViewRecordIndex(
+            view_name=self.view_name,
+            run_env_type=settings.RUN_ENV,
+            host=socket.gethostname(),
             request_date=int(time.time() * 1000)
         )
         obj.save()
