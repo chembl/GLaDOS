@@ -91,7 +91,7 @@ class ColumnsParsing:
             'molecule_synonyms': lambda original_value: ColumnsParsing.static_parse_synonyms(original_value)
         },
         'chembl_target':{
-            'target_components': lambda original_value: \
+            'target_components': lambda original_value:
                 ColumnsParsing.static_parse_target_uniprot_accession(original_value)
         }
     }
