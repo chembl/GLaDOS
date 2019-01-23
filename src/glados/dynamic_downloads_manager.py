@@ -77,16 +77,38 @@ class ColumnsParsing:
             true_synonyms.add(raw_syn['synonyms'])
         return '|'.join(true_synonyms)
 
+    def static_parse_target_uniprot_accession(raw_components):
+        accessions = []
+        for comp in raw_components:
+            accession = comp.get('accession')
+            if accession is not None:
+                accessions.append(accession)
+
+        return '|'.join(accessions)
+
+    parsing_functions = {
+        'chembl_molecule':{
+            'molecule_synonyms': lambda original_value: ColumnsParsing.static_parse_synonyms(original_value)
+        },
+        'chembl_target':{
+            'target_components': lambda original_value: \
+                ColumnsParsing.static_parse_target_uniprot_accession(original_value)
+        }
+    }
+
     def static_parse_property(original_value, index_name, property_name):
 
-        if index_name == 'chembl_molecule':
-            if property_name == 'molecule_synonyms':
-                value = ColumnsParsing.static_parse_synonyms(original_value)
-                return value
-            else:
-                return original_value
-        else:
+        parsing_functions = ColumnsParsing.parsing_functions
+        functions_for_index = parsing_functions.get(index_name)
+
+        if functions_for_index is None:
             return original_value
+        else:
+            function_for_property = functions_for_index.get(property_name)
+            if function_for_property is None:
+                return original_value
+            else:
+                return function_for_property(original_value)
 
 
 def format_cell(original_value):
