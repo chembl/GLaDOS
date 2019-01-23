@@ -147,6 +147,10 @@ $full-header-height-large: 180px;
 
     height: 70%;
 
+    .slick-disabled{
+      color: transparent;
+      cursor: unset;
+    }
     .caption-text{
       padding: 2%;
     }
