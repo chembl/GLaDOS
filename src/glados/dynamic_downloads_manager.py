@@ -77,11 +77,26 @@ class ColumnsParsing:
             true_synonyms.add(raw_syn['synonyms'])
         return '|'.join(true_synonyms)
 
+    def static_parse_target_uniprot_accession(raw_components):
+        accessions = []
+        for comp in raw_components:
+            accession = comp.get('accession')
+            if accession is not None:
+                accessions.append(accession)
+
+        return '|'.join(accessions)
+
     def static_parse_property(original_value, index_name, property_name):
 
         if index_name == 'chembl_molecule':
             if property_name == 'molecule_synonyms':
                 value = ColumnsParsing.static_parse_synonyms(original_value)
+                return value
+            else:
+                return original_value
+        elif index_name == 'chembl_target':
+            if property_name == 'target_components':
+                value = ColumnsParsing.static_parse_target_uniprot_accession(original_value)
                 return value
             else:
                 return original_value
