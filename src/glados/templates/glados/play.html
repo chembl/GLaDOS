@@ -13,7 +13,7 @@
 
                 <div class="section-col first-section">
 
-                    <div class="chembl-game">Play</div>
+                    <div class="BCK-chembl-game chembl-game">Play</div>
 
                 </div>
 
@@ -22,5 +22,11 @@
         </div>
 
     </div>
+
+{% endblock %}
+
+{% block custom_js_inline %}
+
+    glados.apps.Play.PlayPageApp.init();
 
 {% endblock %}
