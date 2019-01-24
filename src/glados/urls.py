@@ -59,6 +59,8 @@ common_urls = [
 
   url(r'^visualise/$', views.visualise, name='visualise'),
 
+  url(r'^play/$', views.play, name='play'),
+
   url(r'^handlebars/visualisation_sources/$',
       xframe_options_exempt(
           DirectTemplateView.as_view(
