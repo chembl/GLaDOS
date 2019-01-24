@@ -106,6 +106,12 @@
 
                     <div class="col l4 m6 s12 dropdown-item">
 
+                        <a href="{% url 'chembl_twitter' %}" target="_blank">Twitter</a>
+
+                    </div>
+
+                    <div class="col l4 m6 s12 dropdown-item">
+
                         <a href="{% url 'contact_us' %}" target="_blank">Contact Us</a>
 
                     </div>
@@ -200,9 +206,16 @@
 
                     <li class="dropdown-item">
 
-                        <a href="https://chembl.blogspot.co.uk" target="_blank">Blog</a>
+                        <a href="{% url 'chembl_blog' %}" target="_blank">Blog</a>
 
                     </li>
+
+                    <li class="dropdown-item">
+
+                        <a href="{% url 'chembl_twitter' %}" target="_blank">Twitter</a>
+
+                    </li>
+                    
                     <li class="dropdown-item">
 
                         <a href="{% url 'contact_us' %}" target="_blank">Contact Us</a>

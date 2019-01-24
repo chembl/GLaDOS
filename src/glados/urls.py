@@ -130,6 +130,10 @@ common_urls = [
       RedirectView.as_view(url='https://chembl.blogspot.co.uk',
                            permanent=True), name='chembl_blog'),
 
+  url(r'^chembl_twitter/$',
+      RedirectView.as_view(url='https://twitter.com/chembl',
+                           permanent=True), name='chembl_twitter'),
+
   url(r'^db_schema',
     DirectTemplateView.as_view(template_name="glados/database_schema.html"), name='db_schema'),
 
