@@ -16,7 +16,13 @@ CardView = Backbone.View.extend(glados.views.base.TrackView).extend
     else
       @entityName = originalArguments[0].entity_name
       viewName =  "#{@entityName}-#{@sectionID}"
-    @initTracking(viewName)
+
+    if @config.view_type?
+      viewType = @config.view_type
+    else
+      viewType = "#{glados.views.base.TrackView.viewTypes.CARD}"
+
+    @initTracking(viewName, viewType, @entityName)
 
   showSection: -> @reportCardApp.showSection(@sectionID) unless GlobalVariables['EMBEDED']
   hideSection: -> @reportCardApp.hideSection(@sectionID) unless GlobalVariables['EMBEDED']

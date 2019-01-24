@@ -95,11 +95,14 @@ def record_download(download_id, time_taken, is_new, file_size, desired_format, 
         traceback.print_exc()
         print('Error saving download record in elastic!')
 
-def record_view_usage(view_name):
+
+def record_view_usage(view_name, view_type, entity_name):
 
     try:
         view_record = ESViewRecord(
             view_name=view_name,
+            view_type=view_type,
+            entity_name=entity_name
         )
         print('-------------------------------------------------')
         print('server statistics')

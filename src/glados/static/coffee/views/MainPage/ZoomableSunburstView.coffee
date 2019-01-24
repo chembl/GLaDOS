@@ -5,7 +5,7 @@ glados.useNameSpace 'glados.views.MainPage',
 
     initialize: ->
       @config = arguments[0].config
-      @initTracking('ZoomableSunburst')
+      @initTracking('ZoomableSunburst', glados.views.base.TrackView.viewTypes.VISUALISATION)
       @$vis_elem = $(@el).find('.BCK-sunburst-container')
       @setUpResponsiveRender()
       @model.on 'change', @render, @

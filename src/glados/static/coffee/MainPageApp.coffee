@@ -67,6 +67,7 @@ class MainPageApp
       disable_embedding: true
       embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#max_phase_for_disease"
       view_name: 'Visualisation-DrugsByMaxPhaseAndDisease'
+      view_type: glados.views.base.TrackView.viewTypes.VISUALISATION
       link_to_all:
         link_text: 'See all drug Compounds in ChEMBL'
         url: Drug.getDrugsListURL()
@@ -115,6 +116,7 @@ class MainPageApp
       disable_embedding: true
       is_outside_an_entity_report_card: true
       view_name: 'Visualisation-DrugsByMoleculeTypeAndFirstApproval'
+      view_type: glados.views.base.TrackView.viewTypes.VISUALISATION
 #      embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#documents_by_year_histogram"
 
     view = new glados.views.ReportCards.HistogramInCardView
@@ -162,6 +164,7 @@ class MainPageApp
       is_outside_an_entity_report_card: true
       disable_embedding: true
       view_name: 'Visualisation-DrugsByUsanYear'
+      view_type: glados.views.base.TrackView.viewTypes.VISUALISATION
 #      embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#documents_by_year_histogram"
 
     view = new glados.views.ReportCards.HistogramInCardView
@@ -184,6 +187,7 @@ class MainPageApp
       embed_url: "#{glados.Settings.GLADOS_BASE_URL_FULL}embed/#targets_by_protein_class"
       view_class: BrowseTargetAsCirclesView
       view_name: 'Visualisation-TargetBrowserAsCircles'
+      view_type: glados.views.base.TrackView.viewTypes.VISUALISATION
       view_config:
         browse_button_container: $browseButtonContainer
 

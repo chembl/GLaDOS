@@ -68,6 +68,8 @@ REQUIRED_INDEXES = [
             'es_view_record': {
                 'properties': {
                     'view_name': KEYWORD_TYPE,
+                    'view_type': KEYWORD_TYPE,
+                    'entity_name': KEYWORD_TYPE,
                     'run_env_type': KEYWORD_TYPE,
                     'host': KEYWORD_TYPE,
                     'request_date': {
