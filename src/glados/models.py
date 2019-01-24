@@ -96,9 +96,9 @@ class ESDownloadRecord(models.Model):
 
 class ESViewRecord(models.Model):
 
-    view_name = models.CharField(max_length=20)
-    view_type = models.CharField(max_length=100)
-    entity_name = models.CharField(max_length=100)
+    view_name = models.CharField(max_length=20, default='')
+    view_type = models.CharField(max_length=100, default='')
+    entity_name = models.CharField(max_length=100, default='')
     run_env_type = models.TextField()
     host = models.TextField(default='')
 
