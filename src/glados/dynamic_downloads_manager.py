@@ -15,6 +15,8 @@ from django.conf import settings
 from glados.settings import RunEnvs
 import re
 import subprocess
+import socket
+import datetime
 
 class DownloadError(Exception):
     """Base class for exceptions in this file."""
@@ -91,7 +93,7 @@ class ColumnsParsing:
             'molecule_synonyms': lambda original_value: ColumnsParsing.static_parse_synonyms(original_value)
         },
         'chembl_target':{
-            'target_components': lambda original_value: \
+            'target_components': lambda original_value:
                 ColumnsParsing.static_parse_target_uniprot_accession(original_value)
         }
     }
@@ -203,7 +205,9 @@ def generate_download_file(download_id):
     start_time = time.time()
     download_job = DownloadJob.objects.get(job_id=download_id)
     download_job.status = DownloadJob.PROCESSING
+    download_job.worker = socket.gethostname()
     download_job.save()
+    append_to_job_log(download_job, 'Generating File')
 
     print('processing job: ', download_id)
 
@@ -238,6 +242,8 @@ def generate_download_file(download_id):
 
         if settings.RUN_ENV == RunEnvs.PROD:
             rsync_to_the_other_nfs(download_job)
+
+        append_to_job_log(download_job, 'File Ready')
         save_download_job_state(download_job, DownloadJob.FINISHED)
 
         # now save some statistics
@@ -251,18 +257,20 @@ def generate_download_file(download_id):
             es_index=index_name,
             es_query=raw_query,
             desired_format=desired_format,
-            total_items=total_items
+            total_items=total_items,
         )
 
     except:
         save_download_job_state(download_job, DownloadJob.ERROR)
-        traceback.print_exc()
+        tb = traceback.format_exc()
+        append_to_job_log(download_job, "Error:\n{}".format(tb))
+        print(tb)
         return
 
 
 def rsync_to_the_other_nfs(download_job):
 
-    hostname = 'wp-p2m-54'
+    hostname = socket.gethostname()
     if bool(re.match("wp-p1m.*", hostname)):
         rsync_destination_server = 'wp-p2m-54'
     else:
@@ -273,7 +281,7 @@ def rsync_to_the_other_nfs(download_job):
     rsync_command = "rsync -v {source} {destination}".format(source=file_path, destination=rsync_destination)
     rsync_command_parts = rsync_command.split(' ')
 
-    print('rsync_command_parts: ', rsync_command_parts)
+    append_to_job_log(download_job, "Rsyncing: {}".format(rsync_command))
     subprocess.check_call(rsync_command_parts)
 
 
@@ -306,6 +314,7 @@ def generate_download(index_name, raw_query, desired_format, raw_columns_to_down
             download_job.progress = 0
             download_job.status = DownloadJob.QUEUED
             download_job.save()
+            append_to_job_log(download_job, "Job was in error state, queuing again.")
             generate_download_file.delay(download_id)
         elif download_job.status == DownloadJob.FINISHED:
 
@@ -329,6 +338,7 @@ def generate_download(index_name, raw_query, desired_format, raw_columns_to_down
                 download_job.progress = 0
                 download_job.status = DownloadJob.QUEUED
                 download_job.save()
+                append_to_job_log(download_job, "File not found, queuing again.")
                 generate_download_file.delay(download_id)
 
     except DownloadJob.DoesNotExist:
@@ -337,13 +347,28 @@ def generate_download(index_name, raw_query, desired_format, raw_columns_to_down
             index_name=index_name,
             raw_columns_to_download=raw_columns_to_download,
             raw_query=raw_query,
-            desired_format=parsed_desired_format
+            desired_format=parsed_desired_format,
+            log=format_log_message('Job Queued')
         )
         download_job.save()
         generate_download_file.delay(download_id)
 
     response['download_id'] = download_id
     return response
+
+
+def append_to_job_log(download_job, msg):
+
+    if download_job.log is None:
+        download_job.log = ''
+
+    download_job.log += format_log_message(msg)
+    download_job.save()
+
+
+def format_log_message(msg):
+    now = datetime.datetime.now()
+    return "[{date}] {hostname}: {msg}\n".format(date=now, hostname=socket.gethostname(), msg=msg)
 
 
 def get_download_status(download_id):
