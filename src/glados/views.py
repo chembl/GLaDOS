@@ -27,6 +27,15 @@ def visualise(request):
     return render(request, 'glados/visualise.html', context)
 
 
+def play(request):
+
+    context = {
+        'hide_breadcrumbs': True
+    }
+
+    return render(request, 'glados/play.html', context)
+
+
 def get_latest_tweets(page_number=1, count=15):
     """
     Returns the latest tweets from chembl, It tries to find them in the cache first to avoid hammering twitter

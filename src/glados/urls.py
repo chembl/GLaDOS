@@ -59,6 +59,8 @@ common_urls = [
 
   url(r'^visualise/$', views.visualise, name='visualise'),
 
+  url(r'^play/$', views.play, name='play'),
+
   url(r'^handlebars/visualisation_sources/$',
       xframe_options_exempt(
           DirectTemplateView.as_view(
@@ -129,6 +131,10 @@ common_urls = [
   url(r'^chembl_blog/$',
       RedirectView.as_view(url='https://chembl.blogspot.co.uk',
                            permanent=True), name='chembl_blog'),
+
+  url(r'^chembl_twitter/$',
+      RedirectView.as_view(url='https://twitter.com/chembl',
+                           permanent=True), name='chembl_twitter'),
 
   url(r'^db_schema',
     DirectTemplateView.as_view(template_name="glados/database_schema.html"), name='db_schema'),
