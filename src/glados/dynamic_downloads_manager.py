@@ -240,8 +240,8 @@ def generate_download_file(download_id):
         elif desired_format == 'sdf':
             file_size = write_sdf_file(scanner, download_job)
 
-        # if settings.RUN_ENV == RunEnvs.PROD:
-        rsync_to_the_other_nfs(download_job)
+        if settings.RUN_ENV == RunEnvs.PROD:
+            rsync_to_the_other_nfs(download_job)
 
         append_to_job_log(download_job, 'File Ready')
         save_download_job_state(download_job, DownloadJob.FINISHED)
@@ -270,7 +270,7 @@ def generate_download_file(download_id):
 
 def rsync_to_the_other_nfs(download_job):
 
-    hostname = 'wp-p2m-54'
+    hostname = socket.gethostname()
     if bool(re.match("wp-p1m.*", hostname)):
         rsync_destination_server = 'wp-p2m-54'
     else:
@@ -282,7 +282,7 @@ def rsync_to_the_other_nfs(download_job):
     rsync_command_parts = rsync_command.split(' ')
 
     append_to_job_log(download_job, "Rsyncing: {}".format(rsync_command))
-    # subprocess.check_call(rsync_command_parts)
+    subprocess.check_call(rsync_command_parts)
 
 
 def get_download_id(index_name, raw_query, desired_format):
