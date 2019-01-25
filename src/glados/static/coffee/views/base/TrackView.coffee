@@ -18,6 +18,23 @@ glados.useNameSpace 'glados.views.base',
         registerUsage.then (data) -> console.debug "usage for #{viewName} registered"
         registerUsage.fail (data) -> console.debug "usage registration for #{viewName} failed!"
 
+    registerSearchUsage: (searchType) ->
+
+      paramsDict =
+        search_type: searchType
+
+      registerSearch = glados.doCSRFPost(glados.Settings.REGISTER_SEARCH_ENDPOINT, paramsDict)
+      registerSearch.then (data) -> console.debug "#{searchType} search registered"
+      registerSearch.fail (data) -> console.debug "#{searchType} search failed!"
+
 glados.views.base.TrackView.viewTypes =
   CARD: 'CARD'
   VISUALISATION: 'VISUALISATION'
+
+glados.views.base.TrackView.searchTypes =
+  FREE_TEXT: 'FREE_TEXT'
+  SUBSTRUCTURE: 'SUBSTRUCTURE'
+  SIMILARITY: 'SIMILARITY'
+  CONNECTIVITY: 'CONNECTIVITY'
+  BLAST: 'BLAST'
+  OTHER: 'OTHER'

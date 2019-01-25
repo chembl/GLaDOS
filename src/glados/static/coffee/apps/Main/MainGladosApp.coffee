@@ -56,7 +56,6 @@ glados.useNameSpace 'glados.apps.Main',
       @showMainSplashScreen()
 
       promiseFunc = (resolve, reject)->
-        console.log 'CONTENT PREPARED'
         templateName = @baseTemplates[pageName]
         $gladosMainContent = $('#GladosMainContent')
         $gladosMainContent.empty()

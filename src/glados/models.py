@@ -1,5 +1,6 @@
 from django.db import models
-from glados.es_models import TinyURLIndex, ESCachedRequestIndex, ESDownloadRecordIndex, ESViewRecordIndex
+from glados.es_models import TinyURLIndex, ESCachedRequestIndex, ESDownloadRecordIndex, ESViewRecordIndex, \
+    ESSearchRecordIndex
 import time
 import socket
 from django.conf import settings
@@ -113,6 +114,40 @@ class ESViewRecord(models.Model):
         )
         obj.save()
         return obj.to_dict(include_meta=True)
+
+
+class ESSearchRecord(models.Model):
+
+    FREE_TEXT = 'FREE_TEXT'
+    SUBSTRUCTURE = 'SUBSTRUCTURE'
+    SIMILARITY = 'SIMILARITY'
+    CONNECTIVITY = 'CONNECTIVITY'
+    BLAST = 'BLAST'
+    OTHER = 'OTHER'
+
+    SEARCH_TYPES = (
+        (FREE_TEXT, FREE_TEXT),
+        (SUBSTRUCTURE, SUBSTRUCTURE),
+        (SIMILARITY, SIMILARITY),
+        (CONNECTIVITY, CONNECTIVITY),
+        (BLAST, BLAST),
+        (OTHER, OTHER)
+    )
+
+    search_type = models.CharField(max_length=20, choices=SEARCH_TYPES, default=OTHER)
+    run_env_type = models.TextField()
+    host = models.TextField(default='')
+
+    def indexing(self):
+        obj = ESSearchRecordIndex(
+            search_type=self.search_type,
+            run_env_type=settings.RUN_ENV,
+            host=socket.gethostname(),
+            request_date=int(time.time() * 1000)
+        )
+        obj.save()
+        return obj.to_dict(include_meta=True)
+
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Download Jobs

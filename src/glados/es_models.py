@@ -47,6 +47,18 @@ class ESDownloadRecordIndex(DocType):
         doc_type = 'es_download_record'
 
 
+class ESSearchRecordIndex(DocType):
+
+    search_type = Keyword()
+    run_env_type = Keyword()
+    host = Keyword()
+    request_date = Integer()
+
+    class Meta:
+        index = 'chembl_glados_es_search_record'
+        doc_type = 'es_search_record'
+
+
 class ESViewRecordIndex(DocType):
     view_name = Keyword()
     view_type = Keyword()

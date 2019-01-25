@@ -17,7 +17,6 @@ glados.useNameSpace 'glados.views.Browsers',
 
     initialize: ->
 
-      console.log 'INITIALISE VIEW'
       @showPreloader()
       @collection.on 'reset do-repaint sort', @renderViewState, @
       @collection.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_FETCHING_STATE_CHANGED,
