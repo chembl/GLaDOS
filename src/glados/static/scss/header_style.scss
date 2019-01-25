@@ -162,12 +162,9 @@ header .row {
             letter-spacing: 0.05em;
             width: 50%;
 
-            .example-link{
-              max-width: 70px;
-              overflow: hidden;
-              white-space: nowrap;
-              text-overflow: ellipsis;
-            }
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
 
             a {
               color: white;
@@ -176,10 +173,18 @@ header .row {
                 text-decoration: underline;
               }
             }
+
           }
 
           .search-examples{
             float: left;
+
+            a:last-child{
+              display:inline-block;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+            }
           }
           .special-searches{
             float: right;
