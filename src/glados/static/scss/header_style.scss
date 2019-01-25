@@ -154,14 +154,13 @@ header .row {
             }
           }
 
-          .search-examples {
+          .search-examples, .special-searches {
             font-family: $chembl-helvetica;
             color: white;
             font-size: 0.8em;
             margin-top: 0.5em;
             letter-spacing: 0.05em;
             width: 50%;
-            float: left;
 
             .example-link{
               max-width: 70px;
@@ -179,8 +178,10 @@ header .row {
             }
           }
 
+          .search-examples{
+            float: left;
+          }
           .special-searches{
-            width: 50%;
             float: right;
             text-align: right;
           }
