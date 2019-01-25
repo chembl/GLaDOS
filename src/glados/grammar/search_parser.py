@@ -16,6 +16,8 @@ import traceback
 import time
 import threading
 import sys
+from glados import glados_server_statistics
+from glados.models import ESSearchRecord
 
 from django.http import HttpResponse
 from glados.es.query_builder import QueryBuilder
@@ -603,6 +605,7 @@ def parse_url_search(request):
     if request.method == 'GET':
         return HttpResponse('INVALID USAGE! PLEASE USE POST!', status=400)
     elif request.method == 'POST':
+
         query_string = request.POST.get('query_string', '')
         indexes_str = request.POST.get('es_indexes', '')
         indexes = indexes_str.split(',')
@@ -615,5 +618,6 @@ def parse_url_search(request):
             'best_es_base_queries': best_queries,
             'sorted_indexes_by_score': sorted_indexes_by_score
         }
+        glados_server_statistics.record_search(ESSearchRecord.FREE_TEXT)
 
         return HttpResponse(json.dumps(response_dict))

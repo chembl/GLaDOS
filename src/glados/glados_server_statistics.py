@@ -2,6 +2,7 @@
 from glados.models import ESCachedRequest
 from glados.models import ESDownloadRecord
 from glados.models import ESViewRecord
+from glados.models import ESSearchRecord
 import json
 import hashlib
 import base64
@@ -112,3 +113,19 @@ def record_view_usage(view_name, view_type, entity_name):
     except:
         traceback.print_exc()
         print('Error saving view record in elastic!')
+
+
+def record_search(search_type):
+
+    try:
+        search_record = ESSearchRecord(
+            search_type=search_type
+        )
+        print('-------------------------------------------------')
+        print('server statistics')
+        print('record_search: ', search_type)
+        print('-------------------------------------------------')
+        search_record.indexing()
+    except:
+        traceback.print_exc()
+        print('Error saving search record in elastic!')
