@@ -160,6 +160,15 @@ header .row {
             font-size: 0.8em;
             margin-top: 0.5em;
             letter-spacing: 0.05em;
+            width: 50%;
+            float: left;
+
+            .example-link{
+              max-width: 70px;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+            }
 
             a {
               color: white;
@@ -168,6 +177,12 @@ header .row {
                 text-decoration: underline;
               }
             }
+          }
+
+          .special-searches{
+            width: 50%;
+            float: right;
+            text-align: right;
           }
         }
       }
