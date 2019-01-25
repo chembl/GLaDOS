@@ -470,7 +470,9 @@ def register_usage(request):
     if request.method == "POST":
         try:
             view_name = request.POST.get('view_name', '')
-            glados_server_statistics.record_view_usage(view_name)
+            view_type = request.POST.get('view_type', '')
+            entity_name = request.POST.get('entity_name', '')
+            glados_server_statistics.record_view_usage(view_name, view_type, entity_name)
             return JsonResponse({'success': 'registration successful!'})
         except Exception as e:
             print_server_error(e)

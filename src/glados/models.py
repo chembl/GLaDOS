@@ -96,13 +96,17 @@ class ESDownloadRecord(models.Model):
 
 class ESViewRecord(models.Model):
 
-    view_name = models.CharField(max_length=20)
+    view_name = models.CharField(max_length=20, default='')
+    view_type = models.CharField(max_length=100, default='')
+    entity_name = models.CharField(max_length=100, default='')
     run_env_type = models.TextField()
     host = models.TextField(default='')
 
     def indexing(self):
         obj = ESViewRecordIndex(
             view_name=self.view_name,
+            view_type=self.view_type,
+            entity_name=self.entity_name,
             run_env_type=settings.RUN_ENV,
             host=socket.gethostname(),
             request_date=int(time.time() * 1000)

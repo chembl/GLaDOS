@@ -49,6 +49,8 @@ class ESDownloadRecordIndex(DocType):
 
 class ESViewRecordIndex(DocType):
     view_name = Keyword()
+    view_type = Keyword()
+    entity_name = Keyword()
     run_env_type = Keyword()
     host = Keyword()
     request_date = Integer()
