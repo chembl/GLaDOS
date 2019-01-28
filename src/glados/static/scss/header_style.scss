@@ -489,6 +489,10 @@ header .row {
       top: 39px;
     }
   }
+  
+  .show-on-large-pin-top{
+    display: none;
+  }
 }
 
 @media (min-width: 640px) and (max-width: 992px) {
