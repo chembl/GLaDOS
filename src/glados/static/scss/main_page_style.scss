@@ -147,10 +147,27 @@ $full-header-height-large: 180px;
           text-align: justify;
         }
 
-        height: 100%;
+        height: 40%;
       }
 
     }
+
+    .mobile-search-buttons{
+
+      display: flex;
+      flex-direction: column;
+
+      .mobile-search-bar-container{
+        height: 100%;
+      }
+
+      /* -------- SMALL SCREEN -------- */
+      @media (max-width: 600px) {
+        height: 60%;
+      }
+
+    }
+
 
     .chembl-game{
       border: black 1px solid;
