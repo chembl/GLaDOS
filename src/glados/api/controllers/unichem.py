@@ -4,6 +4,9 @@ from glados.models import Parentsmile
 from glados.api.cache.models import ChemCache
 from simplejson import dumps
 from django.views.decorators.csrf import csrf_exempt
+import logging
+
+logger = logging.getLogger('django')
 
 ctab = """
       MJ161212                      
@@ -108,6 +111,7 @@ def test(request):
             '
 {ctab}
 ') = 1
+AND rownum <= 100
         '''.format(ctab=incoming_ctab)
 
         print("Le query: {query}".format(query=query))
@@ -131,7 +135,7 @@ def test(request):
                 "smiles":parent.parent_smiles
                 })
 
-        print (mongo_parents)
+        logger.info(mongo_parents)
 
         # cole.collection.insert_one({ 'ctab':incoming_ctab, 'response':mongo_parents})
 
