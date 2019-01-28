@@ -8,21 +8,22 @@
 
         <input type="search" value="" name="search-str" class="chembl-search-bar" placeholder="Search in ChEMBL">
 
-        <a class="bar-button BCK-Draw-Structure draw-structure tooltipped hide-on-small-only"
-           data-position="left" data-delay="50" data-tooltip="Draw a structure">
-            <img src="{% static 'img/icons/structure_icon.png' %}"/>
-        </a>
-
-        <a class="bar-button draw-structure tooltipped hide-on-med-and-up"
-           href="{% url 'main' %}marvin_search_fullscreen/"
-           data-position="left" data-delay="50" data-tooltip="Draw a structure">
-            <img src="{% static 'img/icons/structure_icon.png' %}"/>
-
-        </a>
-
         <a class="bar-button search-button">
             <img src="{% static 'img/icons/search_icon.png' %}"/>
         </a>
+
+        <div class="special-searches-buttons-container">
+            <a class="bar-button BCK-Draw-Structure draw-structure tooltipped hide-on-small-only"
+               data-position="left" data-delay="50" data-tooltip="Draw a structure">
+                <img src="{% static 'img/icons/structure_icon.png' %}"/>
+            </a>
+
+            <a class="bar-button BCK-Draw-Structure draw-structure tooltipped hide-on-small-only"
+               data-position="left" data-delay="50" data-tooltip="Draw a structure">
+                <img src="{% static 'img/icons/structure_icon.png' %}"/>
+            </a>
+        </div>
+
     </div>
 
     <div class="show-on-large-pin-top">

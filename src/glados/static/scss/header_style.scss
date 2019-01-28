@@ -132,6 +132,12 @@ header .row {
               height: 100%;
             }
 
+            .special-searches-buttons-container{
+              display: flex;
+              padding: 0 10px;
+              background-color: $chembl-teal;
+            }
+
             .bar-button {
               padding: $chembl-header-padding;
               height: 100%;
@@ -489,7 +495,7 @@ header .row {
       top: 39px;
     }
   }
-  
+
   .show-on-large-pin-top{
     display: none;
   }
