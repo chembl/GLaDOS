@@ -178,6 +178,7 @@ header .row {
 
           .search-examples{
             float: left;
+            display: flex;
 
             a:last-child{
               display:inline-block;
