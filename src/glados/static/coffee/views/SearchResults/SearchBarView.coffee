@@ -23,7 +23,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       @initializeSketcherButton()
 
     initializeSketcherButton: ()->
-      $openEditorBtn = $(@el).find('.draw-structure.hide-on-small-only')
+      $openEditorBtn = $(@el).find('.BCK-Draw-Structure')
       $openEditorBtn.click glados.helpers.ChemicalEditorHelper.showChemicalEditorModal
 
 
@@ -74,6 +74,6 @@ glados.views.SearchResults.SearchBarView.createInstances = () ->
     glados.views.SearchResults.SearchBarView.BCKSRBInstance = new glados.views.SearchResults.SearchBarView
       el: $('#BCK-SRB-wrapper')
   glados.views.SearchResults.SearchBarView.HeaderInstance = undefined
-  if $('#chembl-header-search-bar-container').length == 1
+  if $('#BCK-SearchBarContainer').length == 1
     glados.views.SearchResults.SearchBarView.HeaderInstance = new glados.views.SearchResults.SearchBarView
-      el: $('#chembl-header-search-bar-container')
+      el: $('#BCK-SearchBarContainer')
