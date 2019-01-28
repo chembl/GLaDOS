@@ -134,8 +134,19 @@ $full-header-height-large: 180px;
         padding: 0 10%;
       }
 
+      /* -------- MEDIUM SCREEN -------- */
+      @media (min-width: 600px) and (max-width: 992px) {
+        .chembl-text{
+          text-align: justify;
+        }
+      }
       /* -------- SMALL SCREEN -------- */
       @media (max-width: 600px) {
+        .chembl-text{
+          padding: 0;
+          text-align: justify;
+        }
+
         height: 100%;
       }
 

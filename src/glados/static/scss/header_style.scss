@@ -98,6 +98,14 @@ header .row {
           font-family: $chembl-helvetica;
           font-size: 35px;
         }
+
+        /* -------- SMALL SCREEN -------- */
+        @media (max-width: 600px) {
+          span {
+            font-size: 30px;
+          }
+        }
+
       }
 
       /* -------- SEARCH BAR -------- */
@@ -543,6 +551,12 @@ header .row {
       .dropdown-contents {
         top: 84px;
       }
+    }
+  }
+
+  #chembl-header-container{
+    .show-on-large-pin-top {
+      display: none !important;
     }
   }
 }
