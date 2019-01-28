@@ -137,9 +137,6 @@ header .row {
               padding: 0 5px;
               background-color: $chembl-teal;
 
-              .bar-button{
-                background-color: $darker-teal;
-              }
               .bar-button:first-child{
                 margin-right: 5px;
               }
@@ -161,9 +158,11 @@ header .row {
                 transition: height, width 200ms ease-in;
               }
 
-              &.search-button {
-                background-color: $darker-teal;
+              background-color: $darker-teal;
+              &:hover{
+                background-color: $lighter-teal
               }
+
             }
           }
 
