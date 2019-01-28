@@ -1,6 +1,5 @@
 import unittest
 import os
-
 import glados.static_files_compiler
 
 

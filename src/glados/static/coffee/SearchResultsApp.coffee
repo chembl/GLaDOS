@@ -24,6 +24,8 @@ class SearchResultsApp
   # --------------------------------------------------------------------------------------------------------------------
 
   @initSubstructureSearchResults = (searchTerm) ->
+
+    glados.views.base.TrackView.registerSearchUsage(glados.views.base.TrackView.searchTypes.SUBSTRUCTURE)
     GlobalVariables.SEARCH_TERM = searchTerm
     resultsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewSubstructureSearchResultsList()
     resultsList.initURL GlobalVariables.SEARCH_TERM
@@ -45,6 +47,8 @@ class SearchResultsApp
       GlobalVariables.SEARCH_TERM)
 
   @initSimilaritySearchResults = (searchTerm, threshold) ->
+
+    glados.views.base.TrackView.registerSearchUsage(glados.views.base.TrackView.searchTypes.SIMILARITY)
     GlobalVariables.SEARCH_TERM = searchTerm
     GlobalVariables.SIMILARITY_PERCENTAGE = threshold
     queryParams =
@@ -69,6 +73,8 @@ class SearchResultsApp
       GlobalVariables.SEARCH_TERM)
 
   @initFlexmatchSearchResults = (searchTerm) ->
+
+    glados.views.base.TrackView.registerSearchUsage(glados.views.base.TrackView.searchTypes.CONNECTIVITY)
     GlobalVariables.SEARCH_TERM = searchTerm
 
     queryParams =

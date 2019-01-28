@@ -7,7 +7,10 @@ import traceback
 
 logger = logging.getLogger('glados.es_connection')
 
-KEYWORD_TYPE = {'type': 'keyword'}
+KEYWORD_TYPE = {'type': 'keyword', 'ignore_above': 500}
+BOOLEAN_TYPE = {'type': 'boolean'}
+INTEGER_TYPE = {'type': 'integer'}
+LONG_TYPE = {'type': 'long'}
 
 REQUIRED_INDEXES = [
     {
@@ -23,9 +26,70 @@ REQUIRED_INDEXES = [
                     'es_request_digest': KEYWORD_TYPE,
                     'host': KEYWORD_TYPE,
                     'run_env_type': KEYWORD_TYPE,
-                    'is_cached': {
-                        'type': 'boolean'
-                    },
+                    'is_cached': BOOLEAN_TYPE,
+                    'request_date': {
+                        'type':   'date',
+                        'format': 'yyyy-MM-dd HH:mm:ss||epoch_millis'
+                    }
+                }
+            }
+        }
+    },
+    {
+        'idx_name': 'chembl_glados_es_download_record',
+        'shards': 7,
+        'replicas': 1,
+        'mappings': {
+            'es_download_record': {
+                'properties': {
+                    'download_id': KEYWORD_TYPE,
+                    'time_taken': INTEGER_TYPE,
+                    'is_new': BOOLEAN_TYPE,
+                    'file_size': LONG_TYPE,
+                    'es_index': KEYWORD_TYPE,
+                    'es_query': KEYWORD_TYPE,
+                    'run_env_type': KEYWORD_TYPE,
+                    'desired_format': KEYWORD_TYPE,
+                    'total_items': INTEGER_TYPE,
+                    'host': KEYWORD_TYPE,
+                    'request_date': {
+                        'type':   'date',
+                        'format': 'yyyy-MM-dd HH:mm:ss||epoch_millis'
+                    }
+                }
+            }
+        }
+    },
+    {
+        'idx_name': 'chembl_glados_es_search_record',
+        'shards': 7,
+        'replicas': 1,
+        'mappings': {
+            'es_view_record': {
+                'properties': {
+                    'search_type': KEYWORD_TYPE,
+                    'run_env_type': KEYWORD_TYPE,
+                    'host': KEYWORD_TYPE,
+                    'request_date': {
+                        'type':   'date',
+                        'format': 'yyyy-MM-dd HH:mm:ss||epoch_millis'
+                    }
+                }
+            }
+        }
+    },
+    {
+        'idx_name': 'chembl_glados_es_view_record',
+        'shards': 7,
+        'replicas': 1,
+        'mappings': {
+            'es_view_record': {
+                'properties': {
+                    'view_name': KEYWORD_TYPE,
+                    'view_type': KEYWORD_TYPE,
+                    'entity_name': KEYWORD_TYPE,
+                    'run_env_type': KEYWORD_TYPE,
+                    'host': KEYWORD_TYPE,
                     'request_date': {
                         'type':   'date',
                         'format': 'yyyy-MM-dd HH:mm:ss||epoch_millis'
@@ -43,6 +107,7 @@ REQUIRED_INDEXES = [
 
 
 def setup_glados_es_connection():
+    print('SET UP ES CONNECTION')
     if getattr(settings, 'ELASTICSEARCH_HOST', None) is None:
         logger.warning('The elastic search connection has not been defined!')
         logger.warning('Please use ELASTICSEARCH_HOST in the Django settings to define it.')
@@ -55,6 +120,15 @@ def setup_glados_es_connection():
                 "retry_on_timeout": True
             }
 
+            print('ELASTICSEARCH_HOST: ', settings.ELASTICSEARCH_HOST)
+            print('ELASTICSEARCH_USERNAME')
+            # for c in settings.ELASTICSEARCH_USERNAME:
+            #     print(c)
+            #
+            # print('ELASTICSEARCH_PASSWORD')
+            # for c in settings.ELASTICSEARCH_PASSWORD:
+            #     print(c)
+
             if settings.ELASTICSEARCH_PASSWORD is not None:
                 keyword_args["http_auth"] = (settings.ELASTICSEARCH_USERNAME, settings.ELASTICSEARCH_PASSWORD)
 
@@ -64,6 +138,8 @@ def setup_glados_es_connection():
             logger.info('PING to {0} was successful!'.format(settings.ELASTICSEARCH_HOST))
             create_indexes()
         except Exception as e:
+            print('CONNECTION NOT CREATED!')
+            traceback.print_exc()
             logger.warning('The elastic search connection has not been created!')
             logger.warning('please use ELASTICSEARCH_HOST, ELASTICSEARCH_USERNAME and ELASTICSEARCH_PASSWORD'
                            ' in the Django settings to define it.')

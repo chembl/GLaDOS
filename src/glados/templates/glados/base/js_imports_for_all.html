@@ -95,6 +95,7 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/helpers/URLHelper.js' %}"></script>
 
     <!-- Backbone -->
+    <script type="text/javascript" src="{% static 'js/coffee-gen/views/base/TrackView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/base/CardView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/base/DownloadModelOrCollectionExt.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/base/ReportCardEntity.js' %}"></script>
@@ -143,6 +144,7 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/ReportCards/EntityDetailsInCardView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/ReportCards/CarouselInCardView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/ReportCards/PaginatedTableInCardView.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/views/ReportCards/FullSectionEmbedderView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/ReportCards/SectionView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/ScrollSpy/ScrollSpyHandler.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/ScrollSpy/ScrollSpyView.js' %}"></script>
@@ -198,10 +200,6 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/Activity/ActivityAggregationMatrix.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Activity/ActivityAggregationView.js' %}"></script>
 
-    <!-- Browsers -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/apps/Activity/ActivitiesBrowserApp.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/apps/Activity/ActivitiesRouter.js' %}"></script>
-
     <!-- 3D Visualization of compounds -->
     <script type="text/javascript" src="{% static 'speck/static/MoleculeVisualisator.js' %}"></script>
 
@@ -242,6 +240,8 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/DocumentSchema.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/CellLineSchema.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/TissueSchema.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/DrugIndicationSchema.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/MechanismSchema.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/StateSaving/ESCollectionStateSavingFunctions.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/ColumnsHandler.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/FacetGroupVisibilityHandler.js' %}"></script>
@@ -289,6 +289,8 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/SearchResults/SearchBarAutocompleteView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/SearchResults/SearchResultsView.js' %}"></script>
 
+    <script type="text/javascript" src="{% static 'js/coffee-gen/models/ServerSideDownloads/DownloadModel.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/views/ServerSideDownloads/ServerSideDownloadView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/SearchResults/ESResultsGraphView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/SearchResults/ESResultsBioactivitySummaryView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Browsers/QueryEditorView.js' %}"></script>
@@ -310,6 +312,9 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/MainPage/DatabaseSummaryView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/MainPage/CentralCardView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/MainPageApp.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/views/MainPage/VisualisationsWithCaptionsView.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Visualisation/VisualisationsPageHandlerView.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Play/ChEMBLGameView.js' %}"></script>
 
     <!-- Breadcrumbs -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/apps/BreadcrumbApp.js' %}"></script>
@@ -337,6 +342,7 @@
 
     <!-- Main glados app -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/apps/Main/MainGladosApp.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/apps/Play/PlayPageApp.js' %}"></script>
 
     <!-- JavaScript Environment log -->
     <script type="text/javascript">

@@ -436,3 +436,209 @@ msgstr "ChEMBL Assay Types for Tissue "
 
 msgid "glados_tissue__bioactivities_pie_title_base"
 msgstr "ChEMBL Activity Types for Tissue "
+
+
+#-----------------------------------------------------------------------------------------------------------------------
+# Mechanism of Action Columns
+#-----------------------------------------------------------------------------------------------------------------------
+msgid "glados_es_gs__mechanism_by_parent_target__mechanism_of_action___mec_id__label"
+msgstr "Mechanism ID"
+
+msgid "glados_es_gs__mechanism_by_parent_target__mechanism_of_action___mec_id__label__mini"
+msgstr "Mech ID"
+
+msgid "glados_es_gs__mechanism_by_parent_target__mechanism_of_action___mechanism_of_action__label"
+msgstr "Mechanism Of Action"
+
+msgid "glados_es_gs__mechanism_by_parent_target__mechanism_of_action___mechanism_of_action__label__mini"
+msgstr "Mech. Of Action"
+
+msgid "glados_es_gs__mechanism_by_parent_target__mechanism_of_action___mechanism_comment__label"
+msgstr "Mechanism Comment"
+
+msgid "glados_es_gs__mechanism_by_parent_target__mechanism_of_action___mechanism_comment__label__mini"
+msgstr "Mech. Comment"
+
+msgid "glados_es_gs__mechanism_by_parent_target__mechanism_of_action___selectivity_comment__label"
+msgstr "Selectivity Comment"
+
+msgid "glados_es_gs__mechanism_by_parent_target__mechanism_of_action___selectivity_comment__label__mini"
+msgstr "Selectivity Comment"
+
+msgid "glados_es_gs__mechanism_by_parent_target__binding_site___site_name__label"
+msgstr "Binding Site Name"
+
+msgid "glados_es_gs__mechanism_by_parent_target__binding_site___site_name__label__mini"
+msgstr "Binding Site Name"
+
+msgid "glados_es_gs__mechanism_by_parent_target__mechanism_of_action___binding_site_comment__label"
+msgstr "Binding Site Comment"
+
+msgid "glados_es_gs__mechanism_by_parent_target__mechanism_of_action___binding_site_comment__label__mini"
+msgstr "Binding Site Comment"
+
+msgid "glados_es_gs__mechanism_by_parent_target__mechanism_of_action___action_type__label"
+msgstr "Mechanism Type"
+
+msgid "glados_es_gs__mechanism_by_parent_target__mechanism_of_action___action_type__label__mini"
+msgstr "Mech. Type"
+
+msgid "glados_es_gs__mechanism_by_parent_target__mechanism_of_action___max_phase__label"
+msgstr "Max Phase"
+
+msgid "glados_es_gs__mechanism_by_parent_target__mechanism_of_action___max_phase__label__mini"
+msgstr "Max Phase"
+
+msgid "glados_es_gs__mechanism_by_parent_target__target___target_chembl_id__label"
+msgstr "Target ChEMBL ID"
+
+msgid "glados_es_gs__mechanism_by_parent_target__target___target_chembl_id__label__mini"
+msgstr "Tgt. ChEMBL ID"
+
+msgid "glados_es_gs__mechanism_by_parent_target__target___pref_name__label"
+msgstr "Target Name"
+
+msgid "glados_es_gs__mechanism_by_parent_target__target___pref_name__label__mini"
+msgstr "Tgt. Name"
+
+msgid "glados_es_gs__mechanism_by_parent_target__target___target_type__label"
+msgstr "Target Type"
+
+msgid "glados_es_gs__mechanism_by_parent_target__target___target_type__label__mini"
+msgstr "Tgt. Type"
+
+msgid "glados_es_gs__mechanism_by_parent_target__target___organism__label"
+msgstr "Target Organism"
+
+msgid "glados_es_gs__mechanism_by_parent_target__target___organism__label__mini"
+msgstr "Tgt. Organism"
+
+msgid "glados_es_gs__mechanism_by_parent_target__mechanism_of_action___mechanism_refs__label"
+msgstr "Mechanism References"
+
+msgid "glados_es_gs__mechanism_by_parent_target__mechanism_of_action___mechanism_refs__label__mini"
+msgstr "Mech. Refs."
+
+msgid "glados_es_gs__mechanism_by_parent_target__all_molecule_chembl_ids__label"
+msgstr "All Compound Family ChEMBL Ids"
+
+msgid "glados_es_gs__mechanism_by_parent_target__all_molecule_chembl_ids__label__mini"
+msgstr "All Compound Family ChEMBL Ids"
+
+msgid "glados_es_gs__mechanism_by_parent_target__parent_molecule___molecule_chembl_id__label"
+msgstr "Molecule ChEMBL ID"
+
+msgid "glados_es_gs__mechanism_by_parent_target__parent_molecule___molecule_chembl_id__label__mini"
+msgstr "Molecule ChEMBL ID"
+
+msgid "glados_es_gs__mechanism_by_parent_target__atc_classifications__label"
+msgstr "ATC Classifications"
+
+msgid "glados_es_gs__mechanism_by_parent_target__atc_classifications__label__mini"
+msgstr "ATC Classifications"
+
+msgid "glados_es_gs__mechanism_by_parent_target__parent_molecule___first_approval__label"
+msgstr "First Approval"
+
+msgid "glados_es_gs__mechanism_by_parent_target__parent_molecule___first_approval__label__mini"
+msgstr "First Approval"
+
+msgid "glados_es_gs__mechanism_by_parent_target__parent_molecule___usan_stem__label"
+msgstr "USAN Stem"
+
+msgid "glados_es_gs__mechanism_by_parent_target__parent_molecule___usan_stem__label__mini"
+msgstr "USAN Stem"
+
+msgid "glados_es_gs__mechanism_by_parent_target__parent_molecule___molecule_type__label"
+msgstr "Molecule Type"
+
+msgid "glados_es_gs__mechanism_by_parent_target__parent_molecule___molecule_type__label__mini"
+msgstr "Molecule Type"
+
+msgid "glados_es_gs__mechanism_by_parent_target__parent_molecule___pref_name__label"
+msgstr "Molecule Name"
+
+msgid "glados_es_gs__mechanism_by_parent_target__parent_molecule___pref_name__label__mini"
+msgstr "Molecule Name"
+
+msgid "glados_es_gs__mechanism_by_parent_target__synonyms__label"
+msgstr "Synonyms"
+
+msgid "glados_es_gs__mechanism_by_parent_target__synonyms__label__mini"
+msgstr "Synonyms"
+
+
+#-----------------------------------------------------------------------------------------------------------------------
+# Drug Indications Columns
+#-----------------------------------------------------------------------------------------------------------------------
+msgid "glados_es_gs__drug_indication_by_parent__drug_indication___mesh_id__label"
+msgstr "MESH ID"
+
+msgid "glados_es_gs__drug_indication_by_parent__drug_indication___mesh_id__label__mini"
+msgstr "MESH ID"
+
+msgid "glados_es_gs__drug_indication_by_parent__drug_indication___mesh_heading__label"
+msgstr "MESH Heading"
+
+msgid "glados_es_gs__drug_indication_by_parent__drug_indication___mesh_heading__label__mini"
+msgstr "MESH Heading"
+
+msgid "glados_es_gs__drug_indication_by_parent__drug_indication___efo__label"
+msgstr "EFO"
+
+msgid "glados_es_gs__drug_indication_by_parent__drug_indication___efo__label__mini"
+msgstr "EFO"
+
+msgid "glados_es_gs__drug_indication_by_parent__drug_indication___max_phase_for_ind__label"
+msgstr "Max Phase for Indication"
+
+msgid "glados_es_gs__drug_indication_by_parent__drug_indication___max_phase_for_ind__label__mini"
+msgstr "Max Phase for Indication"
+
+msgid "glados_es_gs__drug_indication_by_parent__drug_indication___indication_refs__label"
+msgstr "Indication References"
+
+msgid "glados_es_gs__drug_indication_by_parent__drug_indication___indication_refs__label__mini"
+msgstr "Indication Refs"
+
+msgid "glados_es_gs__drug_indication_by_parent__parent_molecule___molecule_chembl_id__label"
+msgstr "ChEMBL ID"
+
+msgid "glados_es_gs__drug_indication_by_parent__parent_molecule___molecule_chembl_id__label__mini"
+msgstr "ChEMBL ID"
+
+msgid "glados_es_gs__drug_indication_by_parent__parent_molecule___pref_name__label"
+msgstr "Molecule Name"
+
+msgid "glados_es_gs__drug_indication_by_parent__parent_molecule___pref_name__label__mini"
+msgstr "Molecule Name"
+
+msgid "glados_es_gs__drug_indication_by_parent__parent_molecule___molecule_type__label"
+msgstr "Molecule Type"
+
+msgid "glados_es_gs__drug_indication_by_parent__parent_molecule___molecule_type__label__mini"
+msgstr "Molecule Type"
+
+msgid "glados_es_gs__drug_indication_by_parent__parent_molecule___first_approval__label"
+msgstr "First Approval"
+
+msgid "glados_es_gs__drug_indication_by_parent__parent_molecule___first_approval__label__mini"
+msgstr "First Approval"
+
+msgid "glados_es_gs__drug_indication_by_parent__parent_molecule___usan_stem__label"
+msgstr "USAN Stem"
+
+msgid "glados_es_gs__drug_indication_by_parent__parent_molecule___usan_stem__label__mini"
+msgstr "USAN Stem"
+
+msgid "glados_es_gs__drug_indication_by_parent__parent_molecule___usan_year__label"
+msgstr "USAN Year"
+
+msgid "glados_es_gs__drug_indication_by_parent__parent_molecule___usan_year__label__mini"
+msgstr "USAN Year"
+
+msgid "glados_es_gs__drug_indication_by_parent__synonyms__label"
+msgstr "Synonyms"
+
+msgid "glados_es_gs__drug_indication_by_parent__synonyms__label__mini"
+msgstr "Synonyms"

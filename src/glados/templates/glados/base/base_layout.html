@@ -118,10 +118,13 @@
 <!-- handlebars templates -->
 {% block common_handlebars %}
     {% include "glados/Handlebars/CommonSources.html" %}
-    {% include "glados/Handlebars/DownloadWizard/Hbs-WizardStep.html" %}
 {% endblock %}
 
 {% block custom_handlebars %}
+{% endblock %}
+
+{% block lay_handlebars %}
+    <div id="glados-lazy-handlebars"></div>
 {% endblock %}
 
 <!-- inline javascript -->

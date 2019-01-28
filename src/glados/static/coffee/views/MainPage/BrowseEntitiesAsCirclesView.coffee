@@ -1,7 +1,10 @@
 glados.useNameSpace 'glados.views.MainPage',
-  BrowseEntitiesAsCirclesView: Backbone.View.extend(ResponsiviseViewExt).extend
+  BrowseEntitiesAsCirclesView: Backbone.View\
+  .extend(ResponsiviseViewExt)\
+  .extend(glados.views.base.TrackView).extend
 
     initialize: ->
+      @initTracking('BrowseEntitiesAsCircles', glados.views.base.TrackView.viewTypes.VISUALISATION)
       @$vis_elem = $(@el).find('.BCK-circles-Container')
       @setUpResponsiveRender()
       @links =
@@ -12,6 +15,8 @@ glados.useNameSpace 'glados.views.MainPage',
         Assays: Assay.getAssaysListURL()
         Compounds: Compound.getCompoundsListURL()
         Targets: Target.getTargetsListURL()
+        Indications: glados.models.Compound.DrugIndication.getListURL()
+        Mechanisms: glados.models.Compound.MechanismOfAction.getListURL()
 
       @render()
 
@@ -63,6 +68,8 @@ glados.useNameSpace 'glados.views.MainPage',
         Assays: RED
         Compounds: DARKEST_GREEN
         Targets: PINK
+        Indications: DARK_GREEN
+        Mechanisms: DARK_GREEN
       }
 
       sizes = []
@@ -81,7 +88,7 @@ glados.useNameSpace 'glados.views.MainPage',
 
 #     Scale the sizes
       sizeScale = d3.scale.sqrt()
-        .range([4, 200])
+        .range([50, 250])
         .domain([min, max])
 
       for key, value of data

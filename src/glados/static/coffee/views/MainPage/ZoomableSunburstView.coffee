@@ -1,8 +1,11 @@
 glados.useNameSpace 'glados.views.MainPage',
-  ZoomableSunburstView: Backbone.View.extend(ResponsiviseViewExt).extend
+  ZoomableSunburstView: Backbone.View\
+  .extend(ResponsiviseViewExt)\
+  .extend(glados.views.base.TrackView).extend
 
     initialize: ->
       @config = arguments[0].config
+      @initTracking('ZoomableSunburst', glados.views.base.TrackView.viewTypes.VISUALISATION)
       @$vis_elem = $(@el).find('.BCK-sunburst-container')
       @setUpResponsiveRender()
       @model.on 'change', @render, @
@@ -289,33 +292,17 @@ glados.useNameSpace 'glados.views.MainPage',
       (getAngle(d.x + d.dx / 2) - (Math.PI / 2)) / Math.PI * 180
 
     fillBrowseButton: (d) ->
-      $button = $('.BCK-browse-button')
-      $button_medium = $('.BCK-browse-button-medium')
 
-      button_template = $('#' + $button.attr('data-hb-template'))
-      button_medium_template = $('#' + $button_medium.attr('data-hb-template'))
-
-      console.log 'button_medium: ', $button_medium.length
+      $browseButtonContainer = @config.browse_button_container
 
       if d.name == 'root'
-        $button.html Handlebars.compile(button_template.html())
-          node_name: ''
-          node_link: '/g/#browse/targets'
-
-        if $button_medium.length > 0
-          $button_medium.html Handlebars.compile(button_medium_template.html())
-            node_name: ''
-            node_link: '/g/#browse/targets'
-
+        glados.Utils.fillContentForElement $browseButtonContainer,
+          link_title: "Browse all Targets"
+          link_url: Target.getTargetsListURL()
       else
-
-        $button.html Handlebars.compile(button_template.html())
-          node_name: d.name
-          node_link: d.link
-        if $button_medium.length > 0
-          $button_medium.html Handlebars.compile(button_medium_template.html())
-            node_name: d.name
-            node_link: d.link
+        glados.Utils.fillContentForElement $browseButtonContainer,
+          link_title: "Browse all #{d.name} Targets"
+          link_url: d.link
 
     getBucketData: ->
       receivedBuckets = @model.get 'bucket_data'

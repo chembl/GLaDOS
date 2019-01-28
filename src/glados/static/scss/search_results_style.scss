@@ -188,10 +188,13 @@ em.glados-result-highlight {
       font-size: 1.05em;
       padding: 0.15em 1em !important;
 
-      &:active, &:target, &:focus, &:hover, &.selected {
-        outline: none !important;
-        background-color: $teal-4 !important;
+      &.clickable{
+        &:active, &:target, &:focus, &:hover, &.selected {
+          outline: none !important;
+          background-color: $teal-4 !important;
+        }
       }
+
     }
 
     .autocomplete-option-rc-link {

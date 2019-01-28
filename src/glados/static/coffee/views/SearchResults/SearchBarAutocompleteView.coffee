@@ -6,17 +6,18 @@ glados.useNameSpace 'glados.views.SearchResults',
     # Initialization
     # ------------------------------------------------------------------------------------------------------------------
 
-    initialize: () ->
-      @suggestionsTemplate = Handlebars.compile $(@el).find('.Handlebars-search-bar-autocomplete').html()
+    initialize: ->
       @searchModel = SearchModel.getInstance()
-      @searchModel.on('change:autocompleteSuggestions', @updateAutocomplete.bind(@))
+      @searchModel.on('change:autosuggestion_state', @updateAutocomplete, @)
+      @searchModel.on(SearchModel.EVENTS.SUGGESTIONS_REQUESTED, @updateAutocomplete, @)
       @$barElem = null
       @$autocompleteWrapperDiv = null
       @lastSearch = null
       @currentSelection = -1
       @numSuggestions = 0
-      @autocompleteSuggestions = []
+      @autocompleteSuggestions = SearchModel.getInstance().get('autocompleteSuggestions')
       @searchBarView = null
+      @positioningDebounceTime = 200
 
     attachSearchBar: (searchBarView)->
       @searchBarView = searchBarView
@@ -46,7 +47,6 @@ glados.useNameSpace 'glados.views.SearchResults',
     # ------------------------------------------------------------------------------------------------------------------
     # Bar Event Handling
     # ------------------------------------------------------------------------------------------------------------------
-
     barFocusHandler: (event)->
       @updateSelected true
       if @$autocompleteWrapperDiv?
@@ -79,16 +79,20 @@ glados.useNameSpace 'glados.views.SearchResults',
         keyEvent.preventDefault()
 
     barKeyupHandler: (keyEvent)->
+
       searchText = @$barElem.val().trim()
       isUpOrDownOrEnter = keyEvent.which == 38 or keyEvent.which == 40 or keyEvent.which  == 13
       if not isUpOrDownOrEnter
         @$autocompleteWrapperDiv.hide()
+
       if searchText.length >= 3
+
         # only submit the search if the text changes and is not on a selection doing up or down
         if @lastSearch != searchText and (@currentSelection == -1 or not isUpOrDownOrEnter)
           @searchModel.requestAutocompleteSuggestions searchText, @
       else
-        @searchModel.set('autocompleteSuggestions', [])
+        @searchModel.resetAutoSuggestionState()
+
       if not isUpOrDownOrEnter
         @lastSearch = searchText
 
@@ -102,7 +106,7 @@ glados.useNameSpace 'glados.views.SearchResults',
     # Autocomplete Navigation on Enter or Click
     # ------------------------------------------------------------------------------------------------------------------
 
-    getSuggestion: (suggIndex)->
+    getSuggestion: (suggIndex) ->
       if @autocompleteSuggestions? and suggIndex >= 0 and suggIndex < @autocompleteSuggestions.length
         return @autocompleteSuggestions[suggIndex]
       return null
@@ -170,31 +174,77 @@ glados.useNameSpace 'glados.views.SearchResults',
             @$autocompleteWrapperDiv.css
               top: (barPos.top+barH)+'px'
               'max-height': (window.innerHeight*3/4)+'px'
-        debouncedCall = _.debounce(debouncedCall.bind(@), 200)
+        debouncedCall = _.debounce(debouncedCall.bind(@), @positioningDebounceTime)
         @__recalculatePositioning = debouncedCall
       @__recalculatePositioning()
 
     # ------------------------------------------------------------------------------------------------------------------
     # Callback from model
     # ------------------------------------------------------------------------------------------------------------------
+    showPreloader: -> @renderMessageToUser('Loading suggestions...')
 
-    updateAutocomplete: ()->
+    renderMessageToUser: (msg) ->
+
+      templateParams =
+        msg: msg
+
+      #avoid flashing unstyled content
+      @$autocompleteWrapperDiv.hide()
+
+      glados.Utils.fillContentForElement(
+        $element=@$autocompleteWrapperDiv,
+        paramsObj=templateParams,
+        customTemplate='Handlebars-search-bar-autocomplete-message'
+      )
+
+      @recalculatePositioning()
+      #wait until the position is set to show the div
+      thisView = @
+      setTimeout((-> thisView.$autocompleteWrapperDiv.show()), @positioningDebounceTime)
+
+    renderSuggestions: ->
+
+      templateID = 'Handlebars-search-bar-autocomplete'
+      templateParams =
+        suggestions: @autocompleteSuggestions
+        textSearch: @lastSearch
+
+      glados.Utils.fillContentForElement(
+        $element=@$autocompleteWrapperDiv,
+        paramsObj=templateParams,
+        customTemplate='Handlebars-search-bar-autocomplete'
+      )
+
+      @assignOnclickCallbacks()
+      @recalculatePositioning()
+      @$autocompleteWrapperDiv.show()
+
+    renderWhenNoSuggestions: -> @renderMessageToUser('No suggestions found for this term.')
+
+    updateAutocomplete: ->
+
       if not @$barElem? or not @$barElem.is(":visible")
         return
       if @searchModel.autocompleteCaller != @
         return
-      if @$autocompleteWrapperDiv?
+
+      if not @$autocompleteWrapperDiv?
+        return
+
+      autoSuggestionState = @searchModel.get('autosuggestion_state')
+      if autoSuggestionState == SearchModel.AUTO_SUGGESTION_STATES.REQUESTING_SUGGESTIONS
+        @showPreloader()
+      else if autoSuggestionState == SearchModel.AUTO_SUGGESTION_STATES.SUGGESTIONS_RECEIVED
+
         @updateSelected true
         @autocompleteSuggestions = @searchModel.get('autocompleteSuggestions')
         @numSuggestions = @autocompleteSuggestions.length
-        @$autoccompleteDiv = @suggestionsTemplate
-          suggestions: @autocompleteSuggestions
-          textSearch: @lastSearch
-        @$autocompleteWrapperDiv.html(@$autoccompleteDiv)
-        @assignOnclickCallbacks()
-        @recalculatePositioning()
-        # Additional check to make sure the shown suggestions belong to the currently displayed text
-        if @numSuggestions == 0 or @autocompleteSuggestions[0].autocompleteQuery != @lastSearch
-          @$autocompleteWrapperDiv.hide()
+
+        if @numSuggestions == 0
+          @renderWhenNoSuggestions()
         else
-          @$autocompleteWrapperDiv.show()
+          @renderSuggestions()
+
+
+
+

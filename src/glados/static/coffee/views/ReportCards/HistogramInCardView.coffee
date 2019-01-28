@@ -10,8 +10,9 @@ glados.useNameSpace 'glados.views.ReportCards',
       @model.set('progress_elem', $progressElem)
 
       @resource_type = @config.resource_type
-      @initEmbedModal(@config.embed_section_name, @config.embed_identifier)
-      @activateModals()
+      unless @config.disable_embedding
+        @initEmbedModal(@config.embed_section_name, @config.embed_identifier)
+        @activateModals()
 
       histogramConfig = @config.histogram_config
       @model.set('current_xaxis_property', histogramConfig.properties[histogramConfig.initial_property_x].propName)

@@ -1,0 +1,102 @@
+<VirtualHost *:80>
+
+ServerName www.ebi.ac.uk
+ServerAlias wwwdev.ebi.ac.uk
+ServerAlias *.ebi.ac.uk
+ServerAlias *
+
+# Force http 1.0 for proxying: needed for gunicorn!
+SetEnv force-proxy-request-1.0 1
+ProxyPreserveHost On
+
+RedirectMatch /{SERVER_BASE_PATH}$ {SERVER_BASE_PATH}/
+
+# proxy everything except static files and dynamic downloads to gunicorn
+ProxyPassMatch /{SERVER_BASE_PATH}/static/(.*)$ !
+ProxyPassMatch /{SERVER_BASE_PATH}/dynamic-downloads/(.*)$ !
+ProxyPassMatch /{SERVER_BASE_PATH}/(.*)$ http://localhost:8000/{SERVER_BASE_PATH}/$1
+ProxyPassReverse /{SERVER_BASE_PATH}/static/(.*)$ !
+ProxyPassReverse /{SERVER_BASE_PATH}/dynamic-downloads/(.*)$ !
+ProxyPassReverse /{SERVER_BASE_PATH}/(.*)$ http://localhost:8000/{SERVER_BASE_PATH}/$1
+
+# serve directly static files
+Alias "/{SERVER_BASE_PATH}/static" "{STATIC_DIR}"
+<Directory "{STATIC_DIR}">
+  AllowOverride None
+  Order allow,deny
+  Allow from all
+</Directory>
+
+# serve directly dynamically generated download files
+Alias "/{SERVER_BASE_PATH}/dynamic-downloads" "{DYNAMIC_DOWNLOADS_DIR}"
+<Directory "{DYNAMIC_DOWNLOADS_DIR}">
+  AllowOverride None
+  Order allow,deny
+  Allow from all
+</Directory>
+
+# Always set these headers.
+Header unset access-control-allow-Origin
+Header unset Access-Control-Allow-Origin
+Header always set Access-Control-Allow-Origin "*"
+Header always set Access-Control-Allow-Methods "POST, GET, OPTIONS, DELETE, PUT"
+Header always set Access-Control-Max-Age "1000"
+Header always set Access-Control-Allow-Headers "x-requested-with, Content-Type, origin, authorization, accept, client-security-token"
+
+# Added a rewrite to respond with a 200 SUCCESS on every OPTIONS request.
+RewriteEngine On
+RewriteCond %{{REQUEST_METHOD}} OPTIONS
+RewriteRule ^(.*)$ $1 [R=200,L]
+
+LoadModule deflate_module modules/mod_deflate.so
+
+AddOutputFilterByType DEFLATE text/plain
+AddOutputFilterByType DEFLATE text/html
+AddOutputFilterByType DEFLATE text/xml
+AddOutputFilterByType DEFLATE text/css
+AddOutputFilterByType DEFLATE text/javascript
+AddOutputFilterByType DEFLATE image/png
+AddOutputFilterByType DEFLATE image/gif
+AddOutputFilterByType DEFLATE image/svg
+AddOutputFilterByType DEFLATE application/font-woff
+AddOutputFilterByType DEFLATE application/xml
+AddOutputFilterByType DEFLATE application/xhtml+xml
+AddOutputFilterByType DEFLATE application/rss+xml
+AddOutputFilterByType DEFLATE application/javascript
+AddOutputFilterByType DEFLATE application/x-javascript
+AddOutputFilterByType DEFLATE application/json .json
+
+# cache
+LoadModule expires_module modules/mod_expires.so
+
+ExpiresActive On
+
+# image and font files are expected to change less
+ExpiresByType image/png "access plus 1 week"
+ExpiresByType image/gif "access plus 1 week"
+ExpiresByType image/svg "access plus 1 week"
+ExpiresByType application/font-woff "access plus 1 week"
+ExpiresByType application/font-woff2 "access plus 1 week"
+ExpiresByType application/font-ttf "access plus 1 week"
+
+# style and javascript files are expected to change daily
+ExpiresByType text/css "access plus 1 day"
+ExpiresByType text/javascript "access plus 1 day"
+ExpiresByType application/javascript "access plus 1 day"
+ExpiresByType application/x-javascript "access plus 1 day"
+
+# generated downloads are expected to change only after a new release is done. Browsers won't cache big files, but we can try
+# this to see how it works. It shouldn't hurt.
+ExpiresByType application/zip "access plus 1 week"
+
+Header append Cache-Control "public"
+
+<Location /server-status>
+  SetHandler server-status
+
+  Order Deny,Allow
+  Deny from all
+  Allow from .ebi.ac.uk
+</Location>
+
+</VirtualHost>

@@ -59,6 +59,14 @@ common_urls = [
 
   url(r'^visualise/$', views.visualise, name='visualise'),
 
+  url(r'^play/$', views.play, name='play'),
+
+  url(r'^handlebars/visualisation_sources/$',
+      xframe_options_exempt(
+          DirectTemplateView.as_view(
+              template_name="glados/Handlebars/LazilyLoaded/Visualisations/VisualisationsSources.html")
+      ), ),
+
   url(r'^design_components/$', views.design_components , name='design_components'),
 
   url(r'^marvin_search_fullscreen/$',
@@ -100,6 +108,33 @@ common_urls = [
   url(r'^chembl-ntd/$',
       RedirectView.as_view(url='https://chembl.gitbook.io/chembl-ntd/',
                            permanent=True), name='chembl-ntd'),
+
+  url(r'^status/$',
+      RedirectView.as_view(url='http://chembl.github.io/status/',
+                           permanent=True), name='status'),
+
+  url(r'^ws_home/$',
+      RedirectView.as_view(url='https://www.ebi.ac.uk/chembl/ws',
+                           permanent=True), name='web_services_home'),
+
+  url(r'^unichem_home/$',
+      RedirectView.as_view(url='https://www.ebi.ac.uk/unichem',
+                           permanent=True), name='unichem_home'),
+
+  url(r'^surechembl/$',
+      RedirectView.as_view(url='https://www.surechembl.org',
+                           permanent=True), name='surechembl'),
+  url(r'^chembl_rdf/$',
+      RedirectView.as_view(url='https://www.ebi.ac.uk/rdf',
+                           permanent=True), name='chembl_rdf'),
+
+  url(r'^chembl_blog/$',
+      RedirectView.as_view(url='https://chembl.blogspot.co.uk',
+                           permanent=True), name='chembl_blog'),
+
+  url(r'^chembl_twitter/$',
+      RedirectView.as_view(url='https://twitter.com/chembl',
+                           permanent=True), name='chembl_twitter'),
 
   url(r'^db_schema',
     DirectTemplateView.as_view(template_name="glados/database_schema.html"), name='db_schema'),
@@ -204,6 +239,12 @@ common_urls = [
   url(r'^elasticsearch_cache', views.elasticsearch_cache, name='elasticsearch_cache'),
 
   # --------------------------------------------------------------------------------------------------------------------
+  # Tracking
+  # --------------------------------------------------------------------------------------------------------------------
+  url(r'^register_usage', views.register_usage, name='register_usage'),
+  url(r'^register_search', views.register_search, name='register_search'),
+
+  # --------------------------------------------------------------------------------------------------------------------
   # Unichem
   # --------------------------------------------------------------------------------------------------------------------
   url(r'^unichem_sss', DirectTemplateView.as_view(template_name="glados/Unichem/substructureSimilaritySearch.html"), name='unichem_sss'),
@@ -211,7 +252,18 @@ common_urls = [
   # --------------------------------------------------------------------------------------------------------------------
   # Unichem
   # --------------------------------------------------------------------------------------------------------------------
-  url(r'^api/', include('glados.api.urls'))
+  url(r'^api/', include('glados.api.urls')),
+
+  # --------------------------------------------------------------------------------------------------------------------
+  # django RQ (Redis Queue)
+  # --------------------------------------------------------------------------------------------------------------------
+  url(r'^django-rq/', include('django_rq.urls')),
+
+  # --------------------------------------------------------------------------------------------------------------------
+  # Downloads
+  # --------------------------------------------------------------------------------------------------------------------
+  url(r'^generate-download', views.generate_download, name='generate_download'),
+  url(r'^download-progress/(?P<download_id>.*)$', views.get_download_status, name='get_download_status'),
 ]
 
 # ----------------------------------------------------------------------------------------------------------------------

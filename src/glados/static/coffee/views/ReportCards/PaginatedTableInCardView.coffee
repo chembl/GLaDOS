@@ -7,8 +7,10 @@ glados.useNameSpace 'glados.views.ReportCards',
       @collection.on 'reset', @.render, @
       @config = arguments[0].config
       @resource_type = arguments[0].resource_type
+      tableConfig = @config.table_config
       @paginatedView = glados.views.PaginatedViews.PaginatedViewFactory.getNewTablePaginatedView(
-        @collection, @el, customRenderEvent=undefined, disableColumnsSelection=true)
+        @collection, @el, customRenderEvent=undefined, disableColumnsSelection=true, disableItemSelection=undefined,
+        tableConfig)
 
       @initEmbedModal(@config.embed_section_name, @config.embed_identifier)
       @activateModals()

@@ -23,7 +23,10 @@ glados.useNameSpace 'glados.apps.Browsers',
         .bind(glados.models.paginatedCollections.PaginatedCollectionFactory)
       activities: glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESActivitiesList\
         .bind(glados.models.paginatedCollections.PaginatedCollectionFactory)
-
+      mechanisms_of_action: glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESMechanismsOfActionList\
+        .bind(glados.models.paginatedCollections.PaginatedCollectionFactory)
+      drug_indications: glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESDrugIndicationsList\
+        .bind(glados.models.paginatedCollections.PaginatedCollectionFactory)
 
     # TODO: standardise the entity names from the models
     @entityNames:
@@ -35,6 +38,8 @@ glados.useNameSpace 'glados.apps.Browsers',
       tissues: 'Tissues'
       drugs: 'Drugs'
       activities: 'Activities'
+      mechanisms_of_action: 'Mechanisms of Action'
+      drug_indications: 'Drug Indications'
 
     @initBrowserForEntity = (entityName, query, state, isFullState=false) ->
 

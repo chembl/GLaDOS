@@ -14,8 +14,9 @@ glados.useNameSpace 'glados.views.ReportCards',
         @createPieView()
         @bindAgg()
 
-      @initEmbedModal(@config.embed_section_name, @config.embed_identifier)
-      @activateModals()
+      unless @config.disable_embedding
+        @initEmbedModal(@config.embed_section_name, @config.embed_identifier)
+        @activateModals()
 
     #-------------------------------------------------------------------------------------------------------------------
     # Events binding

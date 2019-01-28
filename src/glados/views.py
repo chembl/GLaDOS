@@ -15,6 +15,8 @@ from . import og_tags_generator
 from . import schema_tags_generator
 from . import glados_server_statistics
 from . import heatmap_helper
+from . import dynamic_downloads_manager
+import traceback
 
 
 def visualise(request):
@@ -23,6 +25,15 @@ def visualise(request):
     }
 
     return render(request, 'glados/visualise.html', context)
+
+
+def play(request):
+
+    context = {
+        'hide_breadcrumbs': True
+    }
+
+    return render(request, 'glados/play.html', context)
 
 
 def get_latest_tweets(page_number=1, count=15):
@@ -98,6 +109,14 @@ def get_latest_tweets_json(request):
 
 
 def get_latest_blog_entries(request, pageToken):
+
+    if not settings.BLOGGER_ENABLED:
+        default_empty_response = {
+            'entries': [],
+            'totalCount': 0
+        }
+        return JsonResponse(default_empty_response)
+
     blogId = '2546008714740235720'
     key = settings.BLOGGER_KEY
     fetchBodies = True
@@ -214,7 +233,7 @@ def get_database_summary(request):
 
 def get_entities_records(request):
 
-    cache_key = 'entities_records'
+    cache_key = 'entities_records_v2'
     cache_time = 604800
     cache_response = cache.get(cache_key)
 
@@ -239,7 +258,9 @@ def get_entities_records(request):
         'Documents': Search(index="chembl_document").execute().hits.total,
         'Targets': Search(index="chembl_target").execute().hits.total,
         'Cells': Search(index="chembl_cell_line").execute().hits.total,
-        'Tissues': Search(index="chembl_tissue").execute().hits.total
+        'Tissues': Search(index="chembl_tissue").execute().hits.total,
+        'Indications': Search(index="chembl_drug_indication_by_parent").execute().hits.total,
+        'Mechanisms': Search(index="chembl_mechanism_by_parent_target").execute().hits.total
     }
 
     cache.set(cache_key, response, cache_time)
@@ -249,30 +270,36 @@ def get_entities_records(request):
 
 def get_github_details(request):
 
-    last_commit = requests.get('https://api.github.com/repos/chembl/GLaDOS/commits/master').json()
-
     cache_key = 'github_details'
     cache_time = 1800
     cache_response = cache.get(cache_key)
 
-    now = datetime.datetime.now()
-    date = last_commit['commit']['author']['date'][:-1]
-    date = datetime.datetime.strptime(date, '%Y-%m-%dT%H:%M:%S')
-    time_ago = timeago.format(date, now)
-
-    if cache_response != None:
+    if cache_response is not None:
         print('github details are in cache')
+        now = datetime.datetime.now()
+        raw_commit_date = cache_response['raw_commit_date']
+        commit_date = datetime.datetime.strptime(raw_commit_date, '%Y-%m-%dT%H:%M:%S')
+        time_ago = timeago.format(commit_date, now)
         cache_response['time_ago'] = time_ago
         return JsonResponse(cache_response)
 
     print('github details are not in cache')
+    last_commit = requests.get('https://api.github.com/repos/chembl/GLaDOS/commits/master').json()
+
+    now = datetime.datetime.now()
+    raw_commit_date = last_commit['commit']['author']['date'][:-1]
+    commit_date = datetime.datetime.strptime(raw_commit_date, '%Y-%m-%dT%H:%M:%S')
+    time_ago = timeago.format(commit_date, now)
 
     response = {
         'url': last_commit['html_url'],
         'author': last_commit['commit']['author']['name'],
         'time_ago': time_ago,
+        'raw_commit_date': raw_commit_date,
         'message': last_commit['commit']['message']
     }
+
+    print('response: ', response)
 
     cache.set(cache_key, response, cache_time)
 
@@ -368,6 +395,46 @@ def request_heatmap_helper(request):
 
     return JsonResponse({'data': 'Data'})
 
+# ----------------------------------------------------------------------------------------------------------------------
+# Downloads
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+def generate_download(request):
+
+    if request.method != "POST":
+        return JsonResponse({'error': 'This is only available via POST'})
+
+    index_name = request.POST.get('index_name', '')
+    raw_query = request.POST.get('query', '')
+    desired_format = request.POST.get('format', '')
+    raw_columns_to_download = request.POST.get('columns', '')
+
+    print('index_name: ', index_name)
+    print('raw_query: ', raw_query)
+    print('desired_format: ', desired_format)
+    print('raw_columns_to_download: ', raw_columns_to_download)
+
+    try:
+        response = dynamic_downloads_manager.generate_download(index_name, raw_query, desired_format,
+                                                               raw_columns_to_download)
+        return JsonResponse(response)
+    except Exception as e:
+        traceback.print_exc()
+        return HttpResponse('Internal Server Error', status=500)
+
+def get_download_status(request, download_id):
+
+    if request.method != "GET":
+        return JsonResponse({'error': 'This is only available via GET'})
+
+    try:
+        response = dynamic_downloads_manager.get_download_status(download_id)
+        return JsonResponse(response)
+    except Exception as e:
+        traceback.print_exc()
+        return HttpResponse('Internal Server Error', status=500)
+
 
 # noinspection PyBroadException
 def elasticsearch_cache(request):
@@ -394,8 +461,44 @@ def extend_url(request, hash):
     return JsonResponse(resp_data)
 
 # ----------------------------------------------------------------------------------------------------------------------
+# Tracking
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+def register_usage(request):
+
+    if request.method == "POST":
+        try:
+            view_name = request.POST.get('view_name', '')
+            view_type = request.POST.get('view_type', '')
+            entity_name = request.POST.get('entity_name', '')
+            glados_server_statistics.record_view_usage(view_name, view_type, entity_name)
+            return JsonResponse({'success': 'registration successful!'})
+        except Exception as e:
+            print_server_error(e)
+            return HttpResponse('Internal Server Error', status=500)
+    else:
+        return JsonResponse({'error': 'this is only available via POST! You crazy hacker! :P'})
+
+
+def register_search(request):
+
+    if request.method == "POST":
+        try:
+            search_type = request.POST.get('search_type', '')
+            glados_server_statistics.record_search(search_type)
+            return JsonResponse({'success': 'registration successful!'})
+        except Exception as e:
+            print_server_error(e)
+            return HttpResponse('Internal Server Error', status=500)
+    else:
+        return JsonResponse({'error': 'this is only available via POST! You crazy hacker! :P'})
+
+# ----------------------------------------------------------------------------------------------------------------------
 # Report Cards
 # ----------------------------------------------------------------------------------------------------------------------
+
+
 def compound_report_card(request, chembl_id):
 
     context = {
