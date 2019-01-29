@@ -1,0 +1,17 @@
+@import "chembl_base";
+
+.sequence-search-menu-wrapper{
+
+  background-color: red;
+  min-height: 100vh;
+  height: 100vh;
+  top: 0 !important;
+  width: 85%;
+
+  .sequence-search-menu-container{
+    height: 100%;
+    background-color: blue;
+    display: flex;
+  }
+
+}

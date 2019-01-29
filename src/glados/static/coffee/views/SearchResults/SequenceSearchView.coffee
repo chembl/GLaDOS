@@ -3,11 +3,13 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     initialize: ->
 
-      loadPromise = glados.Utils.fillContentForElement($(@el))
-      loadPromise.then ->
-        console.log 'CONTENT LOADED'
+      @render()
 
     render: ->
+
+      loadPromise = glados.Utils.fillContentForElement($(@el))
+      loadPromise.then ->
+        console.log 'content loaded'
 
 
 

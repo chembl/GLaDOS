@@ -17,5 +17,4 @@ glados.useNameSpace 'glados.helpers',
         @sequenceSearchView = new glados.views.SearchResults.SequenceSearchView
           el: $modal
 
-      console.log '@showSequenceSearchModal: '
       $modal.modal('open')
