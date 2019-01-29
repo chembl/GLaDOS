@@ -115,3 +115,5 @@ yarn-error.log*
 /test/e2e/reports/
 selenium-debug.log
 
+# Dev configurations, used on Dockerfile
+/configurations/config.yml
