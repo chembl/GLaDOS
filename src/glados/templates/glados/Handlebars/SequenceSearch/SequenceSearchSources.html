@@ -1,7 +1,14 @@
 {% verbatim %}
 <script id="Handlebars-Common-StructureSearch" type="text/x-handlebars-template">
-    <div id="{{id}}" class='modal'>
-        Search by structure!
+
+    <div id="{{id}}" class='modal' data-hb-template='Handlebars-Search-SequenceSearch'
+         data-hb-is-lazy="true"
+         {% endverbatim %}
+         data-hb-src="{% url 'handlebars-search' %}">
+        {% verbatim %}
+
+        Hola
+
     </div>
 </script>
 {% endverbatim %}

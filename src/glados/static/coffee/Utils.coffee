@@ -381,19 +381,20 @@ glados.useNameSpace 'glados',
       promise = jQuery.Deferred()
 
       if $lazyTemplatesContainer.find("##{templateID}").length > 0
-        glados.Utils.fillContentForElement($element, paramsObj, templateID) 
+        glados.Utils.fillElementWithTemplate($element, paramsObj, templateID)
       else
         $lazyTemplatesContainer.append("<div id='#{templateContainerID}'>")
         $templateContainer = $lazyTemplatesContainer.find("##{templateContainerID}")
 
+        $element.attr('hb-loading-status', 'loading')
         $templateContainer.load templateLoadURL, ( response, status, xhr ) ->
           if ( status == "error" )
-            glados.Utils.fillContentForElement($element, {
+            glados.Utils.fillElementWithTemplate($element, {
               msg: 'There was an error loading the html content'
             }, 'Handlebars-Common-CardError')
             promise.reject("ERROR: unable to load template #{templateID} from #{templateSourceURL}")
           else
-            glados.Utils.fillContentForElement($element, paramsObj, templateID)
+            glados.Utils.fillElementWithTemplate($element, paramsObj, templateID)
             promise.resolve()
 
       promise.fail ((msg) -> throw msg)
@@ -403,6 +404,15 @@ glados.useNameSpace 'glados',
     fillContentForElement: ($element, paramsObj={}, customTemplate, fillWithPreloader=false)->
 
 
+      if $element.attr('data-hb-is-lazy') == 'true'
+        templateID = $element.attr('data-hb-template')
+        templateSourceURL = $element.attr('data-hb-src')
+        return glados.Utils.loadTemplateAndFillContentForElement(templateSourceURL, templateID, $element)
+
+      else
+        glados.Utils.fillElementWithTemplate($element, paramsObj, customTemplate, fillWithPreloader)
+
+    fillElementWithTemplate: ($element, paramsObj={}, customTemplate, fillWithPreloader=false)->
       if customTemplate?
         templateSelector = '#' + customTemplate
       else
@@ -418,6 +428,7 @@ glados.useNameSpace 'glados',
         templateFunction = glados.Utils.cachedTemplateFunctions[templateSelector]
 
       $element.html templateFunction(paramsObj)
+      $element.attr('hb-loading-status', 'loaded')
 
     getContentFromTemplate: (templateID, paramsObj={}, customTemplateContent) ->
 
