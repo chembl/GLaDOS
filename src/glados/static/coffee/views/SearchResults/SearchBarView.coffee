@@ -20,13 +20,16 @@ glados.useNameSpace 'glados.views.SearchResults',
       @autocompleteView = new glados.views.SearchResults.SearchBarAutocompleteView
         el: autocompleteElem
       @autocompleteView.attachSearchBar(@)
-      @initializeSketcherButton()
+      @initializeSketcherButtons()
+      @initializeSequenceSearchButtons()
 
-    initializeSketcherButton: ()->
+    initializeSketcherButtons: ->
       $openEditorBtn = $(@el).find('.BCK-Draw-Structure')
       $openEditorBtn.click glados.helpers.ChemicalEditorHelper.showChemicalEditorModal
 
-
+    initializeSequenceSearchButtons: ->
+      $enterSequenceButton = $(@el).find('.BCK-Enter-Sequence')
+      $enterSequenceButton.click glados.helpers.SequenceSearchHelper.showSequenceSearchModal
     # ------------------------------------------------------------------------------------------------------------------
     # Events Handling
     # ------------------------------------------------------------------------------------------------------------------
