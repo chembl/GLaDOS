@@ -12,6 +12,13 @@
     display: flex;
     flex-wrap: wrap;
 
+    .input-options-container{
+      margin-top: 10px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+    }
+
     .enter-a-sequence{
       width: 50%;
       height: 80%;
@@ -38,12 +45,6 @@
           }
         }
 
-        .input-options-container{
-          margin-top: 20px;
-          display: flex;
-          flex-direction: row;
-          justify-content: center;
-        }
 
       }
 
@@ -53,14 +54,12 @@
       width: 50%;
       height: 80%;
       padding: 25px;
-
-      .header-text{
-        display: flex;
-        justify-content: space-between;
-      }
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
 
       .params-container{
-        height: calc(100% - 30px);
+
         overflow-y: scroll;
         margin-top: 20px;
         display: flex;
@@ -83,7 +82,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #efefef;
     }
 
     /* -------- MEDIUM SCREEN -------- */
