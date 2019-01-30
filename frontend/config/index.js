@@ -45,10 +45,10 @@ module.exports = {
 
   build: {
     // Template for index.html
-    index: path.resolve(__dirname, '../../templates/glados/Unichem/substructureSimilaritySearch.html'),
+    index: path.resolve(__dirname, '../../src/glados/templates/glados/Unichem/substructureSimilaritySearch.html'),
 
     // Paths
-    assetsRoot: path.resolve(__dirname, '../../static'),
+    assetsRoot: path.resolve(__dirname, '../../src/glados/static'),
     assetsSubDirectory: 'unichem_gen',
     assetsPublicPath: 'static/',
 

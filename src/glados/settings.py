@@ -17,7 +17,6 @@ import logging
 import yaml
 from pymongo.read_preferences import ReadPreference
 
-
 class GladosSettingsError(Exception):
     """Base class for exceptions in GLaDOS configuration."""
     pass
