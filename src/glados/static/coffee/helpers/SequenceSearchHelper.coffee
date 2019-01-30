@@ -9,7 +9,7 @@ glados.useNameSpace 'glados.helpers',
       if $modal.length == 0
 
         console.log 'creating modal'
-        $modal = ButtonsHelper.generateModalFromTemplate($trigger=undefined, 'Handlebars-Common-StructureSearch',
+        $modal = ButtonsHelper.generateModalFromTemplate($trigger=undefined, 'Handlebars-Common-SequenceSearch',
           startingTop=undefined, endingTop=undefined, customID=modalID)
 
       if not @sequenceSearchView?
@@ -17,4 +17,4 @@ glados.useNameSpace 'glados.helpers',
         @sequenceSearchView = new glados.views.SearchResults.SequenceSearchView
           el: $modal
 
-      $modal.modal('open')
+      @sequenceSearchView.render()

@@ -407,7 +407,7 @@ glados.useNameSpace 'glados',
       if $element.attr('data-hb-is-lazy') == 'true'
         templateID = $element.attr('data-hb-template')
         templateSourceURL = $element.attr('data-hb-src')
-        return glados.Utils.loadTemplateAndFillContentForElement(templateSourceURL, templateID, $element)
+        return glados.Utils.loadTemplateAndFillContentForElement(templateSourceURL, templateID, $element, paramsObj)
 
       else
         glados.Utils.fillElementWithTemplate($element, paramsObj, customTemplate, fillWithPreloader)

@@ -25,7 +25,36 @@
               </form>
 
         </div>
-        <div class="define-your-parameters">Define your parameters</div>
+        <div class="define-your-parameters">
+            <div class="header-text">
+                <div>2. Define your parameters for <b>blastp</b>:</div>
+                <div><a class="btn-small hollow-teal"> Reset to Default </a></div>
+            </div>
+
+            <div>
+
+            </div>
+
+            <div class="params-container">
+
+                {{#each blast_params}}
+                <div class="blast-param-selector {{#if this.long}}long{{/if}}">
+                    <a target="_blank" href="{{ this.param_help_link }}">{{this.param_label}}</a>:
+
+                    <select class="BCK-ParamSelect">
+
+                      <option value="1" selected >BLOSUM45</option>
+                      <option value="2">BLOSUM50</option>
+                      <option value="3">BLOSUM62</option>
+                    </select>
+                </div>
+                {{/each}}
+
+
+            </div>
+
+
+        </div>
         <div class="search-button-container">
             <a class="btn-chembl"> Search in ChEMBL</a>
         </div>
