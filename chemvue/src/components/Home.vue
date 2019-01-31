@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout align-start justify-start column>
-      <h1>ChEMBL</h1>
+      <h1>ChEMBL Perro</h1>
       <h3>Substructure Similarity Search</h3>
       <v-container>
         <v-layout align-center justify-center>

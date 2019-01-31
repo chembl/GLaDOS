@@ -54,6 +54,7 @@ print('DEBUG: ', DEBUG)
 
 # Build paths inside the project like this: os.path.join(GLADOS_ROOT, ...)
 GLADOS_ROOT = os.path.dirname(os.path.abspath(glados.__file__))
+VUE_ROOT = os.path.join(GLADOS_ROOT, 'v')
 DYNAMIC_DOWNLOADS_DIR = os.path.join(GLADOS_ROOT, 'dynamic-downloads')
 print('DYNAMIC_DOWNLOADS_DIR: ', DYNAMIC_DOWNLOADS_DIR)
 
@@ -140,7 +141,8 @@ INSTALLED_APPS = [
   'glados',
   'compressor',
   'twitter',
-  'django_rq'
+  'django_rq',
+  'unichem'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -193,12 +195,6 @@ DATABASES = {
   'default': {
     'ENGINE': 'django.db.backends.sqlite3',
     'NAME': os.path.join(GLADOS_ROOT, 'db/db.sqlite3')
-  },
-  'oradb': {
-    'ENGINE':   'django.db.backends.oracle',
-    'NAME':     'molpro',
-    'USER':     'leFakePass',
-    'PASSWORD': 'leFakePass'
   }
 }
 if ENABLE_MYSQL_DATABASE:
@@ -228,18 +224,6 @@ else:
         'NAME': os.path.join(GLADOS_ROOT, 'db/db.sqlite3')
     }
 
-ENABLE_UNICHEM_ORACLE_DB = run_config.get('enable_unichem_oracle_db', False)
-print('ENABLE_UNICHEM_ORACLE_DB: ', ENABLE_UNICHEM_ORACLE_DB)
-if ENABLE_UNICHEM_ORACLE_DB:
-
-    DATABASES['oradb'] = {
-        'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'oradb/xe',
-        'USER': 'hr',
-        'PASSWORD': 'hr'
-    }
-
-    DATABASE_ROUTERS = ['glados.db.APIDatabaseRouter.APIDatabaseRouter']
 # ----------------------------------------------------------------------------------------------------------------------
 # Django RQ
 # https://github.com/rq/django-rq
@@ -307,9 +291,13 @@ LOCALE_PATHS = [
 USE_X_FORWARDED_HOST = True
 
 STATIC_URL = '/{0}static/'.format(SERVER_BASE_PATH)
+VUE_STATIC_URL = '{0}v/'.format(SERVER_BASE_PATH)
+
+print('VUE ROOT', VUE_ROOT)
 
 STATICFILES_DIRS = (
-  os.path.join(GLADOS_ROOT, 'static/'),
+    os.path.join(GLADOS_ROOT, 'static/'),
+    VUE_ROOT
 )
 
 STATIC_ROOT = os.path.join(GLADOS_ROOT, 'static_root')
