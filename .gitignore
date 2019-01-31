@@ -115,5 +115,8 @@ yarn-error.log*
 /test/e2e/reports/
 selenium-debug.log
 
+# VUE_ROOT CACHE
+src/glados/v/*
+
 # Dev configurations, used on Dockerfile
 /configurations/config.yml
