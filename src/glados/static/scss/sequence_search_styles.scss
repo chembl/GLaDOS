@@ -58,10 +58,6 @@
       flex-direction: column;
       justify-content: space-between;
 
-      .header-text{
-        display: flex;
-        justify-content: space-between;
-      }
 
       .params-container{
 
@@ -76,6 +72,17 @@
           &.long{
             width: 100%;
           }
+        }
+
+        .reset-params-btn-container{
+          text-align: center;
+          width: 100%;
+        }
+
+
+        &.closed{
+          display: none;
+
         }
       }
     }

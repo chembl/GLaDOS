@@ -5,6 +5,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       @state = glados.views.SearchResults.SequenceSearchView.states.INITIAL_STATE
       @selectorsActivated = false
+      @paramsTogglerActivated = false
 
     render: ->
 
@@ -39,10 +40,40 @@ glados.useNameSpace 'glados.views.SearchResults',
       $element = $(@el)
       $selectors = $element.find('.BCK-ParamSelect')
       $element.modal('open')
+
       if not @selectorsActivated
         $selectors.material_select()
         console.log 'selectors activated'
         @selectorsActivated = true
+
+      if not @paramsTogglerActivated
+
+        @initParamsToggler()
+        @paramsTogglerActivated = true
+
+    initParamsToggler: ->
+
+      $paramsToggler = $(@el).find('.BCK-show-parameters')
+      $paramsContainer = $(@el).find('.BCK-params-container')
+      $paramsContainer.attr('is_open', 'no')
+      $paramsContainer.addClass('closed')
+
+      $paramsToggler.click ->
+
+        if $paramsContainer.attr('is_open') == 'no'
+          console.log 'open params'
+          $paramsContainer.attr('is_open', 'yes')
+          $paramsContainer.removeClass('closed')
+          $paramsToggler.text('Hide Parameters')
+        else
+          console.log 'close params'
+          $paramsContainer.attr('is_open', 'no')
+          $paramsContainer.addClass('closed')
+          $paramsToggler.text('Show Parameters')
+
+
+
+
 
 glados.views.SearchResults.SequenceSearchView.states =
   INITIAL_STATE: 'INITIAL_STATE'

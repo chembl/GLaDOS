@@ -14,13 +14,13 @@
                 <textarea ></textarea>
                 <div class="input-options-container" >
                     <div>
-                        Use a <a class="dotted-link">example sequence</a>
+                        <a class="dotted-link">Use Example Sequence</a>
                     </div>
                     <div>
-                        <a class="dotted-link">clear sequence</a>
+                        <a class="dotted-link">Clear Sequence</a>
                     </div>
                     <div>
-                        <a class="dotted-link">upload a file</a>
+                        <a class="dotted-link">Upload a File</a>
                     </div>
                 </div>
             </div>
@@ -28,9 +28,10 @@
         </div>
         <div class="define-your-parameters">
             <div class="header-text">
-                <div>2. Modify the default parameters for <b>blastp</b> (optional):</div>
+                <div>2. Modify the default parameters for <b>blastp</b> (optional):
+                </div>
                 <div>
-                    <a class="dotted-link"> show parameters</a>
+                    <a class="BCK-show-parameters dotted-link"> Show Parameters</a>
                 </div>
             </div>
 
@@ -38,7 +39,7 @@
 
             </div>
 
-            <div class="params-container">
+            <div class="BCK-params-container params-container closed">
 
                 {{#each blast_params}}
                 <div class="blast-param-selector {{#if this.long}}long{{/if}}">
@@ -54,12 +55,10 @@
                 {{/each}}
 
 
+                <div class="reset-params-btn-container" >
+                    <a class="dotted-link">reset parameters</a>
+                </div>
             </div>
-
-            <div class="input-options-container">
-                <a class="dotted-link">reset parameters</a>
-            </div>
-
 
         </div>
         <div class="search-button-container">
