@@ -13,8 +13,13 @@
             <div class="sequence-textarea-container">
                 <textarea ></textarea>
                 <div class="input-options-container" >
-                    <div>Use a <a class="dotted-link">example sequence</a> |
-                        <a class="dotted-link">clear sequence</a> |
+                    <div>
+                        Use a <a class="dotted-link">example sequence</a>
+                    </div>
+                    <div>
+                        <a class="dotted-link">clear sequence</a>
+                    </div>
+                    <div>
                         <a class="dotted-link">upload a file</a>
                     </div>
                 </div>
@@ -23,7 +28,10 @@
         </div>
         <div class="define-your-parameters">
             <div class="header-text">
-                <div>2. Define your parameters for <b>blastp</b>:</div>
+                <div>2. Modify the default parameters for <b>blastp</b> (optional):</div>
+                <div>
+                    <a class="dotted-link"> show parameters</a>
+                </div>
             </div>
 
             <div>
@@ -55,7 +63,9 @@
 
         </div>
         <div class="search-button-container">
-            <a href="{% endverbatim %}{% url 'javascript_routing' %}{% verbatim %}#browse/targets" class="btn-chembl"> Search in ChEMBL</a>
+            <a href="{% endverbatim %}{% url 'javascript_routing' %}{% verbatim %}#browse/targets" class="btn-chembl">
+                3. Search in ChEMBL
+            </a>
         </div>
     </div>
 </script>
