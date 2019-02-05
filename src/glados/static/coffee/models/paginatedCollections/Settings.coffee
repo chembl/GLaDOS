@@ -84,8 +84,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           Table:
             Default: Target.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
             Additional: Target.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL
-          Cards:
-            Default: Target.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
           Carousel:
             Default: Target.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         DOWNLOAD_COLUMNS: Target.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS
@@ -93,7 +91,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
-          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Heatmap]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
         ENABLE_COLLECTION_CACHING: true
@@ -112,16 +109,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           Table:
             Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
             Additional: Assay.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL
-          Cards:
-            Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
           Carousel:
             Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         DOWNLOAD_COLUMNS: Assay.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.AssaySchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
-        AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
-          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']]
+        AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
         ENABLE_COLLECTION_CACHING: true
         LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
@@ -139,16 +133,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           Table:
             Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
             Additional: Document.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL
-          Cards:
-            Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_CARD
           Carousel:
             Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_CARD
         DOWNLOAD_COLUMNS: Document.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.DocumentSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
-        AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
-          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']]
+        AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
         ENABLE_COLLECTION_CACHING: true
         LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
@@ -166,16 +157,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           Table:
             Default: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
             Additional: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL
-          Cards:
-            Default: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
           Carousel:
             Default: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         DOWNLOAD_COLUMNS: CellLine.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.CellLineSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
-        AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
-          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']]
+        AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
         ENABLE_COLLECTION_CACHING: true
         LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
@@ -193,16 +181,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           Table:
             Default: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
             Additional: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL
-          Cards:
-            Default: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
           Carousel:
             Default: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         DOWNLOAD_COLUMNS: glados.models.Tissue.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.TissueSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
-        AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
-          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']]
+        AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
         ENABLE_COLLECTION_CACHING: true
         LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
