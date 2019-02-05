@@ -41,11 +41,11 @@ glados.useNameSpace 'glados.views.Browsers',
         el: $(@el).find('.BCK-ToolBar-Container')
         menu_view: @
 
-      @$facetsElem = $(@el).find('.BCK-Facets-Container')
-      @facetsView = new glados.views.Browsers.BrowserFacetView
-        collection: @collection
-        el: @$facetsElem
-        menu_view: @
+#      @$facetsElem = $(@el).find('.BCK-Facets-Container')
+#      @facetsView = new glados.views.Browsers.BrowserFacetView
+#        collection: @collection
+#        el: @$facetsElem
+#        menu_view: @
 
       unless @collection.getMeta('streaming_mode')
         @$queryEditorElem = $(@el).find('.BCK-query-editor')
