@@ -453,6 +453,13 @@ def elasticsearch_cache(request):
         return JsonResponse({'error': 'this is only available via POST! You crazy hacker! :P'})
 
 
+def chembl_list_helper(request):
+    if request.method == "POST":
+        print('chembl lis helper')
+    else:
+        return JsonResponse({'error': 'this is only available via POST! You crazy hacker! :P'})
+
+
 def extend_url(request, hash):
     resp_data = {
         'long_url': url_shortener.get_original_url(hash)

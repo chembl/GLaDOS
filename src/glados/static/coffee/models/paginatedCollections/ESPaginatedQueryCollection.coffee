@@ -164,6 +164,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # Parses the Elastic Search Response and resets the pagination metadata
     parse: (data) ->
 
+      console.log 'PARSING'
+      console.log data
+      return
+
       lastPageResultsIds = null
       lastPageResultsIds = @getMeta('last_page_results_ids')
       if not lastPageResultsIds?
@@ -234,7 +238,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       @setItemsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.FETCHING_ITEMS)
       # Creates the Elastic Search Query parameters and serializes them
-      requestData = @getRequestData()
+      esJSONRequest = @getRequestData()
+
+      console.log 'url: ', @url
+      console.log('Request Data:', esJSONRequest)
+
+      return
+
+
       esJSONRequest = JSON.stringify(@getRequestData())
       # Uses POST to prevent result caching
       fetchESOptions =
@@ -245,10 +256,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       # Use options if specified by caller
       if not _.isUndefined(options) and _.isObject(options)
         _.extend(fetchESOptions, options)
-      @loadFacetGroups() unless testMode or @isStreaming()
+
+#      @loadFacetGroups() unless testMode or @isStreaming()
 
       if testMode or @getMeta('test_mode')
         return requestData
+
+
+
+      glados.doCSRFPost(glados.Settings.REGISTER_USAGE_ENDPOINT, paramsDict)
 
       # Call Backbone's fetch
       return Backbone.Collection.prototype.fetch.call(this, fetchESOptions)
@@ -369,7 +385,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @addStickyQuery(esQuery)
       # do not save request facets calls for the editor
       @setMeta('latest_request_data', esQuery) unless requestFacets
-      return esQuery
+
+      requestData =
+        index_name: @getMeta('index')
+        es_query: esQuery
+
+      console.log 'requestData: ', requestData
+      return requestData
 
     getAllColumns: ->
 
@@ -581,8 +603,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @fetch() unless not doFetch
 
     # builds the url to do the request
-    getURL: ->
-      glados.models.paginatedCollections.Settings.ES_BASE_URL + @getMeta('index') + '/_search'
+    getURL: -> glados.Settings.CHEMBL_LIST_HELPER_URL
 
     # ------------------------------------------------------------------------------------------------------------------
     # Items Selection
