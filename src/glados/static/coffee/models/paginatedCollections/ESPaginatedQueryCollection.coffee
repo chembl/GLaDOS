@@ -238,18 +238,27 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       @setItemsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.FETCHING_ITEMS)
       # Creates the Elastic Search Query parameters and serializes them
-      esJSONRequest = @getRequestData()
+      esCacheRequest = @getESCacheRequestData()
 
       console.log 'url: ', @url
-      console.log('Request Data:', esJSONRequest)
+      console.log('esCacheRequest:', esCacheRequest)
+
+      fetchPromise = glados.doCSRFPost(glados.Settings.ELASTICSEARCH_CACHE, esCacheRequest)
+
+      fetchPromise.then (data) ->
+        console.log 'data received: ', data
+
+      fetchPromise.fail (data) ->
+
+        console.log 'THERE WAS AN ERROR'
 
       return
 
 
-      esJSONRequest = JSON.stringify(@getRequestData())
+      esCacheRequest = JSON.stringify(@getRequestData())
       # Uses POST to prevent result caching
       fetchESOptions =
-        data: esJSONRequest
+        data: esCacheRequest
         type: 'POST'
         reset: true
         error: @errorHandler.bind(@)
@@ -336,6 +345,17 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       catch error
         return false
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # Request data
+    # ------------------------------------------------------------------------------------------------------------------
+    getESCacheRequestData: (customPage, customPageSize) ->
+
+      cacheRequestData =
+        index_name: @getMeta('index_name')
+        raw_search_data: JSON.stringify(@getRequestData(customPage, customPageSize))
+
+      return cacheRequestData
+
     # generates an object with the data necessary to do the ES request
     # customPage: set a customPage if you want a page different than the one set as current
     # the same for customPageSize
@@ -386,12 +406,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       # do not save request facets calls for the editor
       @setMeta('latest_request_data', esQuery) unless requestFacets
 
-      requestData =
-        index_name: @getMeta('index')
-        es_query: esQuery
-
-      console.log 'requestData: ', requestData
-      return requestData
+      return esQuery
 
     getAllColumns: ->
 
@@ -603,7 +618,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @fetch() unless not doFetch
 
     # builds the url to do the request
-    getURL: -> glados.Settings.CHEMBL_LIST_HELPER_URL
+    getURL: ->
+      glados.models.paginatedCollections.Settings.ES_BASE_URL + @getMeta('index') + '/_search'
 
     # ------------------------------------------------------------------------------------------------------------------
     # Items Selection
