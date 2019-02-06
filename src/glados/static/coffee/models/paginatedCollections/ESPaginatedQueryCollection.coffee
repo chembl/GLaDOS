@@ -164,10 +164,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # Parses the Elastic Search Response and resets the pagination metadata
     parse: (data) ->
 
-      console.log 'PARSING'
-      console.log data
-      return
-
       lastPageResultsIds = null
       lastPageResultsIds = @getMeta('last_page_results_ids')
       if not lastPageResultsIds?
@@ -246,39 +242,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       fetchPromise = glados.doCSRFPost(glados.Settings.ELASTICSEARCH_CACHE, esCacheRequest)
       thisCollection = @
 
-      fetchPromise.then (data) ->
-        console.log 'data received: ', data
-
-      fetchPromise.fail (jqXHR) ->
-
-        console.log 'THERE WAS AN ERROR: ', jqXHR
-        thisCollection.trigger('error', thisCollection, jqXHR)
-
-      return
-
-
-      esCacheRequest = JSON.stringify(@getRequestData())
-      # Uses POST to prevent result caching
-      fetchESOptions =
-        data: esCacheRequest
-        type: 'POST'
-        reset: true
-        error: @errorHandler.bind(@)
-      # Use options if specified by caller
-      if not _.isUndefined(options) and _.isObject(options)
-        _.extend(fetchESOptions, options)
+      fetchPromise.then (data) -> thisCollection.reset(thisCollection.parse(data))
+      fetchPromise.fail (jqXHR) -> thisCollection.trigger('error', thisCollection, jqXHR)
 
 #      @loadFacetGroups() unless testMode or @isStreaming()
-
-      if testMode or @getMeta('test_mode')
-        return requestData
-
-
-
-      glados.doCSRFPost(glados.Settings.REGISTER_USAGE_ENDPOINT, paramsDict)
-
-      # Call Backbone's fetch
-      return Backbone.Collection.prototype.fetch.call(this, fetchESOptions)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Elastic Search Query structure
@@ -354,7 +321,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       cacheRequestData =
         index_name: @getMeta('index_name')
-        raw_search_data: JSON.stringify(@getRequestData(customPage, customPageSize))
+        search_data: JSON.stringify(@getRequestData(customPage, customPageSize))
 
       return cacheRequestData
 
