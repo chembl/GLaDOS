@@ -657,9 +657,12 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     handleError: (model, jqXHR, options) ->
 
+      console.log 'HANDLE ERROR: ', model, jqXHR, options
+
       $errorMessagesContainer = $(@el).find('.BCK-ErrorMessagesContainer')
       $errorMessagesContainer.html glados.Utils.ErrorMessages.getCollectionErrorContent(jqXHR)
       $errorMessagesContainer.show()
+      @hidePreloaderOnly()
 
     # ------------------------------------------------------------------------------------------------------------------
     # Embed modal

@@ -244,13 +244,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       console.log('esCacheRequest:', esCacheRequest)
 
       fetchPromise = glados.doCSRFPost(glados.Settings.ELASTICSEARCH_CACHE, esCacheRequest)
+      thisCollection = @
 
       fetchPromise.then (data) ->
         console.log 'data received: ', data
 
-      fetchPromise.fail (data) ->
+      fetchPromise.fail (jqXHR) ->
 
-        console.log 'THERE WAS AN ERROR'
+        console.log 'THERE WAS AN ERROR: ', jqXHR
+        thisCollection.trigger('error', thisCollection, jqXHR)
 
       return
 
