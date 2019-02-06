@@ -224,7 +224,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @shouldIgnoreContentChangeRequestWhileStreaming()
         return
 
-      console.log 'sendDataToTemplate'
       if (@isInfinite() or @isCards()) and not @isComplicated
         templateID = @collection.getMeta('custom_cards_template')
         if @isInfinite()
@@ -240,7 +239,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       for item in @collection.getCurrentPage()
 
-        console.log 'GOING TO GET COLUMNS WITH VALUES'
         [columnsWithValues, highlights] = glados.Utils.getColumnsWithValuesAndHighlights(visibleColumns, item)
         idValue = glados.Utils.getNestedValue(item.attributes, @collection.getMeta('id_column').comparator)
 
@@ -248,7 +246,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         for column_i in columnsWithValues
           columnsByComparator[column_i.comparator.replace(/[^a-zA-Z0-9]/g, '__')] = column_i
 
-        console.log 'img url: ', glados.Utils.getImgURL(columnsWithValues)
         templateParams =
           base_check_box_id: idValue
           is_selected: @collection.itemIsSelected(idValue)

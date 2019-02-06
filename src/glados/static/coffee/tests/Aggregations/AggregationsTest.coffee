@@ -363,6 +363,22 @@ describe 'Aggregation', ->
       expect(aggConfigGot.bin_size).toBe(newBinSize)
       expect(aggConfigGot.intervals_set_by_bin_size).toBe(true)
 
+  describe '3. From a raw query', ->
+
+    facetsAgg = undefined
+    rawQuery = undefined
+
+    beforeAll (done) ->
+
+      $.get (glados.Settings.STATIC_URL + 'testData/AggregationBucketsSampleResponseSc2.json'), (testData) ->
+        console.log 'raw query: ', testData
+        done()
+
+    it 'works', ->
+
+
+
+
 
 
 

@@ -242,18 +242,18 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       @setItemsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.FETCHING_ITEMS)
       # Creates the Elastic Search Query parameters and serializes them
-      esCacheRequest = @getESCacheRequestData()
+      esCacheRequest = @getListHelperRequestData()
 
       console.log 'url: ', @url
       console.log('esCacheRequest:', esCacheRequest)
 
-      fetchPromise = glados.doCSRFPost(glados.Settings.ELASTICSEARCH_CACHE, esCacheRequest)
+      fetchPromise = glados.doCSRFPost(glados.Settings.CHEMBL_LIST_HELPER_ENDPOINT, esCacheRequest)
       thisCollection = @
 
       fetchPromise.then (data) -> thisCollection.reset(thisCollection.parse(data))
       fetchPromise.fail (jqXHR) -> thisCollection.trigger('error', thisCollection, jqXHR)
 
-#      @loadFacetGroups() unless testMode or @isStreaming()
+      @loadFacetGroups() unless testMode or @isStreaming()
 
     # ------------------------------------------------------------------------------------------------------------------
     # Elastic Search Query structure
@@ -325,7 +325,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
     # Request data
     # ------------------------------------------------------------------------------------------------------------------
-    getESCacheRequestData: (customPage, customPageSize) ->
+    getListHelperRequestData: (customPage, customPageSize) ->
 
       cacheRequestData =
         index_name: @getMeta('index_name')
@@ -338,6 +338,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # the same for customPageSize
     getRequestData: (customPage, customPageSize, requestFacets=false, facetsFirstCall=true) ->
 
+      console.log 'requestFacets: ', requestFacets
+      console.log 'facetsFirstCall: ', facetsFirstCall
       # If facets are requested the facet filters are excluded from the query
       facetsFiltered = true
       page = if customPage? then customPage else @getMeta('current_page')
@@ -423,6 +425,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     addFacetsToQuery: (esQuery, facetsFiltered, requestFacets, facetsFirstCall) ->
 
+      console.log 'addFacetsToQuery'
+      console.log 'facetsFiltered: ', facetsFiltered
+      console.log 'requestFacets: ', requestFacets
+      console.log 'facetsFirstCall: ', facetsFirstCall
+      console.log '^^^'
       # Includes the selected facets filter
       if facetsFiltered
         filter_query = @getFacetFilterQuery()
@@ -471,10 +478,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     getFacetsGroupsAggsQuery: (facets_first_call)->
       non_selected_facets_groups = @getFacetsGroups(false)
+      console.log 'non_selected_facets_groups: ', non_selected_facets_groups
       if non_selected_facets_groups
         aggs_query = {}
         for facet_group_key, facet_group of non_selected_facets_groups
           facet_group.faceting_handler.addQueryAggs(aggs_query, facets_first_call)
+
+        console.log 'aggs_query: ', aggs_query
         return aggs_query
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -498,6 +508,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       # Creates the Elastic Search Query parameters and serializes them
       # Includes the request for the faceting data
       esJSONRequestData = JSON.stringify(@getRequestData(1, 0, true, first_call))
+      console.log 'FACETS esJSONRequestData: ', esJSONRequestData
       # Uses POST to prevent result caching
       ajax_deferred = $.post(es_url, esJSONRequestData)
       return ajax_deferred
@@ -550,12 +561,20 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       else
         runPromise.bind(@)()
 
-    loadFacetGroups: ->
+    loadFacetGroups: (esRequestData) ->
 
       @setFacetsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.FETCHING_FACETS)
 
       if @getMeta('test_mode')
         return
+
+      console.log 'AAA LOAD FACETS GROUPS'
+      console.log 'AAA CREATE AGG HERE: '
+      console.log 'AAA esRequestData: ', esRequestData
+
+      queryConfig = {}
+
+      console.log 'queryConfig: ', queryConfig
 
       if not @__debouncedLoadFacetGroups?
         @__debouncedLoadFacetGroups = _.debounce(@__loadFacetGroups, 10)
