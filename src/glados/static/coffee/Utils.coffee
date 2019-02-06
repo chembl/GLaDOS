@@ -340,6 +340,9 @@ glados.useNameSpace 'glados',
         glados.Utils.Columns.parseColValue(returnCol, colDescription, colValue, model)
         glados.Utils.Columns.addLink(returnCol, colDescription, colValue, model)
 
+        console.log 'going to get img_url'
+        console.log 'colDescription: ', colDescription
+        console.log 'model: ', model
         if _.has(colDescription, 'image_base_url')
           img_url = model.get(colDescription['image_base_url'])
           returnCol['img_url'] = img_url

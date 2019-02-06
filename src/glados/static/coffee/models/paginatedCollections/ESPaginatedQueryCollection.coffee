@@ -174,16 +174,24 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @setMeta('data_loaded', true)
       jsonResultsList = []
 
-      idAttribute = @getMeta('model').ID_COLUMN.comparator
+      ItemsModel = @getMeta('model')
+      idAttribute = ItemsModel.ID_COLUMN.comparator
       scores = @getMeta('scores')
 
       pageChanged = false
       for hitI in data.hits.hits
         if not _.has(lastPageResultsIds, hitI._id)
           pageChanged = true
-        curPageResultsIds[hitI._id] = true
 
         currentItemData = hitI._source
+        idValue = glados.Utils.getNestedValue(currentItemData, idAttribute)
+
+        parsingModel = new ItemsModel
+          id: idValue
+
+        hitI = parsingModel.parse(hitI)
+        curPageResultsIds[hitI._id] = true
+
         currentItemData._highlights = if hitI.highlight? then @simplifyHighlights(hitI.highlight) else null
         currentItemData._score = hitI._score
 
