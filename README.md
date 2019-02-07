@@ -84,14 +84,16 @@ $ npm install -g @vue/cli
 GLaDOS collectstatic function ```CONFIG_FILE_PATH=configurations/config.yml ./manage_glados_no_install.sh collectstatic --no-input```
 will build and place chemvue static files on ```src/glados/v``` folder, which will be served by Django.
 
+This process will fail if the configuration file is not present 
+
 In order to take advantage of VueJS's [hot reload](https://vue-loader.vuejs.org/guide/hot-reload.html) capabilities while developing, on chemvue dir run:
 
 ```bash
-$ npm run start
+$ CONFIG_FILE_PATH=../configurations/config.yml npm run build
 ```
 
-To build for production run:
+To build the statics files run:
 
 ```bash
-$ npm run build
+$ CONFIG_FILE_PATH=../configurations/config.yml npm run build
 ```

@@ -5,9 +5,10 @@ import store from "./store";
 
 import Vuetify from "vuetify";
 import axios from "axios";
+import VueAxios from "vue-axios";
 import "./assets/stylus/main.styl";
 
-Vue.use(axios);
+Vue.use(VueAxios, axios);
 
 Vue.use(Vuetify, {
   theme: {

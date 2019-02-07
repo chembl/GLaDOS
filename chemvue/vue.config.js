@@ -1,4 +1,24 @@
 const path = require("path");
+const yaml = require('js-yaml');
+const fs = require('fs');
+
+process.env.VUE_APP_SERVER_BASE_PATH = process.env.SERVER_BASE_PATH;
+
+let gladosConfigFile = process.env.CONFIG_FILE_PATH ? process.env.CONFIG_FILE_PATH : `${process.env.HOME}/.chembl-glados/config.yml`;
+let gladosConfig = yaml.safeLoad(fs.readFileSync(gladosConfigFile));
+
+if (typeof gladosConfig.unichemapi === 'undefined') {
+    throw {
+        name: "unichemapi not found",
+        level: "FATAL",
+        message: `API string (unichemapi) on config file ${gladosConfigFile} was not found`,
+        toString: function () {
+            return this.name + ": " + this.message;
+        }
+    };
+} else {
+    process.env.VUE_APP_ROOT_API = gladosConfig.unichemapi;
+}
 
 module.exports = {
     indexPath: path.resolve(
@@ -10,7 +30,7 @@ module.exports = {
     //assetsSubDirectory
     assetsDir: "chemvue",
     //output.publicpath
-    publicPath: process.env.NODE_ENV === 'production'
-        ? "v/"
+    publicPath: process.env.NODE_ENV === "production"
+        ? (process.env.SERVER_BASE_PATH ? process.env.SERVER_BASE_PATH + "/" : "") + "v/"
         : "/"
 };
