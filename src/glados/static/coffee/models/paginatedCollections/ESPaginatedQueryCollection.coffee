@@ -253,7 +253,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       fetchPromise.then (data) -> thisCollection.reset(thisCollection.parse(data))
       fetchPromise.fail (jqXHR) -> thisCollection.trigger('error', thisCollection, jqXHR)
 
-      @loadFacetGroups() unless testMode or @isStreaming()
+      @loadFacetGroups(@getRequestData()) unless testMode or @isStreaming()
 
     # ------------------------------------------------------------------------------------------------------------------
     # Elastic Search Query structure
@@ -572,9 +572,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       console.log 'AAA CREATE AGG HERE: '
       console.log 'AAA esRequestData: ', esRequestData
 
+      console.log 'AAA query: ', JSON.stringify(esRequestData.query)
       queryConfig = {}
 
-      console.log 'queryConfig: ', queryConfig
+
+      console.log 'AAA queryConfig: ', queryConfig
 
       if not @__debouncedLoadFacetGroups?
         @__debouncedLoadFacetGroups = _.debounce(@__loadFacetGroups, 10)

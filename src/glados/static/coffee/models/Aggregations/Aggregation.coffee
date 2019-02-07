@@ -539,6 +539,7 @@ glados.models.Aggregations.Aggregation.States =
 glados.models.Aggregations.Aggregation.QueryTypes =
    MULTIMATCH: 'MULTIMATCH'
    QUERY_STRING: 'QUERY_STRING'
+   RAW_QUERY: 'RAW_QUERY'
 
 glados.models.Aggregations.Aggregation.AggTypes =
    RANGE: 'RANGE'
