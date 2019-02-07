@@ -396,7 +396,11 @@ describe 'Aggregation', ->
         aggs_config: aggsConfig
 
       expect(facetsAgg.url).toBe(indexUrl)
-      
+      queryGot = facetsAgg.get('query')
+      expect(_.isEqual(queryGot, rawQuery))
+
+      facetsAgg.fetch()
+
 
 
 
