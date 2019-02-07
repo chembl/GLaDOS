@@ -425,11 +425,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     addFacetsToQuery: (esQuery, facetsFiltered, requestFacets, facetsFirstCall) ->
 
-      console.log 'addFacetsToQuery'
-      console.log 'facetsFiltered: ', facetsFiltered
-      console.log 'requestFacets: ', requestFacets
-      console.log 'facetsFirstCall: ', facetsFirstCall
-      console.log '^^^'
       # Includes the selected facets filter
       if facetsFiltered
         filter_query = @getFacetFilterQuery()
@@ -478,13 +473,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     getFacetsGroupsAggsQuery: (facets_first_call)->
       non_selected_facets_groups = @getFacetsGroups(false)
-      console.log 'non_selected_facets_groups: ', non_selected_facets_groups
       if non_selected_facets_groups
         aggs_query = {}
         for facet_group_key, facet_group of non_selected_facets_groups
           facet_group.faceting_handler.addQueryAggs(aggs_query, facets_first_call)
 
-        console.log 'aggs_query: ', aggs_query
         return aggs_query
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -508,7 +501,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       # Creates the Elastic Search Query parameters and serializes them
       # Includes the request for the faceting data
       esJSONRequestData = JSON.stringify(@getRequestData(1, 0, true, first_call))
-      console.log 'FACETS esJSONRequestData: ', esJSONRequestData
       # Uses POST to prevent result caching
       ajax_deferred = $.post(es_url, esJSONRequestData)
       return ajax_deferred
@@ -567,16 +559,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       if @getMeta('test_mode')
         return
-
-      console.log 'AAA LOAD FACETS GROUPS'
-      console.log 'AAA CREATE AGG HERE: '
-      console.log 'AAA esRequestData: ', esRequestData
-
-      console.log 'AAA query: ', JSON.stringify(esRequestData.query)
-      queryConfig = {}
-
-
-      console.log 'AAA queryConfig: ', queryConfig
 
       if not @__debouncedLoadFacetGroups?
         @__debouncedLoadFacetGroups = _.debounce(@__loadFacetGroups, 10)

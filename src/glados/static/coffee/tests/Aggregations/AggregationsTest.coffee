@@ -399,7 +399,6 @@ describe 'Aggregation', ->
       queryGot = facetsAgg.get('query')
       expect(_.isEqual(queryGot, rawQuery))
 
-      facetsAgg.fetch()
 
 
 

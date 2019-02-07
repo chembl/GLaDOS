@@ -305,10 +305,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
     parseESResults: (es_aggregations_data, first_call)->
 
-      console.log 'parseESResults: '
-      console.log es_aggregations_data
-      console.log first_call
-
       if first_call
         @faceting_keys_inorder = []
         @faceting_data = {}
