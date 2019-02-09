@@ -14,14 +14,14 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Parentsmile',
+            name='UciInchi',
             fields=[
-                ('n_parent', models.IntegerField(primary_key=True, serialize=False)),
-                ('parent_smiles', models.CharField(max_length=4000)),
-                ('inchikey', models.CharField(max_length=30)),
+                ('uci', models.CharField(max_length=20, primary_key=True, serialize=False)),
+                ('standardinchi', models.CharField(max_length=4000)),
+                ('standardinchikey', models.CharField(max_length=30)),
             ],
             options={
-                'db_table': 'PARENTSMILES',
+                'db_table': 'uc_inchi',
                 'managed': False,
             },
         ),

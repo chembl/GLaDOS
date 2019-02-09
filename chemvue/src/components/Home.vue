@@ -27,8 +27,8 @@
           >
             <v-card-title primary-title>
               <div>
-                <h3 class="headline mb-0">{{compound.n_parent}}</h3>
-                <div v-if="typeof compound.inchikey !== 'undefined'">{{compound.inchikey}}</div>
+                <h3 class="headline mb-0">{{compound.uci}}</h3>
+                <div v-if="typeof compound.similarity !== 'undefined'">{{compound.similarity}}</div>
               </div>
               <v-layout align-center justify-end row fill-height>
                 <v-btn v-on:click="compound.show = !compound.show" fab dark small class="ml-4">
@@ -45,8 +45,8 @@
                       <div class="label">SMILES</div>
                       <div
                         class="value"
-                        v-if="typeof compound.smiles !== 'undefined'"
-                      >{{compound.smiles}}</div>
+                        v-if="typeof compound.standardinchi !== 'undefined'"
+                      >{{compound.standardinchi}}</div>
                     </div>
                   </v-layout>
                 </div>

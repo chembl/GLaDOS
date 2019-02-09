@@ -1,4 +1,3 @@
 run_env: DEV #DEV, TRAVIS, TEST or PROD
 elasticsearch:
   host: 'http://<YOUR_ELASTICSEARCH_HOST>:9200'
-unichemapi: 'http://localhost:8000/'

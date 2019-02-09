@@ -224,6 +224,20 @@ else:
         'NAME': os.path.join(GLADOS_ROOT, 'db/db.sqlite3')
     }
 
+ENABLE_UNICHEM_ORACLE_DB = run_config.get('enable_unichem_oracle_db', False)
+print('ENABLE_UNICHEM_ORACLE_DB: ', ENABLE_UNICHEM_ORACLE_DB)
+if ENABLE_UNICHEM_ORACLE_DB:
+
+    oracle_config = run_config.get('unichem_oracle')
+
+    DATABASES['oradb'] = {
+        'ENGINE': 'django.db.backends.oracle',
+        'NAME': oracle_config.get('name'),
+        'USER': oracle_config.get('user'),
+        'PASSWORD': oracle_config.get('password')
+    }
+
+    DATABASE_ROUTERS = ['glados.db.APIDatabaseRouter.APIDatabaseRouter']
 # ----------------------------------------------------------------------------------------------------------------------
 # Django RQ
 # https://github.com/rq/django-rq

@@ -1,14 +1,14 @@
 from django.db import models
 
 
-class Parentsmile(models.Model):
-    n_parent = models.IntegerField(primary_key=True)
-    parent_smiles = models.CharField(max_length=4000)
-    inchikey = models.CharField(max_length=30)
+class UciInchi(models.Model):
+    uci = models.CharField(max_length=20, primary_key=True)
+    standardinchi = models.CharField(max_length=4000)
+    standardinchikey = models.CharField(max_length=30)
 
     class Meta:
-        db_table = u'PARENTSMILES'
+        db_table = u'uc_inchi'
         managed = False
 
     def __str__(self):
-        return self.parent_smiles
+        return self.uc_inchi

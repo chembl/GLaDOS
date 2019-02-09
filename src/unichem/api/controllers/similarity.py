@@ -1,6 +1,9 @@
 from django.http import HttpResponse
 from simplejson import dumps
+from unichem.models import UciInchi
+import unichem.services as services
 from django.views.decorators.csrf import csrf_exempt
+
 import logging
 
 logger = logging.getLogger('django')
@@ -14,6 +17,19 @@ def test(request):
 
         logger.info(body)
 
+        similarity = services.get_similarity(body)
+
+        inchis = []
+
+        for sim_uci in similarity:
+
+            inchis.append({
+                "uci": sim_uci[0],
+                "similarity": sim_uci[1],
+                "standardinchi": 'lalalalal',
+                "standardinchikey": 'lalalalal',
+                })
+
         # if validateExistence(incoming_ctab):
         #     cached_response = cole.getChached(incoming_ctab)
         #     print("ITS CACHED!!!")
@@ -21,19 +37,24 @@ def test(request):
         #     # return HttpResponse(cached_response.get("response"), content_type="application/json")
         #     return HttpResponse(dumps(cached_response.get("response")), content_type="application/json")
 
-        
-        mongo_parents = []
-        for i in range(5):
-            mongo_parents.append({
-                "n_parent":'lalalalal',
-                "inchikey":'lalalalal',
-                "smiles":'lalalalal',
-                })
 
+        # query = "select uci, standardinchi, STANDARDINCHIKEY from uc_inchi where uci = 151374835;"
+        #
+        # similar_inchis = UciInchi.objects.using('oradb').raw(query)
+        #
+        # inchis = []
+        # for uci_inchi in similar_inchis:
+        #     inchis.append({
+        #         "uci": uci_inchi.uci,
+        #         "standardinchi": uci_inchi.standardinchi,
+        #         "standardinchikey": uci_inchi.standardinchikey
+        #     })
+        #
+        # logger.info(inchis)
 
         # cole.collection.insert_one({ 'ctab':incoming_ctab, 'response':mongo_parents})
 
-        response = dumps(mongo_parents)
+        response = dumps(inchis)
 
         return HttpResponse(response, content_type="application/json")
 
