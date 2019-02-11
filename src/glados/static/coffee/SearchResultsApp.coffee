@@ -1,5 +1,8 @@
 class SearchResultsApp
 
+  SEARCH_TYPES =
+    STRUCTURE:
+      SIMILARITY: 'SIMILARITY'
   # --------------------------------------------------------------------------------------------------------------------
   # Initialization
   # --------------------------------------------------------------------------------------------------------------------
@@ -42,7 +45,7 @@ class SearchResultsApp
     $browserContainer = $('.BCK-BrowserContainer')
     $browserContainer.hide()
     $noResultsDiv = $('.no-results-found')
-    @initBrowserFromWSResults(resultsList, $browserContainer, $progressElement, $noResultsDiv, undefined,
+    @initBrowserFromSSResults(resultsList, $browserContainer, $progressElement, $noResultsDiv, undefined,
       glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_SUBSTRUCTURE_HIGHLIGHTING,
       GlobalVariables.SEARCH_TERM)
 
@@ -60,17 +63,14 @@ class SearchResultsApp
       el: $queryContainer
       query_params: queryParams
 
-    resultsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewSimilaritySearchResultsList()
-    resultsList.initURL GlobalVariables.SEARCH_TERM, GlobalVariables.SIMILARITY_PERCENTAGE
-
     $progressElement = $('#BCK-loading-messages-container')
     $browserContainer = $('.BCK-BrowserContainer')
     $browserContainer.hide()
     $noResultsDiv = $('.no-results-found')
-    @initBrowserFromWSResults(resultsList, $browserContainer, $progressElement, $noResultsDiv,
+    @initBrowserFromSSResults($browserContainer, $progressElement, $noResultsDiv,
       [Compound.COLUMNS.SIMILARITY_ELASTIC],
       glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_SIMILARITY_MAPS,
-      GlobalVariables.SEARCH_TERM)
+      GlobalVariables.SEARCH_TERM, threshold)
 
   @initFlexmatchSearchResults = (searchTerm) ->
 
@@ -92,12 +92,22 @@ class SearchResultsApp
     $browserContainer = $('.BCK-BrowserContainer')
     $browserContainer.hide()
     $noResultsDiv = $('.no-results-found')
-    @initBrowserFromWSResults(resultsList, $browserContainer, $progressElement, $noResultsDiv)
+    @initBrowserFromSSResults(resultsList, $browserContainer, $progressElement, $noResultsDiv)
 
-  @initBrowserFromWSResults = (resultsList, $browserContainer, $progressElement, $noResultsDiv, contextualColumns,
-    customSettings, searchTerm) ->
+  @initBrowserFromSSResults = ($browserContainer, $progressElement, $noResultsDiv, contextualColumns, customSettings,
+    searchTerm, threshold) ->
 
     console.log 'INIT BROWSER FROM SEARCH RESULTS'
+    console.log 'searchTerm: ', searchTerm
+
+    paramsDict =
+      search_type: SEARCH_TYPES.STRUCTURE.SIMILARITY
+      search_term: searchTerm
+      search_params:
+        threshold: threshold
+
+    console.log 'paramsDict: ', paramsDict
+    glados.doCSRFPost(glados.Settings.CHEMBL_STRUCTURE_SEARCH_HELPER_ENDPOINT, paramsDict)
 
     return
     esCompoundsList = undefined
@@ -147,4 +157,3 @@ class SearchResultsApp
             msg: msg
             custom_explanation: customExplanation
     )
-

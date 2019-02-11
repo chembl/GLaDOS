@@ -509,23 +509,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Default: glados.models.MainPage.BlogEntry.COLUMNS_SETTINGS.INFINITE_VIEW
             CustomItemTemplate: 'Handlebars-Common-Paginated-Card-Blog-Entry'
         ID_COLUMN: glados.models.MainPage.BlogEntry.ID_COLUMN
-      SIMILARITY_RESULTS_LIST:
-        MODEL: Compound
-        BASE_URL: 'base_url is set by initURL'
-        DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
-        AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        COLUMNS: Compound.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_SIMILARITY
-          Cards:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_SIMILARITY
-          Infinite:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_SIMILARITY
-          Carousel:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_SIMILARITY
-        ID_COLUMN: Compound.ID_COLUMN
-        ADDITIONAL_COLUMNS:[]
       COMPOUND_WS_RESULTS_LIST_CAROUSEL:
         MODEL: Compound
         BASE_URL: 'base_url is set by initURL'

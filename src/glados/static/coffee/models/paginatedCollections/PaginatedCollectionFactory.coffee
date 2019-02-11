@@ -465,37 +465,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return list
 
-
-    getNewSimilaritySearchResultsList: ->
-      list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.SIMILARITY_RESULTS_LIST)
-
-      list.initURL = (term, percentage) ->
-        @baseUrl = glados.Settings.WS_BASE_SIMILARITY_SEARCH_URL
-        console.log 'base url: ', @baseUrl
-        @setMeta('base_url', @baseUrl, true)
-        @setMeta('use_post', true)
-        @setMeta('extra_params', ['only=molecule_chembl_id,similarity'])
-        params = {
-          similarity: percentage
-        }
-        if term.startsWith('CHEMBL')
-          params['chembl_id'] = term
-        else
-          params['smiles'] = term
-
-        @setMeta('post_parameters', params)
-        @initialiseUrl()
-
-
-      list.parse = (data) ->
-        data.page_meta.records_in_page = data.molecules.length
-        @setMeta('data_loaded', true)
-        @resetMeta(data.page_meta)
-
-        return data.molecules
-
-      return list
-
     getNewSimilaritySearchResultsListForCarousel: (customConfig={}) ->
       config = glados.models.paginatedCollections.Settings.WS_COLLECTIONS.COMPOUND_WS_RESULTS_LIST_CAROUSEL
 

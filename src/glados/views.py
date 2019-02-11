@@ -453,6 +453,17 @@ def elasticsearch_cache(request):
         return JsonResponse({'error': 'this is only available via POST! You crazy hacker! :P'})
 
 
+def sustructure_search_help(request):
+
+    if request.method == "POST":
+
+        print('sustructure_search_help')
+
+        return JsonResponse({})
+    else:
+        return JsonResponse({'error': 'this is only available via POST! You crazy hacker! :P'})
+
+
 def chembl_list_helper(request):
 
     if request.method == "POST":

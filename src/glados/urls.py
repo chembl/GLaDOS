@@ -248,8 +248,9 @@ common_urls = [
     url(r'^elasticsearch_cache', views.elasticsearch_cache, name='elasticsearch_cache'),
 
     # --------------------------------------------------------------------------------------------------------------------
-    # Elasticsearch cache
+    # Structure searches helper
     # --------------------------------------------------------------------------------------------------------------------
+    url(r'^sustructure_search_help', views.sustructure_search_help, name='sustructure_search_help'),
 
     # --------------------------------------------------------------------------------------------------------------------
     # Lists Helper
