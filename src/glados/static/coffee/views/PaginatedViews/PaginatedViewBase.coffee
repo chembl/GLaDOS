@@ -660,6 +660,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       $errorMessagesContainer = $(@el).find('.BCK-ErrorMessagesContainer')
       $errorMessagesContainer.html glados.Utils.ErrorMessages.getCollectionErrorContent(jqXHR)
       $errorMessagesContainer.show()
+      @hidePreloaderOnly()
 
     # ------------------------------------------------------------------------------------------------------------------
     # Embed modal

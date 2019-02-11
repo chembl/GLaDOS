@@ -16,6 +16,7 @@ from . import schema_tags_generator
 from . import glados_server_statistics
 from . import heatmap_helper
 from . import dynamic_downloads_manager
+from . import structure_and_sequence_searches_helper
 import traceback
 
 
@@ -441,6 +442,36 @@ def elasticsearch_cache(request):
     if request.method == "POST":
 
         print('elasticsearch_cache')
+        index_name = request.POST.get('index_name', '')
+        raw_search_data = request.POST.get('search_data', '')
+
+        response = glados_server_statistics.get_and_record_es_cached_response(index_name, raw_search_data)
+        if response is None:
+            return HttpResponse('ELASTIC SEARCH RESPONSE IS EMPTY!', status=500)
+
+        return JsonResponse(response)
+    else:
+        return JsonResponse({'error': 'this is only available via POST! You crazy hacker! :P'})
+
+
+def sustructure_search_help(request):
+
+    if request.method == "POST":
+
+        search_type = request.POST.get('search_type')
+        search_params = request.POST.get('search_params')
+        structure_and_sequence_searches_helper.do_search(search_type, search_params)
+
+        return JsonResponse({})
+    else:
+        return JsonResponse({'error': 'this is only available via POST! You crazy hacker! :P'})
+
+
+def chembl_list_helper(request):
+
+    if request.method == "POST":
+
+        print('chembl_list_helper')
         index_name = request.POST.get('index_name', '')
         raw_search_data = request.POST.get('search_data', '')
 

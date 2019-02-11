@@ -174,16 +174,24 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @setMeta('data_loaded', true)
       jsonResultsList = []
 
-      idAttribute = @getMeta('model').ID_COLUMN.comparator
+      ItemsModel = @getMeta('model')
+      idAttribute = ItemsModel.ID_COLUMN.comparator
       scores = @getMeta('scores')
 
       pageChanged = false
       for hitI in data.hits.hits
         if not _.has(lastPageResultsIds, hitI._id)
           pageChanged = true
-        curPageResultsIds[hitI._id] = true
 
         currentItemData = hitI._source
+        idValue = glados.Utils.getNestedValue(currentItemData, idAttribute)
+
+        parsingModel = new ItemsModel
+          id: idValue
+
+        hitI = parsingModel.parse(hitI)
+        curPageResultsIds[hitI._id] = true
+
         currentItemData._highlights = if hitI.highlight? then @simplifyHighlights(hitI.highlight) else null
         currentItemData._score = hitI._score
 
@@ -234,24 +242,18 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       @setItemsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.FETCHING_ITEMS)
       # Creates the Elastic Search Query parameters and serializes them
-      requestData = @getRequestData()
-      esJSONRequest = JSON.stringify(@getRequestData())
-      # Uses POST to prevent result caching
-      fetchESOptions =
-        data: esJSONRequest
-        type: 'POST'
-        reset: true
-        error: @errorHandler.bind(@)
-      # Use options if specified by caller
-      if not _.isUndefined(options) and _.isObject(options)
-        _.extend(fetchESOptions, options)
-      @loadFacetGroups() unless testMode or @isStreaming()
+      esCacheRequest = @getListHelperRequestData()
 
-      if testMode or @getMeta('test_mode')
-        return requestData
+      console.log 'url: ', @url
+      console.log('esCacheRequest:', esCacheRequest)
 
-      # Call Backbone's fetch
-      return Backbone.Collection.prototype.fetch.call(this, fetchESOptions)
+      fetchPromise = glados.doCSRFPost(glados.Settings.CHEMBL_LIST_HELPER_ENDPOINT, esCacheRequest)
+      thisCollection = @
+
+      fetchPromise.then (data) -> thisCollection.reset(thisCollection.parse(data))
+      fetchPromise.fail (jqXHR) -> thisCollection.trigger('error', thisCollection, jqXHR)
+
+      @loadFacetGroups(@getRequestData()) unless testMode or @isStreaming()
 
     # ------------------------------------------------------------------------------------------------------------------
     # Elastic Search Query structure
@@ -320,11 +322,24 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       catch error
         return false
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # Request data
+    # ------------------------------------------------------------------------------------------------------------------
+    getListHelperRequestData: (customPage, customPageSize) ->
+
+      cacheRequestData =
+        index_name: @getMeta('index_name')
+        search_data: JSON.stringify(@getRequestData(customPage, customPageSize))
+
+      return cacheRequestData
+
     # generates an object with the data necessary to do the ES request
     # customPage: set a customPage if you want a page different than the one set as current
     # the same for customPageSize
     getRequestData: (customPage, customPageSize, requestFacets=false, facetsFirstCall=true) ->
 
+      console.log 'requestFacets: ', requestFacets
+      console.log 'facetsFirstCall: ', facetsFirstCall
       # If facets are requested the facet filters are excluded from the query
       facetsFiltered = true
       page = if customPage? then customPage else @getMeta('current_page')
@@ -369,6 +384,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @addStickyQuery(esQuery)
       # do not save request facets calls for the editor
       @setMeta('latest_request_data', esQuery) unless requestFacets
+
       return esQuery
 
     getAllColumns: ->
@@ -461,6 +477,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         aggs_query = {}
         for facet_group_key, facet_group of non_selected_facets_groups
           facet_group.faceting_handler.addQueryAggs(aggs_query, facets_first_call)
+
         return aggs_query
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -536,7 +553,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       else
         runPromise.bind(@)()
 
-    loadFacetGroups: ->
+    loadFacetGroups: (esRequestData) ->
 
       @setFacetsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.FETCHING_FACETS)
 

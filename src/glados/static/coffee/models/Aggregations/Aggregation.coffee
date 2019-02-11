@@ -12,14 +12,18 @@ glados.useNameSpace 'glados.models.Aggregations',
       @loadQuery()
 
     loadQuery: ->
+
       queryConfig = @get('query_config')
+
       if queryConfig.type == glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
         query =
           multi_match:
             query: @get(queryConfig.queryValueField)
             fields: queryConfig.fields
         @set('query', query)
+
       else if queryConfig.type == glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
+
         templateValues = {}
         templateData = queryConfig.template_data
 
@@ -35,12 +39,15 @@ glados.useNameSpace 'glados.models.Aggregations',
             analyze_wildcard: true
         @set('query', query)
 
+      else if queryConfig.type == glados.models.Aggregations.Aggregation.QueryTypes.RAW_QUERY
+
+        query = queryConfig.query
+        @set('query', query)
+
     getAggregationConfig: (aggName) ->
 
       aggsConfig = @get('aggs_config')
       return aggsConfig.aggs[aggName]
-
-
 
     #-------------------------------------------------------------------------------------------------------------------
     # Changing configuration
@@ -539,6 +546,7 @@ glados.models.Aggregations.Aggregation.States =
 glados.models.Aggregations.Aggregation.QueryTypes =
    MULTIMATCH: 'MULTIMATCH'
    QUERY_STRING: 'QUERY_STRING'
+   RAW_QUERY: 'RAW_QUERY'
 
 glados.models.Aggregations.Aggregation.AggTypes =
    RANGE: 'RANGE'

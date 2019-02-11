@@ -1,5 +1,5 @@
 {% load static %}
-<div class="search-bar-container">
+<div id='BCK-SearchBarContainer' class="search-bar-container">
     <div id="chembl-header-search-bar-container" class="bar-wrapper">
 
         {% block autocomplete_chembl_header %}
@@ -8,28 +8,35 @@
 
         <input type="search" value="" name="search-str" class="chembl-search-bar" placeholder="Search in ChEMBL">
 
-        <a class="bar-button draw-structure tooltipped hide-on-small-only"
-           data-position="left" data-delay="50" data-tooltip="Draw a structure">
-            <img src="{% static 'img/icons/structure_icon.png' %}"/>
-        </a>
-
-        <a class="bar-button draw-structure tooltipped hide-on-med-and-up"
-           href="{% url 'main' %}marvin_search_fullscreen/"
-           data-position="left" data-delay="50" data-tooltip="Draw a structure">
-            <img src="{% static 'img/icons/structure_icon.png' %}"/>
-
-        </a>
-
         <a class="bar-button search-button">
             <img src="{% static 'img/icons/search_icon.png' %}"/>
         </a>
+
+        <div class="special-searches-buttons-container hide-on-large-pin-top">
+
+            <a class="bar-button BCK-Draw-Structure draw-structure tooltipped hide-on-small-only"
+               data-position="down" data-delay="50" data-tooltip="Draw a structure">
+                <img src="{% static 'img/icons/structure_search_icon_white.png' %}"/>
+            </a>
+
+            <a class="bar-button BCK-Enter-Sequence draw-structure tooltipped hide-on-small-only"
+               data-position="down" data-delay="50" data-tooltip="Enter a sequence">
+                <img src="{% static 'img/icons/sequence_search_icon_white.svg' %}"/>
+            </a>
+        </div>
+
     </div>
 
-    <div class="search-examples show-on-large-pin-top" style="display: none">
-        Example: &nbsp;
-        <a href="{% url 'main' %}g/#search_results/Dopamine">Dopamine</a> &nbsp;
-        <a href="{% url 'main' %}g/#search_results/Aspirin"> Aspirin</a> &nbsp;
-        <a href="{% url 'main' %}g/#search_results/NCCc1ccc(O)c(O)c1"> NCCc1ccc(O)c(O)c1</a> &nbsp;
-        <a href="{% url 'main' %}g/#search_results/Liver"> Liver</a>
+    <div class="show-on-large-pin-top">
+        <div class="search-examples">
+            Examples:&nbsp;
+            <a href="{% url 'main' %}g/#search_results/Dopamine">Dopamine</a>&nbsp;
+            <a  href="{% url 'main' %}g/#search_results/HepG2"> HepG2</a>&nbsp;
+            <a href="{% url 'main' %}g/#search_results/NAFRONYL"> NAFRONYL</a>&nbsp;
+            <a href="{% url 'main' %}g/#search_results/CC(=O)Oc1ccccc1C(=O)O">NCC(=O)Oc1ccccc1C(=O)O</a>
+        </div>
+        <div class="special-searches">
+            <a class="BCK-Draw-Structure">Draw a Structure</a> | <a class="BCK-Enter-Sequence">Enter a Sequence</a>
+        </div>
     </div>
 </div>

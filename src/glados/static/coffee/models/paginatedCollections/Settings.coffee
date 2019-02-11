@@ -20,8 +20,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Additional: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
           Cards:
             Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-          Infinite:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
           Carousel:
             Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         ID_COLUMN: Compound.ID_COLUMN
@@ -48,7 +46,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV'], glados.Settings.DEFAULT_FILE_FORMAT_NAMES['SDF']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'],
-          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Graph'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Heatmap]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
@@ -87,10 +84,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           Table:
             Default: Target.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
             Additional: Target.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL
-          Cards:
-            Default: Target.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-          Infinite:
-            Default: Target.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
           Carousel:
             Default: Target.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         DOWNLOAD_COLUMNS: Target.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS
@@ -98,7 +91,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
-          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'], glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Heatmap]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
         ENABLE_COLLECTION_CACHING: true
@@ -117,18 +109,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           Table:
             Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
             Additional: Assay.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL
-          Cards:
-            Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-          Infinite:
-            Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
           Carousel:
             Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         DOWNLOAD_COLUMNS: Assay.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.AssaySchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
-        AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
-          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'], glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite']]
+        AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
         ENABLE_COLLECTION_CACHING: true
         LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
@@ -146,18 +133,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           Table:
             Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
             Additional: Document.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL
-          Cards:
-            Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_CARD
-          Infinite:
-            Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_CARD
           Carousel:
             Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_CARD
         DOWNLOAD_COLUMNS: Document.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.DocumentSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
-        AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
-          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'], glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite']]
+        AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
         ENABLE_COLLECTION_CACHING: true
         LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
@@ -175,18 +157,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           Table:
             Default: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
             Additional: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL
-          Cards:
-            Default: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-          Infinite:
-            Default: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
           Carousel:
             Default: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
         DOWNLOAD_COLUMNS: CellLine.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.CellLineSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
-        AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
-          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'], glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite']]
+        AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
         ENABLE_COLLECTION_CACHING: true
         LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
@@ -204,18 +181,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           Table:
             Default: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
             Additional: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL
-          Cards:
-            Default: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-          Infinite:
-            Default: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
           Carousel:
             Default: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         DOWNLOAD_COLUMNS: glados.models.Tissue.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.TissueSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
-        AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
-          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'], glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite']]
+        AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
         ENABLE_COLLECTION_CACHING: true
         LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
@@ -238,16 +210,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Additional: Activity.COLUMNS_SETTINGS.RESULTS_LIST_TABLE_ADDITIONAL
           Cards:
             Default: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-          Infinite:
-            Default: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
           Carousel:
             Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
         DOWNLOAD_COLUMNS: Activity.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.ActivitySchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
-        AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
-          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite']]
+        AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
         LINKS_TO_OTHER_ENTITIES: [Compound.prototype.entityName, Target.prototype.entityName,
           Assay.prototype.entityName, Document.prototype.entityName]
@@ -290,8 +259,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Additional: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
           Cards:
             Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-          Infinite:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
           Carousel:
             Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         DOWNLOAD_COLUMNS: Compound.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS
@@ -304,7 +271,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV'], glados.Settings.DEFAULT_FILE_FORMAT_NAMES['SDF']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'],
-          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Graph'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Heatmap]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
@@ -325,8 +291,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Additional: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
           Cards:
             Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-          Infinite:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
           Carousel:
             Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         DOWNLOAD_COLUMNS: Compound.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS
@@ -340,7 +304,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV'], glados.Settings.DEFAULT_FILE_FORMAT_NAMES['SDF']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'],
-          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Graph'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Heatmap]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
@@ -364,8 +327,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Additional: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
           Cards:
             Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-          Infinite:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
           Carousel:
             Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         DOWNLOAD_COLUMNS: Compound.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS_SIMILARITY
@@ -379,7 +340,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV'], glados.Settings.DEFAULT_FILE_FORMAT_NAMES['SDF']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'],
-          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Graph'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Heatmap]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
@@ -403,8 +363,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Additional: glados.models.Compound.Drug.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
           Cards:
             Default: glados.models.Compound.Drug.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-          Infinite:
-            Default: glados.models.Compound.Drug.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
           Carousel:
             Default: glados.models.Compound.Drug.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         DOWNLOAD_COLUMNS: glados.models.Compound.Drug.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS
@@ -419,7 +377,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV'], glados.Settings.DEFAULT_FILE_FORMAT_NAMES['SDF']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'],
-          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Infinite'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Graph'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Heatmap]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
@@ -552,23 +509,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Default: glados.models.MainPage.BlogEntry.COLUMNS_SETTINGS.INFINITE_VIEW
             CustomItemTemplate: 'Handlebars-Common-Paginated-Card-Blog-Entry'
         ID_COLUMN: glados.models.MainPage.BlogEntry.ID_COLUMN
-      SIMILARITY_RESULTS_LIST:
-        MODEL: Compound
-        BASE_URL: 'base_url is set by initURL'
-        DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
-        AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        COLUMNS: Compound.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_SIMILARITY
-          Cards:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_SIMILARITY
-          Infinite:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_SIMILARITY
-          Carousel:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_SIMILARITY
-        ID_COLUMN: Compound.ID_COLUMN
-        ADDITIONAL_COLUMNS:[]
       COMPOUND_WS_RESULTS_LIST_CAROUSEL:
         MODEL: Compound
         BASE_URL: 'base_url is set by initURL'
