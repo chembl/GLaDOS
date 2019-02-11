@@ -17,8 +17,10 @@ def generate_config():
             server_base_path = server_base_path[:-1]
 
         output = config_template.format(SERVER_BASE_PATH=server_base_path,
-                                        STATIC_DIR=settings.STATIC_ROOT,
-                                        DYNAMIC_DOWNLOADS_DIR=settings.DYNAMIC_DOWNLOADS_DIR)
+                                        STATIC_ROOT=settings.STATIC_ROOT,
+                                        DYNAMIC_DOWNLOADS_DIR=settings.DYNAMIC_DOWNLOADS_DIR,
+                                        VUE_ROOT=settings.VUE_ROOT
+                                        )
 
         with open(output_file_path, 'w') as out_file:
             out_file.write(output)

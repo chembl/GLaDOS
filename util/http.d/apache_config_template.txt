@@ -14,14 +14,16 @@ RedirectMatch /{SERVER_BASE_PATH}$ {SERVER_BASE_PATH}/
 # proxy everything except static files and dynamic downloads to gunicorn
 ProxyPassMatch /{SERVER_BASE_PATH}/static/(.*)$ !
 ProxyPassMatch /{SERVER_BASE_PATH}/dynamic-downloads/(.*)$ !
+ProxyPassMatch /{SERVER_BASE_PATH}/v/(.*)$ !
 ProxyPassMatch /{SERVER_BASE_PATH}/(.*)$ http://localhost:8000/{SERVER_BASE_PATH}/$1
 ProxyPassReverse /{SERVER_BASE_PATH}/static/(.*)$ !
 ProxyPassReverse /{SERVER_BASE_PATH}/dynamic-downloads/(.*)$ !
+ProxyPassReverse /{SERVER_BASE_PATH}/v/(.*)$ !
 ProxyPassReverse /{SERVER_BASE_PATH}/(.*)$ http://localhost:8000/{SERVER_BASE_PATH}/$1
 
 # serve directly static files
-Alias "/{SERVER_BASE_PATH}/static" "{STATIC_DIR}"
-<Directory "{STATIC_DIR}">
+Alias "/{SERVER_BASE_PATH}/static" "{STATIC_ROOT}"
+<Directory "{STATIC_ROOT}">
   AllowOverride None
   Order allow,deny
   Allow from all
@@ -30,6 +32,14 @@ Alias "/{SERVER_BASE_PATH}/static" "{STATIC_DIR}"
 # serve directly dynamically generated download files
 Alias "/{SERVER_BASE_PATH}/dynamic-downloads" "{DYNAMIC_DOWNLOADS_DIR}"
 <Directory "{DYNAMIC_DOWNLOADS_DIR}">
+  AllowOverride None
+  Order allow,deny
+  Allow from all
+</Directory>
+
+# serve directly chemvue (vuejs) static files
+Alias "/{SERVER_BASE_PATH}/v" "{VUE_ROOT}"
+<Directory "{VUE_ROOT}">
   AllowOverride None
   Order allow,deny
   Allow from all

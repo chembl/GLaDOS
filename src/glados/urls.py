@@ -247,12 +247,12 @@ common_urls = [
   # --------------------------------------------------------------------------------------------------------------------
   # Unichem
   # --------------------------------------------------------------------------------------------------------------------
-  url(r'^unichem_sss', DirectTemplateView.as_view(template_name="glados/Unichem/substructureSimilaritySearch.html"), name='unichem_sss'),
+  url(r'^vs/', DirectTemplateView.as_view(template_name="glados/mainvue.html"), name='unichem_sss'),
 
   # --------------------------------------------------------------------------------------------------------------------
   # Unichem
   # --------------------------------------------------------------------------------------------------------------------
-  url(r'^api/', include('glados.api.urls')),
+  url(r'^api/', include('unichem.api.urls')),
 
   # --------------------------------------------------------------------------------------------------------------------
   # django RQ (Redis Queue)
@@ -277,3 +277,4 @@ urlpatterns = [url(r'^'+settings.SERVER_BASE_PATH, include(common_urls))]
 # ----------------------------------------------------------------------------------------------------------------------
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.VUE_STATIC_URL, document_root=settings.VUE_ROOT)

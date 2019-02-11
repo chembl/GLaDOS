@@ -1,0 +1,9 @@
+run_env: DEV #DEV, TRAVIS, TEST or PROD
+elasticsearch:
+  host: 'http://<YOUR_ELASTICSEARCH_HOST>:9200'
+unichemapi: 'http://localhost:8000/'
+enable_unichem_oracle_db: false
+unichem_oracle:
+  name: 'TSN_NAME'
+  user: 'user'
+  password: 'password'

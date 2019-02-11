@@ -106,8 +106,8 @@ gecko_bin/*
 # VUE UNICHEM
 .DS_Store
 node_modules/
-/dist/
-unichem_gen
+chemvue/dist
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -115,3 +115,12 @@ yarn-error.log*
 /test/e2e/reports/
 selenium-debug.log
 
+# local env files Vue
+.env.local
+.env.*.local
+
+# VUE_ROOT CACHE
+src/glados/v/*
+
+# Dev configurations, used on Dockerfile
+/configurations/config.yml

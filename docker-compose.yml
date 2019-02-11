@@ -1,0 +1,14 @@
+version: "3"
+services:
+  glados:
+    build: .
+    container_name: glados
+    image: chembl/glados
+    ports:
+      - "8000:8000"
+    networks:
+      - "cake"
+
+networks:
+  cake:
+    driver: bridge

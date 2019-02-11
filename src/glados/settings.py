@@ -17,7 +17,6 @@ import logging
 import yaml
 from pymongo.read_preferences import ReadPreference
 
-
 class GladosSettingsError(Exception):
     """Base class for exceptions in GLaDOS configuration."""
     pass
@@ -55,6 +54,7 @@ print('DEBUG: ', DEBUG)
 
 # Build paths inside the project like this: os.path.join(GLADOS_ROOT, ...)
 GLADOS_ROOT = os.path.dirname(os.path.abspath(glados.__file__))
+VUE_ROOT = os.path.join(GLADOS_ROOT, 'v')
 DYNAMIC_DOWNLOADS_DIR = os.path.join(GLADOS_ROOT, 'dynamic-downloads')
 print('DYNAMIC_DOWNLOADS_DIR: ', DYNAMIC_DOWNLOADS_DIR)
 
@@ -141,7 +141,8 @@ INSTALLED_APPS = [
   'glados',
   'compressor',
   'twitter',
-  'django_rq'
+  'django_rq',
+  'unichem'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -190,6 +191,12 @@ DATABASES = {}
 ENABLE_MYSQL_DATABASE = run_config.get('enable_mysql_database', False)
 print('ENABLE_MYSQL_DATABASE: ', ENABLE_MYSQL_DATABASE)
 
+DATABASES = {
+  'default': {
+    'ENGINE': 'django.db.backends.sqlite3',
+    'NAME': os.path.join(GLADOS_ROOT, 'db/db.sqlite3')
+  }
+}
 if ENABLE_MYSQL_DATABASE:
 
     mysql_config = run_config.get('mysql_config')
@@ -221,11 +228,13 @@ ENABLE_UNICHEM_ORACLE_DB = run_config.get('enable_unichem_oracle_db', False)
 print('ENABLE_UNICHEM_ORACLE_DB: ', ENABLE_UNICHEM_ORACLE_DB)
 if ENABLE_UNICHEM_ORACLE_DB:
 
+    oracle_config = run_config.get('unichem_oracle')
+
     DATABASES['oradb'] = {
         'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'oradb/xe',
-        'USER': 'hr',
-        'PASSWORD': 'hr'
+        'NAME': oracle_config.get('name'),
+        'USER': oracle_config.get('user'),
+        'PASSWORD': oracle_config.get('password')
     }
 
     DATABASE_ROUTERS = ['glados.db.APIDatabaseRouter.APIDatabaseRouter']
@@ -296,9 +305,13 @@ LOCALE_PATHS = [
 USE_X_FORWARDED_HOST = True
 
 STATIC_URL = '/{0}static/'.format(SERVER_BASE_PATH)
+VUE_STATIC_URL = '{0}v/'.format(SERVER_BASE_PATH)
+
+print('VUE ROOT', VUE_ROOT)
 
 STATICFILES_DIRS = (
-  os.path.join(GLADOS_ROOT, 'static/'),
+    os.path.join(GLADOS_ROOT, 'static/'),
+    VUE_ROOT
 )
 
 STATIC_ROOT = os.path.join(GLADOS_ROOT, 'static_root')
