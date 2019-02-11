@@ -16,6 +16,7 @@ from . import schema_tags_generator
 from . import glados_server_statistics
 from . import heatmap_helper
 from . import dynamic_downloads_manager
+from . import structure_and_sequence_searches_helper
 import traceback
 
 
@@ -457,7 +458,9 @@ def sustructure_search_help(request):
 
     if request.method == "POST":
 
-        print('sustructure_search_help')
+        search_type = request.POST.get('search_type')
+        search_params = request.POST.get('search_params')
+        structure_and_sequence_searches_helper.do_search(search_type, search_params)
 
         return JsonResponse({})
     else:

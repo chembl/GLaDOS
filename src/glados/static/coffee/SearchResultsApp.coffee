@@ -51,7 +51,6 @@ class SearchResultsApp
 
   @initSimilaritySearchResults = (searchTerm, threshold) ->
 
-    glados.views.base.TrackView.registerSearchUsage(glados.views.base.TrackView.searchTypes.SIMILARITY)
     GlobalVariables.SEARCH_TERM = searchTerm
     GlobalVariables.SIMILARITY_PERCENTAGE = threshold
     queryParams =
@@ -102,8 +101,8 @@ class SearchResultsApp
 
     paramsDict =
       search_type: SEARCH_TYPES.STRUCTURE.SIMILARITY
-      search_term: searchTerm
       search_params:
+        search_term: searchTerm
         threshold: threshold
 
     console.log 'paramsDict: ', paramsDict
