@@ -96,6 +96,10 @@ class SearchResultsApp
 
   @initBrowserFromWSResults = (resultsList, $browserContainer, $progressElement, $noResultsDiv, contextualColumns,
     customSettings, searchTerm) ->
+
+    console.log 'INIT BROWSER FROM SEARCH RESULTS'
+
+    return
     esCompoundsList = undefined
     browserView = undefined
     query_first_n = 10000
