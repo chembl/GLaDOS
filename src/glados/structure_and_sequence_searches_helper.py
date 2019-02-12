@@ -4,6 +4,7 @@ from glados.models import StructureSearchJob
 import json
 import hashlib
 import base64
+from . import glados_server_statistics
 
 
 class SSSearchError(Exception):
@@ -30,6 +31,7 @@ def do_search(search_type, raw_search_params):
             "search_type: {} is unknown. Possible types are: {}".format(search_type, ', '.join(search_types))
         )
 
+    glados_server_statistics.record_search(search_type)
     job_id = get_search_id(search_type, raw_search_params)
 
     response = {
