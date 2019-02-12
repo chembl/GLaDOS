@@ -411,11 +411,6 @@ def generate_download(request):
     desired_format = request.POST.get('format', '')
     raw_columns_to_download = request.POST.get('columns', '')
 
-    print('index_name: ', index_name)
-    print('raw_query: ', raw_query)
-    print('desired_format: ', desired_format)
-    print('raw_columns_to_download: ', raw_columns_to_download)
-
     try:
         response = dynamic_downloads_manager.generate_download(index_name, raw_query, desired_format,
                                                                raw_columns_to_download)
@@ -423,6 +418,7 @@ def generate_download(request):
     except Exception as e:
         traceback.print_exc()
         return HttpResponse('Internal Server Error', status=500)
+
 
 def get_download_status(request, download_id):
 
@@ -454,15 +450,23 @@ def elasticsearch_cache(request):
         return JsonResponse({'error': 'this is only available via POST! You crazy hacker! :P'})
 
 
-def sustructure_search_help(request):
+def submit_sustructure_search(request):
 
     if request.method == "POST":
 
         search_type = request.POST.get('search_type')
         search_params = request.POST.get('search_params')
-        structure_and_sequence_searches_helper.do_search(search_type, search_params)
 
-        return JsonResponse({})
+        try:
+
+            response = structure_and_sequence_searches_helper.do_search(search_type, search_params)
+            return JsonResponse(response)
+
+        except Exception as e:
+
+            traceback.print_exc()
+            return HttpResponse("Internal Server Error: {}".format(repr(e)), status=500)
+
     else:
         return JsonResponse({'error': 'this is only available via POST! You crazy hacker! :P'})
 

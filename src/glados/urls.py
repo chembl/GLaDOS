@@ -250,7 +250,7 @@ common_urls = [
     # --------------------------------------------------------------------------------------------------------------------
     # Structure searches helper
     # --------------------------------------------------------------------------------------------------------------------
-    url(r'^sustructure_search_help', views.sustructure_search_help, name='sustructure_search_help'),
+    url(r'^submit_sustructure_search', views.submit_sustructure_search, name='submit_sustructure_search'),
 
     # --------------------------------------------------------------------------------------------------------------------
     # Lists Helper

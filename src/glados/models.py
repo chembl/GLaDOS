@@ -167,3 +167,20 @@ class DownloadJob(models.Model):
     worker = models.TextField(max_length=250, null=True)
     log = models.TextField(null=True)
 
+# ----------------------------------------------------------------------------------------------------------------------
+# Search Jobs
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+class StructureSearchJob(models.Model):
+    SIMILARITY = 'SIMILARITY'
+    SUBSTRUCTURE = 'SUBSTRUCTURE'
+    CONNECTIVITY = 'CONNECTIVITY'
+
+    SEARCH_TYPES = (
+        (SIMILARITY, SIMILARITY),
+        (SUBSTRUCTURE, SUBSTRUCTURE),
+        (CONNECTIVITY, CONNECTIVITY)
+    )
+
+    search_type = models.CharField(max_length=20, choices=SEARCH_TYPES)

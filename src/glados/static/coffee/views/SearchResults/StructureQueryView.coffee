@@ -7,6 +7,7 @@ glados.useNameSpace 'glados.views.SearchResults',
     initialize: ->
 
       @queryParams = @model.get('query_params').query_params
+      @model.on 'change:state', @render, @
 
       if @queryParams.search_term.startsWith('CHEMBL')
         @img_url = glados.Settings.WS_BASE_URL + 'image/' + @queryParams.search_term + '.svg?engine=indigo'
@@ -80,6 +81,10 @@ glados.useNameSpace 'glados.views.SearchResults',
       currentStatus = @model.get('state')
       if currentStatus == glados.models.Search.StructureSearchModel.STATES.INITIAL_STATE
         return 'Submitting'
+      else if currentStatus == glados.models.Search.StructureSearchModel.STATES.ERROR_STATE
+        return 'There was an error. Please try again later.'
+      else if currentStatus == glados.models.Search.StructureSearchModel.STATES.SEARCH_SUBMITTED
+        return 'Submitted'
 
     showEditModal: (event) ->
       @$clickedElem = $(event.currentTarget)
