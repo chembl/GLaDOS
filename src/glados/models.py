@@ -173,6 +173,8 @@ class DownloadJob(models.Model):
 
 
 class StructureSearchJob(models.Model):
+    search_id = models.TextField(max_length=250)
+    context_id = models.TextField(max_length=250)
     SIMILARITY = 'SIMILARITY'
     SUBSTRUCTURE = 'SUBSTRUCTURE'
     CONNECTIVITY = 'CONNECTIVITY'
@@ -186,7 +188,15 @@ class StructureSearchJob(models.Model):
     search_type = models.CharField(max_length=20, choices=SEARCH_TYPES)
 
     SEARCH_QUEUED = 'SEARCH_QUEUED'
+    SEARCHING = 'SEARCHING'
+    FINISHED = 'FINISHED'
 
     STATUSES = (
-        (SEARCH_QUEUED, SEARCH_QUEUED)
+        (SEARCH_QUEUED, SEARCH_QUEUED),
+        (SEARCHING, SEARCHING),
+        (FINISHED, FINISHED)
     )
+
+    status = models.CharField(max_length=20, choices=STATUSES)
+    worker = models.TextField(max_length=250, null=True)
+    log = models.TextField(null=True)
