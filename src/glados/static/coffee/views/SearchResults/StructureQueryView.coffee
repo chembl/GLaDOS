@@ -6,7 +6,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     initialize: ->
 
-      @queryParams = @model.get('query_params').query_params
+      @queryParams = @model.get('query_params')
       @model.on 'change:state', @render, @
 
       if @queryParams.search_term.startsWith('CHEMBL')
@@ -83,7 +83,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         return 'Submitting'
       else if currentStatus == glados.models.Search.StructureSearchModel.STATES.ERROR_STATE
         return 'There was an error. Please try again later.'
-      else if currentStatus == glados.models.Search.StructureSearchModel.STATES.SEARCH_SUBMITTED
+      else if currentStatus == glados.models.Search.StructureSearchModel.STATES.SEARCH_QUEUED
         return 'Submitted'
 
     showEditModal: (event) ->

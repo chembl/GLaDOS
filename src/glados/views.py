@@ -455,11 +455,11 @@ def submit_sustructure_search(request):
     if request.method == "POST":
 
         search_type = request.POST.get('search_type')
-        search_params = request.POST.get('search_params')
+        raw_search_params = request.POST.get('raw_search_params')
 
         try:
 
-            response = structure_and_sequence_searches_helper.do_search(search_type, search_params)
+            response = structure_and_sequence_searches_helper.do_search(search_type, raw_search_params)
             return JsonResponse(response)
 
         except Exception as e:

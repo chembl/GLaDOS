@@ -9,13 +9,16 @@ glados.useNameSpace 'glados.models.Search',
 
     submitSearch: ->
 
-      paramsDict = @get('query_params')
+      paramsDict =
+        search_type: @get('search_type')
+        raw_search_params: JSON.stringify(@get('query_params'))
+
       submitPromise = glados.doCSRFPost(glados.Settings.CHEMBL_SUBMIT_STRUCTURE_SEARCH_ENDPOINT, paramsDict)
       thisModel = @
       submitPromise.then (data) ->
 
         thisModel.set('search_id', data.search_id)
-        thisModel.set('state', glados.models.Search.StructureSearchModel.STATES.SEARCH_SUBMITTED)
+        thisModel.set('state', glados.models.Search.StructureSearchModel.STATES.SEARCH_QUEUED)
 
       submitPromise.fail (jqXHR) ->
 
@@ -26,4 +29,4 @@ glados.useNameSpace 'glados.models.Search',
 glados.models.Search.StructureSearchModel.STATES =
   INITIAL_STATE: 'INITIAL_STATE'
   ERROR_STATE: 'ERROR_STATE'
-  SEARCH_SUBMITTED: 'SEARCH_SUBMITTED'
+  SEARCH_QUEUED: 'SEARCH_QUEUED'

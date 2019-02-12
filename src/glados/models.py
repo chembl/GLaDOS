@@ -184,3 +184,9 @@ class StructureSearchJob(models.Model):
     )
 
     search_type = models.CharField(max_length=20, choices=SEARCH_TYPES)
+
+    SEARCH_QUEUED = 'SEARCH_QUEUED'
+
+    STATUSES = (
+        (SEARCH_QUEUED, SEARCH_QUEUED)
+    )

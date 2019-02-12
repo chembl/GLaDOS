@@ -57,14 +57,13 @@ class SearchResultsApp
     console.log 'searchTerm: ', searchTerm
 
     paramsDict =
-      search_type: SEARCH_TYPES.STRUCTURE.SIMILARITY
-      query_params:
-        search_term: searchTerm
-        threshold: threshold
+      search_term: searchTerm
+      threshold: threshold
 
     console.log 'paramsDict: ', paramsDict
     ssSearchModel = new glados.models.Search.StructureSearchModel
       query_params: paramsDict
+      search_type: SEARCH_TYPES.STRUCTURE.SIMILARITY
 
     $queryContainer = $('.BCK-query-Container')
     new glados.views.SearchResults.StructureQueryView
