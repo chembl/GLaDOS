@@ -5,7 +5,12 @@ glados.useNameSpace 'glados.views.SearchResults',
       'click .BCK-Edit-Query': 'showEditModal'
 
     initialize: ->
-      @queryParams = arguments[0].query_params
+
+      console.log 'init structure query view'
+      console.log 'model: ', @model
+
+      @queryParams = @model.get('query_params').query_params
+
       if @queryParams.search_term.startsWith('CHEMBL')
         @img_url = glados.Settings.WS_BASE_URL + 'image/' + @queryParams.search_term + '.svg?engine=indigo'
         @render()

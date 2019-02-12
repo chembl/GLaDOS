@@ -53,6 +53,23 @@ class SearchResultsApp
 
     GlobalVariables.SEARCH_TERM = searchTerm
     GlobalVariables.SIMILARITY_PERCENTAGE = threshold
+
+    console.log 'searchTerm: ', searchTerm
+
+    paramsDict =
+      search_type: SEARCH_TYPES.STRUCTURE.SIMILARITY
+      query_params:
+        search_term: searchTerm
+        threshold: threshold
+
+    console.log 'paramsDict: ', paramsDict
+    ssSearchModel = new glados.models.Search.StructureSearchModel
+      query_params: paramsDict
+
+
+#    glados.doCSRFPost(glados.Settings.CHEMBL_STRUCTURE_SEARCH_HELPER_ENDPOINT, paramsDict)
+
+
     queryParams =
       search_term: GlobalVariables.SEARCH_TERM
       similarity_percentage: GlobalVariables.SIMILARITY_PERCENTAGE
@@ -60,7 +77,7 @@ class SearchResultsApp
     $queryContainer = $('.BCK-query-Container')
     new glados.views.SearchResults.StructureQueryView
       el: $queryContainer
-      query_params: queryParams
+      model: ssSearchModel
 
     $progressElement = $('#BCK-loading-messages-container')
     $browserContainer = $('.BCK-BrowserContainer')
@@ -75,6 +92,7 @@ class SearchResultsApp
 
     glados.views.base.TrackView.registerSearchUsage(glados.views.base.TrackView.searchTypes.CONNECTIVITY)
     GlobalVariables.SEARCH_TERM = searchTerm
+
 
     queryParams =
       search_term: GlobalVariables.SEARCH_TERM
@@ -97,16 +115,6 @@ class SearchResultsApp
     searchTerm, threshold) ->
 
     console.log 'INIT BROWSER FROM SEARCH RESULTS'
-    console.log 'searchTerm: ', searchTerm
-
-    paramsDict =
-      search_type: SEARCH_TYPES.STRUCTURE.SIMILARITY
-      search_params:
-        search_term: searchTerm
-        threshold: threshold
-
-    console.log 'paramsDict: ', paramsDict
-    glados.doCSRFPost(glados.Settings.CHEMBL_STRUCTURE_SEARCH_HELPER_ENDPOINT, paramsDict)
 
     return
     esCompoundsList = undefined
