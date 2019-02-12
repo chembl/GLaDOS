@@ -12,6 +12,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         @img_url = glados.Settings.WS_BASE_URL + 'image/' + @queryParams.search_term + '.svg?engine=indigo'
         @render()
       else
+        @render()
         @getSmilesImageAndRender()
 
     getCtabSvgAndRender: ()->
@@ -64,10 +65,21 @@ glados.useNameSpace 'glados.views.SearchResults',
       return deferred
 
     render: ->
+
+      img_url = @img_url
+      img_url ?= glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/unknown.svg'
+
       glados.Utils.fillContentForElement $(@el),
-        image_url: @img_url
+        image_url: img_url
         search_term: @queryParams.search_term
         similarity: @queryParams.threshold
+        status_text: @getStatusText()
+
+    getStatusText: ->
+
+      currentStatus = @model.get('state')
+      if currentStatus == glados.models.Search.StructureSearchModel.STATES.INITIAL_STATE
+        return 'Submitting'
 
     showEditModal: (event) ->
       @$clickedElem = $(event.currentTarget)

@@ -7,5 +7,10 @@ glados.useNameSpace 'glados.models.Search',
 
       @set('state', glados.models.Search.StructureSearchModel.STATES.INITIAL_STATE)
 
+    submitSearch: ->
+
+      paramsDict = @get('query_params')
+      glados.doCSRFPost(glados.Settings.CHEMBL_STRUCTURE_SEARCH_HELPER_ENDPOINT, paramsDict)
+
 glados.models.Search.StructureSearchModel.STATES =
   INITIAL_STATE: 'INITIAL_STATE'

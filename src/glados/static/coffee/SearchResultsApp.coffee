@@ -66,18 +66,12 @@ class SearchResultsApp
     ssSearchModel = new glados.models.Search.StructureSearchModel
       query_params: paramsDict
 
-
-#    glados.doCSRFPost(glados.Settings.CHEMBL_STRUCTURE_SEARCH_HELPER_ENDPOINT, paramsDict)
-
-
-    queryParams =
-      search_term: GlobalVariables.SEARCH_TERM
-      similarity_percentage: GlobalVariables.SIMILARITY_PERCENTAGE
-
     $queryContainer = $('.BCK-query-Container')
     new glados.views.SearchResults.StructureQueryView
       el: $queryContainer
       model: ssSearchModel
+
+    ssSearchModel.submitSearch()
 
     $progressElement = $('#BCK-loading-messages-container')
     $browserContainer = $('.BCK-BrowserContainer')
