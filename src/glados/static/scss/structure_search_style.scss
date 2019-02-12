@@ -1,0 +1,35 @@
+@import "chembl_base";
+
+.structure-results-query-container{
+  padding: 20px;
+  background-color: $grey-lightest;
+
+  .query{
+
+    display: flex;
+    .structure-img{
+      height: 200px;
+      background-color: white;
+    }
+
+    .query-details{
+      width: calc(100% - 210px);
+      margin-left: 10px;
+      max-height: 200px;
+      overflow-y: scroll;
+      .smiles{
+        width: 100%;
+        word-wrap: break-word;
+      }
+    }
+
+  }
+
+  .edit-query{
+    height: 50px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

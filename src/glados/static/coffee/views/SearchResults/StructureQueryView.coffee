@@ -6,9 +6,6 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     initialize: ->
 
-      console.log 'init structure query view'
-      console.log 'model: ', @model
-
       @queryParams = @model.get('query_params').query_params
 
       if @queryParams.search_term.startsWith('CHEMBL')
@@ -70,7 +67,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       glados.Utils.fillContentForElement $(@el),
         image_url: @img_url
         search_term: @queryParams.search_term
-        similarity: @queryParams.similarity_percentage
+        similarity: @queryParams.threshold
 
     showEditModal: (event) ->
       @$clickedElem = $(event.currentTarget)

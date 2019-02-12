@@ -424,14 +424,28 @@
 
 <script id="Handlebars-Common-StructureQuery" type="text/x-handlebars-template">
 
- <div class="card-panel z-depth-0 green lighten-5">
-  <img src="{{image_url}}" height="150"><br>
-  <b>Query:</b>
-  {{search_term}}
-  {{#if similarity}}
-    <b>Threshold:</b> {{similarity}}%
-  {{/if}}
-  <a class="menu-button BCK-Edit-Query">Edit Search</a>
+ <div class="structure-results-query-container">
+     <div class="query">
+         <img class="structure-img" src="{{image_url}}" ><br>
+
+         <div class="query-details">
+
+             {{#if similarity}}
+             <div>
+                <b>Threshold:</b> {{similarity}}%
+             </div>
+             {{/if}}
+
+             <div class="smiles"><b>Query:</b>
+                {{search_term}}
+             </div>
+         </div>
+
+     </div>
+    <div class="edit-query">
+        <a class="btn-chembl BCK-Edit-Query">Edit Search</a>
+    </div>
+
  </div>
 
 </script>
