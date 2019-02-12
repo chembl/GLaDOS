@@ -2,7 +2,6 @@
 
 .structure-results-query-container{
   padding: 20px;
-  background-color: $grey-lightest;
 
   .query{
 
@@ -10,13 +9,16 @@
     .structure-img{
       height: 200px;
       background-color: white;
+      border: 1px solid $grey-medium;
     }
 
     .query-details{
+      background-color: $grey-lightest;
       width: calc(100% - 210px);
       margin-left: 10px;
       max-height: 200px;
       overflow-y: scroll;
+      padding: 10px;
       .smiles{
         width: 100%;
         word-wrap: break-word;
@@ -29,7 +31,7 @@
     height: 50px;
     margin-top: 10px;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
   }
 }
