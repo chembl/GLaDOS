@@ -172,7 +172,7 @@ class DownloadJob(models.Model):
 # ----------------------------------------------------------------------------------------------------------------------
 
 
-class StructureSearchJob(models.Model):
+class SSSearchJob(models.Model):
     search_id = models.TextField(max_length=250)
     context_id = models.TextField(max_length=250)
     SIMILARITY = 'SIMILARITY'

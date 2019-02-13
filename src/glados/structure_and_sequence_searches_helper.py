@@ -1,6 +1,6 @@
 # this handles the management of the special searches, structure (similarity, substructure, connectivity) and
 # sequence (blast)
-from glados.models import StructureSearchJob
+from glados.models import SSSearchJob
 import json
 import hashlib
 import base64
@@ -24,7 +24,7 @@ def get_search_id(search_type, raw_search_params):
 
 def do_search(search_type, raw_search_params):
 
-    search_types = [s[0] for s in StructureSearchJob.SEARCH_TYPES]
+    search_types = [s[0] for s in SSSearchJob.SEARCH_TYPES]
     if search_type not in search_types:
 
         raise SSSearchError(
