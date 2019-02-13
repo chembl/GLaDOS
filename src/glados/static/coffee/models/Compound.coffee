@@ -910,6 +910,8 @@ Compound.COLUMNS = {
     comparator: 'withdrawn_country'
   WITHDRAWN_REASON: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     comparator: 'withdrawn_reason'
+  WITHDRAWN_CLASS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
+    comparator: 'withdrawn_class'
   HELM_NOTATION: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     comparator: 'helm_notation'
   BIOCOMPONENTS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
@@ -1007,6 +1009,7 @@ Compound.COLUMNS_SETTINGS = {
     Compound.COLUMNS.WITHDRAWN_YEAR
     Compound.COLUMNS.WITHDRAWN_COUNTRY
     Compound.COLUMNS.WITHDRAWN_REASON
+    Compound.COLUMNS.WITHDRAWN_CLASS
   ]
   HELM_NOTATION_SECTION: [
     Compound.COLUMNS.CHEMBL_ID
