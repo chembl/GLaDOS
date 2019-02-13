@@ -256,6 +256,7 @@ common_urls = [
     # Lists Helper
     # --------------------------------------------------------------------------------------------------------------------
     url(r'^chembl_list_helper', views.chembl_list_helper, name='chembl_list_helper'),
+    url(r'^sssearch-progress/(?P<search_id>.*)$', views.get_sssearch_status, name='get_sssearch_status'),
 
     # --------------------------------------------------------------------------------------------------------------------
     # Tracking

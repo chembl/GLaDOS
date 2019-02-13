@@ -190,11 +190,13 @@ class SSSearchJob(models.Model):
     SEARCH_QUEUED = 'SEARCH_QUEUED'
     SEARCHING = 'SEARCHING'
     FINISHED = 'FINISHED'
+    ERROR = 'ERROR'
 
     STATUSES = (
         (SEARCH_QUEUED, SEARCH_QUEUED),
         (SEARCHING, SEARCHING),
-        (FINISHED, FINISHED)
+        (FINISHED, FINISHED),
+        (ERROR, ERROR)
     )
 
     status = models.CharField(max_length=20, choices=STATUSES, default=SEARCH_QUEUED)

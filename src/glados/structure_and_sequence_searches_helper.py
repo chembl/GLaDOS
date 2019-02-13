@@ -55,3 +55,22 @@ def do_search(search_type, raw_search_params):
 def format_log_message(msg):
     now = datetime.datetime.now()
     return "[{date}] {hostname}: {msg}\n".format(date=now, hostname=socket.gethostname(), msg=msg)
+
+
+def get_sssearch_status(search_id):
+
+    print('get_sssearch_status ', search_id)
+    try:
+        sssearch_job = SSSearchJob.objects.get(search_id=search_id)
+        response = {
+            'status': sssearch_job.status
+
+        }
+        return response
+
+    except SSSearchJob.DoesNotExist:
+        response = {
+            'msg': 'search job does not exist!',
+            'status:': SSSearchJob.ERROR
+        }
+        return response

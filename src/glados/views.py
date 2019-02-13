@@ -471,6 +471,19 @@ def submit_sustructure_search(request):
         return JsonResponse({'error': 'this is only available via POST! You crazy hacker! :P'})
 
 
+def get_sssearch_status(request, search_id):
+
+    if request.method != "GET":
+        return JsonResponse({'error': 'This is only available via GET'})
+
+    try:
+        response = structure_and_sequence_searches_helper.get_sssearch_status(search_id)
+        return JsonResponse(response)
+    except Exception as e:
+        traceback.print_exc()
+        return HttpResponse('Internal Server Error', status=500)
+
+
 def chembl_list_helper(request):
 
     if request.method == "POST":
