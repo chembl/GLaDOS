@@ -197,6 +197,6 @@ class SSSearchJob(models.Model):
         (FINISHED, FINISHED)
     )
 
-    status = models.CharField(max_length=20, choices=STATUSES)
+    status = models.CharField(max_length=20, choices=STATUSES, default=SEARCH_QUEUED)
     worker = models.TextField(max_length=250, null=True)
     log = models.TextField(null=True)

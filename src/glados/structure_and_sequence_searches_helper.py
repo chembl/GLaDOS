@@ -5,6 +5,8 @@ import json
 import hashlib
 import base64
 from . import glados_server_statistics
+import datetime
+import socket
 
 
 class SSSearchError(Exception):
@@ -34,7 +36,22 @@ def do_search(search_type, raw_search_params):
     glados_server_statistics.record_search(search_type)
     job_id = get_search_id(search_type, raw_search_params)
 
+    try:
+        sssearch_job = SSSearchJob.objects.get(search_id=job_id)
+    except SSSearchJob.DoesNotExist:
+        sssearch_job = SSSearchJob(
+            search_id=job_id,
+            search_type=search_type,
+            log=format_log_message('Job Queued')
+        )
+        sssearch_job.save()
+
     response = {
         'search_id': job_id
     }
     return response
+
+
+def format_log_message(msg):
+    now = datetime.datetime.now()
+    return "[{date}] {hostname}: {msg}\n".format(date=now, hostname=socket.gethostname(), msg=msg)
