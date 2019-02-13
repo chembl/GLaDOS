@@ -8,6 +8,7 @@ glados.useNameSpace 'glados.views.Activity',
       [valuesObject, highlights] = glados.Utils.getColumnsWithValuesAndHighlights(\
         glados.models.Activity.ActivityAggregation.MINI_REPORT_CARD.COLUMNS, @model)
 
+      console.log 'AAA valuesObject: ', valuesObject
       filter = 'target_chembl_id:("' + @model.get('target_chembl_id') +
         '") AND molecule_chembl_id:("' + @model.get('molecule_chembl_id') + '")'
 
