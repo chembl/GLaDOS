@@ -459,7 +459,7 @@ def submit_sustructure_search(request):
 
         try:
 
-            response = structure_and_sequence_searches_helper.do_search(search_type, raw_search_params)
+            response = structure_and_sequence_searches_helper.generate_search_job(search_type, raw_search_params)
             return JsonResponse(response)
 
         except Exception as e:

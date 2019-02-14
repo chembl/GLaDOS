@@ -9,6 +9,7 @@ import datetime
 import socket
 from django_rq import job
 import time
+import traceback
 
 
 class SSSearchError(Exception):
@@ -36,8 +37,19 @@ def do_structure_search(job_id):
     append_to_job_log(search_job, 'Performing Search')
     print('processing job: ', job_id)
 
+    try:
 
-def do_search(search_type, raw_search_params):
+        print('searching!!!')
+
+    except:
+        save_search_job_state(search_job, SSSearchJob.ERROR)
+        tb = traceback.format_exc()
+        append_to_job_log(search_job, "Error:\n{}".format(tb))
+        print(tb)
+        return
+
+
+def generate_search_job(search_type, raw_search_params):
 
     search_types = [s[0] for s in SSSearchJob.SEARCH_TYPES]
     if search_type not in search_types:
@@ -51,6 +63,13 @@ def do_search(search_type, raw_search_params):
 
     try:
         sssearch_job = SSSearchJob.objects.get(search_id=job_id)
+        if sssearch_job.status == SSSearchJob.ERROR:
+            # if it was in error state, requeue it
+            sssearch_job.status = SSSearchJob.SEARCH_QUEUED
+            sssearch_job.save()
+            append_to_job_log(sssearch_job, "Job was in error state, queuing again.")
+            do_structure_search.delay(job_id)
+            
 
     except SSSearchJob.DoesNotExist:
 
@@ -67,6 +86,7 @@ def do_search(search_type, raw_search_params):
         'search_id': job_id
     }
     return response
+
 
 def get_sssearch_status(search_id):
 
@@ -99,4 +119,9 @@ def append_to_job_log(search_job, msg):
 def format_log_message(msg):
     now = datetime.datetime.now()
     return "[{date}] {hostname}: {msg}\n".format(date=now, hostname=socket.gethostname(), msg=msg)
+
+
+def save_search_job_state(search_job, new_state):
+    search_job.status = new_state
+    search_job.save()
 
