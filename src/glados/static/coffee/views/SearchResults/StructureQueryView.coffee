@@ -78,7 +78,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     getStatusText: ->
 
-      currentStatus = @model.get('state')
+      currentStatus = @model.getState()
       if currentStatus == glados.models.Search.StructureSearchModel.STATES.INITIAL_STATE
         return 'Submitting'
       else if currentStatus == glados.models.Search.StructureSearchModel.STATES.ERROR_STATE

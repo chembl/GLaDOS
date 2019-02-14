@@ -5,7 +5,7 @@ glados.useNameSpace 'glados.models.Search',
 
     initialize: ->
 
-      @set('state', glados.models.Search.StructureSearchModel.STATES.INITIAL_STATE)
+      @setState(glados.models.Search.StructureSearchModel.STATES.INITIAL_STATE)
 
     submitSearch: ->
 
@@ -18,14 +18,13 @@ glados.useNameSpace 'glados.models.Search',
       submitPromise.then (data) ->
 
         thisModel.set('search_id', data.search_id)
-        thisModel.set('state', glados.models.Search.StructureSearchModel.STATES.SEARCH_QUEUED)
-        thisModel.checkSearchStatusPeriodically()
+        thisModel.setState(glados.models.Search.StructureSearchModel.STATES.SEARCH_QUEUED)
 
       submitPromise.fail (jqXHR) ->
 
         errorMSG = if jqXHR.status == 500 then jqXHR.responseText else jqXHR.statusText
         thisModel.set('error_message', errorMSG)
-        thisModel.set('state', glados.models.Search.StructureSearchModel.STATES.ERROR_STATE)
+        thisModel.setState(glados.models.Search.StructureSearchModel.STATES.ERROR_STATE)
 
     #-------------------------------------------------------------------------------------------------------------------
     # Check search progress
@@ -42,6 +41,15 @@ glados.useNameSpace 'glados.models.Search',
       getProgress.then (response) ->
 
         console.log 'PROGRESS OBTAINED: ', response
+
+     #-------------------------------------------------------------------------------------------------------------------
+    # State handling
+    #-------------------------------------------------------------------------------------------------------------------
+    getState: -> @get('state')
+    setState: (newState) ->
+      @set('state', newState)
+      if newState == glados.models.Search.StructureSearchModel.STATES.SEARCH_QUEUED
+        @checkSearchStatusPeriodically()
 
 
 
