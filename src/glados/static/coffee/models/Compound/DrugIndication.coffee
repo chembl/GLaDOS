@@ -92,12 +92,12 @@ glados.models.Compound.DrugIndication.COLUMNS_SETTINGS =
     glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_CHEMBL_ID
     glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_PREF_NAME
     glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_TYPE
+    glados.models.Compound.DrugIndication.COLUMNS.INDICATION_MAX_PHASE
     glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_FIRST_APPROVAL
     glados.models.Compound.DrugIndication.COLUMNS.MESH_ID
     glados.models.Compound.DrugIndication.COLUMNS.MESH_HEADING
     glados.models.Compound.DrugIndication.COLUMNS.EFO_ID
     glados.models.Compound.DrugIndication.COLUMNS.EFO_TERM
-    glados.models.Compound.DrugIndication.COLUMNS.INDICATION_MAX_PHASE
     glados.models.Compound.DrugIndication.COLUMNS.INDICATION_REFERENCES
   ]
   RESULTS_LIST_TABLE_ADDITIONAL: [
