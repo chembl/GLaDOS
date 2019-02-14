@@ -444,7 +444,12 @@
      </div>
     <div class="edit-query">
         <div>
-            <b>Status:</b> {{ status_text }}
+            <b>Status:</b>
+            {{#if status_link  }}
+                <a href="{{ status_link }}" target="_blank">{{ status_text }}</a>
+            {{else}}
+                {{ status_text }}
+            {{/if}}
         </div>
         <a class="btn-chembl BCK-Edit-Query">Edit Search</a>
     </div>

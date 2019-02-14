@@ -75,6 +75,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         search_term: @queryParams.search_term
         similarity: @queryParams.threshold
         status_text: @getStatusText()
+        status_link: @getStatusLink()
 
     getStatusText: ->
 
@@ -85,6 +86,13 @@ glados.useNameSpace 'glados.views.SearchResults',
         return 'There was an error. Please try again later.'
       else if currentStatus == glados.models.Search.StructureSearchModel.STATES.SEARCH_QUEUED
         return 'Submitted'
+
+    getStatusLink: ->
+
+      currentStatus = @model.getState()
+      if currentStatus == glados.models.Search.StructureSearchModel.STATES.ERROR_STATE or currentStatus == glados.models.Search.StructureSearchModel.STATES.SEARCH_QUEUED
+        return @model.getProgressURL()
+      else return undefined
 
     showEditModal: (event) ->
       @$clickedElem = $(event.currentTarget)

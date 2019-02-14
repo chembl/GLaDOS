@@ -71,6 +71,6 @@ def get_sssearch_status(search_id):
     except SSSearchJob.DoesNotExist:
         response = {
             'msg': 'search job does not exist!',
-            'status:': SSSearchJob.ERROR
+            'status': SSSearchJob.ERROR
         }
         return response
