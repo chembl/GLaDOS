@@ -10,6 +10,7 @@ import socket
 from django_rq import job
 import time
 import traceback
+import requests
 
 
 class SSSearchError(Exception):
@@ -37,9 +38,36 @@ def do_structure_search(job_id):
     append_to_job_log(search_job, 'Performing Search')
     print('processing job: ', job_id)
 
+    raw_search_params = search_job.raw_search_params
+    parsed_search_params = json.loads(raw_search_params)
+
     try:
 
+        # set the initial url
         print('searching!!!')
+        search_term = parsed_search_params['search_term']
+        threshold = parsed_search_params['threshold']
+        page_size = 2
+
+        print('search_term: ', search_term)
+        print('threshold: ', threshold)
+        search_url = 'https://www.ebi.ac.uk/chembl/api/data/similarity/{search_term}/{threshold}.json?limit={page_size}'\
+            .format(search_term=search_term, threshold=threshold, page_size=page_size)
+
+        results = []
+        # receive the results
+        print('search_url: ', search_url)
+        r = requests.get(search_url)
+        response = r.json()
+        new_results = [ {attr: r.get(attr) for attr in ['molecule_chembl_id', 'similarity']}
+                       for r in response['molecules']]
+        results.extend(new_results)
+
+        next_url = 'https://www.ebi.ac.uk{}'.format(response['page_meta']['next'])
+        print('next_url: ', next_url)
+
+        print('results:')
+        print(json.dumps(new_results, indent=2))
 
     except:
         save_search_job_state(search_job, SSSearchJob.ERROR)
@@ -69,7 +97,7 @@ def generate_search_job(search_type, raw_search_params):
             sssearch_job.save()
             append_to_job_log(sssearch_job, "Job was in error state, queuing again.")
             do_structure_search.delay(job_id)
-            
+
 
     except SSSearchJob.DoesNotExist:
 
