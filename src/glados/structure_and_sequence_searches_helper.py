@@ -7,6 +7,8 @@ import base64
 from . import glados_server_statistics
 import datetime
 import socket
+from django_rq import job
+import time
 
 
 class SSSearchError(Exception):
@@ -23,6 +25,17 @@ def get_search_id(search_type, raw_search_params):
     job_id = '{}-{}'.format(search_type, base64_search_params_digest)
     return job_id
 
+@job
+def do_structure_search(job_id):
+
+    start_time = time.time()
+    search_job = SSSearchJob.objects.get(search_id=job_id)
+    search_job.status = SSSearchJob.SEARCHING
+    search_job.worker = socket.gethostname()
+    search_job.save()
+    append_to_job_log(search_job, 'Performing Search')
+    print('processing job: ', job_id)
+
 
 def do_search(search_type, raw_search_params):
 
@@ -38,24 +51,22 @@ def do_search(search_type, raw_search_params):
 
     try:
         sssearch_job = SSSearchJob.objects.get(search_id=job_id)
+
     except SSSearchJob.DoesNotExist:
+
         sssearch_job = SSSearchJob(
             search_id=job_id,
             search_type=search_type,
+            raw_search_params=raw_search_params,
             log=format_log_message('Job Queued')
         )
         sssearch_job.save()
+        do_structure_search.delay(job_id)
 
     response = {
         'search_id': job_id
     }
     return response
-
-
-def format_log_message(msg):
-    now = datetime.datetime.now()
-    return "[{date}] {hostname}: {msg}\n".format(date=now, hostname=socket.gethostname(), msg=msg)
-
 
 def get_sssearch_status(search_id):
 
@@ -74,3 +85,18 @@ def get_sssearch_status(search_id):
             'status': SSSearchJob.ERROR
         }
         return response
+
+
+def append_to_job_log(search_job, msg):
+
+    if search_job.log is None:
+        search_job.log = ''
+
+    search_job.log += format_log_message(msg)
+    search_job.save()
+
+
+def format_log_message(msg):
+    now = datetime.datetime.now()
+    return "[{date}] {hostname}: {msg}\n".format(date=now, hostname=socket.gethostname(), msg=msg)
+

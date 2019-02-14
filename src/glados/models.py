@@ -199,6 +199,7 @@ class SSSearchJob(models.Model):
         (ERROR, ERROR)
     )
 
+    raw_search_params = models.TextField(null=True)
     status = models.CharField(max_length=20, choices=STATUSES, default=SEARCH_QUEUED)
     worker = models.TextField(max_length=250, null=True)
     log = models.TextField(null=True)

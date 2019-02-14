@@ -32,6 +32,7 @@ glados.useNameSpace 'glados.models.Search',
     getProgressURL: -> "#{glados.Settings.GLADOS_BASE_PATH_REL}sssearch-progress/#{@get('search_id')}"
     checkSearchStatusPeriodically: ->
 
+      console.log 'checkSearchStatusPeriodically'
       progressURL = @getProgressURL()
       thisModel = @
       getProgress = $.get(progressURL)
@@ -46,6 +47,11 @@ glados.useNameSpace 'glados.models.Search',
 
         else if status == 'SEARCH_QUEUED'
 
+          setTimeout(thisModel.checkSearchStatusPeriodically.bind(thisModel), 1000)
+
+        else if status == 'SEARCHING'
+
+          thisModel.setState(glados.models.Search.StructureSearchModel.STATES.SEARCHING)
           setTimeout(thisModel.checkSearchStatusPeriodically.bind(thisModel), 1000)
 
      #-------------------------------------------------------------------------------------------------------------------
@@ -66,3 +72,4 @@ glados.models.Search.StructureSearchModel.STATES =
   INITIAL_STATE: 'INITIAL_STATE'
   ERROR_STATE: 'ERROR_STATE'
   SEARCH_QUEUED: 'SEARCH_QUEUED'
+  SEARCHING: 'SEARCHING'

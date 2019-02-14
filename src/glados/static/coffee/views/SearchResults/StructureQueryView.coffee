@@ -86,11 +86,15 @@ glados.useNameSpace 'glados.views.SearchResults',
         return 'There was an error. Please try again later.'
       else if currentStatus == glados.models.Search.StructureSearchModel.STATES.SEARCH_QUEUED
         return 'Submitted'
+      else if currentStatus == glados.models.Search.StructureSearchModel.STATES.SEARCHING
+        return 'Searching'
 
     getStatusLink: ->
 
       currentStatus = @model.getState()
-      if currentStatus == glados.models.Search.StructureSearchModel.STATES.ERROR_STATE or currentStatus == glados.models.Search.StructureSearchModel.STATES.SEARCH_QUEUED
+      if currentStatus == glados.models.Search.StructureSearchModel.STATES.ERROR_STATE or \
+      currentStatus == glados.models.Search.StructureSearchModel.STATES.SEARCH_QUEUED or \
+      currentStatus == glados.models.Search.StructureSearchModel.STATES.SEARCHING
         return @model.getProgressURL()
       else return undefined
 
