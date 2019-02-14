@@ -116,6 +116,7 @@ glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS =
     glados.models.Compound.MechanismOfAction.COLUMNS.MOLECULE_CHEMBL_ID
     glados.models.Compound.MechanismOfAction.COLUMNS.MOLECULE_PREF_NAME
     glados.models.Compound.MechanismOfAction.COLUMNS.MOLECULE_TYPE
+    glados.models.Compound.MechanismOfAction.COLUMNS.MAX_PHASE
     glados.models.Compound.MechanismOfAction.COLUMNS.MOLECULE_FIRST_APPROVAL
     glados.models.Compound.MechanismOfAction.COLUMNS.MOLECULE_USAN_STEM
     glados.models.Compound.MechanismOfAction.COLUMNS.MECHANISM_OF_ACTION
@@ -125,7 +126,6 @@ glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS =
     glados.models.Compound.MechanismOfAction.COLUMNS.TARGET_TYPE
     glados.models.Compound.MechanismOfAction.COLUMNS.TARGET_ORGANISM
     glados.models.Compound.MechanismOfAction.COLUMNS.BINDING_SITE_NAME
-    glados.models.Compound.MechanismOfAction.COLUMNS.MAX_PHASE
     glados.models.Compound.MechanismOfAction.COLUMNS.REFERENCES
 
   ]
