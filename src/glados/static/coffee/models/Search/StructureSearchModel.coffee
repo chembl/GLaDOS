@@ -29,23 +29,24 @@ glados.useNameSpace 'glados.models.Search',
     #-------------------------------------------------------------------------------------------------------------------
     # Check search progress
     #-------------------------------------------------------------------------------------------------------------------
-    getProgressURL: -> "#{glados.Settings.GLADOS_BASE_PATH_REL}sssearch-progress/l;l;#{@get('search_id')}"
+    getProgressURL: -> "#{glados.Settings.GLADOS_BASE_PATH_REL}sssearch-progress/#{@get('search_id')}"
     checkSearchStatusPeriodically: ->
 
-      console.log 'checkSearchStatusPeriodically'
       progressURL = @getProgressURL()
       thisModel = @
       getProgress = $.get(progressURL)
 
-      console.log 'progressURL: ', progressURL
       getProgress.then (response) ->
 
         status = response.status
-        console.log 'status OBTAINED: ', status
         if status == 'ERROR'
 
           thisModel.set('error_message', response.msg)
           thisModel.setState(glados.models.Search.StructureSearchModel.STATES.ERROR_STATE)
+
+        else if status == 'SEARCH_QUEUED'
+
+          setTimeout(thisModel.checkSearchStatusPeriodically.bind(thisModel), 1000)
 
      #-------------------------------------------------------------------------------------------------------------------
     # State handling
