@@ -115,15 +115,19 @@ def record_view_usage(view_name, view_type, entity_name):
         print('Error saving view record in elastic!')
 
 
-def record_search(search_type):
+def record_search(search_type, time_taken, is_new=True):
 
     try:
         search_record = ESSearchRecord(
-            search_type=search_type
+            search_type=search_type,
+            time_taken=time_taken,
+            is_new=is_new
         )
         print('-------------------------------------------------')
         print('server statistics')
         print('record_search: ', search_type)
+        print('time_taken: ', time_taken)
+        print('is_new: ', is_new)
         print('-------------------------------------------------')
         search_record.indexing()
     except:

@@ -53,6 +53,8 @@ class ESSearchRecordIndex(DocType):
     run_env_type = Keyword()
     host = Keyword()
     request_date = Integer()
+    time_taken = Integer()
+    is_new = Boolean()
 
     class Meta:
         index = 'chembl_glados_es_search_record'

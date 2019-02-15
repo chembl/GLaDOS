@@ -93,6 +93,10 @@ def do_structure_search(job_id):
         append_to_job_log(search_job, 'Results Ready')
         save_search_job_state(search_job, SSSearchJob.FINISHED)
 
+        end_time = time.time()
+        time_taken = end_time - start_time
+        glados_server_statistics.record_search(search_job.search_type, time_taken)
+
     except:
         save_search_job_state(search_job, SSSearchJob.ERROR)
         tb = traceback.format_exc()
@@ -110,7 +114,6 @@ def generate_search_job(search_type, raw_search_params):
             "search_type: {} is unknown. Possible types are: {}".format(search_type, ', '.join(search_types))
         )
 
-    glados_server_statistics.record_search(search_type)
     job_id = get_search_id(search_type, raw_search_params)
 
     try:
@@ -122,6 +125,10 @@ def generate_search_job(search_type, raw_search_params):
             append_to_job_log(sssearch_job, "Job was in error state, queuing again.")
             do_structure_search.delay(job_id)
 
+        elif sssearch_job.status == SSSearchJob.FINISHED:
+
+            # if not, register the statistics
+            glados_server_statistics.record_search(sssearch_job.search_type, 0, False)
 
     except SSSearchJob.DoesNotExist:
 

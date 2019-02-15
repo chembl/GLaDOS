@@ -262,7 +262,6 @@ common_urls = [
     # Tracking
     # --------------------------------------------------------------------------------------------------------------------
     url(r'^register_usage', views.register_usage, name='register_usage'),
-    url(r'^register_search', views.register_search, name='register_search'),
 
     # --------------------------------------------------------------------------------------------------------------------
     # Unichem

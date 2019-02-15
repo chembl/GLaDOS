@@ -126,10 +126,14 @@ class ESSearchRecord(models.Model):
     search_type = models.CharField(max_length=20, choices=SEARCH_TYPES, default=OTHER)
     run_env_type = models.TextField()
     host = models.TextField(default='')
+    time_taken = models.IntegerField(default=0)
+    is_new = models.BooleanField()
 
     def indexing(self):
         obj = ESSearchRecordIndex(
             search_type=self.search_type,
+            time_taken=self.time_taken,
+            is_new=self.is_new,
             run_env_type=settings.RUN_ENV,
             host=socket.gethostname(),
             request_date=int(time.time() * 1000)

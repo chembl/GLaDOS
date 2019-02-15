@@ -93,7 +93,9 @@ REQUIRED_INDEXES = [
                     'request_date': {
                         'type':   'date',
                         'format': 'yyyy-MM-dd HH:mm:ss||epoch_millis'
-                    }
+                    },
+                    'time_taken': INTEGER_TYPE,
+                    'is_new': BOOLEAN_TYPE,
                 }
             }
         }

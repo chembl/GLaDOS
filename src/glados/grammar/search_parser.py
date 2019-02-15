@@ -606,6 +606,7 @@ def parse_url_search(request):
         return HttpResponse('INVALID USAGE! PLEASE USE POST!', status=400)
     elif request.method == 'POST':
 
+        start_time = time.time()
         query_string = request.POST.get('query_string', '')
         indexes_str = request.POST.get('es_indexes', '')
         indexes = indexes_str.split(',')
@@ -618,6 +619,8 @@ def parse_url_search(request):
             'best_es_base_queries': best_queries,
             'sorted_indexes_by_score': sorted_indexes_by_score
         }
-        glados_server_statistics.record_search(ESSearchRecord.FREE_TEXT)
+        end_time = time.time()
+        time_taken = end_time - start_time
+        glados_server_statistics.record_search(ESSearchRecord.FREE_TEXT, time_taken)
 
         return HttpResponse(json.dumps(response_dict))

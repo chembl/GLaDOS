@@ -528,20 +528,6 @@ def register_usage(request):
     else:
         return JsonResponse({'error': 'this is only available via POST! You crazy hacker! :P'})
 
-
-def register_search(request):
-
-    if request.method == "POST":
-        try:
-            search_type = request.POST.get('search_type', '')
-            glados_server_statistics.record_search(search_type)
-            return JsonResponse({'success': 'registration successful!'})
-        except Exception as e:
-            print_server_error(e)
-            return HttpResponse('Internal Server Error', status=500)
-    else:
-        return JsonResponse({'error': 'this is only available via POST! You crazy hacker! :P'})
-
 # ----------------------------------------------------------------------------------------------------------------------
 # Report Cards
 # ----------------------------------------------------------------------------------------------------------------------
