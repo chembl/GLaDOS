@@ -13,6 +13,7 @@ import traceback
 import requests
 import os
 from django.conf import settings
+from glados.settings import RunEnvs
 import re
 
 
@@ -88,6 +89,9 @@ def do_structure_search(job_id):
 
         if settings.RUN_ENV == RunEnvs.PROD:
             rsync_to_the_other_nfs(search_job)
+
+        append_to_job_log(search_job, 'Results Ready')
+        save_search_job_state(search_job, SSSearchJob.FINISHED)
 
     except:
         save_search_job_state(search_job, SSSearchJob.ERROR)
@@ -176,7 +180,7 @@ def rsync_to_the_other_nfs(search_job):
 
 
 # ----------------------------------------------------------------------------------------------------------------------
-# Logging to job
+# Logging to job and saving state
 # ----------------------------------------------------------------------------------------------------------------------
 def append_to_job_log(search_job, msg):
 

@@ -54,7 +54,11 @@ glados.useNameSpace 'glados.models.Search',
           thisModel.setState(glados.models.Search.StructureSearchModel.STATES.SEARCHING)
           setTimeout(thisModel.checkSearchStatusPeriodically.bind(thisModel), 1000)
 
-     #-------------------------------------------------------------------------------------------------------------------
+        else if status == 'FINISHED'
+
+          thisModel.setState(glados.models.Search.StructureSearchModel.STATES.FINISHED)
+
+    #-------------------------------------------------------------------------------------------------------------------
     # State handling
     #-------------------------------------------------------------------------------------------------------------------
     getState: -> @get('state')
@@ -63,13 +67,9 @@ glados.useNameSpace 'glados.models.Search',
       if newState == glados.models.Search.StructureSearchModel.STATES.SEARCH_QUEUED
         @checkSearchStatusPeriodically()
 
-
-
-
-
-
 glados.models.Search.StructureSearchModel.STATES =
   INITIAL_STATE: 'INITIAL_STATE'
   ERROR_STATE: 'ERROR_STATE'
   SEARCH_QUEUED: 'SEARCH_QUEUED'
   SEARCHING: 'SEARCHING'
+  FINISHED: 'FINISHED'

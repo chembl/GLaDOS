@@ -88,6 +88,8 @@ glados.useNameSpace 'glados.views.SearchResults',
         return 'Submitted'
       else if currentStatus == glados.models.Search.StructureSearchModel.STATES.SEARCHING
         return 'Searching'
+      else if currentStatus == glados.models.Search.StructureSearchModel.STATES.FINISHED
+        return 'Results Ready'
 
     getStatusLink: ->
 
