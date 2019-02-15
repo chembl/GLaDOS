@@ -13,6 +13,7 @@ import traceback
 import requests
 import os
 from django.conf import settings
+import re
 
 
 class SSSearchError(Exception):
@@ -85,6 +86,9 @@ def do_structure_search(job_id):
         with open(output_file_path, 'w') as outfile:
             json.dump(results, outfile)
 
+        if settings.RUN_ENV == RunEnvs.PROD:
+            rsync_to_the_other_nfs(search_job)
+
     except:
         save_search_job_state(search_job, SSSearchJob.ERROR)
         tb = traceback.format_exc()
@@ -151,6 +155,29 @@ def get_sssearch_status(search_id):
         return response
 
 
+# ----------------------------------------------------------------------------------------------------------------------
+# Syncing nfs
+# ----------------------------------------------------------------------------------------------------------------------
+def rsync_to_the_other_nfs(search_job):
+
+    hostname = socket.gethostname()
+    if bool(re.match("wp-p1m.*", hostname)):
+        rsync_destination_server = 'wp-p2m-54'
+    else:
+        rsync_destination_server = 'wp-p1m-54'
+
+    file_path = get_results_file_path(search_job.search_id)
+    rsync_destination = "{server}:{path}".format(server=rsync_destination_server, path=file_path)
+    rsync_command = "rsync -v {source} {destination}".format(source=file_path, destination=rsync_destination)
+    rsync_command_parts = rsync_command.split(' ')
+
+    append_to_job_log(search_job, "Rsyncing: {}".format(rsync_command))
+    subprocess.check_call(rsync_command_parts)
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Logging to job
+# ----------------------------------------------------------------------------------------------------------------------
 def append_to_job_log(search_job, msg):
 
     if search_job.log is None:
