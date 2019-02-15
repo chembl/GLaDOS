@@ -51,23 +51,33 @@ def do_structure_search(job_id):
 
         print('search_term: ', search_term)
         print('threshold: ', threshold)
+
         search_url = 'https://www.ebi.ac.uk/chembl/api/data/similarity/{search_term}/{threshold}.json?limit={page_size}'\
             .format(search_term=search_term, threshold=threshold, page_size=page_size)
 
-        results = []
+        results = {}
         # receive the results
-        print('search_url: ', search_url)
-        r = requests.get(search_url)
-        response = r.json()
-        new_results = [ {attr: r.get(attr) for attr in ['molecule_chembl_id', 'similarity']}
-                       for r in response['molecules']]
-        results.extend(new_results)
+        more_results_to_load = True
+        while more_results_to_load:
+            print('search_url: ', search_url)
+            r = requests.get(search_url)
+            response = r.json()
 
-        next_url = 'https://www.ebi.ac.uk{}'.format(response['page_meta']['next'])
-        print('next_url: ', next_url)
+            for r in response['molecules']:
+                results[r['molecule_chembl_id']] = {
+                    'similarity': r['similarity']
+                }
+
+            next = response['page_meta']['next']
+            if next is not None:
+                search_url = 'https://www.ebi.ac.uk{}'.format(next)
+            else:
+                more_results_to_load = False
+
+            print('search_url: ', search_url)
 
         print('results:')
-        print(json.dumps(new_results, indent=2))
+        print(json.dumps(results, indent=2))
 
     except:
         save_search_job_state(search_job, SSSearchJob.ERROR)
