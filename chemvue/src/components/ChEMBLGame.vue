@@ -1,7 +1,7 @@
 <template>
   <v-container fluid class="container-story">
     <v-slide-y-transition mode="out-in">
-      <h1>Hola</h1>
+      <h1>Hello World</h1>
     </v-slide-y-transition>
   </v-container>
 </template>
@@ -32,5 +32,5 @@ a {
 
 <script>
 import Vue from "vue";
-export default Vue.component("HelloWorld", {});
+export default Vue.component("ChEMBLGame", {});
 </script>
