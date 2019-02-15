@@ -11,11 +11,17 @@ from django_rq import job
 import time
 import traceback
 import requests
+import os
+from django.conf import settings
 
 
 class SSSearchError(Exception):
     """Base class for exceptions in this file."""
     pass
+
+
+def get_results_file_path(job_id):
+    return os.path.join(settings.SSSEARCH_RESULTS_DIR, job_id + '.json')
 
 
 def get_search_id(search_type, raw_search_params):
@@ -44,22 +50,21 @@ def do_structure_search(job_id):
     try:
 
         # set the initial url
-        print('searching!!!')
         search_term = parsed_search_params['search_term']
         threshold = parsed_search_params['threshold']
-        page_size = 2
-
-        print('search_term: ', search_term)
-        print('threshold: ', threshold)
+        page_size = 1000
+        append_to_job_log(search_job, 'page_size: {}'.format(page_size))
 
         search_url = 'https://www.ebi.ac.uk/chembl/api/data/similarity/{search_term}/{threshold}.json?limit={page_size}'\
             .format(search_term=search_term, threshold=threshold, page_size=page_size)
 
+        page_num = 1
         results = {}
-        # receive the results
+        # receive the results and then save them to the context file
         more_results_to_load = True
         while more_results_to_load:
-            print('search_url: ', search_url)
+
+            append_to_job_log(search_job, 'loading page: {}'.format(page_num))
             r = requests.get(search_url)
             response = r.json()
 
@@ -71,13 +76,14 @@ def do_structure_search(job_id):
             next = response['page_meta']['next']
             if next is not None:
                 search_url = 'https://www.ebi.ac.uk{}'.format(next)
+                page_num += 1
             else:
                 more_results_to_load = False
 
-            print('search_url: ', search_url)
-
-        print('results:')
-        print(json.dumps(results, indent=2))
+        output_file_path = get_results_file_path(job_id)
+        append_to_job_log(search_job, 'output_file_path: {}'.format(output_file_path))
+        with open(output_file_path, 'w') as outfile:
+            json.dump(results, outfile)
 
     except:
         save_search_job_state(search_job, SSSearchJob.ERROR)
