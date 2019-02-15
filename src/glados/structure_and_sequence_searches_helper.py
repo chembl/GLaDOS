@@ -127,8 +127,19 @@ def generate_search_job(search_type, raw_search_params):
 
         elif sssearch_job.status == SSSearchJob.FINISHED:
 
-            # if not, register the statistics
-            glados_server_statistics.record_search(sssearch_job.search_type, 0, False)
+            # check that the results file exists and save statistics, if not, queue it again
+            try:
+
+                file_path = get_results_file_path(job_id)
+                file_size = os.path.getsize(file_path)
+                glados_server_statistics.record_search(sssearch_job.search_type, 0, False)
+
+            except FileNotFoundError:
+
+                sssearch_job.status = SSSearchJob.SEARCH_QUEUED
+                sssearch_job.save()
+                append_to_job_log(sssearch_job, "Resuls File not found, queuing again.")
+                do_structure_search.delay(job_id)
 
     except SSSearchJob.DoesNotExist:
 
