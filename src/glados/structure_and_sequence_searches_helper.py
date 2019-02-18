@@ -15,6 +15,8 @@ import os
 from django.conf import settings
 from glados.settings import RunEnvs
 import re
+from elasticsearch_dsl.connections import connections
+import subprocess
 
 
 class SSSearchError(Exception):
@@ -197,6 +199,24 @@ def get_search_results_context(sssearch_job):
         context = json.load(f)
 
     return context
+
+
+def get_items_with_context(index_name, raw_search_data, context_id, id_property):
+
+    print('get_items_with_context')
+    print('index_name', index_name)
+    print('raw_search_data: ', raw_search_data)
+    print('context_id: ', context_id)
+    print('id_property: ', id_property)
+
+    search_data = json.loads(raw_search_data)
+    sssearch_job = SSSearchJob.objects.get(search_id=context_id)
+    context = get_search_results_context(sssearch_job)
+    print('context')
+    print(json.dumps(context, indent=2))
+
+    print('getting es data')
+    response = connections.get_connection()
 
 
 # ----------------------------------------------------------------------------------------------------------------------

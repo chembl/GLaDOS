@@ -229,6 +229,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     # Prepares an Elastic Search query to search in all the fields of a document in a specific index
     fetch: (options, testMode=false) ->
+      console.log 'fetch collection'
       testMode |= @getMeta('test_mode')
       @trigger('before_fetch_elastic')
       @url = @getURL()
@@ -303,6 +304,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       cacheRequestData =
         index_name: @getMeta('index_name')
         search_data: JSON.stringify(@getRequestData(customPage, customPageSize))
+        context_id: @getMeta('context_id')
+        id_property: @getMeta('model').ID_COLUMN.comparator
 
       return cacheRequestData
 

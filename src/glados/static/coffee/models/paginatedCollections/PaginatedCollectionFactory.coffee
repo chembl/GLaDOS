@@ -35,8 +35,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return list
 
-    getNewESResultsListFor: (esIndexSettings, customQuery='*', useCustomQuery=false, itemsList,
-      contextualProperties, searchTerm, stickyQuery, searchESQuery, flavour) ->
+    getNewESResultsListFor: (esIndexSettings, customQuery='*', useCustomQuery=false, itemsList, contextID, stickyQuery,
+      searchESQuery, flavour) ->
 
       IndexESPagQueryCollection = glados.models.paginatedCollections.PaginatedCollectionBase\
       .extend(glados.models.paginatedCollections.ESPaginatedQueryCollection)
@@ -84,12 +84,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             use_custom_query: useCustomQuery
             model: esIndexSettings.MODEL
             generator_items_list: itemsList
-            contextual_properties: contextualProperties
             enable_similarity_maps: esIndexSettings.ENABLE_SIMILARITY_MAPS
             show_similarity_maps: esIndexSettings.SHOW_SIMILARITY_MAPS
             enable_substructure_highlighting: esIndexSettings.ENABLE_SUBSTRUCTURE_HIGHLIGHTING
             show_substructure_highlighting: esIndexSettings.SHOW_SUBSTRUCTURE_HIGHLIGHTING
-            search_term: searchTerm
             sticky_query: stickyQuery
             data_loaded: false
             enable_collection_caching: esIndexSettings.ENABLE_COLLECTION_CACHING
@@ -98,6 +96,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             settings_path: esIndexSettings.PATH_IN_SETTINGS
             searchESQuery: searchESQuery
             links_to_other_entities: esIndexSettings.LINKS_TO_OTHER_ENTITIES
+            context_id: contextID
 
           if @getMeta('enable_similarity_maps') or @getMeta('enable_substructure_highlighting')
             @initReferenceStructureFunctions()
@@ -240,9 +239,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     getNewESCompoundsList: (customQuery='*', itemsList,
       settings=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_COOL_CARDS,
-      searchTerm) ->
+      contextID) ->
 
-      list = @getNewESResultsListFor(settings, customQuery, useCustomQuery=(not itemsList?), itemsList, searchTerm)
+      list = @getNewESResultsListFor(settings, customQuery, useCustomQuery=(not itemsList?), itemsList, contextID)
       return list
 
     getNewESActivitiesList: (customQuery='*') ->

@@ -3,7 +3,8 @@ import base64
 from glados.models import TinyURL
 from elasticsearch_dsl import Search
 
-#given a long url, it shortens it and saves it in elastic, it returns the hash obtained
+
+# given a long url, it shortens it and saves it in elastic, it returns the hash obtained
 def shorten_url(long_url):
 
   hex_digest = hashlib.md5(long_url.encode('utf-8')).digest()
