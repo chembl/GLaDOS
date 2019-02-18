@@ -323,12 +323,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS: Compound.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE_SIMILARITY
             Additional: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
           Cards:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_SIMILARITY
           Carousel:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_SIMILARITY
         DOWNLOAD_COLUMNS: Compound.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS_SIMILARITY
         ID_COLUMN: Compound.ID_COLUMN
         ENABLE_CARDS_ZOOM: true

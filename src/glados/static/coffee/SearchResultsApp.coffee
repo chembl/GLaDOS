@@ -77,7 +77,6 @@ class SearchResultsApp
 
       $browserContainer.show()
       thisApp.initBrowserFromSSResults($browserContainer, $progressElement, $noResultsDiv,
-        [Compound.COLUMNS.SIMILARITY_ELASTIC],
         glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_SIMILARITY_MAPS,
         ssSearchModel)
 
@@ -105,7 +104,7 @@ class SearchResultsApp
     $noResultsDiv = $('.no-results-found')
     @initBrowserFromSSResults(resultsList, $browserContainer, $progressElement, $noResultsDiv)
 
-  @initBrowserFromSSResults = ($browserContainer, $progressElement, $noResultsDiv, contextualColumns, customSettings,
+  @initBrowserFromSSResults = ($browserContainer, $progressElement, $noResultsDiv, customSettings,
     ssSearchModel) ->
 
     resultIds = ssSearchModel.get('result_ids')

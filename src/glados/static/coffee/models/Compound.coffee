@@ -778,21 +778,13 @@ Compound.COLUMNS = {
   DOSED_INGREDIENT: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     name_to_show: 'Dosed Ingredient'
     comparator: 'dosed_ingredient'
-  SIMILARITY: {
-      'name_to_show': 'Similarity'
-      'comparator': 'similarity'
-      'sort_disabled': false
-      'is_sorting': 0
-      'sort_class': 'fa-sort'
-      'custom_field_template': '<b>{{val}}</b>'
-    }
   SIMILARITY_ELASTIC: {
+      'show': true
       'name_to_show': 'Similarity'
-      'comparator': '_score'
+      'comparator': '_context.similarity'
       'sort_disabled': false
       'is_sorting': 0
       'sort_class': 'fa-sort'
-      is_elastic_score: true
     }
   STRUCTURE_TYPE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     comparator: 'structure_type'
@@ -943,9 +935,33 @@ Compound.COLUMNS_SETTINGS = {
     Compound.COLUMNS.RULE_OF_THREE_PASS,
     Compound.COLUMNS.QED_WEIGHTED
   ]
+  RESULTS_LIST_TABLE_SIMILARITY: [
+    Compound.COLUMNS.SIMILARITY_ELASTIC
+    Compound.COLUMNS.CHEMBL_ID,
+    Compound.COLUMNS.PREF_NAME
+    Compound.COLUMNS.SYNONYMS,
+    Compound.COLUMNS.MOLECULE_TYPE,
+    Compound.COLUMNS.MAX_PHASE,
+    Compound.COLUMNS.FULL_MWT,
+    Compound.COLUMNS.NUM_TARGETS,
+    Compound.COLUMNS.BIOACTIVITIES_NUMBER,
+    Compound.COLUMNS.ALOGP,
+    Compound.COLUMNS.PSA,
+    Compound.COLUMNS.HBA,
+    Compound.COLUMNS.HBD,
+    Compound.COLUMNS.RO5,
+    Compound.COLUMNS.ROTATABLE_BONDS,
+    Compound.COLUMNS.RULE_OF_THREE_PASS,
+    Compound.COLUMNS.QED_WEIGHTED
+  ]
   RESULTS_LIST_REPORT_CARD:[
     Compound.COLUMNS.CHEMBL_ID,
     Compound.COLUMNS.PREF_NAME
+  ]
+  RESULTS_LIST_REPORT_CARD_SIMILARITY:[
+    Compound.COLUMNS.CHEMBL_ID,
+    Compound.COLUMNS.PREF_NAME,
+    Compound.COLUMNS.SIMILARITY_ELASTIC
   ]
   RESULTS_LIST_REPORT_CARD_LONG:[
     Compound.COLUMNS.CHEMBL_ID,

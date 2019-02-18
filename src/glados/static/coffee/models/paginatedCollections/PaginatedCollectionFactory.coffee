@@ -238,12 +238,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         customQueryString, useCustomQuery=true)
       return list
 
-    getNewESCompoundsList: (customQuery='*', itemsList, contextualProperties,
+    getNewESCompoundsList: (customQuery='*', itemsList,
       settings=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_COOL_CARDS,
       searchTerm) ->
 
-      list = @getNewESResultsListFor(settings, customQuery, useCustomQuery=(not itemsList?), itemsList,
-        contextualProperties, searchTerm)
+      list = @getNewESResultsListFor(settings, customQuery, useCustomQuery=(not itemsList?), itemsList, searchTerm)
       return list
 
     getNewESActivitiesList: (customQuery='*') ->

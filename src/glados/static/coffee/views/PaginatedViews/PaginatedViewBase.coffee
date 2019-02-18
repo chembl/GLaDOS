@@ -80,12 +80,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       defaultColumns = @getDefaultColumns()
       additionalColumns = @getAdditionalColumns()
-      contextualProperties = @collection.getMeta('contextual_properties')
 
       @columnsHandler = new glados.models.paginatedCollections.ColumnsHandler
         default_columns: defaultColumns
         additional_columns: additionalColumns
-        contextual_properties: contextualProperties
         include_highlights_column: @include_search_results_highlight
 
       @columnsHandler.on 'change:exit change:enter', @handleShowHideColumns, @
