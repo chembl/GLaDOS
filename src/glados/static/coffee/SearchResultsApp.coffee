@@ -67,26 +67,26 @@ class SearchResultsApp
       el: $queryContainer
       model: ssSearchModel
 
-    ssSearchModel.once glados.models.Search.StructureSearchModel.EVENTS.RESULTS_READY, ->
-      console.log 'RESULTS ARE READY!'
-
-    ssSearchModel.submitSearch()
-
-    return
     $progressElement = $('#BCK-loading-messages-container')
     $browserContainer = $('.BCK-BrowserContainer')
     $browserContainer.hide()
     $noResultsDiv = $('.no-results-found')
-    @initBrowserFromSSResults($browserContainer, $progressElement, $noResultsDiv,
-      [Compound.COLUMNS.SIMILARITY_ELASTIC],
-      glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_SIMILARITY_MAPS,
-      GlobalVariables.SEARCH_TERM, threshold)
+
+    thisApp = @
+    ssSearchModel.once glados.models.Search.StructureSearchModel.EVENTS.RESULTS_READY, ->
+
+      $browserContainer.show()
+      thisApp.initBrowserFromSSResults($browserContainer, $progressElement, $noResultsDiv,
+        [Compound.COLUMNS.SIMILARITY_ELASTIC],
+        glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_SIMILARITY_MAPS,
+        ssSearchModel)
+
+    ssSearchModel.submitSearch()
 
   @initFlexmatchSearchResults = (searchTerm) ->
 
     glados.views.base.TrackView.registerSearchUsage(glados.views.base.TrackView.searchTypes.CONNECTIVITY)
     GlobalVariables.SEARCH_TERM = searchTerm
-
 
     queryParams =
       search_term: GlobalVariables.SEARCH_TERM
@@ -106,10 +106,22 @@ class SearchResultsApp
     @initBrowserFromSSResults(resultsList, $browserContainer, $progressElement, $noResultsDiv)
 
   @initBrowserFromSSResults = ($browserContainer, $progressElement, $noResultsDiv, contextualColumns, customSettings,
-    searchTerm, threshold) ->
+    ssSearchModel) ->
 
     console.log 'INIT BROWSER FROM SEARCH RESULTS'
+    console.log 'ssSearchModel: ', ssSearchModel
 
+    resultIds = ssSearchModel.get('result_ids')
+
+    esCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(
+      customQuery=undefined, itemsList=resultIds, settings=customSettings)
+
+    new glados.views.Browsers.BrowserMenuView
+      collection: esCompoundsList
+      el: $browserContainer
+
+    console.log 'esCompoundsList: ', esCompoundsList
+    esCompoundsList.fetch()
     return
     esCompoundsList = undefined
     browserView = undefined

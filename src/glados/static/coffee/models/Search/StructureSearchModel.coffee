@@ -56,7 +56,7 @@ glados.useNameSpace 'glados.models.Search',
 
         else if status == 'FINISHED'
 
-          console.log 'FINISHED: ', response
+          thisModel.set('result_ids', response.ids)
           thisModel.setState(glados.models.Search.StructureSearchModel.STATES.FINISHED)
 
     #-------------------------------------------------------------------------------------------------------------------

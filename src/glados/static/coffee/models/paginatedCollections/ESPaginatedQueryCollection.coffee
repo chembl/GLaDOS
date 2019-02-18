@@ -275,40 +275,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getQueryForGeneratorList: ->
 
       idAttribute = @getMeta('model').ID_COLUMN.comparator
-      generatorList = @getMeta('generator_items_list')
-
-      idsList = (item[idAttribute] for item in generatorList)
-      scores = {}
-      if generatorList.length > 0
-        for i in [0..generatorList.length-1]
-          item = generatorList[i]
-          if item.similarity?
-            currentScore = parseFloat(item.similarity)
-          else
-            currentScore = ((generatorList.length - i) / generatorList.length) * 100
-          scores[item[idAttribute]] = currentScore
-
-      @setMeta('scores', scores)
-
+      idsList = @getMeta('generator_items_list')
       query_fgl = {
         terms: {}
       }
       query_fgl.terms[idAttribute] = idsList
 
       return {
-        must_query:
-          function_score:
-            query: {}
-            functions: [
-
-             script_score:
-               script:
-                 lang: "painless",
-                 params:
-                   scores: scores
-                 inline: "String mcid=doc['" + idAttribute + "'].value; "\
-                   +"if(params.scores.containsKey(mcid)){return params.scores[mcid];} return 0;"
-           ]
         filter_query:
           query_fgl
       }
@@ -374,7 +347,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       # Normal Search query
       else if generatorList?
         glq = @getQueryForGeneratorList()
-        esQuery.query.bool.must.push glq.must_query
         esQuery.query.bool.filter.push glq.filter_query
       else if searchESQuery?
         esQuery.query.bool.must = searchESQuery
