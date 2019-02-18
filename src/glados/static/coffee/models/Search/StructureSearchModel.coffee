@@ -56,6 +56,7 @@ glados.useNameSpace 'glados.models.Search',
 
         else if status == 'FINISHED'
 
+          console.log 'FINISHED: ', response
           thisModel.setState(glados.models.Search.StructureSearchModel.STATES.FINISHED)
 
     #-------------------------------------------------------------------------------------------------------------------
@@ -63,9 +64,14 @@ glados.useNameSpace 'glados.models.Search',
     #-------------------------------------------------------------------------------------------------------------------
     getState: -> @get('state')
     setState: (newState) ->
-      @set('state', newState)
+
       if newState == glados.models.Search.StructureSearchModel.STATES.SEARCH_QUEUED
         @checkSearchStatusPeriodically()
+      else if newState == glados.models.Search.StructureSearchModel.STATES.FINISHED
+        console.log 'trigger results are ready'
+        @trigger(glados.models.Search.StructureSearchModel.EVENTS.RESULTS_READY)
+
+      @set('state', newState)
 
 glados.models.Search.StructureSearchModel.STATES =
   INITIAL_STATE: 'INITIAL_STATE'
@@ -73,3 +79,6 @@ glados.models.Search.StructureSearchModel.STATES =
   SEARCH_QUEUED: 'SEARCH_QUEUED'
   SEARCHING: 'SEARCHING'
   FINISHED: 'FINISHED'
+
+glados.models.Search.StructureSearchModel.EVENTS =
+  RESULTS_READY: 'RESULTS_READY'

@@ -160,21 +160,43 @@ def generate_search_job(search_type, raw_search_params):
 
 def get_sssearch_status(search_id):
 
-    print('get_sssearch_status ', search_id)
     try:
         sssearch_job = SSSearchJob.objects.get(search_id=search_id)
         response = {
             'status': sssearch_job.status
-
         }
+        if sssearch_job.status == SSSearchJob.FINISHED:
+            results_context = get_search_results_context(sssearch_job)
+            response['ids'] = [k for k in results_context.keys()]
         return response
 
     except SSSearchJob.DoesNotExist:
+
         response = {
             'msg': 'search job does not exist!',
             'status': SSSearchJob.ERROR
         }
         return response
+
+    except FileNotFoundError:
+
+        response = {
+            'msg': 'Search results not found, they may have expired. Please run the search again.',
+            'status': SSSearchJob.ERROR
+        }
+        return response
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Loading context
+# ----------------------------------------------------------------------------------------------------------------------
+def get_search_results_context(sssearch_job):
+
+    results_file_path = get_results_file_path(sssearch_job.search_id)
+    with open(results_file_path) as f:
+        context = json.load(f)
+
+    return context
 
 
 # ----------------------------------------------------------------------------------------------------------------------

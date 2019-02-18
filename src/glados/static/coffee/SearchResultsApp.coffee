@@ -54,13 +54,10 @@ class SearchResultsApp
     GlobalVariables.SEARCH_TERM = searchTerm
     GlobalVariables.SIMILARITY_PERCENTAGE = threshold
 
-    console.log 'searchTerm: ', searchTerm
-
     paramsDict =
       search_term: searchTerm
       threshold: threshold
 
-    console.log 'paramsDict: ', paramsDict
     ssSearchModel = new glados.models.Search.StructureSearchModel
       query_params: paramsDict
       search_type: SEARCH_TYPES.STRUCTURE.SIMILARITY
@@ -70,8 +67,12 @@ class SearchResultsApp
       el: $queryContainer
       model: ssSearchModel
 
+    ssSearchModel.once glados.models.Search.StructureSearchModel.EVENTS.RESULTS_READY, ->
+      console.log 'RESULTS ARE READY!'
+
     ssSearchModel.submitSearch()
 
+    return
     $progressElement = $('#BCK-loading-messages-container')
     $browserContainer = $('.BCK-BrowserContainer')
     $browserContainer.hide()
