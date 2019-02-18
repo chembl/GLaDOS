@@ -253,7 +253,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       fetchPromise.then (data) -> thisCollection.reset(thisCollection.parse(data))
       fetchPromise.fail (jqXHR) -> thisCollection.trigger('error', thisCollection, jqXHR)
 
-      @loadFacetGroups(@getRequestData()) unless testMode or @isStreaming()
+      @loadFacetGroups(@getRequestData()) unless testMode
 
     # ------------------------------------------------------------------------------------------------------------------
     # Elastic Search Query structure
@@ -579,24 +579,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     toggleSelectAll: ->
       @setMeta('all_items_selected', !@getMeta('all_items_selected'))
       @trigger('selection-changed')
-
-    # ------------------------------------------------------------------------------------------------------------------
-    # Streaming Mode
-    # ------------------------------------------------------------------------------------------------------------------
-
-    enableStreamingMode: ->
-      @setMeta('streaming_mode', true)
-      @loadFacetGroups()
-
-    disableStreamingMode: ->
-      delete @meta['streaming_mode']
-      @loadFacetGroups()
-
-    isStreaming: ->
-      return @hasMeta('streaming_mode') and @getMeta('streaming_mode')
-
-    shouldIgnoreContentChangeRequestWhileStreaming: ->
-      return @isStreaming() and not @getMeta('page_changed')
 
     # ------------------------------------------------------------------------------------------------------------------
     # Metadata Handlers for query and pagination

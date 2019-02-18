@@ -108,9 +108,6 @@ class SearchResultsApp
   @initBrowserFromSSResults = ($browserContainer, $progressElement, $noResultsDiv, contextualColumns, customSettings,
     ssSearchModel) ->
 
-    console.log 'INIT BROWSER FROM SEARCH RESULTS'
-    console.log 'ssSearchModel: ', ssSearchModel
-
     resultIds = ssSearchModel.get('result_ids')
 
     esCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(
@@ -120,53 +117,4 @@ class SearchResultsApp
       collection: esCompoundsList
       el: $browserContainer
 
-    console.log 'esCompoundsList: ', esCompoundsList
     esCompoundsList.fetch()
-    return
-    esCompoundsList = undefined
-    browserView = undefined
-    query_first_n = 10000
-    doneCallback = (firstCall=false, finalCall=false)->
-
-      if resultsList.allResults.length == 0
-        $progressElement.hide()
-        $browserContainer.hide()
-        $noResultsDiv.show()
-        return
-      $browserContainer.show()
-      if not esCompoundsList?
-        esCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(undefined,
-          resultsList.allResults, contextualColumns, customSettings, searchTerm)
-        esCompoundsList.enableStreamingMode()
-        if resultsList.getMeta('total_all_results') > query_first_n
-          esCompoundsList.setMeta('out_of_n', resultsList.getMeta('total_all_results'))
-        browserView = new glados.views.Browsers.BrowserMenuView
-          collection: esCompoundsList
-          el: $browserContainer
-      else
-        esCompoundsList.setMeta('generator_items_list', resultsList.allResults)
-
-      fetchDeferred = esCompoundsList.fetch()
-      if finalCall
-        fetchDeferred.then _.defer( ->
-          esCompoundsList.disableStreamingMode()
-        )
-
-    debouncedDoneCallback = _.debounce(doneCallback, 500, true)
-    deferreds = resultsList.getAllResults($progressElement, askingForOnlySelected=false, onlyFirstN=query_first_n,
-    customBaseProgressText='Searching . . . ', customProgressCallback=debouncedDoneCallback)
-
-    # for now, we need to jump from web services to elastic
-    $.when.apply($, deferreds).done(doneCallback.bind(@, false, true)).fail((msg) ->
-
-      customExplanation = 'Error while performing the search.'
-      $browserContainer.hide()
-      if $progressElement?
-        # it can be a jqxr
-        if msg.status?
-          $progressElement.html glados.Utils.ErrorMessages.getCollectionErrorContent(msg, customExplanation)
-        else
-          $progressElement.html Handlebars.compile($('#Handlebars-Common-CollectionErrorMsg').html())
-            msg: msg
-            custom_explanation: customExplanation
-    )

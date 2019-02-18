@@ -175,8 +175,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
 
     sendDataToTemplate: ($specificElemContainer, visibleColumns) ->
-      if @shouldIgnoreContentChangeRequestWhileStreaming()
-        return
 
       templateID = $specificElemContainer.attr('data-hb-template')
       applyTemplate = Handlebars.compile($('#' + templateID).html())

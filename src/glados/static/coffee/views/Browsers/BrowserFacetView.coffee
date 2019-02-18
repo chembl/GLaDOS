@@ -237,11 +237,6 @@ glados.useNameSpace 'glados.views.Browsers',
 
     render: ->
 
-      if @collection.isStreaming()
-        @facetsStreamingCover.show()
-      else
-        @facetsStreamingCover.hide()
-
       if not $(@el).is(":visible") or $(@el).width() == 0
         return
 
