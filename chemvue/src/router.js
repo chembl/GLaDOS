@@ -20,6 +20,12 @@ export default new Router({
       // which is lazy-loaded when the route is visited.
       component: () =>
         import(/* webpackChunkName: "about" */ "./components/HelloWorld.vue")
+    },
+    {
+      path: "/chembl_game",
+      name: "ChEMBLGame",
+      component: () =>
+        import("./components/ChEMBLGame.vue")
     }
   ]
 });
