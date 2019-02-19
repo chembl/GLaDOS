@@ -63,8 +63,10 @@ def do_structure_search(job_id):
             .format(search_term=search_term, threshold=threshold, page_size=page_size)
 
         page_num = 1
-        results = {}
+        results = []
         # receive the results and then save them to the context file
+        # I will save all the results sorted as I receive them. It is responsibility of anyone who reads the
+        # results to load only a subset if necessary. For example, loading only the first 10000.
         more_results_to_load = True
         while more_results_to_load:
 
@@ -73,9 +75,10 @@ def do_structure_search(job_id):
             response = r.json()
 
             for r in response['molecules']:
-                results[r['molecule_chembl_id']] = {
+                results.append({
+                    'molecule_chembl_id': r['molecule_chembl_id'],
                     'similarity': r['similarity']
-                }
+                })
 
             next = response['page_meta']['next']
             if next is not None:
@@ -169,7 +172,7 @@ def get_sssearch_status(search_id):
         }
         if sssearch_job.status == SSSearchJob.FINISHED:
             results_context = get_search_results_context(sssearch_job)
-            response['ids'] = [k for k in results_context.keys()]
+            response['ids'] = [k['molecule_chembl_id'] for k in results_context]
         return response
 
     except SSSearchJob.DoesNotExist:
