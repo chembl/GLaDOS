@@ -17,6 +17,7 @@ from glados.settings import RunEnvs
 import re
 from elasticsearch_dsl.connections import connections
 import subprocess
+from django.core.cache import cache
 
 
 class SSSearchError(Exception):
@@ -229,6 +230,23 @@ def get_items_with_context(index_name, raw_search_data, context_id, id_property)
     context, total_results = get_search_results_context(sssearch_job)
     print('context')
     print(json.dumps(context, indent=2))
+
+    # create a context index so access is faster
+    context_index_key = 'context_index-{}'.format(context_id)
+    context_index = cache.get(context_index_key)
+    if context_index is None:
+        print('context index not found in cache')
+        context_index = {}
+        for item in context:
+            context_index[item[id_property]] = item
+        cache.set(context_index_key, context_index, 3600)
+
+    else:
+        print('context index found!!!')
+
+    print('context_index_key: ', context_index_key)
+
+    print('cotnext_index: ', context_index)
 
     print('getting es data')
     response = connections.get_connection()
