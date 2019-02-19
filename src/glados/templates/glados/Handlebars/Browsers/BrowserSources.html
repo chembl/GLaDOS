@@ -82,7 +82,13 @@
   <div class="selection-menu">
     <div class="selection-information">
 
-      <b>{{#if out_of_n}}first {{/if}}{{total_items}} {{entity_label}}{{#if out_of_n}} out of <span class="teal-text tooltipped" data-position="bottom" data-tooltip="Please narrow your search.">{{out_of_n}}</span> found{{/if}}</b><br>
+      <b>
+          {{#if out_of_n}}
+            Showing first {{total_items}} {{entity_label}} out of {{out_of_n}}
+          {{else}}
+            {{total_items}} {{entity_label}}
+          {{/if}}
+      </b><br>
       {{num_selected}} Selected -
       <a class="BCK-toggle-clear-selections">
         {{#if none_is_selected}}

@@ -301,10 +301,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
     getListHelperRequestData: (customPage, customPageSize) ->
 
+      ssSearchModel = @getMeta('sssearch_model')
       cacheRequestData =
         index_name: @getMeta('index_name')
         search_data: JSON.stringify(@getRequestData(customPage, customPageSize))
-        context_id: @getMeta('context_id')
+        context_id: ssSearchModel.get('search_id')
         id_property: @getMeta('model').ID_COLUMN.comparator
 
       return cacheRequestData

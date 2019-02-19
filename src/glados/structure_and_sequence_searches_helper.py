@@ -23,6 +23,11 @@ class SSSearchError(Exception):
     """Base class for exceptions in this file."""
     pass
 
+# ----------------------------------------------------------------------------------------------------------------------
+# results size limit
+# ----------------------------------------------------------------------------------------------------------------------
+WEB_RESULTS_SIZE_LIMIT = settings.FILTER_QUERY_MAX_CLAUSES
+
 
 def get_results_file_path(job_id):
     return os.path.join(settings.SSSEARCH_RESULTS_DIR, job_id + '.json')
@@ -171,8 +176,11 @@ def get_sssearch_status(search_id):
             'status': sssearch_job.status
         }
         if sssearch_job.status == SSSearchJob.FINISHED:
-            results_context = get_search_results_context(sssearch_job)
-            response['ids'] = [k['molecule_chembl_id'] for k in results_context]
+            context, total_results = get_search_results_context(sssearch_job)
+            response['ids'] = [k['molecule_chembl_id'] for k in context]
+            response['total_results'] = total_results
+            response['size_limit'] = WEB_RESULTS_SIZE_LIMIT
+
         return response
 
     except SSSearchJob.DoesNotExist:
@@ -201,7 +209,11 @@ def get_search_results_context(sssearch_job):
     with open(results_file_path) as f:
         context = json.load(f)
 
-    return context
+    total_results = len(context)
+    if total_results > WEB_RESULTS_SIZE_LIMIT:
+        context = context[0:WEB_RESULTS_SIZE_LIMIT]
+
+    return context, total_results
 
 
 def get_items_with_context(index_name, raw_search_data, context_id, id_property):
@@ -214,7 +226,7 @@ def get_items_with_context(index_name, raw_search_data, context_id, id_property)
 
     search_data = json.loads(raw_search_data)
     sssearch_job = SSSearchJob.objects.get(search_id=context_id)
-    context = get_search_results_context(sssearch_job)
+    context, total_results = get_search_results_context(sssearch_job)
     print('context')
     print(json.dumps(context, indent=2))
 

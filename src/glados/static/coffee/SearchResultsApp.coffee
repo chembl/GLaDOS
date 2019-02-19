@@ -108,10 +108,8 @@ class SearchResultsApp
     ssSearchModel) ->
 
     resultIds = ssSearchModel.get('result_ids')
-    contextID = ssSearchModel.get('search_id')
-
     esCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(
-      customQuery=undefined, itemsList=resultIds, settings=customSettings, contextID)
+      customQuery=undefined, itemsList=resultIds, settings=customSettings, ssSearchModel)
 
     new glados.views.Browsers.BrowserMenuView
       collection: esCompoundsList

@@ -35,8 +35,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return list
 
-    getNewESResultsListFor: (esIndexSettings, customQuery='*', useCustomQuery=false, itemsList, contextID, stickyQuery,
-      searchESQuery, flavour) ->
+    getNewESResultsListFor: (esIndexSettings, customQuery='*', useCustomQuery=false, itemsList, ssSearchModel,
+      stickyQuery, searchESQuery, flavour) ->
 
       IndexESPagQueryCollection = glados.models.paginatedCollections.PaginatedCollectionBase\
       .extend(glados.models.paginatedCollections.ESPaginatedQueryCollection)
@@ -96,7 +96,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             settings_path: esIndexSettings.PATH_IN_SETTINGS
             searchESQuery: searchESQuery
             links_to_other_entities: esIndexSettings.LINKS_TO_OTHER_ENTITIES
-            context_id: contextID
+            sssearch_model: ssSearchModel
 
           if @getMeta('enable_similarity_maps') or @getMeta('enable_substructure_highlighting')
             @initReferenceStructureFunctions()
@@ -104,6 +104,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           if @getMeta('enable_collection_caching')
             @initCache()
             @on 'reset update', @addModelsInCurrentPage, @
+
+          if ssSearchModel?
+            @setMeta('out_of_n', ssSearchModel.get('total_results'))
+            @setMeta('size_limit', ssSearchModel.get('size_limit'))
 
           glados.models.paginatedCollections.PaginatedCollectionBase.prototype.initialize.call(@)
 
@@ -239,9 +243,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     getNewESCompoundsList: (customQuery='*', itemsList,
       settings=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_COOL_CARDS,
-      contextID) ->
+      ssSearchModel) ->
 
-      list = @getNewESResultsListFor(settings, customQuery, useCustomQuery=(not itemsList?), itemsList, contextID)
+      list = @getNewESResultsListFor(settings, customQuery, useCustomQuery=(not itemsList?), itemsList, ssSearchModel)
       return list
 
     getNewESActivitiesList: (customQuery='*') ->

@@ -203,10 +203,12 @@ glados.useNameSpace 'glados.views.Browsers',
         return
 
       $selectionMenuContainer = $(@el).find('.BCK-selection-menu-container')
-      out_of_n = @collection.getMeta('out_of_n')
+      outOfN = @collection.getMeta('out_of_n')
+      sizeLimit = @collection.getMeta('size_limit')
+
       numSelectedItems = @collection.getNumberOfSelectedItems()
       glados.Utils.fillContentForElement $selectionMenuContainer,
-        out_of_n: if out_of_n > 0 then glados.Utils.getFormattedNumber(out_of_n) else false
+        out_of_n: if outOfN > sizeLimit then glados.Utils.getFormattedNumber(outOfN) else false
         num_selected: numSelectedItems
         hide_num_selected: numSelectedItems == 0
         total_items: glados.Utils.getFormattedNumber @collection.getMeta('total_records')
