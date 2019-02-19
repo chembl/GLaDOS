@@ -249,7 +249,14 @@ def get_items_with_context(index_name, raw_search_data, context_id, id_property)
     print('cotnext_index: ', context_index)
 
     print('getting es data')
-    response = connections.get_connection()
+    es_response = glados_server_statistics.get_and_record_es_cached_response(index_name, raw_search_data)
+    hits = es_response['hits']['hits']
+    for hit in hits:
+        hit_id = hit['_id']
+        context_obj = context_index[hit_id]
+        print('hit_id: ', hit_id)
+        print('context_obj: ', context_obj)
+
 
 
 # ----------------------------------------------------------------------------------------------------------------------
