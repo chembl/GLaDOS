@@ -227,11 +227,37 @@ def get_items_with_context(index_name, raw_search_data, context_id, id_property)
     context_index = cache.get(context_index_key)
     if context_index is None:
         context_index = {}
-        for item in context:
+
+        for index, item in enumerate(context):
             context_index[item[id_property]] = item
+            context_index[item[id_property]]['index'] = index
+
         cache.set(context_index_key, context_index, 3600)
 
-    es_response = glados_server_statistics.get_and_record_es_cached_response(index_name, raw_search_data)
+    score_property = 'index'
+    parsed_search_data = json.loads(raw_search_data)
+    scores_query = {
+        'function_score': {
+            'query': {},
+            'functions': [{
+                'script_score': {
+                    'script': {
+                        'lang': "painless",
+                        'params': {
+                            'scores': context_index,
+                        },
+                        'inline': "String id=doc['" + id_property + "'].value; "
+                                  "return " + str(total_results) + " - params.scores[id]['" + score_property + "'];"
+                    }
+                }
+            }]
+        }
+    }
+    print('scores_query: ', json.dumps(scores_query, indent=2))
+    parsed_search_data['query']['bool']['must'].append(scores_query)
+    raw_search_data_with_scores = json.dumps(parsed_search_data)
+
+    es_response = glados_server_statistics.get_and_record_es_cached_response(index_name, raw_search_data_with_scores)
     hits = es_response['hits']['hits']
     for hit in hits:
         hit_id = hit['_id']
