@@ -498,10 +498,8 @@ def chembl_list_helper(request):
             if context_id is None:
                 response = glados_server_statistics.get_and_record_es_cached_response(index_name, raw_search_data)
             else:
-                response = glados_server_statistics.get_and_record_es_cached_response(index_name, raw_search_data)
-                structure_and_sequence_searches_helper.get_items_with_context(index_name, raw_search_data, context_id,
-                                                                              id_property)
-
+                response = structure_and_sequence_searches_helper.get_items_with_context(index_name, raw_search_data,
+                                                                                         context_id, id_property)
         except Exception as e:
             traceback.print_exc()
             return HttpResponse('Internal Server Error', status=500)

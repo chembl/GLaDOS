@@ -219,44 +219,25 @@ def get_search_results_context(sssearch_job):
 
 def get_items_with_context(index_name, raw_search_data, context_id, id_property):
 
-    print('get_items_with_context')
-    print('index_name', index_name)
-    print('raw_search_data: ', raw_search_data)
-    print('context_id: ', context_id)
-    print('id_property: ', id_property)
-
-    search_data = json.loads(raw_search_data)
     sssearch_job = SSSearchJob.objects.get(search_id=context_id)
     context, total_results = get_search_results_context(sssearch_job)
-    print('context')
-    print(json.dumps(context, indent=2))
 
     # create a context index so access is faster
     context_index_key = 'context_index-{}'.format(context_id)
     context_index = cache.get(context_index_key)
     if context_index is None:
-        print('context index not found in cache')
         context_index = {}
         for item in context:
             context_index[item[id_property]] = item
         cache.set(context_index_key, context_index, 3600)
 
-    else:
-        print('context index found!!!')
-
-    print('context_index_key: ', context_index_key)
-
-    print('cotnext_index: ', context_index)
-
-    print('getting es data')
     es_response = glados_server_statistics.get_and_record_es_cached_response(index_name, raw_search_data)
     hits = es_response['hits']['hits']
     for hit in hits:
         hit_id = hit['_id']
         context_obj = context_index[hit_id]
-        print('hit_id: ', hit_id)
-        print('context_obj: ', context_obj)
-
+        hit['_source']['_context'] = context_obj
+    return es_response
 
 
 # ----------------------------------------------------------------------------------------------------------------------
