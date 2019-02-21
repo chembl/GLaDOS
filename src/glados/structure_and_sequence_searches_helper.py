@@ -77,7 +77,7 @@ def do_structure_search(job_id):
         more_results_to_load = True
         while more_results_to_load:
 
-            append_to_job_log(search_job, 'loading page: {}'.format(page_num))
+            append_to_job_log(search_job, 'loading page: {} url: {}'.format(page_num, search_url))
             r = requests.get(search_url)
             response = r.json()
 

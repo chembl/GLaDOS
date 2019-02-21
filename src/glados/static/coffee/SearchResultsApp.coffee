@@ -28,8 +28,25 @@ class SearchResultsApp
 
   @initSubstructureSearchResults = (searchTerm) ->
 
-    glados.views.base.TrackView.registerSearchUsage(glados.views.base.TrackView.searchTypes.SUBSTRUCTURE)
     GlobalVariables.SEARCH_TERM = searchTerm
+
+    paramsDict =
+      search_term: searchTerm
+
+    console.log 'paramsDict: ', paramsDict
+    ssSearchModel = new glados.models.Search.StructureSearchModel
+      query_params: paramsDict
+      search_type: SEARCH_TYPES.STRUCTURE.SIMILARITY
+
+    $queryContainer = $('.BCK-query-Container')
+    new glados.views.SearchResults.StructureQueryView
+      el: $queryContainer
+      model: ssSearchModel
+
+
+    ssSearchModel.submitSearch()
+    return
+
     resultsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewSubstructureSearchResultsList()
     resultsList.initURL GlobalVariables.SEARCH_TERM
 
