@@ -9,6 +9,7 @@ from elasticsearch_dsl.connections import connections
 import json
 import traceback
 from . import glados_server_statistics
+from . import structure_and_sequence_searches_helper
 import gzip
 import os
 from django.conf import settings
@@ -17,6 +18,7 @@ import re
 import subprocess
 import socket
 import datetime
+from glados.models import SSSearchJob
 
 
 class DownloadError(Exception):
@@ -136,10 +138,17 @@ def get_file_path(job_id):
 # ----------------------------------------------------------------------------------------------------------------------
 
 
-def write_csv_or_tsv_file(scanner, download_job, cols_to_download, index_name, desired_format):
+def write_csv_or_tsv_file(scanner, download_job, cols_to_download, index_name, context_id, desired_format):
     file_path = get_file_path(download_job.job_id)
     total_items = download_job.total_items
     separator = ',' if desired_format == 'csv' else '\t'
+
+    print('context_id: ', context_id)
+    if context_id is not None:
+
+        sssearch_job = SSSearchJob.objects.get(search_id=context_id)
+        context = structure_and_sequence_searches_helper.get_search_results_context(sssearch_job, False)
+        print('context: ', context)
 
     with gzip.open(file_path, 'wt', encoding='utf-16-le') as out_file:
 
@@ -217,6 +226,7 @@ def generate_download_file(download_id):
     cols_to_download = json.loads(raw_columns_to_download)
     raw_query = download_job.raw_query
     query = json.loads(raw_query)
+    context_id = download_job.context_id
     desired_format = download_job.desired_format
 
     try:
@@ -237,7 +247,8 @@ def generate_download_file(download_id):
         download_job.save()
 
         if desired_format in ['csv', 'tsv']:
-            file_size = write_csv_or_tsv_file(scanner, download_job, cols_to_download, index_name, desired_format)
+            file_size = write_csv_or_tsv_file(scanner, download_job, cols_to_download, index_name, context_id,
+                                              desired_format)
         elif desired_format == 'sdf':
             file_size = write_sdf_file(scanner, download_job)
 
@@ -303,7 +314,7 @@ def get_download_id(index_name, raw_query, desired_format, context_id):
         download_id = "{}-{}-{}.{}".format(latest_release_full, index_name, base64_query_digest, parsed_desired_format)
     else:
         download_id = "{}-{}-{}-{}.{}".format(latest_release_full, index_name, base64_query_digest,
-                                              parsed_desired_format, context_id)
+                                              context_id, parsed_desired_format)
     return download_id
 
 

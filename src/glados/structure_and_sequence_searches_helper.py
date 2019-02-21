@@ -204,14 +204,14 @@ def get_sssearch_status(search_id):
 # ----------------------------------------------------------------------------------------------------------------------
 # Loading context
 # ----------------------------------------------------------------------------------------------------------------------
-def get_search_results_context(sssearch_job):
+def get_search_results_context(sssearch_job, limited=True):
 
     results_file_path = get_results_file_path(sssearch_job.search_id)
     with open(results_file_path) as f:
         context = json.load(f)
 
     total_results = len(context)
-    if total_results > WEB_RESULTS_SIZE_LIMIT:
+    if total_results > WEB_RESULTS_SIZE_LIMIT and limited:
         context = context[0:WEB_RESULTS_SIZE_LIMIT]
 
     return context, total_results
