@@ -493,13 +493,15 @@ def chembl_list_helper(request):
         raw_search_data = request.POST.get('search_data', '')
         context_id = request.POST.get('context_id')
         id_property = request.POST.get('id_property')
+        raw_contextual_sort_data = request.POST.get('contextual_sort_data')
 
         try:
             if context_id is None:
                 response = glados_server_statistics.get_and_record_es_cached_response(index_name, raw_search_data)
             else:
                 response = structure_and_sequence_searches_helper.get_items_with_context(index_name, raw_search_data,
-                                                                                         context_id, id_property)
+                                                                                         context_id, id_property,
+                                                                                         raw_contextual_sort_data)
         except Exception as e:
             traceback.print_exc()
             return HttpResponse('Internal Server Error', status=500)

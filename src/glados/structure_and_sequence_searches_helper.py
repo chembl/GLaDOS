@@ -83,7 +83,7 @@ def do_structure_search(job_id):
             for r in response['molecules']:
                 results.append({
                     'molecule_chembl_id': r['molecule_chembl_id'],
-                    'similarity': r['similarity']
+                    'similarity': float(r['similarity'])
                 })
 
             next = response['page_meta']['next']
@@ -217,10 +217,11 @@ def get_search_results_context(sssearch_job):
     return context, total_results
 
 
-def get_items_with_context(index_name, raw_search_data, context_id, id_property):
+def get_items_with_context(index_name, raw_search_data, context_id, id_property, raw_contextual_sort_data='{}'):
 
     sssearch_job = SSSearchJob.objects.get(search_id=context_id)
     context, total_results = get_search_results_context(sssearch_job)
+    context_prefix = '_context'
 
     # create a context index so access is faster
     context_index_key = 'context_index-{}'.format(context_id)
@@ -234,8 +235,27 @@ def get_items_with_context(index_name, raw_search_data, context_id, id_property)
 
         cache.set(context_index_key, context_index, 3600)
 
-    score_property = 'index'
-    parsed_search_data = json.loads(raw_search_data)
+    contextual_sort_data = json.loads(raw_contextual_sort_data)
+    contextual_sort_data_keys = contextual_sort_data.keys()
+    if len(contextual_sort_data_keys) == 0:
+        # if nothing is specified use the default scoring script, which is to score them according to their original
+        # position in the results
+        score_property = 'index'
+        score_script = "String id=doc['" + id_property + "'].value; " \
+                       "return " + str(total_results) + " - params.scores[id]['" + score_property + "'];"
+    else:
+
+        raw_score_property = list(contextual_sort_data_keys)[0]
+        score_property = raw_score_property.replace('{}.'.format(context_prefix), '')
+        sort_order = contextual_sort_data[raw_score_property]
+
+        if sort_order == 'desc':
+            score_script = "String id=doc['" + id_property + "'].value; " \
+                           "return params.scores[id]['" + score_property + "'];"
+        else:
+            score_script = "String id=doc['" + id_property + "'].value; " \
+                           "return 1 / params.scores[id]['" + score_property + "'];"
+
     scores_query = {
         'function_score': {
             'query': {},
@@ -246,14 +266,14 @@ def get_items_with_context(index_name, raw_search_data, context_id, id_property)
                         'params': {
                             'scores': context_index,
                         },
-                        'inline': "String id=doc['" + id_property + "'].value; "
-                                  "return " + str(total_results) + " - params.scores[id]['" + score_property + "'];"
+                        'inline': score_script
                     }
                 }
             }]
         }
     }
-    print('scores_query: ', json.dumps(scores_query, indent=2))
+
+    parsed_search_data = json.loads(raw_search_data)
     parsed_search_data['query']['bool']['must'].append(scores_query)
     raw_search_data_with_scores = json.dumps(parsed_search_data)
 
@@ -262,7 +282,7 @@ def get_items_with_context(index_name, raw_search_data, context_id, id_property)
     for hit in hits:
         hit_id = hit['_id']
         context_obj = context_index[hit_id]
-        hit['_source']['_context'] = context_obj
+        hit['_source'][context_prefix] = context_obj
     return es_response
 
 

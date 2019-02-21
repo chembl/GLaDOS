@@ -276,9 +276,6 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     else
       objData = response
 
-    console.log 'parsing compound'
-    console.log objData
-
     filterForActivities = 'molecule_chembl_id:' + objData.molecule_chembl_id
     objData.activities_url = Activity.getActivitiesListURL(filterForActivities)
 
@@ -788,6 +785,7 @@ Compound.COLUMNS = {
       'sort_disabled': false
       'is_sorting': 0
       'sort_class': 'fa-sort'
+      'is_contextual': true
     }
   STRUCTURE_TYPE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     comparator: 'structure_type'

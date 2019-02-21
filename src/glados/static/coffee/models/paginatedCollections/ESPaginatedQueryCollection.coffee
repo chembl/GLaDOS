@@ -305,6 +305,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       cacheRequestData =
         index_name: @getMeta('index_name')
         search_data: JSON.stringify(@getRequestData(customPage, customPageSize))
+        contextual_sort_data: JSON.stringify(@getContextualSortingProperties())
         context_id: ssSearchModel.get('search_id')
         id_property: @getMeta('model').ID_COLUMN.comparator
 
@@ -416,13 +417,30 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         if facets_query
           esQuery.aggs = facets_query
 
+    getContextualSortingProperties: ->
+
+      sortObj = {}
+      columns = @getAllColumns()
+      for col in columns
+
+        if col.is_sorting? and col.is_sorting !=0 and col.is_contextual
+          if col.is_sorting == 1
+            order = 'asc'
+          if col.is_sorting == -1
+            order = 'desc'
+
+          sortObj =
+            "#{col.comparator}": order
+
+      return sortObj
+
     addSortingToQuery: (esQuery) ->
       sortList = []
 
       columns = @getAllColumns()
       for col in columns
 
-        if col.is_sorting? and col.is_sorting !=0
+        if col.is_sorting? and col.is_sorting !=0 and not col.is_contextual
 
           sortObj = {}
           if col.is_sorting == 1
