@@ -496,9 +496,11 @@ def chembl_list_helper(request):
         context_id = request.POST.get('context_id')
         id_property = request.POST.get('id_property')
         raw_contextual_sort_data = request.POST.get('contextual_sort_data')
+        print('raw_search_data: ', raw_search_data)
 
         try:
             if context_id is None or context_id == 'undefined' or context_id == 'null':
+                print('no context id')
                 response = glados_server_statistics.get_and_record_es_cached_response(index_name, raw_search_data)
             else:
                 response = structure_and_sequence_searches_helper.get_items_with_context(index_name, raw_search_data,

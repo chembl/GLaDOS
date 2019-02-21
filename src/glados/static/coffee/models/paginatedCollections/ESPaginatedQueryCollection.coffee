@@ -316,8 +316,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # the same for customPageSize
     getRequestData: (customPage, customPageSize, requestFacets=false, facetsFirstCall=true) ->
 
-      console.log 'requestFacets: ', requestFacets
-      console.log 'facetsFirstCall: ', facetsFirstCall
       # If facets are requested the facet filters are excluded from the query
       facetsFiltered = true
       page = if customPage? then customPage else @getMeta('current_page')
@@ -383,7 +381,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     addStickyQuery: (esQuery) ->
 
       stickyQuery = @getMeta('sticky_query')
-      if stickyQuery?
+      if stickyQuery? and stickyQuery != ''
         esQuery.query.bool.must = [] unless esQuery.query.bool.must?
         esQuery.query.bool.must.push stickyQuery
 
