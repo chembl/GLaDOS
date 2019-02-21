@@ -410,6 +410,7 @@ def generate_download(request):
     raw_query = request.POST.get('query', '')
     desired_format = request.POST.get('format', '')
     raw_columns_to_download = request.POST.get('columns', '')
+    context_id = request.POST.get('context_id')
 
     try:
         response = dynamic_downloads_manager.generate_download(index_name, raw_query, desired_format,
@@ -488,7 +489,6 @@ def chembl_list_helper(request):
 
     if request.method == "POST":
 
-        print('chembl_list_helper')
         index_name = request.POST.get('index_name', '')
         raw_search_data = request.POST.get('search_data', '')
         context_id = request.POST.get('context_id')
@@ -496,7 +496,7 @@ def chembl_list_helper(request):
         raw_contextual_sort_data = request.POST.get('contextual_sort_data')
 
         try:
-            if context_id is None:
+            if context_id is None or context_id == 'undefined' or context_id == 'null':
                 response = glados_server_statistics.get_and_record_es_cached_response(index_name, raw_search_data)
             else:
                 response = structure_and_sequence_searches_helper.get_items_with_context(index_name, raw_search_data,

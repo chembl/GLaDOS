@@ -306,7 +306,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         index_name: @getMeta('index_name')
         search_data: JSON.stringify(@getRequestData(customPage, customPageSize))
         contextual_sort_data: JSON.stringify(@getContextualSortingProperties())
-        context_id: ssSearchModel.get('search_id')
+        context_id: if ssSearchModel? then ssSearchModel.get('search_id') else undefined
         id_property: @getMeta('model').ID_COLUMN.comparator
 
       return cacheRequestData
