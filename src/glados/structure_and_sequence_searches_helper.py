@@ -28,6 +28,7 @@ class SSSearchError(Exception):
 # results size limit
 # ----------------------------------------------------------------------------------------------------------------------
 WEB_RESULTS_SIZE_LIMIT = settings.FILTER_QUERY_MAX_CLAUSES
+CONTEXT_PREFIX = '_context'
 
 
 def get_results_file_path(job_id):
@@ -221,7 +222,6 @@ def get_items_with_context(index_name, raw_search_data, context_id, id_property,
 
     sssearch_job = SSSearchJob.objects.get(search_id=context_id)
     context, total_results = get_search_results_context(sssearch_job)
-    context_prefix = '_context'
 
     # create a context index so access is faster
     context_index_key = 'context_index-{}'.format(context_id)
@@ -246,7 +246,7 @@ def get_items_with_context(index_name, raw_search_data, context_id, id_property,
     else:
 
         raw_score_property = list(contextual_sort_data_keys)[0]
-        score_property = raw_score_property.replace('{}.'.format(context_prefix), '')
+        score_property = raw_score_property.replace('{}.'.format(CONTEXT_PREFIX), '')
         sort_order = contextual_sort_data[raw_score_property]
 
         if sort_order == 'desc':
@@ -282,7 +282,7 @@ def get_items_with_context(index_name, raw_search_data, context_id, id_property,
     for hit in hits:
         hit_id = hit['_id']
         context_obj = context_index[hit_id]
-        hit['_source'][context_prefix] = context_obj
+        hit['_source'][CONTEXT_PREFIX] = context_obj
     return es_response
 
 

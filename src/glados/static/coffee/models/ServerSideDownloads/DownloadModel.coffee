@@ -43,6 +43,7 @@ glados.useNameSpace 'glados.models.ServerSideDownloads',
         format: desiredFormat
         columns: JSON.stringify(columnsToDownload)
         context_id: if ssSearchModel? then ssSearchModel.get('search_id') else undefined
+        id_property: collection.getMeta('model').ID_COLUMN.comparator
       }
 
     #-------------------------------------------------------------------------------------------------------------------
