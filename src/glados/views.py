@@ -411,10 +411,12 @@ def generate_download(request):
     desired_format = request.POST.get('format', '')
     raw_columns_to_download = request.POST.get('columns', '')
     context_id = request.POST.get('context_id')
+    if context_id == "null" or context_id == "undefined":
+        context_id = None
 
     try:
         response = dynamic_downloads_manager.generate_download(index_name, raw_query, desired_format,
-                                                               raw_columns_to_download)
+                                                               raw_columns_to_download, context_id)
         return JsonResponse(response)
     except Exception as e:
         traceback.print_exc()

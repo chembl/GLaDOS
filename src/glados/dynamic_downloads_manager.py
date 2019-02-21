@@ -286,7 +286,7 @@ def rsync_to_the_other_nfs(download_job):
     subprocess.check_call(rsync_command_parts)
 
 
-def get_download_id(index_name, raw_query, desired_format):
+def get_download_id(index_name, raw_query, desired_format, context_id):
 
     # make sure the string generated is stable
     stable_raw_query = json.dumps(json.loads(raw_query), sort_keys=True)
@@ -299,13 +299,17 @@ def get_download_id(index_name, raw_query, desired_format):
     query_digest = hashlib.sha256(stable_raw_query.encode('utf-8')).digest()
     base64_query_digest = base64.b64encode(query_digest).decode('utf-8').replace('/', '_').replace('+', '-')
 
-    download_id = "{}-{}-{}.{}".format(latest_release_full, index_name, base64_query_digest, parsed_desired_format)
+    if context_id is None:
+        download_id = "{}-{}-{}.{}".format(latest_release_full, index_name, base64_query_digest, parsed_desired_format)
+    else:
+        download_id = "{}-{}-{}-{}.{}".format(latest_release_full, index_name, base64_query_digest,
+                                              parsed_desired_format, context_id)
     return download_id
 
 
-def generate_download(index_name, raw_query, desired_format, raw_columns_to_download):
+def generate_download(index_name, raw_query, desired_format, raw_columns_to_download, context_id):
     response = {}
-    download_id = get_download_id(index_name, raw_query, desired_format)
+    download_id = get_download_id(index_name, raw_query, desired_format, context_id)
     parsed_desired_format = desired_format.lower()
 
     try:
@@ -349,7 +353,8 @@ def generate_download(index_name, raw_query, desired_format, raw_columns_to_down
             raw_columns_to_download=raw_columns_to_download,
             raw_query=raw_query,
             desired_format=parsed_desired_format,
-            log=format_log_message('Job Queued')
+            log=format_log_message('Job Queued'),
+            context_id=context_id
         )
         download_job.save()
         generate_download_file.delay(download_id)

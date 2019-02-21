@@ -127,7 +127,7 @@ class ESSearchRecord(models.Model):
     run_env_type = models.TextField()
     host = models.TextField(default='')
     time_taken = models.IntegerField(default=0)
-    is_new = models.BooleanField()
+    is_new = models.BooleanField(default=True)
 
     def indexing(self):
         obj = ESSearchRecordIndex(
@@ -149,7 +149,7 @@ class ESSearchRecord(models.Model):
 
 # This is to keep track of the status of a download job
 class DownloadJob(models.Model):
-    job_id = models.TextField(max_length=250)
+    job_id = models.TextField(max_length=500)
     progress = models.PositiveSmallIntegerField(default=0)
     total_items = models.PositiveIntegerField(default=0)
     raw_columns_to_download = models.TextField(null=True)
@@ -170,6 +170,7 @@ class DownloadJob(models.Model):
     desired_format = models.CharField(max_length=200, null=True)
     worker = models.TextField(max_length=250, null=True)
     log = models.TextField(null=True)
+    context_id = models.TextField(max_length=500, null=True)
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Search Jobs
