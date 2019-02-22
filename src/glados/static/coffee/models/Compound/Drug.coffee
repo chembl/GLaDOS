@@ -1,7 +1,9 @@
 glados.useNameSpace 'glados.models.Compound',
   Drug: Compound.extend
     parse: (response) ->
-      patentID = response._metadata.drug.drug_data.sc_patent
+
+      objData = response._source
+      patentID = objData._metadata.drug.drug_data.sc_patent
       if patentID
         response.patent_url = 'https://www.surechembl.org/document/' + patentID
       return Compound.prototype.parse.call(@, response)

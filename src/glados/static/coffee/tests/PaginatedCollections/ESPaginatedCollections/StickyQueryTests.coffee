@@ -8,12 +8,13 @@ describe "A collection with a sticky query", ->
   list = undefined
   beforeAll ->
     list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFor(settings,
-      customQueryString=undefined, useCustomQuery=false, itemsList=undefined, contextualProperties=undefined,
-      searchTerm=undefined, stickyQueryMustBe)
+      customQueryString=undefined, useCustomQuery=false, itemsList=undefined, ssSearchModel=undefined
+      stickyQuery=stickyQueryMustBe)
 
   it "sets the initial parameters", ->
 
     stickyQueryGot = list.getMeta('sticky_query')
+    console.log 'stickyQueryGot: ', stickyQueryGot
     expect(_.isEqual(stickyQueryMustBe, stickyQueryGot)).toBe(true)
 
   it 'Generates the correct request object', ->

@@ -301,7 +301,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           "_metadata.drug.is_drug": true
 
       list = @getNewESResultsListFor(settings, customQuery, useCustomQuery=(not itemsList?), itemsList,
-        contextualProperties, searchTerm, stickyQuery)
+        ssSearchModel=undefined, stickyQuery)
       return list
 
     getNewESDrugIndicationsList: (customQuery='*') ->
