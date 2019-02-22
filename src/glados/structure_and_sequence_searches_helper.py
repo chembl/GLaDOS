@@ -44,6 +44,51 @@ def get_search_id(search_type, raw_search_params):
     job_id = '{}-{}'.format(search_type, base64_search_params_digest)
     return job_id
 
+
+def get_initial_search_url(search_params, search_job):
+
+    search_term = search_params['search_term']
+    page_size = 1000
+    append_to_job_log(search_job, 'page_size: {}'.format(page_size))
+    search_type = search_job.search_type
+
+    if search_type == SSSearchJob.SIMILARITY:
+
+        threshold = search_params['threshold']
+        search_url = 'https://www.ebi.ac.uk/chembl/api/data/similarity/{search_term}/{threshold}.json' \
+                     '?limit={page_size}&only=molecule_chembl_id,similarity'.format(search_term=search_term,
+                                                                                    threshold=threshold,
+                                                                                    page_size=page_size)
+
+    elif search_type == SSSearchJob.SUBSTRUCTURE:
+
+        search_url = 'https://www.ebi.ac.uk/chembl/api/data/substructure/{search_term}.json' \
+                     '?limit={page_size}&only=molecule_chembl_id'.format(search_term=search_term, page_size=page_size)
+
+    elif search_type == SSSearchJob.CONNECTIVITY:
+
+        search_url = 'https://www.ebi.ac.uk/chembl/api/data/substructure/{search_term}.json' \
+                     '?limit={page_size}'.format(search_term=search_term, page_size=page_size)
+
+    return search_url
+
+
+def append_to_results_from_response_page(response, results, search_type):
+
+    if search_type == SSSearchJob.SIMILARITY:
+
+        for r in response['molecules']:
+            results.append({
+                'molecule_chembl_id': r['molecule_chembl_id'],
+                'similarity': float(r['similarity'])
+            })
+
+    elif search_type == SSSearchJob.SUBSTRUCTURE or search_type == SSSearchJob.CONNECTIVITY:
+
+        for r in response['molecules']:
+            results.append(r)
+
+
 @job
 def do_structure_search(job_id):
 
@@ -60,15 +105,7 @@ def do_structure_search(job_id):
 
     try:
 
-        # set the initial url
-        search_term = parsed_search_params['search_term']
-        threshold = parsed_search_params['threshold']
-        page_size = 1000
-        append_to_job_log(search_job, 'page_size: {}'.format(page_size))
-
-        search_url = 'https://www.ebi.ac.uk/chembl/api/data/similarity/{search_term}/{threshold}.json?limit={page_size}'\
-            .format(search_term=search_term, threshold=threshold, page_size=page_size)
-
+        search_url = get_initial_search_url(parsed_search_params, search_job)
         page_num = 1
         results = []
         # receive the results and then save them to the context file
@@ -80,16 +117,11 @@ def do_structure_search(job_id):
             append_to_job_log(search_job, 'loading page: {} url: {}'.format(page_num, search_url))
             r = requests.get(search_url)
             response = r.json()
+            append_to_results_from_response_page(response, results, search_job.search_type)
 
-            for r in response['molecules']:
-                results.append({
-                    'molecule_chembl_id': r['molecule_chembl_id'],
-                    'similarity': float(r['similarity'])
-                })
-
-            next = response['page_meta']['next']
-            if next is not None:
-                search_url = 'https://www.ebi.ac.uk{}'.format(next)
+            next_page = response['page_meta']['next']
+            if next_page is not None:
+                search_url = 'https://www.ebi.ac.uk{}'.format(next_page)
                 page_num += 1
             else:
                 more_results_to_load = False

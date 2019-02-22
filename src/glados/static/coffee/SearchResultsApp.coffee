@@ -3,6 +3,9 @@ class SearchResultsApp
   SEARCH_TYPES =
     STRUCTURE:
       SIMILARITY: 'SIMILARITY'
+      SUBSTRUCTURE: 'SUBSTRUCTURE'
+      CONNECTIVITY: 'CONNECTIVITY'
+
   # --------------------------------------------------------------------------------------------------------------------
   # Initialization
   # --------------------------------------------------------------------------------------------------------------------
@@ -36,35 +39,26 @@ class SearchResultsApp
     console.log 'paramsDict: ', paramsDict
     ssSearchModel = new glados.models.Search.StructureSearchModel
       query_params: paramsDict
-      search_type: SEARCH_TYPES.STRUCTURE.SIMILARITY
+      search_type: SEARCH_TYPES.STRUCTURE.SUBSTRUCTURE
 
     $queryContainer = $('.BCK-query-Container')
     new glados.views.SearchResults.StructureQueryView
       el: $queryContainer
       model: ssSearchModel
 
-
-    ssSearchModel.submitSearch()
-    return
-
-    resultsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewSubstructureSearchResultsList()
-    resultsList.initURL GlobalVariables.SEARCH_TERM
-
-    queryParams =
-      search_term: GlobalVariables.SEARCH_TERM
-
-    $queryContainer = $('.BCK-query-Container')
-    new glados.views.SearchResults.StructureQueryView
-      el: $queryContainer
-      query_params: queryParams
-
-    $progressElement = $('#BCK-loading-messages-container')
     $browserContainer = $('.BCK-BrowserContainer')
     $browserContainer.hide()
     $noResultsDiv = $('.no-results-found')
-    @initBrowserFromSSResults(resultsList, $browserContainer, $progressElement, $noResultsDiv, undefined,
-      glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_SUBSTRUCTURE_HIGHLIGHTING,
-      GlobalVariables.SEARCH_TERM)
+
+    thisApp = @
+    ssSearchModel.once glados.models.Search.StructureSearchModel.EVENTS.RESULTS_READY, ->
+
+      $browserContainer.show()
+      thisApp.initBrowserFromSSResults($browserContainer, $noResultsDiv,
+        glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.SUBSTRUCTURE_RESULTS_LIST,
+        ssSearchModel)
+
+    ssSearchModel.submitSearch()
 
   @initSimilaritySearchResults = (searchTerm, threshold) ->
 
@@ -84,7 +78,6 @@ class SearchResultsApp
       el: $queryContainer
       model: ssSearchModel
 
-    $progressElement = $('#BCK-loading-messages-container')
     $browserContainer = $('.BCK-BrowserContainer')
     $browserContainer.hide()
     $noResultsDiv = $('.no-results-found')
@@ -93,7 +86,7 @@ class SearchResultsApp
     ssSearchModel.once glados.models.Search.StructureSearchModel.EVENTS.RESULTS_READY, ->
 
       $browserContainer.show()
-      thisApp.initBrowserFromSSResults($browserContainer, $progressElement, $noResultsDiv,
+      thisApp.initBrowserFromSSResults($browserContainer, $noResultsDiv,
         glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_SIMILARITY_MAPS,
         ssSearchModel)
 
@@ -121,8 +114,7 @@ class SearchResultsApp
     $noResultsDiv = $('.no-results-found')
     @initBrowserFromSSResults(resultsList, $browserContainer, $progressElement, $noResultsDiv)
 
-  @initBrowserFromSSResults = ($browserContainer, $progressElement, $noResultsDiv, customSettings,
-    ssSearchModel) ->
+  @initBrowserFromSSResults = ($browserContainer, $noResultsDiv, customSettings, ssSearchModel) ->
 
     resultIds = ssSearchModel.get('result_ids')
     esCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(

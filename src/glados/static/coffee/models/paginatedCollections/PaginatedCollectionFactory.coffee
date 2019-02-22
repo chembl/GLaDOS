@@ -359,31 +359,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return list
 
-    getNewFlexmatchSearchResultsList: ->
-
-# this list has the same columns as the one used for substrucure
-      list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.SUBSTRUCTURE_RESULTS_LIST)
-
-      list.initURL = (term) ->
-        @baseUrl = glados.Settings.WS_BASE_FLEXMATCH_SEARCH_URL
-        console.log 'base url: ', @baseUrl
-        @setMeta('base_url', @baseUrl, true)
-        @setMeta('use_post', true)
-        @setMeta('extra_params', ['only=molecule_chembl_id'])
-        @setMeta('post_parameters', {
-          molecule_structures__canonical_smiles__flexmatch: term
-        })
-        @initialiseUrl()
-
-
-      list.parse = (data) ->
-        data.page_meta.records_in_page = data.molecules.length
-        @setMeta('data_loaded', true)
-        @resetMeta(data.page_meta)
-
-        return data.molecules
-
-      return list
 
     getNewBlogEntriesList: ->
 
