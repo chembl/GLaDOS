@@ -28,91 +28,63 @@ class SearchResultsApp
   # --------------------------------------------------------------------------------------------------------------------
   # Views
   # --------------------------------------------------------------------------------------------------------------------
+  @initSSSearchResults = (searchParams, search_type) ->
+
+    GlobalVariables.SEARCH_TERM = searchParams.search_term
+
+    ssSearchModel = new glados.models.Search.StructureSearchModel
+      query_params: searchParams
+      search_type: search_type
+
+    $queryContainer = $('.BCK-query-Container')
+    new glados.views.SearchResults.StructureQueryView
+      el: $queryContainer
+      model: ssSearchModel
+
+    $browserContainer = $('.BCK-BrowserContainer')
+    $browserContainer.hide()
+    $noResultsDiv = $('.no-results-found')
+
+    if search_type == SEARCH_TYPES.STRUCTURE.SIMILARITY
+
+      listConfig = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_SIMILARITY_MAPS
+
+    else if search_type == SEARCH_TYPES.STRUCTURE.SUBSTRUCTURE or search_type == SEARCH_TYPES.CONNECTIVITY
+
+      listConfig = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.SUBSTRUCTURE_RESULTS_LIST
+
+    thisApp = @
+    ssSearchModel.once glados.models.Search.StructureSearchModel.EVENTS.RESULTS_READY, ->
+
+      $browserContainer.show()
+      thisApp.initBrowserFromSSResults($browserContainer, $noResultsDiv, listConfig, ssSearchModel)
+
+    ssSearchModel.submitSearch()
 
   @initSubstructureSearchResults = (searchTerm) ->
 
-    GlobalVariables.SEARCH_TERM = searchTerm
-
-    paramsDict =
+    searchParams =
       search_term: searchTerm
 
-    console.log 'paramsDict: ', paramsDict
-    ssSearchModel = new glados.models.Search.StructureSearchModel
-      query_params: paramsDict
-      search_type: SEARCH_TYPES.STRUCTURE.SUBSTRUCTURE
+    @initSSSearchResults(searchParams, SEARCH_TYPES.STRUCTURE.SUBSTRUCTURE)
 
-    $queryContainer = $('.BCK-query-Container')
-    new glados.views.SearchResults.StructureQueryView
-      el: $queryContainer
-      model: ssSearchModel
-
-    $browserContainer = $('.BCK-BrowserContainer')
-    $browserContainer.hide()
-    $noResultsDiv = $('.no-results-found')
-
-    thisApp = @
-    ssSearchModel.once glados.models.Search.StructureSearchModel.EVENTS.RESULTS_READY, ->
-
-      $browserContainer.show()
-      thisApp.initBrowserFromSSResults($browserContainer, $noResultsDiv,
-        glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.SUBSTRUCTURE_RESULTS_LIST,
-        ssSearchModel)
-
-    ssSearchModel.submitSearch()
 
   @initSimilaritySearchResults = (searchTerm, threshold) ->
 
-    GlobalVariables.SEARCH_TERM = searchTerm
-    GlobalVariables.SIMILARITY_PERCENTAGE = threshold
-
-    paramsDict =
+    searchParams =
       search_term: searchTerm
       threshold: threshold
 
-    ssSearchModel = new glados.models.Search.StructureSearchModel
-      query_params: paramsDict
-      search_type: SEARCH_TYPES.STRUCTURE.SIMILARITY
+    @initSSSearchResults(searchParams, SEARCH_TYPES.STRUCTURE.SIMILARITY)
 
-    $queryContainer = $('.BCK-query-Container')
-    new glados.views.SearchResults.StructureQueryView
-      el: $queryContainer
-      model: ssSearchModel
-
-    $browserContainer = $('.BCK-BrowserContainer')
-    $browserContainer.hide()
-    $noResultsDiv = $('.no-results-found')
-
-    thisApp = @
-    ssSearchModel.once glados.models.Search.StructureSearchModel.EVENTS.RESULTS_READY, ->
-
-      $browserContainer.show()
-      thisApp.initBrowserFromSSResults($browserContainer, $noResultsDiv,
-        glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_SIMILARITY_MAPS,
-        ssSearchModel)
-
-    ssSearchModel.submitSearch()
 
   @initFlexmatchSearchResults = (searchTerm) ->
 
-    glados.views.base.TrackView.registerSearchUsage(glados.views.base.TrackView.searchTypes.CONNECTIVITY)
-    GlobalVariables.SEARCH_TERM = searchTerm
+    searchParams =
+      search_term: searchTerm
 
-    queryParams =
-      search_term: GlobalVariables.SEARCH_TERM
+    @initSSSearchResults(searchParams, SEARCH_TYPES.STRUCTURE.CONNECTIVITY)
 
-    $queryContainer = $('.BCK-query-Container')
-    new glados.views.SearchResults.StructureQueryView
-      el: $queryContainer
-      query_params: queryParams
-
-    resultsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewFlexmatchSearchResultsList()
-    resultsList.initURL GlobalVariables.SEARCH_TERM
-
-    $progressElement = $('#BCK-loading-messages-container')
-    $browserContainer = $('.BCK-BrowserContainer')
-    $browserContainer.hide()
-    $noResultsDiv = $('.no-results-found')
-    @initBrowserFromSSResults(resultsList, $browserContainer, $progressElement, $noResultsDiv)
 
   @initBrowserFromSSResults = ($browserContainer, $noResultsDiv, customSettings, ssSearchModel) ->
 
