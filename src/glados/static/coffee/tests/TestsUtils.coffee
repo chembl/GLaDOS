@@ -163,7 +163,7 @@ class TestsUtils
   @testIteratesPages = (esList, pageSize, totalPages) ->
 
     for pageNumber in [1..totalPages]
-      requestData = esList.setPage(pageNumber, doFetch=true, testMode=true)
+      requestData = JSON.parse(esList.setPage(pageNumber, doFetch=true, testMode=true).search_data)
       expect(requestData['from']).toBe(pageSize * (pageNumber - 1))
       expect(requestData['size']).toBe(pageSize)
 

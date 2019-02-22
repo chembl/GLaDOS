@@ -229,7 +229,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     # Prepares an Elastic Search query to search in all the fields of a document in a specific index
     fetch: (options, testMode=false) ->
-      console.log 'fetch collection'
       testMode |= @getMeta('test_mode')
       @trigger('before_fetch_elastic')
       @url = @getURL()
@@ -245,16 +244,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       # Creates the Elastic Search Query parameters and serializes them
       esCacheRequest = @getListHelperRequestData()
 
-      console.log 'url: ', @url
-      console.log('esCacheRequest:', esCacheRequest)
+      unless testMode
+        fetchPromise = glados.doCSRFPost(glados.Settings.CHEMBL_LIST_HELPER_ENDPOINT, esCacheRequest)
+        thisCollection = @
 
-      fetchPromise = glados.doCSRFPost(glados.Settings.CHEMBL_LIST_HELPER_ENDPOINT, esCacheRequest)
-      thisCollection = @
+        fetchPromise.then (data) -> thisCollection.reset(thisCollection.parse(data))
+        fetchPromise.fail (jqXHR) -> thisCollection.trigger('error', thisCollection, jqXHR)
 
-      fetchPromise.then (data) -> thisCollection.reset(thisCollection.parse(data))
-      fetchPromise.fail (jqXHR) -> thisCollection.trigger('error', thisCollection, jqXHR)
+        @loadFacetGroups(@getRequestData())
 
-      @loadFacetGroups(@getRequestData()) unless testMode
+      return esCacheRequest
 
     # ------------------------------------------------------------------------------------------------------------------
     # Elastic Search Query structure
@@ -717,7 +716,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
               @trigger('do-repaint')
               return
 
-        @fetch(options=undefined, testMode)
+        retValue = @fetch(options=undefined, testMode)
+        return retValue
 
      # tells if the current page is the las page
     currentlyOnLastPage: -> @getMeta('current_page') == @getMeta('total_pages')

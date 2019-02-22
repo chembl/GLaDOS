@@ -14,7 +14,6 @@ describe "A collection with a sticky query", ->
   it "sets the initial parameters", ->
 
     stickyQueryGot = list.getMeta('sticky_query')
-    console.log 'stickyQueryGot: ', stickyQueryGot
     expect(_.isEqual(stickyQueryMustBe, stickyQueryGot)).toBe(true)
 
   it 'Generates the correct request object', ->
@@ -30,13 +29,14 @@ describe "A collection with a sticky query", ->
     list = undefined
     beforeAll ->
       list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFor(settings,
-        customQueryString, useCustomQuery=true, itemsList=undefined, contextualProperties=undefined,
-        searchTerm=undefined, stickyQueryMustBe)
+        customQueryString, useCustomQuery=true, itemsList=undefined, ssSearchModel=undefined,
+        stickyQuery=stickyQueryMustBe)
 
     it 'sets the initial parameters', ->
 
       expect(list.getMeta('custom_query')).toBe(customQueryString)
       stickyQueryGot = list.getMeta('sticky_query')
+      console.log 'stickyQueryGot: ', stickyQueryGot
       expect(_.isEqual(stickyQueryMustBe, stickyQueryGot)).toBe(true)
 
     it 'Generates the correct request object', ->
@@ -52,4 +52,6 @@ describe "A collection with a sticky query", ->
       useQueryStringMustBe=true,
       stickyQueryMustBe)
 
-    it 'creates a list from a state object', -> TestsUtils.testRestoredListIsEqualToOriginal(list)
+    it 'creates a list from a state object', ->
+      console.log 'DEBUG'
+      TestsUtils.testRestoredListIsEqualToOriginal(list)

@@ -20,8 +20,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       contextualProperties = stateObject.contextual_properties
       searchTerm = stateObject.search_term
 
-      list = @getNewESResultsListFor(settings, queryString, useQueryString, itemsList,
-        contextualProperties, searchTerm, stickyQuery, searchESQuery)
+      list = @getNewESResultsListFor(settings, queryString, useQueryString, itemsList, ssSearchModel=undefined,
+        stickyQuery, searchESQuery)
 
       facetGroups = list.getFacetsGroups()
       facetsState = stateObject.facets_state
