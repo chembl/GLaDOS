@@ -19,10 +19,10 @@
                 <img src="{% static 'img/icons/structure_search_icon_white.png' %}"/>
             </a>
 
-            <a class="bar-button BCK-Enter-Sequence draw-structure tooltipped hide-on-small-only"
-               data-position="down" data-delay="50" data-tooltip="Enter a sequence">
-                <img src="{% static 'img/icons/sequence_search_icon_white.svg' %}"/>
-            </a>
+{#            <a class="bar-button BCK-Enter-Sequence draw-structure tooltipped hide-on-small-only"#}
+{#               data-position="down" data-delay="50" data-tooltip="Enter a sequence">#}
+{#                <img src="{% static 'img/icons/sequence_search_icon_white.svg' %}"/>#}
+{#            </a>#}
         </div>
 
     </div>
@@ -36,7 +36,8 @@
             <a href="{% url 'main' %}g/#search_results/CC(=O)Oc1ccccc1C(=O)O">NCC(=O)Oc1ccccc1C(=O)O</a>
         </div>
         <div class="special-searches">
-            <a class="BCK-Draw-Structure">Draw a Structure</a> | <a class="BCK-Enter-Sequence">Enter a Sequence</a>
+            <a class="BCK-Draw-Structure">Draw a Structure</a>
+{#            | <a class="BCK-Enter-Sequence">Enter a Sequence</a>#}
         </div>
     </div>
 </div>
