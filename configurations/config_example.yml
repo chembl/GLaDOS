@@ -1,10 +1,58 @@
 run_env: DEV #DEV, TRAVIS, TEST or PROD
 elasticsearch:
   host: 'http://<YOUR_ELASTICSEARCH_HOST>:9200'
-unichemapi: 'http://localhost:8000/'
-filter_query_max_clauses: 30000
-enable_unichem_oracle_db: false
-unichem_oracle:
-  name: 'TSN_NAME'
+server_secret_key: 'server_secret_key'
+enable_twitter: True
+twitter_secrets:
+  twitter_access_token: 'twitter_access_token'
+  twitter_access_token_secret: 'twitter_access_token_secret'
+  twitter_access_consumer_key: 'twitter_access_consumer_key'
+  twitter_access_consumer_secret: 'twitter_access_consumer_secret'
+enable_blogger: True
+blogger_secrets:
+  blogger_key: 'blogger_key'
+admin_user:
+  username: 'admin'
+  email: 'email'
+  password: 'password'
+enable_mongo_db_cache: True
+mongo_db_cache_config:
+  BACKEND: 'glados.cache_backend.MongoDBCache.MongoDBCache'
+  LOCATION: 'LOCATION'
+  OPTIONS:
+    HOST:
+      - "host1:12345"
+      - "host2:12345"
+      - "host3:12345"
+    RSNAME: 'RSNAME'
+    MAX_ENTRIES: 100000000000
+    DATABASE: 'DATABASE'
+    USER: 'USER'
+    PASSWORD: 'PASSWORD'
+    SOCKET_TIMEOUT_MS: 4000
+    CONNECT_TIMEOUT_MS: 2000
+    SERVER_SELECTION_TIMEOUT_MS: 2000
+    MAX_TIME_MS: 1000
+    COMPRESSION_LEVEL: 6
+    COMPRESSION: True
+enable_mysql_database: True
+mysql_config:
+  schema_name: 'schema_name'
+  host: 'host'
+  port: 'port'
   user: 'user'
   password: 'password'
+custom_rq_queues_config:
+  default:
+    HOST: 'HOST'
+    PASSWORD: 'PASSWORD'
+    PORT: 1234
+    DB: 0
+    DEFAULT_TIMEOUT: 86400
+unichemapi: 'http://localhost:8000/'
+enable_unichem_oracle_db: true
+unichem_oracle:
+  name: 'name'
+  user: 'user'
+  password: 'password'
+filter_query_max_clauses: 30000
