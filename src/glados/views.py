@@ -15,7 +15,6 @@ from . import og_tags_generator
 from . import schema_tags_generator
 from . import glados_server_statistics
 from . import heatmap_helper
-from . import dynamic_downloads_manager
 from . import structure_and_sequence_searches_helper
 import traceback
 
@@ -395,47 +394,6 @@ def request_heatmap_helper(request):
         heatmap_helper.generate_heatmap_initial_data(index_name, raw_search_data)
 
     return JsonResponse({'data': 'Data'})
-
-# ----------------------------------------------------------------------------------------------------------------------
-# Downloads
-# ----------------------------------------------------------------------------------------------------------------------
-
-
-def generate_download(request):
-
-    if request.method != "POST":
-        return JsonResponse({'error': 'This is only available via POST'})
-
-    index_name = request.POST.get('index_name', '')
-    raw_query = request.POST.get('query', '')
-    desired_format = request.POST.get('format', '')
-    raw_columns_to_download = request.POST.get('columns', '')
-    context_id = request.POST.get('context_id')
-    id_property = request.POST.get('id_property')
-
-    if context_id == "null" or context_id == "undefined":
-        context_id = None
-
-    try:
-        response = dynamic_downloads_manager.generate_download(index_name, raw_query, desired_format,
-                                                               raw_columns_to_download, context_id, id_property)
-        return JsonResponse(response)
-    except Exception as e:
-        traceback.print_exc()
-        return HttpResponse('Internal Server Error', status=500)
-
-
-def get_download_status(request, download_id):
-
-    if request.method != "GET":
-        return JsonResponse({'error': 'This is only available via GET'})
-
-    try:
-        response = dynamic_downloads_manager.get_download_status(download_id)
-        return JsonResponse(response)
-    except Exception as e:
-        traceback.print_exc()
-        return HttpResponse('Internal Server Error', status=500)
 
 
 # noinspection PyBroadException
