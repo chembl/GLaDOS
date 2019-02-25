@@ -277,7 +277,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getNewESMechanismsOfActionList: (customQuery) ->
 
       listConfig=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.MECHANISMS_OF_ACTION
-      list = @getNewESResultsListFor(listConfig, customQuery)
+      list = @getNewESResultsListFor(listConfig, customQuery, useCustomQuery=true)
       return list
 
     getNewAssaysList: (filter='') ->
@@ -306,7 +306,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getNewESDrugIndicationsList: (customQuery='*') ->
 
       config = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.DRUG_INDICATIONS
-      list = @getNewESResultsListFor config, customQuery, useCustomQuery=true
+      list = @getNewESResultsListFor(config, customQuery, useCustomQuery=true)
 
       return list
 
