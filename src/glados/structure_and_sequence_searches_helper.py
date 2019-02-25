@@ -67,8 +67,11 @@ def get_initial_search_url(search_params, search_job):
 
     elif search_type == SSSearchJob.CONNECTIVITY:
 
-        search_url = 'https://www.ebi.ac.uk/chembl/api/data/substructure/{search_term}.json' \
-                     '?limit={page_size}'.format(search_term=search_term, page_size=page_size)
+        search_url = 'https://www.ebi.ac.uk/chembl/api/data/molecule.json?limit={page_size}' \
+                     '&only=molecule_chembl_id' \
+                     '&molecule_structures__canonical_smiles__flexmatch={search_term}'.format(
+                      search_term=search_term, page_size=page_size
+                     )
 
     return search_url
 
