@@ -105,6 +105,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             @initCache()
             @on 'reset update', @addModelsInCurrentPage, @
 
+          console.log 'ssSearchModel: ', ssSearchModel
           if ssSearchModel?
             @setMeta('out_of_n', ssSearchModel.get('total_results'))
             @setMeta('size_limit', ssSearchModel.get('size_limit'))
@@ -273,12 +274,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         customQuery, useCustomQuery=true)
       return list
 
-    getNewESMechanismsOfActionList: (customQuery='*', itemsList, contextualProperties,
-      settings=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.MECHANISMS_OF_ACTION,
-      searchTerm) ->
+    getNewESMechanismsOfActionList: (customQuery) ->
 
-      list = @getNewESResultsListFor(settings, customQuery, useCustomQuery=(not itemsList?), itemsList,
-        contextualProperties, searchTerm)
+      listConfig=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.MECHANISMS_OF_ACTION
+      list = @getNewESResultsListFor(listConfig, customQuery)
       return list
 
     getNewAssaysList: (filter='') ->

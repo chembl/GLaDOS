@@ -306,7 +306,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       parentID = compound.getParentID()
       filter = "molecule_hierarchy.parent_chembl_id:(\"#{parentID}\") OR molecule_chembl_id:(\"#{parentID}\")^100"
       alternateFormsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(filter,
-      itemsList=undefined, contextualProperties=undefined,
+      itemsList=undefined,
       settings=settings=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_ES_RESULTS_LIST_CAROUSEL)
 
       if compound.isParent()
