@@ -1,3 +1,4 @@
 run_env: TRAVIS
 elasticsearch:
   host: 'https://www.ebi.ac.uk/chembl/glados-es/'
+filter_query_max_clauses: 30000

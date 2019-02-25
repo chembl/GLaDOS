@@ -3,6 +3,7 @@ import sys
 import logging.config
 import subprocess
 
+
 def main():
     os.environ['DJANGO_SETTINGS_MODULE'] = 'glados.settings'
 
@@ -15,12 +16,16 @@ def main():
     import glados.apache_config_generator
     import glados.admin_user_generator
 
+    if not os.path.exists(settings.DYNAMIC_DOWNLOADS_DIR):
+        print("Dynamic downloads dir ({}) didn't exist, I will create it".format(settings.DYNAMIC_DOWNLOADS_DIR))
+        os.mkdir(settings.DYNAMIC_DOWNLOADS_DIR)
+
+    if not os.path.exists(settings.SSSEARCH_RESULTS_DIR):
+        print("SSSearch results dir ({}) didn't exist, I will create it".format(settings.SSSEARCH_RESULTS_DIR))
+        os.mkdir(settings.SSSEARCH_RESULTS_DIR)
+        
     # Compress files before server launch if compression is enabled
     if os.environ.get('RUN_MAIN') != 'true' and len(sys.argv) > 1 and sys.argv[1] == 'runserver' and settings.DEBUG:
-
-        if not os.path.exists(settings.DYNAMIC_DOWNLOADS_DIR):
-            print("Dynamic downloads dir ({}) didn't exist, I will create it".format(settings.DYNAMIC_DOWNLOADS_DIR))
-            os.mkdir(settings.DYNAMIC_DOWNLOADS_DIR)
 
         glados.static_files_compiler.StaticFilesCompiler.compile_all_known_compilers()
         execute_from_command_line([sys.argv[0], 'compilemessages'])

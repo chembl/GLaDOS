@@ -174,16 +174,24 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @setMeta('data_loaded', true)
       jsonResultsList = []
 
-      idAttribute = @getMeta('model').ID_COLUMN.comparator
+      ItemsModel = @getMeta('model')
+      idAttribute = ItemsModel.ID_COLUMN.comparator
       scores = @getMeta('scores')
 
       pageChanged = false
       for hitI in data.hits.hits
         if not _.has(lastPageResultsIds, hitI._id)
           pageChanged = true
-        curPageResultsIds[hitI._id] = true
 
         currentItemData = hitI._source
+        idValue = glados.Utils.getNestedValue(currentItemData, idAttribute)
+
+        parsingModel = new ItemsModel
+          id: idValue
+
+        hitI = parsingModel.parse(hitI)
+        curPageResultsIds[hitI._id] = true
+
         currentItemData._highlights = if hitI.highlight? then @simplifyHighlights(hitI.highlight) else null
         currentItemData._score = hitI._score
 
@@ -234,24 +242,18 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       @setItemsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.FETCHING_ITEMS)
       # Creates the Elastic Search Query parameters and serializes them
-      requestData = @getRequestData()
-      esJSONRequest = JSON.stringify(@getRequestData())
-      # Uses POST to prevent result caching
-      fetchESOptions =
-        data: esJSONRequest
-        type: 'POST'
-        reset: true
-        error: @errorHandler.bind(@)
-      # Use options if specified by caller
-      if not _.isUndefined(options) and _.isObject(options)
-        _.extend(fetchESOptions, options)
-      @loadFacetGroups() unless testMode or @isStreaming()
+      esCacheRequest = @getListHelperRequestData()
 
-      if testMode or @getMeta('test_mode')
-        return requestData
+      unless testMode
+        fetchPromise = glados.doCSRFPost(glados.Settings.CHEMBL_LIST_HELPER_ENDPOINT, esCacheRequest)
+        thisCollection = @
 
-      # Call Backbone's fetch
-      return Backbone.Collection.prototype.fetch.call(this, fetchESOptions)
+        fetchPromise.then (data) -> thisCollection.reset(thisCollection.parse(data))
+        fetchPromise.fail (jqXHR) -> thisCollection.trigger('error', thisCollection, jqXHR)
+
+        @loadFacetGroups(@getRequestData())
+
+      return esCacheRequest
 
     # ------------------------------------------------------------------------------------------------------------------
     # Elastic Search Query structure
@@ -273,40 +275,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getQueryForGeneratorList: ->
 
       idAttribute = @getMeta('model').ID_COLUMN.comparator
-      generatorList = @getMeta('generator_items_list')
-
-      idsList = (item[idAttribute] for item in generatorList)
-      scores = {}
-      if generatorList.length > 0
-        for i in [0..generatorList.length-1]
-          item = generatorList[i]
-          if item.similarity?
-            currentScore = parseFloat(item.similarity)
-          else
-            currentScore = ((generatorList.length - i) / generatorList.length) * 100
-          scores[item[idAttribute]] = currentScore
-
-      @setMeta('scores', scores)
-
+      idsList = @getMeta('generator_items_list')
       query_fgl = {
         terms: {}
       }
       query_fgl.terms[idAttribute] = idsList
 
       return {
-        must_query:
-          function_score:
-            query: {}
-            functions: [
-
-             script_score:
-               script:
-                 lang: "painless",
-                 params:
-                   scores: scores
-                 inline: "String mcid=doc['" + idAttribute + "'].value; "\
-                   +"if(params.scores.containsKey(mcid)){return params.scores[mcid];} return 0;"
-           ]
         filter_query:
           query_fgl
       }
@@ -319,6 +294,21 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         return true
       catch error
         return false
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Request data
+    # ------------------------------------------------------------------------------------------------------------------
+    getListHelperRequestData: (customPage, customPageSize) ->
+
+      ssSearchModel = @getMeta('sssearch_model')
+      cacheRequestData =
+        index_name: @getMeta('index_name')
+        search_data: JSON.stringify(@getRequestData(customPage, customPageSize))
+        contextual_sort_data: JSON.stringify(@getContextualSortingProperties())
+        context_id: if ssSearchModel? then ssSearchModel.get('search_id') else undefined
+        id_property: @getMeta('model').ID_COLUMN.comparator
+
+      return cacheRequestData
 
     # generates an object with the data necessary to do the ES request
     # customPage: set a customPage if you want a page different than the one set as current
@@ -359,7 +349,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       # Normal Search query
       else if generatorList?
         glq = @getQueryForGeneratorList()
-        esQuery.query.bool.must.push glq.must_query
         esQuery.query.bool.filter.push glq.filter_query
       else if searchESQuery?
         esQuery.query.bool.must = searchESQuery
@@ -369,6 +358,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @addStickyQuery(esQuery)
       # do not save request facets calls for the editor
       @setMeta('latest_request_data', esQuery) unless requestFacets
+
       return esQuery
 
     getAllColumns: ->
@@ -390,7 +380,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     addStickyQuery: (esQuery) ->
 
       stickyQuery = @getMeta('sticky_query')
-      if stickyQuery?
+      if stickyQuery? and stickyQuery != ''
         esQuery.query.bool.must = [] unless esQuery.query.bool.must?
         esQuery.query.bool.must.push stickyQuery
 
@@ -424,13 +414,30 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         if facets_query
           esQuery.aggs = facets_query
 
+    getContextualSortingProperties: ->
+
+      sortObj = {}
+      columns = @getAllColumns()
+      for col in columns
+
+        if col.is_sorting? and col.is_sorting !=0 and col.is_contextual
+          if col.is_sorting == 1
+            order = 'asc'
+          if col.is_sorting == -1
+            order = 'desc'
+
+          sortObj =
+            "#{col.comparator}": order
+
+      return sortObj
+
     addSortingToQuery: (esQuery) ->
       sortList = []
 
       columns = @getAllColumns()
       for col in columns
 
-        if col.is_sorting? and col.is_sorting !=0
+        if col.is_sorting? and col.is_sorting !=0 and not col.is_contextual
 
           sortObj = {}
           if col.is_sorting == 1
@@ -461,6 +468,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         aggs_query = {}
         for facet_group_key, facet_group of non_selected_facets_groups
           facet_group.faceting_handler.addQueryAggs(aggs_query, facets_first_call)
+
         return aggs_query
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -536,7 +544,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       else
         runPromise.bind(@)()
 
-    loadFacetGroups: ->
+    loadFacetGroups: (esRequestData) ->
 
       @setFacetsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.FETCHING_FACETS)
 
@@ -590,24 +598,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     toggleSelectAll: ->
       @setMeta('all_items_selected', !@getMeta('all_items_selected'))
       @trigger('selection-changed')
-
-    # ------------------------------------------------------------------------------------------------------------------
-    # Streaming Mode
-    # ------------------------------------------------------------------------------------------------------------------
-
-    enableStreamingMode: ->
-      @setMeta('streaming_mode', true)
-      @loadFacetGroups()
-
-    disableStreamingMode: ->
-      delete @meta['streaming_mode']
-      @loadFacetGroups()
-
-    isStreaming: ->
-      return @hasMeta('streaming_mode') and @getMeta('streaming_mode')
-
-    shouldIgnoreContentChangeRequestWhileStreaming: ->
-      return @isStreaming() and not @getMeta('page_changed')
 
     # ------------------------------------------------------------------------------------------------------------------
     # Metadata Handlers for query and pagination
@@ -726,7 +716,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
               @trigger('do-repaint')
               return
 
-        @fetch(options=undefined, testMode)
+        retValue = @fetch(options=undefined, testMode)
+        return retValue
 
      # tells if the current page is the las page
     currentlyOnLastPage: -> @getMeta('current_page') == @getMeta('total_pages')

@@ -1,18 +1,24 @@
 glados.useNameSpace 'glados.models.Compound',
   DrugIndication: Backbone.Model.extend
 
-    parse: (resp) ->
-      imageFile = glados.Utils.getNestedValue(resp, 'parent_molecule._metadata.compound_generated.image_file')
-      if imageFile != glados.Settings.DEFAULT_NULL_VALUE_LABEL
-        resp.parent_image_url = "#{glados.Settings.STATIC_IMAGES_URL}compound_placeholders/#{imageFile}"
+    parse: (response) ->
+
+      if response._source?
+        objData = response._source
       else
-        resp.parent_image_url = \
-          "#{glados.Settings.WS_BASE_URL}image/#{resp.parent_molecule.molecule_chembl_id}.svg?engine=indigo"
-      resp.molecule_link = Compound.get_report_card_url(resp.parent_molecule.molecule_chembl_id)
+        objData = response
+
+      imageFile = glados.Utils.getNestedValue(objData, 'parent_molecule._metadata.compound_generated.image_file')
+      if imageFile != glados.Settings.DEFAULT_NULL_VALUE_LABEL
+        objData.parent_image_url = "#{glados.Settings.STATIC_IMAGES_URL}compound_placeholders/#{imageFile}"
+      else
+        objData.parent_image_url = \
+          "#{glados.Settings.WS_BASE_URL}image/#{objData.parent_molecule.molecule_chembl_id}.svg?engine=indigo"
+      objData.molecule_link = Compound.get_report_card_url(objData.parent_molecule.molecule_chembl_id)
 
 
-      resp.mesh_url = "https://id.nlm.nih.gov/mesh/#{resp.drug_indication.mesh_id}.html"
-      return resp
+      objData.mesh_url = "https://id.nlm.nih.gov/mesh/#{objData.drug_indication.mesh_id}.html"
+      return objData
 
 glados.models.Compound.DrugIndication.INDEX_NAME = 'chembl_drug_indication_by_parent'
 

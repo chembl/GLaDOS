@@ -16,6 +16,7 @@ from . import schema_tags_generator
 from . import glados_server_statistics
 from . import heatmap_helper
 from . import dynamic_downloads_manager
+from . import structure_and_sequence_searches_helper
 import traceback
 
 
@@ -409,19 +410,20 @@ def generate_download(request):
     raw_query = request.POST.get('query', '')
     desired_format = request.POST.get('format', '')
     raw_columns_to_download = request.POST.get('columns', '')
+    context_id = request.POST.get('context_id')
+    id_property = request.POST.get('id_property')
 
-    print('index_name: ', index_name)
-    print('raw_query: ', raw_query)
-    print('desired_format: ', desired_format)
-    print('raw_columns_to_download: ', raw_columns_to_download)
+    if context_id == "null" or context_id == "undefined":
+        context_id = None
 
     try:
         response = dynamic_downloads_manager.generate_download(index_name, raw_query, desired_format,
-                                                               raw_columns_to_download)
+                                                               raw_columns_to_download, context_id, id_property)
         return JsonResponse(response)
     except Exception as e:
         traceback.print_exc()
         return HttpResponse('Internal Server Error', status=500)
+
 
 def get_download_status(request, download_id):
 
@@ -453,6 +455,71 @@ def elasticsearch_cache(request):
         return JsonResponse({'error': 'this is only available via POST! You crazy hacker! :P'})
 
 
+def submit_sustructure_search(request):
+
+    if request.method == "POST":
+
+        search_type = request.POST.get('search_type')
+        raw_search_params = request.POST.get('raw_search_params')
+
+        try:
+
+            response = structure_and_sequence_searches_helper.generate_search_job(search_type, raw_search_params)
+            return JsonResponse(response)
+
+        except Exception as e:
+
+            traceback.print_exc()
+            return HttpResponse("Internal Server Error: {}".format(repr(e)), status=500)
+
+    else:
+        return JsonResponse({'error': 'this is only available via POST! You crazy hacker! :P'})
+
+
+def get_sssearch_status(request, search_id):
+
+    if request.method != "GET":
+        return JsonResponse({'error': 'This is only available via GET'})
+
+    try:
+        response = structure_and_sequence_searches_helper.get_sssearch_status(search_id)
+        return JsonResponse(response)
+    except Exception as e:
+        traceback.print_exc()
+        return HttpResponse('Internal Server Error', status=500)
+
+
+def chembl_list_helper(request):
+
+    if request.method == "POST":
+
+        index_name = request.POST.get('index_name', '')
+        raw_search_data = request.POST.get('search_data', '')
+        context_id = request.POST.get('context_id')
+        id_property = request.POST.get('id_property')
+        raw_contextual_sort_data = request.POST.get('contextual_sort_data')
+        print('raw_search_data: ', raw_search_data)
+
+        try:
+            if context_id is None or context_id == 'undefined' or context_id == 'null':
+                print('no context id')
+                response = glados_server_statistics.get_and_record_es_cached_response(index_name, raw_search_data)
+            else:
+                response = structure_and_sequence_searches_helper.get_items_with_context(index_name, raw_search_data,
+                                                                                         context_id, id_property,
+                                                                                         raw_contextual_sort_data)
+        except Exception as e:
+            traceback.print_exc()
+            return HttpResponse('Internal Server Error', status=500)
+
+        if response is None:
+            return HttpResponse('ELASTIC SEARCH RESPONSE IS EMPTY!', status=500)
+
+        return JsonResponse(response)
+    else:
+        return JsonResponse({'error': 'this is only available via POST! You crazy hacker! :P'})
+
+
 def extend_url(request, hash):
     resp_data = {
         'long_url': url_shortener.get_original_url(hash)
@@ -473,20 +540,6 @@ def register_usage(request):
             view_type = request.POST.get('view_type', '')
             entity_name = request.POST.get('entity_name', '')
             glados_server_statistics.record_view_usage(view_name, view_type, entity_name)
-            return JsonResponse({'success': 'registration successful!'})
-        except Exception as e:
-            print_server_error(e)
-            return HttpResponse('Internal Server Error', status=500)
-    else:
-        return JsonResponse({'error': 'this is only available via POST! You crazy hacker! :P'})
-
-
-def register_search(request):
-
-    if request.method == "POST":
-        try:
-            search_type = request.POST.get('search_type', '')
-            glados_server_statistics.record_search(search_type)
             return JsonResponse({'success': 'registration successful!'})
         except Exception as e:
             print_server_error(e)

@@ -5,11 +5,15 @@ glados.useNameSpace 'glados.views.SearchResults',
       'click .BCK-Edit-Query': 'showEditModal'
 
     initialize: ->
-      @queryParams = arguments[0].query_params
+
+      @queryParams = @model.get('query_params')
+      @model.on 'change:state', @render, @
+
       if @queryParams.search_term.startsWith('CHEMBL')
         @img_url = glados.Settings.WS_BASE_URL + 'image/' + @queryParams.search_term + '.svg?engine=indigo'
         @render()
       else
+        @render()
         @getSmilesImageAndRender()
 
     getCtabSvgAndRender: ()->
@@ -62,10 +66,39 @@ glados.useNameSpace 'glados.views.SearchResults',
       return deferred
 
     render: ->
+
+      img_url = @img_url
+      img_url ?= glados.Settings.STATIC_IMAGES_URL + 'compound_placeholders/unknown.svg'
+
       glados.Utils.fillContentForElement $(@el),
-        image_url: @img_url
+        image_url: img_url
         search_term: @queryParams.search_term
-        similarity: @queryParams.similarity_percentage
+        similarity: @queryParams.threshold
+        status_text: @getStatusText()
+        status_link: @getStatusLink()
+
+    getStatusText: ->
+
+      currentStatus = @model.getState()
+      if currentStatus == glados.models.Search.StructureSearchModel.STATES.INITIAL_STATE
+        return 'Submitting'
+      else if currentStatus == glados.models.Search.StructureSearchModel.STATES.ERROR_STATE
+        return 'There was an error. Please try again later.'
+      else if currentStatus == glados.models.Search.StructureSearchModel.STATES.SEARCH_QUEUED
+        return 'Submitted'
+      else if currentStatus == glados.models.Search.StructureSearchModel.STATES.SEARCHING
+        return 'Searching'
+      else if currentStatus == glados.models.Search.StructureSearchModel.STATES.FINISHED
+        return 'Results Ready'
+
+    getStatusLink: ->
+
+      currentStatus = @model.getState()
+      if currentStatus == glados.models.Search.StructureSearchModel.STATES.ERROR_STATE or \
+      currentStatus == glados.models.Search.StructureSearchModel.STATES.SEARCH_QUEUED or \
+      currentStatus == glados.models.Search.StructureSearchModel.STATES.SEARCHING
+        return @model.getProgressURL()
+      else return undefined
 
     showEditModal: (event) ->
       @$clickedElem = $(event.currentTarget)
@@ -73,7 +106,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         @$modal = ButtonsHelper.generateModalFromTemplate(@$clickedElem, 'Handlebars-Common-MarvinModal')
         sketcherParams =
           el: @$modal
-          custom_initial_similarity: @queryParams.similarity_percentage
+          custom_initial_similarity: @queryParams.threshold
 
         if @queryParams.search_term.startsWith('CHEMBL')
           sketcherParams.chembl_id_to_load_on_ready = @queryParams.search_term

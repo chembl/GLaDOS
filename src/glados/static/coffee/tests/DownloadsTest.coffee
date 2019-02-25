@@ -34,7 +34,7 @@ describe "Downloads", ->
         "structure_type","inorganic_flag","molecule_properties.heavy_atoms","molecule_properties.hba_lipinski",
         "molecule_properties.hbd_lipinski","molecule_properties.num_lipinski_ro5_violations",
         "molecule_properties.mw_monoisotopic","molecule_properties.molecular_species",
-        "molecule_properties.full_molformula","_score"]
+        "molecule_properties.full_molformula","_context.similarity"]
 
       comparatorsGot = (col.comparator for col in Compound.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS_SIMILARITY)
       expect(TestsUtils.listsAreEqual(comparatorsMustBe, comparatorsGot)).toBe(true)

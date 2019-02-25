@@ -1,0 +1,43 @@
+{
+  "size": 24,
+  "from": 0,
+  "_source": {
+    "includes": [
+      "*",
+      "_metadata.*"
+    ],
+    "excludes": [
+      "_metadata.related_targets.chembl_ids.*",
+      "_metadata.related_compounds.chembl_ids.*"
+    ]
+  },
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "query_string": {
+            "analyze_wildcard": true,
+            "query": "*"
+          }
+        },
+        ""
+      ],
+      "filter": [
+        [
+          {
+            "bool": {
+              "should": [
+                {
+                  "term": {
+                    "molecule_type": "Cell"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      ]
+    }
+  },
+  "sort": []
+}

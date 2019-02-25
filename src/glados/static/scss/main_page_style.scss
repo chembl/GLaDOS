@@ -33,6 +33,21 @@ $full-header-height-large: 180px;
     min-height: 400px;
     max-height: 900px;
 
+    .btn-chembl{
+      img {
+        width: 20px;
+        background-color: transparent;
+        vertical-align: middle;
+      }
+    }
+
+    /* -------- SMALL SCREEN -------- */
+    @media (max-width: 600px) {
+      &:first-child{
+        max-height: 500px;
+      }
+    }
+
      /* -------- MEDIUM SCREEN -------- */
     @media (min-width: 600px) and (max-width: 992px) {
       min-height: 900px;
@@ -134,12 +149,44 @@ $full-header-height-large: 180px;
         padding: 0 10%;
       }
 
+      /* -------- MEDIUM SCREEN -------- */
+      @media (min-width: 600px) and (max-width: 992px) {
+        .chembl-text{
+          text-align: justify;
+        }
+      }
       /* -------- SMALL SCREEN -------- */
       @media (max-width: 600px) {
-        height: 100%;
+        .chembl-text{
+          padding: 0;
+          text-align: justify;
+        }
+
+        height: 40%;
       }
 
     }
+
+    .mobile-search-buttons{
+
+      display: flex;
+      flex-direction: column;
+
+      .mobile-search-bar-container{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 30px 0;
+      }
+
+      /* -------- SMALL SCREEN -------- */
+      @media (max-width: 600px) {
+        height: 60%;
+      }
+
+    }
+
 
     .chembl-game{
       border: black 1px solid;

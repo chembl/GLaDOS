@@ -80,12 +80,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       defaultColumns = @getDefaultColumns()
       additionalColumns = @getAdditionalColumns()
-      contextualProperties = @collection.getMeta('contextual_properties')
 
       @columnsHandler = new glados.models.paginatedCollections.ColumnsHandler
         default_columns: defaultColumns
         additional_columns: additionalColumns
-        contextual_properties: contextualProperties
         include_highlights_column: @include_search_results_highlight
 
       @columnsHandler.on 'change:exit change:enter', @handleShowHideColumns, @
@@ -221,8 +219,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     getAllColumns: -> @columnsHandler.get('all_columns')
 
     sendDataToTemplate: ($specificElemContainer, visibleColumns, customItemTemplate) ->
-      if @shouldIgnoreContentChangeRequestWhileStreaming()
-        return
 
       if (@isInfinite() or @isCards()) and not @isComplicated
         templateID = @collection.getMeta('custom_cards_template')
@@ -430,14 +426,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       $preloaderCont.show()
       $contentCont.show()
 
-    shouldIgnoreContentChangeRequestWhileStreaming: ->
-      return _.isFunction(@collection.shouldIgnoreContentChangeRequestWhileStreaming) and \
-        @collection.shouldIgnoreContentChangeRequestWhileStreaming()
-
     clearContentContainer: ->
-
-      if @shouldIgnoreContentChangeRequestWhileStreaming()
-        return
 
       @latestPageRendered = undefined
       @latestPageSizeRendered = undefined
@@ -488,8 +477,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       $headerRow.show()
 
     showPreloaderHideOthers: ->
-      if @shouldIgnoreContentChangeRequestWhileStreaming()
-        return
       @showPreloaderOnly()
       @hideHeaderContainer()
       @hideContentContainer()
@@ -660,6 +647,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       $errorMessagesContainer = $(@el).find('.BCK-ErrorMessagesContainer')
       $errorMessagesContainer.html glados.Utils.ErrorMessages.getCollectionErrorContent(jqXHR)
       $errorMessagesContainer.show()
+      @hidePreloaderOnly()
 
     # ------------------------------------------------------------------------------------------------------------------
     # Embed modal

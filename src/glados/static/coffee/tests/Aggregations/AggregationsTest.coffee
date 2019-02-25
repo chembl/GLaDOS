@@ -363,6 +363,48 @@ describe 'Aggregation', ->
       expect(aggConfigGot.bin_size).toBe(newBinSize)
       expect(aggConfigGot.intervals_set_by_bin_size).toBe(true)
 
+  describe '3. From a raw query', ->
+
+    facetsAgg = undefined
+    rawQuery = undefined
+    indexUrl = glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
+
+    beforeAll (done) ->
+
+      $.get (glados.Settings.STATIC_URL + 'testData/Aggregations/RawQuerySample.json'), (testData) ->
+        rawQuery = testData
+        done()
+
+    it 'initializes correctly', ->
+
+      queryConfig =
+        type: glados.models.Aggregations.Aggregation.QueryTypes.RAW_QUERY
+        query: rawQuery
+
+      aggsConfig =
+        aggs:
+          x_axis_agg:
+            field: 'molecule_properties.full_mwt'
+            type: glados.models.Aggregations.Aggregation.AggTypes.RANGE
+            min_columns: 1
+            max_columns: 20
+            num_columns: 10
+
+      facetsAgg = new glados.models.Aggregations.Aggregation
+        index_url: glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL
+        query_config: queryConfig
+        aggs_config: aggsConfig
+
+      expect(facetsAgg.url).toBe(indexUrl)
+      queryGot = facetsAgg.get('query')
+      expect(_.isEqual(queryGot, rawQuery))
+
+
+
+
+
+
+
 
 
 

@@ -126,10 +126,14 @@ class ESSearchRecord(models.Model):
     search_type = models.CharField(max_length=20, choices=SEARCH_TYPES, default=OTHER)
     run_env_type = models.TextField()
     host = models.TextField(default='')
+    time_taken = models.IntegerField(default=0)
+    is_new = models.BooleanField(default=True)
 
     def indexing(self):
         obj = ESSearchRecordIndex(
             search_type=self.search_type,
+            time_taken=self.time_taken,
+            is_new=self.is_new,
             run_env_type=settings.RUN_ENV,
             host=socket.gethostname(),
             request_date=int(time.time() * 1000)
@@ -145,7 +149,7 @@ class ESSearchRecord(models.Model):
 
 # This is to keep track of the status of a download job
 class DownloadJob(models.Model):
-    job_id = models.TextField(max_length=250)
+    job_id = models.TextField(max_length=500)
     progress = models.PositiveSmallIntegerField(default=0)
     total_items = models.PositiveIntegerField(default=0)
     raw_columns_to_download = models.TextField(null=True)
@@ -166,4 +170,41 @@ class DownloadJob(models.Model):
     desired_format = models.CharField(max_length=200, null=True)
     worker = models.TextField(max_length=250, null=True)
     log = models.TextField(null=True)
+    context_id = models.TextField(max_length=500, null=True)
+    id_property = models.CharField(max_length=20)
 
+# ----------------------------------------------------------------------------------------------------------------------
+# Search Jobs
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+class SSSearchJob(models.Model):
+    search_id = models.TextField(max_length=250)
+    SIMILARITY = 'SIMILARITY'
+    SUBSTRUCTURE = 'SUBSTRUCTURE'
+    CONNECTIVITY = 'CONNECTIVITY'
+
+    SEARCH_TYPES = (
+        (SIMILARITY, SIMILARITY),
+        (SUBSTRUCTURE, SUBSTRUCTURE),
+        (CONNECTIVITY, CONNECTIVITY)
+    )
+
+    search_type = models.CharField(max_length=20, choices=SEARCH_TYPES)
+
+    SEARCH_QUEUED = 'SEARCH_QUEUED'
+    SEARCHING = 'SEARCHING'
+    FINISHED = 'FINISHED'
+    ERROR = 'ERROR'
+
+    STATUSES = (
+        (SEARCH_QUEUED, SEARCH_QUEUED),
+        (SEARCHING, SEARCHING),
+        (FINISHED, FINISHED),
+        (ERROR, ERROR)
+    )
+
+    raw_search_params = models.TextField(null=True)
+    status = models.CharField(max_length=20, choices=STATUSES, default=SEARCH_QUEUED)
+    worker = models.TextField(max_length=250, null=True)
+    log = models.TextField(null=True)

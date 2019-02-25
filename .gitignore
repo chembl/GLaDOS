@@ -6,6 +6,10 @@ __pycache__/
 # C extensions
 *.so
 
+# generated download and search results files
+src/glados/dynamic-downloads/
+src/glados/sssearch-results/
+
 # Distribution / packaging
 .Python
 env/

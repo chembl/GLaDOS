@@ -4,7 +4,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     initReferenceStructureFunctions: ->
 
-      searchTerm = @getMeta('search_term')
+      searchTerm = GlobalVariables.SEARCH_TERM
       if searchTerm.startsWith('CHEMBL')
         @referenceCompound = new Compound
           id: searchTerm

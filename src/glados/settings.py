@@ -57,6 +57,13 @@ GLADOS_ROOT = os.path.dirname(os.path.abspath(glados.__file__))
 VUE_ROOT = os.path.join(GLADOS_ROOT, 'v')
 DYNAMIC_DOWNLOADS_DIR = os.path.join(GLADOS_ROOT, 'dynamic-downloads')
 print('DYNAMIC_DOWNLOADS_DIR: ', DYNAMIC_DOWNLOADS_DIR)
+SSSEARCH_RESULTS_DIR = os.path.join(GLADOS_ROOT, 'sssearch-results')
+print('SSSEARCH_RESULTS_DIR: ', SSSEARCH_RESULTS_DIR)
+
+FILTER_QUERY_MAX_CLAUSES = run_config.get('filter_query_max_clauses')
+if FILTER_QUERY_MAX_CLAUSES is None:
+    raise GladosSettingsError("You must tell me the filter_query_max_clauses")
+print('FILTER_QUERY_MAX_CLAUSES: ', FILTER_QUERY_MAX_CLAUSES)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/

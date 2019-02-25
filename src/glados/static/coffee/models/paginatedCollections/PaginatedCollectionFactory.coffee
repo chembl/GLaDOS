@@ -20,8 +20,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       contextualProperties = stateObject.contextual_properties
       searchTerm = stateObject.search_term
 
-      list = @getNewESResultsListFor(settings, queryString, useQueryString, itemsList,
-        contextualProperties, searchTerm, stickyQuery, searchESQuery)
+      list = @getNewESResultsListFor(settings, queryString, useQueryString, itemsList, ssSearchModel=undefined,
+        stickyQuery, searchESQuery)
 
       facetGroups = list.getFacetsGroups()
       facetsState = stateObject.facets_state
@@ -35,8 +35,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return list
 
-    getNewESResultsListFor: (esIndexSettings, customQuery='*', useCustomQuery=false, itemsList,
-      contextualProperties, searchTerm, stickyQuery, searchESQuery, flavour) ->
+    getNewESResultsListFor: (esIndexSettings, customQuery='*', useCustomQuery=false, itemsList, ssSearchModel,
+      stickyQuery, searchESQuery, flavour) ->
 
       IndexESPagQueryCollection = glados.models.paginatedCollections.PaginatedCollectionBase\
       .extend(glados.models.paginatedCollections.ESPaginatedQueryCollection)
@@ -84,12 +84,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             use_custom_query: useCustomQuery
             model: esIndexSettings.MODEL
             generator_items_list: itemsList
-            contextual_properties: contextualProperties
             enable_similarity_maps: esIndexSettings.ENABLE_SIMILARITY_MAPS
             show_similarity_maps: esIndexSettings.SHOW_SIMILARITY_MAPS
             enable_substructure_highlighting: esIndexSettings.ENABLE_SUBSTRUCTURE_HIGHLIGHTING
             show_substructure_highlighting: esIndexSettings.SHOW_SUBSTRUCTURE_HIGHLIGHTING
-            search_term: searchTerm
             sticky_query: stickyQuery
             data_loaded: false
             enable_collection_caching: esIndexSettings.ENABLE_COLLECTION_CACHING
@@ -98,6 +96,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             settings_path: esIndexSettings.PATH_IN_SETTINGS
             searchESQuery: searchESQuery
             links_to_other_entities: esIndexSettings.LINKS_TO_OTHER_ENTITIES
+            sssearch_model: ssSearchModel
 
           if @getMeta('enable_similarity_maps') or @getMeta('enable_substructure_highlighting')
             @initReferenceStructureFunctions()
@@ -105,6 +104,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           if @getMeta('enable_collection_caching')
             @initCache()
             @on 'reset update', @addModelsInCurrentPage, @
+
+          console.log 'ssSearchModel: ', ssSearchModel
+          if ssSearchModel?
+            @setMeta('out_of_n', ssSearchModel.get('total_results'))
+            @setMeta('size_limit', ssSearchModel.get('size_limit'))
 
           glados.models.paginatedCollections.PaginatedCollectionBase.prototype.initialize.call(@)
 
@@ -238,12 +242,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         customQueryString, useCustomQuery=true)
       return list
 
-    getNewESCompoundsList: (customQuery='*', itemsList, contextualProperties,
+    getNewESCompoundsList: (customQuery='*', itemsList,
       settings=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_COOL_CARDS,
-      searchTerm) ->
+      ssSearchModel) ->
 
-      list = @getNewESResultsListFor(settings, customQuery, useCustomQuery=(not itemsList?), itemsList,
-        contextualProperties, searchTerm)
+      list = @getNewESResultsListFor(settings, customQuery, useCustomQuery=(not itemsList?), itemsList, ssSearchModel)
       return list
 
     getNewESActivitiesList: (customQuery='*') ->
@@ -271,12 +274,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         customQuery, useCustomQuery=true)
       return list
 
-    getNewESMechanismsOfActionList: (customQuery='*', itemsList, contextualProperties,
-      settings=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.MECHANISMS_OF_ACTION,
-      searchTerm) ->
+    getNewESMechanismsOfActionList: (customQuery) ->
 
-      list = @getNewESResultsListFor(settings, customQuery, useCustomQuery=(not itemsList?), itemsList,
-        contextualProperties, searchTerm)
+      listConfig=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.MECHANISMS_OF_ACTION
+      list = @getNewESResultsListFor(listConfig, customQuery, useCustomQuery=true)
       return list
 
     getNewAssaysList: (filter='') ->
@@ -299,13 +300,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           "_metadata.drug.is_drug": true
 
       list = @getNewESResultsListFor(settings, customQuery, useCustomQuery=(not itemsList?), itemsList,
-        contextualProperties, searchTerm, stickyQuery)
+        ssSearchModel=undefined, stickyQuery)
       return list
 
     getNewESDrugIndicationsList: (customQuery='*') ->
 
       config = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.DRUG_INDICATIONS
-      list = @getNewESResultsListFor config, customQuery, useCustomQuery=true
+      list = @getNewESResultsListFor(config, customQuery, useCustomQuery=true)
 
       return list
 
@@ -357,31 +358,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return list
 
-    getNewFlexmatchSearchResultsList: ->
-
-# this list has the same columns as the one used for substrucure
-      list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.SUBSTRUCTURE_RESULTS_LIST)
-
-      list.initURL = (term) ->
-        @baseUrl = glados.Settings.WS_BASE_FLEXMATCH_SEARCH_URL
-        console.log 'base url: ', @baseUrl
-        @setMeta('base_url', @baseUrl, true)
-        @setMeta('use_post', true)
-        @setMeta('extra_params', ['only=molecule_chembl_id'])
-        @setMeta('post_parameters', {
-          molecule_structures__canonical_smiles__flexmatch: term
-        })
-        @initialiseUrl()
-
-
-      list.parse = (data) ->
-        data.page_meta.records_in_page = data.molecules.length
-        @setMeta('data_loaded', true)
-        @resetMeta(data.page_meta)
-
-        return data.molecules
-
-      return list
 
     getNewBlogEntriesList: ->
 
@@ -462,37 +438,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       # ----------------------------------------------------------------------------------------------------------------
       # end parse
       # ----------------------------------------------------------------------------------------------------------------
-
-      return list
-
-
-    getNewSimilaritySearchResultsList: ->
-      list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.SIMILARITY_RESULTS_LIST)
-
-      list.initURL = (term, percentage) ->
-        @baseUrl = glados.Settings.WS_BASE_SIMILARITY_SEARCH_URL
-        console.log 'base url: ', @baseUrl
-        @setMeta('base_url', @baseUrl, true)
-        @setMeta('use_post', true)
-        @setMeta('extra_params', ['only=molecule_chembl_id,similarity'])
-        params = {
-          similarity: percentage
-        }
-        if term.startsWith('CHEMBL')
-          params['chembl_id'] = term
-        else
-          params['smiles'] = term
-
-        @setMeta('post_parameters', params)
-        @initialiseUrl()
-
-
-      list.parse = (data) ->
-        data.page_meta.records_in_page = data.molecules.length
-        @setMeta('data_loaded', true)
-        @resetMeta(data.page_meta)
-
-        return data.molecules
 
       return list
 

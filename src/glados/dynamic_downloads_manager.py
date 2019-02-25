@@ -9,6 +9,7 @@ from elasticsearch_dsl.connections import connections
 import json
 import traceback
 from . import glados_server_statistics
+from . import structure_and_sequence_searches_helper
 import gzip
 import os
 from django.conf import settings
@@ -17,6 +18,8 @@ import re
 import subprocess
 import socket
 import datetime
+from glados.models import SSSearchJob
+
 
 class DownloadError(Exception):
     """Base class for exceptions in this file."""
@@ -135,14 +138,26 @@ def get_file_path(job_id):
 # ----------------------------------------------------------------------------------------------------------------------
 
 
-def write_csv_or_tsv_file(scanner, download_job, cols_to_download, index_name, desired_format):
+def write_csv_or_tsv_file(scanner, download_job, cols_to_download, index_name, context_id, id_property, desired_format):
     file_path = get_file_path(download_job.job_id)
     total_items = download_job.total_items
     separator = ',' if desired_format == 'csv' else '\t'
 
+    context = None
+    if context_id is not None:
+        sssearch_job = SSSearchJob.objects.get(search_id=context_id)
+        context, total_results = structure_and_sequence_searches_helper.get_search_results_context(sssearch_job, False)
+        context_index = {}
+        for item in context:
+            context_index[item[id_property]] = item
+
     with gzip.open(file_path, 'wt', encoding='utf-16-le') as out_file:
 
-        header_line = separator.join([format_cell(col['label']) for col in cols_to_download])
+        own_columns = [col for col in cols_to_download if col.get('is_contextual') is not True]
+        contextual_columns = [col for col in cols_to_download if col.get('is_contextual') is True]
+        all_columns = own_columns + contextual_columns
+
+        header_line = separator.join([format_cell(col['label']) for col in all_columns])
         out_file.write(header_line + '\n')
 
         i = 0
@@ -152,10 +167,22 @@ def write_csv_or_tsv_file(scanner, download_job, cols_to_download, index_name, d
 
             doc_source = doc_i['_source']
             dot_notation_getter = DotNotationGetter(doc_source)
-            properties_to_get = [col['property_name'] for col in cols_to_download]
-            values = [parse_and_format_cell(dot_notation_getter.get_from_string(prop_name), index_name, prop_name) for
-                      prop_name in properties_to_get]
-            item_line = separator.join(values)
+            own_properties_to_get = [col['property_name'] for col in own_columns]
+
+            own_values = [parse_and_format_cell(dot_notation_getter.get_from_string(prop_name), index_name, prop_name)
+                          for prop_name in own_properties_to_get]
+
+            contextual_values = []
+            if context is not None:
+                context_item = context_index[doc_i['_id']]
+                for col in contextual_columns:
+                    prop_name_in_context = col['property_name'].replace(
+                        '{}.'.format(structure_and_sequence_searches_helper.CONTEXT_PREFIX), '')
+                    value = str(context_item[prop_name_in_context])
+                    contextual_values.append(value)
+
+            all_values = own_values + contextual_values
+            item_line = separator.join(all_values)
             out_file.write(item_line + '\n')
 
             percentage = int((i / total_items) * 100)
@@ -216,6 +243,8 @@ def generate_download_file(download_id):
     cols_to_download = json.loads(raw_columns_to_download)
     raw_query = download_job.raw_query
     query = json.loads(raw_query)
+    context_id = download_job.context_id
+    id_property = download_job.id_property
     desired_format = download_job.desired_format
 
     try:
@@ -236,7 +265,8 @@ def generate_download_file(download_id):
         download_job.save()
 
         if desired_format in ['csv', 'tsv']:
-            file_size = write_csv_or_tsv_file(scanner, download_job, cols_to_download, index_name, desired_format)
+            file_size = write_csv_or_tsv_file(scanner, download_job, cols_to_download, index_name, context_id,
+                                              id_property, desired_format)
         elif desired_format == 'sdf':
             file_size = write_sdf_file(scanner, download_job)
 
@@ -285,7 +315,7 @@ def rsync_to_the_other_nfs(download_job):
     subprocess.check_call(rsync_command_parts)
 
 
-def get_download_id(index_name, raw_query, desired_format):
+def get_download_id(index_name, raw_query, desired_format, context_id):
 
     # make sure the string generated is stable
     stable_raw_query = json.dumps(json.loads(raw_query), sort_keys=True)
@@ -298,13 +328,17 @@ def get_download_id(index_name, raw_query, desired_format):
     query_digest = hashlib.sha256(stable_raw_query.encode('utf-8')).digest()
     base64_query_digest = base64.b64encode(query_digest).decode('utf-8').replace('/', '_').replace('+', '-')
 
-    download_id = "{}-{}-{}.{}".format(latest_release_full, index_name, base64_query_digest, parsed_desired_format)
+    if context_id is None:
+        download_id = "{}-{}-{}.{}".format(latest_release_full, index_name, base64_query_digest, parsed_desired_format)
+    else:
+        download_id = "{}-{}-{}-{}.{}".format(latest_release_full, index_name, base64_query_digest,
+                                              context_id, parsed_desired_format)
     return download_id
 
 
-def generate_download(index_name, raw_query, desired_format, raw_columns_to_download):
+def generate_download(index_name, raw_query, desired_format, raw_columns_to_download, context_id, id_property):
     response = {}
-    download_id = get_download_id(index_name, raw_query, desired_format)
+    download_id = get_download_id(index_name, raw_query, desired_format, context_id)
     parsed_desired_format = desired_format.lower()
 
     try:
@@ -348,7 +382,9 @@ def generate_download(index_name, raw_query, desired_format, raw_columns_to_down
             raw_columns_to_download=raw_columns_to_download,
             raw_query=raw_query,
             desired_format=parsed_desired_format,
-            log=format_log_message('Job Queued')
+            log=format_log_message('Job Queued'),
+            context_id=context_id,
+            id_property=id_property
         )
         download_job.save()
         generate_download_file.delay(download_id)

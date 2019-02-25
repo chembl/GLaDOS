@@ -53,6 +53,7 @@ glados.useNameSpace 'glados.views.Browsers',
       $applyChangesBtn = $(@el).find('.BCK-apply-changes')
       if currentValue != @previousQueryString
         $applyChangesBtn.removeClass('disabled')
+        @previousQueryString = currentValue
       else
         $applyChangesBtn.addClass('disabled')
 
@@ -111,9 +112,6 @@ glados.useNameSpace 'glados.views.Browsers',
       $queryStringTextArea = $(@el).find('.BCK-querystring-text-area')
       currentValue =  $queryStringTextArea.val()
       @collection.setMeta('custom_query', currentValue)
-      console.log 'collection after custom query change', @collection
-      console.log 'cache: '
-      console.log JSON.stringify(@collection.getMeta('cache'))
       @collection.clearAllFacetsSelections() # remember that this clears the facets and then does the fetch
 
     #-------------------------------------------------------------------------------------------------------------------

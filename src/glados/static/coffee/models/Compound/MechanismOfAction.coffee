@@ -1,19 +1,25 @@
 glados.useNameSpace 'glados.models.Compound',
   MechanismOfAction: Backbone.Model.extend
 
-    parse: (resp) ->
-      imageFile = glados.Utils.getNestedValue(resp, 'parent_molecule._metadata.compound_generated.image_file')
-      if imageFile != glados.Settings.DEFAULT_NULL_VALUE_LABEL
-        resp.parent_image_url = "#{glados.Settings.STATIC_IMAGES_URL}compound_placeholders/#{imageFile}"
-      else
-        resp.parent_image_url = \
-          "#{glados.Settings.WS_BASE_URL}image/#{resp.parent_molecule.molecule_chembl_id}.svg?engine=indigo"
-      resp.molecule_link = Compound.get_report_card_url(resp.parent_molecule.molecule_chembl_id)
+    parse: (response) ->
 
-      resp.target_link = null
-      if resp.target?
-        resp.target_link = Target.get_report_card_url(resp.target.target_chembl_id)
-      return resp
+      if response._source?
+        objData = response._source
+      else
+        objData = response
+
+      imageFile = glados.Utils.getNestedValue(objData, 'parent_molecule._metadata.compound_generated.image_file')
+      if imageFile != glados.Settings.DEFAULT_NULL_VALUE_LABEL
+        objData.parent_image_url = "#{glados.Settings.STATIC_IMAGES_URL}compound_placeholders/#{imageFile}"
+      else
+        objData.parent_image_url = \
+          "#{glados.Settings.WS_BASE_URL}image/#{objData.parent_molecule.molecule_chembl_id}.svg?engine=indigo"
+      objData.molecule_link = Compound.get_report_card_url(objData.parent_molecule.molecule_chembl_id)
+
+      objData.target_link = null
+      if objData.target?
+        objData.target_link = Target.get_report_card_url(objData.target.target_chembl_id)
+      return objData
 
 
 glados.models.Compound.MechanismOfAction.INDEX_NAME = 'chembl_mechanism_by_parent_target'

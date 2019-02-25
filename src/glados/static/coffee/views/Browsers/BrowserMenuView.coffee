@@ -112,7 +112,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
     renderViewState: ->
 
-      if not @collection.isReady() and not @collection.isStreaming()
+      if not @collection.isReady()
         @showPreloader()
         return
 
@@ -187,9 +187,6 @@ glados.useNameSpace 'glados.views.Browsers',
     #--------------------------------------------------------------------------------------
     checkIfViewMustBeDisabled: (viewLabel) ->
 
-      if @collection.isStreaming() and (viewLabel in glados.Settings.VIEWS_DISABLED_WHILE_STREAMING)
-        return [true, glados.views.Browsers.BrowserMenuView.DISABLE_BUTTON_REASONS.IS_STREAMING]
-
       if glados.Settings.VIEW_SELECTION_THRESHOLDS[viewLabel]?
         numSelectedItems = @collection.getNumberOfSelectedItems()
         threshold = glados.Settings.VIEW_SELECTION_THRESHOLDS[viewLabel]
@@ -206,10 +203,12 @@ glados.useNameSpace 'glados.views.Browsers',
         return
 
       $selectionMenuContainer = $(@el).find('.BCK-selection-menu-container')
-      out_of_n = @collection.getMeta('out_of_n')
+      outOfN = @collection.getMeta('out_of_n')
+      sizeLimit = @collection.getMeta('size_limit')
+
       numSelectedItems = @collection.getNumberOfSelectedItems()
       glados.Utils.fillContentForElement $selectionMenuContainer,
-        out_of_n: if out_of_n > 0 then glados.Utils.getFormattedNumber(out_of_n) else false
+        out_of_n: if outOfN > sizeLimit then glados.Utils.getFormattedNumber(outOfN) else false
         num_selected: numSelectedItems
         hide_num_selected: numSelectedItems == 0
         total_items: glados.Utils.getFormattedNumber @collection.getMeta('total_records')
@@ -238,8 +237,7 @@ glados.useNameSpace 'glados.views.Browsers',
       $linkToAllContainer = $selectionMenuContainer.find('.BCK-LinkToOtherEntitiesContainer')
 
       tooManyItems = @collection.thereAreTooManyItemsForActivitiesLink()
-      isStreaming = @collection.isStreaming()
-      needsToBeDisabled = tooManyItems or isStreaming
+      needsToBeDisabled = tooManyItems
 
       availableDestinationEntities = []
 
@@ -267,8 +265,6 @@ glados.useNameSpace 'glados.views.Browsers',
         $links = $linkToAllContainer.find('.BCK-LinkToOtherEntities')
 
         qtipText = switch
-          when isStreaming then \
-          "Please wait until the download is complete"
           when tooManyItems then \
           "Please select or filter less than #{glados.Settings.VIEW_SELECTION_THRESHOLDS.Heatmap[1]} " +
           "items to activate this link."
