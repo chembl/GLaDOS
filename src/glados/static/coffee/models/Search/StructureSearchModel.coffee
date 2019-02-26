@@ -29,7 +29,7 @@ glados.useNameSpace 'glados.models.Search',
     #-------------------------------------------------------------------------------------------------------------------
     # Check search progress
     #-------------------------------------------------------------------------------------------------------------------
-    getProgressURL: -> "#{glados.Settings.GLADOS_BASE_PATH_REL}sssearch-progress/#{@get('search_id')}"
+    getProgressURL: -> "#{glados.Settings.GLADOS_BASE_PATH_REL}api/chembl/sssearch/sssearch-progress/#{@get('search_id')}"
     checkSearchStatusPeriodically: ->
 
       console.log 'checkSearchStatusPeriodically'

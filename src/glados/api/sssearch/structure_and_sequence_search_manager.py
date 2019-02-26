@@ -4,7 +4,7 @@ from glados.models import SSSearchJob
 import json
 import hashlib
 import base64
-from . import glados_server_statistics
+from glados import glados_server_statistics
 import datetime
 import socket
 from django_rq import job
@@ -15,14 +15,53 @@ import os
 from django.conf import settings
 from glados.settings import RunEnvs
 import re
-from elasticsearch_dsl.connections import connections
+from django.http import JsonResponse, HttpResponse
 import subprocess
-from django.core.cache import cache
+
 
 
 class SSSearchError(Exception):
     """Base class for exceptions in this file."""
     pass
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Entry functions
+# ----------------------------------------------------------------------------------------------------------------------
+def request_submit_substructure_search(request):
+
+    if request.method == "POST":
+
+        search_type = request.POST.get('search_type')
+        raw_search_params = request.POST.get('raw_search_params')
+
+        try:
+
+            print('submitting search!')
+
+            response = generate_search_job(search_type, raw_search_params)
+            return JsonResponse(response)
+
+        except Exception as e:
+
+            traceback.print_exc()
+            return HttpResponse("Internal Server Error: {}".format(repr(e)), status=500)
+
+    else:
+        return JsonResponse({'error': 'this is only available via POST! You crazy hacker! :P'})
+
+
+def request_sssearch_status(request, search_id):
+
+    if request.method != "GET":
+        return JsonResponse({'error': 'This is only available via GET'})
+
+    try:
+        response = get_sssearch_status(search_id)
+        return JsonResponse(response)
+    except Exception as e:
+        traceback.print_exc()
+        return HttpResponse('Internal Server Error', status=500)
 
 # ----------------------------------------------------------------------------------------------------------------------
 # results size limit
@@ -251,74 +290,6 @@ def get_search_results_context(sssearch_job, limited=True):
         context = context[0:WEB_RESULTS_SIZE_LIMIT]
 
     return context, total_results
-
-
-def get_items_with_context(index_name, raw_search_data, context_id, id_property, raw_contextual_sort_data='{}'):
-
-    sssearch_job = SSSearchJob.objects.get(search_id=context_id)
-    context, total_results = get_search_results_context(sssearch_job)
-
-    # create a context index so access is faster
-    context_index_key = 'context_index-{}'.format(context_id)
-    context_index = cache.get(context_index_key)
-    if context_index is None:
-        context_index = {}
-
-        for index, item in enumerate(context):
-            context_index[item[id_property]] = item
-            context_index[item[id_property]]['index'] = index
-
-        cache.set(context_index_key, context_index, 3600)
-
-    contextual_sort_data = json.loads(raw_contextual_sort_data)
-    contextual_sort_data_keys = contextual_sort_data.keys()
-    if len(contextual_sort_data_keys) == 0:
-        # if nothing is specified use the default scoring script, which is to score them according to their original
-        # position in the results
-        score_property = 'index'
-        score_script = "String id=doc['" + id_property + "'].value; " \
-                       "return " + str(total_results) + " - params.scores[id]['" + score_property + "'];"
-    else:
-
-        raw_score_property = list(contextual_sort_data_keys)[0]
-        score_property = raw_score_property.replace('{}.'.format(CONTEXT_PREFIX), '')
-        sort_order = contextual_sort_data[raw_score_property]
-
-        if sort_order == 'desc':
-            score_script = "String id=doc['" + id_property + "'].value; " \
-                           "return params.scores[id]['" + score_property + "'];"
-        else:
-            score_script = "String id=doc['" + id_property + "'].value; " \
-                           "return 1 / params.scores[id]['" + score_property + "'];"
-
-    scores_query = {
-        'function_score': {
-            'query': {},
-            'functions': [{
-                'script_score': {
-                    'script': {
-                        'lang': "painless",
-                        'params': {
-                            'scores': context_index,
-                        },
-                        'inline': score_script
-                    }
-                }
-            }]
-        }
-    }
-
-    parsed_search_data = json.loads(raw_search_data)
-    parsed_search_data['query']['bool']['must'].append(scores_query)
-    raw_search_data_with_scores = json.dumps(parsed_search_data)
-
-    es_response = glados_server_statistics.get_and_record_es_cached_response(index_name, raw_search_data_with_scores)
-    hits = es_response['hits']['hits']
-    for hit in hits:
-        hit_id = hit['_id']
-        context_obj = context_index[hit_id]
-        hit['_source'][CONTEXT_PREFIX] = context_obj
-    return es_response
 
 
 # ----------------------------------------------------------------------------------------------------------------------
