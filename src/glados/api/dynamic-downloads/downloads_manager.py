@@ -8,8 +8,8 @@ from elasticsearch.helpers import scan
 from elasticsearch_dsl.connections import connections
 import json
 import traceback
-from . import glados_server_statistics
-from . import structure_and_sequence_searches_helper
+from glados import glados_server_statistics
+from glados import structure_and_sequence_searches_helper
 import gzip
 import os
 from django.conf import settings
@@ -19,12 +19,52 @@ import subprocess
 import socket
 import datetime
 from glados.models import SSSearchJob
+from django.http import JsonResponse, HttpResponse
 
 
 class DownloadError(Exception):
     """Base class for exceptions in this file."""
     pass
 
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Entry functions
+# ----------------------------------------------------------------------------------------------------------------------
+def request_generate_download_request(request):
+
+    if request.method != "POST":
+        return JsonResponse({'error': 'This is only available via POST'})
+
+    index_name = request.POST.get('index_name', '')
+    raw_query = request.POST.get('query', '')
+    desired_format = request.POST.get('format', '')
+    raw_columns_to_download = request.POST.get('columns', '')
+    context_id = request.POST.get('context_id')
+    id_property = request.POST.get('id_property')
+
+    if context_id == "null" or context_id == "undefined":
+        context_id = None
+
+    try:
+        response = generate_download(index_name, raw_query, desired_format,
+                                                               raw_columns_to_download, context_id, id_property)
+        return JsonResponse(response)
+    except Exception as e:
+        traceback.print_exc()
+        return HttpResponse('Internal Server Error', status=500)
+
+
+def request_get_download_status(request, download_id):
+
+        if request.method != "GET":
+            return JsonResponse({'error': 'This is only available via GET'})
+
+        try:
+            response = get_download_status(download_id)
+            return JsonResponse(response)
+        except Exception as e:
+            traceback.print_exc()
+            return HttpResponse('Internal Server Error', status=500)
 # ----------------------------------------------------------------------------------------------------------------------
 # Download job helpers
 # ----------------------------------------------------------------------------------------------------------------------
@@ -39,13 +79,13 @@ def save_download_job_state(download_job, new_state):
     download_job.status = new_state
     download_job.save()
 
+
 # ----------------------------------------------------------------------------------------------------------------------
 # Property getter
 # ----------------------------------------------------------------------------------------------------------------------
 
 
 class DotNotationGetter:
-
     DEFAULT_NULL_LABEL = ''
 
     def __init__(self, obj):
@@ -69,13 +109,13 @@ class DotNotationGetter:
     def get_from_string(self, dot_notation_property):
         return self.get_property(self.obj, dot_notation_property)
 
+
 # ----------------------------------------------------------------------------------------------------------------------
 # Columns Parsing
 # ----------------------------------------------------------------------------------------------------------------------
 
 
 class ColumnsParsing:
-
     def static_parse_synonyms(raw_synonyms):
         true_synonyms = set()
         for raw_syn in raw_synonyms:
@@ -92,12 +132,12 @@ class ColumnsParsing:
         return '|'.join(accessions)
 
     parsing_functions = {
-        'chembl_molecule':{
+        'chembl_molecule': {
             'molecule_synonyms': lambda original_value: ColumnsParsing.static_parse_synonyms(original_value)
         },
-        'chembl_target':{
+        'chembl_target': {
             'target_components': lambda original_value:
-                ColumnsParsing.static_parse_target_uniprot_accession(original_value)
+            ColumnsParsing.static_parse_target_uniprot_accession(original_value)
         }
     }
 
@@ -117,7 +157,6 @@ class ColumnsParsing:
 
 
 def format_cell(original_value):
-
     value = original_value
     if isinstance(value, str):
         value = value.replace('"', "'")
@@ -126,13 +165,14 @@ def format_cell(original_value):
 
 
 def parse_and_format_cell(original_value, index_name, property_name):
-
     value = ColumnsParsing.static_parse_property(original_value, index_name, property_name)
     return format_cell(value)
 
 
 def get_file_path(job_id):
     return os.path.join(settings.DYNAMIC_DOWNLOADS_DIR, job_id + '.gz')
+
+
 # ----------------------------------------------------------------------------------------------------------------------
 # Writing csv and tsv files
 # ----------------------------------------------------------------------------------------------------------------------
@@ -193,6 +233,7 @@ def write_csv_or_tsv_file(scanner, download_job, cols_to_download, index_name, c
     file_size = os.path.getsize(file_path)
     return file_size
 
+
 # ----------------------------------------------------------------------------------------------------------------------
 # Writing sdf files
 # ----------------------------------------------------------------------------------------------------------------------
@@ -213,7 +254,7 @@ def write_sdf_file(scanner, download_job):
             sdf_value = dot_notation_getter.get_from_string('_metadata.compound_generated.sdf_data')
             if sdf_value is None:
                 continue
-                
+
             out_file.write(sdf_value)
             out_file.write('$$$$\n')
 
@@ -228,7 +269,6 @@ def write_sdf_file(scanner, download_job):
 
 @job
 def generate_download_file(download_id):
-
     start_time = time.time()
     download_job = DownloadJob.objects.get(job_id=download_id)
     download_job.status = DownloadJob.PROCESSING
@@ -299,7 +339,6 @@ def generate_download_file(download_id):
 
 
 def rsync_to_the_other_nfs(download_job):
-
     hostname = socket.gethostname()
     if bool(re.match("wp-p1m.*", hostname)):
         rsync_destination_server = 'wp-p2m-54'
@@ -316,7 +355,6 @@ def rsync_to_the_other_nfs(download_job):
 
 
 def get_download_id(index_name, raw_query, desired_format, context_id):
-
     # make sure the string generated is stable
     stable_raw_query = json.dumps(json.loads(raw_query), sort_keys=True)
 
@@ -394,7 +432,6 @@ def generate_download(index_name, raw_query, desired_format, raw_columns_to_down
 
 
 def append_to_job_log(download_job, msg):
-
     if download_job.log is None:
         download_job.log = ''
 
@@ -408,7 +445,6 @@ def format_log_message(msg):
 
 
 def get_download_status(download_id):
-
     try:
         download_job = DownloadJob.objects.get(job_id=download_id)
         response = {
