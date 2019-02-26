@@ -153,7 +153,7 @@ glados.useNameSpace 'glados.apps.Main',
         breadcrumbLinks = [
           {
             label: 'BLAST Search Results'
-            link: ""
+            link: "#{glados.Settings.BLAST_SEARCH_RESULTS_PAGE}#{base64Params}"
           }
         ]
 

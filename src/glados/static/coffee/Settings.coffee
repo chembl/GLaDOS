@@ -244,6 +244,10 @@ glados.loadURLPaths = (request_root, app_root, static_root)->
 
   glados.Settings.FLEXMATCH_SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL +
     'flexmatch_search_results/'
+
+  glados.Settings.BLAST_SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL +
+    'blast_search_results/'
+
   glados.Settings.WS_BASE_FLEXMATCH_SEARCH_URL = 'https://www.ebi.ac.uk/chembl/api/data/molecule.json'
 
   glados.Settings.BASE_COMPOUND_METABOLISM_FS_URL = '/compound_metabolism/'
