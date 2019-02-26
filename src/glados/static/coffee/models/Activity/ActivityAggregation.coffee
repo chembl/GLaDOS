@@ -9,6 +9,7 @@ glados.models.Activity.ActivityAggregation.COLUMNS = {
     'sort_disabled': false
     'is_sorting': 0
     'sort_class': 'fa-sort'
+    'show': true
   }
   PCHEMBL_VALUE_AVG: {
     'name_to_show': 'pChEMBL Avg'
@@ -18,6 +19,7 @@ glados.models.Activity.ActivityAggregation.COLUMNS = {
     'sort_class': 'fa-sort'
     'format_as_number': true
     'num_decimals': 2
+    'show': true
   }
   PCHEMBL_VALUE_MAX: {
     'name_to_show': 'pChEMBL Max'
@@ -27,6 +29,7 @@ glados.models.Activity.ActivityAggregation.COLUMNS = {
     'sort_class': 'fa-sort'
     'format_as_number': true
     'num_decimals': 2
+    'show': true
   }
 }
 
