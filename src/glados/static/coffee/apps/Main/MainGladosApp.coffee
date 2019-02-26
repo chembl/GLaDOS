@@ -144,10 +144,22 @@ glados.useNameSpace 'glados.apps.Main',
           hideShareButton=false, longFilterURL=undefined, askBeforeShortening=true)
         SearchResultsApp.initFlexmatchSearchResults(searchTerm)
 
-    @initBLASTSearchResults = (searchTerm) ->
+    @initBLASTSearchResults = (base64Params) ->
 
       promise = @prepareContentFor('blast_search_results')
-      
+
+      promise.then ->
+
+        breadcrumbLinks = [
+          {
+            label: 'BLAST Search Results'
+            link: ""
+          }
+        ]
+
+        glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks, longFilter=undefined,
+          hideShareButton=false, longFilterURL=undefined, askBeforeShortening=true)
+
     # ------------------------------------------------------------------------------------------------------------------
     # Entity Browsers
     # ------------------------------------------------------------------------------------------------------------------
