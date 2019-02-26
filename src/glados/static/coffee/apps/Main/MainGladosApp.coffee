@@ -11,6 +11,7 @@ glados.useNameSpace 'glados.apps.Main',
       main_page: 'Handlebars-MainPageLayout'
       search_results: 'Handlebars-SearchResultsLayout'
       structure_search_results: 'Handlebars-SubstructureSearchResultsLayout'
+      blast_search_results: 'Handlebars-BLASTSearchResultsLayout'
       browser: 'Handlebars-MainBrowserContent'
       unichem_connectivity: 'Handlebars-MainUnichemConnectivityContent'
 
@@ -80,13 +81,6 @@ glados.useNameSpace 'glados.apps.Main',
     # ------------------------------------------------------------------------------------------------------------------
     @initMainPage = ->
 
-#      window.location.href = '/main'
-#      glados.apps.BreadcrumbApp.setBreadCrumb([], undefined, hideShareButton=true)
-#      promise = @prepareContentFor('main_page')
-#
-#      promise.then ->
-#        MainPageApp.init()
-
     # ------------------------------------------------------------------------------------------------------------------
     # Search Results
     # ------------------------------------------------------------------------------------------------------------------
@@ -150,6 +144,10 @@ glados.useNameSpace 'glados.apps.Main',
           hideShareButton=false, longFilterURL=undefined, askBeforeShortening=true)
         SearchResultsApp.initFlexmatchSearchResults(searchTerm)
 
+    @initBLASTSearchResults = (searchTerm) ->
+
+      promise = @prepareContentFor('blast_search_results')
+      
     # ------------------------------------------------------------------------------------------------------------------
     # Entity Browsers
     # ------------------------------------------------------------------------------------------------------------------
