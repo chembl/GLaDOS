@@ -183,13 +183,15 @@ class SSSearchJob(models.Model):
     SIMILARITY = 'SIMILARITY'
     SUBSTRUCTURE = 'SUBSTRUCTURE'
     CONNECTIVITY = 'CONNECTIVITY'
+    BLAST = 'BLAST'
 
     CONTEXT_PREFIX = '_context'
 
     SEARCH_TYPES = (
         (SIMILARITY, SIMILARITY),
         (SUBSTRUCTURE, SUBSTRUCTURE),
-        (CONNECTIVITY, CONNECTIVITY)
+        (CONNECTIVITY, CONNECTIVITY),
+        (BLAST, BLAST)
     )
 
     search_type = models.CharField(max_length=20, choices=SEARCH_TYPES)

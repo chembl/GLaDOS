@@ -37,8 +37,6 @@ def request_submit_substructure_search(request):
 
         try:
 
-            print('submitting search!')
-
             response = generate_search_job(search_type, raw_search_params)
             return JsonResponse(response)
 

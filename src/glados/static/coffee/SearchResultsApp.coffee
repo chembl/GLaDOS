@@ -5,6 +5,8 @@ class SearchResultsApp
       SIMILARITY: 'SIMILARITY'
       SUBSTRUCTURE: 'SUBSTRUCTURE'
       CONNECTIVITY: 'CONNECTIVITY'
+    SEQUENCE:
+      BLAST: 'BLAST'
 
   # --------------------------------------------------------------------------------------------------------------------
   # Initialization
@@ -35,6 +37,10 @@ class SearchResultsApp
     ssSearchModel = new glados.models.Search.StructureSearchModel
       query_params: searchParams
       search_type: search_type
+
+    console.log 'ssSearchModel: ', ssSearchModel
+    ssSearchModel.submitSearch()
+    return
 
     $queryContainer = $('.BCK-query-Container')
     new glados.views.SearchResults.StructureQueryView
@@ -84,6 +90,13 @@ class SearchResultsApp
       search_term: searchTerm
 
     @initSSSearchResults(searchParams, SEARCH_TYPES.STRUCTURE.CONNECTIVITY)
+
+  @initBLASTSearchResults = (base64Params) ->
+
+    searchParams =
+      query_sequence: 'ABCDE'
+
+    @initSSSearchResults(searchParams, SEARCH_TYPES.SEQUENCE.BLAST)
 
 
   @initBrowserFromSSResults = ($browserContainer, $noResultsDiv, customSettings, ssSearchModel) ->
