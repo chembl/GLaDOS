@@ -2,7 +2,7 @@ from django.http import JsonResponse, HttpResponse
 from glados import glados_server_statistics
 import traceback
 from glados.models import SSSearchJob
-from glados.api.sssearch import structure_and_sequence_search_manager
+from glados.api.sssearch import search_manager
 from django.core.cache import cache
 import json
 
@@ -40,7 +40,7 @@ def get_page(request):
 def get_items_with_context(index_name, raw_search_data, context_id, id_property, raw_contextual_sort_data='{}'):
 
     sssearch_job = SSSearchJob.objects.get(search_id=context_id)
-    context, total_results = structure_and_sequence_search_manager.get_search_results_context(sssearch_job)
+    context, total_results = search_manager.get_search_results_context(sssearch_job)
 
     # create a context index so access is faster
     context_index_key = 'context_index-{}'.format(context_id)
