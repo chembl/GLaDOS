@@ -4,16 +4,11 @@ from glados.models import SSSearchJob
 import json
 import hashlib
 import base64
-from glados import glados_server_statistics
 import datetime
 import socket
-from django_rq import job
-import time
 import traceback
-import requests
 import os
 from django.conf import settings
-from glados.settings import RunEnvs
 import re
 from django.http import JsonResponse, HttpResponse
 import subprocess
@@ -152,6 +147,7 @@ def get_sssearch_status(search_id):
             'status': SSSearchJob.ERROR
         }
         return response
+
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Syncing nfs
