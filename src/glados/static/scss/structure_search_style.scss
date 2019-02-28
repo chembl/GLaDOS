@@ -25,6 +25,14 @@
       }
     }
 
+    &.blast{
+      .query-details {
+        width: 100%;
+        margin-left: 0;
+        word-wrap: break-word;
+      }
+    }
+
   }
 
   .edit-query{
