@@ -8,6 +8,9 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       @queryParams = @model.get('query_params')
       @model.on 'change:state', @render, @
+      @loadImage()
+
+    loadImage: ->
 
       if @queryParams.search_term.startsWith('CHEMBL')
         @img_url = glados.Settings.WS_BASE_URL + 'image/' + @queryParams.search_term + '.svg?engine=indigo'

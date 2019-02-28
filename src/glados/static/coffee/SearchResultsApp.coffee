@@ -38,15 +38,16 @@ class SearchResultsApp
       query_params: searchParams
       search_type: search_type
 
-    return
     console.log 'ssSearchModel: ', ssSearchModel
-    ssSearchModel.submitSearch()
-    return
 
     $queryContainer = $('.BCK-query-Container')
-    new glados.views.SearchResults.StructureQueryView
-      el: $queryContainer
-      model: ssSearchModel
+    if search_type == SEARCH_TYPES.SEQUENCE.BLAST
+      @initSequenceQueryView($queryContainer, ssSearchModel)
+    else
+      @initStructureQueryView($queryContainer, ssSearchModel)
+      
+    ssSearchModel.submitSearch()
+    return
 
     $browserContainer = $('.BCK-BrowserContainer')
     $browserContainer.hide()
@@ -67,6 +68,16 @@ class SearchResultsApp
       thisApp.initBrowserFromSSResults($browserContainer, $noResultsDiv, listConfig, ssSearchModel)
 
     ssSearchModel.submitSearch()
+
+  @initSequenceQueryView = ($queryContainer, ssSearchModel) ->
+
+    console.log 'init sequence query view'
+
+  @initStructureQueryView = ($queryContainer, ssSearchModel) ->
+
+    new glados.views.SearchResults.StructureQueryView
+      el: $queryContainer
+      model: ssSearchModel
 
   @initSubstructureSearchResults = (searchTerm) ->
 
