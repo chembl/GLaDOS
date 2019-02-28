@@ -10,7 +10,7 @@ glados.useNameSpace 'glados.apps.Main',
     @baseTemplates:
       main_page: 'Handlebars-MainPageLayout'
       search_results: 'Handlebars-SearchResultsLayout'
-      structure_search_results: 'Handlebars-SubstructureSearchResultsLayout'
+      sss_search_results: 'Handlebars-SubstructureSearchResultsLayout'
       blast_search_results: 'Handlebars-BLASTSearchResultsLayout'
       browser: 'Handlebars-MainBrowserContent'
       unichem_connectivity: 'Handlebars-MainUnichemConnectivityContent'
@@ -95,13 +95,13 @@ glados.useNameSpace 'glados.apps.Main',
 
       templateParams =
         type: 'Substructure'
-      promise = @prepareContentFor('structure_search_results', templateParams)
+      promise = @prepareContentFor('sss_search_results', templateParams)
 
       promise.then ->
         breadcrumbLinks = [
           {
             label: 'Substructure Search Results'
-            link: "#{glados.Settings.SUBSTRUCTURE_SEARCH_RESULTS_PAGE}#{searchTerm}"
+            link: "#{glados.Settings.SUBsss_search_results_PAGE}#{searchTerm}"
           }
         ]
 
@@ -113,7 +113,7 @@ glados.useNameSpace 'glados.apps.Main',
 
       templateParams =
         type: 'Similarity'
-      promise = @prepareContentFor('structure_search_results', templateParams)
+      promise = @prepareContentFor('sss_search_results', templateParams)
 
       promise.then ->
         breadcrumbLinks = [
@@ -130,8 +130,8 @@ glados.useNameSpace 'glados.apps.Main',
     @initFlexmatchSearchResults = (searchTerm) ->
 
       templateParams =
-        type: ''
-      promise = @prepareContentFor('structure_search_results', templateParams)
+        type: 'Connectivity'
+      promise = @prepareContentFor('sss_search_results', templateParams)
 
       promise.then ->
         breadcrumbLinks = [
@@ -146,7 +146,9 @@ glados.useNameSpace 'glados.apps.Main',
 
     @initBLASTSearchResults = (base64Params) ->
 
-      promise = @prepareContentFor('blast_search_results')
+      templateParams =
+        type: 'BLAST'
+      promise = @prepareContentFor('sss_search_results', templateParams)
 
       promise.then ->
 

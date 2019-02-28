@@ -38,6 +38,7 @@ class SearchResultsApp
       query_params: searchParams
       search_type: search_type
 
+    return
     console.log 'ssSearchModel: ', ssSearchModel
     ssSearchModel.submitSearch()
     return
