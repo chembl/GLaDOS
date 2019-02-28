@@ -458,6 +458,36 @@
 
 </script>
 
+<script id="Handlebars-Common-BLASTQuery" type="text/x-handlebars-template">
+
+ <div class="structure-results-query-container">
+     <div class="query">
+         <img class="structure-img" src="{{image_url}}" ><br>
+
+         <div class="query-details">
+
+             <div class="smiles"><b>Query:</b><br>
+                {{sequence}}
+             </div>
+         </div>
+
+     </div>
+    <div class="edit-query">
+        <div>
+            <b>Status:</b>
+            {{#if status_link  }}
+                <a href="{{ status_link }}" target="_blank">{{ status_text }}</a>
+            {{else}}
+                {{ status_text }}
+            {{/if}}
+        </div>
+        <a class="btn-chembl BCK-Edit-Query">Edit Search</a>
+    </div>
+
+ </div>
+
+</script>
+
 <script id="Handlebars-Marvin-Similarity-Percentage" type="text/x-handlebars-template">
   >= {{percentage}}%
 </script>

@@ -95,6 +95,7 @@ glados.useNameSpace 'glados.apps.Main',
 
       templateParams =
         type: 'Substructure'
+        query_view_template: 'Handlebars-Common-StructureQuery'
       promise = @prepareContentFor('sss_search_results', templateParams)
 
       promise.then ->
@@ -113,6 +114,7 @@ glados.useNameSpace 'glados.apps.Main',
 
       templateParams =
         type: 'Similarity'
+        query_view_template: 'Handlebars-Common-StructureQuery'
       promise = @prepareContentFor('sss_search_results', templateParams)
 
       promise.then ->
@@ -131,6 +133,7 @@ glados.useNameSpace 'glados.apps.Main',
 
       templateParams =
         type: 'Connectivity'
+        query_view_template: 'Handlebars-Common-StructureQuery'
       promise = @prepareContentFor('sss_search_results', templateParams)
 
       promise.then ->
@@ -148,6 +151,7 @@ glados.useNameSpace 'glados.apps.Main',
 
       templateParams =
         type: 'BLAST'
+        query_view_template: 'Handlebars-Common-BLASTQuery'
       promise = @prepareContentFor('sss_search_results', templateParams)
 
       promise.then ->

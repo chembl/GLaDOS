@@ -43,8 +43,8 @@ class SearchResultsApp
     else
       @initStructureQueryView($queryContainer, ssSearchModel)
 
-#    ssSearchModel.submitSearch()
-#    return
+    ssSearchModel.submitSearch()
+    return
 
     $browserContainer = $('.BCK-BrowserContainer')
     $browserContainer.hide()
@@ -68,7 +68,9 @@ class SearchResultsApp
 
   @initSequenceQueryView = ($queryContainer, ssSearchModel) ->
 
-    console.log 'init sequence query view'
+    new glados.views.SearchResults.SequenceQueryView
+      el: $queryContainer
+      model: ssSearchModel
 
   @initStructureQueryView = ($queryContainer, ssSearchModel) ->
 
@@ -105,8 +107,26 @@ class SearchResultsApp
 
   @initBLASTSearchResults = (base64Params) ->
 
-    searchParams =
-      query_sequence: 'ABCDE'
+    searchParams = {
+      'alignments': '50',
+      'database': 'chembl',
+      'gapopen': '-1',
+      'gapalign': 'true',
+      'scores': '50',
+      'sequence': '>sp|P35858|ALS_HUMAN Insulin-like growth factor-binding protein complex acid labile subunit OS=Homo sapiens GN=IGFALS PE=1 SV=1 \nMALRKGGLALALLLLSWVALGPRSLEGADPGTPGEAEGPACPAACVCSYDDDADELSVFC\nSSRNLTRLPDGVPGGTQALWLDGNNLSSVPPAAFQNLSSLGFLNLQGGQLGSLEPQALLG\nLENLCHLHLERNQLRSLALGTFAHTPALASLGLSNNRLSRLEDGLFEGLGSLWDLNLGWN\nSLAVLPDAAFRGLGSLRELVLAGNRLAYLQPALFSGLAELRELDLSRNALRAIKANVFVQ\nLPRLQKLYLDRNLIAAVAPGAFLGLKALRWLDLSHNRVAGLLEDTFPGLLGLRVLRLSHN\nAIASLRPRTFKDLHFLEELQLGHNRIRQLAERSFEGLGQLEVLTLDHNQLQEVKAGAFLG\nLTNVAVMNLSGNCLRNLPEQVFRGLGKLHSLHLEGSCLGRIRPHTFTGLSGLRRLFLKDN\nGLVGIEEQSLWGLAELLELDLTSNQLTHLPHRLFQGLGKLEYLLLSRNRLAELPADALGP\nLQRAFWLDVSHNRLEALPNSLLAPLGRLRYLSLRNNSLRTFTPQPPGLERLWLEGNPWDC\nGCPLKALRDFALQNPSAVPRFVQAICEGDDCQPPAYTYNNITCASPPEVVGLDLRDLSEA\nHFAPC\n',
+      'matrix': 'BLOSUM62',
+      'dropoff': '0',
+      'email': 'dmendez@ebi.ac.uk',
+      'align': '0',
+      'transltable': '1',
+      'gapext': '-1',
+      'program': 'blastp',
+      'stype': 'protein',
+      'filter': 'F',
+      'task': 'blastp',
+      'exp': '10',
+      'compstats': 'F'
+    }
 
     @initSSSearchResults(searchParams, SEARCH_TYPES.SEQUENCE.BLAST)
 
