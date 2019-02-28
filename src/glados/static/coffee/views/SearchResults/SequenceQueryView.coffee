@@ -14,3 +14,8 @@ glados.useNameSpace 'glados.views.SearchResults',
         sequence: @queryParams.sequence
         status_text: @getStatusText()
         status_link: @getStatusLink()
+        
+
+    showEditModal: ->
+
+      glados.helpers.SequenceSearchHelper.showSequenceSearchModal()
