@@ -10,11 +10,12 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     render: ->
 
+      console.log 'render'
       glados.Utils.fillContentForElement $(@el),
         sequence: @queryParams.sequence
         status_text: @getStatusText()
         status_link: @getStatusLink()
-        
+
 
     showEditModal: ->
 

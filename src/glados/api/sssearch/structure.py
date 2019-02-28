@@ -12,6 +12,38 @@ from glados.settings import RunEnvs
 from . import search_manager
 
 
+def get_structure_search_status(search_id):
+
+    try:
+        sssearch_job = SSSearchJob.objects.get(search_id=search_id)
+        response = {
+            'status': sssearch_job.status
+        }
+        if sssearch_job.status == SSSearchJob.FINISHED:
+            context, total_results = get_search_results_context(sssearch_job)
+            response['ids'] = [k['molecule_chembl_id'] for k in context]
+            response['total_results'] = total_results
+            response['size_limit'] = WEB_RESULTS_SIZE_LIMIT
+
+        return response
+
+    except SSSearchJob.DoesNotExist:
+
+        response = {
+            'msg': 'search job does not exist!',
+            'status': SSSearchJob.ERROR
+        }
+        return response
+
+    except FileNotFoundError:
+
+        response = {
+            'msg': 'Search results not found, they may have expired. Please run the search again.',
+            'status': SSSearchJob.ERROR
+        }
+        return response
+
+
 def queue_structure_search_job(search_type, raw_search_params):
 
     job_id = search_manager.get_search_id(search_type, raw_search_params)
