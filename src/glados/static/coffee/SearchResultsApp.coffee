@@ -27,9 +27,6 @@ class SearchResultsApp
     stateObject = if currentState? then JSON.parse(atob(currentState)) else undefined
     SearchModel.getInstance().search(searchTerm, selectedESEntity, stateObject)
 
-  # --------------------------------------------------------------------------------------------------------------------
-  # Views
-  # --------------------------------------------------------------------------------------------------------------------
   @initSSSearchResults = (searchParams, search_type) ->
 
     GlobalVariables.SEARCH_TERM = searchParams.search_term
@@ -45,9 +42,9 @@ class SearchResultsApp
       @initSequenceQueryView($queryContainer, ssSearchModel)
     else
       @initStructureQueryView($queryContainer, ssSearchModel)
-      
-    ssSearchModel.submitSearch()
-    return
+
+#    ssSearchModel.submitSearch()
+#    return
 
     $browserContainer = $('.BCK-BrowserContainer')
     $browserContainer.hide()
@@ -79,6 +76,9 @@ class SearchResultsApp
       el: $queryContainer
       model: ssSearchModel
 
+  # --------------------------------------------------------------------------------------------------------------------
+  # Router functions
+  # --------------------------------------------------------------------------------------------------------------------
   @initSubstructureSearchResults = (searchTerm) ->
 
     searchParams =
