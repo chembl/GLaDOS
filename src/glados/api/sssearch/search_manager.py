@@ -109,7 +109,7 @@ def generate_search_job(search_type, raw_search_params):
 
     elif search_type == SSSearchJob.BLAST:
 
-        search_id = blast.queue_blast_job()
+        search_id = blast.queue_blast_job(raw_search_params)
 
     response = {
         'search_id': search_id

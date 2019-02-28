@@ -38,9 +38,9 @@ class SearchResultsApp
       query_params: searchParams
       search_type: search_type
 
-#    console.log 'ssSearchModel: ', ssSearchModel
-#    ssSearchModel.submitSearch()
-#    return
+    console.log 'ssSearchModel: ', ssSearchModel
+    ssSearchModel.submitSearch()
+    return
 
     $queryContainer = $('.BCK-query-Container')
     new glados.views.SearchResults.StructureQueryView
