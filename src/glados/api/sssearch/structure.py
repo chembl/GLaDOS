@@ -24,6 +24,8 @@ def get_structure_search_status(search_id):
             response['ids'] = [k['molecule_chembl_id'] for k in context]
             response['total_results'] = total_results
             response['size_limit'] = search_manager.WEB_RESULTS_SIZE_LIMIT
+        elif sssearch_job.status == SSSearchJob.ERROR:
+            response['msg'] = sssearch_job.error_message
 
         return response
 
@@ -138,6 +140,14 @@ def do_structure_search(job_id):
         time_taken = end_time - start_time
         glados_server_statistics.record_search(search_job.search_type, time_taken)
 
+    except search_manager.SSSearchError as sssearch_error:
+
+        search_job.error_message = repr(sssearch_error)
+        search_manager.save_search_job_state(search_job, SSSearchJob.ERROR)
+        tb = traceback.format_exc()
+        search_manager.append_to_job_log(search_job, "Error:\n{}".format(tb))
+        print(tb)
+
     except:
 
         search_manager.save_search_job_state(search_job, SSSearchJob.ERROR)
@@ -179,6 +189,10 @@ def get_initial_search_url(search_params, search_job):
 
 
 def append_to_results_from_response_page(response, results, search_type):
+
+    error_message = response.get('error_message')
+    if error_message is not None:
+        raise search_manager.SSSearchError(error_message)
 
     if search_type == SSSearchJob.SIMILARITY:
 
