@@ -149,7 +149,7 @@ class ESSearchRecord(models.Model):
 
 # This is to keep track of the status of a download job
 class DownloadJob(models.Model):
-    job_id = models.TextField(max_length=500)
+    job_id = models.CharField(max_length=250, primary_key=True)
     progress = models.PositiveSmallIntegerField(default=0)
     total_items = models.PositiveIntegerField(default=0)
     raw_columns_to_download = models.TextField(null=True)
@@ -179,7 +179,7 @@ class DownloadJob(models.Model):
 
 
 class SSSearchJob(models.Model):
-    search_id = models.TextField(max_length=250)
+    search_id = models.CharField(max_length=250, primary_key=True)
     SIMILARITY = 'SIMILARITY'
     SUBSTRUCTURE = 'SUBSTRUCTURE'
     CONNECTIVITY = 'CONNECTIVITY'

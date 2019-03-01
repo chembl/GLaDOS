@@ -35,12 +35,13 @@ class SearchResultsApp
     else
       @initStructureQueryView($queryContainer, ssSearchModel)
 
-    ssSearchModel.submitSearch()
-    return
 
     $browserContainer = $('.BCK-BrowserContainer')
     $browserContainer.hide()
     $noResultsDiv = $('.no-results-found')
+
+    ssSearchModel.submitSearch()
+    return
 
     if search_type == glados.models.Search.StructureSearchModel.SEARCH_TYPES.STRUCTURE.SIMILARITY
 

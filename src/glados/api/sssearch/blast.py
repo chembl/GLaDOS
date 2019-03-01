@@ -5,6 +5,7 @@ from . import search_manager
 import json
 from glados.models import SSSearchJob
 import requests
+import os
 
 BLAST_API_BASE_URL = 'https://www.ebi.ac.uk/Tools/services/rest/ncbiblast'
 
@@ -28,9 +29,7 @@ def get_sequence_search_status(search_id):
             'status': SSSearchJob.SEARCH_QUEUED
         }
     elif status_response == 'FINISHED':
-        response = {
-            'status': SSSearchJob.LOADING_RESULTS
-        }
+        response = check_blast_job_results(search_id)
     else:
         response = {
             'status': SSSearchJob.SEARCH_QUEUED
@@ -65,3 +64,31 @@ def queue_blast_job(raw_search_params):
         msg = 'Error while submitting BLAST job:\n{}'.format(repr(ex))
         raise search_manager.SSSearchError(msg)
 
+
+def check_blast_job_results(search_id):
+    # only at this stage I create a model in the database, because now the task is entirely mine, to load the
+    # results into a context object
+    context_file_path_must_be = search_manager.get_results_file_path(search_id)
+    print('context_file_path_must_be: ', context_file_path_must_be)
+    try:
+        os.path.getsize(context_file_path_must_be)
+    except FileNotFoundError:
+
+        sssearch_job = SSSearchJob(
+            search_id=search_id,
+            search_type=SSSearchJob.BLAST,
+            log=search_manager.format_log_message('Queuing Download of Results')
+        )
+        sssearch_job.save()
+
+
+    response = {
+        'status': SSSearchJob.LOADING_RESULTS
+    }
+    return response
+
+
+def download_results(search_id):
+
+    print('going to load results')
+    sssearch_job = SSSearchJob.objects.get(search_id=job_id)
