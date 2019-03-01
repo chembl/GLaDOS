@@ -10,7 +10,9 @@ BLAST_API_BASE_URL = 'https://www.ebi.ac.uk/Tools/services/rest/ncbiblast'
 
 def get_sequence_search_status(search_id):
 
+    status_url = '{}/statuslklk/{}'.format(BLAST_API_BASE_URL, search_id)
     print('get blast status: ', search_id)
+    print('status_url: ', status_url)
     response = {
         'status': SSSearchJob.SEARCH_QUEUED
     }

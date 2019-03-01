@@ -471,7 +471,14 @@
          </div>
 
      </div>
-    <div class="edit-query">
+
+     {{#if ebi_job_link  }}
+     <div class="ebi-blast-search-details">
+         Click <a target="_blank" href="{{ ebi_job_link }}">here</a> to see the job submission to the EBI BLAST Search.
+     </div>
+     {{/if}}
+
+     <div class="edit-query">
         <div>
             <b>Status:</b>
             {{#if status_link  }}
@@ -481,7 +488,7 @@
             {{/if}}
         </div>
         <a class="btn-chembl BCK-Edit-Query">Edit Search</a>
-    </div>
+     </div>
 
  </div>
 

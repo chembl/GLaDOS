@@ -35,8 +35,8 @@ class SearchResultsApp
     else
       @initStructureQueryView($queryContainer, ssSearchModel)
 
-#    ssSearchModel.submitSearch()
-#    return
+    ssSearchModel.submitSearch()
+    return
 
     $browserContainer = $('.BCK-BrowserContainer')
     $browserContainer.hide()
