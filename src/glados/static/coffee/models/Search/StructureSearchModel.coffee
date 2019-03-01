@@ -31,8 +31,9 @@ glados.useNameSpace 'glados.models.Search',
     #-------------------------------------------------------------------------------------------------------------------
     getProgressURL: ->
 
-      url = "#{glados.Settings.GLADOS_BASE_PATH_REL}api/chembl/sssearch/sssearch-progress/#{@get('search_id')}" +
-        "/?is_blast=True"
+      url = "#{glados.Settings.GLADOS_BASE_PATH_REL}api/chembl/sssearch/sssearch-progress/#{@get('search_id')}"
+      if @get('search_type') == glados.models.Search.StructureSearchModel.SEARCH_TYPES.SEQUENCE.BLAST
+        url += "/?is_blast=True"
       return url
 
 
@@ -44,7 +45,7 @@ glados.useNameSpace 'glados.models.Search',
       getProgress = $.get(progressURL)
 
       getProgress.then (response) ->
-
+        console.log 'response: ', response
         status = response.status
         if status == 'ERROR'
 
@@ -90,3 +91,11 @@ glados.models.Search.StructureSearchModel.STATES =
 
 glados.models.Search.StructureSearchModel.EVENTS =
   RESULTS_READY: 'RESULTS_READY'
+
+glados.models.Search.StructureSearchModel.SEARCH_TYPES =
+  STRUCTURE:
+    SIMILARITY: 'SIMILARITY'
+    SUBSTRUCTURE: 'SUBSTRUCTURE'
+    CONNECTIVITY: 'CONNECTIVITY'
+  SEQUENCE:
+    BLAST: 'BLAST'

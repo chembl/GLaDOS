@@ -20,10 +20,10 @@ def get_structure_search_status(search_id):
             'status': sssearch_job.status
         }
         if sssearch_job.status == SSSearchJob.FINISHED:
-            context, total_results = get_search_results_context(sssearch_job)
+            context, total_results = search_manager.get_search_results_context(sssearch_job)
             response['ids'] = [k['molecule_chembl_id'] for k in context]
             response['total_results'] = total_results
-            response['size_limit'] = WEB_RESULTS_SIZE_LIMIT
+            response['size_limit'] = search_manager.WEB_RESULTS_SIZE_LIMIT
 
         return response
 
