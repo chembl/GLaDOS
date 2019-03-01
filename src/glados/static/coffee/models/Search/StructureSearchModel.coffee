@@ -61,6 +61,11 @@ glados.useNameSpace 'glados.models.Search',
           thisModel.setState(glados.models.Search.StructureSearchModel.STATES.SEARCHING)
           setTimeout(thisModel.checkSearchStatusPeriodically.bind(thisModel), 1000)
 
+        else if status == 'LOADING_RESULTS'
+
+          thisModel.setState(glados.models.Search.StructureSearchModel.STATES.LOADING_RESULTS)
+          setTimeout(thisModel.checkSearchStatusPeriodically.bind(thisModel), 1000)
+
         else if status == 'FINISHED'
 
           thisModel.set('result_ids', response.ids)
@@ -87,6 +92,7 @@ glados.models.Search.StructureSearchModel.STATES =
   ERROR_STATE: 'ERROR_STATE'
   SEARCH_QUEUED: 'SEARCH_QUEUED'
   SEARCHING: 'SEARCHING'
+  LOADING_RESULTS: 'LOADING_RESULTS'
   FINISHED: 'FINISHED'
 
 glados.models.Search.StructureSearchModel.EVENTS =
