@@ -19,18 +19,18 @@ class SearchResultsApp
     stateObject = if currentState? then JSON.parse(atob(currentState)) else undefined
     SearchModel.getInstance().search(searchTerm, selectedESEntity, stateObject)
 
-  @initSSSearchResults = (searchParams, search_type) ->
+  @initSSSearchResults = (searchParams, searchType) ->
 
     GlobalVariables.SEARCH_TERM = searchParams.search_term
 
     ssSearchModel = new glados.models.Search.StructureSearchModel
       query_params: searchParams
-      search_type: search_type
+      search_type: searchType
 
     console.log 'ssSearchModel: ', ssSearchModel
 
     $queryContainer = $('.BCK-query-Container')
-    if search_type == glados.models.Search.StructureSearchModel.SEARCH_TYPES.SEQUENCE.BLAST
+    if searchType == glados.models.Search.StructureSearchModel.SEARCH_TYPES.SEQUENCE.BLAST
       @initSequenceQueryView($queryContainer, ssSearchModel)
     else
       @initStructureQueryView($queryContainer, ssSearchModel)
@@ -40,17 +40,8 @@ class SearchResultsApp
     $browserContainer.hide()
     $noResultsDiv = $('.no-results-found')
 
-#    ssSearchModel.submitSearch()
-#    return
-
-    if search_type == glados.models.Search.StructureSearchModel.SEARCH_TYPES.STRUCTURE.SIMILARITY
-
-      listConfig = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_SIMILARITY_MAPS
-
-    else if search_type == glados.models.Search.StructureSearchModel.SEARCH_TYPES.STRUCTURE.SUBSTRUCTURE or \
-    search_type == glados.models.Search.StructureSearchModel.SEARCH_TYPES.STRUCTURE.CONNECTIVITY
-
-      listConfig = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.SUBSTRUCTURE_RESULTS_LIST
+    listConfig = @getListConfig(searchType)
+    console.log 'listConfig: ', listConfig
 
     thisApp = @
     ssSearchModel.once glados.models.Search.StructureSearchModel.EVENTS.RESULTS_READY, ->
@@ -71,6 +62,26 @@ class SearchResultsApp
     new glados.views.SearchResults.StructureQueryView
       el: $queryContainer
       model: ssSearchModel
+
+  # --------------------------------------------------------------------------------------------------------------------
+  # List Config
+  # --------------------------------------------------------------------------------------------------------------------
+  @getListConfig = (searchType) ->
+
+    if searchType == glados.models.Search.StructureSearchModel.SEARCH_TYPES.STRUCTURE.SIMILARITY
+
+      listConfig = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_SIMILARITY_MAPS
+
+    else if searchType == glados.models.Search.StructureSearchModel.SEARCH_TYPES.STRUCTURE.SUBSTRUCTURE or \
+    searchType == glados.models.Search.StructureSearchModel.SEARCH_TYPES.STRUCTURE.CONNECTIVITY
+
+      listConfig = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.SUBSTRUCTURE_RESULTS_LIST
+
+    else if searchType == glados.models.Search.StructureSearchModel.SEARCH_TYPES.SEQUENCE.BLAST
+
+      listConfig = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.TARGET_BLAST_RESULTS
+
+    return listConfig
 
   # --------------------------------------------------------------------------------------------------------------------
   # Router functions

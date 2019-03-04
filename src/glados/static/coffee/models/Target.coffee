@@ -223,6 +223,60 @@ Target.COLUMNS = {
     comparator: 'species_group_flag'
   TAX_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Target.INDEX_NAME,
     comparator: 'tax_id'
+  BLAST_EXPECTATION:{
+    'show': true
+    'name_to_show': 'E-Value'
+    'comparator': '_context.best_expectation'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'is_contextual': true
+  }
+  POSITIVES_BLAST:{
+    'show': true
+    'name_to_show': 'Positives %'
+    'comparator': '_context.best_positives'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'is_contextual': true
+  }
+  IDENTITIES_BLAST:{
+    'show': true
+    'name_to_show': 'Identities %'
+    'comparator': '_context.best_identities'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'is_contextual': true
+  }
+  SCORE_BITS_BLAST:{
+    'show': true
+    'name_to_show': 'Score (bits)'
+    'comparator': '_context.best_score_bits'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'is_contextual': true
+  }
+  SCORE_BLAST:{
+    'show': true
+    'name_to_show': 'Score'
+    'comparator': '_context.best_score'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'is_contextual': true
+  }
+  LENGTH_BLAST:{
+    'show': true
+    'name_to_show': 'Length'
+    'comparator': '_context.length'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'is_contextual': true
+  }
 }
 Target.ID_COLUMN = Target.COLUMNS.CHEMBL_ID
 
@@ -235,6 +289,21 @@ Target.COLUMNS_SETTINGS = {
   )()
   RESULTS_LIST_TABLE: [
     Target.COLUMNS.CHEMBL_ID
+    Target.COLUMNS.PREF_NAME
+    Target.COLUMNS.ACCESSION
+    Target.COLUMNS.TYPE
+    Target.COLUMNS.ORGANISM
+    Target.COLUMNS.NUM_COMPOUNDS_HISTOGRAM
+    Target.COLUMNS.BIOACTIVITIES_NUMBER
+  ]
+  RESULTS_LIST_BLAST: [
+    Target.COLUMNS.CHEMBL_ID
+    Target.COLUMNS.BLAST_EXPECTATION
+    Target.COLUMNS.POSITIVES_BLAST
+    Target.COLUMNS.IDENTITIES_BLAST
+    Target.COLUMNS.SCORE_BITS_BLAST
+    Target.COLUMNS.SCORE_BLAST
+    Target.COLUMNS.LENGTH_BLAST
     Target.COLUMNS.PREF_NAME
     Target.COLUMNS.ACCESSION
     Target.COLUMNS.TYPE
