@@ -162,7 +162,8 @@ def format_log_message(msg):
     return "[{date}] {hostname}: {msg}\n".format(date=now, hostname=socket.gethostname(), msg=msg)
 
 
-def save_search_job_state(search_job, new_state):
+def save_search_job_state(search_job, new_state, error_message=None):
     search_job.status = new_state
+    search_job.error_message = error_message
     search_job.save()
 

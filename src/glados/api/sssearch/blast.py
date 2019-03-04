@@ -6,6 +6,10 @@ import json
 from glados.models import SSSearchJob
 import requests
 import os
+from django_rq import job
+import xml.etree.ElementTree as ET
+import re
+import traceback
 
 BLAST_API_BASE_URL = 'https://www.ebi.ac.uk/Tools/services/rest/ncbiblast'
 
@@ -70,25 +74,102 @@ def check_blast_job_results(search_id):
     # results into a context object
     context_file_path_must_be = search_manager.get_results_file_path(search_id)
     print('context_file_path_must_be: ', context_file_path_must_be)
-    try:
-        os.path.getsize(context_file_path_must_be)
-    except FileNotFoundError:
 
+    try:
+
+        sssearch_job = SSSearchJob.objects.get(search_id=search_id)
+        if sssearch_job.status == SSSearchJob.ERROR:
+            response = {
+                'status': SSSearchJob.ERROR,
+                'msg': sssearch_job.error_message
+            }
+        else:
+            os.path.getsize(context_file_path_must_be)
+            response = {
+                'status': SSSearchJob.LOADING_RESULTS
+            }
+
+        return response
+
+    except (FileNotFoundError, SSSearchJob.DoesNotExist) as ex:
+
+        print('creating search job')
         sssearch_job = SSSearchJob(
             search_id=search_id,
             search_type=SSSearchJob.BLAST,
+            status=SSSearchJob.LOADING_RESULTS,
             log=search_manager.format_log_message('Queuing Download of Results')
         )
         sssearch_job.save()
+        download_results.delay(search_id)
 
+        response = {
+            'status': SSSearchJob.LOADING_RESULTS
+        }
+        return response
 
-    response = {
-        'status': SSSearchJob.LOADING_RESULTS
-    }
-    return response
-
-
+@job
 def download_results(search_id):
 
     print('going to load results')
-    sssearch_job = SSSearchJob.objects.get(search_id=job_id)
+    sssearch_job = SSSearchJob.objects.get(search_id=search_id)
+
+    try:
+        1/0
+        search_manager.append_to_job_log(sssearch_job, 'Starting to download results')
+
+        ids_url = '{}/result/{}/xml'.format(BLAST_API_BASE_URL, search_id)
+        print('ids_url: ', ids_url)
+        r = requests.get(ids_url)
+        xml_response = r.text
+        results_root = ET.fromstring(xml_response)
+
+        ebi_schema_url = '{http://www.ebi.ac.uk/schema}'
+        results_path = '{schema_url}SequenceSimilaritySearchResult/{schema_url}hits'.format(schema_url=ebi_schema_url)
+        blast_results = results_root.find(results_path)
+
+        results_context = []
+        id_regex = re.compile('CHEMBL\d+')
+        best_alignment_path = '{schema_url}alignments/{schema_url}alignment'.format(schema_url=ebi_schema_url)
+        score_path = '{schema_url}score'.format(schema_url=ebi_schema_url)
+        score_bits_path = '{schema_url}bits'.format(schema_url=ebi_schema_url)
+        identities_path = '{schema_url}identity'.format(schema_url=ebi_schema_url)
+        positives_path = '{schema_url}identity'.format(schema_url=ebi_schema_url)
+        expectation_path = '{schema_url}identity'.format(schema_url=ebi_schema_url)
+
+        for result_child in blast_results:
+            id = id_regex.match(result_child.get('id')).group()
+            length = result_child.get('length')
+            best_alignment = result_child.find(best_alignment_path)
+            best_score = float(best_alignment.find(score_path).text)
+            best_score_bits = float(best_alignment.find(score_bits_path).text)
+            best_identities = float(best_alignment.find(identities_path).text)
+            best_positives = float(best_alignment.find(positives_path).text)
+            best_expectation = float(best_alignment.find(expectation_path).text)
+
+            new_result = {
+                'id': id,
+                'length': length,
+                'best_score': best_score,
+                'best_score_bits': best_score_bits,
+                'best_identities': best_identities,
+                'best_positives': best_positives,
+                'best_expectation': best_expectation
+            }
+            results_context.append(new_result)
+
+        print('results:')
+        print(results_context)
+
+    except Exception as ex:
+
+        search_manager.save_search_job_state(sssearch_job, SSSearchJob.ERROR, repr(ex))
+        tb = traceback.format_exc()
+        search_manager.append_to_job_log(sssearch_job, "Error:\n{}".format(tb))
+        print(tb)
+
+
+
+
+
+
