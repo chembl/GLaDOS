@@ -40,8 +40,8 @@ class SearchResultsApp
     $browserContainer.hide()
     $noResultsDiv = $('.no-results-found')
 
-    ssSearchModel.submitSearch()
-    return
+#    ssSearchModel.submitSearch()
+#    return
 
     if search_type == glados.models.Search.StructureSearchModel.SEARCH_TYPES.STRUCTURE.SIMILARITY
 

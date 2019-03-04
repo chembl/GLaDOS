@@ -14,6 +14,8 @@ from django.http import JsonResponse, HttpResponse
 import subprocess
 from . import blast
 from . import structure
+from django.conf import settings
+from glados.settings import RunEnvs
 
 
 class SSSearchError(Exception):
@@ -166,4 +168,20 @@ def save_search_job_state(search_job, new_state, error_message=None):
     search_job.status = new_state
     search_job.error_message = error_message
     search_job.save()
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Saving results
+# ----------------------------------------------------------------------------------------------------------------------
+def save_results_file(results, sssearch_job):
+
+    search_id = sssearch_job.search_id
+    output_file_path = get_results_file_path(search_id)
+    append_to_job_log(sssearch_job, 'output_file_path: {}'.format(output_file_path))
+    with open(output_file_path, 'w') as outfile:
+        json.dump(results, outfile)
+
+    if settings.RUN_ENV == RunEnvs.PROD:
+        rsync_to_the_other_nfs(sssearch_job)
+
 

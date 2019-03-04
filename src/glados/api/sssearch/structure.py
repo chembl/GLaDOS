@@ -7,8 +7,6 @@ import time
 import traceback
 import requests
 import os
-from django.conf import settings
-from glados.settings import RunEnvs
 from . import search_manager
 
 
@@ -125,14 +123,7 @@ def do_structure_search(job_id):
             else:
                 more_results_to_load = False
 
-        output_file_path = search_manager.get_results_file_path(job_id)
-        search_manager.append_to_job_log(search_job, 'output_file_path: {}'.format(output_file_path))
-        with open(output_file_path, 'w') as outfile:
-            json.dump(results, outfile)
-
-        if settings.RUN_ENV == RunEnvs.PROD:
-            search_manager.rsync_to_the_other_nfs(search_job)
-
+        search_manager.save_results_file(results, search_job)
         search_manager.append_to_job_log(search_job, 'Results Ready')
         search_manager.save_search_job_state(search_job, SSSearchJob.FINISHED)
 
