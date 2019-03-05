@@ -53,6 +53,7 @@ class SearchResultsApp
 
   @initSequenceQueryView = ($queryContainer, ssSearchModel) ->
 
+    console.log 'init sequence query view'
     new glados.views.SearchResults.SequenceQueryView
       el: $queryContainer
       model: ssSearchModel

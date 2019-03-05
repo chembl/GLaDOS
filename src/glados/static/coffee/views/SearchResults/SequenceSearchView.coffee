@@ -1,6 +1,23 @@
 glados.useNameSpace 'glados.views.SearchResults',
   SequenceSearchView: Backbone.View.extend
 
+    EXAMPLE_SEQUENCE: '>sp|P35858|ALS_HUMAN Insulin-like growth factor-binding protein complex acid labile subunit OS=Homo sapiens GN=IGFALS PE=1 SV=1 \n' +
+      'MALRKGGLALALLLLSWVALGPRSLEGADPGTPGEAEGPACPAACVCSYDDDADELSVFC\n' +
+      'SSRNLTRLPDGVPGGTQALWLDGNNLSSVPPAAFQNLSSLGFLNLQGGQLGSLEPQALLG\n' +
+      'LENLCHLHLERNQLRSLALGTFAHTPALASLGLSNNRLSRLEDGLFEGLGSLWDLNLGWN\n' +
+      'SLAVLPDAAFRGLGSLRELVLAGNRLAYLQPALFSGLAELRELDLSRNALRAIKANVFVQ\n' +
+      'LPRLQKLYLDRNLIAAVAPGAFLGLKALRWLDLSHNRVAGLLEDTFPGLLGLRVLRLSHN\n' +
+      'AIASLRPRTFKDLHFLEELQLGHNRIRQLAERSFEGLGQLEVLTLDHNQLQEVKAGAFLG\n' +
+      'LTNVAVMNLSGNCLRNLPEQVFRGLGKLHSLHLEGSCLGRIRPHTFTGLSGLRRLFLKDN\n' +
+      'GLVGIEEQSLWGLAELLELDLTSNQLTHLPHRLFQGLGKLEYLLLSRNRLAELPADALGP\n' +
+      'LQRAFWLDVSHNRLEALPNSLLAPLGRLRYLSLRNNSLRTFTPQPPGLERLWLEGNPWDC\n' +
+      'GCPLKALRDFALQNPSAVPRFVQAICEGDDCQPPAYTYNNITCASPPEVVGLDLRDLSEA\n' +
+      'HFAPC'
+
+    events:
+      'click .BCK-use-example-sequence': 'useExampleSequence'
+      'click .BCK-clear-sequence': 'clearSequence'
+
     initialize: ->
 
       @state = glados.views.SearchResults.SequenceSearchView.states.INITIAL_STATE
@@ -71,8 +88,15 @@ glados.useNameSpace 'glados.views.SearchResults',
           $paramsContainer.addClass('closed')
           $paramsToggler.text('Show Parameters')
 
+    useExampleSequence: ->
 
+      $textArea = $(@el).find('.BCK-sequence-textarea')
+      $textArea.text(@EXAMPLE_SEQUENCE)
 
+    clearSequence: ->
+
+      $textArea = $(@el).find('.BCK-sequence-textarea')
+      $textArea.text('')
 
 
 glados.views.SearchResults.SequenceSearchView.states =
