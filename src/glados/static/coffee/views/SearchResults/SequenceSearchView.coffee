@@ -17,6 +17,9 @@ glados.useNameSpace 'glados.views.SearchResults',
     events:
       'click .BCK-use-example-sequence': 'useExampleSequence'
       'click .BCK-clear-sequence': 'clearSequence'
+      'click .BCK-upload-sequence': 'clickOnUploadSequenceInput'
+      'change .BCK-upload-sequence-input': 'processFile'
+      'input .BCK-sequence-textarea': 'resetFileInput'
 
     initialize: ->
 
@@ -41,7 +44,6 @@ glados.useNameSpace 'glados.views.SearchResults',
         loadPromise = glados.Utils.fillContentForElement($(@el), paramsObj)
         thisView = @
         loadPromise.then ->
-          console.log 'content loaded'
           @state = glados.views.SearchResults.SequenceSearchView.states.CONTENT_LOADED
           thisView.showModal()
 
@@ -53,14 +55,12 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     showModal: ->
 
-      console.log 'show modal'
       $element = $(@el)
       $selectors = $element.find('.BCK-ParamSelect')
       $element.modal('open')
 
       if not @selectorsActivated
         $selectors.material_select()
-        console.log 'selectors activated'
         @selectorsActivated = true
 
       if not @paramsTogglerActivated
@@ -78,12 +78,10 @@ glados.useNameSpace 'glados.views.SearchResults',
       $paramsToggler.click ->
 
         if $paramsContainer.attr('is_open') == 'no'
-          console.log 'open params'
           $paramsContainer.attr('is_open', 'yes')
           $paramsContainer.removeClass('closed')
           $paramsToggler.text('Hide Parameters')
         else
-          console.log 'close params'
           $paramsContainer.attr('is_open', 'no')
           $paramsContainer.addClass('closed')
           $paramsToggler.text('Show Parameters')
@@ -91,12 +89,41 @@ glados.useNameSpace 'glados.views.SearchResults',
     useExampleSequence: ->
 
       $textArea = $(@el).find('.BCK-sequence-textarea')
-      $textArea.text(@EXAMPLE_SEQUENCE)
+      $textArea.val(@EXAMPLE_SEQUENCE)
+      @resetFileInput()
 
     clearSequence: ->
 
       $textArea = $(@el).find('.BCK-sequence-textarea')
-      $textArea.text('')
+      $textArea.val('')
+      @resetFileInput()
+
+    clickOnUploadSequenceInput: ->
+
+      $uploadSequenceInput = $(@el).find('.BCK-upload-sequence-input')
+      $uploadSequenceInput.click()
+
+    resetFileInput: ->
+
+      $fileInput = $(@el).find('.BCK-upload-sequence-input')
+      $fileInput.val('')
+
+    processFile: (event) ->
+
+      input = event.target
+      reader = new FileReader()
+
+      thisView = @
+      reader.onload = ->
+        text = reader.result
+        $textArea = $(thisView.el).find('.BCK-sequence-textarea')
+        $textArea.val(text)
+
+      reader.onerror = ->
+        alert('There was an error while loading the file. Please try again.')
+
+
+      reader.readAsText(input.files[0])
 
 
 glados.views.SearchResults.SequenceSearchView.states =

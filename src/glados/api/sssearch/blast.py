@@ -40,6 +40,7 @@ def get_sequence_search_status(search_id):
             'status': SSSearchJob.SEARCH_QUEUED
         }
 
+    response['ebi_status_response'] = status_response
     return response
 
 
