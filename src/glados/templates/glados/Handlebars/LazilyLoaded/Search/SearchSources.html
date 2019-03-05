@@ -22,11 +22,9 @@
                     <div>
                         <a class="BCK-upload-sequence dotted-link">Upload a file</a>
                     </div>
-                    <div>
-                        <input accept='.fasta, .FASTA, .GENBANK, .gcg, .PIR, .pir, .txt'
-                               class="upload-file-input BCK-upload-sequence-input" type='file'><br>
-                    </div>
                 </div>
+                <input accept='.fasta, .FASTA, .GENBANK, .gcg, .PIR, .pir, .txt'
+                       class="upload-file-input BCK-upload-sequence-input" type='file'>
             </div>
 
         </div>
@@ -45,23 +43,8 @@
 
             <div class="BCK-params-container params-container closed">
 
-                {{#each blast_params}}
-                <div class="blast-param-selector {{#if this.long}}long{{/if}}">
-                    <a target="_blank" href="{{ this.param_help_link }}">{{this.param_label}}</a>:
+                Loading...
 
-                    <select class="BCK-ParamSelect">
-
-                      <option value="1" selected >BLOSUM45</option>
-                      <option value="2">BLOSUM50</option>
-                      <option value="3">BLOSUM62</option>
-                    </select>
-                </div>
-                {{/each}}
-
-
-                <div class="reset-params-btn-container" >
-                    <a class="dotted-link">reset parameters</a>
-                </div>
             </div>
 
         </div>

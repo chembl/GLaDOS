@@ -31,17 +31,18 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       if @state == glados.views.SearchResults.SequenceSearchView.states.INITIAL_STATE
 
-        blastParameters = []
-        for i in [1..12]
-          blastParameters.push
-            param_label: "Param#{i}"
-            param_help_link: 'https://www.ebi.ac.uk/seqdb/confluence/pages/viewpage.action?pageId=68167377#NCBIBLAST+(ProteinDatabases)-matrix'
-            long: i == 11
+#        blastParameters = []
+#        for i in [1..12]
+#          blastParameters.push
+#            param_label: "Param#{i}"
+#            param_help_link: 'https://www.ebi.ac.uk/seqdb/confluence/pages/viewpage.action?pageId=68167377#NCBIBLAST+(ProteinDatabases)-matrix'
+#            long: i == 11
+#
+#        paramsObj =
+#          blast_params: blastParameters
 
-        paramsObj =
-          blast_params: blastParameters
 
-        loadPromise = glados.Utils.fillContentForElement($(@el), paramsObj)
+        loadPromise = glados.Utils.fillContentForElement($(@el))
         thisView = @
         loadPromise.then ->
           @state = glados.views.SearchResults.SequenceSearchView.states.CONTENT_LOADED
@@ -75,16 +76,29 @@ glados.useNameSpace 'glados.views.SearchResults',
       $paramsContainer.attr('is_open', 'no')
       $paramsContainer.addClass('closed')
 
+      thisView = @
       $paramsToggler.click ->
 
         if $paramsContainer.attr('is_open') == 'no'
           $paramsContainer.attr('is_open', 'yes')
           $paramsContainer.removeClass('closed')
           $paramsToggler.text('Hide Parameters')
+          thisView.loadParams()
         else
           $paramsContainer.attr('is_open', 'no')
           $paramsContainer.addClass('closed')
           $paramsToggler.text('Show Parameters')
+
+    loadParams: ->
+
+      console.log 'loadParams'
+      if not @paramsModel?
+        @paramsModel = new glados.models.Search.BLASTParamsModel()
+
+      if not @paramsModel.paramsLoaded()
+        @paramsModel.fetch()
+
+      console.log '@paramsModel: ', @paramsModel
 
     useExampleSequence: ->
 
