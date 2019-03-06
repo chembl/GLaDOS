@@ -20,39 +20,33 @@ glados.useNameSpace 'glados.views.SearchResults',
       'click .BCK-upload-sequence': 'clickOnUploadSequenceInput'
       'change .BCK-upload-sequence-input': 'processFile'
       'input .BCK-sequence-textarea': 'resetFileInput'
+      'input .BCK-search-param': 'updateParam'
+      'change .BCK-search-param': 'updateParam'
 
     initialize: ->
 
-      @state = glados.views.SearchResults.SequenceSearchView.states.INITIAL_STATE
       @selectorsActivated = false
       @paramsTogglerActivated = false
+      @paramsModel = new glados.models.Search.BLASTParamsModel()
+      @searchParams = {}
 
     render: ->
 
-      if @state == glados.views.SearchResults.SequenceSearchView.states.INITIAL_STATE
-
-#        blastParameters = []
-#        for i in [1..12]
-#          blastParameters.push
-#            param_label: "Param#{i}"
-#            param_help_link: 'https://www.ebi.ac.uk/seqdb/confluence/pages/viewpage.action?pageId=68167377#NCBIBLAST+(ProteinDatabases)-matrix'
-#            long: i == 11
-#
-#        paramsObj =
-#          blast_params: blastParameters
-
-
-        loadPromise = glados.Utils.fillContentForElement($(@el))
+      if @paramsModel.isNew()
+        console.log 'loading params'
         thisView = @
-        loadPromise.then ->
-          @state = glados.views.SearchResults.SequenceSearchView.states.CONTENT_LOADED
-          thisView.showModal()
+        @paramsModel.on 'change', ->
 
-        @state = glados.views.SearchResults.SequenceSearchView.states.LOADING_CONTENT
+          blastParams = [param for param in thisView.paramsModel.get('params') when param.param_id != 'sequence']
 
-      else
+          console.log 'blastParams: ', blastParams
 
-        @showModal()
+          glados.Utils.fillContentForElement($(thisView.el))
+          thisView.initParamsToggler()
+
+        @paramsModel.fetch()
+
+      @showModal()
 
     showModal: ->
 
@@ -83,42 +77,38 @@ glados.useNameSpace 'glados.views.SearchResults',
           $paramsContainer.attr('is_open', 'yes')
           $paramsContainer.removeClass('closed')
           $paramsToggler.text('Hide Parameters')
-          thisView.loadParams()
         else
           $paramsContainer.attr('is_open', 'no')
           $paramsContainer.addClass('closed')
           $paramsToggler.text('Show Parameters')
 
-    loadParams: ->
+#-----------------------------------------------------------------------------------------------------------------------
+# Handling params
+#-----------------------------------------------------------------------------------------------------------------------
+    updateParam: (event) ->
 
-      console.log 'loadParams'
-      if not @paramsModel?
-        @paramsModel = new glados.models.Search.BLASTParamsModel()
+      $paramElem = $(event.target)
+      paramID = $paramElem.attr('data-param-id')
+      value =
+      console.log 'param updated: ', paramID
+      console.log 'value: ', $paramElem.val()
+#      @searchParams[paramID]
 
-      if not @paramsModel.paramsLoaded()
-
-        @paramsModel.fetch()
-
-        thisView = @
-        @paramsModel.on 'error', ->
-          $paramsContainer = $(thisView.el).find('.BCK-params-container')
-          $paramsContainer.text('There was an error while loading the parameters. Please try again later.')
-
-
-      console.log '@paramsModel: ', @paramsModel
-
-
-
+#-----------------------------------------------------------------------------------------------------------------------
+# Helper buttons
+#-----------------------------------------------------------------------------------------------------------------------
     useExampleSequence: ->
 
       $textArea = $(@el).find('.BCK-sequence-textarea')
       $textArea.val(@EXAMPLE_SEQUENCE)
+      $textArea.trigger('change')
       @resetFileInput()
 
     clearSequence: ->
 
       $textArea = $(@el).find('.BCK-sequence-textarea')
       $textArea.val('')
+      $textArea.trigger('change')
       @resetFileInput()
 
     clickOnUploadSequenceInput: ->
@@ -141,6 +131,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         text = reader.result
         $textArea = $(thisView.el).find('.BCK-sequence-textarea')
         $textArea.val(text)
+        $textArea.trigger('change')
 
       reader.onerror = ->
         alert('There was an error while loading the file. Please try again.')

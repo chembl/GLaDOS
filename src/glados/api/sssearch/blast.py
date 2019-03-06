@@ -65,9 +65,9 @@ def get_blast_params():
     adjustable_params = [p for p in all_param_names if
                          p not in ['program', 'task', 'match_scores', 'stype', 'database']]
     final_params_list = []
-    for param_name in adjustable_params:
-        param_details_url = '{base_url}/parameterdetails/{param_name}'.format(base_url=BLAST_API_BASE_URL,
-                                                                              param_name=param_name)
+    for param_id in adjustable_params:
+        param_details_url = '{base_url}/parameterdetails/{param_id}'.format(base_url=BLAST_API_BASE_URL,
+                                                                            param_id=param_id)
         rp = requests.get(param_details_url)
         rp_xml_response = rp.text
         params_root = ET.fromstring(rp_xml_response)
@@ -93,6 +93,7 @@ def get_blast_params():
                 param_values.append(value_dict)
 
         param_dict = {
+            'param_id': param_id,
             'param_name': param_name,
             'param_description': param_description,
             'param_type': param_type,

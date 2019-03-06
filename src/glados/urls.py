@@ -66,12 +66,6 @@ common_urls = [
                 template_name="glados/Handlebars/LazilyLoaded/Visualisations/VisualisationsSources.html")
         ), ),
 
-    url(r'^handlebars/search_sources/$',
-        xframe_options_exempt(
-            DirectTemplateView.as_view(
-                template_name="glados/Handlebars/LazilyLoaded/Search/SearchSources.html")
-        ), name='handlebars-search'),
-
     url(r'^design_components/$', views.design_components, name='design_components'),
 
     url(r'^marvin_search_fullscreen/$',
