@@ -113,32 +113,9 @@ class SearchResultsApp
 
   @initBLASTSearchResults = (base64Params) ->
 
-    searchParams = {
-      'alignments': '50',
-      'database': 'chembl',
-      'gapopen': '-1',
-      'gapalign': 'true',
-      'scores': '50',
-      'sequence': '>sp|P35858|ALS_HUMAN Insulin-like growth factor-binding protein complex acid labile subunit OS=Homo sapiens GN=IGFALS PE=1 SV=1 \nMALRKGGLALALLLLSWVALGPRSLEGADPGTPGEAEGPACPAACVCSYDDDADELSVFC\nSSRNLTRLPDGVPGGTQALWLDGNNLSSVPPAAFQNLSSLGFLNLQGGQLGSLEPQALLG\nLENLCHLHLERNQLRSLALGTFAHTPALASLGLSNNRLSRLEDGLFEGLGSLWDLNLGWN\nSLAVLPDAAFRGLGSLRELVLAGNRLAYLQPALFSGLAELRELDLSRNALRAIKANVFVQ\nLPRLQKLYLDRNLIAAVAPGAFLGLKALRWLDLSHNRVAGLLEDTFPGLLGLRVLRLSHN\nAIASLRPRTFKDLHFLEELQLGHNRIRQLAERSFEGLGQLEVLTLDHNQLQEVKAGAFLG\nLTNVAVMNLSGNCLRNLPEQVFRGLGKLHSLHLEGSCLGRIRPHTFTGLSGLRRLFLKDN\nGLVGIEEQSLWGLAELLELDLTSNQLTHLPHRLFQGLGKLEYLLLSRNRLAELPADALGP\nLQRAFWLDVSHNRLEALPNSLLAPLGRLRYLSLRNNSLRTFTPQPPGLERLWLEGNPWDC\nGCPLKALRDFALQNPSAVPRFVQAICEGDDCQPPAYTYNNITCASPPEVVGLDLRDLSEA\nHFAPC\n',
-#      'sequence': 'blablablbalbal'
-      'matrix': 'BLOSUM62',
-      'dropoff': '0',
-      'email': 'dmendez@ebi.ac.uk',
-      'align': '0',
-      'transltable': '1',
-      'gapext': '-1',
-      'program': 'blastp',
-      'stype': 'protein',
-      'filter': 'F',
-      'task': 'blastp',
-      'exp': '10',
-      'compstats': 'F'
-    }
+    searchParams = JSON.parse(atob(base64Params))
 
-    console.log 'searchParams: ', searchParams
-    return
     @initSSSearchResults(searchParams, glados.models.Search.StructureSearchModel.SEARCH_TYPES.SEQUENCE.BLAST)
-
 
   @initBrowserFromSSResults = ($browserContainer, $noResultsDiv, customSettings, ssSearchModel) ->
 

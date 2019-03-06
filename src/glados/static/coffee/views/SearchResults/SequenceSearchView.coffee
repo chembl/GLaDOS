@@ -153,16 +153,8 @@ glados.useNameSpace 'glados.views.SearchResults',
       if $btn.hasClass('disabled')
         return
 
-      console.log '@searchParams: ', @searchParams
       base64Params = btoa(JSON.stringify(@searchParams))
       url = glados.Settings.BLAST_SEARCH_RESULTS_PAGE + base64Params
 
       window.location.href = url
       @closeModal()
-
-
-glados.views.SearchResults.SequenceSearchView.states =
-  INITIAL_STATE: 'INITIAL_STATE'
-  LOADING_PARAMS: 'LOADING_PARAMS'
-  LOADING_CONTENT: 'LOADING_CONTENT'
-  CONTENT_LOADED: 'CONTENT_LOADED'

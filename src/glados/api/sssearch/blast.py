@@ -153,9 +153,18 @@ def get_blast_params():
 # ----------------------------------------------------------------------------------------------------------------------
 def queue_blast_job(raw_search_params):
 
+    print('raw_search_params: ', raw_search_params)
     run_url = '{}/run/'.format(BLAST_API_BASE_URL)
-    params = json.loads(raw_search_params)
-    request_data = urlencode(params)
+    search_params = json.loads(raw_search_params)
+
+    # add fixed chembl parameters
+    search_params['database'] = 'chembl'
+    search_params['email'] = 'chembl@ebi.ac.uk'
+    search_params['program'] = 'blastp'
+    print('search_params: ')
+    print(json.dumps(search_params, indent=2))
+
+    request_data = urlencode(search_params)
 
     try:
 
