@@ -48,6 +48,34 @@ def get_sequence_search_status(search_id):
 # ----------------------------------------------------------------------------------------------------------------------
 # Getting params
 # ----------------------------------------------------------------------------------------------------------------------
+PARAMS_SEARCH_LINKS = {
+    'matrix': 'https://www.ebi.ac.uk/seqdb/confluence/pages/viewpage.action?pageId=68167377#NCBIBLAST+'
+              '(ProteinDatabases)-matrix',
+    'gapopen': 'https://www.ebi.ac.uk/seqdb/confluence/pages/viewpage.action?pageId=68167377#NCBIBLAST+'
+               '(ProteinDatabases)-gapopen',
+    'gapext': 'https://www.ebi.ac.uk/seqdb/confluence/pages/viewpage.action?pageId=68167377#NCBIBLAST+'
+              '(ProteinDatabases)-gapext',
+    'exp': 'https://www.ebi.ac.uk/seqdb/confluence/pages/viewpage.action?pageId=68167377#NCBIBLAST+'
+           '(ProteinDatabases)-exp',
+    'filter': 'https://www.ebi.ac.uk/seqdb/confluence/pages/viewpage.action?pageId=68167377#NCBIBLAST+'
+              '(ProteinDatabases)-filter',
+    'dropoff': 'https://www.ebi.ac.uk/seqdb/confluence/pages/viewpage.action?pageId=68167377#NCBIBLAST+'
+               '(ProteinDatabases)-dropoff',
+    'scores': 'https://www.ebi.ac.uk/seqdb/confluence/pages/viewpage.action?pageId=68167377#NCBIBLAST+'
+              '(ProteinDatabases)-scores',
+    'alignments': 'https://www.ebi.ac.uk/seqdb/confluence/pages/viewpage.action?pageId=68167377#NCBIBLAST'
+                  '+(ProteinDatabases)-alignments',
+    'seqrange': 'https://www.ebi.ac.uk/seqdb/confluence/pages/viewpage.action?pageId=68167377#NCBIBLAST+'
+                '(ProteinDatabases)-seqrange',
+    'gapalign': 'https://www.ebi.ac.uk/seqdb/confluence/pages/viewpage.action?pageId=68167377#NCBIBLAST+'
+                '(ProteinDatabases)-gapalign',
+    'align': 'https://www.ebi.ac.uk/seqdb/confluence/pages/viewpage.action?pageId=68167377#NCBIBLAST+'
+             '(ProteinDatabases)-align',
+    'compstats': 'https://www.ebi.ac.uk/seqdb/confluence/pages/viewpage.action?pageId=68167377#NCBIBLAST+'
+                 '(ProteinDatabases)-compstats'
+}
+
+
 def get_blast_params():
 
     cache_key = 'chembl-blast-params'
@@ -63,7 +91,7 @@ def get_blast_params():
 
     all_param_names = [param.text for param in results_root]
     adjustable_params = [p for p in all_param_names if
-                         p not in ['program', 'task', 'match_scores', 'stype', 'database']]
+                         p not in ['program', 'task', 'match_scores', 'stype', 'database', 'transltable']]
     final_params_list = []
     for param_id in adjustable_params:
         param_details_url = '{base_url}/parameterdetails/{param_id}'.format(base_url=BLAST_API_BASE_URL,
@@ -98,7 +126,8 @@ def get_blast_params():
             'param_description': param_description,
             'param_type': param_type,
             'param_values': param_values,
-            'allow_free_input': allow_free_input
+            'allow_free_input': allow_free_input,
+            'param_help_link': PARAMS_SEARCH_LINKS.get(param_id)
         }
 
         final_params_list.append(param_dict)

@@ -37,11 +37,13 @@ glados.useNameSpace 'glados.views.SearchResults',
         thisView = @
         @paramsModel.on 'change', ->
 
-          blastParams = [param for param in thisView.paramsModel.get('params') when param.param_id != 'sequence']
-
+          blastParams = (param for param in thisView.paramsModel.get('params') when param.param_id != 'sequence')
+          templateParams =
+            blast_params: blastParams
           console.log 'blastParams: ', blastParams
+          console.log 'templateParams: ', templateParams
 
-          glados.Utils.fillContentForElement($(thisView.el))
+          glados.Utils.fillContentForElement($(thisView.el), templateParams)
           thisView.initParamsToggler()
 
         @paramsModel.fetch()

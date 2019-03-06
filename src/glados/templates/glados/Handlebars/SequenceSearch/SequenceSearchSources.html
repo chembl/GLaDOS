@@ -48,10 +48,9 @@
 
             <div class="BCK-params-container params-container closed">
 
-                Parameters!!!
                 {{#each blast_params}}
                 <div class="blast-param-selector {{#if this.long}}long{{/if}}">
-                    <a target="_blank" href="{{ this.param_help_link }}">{{this.param_label}}</a>:
+                    <a target="_blank" href="{{ this.param_help_link }}">{{this.param_name}}</a>:
 
                     <select class="BCK-ParamSelect">
 
