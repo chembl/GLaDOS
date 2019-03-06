@@ -104,14 +104,15 @@ def get_blast_params():
         param_description = params_root.find('description').text
         param_type = params_root.find('type').text
         param_values = []
-        allow_free_input = param_name in ['seqrange', 'sequence']
+        allow_free_input = param_id in ['seqrange', 'sequence']
 
         values_elem = params_root.find('values')
         if values_elem is not None:
             for value_desc in values_elem:
                 label = value_desc.find('label').text
                 value = value_desc.find('value').text
-                is_default = bool(value_desc.find('defaultValue').text)
+                is_default_text = value_desc.find('defaultValue').text
+                is_default = True if is_default_text == 'true' else False
 
                 value_dict = {
                     'label': label,
@@ -129,6 +130,13 @@ def get_blast_params():
             'allow_free_input': allow_free_input,
             'param_help_link': PARAMS_SEARCH_LINKS.get(param_id)
         }
+
+        if allow_free_input:
+            for value_dict in param_values:
+                if value_dict['is_default']:
+                    default_value = value_dict['value']
+                    param_dict['default_value'] = default_value
+                    break
 
         final_params_list.append(param_dict)
 

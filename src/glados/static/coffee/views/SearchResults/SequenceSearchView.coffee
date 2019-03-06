@@ -25,8 +25,6 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     initialize: ->
 
-      @selectorsActivated = false
-      @paramsTogglerActivated = false
       @paramsModel = new glados.models.Search.BLASTParamsModel()
       @searchParams = {}
 
@@ -43,8 +41,11 @@ glados.useNameSpace 'glados.views.SearchResults',
           console.log 'blastParams: ', blastParams
           console.log 'templateParams: ', templateParams
 
-          glados.Utils.fillContentForElement($(thisView.el), templateParams)
+          $element = $(thisView.el)
+          glados.Utils.fillContentForElement($element, templateParams)
           thisView.initParamsToggler()
+          $selectors = $element.find('.BCK-ParamSelect')
+          $selectors.material_select()
 
         @paramsModel.fetch()
 
@@ -53,17 +54,7 @@ glados.useNameSpace 'glados.views.SearchResults',
     showModal: ->
 
       $element = $(@el)
-      $selectors = $element.find('.BCK-ParamSelect')
       $element.modal('open')
-
-      if not @selectorsActivated
-        $selectors.material_select()
-        @selectorsActivated = true
-
-      if not @paramsTogglerActivated
-
-        @initParamsToggler()
-        @paramsTogglerActivated = true
 
     initParamsToggler: ->
 
@@ -91,10 +82,8 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       $paramElem = $(event.target)
       paramID = $paramElem.attr('data-param-id')
-      value =
-      console.log 'param updated: ', paramID
-      console.log 'value: ', $paramElem.val()
-#      @searchParams[paramID]
+      value = $paramElem.val()
+      @searchParams[paramID] = value
 
 #-----------------------------------------------------------------------------------------------------------------------
 # Helper buttons

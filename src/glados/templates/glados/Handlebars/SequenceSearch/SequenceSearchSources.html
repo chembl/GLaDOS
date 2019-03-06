@@ -52,12 +52,15 @@
                 <div class="blast-param-selector {{#if this.long}}long{{/if}}">
                     <a target="_blank" href="{{ this.param_help_link }}">{{this.param_name}}</a>:
 
-                    <select class="BCK-ParamSelect">
-
-                      <option value="1" selected >BLOSUM45</option>
-                      <option value="2">BLOSUM50</option>
-                      <option value="3">BLOSUM62</option>
-                    </select>
+                    {{#if this.allow_free_input }}
+                        <input value="{{ this.default_value }}">
+                    {{ else }}
+                        <select class="BCK-ParamSelect BCK-search-param" data-param-id="{{ this.param_id }}">
+                            {{#each this.param_values}}
+                                <option value="{{ this.value }}" {{#if this.is_default }}selected{{/if  }} >{{ this.label }}</option>
+                            {{/each}}
+                        </select>
+                    {{/if  }}
                 </div>
                 {{/each}}
 
@@ -69,7 +72,7 @@
 
         </div>
         <div class="search-button-container">
-            <a class="btn-chembl">
+            <a class="btn-chembl disabled BCK-trigger-search">
                 3. Search in ChEMBL
             </a>
         </div>
