@@ -68,6 +68,21 @@ def request_sssearch_status(request, search_id):
         return HttpResponse('Internal Server Error', status=500)
 
 
+def get_blast_params(request):
+
+    if request.method != "GET":
+        return JsonResponse({'error': 'This is only available via GET'})
+
+    try:
+
+        response = blast.get_blast_params()
+        return JsonResponse(response)
+
+    except Exception as e:
+
+        traceback.print_exc()
+        return HttpResponse('Internal Server Error', status=500)
+
 # ----------------------------------------------------------------------------------------------------------------------
 # Loading context
 # ----------------------------------------------------------------------------------------------------------------------

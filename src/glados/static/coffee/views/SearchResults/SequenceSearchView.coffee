@@ -96,9 +96,18 @@ glados.useNameSpace 'glados.views.SearchResults',
         @paramsModel = new glados.models.Search.BLASTParamsModel()
 
       if not @paramsModel.paramsLoaded()
+
         @paramsModel.fetch()
 
+        thisView = @
+        @paramsModel.on 'error', ->
+          $paramsContainer = $(thisView.el).find('.BCK-params-container')
+          $paramsContainer.text('There was an error while loading the parameters. Please try again later.')
+
+
       console.log '@paramsModel: ', @paramsModel
+
+
 
     useExampleSequence: ->
 
