@@ -13,6 +13,7 @@ import traceback
 from glados import glados_server_statistics
 from dateutil import parser
 import socket
+from django.core.cache import cache
 
 
 BLAST_API_BASE_URL = 'https://www.ebi.ac.uk/Tools/services/rest/ncbiblast'
@@ -48,6 +49,11 @@ def get_sequence_search_status(search_id):
 # Getting params
 # ----------------------------------------------------------------------------------------------------------------------
 def get_blast_params():
+
+    cache_key = 'chembl-blast-params'
+    cached_response = cache.get(cache_key)
+    if cached_response is not None:
+        return cached_response
 
     params_url = '{}/parameters'.format(BLAST_API_BASE_URL)
 
@@ -99,6 +105,8 @@ def get_blast_params():
     response = {
         'params': final_params_list
     }
+
+    cache.set(cache_key, response, 86400)
     return response
 
 
