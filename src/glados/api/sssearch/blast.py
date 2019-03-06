@@ -158,9 +158,24 @@ def queue_blast_job(raw_search_params):
     search_params = json.loads(raw_search_params)
 
     # add fixed chembl parameters
+    search_params['alignments'] ='50'
     search_params['database'] = 'chembl'
+    search_params['gapopen'] = '-1'
+    search_params['gapalign'] = 'true'
+    search_params['scores'] = '50'
+    search_params['matrix'] = 'BLOSUM62'
+    search_params['dropoff'] ='0'
     search_params['email'] = 'chembl@ebi.ac.uk'
+    search_params['align'] = '0'
+    search_params['transltable'] = '1'
+    search_params['gapext'] = '-1'
     search_params['program'] = 'blastp'
+    search_params['stype'] = 'protein'
+    search_params['filter'] = 'F'
+    search_params['task'] = 'blastp'
+    search_params['exp'] = 10
+    search_params['compstats'] = 'F'
+    
     print('search_params: ')
     print(json.dumps(search_params, indent=2))
 
