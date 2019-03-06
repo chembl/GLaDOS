@@ -20,8 +20,11 @@ glados.useNameSpace 'glados.views.SearchResults',
       'click .BCK-upload-sequence': 'clickOnUploadSequenceInput'
       'change .BCK-upload-sequence-input': 'processFile'
       'input .BCK-sequence-textarea': 'resetFileInput'
+      'input .BCK-sequence-textarea': 'toggleSearchButtonEnabling'
+      'change .BCK-sequence-textarea': 'toggleSearchButtonEnabling'
       'input .BCK-search-param': 'updateParam'
       'change .BCK-search-param': 'updateParam'
+      'click .BCK-trigger-search': 'triggerSearch'
 
     initialize: ->
 
@@ -31,15 +34,12 @@ glados.useNameSpace 'glados.views.SearchResults',
     render: ->
 
       if @paramsModel.isNew()
-        console.log 'loading params'
         thisView = @
         @paramsModel.on 'change', ->
 
           blastParams = (param for param in thisView.paramsModel.get('params') when param.param_id != 'sequence')
           templateParams =
             blast_params: blastParams
-          console.log 'blastParams: ', blastParams
-          console.log 'templateParams: ', templateParams
 
           $element = $(thisView.el)
           glados.Utils.fillContentForElement($element, templateParams)
@@ -55,6 +55,11 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       $element = $(@el)
       $element.modal('open')
+
+    closeModal: ->
+
+      $element = $(@el)
+      $element.modal('close')
 
     initParamsToggler: ->
 
@@ -127,8 +132,33 @@ glados.useNameSpace 'glados.views.SearchResults',
       reader.onerror = ->
         alert('There was an error while loading the file. Please try again.')
 
-
       reader.readAsText(input.files[0])
+
+#-----------------------------------------------------------------------------------------------------------------------
+# Trigger Search
+#-----------------------------------------------------------------------------------------------------------------------
+    toggleSearchButtonEnabling: ->
+
+      $searchBtn = $(@el).find('.BCK-trigger-search')
+      $textArea = $(@el).find('.BCK-sequence-textarea')
+      currentText = $textArea.val()
+      if currentText == ''
+        $searchBtn.addClass('disabled')
+      else
+        $searchBtn.removeClass('disabled')
+
+    triggerSearch: (event) ->
+
+      $btn = $(event.target)
+      if $btn.hasClass('disabled')
+        return
+
+      console.log '@searchParams: ', @searchParams
+      base64Params = btoa(JSON.stringify(@searchParams))
+      url = glados.Settings.BLAST_SEARCH_RESULTS_PAGE + base64Params
+
+      window.location.href = url
+      @closeModal()
 
 
 glados.views.SearchResults.SequenceSearchView.states =

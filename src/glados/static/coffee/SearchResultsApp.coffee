@@ -136,6 +136,7 @@ class SearchResultsApp
     }
 
     console.log 'searchParams: ', searchParams
+    return
     @initSSSearchResults(searchParams, glados.models.Search.StructureSearchModel.SEARCH_TYPES.SEQUENCE.BLAST)
 
 
