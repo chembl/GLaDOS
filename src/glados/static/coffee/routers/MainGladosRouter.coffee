@@ -6,6 +6,7 @@ glados.useNameSpace 'glados.routers',
       'substructure_search_results/:search_term': 'initSubstructureSearchResults'
       'similarity_search_results/:search_term/:threshold': 'initSimilaritySearchResults'
       'flexmatch_search_results/:search_term': 'initFlexmatchSearchResults'
+      'blast_search_results/:base64Params': 'initBLASTSearchResults'
       'browse/:entity_name(/filter/:filter)(/state/:state)': 'initBrowser'
       'browse/:entity_name(/query/:query)(/state/:state)': 'initBrowser'
       'browse/:entity_name(/full_state/:encoded_state)': 'initBrowserFullState'
@@ -42,6 +43,10 @@ glados.useNameSpace 'glados.routers',
     initFlexmatchSearchResults: (searchTerm) ->
       glados.helpers.URLHelper.getInstance().resetStateAndBindings()
       glados.apps.Main.MainGladosApp.initFlexmatchSearchResults(searchTerm)
+
+    initBLASTSearchResults: (base64Params) ->
+      glados.helpers.URLHelper.getInstance().resetStateAndBindings()
+      glados.apps.Main.MainGladosApp.initBLASTSearchResults(base64Params)
 
     initBrowser: (entityName, query, state) ->
       glados.helpers.URLHelper.getInstance().setMode(glados.helpers.URLHelper.MODES.BROWSE_ENTITY)

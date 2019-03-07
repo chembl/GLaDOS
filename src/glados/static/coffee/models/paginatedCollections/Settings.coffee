@@ -84,8 +84,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           Table:
             Default: Target.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
             Additional: Target.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL
-          Carousel:
-            Default: Target.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
         DOWNLOAD_COLUMNS: Target.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.TargetSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
@@ -311,6 +309,28 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         SHOW_SUBSTRUCTURE_HIGHLIGHTING: false
         ENABLE_COLLECTION_CACHING: true
         DISABLE_CACHE_ON_DOWNLOAD: true
+        LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
+      TARGET_BLAST_RESULTS:
+        ID_NAME: 'ESTarget'
+        LABEL: 'Targets'
+        INDEX_NAME: 'chembl_target'
+        BROWSE_LIST_URL: Target.getTargetsListURL
+        # PATH: Assigned after this declaration using the INDEX_NAME
+        MODEL: Target
+        ID_COLUMN: Target.ID_COLUMN
+        COLUMNS: Target.COLUMNS_SETTINGS.ALL_COLUMNS
+        COLUMNS_DESCRIPTION:
+          Table:
+            Default: Target.COLUMNS_SETTINGS.RESULTS_LIST_BLAST
+            Additional: Target.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL
+        DOWNLOAD_COLUMNS: Target.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS
+        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.TargetSchema.FACETS_GROUPS
+        DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
+          glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
+        AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
+          glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Heatmap]
+        DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
+        ENABLE_COLLECTION_CACHING: true
         LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
       COMPOUND_SIMILARITY_MAPS:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES

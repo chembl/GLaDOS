@@ -66,12 +66,6 @@ common_urls = [
                 template_name="glados/Handlebars/LazilyLoaded/Visualisations/VisualisationsSources.html")
         ), ),
 
-    url(r'^handlebars/search_sources/$',
-        xframe_options_exempt(
-            DirectTemplateView.as_view(
-                template_name="glados/Handlebars/LazilyLoaded/Search/SearchSources.html")
-        ), name='handlebars-search'),
-
     url(r'^design_components/$', views.design_components, name='design_components'),
 
     url(r'^marvin_search_fullscreen/$',
@@ -248,17 +242,6 @@ common_urls = [
     url(r'^elasticsearch_cache', views.elasticsearch_cache, name='elasticsearch_cache'),
 
     # --------------------------------------------------------------------------------------------------------------------
-    # Structure searches helper
-    # --------------------------------------------------------------------------------------------------------------------
-    url(r'^submit_sustructure_search', views.submit_sustructure_search, name='submit_sustructure_search'),
-
-    # --------------------------------------------------------------------------------------------------------------------
-    # Lists Helper
-    # --------------------------------------------------------------------------------------------------------------------
-    url(r'^chembl_list_helper', views.chembl_list_helper, name='chembl_list_helper'),
-    url(r'^sssearch-progress/(?P<search_id>.*)$', views.get_sssearch_status, name='get_sssearch_status'),
-
-    # --------------------------------------------------------------------------------------------------------------------
     # Tracking
     # --------------------------------------------------------------------------------------------------------------------
     url(r'^register_usage', views.register_usage, name='register_usage'),
@@ -273,9 +256,6 @@ common_urls = [
     # --------------------------------------------------------------------------------------------------------------------
     url(r'^api/', include('unichem.api.urls')),
     # --------------------------------------------------------------------------------------------------------------------
-    # Unichem API
-    # --------------------------------------------------------------------------------------------------------------------
-    url(r'^api/', include('unichem.api.urls')),
 
     # --------------------------------------------------------------------------------------------------------------------
     # django RQ (Redis Queue)

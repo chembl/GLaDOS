@@ -10,7 +10,8 @@ glados.useNameSpace 'glados.apps.Main',
     @baseTemplates:
       main_page: 'Handlebars-MainPageLayout'
       search_results: 'Handlebars-SearchResultsLayout'
-      structure_search_results: 'Handlebars-SubstructureSearchResultsLayout'
+      sss_search_results: 'Handlebars-SubstructureSearchResultsLayout'
+      blast_search_results: 'Handlebars-BLASTSearchResultsLayout'
       browser: 'Handlebars-MainBrowserContent'
       unichem_connectivity: 'Handlebars-MainUnichemConnectivityContent'
 
@@ -80,13 +81,6 @@ glados.useNameSpace 'glados.apps.Main',
     # ------------------------------------------------------------------------------------------------------------------
     @initMainPage = ->
 
-#      window.location.href = '/main'
-#      glados.apps.BreadcrumbApp.setBreadCrumb([], undefined, hideShareButton=true)
-#      promise = @prepareContentFor('main_page')
-#
-#      promise.then ->
-#        MainPageApp.init()
-
     # ------------------------------------------------------------------------------------------------------------------
     # Search Results
     # ------------------------------------------------------------------------------------------------------------------
@@ -101,13 +95,14 @@ glados.useNameSpace 'glados.apps.Main',
 
       templateParams =
         type: 'Substructure'
-      promise = @prepareContentFor('structure_search_results', templateParams)
+        query_view_template: 'Handlebars-Common-StructureQuery'
+      promise = @prepareContentFor('sss_search_results', templateParams)
 
       promise.then ->
         breadcrumbLinks = [
           {
             label: 'Substructure Search Results'
-            link: "#{glados.Settings.SUBSTRUCTURE_SEARCH_RESULTS_PAGE}#{searchTerm}"
+            link: "#{glados.Settings.SUBsss_search_results_PAGE}#{searchTerm}"
           }
         ]
 
@@ -119,7 +114,8 @@ glados.useNameSpace 'glados.apps.Main',
 
       templateParams =
         type: 'Similarity'
-      promise = @prepareContentFor('structure_search_results', templateParams)
+        query_view_template: 'Handlebars-Common-StructureQuery'
+      promise = @prepareContentFor('sss_search_results', templateParams)
 
       promise.then ->
         breadcrumbLinks = [
@@ -136,8 +132,9 @@ glados.useNameSpace 'glados.apps.Main',
     @initFlexmatchSearchResults = (searchTerm) ->
 
       templateParams =
-        type: ''
-      promise = @prepareContentFor('structure_search_results', templateParams)
+        type: 'Connectivity'
+        query_view_template: 'Handlebars-Common-StructureQuery'
+      promise = @prepareContentFor('sss_search_results', templateParams)
 
       promise.then ->
         breadcrumbLinks = [
@@ -149,6 +146,27 @@ glados.useNameSpace 'glados.apps.Main',
         glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks, longFilter=undefined,
           hideShareButton=false, longFilterURL=undefined, askBeforeShortening=true)
         SearchResultsApp.initFlexmatchSearchResults(searchTerm)
+
+    @initBLASTSearchResults = (base64Params) ->
+
+      templateParams =
+        type: 'BLAST'
+        query_view_template: 'Handlebars-Common-BLASTQuery'
+      promise = @prepareContentFor('sss_search_results', templateParams)
+
+      promise.then ->
+
+        breadcrumbLinks = [
+          {
+            label: 'BLAST Search Results'
+            link: "#{glados.Settings.BLAST_SEARCH_RESULTS_PAGE}#{base64Params}"
+          }
+        ]
+
+        glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks, longFilter=undefined,
+          hideShareButton=false, longFilterURL=undefined, askBeforeShortening=true)
+
+        SearchResultsApp.initBLASTSearchResults(base64Params)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Entity Browsers

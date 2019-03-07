@@ -29,7 +29,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     initializeSequenceSearchButtons: ->
       $enterSequenceButton = $(@el).find('.BCK-Enter-Sequence')
-      $enterSequenceButton.click glados.helpers.SequenceSearchHelper.showSequenceSearchModal
+      $enterSequenceButton.click (-> glados.helpers.SequenceSearchHelper.showSequenceSearchModal())
     # ------------------------------------------------------------------------------------------------------------------
     # Events Handling
     # ------------------------------------------------------------------------------------------------------------------

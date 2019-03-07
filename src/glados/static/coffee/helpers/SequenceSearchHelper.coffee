@@ -1,14 +1,13 @@
 glados.useNameSpace 'glados.helpers',
   SequenceSearchHelper: class SequenceSearchHelper
 
-    @showSequenceSearchModal = ->
+    @showSequenceSearchModal = (queryParams) ->
 
       modalID = 'modal-EnterASequence'
       $modal = $("#BCK-GeneratedModalsContainer ##{modalID}")
 
       if $modal.length == 0
 
-        console.log 'creating modal'
         $modal = ButtonsHelper.generateModalFromTemplate($trigger=undefined, 'Handlebars-Common-SequenceSearch',
           startingTop=undefined, endingTop=undefined, customID=modalID)
 
@@ -17,4 +16,4 @@ glados.useNameSpace 'glados.helpers',
         @sequenceSearchView = new glados.views.SearchResults.SequenceSearchView
           el: $modal
 
-      @sequenceSearchView.render()
+      @sequenceSearchView.render(queryParams)
