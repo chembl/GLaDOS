@@ -30,6 +30,11 @@ def get_sequence_search_status(search_id):
             'status': SSSearchJob.ERROR,
             'msg': 'Search submission not found, it may have expired. Please run the search again.'
         }
+    elif status_response == 'FAILURE':
+        response = {
+            'status': SSSearchJob.ERROR,
+            'msg': 'There was an error in the EBI BLAST Search.'
+        }
     elif status_response == 'RUNNING':
         response = {
             'status': SSSearchJob.SEARCH_QUEUED
