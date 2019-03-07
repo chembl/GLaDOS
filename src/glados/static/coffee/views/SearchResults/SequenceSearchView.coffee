@@ -33,7 +33,6 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     render: (queryParams) ->
 
-      console.log 'queryParams: ', queryParams
       if @paramsModel.isNew()
         thisView = @
 
@@ -46,20 +45,14 @@ glados.useNameSpace 'glados.views.SearchResults',
           else
             previousSequence = ''
 
-          console.log 'queryParams: ', queryParams
-
           for param_obj in blastParams
 
             param_id = param_obj.param_id
             if queryParams?
               previousValue = queryParams[param_id]
 
-            console.log 'param_id: ', param_id
-            console.log 'previousValue: ', previousValue
-
             if not previousValue?
-              console.log 'using detault value'
-              
+
               if param_obj.allow_free_input
                 param_obj.current_value = param_obj.default_value
               else
@@ -68,21 +61,11 @@ glados.useNameSpace 'glados.views.SearchResults',
 
             else
 
-              console.log 'using preset value: ', previousValue
               if param_obj.allow_free_input
                 param_obj.current_value = previousValue
-                console.log 'current value set is', previousValue
               else
                 for value_obj in param_obj.param_values
                   value_obj.is_selected = value_obj.value == previousValue
-                  if value_obj.is_selected
-                    console.log 'selected value: ', previousValue
-
-              console.log 'param_obj: ', param_obj
-
-            console.log '---'
-
-          console.log 'blastParams: ', blastParams
 
           templateParams =
             blast_params: blastParams
