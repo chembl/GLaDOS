@@ -9,7 +9,7 @@ from elasticsearch_dsl.connections import connections
 import json
 import traceback
 from glados import glados_server_statistics
-from glados.api.sssearch import structure_and_sequence_search_manager
+from glados.api.sssearch import search_manager
 import gzip
 import os
 from django.conf import settings
@@ -186,7 +186,7 @@ def write_csv_or_tsv_file(scanner, download_job, cols_to_download, index_name, c
     context = None
     if context_id is not None:
         sssearch_job = SSSearchJob.objects.get(search_id=context_id)
-        context, total_results = structure_and_sequence_search_manager.get_search_results_context(sssearch_job, False)
+        context, total_results = search_manager.get_search_results_context(sssearch_job, False)
         context_index = {}
         for item in context:
             context_index[item[id_property]] = item

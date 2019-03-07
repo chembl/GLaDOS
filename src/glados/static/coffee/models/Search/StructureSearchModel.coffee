@@ -13,7 +13,7 @@ glados.useNameSpace 'glados.models.Search',
         search_type: @get('search_type')
         raw_search_params: JSON.stringify(@get('query_params'))
 
-      submitPromise = glados.doCSRFPost(glados.Settings.CHEMBL_SUBMIT_STRUCTURE_SEARCH_ENDPOINT, paramsDict)
+      submitPromise = glados.doCSRFPost(glados.Settings.CHEMBL_SUBMIT_SS_SEARCH_ENDPOINT, paramsDict)
       thisModel = @
       submitPromise.then (data) ->
 
@@ -29,16 +29,21 @@ glados.useNameSpace 'glados.models.Search',
     #-------------------------------------------------------------------------------------------------------------------
     # Check search progress
     #-------------------------------------------------------------------------------------------------------------------
-    getProgressURL: -> "#{glados.Settings.GLADOS_BASE_PATH_REL}api/chembl/sssearch/sssearch-progress/#{@get('search_id')}"
+    getProgressURL: ->
+
+      url = "#{glados.Settings.GLADOS_BASE_PATH_REL}api/chembl/sssearch/sssearch-progress/#{@get('search_id')}"
+      if @get('search_type') == glados.models.Search.StructureSearchModel.SEARCH_TYPES.SEQUENCE.BLAST
+        url += "?is_blast=True"
+      return url
+
+
     checkSearchStatusPeriodically: ->
 
-      console.log 'checkSearchStatusPeriodically'
       progressURL = @getProgressURL()
       thisModel = @
       getProgress = $.get(progressURL)
 
       getProgress.then (response) ->
-
         status = response.status
         if status == 'ERROR'
 
@@ -52,6 +57,11 @@ glados.useNameSpace 'glados.models.Search',
         else if status == 'SEARCHING'
 
           thisModel.setState(glados.models.Search.StructureSearchModel.STATES.SEARCHING)
+          setTimeout(thisModel.checkSearchStatusPeriodically.bind(thisModel), 1000)
+
+        else if status == 'LOADING_RESULTS'
+
+          thisModel.setState(glados.models.Search.StructureSearchModel.STATES.LOADING_RESULTS)
           setTimeout(thisModel.checkSearchStatusPeriodically.bind(thisModel), 1000)
 
         else if status == 'FINISHED'
@@ -70,7 +80,6 @@ glados.useNameSpace 'glados.models.Search',
       if newState == glados.models.Search.StructureSearchModel.STATES.SEARCH_QUEUED
         @checkSearchStatusPeriodically()
       else if newState == glados.models.Search.StructureSearchModel.STATES.FINISHED
-        console.log 'trigger results are ready'
         @trigger(glados.models.Search.StructureSearchModel.EVENTS.RESULTS_READY)
 
       @set('state', newState)
@@ -80,7 +89,16 @@ glados.models.Search.StructureSearchModel.STATES =
   ERROR_STATE: 'ERROR_STATE'
   SEARCH_QUEUED: 'SEARCH_QUEUED'
   SEARCHING: 'SEARCHING'
+  LOADING_RESULTS: 'LOADING_RESULTS'
   FINISHED: 'FINISHED'
 
 glados.models.Search.StructureSearchModel.EVENTS =
   RESULTS_READY: 'RESULTS_READY'
+
+glados.models.Search.StructureSearchModel.SEARCH_TYPES =
+  STRUCTURE:
+    SIMILARITY: 'SIMILARITY'
+    SUBSTRUCTURE: 'SUBSTRUCTURE'
+    CONNECTIVITY: 'CONNECTIVITY'
+  SEQUENCE:
+    BLAST: 'BLAST'

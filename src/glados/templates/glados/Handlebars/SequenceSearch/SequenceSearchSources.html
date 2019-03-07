@@ -1,12 +1,80 @@
 {% verbatim %}
 <script id="Handlebars-Common-SequenceSearch" type="text/x-handlebars-template">
-
-    <div id="{{id}}" class='modal sequence-search-menu-wrapper' data-hb-template='Handlebars-Search-SequenceSearch'
-         data-hb-is-lazy="true"
-         {% endverbatim %}
-         data-hb-src="{% url 'handlebars-search' %}">
-        {% verbatim %}
-
+    <div id="{{id}}" class='modal sequence-search-menu-wrapper' data-hb-template='Handlebars-Search-SequenceSearch'>
+        Loading...
     </div>
 </script>
+
+<script id="Handlebars-Search-SequenceSearch" type="text/x-handlebars-template">
+
+    <div class="sequence-search-menu-container">
+        <div class="enter-a-sequence">
+            <div>1. Enter or paste a sequence in any
+            <a href="https://www.ebi.ac.uk/seqdb/confluence/pages/viewpage.action?pageId=68167377#NCBIBLAST+(ProteinDatabases)-sequence"
+            target="_blank">
+                supported format</a>:
+            </div>
+
+            <div class="sequence-textarea-container">
+                <textarea class="BCK-sequence-textarea BCK-search-param" data-param-id="sequence" >{{ previous_sequence }}</textarea>
+                <div class="input-options-container" >
+                    <div>
+                        <a class="BCK-use-example-sequence dotted-link">Use a example sequence</a>
+                    </div>
+                    <div>
+                        <a class="BCK-clear-sequence dotted-link">Clear sequence</a>
+                    </div>
+                    <div>
+                        <a class="BCK-upload-sequence dotted-link">Upload a file</a>
+                    </div>
+                </div>
+                <input accept='.fasta, .FASTA, .GENBANK, .gcg, .PIR, .pir, .txt'
+                       class="upload-file-input BCK-upload-sequence-input" type='file'>
+            </div>
+
+        </div>
+        <div class="define-your-parameters">
+            <div class="header-text">
+                <div>2. Modify the parameters for <b>blastp</b> (optional):
+                </div>
+                <div>
+                    <a class="BCK-show-parameters dotted-link"> Show Parameters</a>
+                </div>
+            </div>
+
+            <div>
+
+            </div>
+
+            <div class="BCK-params-container params-container closed">
+
+                {{#each blast_params}}
+                <div class="blast-param-selector {{#if this.long}}long{{/if}}">
+                    <a target="_blank" href="{{ this.param_help_link }}">{{this.param_name}}</a>:
+
+                    {{#if this.allow_free_input }}
+                        <input class= "BCK-search-param" data-param-id="{{ this.param_id }}" value="{{ this.current_value }}">
+                    {{ else }}
+                        <select class="BCK-ParamSelect BCK-search-param" data-param-id="{{ this.param_id }}">
+                            {{#each this.param_values}}
+                                <option value="{{ this.value }}" {{#if this.is_selected }}selected{{/if  }} >{{ this.label }}</option>
+                            {{/each}}
+                        </select>
+                    {{/if  }}
+                </div>
+                {{/each}}
+
+
+            </div>
+
+        </div>
+        <div class="search-button-container">
+            <a class="btn-chembl disabled BCK-trigger-search">
+                3. Search in ChEMBL
+            </a>
+        </div>
+    </div>
+</script>
+
+
 {% endverbatim %}

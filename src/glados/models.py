@@ -149,7 +149,7 @@ class ESSearchRecord(models.Model):
 
 # This is to keep track of the status of a download job
 class DownloadJob(models.Model):
-    job_id = models.TextField(max_length=500)
+    job_id = models.CharField(max_length=250, primary_key=True)
     progress = models.PositiveSmallIntegerField(default=0)
     total_items = models.PositiveIntegerField(default=0)
     raw_columns_to_download = models.TextField(null=True)
@@ -179,29 +179,33 @@ class DownloadJob(models.Model):
 
 
 class SSSearchJob(models.Model):
-    search_id = models.TextField(max_length=250)
+    search_id = models.CharField(max_length=250, primary_key=True)
     SIMILARITY = 'SIMILARITY'
     SUBSTRUCTURE = 'SUBSTRUCTURE'
     CONNECTIVITY = 'CONNECTIVITY'
+    BLAST = 'BLAST'
 
     CONTEXT_PREFIX = '_context'
 
     SEARCH_TYPES = (
         (SIMILARITY, SIMILARITY),
         (SUBSTRUCTURE, SUBSTRUCTURE),
-        (CONNECTIVITY, CONNECTIVITY)
+        (CONNECTIVITY, CONNECTIVITY),
+        (BLAST, BLAST)
     )
 
     search_type = models.CharField(max_length=20, choices=SEARCH_TYPES)
 
     SEARCH_QUEUED = 'SEARCH_QUEUED'
     SEARCHING = 'SEARCHING'
+    LOADING_RESULTS = 'LOADING_RESULTS'
     FINISHED = 'FINISHED'
     ERROR = 'ERROR'
 
     STATUSES = (
         (SEARCH_QUEUED, SEARCH_QUEUED),
         (SEARCHING, SEARCHING),
+        (LOADING_RESULTS, LOADING_RESULTS),
         (FINISHED, FINISHED),
         (ERROR, ERROR)
     )
@@ -210,3 +214,4 @@ class SSSearchJob(models.Model):
     status = models.CharField(max_length=20, choices=STATUSES, default=SEARCH_QUEUED)
     worker = models.TextField(max_length=250, null=True)
     log = models.TextField(null=True)
+    error_message = models.TextField(null=True)

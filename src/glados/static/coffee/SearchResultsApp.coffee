@@ -1,11 +1,5 @@
 class SearchResultsApp
 
-  SEARCH_TYPES =
-    STRUCTURE:
-      SIMILARITY: 'SIMILARITY'
-      SUBSTRUCTURE: 'SUBSTRUCTURE'
-      CONNECTIVITY: 'CONNECTIVITY'
-
   # --------------------------------------------------------------------------------------------------------------------
   # Initialization
   # --------------------------------------------------------------------------------------------------------------------
@@ -25,33 +19,26 @@ class SearchResultsApp
     stateObject = if currentState? then JSON.parse(atob(currentState)) else undefined
     SearchModel.getInstance().search(searchTerm, selectedESEntity, stateObject)
 
-  # --------------------------------------------------------------------------------------------------------------------
-  # Views
-  # --------------------------------------------------------------------------------------------------------------------
-  @initSSSearchResults = (searchParams, search_type) ->
+  @initSSSearchResults = (searchParams, searchType) ->
 
     GlobalVariables.SEARCH_TERM = searchParams.search_term
 
     ssSearchModel = new glados.models.Search.StructureSearchModel
       query_params: searchParams
-      search_type: search_type
+      search_type: searchType
 
     $queryContainer = $('.BCK-query-Container')
-    new glados.views.SearchResults.StructureQueryView
-      el: $queryContainer
-      model: ssSearchModel
+    if searchType == glados.models.Search.StructureSearchModel.SEARCH_TYPES.SEQUENCE.BLAST
+      @initSequenceQueryView($queryContainer, ssSearchModel)
+    else
+      @initStructureQueryView($queryContainer, ssSearchModel)
+
 
     $browserContainer = $('.BCK-BrowserContainer')
     $browserContainer.hide()
     $noResultsDiv = $('.no-results-found')
 
-    if search_type == SEARCH_TYPES.STRUCTURE.SIMILARITY
-
-      listConfig = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_SIMILARITY_MAPS
-
-    else if search_type == SEARCH_TYPES.STRUCTURE.SUBSTRUCTURE or search_type == SEARCH_TYPES.CONNECTIVITY
-
-      listConfig = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.SUBSTRUCTURE_RESULTS_LIST
+    listConfig = @getListConfig(searchType)
 
     thisApp = @
     ssSearchModel.once glados.models.Search.StructureSearchModel.EVENTS.RESULTS_READY, ->
@@ -61,12 +48,47 @@ class SearchResultsApp
 
     ssSearchModel.submitSearch()
 
+  @initSequenceQueryView = ($queryContainer, ssSearchModel) ->
+
+    new glados.views.SearchResults.SequenceQueryView
+      el: $queryContainer
+      model: ssSearchModel
+
+  @initStructureQueryView = ($queryContainer, ssSearchModel) ->
+
+    new glados.views.SearchResults.StructureQueryView
+      el: $queryContainer
+      model: ssSearchModel
+
+  # --------------------------------------------------------------------------------------------------------------------
+  # List Config
+  # --------------------------------------------------------------------------------------------------------------------
+  @getListConfig = (searchType) ->
+
+    if searchType == glados.models.Search.StructureSearchModel.SEARCH_TYPES.STRUCTURE.SIMILARITY
+
+      listConfig = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_SIMILARITY_MAPS
+
+    else if searchType == glados.models.Search.StructureSearchModel.SEARCH_TYPES.STRUCTURE.SUBSTRUCTURE or \
+    searchType == glados.models.Search.StructureSearchModel.SEARCH_TYPES.STRUCTURE.CONNECTIVITY
+
+      listConfig = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.SUBSTRUCTURE_RESULTS_LIST
+
+    else if searchType == glados.models.Search.StructureSearchModel.SEARCH_TYPES.SEQUENCE.BLAST
+
+      listConfig = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.TARGET_BLAST_RESULTS
+
+    return listConfig
+
+  # --------------------------------------------------------------------------------------------------------------------
+  # Router functions
+  # --------------------------------------------------------------------------------------------------------------------
   @initSubstructureSearchResults = (searchTerm) ->
 
     searchParams =
       search_term: searchTerm
 
-    @initSSSearchResults(searchParams, SEARCH_TYPES.STRUCTURE.SUBSTRUCTURE)
+    @initSSSearchResults(searchParams, glados.models.Search.StructureSearchModel.SEARCH_TYPES.STRUCTURE.SUBSTRUCTURE)
 
 
   @initSimilaritySearchResults = (searchTerm, threshold) ->
@@ -75,7 +97,7 @@ class SearchResultsApp
       search_term: searchTerm
       threshold: threshold
 
-    @initSSSearchResults(searchParams, SEARCH_TYPES.STRUCTURE.SIMILARITY)
+    @initSSSearchResults(searchParams, glados.models.Search.StructureSearchModel.SEARCH_TYPES.STRUCTURE.SIMILARITY)
 
 
   @initFlexmatchSearchResults = (searchTerm) ->
@@ -83,8 +105,13 @@ class SearchResultsApp
     searchParams =
       search_term: searchTerm
 
-    @initSSSearchResults(searchParams, SEARCH_TYPES.STRUCTURE.CONNECTIVITY)
+    @initSSSearchResults(searchParams, glados.models.Search.StructureSearchModel.SEARCH_TYPES.STRUCTURE.CONNECTIVITY)
 
+  @initBLASTSearchResults = (base64Params) ->
+
+    searchParams = JSON.parse(atob(base64Params))
+
+    @initSSSearchResults(searchParams, glados.models.Search.StructureSearchModel.SEARCH_TYPES.SEQUENCE.BLAST)
 
   @initBrowserFromSSResults = ($browserContainer, $noResultsDiv, customSettings, ssSearchModel) ->
 

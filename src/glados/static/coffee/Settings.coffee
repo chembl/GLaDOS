@@ -244,6 +244,10 @@ glados.loadURLPaths = (request_root, app_root, static_root)->
 
   glados.Settings.FLEXMATCH_SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL +
     'flexmatch_search_results/'
+
+  glados.Settings.BLAST_SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL +
+    'blast_search_results/'
+
   glados.Settings.WS_BASE_FLEXMATCH_SEARCH_URL = 'https://www.ebi.ac.uk/chembl/api/data/molecule.json'
 
   glados.Settings.BASE_COMPOUND_METABOLISM_FS_URL = '/compound_metabolism/'
@@ -304,7 +308,7 @@ glados.loadSearchResultsURLS = ()->
   glados.Settings.REGISTER_USAGE_ENDPOINT = 'register_usage'
   glados.Settings.REGISTER_SEARCH_ENDPOINT = 'register_search'
   glados.Settings.CHEMBL_LIST_HELPER_ENDPOINT = 'api/chembl/list_pagination/get_page'
-  glados.Settings.CHEMBL_SUBMIT_STRUCTURE_SEARCH_ENDPOINT = 'api/chembl/sssearch/submit_substructure_search/'
+  glados.Settings.CHEMBL_SUBMIT_SS_SEARCH_ENDPOINT = 'api/chembl/sssearch/submit/'
   glados.Settings.CHEMBL_LIST_HELPER_URL = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{glados.Settings.CHEMBL_LIST_HELPER_ENDPOINT}"
   glados.Settings.SHORTEN_URLS_URL = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{glados.Settings.SHORTEN_URLS_ENDPOINT}"
   glados.Settings.EXTEND_URLS_ENDPOINT_URL = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{glados.Settings.EXTEND_URLS_ENDPOINT}"

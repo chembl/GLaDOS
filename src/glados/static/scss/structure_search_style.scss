@@ -25,6 +25,19 @@
       }
     }
 
+    &.blast{
+      .query-details {
+        width: 100%;
+        margin-left: 0;
+        word-wrap: break-word;
+      }
+    }
+
+  }
+
+  .ebi-blast-search-details{
+    padding: 10px;
+    text-align: center;
   }
 
   .edit-query{
