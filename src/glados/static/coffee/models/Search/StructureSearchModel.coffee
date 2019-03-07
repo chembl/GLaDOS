@@ -39,13 +39,11 @@ glados.useNameSpace 'glados.models.Search',
 
     checkSearchStatusPeriodically: ->
 
-      console.log 'checkSearchStatusPeriodically'
       progressURL = @getProgressURL()
       thisModel = @
       getProgress = $.get(progressURL)
 
       getProgress.then (response) ->
-        console.log 'response: ', response
         status = response.status
         if status == 'ERROR'
 
@@ -82,7 +80,6 @@ glados.useNameSpace 'glados.models.Search',
       if newState == glados.models.Search.StructureSearchModel.STATES.SEARCH_QUEUED
         @checkSearchStatusPeriodically()
       else if newState == glados.models.Search.StructureSearchModel.STATES.FINISHED
-        console.log 'trigger results are ready'
         @trigger(glados.models.Search.StructureSearchModel.EVENTS.RESULTS_READY)
 
       @set('state', newState)

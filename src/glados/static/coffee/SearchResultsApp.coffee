@@ -27,8 +27,6 @@ class SearchResultsApp
       query_params: searchParams
       search_type: searchType
 
-    console.log 'ssSearchModel: ', ssSearchModel
-
     $queryContainer = $('.BCK-query-Container')
     if searchType == glados.models.Search.StructureSearchModel.SEARCH_TYPES.SEQUENCE.BLAST
       @initSequenceQueryView($queryContainer, ssSearchModel)
@@ -41,7 +39,6 @@ class SearchResultsApp
     $noResultsDiv = $('.no-results-found')
 
     listConfig = @getListConfig(searchType)
-    console.log 'listConfig: ', listConfig
 
     thisApp = @
     ssSearchModel.once glados.models.Search.StructureSearchModel.EVENTS.RESULTS_READY, ->
@@ -53,7 +50,6 @@ class SearchResultsApp
 
   @initSequenceQueryView = ($queryContainer, ssSearchModel) ->
 
-    console.log 'init sequence query view'
     new glados.views.SearchResults.SequenceQueryView
       el: $queryContainer
       model: ssSearchModel

@@ -71,11 +71,13 @@ glados.useNameSpace 'glados.views.SearchResults',
             blast_params: blastParams
             previous_sequence: previousSequence
 
+          thisView.blastParams = blastParams
           $element = $(thisView.el)
           glados.Utils.fillContentForElement($element, templateParams)
           thisView.initParamsToggler()
           $selectors = $element.find('.BCK-ParamSelect')
           $selectors.material_select()
+          thisView.toggleSearchButtonEnabling()
 
         @paramsModel.fetch()
 
