@@ -31,15 +31,62 @@ glados.useNameSpace 'glados.views.SearchResults',
       @paramsModel = new glados.models.Search.BLASTParamsModel()
       @searchParams = {}
 
-    render: ->
+    render: (queryParams) ->
 
+      console.log 'queryParams: ', queryParams
       if @paramsModel.isNew()
         thisView = @
+
         @paramsModel.on 'change', ->
 
           blastParams = (param for param in thisView.paramsModel.get('params') when param.param_id != 'sequence')
+
+          if queryParams?
+            previousSequence = queryParams.sequence
+          else
+            previousSequence = ''
+
+          console.log 'queryParams: ', queryParams
+
+          for param_obj in blastParams
+
+            param_id = param_obj.param_id
+            if queryParams?
+              previousValue = queryParams[param_id]
+
+            console.log 'param_id: ', param_id
+            console.log 'previousValue: ', previousValue
+
+            if not previousValue?
+              console.log 'using detault value'
+              
+              if param_obj.allow_free_input
+                param_obj.current_value = param_obj.default_value
+              else
+                for value_obj in param_obj.param_values
+                  value_obj.is_selected = value_obj.is_default
+
+            else
+
+              console.log 'using preset value: ', previousValue
+              if param_obj.allow_free_input
+                param_obj.current_value = previousValue
+                console.log 'current value set is', previousValue
+              else
+                for value_obj in param_obj.param_values
+                  value_obj.is_selected = value_obj.value == previousValue
+                  if value_obj.is_selected
+                    console.log 'selected value: ', previousValue
+
+              console.log 'param_obj: ', param_obj
+
+            console.log '---'
+
+          console.log 'blastParams: ', blastParams
+
           templateParams =
             blast_params: blastParams
+            previous_sequence: previousSequence
 
           $element = $(thisView.el)
           glados.Utils.fillContentForElement($element, templateParams)

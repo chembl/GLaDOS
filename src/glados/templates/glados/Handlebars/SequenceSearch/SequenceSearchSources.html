@@ -16,7 +16,7 @@
             </div>
 
             <div class="sequence-textarea-container">
-                <textarea class="BCK-sequence-textarea BCK-search-param" data-param-id="sequence" ></textarea>
+                <textarea class="BCK-sequence-textarea BCK-search-param" data-param-id="sequence" >{{ previous_sequence }}</textarea>
                 <div class="input-options-container" >
                     <div>
                         <a class="BCK-use-example-sequence dotted-link">Use a example sequence</a>
@@ -35,7 +35,7 @@
         </div>
         <div class="define-your-parameters">
             <div class="header-text">
-                <div>2. Modify the default parameters for <b>blastp</b> (optional):
+                <div>2. Modify the parameters for <b>blastp</b> (optional):
                 </div>
                 <div>
                     <a class="BCK-show-parameters dotted-link"> Show Parameters</a>
@@ -53,11 +53,11 @@
                     <a target="_blank" href="{{ this.param_help_link }}">{{this.param_name}}</a>:
 
                     {{#if this.allow_free_input }}
-                        <input value="{{ this.default_value }}">
+                        <input class= "BCK-search-param" data-param-id="{{ this.param_id }}" value="{{ this.current_value }}">
                     {{ else }}
                         <select class="BCK-ParamSelect BCK-search-param" data-param-id="{{ this.param_id }}">
                             {{#each this.param_values}}
-                                <option value="{{ this.value }}" {{#if this.is_default }}selected{{/if  }} >{{ this.label }}</option>
+                                <option value="{{ this.value }}" {{#if this.is_selected }}selected{{/if  }} >{{ this.label }}</option>
                             {{/each}}
                         </select>
                     {{/if  }}
@@ -65,7 +65,7 @@
                 {{/each}}
 
                 <div class="reset-params-btn-container" >
-                    <a class="dotted-link">reset parameters</a>
+                    <a class="dotted-link">Reset parameters</a>
                 </div>
 
             </div>

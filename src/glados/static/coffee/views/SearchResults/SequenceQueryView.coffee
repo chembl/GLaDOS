@@ -3,7 +3,6 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     initialize: ->
 
-      console.log 'init sequence query view: ', @el
       @queryParams = @model.get('query_params')
       @model.on 'change:state', @render, @
       @render()
@@ -29,4 +28,4 @@ glados.useNameSpace 'glados.views.SearchResults',
 
     showEditModal: ->
 
-      glados.helpers.SequenceSearchHelper.showSequenceSearchModal()
+      glados.helpers.SequenceSearchHelper.showSequenceSearchModal(@queryParams)
