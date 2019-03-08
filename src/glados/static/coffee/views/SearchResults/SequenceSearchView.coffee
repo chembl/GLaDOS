@@ -189,7 +189,5 @@ glados.useNameSpace 'glados.views.SearchResults',
       base64Params = btoa(JSON.stringify(@searchParams))
       url = glados.Settings.BLAST_SEARCH_RESULTS_PAGE + base64Params
 
-      console.log '@searchParams: ', @searchParams
-      return
       window.location.href = url
       @closeModal()
