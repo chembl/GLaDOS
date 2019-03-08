@@ -41,6 +41,7 @@ glados.useNameSpace 'glados.views.SearchResults',
           blastParams = (param for param in thisView.paramsModel.get('params') when param.param_id != 'sequence')
 
           if queryParams?
+            thisView.searchParams = queryParams
             previousSequence = queryParams.sequence
           else
             previousSequence = ''
