@@ -41,6 +41,7 @@ glados.useNameSpace 'glados.views.SearchResults',
           blastParams = (param for param in thisView.paramsModel.get('params') when param.param_id != 'sequence')
 
           if queryParams?
+            thisView.searchParams = queryParams
             previousSequence = queryParams.sequence
           else
             previousSequence = ''
@@ -188,5 +189,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       base64Params = btoa(JSON.stringify(@searchParams))
       url = glados.Settings.BLAST_SEARCH_RESULTS_PAGE + base64Params
 
+      console.log '@searchParams: ', @searchParams
+      return
       window.location.href = url
       @closeModal()
