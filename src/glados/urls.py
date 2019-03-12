@@ -217,6 +217,27 @@ common_urls = [
     url(r'^tissue_report_card/(?P<chembl_id>\w+)/$',
         views.tissue_report_card, name='tissue_report_card'),
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # Old Interface redirections
+    # ------------------------------------------------------------------------------------------------------------------
+    url(r'^compound/inspect/(?P<chembl_id>\w+)/$',
+        RedirectView.as_view(pattern_name='compound_report_card', permanent=True)),
+
+    url(r'^target/inspect/(?P<chembl_id>\w+)/$',
+        RedirectView.as_view(pattern_name='target_report_card', permanent=True)),
+
+    url(r'^assay/inspect/(?P<chembl_id>\w+)/$',
+        RedirectView.as_view(pattern_name='assay_report_card', permanent=True)),
+
+    url(r'^doc/inspect/(?P<chembl_id>\w+)/$',
+        RedirectView.as_view(pattern_name='document_report_card', permanent=True)),
+
+    url(r'^cell/inspect/(?P<chembl_id>\w+)/$',
+        RedirectView.as_view(pattern_name='cell_line_report_card', permanent=True)),
+
+    url(r'^tissue/inspect/(?P<chembl_id>\w+)/$',
+        RedirectView.as_view(pattern_name='tissue_report_card', permanent=True)),
+
     # --------------------------------------------------------------------------------------------------------------------
     # Search Results
     # --------------------------------------------------------------------------------------------------------------------
