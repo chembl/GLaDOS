@@ -66,6 +66,10 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         },
         'usan_year',
         'withdrawn_flag',
+        'withdrawn_class',
+        'withdrawn_year',
+        'withdrawn_reason',
+        'withdrawn_country'
       ],
       [
         /_metadata\.drug\.drug_data\..*/
