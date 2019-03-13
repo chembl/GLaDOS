@@ -76,6 +76,9 @@ glados.models.Compound.Drug.COLUMNS =
   WITHDRAWN_REASON: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     name_to_show: 'Withdrawn Reason'
     comparator: 'withdrawn_reason'
+  WITHDRAWN_CLASS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
+    name_to_show: 'Withdrawn Class'
+    comparator: 'withdrawn_class'
   ICON: {
     'name_to_show': 'Icon'
     'comparator': '--'
@@ -120,6 +123,7 @@ glados.models.Compound.Drug.COLUMNS_SETTINGS =
     Drug.COLUMNS.WITHDRAWN_YEAR
     Drug.COLUMNS.WITHDRAWN_REASON
     Drug.COLUMNS.WITHDRAWN_COUNTRY
+    Drug.COLUMNS.WITHDRAWN_CLASS
   ]
   RESULTS_LIST_REPORT_CARD: [
     Drug.COLUMNS.CHEMBL_ID

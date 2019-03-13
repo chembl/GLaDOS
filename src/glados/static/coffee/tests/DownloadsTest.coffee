@@ -44,7 +44,9 @@ describe "Downloads", ->
       comparatorsMustBe = ["molecule_chembl_id","molecule_synonyms","molecule_synonyms","max_phase",
         "_metadata.drug.drug_data.applicants","usan_stem","usan_year","first_approval","atc_classifications",
         "--","usan_stem_definition","_metadata.drug.drug_data.usan_stem_substem","indication_class",
-        "_metadata.drug.drug_data.sc_patent","withdrawn_year","withdrawn_reason","withdrawn_country"]
+        "_metadata.drug.drug_data.sc_patent","withdrawn_year","withdrawn_reason","withdrawn_country",
+        "withdrawn_class"
+      ]
 
       comparatorsGot = (col.comparator for col in glados.models.Compound.Drug.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS)
       expect(TestsUtils.listsAreEqual(comparatorsMustBe, comparatorsGot)).toBe(true)
