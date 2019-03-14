@@ -117,7 +117,7 @@ common_urls = [
                              permanent=True), name='status'),
 
     url(r'^ws_home/$',
-        RedirectView.as_view(url='https://www.ebi.ac.uk/chembl/ws',
+        RedirectView.as_view(url='https://chembl.gitbook.io/chembl-interface-documentation/web-services',
                              permanent=True), name='web_services_home'),
 
     url(r'^unichem_home/$',
