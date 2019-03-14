@@ -208,6 +208,11 @@ def write_csv_or_tsv_file(scanner, download_job, cols_to_download, index_name, c
             doc_source = doc_i['_source']
             dot_notation_getter = DotNotationGetter(doc_source)
             own_properties_to_get = [col['property_name'] for col in own_columns]
+            print('own_properties_to_get: ')
+            print(json.dumps(own_properties_to_get, indent=2))
+            print('doc:')
+            print(json.dumps(doc_i, indent=2))
+            print('---')
 
             own_values = [parse_and_format_cell(dot_notation_getter.get_from_string(prop_name), index_name, prop_name)
                           for prop_name in own_properties_to_get]
