@@ -30,6 +30,10 @@ PARSING_FUNCTIONS = {
     'chembl_mechanism_by_parent_target': {
         'parent_molecule._metadata.drug.drug_data.synonyms': lambda original_value: parse_mech_of_act_synonyms(
             original_value)
+    },
+    'chembl_drug_indication_by_parent': {
+        'parent_molecule._metadata.drug.drug_data.synonyms': lambda original_value: parse_mech_of_act_synonyms(
+            original_value)
     }
 
 }
