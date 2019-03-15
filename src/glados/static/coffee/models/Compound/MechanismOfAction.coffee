@@ -143,15 +143,6 @@ glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS =
     glados.models.Compound.MechanismOfAction.COLUMNS.MECHANISM_SELECTIVITY_COMMENT
     glados.models.Compound.MechanismOfAction.COLUMNS.BINDING_SITE_COMMENT
   ]
-  DOWNLOAD_COLUMNS: [
-    glados.models.Compound.MechanismOfAction.COLUMNS.MOLECULE_CHEMBL_ID
-    glados.models.Compound.MechanismOfAction.COLUMNS.MOLECULE_DRUG_SYNONYMS
-    glados.models.Compound.MechanismOfAction.COLUMNS.ACTION_TYPE
-    glados.models.Compound.MechanismOfAction.COLUMNS.MECHANISM_OF_ACTION
-    glados.models.Compound.MechanismOfAction.COLUMNS.TARGET_CHEMBL_ID
-    glados.models.Compound.MechanismOfAction.COLUMNS.MAX_PHASE
-    glados.models.Compound.MechanismOfAction.COLUMNS.REFERENCES
-  ]
 
 glados.models.Compound.MechanismOfAction.getListURL = (filter) ->
 
@@ -166,3 +157,7 @@ glados.models.Compound.MechanismOfAction.getListURLByMoleculeChemblId = (molecul
 glados.models.Compound.MechanismOfAction.getListURLByTargetChemblId = (moleculeChemblId) ->
   filterStr = "target.target_chembl_id:#{moleculeChemblId}"
   glados.models.Compound.MechanismOfAction.getListURL filterStr
+
+glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.DOWNLOAD_COLUMNS =
+  _.union(glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.RESULTS_LIST_TABLE,
+    glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.RESULTS_LIST_TABLE_ADDITIONAL)

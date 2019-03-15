@@ -20,6 +20,7 @@ import socket
 import datetime
 from glados.models import SSSearchJob
 from django.http import JsonResponse, HttpResponse
+from . import columns_parser
 
 
 class DownloadError(Exception):
@@ -110,52 +111,6 @@ class DotNotationGetter:
         return self.get_property(self.obj, dot_notation_property)
 
 
-# ----------------------------------------------------------------------------------------------------------------------
-# Columns Parsing
-# ----------------------------------------------------------------------------------------------------------------------
-
-
-class ColumnsParsing:
-    def static_parse_synonyms(raw_synonyms):
-        true_synonyms = set()
-        for raw_syn in raw_synonyms:
-            true_synonyms.add(raw_syn['synonyms'])
-        return '|'.join(true_synonyms)
-
-    def static_parse_target_uniprot_accession(raw_components):
-        accessions = []
-        for comp in raw_components:
-            accession = comp.get('accession')
-            if accession is not None:
-                accessions.append(accession)
-
-        return '|'.join(accessions)
-
-    parsing_functions = {
-        'chembl_molecule': {
-            'molecule_synonyms': lambda original_value: ColumnsParsing.static_parse_synonyms(original_value)
-        },
-        'chembl_target': {
-            'target_components': lambda original_value:
-            ColumnsParsing.static_parse_target_uniprot_accession(original_value)
-        }
-    }
-
-    def static_parse_property(original_value, index_name, property_name):
-
-        parsing_functions = ColumnsParsing.parsing_functions
-        functions_for_index = parsing_functions.get(index_name)
-
-        if functions_for_index is None:
-            return original_value
-        else:
-            function_for_property = functions_for_index.get(property_name)
-            if function_for_property is None:
-                return original_value
-            else:
-                return function_for_property(original_value)
-
-
 def format_cell(original_value):
     value = original_value
     if isinstance(value, str):
@@ -165,7 +120,7 @@ def format_cell(original_value):
 
 
 def parse_and_format_cell(original_value, index_name, property_name):
-    value = ColumnsParsing.static_parse_property(original_value, index_name, property_name)
+    value = columns_parser.static_parse_property(original_value, index_name, property_name)
     return format_cell(value)
 
 
@@ -275,8 +230,6 @@ def generate_download_file(download_id):
     download_job.worker = socket.gethostname()
     download_job.save()
     append_to_job_log(download_job, 'Generating File')
-
-    print('processing job: ', download_id)
 
     index_name = download_job.index_name
     raw_columns_to_download = download_job.raw_columns_to_download

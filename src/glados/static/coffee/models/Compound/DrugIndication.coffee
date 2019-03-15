@@ -111,9 +111,6 @@ glados.models.Compound.DrugIndication.COLUMNS_SETTINGS =
     glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_USAN_STEM
     glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_USAN_YEAR
   ]
-  DOWNLOAD_COLUMNS: [
-    glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_CHEMBL_ID
-  ]
 
 glados.models.Compound.DrugIndication.getListURL = (filter) ->
   
@@ -124,3 +121,7 @@ glados.models.Compound.DrugIndication.getListURL = (filter) ->
 glados.models.Compound.DrugIndication.getListURLByMoleculeChemblId = (moleculeChemblId) ->
   filterStr = "drug_indication._metadata.all_molecule_chembl_ids:#{moleculeChemblId}"
   glados.models.Compound.DrugIndication.getListURL filterStr
+
+glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.DOWNLOAD_COLUMNS =
+  _.union(glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.RESULTS_LIST_TABLE,
+    glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.RESULTS_LIST_TABLE_ADDITIONAL)
