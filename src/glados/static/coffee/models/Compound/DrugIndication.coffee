@@ -112,11 +112,16 @@ glados.models.Compound.DrugIndication.COLUMNS_SETTINGS =
     glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_USAN_YEAR
   ]
 
-glados.models.Compound.DrugIndication.getListURL = (filter) ->
-  
+glados.models.Compound.DrugIndication.getListURL = (filter, isFullState=false, fragmentOnly=false) ->
+
+  if isFullState
+    filter = btoa(JSON.stringify(filter))
+
   glados.Settings.ENTITY_BROWSERS_URL_GENERATOR
+    fragment_only: fragmentOnly
     entity: 'drug_indications'
     filter: encodeURIComponent(filter) unless not filter?
+    is_full_state: isFullState
 
 glados.models.Compound.DrugIndication.getListURLByMoleculeChemblId = (moleculeChemblId) ->
   filterStr = "drug_indication._metadata.all_molecule_chembl_ids:#{moleculeChemblId}"

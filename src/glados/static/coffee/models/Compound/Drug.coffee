@@ -147,8 +147,13 @@ glados.models.Compound.Drug.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS = _.union(
   glados.models.Compound.Drug.COLUMNS_SETTINGS.RESULTS_LIST_TABLE,
   glados.models.Compound.Drug.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL)
 
-Drug.getDrugsListURL = (filter) ->
+Drug.getDrugsListURL = (filter, isFullState=false, fragmentOnly=false) ->
+
+  if isFullState
+    filter = btoa(JSON.stringify(filter))
 
   glados.Settings.ENTITY_BROWSERS_URL_GENERATOR
+    fragment_only: fragmentOnly
     entity: 'drugs'
     filter: encodeURIComponent(filter) unless not filter?
+    is_full_state: isFullState

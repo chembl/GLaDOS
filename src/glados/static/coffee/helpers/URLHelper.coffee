@@ -104,7 +104,6 @@ glados.useNameSpace 'glados.helpers',
 
     triggerUpdateBrowserURL: (list) ->
 
-      console.log 'triggerUpdateBrowserURL ', list
       @updateBrowserURL(list)
 
     updateBrowserURL: (list) ->

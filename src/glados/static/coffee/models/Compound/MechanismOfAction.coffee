@@ -144,11 +144,16 @@ glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS =
     glados.models.Compound.MechanismOfAction.COLUMNS.BINDING_SITE_COMMENT
   ]
 
-glados.models.Compound.MechanismOfAction.getListURL = (filter) ->
+glados.models.Compound.MechanismOfAction.getListURL = (filter, isFullState=false, fragmentOnly=false) ->
+
+  if isFullState
+    filter = btoa(JSON.stringify(filter))
 
   glados.Settings.ENTITY_BROWSERS_URL_GENERATOR
+    fragment_only: fragmentOnly
     entity: 'mechanisms_of_action'
     filter: encodeURIComponent(filter) unless not filter?
+    is_full_state: isFullState
 
 glados.models.Compound.MechanismOfAction.getListURLByMoleculeChemblId = (moleculeChemblId) ->
   filterStr = "mechanism_of_action._metadata.all_molecule_chembl_ids:#{moleculeChemblId}"
