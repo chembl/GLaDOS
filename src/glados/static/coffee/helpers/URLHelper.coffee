@@ -112,6 +112,8 @@ glados.useNameSpace 'glados.helpers',
         fullState =
           list: list.getStateJSON()
 
+        console.log 'fullState: ', fullState
+
         newURL = list.getLinkToListFunction()(fullState, isFullState=true, fragmentOnly=true)
       else if @mode == glados.helpers.URLHelper.MODES.SEARCH_RESULTS
 
