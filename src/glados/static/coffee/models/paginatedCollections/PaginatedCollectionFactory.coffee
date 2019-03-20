@@ -17,13 +17,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       searchESQuery = stateObject.searchESQuery
       stickyQuery = stateObject.sticky_query
       itemsList = stateObject.generator_items_list
-      contextualProperties = stateObject.contextual_properties
-      searchTerm = stateObject.search_term
 
       list = @getNewESResultsListFor(settings, queryString, useQueryString, itemsList, ssSearchModel=undefined,
         stickyQuery, searchESQuery)
 
-      facetGroups = list.getFacetsGroups()
+      facetGroups = list.getFacetsGroups(selected=undefined, onlyVisible=false)
       facetsState = stateObject.facets_state
 
       if facetsState?
@@ -31,7 +29,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
           originalFGroupState = facetsState[fGroupKey]
           facetingHandler = facetGroups[fGroupKey].faceting_handler
+          # make sure all restored facets are shown
+          facetGroups[fGroupKey].show = true
           facetingHandler.loadState(originalFGroupState)
+          console.log 'facetingHandler: ', facetingHandler
 
       return list
 
