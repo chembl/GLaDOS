@@ -344,12 +344,16 @@ def design_components(request):
 
 
 def main_html_base_no_bar(request):
-    return render(request, 'glados/mainGladosNoBar.html')
+    context = {
+        'show_save_button': True
+    }
+    return render(request, 'glados/mainGladosNoBar.html', context)
 
 
 def render_params_from_hash(request, hash):
     context = {
-        'shortened_params': url_shortener.get_original_url(hash)
+        'shortened_params': url_shortener.get_original_url(hash),
+        'show_save_button': True
     }
     return render(request, 'glados/mainGladosNoBar.html', context)
 

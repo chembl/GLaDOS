@@ -1,6 +1,6 @@
 {% load static %}
 
-<div class="chembl-header">
+<div class="chembl-header" id="BCK-ChEMBL-Header">
 
     <div class="inner-row">
 
@@ -237,6 +237,14 @@
             </li>
 
         </ul>
+
+        {% if show_save_button %}
+        <ul class="header-nav-links show-on-large-pin-top">
+            <li class="nav-link save-page">
+                <a class="BCK-open-share-modal"><i class="icon icon-functional" data-icon="r"></i> Share</a>
+            </li>
+        </ul>
+        {% endif %}
 
     </div>
 
