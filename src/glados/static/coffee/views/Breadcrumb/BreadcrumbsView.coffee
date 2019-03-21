@@ -8,13 +8,10 @@ glados.useNameSpace 'glados.views.Breadcrumb',
       @shortenedURL = undefined 
       $breadcrumbsContainer = $(@el).find('.BCK-dynamic-breadcrumbs')
       breadcrumbsList = @model.get('breadcrumbs_list')
-      hideShareButton = @model.get('hide_share_button')
       glados.Utils.fillContentForElement $breadcrumbsContainer,
         breadcrumbs: breadcrumbsList
-        hide_share_button: hideShareButton
         share_modal_id: @shareModalID
 
-      @renderShareComponent()
 
     renderShareComponent: ->
 

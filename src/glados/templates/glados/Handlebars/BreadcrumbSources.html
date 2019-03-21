@@ -12,49 +12,6 @@
 
     {{/each}}
 
-    {{#unless hide_share_button}}
-        <a class="BCK-open-share-modal" href="#{{ share_modal_id }}">
-            <i class="fa fa-share-alt"></i>
-        </a>
-    {{/unless}}
 </script>
 
-<script id="Handlebars-share-page-modal" type="text/x-handlebars-template" >
-  <div id="{{id}}" class='modal'>
-    <div class="card-panel z-depth-0">
-
-        <table>
-            <tr>
-                <td><b>Use the following link to share this page:</b></td>
-            </tr>
-            <tr>
-                <td class="BCK-LinkToShare" data-hb-template="Handlebars-Common-CroppedContainer"></td>
-            </tr>
-        </table>
-        <div class="BCK-shortenBtnContainer"data-hb-template="Handlebars-ShortenButton-Container" ></div>
-        <div class="BCK-shortening-info" data-hb-template="Handlebars-Shortening-Error"
-             data-hb-preloader-template="Handlebars-Shortening-Info"></div>
-
-        </div>
-
-    </div>
-  </div>
-</script>
-
-<script id="Handlebars-ShortenButton-Container" type="text/x-handlebars-template">
-We can shorten this link for you. Take into account that this will require to store your query in our servers.
-<a href="https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions/chembl-data-questions#are-my-queries-stored-and-if-so-are-they-routinely-deleted"
-target="_blank">Learn More.</a>
-<div class="center-align">
-    <a class="menu-button BCK-Shorten-link">Shorten Link</a>
-</div>
-
-</script>
-
-<script id="Handlebars-Shortening-Info" type="text/x-handlebars-template">
-<div class="center-align">Shortening link...</div>
-</script>
-<script id="Handlebars-Shortening-Error" type="text/x-handlebars-template">
-<div class="center-align">{{ msg }}</div>
-</script>
 {% endverbatim %}
