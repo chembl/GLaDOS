@@ -79,8 +79,7 @@ glados.useNameSpace 'glados.helpers',
         return [breadcrumbLinks, newSearchURL]
 
       window.history.pushState({}, 'Search Results', newSearchURL)
-      glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks, longFilter=undefined,
-          hideShareButton=false,longFilterURL=undefined, askBeforeShortening=true)
+      glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks, longFilter=undefined, longFilterURL=undefined)
 
     #-------------------------------------------------------------------------------------------------------------------
     # Search results mode
@@ -129,8 +128,7 @@ glados.useNameSpace 'glados.helpers',
         return newURL
 
       window.history.pushState({}, 'Browse', newURL)
-      breadcrumbsView = glados.views.Breadcrumb.BreadcrumbsView.getInstance()
-      breadcrumbsView.renderShareComponent.call(breadcrumbsView)
+
 # ----------------------------------------------------------------------------------------------------------------------
 # Singleton pattern
 # ----------------------------------------------------------------------------------------------------------------------
