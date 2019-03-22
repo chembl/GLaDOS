@@ -2,6 +2,29 @@ import hashlib
 import base64
 from glados.models import TinyURL
 from elasticsearch_dsl import Search
+from django.http import JsonResponse
+
+
+def process_shorten_url_request(request):
+    if request.method == "POST":
+        long_url = request.POST.get('long_url', '')
+        short_url = shorten_url(long_url)
+
+        resp_data = {
+            'hash': short_url
+        }
+        return JsonResponse(resp_data)
+
+    else:
+        return JsonResponse({'error': 'this is only available via POST'})
+
+
+def process_extend_url_request(request, hash):
+    resp_data = {
+        'long_url': get_original_url(hash)
+    }
+
+    return JsonResponse(resp_data)
 
 
 # given a long url, it shortens it and saves it in elastic, it returns the hash obtained

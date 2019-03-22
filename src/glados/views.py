@@ -4,7 +4,6 @@ from django.conf import settings
 from glados.utils import *
 from django.core.cache import cache
 from django.http import JsonResponse, HttpResponse
-import glados.url_shortener.url_shortener as url_shortener
 from apiclient.discovery import build
 import re
 from elasticsearch_dsl import Search
@@ -15,6 +14,7 @@ from . import og_tags_generator
 from . import schema_tags_generator
 from . import glados_server_statistics
 from . import heatmap_helper
+from glados.api.url_shortening import url_shortener
 
 
 def visualise(request):

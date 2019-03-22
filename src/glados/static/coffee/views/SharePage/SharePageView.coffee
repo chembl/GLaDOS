@@ -37,7 +37,6 @@ glados.useNameSpace 'glados.views.SharePage',
 
     shortenURL: ->
 
-      console.log 'SHORTEN URL!'
       $shorteningInfo = $(@el).find('.BCK-shortening-info')
 
       urlToShorten = window.location.href.match(glados.Settings.SHORTENING_MATCH_REPEXG)[0]
