@@ -7,7 +7,6 @@ glados.useNameSpace 'glados.views.SharePage',
       $element = $(@el)
       needsShortening = glados.Utils.URLS.URLNeedsShortening(window.location.href, 100)
       match = window.location.href.match(glados.Settings.SHORTENING_MATCH_REPEXG)
-      console.log 'needsShortening: ', needsShortening
       @renderURLContainer(window.location.href)
 
       if needsShortening and match?
@@ -52,3 +51,17 @@ glados.useNameSpace 'glados.views.SharePage',
         glados.Utils.fillContentForElement($shorteningInfo, {}, customTemplate=undefined, fillWithPreloader=true)
         $shorteningInfo.empty()
         thisView.renderURLContainer(newHref)
+
+#        thisView.setButtonStatusAsExpanding()
+
+    setButtonStatusAsExpanding: ->
+
+      $shortenBtnContainer = $(@el).find('.BCK-shortenBtnContainer')
+      $shortenBTN = $shortenBtnContainer.find('.BCK-Shorten-link')
+
+      $shortenBTN.removeClass('disabled')
+      $shortenBTN.text('Expand Link')
+      $shortenBTN.off('click', @shortenLinkBound)
+
+      @expandLinkBound = @expandURL.bind(@)
+      $shortenBTN.click(@expandLinkBound)
