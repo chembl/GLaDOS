@@ -8,6 +8,7 @@ class TinyURLIndex(DocType):
 
     long_url = Text()
     hash = Text()
+    expires = Integer()
 
     class Index:
         name = 'chembl_glados_tiny_url'

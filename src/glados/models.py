@@ -10,12 +10,14 @@ class TinyURL(models.Model):
 
     long_url = models.TextField()
     hash = models.CharField(max_length=100)
+    expires = models.BigIntegerField(null=True)
 
     def indexing(self):
         obj = TinyURLIndex(
             meta={'id': self.hash},
             long_url=self.long_url,
             hash=self.hash,
+            expires=self.expires
         )
         obj.save(refresh='wait_for')
         return obj.to_dict(include_meta=True)

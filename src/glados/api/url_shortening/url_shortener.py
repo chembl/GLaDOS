@@ -3,6 +3,7 @@ import base64
 from glados.models import TinyURL
 from elasticsearch_dsl import Search
 from django.http import JsonResponse
+from datetime import datetime, timedelta
 
 
 def process_shorten_url_request(request):
@@ -33,14 +34,18 @@ def shorten_url(long_url):
   hex_digest = hashlib.md5(long_url.encode('utf-8')).digest()
   # replace / and + to avoid routing problems
   hash = base64.b64encode(hex_digest).decode('utf-8').replace('/', '_').replace('+', '-')
-  print('shorten url')
-  print('long_url: ', long_url)
-  print('hash: ', hash)
+
   # save this in elastic if it doesn't exist
   s = Search().filter('query_string', query='"' + hash + '"')
   response = s.execute()
   if response.hits.total == 0:
-    tinyURL = TinyURL(long_url=long_url, hash=hash)
+
+    dt = datetime.now()
+    td = timedelta(days=4)
+    expiration_date = dt + td
+    expires = expiration_date.timestamp() * 1000
+
+    tinyURL = TinyURL(long_url=long_url, hash=hash, expires=expires)
     tinyURL.indexing()
     print('has not been saved before!')
 
