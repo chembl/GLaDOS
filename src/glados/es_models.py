@@ -25,7 +25,7 @@ class ESCachedRequestIndex(DocType):
 
     class Meta:
         index = 'chembl_glados_es_cache_usage'
-        doc_type = 'es_cached_request'
+        doc_type = '_doc'
 
         
 class ESDownloadRecordIndex(DocType):
@@ -44,7 +44,7 @@ class ESDownloadRecordIndex(DocType):
 
     class Meta:
         index = 'chembl_glados_es_download_record'
-        doc_type = 'es_download_record'
+        doc_type = '_doc'
 
 
 class ESSearchRecordIndex(DocType):
@@ -58,7 +58,7 @@ class ESSearchRecordIndex(DocType):
 
     class Meta:
         index = 'chembl_glados_es_search_record'
-        doc_type = 'es_search_record'
+        doc_type = '_doc'
 
 
 class ESViewRecordIndex(DocType):
@@ -71,7 +71,7 @@ class ESViewRecordIndex(DocType):
 
     class Meta:
         index = 'chembl_glados_es_view_record'
-        doc_type = 'es_view_record'
+        doc_type = '_doc'
 
 
 class ElasticSearchMultiSearchQuery:
