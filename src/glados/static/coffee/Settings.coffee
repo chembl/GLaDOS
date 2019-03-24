@@ -105,7 +105,6 @@ glados.useNameSpace 'glados',
       LIGHT_GREEN5: '#f1f8e9'
 
     GLADOS_STRINGS_PREFIX: 'glados_es_gs__'
-    WS_HOSTNAME: 'https://www.ebi.ac.uk/'
     WS_BASE_URL: 'https://www.ebi.ac.uk/chembl/api/data/'
     BEAKER_BASE_URL: 'https://www.ebi.ac.uk/chembl/api/utils/'
     # Searches
