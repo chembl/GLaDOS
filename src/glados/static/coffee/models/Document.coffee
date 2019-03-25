@@ -11,7 +11,7 @@ Document = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     @set('document_chembl_id', id)
 
     if @get('fetch_from_elastic')
-      @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_document/document/' + id
+      @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_document/_doc/' + id
     else
       @url = glados.Settings.WS_BASE_URL + 'document/' + id + '.json'
 

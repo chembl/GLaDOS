@@ -13,7 +13,7 @@ CellLine = Backbone.Model.extend
     @set('cell_chembl_id', id)
 
     if @get('fetch_from_elastic')
-      @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_cell_line/cell_line/' + id
+      @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_cell_line/_doc/' + id
     else
       @url = glados.Settings.WS_BASE_URL + 'cell_line/' + id + '.json'
 

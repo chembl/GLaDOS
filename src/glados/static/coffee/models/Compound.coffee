@@ -13,7 +13,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     @set('molecule_chembl_id', id)
 
     if @get('fetch_from_elastic')
-      @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_molecule/molecule/' + id
+      @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_molecule/_doc/' + id
     else
       @url = glados.Settings.WS_BASE_URL + 'molecule/' + id + '.json'
 
