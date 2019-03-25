@@ -62,8 +62,17 @@ def get_original_url(hash):
     # look here in elastic
     s = Search().filter('query_string', query='"' + hash + '"')
     response = s.execute(ignore_cache=True)
+
     if response.hits.total == 0:
         return None
+
+    try:
+        expires = response.hits[0].expires
+        expiration_date = datetime.utcfromtimestamp(expires / 1000)
+
+    except AttributeError:
+        # no expiration time means that it never expires
+        pass
 
     url = response.hits[0].long_url
     return url

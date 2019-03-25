@@ -1,7 +1,7 @@
 from django.conf.urls import include, url
 from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
-from glados.utils import DirectTemplateView
+from glados.utils_refactor import DirectTemplateView
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.conf import settings
 from . import views
