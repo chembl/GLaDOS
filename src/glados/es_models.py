@@ -56,6 +56,17 @@ class ESDownloadRecordIndex(DocType):
         doc_type = '_doc'
 
 
+class ESTinyURLUsageRecordIndex(DocType):
+    event = Keyword()
+    host = Keyword()
+    run_env_type = Keyword()
+    request_date = Integer()
+
+    class Meta:
+        index = 'chembl_glados_es_tinyurl_usage_record'
+        doc_type = 'es_tinyurl_usage_record'
+
+
 class ESSearchRecordIndex(DocType):
 
     search_type = Keyword()

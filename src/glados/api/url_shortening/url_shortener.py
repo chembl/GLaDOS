@@ -4,6 +4,8 @@ from glados.models import TinyURL
 from elasticsearch_dsl import Search
 from django.http import JsonResponse
 from datetime import datetime, timedelta, timezone
+from glados.usage_statistics import glados_server_statistics
+from glados.models import ESTinyURLUsageRecord
 
 DAYS_TO_LIVE = 7
 
@@ -57,6 +59,7 @@ def shorten_url(long_url):
         except AttributeError:
             expiration_date_str = 'Never'
 
+    glados_server_statistics.record_tiny_url_usage(ESTinyURLUsageRecord.URL_SHORTENED)
     return url_hash, expiration_date_str
 
 
@@ -77,11 +80,13 @@ def get_original_url(url_hash):
             return None
         else:
             url = response.hits[0].long_url
+            glados_server_statistics.record_tiny_url_usage(ESTinyURLUsageRecord.URL_EXPANDED)
             return url
 
     except AttributeError:
         # no expiration time means that it never expires
         url = response.hits[0].long_url
+        glados_server_statistics.record_tiny_url_usage(ESTinyURLUsageRecord.URL_EXPANDED)
         return url
 
 

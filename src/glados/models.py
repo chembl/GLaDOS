@@ -1,6 +1,6 @@
 from django.db import models
 from glados.es_models import TinyURLIndex, ESCachedRequestIndex, ESDownloadRecordIndex, ESViewRecordIndex, \
-    ESSearchRecordIndex
+    ESSearchRecordIndex, ESTinyURLUsageRecordIndex
 import time
 import socket
 from django.conf import settings
@@ -80,6 +80,32 @@ class ESDownloadRecord(models.Model):
         )
         obj.save()
         return obj.to_dict(include_meta=True)
+
+
+class ESTinyURLUsageRecord(models.Model):
+
+    URL_SHORTENED = 'URL_SHORTENED'
+    URL_EXPANDED = 'URL_EXPANDED'
+
+    EVENTS = (
+        (URL_SHORTENED, URL_SHORTENED),
+        (URL_EXPANDED, URL_EXPANDED)
+    )
+
+    event = models.CharField(max_length=200, choices=EVENTS)
+    host = models.TextField(default='')
+    run_env_type = models.TextField()
+
+    def indexing(self):
+        obj = ESTinyURLUsageRecordIndex(
+            event=self.event,
+            host=socket.gethostname(),
+            run_env_type=settings.RUN_ENV,
+            request_date=int(time.time() * 1000)
+        )
+        obj.save()
+        return obj.to_dict(include_meta=True)
+
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Tracking
