@@ -2,7 +2,7 @@ glados.useNameSpace 'glados',
   ChemUtils:
     # based on http://opensmiles.org/opensmiles.html
     SMILES:
-      canonicalize_ws_url: 'https://www.ebi.ac.uk/chembl/api/utils/canonicalizeSmiles'
+      canonicalize_ws_url: glados.Settings.BEAKER_BASE_URL+'canonicalizeSmiles'
       aliphatic_organic: '(?:B|C|N|O|S|P|F|Cl|Br|I)'
       aromatic_organic: '(?:b|c|n|o|s|p)'
       element_symbols: '(?:H|He|Li|Be|B|C|N|O|F|Ne|Na|Mg|Al|Si|P|S|Cl|Ar|K|Ca|Sc|Ti|V|Cr|Mn|Fe|Co|Ni|Cu|Zn|Ga|Ge|As|'+

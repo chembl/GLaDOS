@@ -70,7 +70,7 @@ glados.useNameSpace 'glados.views.Compound',
 #     @return an object with 2 elements: "elems" and "stylesheet" to be used directly into cytoscape
     getElemsAndSylesheetFromData: (data, nodes_style, edges_style)  ->
 
-        base_img_link = 'https://www.ebi.ac.uk/chembl/api/data/image/'
+        base_img_link = glados.Settings.WS_BASE_URL+'image/'
         base_img_backup_link = 'https://www.ebi.ac.uk/chembl/compound/displayimage_large/'
 
         ans = {}
@@ -158,7 +158,7 @@ glados.useNameSpace 'glados.views.Compound',
           pref_name = n.data('pref_name')
           chembl_id = n.data('id')
 
-          ws_img = "https://www.ebi.ac.uk/chembl/api/data/image/#{chembl_id}?engine=indigo"
+          ws_img = glados.Settings.WS_BASE_URL+"image/#{chembl_id}?engine=indigo"
           backup_img =  "#{glados.Settings.STATIC_IMAGES_URL}compound_placeholders/#{n.data('image_file')}"
 
           img_link = if n.data('has_structure') then ws_img else backup_img

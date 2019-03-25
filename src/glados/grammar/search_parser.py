@@ -21,6 +21,8 @@ from glados.models import ESSearchRecord
 
 from django.http import HttpResponse
 from glados.es.query_builder import QueryBuilder
+from urllib.parse import urlparse
+from django.conf import settings
 
 BASE_EBI_URL = 'https://www.ebi.ac.uk'
 
@@ -38,6 +40,10 @@ CHEMBL_ENTITIES = {
     'cell': 'cells',
     'tissue': 'tissues'
 }
+
+WS_PARSED_URL = urlparse(settings.WS_URL)
+WS_DOMAIN = WS_PARSED_URL.scheme + '://' + WS_PARSED_URL.netloc
+WS_BASE_PATH = WS_PARSED_URL.path
 
 
 # noinspection PyBroadException
@@ -263,7 +269,7 @@ def check_doi(term_dict: dict):
         try:
             chembl_ids = []
             response = requests.get(
-                BASE_EBI_URL + '/chembl/glados-es/chembl_document/_search',
+                '{es_url}/chembl_document/_search'.format(es_url=settings.ELASTICSEARCH_EXTERNAL_URL),
                 json=
                 {
                     'size': 10,
@@ -299,7 +305,7 @@ def check_inchi(term_dict: dict, term_is_inchi_key=False):
     try:
         chembl_ids = []
         response = requests.get(
-            BASE_EBI_URL + '/chembl/glados-es/chembl_molecule/_search',
+            '{es_url}/chembl_molecule/_search'.format(es_url=settings.ELASTICSEARCH_EXTERNAL_URL),
             json=
             {
                 'size': 10,
@@ -332,13 +338,14 @@ def check_inchi(term_dict: dict, term_is_inchi_key=False):
 
 
 def check_smiles(term_dict: dict):
+    global WS_BASE_PATH
     try:
         chembl_ids = []
-        next_url_path = '/chembl/api/data/molecule.json?molecule_structures__canonical_smiles__flexmatch={0}'\
-                        .format(urllib.parse.quote(term_dict['term']))
+        next_url_path = '{ws_path}/molecule.json?molecule_structures__canonical_smiles__flexmatch={smiles}'\
+                        .format(ws_path=WS_BASE_PATH, smiles=urllib.parse.quote(term_dict['term']))
         while next_url_path:
             response = requests.get(
-                BASE_EBI_URL + next_url_path,
+                WS_DOMAIN + next_url_path,
                 headers={'Accept': 'application/json'},
                 timeout=5
             )
@@ -408,62 +415,6 @@ def check_unichem(term_dict: dict):
                 }
             )
     except:
-        traceback.print_exc()
-
-
-# noinspection PyBroadException
-def check_fasta(term_dict: dict):
-    try:
-        url_path = '/chembl/api/utils/blast'
-        response = requests.post(
-            BASE_EBI_URL + url_path,
-            data=term_dict['term'],
-            headers={'Accept': 'application/json'},
-            timeout=10
-        )
-        json_response = response.json()
-        if 'error_message' in json_response:
-            if len(term_dict['term']) < 30:
-                term_dict['include_in_query'] = True
-            return None
-
-        for key_id in json_response['targets']:
-            chembl_ids_by_score = sorted(json_response['targets'][key_id].items(), key=operator.itemgetter(1),
-                                         reverse=True)
-            term_dict['references'].append(
-                {
-                    'type': 'blast',
-                    'label': 'BLAST - Targets - {0}'.format(key_id),
-                    'blast_id': key_id,
-                    'chembl_ids': [
-                        get_chembl_id_dict(chembl_id, score=score) for chembl_id, score in chembl_ids_by_score
-                    ],
-                    'include_in_query': True,
-                    'chembl_entity': 'target'
-                }
-            )
-
-        for key_id in json_response['compounds']:
-            chembl_ids_by_score = sorted(json_response['compounds'][key_id].items(), key=operator.itemgetter(1),
-                                         reverse=True)
-            term_dict['references'].append(
-                {
-                    'type': 'blast',
-                    'label': 'BLAST - Compounds - {0}'.format(key_id),
-                    'blast_id': key_id,
-                    'chembl_ids': [
-                        get_chembl_id_dict(chembl_id, score=score) for chembl_id, score in chembl_ids_by_score
-                    ],
-                    'include_in_query': True,
-                    'chembl_entity': 'compound'
-                }
-            )
-        if len(json_response['targets']) + len(json_response['compounds']) == 0:
-            if len(term_dict['term']) < 30:
-                term_dict['include_in_query'] = True
-    except:
-        if len(term_dict['term']) < 30:
-            term_dict['include_in_query'] = True
         traceback.print_exc()
 
 
@@ -562,7 +513,7 @@ class TermsVisitor(PTNodeVisitor):
     def visit_fasta(self, node, children):
         term = ''.join(children)
         term_dict = self.get_term_dict(term, include_in_query=False)
-        check_fasta(term_dict)
+        # check_fasta(term_dict)
         return term_dict
 
     def visit_property_term(self, node, children):

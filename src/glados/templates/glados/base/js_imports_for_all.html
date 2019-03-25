@@ -75,8 +75,14 @@
 
 <!-- Load Server url variables -->
 <script type="text/javascript">
-  glados.loadURLPaths('{{ request_root_url }}', '{% url "main" %}', '{% static "" %}');
   glados.Settings.DEBUG = {{ js_debug }};
+  /**
+    * TODO: Remove the requirement for a trailing  '/' in WS and BEAKER URLS
+    */
+  glados.Settings.WS_BASE_URL = "{{ ws_url }}/";
+  glados.Settings.BEAKER_BASE_URL = "{{ beaker_url }}/";
+  glados.Settings.ELASTICSEARCH_EXTERNAL_URL = "{{ es_url }}";
+  glados.loadURLPaths('{{ request_root_url }}', '{% url "main" %}', '{% static "" %}');
   glados.loadGLaDOSTopS3cre7();
 </script>
 <script type="text/javascript" src="{% static 'js/coffee-gen/GlobalVariables.js' %}"></script>
