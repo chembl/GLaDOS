@@ -249,8 +249,6 @@ common_urls = [
     # Tiny urls
     # --------------------------------------------------------------------------------------------------------------------
     url(r'^g/tiny/(?P<hash>.*?)$', views.render_params_from_hash, name='tiny'),
-    url(r'^shorten_url', views.shorten_url, name='shorten'),
-    url(r'^extend_url/(?P<hash>.*?)$', views.extend_url, name='extend'),
 
     url(r'^robots.txt', lambda x: HttpResponse(
         "User-Agent: *\nDisallow: / \nUser-Agent: Twitterbot\nAllow: {0}img".format(settings.STATIC_URL),

@@ -9,35 +9,36 @@ glados.useNameSpace 'glados.views.SharePage',
       @model.on 'change:state', @processModelState, @
 
     render: ->
-      console.log 'RENDER SHARE VIEW'
+
       @model.resetState()
       @processModelState()
-      console.log 'model: ', @model
-#      $element = $(@el)
-#      needsShortening = glados.Utils.URLS.URLNeedsShortening(window.location.href, 100)
-
-#      match = window.location.href.match(glados.Settings.SHORTENING_MATCH_REPEXG)
-#      @renderURLContainer(window.location.href)
-#
-#      if needsShortening and match?
-#
-#        $shortenBtnContainer = $element.find('.BCK-shortenBtnContainer')
-#        glados.Utils.fillContentForElement($shortenBtnContainer)
-#        $shortenBTN = $shortenBtnContainer.find('.BCK-Shorten-link')
-#        @shortenLinkBound = @shortenURL.bind(@)
-#        $shortenBTN.click(@shortenLinkBound)
-
       @showModal()
 
     processModelState: ->
 
-      console.log 'process model state'
       currentState = @model.get('state')
 
       if currentState == glados.models.SharePage.SharePageModel.States.INITIAL_STATE
         @renderURLContainer(@model.get('long_href'))
+        @enableShortenButton()
+        @setButtonStatusAsShortening()
+        @renderMessage('')
       else if currentState == glados.models.SharePage.SharePageModel.States.SHORTENING_URL
         @renderMessage('Processing...')
+        @disableShortenButton()
+      else if currentState == glados.models.SharePage.SharePageModel.States.URL_SHORTENED
+        @renderURLContainer(@model.get('short_href'))
+        @renderMessage("The shortened url will expire on #{@model.get('expires')}")
+        @enableShortenButton()
+        @setButtonStatusAsExpanding()
+      else if currentState == glados.models.SharePage.SharePageModel.States.EXPANDING_URL
+        @disableShortenButton()
+        @renderMessage('Expanding...')
+      else if currentState == glados.models.SharePage.SharePageModel.States.URL_EXPANDED
+        @renderURLContainer(@model.get('long_href'))
+        @enableShortenButton()
+        @setButtonStatusAsShortening()
+        @renderMessage('')
 
     renderURLContainer: (link) ->
 
@@ -57,45 +58,37 @@ glados.useNameSpace 'glados.views.SharePage',
     shortenOrExpandURL: (event) ->
 
       $clickedBtn = $(event.currentTarget)
-      console.log 'shortenOrExpandURL'
       isShortening = $clickedBtn.attr('data-shorten-or-expand') == 'shorten'
-      console.log 'isShortening: ', isShortening
+      
       if isShortening
         @model.shortenURL()
+      else
+        @model.expandURL()
 
     showModal: ->
 
       $element = $(@el)
       $element.modal('open')
 
-    shortenURL: ->
+    disableShortenButton: ->
 
+      $shortenBTN = $(@el).find('.BCK-Shorten-link')
+      $shortenBTN.addClass('disabled')
 
+    enableShortenButton: ->
 
-      urlToShorten = window.location.href.match(glados.Settings.SHORTENING_MATCH_REPEXG)[0]
-      paramsDict =
-        long_url: urlToShorten
-      shortenURL = glados.doCSRFPost(glados.Settings.SHORTEN_URLS_ENDPOINT, paramsDict)
-
-      thisView = @
-      shortenURL.then (data) ->
-        newHref = glados.Settings.SHORTENED_URL_GENERATOR
-          hash: data.hash
-          absolute: true
-        glados.Utils.fillContentForElement($shorteningInfo, {}, customTemplate=undefined, fillWithPreloader=true)
-        $shorteningInfo.empty()
-        thisView.renderURLContainer(newHref)
-
-#        thisView.setButtonStatusAsExpanding()
+      $shortenBTN = $(@el).find('.BCK-Shorten-link')
+      $shortenBTN.removeClass('disabled')
 
     setButtonStatusAsExpanding: ->
 
-      $shortenBtnContainer = $(@el).find('.BCK-shortenBtnContainer')
-      $shortenBTN = $shortenBtnContainer.find('.BCK-Shorten-link')
-
-      $shortenBTN.removeClass('disabled')
+      $shortenBTN = $(@el).find('.BCK-Shorten-link')
       $shortenBTN.text('Expand Link')
-      $shortenBTN.off('click', @shortenLinkBound)
+      $shortenBTN.attr('data-shorten-or-expand', 'expand')
 
-      @expandLinkBound = @expandURL.bind(@)
-      $shortenBTN.click(@expandLinkBound)
+    setButtonStatusAsShortening: ->
+
+      $shortenBTN = $(@el).find('.BCK-Shorten-link')
+      $shortenBTN.text('Shorten Link')
+      $shortenBTN.attr('data-shorten-or-expand', 'shorten')
+

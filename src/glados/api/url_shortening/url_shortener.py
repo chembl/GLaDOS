@@ -3,16 +3,17 @@ import base64
 from glados.models import TinyURL
 from elasticsearch_dsl import Search
 from django.http import JsonResponse
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 
 def process_shorten_url_request(request):
     if request.method == "POST":
         long_url = request.POST.get('long_url', '')
-        short_url = shorten_url(long_url)
+        short_url, expiration_str = shorten_url(long_url)
 
         resp_data = {
-            'hash': short_url
+            'hash': short_url,
+            'expires': expiration_str
         }
         return JsonResponse(resp_data)
 
@@ -32,22 +33,29 @@ def process_extend_url_request(request, hash):
 def shorten_url(long_url):
     hex_digest = hashlib.md5(long_url.encode('utf-8')).digest()
     # replace / and + to avoid routing problems
-    hash = base64.b64encode(hex_digest).decode('utf-8').replace('/', '_').replace('+', '-')
+    url_hash = base64.b64encode(hex_digest).decode('utf-8').replace('/', '_').replace('+', '-')
 
     # save this in elastic if it doesn't exist
-    s = Search().filter('query_string', query='"' + hash + '"')
+    s = Search().filter('query_string', query='"' + url_hash + '"')
     response = s.execute()
     if response.hits.total == 0:
         dt = datetime.now()
         td = timedelta(days=4)
         expiration_date = dt + td
         expires = expiration_date.timestamp() * 1000
-
-        tinyURL = TinyURL(long_url=long_url, hash=hash, expires=expires)
+        tinyURL = TinyURL(long_url=long_url, hash=url_hash, expires=expires)
         tinyURL.indexing()
-        print('has not been saved before!')
+        expiration_date_str = expiration_date.replace(tzinfo=timezone.utc).isoformat()
+    else:
 
-    return hash
+        try:
+            expires = response.hits[0].expires
+            expiration_date = datetime.utcfromtimestamp(expires / 1000)
+            expiration_date_str = expiration_date.replace(tzinfo=timezone.utc).isoformat()
+        except AttributeError:
+            expiration_date_str = 'Never'
+
+    return url_hash, expiration_date_str
 
 
 def get_original_url(hash):
