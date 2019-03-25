@@ -6,8 +6,8 @@
     <meta property="og:description" content="{{ og_tags.description }}"/>
     <meta property="og:type" content="object" />
     <meta property="og:url" content="{{request.build_absolute_uri }}" />
-    <meta property="og:image" content="https://www.ebi.ac.uk/chembl/api/data/image/{{ og_tags.chembl_id }}.png?bgColor=white" />
-    <meta property="og:image:secure_url" content="https://www.ebi.ac.uk/chembl/api/data/image/{{ og_tags.chembl_id }}.png?bgColor=white" />
+    <meta property="og:image" content="{{ ws_url }}/image/{{ og_tags.chembl_id }}.png?bgColor=white" />
+    <meta property="og:image:secure_url" content="{{ ws_url }}/image/{{ og_tags.chembl_id }}.png?bgColor=white" />
     <meta property="og:image:type" content="image/png" />
 
     <meta property="og:image:width" content="300" />

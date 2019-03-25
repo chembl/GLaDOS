@@ -62,7 +62,7 @@ def get_schema_obj_for_compound(chembl_id, request):
         image_local_url = static("img/compound_placeholders/{}".format(placeholder_image))
         metadata_obj['image'] = "{}{}".format(host_url, image_local_url)
     except (KeyError, AttributeError, TypeError):
-        metadata_obj['image'] = "https://www.ebi.ac.uk/chembl/api/data/image/{}.svg?engine=indigo".format(chembl_id)
+        metadata_obj['image'] = "{0}/image/{1}.svg?engine=indigo".format(settings.WS_URL, chembl_id)
 
     try:
         metadata_obj['molecularFormula'] = item['molecule_properties']['full_molformula']

@@ -169,10 +169,13 @@ SearchModel = Backbone.Model.extend
     deferreds = []
     for es_index_i_key in _.keys(glados.models.paginatedCollections.Settings.ES_INDEXES)
       es_index_i = glados.models.paginatedCollections.Settings.ES_INDEXES[es_index_i_key]
-      deferred_i = $.post(
-        glados.models.paginatedCollections.Settings.ES_BASE_URL + es_index_i.PATH + '/_search',
-        JSON.stringify(esQuery)
-      )
+      deferred_i = $.post
+        url: glados.models.paginatedCollections.Settings.ES_BASE_URL + es_index_i.PATH + '/_search'
+        data: JSON.stringify(esQuery)
+        dataType: 'json'
+        contentType: 'application/json'
+        mimeType: 'application/json'
+
       deferred_i.done(getDoneCallBack(es_index_i.INDEX_NAME))
       deferreds.push(deferred_i)
     $.when.apply($, deferreds).then(then_callback.bind(@), then_callback.bind(@))

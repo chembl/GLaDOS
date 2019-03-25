@@ -43,6 +43,9 @@ glados.useNameSpace 'glados.models.Activity',
         data: esJSONRequest
         type: 'POST'
         reset: true
+        dataType: 'json'
+        contentType: 'application/json'
+        mimeType: 'application/json'
 
       thisModel = @
       $.ajax(fetchESOptions).done((data) ->

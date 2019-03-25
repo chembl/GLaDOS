@@ -7,6 +7,7 @@ import time
 import traceback
 import requests
 import os
+from django.conf import settings
 from . import search_manager
 
 
@@ -158,22 +159,25 @@ def get_initial_search_url(search_params, search_job):
     if search_type == SSSearchJob.SIMILARITY:
 
         threshold = search_params['threshold']
-        search_url = 'https://www.ebi.ac.uk/chembl/api/data/similarity/{search_term}/{threshold}.json' \
-                     '?limit={page_size}&only=molecule_chembl_id,similarity'.format(search_term=search_term,
+        search_url = '{ws_url}/similarity/{search_term}/{threshold}.json' \
+                     '?limit={page_size}&only=molecule_chembl_id,similarity'.format(ws_url=settings.WS_URL,
+                                                                                    search_term=search_term,
                                                                                     threshold=threshold,
                                                                                     page_size=page_size)
 
     elif search_type == SSSearchJob.SUBSTRUCTURE:
 
-        search_url = 'https://www.ebi.ac.uk/chembl/api/data/substructure/{search_term}.json' \
-                     '?limit={page_size}&only=molecule_chembl_id'.format(search_term=search_term, page_size=page_size)
+        search_url = '{ws_url}/substructure/{search_term}.json' \
+                     '?limit={page_size}&only=molecule_chembl_id'.format(ws_url=settings.WS_URL,
+                                                                         search_term=search_term, page_size=page_size)
 
     elif search_type == SSSearchJob.CONNECTIVITY:
 
-        search_url = 'https://www.ebi.ac.uk/chembl/api/data/molecule.json?limit={page_size}' \
+        search_url = '{ws_url}/molecule.json?limit={page_size}' \
                      '&only=molecule_chembl_id' \
                      '&molecule_structures__canonical_smiles__flexmatch={search_term}'.format(
-                      search_term=search_term, page_size=page_size
+                        ws_url=settings.WS_URL,
+                        search_term=search_term, page_size=page_size
                      )
 
     return search_url

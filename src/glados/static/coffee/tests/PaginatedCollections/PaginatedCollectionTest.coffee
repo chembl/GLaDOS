@@ -158,23 +158,23 @@ describe "Paginated Collection", ->
 #      done()
 
     it "defines the initial url", ->
-      expect(drugList.url).toBe('https://www.ebi.ac.uk/chembl/api/data/molecule.json?limit=20&offset=0')
+      expect(drugList.url).toBe(glados.Settings.WS_BASE_URL+'molecule.json?limit=20&offset=0')
 
 
     it "defines the url for the 5th page", ->
       drugList.setPage(5)
-      expect(drugList.url).toBe('https://www.ebi.ac.uk/chembl/api/data/molecule.json?limit=20&offset=80')
+      expect(drugList.url).toBe(glados.Settings.WS_BASE_URL+'molecule.json?limit=20&offset=80')
 
     it "defines the url after switching to 5 items per page", ->
       drugList.resetPageSize(5)
-      expect(drugList.url).toBe('https://www.ebi.ac.uk/chembl/api/data/molecule.json?limit=5&offset=0')
+      expect(drugList.url).toBe(glados.Settings.WS_BASE_URL+'molecule.json?limit=5&offset=0')
 
     it "generates a url from custom parameters", ->
 
       customPageSize = 50
       customPageNum = 10
       url = drugList.getPaginatedURL(customPageSize, customPageNum)
-      expect(url).toBe('https://www.ebi.ac.uk/chembl/api/data/molecule.json?limit=50&offset=450')
+      expect(url).toBe(glados.Settings.WS_BASE_URL+'molecule.json?limit=50&offset=450')
 
     it "generates a correct paginated url (sorting)", ->
       drugList.sortCollection('molecule_chembl_id')
@@ -201,7 +201,7 @@ describe "Paginated Collection", ->
     it 'generates the initial url', ->
 
       console.log 'generates the initial url'
-      urlMustBe = 'https://www.ebi.ac.uk/chembl/api/data/activity.json?limit=20&offset=0&target_chembl_id=CHEMBL2096905&standard_type=Ki'
+      urlMustBe = glados.Settings.WS_BASE_URL+'activity.json?limit=20&offset=0&target_chembl_id=CHEMBL2096905&standard_type=Ki'
       expect(list.url).toBe(urlMustBe)
 
   # ------------------------------

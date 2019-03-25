@@ -77,7 +77,6 @@ def get_items_with_context(index_name, raw_search_data, context_id, id_property,
 
     scores_query = {
         'function_score': {
-            'query': {},
             'functions': [{
                 'script_score': {
                     'script': {
@@ -85,7 +84,7 @@ def get_items_with_context(index_name, raw_search_data, context_id, id_property,
                         'params': {
                             'scores': context_index,
                         },
-                        'inline': score_script
+                        'source': score_script
                     }
                 }
             }]

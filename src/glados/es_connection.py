@@ -18,7 +18,7 @@ REQUIRED_INDEXES = [
         'shards': 7,
         'replicas': 1,
         'mappings': {
-            'es_cached_request': {
+            '_doc': {
                 'properties': {
                     'es_index': KEYWORD_TYPE,
                     'es_query': KEYWORD_TYPE,
@@ -40,7 +40,7 @@ REQUIRED_INDEXES = [
         'shards': 7,
         'replicas': 1,
         'mappings': {
-            'es_download_record': {
+            '_doc': {
                 'properties': {
                     'download_id': KEYWORD_TYPE,
                     'time_taken': INTEGER_TYPE,
@@ -65,7 +65,7 @@ REQUIRED_INDEXES = [
         'shards': 7,
         'replicas': 1,
         'mappings': {
-            'es_view_record': {
+            '_doc': {
                 'properties': {
                     'search_type': KEYWORD_TYPE,
                     'run_env_type': KEYWORD_TYPE,
@@ -83,7 +83,7 @@ REQUIRED_INDEXES = [
         'shards': 7,
         'replicas': 1,
         'mappings': {
-            'es_view_record': {
+            '_doc': {
                 'properties': {
                     'view_name': KEYWORD_TYPE,
                     'view_type': KEYWORD_TYPE,
@@ -103,7 +103,13 @@ REQUIRED_INDEXES = [
     {
         'idx_name': 'chembl_glados_tiny_url',
         'shards': 7,
-        'replicas': 1
+        'replicas': 1,
+        'mappings': {
+            '_doc': {
+                'properties': {
+                }
+            }
+        }
     }
 ]
 

@@ -167,6 +167,9 @@ glados.useNameSpace 'glados.models.Aggregations',
           data: esJSONRequest
           type: 'POST'
           reset: true
+          dataType: 'json'
+          contentType: 'application/json'
+          mimeType: 'application/json'
 
         fetchPromise = $.ajax(fetchESOptions)
 
@@ -203,6 +206,9 @@ glados.useNameSpace 'glados.models.Aggregations',
           data: esJSONRequest
           type: 'POST'
           reset: true
+          dataType: 'json'
+          contentType: 'application/json'
+          mimeType: 'application/json'
 
         fetchPromise = $.ajax(fetchESOptions)
 

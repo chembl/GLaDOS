@@ -17,6 +17,7 @@ import logging
 import yaml
 from pymongo.read_preferences import ReadPreference
 
+
 class GladosSettingsError(Exception):
     """Base class for exceptions in GLaDOS configuration."""
     pass
@@ -28,9 +29,19 @@ class RunEnvs(object):
     TEST = 'TEST'
     PROD = 'PROD'
 
+
+# ----------------------------------------------------------------------------------------------------------------------
+# External Resources Defaults (will be overwritten by .yml file)
+# ----------------------------------------------------------------------------------------------------------------------
+WS_URL = 'https://www.ebi.ac.uk/chembl/api/data'
+BEAKER_URL = 'https://www.ebi.ac.uk/chembl/api/utils'
+ELASTICSEARCH_HOST = '<INTERNAL_URL_CAN NOT BE PUBLISHED>'
+ELASTICSEARCH_EXTERNAL_URL = 'https://www.ebi.ac.uk/chembl/glados-es'
+
 # ----------------------------------------------------------------------------------------------------------------------
 # Read config file
 # ----------------------------------------------------------------------------------------------------------------------
+
 
 custom_config_file_path = os.getenv('CONFIG_FILE_PATH')
 if custom_config_file_path is not None:
@@ -72,11 +83,22 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # ----------------------------------------------------------------------------------------------------------------------
 # SERVER BASE PATH
 # ----------------------------------------------------------------------------------------------------------------------
-
-
 # For usage behind proxies eg: 'chembl/beta/', you don't need to care about this in DEV mode
 SERVER_BASE_PATH = '' if os.getenv('SERVER_BASE_PATH') is None else os.getenv('SERVER_BASE_PATH') + '/'
 print('SERVER_BASE_PATH: ', SERVER_BASE_PATH)
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ChEMBL API
+# ----------------------------------------------------------------------------------------------------------------------
+chembl_api_config = run_config.get('chembl_api')
+if chembl_api_config is None:
+    raise GladosSettingsError("You must provide the chembl_api configuration")
+else:
+    WS_URL = chembl_api_config.get('ws_url')
+    BEAKER_URL = chembl_api_config.get('beaker_url')
+    if WS_URL is None or BEAKER_URL is None:
+        raise GladosSettingsError("You must provide both the web services (data) URL and beaker (utils) URL")
+
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Admin user
@@ -132,6 +154,11 @@ else:
     else:
         ELASTICSEARCH_USERNAME = elasticsearch_config.get('username')
         ELASTICSEARCH_PASSWORD = elasticsearch_config.get('password')
+
+    ELASTICSEARCH_EXTERNAL_URL = elasticsearch_config.get('public_host')
+    if ELASTICSEARCH_EXTERNAL_URL is None:
+        raise GladosSettingsError("You must provide the elasticsearch public URL that will be accessible from the js "
+                                  "code in the browser")
 
 ALLOWED_HOSTS = ['*']
 

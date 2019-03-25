@@ -5,11 +5,15 @@ import traceback
 
 
 class TinyURLIndex(DocType):
+
     long_url = Text()
     hash = Text()
 
+    class Index:
+        name = 'chembl_glados_tiny_url'
+
     class Meta:
-        index = 'chembl_glados_tiny_url'
+        doc_type = '_doc'
 
 
 class ESCachedRequestIndex(DocType):
@@ -23,9 +27,11 @@ class ESCachedRequestIndex(DocType):
     # Do not use elasticsearch_dsl Date type, it does not serializes correctly
     request_date = Integer()
 
+    class Index:
+        name = 'chembl_glados_es_cache_usage'
+
     class Meta:
-        index = 'chembl_glados_es_cache_usage'
-        doc_type = 'es_cached_request'
+        doc_type = '_doc'
 
         
 class ESDownloadRecordIndex(DocType):
@@ -42,9 +48,11 @@ class ESDownloadRecordIndex(DocType):
     # Do not use elasticsearch_dsl Date type, it does not serialize correctly
     request_date = Integer()
 
+    class Index:
+        name = 'chembl_glados_es_download_record'
+
     class Meta:
-        index = 'chembl_glados_es_download_record'
-        doc_type = 'es_download_record'
+        doc_type = '_doc'
 
 
 class ESSearchRecordIndex(DocType):
@@ -56,9 +64,11 @@ class ESSearchRecordIndex(DocType):
     time_taken = Integer()
     is_new = Boolean()
 
+    class Index:
+        name = 'chembl_glados_es_search_record'
+
     class Meta:
-        index = 'chembl_glados_es_search_record'
-        doc_type = 'es_search_record'
+        doc_type = '_doc'
 
 
 class ESViewRecordIndex(DocType):
@@ -69,9 +79,11 @@ class ESViewRecordIndex(DocType):
     host = Keyword()
     request_date = Integer()
 
+    class Index:
+        name = 'chembl_glados_es_view_record'
+
     class Meta:
-        index = 'chembl_glados_es_view_record'
-        doc_type = 'es_view_record'
+        doc_type = '_doc'
 
 
 class ElasticSearchMultiSearchQuery:

@@ -14,7 +14,7 @@ glados.useNameSpace 'glados.models',
       @set('tissue_chembl_id', id)
 
       if @get('fetch_from_elastic')
-        @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_tissue/tissue/' + id
+        @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_tissue/_doc/' + id
       else
         @url = glados.Settings.WS_BASE_URL + 'tissue/' + id + '.json'
 

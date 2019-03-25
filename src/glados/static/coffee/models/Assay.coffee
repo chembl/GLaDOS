@@ -13,7 +13,7 @@ Assay = Backbone.Model.extend
     @set('assay_chembl_id', id)
 
     if @get('fetch_from_elastic')
-      @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_assay/assay/' + id
+      @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_assay/_doc/' + id
     else
       @url = glados.Settings.WS_BASE_URL + 'assay/' + id + '.json'
 

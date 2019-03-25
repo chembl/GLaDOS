@@ -385,17 +385,19 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         esQuery.query.bool.must.push stickyQuery
 
     addHighlightsToQuery: (esQuery)->
-      esQuery.highlight = {
-        order: 'score'
-        fragment_size: 150
-        number_of_fragments: 3
-        fragmenter: 'simple'
-        pre_tags: [glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_OPEN_TAG]
-        post_tags: [glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_CLOSE_TAG]
-        type: 'fvh'
-        fields:
-          '*': {}
-      }
+# TEMPORAL DISABLE OF HIGHLIGHTING
+#      esQuery.highlight = {
+#        order: 'score'
+#        fragment_size: 150
+#        number_of_fragments: 3
+#        fragmenter: 'simple'
+#        pre_tags: [glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_OPEN_TAG]
+#        post_tags: [glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_CLOSE_TAG]
+#        type: 'fvh'
+#        fields:
+#          '*': {}
+#      }
+      return
 
     addFacetsToQuery: (esQuery, facetsFiltered, requestFacets, facetsFirstCall) ->
 
@@ -493,7 +495,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       # Includes the request for the faceting data
       esJSONRequestData = JSON.stringify(@getRequestData(1, 0, true, first_call))
       # Uses POST to prevent result caching
-      ajax_deferred = $.post(es_url, esJSONRequestData)
+      ajax_deferred = $.post
+        url: es_url
+        data: esJSONRequestData
+        dataType: 'json'
+        contentType: 'application/json'
+        mimeType: 'application/json'
       return ajax_deferred
 
     __parseFacetsGroupsData: (non_selected_facets_groups, es_data, first_call, resolve, reject, needs_second_call)->
@@ -791,7 +798,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       if not totalRecords?
         url = @getURL()
         requestData = JSON.stringify(thisCollection.getRequestData(1, 1))
-        restartGetAllResults = $.post(url, requestData).done((response) ->
+        restartGetAllResults = $.post(
+          {
+            url: url
+            data: requestData
+            dataType: 'json'
+            contentType: 'application/json'
+            mimeType: 'application/json'
+          }).done((response) ->
           thisCollection.setMeta('total_records', response.hits.total)
           thisCollection.getAllResults($progressElement, askingForOnlySelected)
         )
@@ -834,7 +848,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         else
           data = JSON.stringify(thisCollection.getRequestData(currentPage, pageSize))
 
-        return $.post(url, data).done((response) ->
+        return $.post(
+          {
+            url: url
+            data: data
+            dataType: 'json'
+            contentType: 'application/json'
+            mimeType: 'application/json'
+          }).done((response) ->
           #I know that I must be receiving currentPage.
           newItems = (item._source for item in response.hits.hits)
           # now I add them in the corresponding position in the items array

@@ -105,9 +105,10 @@ glados.useNameSpace 'glados',
       LIGHT_GREEN5: '#f1f8e9'
 
     GLADOS_STRINGS_PREFIX: 'glados_es_gs__'
-    WS_HOSTNAME: 'https://www.ebi.ac.uk/'
-    WS_BASE_URL: 'https://www.ebi.ac.uk/chembl/api/data/'
-    BEAKER_BASE_URL: 'https://www.ebi.ac.uk/chembl/api/utils/'
+    # Thi URLs come from the django settings
+    WS_BASE_URL: 'check glados.settings.WS_URL'
+    BEAKER_BASE_URL: 'check glados.settings.BEAKER_URL'
+    ES_BASE_URL: 'check glados.settings.ELASTICSEARCH_EXTERNAL_URL'
     # Searches
     SEARCH_INPUT_DEBOUNCE_TIME: 600
     # Paginated Collections
@@ -236,11 +237,11 @@ glados.loadURLPaths = (request_root, app_root, static_root)->
 
   glados.Settings.SUBSTRUCTURE_SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL +
     'substructure_search_results/'
-  glados.Settings.WS_BASE_SUBSTRUCTURE_SEARCH_URL = 'https://www.ebi.ac.uk/chembl/api/data/substructure.json'
+  glados.Settings.WS_BASE_SUBSTRUCTURE_SEARCH_URL = glados.Settings.WS_BASE_URL+'substructure.json'
 
   glados.Settings.SIMILARITY_SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL +
     'similarity_search_results/'
-  glados.Settings.WS_BASE_SIMILARITY_SEARCH_URL = 'https://www.ebi.ac.uk/chembl/api/data/similarity.json'
+  glados.Settings.WS_BASE_SIMILARITY_SEARCH_URL = glados.Settings.WS_BASE_URL+'similarity.json'
 
   glados.Settings.FLEXMATCH_SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL +
     'flexmatch_search_results/'
@@ -248,7 +249,7 @@ glados.loadURLPaths = (request_root, app_root, static_root)->
   glados.Settings.BLAST_SEARCH_RESULTS_PAGE = glados.Settings.GLADOS_MAIN_ROUTER_BASE_URL +
     'blast_search_results/'
 
-  glados.Settings.WS_BASE_FLEXMATCH_SEARCH_URL = 'https://www.ebi.ac.uk/chembl/api/data/molecule.json'
+  glados.Settings.WS_BASE_FLEXMATCH_SEARCH_URL = glados.Settings.WS_BASE_URL+'molecule.json'
 
   glados.Settings.BASE_COMPOUND_METABOLISM_FS_URL = '/compound_metabolism/'
 

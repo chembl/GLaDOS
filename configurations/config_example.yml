@@ -1,6 +1,10 @@
 run_env: DEV #DEV, TRAVIS, TEST or PROD
 elasticsearch:
   host: 'http://<YOUR_ELASTICSEARCH_HOST>:9200'
+  public_host: 'https://www.ebi.ac.uk/chembl/glados-es'
+chembl_api:
+  ws_url: 'https://www.ebi.ac.uk/chembl/api/data'
+  beaker_url: 'https://www.ebi.ac.uk/chembl/api/utils'
 server_secret_key: 'server_secret_key'
 enable_twitter: True
 twitter_secrets:
