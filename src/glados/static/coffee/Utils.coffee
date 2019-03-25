@@ -56,7 +56,11 @@ glados.useNameSpace 'glados',
       lookup_url = glados.models.paginatedCollections.Settings.ES_BASE_URL
       lookup_url += '/chembl_chembl_id_lookup/_search?q=status:ACTIVE%20AND%20chembl_id:'
       lookup_url += chemblId
-      ajax_deferred = $.post lookup_url
+      ajax_deferred = $.post
+        url:lookup_url
+        dataType: 'json'
+        contentType: 'application/json'
+        mimeType: 'application/json'
       ajax_deferred.then (data) ->
         if data.hits.hits.length > 0
           entityName = data.hits.hits[0]._source.entity_type
