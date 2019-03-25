@@ -385,17 +385,19 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         esQuery.query.bool.must.push stickyQuery
 
     addHighlightsToQuery: (esQuery)->
-      esQuery.highlight = {
-        order: 'score'
-        fragment_size: 150
-        number_of_fragments: 3
-        fragmenter: 'simple'
-        pre_tags: [glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_OPEN_TAG]
-        post_tags: [glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_CLOSE_TAG]
-        type: 'fvh'
-        fields:
-          '*': {}
-      }
+# TEMPORAL DISABLE OF HIGHLIGHTING
+#      esQuery.highlight = {
+#        order: 'score'
+#        fragment_size: 150
+#        number_of_fragments: 3
+#        fragmenter: 'simple'
+#        pre_tags: [glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_OPEN_TAG]
+#        post_tags: [glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_CLOSE_TAG]
+#        type: 'fvh'
+#        fields:
+#          '*': {}
+#      }
+      return
 
     addFacetsToQuery: (esQuery, facetsFiltered, requestFacets, facetsFirstCall) ->
 
