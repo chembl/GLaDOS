@@ -1,4 +1,8 @@
 run_env: TRAVIS
 elasticsearch:
-  host: 'https://www.ebi.ac.uk/chembl/glados-es/'
+  host: 'http://<YOUR_ELASTICSEARCH_HOST>:9200'
+  public_host: 'https://www.ebi.ac.uk/chembl/glados-es'
+chembl_api:
+  ws_url: 'https://www.ebi.ac.uk/chembl/api/data'
+  beaker_url: 'https://www.ebi.ac.uk/chembl/api/utils'
 filter_query_max_clauses: 30000
