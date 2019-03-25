@@ -103,7 +103,13 @@ REQUIRED_INDEXES = [
     {
         'idx_name': 'chembl_glados_tiny_url',
         'shards': 7,
-        'replicas': 1
+        'replicas': 1,
+        'mappings': {
+            '_doc': {
+                'properties': {
+                }
+            }
+        }
     }
 ]
 
