@@ -5,5 +5,27 @@ glados.useNameSpace 'glados.models.SharePage',
 
     initialize: ->
 
-      console.log 'init Share page Model'
-      console.log @get('long_url')
+      @set('state', glados.models.SharePage.SharePageModel.States.INITIAL_STATE)
+
+    resetState: ->
+
+      @set({
+        'state': glados.models.SharePage.SharePageModel.States.INITIAL_STATE
+        'long_href': window.location.href
+        'short_href': undefined
+      })
+
+    shortenURL: ->
+
+      @set('state', glados.models.SharePage.SharePageModel.States.SHORTENING_URL)
+
+      urlToShorten = window.location.href.match(glados.Settings.SHORTENING_MATCH_REPEXG)[0]
+      paramsDict =
+        long_url: urlToShorten
+      shortenURL = glados.doCSRFPost(glados.Settings.SHORTEN_URLS_ENDPOINT, paramsDict)
+
+
+
+glados.models.SharePage.SharePageModel.States =
+  INITIAL_STATE: 'INITIAL_STATE'
+  SHORTENING_URL: 'SHORTENING_URL'

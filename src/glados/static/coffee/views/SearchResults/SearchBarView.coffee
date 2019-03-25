@@ -80,9 +80,6 @@ glados.useNameSpace 'glados.views.SearchResults',
 glados.views.SearchResults.SearchBarView.createInstances = () ->
   glados.views.SearchResults.SearchBarView.BCKSRBInstance = undefined
   if $('#BCK-ChEMBL-Header').length == 1
-    sharePageModel = new glados.models.SharePage.SharePageModel
-      long_url: window.location.href
 
     glados.views.SearchResults.SearchBarView.HeaderInstance = new glados.views.SearchResults.SearchBarView
       el: $('#BCK-ChEMBL-Header')
-      model: sharePageModel

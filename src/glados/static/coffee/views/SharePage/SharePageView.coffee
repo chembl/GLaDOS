@@ -1,23 +1,43 @@
 glados.useNameSpace 'glados.views.SharePage',
   SharePageView: Backbone.View.extend
 
+    events:
+      'click .BCK-Shorten-link': 'shortenOrExpandURL'
+
+    initialize: ->
+
+      @model.on 'change:state', @processModelState, @
+
     render: ->
       console.log 'RENDER SHARE VIEW'
+      @model.resetState()
+      @processModelState()
+      console.log 'model: ', @model
+#      $element = $(@el)
+#      needsShortening = glados.Utils.URLS.URLNeedsShortening(window.location.href, 100)
 
-      $element = $(@el)
-      needsShortening = glados.Utils.URLS.URLNeedsShortening(window.location.href, 100)
-      match = window.location.href.match(glados.Settings.SHORTENING_MATCH_REPEXG)
-      @renderURLContainer(window.location.href)
-
-      if needsShortening and match?
-
-        $shortenBtnContainer = $element.find('.BCK-shortenBtnContainer')
-        glados.Utils.fillContentForElement($shortenBtnContainer)
-        $shortenBTN = $shortenBtnContainer.find('.BCK-Shorten-link')
-        @shortenLinkBound = @shortenURL.bind(@)
-        $shortenBTN.click(@shortenLinkBound)
+#      match = window.location.href.match(glados.Settings.SHORTENING_MATCH_REPEXG)
+#      @renderURLContainer(window.location.href)
+#
+#      if needsShortening and match?
+#
+#        $shortenBtnContainer = $element.find('.BCK-shortenBtnContainer')
+#        glados.Utils.fillContentForElement($shortenBtnContainer)
+#        $shortenBTN = $shortenBtnContainer.find('.BCK-Shorten-link')
+#        @shortenLinkBound = @shortenURL.bind(@)
+#        $shortenBTN.click(@shortenLinkBound)
 
       @showModal()
+
+    processModelState: ->
+
+      console.log 'process model state'
+      currentState = @model.get('state')
+
+      if currentState == glados.models.SharePage.SharePageModel.States.INITIAL_STATE
+        @renderURLContainer(@model.get('long_href'))
+      else if currentState == glados.models.SharePage.SharePageModel.States.SHORTENING_URL
+        @renderMessage('Processing...')
 
     renderURLContainer: (link) ->
 
@@ -29,6 +49,20 @@ glados.useNameSpace 'glados.views.SharePage',
 
       ButtonsHelper.initCroppedContainer($inkToShareContainer, config, cleanup=true)
 
+    renderMessage: (msg) ->
+
+      $msgContainer = $(@el).find('.Handlebars-Shortening-Info')
+      $msgContainer.text(msg)
+
+    shortenOrExpandURL: (event) ->
+
+      $clickedBtn = $(event.currentTarget)
+      console.log 'shortenOrExpandURL'
+      isShortening = $clickedBtn.attr('data-shorten-or-expand') == 'shorten'
+      console.log 'isShortening: ', isShortening
+      if isShortening
+        @model.shortenURL()
+
     showModal: ->
 
       $element = $(@el)
@@ -36,7 +70,7 @@ glados.useNameSpace 'glados.views.SharePage',
 
     shortenURL: ->
 
-      $shorteningInfo = $(@el).find('.BCK-shortening-info')
+
 
       urlToShorten = window.location.href.match(glados.Settings.SHORTENING_MATCH_REPEXG)[0]
       paramsDict =

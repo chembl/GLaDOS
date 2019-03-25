@@ -13,7 +13,11 @@ glados.useNameSpace 'glados.helpers',
 
       if not @sharePageView?
 
+        sharePageModel = new glados.models.SharePage.SharePageModel
+          long_href: window.location.href
+
         @sharePageView = new glados.views.SharePage.SharePageView
           el: $modal
+          model: sharePageModel
 
       @sharePageView.render()
