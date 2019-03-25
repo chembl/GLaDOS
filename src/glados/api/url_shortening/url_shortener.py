@@ -5,6 +5,8 @@ from elasticsearch_dsl import Search
 from django.http import JsonResponse
 from datetime import datetime, timedelta, timezone
 
+DAYS_TO_LIVE = 7
+
 
 def process_shorten_url_request(request):
     if request.method == "POST":
@@ -40,7 +42,7 @@ def shorten_url(long_url):
     response = s.execute()
     if response.hits.total == 0:
         dt = datetime.now()
-        td = timedelta(days=4)
+        td = timedelta(days=DAYS_TO_LIVE)
         expiration_date = dt + td
         expires = expiration_date.timestamp() * 1000
         tinyURL = TinyURL(long_url=long_url, hash=url_hash, expires=expires)
@@ -58,9 +60,9 @@ def shorten_url(long_url):
     return url_hash, expiration_date_str
 
 
-def get_original_url(hash):
+def get_original_url(url_hash):
     # look here in elastic
-    s = Search().filter('query_string', query='"' + hash + '"')
+    s = Search().filter('query_string', query='"' + url_hash + '"')
     response = s.execute(ignore_cache=True)
 
     if response.hits.total == 0:
@@ -69,10 +71,17 @@ def get_original_url(hash):
     try:
         expires = response.hits[0].expires
         expiration_date = datetime.utcfromtimestamp(expires / 1000)
+        now = datetime.now()
+        expired = now > expiration_date
+        if expired:
+            return None
+        else:
+            url = response.hits[0].long_url
+            return url
 
     except AttributeError:
         # no expiration time means that it never expires
-        pass
+        url = response.hits[0].long_url
+        return url
 
-    url = response.hits[0].long_url
-    return url
+
