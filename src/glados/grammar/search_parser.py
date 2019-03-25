@@ -16,7 +16,7 @@ import traceback
 import time
 import threading
 import sys
-from glados import glados_server_statistics
+from glados.usage_statistics import glados_server_statistics
 from glados.models import ESSearchRecord
 
 from django.http import HttpResponse

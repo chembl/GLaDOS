@@ -1,6 +1,6 @@
 from glados.models import SSSearchJob
 import json
-from glados import glados_server_statistics
+from glados.usage_statistics import glados_server_statistics
 import socket
 from django_rq import job
 import time
