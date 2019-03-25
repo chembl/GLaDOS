@@ -59,7 +59,7 @@ glados.useNameSpace 'glados.views.SharePage',
 
       $clickedBtn = $(event.currentTarget)
       isShortening = $clickedBtn.attr('data-shorten-or-expand') == 'shorten'
-      
+
       if isShortening
         @model.shortenURL()
       else
