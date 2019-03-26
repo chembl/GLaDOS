@@ -13,7 +13,7 @@ from glados.api.url_shortening import url_shortener
 from glados.utils import *
 from twitter import *
 
-from src.glados.usage_statistics import glados_server_statistics
+from glados.usage_statistics import glados_server_statistics
 from . import heatmap_helper
 from . import og_tags_generator
 from . import schema_tags_generator
