@@ -23,9 +23,7 @@ def delete_expired_urls():
         "query":{
             "range": {
                 "expires": {
-                    # less than now
-                    #"lte": str(int(datetime.now().timestamp() * 1000))
-                    "lte": "1554205754971"
+                    "lte": str(int(now.timestamp() * 1000))
                 }
 
             }
