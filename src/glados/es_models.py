@@ -62,8 +62,8 @@ class ESTinyURLUsageRecordIndex(DocType):
     run_env_type = Keyword()
     request_date = Integer()
 
-    class Meta:
-        index = 'chembl_glados_es_tinyurl_usage_record'
+    class Index:
+        name = 'chembl_glados_es_tinyurl_usage_record'
 
     class Meta:
         doc_type = '_doc'
