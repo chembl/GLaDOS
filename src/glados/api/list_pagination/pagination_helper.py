@@ -1,5 +1,5 @@
 from django.http import JsonResponse, HttpResponse
-from glados import glados_server_statistics
+from glados.usage_statistics import glados_server_statistics
 import traceback
 from glados.models import SSSearchJob
 from glados.api.sssearch import search_manager

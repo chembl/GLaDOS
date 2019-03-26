@@ -1,6 +1,6 @@
 {% load static %}
 
-<div class="chembl-header">
+<div class="chembl-header" id="BCK-ChEMBL-Header">
 
     <div class="inner-row">
 
@@ -45,6 +45,12 @@
                     <div class="col l4 m6 s12 dropdown-item">
 
                         <a href="{% url 'web_services_home' %}" target="_blank">Web Services</a>
+
+                    </div>
+
+                    <div class="col l4 m6 s12 dropdown-item">
+
+                        <a href="{% url 'old_interface_home' %}" target="_blank">Old Interface</a>
 
                     </div>
 
@@ -165,6 +171,8 @@
 
             <li class="nav-link"><a href="{% url 'web_services_home' %}" target="_blank">Web Services</a></li>
 
+            <li class="nav-link"><a href="{% url 'old_interface_home' %}" target="_blank">Old Interface</a></li>
+
             <!-- More Links -->
             <li class="dropdown nav-link">
 
@@ -237,6 +245,14 @@
             </li>
 
         </ul>
+
+        {% if show_save_button %}
+        <ul class="header-nav-links show-on-large-pin-top">
+            <li class="nav-link save-page">
+                <a class="BCK-open-share-modal"><i class="icon icon-functional" data-icon="r"></i> Share</a>
+            </li>
+        </ul>
+        {% endif %}
 
     </div>
 

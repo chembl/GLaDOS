@@ -359,6 +359,10 @@ header .row {
               font-family: $verdana;
               letter-spacing: 0.1em;
 
+              &.save-page {
+                border-right: none;
+              }
+
               -webkit-transition: background-color 400ms ease-in-out;
               transition: background-color 400ms ease-in-out;
 

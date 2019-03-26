@@ -8,6 +8,7 @@ class TinyURLIndex(DocType):
 
     long_url = Text()
     hash = Text()
+    expires = Integer()
 
     class Index:
         name = 'chembl_glados_tiny_url'
@@ -50,6 +51,19 @@ class ESDownloadRecordIndex(DocType):
 
     class Index:
         name = 'chembl_glados_es_download_record'
+
+    class Meta:
+        doc_type = '_doc'
+
+
+class ESTinyURLUsageRecordIndex(DocType):
+    event = Keyword()
+    host = Keyword()
+    run_env_type = Keyword()
+    request_date = Integer()
+
+    class Index:
+        name = 'chembl_glados_es_tinyurl_usage_record'
 
     class Meta:
         doc_type = '_doc'

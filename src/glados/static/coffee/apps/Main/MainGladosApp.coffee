@@ -106,8 +106,7 @@ glados.useNameSpace 'glados.apps.Main',
           }
         ]
 
-        glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks, longFilter=undefined,
-          hideShareButton=false, longFilterURL=undefined, askBeforeShortening=true)
+        glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks, longFilter=undefined, longFilterURL=undefined)
         SearchResultsApp.initSubstructureSearchResults(searchTerm)
 
     @initSimilaritySearchResults = (searchTerm, threshold) ->
@@ -125,8 +124,7 @@ glados.useNameSpace 'glados.apps.Main',
           }
         ]
 
-        glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks, longFilter=undefined,
-          hideShareButton=false, longFilterURL=undefined, askBeforeShortening=true)
+        glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks, longFilter=undefined, longFilterURL=undefined)
         SearchResultsApp.initSimilaritySearchResults(searchTerm, threshold)
 
     @initFlexmatchSearchResults = (searchTerm) ->
@@ -143,8 +141,7 @@ glados.useNameSpace 'glados.apps.Main',
             link: "#{glados.Settings.FLEXMATCH_SEARCH_RESULTS_PAGE}#{searchTerm}/#{searchTerm}"
           }
         ]
-        glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks, longFilter=undefined,
-          hideShareButton=false, longFilterURL=undefined, askBeforeShortening=true)
+        glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks, longFilter=undefined, longFilterURL=undefined)
         SearchResultsApp.initFlexmatchSearchResults(searchTerm)
 
     @initBLASTSearchResults = (base64Params) ->
@@ -163,8 +160,7 @@ glados.useNameSpace 'glados.apps.Main',
           }
         ]
 
-        glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks, longFilter=undefined,
-          hideShareButton=false, longFilterURL=undefined, askBeforeShortening=true)
+        glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks, longFilter=undefined, longFilterURL=undefined)
 
         SearchResultsApp.initBLASTSearchResults(base64Params)
 
@@ -208,7 +204,6 @@ glados.useNameSpace 'glados.apps.Main',
 
         glados.apps.BreadcrumbApp.setBreadCrumb(breadcrumbLinks,
           longFilter=query,
-          hideShareButton=false,
           longFilterURL=listConfig.BROWSE_LIST_URL(query))
         console.log 'before initBrowserForEntity'
         glados.apps.Browsers.BrowserApp.initBrowserForEntity(entityName, query, state, isFullState)

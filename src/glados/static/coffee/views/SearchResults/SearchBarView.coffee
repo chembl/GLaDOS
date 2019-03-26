@@ -22,6 +22,7 @@ glados.useNameSpace 'glados.views.SearchResults',
       @autocompleteView.attachSearchBar(@)
       @initializeSketcherButtons()
       @initializeSequenceSearchButtons()
+      @initializeSaveButton()
 
     initializeSketcherButtons: ->
       $openEditorBtn = $(@el).find('.BCK-Draw-Structure')
@@ -30,6 +31,11 @@ glados.useNameSpace 'glados.views.SearchResults',
     initializeSequenceSearchButtons: ->
       $enterSequenceButton = $(@el).find('.BCK-Enter-Sequence')
       $enterSequenceButton.click (-> glados.helpers.SequenceSearchHelper.showSequenceSearchModal())
+
+    initializeSaveButton: ->
+      $saveButton = $(@el).find('.BCK-open-share-modal')
+      $saveButton.click(-> glados.helpers.SharePageHelper.showSharePageModal())
+
     # ------------------------------------------------------------------------------------------------------------------
     # Events Handling
     # ------------------------------------------------------------------------------------------------------------------
@@ -73,10 +79,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
 glados.views.SearchResults.SearchBarView.createInstances = () ->
   glados.views.SearchResults.SearchBarView.BCKSRBInstance = undefined
-  if $('#BCK-SRB-wrapper').length == 1
-    glados.views.SearchResults.SearchBarView.BCKSRBInstance = new glados.views.SearchResults.SearchBarView
-      el: $('#BCK-SRB-wrapper')
-  glados.views.SearchResults.SearchBarView.HeaderInstance = undefined
-  if $('#BCK-SearchBarContainer').length == 1
+  if $('#BCK-ChEMBL-Header').length == 1
+
     glados.views.SearchResults.SearchBarView.HeaderInstance = new glados.views.SearchResults.SearchBarView
-      el: $('#BCK-SearchBarContainer')
+      el: $('#BCK-ChEMBL-Header')

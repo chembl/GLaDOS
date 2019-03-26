@@ -1,20 +1,22 @@
-from django.shortcuts import render
-from twitter import *
+import datetime
+import re
+
+import requests
+import timeago
+from apiclient.discovery import build
 from django.conf import settings
-from glados.utils import *
 from django.core.cache import cache
 from django.http import JsonResponse, HttpResponse
-import glados.url_shortener.url_shortener as url_shortener
-from apiclient.discovery import build
-import re
+from django.shortcuts import render
 from elasticsearch_dsl import Search
-import requests
-import datetime
-import timeago
+from glados.api.url_shortening import url_shortener
+from glados.utils import *
+from twitter import *
+
+from glados.usage_statistics import glados_server_statistics
+from . import heatmap_helper
 from . import og_tags_generator
 from . import schema_tags_generator
-from . import glados_server_statistics
-from . import heatmap_helper
 
 
 def visualise(request):
@@ -344,12 +346,16 @@ def design_components(request):
 
 
 def main_html_base_no_bar(request):
-    return render(request, 'glados/mainGladosNoBar.html')
+    context = {
+        'show_save_button': True
+    }
+    return render(request, 'glados/mainGladosNoBar.html', context)
 
 
 def render_params_from_hash(request, hash):
     context = {
-        'shortened_params': url_shortener.get_original_url(hash)
+        'shortened_params': url_shortener.get_original_url(hash),
+        'show_save_button': True
     }
     return render(request, 'glados/mainGladosNoBar.html', context)
 

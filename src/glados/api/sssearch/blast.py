@@ -10,7 +10,7 @@ from django_rq import job
 import xml.etree.ElementTree as ET
 import re
 import traceback
-from glados import glados_server_statistics
+from glados.usage_statistics import glados_server_statistics
 from dateutil import parser
 import socket
 from django.core.cache import cache

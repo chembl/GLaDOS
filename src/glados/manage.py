@@ -15,6 +15,7 @@ def main():
     import glados.static_files_compiler
     import glados.apache_config_generator
     import glados.admin_user_generator
+    from glados.utils import manage_shortened_urls
 
     if not os.path.exists(settings.DYNAMIC_DOWNLOADS_DIR):
         print("Dynamic downloads dir ({}) didn't exist, I will create it".format(settings.DYNAMIC_DOWNLOADS_DIR))
@@ -59,7 +60,12 @@ def main():
             print(now)
             time.sleep(1)
 
-    execute_in_manage = sys.argv[1] not in ['createapacheconfig', 'createdefaultadminuser', 'simulatedaemon']
+    elif os.environ.get('RUN_MAIN') != 'true' and len(sys.argv) > 1 and sys.argv[1] == 'deleteexpiredurls':
+
+        manage_shortened_urls.delete_expired_urls()
+
+    execute_in_manage = sys.argv[1] not in ['createapacheconfig', 'createdefaultadminuser', 'simulatedaemon',
+                                            'deleteexpiredurls']
     if execute_in_manage:
         execute_from_command_line(sys.argv)
 

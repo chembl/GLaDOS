@@ -42,7 +42,6 @@ ELASTICSEARCH_EXTERNAL_URL = 'https://www.ebi.ac.uk/chembl/glados-es'
 # Read config file
 # ----------------------------------------------------------------------------------------------------------------------
 
-
 custom_config_file_path = os.getenv('CONFIG_FILE_PATH')
 if custom_config_file_path is not None:
     CONFIG_FILE_PATH = custom_config_file_path
@@ -80,6 +79,11 @@ print('FILTER_QUERY_MAX_CLAUSES: ', FILTER_QUERY_MAX_CLAUSES)
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+OLD_INTERFACE_URL = run_config.get('old_interface_url')
+if OLD_INTERFACE_URL is None:
+    raise GladosSettingsError("You must provide the url for the old interface")
+
 # ----------------------------------------------------------------------------------------------------------------------
 # SERVER BASE PATH
 # ----------------------------------------------------------------------------------------------------------------------

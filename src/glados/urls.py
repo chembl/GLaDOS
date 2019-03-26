@@ -1,7 +1,7 @@
 from django.conf.urls import include, url
 from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
-from glados.utils import DirectTemplateView
+from glados.utils_refactor import DirectTemplateView
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.conf import settings
 from . import views
@@ -119,6 +119,10 @@ common_urls = [
     url(r'^ws_home/$',
         RedirectView.as_view(url='https://chembl.gitbook.io/chembl-interface-documentation/web-services',
                              permanent=True), name='web_services_home'),
+
+    url(r'^old_interface/$',
+        RedirectView.as_view(url=settings.OLD_INTERFACE_URL,
+                             permanent=False), name='old_interface_home'),
 
     url(r'^unichem_home/$',
         RedirectView.as_view(url='https://www.ebi.ac.uk/unichem',
@@ -249,8 +253,6 @@ common_urls = [
     # Tiny urls
     # --------------------------------------------------------------------------------------------------------------------
     url(r'^g/tiny/(?P<hash>.*?)$', views.render_params_from_hash, name='tiny'),
-    url(r'^shorten_url', views.shorten_url, name='shorten'),
-    url(r'^extend_url/(?P<hash>.*?)$', views.extend_url, name='extend'),
 
     url(r'^robots.txt', lambda x: HttpResponse(
         "User-Agent: *\nDisallow: / \nUser-Agent: Twitterbot\nAllow: {0}img".format(settings.STATIC_URL),

@@ -303,8 +303,8 @@ glados.loadSearchResultsURLS = ()->
 
   glados.Settings.GENERATE_SERVER_SIDE_DOWNLOAD_ENDPOINT = 'api/chembl/downloads/generate-download/'
   glados.Settings.SEARCH_RESULTS_PARSER_ENDPOINT = 'search_results_parser'
-  glados.Settings.SHORTEN_URLS_ENDPOINT = 'shorten_url'
-  glados.Settings.EXTEND_URLS_ENDPOINT = 'extend_url'
+  glados.Settings.SHORTEN_URLS_ENDPOINT = 'api/chembl/url_shortening/shorten_url/'
+  glados.Settings.EXTEND_URLS_ENDPOINT = 'api/chembl/url_shortening/extend_url/'
   glados.Settings.ELASTICSEARCH_CACHE = 'elasticsearch_cache'
   glados.Settings.REGISTER_USAGE_ENDPOINT = 'register_usage'
   glados.Settings.REGISTER_SEARCH_ENDPOINT = 'register_search'

@@ -1,0 +1,46 @@
+{% verbatim %}
+<script id="Handlebars-Search-SharePageModal" type="text/x-handlebars-template" >
+  <div id="{{id}}" class='modal'>
+    <div class="card-panel z-depth-0">
+        <div>You can share this url with people to let them load this page with the same query:</div>
+        <table>
+            <tr>
+                <td class="BCK-LinkToShare" data-hb-template="Handlebars-Common-CroppedContainer"></td>
+            </tr>
+        </table>
+
+        You can shorten the link by clicking on the button below. Take into account that this will require to store your query in our servers.
+        The shortened link will be valid for one week from the generation time. Remember that the expanded link is valid permanently.
+        <a href="https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions/chembl-data-questions#are-my-queries-stored-and-if-so-are-they-routinely-deleted"
+        target="_blank">Learn More.</a>
+        <br><br>
+        <div class="center-align">
+            <a class="btn-chembl BCK-Shorten-link" data-shorten-or-expand="shorten">Shorten Link</a>
+        </div>
+        <br>
+        <div class="Handlebars-Shortening-Info center-align"></div>
+
+    </div>
+  </div>
+</script>
+
+<script id="Handlebars-ShortenButton-Container" type="text/x-handlebars-template">
+You can shorten the link by clicking on the button below. Take into account that this will require to store your query in our servers.
+The shortened link will be valid for one week from the generation time.
+<a href="https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions/chembl-data-questions#are-my-queries-stored-and-if-so-are-they-routinely-deleted"
+target="_blank">Learn More.</a>
+<br><br>
+<div class="center-align">
+    <a class="btn-chembl BCK-Shorten-link">Shorten Link</a>
+</div>
+
+</script>
+
+<script id="Handlebars-Shortening-Info" type="text/x-handlebars-template">
+<div class="center-align">Shortening link...</div>
+</script>
+<script id="Handlebars-Shortening-Error" type="text/x-handlebars-template">
+<div class="center-align">{{ msg }}</div>
+</script>
+
+{% endverbatim %}

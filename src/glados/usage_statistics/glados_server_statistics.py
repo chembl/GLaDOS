@@ -3,6 +3,7 @@ from glados.models import ESCachedRequest
 from glados.models import ESDownloadRecord
 from glados.models import ESViewRecord
 from glados.models import ESSearchRecord
+from glados.models import ESTinyURLUsageRecord
 import json
 import hashlib
 import base64
@@ -133,3 +134,17 @@ def record_search(search_type, time_taken, is_new=True):
     except:
         traceback.print_exc()
         print('Error saving search record in elastic!')
+
+
+def record_tiny_url_usage(event):
+
+    try:
+        usage_record = ESTinyURLUsageRecord(event=event)
+        print('-------------------------------------------------')
+        print('server statistics')
+        print('record tiny url usage event: ', event)
+        print('-------------------------------------------------')
+        usage_record.indexing()
+    except:
+        traceback.print_exc()
+        print('Error saving tiny url usage record in elastic!')
