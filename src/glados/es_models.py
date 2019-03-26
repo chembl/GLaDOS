@@ -64,7 +64,9 @@ class ESTinyURLUsageRecordIndex(DocType):
 
     class Meta:
         index = 'chembl_glados_es_tinyurl_usage_record'
-        doc_type = 'es_tinyurl_usage_record'
+
+    class Meta:
+        doc_type = '_doc'
 
 
 class ESSearchRecordIndex(DocType):

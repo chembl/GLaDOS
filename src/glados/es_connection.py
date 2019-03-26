@@ -83,7 +83,7 @@ REQUIRED_INDEXES = [
         'shards': 7,
         'replicas': 1,
         'mappings': {
-            'es_tinyurl_usage_record': {
+            '_doc': {
                 'properties': {
                     'event': KEYWORD_TYPE,
                     'run_env_type': KEYWORD_TYPE,
