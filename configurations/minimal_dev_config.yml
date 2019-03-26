@@ -1,8 +1,8 @@
 run_env: DEV #DEV, TRAVIS, TEST or PROD
 elasticsearch:
-  host: 'https://wwwdev.ebi.ac.uk/chembl/glados-es'
-  public_host: 'https://wwwdev.ebi.ac.uk/chembl/glados-es'
+  host: 'https://www.ebi.ac.uk/chembl/glados-es'
+  public_host: 'https://www.ebi.ac.uk/chembl/glados-es'
 chembl_api:
-  ws_url: 'https://wwwdev.ebi.ac.uk/chembl/api/data'
-  beaker_url: 'https://wwwdev.ebi.ac.uk/chembl/api/utils'
+  ws_url: 'https://www.ebi.ac.uk/chembl/api/data'
+  beaker_url: 'https://www.ebi.ac.uk/chembl/api/utils'
 filter_query_max_clauses: 30000
