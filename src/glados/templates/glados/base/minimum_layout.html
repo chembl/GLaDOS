@@ -7,7 +7,7 @@
       <link rel="icon" href="{% static 'favicon.png' %}" type="image/png"/>
       <title>{% block title %}{% endblock %}</title>
       {% block analytics %}
-      {% include "glados/base/hotjar_analytics.html" %}
+      {% include "glados/base/google_analytics.html" %}
       {% endblock %}
       {% include "glados/base/data_protection_banner.html" %}
       {% load compress %}
