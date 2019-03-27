@@ -8,7 +8,7 @@ from . import views
 from django.contrib import admin
 import glados.grammar.search_parser
 from django.views.i18n import javascript_catalog
-
+from glados import old_urls_redirector
 from django.conf.urls import url
 from django.http import HttpResponse
 
@@ -224,23 +224,7 @@ common_urls = [
     # ------------------------------------------------------------------------------------------------------------------
     # Old Interface redirections
     # ------------------------------------------------------------------------------------------------------------------
-    url(r'^compound/inspect/(?P<chembl_id>\w+)/$',
-        RedirectView.as_view(pattern_name='compound_report_card', permanent=True)),
-
-    url(r'^target/inspect/(?P<chembl_id>\w+)/$',
-        RedirectView.as_view(pattern_name='target_report_card', permanent=True)),
-
-    url(r'^assay/inspect/(?P<chembl_id>\w+)/$',
-        RedirectView.as_view(pattern_name='assay_report_card', permanent=True)),
-
-    url(r'^doc/inspect/(?P<chembl_id>\w+)/$',
-        RedirectView.as_view(pattern_name='document_report_card', permanent=True)),
-
-    url(r'^cell/inspect/(?P<chembl_id>\w+)/$',
-        RedirectView.as_view(pattern_name='cell_line_report_card', permanent=True)),
-
-    url(r'^tissue/inspect/(?P<chembl_id>\w+)/$',
-        RedirectView.as_view(pattern_name='tissue_report_card', permanent=True)),
+    url(r'^(index\.php\/)?(?P<entity_name>\w+)/inspect/(?P<chembl_id>\w+)/$', old_urls_redirector.redirect_report_card),
 
     # --------------------------------------------------------------------------------------------------------------------
     # Search Results
