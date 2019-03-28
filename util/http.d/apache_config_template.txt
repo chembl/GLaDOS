@@ -9,11 +9,11 @@ ServerAlias *
 SetEnv force-proxy-request-1.0 1
 ProxyPreserveHost On
 
-RedirectMatch /{SERVER_BASE_PATH}$ {SERVER_BASE_PATH}/
+RedirectMatch ^/{SERVER_BASE_PATH}$ /{SERVER_BASE_PATH}/
 
 # Old beta and chembldb redirections
-RedirectMatch ^/chembl/beta/(.*)$ {SERVER_BASE_PATH}/$1
-RedirectMatch ^/chembldb/(.*)$ {SERVER_BASE_PATH}/$1
+RedirectMatch ^/chembl/beta/(.*)$ /{SERVER_BASE_PATH}/$1
+RedirectMatch ^/chembldb/(.*)$ /{SERVER_BASE_PATH}/$1
 
 # proxy everything except static files and dynamic downloads to gunicorn
 ProxyPassMatch /{SERVER_BASE_PATH}/static/(.*)$ !
