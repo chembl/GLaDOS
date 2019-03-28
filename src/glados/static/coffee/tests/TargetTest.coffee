@@ -22,7 +22,7 @@ describe "Target", ->
     testCompoundsURL = (response, parsed) ->
 
       chemblID = response.target_chembl_id
-      urlMustBe = Compound.getCompoundsListURL('_metadata.related_targets.chembl_ids.\\*:' + chemblID)
+      urlMustBe = Compound.getCompoundsListURL('_metadata.related_targets.all_chembl_ids:' + chemblID)
       expect(parsed.compounds_url).toBe(urlMustBe)
 
     testReportCardURL = (response, parsed) ->

@@ -291,10 +291,10 @@ glados.useNameSpace 'glados.models.Activity',
       allRowsIDS = _.pluck(allRows, 'id')
 
       if aggregations[1] == 'target_chembl_id'
-        filter = "_metadata.related_compounds.chembl_ids.\\*:(#{allRowsIDS.join(' OR ')})"
+        filter = "_metadata.related_compounds.all_chembl_ids:(#{allRowsIDS.join(' OR ')})"
         link = Target.getTargetsListURL(filter)
       else
-        filter = "_metadata.related_targets.chembl_ids.\\*:(#{allRowsIDS.join(' OR ')})"
+        filter = "_metadata.related_targets.all_chembl_ids:(#{allRowsIDS.join(' OR ')})"
         link = Compound.getCompoundsListURL(filter)
 
       matrix.link_to_all_columns = link

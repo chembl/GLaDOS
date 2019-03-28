@@ -35,7 +35,7 @@ describe "Compound", ->
     testRelatedTargetsURL = (response, parsed) ->
 
       chemblID = response.molecule_chembl_id
-      urlMustBe = Target.getTargetsListURL('_metadata.related_compounds.chembl_ids.\\*:' + chemblID)
+      urlMustBe = Target.getTargetsListURL('_metadata.related_compounds.all_chembl_ids:' + chemblID)
       expect(parsed.targets_url).toBe(urlMustBe)
 
     testHasNormalImageURL = (response, parsed) ->

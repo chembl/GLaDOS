@@ -263,7 +263,7 @@ class TargetReportCardApp extends glados.ReportCardApp
       x_axis_initial_num_columns: 10
       x_axis_prop_name: 'x_axis_agg'
       title: 'Associated Compounds for Target ' + chemblID
-      title_link_url: Compound.getCompoundsListURL('_metadata.related_targets.chembl_ids.\\*:' +
+      title_link_url: Compound.getCompoundsListURL('_metadata.related_targets.all_chembl_ids:' +
         chemblID)
       range_categories: true
 
@@ -465,7 +465,7 @@ class TargetReportCardApp extends glados.ReportCardApp
           max_columns: maxCols
           num_columns: defaultCols
           bucket_links:
-            bucket_filter_template: '_metadata.related_targets.chembl_ids.\\*:{{target_chembl_id}} ' +
+            bucket_filter_template: '_metadata.related_targets.all_chembl_ids:{{target_chembl_id}} ' +
               'AND molecule_properties.full_mwt:(>={{min_val}} AND <={{max_val}})'
             template_data:
               target_chembl_id: 'target_chembl_id'

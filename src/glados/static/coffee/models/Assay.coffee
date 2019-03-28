@@ -31,7 +31,7 @@ Assay = Backbone.Model.extend
     objData.document_link = Document.get_report_card_url(objData.document_chembl_id)
     objData.tissue_link = glados.models.Tissue.get_report_card_url(objData.tissue_chembl_id)
 
-    filterForCompounds = '_metadata.related_assays.chembl_ids.\\*:' + objData.assay_chembl_id
+    filterForCompounds = '_metadata.related_assays.all_chembl_ids:' + objData.assay_chembl_id
     objData.compounds_url = Compound.getCompoundsListURL(filterForCompounds)
 
     filterForActivities = 'assay_chembl_id:' + objData.assay_chembl_id

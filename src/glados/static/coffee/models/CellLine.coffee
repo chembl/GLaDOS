@@ -30,7 +30,7 @@ CellLine = Backbone.Model.extend
     filterForActivities = '_metadata.assay_data.cell_chembl_id:' + objData.cell_chembl_id
     objData.activities_url = Activity.getActivitiesListURL(filterForActivities)
 
-    filterForCompounds = '_metadata.related_cell_lines.chembl_ids.\\*:' + objData.cell_chembl_id
+    filterForCompounds = '_metadata.related_cell_lines.all_chembl_ids:' + objData.cell_chembl_id
     objData.compounds_url = Compound.getCompoundsListURL(filterForCompounds)
 
     return objData;

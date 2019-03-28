@@ -194,11 +194,11 @@ describe "Compounds vs Target Matrix", ->
 
 
     if rowsPropName == 'molecule_chembl_id'
-      relatedEntitiesPropName = '_metadata.related_compounds.chembl_ids.\\*'
+      relatedEntitiesPropName = '_metadata.related_compounds.all_chembl_ids'
       filter = "#{relatedEntitiesPropName}:(#{_.keys(rowsGot).join(' OR ')})"
       allColsHeaderURLMustBe = Target.getTargetsListURL(filter)
     else
-      relatedEntitiesPropName = '_metadata.related_targets.chembl_ids.\\*'
+      relatedEntitiesPropName = '_metadata.related_targets.all_chembl_ids'
       filter = "#{relatedEntitiesPropName}:(#{_.keys(rowsGot).join(' OR ')})"
       allColsHeaderURLMustBe = Compound.getCompoundsListURL(filter)
 

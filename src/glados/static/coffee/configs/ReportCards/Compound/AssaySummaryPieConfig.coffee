@@ -18,7 +18,7 @@ glados.useNameSpace 'glados.configs.ReportCards.Compound',
           [chemblIDs, titleAdditionalText] = glados.configs.ReportCards.Compound.ToggleAlternateFormsInPieConfig\
           .getChemblIDsAndTitleAdditionalText(model, thisView)
 
-          titleLinkFilter = Handlebars.compile('_metadata.related_compounds.chembl_ids.\\*:({{#each molecule_chembl_ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
+          titleLinkFilter = Handlebars.compile('_metadata.related_compounds.all_chembl_ids:({{#each molecule_chembl_ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
             molecule_chembl_ids: chemblIDs
 
           relatedAssaysProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RELATED_ASSAYS')
@@ -59,7 +59,7 @@ glados.useNameSpace 'glados.configs.ReportCards.Compound',
       queryConfig =
         type: glados.models.Aggregations.Aggregation.QueryTypes.QUERY_STRING
         query_string_template:\
-        '_metadata.related_compounds.chembl_ids.\\*:({{#each molecule_chembl_ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})'
+        '_metadata.related_compounds.all_chembl_ids:({{#each molecule_chembl_ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})'
         template_data:
           molecule_chembl_ids: 'molecule_chembl_ids'
       return queryConfig
@@ -74,7 +74,7 @@ glados.useNameSpace 'glados.configs.ReportCards.Compound',
             size: 20
             bucket_links:
 
-              bucket_filter_template: '_metadata.related_compounds.chembl_ids.\\*:' +
+              bucket_filter_template: '_metadata.related_compounds.all_chembl_ids:' +
                                       '({{#each molecule_chembl_ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}}) ' +
                                       'AND _metadata.assay_generated.type_label:("{{bucket_key}}"' +
                                       '{{#each extra_buckets}} OR "{{this}}"{{/each}})'

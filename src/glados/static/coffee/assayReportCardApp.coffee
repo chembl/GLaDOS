@@ -110,7 +110,7 @@ class AssayReportCardApp extends glados.ReportCardApp
       x_axis_initial_num_columns: 10
       x_axis_prop_name: 'x_axis_agg'
       title: 'Associated Compounds for Assay ' + chemblID
-      title_link_url: Compound.getCompoundsListURL('_metadata.related_assays.chembl_ids.\\*:' + chemblID)
+      title_link_url: Compound.getCompoundsListURL('_metadata.related_assays.all_chembl_ids:' + chemblID)
       range_categories: true
 
     config =
@@ -200,7 +200,7 @@ class AssayReportCardApp extends glados.ReportCardApp
           max_columns: maxCols
           num_columns: defaultCols
           bucket_links:
-            bucket_filter_template: '_metadata.related_assays.chembl_ids.\\*:{{assay_chembl_id}} ' +
+            bucket_filter_template: '_metadata.related_assays.all_chembl_ids:{{assay_chembl_id}} ' +
                                     'AND molecule_properties.full_mwt:(>={{min_val}} AND <={{max_val}})'
             template_data:
               assay_chembl_id: 'assay_chembl_id'
@@ -231,7 +231,7 @@ class AssayReportCardApp extends glados.ReportCardApp
           size: 20
           bucket_links:
 
-            bucket_filter_template: '_metadata.related_assays.chembl_ids.\\*:{{assay_chembl_id}} ' +
+            bucket_filter_template: '_metadata.related_assays.all_chembl_ids:{{assay_chembl_id}} ' +
                                     'AND target_type:("{{bucket_key}}"' +
                                     '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
             template_data:
@@ -264,7 +264,7 @@ class AssayReportCardApp extends glados.ReportCardApp
           size: 20
           bucket_links:
 
-            bucket_filter_template: '_metadata.related_assays.chembl_ids.\\*:{{assay_chembl_id}} ' +
+            bucket_filter_template: '_metadata.related_assays.all_chembl_ids:{{assay_chembl_id}} ' +
                                     'AND _metadata.protein_classification.l1:("{{bucket_key}}"' +
                                     '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
             template_data:

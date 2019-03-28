@@ -336,7 +336,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
     objData.report_card_url = Compound.get_report_card_url(objData.molecule_chembl_id )
 
-    filterForTargets = '_metadata.related_compounds.chembl_ids.\\*:' + objData.molecule_chembl_id
+    filterForTargets = '_metadata.related_compounds.all_chembl_ids:' + objData.molecule_chembl_id
     objData.targets_url = Target.getTargetsListURL(filterForTargets)
 
     @parseChemSpiderXref(objData)

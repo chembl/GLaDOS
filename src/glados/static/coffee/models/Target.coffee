@@ -91,7 +91,7 @@ Target = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     objData.report_card_url = Target.get_report_card_url(objData.target_chembl_id)
     filterForActivities = 'target_chembl_id:' + objData.target_chembl_id
     objData.activities_url = Activity.getActivitiesListURL(filterForActivities)
-    filterForCompounds = '_metadata.related_targets.chembl_ids.\\*:' + objData.target_chembl_id
+    filterForCompounds = '_metadata.related_targets.all_chembl_ids:' + objData.target_chembl_id
     objData.compounds_url = Compound.getCompoundsListURL(filterForCompounds)
 
     @parseXrefs(objData)

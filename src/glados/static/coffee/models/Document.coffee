@@ -26,7 +26,7 @@ Document = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     filterForActivities = 'document_chembl_id:' + objData.document_chembl_id
     objData.activities_url = Activity.getActivitiesListURL(filterForActivities)
 
-    filterForCompounds = '_metadata.related_documents.chembl_ids.\\*:' + objData.document_chembl_id
+    filterForCompounds = '_metadata.related_documents.all_chembl_ids:' + objData.document_chembl_id
     objData.compounds_url = Compound.getCompoundsListURL(filterForCompounds)
 
     return objData;
