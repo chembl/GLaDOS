@@ -49,7 +49,7 @@ glados.useNameSpace 'glados.models.ServerSideDownloads',
     #-------------------------------------------------------------------------------------------------------------------
     # Check download progress
     #-------------------------------------------------------------------------------------------------------------------
-    getProgressURL: -> "#{glados.Settings.GLADOS_BASE_PATH_REL}api/chembl/downloads/download-progress/#{@get('download_id')}"
+    getProgressURL: -> "#{glados.Settings.GLADOS_BASE_PATH_REL}glados_api/chembl/downloads/download-progress/#{@get('download_id')}"
     checkDownloadProgressPeriodically: ->
 
       progressURL = @getProgressURL()

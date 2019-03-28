@@ -4,6 +4,6 @@ glados.useNameSpace 'glados.models.Search',
   BLASTParamsModel: Backbone.Model.extend
 
     initialize: ->
-      @url = "#{glados.Settings.GLADOS_BASE_PATH_REL}api/chembl/sssearch/blast-params/"
+      @url = "#{glados.Settings.GLADOS_BASE_PATH_REL}glados_api/chembl/sssearch/blast-params/"
 
     paramsLoaded: -> false
