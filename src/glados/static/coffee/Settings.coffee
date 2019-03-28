@@ -301,15 +301,15 @@ glados.loadSearchResultsURLS = ()->
   for Entity in [Compound, Target, Assay, Document, CellLine, glados.models.Tissue, Assay, Activity]
     glados.Settings.ENTITY_NAME_TO_ENTITY[Entity.prototype.entityName] = Entity
 
-  glados.Settings.GENERATE_SERVER_SIDE_DOWNLOAD_ENDPOINT = 'api/chembl/downloads/generate-download/'
+  glados.Settings.GENERATE_SERVER_SIDE_DOWNLOAD_ENDPOINT = 'glados_api/chembl/downloads/generate-download/'
   glados.Settings.SEARCH_RESULTS_PARSER_ENDPOINT = 'search_results_parser'
-  glados.Settings.SHORTEN_URLS_ENDPOINT = 'api/chembl/url_shortening/shorten_url/'
-  glados.Settings.EXTEND_URLS_ENDPOINT = 'api/chembl/url_shortening/extend_url/'
+  glados.Settings.SHORTEN_URLS_ENDPOINT = 'glados_api/chembl/url_shortening/shorten_url/'
+  glados.Settings.EXTEND_URLS_ENDPOINT = 'glados_api/chembl/url_shortening/extend_url/'
   glados.Settings.ELASTICSEARCH_CACHE = 'elasticsearch_cache'
   glados.Settings.REGISTER_USAGE_ENDPOINT = 'register_usage'
   glados.Settings.REGISTER_SEARCH_ENDPOINT = 'register_search'
-  glados.Settings.CHEMBL_LIST_HELPER_ENDPOINT = 'api/chembl/list_pagination/get_page'
-  glados.Settings.CHEMBL_SUBMIT_SS_SEARCH_ENDPOINT = 'api/chembl/sssearch/submit/'
+  glados.Settings.CHEMBL_LIST_HELPER_ENDPOINT = 'glados_api/chembl/list_pagination/get_page'
+  glados.Settings.CHEMBL_SUBMIT_SS_SEARCH_ENDPOINT = 'glados_api/chembl/sssearch/submit/'
   glados.Settings.CHEMBL_LIST_HELPER_URL = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{glados.Settings.CHEMBL_LIST_HELPER_ENDPOINT}"
   glados.Settings.SHORTEN_URLS_URL = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{glados.Settings.SHORTEN_URLS_ENDPOINT}"
   glados.Settings.EXTEND_URLS_ENDPOINT_URL = "#{glados.Settings.GLADOS_BASE_PATH_REL}#{glados.Settings.EXTEND_URLS_ENDPOINT}"

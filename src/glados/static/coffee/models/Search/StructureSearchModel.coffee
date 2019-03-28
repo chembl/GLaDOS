@@ -31,7 +31,7 @@ glados.useNameSpace 'glados.models.Search',
     #-------------------------------------------------------------------------------------------------------------------
     getProgressURL: ->
 
-      url = "#{glados.Settings.GLADOS_BASE_PATH_REL}api/chembl/sssearch/sssearch-progress/#{@get('search_id')}"
+      url = "#{glados.Settings.GLADOS_BASE_PATH_REL}glados_api/chembl/sssearch/sssearch-progress/#{@get('search_id')}"
       if @get('search_type') == glados.models.Search.StructureSearchModel.SEARCH_TYPES.SEQUENCE.BLAST
         url += "?is_blast=True"
       return url
