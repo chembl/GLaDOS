@@ -22,7 +22,7 @@ describe 'Document Model', ->
   testCompoundsURL = (response, parsed) ->
 
     chemblID = response.document_chembl_id
-    compoundsURLMustBe = Compound.getCompoundsListURL('_metadata.related_documents.chembl_ids.\\*:' + chemblID)
+    compoundsURLMustBe = Compound.getCompoundsListURL('_metadata.related_documents.all_chembl_ids:' + chemblID)
     expect(parsed.compounds_url).toBe(compoundsURLMustBe)
   #-------------------------------------------------------------------------------------------------------------------
   # From Web services

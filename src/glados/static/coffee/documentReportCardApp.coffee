@@ -121,7 +121,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
     pieConfig =
       x_axis_prop_name: 'classes'
       title: gettext('glados_compound__associated_targets_by_class_pie_title_base') + chemblID
-      title_link_url: Target.getTargetsListURL('_metadata.related_documents.chembl_ids.\\*:' + chemblID)
+      title_link_url: Target.getTargetsListURL('_metadata.related_documents.all_chembl_ids:' + chemblID)
       custom_empty_message: "No target classification data available for document #{chemblID} (all may be non-protein targets)"
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
       properties:
@@ -134,7 +134,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
       embed_identifier: chemblID
       link_to_all:
         link_text: 'See all targets related to ' + chemblID + ' used in this visualisation.'
-        url: Target.getTargetsListURL('_metadata.related_documents.chembl_ids.\\*:' + chemblID)
+        url: Target.getTargetsListURL('_metadata.related_documents.all_chembl_ids:' + chemblID)
 
     new glados.views.ReportCards.PieInCardView
       model: relatedTargets
@@ -235,7 +235,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
       x_axis_initial_num_columns: 10
       x_axis_prop_name: 'x_axis_agg'
       title: 'Associated Compounds for Document ' + chemblID
-      title_link_url: Compound.getCompoundsListURL('_metadata.related_documents.chembl_ids.\\*:' + chemblID)
+      title_link_url: Compound.getCompoundsListURL('_metadata.related_documents.all_chembl_ids:' + chemblID)
       range_categories: true
 
     config =
@@ -291,7 +291,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
           size: 20
           bucket_links:
 
-            bucket_filter_template: '_metadata.related_documents.chembl_ids.\\*:{{document_chembl_id}} ' +
+            bucket_filter_template: '_metadata.related_documents.all_chembl_ids:{{document_chembl_id}} ' +
                                     'AND _metadata.protein_classification.l1:("{{bucket_key}}"' +
                                     '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
             template_data:
@@ -324,7 +324,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
           size: 20
           bucket_links:
 
-            bucket_filter_template: '_metadata.related_documents.chembl_ids.\\*:{{document_chembl_id}} ' +
+            bucket_filter_template: '_metadata.related_documents.all_chembl_ids:{{document_chembl_id}} ' +
                                     'AND target_type:("{{bucket_key}}"' +
                                     '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
             template_data:
@@ -426,7 +426,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
           max_columns: maxCols
           num_columns: defaultCols
           bucket_links:
-            bucket_filter_template: '_metadata.related_documents.chembl_ids.\\*:{{document_chembl_id}} ' +
+            bucket_filter_template: '_metadata.related_documents.all_chembl_ids:{{document_chembl_id}} ' +
               'AND molecule_properties.full_mwt:(>={{min_val}} AND <={{max_val}})'
             template_data:
               document_chembl_id: 'document_chembl_id'

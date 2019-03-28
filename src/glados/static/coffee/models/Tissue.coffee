@@ -30,7 +30,7 @@ glados.useNameSpace 'glados.models',
       filterForActivities = '_metadata.assay_data.tissue_chembl_id:' + objData.tissue_chembl_id
       objData.activities_url = Activity.getActivitiesListURL(filterForActivities)
 
-      filterForCompounds = '_metadata.related_tissues.chembl_ids.\\*:' + objData.tissue_chembl_id
+      filterForCompounds = '_metadata.related_tissues.all_chembl_ids:' + objData.tissue_chembl_id
       objData.compounds_url = Compound.getCompoundsListURL(filterForCompounds)
 
       return objData;

@@ -143,7 +143,7 @@ class TissueReportCardApp extends glados.ReportCardApp
       x_axis_initial_num_columns: 10
       x_axis_prop_name: 'x_axis_agg'
       title: 'Associated Compounds for Tissue ' + chemblID
-      title_link_url: Compound.getCompoundsListURL('_metadata.related_tissues.chembl_ids.\\*:' + chemblID)
+      title_link_url: Compound.getCompoundsListURL('_metadata.related_tissues.all_chembl_ids:' + chemblID)
       range_categories: true
 
     config =
@@ -252,7 +252,7 @@ class TissueReportCardApp extends glados.ReportCardApp
           max_columns: maxCols
           num_columns: defaultCols
           bucket_links:
-            bucket_filter_template: '_metadata.related_tissues.chembl_ids.\\*:{{tissue_chembl_id}} ' +
+            bucket_filter_template: '_metadata.related_tissues.all_chembl_ids:{{tissue_chembl_id}} ' +
               'AND molecule_properties.full_mwt:(>={{min_val}} AND <={{max_val}})'
             template_data:
               tissue_chembl_id: 'tissue_chembl_id'

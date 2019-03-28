@@ -407,7 +407,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       x_axis_initial_num_columns: 40
       x_axis_prop_name: 'documentsPerYear'
       title: 'Documents by Year'
-      title_link_url: Document.getDocumentsListURL('_metadata.related_compounds.chembl_ids.\\*:' +
+      title_link_url: Document.getDocumentsListURL('_metadata.related_compounds.all_chembl_ids:' +
         chemblID)
       max_z_categories: 7
       max_height: 320
@@ -862,7 +862,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
           size: 20
           bucket_links:
 
-            bucket_filter_template: '_metadata.related_compounds.chembl_ids.\\*:{{molecule_chembl_id}} ' +
+            bucket_filter_template: '_metadata.related_compounds.all_chembl_ids:{{molecule_chembl_id}} ' +
                                     'AND target_type:("{{bucket_key}}"' +
                                     '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
             template_data:
@@ -941,7 +941,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
               size: 10
               bucket_links:
 
-                bucket_filter_template: '_metadata.related_compounds.chembl_ids.\\*:({{molecule_chembl_id}})' +
+                bucket_filter_template: '_metadata.related_compounds.all_chembl_ids:({{molecule_chembl_id}})' +
                                         ' AND year:({{year}}) AND journal:("{{bucket_key}}"' +
                                         '{{#each extra_buckets}} OR "{{this}}"{{/each}})'
                 template_data:
