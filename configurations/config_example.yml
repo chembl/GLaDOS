@@ -5,6 +5,7 @@ elasticsearch:
 chembl_api:
   ws_url: 'https://www.ebi.ac.uk/chembl/api/data'
   beaker_url: 'https://www.ebi.ac.uk/chembl/api/utils'
+old_interface_url: 'https://www.ebi.ac.uk/chembl/old'
 server_secret_key: 'server_secret_key'
 enable_twitter: True
 twitter_secrets:
