@@ -1,10 +1,18 @@
+<div id="data-protection-message-configuration" data-service-id="chembl-website" data-data-protection-version="0.2"
+     data-message="This website requires cookies, and the limited processing of your personal data in order to function.
+     By using the site you are agreeing to this as outlined in our
+     <a target='_blank' href='https://www.ebi.ac.uk/data-protection/privacy-notice/chembl-website'>Privacy Notice</a>
+     and <a target='_blank' href='https://www.ebi.ac.uk/about/terms-of-use'>Terms of Use</>.">
+</div>
 <script type="text/javascript">
+
     var localFrameworkVersion = 'other';
     var newDataProtectionNotificationBanner = document.createElement('script');
     newDataProtectionNotificationBanner.src = 'https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.3/js/ebi-global-includes/script/5_ebiFrameworkNotificationBanner.js?legacyRequest='+localFrameworkVersion;
     document.head.appendChild(newDataProtectionNotificationBanner);
       newDataProtectionNotificationBanner.onload = function() {
       ebiFrameworkRunDataProtectionBanner(); // invoke the banner
+      var divDataProtectionBanner = document.getElementById('data-protection-message-configuration');
     };
 
 </script>
