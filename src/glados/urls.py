@@ -124,6 +124,10 @@ common_urls = [
         RedirectView.as_view(url='https://chembl.gitbook.io/chembl-interface-documentation/web-services',
                              permanent=True), name='web_services_home'),
 
+    url(r'^ws/$',
+        RedirectView.as_view(url='https://chembl.gitbook.io/chembl-interface-documentation/web-services',
+                             permanent=True), name='web_services_home_2'),
+
     url(r'^deprecated_interface/$',
         RedirectView.as_view(url=settings.OLD_INTERFACE_URL,
                              permanent=False), name='old_interface_home'),
