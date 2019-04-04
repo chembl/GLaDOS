@@ -241,7 +241,7 @@ if ENABLE_MYSQL_DATABASE:
         raise GladosSettingsError("You must provide the mysql configuration")
     else:
         DATABASES['default'] = {
-            'ENGINE': 'mysql.connector.django',
+            'ENGINE': 'django.db.backends.mysql',
             'NAME': mysql_config.get('schema_name'),
             'HOST': mysql_config.get('host'),
             'PORT': mysql_config.get('port'),
