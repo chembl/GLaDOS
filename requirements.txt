@@ -24,6 +24,4 @@ redis==2.10.6
 rq==0.12.0
 django-rq==1.2.0
 pyyaml==3.13
-#mysql client requires the installation of mysql c libraries.
-#See also other problems here https://stackoverflow.com/questions/22419210/django-and-mysql-problems-on-mavericks
 mysqlclient==1.4.2.post1
