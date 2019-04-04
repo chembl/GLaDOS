@@ -7,7 +7,7 @@ from django.conf import settings
 from . import views
 from django.contrib import admin
 import glados.grammar.search_parser
-from django.views.i18n import javascript_catalog
+from django.views.i18n import JavaScriptCatalog
 from glados import old_urls_redirector
 from django.conf.urls import url
 from django.http import HttpResponse
@@ -23,21 +23,17 @@ common_urls = [
     # --------------------------------------------------------------------------------------------------------------------
     # Translation for Javascript
     # --------------------------------------------------------------------------------------------------------------------
-    url(r'^glados_jsi18n/glados$', javascript_catalog, {
-        'packages': ('glados',),
-        'domain': 'glados',
+    url(r'^glados_jsi18n/glados$',
+        JavaScriptCatalog.as_view(packages=['glados'], domain='glados'),
+        name='js-glados-catalog'),
 
-    }, name='js-glados-catalog'),
-    url(r'^glados_jsi18n/glados_es_generated$', javascript_catalog, {
-        'packages': ('glados',),
-        'domain': 'glados_es_generated',
+    url(r'^glados_jsi18n/glados_es_generated$',
+        JavaScriptCatalog.as_view(packages=['glados'], domain='glados_es_generated'),
+        name='js-glados_es_generated-catalog'),
 
-    }, name='js-glados_es_generated-catalog'),
-    url(r'^glados_jsi18n/glados_es_override$', javascript_catalog, {
-        'packages': ('glados',),
-        'domain': 'glados_es_override',
-
-    }, name='js-glados_es_override-catalog'),
+    url(r'^glados_jsi18n/glados_es_override$',
+        JavaScriptCatalog.as_view(packages=['glados'], domain='glados_es_override'),
+        name='js-glados_es_override-catalog'),
     # --------------------------------------------------------------------------------------------------------------------
     # Main Pages
     # --------------------------------------------------------------------------------------------------------------------
@@ -161,7 +157,7 @@ common_urls = [
     # Django Admin
     # --------------------------------------------------------------------------------------------------------------------
 
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', admin.site.urls),
 
     # --------------------------------------------------------------------------------------------------------------------
     # Embedding
