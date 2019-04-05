@@ -374,7 +374,7 @@ if COMPRESS_ENABLED:
 
     COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter',
                             'compressor.filters.cssmin.CSSMinFilter']
-    COMPRESS_JS_FILTERS = ['compressor.filters.yuglify.YUglifyJSFilter']
+    COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
     COMPRESS_URL = STATIC_URL
     COMPRESS_ROOT = STATIC_ROOT
     #COMPRESS_CLOSURE_COMPILER_BINARY = 'java -jar '+ os.path.join(BASE_DIR,
