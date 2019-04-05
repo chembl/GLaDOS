@@ -7,7 +7,7 @@ process.env.VUE_APP_SERVER_BASE_PATH = process.env.SERVER_BASE_PATH ? process.en
 let gladosConfigFile = process.env.CONFIG_FILE_PATH ? process.env.CONFIG_FILE_PATH : `${process.env.HOME}/.chembl-glados/config.yml`;
 let gladosConfig = yaml.safeLoad(fs.readFileSync(gladosConfigFile));
 
-if (typeof gladosConfig.unichemapi === 'undefined') {
+if (typeof gladosConfig.chemvue_root_api === 'undefined') {
     throw {
         name: "unichemapi not found",
         level: "FATAL",
@@ -17,7 +17,7 @@ if (typeof gladosConfig.unichemapi === 'undefined') {
         }
     };
 } else {
-    process.env.VUE_APP_ROOT_API = gladosConfig.unichemapi;
+    process.env.VUE_APP_ROOT_API = gladosConfig.chemvue_root_api;
 }
 
 module.exports = {

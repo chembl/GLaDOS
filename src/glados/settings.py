@@ -196,7 +196,7 @@ MIDDLEWARE_CLASSES = [
   'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
-CORS_URLS_REGEX = r'^/glados_api/.*$'
+CORS_URLS_REGEX = r'^.*/glados_api/.*$'
 CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'glados.urls'

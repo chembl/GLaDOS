@@ -9,7 +9,7 @@ from elasticsearch_dsl.connections import connections
 import json
 import traceback
 from glados.usage_statistics import glados_server_statistics
-from glados.api.sssearch import search_manager
+from glados.api.chembl.sssearch import search_manager
 import gzip
 import os
 from django.conf import settings

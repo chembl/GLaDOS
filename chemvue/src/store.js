@@ -14,11 +14,11 @@ export default new Vuex.Store({
       state.loading = flag;
     },
     SET_SIMILAR_COMPOUNDS(state, similarCompounds) {
-      similarCompounds.map(similarCompounds => {
+      similarCompounds.inchis.map(similarCompounds => {
         similarCompounds.show = false;
         return similarCompounds;
       });
-      state.similarCompounds = similarCompounds;
+      state.similarCompounds = similarCompounds.inchis;
     }
   },
   actions: {
@@ -28,7 +28,7 @@ export default new Vuex.Store({
       commit("SET_LOADING", true);
       console.log("State loading ", this.state.loading);
       Api()
-        .post("/test", body)
+        .post("/similarity/", body)
         .then(similarCompounds => {
           commit("SET_SIMILAR_COMPOUNDS", similarCompounds.data);
           commit("SET_LOADING", false);

@@ -2,7 +2,7 @@ from django.http import JsonResponse, HttpResponse
 from glados.usage_statistics import glados_server_statistics
 import traceback
 from glados.models import SSSearchJob
-from glados.api.sssearch import search_manager
+from glados.api.chembl.sssearch import search_manager
 from django.core.cache import cache
 import json
 
