@@ -179,8 +179,7 @@ INSTALLED_APPS = [
   'glados',
   'compressor',
   'twitter',
-  'django_rq',
-  'unichem'
+  'django_rq'
 ]
 
 MIDDLEWARE_CLASSES = [

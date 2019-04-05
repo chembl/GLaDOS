@@ -1,7 +1,6 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from simplejson import dumps
-from unichem.models import UciInchi
-import unichem.services as services
+import glados.api.unichem.services
 from django.views.decorators.csrf import csrf_exempt
 
 import logging
@@ -16,10 +15,21 @@ def test(request):
         body = request.body.decode('utf-8')
 
         logger.info(body)
+        response = {'inchis': []}
+
+        for i in range(0, 5):
+            response['inchis'].append({
+                "uci": i,
+                "similarity": 'lslslslslsl',
+                "standardinchi": 'lalalalal',
+                "standardinchikey": 'lalalalal',
+                })
+
+        return JsonResponse(response)
 
         similarity = services.get_similarity(body)
 
-        inchis = []
+
 
         for sim_uci in similarity:
 
@@ -53,6 +63,8 @@ def test(request):
         # logger.info(inchis)
 
         # cole.collection.insert_one({ 'ctab':incoming_ctab, 'response':mongo_parents})
+
+
 
         response = dumps(inchis)
 
