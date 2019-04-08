@@ -34,8 +34,6 @@
         <script type="text/javascript" src="{% static 'js/api/jquery.materialize-autocomplete.min.js' %}"></script>
         <!-- shim is a polyfill for xlsx.js' %} -->
         <script type="text/javascript" src="{% static 'js/api/shim.js' %}"></script>
-        <!-- https://github.com/timdream/wordcloud2.js' %} -->
-        <script type="text/javascript" src="{% static 'js/api/wordcloud2.js' %}"></script>
 
         <!-- App Settings and global variables object-->
         <script type="text/javascript" src="{% static 'js/coffee-gen/Settings.js' %}"></script>
@@ -234,9 +232,7 @@
     <!-- Document Report Card -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/documentReportCardApp.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/Document.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/DocumentTerms.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Document/DocumentBasicInformationView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Document/DocumentWordCloudView.js' %}"></script>
 
     <!-- Elastic Search Models -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/PaginatedCollectionBase.js' %}"></script>
@@ -283,10 +279,6 @@
 
     <!-- References -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/References/ReferencesView.js' %}"></script>
-
-    <!-- Document Search by Terms -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/DocumentSearchByTermsApp.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Document/DocumentsFromTermsView.js' %}"></script>
 
     <!-- Search Results -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/SearchModel.js' %}"></script>
