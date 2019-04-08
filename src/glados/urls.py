@@ -70,6 +70,10 @@ common_urls = [
     url(r'^compound_3D_speck/$',
         DirectTemplateView.as_view(template_name="glados/comp_3D_view_speck_fullscreen.html"), ),
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # Redirections to other chembl resources and documentation
+    # ------------------------------------------------------------------------------------------------------------------
+
     url(r'^acknowledgements/$',
         RedirectView.as_view(url='https://chembl.gitbook.io/chembl-interface-documentation/acknowledgments',
                              permanent=True), name='acks'),
@@ -116,6 +120,10 @@ common_urls = [
         RedirectView.as_view(url='https://chembl.gitbook.io/chembl-interface-documentation/web-services',
                              permanent=True), name='web_services_home'),
 
+    url(r'^ws/$',
+        RedirectView.as_view(url='https://chembl.gitbook.io/chembl-interface-documentation/web-services',
+                             permanent=True), name='web_services_home_2'),
+
     url(r'^deprecated_interface/$',
         RedirectView.as_view(url=settings.OLD_INTERFACE_URL,
                              permanent=False), name='old_interface_home'),
@@ -144,6 +152,30 @@ common_urls = [
 
     url(r'^ws_schema',
         DirectTemplateView.as_view(template_name="glados/web_services_schema.html"), name='ws_schema'),
+
+    url(r'^admesarfari/$',
+        RedirectView.as_view(
+            url="https://chembl.gitbook.io/chembl-interface-documentation/legacy-resources#adme-sarfari",
+            permanent=True),
+        name='adme_sarfari'),
+
+    url(r'^sarfari/kinasesarfari/$',
+        RedirectView.as_view(
+            url="https://chembl.gitbook.io/chembl-interface-documentation/legacy-resources#kinase-sarfari",
+            permanent=True),
+        name='kinase_sarfari'),
+
+    url(r'^sarfari/GPCRsarfari/$',
+        RedirectView.as_view(
+            url="https://chembl.gitbook.io/chembl-interface-documentation/legacy-resources#gpcr-sarfari",
+            permanent=True),
+        name='gpcr_sarfari'),
+
+    url(r'^malaria/$',
+        RedirectView.as_view(
+            url="https://chembl.gitbook.io/chembl-interface-documentation/legacy-resources#chembl-malaria",
+            permanent=True),
+        name='chembl_malaria'),
 
     # --------------------------------------------------------------------------------------------------------------------
     # Tests
