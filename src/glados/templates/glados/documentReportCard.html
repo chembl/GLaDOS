@@ -57,19 +57,6 @@
 
                 </div>
 
-                <div id="WordCloud">
-                    {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
-
-                    <div class="row BCK-section-content">
-                        {% block wc %}
-                            {% with is_dynamic=True %}
-                                {% include "glados/DocumentReportCardParts/WordCloud.html" %}
-                            {% endwith %}
-                        {% endblock %}
-                    </div>
-
-                </div>
-
                 <div id="ActivityCharts">
                     {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
