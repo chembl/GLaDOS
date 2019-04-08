@@ -2,7 +2,7 @@ const path = require("path");
 const yaml = require('js-yaml');
 const fs = require('fs');
 
-process.env.VUE_APP_SERVER_BASE_PATH = process.env.SERVER_BASE_PATH ? process.env.SERVER_BASE_PATH + "/" : "";
+process.env.VUE_APP_SERVER_BASE_PATH = process.env.SERVER_BASE_PATH ? process.env.SERVER_BASE_PATH + "/": "";
 
 let gladosConfigFile = process.env.CONFIG_FILE_PATH ? process.env.CONFIG_FILE_PATH : `${process.env.HOME}/.chembl-glados/config.yml`;
 let gladosConfig = yaml.safeLoad(fs.readFileSync(gladosConfigFile));

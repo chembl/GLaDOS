@@ -1,6 +1,6 @@
 from django.conf.urls import url
-from .controllers.similarity import test
+from .controllers.similarity import similarity
 
 urlpatterns = [
-    url(r'similarity/$', test),
+    url(r'similarity/$', similarity),
 ]

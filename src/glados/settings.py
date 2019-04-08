@@ -413,6 +413,9 @@ else:
     }
 
 
+UNICHEM_SIMILARITY_ENDPOINT = run_config.get('unichem_similarity_endpoint')
+if UNICHEM_SIMILARITY_ENDPOINT is None:
+    raise GladosSettingsError("You must provide a valid URL for UNICHEM similarity search endpoint")
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Logging
