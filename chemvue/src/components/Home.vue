@@ -4,6 +4,17 @@
       <h1>ChEMBL</h1>
       <h3>Substructure Similarity Search</h3>
       <v-container>
+        <v-flex xs12 v-if="isError">
+          <v-alert
+            :value="true"
+            type="error"
+            dismissible="true"
+            transition="scale-transition"
+            outline
+          >
+            YO, Error while fetching similarity: {{ errorMessage }}
+          </v-alert>
+        </v-flex>
         <v-layout align-center justify-center>
           <v-textarea
             name="input-7-1"
@@ -16,7 +27,14 @@
             <v-icon dark>add</v-icon>
           </v-btn>
         </v-layout>
-        <v-progress-circular v-if="isLoading" :size="70" :width="7" color="purple" indeterminate></v-progress-circular>
+        <v-progress-circular
+          v-if="isLoading"
+          :size="70"
+          :width="7"
+          color="purple"
+          indeterminate
+        >
+        </v-progress-circular>
         <v-layout align-space-around justify-center column fill-height>
           <v-card
             v-for="(compound, index) in similarCompounds"
@@ -27,11 +45,19 @@
           >
             <v-card-title primary-title>
               <div>
-                <h3 class="headline mb-0">{{compound.uci}}</h3>
-                <div v-if="typeof compound.similarity !== 'undefined'">{{compound.similarity}}</div>
+                <h3 class="headline mb-0">{{ compound.uci }}</h3>
+                <div v-if="typeof compound.similarity !== 'undefined'">
+                  {{ compound.similarity }}
+                </div>
               </div>
               <v-layout align-center justify-end row fill-height>
-                <v-btn v-on:click="compound.show = !compound.show" fab dark small class="ml-4">
+                <v-btn
+                  v-on:click="compound.show = !compound.show"
+                  fab
+                  dark
+                  small
+                  class="ml-4"
+                >
                   <v-icon>mdi-arrow-down-drop-circle</v-icon>
                 </v-btn>
               </v-layout>
@@ -46,7 +72,9 @@
                       <div
                         class="value"
                         v-if="typeof compound.standardinchi !== 'undefined'"
-                      >{{compound.standardinchi}}</div>
+                      >
+                        {{ compound.standardinchi }}
+                      </div>
                     </div>
                   </v-layout>
                 </div>
@@ -60,8 +88,7 @@
 </template>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>
 
 <script>
 import Vue from "vue";
@@ -75,6 +102,7 @@ export default Vue.component("Home", {
   },
   created() {
     this.$store.commit("SET_LOADING", false);
+    this.$store.commit("SET_ERROR_FETCHING", false, null);
   },
   // beforeCreate () {
   //   let body = this.ctabtext
@@ -86,6 +114,12 @@ export default Vue.component("Home", {
     },
     isLoading() {
       return this.$store.getters.isLoading;
+    },
+    isError() {
+      return this.$store.getters.isErrorFetching;
+    },
+    errorMessage() {
+      return this.$store.getters.errorMessage;
     }
   },
   methods: {
@@ -98,7 +132,7 @@ export default Vue.component("Home", {
   },
   watch: {
     similarCompounds: function() {
-      console.log("CHanged similarCompounds");
+      console.log("Changed similarCompounds");
     }
   }
 });

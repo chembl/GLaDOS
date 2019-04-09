@@ -6,6 +6,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    errorFetching: false,
+    errorMessage: "",
     loading: true,
     similarCompounds: []
   },
@@ -19,6 +21,13 @@ export default new Vuex.Store({
         return similarCompounds;
       });
       state.similarCompounds = similarCompounds.inchis;
+    },
+    SET_ERROR_FETCHING(state, isError){
+      console.log("Is error", isError);
+      state.errorFetching = isError;
+    },
+    SET_ERROR_MESSAGE(state, message){
+      state.errorMessage = message
     }
   },
   actions: {
@@ -30,7 +39,14 @@ export default new Vuex.Store({
       Api()
         .post("/similarity/", body)
         .then(similarCompounds => {
-          commit("SET_SIMILAR_COMPOUNDS", similarCompounds.data);
+          if (similarCompounds.data.inchis.length <= 0) {
+            console.log("No inchis");
+            commit("SET_ERROR_FETCHING", true);
+            commit("SET_ERROR_MESSAGE", similarCompounds.data.message)
+          } else {
+            commit("SET_ERROR_FETCHING", false);
+            commit("SET_SIMILAR_COMPOUNDS", similarCompounds.data);
+          }
           commit("SET_LOADING", false);
         })
         .catch(error => console.log(error));
@@ -38,6 +54,8 @@ export default new Vuex.Store({
   },
   getters: {
     similarCompounds: state => state.similarCompounds,
-    isLoading: state => state.loading
+    isLoading: state => state.loading,
+    errorMessage: state => state.errorMessage,
+    isErrorFetching: state => state.errorFetching,
   }
 });
