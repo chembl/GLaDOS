@@ -6,4 +6,5 @@ chembl_api:
   ws_url: 'https://wwwdev.ebi.ac.uk/chembl/api/data'
   beaker_url: 'https://wwwdev.ebi.ac.uk/chembl/api/utils'
 old_interface_url: 'https://www.ebi.ac.uk/chembl/old'
+current_chembl_release: 'CHEMBL25'
 filter_query_max_clauses: 30000
