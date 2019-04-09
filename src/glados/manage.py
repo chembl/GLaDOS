@@ -16,6 +16,7 @@ def main():
     import glados.apache_config_generator
     import glados.admin_user_generator
     from glados.utils import manage_shortened_urls
+    from glados.utils import daemon_simulator
 
     if not os.path.exists(settings.DYNAMIC_DOWNLOADS_DIR):
         print("Dynamic downloads dir ({}) didn't exist, I will create it".format(settings.DYNAMIC_DOWNLOADS_DIR))
@@ -51,14 +52,7 @@ def main():
 
     elif os.environ.get('RUN_MAIN') != 'true' and len(sys.argv) > 1 and sys.argv[1] == 'simulatedaemon':
 
-        import datetime
-        import time
-
-        while True:
-            now = datetime.datetime.now()
-            print('working...')
-            print(now)
-            time.sleep(1)
+        daemon_simulator.work()
 
     elif os.environ.get('RUN_MAIN') != 'true' and len(sys.argv) > 1 and sys.argv[1] == 'deleteexpiredurls':
 
