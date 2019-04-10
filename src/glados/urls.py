@@ -7,7 +7,7 @@ from django.conf import settings
 from . import views
 from django.contrib import admin
 import glados.grammar.search_parser
-from django.views.i18n import javascript_catalog
+from django.views.i18n import JavaScriptCatalog
 from glados import old_urls_redirector
 from django.conf.urls import url
 from django.http import HttpResponse
@@ -23,21 +23,17 @@ common_urls = [
     # --------------------------------------------------------------------------------------------------------------------
     # Translation for Javascript
     # --------------------------------------------------------------------------------------------------------------------
-    url(r'^glados_jsi18n/glados$', javascript_catalog, {
-        'packages': ('glados',),
-        'domain': 'glados',
+    url(r'^glados_jsi18n/glados$',
+        JavaScriptCatalog.as_view(packages=['glados'], domain='glados'),
+        name='js-glados-catalog'),
 
-    }, name='js-glados-catalog'),
-    url(r'^glados_jsi18n/glados_es_generated$', javascript_catalog, {
-        'packages': ('glados',),
-        'domain': 'glados_es_generated',
+    url(r'^glados_jsi18n/glados_es_generated$',
+        JavaScriptCatalog.as_view(packages=['glados'], domain='glados_es_generated'),
+        name='js-glados_es_generated-catalog'),
 
-    }, name='js-glados_es_generated-catalog'),
-    url(r'^glados_jsi18n/glados_es_override$', javascript_catalog, {
-        'packages': ('glados',),
-        'domain': 'glados_es_override',
-
-    }, name='js-glados_es_override-catalog'),
+    url(r'^glados_jsi18n/glados_es_override$',
+        JavaScriptCatalog.as_view(packages=['glados'], domain='glados_es_override'),
+        name='js-glados_es_override-catalog'),
     # --------------------------------------------------------------------------------------------------------------------
     # Main Pages
     # --------------------------------------------------------------------------------------------------------------------
@@ -73,6 +69,10 @@ common_urls = [
 
     url(r'^compound_3D_speck/$',
         DirectTemplateView.as_view(template_name="glados/comp_3D_view_speck_fullscreen.html"), ),
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Redirections to other chembl resources and documentation
+    # ------------------------------------------------------------------------------------------------------------------
 
     url(r'^acknowledgements/$',
         RedirectView.as_view(url='https://chembl.gitbook.io/chembl-interface-documentation/acknowledgments',
@@ -120,6 +120,10 @@ common_urls = [
         RedirectView.as_view(url='https://chembl.gitbook.io/chembl-interface-documentation/web-services',
                              permanent=True), name='web_services_home'),
 
+    url(r'^ws/$',
+        RedirectView.as_view(url='https://chembl.gitbook.io/chembl-interface-documentation/web-services',
+                             permanent=True), name='web_services_home_2'),
+
     url(r'^deprecated_interface/$',
         RedirectView.as_view(url=settings.OLD_INTERFACE_URL,
                              permanent=False), name='old_interface_home'),
@@ -149,6 +153,30 @@ common_urls = [
     url(r'^ws_schema',
         DirectTemplateView.as_view(template_name="glados/web_services_schema.html"), name='ws_schema'),
 
+    url(r'^admesarfari/$',
+        RedirectView.as_view(
+            url="https://chembl.gitbook.io/chembl-interface-documentation/legacy-resources#adme-sarfari",
+            permanent=True),
+        name='adme_sarfari'),
+
+    url(r'^sarfari/kinasesarfari/$',
+        RedirectView.as_view(
+            url="https://chembl.gitbook.io/chembl-interface-documentation/legacy-resources#kinase-sarfari",
+            permanent=True),
+        name='kinase_sarfari'),
+
+    url(r'^sarfari/GPCRsarfari/$',
+        RedirectView.as_view(
+            url="https://chembl.gitbook.io/chembl-interface-documentation/legacy-resources#gpcr-sarfari",
+            permanent=True),
+        name='gpcr_sarfari'),
+
+    url(r'^malaria/$',
+        RedirectView.as_view(
+            url="https://chembl.gitbook.io/chembl-interface-documentation/legacy-resources#chembl-malaria",
+            permanent=True),
+        name='chembl_malaria'),
+
     # --------------------------------------------------------------------------------------------------------------------
     # Tests
     # --------------------------------------------------------------------------------------------------------------------
@@ -161,7 +189,7 @@ common_urls = [
     # Django Admin
     # --------------------------------------------------------------------------------------------------------------------
 
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', admin.site.urls),
 
     # --------------------------------------------------------------------------------------------------------------------
     # Embedding

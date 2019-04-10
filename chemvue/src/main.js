@@ -14,6 +14,7 @@ import "./assets/stylus/main.styl";
 
 import EBIHeader from "./components/EBIcomponents/Header";
 import EBIFooter from "./components/EBIcomponents/Footer";
+import Header from "./components/shared/Header";
 
 Vue.use(LoadScript);
 
@@ -39,6 +40,7 @@ new Vue({
   render: h => h(App),
   components: {
     EBIHeader,
-    EBIFooter
+    EBIFooter,
+    Header
   }
 }).$mount("#app");

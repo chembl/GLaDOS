@@ -18,7 +18,6 @@ class DocumentReportCardApp extends glados.ReportCardApp
 
     DocumentReportCardApp.initBasicInformation()
     DocumentReportCardApp.initRelatedDocuments()
-    DocumentReportCardApp.initWordCloud()
     DocumentReportCardApp.initActivitySummary()
     DocumentReportCardApp.initTargetSummary()
     DocumentReportCardApp.initAssaySummary()
@@ -96,21 +95,6 @@ class DocumentReportCardApp extends glados.ReportCardApp
 
     if GlobalVariables['EMBEDED']
       document.fetch()
-
-  @initWordCloud = ->
-
-    docTerms = new DocumentTerms
-      document_chembl_id: glados.Utils.URLS.getCurrentModelChemblID()
-
-    new DocumentWordCloudView
-      model: docTerms
-      el: $('#DWordCloudCard')
-      section_id: 'WordCloud'
-      section_label: 'Word Cloud'
-      entity_name: Document.prototype.entityName
-      report_card_app: @
-
-    docTerms.fetch()
 
   @initTargetSummary = ->
 
