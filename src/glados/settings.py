@@ -84,6 +84,10 @@ OLD_INTERFACE_URL = run_config.get('old_interface_url')
 if OLD_INTERFACE_URL is None:
     raise GladosSettingsError("You must provide the url for the old interface")
 
+CURRENT_CHEMBL_RELEASE = run_config.get('current_chembl_release')
+if CURRENT_CHEMBL_RELEASE is None:
+    raise GladosSettingsError("You must provide the current chembl release")
+
 # ----------------------------------------------------------------------------------------------------------------------
 # SERVER BASE PATH
 # ----------------------------------------------------------------------------------------------------------------------
