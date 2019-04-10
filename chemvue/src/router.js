@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "@/components/Home";
+import Home from "@/views/Home";
 Vue.use(Router);
 
 export default new Router({
@@ -24,8 +24,7 @@ export default new Router({
     {
       path: "/chembl_game",
       name: "ChEMBLGame",
-      component: () =>
-        import("./components/ChEMBLGame.vue")
+      component: () => import("./components/ChEMBLGame.vue")
     }
   ]
 });

@@ -22,12 +22,12 @@ export default new Vuex.Store({
       });
       state.similarCompounds = similarCompounds.inchis;
     },
-    SET_ERROR_FETCHING(state, isError){
+    SET_ERROR_FETCHING(state, isError) {
       console.log("Is error", isError);
       state.errorFetching = isError;
     },
-    SET_ERROR_MESSAGE(state, message){
-      state.errorMessage = message
+    SET_ERROR_MESSAGE(state, message) {
+      state.errorMessage = message;
     }
   },
   actions: {
@@ -42,7 +42,7 @@ export default new Vuex.Store({
           if (similarCompounds.data.inchis.length <= 0) {
             console.log("No inchis");
             commit("SET_ERROR_FETCHING", true);
-            commit("SET_ERROR_MESSAGE", similarCompounds.data.message)
+            commit("SET_ERROR_MESSAGE", similarCompounds.data.message);
           } else {
             commit("SET_ERROR_FETCHING", false);
             commit("SET_SIMILAR_COMPOUNDS", similarCompounds.data);
@@ -56,6 +56,6 @@ export default new Vuex.Store({
     similarCompounds: state => state.similarCompounds,
     isLoading: state => state.loading,
     errorMessage: state => state.errorMessage,
-    isErrorFetching: state => state.errorFetching,
+    isErrorFetching: state => state.errorFetching
   }
 });

@@ -3,10 +3,19 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
+// import "./assets/ebi-feeling/css/ebi-lite.min.css";
+// import "./assets/ebi-feeling/js/script.min";
+
 import Vuetify from "vuetify";
 import axios from "axios";
 import VueAxios from "vue-axios";
+import LoadScript from "vue-plugin-load-script";
 import "./assets/stylus/main.styl";
+
+import EBIHeader from "./components/EBIcomponents/Header";
+import EBIFooter from "./components/EBIcomponents/Footer";
+
+Vue.use(LoadScript);
 
 Vue.use(VueAxios, axios);
 
@@ -27,5 +36,9 @@ Vue.config.productionTip = false;
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: h => h(App),
+  components: {
+    EBIHeader,
+    EBIFooter
+  }
 }).$mount("#app");

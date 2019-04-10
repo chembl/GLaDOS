@@ -113,7 +113,5 @@ a {
 <script>
 import Vue from "vue";
 
-console.log(`${process.env.VUE_APP_ROOT_API}${process.env.VUE_APP_SERVER_BASE_PATH}`);
-
 export default Vue.component("HelloWorld", {});
 </script>
