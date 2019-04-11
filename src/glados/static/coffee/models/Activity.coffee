@@ -6,7 +6,11 @@ Activity = Backbone.Model.extend
 
   parse: (response) ->
 
-    objData = response._source
+    if response._source?
+      objData = response._source
+    else
+      objData = response
+
     imageFile = glados.Utils.getNestedValue(objData, '_metadata.parent_molecule_data.image_file')
 
     if imageFile != glados.Settings.DEFAULT_NULL_VALUE_LABEL
