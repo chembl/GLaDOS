@@ -65,9 +65,15 @@ print('DEBUG: ', DEBUG)
 # Build paths inside the project like this: os.path.join(GLADOS_ROOT, ...)
 GLADOS_ROOT = os.path.dirname(os.path.abspath(glados.__file__))
 VUE_ROOT = os.path.join(GLADOS_ROOT, 'v')
-DYNAMIC_DOWNLOADS_DIR = os.path.join(GLADOS_ROOT, 'dynamic-downloads')
+
+DYNAMIC_DOWNLOADS_DIR = run_config.get('dynamic_downloads_dir')
+if DYNAMIC_DOWNLOADS_DIR is None:
+    DYNAMIC_DOWNLOADS_DIR = os.path.join(GLADOS_ROOT, 'dynamic-downloads')
 print('DYNAMIC_DOWNLOADS_DIR: ', DYNAMIC_DOWNLOADS_DIR)
-SSSEARCH_RESULTS_DIR = os.path.join(GLADOS_ROOT, 'sssearch-results')
+
+SSSEARCH_RESULTS_DIR = run_config.get('sssearch_results_dir')
+if SSSEARCH_RESULTS_DIR is None:
+    SSSEARCH_RESULTS_DIR = os.path.join(GLADOS_ROOT, 'sssearch-results')
 print('SSSEARCH_RESULTS_DIR: ', SSSEARCH_RESULTS_DIR)
 
 FILTER_QUERY_MAX_CLAUSES = run_config.get('filter_query_max_clauses')
