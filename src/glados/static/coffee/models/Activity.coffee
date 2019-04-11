@@ -6,20 +6,22 @@ Activity = Backbone.Model.extend
 
   parse: (response) ->
 
-    imageFile = glados.Utils.getNestedValue(response, '_metadata.parent_molecule_data.image_file')
+    objData = response._source
+    imageFile = glados.Utils.getNestedValue(objData, '_metadata.parent_molecule_data.image_file')
 
     if imageFile != glados.Settings.DEFAULT_NULL_VALUE_LABEL
-      response.image_url = "#{glados.Settings.STATIC_IMAGES_URL}compound_placeholders/#{imageFile}"
+      objData.image_url = "#{glados.Settings.STATIC_IMAGES_URL}compound_placeholders/#{imageFile}"
     else
-      response.image_url = "#{glados.Settings.WS_BASE_URL}image/#{response.molecule_chembl_id}.svg?engine=indigo"
+      objData.image_url = "#{glados.Settings.WS_BASE_URL}image/#{objData.molecule_chembl_id}.svg?engine=indigo"
 
-    response.molecule_link = Compound.get_report_card_url(response.molecule_chembl_id )
-    response.target_link = Target.get_report_card_url(response.target_chembl_id)
-    response.assay_link = Assay.get_report_card_url(response.assay_chembl_id )
-    response.document_link = Document.get_report_card_url(response.document_chembl_id)
-    if response._metadata?
-      response.tissue_link = glados.models.Tissue.get_report_card_url(response._metadata.assay_data.tissue_chembl_id)
-    return response
+    objData.molecule_link = Compound.get_report_card_url(objData.molecule_chembl_id )
+    objData.target_link = Target.get_report_card_url(objData.target_chembl_id)
+    objData.assay_link = Assay.get_report_card_url(objData.assay_chembl_id )
+    objData.document_link = Document.get_report_card_url(objData.document_chembl_id)
+    if objData._metadata?
+      objData.tissue_link = glados.models.Tissue.get_report_card_url(objData._metadata.assay_data.tissue_chembl_id)
+
+    return objData
 
 Activity.indexName = 'chembl_activity'
 Activity.COLUMNS = {
