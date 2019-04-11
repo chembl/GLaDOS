@@ -71,10 +71,18 @@ if DYNAMIC_DOWNLOADS_DIR is None:
     DYNAMIC_DOWNLOADS_DIR = os.path.join(GLADOS_ROOT, 'dynamic-downloads')
 print('DYNAMIC_DOWNLOADS_DIR: ', DYNAMIC_DOWNLOADS_DIR)
 
+if not os.path.exists(DYNAMIC_DOWNLOADS_DIR):
+    print("Dynamic downloads dir ({}) didn't exist, I will create it".format(DYNAMIC_DOWNLOADS_DIR))
+    os.mkdir(DYNAMIC_DOWNLOADS_DIR)
+
 SSSEARCH_RESULTS_DIR = run_config.get('sssearch_results_dir')
 if SSSEARCH_RESULTS_DIR is None:
     SSSEARCH_RESULTS_DIR = os.path.join(GLADOS_ROOT, 'sssearch-results')
 print('SSSEARCH_RESULTS_DIR: ', SSSEARCH_RESULTS_DIR)
+
+if not os.path.exists(SSSEARCH_RESULTS_DIR):
+    print("SSSearch results dir ({}) didn't exist, I will create it".format(SSSEARCH_RESULTS_DIR))
+    os.mkdir(SSSEARCH_RESULTS_DIR)
 
 FILTER_QUERY_MAX_CLAUSES = run_config.get('filter_query_max_clauses')
 if FILTER_QUERY_MAX_CLAUSES is None:
