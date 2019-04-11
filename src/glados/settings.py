@@ -48,7 +48,7 @@ if custom_config_file_path is not None:
 else:
     CONFIG_FILE_PATH = os.getenv("HOME") + '/.chembl-glados/config.yml'
 print('CONFIG_FILE_PATH: ', CONFIG_FILE_PATH)
-run_config = yaml.load(open(CONFIG_FILE_PATH, 'r'))
+run_config = yaml.load(open(CONFIG_FILE_PATH, 'r'), Loader=yaml.FullLoader)
 
 RUN_ENV = run_config['run_env']
 
