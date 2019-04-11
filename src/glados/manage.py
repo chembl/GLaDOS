@@ -18,14 +18,6 @@ def main():
     from glados.utils import manage_shortened_urls
     from glados.utils import daemon_simulator
     from glados.utils import rq_workers
-
-    if not os.path.exists(settings.DYNAMIC_DOWNLOADS_DIR):
-        print("Dynamic downloads dir ({}) didn't exist, I will create it".format(settings.DYNAMIC_DOWNLOADS_DIR))
-        os.mkdir(settings.DYNAMIC_DOWNLOADS_DIR)
-
-    if not os.path.exists(settings.SSSEARCH_RESULTS_DIR):
-        print("SSSearch results dir ({}) didn't exist, I will create it".format(settings.SSSEARCH_RESULTS_DIR))
-        os.mkdir(settings.SSSEARCH_RESULTS_DIR)
         
     # Compress files before server launch if compression is enabled
     if os.environ.get('RUN_MAIN') != 'true' and len(sys.argv) > 1 and sys.argv[1] == 'runserver' and settings.DEBUG:
