@@ -1,15 +1,8 @@
 <template>
   <v-app>
     <EBIHeader></EBIHeader>
-    <div
-      id="masthead"
-      class="masthead"
-      data-sticky
-      data-sticky-on="large"
-      data-top-anchor="main-content-area:top"
-      data-btm-anchor="main-content-area:bottom"
-    ></div>
-    <Header></Header>
+    <!-- <Header></Header> -->
+    <CommonHeader></CommonHeader>
     <!-- Splash screen -->
     <div
       v-if="splashScreen"
@@ -39,14 +32,12 @@
 </template>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-// @import "./assets/ebi-feeling/css/ebi-lite.min.css";
-</style>
+<style scoped lang="scss"></style>
 
 <script>
 import EBIHeader from "./components/EBIcomponents/Header";
 import EBIFooter from "./components/EBIcomponents/Footer";
-import Header from "./components/shared/Header";
+import CommonHeader from "./components/shared/Header";
 
 export default {
   data() {
@@ -78,7 +69,7 @@ export default {
   components: {
     EBIHeader,
     EBIFooter,
-    Header
+    CommonHeader
   }
 };
 </script>

@@ -7,11 +7,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   {% block open_graph_tags %}{% endblock %}
   <link href='https://fonts.googleapis.com/css?family=product+sans|Roboto:300,400,500,700|Material+Icons'
-        rel="stylesheet">
+        rel="stylesheet">        
   <link rel="icon" href="{% static 'favicon.png' %}" type="image/x-icon"/>
-  <!-- EBI Sugar -->
+  
+  <!-- EBI Flavor -->
   <link rel="stylesheet" href="https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.3/css/ebi-lite.min.css">
   <script src="https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.3/js/script.min.js"></script>
+
   <title>ChEMBL</title>
   {% block analytics %}
   {% endblock %}
@@ -19,6 +21,7 @@
   {% load compress %}
 </head>
 <body data-ebiFrameworkInvokeScripts="false">
+<!-- <body> -->
 <noscript>
   <strong>We're sorry but chemvue doesn't work properly without JavaScript enabled. Please enable it to
     continue.</strong>
@@ -26,5 +29,9 @@
 <main>
   <div id="app"></div>
 </main>
+<!-- Connection to MArvin JS-->
+<script type="text/javascript" src="marvinjs/gui/lib/promise-1.0.0.min.js"></script>
+<script type="text/javascript" src="marvinjs/js/marvinjslauncher.js"></script>
+<!-- <script defer src="https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.3/js/script.min.js"></script> -->
 </body>
 </html>

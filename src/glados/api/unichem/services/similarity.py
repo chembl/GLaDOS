@@ -2,6 +2,7 @@ import requests
 import logging
 from elasticsearch_dsl import Search
 from django.conf import settings
+import re
 
 logger = logging.getLogger('django')
 
@@ -73,6 +74,34 @@ def get_unichem_compound(uci):
         return {}
 
     return compound
+
+
+def get_image_uci(uci):
+
+    compound = get_unichem_compound(uci)
+
+    if compound.get('smiles'):
+        return get_svg_from_smile(compound.get('smiles'))
+
+    return ''
+
+
+def get_svg_from_smile(smile):
+    url = "https://www.ebi.ac.uk/chembl/api/utils/smiles2svg?size={size}"
+    url = url.format(size="250")
+
+    data = {}
+
+    r = requests.post(url, smile)
+
+    if r.ok:
+        data = r.content
+
+    # data.replace(b'opacity:1.0', b'opacity:0')
+
+    data = re.sub(b"opacity:1.0", b"opacity:0", data)
+
+    return data
 
 
 def get_all_compounds():

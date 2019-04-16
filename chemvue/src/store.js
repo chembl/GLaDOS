@@ -1,13 +1,12 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import Api from "@/services/Api.js";
+import RestAPI from "@/services/Api";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    errorFetching: false,
-    errorMessage: "",
+    errorFetching: {},
     loading: true,
     similarCompounds: []
   },
@@ -22,29 +21,31 @@ export default new Vuex.Store({
       });
       state.similarCompounds = similarCompounds.inchis;
     },
-    SET_ERROR_FETCHING(state, isError) {
-      console.log("Is error", isError);
-      state.errorFetching = isError;
-    },
-    SET_ERROR_MESSAGE(state, message) {
-      state.errorMessage = message;
+    SET_FETCHING_SIMILARITY_ERROR(state, error) {
+      state.errorFetching = error;
     }
   },
   actions: {
-    loadCountries: function({ commit }, payload) {
+    loadCompounds: function({ commit }, payload) {
       let body = payload.body;
-      console.log(body);
       commit("SET_LOADING", true);
-      console.log("State loading ", this.state.loading);
-      Api()
+      //TO DO: Make this a general state variable
+      var unichemApi = new RestAPI();
+      unichemApi
+        .getSimilarity()
         .post("/similarity/", body)
         .then(similarCompounds => {
           if (similarCompounds.data.inchis.length <= 0) {
             console.log("No inchis");
-            commit("SET_ERROR_FETCHING", true);
-            commit("SET_ERROR_MESSAGE", similarCompounds.data.message);
+            commit("SET_FETCHING_SIMILARITY_ERROR", {
+              isError: true,
+              errorMsg: similarCompounds.data.message
+            });
           } else {
-            commit("SET_ERROR_FETCHING", false);
+            commit("SET_FETCHING_SIMILARITY_ERROR", {
+              isError: false,
+              errorMsg: ""
+            });
             commit("SET_SIMILAR_COMPOUNDS", similarCompounds.data);
           }
           commit("SET_LOADING", false);
@@ -55,7 +56,6 @@ export default new Vuex.Store({
   getters: {
     similarCompounds: state => state.similarCompounds,
     isLoading: state => state.loading,
-    errorMessage: state => state.errorMessage,
-    isErrorFetching: state => state.errorFetching
+    errorFetching: state => state.errorFetching
   }
 });

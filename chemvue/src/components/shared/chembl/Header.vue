@@ -1,19 +1,25 @@
 <template>
-  <div id="masthead" class="masthead">
+  <div
+    id="masthead"
+    class="masthead"
+  >
     <div class="masthead-inner row">
-      <v-container>
+      <v-container fluid>
         <v-layout row fill-height wrap>
-          <v-flex xs12 md4 class="chembl-logo">
+          <v-flex xs12 md4 class="chembl-logo hidden-xs-and-down" >
             <a href="/">
               <img src="@/assets/img/icons/chembl_logo_pink.png" />
               <span class="white-text">ChEMBL</span>
             </a>
           </v-flex>
-        </v-layout>
+          <v-flex xs12 md8 class="search-bar">
+            <SearchBox></SearchBox>
+          </v-flex>
+        </v-layout>        
       </v-container>
 
       <!-- local-nav -->
-      <nav class="columns hidden-sm-and-down">
+      <nav class="columns">
         <ul
           id="local-nav"
           class="dropdown menu float-left"
@@ -31,6 +37,9 @@
 </template>
 
 <script>
+import SearchBox from "./SearchBox";
+// import * as ebiscript from "../../assets/ebi-feeling/js/script.js";
+// ebiFrameworkPopulateBlackBar();
 export default {
   data() {
     return {
@@ -40,24 +49,8 @@ export default {
           url: "https://www.ebi.ac.uk/unichem"
         },
         {
-          label: "ChEMBL-NTD",
-          url: "https://www.ebi.ac.uk/chembl/chembl-ntd/"
-        },
-        {
           label: "SureChEMBL",
           url: "https://www.surechembl.org"
-        },
-        {
-          label: "Downloads",
-          url: "https://www.ebi.ac.uk/chembl/downloads/"
-        },
-        {
-          label: "Web Services",
-          url: "https://www.ebi.ac.uk/chembl/ws_home/"
-        },
-        {
-          label: "Old Interface",
-          url: "https://www.ebi.ac.uk/chembl/deprecated_interface/"
         }
       ]
     };
@@ -67,7 +60,9 @@ export default {
     ebiFrameworkAssignImageByMetaTags();
   },
   name: "Header",
-  components: {}
+  components: {
+    SearchBox
+  }
 };
 </script>
 
@@ -88,8 +83,9 @@ export default {
 
   .chembl-logo {
     a {
-      text-decoration: none;
+      text-decoration:  none;
     }
+    
 
     img {
       width: 5em;
@@ -102,6 +98,26 @@ export default {
       font-family: $chembl-helvetica;
       font-size: 3em;
     }
+
+    /* -------- SMALL SCREEN -------- */
+    @media (max-width: 600px) {
+      span {
+        font-size: 30px;
+      }
+    }
+  }
+
+  .search-bar {
+    height: $chembl-header-height;
+    padding: $chembl-header-padding;
+    // float: left;
+    // background: none;
+    // flex-grow: 2;
+    // display: flex;
+    // align-items: center;
+
+    -webkit-transition: max-width 300ms ease-in;
+    transition: max-width 300ms ease-in;
   }
 }
 </style>

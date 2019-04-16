@@ -1,0 +1,32 @@
+@font-face {
+  font-family: "ChEMBL_Verdana";
+  src: local(Verdana), url("../../assets/fonts/verdana/Verdana.otf");
+  src: url("../../assets/fonts/verdana/Verdana.eot?#iefix") format("embedded-opentype"),
+    url("../../assets/fonts/verdana/Verdana.woff") format("woff"),
+    url("../../assets/fonts/verdana/Verdana.ttf") format("truetype"),
+    url("../../assets/fonts/verdana/Verdana.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "ChEMBL_Verdana";
+  src: local(Verdana Bold), url("../../assets/fonts/verdana/Verdana-Bold.eot");
+  src: url("../../assets/fonts/verdana/Verdana-Bold.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/fonts/verdana/Verdana-Bold.woff") format("woff"),
+    url("../../assets/fonts/verdana/Verdana-Bold.ttf") format("truetype"),
+    url("../../assets/fonts/verdana/Verdana-Bold.svg") format("svg");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "ChEMBL_HelveticaNeueLTPRo";
+  src: local(Verdana Bold), url("../../assets/fonts/helvetica/helveticaneueltprolt.eot");
+  src: url("../../assets/fonts/helvetica/helveticaneueltprolt.eot?#iefix")
+      format("embedded-opentype"),
+    url("../../assets/fonts/helvetica/helveticaneueltprolt.woff") format("woff"),
+    url("../../assets/fonts/helvetica/helveticaneueltprolt.ttf") format("truetype"),
+    url("../../assets/fonts/helvetica/helveticaneueltprolt.svg") format("svg"),
+    url("../../assets/fonts/helvetica/helveticaneueltprolt.otf") format("otf");
+}
