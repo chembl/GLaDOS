@@ -27,16 +27,17 @@ export default new Vuex.Store({
   },
   actions: {
     loadCompounds: function({ commit }, payload) {
-      let body = payload.body;
+      let data = payload.data;
       commit("SET_LOADING", true);
+      let params = { threshold: payload.threshold };
+      let config = { params: params };
       //TO DO: Make this a general state variable
       var unichemApi = new RestAPI();
       unichemApi
-        .getSimilarity()
-        .post("/similarity/", body)
+        .getSBackendAPI()
+        .post("/similarity/", data, config)
         .then(similarCompounds => {
           if (similarCompounds.data.inchis.length <= 0) {
-            console.log("No inchis");
             commit("SET_FETCHING_SIMILARITY_ERROR", {
               isError: true,
               errorMsg: similarCompounds.data.message
@@ -50,7 +51,15 @@ export default new Vuex.Store({
           }
           commit("SET_LOADING", false);
         })
-        .catch(error => console.log(error));
+        .catch(error => {
+          console.log(error);
+          commit("SET_LOADING", false);
+          commit("SET_FETCHING_SIMILARITY_ERROR", {
+            isError: true,
+            errorMsg:
+              "Error getting services, please try againg later or contact support"
+          });
+        });
     }
   },
   getters: {

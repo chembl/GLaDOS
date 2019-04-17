@@ -1,24 +1,29 @@
 <template>
   <v-layout align-space-around justify-center column>
+    <div class="text-xs-center">
+      <v-pagination
+        v-if="renderedCompounds.length > 0"
+        v-model="page"
+        :length="pages"
+        :total-visible="7"
+      ></v-pagination>
+    </div>
     <v-card
-      v-for="(compound, index) in compounds"
+      v-for="(compound, index) in renderedCompounds"
       v-bind:compound="compound"
       :key="index"
       class="mt-3 pa-2 compound-card"
     >
       <v-layout wrap>
-        <v-flex xs12 sm4>
-          <div class="mt-3 ml-3 pa-2 image-cont">
-            <v-img
-              :src="imgBasePath + compound.uci"
-              contain
-            />
+        <v-flex xs12 sm6>
+          <div class="ma-3 pa-2 image-cont">
+            <v-img :src="imgBasePath + compound.uci" contain />
           </div>
         </v-flex>
-        <v-flex xs12 sm8>
+        <v-flex xs12 sm6>
           <v-card-title primary-title>
             <v-layout align-start row>
-              <h3 class="headline mb-0">UCI: {{ compound.uci }}</h3>
+              <div class="title mb-0">UCI: {{ compound.uci }}</div>
               <v-spacer></v-spacer>
               <v-btn
                 v-on:click="compound.show = !compound.show"
@@ -29,13 +34,21 @@
               </v-btn>
             </v-layout>
             <div>
-              <div v-if="typeof compound.similarity !== 'undefined'">
-                Similarity: {{ compound.similarity }}
-              </div>
+              <span class="subheading">Similarity</span>
+              <span
+                class="subheading  font-weight-bold"
+                v-if="typeof compound.similarity !== 'undefined'"
+              >
+                {{ compound.similarity }}
+              </span>
               <v-divider light></v-divider>
-              <div class="value" v-if="typeof compound.smiles !== 'undefined'">
-                SMILES: {{ compound.smiles }}
-              </div>
+              <span class="subheading">SMILES</span>
+              <span
+                class="compound-property body-1 font-weight-light"
+                v-if="typeof compound.smiles !== 'undefined'"
+              >
+                {{ compound.smiles }}
+              </span>
               <v-divider light></v-divider>
               <!-- <div
                 class="value"
@@ -44,12 +57,13 @@
                 Inchi: {{ compound.standardinchi }}
               </div>
               <v-divider light></v-divider> -->
-              <div
-                class="value"
+              <span class="subheading">Standard Inchi</span>
+              <span
+                class="compound-property body-1 font-weight-light"
                 v-if="typeof compound.standardinchikey !== 'undefined'"
               >
-                Standard Inchi: {{ compound.standardinchikey }}
-              </div>
+                {{ compound.standardinchikey }}
+              </span>
             </div>
           </v-card-title>
         </v-flex>
@@ -73,6 +87,10 @@ export default {
   data() {
     return {
       compounds: this.compoundList,
+      renderedCompounds: [],
+      page: 1,
+      pages: 0,
+      pageMax: 10,
       imgBasePath: "http://localhost:8000/glados_api/chembl/unichem/images/"
     };
   },
@@ -81,6 +99,12 @@ export default {
   watch: {
     compoundList() {
       this.compounds = this.compoundList;
+      this.pages = Math.ceil(this.compounds.length / this.pageMax);
+      this.renderedCompounds = this.compounds.slice(0, this.pageMax);
+    },
+    page: function(newVal) {
+      let init = (newVal - 1) * this.pageMax;
+      this.renderedCompounds = this.compounds.slice(init, init + this.pageMax);
     }
   },
   name: "Compounds",
@@ -90,7 +114,10 @@ export default {
 
 <style scoped lang="scss">
 .image-cont {
-  background-color: $teal-6;
+  background-color: $grey-lightest;
   border-radius: 100%;
+}
+.compound-property {
+  word-break: break-all;
 }
 </style>

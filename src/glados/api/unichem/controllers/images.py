@@ -1,5 +1,5 @@
 from django.http import HttpResponse, JsonResponse
-from glados.api.unichem.services.similarity import get_svg_from_smile
+from glados.api.unichem.services.similarity import get_image_uci
 from django.views.decorators.csrf import csrf_exempt
 
 import logging
@@ -11,7 +11,7 @@ def images(request, uci):
 
     if request.method == "GET":
 
-        img_svg = get_svg_from_smile("COc1cc(-c2cc(-c3ccccc3)nc(Sc3ccc([N+](=O)[O-])cc3C=O)c2C#N)cc(OC)c1OC")
+        img_svg = get_image_uci(uci)
 
         response = HttpResponse(img_svg)
 

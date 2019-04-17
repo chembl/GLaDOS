@@ -30,7 +30,14 @@
             {{ alertBox.message }}
           </v-alert>
         </v-flex>
-        <v-btn color="info" @click.stop="marvinModal = true">Draw it!</v-btn>
+
+        <v-slider
+          v-model="slider"
+          label="Threshold"
+          thumb-label
+          min="70"
+          max="100"
+        ></v-slider>
         <v-layout align-center justify-center>
           <v-textarea
             name="input-7-1"
@@ -44,7 +51,42 @@
           <v-btn dark color="primary" @click="onSearch">
             <v-icon dark>mdi-database-search</v-icon><v-spacer></v-spacer>Search
           </v-btn>
+          <v-btn color="primary" @click.stop="marvinModal = true">
+            <v-icon dark>mdi-drawing</v-icon><v-spacer></v-spacer>Draw Mol
+          </v-btn>
         </v-layout>
+        <div v-if="molecule">
+          <v-layout class="align-center justify-center column">
+            <span class="title">Showing results for:</span>
+            <v-tabs class="ma-2" color="primary" fixed-tabs>
+              <v-tab ripple>
+                Molecule
+              </v-tab>
+              <v-tab ripple v-if="smilesForm">
+                SMILES
+              </v-tab>
+              <v-tab-item>
+                <v-card flat>
+                  <v-card-text class="pa-1 searched-compound">
+                    <pre>
+                      {{ molecule }}
+                    </pre>
+                  </v-card-text>
+                </v-card>
+              </v-tab-item>
+              <v-tab-item v-if="smilesForm">
+                <v-card flat>
+                  <v-card-text class="pa-1 searched-compound">
+                    <pre>
+                      {{ smilesForm }}
+                    </pre>
+                  </v-card-text>
+                </v-card>
+              </v-tab-item>
+            </v-tabs>
+          </v-layout>
+          <v-divider></v-divider>
+        </div>
         <v-progress-circular
           v-if="isLoading"
           :size="70"
@@ -52,54 +94,6 @@
           color="purple"
           indeterminate
         ></v-progress-circular>
-        <!-- <v-layout align-space-around justify-center column fill-height>
-          <v-card
-            v-for="(compound, index) in similarCompounds"
-            v-bind:compound="compound"
-            :key="index"
-            class="mt-3"
-            raised
-          >
-            <v-card-title primary-title>
-              <div>
-                <h3 class="headline mb-0">{{ compound.uci }}</h3>
-                <div v-if="typeof compound.similarity !== 'undefined'">
-                  {{ compound.similarity }}
-                </div>
-                <img :src="urlImages + compound.uci" />
-              </div>
-              <v-layout align-center justify-end row fill-height>
-                <v-btn
-                  v-on:click="compound.show = !compound.show"
-                  fab
-                  dark
-                  small
-                  class="ml-4"
-                >
-                  <v-icon>mdi-arrow-down-drop-circle</v-icon>
-                </v-btn>
-              </v-layout>
-            </v-card-title>
-
-            <v-card-actions>
-              <transition name="slide-fade">
-                <div class="detail pa-3" v-if="compound.show">
-                  <v-layout align-center justify-space-around row>
-                    <div class="property px-3 py-1">
-                      <div class="label">SMILES</div>
-                      <div
-                        class="value"
-                        v-if="typeof compound.standardinchi !== 'undefined'"
-                      >
-                        {{ compound.standardinchi }}
-                      </div>
-                    </div>
-                  </v-layout>
-                </div>
-              </transition>
-            </v-card-actions>
-          </v-card>
-        </v-layout> -->
         <Compounds v-bind:compoundList="retrievedCompounds"></Compounds>
       </v-container>
     </v-layout>
@@ -107,21 +101,30 @@
 </template>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.searched-compound {
+  max-height: 100px;
+  overflow-y: scroll;
+  backface-visibility: hidden;
+}
+</style>
 
 <script>
 import Vue from "vue";
-import MarvinJS from "@/components/shared/marvin";
+import MarvinJS from "@/components/shared/Marvin";
 import RestAPI from "@/services/Api";
 import Compounds from "@/components/shared/Compounds";
 
 export default Vue.component("Home", {
   data() {
     return {
+      slider: 90,
+      threshold: 0.9,
       page: 1,
       ctabText: "",
       marvinModal: false,
       molecule: "",
+      smilesForm: "",
       isShowAlert: false,
       alertBox: {
         type: "error",
@@ -152,24 +155,18 @@ export default Vue.component("Home", {
     }
   },
   methods: {
-    getImage(smiles) {
-      console.log("searching smile", smiles);
-      let unichemApi = new RestAPI();
-      let imageSVG = unichemApi
-        .getImageFromSmile()
-        .post("", smiles)
-        .then(image => {
-          return image.data;
-        })
-        .catch(error => console.log(error));
-      return imageSVG;
-    },
     loadCompounds(query) {
       this.$store.commit("SET_LOADING", true);
-      this.$store.dispatch("loadCompounds", { query });
+      this.$store.dispatch("loadCompounds", {
+        data: query,
+        threshold: this.threshold
+      });
     },
     onSearch() {
       this.isShowAlert = false;
+      this.molecule = "";
+      this.smilesForm = "";
+
       if (this.ctabText == "") {
         this.isShowAlert = true;
         this.alertBox = {
@@ -181,13 +178,30 @@ export default Vue.component("Home", {
           isError: false,
           errorMsg: ""
         });
+        this.molecule = this.ctabText;
         this.loadCompounds(this.ctabText);
       }
     },
     onMarvinSearch: function(mol) {
       this.marvinModal = false;
+      this.isShowAlert = false;
+      this.smilesForm = "";
+
       this.molecule = mol;
       this.loadCompounds(this.molecule);
+      this.getSMILESfromMOL(mol);
+    },
+    getSMILESfromMOL(mol) {
+      var backendAPIs = new RestAPI();
+      backendAPIs
+        .getBeakerAPI()
+        .post("/ctab2smiles", mol)
+        .then(res => {
+          this.smilesForm = res.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   },
   watch: {
@@ -200,6 +214,9 @@ export default Vue.component("Home", {
           message: errorFetching.errorMsg
         };
       }
+    },
+    slider() {
+      this.threshold = this.slider / 100;
     }
   },
   components: {

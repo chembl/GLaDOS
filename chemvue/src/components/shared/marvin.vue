@@ -58,7 +58,7 @@ export default {
             this.currentMolecule = mol;
             this.$emit("onSearch", this.currentMolecule);
           },
-          err => alert(err)
+          err => console.log("Marvin export estructure error", err)
         );
       }
     }
