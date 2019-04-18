@@ -9,7 +9,7 @@
       ></v-pagination>
     </div>
     <v-card
-      v-for="(compound, index) in renderedCompounds"
+      v-for="(compound, index) in compounds"
       v-bind:compound="compound"
       :key="index"
       class="mt-3 pa-2 compound-card"
@@ -83,14 +83,15 @@
 
 <script>
 export default {
-  props: ["compoundList"],
+  props: ["compoundList", "compoundsTotal", "maxPerPage"],
   data() {
     return {
       compounds: this.compoundList,
+      compoundCount: this.compoundsTotal,
       renderedCompounds: [],
       page: 1,
       pages: 0,
-      pageMax: 10,
+      pageMax: this.maxPerPage,
       imgBasePath: "http://localhost:8000/glados_api/chembl/unichem/images/"
     };
   },
@@ -99,12 +100,16 @@ export default {
   watch: {
     compoundList() {
       this.compounds = this.compoundList;
-      this.pages = Math.ceil(this.compounds.length / this.pageMax);
+      this.pageMax = this.maxPerPage;
+      this.compoundCount = this.compoundsTotal;
+
+      this.pages = Math.ceil(this.compoundCount / this.pageMax);
       this.renderedCompounds = this.compounds.slice(0, this.pageMax);
     },
     page: function(newVal) {
       let init = (newVal - 1) * this.pageMax;
-      this.renderedCompounds = this.compounds.slice(init, init + this.pageMax);
+      this.$emit("onPageChange", init);
+      // this.renderedCompounds = this.compounds.slice(init, init + this.pageMax);
     }
   },
   name: "Compounds",

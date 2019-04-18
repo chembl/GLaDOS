@@ -42,7 +42,6 @@
           <v-textarea
             name="input-7-1"
             label="CTAB/SMILES"
-            auto-grow
             value
             rows="1"
             hint="Place your CTAB/SMILES here"
@@ -57,7 +56,7 @@
         </v-layout>
         <div v-if="molecule">
           <v-layout class="align-center justify-center column">
-            <span class="title">Showing results for:</span>
+            <span class="title">Showing {{ compoundCount }} results for:</span>
             <v-tabs class="ma-2" color="primary" fixed-tabs>
               <v-tab ripple>
                 Molecule
@@ -94,7 +93,12 @@
           color="purple"
           indeterminate
         ></v-progress-circular>
-        <Compounds v-bind:compoundList="retrievedCompounds"></Compounds>
+        <Compounds
+          v-bind:compoundList="retrievedCompounds"
+          v-bind:compoundsTotal="compoundCount"
+          v-bind:maxPerPage="maxPerPage"
+          v-on:onPageChange="onPageChange"
+        ></Compounds>
       </v-container>
     </v-layout>
   </v-container>
@@ -120,6 +124,10 @@ export default Vue.component("Home", {
     return {
       slider: 90,
       threshold: 0.9,
+      range: {
+        init: 0,
+        end: 10
+      },
       page: 1,
       ctabText: "",
       marvinModal: false,
@@ -130,6 +138,7 @@ export default Vue.component("Home", {
         type: "error",
         message: ""
       },
+      maxPerPage: 10,
       urlImages: "http://localhost:8000/glados_api/chembl/unichem/images/"
     };
   },
@@ -152,6 +161,9 @@ export default Vue.component("Home", {
     },
     errorMessage() {
       return this.$store.getters.errorMessage;
+    },
+    compoundCount() {
+      return this.$store.getters.totalCompounds;
     }
   },
   methods: {
@@ -159,7 +171,9 @@ export default Vue.component("Home", {
       this.$store.commit("SET_LOADING", true);
       this.$store.dispatch("loadCompounds", {
         data: query,
-        threshold: this.threshold
+        threshold: this.threshold,
+        init: this.range.init,
+        end: this.range.end
       });
     },
     onSearch() {
@@ -202,6 +216,15 @@ export default Vue.component("Home", {
         .catch(error => {
           console.log(error);
         });
+    },
+    onPageChange(init) {
+      console.log("On page change", init);
+      this.range = {
+        init: init,
+        end: init + this.maxPerPage
+      };
+      console.log(this.range);
+      this.loadCompounds(this.molecule);
     }
   },
   watch: {

@@ -1,44 +1,48 @@
 import requests
 import logging
-from elasticsearch_dsl import Search
+from elasticsearch_dsl import Search, Q
 from django.conf import settings
 import re
 
 logger = logging.getLogger('django')
 
 
-def get_similarity(body, threshold):
+def get_similarity(body, threshold, init, end):
     similar_compounds = []
 
     similarities = fetch_similarity(body, threshold)
 
     if not bool(similarities):
         logger.warning("No similarities found from external endpoint")
-        return similar_compounds
+        return 0, similar_compounds
 
-    compounds = get_multiple_compounds(similarities)
-    logger.info("Got {} compounds from Elasticsearch".format(len(compounds)))
+    if init > len(similarities):
+        return 0, similar_compounds
 
-    for similar_compound in similarities:
-        uci = similar_compound[0]
-        similarity = similar_compound[1]
+    compound_ids = []
+    for sim_uci in similarities:
+        compound_ids.append(str(sim_uci[0]))
 
-        compound_index = next((index for (index, d) in enumerate(compounds) if d["uci"] == uci), None)
+    total_count, compounds = get_multiple_compounds(compound_ids, init, end)
+    logger.info("Got {} from elastic of {} similarity".format(total_count, len(similarities)))
 
+    for compound in compounds:
+
+        sim_index = next((index for (index, d) in enumerate(similarities) if d[0] == compound.get("uci")), None)
         # Skipping UCIs not found on INDEX
-        if not bool(compound_index):
-            logger.warning("Compound not found for UCI %s", uci)
+        if sim_index is None:
+            logger.warning("Compound not found for UCI %s", compound.get("uci"))
             continue
 
         similar_compounds.append({
-            "uci": uci,
-            "similarity": similarity,
-            "standardinchi": compounds[compound_index].get("inchi"),
-            "standardinchikey": compounds[compound_index].get("standardinchikey"),
-            "smiles": compounds[compound_index].get("smiles"),
+            "uci": similarities[sim_index][0],
+            "similarity": similarities[sim_index][1],
+            "standardinchi": compound.get("inchi"),
+            "standardinchikey": compound.get("standardinchikey"),
+            "smiles": compound.get("smiles"),
         })
 
-    return similar_compounds
+    return total_count, similar_compounds
 
 
 def fetch_similarity(compound, threshold):
@@ -55,22 +59,16 @@ def fetch_similarity(compound, threshold):
     return similarity
 
 
-def get_multiple_compounds(similarities):
-    compound_ids = []
-    for sim_uci in similarities:
-        compound_ids.append(str(sim_uci[0]))
-
-    logger.info(compound_ids)
+def get_multiple_compounds(compound_ids, start, finish):
 
     q = {
-        "terms": {
-            "_id": compound_ids
+        "ids": {
+            "values": compound_ids
         }
     }
     s = Search(index="unichem").query(q)
+    s = s[start:finish]
     elastic_response = s.execute()
-
-    logger.debug("Total similarity compounds from elastic " + str(elastic_response.hits.total))
 
     compounds = []
 
@@ -85,9 +83,9 @@ def get_multiple_compounds(similarities):
             compounds.append(compound)
     else:
         logger.warning("No compounds found for %s", compound_ids)
-        return {}
+        return 0, {}
 
-    return compounds
+    return elastic_response.hits.total, compounds
 
 
 def get_unichem_compound(uci):

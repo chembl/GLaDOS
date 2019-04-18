@@ -8,7 +8,8 @@ export default new Vuex.Store({
   state: {
     errorFetching: {},
     loading: true,
-    similarCompounds: []
+    similarCompounds: [],
+    totalCompounds: 0
   },
   mutations: {
     SET_LOADING(state, flag) {
@@ -20,6 +21,7 @@ export default new Vuex.Store({
         return similarCompounds;
       });
       state.similarCompounds = similarCompounds.inchis;
+      state.totalCompounds = similarCompounds.totalCount;
     },
     SET_FETCHING_SIMILARITY_ERROR(state, error) {
       state.errorFetching = error;
@@ -29,7 +31,11 @@ export default new Vuex.Store({
     loadCompounds: function({ commit }, payload) {
       let data = payload.data;
       commit("SET_LOADING", true);
-      let params = { threshold: payload.threshold };
+      let params = {
+        threshold: payload.threshold,
+        init: payload.init,
+        end: payload.end
+      };
       let config = { params: params };
       //TO DO: Make this a general state variable
       var unichemApi = new RestAPI();
@@ -64,6 +70,7 @@ export default new Vuex.Store({
   },
   getters: {
     similarCompounds: state => state.similarCompounds,
+    totalCompounds: state => state.totalCompounds,
     isLoading: state => state.loading,
     errorFetching: state => state.errorFetching
   }
