@@ -1,5 +1,5 @@
 <template>
-  <v-layout align-space-around justify-center column>
+  <v-container fluid>
     <div class="text-xs-center">
       <v-pagination
         v-if="renderedCompounds.length > 0"
@@ -26,7 +26,7 @@
               <div class="title mb-0">UCI: {{ compound.uci }}</div>
               <v-spacer></v-spacer>
               <v-btn
-                v-on:click="compound.show = !compound.show"
+                v-on:click="onDisplaySources(compound)"
                 class="ml-4"
                 color="primary"
               >
@@ -42,7 +42,7 @@
                 {{ compound.similarity }}
               </span>
               <v-divider light></v-divider>
-              <span class="subheading">SMILES</span>
+              <span class="subheading">Canonical SMILES</span>
               <span
                 class="compound-property body-1 font-weight-light"
                 v-if="typeof compound.smiles !== 'undefined'"
@@ -50,20 +50,22 @@
                 {{ compound.smiles }}
               </span>
               <v-divider light></v-divider>
-              <!-- <div
-                class="value"
-                v-if="typeof compound.standardinchi !== 'undefined'"
-              >
-                Inchi: {{ compound.standardinchi }}
-              </div>
-              <v-divider light></v-divider> -->
-              <span class="subheading">Standard Inchi</span>
+              <span class="subheading">Standard InChI Key</span>
               <span
                 class="compound-property body-1 font-weight-light"
                 v-if="typeof compound.standardinchikey !== 'undefined'"
               >
                 {{ compound.standardinchikey }}
               </span>
+              <v-divider light></v-divider>
+              <span class="subheading">Standard InChI</span>
+              <span
+                class="compound-property body-1 font-weight-light"
+                v-if="typeof compound.standardinchi !== 'undefined'"
+              >
+                {{ compound.standardinchi }}
+              </span>
+              <v-divider light></v-divider>
             </div>
           </v-card-title>
         </v-flex>
@@ -72,16 +74,24 @@
         <div class="detail pa-3" v-if="compound.show">
           <v-layout align-center justify-start row>
             <div class="property px-3 py-1">
-              <div class="label">Sources</div>
+              <v-chip v-for="(source, index) in compound.sources" :key="index">
+                <a :href="source.url" target="_blank">
+                  {{ source.nameLabel }} {{ source.id }}
+                </a>
+              </v-chip>
             </div>
           </v-layout>
         </div>
       </transition>
     </v-card>
-  </v-layout>
+  </v-container>
 </template>
 
 <script>
+import RestAPI from "@/services/Api";
+
+const backendAPIs = new RestAPI();
+
 export default {
   props: ["compoundList", "compoundsTotal", "maxPerPage"],
   data() {
@@ -95,11 +105,28 @@ export default {
       imgBasePath: "http://localhost:8000/glados_api/chembl/unichem/images/"
     };
   },
-  mounted() {},
-  methods: {},
+  methods: {
+    onDisplaySources(compound) {
+      // let compound = this.compounds[index];
+      compound.show = !compound.show;
+    },
+    fetchSources(compound) {
+      backendAPIs
+        .getGLaDOSAPI()
+        .get(`/sources/${compound.standardinchikey}`)
+        .then(res => {
+          compound.sources = res.data.sources;
+          console.log(compound.sources);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+  },
   watch: {
     compoundList() {
       this.compounds = this.compoundList;
+
       this.pageMax = this.maxPerPage;
       this.compoundCount = this.compoundsTotal;
 
@@ -109,7 +136,6 @@ export default {
     page: function(newVal) {
       let init = (newVal - 1) * this.pageMax;
       this.$emit("onPageChange", init);
-      // this.renderedCompounds = this.compounds.slice(init, init + this.pageMax);
     }
   },
   name: "Compounds",

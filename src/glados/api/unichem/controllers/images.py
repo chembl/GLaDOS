@@ -1,5 +1,5 @@
 from django.http import HttpResponse, JsonResponse
-from glados.api.unichem.services.similarity import get_image_uci
+from glados.api.unichem.services.images import get_image_uci
 from django.views.decorators.csrf import csrf_exempt
 
 import logging

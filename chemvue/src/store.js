@@ -40,7 +40,7 @@ export default new Vuex.Store({
       //TO DO: Make this a general state variable
       var unichemApi = new RestAPI();
       unichemApi
-        .getSBackendAPI()
+        .getGLaDOSAPI()
         .post("/similarity/", data, config)
         .then(similarCompounds => {
           if (similarCompounds.data.inchis.length <= 0) {

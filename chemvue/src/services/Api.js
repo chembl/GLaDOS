@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default class RestAPI {
-  getSBackendAPI() {
+  getGLaDOSAPI() {
     let path = `${process.env.VUE_APP_ROOT_API}/${
       process.env.VUE_APP_SERVER_BASE_PATH
     }glados_api/chembl/unichem`;

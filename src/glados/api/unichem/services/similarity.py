@@ -1,8 +1,8 @@
 import requests
 import logging
-from elasticsearch_dsl import Search, Q
 from django.conf import settings
-import re
+from glados.api.unichem.services.elastic_index import get_multiple_compounds
+from urllib.parse import urljoin
 
 logger = logging.getLogger('django')
 
@@ -34,12 +34,20 @@ def get_similarity(body, threshold, init, end):
             logger.warning("Compound not found for UCI %s", compound.get("uci"))
             continue
 
+        unichem_sources = get_sources_from_inchi(compound.get("standardinchikey"))
+
+        # unichem_sources = fetch_sources_unichem(compound.get("standardinchikey"))
+
+        if not bool(unichem_sources):
+            unichem_sources = "ERROR"
+
         similar_compounds.append({
             "uci": similarities[sim_index][0],
             "similarity": similarities[sim_index][1],
             "standardinchi": compound.get("inchi"),
             "standardinchikey": compound.get("standardinchikey"),
             "smiles": compound.get("smiles"),
+            "sources": unichem_sources
         })
 
     return total_count, similar_compounds
@@ -59,96 +67,41 @@ def fetch_similarity(compound, threshold):
     return similarity
 
 
-def get_multiple_compounds(compound_ids, start, finish):
-
-    q = {
-        "ids": {
-            "values": compound_ids
-        }
-    }
-    s = Search(index="unichem").query(q)
-    s = s[start:finish]
-    elastic_response = s.execute()
-
-    compounds = []
-
-    if elastic_response.hits.total >= 1:
-        for comp in elastic_response:
-            compound = {
-                "uci": int(comp.meta.id),
-                "inchi": comp.inchi,
-                "standardinchikey": comp.standard_inchi_key,
-                "smiles": comp.smiles
-            }
-            compounds.append(compound)
-    else:
-        logger.warning("No compounds found for %s", compound_ids)
-        return 0, {}
-
-    return elastic_response.hits.total, compounds
-
-
-def get_unichem_compound(uci):
-    q = {
-        "terms": {
-            "_id": [uci]
-        }
-    }
-
-    s = Search(index="unichem").query(q)
-    response = s.execute()
-
-    compound = {
-        "inchi": "",
-        "standardinchikey": "",
-        "smiles": ""
-    }
-    if response.hits.total == 1:
-        smiles = ""
-
-        if hasattr(response.hits[0], 'smiles'):
-            smiles = response.hits[0].smiles
-        else:
-            logger.warning("No SMILES for UCI %s, check that out", uci)
-
-        compound["inchi"] = response.hits[0].inchi
-        compound["standardinchikey"] = response.hits[0].standard_inchi_key
-        compound["smiles"] = smiles
-    else:
-        logger.warning("Compound not found for UCI %s", uci)
-        return {}
-
-    return compound
-
-
-def get_image_uci(uci):
-    compound = get_unichem_compound(uci)
-
-    if compound.get('smiles'):
-        return get_svg_from_smile(compound.get('smiles'))
-
-    return ''
-
-
-def get_svg_from_smile(smile):
-    url = "https://www.ebi.ac.uk/chembl/api/utils/smiles2svg?size={size}"
-    url = url.format(size="250")
-
-    data = {}
-
-    r = requests.post(url, smile)
-
-    if r.ok:
-        data = r.content
-
-    # data.replace(b'opacity:1.0', b'opacity:0')
-
-    data = re.sub(b"opacity:1.0", b"opacity:0", data)
-
-    return data
-
-
 def get_sources_from_inchi(inchikey):
+
+    sources = []
+
+    response = fetch_sources_unichem(inchikey)
+
+    if not bool(response):
+        return sources
+
+    for uni_source in response:
+
+        if len(uni_source.get("src_compound_id")) > 1:
+            for source_id in uni_source.get("src_compound_id"):
+
+                url = urljoin(uni_source.get("base_id_url"), source_id)
+                print(url)
+                sources.append({
+                    "name": uni_source.get("name"),
+                    "nameLabel": uni_source.get("name_label"),
+                    "id": source_id,
+                    "url": url
+                })
+        else:
+            url = urljoin(uni_source.get("base_id_url"), uni_source.get("src_compound_id")[0])
+            sources.append({
+                "name": uni_source.get("name"),
+                "nameLabel": uni_source.get("name_label"),
+                "id": uni_source.get("src_compound_id")[0],
+                "url": url
+            })
+
+    return sources
+
+
+def fetch_sources_unichem(inchikey):
     url = "https://www.ebi.ac.uk/unichem/rest/verbose_inchikey/{inchikey}"
     url = url.format(inchikey=inchikey)
 
@@ -160,36 +113,3 @@ def get_sources_from_inchi(inchikey):
         data = r.json()
 
     return data
-
-
-def get_all_compounds():
-    response = {'inchis': []}
-
-    q = {
-        "query": {
-            "exists": {"field": "smiles"}
-        }
-    }
-    s = Search(index="unichem").filter("exists", field="smiles")
-    elastic_response = s.execute()
-
-    com = get_unichem_compound('74790025')
-    logger.info(com)
-
-    logger.info("Total " + str(elastic_response.hits.total))
-
-    for compound in s:
-        smiles = ''
-
-        if hasattr(compound, 'smiles'):
-            smiles = compound.smiles
-
-        response['inchis'].append({
-            "uci": compound.meta.id,
-            "smiles": smiles,
-            "similarity": 'LOOL',
-            "standardinchi": compound.inchi,
-            "standardinchikey": compound.standard_inchi_key,
-        })
-
-    return response

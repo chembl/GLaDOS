@@ -1,106 +1,107 @@
 <template>
   <v-container>
-    <v-layout align-start justify-start column>
-      <v-dialog v-model="marvinModal" max-width="100%">
-        <v-card>
-          <v-toolbar flat>
-            <v-toolbar-title>Marvin Editor</v-toolbar-title>
-            <v-spacer></v-spacer>
-            <v-btn icon @click="marvinModal = false">
-              <v-icon>close</v-icon>
-            </v-btn>
-          </v-toolbar>
-          <v-card-text>Draw your molecule</v-card-text>
-          <MarvinJS
-            v-bind:molecule="molecule"
-            v-on:onSearch="onMarvinSearch"
-          ></MarvinJS>
-        </v-card>
-      </v-dialog>
-      <h1>Unichem</h1>
-      <h3>Substructure Similarity Search</h3>
-      <v-container>
-        <v-flex xs12>
-          <v-alert
-            v-bind:value="isShowAlert"
-            v-bind:type="alertBox.type"
-            dark
-            transition="scale-transition"
-          >
-            {{ alertBox.message }}
-          </v-alert>
-        </v-flex>
-
+    <v-dialog v-model="marvinModal" max-width="100%">
+      <v-card>
+        <v-toolbar flat>
+          <v-toolbar-title>Marvin Editor</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-btn icon @click="marvinModal = false">
+            <v-icon>close</v-icon>
+          </v-btn>
+        </v-toolbar>
+        <v-card-text>Draw your molecule</v-card-text>
+        <MarvinJS
+          v-bind:molecule="molecule"
+          v-on:onSearch="onMarvinSearch"
+        ></MarvinJS>
+      </v-card>
+    </v-dialog>
+    <h1>Unichem</h1>
+    <h3>Substructure Similarity Search</h3>
+    <v-alert
+      v-bind:value="isShowAlert"
+      v-bind:type="alertBox.type"
+      dark
+      transition="scale-transition"
+      mt-2
+    >
+      {{ alertBox.message }}
+    </v-alert>
+    <v-layout align-center justify-space-around row wrap mb-2>
+      <v-flex xs12 sm10>
         <v-slider
           v-model="slider"
           label="Threshold"
           thumb-label
           min="70"
-          max="100"
+          max="99"
         ></v-slider>
-        <v-layout align-center justify-center>
-          <v-textarea
-            name="input-7-1"
-            label="CTAB/SMILES"
-            value
-            rows="1"
-            hint="Place your CTAB/SMILES here"
-            v-model="ctabText"
-          ></v-textarea>
-          <v-btn dark color="primary" @click="onSearch">
-            <v-icon dark>mdi-database-search</v-icon><v-spacer></v-spacer>Search
-          </v-btn>
-          <v-btn color="primary" @click.stop="marvinModal = true">
-            <v-icon dark>mdi-drawing</v-icon><v-spacer></v-spacer>Draw Mol
-          </v-btn>
-        </v-layout>
-        <div v-if="molecule">
-          <v-layout class="align-center justify-center column">
-            <span class="title">Showing {{ compoundCount }} results for:</span>
-            <v-tabs class="ma-2" color="primary" fixed-tabs>
-              <v-tab ripple>
-                Molecule
-              </v-tab>
-              <v-tab ripple v-if="smilesForm">
-                SMILES
-              </v-tab>
-              <v-tab-item>
-                <v-card flat>
-                  <v-card-text class="pa-1 searched-compound">
-                    <pre>
-                      {{ molecule }}
-                    </pre>
-                  </v-card-text>
-                </v-card>
-              </v-tab-item>
-              <v-tab-item v-if="smilesForm">
-                <v-card flat>
-                  <v-card-text class="pa-1 searched-compound">
-                    <pre>
-                      {{ smilesForm }}
-                    </pre>
-                  </v-card-text>
-                </v-card>
-              </v-tab-item>
-            </v-tabs>
-          </v-layout>
-          <v-divider></v-divider>
-        </div>
-        <v-progress-circular
-          v-if="isLoading"
-          :size="70"
-          :width="7"
-          color="purple"
-          indeterminate
-        ></v-progress-circular>
-        <Compounds
-          v-bind:compoundList="retrievedCompounds"
-          v-bind:compoundsTotal="compoundCount"
-          v-bind:maxPerPage="maxPerPage"
-          v-on:onPageChange="onPageChange"
-        ></Compounds>
-      </v-container>
+      </v-flex>
+      <v-spacer></v-spacer>
+      <v-flex xs12 sm2>
+        <span class="title ml-5">
+          {{ slider }}
+          <v-icon>mdi-percent</v-icon>
+        </span>
+      </v-flex>
     </v-layout>
+    <v-layout align-center justify-space-between row wrap mb-2>
+      <v-flex xs12 sm8>
+        <v-textarea
+          name="input-7-1"
+          label="CTAB/SMILES"
+          rows="1"
+          hint="Place your CTAB/SMILES here, e.g., NCCc1ccc(O)c(O)c1"
+          v-model="ctabText"
+        ></v-textarea>
+      </v-flex>
+      <v-flex xs6 sm2>
+        <v-btn dark color="primary" @click="onSearch">
+          <v-icon dark>mdi-database-search</v-icon><v-spacer></v-spacer>Search
+        </v-btn>
+      </v-flex>
+      <v-flex xs6 sm2>
+        <v-btn color="primary" @click.stop="marvinModal = true">
+          <v-icon dark>mdi-drawing</v-icon><v-spacer></v-spacer>Draw Mol
+        </v-btn>
+      </v-flex>
+    </v-layout>
+    <div v-if="molecule">
+      <span class="title">Showing {{ compoundCount }} results for:</span>
+      <v-tabs class="mt-3 mb-3" color="primary" fixed-tabs>
+        <v-tab ripple>
+          Molecule
+        </v-tab>
+        <v-tab ripple v-if="smilesForm">
+          SMILES
+        </v-tab>
+        <v-tab-item>
+          <v-card flat>
+            <v-card-text class="pa-1 searched-compound">
+              <pre>
+                {{ molecule }}
+              </pre>
+            </v-card-text>
+          </v-card>
+        </v-tab-item>
+        <v-tab-item v-if="smilesForm">
+          <v-card flat>
+            <v-card-text class="pa-1 searched-compound">
+              <pre>
+                {{ smilesForm }}
+              </pre>
+            </v-card-text>
+          </v-card>
+        </v-tab-item>
+      </v-tabs>
+      <v-divider></v-divider>
+    </div>
+    <Compounds
+      v-bind:compoundList="retrievedCompounds"
+      v-bind:compoundsTotal="compoundCount"
+      v-bind:maxPerPage="maxPerPage"
+      v-on:onPageChange="onPageChange"
+    ></Compounds>
   </v-container>
 </template>
 
@@ -129,7 +130,7 @@ export default Vue.component("Home", {
         end: 10
       },
       page: 1,
-      ctabText: "",
+      ctabText: "NCCc1ccc(O)c(O)c1",
       marvinModal: false,
       molecule: "",
       smilesForm: "",
@@ -200,7 +201,7 @@ export default Vue.component("Home", {
       this.marvinModal = false;
       this.isShowAlert = false;
       this.smilesForm = "";
-
+      this.ctabText = mol;
       this.molecule = mol;
       this.loadCompounds(this.molecule);
       this.getSMILESfromMOL(mol);
@@ -218,12 +219,10 @@ export default Vue.component("Home", {
         });
     },
     onPageChange(init) {
-      console.log("On page change", init);
       this.range = {
         init: init,
         end: init + this.maxPerPage
       };
-      console.log(this.range);
       this.loadCompounds(this.molecule);
     }
   },
