@@ -24,6 +24,12 @@ if (typeof gladosConfig.chemvue_root_api === "undefined") {
   process.env.VUE_APP_ROOT_API = gladosConfig.chemvue_root_api;
 }
 
+process.env.VUE_APP_PUBLIC_PATH =
+  process.env.NODE_ENV === "production"
+    ? (process.env.SERVER_BASE_PATH ? process.env.SERVER_BASE_PATH + "/" : "") +
+      "/v/"
+    : "/";
+
 module.exports = {
   indexPath: path.resolve(
     __dirname,
@@ -34,12 +40,7 @@ module.exports = {
   //assetsSubDirectory
   assetsDir: "chemvue",
   //output.publicpath
-  publicPath:
-    process.env.NODE_ENV === "production"
-      ? (process.env.SERVER_BASE_PATH
-          ? process.env.SERVER_BASE_PATH + "/"
-          : "") + "v/"
-      : "/",
+  publicPath: process.env.VUE_APP_PUBLIC_PATH,
   css: {
     loaderOptions: {
       sass: {

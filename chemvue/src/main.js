@@ -1,4 +1,5 @@
 import "@mdi/font/css/materialdesignicons.css";
+import "./assets/stylus/main.styl";
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
@@ -6,10 +7,6 @@ import store from "./store";
 import Vuetify from "vuetify";
 import axios from "axios";
 import VueAxios from "vue-axios";
-import LoadScript from "vue-plugin-load-script";
-import "./assets/stylus/main.styl";
-
-Vue.use(LoadScript);
 
 Vue.use(VueAxios, axios);
 

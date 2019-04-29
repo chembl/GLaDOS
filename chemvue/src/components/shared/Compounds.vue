@@ -88,10 +88,6 @@
 </template>
 
 <script>
-import RestAPI from "@/services/Api";
-
-const backendAPIs = new RestAPI();
-
 export default {
   props: ["compoundList", "compoundsTotal", "maxPerPage"],
   data() {
@@ -107,20 +103,7 @@ export default {
   },
   methods: {
     onDisplaySources(compound) {
-      // let compound = this.compounds[index];
       compound.show = !compound.show;
-    },
-    fetchSources(compound) {
-      backendAPIs
-        .getGLaDOSAPI()
-        .get(`/sources/${compound.standardinchikey}`)
-        .then(res => {
-          compound.sources = res.data.sources;
-          console.log(compound.sources);
-        })
-        .catch(error => {
-          console.log(error);
-        });
     }
   },
   watch: {

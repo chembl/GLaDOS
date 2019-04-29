@@ -30,9 +30,7 @@
     <EBIFooter></EBIFooter>
   </v-app>
 </template>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss"></style>
+<style lang="scss"></style>
 
 <script>
 import EBIHeader from "./components/EBIcomponents/Header";
@@ -65,6 +63,7 @@ export default {
       title: "UNICHEM"
     };
   },
+  created() {},
   name: "App",
   components: {
     EBIHeader,

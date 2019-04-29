@@ -84,6 +84,7 @@ def get_sources_from_inchi(inchikey):
                 url = urljoin(uni_source.get("base_id_url"), source_id)
                 print(url)
                 sources.append({
+                    "srcId": uni_source.get("src_id"),
                     "name": uni_source.get("name"),
                     "nameLabel": uni_source.get("name_label"),
                     "id": source_id,
@@ -92,6 +93,7 @@ def get_sources_from_inchi(inchikey):
         else:
             url = urljoin(uni_source.get("base_id_url"), uni_source.get("src_compound_id")[0])
             sources.append({
+                "srcId": uni_source.get("src_id"),
                 "name": uni_source.get("name"),
                 "nameLabel": uni_source.get("name_label"),
                 "id": uni_source.get("src_compound_id")[0],

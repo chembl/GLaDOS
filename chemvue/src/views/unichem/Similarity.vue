@@ -66,9 +66,10 @@
         </v-btn>
       </v-flex>
     </v-layout>
+
     <div v-if="molecule">
       <span class="title">Showing {{ compoundCount }} results for:</span>
-      <v-tabs class="mt-3 mb-3" color="primary" fixed-tabs>
+      <v-tabs class="mt-3 mb-3 elevation-1" color="primary" fixed-tabs>
         <v-tab ripple>
           Molecule
         </v-tab>
@@ -96,6 +97,9 @@
       </v-tabs>
       <v-divider></v-divider>
     </div>
+
+    <v-progress-linear :active="isLoading" indeterminate></v-progress-linear>
+
     <Compounds
       v-bind:compoundList="retrievedCompounds"
       v-bind:compoundsTotal="compoundCount"
@@ -105,20 +109,13 @@
   </v-container>
 </template>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-.searched-compound {
-  max-height: 100px;
-  overflow-y: scroll;
-  backface-visibility: hidden;
-}
-</style>
-
 <script>
 import Vue from "vue";
 import MarvinJS from "@/components/shared/Marvin";
 import RestAPI from "@/services/Api";
 import Compounds from "@/components/shared/Compounds";
+
+const backendAPIs = new RestAPI();
 
 export default Vue.component("Home", {
   data() {
@@ -207,7 +204,6 @@ export default Vue.component("Home", {
       this.getSMILESfromMOL(mol);
     },
     getSMILESfromMOL(mol) {
-      var backendAPIs = new RestAPI();
       backendAPIs
         .getBeakerAPI()
         .post("/ctab2smiles", mol)
@@ -247,3 +243,11 @@ export default Vue.component("Home", {
   }
 });
 </script>
+
+<style scoped lang="scss">
+.searched-compound {
+  max-height: 100px;
+  overflow-y: scroll;
+  backface-visibility: hidden;
+}
+</style>

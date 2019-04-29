@@ -22,18 +22,31 @@
 </template>
 
 <script>
+// eslint-disable-next-line
+import marv from "@/assets/marvin/marvinjslauncher.js";
+
 export default {
   props: ["molecule"],
   data() {
     return {
-      // marvinPath: `${process.env.VUE_APP_ROOT_API}/static/marvinjs/editorws.html
       alert: false,
       alertMessage: "",
-      marvinPath: `/marvinjs/editorws.html`,
+      // marvinPath: `${
+      //   process.env.VUE_APP_ROOT_API
+      // }/static/marvinjs/editorws.html`,
+      marvinPath: "",
       marvinEditor: {},
       currentMolecule: this.molecule,
       isEditorEmpty: true
     };
+  },
+  created() {
+    console.log("Server base path", process.env.VUE_APP_SERVER_BASE_PATH);
+    console.log("PUBLIC PATH", process.env.VUE_APP_PUBLIC_PATH);
+    this.marvinPath = `${process.env.VUE_APP_SERVER_BASE_PATH}${
+      process.env.VUE_APP_PUBLIC_PATH
+    }marvinjs/editorws.html`;
+    console.log("MARVING PATH", this.marvinPath);
   },
   mounted() {
     // eslint-disable-next-line
