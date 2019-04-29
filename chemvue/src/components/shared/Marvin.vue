@@ -43,7 +43,7 @@ export default {
   created() {
     console.log("Server base path", process.env.VUE_APP_SERVER_BASE_PATH);
     console.log("PUBLIC PATH", process.env.VUE_APP_PUBLIC_PATH);
-    this.marvinPath = `${process.env.VUE_APP_SERVER_BASE_PATH}${
+    this.marvinPath = `${
       process.env.VUE_APP_PUBLIC_PATH
     }marvinjs/editorws.html`;
     console.log("MARVING PATH", this.marvinPath);

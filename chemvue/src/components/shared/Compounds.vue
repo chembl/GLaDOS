@@ -98,8 +98,16 @@ export default {
       page: 1,
       pages: 0,
       pageMax: this.maxPerPage,
-      imgBasePath: "http://localhost:8000/glados_api/chembl/unichem/images/"
+      imgBasePath: ""
     };
+  },
+  created() {
+    console.log("API PATH", process.env.VUE_APP_ROOT_API);
+    console.log("SERVER BASE PATH VUE", process.env.VUE_APP_SERVER_BASE_PATH)
+    this.imgBasePath = `${
+      process.env.VUE_APP_ROOT_API
+    }/${process.env.VUE_APP_SERVER_BASE_PATH}glados_api/chembl/unichem/images/`;
+    console.log("IMAGE BASE", this.imgBasePath);
   },
   methods: {
     onDisplaySources(compound) {

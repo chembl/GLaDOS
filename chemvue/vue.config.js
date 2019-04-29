@@ -26,8 +26,8 @@ if (typeof gladosConfig.chemvue_root_api === "undefined") {
 
 process.env.VUE_APP_PUBLIC_PATH =
   process.env.NODE_ENV === "production"
-    ? (process.env.SERVER_BASE_PATH ? process.env.SERVER_BASE_PATH + "/" : "") +
-      "/v/"
+    ? (process.env.SERVER_BASE_PATH ? "/" + process.env.SERVER_BASE_PATH + "/" : "/") +
+      "v/"
     : "/";
 
 module.exports = {
