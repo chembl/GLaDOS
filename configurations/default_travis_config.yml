@@ -7,3 +7,6 @@ chembl_api:
   beaker_url: 'https://wwwdev.ebi.ac.uk/chembl/api/utils'
 old_interface_url: 'https://www.ebi.ac.uk/chembl/old'
 filter_query_max_clauses: 30000
+
+chemvue_root_api: 'http://localhost:8000'
+unichem_similarity_endpoint: 'http://fakeserver/similarity'
