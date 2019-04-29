@@ -78,7 +78,7 @@ common_urls = [
         RedirectView.as_view(url='https://chembl.gitbook.io/chembl-interface-documentation/acknowledgments',
                              permanent=True), name='acks'),
 
-    url(r'^faqs/$',
+    url(r'^faq(s)?/$',
         RedirectView.as_view(url='https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions',
                              permanent=True), name='faqs'),
 

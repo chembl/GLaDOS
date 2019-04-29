@@ -48,7 +48,7 @@ if custom_config_file_path is not None:
 else:
     CONFIG_FILE_PATH = os.getenv("HOME") + '/.chembl-glados/config.yml'
 print('CONFIG_FILE_PATH: ', CONFIG_FILE_PATH)
-run_config = yaml.load(open(CONFIG_FILE_PATH, 'r'))
+run_config = yaml.load(open(CONFIG_FILE_PATH, 'r'), Loader=yaml.FullLoader)
 
 RUN_ENV = run_config['run_env']
 
@@ -65,10 +65,24 @@ print('DEBUG: ', DEBUG)
 # Build paths inside the project like this: os.path.join(GLADOS_ROOT, ...)
 GLADOS_ROOT = os.path.dirname(os.path.abspath(glados.__file__))
 VUE_ROOT = os.path.join(GLADOS_ROOT, 'v')
-DYNAMIC_DOWNLOADS_DIR = os.path.join(GLADOS_ROOT, 'dynamic-downloads')
+
+DYNAMIC_DOWNLOADS_DIR = run_config.get('dynamic_downloads_dir')
+if DYNAMIC_DOWNLOADS_DIR is None:
+    DYNAMIC_DOWNLOADS_DIR = os.path.join(GLADOS_ROOT, 'dynamic-downloads')
 print('DYNAMIC_DOWNLOADS_DIR: ', DYNAMIC_DOWNLOADS_DIR)
-SSSEARCH_RESULTS_DIR = os.path.join(GLADOS_ROOT, 'sssearch-results')
+
+if not os.path.exists(DYNAMIC_DOWNLOADS_DIR):
+    print("Dynamic downloads dir ({}) didn't exist, I will create it".format(DYNAMIC_DOWNLOADS_DIR))
+    os.mkdir(DYNAMIC_DOWNLOADS_DIR)
+
+SSSEARCH_RESULTS_DIR = run_config.get('sssearch_results_dir')
+if SSSEARCH_RESULTS_DIR is None:
+    SSSEARCH_RESULTS_DIR = os.path.join(GLADOS_ROOT, 'sssearch-results')
 print('SSSEARCH_RESULTS_DIR: ', SSSEARCH_RESULTS_DIR)
+
+if not os.path.exists(SSSEARCH_RESULTS_DIR):
+    print("SSSearch results dir ({}) didn't exist, I will create it".format(SSSEARCH_RESULTS_DIR))
+    os.mkdir(SSSEARCH_RESULTS_DIR)
 
 FILTER_QUERY_MAX_CLAUSES = run_config.get('filter_query_max_clauses')
 if FILTER_QUERY_MAX_CLAUSES is None:
@@ -83,6 +97,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 OLD_INTERFACE_URL = run_config.get('old_interface_url')
 if OLD_INTERFACE_URL is None:
     raise GladosSettingsError("You must provide the url for the old interface")
+
+CURRENT_CHEMBL_RELEASE = run_config.get('current_chembl_release')
+if CURRENT_CHEMBL_RELEASE is None:
+    raise GladosSettingsError("You must provide the current chembl release")
 
 # ----------------------------------------------------------------------------------------------------------------------
 # SERVER BASE PATH

@@ -16,14 +16,8 @@ def main():
     import glados.apache_config_generator
     import glados.admin_user_generator
     from glados.utils import manage_shortened_urls
-
-    if not os.path.exists(settings.DYNAMIC_DOWNLOADS_DIR):
-        print("Dynamic downloads dir ({}) didn't exist, I will create it".format(settings.DYNAMIC_DOWNLOADS_DIR))
-        os.mkdir(settings.DYNAMIC_DOWNLOADS_DIR)
-
-    if not os.path.exists(settings.SSSEARCH_RESULTS_DIR):
-        print("SSSearch results dir ({}) didn't exist, I will create it".format(settings.SSSEARCH_RESULTS_DIR))
-        os.mkdir(settings.SSSEARCH_RESULTS_DIR)
+    from glados.utils import daemon_simulator
+    from glados.utils import rq_workers
         
     # Compress files before server launch if compression is enabled
     if os.environ.get('RUN_MAIN') != 'true' and len(sys.argv) > 1 and sys.argv[1] == 'runserver' and settings.DEBUG:
@@ -51,21 +45,19 @@ def main():
 
     elif os.environ.get('RUN_MAIN') != 'true' and len(sys.argv) > 1 and sys.argv[1] == 'simulatedaemon':
 
-        import datetime
-        import time
-
-        while True:
-            now = datetime.datetime.now()
-            print('working...')
-            print(now)
-            time.sleep(1)
+        daemon_simulator.work()
 
     elif os.environ.get('RUN_MAIN') != 'true' and len(sys.argv) > 1 and sys.argv[1] == 'deleteexpiredurls':
 
         manage_shortened_urls.delete_expired_urls()
 
+    elif os.environ.get('RUN_MAIN') != 'true' and len(sys.argv) > 1 and sys.argv[1] == 'waitunitlworkersarefree':
+
+        rq_workers.wait_until_workers_are_free()
+
+    # all our custom commands are listed here so they are not sent to the original manage.py
     execute_in_manage = sys.argv[1] not in ['createapacheconfig', 'createdefaultadminuser', 'simulatedaemon',
-                                            'deleteexpiredurls']
+                                            'deleteexpiredurls', 'waitunitlworkersarefree']
     if execute_in_manage:
         execute_from_command_line(sys.argv)
 
