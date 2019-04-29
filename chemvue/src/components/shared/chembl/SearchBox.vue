@@ -7,19 +7,21 @@
         name="search-str"
         class="chembl-search-bar"
         placeholder="Search in ChEMBL"
-      >
+      />
       <a class="bar-button search-button">
         <img src="@/assets/img/icons/search_icon.png" />
       </a>
     </div>
-    
+
     <div class="show-on-large-pin-top">
       <div class="search-examples">
         Examples:&nbsp;
         <a href="/g/#search_results/Dopamine">Dopamine</a>&nbsp;
         <a href="/g/#search_results/HepG2">HepG2</a>&nbsp;
         <a href="/g/#search_results/NAFRONYL">NAFRONYL</a>&nbsp;
-        <a href="/g/#search_results/NCC(=O)Oc1ccccc1C(=O)O">NCC(=O)Oc1ccccc1C(=O)O</a>
+        <a href="/g/#search_results/NCC(=O)Oc1ccccc1C(=O)O"
+          >NCC(=O)Oc1ccccc1C(=O)O</a
+        >
       </div>
       <div class="special-searches">
         <a class="BCK-Draw-Structure">Draw a Structure</a>

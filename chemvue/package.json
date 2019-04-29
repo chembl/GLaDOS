@@ -16,7 +16,6 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "html-loader": "^0.5.5",
     "js-yaml": "^3.13.1",
     "vue": "^2.6.10",
     "vue-axios": "^2.1.4",
@@ -42,7 +41,6 @@
     "sass-loader": "^7.1.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
-    "vue-plugin-load-script": "^1.2.0",
     "vue-template-compiler": "^2.6.10"
   }
 }

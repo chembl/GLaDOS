@@ -1,12 +1,9 @@
 <template>
-  <div
-    id="masthead"
-    class="masthead"
-  >
+  <div id="masthead" class="masthead">
     <div class="masthead-inner row">
       <v-container fluid>
         <v-layout row fill-height wrap>
-          <v-flex xs12 md4 class="chembl-logo hidden-xs-and-down" >
+          <v-flex xs12 md4 class="chembl-logo hidden-xs-and-down">
             <a href="/">
               <img src="@/assets/img/icons/chembl_logo_pink.png" />
               <span class="white-text">ChEMBL</span>
@@ -15,7 +12,7 @@
           <v-flex xs12 md8 class="search-bar">
             <SearchBox></SearchBox>
           </v-flex>
-        </v-layout>        
+        </v-layout>
       </v-container>
 
       <!-- local-nav -->
@@ -83,9 +80,8 @@ export default {
 
   .chembl-logo {
     a {
-      text-decoration:  none;
+      text-decoration: none;
     }
-    
 
     img {
       width: 5em;
