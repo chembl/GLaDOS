@@ -111,6 +111,7 @@ gecko_bin/*
 .DS_Store
 node_modules/
 chemvue/dist
+!chemvue/public/marvinjs/gui/lib/
 
 npm-debug.log*
 yarn-debug.log*
