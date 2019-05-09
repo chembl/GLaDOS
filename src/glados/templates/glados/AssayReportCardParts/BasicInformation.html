@@ -88,6 +88,13 @@
       <td><a href='{{tissue_link}}'>{{tissue_chembl_id}}</a></td>
     </tr>
 
+    {{#if show_assay_src_id }}
+    <tr>
+      <td class="fixed-width-column-11"><b>PubChem Source:</b></td>
+      <td><a target="_blank" href='{{src_assay_id_link}}'>{{src_assay_id_text}}</a></td>
+    </tr>
+    {{/if }}
+
   </table>
 
 </script>
