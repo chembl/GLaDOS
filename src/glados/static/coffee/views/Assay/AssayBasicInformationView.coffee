@@ -28,15 +28,12 @@ AssayBasicInformationView = CardView.extend
     referenceText = Document.getFormattedReference(documentAttributes)
     referenceLink = 'http://dx.doi.org/' + encodeURIComponent(documentAttributes.doi)
 
-    console.log '---'
     showAssaySrcID = false
     srcAssayID = @model.get('src_assay_id')
     if srcAssayID?
       showAssaySrcID = true
       srcAssayIDText = "AID:#{srcAssayID}"
       srcAssayIDLink = "https://pubchem.ncbi.nlm.nih.gov/bioassay/#{srcAssayID}"
-    console.log 'srcAssayID: ', srcAssayID
-    console.log 'srcAssayIDText: ', srcAssayIDText
 
     glados.Utils.fillContentForElement $elem,
       chembl_id: @model.get('assay_chembl_id')
