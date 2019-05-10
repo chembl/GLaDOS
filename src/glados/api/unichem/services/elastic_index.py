@@ -5,7 +5,35 @@ from elasticsearch_dsl import Search
 logger = logging.getLogger('django')
 
 
-def get_multiple_compounds(compound_ids, start, finish):
+def get_multiple_compounds(compound_ids):
+
+    q = {
+        "ids": {
+            "values": compound_ids
+        }
+    }
+    s = Search(index="unichem").query(q)
+    elastic_response = s.execute()
+
+    compounds = []
+
+    if elastic_response.hits.total >= 1:
+        for comp in elastic_response:
+            compound = {
+                "uci": int(comp.meta.id),
+                "inchi": comp.inchi,
+                "standardinchikey": comp.standard_inchi_key,
+                "smiles": comp.smiles
+            }
+            compounds.append(compound)
+    else:
+        logger.warning("No compounds found for %s", compound_ids)
+        return 0, {}
+
+    return elastic_response.hits.total, compounds
+
+
+def get_multiple_compounds_range(compound_ids, start, finish):
 
     q = {
         "ids": {

@@ -9,7 +9,7 @@ logger = logging.getLogger('django')
 def get_image_uci(uci):
     compound = get_unichem_compound(uci)
 
-    if compound.get('smiles'):
+    if compound.get('inchi'):
         return get_svg_from_smile(compound.get('inchi'))
 
     return ''
@@ -17,7 +17,7 @@ def get_image_uci(uci):
 
 def get_svg_from_smile(inchi):
     url = "https://www.ebi.ac.uk/chembl/api/utils/inchi2svg?size={size}"
-    url = url.format(size="400")
+    url = url.format(size="256")
 
     data = {}
 

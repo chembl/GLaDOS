@@ -20,37 +20,34 @@ def get_similarity(body, threshold, init, end):
         return 0, similar_compounds
 
     compound_ids = []
-    for sim_uci in similarities:
+    for sim_uci in similarities[init:end]:
         compound_ids.append(str(sim_uci[0]))
 
-    total_count, compounds = get_multiple_compounds(compound_ids, init, end)
+    total_count, compounds = get_multiple_compounds(compound_ids)
     logger.info("Got {} from elastic of {} similarity".format(total_count, len(similarities)))
 
-    for compound in compounds:
+    for similar in similarities[init:end]:
 
-        sim_index = next((index for (index, d) in enumerate(similarities) if d[0] == compound.get("uci")), None)
+        comp_index = next((index for (index, d) in enumerate(compounds) if similar[0] == d.get("uci")), None)
         # Skipping UCIs not found on INDEX
-        if sim_index is None:
-            logger.warning("Compound not found for UCI %s", compound.get("uci"))
+        if comp_index is None:
+            logger.warning("Compound not found for UCI %s", similar[0])
             continue
+
+        compound = compounds[comp_index]
 
         unichem_sources = get_sources_from_inchi(compound.get("standardinchikey"))
 
-        # unichem_sources = fetch_sources_unichem(compound.get("standardinchikey"))
-
-        if not bool(unichem_sources):
-            unichem_sources = "ERROR"
-
         similar_compounds.append({
-            "uci": similarities[sim_index][0],
-            "similarity": similarities[sim_index][1],
+            "uci": similar[0],
+            "similarity": similar[1],
             "standardinchi": compound.get("inchi"),
             "standardinchikey": compound.get("standardinchikey"),
             "smiles": compound.get("smiles"),
             "sources": unichem_sources
         })
 
-    return total_count, similar_compounds
+    return len(similarities), similar_compounds
 
 
 def fetch_similarity(compound, threshold):
@@ -82,7 +79,6 @@ def get_sources_from_inchi(inchikey):
             for source_id in uni_source.get("src_compound_id"):
 
                 url = urljoin(uni_source.get("base_id_url"), source_id)
-                print(url)
                 sources.append({
                     "srcId": uni_source.get("src_id"),
                     "name": uni_source.get("name"),

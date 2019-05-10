@@ -14,13 +14,13 @@
       :key="index"
       class="mt-3 pa-2 compound-card"
     >
-      <v-layout wrap>
-        <v-flex xs12 sm6>
+      <v-layout justify-center wrap>
+        <v-flex xs12 sm3>
           <div class="ma-3 pa-2 image-cont">
             <v-img :src="imgBasePath + compound.uci" contain />
           </div>
         </v-flex>
-        <v-flex xs12 sm6>
+        <v-flex xs12 sm8>
           <v-card-title primary-title>
             <v-layout align-start row>
               <div class="title mb-0">UCI: {{ compound.uci }}</div>
@@ -80,6 +80,15 @@
                 </a>
               </v-chip>
             </div>
+            <v-alert
+              :value="compound.sources.length < 1"
+              type="error"
+              dark
+              transition="scale-transition"
+              mt-2
+            >
+              NO SOURCES FOUND
+            </v-alert>            
           </v-layout>
         </div>
       </transition>
