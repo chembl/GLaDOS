@@ -13,6 +13,7 @@ class JavascriptTest(unittest.TestCase):
     FIREFOX_OPTIONS = Options()
     FIREFOX_OPTIONS.add_argument('--headless')
     SINGLETON_BROWSER = None
+    DEFAULT_TIMEOUT = 60
 
     @classmethod
     def instantiateBrowser(cls):
@@ -22,7 +23,6 @@ class JavascriptTest(unittest.TestCase):
             while not created and retries < 3:
                 try:
                     JavascriptTest.SINGLETON_BROWSER = Firefox(firefox_options=cls.FIREFOX_OPTIONS)
-                    JavascriptTest.NUM_BROWSER_CALLS = 0
                     created = True
                 except:
                     retries += 1
@@ -38,4 +38,11 @@ class JavascriptTest(unittest.TestCase):
         self.browser = JavascriptTest.SINGLETON_BROWSER
 
     def test_javascript_code_only(self):
-        print('testing javascript!!!')
+        print('Testing javascript')
+        url = self.HOST + '/js_tests/'
+        self.getURL(url)
+
+    def getURL(self, url):
+        print('\nGetting Url:')
+        print(url)
+        self.browser.get(url)
