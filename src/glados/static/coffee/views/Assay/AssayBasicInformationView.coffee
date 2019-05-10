@@ -24,11 +24,18 @@ AssayBasicInformationView = CardView.extend
 
     $elem = $(@el).find('#' + div_id)
 
-    console.log 'fillTemplate: '
     documentAttributes = @model.get('_metadata').document_data
     referenceText = Document.getFormattedReference(documentAttributes)
     referenceLink = 'http://dx.doi.org/' + encodeURIComponent(documentAttributes.doi)
-    console.log 'documentAttributes: ', documentAttributes
+
+    showAssaySrcID = false
+    srcAssayID = @model.get('src_assay_id')
+    srcID = parseInt(@model.get('src_id'))
+
+    if srcAssayID? and srcID == 7
+      showAssaySrcID = true
+      srcAssayIDText = "AID:#{srcAssayID}"
+      srcAssayIDLink = "https://pubchem.ncbi.nlm.nih.gov/bioassay/#{srcAssayID}"
 
     glados.Utils.fillContentForElement $elem,
       chembl_id: @model.get('assay_chembl_id')
@@ -50,3 +57,6 @@ AssayBasicInformationView = CardView.extend
       cell_link: @model.get('cell_link')
       tissue_chembl_id: @model.get('tissue_chembl_id')
       tissue_link: @model.get('tissue_link')
+      show_assay_src_id: showAssaySrcID
+      src_assay_id_text: srcAssayIDText
+      src_assay_id_link: srcAssayIDLink
