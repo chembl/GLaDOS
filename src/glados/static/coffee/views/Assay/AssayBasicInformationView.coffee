@@ -30,7 +30,9 @@ AssayBasicInformationView = CardView.extend
 
     showAssaySrcID = false
     srcAssayID = @model.get('src_assay_id')
-    if srcAssayID?
+    srcID = parseInt(@model.get('src_id'))
+
+    if srcAssayID? and srcID == 7
       showAssaySrcID = true
       srcAssayIDText = "AID:#{srcAssayID}"
       srcAssayIDLink = "https://pubchem.ncbi.nlm.nih.gov/bioassay/#{srcAssayID}"
