@@ -94,6 +94,8 @@ class JavascriptTest(unittest.TestCase):
         elif jasmine_passed_elem is not None:
             summary_text = jasmine_passed_elem.text
             self.assertIn(', 0 failures', summary_text, 'Check the javascript tests out! ' + self.HOST + '/js_tests/')
+            print('Tests results summary:')
+            print(summary_text)
         else:
             self.fail("Could not find jasmine passed nor failed output!")
 
