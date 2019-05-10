@@ -14,6 +14,7 @@ class JavascriptTest(unittest.TestCase):
     FIREFOX_OPTIONS.add_argument('--headless')
     SINGLETON_BROWSER = None
     DEFAULT_TIMEOUT = 60
+    HOST = 'http://127.0.0.1:8000'
 
     @classmethod
     def instantiateBrowser(cls):
