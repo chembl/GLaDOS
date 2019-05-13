@@ -9,10 +9,12 @@
             </tr>
         </table>
 
-        You can shorten the link by clicking on the button below. Take into account that this will require to store your query in our servers.
+        You can shorten the url by clicking on the button below. Take into account that this will require to store your query in our servers.
         The shortened link will be valid for one week from the generation time. Remember that the expanded link is valid permanently.
-        <a href="https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions/chembl-data-questions#are-my-queries-stored-and-if-so-are-they-routinely-deleted"
-        target="_blank">Learn More.</a>
+        <a {% endverbatim %}
+           href="{% url 'faqs_shorten_url' %}"
+            {% verbatim %}
+           target="_blank">Learn More.</a>
         <br><br>
         <div class="center-align">
             <a class="btn-chembl BCK-Shorten-link" data-shorten-or-expand="shorten">Shorten Link</a>

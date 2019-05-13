@@ -357,7 +357,8 @@ def render_params_from_hash(request, hash):
     long_url, expiration_date_str = url_shortener.get_original_url(hash)
     context = {
         'shortened_params': long_url,
-        'expiration_date_str': expiration_date_str
+        'expiration_date_str': expiration_date_str,
+        'show_save_button': True
     }
     return render(request, 'glados/mainGladosNoBar.html', context)
 
