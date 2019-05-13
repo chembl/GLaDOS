@@ -353,16 +353,20 @@ def main_html_base_no_bar(request):
 
 
 def render_params_from_hash(request, hash):
+
+    long_url, expiration_date_str = url_shortener.get_original_url(hash)
     context = {
-        'shortened_params': url_shortener.get_original_url(hash),
-        'show_save_button': True
+        'shortened_params': long_url,
+        'expiration_date_str': expiration_date_str
     }
     return render(request, 'glados/mainGladosNoBar.html', context)
 
 
 def render_params_from_hash_when_embedded(request, hash):
+
+    long_url, expiration_date_str = url_shortener.get_original_url(hash)
     context = {
-        'shortened_params': url_shortener.get_original_url(hash)
+        'shortened_params': long_url
     }
     return render(request, 'glados/Embedding/embed_base.html', context)
 

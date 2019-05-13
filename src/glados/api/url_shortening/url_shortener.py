@@ -26,8 +26,11 @@ def process_shorten_url_request(request):
 
 
 def process_extend_url_request(request, hash):
+
+    long_url, expiration_str = get_original_url(hash)
     resp_data = {
-        'long_url': get_original_url(hash)
+        'long_url': long_url,
+        'expiration_date': expiration_str
     }
 
     return JsonResponse(resp_data)
@@ -81,12 +84,13 @@ def get_original_url(url_hash):
         else:
             url = response.hits[0].long_url
             glados_server_statistics.record_tiny_url_usage(ESTinyURLUsageRecord.URL_EXPANDED)
-            return url
+            expiration_date_str = expiration_date.replace(tzinfo=timezone.utc).isoformat()
+            return url, expiration_date_str
 
     except AttributeError:
         # no expiration time means that it never expires
         url = response.hits[0].long_url
         glados_server_statistics.record_tiny_url_usage(ESTinyURLUsageRecord.URL_EXPANDED)
-        return url
+        return url, None
 
 
