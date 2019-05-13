@@ -1,7 +1,7 @@
 from elasticsearch_dsl.connections import connections
 from glados import es_connection
 from elasticsearch.helpers import scan, bulk
-from datetime import datetime
+from datetime import datetime, timezone
 import sys
 
 ES_INDEX = 'chembl_glados_tiny_url'
@@ -11,7 +11,7 @@ BULK_SIZE = 1000
 def delete_expired_urls():
 
     dryn_run = '--dry-run' in sys.argv
-    now = datetime.now()
+    now = datetime.utcnow().replace(tzinfo=timezone.utc)
 
     print('I am going to delete the urls that expire before {}'.format(str(now)))
 
