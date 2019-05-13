@@ -72,7 +72,7 @@ def get_original_url(url_hash):
     response = s.execute(ignore_cache=True)
 
     if response.hits.total == 0:
-        return None
+        return None, None
 
     try:
         expires = response.hits[0].expires
@@ -80,7 +80,7 @@ def get_original_url(url_hash):
         now = datetime.now()
         expired = now > expiration_date
         if expired:
-            return None
+            return None, None
         else:
             url = response.hits[0].long_url
             glados_server_statistics.record_tiny_url_usage(ESTinyURLUsageRecord.URL_EXPANDED)

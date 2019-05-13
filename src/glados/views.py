@@ -17,6 +17,7 @@ from glados.usage_statistics import glados_server_statistics
 from . import heatmap_helper
 from . import og_tags_generator
 from . import schema_tags_generator
+from django.http import Http404
 
 
 def visualise(request):
@@ -355,6 +356,10 @@ def main_html_base_no_bar(request):
 def render_params_from_hash(request, hash):
 
     long_url, expiration_date_str = url_shortener.get_original_url(hash)
+
+    if long_url is None:
+        raise Http404("Shortened url does not exist")
+
     context = {
         'shortened_params': long_url,
         'expiration_date_str': expiration_date_str,
