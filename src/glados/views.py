@@ -367,20 +367,6 @@ def render_params_from_hash_when_embedded(request, hash):
     return render(request, 'glados/Embedding/embed_base.html', context)
 
 
-def shorten_url(request):
-    if request.method == "POST":
-        long_url = request.POST.get('long_url', '')
-        short_url = url_shortener.shorten_url(long_url)
-
-        print('short_url', short_url)
-        resp_data = {
-            'hash': short_url
-        }
-        return JsonResponse(resp_data)
-
-    else:
-        return JsonResponse({'error': 'this is only available via POST'})
-
 # ----------------------------------------------------------------------------------------------------------------------
 # Heatmap Helper
 # ----------------------------------------------------------------------------------------------------------------------
