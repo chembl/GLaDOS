@@ -1,17 +1,23 @@
 sudo: required
 dist: xenial
+env:
+  - MOZ_HEADLESS=1
 addons:
+  firefox: latest
   apt:
     packages:
     - bsdtar
     - gettext
-    - chromium-chromedriver
   chrome: stable
 language: python
 python:
 - '3.5'
+before_install:
+  - wget https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz
+  - mkdir geckodriver
+  - tar -xzf geckodriver-v0.24.0-linux64.tar.gz -C geckodriver
+  - export PATH=$PATH:$PWD/geckodriver
 install:
-- ln -s /usr/lib/chromium-browser/chromedriver ~/bin/chromedriver
 - pip install -r requirements.txt
 - python setup.py install
 before_script:
