@@ -97,6 +97,10 @@ common_urls = [
             url='https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions/chembl-interface-questions#can-i-edit-the-query-being-used',
             permanent=True), name='faqs_edit_query_string'),
 
+    url(r'^faqs_shorten_url/$',
+        RedirectView.as_view(url='https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions/chembl-data-questions#are-my-queries-stored-and-if-so-are-they-routinely-deleted',
+                             permanent=True), name='faqs_shorten_url'),
+
     url(r'^contact_us/$',
         RedirectView.as_view(
             url='https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions/general-questions#how-do-i-report-errors-or-make-suggestions-for-the-interface',

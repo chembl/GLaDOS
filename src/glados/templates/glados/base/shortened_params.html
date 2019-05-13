@@ -1,1 +1,6 @@
-<div id='GladosShortenedParamsContainer' data-shortened-params='{{shortened_params}}'></div>
+<div id='GladosShortenedParamsContainer' class="center-align" data-shortened-params='{{shortened_params}}'>
+    {% if expiration_date_str != None %}
+        The shortened url used will expire on {{ expiration_date_str }}. <a href="{% url 'faqs_shorten_url' %}"
+                                                                            target="_blank">Learn More</a>.
+    {% endif%}
+</div>
