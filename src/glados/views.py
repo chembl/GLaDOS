@@ -18,6 +18,7 @@ from . import heatmap_helper
 from . import og_tags_generator
 from . import schema_tags_generator
 from django.http import Http404
+from django.views.decorators.csrf import csrf_exempt
 
 
 def visualise(request):
@@ -397,6 +398,7 @@ def request_heatmap_helper(request):
 
 
 # noinspection PyBroadException
+@csrf_exempt
 def elasticsearch_cache(request):
     if request.method == "POST":
 

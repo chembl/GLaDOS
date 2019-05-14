@@ -5,8 +5,10 @@ from glados.models import SSSearchJob
 from glados.api.chembl.sssearch import search_manager
 from django.core.cache import cache
 import json
+from django.views.decorators.csrf import csrf_exempt
 
 
+@csrf_exempt
 def get_page(request):
 
     if request.method == "POST":
