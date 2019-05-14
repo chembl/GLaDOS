@@ -111,12 +111,9 @@ export default {
     };
   },
   created() {
-    console.log("API PATH", process.env.VUE_APP_ROOT_API);
-    console.log("SERVER BASE PATH VUE", process.env.VUE_APP_SERVER_BASE_PATH)
     this.imgBasePath = `${
       process.env.VUE_APP_ROOT_API
     }/${process.env.VUE_APP_SERVER_BASE_PATH}glados_api/chembl/unichem/images/`;
-    console.log("IMAGE BASE", this.imgBasePath);
   },
   methods: {
     onDisplaySources(compound) {

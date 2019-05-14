@@ -35,8 +35,7 @@
 
 <script>
 import SearchBox from "./SearchBox";
-// import * as ebiscript from "../../assets/ebi-feeling/js/script.js";
-// ebiFrameworkPopulateBlackBar();
+
 export default {
   data() {
     return {
@@ -106,11 +105,6 @@ export default {
   .search-bar {
     height: $chembl-header-height;
     padding: $chembl-header-padding;
-    // float: left;
-    // background: none;
-    // flex-grow: 2;
-    // display: flex;
-    // align-items: center;
 
     -webkit-transition: max-width 300ms ease-in;
     transition: max-width 300ms ease-in;

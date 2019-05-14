@@ -9,11 +9,13 @@ logger = logging.getLogger('django')
 @csrf_exempt
 def similarity(request):
 
+    if request.method != "POST":
+        return HttpResponse("Method not supported", content_type="application/text")
+
     if request.method == "POST":
         body = request.body.decode('utf-8')
         logger.debug("Called unichem similarity for {}".format(body))
 
-        threshold = "0.9"
         init = 0
         end = 10
         response = {'inchis': []}
@@ -23,14 +25,19 @@ def similarity(request):
 
             return JsonResponse(response)
 
-        if request.GET.get('threshold'):
+        threshold = request.GET.get('threshold')
+        if threshold is None:
+            threshold = "0.9"
+        else:
             threshold = request.GET['threshold']
 
-        if request.GET.get('init'):
-            init = int(request.GET['init'])
+        raw_init = request.GET.get('init')
+        if raw_init is not None:
+            init = int(raw_init)
 
-        if request.GET.get('end'):
-            end = int(request.GET['end'])
+        raw_end = request.GET.get('end')
+        if raw_end:
+            end = int(raw_end)
 
         if init >= end:
             response['error'] = "Pagination params end must be greater than init"
@@ -49,8 +56,6 @@ def similarity(request):
             return json_response
 
         return JsonResponse(response)
-
-    return HttpResponse("Method not supported, SORRY MATE", content_type="application/text")
 
 
 def is_int(s):
