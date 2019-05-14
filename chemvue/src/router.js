@@ -1,6 +1,10 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "@/components/Home";
+import Similarity from "@/views/unichem/Similarity";
+import Sources from "@/views/unichem/Sources";
+import HelloWorld from "@/views/HelloWorld";
+import PageNotFound from "@/views/PageNotFound";
+
 Vue.use(Router);
 
 export default new Router({
@@ -9,23 +13,37 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "Home",
-      component: Home
+      name: "Similarity",
+      component: Similarity
+    },
+    {
+      path: "/sources",
+      name: "Sources",
+      component: Sources
     },
     {
       path: "/test",
       name: "HelloWorld",
+      component: HelloWorld
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () =>
-        import(/* webpackChunkName: "about" */ "./components/HelloWorld.vue")
+      // component: () =>
+      //   import(/* webpackChunkName: "about" */ "./components/HelloWorld.vue")
+    },
+    {
+      path: "/404",
+      name: "PageNotFound",
+      component: PageNotFound
+    },
+    {
+      path: "*",
+      redirect: "/404"
     },
     {
       path: "/chembl_game",
       name: "ChEMBLGame",
-      component: () =>
-        import("./components/ChEMBLGame.vue")
+      component: () => import("@/views/chembl/ChEMBLGame.vue")
     }
   ]
 });

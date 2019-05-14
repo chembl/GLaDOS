@@ -1,12 +1,12 @@
+import "@mdi/font/css/materialdesignicons.css";
+import "./assets/stylus/main.styl";
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-
 import Vuetify from "vuetify";
 import axios from "axios";
 import VueAxios from "vue-axios";
-import "./assets/stylus/main.styl";
 
 Vue.use(VueAxios, axios);
 
@@ -19,7 +19,8 @@ Vue.use(Vuetify, {
     info: "#2196F3",
     success: "#4CAF50",
     warning: "#FFC107"
-  }
+  },
+  iconfont: `mdi`
 });
 
 Vue.config.productionTip = false;
@@ -27,5 +28,6 @@ Vue.config.productionTip = false;
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: h => h(App),
+  components: {}
 }).$mount("#app");

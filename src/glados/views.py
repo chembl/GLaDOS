@@ -9,7 +9,7 @@ from django.core.cache import cache
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 from elasticsearch_dsl import Search
-from glados.api.url_shortening import url_shortener
+from glados.api.chembl.url_shortening import url_shortener
 from glados.utils import *
 from twitter import *
 

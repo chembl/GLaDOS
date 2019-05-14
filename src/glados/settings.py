@@ -197,8 +197,7 @@ INSTALLED_APPS = [
   'glados',
   'compressor',
   'twitter',
-  'django_rq',
-  'unichem'
+  'django_rq'
 ]
 
 MIDDLEWARE = [
@@ -214,7 +213,7 @@ MIDDLEWARE = [
   'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
-CORS_URLS_REGEX = r'^/glados_api/.*$'
+CORS_URLS_REGEX = r'^.*/glados_api/.*$'
 CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'glados.urls'
@@ -431,6 +430,9 @@ else:
     }
 
 
+UNICHEM_SIMILARITY_ENDPOINT = run_config.get('unichem_similarity_endpoint')
+if UNICHEM_SIMILARITY_ENDPOINT is None:
+    raise GladosSettingsError("You must provide a valid URL for UNICHEM similarity search endpoint")
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Logging

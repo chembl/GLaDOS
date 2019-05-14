@@ -1,43 +1,77 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import Api from "@/services/Api.js";
+import RestAPI from "@/services/Api";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    errorFetching: {},
     loading: true,
-    similarCompounds: []
+    similarCompounds: [],
+    totalCompounds: 0
   },
   mutations: {
     SET_LOADING(state, flag) {
       state.loading = flag;
     },
     SET_SIMILAR_COMPOUNDS(state, similarCompounds) {
-      similarCompounds.map(similarCompounds => {
+      similarCompounds.inchis.map(similarCompounds => {
         similarCompounds.show = false;
         return similarCompounds;
       });
-      state.similarCompounds = similarCompounds;
+      state.similarCompounds = similarCompounds.inchis;
+      state.totalCompounds = similarCompounds.totalCount;
+    },
+    SET_FETCHING_SIMILARITY_ERROR(state, error) {
+      state.errorFetching = error;
     }
   },
   actions: {
-    loadCountries: function({ commit }, payload) {
-      let body = payload.body;
-      console.log(body);
+    loadCompounds: function({ commit }, payload) {
+      let data = payload.data;
       commit("SET_LOADING", true);
-      console.log("State loading ", this.state.loading);
-      Api()
-        .post("/test", body)
+      let params = {
+        threshold: payload.threshold,
+        init: payload.init,
+        end: payload.end
+      };
+      let config = { params: params };
+      //TO DO: Make this a general state variable
+      var unichemApi = new RestAPI();
+      unichemApi
+        .getGLaDOSAPI()
+        .post("/similarity/", data, config)
         .then(similarCompounds => {
-          commit("SET_SIMILAR_COMPOUNDS", similarCompounds.data);
+          if (similarCompounds.data.inchis.length <= 0) {
+            commit("SET_FETCHING_SIMILARITY_ERROR", {
+              isError: true,
+              errorMsg: similarCompounds.data.message
+            });
+          } else {
+            commit("SET_FETCHING_SIMILARITY_ERROR", {
+              isError: false,
+              errorMsg: ""
+            });
+            commit("SET_SIMILAR_COMPOUNDS", similarCompounds.data);
+          }
           commit("SET_LOADING", false);
         })
-        .catch(error => console.log(error));
+        .catch(error => {
+          console.log(error);
+          commit("SET_LOADING", false);
+          commit("SET_FETCHING_SIMILARITY_ERROR", {
+            isError: true,
+            errorMsg:
+              "Error getting services, please try againg later or contact support"
+          });
+        });
     }
   },
   getters: {
     similarCompounds: state => state.similarCompounds,
-    isLoading: state => state.loading
+    totalCompounds: state => state.totalCompounds,
+    isLoading: state => state.loading,
+    errorFetching: state => state.errorFetching
   }
 });
