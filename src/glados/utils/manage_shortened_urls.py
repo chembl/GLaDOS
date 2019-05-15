@@ -10,7 +10,7 @@ BULK_SIZE = 1000
 
 def delete_expired_urls():
 
-    dryn_run = '--dry-run' in sys.argv
+    dry_run = '--dry-run' in sys.argv
     now = datetime.utcnow().replace(tzinfo=timezone.utc)
 
     print('I am going to delete the urls that expire before {}'.format(str(now)))
@@ -31,7 +31,7 @@ def delete_expired_urls():
     }
 
     total_items = es_conn.search(index=ES_INDEX, body=query)['hits']['total']
-    if dryn_run:
+    if dry_run:
         print('I would have deleted {} saved urls (dry run).'.format(total_items))
     else:
         bulk(es_conn, stream_items(es_conn, query), chunk_size=BULK_SIZE)
