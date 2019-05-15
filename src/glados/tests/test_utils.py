@@ -23,8 +23,9 @@ class UtilsTester(unittest.TestCase):
 
     def test_expired_downloads_deletion(self):
 
+        num_unexpirable_downloads = 3
         # create 3 downloads that with undefined expired time
-        for i in range(1, 4):
+        for i in range(1, num_unexpirable_downloads + 1):
 
             job_id = 'never_expires_{}'.format(i)
             download_job = DownloadJob(job_id=job_id)
@@ -35,8 +36,9 @@ class UtilsTester(unittest.TestCase):
         now.replace(tzinfo=timezone.utc)
         expired_date = now
 
+        num_expired_downloads = 3
         # create 3 downloads that will be expired
-        for i in range(1, 4):
+        for i in range(1, num_expired_downloads + 1):
             job_id = 'expired_{}'.format(i)
             download_job = DownloadJob(job_id=job_id, expires=expired_date)
             download_job.save()
@@ -45,9 +47,10 @@ class UtilsTester(unittest.TestCase):
         td = timedelta(days=1)
         valid_date = datetime.now() + td
 
+        num_still_valid_downloads = 3
         valid_date.replace(tzinfo=timezone.utc)
         # create 3 downloads that will not be expired
-        for i in range(1, 4):
+        for i in range(1, num_still_valid_downloads + 1):
             job_id = 'not_expired_{}'.format(i)
             download_job = DownloadJob(job_id=job_id, expires=valid_date)
             download_job.save()
@@ -55,11 +58,15 @@ class UtilsTester(unittest.TestCase):
 
         manage_downloads.delete_expired_downloads()
 
-        for download_job in DownloadJob.objects.all():
+        all_downloads = DownloadJob.objects.all()
+        for download_job in all_downloads:
             expires = download_job.expires
             if expires is not None:
                 self.assertTrue(expires.replace(tzinfo=timezone.utc) > now.replace(tzinfo=timezone.utc),
                                 'An expired download was not deleted!')
+
+        num_surviving_downloads = num_still_valid_downloads + num_unexpirable_downloads
+        self.assertTrue(num_surviving_downloads == all_downloads.count(), 'Some valid downloads are missing!')
 
         # There must not be files that would correspond to expired downloads
         for root, dirs, files in os.walk(settings.DYNAMIC_DOWNLOADS_DIR):
