@@ -21,6 +21,9 @@ import datetime
 from glados.models import SSSearchJob
 from django.http import JsonResponse, HttpResponse
 from . import columns_parser
+import logging
+
+logger = logging.getLogger('django')
 
 
 class DownloadError(Exception):
@@ -267,6 +270,9 @@ def generate_download_file(download_id):
             rsync_to_the_other_nfs(download_job)
 
         append_to_job_log(download_job, 'File Ready')
+        # here
+
+        logger.debug('File Ready: ' + get_file_path(download_job.job_id))
         save_download_job_state(download_job, DownloadJob.FINISHED)
 
         # now save some statistics
