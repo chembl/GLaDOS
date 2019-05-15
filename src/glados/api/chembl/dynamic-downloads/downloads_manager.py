@@ -17,13 +17,14 @@ from glados.settings import RunEnvs
 import re
 import subprocess
 import socket
-import datetime
+from datetime import datetime, timedelta, timezone
 from glados.models import SSSearchJob
 from django.http import JsonResponse, HttpResponse
 from . import columns_parser
 import logging
 
 logger = logging.getLogger('django')
+DAYS_TO_LIVE = 7
 
 
 class DownloadError(Exception):
@@ -81,6 +82,12 @@ def save_download_job_progress(download_job, progress_percentage):
 
 def save_download_job_state(download_job, new_state):
     download_job.status = new_state
+    if new_state == DownloadJob.FINISHED:
+        dt = datetime.now()
+        td = timedelta(days=DAYS_TO_LIVE)
+        expiration_date = dt + td
+        expiration_date.replace(tzinfo=timezone.utc)
+        download_job.expires = expiration_date
     download_job.save()
 
 
@@ -399,7 +406,7 @@ def append_to_job_log(download_job, msg):
 
 
 def format_log_message(msg):
-    now = datetime.datetime.now()
+    now = datetime.now()
     return "[{date}] {hostname}: {msg}\n".format(date=now, hostname=socket.gethostname(), msg=msg)
 
 
