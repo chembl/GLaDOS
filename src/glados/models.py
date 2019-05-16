@@ -177,6 +177,7 @@ class ESSearchRecord(models.Model):
 
 # This is to keep track of the status of a download job
 class DownloadJob(models.Model):
+
     job_id = models.CharField(max_length=250, primary_key=True)
     progress = models.PositiveSmallIntegerField(default=0)
     total_items = models.PositiveIntegerField(default=0)
@@ -187,11 +188,13 @@ class DownloadJob(models.Model):
     PROCESSING = 'PROCESSING'
     ERROR = 'ERROR'
     FINISHED = 'FINISHED'
+    DELETING = 'DELETING'
     STATUSES = (
         (QUEUED, QUEUED),
         (PROCESSING, PROCESSING),
         (FINISHED, FINISHED),
         (ERROR, ERROR),
+        (DELETING, DELETING)
     )
     status = models.CharField(max_length=20, choices=STATUSES, default=QUEUED)
     index_name = models.CharField(max_length=200, null=True)
@@ -200,6 +203,7 @@ class DownloadJob(models.Model):
     log = models.TextField(null=True)
     context_id = models.TextField(max_length=500, null=True)
     id_property = models.CharField(max_length=100)
+    expires = models.DateTimeField(null=True)
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Search Jobs

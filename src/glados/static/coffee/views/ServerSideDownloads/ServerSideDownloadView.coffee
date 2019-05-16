@@ -23,6 +23,8 @@ glados.useNameSpace 'glados.views.ServerSideDownloads',
         @renderWhenError()
       else if state == glados.models.ServerSideDownloads.DownloadModel.states.GENERATING_DOWNLOAD
         @renderWhenGeneratingDownload()
+      else if state == glados.models.ServerSideDownloads.DownloadModel.states.DELETING
+        @renderWhenGeneratingDownload()
       else if state == glados.models.ServerSideDownloads.DownloadModel.states.FINISHED
         @renderWhenFinished()
 
@@ -57,18 +59,26 @@ glados.useNameSpace 'glados.views.ServerSideDownloads',
       @$statusLinkElem.hide()
       @$downloadLinkElem.hide()
 
+
     #-------------------------------------------------------------------------------------------------------------------
     # Render when generating download
     #-------------------------------------------------------------------------------------------------------------------
     renderWhenGeneratingDownload: ->
 
+      state = @model.getState()
       # just in case this is called from the callback while in a different state.
-      if @model.getState() != glados.models.ServerSideDownloads.DownloadModel.states.GENERATING_DOWNLOAD
+      if state not in [glados.models.ServerSideDownloads.DownloadModel.states.GENERATING_DOWNLOAD,
+        glados.models.ServerSideDownloads.DownloadModel.states.DELETING]
         return
+
+      if state == glados.models.ServerSideDownloads.DownloadModel.states.GENERATING_DOWNLOAD
+        progressMsg = 'Generating Download File'
+      else if state == glados.models.ServerSideDownloads.DownloadModel.states.DELETING
+        progressMsg = 'Waiting for server cleanup'
 
       progressPercentage = @model.get('progress')
       paramsObj =
-        msg: 'Generating Download File'
+        msg: progressMsg
         percentage: progressPercentage
       glados.Utils.fillContentForElement(@$progressElem, paramsObj)
 
