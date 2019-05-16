@@ -60,6 +60,6 @@ def rsync_nfss():
     rsync_destination = "{server}:{path}".format(server=rsync_destination_server,
                                                  path=Path(settings.DYNAMIC_DOWNLOADS_DIR).parent)
     rsync_command = "rsync -avp --delete {source} {destination}".format(source=settings.DYNAMIC_DOWNLOADS_DIR,
-                                                             destination=rsync_destination)
+                                                                        destination=rsync_destination)
     rsync_command_parts = rsync_command.split(' ')
     subprocess.check_call(rsync_command_parts)

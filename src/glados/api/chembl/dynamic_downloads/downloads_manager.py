@@ -339,6 +339,59 @@ def get_download_id(index_name, raw_query, desired_format, context_id):
                                               context_id, parsed_desired_format)
     return download_id
 
+@job
+def wait_until_job_is_deleted_and_requeue(download_id):
+
+    download_job = DownloadJob.objects.get(job_id=download_id)
+    download_id = download_job.job_id
+    index_name = download_job.index_name
+    raw_columns_to_download = download_job.raw_columns_to_download
+    raw_query = download_job.raw_query
+    parsed_desired_format = download_job.desired_format
+    context_id = download_job.context_id
+    id_property = download_job.id_property
+
+    job_exists = True
+    while job_exists:
+        try:
+            logger.debug('job still exists')
+            DownloadJob.objects.get(job_id=download_id)
+            time.sleep(1)
+        except DownloadJob.DoesNotExist:
+            logger.debug('job was deleted!')
+            job_exists = False
+
+    queue_job(download_id=download_id, index_name=index_name, raw_columns_to_download=raw_columns_to_download,
+              raw_query=raw_query, parsed_desired_format=parsed_desired_format, context_id=context_id,
+              id_property=id_property
+              )
+
+
+def queue_job(download_id, index_name, raw_columns_to_download, raw_query, parsed_desired_format, context_id,
+              id_property):
+
+    download_job = DownloadJob(
+        job_id=download_id,
+        index_name=index_name,
+        raw_columns_to_download=raw_columns_to_download,
+        raw_query=raw_query,
+        desired_format=parsed_desired_format,
+        log=format_log_message('Job Queued'),
+        context_id=context_id,
+        id_property=id_property
+    )
+    download_job.save()
+    generate_download_file.delay(download_id)
+
+
+def requeue_job(download_id, job_log_msg):
+    # This queues again a job that exists but for any reason it needs to be put into the queue again
+    download_job = DownloadJob.objects.get(job_id=download_id)
+    download_job.progress = 0
+    download_job.status = DownloadJob.QUEUED
+    download_job.save()
+    append_to_job_log(download_job, job_log_msg)
+    generate_download_file.delay(download_id)
 
 def generate_download(index_name, raw_query, desired_format, raw_columns_to_download, context_id, id_property):
     response = {}
@@ -349,11 +402,8 @@ def generate_download(index_name, raw_query, desired_format, raw_columns_to_down
         download_job = DownloadJob.objects.get(job_id=download_id)
         if download_job.status == DownloadJob.ERROR:
             # if it was in error state, requeue it
-            download_job.progress = 0
-            download_job.status = DownloadJob.QUEUED
-            download_job.save()
-            append_to_job_log(download_job, "Job was in error state, queuing again.")
-            generate_download_file.delay(download_id)
+            requeue_job(download_id, 'Job was in error state, queuing again.')
+
         elif download_job.status == DownloadJob.FINISHED:
 
             # if not, register the statistics
@@ -373,25 +423,17 @@ def generate_download(index_name, raw_query, desired_format, raw_columns_to_down
                 )
             except FileNotFoundError:
                 # if for some reason the file is not found. requeue que job
-                download_job.progress = 0
-                download_job.status = DownloadJob.QUEUED
-                download_job.save()
-                append_to_job_log(download_job, "File not found, queuing again.")
-                generate_download_file.delay(download_id)
+                requeue_job(download_id, 'File not found, queuing again.')
+
+        elif download_job.status == DownloadJob.DELETING:
+            # someone is deleting the job, I just need to wait until it is deleted and then re queue it
+            logger.debug('job is being deleted! We need to wait until the process finishes')
+            wait_until_job_is_deleted_and_requeue.delay(download_id)
 
     except DownloadJob.DoesNotExist:
-        download_job = DownloadJob(
-            job_id=download_id,
-            index_name=index_name,
-            raw_columns_to_download=raw_columns_to_download,
-            raw_query=raw_query,
-            desired_format=parsed_desired_format,
-            log=format_log_message('Job Queued'),
-            context_id=context_id,
-            id_property=id_property
+        queue_job(download_id=download_id, index_name=index_name, raw_columns_to_download=raw_columns_to_download,
+            raw_query=raw_query, parsed_desired_format=parsed_desired_format, context_id=context_id, id_property=id_property
         )
-        download_job.save()
-        generate_download_file.delay(download_id)
 
     response['download_id'] = download_id
     return response

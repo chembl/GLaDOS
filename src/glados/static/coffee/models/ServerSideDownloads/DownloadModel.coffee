@@ -73,9 +73,19 @@ glados.useNameSpace 'glados.models.ServerSideDownloads',
           thisModel.set('progress', response.percentage)
           setTimeout(thisModel.checkDownloadProgressPeriodically.bind(thisModel), 1000)
 
+        else if status == 'DELETING'
+
+          thisModel.set('progress', '--')
+          thisModel.setState(glados.models.ServerSideDownloads.DownloadModel.states.DELETING)
+          setTimeout(thisModel.checkDownloadProgressPeriodically.bind(thisModel), 1000)
+
         else if status == 'FINISHED'
 
           thisModel.setState(glados.models.ServerSideDownloads.DownloadModel.states.FINISHED)
+
+        else
+
+          setTimeout(thisModel.checkDownloadProgressPeriodically.bind(thisModel), 1000)
 
       getProgress.fail (response) ->
 
@@ -101,3 +111,4 @@ glados.models.ServerSideDownloads.DownloadModel.states =
   ERROR_STATE: 'ERROR_STATE'
   GENERATING_DOWNLOAD: 'GENERATING_DOWNLOAD'
   FINISHED: 'FINISHED'
+  DELETING: 'DELETING'
