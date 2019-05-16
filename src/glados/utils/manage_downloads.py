@@ -44,8 +44,12 @@ def delete_expired_downloads():
 
 
 def delete_download_file(path):
+
     print('Removing file: ', path)
-    os.remove(path)
+    try:
+        os.remove(path)
+    except FileNotFoundError:
+        print('File was not there anyway')
 
 
 def rsync_nfss():
