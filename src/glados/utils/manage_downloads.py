@@ -9,6 +9,8 @@ import os
 import re
 import socket
 from pathlib import Path
+from glados.settings import RunEnvs
+import subprocess
 
 
 def delete_expired_downloads():
@@ -28,7 +30,8 @@ def delete_expired_downloads():
             delete_download_file(file_to_remove)
         expired_downloads.delete()
         print('Deleted {} expired expired downloads.'.format(num_expired_downloads))
-        rsync_nfss()
+        if settings.RUN_ENV == RunEnvs.PROD:
+            rsync_nfss()
 
 
 def delete_download_file(path):
@@ -49,5 +52,5 @@ def rsync_nfss():
                                                  path=Path(settings.DYNAMIC_DOWNLOADS_DIR).parent)
     rsync_command = "rsync -avp --delete {source} {destination}".format(source=settings.DYNAMIC_DOWNLOADS_DIR,
                                                              destination=rsync_destination)
-    print('rsync_command: ', rsync_command)
-    # rsync_command_parts = rsync_command.split('')
+    rsync_command_parts = rsync_command.split(' ')
+    subprocess.check_call(rsync_command_parts)
