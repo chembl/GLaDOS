@@ -16,10 +16,17 @@ import subprocess
 def delete_expired_downloads():
 
     dry_run = '--dry-run' in sys.argv
+    delete_unexpirable = '--deleteunexpirable' in sys.argv
+    print('deleteunexpirable: ', delete_unexpirable)
     now = datetime.utcnow().replace(tzinfo=timezone.utc)
 
     print('I am going to delete the downloads that expire before {}'.format(str(now)))
-    expired_downloads = DownloadJob.objects.filter(expires__lte=now)
+    if delete_unexpirable:
+        really_expired_downloads = DownloadJob.objects.filter(expires__lte=now)
+        unexpirable_downloads = DownloadJob.objects.filter(expires__isnull=True)
+        expired_downloads = really_expired_downloads | unexpirable_downloads
+    else:
+        expired_downloads = DownloadJob.objects.filter(expires__lte=now)
     num_expired_downloads = expired_downloads.count()
 
     if dry_run:
