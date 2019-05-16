@@ -188,11 +188,13 @@ class DownloadJob(models.Model):
     PROCESSING = 'PROCESSING'
     ERROR = 'ERROR'
     FINISHED = 'FINISHED'
+    DELETING = 'DELETING'
     STATUSES = (
         (QUEUED, QUEUED),
         (PROCESSING, PROCESSING),
         (FINISHED, FINISHED),
         (ERROR, ERROR),
+        (DELETING, DELETING)
     )
     status = models.CharField(max_length=20, choices=STATUSES, default=QUEUED)
     index_name = models.CharField(max_length=200, null=True)
