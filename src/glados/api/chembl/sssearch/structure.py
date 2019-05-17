@@ -9,6 +9,7 @@ import requests
 import os
 from django.conf import settings
 from . import search_manager
+from urllib.parse import quote
 
 
 def get_structure_search_status(search_id):
@@ -151,7 +152,7 @@ def do_structure_search(job_id):
 
 def get_initial_search_url(search_params, search_job):
 
-    search_term = search_params['search_term']
+    search_term = quote(search_params['search_term'])
     page_size = 1000
     search_manager.append_to_job_log(search_job, 'page_size: {}'.format(page_size))
     search_type = search_job.search_type
