@@ -455,16 +455,22 @@ def format_log_message(msg):
 def get_download_status(download_id):
     try:
         download_job = DownloadJob.objects.get(job_id=download_id)
+        status = download_job.status
         response = {
             'percentage': download_job.progress,
             'status': download_job.status
 
         }
+
+        if status == DownloadJob.FINISHED:
+            expiration_time_str = download_job.expires.replace(tzinfo=timezone.utc).isoformat()
+            response['expires'] = expiration_time_str
+
         return response
 
     except DownloadJob.DoesNotExist:
         response = {
             'msg': 'download does not exist!',
-            'status:': DownloadJob.ERROR
+            'status': DownloadJob.ERROR,
         }
         return response
