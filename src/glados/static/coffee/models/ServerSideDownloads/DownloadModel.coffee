@@ -81,6 +81,7 @@ glados.useNameSpace 'glados.models.ServerSideDownloads',
 
         else if status == 'FINISHED'
 
+          thisModel.set('expires', response.expires)
           thisModel.setState(glados.models.ServerSideDownloads.DownloadModel.states.FINISHED)
 
         else

@@ -102,6 +102,7 @@ glados.useNameSpace 'glados.views.ServerSideDownloads',
 
       paramsObj =
         url: @model.getDownloadURL()
+        expires: @model.get('expires')
       glados.Utils.fillContentForElement(@$downloadLinkElem, paramsObj)
       @showProgressAndStatusLink()
       @showDownloadLinkHideOthers()
