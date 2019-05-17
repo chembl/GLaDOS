@@ -181,6 +181,12 @@ common_urls = [
             permanent=True),
         name='chembl_malaria'),
 
+    url(r'^download_expiration/$',
+        RedirectView.as_view(
+            url="https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions/chembl-download-questions#what-is-the-expiration-date-in-the-downloads-from-the-interface",
+            permanent=True),
+        name='download_expiration'),
+
     # --------------------------------------------------------------------------------------------------------------------
     # Tests
     # --------------------------------------------------------------------------------------------------------------------
