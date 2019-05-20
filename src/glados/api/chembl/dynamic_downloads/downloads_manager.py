@@ -393,6 +393,7 @@ def requeue_job(download_id, job_log_msg):
     append_to_job_log(download_job, job_log_msg)
     generate_download_file.delay(download_id)
 
+
 def generate_download(index_name, raw_query, desired_format, raw_columns_to_download, context_id, id_property):
     response = {}
     download_id = get_download_id(index_name, raw_query, desired_format, context_id)

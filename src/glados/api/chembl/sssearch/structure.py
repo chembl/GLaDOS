@@ -10,6 +10,10 @@ import os
 from django.conf import settings
 from . import search_manager
 from urllib.parse import quote
+from datetime import timezone
+import logging
+
+logger = logging.getLogger('django')
 
 
 def get_structure_search_status(search_id):
@@ -24,6 +28,8 @@ def get_structure_search_status(search_id):
             response['ids'] = [k['molecule_chembl_id'] for k in context]
             response['total_results'] = total_results
             response['size_limit'] = search_manager.WEB_RESULTS_SIZE_LIMIT
+            expiration_time_str = sssearch_job.expires.replace(tzinfo=timezone.utc).isoformat()
+            response['expires'] = expiration_time_str
         elif sssearch_job.status == SSSearchJob.ERROR:
             response['msg'] = sssearch_job.error_message
 
@@ -44,6 +50,26 @@ def get_structure_search_status(search_id):
             'status': SSSearchJob.ERROR
         }
         return response
+
+@job
+def wait_until_job_is_deleted_and_requeue(job_id):
+
+    logger.debug('Job is being deleted, waiting until this process finishes.')
+    sssearch_job = SSSearchJob.objects.get(search_id=job_id)
+    search_type = sssearch_job.search_type
+    raw_search_params = sssearch_job.raw_search_params
+
+    job_exists = True
+    while job_exists:
+        try:
+            logger.debug('job still exists')
+            SSSearchJob.objects.get(search_id=job_id)
+            time.sleep(1)
+        except SSSearchJob.DoesNotExist:
+            logger.debug('job was deleted!')
+            job_exists = False
+
+    queue_structure_search_job(search_type, raw_search_params)
 
 
 def queue_structure_search_job(search_type, raw_search_params):
@@ -74,6 +100,11 @@ def queue_structure_search_job(search_type, raw_search_params):
                 sssearch_job.save()
                 search_manager.append_to_job_log(sssearch_job, "Results File not found, queuing again.")
                 do_structure_search.delay(job_id)
+
+        elif sssearch_job.status == SSSearchJob.DELETING:
+            # someone is deleting the job, I just need to wait until it is deleted and then re queue it
+            logger.debug('job is being deleted! We need to wait until the process finishes')
+            wait_until_job_is_deleted_and_requeue.delay(job_id)
 
     except SSSearchJob.DoesNotExist:
 

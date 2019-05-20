@@ -19,6 +19,8 @@ glados.useNameSpace 'glados.views.SearchResults',
         return 'Loading Results'
       else if currentStatus == glados.models.Search.StructureSearchModel.STATES.FINISHED
         return 'Results Ready'
+      else if currentStatus == glados.models.Search.StructureSearchModel.STATES.DELETING
+        return 'Waiting for Server Clean-up'
 
 
     getStatusLink: ->

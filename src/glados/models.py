@@ -233,13 +233,15 @@ class SSSearchJob(models.Model):
     LOADING_RESULTS = 'LOADING_RESULTS'
     FINISHED = 'FINISHED'
     ERROR = 'ERROR'
+    DELETING = 'DELETING'
 
     STATUSES = (
         (SEARCH_QUEUED, SEARCH_QUEUED),
         (SEARCHING, SEARCHING),
         (LOADING_RESULTS, LOADING_RESULTS),
         (FINISHED, FINISHED),
-        (ERROR, ERROR)
+        (ERROR, ERROR),
+        (DELETING, DELETING)
     )
 
     raw_search_params = models.TextField(null=True)
@@ -247,3 +249,4 @@ class SSSearchJob(models.Model):
     worker = models.TextField(max_length=250, null=True)
     log = models.TextField(null=True)
     error_message = models.TextField(null=True)
+    expires = models.DateTimeField(null=True)
