@@ -8,6 +8,7 @@ from pathlib import Path
 import subprocess
 from glados.settings import RunEnvs
 import os
+import re
 
 
 def delete_expired_searches():
