@@ -1,5 +1,5 @@
 import unittest
-from glados.models import DownloadJob
+from glados.models import DownloadJob, SSSearchJob
 from glados.utils import manage_downloads
 from datetime import datetime, timezone, timedelta
 from django.conf import settings
@@ -75,6 +75,16 @@ class UtilsTester(unittest.TestCase):
                 job_id = file_name.split('.')[0]
                 owner_job_count = DownloadJob.objects.filter(job_id=job_id).count()
                 self.assertTrue(owner_job_count == 1, 'There were orphan download files left!')
+
+    def test_expired_searches_deletion(self):
+
+        num_unexpirable = 3
+        # create 3 searches that with undefined expired time
+        for i in range(1, num_unexpirable + 1):
+            job_id = 'never_expires_{}'.format(i)
+            sssearch_job = SSSearchJob(job_id=job_id)
+            sssearch_job.save()
+            # touch_file(job_id)
 
 
 def touch_file(job_id):
