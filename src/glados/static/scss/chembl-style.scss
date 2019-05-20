@@ -127,6 +127,7 @@ footer {
 }
 
 .btn-chembl {
+  white-space: nowrap;
   color: white;
   background-color: $chembl-teal;
   border-radius: $default-btn-border-radius;

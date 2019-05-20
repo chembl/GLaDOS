@@ -81,6 +81,7 @@ glados.useNameSpace 'glados.views.SearchResults',
         similarity: @queryParams.threshold
         status_text: @getStatusText()
         status_link: @getStatusLink()
+        expiration_time: @model.get('expires')
 
 
     showEditModal: (event) ->

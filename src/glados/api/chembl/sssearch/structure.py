@@ -10,6 +10,7 @@ import os
 from django.conf import settings
 from . import search_manager
 from urllib.parse import quote
+from datetime import timezone
 
 
 def get_structure_search_status(search_id):
@@ -24,6 +25,8 @@ def get_structure_search_status(search_id):
             response['ids'] = [k['molecule_chembl_id'] for k in context]
             response['total_results'] = total_results
             response['size_limit'] = search_manager.WEB_RESULTS_SIZE_LIMIT
+            expiration_time_str = sssearch_job.expires.replace(tzinfo=timezone.utc).isoformat()
+            response['expires'] = expiration_time_str
         elif sssearch_job.status == SSSearchJob.ERROR:
             response['msg'] = sssearch_job.error_message
 
