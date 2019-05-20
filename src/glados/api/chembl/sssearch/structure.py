@@ -52,9 +52,9 @@ def get_structure_search_status(search_id):
         return response
 
 @job
-def  wait_until_job_is_deleted_and_requeue(job_id):
+def wait_until_job_is_deleted_and_requeue(job_id):
 
-    print('Job is being deleted, waiting until this process finishes.')
+    logger.debug('Job is being deleted, waiting until this process finishes.')
     sssearch_job = SSSearchJob.objects.get(search_id=job_id)
     search_type = sssearch_job.search_type
     raw_search_params = sssearch_job.raw_search_params
@@ -62,14 +62,15 @@ def  wait_until_job_is_deleted_and_requeue(job_id):
     job_exists = True
     while job_exists:
         try:
-            print('job still exists')
+            logger.debug('job still exists')
             SSSearchJob.objects.get(search_id=job_id)
             time.sleep(1)
         except SSSearchJob.DoesNotExist:
-            print('job was deleted!')
+            logger.debug('job was deleted!')
             job_exists = False
 
     queue_structure_search_job(search_type, raw_search_params)
+
 
 def queue_structure_search_job(search_type, raw_search_params):
 
