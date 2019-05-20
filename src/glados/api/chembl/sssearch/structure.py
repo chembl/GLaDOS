@@ -11,6 +11,9 @@ from django.conf import settings
 from . import search_manager
 from urllib.parse import quote
 from datetime import timezone
+import logging
+
+logger = logging.getLogger('django')
 
 
 def get_structure_search_status(search_id):
@@ -48,6 +51,25 @@ def get_structure_search_status(search_id):
         }
         return response
 
+@job
+def  wait_until_job_is_deleted_and_requeue(job_id):
+
+    print('Job is being deleted, waiting until this process finishes.')
+    sssearch_job = SSSearchJob.objects.get(search_id=job_id)
+    search_type = sssearch_job.search_type
+    raw_search_params = sssearch_job.raw_search_params
+
+    job_exists = True
+    while job_exists:
+        try:
+            print('job still exists')
+            SSSearchJob.objects.get(search_id=job_id)
+            time.sleep(1)
+        except SSSearchJob.DoesNotExist:
+            print('job was deleted!')
+            job_exists = False
+
+    queue_structure_search_job(search_type, raw_search_params)
 
 def queue_structure_search_job(search_type, raw_search_params):
 
@@ -77,6 +99,11 @@ def queue_structure_search_job(search_type, raw_search_params):
                 sssearch_job.save()
                 search_manager.append_to_job_log(sssearch_job, "Results File not found, queuing again.")
                 do_structure_search.delay(job_id)
+
+        elif sssearch_job.status == SSSearchJob.DELETING:
+            # someone is deleting the job, I just need to wait until it is deleted and then re queue it
+            logger.debug('job is being deleted! We need to wait until the process finishes')
+            wait_until_job_is_deleted_and_requeue.delay(job_id)
 
     except SSSearchJob.DoesNotExist:
 

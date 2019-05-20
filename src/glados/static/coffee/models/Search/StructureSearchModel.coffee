@@ -64,6 +64,11 @@ glados.useNameSpace 'glados.models.Search',
           thisModel.setState(glados.models.Search.StructureSearchModel.STATES.LOADING_RESULTS)
           setTimeout(thisModel.checkSearchStatusPeriodically.bind(thisModel), 1000)
 
+        else if status == 'DELETING'
+
+          thisModel.setState(glados.models.Search.StructureSearchModel.STATES.DELETING)
+          setTimeout(thisModel.checkSearchStatusPeriodically.bind(thisModel), 1000)
+
         else if status == 'FINISHED'
 
           thisModel.set('result_ids', response.ids)
@@ -71,6 +76,10 @@ glados.useNameSpace 'glados.models.Search',
           thisModel.set('size_limit', response.size_limit)
           thisModel.set('expires', response.expires)
           thisModel.setState(glados.models.Search.StructureSearchModel.STATES.FINISHED)
+
+        else
+
+          setTimeout(thisModel.checkSearchStatusPeriodically.bind(thisModel), 1000)
 
     #-------------------------------------------------------------------------------------------------------------------
     # State handling
@@ -92,6 +101,7 @@ glados.models.Search.StructureSearchModel.STATES =
   SEARCHING: 'SEARCHING'
   LOADING_RESULTS: 'LOADING_RESULTS'
   FINISHED: 'FINISHED'
+  DELETING: 'DELETING'
 
 glados.models.Search.StructureSearchModel.EVENTS =
   RESULTS_READY: 'RESULTS_READY'
