@@ -247,3 +247,4 @@ class SSSearchJob(models.Model):
     worker = models.TextField(max_length=250, null=True)
     log = models.TextField(null=True)
     error_message = models.TextField(null=True)
+    expires = models.DateTimeField(null=True)
