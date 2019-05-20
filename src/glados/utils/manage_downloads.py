@@ -30,7 +30,7 @@ def delete_expired_downloads():
     num_expired_downloads = expired_downloads.count()
 
     if dry_run:
-        print('I would have deleted {} saved urls (dry run).'.format(num_expired_downloads))
+        print('I would have deleted {} saved downloads (dry run).'.format(num_expired_downloads))
     else:
         for download_job in expired_downloads:
             download_job.status = DownloadJob.DELETING
