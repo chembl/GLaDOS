@@ -4,7 +4,6 @@ from glados.models import SSSearchJob
 import json
 import hashlib
 import base64
-import datetime
 import socket
 import traceback
 import os
@@ -16,6 +15,9 @@ from . import blast
 from . import structure
 from django.conf import settings
 from glados.settings import RunEnvs
+from datetime import datetime, timedelta, timezone
+
+DAYS_TO_LIVE = 7
 
 
 class SSSearchError(Exception):
@@ -175,13 +177,18 @@ def append_to_job_log(search_job, msg):
 
 
 def format_log_message(msg):
-    now = datetime.datetime.now()
+    now = datetime.now()
     return "[{date}] {hostname}: {msg}\n".format(date=now, hostname=socket.gethostname(), msg=msg)
 
 
-def save_search_job_state(search_job, new_state, error_message=None):
+def save_search_job_state(search_job, new_state):
     search_job.status = new_state
-    search_job.error_message = error_message
+    if new_state == SSSearchJob.FINISHED:
+        dt = datetime.now()
+        td = timedelta(days=DAYS_TO_LIVE)
+        expiration_date = dt + td
+        expiration_date.replace(tzinfo=timezone.utc)
+        search_job.expires = expiration_date
     search_job.save()
 
 
