@@ -69,6 +69,7 @@ glados.useNameSpace 'glados.models.Search',
           thisModel.set('result_ids', response.ids)
           thisModel.set('total_results', response.total_results)
           thisModel.set('size_limit', response.size_limit)
+          thisModel.set('expires', response.expires)
           thisModel.setState(glados.models.Search.StructureSearchModel.STATES.FINISHED)
 
     #-------------------------------------------------------------------------------------------------------------------

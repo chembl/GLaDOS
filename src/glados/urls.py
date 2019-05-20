@@ -187,6 +187,12 @@ common_urls = [
             permanent=True),
         name='download_expiration'),
 
+    url(r'^sssearch_expiration/$',
+        RedirectView.as_view(
+            url="https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions/chembl-interface-questions#what-is-the-expiration-date-in-the-structure-based-searches-from-the-interface",
+            permanent=True),
+        name='sssearch_expiration'),
+
     # --------------------------------------------------------------------------------------------------------------------
     # Tests
     # --------------------------------------------------------------------------------------------------------------------

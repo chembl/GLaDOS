@@ -450,6 +450,10 @@
             {{else}}
                 {{ status_text }}
             {{/if}}
+            {{#if expiration_time  }}
+                These results will expire on {{ expiration_time }}.
+                <a target="_blank" href="{% endverbatim %}{% url 'sssearch_expiration' %}{% verbatim %}">Learn More</a>.
+            {{/if}}
         </div>
         <a class="btn-chembl BCK-Edit-Query">Edit Search</a>
     </div>
