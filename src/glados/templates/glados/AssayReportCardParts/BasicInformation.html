@@ -95,6 +95,13 @@
     </tr>
     {{/if }}
 
+    {{#if show_binding_db_link }}
+    <tr>
+      <td class="fixed-width-column-11"><b>BindingDB:</b></td>
+      <td><a target="_blank" href='{{binding_db_link}}'>{{binding_db_link_text}}</a></td>
+    </tr>
+    {{/if }}
+
   </table>
 
 </script>
@@ -185,7 +192,13 @@
 
     {{#if show_assay_src_id }}
     <li class="collection-item">
-    <b>PubChem Source:</b> <a target="_blank" href='{{src_assay_id_link}}'>{{src_assay_id_text}}</a>
+        <b>PubChem Source:</b> <a target="_blank" href='{{src_assay_id_link}}'>{{src_assay_id_text}}</a>
+    </li>
+    {{/if }}
+
+    {{#if show_binding_db_link }}
+    <li class="collection-item">
+      <b>BindingDB:</b> <a target="_blank" href='{{binding_db_link}}'>{{binding_db_link_text}}</a>
     </li>
     {{/if }}
 

@@ -60,3 +60,6 @@ AssayBasicInformationView = CardView.extend
       show_assay_src_id: showAssaySrcID
       src_assay_id_text: srcAssayIDText
       src_assay_id_link: srcAssayIDLink
+      show_binding_db_link: @model.get('binding_db_link')?
+      binding_db_link: @model.get('binding_db_link')
+      binding_db_link_text: @model.get('binding_db_link_text')

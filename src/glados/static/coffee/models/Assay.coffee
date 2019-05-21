@@ -50,6 +50,7 @@ Assay = Backbone.Model.extend
 
       bindingDBLink = "https://www.bindingdb.org/jsp/dbsearch/assay.jsp?assayid=#{byAssayID}&entryid=#{entryID}"
       objData.binding_db_link = bindingDBLink
+      objData.binding_db_link_text = entryID
 
     return objData;
 
