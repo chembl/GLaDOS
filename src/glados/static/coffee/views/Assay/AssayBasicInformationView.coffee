@@ -23,15 +23,15 @@ AssayBasicInformationView = CardView.extend
   fillTemplate: (div_id) ->
 
     $elem = $(@el).find('#' + div_id)
-
+    referenceLink = @model.get('reference_link')
     documentAttributes = @model.get('_metadata').document_data
     referenceText = Document.getFormattedReference(documentAttributes)
-    referenceLink = 'http://dx.doi.org/' + encodeURIComponent(documentAttributes.doi)
 
     showAssaySrcID = false
     srcAssayID = @model.get('src_assay_id')
     srcID = parseInt(@model.get('src_id'))
 
+    #this should be in parsing!
     if srcAssayID? and srcID == 7
       showAssaySrcID = true
       srcAssayIDText = "AID:#{srcAssayID}"
@@ -44,6 +44,7 @@ AssayBasicInformationView = CardView.extend
       format: @model.get('bao_format')
       reference_text: referenceText
       reference_link: referenceLink
+      show_reference_link: referenceLink?
       organism: @model.get('assay_organism')
       strain: @model.get('assay_strain')
       tissue: @model.get('assay_tissue')
@@ -60,3 +61,6 @@ AssayBasicInformationView = CardView.extend
       show_assay_src_id: showAssaySrcID
       src_assay_id_text: srcAssayIDText
       src_assay_id_link: srcAssayIDLink
+      show_binding_db_link: @model.get('binding_db_link')?
+      binding_db_link: @model.get('binding_db_link')
+      binding_db_link_text: @model.get('binding_db_link_text')

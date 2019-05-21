@@ -39,7 +39,13 @@
 
     <tr>
       <td class="fixed-width-column-11"><b>Journal:</b></td>
-      <td><a href="{{reference_link}}" target="_blank">{{reference_text}}</a>
+      <td>
+          {{#if show_reference_link }}
+              <a href="{{reference_link}}" target="_blank">{{reference_text}}
+              </a>
+          {{else }}
+              No Reference Available
+          {{/if }}
       </td>
     </tr>
 
@@ -95,6 +101,13 @@
     </tr>
     {{/if }}
 
+    {{#if show_binding_db_link }}
+    <tr>
+      <td class="fixed-width-column-11"><b>BindingDB:</b></td>
+      <td><a target="_blank" href='{{binding_db_link}}'>{{binding_db_link_text}}</a></td>
+    </tr>
+    {{/if }}
+
   </table>
 
 </script>
@@ -142,8 +155,11 @@
 
   <li class="collection-item">
 
-    <b>Journal:</b> <a href="http://europepmc.org/abstract/MED/19049433" target="_blank">J. Med. Chem. (2008)
-    51:7991-7999</a>
+      {{#if show_reference_link }}
+          <b>Journal:</b> <a href="{{reference_link}}" target="_blank">{{reference_text}}</a>
+      {{else }}
+          No Reference Available
+      {{/if }}
 
   </li>
 
@@ -182,6 +198,18 @@
     <b>No of Bioactivities:</b> 1
 
   </li>
+
+    {{#if show_assay_src_id }}
+    <li class="collection-item">
+        <b>PubChem Source:</b> <a target="_blank" href='{{src_assay_id_link}}'>{{src_assay_id_text}}</a>
+    </li>
+    {{/if }}
+
+    {{#if show_binding_db_link }}
+    <li class="collection-item">
+      <b>BindingDB:</b> <a target="_blank" href='{{binding_db_link}}'>{{binding_db_link_text}}</a>
+    </li>
+    {{/if }}
 
 </ul>
 
