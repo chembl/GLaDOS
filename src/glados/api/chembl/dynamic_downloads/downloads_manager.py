@@ -468,8 +468,9 @@ def get_download_status(download_id):
         }
 
         if status == DownloadJob.FINISHED:
-            expiration_time_str = download_job.expires.replace(tzinfo=timezone.utc).isoformat()
-            response['expires'] = expiration_time_str
+            if download_job.expires is not None:
+                expiration_time_str = download_job.expires.replace(tzinfo=timezone.utc).isoformat()
+                response['expires'] = expiration_time_str
 
         return response
 
