@@ -234,6 +234,10 @@ def write_sdf_file(scanner, download_job):
 
 @job
 def generate_download_file(download_id):
+
+    print('-----------------------------------------------------------------------------------------------------------')
+    print('Processing job: ', download_id)
+    print('-----------------------------------------------------------------------------------------------------------')
     start_time = time.time()
     download_job = DownloadJob.objects.get(job_id=download_id)
     download_job.status = DownloadJob.PROCESSING
