@@ -19,6 +19,7 @@ Assay = Backbone.Model.extend
 
   parse: (response) ->
 
+    console.log('Parsing Assay')
     # get data when it comes from elastic
     if response._source?
       objData = response._source
@@ -39,6 +40,16 @@ Assay = Backbone.Model.extend
 
     objData.target_link = Target.get_report_card_url(objData.target_chembl_id)
     objData.cell_link = CellLine.get_report_card_url(objData.cell_chembl_id)
+
+    #check if it is bindingdb and add corresponding link
+    isFromBindingDB = objData.src_id == 37
+    if isFromBindingDB
+      assayIDParts = objData.src_assay_id.split('_')
+      byAssayID = assayIDParts[1]
+      entryID = assayIDParts[0]
+
+      bindingDBLink = "https://www.bindingdb.org/jsp/dbsearch/assay.jsp?assayid=#{byAssayID}&entryid=#{entryID}"
+      objData.binding_db_link = bindingDBLink
 
     return objData;
 
