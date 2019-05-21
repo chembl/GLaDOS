@@ -19,7 +19,6 @@ Assay = Backbone.Model.extend
 
   parse: (response) ->
 
-    console.log('Parsing Assay')
     # get data when it comes from elastic
     if response._source?
       objData = response._source
@@ -51,6 +50,9 @@ Assay = Backbone.Model.extend
       bindingDBLink = "https://www.bindingdb.org/jsp/dbsearch/assay.jsp?assayid=#{byAssayID}&entryid=#{entryID}"
       objData.binding_db_link = bindingDBLink
       objData.binding_db_link_text = entryID
+
+    if objData._metadata.document_data.doi?
+      objData.reference_link = 'http://dx.doi.org/' + encodeURIComponent(objData._metadata.document_data.doi)
 
     return objData;
 
