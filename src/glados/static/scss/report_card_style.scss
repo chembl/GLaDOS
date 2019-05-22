@@ -40,12 +40,6 @@ div#CompoundNameAndClassification .CNC-img {
   max-height: 90%;
 }
 
-div#CompoundNameAndClassification .CNC-img-btn {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-
 .td-oneline {
   white-space: nowrap;
 }
@@ -158,100 +152,6 @@ div#CompoundNameAndClassification .comp-phase-0 {
 
 }
 
-.cropped-container-btns {
-  position: absolute;
-  bottom: 0px;
-  right: 0px;
-}
-
-.material-tooltip {
-  padding: 5px 4px;
-  font-size: 0.8rem;
-  min-height: 20px;
-  max-width: calc(80% - 4px)
-}
-
-.cropped-container-btns span {
-  margin: 0 1px;
-  padding-left: 3px;
-  font-size: 0.65rem;
-}
-
-.cropped-container-btns-exp {
-  position: relative;
-  float: right;
-}
-
-.CNC-expandable-content-right,
-.CNC-expandable-content-left,
-.CNC-expandable-content-top,
-.CNC-expandable-content-bottom {
-  background-color: rgba(158, 158, 158, 0.6);
-  position: absolute;
-  z-index: $z-overlay;
-  width: 100%;
-  overflow: hidden;
-  display: none;
-}
-
-.CNC-expandable-content-top {
-  bottom: 100%;
-}
-
-.CNC-expandable-content-left {
-  width: 40px;
-  top: 0;
-  right: 100%;
-}
-
-.CNC-expandable-content-right {
-  width: 80px;
-  top: 0;
-  left: 100%;
-}
-
-.CNC-expandable-content-right a,
-.CNC-expandable-content-left a,
-.CNC-expandable-content-top a,
-.CNC-expandable-content-bottom a {
-  color: white;
-  margin: 8px auto 8px auto;
-  border-radius: 2px;
-  display: inline-block;
-  padding: 6px;
-  width: 30px;
-  height: 33px;
-  line-height: 21px;
-}
-
-.CNC-expandable-content-right a,
-.CNC-expandable-content-left a {
-  margin: 2px auto 2px 2px;
-}
-
-.CNC-expandable-content-right i,
-.CNC-expandable-content-left i,
-.CNC-expandable-content-top i,
-.CNC-expandable-content-bottom i {
-  color: white;
-  font-size: 120%;
-}
-
-.CNC-expandable-content-right p,
-.CNC-expandable-content-left p,
-.CNC-expandable-content-top p,
-.CNC-expandable-content-bottom p {
-  margin: 0;
-  text-align: center;
-}
-
-.CNC-expandable-content-right .container,
-.CNC-expandable-content-left .container,
-.CNC-expandable-content-top .container,
-.CNC-expandable-content-bottom .container {
-  width: 90%;
-}
-
 .position-relative {
   position: relative;
 }
@@ -278,59 +178,12 @@ div#CompoundNameAndClassification .comp-phase-0 {
   overflow: scroll;
 }
 
-div#CNC-zoom-modal {
-  height: $modals-height;
-  overflow-y: hidden;
-}
-
-.img-zoom-container {
-  height: 95%;
-  width: 95%;
-  text-align: center;
-  margin: 2% auto 2% auto;
-}
 
 .responsive-height-img {
   max-height: 100%;
   max-width: 100%;
 }
 
-.img-zoom-title {
-  position: absolute;
-  top: 0;
-  padding: 5px;
-  margin-top: 10px;
-}
-
-#SDF-raw-modal {
-  display: inline-block;
-}
-
-.sdf-raw-container {
-  height: 95%;
-  width: 95%;
-  text-align: center;
-  margin: 2% auto 2% auto;
-}
-
-.SDF-raw-modal-title-container {
-  position: absolute;
-  top: 0;
-  padding: 5px;
-  margin-top: 10px;
-}
-
-.SDF-raw-modal-content-container {
-  width: 95%;
-  text-align: center;
-  margin: 35px auto 2% auto;
-}
-
-.SDF-raw-modal-content {
-  display: inline-block;
-  font-family: $roboto-mono;
-  text-align: left;
-}
 
 .modal-close-icon {
   position: absolute;
@@ -338,97 +191,6 @@ div#CNC-zoom-modal {
   right: 0;
 }
 
-.menu-close-icon {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-}
-
-.menu-open-icon {
-  position: absolute;
-  right: 0;
-  left: 0;
-  margin-right: auto;
-  margin-left: auto;
-  bottom: 5px;
-}
-
-.img-zoom-menu {
-  opacity: 0.8;
-  position: absolute;
-  bottom: 20px;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 50%;
-  padding: 15px;
-  border-radius: 5px;
-}
-
-.img-zoom-menu label {
-  color: $grey-dark;
-}
-
-/* small screens */
-@media only screen and (max-width: 600px) {
-  .img-zoom-menu {
-    max-width: 90%;
-  }
-}
-
-.modal-3D {
-  min-height: 400px;
-  overflow-x: hidden;
-  overflow-y: hidden;
-}
-
-.options-3D-menu-wrapper {
-  position: absolute;
-  bottom: 0px;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-}
-
-.visualisation-container-3D {
-  text-align: center;
-  position: relative;
-  width: 100%;
-  min-height: 300px;
-  overflow-x: hidden;
-  overflow-y: hidden;
-}
-
-.vis-3D-wrapper {
-  min-height: 350px;
-}
-
-.img-3D-menu {
-  opacity: 0.8;
-  position: absolute;
-  bottom: 5px;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 50%;
-  padding: 15px;
-  border-radius: 5px;
-}
-
-.img-3D-menu label {
-  color: $grey-dark;
-}
-
-/* small screens */
-@media only screen and (max-width: 600px) {
-  .img-3D-menu {
-    max-width: 90%;
-  }
-}
 
 /**
 * Indications
