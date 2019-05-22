@@ -24,7 +24,6 @@ CompoundImageView = CardView.extend
 
 
     @renderImage()
-    @initDownloadButtons()
     @initZoomModal()
 
   events: ->
@@ -56,26 +55,6 @@ CompoundImageView = CardView.extend
 
     img.attr('src', img_url)
 
-
-  initDownloadButtons: ->
-    $dwn_png = $('.CNC-download-png')
-    $dwn_svg = $('.CNC-download-svg')
-    $viewRawJsonBTN = $(@el).find('.BCK-trigger-download-JSON')
-    $viewRawJsonBTN.attr('href', @model.url)
-
-
-    if @model.get('structure_image')
-      $dwn_png.attr('href', @model.get('image_url_png'))
-      $dwn_png.attr('download', @model.get('molecule_chembl_id') + '.png')
-
-      $dwn_svg.attr('href', @model.get('image_url'))
-      $dwn_svg.attr('download', @model.get('molecule_chembl_id') + '.svg')
-    else
-      disable_func = (e) -> e.preventDefault()
-      $dwn_png.click(disable_func)
-      $dwn_png.attr('class', 'CNC-download-png disabled')
-      $dwn_svg.click(disable_func)
-      $dwn_svg.attr('class', 'CNC-download-svg disabled')
 
   initZoomModal: ->
 
