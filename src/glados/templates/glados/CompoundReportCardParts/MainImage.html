@@ -1,4 +1,4 @@
-<div id="CNCImageCard" class="card z-depth-0 expandable-menu">
+<div id="CNCImageCard" class="z-depth-0">
 
   {% block card_loaders %}
   {% include "glados/base/card_loaders.html" %}
@@ -6,127 +6,16 @@
 
   <div style="display: none">
 
-    <div class="card-image white hoverable">
-      <img id="Bck-COMP_IMG" class="CNC-img" src="" alt="Compound Image">
-                    <span class="CNC-img-btn">
+    <div class="comp-img-container">
+      <img id="Bck-COMP_IMG" class="compound-img" src="" alt="Compound Image">
 
-                      <a id="CNC-IMG-Options" class="CNC-btn btn waves-effect waves-light teal hide-on-small-only"
-                         data-activates="CNC-expandable-bottom,CNC-expandable-top"><i
-                        class="material-icons">add</i></a>
-
-                      <a id="CNC-IMG-Options-small" class="CNC-btn btn waves-effect waves-light teal hide-on-med-and-up"
-                         data-activates="CNC-expandable-left,CNC-expandable-right"
-                      ><i
-                        class="material-icons">add</i></a>
-
-                    </span>
-    </div>
-    {% load static %}
-    <!-- Expandable menu bottom -->
-    <div id="CNC-expandable-bottom" class='CNC-expandable-content-bottom hide-on-small-only'>
-
-      <div class="container">
-
-        <a id="CNC-IMG-Options-Zoom" class="hoverable waves-effect waves-light teal tooltipped modal-trigger"
-           href="#CNC-zoom-modal"
-           data-tooltip="Zoom">
-          <p><i class="fa fa-search-plus"></i></p>
-        </a>
-
-        <a id="CNC-3d-modal-trigger" class="hoverable waves-effect waves-light teal tooltipped modal-trigger"
-           href="#CNC-3d-modal"
-           data-tooltip="3D">
-          <p><i class="fa fa-cube"></i></p>
-        </a>
-
-        <a class="hoverable waves-effect waves-light teal tooltipped BCK-trigger-download-JSON"
-           data-tooltip="See Raw JSON" target="_blank">
-          <p><i class="icon icon-fileformats" data-icon="J"></i></p>
-        </a>
-
-      </div>
-
-    </div>
-
-    <!-- Expandable menu top -->
-    <div id="CNC-expandable-top" class='CNC-expandable-content-top hide-on-small-only'>
-
-      <div class="container">
-
-        <a class="hoverable waves-effect waves-light teal tooltipped CNC-download-png" data-position="top"
-           data-tooltip="PNG File">
-          <p><i class="fa fa-file-image-o"></i></p>
-        </a>
-
-        <a class="hoverable waves-effect waves-light teal tooltipped CNC-download-svg" data-position="top"
-           data-tooltip="SVG File">
-          <p><i class="fa fa-file-code-o"></i></p>
-        </a>
-
-      </div>
-
-    </div>
-
-    <!-- Expandable menu left -->
-    <div id="CNC-expandable-left" class='CNC-expandable-content-left hide-on-med-and-up'>
-
-      <div class="container">
-
-        <a id="CNC-IMG-Options-Zoom-small" class="hoverable waves-effect waves-light teal tooltipped modal-trigger"
-           data-position="left"
-           href="#CNC-zoom-modal"
-           data-tooltip="Zoom">
-          <p><i class="fa fa-search-plus"></i></p>
-        </a>
-
-        <a id="CNC-3d-modal-trigger-small" class="hoverable waves-effect waves-light teal tooltipped modal-trigger" data-position="left"
-           href="#CNC-3d-modal"
-           data-tooltip="3D">
-          <p><i class="fa fa-cube"></i></p>
-        </a>
-
-        <a class="hoverable waves-effect waves-light teal tooltipped" data-position="left"
-           data-tooltip="Download">
-          <p><i class="fa fa-download"></i></p>
-        </a>
-
-      </div>
-
-    </div>
-
-    <!-- Expandable menu right -->
-    <div id="CNC-expandable-right" class='CNC-expandable-content-right hide-on-med-and-up'>
-
-      <div class="container">
-
-        <a class="hoverable waves-effect waves-light teal tooltipped CNC-download-png" data-position="top"
-           data-tooltip="PNG File">
-          <p><i class="fa fa-file-image-o"></i></p>
-        </a>
-
-        <a class="hoverable waves-effect waves-light teal tooltipped CNC-download-svg" data-position="top"
-           data-tooltip="SVG File">
-          <p><i class="fa fa-file-code-o"></i></p>
-        </a>
-
-        <a class="hoverable waves-effect waves-light teal tooltipped BCK-trigger-download-JSON" data-tooltip="Download JSON">
-          <p><i class="icon icon-fileformats" data-icon="J"></i></p>
-        </a>
-
-      </div>
+        <div class="BCK-Structure-Search-BTN-container sssearch-button-container"
+             data-hb-template="Handlebars-ReportCard-StructureSearchBTN">
+        </div>
 
     </div>
 
   </div>
-
-  <!-- Image zoom Modal Structure -->
-  {% block img_zoom_modal %}
-    {% include "glados/CompoundReportCardParts/ImageZoomModal.html" %}
-  {% endblock %}
-
-  {% block img_3d_view_modal %}
-    {% include "glados/CompoundReportCardParts/3DViewModal.html" %}
-  {% endblock %}
 
 
 
