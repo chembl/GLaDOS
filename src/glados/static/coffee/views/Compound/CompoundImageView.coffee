@@ -7,9 +7,10 @@ CompoundImageView = CardView.extend
   render: ->
 
     @renderImage()
+    @renderStructureSearchButton()
 
   events:
-    'click .CNC-img': 'openEditor'
+    'click .BCK-open-structure-editor': 'openEditor'
 
   openEditor: ->
 
@@ -32,3 +33,11 @@ CompoundImageView = CardView.extend
       img.attr('src', glados.Settings.STATIC_URL+'img/structure_not_found.png')
 
     img.attr('src', img_url)
+
+  renderStructureSearchButton: ->
+
+    hasStructure = @model.get('structure_image')
+    $structureSearchBTNContainer = $(@el).find('.BCK-Structure-Search-BTN-container')
+    if hasStructure
+      glados.Utils.fillContentForElement($structureSearchBTNContainer)
+

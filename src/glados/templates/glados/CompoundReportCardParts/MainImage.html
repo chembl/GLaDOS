@@ -1,4 +1,4 @@
-<div id="CNCImageCard" class="card z-depth-0 expandable-menu">
+<div id="CNCImageCard" class="z-depth-0">
 
   {% block card_loaders %}
   {% include "glados/base/card_loaders.html" %}
@@ -6,10 +6,13 @@
 
   <div style="display: none">
 
-    <div>
-      <img id="Bck-COMP_IMG" class="CNC-img" src="" alt="Compound Image">
+    <div class="comp-img-container">
+      <img id="Bck-COMP_IMG" class="compound-img" src="" alt="Compound Image">
 
-        <a class="btn-chembl"> Structure Search </a>
+        <div class="BCK-Structure-Search-BTN-container sssearch-button-container"
+             data-hb-template="Handlebars-ReportCard-StructureSearchBTN">
+        </div>
+
     </div>
 
   </div>
