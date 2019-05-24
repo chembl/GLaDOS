@@ -21,20 +21,6 @@ def get_no_metadata_object():
 # ------------------------------------------------------------------------------------------------------------------
 def get_main_page_schema(request):
 
-    base = {
-        'doi': 'http://doi.org/10.6019/CHEMBL.database.24.1',
-        'latest_release_short': 'chembl_24',
-        'latest_release_full': 'chembl_24_1',
-        'downloads_uploaded_date': '2018-06-18',
-        'compressed_downloads': ['.fa', '.fps', '.sdf', '_bio.fa', '_chemreps.txt', '_mysql.tar', '_oracle10g.tar',
-                                 '_oracle11g.tar', '_oracle12c.tar', '_postgresql.tar', '_sqlite.tar'],
-        'text_downloads': ['_schema_documentation', '_release_notes'],
-        'downloads_page_url': 'https://chembl.gitbook.io/chembl-interface-documentation/downloads'
-    }
-
-    print('base: ')
-    print(json.dumps(base, indent=2))
-
     if request is not None:
         absolute_uri = request.build_absolute_uri()
     else:
@@ -150,8 +136,6 @@ def get_main_page_schema(request):
         'url': downloads_url
     })
 
-    print('metadata_obj: ')
-    print(json.dumps(metadata_obj, indent=4))
     return metadata_obj
 
 

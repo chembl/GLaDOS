@@ -12,13 +12,9 @@ class MetadataGenerationTester(unittest.TestCase):
         print('METADATA GENERATION TEST')
         print('Running Test: {0}'.format(self._testMethodName))
 
-    def test_metadata_is_rpoduced_for_main_page(self):
+    def test_metadata_is_produced_for_main_page(self):
 
         schema_obj_got = schema_tags_generator.get_main_page_schema(None)
-
-        print('schema_obj_got: ')
-        import json
-        print(json.dumps(schema_obj_got, indent=2))
 
         self.assertEqual(schema_obj_got.get('schema:identifier'), settings.CURRENT_CHEMBL_FULL_DOI)
         self.assertEqual(schema_obj_got.get('schema:version'), settings.CURRENT_CHEMBL_RELEASE_NAME)
@@ -27,16 +23,14 @@ class MetadataGenerationTester(unittest.TestCase):
         ftp.login("anonymous", "ftplib-example-1")
         file_list = ftp.nlst('/pub/databases/chembl/ChEMBLdb/latest/')
         file_names = [f.replace('/pub/databases/chembl/ChEMBLdb/latest/', '') for f in file_list]
-        print('file_names: ', file_names)
 
         for distribution in schema_obj_got.get('schema:distribution'):
 
             file_url = distribution['contentURL']
             file_name_got = file_url.replace('ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/latest/', '')
             self.assertIn(file_name_got, file_names, '{} is not in the ftp'.format(file_url))
-
-            print('file_name_got: ', file_name_got)
-
+            upload_date_got = distribution['uploadDate']
+            self.assertEqual(upload_date_got, settings.CURRENT_DOWNLOADS_DATE)
 
     def test_metadata_is_not_produced_for_nonexistent_compounds(self):
 
