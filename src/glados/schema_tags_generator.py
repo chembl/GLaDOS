@@ -89,6 +89,67 @@ def get_main_page_schema(request):
         }
         metadata_obj['schema:distribution'].append(distribution)
 
+    for current_format in ['_schema_documentation', '_release_notes']:
+
+        distribution = {
+
+            '@context': 'http://schema.org/',
+            '@type': 'DataDownload',
+            'name': settings.CURRENT_CHEMBL_RELEASE_NAME,
+            'encodingFormat': 'text/plain',
+            'contentURL': 'ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/latest/{release_name}{current_format}.txt'
+            .format(
+                release_name=settings.DOWNLOADS_RELEASE_NAME,
+                current_format=current_format
+            ),
+            'uploadDate': settings.CURRENT_DOWNLOADS_DATE,
+            'url': downloads_url
+        }
+        metadata_obj['schema:distribution'].append(distribution)
+
+    metadata_obj['schema:distribution'].append({
+        '@context': 'http://schema.org/',
+        '@type': 'DataDownload',
+        'name': settings.CURRENT_CHEMBL_RELEASE_NAME,
+        'encodingFormat': 'text/plain',
+        'contentURL': 'ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/latest/chembl_uniprot_mapping.txt',
+        'uploadDate': settings.CURRENT_DOWNLOADS_DATE,
+        'url': downloads_url
+    })
+
+    metadata_obj['schema:distribution'].append({
+        '@context': 'http://schema.org/',
+        '@type': 'DataDownload',
+        'name': settings.CURRENT_CHEMBL_RELEASE_NAME,
+        'encodingFormat': 'text/html',
+        'contentURL': 'ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/latest/{release_name}'
+                      '_schema_documentation.html'.format(release_name=settings.DOWNLOADS_RELEASE_NAME),
+        'uploadDate': settings.CURRENT_DOWNLOADS_DATE,
+        'url': downloads_url
+    })
+
+    metadata_obj['schema:distribution'].append({
+        '@context': 'http://schema.org/',
+        '@type': 'DataDownload',
+        'name': settings.CURRENT_CHEMBL_RELEASE_NAME,
+        'encodingFormat': 'image/png',
+        'contentURL': 'ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/latest/{release_name}_schema.png'.format(
+            release_name=settings.DOWNLOADS_RELEASE_NAME),
+        'uploadDate': settings.CURRENT_DOWNLOADS_DATE,
+        'url': downloads_url
+    })
+
+    metadata_obj['schema:distribution'].append({
+        '@context': 'http://schema.org/',
+        '@type': 'DataDownload',
+        'name': settings.CURRENT_CHEMBL_RELEASE_NAME,
+        'encodingFormat': 'application/xml',
+        'contentURL': "ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/latest/{release_name}_monomer_library.xml"
+            .format(release_name=settings.DOWNLOADS_RELEASE_NAME),
+        'uploadDate': settings.CURRENT_DOWNLOADS_DATE,
+        'url': downloads_url
+    })
+
     print('metadata_obj: ')
     print(json.dumps(metadata_obj, indent=4))
     return metadata_obj
