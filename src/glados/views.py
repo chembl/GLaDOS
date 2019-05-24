@@ -332,6 +332,10 @@ def main_page(request):
         'text_downloads': ['_schema_documentation', '_release_notes'],
         'downloads_page_url': 'https://chembl.gitbook.io/chembl-interface-documentation/downloads'
     }
+
+    schema_tags_generator.get_main_page_schema(request)
+
+
     context = {
         'main_page': True,
         'hide_breadcrumbs': True,

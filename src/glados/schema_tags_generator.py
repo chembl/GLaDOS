@@ -15,6 +15,51 @@ def get_no_metadata_object():
     return schema_obj
 
 
+# ------------------------------------------------------------------------------------------------------------------
+# Main Page
+# ------------------------------------------------------------------------------------------------------------------
+def get_main_page_schema(request):
+
+    base = {
+        'doi': 'http://doi.org/10.6019/CHEMBL.database.24.1',
+        'latest_release_short': 'chembl_24',
+        'latest_release_full': 'chembl_24_1',
+        'downloads_uploaded_date': '2018-06-18',
+        'compressed_downloads': ['.fa', '.fps', '.sdf', '_bio.fa', '_chemreps.txt', '_mysql.tar', '_oracle10g.tar',
+                                 '_oracle11g.tar', '_oracle12c.tar', '_postgresql.tar', '_sqlite.tar'],
+        'text_downloads': ['_schema_documentation', '_release_notes'],
+        'downloads_page_url': 'https://chembl.gitbook.io/chembl-interface-documentation/downloads'
+    }
+
+    print('base: ')
+    print(json.dumps(base, indent=2))
+
+    metadata_obj = {
+
+        '@context': {
+            'schema': 'http://schema.org/',
+            'bs': 'http://bioschemas.org/'
+        },
+        '@type': 'schema:Dataset',
+        '@id': '{base_url}#data'.format(base_url=request.build_absolute_uri()),
+        'schema:name': 'ChEMBL',
+        'schema:description': 'A manually curated database of bioactive molecules with drug-like properties. It brings '
+                              'together chemical, bioactivity and genomic data to aid the translation of '
+                              'genomic information into effective new drugs.',
+        'schema:url': request.build_absolute_uri(),
+        "schema:identifier": base['doi'],
+
+    }
+
+    print('metadata_obj: ')
+    print(json.dumps(metadata_obj, indent=2))
+
+    return metadata_obj
+
+
+# ------------------------------------------------------------------------------------------------------------------
+# Compound
+# ------------------------------------------------------------------------------------------------------------------
 def get_schema_obj_for_compound(chembl_id, request):
 
     q = {
