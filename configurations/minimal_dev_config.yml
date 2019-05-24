@@ -8,4 +8,8 @@ chembl_api:
 old_interface_url: 'https://www.ebi.ac.uk/chembl/old'
 current_release:
   full_name: 'CHEMBL25'
+  full_doi: 'http://doi.org/10.6019/CHEMBL.database.25'
+  downloads_date: '2018-06-18'
+  # The basename of the files in the ftp
+  downloads_release_name: 'chembl_25'
 filter_query_max_clauses: 30000

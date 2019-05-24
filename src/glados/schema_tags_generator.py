@@ -2,6 +2,7 @@ from elasticsearch_dsl import Search
 import json
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.conf import settings
+from django.urls import reverse
 # This uses elasticsearch to generate helper objects to generate the schema tags of the pages
 # ------------------------------------------------------------------------------------------------------------------
 # Helper functions
@@ -34,26 +35,62 @@ def get_main_page_schema(request):
     print('base: ')
     print(json.dumps(base, indent=2))
 
-    metadata_obj = {
+    if request is not None:
+        absolute_uri = request.build_absolute_uri()
+    else:
+        absolute_uri = 'http://0.0.0.0:8000/'
 
+    metadata_obj = {
         '@context': {
             'schema': 'http://schema.org/',
             'bs': 'http://bioschemas.org/'
         },
         '@type': 'schema:Dataset',
-        '@id': '{base_url}#data'.format(base_url=request.build_absolute_uri()),
+        '@id': '{base_url}#data'.format(base_url=absolute_uri),
         'schema:name': 'ChEMBL',
         'schema:description': 'A manually curated database of bioactive molecules with drug-like properties. It brings '
                               'together chemical, bioactivity and genomic data to aid the translation of '
                               'genomic information into effective new drugs.',
-        'schema:url': request.build_absolute_uri(),
-        "schema:identifier": base['doi'],
-
+        'schema:url': absolute_uri,
+        'schema:identifier': settings.CURRENT_CHEMBL_FULL_DOI,
+        'schema:keywords': 'database, molecule, chemical, curated, bioactivities',
+        'schema:includedInDataCatalog': absolute_uri,
+        'schema:creator': {
+            '@context': 'http://schema.org/',
+            '@type': 'Organization',
+            'name': 'EMBL-EBI',
+            'url': 'https://www.ebi.ac.uk/'
+        },
+        'schema:version': settings.CURRENT_CHEMBL_RELEASE_NAME,
+        'schema:license': 'Creative Commons Attribution-Share Alike 3.0 Unported License',
     }
 
-    print('metadata_obj: ')
-    print(json.dumps(metadata_obj, indent=2))
+    if request is not None:
+        downloads_url = request.build_absolute_uri(reverse('downloads'))
+    else:
+        downloads_url = 'http://0.0.0.0:8000' + reverse('downloads')
 
+    metadata_obj['schema:distribution'] = []
+    for current_format in ['.fa', '.fps', '.sdf', '_bio.fa', '_chemreps.txt', '_mysql.tar',
+                           '_oracle10g.tar', '_oracle11g.tar', '_oracle12c.tar', '_postgresql.tar', '_sqlite.tar']:
+
+        distribution = {
+            '@context': 'http://schema.org/',
+            '@type': 'DataDownload',
+            'name': settings.CURRENT_CHEMBL_RELEASE_NAME,
+            'encodingFormat': 'application/gzip',
+            'contentURL': 'ftp://ftp.ebi.ac.uk/pub/databases/chembl/ChEMBLdb/latest/{release_name}{current_format}.gz'
+            .format(
+                release_name=settings.DOWNLOADS_RELEASE_NAME,
+                current_format=current_format
+            ),
+            'uploadDate': settings.CURRENT_DOWNLOADS_DATE,
+            'url': downloads_url
+        }
+        metadata_obj['schema:distribution'].append(distribution)
+
+    print('metadata_obj: ')
+    print(json.dumps(metadata_obj, indent=4))
     return metadata_obj
 
 

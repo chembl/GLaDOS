@@ -106,6 +106,17 @@ CURRENT_CHEMBL_RELEASE_NAME = release_config.get('full_name')
 if CURRENT_CHEMBL_RELEASE_NAME is None:
     raise GladosSettingsError("You must provide the current release name")
 
+CURRENT_CHEMBL_FULL_DOI = release_config.get('full_doi')
+if CURRENT_CHEMBL_FULL_DOI is None:
+    raise GladosSettingsError("You must provide the current release doi")
+
+CURRENT_DOWNLOADS_DATE = release_config.get('downloads_date')
+if CURRENT_DOWNLOADS_DATE is None:
+    raise GladosSettingsError("You must provide the current downloads date ")
+
+DOWNLOADS_RELEASE_NAME = release_config.get('downloads_release_name')
+if DOWNLOADS_RELEASE_NAME is None:
+    raise GladosSettingsError("You must provide the current downloads base name ")
 # ----------------------------------------------------------------------------------------------------------------------
 # SERVER BASE PATH
 # ----------------------------------------------------------------------------------------------------------------------
