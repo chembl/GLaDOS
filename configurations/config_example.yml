@@ -6,7 +6,8 @@ chembl_api:
   ws_url: 'https://www.ebi.ac.uk/chembl/api/data'
   beaker_url: 'https://www.ebi.ac.uk/chembl/api/utils'
 old_interface_url: 'https://www.ebi.ac.uk/chembl/old'
-current_chembl_release: 'CHEMBL25'
+current_release:
+  full_name: 'CHEMBL25'
 server_secret_key: 'server_secret_key'
 enable_twitter: True
 twitter_secrets:
