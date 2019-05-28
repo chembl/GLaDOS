@@ -19,6 +19,7 @@ from . import og_tags_generator
 from . import schema_tags_generator
 from django.http import Http404
 from django.views.decorators.csrf import csrf_exempt
+import json
 
 
 def visualise(request):
@@ -324,7 +325,7 @@ def main_page(request):
     context = {
         'main_page': True,
         'hide_breadcrumbs': True,
-        'metadata_obj':  schema_tags_generator.get_main_page_schema(request),
+        'metadata_str':  json.dumps(schema_tags_generator.get_main_page_schema(request), indent=2),
     }
     return render(request, 'glados/main_page.html', context)
 
