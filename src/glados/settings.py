@@ -98,10 +98,25 @@ OLD_INTERFACE_URL = run_config.get('old_interface_url')
 if OLD_INTERFACE_URL is None:
     raise GladosSettingsError("You must provide the url for the old interface")
 
-CURRENT_CHEMBL_RELEASE = run_config.get('current_chembl_release')
-if CURRENT_CHEMBL_RELEASE is None:
-    raise GladosSettingsError("You must provide the current chembl release")
+release_config = run_config.get('current_release')
+if release_config is None:
+    raise GladosSettingsError("You must provide the current chembl release config")
 
+CURRENT_CHEMBL_RELEASE_NAME = release_config.get('full_name')
+if CURRENT_CHEMBL_RELEASE_NAME is None:
+    raise GladosSettingsError("You must provide the current release name")
+
+CURRENT_CHEMBL_FULL_DOI = release_config.get('full_doi')
+if CURRENT_CHEMBL_FULL_DOI is None:
+    raise GladosSettingsError("You must provide the current release doi")
+
+CURRENT_DOWNLOADS_DATE = release_config.get('downloads_date')
+if CURRENT_DOWNLOADS_DATE is None:
+    raise GladosSettingsError("You must provide the current downloads date ")
+
+DOWNLOADS_RELEASE_NAME = release_config.get('downloads_release_name')
+if DOWNLOADS_RELEASE_NAME is None:
+    raise GladosSettingsError("You must provide the current downloads base name ")
 # ----------------------------------------------------------------------------------------------------------------------
 # SERVER BASE PATH
 # ----------------------------------------------------------------------------------------------------------------------

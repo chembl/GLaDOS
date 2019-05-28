@@ -332,7 +332,7 @@ def get_download_id(index_name, raw_query, desired_format, context_id):
     if parsed_desired_format not in ['csv', 'tsv', 'sdf']:
         raise DownloadError("Format {} not supported".format(desired_format))
 
-    latest_release_full = settings.CURRENT_CHEMBL_RELEASE
+    latest_release_full = settings.CURRENT_CHEMBL_RELEASE_NAME
     query_digest = hashlib.sha256(stable_raw_query.encode('utf-8')).digest()
     base64_query_digest = base64.b64encode(query_digest).decode('utf-8').replace('/', '_').replace('+', '-')
 

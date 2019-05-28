@@ -6,5 +6,10 @@ chembl_api:
   ws_url: 'https://wwwdev.ebi.ac.uk/chembl/api/data'
   beaker_url: 'https://wwwdev.ebi.ac.uk/chembl/api/utils'
 old_interface_url: 'https://www.ebi.ac.uk/chembl/old'
-current_chembl_release: 'CHEMBL25'
+current_release:
+  full_name: 'CHEMBL25'
+  full_doi: 'http://doi.org/10.6019/CHEMBL.database.25'
+  downloads_date: '2018-06-18'
+  # The basename of the files in the ftp
+  downloads_release_name: 'chembl_25'
 filter_query_max_clauses: 30000

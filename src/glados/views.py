@@ -321,21 +321,10 @@ def replace_urls_from_entinies(html, urls):
 
 def main_page(request):
 
-    # This would preferably be included in elasticsearch and updated by the indexation process
-    markup = {
-        'doi': 'http://doi.org/10.6019/CHEMBL.database.24.1',
-        'latest_release_short': 'chembl_24',
-        'latest_release_full': 'chembl_24_1',
-        'downloads_uploaded_date': '2018-06-18',
-        'compressed_downloads':['.fa', '.fps', '.sdf', '_bio.fa', '_chemreps.txt', '_mysql.tar', '_oracle10g.tar',
-                                '_oracle11g.tar', '_oracle12c.tar', '_postgresql.tar', '_sqlite.tar'],
-        'text_downloads': ['_schema_documentation', '_release_notes'],
-        'downloads_page_url': 'https://chembl.gitbook.io/chembl-interface-documentation/downloads'
-    }
     context = {
         'main_page': True,
         'hide_breadcrumbs': True,
-        'markup': markup,
+        'metadata_obj':  schema_tags_generator.get_main_page_schema(request),
     }
     return render(request, 'glados/main_page.html', context)
 
