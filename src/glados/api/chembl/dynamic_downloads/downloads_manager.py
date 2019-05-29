@@ -211,15 +211,21 @@ def write_sdf_file(scanner, download_job):
 
         i = 0
         previous_percentage = 0
+        one_item_has_structure = False
         for doc_i in scanner:
             i += 1
 
             doc_source = doc_i['_source']
             dot_notation_getter = DotNotationGetter(doc_source)
             sdf_value = dot_notation_getter.get_from_string('_metadata.compound_generated.sdf_data')
+
             if sdf_value is None:
                 continue
 
+            if sdf_value == '':
+                continue
+
+            one_item_has_structure = True
             out_file.write(sdf_value)
             out_file.write('$$$$\n')
 
@@ -227,6 +233,10 @@ def write_sdf_file(scanner, download_job):
             if percentage != previous_percentage:
                 previous_percentage = percentage
                 save_download_job_progress(download_job, percentage)
+
+        if not one_item_has_structure:
+            out_file.write('None of the downloaded items have a chemical structure,'
+                           ' please try other download formats.\n')
 
     file_size = os.path.getsize(file_path)
     return file_size
