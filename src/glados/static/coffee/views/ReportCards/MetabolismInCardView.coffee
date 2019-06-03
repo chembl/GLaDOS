@@ -26,7 +26,7 @@ glados.useNameSpace 'glados.views.ReportCards',
         chembl_id: @molecule_chembl_id
 
       $(@el).find('.visualisation-fullscreen-link').html Handlebars.compile( $('#Handlebars-MetabolismVisualisation-FSLink').html() )
-        chembl_id: @molecule_chembl_id
+        fs_link: "#{glados.Settings.GLADOS_BASE_PATH_REL}compound_metabolism/#{@molecule_chembl_id}"
 
       @showCardContent()
 
