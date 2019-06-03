@@ -391,6 +391,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     histogramConfig =
       bars_colour_scale: barsColourScale
       stacked_histogram: true
+      sort_by_key: true
       y_scale_mode: 'normal'
       rotate_x_axis_if_needed: false
       legend_vertical: true
@@ -934,6 +935,14 @@ class CompoundReportCardApp extends glados.ReportCardApp
           min_interval_size: 1
           max_interval_size: 10
           bucket_key_parse_function: (key) -> key.replace(/\.0/i, '')
+          bucket_sort_compare_function: (bucketA, bucketB) ->
+            yearA = parseFloat(bucketA.key)
+            yearB = parseFloat(bucketB.key)
+            if yearA < yearB
+              return -1
+            else if yearA > yearB
+              return 1
+            return 0
           aggs:
             journal:
               type: glados.models.Aggregations.Aggregation.AggTypes.TERMS
