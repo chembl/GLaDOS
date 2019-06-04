@@ -59,6 +59,7 @@ export default {
   },
   methods: {
     onSearchMolecule() {
+      console.log('ON SEARCH MOLECULE')
       this.isEditorEmpty = this.marvinEditor.isEmpty();
 
       if (this.isEditorEmpty) {

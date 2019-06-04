@@ -4,6 +4,7 @@ import Similarity from "@/views/unichem/Similarity";
 import Sources from "@/views/unichem/Sources";
 import HelloWorld from "@/views/HelloWorld";
 import PageNotFound from "@/views/PageNotFound";
+import ChEMBLPlayground from "@/views/chembl/ChEMBLPlayground.vue"
 
 Vue.use(Router);
 
@@ -41,9 +42,9 @@ export default new Router({
       redirect: "/404"
     },
     {
-      path: "/chembl_game",
+      path: "/chembl_playground",
       name: "ChEMBLGame",
-      component: () => import("@/views/chembl/ChEMBLGame.vue")
+      component: ChEMBLPlayground
     }
   ]
 });
