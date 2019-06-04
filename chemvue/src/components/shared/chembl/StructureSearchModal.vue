@@ -9,7 +9,7 @@
           dark
           v-on="on"
         >
-          Click Me
+          Structure Search
         </v-btn>
       </template>
 
@@ -21,25 +21,23 @@
           Draw a Structure
         </v-card-title>
 
-        <v-card-text>
-          Editor comes here!
-        </v-card-text>
+        <MarvinJS/>
 
         <v-divider></v-divider>
 
         <v-card-actions>
 
-          <v-btn dark color="primary" @click="dialog = false" >
+          <v-btn dark color="primary" @click="triggerConnectivitySearch">
             Connectivity
           </v-btn>
           <v-spacer></v-spacer>
 
-          <v-btn dark color="primary" @click="dialog = false">
+          <v-btn dark color="primary" @click="triggerSimilaritySearch">
             Similarity
           </v-btn>
           
           <v-spacer></v-spacer>
-          <v-btn dark color="primary" @click="dialog = false">
+          <v-btn dark color="primary" @click="triggerSubstructureSearch">
             Substructure
           </v-btn>
         </v-card-actions>
@@ -48,10 +46,28 @@
 </template>
 
 <script>
+import MarvinJS from "@/components/shared/MarvinSketcher";
+
 export default {
+  components: {
+    MarvinJS
+  },
   data () {
     return {
-      dialog: false
+      dialog: false,
+    }
+  },
+  methods: {
+    triggerConnectivitySearch() {
+      // this.dialog = false remember to use this to close the modal
+      console.log('TRIGGER CONNECTIVITY SEARCH')
+    },
+    triggerSimilaritySearch() {
+      console.log('TRIGGER Similarity SEARCH')
+
+    },
+    triggerSubstructureSearch() {
+      console.log('TRIGGER Substructure SEARCH')
     }
   }
 }
