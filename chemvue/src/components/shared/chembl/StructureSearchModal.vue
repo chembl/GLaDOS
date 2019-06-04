@@ -96,7 +96,7 @@ export default {
       console.log('TRIGGER CONNECTIVITY SEARCH')
       this.loading = true
       this.disableButtons()
-      this.eventBus.$emit('getDrawnSmiles')
+      this.eventBus.$emit('getDrawnCTAB')
     },
     triggerSimilaritySearch() {
       console.log('TRIGGER Similarity SEARCH')

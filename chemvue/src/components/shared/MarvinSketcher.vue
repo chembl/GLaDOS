@@ -51,11 +51,11 @@ export default {
       },
       err => alert(err)
     )
-    this.eventBus.$on('getDrawnSmiles', this.getSmiles)
+    this.eventBus.$on('getDrawnCTAB', this.getDrawnCTAB)
 
   },
   methods: {
-    getSmiles() {
+    getDrawnCTAB() {
       console.log('GOING TO GET SMILES')
       this.isEditorEmpty = this.marvinEditor.isEmpty();
 
