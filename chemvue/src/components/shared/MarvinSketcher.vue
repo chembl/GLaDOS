@@ -21,7 +21,7 @@ import marv from "@/assets/marvin/marvinjslauncher.js";
 
 export default {
 
-  props: ["molecule"],
+  props: ["molecule", "eventBus"],
   data() {
     return {
       alert: false,
@@ -31,7 +31,7 @@ export default {
       // }/static/marvinjs/editorws.html`,
       marvinPath: "",
       marvinEditor: {},
-      currentMolecule: this.molecule,
+      currentCTAB: this.molecule,
       isEditorEmpty: true
     };
   },
@@ -51,25 +51,25 @@ export default {
       },
       err => alert(err)
     )
+    this.eventBus.$on('getDrawnSmiles', this.getSmiles)
 
   },
   methods: {
     getSmiles() {
-        console.log('GOING TO GET SMILES')
-    },
-    onSearchMolecule() {
-      console.log('ON SEARCH MOLECULE')
+      console.log('GOING TO GET SMILES')
       this.isEditorEmpty = this.marvinEditor.isEmpty();
 
       if (this.isEditorEmpty) {
         this.alert = true;
         this.alertMessage = "The editor is empty";
+        this.$emit("error");
       } else {
         this.alert = false;
         this.marvinEditor.exportStructure("mol").then(
           mol => {
-            this.currentMolecule = mol;
-            this.$emit("onSearch", this.currentMolecule);
+            this.currentCTAB = mol;
+            console.log('ctab OBTAINED: ' + this.currentCTAB)
+            // this.$emit("onSearch", this.currentCTAB);
           },
           err => console.log("Marvin export estructure error", err)
         );

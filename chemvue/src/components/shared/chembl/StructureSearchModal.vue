@@ -21,7 +21,7 @@
           Draw a Structure
         </v-card-title>
 
-        <MarvinJS/>
+        <MarvinJS :eventBus="eventBus" v-on:error="hadleSketcherError" />
 
         <v-divider></v-divider>
 
@@ -63,19 +63,21 @@
 
 <script>
 import MarvinJS from "@/components/shared/MarvinSketcher";
+import Vue from "vue";
 
 export default {
   components: {
     MarvinJS
   },
+  props: ['bus'],
   data () {
     return {
       dialog: false,
       disableConnectivity: false,
       disableSimilarity: false,
       disableSubstructure: false,
-      loading: false
-      // eventBus: new Vue() // this is to communicate with marvin and get the smiles
+      loading: false,
+      eventBus: new Vue() // this is to communicate with marvin and get the smiles
     }
   },
   methods: {
@@ -84,11 +86,17 @@ export default {
       this.disableSimilarity = true
       this.disableSubstructure = true
     },
+    enableButtons () {
+      this.disableConnectivity = false
+      this.disableSimilarity = false
+      this.disableSubstructure = false
+    },
     triggerConnectivitySearch() {
       // this.dialog = false remember to use this to close the modal
       console.log('TRIGGER CONNECTIVITY SEARCH')
       this.loading = true
       this.disableButtons()
+      this.eventBus.$emit('getDrawnSmiles')
     },
     triggerSimilaritySearch() {
       console.log('TRIGGER Similarity SEARCH')
@@ -99,6 +107,10 @@ export default {
       console.log('TRIGGER Substructure SEARCH')
       this.loading = true
       this.disableButtons()
+    },
+    hadleSketcherError() {
+      this.loading = false
+      this.enableButtons()
     }
   }
 }
