@@ -25,22 +25,38 @@
 
         <v-divider></v-divider>
 
-        <v-card-actions>
+        <v-container>
+          Search by: 
+          <v-card-actions>
 
-          <v-btn dark color="primary" @click="triggerConnectivitySearch">
-            Connectivity
-          </v-btn>
-          <v-spacer></v-spacer>
+            <v-btn dark color="primary" 
+              @click="triggerConnectivitySearch" 
+              :disabled="disableConnectivity" 
+              :loading="loading"
+              >
+              Connectivity
+            </v-btn>
+            <v-spacer></v-spacer>
 
-          <v-btn dark color="primary" @click="triggerSimilaritySearch">
-            Similarity
-          </v-btn>
-          
-          <v-spacer></v-spacer>
-          <v-btn dark color="primary" @click="triggerSubstructureSearch">
-            Substructure
-          </v-btn>
-        </v-card-actions>
+            <v-btn 
+              dark color="primary" 
+              @click="triggerSimilaritySearch" 
+              :disabled="disableSimilarity" 
+              :loading="loading">
+              Similarity
+            </v-btn>
+            
+            <v-spacer></v-spacer>
+            <v-btn 
+              dark color="primary" 
+              @click="triggerSubstructureSearch" 
+              :disabled="disableSubstructure" 
+              :loading="loading">
+              Substructure
+            </v-btn>
+          </v-card-actions>
+          <div v-if="loading" class="text-xs-center">Loading...</div>
+        </v-container>
       </v-card>
     </v-dialog>
 </template>
@@ -54,20 +70,35 @@ export default {
   },
   data () {
     return {
-      dialog: false
+      dialog: false,
+      disableConnectivity: false,
+      disableSimilarity: false,
+      disableSubstructure: false,
+      loading: false
+      // eventBus: new Vue() // this is to communicate with marvin and get the smiles
     }
   },
   methods: {
+    disableButtons () {
+      this.disableConnectivity = true
+      this.disableSimilarity = true
+      this.disableSubstructure = true
+    },
     triggerConnectivitySearch() {
       // this.dialog = false remember to use this to close the modal
       console.log('TRIGGER CONNECTIVITY SEARCH')
+      this.loading = true
+      this.disableButtons()
     },
     triggerSimilaritySearch() {
       console.log('TRIGGER Similarity SEARCH')
-
+      this.loading = true
+      this.disableButtons()
     },
     triggerSubstructureSearch() {
       console.log('TRIGGER Substructure SEARCH')
+      this.loading = true
+      this.disableButtons()
     }
   }
 }
