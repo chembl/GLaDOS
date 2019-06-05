@@ -98,8 +98,6 @@ export default {
       this.disableSubstructure = false
     },
     triggerConnectivitySearch() {
-      // this.dialog = false remember to use this to close the modal
-      console.log('TRIGGER CONNECTIVITY SEARCH')
       this.selectedSearchType = this.searchTypes.CONNECTIVITY
       this.loading = true
       this.disableButtons()
@@ -107,22 +105,25 @@ export default {
       
     },
     triggerSimilaritySearch() {
-      console.log('TRIGGER Similarity SEARCH')
       this.selectedSearchType = this.searchTypes.SIMILARITY
       this.loading = true
       this.disableButtons()
+      this.eventBus.$emit('getDrawnMol')
     },
     triggerSubstructureSearch() {
-      console.log('TRIGGER Substructure SEARCH')
       this.selectedSearchType = this.searchTypes.CONNECTIVITY
       this.loading = true
       this.disableButtons()
+      this.eventBus.$emit('getDrawnMol')
     },
     hadleSketcherError() {
       this.loading = false
       this.enableButtons()
     },
     receiveMol(currentMol) {
+      this.loading = false
+      this.enableButtons()
+      this.dialog = false
       console.log('mol was recevied from outside', currentMol)
       console.log('TODO: Here I do a search...')
     }

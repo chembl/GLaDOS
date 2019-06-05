@@ -36,12 +36,9 @@ export default {
     };
   },
   created() {
-    console.log("Server base path", process.env.VUE_APP_SERVER_BASE_PATH);
-    console.log("PUBLIC PATH", process.env.VUE_APP_PUBLIC_PATH);
     this.marvinPath = `${
       process.env.VUE_APP_PUBLIC_PATH
     }marvinjs/editorws.html`;
-    console.log("MARVING PATH", this.marvinPath);
   },
   mounted() {
     // eslint-disable-next-line
@@ -56,7 +53,6 @@ export default {
   },
   methods: {
     getDrawnMol() {
-      console.log('GOING TO GET SMILES')
       this.isEditorEmpty = this.marvinEditor.isEmpty();
 
       if (this.isEditorEmpty) {
@@ -70,7 +66,7 @@ export default {
             this.currentMol = mol
             this.$emit("molObtained", this.currentMol)
           },
-          err => console.log("Marvin export estructure error", err)
+          err => this.alertMessage = "Marvin export estructure error: " + err
         );
       }
     }
