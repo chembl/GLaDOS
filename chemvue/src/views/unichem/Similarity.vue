@@ -1,7 +1,14 @@
 <template>
   <v-container>
     <v-dialog v-model="sketcherModal" max-width="100%">
-      <StructureSearchMenu/>
+      <v-toolbar flat>
+        <v-toolbar-title>Marvin Editor</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-btn icon @click="sketcherModal = false">
+          <v-icon>close</v-icon>
+        </v-btn>
+    </v-toolbar>
+      <StructureSearchMenu v-on:molObtained='handleMolObtained'/>
     </v-dialog>
     <h1>Unichem</h1>
     <h3>Substructure Similarity Search</h3>
@@ -181,7 +188,7 @@ export default Vue.component("Home", {
         this.loadCompounds(this.ctabText);
       }
     },
-    onMarvinSearch: function(mol) {
+    handleMolObtained: function(mol) {
       this.sketcherModal = false;
       this.isShowAlert = false;
       this.smilesForm = "";

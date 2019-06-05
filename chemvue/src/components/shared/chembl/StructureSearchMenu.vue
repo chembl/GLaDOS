@@ -65,7 +65,7 @@ export default {
       disableSimilarity: false,
       disableSubstructure: false,
       loading: false,
-      eventBus: new Vue(), // this is to communicate with marvin and get the smiles
+      eventBus: new Vue(), // this is to communicate with marvin and get the molecule drawn
       selectedSearchType: '',
       searchTypes: { SIMILARITY, SUBSTRUCTURE, CONNECTIVITY }
     }
