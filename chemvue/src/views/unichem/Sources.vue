@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-dialog v-model="marvinModal" max-width="100%">
-      <v-card>
+
         <v-toolbar flat>
           <v-toolbar-title>Marvin Editor</v-toolbar-title>
           <v-spacer></v-spacer>
@@ -9,12 +9,8 @@
             <v-icon>close</v-icon>
           </v-btn>
         </v-toolbar>
-        <v-card-text>Draw your molecule</v-card-text>
-        <MarvinJS
-          v-bind:molecule="molecule"
-          v-on:onSearch="onMarvinSearch"
-        ></MarvinJS>
-      </v-card>
+        <StructureSearchMenu v-on:molObtained="handleMolObtained" v-bind:molecule="molecule"/>
+
     </v-dialog>
     <h1>Unichem</h1>
     <h3>Sources search</h3>
@@ -118,6 +114,7 @@
 import Vue from "vue";
 import MarvinJS from "@/components/shared/Marvin";
 import RestAPI from "@/services/Api";
+import StructureSearchMenu from "@/components/shared/unichem/StructureSearchMenu.vue";
 
 const backendAPIs = new RestAPI();
 
@@ -190,7 +187,7 @@ export default Vue.component("Home", {
         this.getSMILESfromMOL(this.molecule);
       }
     },
-    onMarvinSearch: function(mol) {
+    handleMolObtained: function(mol) {
       this.resetFields();
 
       this.marvinModal = false;
@@ -249,7 +246,8 @@ export default Vue.component("Home", {
   },
   watch: {},
   components: {
-    MarvinJS
+    MarvinJS,
+    StructureSearchMenu
   }
 });
 </script>

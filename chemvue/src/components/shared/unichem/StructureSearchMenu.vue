@@ -23,13 +23,14 @@ export default {
   components: {
     MarvinJS
   },
-  props: ["bus"],
+  props: ["bus", 'molecule'],
   data() {
     return {
       loading: false,
       disableSearch: false,
-      eventBus: new Vue() // this is to communicate with marvin and get the molecule drawn
-    };
+      eventBus: new Vue(), // this is to communicate with marvin and get the molecule drawn
+      currentMol: this.molecule
+    }
   },
   methods: {
     disableButtons() {
@@ -48,6 +49,7 @@ export default {
       this.enableButtons();
     },
     receiveMol(currentMol) {
+      this.currentMol = currentMol
       this.loading = false;
       this.enableButtons();
       this.$emit('molObtained', currentMol)

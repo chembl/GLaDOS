@@ -8,7 +8,7 @@
           <v-icon>close</v-icon>
         </v-btn>
       </v-toolbar>
-      <StructureSearchMenu v-on:molObtained="handleMolObtained"/>
+      <StructureSearchMenu v-on:molObtained="handleMolObtained" v-bind:molecule="molecule"/>
     </v-dialog>
     <h1>Unichem</h1>
     <h3>Substructure Similarity Search</h3>
