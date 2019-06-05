@@ -3,7 +3,22 @@
 
     Structure search modal:
     <br>
-    <StructureSearchModal/>
+
+    <v-dialog v-model="dialog" width="90%">
+      <StructureSearchMenu v-on:searching="closeModal"/>
+      <template v-slot:activator="{ on }">
+        <v-btn
+          color="primary"
+          dark
+          v-on="on"
+        >
+          Structure Search
+        </v-btn>
+      </template>
+
+    </v-dialog>
+
+    
 
 
   </v-container>
@@ -15,10 +30,20 @@
 </style>
 
 <script>
-import StructureSearchModal from '@/components/shared/chembl/StructureSearchModal.vue'
+import StructureSearchMenu from '@/components/shared/chembl/StructureSearchMenu.vue'
 export default {
     components: {
-      StructureSearchModal
+      StructureSearchMenu
+    },
+    data() {
+      return {
+        dialog: false,
+      }
+    },
+    methods: {
+      closeModal() {
+        this.dialog = false
+      }
     }
 }
 </script>
