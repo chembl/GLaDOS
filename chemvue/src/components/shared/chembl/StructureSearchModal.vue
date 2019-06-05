@@ -65,6 +65,10 @@
 import MarvinJS from "@/components/shared/MarvinSketcher";
 import Vue from "vue";
 
+const SIMILARITY = 'SIMILARITY'
+const SUBSTRUCTURE = 'SUBSTRUCTURE'
+const CONNECTIVITY = 'CONNECTIVITY'
+
 export default {
   components: {
     MarvinJS
@@ -77,7 +81,9 @@ export default {
       disableSimilarity: false,
       disableSubstructure: false,
       loading: false,
-      eventBus: new Vue() // this is to communicate with marvin and get the smiles
+      eventBus: new Vue(), // this is to communicate with marvin and get the smiles
+      selectedSearchType: '',
+      searchTypes: { SIMILARITY, SUBSTRUCTURE, CONNECTIVITY }
     }
   },
   methods: {
@@ -94,17 +100,21 @@ export default {
     triggerConnectivitySearch() {
       // this.dialog = false remember to use this to close the modal
       console.log('TRIGGER CONNECTIVITY SEARCH')
+      this.selectedSearchType = this.searchTypes.CONNECTIVITY
       this.loading = true
       this.disableButtons()
       this.eventBus.$emit('getDrawnMol')
+      
     },
     triggerSimilaritySearch() {
       console.log('TRIGGER Similarity SEARCH')
+      this.selectedSearchType = this.searchTypes.SIMILARITY
       this.loading = true
       this.disableButtons()
     },
     triggerSubstructureSearch() {
       console.log('TRIGGER Substructure SEARCH')
+      this.selectedSearchType = this.searchTypes.CONNECTIVITY
       this.loading = true
       this.disableButtons()
     },
