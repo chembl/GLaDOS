@@ -31,7 +31,7 @@ export default {
       // }/static/marvinjs/editorws.html`,
       marvinPath: "",
       marvinEditor: {},
-      currentCTAB: this.molecule,
+      currentMol: this.molecule,
       isEditorEmpty: true
     };
   },
@@ -67,9 +67,8 @@ export default {
         this.alert = false;
         this.marvinEditor.exportStructure("mol").then(
           mol => {
-            this.currentCTAB = mol;
-            console.log('ctab OBTAINED: ' + this.currentCTAB)
-            // this.$emit("onSearch", this.currentCTAB);
+            this.currentMol = mol
+            this.$emit("molObtained", this.currentMol)
           },
           err => console.log("Marvin export estructure error", err)
         );

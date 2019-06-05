@@ -21,7 +21,7 @@
           Draw a Structure
         </v-card-title>
 
-        <MarvinJS :eventBus="eventBus" v-on:error="hadleSketcherError" />
+        <MarvinJS :eventBus="eventBus" v-on:error="hadleSketcherError" v-on:molObtained="receiveMol"/>
 
         <v-divider></v-divider>
 
@@ -121,6 +121,10 @@ export default {
     hadleSketcherError() {
       this.loading = false
       this.enableButtons()
+    },
+    receiveMol(currentMol) {
+      console.log('mol was recevied from outside', currentMol)
+      console.log('TODO: Here I do a search...')
     }
   }
 }
