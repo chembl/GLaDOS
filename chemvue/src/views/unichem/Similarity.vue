@@ -1,20 +1,7 @@
 <template>
   <v-container>
-    <v-dialog v-model="marvinModal" max-width="100%">
-      <v-card>
-        <v-toolbar flat>
-          <v-toolbar-title>Marvin Editor</v-toolbar-title>
-          <v-spacer></v-spacer>
-          <v-btn icon @click="marvinModal = false">
-            <v-icon>close</v-icon>
-          </v-btn>
-        </v-toolbar>
-        <v-card-text>Draw your molecule</v-card-text>
-        <MarvinJS
-          v-bind:molecule="molecule"
-          v-on:onSearch="onMarvinSearch"
-        ></MarvinJS>
-      </v-card>
+    <v-dialog v-model="sketcherModal" max-width="100%">
+      <StructureSearchMenu/>
     </v-dialog>
     <h1>Unichem</h1>
     <h3>Substructure Similarity Search</h3>
@@ -61,7 +48,7 @@
         </v-btn>
       </v-flex>
       <v-flex xs6 sm2>
-        <v-btn color="primary" @click.stop="marvinModal = true">
+        <v-btn color="primary" @click.stop="sketcherModal = true">
           <v-icon dark>mdi-drawing</v-icon><v-spacer></v-spacer>Draw Mol
         </v-btn>
       </v-flex>
@@ -111,9 +98,9 @@
 
 <script>
 import Vue from "vue";
-import MarvinJS from "@/components/shared/Marvin";
 import RestAPI from "@/services/Api";
 import Compounds from "@/components/shared/Compounds";
+import StructureSearchMenu from '@/components/shared/unichem/StructureSearchMenu.vue'
 
 const backendAPIs = new RestAPI();
 
@@ -128,7 +115,7 @@ export default Vue.component("Home", {
       },
       page: 1,
       ctabText: "NCCc1ccc(O)c(O)c1",
-      marvinModal: false,
+      sketcherModal: false,
       molecule: "",
       smilesForm: "",
       isShowAlert: false,
@@ -195,7 +182,7 @@ export default Vue.component("Home", {
       }
     },
     onMarvinSearch: function(mol) {
-      this.marvinModal = false;
+      this.sketcherModal = false;
       this.isShowAlert = false;
       this.smilesForm = "";
       this.ctabText = mol;
@@ -238,7 +225,7 @@ export default Vue.component("Home", {
     }
   },
   components: {
-    MarvinJS,
+    StructureSearchMenu,
     Compounds
   }
 });
