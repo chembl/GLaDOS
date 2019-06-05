@@ -112,7 +112,6 @@
 
 <script>
 import Vue from "vue";
-import MarvinJS from "@/components/shared/Marvin";
 import RestAPI from "@/services/Api";
 import StructureSearchMenu from "@/components/shared/unichem/StructureSearchMenu.vue";
 
@@ -246,7 +245,6 @@ export default Vue.component("Home", {
   },
   watch: {},
   components: {
-    MarvinJS,
     StructureSearchMenu
   }
 });
