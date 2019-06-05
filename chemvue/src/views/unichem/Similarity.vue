@@ -7,8 +7,8 @@
         <v-btn icon @click="sketcherModal = false">
           <v-icon>close</v-icon>
         </v-btn>
-    </v-toolbar>
-      <StructureSearchMenu v-on:molObtained='handleMolObtained'/>
+      </v-toolbar>
+      <StructureSearchMenu v-on:molObtained="handleMolObtained"/>
     </v-dialog>
     <h1>Unichem</h1>
     <h3>Substructure Similarity Search</h3>
@@ -18,18 +18,10 @@
       dark
       transition="scale-transition"
       mt-2
-    >
-      {{ alertBox.message }}
-    </v-alert>
+    >{{ alertBox.message }}</v-alert>
     <v-layout align-center justify-space-around row wrap mb-2>
       <v-flex xs12 sm10>
-        <v-slider
-          v-model="slider"
-          label="Threshold"
-          thumb-label
-          min="70"
-          max="99"
-        ></v-slider>
+        <v-slider v-model="slider" label="Threshold" thumb-label min="70" max="99"></v-slider>
       </v-flex>
       <v-spacer></v-spacer>
       <v-flex xs12 sm2>
@@ -51,12 +43,14 @@
       </v-flex>
       <v-flex xs6 sm2>
         <v-btn dark color="primary" @click="onSearch">
-          <v-icon dark>mdi-database-search</v-icon><v-spacer></v-spacer>Search
+          <v-icon dark>mdi-database-search</v-icon>
+          <v-spacer></v-spacer>Search
         </v-btn>
       </v-flex>
       <v-flex xs6 sm2>
         <v-btn color="primary" @click.stop="sketcherModal = true">
-          <v-icon dark>mdi-drawing</v-icon><v-spacer></v-spacer>Draw Mol
+          <v-icon dark>mdi-drawing</v-icon>
+          <v-spacer></v-spacer>Draw Mol
         </v-btn>
       </v-flex>
     </v-layout>
@@ -64,12 +58,8 @@
     <div v-if="molecule">
       <span class="title">Showing {{ compoundCount }} results for:</span>
       <v-tabs class="mt-3 mb-3 elevation-1" color="primary" fixed-tabs>
-        <v-tab ripple>
-          Molecule
-        </v-tab>
-        <v-tab ripple v-if="smilesForm">
-          SMILES
-        </v-tab>
+        <v-tab ripple>Molecule</v-tab>
+        <v-tab ripple v-if="smilesForm">SMILES</v-tab>
         <v-tab-item>
           <v-card flat>
             <v-card-text class="pa-1 searched-compound">
@@ -107,7 +97,7 @@
 import Vue from "vue";
 import RestAPI from "@/services/Api";
 import Compounds from "@/components/shared/Compounds";
-import StructureSearchMenu from '@/components/shared/unichem/StructureSearchMenu.vue'
+import StructureSearchMenu from "@/components/shared/unichem/StructureSearchMenu.vue";
 
 const backendAPIs = new RestAPI();
 
