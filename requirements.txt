@@ -25,3 +25,7 @@ rq==0.12.0
 django-rq==1.2.0
 pyyaml==5.1
 mysqlclient==1.4.2.post1
+# requirements from ws2es
+progressbar2==3.10.1
+wrapt==1.11.1
+blessings==1.6
