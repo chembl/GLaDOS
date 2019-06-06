@@ -16,7 +16,6 @@ import pprint
 import math
 from functools import lru_cache
 from glados.ws2es.util import SharedThreadPool
-from elasticsearch_dsl.connections import connections
 
 __author__ = 'jfmosquera@ebi.ac.uk'
 
@@ -108,8 +107,10 @@ def create_idx(idx_name, shards, replicas, analysis=None, mappings=None, logger=
 
 
 def get_index_mapping(es_index):
-
-    es_conn = connections.get_connection()
+    if es_conn is None:
+        print("FATAL ERROR: there is not an elastic search connection defined.", file=sys.stderr)
+        traceback.print_exc(file=sys.stderr)
+        sys.exit(1)
     mappings_response = es_conn.indices.get(index=es_index)
     return list(mappings_response.values())[0]['mappings']
 
