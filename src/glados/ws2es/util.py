@@ -4,7 +4,6 @@ from threading import Thread
 import glados.ws2es.signal_handler as signal_handler
 import time
 from wrapt.decorators import synchronized
-import sys
 
 
 def get_js_path_from_dict(doc: dict, js_path, default=None):
