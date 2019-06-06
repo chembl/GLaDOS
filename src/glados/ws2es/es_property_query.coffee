@@ -1,0 +1,10 @@
+{
+  "size": 10
+  "from": 0
+  "_source": "<PROPERTY_NAME>"
+  "query":
+    "constant_score":
+      "filter":
+        "exists":
+          "field": "<PROPERTY_NAME>"
+}
