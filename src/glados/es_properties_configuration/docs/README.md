@@ -1,0 +1,1 @@
+# ES properties configutation module
