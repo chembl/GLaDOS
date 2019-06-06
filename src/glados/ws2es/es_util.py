@@ -397,6 +397,58 @@ def num_shards_by_num_rows(n_rows):
     return shards_guide[guides[cur_i-1]]
 
 
+def remove_es_mapping_properties_level(mapping_dict: dict={}):
+    return_dict = {}
+    for key, value in mapping_dict.items():
+        if key == 'properties' and isinstance(value, dict):
+            for inner_key, inner_value in value.items():
+                if isinstance(inner_value, dict):
+                    if 'properties' not in inner_value.keys():
+                        inner_value['es_mapping_leaf'] = True
+                        return_dict[inner_key] = inner_value
+                    else:
+                        return_dict[inner_key] = remove_es_mapping_properties_level(inner_value)
+                else:
+                    return_dict[key] = inner_value
+        elif isinstance(value, dict):
+            if 'properties' not in value.keys():
+                value['es_mapping_leaf'] = True
+                return_dict[key] = value
+            else:
+                return_dict[key] = remove_es_mapping_properties_level(value)
+        elif value:
+            return_dict[key] = value
+    return return_dict
+
+
+def simplify_single_mapping(single_mapping):
+    mapping_type = single_mapping['type']
+    indexed = single_mapping.get('index', True)
+    return {
+        'type': DefaultMappings.SIMPLE_MAPPINGS_REVERSE[mapping_type],
+        'aggregatable': indexed and mapping_type in DefaultMappings.AGGREGATABLE_TYPES
+    }
+
+
+def _recursive_simplify_es_properties(cur_dict: dict, cur_prefix: str):
+    simple_props = SummableDict()
+    for key, value in cur_dict.items():
+        next_prefix = '{0}.{1}'.format(cur_prefix, key) if cur_prefix else key
+        if isinstance(value, dict):
+            if 'es_mapping_leaf' in value.keys():
+                simple_props[next_prefix] = simplify_single_mapping(value)
+            else:
+                simple_props += _recursive_simplify_es_properties(value, next_prefix)
+        elif value:
+            simple_props[next_prefix] = value
+    return simple_props
+
+
+def simplify_es_properties(mappings_dict: dict):
+    mappings_dict_no_props = remove_es_mapping_properties_level(mappings_dict)
+    return _recursive_simplify_es_properties(mappings_dict_no_props, '')
+
+
 class DefaultMappings(object):
     # Similarity
     NAMES_SIMILARITY = {
@@ -637,6 +689,19 @@ class DefaultMappings(object):
     NUMERIC_TYPES = {desc_i['type'] for desc_i in NUMERIC_MAPPINGS}
     INTEGER_NUMERIC_TYPES = {desc_i['type'] for desc_i in INTEGER_NUMERIC_MAPPINGS}
     AGGREGATABLE_TYPES = {desc_i['type'] for desc_i in AGGREGATABLE_MAPPINGS}
+
+    SIMPLE_MAPPINGS = {
+        'string': {__KEYWORD_TYPE['type'], __TEXT_TYPE['type']},
+        'string-es-interal': {COMPLETION_TYPE['type'], },
+        'double': {FLOAT['type'], DOUBLE['type']},
+        'integer': INTEGER_NUMERIC_TYPES,
+        'boolean': {BOOLEAN['type']},
+        'date': {DATE_Y_M_D['type'], }
+    }
+    SIMPLE_MAPPINGS_REVERSE = {}
+    for s_type, types in SIMPLE_MAPPINGS.items():
+        for type in types:
+            SIMPLE_MAPPINGS_REVERSE[type] = s_type
 
     # Enable/Disable
     ENABLE = SummableDict(enabled=True)
