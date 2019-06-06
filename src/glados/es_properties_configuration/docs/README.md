@@ -16,3 +16,6 @@ Given an **index name** and a **property id**, it returns the following informat
 ## Getting the parsing function of one property
 
 Given an **index name** and a **property id**, it returns the function used to parse the value of an instance for the download file. 
+
+- The parsing function, if there is one, to parse the value in a downloaded file.
+
