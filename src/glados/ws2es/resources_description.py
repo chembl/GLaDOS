@@ -91,6 +91,10 @@ class ResourceDescription(object):
         path_to_properties = '{0}.properties'.format('_doc')
         return util.get_js_path_from_dict(mapping, path_to_properties)
 
+    def get_simplified_mapping_from_es(self):
+        mapping = self.get_resource_mapping_from_es()
+        return es_util.simplify_es_properties(mapping)
+
     def get_doc_by_id_from_es(self, doc_id):
         return es_util.get_doc_by_id(self.idx_name, '_doc', doc_id)
 
