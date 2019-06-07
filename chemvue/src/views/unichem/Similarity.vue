@@ -104,14 +104,14 @@
 </template>
 
 <script>
-import Vue from "vue";
-import RestAPI from "@/services/Api";
-import Compounds from "@/components/shared/Compounds";
-import StructureSearchMenu from "@/components/shared/unichem/StructureSearchMenu.vue";
+import Vue from 'vue';
+import RestAPI from '@/services/Api';
+import Compounds from '@/components/shared/Compounds';
+import StructureSearchMenu from '@/components/shared/unichem/StructureSearchMenu.vue';
 
 const backendAPIs = new RestAPI();
 
-export default Vue.component("Home", {
+export default Vue.component('Home', {
   data() {
     return {
       slider: 90,
@@ -121,24 +121,24 @@ export default Vue.component("Home", {
         end: 10
       },
       page: 1,
-      ctabText: "NCCc1ccc(O)c(O)c1",
+      ctabText: 'NCCc1ccc(O)c(O)c1',
       sketcherModal: false,
-      molecule: "",
-      smilesForm: "",
+      molecule: '',
+      smilesForm: '',
       isShowAlert: false,
       alertBox: {
-        type: "error",
-        message: ""
+        type: 'error',
+        message: ''
       },
       maxPerPage: 10,
-      urlImages: "http://localhost:8000/glados_api/chembl/unichem/images/"
+      urlImages: 'http://localhost:8000/glados_api/chembl/unichem/images/'
     };
   },
   created() {
-    this.$store.commit("SET_LOADING", false);
-    this.$store.commit("SET_FETCHING_SIMILARITY_ERROR", {
+    this.$store.commit('SET_LOADING', false);
+    this.$store.commit('SET_FETCHING_SIMILARITY_ERROR', {
       isError: false,
-      errorMsg: ""
+      errorMsg: ''
     });
   },
   computed: {
@@ -160,8 +160,8 @@ export default Vue.component("Home", {
   },
   methods: {
     loadCompounds(query) {
-      this.$store.commit("SET_LOADING", true);
-      this.$store.dispatch("loadCompounds", {
+      this.$store.commit('SET_LOADING', true);
+      this.$store.dispatch('loadCompounds', {
         data: query,
         threshold: this.threshold,
         init: this.range.init,
@@ -170,19 +170,19 @@ export default Vue.component("Home", {
     },
     onSearch() {
       this.isShowAlert = false;
-      this.molecule = "";
-      this.smilesForm = "";
+      this.molecule = '';
+      this.smilesForm = '';
 
-      if (this.ctabText == "") {
+      if (this.ctabText == '') {
         this.isShowAlert = true;
         this.alertBox = {
-          type: "warning",
-          message: "Need CTAB or SMILES for the search"
+          type: 'warning',
+          message: 'Need CTAB or SMILES for the search'
         };
       } else {
-        this.$store.commit("SET_FETCHING_SIMILARITY_ERROR", {
+        this.$store.commit('SET_FETCHING_SIMILARITY_ERROR', {
           isError: false,
-          errorMsg: ""
+          errorMsg: ''
         });
         this.molecule = this.ctabText;
         this.loadCompounds(this.ctabText);
@@ -191,7 +191,7 @@ export default Vue.component("Home", {
     handleMolObtained: function(mol) {
       this.sketcherModal = false;
       this.isShowAlert = false;
-      this.smilesForm = "";
+      this.smilesForm = '';
       this.ctabText = mol;
       this.molecule = mol;
       this.loadCompounds(this.molecule);
@@ -200,7 +200,7 @@ export default Vue.component("Home", {
     getSMILESfromMOL(mol) {
       backendAPIs
         .getBeakerAPI()
-        .post("/ctab2smiles", mol)
+        .post('/ctab2smiles', mol)
         .then(res => {
           this.smilesForm = res.data;
         })
@@ -222,7 +222,7 @@ export default Vue.component("Home", {
       if (errorFetching.isError) {
         this.isShowAlert = true;
         this.alertBox = {
-          type: "error",
+          type: 'error',
           message: errorFetching.errorMsg
         };
       }

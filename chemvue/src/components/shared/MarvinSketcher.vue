@@ -20,15 +20,15 @@
 import marv from "@/assets/marvin/marvinjslauncher.js";
 
 export default {
-  props: ["molecule", "eventBus"],
+  props: ['molecule', 'eventBus'],
   data() {
     return {
       alert: false,
-      alertMessage: "",
+      alertMessage: '',
       // marvinPath: `${
       //   process.env.VUE_APP_ROOT_API
       // }/static/marvinjs/editorws.html`,
-      marvinPath: "",
+      marvinPath: '',
       marvinEditor: {},
       currentMol: this.molecule,
       isEditorEmpty: true
@@ -47,7 +47,7 @@ export default {
       },
       err => alert(err)
     );
-    this.eventBus.$on("getDrawnMol", this.getDrawnMol);
+    this.eventBus.$on('getDrawnMol', this.getDrawnMol);
   },
   methods: {
     getDrawnMol() {
@@ -55,21 +55,21 @@ export default {
 
       if (this.isEditorEmpty) {
         this.alert = true;
-        this.alertMessage = "The editor is empty";
-        this.$emit("error");
+        this.alertMessage = 'The editor is empty';
+        this.$emit('error');
       } else {
         this.alert = false;
-        this.marvinEditor.exportStructure("mol").then(
+        this.marvinEditor.exportStructure('mol').then(
           mol => {
             this.currentMol = mol;
-            this.$emit("molObtained", this.currentMol);
+            this.$emit('molObtained', this.currentMol);
           },
-          err => (this.alertMessage = "Marvin export estructure error: " + err)
+          err => (this.alertMessage = 'Marvin export estructure error: ' + err)
         );
       }
     }
   },
-  name: "Header",
+  name: 'Header',
   components: {}
 };
 </script>

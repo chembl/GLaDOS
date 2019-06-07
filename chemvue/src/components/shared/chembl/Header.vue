@@ -34,19 +34,19 @@
 </template>
 
 <script>
-import SearchBox from "./SearchBox";
+import SearchBox from './SearchBox';
 
 export default {
   data() {
     return {
       links: [
         {
-          label: "UniChem",
-          url: "https://www.ebi.ac.uk/unichem"
+          label: 'UniChem',
+          url: 'https://www.ebi.ac.uk/unichem'
         },
         {
-          label: "SureChEMBL",
-          url: "https://www.surechembl.org"
+          label: 'SureChEMBL',
+          url: 'https://www.surechembl.org'
         }
       ]
     };
@@ -55,7 +55,7 @@ export default {
     // eslint-disable-next-line
     ebiFrameworkAssignImageByMetaTags();
   },
-  name: "Header",
+  name: 'Header',
   components: {
     SearchBox
   }

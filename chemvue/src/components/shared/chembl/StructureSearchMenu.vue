@@ -53,18 +53,18 @@
 </template>
 
 <script>
-import MarvinJS from "@/components/shared/MarvinSketcher";
-import Vue from "vue";
+import MarvinJS from '@/components/shared/MarvinSketcher';
+import Vue from 'vue';
 
-const SIMILARITY = "SIMILARITY";
-const SUBSTRUCTURE = "SUBSTRUCTURE";
-const CONNECTIVITY = "CONNECTIVITY";
+const SIMILARITY = 'SIMILARITY';
+const SUBSTRUCTURE = 'SUBSTRUCTURE';
+const CONNECTIVITY = 'CONNECTIVITY';
 
 export default {
   components: {
     MarvinJS
   },
-  props: ["bus"],
+  props: ['bus'],
   data() {
     return {
       disableConnectivity: false,
@@ -72,7 +72,7 @@ export default {
       disableSubstructure: false,
       loading: false,
       eventBus: new Vue(), // this is to communicate with marvin and get the molecule drawn
-      selectedSearchType: "",
+      selectedSearchType: '',
       searchTypes: { SIMILARITY, SUBSTRUCTURE, CONNECTIVITY }
     };
   },
@@ -91,19 +91,19 @@ export default {
       this.selectedSearchType = this.searchTypes.CONNECTIVITY;
       this.loading = true;
       this.disableButtons();
-      this.eventBus.$emit("getDrawnMol");
+      this.eventBus.$emit('getDrawnMol');
     },
     triggerSimilaritySearch() {
       this.selectedSearchType = this.searchTypes.SIMILARITY;
       this.loading = true;
       this.disableButtons();
-      this.eventBus.$emit("getDrawnMol");
+      this.eventBus.$emit('getDrawnMol');
     },
     triggerSubstructureSearch() {
       this.selectedSearchType = this.searchTypes.SUBSTRUCTURE;
       this.loading = true;
       this.disableButtons();
-      this.eventBus.$emit("getDrawnMol");
+      this.eventBus.$emit('getDrawnMol');
     },
     hadleSketcherError() {
       this.loading = false;
@@ -112,9 +112,9 @@ export default {
     receiveMol(currentMol) {
       this.loading = false;
       this.enableButtons();
-      this.$emit("searching");
-      console.log("mol was recevied from outside", currentMol);
-      console.log("TODO: Here I do a search...");
+      this.$emit('searching');
+      console.log('mol was recevied from outside', currentMol);
+      console.log('TODO: Here I do a search...');
     }
   }
 };

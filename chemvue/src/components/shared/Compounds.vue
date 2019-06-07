@@ -98,7 +98,7 @@
 
 <script>
 export default {
-  props: ["compoundList", "compoundsTotal", "maxPerPage"],
+  props: ['compoundList', 'compoundsTotal', 'maxPerPage'],
   data() {
     return {
       compounds: this.compoundList,
@@ -107,7 +107,7 @@ export default {
       page: 1,
       pages: 0,
       pageMax: this.maxPerPage,
-      imgBasePath: ""
+      imgBasePath: ''
     };
   },
   created() {
@@ -132,10 +132,10 @@ export default {
     },
     page: function(newVal) {
       let init = (newVal - 1) * this.pageMax;
-      this.$emit("onPageChange", init);
+      this.$emit('onPageChange', init);
     }
   },
-  name: "Compounds",
+  name: 'Compounds',
   components: {}
 };
 </script>

@@ -1,24 +1,24 @@
-import "@mdi/font/css/materialdesignicons.css";
-import "./assets/stylus/main.styl";
-import Vue from "vue";
-import App from "./App.vue";
-import router from "./router";
-import store from "./store/Store";
-import Vuetify from "vuetify";
-import axios from "axios";
-import VueAxios from "vue-axios";
+import '@mdi/font/css/materialdesignicons.css';
+import './assets/stylus/main.styl';
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router';
+import store from './store/Store';
+import Vuetify from 'vuetify';
+import axios from 'axios';
+import VueAxios from 'vue-axios';
 
 Vue.use(VueAxios, axios);
 
 Vue.use(Vuetify, {
   theme: {
-    primary: "#07979b",
-    secondary: "#4d5456",
-    accent: "#0e595f",
-    error: "#FF5252",
-    info: "#2196F3",
-    success: "#4CAF50",
-    warning: "#FFC107"
+    primary: '#07979b',
+    secondary: '#4d5456',
+    accent: '#0e595f',
+    error: '#FF5252',
+    info: '#2196F3',
+    success: '#4CAF50',
+    warning: '#FFC107'
   },
   iconfont: `mdi`
 });
@@ -30,4 +30,4 @@ new Vue({
   store,
   render: h => h(App),
   components: {}
-}).$mount("#app");
+}).$mount('#app');

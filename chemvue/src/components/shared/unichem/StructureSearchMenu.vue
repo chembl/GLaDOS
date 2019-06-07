@@ -21,14 +21,14 @@
 </template>
 
 <script>
-import MarvinJS from "@/components/shared/MarvinSketcher";
-import Vue from "vue";
+import MarvinJS from '@/components/shared/MarvinSketcher';
+import Vue from 'vue';
 
 export default {
   components: {
     MarvinJS
   },
-  props: ["bus", "molecule"],
+  props: ['bus', 'molecule'],
   data() {
     return {
       loading: false,
@@ -47,7 +47,7 @@ export default {
     triggerSearch() {
       this.loading = true;
       this.disableButtons();
-      this.eventBus.$emit("getDrawnMol");
+      this.eventBus.$emit('getDrawnMol');
     },
     hadleSketcherError() {
       this.loading = false;
@@ -57,7 +57,7 @@ export default {
       this.currentMol = currentMol;
       this.loading = false;
       this.enableButtons();
-      this.$emit("molObtained", currentMol);
+      this.$emit('molObtained', currentMol);
     }
   }
 };

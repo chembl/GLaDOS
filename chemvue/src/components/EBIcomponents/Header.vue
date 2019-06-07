@@ -62,10 +62,10 @@ export default {
     // // eslint-disable-next-line
     // ebiFrameworkPopulateBlackBar();
   },
-  name: "EBIHeader"
+  name: 'EBIHeader'
 };
 </script>
 
 <style scoped lang="scss">
-@import "@/assets/sass/ebi/ebi-global.scss";
+@import '@/assets/sass/ebi/ebi-global.scss';
 </style>

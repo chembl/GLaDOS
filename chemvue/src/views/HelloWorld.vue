@@ -111,7 +111,7 @@ a {
 </style>
 
 <script>
-import Vue from "vue";
+import Vue from 'vue';
 
-export default Vue.component("HelloWorld", {});
+export default Vue.component('HelloWorld', {});
 </script>

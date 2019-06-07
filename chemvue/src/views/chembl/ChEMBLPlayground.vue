@@ -18,7 +18,7 @@
 <style scoped></style>
 
 <script>
-import StructureSearchMenu from "@/components/shared/chembl/StructureSearchMenu.vue";
+import StructureSearchMenu from '@/components/shared/chembl/StructureSearchMenu.vue';
 export default {
   components: {
     StructureSearchMenu

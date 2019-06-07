@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default class RestAPI {
   getGLaDOSAPI() {
@@ -9,8 +9,8 @@ export default class RestAPI {
       baseURL: path,
       withCredentials: false,
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
       }
     });
   }
