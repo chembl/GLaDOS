@@ -1,12 +1,12 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import RestAPI from "@/services/Api";
-import * as chembl from '@/store/modules/Chembl.js'
+import * as chembl from "@/store/modules/Chembl.js";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  modules:{
+  modules: {
     chembl
   },
   state: {

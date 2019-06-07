@@ -1,16 +1,17 @@
 <template>
   <v-container>
     <v-dialog v-model="marvinModal" max-width="100%">
-
-        <v-toolbar flat>
-          <v-toolbar-title>Marvin Editor</v-toolbar-title>
-          <v-spacer></v-spacer>
-          <v-btn icon @click="marvinModal = false">
-            <v-icon>close</v-icon>
-          </v-btn>
-        </v-toolbar>
-        <StructureSearchMenu v-on:molObtained="handleMolObtained" v-bind:molecule="molecule"/>
-
+      <v-toolbar flat>
+        <v-toolbar-title>Marvin Editor</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-btn icon @click="marvinModal = false">
+          <v-icon>close</v-icon>
+        </v-btn>
+      </v-toolbar>
+      <StructureSearchMenu
+        v-on:molObtained="handleMolObtained"
+        v-bind:molecule="molecule"
+      />
     </v-dialog>
     <h1>Unichem</h1>
     <h3>Sources search</h3>

@@ -8,7 +8,10 @@
           <v-icon>close</v-icon>
         </v-btn>
       </v-toolbar>
-      <StructureSearchMenu v-on:molObtained="handleMolObtained" v-bind:molecule="molecule"/>
+      <StructureSearchMenu
+        v-on:molObtained="handleMolObtained"
+        v-bind:molecule="molecule"
+      />
     </v-dialog>
     <h1>Unichem</h1>
     <h3>Substructure Similarity Search</h3>
@@ -18,10 +21,17 @@
       dark
       transition="scale-transition"
       mt-2
-    >{{ alertBox.message }}</v-alert>
+      >{{ alertBox.message }}</v-alert
+    >
     <v-layout align-center justify-space-around row wrap mb-2>
       <v-flex xs12 sm10>
-        <v-slider v-model="slider" label="Threshold" thumb-label min="70" max="99"></v-slider>
+        <v-slider
+          v-model="slider"
+          label="Threshold"
+          thumb-label
+          min="70"
+          max="99"
+        ></v-slider>
       </v-flex>
       <v-spacer></v-spacer>
       <v-flex xs12 sm2>

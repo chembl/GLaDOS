@@ -2,7 +2,11 @@
   <v-card>
     <v-card-text>Draw your molecule</v-card-text>
 
-    <MarvinJS :eventBus="eventBus" v-on:error="hadleSketcherError" v-on:molObtained="receiveMol"/>
+    <MarvinJS
+      :eventBus="eventBus"
+      v-on:error="hadleSketcherError"
+      v-on:molObtained="receiveMol"
+    />
     <v-card-actions class="justify-center">
       <v-btn
         dark
@@ -10,7 +14,8 @@
         @click="triggerSearch"
         :disabled="disableSearch"
         :loading="loading"
-      >Search</v-btn>
+        >Search</v-btn
+      >
     </v-card-actions>
   </v-card>
 </template>
@@ -23,14 +28,14 @@ export default {
   components: {
     MarvinJS
   },
-  props: ["bus", 'molecule'],
+  props: ["bus", "molecule"],
   data() {
     return {
       loading: false,
       disableSearch: false,
       eventBus: new Vue(), // this is to communicate with marvin and get the molecule drawn
       currentMol: this.molecule
-    }
+    };
   },
   methods: {
     disableButtons() {
@@ -49,14 +54,13 @@ export default {
       this.enableButtons();
     },
     receiveMol(currentMol) {
-      this.currentMol = currentMol
+      this.currentMol = currentMol;
       this.loading = false;
       this.enableButtons();
-      this.$emit('molObtained', currentMol)
+      this.$emit("molObtained", currentMol);
     }
   }
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

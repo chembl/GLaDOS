@@ -4,7 +4,7 @@ import Similarity from "@/views/unichem/Similarity";
 import Sources from "@/views/unichem/Sources";
 import HelloWorld from "@/views/HelloWorld";
 import PageNotFound from "@/views/PageNotFound";
-import ChEMBLPlayground from "@/views/chembl/ChEMBLPlayground.vue"
+import ChEMBLPlayground from "@/views/chembl/ChEMBLPlayground.vue";
 
 Vue.use(Router);
 

@@ -88,7 +88,7 @@
               mt-2
             >
               NO SOURCES FOUND
-            </v-alert>            
+            </v-alert>
           </v-layout>
         </div>
       </transition>
@@ -111,9 +111,9 @@ export default {
     };
   },
   created() {
-    this.imgBasePath = `${
-      process.env.VUE_APP_ROOT_API
-    }/${process.env.VUE_APP_SERVER_BASE_PATH}glados_api/chembl/unichem/images/`;
+    this.imgBasePath = `${process.env.VUE_APP_ROOT_API}/${
+      process.env.VUE_APP_SERVER_BASE_PATH
+    }glados_api/chembl/unichem/images/`;
   },
   methods: {
     onDisplaySources(compound) {

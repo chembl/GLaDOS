@@ -20,7 +20,6 @@
 import marv from "@/assets/marvin/marvinjslauncher.js";
 
 export default {
-
   props: ["molecule", "eventBus"],
   data() {
     return {
@@ -47,9 +46,8 @@ export default {
         this.marvinEditor = sketcher;
       },
       err => alert(err)
-    )
-    this.eventBus.$on('getDrawnMol', this.getDrawnMol)
-
+    );
+    this.eventBus.$on("getDrawnMol", this.getDrawnMol);
   },
   methods: {
     getDrawnMol() {
@@ -63,10 +61,10 @@ export default {
         this.alert = false;
         this.marvinEditor.exportStructure("mol").then(
           mol => {
-            this.currentMol = mol
-            this.$emit("molObtained", this.currentMol)
+            this.currentMol = mol;
+            this.$emit("molObtained", this.currentMol);
           },
-          err => this.alertMessage = "Marvin export estructure error: " + err
+          err => (this.alertMessage = "Marvin export estructure error: " + err)
         );
       }
     }
