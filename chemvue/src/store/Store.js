@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import RestAPI from "@/services/Api";
-import * as chembl from '@/store/modules/chembl.js'
+import * as chembl from '@/store/modules/Chembl.js'
 
 Vue.use(Vuex);
 
