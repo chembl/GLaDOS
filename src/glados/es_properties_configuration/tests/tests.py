@@ -19,6 +19,17 @@ class ConfigurationGetterTester(unittest.TestCase):
         except configuration_getter.ESPropsConfigurationGetterError:
             pass
 
+    def test_fails_when_property_does_not_exist(self):
+
+        index_name = 'chembl_activity'
+        prop_id = 'does not exist'
+
+        try:
+            config_got = configuration_getter.get_config_for(index_name, prop_id)
+            self.assertTrue(False, 'This should have thrown an exception for a non existing property!')
+        except configuration_getter.ESPropsConfigurationGetterError:
+            pass
+
     def test_gets_config_for_one_property_with_no_override(self):
 
         print('test_gets_config_for_one_property')
