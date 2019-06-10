@@ -13,9 +13,9 @@ class ConfigurationGetterTester(TestCase):
 
     def setUp(self):
         if settings.RUN_ENV == RunEnvs.TRAVIS:
-            es_util.setup_connection('www.ebi.ac.uk', 9200)
+            es_util.setup_connection('www.ebi.ac.uk/chembl/glados-es', 9200)
         else:
-            es_util.setup_connection('wp-p1m-50.ebi.ac.uk/chembl/glados-es', 9200)
+            es_util.setup_connection('wp-p1m-50.ebi.ac.uk', 9200)
 
     def test_fails_when_index_does_not_exist(self):
 
@@ -39,7 +39,7 @@ class ConfigurationGetterTester(TestCase):
         except configuration_getter.ESPropsConfigurationGetterError:
             pass
 
-    @override_settings(PROPERTIES_CONFIG_OVERRIDE_DIR=CONFIG_TEST_FILE)
+    @override_settings(PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE)
     def test_gets_config_for_one_property_with_no_override(self):
 
         index_name = 'chembl_activity'
@@ -53,10 +53,10 @@ class ConfigurationGetterTester(TestCase):
         self.assertEqual(config_got['label'], 'Assay Data Subcellular Fraction')
         self.assertEqual(config_got['label_mini'], 'As. Data Subc. Frct.')
 
-    @override_settings(PROPERTIES_CONFIG_OVERRIDE_DIR=CONFIG_TEST_FILE)
+    @override_settings(PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE)
     def test_gets_config_for_one_property_with_override(self):
 
-        override_config_must_be = yaml.load(open(settings.PROPERTIES_CONFIG_OVERRIDE_DIR, 'r'), Loader=yaml.FullLoader)
+        override_config_must_be = yaml.load(open(settings.PROPERTIES_CONFIG_OVERRIDE_FILE, 'r'), Loader=yaml.FullLoader)
 
         index_name = 'chembl_activity'
         prop_id = '_metadata.activity_generated.short_data_validity_comment'
