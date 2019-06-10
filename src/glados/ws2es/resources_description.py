@@ -93,7 +93,7 @@ class ResourceDescription(object):
 
     def get_simplified_mapping_from_es(self):
         mapping = self.get_resource_mapping_from_es()
-        return es_util.simplify_es_properties(mapping)
+        return es_util.simplify_es_properties(self.res_name, mapping)
 
     def get_doc_by_id_from_es(self, doc_id):
         return es_util.get_doc_by_id(self.idx_name, '_doc', doc_id)

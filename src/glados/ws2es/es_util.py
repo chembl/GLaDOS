@@ -15,7 +15,7 @@ import time
 import pprint
 import math
 from functools import lru_cache
-from glados.ws2es.util import SharedThreadPool
+from glados.ws2es.util import SharedThreadPool, get_labels_from_property_name
 
 __author__ = 'jfmosquera@ebi.ac.uk'
 
@@ -442,12 +442,20 @@ def _recursive_simplify_es_properties(cur_dict: dict, cur_prefix: str):
                 simple_props += _recursive_simplify_es_properties(value, next_prefix)
         elif value:
             simple_props[next_prefix] = value
+
     return simple_props
 
 
-def simplify_es_properties(mappings_dict: dict):
+def simplify_es_properties(res_name, mappings_dict: dict):
     mappings_dict_no_props = remove_es_mapping_properties_level(mappings_dict)
-    return _recursive_simplify_es_properties(mappings_dict_no_props, '')
+    simplified_props = _recursive_simplify_es_properties(mappings_dict_no_props, '')
+
+    for property_i, desc in simplified_props.items():
+        label, label_mini = get_labels_from_property_name(res_name, property_i)
+        desc['label'] = label
+        desc['label_mini'] = label_mini
+
+    return simplified_props
 
 
 class DefaultMappings(object):
