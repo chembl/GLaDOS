@@ -31,7 +31,7 @@ class ConfigurationGetterTester(TestCase):
     def test_fails_when_property_does_not_exist(self):
 
         index_name = 'chembl_activity'
-        prop_id = 'does not exist'
+        prop_id = 'does_not_exist'
 
         try:
             config_got = configuration_getter.get_config_for(index_name, prop_id)
