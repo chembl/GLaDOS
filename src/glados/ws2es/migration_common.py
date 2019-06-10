@@ -3,7 +3,6 @@ import glados.ws2es.es_util as es_util
 import glados.ws2es.es_resources_desc as es_resources_desc
 import glados.ws2es.migration_logging as migration_logging
 import glados.ws2es.es_mappings_skeleton_generator as es_mappings_skeleton_generator
-import glados.ws2es.es_glados_schema_generator as es_glados_schema_generator
 import glados.ws2es.resources_description as resources_description
 import subprocess
 import importlib
@@ -172,7 +171,3 @@ def generate_mappings_for_resources(resources=None):
     print(descriptions)
     print('COMPARISON WITH EXISTING MAPPINGS!-------------------------------------------------------------------------')
     es_mappings_skeleton_generator.compare_mappings(resources)
-
-
-def generate_glados_schema_and_po_files():
-    es_glados_schema_generator.generate_glados_schema_and_po_files()

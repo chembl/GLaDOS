@@ -63,10 +63,6 @@ def main():
                         dest="generate_mappings",
                         help="Generate elastic search mapping skeleton files without migrating",
                         action="store_true",)
-    parser.add_argument("-GGF", "--generate_glados_files",
-                        dest="generate_glados_files",
-                        help="Generate schema and PO files for the GLaDOS project",
-                        action="store_true",)
     parser.add_argument("--host",
                         dest="es_host",
                         help="Elastic Search Hostname or IP address.",
@@ -111,10 +107,6 @@ def main():
 
     if args.generate_mappings:
         migration_common.generate_mappings_for_resources(selected_resources)
-        return
-
-    if args.generate_glados_files:
-        migration_common.generate_glados_schema_and_po_files()
         return
 
     if not args.ignore_warning:
