@@ -38,18 +38,18 @@ export default {
     return {
       links: [
         {
-          label: "UniChem",
-          url: "https://www.ebi.ac.uk/unichem"
+          label: 'UniChem',
+          url: 'https://www.ebi.ac.uk/unichem'
         },
         {
-          label: "SureChEMBL",
-          url: "https://www.surechembl.org"
+          label: 'SureChEMBL',
+          url: 'https://www.surechembl.org'
         }
       ]
     };
   },
   mounted() {},
-  name: "SearchBox"
+  name: 'SearchBox'
 };
 </script>
 

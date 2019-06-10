@@ -28,28 +28,28 @@ export default {
     return {
       links: [
         {
-          label: "UniChem",
-          url: "https://www.ebi.ac.uk/unichem"
+          label: 'UniChem',
+          url: 'https://www.ebi.ac.uk/unichem'
         },
         {
-          label: "ChEMBL-NTD",
-          url: "https://www.ebi.ac.uk/chembl/chembl-ntd/"
+          label: 'ChEMBL-NTD',
+          url: 'https://www.ebi.ac.uk/chembl/chembl-ntd/'
         },
         {
-          label: "SureChEMBL",
-          url: "https://www.surechembl.org"
+          label: 'SureChEMBL',
+          url: 'https://www.surechembl.org'
         },
         {
-          label: "Downloads",
-          url: "https://www.ebi.ac.uk/chembl/downloads/"
+          label: 'Downloads',
+          url: 'https://www.ebi.ac.uk/chembl/downloads/'
         },
         {
-          label: "Web Services",
-          url: "https://www.ebi.ac.uk/chembl/ws_home/"
+          label: 'Web Services',
+          url: 'https://www.ebi.ac.uk/chembl/ws_home/'
         },
         {
-          label: "Old Interface",
-          url: "https://www.ebi.ac.uk/chembl/deprecated_interface/"
+          label: 'Old Interface',
+          url: 'https://www.ebi.ac.uk/chembl/deprecated_interface/'
         }
       ]
     };
@@ -58,7 +58,7 @@ export default {
     // // eslint-disable-next-line
     // ebiFrameworkAssignImageByMetaTags();
   },
-  name: "Header",
+  name: 'Header',
   components: {}
 };
 </script>

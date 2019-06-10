@@ -1,10 +1,14 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import RestAPI from "@/services/Api";
+import Vue from 'vue';
+import Vuex from 'vuex';
+import RestAPI from '@/services/Api';
+import * as chembl from '@/store/modules/Chembl.js';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  modules: {
+    chembl
+  },
   state: {
     errorFetching: {},
     loading: true,
@@ -30,7 +34,7 @@ export default new Vuex.Store({
   actions: {
     loadCompounds: function({ commit }, payload) {
       let data = payload.data;
-      commit("SET_LOADING", true);
+      commit('SET_LOADING', true);
       let params = {
         threshold: payload.threshold,
         init: payload.init,
@@ -41,29 +45,29 @@ export default new Vuex.Store({
       var unichemApi = new RestAPI();
       unichemApi
         .getGLaDOSAPI()
-        .post("/similarity/", data, config)
+        .post('/similarity/', data, config)
         .then(similarCompounds => {
           if (similarCompounds.data.inchis.length <= 0) {
-            commit("SET_FETCHING_SIMILARITY_ERROR", {
+            commit('SET_FETCHING_SIMILARITY_ERROR', {
               isError: true,
               errorMsg: similarCompounds.data.message
             });
           } else {
-            commit("SET_FETCHING_SIMILARITY_ERROR", {
+            commit('SET_FETCHING_SIMILARITY_ERROR', {
               isError: false,
-              errorMsg: ""
+              errorMsg: ''
             });
-            commit("SET_SIMILAR_COMPOUNDS", similarCompounds.data);
+            commit('SET_SIMILAR_COMPOUNDS', similarCompounds.data);
           }
-          commit("SET_LOADING", false);
+          commit('SET_LOADING', false);
         })
         .catch(error => {
           console.log(error);
-          commit("SET_LOADING", false);
-          commit("SET_FETCHING_SIMILARITY_ERROR", {
+          commit('SET_LOADING', false);
+          commit('SET_FETCHING_SIMILARITY_ERROR', {
             isError: true,
             errorMsg:
-              "Error getting services, please try againg later or contact support"
+              'Error getting services, please try againg later or contact support'
           });
         });
     }

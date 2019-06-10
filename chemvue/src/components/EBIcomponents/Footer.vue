@@ -171,10 +171,10 @@
 
 <script>
 export default {
-  name: "EBIFooter"
+  name: 'EBIFooter'
 };
 </script>
 
 <style scoped lang="scss">
-@import "@/assets/sass/ebi/ebi-global.scss";
+@import '@/assets/sass/ebi/ebi-global.scss';
 </style>

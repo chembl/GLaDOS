@@ -11,12 +11,6 @@
         :src="marvinPath"
         allowfullscreen
       ></iframe>
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn color="primary" @click="onSearchMolecule">
-          Search
-        </v-btn>
-      </v-card-actions>
     </v-card>
   </div>
 </template>
@@ -26,27 +20,24 @@
 import marv from "@/assets/marvin/marvinjslauncher.js";
 
 export default {
-  props: ["molecule"],
+  props: ['molecule', 'eventBus'],
   data() {
     return {
       alert: false,
-      alertMessage: "",
+      alertMessage: '',
       // marvinPath: `${
       //   process.env.VUE_APP_ROOT_API
       // }/static/marvinjs/editorws.html`,
-      marvinPath: "",
+      marvinPath: '',
       marvinEditor: {},
-      currentMolecule: this.molecule,
+      currentMol: this.molecule,
       isEditorEmpty: true
     };
   },
   created() {
-    console.log("Server base path", process.env.VUE_APP_SERVER_BASE_PATH);
-    console.log("PUBLIC PATH", process.env.VUE_APP_PUBLIC_PATH);
     this.marvinPath = `${
       process.env.VUE_APP_PUBLIC_PATH
     }marvinjs/editorws.html`;
-    console.log("MARVING PATH", this.marvinPath);
   },
   mounted() {
     // eslint-disable-next-line
@@ -56,27 +47,29 @@ export default {
       },
       err => alert(err)
     );
+    this.eventBus.$on('getDrawnMol', this.getDrawnMol);
   },
   methods: {
-    onSearchMolecule() {
+    getDrawnMol() {
       this.isEditorEmpty = this.marvinEditor.isEmpty();
 
       if (this.isEditorEmpty) {
         this.alert = true;
-        this.alertMessage = "The editor is empty";
+        this.alertMessage = 'The editor is empty';
+        this.$emit('error');
       } else {
         this.alert = false;
-        this.marvinEditor.exportStructure("mol").then(
+        this.marvinEditor.exportStructure('mol').then(
           mol => {
-            this.currentMolecule = mol;
-            this.$emit("onSearch", this.currentMolecule);
+            this.currentMol = mol;
+            this.$emit('molObtained', this.currentMol);
           },
-          err => console.log("Marvin export estructure error", err)
+          err => (this.alertMessage = 'Marvin export estructure error: ' + err)
         );
       }
     }
   },
-  name: "Header",
+  name: 'Header',
   components: {}
 };
 </script>

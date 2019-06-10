@@ -33,38 +33,38 @@
 <style lang="scss"></style>
 
 <script>
-import EBIHeader from "./components/EBIcomponents/Header";
-import EBIFooter from "./components/EBIcomponents/Footer";
-import CommonHeader from "./components/shared/Header";
+import EBIHeader from './components/EBIcomponents/Header';
+import EBIFooter from './components/EBIcomponents/Footer';
+import CommonHeader from './components/shared/Header';
 
 export default {
   data() {
     return {
-      topval: "10px",
+      topval: '10px',
       splashScreen: false,
       clipped: false,
       drawer: true,
       fixed: false,
       items: [
         {
-          icon: "home",
-          title: "Home",
-          path: "/"
+          icon: 'home',
+          title: 'Home',
+          path: '/'
         },
         {
-          icon: "low_priority",
-          title: "Test",
-          path: "/test"
+          icon: 'low_priority',
+          title: 'Test',
+          path: '/test'
         }
       ],
       miniVariant: true,
       right: false,
       rightDrawer: false,
-      title: "UNICHEM"
+      title: 'UNICHEM'
     };
   },
   created() {},
-  name: "App",
+  name: 'App',
   components: {
     EBIHeader,
     EBIFooter,

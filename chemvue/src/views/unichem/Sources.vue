@@ -1,20 +1,17 @@
 <template>
   <v-container>
     <v-dialog v-model="marvinModal" max-width="100%">
-      <v-card>
-        <v-toolbar flat>
-          <v-toolbar-title>Marvin Editor</v-toolbar-title>
-          <v-spacer></v-spacer>
-          <v-btn icon @click="marvinModal = false">
-            <v-icon>close</v-icon>
-          </v-btn>
-        </v-toolbar>
-        <v-card-text>Draw your molecule</v-card-text>
-        <MarvinJS
-          v-bind:molecule="molecule"
-          v-on:onSearch="onMarvinSearch"
-        ></MarvinJS>
-      </v-card>
+      <v-toolbar flat>
+        <v-toolbar-title>Marvin Editor</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-btn icon @click="marvinModal = false">
+          <v-icon>close</v-icon>
+        </v-btn>
+      </v-toolbar>
+      <StructureSearchMenu
+        v-on:molObtained="handleMolObtained"
+        v-bind:molecule="molecule"
+      />
     </v-dialog>
     <h1>Unichem</h1>
     <h3>Sources search</h3>
@@ -115,35 +112,35 @@
 </style>
 
 <script>
-import Vue from "vue";
-import MarvinJS from "@/components/shared/Marvin";
-import RestAPI from "@/services/Api";
+import Vue from 'vue';
+import RestAPI from '@/services/Api';
+import StructureSearchMenu from '@/components/shared/unichem/StructureSearchMenu.vue';
 
 const backendAPIs = new RestAPI();
 
-export default Vue.component("Home", {
+export default Vue.component('Home', {
   data() {
     return {
-      inchiKeyBox: "HMCCXLBXIJMERM-UHFFFAOYSA-N",
+      inchiKeyBox: 'HMCCXLBXIJMERM-UHFFFAOYSA-N',
       marvinModal: false,
-      molecule: "",
-      smilesForm: "",
+      molecule: '',
+      smilesForm: '',
       isShowAlert: false,
       isSources: false,
       alertBox: {
-        type: "error",
-        message: ""
+        type: 'error',
+        message: ''
       },
-      urlImages: "http://localhost:8000/glados_api/chembl/unichem/images/",
+      urlImages: 'http://localhost:8000/glados_api/chembl/unichem/images/',
       sources: [],
       headers: [
         {
-          text: "ID on source",
-          align: "left",
-          value: "id"
+          text: 'ID on source',
+          align: 'left',
+          value: 'id'
         },
-        { text: "Source Name", value: "nameLabel" },
-        { text: "Unichem Source ID", value: "srcId" }
+        { text: 'Source Name', value: 'nameLabel' },
+        { text: 'Unichem Source ID', value: 'srcId' }
       ],
       isShowTable: false,
       isLoading: false
@@ -163,7 +160,7 @@ export default Vue.component("Home", {
           this.isLoading = false;
           if (res.data.message) {
             this.showAlert(
-              "warning",
+              'warning',
               `No data found on Unichem for the compound given`
             );
             this.hideTable();
@@ -173,16 +170,16 @@ export default Vue.component("Home", {
           this.hideTable();
           console.log(error);
           this.showAlert(
-            "error",
-            "Error getting sources service, please try againg later or contact support"
+            'error',
+            'Error getting sources service, please try againg later or contact support'
           );
         });
     },
     onSearch() {
       this.resetFields();
 
-      if (this.inchiKeyBox == "") {
-        this.showAlert("warning", "Need CTAB or SMILES for the search");
+      if (this.inchiKeyBox == '') {
+        this.showAlert('warning', 'Need CTAB or SMILES for the search');
         this.hideTable();
       } else {
         this.molecule = this.inchiKeyBox;
@@ -190,7 +187,7 @@ export default Vue.component("Home", {
         this.getSMILESfromMOL(this.molecule);
       }
     },
-    onMarvinSearch: function(mol) {
+    handleMolObtained: function(mol) {
       this.resetFields();
 
       this.marvinModal = false;
@@ -202,7 +199,7 @@ export default Vue.component("Home", {
         })
         .catch(error => {
           this.hideTable();
-          this.showAlert("error", "Error parsing InchiKey to MOL");
+          this.showAlert('error', 'Error parsing InchiKey to MOL');
           console.log(error);
         });
       this.getSMILESfromMOL(mol);
@@ -210,7 +207,7 @@ export default Vue.component("Home", {
     getSMILESfromMOL(mol) {
       backendAPIs
         .getBeakerAPI()
-        .post("/ctab2smiles", mol)
+        .post('/ctab2smiles', mol)
         .then(res => {
           this.smilesForm = res.data;
         })
@@ -221,7 +218,7 @@ export default Vue.component("Home", {
     getInchiKeyfromMOL(mol) {
       return backendAPIs
         .getBeakerAPI()
-        .post("/ctab2inchiKey", mol)
+        .post('/ctab2inchiKey', mol)
         .then(res => {
           return res;
         })
@@ -242,14 +239,14 @@ export default Vue.component("Home", {
     },
     resetFields() {
       this.isShowAlert = false;
-      this.smilesForm = "";
-      this.molecule = "";
+      this.smilesForm = '';
+      this.molecule = '';
       this.sources = [];
     }
   },
   watch: {},
   components: {
-    MarvinJS
+    StructureSearchMenu
   }
 });
 </script>
