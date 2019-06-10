@@ -1,4 +1,5 @@
 import glados.ws2es.resources_description as resources_description
+from glados.ws2es.util import SummableDict
 
 
 class ESPropsConfigurationGetterError(Exception):
@@ -20,9 +21,10 @@ def get_config_for(index_name, prop_id):
     print('property_description: ', property_description)
 
     # print('index_mapping: ', index_mapping)
-    base_config = {
+    config = SummableDict({
         'index_name': index_name,
         'prop_id': prop_id,
-    }
+    })
 
-    return base_config
+    config += SummableDict(property_description)
+    return config

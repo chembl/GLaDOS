@@ -40,3 +40,9 @@ class ConfigurationGetterTester(unittest.TestCase):
 
         self.assertEqual(config_got['index_name'], index_name)
         self.assertEqual(config_got['prop_id'], prop_id)
+        self.assertTrue(config_got['aggregatable'])
+        self.assertEqual(config_got['type'], 'string')
+        #Todo: test labels
+
+    # def test_gets_config_for_one_property_with_override(self):
+
