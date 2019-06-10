@@ -46,7 +46,8 @@ class ConfigurationGetterTester(TestCase):
         self.assertEqual(config_got['prop_id'], prop_id)
         self.assertTrue(config_got['aggregatable'])
         self.assertEqual(config_got['type'], 'string')
-        #Todo: test labels
+        self.assertEqual(config_got['label'], 'Assay Data Subcellular Fraction')
+        self.assertEqual(config_got['label_mini'], 'As. Data Subc. Frct.')
 
     @override_settings(PROPERTIES_CONFIG_OVERRIDE_DIR=CONFIG_TEST_FILE)
     def test_gets_config_for_one_property_with_override(self):

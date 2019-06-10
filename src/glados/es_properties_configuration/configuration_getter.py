@@ -31,4 +31,6 @@ def get_config_for(index_name, prop_id):
     })
 
     config += SummableDict(property_description)
+
+    print('config: ', config)
     return config
