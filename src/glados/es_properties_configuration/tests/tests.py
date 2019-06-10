@@ -2,6 +2,7 @@ from django.test import TestCase, override_settings
 from glados.es_properties_configuration import configuration_getter
 import glados.ws2es.es_util as es_util
 from django.conf import settings
+from glados.settings import RunEnvs
 import os
 import yaml
 
@@ -11,7 +12,10 @@ class ConfigurationGetterTester(TestCase):
     CONFIG_TEST_FILE = os.path.join( settings.GLADOS_ROOT, 'es_properties_configuration/tests/data/test_override.yml')
 
     def setUp(self):
-        es_util.setup_connection('wp-p1m-50.ebi.ac.uk', 9200)
+        if settings.RUN_ENV == RunEnvs.TRAVIS:
+            es_util.setup_connection('www.ebi.ac.uk', 9200)
+        else:
+            es_util.setup_connection('wp-p1m-50.ebi.ac.uk', 9200)
 
     def test_fails_when_index_does_not_exist(self):
 
