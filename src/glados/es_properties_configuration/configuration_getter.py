@@ -20,10 +20,6 @@ def get_config_for(index_name, prop_id):
     if property_description is None:
         raise ESPropsConfigurationGetterError("The property {} does not exist!".format(prop_id))
 
-    config_override = yaml.load(open(settings.PROPERTIES_CONFIG_OVERRIDE_DIR, 'r'), Loader=yaml.FullLoader)
-
-    print('config_override: ', config_override)
-
     # print('index_mapping: ', index_mapping)
     config = SummableDict({
         'index_name': index_name,
@@ -31,6 +27,11 @@ def get_config_for(index_name, prop_id):
     })
 
     config += SummableDict(property_description)
+
+    config_override = yaml.load(open(settings.PROPERTIES_CONFIG_OVERRIDE_DIR, 'r'), Loader=yaml.FullLoader)
+    property_override = config_override[index_name].get(prop_id)
+    if property_override is not None:
+        config += SummableDict(property_override)
 
     print('config: ', config)
     return config

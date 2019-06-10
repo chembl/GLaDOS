@@ -58,3 +58,13 @@ class ConfigurationGetterTester(TestCase):
 
         override_config_must_be = yaml.load(open(settings.PROPERTIES_CONFIG_OVERRIDE_DIR, 'r'), Loader=yaml.FullLoader)
 
+        index_name = 'chembl_activity'
+        prop_id = '_metadata.activity_generated.short_data_validity_comment'
+        config_got = configuration_getter.get_config_for(index_name, prop_id)
+
+        property_config_must_be = override_config_must_be[index_name][prop_id]
+        self.assertEqual(config_got['label'], property_config_must_be['label'],
+                         'The label was not overridden properly!')
+        self.assertEqual(config_got['label_mini'], property_config_must_be['label_mini'],
+                         'The label mini was not overridden properly!')
+
