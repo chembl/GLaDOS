@@ -1,5 +1,7 @@
 import glados.ws2es.resources_description as resources_description
 from glados.ws2es.util import SummableDict
+import yaml
+from django.conf import settings
 
 
 class ESPropsConfigurationGetterError(Exception):
@@ -18,7 +20,9 @@ def get_config_for(index_name, prop_id):
     if property_description is None:
         raise ESPropsConfigurationGetterError("The property {} does not exist!".format(prop_id))
 
-    print('property_description: ', property_description)
+    config_override = yaml.load(open(settings.PROPERTIES_CONFIG_OVERRIDE_DIR, 'r'), Loader=yaml.FullLoader)
+
+    print('config_override: ', config_override)
 
     # print('index_mapping: ', index_mapping)
     config = SummableDict({

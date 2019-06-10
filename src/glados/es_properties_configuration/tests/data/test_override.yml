@@ -1,0 +1,4 @@
+chembl_activity:
+  '_metadata.activity_generated.short_data_validity_comment':
+    label: 'My custom label'
+    label_mini: 'My cstm lbl'
