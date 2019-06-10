@@ -15,7 +15,7 @@ class ConfigurationGetterTester(TestCase):
         if settings.RUN_ENV == RunEnvs.TRAVIS:
             es_util.setup_connection('www.ebi.ac.uk', 9200)
         else:
-            es_util.setup_connection('wp-p1m-50.ebi.ac.uk', 9200)
+            es_util.setup_connection('wp-p1m-50.ebi.ac.uk/chembl/glados-es', 9200)
 
     def test_fails_when_index_does_not_exist(self):
 
