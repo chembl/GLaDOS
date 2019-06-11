@@ -1,3 +1,8 @@
 chembl_activity:
   download:
     default: ['_metadata.activity_generated.short_data_validity_comment', '_metadata.activity_generated']
+  table:
+    default: ['_metadata.activity_generated.short_data_validity_comment', '_metadata.activity_generated',
+    '_metadata.assay_data.assay_cell_type']
+    additional: ['_metadata.assay_data.assay_organism', '_metadata.assay_data.assay_subcellular_fraction',
+    '_metadata.assay_data.assay_tissue' ]

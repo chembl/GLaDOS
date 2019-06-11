@@ -14,7 +14,7 @@ class ESPropsConfigurationGetterError(Exception):
 CACHE_TIME = 3600
 
 
-def get_config_for(index_name, prop_id):
+def get_config_for_prop(index_name, prop_id):
 
     cache_key = 'property_config-{index_name}-{prop_id}'.format(index_name=index_name, prop_id=prop_id)
     cache_response = cache.get(cache_key)
@@ -55,13 +55,22 @@ def get_config_for_props_list(index_name, prop_ids):
     configs = []
 
     for prop_id in prop_ids:
-        configs.append(get_config_for(index_name, prop_id))
+        configs.append(get_config_for_prop(index_name, prop_id))
 
     return configs
 
 
 def get_config_for_group(index_name, group_name):
 
+    groups_config = yaml.load(open(settings.PROPERTIES_GROUPS_FILE, 'r'), Loader=yaml.FullLoader)
+    if groups_config is None:
+        raise ESPropsConfigurationGetterError("There is no configuration for groups")
+
     index_mapping = resources_description.RESOURCES_BY_ALIAS_NAME.get(index_name)
     if index_mapping is None:
         raise ESPropsConfigurationGetterError("The index {} does not exist!".format(index_name))
+
+    index_groups = groups_config.get(index_name, {})
+    group_config = index_groups.get(group_name)
+    if group_config is None:
+        raise ESPropsConfigurationGetterError("The group {} does not exist!".format(group_name))

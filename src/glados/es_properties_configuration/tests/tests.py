@@ -11,6 +11,7 @@ import re
 class ConfigurationGetterTester(TestCase):
 
     CONFIG_TEST_FILE = os.path.join( settings.GLADOS_ROOT, 'es_properties_configuration/tests/data/test_override.yml')
+    GROUPS_TEST_FILE = os.path.join( settings.GLADOS_ROOT, 'es_properties_configuration/tests/data/test_groups.yml')
 
     def setUp(self):
 
@@ -28,7 +29,7 @@ class ConfigurationGetterTester(TestCase):
         prop_id = '_metadata.assay_data.assay_subcellular_fraction'
 
         try:
-            config_got = configuration_getter.get_config_for(index_name, prop_id)
+            config_got = configuration_getter.get_config_for_prop(index_name, prop_id)
             self.assertTrue(False, 'This should have thrown an exception for a non existing index!')
         except configuration_getter.ESPropsConfigurationGetterError:
             pass
@@ -39,7 +40,7 @@ class ConfigurationGetterTester(TestCase):
         prop_id = 'does_not_exist'
 
         try:
-            config_got = configuration_getter.get_config_for(index_name, prop_id)
+            config_got = configuration_getter.get_config_for_prop(index_name, prop_id)
             self.assertTrue(False, 'This should have thrown an exception for a non existing property!')
         except configuration_getter.ESPropsConfigurationGetterError:
             pass
@@ -49,7 +50,7 @@ class ConfigurationGetterTester(TestCase):
 
         index_name = 'chembl_activity'
         prop_id = '_metadata.assay_data.assay_subcellular_fraction'
-        config_got = configuration_getter.get_config_for(index_name, prop_id)
+        config_got = configuration_getter.get_config_for_prop(index_name, prop_id)
 
         self.assertEqual(config_got['index_name'], index_name)
         self.assertEqual(config_got['prop_id'], prop_id)
@@ -65,7 +66,7 @@ class ConfigurationGetterTester(TestCase):
 
         index_name = 'chembl_activity'
         prop_id = '_metadata.activity_generated.short_data_validity_comment'
-        config_got = configuration_getter.get_config_for(index_name, prop_id)
+        config_got = configuration_getter.get_config_for_prop(index_name, prop_id)
 
         property_config_must_be = override_config_must_be[index_name][prop_id]
         self.assertEqual(config_got['label'], property_config_must_be['label'],
@@ -123,15 +124,27 @@ class ConfigurationGetterTester(TestCase):
     # ------------------------------------------------------------------------------------------------------------------
     # Getting a group of properties
     # ------------------------------------------------------------------------------------------------------------------
-    def test_fails_to_get_group_when_index_does_not_exist(self):
+    @override_settings(PROPERTIES_GROUPS_FILE=GROUPS_TEST_FILE)
+    def test_gets_config_for_a_group_fails_when_index_does_not_exist(self):
 
-        pass
-        # index_name = 'does_not_exist'
-        # group_id = '_metadata.assay_data.assay_subcellular_fraction'
-        #
-        # try:
-        #     config_got = configuration_getter.get_config_for(index_name, prop_id)
-        #     self.assertTrue(False, 'This should have thrown an exception for a non existing index!')
-        # except configuration_getter.ESPropsConfigurationGetterError:
-        #     pass
+        index_name = 'does_not_exist'
+        group_name = 'download'
+
+        try:
+            configs_got = configuration_getter.get_config_for_group(index_name, group_name)
+            self.assertTrue(False, 'This should have thrown an exception for a non existing index!')
+        except configuration_getter.ESPropsConfigurationGetterError:
+            pass
+
+    @override_settings(PROPERTIES_GROUPS_FILE=GROUPS_TEST_FILE)
+    def test_gets_config_for_a_group_fails_when_group_does_not_exist(self):
+
+        index_name = 'chembl_activity'
+        group_name = 'does_not_exist'
+
+        try:
+            configs_got = configuration_getter.get_config_for_group(index_name, group_name)
+            self.assertTrue(False, 'This should have thrown an exception for a non existing group!')
+        except configuration_getter.ESPropsConfigurationGetterError:
+            pass
 
