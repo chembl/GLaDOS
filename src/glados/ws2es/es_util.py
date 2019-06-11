@@ -25,6 +25,10 @@ es_conn = None
 ########################################################################################################################
 
 
+def setup_connection_from_full_url(url):
+    global es_conn
+    es_conn = Elasticsearch([url])
+
 def setup_connection(host, port):
     global es_conn
     es_conn = Elasticsearch(hosts=[{'host': host, 'port': port,

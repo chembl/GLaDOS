@@ -14,16 +14,9 @@ class ConfigurationGetterTester(TestCase):
     def setUp(self):
 
         if settings.RUN_ENV == RunEnvs.TRAVIS:
-
-            host = re.sub(r'http(s)?://', '', settings.ELASTICSEARCH_EXTERNAL_URL)  # remove http part
-            host = re.sub(r':.*$', '', host)  # remove port part and afterwards
-            print('HOST: ', host)
-            es_util.setup_connection(host, 443)
-
+            es_util.setup_connection_from_full_url(settings.ELASTICSEARCH_EXTERNAL_URL)
         else:
-            host = re.sub(r'http(s)?://', '', settings.ELASTICSEARCH_HOST) # remove http part
-            host = re.sub(r':.*$', '', host) # remove port part and afterwards
-            es_util.setup_connection(host, 9200)
+            es_util.setup_connection_from_full_url(settings.ELASTICSEARCH_HOST)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Getting one property
