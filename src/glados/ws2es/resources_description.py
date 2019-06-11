@@ -6,6 +6,7 @@ import traceback
 import glados.ws2es.util as util
 import glados.ws2es.es_util as es_util
 import re
+from functools import lru_cache
 
 ########################################################################################################################
 
@@ -30,6 +31,19 @@ ALL_WS_RESOURCES = []
 ALL_WS_RESOURCES_NAMES = []
 CURRENT_INDEX_VERSION = '25'
 MAX_RES_NAME_LENGTH = 0
+
+
+@lru_cache(maxsize=64)
+def memoized_get_resource_mapping_from_es(idx_name):
+    mapping = es_util.get_index_mapping(idx_name)
+    path_to_properties = '{0}.properties'.format('_doc')
+    return util.get_js_path_from_dict(mapping, path_to_properties)
+
+
+@lru_cache(maxsize=64)
+def memoized_get_simplified_mapping_from_es(res_name, idx_name):
+    mapping = memoized_get_resource_mapping_from_es(idx_name)
+    return es_util.simplify_es_properties(res_name, mapping)
 
 
 class ResourceDescription(object):
@@ -87,13 +101,10 @@ class ResourceDescription(object):
             print('ERROR: Failed to create alias for {0}'.format(self.idx_alias), file=sys.stderr)
 
     def get_resource_mapping_from_es(self):
-        mapping = es_util.get_index_mapping(self.idx_name)
-        path_to_properties = '{0}.properties'.format('_doc')
-        return util.get_js_path_from_dict(mapping, path_to_properties)
+        return memoized_get_resource_mapping_from_es(self.idx_name)
 
     def get_simplified_mapping_from_es(self):
-        mapping = self.get_resource_mapping_from_es()
-        return es_util.simplify_es_properties(self.res_name, mapping)
+        return memoized_get_simplified_mapping_from_es(self.res_name, self.idx_name)
 
     def get_doc_by_id_from_es(self, doc_id):
         return es_util.get_doc_by_id(self.idx_name, '_doc', doc_id)
