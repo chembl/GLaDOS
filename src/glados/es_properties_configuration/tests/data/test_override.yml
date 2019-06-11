@@ -2,3 +2,9 @@ chembl_activity:
   '_metadata.activity_generated.short_data_validity_comment':
     label: 'My custom label'
     label_mini: 'My cstm lbl'
+chembl_molecule:
+  # This is a virtual property, property does not exist in the index, but it is based on an existing property,
+  #this can use a different parsing for example, trade names: they are synonyms which are of type trade_name
+  'trade_names':
+    prop_id: 'molecule_synonyms'
+    label: 'Trade Names'

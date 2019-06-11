@@ -27,8 +27,10 @@ def get_config_for_prop(index_name, prop_id):
 
     simplified_mapping = index_mapping.get_simplified_mapping_from_es()
     property_description = simplified_mapping.get(prop_id)
-    if property_description is None:
-        raise ESPropsConfigurationGetterError("The property {} does not exist!".format(prop_id))
+
+    found_in_es = property_description is not None
+    if not found_in_es:
+        property_description = {}
 
     # print('index_mapping: ', index_mapping)
     config = SummableDict({
@@ -39,12 +41,18 @@ def get_config_for_prop(index_name, prop_id):
     config += SummableDict(property_description)
 
     config_override = yaml.load(open(settings.PROPERTIES_CONFIG_OVERRIDE_FILE, 'r'), Loader=yaml.FullLoader)
+    found_in_override = False
     if config_override is not None:
         index_override = config_override.get(index_name)
         if index_override is not None:
             property_override = index_override.get(prop_id)
             if property_override is not None:
                 config += SummableDict(property_override)
+                found_in_override = True
+
+    if not found_in_es and not found_in_override:
+        raise ESPropsConfigurationGetterError("The property {} does not exist in elasticsearch or as virtual property"
+                                              .format(prop_id))
 
     cache.set(cache_key, config, CACHE_TIME)
     return config

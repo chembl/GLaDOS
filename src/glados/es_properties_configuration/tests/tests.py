@@ -74,6 +74,23 @@ class ConfigurationGetterTester(TestCase):
         self.assertEqual(config_got['label_mini'], property_config_must_be['label_mini'],
                          'The label mini was not overridden properly!')
 
+    @override_settings(PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE)
+    def test_gets_config_for_a_virtual_property(self):
+
+        override_config_must_be = yaml.load(open(settings.PROPERTIES_CONFIG_OVERRIDE_FILE, 'r'), Loader=yaml.FullLoader)
+
+        index_name = 'chembl_molecule'
+        prop_id = 'trade_names'
+        config_got = configuration_getter.get_config_for_prop(index_name, prop_id)
+
+        print('config_got: ')
+        print(config_got)
+        property_config_must_be = override_config_must_be[index_name][prop_id]
+        self.assertEqual(config_got['prop_id'], property_config_must_be['prop_id'],
+                         'The prop_id was not set up properly!')
+        self.assertEqual(config_got['label'], property_config_must_be['label'],
+                         'The label was not set up properly!')
+
     # ------------------------------------------------------------------------------------------------------------------
     # Getting a custom list of properties
     # ------------------------------------------------------------------------------------------------------------------
@@ -162,4 +179,17 @@ class ConfigurationGetterTester(TestCase):
             props_list_got = [c['prop_id'] for c in configs_got[sub_group]]
             self.assertTrue(props_list_got == props_list_must_be)
 
+    @override_settings(PROPERTIES_GROUPS_FILE=GROUPS_TEST_FILE)
+    def test_gets_config_for_a_group_with_default_and_additional_properties(self):
+
+        index_name = 'chembl_activity'
+        group_name = 'table'
+
+        configs_got = configuration_getter.get_config_for_group(index_name, group_name)
+        groups_must_be = yaml.load(open(settings.PROPERTIES_GROUPS_FILE, 'r'), Loader=yaml.FullLoader)
+        group_must_be = groups_must_be[index_name][group_name]
+
+        for sub_group, props_list_must_be in group_must_be.items():
+            props_list_got = [c['prop_id'] for c in configs_got[sub_group]]
+            self.assertTrue(props_list_got == props_list_must_be)
 
