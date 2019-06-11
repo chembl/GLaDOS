@@ -30,7 +30,7 @@ class ConfigurationGetterTester(TestCase):
 
         try:
             config_got = configuration_getter.get_config_for_prop(index_name, prop_id)
-            self.assertTrue(False, 'This should have thrown an exception for a non existing index!')
+            self.fail('This should have thrown an exception for a non existing index!')
         except configuration_getter.ESPropsConfigurationGetterError:
             pass
 
@@ -41,7 +41,7 @@ class ConfigurationGetterTester(TestCase):
 
         try:
             config_got = configuration_getter.get_config_for_prop(index_name, prop_id)
-            self.assertTrue(False, 'This should have thrown an exception for a non existing property!')
+            self.fail('This should have thrown an exception for a non existing property!')
         except configuration_getter.ESPropsConfigurationGetterError:
             pass
 
@@ -84,7 +84,7 @@ class ConfigurationGetterTester(TestCase):
 
         try:
             configuration_getter.get_config_for_props_list(index_name, props)
-            self.assertTrue(False, 'This should have thrown an exception for a non existing index!')
+            self.fail('This should have thrown an exception for a non existing index!')
         except configuration_getter.ESPropsConfigurationGetterError:
             pass
 
@@ -95,7 +95,7 @@ class ConfigurationGetterTester(TestCase):
 
         try:
             configuration_getter.get_config_for_props_list(index_name, props)
-            self.assertTrue(False, 'This should have thrown an exception for a non existing property!')
+            self.fail('This should have thrown an exception for a non existing property!')
         except configuration_getter.ESPropsConfigurationGetterError:
             pass
 
@@ -132,7 +132,7 @@ class ConfigurationGetterTester(TestCase):
 
         try:
             configs_got = configuration_getter.get_config_for_group(index_name, group_name)
-            self.assertTrue(False, 'This should have thrown an exception for a non existing index!')
+            self.fail('This should have thrown an exception for a non existing index!')
         except configuration_getter.ESPropsConfigurationGetterError:
             pass
 
@@ -144,7 +144,7 @@ class ConfigurationGetterTester(TestCase):
 
         try:
             configs_got = configuration_getter.get_config_for_group(index_name, group_name)
-            self.assertTrue(False, 'This should have thrown an exception for a non existing group!')
+            self.fail('This should have thrown an exception for a non existing group!')
         except configuration_getter.ESPropsConfigurationGetterError:
             pass
 
@@ -158,7 +158,6 @@ class ConfigurationGetterTester(TestCase):
         groups_must_be = yaml.load(open(settings.PROPERTIES_GROUPS_FILE, 'r'), Loader=yaml.FullLoader)
         group_must_be = groups_must_be[index_name][group_name]
 
-        print('group_must_be: ', group_must_be)
         for sub_group, props_list_must_be in group_must_be.items():
             props_list_got = [c['prop_id'] for c in configs_got[sub_group]]
             self.assertTrue(props_list_got == props_list_must_be)
