@@ -443,6 +443,10 @@ def _recursive_simplify_es_properties(cur_dict: dict, cur_prefix: str):
             if 'es_mapping_leaf' in value.keys():
                 simple_props[next_prefix] = simplify_single_mapping(value)
             else:
+                simple_props[next_prefix] = {
+                    'type': 'object',
+                    'aggregatable': False,
+                }
                 simple_props += _recursive_simplify_es_properties(value, next_prefix)
         elif value:
             simple_props[next_prefix] = value
