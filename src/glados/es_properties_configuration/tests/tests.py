@@ -5,18 +5,29 @@ from django.conf import settings
 from glados.settings import RunEnvs
 import os
 import yaml
-
+import re
 
 class ConfigurationGetterTester(TestCase):
 
     CONFIG_TEST_FILE = os.path.join( settings.GLADOS_ROOT, 'es_properties_configuration/tests/data/test_override.yml')
 
     def setUp(self):
-        if settings.RUN_ENV == RunEnvs.TRAVIS:
-            es_util.setup_connection('www.ebi.ac.uk/chembl/glados-es', 9200)
-        else:
-            es_util.setup_connection('wp-p1m-50.ebi.ac.uk', 9200)
 
+        if settings.RUN_ENV == RunEnvs.TRAVIS:
+
+            host = re.sub(r'http(s)?://', '', settings.ELASTICSEARCH_EXTERNAL_URL)  # remove http part
+            host = re.sub(r':.*$', '', host)  # remove port part and afterwards
+            print('HOST: ', host)
+            es_util.setup_connection(host, 443)
+
+        else:
+            host = re.sub(r'http(s)?://', '', settings.ELASTICSEARCH_HOST) # remove http part
+            host = re.sub(r':.*$', '', host) # remove port part and afterwards
+            es_util.setup_connection(host, 9200)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # Getting one property
+    # ------------------------------------------------------------------------------------------------------------------
     def test_fails_when_index_does_not_exist(self):
 
         index_name = 'does_not_exist'

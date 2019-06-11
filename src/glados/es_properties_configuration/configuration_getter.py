@@ -17,7 +17,6 @@ CACHE_TIME = 3600
 def get_config_for(index_name, prop_id):
 
     cache_key = 'property_config-{index_name}-{prop_id}'.format(index_name=index_name, prop_id=prop_id)
-    print('cache_key:', cache_key)
     cache_response = cache.get(cache_key)
     if cache_response is not None:
         return cache_response
@@ -44,6 +43,15 @@ def get_config_for(index_name, prop_id):
     if property_override is not None:
         config += SummableDict(property_override)
 
-    print('config: ', config)
     cache.set(cache_key, config, CACHE_TIME)
     return config
+
+
+def get_config_for_props_list(index_name, prop_ids):
+    pass
+
+def get_config_for_group(index_name, group_name):
+
+    index_mapping = resources_description.RESOURCES_BY_ALIAS_NAME.get(index_name)
+    if index_mapping is None:
+        raise ESPropsConfigurationGetterError("The index {} does not exist!".format(index_name))

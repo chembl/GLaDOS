@@ -1,0 +1,3 @@
+chembl_activity:
+  download:
+    default: ['_metadata.activity_generated.short_data_validity_comment', '_metadata.activity_generated']
