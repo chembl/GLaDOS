@@ -39,16 +39,26 @@ def get_config_for(index_name, prop_id):
     config += SummableDict(property_description)
 
     config_override = yaml.load(open(settings.PROPERTIES_CONFIG_OVERRIDE_FILE, 'r'), Loader=yaml.FullLoader)
-    property_override = config_override[index_name].get(prop_id)
-    if property_override is not None:
-        config += SummableDict(property_override)
+    if config_override is not None:
+        index_override = config_override.get(index_name)
+        if index_override is not None:
+            property_override = index_override.get(prop_id)
+            if property_override is not None:
+                config += SummableDict(property_override)
 
     cache.set(cache_key, config, CACHE_TIME)
     return config
 
 
 def get_config_for_props_list(index_name, prop_ids):
-    pass
+
+    configs = []
+
+    for prop_id in prop_ids:
+        configs.append(get_config_for(index_name, prop_id))
+
+    return configs
+
 
 def get_config_for_group(index_name, group_name):
 
