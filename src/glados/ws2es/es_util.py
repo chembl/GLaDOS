@@ -115,8 +115,7 @@ def get_index_mapping(es_index):
         print("FATAL ERROR: there is not an elastic search connection defined.", file=sys.stderr)
         traceback.print_exc(file=sys.stderr)
         sys.exit(1)
-    mappings_response = es_conn.indices.get(index=es_index)
-    return list(mappings_response.values())[0]['mappings']
+    return es_conn.indices.get_mapping(index=es_index)[es_index]['mappings']
 
 
 STOP_SCAN = False
