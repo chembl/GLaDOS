@@ -74,3 +74,11 @@ def get_config_for_group(index_name, group_name):
     group_config = index_groups.get(group_name)
     if group_config is None:
         raise ESPropsConfigurationGetterError("The group {} does not exist!".format(group_name))
+
+    configs = {}
+
+    for sub_group, props_list in group_config.items():
+        configs[sub_group] = get_config_for_props_list(index_name, props_list)
+
+    return configs
+

@@ -148,3 +148,19 @@ class ConfigurationGetterTester(TestCase):
         except configuration_getter.ESPropsConfigurationGetterError:
             pass
 
+    @override_settings(PROPERTIES_GROUPS_FILE=GROUPS_TEST_FILE)
+    def test_gets_config_for_a_group_with_only_default_properties(self):
+
+        index_name = 'chembl_activity'
+        group_name = 'download'
+
+        configs_got = configuration_getter.get_config_for_group(index_name, group_name)
+        groups_must_be = yaml.load(open(settings.PROPERTIES_GROUPS_FILE, 'r'), Loader=yaml.FullLoader)
+        group_must_be = groups_must_be[index_name][group_name]
+
+        print('group_must_be: ', group_must_be)
+        for sub_group, props_list_must_be in group_must_be.items():
+            props_list_got = [c['prop_id'] for c in configs_got[sub_group]]
+            self.assertTrue(props_list_got == props_list_must_be)
+
+
