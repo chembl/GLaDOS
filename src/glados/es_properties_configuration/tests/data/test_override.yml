@@ -16,6 +16,9 @@ chembl_molecule:
   # injected inside the _context object
   '_context.similarity':
     label: 'Similarity'
+    label_mini: 'Similarity'
+    type: 'double'
+    aggregatable: true
   # this will fail because it is based on a non existing property
   'trade_names_wrong':
     based_on: 'does_not_exist'

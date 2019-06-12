@@ -109,14 +109,17 @@ class ConfigurationGetterTester(TestCase):
     @override_settings(PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE)
     def test_gets_config_for_a_contextual_property(self):
 
-        override_config_must_be = yaml.load(open(settings.PROPERTIES_CONFIG_OVERRIDE_FILE, 'r'), Loader=yaml.FullLoader)
         index_name = 'chembl_molecule'
         prop_id = '_context.similarity'
         config_got = configuration_getter.get_config_for_prop(index_name, prop_id)
 
-        # print('config_got: ')
-        # print(config_got)
+        self.assertEqual(config_got['prop_id'], prop_id,
+                         'The prop_id was not set up properly!')
 
+        self.assertTrue(config_got['aggregatable'])
+        self.assertEqual(config_got['type'], 'double')
+        self.assertEqual(config_got['label'], 'Similarity')
+        self.assertEqual(config_got['label_mini'], 'Similarity')
 
     # ------------------------------------------------------------------------------------------------------------------
     # Getting a custom list of properties
