@@ -119,7 +119,10 @@ def get_config_for_group(index_name, group_name):
     configs = {}
 
     for sub_group, props_list in group_config.items():
-        configs[sub_group] = get_config_for_props_list(index_name, props_list)
+        if sub_group != '__default_sorting__':
+            configs[sub_group] = get_config_for_props_list(index_name, props_list)
+        else:
+            configs[sub_group] = props_list
 
     return configs
 

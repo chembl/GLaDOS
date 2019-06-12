@@ -235,3 +235,18 @@ class ConfigurationGetterTester(TestCase):
             props_list_got = [c['prop_id'] for c in configs_got[sub_group]]
             self.assertTrue(props_list_got == props_list_must_be)
 
+    @override_settings(PROPERTIES_GROUPS_FILE=GROUPS_TEST_FILE)
+    def test_gets_config_for_a_group_with_default_sorting(self):
+
+        index_name = 'chembl_molecule'
+        group_name = 'sorted_table'
+
+        configs_got = configuration_getter.get_config_for_group(index_name, group_name)
+        groups_must_be = yaml.load(open(settings.PROPERTIES_GROUPS_FILE, 'r'), Loader=yaml.FullLoader)
+        group_must_be = groups_must_be[index_name][group_name]
+
+        for sub_group, props_list_must_be in group_must_be.items():
+            if sub_group != '__default_sorting__':
+                props_list_got = [c['prop_id'] for c in configs_got[sub_group]]
+                self.assertTrue(props_list_got == props_list_must_be)
+
