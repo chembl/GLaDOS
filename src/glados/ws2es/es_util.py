@@ -431,7 +431,8 @@ def simplify_single_mapping(single_mapping):
     indexed = single_mapping.get('index', True)
     return {
         'type': DefaultMappings.SIMPLE_MAPPINGS_REVERSE[mapping_type],
-        'aggregatable': indexed and mapping_type in DefaultMappings.AGGREGATABLE_TYPES
+        'aggregatable': indexed and mapping_type in DefaultMappings.AGGREGATABLE_TYPES,
+        'sortable': indexed and mapping_type in DefaultMappings.AGGREGATABLE_TYPES
     }
 
 
@@ -446,6 +447,7 @@ def _recursive_simplify_es_properties(cur_dict: dict, cur_prefix: str):
                 simple_props[next_prefix] = {
                     'type': 'object',
                     'aggregatable': False,
+                    'sortable': False
                 }
                 simple_props += _recursive_simplify_es_properties(value, next_prefix)
         elif value:
