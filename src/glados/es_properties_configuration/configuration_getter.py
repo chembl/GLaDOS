@@ -25,34 +25,54 @@ def get_config_for_prop(index_name, prop_id):
     if index_mapping is None:
         raise ESPropsConfigurationGetterError("The index {} does not exist!".format(index_name))
 
+    # Search for description in Elasticsearch
     simplified_mapping = index_mapping.get_simplified_mapping_from_es()
-    property_description = simplified_mapping.get(prop_id)
+    es_property_description = simplified_mapping.get(prop_id)
 
-    found_in_es = property_description is not None
+    found_in_es = es_property_description is not None
     if not found_in_es:
-        property_description = {}
+        es_property_description = {}
 
-    # print('index_mapping: ', index_mapping)
-    config = SummableDict({
-        'index_name': index_name,
-        'prop_id': prop_id,
-    })
-
-    config += SummableDict(property_description)
-
+    # Search for description in override
     config_override = yaml.load(open(settings.PROPERTIES_CONFIG_OVERRIDE_FILE, 'r'), Loader=yaml.FullLoader)
     found_in_override = False
     if config_override is not None:
         index_override = config_override.get(index_name)
         if index_override is not None:
-            property_override = index_override.get(prop_id)
-            if property_override is not None:
-                config += SummableDict(property_override)
-                found_in_override = True
+            property_override_description = index_override.get(prop_id)
+            found_in_override = property_override_description is not None
 
+    config = {}
     if not found_in_es and not found_in_override:
         raise ESPropsConfigurationGetterError("The property {} does not exist in elasticsearch or as virtual property"
                                               .format(prop_id))
+
+    elif found_in_es and not found_in_override:
+
+        config = SummableDict({
+            'index_name': index_name,
+            'prop_id': prop_id,
+        })
+        config += SummableDict(es_property_description)
+
+    elif not found_in_es and found_in_override:
+        # this is a virtual property
+        config = SummableDict({
+            'index_name': index_name,
+            'prop_id': prop_id,
+        })
+
+        config += SummableDict(simplified_mapping.get(property_override_description['based_on'], {}))
+        config += property_override_description
+
+    elif found_in_es and found_in_override:
+        # this is a normal
+        config = SummableDict({
+            'index_name': index_name,
+            'prop_id': prop_id,
+        })
+        config += SummableDict(es_property_description)
+        config += property_override_description
 
     cache.set(cache_key, config, CACHE_TIME)
     return config

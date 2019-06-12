@@ -86,10 +86,15 @@ class ConfigurationGetterTester(TestCase):
         print('config_got: ')
         print(config_got)
         property_config_must_be = override_config_must_be[index_name][prop_id]
-        self.assertEqual(config_got['prop_id'], property_config_must_be['prop_id'],
+        print('property_config_must_be: ', property_config_must_be)
+        self.assertEqual(config_got['prop_id'], prop_id,
                          'The prop_id was not set up properly!')
+        self.assertEqual(config_got['based_on'], property_config_must_be['based_on'],
+                         'The based_on was not set up properly!')
         self.assertEqual(config_got['label'], property_config_must_be['label'],
                          'The label was not set up properly!')
+        # print('aggregatable: ', config_got['aggregatable'])
+        self.assertFalse(config_got['aggregatable'], 'This property should not be aggregatable')
 
     # ------------------------------------------------------------------------------------------------------------------
     # Getting a custom list of properties
