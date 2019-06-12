@@ -83,8 +83,6 @@ class ConfigurationGetterTester(TestCase):
         prop_id = 'trade_names'
         config_got = configuration_getter.get_config_for_prop(index_name, prop_id)
 
-        print('config_got: ')
-        print(config_got)
         property_config_must_be = override_config_must_be[index_name][prop_id]
         print('property_config_must_be: ', property_config_must_be)
         self.assertEqual(config_got['prop_id'], prop_id,
@@ -95,6 +93,30 @@ class ConfigurationGetterTester(TestCase):
                          'The label was not set up properly!')
         # print('aggregatable: ', config_got['aggregatable'])
         self.assertFalse(config_got['aggregatable'], 'This property should not be aggregatable')
+
+    @override_settings(PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE)
+    def test_gets_config_fails_for_a_virtual_property_based_on_non_existing_prop(self):
+
+        index_name = 'chembl_molecule'
+        prop_id = 'trade_names_wrong'
+
+        try:
+            config_got = configuration_getter.get_config_for_prop(index_name, prop_id)
+            self.fail('This should have thrown an exception for a non existing property!')
+        except configuration_getter.ESPropsConfigurationGetterError:
+            pass
+
+    @override_settings(PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE)
+    def test_gets_config_for_a_contextual_property(self):
+
+        override_config_must_be = yaml.load(open(settings.PROPERTIES_CONFIG_OVERRIDE_FILE, 'r'), Loader=yaml.FullLoader)
+        index_name = 'chembl_molecule'
+        prop_id = '_context.similarity'
+        config_got = configuration_getter.get_config_for_prop(index_name, prop_id)
+
+        # print('config_got: ')
+        # print(config_got)
+
 
     # ------------------------------------------------------------------------------------------------------------------
     # Getting a custom list of properties
