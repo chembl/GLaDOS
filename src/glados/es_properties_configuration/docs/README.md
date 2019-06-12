@@ -13,9 +13,8 @@ Given an **index name** and a **property id**, it returns the following informat
 - The full label.
 - A short version of the label.
 
-## Getting the parsing function of one property
+# Parsing a property
 
-Given an **index name** and a **property id**, it returns the function used to parse the value of an instance for the download file. 
-
-- The parsing function, if there is one, to parse the value in a downloaded file.
+It parses the returned value from eleasticsearch given the functions defined in columns_parser.py, if there is no 
+parsing function it will return the original value. 
 
