@@ -69,8 +69,13 @@ def get_config_for_prop(index_name, prop_id):
                 raise ESPropsConfigurationGetterError(
                     'The virtual property {prop_id} is based on {based_on} which does not exist in elasticsearch '
                     'index {index_name}'.format(prop_id=prop_id, based_on=based_on, index_name=index_name))
-
             config += SummableDict(base_description)
+        else:
+            if property_override_description.get('aggregatable') is None or \
+                            property_override_description.get('type') is None:
+                raise ESPropsConfigurationGetterError('A contextual property must define the type and if it is '
+                                                      'aggregatable')
+
         config += property_override_description
 
     elif found_in_es and found_in_override:

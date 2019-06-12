@@ -107,6 +107,18 @@ class ConfigurationGetterTester(TestCase):
             pass
 
     @override_settings(PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE)
+    def test_makes_sure_config_for_a_contextual_property_is_correct(self):
+
+        index_name = 'chembl_molecule'
+        prop_id = '_context.similarity_wrong'
+
+        try:
+            config_got = configuration_getter.get_config_for_prop(index_name, prop_id)
+            self.fail('This should have thrown an exception for a bad configuration!')
+        except configuration_getter.ESPropsConfigurationGetterError:
+            pass
+
+    @override_settings(PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE)
     def test_gets_config_for_a_contextual_property(self):
 
         index_name = 'chembl_molecule'
