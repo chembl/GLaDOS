@@ -3,8 +3,6 @@ from glados.utils.dot_notation_getter import DotNotationGetter
 
 
 class DotNotationGetterTester(TestCase):
-    """This class allows to obtain proterties in a dictionary using a string with dots, such as
-    '_metadata.assay_data.assay_subcellular_fraction'"""
 
     test_dict = {
         'brand': 'Ford',

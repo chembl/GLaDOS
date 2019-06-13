@@ -1,4 +1,6 @@
 class DotNotationGetter:
+    """This class allows to obtain proterties in a dictionary using a string with dots, such as
+        '_metadata.assay_data.assay_subcellular_fraction'"""
     DEFAULT_NULL_LABEL = ''
 
     def __init__(self, obj):
