@@ -84,6 +84,16 @@ if not os.path.exists(SSSEARCH_RESULTS_DIR):
     print("SSSearch results dir ({}) didn't exist, I will create it".format(SSSEARCH_RESULTS_DIR))
     os.mkdir(SSSEARCH_RESULTS_DIR)
 
+PROPERTIES_CONFIG_OVERRIDE_FILE = run_config.get('properties_config_dir')
+if PROPERTIES_CONFIG_OVERRIDE_FILE is None:
+    PROPERTIES_CONFIG_OVERRIDE_FILE = os.path.join(GLADOS_ROOT, 'es_properties_configuration/config/override.yml')
+print('PROPERTIES_CONFIG_OVERRIDE_FILE: ', PROPERTIES_CONFIG_OVERRIDE_FILE)
+
+PROPERTIES_GROUPS_FILE = run_config.get('properties_config_dir')
+if PROPERTIES_GROUPS_FILE is None:
+    PROPERTIES_GROUPS_FILE = os.path.join(GLADOS_ROOT, 'es_properties_configuration/config/groups.yml')
+print('PROPERTIES_GROUPS_FILE: ', PROPERTIES_GROUPS_FILE)
+
 FILTER_QUERY_MAX_CLAUSES = run_config.get('filter_query_max_clauses')
 if FILTER_QUERY_MAX_CLAUSES is None:
     raise GladosSettingsError("You must tell me the filter_query_max_clauses")

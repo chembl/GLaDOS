@@ -1,0 +1,30 @@
+chembl_activity:
+  '_metadata.activity_generated.short_data_validity_comment':
+    label: 'My custom label'
+    label_mini: 'My cstm lbl'
+chembl_molecule:
+  # This is a virtual property, property does not exist in the index, but it is based on an existing property,
+  #this can use a different parsing for example, trade names: they are synonyms which are of type trade_name,
+  # based_on means on which property in elasticsearch is based on
+  'trade_names':
+    based_on: 'molecule_synonyms'
+    label: 'Trade Names'
+  # this will fail because it is based on a non existing property
+  'trade_names_wrong':
+    based_on: 'does_not_exist'
+    label: 'Trade Names'
+  # Another type of a virtual property is a contextual property. Such as the similarity. The similarity would be the
+  # similarity score of a compound after running a search, the value of this property depends on the context (the
+  # results of the search). This is a virtual property, but it is not based on any property of elasticsearch.
+  # Here, the id is '_context.similarity' because when loading the results of a search this properties will be
+  # injected inside the _context object
+  '_context.similarity':
+    label: 'Similarity'
+    label_mini: 'Similarity'
+    type: 'double'
+    aggregatable: false
+    sortable: true
+  # This will fail because it is a contextual property but doesn't define a type and if it is aggregatable.
+  '_context.similarity_wrong':
+    label: 'Similarity'
+    label_mini: 'Similarity'

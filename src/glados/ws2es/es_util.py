@@ -15,7 +15,7 @@ import time
 import pprint
 import math
 from functools import lru_cache
-from glados.ws2es.util import SharedThreadPool
+from glados.ws2es.util import SharedThreadPool, get_labels_from_property_name
 
 __author__ = 'jfmosquera@ebi.ac.uk'
 
@@ -23,6 +23,11 @@ __author__ = 'jfmosquera@ebi.ac.uk'
 es_conn = None
 
 ########################################################################################################################
+
+
+def setup_connection_from_full_url(url):
+    global es_conn
+    es_conn = Elasticsearch([url])
 
 
 def setup_connection(host, port):
@@ -111,8 +116,7 @@ def get_index_mapping(es_index):
         print("FATAL ERROR: there is not an elastic search connection defined.", file=sys.stderr)
         traceback.print_exc(file=sys.stderr)
         sys.exit(1)
-    mappings_response = es_conn.indices.get(index=es_index)
-    return list(mappings_response.values())[0]['mappings']
+    return es_conn.indices.get_mapping(index=es_index)[es_index]['mappings']
 
 
 STOP_SCAN = False
@@ -181,7 +185,7 @@ class ESBulkSubmitter(Thread):
         self.submission_count = 0
         self.submission_completed_count = 0
         self.stop_submission = False
-        self.submission_pb = progress_bar_handler.get_new_progressbar('ES-bulk-submitter', 1)
+        self.submission_pb = None
         self.max_docs_per_request = 1000
         self.complete_futures = False
         signal_handler.add_termination_handler(self.stop_submitter)
@@ -258,6 +262,7 @@ class ESBulkSubmitter(Thread):
         super().join(timeout)
 
     def run(self):
+        self.submission_pb = progress_bar_handler.get_new_progressbar('ES-bulk-submitter', 1)
         self.submission_pool.start()
         cur_low_counts = 0
         while not self.stop_submission:
@@ -321,7 +326,7 @@ class ESBulkSubmitter(Thread):
 
 
 bulk_submitter = ESBulkSubmitter()
-bulk_submitter.start()
+# bulk_submitter.start()
 
 
 def index_doc_bulk(idx_name, doc_id, dict_doc, logger=None):
@@ -426,7 +431,8 @@ def simplify_single_mapping(single_mapping):
     indexed = single_mapping.get('index', True)
     return {
         'type': DefaultMappings.SIMPLE_MAPPINGS_REVERSE[mapping_type],
-        'aggregatable': indexed and mapping_type in DefaultMappings.AGGREGATABLE_TYPES
+        'aggregatable': indexed and mapping_type in DefaultMappings.AGGREGATABLE_TYPES,
+        'sortable': indexed and mapping_type in DefaultMappings.AGGREGATABLE_TYPES
     }
 
 
@@ -438,15 +444,28 @@ def _recursive_simplify_es_properties(cur_dict: dict, cur_prefix: str):
             if 'es_mapping_leaf' in value.keys():
                 simple_props[next_prefix] = simplify_single_mapping(value)
             else:
+                simple_props[next_prefix] = {
+                    'type': 'object',
+                    'aggregatable': False,
+                    'sortable': False
+                }
                 simple_props += _recursive_simplify_es_properties(value, next_prefix)
         elif value:
             simple_props[next_prefix] = value
+
     return simple_props
 
 
-def simplify_es_properties(mappings_dict: dict):
+def simplify_es_properties(res_name, mappings_dict: dict):
     mappings_dict_no_props = remove_es_mapping_properties_level(mappings_dict)
-    return _recursive_simplify_es_properties(mappings_dict_no_props, '')
+    simplified_props = _recursive_simplify_es_properties(mappings_dict_no_props, '')
+
+    for property_i, desc in simplified_props.items():
+        label, label_mini = get_labels_from_property_name(res_name, property_i)
+        desc['label'] = label
+        desc['label_mini'] = label_mini
+
+    return simplified_props
 
 
 class DefaultMappings(object):

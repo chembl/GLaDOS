@@ -1,4 +1,4 @@
-import unittest
+from django.test import TestCase
 from glados.models import DownloadJob, SSSearchJob
 from glados.utils import manage_downloads, manage_saved_searches
 from datetime import datetime, timezone, timedelta
@@ -8,7 +8,7 @@ from glados.api.chembl.dynamic_downloads import downloads_manager
 from glados.api.chembl.sssearch import search_manager
 
 
-class UtilsTester(unittest.TestCase):
+class UtilsTester(TestCase):
 
     def setUp(self):
         print('Running Test: {0}'.format(self._testMethodName))
@@ -135,6 +135,7 @@ class UtilsTester(unittest.TestCase):
                 job_id = file_name.split('.')[0]
                 owner_job_count = SSSearchJob.objects.filter(search_id=job_id).count()
                 self.assertTrue(owner_job_count == 1, 'There were orphan search results files left!')
+
 
 def touch_download_file(job_id):
 
