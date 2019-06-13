@@ -22,7 +22,8 @@ chembl_molecule:
     label: 'Similarity'
     label_mini: 'Similarity'
     type: 'double'
-    aggregatable: true
+    aggregatable: false
+    sortable: true
   # This will fail because it is a contextual property but doesn't define a type and if it is aggregatable.
   '_context.similarity_wrong':
     label: 'Similarity'

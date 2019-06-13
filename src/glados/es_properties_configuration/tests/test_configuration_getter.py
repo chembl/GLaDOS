@@ -125,7 +125,8 @@ class ConfigurationGetterTester(TestCase):
         self.assertEqual(config_got['prop_id'], prop_id,
                          'The prop_id was not set up properly!')
 
-        self.assertTrue(config_got['aggregatable'])
+        self.assertFalse(config_got['aggregatable'])
+        self.assertTrue(config_got['sortable'])
         self.assertEqual(config_got['type'], 'double')
         self.assertEqual(config_got['label'], 'Similarity')
         self.assertEqual(config_got['label_mini'], 'Similarity')

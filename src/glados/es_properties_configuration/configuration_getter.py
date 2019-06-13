@@ -72,9 +72,10 @@ def get_config_for_prop(index_name, prop_id):
             config += SummableDict(base_description)
         else:
             if property_override_description.get('aggregatable') is None or \
-                            property_override_description.get('type') is None:
+                            property_override_description.get('type') is None or \
+                            property_override_description.get('sortable') is None:
                 raise ESPropsConfigurationGetterError('A contextual property must define the type and if it is '
-                                                      'aggregatable')
+                                                      'aggregatable and sortable')
 
         config += property_override_description
 
