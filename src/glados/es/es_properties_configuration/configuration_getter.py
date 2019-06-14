@@ -1,5 +1,5 @@
-import glados.ws2es.resources_description as resources_description
-from glados.ws2es.util import SummableDict
+import glados.es.ws2es.resources_description as resources_description
+from glados.es.ws2es.util import SummableDict
 import yaml
 from django.conf import settings
 from django.core.cache import cache

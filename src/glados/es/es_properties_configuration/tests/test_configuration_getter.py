@@ -1,6 +1,6 @@
 from django.test import TestCase, override_settings
 from glados.es.es_properties_configuration import configuration_getter
-import glados.ws2es.es_util as es_util
+import glados.es.ws2es.es_util as es_util
 from django.conf import settings
 from glados.settings import RunEnvs
 import os
