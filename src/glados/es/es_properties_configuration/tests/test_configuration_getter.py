@@ -1,5 +1,5 @@
 from django.test import TestCase, override_settings
-from glados.es_properties_configuration import configuration_getter
+from glados.es.es_properties_configuration import configuration_getter
 import glados.ws2es.es_util as es_util
 from django.conf import settings
 from glados.settings import RunEnvs
@@ -9,8 +9,8 @@ import yaml
 
 class ConfigurationGetterTester(TestCase):
 
-    CONFIG_TEST_FILE = os.path.join( settings.GLADOS_ROOT, 'es_properties_configuration/tests/data/test_override.yml')
-    GROUPS_TEST_FILE = os.path.join( settings.GLADOS_ROOT, 'es_properties_configuration/tests/data/test_groups.yml')
+    CONFIG_TEST_FILE = os.path.join( settings.GLADOS_ROOT, 'es/es_properties_configuration/tests/data/test_override.yml')
+    GROUPS_TEST_FILE = os.path.join( settings.GLADOS_ROOT, 'es/es_properties_configuration/tests/data/test_groups.yml')
 
     def setUp(self):
 

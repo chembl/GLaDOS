@@ -1,5 +1,5 @@
 from django.test import TestCase
-from glados.es_properties_configuration import columns_parser
+from glados.es.es_properties_configuration import columns_parser
 
 
 class ColumnsParserTester(TestCase):
