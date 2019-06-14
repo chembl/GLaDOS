@@ -282,6 +282,11 @@ def generate_download_file(download_id):
         download_job.save()
 
         if desired_format in ['csv', 'tsv']:
+            print('GOING TO WRITE CSV FILE')
+            print('cols_to_download')
+            print(json.dumps(cols_to_download))
+            print('source:')
+            print(source)
             file_size = write_csv_or_tsv_file(scanner, download_job, cols_to_download, index_name, context_id,
                                               id_property, desired_format)
         elif desired_format == 'sdf':
