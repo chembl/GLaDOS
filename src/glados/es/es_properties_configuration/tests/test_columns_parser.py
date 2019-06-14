@@ -4,6 +4,7 @@ from glados.es.es_properties_configuration import columns_parser
 
 class ColumnsParserTester(TestCase):
     def test_parses_one_property(self):
+
         original_value = [
             {
                 'synonyms': 'Carbilev',
