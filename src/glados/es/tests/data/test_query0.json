@@ -1,0 +1,65 @@
+{
+    "bool": {
+        "must": {
+            "bool": {
+                "boost": 1,
+                "must": {
+                    "bool": {
+                        "should": [
+                            {
+                                "multi_match": {
+                                    "boost": 10,
+                                    "minimum_should_match": "100%",
+                                    "fuzziness": 0,
+                                    "query": "Dopamine",
+                                    "type": "most_fields",
+                                    "fields": [
+                                        "*.std_analyzed^1.6",
+                                        "*.eng_analyzed^0.8",
+                                        "*.ws_analyzed^1.4",
+                                        "*.keyword^2",
+                                        "*.lower_case_keyword^1.5",
+                                        "*.alphanumeric_lowercase_keyword^1.3"
+                                    ]
+                                }
+                            },
+                            {
+                                "multi_match": {
+                                    "boost": 2,
+                                    "minimum_should_match": "100%",
+                                    "fuzziness": 0,
+                                    "query": "Dopamine",
+                                    "type": "best_fields",
+                                    "fields": [
+                                        "*.std_analyzed^1.6",
+                                        "*.eng_analyzed^0.8",
+                                        "*.ws_analyzed^1.4",
+                                        "*.keyword^2",
+                                        "*.lower_case_keyword^1.5",
+                                        "*.alphanumeric_lowercase_keyword^1.3"
+                                    ]
+                                }
+                            },
+                            {
+                                "multi_match": {
+                                    "fuzziness": 0,
+                                    "boost": 10,
+                                    "query": "Dopamine",
+                                    "type": "most_fields",
+                                    "fields": [
+                                        "*.entity_id^2",
+                                        "*.id_reference^1.5",
+                                        "*.chembl_id^2",
+                                        "*.chembl_id_reference^1.5"
+                                    ]
+                                }
+                            }
+                        ],
+                        "must": []
+                    }
+                }
+            }
+        },
+        "filter": []
+    }
+}
