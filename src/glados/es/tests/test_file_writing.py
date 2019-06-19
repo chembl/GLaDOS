@@ -51,10 +51,6 @@ class FileWriterTester(TestCase):
 
         test_query = json.loads(open('src/glados/es/tests/data/test_query0.json', 'r').read())
 
-        print('test_downloads_and_writes_csv_file')
-        print('test_query')
-        print(test_query)
-
         filename = 'test' + str(int(round(time.time() * 1000)))
         out_file_path = file_writer.write_separated_values_file(desired_format=file_writer.OutputFormats.CSV,
                                                                 index_name=test_index_name, query=test_query,
@@ -67,5 +63,26 @@ class FileWriterTester(TestCase):
             self.assertEqual(line_0, '"ChEMBL ID";"Name"\n', 'Header line is malformed!')
             line_1 = lines_got[1]
             self.assertEqual(line_1, '"CHEMBL59";"DOPAMINE"\n', 'Line is malformed!')
+
+    def test_downloads_and_writes_csv_file_parsing_required(self):
+        test_columns_to_download = [{'label': 'ChEMBL ID', 'property_name': 'molecule_chembl_id'},
+                                    {'label': 'Synonyms', 'property_name': 'molecule_synonyms'}]
+        test_index_name = 'chembl_molecule'
+
+        test_query = json.loads(open('src/glados/es/tests/data/test_query0.json', 'r').read())
+
+        filename = 'test' + str(int(round(time.time() * 1000)))
+        out_file_path = file_writer.write_separated_values_file(desired_format=file_writer.OutputFormats.CSV,
+                                                                index_name=test_index_name, query=test_query,
+                                                                columns_to_download=test_columns_to_download,
+                                                                base_file_name=filename)
+
+        with gzip.open(out_file_path, 'rt', encoding='utf-16-le') as file_got:
+            lines_got = file_got.readlines()
+            line_0 = lines_got[0]
+            self.assertEqual(line_0, '"ChEMBL ID";"Synonyms"\n', 'Header line is malformed!')
+            line_1 = lines_got[1]
+            self.assertEqual(line_1, '"CHEMBL59";"Carbilev|DOPAMINE|Dopamine|Intropin|Parcopa|Sinemet"\n',
+                             'Line is malformed!')
 
 

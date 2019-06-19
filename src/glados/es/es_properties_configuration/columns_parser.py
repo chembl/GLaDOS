@@ -2,7 +2,9 @@ def parse_synonyms(raw_synonyms):
     true_synonyms = set()
     for raw_syn in raw_synonyms:
         true_synonyms.add(raw_syn['synonyms'])
-    return '|'.join(true_synonyms)
+    sorted_synonyms = list(true_synonyms)
+    sorted_synonyms.sort()
+    return '|'.join(sorted_synonyms)
 
 
 def parse_target_uniprot_accession(raw_components):
