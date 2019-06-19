@@ -51,6 +51,6 @@ class ColumnsParserTester(TestCase):
         index_name = 'chembl_molecule'
         property_name = 'molecule_synonyms'
 
-        parsed_value_got = columns_parser.parse_property(original_value, index_name, property_name)
+        parsed_value_got = columns_parser.parse(original_value, index_name, property_name)
         parsed_value_must_be = columns_parser.parse_synonyms(original_value)
         self.assertEqual(parsed_value_got, parsed_value_must_be, 'A value was not parser correctly.')

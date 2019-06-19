@@ -39,7 +39,7 @@ PARSING_FUNCTIONS = {
 }
 
 
-def parse_property(original_value, index_name, property_name):
+def parse(original_value, index_name, property_name):
 
     functions_for_index = PARSING_FUNCTIONS.get(index_name)
 

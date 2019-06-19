@@ -43,7 +43,7 @@ def write_separated_values_file(desired_format, index_name, query, columns_to_do
         dot_notation_getter = DotNotationGetter(doc_source)
         own_properties_to_get = [col['property_name'] for col in columns_to_download]
 
-        own_values = [columns_parser.parse_property(dot_notation_getter.get_from_string(prop_name), index_name, prop_name)
+        own_values = [columns_parser.parse(dot_notation_getter.get_from_string(prop_name), index_name, prop_name)
                       for prop_name in own_properties_to_get]
 
         print('own_values')
