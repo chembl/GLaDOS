@@ -1,7 +1,8 @@
 from django.test import TestCase
 from glados.es import file_writer
 import json
-from django.conf import settings
+import time
+import gzip
 
 
 class FileWriterTester(TestCase):
@@ -25,7 +26,8 @@ class FileWriterTester(TestCase):
             file_writer.write_separated_values_file(desired_format='XLSX',
                                                     index_name=test_index_name,
                                                     query=test_query,
-                                                    columns_to_download=test_columns_to_download)
+                                                    columns_to_download=test_columns_to_download,
+                                                    base_file_name='test' + str(int(round(time.time() * 1000))))
 
     def test_fails_when_index_name_is_not_provided(self):
         test_columns_to_download = [{'label': 'ChEMBL ID', 'property_name': 'molecule_chembl_id'},
@@ -39,7 +41,8 @@ class FileWriterTester(TestCase):
             file_writer.write_separated_values_file(desired_format=file_writer.OutputFormats.CSV,
                                                     index_name=test_index_name,
                                                     query=test_query,
-                                                    columns_to_download=test_columns_to_download)
+                                                    columns_to_download=test_columns_to_download,
+                                                    base_file_name='test' + str(int(round(time.time() * 1000))))
 
     def test_downloads_and_writes_csv_file_no_parsing_required(self):
         test_columns_to_download = [{'label': 'ChEMBL ID', 'property_name': 'molecule_chembl_id'},
@@ -52,6 +55,17 @@ class FileWriterTester(TestCase):
         print('test_query')
         print(test_query)
 
-        file_writer.write_separated_values_file(desired_format=file_writer.OutputFormats.CSV,
-                                                index_name=test_index_name, query=test_query,
-                                                columns_to_download=test_columns_to_download)
+        filename = 'test' + str(int(round(time.time() * 1000)))
+        out_file_path = file_writer.write_separated_values_file(desired_format=file_writer.OutputFormats.CSV,
+                                                                index_name=test_index_name, query=test_query,
+                                                                columns_to_download=test_columns_to_download,
+                                                                base_file_name=filename)
+
+        with gzip.open(out_file_path, 'rt', encoding='utf-16-le') as file_got:
+            lines_got = file_got.readlines()
+            line_0 = lines_got[0]
+            self.assertEqual(line_0, '"ChEMBL ID";"Name"\n', 'Header line is malformed!')
+            line_1 = lines_got[1]
+            self.assertEqual(line_1, '"CHEMBL59";"DOPAMINE"\n', 'Line is malformed!')
+
+
