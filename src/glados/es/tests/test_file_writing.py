@@ -89,8 +89,8 @@ class FileWriterTester(TestCase):
         test_columns_to_download = [{'label': 'ChEMBL ID', 'property_name': 'molecule_chembl_id'},
                                     {'label': 'Synonyms', 'property_name': 'molecule_synonyms'}]
         test_index_name = 'chembl_molecule'
-
         test_query = json.loads(open('src/glados/es/tests/data/test_query0.json', 'r').read())
+        test_contextual_columns = [{'label': 'Similarity', 'property_name': 'similarity'}]
 
         test_context = {
             'ChEMBL59': {
@@ -105,9 +105,54 @@ class FileWriterTester(TestCase):
             out_file_path = file_writer.write_separated_values_file(desired_format=file_writer.OutputFormats.CSV,
                                                                     index_name=test_index_name, query=test_query,
                                                                     columns_to_download=test_columns_to_download,
-                                                                    base_file_name=filename, context=test_context)
+                                                                    base_file_name=filename, context=test_context,
+                                                                    contextual_columns=test_contextual_columns)
 
+    def test_fails_with_context_but_no_contextual_columns(self):
+        test_columns_to_download = [{'label': 'ChEMBL ID', 'property_name': 'molecule_chembl_id'},
+                                    {'label': 'Synonyms', 'property_name': 'molecule_synonyms'}]
+        test_index_name = 'chembl_molecule'
+        test_query = json.loads(open('src/glados/es/tests/data/test_query0.json', 'r').read())
+        id_property = 'molecule_chembl_id'
+
+        test_context = {
+            'ChEMBL59': {
+                'molecule_chembl_id': 'ChEMBL59',
+                'similarity': 100.0
+            }
+        }
+
+        filename = 'test' + str(int(round(time.time() * 1000)))
+        with self.assertRaises(file_writer.FileWriterError,
+                               msg='It should raise an error when the conexts is given but no contextual columns '
+                                   'description'):
+            out_file_path = file_writer.write_separated_values_file(desired_format=file_writer.OutputFormats.CSV,
+                                                                    index_name=test_index_name, query=test_query,
+                                                                    columns_to_download=test_columns_to_download,
+                                                                    base_file_name=filename, context=test_context,
+                                                                    id_property=id_property)
+
+    def test_writes_csv_files_with_context(self):
         return
+        test_columns_to_download = [{'label': 'ChEMBL ID', 'property_name': 'molecule_chembl_id'},
+                                    {'label': 'Synonyms', 'property_name': 'molecule_synonyms'}]
+        test_index_name = 'chembl_molecule'
+
+        test_query = json.loads(open('src/glados/es/tests/data/test_query0.json', 'r').read())
+
+        test_context = {
+            'ChEMBL59': {
+                'molecule_chembl_id': 'ChEMBL59',
+                'similarity': 100.0
+            }
+        }
+
+        filename = 'test' + str(int(round(time.time() * 1000)))
+        out_file_path = file_writer.write_separated_values_file(desired_format=file_writer.OutputFormats.CSV,
+                                                                index_name=test_index_name, query=test_query,
+                                                                columns_to_download=test_columns_to_download,
+                                                                base_file_name=filename, context=test_context)
+
         with gzip.open(out_file_path, 'rt', encoding='utf-16-le') as file_got:
             lines_got = file_got.readlines()
             line_0 = lines_got[0]

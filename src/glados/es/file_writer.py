@@ -31,7 +31,8 @@ def format_cell(original_value):
 
 
 def write_separated_values_file(desired_format, index_name, query, columns_to_download, base_file_name,
-                                output_dir=settings.DYNAMIC_DOWNLOADS_DIR, context=None, id_property=None):
+                                output_dir=settings.DYNAMIC_DOWNLOADS_DIR, context=None, id_property=None,
+                                contextual_columns=None):
     print('Writing file!')
 
     if desired_format not in OutputFormats:
@@ -43,6 +44,8 @@ def write_separated_values_file(desired_format, index_name, query, columns_to_do
     if context is not None:
         if id_property is None:
             raise FileWriterError('When providing context, an id property must be given in order to join the rows')
+        if contextual_columns is None:
+            raise FileWriterError('When providing context, an contextual column description must be given')
 
     if desired_format is OutputFormats.CSV:
         separator = ';'
