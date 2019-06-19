@@ -36,7 +36,7 @@ class FileWriterTester(TestCase):
 
         with self.assertRaises(file_writer.FileWriterError,
                                msg='It should raise an error when the index name is not given'):
-            file_writer.write_separated_values_file(desired_format=file_writer.OUTPUT_FORMATS['CSV'],
+            file_writer.write_separated_values_file(desired_format=file_writer.OutputFormats.CSV,
                                                     index_name=test_index_name,
                                                     query=test_query,
                                                     columns_to_download=test_columns_to_download)
@@ -52,6 +52,6 @@ class FileWriterTester(TestCase):
         print('test_query')
         print(test_query)
 
-        file_writer.write_separated_values_file(desired_format=file_writer.OUTPUT_FORMATS['CSV'],
+        file_writer.write_separated_values_file(desired_format=file_writer.OutputFormats.CSV,
                                                 index_name=test_index_name, query=test_query,
                                                 columns_to_download=test_columns_to_download)

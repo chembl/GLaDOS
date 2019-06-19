@@ -2,11 +2,12 @@ from elasticsearch_dsl.connections import connections
 from elasticsearch.helpers import scan
 from glados.utils.dot_notation_getter import DotNotationGetter
 from glados.es.es_properties_configuration import columns_parser
+from enum import Enum
 
-OUTPUT_FORMATS = {
-    'CSV': 'CSV',
-    'TSV': 'TSV'
-}
+
+class OutputFormats(Enum):
+    CSV = 'CSV'
+    TSV = 'TSV'
 
 
 class FileWriterError(Exception):
@@ -21,7 +22,7 @@ def get_search_source(columns_to_download):
 def write_separated_values_file(desired_format, index_name, query, columns_to_download):
     print('Writing file!')
 
-    if desired_format not in OUTPUT_FORMATS.keys():
+    if desired_format not in OutputFormats:
         raise FileWriterError('The format {} is not supported'.format(desired_format))
 
     if index_name is None:
