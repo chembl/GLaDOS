@@ -1,0 +1,19 @@
+{
+  "bool": {
+    "filter": [
+      [
+        {
+          "bool": {
+            "should": [
+              {
+                "term": {
+                  "molecule_type": "Enzyme"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    ]
+  }
+}

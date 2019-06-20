@@ -162,3 +162,28 @@ class FileWriterTester(TestCase):
             line_1 = lines_got[1]
             self.assertEqual(line_1, '"100.0";"CHEMBL59";"Carbilev|DOPAMINE|Dopamine|Intropin|Parcopa|Sinemet"\n',
                              'Line is malformed!')
+
+    def test_reports_file_writing_progress(self):
+
+        test_columns_to_download = [{'label': 'ChEMBL ID', 'property_name': 'molecule_chembl_id'},
+                                    {'label': 'Synonyms', 'property_name': 'molecule_synonyms'}]
+        test_index_name = 'chembl_molecule'
+        test_query = json.loads(open('src/glados/es/tests/data/test_query1.json', 'r').read())
+        id_property = 'molecule_chembl_id'
+        test_contextual_columns = [{'label': 'Similarity', 'property_name': 'similarity'}]
+
+        test_context = {
+            'CHEMBL59': {
+                'molecule_chembl_id': 'CHEMBL59',
+                'similarity': 100.0
+            }
+        }
+
+        filename = 'test' + str(int(round(time.time() * 1000)))
+        out_file_path = file_writer.write_separated_values_file(desired_format=file_writer.OutputFormats.CSV,
+                                                                index_name=test_index_name, query=test_query,
+                                                                columns_to_download=test_columns_to_download,
+                                                                base_file_name=filename, context=test_context,
+                                                                id_property=id_property,
+                                                                contextual_columns=test_contextual_columns)
+        print('out_file_path: ', out_file_path)

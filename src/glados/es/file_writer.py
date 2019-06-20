@@ -82,11 +82,13 @@ def write_separated_values_file(desired_format, index_name, query, columns_to_do
             own_values = [columns_parser.parse(dot_notation_getter.get_from_string(prop_name), index_name, prop_name)
                           for prop_name in own_properties_to_get]
 
+            contextual_values = []
             if using_context:
-                context_item = context[doc_i['_id']]
-                contextual_values = [str(context_item[col['property_name']]) for col in contextual_columns]
-            else:
-                contextual_values = []
+                context_item = context.get(doc_i['_id'])
+                if context_item is not None:
+                    contextual_values = [str(context_item[col['property_name']]) for col in contextual_columns]
+                else:
+                    contextual_values = ['' for i in range(0, len(contextual_columns))]
 
             all_values = contextual_values + own_values
             item_line = separator.join([format_cell(v) for v in all_values])
