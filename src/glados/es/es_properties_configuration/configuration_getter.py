@@ -3,8 +3,6 @@ from glados.es.ws2es.util import SummableDict
 import yaml
 from django.conf import settings
 from django.core.cache import cache
-import base64
-import hashlib
 
 
 class ESPropsConfigurationGetterError(Exception):

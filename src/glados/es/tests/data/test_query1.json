@@ -1,19 +1,5 @@
 {
-  "bool": {
-    "filter": [
-      [
-        {
-          "bool": {
-            "should": [
-              {
-                "term": {
-                  "molecule_type": "Enzyme"
-                }
-              }
-            ]
-          }
-        }
-      ]
-    ]
+  "query_string": {
+    "query": "molecule_chembl_id:(CHEMBL59)"
   }
 }

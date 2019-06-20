@@ -6,6 +6,7 @@ from enum import Enum
 import os
 from django.conf import settings
 import gzip
+from glados.es.ws2es.util import SummableDict
 
 
 class OutputFormats(Enum):
@@ -112,8 +113,9 @@ def write_sdf_file(query, base_file_name='compounds', output_dir=settings.DYNAMI
     file_path = os.path.join(output_dir, base_file_name + '.sdf.gz')
     index_name = 'chembl_molecule'
     es_conn = connections.get_connection()
-    count_query = query
-    total_items = es_conn.search(index=index_name, body={'query': count_query})['hits']['total']
+
+    total_items = es_conn.search(index=index_name, body={'query': query})['hits']['total']
+    num_items_with_structure = 0
 
     with gzip.open(file_path, 'wt') as out_file:
         es_conn = connections.get_connection()
@@ -122,14 +124,30 @@ def write_sdf_file(query, base_file_name='compounds', output_dir=settings.DYNAMI
             "query": query
         })
 
+        i = 0
+        previous_percentage = 0
+        one_item_has_structure = False
         for doc_i in scanner:
 
             doc_source = doc_i['_source']
             dot_notation_getter = DotNotationGetter(doc_source)
             sdf_value = dot_notation_getter.get_from_string('_metadata.compound_generated.sdf_data')
 
+            if sdf_value is None:
+                continue
+
+            if sdf_value == '':
+                continue
+
             out_file.write(sdf_value)
             out_file.write('$$$$\n')
+            num_items_with_structure += 1
 
-    return file_path, total_items
+            percentage = int((i / total_items) * 100)
+            print('percentage: ', percentage)
+            if percentage != previous_percentage:
+                previous_percentage = percentage
+                # print('percentage: ', percentage)
+
+    return file_path, num_items_with_structure
 
