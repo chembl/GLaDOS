@@ -32,7 +32,8 @@ def format_cell(original_value):
 
 def write_separated_values_file(desired_format, index_name, query, columns_to_download, base_file_name,
                                 output_dir=settings.DYNAMIC_DOWNLOADS_DIR, context=None, id_property=None,
-                                contextual_columns=None):
+                                contextual_columns=None,
+                                progress_function=(lambda progress: progress)):
 
     if desired_format not in OutputFormats:
         raise FileWriterError('The format {} is not supported'.format(desired_format))
@@ -76,7 +77,6 @@ def write_separated_values_file(desired_format, index_name, query, columns_to_do
         i = 0
         previous_percentage = 0
         total_items = es_conn.search(index=index_name, body={'query': query})['hits']['total']
-        print('total_items: ', total_items)
         for doc_i in scanner:
             i += 1
             doc_source = doc_i['_source']
@@ -98,5 +98,10 @@ def write_separated_values_file(desired_format, index_name, query, columns_to_do
             all_values = contextual_values + own_values
             item_line = separator.join([format_cell(v) for v in all_values])
             out_file.write(item_line + '\n')
+
+            percentage = int((i / total_items) * 100)
+            if percentage != previous_percentage:
+                previous_percentage = percentage
+                progress_function(percentage)
 
     return file_path, total_items

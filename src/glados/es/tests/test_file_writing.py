@@ -169,7 +169,6 @@ class FileWriterTester(TestCase):
                              'Line is malformed!')
 
     def test_reports_file_writing_progress(self):
-
         test_columns_to_download = [{'label': 'ChEMBL ID', 'property_name': 'molecule_chembl_id'},
                                     {'label': 'Synonyms', 'property_name': 'molecule_synonyms'}]
         test_index_name = 'chembl_molecule'
@@ -183,6 +182,8 @@ class FileWriterTester(TestCase):
                 'similarity': 100.0
             }
         }
+        progress_got = []
+        progress_function = lambda progress: progress_got.append(progress)
 
         filename = 'test' + str(int(round(time.time() * 1000)))
         out_file_path, total_items = file_writer.write_separated_values_file(
@@ -191,6 +192,15 @@ class FileWriterTester(TestCase):
             columns_to_download=test_columns_to_download,
             base_file_name=filename, context=test_context,
             id_property=id_property,
-            contextual_columns=test_contextual_columns)
+            contextual_columns=test_contextual_columns,
+            progress_function=progress_function
+        )
 
-        print('out_file_path: ', out_file_path)
+        is_ascending = all(progress_got[i] <= progress_got[i + 1] for i in range(len(progress_got) - 1))
+        ends_with100 = progress_got[-1] == 100
+
+        self.assertTrue(is_ascending, msg='The progress is not reported correctly, it should be ascending. '
+                                          'I got this: {}\n'.format(str(progress_got)))
+
+        self.assertTrue(ends_with100, msg='The progress must end with 100. I got this: {}\n'.format(
+            str(progress_got)))
