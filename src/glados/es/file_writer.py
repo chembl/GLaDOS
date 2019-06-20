@@ -110,11 +110,14 @@ def write_separated_values_file(desired_format, index_name, query, columns_to_do
 def write_sdf_file(query, base_file_name='compounds', output_dir=settings.DYNAMIC_DOWNLOADS_DIR):
 
     file_path = os.path.join(output_dir, base_file_name + '.sdf.gz')
-    total_tiems = 0
+    index_name = 'chembl_molecule'
+    es_conn = connections.get_connection()
+    count_query = query
+    total_items = es_conn.search(index=index_name, body={'query': count_query})['hits']['total']
 
     with gzip.open(file_path, 'wt') as out_file:
         es_conn = connections.get_connection()
-        scanner = scan(es_conn, index='chembl_molecule', scroll=u'1m', size=1000, request_timeout=60, query={
+        scanner = scan(es_conn, index=index_name, scroll=u'1m', size=1000, request_timeout=60, query={
             "_source": ['_metadata.compound_generated.sdf_data'],
             "query": query
         })
@@ -128,5 +131,5 @@ def write_sdf_file(query, base_file_name='compounds', output_dir=settings.DYNAMI
             out_file.write(sdf_value)
             out_file.write('$$$$\n')
 
-    return file_path, total_tiems
+    return file_path, total_items
 

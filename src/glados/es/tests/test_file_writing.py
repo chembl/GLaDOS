@@ -223,10 +223,11 @@ class FileWriterTester(TestCase):
         filename = 'test_sdf' + str(int(round(time.time() * 1000)))
         out_file_path, total_items = file_writer.write_sdf_file(test_query, filename)
 
-        # content_must_be = open(out_file_path, 'rt')
-        print('out_file_path: ', out_file_path)
+        sdf_must_be_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/simple_sdf_must_be.sdf')
+        sdf_must_be = open(sdf_must_be_path, 'rt').read()
+        num_items_must_be = 1
         with gzip.open(out_file_path, 'rt') as file_got:
             content_got = file_got.read()
-            print('content_got: ')
-            print(content_got)
+            self.assertEqual(sdf_must_be, content_got, msg='The sdf was not generated properly!')
+            self.assertEqual(num_items_must_be, total_items, msg='The total number of items was not returned properly')
 
