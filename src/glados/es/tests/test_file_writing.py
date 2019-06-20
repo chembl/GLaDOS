@@ -52,10 +52,11 @@ class FileWriterTester(TestCase):
         test_query = json.loads(open('src/glados/es/tests/data/test_query0.json', 'r').read())
 
         filename = 'test' + str(int(round(time.time() * 1000)))
-        out_file_path = file_writer.write_separated_values_file(desired_format=file_writer.OutputFormats.CSV,
-                                                                index_name=test_index_name, query=test_query,
-                                                                columns_to_download=test_columns_to_download,
-                                                                base_file_name=filename)
+        out_file_path, total_items = file_writer.write_separated_values_file(
+            desired_format=file_writer.OutputFormats.CSV,
+            index_name=test_index_name, query=test_query,
+            columns_to_download=test_columns_to_download,
+            base_file_name=filename)
 
         with gzip.open(out_file_path, 'rt', encoding='utf-16-le') as file_got:
             lines_got = file_got.readlines()
@@ -72,10 +73,11 @@ class FileWriterTester(TestCase):
         test_query = json.loads(open('src/glados/es/tests/data/test_query0.json', 'r').read())
 
         filename = 'test' + str(int(round(time.time() * 1000)))
-        out_file_path = file_writer.write_separated_values_file(desired_format=file_writer.OutputFormats.CSV,
-                                                                index_name=test_index_name, query=test_query,
-                                                                columns_to_download=test_columns_to_download,
-                                                                base_file_name=filename)
+        out_file_path, total_items = file_writer.write_separated_values_file(
+            desired_format=file_writer.OutputFormats.CSV,
+            index_name=test_index_name, query=test_query,
+            columns_to_download=test_columns_to_download,
+            base_file_name=filename)
 
         with gzip.open(out_file_path, 'rt', encoding='utf-16-le') as file_got:
             lines_got = file_got.readlines()
@@ -102,11 +104,12 @@ class FileWriterTester(TestCase):
         filename = 'test' + str(int(round(time.time() * 1000)))
         with self.assertRaises(file_writer.FileWriterError,
                                msg='It should raise an error when the conexts is given but no id property'):
-            out_file_path = file_writer.write_separated_values_file(desired_format=file_writer.OutputFormats.CSV,
-                                                                    index_name=test_index_name, query=test_query,
-                                                                    columns_to_download=test_columns_to_download,
-                                                                    base_file_name=filename, context=test_context,
-                                                                    contextual_columns=test_contextual_columns)
+            out_file_path, total_items = file_writer.write_separated_values_file(
+                desired_format=file_writer.OutputFormats.CSV,
+                index_name=test_index_name, query=test_query,
+                columns_to_download=test_columns_to_download,
+                base_file_name=filename, context=test_context,
+                contextual_columns=test_contextual_columns)
 
     def test_fails_with_context_but_no_contextual_columns(self):
         test_columns_to_download = [{'label': 'ChEMBL ID', 'property_name': 'molecule_chembl_id'},
@@ -126,11 +129,12 @@ class FileWriterTester(TestCase):
         with self.assertRaises(file_writer.FileWriterError,
                                msg='It should raise an error when the conexts is given but no contextual columns '
                                    'description'):
-            out_file_path = file_writer.write_separated_values_file(desired_format=file_writer.OutputFormats.CSV,
-                                                                    index_name=test_index_name, query=test_query,
-                                                                    columns_to_download=test_columns_to_download,
-                                                                    base_file_name=filename, context=test_context,
-                                                                    id_property=id_property)
+            out_file_path, total_items = file_writer.write_separated_values_file(
+                desired_format=file_writer.OutputFormats.CSV,
+                index_name=test_index_name, query=test_query,
+                columns_to_download=test_columns_to_download,
+                base_file_name=filename, context=test_context,
+                id_property=id_property)
 
     def test_writes_csv_files_with_context(self):
         test_columns_to_download = [{'label': 'ChEMBL ID', 'property_name': 'molecule_chembl_id'},
@@ -148,12 +152,13 @@ class FileWriterTester(TestCase):
         }
 
         filename = 'test' + str(int(round(time.time() * 1000)))
-        out_file_path = file_writer.write_separated_values_file(desired_format=file_writer.OutputFormats.CSV,
-                                                                index_name=test_index_name, query=test_query,
-                                                                columns_to_download=test_columns_to_download,
-                                                                base_file_name=filename, context=test_context,
-                                                                id_property=id_property,
-                                                                contextual_columns=test_contextual_columns)
+        out_file_path, total_items = file_writer.write_separated_values_file(
+            desired_format=file_writer.OutputFormats.CSV,
+            index_name=test_index_name, query=test_query,
+            columns_to_download=test_columns_to_download,
+            base_file_name=filename, context=test_context,
+            id_property=id_property,
+            contextual_columns=test_contextual_columns)
 
         with gzip.open(out_file_path, 'rt', encoding='utf-16-le') as file_got:
             lines_got = file_got.readlines()
@@ -180,10 +185,12 @@ class FileWriterTester(TestCase):
         }
 
         filename = 'test' + str(int(round(time.time() * 1000)))
-        out_file_path = file_writer.write_separated_values_file(desired_format=file_writer.OutputFormats.CSV,
-                                                                index_name=test_index_name, query=test_query,
-                                                                columns_to_download=test_columns_to_download,
-                                                                base_file_name=filename, context=test_context,
-                                                                id_property=id_property,
-                                                                contextual_columns=test_contextual_columns)
+        out_file_path, total_items = file_writer.write_separated_values_file(
+            desired_format=file_writer.OutputFormats.CSV,
+            index_name=test_index_name, query=test_query,
+            columns_to_download=test_columns_to_download,
+            base_file_name=filename, context=test_context,
+            id_property=id_property,
+            contextual_columns=test_contextual_columns)
+
         print('out_file_path: ', out_file_path)

@@ -73,7 +73,12 @@ def write_separated_values_file(desired_format, index_name, query, columns_to_do
             "query": query
         })
 
+        i = 0
+        previous_percentage = 0
+        total_items = es_conn.search(index=index_name, body={'query': query})['hits']['total']
+        print('total_items: ', total_items)
         for doc_i in scanner:
+            i += 1
             doc_source = doc_i['_source']
 
             dot_notation_getter = DotNotationGetter(doc_source)
@@ -94,4 +99,4 @@ def write_separated_values_file(desired_format, index_name, query, columns_to_do
             item_line = separator.join([format_cell(v) for v in all_values])
             out_file.write(item_line + '\n')
 
-    return file_path
+    return file_path, total_items
