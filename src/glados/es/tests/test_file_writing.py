@@ -241,6 +241,42 @@ class FileWriterTester(TestCase):
         sdf_must_be_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/simple_sdf_must_be.sdf')
         sdf_must_be = open(sdf_must_be_path, 'rt').read()
         num_items_must_be = 1
+
+        with gzip.open(out_file_path, 'rt') as file_got:
+            content_got = file_got.read()
+            self.assertEqual(sdf_must_be, content_got, msg='The sdf was not generated properly!')
+            self.assertEqual(num_items_must_be, total_items, msg='The total number of items was not returned properly')
+
+    def test_writes_simple_sdf_file_when_no_items_have_structure(self):
+
+        query_file_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/test_query4.json')
+        test_query = json.loads(open(query_file_path, 'r').read())
+        filename = 'test_sdf' + str(int(round(time.time() * 1000)))
+        out_file_path, total_items = file_writer.write_sdf_file(test_query, filename)
+
+        sdf_must_be_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/sdf_when_no_structures_must_be.sdf')
+        sdf_must_be = open(sdf_must_be_path, 'rt').read()
+        num_items_must_be = 0
+        print('out_file_path: ', out_file_path)
+        with gzip.open(out_file_path, 'rt') as file_got:
+            content_got = file_got.read()
+            print('content_got:')
+            print(content_got)
+            print('sdf_must_be:')
+            print(sdf_must_be)
+            self.assertEqual(sdf_must_be, content_got, msg='The sdf was not generated properly!')
+            self.assertEqual(num_items_must_be, total_items, msg='The total number of items was not returned properly')
+
+    def test_reports_sdf_file_writing_progress(self):
+        
+        query_file_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/test_query4.json')
+        test_query = json.loads(open(query_file_path, 'r').read())
+        filename = 'test_sdf' + str(int(round(time.time() * 1000)))
+        out_file_path, total_items = file_writer.write_sdf_file(test_query, filename)
+
+        sdf_must_be_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/sdf_when_no_structures_must_be.sdf')
+        sdf_must_be = open(sdf_must_be_path, 'rt').read()
+        num_items_must_be = 0
         print('out_file_path: ', out_file_path)
         with gzip.open(out_file_path, 'rt') as file_got:
             content_got = file_got.read()

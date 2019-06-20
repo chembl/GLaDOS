@@ -77,6 +77,7 @@ def write_separated_values_file(desired_format, index_name, query, columns_to_do
 
         i = 0
         previous_percentage = 0
+        progress_function(previous_percentage)
         total_items = es_conn.search(index=index_name, body={'query': query})['hits']['total']
         for doc_i in scanner:
             i += 1
@@ -148,6 +149,10 @@ def write_sdf_file(query, base_file_name='compounds', output_dir=settings.DYNAMI
             if percentage != previous_percentage:
                 previous_percentage = percentage
                 # print('percentage: ', percentage)
+
+        if num_items_with_structure == 0:
+            out_file.write('None of the downloaded items have a chemical structure,'
+                           ' please try other download formats.\n')
 
     return file_path, num_items_with_structure
 
