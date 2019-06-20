@@ -191,7 +191,9 @@ class FileWriterTester(TestCase):
             }
         }
         progress_got = []
-        progress_function = lambda progress: progress_got.append(progress)
+
+        def progress_function(progress):
+            progress_got.append(progress)
 
         filename = 'test' + str(int(round(time.time() * 1000)))
         out_file_path, total_items = file_writer.write_separated_values_file(
@@ -257,33 +259,42 @@ class FileWriterTester(TestCase):
         sdf_must_be_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/sdf_when_no_structures_must_be.sdf')
         sdf_must_be = open(sdf_must_be_path, 'rt').read()
         num_items_must_be = 0
-        print('out_file_path: ', out_file_path)
+
         with gzip.open(out_file_path, 'rt') as file_got:
             content_got = file_got.read()
-            print('content_got:')
-            print(content_got)
-            print('sdf_must_be:')
-            print(sdf_must_be)
             self.assertEqual(sdf_must_be, content_got, msg='The sdf was not generated properly!')
             self.assertEqual(num_items_must_be, total_items, msg='The total number of items was not returned properly')
 
     def test_reports_sdf_file_writing_progress(self):
-        
-        query_file_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/test_query4.json')
+
+        query_file_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/test_query5.json')
         test_query = json.loads(open(query_file_path, 'r').read())
         filename = 'test_sdf' + str(int(round(time.time() * 1000)))
-        out_file_path, total_items = file_writer.write_sdf_file(test_query, filename)
 
-        sdf_must_be_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/sdf_when_no_structures_must_be.sdf')
+        progress_got = []
+
+        def progress_function(progress):
+            progress_got.append(progress)
+
+        out_file_path, total_items = file_writer.write_sdf_file(test_query, filename,
+                                                                progress_function=progress_function)
+
+        sdf_must_be_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/sdf_with_3_structures_must_be.sdf')
         sdf_must_be = open(sdf_must_be_path, 'rt').read()
-        num_items_must_be = 0
-        print('out_file_path: ', out_file_path)
+        num_items_must_be = 3
+
         with gzip.open(out_file_path, 'rt') as file_got:
             content_got = file_got.read()
-            print('content_got:')
-            print(content_got)
-            print('sdf_must_be:')
-            print(sdf_must_be)
+
             self.assertEqual(sdf_must_be, content_got, msg='The sdf was not generated properly!')
             self.assertEqual(num_items_must_be, total_items, msg='The total number of items was not returned properly')
+
+        is_ascending = all(progress_got[i] <= progress_got[i + 1] for i in range(len(progress_got) - 1))
+        ends_with100 = progress_got[-1] == 100
+
+        self.assertTrue(is_ascending, msg='The progress is not reported correctly, it should be ascending. '
+                                          'I got this: {}\n'.format(str(progress_got)))
+
+        self.assertTrue(ends_with100, msg='The progress must end with 100. I got this: {}\n'.format(
+            str(progress_got)))
 

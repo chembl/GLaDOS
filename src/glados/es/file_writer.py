@@ -109,7 +109,8 @@ def write_separated_values_file(desired_format, index_name, query, columns_to_do
     return file_path, total_items
 
 
-def write_sdf_file(query, base_file_name='compounds', output_dir=settings.DYNAMIC_DOWNLOADS_DIR):
+def write_sdf_file(query, base_file_name='compounds', output_dir=settings.DYNAMIC_DOWNLOADS_DIR,
+                   progress_function=(lambda progress: progress)):
 
     file_path = os.path.join(output_dir, base_file_name + '.sdf.gz')
     index_name = 'chembl_molecule'
@@ -127,8 +128,9 @@ def write_sdf_file(query, base_file_name='compounds', output_dir=settings.DYNAMI
 
         i = 0
         previous_percentage = 0
-        one_item_has_structure = False
+        progress_function(previous_percentage)
         for doc_i in scanner:
+            i += 1
 
             doc_source = doc_i['_source']
             dot_notation_getter = DotNotationGetter(doc_source)
@@ -145,10 +147,9 @@ def write_sdf_file(query, base_file_name='compounds', output_dir=settings.DYNAMI
             num_items_with_structure += 1
 
             percentage = int((i / total_items) * 100)
-            print('percentage: ', percentage)
             if percentage != previous_percentage:
                 previous_percentage = percentage
-                # print('percentage: ', percentage)
+                progress_function(percentage)
 
         if num_items_with_structure == 0:
             out_file.write('None of the downloaded items have a chemical structure,'
