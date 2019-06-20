@@ -33,7 +33,6 @@ def format_cell(original_value):
 def write_separated_values_file(desired_format, index_name, query, columns_to_download, base_file_name,
                                 output_dir=settings.DYNAMIC_DOWNLOADS_DIR, context=None, id_property=None,
                                 contextual_columns=None):
-    print('Writing file!')
 
     if desired_format not in OutputFormats:
         raise FileWriterError('The format {} is not supported'.format(desired_format))
@@ -41,11 +40,13 @@ def write_separated_values_file(desired_format, index_name, query, columns_to_do
     if index_name is None:
         raise FileWriterError('You must provide an index name')
 
+    using_context = False
     if context is not None:
         if id_property is None:
             raise FileWriterError('When providing context, an id property must be given in order to join the rows')
         if contextual_columns is None:
             raise FileWriterError('When providing context, an contextual column description must be given')
+        using_context = True
 
     if desired_format is OutputFormats.CSV:
         separator = ';'
@@ -54,12 +55,13 @@ def write_separated_values_file(desired_format, index_name, query, columns_to_do
         separator = '\t'
         file_path = os.path.join(output_dir, base_file_name + '.tsv.gz')
 
-    print('file_path: ')
-    print(file_path)
-
     with gzip.open(file_path, 'wt', encoding='utf-16-le') as out_file:
 
-        all_columns = columns_to_download + []
+        if using_context:
+            all_columns = contextual_columns + columns_to_download
+        else:
+            all_columns = columns_to_download
+
         header_line = separator.join([format_cell(col['label']) for col in all_columns])
         out_file.write(header_line + '\n')
 
@@ -80,8 +82,13 @@ def write_separated_values_file(desired_format, index_name, query, columns_to_do
             own_values = [columns_parser.parse(dot_notation_getter.get_from_string(prop_name), index_name, prop_name)
                           for prop_name in own_properties_to_get]
 
-            contextual_values = []
-            all_values = own_values + contextual_values
+            if using_context:
+                context_item = context[doc_i['_id']]
+                contextual_values = [str(context_item[col['property_name']]) for col in contextual_columns]
+            else:
+                contextual_values = []
+
+            all_values = contextual_values + own_values
             item_line = separator.join([format_cell(v) for v in all_values])
             out_file.write(item_line + '\n')
 
