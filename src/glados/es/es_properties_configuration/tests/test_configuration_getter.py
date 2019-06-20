@@ -9,8 +9,8 @@ import yaml
 
 class ConfigurationGetterTester(TestCase):
 
-    CONFIG_TEST_FILE = os.path.join( settings.GLADOS_ROOT, 'es/es_properties_configuration/tests/data/test_override.yml')
-    GROUPS_TEST_FILE = os.path.join( settings.GLADOS_ROOT, 'es/es_properties_configuration/tests/data/test_groups.yml')
+    CONFIG_TEST_FILE = os.path.join(settings.GLADOS_ROOT, 'es/es_properties_configuration/tests/data/test_override.yml')
+    GROUPS_TEST_FILE = os.path.join(settings.GLADOS_ROOT, 'es/es_properties_configuration/tests/data/test_groups.yml')
 
     def setUp(self):
 

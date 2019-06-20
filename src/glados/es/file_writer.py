@@ -30,7 +30,7 @@ def format_cell(original_value):
     return '"{}"'.format(value)
 
 
-def write_separated_values_file(desired_format, index_name, query, columns_to_download, base_file_name,
+def write_separated_values_file(desired_format, index_name, query, columns_to_download, base_file_name='result',
                                 output_dir=settings.DYNAMIC_DOWNLOADS_DIR, context=None, id_property=None,
                                 contextual_columns=None,
                                 progress_function=(lambda progress: progress)):
@@ -105,3 +105,28 @@ def write_separated_values_file(desired_format, index_name, query, columns_to_do
                 progress_function(percentage)
 
     return file_path, total_items
+
+
+def write_sdf_file(query, base_file_name='compounds', output_dir=settings.DYNAMIC_DOWNLOADS_DIR):
+
+    file_path = os.path.join(output_dir, base_file_name + '.sdf.gz')
+    total_tiems = 0
+
+    with gzip.open(file_path, 'wt') as out_file:
+        es_conn = connections.get_connection()
+        scanner = scan(es_conn, index='chembl_molecule', scroll=u'1m', size=1000, request_timeout=60, query={
+            "_source": ['_metadata.compound_generated.sdf_data'],
+            "query": query
+        })
+
+        for doc_i in scanner:
+
+            doc_source = doc_i['_source']
+            dot_notation_getter = DotNotationGetter(doc_source)
+            sdf_value = dot_notation_getter.get_from_string('_metadata.compound_generated.sdf_data')
+
+            out_file.write(sdf_value)
+            out_file.write('$$$$\n')
+
+    return file_path, total_tiems
+

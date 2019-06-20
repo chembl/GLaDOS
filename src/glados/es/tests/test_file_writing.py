@@ -3,6 +3,8 @@ from glados.es import file_writer
 import json
 import time
 import gzip
+from django.conf import settings
+import os
 
 
 class FileWriterTester(TestCase):
@@ -18,8 +20,8 @@ class FileWriterTester(TestCase):
         test_columns_to_download = [{'label': 'ChEMBL ID', 'property_name': 'molecule_chembl_id'},
                                     {'label': 'Name', 'property_name': 'pref_name'}]
         test_index_name = 'chembl_molecule'
-
-        test_query = json.loads(open('src/glados/es/tests/data/test_query0.json', 'r').read())
+        query_file_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/test_query0.json')
+        test_query = json.loads(open(query_file_path, 'r').read())
 
         with self.assertRaises(file_writer.FileWriterError,
                                msg='It should raise an error when the given format is not supported'):
@@ -33,8 +35,8 @@ class FileWriterTester(TestCase):
         test_columns_to_download = [{'label': 'ChEMBL ID', 'property_name': 'molecule_chembl_id'},
                                     {'label': 'Name', 'property_name': 'pref_name'}]
         test_index_name = None
-
-        test_query = json.loads(open('src/glados/es/tests/data/test_query0.json', 'r').read())
+        query_file_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/test_query0.json')
+        test_query = json.loads(open(query_file_path, 'r').read())
 
         with self.assertRaises(file_writer.FileWriterError,
                                msg='It should raise an error when the index name is not given'):
@@ -48,8 +50,8 @@ class FileWriterTester(TestCase):
         test_columns_to_download = [{'label': 'ChEMBL ID', 'property_name': 'molecule_chembl_id'},
                                     {'label': 'Name', 'property_name': 'pref_name'}]
         test_index_name = 'chembl_molecule'
-
-        test_query = json.loads(open('src/glados/es/tests/data/test_query0.json', 'r').read())
+        query_file_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/test_query0.json')
+        test_query = json.loads(open(query_file_path, 'r').read())
 
         filename = 'test' + str(int(round(time.time() * 1000)))
         out_file_path, total_items = file_writer.write_separated_values_file(
@@ -70,7 +72,8 @@ class FileWriterTester(TestCase):
                                     {'label': 'Synonyms', 'property_name': 'molecule_synonyms'}]
         test_index_name = 'chembl_molecule'
 
-        test_query = json.loads(open('src/glados/es/tests/data/test_query0.json', 'r').read())
+        query_file_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/test_query0.json')
+        test_query = json.loads(open(query_file_path, 'r').read())
 
         filename = 'test' + str(int(round(time.time() * 1000)))
         out_file_path, total_items = file_writer.write_separated_values_file(
@@ -91,7 +94,8 @@ class FileWriterTester(TestCase):
         test_columns_to_download = [{'label': 'ChEMBL ID', 'property_name': 'molecule_chembl_id'},
                                     {'label': 'Synonyms', 'property_name': 'molecule_synonyms'}]
         test_index_name = 'chembl_molecule'
-        test_query = json.loads(open('src/glados/es/tests/data/test_query0.json', 'r').read())
+        query_file_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/test_query0.json')
+        test_query = json.loads(open(query_file_path, 'r').read())
         test_contextual_columns = [{'label': 'Similarity', 'property_name': 'similarity'}]
 
         test_context = {
@@ -115,7 +119,8 @@ class FileWriterTester(TestCase):
         test_columns_to_download = [{'label': 'ChEMBL ID', 'property_name': 'molecule_chembl_id'},
                                     {'label': 'Synonyms', 'property_name': 'molecule_synonyms'}]
         test_index_name = 'chembl_molecule'
-        test_query = json.loads(open('src/glados/es/tests/data/test_query0.json', 'r').read())
+        query_file_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/test_query0.json')
+        test_query = json.loads(open(query_file_path, 'r').read())
         id_property = 'molecule_chembl_id'
 
         test_context = {
@@ -140,7 +145,8 @@ class FileWriterTester(TestCase):
         test_columns_to_download = [{'label': 'ChEMBL ID', 'property_name': 'molecule_chembl_id'},
                                     {'label': 'Synonyms', 'property_name': 'molecule_synonyms'}]
         test_index_name = 'chembl_molecule'
-        test_query = json.loads(open('src/glados/es/tests/data/test_query0.json', 'r').read())
+        query_file_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/test_query0.json')
+        test_query = json.loads(open(query_file_path, 'r').read())
         id_property = 'molecule_chembl_id'
         test_contextual_columns = [{'label': 'Similarity', 'property_name': 'similarity'}]
 
@@ -172,7 +178,9 @@ class FileWriterTester(TestCase):
         test_columns_to_download = [{'label': 'ChEMBL ID', 'property_name': 'molecule_chembl_id'},
                                     {'label': 'Synonyms', 'property_name': 'molecule_synonyms'}]
         test_index_name = 'chembl_molecule'
-        test_query = json.loads(open('src/glados/es/tests/data/test_query1.json', 'r').read())
+
+        query_file_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/test_query1.json')
+        test_query = json.loads(open(query_file_path, 'r').read())
         id_property = 'molecule_chembl_id'
         test_contextual_columns = [{'label': 'Similarity', 'property_name': 'similarity'}]
 
@@ -204,3 +212,21 @@ class FileWriterTester(TestCase):
 
         self.assertTrue(ends_with100, msg='The progress must end with 100. I got this: {}\n'.format(
             str(progress_got)))
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # SDF Files
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_writes_simple_sdf_file(self):
+
+        query_file_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/test_query0.json')
+        test_query = json.loads(open(query_file_path, 'r').read())
+        filename = 'test_sdf' + str(int(round(time.time() * 1000)))
+        out_file_path, total_items = file_writer.write_sdf_file(test_query, filename)
+
+        # content_must_be = open(out_file_path, 'rt')
+        print('out_file_path: ', out_file_path)
+        with gzip.open(out_file_path, 'rt') as file_got:
+            content_got = file_got.read()
+            print('content_got: ')
+            print(content_got)
+
