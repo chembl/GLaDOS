@@ -3,7 +3,7 @@ import time
 from django_rq import job
 import hashlib
 import base64
-from glados.models import DownloadJob
+from glados.api.chembl.dynamic_downloads.models import DownloadJob
 from elasticsearch.helpers import scan
 from elasticsearch_dsl.connections import connections
 import json
