@@ -6,7 +6,8 @@ import traceback
 from glados.es import file_writer
 from django.conf import settings
 from glados.settings import RunEnvs
-
+import subprocess
+import re
 
 def make_download_file(job_id):
 
@@ -48,8 +49,8 @@ def make_download_file(job_id):
         download_job.file_path = out_file_path
         download_job.save()
 
-        # if settings.RUN_ENV == RunEnvs.PROD:
-        #     rsync_to_the_other_nfs(download_job)
+        if settings.RUN_ENV == RunEnvs.PROD:
+            rsync_to_the_other_nfs(download_job)
 
 
         return out_file_path, total_items
@@ -61,19 +62,20 @@ def make_download_file(job_id):
         print(tb)
         return None
 
-# def rsync_to_the_other_nfs(download_job):
-#     hostname = socket.gethostname()
-#     if bool(re.match("wp-p1m.*", hostname)):
-#         rsync_destination_server = 'wp-p2m-54'
-#     else:
-#         rsync_destination_server = 'wp-p1m-54'
-#
-#     file_path = get_file_path(download_job.job_id)
-#     rsync_destination = "{server}:{path}".format(server=rsync_destination_server, path=file_path)
-#     rsync_command = "rsync -v {source} {destination}".format(source=file_path, destination=rsync_destination)
-#     rsync_command_parts = rsync_command.split(' ')
-#
-#     append_to_job_log(download_job, "Rsyncing: {}".format(rsync_command))
-#     subprocess.check_call(rsync_command_parts)
+
+def rsync_to_the_other_nfs(download_job):
+    hostname = socket.gethostname()
+    if bool(re.match("wp-p1m.*", hostname)):
+        rsync_destination_server = 'wp-p2m-54'
+    else:
+        rsync_destination_server = 'wp-p1m-54'
+
+    file_path = download_job.file_path
+    rsync_destination = "{server}:{path}".format(server=rsync_destination_server, path=file_path)
+    rsync_command = "rsync -v {source} {destination}".format(source=file_path, destination=rsync_destination)
+    rsync_command_parts = rsync_command.split(' ')
+
+    download_job.append_to_job_log("Rsyncing: {}".format(rsync_command))
+    subprocess.check_call(rsync_command_parts)
 
 
