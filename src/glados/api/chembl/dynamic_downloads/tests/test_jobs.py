@@ -5,7 +5,6 @@ import os
 
 
 class DownloadJobsTester(TestCase):
-
     def setUp(self):
         DownloadJob.objects.all().delete()
 
@@ -32,7 +31,19 @@ class DownloadJobsTester(TestCase):
         test_download_job.save()
 
         out_file_path_got, total_items_got = jobs.make_download_file(job_id)
+
+        test_download_job.refresh_from_db()
         total_items_must_be = 1
         self.assertEqual(total_items_got, total_items_must_be, msg='The total items got is not correct')
         self.assertTrue(os.path.exists(out_file_path_got), msg='The output file was not generated!')
 
+        final_status_must_be = DownloadJob.FINISHED
+        final_progress_must_be = 100
+        final_status_got = test_download_job.status
+        final_progress_got = test_download_job.progress
+
+        self.assertEqual(final_status_must_be, final_status_got, msg='The final status of the job '
+                                                                     'is not "Finished"')
+        self.assertEqual(final_progress_must_be, final_progress_got, msg='The final progress of the job must be 100')
+
+        # test expiration time

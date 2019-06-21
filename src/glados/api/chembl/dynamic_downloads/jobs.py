@@ -8,6 +8,10 @@ from django.conf import settings
 from glados.settings import RunEnvs
 import subprocess
 import re
+import logging
+
+logger = logging.getLogger('django')
+
 
 def make_download_file(job_id):
 
@@ -36,6 +40,11 @@ def make_download_file(job_id):
         desired_format = file_writer.OutputFormats.TSV
 
     try:
+
+        def save_download_job_progress(progress_percentage):
+            download_job.progress = progress_percentage
+            download_job.save()
+
         out_file_path, total_items = file_writer.write_separated_values_file(
             desired_format=desired_format,
             index_name=index_name,
@@ -43,7 +52,9 @@ def make_download_file(job_id):
             columns_to_download=columns_to_download,
             base_file_name=base_file_name,
             context=context,
-            id_property=id_property)
+            id_property=id_property,
+            progress_function=save_download_job_progress
+        )
 
         download_job.total_items = total_items
         download_job.file_path = out_file_path
@@ -52,6 +63,9 @@ def make_download_file(job_id):
         if settings.RUN_ENV == RunEnvs.PROD:
             rsync_to_the_other_nfs(download_job)
 
+        download_job.append_to_job_log('File Ready')
+        logger.debug('File Ready: ' + out_file_path)
+        download_job.save_download_job_state(DownloadJob.FINISHED)
 
         return out_file_path, total_items
 
