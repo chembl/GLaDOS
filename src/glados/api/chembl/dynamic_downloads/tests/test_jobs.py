@@ -2,6 +2,8 @@ from django.test import TestCase
 from glados.api.chembl.dynamic_downloads import jobs
 from glados.api.chembl.dynamic_downloads.models import DownloadJob
 import os
+from datetime import timedelta
+from django.utils import timezone
 
 
 class DownloadJobsTester(TestCase):
@@ -30,7 +32,12 @@ class DownloadJobsTester(TestCase):
         )
         test_download_job.save()
 
+        # Here is the Tested Function!!!!
         out_file_path_got, total_items_got = jobs.make_download_file(job_id)
+        finished_time = timezone.now()
+        delta = timedelta(days=DownloadJob.DAYS_TO_EXPIRE)
+        expiration_date_should_be = finished_time + delta
+        expiration_date_should_be_seconds = expiration_date_should_be.timestamp()
 
         test_download_job.refresh_from_db()
         total_items_must_be = 1
@@ -46,4 +53,7 @@ class DownloadJobsTester(TestCase):
                                                                      'is not "Finished"')
         self.assertEqual(final_progress_must_be, final_progress_got, msg='The final progress of the job must be 100')
 
-        # test expiration time
+        expiration_date_got = test_download_job.expires
+        expiration_date_got_seconds = expiration_date_got.timestamp()
+        self.assertAlmostEqual(expiration_date_got_seconds, expiration_date_should_be_seconds, delta=1,
+                               msg='The expiration time was not calculated correctly')

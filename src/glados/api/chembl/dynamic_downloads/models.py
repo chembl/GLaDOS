@@ -1,6 +1,7 @@
 from django.db import models
-from datetime import datetime, timedelta, timezone
+from datetime import timedelta
 import socket
+from django.utils import timezone
 
 
 # This is to keep track of the status of a download job
@@ -38,7 +39,7 @@ class DownloadJob(models.Model):
 
     @staticmethod
     def format_log_message(msg):
-        now = datetime.now()
+        now = timezone.now()
         return "[{date}] {hostname}: {msg}\n".format(date=now, hostname=socket.gethostname(), msg=msg)
 
     def append_to_job_log(self, msg):
@@ -51,9 +52,8 @@ class DownloadJob(models.Model):
     def save_download_job_state(self, new_state):
         self.status = new_state
         if new_state == DownloadJob.FINISHED:
-            dt = datetime.now()
-            td = timedelta(days=7)
-            expiration_date = dt + td
-            expiration_date.replace(tzinfo=timezone.utc)
+            finished_time = timezone.now()
+            delta = timedelta(days=DownloadJob.DAYS_TO_EXPIRE)
+            expiration_date = finished_time + delta
             self.expires = expiration_date
         self.save()
