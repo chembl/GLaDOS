@@ -4,6 +4,8 @@ from django.db import models
 # This is to keep track of the status of a download job
 class DownloadJob(models.Model):
 
+    DAYS_TO_EXPIRE = 7
+
     job_id = models.CharField(max_length=250, primary_key=True)
     progress = models.PositiveSmallIntegerField(default=0)
     total_items = models.PositiveIntegerField(default=0)
