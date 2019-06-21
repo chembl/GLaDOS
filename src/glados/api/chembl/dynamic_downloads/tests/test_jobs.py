@@ -1,6 +1,7 @@
 from django.test import TestCase
 from glados.api.chembl.dynamic_downloads import jobs
 from glados.api.chembl.dynamic_downloads.models import DownloadJob
+import os
 
 
 class DownloadJobsTester(TestCase):
@@ -11,7 +12,7 @@ class DownloadJobsTester(TestCase):
     def tearDown(self):
         DownloadJob.objects.all().delete()
 
-    def test_make_csv_download_file(self):
+    def test_make_csv_download_file_no_context(self):
         print('------------------------------------------------------------------------')
         print('test_make_download_file!!!')
         print('------------------------------------------------------------------------')
@@ -30,4 +31,8 @@ class DownloadJobsTester(TestCase):
         )
         test_download_job.save()
 
-        jobs.make_download_file(job_id)
+        out_file_path_got, total_items_got = jobs.make_download_file(job_id)
+        total_items_must_be = 1
+        self.assertEqual(total_items_got, total_items_must_be, msg='The total items got is not correct')
+        self.assertTrue(os.path.exists(out_file_path_got), msg='The output file was not generated!')
+

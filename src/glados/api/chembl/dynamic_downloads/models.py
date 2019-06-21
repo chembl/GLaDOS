@@ -34,6 +34,7 @@ class DownloadJob(models.Model):
     context_id = models.TextField(max_length=500, null=True)
     id_property = models.CharField(max_length=100)
     expires = models.DateTimeField(null=True)
+    # file_path = models.TextField(null=True)
 
     @staticmethod
     def format_log_message(msg):
