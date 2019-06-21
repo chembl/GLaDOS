@@ -9,6 +9,8 @@ from glados.settings import RunEnvs
 import subprocess
 import re
 import logging
+from glados.usage_statistics import glados_server_statistics
+import os
 
 logger = logging.getLogger('django')
 
@@ -33,10 +35,11 @@ def make_download_file(job_id):
     context_id = download_job.context_id
     context = None
     id_property = download_job.id_property
+    raw_desired_format = download_job.desired_format
 
-    if download_job.desired_format in ['csv', 'CSV']:
+    if raw_desired_format in ['csv', 'CSV']:
         desired_format = file_writer.OutputFormats.CSV
-    elif download_job.desired_format in ['tsv', 'TSV']:
+    elif raw_desired_format in ['tsv', 'TSV']:
         desired_format = file_writer.OutputFormats.TSV
 
     try:
@@ -66,6 +69,23 @@ def make_download_file(job_id):
         download_job.append_to_job_log('File Ready')
         logger.debug('File Ready: ' + out_file_path)
         download_job.save_download_job_state(DownloadJob.FINISHED)
+
+        # now save some statistics
+        if settings.RUN_ENV != RunEnvs.TRAVIS:
+            end_time = time.time()
+            time_taken = end_time - start_time
+            file_size = os.path.getsize(out_file_path)
+
+            glados_server_statistics.record_download(
+                download_id=job_id,
+                time_taken=time_taken,
+                is_new=True,
+                file_size=file_size,
+                es_index=index_name,
+                es_query=raw_query,
+                desired_format=raw_desired_format,
+                total_items=total_items,
+            )
 
         return out_file_path, total_items
 
