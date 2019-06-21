@@ -1,6 +1,5 @@
 import time
 from glados.api.chembl.dynamic_downloads.models import DownloadJob
-from glados.api.chembl.dynamic_downloads import job_status
 import socket
 import json
 import traceback
@@ -12,8 +11,8 @@ def make_download_file(download_id):
     start_time = time.time()
     download_job = DownloadJob.objects.get(job_id=download_id)
     download_job.worker = socket.gethostname()
-    job_status.save_download_job_state(download_job, DownloadJob.PROCESSING)
-    job_status.append_to_job_log(download_job, 'Generating File')
+    download_job.save_download_job_state(DownloadJob.PROCESSING)
+    download_job.append_to_job_log('Generating File')
     download_job.save()
 
     index_name = download_job.index_name

@@ -1,6 +1,5 @@
 from django.test import TestCase
 from glados.api.chembl.dynamic_downloads import jobs
-from glados.api.chembl.dynamic_downloads import job_status
 from glados.api.chembl.dynamic_downloads.models import DownloadJob
 
 
@@ -25,7 +24,7 @@ class DownloadJobsTester(TestCase):
             '[{"property_name":"molecule_chembl_id","label":"ChEMBL ID"},{"property_name":"pref_name","label":"Name"}]',
             raw_query='{"query_string": {"query": "molecule_chembl_id:(CHEMBL59)"}}',
             desired_format='csv',
-            log=job_status.format_log_message('Job Queued'),
+            log=DownloadJob.format_log_message('Job Queued'),
             context_id=None,
             id_property='molecule_chembl_id'
         )
