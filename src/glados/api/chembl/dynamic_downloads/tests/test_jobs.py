@@ -57,3 +57,7 @@ class DownloadJobsTester(TestCase):
         expiration_date_got_seconds = expiration_date_got.timestamp()
         self.assertAlmostEqual(expiration_date_got_seconds, expiration_date_should_be_seconds, delta=1,
                                msg='The expiration time was not calculated correctly')
+
+    # TODO: Test with context
+
+

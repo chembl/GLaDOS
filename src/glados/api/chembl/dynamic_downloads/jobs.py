@@ -8,13 +8,15 @@ from django.conf import settings
 from glados.settings import RunEnvs
 import subprocess
 import re
-import logging
 from glados.usage_statistics import glados_server_statistics
 import os
+from django_rq import job
+import logging
 
 logger = logging.getLogger('django')
 
 
+@job
 def make_download_file(job_id):
 
     print('MAKING DOWNLOAD FILE')
