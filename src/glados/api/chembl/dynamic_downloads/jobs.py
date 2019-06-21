@@ -45,10 +45,11 @@ def make_download_file(job_id):
             id_property=id_property)
 
         download_job.total_items = total_items
+        download_job.file_path = out_file_path
         download_job.save()
 
-        if settings.RUN_ENV == RunEnvs.PROD:
-            rsync_to_the_other_nfs(download_job)
+        # if settings.RUN_ENV == RunEnvs.PROD:
+        #     rsync_to_the_other_nfs(download_job)
 
 
         return out_file_path, total_items
