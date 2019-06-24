@@ -58,6 +58,9 @@ class DownloadJobsTester(TestCase):
         self.assertAlmostEqual(expiration_date_got_seconds, expiration_date_should_be_seconds, delta=30,
                                msg='The expiration time was not calculated correctly')
 
+        # finally. the file must have been created
+        self.assertTrue(Path(out_file_path_got).is_file(), msg='The output file was not created!!!')
+
     def test_make_csv_download_file_with_context(self):
         # move a search results mock file for this test
         test_search_context_path = os.path.join(settings.SSSEARCH_RESULTS_DIR, 'test_search_context.json')
@@ -120,6 +123,8 @@ class DownloadJobsTester(TestCase):
             line_1 = lines_got[1]
             self.assertEqual(line_1, '"100.0";"CHEMBL59";"DOPAMINE"\n', 'Line is malformed!')
 
+        # finally. the file must have been created
+        self.assertTrue(Path(out_file_path_got).is_file(), msg='The output file was not created!!!')
         os.remove(test_search_context_path)
 
     def test_fails_when_format_is_not_available(self):
@@ -180,4 +185,6 @@ class DownloadJobsTester(TestCase):
         expiration_date_got_seconds = expiration_date_got.timestamp()
         self.assertAlmostEqual(expiration_date_got_seconds, expiration_date_should_be_seconds, delta=30,
                                msg='The expiration time was not calculated correctly')
+
+        self.assertTrue(Path(out_file_path_got).is_file(), msg='The output file was not created!!!')
 
