@@ -12,6 +12,7 @@ from glados.es.ws2es.util import SummableDict
 class OutputFormats(Enum):
     CSV = 'CSV'
     TSV = 'TSV'
+    SDF = 'SDF'
 
 
 class FileWriterError(Exception):

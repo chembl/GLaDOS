@@ -16,6 +16,11 @@ import logging
 logger = logging.getLogger('django')
 
 
+class DownloadJobError(Exception):
+    """Base class for exceptions in the download jobs."""
+    pass
+
+
 @job
 def make_download_file(job_id):
     logger.debug('MAKING DOWNLOAD FILE')
@@ -29,7 +34,11 @@ def make_download_file(job_id):
 
     index_name = download_job.index_name
     raw_columns_to_download = download_job.raw_columns_to_download
-    all_columns_to_download = json.loads(raw_columns_to_download)
+    if raw_columns_to_download is None or raw_columns_to_download == '':
+        all_columns_to_download = []
+    else:
+        all_columns_to_download = json.loads(raw_columns_to_download)
+
     own_columns = [col for col in all_columns_to_download if col.get('is_contextual', False) is not True]
 
     raw_query = download_job.raw_query
@@ -51,10 +60,14 @@ def make_download_file(job_id):
             context_index[item[id_property]] = item
         contextual_columns = [col for col in all_columns_to_download if col.get('is_contextual', False) is True]
 
-    if raw_desired_format in ['csv', 'CSV']:
+    if raw_desired_format.upper() == 'CSV':
         desired_format = file_writer.OutputFormats.CSV
-    elif raw_desired_format in ['tsv', 'TSV']:
+    elif raw_desired_format.upper() == 'TSV':
         desired_format = file_writer.OutputFormats.TSV
+    elif raw_desired_format.upper() == 'SDF':
+        desired_format = file_writer.OutputFormats.SDF
+    else:
+        raise DownloadJobError('The format {} is not suooported'.format(raw_desired_format))
 
     try:
 
@@ -62,17 +75,21 @@ def make_download_file(job_id):
             download_job.progress = progress_percentage
             download_job.save()
 
-        out_file_path, total_items = file_writer.write_separated_values_file(
-            desired_format=desired_format,
-            index_name=index_name,
-            query=query,
-            columns_to_download=own_columns,
-            base_file_name=base_file_name,
-            context=context_index,
-            id_property=id_property,
-            contextual_columns=contextual_columns,
-            progress_function=save_download_job_progress
-        )
+        if (desired_format is file_writer.OutputFormats.CSV) or (desired_format is file_writer.OutputFormats.TSV):
+            out_file_path, total_items = file_writer.write_separated_values_file(
+                desired_format=desired_format,
+                index_name=index_name,
+                query=query,
+                columns_to_download=own_columns,
+                base_file_name=base_file_name,
+                context=context_index,
+                id_property=id_property,
+                contextual_columns=contextual_columns,
+                progress_function=save_download_job_progress
+            )
+        else:
+            out_file_path, total_items = file_writer.write_sdf_file(query=query, base_file_name=base_file_name,
+                                                                    progress_function=save_download_job_progress)
 
         download_job.total_items = total_items
         download_job.file_path = out_file_path
