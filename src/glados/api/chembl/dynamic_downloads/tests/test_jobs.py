@@ -4,6 +4,8 @@ from glados.api.chembl.dynamic_downloads.models import DownloadJob
 import os
 from datetime import timedelta
 from django.utils import timezone
+from multiprocessing import Process
+import time
 
 
 class DownloadJobsTester(TestCase):
@@ -14,9 +16,6 @@ class DownloadJobsTester(TestCase):
         DownloadJob.objects.all().delete()
 
     def test_make_csv_download_file_no_context(self):
-        print('------------------------------------------------------------------------')
-        print('test_make_download_file!!!')
-        print('------------------------------------------------------------------------')
 
         job_id = 'CHEMBL25-chembl_molecule-gZ6DeuyotzHOwnHi1bKOiu_WHWBbLgOlaCGSTa4Hiuw=.csv'
         test_download_job = DownloadJob(
@@ -59,5 +58,13 @@ class DownloadJobsTester(TestCase):
                                msg='The expiration time was not calculated correctly')
 
     # TODO: Test with context
+    def test_make_csv_download_file_with_context(self):
+        pass
+
+    # TODO: Test sdf files
+    def test_make_sdf_download_file_with_context(self):
+        pass
+
+
 
 

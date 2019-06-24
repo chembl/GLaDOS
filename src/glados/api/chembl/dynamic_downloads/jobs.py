@@ -19,8 +19,8 @@ logger = logging.getLogger('django')
 @job
 def make_download_file(job_id):
 
-    print('MAKING DOWNLOAD FILE')
-    print(job_id)
+    logger.debug('MAKING DOWNLOAD FILE')
+    logger.debug(job_id)
     start_time = time.time()
     download_job = DownloadJob.objects.get(job_id=job_id)
     download_job.worker = socket.gethostname()
@@ -113,5 +113,50 @@ def rsync_to_the_other_nfs(download_job):
 
     download_job.append_to_job_log("Rsyncing: {}".format(rsync_command))
     subprocess.check_call(rsync_command_parts)
+
+
+@job
+def wait_until_job_is_deleted_and_requeue(download_id):
+
+    download_job = DownloadJob.objects.get(job_id=download_id)
+    download_id = download_job.job_id
+    index_name = download_job.index_name
+    raw_columns_to_download = download_job.raw_columns_to_download
+    raw_query = download_job.raw_query
+    parsed_desired_format = download_job.desired_format
+    context_id = download_job.context_id
+    id_property = download_job.id_property
+
+    job_exists = True
+    while job_exists:
+        try:
+            logger.debug('job still exists')
+            DownloadJob.objects.get(job_id=download_id)
+            time.sleep(1)
+        except DownloadJob.DoesNotExist:
+            logger.debug('job was deleted!')
+            job_exists = False
+
+    queue_job(download_id=download_id, index_name=index_name, raw_columns_to_download=raw_columns_to_download,
+              raw_query=raw_query, parsed_desired_format=parsed_desired_format, context_id=context_id,
+              id_property=id_property
+              )
+
+
+def queue_job(download_id, index_name, raw_columns_to_download, raw_query, parsed_desired_format, context_id,
+              id_property):
+
+    download_job = DownloadJob(
+        job_id=download_id,
+        index_name=index_name,
+        raw_columns_to_download=raw_columns_to_download,
+        raw_query=raw_query,
+        desired_format=parsed_desired_format,
+        log=format_log_message('Job Queued'),
+        context_id=context_id,
+        id_property=id_property
+    )
+    download_job.save()
+    make_download_file.delay(download_id)
 
 
