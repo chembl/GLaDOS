@@ -18,7 +18,6 @@ logger = logging.getLogger('django')
 
 @job
 def make_download_file(job_id):
-
     logger.debug('MAKING DOWNLOAD FILE')
     logger.debug(job_id)
     start_time = time.time()
@@ -30,14 +29,27 @@ def make_download_file(job_id):
 
     index_name = download_job.index_name
     raw_columns_to_download = download_job.raw_columns_to_download
-    columns_to_download = json.loads(raw_columns_to_download)
+    all_columns_to_download = json.loads(raw_columns_to_download)
+    own_columns = [col for col in all_columns_to_download if col.get('is_contextual', False) is not True]
+
     raw_query = download_job.raw_query
     query = json.loads(raw_query)
     base_file_name = job_id.split('.')[0]
-    context_id = download_job.context_id
-    context = None
     id_property = download_job.id_property
     raw_desired_format = download_job.desired_format
+    context_id = download_job.context_id
+
+    contextual_columns = []
+    context_index = None
+    if context_id is not None:
+        # TODO The loading of the context needs to be refactored, as well as the structure based searches.
+
+        context_file = os.path.join(settings.SSSEARCH_RESULTS_DIR, context_id + '.json')
+        raw_context = json.loads(open(context_file).read())
+        context_index = {}
+        for item in raw_context:
+            context_index[item[id_property]] = item
+        contextual_columns = [col for col in all_columns_to_download if col.get('is_contextual', False) is True]
 
     if raw_desired_format in ['csv', 'CSV']:
         desired_format = file_writer.OutputFormats.CSV
@@ -54,10 +66,11 @@ def make_download_file(job_id):
             desired_format=desired_format,
             index_name=index_name,
             query=query,
-            columns_to_download=columns_to_download,
+            columns_to_download=own_columns,
             base_file_name=base_file_name,
-            context=context,
+            context=context_index,
             id_property=id_property,
+            contextual_columns=contextual_columns,
             progress_function=save_download_job_progress
         )
 
@@ -117,7 +130,6 @@ def rsync_to_the_other_nfs(download_job):
 
 @job
 def wait_until_job_is_deleted_and_requeue(download_id):
-
     download_job = DownloadJob.objects.get(job_id=download_id)
     download_id = download_job.job_id
     index_name = download_job.index_name
@@ -145,7 +157,6 @@ def wait_until_job_is_deleted_and_requeue(download_id):
 
 def queue_job(download_id, index_name, raw_columns_to_download, raw_query, parsed_desired_format, context_id,
               id_property):
-
     download_job = DownloadJob(
         job_id=download_id,
         index_name=index_name,
@@ -158,5 +169,3 @@ def queue_job(download_id, index_name, raw_columns_to_download, raw_query, parse
     )
     download_job.save()
     make_download_file.delay(download_id)
-
-

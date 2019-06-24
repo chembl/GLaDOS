@@ -4,8 +4,9 @@ from glados.api.chembl.dynamic_downloads.models import DownloadJob
 import os
 from datetime import timedelta
 from django.utils import timezone
-from multiprocessing import Process
-import time
+from django.conf import settings
+import json
+import gzip
 
 
 class DownloadJobsTester(TestCase):
@@ -16,7 +17,6 @@ class DownloadJobsTester(TestCase):
         DownloadJob.objects.all().delete()
 
     def test_make_csv_download_file_no_context(self):
-
         job_id = 'CHEMBL25-chembl_molecule-gZ6DeuyotzHOwnHi1bKOiu_WHWBbLgOlaCGSTa4Hiuw=.csv'
         test_download_job = DownloadJob(
             job_id=job_id,
@@ -54,17 +54,73 @@ class DownloadJobsTester(TestCase):
 
         expiration_date_got = test_download_job.expires
         expiration_date_got_seconds = expiration_date_got.timestamp()
+        self.assertAlmostEqual(expiration_date_got_seconds, expiration_date_should_be_seconds, delta=30,
+                               msg='The expiration time was not calculated correctly')
+
+    def test_make_csv_download_file_with_context(self):
+        # move a search results mock file for this test
+        test_search_context_path = os.path.join(settings.SSSEARCH_RESULTS_DIR, 'test_search_context.json')
+
+        test_contextual_columns = [{'label': 'Similarity', 'property_name': 'similarity', 'is_contextual': True}]
+        test_raw_context = [{
+            'molecule_chembl_id': 'CHEMBL59',
+            'similarity': 100.0
+        }]
+
+        with open(test_search_context_path, 'wt') as test_search_file:
+            test_search_file.write(json.dumps(test_raw_context))
+
+        job_id = 'CHEMBL25-chembl_molecule-gZ6DeuyotzHOwnHi1bKOiu_WHWBbLgOlaCGSTa4Hiuw=.csv'
+        context_id = 'test_search_context'
+        test_download_job = DownloadJob(
+            job_id=job_id,
+            index_name='chembl_molecule',
+            raw_columns_to_download=
+            '[{"property_name":"molecule_chembl_id","label":"ChEMBL ID"},{"property_name":"pref_name","label":"Name"},'
+            '{"property_name": "similarity","label": "Similarity","is_contextual": true}]',
+            raw_query='{"query_string": {"query": "molecule_chembl_id:(CHEMBL59)"}}',
+            desired_format='csv',
+            log=DownloadJob.format_log_message('Job Queued'),
+            context_id=context_id,
+            id_property='molecule_chembl_id'
+        )
+        test_download_job.save()
+
+        # Here is the Tested Function!!!!
+        out_file_path_got, total_items_got = jobs.make_download_file(job_id)
+        finished_time = timezone.now()
+        delta = timedelta(days=DownloadJob.DAYS_TO_EXPIRE)
+        expiration_date_should_be = finished_time + delta
+        expiration_date_should_be_seconds = expiration_date_should_be.timestamp()
+
+        test_download_job.refresh_from_db()
+        total_items_must_be = 1
+        self.assertEqual(total_items_got, total_items_must_be, msg='The total items got is not correct')
+        self.assertTrue(os.path.exists(out_file_path_got), msg='The output file was not generated!')
+
+        final_status_must_be = DownloadJob.FINISHED
+        final_progress_must_be = 100
+        final_status_got = test_download_job.status
+        final_progress_got = test_download_job.progress
+
+        self.assertEqual(final_status_must_be, final_status_got, msg='The final status of the job '
+                                                                     'is not "Finished"')
+        self.assertEqual(final_progress_must_be, final_progress_got, msg='The final progress of the job must be 100')
+
+        expiration_date_got = test_download_job.expires
+        expiration_date_got_seconds = expiration_date_got.timestamp()
         self.assertAlmostEqual(expiration_date_got_seconds, expiration_date_should_be_seconds, delta=1,
                                msg='The expiration time was not calculated correctly')
 
-    # TODO: Test with context
-    def test_make_csv_download_file_with_context(self):
-        pass
+        with gzip.open(out_file_path_got, 'rt', encoding='utf-16-le') as file_got:
+            lines_got = file_got.readlines()
+            line_0 = lines_got[0]
+            self.assertEqual(line_0, '"Similarity";"ChEMBL ID";"Name"\n', 'Header line is malformed!')
+            line_1 = lines_got[1]
+            self.assertEqual(line_1, '"100.0";"CHEMBL59";"DOPAMINE"\n', 'Line is malformed!')
+
+        os.remove(test_search_context_path)
 
     # TODO: Test sdf files
     def test_make_sdf_download_file_with_context(self):
         pass
-
-
-
-
