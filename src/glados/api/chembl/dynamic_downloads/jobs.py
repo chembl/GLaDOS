@@ -186,3 +186,13 @@ def queue_job(download_id, index_name, raw_columns_to_download, raw_query, parse
     )
     download_job.save()
     make_download_file.delay(download_id)
+
+
+def requeue_job(download_id, job_log_msg):
+    # This queues again a job that exists but for any reason it needs to be put into the queue again
+    download_job = DownloadJob.objects.get(job_id=download_id)
+    download_job.progress = 0
+    download_job.status = DownloadJob.QUEUED
+    download_job.save()
+    download_job.append_to_job_log(job_log_msg)
+    make_download_file.delay(download_id)
