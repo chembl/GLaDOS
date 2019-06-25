@@ -1,5 +1,6 @@
 import glados.es.ws2es.resources_description as resources_description
 from glados.es.ws2es.util import SummableDict
+from glados.es.ws2es import resources_description
 import yaml
 from django.conf import settings
 from django.core.cache import cache
@@ -9,11 +10,11 @@ class ESPropsConfigurationGetterError(Exception):
     """Base class for exceptions in GLaDOS configuration."""
     pass
 
+
 CACHE_TIME = 3600
 
 
 def get_config_for_prop(index_name, prop_id):
-
     cache_key = 'property_config-{index_name}-{prop_id}'.format(index_name=index_name, prop_id=prop_id)
     cache_response = cache.get(cache_key)
     if cache_response is not None:
@@ -91,7 +92,6 @@ def get_config_for_prop(index_name, prop_id):
 
 
 def get_config_for_props_list(index_name, prop_ids):
-
     configs = []
 
     for prop_id in prop_ids:
@@ -101,7 +101,6 @@ def get_config_for_props_list(index_name, prop_ids):
 
 
 def get_config_for_group(index_name, group_name):
-
     groups_config = yaml.load(open(settings.PROPERTIES_GROUPS_FILE, 'r'), Loader=yaml.FullLoader)
     if groups_config is None:
         raise ESPropsConfigurationGetterError("There is no configuration for groups")
@@ -125,3 +124,16 @@ def get_config_for_group(index_name, group_name):
 
     return configs
 
+
+def get_id_property_for_index(index_name):
+    resources_desc = resources_description.RESOURCES_BY_ALIAS_NAME
+    resource_desc = resources_desc.get(index_name)
+    if resource_desc is None:
+        raise ESPropsConfigurationGetterError('The index {} does not exist.'.format(index_name))
+
+    resource_ids = resource_desc.resource_ids
+    if len(resource_ids) > 1:
+        raise ESPropsConfigurationGetterError('The index {} has a compound id. Which is not supported yet'
+                                              .format(index_name))
+
+    return resource_ids[0]

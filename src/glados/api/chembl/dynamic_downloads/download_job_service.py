@@ -3,7 +3,6 @@ from glados.api.chembl.dynamic_downloads import jobs
 
 def queue_download_job(index_name, raw_query, desired_format, context_id):
 
-    response = {}
     download_id = 'hola'
         # get_download_id(index_name, raw_query, desired_format, context_id)
     # parsed_desired_format = desired_format.lower()
@@ -24,7 +23,6 @@ def queue_download_job(index_name, raw_query, desired_format, context_id):
         id_property=id_property
     )
 
-    response['download_id'] = download_job.job_id
-    return response
+    return download_job.job_id
 
 

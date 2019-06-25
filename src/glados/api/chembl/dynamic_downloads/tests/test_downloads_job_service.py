@@ -32,9 +32,12 @@ class DownloadJobsServiceTester(TestCase):
         desired_format = 'csv'
         context_id = 'test_search_context'
 
-        response_got = download_job_service.queue_download_job(index_name, raw_query, desired_format, context_id)
-        print('response_got: ', response_got)
-        # job_got = DownloadJob.objects.get()
+        job_id = download_job_service.queue_download_job(index_name, raw_query, desired_format, context_id)
+        download_job_got = DownloadJob.objects.get(job_id=job_id)
+
+        id_property_must_be = 'molecule_chembl_id'
+        id_property_got = download_job_got.id_property
+        self.assertEqual(id_property_must_be, id_property_got, msg='The id property was not set correctly!')
 
 
         # TODO: a job must exist in queued state

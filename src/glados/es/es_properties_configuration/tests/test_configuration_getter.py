@@ -248,3 +248,30 @@ class ConfigurationGetterTester(TestCase):
                 props_list_got = [c['prop_id'] for c in configs_got[sub_group]]
                 self.assertTrue(props_list_got == props_list_must_be)
 
+    def test_gets_id_property_for_index(self):
+
+        index_name = 'chembl_molecule'
+        id_property_must_be = 'molecule_chembl_id'
+
+        for index_name, id_property_must_be in [('chembl_molecule', 'molecule_chembl_id')]:
+            id_property_got = configuration_getter.get_id_property_for_index(index_name)
+
+            self.assertEqual(id_property_must_be, id_property_got, msg='The id property for {} was not returned '
+                                                                       'correctly!'.format(index_name))
+
+    def test_fails_to_get_id_property_when_index_does_not_exist(self):
+
+        index_name = 'does_not_exist'
+
+        with self.assertRaises(configuration_getter.ESPropsConfigurationGetterError,
+                               msg='This should rise an error when the index does not exist'):
+            configuration_getter.get_id_property_for_index(index_name)
+
+    def test_fails_to_get_id_property_when_it_is_a_compound_id(self):
+        """Handling of compound ids is not implemented yet! mostly in using contexts!"""
+
+        index_name = 'chembl_mechanism_by_parent_target'
+
+        with self.assertRaises(configuration_getter.ESPropsConfigurationGetterError,
+                               msg='This should rise an error when the index has a compound id'):
+            configuration_getter.get_id_property_for_index(index_name)
