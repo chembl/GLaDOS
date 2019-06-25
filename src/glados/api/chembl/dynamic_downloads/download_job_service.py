@@ -1,3 +1,6 @@
+from glados.api.chembl.dynamic_downloads import jobs
+
+
 def queue_download_job(index_name, raw_query, desired_format, context_id):
 
     response = {}
@@ -12,7 +15,16 @@ def queue_download_job(index_name, raw_query, desired_format, context_id):
                               '{"property_name": "similarity","label": "Similarity","is_contextual": true}]'
     id_property = 'molecule_chembl_id'
 
-    response['download_id'] = download_id
+    download_job = jobs.queue_new_job(
+        index_name=index_name,
+        raw_columns_to_download=raw_columns_to_download,
+        raw_query=raw_query,
+        parsed_desired_format=desired_format.upper(),
+        context_id=context_id,
+        id_property=id_property
+    )
+
+    response['download_id'] = download_job.job_id
     return response
 
 

@@ -3,6 +3,7 @@ from glados.api.chembl.dynamic_downloads.models import DownloadJob
 import json
 import os
 from django.conf import settings
+from glados.api.chembl.dynamic_downloads import download_job_service
 
 
 class DownloadJobsServiceTester(TestCase):
@@ -30,7 +31,10 @@ class DownloadJobsServiceTester(TestCase):
         raw_query = '{"query_string": {"query": "molecule_chembl_id:(CHEMBL59)"}}'
         desired_format = 'csv'
         context_id = 'test_search_context'
-        
+
+        response_got = download_job_service.queue_download_job(index_name, raw_query, desired_format, context_id)
+        print('response_got: ', response_got)
+        # job_got = DownloadJob.objects.get()
 
 
         # TODO: a job must exist in queued state

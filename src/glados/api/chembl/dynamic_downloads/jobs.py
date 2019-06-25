@@ -1,4 +1,5 @@
 import time
+from glados.api.chembl.dynamic_downloads.models import DownloadJobManager
 from glados.api.chembl.dynamic_downloads.models import DownloadJob
 import socket
 import json
@@ -166,30 +167,33 @@ def wait_until_job_is_deleted_and_requeue(download_id):
             logger.debug('job was deleted!')
             job_exists = False
 
-    queue_job(download_id=download_id, index_name=index_name, raw_columns_to_download=raw_columns_to_download,
-              raw_query=raw_query, parsed_desired_format=parsed_desired_format, context_id=context_id,
-              id_property=id_property
-              )
+    queue_new_job(index_name=index_name, raw_columns_to_download=raw_columns_to_download,
+                  raw_query=raw_query, parsed_desired_format=parsed_desired_format, context_id=context_id,
+                  id_property=id_property
+                  )
 
 
-def queue_job(download_id, index_name, raw_columns_to_download, raw_query, parsed_desired_format, context_id,
-              id_property):
-    download_job = DownloadJob(
-        job_id=download_id,
+def queue_new_job(index_name, raw_columns_to_download, raw_query, parsed_desired_format, context_id,
+                  id_property):
+    download_job_manager = DownloadJobManager()
+    download_job = download_job_manager.create_download_job(
         index_name=index_name,
         raw_columns_to_download=raw_columns_to_download,
         raw_query=raw_query,
         desired_format=parsed_desired_format,
-        log=format_log_message('Job Queued'),
+        log=DownloadJob.format_log_message('Job Queued'),
         context_id=context_id,
-        id_property=id_property
-    )
+        id_property=id_property)
+
     download_job.save()
+    download_id = download_job.job_id
 
     if settings.SPAWN_JOBS:
         make_download_file.delay(download_id)
     else:
         make_download_file(download_id)
+
+    return download_job
 
 
 def requeue_job(download_id, job_log_msg):

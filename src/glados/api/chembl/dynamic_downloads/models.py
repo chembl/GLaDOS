@@ -2,6 +2,46 @@ from django.db import models
 from datetime import timedelta
 import socket
 from django.utils import timezone
+import json
+from django.conf import settings
+import hashlib
+import base64
+
+
+class DownloadJobManager(models.Manager):
+    def get_download_id(self, index_name, raw_query, desired_format, context_id):
+        # make sure the string generated is stable
+        stable_raw_query = json.dumps(json.loads(raw_query), sort_keys=True)
+
+        parsed_desired_format = desired_format.upper()
+
+        latest_release_full = settings.CURRENT_CHEMBL_RELEASE_NAME
+        query_digest = hashlib.sha256(stable_raw_query.encode('utf-8')).digest()
+        base64_query_digest = base64.b64encode(query_digest).decode('utf-8').replace('/', '_').replace('+', '-')
+
+        if context_id is None:
+            download_id = "{}-{}-{}.{}".format(latest_release_full, index_name, base64_query_digest,
+                                               parsed_desired_format)
+        else:
+            download_id = "{}-{}-{}-{}.{}".format(latest_release_full, index_name, base64_query_digest,
+                                                  context_id, parsed_desired_format)
+        return download_id
+
+    def create_download_job(self, index_name, raw_columns_to_download, raw_query, desired_format, log, context_id,
+                            id_property):
+        download_id = self.get_download_id(index_name, raw_query, desired_format, context_id)
+
+        download_job = DownloadJob(
+            job_id=download_id,
+            index_name=index_name,
+            raw_columns_to_download=raw_columns_to_download,
+            raw_query=raw_query,
+            desired_format=desired_format,
+            log=log,
+            context_id=context_id,
+            id_property=id_property
+        )
+        return download_job
 
 
 # This is to keep track of the status of a download job
