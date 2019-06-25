@@ -5,17 +5,8 @@ import json
 
 def queue_download_job(index_name, raw_query, desired_format, context_id):
 
-    # get_download_id(index_name, raw_query, desired_format, context_id)
-    # parsed_desired_format = desired_format.lower()
-
-    # I am responsible for raw_columns_to_download, id_property
-    print('index_name: ')
-    print(index_name)
     columns_to_download = configuration_getter.get_config_for_group(index_name, 'download')['default']
-    print('columns_to_download: ')
-    print(columns_to_download)
     raw_columns_to_download = json.dumps(columns_to_download)
-
     id_property = configuration_getter.get_id_property_for_index(index_name)
 
     download_job = jobs.queue_new_job(

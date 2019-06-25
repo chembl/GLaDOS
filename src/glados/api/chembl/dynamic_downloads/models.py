@@ -9,6 +9,10 @@ import base64
 
 
 class DownloadJobManager(models.Manager):
+
+    class DownloadJobManagerError(Exception):
+        pass
+
     def get_download_id(self, index_name, raw_query, desired_format, context_id):
         # make sure the string generated is stable
         stable_raw_query = json.dumps(json.loads(raw_query), sort_keys=True)
@@ -29,10 +33,16 @@ class DownloadJobManager(models.Manager):
 
     def create_download_job(self, index_name, raw_columns_to_download, raw_query, desired_format, log, context_id,
                             id_property):
-        download_id = self.get_download_id(index_name, raw_query, desired_format, context_id)
+        job_id = self.get_download_id(index_name, raw_query, desired_format, context_id)
 
+        try:
+            DownloadJob.objects.get(job_id=job_id)
+            raise DownloadJobManager.DownloadJobManagerError('A job with the same parametrers already exists')
+        except DownloadJob.DoesNotExist:
+            pass
+            
         download_job = DownloadJob(
-            job_id=download_id,
+            job_id=job_id,
             index_name=index_name,
             raw_columns_to_download=raw_columns_to_download,
             raw_query=raw_query,

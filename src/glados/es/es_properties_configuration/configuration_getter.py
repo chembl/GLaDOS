@@ -105,7 +105,9 @@ def get_config_for_props_list(index_name, prop_ids):
 def get_config_for_group(index_name, group_name):
     groups_config = yaml.load(open(settings.PROPERTIES_GROUPS_FILE, 'r'), Loader=yaml.FullLoader)
     if groups_config is None:
-        raise ESPropsConfigurationGetterError("There is no configuration for groups")
+        raise ESPropsConfigurationGetterError("There is no configuration for groups. "
+                                              "There should be a configuration set up in {}"
+                                              .format(settings.PROPERTIES_GROUPS_FILE))
 
     index_mapping = resources_description.RESOURCES_BY_ALIAS_NAME.get(index_name)
     if index_mapping is None:
