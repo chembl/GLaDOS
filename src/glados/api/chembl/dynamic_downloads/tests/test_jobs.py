@@ -23,7 +23,7 @@ class DownloadJobsTester(TestCase):
             job_id=job_id,
             index_name='chembl_molecule',
             raw_columns_to_download=
-            '[{"property_name":"molecule_chembl_id","label":"ChEMBL ID"},{"property_name":"pref_name","label":"Name"}]',
+            '[{"prop_id":"molecule_chembl_id","label":"ChEMBL ID"},{"prop_id":"pref_name","label":"Name"}]',
             raw_query='{"query_string": {"query": "molecule_chembl_id:(CHEMBL59)"}}',
             desired_format='csv',
             log=DownloadJob.format_log_message('Job Queued'),
@@ -79,8 +79,8 @@ class DownloadJobsTester(TestCase):
             job_id=job_id,
             index_name='chembl_molecule',
             raw_columns_to_download=
-            '[{"property_name":"molecule_chembl_id","label":"ChEMBL ID"},{"property_name":"pref_name","label":"Name"},'
-            '{"property_name": "similarity","label": "Similarity","is_contextual": true}]',
+            '[{"prop_id":"molecule_chembl_id","label":"ChEMBL ID"},{"prop_id":"pref_name","label":"Name"},'
+            '{"prop_id": "similarity","label": "Similarity","is_contextual": true}]',
             raw_query='{"query_string": {"query": "molecule_chembl_id:(CHEMBL59)"}}',
             desired_format='csv',
             log=DownloadJob.format_log_message('Job Queued'),
@@ -133,7 +133,7 @@ class DownloadJobsTester(TestCase):
             job_id=job_id,
             index_name='chembl_molecule',
             raw_columns_to_download=
-            '[{"property_name":"molecule_chembl_id","label":"ChEMBL ID"},{"property_name":"pref_name","label":"Name"}]',
+            '[{"prop_id":"molecule_chembl_id","label":"ChEMBL ID"},{"prop_id":"pref_name","label":"Name"}]',
             raw_query='{"query_string": {"query": "molecule_chembl_id:(CHEMBL59)"}}',
             desired_format='kgjhgjhgjhgjhghj',
             log=DownloadJob.format_log_message('Job Queued'),

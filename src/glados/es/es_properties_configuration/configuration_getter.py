@@ -24,7 +24,6 @@ def get_config_for_prop(index_name, prop_id):
     if index_mapping is None:
         raise ESPropsConfigurationGetterError("The index {} does not exist!".format(index_name))
 
-    # Search for description in Elasticsearch
     simplified_mapping = index_mapping.get_simplified_mapping_from_es()
     es_property_description = simplified_mapping.get(prop_id)
 
@@ -47,6 +46,7 @@ def get_config_for_prop(index_name, prop_id):
                                               .format(prop_id))
 
     elif found_in_es and not found_in_override:
+        # this is a normal property WITHOUT override
 
         config = SummableDict({
             'index_name': index_name,
@@ -59,6 +59,7 @@ def get_config_for_prop(index_name, prop_id):
         config = SummableDict({
             'index_name': index_name,
             'prop_id': prop_id,
+            'is_virtual': True
         })
 
         based_on = property_override_description.get('based_on')
@@ -69,6 +70,7 @@ def get_config_for_prop(index_name, prop_id):
                     'The virtual property {prop_id} is based on {based_on} which does not exist in elasticsearch '
                     'index {index_name}'.format(prop_id=prop_id, based_on=based_on, index_name=index_name))
             config += SummableDict(base_description)
+            config['is_contextual'] = True
         else:
             if property_override_description.get('aggregatable') is None or \
                             property_override_description.get('type') is None or \
@@ -79,7 +81,7 @@ def get_config_for_prop(index_name, prop_id):
         config += property_override_description
 
     elif found_in_es and found_in_override:
-        # this is a normal
+        # this is a normal overridden property
         config = SummableDict({
             'index_name': index_name,
             'prop_id': prop_id,

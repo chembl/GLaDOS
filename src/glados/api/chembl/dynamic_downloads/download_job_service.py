@@ -1,18 +1,20 @@
 from glados.api.chembl.dynamic_downloads import jobs
 from glados.es.es_properties_configuration import configuration_getter
+import json
 
 
 def queue_download_job(index_name, raw_query, desired_format, context_id):
 
-    download_id = 'hola'
-        # get_download_id(index_name, raw_query, desired_format, context_id)
+    # get_download_id(index_name, raw_query, desired_format, context_id)
     # parsed_desired_format = desired_format.lower()
 
     # I am responsible for raw_columns_to_download, id_property
-
-    raw_columns_to_download = '[{"property_name":"molecule_chembl_id","label":"ChEMBL ID"},' \
-                              '{"property_name":"pref_name","label":"Name"},' \
-                              '{"property_name": "similarity","label": "Similarity","is_contextual": true}]'
+    print('index_name: ')
+    print(index_name)
+    columns_to_download = configuration_getter.get_config_for_group(index_name, 'download')['default']
+    print('columns_to_download: ')
+    print(columns_to_download)
+    raw_columns_to_download = json.dumps(columns_to_download)
 
     id_property = configuration_getter.get_id_property_for_index(index_name)
 

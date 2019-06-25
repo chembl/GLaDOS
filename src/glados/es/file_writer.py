@@ -6,7 +6,6 @@ from enum import Enum
 import os
 from django.conf import settings
 import gzip
-from glados.es.ws2es.util import SummableDict
 
 
 class OutputFormats(Enum):
@@ -21,7 +20,7 @@ class FileWriterError(Exception):
 
 
 def get_search_source(columns_to_download):
-    return [col['property_name'] for col in columns_to_download]
+    return [col['prop_id'] for col in columns_to_download]
 
 
 def format_cell(original_value):
@@ -85,7 +84,7 @@ def write_separated_values_file(desired_format, index_name, query, columns_to_do
             doc_source = doc_i['_source']
 
             dot_notation_getter = DotNotationGetter(doc_source)
-            own_properties_to_get = [col['property_name'] for col in columns_to_download]
+            own_properties_to_get = [col['prop_id'] for col in columns_to_download]
 
             own_values = [columns_parser.parse(dot_notation_getter.get_from_string(prop_name), index_name, prop_name)
                           for prop_name in own_properties_to_get]
@@ -94,7 +93,7 @@ def write_separated_values_file(desired_format, index_name, query, columns_to_do
             if using_context:
                 context_item = context.get(doc_i['_id'])
                 if context_item is not None:
-                    contextual_values = [str(context_item[col['property_name']]) for col in contextual_columns]
+                    contextual_values = [str(context_item[col['prop_id']]) for col in contextual_columns]
                 else:
                     contextual_values = ['' for i in range(0, len(contextual_columns))]
 
