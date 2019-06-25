@@ -1,4 +1,5 @@
 from glados.api.chembl.dynamic_downloads import jobs
+from glados.es.es_properties_configuration import configuration_getter
 
 
 def queue_download_job(index_name, raw_query, desired_format, context_id):
@@ -12,7 +13,8 @@ def queue_download_job(index_name, raw_query, desired_format, context_id):
     raw_columns_to_download = '[{"property_name":"molecule_chembl_id","label":"ChEMBL ID"},' \
                               '{"property_name":"pref_name","label":"Name"},' \
                               '{"property_name": "similarity","label": "Similarity","is_contextual": true}]'
-    id_property = 'molecule_chembl_id'
+
+    id_property = configuration_getter.get_id_property_for_index(index_name)
 
     download_job = jobs.queue_new_job(
         index_name=index_name,
