@@ -65,7 +65,6 @@ class DownloadJobsTester(TestCase):
         # move a search results mock file for this test
         test_search_context_path = os.path.join(settings.SSSEARCH_RESULTS_DIR, 'test_search_context.json')
 
-        test_contextual_columns = [{'label': 'Similarity', 'property_name': 'similarity', 'is_contextual': True}]
         test_raw_context = [{
             'molecule_chembl_id': 'CHEMBL59',
             'similarity': 100.0

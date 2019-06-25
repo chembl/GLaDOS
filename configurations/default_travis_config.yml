@@ -1,4 +1,6 @@
 run_env: TRAVIS
+spawn_jobs: False # When False, it doesn't use the django rq system, it just executes the function right away.
+# ^ If not present, it is assumed to be True
 elasticsearch:
   host: 'https://www.ebi.ac.uk/chembl/glados-es'
   public_host: 'https://www.ebi.ac.uk/chembl/glados-es'

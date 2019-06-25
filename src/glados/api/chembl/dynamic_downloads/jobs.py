@@ -185,7 +185,11 @@ def queue_job(download_id, index_name, raw_columns_to_download, raw_query, parse
         id_property=id_property
     )
     download_job.save()
-    make_download_file.delay(download_id)
+
+    if settings.SPAWN_JOBS:
+        make_download_file.delay(download_id)
+    else:
+        make_download_file(download_id)
 
 
 def requeue_job(download_id, job_log_msg):
@@ -195,4 +199,8 @@ def requeue_job(download_id, job_log_msg):
     download_job.status = DownloadJob.QUEUED
     download_job.save()
     download_job.append_to_job_log(job_log_msg)
-    make_download_file.delay(download_id)
+
+    if settings.SPAWN_JOBS:
+        make_download_file.delay(download_id)
+    else:
+        make_download_file(download_id)

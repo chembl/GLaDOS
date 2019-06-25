@@ -99,6 +99,12 @@ if FILTER_QUERY_MAX_CLAUSES is None:
     raise GladosSettingsError("You must tell me the filter_query_max_clauses")
 print('FILTER_QUERY_MAX_CLAUSES: ', FILTER_QUERY_MAX_CLAUSES)
 
+SPAWN_JOBS = run_config.get('spawn_jobs', True)
+if SPAWN_JOBS:
+    print('SPAWN_JOBS is True, this means that I will delay the annotated functions and put them in the worker queue.')
+else:
+    print('SPAWN_JOBS is True, this means that I will run the job functions straight away. Not using any worker.')
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
