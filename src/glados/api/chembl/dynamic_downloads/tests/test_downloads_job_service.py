@@ -95,11 +95,86 @@ class DownloadJobsServiceTester(TestCase):
         self.assertEqual(expires_0, expires_1, msg='The expiration time should have never been changed.')
         self.assertEqual(log_0, log_1, msg='The logs should be the same, because the job was not run again.')
 
+        os.remove(test_search_context_path)
 
+    @override_settings(PROPERTIES_GROUPS_FILE=GROUPS_TEST_FILE, PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE)
+    def test_requeues_job_when_was_in_error(self):
 
+        test_search_context_path = os.path.join(settings.SSSEARCH_RESULTS_DIR, 'test_search_context.json')
+        test_raw_context = [{
+            'molecule_chembl_id': 'CHEMBL59',
+            'similarity': 100.0
+        }]
 
+        with open(test_search_context_path, 'wt') as test_search_file:
+            test_search_file.write(json.dumps(test_raw_context))
 
+        index_name = 'chembl_molecule'
+        raw_query = '{"query_string": {"query": "molecule_chembl_id:(CHEMBL59)"}}'
+        desired_format = 'csv'
+        context_id = 'test_search_context'
 
-        # TODO: the expiration time should have not changed!
+        # Queue the job for the first time
+        job_id_0 = download_job_service.queue_download_job(index_name, raw_query, desired_format, context_id)
+        download_job_got_0 = DownloadJob.objects.get(job_id=job_id_0)
+        expires_0 = download_job_got_0.expires
+        log_0 = download_job_got_0.log
+
+        # now simulate an error in the job
+        download_job_got_0.status = DownloadJob.ERROR
+        download_job_got_0.save()
+
+        # Queue a job again with exactly the same parameters
+        job_id_1 = download_job_service.queue_download_job(index_name, raw_query, desired_format, context_id)
+        download_job_got_1 = DownloadJob.objects.get(job_id=job_id_1)
+        expires_1 = download_job_got_1.expires
+        log_1 = download_job_got_1.log
+
+        self.assertEqual(job_id_0, job_id_1, msg='The ids should be exactly the same.')
+        self.assertNotEqual(expires_0, expires_1, msg='The expiration time should have changed.')
+        self.assertNotEqual(log_0, log_1, msg='The logs should be the different, because the job was run again.')
+
+        os.remove(test_search_context_path)
+
+    @override_settings(PROPERTIES_GROUPS_FILE=GROUPS_TEST_FILE, PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE)
+    def test_requeues_job_when_file_is_missing(self):
+
+        test_search_context_path = os.path.join(settings.SSSEARCH_RESULTS_DIR, 'test_search_context.json')
+        test_raw_context = [{
+            'molecule_chembl_id': 'CHEMBL59',
+            'similarity': 100.0
+        }]
+
+        with open(test_search_context_path, 'wt') as test_search_file:
+            test_search_file.write(json.dumps(test_raw_context))
+
+        index_name = 'chembl_molecule'
+        raw_query = '{"query_string": {"query": "molecule_chembl_id:(CHEMBL59)"}}'
+        desired_format = 'csv'
+        context_id = 'test_search_context'
+
+        # Queue the job for the first time
+        job_id_0 = download_job_service.queue_download_job(index_name, raw_query, desired_format, context_id)
+        download_job_got_0 = DownloadJob.objects.get(job_id=job_id_0)
+        expires_0 = download_job_got_0.expires
+        log_0 = download_job_got_0.log
+
+        # now delete the download file
+        file_path = download_job_got_0.file_path
+        os.remove(file_path)
+
+        # Queue a job again with exactly the same parameters
+        job_id_1 = download_job_service.queue_download_job(index_name, raw_query, desired_format, context_id)
+        download_job_got_1 = DownloadJob.objects.get(job_id=job_id_1)
+        expires_1 = download_job_got_1.expires
+        log_1 = download_job_got_1.log
+
+        self.assertEqual(job_id_0, job_id_1, msg='The ids should be exactly the same.')
+        self.assertNotEqual(expires_0, expires_1, msg='The expiration time should have changed.')
+        self.assertNotEqual(log_0, log_1, msg='The logs should be the different, because the job was run again.')
+        try:
+            file_size = os.path.getsize(download_job_got_1.file_path)
+        except FileNotFoundError:
+            self.fail('The file was not created again!')
 
         os.remove(test_search_context_path)
