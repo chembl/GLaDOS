@@ -188,7 +188,6 @@ class ESBulkSubmitter(Thread):
         self.submission_pb = None
         self.max_docs_per_request = 1000
         self.complete_futures = False
-        signal_handler.add_termination_handler(self.stop_submitter)
 
     def stop_submitter(self, signal, frame):
         self.stop_submission = True
@@ -262,6 +261,7 @@ class ESBulkSubmitter(Thread):
         super().join(timeout)
 
     def run(self):
+        signal_handler.add_termination_handler(self.stop_submitter)
         self.submission_pb = progress_bar_handler.get_new_progressbar('ES-bulk-submitter', 1)
         self.submission_pool.start()
         cur_low_counts = 0
