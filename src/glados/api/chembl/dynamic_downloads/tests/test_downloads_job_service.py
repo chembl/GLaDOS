@@ -6,6 +6,7 @@ from django.conf import settings
 from glados.api.chembl.dynamic_downloads import download_job_service
 import glados.es.ws2es.es_util as es_util
 from glados.settings import RunEnvs
+from datetime import timezone
 
 
 class DownloadJobsServiceTester(TestCase):
@@ -178,3 +179,44 @@ class DownloadJobsServiceTester(TestCase):
             self.fail('The file was not created again!')
 
         os.remove(test_search_context_path)
+
+    @override_settings(PROPERTIES_GROUPS_FILE=GROUPS_TEST_FILE, PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE)
+    def test_returns_status_of_a_job(self):
+
+        test_search_context_path = os.path.join(settings.SSSEARCH_RESULTS_DIR, 'test_search_context.json')
+        test_raw_context = [{
+            'molecule_chembl_id': 'CHEMBL59',
+            'similarity': 100.0
+        }]
+
+        with open(test_search_context_path, 'wt') as test_search_file:
+            test_search_file.write(json.dumps(test_raw_context))
+
+        index_name = 'chembl_molecule'
+        raw_query = '{"query_string": {"query": "molecule_chembl_id:(CHEMBL59)"}}'
+        desired_format = 'csv'
+        context_id = 'test_search_context'
+
+        job_id = download_job_service.queue_download_job(index_name, raw_query, desired_format, context_id)
+        download_job_got = DownloadJob.objects.get(job_id=job_id)
+
+        response_got = download_job_service.get_download_status(job_id)
+        satus_got = response_got['status']
+        status_must_be = download_job_got.status
+        self.assertEqual(satus_got, status_must_be, msg='The status was not given correctly!')
+
+        percentage_got = response_got['percentage']
+        percentage_must_be = download_job_got.progress
+        self.assertEqual(percentage_got, percentage_must_be, msg='The progress was not given correctly!')
+
+        expires_got = response_got['expires']
+        expires_must_be = download_job_got.expires.replace(tzinfo=timezone.utc).isoformat()
+        self.assertEqual(expires_got, expires_must_be, msg='The sexpiration time was not given correctly!')
+
+    @override_settings(PROPERTIES_GROUPS_FILE=GROUPS_TEST_FILE, PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE)
+    def test_raises_error_when_job_does_not_exist(self):
+
+        with self.assertRaises(DownloadJob.DoesNotExist,
+                               msg='This should raise an error because the download does not exist'):
+                download_job_service.get_download_status('does_not_exist')
+

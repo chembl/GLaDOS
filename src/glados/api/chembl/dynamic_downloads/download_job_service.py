@@ -5,7 +5,9 @@ from glados.api.chembl.dynamic_downloads.models import DownloadJob
 from glados.usage_statistics import glados_server_statistics
 import json
 import os
+from datetime import timezone
 import logging
+
 logger = logging.getLogger('django')
 
 
@@ -57,7 +59,24 @@ def queue_download_job(index_name, raw_query, desired_format, context_id):
             logger.debug('job is being deleted! We need to wait until the process finishes')
             jobs.wait_until_job_is_deleted_and_requeue(job_id)
 
-
     return download_job.job_id
+
+
+def get_download_status(download_id):
+
+    download_job = DownloadJob.objects.get(job_id=download_id)
+    status = download_job.status
+
+    response = {
+        'percentage': download_job.progress,
+        'status': status
+    }
+
+    if status == DownloadJob.FINISHED:
+        if download_job.expires is not None:
+            expiration_time_str = download_job.expires.replace(tzinfo=timezone.utc).isoformat()
+            response['expires'] = expiration_time_str
+
+    return response
 
 
