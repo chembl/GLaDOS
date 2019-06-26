@@ -3,6 +3,7 @@ from django.conf import settings
 import os
 import json
 from django.urls import reverse
+from glados.api.chembl.dynamic_downloads import downloads_controller
 
 
 class DownloadJobsControllerTester(TestCase):
