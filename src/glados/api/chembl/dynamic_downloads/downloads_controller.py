@@ -1,14 +1,24 @@
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.http import require_POST
+from glados.api.chembl.dynamic_downloads import download_job_service
+import traceback
 
 
 @require_POST
 def queue_download_job(request):
 
-    print('METHOD: ', request.method)
-    if request.method != "POST":
-        return JsonResponse({'error': 'This is only available via POST'})
+    index_name = request.POST.get('index_name', '')
+    raw_query = request.POST.get('query', '')
+    desired_format = request.POST.get('format', '')
+    context_id = request.POST.get('context_id')
 
-    response = {}
+    if context_id == "null" or context_id == "undefined":
+        context_id = None
 
-    return response
+    try:
+        download_id = download_job_service.queue_download_job(index_name, raw_query, desired_format, context_id)
+        return JsonResponse({'download_id':download_id})
+
+    except Exception as e:
+        traceback.print_exc()
+        return HttpResponse('Internal Server Error', status=500)

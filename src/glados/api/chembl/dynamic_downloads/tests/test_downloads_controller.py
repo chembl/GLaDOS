@@ -4,6 +4,9 @@ import os
 import json
 from django.urls import reverse
 from glados.api.chembl.dynamic_downloads import downloads_controller
+from glados.api.chembl.dynamic_downloads.models import DownloadJob
+import glados.es.ws2es.es_util as es_util
+from glados.settings import RunEnvs
 
 
 class DownloadJobsControllerTester(TestCase):
@@ -12,7 +15,12 @@ class DownloadJobsControllerTester(TestCase):
     GROUPS_TEST_FILE = os.path.join(settings.GLADOS_ROOT, 'api/chembl/dynamic_downloads/tests/data/test_groups.yml')
 
     def setUp(self):
+
         self.request_factory = RequestFactory()
+        if settings.RUN_ENV == RunEnvs.TRAVIS:
+            es_util.setup_connection_from_full_url(settings.ELASTICSEARCH_EXTERNAL_URL)
+        else:
+            es_util.setup_connection_from_full_url(settings.ELASTICSEARCH_HOST)
 
     @override_settings(PROPERTIES_GROUPS_FILE=GROUPS_TEST_FILE, PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE)
     def test_queues_download_job(self):
@@ -25,6 +33,22 @@ class DownloadJobsControllerTester(TestCase):
         with open(test_search_context_path, 'wt') as test_search_file:
             test_search_file.write(json.dumps(test_raw_context))
 
-        request = self.request_factory.get(reverse('queue-download'))
+        index_name = 'chembl_molecule'
+        raw_query = '{"query_string": {"query": "molecule_chembl_id:(CHEMBL59)"}}'
+        desired_format = 'csv'
+        context_id = 'test_search_context'
+
+        data = {
+            'index_name': index_name,
+            'query': raw_query,
+            'format': desired_format,
+            'context_id': context_id
+        }
+
+        request = self.request_factory.post(reverse('queue-download'), data)
+        response_got = downloads_controller.queue_download_job(request)
+        data_got = json.loads(response_got.content.decode('utf-8'))
+        job_id_got = data_got['download_id']
+        download_job_got = DownloadJob.objects.get(job_id=job_id_got)
 
         os.remove(test_search_context_path)
