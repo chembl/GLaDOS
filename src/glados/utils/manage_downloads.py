@@ -4,7 +4,6 @@ from django.conf import settings
 from glados.api.chembl.dynamic_downloads.models import DownloadJob
 from datetime import datetime, timezone
 import sys
-from glados.api.chembl.dynamic_downloads import downloads_manager
 import os
 import re
 import socket
@@ -35,7 +34,7 @@ def delete_expired_downloads():
         for download_job in expired_downloads:
             download_job.status = DownloadJob.DELETING
             download_job.save()
-            file_to_remove = downloads_manager.get_file_path(download_job.job_id)
+            file_to_remove = download_job.file_path
             delete_download_file(file_to_remove)
         expired_downloads.delete()
         print('Deleted {} expired expired downloads.'.format(num_expired_downloads))
