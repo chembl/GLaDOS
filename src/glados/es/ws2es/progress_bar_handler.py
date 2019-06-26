@@ -14,6 +14,9 @@ PROGRESS_BAR_REQUESTED = False
 @synchronized
 def get_new_progressbar(name, max_val=1) -> ProgressBar:
     global PROGRESS_BAR_IDX, PROGRESS_BAR_REQUESTED
+    if PROGRESS_BAR_IDX == 0:
+        signal_handler.add_termination_handler(on_exit)
+        atexit.register(on_exit, *[None, None])
     PROGRESS_BAR_REQUESTED = True
     if PROGRESS_BAR_IDX == 0:
         print(term.clear)
@@ -52,6 +55,3 @@ class Writer(object):
 
 def on_exit(signal, frame):
     write_after_progress_bars()
-
-signal_handler.add_termination_handler(on_exit)
-atexit.register(on_exit, *[None, None])
