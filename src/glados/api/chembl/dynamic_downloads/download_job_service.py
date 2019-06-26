@@ -5,6 +5,8 @@ from glados.api.chembl.dynamic_downloads.models import DownloadJob
 from glados.usage_statistics import glados_server_statistics
 import json
 import os
+import logging
+logger = logging.getLogger('django')
 
 
 def queue_download_job(index_name, raw_query, desired_format, context_id):
@@ -49,6 +51,11 @@ def queue_download_job(index_name, raw_query, desired_format, context_id):
             except FileNotFoundError:
                 # if for some reason the file is not found. requeue que job
                 jobs.requeue_job(job_id, 'File not found, queuing again.')
+
+        elif download_job.status == DownloadJob.DELETING:
+            # someone is deleting the job, I just need to wait until it is deleted and then re queue it
+            logger.debug('job is being deleted! We need to wait until the process finishes')
+            jobs.wait_until_job_is_deleted_and_requeue(job_id)
 
 
     return download_job.job_id
