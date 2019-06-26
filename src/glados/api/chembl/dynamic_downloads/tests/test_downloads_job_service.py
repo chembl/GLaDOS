@@ -24,7 +24,7 @@ class DownloadJobsServiceTester(TestCase):
         DownloadJob.objects.all().delete()
 
     @override_settings(PROPERTIES_GROUPS_FILE=GROUPS_TEST_FILE, PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE)
-    def test_queues_simple_download_job(self):
+    def test_queues_download_job(self):
 
         test_search_context_path = os.path.join(settings.SSSEARCH_RESULTS_DIR, 'test_search_context.json')
         test_raw_context = [{
