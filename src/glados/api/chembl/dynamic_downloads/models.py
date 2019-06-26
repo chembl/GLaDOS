@@ -10,7 +10,7 @@ import base64
 
 class DownloadJobManager(models.Manager):
 
-    class DownloadJobManagerError(Exception):
+    class DownloadJobAlreadyExistsError(Exception):
         pass
 
     def get_download_id(self, index_name, raw_query, desired_format, context_id):
@@ -37,10 +37,10 @@ class DownloadJobManager(models.Manager):
 
         try:
             DownloadJob.objects.get(job_id=job_id)
-            raise DownloadJobManager.DownloadJobManagerError('A job with the same parametrers already exists')
+            raise DownloadJobManager.DownloadJobAlreadyExistsError('A job with the same parameters already exists!')
         except DownloadJob.DoesNotExist:
             pass
-            
+
         download_job = DownloadJob(
             job_id=job_id,
             index_name=index_name,

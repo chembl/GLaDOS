@@ -80,10 +80,26 @@ class DownloadJobsServiceTester(TestCase):
         context_id = 'test_search_context'
 
         # Queue the job for the first time
-        download_job_service.queue_download_job(index_name, raw_query, desired_format, context_id)
+        job_id_0 = download_job_service.queue_download_job(index_name, raw_query, desired_format, context_id)
+        download_job_got_0 = DownloadJob.objects.get(job_id=job_id_0)
+        expires_0 = download_job_got_0.expires
+        log_0 = download_job_got_0.log
+
         # Queue a job again with exactly the same parameters
-        job_id = download_job_service.queue_download_job(index_name, raw_query, desired_format, context_id)
+        job_id_1 = download_job_service.queue_download_job(index_name, raw_query, desired_format, context_id)
+        download_job_got_1 = DownloadJob.objects.get(job_id=job_id_1)
+        expires_1 = download_job_got_1.expires
+        log_1 = download_job_got_1.log
+
+        self.assertEqual(job_id_0, job_id_1, msg='The ids should be exactly the same.')
+        self.assertEqual(expires_0, expires_1, msg='The expiration time should have never been changed.')
+        self.assertEqual(log_0, log_1, msg='The logs should be the same, because the job was not run again.')
 
 
+
+
+
+
+        # TODO: the expiration time should have not changed!
 
         os.remove(test_search_context_path)
