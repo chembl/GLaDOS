@@ -1,5 +1,5 @@
 from django.http import JsonResponse, HttpResponse
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_POST, require_GET
 from glados.api.chembl.dynamic_downloads import download_job_service
 import traceback
 
@@ -22,3 +22,10 @@ def queue_download_job(request):
     except Exception as e:
         traceback.print_exc()
         return HttpResponse('Internal Server Error', status=500)
+
+
+@require_GET
+def get_download_status(request, download_id):
+
+    response = download_job_service.get_download_status(download_id)
+    return JsonResponse(response)
