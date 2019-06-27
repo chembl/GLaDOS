@@ -57,7 +57,7 @@ def write_separated_values_file(desired_format, index_name, query, columns_to_do
         separator = '\t'
         file_path = os.path.join(output_dir, base_file_name + '.tsv.gz')
 
-    with gzip.open(file_path, 'wt', encoding='utf-16-le') as out_file:
+    with gzip.open(file_path, 'wt') as out_file:
 
         if using_context:
             all_columns = contextual_columns + columns_to_download

@@ -60,7 +60,7 @@ class FileWriterTester(TestCase):
             columns_to_download=test_columns_to_download,
             base_file_name=filename)
 
-        with gzip.open(out_file_path, 'rt', encoding='utf-16-le') as file_got:
+        with gzip.open(out_file_path, 'rt') as file_got:
             lines_got = file_got.readlines()
             line_0 = lines_got[0]
             self.assertEqual(line_0, '"ChEMBL ID";"Name"\n', 'Header line is malformed!')
@@ -82,7 +82,7 @@ class FileWriterTester(TestCase):
             columns_to_download=test_columns_to_download,
             base_file_name=filename)
 
-        with gzip.open(out_file_path, 'rt', encoding='utf-16-le') as file_got:
+        with gzip.open(out_file_path, 'rt') as file_got:
             lines_got = file_got.readlines()
             line_0 = lines_got[0]
             self.assertEqual(line_0, '"ChEMBL ID";"Synonyms"\n', 'Header line is malformed!')
@@ -166,7 +166,7 @@ class FileWriterTester(TestCase):
             id_property=id_property,
             contextual_columns=test_contextual_columns)
 
-        with gzip.open(out_file_path, 'rt', encoding='utf-16-le') as file_got:
+        with gzip.open(out_file_path, 'rt') as file_got:
             lines_got = file_got.readlines()
             line_0 = lines_got[0]
             self.assertEqual(line_0, '"Similarity";"ChEMBL ID";"Synonyms"\n', 'Header line is malformed!')
