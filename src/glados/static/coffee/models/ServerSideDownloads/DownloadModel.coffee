@@ -27,23 +27,13 @@ glados.useNameSpace 'glados.models.ServerSideDownloads',
 
       collection = @get('collection')
       requestData = collection.getRequestData()
-      columnsToDownload = []
-      downloadColumns = collection.getMeta('download_columns')
-
-      for column in downloadColumns
-        columnsToDownload.push
-          property_name: column.comparator
-          label: column.name_to_show
-          is_contextual: column.is_contextual
 
       ssSearchModel = collection.getMeta('sssearch_model')
       return {
         index_name: collection.getMeta('index_name')
         query: JSON.stringify(requestData.query)
         format: desiredFormat
-        columns: JSON.stringify(columnsToDownload)
         context_id: if ssSearchModel? then ssSearchModel.get('search_id') else undefined
-        id_property: collection.getMeta('model').ID_COLUMN.comparator
       }
 
     #-------------------------------------------------------------------------------------------------------------------

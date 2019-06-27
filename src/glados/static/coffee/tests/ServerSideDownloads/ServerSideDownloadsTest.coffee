@@ -42,23 +42,12 @@ describe "Server Side Downloads", ->
     formatGot = downloadParamsGot.format
     expect(formatGot).toBe(desiredFormat)
 
-    downloadColumnsMustBe = esList.getMeta('download_columns')
-    columnComparatorsMustBe = (col.comparator for col in downloadColumnsMustBe)
-    columnLabelsMustBe = (col.name_to_show for col in downloadColumnsMustBe)
-
-    columnsGot = JSON.parse(downloadParamsGot.columns)
-    columnComparatorsGot = (col.property_name for col in columnsGot)
-    expect(_.isEqual(columnComparatorsGot, columnComparatorsMustBe)).toBe(true)
-
-    columnLabelsGot = (col.label for col in columnsGot)
-    expect(_.isEqual(columnLabelsGot, columnLabelsMustBe)).toBe(true)
-
   it 'generates the params to request the download status', ->
 
     testDownloadID = 'someDownloadId'
     downloadModel.set('download_id', testDownloadID)
     progressURLGot = downloadModel.getProgressURL()
-    progressURLMustBe = "#{glados.Settings.GLADOS_BASE_PATH_REL}glados_api/chembl/downloads/download-progress/#{testDownloadID}"
+    progressURLMustBe = "#{glados.Settings.GLADOS_BASE_PATH_REL}glados_api/chembl/downloads/download_status/#{testDownloadID}"
     expect(progressURLGot).toBe(progressURLMustBe)
 
   it 'generates the correct download url', ->
