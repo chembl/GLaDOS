@@ -7,6 +7,7 @@ import json
 import os
 from datetime import timezone
 import logging
+from django.conf import settings
 
 logger = logging.getLogger('django')
 
@@ -56,8 +57,12 @@ def queue_download_job(index_name, raw_query, desired_format, context_id):
 
         elif download_job.status == DownloadJob.DELETING:
             # someone is deleting the job, I just need to wait until it is deleted and then re queue it
-            logger.debug('job is being deleted! We need to wait until the process finishes')
-            jobs.wait_until_job_is_deleted_and_requeue(job_id)
+            logger.info('job is being deleted! We need to wait until the process finishes')
+            if settings.SPAWN_JOBS:
+                jobs.wait_until_job_is_deleted_and_requeue.delay(job_id)
+            else:
+                jobs.wait_until_job_is_deleted_and_requeue(job_id)
+
 
     return download_job.job_id
 

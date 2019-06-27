@@ -157,14 +157,16 @@ def wait_until_job_is_deleted_and_requeue(download_id):
     context_id = download_job.context_id
     id_property = download_job.id_property
 
+    logger.info('{} is being deleted. Will wait until deletion finishes and the requeue'.format(download_id))
+
     job_exists = True
     while job_exists:
         try:
-            logger.debug('job still exists')
+            logger.info('job still exists')
             DownloadJob.objects.get(job_id=download_id)
             time.sleep(1)
         except DownloadJob.DoesNotExist:
-            logger.debug('job was deleted!')
+            logger.info('job was deleted!')
             job_exists = False
 
     queue_new_job(index_name=index_name, raw_columns_to_download=raw_columns_to_download,
