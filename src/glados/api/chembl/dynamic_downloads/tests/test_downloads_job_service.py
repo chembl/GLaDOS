@@ -48,12 +48,10 @@ class DownloadJobsServiceTester(TestCase):
         self.assertEqual(id_property_must_be, id_property_got, msg='The id property was not set correctly!')
 
         columns_to_download_must_be = [
-            {'label_mini': 'ChEMBL ID', 'type': 'string', 'aggregatable': True, 'sortable': True,
-             'prop_id': 'molecule_chembl_id', 'index_name': 'chembl_molecule', 'label': 'ChEMBL ID'},
-            {'label_mini': 'Name', 'type': 'string', 'aggregatable': True, 'sortable': True, 'prop_id': 'pref_name',
-             'index_name': 'chembl_molecule', 'label': 'Name'},
-            {'aggregatable': False, 'label_mini': 'Similarity', 'type': 'double', 'index_name': 'chembl_molecule',
-             'sortable': True, 'prop_id': 'similarity', 'is_virtual': True, 'label': 'Similarity'}]
+            {'aggregatable': True, 'type': 'string', 'label': 'ChEMBL ID', 'prop_id': 'molecule_chembl_id',
+             'sortable': True, 'index_name': 'chembl_molecule', 'label_mini': 'ChEMBL ID'},
+            {'aggregatable': True, 'type': 'string', 'label': 'Name', 'prop_id': 'pref_name', 'sortable': True,
+             'index_name': 'chembl_molecule', 'label_mini': 'Name'}]
 
         raw_columns_to_download_got = download_job_got.raw_columns_to_download
         columns_to_download_got = json.loads(raw_columns_to_download_got)
@@ -218,5 +216,4 @@ class DownloadJobsServiceTester(TestCase):
 
         with self.assertRaises(DownloadJob.DoesNotExist,
                                msg='This should raise an error because the download does not exist'):
-                download_job_service.get_download_status('does_not_exist')
-
+            download_job_service.get_download_status('does_not_exist')
