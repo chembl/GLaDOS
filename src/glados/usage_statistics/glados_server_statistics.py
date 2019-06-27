@@ -10,6 +10,8 @@ import base64
 from elasticsearch_dsl.connections import connections
 from django.core.cache import cache
 import traceback
+from django.conf import settings
+from glados.settings import RunEnvs
 
 
 def get_and_record_es_cached_response(index_name, raw_search_data):
@@ -81,6 +83,10 @@ def record_elasticsearch_cache_usage(index_name, search_data, base64_search_data
 
 def record_download(download_id, time_taken, is_new, file_size, desired_format, es_index, es_query='',
                     total_items=0):
+
+    if settings.RUN_ENV == RunEnvs.TRAVIS:
+        return
+
     try:
         download_record = ESDownloadRecord(
             download_id=download_id,
