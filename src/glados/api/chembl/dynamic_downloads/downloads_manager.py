@@ -156,7 +156,7 @@ def write_csv_or_tsv_file(scanner, download_job, cols_to_download, index_name, c
         for item in context:
             context_index[item[id_property]] = item
 
-    with gzip.open(file_path, 'wt', encoding='utf-16-le') as out_file:
+    with gzip.open(file_path, 'wt') as out_file:
 
         own_columns = [col for col in cols_to_download if col.get('is_contextual') is not True]
         contextual_columns = [col for col in cols_to_download if col.get('is_contextual') is True]

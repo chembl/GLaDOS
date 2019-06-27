@@ -115,7 +115,7 @@ class DownloadJobsTester(TestCase):
         self.assertAlmostEqual(expiration_date_got_seconds, expiration_date_should_be_seconds, delta=1,
                                msg='The expiration time was not calculated correctly')
 
-        with gzip.open(out_file_path_got, 'rt', encoding='utf-16-le') as file_got:
+        with gzip.open(out_file_path_got, 'rt') as file_got:
             lines_got = file_got.readlines()
             line_0 = lines_got[0]
             self.assertEqual(line_0, '"Similarity";"ChEMBL ID";"Name"\n', 'Header line is malformed!')
