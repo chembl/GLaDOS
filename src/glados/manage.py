@@ -20,6 +20,7 @@ def main():
     from glados.utils import manage_saved_searches
     from glados.utils import daemon_simulator
     from glados.utils import rq_workers
+    from glados.es.es_properties_configuration import configuration_getter
         
     # Compress files before server launch if compression is enabled
     if os.environ.get('RUN_MAIN') != 'true' and len(sys.argv) > 1 and sys.argv[1] == 'runserver' and settings.DEBUG:
@@ -65,10 +66,14 @@ def main():
 
         manage_saved_searches.delete_expired_searches()
 
+    elif os.environ.get('RUN_MAIN') != 'true' and len(sys.argv) > 1 and sys.argv[1] == 'getpropertiescounts':
+
+        configuration_getter.print_properties_counts()
+
     # all our custom commands are listed here so they are not sent to the original manage.py
     execute_in_manage = sys.argv[1] not in ['createapacheconfig', 'createdefaultadminuser', 'simulatedaemon',
                                             'deleteexpiredurls', 'waitunitlworkersarefree', 'deleteexpireddownloads',
-                                            'deleteexpiredsearches']
+                                            'deleteexpiredsearches', 'getpropertiescounts']
     if execute_in_manage:
         execute_from_command_line(sys.argv)
 

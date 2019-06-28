@@ -4,6 +4,7 @@ from glados.es.ws2es import resources_description
 import yaml
 from django.conf import settings
 from django.core.cache import cache
+import glados.es.ws2es.es_util as es_util
 
 
 class ESPropsConfigurationGetterError(Exception):
@@ -141,3 +142,35 @@ def get_id_property_for_index(index_name):
                                               .format(index_name))
 
     return resource_ids[0]
+
+
+def print_properties_counts():
+
+    es_util.setup_connection_from_full_url(settings.ELASTICSEARCH_HOST)
+    print('GETTING PROPERTIES COUNTS')
+    properties_sum = 0
+    groups_config = yaml.load(open(settings.PROPERTIES_GROUPS_FILE, 'r'), Loader=yaml.FullLoader)
+
+    for index_name, index_mapping in resources_description.RESOURCES_BY_ALIAS_NAME.items():
+
+        print('Resource: ' + index_name)
+        mapping = index_mapping.get_resource_mapping_from_es()
+        num_properties = len(mapping.keys())
+        properties_sum += num_properties
+
+        index_groups = groups_config.get(index_name, {})
+        print('Groups: ')
+        for group_name, group in index_groups.items():
+            print('\t' + group_name)
+            properties_in_group = 0
+            for sub_group, props_list in group.items():
+                num_properties_in_subgroup = len(props_list)
+                print('\t\t' + sub_group + ':' + str(num_properties_in_subgroup))
+                properties_in_group += num_properties_in_subgroup
+
+            print('\t\tProperties in group: ' + str(properties_in_group))
+
+        print('Total properties: ', num_properties)
+        print('---')
+
+    print('Properties Sum: ', properties_sum)
