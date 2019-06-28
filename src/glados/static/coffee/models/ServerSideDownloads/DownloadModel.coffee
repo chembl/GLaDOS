@@ -27,6 +27,7 @@ glados.useNameSpace 'glados.models.ServerSideDownloads',
 
       collection = @get('collection')
       requestData = collection.getRequestData()
+      download_columns_group = collection.getMeta('download_columns_group')
 
       ssSearchModel = collection.getMeta('sssearch_model')
       return {
@@ -34,6 +35,7 @@ glados.useNameSpace 'glados.models.ServerSideDownloads',
         query: JSON.stringify(requestData.query)
         format: desiredFormat
         context_id: if ssSearchModel? then ssSearchModel.get('search_id') else undefined
+        download_columns_group: if download_columns_group? then download_columns_group else undefined
       }
 
     #-------------------------------------------------------------------------------------------------------------------

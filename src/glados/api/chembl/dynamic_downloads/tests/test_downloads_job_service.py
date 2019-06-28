@@ -62,6 +62,46 @@ class DownloadJobsServiceTester(TestCase):
         os.remove(test_search_context_path)
 
     @override_settings(PROPERTIES_GROUPS_FILE=GROUPS_TEST_FILE, PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE)
+    def test_queues_download_job_with_custom_groups(self):
+
+        test_search_context_path = os.path.join(settings.SSSEARCH_RESULTS_DIR, 'test_search_context.json')
+        test_raw_context = [{
+            'molecule_chembl_id': 'CHEMBL59',
+            'similarity': 100.0
+        }]
+
+        with open(test_search_context_path, 'wt') as test_search_file:
+            test_search_file.write(json.dumps(test_raw_context))
+
+        index_name = 'chembl_molecule'
+        raw_query = '{"query_string": {"query": "molecule_chembl_id:(CHEMBL59)"}}'
+        desired_format = 'csv'
+        context_id = 'test_search_context'
+
+        custom_columns_group = 'download_drugs'
+        job_id = download_job_service.queue_download_job(index_name, raw_query, desired_format, context_id,
+                                                         custom_columns_group)
+        download_job_got = DownloadJob.objects.get(job_id=job_id)
+
+        id_property_must_be = 'molecule_chembl_id'
+        id_property_got = download_job_got.id_property
+        self.assertEqual(id_property_must_be, id_property_got, msg='The id property was not set correctly!')
+
+        columns_to_download_must_be = [
+            {'aggregatable': True, 'label_mini': 'ChEMBL ID', 'type': 'string', 'prop_id': 'molecule_chembl_id',
+             'sortable': True, 'index_name': 'chembl_molecule', 'label': 'ChEMBL ID'},
+            {'aggregatable': True, 'label_mini': 'Max Phase', 'type': 'integer', 'prop_id': 'max_phase',
+             'sortable': True, 'index_name': 'chembl_molecule', 'label': 'Max Phase'}]
+
+        raw_columns_to_download_got = download_job_got.raw_columns_to_download
+        columns_to_download_got = json.loads(raw_columns_to_download_got)
+
+        self.assertEqual(columns_to_download_must_be, columns_to_download_got,
+                         msg='The columns to download were not set correctly')
+
+        os.remove(test_search_context_path)
+
+    @override_settings(PROPERTIES_GROUPS_FILE=GROUPS_TEST_FILE, PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE)
     def test_does_not_queue_job_when_already_exists(self):
 
         test_search_context_path = os.path.join(settings.SSSEARCH_RESULTS_DIR, 'test_search_context.json')

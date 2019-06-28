@@ -97,6 +97,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             searchESQuery: searchESQuery
             links_to_other_entities: esIndexSettings.LINKS_TO_OTHER_ENTITIES
             sssearch_model: ssSearchModel
+            download_columns_group: esIndexSettings.DOWNLOAD_COLUMNS_GROUP
 
           if @getMeta('enable_similarity_maps') or @getMeta('enable_substructure_highlighting')
             @initReferenceStructureFunctions()

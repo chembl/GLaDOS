@@ -12,9 +12,9 @@ from django.conf import settings
 logger = logging.getLogger('django')
 
 
-def queue_download_job(index_name, raw_query, desired_format, context_id):
+def queue_download_job(index_name, raw_query, desired_format, context_id, columns_group='download'):
 
-    columns_to_download = configuration_getter.get_config_for_group(index_name, 'download')['default']
+    columns_to_download = configuration_getter.get_config_for_group(index_name, columns_group)['default']
     raw_columns_to_download = json.dumps(columns_to_download)
     id_property = configuration_getter.get_id_property_for_index(index_name)
 
@@ -62,7 +62,6 @@ def queue_download_job(index_name, raw_query, desired_format, context_id):
                 jobs.wait_until_job_is_deleted_and_requeue.delay(job_id)
             else:
                 jobs.wait_until_job_is_deleted_and_requeue(job_id)
-
 
     return download_job.job_id
 
