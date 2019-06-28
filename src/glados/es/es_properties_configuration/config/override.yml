@@ -1,0 +1,47 @@
+chembl_molecule:
+  'molecule_properties.full_mwt':
+    label: 'Molecular Weight'
+  '_metadata.related_targets.count':
+    label: 'Targets'
+  '_metadata.related_activities.count':
+    label: 'Bioactivities'
+  'molecule_properties.alogp':
+    label: 'AlogP'
+  'molecule_properties.psa':
+    label: 'PSA'
+  'molecule_properties.hba':
+    label: 'HBA'
+  'molecule_properties.hbd':
+    label: 'HBD'
+  'molecule_properties.num_ro5_violations':
+    label: '#RO5 Violations'
+  'molecule_properties.rtb':
+    label: '#Rotatable Bonds'
+  'molecule_properties.ro3_pass':
+    label: 'Passes Ro3'
+  'molecule_properties.qed_weighted':
+    label: 'QED Weighted'
+  'molecule_properties.acd_most_apka':
+    label: 'ACD ApKa'
+  'molecule_properties.acd_most_bpka':
+    label: 'ACD BpKa'
+  'molecule_properties.acd_logp':
+    label: 'ACD LogP'
+  'molecule_properties.acd_logd':
+    label: 'ACD LogD'
+  'molecule_properties.aromatic_rings':
+    label: 'Aromatic Rings'
+  'structure_type':
+    label: 'Structure Type'
+  'molecule_properties.hba_lipinski':
+    label: 'HBA Lipinski'
+  'molecule_properties.hbd_lipinski':
+    label: 'HBD Lipinski'
+  'molecule_properties.num_lipinski_ro5_violations':
+    label: '#RO5 Violations (Lipinski)'
+  'molecule_properties.mw_monoisotopic':
+    label: 'Molecular Weight (Monoisotopic)'
+  'molecule_properties.full_molformula':
+    label: 'Molecular Formula'
+  'molecule_structures.canonical_smiles':
+    label: 'Smiles'

@@ -9,4 +9,4 @@ chembl_molecule:
     'structure_type', 'inorganic_flag', 'molecule_properties.heavy_atoms', 'molecule_properties.hba_lipinski',
     'molecule_properties.hbd_lipinski', 'molecule_properties.num_lipinski_ro5_violations',
     'molecule_properties.mw_monoisotopic', 'molecule_properties.molecular_species',
-    'molecule_properties.full_molformula','molecule_structures.canonical_smiles']
+    'molecule_properties.full_molformula', 'molecule_structures.canonical_smiles']
