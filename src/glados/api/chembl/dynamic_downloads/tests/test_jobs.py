@@ -146,7 +146,8 @@ class DownloadJobsTester(TestCase):
             raw_columns_to_download=
             '[{"label": "ChEMBL ID", "prop_id": "molecule_chembl_id"}, '
             '{"label": "Research Codes", "prop_id": "research_codes", "is_virtual": true, '
-            '"is_contextual": false, "based_on": "molecule_synonyms"}]',
+            '"is_contextual": false, "based_on": "molecule_synonyms"}, '
+            '{"prop_id": "similarity","label": "Similarity","is_contextual": true}]',
             raw_query='{"query_string": {"query": "molecule_chembl_id:(CHEMBL2108809)"}}',
             desired_format='csv',
             log=DownloadJob.format_log_message('Job Queued'),
@@ -184,9 +185,9 @@ class DownloadJobsTester(TestCase):
         with gzip.open(out_file_path_got, 'rt') as file_got:
             lines_got = file_got.readlines()
             line_0 = lines_got[0]
-            self.assertEqual(line_0, '"Similarity";"ChEMBL ID";"Name"\n', 'Header line is malformed!')
+            self.assertEqual(line_0, '"Similarity";"ChEMBL ID";"Research Codes"\n', 'Header line is malformed!')
             line_1 = lines_got[1]
-            self.assertEqual(line_1, '"100.0";"CHEMBL59";"DOPAMINE"\n', 'Line is malformed!')
+            self.assertEqual(line_1, '"100.0";"CHEMBL2108809";"IMMU-MN3"\n', 'Line is malformed!')
 
         # finally. the file must have been created
         self.assertTrue(Path(out_file_path_got).is_file(), msg='The output file was not created!!!')
