@@ -65,14 +65,16 @@ def get_config_for_prop(index_name, prop_id):
 
         based_on = property_override_description.get('based_on')
         if based_on is not None:
+            config['is_contextual'] = False
             base_description = simplified_mapping.get(based_on)
             if base_description is None:
                 raise ESPropsConfigurationGetterError(
                     'The virtual property {prop_id} is based on {based_on} which does not exist in elasticsearch '
                     'index {index_name}'.format(prop_id=prop_id, based_on=based_on, index_name=index_name))
             config += SummableDict(base_description)
-            config['is_contextual'] = True
+
         else:
+            config['is_contextual'] = True
             if property_override_description.get('aggregatable') is None or \
                             property_override_description.get('type') is None or \
                             property_override_description.get('sortable') is None:

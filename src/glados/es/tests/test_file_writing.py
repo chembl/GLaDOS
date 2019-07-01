@@ -186,7 +186,7 @@ class FileWriterTester(TestCase):
     def test_writes_csv_files_with_virual_properties(self):
         test_columns_to_download = [{'label': 'ChEMBL ID', 'prop_id': 'molecule_chembl_id'},
                                     {'label': 'Research Codes', 'prop_id': 'research_codes', 'is_virtual': True,
-                                     'is_contextual': True, 'based_on': 'molecule_synonyms'}]
+                                     'is_contextual': False, 'based_on': 'molecule_synonyms'}]
         test_index_name = 'chembl_molecule'
         query_file_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/test_query6.json')
         test_query = json.loads(open(query_file_path, 'r').read())

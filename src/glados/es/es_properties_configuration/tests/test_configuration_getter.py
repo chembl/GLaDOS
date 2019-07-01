@@ -91,6 +91,11 @@ class ConfigurationGetterTester(TestCase):
                          'The label was not set up properly!')
         self.assertFalse(config_got['aggregatable'], 'This property should not be aggregatable')
 
+        self.assertEqual(config_got['is_virtual'], True,
+                         'This is a virtual property!')
+        self.assertEqual(config_got['is_contextual'], False,
+                         'This is not a contextual property!')
+
     @override_settings(PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE)
     def test_gets_config_fails_for_a_virtual_property_based_on_non_existing_prop(self):
 
@@ -130,6 +135,9 @@ class ConfigurationGetterTester(TestCase):
         self.assertEqual(config_got['type'], 'double')
         self.assertEqual(config_got['label'], 'Similarity')
         self.assertEqual(config_got['label_mini'], 'Similarity')
+
+        self.assertEqual(config_got['is_virtual'], True, 'This is a virtual property!')
+        self.assertEqual(config_got['is_contextual'], True, 'This is a contextual property!')
 
     # ------------------------------------------------------------------------------------------------------------------
     # Getting a custom list of properties
