@@ -11,4 +11,14 @@ chembl_molecule:
     'molecule_properties.mw_monoisotopic', 'molecule_properties.molecular_species',
     'molecule_properties.full_molformula', 'molecule_structures.canonical_smiles']
   download_drugs:
-    default: ['molecule_chembl_id', 'molecule_synonyms', 'research_codes']
+    default: ['molecule_chembl_id', 'molecule_synonyms', 'research_codes', 'drug_phase',
+    '_metadata.drug.drug_data.applicants', 'usan_stem', 'usan_year', 'usan_stem_definition',
+    '_metadata.drug.drug_data.usan_stem_substem', 'first_approval', 'drug_atc_classifications', 'drug_atc_descriptions',
+    'indication_class', '_metadata.drug.drug_data.sc_patent', '_metadata.drug.drug_data.drug_type',
+    '_metadata.drug.drug_data.rule_of_five', '_metadata.drug.drug_data.first_in_class',
+    '_metadata.compound_generated.chirality_label', '_metadata.drug.drug_data.prodrug',
+    '_metadata.drug.drug_data.oral', '_metadata.drug.drug_data.parenteral', '_metadata.drug.drug_data.topical',
+    '_metadata.drug.drug_data.black_box', '_metadata.compound_generated.availability_type_label',
+    '_metadata.drug.drug_data.withdrawn_year', '_metadata.drug.drug_data.withdrawn_reason',
+    '_metadata.drug.drug_data.withdrawn_country', '_metadata.drug.drug_data.withdrawn_class',
+    'molecule_structures.canonical_smiles']

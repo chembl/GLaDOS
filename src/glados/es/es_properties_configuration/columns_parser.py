@@ -17,6 +17,51 @@ def parse_research_codes(raw_synonyms):
     return '|'.join(sorted_synonyms)
 
 
+def list_to_pipe_separated_string(raw_applicants):
+    return '|'.join(raw_applicants)
+
+
+def escape_text_with_simple_colon(raw_value):
+    return "'{}'".format(raw_value)
+
+
+def parse_drug_atc_classifications(raw_classifications):
+    return '|'.join([class_data['code'] for class_data in raw_classifications])
+
+
+def parse_drug_atc_class_descriptions(raw_classifications):
+    return '|'.join([class_data['description'] for class_data in raw_classifications])
+
+
+def parse_drug_type(raw_type):
+
+    type = int(raw_type)
+    if type == 1:
+        return '1:Synthetic Small Molecule'
+    elif type == 2:
+        return '2:Enzyme'
+    elif type == 3:
+        return '3:Oligosaccharide'
+    elif type == 4:
+        return '4:Oligonucleotide'
+    elif type == 5:
+        return '5:Oligopeptide'
+    elif type == 6:
+        return '6:Antibody'
+    elif type == 7:
+        return '7:Natural Product-derived'
+    elif type == 8:
+        return '8:Cell-based'
+    elif type == 9:
+        return '9:Inorganic'
+    elif type == 10:
+        return '10:Polymer'
+    elif type == -1:
+        return '-1:Unknown'
+    else:
+        return ''
+
+
 def parse_target_uniprot_accession(raw_components):
     accessions = []
     for comp in raw_components:
@@ -35,7 +80,14 @@ def parse_mech_of_act_synonyms(raw_synonyms):
 PARSING_FUNCTIONS = {
     'chembl_molecule': {
         'molecule_synonyms': lambda original_value: parse_synonyms(original_value),
-        'research_codes': lambda original_value: parse_research_codes(original_value)
+        'research_codes': lambda original_value: parse_research_codes(original_value),
+        '_metadata.drug.drug_data.applicants': lambda original_value: list_to_pipe_separated_string(original_value),
+        'usan_stem': lambda original_value: escape_text_with_simple_colon(original_value),
+        '_metadata.drug.drug_data.usan_stem_substem': lambda original_value: escape_text_with_simple_colon(
+            original_value),
+        'drug_atc_classifications': lambda original_value: parse_drug_atc_classifications(original_value),
+        'drug_atc_descriptions': lambda original_value: parse_drug_atc_class_descriptions(original_value),
+        '_metadata.drug.drug_data.drug_type': lambda original_value: parse_drug_type(original_value),
     },
     'chembl_target': {
         'target_components': lambda original_value: parse_target_uniprot_accession(original_value)

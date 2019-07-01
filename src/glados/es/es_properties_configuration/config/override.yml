@@ -51,4 +51,20 @@ chembl_molecule:
   'research_codes':
     based_on: 'molecule_synonyms'
     label: 'Research Codes'
-
+  'drug_phase':
+    based_on: 'max_phase'
+    label: 'Phase'
+  'drug_atc_classifications':
+    based_on: '_metadata.drug.drug_data.atc_classification'
+    label: 'ATC Classifications'
+  'drug_atc_descriptions':
+    based_on: '_metadata.drug.drug_data.atc_classification'
+    label: 'ATC Code Descriptions'
+  '_metadata.drug.drug_data.sc_patent':
+    label: 'Patent'
+  '_metadata.drug.drug_data.rule_of_five':
+    label: 'Passes Rule of Five'
+  '_metadata.compound_generated.chirality_label':
+    label: 'Chirality'
+  '_metadata.compound_generated.availability_type_label':
+    label: 'Availability Type'
