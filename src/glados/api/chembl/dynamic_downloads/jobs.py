@@ -24,8 +24,8 @@ class DownloadJobError(Exception):
 
 @job
 def make_download_file(job_id):
-    logger.debug('MAKING DOWNLOAD FILE')
-    logger.debug(job_id)
+    logger.info('MAKING DOWNLOAD FILE')
+    logger.info(job_id)
     start_time = time.time()
     download_job = DownloadJob.objects.get(job_id=job_id)
     download_job.worker = socket.gethostname()
@@ -76,6 +76,9 @@ def make_download_file(job_id):
             download_job.progress = progress_percentage
             download_job.save()
 
+        print('own_columns: ', own_columns)
+        print('all_columns_to_download: ', all_columns_to_download)
+
         if (desired_format is file_writer.OutputFormats.CSV) or (desired_format is file_writer.OutputFormats.TSV):
             out_file_path, total_items = file_writer.write_separated_values_file(
                 desired_format=desired_format,
@@ -100,7 +103,7 @@ def make_download_file(job_id):
             rsync_to_the_other_nfs(download_job)
 
         download_job.append_to_job_log('File Ready')
-        logger.debug('File Ready: ' + out_file_path)
+        logger.info('File Ready: ' + out_file_path)
         download_job.save_download_job_state(DownloadJob.FINISHED)
 
         # now save some statistics

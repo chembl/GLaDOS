@@ -16,6 +16,15 @@ class FileWriterTester(TestCase):
         source_got = file_writer.get_search_source(test_columns_to_download)
         self.assertEqual(source_must_be, source_got, 'The search source is not generated correctly')
 
+    def test_generates_source_for_virtual_properties(self):
+        test_columns_to_download = [{'label': 'ChEMBL ID', 'prop_id': 'molecule_chembl_id'},
+                                    {'label': 'Research Codes', 'prop_id': 'research_codes', 'is_virtual': True,
+                                     'is_contextual': True, 'based_on': 'molecule_synonyms'}]
+
+        source_must_be = ['molecule_chembl_id', 'molecule_synonyms']
+        source_got = file_writer.get_search_source(test_columns_to_download)
+        self.assertEqual(source_must_be, source_got, 'The search source is not generated correctly')
+
     def test_fails_when_output_format_is_not_available(self):
         test_columns_to_download = [{'label': 'ChEMBL ID', 'prop_id': 'molecule_chembl_id'},
                                     {'label': 'Name', 'prop_id': 'pref_name'}]
@@ -172,6 +181,40 @@ class FileWriterTester(TestCase):
             self.assertEqual(line_0, '"Similarity";"ChEMBL ID";"Synonyms"\n', 'Header line is malformed!')
             line_1 = lines_got[1]
             self.assertEqual(line_1, '"100.0";"CHEMBL59";"Carbilev|DOPAMINE|Dopamine|Intropin|Parcopa|Sinemet"\n',
+                             'Line is malformed!')
+
+    def test_writes_csv_files_with_virual_properties(self):
+        test_columns_to_download = [{'label': 'ChEMBL ID', 'prop_id': 'molecule_chembl_id'},
+                                    {'label': 'Research Codes', 'prop_id': 'research_codes', 'is_virtual': True,
+                                     'is_contextual': True, 'based_on': 'molecule_synonyms'}]
+        test_index_name = 'chembl_molecule'
+        query_file_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/test_query6.json')
+        test_query = json.loads(open(query_file_path, 'r').read())
+        id_property = 'molecule_chembl_id'
+        test_contextual_columns = [{'label': 'Similarity', 'prop_id': 'similarity'}]
+
+        test_context = {
+            'CHEMBL2108809': {
+                'molecule_chembl_id': 'CHEMBL2108809',
+                'similarity': 100.0
+            }
+        }
+
+        filename = 'test' + str(int(round(time.time() * 1000)))
+        out_file_path, total_items = file_writer.write_separated_values_file(
+            desired_format=file_writer.OutputFormats.CSV,
+            index_name=test_index_name, query=test_query,
+            columns_to_download=test_columns_to_download,
+            base_file_name=filename, context=test_context,
+            id_property=id_property,
+            contextual_columns=test_contextual_columns)
+
+        with gzip.open(out_file_path, 'rt') as file_got:
+            lines_got = file_got.readlines()
+            line_0 = lines_got[0]
+            self.assertEqual(line_0, '"Similarity";"ChEMBL ID";"Research Codes"\n', 'Header line is malformed!')
+            line_1 = lines_got[1]
+            self.assertEqual(line_1, '"100.0";"CHEMBL2108809";"IMMU-MN3"\n',
                              'Line is malformed!')
 
     def test_reports_file_writing_progress(self):

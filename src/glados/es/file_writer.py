@@ -20,7 +20,16 @@ class FileWriterError(Exception):
 
 
 def get_search_source(columns_to_download):
-    return [col['prop_id'] for col in columns_to_download]
+    source = []
+    for col in columns_to_download:
+        prop_name = col.get('prop_id')
+        based_on = col.get('based_on')
+        if based_on is not None:
+            source.append(based_on)
+        else:
+            source.append(prop_name)
+
+    return source
 
 
 def format_cell(original_value):
@@ -84,10 +93,30 @@ def write_separated_values_file(desired_format, index_name, query, columns_to_do
             doc_source = doc_i['_source']
 
             dot_notation_getter = DotNotationGetter(doc_source)
-            own_properties_to_get = [col['prop_id'] for col in columns_to_download]
+            own_properties_to_get = []
 
-            own_values = [columns_parser.parse(dot_notation_getter.get_from_string(prop_name), index_name, prop_name)
-                          for prop_name in own_properties_to_get]
+            for col in columns_to_download:
+
+                prop_name = col['prop_id']
+                based_on = col.get('based_on')
+
+                own_properties_to_get.append({
+                    'prop_name': prop_name,
+                    'based_on': based_on
+                })
+
+            own_values = []
+            for prop_desc in own_properties_to_get:
+                prop_name = prop_desc.get('prop_name')
+                based_on = prop_desc.get('based_on')
+                if based_on is not None:
+                    prop_to_get = based_on
+                else:
+                    prop_to_get = prop_name
+                raw_value = dot_notation_getter.get_from_string(prop_to_get)
+
+                parsed_value = columns_parser.parse(raw_value, index_name, prop_desc['prop_name'])
+                own_values.append(parsed_value)
 
             contextual_values = []
             if using_context:

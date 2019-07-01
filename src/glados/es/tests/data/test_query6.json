@@ -1,0 +1,5 @@
+{
+  "query_string": {
+    "query": "molecule_chembl_id:(CHEMBL2108809)"
+  }
+}

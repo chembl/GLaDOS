@@ -45,3 +45,10 @@ chembl_molecule:
     label: 'Molecular Formula'
   'molecule_structures.canonical_smiles':
     label: 'Smiles'
+  'drug_parent_molecule_chembl_id':
+    based_on: 'molecule_chembl_id'
+    label: 'Parent Molecule ChEMBL ID'
+  'research_codes':
+    based_on: 'molecule_synonyms'
+    label: 'Research Codes'
+

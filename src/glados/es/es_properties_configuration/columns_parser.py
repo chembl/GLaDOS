@@ -7,6 +7,16 @@ def parse_synonyms(raw_synonyms):
     return '|'.join(sorted_synonyms)
 
 
+def parse_research_codes(raw_synonyms):
+    true_synonyms = set()
+    for raw_syn in raw_synonyms:
+        if raw_syn['syn_type'] == 'RESEARCH_CODE':
+            true_synonyms.add(raw_syn['molecule_synonym'])
+    sorted_synonyms = list(true_synonyms)
+    sorted_synonyms.sort()
+    return '|'.join(sorted_synonyms)
+
+
 def parse_target_uniprot_accession(raw_components):
     accessions = []
     for comp in raw_components:
@@ -24,7 +34,8 @@ def parse_mech_of_act_synonyms(raw_synonyms):
 
 PARSING_FUNCTIONS = {
     'chembl_molecule': {
-        'molecule_synonyms': lambda original_value: parse_synonyms(original_value)
+        'molecule_synonyms': lambda original_value: parse_synonyms(original_value),
+        'research_codes': lambda original_value: parse_research_codes(original_value)
     },
     'chembl_target': {
         'target_components': lambda original_value: parse_target_uniprot_accession(original_value)

@@ -11,4 +11,4 @@ chembl_molecule:
     'molecule_properties.mw_monoisotopic', 'molecule_properties.molecular_species',
     'molecule_properties.full_molformula', 'molecule_structures.canonical_smiles']
   download_drugs:
-    default: ['molecule_chembl_id', 'max_phase']
+    default: ['molecule_chembl_id', 'molecule_synonyms', 'research_codes']
