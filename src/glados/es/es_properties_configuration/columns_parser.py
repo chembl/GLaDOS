@@ -94,7 +94,7 @@ PARSING_FUNCTIONS = {
         '_metadata.drug.drug_data.drug_type': lambda original_value: parse_drug_type(original_value),
     },
     'chembl_target': {
-        'target_components': lambda original_value: parse_target_uniprot_accession(original_value)
+        'uniprot_accessions': lambda original_value: parse_target_uniprot_accession(original_value)
     },
     'chembl_mechanism_by_parent_target': {
         'parent_molecule._metadata.drug.drug_data.synonyms': lambda original_value: parse_mech_of_act_synonyms(

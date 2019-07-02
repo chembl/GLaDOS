@@ -99,3 +99,15 @@ chembl_assay:
     label: 'First Page'
   '_metadata.document_data.last_page':
     label: 'Last Page'
+chembl_target:
+  'pref_name':
+    label: 'Name'
+  'uniprot_accessions':
+    based_on: 'target_components'
+    label: 'UniProt Accessions'
+  '_metadata.related_compounds.count':
+    label: 'Compounds'
+  '_metadata.related_activities.count':
+    label: 'Activities'
+  'tax_id':
+    label: 'Tax ID'

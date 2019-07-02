@@ -30,3 +30,7 @@ chembl_assay:
     'document_chembl_id', '_metadata.document_data.pubmed_id', '_metadata.document_data.doi',
     '_metadata.document_data.year', '_metadata.document_data.journal', '_metadata.document_data.volume',
     '_metadata.document_data.first_page','_metadata.document_data.last_page']
+chembl_target:
+  download:
+    default: ['target_chembl_id', 'pref_name', 'uniprot_accessions', 'target_type', 'organism',
+    '_metadata.related_compounds.count', '_metadata.related_activities.count', 'tax_id', 'species_group_flag']
