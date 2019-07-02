@@ -81,6 +81,10 @@ def parse_mech_of_act_synonyms(raw_synonyms):
     return '|'.join(raw_synonyms)
 
 
+def parse_document_source(raw_source):
+
+    return '|'.join([v['src_description'] for v in raw_source])
+
 PARSING_FUNCTIONS = {
     'chembl_molecule': {
         'molecule_synonyms': lambda original_value: parse_synonyms(original_value),
@@ -95,6 +99,9 @@ PARSING_FUNCTIONS = {
     },
     'chembl_target': {
         'uniprot_accessions': lambda original_value: parse_target_uniprot_accession(original_value)
+    },
+    'chembl_document': {
+        '_metadata.source': lambda original_value: parse_document_source(original_value),
     },
     'chembl_mechanism_by_parent_target': {
         'parent_molecule._metadata.drug.drug_data.synonyms': lambda original_value: parse_mech_of_act_synonyms(

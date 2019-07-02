@@ -111,3 +111,30 @@ chembl_target:
     label: 'Activities'
   'tax_id':
     label: 'Tax ID'
+chembl_document:
+  'journal_full_title':
+    label: 'Journal'
+  'src_id':
+    label: 'Source ID'
+  '_metadata.source':
+    label: 'Source Description'
+  'pubmed_id':
+    label: 'PubMed ID'
+  'doi':
+    label: 'DOI'
+  'patent_id':
+    label: 'Patent ID'
+  'volume':
+    label: 'Volume'
+  'issue':
+    label: 'Issue'
+  'first_page':
+    label: 'First Page'
+  'doc_type':
+    label: 'Document Type'
+  '_metadata.related_compounds.count':
+    label: 'Compounds'
+  '_metadata.related_targets.count':
+    label: 'Targets'
+  '_metadata.related_activities.count':
+    label: 'Activities'
