@@ -22,3 +22,11 @@ chembl_molecule:
     '_metadata.drug.drug_data.withdrawn_year', '_metadata.drug.drug_data.withdrawn_reason',
     '_metadata.drug.drug_data.withdrawn_country', '_metadata.drug.drug_data.withdrawn_class',
     'molecule_structures.canonical_smiles']
+chembl_assay:
+  download:
+    default: ['assay_chembl_id', 'assay_type', 'description', 'assay_organism', '_metadata.related_compounds.count',
+    '_metadata.related_activities.count', 'bao_format', 'bao_label', 'assay_strain', '_metadata.source.src_description',
+    'assay_tax_id', 'assay_type', 'tissue_chembl_id', 'assay_tissue', 'assay_cell_type', 'assay_subcellular_fraction',
+    'document_chembl_id', '_metadata.document_data.pubmed_id', '_metadata.document_data.doi',
+    '_metadata.document_data.year', '_metadata.document_data.journal', '_metadata.document_data.volume',
+    '_metadata.document_data.first_page','_metadata.document_data.last_page']

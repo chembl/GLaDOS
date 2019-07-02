@@ -22,6 +22,10 @@ def list_to_pipe_separated_string(raw_applicants):
 
 
 def escape_text_with_simple_colon(raw_value):
+    if raw_value is None:
+        return ''
+    if raw_value == '':
+        return ''
     return "'{}'".format(raw_value)
 
 

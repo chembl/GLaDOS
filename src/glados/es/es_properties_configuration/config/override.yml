@@ -68,3 +68,34 @@ chembl_molecule:
     label: 'Chirality'
   '_metadata.compound_generated.availability_type_label':
     label: 'Availability Type'
+chembl_assay:
+  '_metadata.related_compounds.count':
+    label: 'Compounds'
+  '_metadata.related_activities.count':
+    label: 'Activities'
+  'bao_format':
+    label: 'BAO Format ID'
+  'bao_label':
+    label: 'BAO Format'
+  '_metadata.source.src_description':
+    label: 'Source'
+  'assay_tax_id':
+    label: 'Tax ID'
+  'assay_type':
+    label: 'Assay Type'
+  'assay_tissue':
+    label: 'Tissue Name'
+  '_metadata.document_data.pubmed_id':
+    label: 'PubMed ID'
+  '_metadata.document_data.doi':
+    label: 'DOI'
+  '_metadata.document_data.journal':
+    label: 'Journal'
+  '_metadata.document_data.year':
+    label: 'Year'
+  '_metadata.document_data.volume':
+    label: 'Volume'
+  '_metadata.document_data.first_page':
+    label: 'First Page'
+  '_metadata.document_data.last_page':
+    label: 'Last Page'
