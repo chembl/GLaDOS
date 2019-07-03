@@ -279,7 +279,10 @@ class ConfigurationGetterTester(TestCase):
         """Handling of compound ids is not implemented yet! mostly in using contexts!"""
 
         index_name = 'chembl_mechanism_by_parent_target'
+        # for now, the id property will be the first property
+        id_property_must_be = 'parent_molecule.molecule_chembl_id'
 
-        with self.assertRaises(configuration_getter.ESPropsConfigurationGetterError,
-                               msg='This should rise an error when the index has a compound id'):
-            configuration_getter.get_id_property_for_index(index_name)
+        with self.assertWarns(configuration_getter.ESPropsConfigutationGetterWaring,
+                              msg='This should have warned when the index has a compound id'):
+            id_property_got = configuration_getter.get_id_property_for_index(index_name)
+            self.assertEqual(id_property_must_be, id_property_got, msg='The id property was not returned properly')

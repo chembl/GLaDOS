@@ -39,3 +39,12 @@ chembl_document:
     default: ['document_chembl_id', 'journal_full_title', 'src_id', '_metadata.source', 'title', 'pubmed_id', 'doi',
     'patent_id', 'authors', 'year', 'volume', 'issue', 'first_page', 'doc_type', 'abstract',
     '_metadata.related_compounds.count', '_metadata.related_targets.count', '_metadata.related_activities.count']
+chembl_cell_line:
+  download:
+    default: ['cell_chembl_id']
+chembl_tissue:
+  download:
+    default: ['tissue_chembl_id']
+chembl_drug_indication_by_parent:
+  download:
+    default: ['parent_molecule.molecule_chembl_id']

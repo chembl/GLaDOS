@@ -5,12 +5,16 @@ import yaml
 from django.conf import settings
 from django.core.cache import cache
 import glados.es.ws2es.es_util as es_util
+import warnings
 
 
 class ESPropsConfigurationGetterError(Exception):
     """Base class for exceptions in GLaDOS configuration."""
     pass
 
+
+class ESPropsConfigutationGetterWaring(Warning):
+    pass
 
 CACHE_TIME = 3600
 
@@ -25,6 +29,9 @@ def get_config_for_prop(index_name, prop_id):
     if index_mapping is None:
         raise ESPropsConfigurationGetterError("The index {} does not exist!".format(index_name))
 
+    print('index_name: ', index_name)
+    print('prop_id: ', prop_id)
+    print('res description: ', resources_description.RESOURCES_BY_ALIAS_NAME)
     simplified_mapping = index_mapping.get_simplified_mapping_from_es()
     es_property_description = simplified_mapping.get(prop_id)
 
@@ -106,6 +113,7 @@ def get_config_for_props_list(index_name, prop_ids):
 
 
 def get_config_for_group(index_name, group_name):
+    print('get_config_for_group( ' + index_name + ',' + group_name)
     groups_config = yaml.load(open(settings.PROPERTIES_GROUPS_FILE, 'r'), Loader=yaml.FullLoader)
     if groups_config is None:
         raise ESPropsConfigurationGetterError("There is no configuration for groups. "
@@ -140,8 +148,8 @@ def get_id_property_for_index(index_name):
 
     resource_ids = resource_desc.resource_ids
     if len(resource_ids) > 1:
-        raise ESPropsConfigurationGetterError('The index {} has a compound id. Which is not supported yet'
-                                              .format(index_name))
+        warnings.warn('The index {} has a compound id (domposed by more than one property). '
+                      'Which is not fully supported yet'.format(index_name), ESPropsConfigutationGetterWaring)
 
     return resource_ids[0]
 
