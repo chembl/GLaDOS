@@ -85,6 +85,26 @@ def parse_document_source(raw_source):
 
     return '|'.join([v['src_description'] for v in raw_source])
 
+
+def parse_efo_ids(raw_efo_data):
+
+    return '|'.join([v['id'] for v in raw_efo_data])
+
+
+def parse_efo_efo_terms(raw_efo_data):
+
+    return '|'.join([v['term'] for v in raw_efo_data])
+
+
+def parse_indication_refs(raw_refs):
+
+    return '|'.join(['Type: {} RefID: {} URL: {}'.format(r['ref_type'], r['ref_id'], r['ref_url']) for r in raw_refs])
+
+
+def parse_indication_synonyms(raw_synonyms):
+
+    return '|'.join(raw_synonyms)
+
 PARSING_FUNCTIONS = {
     'chembl_molecule': {
         'molecule_synonyms': lambda original_value: parse_synonyms(original_value),
@@ -109,7 +129,13 @@ PARSING_FUNCTIONS = {
     },
     'chembl_drug_indication_by_parent': {
         'parent_molecule._metadata.drug.drug_data.synonyms': lambda original_value: parse_mech_of_act_synonyms(
-            original_value)
+            original_value),
+        'efo_ids': lambda original_value: parse_efo_ids(original_value),
+        'efo_terms': lambda original_value: parse_efo_efo_terms(original_value),
+        'drug_indication.indication_refs': lambda original_value: parse_indication_refs(original_value),
+        'parent_molecule._metadata.drug.drug_data.synonyms': lambda original_value: parse_indication_synonyms(
+            original_value),
+        'usan_stem': lambda original_value: escape_text_with_simple_colon(original_value)
     }
 
 }

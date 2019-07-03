@@ -138,3 +138,22 @@ chembl_document:
     label: 'Targets'
   '_metadata.related_activities.count':
     label: 'Activities'
+chembl_drug_indication_by_parent:
+  'drug_indication.max_phase_for_ind':
+    label: 'Max Phase for Indication'
+  'parent_molecule.first_approval':
+    label: 'First Approval'
+  'drug_indication.mesh_id':
+    label: 'MESH ID'
+  'drug_indication.mesh_heading':
+    label: 'MESH Heading'
+  'efo_ids':
+    based_on: 'drug_indication.efo'
+    label: 'EFO IDs'
+  'efo_terms':
+    based_on: 'drug_indication.efo'
+    label: 'EFO Terms'
+  'drug_indication.indication_refs':
+    label: 'References'
+  'parent_molecule._metadata.drug.drug_data.synonyms':
+    label: 'Synonyms'

@@ -47,4 +47,8 @@ chembl_tissue:
     default: ['tissue_chembl_id']
 chembl_drug_indication_by_parent:
   download:
-    default: ['parent_molecule.molecule_chembl_id']
+    default: ['parent_molecule.molecule_chembl_id', 'parent_molecule.pref_name', 'parent_molecule.molecule_type',
+    'drug_indication.max_phase_for_ind', 'parent_molecule.first_approval', 'drug_indication.mesh_id',
+    'drug_indication.mesh_heading', 'efo_ids', 'efo_terms', 'drug_indication.indication_refs',
+    'parent_molecule._metadata.drug.drug_data.synonyms', 'parent_molecule._metadata.drug.drug_data.usan_stem',
+    'parent_molecule._metadata.drug.drug_data.usan_year']
