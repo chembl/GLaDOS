@@ -46,7 +46,8 @@ chembl_cell_line:
     '_metadata.related_activities.count']
 chembl_tissue:
   download:
-    default: ['tissue_chembl_id']
+    default: ['tissue_chembl_id', 'pref_name', 'uberon_id', 'efo_id', 'bto_id', 'caloha_id',
+    '_metadata.related_compounds.count', '_metadata.related_activities.count']
 chembl_drug_indication_by_parent:
   download:
     default: ['parent_molecule.molecule_chembl_id', 'parent_molecule.pref_name', 'parent_molecule.molecule_type',

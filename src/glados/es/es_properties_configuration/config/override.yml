@@ -147,6 +147,13 @@ chembl_cell_line:
     label: 'Compounds'
   '_metadata.related_activities.count':
     label: 'Activities'
+chembl_tissue:
+  'bto_id':
+    label: 'BTO ID'
+  '_metadata.related_compounds.count':
+    label: 'Compounds'
+  '_metadata.related_activities.count':
+    label: 'Activities'
 chembl_drug_indication_by_parent:
   'drug_indication.max_phase_for_ind':
     label: 'Max Phase for Indication'
