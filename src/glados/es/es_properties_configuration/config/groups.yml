@@ -65,3 +65,6 @@ chembl_mechanism_by_parent_target:
     'binding_site.site_name', 'mechanism_of_action.binding_site_comment', 'mechanism_of_action.mechanism_refs',
     'parent_molecule._metadata.drug.drug_data.synonyms', 'parent_molecule._metadata.atc_classifications',
     'parent_molecule.molecule_chembl_id']
+chembl_activity:
+  download:
+    default: ['molecule_chembl_id']
