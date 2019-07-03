@@ -173,3 +173,29 @@ chembl_drug_indication_by_parent:
     label: 'References'
   'parent_molecule._metadata.drug.drug_data.synonyms':
     label: 'Synonyms'
+chembl_mechanism_by_parent_target:
+  'mechanism_of_action.max_phase':
+    label: 'Max Phase'
+  'parent_molecule.first_approval':
+    label: 'First Approval'
+  'parent_molecule.usan_stem':
+    label: 'USAN Stem'
+  'mechanism_of_action.mechanism_of_action':
+    label: 'Mechanism of Action'
+  'mechanism_of_action.mechanism_comment':
+    label: 'Mechanism Comment'
+  'mechanism_of_action.selectivity_comment':
+    label: 'Selectivity Comment'
+  'mechanism_of_action.action_type':
+    label: 'Action Type'
+  'mechanism_of_action.mechanism_refs':
+    label: 'References'
+  'parent_molecule._metadata.drug.drug_data.synonyms':
+    label: 'Synonyms'
+  'parent_molecule._metadata.atc_classifications':
+    label: 'ATC Classifications'
+  'mechanism_of_action.binding_site_comment':
+    label: 'Binding Site Comment'
+  'parent_molecule.molecule_structures.canonical_smiles':
+    label: 'Smiles'
+

@@ -96,12 +96,12 @@ def parse_efo_efo_terms(raw_efo_data):
     return '|'.join([v['term'] for v in raw_efo_data])
 
 
-def parse_indication_refs(raw_refs):
+def parse_mech_or_indication_refs(raw_refs):
 
     return '|'.join(['Type: {} RefID: {} URL: {}'.format(r['ref_type'], r['ref_id'], r['ref_url']) for r in raw_refs])
 
 
-def parse_indication_synonyms(raw_synonyms):
+def parse_mech_or_indication_syns(raw_synonyms):
 
     return '|'.join(raw_synonyms)
 
@@ -132,10 +132,21 @@ PARSING_FUNCTIONS = {
             original_value),
         'efo_ids': lambda original_value: parse_efo_ids(original_value),
         'efo_terms': lambda original_value: parse_efo_efo_terms(original_value),
-        'drug_indication.indication_refs': lambda original_value: parse_indication_refs(original_value),
-        'parent_molecule._metadata.drug.drug_data.synonyms': lambda original_value: parse_indication_synonyms(
+        'drug_indication.indication_refs': lambda original_value: parse_mech_or_indication_refs(original_value),
+        'parent_molecule._metadata.drug.drug_data.synonyms': lambda original_value: parse_mech_or_indication_syns(
             original_value),
-        'usan_stem': lambda original_value: escape_text_with_simple_colon(original_value)
+        'parent_molecule._metadata.drug.drug_data.usan_stem': lambda original_value: escape_text_with_simple_colon(
+            original_value)
+    },
+    'chembl_mechanism_by_parent_target': {
+        'parent_molecule.usan_stem': lambda original_value: escape_text_with_simple_colon(
+            original_value),
+        'mechanism_of_action.mechanism_comment': lambda original_value: list_to_pipe_separated_string(original_value),
+        'mechanism_of_action.selectivity_comment': lambda original_value: list_to_pipe_separated_string(original_value),
+        'mechanism_of_action.mechanism_refs': lambda raw_refs: parse_mech_or_indication_refs(raw_refs),
+        'parent_molecule._metadata.drug.drug_data.synonyms': lambda original_value: parse_mech_or_indication_syns(
+            original_value),
+        'mechanism_of_action.binding_site_comment': lambda original_value: list_to_pipe_separated_string(original_value)
     }
 
 }
