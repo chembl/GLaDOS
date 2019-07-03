@@ -430,7 +430,7 @@ def simplify_single_mapping(single_mapping):
     mapping_type = single_mapping['type']
     indexed = single_mapping.get('index', True)
     return {
-        'type': DefaultMappings.SIMPLE_MAPPINGS_REVERSE[mapping_type],
+        'type': DefaultMappings.SIMPLE_MAPPINGS_REVERSE.get(mapping_type, mapping_type),
         'aggregatable': indexed and mapping_type in DefaultMappings.AGGREGATABLE_TYPES,
         'sortable': indexed and mapping_type in DefaultMappings.AGGREGATABLE_TYPES
     }
