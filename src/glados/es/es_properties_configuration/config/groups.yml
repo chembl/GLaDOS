@@ -41,7 +41,9 @@ chembl_document:
     '_metadata.related_compounds.count', '_metadata.related_targets.count', '_metadata.related_activities.count']
 chembl_cell_line:
   download:
-    default: ['cell_chembl_id']
+    default: ['cell_chembl_id', 'cell_name', 'cell_description', 'cell_source_organism', 'cell_source_tissue',
+    'cell_source_tax_id', 'clo_id', 'efo_id', 'cellosaurus_id', 'cl_lincs_id', '_metadata.related_compounds.count',
+    '_metadata.related_activities.count']
 chembl_tissue:
   download:
     default: ['tissue_chembl_id']

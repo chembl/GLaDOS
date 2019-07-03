@@ -138,6 +138,15 @@ chembl_document:
     label: 'Targets'
   '_metadata.related_activities.count':
     label: 'Activities'
+chembl_cell_line:
+  'clo_id':
+    label: 'CLO ID'
+  'cl_lincs_id':
+    label: 'LINKS ID'
+  '_metadata.related_compounds.count':
+    label: 'Compounds'
+  '_metadata.related_activities.count':
+    label: 'Activities'
 chembl_drug_indication_by_parent:
   'drug_indication.max_phase_for_ind':
     label: 'Max Phase for Indication'
