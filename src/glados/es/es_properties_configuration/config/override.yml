@@ -117,6 +117,42 @@ chembl_target:
     label: 'Activities'
   'tax_id':
     label: 'Tax ID'
+  'best_expectation':
+    label: 'E-Value'
+    label_mini: 'E-Value'
+    type: 'double'
+    aggregatable: false
+    sortable: true
+  'best_positives':
+    label: 'Positives %'
+    label_mini: 'Positives %'
+    type: 'double'
+    aggregatable: false
+    sortable: true
+  'best_identities':
+    label: 'Identities %'
+    label_mini: 'Identities %'
+    type: 'double'
+    aggregatable: false
+    sortable: true
+  'best_score_bits':
+    label: 'Score (bits)'
+    label_mini: 'Score (bits)'
+    type: 'double'
+    aggregatable: false
+    sortable: true
+  'best_score':
+    label: 'Score'
+    label_mini: 'Score'
+    type: 'double'
+    aggregatable: false
+    sortable: true
+  'length':
+    label: 'Length'
+    label_mini: 'Length'
+    type: 'double'
+    aggregatable: false
+    sortable: true
 chembl_document:
   'journal_full_title':
     label: 'Journal'

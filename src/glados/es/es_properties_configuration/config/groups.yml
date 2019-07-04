@@ -45,6 +45,10 @@ chembl_target:
   download:
     default: ['target_chembl_id', 'pref_name', 'uniprot_accessions', 'target_type', 'organism',
     '_metadata.related_compounds.count', '_metadata.related_activities.count', 'tax_id', 'species_group_flag']
+  download_blast:
+    default: ['best_expectation', 'best_positives', 'best_identities', 'best_score_bits', 'best_score', 'length',
+    'target_chembl_id', 'pref_name', 'uniprot_accessions', 'target_type', 'organism',
+    '_metadata.related_compounds.count', '_metadata.related_activities.count', 'tax_id', 'species_group_flag']
 chembl_document:
   download:
     default: ['document_chembl_id', 'journal_full_title', 'src_id', '_metadata.source', 'title', 'pubmed_id', 'doi',
