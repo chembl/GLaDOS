@@ -68,6 +68,12 @@ chembl_molecule:
     label: 'Chirality'
   '_metadata.compound_generated.availability_type_label':
     label: 'Availability Type'
+  'similarity':
+    label: 'Similarity'
+    label_mini: 'Similarity'
+    type: 'double'
+    aggregatable: false
+    sortable: true
 chembl_assay:
   '_metadata.related_compounds.count':
     label: 'Compounds'
