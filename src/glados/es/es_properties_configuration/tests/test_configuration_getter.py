@@ -183,7 +183,7 @@ class ConfigurationGetterTester(TestCase):
         self.assertEqual(config['prop_id'], props[1])
         self.assertTrue(config['aggregatable'])
         self.assertEqual(config['type'], 'string')
-        self.assertEqual(config['label'], 'Assay Data Cell Type')
+        self.assertEqual(config['label'], 'Assay Cell Type')
         self.assertEqual(config['label_mini'], 'Assay Data Cell Type')
 
     # ------------------------------------------------------------------------------------------------------------------
