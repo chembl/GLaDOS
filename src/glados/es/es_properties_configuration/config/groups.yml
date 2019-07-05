@@ -82,4 +82,14 @@ chembl_mechanism_by_parent_target:
     'parent_molecule.molecule_chembl_id']
 chembl_activity:
   download:
-    default: ['molecule_chembl_id']
+    default: ['molecule_chembl_id', 'molecule_pref_name', '_metadata.parent_molecule_data.max_phase',
+    '_metadata.parent_molecule_data.full_mwt', '_metadata.parent_molecule_data.num_ro5_violations',
+    '_metadata.parent_molecule_data.alogp', '_metadata.parent_molecule_data.compound_key', 'canonical_smiles',
+    'standard_type', 'standard_relation', 'standard_value', 'standard_units', 'pchembl_value', 'data_validity_comment',
+    'activity_comment', 'uo_units', 'ligand_efficiency.bei', 'ligand_efficiency.le', 'ligand_efficiency.lle',
+    'ligand_efficiency.sei', 'potential_duplicate', 'assay_chembl_id', 'assay_description',
+    'assay_type', 'bao_format', 'bao_label', '_metadata.assay_data.assay_organism',
+    '_metadata.assay_data.tissue_chembl_id', '_metadata.assay_data.assay_tissue',
+    '_metadata.assay_data.assay_cell_type', '_metadata.assay_data.assay_subcellular_fraction', 'target_chembl_id',
+    'target_pref_name', 'target_organism', '_metadata.target_data.target_type', 'document_chembl_id', 'src_id',
+    '_metadata.source.src_description', 'document_journal', 'document_year', '_metadata.assay_data.cell_chembl_id']

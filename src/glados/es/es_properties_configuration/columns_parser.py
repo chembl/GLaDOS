@@ -136,6 +136,9 @@ PARSING_FUNCTIONS = {
     'chembl_document': {
         '_metadata.source': lambda original_value: parse_document_source(original_value),
     },
+    'chembl_activity': {
+        'standard_relation': lambda original_value: escape_text_with_simple_colon(original_value),
+    },
     'chembl_mechanism_by_parent_target': {
         'parent_molecule._metadata.drug.drug_data.synonyms': lambda original_value: parse_mech_of_act_synonyms(
             original_value)

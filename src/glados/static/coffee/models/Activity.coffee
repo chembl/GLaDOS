@@ -105,7 +105,7 @@ Activity.COLUMNS = {
   PUBLISHED_VALUE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: 'published_value'
   QUDT_UNITS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'qudt_units'
+    comparator: 'qudt_units' # not used???
   RECORD_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: 'record_id'
   SRC_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,

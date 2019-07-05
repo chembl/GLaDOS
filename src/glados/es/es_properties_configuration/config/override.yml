@@ -105,6 +105,8 @@ chembl_assay:
     label: 'First Page'
   '_metadata.document_data.last_page':
     label: 'Last Page'
+  'assay_parameters':
+    label: 'Assay Parameters'
 chembl_target:
   'pref_name':
     label: 'Name'
@@ -240,4 +242,46 @@ chembl_mechanism_by_parent_target:
     label: 'Binding Site Comment'
   'parent_molecule.molecule_structures.canonical_smiles':
     label: 'Smiles'
-
+chembl_activity:
+  '_metadata.parent_molecule_data.max_phase':
+    label: 'Molecule Max Phase'
+  '_metadata.parent_molecule_data.full_mwt':
+    label: 'Molecular Weight'
+  '_metadata.parent_molecule_data.num_ro5_violations':
+    label: '#RO5 Violations'
+  '_metadata.parent_molecule_data.alogp':
+    label: 'AlogP'
+  '_metadata.parent_molecule_data.compound_key':
+    label: 'Compound Key'
+  'canonical_smiles':
+    label: 'Smiles'
+  'pchembl_value':
+    label: 'pChEMBL Value'
+  'ligand_efficiency.bei':
+    label: 'Ligand Efficiency BEI'
+  'ligand_efficiency.sei':
+    label: 'Ligand Efficiency SEI'
+  'ligand_efficiency.le':
+    label: 'Ligand Efficiency LE'
+  'ligand_efficiency.lle':
+    label: 'Ligand Efficiency LLE'
+  'bao_format':
+    label: 'BAO Format ID'
+  '_metadata.assay_data.assay_organism':
+    label: 'Assay Organism'
+  '_metadata.assay_data.tissue_chembl_id':
+    label: 'Assay Tissue ChEMBL ID'
+  '_metadata.assay_data.assay_tissue':
+    label: 'Assay Tissue Name'
+  '_metadata.assay_data.assay_cell_type':
+    label: 'Assay Cell Type'
+  '_metadata.assay_data.assay_subcellular_fraction':
+    label: 'Assay Subcellular Fraction'
+  '_metadata.target_data.target_type':
+    label: 'Target Type'
+  '_metadata.source.src_description':
+    label: 'Source Description'
+  'src_id':
+    label: 'Source ID'
+  '_metadata.assay_data.cell_chembl_id':
+    label: 'Cell ChEMBL ID'
