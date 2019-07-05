@@ -40,7 +40,7 @@ chembl_assay:
     'assay_tax_id', 'assay_type', 'tissue_chembl_id', 'assay_tissue', 'assay_cell_type', 'assay_subcellular_fraction',
     'document_chembl_id', '_metadata.document_data.pubmed_id', '_metadata.document_data.doi',
     '_metadata.document_data.year', '_metadata.document_data.journal', '_metadata.document_data.volume',
-    '_metadata.document_data.first_page','_metadata.document_data.last_page']
+    '_metadata.document_data.first_page','_metadata.document_data.last_page', 'assay_parameters']
 chembl_target:
   download:
     default: ['target_chembl_id', 'pref_name', 'uniprot_accessions', 'target_type', 'organism',

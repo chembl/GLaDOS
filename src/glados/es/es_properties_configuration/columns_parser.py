@@ -38,7 +38,6 @@ def parse_drug_atc_class_descriptions(raw_classifications):
 
 
 def parse_drug_type(raw_type):
-
     type = int(raw_type)
     if type == 1:
         return '1:Synthetic Small Molecule'
@@ -77,33 +76,44 @@ def parse_target_uniprot_accession(raw_components):
 
 
 def parse_mech_of_act_synonyms(raw_synonyms):
-
     return '|'.join(raw_synonyms)
 
 
 def parse_document_source(raw_source):
-
     return '|'.join([v['src_description'] for v in raw_source])
 
 
 def parse_efo_ids(raw_efo_data):
-
     return '|'.join([v['id'] for v in raw_efo_data])
 
 
 def parse_efo_efo_terms(raw_efo_data):
-
     return '|'.join([v['term'] for v in raw_efo_data])
 
 
 def parse_mech_or_indication_refs(raw_refs):
-
     return '|'.join(['Type: {} RefID: {} URL: {}'.format(r['ref_type'], r['ref_id'], r['ref_url']) for r in raw_refs])
 
 
 def parse_mech_or_indication_syns(raw_synonyms):
-
     return '|'.join(raw_synonyms)
+
+
+def parse_assay_parameters(raw_parameters):
+
+    params_groups = []
+
+    for param in raw_parameters:
+
+        useful_params = []
+
+        for key in ['standard_type', 'standard_relation', 'standard_value', 'standard_units', 'comments']:
+            useful_params.append('{param_name}:{value}'.format(param_name=key, value=param[key]))
+
+        params_groups.append(' '.join(useful_params))
+
+    return ' | '.join(params_groups)
+
 
 PARSING_FUNCTIONS = {
     'chembl_molecule': {
@@ -119,6 +129,9 @@ PARSING_FUNCTIONS = {
     },
     'chembl_target': {
         'uniprot_accessions': lambda original_value: parse_target_uniprot_accession(original_value)
+    },
+    'chembl_assay': {
+        'assay_parameters': lambda original_value: parse_assay_parameters(original_value)
     },
     'chembl_document': {
         '_metadata.source': lambda original_value: parse_document_source(original_value),
@@ -153,7 +166,6 @@ PARSING_FUNCTIONS = {
 
 
 def parse(original_value, index_name, property_name):
-
     functions_for_index = PARSING_FUNCTIONS.get(index_name)
 
     if functions_for_index is None:
