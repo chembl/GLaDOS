@@ -10,7 +10,7 @@ HANDLERS = []
 
 
 def add_termination_handler(handler: Callable):
-    return # TODO: this must be refactored to work with the GLaDOS server smoothly
+    return  # TODO: this must be refactored to work with the GLaDOS server smoothly
     global HANDLERS
     if len(HANDLERS) == 0:
         signal.signal(signal.SIGTERM, termination_handler)

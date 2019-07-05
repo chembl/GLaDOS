@@ -22,8 +22,8 @@ class DownloadJobsTester(TestCase):
         test_download_job = DownloadJob(
             job_id=job_id,
             index_name='chembl_molecule',
-            raw_columns_to_download=
-            '[{"prop_id":"molecule_chembl_id","label":"ChEMBL ID"},{"prop_id":"pref_name","label":"Name"}]',
+            raw_columns_to_download='[{"prop_id":"molecule_chembl_id","label":"ChEMBL ID"},'
+                                    '{"prop_id":"pref_name","label":"Name"}]',
             raw_query='{"query_string": {"query": "molecule_chembl_id:(CHEMBL59)"}}',
             desired_format='csv',
             log=DownloadJob.format_log_message('Job Queued'),
@@ -78,9 +78,9 @@ class DownloadJobsTester(TestCase):
         test_download_job = DownloadJob(
             job_id=job_id,
             index_name='chembl_molecule',
-            raw_columns_to_download=
-            '[{"prop_id":"molecule_chembl_id","label":"ChEMBL ID"},{"prop_id":"pref_name","label":"Name"},'
-            '{"prop_id": "similarity","label": "Similarity","is_contextual": true}]',
+            raw_columns_to_download='[{"prop_id":"molecule_chembl_id","label":"ChEMBL ID"},'
+                                    '{"prop_id":"pref_name","label":"Name"},'
+                                    '{"prop_id": "similarity","label": "Similarity","is_contextual": true}]',
             raw_query='{"query_string": {"query": "molecule_chembl_id:(CHEMBL59)"}}',
             desired_format='csv',
             log=DownloadJob.format_log_message('Job Queued'),
@@ -143,11 +143,10 @@ class DownloadJobsTester(TestCase):
         test_download_job = DownloadJob(
             job_id=job_id,
             index_name='chembl_molecule',
-            raw_columns_to_download=
-            '[{"label": "ChEMBL ID", "prop_id": "molecule_chembl_id"}, '
-            '{"label": "Research Codes", "prop_id": "research_codes", "is_virtual": true, '
-            '"is_contextual": false, "based_on": "molecule_synonyms"}, '
-            '{"prop_id": "similarity","label": "Similarity","is_contextual": true}]',
+            raw_columns_to_download='[{"label": "ChEMBL ID", "prop_id": "molecule_chembl_id"}, '
+                                    '{"label": "Research Codes", "prop_id": "research_codes", "is_virtual": true, '
+                                    '"is_contextual": false, "based_on": "molecule_synonyms"}, '
+                                    '{"prop_id": "similarity","label": "Similarity","is_contextual": true}]',
             raw_query='{"query_string": {"query": "molecule_chembl_id:(CHEMBL2108809)"}}',
             desired_format='csv',
             log=DownloadJob.format_log_message('Job Queued'),
@@ -194,13 +193,12 @@ class DownloadJobsTester(TestCase):
         os.remove(test_search_context_path)
 
     def test_fails_when_format_is_not_available(self):
-
         job_id = 'CHEMBL25-chembl_molecule-gZ6DeuyotzHOwnHi1bKOiu_WHWBbLgOlaCGSTa4Hiuw=.csv'
         test_download_job = DownloadJob(
             job_id=job_id,
             index_name='chembl_molecule',
-            raw_columns_to_download=
-            '[{"prop_id":"molecule_chembl_id","label":"ChEMBL ID"},{"prop_id":"pref_name","label":"Name"}]',
+            raw_columns_to_download='[{"prop_id":"molecule_chembl_id","label":"ChEMBL ID"},'
+                                    '{"prop_id":"pref_name","label":"Name"}]',
             raw_query='{"query_string": {"query": "molecule_chembl_id:(CHEMBL59)"}}',
             desired_format='kgjhgjhgjhgjhghj',
             log=DownloadJob.format_log_message('Job Queued'),
@@ -214,7 +212,6 @@ class DownloadJobsTester(TestCase):
             jobs.make_download_file(job_id)
 
     def test_make_sdf_download_file(self):
-
         job_id = 'CHEMBL25-chembl_molecule-gZ6DeuyotzHOwnHi1bKOiu_WHWBbLgOlaCGSTa4Hiuw=.csv'
         test_download_job = DownloadJob(
             job_id=job_id,
@@ -253,4 +250,3 @@ class DownloadJobsTester(TestCase):
                                msg='The expiration time was not calculated correctly')
 
         self.assertTrue(Path(out_file_path_got).is_file(), msg='The output file was not created!!!')
-

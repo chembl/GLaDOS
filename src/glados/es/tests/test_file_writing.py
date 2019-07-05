@@ -340,4 +340,3 @@ class FileWriterTester(TestCase):
 
         self.assertTrue(ends_with100, msg='The progress must end with 100. I got this: {}\n'.format(
             str(progress_got)))
-

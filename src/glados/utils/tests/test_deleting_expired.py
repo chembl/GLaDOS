@@ -10,7 +10,6 @@ from glados.api.chembl.sssearch import search_manager
 
 
 class UtilsTester(TestCase):
-
     def setUp(self):
         print('Running Test: {0}'.format(self._testMethodName))
         DownloadJob.objects.all().delete()
@@ -34,11 +33,10 @@ class UtilsTester(TestCase):
         num_unexpirable = 3
         # create 3 downloads that with undefined expired time
         for i in range(1, num_unexpirable + 1):
-
             job_id = 'never_expires_{}'.format(i)
             download_job = DownloadJob(
                 job_id=job_id,
-                file_path= os.path.join(settings.DYNAMIC_DOWNLOADS_DIR, job_id + '.gz')
+                file_path=os.path.join(settings.DYNAMIC_DOWNLOADS_DIR, job_id + '.gz')
             )
             download_job.save()
             touch_download_file(job_id)
@@ -90,7 +88,6 @@ class UtilsTester(TestCase):
         # There must not be files that would correspond to expired downloads
         for root, dirs, files in os.walk(settings.DYNAMIC_DOWNLOADS_DIR):
             for file_name in files:
-
                 job_id = file_name.split('.')[0]
                 owner_job_count = DownloadJob.objects.filter(job_id=job_id).count()
                 self.assertTrue(owner_job_count == 1, 'There were orphan download files left!')
@@ -150,7 +147,6 @@ class UtilsTester(TestCase):
 
 
 def touch_download_file(job_id):
-
     download_job = DownloadJob.objects.get(job_id=job_id)
     file_path = download_job.file_path
     with open(file_path, 'wt') as out_file:
@@ -158,7 +154,6 @@ def touch_download_file(job_id):
 
 
 def touch_search_results_file(job_id):
-
     file_path = search_manager.get_results_file_path(job_id)
     with open(file_path, 'wt') as out_file:
         out_file.write('GLaDOS')

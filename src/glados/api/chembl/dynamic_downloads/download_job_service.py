@@ -82,5 +82,3 @@ def get_download_status(download_id):
             response['expires'] = expiration_time_str
 
     return response
-
-

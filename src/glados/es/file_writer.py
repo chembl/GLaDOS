@@ -185,4 +185,3 @@ def write_sdf_file(query, base_file_name='compounds', output_dir=settings.DYNAMI
                            ' please try other download formats.\n')
 
     return file_path, num_items_with_structure
-

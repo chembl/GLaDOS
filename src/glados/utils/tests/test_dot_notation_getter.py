@@ -3,7 +3,6 @@ from glados.utils.dot_notation_getter import DotNotationGetter
 
 
 class DotNotationGetterTester(TestCase):
-
     test_dict = {
         'brand': 'Ford',
         'model': 'Mustang',
@@ -16,12 +15,11 @@ class DotNotationGetterTester(TestCase):
                 'name': 'Bogotá',
                 'country': 'Colombia'
             }
-            
+
         }
     }
 
     def test_gets_one_simple_property(self):
-
         dot_notation_getter = DotNotationGetter(self.test_dict)
         property_to_get = 'brand'
 
@@ -29,7 +27,6 @@ class DotNotationGetterTester(TestCase):
         self.assertEqual(value_got, 'Ford', 'A simple property was not obtained!')
 
     def test_gets_a_nested_property(self):
-
         dot_notation_getter = DotNotationGetter(self.test_dict)
         property_to_get = 'owner.hometown.country'
 
@@ -37,7 +34,6 @@ class DotNotationGetterTester(TestCase):
         self.assertEqual(value_got, 'Colombia', 'A nested property was not obtained!')
 
     def test_gets_the_default_null_value(self):
-
         dot_notation_getter = DotNotationGetter(self.test_dict)
         property_to_get = 'does_not_exist'
 
