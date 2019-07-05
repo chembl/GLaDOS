@@ -1,1 +1,3 @@
 no_blank_comment: False
+pycodestyle:
+    max-line-length: 120
