@@ -170,7 +170,13 @@ PARSING_FUNCTIONS = {
         'mechanism_of_action.mechanism_refs': lambda raw_refs: parse_mech_or_indication_refs(raw_refs),
         'parent_molecule._metadata.drug.drug_data.synonyms': lambda original_value: parse_mech_or_indication_syns(
             original_value),
-        'mechanism_of_action.binding_site_comment': lambda original_value: list_to_pipe_separated_string(original_value)
+        'mechanism_of_action.binding_site_comment': lambda original_value: list_to_pipe_separated_string(
+            original_value),
+        'drug_atc_codes': lambda original_value: parse_atc_codes(original_value),
+        'drug_atc_codes_level_4': lambda original_value: parse_atc_codes_descriptions(original_value, 4),
+        'drug_atc_codes_level_3': lambda original_value: parse_atc_codes_descriptions(original_value, 3),
+        'drug_atc_codes_level_2': lambda original_value: parse_atc_codes_descriptions(original_value, 2),
+        'drug_atc_codes_level_1': lambda original_value: parse_atc_codes_descriptions(original_value, 1),
     }
 
 }

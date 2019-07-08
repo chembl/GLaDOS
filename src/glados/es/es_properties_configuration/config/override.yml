@@ -251,6 +251,21 @@ chembl_mechanism_by_parent_target:
     label: 'Binding Site Comment'
   'parent_molecule.molecule_structures.canonical_smiles':
     label: 'Smiles'
+  'drug_atc_codes':
+    based_on: 'parent_molecule._metadata.atc_classifications'
+    label: 'ATC Codes'
+  'drug_atc_codes_level_4':
+    based_on: 'parent_molecule._metadata.atc_classifications'
+    label: 'Level 4 ATC Codes'
+  'drug_atc_codes_level_3':
+    based_on: 'parent_molecule._metadata.atc_classifications'
+    label: 'Level 3 ATC Codes'
+  'drug_atc_codes_level_2':
+    based_on: 'parent_molecule._metadata.atc_classifications'
+    label: 'Level 2 ATC Codes'
+  'drug_atc_codes_level_1':
+    based_on: 'parent_molecule._metadata.atc_classifications'
+    label: 'Level 1 ATC Codes'
 chembl_activity:
   '_metadata.parent_molecule_data.max_phase':
     label: 'Molecule Max Phase'
