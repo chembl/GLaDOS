@@ -29,9 +29,6 @@ def get_config_for_prop(index_name, prop_id):
     if index_mapping is None:
         raise ESPropsConfigurationGetterError("The index {} does not exist!".format(index_name))
 
-    print('index_name: ', index_name)
-    print('prop_id: ', prop_id)
-    print('res description: ', resources_description.RESOURCES_BY_ALIAS_NAME)
     simplified_mapping = index_mapping.get_simplified_mapping_from_es()
     es_property_description = simplified_mapping.get(prop_id)
 
@@ -113,7 +110,7 @@ def get_config_for_props_list(index_name, prop_ids):
 
 
 def get_config_for_group(index_name, group_name):
-    print('get_config_for_group( ' + index_name + ',' + group_name)
+
     groups_config = yaml.load(open(settings.PROPERTIES_GROUPS_FILE, 'r'), Loader=yaml.FullLoader)
     if groups_config is None:
         raise ESPropsConfigurationGetterError("There is no configuration for groups. "
