@@ -27,29 +27,21 @@ glados.useNameSpace 'glados.models.ServerSideDownloads',
 
       collection = @get('collection')
       requestData = collection.getRequestData()
-      columnsToDownload = []
-      downloadColumns = collection.getMeta('download_columns')
-
-      for column in downloadColumns
-        columnsToDownload.push
-          property_name: column.comparator
-          label: column.name_to_show
-          is_contextual: column.is_contextual
+      download_columns_group = collection.getMeta('download_columns_group')
 
       ssSearchModel = collection.getMeta('sssearch_model')
       return {
         index_name: collection.getMeta('index_name')
         query: JSON.stringify(requestData.query)
         format: desiredFormat
-        columns: JSON.stringify(columnsToDownload)
         context_id: if ssSearchModel? then ssSearchModel.get('search_id') else undefined
-        id_property: collection.getMeta('model').ID_COLUMN.comparator
+        download_columns_group: if download_columns_group? then download_columns_group else undefined
       }
 
     #-------------------------------------------------------------------------------------------------------------------
     # Check download progress
     #-------------------------------------------------------------------------------------------------------------------
-    getProgressURL: -> "#{glados.Settings.GLADOS_BASE_PATH_REL}glados_api/chembl/downloads/download-progress/#{@get('download_id')}"
+    getProgressURL: -> "#{glados.Settings.GLADOS_BASE_PATH_REL}glados_api/chembl/downloads/download_status/#{@get('download_id')}"
     checkDownloadProgressPeriodically: ->
 
       progressURL = @getProgressURL()

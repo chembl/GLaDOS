@@ -63,7 +63,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             id_column: esIndexSettings.ID_COLUMN
             facets_groups: glados.models.paginatedCollections.esSchema.FacetingHandler.initFacetGroups(esIndexSettings.FACETS_GROUPS)
             columns: esIndexSettings.COLUMNS
-            download_columns: esIndexSettings.DOWNLOAD_COLUMNS
             columns_description: esIndexSettings.COLUMNS_DESCRIPTION
             custom_default_card_sizes: esIndexSettings.CUSTOM_DEFAULT_CARD_SIZES
             custom_card_size_to_page_sizes: esIndexSettings.CUSTOM_CARD_SIZE_TO_PAGE_SIZES
@@ -98,6 +97,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             searchESQuery: searchESQuery
             links_to_other_entities: esIndexSettings.LINKS_TO_OTHER_ENTITIES
             sssearch_model: ssSearchModel
+            download_columns_group: esIndexSettings.DOWNLOAD_COLUMNS_GROUP
 
           if @getMeta('enable_similarity_maps') or @getMeta('enable_substructure_highlighting')
             @initReferenceStructureFunctions()

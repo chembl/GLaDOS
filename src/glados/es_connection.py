@@ -3,6 +3,8 @@ from django.conf import settings
 import logging
 import json
 import traceback
+import glados.es.ws2es.es_util as es_util
+from glados.settings import RunEnvs
 
 
 logger = logging.getLogger('glados.es_connection')
@@ -163,6 +165,13 @@ def setup_glados_es_connection():
                 raise Exception('Connection to elasticsearch endpoint failed!')
             logger.info('PING to {0} was successful!'.format(settings.ELASTICSEARCH_HOST))
             create_indexes()
+            logger.info('Initialising utils connection')
+
+            if settings.RUN_ENV == RunEnvs.TRAVIS:
+                es_util.setup_connection_from_full_url(settings.ELASTICSEARCH_EXTERNAL_URL)
+            else:
+                es_util.setup_connection_from_full_url(settings.ELASTICSEARCH_HOST)
+
         except Exception as e:
             print('CONNECTION NOT CREATED!')
             traceback.print_exc()

@@ -1,0 +1,311 @@
+chembl_molecule:
+  'molecule_properties.full_mwt':
+    label: 'Molecular Weight'
+  '_metadata.related_targets.count':
+    label: 'Targets'
+  '_metadata.related_activities.count':
+    label: 'Bioactivities'
+  'molecule_properties.alogp':
+    label: 'AlogP'
+  'molecule_properties.psa':
+    label: 'PSA'
+  'molecule_properties.hba':
+    label: 'HBA'
+  'molecule_properties.hbd':
+    label: 'HBD'
+  'molecule_properties.num_ro5_violations':
+    label: '#RO5 Violations'
+  'molecule_properties.rtb':
+    label: '#Rotatable Bonds'
+  'molecule_properties.ro3_pass':
+    label: 'Passes Ro3'
+  'molecule_properties.qed_weighted':
+    label: 'QED Weighted'
+  'molecule_properties.acd_most_apka':
+    label: 'ACD ApKa'
+  'molecule_properties.acd_most_bpka':
+    label: 'ACD BpKa'
+  'molecule_properties.acd_logp':
+    label: 'ACD LogP'
+  'molecule_properties.acd_logd':
+    label: 'ACD LogD'
+  'molecule_properties.aromatic_rings':
+    label: 'Aromatic Rings'
+  'structure_type':
+    label: 'Structure Type'
+  'molecule_properties.hba_lipinski':
+    label: 'HBA Lipinski'
+  'molecule_properties.hbd_lipinski':
+    label: 'HBD Lipinski'
+  'molecule_properties.num_lipinski_ro5_violations':
+    label: '#RO5 Violations (Lipinski)'
+  'molecule_properties.mw_monoisotopic':
+    label: 'Molecular Weight (Monoisotopic)'
+  'molecule_properties.full_molformula':
+    label: 'Molecular Formula'
+  'molecule_structures.canonical_smiles':
+    label: 'Smiles'
+  'drug_parent_molecule_chembl_id':
+    based_on: 'molecule_chembl_id'
+    label: 'Parent Molecule ChEMBL ID'
+  'research_codes':
+    based_on: 'molecule_synonyms'
+    label: 'Research Codes'
+  'drug_phase':
+    based_on: 'max_phase'
+    label: 'Phase'
+  '_metadata.drug.drug_data.sc_patent':
+    label: 'Patent'
+  '_metadata.drug.drug_data.rule_of_five':
+    label: 'Passes Rule of Five'
+  '_metadata.compound_generated.chirality_label':
+    label: 'Chirality'
+  '_metadata.compound_generated.availability_type_label':
+    label: 'Availability Type'
+  'similarity':
+    label: 'Similarity'
+    label_mini: 'Similarity'
+    type: 'double'
+    aggregatable: false
+    sortable: true
+  'drug_atc_codes':
+    based_on: '_metadata.atc_classifications'
+    label: 'ATC Codes'
+  'drug_atc_codes_level_4':
+    based_on: '_metadata.atc_classifications'
+    label: 'Level 4 ATC Codes'
+  'drug_atc_codes_level_3':
+    based_on: '_metadata.atc_classifications'
+    label: 'Level 3 ATC Codes'
+  'drug_atc_codes_level_2':
+    based_on: '_metadata.atc_classifications'
+    label: 'Level 2 ATC Codes'
+  'drug_atc_codes_level_1':
+    based_on: '_metadata.atc_classifications'
+    label: 'Level 1 ATC Codes'
+chembl_assay:
+  '_metadata.related_compounds.count':
+    label: 'Compounds'
+  '_metadata.related_activities.count':
+    label: 'Activities'
+  'bao_format':
+    label: 'BAO Format ID'
+  'bao_label':
+    label: 'BAO Format'
+  '_metadata.source.src_description':
+    label: 'Source'
+  'assay_tax_id':
+    label: 'Tax ID'
+  'assay_type':
+    label: 'Assay Type'
+  'assay_tissue':
+    label: 'Tissue Name'
+  '_metadata.document_data.pubmed_id':
+    label: 'PubMed ID'
+  '_metadata.document_data.doi':
+    label: 'DOI'
+  '_metadata.document_data.journal':
+    label: 'Journal'
+  '_metadata.document_data.year':
+    label: 'Year'
+  '_metadata.document_data.volume':
+    label: 'Volume'
+  '_metadata.document_data.first_page':
+    label: 'First Page'
+  '_metadata.document_data.last_page':
+    label: 'Last Page'
+  'assay_parameters':
+    label: 'Assay Parameters'
+chembl_target:
+  'pref_name':
+    label: 'Name'
+  'uniprot_accessions':
+    based_on: 'target_components'
+    label: 'UniProt Accessions'
+  '_metadata.related_compounds.count':
+    label: 'Compounds'
+  '_metadata.related_activities.count':
+    label: 'Activities'
+  'tax_id':
+    label: 'Tax ID'
+  'best_expectation':
+    label: 'E-Value'
+    label_mini: 'E-Value'
+    type: 'double'
+    aggregatable: false
+    sortable: true
+  'best_positives':
+    label: 'Positives %'
+    label_mini: 'Positives %'
+    type: 'double'
+    aggregatable: false
+    sortable: true
+  'best_identities':
+    label: 'Identities %'
+    label_mini: 'Identities %'
+    type: 'double'
+    aggregatable: false
+    sortable: true
+  'best_score_bits':
+    label: 'Score (bits)'
+    label_mini: 'Score (bits)'
+    type: 'double'
+    aggregatable: false
+    sortable: true
+  'best_score':
+    label: 'Score'
+    label_mini: 'Score'
+    type: 'double'
+    aggregatable: false
+    sortable: true
+  'length':
+    label: 'Length'
+    label_mini: 'Length'
+    type: 'double'
+    aggregatable: false
+    sortable: true
+chembl_document:
+  'journal_full_title':
+    label: 'Journal'
+  'src_id':
+    label: 'Source ID'
+  '_metadata.source':
+    label: 'Source Description'
+  'pubmed_id':
+    label: 'PubMed ID'
+  'doi':
+    label: 'DOI'
+  'patent_id':
+    label: 'Patent ID'
+  'volume':
+    label: 'Volume'
+  'issue':
+    label: 'Issue'
+  'first_page':
+    label: 'First Page'
+  'doc_type':
+    label: 'Document Type'
+  '_metadata.related_compounds.count':
+    label: 'Compounds'
+  '_metadata.related_targets.count':
+    label: 'Targets'
+  '_metadata.related_activities.count':
+    label: 'Activities'
+chembl_cell_line:
+  'clo_id':
+    label: 'CLO ID'
+  'cl_lincs_id':
+    label: 'LINKS ID'
+  '_metadata.related_compounds.count':
+    label: 'Compounds'
+  '_metadata.related_activities.count':
+    label: 'Activities'
+chembl_tissue:
+  'bto_id':
+    label: 'BTO ID'
+  '_metadata.related_compounds.count':
+    label: 'Compounds'
+  '_metadata.related_activities.count':
+    label: 'Activities'
+chembl_drug_indication_by_parent:
+  'drug_indication.max_phase_for_ind':
+    label: 'Max Phase for Indication'
+  'parent_molecule.first_approval':
+    label: 'First Approval'
+  'drug_indication.mesh_id':
+    label: 'MESH ID'
+  'drug_indication.mesh_heading':
+    label: 'MESH Heading'
+  'efo_ids':
+    based_on: 'drug_indication.efo'
+    label: 'EFO IDs'
+  'efo_terms':
+    based_on: 'drug_indication.efo'
+    label: 'EFO Terms'
+  'drug_indication.indication_refs':
+    label: 'References'
+  'parent_molecule._metadata.drug.drug_data.synonyms':
+    label: 'Synonyms'
+chembl_mechanism_by_parent_target:
+  'mechanism_of_action.max_phase':
+    label: 'Max Phase'
+  'parent_molecule.first_approval':
+    label: 'First Approval'
+  'parent_molecule.usan_stem':
+    label: 'USAN Stem'
+  'mechanism_of_action.mechanism_of_action':
+    label: 'Mechanism of Action'
+  'mechanism_of_action.mechanism_comment':
+    label: 'Mechanism Comment'
+  'mechanism_of_action.selectivity_comment':
+    label: 'Selectivity Comment'
+  'mechanism_of_action.action_type':
+    label: 'Action Type'
+  'mechanism_of_action.mechanism_refs':
+    label: 'References'
+  'parent_molecule._metadata.drug.drug_data.synonyms':
+    label: 'Synonyms'
+  'parent_molecule._metadata.atc_classifications':
+    label: 'ATC Classifications'
+  'mechanism_of_action.binding_site_comment':
+    label: 'Binding Site Comment'
+  'parent_molecule.molecule_structures.canonical_smiles':
+    label: 'Smiles'
+  'drug_atc_codes':
+    based_on: 'parent_molecule._metadata.atc_classifications'
+    label: 'ATC Codes'
+  'drug_atc_codes_level_4':
+    based_on: 'parent_molecule._metadata.atc_classifications'
+    label: 'Level 4 ATC Codes'
+  'drug_atc_codes_level_3':
+    based_on: 'parent_molecule._metadata.atc_classifications'
+    label: 'Level 3 ATC Codes'
+  'drug_atc_codes_level_2':
+    based_on: 'parent_molecule._metadata.atc_classifications'
+    label: 'Level 2 ATC Codes'
+  'drug_atc_codes_level_1':
+    based_on: 'parent_molecule._metadata.atc_classifications'
+    label: 'Level 1 ATC Codes'
+chembl_activity:
+  '_metadata.parent_molecule_data.max_phase':
+    label: 'Molecule Max Phase'
+  '_metadata.parent_molecule_data.full_mwt':
+    label: 'Molecular Weight'
+  '_metadata.parent_molecule_data.num_ro5_violations':
+    label: '#RO5 Violations'
+  '_metadata.parent_molecule_data.alogp':
+    label: 'AlogP'
+  '_metadata.parent_molecule_data.compound_key':
+    label: 'Compound Key'
+  'canonical_smiles':
+    label: 'Smiles'
+  'pchembl_value':
+    label: 'pChEMBL Value'
+  'ligand_efficiency.bei':
+    label: 'Ligand Efficiency BEI'
+  'ligand_efficiency.sei':
+    label: 'Ligand Efficiency SEI'
+  'ligand_efficiency.le':
+    label: 'Ligand Efficiency LE'
+  'ligand_efficiency.lle':
+    label: 'Ligand Efficiency LLE'
+  'bao_format':
+    label: 'BAO Format ID'
+  '_metadata.assay_data.assay_organism':
+    label: 'Assay Organism'
+  '_metadata.assay_data.tissue_chembl_id':
+    label: 'Assay Tissue ChEMBL ID'
+  '_metadata.assay_data.assay_tissue':
+    label: 'Assay Tissue Name'
+  '_metadata.assay_data.assay_cell_type':
+    label: 'Assay Cell Type'
+  '_metadata.assay_data.assay_subcellular_fraction':
+    label: 'Assay Subcellular Fraction'
+  '_metadata.target_data.target_type':
+    label: 'Target Type'
+  '_metadata.source.src_description':
+    label: 'Source Description'
+  'src_id':
+    label: 'Source ID'
+  '_metadata.assay_data.cell_chembl_id':
+    label: 'Cell ChEMBL ID'
