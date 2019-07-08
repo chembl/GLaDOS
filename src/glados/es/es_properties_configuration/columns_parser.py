@@ -29,8 +29,12 @@ def escape_text_with_simple_colon(raw_value):
     return "'{}'".format(raw_value)
 
 
-def parse_drug_atc_classifications(raw_classifications):
-    return '|'.join([class_data['code'] for class_data in raw_classifications])
+def parse_atc_codes(raw_classifications):
+    return ' | '.join([class_data['level5'] for class_data in raw_classifications])
+
+
+def parse_atc_codes_descriptions(raw_classifications, level):
+    return ' | '.join([class_data['level' + str(level) + '_description'] for class_data in raw_classifications])
 
 
 def parse_drug_atc_class_descriptions(raw_classifications):
@@ -123,9 +127,13 @@ PARSING_FUNCTIONS = {
         'usan_stem': lambda original_value: escape_text_with_simple_colon(original_value),
         '_metadata.drug.drug_data.usan_stem_substem': lambda original_value: escape_text_with_simple_colon(
             original_value),
-        'drug_atc_classifications': lambda original_value: parse_drug_atc_classifications(original_value),
         'drug_atc_descriptions': lambda original_value: parse_drug_atc_class_descriptions(original_value),
         '_metadata.drug.drug_data.drug_type': lambda original_value: parse_drug_type(original_value),
+        'drug_atc_codes': lambda original_value: parse_atc_codes(original_value),
+        'drug_atc_codes_level_4': lambda original_value: parse_atc_codes_descriptions(original_value, 4),
+        'drug_atc_codes_level_3': lambda original_value: parse_atc_codes_descriptions(original_value, 3),
+        'drug_atc_codes_level_2': lambda original_value: parse_atc_codes_descriptions(original_value, 2),
+        'drug_atc_codes_level_1': lambda original_value: parse_atc_codes_descriptions(original_value, 1),
     },
     'chembl_target': {
         'uniprot_accessions': lambda original_value: parse_target_uniprot_accession(original_value)

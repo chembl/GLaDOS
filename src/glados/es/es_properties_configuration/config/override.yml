@@ -54,12 +54,6 @@ chembl_molecule:
   'drug_phase':
     based_on: 'max_phase'
     label: 'Phase'
-  'drug_atc_classifications':
-    based_on: '_metadata.drug.drug_data.atc_classification'
-    label: 'ATC Classifications'
-  'drug_atc_descriptions':
-    based_on: '_metadata.drug.drug_data.atc_classification'
-    label: 'ATC Code Descriptions'
   '_metadata.drug.drug_data.sc_patent':
     label: 'Patent'
   '_metadata.drug.drug_data.rule_of_five':
@@ -74,6 +68,21 @@ chembl_molecule:
     type: 'double'
     aggregatable: false
     sortable: true
+  'drug_atc_codes':
+    based_on: '_metadata.atc_classifications'
+    label: 'ATC Codes'
+  'drug_atc_codes_level_4':
+    based_on: '_metadata.atc_classifications'
+    label: 'Level 4 ATC Codes'
+  'drug_atc_codes_level_3':
+    based_on: '_metadata.atc_classifications'
+    label: 'Level 3 ATC Codes'
+  'drug_atc_codes_level_2':
+    based_on: '_metadata.atc_classifications'
+    label: 'Level 2 ATC Codes'
+  'drug_atc_codes_level_1':
+    based_on: '_metadata.atc_classifications'
+    label: 'Level 1 ATC Codes'
 chembl_assay:
   '_metadata.related_compounds.count':
     label: 'Compounds'

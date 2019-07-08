@@ -13,7 +13,8 @@ chembl_molecule:
   download_drugs:
     default: ['molecule_chembl_id', 'molecule_synonyms', 'research_codes', 'drug_phase',
     '_metadata.drug.drug_data.applicants', 'usan_stem', 'usan_year', 'usan_stem_definition',
-    '_metadata.drug.drug_data.usan_stem_substem', 'first_approval', 'drug_atc_classifications', 'drug_atc_descriptions',
+    '_metadata.drug.drug_data.usan_stem_substem', 'first_approval', 'drug_atc_codes', 'drug_atc_codes_level_4',
+    'drug_atc_codes_level_3', 'drug_atc_codes_level_2', 'drug_atc_codes_level_1',
     'indication_class', '_metadata.drug.drug_data.sc_patent', '_metadata.drug.drug_data.drug_type',
     '_metadata.drug.drug_data.rule_of_five', '_metadata.drug.drug_data.first_in_class',
     '_metadata.compound_generated.chirality_label', '_metadata.drug.drug_data.prodrug',
