@@ -17,7 +17,7 @@ class DownloadJobManager(models.Manager):
         # make sure the string generated is stable
         stable_raw_query = json.dumps(json.loads(raw_query), sort_keys=True)
 
-        parsed_desired_format = desired_format.upper()
+        parsed_desired_format = desired_format.lower()
 
         latest_release_full = settings.CURRENT_CHEMBL_RELEASE_NAME
         query_digest = hashlib.sha256(stable_raw_query.encode('utf-8')).digest()
