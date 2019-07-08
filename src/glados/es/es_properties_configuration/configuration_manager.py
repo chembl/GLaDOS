@@ -8,12 +8,12 @@ import glados.es.ws2es.es_util as es_util
 import warnings
 
 
-class ESPropsConfigurationGetterError(Exception):
+class ESPropsConfigurationManagerError(Exception):
     """Base class for exceptions in GLaDOS configuration."""
     pass
 
 
-class ESPropsConfigutationGetterWaring(Warning):
+class ESPropsConfigurationManagerWarning(Warning):
     pass
 
 CACHE_TIME = 3600
@@ -27,7 +27,7 @@ def get_config_for_prop(index_name, prop_id):
 
     index_mapping = resources_description.RESOURCES_BY_ALIAS_NAME.get(index_name)
     if index_mapping is None:
-        raise ESPropsConfigurationGetterError("The index {} does not exist!".format(index_name))
+        raise ESPropsConfigurationManagerError("The index {} does not exist!".format(index_name))
 
     simplified_mapping = index_mapping.get_simplified_mapping_from_es()
     es_property_description = simplified_mapping.get(prop_id)
@@ -47,7 +47,7 @@ def get_config_for_prop(index_name, prop_id):
 
     config = {}
     if not found_in_es and not found_in_override:
-        raise ESPropsConfigurationGetterError("The property {} does not exist in elasticsearch or as virtual property"
+        raise ESPropsConfigurationManagerError("The property {} does not exist in elasticsearch or as virtual property"
                                               .format(prop_id))
 
     elif found_in_es and not found_in_override:
@@ -72,7 +72,7 @@ def get_config_for_prop(index_name, prop_id):
             config['is_contextual'] = False
             base_description = simplified_mapping.get(based_on)
             if base_description is None:
-                raise ESPropsConfigurationGetterError(
+                raise ESPropsConfigurationManagerError(
                     'The virtual property {prop_id} is based on {based_on} which does not exist in elasticsearch '
                     'index {index_name}'.format(prop_id=prop_id, based_on=based_on, index_name=index_name))
             config += SummableDict(base_description)
@@ -82,7 +82,7 @@ def get_config_for_prop(index_name, prop_id):
             if property_override_description.get('aggregatable') is None or \
                             property_override_description.get('type') is None or \
                             property_override_description.get('sortable') is None:
-                raise ESPropsConfigurationGetterError('A contextual property must define the type and if it is '
+                raise ESPropsConfigurationManagerError('A contextual property must define the type and if it is '
                                                       'aggregatable and sortable')
 
         config += property_override_description
@@ -113,18 +113,18 @@ def get_config_for_group(index_name, group_name):
 
     groups_config = yaml.load(open(settings.PROPERTIES_GROUPS_FILE, 'r'), Loader=yaml.FullLoader)
     if groups_config is None:
-        raise ESPropsConfigurationGetterError("There is no configuration for groups. "
+        raise ESPropsConfigurationManagerError("There is no configuration for groups. "
                                               "There should be a configuration set up in {}"
                                               .format(settings.PROPERTIES_GROUPS_FILE))
 
     index_mapping = resources_description.RESOURCES_BY_ALIAS_NAME.get(index_name)
     if index_mapping is None:
-        raise ESPropsConfigurationGetterError("The index {} does not exist!".format(index_name))
+        raise ESPropsConfigurationManagerError("The index {} does not exist!".format(index_name))
 
     index_groups = groups_config.get(index_name, {})
     group_config = index_groups.get(group_name)
     if group_config is None:
-        raise ESPropsConfigurationGetterError("The group {} does not exist!".format(group_name))
+        raise ESPropsConfigurationManagerError("The group {} does not exist!".format(group_name))
 
     configs = {}
 
@@ -141,12 +141,12 @@ def get_id_property_for_index(index_name):
     resources_desc = resources_description.RESOURCES_BY_ALIAS_NAME
     resource_desc = resources_desc.get(index_name)
     if resource_desc is None:
-        raise ESPropsConfigurationGetterError('The index {} does not exist.'.format(index_name))
+        raise ESPropsConfigurationManagerError('The index {} does not exist.'.format(index_name))
 
     resource_ids = resource_desc.resource_ids
     if len(resource_ids) > 1:
         warnings.warn('The index {} has a compound id (domposed by more than one property). '
-                      'Which is not fully supported yet'.format(index_name), ESPropsConfigutationGetterWaring)
+                      'Which is not fully supported yet'.format(index_name), ESPropsConfigurationManagerWarning)
 
     return resource_ids[0]
 

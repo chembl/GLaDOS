@@ -30,7 +30,7 @@ class ConfigurationGetterTester(TestCase):
         try:
             config_got = configuration_manager.get_config_for_prop(index_name, prop_id)
             self.fail('This should have thrown an exception for a non existing index!')
-        except configuration_manager.ESPropsConfigurationGetterError:
+        except configuration_manager.ESPropsConfigurationManagerError:
             pass
 
     def test_fails_when_property_does_not_exist(self):
@@ -41,7 +41,7 @@ class ConfigurationGetterTester(TestCase):
         try:
             config_got = configuration_manager.get_config_for_prop(index_name, prop_id)
             self.fail('This should have thrown an exception for a non existing property!')
-        except configuration_manager.ESPropsConfigurationGetterError:
+        except configuration_manager.ESPropsConfigurationManagerError:
             pass
 
     @override_settings(PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE)
@@ -105,7 +105,7 @@ class ConfigurationGetterTester(TestCase):
         try:
             config_got = configuration_manager.get_config_for_prop(index_name, prop_id)
             self.fail('This should have thrown an exception for a non existing property!')
-        except configuration_manager.ESPropsConfigurationGetterError:
+        except configuration_manager.ESPropsConfigurationManagerError:
             pass
 
     @override_settings(PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE)
@@ -117,7 +117,7 @@ class ConfigurationGetterTester(TestCase):
         try:
             config_got = configuration_manager.get_config_for_prop(index_name, prop_id)
             self.fail('This should have thrown an exception for a bad configuration!')
-        except configuration_manager.ESPropsConfigurationGetterError:
+        except configuration_manager.ESPropsConfigurationManagerError:
             pass
 
     @override_settings(PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE)
@@ -150,7 +150,7 @@ class ConfigurationGetterTester(TestCase):
         try:
             configuration_manager.get_config_for_props_list(index_name, props)
             self.fail('This should have thrown an exception for a non existing index!')
-        except configuration_manager.ESPropsConfigurationGetterError:
+        except configuration_manager.ESPropsConfigurationManagerError:
             pass
 
     def test_fails_config_for_a_list_of_properties_when_property_does_not_exist(self):
@@ -161,7 +161,7 @@ class ConfigurationGetterTester(TestCase):
         try:
             configuration_manager.get_config_for_props_list(index_name, props)
             self.fail('This should have thrown an exception for a non existing property!')
-        except configuration_manager.ESPropsConfigurationGetterError:
+        except configuration_manager.ESPropsConfigurationManagerError:
             pass
 
     def test_gets_config_for_a_list_of_properties(self):
@@ -198,7 +198,7 @@ class ConfigurationGetterTester(TestCase):
         try:
             configs_got = configuration_manager.get_config_for_group(index_name, group_name)
             self.fail('This should have thrown an exception for a non existing index!')
-        except configuration_manager.ESPropsConfigurationGetterError:
+        except configuration_manager.ESPropsConfigurationManagerError:
             pass
 
     @override_settings(PROPERTIES_GROUPS_FILE=GROUPS_TEST_FILE)
@@ -210,7 +210,7 @@ class ConfigurationGetterTester(TestCase):
         try:
             configs_got = configuration_manager.get_config_for_group(index_name, group_name)
             self.fail('This should have thrown an exception for a non existing group!')
-        except configuration_manager.ESPropsConfigurationGetterError:
+        except configuration_manager.ESPropsConfigurationManagerError:
             pass
 
     @override_settings(PROPERTIES_GROUPS_FILE=GROUPS_TEST_FILE)
@@ -271,7 +271,7 @@ class ConfigurationGetterTester(TestCase):
 
         index_name = 'does_not_exist'
 
-        with self.assertRaises(configuration_manager.ESPropsConfigurationGetterError,
+        with self.assertRaises(configuration_manager.ESPropsConfigurationManagerError,
                                msg='This should rise an error when the index does not exist'):
             configuration_manager.get_id_property_for_index(index_name)
 
@@ -282,7 +282,7 @@ class ConfigurationGetterTester(TestCase):
         # for now, the id property will be the first property
         id_property_must_be = 'parent_molecule.molecule_chembl_id'
 
-        with self.assertWarns(configuration_manager.ESPropsConfigutationGetterWaring,
+        with self.assertWarns(configuration_manager.ESPropsConfigurationManagerWarning,
                               msg='This should have warned when the index has a compound id'):
             id_property_got = configuration_manager.get_id_property_for_index(index_name)
             self.assertEqual(id_property_must_be, id_property_got, msg='The id property was not returned properly')
