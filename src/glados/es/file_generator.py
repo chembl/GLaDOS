@@ -14,7 +14,7 @@ class OutputFormats(Enum):
     SDF = 'SDF'
 
 
-class FileWriterError(Exception):
+class FileGeneratorError(Exception):
     """Base class for exceptions in the file writer."""
     pass
 
@@ -46,17 +46,17 @@ def write_separated_values_file(desired_format, index_name, query, columns_to_do
                                 progress_function=(lambda progress: progress)):
 
     if desired_format not in OutputFormats:
-        raise FileWriterError('The format {} is not supported'.format(desired_format))
+        raise FileGeneratorError('The format {} is not supported'.format(desired_format))
 
     if index_name is None:
-        raise FileWriterError('You must provide an index name')
+        raise FileGeneratorError('You must provide an index name')
 
     using_context = False
     if context is not None:
         if id_property is None:
-            raise FileWriterError('When providing context, an id property must be given in order to join the rows')
+            raise FileGeneratorError('When providing context, an id property must be given in order to join the rows')
         if contextual_columns is None:
-            raise FileWriterError('When providing context, an contextual column description must be given')
+            raise FileGeneratorError('When providing context, an contextual column description must be given')
         using_context = True
 
     if desired_format is OutputFormats.CSV:

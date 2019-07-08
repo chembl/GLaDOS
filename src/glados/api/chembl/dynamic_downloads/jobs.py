@@ -4,7 +4,7 @@ from glados.api.chembl.dynamic_downloads.models import DownloadJob
 import socket
 import json
 import traceback
-from glados.es import file_writer
+from glados.es import file_generator
 from django.conf import settings
 from glados.settings import RunEnvs
 import subprocess
@@ -62,11 +62,11 @@ def make_download_file(job_id):
         contextual_columns = [col for col in all_columns_to_download if col.get('is_contextual', False) is True]
 
     if raw_desired_format.upper() == 'CSV':
-        desired_format = file_writer.OutputFormats.CSV
+        desired_format = file_generator.OutputFormats.CSV
     elif raw_desired_format.upper() == 'TSV':
-        desired_format = file_writer.OutputFormats.TSV
+        desired_format = file_generator.OutputFormats.TSV
     elif raw_desired_format.upper() == 'SDF':
-        desired_format = file_writer.OutputFormats.SDF
+        desired_format = file_generator.OutputFormats.SDF
     else:
         raise DownloadJobError('The format {} is not suooported'.format(raw_desired_format))
 
@@ -79,8 +79,8 @@ def make_download_file(job_id):
         print('own_columns: ', own_columns)
         print('all_columns_to_download: ', all_columns_to_download)
 
-        if (desired_format is file_writer.OutputFormats.CSV) or (desired_format is file_writer.OutputFormats.TSV):
-            out_file_path, total_items = file_writer.write_separated_values_file(
+        if (desired_format is file_generator.OutputFormats.CSV) or (desired_format is file_generator.OutputFormats.TSV):
+            out_file_path, total_items = file_generator.write_separated_values_file(
                 desired_format=desired_format,
                 index_name=index_name,
                 query=query,
@@ -92,7 +92,7 @@ def make_download_file(job_id):
                 progress_function=save_download_job_progress
             )
         else:
-            out_file_path, total_items = file_writer.write_sdf_file(query=query, base_file_name=base_file_name,
+            out_file_path, total_items = file_generator.write_sdf_file(query=query, base_file_name=base_file_name,
                                                                     progress_function=save_download_job_progress)
 
         download_job.total_items = total_items

@@ -1,5 +1,5 @@
 from django.test import TestCase
-from glados.es import file_writer
+from glados.es import file_generator
 import json
 import time
 import gzip
@@ -13,7 +13,7 @@ class FileWriterTester(TestCase):
                                     {'label': 'Name', 'prop_id': 'pref_name'}]
 
         source_must_be = ['molecule_chembl_id', 'pref_name']
-        source_got = file_writer.get_search_source(test_columns_to_download)
+        source_got = file_generator.get_search_source(test_columns_to_download)
         self.assertEqual(source_must_be, source_got, 'The search source is not generated correctly')
 
     def test_generates_source_for_virtual_properties(self):
@@ -22,7 +22,7 @@ class FileWriterTester(TestCase):
                                      'is_contextual': True, 'based_on': 'molecule_synonyms'}]
 
         source_must_be = ['molecule_chembl_id', 'molecule_synonyms']
-        source_got = file_writer.get_search_source(test_columns_to_download)
+        source_got = file_generator.get_search_source(test_columns_to_download)
         self.assertEqual(source_must_be, source_got, 'The search source is not generated correctly')
 
     def test_fails_when_output_format_is_not_available(self):
@@ -32,9 +32,9 @@ class FileWriterTester(TestCase):
         query_file_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/test_query0.json')
         test_query = json.loads(open(query_file_path, 'r').read())
 
-        with self.assertRaises(file_writer.FileWriterError,
+        with self.assertRaises(file_generator.FileGeneratorError,
                                msg='It should raise an error when the given format is not supported'):
-            file_writer.write_separated_values_file(desired_format='XLSX',
+            file_generator.write_separated_values_file(desired_format='XLSX',
                                                     index_name=test_index_name,
                                                     query=test_query,
                                                     columns_to_download=test_columns_to_download,
@@ -47,9 +47,9 @@ class FileWriterTester(TestCase):
         query_file_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/test_query0.json')
         test_query = json.loads(open(query_file_path, 'r').read())
 
-        with self.assertRaises(file_writer.FileWriterError,
+        with self.assertRaises(file_generator.FileGeneratorError,
                                msg='It should raise an error when the index name is not given'):
-            file_writer.write_separated_values_file(desired_format=file_writer.OutputFormats.CSV,
+            file_generator.write_separated_values_file(desired_format=file_generator.OutputFormats.CSV,
                                                     index_name=test_index_name,
                                                     query=test_query,
                                                     columns_to_download=test_columns_to_download,
@@ -63,8 +63,8 @@ class FileWriterTester(TestCase):
         test_query = json.loads(open(query_file_path, 'r').read())
 
         filename = 'test' + str(int(round(time.time() * 1000)))
-        out_file_path, total_items = file_writer.write_separated_values_file(
-            desired_format=file_writer.OutputFormats.CSV,
+        out_file_path, total_items = file_generator.write_separated_values_file(
+            desired_format=file_generator.OutputFormats.CSV,
             index_name=test_index_name, query=test_query,
             columns_to_download=test_columns_to_download,
             base_file_name=filename)
@@ -85,8 +85,8 @@ class FileWriterTester(TestCase):
         test_query = json.loads(open(query_file_path, 'r').read())
 
         filename = 'test' + str(int(round(time.time() * 1000)))
-        out_file_path, total_items = file_writer.write_separated_values_file(
-            desired_format=file_writer.OutputFormats.CSV,
+        out_file_path, total_items = file_generator.write_separated_values_file(
+            desired_format=file_generator.OutputFormats.CSV,
             index_name=test_index_name, query=test_query,
             columns_to_download=test_columns_to_download,
             base_file_name=filename)
@@ -115,10 +115,10 @@ class FileWriterTester(TestCase):
         }
 
         filename = 'test' + str(int(round(time.time() * 1000)))
-        with self.assertRaises(file_writer.FileWriterError,
+        with self.assertRaises(file_generator.FileGeneratorError,
                                msg='It should raise an error when the conexts is given but no id property'):
-            out_file_path, total_items = file_writer.write_separated_values_file(
-                desired_format=file_writer.OutputFormats.CSV,
+            out_file_path, total_items = file_generator.write_separated_values_file(
+                desired_format=file_generator.OutputFormats.CSV,
                 index_name=test_index_name, query=test_query,
                 columns_to_download=test_columns_to_download,
                 base_file_name=filename, context=test_context,
@@ -140,11 +140,11 @@ class FileWriterTester(TestCase):
         }
 
         filename = 'test' + str(int(round(time.time() * 1000)))
-        with self.assertRaises(file_writer.FileWriterError,
+        with self.assertRaises(file_generator.FileGeneratorError,
                                msg='It should raise an error when the conexts is given but no contextual columns '
                                    'description'):
-            out_file_path, total_items = file_writer.write_separated_values_file(
-                desired_format=file_writer.OutputFormats.CSV,
+            out_file_path, total_items = file_generator.write_separated_values_file(
+                desired_format=file_generator.OutputFormats.CSV,
                 index_name=test_index_name, query=test_query,
                 columns_to_download=test_columns_to_download,
                 base_file_name=filename, context=test_context,
@@ -167,8 +167,8 @@ class FileWriterTester(TestCase):
         }
 
         filename = 'test' + str(int(round(time.time() * 1000)))
-        out_file_path, total_items = file_writer.write_separated_values_file(
-            desired_format=file_writer.OutputFormats.CSV,
+        out_file_path, total_items = file_generator.write_separated_values_file(
+            desired_format=file_generator.OutputFormats.CSV,
             index_name=test_index_name, query=test_query,
             columns_to_download=test_columns_to_download,
             base_file_name=filename, context=test_context,
@@ -201,8 +201,8 @@ class FileWriterTester(TestCase):
         }
 
         filename = 'test' + str(int(round(time.time() * 1000)))
-        out_file_path, total_items = file_writer.write_separated_values_file(
-            desired_format=file_writer.OutputFormats.CSV,
+        out_file_path, total_items = file_generator.write_separated_values_file(
+            desired_format=file_generator.OutputFormats.CSV,
             index_name=test_index_name, query=test_query,
             columns_to_download=test_columns_to_download,
             base_file_name=filename, context=test_context,
@@ -239,8 +239,8 @@ class FileWriterTester(TestCase):
             progress_got.append(progress)
 
         filename = 'test' + str(int(round(time.time() * 1000)))
-        out_file_path, total_items = file_writer.write_separated_values_file(
-            desired_format=file_writer.OutputFormats.CSV,
+        out_file_path, total_items = file_generator.write_separated_values_file(
+            desired_format=file_generator.OutputFormats.CSV,
             index_name=test_index_name, query=test_query,
             columns_to_download=test_columns_to_download,
             base_file_name=filename, context=test_context,
@@ -266,7 +266,7 @@ class FileWriterTester(TestCase):
         query_file_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/test_query0.json')
         test_query = json.loads(open(query_file_path, 'r').read())
         filename = 'test_sdf' + str(int(round(time.time() * 1000)))
-        out_file_path, total_items = file_writer.write_sdf_file(test_query, filename)
+        out_file_path, total_items = file_generator.write_sdf_file(test_query, filename)
 
         sdf_must_be_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/simple_sdf_must_be.sdf')
         sdf_must_be = open(sdf_must_be_path, 'rt').read()
@@ -281,7 +281,7 @@ class FileWriterTester(TestCase):
         query_file_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/test_query3.json')
         test_query = json.loads(open(query_file_path, 'r').read())
         filename = 'test_sdf' + str(int(round(time.time() * 1000)))
-        out_file_path, total_items = file_writer.write_sdf_file(test_query, filename)
+        out_file_path, total_items = file_generator.write_sdf_file(test_query, filename)
 
         sdf_must_be_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/simple_sdf_must_be.sdf')
         sdf_must_be = open(sdf_must_be_path, 'rt').read()
@@ -297,7 +297,7 @@ class FileWriterTester(TestCase):
         query_file_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/test_query4.json')
         test_query = json.loads(open(query_file_path, 'r').read())
         filename = 'test_sdf' + str(int(round(time.time() * 1000)))
-        out_file_path, total_items = file_writer.write_sdf_file(test_query, filename)
+        out_file_path, total_items = file_generator.write_sdf_file(test_query, filename)
 
         sdf_must_be_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/sdf_when_no_structures_must_be.sdf')
         sdf_must_be = open(sdf_must_be_path, 'rt').read()
@@ -319,7 +319,7 @@ class FileWriterTester(TestCase):
         def progress_function(progress):
             progress_got.append(progress)
 
-        out_file_path, total_items = file_writer.write_sdf_file(test_query, filename,
+        out_file_path, total_items = file_generator.write_sdf_file(test_query, filename,
                                                                 progress_function=progress_function)
 
         sdf_must_be_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/sdf_with_3_structures_must_be.sdf')
