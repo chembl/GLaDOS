@@ -1,5 +1,5 @@
 from glados.api.chembl.dynamic_downloads import jobs
-from glados.es.es_properties_configuration import configuration_getter
+from glados.es.es_properties_configuration import configuration_manager
 from glados.api.chembl.dynamic_downloads.models import DownloadJobManager
 from glados.api.chembl.dynamic_downloads.models import DownloadJob
 from glados.usage_statistics import glados_server_statistics
@@ -14,9 +14,9 @@ logger = logging.getLogger('django')
 
 def queue_download_job(index_name, raw_query, desired_format, context_id, columns_group='download'):
 
-    columns_to_download = configuration_getter.get_config_for_group(index_name, columns_group)['default']
+    columns_to_download = configuration_manager.get_config_for_group(index_name, columns_group)['default']
     raw_columns_to_download = json.dumps(columns_to_download)
-    id_property = configuration_getter.get_id_property_for_index(index_name)
+    id_property = configuration_manager.get_id_property_for_index(index_name)
 
     try:
         download_job = jobs.queue_new_job(

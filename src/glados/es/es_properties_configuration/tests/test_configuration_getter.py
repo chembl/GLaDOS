@@ -1,5 +1,5 @@
 from django.test import TestCase, override_settings
-from glados.es.es_properties_configuration import configuration_getter
+from glados.es.es_properties_configuration import configuration_manager
 import glados.es.ws2es.es_util as es_util
 from django.conf import settings
 from glados.settings import RunEnvs
@@ -28,9 +28,9 @@ class ConfigurationGetterTester(TestCase):
         prop_id = '_metadata.assay_data.assay_subcellular_fraction'
 
         try:
-            config_got = configuration_getter.get_config_for_prop(index_name, prop_id)
+            config_got = configuration_manager.get_config_for_prop(index_name, prop_id)
             self.fail('This should have thrown an exception for a non existing index!')
-        except configuration_getter.ESPropsConfigurationGetterError:
+        except configuration_manager.ESPropsConfigurationGetterError:
             pass
 
     def test_fails_when_property_does_not_exist(self):
@@ -39,9 +39,9 @@ class ConfigurationGetterTester(TestCase):
         prop_id = 'does_not_exist'
 
         try:
-            config_got = configuration_getter.get_config_for_prop(index_name, prop_id)
+            config_got = configuration_manager.get_config_for_prop(index_name, prop_id)
             self.fail('This should have thrown an exception for a non existing property!')
-        except configuration_getter.ESPropsConfigurationGetterError:
+        except configuration_manager.ESPropsConfigurationGetterError:
             pass
 
     @override_settings(PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE)
@@ -49,7 +49,7 @@ class ConfigurationGetterTester(TestCase):
 
         index_name = 'chembl_activity'
         prop_id = '_metadata.assay_data.assay_subcellular_fraction'
-        config_got = configuration_getter.get_config_for_prop(index_name, prop_id)
+        config_got = configuration_manager.get_config_for_prop(index_name, prop_id)
 
         self.assertEqual(config_got['index_name'], index_name)
         self.assertEqual(config_got['prop_id'], prop_id)
@@ -65,7 +65,7 @@ class ConfigurationGetterTester(TestCase):
 
         index_name = 'chembl_activity'
         prop_id = '_metadata.activity_generated.short_data_validity_comment'
-        config_got = configuration_getter.get_config_for_prop(index_name, prop_id)
+        config_got = configuration_manager.get_config_for_prop(index_name, prop_id)
 
         property_config_must_be = override_config_must_be[index_name][prop_id]
         self.assertEqual(config_got['label'], property_config_must_be['label'],
@@ -80,7 +80,7 @@ class ConfigurationGetterTester(TestCase):
 
         index_name = 'chembl_molecule'
         prop_id = 'trade_names'
-        config_got = configuration_getter.get_config_for_prop(index_name, prop_id)
+        config_got = configuration_manager.get_config_for_prop(index_name, prop_id)
 
         property_config_must_be = override_config_must_be[index_name][prop_id]
         self.assertEqual(config_got['prop_id'], prop_id,
@@ -103,9 +103,9 @@ class ConfigurationGetterTester(TestCase):
         prop_id = 'trade_names_wrong'
 
         try:
-            config_got = configuration_getter.get_config_for_prop(index_name, prop_id)
+            config_got = configuration_manager.get_config_for_prop(index_name, prop_id)
             self.fail('This should have thrown an exception for a non existing property!')
-        except configuration_getter.ESPropsConfigurationGetterError:
+        except configuration_manager.ESPropsConfigurationGetterError:
             pass
 
     @override_settings(PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE)
@@ -115,9 +115,9 @@ class ConfigurationGetterTester(TestCase):
         prop_id = '_context.similarity_wrong'
 
         try:
-            config_got = configuration_getter.get_config_for_prop(index_name, prop_id)
+            config_got = configuration_manager.get_config_for_prop(index_name, prop_id)
             self.fail('This should have thrown an exception for a bad configuration!')
-        except configuration_getter.ESPropsConfigurationGetterError:
+        except configuration_manager.ESPropsConfigurationGetterError:
             pass
 
     @override_settings(PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE)
@@ -125,7 +125,7 @@ class ConfigurationGetterTester(TestCase):
 
         index_name = 'chembl_molecule'
         prop_id = '_context.similarity'
-        config_got = configuration_getter.get_config_for_prop(index_name, prop_id)
+        config_got = configuration_manager.get_config_for_prop(index_name, prop_id)
 
         self.assertEqual(config_got['prop_id'], prop_id,
                          'The prop_id was not set up properly!')
@@ -148,9 +148,9 @@ class ConfigurationGetterTester(TestCase):
         props = ['_metadata.assay_data.assay_subcellular_fraction']
 
         try:
-            configuration_getter.get_config_for_props_list(index_name, props)
+            configuration_manager.get_config_for_props_list(index_name, props)
             self.fail('This should have thrown an exception for a non existing index!')
-        except configuration_getter.ESPropsConfigurationGetterError:
+        except configuration_manager.ESPropsConfigurationGetterError:
             pass
 
     def test_fails_config_for_a_list_of_properties_when_property_does_not_exist(self):
@@ -159,9 +159,9 @@ class ConfigurationGetterTester(TestCase):
         props = ['does_not_exist']
 
         try:
-            configuration_getter.get_config_for_props_list(index_name, props)
+            configuration_manager.get_config_for_props_list(index_name, props)
             self.fail('This should have thrown an exception for a non existing property!')
-        except configuration_getter.ESPropsConfigurationGetterError:
+        except configuration_manager.ESPropsConfigurationGetterError:
             pass
 
     def test_gets_config_for_a_list_of_properties(self):
@@ -169,7 +169,7 @@ class ConfigurationGetterTester(TestCase):
         index_name = 'chembl_activity'
         props = ['_metadata.activity_generated.short_data_validity_comment', '_metadata.assay_data.assay_cell_type']
 
-        configs_got = configuration_getter.get_config_for_props_list(index_name, props)
+        configs_got = configuration_manager.get_config_for_props_list(index_name, props)
         config = configs_got[0]
         self.assertEqual(config['index_name'], index_name)
         self.assertEqual(config['prop_id'], props[0])
@@ -196,9 +196,9 @@ class ConfigurationGetterTester(TestCase):
         group_name = 'download'
 
         try:
-            configs_got = configuration_getter.get_config_for_group(index_name, group_name)
+            configs_got = configuration_manager.get_config_for_group(index_name, group_name)
             self.fail('This should have thrown an exception for a non existing index!')
-        except configuration_getter.ESPropsConfigurationGetterError:
+        except configuration_manager.ESPropsConfigurationGetterError:
             pass
 
     @override_settings(PROPERTIES_GROUPS_FILE=GROUPS_TEST_FILE)
@@ -208,9 +208,9 @@ class ConfigurationGetterTester(TestCase):
         group_name = 'does_not_exist'
 
         try:
-            configs_got = configuration_getter.get_config_for_group(index_name, group_name)
+            configs_got = configuration_manager.get_config_for_group(index_name, group_name)
             self.fail('This should have thrown an exception for a non existing group!')
-        except configuration_getter.ESPropsConfigurationGetterError:
+        except configuration_manager.ESPropsConfigurationGetterError:
             pass
 
     @override_settings(PROPERTIES_GROUPS_FILE=GROUPS_TEST_FILE)
@@ -219,7 +219,7 @@ class ConfigurationGetterTester(TestCase):
         index_name = 'chembl_activity'
         group_name = 'download'
 
-        configs_got = configuration_getter.get_config_for_group(index_name, group_name)
+        configs_got = configuration_manager.get_config_for_group(index_name, group_name)
         groups_must_be = yaml.load(open(settings.PROPERTIES_GROUPS_FILE, 'r'), Loader=yaml.FullLoader)
         group_must_be = groups_must_be[index_name][group_name]
 
@@ -233,7 +233,7 @@ class ConfigurationGetterTester(TestCase):
         index_name = 'chembl_activity'
         group_name = 'table'
 
-        configs_got = configuration_getter.get_config_for_group(index_name, group_name)
+        configs_got = configuration_manager.get_config_for_group(index_name, group_name)
         groups_must_be = yaml.load(open(settings.PROPERTIES_GROUPS_FILE, 'r'), Loader=yaml.FullLoader)
         group_must_be = groups_must_be[index_name][group_name]
 
@@ -247,7 +247,7 @@ class ConfigurationGetterTester(TestCase):
         index_name = 'chembl_molecule'
         group_name = 'sorted_table'
 
-        configs_got = configuration_getter.get_config_for_group(index_name, group_name)
+        configs_got = configuration_manager.get_config_for_group(index_name, group_name)
         groups_must_be = yaml.load(open(settings.PROPERTIES_GROUPS_FILE, 'r'), Loader=yaml.FullLoader)
         group_must_be = groups_must_be[index_name][group_name]
 
@@ -262,7 +262,7 @@ class ConfigurationGetterTester(TestCase):
         id_property_must_be = 'molecule_chembl_id'
 
         for index_name, id_property_must_be in [('chembl_molecule', 'molecule_chembl_id')]:
-            id_property_got = configuration_getter.get_id_property_for_index(index_name)
+            id_property_got = configuration_manager.get_id_property_for_index(index_name)
 
             self.assertEqual(id_property_must_be, id_property_got, msg='The id property for {} was not returned '
                                                                        'correctly!'.format(index_name))
@@ -271,9 +271,9 @@ class ConfigurationGetterTester(TestCase):
 
         index_name = 'does_not_exist'
 
-        with self.assertRaises(configuration_getter.ESPropsConfigurationGetterError,
+        with self.assertRaises(configuration_manager.ESPropsConfigurationGetterError,
                                msg='This should rise an error when the index does not exist'):
-            configuration_getter.get_id_property_for_index(index_name)
+            configuration_manager.get_id_property_for_index(index_name)
 
     def test_fails_to_get_id_property_when_it_is_a_compound_id(self):
         """Handling of compound ids is not implemented yet! mostly in using contexts!"""
@@ -282,7 +282,7 @@ class ConfigurationGetterTester(TestCase):
         # for now, the id property will be the first property
         id_property_must_be = 'parent_molecule.molecule_chembl_id'
 
-        with self.assertWarns(configuration_getter.ESPropsConfigutationGetterWaring,
+        with self.assertWarns(configuration_manager.ESPropsConfigutationGetterWaring,
                               msg='This should have warned when the index has a compound id'):
-            id_property_got = configuration_getter.get_id_property_for_index(index_name)
+            id_property_got = configuration_manager.get_id_property_for_index(index_name)
             self.assertEqual(id_property_must_be, id_property_got, msg='The id property was not returned properly')

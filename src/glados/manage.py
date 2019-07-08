@@ -20,7 +20,7 @@ def main():
     from glados.utils import manage_saved_searches
     from glados.utils import daemon_simulator
     from glados.utils import rq_workers
-    from glados.es.es_properties_configuration import configuration_getter
+    from glados.es.es_properties_configuration import configuration_manager
         
     # Compress files before server launch if compression is enabled
     if os.environ.get('RUN_MAIN') != 'true' and len(sys.argv) > 1 and sys.argv[1] == 'runserver' and settings.DEBUG:
@@ -68,7 +68,7 @@ def main():
 
     elif os.environ.get('RUN_MAIN') != 'true' and len(sys.argv) > 1 and sys.argv[1] == 'getpropertiescounts':
 
-        configuration_getter.print_properties_counts()
+        configuration_manager.print_properties_counts()
 
     # all our custom commands are listed here so they are not sent to the original manage.py
     execute_in_manage = sys.argv[1] not in ['createapacheconfig', 'createdefaultadminuser', 'simulatedaemon',
