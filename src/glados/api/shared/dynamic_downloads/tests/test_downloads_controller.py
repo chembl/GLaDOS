@@ -11,8 +11,8 @@ from glados.settings import RunEnvs
 
 class DownloadJobsControllerTester(TestCase):
 
-    CONFIG_TEST_FILE = os.path.join(settings.GLADOS_ROOT, 'api/chembl/dynamic_downloads/tests/data/test_override.yml')
-    GROUPS_TEST_FILE = os.path.join(settings.GLADOS_ROOT, 'api/chembl/dynamic_downloads/tests/data/test_groups.yml')
+    CONFIG_TEST_FILE = os.path.join(settings.GLADOS_ROOT, 'api/shared/dynamic_downloads/tests/data/test_override.yml')
+    GROUPS_TEST_FILE = os.path.join(settings.GLADOS_ROOT, 'api/shared/dynamic_downloads/tests/data/test_groups.yml')
 
     def setUp(self):
         DownloadJob.objects.all().delete()
