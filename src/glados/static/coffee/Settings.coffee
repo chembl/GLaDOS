@@ -301,7 +301,7 @@ glados.loadSearchResultsURLS = ()->
   for Entity in [Compound, Target, Assay, Document, CellLine, glados.models.Tissue, Assay, Activity]
     glados.Settings.ENTITY_NAME_TO_ENTITY[Entity.prototype.entityName] = Entity
 
-  glados.Settings.GENERATE_SERVER_SIDE_DOWNLOAD_ENDPOINT = 'glados_api/chembl/downloads/queue_download/'
+  glados.Settings.GENERATE_SERVER_SIDE_DOWNLOAD_ENDPOINT = 'glados_api/shared/downloads/queue_download/'
   glados.Settings.SEARCH_RESULTS_PARSER_ENDPOINT = 'search_results_parser'
   glados.Settings.SHORTEN_URLS_ENDPOINT = 'glados_api/chembl/url_shortening/shorten_url/'
   glados.Settings.EXTEND_URLS_ENDPOINT = 'glados_api/chembl/url_shortening/extend_url/'

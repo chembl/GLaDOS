@@ -1,17 +1,17 @@
 from django.test import TestCase, override_settings
-from glados.api.chembl.dynamic_downloads.models import DownloadJob
+from glados.api.shared.dynamic_downloads.models import DownloadJob
 import json
 import os
 from django.conf import settings
-from glados.api.chembl.dynamic_downloads import download_job_service
+from glados.api.shared.dynamic_downloads import download_job_service
 import glados.es.ws2es.es_util as es_util
 from glados.settings import RunEnvs
 from datetime import timezone
 
 
 class DownloadJobsServiceTester(TestCase):
-    CONFIG_TEST_FILE = os.path.join(settings.GLADOS_ROOT, 'api/chembl/dynamic_downloads/tests/data/test_override.yml')
-    GROUPS_TEST_FILE = os.path.join(settings.GLADOS_ROOT, 'api/chembl/dynamic_downloads/tests/data/test_groups.yml')
+    CONFIG_TEST_FILE = os.path.join(settings.GLADOS_ROOT, 'api/shared/dynamic_downloads/tests/data/test_override.yml')
+    GROUPS_TEST_FILE = os.path.join(settings.GLADOS_ROOT, 'api/shared/dynamic_downloads/tests/data/test_groups.yml')
 
     def setUp(self):
         DownloadJob.objects.all().delete()
