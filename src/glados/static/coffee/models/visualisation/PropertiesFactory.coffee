@@ -161,6 +161,12 @@ glados.useNameSpace 'glados.models.visualisation',
             '#e95f7e',
             '#cc4362'
           ]
+        IS_DRUG:
+          propName: '_metadata.drug.is_drug'
+          label: 'Is Drug'
+          parser:
+            0: 'True'
+            1: 'False'
     DocumentAggregation:
       Properties:
         YEAR:

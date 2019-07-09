@@ -48,6 +48,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       return newFacets
 
     @generateFacetsForIndex: (es_index, defaults, defaults_hidden, exclude_patterns)->
+
       facets = {}
       if not _.has(glados.models.paginatedCollections.esSchema.GLaDOS_es_GeneratedSchema, es_index)
         throw 'ERROR: '+es_index+' was not found in the Generated Schema for GLaDOS!'
@@ -96,6 +97,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
             prop_name = prop_i.property
           facets[prop_name] = getFacetData(prop_i)
           facets[prop_name].show = false
+
       return facets
 
     @getNewFacetingHandler: (es_index, es_property, sort=null, intervals=null, report_card_entity=null)->
@@ -309,10 +311,12 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         @faceting_keys_inorder = []
         @faceting_data = {}
       if @faceting_type == FacetingHandler.CATEGORY_FACETING
+
         aggregated_data = es_aggregations_data[@es_property_name]
         if aggregated_data
           if not _.isUndefined(aggregated_data.buckets)
             for bucket_i in aggregated_data.buckets
+
               fKey = bucket_i.key
               @parseCategoricalKey(fKey)
               @faceting_data[fKey] = {
@@ -320,7 +324,9 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
                 count: bucket_i.doc_count
                 selected: false
                 key_for_humans: @parseCategoricalKey(fKey)
+                key_as_string: bucket_i.key_as_string
               }
+
               @faceting_keys_inorder.push(bucket_i.key)
 
           if not _.isUndefined(aggregated_data.sum_other_doc_count) and aggregated_data.sum_other_doc_count > 0
@@ -414,7 +420,12 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       }
       for facet_key, facet_data of @faceting_data
         if facet_data.selected
-          selected_query.bool.should.push(@getFilterQueryForFacetKey(facet_key))
+
+          if facet_data.key_as_string?
+            keyToUse = facet_data.key_as_string
+          else
+            keyToUse = facet_data.key
+          selected_query.bool.should.push(@getFilterQueryForFacetKey(keyToUse))
       if selected_query.bool.should.length ==0
         return null
       return selected_query
@@ -435,6 +446,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         .replace(FacetingHandler.KEY_REGEX_REPLACE,"__")
 
     getFilterQueryForFacetKey: (facet_key)->
+
       filter_terms_query = null
       if @faceting_type == FacetingHandler.CATEGORY_FACETING
         if facet_key == FacetingHandler.OTHERS_CATEGORY
