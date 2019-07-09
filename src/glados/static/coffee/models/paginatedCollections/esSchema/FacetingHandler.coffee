@@ -48,7 +48,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       return newFacets
 
     @generateFacetsForIndex: (es_index, defaults, defaults_hidden, exclude_patterns)->
-
       facets = {}
       if not _.has(glados.models.paginatedCollections.esSchema.GLaDOS_es_GeneratedSchema, es_index)
         throw 'ERROR: '+es_index+' was not found in the Generated Schema for GLaDOS!'
@@ -97,7 +96,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
             prop_name = prop_i.property
           facets[prop_name] = getFacetData(prop_i)
           facets[prop_name].show = false
-
       return facets
 
     @getNewFacetingHandler: (es_index, es_property, sort=null, intervals=null, report_card_entity=null)->
