@@ -1,6 +1,6 @@
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.http import require_POST, require_GET
-from glados.api.chembl.dynamic_downloads import download_job_service
+from glados.api.shared.dynamic_downloads import download_job_service
 import traceback
 
 

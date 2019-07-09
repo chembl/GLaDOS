@@ -4,7 +4,7 @@ from glados.es_models import TinyURLIndex, ESCachedRequestIndex, ESDownloadRecor
 import time
 import socket
 from django.conf import settings
-from glados.api.chembl.dynamic_downloads.models import *
+from glados.api.shared.dynamic_downloads.models import *
 
 
 class TinyURL(models.Model):

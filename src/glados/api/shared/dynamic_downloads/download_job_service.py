@@ -1,7 +1,7 @@
-from glados.api.chembl.dynamic_downloads import jobs
+from glados.api.shared.dynamic_downloads import jobs
 from glados.es.es_properties_configuration import configuration_manager
-from glados.api.chembl.dynamic_downloads.models import DownloadJobManager
-from glados.api.chembl.dynamic_downloads.models import DownloadJob
+from glados.api.shared.dynamic_downloads.models import DownloadJobManager
+from glados.api.shared.dynamic_downloads.models import DownloadJob
 from glados.usage_statistics import glados_server_statistics
 import json
 import os

@@ -1,11 +1,11 @@
 from django.test import TestCase
-from glados.api.chembl.dynamic_downloads.models import DownloadJob
+from glados.api.shared.dynamic_downloads.models import DownloadJob
 from glados.models import SSSearchJob
 from glados.utils import manage_downloads, manage_saved_searches
 from datetime import datetime, timezone, timedelta
 from django.conf import settings
 import os
-from glados.api.chembl.dynamic_downloads.models import DownloadJob
+from glados.api.shared.dynamic_downloads.models import DownloadJob
 from glados.api.chembl.sssearch import search_manager
 
 

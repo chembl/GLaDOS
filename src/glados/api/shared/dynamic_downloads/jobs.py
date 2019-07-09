@@ -1,6 +1,6 @@
 import time
-from glados.api.chembl.dynamic_downloads.models import DownloadJobManager
-from glados.api.chembl.dynamic_downloads.models import DownloadJob
+from glados.api.shared.dynamic_downloads.models import DownloadJobManager
+from glados.api.shared.dynamic_downloads.models import DownloadJob
 import socket
 import json
 import traceback

@@ -1,6 +1,6 @@
 from django.test import TestCase
-from glados.api.chembl.dynamic_downloads import jobs
-from glados.api.chembl.dynamic_downloads.models import DownloadJob
+from glados.api.shared.dynamic_downloads import jobs
+from glados.api.shared.dynamic_downloads.models import DownloadJob
 import os
 from datetime import timedelta
 from django.utils import timezone

@@ -47,7 +47,7 @@ describe "Server Side Downloads", ->
     testDownloadID = 'someDownloadId'
     downloadModel.set('download_id', testDownloadID)
     progressURLGot = downloadModel.getProgressURL()
-    progressURLMustBe = "#{glados.Settings.GLADOS_BASE_PATH_REL}glados_api/chembl/downloads/download_status/#{testDownloadID}"
+    progressURLMustBe = "#{glados.Settings.GLADOS_BASE_PATH_REL}glados_api/shared/downloads/download_status/#{testDownloadID}"
     expect(progressURLGot).toBe(progressURLMustBe)
 
   it 'generates the correct download url', ->

@@ -1,7 +1,7 @@
 import django
 django.setup()
 from django.conf import settings
-from glados.api.chembl.dynamic_downloads.models import DownloadJob
+from glados.api.shared.dynamic_downloads.models import DownloadJob
 from datetime import datetime, timezone
 import sys
 import os

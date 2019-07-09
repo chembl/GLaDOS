@@ -3,8 +3,8 @@ from django.conf import settings
 import os
 import json
 from django.urls import reverse
-from glados.api.chembl.dynamic_downloads import downloads_controller
-from glados.api.chembl.dynamic_downloads.models import DownloadJob
+from glados.api.shared.dynamic_downloads import downloads_controller
+from glados.api.shared.dynamic_downloads.models import DownloadJob
 import glados.es.ws2es.es_util as es_util
 from glados.settings import RunEnvs
 
