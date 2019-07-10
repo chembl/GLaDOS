@@ -1,0 +1,14 @@
+chembl_molecule:
+  # this is as elasticsearch would receve the object to sort the dataset
+  # see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html
+  sorted_table: [
+    {
+      '_metadata.compound_records.compound_name': {
+        'order': 'asc'
+      }
+    },
+    '_metadata.disease_name',
+    {
+      '_metadata.drug.drug_data.availability_type': 'desc'
+    }
+  ]
