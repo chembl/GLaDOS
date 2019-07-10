@@ -129,14 +129,18 @@ def get_config_for_group(index_name, group_name):
     props_configs = {}
 
     for sub_group, props_list in group_config.items():
-        if sub_group != '__default_sorting__':
-            props_configs[sub_group] = get_config_for_props_list(index_name, props_list)
-        else:
-            props_configs[sub_group] = props_list
+        props_configs[sub_group] = get_config_for_props_list(index_name, props_list)
 
-    config = {
-        'properties': props_configs
-    }
+    config = {'properties': props_configs}
+
+    sorting_config = yaml.load(open(settings.GROUPS_DEFAULT_SORTING_FILE, 'r'), Loader=yaml.FullLoader)
+    if sorting_config is not None:
+        index_sorting = sorting_config.get(index_name)
+        if index_sorting is not None:
+            group_sorting = index_sorting.get(group_name)
+            if group_sorting is not None:
+                config['default_sorting'] = group_sorting
+
     return config
 
 
