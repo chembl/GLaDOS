@@ -196,7 +196,7 @@ class ConfigurationGetterTester(TestCase):
         group_name = 'download'
 
         try:
-            configs_got = configuration_manager.get_config_for_group(index_name, group_name)
+            configs_got = configuration_manager.get_config_for_group(index_name, group_name)['properties']
             self.fail('This should have thrown an exception for a non existing index!')
         except configuration_manager.ESPropsConfigurationManagerError:
             pass
@@ -208,7 +208,7 @@ class ConfigurationGetterTester(TestCase):
         group_name = 'does_not_exist'
 
         try:
-            configs_got = configuration_manager.get_config_for_group(index_name, group_name)
+            configs_got = configuration_manager.get_config_for_group(index_name, group_name)['properties']
             self.fail('This should have thrown an exception for a non existing group!')
         except configuration_manager.ESPropsConfigurationManagerError:
             pass
@@ -219,7 +219,7 @@ class ConfigurationGetterTester(TestCase):
         index_name = 'chembl_activity'
         group_name = 'download'
 
-        configs_got = configuration_manager.get_config_for_group(index_name, group_name)
+        configs_got = configuration_manager.get_config_for_group(index_name, group_name)['properties']
         groups_must_be = yaml.load(open(settings.PROPERTIES_GROUPS_FILE, 'r'), Loader=yaml.FullLoader)
         group_must_be = groups_must_be[index_name][group_name]
 
@@ -233,7 +233,7 @@ class ConfigurationGetterTester(TestCase):
         index_name = 'chembl_activity'
         group_name = 'table'
 
-        configs_got = configuration_manager.get_config_for_group(index_name, group_name)
+        configs_got = configuration_manager.get_config_for_group(index_name, group_name)['properties']
         groups_must_be = yaml.load(open(settings.PROPERTIES_GROUPS_FILE, 'r'), Loader=yaml.FullLoader)
         group_must_be = groups_must_be[index_name][group_name]
 
@@ -247,7 +247,7 @@ class ConfigurationGetterTester(TestCase):
         index_name = 'chembl_molecule'
         group_name = 'sorted_table'
 
-        configs_got = configuration_manager.get_config_for_group(index_name, group_name)
+        configs_got = configuration_manager.get_config_for_group(index_name, group_name)['properties']
         groups_must_be = yaml.load(open(settings.PROPERTIES_GROUPS_FILE, 'r'), Loader=yaml.FullLoader)
         group_must_be = groups_must_be[index_name][group_name]
 

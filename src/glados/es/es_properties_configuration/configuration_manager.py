@@ -126,15 +126,18 @@ def get_config_for_group(index_name, group_name):
     if group_config is None:
         raise ESPropsConfigurationManagerError("The group {} does not exist!".format(group_name))
 
-    configs = {}
+    props_configs = {}
 
     for sub_group, props_list in group_config.items():
         if sub_group != '__default_sorting__':
-            configs[sub_group] = get_config_for_props_list(index_name, props_list)
+            props_configs[sub_group] = get_config_for_props_list(index_name, props_list)
         else:
-            configs[sub_group] = props_list
+            props_configs[sub_group] = props_list
 
-    return configs
+    config = {
+        'properties': props_configs
+    }
+    return config
 
 
 def get_id_property_for_index(index_name):

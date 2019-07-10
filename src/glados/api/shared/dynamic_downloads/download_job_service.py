@@ -14,7 +14,7 @@ logger = logging.getLogger('django')
 
 def queue_download_job(index_name, raw_query, desired_format, context_id, columns_group='download'):
 
-    columns_to_download = configuration_manager.get_config_for_group(index_name, columns_group)['default']
+    columns_to_download = configuration_manager.get_config_for_group(index_name, columns_group)['properties']['default']
     raw_columns_to_download = json.dumps(columns_to_download)
     id_property = configuration_manager.get_id_property_for_index(index_name)
 
