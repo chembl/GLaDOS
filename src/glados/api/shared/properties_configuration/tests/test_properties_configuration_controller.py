@@ -65,7 +65,38 @@ class PropertiesConfigurationControllerTester(TestCase):
         request = self.request_factory.get(request_url)
         response_got = properties_configuration_controller.get_config_for_property(request, index_name, prop_id)
         data_got = json.loads(response_got.content.decode('utf-8'))
-
         data_must_be = configuration_manager.get_config_for_prop(index_name, prop_id)
+
         self.assertEqual(data_got, data_must_be,
                          msg='The property configuration is not correct')
+
+    @override_settings(PROPERTIES_GROUPS_FILE=GROUPS_TEST_FILE,
+                       PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE,
+                       GROUPS_DEFAULT_SORTING_FILE=SORTING_TEST_FILE)
+    def test_gets_config_for_a_group_fails_when_index_does_not_exist(self):
+
+        index_name = 'does_not_exist'
+        group_name = 'download'
+
+        request_url = reverse('get_config_for_group', args=(index_name, group_name))
+        request = self.request_factory.get(request_url)
+        response_got = properties_configuration_controller.get_config_for_group(request, index_name, group_name)
+
+        self.assertEqual(response_got.status_code, 500,
+                         'This should return a 500 error when the group does not exist')
+
+    @override_settings(PROPERTIES_GROUPS_FILE=GROUPS_TEST_FILE,
+                       PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE,
+                       GROUPS_DEFAULT_SORTING_FILE=SORTING_TEST_FILE)
+    def test_gets_config_for_a_group(self):
+
+        index_name = 'chembl_molecule'
+        group_name = 'sorted_table'
+
+        request_url = reverse('get_config_for_property', args=(index_name, group_name))
+        request = self.request_factory.get(request_url)
+        response_got = properties_configuration_controller.get_config_for_group(request, index_name, group_name)
+        data_got = json.loads(response_got.content.decode('utf-8'))
+        data_must_be = configuration_manager.get_config_for_group(index_name, group_name)
+        self.assertEqual(data_got, data_must_be,
+                         msg='The group configuration is not correct')
