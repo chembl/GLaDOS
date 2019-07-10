@@ -1,8 +1,10 @@
 from django.test import RequestFactory, TestCase, override_settings
 from django.conf import settings
 import os
+from django.urls import reverse
 import glados.es.ws2es.es_util as es_util
 from glados.settings import RunEnvs
+from glados.api.shared.properties_configuration import properties_configuration_controller
 
 
 class PropertiesConfigurationControllerTester(TestCase):
@@ -20,6 +22,20 @@ class PropertiesConfigurationControllerTester(TestCase):
             es_util.setup_connection_from_full_url(settings.ELASTICSEARCH_EXTERNAL_URL)
         else:
             es_util.setup_connection_from_full_url(settings.ELASTICSEARCH_HOST)
+
+    @override_settings(PROPERTIES_GROUPS_FILE=GROUPS_TEST_FILE,
+                       PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE,
+                       GROUPS_DEFAULT_SORTING_FILE=SORTING_TEST_FILE)
+    def test_returns_server_error_when_index_does_not_exist(self):
+
+        index_name = 'does_not_exist'
+        prop_id = 'molecule_chembl_id'
+
+        request_url = reverse('get_config_for_property', args=(index_name, prop_id))
+        request = self.request_factory.get(request_url)
+        response_got = properties_configuration_controller.get_config_for_property(request, index_name, prop_id)
+
+        self.assertEqual(response_got.status_code, 500, 'This should return a 500 error when the index does not exist')
 
     @override_settings(PROPERTIES_GROUPS_FILE=GROUPS_TEST_FILE,
                        PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE,
