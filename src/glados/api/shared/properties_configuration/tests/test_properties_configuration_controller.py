@@ -40,5 +40,20 @@ class PropertiesConfigurationControllerTester(TestCase):
     @override_settings(PROPERTIES_GROUPS_FILE=GROUPS_TEST_FILE,
                        PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE,
                        GROUPS_DEFAULT_SORTING_FILE=SORTING_TEST_FILE)
+    def test_returns_server_error_when_property_does_not_exist(self):
+
+        index_name = 'chembl_molecule'
+        prop_id = 'does_not_exist'
+
+        request_url = reverse('get_config_for_property', args=(index_name, prop_id))
+        request = self.request_factory.get(request_url)
+        response_got = properties_configuration_controller.get_config_for_property(request, index_name, prop_id)
+
+        self.assertEqual(response_got.status_code, 500,
+                         'This should return a 500 error when the property does not exist')
+
+    @override_settings(PROPERTIES_GROUPS_FILE=GROUPS_TEST_FILE,
+                       PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE,
+                       GROUPS_DEFAULT_SORTING_FILE=SORTING_TEST_FILE)
     def test_gets_config_for_one_property(self):
         print('test_gets_config_for_one_property')
