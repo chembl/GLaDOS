@@ -16,6 +16,7 @@ class ESPropsConfigurationManagerError(Exception):
 class ESPropsConfigurationManagerWarning(Warning):
     pass
 
+
 CACHE_TIME = 3600
 
 
@@ -48,7 +49,7 @@ def get_config_for_prop(index_name, prop_id):
     config = {}
     if not found_in_es and not found_in_override:
         raise ESPropsConfigurationManagerError("The property {} does not exist in elasticsearch or as virtual property"
-                                              .format(prop_id))
+                                               .format(prop_id))
 
     elif found_in_es and not found_in_override:
         # this is a normal property WITHOUT override
@@ -83,7 +84,7 @@ def get_config_for_prop(index_name, prop_id):
                             property_override_description.get('type') is None or \
                             property_override_description.get('sortable') is None:
                 raise ESPropsConfigurationManagerError('A contextual property must define the type and if it is '
-                                                      'aggregatable and sortable')
+                                                       'aggregatable and sortable')
 
         config += property_override_description
 
@@ -110,12 +111,11 @@ def get_config_for_props_list(index_name, prop_ids):
 
 
 def get_config_for_group(index_name, group_name):
-
     groups_config = yaml.load(open(settings.PROPERTIES_GROUPS_FILE, 'r'), Loader=yaml.FullLoader)
     if groups_config is None:
         raise ESPropsConfigurationManagerError("There is no configuration for groups. "
-                                              "There should be a configuration set up in {}"
-                                              .format(settings.PROPERTIES_GROUPS_FILE))
+                                               "There should be a configuration set up in {}"
+                                               .format(settings.PROPERTIES_GROUPS_FILE))
 
     index_mapping = resources_description.RESOURCES_BY_ALIAS_NAME.get(index_name)
     if index_mapping is None:
@@ -159,7 +159,6 @@ def get_id_property_for_index(index_name):
 
 
 def print_properties_counts():
-
     es_util.setup_connection_from_full_url(settings.ELASTICSEARCH_HOST)
     print('GETTING PROPERTIES COUNTS')
     properties_sum = 0
