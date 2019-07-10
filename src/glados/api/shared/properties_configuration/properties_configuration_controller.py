@@ -7,8 +7,6 @@ def get_config_for_property(request, index_name, property_id):
 
     try:
         config_got = configuration_manager.get_config_for_prop(index_name, property_id)
+        return JsonResponse(config_got)
     except configuration_manager.ESPropsConfigurationManagerError as err:
         return HttpResponse('Internal Server Error: ' + str(err), status=500)
-
-
-    return JsonResponse({})

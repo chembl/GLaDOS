@@ -1,10 +1,12 @@
+import os
+import json
 from django.test import RequestFactory, TestCase, override_settings
 from django.conf import settings
-import os
 from django.urls import reverse
-import glados.es.ws2es.es_util as es_util
 from glados.settings import RunEnvs
 from glados.api.shared.properties_configuration import properties_configuration_controller
+from glados.es.es_properties_configuration import configuration_manager
+import glados.es.ws2es.es_util as es_util
 
 
 class PropertiesConfigurationControllerTester(TestCase):
@@ -56,4 +58,14 @@ class PropertiesConfigurationControllerTester(TestCase):
                        PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE,
                        GROUPS_DEFAULT_SORTING_FILE=SORTING_TEST_FILE)
     def test_gets_config_for_one_property(self):
-        print('test_gets_config_for_one_property')
+        index_name = 'chembl_molecule'
+        prop_id = 'molecule_chembl_id'
+
+        request_url = reverse('get_config_for_property', args=(index_name, prop_id))
+        request = self.request_factory.get(request_url)
+        response_got = properties_configuration_controller.get_config_for_property(request, index_name, prop_id)
+        data_got = json.loads(response_got.content.decode('utf-8'))
+
+        data_must_be = configuration_manager.get_config_for_prop(index_name, prop_id)
+        self.assertEqual(data_got, data_must_be,
+                         msg='The property configuration is not correct')
