@@ -246,7 +246,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             index_name: thisCollection.getMeta('index_name')
             group_name: groupName
 
-          $.get(config_url).fail (jqXHR) -> thisCollection.trigger('error', thisCollection, jqXHR)
+          getConfigDeferred = $.getJSON(config_url)
+          getConfigDeferred.done (data) ->
+            console.log('data obtained: ', data)
+
+          getConfigDeferred.fail (jqXHR) -> thisCollection.trigger('error', thisCollection, jqXHR)
 
           console.log('config_url: ', config_url)
 
