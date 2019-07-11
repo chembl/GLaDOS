@@ -231,11 +231,24 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       console.log('FETCHING COLUMNS DESCRIPTION')
       thisCollection = @
       descriptionPromise = new Promise((resolve, reject) ->
-        config_url = glados.Settings.PROPERTIES_GROUP_CONFIGURATION_URL_GENERATOR
-          index_name: thisCollection.getMeta('index_name')
-          group_name: 'download'
 
-        console.log('config_url: ', config_url)
+        configGroups = thisCollection.getMeta('config_groups')
+        console.log('configGroups: ', configGroups)
+        loadedGroups = {}
+        for viewKey, groupName of configGroups
+          loadedGroups[groupName] = false
+
+        console.log('loadedGroups: ', loadedGroups)
+
+        for viewKey, groupName of configGroups
+
+          config_url = glados.Settings.PROPERTIES_GROUP_CONFIGURATION_URL_GENERATOR
+            index_name: thisCollection.getMeta('index_name')
+            group_name: groupName
+
+          $.get(config_url).fail (jqXHR) -> thisCollection.trigger('error', thisCollection, jqXHR)
+
+          console.log('config_url: ', config_url)
 
         resolve('success')
       )

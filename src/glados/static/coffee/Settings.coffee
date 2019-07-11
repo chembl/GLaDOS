@@ -337,7 +337,7 @@ glados.loadSearchResultsURLS = ()->
   glados.Settings.SEARCH_URL_GENERATOR = Handlebars.compile(glados.Settings.SEARCH_URL_TEMPLATE)
 
   glados.Settings.PROPERTIES_GROUP_CONFIGURATION_URL_GENERATOR = Handlebars.compile(
-    'glados_api/shared/properties_configuration/group/{{index_name}}/{{download}}')
+    "#{glados.Settings.GLADOS_BASE_PATH_REL}glados_api/shared/properties_configuration/group/{{index_name}}/{{group_name}}/")
 
 # Logs the JavaScript environment details
 glados.logGladosSettings = () ->
