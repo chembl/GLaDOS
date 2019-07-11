@@ -336,6 +336,9 @@ glados.loadSearchResultsURLS = ()->
     "{{#if state}}/state={{state}}{{/if}}"
   glados.Settings.SEARCH_URL_GENERATOR = Handlebars.compile(glados.Settings.SEARCH_URL_TEMPLATE)
 
+  glados.Settings.PROPERTIES_GROUP_CONFIGURATION_URL_GENERATOR = Handlebars.compile(
+    'glados_api/shared/properties_configuration/group/{{index_name}}/{{download}}')
+
 # Logs the JavaScript environment details
 glados.logGladosSettings = () ->
   if glados.Settings.DEBUG

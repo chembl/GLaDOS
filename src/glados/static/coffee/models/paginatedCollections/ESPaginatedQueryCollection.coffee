@@ -227,8 +227,30 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return jsonResultsList
 
-    # Prepares an Elastic Search query to search in all the fields of a document in a specific index
+    fetchColumnsDescription: ->
+      console.log('FETCHING COLUMNS DESCRIPTION')
+      thisCollection = @
+      descriptionPromise = new Promise((resolve, reject) ->
+        config_url = glados.Settings.PROPERTIES_GROUP_CONFIGURATION_URL_GENERATOR
+          index_name: thisCollection.getMeta('index_name')
+          group_name: 'download'
+
+        console.log('config_url: ', config_url)
+
+        resolve('success')
+      )
+      return descriptionPromise
+
     fetch: (options, testMode=false) ->
+      descriptionPromise = @fetchColumnsDescription()
+
+      thisCollection = @
+      descriptionPromise.then( ->
+        thisCollection.fetchData(options, testMode=false)
+      )
+
+    # Prepares an Elastic Search query to search in all the fields of a document in a specific index
+    fetchData: (options, testMode=false) ->
       testMode |= @getMeta('test_mode')
       @trigger('before_fetch_elastic')
       @url = @getURL()
