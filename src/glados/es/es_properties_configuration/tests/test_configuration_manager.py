@@ -8,9 +8,10 @@ import yaml
 
 
 class ConfigurationGetterTester(TestCase):
-
     CONFIG_TEST_FILE = os.path.join(settings.GLADOS_ROOT, 'es/es_properties_configuration/tests/data/test_override.yml')
     GROUPS_TEST_FILE = os.path.join(settings.GLADOS_ROOT, 'es/es_properties_configuration/tests/data/test_groups.yml')
+    SORTING_TEST_FILE = os.path.join(settings.GLADOS_ROOT,
+                                     'es/es_properties_configuration/tests/data/test_default_sorting.yml')
 
     def setUp(self):
 
@@ -196,7 +197,7 @@ class ConfigurationGetterTester(TestCase):
         group_name = 'download'
 
         try:
-            configs_got = configuration_manager.get_config_for_group(index_name, group_name)
+            configs_got = configuration_manager.get_config_for_group(index_name, group_name)['properties']
             self.fail('This should have thrown an exception for a non existing index!')
         except configuration_manager.ESPropsConfigurationManagerError:
             pass
@@ -208,7 +209,7 @@ class ConfigurationGetterTester(TestCase):
         group_name = 'does_not_exist'
 
         try:
-            configs_got = configuration_manager.get_config_for_group(index_name, group_name)
+            configs_got = configuration_manager.get_config_for_group(index_name, group_name)['properties']
             self.fail('This should have thrown an exception for a non existing group!')
         except configuration_manager.ESPropsConfigurationManagerError:
             pass
@@ -219,7 +220,7 @@ class ConfigurationGetterTester(TestCase):
         index_name = 'chembl_activity'
         group_name = 'download'
 
-        configs_got = configuration_manager.get_config_for_group(index_name, group_name)
+        configs_got = configuration_manager.get_config_for_group(index_name, group_name)['properties']
         groups_must_be = yaml.load(open(settings.PROPERTIES_GROUPS_FILE, 'r'), Loader=yaml.FullLoader)
         group_must_be = groups_must_be[index_name][group_name]
 
@@ -233,7 +234,7 @@ class ConfigurationGetterTester(TestCase):
         index_name = 'chembl_activity'
         group_name = 'table'
 
-        configs_got = configuration_manager.get_config_for_group(index_name, group_name)
+        configs_got = configuration_manager.get_config_for_group(index_name, group_name)['properties']
         groups_must_be = yaml.load(open(settings.PROPERTIES_GROUPS_FILE, 'r'), Loader=yaml.FullLoader)
         group_must_be = groups_must_be[index_name][group_name]
 
@@ -241,20 +242,27 @@ class ConfigurationGetterTester(TestCase):
             props_list_got = [c['prop_id'] for c in configs_got[sub_group]]
             self.assertTrue(props_list_got == props_list_must_be)
 
-    @override_settings(PROPERTIES_GROUPS_FILE=GROUPS_TEST_FILE)
+    @override_settings(PROPERTIES_GROUPS_FILE=GROUPS_TEST_FILE, GROUPS_DEFAULT_SORTING_FILE=SORTING_TEST_FILE)
     def test_gets_config_for_a_group_with_default_sorting(self):
 
         index_name = 'chembl_molecule'
         group_name = 'sorted_table'
 
         configs_got = configuration_manager.get_config_for_group(index_name, group_name)
+        properties_got = configs_got['properties']
+
         groups_must_be = yaml.load(open(settings.PROPERTIES_GROUPS_FILE, 'r'), Loader=yaml.FullLoader)
         group_must_be = groups_must_be[index_name][group_name]
+        sortings_must_be = yaml.load(open(settings.GROUPS_DEFAULT_SORTING_FILE, 'r'), Loader=yaml.FullLoader)
+        sorting_must_be = sortings_must_be[index_name][group_name]
+
+        sorting_got = configs_got['default_sorting']
 
         for sub_group, props_list_must_be in group_must_be.items():
-            if sub_group != '__default_sorting__':
-                props_list_got = [c['prop_id'] for c in configs_got[sub_group]]
-                self.assertTrue(props_list_got == props_list_must_be)
+            props_list_got = [c['prop_id'] for c in properties_got[sub_group]]
+            self.assertTrue(props_list_got == props_list_must_be)
+
+        self.assertEqual(sorting_must_be, sorting_got, msg='The default sorting was not set up correctly')
 
     def test_gets_id_property_for_index(self):
 
