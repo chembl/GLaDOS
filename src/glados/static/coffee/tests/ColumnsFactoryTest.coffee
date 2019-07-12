@@ -44,11 +44,31 @@ describe "Columns Factory for paginated views", ->
     }
 
     configGot = glados.models.paginatedCollections.ColumnsFactory2.generateColumn(configFromServer)
-    console.log('configGot: ', configGot)
 
     expect(configGot.comparator).toBe(configFromServer.prop_id)
     expect(configGot.sort_disabled).toBe(false)
     expect(configGot.is_sorting).toBe(0)
     expect(configGot.sort_class).toBe('fa-sort')
     expect(configGot.name_to_show).toBe('ChEMBL ID')
+
+  it 'generates the configuration for an non aggregatable property', ->
+
+    configFromServer = {
+      "sortable": false,
+      "index_name": "chembl_molecule",
+      "label": "Synonyms",
+      "prop_id": "molecule_synonyms",
+      "aggregatable": false,
+      "label_mini": "Synonyms",
+      "type": "object"
+    }
+
+    configGot = glados.models.paginatedCollections.ColumnsFactory2.generateColumn(configFromServer)
+    console.log('configGot: ', configGot)
+
+    expect(configGot.comparator).toBe(configFromServer.comparator)
+    expect(configGot.sort_disabled).toBe(true)
+    expect(configGot.is_sorting?).toBe(false)
+    expect(configGot.sort_class?).toBe(false)
+    expect(configGot.name_to_show).toBe('Synonyms')
 
