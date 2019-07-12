@@ -240,17 +240,29 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
         console.log('loadedGroups: ', loadedGroups)
 
+        reportLoadedGroupGen = (groupName) ->
+            -> console.log('loaded!!!: ', groupName)
+
         for viewKey, groupName of configGroups
 
           config_url = glados.Settings.PROPERTIES_GROUP_CONFIGURATION_URL_GENERATOR
             index_name: thisCollection.getMeta('index_name')
             group_name: groupName
 
+          reportLoaded = reportLoadedGroupGen(groupName)
+
           getConfigDeferred = $.getJSON(config_url)
           getConfigDeferred.done (data) ->
             console.log('data obtained: ', data)
+            defaultProperties = data.default
+            additionalProperties = data.optional
 
-          getConfigDeferred.fail (jqXHR) -> thisCollection.trigger('error', thisCollection, jqXHR)
+            console.log('loadedGroups: ', loadedGroups)
+            console.log('groupName: ', groupName)
+            reportLoaded()
+
+
+          getConfigDeferred.fail (jqXHR) -> reject(jqXHR)
 
           console.log('config_url: ', config_url)
 
@@ -271,6 +283,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       thisCollection = @
       descriptionPromise.then( ->
         thisCollection.fetchData(options, testMode=false)
+      ).catch( (jqXHR) ->
+        thisCollection.trigger('error', thisCollection, jqXHR)
       )
 
     # Prepares an Elastic Search query to search in all the fields of a document in a specific index

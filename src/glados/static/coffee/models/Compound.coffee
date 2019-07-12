@@ -767,6 +767,9 @@ Compound.PROPERTIES_VISUAL_CONFIG = {
     link_base: 'report_card_url'
     image_base_url: 'image_url'
     hide_label: true
+  },
+  'molecule_synonyms': {
+    parse_function: (values) -> _.uniq(v.molecule_synonym for v in values).join(', ')
   }
 }
 
