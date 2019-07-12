@@ -254,6 +254,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
           console.log('config_url: ', config_url)
 
+          console.log('columns description: ', thisCollection.getMeta('columns_description'))
+
         resolve('success')
       )
       return descriptionPromise

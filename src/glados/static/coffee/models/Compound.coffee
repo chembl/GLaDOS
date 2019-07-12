@@ -760,6 +760,16 @@ Compound.reportCardPath = 'compound_report_card/'
 Compound.getSDFURL = (chemblId) -> glados.Settings.WS_BASE_URL + 'molecule/' + chemblId + '.sdf'
 
 Compound.INDEX_NAME = 'chembl_molecule'
+
+Compound.PROPERTIES_VISUAL_CONFIG = {
+  'molecule_chembl_id': {
+    comparator: 'molecule_chembl_id'
+    link_base: 'report_card_url'
+    image_base_url: 'image_url'
+    hide_label: true
+  }
+}
+
 Compound.COLUMNS = {
   CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     comparator: 'molecule_chembl_id'
@@ -922,22 +932,25 @@ Compound.COLUMNS_SETTINGS = {
   )()
   RESULTS_LIST_TABLE: [
     Compound.COLUMNS.CHEMBL_ID,
-    Compound.COLUMNS.PREF_NAME
-    Compound.COLUMNS.SYNONYMS,
-    Compound.COLUMNS.MOLECULE_TYPE,
-    Compound.COLUMNS.MAX_PHASE,
-    Compound.COLUMNS.FULL_MWT,
-    Compound.COLUMNS.NUM_TARGETS,
-    Compound.COLUMNS.BIOACTIVITIES_NUMBER,
-    Compound.COLUMNS.ALOGP,
-    Compound.COLUMNS.PSA,
-    Compound.COLUMNS.HBA,
-    Compound.COLUMNS.HBD,
-    Compound.COLUMNS.RO5,
-    Compound.COLUMNS.ROTATABLE_BONDS,
-    Compound.COLUMNS.RULE_OF_THREE_PASS,
-    Compound.COLUMNS.QED_WEIGHTED
   ]
+#  RESULTS_LIST_TABLE: [
+#    Compound.COLUMNS.CHEMBL_ID,
+#    Compound.COLUMNS.PREF_NAME
+#    Compound.COLUMNS.SYNONYMS,
+#    Compound.COLUMNS.MOLECULE_TYPE,
+#    Compound.COLUMNS.MAX_PHASE,
+#    Compound.COLUMNS.FULL_MWT,
+#    Compound.COLUMNS.NUM_TARGETS,
+#    Compound.COLUMNS.BIOACTIVITIES_NUMBER,
+#    Compound.COLUMNS.ALOGP,
+#    Compound.COLUMNS.PSA,
+#    Compound.COLUMNS.HBA,
+#    Compound.COLUMNS.HBD,
+#    Compound.COLUMNS.RO5,
+#    Compound.COLUMNS.ROTATABLE_BONDS,
+#    Compound.COLUMNS.RULE_OF_THREE_PASS,
+#    Compound.COLUMNS.QED_WEIGHTED
+#  ]
   RESULTS_LIST_TABLE_SIMILARITY: [
     Compound.COLUMNS.SIMILARITY_ELASTIC
     Compound.COLUMNS.CHEMBL_ID,
@@ -988,22 +1001,25 @@ Compound.COLUMNS_SETTINGS = {
     Compound.COLUMNS.BIOACTIVITIES_NUMBER
   ]
   RESULTS_LIST_REPORT_CARD_ADDITIONAL:[
-    Compound.COLUMNS.APKA,
-    Compound.COLUMNS.BPKA,
-    Compound.COLUMNS.ACD_LOGP,
-    Compound.COLUMNS.ACD_LOGD,
-    Compound.COLUMNS.AROMATIC_RINGS,
-    Compound.COLUMNS.STRUCTURE_TYPE,
-    Compound.COLUMNS.INORGANIC_FLAG,
-    Compound.COLUMNS.HEAVY_ATOMS,
-    Compound.COLUMNS.HBA_LIPINSKI,
-    Compound.COLUMNS.HBD_LIPINSKI,
-    Compound.COLUMNS.RO5_LIPINSKI,
-    Compound.COLUMNS.MWT_MONOISOTOPIC,
-    Compound.COLUMNS.MOLECULAR_SPECIES,
-    Compound.COLUMNS.FULL_MOLFORMULA,
-#    Compound.COLUMNS.NUM_TARGETS_BY_CLASS
+    Compound.COLUMNS.PREF_NAME
   ]
+#  RESULTS_LIST_REPORT_CARD_ADDITIONAL:[
+#    Compound.COLUMNS.APKA,
+#    Compound.COLUMNS.BPKA,
+#    Compound.COLUMNS.ACD_LOGP,
+#    Compound.COLUMNS.ACD_LOGD,
+#    Compound.COLUMNS.AROMATIC_RINGS,
+#    Compound.COLUMNS.STRUCTURE_TYPE,
+#    Compound.COLUMNS.INORGANIC_FLAG,
+#    Compound.COLUMNS.HEAVY_ATOMS,
+#    Compound.COLUMNS.HBA_LIPINSKI,
+#    Compound.COLUMNS.HBD_LIPINSKI,
+#    Compound.COLUMNS.RO5_LIPINSKI,
+#    Compound.COLUMNS.MWT_MONOISOTOPIC,
+#    Compound.COLUMNS.MOLECULAR_SPECIES,
+#    Compound.COLUMNS.FULL_MOLFORMULA,
+##    Compound.COLUMNS.NUM_TARGETS_BY_CLASS
+#  ]
   RESULTS_LIST_SIMILARITY:[
     Compound.COLUMNS.CHEMBL_ID,
     Compound.COLUMNS.SIMILARITY,
