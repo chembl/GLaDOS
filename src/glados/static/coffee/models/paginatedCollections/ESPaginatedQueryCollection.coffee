@@ -261,6 +261,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return descriptionPromise
 
     fetch: (options, testMode=false) ->
+
       descriptionPromise = @fetchColumnsDescription()
 
       thisCollection = @

@@ -6,19 +6,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     generateColumn: (configFromServer) ->
 
-      console.log('generateColumn2: ')
-      console.log('configFromServer: ', configFromServer)
       propID = configFromServer.prop_id
 
       indexName = configFromServer.index_name
       console.log(glados.models.paginatedCollections.ColumnsFactory2.ENTITY_NAME_TO_ENTITY_MODEL)
       entity = glados.models.paginatedCollections.ColumnsFactory2.ENTITY_NAME_TO_ENTITY_MODEL[indexName]
       visualConfig = entity.PROPERTIES_VISUAL_CONFIG[propID]
-
-      console.log('propID: ', propID)
-      console.log('indexName: ', indexName)
-      console.log('entity: ', entity)
-      console.log('visualConfig: ', visualConfig)
 
       inferredProperties = {}
 

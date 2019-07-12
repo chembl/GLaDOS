@@ -42,6 +42,7 @@ describe "An elasticsearch collection", ->
 
   it 'updates the request data as the pagination moves', ->
 
+#    alert('HERE')
     totalRecords = 100
     esList.setMeta('total_records', totalRecords)
     pageSize = 10
