@@ -238,19 +238,24 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         console.log('totalGroupsToLoad: ', totalGroupsToLoad)
 
         numLoadedGroups = 0
+        propertiesConfigModels = {}
         for viewKey, groupName of configGroups
 
           propertiesConfigModel = new glados.models.paginatedCollections.esSchema.PropertiesConfigurationModel
             index_name: thisCollection.getMeta('index_name')
             group_name: groupName
 
+          propertiesConfigModels[viewKey] = propertiesConfigModel
+
           propertiesConfigModel.on('error', (jqXHR) -> reject(jqXHR))
-          propertiesConfigModel.once('change', ->
+          propertiesConfigModel.once('change:parsed_configuration', ->
             console.log('config received')
             numLoadedGroups++
             console.log('numLoadedGroups', numLoadedGroups)
             if numLoadedGroups == totalGroupsToLoad
               console.log('ALL RECEIVED!')
+
+              thisCollection.loadConfigFromFetchedModels(propertiesConfigModels)
               resolve('success')
           )
           propertiesConfigModel.fetch()
@@ -260,6 +265,20 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       )
       return descriptionPromise
+
+    loadConfigFromFetchedModels: (propertiesConfigModels) ->
+
+      console.log('loadConfigFromFetchedModels')
+      console.log('propertiesConfigModels: ')
+      console.log(propertiesConfigModels)
+      columnsDescription = {}
+      for viewKey, configModel of propertiesConfigModels
+        columnsDescription[viewKey] = configModel.get('parsed_configuration')
+
+      console.log('columnsDescription: ', columnsDescription)
+      @setMeta('columns_description', columnsDescription)
+      console.log('----')
+
 
     fetch: (options, testMode=false) ->
 
