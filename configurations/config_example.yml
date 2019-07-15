@@ -62,11 +62,6 @@ custom_rq_queues_config:
     PORT: 1234
     DB: 0
     DEFAULT_TIMEOUT: 86400
-unichemapi: 'http://localhost:8000/'
-unichem_similarity_endpoint: 'http://193.62.52.90:8888/similarity/0.7'
-enable_unichem_oracle_db: true
-unichem_oracle:
-  name: 'name'
-  user: 'user'
-  password: 'password'
+unichemapi: 'le unichem api'
+unichem_similarity_endpoint: 'le similarity endpoint'
 filter_query_max_clauses: 30000
