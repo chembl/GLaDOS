@@ -234,41 +234,30 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
         configGroups = thisCollection.getMeta('config_groups')
         console.log('configGroups: ', configGroups)
-        loadedGroups = {}
-        for viewKey, groupName of configGroups
-          loadedGroups[groupName] = false
+        totalGroupsToLoad = Object.keys(configGroups).length
+        console.log('totalGroupsToLoad: ', totalGroupsToLoad)
 
-        console.log('loadedGroups: ', loadedGroups)
-
-        reportLoadedGroupGen = (groupName) ->
-            -> console.log('loaded!!!: ', groupName)
-
+        numLoadedGroups = 0
         for viewKey, groupName of configGroups
 
-          config_url = glados.Settings.PROPERTIES_GROUP_CONFIGURATION_URL_GENERATOR
+          propertiesConfigModel = new glados.models.paginatedCollections.esSchema.PropertiesConfigurationModel
             index_name: thisCollection.getMeta('index_name')
             group_name: groupName
 
-          reportLoaded = reportLoadedGroupGen(groupName)
-
-          getConfigDeferred = $.getJSON(config_url)
-          getConfigDeferred.done (data) ->
-            console.log('data obtained: ', data)
-            defaultProperties = data.default
-            additionalProperties = data.optional
-
-            console.log('loadedGroups: ', loadedGroups)
-            console.log('groupName: ', groupName)
-            reportLoaded()
-
-
-          getConfigDeferred.fail (jqXHR) -> reject(jqXHR)
-
-          console.log('config_url: ', config_url)
+          propertiesConfigModel.on('error', (jqXHR) -> reject(jqXHR))
+          propertiesConfigModel.once('change', ->
+            console.log('config received')
+            numLoadedGroups++
+            console.log('numLoadedGroups', numLoadedGroups)
+            if numLoadedGroups == totalGroupsToLoad
+              console.log('ALL RECEIVED!')
+              resolve('success')
+          )
+          propertiesConfigModel.fetch()
 
           console.log('columns description: ', thisCollection.getMeta('columns_description'))
 
-        resolve('success')
+
       )
       return descriptionPromise
 
