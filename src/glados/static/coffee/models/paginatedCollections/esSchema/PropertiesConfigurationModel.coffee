@@ -8,4 +8,19 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         index_name: @get('index_name')
         group_name: @get('group_name')
 
-      console.log 'URL', @url
+    parse: (response) ->
+
+      parsedConfiguration = {}
+      for subGroupKey, subGroup of response.properties
+
+        parsedProperties = []
+        for propertyDescription in subGroup
+          parsedProperty = glados.models.paginatedCollections.ColumnsFactory2.generateColumn(propertyDescription)
+          parsedProperties.push(parsedProperty)
+
+        if subGroupKey == 'default'
+          parsedConfiguration.Default = parsedProperties
+        else if subGroupKey == 'optional'
+          parsedConfiguration.Additional = parsedProperties
+
+      @set('parsed_configuration', parsedConfiguration)

@@ -12,7 +12,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       entity = glados.models.paginatedCollections.ColumnsFactory2.ENTITY_NAME_TO_ENTITY_MODEL[indexName]
       visualConfig = entity.PROPERTIES_VISUAL_CONFIG[propID]
       if not visualConfig?
-        throw "There is no visual config for the property #{propID}, of index #{indexName}"
+        console.warn("There is no visual config for the property #{propID}, of index #{indexName}")
+        visualConfig = {}
 
       inferredProperties = {}
 
