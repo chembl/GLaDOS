@@ -14,4 +14,6 @@ current_release:
   downloads_date: '2018-06-18'
   # The basename of the files in the ftp
   downloads_release_name: 'chembl_25'
+unichemapi: 'le unichem api'
+unichem_similarity_endpoint: 'le similarity endpoint'
 filter_query_max_clauses: 30000
