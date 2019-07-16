@@ -29,3 +29,30 @@ describe "An elasticsearch collection", ->
       configStateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING.FETCHING_CONFIGURATION
       expect(configStateGot).toBe(configStateMustBe)
 
+    it 'triggers the correct event when changing searching state', ->
+
+      eventTriggered = false
+      esList.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.CONFIG_FETCHING_STATE_CHANGED,
+      (-> eventTriggered = true)
+
+      esList.setConfigState(
+        glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING.CONFIGURATION_READY
+      )
+      expect(eventTriggered).toBe(true)
+
+    it 'does not trigger the event chane after setting exactly the same state again', ->
+
+      esList.setConfigState(
+        glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING.CONFIGURATION_READY
+      )
+
+      eventTriggered = false
+      esList.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.CONFIG_FETCHING_STATE_CHANGED,
+      (-> eventTriggered = true)
+
+      esList.setConfigState(
+        glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING.CONFIGURATION_READY
+      )
+      expect(eventTriggered).toBe(false)
+
+

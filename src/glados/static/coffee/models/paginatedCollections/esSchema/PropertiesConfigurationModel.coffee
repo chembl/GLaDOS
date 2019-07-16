@@ -10,6 +10,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
     parse: (response) ->
 
+      console.log('PARSE')
       parsedConfiguration = {}
       for subGroupKey, subGroup of response.properties
 
@@ -23,4 +24,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         else if subGroupKey == 'optional'
           parsedConfiguration.Additional = parsedProperties
 
-      @set('parsed_configuration', parsedConfiguration)
+      return {
+        'parsed_configuration': parsedConfiguration
+      }

@@ -239,6 +239,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         configGroups = thisCollection.getMeta('config_groups')
         totalGroupsToLoad = Object.keys(configGroups).length
 
+        console.log('DEBUG')
+
         numLoadedGroups = 0
         propertiesConfigModels = {}
         for viewKey, groupName of configGroups
@@ -256,6 +258,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
               console.log('ALL RECEIVED!')
 
               thisCollection.loadConfigFromFetchedModels(propertiesConfigModels)
+              thisCollection.setConfigState(
+                glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING.CONFIGURATION_READY
+              )
+
               resolve('success')
           )
           unless thisCollection.getMeta('test_mode')
@@ -269,6 +275,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       console.log('loadConfigFromFetchedModels')
       console.log('propertiesConfigModels: ')
       console.log(propertiesConfigModels)
+
       columnsDescription = {}
       for viewKey, configModel of propertiesConfigModels
         columnsDescription[viewKey] = configModel.get('parsed_configuration')
