@@ -64,9 +64,8 @@ describe "Columns Factory for paginated views", ->
     }
 
     configGot = glados.models.paginatedCollections.ColumnsFactory2.generateColumn(configFromServer)
-    console.log('configGot: ', configGot)
 
-    expect(configGot.comparator).toBe(configFromServer.comparator)
+    expect(configGot.comparator).toBe(configFromServer.prop_id)
     expect(configGot.sort_disabled).toBe(true)
     expect(configGot.is_sorting?).toBe(false)
     expect(configGot.sort_class?).toBe(false)
