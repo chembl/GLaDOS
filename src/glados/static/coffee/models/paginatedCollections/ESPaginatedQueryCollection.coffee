@@ -287,7 +287,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.COLUMNS_CONFIGURATION_LOADED)
       console.log('----')
 
-
     fetch: (options, testMode=false) ->
 
       testMode |= @getMeta('test_mode')

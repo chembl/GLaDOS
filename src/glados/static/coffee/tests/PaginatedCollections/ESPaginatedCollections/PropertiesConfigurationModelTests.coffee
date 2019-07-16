@@ -92,8 +92,11 @@ describe 'PropertiesConfigurationModel', ->
       index_name: indexName
       group_name: groupName
 
-    propertiesConfigModel.parse(sampleResponse)
-    parsedConfigGot = propertiesConfigModel.get('parsed_configuration')
+    parsedResponse = propertiesConfigModel.parse(sampleResponse)
+    parsedConfigGot = parsedResponse.['parsed_configuration']
+
+    console.log('parsedConfigGot: ', parsedConfigGot)
+    console.log('parsedConfigMustBe: ', parsedConfigMustBe)
 
     expect(_.isEqual(parsedConfigGot, parsedConfigMustBe)).toBe(true)
 
