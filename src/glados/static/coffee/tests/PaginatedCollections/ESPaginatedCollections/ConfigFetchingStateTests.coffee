@@ -19,14 +19,14 @@ describe "An elasticsearch collection", ->
     it 'sets the initial state', ->
 
       configStateGot = esList.getConfigState()
-      configStateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING.INITIAL_STATE
+      configStateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING_STATES.INITIAL_STATE
       expect(configStateGot).toBe(configStateMustBe)
 
     it 'Sets the correct state when starting to fetch the config', ->
 
       esList.fetchColumnsDescription()
       configStateGot = esList.getConfigState()
-      configStateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING.FETCHING_CONFIGURATION
+      configStateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING_STATES.FETCHING_CONFIGURATION
       expect(configStateGot).toBe(configStateMustBe)
 
     it 'triggers the correct event when changing searching state', ->
@@ -36,14 +36,14 @@ describe "An elasticsearch collection", ->
       (-> eventTriggered = true)
 
       esList.setConfigState(
-        glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING.CONFIGURATION_READY
+        glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING_STATES.CONFIGURATION_READY
       )
       expect(eventTriggered).toBe(true)
 
     it 'does not trigger the event chane after setting exactly the same state again', ->
 
       esList.setConfigState(
-        glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING.CONFIGURATION_READY
+        glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING_STATES.CONFIGURATION_READY
       )
 
       eventTriggered = false
@@ -51,7 +51,7 @@ describe "An elasticsearch collection", ->
       (-> eventTriggered = true)
 
       esList.setConfigState(
-        glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING.CONFIGURATION_READY
+        glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING_STATES.CONFIGURATION_READY
       )
       expect(eventTriggered).toBe(false)
 

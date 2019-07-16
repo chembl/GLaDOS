@@ -20,9 +20,8 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @disableColumnsSelection = arguments[0].disable_columns_selection
       @disableItemsSelection = arguments[0].disable_items_selection
       @viewID = (new Date()).getTime().toString()
-      @collection.on(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.COLUMNS_CONFIGURATION_LOADED,
+      @collection.on(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.CONFIG_FETCHING_STATE_CHANGED,
         @initColumnsHandler, @)
-#      @initColumnsHandler()
 
       if @isTable()
         @initialiseColumnsModal() unless @disableColumnsSelection
@@ -80,7 +79,13 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     initColumnsHandler: ->
 
-      console.log('INIT COLUMNS HANDLER')
+      console.log('INIT COLUMNS HANDLER?')
+      if not @collection.configIsReady()
+        console.log('CONFIG IS NOT READY YET')
+        return
+
+      console.log('YES, INIT COLUMNS HANDLER')
+
       defaultColumns = @getDefaultColumns()
       additionalColumns = @getAdditionalColumns()
 

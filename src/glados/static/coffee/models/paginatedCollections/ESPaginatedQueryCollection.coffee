@@ -229,8 +229,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     fetchColumnsDescription: ->
 
+      console.log('FETCHING CONFIGURATION')
       @setConfigState(
-        glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING.FETCHING_CONFIGURATION
+        glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING_STATES.FETCHING_CONFIGURATION
       )
 
       thisCollection = @
@@ -258,8 +259,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
               console.log('ALL RECEIVED!')
 
               thisCollection.loadConfigFromFetchedModels(propertiesConfigModels)
+              console.log('TIGGERING EVENT, CONFIG IS READY')
               thisCollection.setConfigState(
-                glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING.CONFIGURATION_READY
+                glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING_STATES.CONFIGURATION_READY
               )
 
               resolve('success')
