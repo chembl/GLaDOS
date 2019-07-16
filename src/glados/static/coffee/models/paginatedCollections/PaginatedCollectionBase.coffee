@@ -211,6 +211,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     searchIsReady: -> @getMeta('search_state') ==\
       glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_IS_READY
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # Configuration state handling
+    # ------------------------------------------------------------------------------------------------------------------
+    getConfigState: -> @getMeta('config_state')
+    setInitialConfigState: -> @setMeta('config_state',
+      glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING.INITIAL_STATE)
+
     # ------------------------------------------------------------------------------------------------------------------ 
     # Sleep/Awake states
     # ------------------------------------------------------------------------------------------------------------------
@@ -254,6 +261,7 @@ glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS =
   SEARCH_STATE_CHANGED: 'SEARCH_STATE_CHANGED'
   AWAKE_STATE_CHANGED: 'AWAKE_STATE_CHANGED'
   STATE_OBJECT_CHANGED: 'STATE_OBJECT_CHANGED'
+  COLUMNS_CONFIGURATION_LOADED: 'COLUMNS_CONFIGURATION_LOADED'
 
 glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES =
   INITIAL_STATE: 'INITIAL_STATE'
@@ -264,6 +272,11 @@ glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATE
   INITIAL_STATE: 'INITIAL_STATE'
   FETCHING_FACETS: 'FETCHING_FACETS'
   FACETS_READY: 'FACETS_READY'
+
+glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING =
+  INITIAL_STATE: 'INITIAL_STATE'
+  FETCHING_CONFIGURATION: 'FETCHING_CONFIGURATION'
+  CONFIGURATION_READY: 'FACETS_READY'
 
 glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES =
   SEARCH_UNDEFINED: 'SEARCH_UNDEFINED'

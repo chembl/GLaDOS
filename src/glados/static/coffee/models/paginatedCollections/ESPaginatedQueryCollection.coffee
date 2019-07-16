@@ -233,9 +233,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       descriptionPromise = new Promise((resolve, reject) ->
 
         configGroups = thisCollection.getMeta('config_groups')
-        console.log('configGroups: ', configGroups)
         totalGroupsToLoad = Object.keys(configGroups).length
-        console.log('totalGroupsToLoad: ', totalGroupsToLoad)
 
         numLoadedGroups = 0
         propertiesConfigModels = {}
@@ -249,9 +247,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
           propertiesConfigModel.on('error', (jqXHR) -> reject(jqXHR))
           propertiesConfigModel.once('change:parsed_configuration', ->
-            console.log('config received')
             numLoadedGroups++
-            console.log('numLoadedGroups', numLoadedGroups)
             if numLoadedGroups == totalGroupsToLoad
               console.log('ALL RECEIVED!')
 
@@ -259,9 +255,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
               resolve('success')
           )
           propertiesConfigModel.fetch()
-
-          console.log('columns description: ', thisCollection.getMeta('columns_description'))
-
 
       )
       return descriptionPromise
@@ -277,6 +270,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       console.log('columnsDescription: ', columnsDescription)
       @setMeta('columns_description', columnsDescription)
+      @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.COLUMNS_CONFIGURATION_LOADED)
       console.log('----')
 
 
@@ -308,7 +302,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @setMeta('current_page', 1)
         @setMeta('facets_changed', false)
 
-      @setItemsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.FETCHING_ITEMS)
+      @setItemsFetchingState(
+        glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.FETCHING_ITEMS
+      )
       # Creates the Elastic Search Query parameters and serializes them
       esCacheRequest = @getListHelperRequestData()
 

@@ -63,7 +63,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             id_column: esIndexSettings.ID_COLUMN
             facets_groups: glados.models.paginatedCollections.esSchema.FacetingHandler.initFacetGroups(esIndexSettings.FACETS_GROUPS)
             columns: esIndexSettings.COLUMNS
-            columns_description: esIndexSettings.COLUMNS_DESCRIPTION
+#            columns_description: esIndexSettings.COLUMNS_DESCRIPTION
             custom_default_card_sizes: esIndexSettings.CUSTOM_DEFAULT_CARD_SIZES
             custom_card_size_to_page_sizes: esIndexSettings.CUSTOM_CARD_SIZE_TO_PAGE_SIZES
             enable_cards_zoom: esIndexSettings.ENABLE_CARDS_ZOOM

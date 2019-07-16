@@ -53,6 +53,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       else
         @hideSuggestedLabel()
 
+      console.log('DEBUG')
       glados.views.PaginatedViews.PaginatedViewBase.renderViewState.call(@)
 
 

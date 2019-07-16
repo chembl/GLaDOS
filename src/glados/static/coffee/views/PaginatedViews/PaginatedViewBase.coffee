@@ -20,7 +20,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @disableColumnsSelection = arguments[0].disable_columns_selection
       @disableItemsSelection = arguments[0].disable_items_selection
       @viewID = (new Date()).getTime().toString()
-      @initColumnsHandler()
+      @collection.on(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.COLUMNS_CONFIGURATION_LOADED,
+        @initColumnsHandler, @)
+#      @initColumnsHandler()
 
       if @isTable()
         @initialiseColumnsModal() unless @disableColumnsSelection
@@ -78,6 +80,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     initColumnsHandler: ->
 
+      console.log('INIT COLUMNS HANDLER')
       defaultColumns = @getDefaultColumns()
       additionalColumns = @getAdditionalColumns()
 
@@ -206,8 +209,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # it handle the case when the items are shown as list, table, or infinite browser
     fillTemplates: ->
 
+      console.log('FILL TEMPLATES')
       $elem = $(@el).find('.BCK-items-container')
       visibleColumns = @getVisibleColumns()
+      console.log('visibleColumns: ', visibleColumns)
       @numVisibleColumnsList.push visibleColumns.length
 
       for i in [0..$elem.length - 1]
