@@ -279,11 +279,18 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       console.log(propertiesConfigModels)
 
       columnsDescription = {}
+      propsComparatorsSet = {}
       for viewKey, configModel of propertiesConfigModels
         columnsDescription[viewKey] = configModel.get('parsed_configuration')
+        newPropsComparators = configModel.get('props_comparators_set')
+        for key, value of newPropsComparators
+          propsComparatorsSet[key] = key
 
       console.log('columnsDescription: ', columnsDescription)
+      console.log('propsComparatorsSet: ', propsComparatorsSet)
+
       @setMeta('columns_description', columnsDescription)
+      @setMeta('props_comparators_set', propsComparatorsSet)
       @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.COLUMNS_CONFIGURATION_LOADED)
       console.log('----')
 
@@ -400,13 +407,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       useCustomQuery = @getMeta('use_custom_query')
       customQueryIsFullQuery = @customQueryIsFullQuery()
 
+      propsComparatorsSet = @getMeta('props_comparators_set')
+      sourceList = Object.keys(propsComparatorsSet)
       # Base Elasticsearch query
       esQuery = {
         size: pageSize,
         from: ((page - 1) * pageSize)
-        _source:
-          includes: [ '*', '_metadata.*']
-          excludes: [ '_metadata.related_targets.chembl_ids.*', '_metadata.related_compounds.chembl_ids.*']
+        _source: sourceList
         query:
           bool:
             must: []
