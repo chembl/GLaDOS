@@ -42,7 +42,8 @@ describe 'PropertiesConfigurationModel', ->
         "sort_class": "fa-sort",
         "name_to_show": "Name",
         "name_to_show_short": "Name",
-        "id": "pref_name"
+        "id": "pref_name",
+        "comparator": "pref_name"
       }
     ],
     "Default": [
@@ -93,12 +94,18 @@ describe 'PropertiesConfigurationModel', ->
       group_name: groupName
 
     parsedResponse = propertiesConfigModel.parse(sampleResponse)
-    parsedConfigGot = parsedResponse.['parsed_configuration']
-
-    console.log('parsedConfigGot: ', parsedConfigGot)
-    console.log('parsedConfigMustBe: ', parsedConfigMustBe)
+    parsedConfigGot = parsedResponse['parsed_configuration']
 
     expect(_.isEqual(parsedConfigGot, parsedConfigMustBe)).toBe(true)
+
+    propComparatorsSetMustBe = {
+      'molecule_chembl_id':'molecule_chembl_id',
+      'pref_name': 'pref_name'
+    }
+
+    propsComparatorsSetGot = parsedResponse['props_comparators_set']
+
+    expect(_.isEqual(propComparatorsSetMustBe, propsComparatorsSetGot)).toBe(true)
 
 
 
