@@ -23,9 +23,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @collection.on(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.CONFIG_FETCHING_STATE_CHANGED,
         @initColumnsHandler, @)
 
-      if @isTable()
-        @initialiseColumnsModal() unless @disableColumnsSelection
-
       @initTooltipFunctions()
       @bindCollectionEvents()
 
@@ -84,6 +81,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         console.log('CONFIG IS NOT READY YET')
         return
 
+      if @columnsHandler?
+        console.log('COLUMNS HANDLER IS ALREADY CREATED')
+        return
+
       console.log('YES, INIT COLUMNS HANDLER')
 
       defaultColumns = @getDefaultColumns()
@@ -97,6 +98,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @columnsHandler.on 'change:exit change:enter', @handleShowHideColumns, @
       @columnsHandler.on glados.models.paginatedCollections.ColumnsHandler.EVENTS.COLUMNS_ORDER_CHANGED,
         @handleColumnsOrderChange, @
+
+      if @isTable()
+        @initialiseColumnsModal() unless @disableColumnsSelection
 
     handleShowHideColumns: ->
 
@@ -215,6 +219,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     fillTemplates: ->
 
       console.log('FILL TEMPLATES')
+      @initColumnsHandler()
       $elem = $(@el).find('.BCK-items-container')
       visibleColumns = @getVisibleColumns()
       console.log('visibleColumns: ', visibleColumns)

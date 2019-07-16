@@ -24,6 +24,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       else
         inferredProperties.sort_disabled = true
 
+      basedOn = configFromServer.based_on
+      if basedOn?
+        inferredProperties.comparator = basedOn
+      else
+        inferredProperties.comparator = propID
+
       inferredProperties.name_to_show = configFromServer.label
       inferredProperties.name_to_show_short = configFromServer.label_mini
       inferredProperties.id = configFromServer.prop_id

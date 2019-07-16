@@ -53,7 +53,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       else
         @hideSuggestedLabel()
 
-      console.log('DEBUG')
       glados.views.PaginatedViews.PaginatedViewBase.renderViewState.call(@)
 
 
@@ -153,11 +152,13 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # ------------------------------------------------------------------------------------------------------------------
     fillTemplates: ->
 
+      @initColumnsHandler()
       $elem = $(@el).find('.BCK-items-container')
 
       if @collection.getMeta('columns_description').Table.remove_striping
         $elem.removeClass('striped')
 
+      console.log('DEBUG')
       allColumns = @getAllColumns()
       @numVisibleColumnsList.push allColumns.length
       # this is a workaround to the problem

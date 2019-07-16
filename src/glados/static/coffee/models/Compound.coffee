@@ -763,7 +763,6 @@ Compound.INDEX_NAME = 'chembl_molecule'
 
 Compound.PROPERTIES_VISUAL_CONFIG = {
   'molecule_chembl_id': {
-    comparator: 'molecule_chembl_id'
     link_base: 'report_card_url'
     image_base_url: 'image_url'
     hide_label: true
