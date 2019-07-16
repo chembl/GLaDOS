@@ -18,7 +18,14 @@ describe "An elasticsearch collection", ->
 
     it 'sets the initial state', ->
 
-      configStateGot = esList.getItemsFetchingState()
+      configStateGot = esList.getConfigState()
       configStateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING.INITIAL_STATE
+      expect(configStateGot).toBe(configStateMustBe)
+
+    it 'Sets the correct state when starting to fetch the config', ->
+
+      esList.fetchColumnsDescription()
+      configStateGot = esList.getConfigState()
+      configStateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING.FETCHING_CONFIGURATION
       expect(configStateGot).toBe(configStateMustBe)
 

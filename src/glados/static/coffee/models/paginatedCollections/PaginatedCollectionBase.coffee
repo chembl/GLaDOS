@@ -6,6 +6,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       @setInitialFetchingState()
       @setInitialSearchState()
+      @setInitialConfigState()
       if @islinkToOtherEntitiesEnabled()
         @on glados.Events.Collections.SELECTION_UPDATED, @resetLinkToOtherEntitiesCache, @
 
@@ -217,6 +218,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     getConfigState: -> @getMeta('config_state')
     setInitialConfigState: -> @setMeta('config_state',
       glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING.INITIAL_STATE)
+    setConfigState: (newState) ->
+      oldState = @getConfigState()
+      if oldState != newState
+        @setMeta('config_state', newState)
+        @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.CONFIG_FETCHING_STATE_CHANGED)
 
     # ------------------------------------------------------------------------------------------------------------------ 
     # Sleep/Awake states
@@ -262,6 +268,7 @@ glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS =
   AWAKE_STATE_CHANGED: 'AWAKE_STATE_CHANGED'
   STATE_OBJECT_CHANGED: 'STATE_OBJECT_CHANGED'
   COLUMNS_CONFIGURATION_LOADED: 'COLUMNS_CONFIGURATION_LOADED'
+  CONFIG_FETCHING_STATE_CHANGED: 'CONFIG_FETCHING_STATE_CHANGED'
 
 glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES =
   INITIAL_STATE: 'INITIAL_STATE'

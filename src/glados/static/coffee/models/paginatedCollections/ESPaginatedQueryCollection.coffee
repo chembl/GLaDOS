@@ -228,7 +228,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return jsonResultsList
 
     fetchColumnsDescription: ->
-      console.log('FETCHING COLUMNS DESCRIPTION')
+
+      @setConfigState(
+        glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING.FETCHING_CONFIGURATION
+      )
+
       thisCollection = @
       descriptionPromise = new Promise((resolve, reject) ->
 
@@ -254,7 +258,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
               thisCollection.loadConfigFromFetchedModels(propertiesConfigModels)
               resolve('success')
           )
-          propertiesConfigModel.fetch()
+          unless thisCollection.getMeta('test_mode')
+            propertiesConfigModel.fetch()
 
       )
       return descriptionPromise
