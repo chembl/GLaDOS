@@ -220,6 +220,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
           selection_disabled: @disableItemsSelection
           conditional_format: conditionalFormat
 
+
         $newItemElem = $(applyTemplateTo(templateParams))
         $appendTo.append($newItemElem)
 

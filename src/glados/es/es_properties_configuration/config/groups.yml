@@ -11,7 +11,8 @@ chembl_molecule:
     'molecule_properties.mw_monoisotopic', 'molecule_properties.molecular_species',
     'molecule_properties.full_molformula', 'molecule_structures.canonical_smiles']
   browser_table:
-    default: ['molecule_chembl_id', 'pref_name', 'molecule_synonyms', 'molecule_type']
+    default: ['molecule_chembl_id', 'pref_name', 'molecule_synonyms', 'molecule_type', 'max_phase',
+    'molecule_properties.full_mwt', '_metadata.related_targets.count', '_metadata.related_activities.count']
     optional: ['pref_name']
   browser_cards:
     default: ['molecule_chembl_id', 'pref_name']

@@ -769,6 +769,29 @@ Compound.PROPERTIES_VISUAL_CONFIG = {
   },
   'molecule_synonyms': {
     parse_function: (values) -> _.uniq(v.molecule_synonym for v in values).join(', ')
+  },
+  '_metadata.related_targets.count': {
+    format_as_number: true
+    link_base: 'targets_url'
+    on_click: CompoundReportCardApp.initMiniHistogramFromFunctionLink
+    function_parameters: ['molecule_chembl_id']
+    function_constant_parameters: ['targets']
+    function_key: 'targets'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
+  },
+  '_metadata.related_activities.count': {
+    link_base: 'activities_url'
+    on_click: CompoundReportCardApp.initMiniHistogramFromFunctionLink
+    function_parameters: ['molecule_chembl_id']
+    function_constant_parameters: ['activities']
+    # to help bind the link to the function, it could be necessary to always use the key of the columns descriptions
+    # or probably not, depending on how this evolves
+    function_key: 'bioactivities'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
   }
 }
 

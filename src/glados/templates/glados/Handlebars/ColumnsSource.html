@@ -63,6 +63,8 @@
             {{else}}
                 {{{this.highlighted_value}}}
             {{/if}}
+        {{ else if this.no_data }}
+            {{this.value}}
         {{else if this.has_link}}
             <a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
         {{else if this.has_multiple_links}}
