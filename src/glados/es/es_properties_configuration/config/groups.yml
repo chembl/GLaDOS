@@ -44,9 +44,8 @@ chembl_molecule:
     '_metadata.drug.drug_data.applicants', 'usan_stem', 'usan_year', 'first_approval', 'drug_atc_codes', 'drug_icon']
     optional: ['usan_stem_definition', '_metadata.drug.drug_data.usan_stem_substem',  'drug_atc_codes_level_4',
     'drug_atc_codes_level_3', 'drug_atc_codes_level_2', 'drug_atc_codes_level_1', 'indication_class',
-    '_metadata.drug.drug_data.sc_patent', '_metadata.drug.drug_data.withdrawn_year',
-    '_metadata.drug.drug_data.withdrawn_reason', '_metadata.drug.drug_data.withdrawn_country',
-    '_metadata.drug.drug_data.withdrawn_class', 'molecule_structures.canonical_smiles']
+    '_metadata.drug.drug_data.sc_patent', 'withdrawn_year', 'withdrawn_reason', 'withdrawn_country',
+    'withdrawn_class', 'molecule_structures.canonical_smiles']
   download_similarity:
     default: ['similarity', 'molecule_chembl_id', 'pref_name', 'molecule_synonyms', 'molecule_type', 'max_phase',
     'molecule_properties.full_mwt', '_metadata.related_targets.count', '_metadata.related_activities.count',
