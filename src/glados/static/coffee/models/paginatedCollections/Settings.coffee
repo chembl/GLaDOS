@@ -276,14 +276,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
         COLUMNS: Compound.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-            Additional: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
-          Cards:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-          Carousel:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        PERMANENT_COMPARATORS_TO_FETCH:['molecule_chembl_id',
+          'molecule_properties.num_ro5_violations', 'molecule_properties.full_molformula', 'molecule_type',
+          'natural_product', 'polymer_flag', 'structure_type']
         ID_COLUMN: Compound.ID_COLUMN
         ENABLE_CARDS_ZOOM: true
         CUSTOM_CARDS_TEMPLATE: 'Handlebars-Common-Paginated-Card-Compound'
@@ -296,6 +291,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Graph'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Heatmap]
+        CONFIG_GROUPS:
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Cards}": 'browser_cards'
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
         ENABLE_SUBSTRUCTURE_HIGHLIGHTING: true
         SHOW_SUBSTRUCTURE_HIGHLIGHTING: false
