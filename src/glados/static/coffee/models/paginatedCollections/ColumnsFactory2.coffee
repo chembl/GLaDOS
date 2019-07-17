@@ -4,12 +4,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     ENTITY_NAME_TO_ENTITY_MODEL:
       "#{Compound.INDEX_NAME}": Compound
 
-    generateColumn: (configFromServer) ->
+    generateColumn: (configFromServer, customEntity) ->
 
       propID = configFromServer.prop_id
 
       indexName = configFromServer.index_name
-      entity = glados.models.paginatedCollections.ColumnsFactory2.ENTITY_NAME_TO_ENTITY_MODEL[indexName]
+      if customEntity?
+        entity = customEntity
+      else
+        entity = glados.models.paginatedCollections.ColumnsFactory2.ENTITY_NAME_TO_ENTITY_MODEL[indexName]
+
       visualConfig = entity.PROPERTIES_VISUAL_CONFIG[propID]
       if not visualConfig?
         console.warn("There is no visual config for the property #{propID}, of index #{indexName}")

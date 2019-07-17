@@ -228,8 +228,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return jsonResultsList
 
     fetchColumnsDescription: ->
-
-      console.log('FETCHING CONFIGURATION')
       @setConfigState(
         glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING_STATES.FETCHING_CONFIGURATION
       )
@@ -240,8 +238,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         configGroups = thisCollection.getMeta('config_groups')
         totalGroupsToLoad = Object.keys(configGroups).length
 
-        console.log('DEBUG')
-
         numLoadedGroups = 0
         propertiesConfigModels = {}
         for viewKey, groupName of configGroups
@@ -249,6 +245,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           propertiesConfigModel = new glados.models.paginatedCollections.esSchema.PropertiesConfigurationModel
             index_name: thisCollection.getMeta('index_name')
             group_name: groupName
+            entity: thisCollection.getMeta('model')
 
           propertiesConfigModels[viewKey] = propertiesConfigModel
 
@@ -256,14 +253,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           propertiesConfigModel.once('change:parsed_configuration', ->
             numLoadedGroups++
             if numLoadedGroups == totalGroupsToLoad
-              console.log('ALL RECEIVED!')
 
               thisCollection.loadConfigFromFetchedModels(propertiesConfigModels)
-              console.log('TIGGERING EVENT, CONFIG IS READY')
               thisCollection.setConfigState(
                 glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING_STATES.CONFIGURATION_READY
               )
-
               resolve('success')
           )
           unless thisCollection.getMeta('test_mode')
@@ -274,10 +268,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     loadConfigFromFetchedModels: (propertiesConfigModels) ->
 
-      console.log('loadConfigFromFetchedModels')
-      console.log('propertiesConfigModels: ')
-      console.log(propertiesConfigModels)
-
       columnsDescription = {}
       propsComparatorsSet = {}
       for viewKey, configModel of propertiesConfigModels
@@ -287,12 +277,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           propsComparatorsSet[key] = key
 
       console.log('columnsDescription: ', columnsDescription)
-      console.log('propsComparatorsSet: ', propsComparatorsSet)
-
       @setMeta('columns_description', columnsDescription)
       @setMeta('props_comparators_set', propsComparatorsSet)
       @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.COLUMNS_CONFIGURATION_LOADED)
-      console.log('----')
 
     fetch: (options, testMode=false) ->
 

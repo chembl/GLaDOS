@@ -47,10 +47,17 @@ chembl_molecule:
     label: 'Smiles'
   'drug_parent_molecule_chembl_id':
     based_on: 'molecule_chembl_id'
-    label: 'Parent Molecule ChEMBL ID'
+    label: 'Parent Molecule'
+  'drug_icon':
+    based_on: 'molecule_chembl_id'
+    label: 'Icon'
+    type: 'double'
+    aggregatable: false
+    sortable: true
   'research_codes':
     based_on: 'molecule_synonyms'
     label: 'Research Codes'
+    label_mini: 'Research Codes'
   'drug_phase':
     based_on: 'max_phase'
     label: 'Phase'

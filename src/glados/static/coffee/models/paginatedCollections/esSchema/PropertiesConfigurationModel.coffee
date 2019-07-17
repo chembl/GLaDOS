@@ -10,14 +10,14 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
     parse: (response) ->
 
-      console.log('PARSE')
+      customEntity = @get('entity')
       parsedConfiguration = {}
       propsComparatorsSet = {} #  An object is used instead of Set to avoid browser compatibility issues.
       for subGroupKey, subGroup of response.properties
 
         parsedProperties = []
         for propertyDescription in subGroup
-          parsedProperty = glados.models.paginatedCollections.ColumnsFactory2.generateColumn(propertyDescription)
+          parsedProperty = glados.models.paginatedCollections.ColumnsFactory2.generateColumn(propertyDescription, customEntity)
           parsedProperties.push(parsedProperty)
           propsComparatorsSet[parsedProperty.comparator] = parsedProperty.comparator
 
