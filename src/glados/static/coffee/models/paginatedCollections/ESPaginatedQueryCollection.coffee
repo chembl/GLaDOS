@@ -408,6 +408,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       customQueryIsFullQuery = @customQueryIsFullQuery()
 
       propsComparatorsSet = @getMeta('props_comparators_set')
+      # This is a list of permanent comparators that will be included in the source, regardless of the properties
+      # configuration received. In the case of compounds this is necessary to obtain the correct image
+      permanentComparatorsToFetch = @getMeta('permanent_comparators_to_fetch')
+      permanentComparatorsToFetch ?= []
+      for comparator in permanentComparatorsToFetch
+        propsComparatorsSet[comparator] = comparator
+
       sourceList = Object.keys(propsComparatorsSet)
       # Base Elasticsearch query
       esQuery = {
