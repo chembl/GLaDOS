@@ -177,6 +177,46 @@ Target.INDEX_NAME = 'chembl_target'
 Target.PROPERTIES_VISUAL_CONFIG = {
   'target_chembl_id': {
     link_base: 'report_card_url'
+  },
+  'pref_name': {
+    custom_field_template: '<i>{{val}}</i>'
+  },
+  'uniprot_accessions': {
+    parse_function: (components) ->
+
+      if not components?
+        return glados.Utils.DEFAULT_NULL_VALUE_LABEL
+
+      if components.length == 0
+        return glados.Utils.DEFAULT_NULL_VALUE_LABEL
+
+      return (comp.accession for comp in components).join(', ')
+    link_function: (components) ->
+      'http://www.uniprot.org/uniprot/?query=' + ('accession:' + comp.accession for comp in components).join('+OR+')
+  }
+  '_metadata.related_compounds.count': {
+    link_base: 'compounds_url'
+    on_click: TargetReportCardApp.initMiniHistogramFromFunctionLink
+    function_constant_parameters: ['compounds']
+    function_parameters: ['target_chembl_id']
+    # to help bind the link to the function, it could be necessary to always use the key of the columns descriptions
+    # or probably not, depending on how this evolves
+    function_key: 'num_compounds'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
+  }
+  '_metadata.related_activities.count': {
+    link_base: 'activities_url'
+    on_click: TargetReportCardApp.initMiniHistogramFromFunctionLink
+    function_parameters: ['target_chembl_id']
+    function_constant_parameters: ['activities']
+    # to help bind the link to the function, it could be necessary to always use the key of the columns descriptions
+    # or probably not, depending on how this evolves
+    function_key: 'bioactivities'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
   }
 }
 
