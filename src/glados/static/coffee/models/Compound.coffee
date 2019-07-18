@@ -792,6 +792,14 @@ Compound.PROPERTIES_VISUAL_CONFIG = {
     function_link: true
     execute_on_render: true
     format_class: 'number-cell-center'
+  },
+  'similarity': {
+      'show': true
+      'comparator': '_context.similarity'
+      'sort_disabled': false
+      'is_sorting': 0
+      'sort_class': 'fa-sort'
+      'is_contextual': true
   }
 }
 

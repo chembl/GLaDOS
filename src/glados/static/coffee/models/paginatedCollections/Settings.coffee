@@ -331,14 +331,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
         COLUMNS: Compound.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE_SIMILARITY
-            Additional: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
-          Cards:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_SIMILARITY
-          Carousel:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_SIMILARITY
+        PERMANENT_COMPARATORS_TO_FETCH:['molecule_chembl_id',
+          'molecule_properties.num_ro5_violations', 'molecule_properties.full_molformula', 'molecule_type',
+          'natural_product', 'polymer_flag', 'structure_type']
+        CONFIG_GROUPS:
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table_similarity'
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Cards}": 'browser_cards_similarity'
         ID_COLUMN: Compound.ID_COLUMN
         ENABLE_CARDS_ZOOM: true
         CUSTOM_CARDS_TEMPLATE: 'Handlebars-Common-Paginated-Card-Compound'
