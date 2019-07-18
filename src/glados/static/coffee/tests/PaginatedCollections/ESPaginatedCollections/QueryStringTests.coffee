@@ -16,10 +16,13 @@ describe "An elasticsearch collection initialised from a custom querystring", ->
 
   it 'Generates the correct request object', ->
 
+    console.log('DEBUG')
     requestData = esList.getRequestData()
     expect(requestData.query.bool.must[0].query_string.query).toBe(customQueryString)
 
-  it 'generates a state object', -> TestsUtils.testSavesList(esList,
+  it 'generates a state object', ->
+
+    TestsUtils.testSavesList(esList,
       pathInSettingsMustBe='ES_INDEXES_NO_MAIN_SEARCH.ACTIVITY',
       queryStringMustBe=customQueryString,
       useQueryStringMustBe=true)

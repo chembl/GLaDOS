@@ -34,10 +34,8 @@ describe "An elasticsearch collection initialised from a custom query (full)", -
     requestDataMustBe = {
       "size": 24,
       "from": 0,
-      "_source": {
-        "includes": ["*", "_metadata.*"],
-        "excludes": ["_metadata.related_targets.chembl_ids.*", "_metadata.related_compounds.chembl_ids.*"]
-      },
+      "_source": ["molecule_chembl_id", "molecule_properties.num_ro5_violations", "molecule_properties.full_molformula",
+        "molecule_type", "natural_product", "polymer_flag", "structure_type"],
       "query": {
         "bool": {
           "must": [{
