@@ -6,7 +6,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       gladosSchema = glados.models.paginatedCollections.esSchema.GLaDOS_es_GeneratedSchema
       gladosConfig = gladosSchema[indexName][baseConfig.comparator]
-      console.log('gladosConfig: ', gladosConfig)
 
       inferredProperties = {}
 

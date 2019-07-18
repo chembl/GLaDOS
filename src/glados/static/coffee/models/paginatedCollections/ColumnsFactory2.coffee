@@ -3,6 +3,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     ENTITY_NAME_TO_ENTITY_MODEL:
       "#{Compound.INDEX_NAME}": Compound
+      "#{Target.INDEX_NAME}": Target
 
     generateColumn: (configFromServer, customEntity) ->
 

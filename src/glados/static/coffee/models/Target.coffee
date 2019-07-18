@@ -173,6 +173,13 @@ Target.color = 'lime'
 Target.reportCardPath = 'target_report_card/'
 
 Target.INDEX_NAME = 'chembl_target'
+
+Target.PROPERTIES_VISUAL_CONFIG = {
+  'target_chembl_id': {
+    link_base: 'report_card_url'
+  }
+}
+
 Target.COLUMNS = {
   CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Target.INDEX_NAME,
     comparator: 'target_chembl_id'

@@ -13,7 +13,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BROWSE_LIST_URL: Compound.getCompoundsListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
-        COLUMNS: Compound.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
             Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
@@ -80,12 +79,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BROWSE_LIST_URL: Target.getTargetsListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Target
+        PERMANENT_COMPARATORS_TO_FETCH: ['target_chembl_id', 'cross_references', 'target_components']
+        CONFIG_GROUPS:
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
         ID_COLUMN: Target.ID_COLUMN
-        COLUMNS: Target.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: Target.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-            Additional: Target.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.TargetSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
@@ -246,7 +243,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BROWSE_LIST_URL: Compound.getCompoundsListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
-        COLUMNS: Compound.COLUMNS_SETTINGS.ALL_COLUMNS
         PERMANENT_COMPARATORS_TO_FETCH:['molecule_chembl_id',
           'molecule_properties.num_ro5_violations', 'molecule_properties.full_molformula', 'molecule_type',
           'natural_product', 'polymer_flag', 'structure_type']
@@ -330,7 +326,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BROWSE_LIST_URL: Compound.getCompoundsListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
-        COLUMNS: Compound.COLUMNS_SETTINGS.ALL_COLUMNS
         PERMANENT_COMPARATORS_TO_FETCH:['molecule_chembl_id',
           'molecule_properties.num_ro5_violations', 'molecule_properties.full_molformula', 'molecule_type',
           'natural_product', 'polymer_flag', 'structure_type']
