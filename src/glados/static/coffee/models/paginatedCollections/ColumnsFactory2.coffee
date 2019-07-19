@@ -5,6 +5,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       "#{Compound.INDEX_NAME}": Compound
       "#{Target.INDEX_NAME}": Target
       "#{Assay.INDEX_NAME}": Assay
+      "#{Document.INDEX_NAME}": Document
 
     generateColumn: (configFromServer, customEntity) ->
 

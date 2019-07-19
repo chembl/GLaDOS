@@ -120,13 +120,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Document
         ID_COLUMN: Document.ID_COLUMN
-        COLUMNS: Document.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-            Additional: Document.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL
-          Carousel:
-            Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_CARD
+        PERMANENT_COMPARATORS_TO_FETCH: ['document_chembl_id']
+        ID_COLUMN: Assay.ID_COLUMN
+        CONFIG_GROUPS:
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.DocumentSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]

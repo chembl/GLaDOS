@@ -107,8 +107,12 @@ chembl_target:
 chembl_document:
   download:
     default: ['document_chembl_id', 'journal_full_title', 'src_id', '_metadata.source', 'title', 'pubmed_id', 'doi',
-    'patent_id', 'authors', 'year', 'volume', 'issue', 'first_page', 'doc_type', 'abstract',
+    'patent_id', 'authors', 'year', 'volume', 'issue', 'first_page', 'last_page', 'doc_type', 'abstract',
     '_metadata.related_compounds.count', '_metadata.related_targets.count', '_metadata.related_activities.count']
+  browser_table:
+    default: ['document_chembl_id', 'journal_full_title', '_metadata.source', 'title', 'pubmed_id', 'doi', 'patent_id',
+    'authors', 'year', 'volume', 'issue', 'first_page', 'last_page', '_metadata.related_activities.count']
+    optional: ['src_id', 'abstract', '_metadata.related_compounds.count', '_metadata.related_targets.count']
 chembl_cell_line:
   download:
     default: ['cell_chembl_id', 'cell_name', 'cell_description', 'cell_source_organism', 'cell_source_tissue',

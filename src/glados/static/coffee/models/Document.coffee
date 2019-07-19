@@ -37,6 +37,52 @@ Document.color = 'red'
 Document.reportCardPath = 'document_report_card/'
 
 Document.INDEX_NAME = 'chembl_document'
+Document.PROPERTIES_VISUAL_CONFIG = {
+  'document_chembl_id': {
+    link_base: 'report_card_url'
+  }
+  '_metadata.source': {
+    parse_function: (values) -> (v.src_description for v in values).join(', ')
+  }
+  'pubmed_id': {
+    link_function: (id) -> 'http://europepmc.org/abstract/MED/' + encodeURIComponent(id)
+  }
+  'doi': {
+    link_function: (id) -> 'http://dx.doi.org/' + encodeURIComponent(id)
+  }
+  '_metadata.related_activities.count': {
+    link_base: 'activities_url'
+    on_click: DocumentReportCardApp.initMiniHistogramFromFunctionLink
+    function_parameters: ['document_chembl_id']
+    function_constant_parameters: ['activities']
+    function_key: 'document_bioactivities'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
+  }
+  '_metadata.related_compounds.count': {
+    link_base: 'compounds_url'
+    on_click: DocumentReportCardApp.initMiniHistogramFromFunctionLink
+    function_constant_parameters: ['compounds']
+    function_parameters: ['document_chembl_id']
+    function_key: 'document_num_compounds'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
+  }
+  '_metadata.related_targets.count': {
+    format_as_number: true
+    link_base: 'targets_url'
+    on_click: DocumentReportCardApp.initMiniHistogramFromFunctionLink
+    function_parameters: ['document_chembl_id']
+    function_constant_parameters: ['targets']
+    function_key: 'document_targets'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
+  }
+}
+
 Document.COLUMNS = {
   CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
     comparator: 'document_chembl_id'
