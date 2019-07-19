@@ -301,11 +301,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Target
         ID_COLUMN: Target.ID_COLUMN
-        COLUMNS: Target.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: Target.COLUMNS_SETTINGS.RESULTS_LIST_BLAST
-            Additional: Target.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL
+        PERMANENT_COMPARATORS_TO_FETCH: ['target_chembl_id', 'cross_references', 'target_components']
+        CONFIG_GROUPS:
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table_blast'
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.TargetSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
