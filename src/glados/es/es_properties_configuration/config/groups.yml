@@ -79,6 +79,14 @@ chembl_assay:
     'document_chembl_id', '_metadata.document_data.pubmed_id', '_metadata.document_data.doi',
     '_metadata.document_data.year', '_metadata.document_data.journal', '_metadata.document_data.volume',
     '_metadata.document_data.first_page','_metadata.document_data.last_page', 'assay_parameters']
+  browser_table:
+    default: ['assay_chembl_id', 'assay_type', 'description', 'assay_organism', '_metadata.related_compounds.count',
+    'document_chembl_id', 'bao_label', '_metadata.source.src_description']
+    optional: ['_metadata.related_activities.count', 'assay_strain', 'assay_tax_id', 'assay_type', 'tissue_chembl_id',
+    'assay_tissue', 'assay_cell_type', 'assay_subcellular_fraction', '_metadata.document_data.pubmed_id',
+    '_metadata.document_data.doi', '_metadata.document_data.year', '_metadata.document_data.journal',
+    '_metadata.document_data.volume', '_metadata.document_data.first_page','_metadata.document_data.last_page',
+    'assay_parameters']
 chembl_target:
   download:
     default: ['target_chembl_id', 'pref_name', 'uniprot_accessions', 'target_type', 'organism',

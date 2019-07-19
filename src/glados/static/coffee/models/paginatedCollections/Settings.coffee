@@ -99,14 +99,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BROWSE_LIST_URL: Assay.getAssaysListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Assay
+        PERMANENT_COMPARATORS_TO_FETCH: ['assay_chembl_id', 'document_chembl_id', 'tissue_chembl_id', 'src_id',
+          'src_assay_id', '_metadata.document_data.doi', '_metadata.document_data.pubmed_id']
         ID_COLUMN: Assay.ID_COLUMN
-        COLUMNS: Assay.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-            Additional: Assay.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL
-          Carousel:
-            Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+        CONFIG_GROUPS:
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.AssaySchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]

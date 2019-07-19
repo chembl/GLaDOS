@@ -54,6 +54,10 @@ Assay = Backbone.Model.extend
     if objData._metadata.document_data.doi?
       objData.reference_link = 'http://dx.doi.org/' + encodeURIComponent(objData._metadata.document_data.doi)
 
+    if objData._metadata.document_data.pubmed_id?
+      objData.pubmed_link = 'https://www.ncbi.nlm.nih.gov/pubmed/' + \
+        encodeURIComponent(objData._metadata.document_data.pubmed_id)
+
     return objData;
 
 # Constant definition for ReportCardEntity model functionalities
@@ -73,6 +77,60 @@ Assay.getAssaysListURL = (filter, isFullState=false, fragmentOnly=false) ->
     is_full_state: isFullState
 
 Assay.INDEX_NAME = 'chembl_assay'
+Assay.PROPERTIES_VISUAL_CONFIG = {
+  'assay_chembl_id': {
+    link_base: 'report_card_url'
+  }
+  '_metadata.related_compounds.count': {
+    link_base: 'compounds_url'
+    on_click: AssayReportCardApp.initMiniHistogramFromFunctionLink
+    function_constant_parameters: ['compounds']
+    function_parameters: ['assay_chembl_id']
+    function_key: 'assay_num_compounds'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
+  }
+  '_metadata.related_activities.count': {
+    link_base: 'activities_url'
+    on_click: AssayReportCardApp.initMiniHistogramFromFunctionLink
+    function_parameters: ['assay_chembl_id']
+    function_constant_parameters: ['activities']
+    function_key: 'assay_bioactivities'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
+  }
+  'document_chembl_id': {
+    link_base: 'document_link'
+  }
+  'tissue_chembl_id': {
+    link_base: 'tissue_link'
+  }
+  '_metadata.document_data.pubmed_id': {
+    link_base: 'pubmed_link'
+  }
+  '_metadata.document_data.doi': {
+    link_base: 'reference_link'
+  }
+  'assay_parameters': {
+    parse_function: (raw_parameters) ->
+
+      param_groups = []
+
+      for param in raw_parameters
+
+        useful_params = []
+
+        for key in ['standard_type', 'standard_relation', 'standard_value', 'standard_units', 'comments']
+
+          useful_params.push("#{key}:#{param[key]}")
+
+        param_groups.push(useful_params.join(' '))
+
+      return param_groups.join(' | ')
+  }
+}
 Assay.COLUMNS = {
 
   CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
