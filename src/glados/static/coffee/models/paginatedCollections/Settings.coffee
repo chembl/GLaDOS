@@ -179,17 +179,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Activity
         ID_COLUMN: Activity.ID_COLUMN
+        PERMANENT_COMPARATORS_TO_FETCH: ['_metadata.parent_molecule_data.image_file', 'molecule_chembl_id',
+          'target_chembl_id', 'assay_chembl_id', 'document_chembl_id', '_metadata.assay_data.tissue_chembl_id']
+        CONFIG_GROUPS:
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        COLUMNS: Activity.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_TABLE
-            Additional: Activity.COLUMNS_SETTINGS.RESULTS_LIST_TABLE_ADDITIONAL
-          Cards:
-            Default: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-          Carousel:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.ActivitySchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]

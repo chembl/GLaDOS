@@ -24,10 +24,30 @@ Activity = Backbone.Model.extend
     objData.document_link = Document.get_report_card_url(objData.document_chembl_id)
     if objData._metadata?
       objData.tissue_link = glados.models.Tissue.get_report_card_url(objData._metadata.assay_data.tissue_chembl_id)
+      objData.cell_link = CellLine.get_report_card_url(objData._metadata.assay_data.cell_chembl_id)
 
     return objData
 
 Activity.indexName = 'chembl_activity'
+Activity.PROPERTIES_VISUAL_CONFIG = {
+  'molecule_chembl_id': {
+    image_base_url: 'image_url'
+    link_base:'molecule_link'
+  }
+  'assay_chembl_id': {
+    link_base:'assay_link'
+    use_in_summary: true
+  }
+  'target_chembl_id': {
+    link_base:'target_link'
+  }
+  '_metadata.assay_data.cell_chembl_id': {
+    link_base:'cell_link'
+  }
+  'document_chembl_id': {
+    link_base: 'document_link'
+  }
+}
 Activity.COLUMNS = {
   ACTIVITY_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: 'activity_id'
