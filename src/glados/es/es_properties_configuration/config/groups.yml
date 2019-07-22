@@ -96,12 +96,13 @@ chembl_target:
     'target_chembl_id', 'pref_name', 'uniprot_accessions', 'target_type', 'organism',
     '_metadata.related_compounds.count', '_metadata.related_activities.count', 'tax_id', 'species_group_flag']
   browser_table:
-    default: ['_context.best_expectation', '_context.best_positives', '_context.best_identities',
-    '_context.best_score_bits', '_context.best_score', 'length', 'target_chembl_id', 'pref_name', 'uniprot_accessions',
-    'target_type', 'organism', '_metadata.related_compounds.count', '_metadata.related_activities.count']
+    default: ['best_expectation', 'best_positives', 'best_identities', 'best_score_bits', 'best_score', 'length',
+    'target_chembl_id', 'pref_name', 'uniprot_accessions', 'target_type', 'organism',
+    '_metadata.related_compounds.count', '_metadata.related_activities.count']
     optional: ['tax_id', 'species_group_flag']
   browser_table_blast:
-    default: ['target_chembl_id', 'pref_name', 'uniprot_accessions', 'target_type', 'organism',
+    default: ['best_expectation', 'best_positives', 'best_identities', 'best_score_bits', 'best_score', 'length',
+    'target_chembl_id', 'pref_name', 'uniprot_accessions', 'target_type', 'organism',
     '_metadata.related_compounds.count', '_metadata.related_activities.count']
     optional: ['tax_id', 'species_group_flag']
 chembl_document:

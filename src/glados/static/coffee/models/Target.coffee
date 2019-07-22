@@ -218,6 +218,55 @@ Target.PROPERTIES_VISUAL_CONFIG = {
     execute_on_render: true
     format_class: 'number-cell-center'
   }
+  'best_expectation': {
+    'show': true
+    'comparator': '_context.best_expectation'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'is_contextual': true
+  }
+  'best_positives': {
+    'show': true
+    'comparator': '_context.best_positives'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'is_contextual': true
+  }
+  'best_identities': {
+    'show': true
+    'comparator': '_context.best_identities'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'is_contextual': true
+  }
+  'best_score_bits': {
+    'show': true
+    'comparator': '_context.best_score_bits'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'is_contextual': true
+  }
+  'best_score': {
+    'show': true
+    'comparator': '_context.best_score'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'is_contextual': true
+  }
+  'length': {
+    'show': true
+    'name_to_show': 'Length'
+    'comparator': '_context.length'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'is_contextual': true
+  }
 }
 
 Target.COLUMNS = {
