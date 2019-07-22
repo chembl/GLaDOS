@@ -194,15 +194,16 @@
           <div class="col s6 m3 l2 drag-dummy BCK-drag-dummy" data-comparator='{{this.comparator}}'>
           </div>
 
-          <div class="col s6 m3 l2 sortable-item BCK-draggable" draggable='true' data-comparator='{{this.comparator}}'>
+          <div class="col s6 m3 l2 sortable-item BCK-draggable" draggable='true' data-comparator='{{this.comparator}}'
+            data-prop-id='{{this.prop_id}}'>
 
             <div class="item-content">
 
               <div class="item-checkbox">
 
                   <input type="checkbox" class="BCK-show-hide-column filled-in"
-                       id="{{this.modal_id}}-check-{{this.comparator}}"
-                       data-comparator='{{this.comparator}}'
+                       id="{{this.modal_id}}-check-{{this.prop_id}}"
+                       data-comparator='{{this.comparator}}' data-prop-id='{{this.prop_id}}'
                        {{#if this.show}} checked="checked" {{/if}}
                 />
 

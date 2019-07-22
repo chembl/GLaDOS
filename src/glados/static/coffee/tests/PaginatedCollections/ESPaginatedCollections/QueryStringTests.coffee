@@ -16,7 +16,6 @@ describe "An elasticsearch collection initialised from a custom querystring", ->
 
   it 'Generates the correct request object', ->
 
-    console.log('DEBUG')
     requestData = esList.getRequestData()
     expect(requestData.query.bool.must[0].query_string.query).toBe(customQueryString)
 

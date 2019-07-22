@@ -171,6 +171,11 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/configs/ReportCards/Compound/TargetSummaryPieConfig.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/compoundReportCardApp.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound.js' %}"></script>
+
+      <!-- The Drug.js file needs to be loaded after the Compound.js -->
+    <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound/Drug.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/models/ApprovedDrugClinicalCandidate.js' %}"></script>
+
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/Activity.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/CompoundList.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound/Metabolism.js' %}"></script>
@@ -194,10 +199,8 @@
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Compound/TargetPredictionsView.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/coffee-gen/views/Compound/UnichemConnectivityMatchesView.js' %}"></script>
 
-    <!-- Drug Browser -->
-    <!-- The Drug.js file needs to be loaded after the Compound.js -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound/Drug.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/ApprovedDrugClinicalCandidate.js' %}"></script>
+
+
 
     <!-- Activities -->
     <script type="text/javascript" src="{% static 'js/coffee-gen/models/Activity/ActivityAggregation.js' %}"></script>

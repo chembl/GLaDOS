@@ -91,7 +91,6 @@ glados.models.Compound.DrugIndication.COLUMNS =
   INDICATION_MAX_PHASE: generateDrugIndicationColumn
     comparator: 'drug_indication.max_phase_for_ind'
 
-
   INDICATION_REFERENCES:generateDrugIndicationColumn
     comparator: 'drug_indication.indication_refs'
     multiple_links: true

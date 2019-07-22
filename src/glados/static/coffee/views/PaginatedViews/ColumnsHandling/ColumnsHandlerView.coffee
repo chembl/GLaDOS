@@ -32,7 +32,6 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
 
     renderModalContent: ->
 
-      console.log('RENDER MODAL CONTENT')
       if @facetsMode
         allColumns = @getAllColumnsFromFacets()
         @prepareFacetListForView(allColumns)
@@ -78,24 +77,24 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
     showHideColumn: (event) ->
 
       $checkbox = $(event.currentTarget)
-      colComparator = $checkbox.attr('data-comparator')
+      colIdentifier = $checkbox.attr('data-comparator')
       isChecked = $checkbox.is(':checked')
 
       thisView = @
 
       if @facetsMode
 
-        if colComparator == 'SELECT-ALL'
+        if colIdentifier == 'SELECT-ALL'
           thisView.model.setShowHideAllFGroupStatus(isChecked)
         else
-          thisView.model.setShowHideFGroupStatus(colComparator, isChecked)
+          thisView.model.setShowHideFGroupStatus(colIdentifier, isChecked)
 
       else
 
-        if colComparator == 'SELECT-ALL'
+        if colIdentifier == 'SELECT-ALL'
           thisView.model.setShowHideAllColumnStatus(isChecked)
         else
-          thisView.model.setShowHideColumnStatus(colComparator, isChecked)
+          thisView.model.setShowHideColumnStatus(colIdentifier, isChecked)
 
     showPreloader: ->$(@el).find('.BCK-loading-cover').show()
     hidePreloader: -> $(@el).find('.BCK-loading-cover').hide()
