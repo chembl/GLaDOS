@@ -343,7 +343,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # PATH: Assigned after this declaration using the INDEX_NAME
         BROWSE_LIST_URL: Drug.getDrugsListURL
         MODEL: glados.models.Compound.Drug
-        COLUMNS: glados.models.Compound.Drug.COLUMNS_SETTINGS.ALL_COLUMNS
         PERMANENT_COMPARATORS_TO_FETCH: ['molecule_chembl_id',
           'molecule_properties.num_ro5_violations', 'molecule_properties.full_molformula', 'molecule_type',
           'natural_product', 'polymer_flag', 'structure_type', '_metadata.drug.drug_data.sc_patent']
@@ -376,11 +375,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         #BROWSE_LIST_URL: Drug.getDrugsListURL
         BROWSE_LIST_URL: glados.models.Compound.DrugIndication.getListURL
         MODEL: glados.models.Compound.DrugIndication
-        COLUMNS: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-            Additional: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.RESULTS_LIST_TABLE_ADDITIONAL
+        PERMANENT_COMPARATORS_TO_FETCH: ['parent_molecule._metadata.compound_generated.image_file',
+          'parent_molecule.molecule_chembl_id', 'drug_indication.mesh_id']
+        CONFIG_GROUPS:
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.DrugIndicationSchema.FACETS_GROUPS
         ID_COLUMN: glados.models.Compound.DrugIndication.ID_COLUMN
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],

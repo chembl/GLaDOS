@@ -21,6 +21,44 @@ glados.useNameSpace 'glados.models.Compound',
       return objData
 
 glados.models.Compound.DrugIndication.INDEX_NAME = 'chembl_drug_indication_by_parent'
+glados.models.Compound.DrugIndication.PROPERTIES_VISUAL_CONFIG = {
+  'parent_molecule.molecule_chembl_id': {
+    image_base_url: 'parent_image_url'
+    link_base: 'molecule_link'
+  }
+  'drug_indication.mesh_id': {
+    link_base: 'mesh_url'
+  }
+  'efo_ids': {
+    comparator: 'drug_indication.efo'
+    multiple_links: true
+    multiple_links_function: (efos) ->
+      ({text:efo.id, url:"http://www.ebi.ac.uk/efo/#{efo.id.replace(/:/g, '_')}"} for efo in efos)
+  }
+  'efo_terms': {
+    parse_function: (values) ->
+      realValues = []
+      for valI in values
+        if valI?.term?.trim().length > 0
+          realValues.push valI.term.trim()
+      return realValues.join(', ')
+  }
+  'drug_indication.indication_refs': {
+    multiple_links: true
+    multiple_links_function: (refs) -> ({text:r.ref_type, url:r.ref_url} for r in refs)
+  }
+  'parent_molecule._metadata.drug.drug_data.synonyms': {
+    custom_field_template: '<ul class="no-margin" style="width: 15rem; margin-left: 1rem !important;">' +
+        '{{#each val}}<li style="list-style-type: circle;">{{this}}</li>{{/each}}</ul>'
+    parse_function: (values) ->
+      realValues = []
+      for valI in values
+        if valI?.trim().length > 0
+          realValues.push valI.trim()
+      return realValues
+  }
+
+}
 
 generateDrugIndicationColumn = (columnMetadata)->
   return glados.models.paginatedCollections.ColumnsFactory.generateColumn glados.models.Compound\

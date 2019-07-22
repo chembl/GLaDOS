@@ -137,6 +137,13 @@ chembl_drug_indication_by_parent:
     'drug_indication.mesh_heading', 'efo_ids', 'efo_terms', 'drug_indication.indication_refs',
     'parent_molecule._metadata.drug.drug_data.synonyms', 'parent_molecule._metadata.drug.drug_data.usan_stem',
     'parent_molecule._metadata.drug.drug_data.usan_year']
+  browser_table:
+    default: ['parent_molecule.molecule_chembl_id', 'parent_molecule.pref_name', 'parent_molecule.molecule_type',
+    'drug_indication.max_phase_for_ind', 'parent_molecule.first_approval', 'parent_molecule.first_approval',
+    'drug_indication.mesh_id', 'drug_indication.mesh_heading', 'efo_ids', 'efo_terms',
+    'drug_indication.indication_refs']
+    optional: ['parent_molecule._metadata.drug.drug_data.synonyms',
+    'parent_molecule._metadata.drug.drug_data.usan_stem', 'parent_molecule._metadata.drug.drug_data.usan_year']
 chembl_mechanism_by_parent_target:
   download:
     default: ['parent_molecule.molecule_chembl_id', 'parent_molecule.pref_name', 'parent_molecule.molecule_type',
