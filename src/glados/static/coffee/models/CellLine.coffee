@@ -63,6 +63,26 @@ CellLine.PROPERTIES_VISUAL_CONFIG = {
   'cl_lincs_id': {
     link_function: (id) -> 'http://life.ccs.miami.edu/life/summary?mode=CellLine&source=LINCS&input=' + id
   }
+  '_metadata.related_compounds.count': {
+    link_base: 'compounds_url'
+    on_click: CellLineReportCardApp.initMiniHistogramFromFunctionLink
+    function_constant_parameters: ['compounds']
+    function_parameters: ['cell_chembl_id']
+    function_key: 'cell_num_compounds'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
+  }
+  '_metadata.related_activities.count': {
+    link_base: 'activities_url'
+    on_click: CellLineReportCardApp.initMiniHistogramFromFunctionLink
+    function_parameters: ['cell_chembl_id']
+    function_constant_parameters: ['activities']
+    function_key: 'cell_bioactivities'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
+  }
 }
 CellLine.COLUMNS = {
   CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn CellLine.INDEX_NAME,

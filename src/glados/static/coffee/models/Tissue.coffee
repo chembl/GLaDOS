@@ -40,6 +40,43 @@ _.extend(glados.models.Tissue, glados.models.base.ReportCardEntity)
 glados.models.Tissue.color = 'deep-orange'
 glados.models.Tissue.reportCardPath = 'tissue_report_card/'
 
+glados.models.Tissue.PROPERTIES_VISUAL_CONFIG = {
+  'tissue_chembl_id': {
+    link_base: 'report_card_url'
+  }
+  'uberon_id': {
+    link_function: (id) -> 'https://www.ebi.ac.uk/ols/search?q=' + encodeURIComponent(id)
+  }
+  'efo_id': {
+    link_function: (id) -> 'https://www.ebi.ac.uk/ols/search?q=' + encodeURIComponent(id)
+  }
+  'bto_id': {
+    link_function: (id) -> 'https://www.ebi.ac.uk/ols/search?q=' + encodeURIComponent(id)
+  }
+  'caloha_id': {
+    link_function: (id) -> 'https://www.nextprot.org/term/' + encodeURIComponent(id)
+  }
+  '_metadata.related_compounds.count': {
+    on_click: TissueReportCardApp.initMiniHistogramFromFunctionLink
+    function_constant_parameters: ['compounds']
+    function_parameters: ['tissue_chembl_id']
+    function_key: 'tissue_num_compounds'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
+  }
+  '_metadata.related_activities.count': {
+    link_base: 'activities_url'
+    on_click: TissueReportCardApp.initMiniHistogramFromFunctionLink
+    function_parameters: ['tissue_chembl_id']
+    function_constant_parameters: ['activities']
+    function_key: 'tissue_bioactivities'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
+  }
+}
+
 glados.models.Tissue.INDEX_NAME = 'chembl_tissue'
 glados.models.Tissue.COLUMNS = {
   CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn glados.models.Tissue.INDEX_NAME,
