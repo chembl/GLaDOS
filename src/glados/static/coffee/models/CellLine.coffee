@@ -41,6 +41,29 @@ CellLine.color = 'deep-purple'
 CellLine.reportCardPath = 'cell_line_report_card/'
 
 CellLine.INDEX_NAME = 'chembl_cell_line'
+CellLine.PROPERTIES_VISUAL_CONFIG = {
+  'cell_chembl_id': {
+    link_base: 'report_card_url'
+  }
+  'cell_name': {
+    custom_field_template: '<i>{{val}}</i>'
+  }
+  'clo_id': {
+    link_function: (id) -> 'http://purl.obolibrary.org/obo/' + id
+  }
+  'efo_id': {
+    link_function: (id) -> 'https://www.ebi.ac.uk/ols/ontologies/efo/terms?short_form=' + id
+  }
+  'cellosaurus_id': {
+    link_function: (id) -> 'http://web.expasy.org/cellosaurus/' + id
+  }
+  'efo_id': {
+    link_function: (id) -> 'https://www.ebi.ac.uk/ols/ontologies/efo/terms?short_form=' + id
+  }
+  'cl_lincs_id': {
+    link_function: (id) -> 'http://life.ccs.miami.edu/life/summary?mode=CellLine&source=LINCS&input=' + id
+  }
+}
 CellLine.COLUMNS = {
   CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn CellLine.INDEX_NAME,
     link_base: 'report_card_url'

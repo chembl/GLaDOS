@@ -6,6 +6,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       "#{Target.INDEX_NAME}": Target
       "#{Assay.INDEX_NAME}": Assay
       "#{Document.INDEX_NAME}": Document
+      "#{CellLine.INDEX_NAME}": CellLine
 
     generateColumn: (configFromServer, customEntity) ->
 

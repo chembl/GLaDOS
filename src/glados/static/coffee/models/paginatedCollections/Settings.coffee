@@ -140,13 +140,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: CellLine
         ID_COLUMN: CellLine.ID_COLUMN
-        COLUMNS: CellLine.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-            Additional: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL
-          Carousel:
-            Default: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+        PERMANENT_COMPARATORS_TO_FETCH: ['cell_chembl_id']
+        CONFIG_GROUPS:
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.CellLineSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]

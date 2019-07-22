@@ -82,7 +82,7 @@ chembl_assay:
   browser_table:
     default: ['assay_chembl_id', 'assay_type', 'description', 'assay_organism', '_metadata.related_compounds.count',
     'document_chembl_id', 'bao_label', '_metadata.source.src_description']
-    optional: ['_metadata.related_activities.count', 'assay_strain', 'assay_tax_id', 'assay_type', 'tissue_chembl_id',
+    optional: ['_metadata.related_activities.count', 'bao_format', 'assay_strain', 'assay_tax_id', 'assay_type', 'tissue_chembl_id',
     'assay_tissue', 'assay_cell_type', 'assay_subcellular_fraction', '_metadata.document_data.pubmed_id',
     '_metadata.document_data.doi', '_metadata.document_data.year', '_metadata.document_data.journal',
     '_metadata.document_data.volume', '_metadata.document_data.first_page','_metadata.document_data.last_page',
@@ -118,6 +118,10 @@ chembl_cell_line:
     default: ['cell_chembl_id', 'cell_name', 'cell_description', 'cell_source_organism', 'cell_source_tissue',
     'cell_source_tax_id', 'clo_id', 'efo_id', 'cellosaurus_id', 'cl_lincs_id', '_metadata.related_compounds.count',
     '_metadata.related_activities.count']
+  browser_table:
+    default: ['cell_chembl_id', 'cell_name', 'cell_description', 'cell_source_organism', 'cell_source_tissue',]
+    optional: ['cell_source_tax_id', 'clo_id', 'efo_id', 'cellosaurus_id', 'cl_lincs_id']
+
 chembl_tissue:
   download:
     default: ['tissue_chembl_id', 'pref_name', 'uberon_id', 'efo_id', 'bto_id', 'caloha_id',
