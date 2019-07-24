@@ -184,6 +184,20 @@ Assay.COLUMNS = {
     format_class: 'number-cell-center'
 }
 
+Assay.COLUMNS.CHEMBL_ID = {
+  aggregatable: true
+  comparator: "assay_chembl_id"
+  hide_label: true
+  id: "assay_chembl_id"
+  is_sorting: 0
+  link_base: "report_card_url"
+  name_to_show: "ChEMBL ID"
+  name_to_show_short: "ChEMBL ID"
+  show: true
+  sort_class: "fa-sort"
+  sort_disabled: false
+}
+
 Assay.ID_COLUMN = Assay.COLUMNS.CHEMBL_ID
 
 Assay.COLUMNS_SETTINGS = {
