@@ -283,17 +283,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       list = @getNewESResultsListFor(listConfig, customQuery, useCustomQuery=true)
       return list
 
-    getNewAssaysList: (filter='') ->
-
-      list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.ASSAYS_LIST, filter)
-      list.parse = (data) ->
-        data.page_meta.records_in_page = data.assays.length
-        @setMeta('data_loaded', true)
-        @resetMeta(data.page_meta)
-        return data.assays
-
-      return list
-
     getNewESDrugsList: (customQuery='*', itemsList, contextualProperties,
       settings=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.DRUGS_LIST,
       searchTerm) ->

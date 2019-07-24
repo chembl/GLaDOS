@@ -384,23 +384,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
     WS_COLLECTIONS:
-      ASSAYS_LIST:
-        MODEL: Assay
-        BASE_URL: glados.Settings.WS_BASE_URL + 'assay.json'
-        DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
-        AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        COLUMNS: Assay.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_CARD
-          Cards:
-            Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_CARD
-          Infinite:
-            Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_CARD
-          Carousel:
-            Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_CARD
-        ID_COLUMN: Assay.ID_COLUMN
-        ADDITIONAL_COLUMNS:[]
       DRUG_LIST:
         MODEL: Compound
         BASE_URL: glados.Settings.WS_BASE_URL + 'molecule.json'
