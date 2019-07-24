@@ -156,6 +156,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             @on 'reset', @addModelsInCurrentPage, @
 
           glados.models.paginatedCollections.PaginatedCollectionBase.prototype.initialize.call(@)
+          @setConfigState(
+            glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING_STATES.CONFIGURATION_READY)
 
       return new wsPagCollection
 

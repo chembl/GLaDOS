@@ -223,8 +223,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       if oldState != newState
         @setMeta('config_state', newState)
         @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.CONFIG_FETCHING_STATE_CHANGED)
-        console.log(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.CONFIG_FETCHING_STATE_CHANGED)
-        console.log('newState: ', newState)
     configIsReady: -> @getConfigState() ==\
       glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING_STATES.CONFIGURATION_READY
     # ------------------------------------------------------------------------------------------------------------------ 
