@@ -284,7 +284,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     fetch: (options, testMode=false) ->
 
       testMode |= @getMeta('test_mode')
-      if testMode
+      if testMode or @configIsReady()
         return @fetchData(options, testMode)
 
       descriptionPromise = @fetchColumnsDescription()
