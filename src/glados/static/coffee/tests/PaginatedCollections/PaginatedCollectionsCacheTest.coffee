@@ -212,44 +212,6 @@ describe "Paginated Collections Cache", ->
 
     it "does not initialise cache", -> expect(list.getMeta('cache')?).toBe(false)
 
-  describe 'WS Collections with caching', ->
-    list = undefined
-    testDataToParse1 = undefined
-    testDataToParse2 = undefined
-
-    beforeAll (done) ->
-      list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewSubstructureSearchResultsList()
-      list.setMeta('total_pages', 10)
-
-      dataURL1 = glados.Settings.STATIC_URL + 'testData/SimilarityResultsSampleResponsePage1.json'
-      got1 = false
-      dataURL2 = glados.Settings.STATIC_URL + 'testData/SimilarityResultsSampleResponsePage2.json'
-      got2 = false
-
-      $.get dataURL1, (testData) ->
-        testDataToParse1 = testData
-        got1 = true
-        if got1 and got2
-          done()
-
-      $.get dataURL2, (testData) ->
-        testDataToParse2 = testData
-        got2 = true
-        if got1 and got2
-          done()
-
-    beforeEach ->
-      list.resetCache()
-
-    it 'initializes cache', -> testInitCache(list)
-    it 'adds an object to cache', -> testAddObj(list)
-    it 'resets cache', -> testResetCache(list)
-    it 'retrieves one object', -> testRetrieveObj(list)
-    it 'retrieves objects in a range', -> testRetrieveObjs(list)
-    it 'adds objects from received pages', -> testAddsFromPage(list)
-    it 'gets objects from a given page', -> testGetObjectsFromPage(list)
-    it 'adds items to cache after parse', -> testAddsItemsAfterParse(list, testDataToParse1, WS_COL_TYPE)
-
   describe 'ES Collections', ->
 
     list = undefined

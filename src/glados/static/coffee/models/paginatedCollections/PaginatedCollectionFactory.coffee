@@ -302,34 +302,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return list
 
-    getNewSubstructureSearchResultsList: ->
-      list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.SUBSTRUCTURE_RESULTS_LIST)
-
-      list.initURL = (term) ->
-        @baseUrl = glados.Settings.WS_BASE_SUBSTRUCTURE_SEARCH_URL
-        console.log 'base url: ', @baseUrl
-        @setMeta('base_url', @baseUrl, true)
-        @setMeta('use_post', true)
-        @setMeta('extra_params', ['only=molecule_chembl_id'])
-        params = {}
-        if term.startsWith('CHEMBL')
-          params['chembl_id'] = term
-        else
-          params['smiles'] = term
-
-        @setMeta('post_parameters', params)
-        @initialiseUrl()
-
-
-      list.parse = (data) ->
-        data.page_meta.records_in_page = data.molecules.length
-        @setMeta('data_loaded', true)
-        @resetMeta(data.page_meta)
-        return data.molecules
-
-      return list
-
-
     getNewBlogEntriesList: ->
 
       config = glados.models.paginatedCollections.Settings.WS_COLLECTIONS.BLOG_ENTRIES_LIST

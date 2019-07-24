@@ -384,24 +384,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
     WS_COLLECTIONS:
-      SUBSTRUCTURE_RESULTS_LIST:
-        MODEL: Compound
-        BASE_URL: 'base_url is set by initURL'
-        DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
-        AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        COLUMNS: Compound.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-          Cards:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-          Infinite:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-          Carousel:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-        ID_COLUMN: Compound.ID_COLUMN
-        ADDITIONAL_COLUMNS:[]
-        ENABLE_COLLECTION_CACHING: true
       TWEETS_LIST:
         MODEL: glados.models.MainPage.Tweet
         BASE_URL: 'base_url is set by initURL'
