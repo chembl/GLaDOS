@@ -444,57 +444,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return list
 
-    getNewDocumentsFromTermsList: ->
-      config = glados.models.paginatedCollections.Settings.WS_COLLECTIONS.DOCS_BY_TERM_LIST
-      config.DEFAULT_PAGE_SIZE = 50
-      list = @getNewWSCollectionFor(config)
-
-      list.initURL = (term) ->
-        @baseUrl = glados.Settings.WS_BASE_URL + 'document_term.json?term_text=' + term + '&order_by=-score'
-        @setMeta('base_url', @baseUrl, true)
-        @initialiseUrl()
-
-      list.fetch = ->
-        @reset()
-        url = @getPaginatedURL()
-        documents = []
-        totalDocs = 0
-        receivedDocs = 0
-        # 1 first get list of documents
-        getDocuments = $.getJSON(url)
-
-        thisCollection = @
-        # 3. check that everything is ready
-        checkAllInfoReady = ->
-          if receivedDocs == totalDocs
-            console.log 'ALL READY!'
-            console.log thisCollection
-            thisCollection.setMeta('data_loaded', true)
-            thisCollection.trigger('do-repaint')
-
-        getDocuments.done((data) ->
-          data.page_meta.records_in_page = data.document_terms.length
-          thisCollection.resetMeta(data.page_meta)
-
-          documents = data.document_terms
-          totalDocs = documents.length
-
-          # 2. get details per document
-          for docInfo in documents
-
-            doc = new Document(docInfo)
-            thisCollection.add doc
-            doc.fetch
-              success: ->
-                receivedDocs += 1
-                checkAllInfoReady()
-        )
-
-        getDocuments.fail ->
-          console.log 'ERROR!'
-
-      return list
-
     getNewUnichemConnectivityList: ->
 
       config = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.UNICHEM_CONNECTIVITY_LIST

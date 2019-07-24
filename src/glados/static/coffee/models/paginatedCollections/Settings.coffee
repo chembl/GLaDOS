@@ -421,22 +421,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
         ID_COLUMN: Compound.ID_COLUMN
         IS_CAROUSEL: true
-      DOCS_BY_TERM_LIST:
-        MODEL: Document
-        BASE_URL: 'base_url is set by initURL'
-        DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
-        AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        ID_COLUMN: Document.ID_COLUMN
-        COLUMNS: Document.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: Document.COLUMNS_SETTINGS.SEARCH_BY_TERM_RESULTS
-          Cards:
-            Default: Document.COLUMNS_SETTINGS.SEARCH_BY_TERM_RESULTS
-          Infinite:
-            Default: Document.COLUMNS_SETTINGS.SEARCH_BY_TERM_RESULTS
-          Carousel:
-            Default: Document.COLUMNS_SETTINGS.SEARCH_BY_TERM_RESULTS
     CLIENT_SIDE_WS_COLLECTIONS:
       UNICHEM_CONNECTIVITY_LIST:
         MODEL: glados.models.Compound.UnichemConnectivityMatch
