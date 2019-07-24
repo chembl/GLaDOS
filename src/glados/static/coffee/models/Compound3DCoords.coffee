@@ -1,1 +1,0 @@
-Compound3DCoords = Backbone.Model.extend({})
