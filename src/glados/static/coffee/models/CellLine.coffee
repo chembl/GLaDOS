@@ -162,6 +162,20 @@ CellLine.COLUMNS_SETTINGS = {
   ]
 }
 
+CellLine.COLUMNS.CHEMBL_ID = {
+  aggregatable: true
+  comparator: "cell_chembl_id"
+  hide_label: true
+  id: "cell_chembl_id"
+  is_sorting: 0
+  link_base: "report_card_url"
+  name_to_show: "ChEMBL ID"
+  name_to_show_short: "ChEMBL ID"
+  show: true
+  sort_class: "fa-sort"
+  sort_disabled: false
+}
+
 CellLine.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS = _.union(CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE,
   CellLine.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL)
 
