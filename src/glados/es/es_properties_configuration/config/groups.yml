@@ -24,6 +24,8 @@ chembl_molecule:
     'molecule_structures.canonical_smiles']
   browser_cards:
     default: ['molecule_chembl_id', 'pref_name']
+  alternate_forms_carousel:
+    default: ['molecule_chembl_id']
   download_drugs:
     default: ['drug_parent_molecule_chembl_id', 'molecule_synonyms', 'research_codes', 'drug_phase',
     '_metadata.drug.drug_data.applicants', 'usan_stem', 'usan_year', 'usan_stem_definition',

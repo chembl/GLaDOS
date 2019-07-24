@@ -13,14 +13,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BROWSE_LIST_URL: Compound.getCompoundsListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-            Additional: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
-          Cards:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-          Carousel:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        PERMANENT_COMPARATORS_TO_FETCH:['molecule_chembl_id',
+          'molecule_properties.num_ro5_violations', 'molecule_properties.full_molformula', 'molecule_type',
+          'natural_product', 'polymer_flag', 'structure_type']
+        CONFIG_GROUPS:
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Cards}": 'browser_cards'
         ID_COLUMN: Compound.ID_COLUMN
         CUSTOM_DEFAULT_CARD_SIZES:
           small: 12
@@ -47,9 +45,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Graph'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Heatmap]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
-        CONFIG_GROUPS:
-          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
-          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Cards}": 'browser_cards'
         ENABLE_COLLECTION_CACHING: true
         POSSIBLE_CARD_SIZES_STRUCT:
           1:
@@ -201,19 +196,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BROWSE_LIST_URL: Compound.getCompoundsListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
-        BASE_URL: 'base_url is set by initURL'
-        DEFAULT_PAGE_SIZE: "needs to be set up outside, for some reason it doesn't work"
+        PERMANENT_COMPARATORS_TO_FETCH:['molecule_chembl_id',
+          'molecule_properties.num_ro5_violations', 'molecule_properties.full_molformula', 'molecule_type',
+          'natural_product', 'polymer_flag', 'structure_type']
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
         COLUMNS: Compound.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
-          Cards:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
-          Infinite:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
-          Carousel:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
+        CONFIG_GROUPS:
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Carousel}": 'alternate_forms_carousel'
         ID_COLUMN: Compound.ID_COLUMN
         IS_CAROUSEL: true
       COMPOUND_COOL_CARDS:

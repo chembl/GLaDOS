@@ -172,6 +172,7 @@ glados.useNameSpace 'glados',
       'Cards': 'Cards'
       'Infinite': 'Infinite'
       Heatmap: 'Heatmap'
+      Carousel: 'Carousel'
     DEFAULT_RESULTS_VIEWS_ICONS:
       'Matrix': 'fa-th'
       'Graph': 'fa-area-chart'
