@@ -169,6 +169,18 @@ Activity.COLUMNS = {
     comparator: 'target_tax_id'
 }
 
+Activity.COLUMNS.ACTIVITY_ID = {
+  aggregatable: true
+  comparator: "activity_id"
+  id: "activity_id"
+  is_sorting: 0
+  name_to_show: "ID"
+  name_to_show_short: "ID"
+  show: true
+  sort_class: "fa-sort"
+  sort_disabled: false
+}
+
 Activity.ID_COLUMN = Activity.COLUMNS.ACTIVITY_ID
 Activity = Activity.extend({idAttribute: Activity.ID_COLUMN.comparator})
 
