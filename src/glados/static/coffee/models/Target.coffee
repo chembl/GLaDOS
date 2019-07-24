@@ -374,6 +374,21 @@ Target.COLUMNS = {
     'is_contextual': true
   }
 }
+
+Target.COLUMNS.CHEMBL_ID = {
+  aggregatable: true
+  comparator: "target_chembl_id"
+  hide_label: true
+  id: "target_chembl_id"
+  is_sorting: 0
+  link_base: "report_card_url"
+  name_to_show: "ChEMBL ID"
+  name_to_show_short: "ChEMBL ID"
+  show: true
+  sort_class: "fa-sort"
+  sort_disabled: false
+}
+
 Target.ID_COLUMN = Target.COLUMNS.CHEMBL_ID
 
 Target.COLUMNS_SETTINGS = {

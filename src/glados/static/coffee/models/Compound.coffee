@@ -954,6 +954,7 @@ Compound.COLUMNS = {
     comparator: 'biotherapeutic.biocomponents'
 }
 
+
 Compound.COLUMNS.CHEMBL_ID = {
   aggregatable: true
   comparator: "molecule_chembl_id"
