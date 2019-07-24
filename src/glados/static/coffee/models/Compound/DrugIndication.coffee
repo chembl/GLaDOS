@@ -122,6 +122,20 @@ glados.models.Compound.DrugIndication.COLUMNS =
   )
 
 
+glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_CHEMBL_ID = {
+  aggregatable: true
+  comparator: "parent_molecule.molecule_chembl_id"
+  id: "parent_molecule.molecule_chembl_id"
+  image_base_url: "parent_image_url"
+  is_sorting: 0
+  link_base: "molecule_link"
+  name_to_show: "ChEMBL ID"
+  name_to_show_short: "ChEMBL ID"
+  show: true
+  sort_class: "fa-sort"
+  sort_disabled: false
+}
+
 glados.models.Compound.DrugIndication.ID_COLUMN = glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_CHEMBL_ID
 
 glados.models.Compound.DrugIndication.COLUMNS_SETTINGS =
