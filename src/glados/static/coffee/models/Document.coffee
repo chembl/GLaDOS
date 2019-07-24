@@ -172,6 +172,20 @@ Document.COLUMNS = {
     format_class: 'number-cell-center'
 }
 
+Document.COLUMNS.CHEMBL_ID = {
+  aggregatable: true
+  comparator: "document_chembl_id"
+  hide_label: true
+  id: "document_chembl_id"
+  is_sorting: 0
+  link_base: "report_card_url"
+  name_to_show: "ChEMBL ID"
+  name_to_show_short: "ChEMBL ID"
+  show: true
+  sort_class: "fa-sort"
+  sort_disabled: false
+}
+
 Document.ID_COLUMN = Document.COLUMNS.CHEMBL_ID
 
 Document.COLUMNS_SETTINGS = {
