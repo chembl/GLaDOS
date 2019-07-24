@@ -227,6 +227,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           if flavour.initialize?
             flavour.initialize.call(@)
 
+          @setConfigState(
+            glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING_STATES.CONFIGURATION_READY)
+
       return new collection
 
 
