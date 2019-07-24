@@ -172,6 +172,9 @@ glados.models.Compound.Drug.COLUMNS =
 
   }
 
+glados.models.Compound.Drug.COLUMNS.CHEMBL_ID = _.extend({}, Compound.COLUMNS.CHEMBL_ID, 'name_to_show': 'Parent Molecule')
+glados.models.Compound.Drug.ID_COLUMN = glados.models.Compound.Drug.COLUMNS.CHEMBL_ID
+
 glados.models.Compound.Drug.COLUMNS_SETTINGS =
   ALL_COLUMNS: (->
     colsList = []
