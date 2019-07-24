@@ -119,6 +119,20 @@ glados.models.Tissue.COLUMNS = {
     format_class: 'number-cell-center'
 }
 
+glados.models.Tissue.COLUMNS.CHEMBL_ID = {
+  aggregatable: true
+  comparator: "tissue_chembl_id"
+  hide_label: true
+  id: "tissue_chembl_id"
+  is_sorting: 0
+  link_base: "report_card_url"
+  name_to_show: "ChEMBL ID"
+  name_to_show_short: "ChEMBL ID"
+  show: true
+  sort_class: "fa-sort"
+  sort_disabled: false
+}
+
 glados.models.Tissue.ID_COLUMN = glados.models.Tissue.COLUMNS.CHEMBL_ID
 
 glados.models.Tissue.COLUMNS_SETTINGS = {
