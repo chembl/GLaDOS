@@ -313,17 +313,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return list
 
-    getNewActivitiesList: (filter='') ->
-
-      list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.ACTIVITIES_LIST, filter)
-      list.parse = (data) ->
-        data.page_meta.records_in_page = data.activities.length
-        @setMeta('data_loaded', true)
-        @resetMeta(data.page_meta)
-        return data.activities
-
-      return list
-
     getNewDrugList: ->
       list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.DRUG_LIST)
       list.parse = (data) ->

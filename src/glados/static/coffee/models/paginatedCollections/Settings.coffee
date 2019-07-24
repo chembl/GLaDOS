@@ -384,23 +384,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
     WS_COLLECTIONS:
-      ACTIVITIES_LIST:
-        MODEL: Activity
-        BASE_URL: glados.Settings.WS_BASE_URL + 'activity.json'
-        DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
-        AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        COLUMNS: Activity.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-          Cards:
-            Default: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-          Infinite:
-            Default: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-          Carousel:
-            Default: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-        ID_COLUMN: Activity.ID_COLUMN
-        ADDITIONAL_COLUMNS:[]
       ASSAYS_LIST:
         MODEL: Assay
         BASE_URL: glados.Settings.WS_BASE_URL + 'assay.json'
