@@ -21,7 +21,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @disableItemsSelection = arguments[0].disable_items_selection
       @viewID = (new Date()).getTime().toString()
 
-      if @collection.getMeta('columns_description')?
+      if @collection.configIsReady()?
         @initColumnsHandler()
       else
         @collection.on(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.CONFIG_FETCHING_STATE_CHANGED,

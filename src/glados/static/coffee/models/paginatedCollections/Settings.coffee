@@ -512,22 +512,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Default: TargetComponent.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
           Carousel:
             Default: TargetComponent.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-    CLIENT_SIDE_ES_COLLECTIONS:
-      BIOACTIVITY_SUMMARY_LIST:
-        MODEL: Activity
-        DEFAULT_PAGE_SIZE: 20
-        AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        ID_COLUMN: Activity.ID_COLUMN
-        COLUMNS: Activity.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: []
-          Cards:
-            Default: []
-          Infinite:
-            Default: []
-          Carousel:
-            Default: []
 
 glados.models.paginatedCollections.Settings.ES_INDEX_2_GLADOS_SETTINGS= {}
 
