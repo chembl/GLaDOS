@@ -302,16 +302,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return list
 
-    getNewDrugList: ->
-      list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.DRUG_LIST)
-      list.parse = (data) ->
-        data.page_meta.records_in_page = data.molecules.length
-        @setMeta('data_loaded', true)
-        @resetMeta(data.page_meta)
-        return data.molecules
-
-      return list
-
     getNewSubstructureSearchResultsList: ->
       list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.SUBSTRUCTURE_RESULTS_LIST)
 
