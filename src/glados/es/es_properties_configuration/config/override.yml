@@ -1,18 +1,25 @@
 chembl_molecule:
   'molecule_properties.full_mwt':
     label: 'Molecular Weight'
+    label_mini: 'Mol. Wt.'
   '_metadata.related_targets.count':
     label: 'Targets'
+    label_mini: 'Targets'
   '_metadata.related_activities.count':
     label: 'Bioactivities'
+    label_mini: 'Compounds'
   'molecule_properties.alogp':
     label: 'AlogP'
+    label_mini: 'AlogP'
   'molecule_properties.psa':
     label: 'PSA'
+    label_mini: 'PSA'
   'molecule_properties.hba':
     label: 'HBA'
+    label_mini: 'HBA'
   'molecule_properties.hbd':
     label: 'HBD'
+    label_mini: 'HBD'
   'molecule_properties.num_ro5_violations':
     label: '#RO5 Violations'
   'molecule_properties.rtb':
@@ -93,8 +100,10 @@ chembl_molecule:
 chembl_assay:
   '_metadata.related_compounds.count':
     label: 'Compounds'
+    label_mini: 'Compounds'
   '_metadata.related_activities.count':
     label: 'Activities'
+    label_mini: 'Activities'
   'bao_format':
     label: 'BAO Format ID'
   'bao_label':

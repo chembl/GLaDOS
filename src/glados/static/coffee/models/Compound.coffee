@@ -804,11 +804,7 @@ Compound.PROPERTIES_VISUAL_CONFIG = {
 }
 
 Compound.COLUMNS = {
-  CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_chembl_id'
-    link_base: 'report_card_url'
-    image_base_url: 'image_url'
-    hide_label: true
+
   SYNONYMS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     comparator: 'molecule_synonyms'
     parse_function: (values) -> _.uniq(v.molecule_synonym for v in values).join(', ')
@@ -1138,7 +1134,6 @@ Compound.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS_SIMILARITY = _.union(
 Compound.MINI_REPORT_CARD =
   LOADING_TEMPLATE: 'Handlebars-Common-MiniRepCardPreloader'
   TEMPLATE: 'Handlebars-Common-MiniReportCard'
-  COLUMNS: Compound.COLUMNS_SETTINGS.MINI_REPORT_CARD
 
 Compound.getCompoundsListURL = (filter, isFullState=false, fragmentOnly=false) ->
 

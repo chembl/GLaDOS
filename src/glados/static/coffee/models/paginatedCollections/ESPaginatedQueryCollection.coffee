@@ -249,7 +249,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
           propertiesConfigModels[viewKey] = propertiesConfigModel
 
-          propertiesConfigModel.on('error', (jqXHR) -> reject(jqXHR))
+          propertiesConfigModel.on('error', (model, jqXHR) -> reject(jqXHR))
           propertiesConfigModel.once('change:parsed_configuration', ->
             numLoadedGroups++
             if numLoadedGroups == totalGroupsToLoad
