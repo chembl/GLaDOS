@@ -163,7 +163,6 @@ glados.models.Tissue.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS = _.union(
 glados.models.Tissue.MINI_REPORT_CARD =
   LOADING_TEMPLATE: 'Handlebars-Common-MiniRepCardPreloader'
   TEMPLATE: 'Handlebars-Common-MiniReportCard'
-  COLUMNS: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
 
 glados.models.Tissue.getTissuesListURL = (filter, isFullState=false, fragmentOnly=false) ->
 

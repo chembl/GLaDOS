@@ -73,11 +73,6 @@ chembl_molecule:
     'molecule_properties.num_lipinski_ro5_violations', 'molecule_properties.mw_monoisotopic',
     'molecule_properties.molecular_species', 'molecule_properties.full_molformula',
     'molecule_structures.canonical_smiles']
-  mini_report_card:
-    default: ['molecule_chembl_id', 'pref_name', 'molecule_synonyms', 'molecule_type', 'max_phase',
-    'molecule_properties.full_mwt', 'molecule_properties.alogp', 'molecule_properties.psa', 'molecule_properties.hba',
-    'molecule_properties.hbd', 'molecule_properties.num_ro5_violations', '_metadata.related_targets.count',
-    '_metadata.related_activities.count']
 chembl_assay:
   download:
     default: ['assay_chembl_id', 'assay_type', 'description', 'assay_organism', '_metadata.related_compounds.count',

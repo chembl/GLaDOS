@@ -182,7 +182,6 @@ CellLine.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS = _.union(CellLine.COLUMNS_SE
 CellLine.MINI_REPORT_CARD =
   LOADING_TEMPLATE: 'Handlebars-Common-MiniRepCardPreloader'
   TEMPLATE: 'Handlebars-Common-MiniReportCard'
-  COLUMNS: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
 
 CellLine.getCellsListURL = (filter, isFullState=false, fragmentOnly=false) ->
 

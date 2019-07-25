@@ -247,7 +247,6 @@ Document.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS = _.union(Document.COLUMNS_SE
 Document.MINI_REPORT_CARD =
   LOADING_TEMPLATE: 'Handlebars-Common-MiniRepCardPreloader'
   TEMPLATE: 'Handlebars-Common-MiniReportCard'
-  COLUMNS: Document.COLUMNS_SETTINGS.RESULTS_LIST_CARD
 
 Document.getDocumentsListURL = (filter, isFullState=false, fragmentOnly=false) ->
 

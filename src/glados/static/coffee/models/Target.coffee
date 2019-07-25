@@ -443,7 +443,6 @@ Target.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS = _.union(Target.COLUMNS_SETTIN
 Target.MINI_REPORT_CARD =
   LOADING_TEMPLATE: 'Handlebars-Common-MiniRepCardPreloader'
   TEMPLATE: 'Handlebars-Common-MiniReportCard'
-  COLUMNS: Target.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
 
 Target.getTargetsListURL = (filter, isFullState=false, fragmentOnly=false) ->
 
