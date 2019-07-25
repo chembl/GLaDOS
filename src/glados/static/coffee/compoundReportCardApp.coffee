@@ -237,7 +237,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       embed_section_name: 'withdrawal_info'
       embed_identifier: compound.get('molecule_chembl_id')
       show_if: (model) -> model.attributes.withdrawn_flag == true
-      properties_to_show: Compound.COLUMNS_SETTINGS.WITHDRAWN_INFO_SECTION
+      properties_group: 'withdrawal_info'
 
     new glados.views.ReportCards.EntityDetailsInCardView
       model: compound
