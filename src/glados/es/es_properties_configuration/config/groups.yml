@@ -73,6 +73,8 @@ chembl_molecule:
     'molecule_properties.num_lipinski_ro5_violations', 'molecule_properties.mw_monoisotopic',
     'molecule_properties.molecular_species', 'molecule_properties.full_molformula',
     'molecule_structures.canonical_smiles']
+  compound_sources:
+    default: ['sources_list', 'additional_sources_list']
 chembl_assay:
   download:
     default: ['assay_chembl_id', 'assay_type', 'description', 'assay_organism', '_metadata.related_compounds.count',

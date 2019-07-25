@@ -5,6 +5,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
   idAttribute: 'molecule_chembl_id'
   defaults:
     fetch_from_elastic: true
+  indexName:'chembl_molecule'
   initialize: ->
 
     id = @get('id')
@@ -794,12 +795,25 @@ Compound.PROPERTIES_VISUAL_CONFIG = {
     format_class: 'number-cell-center'
   },
   'similarity': {
-      'show': true
-      'comparator': '_context.similarity'
-      'sort_disabled': false
-      'is_sorting': 0
-      'sort_class': 'fa-sort'
-      'is_contextual': true
+    'show': true
+    'comparator': '_context.similarity'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'is_contextual': true
+  }
+  'sources_list': {
+    parse_function: (values) -> _.unique(v.src_description for v in values)
+  }
+  'additional_sources_list': {
+    name_to_show_function: (model) ->
+
+      switch model.isParent()
+        when true then return 'Additional Sources From Alternate Forms:'
+        when false then return 'Additional Sources From Parent:'
+
+    col_value_function: (model) -> model.getAdditionalSources()
+    show_function: (model) -> model.hasAdditionalSources()
   }
 }
 

@@ -121,7 +121,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
           return false
         else
           return true
-      properties_to_show: Compound.COLUMNS_SETTINGS.COMPOUND_SOURCES_SECTION
+      properties_group: 'compound_sources'
       sort_alpha: true
       property_id_to_sort: 'compound_sources_list'
 

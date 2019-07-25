@@ -97,6 +97,11 @@ chembl_molecule:
   'drug_atc_codes_level_1':
     based_on: '_metadata.atc_classifications'
     label: 'Level 1 ATC Codes'
+  'sources_list':
+    label: 'Compound Sources'
+    based_on: '_metadata.compound_records'
+  'additional_sources_list':
+    based_on: '_metadata.compound_records'
 chembl_assay:
   '_metadata.related_compounds.count':
     label: 'Compounds'
