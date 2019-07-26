@@ -180,7 +180,7 @@
         <div class="row center-align">
 
             <input type="checkbox" class="BCK-show-hide-column filled-in"
-                   data-comparator='SELECT-ALL' id="check-{{random_num}}"
+                   data-prop-id='SELECT-ALL' id="check-{{random_num}}"
                    {{#if all_selected}} checked="checked" {{/if}}
             />
             <label for="check-{{random_num}}">Select All</label>
@@ -191,23 +191,21 @@
 
           {{#each all_columns}}
 
-          <div class="col s6 m3 l2 drag-dummy BCK-drag-dummy" data-comparator='{{this.comparator}}'>
+          <div class="col s6 m3 l2 drag-dummy BCK-drag-dummy" data-prop-id='{{this.prop_id}}'>
           </div>
 
-          <div class="col s6 m3 l2 sortable-item BCK-draggable" draggable='true' data-comparator='{{this.comparator}}'
-            data-prop-id='{{this.prop_id}}'>
+          <div class="col s6 m3 l2 sortable-item BCK-draggable" draggable='true' data-prop-id='{{this.prop_id}}'>
 
             <div class="item-content">
 
               <div class="item-checkbox">
 
                   <input type="checkbox" class="BCK-show-hide-column filled-in"
-                       id="{{this.modal_id}}-check-{{this.prop_id}}"
-                       data-comparator='{{this.comparator}}' data-prop-id='{{this.prop_id}}'
+                       id="{{this.modal_id}}-check-{{this.prop_id}}" data-prop-id='{{this.prop_id}}'
                        {{#if this.show}} checked="checked" {{/if}}
                 />
 
-                  <label for="{{this.modal_id}}-check-{{this.comparator}}">
+                  <label for="{{this.modal_id}}-check-{{this.prop_id}}">
                   {{this.position}}.
                   </label>
 

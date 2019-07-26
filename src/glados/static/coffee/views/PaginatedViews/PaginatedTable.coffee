@@ -75,19 +75,19 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     handleShowHideColumns: ->
 
-      exitColsComparators = @columnsHandler.get('exit')
-      for comparator in exitColsComparators
+      exitColsIDs = @columnsHandler.get('exit')
+      for propID in exitColsIDs
 
-        $(@el).find('th[data-comparator="' + comparator + '"]').addClass('hidden_header')
-        $(@el).find('td[data-comparator="' + comparator + '"]').addClass('hidden_cell')
-        $(@el).find('.collection-item div[data-comparator="' + comparator + '"]').addClass('hidden_list_prop')
+        $(@el).find('th[data-prop-id="' + propID + '"]').addClass('hidden_header')
+        $(@el).find('td[data-prop-id="' + propID + '"]').addClass('hidden_cell')
+        $(@el).find('.collection-item div[data-prop-id="' + propID + '"]').addClass('hidden_list_prop')
 
-      enterColsComparators = @columnsHandler.get('enter')
-      for comparator in enterColsComparators
+      enterColsIDs = @columnsHandler.get('enter')
+      for propId in enterColsIDs
 
-        $(@el).find('th[data-comparator="' + comparator + '"]').removeClass('hidden_header')
-        $(@el).find('td[data-comparator="' + comparator + '"]').removeClass('hidden_cell')
-        $(@el).find('.collection-item div[data-comparator="' + comparator + '"]').removeClass('hidden_list_prop')
+        $(@el).find('th[data-prop-id="' + propId + '"]').removeClass('hidden_header')
+        $(@el).find('td[data-prop-id="' + propId + '"]').removeClass('hidden_cell')
+        $(@el).find('.collection-item div[data-prop-id="' + propId + '"]').removeClass('hidden_list_prop')
 
       @bindFunctionLinks()
       @checkIfTableNeedsToScroll()
@@ -101,11 +101,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       compareFunction = (a, b) ->
 
-        comparatorA = $(a).attr('data-comparator')
-        comparatorB = $(b).attr('data-comparator')
+        propIDA = $(a).attr('data-prop-id')
+        propIDB = $(b).attr('data-prop-id')
 
-        positionA = columnsIndex[comparatorA].position
-        positionB = columnsIndex[comparatorB].position
+        positionA = columnsIndex[propIDA].position
+        positionB = columnsIndex[propIDB].position
 
         return positionA - positionB
 
@@ -164,7 +164,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if @collection.getMeta('columns_description').Table.remove_striping
         $elem.removeClass('striped')
 
-      console.log('DEBUG')
       allColumns = @getAllColumns()
       @numVisibleColumnsList.push allColumns.length
       # this is a workaround to the problem
