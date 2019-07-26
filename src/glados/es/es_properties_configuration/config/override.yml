@@ -102,6 +102,13 @@ chembl_molecule:
     based_on: '_metadata.compound_records'
   'additional_sources_list':
     based_on: '_metadata.compound_records'
+  'clinical_trials_terms':
+    based_on: 'molecule_synonyms'
+  'chochrane_terms':
+    base_on: 'pref_name'
+    type: 'string'
+    aggregatable: false
+    sortable: true
 chembl_assay:
   '_metadata.related_compounds.count':
     label: 'Compounds'

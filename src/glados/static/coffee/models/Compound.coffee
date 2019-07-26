@@ -815,6 +815,32 @@ Compound.PROPERTIES_VISUAL_CONFIG = {
     col_value_function: (model) -> model.getAdditionalSources()
     show_function: (model) -> model.hasAdditionalSources()
   }
+  'chochrane_terms': {
+    comparator: 'pref_name'
+    additional_parsing:
+      encoded_value: (value) -> value.replace(/[ ]/g, '+')
+  }
+  'clinical_trials_terms': {
+    parse_function: (values) -> _.uniq(v.molecule_synonym for v in values).join(', ')
+    parse_from_model: true
+    additional_parsing:
+      search_term: (model) ->
+        synonyms = if model.isParent() then model.getOwnAndAdditionalSynonyms() else model.getSynonyms()
+        tradenames = if model.isParent() then model.getOwnAndAdditionalTradenames() else model.getTradenames()
+        fullList = _.union(synonyms, tradenames)
+        linkText = _.uniq(v for v in fullList).join(' OR ')
+
+        maxTextLength = 100
+        if linkText.length > maxTextLength
+          linkText = "#{linkText.substring(0, (maxTextLength-3))}..."
+
+        return linkText
+      encoded_search_term: (model) ->
+        synonyms = if model.isParent() then model.getOwnAndAdditionalSynonyms() else model.getSynonyms()
+        tradenames = if model.isParent() then model.getOwnAndAdditionalTradenames() else model.getTradenames()
+        fullList = _.union(synonyms, tradenames)
+        return encodeURIComponent(_.uniq(v for v in fullList).join(' OR '))
+  }
 }
 
 Compound.COLUMNS = {

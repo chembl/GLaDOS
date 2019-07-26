@@ -77,6 +77,8 @@ chembl_molecule:
     default: ['sources_list', 'additional_sources_list']
   withdrawal_info:
    default: ['withdrawn_year', 'withdrawn_reason', 'withdrawn_country', 'withdrawn_class']
+  clinical_data:
+    default: ['clinical_trials_terms', 'chochrane_terms']
 chembl_assay:
   download:
     default: ['assay_chembl_id', 'assay_type', 'description', 'assay_organism', '_metadata.related_compounds.count',

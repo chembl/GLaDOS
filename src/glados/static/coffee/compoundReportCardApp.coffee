@@ -259,7 +259,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       embed_section_name: 'clinical_data'
       embed_identifier: compound.get('molecule_chembl_id')
       show_if: (model) -> model.attributes.pref_name?
-      properties_to_show: Compound.COLUMNS_SETTINGS.CLINICAL_DATA_SECTION
+      properties_group: 'clinical_data'
 
     new glados.views.ReportCards.EntityDetailsInCardView
       model: compound
