@@ -80,16 +80,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     initColumnsHandler: ->
 
-      console.log('INIT COLUMNS HANDLER?')
       if not @collection.configIsReady()
-        console.log('CONFIG IS NOT READY YET')
         return
 
       if @columnsHandler?
-        console.log('COLUMNS HANDLER IS ALREADY CREATED')
         return
-
-      console.log('YES, INIT COLUMNS HANDLER')
 
       defaultColumns = @getDefaultColumns()
       additionalColumns = @getAdditionalColumns()
@@ -222,11 +217,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # it handle the case when the items are shown as list, table, or infinite browser
     fillTemplates: ->
 
-      console.log('FILL TEMPLATES')
       @initColumnsHandler()
       $elem = $(@el).find('.BCK-items-container')
       visibleColumns = @getVisibleColumns()
-      console.log('visibleColumns: ', visibleColumns)
       @numVisibleColumnsList.push visibleColumns.length
 
       for i in [0..$elem.length - 1]

@@ -276,7 +276,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         for key, value of newPropsComparators
           propsComparatorsSet[key] = key
 
-      console.log('columnsDescription: ', columnsDescription)
       @setMeta('columns_description', columnsDescription)
       @setMeta('props_comparators_set', propsComparatorsSet)
       @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.COLUMNS_CONFIGURATION_LOADED)
