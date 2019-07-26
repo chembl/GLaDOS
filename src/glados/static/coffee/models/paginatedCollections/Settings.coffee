@@ -200,7 +200,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           'molecule_properties.num_ro5_violations', 'molecule_properties.full_molformula', 'molecule_type',
           'natural_product', 'polymer_flag', 'structure_type']
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        COLUMNS: Compound.COLUMNS_SETTINGS.ALL_COLUMNS
         CONFIG_GROUPS:
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Carousel}": 'alternate_forms_carousel'
         ID_COLUMN: Compound.ID_COLUMN
@@ -241,7 +240,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BROWSE_LIST_URL: Compound.getCompoundsListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
-        COLUMNS: Compound.COLUMNS_SETTINGS.ALL_COLUMNS
         PERMANENT_COMPARATORS_TO_FETCH:['molecule_chembl_id',
           'molecule_properties.num_ro5_violations', 'molecule_properties.full_molformula', 'molecule_type',
           'natural_product', 'polymer_flag', 'structure_type']
@@ -409,7 +407,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BASE_URL: 'base_url is set by initURL'
         DEFAULT_PAGE_SIZE: "needs to be set up outside, for some reason it doesn't work"
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        COLUMNS: Compound.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
             Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL

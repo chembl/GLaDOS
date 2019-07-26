@@ -1009,33 +1009,7 @@ Compound.COLUMNS.CHEMBL_ID = {
 Compound.ID_COLUMN = Compound.COLUMNS.CHEMBL_ID
 
 Compound.COLUMNS_SETTINGS = {
-  ALL_COLUMNS: (->
-    colsList = []
-    for key, value of Compound.COLUMNS
-      colsList.push value
-    return colsList
-  )()
-  RESULTS_LIST_TABLE: [
-    Compound.COLUMNS.CHEMBL_ID,
-  ]
-#  RESULTS_LIST_TABLE: [
-#    Compound.COLUMNS.CHEMBL_ID,
-#    Compound.COLUMNS.PREF_NAME
-#    Compound.COLUMNS.SYNONYMS,
-#    Compound.COLUMNS.MOLECULE_TYPE,
-#    Compound.COLUMNS.MAX_PHASE,
-#    Compound.COLUMNS.FULL_MWT,
-#    Compound.COLUMNS.NUM_TARGETS,
-#    Compound.COLUMNS.BIOACTIVITIES_NUMBER,
-#    Compound.COLUMNS.ALOGP,
-#    Compound.COLUMNS.PSA,
-#    Compound.COLUMNS.HBA,
-#    Compound.COLUMNS.HBD,
-#    Compound.COLUMNS.RO5,
-#    Compound.COLUMNS.ROTATABLE_BONDS,
-#    Compound.COLUMNS.RULE_OF_THREE_PASS,
-#    Compound.COLUMNS.QED_WEIGHTED
-#  ]
+
   RESULTS_LIST_TABLE_SIMILARITY: [
     Compound.COLUMNS.SIMILARITY_ELASTIC
     Compound.COLUMNS.CHEMBL_ID,
