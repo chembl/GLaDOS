@@ -619,14 +619,14 @@ class CompoundReportCardApp extends glados.ReportCardApp
       embed_section_name: 'helm_notation'
       embed_identifier: compound.get('molecule_chembl_id')
       show_if: (model) ->
-        HELMNotation = glados.Utils.getNestedValue(model.attributes, Compound.COLUMNS.HELM_NOTATION.comparator,
+        HELMNotation = glados.Utils.getNestedValue(model.attributes, 'helm_notation',
           forceAsNumber=false, customNullValueLabel=undefined, returnUndefined=true)
 
         if not HELMNotation?
           return false
         else
           return true
-      properties_to_show: Compound.COLUMNS_SETTINGS.HELM_NOTATION_SECTION
+      properties_group: 'helm_notation'
       after_render: (thisView) ->
 
         $container = $(thisView.el).find('.BCK-HELMNotationContainer')
