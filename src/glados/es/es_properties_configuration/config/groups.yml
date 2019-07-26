@@ -81,6 +81,8 @@ chembl_molecule:
     default: ['clinical_trials_terms', 'chochrane_terms']
   helm_notation:
     default: ['helm_notation']
+  biocomponents:
+    default: ['molecule_chembl_id', 'biotherapeutic.biocomponents']
 chembl_assay:
   download:
     default: ['assay_chembl_id', 'assay_type', 'description', 'assay_organism', '_metadata.related_compounds.count',

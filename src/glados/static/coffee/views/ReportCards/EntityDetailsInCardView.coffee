@@ -33,7 +33,7 @@ glados.useNameSpace 'glados.views.ReportCards',
 
         [columnsWithValues, highlights] = glados.Utils.getColumnsWithValuesAndHighlights(propertiesToShow,
           thisView.model)
-        protertiesWithValuesIndex = _.indexBy(columnsWithValues, 'id')
+        protertiesWithValuesIndex = _.indexBy(columnsWithValues, 'template_id')
 
         if thisView.config.sort_alpha
 

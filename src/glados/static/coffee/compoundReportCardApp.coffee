@@ -663,7 +663,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       embed_section_name: 'biocomponents'
       embed_identifier: compound.get('molecule_chembl_id')
       show_if: (model) ->
-        biocomponents = glados.Utils.getNestedValue(model.attributes, Compound.COLUMNS.BIOCOMPONENTS.comparator,
+        biocomponents = glados.Utils.getNestedValue(model.attributes, 'biotherapeutic.biocomponents',
           forceAsNumber=false, customNullValueLabel=undefined, returnUndefined=true)
 
         if not biocomponents?
@@ -673,7 +673,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
           return false
 
         return true
-      properties_to_show: Compound.COLUMNS_SETTINGS.BIOCOMPONENTS_SECTION
+      properties_group: 'biocomponents'
       after_render: (thisView) ->
 
         $buttonsContainers = $(thisView.el).find('.BCK-BioCompCroppedContainer')
