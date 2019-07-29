@@ -53,7 +53,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         throw 'ERROR: '+es_index+' was not found in the Generated Schema for GLaDOS!'
       gs_data = glados.models.paginatedCollections.esSchema.GLaDOS_es_GeneratedSchema[es_index]
       cur_pos = 1
-      getFacetData = (prop_data)->
+      getFacetData = (prop_data, prop_name)->
         sort = null
         intervals = null
         report_card_entity = null
@@ -77,6 +77,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
             initial_sort: sort
             initial_intervals: intervals
             report_card_entity: report_card_entity
+            prop_id: prop_name
           }
         throw 'ERROR: '+prop_name+' is not an aggregatable property!'
 
@@ -86,7 +87,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
             prop_name = prop_i
           else if _.isObject(prop_i)
             prop_name = prop_i.property
-          facets[prop_name] = getFacetData(prop_i)
+          facets[prop_name] = getFacetData(prop_i, prop_name)
           facets[prop_name].show = true
       if defaults_hidden?
         for prop_i in defaults_hidden
@@ -94,7 +95,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
             prop_name = prop_i
           else if _.isObject(prop_i)
             prop_name = prop_i.property
-          facets[prop_name] = getFacetData(prop_i)
+          facets[prop_name] = getFacetData(prop_i, prop_name)
           facets[prop_name].show = false
       return facets
 

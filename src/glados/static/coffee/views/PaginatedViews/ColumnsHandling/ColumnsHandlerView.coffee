@@ -33,6 +33,7 @@ glados.useNameSpace 'glados.views.PaginatedViews.ColumnsHandling',
     renderModalContent: ->
 
       if @facetsMode
+        console.log('DEBUG')
         allColumns = @getAllColumnsFromFacets()
         @prepareFacetListForView(allColumns)
 

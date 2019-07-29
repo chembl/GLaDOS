@@ -4,6 +4,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     setShowHideFGroupStatus: (identifier, show) ->
 
+      console.log('setShowHideFGroupStatus')
       @get('all_facets_groups')[identifier].show = show
       @trigger(glados.models.paginatedCollections.FacetGroupVisibilityHandler.EVENTS.COLUMNS_SHOW_STATUS_CHANGED)
 

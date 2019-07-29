@@ -69,7 +69,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     setShowHideColumnStatus: (identifier, show) ->
 
-      console.log('setShowHideAllColumnStatus')
       allColumnsIndex = @get('columns_index')
       changedColumn = allColumnsIndex[identifier]
       changedColumn.show = show
@@ -112,7 +111,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       if receivingProperty == draggedProperty
         return
 
-      console.log('CHANGE COLUMNS ORDER')
       allColumns = @get('all_columns')
       draggedColumn = undefined
 
