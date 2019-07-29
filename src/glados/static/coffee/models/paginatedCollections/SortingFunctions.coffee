@@ -3,14 +3,20 @@ glados.useNameSpace 'glados.models.paginatedCollections',
   SortingFunctions:
     # organises the information of the columns that are going to be sorted.
     # returns true if the sorting needs to be descending, false otherwise.
-    setupColSorting: (columns, comparator) ->
+    setupColSorting: (columns, propID) ->
 
+      console.log('setupColSorting ')
       is_descending = false
 
       for col in columns
 
-        # set is_sorting attribute for the comparator column
-        if col.comparator == comparator
+        if col.prop_id?
+          currentColID = col.prop_id
+        else
+          currentColID = col.comparator
+
+        # set is_sorting attribute for the propID column
+        if currentColID == propID
 
           col.is_sorting = switch col.is_sorting
             when 0 then 1

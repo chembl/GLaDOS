@@ -270,12 +270,22 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       columnsDescription = {}
       propsComparatorsSet = {}
+      allColumns = []
+
       for viewKey, configModel of propertiesConfigModels
         columnsDescription[viewKey] = configModel.get('parsed_configuration')
         newPropsComparators = configModel.get('props_comparators_set')
+        currentAllColumns = configModel.get('all_columns')
+
+        for column in currentAllColumns
+          propId = column.prop_id
+          if not propsComparatorsSet[propId]
+            allColumns.push(column)
+
         for key, value of newPropsComparators
           propsComparatorsSet[key] = key
 
+      @setMeta('columns', allColumns)
       @setMeta('columns_description', columnsDescription)
       @setMeta('props_comparators_set', propsComparatorsSet)
       @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.COLUMNS_CONFIGURATION_LOADED)
@@ -811,10 +821,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # Sorting functions
     # ------------------------------------------------------------------------------------------------------------------
 
-    sortCollection: (comparator) ->
+    sortCollection: (colID) ->
       @resetCache() unless not @getMeta('enable_collection_caching')
       columns = @getAllColumns()
-      @setupColSorting(columns, comparator)
+      @setupColSorting(columns, colID)
       @invalidateAllDownloadedResults()
       @setMeta('current_page', 1)
       @fetch()

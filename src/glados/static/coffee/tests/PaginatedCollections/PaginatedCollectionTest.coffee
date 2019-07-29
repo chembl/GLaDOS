@@ -32,8 +32,8 @@ describe "Paginated Collection", ->
       assert_chembl_ids(appDrugCCList, ["CHEMBL2218913", "CHEMBL614", "CHEMBL1200526"])
 
     it "sorts the collection by name (descending)", ->
-      appDrugCCList.resetMeta()
 
+      appDrugCCList.resetMeta()
       appDrugCCList.sortCollection('pref_name')
       appDrugCCList.sortCollection('pref_name')
 

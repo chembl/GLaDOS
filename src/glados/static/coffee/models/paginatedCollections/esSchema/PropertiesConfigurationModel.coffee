@@ -13,12 +13,17 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       customEntity = @get('entity')
       parsedConfiguration = {}
       propsComparatorsSet = {} #  An object is used instead of Set to avoid browser compatibility issues.
+      allColumns = []
       for subGroupKey, subGroup of response.properties
 
         parsedProperties = []
         for propertyDescription in subGroup
           parsedProperty = glados.models.paginatedCollections.ColumnsFactory2.generateColumn(propertyDescription, customEntity)
           parsedProperties.push(parsedProperty)
+
+          if not propsComparatorsSet[parsedProperty.comparator]?
+            allColumns.push(parsedProperty)
+
           propsComparatorsSet[parsedProperty.comparator] = parsedProperty.comparator
 
         if subGroupKey == 'default'
@@ -29,4 +34,5 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       return {
         'parsed_configuration': parsedConfiguration
         'props_comparators_set': propsComparatorsSet
+        'all_columns': allColumns
       }
