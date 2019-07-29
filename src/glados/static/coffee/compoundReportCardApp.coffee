@@ -179,8 +179,8 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     fetchList = ->
       metadata = compound.get('_metadata')
-      isApprovedDrug = metadata.hierarchy.is_approved_drug
-      if isApprovedDrug
+      show = metadata.hierarchy.is_approved_drug or compound.get('max_phase') <= 3
+      if show
         list.fetch({reset: true})
       else
         tableView.hideSection()
