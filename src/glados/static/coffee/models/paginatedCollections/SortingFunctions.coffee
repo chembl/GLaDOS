@@ -5,7 +5,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # returns true if the sorting needs to be descending, false otherwise.
     setupColSorting: (columns, propID) ->
 
-      console.log('setupColSorting ')
       is_descending = false
 
       for col in columns

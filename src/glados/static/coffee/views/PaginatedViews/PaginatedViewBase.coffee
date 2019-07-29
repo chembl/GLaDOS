@@ -390,9 +390,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       @showPaginatedViewPreloader() unless @collection.getMeta('server_side') != true
       sortIcon = $target.find('.sort-icon')
-      comparator = sortIcon.attr('data-comparator')
+      colID = sortIcon.attr('data-prop-id')
 
-      @triggerCollectionSort(comparator)
+      @triggerCollectionSort(colID)
 
     triggerCollectionSort: (comparator) ->
 
