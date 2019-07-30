@@ -178,12 +178,8 @@ class CompoundReportCardApp extends glados.ReportCardApp
     compound = CompoundReportCardApp.getCurrentCompound()
 
     fetchList = ->
-      metadata = compound.get('_metadata')
-      isApprovedDrug = metadata.hierarchy.is_approved_drug
-      if isApprovedDrug
-        list.fetch({reset: true})
-      else
-        tableView.hideSection()
+      list.fetch({reset: true})
+
 
     compound.on 'change', fetchList, @
     if GlobalVariables['EMBEDED']

@@ -209,6 +209,7 @@ glados.useNameSpace 'glados',
         if returnCol.id?
           returnCol.template_id = returnCol.id.replace(/\./g, '_dot_')
         returnCol.prop_id = returnCol.id
+        returnCol.prop_id ?= colDescription.comparator
 
       addNameToShow: (returnCol, colDescription, model) ->
 
