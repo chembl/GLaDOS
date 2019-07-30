@@ -207,8 +207,11 @@ else:
     ELASTICSEARCH_HOST = elasticsearch_config.get('host')
 
     if RUN_ENV == RunEnvs.TRAVIS:
+        print('TRAVIS: ')
         ELASTICSEARCH_USERNAME = os.getenv('ELASTICSEARCH_USERNAME')
         ELASTICSEARCH_PASSWORD = os.getenv('ELASTICSEARCH_PASSWORD')
+        print('ELASTICSEARCH_USERNAME: ', ELASTICSEARCH_USERNAME)
+        print('ELASTICSEARCH_PASSWORD: ', ELASTICSEARCH_PASSWORD)
     else:
         ELASTICSEARCH_USERNAME = elasticsearch_config.get('username')
         ELASTICSEARCH_PASSWORD = elasticsearch_config.get('password')
