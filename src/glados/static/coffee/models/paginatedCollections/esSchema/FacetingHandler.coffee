@@ -455,6 +455,9 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
             }
         else
           filter_terms_query = {term: {}}
+          if @js_type == Boolean
+            facet_key = parseInt(facet_key)
+            facet_key = facet_key == 1
           filter_terms_query.term[@es_property_name] = facet_key
       else if @faceting_type == FacetingHandler.INTERVAL_FACETING
         filter_terms_query = {range: {}}

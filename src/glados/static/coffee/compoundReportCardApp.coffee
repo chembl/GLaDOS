@@ -180,7 +180,6 @@ class CompoundReportCardApp extends glados.ReportCardApp
     fetchList = ->
       list.fetch({reset: true})
 
-
     compound.on 'change', fetchList, @
     if GlobalVariables['EMBEDED']
       compound.fetch()
