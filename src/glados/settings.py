@@ -200,6 +200,8 @@ if BLOGGER_ENABLED:
 # ----------------------------------------------------------------------------------------------------------------------
 # ElasticSearch
 # ----------------------------------------------------------------------------------------------------------------------
+print('ELASTICSEARCH----------------------------------------------------')
+print('RUN_ENV: ', RUN_ENV)
 elasticsearch_config = run_config.get('elasticsearch')
 if elasticsearch_config is None:
     raise GladosSettingsError("You must provide the elasticsearch configuration")
