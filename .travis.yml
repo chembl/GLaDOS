@@ -1,7 +1,10 @@
 sudo: required
 dist: xenial
 env:
+  matrix:
   - MOZ_HEADLESS=1
+  - secure: l45NhE326UCKnZdJQfGJ0jnfPMzJ6f4+RVZrYKbqufvy8WRWlrUo8zJfc7T5tuDRCfP4gcDPd7qo/3O6wGCnT/PrsyT0LH0sS6DNJmbXk9Bht7zFyzG7WL6cPHBFUubxAqFcH1Pa/kr/klE+UZILyv0qmBavjpbkrjlUqPGKRpOp4xu5WvQ4uS+PitqrPcizRg0R49oqAEsqBz2RH9CMJvxv69QTwiEwPW3RydZ0du6lf6QLtZxEO/xCwy+Tvw1dAYXN5zpXF4umVDyqgs8vEHQRqiMdkca7iiYC2OEyF6qd78jFK+ViF+7sHmvCgpzQmXFoUqzp1wZ1XN3qkB20LaEfay7NDhHxwBb3xD3z9BI83SwTBIB0Ulrtk2I9hTHyfLFXmlvnoOMMgPBTUundLpI2iRCrRfK7O7j1UI8/Q/T+hYHFRKdxAT0rpXCYZ0cwW3ZVM9EminRA3S1Jxl2vCxJE8c3shzILxwb5JZNjBhb+RhRbBZ92SfE5yPv5syvufM6fj9hOn2uONTfPT7JX4TtPeMeJ8Bjd/Q+xWcnsgTMAU9de00NJdsTcyEx3pY1b782iM/qIx6GfcOuXU8O4g7v3PN4sgqg+zHizyA+WRgM3nGj2YoMPYe2bPb51UxY4q9eDWNCVPtD9/+hjKdOFTzIr4dxSF6uIqmotvK0QTWs=
+  - secure: dB94r/Jzsl7Y1FoeEIIb+YK3fjmPch4tGlM4fclQ2UH4LS+rWVYiDdpKTK7h3FxpqGB34IzflZne4a/m9awYNfKSJO7jF84UNUAtfUzkMY7AA6Du9QlAxlhJCm6cyC6ea/wKr/KHEHnN+tPbUb0jBXu5Fl2X7rVgFYhNBQFAYRNkTZ+rSxn/5iLIaQFNCOn6UO/d15xH3k8zRvwpKZKwQLKwaZZY4nZJA0AEHGAbMUBmJ7iZ2oEdmbLUnmRX9Vfw3Vjuy7HkQn3HF26rZrIE9Mz3etaa7nm6h3nPrfV8DB+TeW5kJEANBU1VMnDUgy94VlB5+lL6SZV1ZJgxJvuDDnUgQAtyTM4mYK6ZfUDbbYwm1gVpPf9c75pYvpRbPmvcz5Lph397zttk+gOth6FZnixxtcvsCV98+mTNwdK6qNjqXnrl8o5bHihg6txB/xXs8ZUrfaIvLmeEknCQb1EL0cKXzfEUKWPwmMzkTf5M1tJHrvhQuKIEVcOI6mFhio0hMuuETDsQD8si9l/38x1QIFiNaoMZmGgrE38NwbfkcTUBCwapLISdAIT0R3Hh8CQK10uP1ZpG9NGUjjvBD80qFxrCkbB9BxlDsI0K/HryVtIvnkmNDcVOq2Gwybl0cC1q8s69R9PNxqRamSWXv3Hs+O1NVbjpKV+ShZkQTFufFUI=
 addons:
   firefox: latest
   apt:
@@ -13,10 +16,10 @@ language: python
 python:
 - '3.5'
 before_install:
-  - wget https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz
-  - mkdir geckodriver
-  - tar -xzf geckodriver-v0.24.0-linux64.tar.gz -C geckodriver
-  - export PATH=$PATH:$PWD/geckodriver
+- wget https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz
+- mkdir geckodriver
+- tar -xzf geckodriver-v0.24.0-linux64.tar.gz -C geckodriver
+- export PATH=$PATH:$PWD/geckodriver
 install:
 - pip install -r requirements.txt
 - python setup.py install
@@ -26,7 +29,8 @@ before_script:
 - "./manage_glados_no_install.sh makemigrations"
 - "./manage_glados_no_install.sh migrate"
 - "./manage_glados_no_install.sh compilemessages"
-- "./manage_glados_no_install.sh runserver 8000  2>&1 | grep -v 200 | grep -v 304 &"
+- "./manage_glados_no_install.sh runserver 8000  2>&1 | grep -v 200 | grep -v 304
+  &"
 - sleep 60
 script:
 - "./run_tests_no_install.sh"
