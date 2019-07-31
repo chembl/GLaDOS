@@ -629,7 +629,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
         config =
             value: $container.attr('data-value')
             download:
-              filename: "#{thisView.model.get('molecule_chembl_id')}-HELMNotation.txt"
+              filename: "#{thisView.model.get('molecule_chembl_id')}-HELMNotation.helm"
               value: $container.attr('data-value')
               tooltip: 'Download'
 
