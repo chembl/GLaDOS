@@ -213,9 +213,11 @@ else:
         ELASTICSEARCH_USERNAME = 'glados'
         ELASTICSEARCH_PASSWORD = os.getenv('ELASTICSEARCH_PASSWORD')
         print('ELASTICSEARCH_USERNAME: ', ELASTICSEARCH_USERNAME)
+        print('ELASTICSEARCH_PASSWORD: ', list(ELASTICSEARCH_PASSWORD))
     else:
         ELASTICSEARCH_USERNAME = elasticsearch_config.get('username')
         ELASTICSEARCH_PASSWORD = elasticsearch_config.get('password')
+
 
     print('ELASTICSEARCH_HOST: ', ELASTICSEARCH_HOST)
     ELASTICSEARCH_EXTERNAL_URL = elasticsearch_config.get('public_host')
