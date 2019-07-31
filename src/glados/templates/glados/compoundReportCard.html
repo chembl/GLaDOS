@@ -145,6 +145,17 @@
 
                     </div>
 
+                </div><div id="ClinicalData" style="display: none;">
+                    {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
+
+                    <div class="row BCK-section-content">
+
+                        {% with is_dynamic=True %}
+                            {% include "glados/CompoundReportCardParts/ClinicalData.html" %}
+                        {% endwith %}
+
+                    </div>
+
                 </div>
 
                 <div id="SimilarCompounds" style="display: none;">

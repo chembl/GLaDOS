@@ -144,6 +144,8 @@ chembl_assay:
     label: 'Last Page'
   'assay_parameters':
     label: 'Assay Parameters'
+  'assay_parameters_report_card_rows':
+    based_on: 'assay_parameters'
 chembl_target:
   'pref_name':
     label: 'Name'
