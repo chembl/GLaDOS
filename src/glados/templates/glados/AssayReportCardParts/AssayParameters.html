@@ -1,0 +1,37 @@
+{% extends "glados/base/basic_table_card.html" %}
+{% block card_id %}AssayParametersDataCard{% endblock %}
+
+{% block general_content %}
+{% verbatim %}
+<script id='Handlebars-AssayParameters' type="text/x-handlebars-template">
+
+        <div class="card-content ebi-links">
+
+            <table class="striped">
+
+                <tr>
+                    <th>Parameter:</th>
+                    <th>Value:</th>
+                </tr>
+
+                {{#each assay_parameters_report_card_rows.value}}
+                <tr>
+                    <td>{{this.standard_type}}</td>
+                    <td>{{this.text_value}}</td>
+                </tr>
+                {{/each}}
+
+
+            </table>
+
+        </div>
+
+
+    </div>
+
+
+</script>
+
+{% endverbatim %}
+<div class="BCK-Details-Container" data-hb-template="Handlebars-AssayParameters"></div>
+{% endblock %}

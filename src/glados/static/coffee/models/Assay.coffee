@@ -5,6 +5,7 @@ Assay = Backbone.Model.extend
   idAttribute: 'assay_chembl_id'
   defaults:
     fetch_from_elastic: true
+  indexName:'chembl_assay'
   initialize: ->
 
     id = @get('id')
@@ -129,6 +130,25 @@ Assay.PROPERTIES_VISUAL_CONFIG = {
         param_groups.push(useful_params.join(' '))
 
       return param_groups.join(' | ')
+  }
+  'assay_parameters_report_card_rows': {
+    parse_function: (raw_parameters) ->
+      console.log('raw_parameters: ', raw_parameters)
+      rows = []
+      for paramsObj in raw_parameters
+
+        if paramsObj.standard_value?
+          textValue = "#{paramsObj.standard_relation} #{paramsObj.standard_value} #{paramsObj.standard_units}"
+        else
+          textValue = paramsObj.standard_text_value
+
+        currentRow = {
+          standard_type: paramsObj.standard_type
+          text_value: textValue
+        }
+        rows.push(currentRow)
+      console.log('parsed rows: ', rows)
+      return rows
   }
 }
 Assay.COLUMNS = {

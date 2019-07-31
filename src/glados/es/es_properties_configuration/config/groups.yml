@@ -99,6 +99,8 @@ chembl_assay:
     '_metadata.document_data.doi', '_metadata.document_data.year', '_metadata.document_data.journal',
     '_metadata.document_data.volume', '_metadata.document_data.first_page','_metadata.document_data.last_page',
     'assay_parameters']
+  assay_parameters:
+    default: ['assay_parameters_report_card_rows']
 chembl_target:
   download:
     default: ['target_chembl_id', 'pref_name', 'uniprot_accessions', 'target_type', 'organism',

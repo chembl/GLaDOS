@@ -18,6 +18,7 @@ class AssayReportCardApp extends glados.ReportCardApp
 
     AssayReportCardApp.initAssayBasicInformation()
     AssayReportCardApp.initCurationSummary()
+    AssayReportCardApp.initAssayParams()
     AssayReportCardApp.initActivitySummary()
     AssayReportCardApp.initAssociatedCompounds()
 
@@ -55,7 +56,36 @@ class AssayReportCardApp extends glados.ReportCardApp
       entity_name: Assay.prototype.entityName
       report_card_app: @
 
-    target.fetchFromAssayChemblID();
+    target.fetchFromAssayChemblID()
+
+  @initAssayParams = ->
+
+    assay = AssayReportCardApp.getCurrentAssay()
+
+    viewConfig =
+      embed_section_name: 'assay_parameters'
+      embed_identifier: assay.get('assay_chembl_id')
+      show_if: (model) ->
+        console.log('DEBUG')
+        if not model.attributes.assay_parameters?
+          return false
+        if model.attributes.assay_parameters.length == 0
+          return false
+        return true
+      properties_group: 'assay_parameters'
+
+    new glados.views.ReportCards.EntityDetailsInCardView
+      model: assay
+      el: $('#AssayParametersDataCard')
+      config: viewConfig
+      section_id: 'AssayParameters'
+      section_label: 'Assay Parameters'
+      entity_name: Assay.prototype.entityName
+      report_card_app: @
+
+    if GlobalVariables['EMBEDED']
+      assay.fetch()
+
 
   @initActivitySummary = ->
 

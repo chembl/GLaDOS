@@ -58,6 +58,19 @@
 
       </div>
 
+      <div id="AssayParameters" style="display: none;">
+            {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
+
+            <div class="row BCK-section-content">
+
+                {% with is_dynamic=True %}
+                    {% include "glados/AssayReportCardParts/AssayParameters.html" %}
+                {% endwith %}
+
+            </div>
+
+      </div>
+
       <div id="ActivityCharts">
         {% include "glados/base/ReportCards/Sections/DefaultSectionContent.html" %}
 
