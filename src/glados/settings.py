@@ -200,8 +200,6 @@ if BLOGGER_ENABLED:
 # ----------------------------------------------------------------------------------------------------------------------
 # ElasticSearch
 # ----------------------------------------------------------------------------------------------------------------------
-print('ELASTICSEARCH----------------------------------------------------')
-print('RUN_ENV: ', RUN_ENV)
 elasticsearch_config = run_config.get('elasticsearch')
 if elasticsearch_config is None:
     raise GladosSettingsError("You must provide the elasticsearch configuration")
@@ -209,17 +207,12 @@ else:
     ELASTICSEARCH_HOST = elasticsearch_config.get('host')
 
     if RUN_ENV == RunEnvs.TRAVIS:
-        print('TRAVIS: ')
         ELASTICSEARCH_USERNAME = 'glados'
         ELASTICSEARCH_PASSWORD = os.getenv('ELASTICSEARCH_PASSWORD')
-        print('ELASTICSEARCH_USERNAME: ', ELASTICSEARCH_USERNAME)
-        print('ELASTICSEARCH_PASSWORD: ', list(ELASTICSEARCH_PASSWORD))
     else:
         ELASTICSEARCH_USERNAME = elasticsearch_config.get('username')
         ELASTICSEARCH_PASSWORD = elasticsearch_config.get('password')
 
-
-    print('ELASTICSEARCH_HOST: ', ELASTICSEARCH_HOST)
     ELASTICSEARCH_EXTERNAL_URL = elasticsearch_config.get('public_host')
     if ELASTICSEARCH_EXTERNAL_URL is None:
         raise GladosSettingsError("You must provide the elasticsearch public URL that will be accessible from the js "
