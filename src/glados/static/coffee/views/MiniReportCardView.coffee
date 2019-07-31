@@ -14,22 +14,37 @@ glados.useNameSpace 'glados.views',
 
     render: ->
 
-      console.log 'RENDER MINI REPORT CARD: '
       templateID = @customTemplate
       templateID ?= @entity.MINI_REPORT_CARD.TEMPLATE
       templateCont = $('#' + templateID).html()
 
       columns = @customColumns
       columns ?= @entity.MINI_REPORT_CARD.COLUMNS
-      [valuesObject, highlights] = glados.Utils.getColumnsWithValuesAndHighlights(columns, @model)
-      imgUrl = glados.Utils.getImgURL(valuesObject)
 
-      paramsObj =
-        img_url: imgUrl
-        columns: valuesObject
+      indexName = @entity.INDEX_NAME
+      groupName = 'browser_table'
 
-      _.extend(paramsObj, @additional_params)
-      $(@el).html Handlebars.compile(templateCont)(paramsObj)
+      propertiesConfigModel = new glados.models.paginatedCollections.esSchema.PropertiesConfigurationModel
+        index_name: indexName
+        group_name: groupName
+
+      thisView = @
+      propertiesConfigModel.on('error', @renderError)
+      propertiesConfigModel.on('change:parsed_configuration', ->
+        columns = propertiesConfigModel.get('parsed_configuration').Default
+
+        [valuesObject, highlights] = glados.Utils.getColumnsWithValuesAndHighlights(columns, thisView.model)
+        imgUrl = glados.Utils.getImgURL(valuesObject)
+
+        paramsObj =
+          img_url: imgUrl
+          columns: valuesObject
+
+        _.extend(paramsObj, thisView.additional_params)
+        $(thisView.el).html(Handlebars.compile(templateCont)(paramsObj))
+
+      )
+      propertiesConfigModel.fetch()
 
     renderError:  (model_or_collection, jqXHR, options) ->
       $(@el).html glados.Utils.ErrorMessages.getErrorCardContent(jqXHR)

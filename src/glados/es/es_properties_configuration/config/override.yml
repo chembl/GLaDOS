@@ -1,18 +1,25 @@
 chembl_molecule:
   'molecule_properties.full_mwt':
     label: 'Molecular Weight'
+    label_mini: 'Mol. Wt.'
   '_metadata.related_targets.count':
     label: 'Targets'
+    label_mini: 'Targets'
   '_metadata.related_activities.count':
     label: 'Bioactivities'
+    label_mini: 'Compounds'
   'molecule_properties.alogp':
     label: 'AlogP'
+    label_mini: 'AlogP'
   'molecule_properties.psa':
     label: 'PSA'
+    label_mini: 'PSA'
   'molecule_properties.hba':
     label: 'HBA'
+    label_mini: 'HBA'
   'molecule_properties.hbd':
     label: 'HBD'
+    label_mini: 'HBD'
   'molecule_properties.num_ro5_violations':
     label: '#RO5 Violations'
   'molecule_properties.rtb':
@@ -47,10 +54,17 @@ chembl_molecule:
     label: 'Smiles'
   'drug_parent_molecule_chembl_id':
     based_on: 'molecule_chembl_id'
-    label: 'Parent Molecule ChEMBL ID'
+    label: 'Parent Molecule'
+  'drug_icon':
+    based_on: 'molecule_chembl_id'
+    label: 'Icon'
+    type: 'double'
+    aggregatable: false
+    sortable: true
   'research_codes':
     based_on: 'molecule_synonyms'
     label: 'Research Codes'
+    label_mini: 'Research Codes'
   'drug_phase':
     based_on: 'max_phase'
     label: 'Phase'
@@ -83,11 +97,25 @@ chembl_molecule:
   'drug_atc_codes_level_1':
     based_on: '_metadata.atc_classifications'
     label: 'Level 1 ATC Codes'
+  'sources_list':
+    label: 'Compound Sources'
+    based_on: '_metadata.compound_records'
+  'additional_sources_list':
+    based_on: '_metadata.compound_records'
+  'clinical_trials_terms':
+    based_on: 'molecule_synonyms'
+  'chochrane_terms':
+    base_on: 'pref_name'
+    type: 'string'
+    aggregatable: false
+    sortable: true
 chembl_assay:
   '_metadata.related_compounds.count':
     label: 'Compounds'
+    label_mini: 'Compounds'
   '_metadata.related_activities.count':
     label: 'Activities'
+    label_mini: 'Activities'
   'bao_format':
     label: 'BAO Format ID'
   'bao_label':

@@ -172,6 +172,7 @@ glados.useNameSpace 'glados',
       'Cards': 'Cards'
       'Infinite': 'Infinite'
       Heatmap: 'Heatmap'
+      Carousel: 'Carousel'
     DEFAULT_RESULTS_VIEWS_ICONS:
       'Matrix': 'fa-th'
       'Graph': 'fa-area-chart'
@@ -335,6 +336,9 @@ glados.loadSearchResultsURLS = ()->
     "{{#if query}}/query={{query}}{{/if}}" +
     "{{#if state}}/state={{state}}{{/if}}"
   glados.Settings.SEARCH_URL_GENERATOR = Handlebars.compile(glados.Settings.SEARCH_URL_TEMPLATE)
+
+  glados.Settings.PROPERTIES_GROUP_CONFIGURATION_URL_GENERATOR = Handlebars.compile(
+    "#{glados.Settings.GLADOS_BASE_PATH_REL}glados_api/shared/properties_configuration/group/{{index_name}}/{{group_name}}/")
 
 # Logs the JavaScript environment details
 glados.logGladosSettings = () ->

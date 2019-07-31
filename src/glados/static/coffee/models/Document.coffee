@@ -37,6 +37,52 @@ Document.color = 'red'
 Document.reportCardPath = 'document_report_card/'
 
 Document.INDEX_NAME = 'chembl_document'
+Document.PROPERTIES_VISUAL_CONFIG = {
+  'document_chembl_id': {
+    link_base: 'report_card_url'
+  }
+  '_metadata.source': {
+    parse_function: (values) -> (v.src_description for v in values).join(', ')
+  }
+  'pubmed_id': {
+    link_function: (id) -> 'http://europepmc.org/abstract/MED/' + encodeURIComponent(id)
+  }
+  'doi': {
+    link_function: (id) -> 'http://dx.doi.org/' + encodeURIComponent(id)
+  }
+  '_metadata.related_activities.count': {
+    link_base: 'activities_url'
+    on_click: DocumentReportCardApp.initMiniHistogramFromFunctionLink
+    function_parameters: ['document_chembl_id']
+    function_constant_parameters: ['activities']
+    function_key: 'document_bioactivities'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
+  }
+  '_metadata.related_compounds.count': {
+    link_base: 'compounds_url'
+    on_click: DocumentReportCardApp.initMiniHistogramFromFunctionLink
+    function_constant_parameters: ['compounds']
+    function_parameters: ['document_chembl_id']
+    function_key: 'document_num_compounds'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
+  }
+  '_metadata.related_targets.count': {
+    format_as_number: true
+    link_base: 'targets_url'
+    on_click: DocumentReportCardApp.initMiniHistogramFromFunctionLink
+    function_parameters: ['document_chembl_id']
+    function_constant_parameters: ['targets']
+    function_key: 'document_targets'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
+  }
+}
+
 Document.COLUMNS = {
   CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
     comparator: 'document_chembl_id'
@@ -126,6 +172,20 @@ Document.COLUMNS = {
     format_class: 'number-cell-center'
 }
 
+Document.COLUMNS.CHEMBL_ID = {
+  aggregatable: true
+  comparator: "document_chembl_id"
+  hide_label: true
+  id: "document_chembl_id"
+  is_sorting: 0
+  link_base: "report_card_url"
+  name_to_show: "ChEMBL ID"
+  name_to_show_short: "ChEMBL ID"
+  show: true
+  sort_class: "fa-sort"
+  sort_disabled: false
+}
+
 Document.ID_COLUMN = Document.COLUMNS.CHEMBL_ID
 
 Document.COLUMNS_SETTINGS = {
@@ -187,7 +247,6 @@ Document.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS = _.union(Document.COLUMNS_SE
 Document.MINI_REPORT_CARD =
   LOADING_TEMPLATE: 'Handlebars-Common-MiniRepCardPreloader'
   TEMPLATE: 'Handlebars-Common-MiniReportCard'
-  COLUMNS: Document.COLUMNS_SETTINGS.RESULTS_LIST_CARD
 
 Document.getDocumentsListURL = (filter, isFullState=false, fragmentOnly=false) ->
 

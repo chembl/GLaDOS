@@ -15,25 +15,43 @@ glados.useNameSpace 'glados.views.ReportCards',
       if not show
         @hideSection()
         return
-      propertiesToShow = @config.properties_to_show
-      [columnsWithValues, highlights] = glados.Utils.getColumnsWithValuesAndHighlights(propertiesToShow, @model)
-      protertiesWithValuesIndex = _.indexBy(columnsWithValues, 'template_id')
 
-      if @config.sort_alpha
 
-        for property in propertiesToShow
+      indexName = @model.indexName
 
-          if property.id = @config.property_id_to_sort
-            valueNames = protertiesWithValuesIndex[property.id].value
-            valueNames.sort()
-            protertiesWithValuesIndex[property.id].value = valueNames
+      propertiesGroup = @config.properties_group
 
-      $containerElem = $(@el).find('.BCK-Details-Container')
-      glados.Utils.fillContentForElement $containerElem, protertiesWithValuesIndex
+      propertiesConfigModel = new glados.models.paginatedCollections.esSchema.PropertiesConfigurationModel
+        index_name: indexName
+        group_name: propertiesGroup
 
-      @showSection()
-      @showCardContent()
+      thisView = @
+      propertiesConfigModel.on('error', @showCompoundErrorCard)
+      propertiesConfigModel.on('change:parsed_configuration', ->
 
-      @config.after_render(@) unless not @config.after_render?
+        propertiesToShow = propertiesConfigModel.get('parsed_configuration').Default
 
+        [columnsWithValues, highlights] = glados.Utils.getColumnsWithValuesAndHighlights(propertiesToShow,
+          thisView.model)
+        protertiesWithValuesIndex = _.indexBy(columnsWithValues, 'template_id')
+
+        if thisView.config.sort_alpha
+
+          for property in propertiesToShow
+
+            if property.id == thisView.config.property_id_to_sort
+              valueNames = protertiesWithValuesIndex[property.id].value
+              valueNames.sort()
+              protertiesWithValuesIndex[property.id].value = valueNames
+
+        $containerElem = $(thisView.el).find('.BCK-Details-Container')
+        glados.Utils.fillContentForElement $containerElem, protertiesWithValuesIndex
+
+        thisView.showSection()
+        thisView.showCardContent()
+
+        thisView.config.after_render(thisView) unless not thisView.config.after_render?
+
+      )
+      propertiesConfigModel.fetch()
 

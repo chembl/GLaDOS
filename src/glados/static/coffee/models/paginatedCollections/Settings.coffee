@@ -13,15 +13,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BROWSE_LIST_URL: Compound.getCompoundsListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
-        COLUMNS: Compound.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-            Additional: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
-          Cards:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-          Carousel:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        PERMANENT_COMPARATORS_TO_FETCH:['molecule_chembl_id',
+          'molecule_properties.num_ro5_violations', 'molecule_properties.full_molformula', 'molecule_type',
+          'natural_product', 'polymer_flag', 'structure_type']
+        CONFIG_GROUPS:
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Cards}": 'browser_cards'
         ID_COLUMN: Compound.ID_COLUMN
         CUSTOM_DEFAULT_CARD_SIZES:
           small: 12
@@ -77,12 +74,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BROWSE_LIST_URL: Target.getTargetsListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Target
+        PERMANENT_COMPARATORS_TO_FETCH: ['target_chembl_id', 'cross_references', 'target_components']
+        CONFIG_GROUPS:
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
         ID_COLUMN: Target.ID_COLUMN
-        COLUMNS: Target.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: Target.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-            Additional: Target.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.TargetSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
@@ -99,14 +94,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BROWSE_LIST_URL: Assay.getAssaysListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Assay
+        PERMANENT_COMPARATORS_TO_FETCH: ['assay_chembl_id', 'document_chembl_id', 'tissue_chembl_id', 'src_id',
+          'src_assay_id', '_metadata.document_data.doi', '_metadata.document_data.pubmed_id']
         ID_COLUMN: Assay.ID_COLUMN
-        COLUMNS: Assay.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-            Additional: Assay.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL
-          Carousel:
-            Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+        CONFIG_GROUPS:
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.AssaySchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
@@ -123,13 +115,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Document
         ID_COLUMN: Document.ID_COLUMN
-        COLUMNS: Document.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-            Additional: Document.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL
-          Carousel:
-            Default: Document.COLUMNS_SETTINGS.RESULTS_LIST_CARD
+        PERMANENT_COMPARATORS_TO_FETCH: ['document_chembl_id']
+        ID_COLUMN: Assay.ID_COLUMN
+        CONFIG_GROUPS:
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.DocumentSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
@@ -146,13 +135,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: CellLine
         ID_COLUMN: CellLine.ID_COLUMN
-        COLUMNS: CellLine.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-            Additional: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL
-          Carousel:
-            Default: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
+        PERMANENT_COMPARATORS_TO_FETCH: ['cell_chembl_id']
+        CONFIG_GROUPS:
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.CellLineSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
@@ -169,13 +154,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: glados.models.Tissue
         ID_COLUMN: glados.models.Tissue.ID_COLUMN
-        COLUMNS: glados.models.Tissue.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-            Additional: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL
-          Carousel:
-            Default: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        PERMANENT_COMPARATORS_TO_FETCH: ['tissue_chembl_id']
+        CONFIG_GROUPS:
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.TissueSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
@@ -193,17 +174,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Activity
         ID_COLUMN: Activity.ID_COLUMN
+        PERMANENT_COMPARATORS_TO_FETCH: ['_metadata.parent_molecule_data.image_file', 'molecule_chembl_id',
+          'target_chembl_id', 'assay_chembl_id', 'document_chembl_id', '_metadata.assay_data.tissue_chembl_id']
+        CONFIG_GROUPS:
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        COLUMNS: Activity.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_TABLE
-            Additional: Activity.COLUMNS_SETTINGS.RESULTS_LIST_TABLE_ADDITIONAL
-          Cards:
-            Default: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-          Carousel:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.ActivitySchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
@@ -220,19 +196,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BROWSE_LIST_URL: Compound.getCompoundsListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
-        BASE_URL: 'base_url is set by initURL'
-        DEFAULT_PAGE_SIZE: "needs to be set up outside, for some reason it doesn't work"
+        PERMANENT_COMPARATORS_TO_FETCH:['molecule_chembl_id',
+          'molecule_properties.num_ro5_violations', 'molecule_properties.full_molformula', 'molecule_type',
+          'natural_product', 'polymer_flag', 'structure_type']
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        COLUMNS: Compound.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
-          Cards:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
-          Infinite:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
-          Carousel:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
+        CONFIG_GROUPS:
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Carousel}": 'alternate_forms_carousel'
         ID_COLUMN: Compound.ID_COLUMN
         IS_CAROUSEL: true
       COMPOUND_COOL_CARDS:
@@ -243,15 +212,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BROWSE_LIST_URL: Compound.getCompoundsListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
-        COLUMNS: Compound.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-            Additional: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
-          Cards:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-          Carousel:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        PERMANENT_COMPARATORS_TO_FETCH:['molecule_chembl_id',
+          'molecule_properties.num_ro5_violations', 'molecule_properties.full_molformula', 'molecule_type',
+          'natural_product', 'polymer_flag', 'structure_type']
         ID_COLUMN: Compound.ID_COLUMN
         ENABLE_CARDS_ZOOM: true
         CUSTOM_CARDS_TEMPLATE: 'Handlebars-Common-Paginated-Card-Compound'
@@ -263,6 +226,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Graph'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Heatmap]
+        CONFIG_GROUPS:
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Cards}": 'browser_cards'
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
         ENABLE_COLLECTION_CACHING: true
         LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
@@ -274,15 +240,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BROWSE_LIST_URL: Compound.getCompoundsListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
-        COLUMNS: Compound.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-            Additional: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
-          Cards:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-          Carousel:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        PERMANENT_COMPARATORS_TO_FETCH:['molecule_chembl_id',
+          'molecule_properties.num_ro5_violations', 'molecule_properties.full_molformula', 'molecule_type',
+          'natural_product', 'polymer_flag', 'structure_type']
         ID_COLUMN: Compound.ID_COLUMN
         ENABLE_CARDS_ZOOM: true
         CUSTOM_CARDS_TEMPLATE: 'Handlebars-Common-Paginated-Card-Compound'
@@ -295,6 +255,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Graph'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Heatmap]
+        CONFIG_GROUPS:
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Cards}": 'browser_cards'
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
         ENABLE_SUBSTRUCTURE_HIGHLIGHTING: true
         SHOW_SUBSTRUCTURE_HIGHLIGHTING: false
@@ -309,11 +272,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Target
         ID_COLUMN: Target.ID_COLUMN
-        COLUMNS: Target.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: Target.COLUMNS_SETTINGS.RESULTS_LIST_BLAST
-            Additional: Target.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL
+        PERMANENT_COMPARATORS_TO_FETCH: ['target_chembl_id', 'cross_references', 'target_components']
+        CONFIG_GROUPS:
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table_blast'
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.TargetSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
@@ -331,15 +292,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BROWSE_LIST_URL: Compound.getCompoundsListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
-        COLUMNS: Compound.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE_SIMILARITY
-            Additional: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
-          Cards:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_SIMILARITY
-          Carousel:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_SIMILARITY
+        PERMANENT_COMPARATORS_TO_FETCH:['molecule_chembl_id',
+          'molecule_properties.num_ro5_violations', 'molecule_properties.full_molformula', 'molecule_type',
+          'natural_product', 'polymer_flag', 'structure_type']
+        CONFIG_GROUPS:
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table_similarity'
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Cards}": 'browser_cards_similarity'
         ID_COLUMN: Compound.ID_COLUMN
         ENABLE_CARDS_ZOOM: true
         CUSTOM_CARDS_TEMPLATE: 'Handlebars-Common-Paginated-Card-Compound'
@@ -367,15 +325,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # PATH: Assigned after this declaration using the INDEX_NAME
         BROWSE_LIST_URL: Drug.getDrugsListURL
         MODEL: glados.models.Compound.Drug
-        COLUMNS: glados.models.Compound.Drug.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: glados.models.Compound.Drug.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-            Additional: glados.models.Compound.Drug.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
-          Cards:
-            Default: glados.models.Compound.Drug.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-          Carousel:
-            Default: glados.models.Compound.Drug.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
+        PERMANENT_COMPARATORS_TO_FETCH: ['molecule_chembl_id',
+          'molecule_properties.num_ro5_violations', 'molecule_properties.full_molformula', 'molecule_type',
+          'natural_product', 'polymer_flag', 'structure_type', '_metadata.drug.drug_data.sc_patent']
         ID_COLUMN: glados.models.Compound.Drug.ID_COLUMN
         ENABLE_CARDS_ZOOM: true
         CUSTOM_CARDS_TEMPLATE: 'Handlebars-Common-Paginated-Card-Compound'
@@ -389,6 +341,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Graph'],
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Heatmap]
+        CONFIG_GROUPS:
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table_drugs'
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Cards}": 'browser_cards_drugs'
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
         ENABLE_COLLECTION_CACHING: true
         DISABLE_CACHE_ON_DOWNLOAD: true
@@ -402,11 +357,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         #BROWSE_LIST_URL: Drug.getDrugsListURL
         BROWSE_LIST_URL: glados.models.Compound.DrugIndication.getListURL
         MODEL: glados.models.Compound.DrugIndication
-        COLUMNS: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-            Additional: glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.RESULTS_LIST_TABLE_ADDITIONAL
+        PERMANENT_COMPARATORS_TO_FETCH: ['parent_molecule._metadata.compound_generated.image_file',
+          'parent_molecule.molecule_chembl_id', 'drug_indication.mesh_id']
+        CONFIG_GROUPS:
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.DrugIndicationSchema.FACETS_GROUPS
         ID_COLUMN: glados.models.Compound.DrugIndication.ID_COLUMN
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
@@ -418,86 +372,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         INDEX_NAME: 'chembl_mechanism_by_parent_target'
         BROWSE_LIST_URL: glados.models.Compound.MechanismOfAction.getListURL
         MODEL: glados.models.Compound.MechanismOfAction
-        COLUMNS: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-            Additional: glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.RESULTS_LIST_TABLE_ADDITIONAL
+        PERMANENT_COMPARATORS_TO_FETCH: ['parent_molecule._metadata.compound_generated.image_file',
+          'parent_molecule.molecule_chembl_id', 'target.target_chembl_id']
+        CONFIG_GROUPS:
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.MechanismSchema.FACETS_GROUPS
         ID_COLUMN: glados.models.Compound.MechanismOfAction.ID_COLUMN
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
     WS_COLLECTIONS:
-      ACTIVITIES_LIST:
-        MODEL: Activity
-        BASE_URL: glados.Settings.WS_BASE_URL + 'activity.json'
-        DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
-        AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        COLUMNS: Activity.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-          Cards:
-            Default: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-          Infinite:
-            Default: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-          Carousel:
-            Default: Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-        ID_COLUMN: Activity.ID_COLUMN
-        ADDITIONAL_COLUMNS:[]
-      ASSAYS_LIST:
-        MODEL: Assay
-        BASE_URL: glados.Settings.WS_BASE_URL + 'assay.json'
-        DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
-        AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        COLUMNS: Assay.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_CARD
-          Cards:
-            Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_CARD
-          Infinite:
-            Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_CARD
-          Carousel:
-            Default: Assay.COLUMNS_SETTINGS.RESULTS_LIST_CARD
-        ID_COLUMN: Assay.ID_COLUMN
-        ADDITIONAL_COLUMNS:[]
-      DRUG_LIST:
-        MODEL: Compound
-        BASE_URL: glados.Settings.WS_BASE_URL + 'molecule.json'
-        DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
-        AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        COLUMNS: Compound.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-          Cards:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-          Infinite:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-          Carousel:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-        ID_COLUMN: Compound.ID_COLUMN
-        ENABLE_COLLECTION_CACHING: true
-      SUBSTRUCTURE_RESULTS_LIST:
-        MODEL: Compound
-        BASE_URL: 'base_url is set by initURL'
-        DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
-        AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        COLUMNS: Compound.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-          Cards:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-          Infinite:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-          Carousel:
-            Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
-        ID_COLUMN: Compound.ID_COLUMN
-        ADDITIONAL_COLUMNS:[]
-        ENABLE_COLLECTION_CACHING: true
       TWEETS_LIST:
         MODEL: glados.models.MainPage.Tweet
         BASE_URL: 'base_url is set by initURL'
@@ -523,7 +407,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BASE_URL: 'base_url is set by initURL'
         DEFAULT_PAGE_SIZE: "needs to be set up outside, for some reason it doesn't work"
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        COLUMNS: Compound.COLUMNS_SETTINGS.ALL_COLUMNS
         COLUMNS_DESCRIPTION:
           Table:
             Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
@@ -535,22 +418,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Default: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_CAROUSEL
         ID_COLUMN: Compound.ID_COLUMN
         IS_CAROUSEL: true
-      DOCS_BY_TERM_LIST:
-        MODEL: Document
-        BASE_URL: 'base_url is set by initURL'
-        DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
-        AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        ID_COLUMN: Document.ID_COLUMN
-        COLUMNS: Document.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: Document.COLUMNS_SETTINGS.SEARCH_BY_TERM_RESULTS
-          Cards:
-            Default: Document.COLUMNS_SETTINGS.SEARCH_BY_TERM_RESULTS
-          Infinite:
-            Default: Document.COLUMNS_SETTINGS.SEARCH_BY_TERM_RESULTS
-          Carousel:
-            Default: Document.COLUMNS_SETTINGS.SEARCH_BY_TERM_RESULTS
     CLIENT_SIDE_WS_COLLECTIONS:
       UNICHEM_CONNECTIVITY_LIST:
         MODEL: glados.models.Compound.UnichemConnectivityMatch
@@ -642,22 +509,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             Default: TargetComponent.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
           Carousel:
             Default: TargetComponent.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-    CLIENT_SIDE_ES_COLLECTIONS:
-      BIOACTIVITY_SUMMARY_LIST:
-        MODEL: Activity
-        DEFAULT_PAGE_SIZE: 20
-        AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        ID_COLUMN: Activity.ID_COLUMN
-        COLUMNS: Activity.COLUMNS_SETTINGS.ALL_COLUMNS
-        COLUMNS_DESCRIPTION:
-          Table:
-            Default: []
-          Cards:
-            Default: []
-          Infinite:
-            Default: []
-          Carousel:
-            Default: []
 
 glados.models.paginatedCollections.Settings.ES_INDEX_2_GLADOS_SETTINGS= {}
 

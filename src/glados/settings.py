@@ -207,7 +207,7 @@ else:
     ELASTICSEARCH_HOST = elasticsearch_config.get('host')
 
     if RUN_ENV == RunEnvs.TRAVIS:
-        ELASTICSEARCH_USERNAME = os.getenv('ELASTICSEARCH_USERNAME')
+        ELASTICSEARCH_USERNAME = 'glados'
         ELASTICSEARCH_PASSWORD = os.getenv('ELASTICSEARCH_PASSWORD')
     else:
         ELASTICSEARCH_USERNAME = elasticsearch_config.get('username')

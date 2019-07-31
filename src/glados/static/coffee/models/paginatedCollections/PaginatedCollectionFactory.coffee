@@ -63,7 +63,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             id_column: esIndexSettings.ID_COLUMN
             facets_groups: glados.models.paginatedCollections.esSchema.FacetingHandler.initFacetGroups(esIndexSettings.FACETS_GROUPS)
             columns: esIndexSettings.COLUMNS
-            columns_description: esIndexSettings.COLUMNS_DESCRIPTION
+#            columns_description: esIndexSettings.COLUMNS_DESCRIPTION
+            permanent_comparators_to_fetch: esIndexSettings.PERMANENT_COMPARATORS_TO_FETCH
             custom_default_card_sizes: esIndexSettings.CUSTOM_DEFAULT_CARD_SIZES
             custom_card_size_to_page_sizes: esIndexSettings.CUSTOM_CARD_SIZE_TO_PAGE_SIZES
             enable_cards_zoom: esIndexSettings.ENABLE_CARDS_ZOOM
@@ -78,6 +79,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             label: esIndexSettings.LABEL
             available_views: esIndexSettings.AVAILABLE_VIEWS
             default_view: esIndexSettings.DEFAULT_VIEW
+            config_groups: esIndexSettings.CONFIG_GROUPS
             all_items_selected: false
             selection_exceptions: {}
             custom_query: customQuery
@@ -154,6 +156,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             @on 'reset', @addModelsInCurrentPage, @
 
           glados.models.paginatedCollections.PaginatedCollectionBase.prototype.initialize.call(@)
+          @setConfigState(
+            glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING_STATES.CONFIGURATION_READY)
 
       return new wsPagCollection
 
@@ -223,6 +227,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           if flavour.initialize?
             flavour.initialize.call(@)
 
+          @setConfigState(
+            glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING_STATES.CONFIGURATION_READY)
+
       return new collection
 
 
@@ -281,17 +288,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       list = @getNewESResultsListFor(listConfig, customQuery, useCustomQuery=true)
       return list
 
-    getNewAssaysList: (filter='') ->
-
-      list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.ASSAYS_LIST, filter)
-      list.parse = (data) ->
-        data.page_meta.records_in_page = data.assays.length
-        @setMeta('data_loaded', true)
-        @resetMeta(data.page_meta)
-        return data.assays
-
-      return list
-
     getNewESDrugsList: (customQuery='*', itemsList, contextualProperties,
       settings=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.DRUGS_LIST,
       searchTerm) ->
@@ -310,55 +306,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       list = @getNewESResultsListFor(config, customQuery, useCustomQuery=true)
 
       return list
-
-    getNewActivitiesList: (filter='') ->
-
-      list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.ACTIVITIES_LIST, filter)
-      list.parse = (data) ->
-        data.page_meta.records_in_page = data.activities.length
-        @setMeta('data_loaded', true)
-        @resetMeta(data.page_meta)
-        return data.activities
-
-      return list
-
-    getNewDrugList: ->
-      list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.DRUG_LIST)
-      list.parse = (data) ->
-        data.page_meta.records_in_page = data.molecules.length
-        @setMeta('data_loaded', true)
-        @resetMeta(data.page_meta)
-        return data.molecules
-
-      return list
-
-    getNewSubstructureSearchResultsList: ->
-      list = @getNewWSCollectionFor(glados.models.paginatedCollections.Settings.WS_COLLECTIONS.SUBSTRUCTURE_RESULTS_LIST)
-
-      list.initURL = (term) ->
-        @baseUrl = glados.Settings.WS_BASE_SUBSTRUCTURE_SEARCH_URL
-        console.log 'base url: ', @baseUrl
-        @setMeta('base_url', @baseUrl, true)
-        @setMeta('use_post', true)
-        @setMeta('extra_params', ['only=molecule_chembl_id'])
-        params = {}
-        if term.startsWith('CHEMBL')
-          params['chembl_id'] = term
-        else
-          params['smiles'] = term
-
-        @setMeta('post_parameters', params)
-        @initialiseUrl()
-
-
-      list.parse = (data) ->
-        data.page_meta.records_in_page = data.molecules.length
-        @setMeta('data_loaded', true)
-        @resetMeta(data.page_meta)
-        return data.molecules
-
-      return list
-
 
     getNewBlogEntriesList: ->
 
@@ -500,57 +447,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return list
 
-    getNewDocumentsFromTermsList: ->
-      config = glados.models.paginatedCollections.Settings.WS_COLLECTIONS.DOCS_BY_TERM_LIST
-      config.DEFAULT_PAGE_SIZE = 50
-      list = @getNewWSCollectionFor(config)
-
-      list.initURL = (term) ->
-        @baseUrl = glados.Settings.WS_BASE_URL + 'document_term.json?term_text=' + term + '&order_by=-score'
-        @setMeta('base_url', @baseUrl, true)
-        @initialiseUrl()
-
-      list.fetch = ->
-        @reset()
-        url = @getPaginatedURL()
-        documents = []
-        totalDocs = 0
-        receivedDocs = 0
-        # 1 first get list of documents
-        getDocuments = $.getJSON(url)
-
-        thisCollection = @
-        # 3. check that everything is ready
-        checkAllInfoReady = ->
-          if receivedDocs == totalDocs
-            console.log 'ALL READY!'
-            console.log thisCollection
-            thisCollection.setMeta('data_loaded', true)
-            thisCollection.trigger('do-repaint')
-
-        getDocuments.done((data) ->
-          data.page_meta.records_in_page = data.document_terms.length
-          thisCollection.resetMeta(data.page_meta)
-
-          documents = data.document_terms
-          totalDocs = documents.length
-
-          # 2. get details per document
-          for docInfo in documents
-
-            doc = new Document(docInfo)
-            thisCollection.add doc
-            doc.fetch
-              success: ->
-                receivedDocs += 1
-                checkAllInfoReady()
-        )
-
-        getDocuments.fail ->
-          console.log 'ERROR!'
-
-      return list
-
     getNewUnichemConnectivityList: ->
 
       config = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.UNICHEM_CONNECTIVITY_LIST
@@ -680,131 +576,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             console.log('failed2')
           )
         )
-
-      return list
-
-    getNewBioactivitiesSummaryList: ->
-      list = @getNewClientSideCollectionFor(glados.models.paginatedCollections.Settings\
-        .CLIENT_SIDE_ES_COLLECTIONS.BIOACTIVITY_SUMMARY_LIST)
-
-      defaultComparators = ['target_chembl_id', 'target_organism', 'standard_type']
-      list.setMeta('default_comparators', defaultComparators)
-      list.setMeta('current_comparators', defaultComparators)
-
-      list.url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_activity/_search'
-
-      list.getRequestData = ->
-
-        aggregations = @getMeta('current_comparators')
-        originChemblIDs = @getMeta('origin_chembl_ids')
-        chemblIdsTexts = ('"' + id + '"' for id in originChemblIDs)
-
-        requestData =
-          query:
-            query_string:
-              analyze_wildcard: true,
-              query: 'target_chembl_id:(' + chemblIdsTexts.join(' OR ')+ ')'
-          size: 0
-
-        placeToPutAgg = requestData
-        for i in [0..aggregations.length-1]
-          currentField = aggregations[i]
-          aggName = currentField + '_agg'
-          newAgg =
-            terms:
-              field: currentField
-              size: 1000
-              order:
-                _count: 'desc'
-
-          placeToPutAgg.aggs = {} unless placeToPutAgg.aggs?
-          placeToPutAgg.aggs[aggName] = newAgg
-          placeToPutAgg = placeToPutAgg.aggs[aggName]
-
-        return requestData
-
-      list.fetch = ->
-
-        console.log 'FETCHING LIST!!'
-        console.log 'request data: ', @getRequestData()
-        esJSONRequest = JSON.stringify(@getRequestData())
-        console.log 'esJSONRequest: ', esJSONRequest
-
-        fetchESOptions =
-          url: @url
-          data: esJSONRequest
-          type: 'POST'
-          reset: true
-
-        thisModel = @
-        $.ajax(fetchESOptions).done((data) -> thisModel.set(thisModel.parse data))
-
-      list.parse = (data) ->
-        console.log 'parsing ', data
-
-        # the data that ir receives form elastic is like a tree, this is like listing all leaves of the tree while
-        # including data from their ancestry
-        getInfoFromBuckets = (bucket, keyName) ->
-
-          aggregations = _.filter(Object.keys(bucket), (key) -> key.search('_agg$') != -1)
-          actsList = []
-
-          if aggregations.length == 0
-            # I am at the base case return a new activity. in a one item list to ease concatenating.
-            act = new Activity
-            act.set(Activity.COLUMNS.DOC_COUNT.comparator, bucket.doc_count)
-            actsList = [act]
-          else
-            #recursive case, I need to check my children and add their answers to mine.
-
-            for aggKey in aggregations
-              currentAggData = bucket[aggKey]
-              for currentBucket in currentAggData.buckets
-                actsToAdd = getInfoFromBuckets(currentBucket, aggKey)
-                actsList = actsList.concat(actsToAdd)
-
-          # in either case, assign the value of the current aggregation field to every activity.
-          currentPropertyName = if keyName.search('_agg$') != -1 then keyName.split('_agg')[0] else keyName
-          currentPropertyValue = bucket.key
-
-          for act in actsList
-            act.set(currentPropertyName, currentPropertyValue)
-
-          return actsList
-
-        models = []
-        rootBucket = {key: true}
-        for aggKey, value of data.aggregations
-          rootBucket[aggKey] = value
-
-        models = getInfoFromBuckets(rootBucket, Activity.COLUMNS.IS_AGGREGATION.comparator)
-        @setMetadataAfterParse()
-        @setMeta('data_loaded', true)
-        @reset(models)
-
-      console.log 'CREATING NEW BIOACTIVITIES SUMMARY LIST!'
-      console.log 'list: ', list
-
-      list.setMetadataAfterParse = ->
-
-        currentComparators = @getMeta('current_comparators')
-        console.log 'currentComparators: ', currentComparators
-        columnsIndex = _.indexBy(Activity.COLUMNS, 'comparator')
-        columnsToShow = []
-        for comp in currentComparators
-          currentColumn = columnsIndex[comp]
-          currentColumn.show = true
-          columnsToShow.push currentColumn
-        # also add count!
-        countColumn = Activity.COLUMNS.DOC_COUNT
-        countColumn.show = true
-        columnsToShow.push countColumn
-        list.setMeta('columns', columnsToShow)
-        @resetMeta()
-
-      # ----------------------------------------------------------------------------------
-      # -- End of custom functions for bioactivity summary list
-      # ----------------------------------------------------------------------------------
 
       return list
 

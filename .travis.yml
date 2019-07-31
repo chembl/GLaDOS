@@ -1,7 +1,10 @@
 sudo: required
 dist: xenial
 env:
+  matrix:
   - MOZ_HEADLESS=1
+  global:
+    secure: NGgUGuoMHbycWZzOiPepSoOhwF4wGKM6K8wf7HG1i0UZkz34rSeQQDBy7V2uxsUC+1sZT9LQZ2ZARfGdoVJuUDinIf2cylG4WSc5Uc0QaD9aQKSxS1uLnAWVnTnReHa4/LNlKqw9O/WVCprbFZwqovORG2QmtEiBp9raDtKyGzpJzninh+5Ydk3TdVk4LwmHZQI5Jn+PaxI+T3jtrmELePPCdi8dBN4kT0ei3qkOEsYqSKHKIAIUunZklaL0pZnlZ7Seco199tQXXeR0jB/c6dx141XPsW5ZM2ndiAX3USDJZwHqEQQZ5lbyCvS4U85zJ7jX3k4g/hNZvWgnjER9pKYyD3sr+FFECe7CktxzIab7Y/TwS2kg9Vem3Gbq4dFcdBNBN5mVs8aGAYGdeYaI6jtEZs86sO0grojb5Bou6a8yX0XxynNvTyf2MQaTZKnhs+zQeuTdnezJ9PqBvOWiCEcsKER57MGxYwa+Q+CFpGNx8Mph6RQLaVv00YXHqpf+s/o6b2Du6tBwIHgBTiQFKYD8NCAkJMgjF+moWqPn8r4zOMJDrUW6Rdc4uN6n0qIqaxrXnmwTME1shgJ85ETI4HFLdUsj/NdoOjZ524topjAu6rdaxwiiQVDTx1v3FzXd1k9/6iN9Mxjq4yzR5OqfJRSOmHOXe764AvzfzHAIswY=
 addons:
   firefox: latest
   apt:
@@ -13,10 +16,10 @@ language: python
 python:
 - '3.5'
 before_install:
-  - wget https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz
-  - mkdir geckodriver
-  - tar -xzf geckodriver-v0.24.0-linux64.tar.gz -C geckodriver
-  - export PATH=$PATH:$PWD/geckodriver
+- wget https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz
+- mkdir geckodriver
+- tar -xzf geckodriver-v0.24.0-linux64.tar.gz -C geckodriver
+- export PATH=$PATH:$PWD/geckodriver
 install:
 - pip install -r requirements.txt
 - python setup.py install
@@ -26,7 +29,8 @@ before_script:
 - "./manage_glados_no_install.sh makemigrations"
 - "./manage_glados_no_install.sh migrate"
 - "./manage_glados_no_install.sh compilemessages"
-- "./manage_glados_no_install.sh runserver 8000  2>&1 | grep -v 200 | grep -v 304 &"
+- "./manage_glados_no_install.sh runserver 8000  2>&1 | grep -v 200 | grep -v 304
+  &"
 - sleep 60
 script:
 - "./run_tests_no_install.sh"

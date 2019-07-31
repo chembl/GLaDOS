@@ -5,6 +5,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
   idAttribute: 'molecule_chembl_id'
   defaults:
     fetch_from_elastic: true
+  indexName:'chembl_molecule'
   initialize: ->
 
     id = @get('id')
@@ -760,12 +761,90 @@ Compound.reportCardPath = 'compound_report_card/'
 Compound.getSDFURL = (chemblId) -> glados.Settings.WS_BASE_URL + 'molecule/' + chemblId + '.sdf'
 
 Compound.INDEX_NAME = 'chembl_molecule'
-Compound.COLUMNS = {
-  CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_chembl_id'
+
+Compound.PROPERTIES_VISUAL_CONFIG = {
+  'molecule_chembl_id': {
     link_base: 'report_card_url'
     image_base_url: 'image_url'
     hide_label: true
+  },
+  'molecule_synonyms': {
+    parse_function: (values) -> _.uniq(v.molecule_synonym for v in values).join(', ')
+  },
+  '_metadata.related_targets.count': {
+    format_as_number: true
+    link_base: 'targets_url'
+    on_click: CompoundReportCardApp.initMiniHistogramFromFunctionLink
+    function_parameters: ['molecule_chembl_id']
+    function_constant_parameters: ['targets']
+    function_key: 'targets'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
+  },
+  '_metadata.related_activities.count': {
+    link_base: 'activities_url'
+    on_click: CompoundReportCardApp.initMiniHistogramFromFunctionLink
+    function_parameters: ['molecule_chembl_id']
+    function_constant_parameters: ['activities']
+    # to help bind the link to the function, it could be necessary to always use the key of the columns descriptions
+    # or probably not, depending on how this evolves
+    function_key: 'bioactivities'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
+  },
+  'similarity': {
+    'show': true
+    'comparator': '_context.similarity'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'is_contextual': true
+  }
+  'sources_list': {
+    parse_function: (values) -> _.unique(v.src_description for v in values)
+  }
+  'additional_sources_list': {
+    name_to_show_function: (model) ->
+
+      switch model.isParent()
+        when true then return 'Additional Sources From Alternate Forms:'
+        when false then return 'Additional Sources From Parent:'
+
+    col_value_function: (model) -> model.getAdditionalSources()
+    show_function: (model) -> model.hasAdditionalSources()
+  }
+  'chochrane_terms': {
+    comparator: 'pref_name'
+    additional_parsing:
+      encoded_value: (value) -> value.replace(/[ ]/g, '+')
+  }
+  'clinical_trials_terms': {
+    parse_function: (values) -> _.uniq(v.molecule_synonym for v in values).join(', ')
+    parse_from_model: true
+    additional_parsing:
+      search_term: (model) ->
+        synonyms = if model.isParent() then model.getOwnAndAdditionalSynonyms() else model.getSynonyms()
+        tradenames = if model.isParent() then model.getOwnAndAdditionalTradenames() else model.getTradenames()
+        fullList = _.union(synonyms, tradenames)
+        linkText = _.uniq(v for v in fullList).join(' OR ')
+
+        maxTextLength = 100
+        if linkText.length > maxTextLength
+          linkText = "#{linkText.substring(0, (maxTextLength-3))}..."
+
+        return linkText
+      encoded_search_term: (model) ->
+        synonyms = if model.isParent() then model.getOwnAndAdditionalSynonyms() else model.getSynonyms()
+        tradenames = if model.isParent() then model.getOwnAndAdditionalTradenames() else model.getTradenames()
+        fullList = _.union(synonyms, tradenames)
+        return encodeURIComponent(_.uniq(v for v in fullList).join(' OR '))
+  }
+}
+
+Compound.COLUMNS = {
+
   SYNONYMS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     comparator: 'molecule_synonyms'
     parse_function: (values) -> _.uniq(v.molecule_synonym for v in values).join(', ')
@@ -911,33 +990,26 @@ Compound.COLUMNS = {
     comparator: 'biotherapeutic.biocomponents'
 }
 
+
+Compound.COLUMNS.CHEMBL_ID = {
+  aggregatable: true
+  comparator: "molecule_chembl_id"
+  hide_label: true
+  id: "molecule_chembl_id"
+  image_base_url: "image_url"
+  is_sorting: 0
+  link_base: "report_card_url"
+  name_to_show: "ChEMBL ID"
+  name_to_show_short: "ChEMBL ID"
+  show: true
+  sort_class: "fa-sort"
+  sort_disabled: false
+}
+
 Compound.ID_COLUMN = Compound.COLUMNS.CHEMBL_ID
 
 Compound.COLUMNS_SETTINGS = {
-  ALL_COLUMNS: (->
-    colsList = []
-    for key, value of Compound.COLUMNS
-      colsList.push value
-    return colsList
-  )()
-  RESULTS_LIST_TABLE: [
-    Compound.COLUMNS.CHEMBL_ID,
-    Compound.COLUMNS.PREF_NAME
-    Compound.COLUMNS.SYNONYMS,
-    Compound.COLUMNS.MOLECULE_TYPE,
-    Compound.COLUMNS.MAX_PHASE,
-    Compound.COLUMNS.FULL_MWT,
-    Compound.COLUMNS.NUM_TARGETS,
-    Compound.COLUMNS.BIOACTIVITIES_NUMBER,
-    Compound.COLUMNS.ALOGP,
-    Compound.COLUMNS.PSA,
-    Compound.COLUMNS.HBA,
-    Compound.COLUMNS.HBD,
-    Compound.COLUMNS.RO5,
-    Compound.COLUMNS.ROTATABLE_BONDS,
-    Compound.COLUMNS.RULE_OF_THREE_PASS,
-    Compound.COLUMNS.QED_WEIGHTED
-  ]
+
   RESULTS_LIST_TABLE_SIMILARITY: [
     Compound.COLUMNS.SIMILARITY_ELASTIC
     Compound.COLUMNS.CHEMBL_ID,
@@ -988,22 +1060,25 @@ Compound.COLUMNS_SETTINGS = {
     Compound.COLUMNS.BIOACTIVITIES_NUMBER
   ]
   RESULTS_LIST_REPORT_CARD_ADDITIONAL:[
-    Compound.COLUMNS.APKA,
-    Compound.COLUMNS.BPKA,
-    Compound.COLUMNS.ACD_LOGP,
-    Compound.COLUMNS.ACD_LOGD,
-    Compound.COLUMNS.AROMATIC_RINGS,
-    Compound.COLUMNS.STRUCTURE_TYPE,
-    Compound.COLUMNS.INORGANIC_FLAG,
-    Compound.COLUMNS.HEAVY_ATOMS,
-    Compound.COLUMNS.HBA_LIPINSKI,
-    Compound.COLUMNS.HBD_LIPINSKI,
-    Compound.COLUMNS.RO5_LIPINSKI,
-    Compound.COLUMNS.MWT_MONOISOTOPIC,
-    Compound.COLUMNS.MOLECULAR_SPECIES,
-    Compound.COLUMNS.FULL_MOLFORMULA,
-#    Compound.COLUMNS.NUM_TARGETS_BY_CLASS
+    Compound.COLUMNS.PREF_NAME
   ]
+#  RESULTS_LIST_REPORT_CARD_ADDITIONAL:[
+#    Compound.COLUMNS.APKA,
+#    Compound.COLUMNS.BPKA,
+#    Compound.COLUMNS.ACD_LOGP,
+#    Compound.COLUMNS.ACD_LOGD,
+#    Compound.COLUMNS.AROMATIC_RINGS,
+#    Compound.COLUMNS.STRUCTURE_TYPE,
+#    Compound.COLUMNS.INORGANIC_FLAG,
+#    Compound.COLUMNS.HEAVY_ATOMS,
+#    Compound.COLUMNS.HBA_LIPINSKI,
+#    Compound.COLUMNS.HBD_LIPINSKI,
+#    Compound.COLUMNS.RO5_LIPINSKI,
+#    Compound.COLUMNS.MWT_MONOISOTOPIC,
+#    Compound.COLUMNS.MOLECULAR_SPECIES,
+#    Compound.COLUMNS.FULL_MOLFORMULA,
+##    Compound.COLUMNS.NUM_TARGETS_BY_CLASS
+#  ]
   RESULTS_LIST_SIMILARITY:[
     Compound.COLUMNS.CHEMBL_ID,
     Compound.COLUMNS.SIMILARITY,
@@ -1073,7 +1148,6 @@ Compound.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS_SIMILARITY = _.union(
 Compound.MINI_REPORT_CARD =
   LOADING_TEMPLATE: 'Handlebars-Common-MiniRepCardPreloader'
   TEMPLATE: 'Handlebars-Common-MiniReportCard'
-  COLUMNS: Compound.COLUMNS_SETTINGS.MINI_REPORT_CARD
 
 Compound.getCompoundsListURL = (filter, isFullState=false, fragmentOnly=false) ->
 

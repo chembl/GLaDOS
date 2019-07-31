@@ -173,6 +173,102 @@ Target.color = 'lime'
 Target.reportCardPath = 'target_report_card/'
 
 Target.INDEX_NAME = 'chembl_target'
+
+Target.PROPERTIES_VISUAL_CONFIG = {
+  'target_chembl_id': {
+    link_base: 'report_card_url'
+  },
+  'pref_name': {
+    custom_field_template: '<i>{{val}}</i>'
+  },
+  'uniprot_accessions': {
+    parse_function: (components) ->
+
+      if not components?
+        return glados.Utils.DEFAULT_NULL_VALUE_LABEL
+
+      if components.length == 0
+        return glados.Utils.DEFAULT_NULL_VALUE_LABEL
+
+      return (comp.accession for comp in components).join(', ')
+    link_function: (components) ->
+      'http://www.uniprot.org/uniprot/?query=' + ('accession:' + comp.accession for comp in components).join('+OR+')
+  }
+  '_metadata.related_compounds.count': {
+    link_base: 'compounds_url'
+    on_click: TargetReportCardApp.initMiniHistogramFromFunctionLink
+    function_constant_parameters: ['compounds']
+    function_parameters: ['target_chembl_id']
+    # to help bind the link to the function, it could be necessary to always use the key of the columns descriptions
+    # or probably not, depending on how this evolves
+    function_key: 'num_compounds'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
+  }
+  '_metadata.related_activities.count': {
+    link_base: 'activities_url'
+    on_click: TargetReportCardApp.initMiniHistogramFromFunctionLink
+    function_parameters: ['target_chembl_id']
+    function_constant_parameters: ['activities']
+    # to help bind the link to the function, it could be necessary to always use the key of the columns descriptions
+    # or probably not, depending on how this evolves
+    function_key: 'bioactivities'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
+  }
+  'best_expectation': {
+    'show': true
+    'comparator': '_context.best_expectation'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'is_contextual': true
+  }
+  'best_positives': {
+    'show': true
+    'comparator': '_context.best_positives'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'is_contextual': true
+  }
+  'best_identities': {
+    'show': true
+    'comparator': '_context.best_identities'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'is_contextual': true
+  }
+  'best_score_bits': {
+    'show': true
+    'comparator': '_context.best_score_bits'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'is_contextual': true
+  }
+  'best_score': {
+    'show': true
+    'comparator': '_context.best_score'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'is_contextual': true
+  }
+  'length': {
+    'show': true
+    'name_to_show': 'Length'
+    'comparator': '_context.length'
+    'sort_disabled': false
+    'is_sorting': 0
+    'sort_class': 'fa-sort'
+    'is_contextual': true
+  }
+}
+
 Target.COLUMNS = {
   CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Target.INDEX_NAME,
     comparator: 'target_chembl_id'
@@ -278,6 +374,21 @@ Target.COLUMNS = {
     'is_contextual': true
   }
 }
+
+Target.COLUMNS.CHEMBL_ID = {
+  aggregatable: true
+  comparator: "target_chembl_id"
+  hide_label: true
+  id: "target_chembl_id"
+  is_sorting: 0
+  link_base: "report_card_url"
+  name_to_show: "ChEMBL ID"
+  name_to_show_short: "ChEMBL ID"
+  show: true
+  sort_class: "fa-sort"
+  sort_disabled: false
+}
+
 Target.ID_COLUMN = Target.COLUMNS.CHEMBL_ID
 
 Target.COLUMNS_SETTINGS = {
@@ -332,7 +443,6 @@ Target.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS = _.union(Target.COLUMNS_SETTIN
 Target.MINI_REPORT_CARD =
   LOADING_TEMPLATE: 'Handlebars-Common-MiniRepCardPreloader'
   TEMPLATE: 'Handlebars-Common-MiniReportCard'
-  COLUMNS: Target.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
 
 Target.getTargetsListURL = (filter, isFullState=false, fragmentOnly=false) ->
 

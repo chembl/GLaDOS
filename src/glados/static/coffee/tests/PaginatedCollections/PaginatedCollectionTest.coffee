@@ -32,8 +32,8 @@ describe "Paginated Collection", ->
       assert_chembl_ids(appDrugCCList, ["CHEMBL2218913", "CHEMBL614", "CHEMBL1200526"])
 
     it "sorts the collection by name (descending)", ->
-      appDrugCCList.resetMeta()
 
+      appDrugCCList.resetMeta()
       appDrugCCList.sortCollection('pref_name')
       appDrugCCList.sortCollection('pref_name')
 
@@ -43,17 +43,6 @@ describe "Paginated Collection", ->
       appDrugCCList.setSearch('CHEMBL1200526')
       assert_chembl_ids(appDrugCCList, ["CHEMBL1200526"])
 
-
-  describe "A 5 elements collection, having 5 elements per page", ->
-    drugList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugList()
-    drugList.setMeta('page_size', 5)
-    drugList.setMeta('server_side', true)
-
-    beforeAll (done) ->
-      TestsUtils.simulateDataWSClientList(drugList, glados.Settings.STATIC_URL + 'testData/WSCollectionTestData1.json', done)
-
-    it "gives the first page correctly", ->
-      assert_chembl_ids(drugList, ["CHEMBL6939", "CHEMBL22", "CHEMBL6941", "CHEMBL6942", "CHEMBL6944"])
 
 
   describe "A 68 elements collection", ->
@@ -129,80 +118,6 @@ describe "Paginated Collection", ->
       comparator = _.zip(shownIDs, expectedChEMBLIDs)
       for elem in comparator
         expect(elem[0]).toBe(elem[1])
-
-  describe "A server side collection", ->
-    drugList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugList()
-
-    #    drugList = new DrugList
-    drugList.setMeta('page_size', 20)
-
-    beforeEach ->
-      drugList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewDrugList()
-
-    #TODO: remove dependence from server on this test
-#    it "(SERVER DEPENDENT) initialises correctly", (done) ->
-#      page_size = drugList.getMeta('page_size')
-#      current_page = drugList.getMeta('current_page')
-#      total_pages = drugList.getMeta('total_pages')
-#      total_records = drugList.getMeta('total_records')
-#      records_in_page = drugList.getMeta('records_in_page')
-#
-#      expect(page_size).toBe(20)
-#      expect(current_page).toBe(1)
-#      expect(total_pages).toBe(86773)
-#      expect(total_records).toBe(1735442)
-#      expect(records_in_page).toBe(20)
-#      expect(drugList.getMeta('all_items_selected')).toBe(false)
-#      expect(Object.keys(drugList.getMeta('selection_exceptions')).length).toBe(0)
-#
-#      done()
-
-    it "defines the initial url", ->
-      expect(drugList.url).toBe(glados.Settings.WS_BASE_URL+'molecule.json?limit=20&offset=0')
-
-
-    it "defines the url for the 5th page", ->
-      drugList.setPage(5)
-      expect(drugList.url).toBe(glados.Settings.WS_BASE_URL+'molecule.json?limit=20&offset=80')
-
-    it "defines the url after switching to 5 items per page", ->
-      drugList.resetPageSize(5)
-      expect(drugList.url).toBe(glados.Settings.WS_BASE_URL+'molecule.json?limit=5&offset=0')
-
-    it "generates a url from custom parameters", ->
-
-      customPageSize = 50
-      customPageNum = 10
-      url = drugList.getPaginatedURL(customPageSize, customPageNum)
-      expect(url).toBe(glados.Settings.WS_BASE_URL+'molecule.json?limit=50&offset=450')
-
-    it "generates a correct paginated url (sorting)", ->
-      drugList.sortCollection('molecule_chembl_id')
-      url = drugList.getPaginatedURL()
-
-      expect(url).toContain('order_by=molecule_chembl_id')
-
-
-    it "generates a correct paginated url (search)", ->
-      drugList.setSearch('25', 'molecule_chembl_id', 'text')
-      drugList.setSearch('ASP', 'pref_name', 'text')
-
-      url = drugList.getPaginatedURL()
-
-      expect(url).toContain('molecule_chembl_id__contains=25')
-      expect(url).toContain('pref_name__contains=ASP')
-
-
-  describe "A WS collection initialised with a filter", ->
-
-    filter = 'target_chembl_id=CHEMBL2096905&standard_type=Ki'
-    list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewActivitiesList(filter)
-
-    it 'generates the initial url', ->
-
-      console.log 'generates the initial url'
-      urlMustBe = glados.Settings.WS_BASE_URL+'activity.json?limit=20&offset=0&target_chembl_id=CHEMBL2096905&standard_type=Ki'
-      expect(list.url).toBe(urlMustBe)
 
   # ------------------------------
   # Helpers

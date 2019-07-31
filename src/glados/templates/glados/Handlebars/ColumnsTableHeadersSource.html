@@ -1,7 +1,7 @@
 {% verbatim %}
     {{#each columns}}
         <th class="{{#unless this.show}}hidden_header{{/unless}} BCK-sortable-pag-table-header"
-            data-comparator="{{this.comparator}}">
+            data-prop-id="{{this.prop_id}}">
             <table class="headers-table {{#unless this.sort_disabled}}sort{{/unless}}"
                 {{#if this.table_cell_width}}style='width:{{this.table_cell_width}};'{{/if}}
                 data-view-id="{{this.view_id}}">
@@ -11,7 +11,7 @@
                         <th>
                             {{#unless this.sort_disabled}}
                                 <i class="fa {{sort_class}} grey-text sort-icon" aria-hidden="true"
-                                    data-comparator="{{this.comparator}}">
+                                    data-prop-id="{{this.prop_id}}">
                                 </i>
                             {{/unless}}
                         </th>

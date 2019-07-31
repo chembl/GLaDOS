@@ -1,5 +1,6 @@
 glados.useNameSpace 'glados.models.paginatedCollections',
   ColumnsFactory:
+
     #the baseConfig MUST have a comparator, from there it will do the rest
     generateColumn: (indexName, baseConfig) ->
 
@@ -20,9 +21,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       inferredProperties.name_to_show = gettext(gladosConfig.label_id)
       inferredProperties.name_to_show_short = gettext(gladosConfig.label_mini_id)
       inferredProperties.id = gettext(baseConfig.comparator)
+      inferredProperties.prop_id = inferredProperties.id
 
       finalConfig = _.extend({show:true}, gladosConfig, inferredProperties, baseConfig)
       return finalConfig
+
 
     getSearchResultsHighlightColumn: () ->
       srhColumn= {

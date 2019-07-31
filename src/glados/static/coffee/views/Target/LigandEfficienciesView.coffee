@@ -9,7 +9,7 @@ glados.useNameSpace 'glados.views.Target',
       @collection.on glados.Events.Collections.ALL_ITEMS_DOWNLOADED, @renderPlot, @
 
       @$progressElement = $(@el).find('.load-messages-container')
-      @collection.getAllResults(@$progressElement)
+
       @target_chembl_id = arguments[0].target_chembl_id
 
       @resource_type = 'Target'
@@ -38,6 +38,11 @@ glados.useNameSpace 'glados.views.Target',
         collection: @collection
         config: config
 
+      thisView = @
+      descriptionPromise = @collection.fetchColumnsDescription()
+      descriptionPromise.then(->
+        thisView.collection.getAllResults(thisView.$progressElement)
+      )
 
     renderPlot: ->
       console.log 'going to render plot!'

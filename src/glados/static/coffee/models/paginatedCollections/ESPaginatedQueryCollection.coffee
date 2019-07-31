@@ -227,8 +227,86 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return jsonResultsList
 
-    # Prepares an Elastic Search query to search in all the fields of a document in a specific index
+    fetchColumnsDescription: ->
+      @setConfigState(
+        glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING_STATES.FETCHING_CONFIGURATION
+      )
+
+      thisCollection = @
+      descriptionPromise = new Promise((resolve, reject) ->
+
+        configGroups = thisCollection.getMeta('config_groups')
+        totalGroupsToLoad = Object.keys(configGroups).length
+
+        numLoadedGroups = 0
+        propertiesConfigModels = {}
+        for viewKey, groupName of configGroups
+
+          propertiesConfigModel = new glados.models.paginatedCollections.esSchema.PropertiesConfigurationModel
+            index_name: thisCollection.getMeta('index_name')
+            group_name: groupName
+            entity: thisCollection.getMeta('model')
+
+          propertiesConfigModels[viewKey] = propertiesConfigModel
+
+          propertiesConfigModel.on('error', (model, jqXHR) -> reject(jqXHR))
+          propertiesConfigModel.once('change:parsed_configuration', ->
+            numLoadedGroups++
+            if numLoadedGroups == totalGroupsToLoad
+
+              thisCollection.loadConfigFromFetchedModels(propertiesConfigModels)
+              thisCollection.setConfigState(
+                glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING_STATES.CONFIGURATION_READY
+              )
+              resolve('success')
+          )
+          unless thisCollection.getMeta('test_mode')
+            propertiesConfigModel.fetch()
+
+      )
+      return descriptionPromise
+
+    loadConfigFromFetchedModels: (propertiesConfigModels) ->
+
+      columnsDescription = {}
+      propsComparatorsSet = {}
+      allColumns = []
+
+      for viewKey, configModel of propertiesConfigModels
+        columnsDescription[viewKey] = configModel.get('parsed_configuration')
+        newPropsComparators = configModel.get('props_comparators_set')
+        currentAllColumns = configModel.get('all_columns')
+
+        for column in currentAllColumns
+          propId = column.prop_id
+          if not propsComparatorsSet[propId]
+            allColumns.push(column)
+
+        for key, value of newPropsComparators
+          propsComparatorsSet[key] = key
+
+      @setMeta('columns', allColumns)
+      @setMeta('columns_description', columnsDescription)
+      @setMeta('props_comparators_set', propsComparatorsSet)
+      @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.COLUMNS_CONFIGURATION_LOADED)
+
     fetch: (options, testMode=false) ->
+
+      testMode |= @getMeta('test_mode')
+      if testMode or @configIsReady()
+        return @fetchData(options, testMode)
+
+      descriptionPromise = @fetchColumnsDescription()
+
+      thisCollection = @
+      descriptionPromise.then( ->
+        thisCollection.fetchData(options, testMode=false)
+      ).catch( (jqXHR) ->
+        thisCollection.trigger('error', thisCollection, jqXHR)
+      )
+
+    # Prepares an Elastic Search query to search in all the fields of a document in a specific index
+    fetchData: (options, testMode=false) ->
       testMode |= @getMeta('test_mode')
       @trigger('before_fetch_elastic')
       @url = @getURL()
@@ -240,7 +318,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @setMeta('current_page', 1)
         @setMeta('facets_changed', false)
 
-      @setItemsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.FETCHING_ITEMS)
+      @setItemsFetchingState(
+        glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.FETCHING_ITEMS
+      )
       # Creates the Elastic Search Query parameters and serializes them
       esCacheRequest = @getListHelperRequestData()
 
@@ -323,13 +403,21 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       useCustomQuery = @getMeta('use_custom_query')
       customQueryIsFullQuery = @customQueryIsFullQuery()
 
+      propsComparatorsSet = @getMeta('props_comparators_set')
+      propsComparatorsSet ?= {}
+      # This is a list of permanent comparators that will be included in the source, regardless of the properties
+      # configuration received. In the case of compounds this is necessary to obtain the correct image
+      permanentComparatorsToFetch = @getMeta('permanent_comparators_to_fetch')
+      permanentComparatorsToFetch ?= []
+      for comparator in permanentComparatorsToFetch
+        propsComparatorsSet[comparator] = comparator
+
+      sourceList = Object.keys(propsComparatorsSet)
       # Base Elasticsearch query
       esQuery = {
         size: pageSize,
         from: ((page - 1) * pageSize)
-        _source:
-          includes: [ '*', '_metadata.*']
-          excludes: [ '_metadata.related_targets.chembl_ids.*', '_metadata.related_compounds.chembl_ids.*']
+        _source: sourceList
         query:
           bool:
             must: []
@@ -733,10 +821,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # Sorting functions
     # ------------------------------------------------------------------------------------------------------------------
 
-    sortCollection: (comparator) ->
+    sortCollection: (colID) ->
       @resetCache() unless not @getMeta('enable_collection_caching')
       columns = @getAllColumns()
-      @setupColSorting(columns, comparator)
+      @setupColSorting(columns, colID)
       @invalidateAllDownloadedResults()
       @setMeta('current_page', 1)
       @fetch()

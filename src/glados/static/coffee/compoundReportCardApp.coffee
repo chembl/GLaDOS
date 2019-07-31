@@ -121,7 +121,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
           return false
         else
           return true
-      properties_to_show: Compound.COLUMNS_SETTINGS.COMPOUND_SOURCES_SECTION
+      properties_group: 'compound_sources'
       sort_alpha: true
       property_id_to_sort: 'compound_sources_list'
 
@@ -232,7 +232,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       embed_section_name: 'withdrawal_info'
       embed_identifier: compound.get('molecule_chembl_id')
       show_if: (model) -> model.attributes.withdrawn_flag == true
-      properties_to_show: Compound.COLUMNS_SETTINGS.WITHDRAWN_INFO_SECTION
+      properties_group: 'withdrawal_info'
 
     new glados.views.ReportCards.EntityDetailsInCardView
       model: compound
@@ -254,7 +254,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       embed_section_name: 'clinical_data'
       embed_identifier: compound.get('molecule_chembl_id')
       show_if: (model) -> model.attributes.pref_name?
-      properties_to_show: Compound.COLUMNS_SETTINGS.CLINICAL_DATA_SECTION
+      properties_group: 'clinical_data'
 
     new glados.views.ReportCards.EntityDetailsInCardView
       model: compound
@@ -614,14 +614,14 @@ class CompoundReportCardApp extends glados.ReportCardApp
       embed_section_name: 'helm_notation'
       embed_identifier: compound.get('molecule_chembl_id')
       show_if: (model) ->
-        HELMNotation = glados.Utils.getNestedValue(model.attributes, Compound.COLUMNS.HELM_NOTATION.comparator,
+        HELMNotation = glados.Utils.getNestedValue(model.attributes, 'helm_notation',
           forceAsNumber=false, customNullValueLabel=undefined, returnUndefined=true)
 
         if not HELMNotation?
           return false
         else
           return true
-      properties_to_show: Compound.COLUMNS_SETTINGS.HELM_NOTATION_SECTION
+      properties_group: 'helm_notation'
       after_render: (thisView) ->
 
         $container = $(thisView.el).find('.BCK-HELMNotationContainer')
@@ -658,7 +658,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       embed_section_name: 'biocomponents'
       embed_identifier: compound.get('molecule_chembl_id')
       show_if: (model) ->
-        biocomponents = glados.Utils.getNestedValue(model.attributes, Compound.COLUMNS.BIOCOMPONENTS.comparator,
+        biocomponents = glados.Utils.getNestedValue(model.attributes, 'biotherapeutic.biocomponents',
           forceAsNumber=false, customNullValueLabel=undefined, returnUndefined=true)
 
         if not biocomponents?
@@ -668,7 +668,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
           return false
 
         return true
-      properties_to_show: Compound.COLUMNS_SETTINGS.BIOCOMPONENTS_SECTION
+      properties_group: 'biocomponents'
       after_render: (thisView) ->
 
         $buttonsContainers = $(thisView.el).find('.BCK-BioCompCroppedContainer')

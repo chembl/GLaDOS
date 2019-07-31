@@ -168,6 +168,7 @@ PlotView = Backbone.View.extend(ResponsiviseViewExt).extend
     # can mess the axes range
     @shownElements = _.reject(@shownElements, (mol) ->
 
+      console.log('DEBUG')
       for propName in [thisView.currentPropertyX.propName,
         thisView.currentPropertyY.propName,
         thisView.currentPropertyColour.propName]

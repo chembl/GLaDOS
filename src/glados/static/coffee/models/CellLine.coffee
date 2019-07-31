@@ -41,6 +41,49 @@ CellLine.color = 'deep-purple'
 CellLine.reportCardPath = 'cell_line_report_card/'
 
 CellLine.INDEX_NAME = 'chembl_cell_line'
+CellLine.PROPERTIES_VISUAL_CONFIG = {
+  'cell_chembl_id': {
+    link_base: 'report_card_url'
+  }
+  'cell_name': {
+    custom_field_template: '<i>{{val}}</i>'
+  }
+  'clo_id': {
+    link_function: (id) -> 'http://purl.obolibrary.org/obo/' + id
+  }
+  'efo_id': {
+    link_function: (id) -> 'https://www.ebi.ac.uk/ols/ontologies/efo/terms?short_form=' + id
+  }
+  'cellosaurus_id': {
+    link_function: (id) -> 'http://web.expasy.org/cellosaurus/' + id
+  }
+  'efo_id': {
+    link_function: (id) -> 'https://www.ebi.ac.uk/ols/ontologies/efo/terms?short_form=' + id
+  }
+  'cl_lincs_id': {
+    link_function: (id) -> 'http://life.ccs.miami.edu/life/summary?mode=CellLine&source=LINCS&input=' + id
+  }
+  '_metadata.related_compounds.count': {
+    link_base: 'compounds_url'
+    on_click: CellLineReportCardApp.initMiniHistogramFromFunctionLink
+    function_constant_parameters: ['compounds']
+    function_parameters: ['cell_chembl_id']
+    function_key: 'cell_num_compounds'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
+  }
+  '_metadata.related_activities.count': {
+    link_base: 'activities_url'
+    on_click: CellLineReportCardApp.initMiniHistogramFromFunctionLink
+    function_parameters: ['cell_chembl_id']
+    function_constant_parameters: ['activities']
+    function_key: 'cell_bioactivities'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
+  }
+}
 CellLine.COLUMNS = {
   CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn CellLine.INDEX_NAME,
     link_base: 'report_card_url'
@@ -119,13 +162,26 @@ CellLine.COLUMNS_SETTINGS = {
   ]
 }
 
+CellLine.COLUMNS.CHEMBL_ID = {
+  aggregatable: true
+  comparator: "cell_chembl_id"
+  hide_label: true
+  id: "cell_chembl_id"
+  is_sorting: 0
+  link_base: "report_card_url"
+  name_to_show: "ChEMBL ID"
+  name_to_show_short: "ChEMBL ID"
+  show: true
+  sort_class: "fa-sort"
+  sort_disabled: false
+}
+
 CellLine.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS = _.union(CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE,
   CellLine.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL)
 
 CellLine.MINI_REPORT_CARD =
   LOADING_TEMPLATE: 'Handlebars-Common-MiniRepCardPreloader'
   TEMPLATE: 'Handlebars-Common-MiniReportCard'
-  COLUMNS: CellLine.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
 
 CellLine.getCellsListURL = (filter, isFullState=false, fragmentOnly=false) ->
 

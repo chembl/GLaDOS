@@ -44,7 +44,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     indexAllColumns: ->
 
       allColumns = @get('all_columns')
-      @set('columns_index', _.indexBy(allColumns, 'comparator'))
+      @set('columns_index', _.indexBy(allColumns, 'prop_id'))
 
     setColumnsPositions: ->
 
@@ -70,7 +70,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     setShowHideColumnStatus: (identifier, show) ->
 
       allColumnsIndex = @get('columns_index')
-      allColumnsIndex[identifier].show = show
+      changedColumn = allColumnsIndex[identifier]
+      changedColumn.show = show
 
       if show
         enter = [identifier]
@@ -92,7 +93,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       for col in allColumns
         if col.show != show
           col.show = show
-          identifiers.push col.comparator
+          identifiers.push col.prop_id
 
       if show
         @set
@@ -115,14 +116,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       for i in [0..allColumns.length-1]
         col = allColumns[i]
-        if col.comparator == draggedProperty
+        if col.prop_id == draggedProperty
           draggedColumn = col
           allColumns.splice(i, 1)
           break
 
       for i in [0..allColumns.length-1]
         col = allColumns[i]
-        if col.comparator == receivingProperty
+        if col.prop_id == receivingProperty
           allColumns.splice(i, 0, draggedColumn)
           break
 

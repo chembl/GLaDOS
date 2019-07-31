@@ -20,10 +20,12 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @disableColumnsSelection = arguments[0].disable_columns_selection
       @disableItemsSelection = arguments[0].disable_items_selection
       @viewID = (new Date()).getTime().toString()
-      @initColumnsHandler()
 
-      if @isTable()
-        @initialiseColumnsModal() unless @disableColumnsSelection
+      if @collection.configIsReady()?
+        @initColumnsHandler()
+      else
+        @collection.on(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.CONFIG_FETCHING_STATE_CHANGED,
+          @initColumnsHandler, @)
 
       @initTooltipFunctions()
       @bindCollectionEvents()
@@ -78,6 +80,12 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     initColumnsHandler: ->
 
+      if not @collection.configIsReady()
+        return
+
+      if @columnsHandler?
+        return
+
       defaultColumns = @getDefaultColumns()
       additionalColumns = @getAdditionalColumns()
 
@@ -89,6 +97,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @columnsHandler.on 'change:exit change:enter', @handleShowHideColumns, @
       @columnsHandler.on glados.models.paginatedCollections.ColumnsHandler.EVENTS.COLUMNS_ORDER_CHANGED,
         @handleColumnsOrderChange, @
+
+      if @isTable()
+        @initialiseColumnsModal() unless @disableColumnsSelection
 
     handleShowHideColumns: ->
 
@@ -206,6 +217,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     # it handle the case when the items are shown as list, table, or infinite browser
     fillTemplates: ->
 
+      @initColumnsHandler()
       $elem = $(@el).find('.BCK-items-container')
       visibleColumns = @getVisibleColumns()
       @numVisibleColumnsList.push visibleColumns.length
@@ -378,9 +390,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       @showPaginatedViewPreloader() unless @collection.getMeta('server_side') != true
       sortIcon = $target.find('.sort-icon')
-      comparator = sortIcon.attr('data-comparator')
+      colID = sortIcon.attr('data-prop-id')
 
-      @triggerCollectionSort(comparator)
+      @triggerCollectionSort(colID)
 
     triggerCollectionSort: (comparator) ->
 

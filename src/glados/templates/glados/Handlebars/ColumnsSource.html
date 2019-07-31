@@ -14,12 +14,12 @@
             {% verbatim %}
             <td class="{{#if this.img_url}}center-align{{/if}} {{format_class}}
                 {{#unless this.show}}hidden_cell{{/unless}} BCK-sortable-pag-table-cell"
-                data-comparator="{{this.comparator}}">
+                data-prop-id="{{this.prop_id}}">
             {% endverbatim %}
         {% elif for_table_as_card %}
             {% verbatim %}
             <div class="{{#unless this.show}}hidden_list_prop{{/unless}} BCK-sortable-pag-list-prop"
-                data-comparator="{{this.comparator}}">
+                data-prop-id="{{this.prop_id}}">
                 <b>{{this.name_to_show}}:</b>
             {% endverbatim %}
         {% elif for_card %}
@@ -63,6 +63,8 @@
             {{else}}
                 {{{this.highlighted_value}}}
             {{/if}}
+        {{ else if this.no_data }}
+            {{this.value}}
         {{else if this.has_link}}
             <a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
         {{else if this.has_multiple_links}}

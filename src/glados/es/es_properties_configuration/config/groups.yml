@@ -10,8 +10,24 @@ chembl_molecule:
     'molecule_properties.hbd_lipinski', 'molecule_properties.num_lipinski_ro5_violations',
     'molecule_properties.mw_monoisotopic', 'molecule_properties.molecular_species',
     'molecule_properties.full_molformula', 'molecule_structures.canonical_smiles']
+  browser_table:
+    default: ['molecule_chembl_id', 'pref_name', 'molecule_synonyms', 'molecule_type', 'max_phase',
+    'molecule_properties.full_mwt', '_metadata.related_targets.count', '_metadata.related_activities.count',
+    'molecule_properties.alogp', 'molecule_properties.psa', 'molecule_properties.hba', 'molecule_properties.hbd',
+    'molecule_properties.num_ro5_violations', 'molecule_properties.rtb', 'molecule_properties.ro3_pass',
+    'molecule_properties.qed_weighted']
+    optional: ['molecule_properties.acd_most_apka', 'molecule_properties.acd_most_bpka', 'molecule_properties.acd_logp',
+    'molecule_properties.acd_logd', 'molecule_properties.aromatic_rings', 'structure_type', 'inorganic_flag',
+    'molecule_properties.heavy_atoms', 'molecule_properties.hba_lipinski', 'molecule_properties.hbd_lipinski',
+    'molecule_properties.num_lipinski_ro5_violations', 'molecule_properties.mw_monoisotopic',
+    'molecule_properties.molecular_species', 'molecule_properties.full_molformula',
+    'molecule_structures.canonical_smiles']
+  browser_cards:
+    default: ['molecule_chembl_id', 'pref_name']
+  alternate_forms_carousel:
+    default: ['molecule_chembl_id']
   download_drugs:
-    default: ['molecule_chembl_id', 'molecule_synonyms', 'research_codes', 'drug_phase',
+    default: ['drug_parent_molecule_chembl_id', 'molecule_synonyms', 'research_codes', 'drug_phase',
     '_metadata.drug.drug_data.applicants', 'usan_stem', 'usan_year', 'usan_stem_definition',
     '_metadata.drug.drug_data.usan_stem_substem', 'first_approval', 'drug_atc_codes', 'drug_atc_codes_level_4',
     'drug_atc_codes_level_3', 'drug_atc_codes_level_2', 'drug_atc_codes_level_1',
@@ -23,6 +39,15 @@ chembl_molecule:
     '_metadata.drug.drug_data.withdrawn_year', '_metadata.drug.drug_data.withdrawn_reason',
     '_metadata.drug.drug_data.withdrawn_country', '_metadata.drug.drug_data.withdrawn_class',
     'molecule_structures.canonical_smiles']
+  browser_cards_drugs:
+    default: ['drug_parent_molecule_chembl_id', 'molecule_synonyms', 'research_codes', 'drug_phase']
+  browser_table_drugs:
+    default: ['drug_parent_molecule_chembl_id', 'molecule_synonyms', 'research_codes', 'drug_phase',
+    '_metadata.drug.drug_data.applicants', 'usan_stem', 'usan_year', 'first_approval', 'drug_atc_codes', 'drug_icon']
+    optional: ['usan_stem_definition', '_metadata.drug.drug_data.usan_stem_substem',  'drug_atc_codes_level_4',
+    'drug_atc_codes_level_3', 'drug_atc_codes_level_2', 'drug_atc_codes_level_1', 'indication_class',
+    '_metadata.drug.drug_data.sc_patent', 'withdrawn_year', 'withdrawn_reason', 'withdrawn_country',
+    'withdrawn_class', 'molecule_structures.canonical_smiles']
   download_similarity:
     default: ['similarity', 'molecule_chembl_id', 'pref_name', 'molecule_synonyms', 'molecule_type', 'max_phase',
     'molecule_properties.full_mwt', '_metadata.related_targets.count', '_metadata.related_activities.count',
@@ -34,6 +59,30 @@ chembl_molecule:
     'molecule_properties.hbd_lipinski', 'molecule_properties.num_lipinski_ro5_violations',
     'molecule_properties.mw_monoisotopic', 'molecule_properties.molecular_species',
     'molecule_properties.full_molformula', 'molecule_structures.canonical_smiles']
+  browser_cards_similarity:
+    default: ['molecule_chembl_id', 'pref_name', 'similarity']
+  browser_table_similarity:
+    default: ['similarity', 'molecule_chembl_id', 'pref_name', 'molecule_synonyms', 'molecule_type', 'max_phase',
+    'molecule_properties.full_mwt', '_metadata.related_targets.count', '_metadata.related_activities.count',
+    'molecule_properties.alogp', 'molecule_properties.psa', 'molecule_properties.hba', 'molecule_properties.hbd',
+    'molecule_properties.num_ro5_violations', 'molecule_properties.rtb', 'molecule_properties.ro3_pass',
+    'molecule_properties.qed_weighted']
+    optional: ['molecule_properties.acd_most_apka', 'molecule_properties.acd_most_bpka', 'molecule_properties.acd_logp',
+    'molecule_properties.acd_logd', 'molecule_properties.aromatic_rings', 'structure_type', 'inorganic_flag',
+    'molecule_properties.heavy_atoms', 'molecule_properties.hba_lipinski', 'molecule_properties.hbd_lipinski',
+    'molecule_properties.num_lipinski_ro5_violations', 'molecule_properties.mw_monoisotopic',
+    'molecule_properties.molecular_species', 'molecule_properties.full_molformula',
+    'molecule_structures.canonical_smiles']
+  compound_sources:
+    default: ['sources_list', 'additional_sources_list']
+  withdrawal_info:
+   default: ['withdrawn_year', 'withdrawn_reason', 'withdrawn_country', 'withdrawn_class']
+  clinical_data:
+    default: ['clinical_trials_terms', 'chochrane_terms']
+  helm_notation:
+    default: ['helm_notation']
+  biocomponents:
+    default: ['molecule_chembl_id', 'biotherapeutic.biocomponents']
 chembl_assay:
   download:
     default: ['assay_chembl_id', 'assay_type', 'description', 'assay_organism', '_metadata.related_compounds.count',
@@ -42,6 +91,14 @@ chembl_assay:
     'document_chembl_id', '_metadata.document_data.pubmed_id', '_metadata.document_data.doi',
     '_metadata.document_data.year', '_metadata.document_data.journal', '_metadata.document_data.volume',
     '_metadata.document_data.first_page','_metadata.document_data.last_page', 'assay_parameters']
+  browser_table:
+    default: ['assay_chembl_id', 'assay_type', 'description', 'assay_organism', '_metadata.related_compounds.count',
+    'document_chembl_id', 'bao_label', '_metadata.source.src_description']
+    optional: ['_metadata.related_activities.count', 'bao_format', 'assay_strain', 'assay_tax_id', 'assay_type', 'tissue_chembl_id',
+    'assay_tissue', 'assay_cell_type', 'assay_subcellular_fraction', '_metadata.document_data.pubmed_id',
+    '_metadata.document_data.doi', '_metadata.document_data.year', '_metadata.document_data.journal',
+    '_metadata.document_data.volume', '_metadata.document_data.first_page','_metadata.document_data.last_page',
+    'assay_parameters']
 chembl_target:
   download:
     default: ['target_chembl_id', 'pref_name', 'uniprot_accessions', 'target_type', 'organism',
@@ -50,20 +107,41 @@ chembl_target:
     default: ['best_expectation', 'best_positives', 'best_identities', 'best_score_bits', 'best_score', 'length',
     'target_chembl_id', 'pref_name', 'uniprot_accessions', 'target_type', 'organism',
     '_metadata.related_compounds.count', '_metadata.related_activities.count', 'tax_id', 'species_group_flag']
+  browser_table:
+    default: [ 'target_chembl_id', 'pref_name', 'uniprot_accessions', 'target_type', 'organism',
+    '_metadata.related_compounds.count', '_metadata.related_activities.count']
+    optional: ['tax_id', 'species_group_flag']
+  browser_table_blast:
+    default: ['best_expectation', 'best_positives', 'best_identities', 'best_score_bits', 'best_score', 'length',
+    'target_chembl_id', 'pref_name', 'uniprot_accessions', 'target_type', 'organism',
+    '_metadata.related_compounds.count', '_metadata.related_activities.count']
+    optional: ['tax_id', 'species_group_flag']
 chembl_document:
   download:
     default: ['document_chembl_id', 'journal_full_title', 'src_id', '_metadata.source', 'title', 'pubmed_id', 'doi',
-    'patent_id', 'authors', 'year', 'volume', 'issue', 'first_page', 'doc_type', 'abstract',
+    'patent_id', 'authors', 'year', 'volume', 'issue', 'first_page', 'last_page', 'doc_type', 'abstract',
     '_metadata.related_compounds.count', '_metadata.related_targets.count', '_metadata.related_activities.count']
+  browser_table:
+    default: ['document_chembl_id', 'journal_full_title', '_metadata.source', 'title', 'pubmed_id', 'doi', 'patent_id',
+    'authors', 'year', 'volume', 'issue', 'first_page', 'last_page', '_metadata.related_activities.count']
+    optional: ['src_id', 'abstract', '_metadata.related_compounds.count', '_metadata.related_targets.count']
 chembl_cell_line:
   download:
     default: ['cell_chembl_id', 'cell_name', 'cell_description', 'cell_source_organism', 'cell_source_tissue',
     'cell_source_tax_id', 'clo_id', 'efo_id', 'cellosaurus_id', 'cl_lincs_id', '_metadata.related_compounds.count',
     '_metadata.related_activities.count']
+  browser_table:
+    default: ['cell_chembl_id', 'cell_name', 'cell_description', 'cell_source_organism', 'cell_source_tissue',
+    '_metadata.related_activities.count']
+    optional: ['cell_source_tax_id', 'clo_id', 'efo_id', 'cellosaurus_id', 'cl_lincs_id',
+    '_metadata.related_compounds.count']
 chembl_tissue:
   download:
     default: ['tissue_chembl_id', 'pref_name', 'uberon_id', 'efo_id', 'bto_id', 'caloha_id',
     '_metadata.related_compounds.count', '_metadata.related_activities.count']
+  browser_table:
+    default: ['tissue_chembl_id', 'pref_name', 'uberon_id', 'efo_id', '_metadata.related_activities.count']
+    optional: ['bto_id', 'caloha_id', '_metadata.related_compounds.count']
 chembl_drug_indication_by_parent:
   download:
     default: ['parent_molecule.molecule_chembl_id', 'parent_molecule.pref_name', 'parent_molecule.molecule_type',
@@ -71,6 +149,13 @@ chembl_drug_indication_by_parent:
     'drug_indication.mesh_heading', 'efo_ids', 'efo_terms', 'drug_indication.indication_refs',
     'parent_molecule._metadata.drug.drug_data.synonyms', 'parent_molecule._metadata.drug.drug_data.usan_stem',
     'parent_molecule._metadata.drug.drug_data.usan_year']
+  browser_table:
+    default: ['parent_molecule.molecule_chembl_id', 'parent_molecule.pref_name', 'parent_molecule.molecule_type',
+    'drug_indication.max_phase_for_ind', 'parent_molecule.first_approval', 'parent_molecule.first_approval',
+    'drug_indication.mesh_id', 'drug_indication.mesh_heading', 'efo_ids', 'efo_terms',
+    'drug_indication.indication_refs']
+    optional: ['parent_molecule._metadata.drug.drug_data.synonyms',
+    'parent_molecule._metadata.drug.drug_data.usan_stem', 'parent_molecule._metadata.drug.drug_data.usan_year']
 chembl_mechanism_by_parent_target:
   download:
     default: ['parent_molecule.molecule_chembl_id', 'parent_molecule.pref_name', 'parent_molecule.molecule_type',
@@ -81,6 +166,15 @@ chembl_mechanism_by_parent_target:
     'binding_site.site_name', 'mechanism_of_action.binding_site_comment', 'mechanism_of_action.mechanism_refs',
     'parent_molecule._metadata.drug.drug_data.synonyms', 'drug_atc_codes', 'drug_atc_codes_level_4',
     'drug_atc_codes_level_3', 'drug_atc_codes_level_2', 'drug_atc_codes_level_1', 'parent_molecule.molecule_chembl_id']
+  browser_table:
+    default: ['parent_molecule.molecule_chembl_id', 'parent_molecule.pref_name', 'parent_molecule.molecule_type',
+    'mechanism_of_action.max_phase', 'parent_molecule.first_approval', 'parent_molecule.usan_stem',
+    'target.target_chembl_id', 'target.pref_name', 'mechanism_of_action.action_type', 'target.target_type',
+    'target.organism', 'binding_site.site_name', 'mechanism_of_action.mechanism_refs']
+    optional: ['mechanism_of_action.mechanism_comment', 'mechanism_of_action.selectivity_comment',
+    'mechanism_of_action.binding_site_comment', 'parent_molecule._metadata.drug.drug_data.synonyms',
+    'drug_atc_codes', 'drug_atc_codes_level_4', 'drug_atc_codes_level_3', 'drug_atc_codes_level_2',
+    'drug_atc_codes_level_1']
 chembl_activity:
   download:
     default: ['molecule_chembl_id', 'molecule_pref_name', '_metadata.parent_molecule_data.max_phase',
@@ -94,3 +188,16 @@ chembl_activity:
     '_metadata.assay_data.assay_cell_type', '_metadata.assay_data.assay_subcellular_fraction', 'target_chembl_id',
     'target_pref_name', 'target_organism', '_metadata.target_data.target_type', 'document_chembl_id', 'src_id',
     '_metadata.source.src_description', 'document_journal', 'document_year', '_metadata.assay_data.cell_chembl_id']
+  browser_table:
+    default: ['molecule_chembl_id', '_metadata.parent_molecule_data.compound_key', 'standard_type', 'standard_relation',
+     'standard_value', 'standard_units', 'pchembl_value', 'activity_comment', 'assay_chembl_id', 'assay_description',
+     'bao_label', '_metadata.assay_data.assay_organism', 'target_chembl_id', 'target_pref_name', 'target_organism',
+     '_metadata.target_data.target_type', 'document_chembl_id', '_metadata.source.src_description',
+     '_metadata.assay_data.cell_chembl_id']
+    optional: ['molecule_pref_name', '_metadata.parent_molecule_data.max_phase',
+    '_metadata.parent_molecule_data.full_mwt', '_metadata.parent_molecule_data.num_ro5_violations',
+    '_metadata.parent_molecule_data.alogp', 'canonical_smiles', 'data_validity_comment', 'uo_units',
+    'ligand_efficiency.bei', 'ligand_efficiency.le', 'ligand_efficiency.lle', 'ligand_efficiency.sei',
+    'potential_duplicate', 'assay_type', 'bao_format', '_metadata.assay_data.tissue_chembl_id',
+    '_metadata.assay_data.assay_tissue', '_metadata.assay_data.assay_cell_type',
+    '_metadata.assay_data.assay_subcellular_fraction', 'src_id', 'document_journal', 'document_year']

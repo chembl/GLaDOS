@@ -6,6 +6,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       @setInitialFetchingState()
       @setInitialSearchState()
+      @setInitialConfigState()
       if @islinkToOtherEntitiesEnabled()
         @on glados.Events.Collections.SELECTION_UPDATED, @resetLinkToOtherEntitiesCache, @
 
@@ -211,6 +212,19 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     searchIsReady: -> @getMeta('search_state') ==\
       glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_IS_READY
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # Configuration state handling
+    # ------------------------------------------------------------------------------------------------------------------
+    getConfigState: -> @getMeta('config_state')
+    setInitialConfigState: -> @setMeta('config_state',
+      glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING_STATES.INITIAL_STATE)
+    setConfigState: (newState) ->
+      oldState = @getConfigState()
+      if oldState != newState
+        @setMeta('config_state', newState)
+        @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.CONFIG_FETCHING_STATE_CHANGED)
+    configIsReady: -> @getConfigState() ==\
+      glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING_STATES.CONFIGURATION_READY
     # ------------------------------------------------------------------------------------------------------------------ 
     # Sleep/Awake states
     # ------------------------------------------------------------------------------------------------------------------
@@ -254,6 +268,7 @@ glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS =
   SEARCH_STATE_CHANGED: 'SEARCH_STATE_CHANGED'
   AWAKE_STATE_CHANGED: 'AWAKE_STATE_CHANGED'
   STATE_OBJECT_CHANGED: 'STATE_OBJECT_CHANGED'
+  CONFIG_FETCHING_STATE_CHANGED: 'CONFIG_FETCHING_STATE_CHANGED'
 
 glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES =
   INITIAL_STATE: 'INITIAL_STATE'
@@ -264,6 +279,11 @@ glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATE
   INITIAL_STATE: 'INITIAL_STATE'
   FETCHING_FACETS: 'FETCHING_FACETS'
   FACETS_READY: 'FACETS_READY'
+
+glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING_STATES =
+  INITIAL_STATE: 'INITIAL_STATE'
+  FETCHING_CONFIGURATION: 'FETCHING_CONFIGURATION'
+  CONFIGURATION_READY: 'CONFIGURATION_READY'
 
 glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES =
   SEARCH_UNDEFINED: 'SEARCH_UNDEFINED'

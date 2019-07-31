@@ -208,6 +208,8 @@ glados.useNameSpace 'glados',
         returnCol.id = colDescription.id
         if returnCol.id?
           returnCol.template_id = returnCol.id.replace(/\./g, '_dot_')
+        returnCol.prop_id = returnCol.id
+        returnCol.prop_id ?= colDescription.comparator
 
       addNameToShow: (returnCol, colDescription, model) ->
 
@@ -221,6 +223,13 @@ glados.useNameSpace 'glados',
           returnCol.name_to_show_short = colDescription.name_to_show_short
         else
           returnCol.name_to_show_short = colDescription.name_to_show
+
+      noData: (colDescription, model) ->
+
+        rawValue = glados.Utils.getNestedValue(model.attributes, colDescription.comparator, forceAsNumber=false,\
+            customNullValueLabel=null, returnUndefined=true)
+
+        return (not rawValue?) or rawValue == glados.Settings.DEFAULT_NULL_VALUE_LABEL
 
       getColValue: (colDescription, model, highlights) ->
 
@@ -341,6 +350,7 @@ glados.useNameSpace 'glados',
         returnCol['format_class'] = colDescription.format_class
 
         colValue = glados.Utils.Columns.getColValue(colDescription, model, highlights)
+        returnCol['no_data'] = glados.Utils.Columns.noData(colDescription, model)
         glados.Utils.Columns.parseColValue(returnCol, colDescription, colValue, model)
         glados.Utils.Columns.addLink(returnCol, colDescription, colValue, model)
 

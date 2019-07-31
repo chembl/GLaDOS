@@ -23,7 +23,34 @@ glados.useNameSpace 'glados.models.Compound',
 
 
 glados.models.Compound.MechanismOfAction.INDEX_NAME = 'chembl_mechanism_by_parent_target'
-
+glados.models.Compound.MechanismOfAction.PROPERTIES_VISUAL_CONFIG = {
+  'parent_molecule.molecule_chembl_id': {
+    image_base_url: 'parent_image_url'
+    link_base: 'molecule_link'
+  }
+  'target.target_chembl_id': {
+    link_base:'target_link'
+  }
+  'mechanism_of_action.mechanism_refs': {
+    multiple_links: true
+    multiple_links_function: (refs) -> ({text:r.ref_type, url:r.ref_url} for r in refs)
+  }
+  'parent_molecule._metadata.drug.drug_data.synonyms': {
+    custom_field_template: '<ul class="no-margin" style="width: 15rem; margin-left: 1rem !important;">' +
+        '{{#each val}}<li style="list-style-type: circle;">{{this}}</li>{{/each}}</ul>'
+    parse_function: (values) ->
+      realValues = []
+      for valI in values
+        if valI?.trim().length > 0
+          realValues.push valI.trim()
+      return realValues
+  }
+  'drug_atc_codes': glados.models.Compound.Drug.PROPERTIES_VISUAL_CONFIG['drug_atc_codes']
+  'drug_atc_codes_level_4': glados.models.Compound.Drug.PROPERTIES_VISUAL_CONFIG['drug_atc_codes_level_4']
+  'drug_atc_codes_level_3': glados.models.Compound.Drug.PROPERTIES_VISUAL_CONFIG['drug_atc_codes_level_3']
+  'drug_atc_codes_level_2': glados.models.Compound.Drug.PROPERTIES_VISUAL_CONFIG['drug_atc_codes_level_2']
+  'drug_atc_codes_level_1': glados.models.Compound.Drug.PROPERTIES_VISUAL_CONFIG['drug_atc_codes_level_1']
+}
 generateMechanismColumn = (columnMetadata)->
   return glados.models.paginatedCollections.ColumnsFactory.generateColumn glados.models.Compound\
     .MechanismOfAction.INDEX_NAME, columnMetadata
@@ -108,6 +135,18 @@ glados.models.Compound.MechanismOfAction.COLUMNS =
             realValues.push valI.trim()
         return realValues
   )
+
+glados.models.Compound.MechanismOfAction.COLUMNS.MECH_ID = {
+  aggregatable: true
+  comparator: "mechanism_of_action.mec_id"
+  id: "mechanism_of_action.mec_id"
+  is_sorting: 0
+  name_to_show: "Mechanism ID"
+  name_to_show_short: "Mech ID"
+  show: true
+  sort_class: "fa-sort"
+  sort_disabled: false
+}
 
 glados.models.Compound.MechanismOfAction.ID_COLUMN = glados.models.Compound.MechanismOfAction.COLUMNS.MECH_ID
 

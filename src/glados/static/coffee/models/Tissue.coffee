@@ -40,6 +40,43 @@ _.extend(glados.models.Tissue, glados.models.base.ReportCardEntity)
 glados.models.Tissue.color = 'deep-orange'
 glados.models.Tissue.reportCardPath = 'tissue_report_card/'
 
+glados.models.Tissue.PROPERTIES_VISUAL_CONFIG = {
+  'tissue_chembl_id': {
+    link_base: 'report_card_url'
+  }
+  'uberon_id': {
+    link_function: (id) -> 'https://www.ebi.ac.uk/ols/search?q=' + encodeURIComponent(id)
+  }
+  'efo_id': {
+    link_function: (id) -> 'https://www.ebi.ac.uk/ols/search?q=' + encodeURIComponent(id)
+  }
+  'bto_id': {
+    link_function: (id) -> 'https://www.ebi.ac.uk/ols/search?q=' + encodeURIComponent(id)
+  }
+  'caloha_id': {
+    link_function: (id) -> 'https://www.nextprot.org/term/' + encodeURIComponent(id)
+  }
+  '_metadata.related_compounds.count': {
+    on_click: TissueReportCardApp.initMiniHistogramFromFunctionLink
+    function_constant_parameters: ['compounds']
+    function_parameters: ['tissue_chembl_id']
+    function_key: 'tissue_num_compounds'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
+  }
+  '_metadata.related_activities.count': {
+    link_base: 'activities_url'
+    on_click: TissueReportCardApp.initMiniHistogramFromFunctionLink
+    function_parameters: ['tissue_chembl_id']
+    function_constant_parameters: ['activities']
+    function_key: 'tissue_bioactivities'
+    function_link: true
+    execute_on_render: true
+    format_class: 'number-cell-center'
+  }
+}
+
 glados.models.Tissue.INDEX_NAME = 'chembl_tissue'
 glados.models.Tissue.COLUMNS = {
   CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn glados.models.Tissue.INDEX_NAME,
@@ -82,6 +119,20 @@ glados.models.Tissue.COLUMNS = {
     format_class: 'number-cell-center'
 }
 
+glados.models.Tissue.COLUMNS.CHEMBL_ID = {
+  aggregatable: true
+  comparator: "tissue_chembl_id"
+  hide_label: true
+  id: "tissue_chembl_id"
+  is_sorting: 0
+  link_base: "report_card_url"
+  name_to_show: "ChEMBL ID"
+  name_to_show_short: "ChEMBL ID"
+  show: true
+  sort_class: "fa-sort"
+  sort_disabled: false
+}
+
 glados.models.Tissue.ID_COLUMN = glados.models.Tissue.COLUMNS.CHEMBL_ID
 
 glados.models.Tissue.COLUMNS_SETTINGS = {
@@ -112,7 +163,6 @@ glados.models.Tissue.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS = _.union(
 glados.models.Tissue.MINI_REPORT_CARD =
   LOADING_TEMPLATE: 'Handlebars-Common-MiniRepCardPreloader'
   TEMPLATE: 'Handlebars-Common-MiniReportCard'
-  COLUMNS: glados.models.Tissue.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
 
 glados.models.Tissue.getTissuesListURL = (filter, isFullState=false, fragmentOnly=false) ->
 
