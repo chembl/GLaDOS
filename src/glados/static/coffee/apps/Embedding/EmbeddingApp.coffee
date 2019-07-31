@@ -176,6 +176,9 @@ glados.useNameSpace 'glados.apps.Embedding',
         curation_summary:
           template: "#{@assayReportCardBaseTemplate} #ACurationSummaryCard"
           initFunction: AssayReportCardApp.initCurationSummary
+        assay_parameters:
+          template: "#{@assayReportCardBaseTemplate} #AssayParametersDataCard"
+          initFunction: AssayReportCardApp.initAssayParams
         bioactivities:
           template: "#{@assayReportCardBaseTemplate} #AAssociatedBioactivitiesCard"
           initFunction: AssayReportCardApp.initActivitySummary

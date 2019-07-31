@@ -6,7 +6,7 @@ glados.useNameSpace 'glados.views.ReportCards',
       @config = arguments[0].config
       @model.on 'change', @.render, @
       @model.on 'error', @.showCompoundErrorCard, @
-      @resource_type = 'Compound'
+      @resource_type = arguments[0].entity_name
       @initEmbedModal(@config.embed_section_name, @config.embed_identifier)
       @activateModals()
       
