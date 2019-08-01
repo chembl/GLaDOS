@@ -157,33 +157,117 @@ def get_id_property_for_index(index_name):
 
     return resource_ids[0]
 
+# -----------------------------------------------------------------------------------
+# Properties counts
+# -----------------------------------------------------------------------------------
 
 def print_properties_counts():
     es_util.setup_connection_from_full_url(settings.ELASTICSEARCH_HOST)
-    print('GETTING PROPERTIES COUNTS')
-    properties_sum = 0
+    print()
+    print_groups_counts()
+    print()
+    print_props_counts()
+
+
+def print_props_counts():
+
+    print('Props Counts:')
     groups_config = yaml.load(open(settings.PROPERTIES_GROUPS_FILE, 'r'), Loader=yaml.FullLoader)
+
+    groups_properties = []
+
+    index_name_label = 'Index Name'
+    total_properties_label = 'Total Properties'
+    num_used_properties_label = 'Used Properties'
+
+    all_labels = [index_name_label, total_properties_label, num_used_properties_label]
 
     for index_name, index_mapping in resources_description.RESOURCES_BY_ALIAS_NAME.items():
 
-        print('Resource: ' + index_name)
         mapping = index_mapping.get_resource_mapping_from_es()
-        num_properties = len(mapping.keys())
-        properties_sum += num_properties
+        current_index_description = {
+            index_name_label: index_name,
+            total_properties_label: get_num_properties_in_dict(mapping),
+            num_used_properties_label: 0
+        }
+        groups_properties.append(current_index_description)
+        index_groups = groups_config.get(index_name, {})
+
+        used_properties = set()
+        for group_name, group in index_groups.items():
+            for sub_group, props_list in group.items():
+                for prop in props_list:
+                    used_properties.add(prop)
+
+        current_index_description[num_used_properties_label] = len(used_properties)
+
+    print_table(groups_properties, all_labels)
+
+
+def print_groups_counts():
+
+    print('Groups Counts:')
+
+    groups_config = yaml.load(open(settings.PROPERTIES_GROUPS_FILE, 'r'), Loader=yaml.FullLoader)
+    groups_properties = []
+
+    index_name_label = 'Index Name'
+    groups_and_subgroups_label = 'Groups'
+    total_groups_label = 'Total Groups'
+    all_labels = [index_name_label, groups_and_subgroups_label, total_groups_label]
+
+    for index_name, index_mapping in resources_description.RESOURCES_BY_ALIAS_NAME.items():
+
+        current_index_description = {
+            index_name_label: index_name,
+            groups_and_subgroups_label: '',
+            total_groups_label: 0
+        }
+        groups_properties.append(current_index_description)
 
         index_groups = groups_config.get(index_name, {})
-        print('Groups: ')
+        all_groups_texts = []
+
         for group_name, group in index_groups.items():
-            print('\t' + group_name)
+
             properties_in_group = 0
+            all_subgroups = []
+
             for sub_group, props_list in group.items():
+                all_subgroups.append(sub_group)
                 num_properties_in_subgroup = len(props_list)
-                print('\t\t' + sub_group + ':' + str(num_properties_in_subgroup))
+
                 properties_in_group += num_properties_in_subgroup
 
-            print('\t\tProperties in group: ' + str(properties_in_group))
+            current_group_text = '{group_name}({sub_groups})'.format(group_name=group_name,
+                                                                     sub_groups=', '.join(all_subgroups))
+            all_groups_texts.append(current_group_text)
 
-        print('Total properties: ', num_properties)
-        print('---')
+        current_index_description[groups_and_subgroups_label] = ' '.join(all_groups_texts)
+        current_index_description[total_groups_label] = len(all_groups_texts)
 
-    print('Properties Sum: ', properties_sum)
+    print_table(groups_properties, all_labels)
+
+
+def print_table(rows, labels):
+
+    header_line = '\t'.join(labels)
+    print(header_line)
+
+    for row in rows:
+        row_line = '\t'.join([str(row.get(label, '')) for label in labels])
+        print(row_line)
+
+
+# this counts the leaves of a dict
+def get_num_properties_in_dict(d):
+
+    # anything that is not dict is a leave
+    if not isinstance(d, dict):
+        return 1
+    # empty dicts are leaves
+    elif len(d.keys()) == 0:
+        return 1
+    # if I am not leave, the number of leaves is the sum of leaves of in my children
+    else:
+        return sum([get_num_properties_in_dict(sub_d) for sub_d in d.values()])
