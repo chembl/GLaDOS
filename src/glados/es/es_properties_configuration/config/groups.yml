@@ -182,6 +182,10 @@ chembl_mechanism_by_parent_target:
   report_card_table:
     default: ['mechanism_of_action.action_type', 'target.target_chembl_id', 'target.pref_name', 'target.target_type',
     'target.organism', 'binding_site.site_name', 'mechanism_of_action.mechanism_refs']
+  target_report_card_table:
+    default: ['parent_molecule.molecule_chembl_id', 'parent_molecule.pref_name', 'parent_molecule.molecule_type',
+    'mechanism_of_action.max_phase', 'parent_molecule.first_approval', 'parent_molecule.usan_stem',
+    'mechanism_of_action.mechanism_refs']
 chembl_activity:
   download:
     default: ['molecule_chembl_id', 'molecule_pref_name', '_metadata.parent_molecule_data.max_phase',

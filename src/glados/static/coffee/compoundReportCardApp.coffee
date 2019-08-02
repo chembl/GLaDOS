@@ -157,7 +157,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESMechanismsOfActionList(
       "parent_molecule.molecule_chembl_id:#{chemblID}",
-      listConfig=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.MECHANISMS_OF_ACTION_COMPOUND_REPORD_CARD
+      listConfig=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.MECHANISMS_OF_ACTION_COMPOUND_REPORT_CARD
     )
 
     viewConfig =
