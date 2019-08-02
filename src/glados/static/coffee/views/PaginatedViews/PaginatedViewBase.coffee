@@ -676,6 +676,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     renderLinkToAllItems: ->
 
+      console.log('render link')
       $linkToAllContainer = $(@el).find('.BCK-LinkToBrowseAllItems')
       glados.Utils.fillContentForElement $linkToAllContainer,
         url: @config.full_list_url

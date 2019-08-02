@@ -164,7 +164,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       embed_section_name: 'mechanism_of_action'
       embed_identifier: chemblID
       table_config:
-        full_list_url: glados.models.Compound.MechanismOfAction.getListURLByMoleculeChemblId(chemblID)
+        full_list_url: ''
 
     tableView = new glados.views.ReportCards.PaginatedTableInCardView
       collection: list
@@ -186,6 +186,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       else
         query = "mechanism_of_action.molecule_chembl_id:#{chemblID}"
 
+      viewConfig.table_config.full_list_url = glados.models.Compound.MechanismOfAction.getListURL(query)
       list.setMeta('custom_query', query)
       list.fetch({reset: true})
 
@@ -206,9 +207,9 @@ class CompoundReportCardApp extends glados.ReportCardApp
       embed_section_name: 'drug_indications'
       embed_identifier: chemblID
       table_config:
-        full_list_url: glados.models.Compound.DrugIndication.getListURLByMoleculeChemblId(chemblID)
+        full_list_url: ''
 
-    new glados.views.ReportCards.PaginatedTableInCardView
+    tableView = new glados.views.ReportCards.PaginatedTableInCardView
       collection: list
       el: $('#CDrugIndicationsCard')
       resource_type: gettext('glados_entities_compound_name')
@@ -228,6 +229,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       else
         query = "drug_indication.molecule_chembl_id:#{chemblID}"
 
+      viewConfig.table_config.full_list_url = glados.models.Compound.DrugIndication.getListURL(query)
       list.setMeta('custom_query', query)
       list.fetch({reset: true})
 
