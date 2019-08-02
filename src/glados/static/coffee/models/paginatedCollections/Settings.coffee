@@ -381,6 +381,21 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
+      MECHANISMS_OF_ACTION_COMPOUND_REPORD_CARD:
+        ID_NAME: 'ESMechsOfAction'
+        LABEL: 'Mechanisms of Action'
+        INDEX_NAME: 'chembl_mechanism_by_parent_target'
+        BROWSE_LIST_URL: glados.models.Compound.MechanismOfAction.getListURL
+        MODEL: glados.models.Compound.MechanismOfAction
+        PERMANENT_COMPARATORS_TO_FETCH: ['parent_molecule._metadata.compound_generated.image_file',
+          'parent_molecule.molecule_chembl_id', 'target.target_chembl_id']
+        CONFIG_GROUPS:
+          "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'report_card_table'
+        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.MechanismSchema.FACETS_GROUPS
+        ID_COLUMN: glados.models.Compound.MechanismOfAction.ID_COLUMN
+        DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
+          glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
+        AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
     WS_COLLECTIONS:
       TWEETS_LIST:
         MODEL: glados.models.MainPage.Tweet

@@ -282,9 +282,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         customQuery, useCustomQuery=true)
       return list
 
-    getNewESMechanismsOfActionList: (customQuery) ->
+    getNewESMechanismsOfActionList: (customQuery,
+      listConfig=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.MECHANISMS_OF_ACTION) ->
 
-      listConfig=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.MECHANISMS_OF_ACTION
       list = @getNewESResultsListFor(listConfig, customQuery, useCustomQuery=true)
       return list
 
