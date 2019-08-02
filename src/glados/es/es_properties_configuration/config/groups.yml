@@ -153,11 +153,13 @@ chembl_drug_indication_by_parent:
     'parent_molecule._metadata.drug.drug_data.usan_year']
   browser_table:
     default: ['parent_molecule.molecule_chembl_id', 'parent_molecule.pref_name', 'parent_molecule.molecule_type',
-    'drug_indication.max_phase_for_ind', 'parent_molecule.first_approval', 'parent_molecule.first_approval',
-    'drug_indication.mesh_id', 'drug_indication.mesh_heading', 'efo_ids', 'efo_terms',
-    'drug_indication.indication_refs']
+    'drug_indication.max_phase_for_ind', 'parent_molecule.first_approval', 'drug_indication.mesh_id',
+    'drug_indication.mesh_heading', 'efo_ids', 'efo_terms', 'drug_indication.indication_refs']
     optional: ['parent_molecule._metadata.drug.drug_data.synonyms',
     'parent_molecule._metadata.drug.drug_data.usan_stem', 'parent_molecule._metadata.drug.drug_data.usan_year']
+  report_card_table:
+    default: ['drug_indication.mesh_id', 'drug_indication.mesh_heading', 'efo_ids', 'efo_terms',
+    'drug_indication.max_phase_for_ind', 'parent_molecule.first_approval', 'drug_indication.indication_refs']
 chembl_mechanism_by_parent_target:
   download:
     default: ['parent_molecule.molecule_chembl_id', 'parent_molecule.pref_name', 'parent_molecule.molecule_type',
@@ -178,8 +180,8 @@ chembl_mechanism_by_parent_target:
     'drug_atc_codes', 'drug_atc_codes_level_4', 'drug_atc_codes_level_3', 'drug_atc_codes_level_2',
     'drug_atc_codes_level_1']
   report_card_table:
-    default: ['mechanism_of_action.action_type', 'target.target_chembl_id', 'target.pref_name',
-     'mechanism_of_action.mechanism_refs']
+    default: ['mechanism_of_action.action_type', 'target.target_chembl_id', 'target.pref_name', 'target.target_type',
+    'target.organism', 'binding_site.site_name', 'mechanism_of_action.mechanism_refs']
 chembl_activity:
   download:
     default: ['molecule_chembl_id', 'molecule_pref_name', '_metadata.parent_molecule_data.max_phase',

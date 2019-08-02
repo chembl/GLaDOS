@@ -189,7 +189,10 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     drugIndicationsList = glados.models.paginatedCollections.PaginatedCollectionFactory\
-      .getNewESDrugIndicationsList("drug_indication._metadata.all_molecule_chembl_ids:#{chemblID}")
+      .getNewESDrugIndicationsList(
+        "drug_indication._metadata.all_molecule_chembl_ids:#{chemblID}",
+        config=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.DRUG_INDICATIONS_COMPOUND_REPORT_CARD
+    )
 
     viewConfig =
       embed_section_name: 'drug_indications'

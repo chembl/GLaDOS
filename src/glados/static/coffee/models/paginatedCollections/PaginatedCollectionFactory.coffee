@@ -300,9 +300,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         ssSearchModel=undefined, stickyQuery)
       return list
 
-    getNewESDrugIndicationsList: (customQuery='*') ->
+    getNewESDrugIndicationsList: (customQuery='*',
+      config=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.DRUG_INDICATIONS) ->
 
-      config = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.DRUG_INDICATIONS
+
       list = @getNewESResultsListFor(config, customQuery, useCustomQuery=true)
 
       return list
