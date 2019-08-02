@@ -156,7 +156,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESMechanismsOfActionList(
-      "parent_molecule.molecule_chembl_id:#{chemblID}",
+      "*",
       listConfig=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.MECHANISMS_OF_ACTION_COMPOUND_REPORT_CARD
     )
 
@@ -179,6 +179,14 @@ class CompoundReportCardApp extends glados.ReportCardApp
     compound = CompoundReportCardApp.getCurrentCompound()
 
     fetchList = ->
+      chemblID = compound.get('id')
+
+      if compound.isParent()
+        query = "parent_molecule.molecule_chembl_id:#{chemblID}"
+      else
+        query = "mechanism_of_action.molecule_chembl_id:#{chemblID}"
+
+      list.setMeta('custom_query', query)
       list.fetch({reset: true})
 
     compound.on 'change', fetchList, @
@@ -188,7 +196,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
   @initIndications = ->
 
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
-    drugIndicationsList = glados.models.paginatedCollections.PaginatedCollectionFactory\
+    list = glados.models.paginatedCollections.PaginatedCollectionFactory\
       .getNewESDrugIndicationsList(
         "drug_indication._metadata.all_molecule_chembl_ids:#{chemblID}",
         config=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.DRUG_INDICATIONS_COMPOUND_REPORT_CARD
@@ -201,7 +209,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
         full_list_url: glados.models.Compound.DrugIndication.getListURLByMoleculeChemblId(chemblID)
 
     new glados.views.ReportCards.PaginatedTableInCardView
-      collection: drugIndicationsList
+      collection: list
       el: $('#CDrugIndicationsCard')
       resource_type: gettext('glados_entities_compound_name')
       section_id: 'Indications'
@@ -210,7 +218,20 @@ class CompoundReportCardApp extends glados.ReportCardApp
       config: viewConfig
       report_card_app: @
 
-    drugIndicationsList.fetch({reset: true})
+    compound = CompoundReportCardApp.getCurrentCompound()
+
+    fetchList = ->
+      chemblID = compound.get('id')
+
+      if compound.isParent()
+        query = "drug_indication.parent_molecule_chembl_id:#{chemblID}"
+      else
+        query = "drug_indication.molecule_chembl_id:#{chemblID}"
+
+      list.setMeta('custom_query', query)
+      list.fetch({reset: true})
+
+    compound.on 'change', fetchList, @
     if GlobalVariables['EMBEDED']
       compound.fetch()
 
