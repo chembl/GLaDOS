@@ -116,7 +116,8 @@ class TargetReportCardApp extends glados.ReportCardApp
 
     targetChemblID = glados.Utils.URLS.getCurrentModelChemblID()
     list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESMechanismsOfActionList(
-      "target.target_chembl_id:#{targetChemblID}"
+      "target.target_chembl_id:#{targetChemblID}",
+      listConfig=glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.MECHANISMS_OF_ACTION_TARGET_REPORT_CARD
     )
 
     viewConfig =
