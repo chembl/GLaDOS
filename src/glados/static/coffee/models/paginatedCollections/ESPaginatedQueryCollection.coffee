@@ -270,11 +270,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       columnsDescription = {}
       propsComparatorsSet = {}
+      comparatorsForTextFilterSet = {}
       allColumns = []
 
       for viewKey, configModel of propertiesConfigModels
         columnsDescription[viewKey] = configModel.get('parsed_configuration')
         newPropsComparators = configModel.get('props_comparators_set')
+        currentComparatorsForTextFilter = configModel.get('comparators_for_text_filter_set')
         currentAllColumns = configModel.get('all_columns')
 
         for column in currentAllColumns
@@ -285,9 +287,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         for key, value of newPropsComparators
           propsComparatorsSet[key] = key
 
+        for key, value of currentComparatorsForTextFilter
+          comparatorsForTextFilterSet[key] = key
+
       @setMeta('columns', allColumns)
       @setMeta('columns_description', columnsDescription)
       @setMeta('props_comparators_set', propsComparatorsSet)
+      @setMeta('comparators_for_text_filter_set', comparatorsForTextFilterSet)
       @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.COLUMNS_CONFIGURATION_LOADED)
 
     fetch: (options, testMode=false) ->

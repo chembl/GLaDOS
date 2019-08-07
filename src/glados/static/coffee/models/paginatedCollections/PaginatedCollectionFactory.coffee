@@ -46,6 +46,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       .extend(glados.models.paginatedCollections.ReferenceStructureFunctions)
       .extend(glados.models.paginatedCollections.CacheFunctions)
       .extend(glados.models.paginatedCollections.StateSaving.ESCollectionStateSavingFunctions)
+      .extend(glados.models.paginatedCollections.TextFilter.ESCollectionTextFilterFunctions)
       .extend(flavour).extend
         model: esIndexSettings.MODEL
 
