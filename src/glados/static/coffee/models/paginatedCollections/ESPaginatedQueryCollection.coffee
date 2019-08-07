@@ -449,6 +449,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @addHighlightsToQuery(esQuery)
       # Includes the selected facets filter
       @addFacetsToQuery(esQuery, facetsFiltered, requestFacets, facetsFirstCall)
+      @addTextFilterToQuery(esQuery)
       @addStickyQuery(esQuery)
       # do not save request facets calls for the editor
       @setMeta('latest_request_data', esQuery) unless requestFacets
@@ -509,6 +510,24 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         facets_query = @getFacetsGroupsAggsQuery(facetsFirstCall)
         if facets_query
           esQuery.aggs = facets_query
+
+    addTextFilterToQuery: (esQuery) ->
+
+      currentTextFilter = @getTextFilter()
+      if not currentTextFilter? or currentTextFilter = ''
+        return
+
+      comparatorsForTextFilterSet = @getMeta('comparators_for_text_filter_set')
+      comparatorsList = _.keys(comparatorsForTextFilterSet)
+      comparatorsList.sort()
+
+      textFilterQuery = {
+        "query_string": {
+          "fields": ("#{comp}.*" for comp in comparatorsList),
+          "query": @getTextFilter(),
+        }
+      }
+      esQuery.query.bool.filter.push textFilterQuery
 
     getContextualSortingProperties: ->
 
