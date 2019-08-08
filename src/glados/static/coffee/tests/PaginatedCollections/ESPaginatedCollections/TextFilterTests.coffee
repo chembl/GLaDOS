@@ -100,3 +100,11 @@ describe "An elasticsearch collection", ->
         textFilterMustBe=filter
       )
 
+    it 'creates a list from a state object', ->
+
+      filter = 'some filter'
+      esList.setTextFilter(filter)
+
+      TestsUtils.testRestoredListIsEqualToOriginal(esList)
+
+

@@ -102,7 +102,7 @@ class TestsUtils
     list2 = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFromState(state)
 
     for property in ['settings_path', 'custom_query', 'use_custom_query', 'esSearchQuery', 'sticky_query',
-      'esSearchQuery', 'search_term', 'contextual_properties', 'generator_items_list']
+      'esSearchQuery', 'search_term', 'contextual_properties', 'generator_items_list', 'text_filter']
 
       oldValue = list.getMeta(property)
       newValue = list2.getMeta(property)
