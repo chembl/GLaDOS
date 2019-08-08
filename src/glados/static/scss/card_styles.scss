@@ -133,6 +133,27 @@ $chembl-header-height: 52.245px;
 .paginated-collection {
   padding: 4px;
 
+  .cards-header {
+
+    .first-row {
+      display: flex;
+      justify-content: space-between;
+      
+    }
+
+    .second-row {
+      padding: 20px;
+      &:after {
+        content: ".";
+        display: block;
+        clear: both;
+        visibility: hidden;
+        line-height: 0;
+        height: 0;
+      }
+    }
+  }
+
   .paginator-row {
     margin-top: 20px;
   }

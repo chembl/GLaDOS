@@ -103,6 +103,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             links_to_other_entities: esIndexSettings.LINKS_TO_OTHER_ENTITIES
             sssearch_model: ssSearchModel
             download_columns_group: esIndexSettings.DOWNLOAD_COLUMNS_GROUP
+            enable_text_filter: esIndexSettings.ENABLE_TEXT_FILTER
 
           if @getMeta('enable_similarity_maps') or @getMeta('enable_substructure_highlighting')
             @initReferenceStructureFunctions()
@@ -111,7 +112,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             @initCache()
             @on 'reset update', @addModelsInCurrentPage, @
 
-          console.log 'ssSearchModel: ', ssSearchModel
           if ssSearchModel?
             @setMeta('out_of_n', ssSearchModel.get('total_results'))
             @setMeta('size_limit', ssSearchModel.get('size_limit'))
