@@ -83,3 +83,20 @@ describe "An elasticsearch collection", ->
 
       expect(_.isEqual(textFilterQueryMustBe, texFilterQueryGot)).toBe(true)
 
+    it 'generates a state object with the text filter', ->
+
+      filter = 'some filter'
+      esList.setTextFilter(filter)
+
+      TestsUtils.testSavesList(esList,
+        pathInSettingsMustBe='ES_INDEXES.COMPOUND',
+        queryStringMustBe=undefined,
+        useQueryStringMustBe=undefined,
+        stickyQueryMustBe=undefined,
+        esSearchQueryMustBe= searchESQuery,
+        searchTermMustBe=undefined,
+        contextualColumnsMustBe=undefined,
+        generatorListMustBe=undefined,
+        textFilterMustBe=filter
+      )
+

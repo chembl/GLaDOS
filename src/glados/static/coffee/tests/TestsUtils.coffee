@@ -130,7 +130,7 @@ class TestsUtils
       expect(_.isEqual(facetingHandlerStateGot, facetingHandlerStateMustBe)).toBe(true)
 
   @testSavesList = (list, pathInSettingsMustBe, queryStringMustBe="*", useQueryStringMustBe=false, stickyQueryMustBe,
-    esSearchQueryMustBe, searchTermMustBe, contextualColumnsMustBe, generatorListMustBe)->
+    esSearchQueryMustBe, searchTermMustBe, contextualColumnsMustBe, generatorListMustBe, textFilterMustBe)->
 
     state = list.getStateJSON()
 
@@ -143,6 +143,7 @@ class TestsUtils
     expect(_.isEqual(state.searchESQuery, esSearchQueryMustBe)).toBe(true)
 
     expect(state.search_term).toBe(searchTermMustBe)
+    expect(state.text_filter).toBe(textFilterMustBe)
 
     contextualColumnsGot = state.contextual_properties
     expect(_.isEqual(contextualColumnsGot, contextualColumnsMustBe)).toBe(true)
