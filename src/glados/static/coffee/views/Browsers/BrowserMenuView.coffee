@@ -117,7 +117,15 @@ glados.useNameSpace 'glados.views.Browsers',
         return
 
       @renderMenuContent()
-      if @collection.getMeta('total_records') != 0
+
+      thereAreItems = @collection.getMeta('total_records') != 0
+      textFilterIsSet = @collection.getTextFilter()?
+
+      if not thereAreItems and not textFilterIsSet
+
+        @hideMenuContainer()
+
+      else
 
         @showMenuContainer()
         $downloadBtnsContainer = $(@el).find('.BCK-download-btns-container')
@@ -135,8 +143,12 @@ glados.useNameSpace 'glados.views.Browsers',
           } for viewLabel in @collection.getMeta('available_views'))
 
         @selectButton @currentViewType
-      else
-        @hideMenuContainer()
+
+        if not thereAreItems and textFilterIsSet
+          @disableDownloadButtons()
+          @disableButton('Graph')
+          @disableButton('Heatmap')
+
       @addRemoveQtipToButtons()
 
     renderMenuContent: ->

@@ -9,6 +9,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.TextFilter',
       else
         @setMeta('text_filter', newFilter)
 
+      @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.STATE_OBJECT_CHANGED, @)
       @fetch()
 
     getTextFilter: -> @getMeta('text_filter')

@@ -47,10 +47,10 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         @fillTextFilterContainer()
 
       @showHeaderContainer()
+      @showColumnsSelector()
       @showFooterContainer()
 
       @showPaginatedViewContent()
-
 
       if @collection.getMeta('fuzzy-results')? and @collection.getMeta('fuzzy-results') == true
         @showSuggestedLabel()
@@ -59,6 +59,20 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       glados.views.PaginatedViews.PaginatedViewBase.renderViewState.call(@)
 
+    showNoResultsWhenIsTextFilter: ->
+
+      glados.views.PaginatedViews.PaginatedViewBase.showNoResultsWhenIsTextFilter.call(@)
+      @hideColumnsSelector()
+
+    hideColumnsSelector: ->
+
+      $container = $(@el).find('.BCK-show-hide-columns-container')
+      $container.hide()
+
+    showColumnsSelector: ->
+
+      $container = $(@el).find('.BCK-show-hide-columns-container')
+      $container.show()
 
     removeSelectAllContainer: ->
       $selectAllContainer = $(@el).find('.BCK-selectAll-container')

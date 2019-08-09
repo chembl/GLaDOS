@@ -194,9 +194,14 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @requestCurrentPage()
 
     checkAndRenderIfNoItems: ->
-      if @collection.length == 0
+      isUsingTextFilter =  @collection.getTextFilter()?
+      if @collection.length == 0 and not isUsingTextFilter
         @showNoResultsFound()
         return true
+      else if @collection.length == 0 and isUsingTextFilter
+        @showNoResultsWhenIsTextFilter()
+        return true
+
       $(@el).find('.preloader-row').removeClass('preloader-row-hidden')
       return false
 
@@ -206,6 +211,19 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @hideFooterContainer()
       @hideContentContainer()
       @showEmptyMessageContainer()
+
+    showNoResultsWhenIsTextFilter: ->
+
+      @hidePreloaderOnly()
+      @hidePaginators()
+
+      if @collection.getMeta('enable_text_filter')
+        @fillTextFilterContainer()
+
+      @showHeaderContainer()
+      @hideContentContainer()
+
+
 
     # ------------------------------------------------------------------------------------------------------------------
     # Fill templates
@@ -650,7 +668,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if comp?
         @triggerCollectionSort(comp)
 
-
     # ------------------------------------------------------------------------------------------------------------------
     # Page selector
     # ------------------------------------------------------------------------------------------------------------------
@@ -703,7 +720,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     renderLinkToAllItems: ->
 
-      console.log('render link')
       $linkToAllContainer = $(@el).find('.BCK-LinkToBrowseAllItems')
       glados.Utils.fillContentForElement $linkToAllContainer,
         url: @config.full_list_url
