@@ -5,10 +5,10 @@ glados.useNameSpace 'glados.models.paginatedCollections.TextFilter',
     setTextFilter: (newFilter) ->
 
       if newFilter == ''
-        clearTextFilter()
+        @clearTextFilter()
       else
         @setMeta('text_filter', newFilter)
-        
+
       @fetch()
 
     getTextFilter: -> @getMeta('text_filter')
