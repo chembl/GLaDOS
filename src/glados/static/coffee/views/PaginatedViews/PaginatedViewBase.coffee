@@ -131,6 +131,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       'click .BCK-zoom-in': 'zoomIn'
       'click .BCK-zoom-out': 'zoomOut'
       'click .BCK-reset-zoom': 'resetZoom'
+      'input .BCK-text-filer-input': 'setTextFilter'
 
     stampViewIDOnEventsTriggerers: ->
       eventTriggererSelectors = ['.page-selector', '.change-page-size', '.sort', '.select-search', '.select-sort',
@@ -347,6 +348,18 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     fillNumResults: ->
       glados.Utils.fillContentForElement $(@el).find('.num-results'),
         num_results: @collection.getMeta('total_records')
+
+    triggerTextFilter: (term) ->
+
+      @collection.setTextFilter(term)
+
+    setTextFilter: _.debounce( (event) ->
+
+      $searchInput = $(event.currentTarget)
+      term = $searchInput.val()
+      @triggerTextFilter(term)
+
+    , glados.Settings['SEARCH_INPUT_DEBOUNCE_TIME'])
 
     # ------------------------------------------------------------------------------------------------------------------
     # Local Search
