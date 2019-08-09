@@ -351,6 +351,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DISABLE_CACHE_ON_DOWNLOAD: true
         LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
         DOWNLOAD_COLUMNS_GROUP: 'download_drugs'
+        ENABLE_TEXT_FILTER: true
       DRUG_INDICATIONS:
         ID_NAME: 'ESDrugIndications'
         LABEL: 'Drug Indications'
