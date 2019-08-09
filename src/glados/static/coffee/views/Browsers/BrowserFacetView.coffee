@@ -134,7 +134,10 @@ glados.useNameSpace 'glados.views.Browsers',
     checkIfNoItems: ->
 
       totalRecords = @collection.getMeta('total_records')
-      if totalRecords == 0
+      thereAreItems = totalRecords != 0
+      textFilterIsSet = @collection.getTextFilter()?
+
+      if not thereAreItems and not textFilterIsSet
         @hideAll()
         return true
       else

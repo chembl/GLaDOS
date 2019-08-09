@@ -260,6 +260,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       @once glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.AWAKE_STATE_CHANGED, fetchIfAwaken, @
 
+    setTextFilter: -> # See ESCollectionExtFilterFunctions
+    getTextFilter: ->
+    clearTextFilter: ->
 
 
 glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS =
