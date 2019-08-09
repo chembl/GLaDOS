@@ -138,7 +138,9 @@ $chembl-header-height: 52.245px;
     .first-row {
       display: flex;
       justify-content: space-between;
-
+      @media (max-width: 600px) {
+        flex-wrap: wrap;
+      }
     }
 
     .second-row {
