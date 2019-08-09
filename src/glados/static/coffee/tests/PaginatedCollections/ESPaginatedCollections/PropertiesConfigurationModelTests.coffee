@@ -178,7 +178,19 @@ describe 'PropertiesConfigurationModel', ->
     comparatorsFromOptional = _.filter(sampleResponse2.properties.optional, canBeUsedInTextFilter)
     comparatorsFromDefault = _.filter(sampleResponse2.properties.default, canBeUsedInTextFilter)
 
-    comparatorsInFilterList = _.pluck(_.union(comparatorsFromOptional, comparatorsFromDefault), 'prop_id')
+    comparatorsInFilterList = []
+    for propDesc in _.union(comparatorsFromOptional, comparatorsFromDefault)
+      baseComparator = propDesc.prop_id
+      comparatorsInFilterList.push(baseComparator)
+
+      for field in ['eng_analyzed', 'std_analyzed', 'ws_analyzed', 'alphanumeric_lowercase_keyword']
+        if propDesc.type == 'string'
+          comparatorForTextFilter = "#{baseComparator}.#{field}"
+        else
+          comparatorForTextFilter = "#{baseComparator}.*.#{field}"
+
+        comparatorsInFilterList.push(comparatorForTextFilter)
+
     comparatorsInFilterMustBe = {}
     for comp in comparatorsInFilterList
       comparatorsInFilterMustBe[comp] = comp

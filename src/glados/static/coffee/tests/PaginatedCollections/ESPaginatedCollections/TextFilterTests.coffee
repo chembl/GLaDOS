@@ -73,7 +73,7 @@ describe "An elasticsearch collection", ->
 
       textFilterQueryMustBe = {
         "query_string": {
-          "fields": ("#{comp}.*" for comp in comparatorsList),
+          "fields": ("#{comp}" for comp in comparatorsList),
           "query": esList.getTextFilter()
         }
       }

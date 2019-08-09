@@ -523,7 +523,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       textFilterQuery = {
         "query_string": {
-          "fields": ("#{comp}.*" for comp in comparatorsList),
+          "fields": ("#{comp}" for comp in comparatorsList),
           "query": @getTextFilter(),
         }
       }

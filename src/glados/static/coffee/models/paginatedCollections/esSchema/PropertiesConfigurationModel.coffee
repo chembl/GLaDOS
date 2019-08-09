@@ -31,6 +31,14 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           if canBeUsedInTextFilter
             comparatorsForTextFilterSet[parsedProperty.comparator] = parsedProperty.comparator
 
+            for field in ['eng_analyzed', 'std_analyzed', 'ws_analyzed', 'alphanumeric_lowercase_keyword']
+              if parsedProperty.type == 'string'
+                comparatorForTextFilter = "#{parsedProperty.comparator}.#{field}"
+              else
+                comparatorForTextFilter = "#{parsedProperty.comparator}.*.#{field}"
+
+              comparatorsForTextFilterSet[comparatorForTextFilter] = comparatorForTextFilter
+
         if subGroupKey == 'default'
           parsedConfiguration.Default = parsedProperties
         else if subGroupKey == 'optional'

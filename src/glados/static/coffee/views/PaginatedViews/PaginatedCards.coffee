@@ -57,6 +57,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         @renderSpecialStructuresToggler()
 
       @fillPaginators()
+      @showPaginators()
       @fillPageSizeSelectors()
       @activateSelectors()
       @showPaginatedViewContent()
