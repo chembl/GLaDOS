@@ -2,24 +2,39 @@
 
   <div class="BCK-ErrorMessagesContainer">
   </div>
-  <div class="BCK-header-container paginator-row row table-header-menu" style="display: none">
 
-    <div class="BCK-select-page-size-container col m3 s12" data-hb-template="Handlebars-Common-SelectPageSizeContainer">
+  <div class="BCK-header-container cards-header" style="display: none">
+      <div class="first-row">
+          <div class="records-per-page-container">
+              <div class="BCK-select-page-size-container" data-hb-template="Handlebars-Common-SelectPageSizeContainer">
 
-      <!-- Backbone fills this, it will use the handlebars template defined in data-hb-template -->
+              </div>
+          </div>
+          <div class="columns-selector-container">
 
-    </div>
+              <div class="BCK-show-hide-columns-container buttons-container"
+                     data-hb-template="Handlebars-Common-ShowHideColumnsDropdown">
+                  <!-- Backbone fills this, it will use the handlebars template defined in data-hb-template -->
+                  <div class='BCK-ModalTrigger' data-hb-template="Handlebars-Common-ShowHideColumnsDropdown-trigger">
+                  </div>
+                </div>
 
-    <div class="BCK-show-hide-columns-container col l2 m4 s12 buttons-container"
-         data-hb-template="Handlebars-Common-ShowHideColumnsDropdown">
-      <!-- Backbone fills this, it will use the handlebars template defined in data-hb-template -->
-      <div class='BCK-ModalTrigger' data-hb-template="Handlebars-Common-ShowHideColumnsDropdown-trigger">
+          </div>
+
+           <div class="text-filter-container">
+              Text Filter
+          </div>
+          
       </div>
-    </div>
+      <div class="second-row">
 
-    <div class='BCK-paginator-container col l7 m12' data-hb-template="Handlebars-Common-Paginated-UL">
-      <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
-    </div>
+          <div class='BCK-paginator-container' data-hb-template="Handlebars-Common-Paginated-UL">
+            </div>
+
+      </div>
+
+
+
 
   </div>
 
