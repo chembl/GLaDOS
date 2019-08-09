@@ -332,6 +332,18 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       $selectAllContainer.show()
 
+    fillTextFilterContainer: ->
+
+      currentFilter = @collection.getTextFilter()
+      $textFilterContainer = $(@el).find('.BCK-textFilter-container')
+      if $textFilterContainer.length == 0
+        return
+
+      glados.Utils.fillContentForElement $textFilterContainer,
+        current_filter: currentFilter
+
+      $textFilterContainer.show()
+
     fillNumResults: ->
       glados.Utils.fillContentForElement $(@el).find('.num-results'),
         num_results: @collection.getMeta('total_records')

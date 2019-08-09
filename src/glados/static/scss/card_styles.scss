@@ -141,6 +141,14 @@ $chembl-header-height: 52.245px;
       @media (max-width: 600px) {
         flex-wrap: wrap;
       }
+
+      .text-filter-container {
+        flex-basis: 300px;
+        .text-filter-input-container {
+          padding: 0 10px;
+        }
+      }
+
     }
 
     .second-row {
@@ -154,6 +162,8 @@ $chembl-header-height: 52.245px;
         height: 0;
       }
     }
+
+
   }
 
   .paginator-row {

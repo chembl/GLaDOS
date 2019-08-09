@@ -42,10 +42,15 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       @fillPageSizeSelectors()
       @activateSelectors()
+
+      if @collection.getMeta('enable_text_filter')
+        @fillTextFilterContainer()
+
       @showHeaderContainer()
       @showFooterContainer()
 
       @showPaginatedViewContent()
+
 
       if @collection.getMeta('fuzzy-results')? and @collection.getMeta('fuzzy-results') == true
         @showSuggestedLabel()

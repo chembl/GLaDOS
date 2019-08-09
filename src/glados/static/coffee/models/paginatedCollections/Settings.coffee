@@ -233,6 +233,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
         ENABLE_COLLECTION_CACHING: true
         LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
+        ENABLE_TEXT_FILTER: true
       COMPOUND_SUBSTRUCTURE_HIGHLIGHTING:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCompound'
