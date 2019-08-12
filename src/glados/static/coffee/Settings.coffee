@@ -110,7 +110,7 @@ glados.useNameSpace 'glados',
     BEAKER_BASE_URL: 'check glados.settings.BEAKER_URL'
     ES_BASE_URL: 'check glados.settings.ELASTICSEARCH_EXTERNAL_URL'
     # Searches
-    SEARCH_INPUT_DEBOUNCE_TIME: 600
+    SEARCH_INPUT_DEBOUNCE_TIME: 900
     # Paginated Collections
     TABLE_PAGE_SIZES: [5, 10, 20, 25, 50, 100]
     CARD_PAGE_SIZES: [6, 12, 24, 48, 96]
