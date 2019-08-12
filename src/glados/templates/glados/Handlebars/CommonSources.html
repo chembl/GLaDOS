@@ -44,8 +44,15 @@
 <script id="Handlebars-Common-TextFilter" type="text/x-handlebars-template">
     <div class="text-filter-input-container">
         <input class="BCK-text-filer-input" value="{{current_filter}}" placeholder="Search..." type="text">
+        <div class="search-button-container">
+            <a class="BCK-trigger-text-filter btn-small hollow-teal text-filter-search-button">
+                {% endverbatim %}
+                <img src="{% static 'img/icons/search_icon_teal.png' %}">
+                {% verbatim %}
+            </a>
+        </div>
         <div class="BCK-clear-button-container clear-button-container {{#if hide_clear_button}}hidden{{/if}}">
-            <a class="BCK-clear-button btn-micro hollow-teal clear-button">Clear</a>
+            <a class="BCK-clear-button btn-small hollow-teal clear-button">Clear</a>
     </div>
     </div>
 </script>

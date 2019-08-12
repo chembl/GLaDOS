@@ -131,8 +131,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       'click .BCK-zoom-in': 'zoomIn'
       'click .BCK-zoom-out': 'zoomOut'
       'click .BCK-reset-zoom': 'resetZoom'
-      'input .BCK-text-filer-input': 'setTextFilter'
       'click .BCK-clear-button': 'clearTextFilter'
+      'click .BCK-trigger-text-filter': 'setTextFilter'
+      'keyup .BCK-text-filer-input': 'triggerTextFilterWhenHitEnter'
 
     stampViewIDOnEventsTriggerers: ->
       eventTriggererSelectors = ['.page-selector', '.change-page-size', '.sort', '.select-search', '.select-sort',
@@ -359,9 +360,13 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if $textFilterContainer.length == 0
         return
 
+      currentFilter ?= '*'
+
+      showClearButton = currentFilter != '' and currentFilter != '*'
+
       glados.Utils.fillContentForElement $textFilterContainer,
         current_filter: currentFilter
-        hide_clear_button: not currentFilter?
+        hide_clear_button: not showClearButton
 
       $textFilterContainer.show()
 
@@ -369,19 +374,18 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       glados.Utils.fillContentForElement $(@el).find('.num-results'),
         num_results: @collection.getMeta('total_records')
 
-    triggerTextFilter: _.debounce( (term) ->
+    triggerTextFilter: (term) ->
 
       @collection.setTextFilter(term)
       @showPaginatedViewPreloader()
       @hidePaginators()
-    , glados.Settings['SEARCH_INPUT_DEBOUNCE_TIME'])
 
     showHideClearTextFilterButton: ->
 
       $textFilterInput = $(@el).find('.BCK-text-filer-input')
       term = $textFilterInput.val()
 
-      showClearButton = term? and term != ''
+      showClearButton = term? and term != '' and term != '*'
 
       $clearTextFilterButton = $(@el).find('.BCK-clear-button-container')
       if showClearButton
@@ -394,17 +398,20 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       $textFilterInput = $(@el).find('.BCK-text-filer-input')
       $textFilterInput.val('')
       @showHideClearTextFilterButton()
-      @collection.setTextFilter()
-      @showPaginatedViewPreloader()
-      @hidePaginators()
+      @triggerTextFilter()
 
     setTextFilter: (event) ->
 
       @showHideClearTextFilterButton()
 
-      $searchInput = $(event.currentTarget)
-      term = $searchInput.val()
+      $textFilterInput = $(@el).find('.BCK-text-filer-input')
+      term = $textFilterInput.val()
       @triggerTextFilter(term)
+
+    triggerTextFilterWhenHitEnter: (event) ->
+
+      if event.keyCode == 13
+        @setTextFilter(event)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Local Search

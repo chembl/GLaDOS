@@ -148,6 +148,19 @@ $chembl-header-height: 52.245px;
           padding: 0 10px;
           display: flex;
 
+          .search-button-container {
+            display: flex;
+            align-items: center;
+            padding-right: 5px;
+
+            .text-filter-search-button {
+              height: 23px;
+              padding-top: 3px;
+              padding-bottom: 3px;
+              width: 30px;
+            }
+          }
+
           .clear-button-container {
             display: flex;
             align-items: center;
