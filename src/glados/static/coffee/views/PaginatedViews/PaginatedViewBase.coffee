@@ -394,7 +394,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       $textFilterInput = $(@el).find('.BCK-text-filer-input')
       $textFilterInput.val('')
       @showHideClearTextFilterButton()
-      @triggerTextFilter('')
+      @collection.setTextFilter()
+      @showPaginatedViewPreloader()
+      @hidePaginators()
 
     setTextFilter: (event) ->
 
