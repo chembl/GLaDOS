@@ -140,8 +140,15 @@ glados.useNameSpace 'glados.views.Browsers',
       if not thereAreItems and not textFilterIsSet
         @hideAll()
         return true
+      else if not thereAreItems and textFilterIsSet
+        $(@el).removeClass('facets-container-hidden')
+        @collapseAllFilters()
       else
         $(@el).removeClass('facets-container-hidden')
+        if @textFilterWasSet
+          @expandAllFilters()
+
+      @textFilterWasSet = textFilterIsSet
 
     # ------------------------------------------------------------------------------------------------------------------
     # Filters reordering
