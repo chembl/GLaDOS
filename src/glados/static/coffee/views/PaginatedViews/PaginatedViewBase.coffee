@@ -179,7 +179,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @stampViewIDOnEventsTriggerers()
       @fillTemplates()
       @renderLinkToAllItems() unless not @config.full_list_url?
-      @setUpEmbedModal() unless not @config.show_embed_button
+#      @setUpEmbedModal() unless not @config.show_embed_button
 
     sleepView: ->
       @collection.sleep()
