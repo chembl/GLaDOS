@@ -376,9 +376,21 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     triggerTextFilter: (term) ->
 
+      @disableTextFilter()
       @collection.setTextFilter(term)
       @showPaginatedViewPreloader()
       @hidePaginators()
+
+    disableTextFilter: ->
+
+      $textFilterInput = $(@el).find('.BCK-text-filer-input')
+      $textFilterInput.attr('disabled', true)
+
+      $clearTextFilterButton = $(@el).find('.BCK-clear-button')
+      $clearTextFilterButton.addClass('disabled')
+
+      $triggerTextFilterButton = $(@el).find('.BCK-trigger-text-filter')
+      $triggerTextFilterButton.addClass('disabled')
 
     showHideClearTextFilterButton: ->
 
@@ -387,20 +399,28 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       showClearButton = term? and term != '' and term != '*'
 
-      $clearTextFilterButton = $(@el).find('.BCK-clear-button-container')
+      $clearTextFilterButtonContainer = $(@el).find('.BCK-clear-button-container')
       if showClearButton
-        $clearTextFilterButton.removeClass('hidden')
+        $clearTextFilterButtonContainer.removeClass('hidden')
       else
-        $clearTextFilterButton.addClass('hidden')
+        $clearTextFilterButtonContainer.addClass('hidden')
 
     clearTextFilter: ->
 
       $textFilterInput = $(@el).find('.BCK-text-filer-input')
+      $clearTextFilterButton = $(@el).find('.BCK-clear-button')
+      if $clearTextFilterButton.hasClass('disabled')
+        return
+
       $textFilterInput.val('')
       @showHideClearTextFilterButton()
       @triggerTextFilter()
 
     setTextFilter: (event) ->
+
+      $triggerTextFilterButton = $(@el).find('.BCK-trigger-text-filter')
+      if $triggerTextFilterButton.hasClass('disabled')
+        return
 
       @showHideClearTextFilterButton()
 
