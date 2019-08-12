@@ -46,6 +46,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         return
 
       @currentPageNum = parseInt(pageNum)
+      @showPaginatedViewPreloader()
       @collection.setPage(pageNum)
 
 
