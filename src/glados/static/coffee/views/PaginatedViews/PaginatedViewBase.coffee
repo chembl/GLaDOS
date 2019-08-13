@@ -377,6 +377,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
     triggerTextFilter: (term) ->
 
       @disableTextFilter()
+      @resetPageNumber()
       @collection.setTextFilter(term)
       @showPaginatedViewPreloader()
       @hidePaginators()

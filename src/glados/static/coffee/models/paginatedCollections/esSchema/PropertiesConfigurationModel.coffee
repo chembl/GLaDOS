@@ -29,13 +29,17 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
           canBeUsedInTextFilter = parsedProperty.type in ['string', 'object'] and parsedProperty.is_contextual != true
           if canBeUsedInTextFilter
-            comparatorsForTextFilterSet[parsedProperty.comparator] = parsedProperty.comparator
+
+            baseComparator = parsedProperty.comparator
+
+            unless baseComparator.startsWith('_metadata')
+              comparatorsForTextFilterSet[baseComparator] = baseComparator
 
             for field in ['eng_analyzed', 'std_analyzed', 'ws_analyzed', 'alphanumeric_lowercase_keyword']
               if parsedProperty.type == 'string'
-                comparatorForTextFilter = "#{parsedProperty.comparator}.#{field}"
+                comparatorForTextFilter = "#{baseComparator}.#{field}"
               else
-                comparatorForTextFilter = "#{parsedProperty.comparator}.*.#{field}"
+                comparatorForTextFilter = "#{baseComparator}.*.#{field}"
 
               comparatorsForTextFilterSet[comparatorForTextFilter] = comparatorForTextFilter
 

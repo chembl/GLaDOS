@@ -4,11 +4,13 @@ glados.useNameSpace 'glados.models.paginatedCollections.TextFilter',
 
     setTextFilter: (newFilter) ->
 
-      if newFilter == ''
+      if not newFilter? or newFilter == ''
         @clearTextFilter()
       else
+        newFilter = newFilter.replace('/', '\\/').replace(':', '\\:').replace('(', '\\(').replace(')', '\\)').replace('.', '\\.')
         @setMeta('text_filter', newFilter)
 
+      @setMeta('current_page', 1)
       @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.STATE_OBJECT_CHANGED, @)
       @resetCache()
       @fetch()
