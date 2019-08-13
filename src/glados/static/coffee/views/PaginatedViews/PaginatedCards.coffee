@@ -47,6 +47,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       @fillSelectAllContainer() unless @disableItemsSelection
 
+      if @collection.getMeta('enable_text_filter')
+        @fillTextFilterContainer()
+
       if @isCardsZoomEnabled()
         @fillZoomContainer()
 
@@ -54,6 +57,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         @renderSpecialStructuresToggler()
 
       @fillPaginators()
+      @showPaginators()
       @fillPageSizeSelectors()
       @activateSelectors()
       @showPaginatedViewContent()

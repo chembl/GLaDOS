@@ -131,6 +131,9 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       'click .BCK-zoom-in': 'zoomIn'
       'click .BCK-zoom-out': 'zoomOut'
       'click .BCK-reset-zoom': 'resetZoom'
+      'click .BCK-clear-button': 'clearTextFilter'
+      'click .BCK-trigger-text-filter': 'setTextFilter'
+      'keyup .BCK-text-filer-input': 'triggerTextFilterWhenHitEnter'
 
     stampViewIDOnEventsTriggerers: ->
       eventTriggererSelectors = ['.page-selector', '.change-page-size', '.sort', '.select-search', '.select-sort',
@@ -178,7 +181,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @stampViewIDOnEventsTriggerers()
       @fillTemplates()
       @renderLinkToAllItems() unless not @config.full_list_url?
-      @setUpEmbedModal() unless not @config.show_embed_button
+#      @setUpEmbedModal() unless not @config.show_embed_button
 
     sleepView: ->
       @collection.sleep()
@@ -193,9 +196,14 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @requestCurrentPage()
 
     checkAndRenderIfNoItems: ->
-      if @collection.length == 0
+      isUsingTextFilter =  @collection.getTextFilter()?
+      if @collection.length == 0 and not isUsingTextFilter
         @showNoResultsFound()
         return true
+      else if @collection.length == 0 and isUsingTextFilter
+        @showNoResultsWhenIsTextFilter()
+        return true
+
       $(@el).find('.preloader-row').removeClass('preloader-row-hidden')
       return false
 
@@ -205,6 +213,19 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @hideFooterContainer()
       @hideContentContainer()
       @showEmptyMessageContainer()
+
+    showNoResultsWhenIsTextFilter: ->
+
+      @hidePreloaderOnly()
+      @hidePaginators()
+
+      if @collection.getMeta('enable_text_filter')
+        @fillTextFilterContainer()
+
+      @showHeaderContainer()
+      @hideContentContainer()
+
+
 
     # ------------------------------------------------------------------------------------------------------------------
     # Fill templates
@@ -332,9 +353,86 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       $selectAllContainer.show()
 
+    fillTextFilterContainer: ->
+
+      currentFilter = @collection.getTextFilter()
+      $textFilterContainer = $(@el).find('.BCK-textFilter-container')
+      if $textFilterContainer.length == 0
+        return
+
+      currentFilter ?= '*'
+
+      showClearButton = currentFilter != '' and currentFilter != '*'
+
+      glados.Utils.fillContentForElement $textFilterContainer,
+        current_filter: currentFilter
+        hide_clear_button: not showClearButton
+
+      $textFilterContainer.show()
+
     fillNumResults: ->
       glados.Utils.fillContentForElement $(@el).find('.num-results'),
         num_results: @collection.getMeta('total_records')
+
+    triggerTextFilter: (term) ->
+
+      @disableTextFilter()
+      @resetPageNumber()
+      @collection.setTextFilter(term)
+      @showPaginatedViewPreloader()
+      @hidePaginators()
+
+    disableTextFilter: ->
+
+      $textFilterInput = $(@el).find('.BCK-text-filer-input')
+      $textFilterInput.attr('disabled', true)
+
+      $clearTextFilterButton = $(@el).find('.BCK-clear-button')
+      $clearTextFilterButton.addClass('disabled')
+
+      $triggerTextFilterButton = $(@el).find('.BCK-trigger-text-filter')
+      $triggerTextFilterButton.addClass('disabled')
+
+    showHideClearTextFilterButton: ->
+
+      $textFilterInput = $(@el).find('.BCK-text-filer-input')
+      term = $textFilterInput.val()
+
+      showClearButton = term? and term != '' and term != '*'
+
+      $clearTextFilterButtonContainer = $(@el).find('.BCK-clear-button-container')
+      if showClearButton
+        $clearTextFilterButtonContainer.removeClass('hidden')
+      else
+        $clearTextFilterButtonContainer.addClass('hidden')
+
+    clearTextFilter: ->
+
+      $textFilterInput = $(@el).find('.BCK-text-filer-input')
+      $clearTextFilterButton = $(@el).find('.BCK-clear-button')
+      if $clearTextFilterButton.hasClass('disabled')
+        return
+
+      $textFilterInput.val('')
+      @showHideClearTextFilterButton()
+      @triggerTextFilter()
+
+    setTextFilter: (event) ->
+
+      $triggerTextFilterButton = $(@el).find('.BCK-trigger-text-filter')
+      if $triggerTextFilterButton.hasClass('disabled')
+        return
+
+      @showHideClearTextFilterButton()
+
+      $textFilterInput = $(@el).find('.BCK-text-filer-input')
+      term = $textFilterInput.val()
+      @triggerTextFilter(term)
+
+    triggerTextFilterWhenHitEnter: (event) ->
+
+      if event.keyCode == 13
+        @setTextFilter(event)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Local Search
@@ -623,7 +721,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       if comp?
         @triggerCollectionSort(comp)
 
-
     # ------------------------------------------------------------------------------------------------------------------
     # Page selector
     # ------------------------------------------------------------------------------------------------------------------
@@ -676,7 +773,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     renderLinkToAllItems: ->
 
-      console.log('render link')
       $linkToAllContainer = $(@el).find('.BCK-LinkToBrowseAllItems')
       glados.Utils.fillContentForElement $linkToAllContainer,
         url: @config.full_list_url

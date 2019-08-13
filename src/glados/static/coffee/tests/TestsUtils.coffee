@@ -102,7 +102,7 @@ class TestsUtils
     list2 = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESResultsListFromState(state)
 
     for property in ['settings_path', 'custom_query', 'use_custom_query', 'esSearchQuery', 'sticky_query',
-      'esSearchQuery', 'search_term', 'contextual_properties', 'generator_items_list']
+      'esSearchQuery', 'search_term', 'contextual_properties', 'generator_items_list', 'text_filter']
 
       oldValue = list.getMeta(property)
       newValue = list2.getMeta(property)
@@ -130,7 +130,7 @@ class TestsUtils
       expect(_.isEqual(facetingHandlerStateGot, facetingHandlerStateMustBe)).toBe(true)
 
   @testSavesList = (list, pathInSettingsMustBe, queryStringMustBe="*", useQueryStringMustBe=false, stickyQueryMustBe,
-    esSearchQueryMustBe, searchTermMustBe, contextualColumnsMustBe, generatorListMustBe)->
+    esSearchQueryMustBe, searchTermMustBe, contextualColumnsMustBe, generatorListMustBe, textFilterMustBe)->
 
     state = list.getStateJSON()
 
@@ -143,6 +143,7 @@ class TestsUtils
     expect(_.isEqual(state.searchESQuery, esSearchQueryMustBe)).toBe(true)
 
     expect(state.search_term).toBe(searchTermMustBe)
+    expect(state.text_filter).toBe(textFilterMustBe)
 
     contextualColumnsGot = state.contextual_properties
     expect(_.isEqual(contextualColumnsGot, contextualColumnsMustBe)).toBe(true)

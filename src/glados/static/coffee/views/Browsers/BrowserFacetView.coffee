@@ -134,11 +134,21 @@ glados.useNameSpace 'glados.views.Browsers',
     checkIfNoItems: ->
 
       totalRecords = @collection.getMeta('total_records')
-      if totalRecords == 0
+      thereAreItems = totalRecords != 0
+      textFilterIsSet = @collection.getTextFilter()?
+
+      if not thereAreItems and not textFilterIsSet
         @hideAll()
         return true
+      else if not thereAreItems and textFilterIsSet
+        $(@el).removeClass('facets-container-hidden')
+        @collapseAllFilters()
       else
         $(@el).removeClass('facets-container-hidden')
+        if @textFilterWasSet
+          @expandAllFilters()
+
+      @textFilterWasSet = textFilterIsSet
 
     # ------------------------------------------------------------------------------------------------------------------
     # Filters reordering

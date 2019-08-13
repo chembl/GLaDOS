@@ -17,9 +17,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       searchESQuery = stateObject.searchESQuery
       stickyQuery = stateObject.sticky_query
       itemsList = stateObject.generator_items_list
+      textFilter = stateObject.text_filter
 
       list = @getNewESResultsListFor(settings, queryString, useQueryString, itemsList, ssSearchModel=undefined,
-        stickyQuery, searchESQuery)
+        stickyQuery, searchESQuery, flavour=undefined, textFilter)
 
       facetGroups = list.getFacetsGroups(selected=undefined, onlyVisible=false)
       facetsState = stateObject.facets_state
@@ -37,7 +38,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return list
 
     getNewESResultsListFor: (esIndexSettings, customQuery='*', useCustomQuery=false, itemsList, ssSearchModel,
-      stickyQuery, searchESQuery, flavour) ->
+      stickyQuery, searchESQuery, flavour, textFilter) ->
 
       IndexESPagQueryCollection = glados.models.paginatedCollections.PaginatedCollectionBase\
       .extend(glados.models.paginatedCollections.ESPaginatedQueryCollection)
@@ -46,6 +47,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       .extend(glados.models.paginatedCollections.ReferenceStructureFunctions)
       .extend(glados.models.paginatedCollections.CacheFunctions)
       .extend(glados.models.paginatedCollections.StateSaving.ESCollectionStateSavingFunctions)
+      .extend(glados.models.paginatedCollections.TextFilter.ESCollectionTextFilterFunctions)
       .extend(flavour).extend
         model: esIndexSettings.MODEL
 
@@ -97,9 +99,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             custom_possible_card_sizes_struct: esIndexSettings.POSSIBLE_CARD_SIZES_STRUCT
             settings_path: esIndexSettings.PATH_IN_SETTINGS
             searchESQuery: searchESQuery
+            text_filter: textFilter
             links_to_other_entities: esIndexSettings.LINKS_TO_OTHER_ENTITIES
             sssearch_model: ssSearchModel
             download_columns_group: esIndexSettings.DOWNLOAD_COLUMNS_GROUP
+            enable_text_filter: esIndexSettings.ENABLE_TEXT_FILTER
 
           if @getMeta('enable_similarity_maps') or @getMeta('enable_substructure_highlighting')
             @initReferenceStructureFunctions()
@@ -108,7 +112,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             @initCache()
             @on 'reset update', @addModelsInCurrentPage, @
 
-          console.log 'ssSearchModel: ', ssSearchModel
           if ssSearchModel?
             @setMeta('out_of_n', ssSearchModel.get('total_results'))
             @setMeta('size_limit', ssSearchModel.get('size_limit'))

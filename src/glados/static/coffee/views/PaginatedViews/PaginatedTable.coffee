@@ -42,7 +42,12 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       @fillPageSizeSelectors()
       @activateSelectors()
+
+      if @collection.getMeta('enable_text_filter')
+        @fillTextFilterContainer()
+
       @showHeaderContainer()
+      @showColumnsSelector()
       @showFooterContainer()
 
       @showPaginatedViewContent()
@@ -54,6 +59,20 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
       glados.views.PaginatedViews.PaginatedViewBase.renderViewState.call(@)
 
+    showNoResultsWhenIsTextFilter: ->
+
+      glados.views.PaginatedViews.PaginatedViewBase.showNoResultsWhenIsTextFilter.call(@)
+      @hideColumnsSelector()
+
+    hideColumnsSelector: ->
+
+      $container = $(@el).find('.BCK-show-hide-columns-container')
+      $container.hide()
+
+    showColumnsSelector: ->
+
+      $container = $(@el).find('.BCK-show-hide-columns-container')
+      $container.show()
 
     removeSelectAllContainer: ->
       $selectAllContainer = $(@el).find('.BCK-selectAll-container')

@@ -270,11 +270,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       columnsDescription = {}
       propsComparatorsSet = {}
+      comparatorsForTextFilterSet = {}
       allColumns = []
 
       for viewKey, configModel of propertiesConfigModels
         columnsDescription[viewKey] = configModel.get('parsed_configuration')
         newPropsComparators = configModel.get('props_comparators_set')
+        currentComparatorsForTextFilter = configModel.get('comparators_for_text_filter_set')
         currentAllColumns = configModel.get('all_columns')
 
         for column in currentAllColumns
@@ -285,9 +287,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         for key, value of newPropsComparators
           propsComparatorsSet[key] = key
 
+        for key, value of currentComparatorsForTextFilter
+          comparatorsForTextFilterSet[key] = key
+
       @setMeta('columns', allColumns)
       @setMeta('columns_description', columnsDescription)
       @setMeta('props_comparators_set', propsComparatorsSet)
+      @setMeta('comparators_for_text_filter_set', comparatorsForTextFilterSet)
       @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.COLUMNS_CONFIGURATION_LOADED)
 
     fetch: (options, testMode=false) ->
@@ -443,6 +449,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @addHighlightsToQuery(esQuery)
       # Includes the selected facets filter
       @addFacetsToQuery(esQuery, facetsFiltered, requestFacets, facetsFirstCall)
+      @addTextFilterToQuery(esQuery)
       @addStickyQuery(esQuery)
       # do not save request facets calls for the editor
       @setMeta('latest_request_data', esQuery) unless requestFacets
@@ -503,6 +510,24 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         facets_query = @getFacetsGroupsAggsQuery(facetsFirstCall)
         if facets_query
           esQuery.aggs = facets_query
+
+    addTextFilterToQuery: (esQuery) ->
+
+      currentTextFilter = @getTextFilter()
+      if not currentTextFilter? or currentTextFilter = ''
+        return
+
+      comparatorsForTextFilterSet = @getMeta('comparators_for_text_filter_set')
+      comparatorsList = _.keys(comparatorsForTextFilterSet)
+      comparatorsList.sort()
+
+      textFilterQuery = {
+        "query_string": {
+          "fields": ("#{comp}" for comp in comparatorsList),
+          "query": @getTextFilter(),
+        }
+      }
+      esQuery.query.bool.filter.push textFilterQuery
 
     getContextualSortingProperties: ->
 
@@ -769,7 +794,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         @setMeta('current_page', 1)
       if !@hasMeta('search_term')
         @setMeta('search_term', '')
-      @setMeta('total_pages', Math.ceil(parseFloat(@getMeta('total_records')) / parseFloat(@getMeta('page_size'))))
+
+      if totalRecords == 0
+        totalPages = 0
+      else
+        totalPages = Math.ceil(parseFloat(@getMeta('total_records')) / parseFloat(@getMeta('page_size')))
+
+      @setMeta('total_pages', totalPages)
+
       @calculateHowManyInCurrentPage()
 
     calculateHowManyInCurrentPage: ->

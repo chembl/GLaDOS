@@ -13,6 +13,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       customEntity = @get('entity')
       parsedConfiguration = {}
       propsComparatorsSet = {} #  An object is used instead of Set to avoid browser compatibility issues.
+      comparatorsForTextFilterSet = {}
       allColumns = []
       for subGroupKey, subGroup of response.properties
 
@@ -26,6 +27,22 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
           propsComparatorsSet[parsedProperty.comparator] = parsedProperty.comparator
 
+          canBeUsedInTextFilter = parsedProperty.type in ['string', 'object'] and parsedProperty.is_contextual != true
+          if canBeUsedInTextFilter
+
+            baseComparator = parsedProperty.comparator
+
+            unless baseComparator.startsWith('_metadata')
+              comparatorsForTextFilterSet[baseComparator] = baseComparator
+
+            for field in ['eng_analyzed', 'std_analyzed', 'ws_analyzed', 'alphanumeric_lowercase_keyword']
+              if parsedProperty.type == 'string'
+                comparatorForTextFilter = "#{baseComparator}.#{field}"
+              else
+                comparatorForTextFilter = "#{baseComparator}.*.#{field}"
+
+              comparatorsForTextFilterSet[comparatorForTextFilter] = comparatorForTextFilter
+
         if subGroupKey == 'default'
           parsedConfiguration.Default = parsedProperties
         else if subGroupKey == 'optional'
@@ -34,5 +51,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       return {
         'parsed_configuration': parsedConfiguration
         'props_comparators_set': propsComparatorsSet
+        'comparators_for_text_filter_set': comparatorsForTextFilterSet
         'all_columns': allColumns
       }

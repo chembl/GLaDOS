@@ -133,6 +133,65 @@ $chembl-header-height: 52.245px;
 .paginated-collection {
   padding: 4px;
 
+  .cards-header {
+
+    .first-row {
+      display: flex;
+      justify-content: space-between;
+      @media (max-width: 600px) {
+        flex-wrap: wrap;
+      }
+
+      .text-filter-container {
+        flex-basis: 300px;
+        .text-filter-input-container {
+          padding: 0 10px;
+          display: flex;
+
+          .search-button-container {
+            display: flex;
+            align-items: center;
+            padding-right: 5px;
+
+            .text-filter-search-button {
+              height: 23px;
+              padding-top: 3px;
+              padding-bottom: 3px;
+              width: 30px;
+            }
+          }
+
+          .clear-button-container {
+            display: flex;
+            align-items: center;
+            .clear-button {
+              width: 40px;
+            }
+            &.hidden {
+              display: none;
+            }
+          }
+
+        }
+      }
+
+    }
+
+    .second-row {
+      padding: 10px 0;
+      &:after {
+        content: ".";
+        display: block;
+        clear: both;
+        visibility: hidden;
+        line-height: 0;
+        height: 0;
+      }
+    }
+
+
+  }
+
   .paginator-row {
     margin-top: 20px;
   }

@@ -1,73 +1,89 @@
 <div class="paginated-collection">
 
-  <div class="BCK-ErrorMessagesContainer">
-  </div>
-  <div class="BCK-header-container paginator-row row table-header-menu" style="display: none">
+    <div class="BCK-ErrorMessagesContainer">
+    </div>
 
-    <div class="BCK-select-page-size-container col m3 s12" data-hb-template="Handlebars-Common-SelectPageSizeContainer">
+    <div class="BCK-header-container cards-header" style="display: none">
+        <div class="first-row">
+            <div class="records-per-page-container">
+                <div class="BCK-select-page-size-container"
+                     data-hb-template="Handlebars-Common-SelectPageSizeContainer">
 
-      <!-- Backbone fills this, it will use the handlebars template defined in data-hb-template -->
+                </div>
+            </div>
+            <div class="columns-selector-container valign-wrapper">
+
+                <div class="BCK-show-hide-columns-container buttons-container"
+                     data-hb-template="Handlebars-Common-ShowHideColumnsDropdown">
+                    <!-- Backbone fills this, it will use the handlebars template defined in data-hb-template -->
+                    <div class='BCK-ModalTrigger' data-hb-template="Handlebars-Common-ShowHideColumnsDropdown-trigger">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="text-filter-container">
+                <div class="BCK-textFilter-container" data-hb-template="Handlebars-Common-TextFilter">
+                </div>
+            </div>
+
+        </div>
+        <div class="second-row">
+
+            <div class='BCK-paginator-container' data-hb-template="Handlebars-Common-Paginated-UL">
+            </div>
+
+        </div>
+
 
     </div>
 
-    <div class="BCK-show-hide-columns-container col l2 m4 s12 buttons-container"
-         data-hb-template="Handlebars-Common-ShowHideColumnsDropdown">
-      <!-- Backbone fills this, it will use the handlebars template defined in data-hb-template -->
-      <div class='BCK-ModalTrigger' data-hb-template="Handlebars-Common-ShowHideColumnsDropdown-trigger">
-      </div>
+    <div class='BCK-SuggestedLabel row' style="display: none">
+        <h5>No records were found. However, we found the following similar results:</h5>
     </div>
 
-    <div class='BCK-paginator-container col l7 m12' data-hb-template="Handlebars-Common-Paginated-UL">
-      <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+    <div class="BCK-ErrorMessagesContainer" style="display: none">
     </div>
 
-  </div>
-
-  <div class='BCK-SuggestedLabel row' style="display: none">
-    <h5>No records were found. However, we found the following similar results:</h5>
-  </div>
-
-  <div class="BCK-ErrorMessagesContainer" style="display: none">
-  </div>
-
-  <div class='BCK-EmptyListMessage empty-list-message' style="display: none">
-    <h5>No records were found.</h5>
-  </div>
-
-  <div class="row preloader-row">
-
-    <div class="BCK-PreloaderContainer">
-      {% block card_loaders %}
-      {% include "glados/base/card_loaders.html" %}
-      {% endblock %}
+    <div class='BCK-EmptyListMessage empty-list-message' style="display: none">
+        <h5>No records were found.</h5>
     </div>
 
-    <div class="table-top-scroller-container BCK-top-scroller-container hide-on-small-only">
-      <div class="BCK-top-scroller-dummy">
-      </div>
+    <div class="row preloader-row">
+
+        <div class="BCK-PreloaderContainer">
+            {% block card_loaders %}
+                {% include "glados/base/card_loaders.html" %}
+            {% endblock %}
+        </div>
+
+        <div class="table-top-scroller-container BCK-top-scroller-container hide-on-small-only">
+            <div class="BCK-top-scroller-dummy">
+            </div>
+        </div>
+
+        <table class="BCK-items-container pg-table compact-table scrollable striped hide-on-small-only ebi-links"
+               data-hb-template="Handlebars-Common-Paginated-Row-large"
+               data-hb-header-template="Handlebars-Common-Paginated-Header-large">
+
+            <!-- Backbone fills this, it will use the handlebars template defined in data-hb-template -->
+
+        </table>
+
+        <ul class="BCK-items-container collection hide-on-med-and-up"
+            data-hb-template="Handlebars-Common-Pagination-LI">
+
+            <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+
+        </ul>
+
     </div>
 
-    <table class="BCK-items-container pg-table compact-table scrollable striped hide-on-small-only ebi-links"
-           data-hb-template="Handlebars-Common-Paginated-Row-large"
-           data-hb-header-template="Handlebars-Common-Paginated-Header-large">
+    <div class="BCK-footer-container row" style="display: none">
 
-      <!-- Backbone fills this, it will use the handlebars template defined in data-hb-template -->
+        <div class='BCK-paginator-container' data-hb-template="Handlebars-Common-Paginated-UL">
+            <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
+        </div>
 
-    </table>
-
-    <ul class="BCK-items-container collection hide-on-med-and-up" data-hb-template="Handlebars-Common-Pagination-LI">
-
-      <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
-
-    </ul>
-
-  </div>
-
-  <div class="BCK-footer-container row" style="display: none">
-
-    <div class='BCK-paginator-container' data-hb-template="Handlebars-Common-Paginated-UL">
-      <!-- Backbone fills this, it will use the handlebars template defined in data-handlebar-template -->
     </div>
-
-  </div>
 </div>

@@ -66,6 +66,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             previous: 6
             next: 12
         LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
+        ENABLE_TEXT_FILTER: true
       TARGET:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESTarget'
@@ -86,6 +87,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
         ENABLE_COLLECTION_CACHING: true
         LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
+        ENABLE_TEXT_FILTER: true
       ASSAY:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESAssay'
@@ -106,6 +108,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
         ENABLE_COLLECTION_CACHING: true
         LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
+        ENABLE_TEXT_FILTER: true
       DOCUMENT:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESDocument'
@@ -126,6 +129,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
         ENABLE_COLLECTION_CACHING: true
         LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
+        ENABLE_TEXT_FILTER: true
       CELL_LINE:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCellLine'
@@ -145,6 +149,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
         ENABLE_COLLECTION_CACHING: true
         LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
+        ENABLE_TEXT_FILTER: true
       TISSUE:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESTissue'
@@ -164,6 +169,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
         ENABLE_COLLECTION_CACHING: true
         LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
+        ENABLE_TEXT_FILTER: true
     ES_INDEXES_NO_MAIN_SEARCH:
       ACTIVITY:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
@@ -188,6 +194,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         LINKS_TO_OTHER_ENTITIES: [Compound.prototype.entityName, Target.prototype.entityName,
           Assay.prototype.entityName, Document.prototype.entityName]
         ID_COLUMN: Activity.ID_COLUMN
+        ENABLE_TEXT_FILTER: true
       COMPOUND_ES_RESULTS_LIST_CAROUSEL:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCompound'
@@ -232,6 +239,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
         ENABLE_COLLECTION_CACHING: true
         LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
+        ENABLE_TEXT_FILTER: true
       COMPOUND_SUBSTRUCTURE_HIGHLIGHTING:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCompound'
@@ -264,6 +272,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         ENABLE_COLLECTION_CACHING: true
         DISABLE_CACHE_ON_DOWNLOAD: true
         LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
+        ENABLE_TEXT_FILTER: true
       TARGET_BLAST_RESULTS:
         ID_NAME: 'ESTarget'
         LABEL: 'Targets'
@@ -284,6 +293,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         ENABLE_COLLECTION_CACHING: true
         LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
         DOWNLOAD_COLUMNS_GROUP: 'download_blast'
+        ENABLE_TEXT_FILTER: true
       COMPOUND_SIMILARITY_MAPS:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCompound'
@@ -317,6 +327,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DISABLE_CACHE_ON_DOWNLOAD: true
         LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
         DOWNLOAD_COLUMNS_GROUP: 'download_similarity'
+        ENABLE_TEXT_FILTER: true
       DRUGS_LIST:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESDrugs'
@@ -349,6 +360,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DISABLE_CACHE_ON_DOWNLOAD: true
         LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
         DOWNLOAD_COLUMNS_GROUP: 'download_drugs'
+        ENABLE_TEXT_FILTER: true
       DRUG_INDICATIONS:
         ID_NAME: 'ESDrugIndications'
         LABEL: 'Drug Indications'
@@ -366,6 +378,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
+        ENABLE_TEXT_FILTER: true
       DRUG_INDICATIONS_COMPOUND_REPORT_CARD:
         ID_NAME: 'ESDrugIndications'
         LABEL: 'Drug Indications'
@@ -398,6 +411,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
+        ENABLE_TEXT_FILTER: true
       MECHANISMS_OF_ACTION_COMPOUND_REPORT_CARD:
         ID_NAME: 'ESMechsOfAction'
         LABEL: 'Mechanisms of Action'
