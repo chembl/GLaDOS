@@ -514,9 +514,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     addTextFilterToQuery: (esQuery) ->
 
       currentTextFilter = @getTextFilter()
-      if not currentTextFilter? or currentTextFilter = ''
+      if not currentTextFilter? or currentTextFilter == ''
         return
 
+      currentTextFilter = currentTextFilter.replace('/', '\\/').replace(':', '\\:').replace('(', '\\(').replace(')', '\\)').replace('.', '\\.')
       comparatorsForTextFilterSet = @getMeta('comparators_for_text_filter_set')
       comparatorsList = _.keys(comparatorsForTextFilterSet)
       comparatorsList.sort()
@@ -524,7 +525,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       textFilterQuery = {
         "query_string": {
           "fields": ("#{comp}" for comp in comparatorsList),
-          "query": @getTextFilter(),
+          "query": currentTextFilter,
         }
       }
       esQuery.query.bool.filter.push textFilterQuery

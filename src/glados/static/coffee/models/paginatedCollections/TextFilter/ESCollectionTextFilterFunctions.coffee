@@ -7,7 +7,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.TextFilter',
       if not newFilter? or newFilter == ''
         @clearTextFilter()
       else
-        newFilter = newFilter.replace('/', '\\/').replace(':', '\\:').replace('(', '\\(').replace(')', '\\)').replace('.', '\\.')
         @setMeta('text_filter', newFilter)
 
       @setMeta('current_page', 1)
