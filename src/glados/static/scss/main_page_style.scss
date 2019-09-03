@@ -147,6 +147,9 @@ $full-header-height-large: 180px;
       align-items: center;
       .chembl-text{
         padding: 0 10%;
+        .chembl-at-10-symposium{
+          background-color: $teal-6;
+        }
       }
 
       /* -------- MEDIUM SCREEN -------- */
