@@ -181,7 +181,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         MODEL: Activity
         ID_COLUMN: Activity.ID_COLUMN
         PERMANENT_COMPARATORS_TO_FETCH: ['_metadata.parent_molecule_data.image_file', 'molecule_chembl_id',
-          'target_chembl_id', 'assay_chembl_id', 'document_chembl_id', '_metadata.assay_data.tissue_chembl_id']
+          'target_chembl_id', 'assay_chembl_id', 'document_chembl_id', '_metadata.assay_data.tissue_chembl_id',
+          'activity_id']
         CONFIG_GROUPS:
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
