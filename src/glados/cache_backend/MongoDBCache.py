@@ -35,7 +35,8 @@ class MongoDBCache(BaseCache):
         options = params.get('OPTIONS', {})
         self._host = options.get('HOST', 'localhost')
         self._port = options.get('PORT', 27017)
-        self._database = options.get('DATABASE', 'django_cache')
+        self._database = options.get('DATABASE', 'django_glados_cache')
+        self._auth_database = options.get('AUTH_DATABASE', self._database)
         self._rshosts = options.get('RSHOSTS')
         self._rsname = options.get('RSNAME')
         self._user = options.get('USER', None)
@@ -200,7 +201,7 @@ class MongoDBCache(BaseCache):
 
         self._db = self.connection[self._database]
         if self._user and self._password:
-            self._db.authenticate(self._user, self._password)
+            self._db.authenticate(self._user, self._password, source=self._auth_database)
         if pymongo.version_tuple[0] < 3:
             self._coll = self._db[self._collection]
         else:
