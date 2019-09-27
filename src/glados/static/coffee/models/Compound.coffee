@@ -263,8 +263,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     downloadHighlighted = ->
       model.downloadHighlightedSVG()
 
-    @download2DSDF().then ->
-      model.downloadAlignedSDF().then downloadHighlighted, downloadHighlighted
+    @download2DSDF().then downloadHighlighted, downloadHighlighted
 
   #---------------------------------------------------------------------------------------------------------------------
   # Parsing
@@ -733,7 +732,7 @@ Compound.SDF_2D_ALIGN_URL = glados.Settings.BEAKER_BASE_URL + 'align'
 Compound.SDF_2D_HIGHLIGHT_URL = glados.Settings.BEAKER_BASE_URL + 'highlightCtabFragmentSvg'
 Compound.SDF_2D_URL = glados.Settings.WS_BASE_URL + 'molecule/'
 Compound.SDF_3D_2_XYZ = glados.Settings.BEAKER_BASE_URL + 'ctab2xyz'
-Compound.SMILES_2_SIMILARITY_MAP_URL = glados.Settings.BEAKER_BASE_URL + 'smiles2SimilarityMap'
+Compound.SMILES_2_SIMILARITY_MAP_URL = glados.Settings.BEAKER_BASE_URL + 'smiles2SimilarityMapSvg'
 Compound.SDF_3D_ENDPOINTS = [
   {
     label: 'UFF'

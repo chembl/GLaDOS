@@ -269,7 +269,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Cards}": 'browser_cards'
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
         ENABLE_SUBSTRUCTURE_HIGHLIGHTING: true
-        SHOW_SUBSTRUCTURE_HIGHLIGHTING: false
+        SHOW_SUBSTRUCTURE_HIGHLIGHTING: true
         ENABLE_COLLECTION_CACHING: true
         DISABLE_CACHE_ON_DOWNLOAD: true
         LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
@@ -323,7 +323,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Heatmap]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
         ENABLE_SIMILARITY_MAPS: true
-        SHOW_SIMILARITY_MAPS: false
+        SHOW_SIMILARITY_MAPS: true
         ENABLE_COLLECTION_CACHING: true
         DISABLE_CACHE_ON_DOWNLOAD: true
         LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
