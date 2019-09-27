@@ -323,7 +323,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Heatmap]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
         ENABLE_SIMILARITY_MAPS: true
-        SHOW_SIMILARITY_MAPS: true
+        SHOW_SIMILARITY_MAPS: false
         ENABLE_COLLECTION_CACHING: true
         DISABLE_CACHE_ON_DOWNLOAD: true
         LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
