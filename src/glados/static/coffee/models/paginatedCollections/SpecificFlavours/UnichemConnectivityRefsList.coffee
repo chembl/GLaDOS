@@ -120,7 +120,9 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
         for match in matches
 
           srcCompoundID = match.src_compound_id
-          matchURL = baseItemURL + srcCompoundID
+          matchURL = null
+          if baseItemURL?
+            matchURL = baseItemURL + srcCompoundID
 
           for compare in match.match_compare
 
