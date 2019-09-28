@@ -67,8 +67,11 @@ class SearchResultsApp
 
       listConfig = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_SIMILARITY_MAPS
 
-    else if searchType == glados.models.Search.StructureSearchModel.SEARCH_TYPES.STRUCTURE.SUBSTRUCTURE or \
-    searchType == glados.models.Search.StructureSearchModel.SEARCH_TYPES.STRUCTURE.CONNECTIVITY
+    else if searchType == glados.models.Search.StructureSearchModel.SEARCH_TYPES.STRUCTURE.SUBSTRUCTURE
+
+      listConfig = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.COMPOUND_SUBSTRUCTURE_HIGHLIGHTING
+
+    else if searchType == glados.models.Search.StructureSearchModel.SEARCH_TYPES.STRUCTURE.CONNECTIVITY
 
       listConfig = glados.models.paginatedCollections.Settings.ES_INDEXES_NO_MAIN_SEARCH.SUBSTRUCTURE_RESULTS_LIST
 
