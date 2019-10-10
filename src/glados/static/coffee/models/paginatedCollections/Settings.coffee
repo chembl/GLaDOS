@@ -119,7 +119,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         MODEL: Document
         ID_COLUMN: Document.ID_COLUMN
         PERMANENT_COMPARATORS_TO_FETCH: ['document_chembl_id']
-        ID_COLUMN: Assay.ID_COLUMN
         CONFIG_GROUPS:
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.DocumentSchema.FACETS_GROUPS
@@ -404,7 +403,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BROWSE_LIST_URL: glados.models.Compound.MechanismOfAction.getListURL
         MODEL: glados.models.Compound.MechanismOfAction
         PERMANENT_COMPARATORS_TO_FETCH: ['parent_molecule._metadata.compound_generated.image_file',
-          'parent_molecule.molecule_chembl_id', 'target.target_chembl_id']
+          'parent_molecule.molecule_chembl_id', 'target.target_chembl_id', 'mechanism_of_action.mec_id']
         CONFIG_GROUPS:
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.MechanismSchema.FACETS_GROUPS
@@ -412,6 +411,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
+        LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
         ENABLE_TEXT_FILTER: true
       MECHANISMS_OF_ACTION_COMPOUND_REPORT_CARD:
         ID_NAME: 'ESMechsOfAction'
