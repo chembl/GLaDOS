@@ -113,22 +113,24 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       idProperty = @getMeta('id_column').comparator
       propertiesToPluck ?= [idProperty]
+      if not _.isArray propertiesToPluck
+        propertiesToPluck = [propertiesToPluck]
 
       itemsList = []
 
       if @downloadIsValidAndReady()
         for model in @allResults
           itemProperties = {}
-          if not onlySelected or (onlySelected and @itemIsSelected(model[idProperty]))
+          if not onlySelected or (onlySelected and @itemIsSelected(glados.Utils.getNestedValue(model, idProperty)))
             for propertyToPluckI in propertiesToPluck
-              itemProperties[propertyToPluckI] = model[propertyToPluckI]
+              itemProperties[propertyToPluckI] = glados.Utils.getNestedValue(model, propertyToPluckI)
             itemsList.push itemProperties
       else
         for model in @models
           itemProperties = {}
-          if not onlySelected or (onlySelected and @itemIsSelected(model.attributes[idProperty]))
+          if not onlySelected or (onlySelected and @itemIsSelected(glados.Utils.getNestedValue(model.attributes, idProperty)))
             for propertyToPluckI in propertiesToPluck
-              itemProperties[propertyToPluckI] = model.attributes[propertyToPluckI]
+              itemProperties[propertyToPluckI] = glados.Utils.getNestedValue(model.attributes, propertyToPluckI)
             itemsList.push itemProperties
 
       finalItemsList = []
