@@ -119,7 +119,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         MODEL: Document
         ID_COLUMN: Document.ID_COLUMN
         PERMANENT_COMPARATORS_TO_FETCH: ['document_chembl_id']
-        ID_COLUMN: Assay.ID_COLUMN
         CONFIG_GROUPS:
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.DocumentSchema.FACETS_GROUPS
