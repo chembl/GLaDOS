@@ -399,6 +399,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
         ENABLE_TEXT_FILTER: true
+        LINKS_TO_OTHER_ENTITIES: [
+          glados.models.Compound.Drug.prototype.browseLinkEntityName,
+          Compound.prototype.entityName
+        ]
       DRUG_INDICATIONS_COMPOUND_REPORT_CARD:
         ID_NAME: 'ESDrugIndications'
         LABEL: 'Drug Indications'
@@ -416,10 +420,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
-        LINKS_TO_OTHER_ENTITIES: [
-          glados.models.Compound.Drug.prototype.browseLinkEntityName,
-          Compound.prototype.entityName
-        ]
       MECHANISMS_OF_ACTION:
         ID_NAME: 'ESMechsOfAction'
         LABEL: 'Mechanisms of Action'
