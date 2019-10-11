@@ -137,6 +137,8 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
               ref_id: srcCompoundID
               is_toggleable: isToggeable
               show: not isToggeable
+              show_link: not isToggeable and matchURL?
+              show_text: not isToggeable and not matchURL?
               colour_class: matchClasses[matchingQueryInchi]
 
             allMatches.push newRef
@@ -204,6 +206,8 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
         for match in allMatches
           if match.is_toggleable
             match.show = newState
+            match.show_link = newState and match.ref_url?
+            match.show_text = newState and not match.ref_url?
 
       @setIsShowingAlternativeFormsState(newState)
       @setModelsAfterParse(originalRawModels)
