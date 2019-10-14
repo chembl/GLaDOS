@@ -855,6 +855,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
 
     sortCollection: (colID) ->
+      @unSelectAll()
       @resetCache() unless not @getMeta('enable_collection_caching')
       columns = @getAllColumns()
       @setupColSorting(columns, colID)
