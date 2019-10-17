@@ -90,7 +90,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Heatmap]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
         ENABLE_COLLECTION_CACHING: true
-        LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
+        LINKS_TO_OTHER_ENTITIES: [
+          Activity.prototype.entityName,
+          glados.models.Compound.MechanismOfAction.prototype.entityName
+        ]
         ENABLE_TEXT_FILTER: true
       ASSAY:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES

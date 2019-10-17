@@ -62,6 +62,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       "#{Assay.prototype.entityName}": 'all_assays_link_cache'
       "#{CellLine.prototype.entityName}": 'all_cell_lines_link_cache'
       "#{glados.models.Tissue.prototype.entityName}": 'all_tissues_link_cache'
+      "#{glados.models.Compound.Drug.prototype.browseLinkEntityName}": 'all_drugs_link_cache'
 
 
     thereAreTooManyItemsForActivitiesLink: ->
@@ -79,9 +80,17 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     getLinkToRelatedEntities: (itemsList, destinationEntityName) ->
 
+      itemsList = Array.from(new Set(itemsList))
+
       sourceEntityName = @getModelEntityName()
-      filter = @ENTITY_NAME_TO_FILTER_GENERATOR[sourceEntityName][destinationEntityName]
-        ids: itemsList
+
+      filter = null
+      if _.isObject(@ENTITY_NAME_TO_FILTER_GENERATOR[@getModelEntityName()][destinationEntityName]) and not _.isFunction(@ENTITY_NAME_TO_FILTER_GENERATOR[@getModelEntityName()][destinationEntityName])
+        filter = @ENTITY_NAME_TO_FILTER_GENERATOR[@getModelEntityName()][destinationEntityName]['search_filter']
+          ids: itemsList
+      else
+        filter = @ENTITY_NAME_TO_FILTER_GENERATOR[sourceEntityName][destinationEntityName]
+          ids: itemsList
 
       if destinationEntityName == Activity.prototype.entityName
         return Activity.getActivitiesListURL(filter)
@@ -97,6 +106,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         return CellLine.getCellsListURL(filter)
       else if destinationEntityName == glados.models.Tissue.prototype.entityName
         return glados.models.Tissue.getTissuesListURL(filter)
+      else if destinationEntityName == glados.models.Compound.Drug.prototype.browseLinkEntityName
+        return glados.models.Compound.Drug.getDrugsListURL(filter)
+      else if destinationEntityName == glados.models.Compound.MechanismOfAction.prototype.entityName
+        return glados.models.Compound.MechanismOfAction.getListURL(filter)
+      else if destinationEntityName == glados.models.Compound.DrugIndication.prototype.entityName
+        return glados.models.Compound.DrugIndication.getListURL(filter)
 
     getLinkToRelatedEntitiesPromise: (destinationEntityName) ->
 
@@ -112,6 +127,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       sourceEntityName = @getModelEntityName()
       if sourceEntityName == Activity.prototype.entityName
         propertyToPluck = glados.Settings.ENTITY_NAME_TO_ENTITY[destinationEntityName].prototype.idAttribute
+
+      if _.isObject(@ENTITY_NAME_TO_FILTER_GENERATOR[@getModelEntityName()][destinationEntityName]) and not _.isFunction(@ENTITY_NAME_TO_FILTER_GENERATOR[@getModelEntityName()][destinationEntityName])
+        propertyToPluck = @ENTITY_NAME_TO_FILTER_GENERATOR[@getModelEntityName()][destinationEntityName]['join_property_comparator']
 
       # if all items are un selected the link must be done with all of them.
       iDsPromise = @getItemsIDsPromise(onlySelected=(not @allItemsAreUnselected()), propertyToPluck)
@@ -131,9 +149,21 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       "#{Compound.prototype.entityName}":
         "#{Activity.prototype.entityName}":\
           Handlebars.compile('molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
+        "#{glados.models.Compound.MechanismOfAction.prototype.entityName}":\
+          Handlebars.compile(
+            'mechanism_of_action.molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})'+
+            ' OR '+
+            'mechanism_of_action.parent_molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
+        "#{glados.models.Compound.DrugIndication.prototype.entityName}":\
+          Handlebars.compile(
+            'drug_indication.molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})'+
+            ' OR '+
+            'drug_indication.parent_molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
       "#{Target.prototype.entityName}":
         "#{Activity.prototype.entityName}":\
           Handlebars.compile('target_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
+        "#{glados.models.Compound.MechanismOfAction.prototype.entityName}":\
+          Handlebars.compile('target.target_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
       "#{Document.prototype.entityName}":
         "#{Activity.prototype.entityName}":\
           Handlebars.compile('document_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
@@ -146,9 +176,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       "#{glados.models.Tissue.prototype.entityName}":
         "#{Activity.prototype.entityName}":\
           Handlebars.compile('_metadata.assay_data.tissue_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
-      "#{glados.models.Compound.Drug}":
-        "#{Activity.prototype.entityName}":
-          Handlebars.compile('molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
       "#{Activity.prototype.entityName}":
         "#{Compound.prototype.entityName}":
           Handlebars.compile('molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
@@ -158,6 +185,36 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           Handlebars.compile('assay_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
         "#{Document.prototype.entityName}":
           Handlebars.compile('document_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
+      "#{glados.models.Compound.MechanismOfAction.prototype.entityName}":
+        "#{glados.models.Compound.Drug.prototype.browseLinkEntityName}":
+          join_property_comparator: 'parent_molecule.molecule_chembl_id'
+          search_filter:\
+            Handlebars.compile('molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
+        "#{Compound.prototype.entityName}":
+          join_property_comparator: 'parent_molecule.molecule_chembl_id'
+          search_filter:\
+            Handlebars.compile(
+              'molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}}) OR '+
+              'molecule_hierarchy.parent_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})'
+            )
+        "#{Target.prototype.entityName}":
+          join_property_comparator: 'target.target_chembl_id'
+          search_filter:\
+            Handlebars.compile(
+              'target_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})'
+            )
+      "#{glados.models.Compound.DrugIndication.prototype.entityName}":
+        "#{glados.models.Compound.Drug.prototype.browseLinkEntityName}":
+          join_property_comparator: 'parent_molecule.molecule_chembl_id'
+          search_filter:\
+            Handlebars.compile('molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
+        "#{Compound.prototype.entityName}":
+          join_property_comparator: 'parent_molecule.molecule_chembl_id'
+          search_filter:\
+            Handlebars.compile(
+              'molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}}) OR '+
+              'molecule_hierarchy.parent_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})'
+            )
 
     # ------------------------------------------------------------------------------------------------------------------
     # Fetching state handling
