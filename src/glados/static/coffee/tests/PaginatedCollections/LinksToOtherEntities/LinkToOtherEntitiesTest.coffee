@@ -34,6 +34,8 @@ describe "Paginated Collections", ->
           selectedModel = list.get(id)
           idsList.push(selectedModel.get(propertyToPluck))
 
+        idsList = Array.from(new Set(idsList))
+
       return glados.models.paginatedCollections.PaginatedCollectionBase.prototype\
         .ENTITY_NAME_TO_FILTER_GENERATOR[sourceEntityName][destinationEntityName]
           ids: idsList
