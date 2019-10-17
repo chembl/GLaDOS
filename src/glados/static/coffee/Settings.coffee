@@ -299,8 +299,9 @@ glados.loadSearchResultsURLS = ()->
     glados.Settings.ES_KEY_2_SEARCH_PATH[key_i] = path_i
 
   glados.Settings.ENTITY_NAME_TO_ENTITY = {}
-  for Entity in [Compound, Target, Assay, Document, CellLine, glados.models.Tissue, Assay, Activity]
+  for Entity in [Compound, Target, Assay, Document, CellLine, glados.models.Tissue, Assay, Activity, glados.models.Compound.MechanismOfAction, glados.models.Compound.DrugIndication]
     glados.Settings.ENTITY_NAME_TO_ENTITY[Entity.prototype.entityName] = Entity
+  glados.Settings.ENTITY_NAME_TO_ENTITY[glados.models.Compound.Drug.prototype.browseLinkEntityName] = glados.models.Compound.Drug
 
   glados.Settings.GENERATE_SERVER_SIDE_DOWNLOAD_ENDPOINT = 'glados_api/shared/downloads/queue_download/'
   glados.Settings.SEARCH_RESULTS_PARSER_ENDPOINT = 'search_results_parser'
