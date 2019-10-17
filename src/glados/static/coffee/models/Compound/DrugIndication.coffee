@@ -1,6 +1,10 @@
 glados.useNameSpace 'glados.models.Compound',
   DrugIndication: Backbone.Model.extend
 
+    entityName: 'Drug Indication'
+    entityNamePlural: 'Drug Indications'
+    idAttribute:'drug_indication.drugind_id'
+
     parse: (response) ->
 
       if response._source?
@@ -65,6 +69,8 @@ generateDrugIndicationColumn = (columnMetadata)->
     .DrugIndication.INDEX_NAME, columnMetadata
 
 glados.models.Compound.DrugIndication.COLUMNS =
+  DRUGIND_ID: generateDrugIndicationColumn
+    comparator: 'drug_indication.drugind_id'
   MESH_ID: generateDrugIndicationColumn
     comparator: 'drug_indication.mesh_id'
     link_base: 'mesh_url'
@@ -136,7 +142,7 @@ glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_CHEMBL_ID = {
   sort_disabled: false
 }
 
-glados.models.Compound.DrugIndication.ID_COLUMN = glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_CHEMBL_ID
+glados.models.Compound.DrugIndication.ID_COLUMN = glados.models.Compound.DrugIndication.COLUMNS.DRUGIND_ID
 
 glados.models.Compound.DrugIndication.COLUMNS_SETTINGS =
   ALL_COLUMNS: (->

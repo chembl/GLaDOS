@@ -1,6 +1,10 @@
 glados.useNameSpace 'glados.models.Compound',
   MechanismOfAction: Backbone.Model.extend
 
+    entityName: 'Mechanism Of Action'
+    entityNamePlural: 'Mechanisms Of Action'
+    idAttribute:'mechanism_of_action.mec_id'
+
     parse: (response) ->
 
       if response._source?
