@@ -131,7 +131,7 @@ class TargetReportCardApp extends glados.ReportCardApp
       el: $('#ApprovedDrugsAndClinicalCandidatesCard')
       resource_type: gettext('glados_entities_target_name')
       section_id: 'ApprovedDrugsAndClinicalCandidates'
-      section_label: 'Drugs And ClinicalCandidates'
+      section_label: 'Drugs And Clinical Candidates'
       entity_name: Target.prototype.entityName
       config: viewConfig
       report_card_app: @
