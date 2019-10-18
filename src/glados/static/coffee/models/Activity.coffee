@@ -115,15 +115,6 @@ Activity.COLUMNS = {
     comparator: 'activity_comment'
   POTENTIAL_DUPLICATE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: 'potential_duplicate'
-  PUBLISHED_RELATION: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'published_relation'
-  PUBLISHED_TYPE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'published_type'
-  PUBLISHED_UNITS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    name_to_show: 'Published Units'
-    comparator: 'published_units'
-  PUBLISHED_VALUE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'published_value'
   QUDT_UNITS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: 'qudt_units' # not used???
   RECORD_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
@@ -240,10 +231,6 @@ Activity.COLUMNS_SETTINGS = {
     Activity.COLUMNS.ASSAY_SUBCELLULAR_FRACTION
     Activity.COLUMNS.TARGET_TAX_ID
     Activity.COLUMNS.BAO_FORMAT
-    Activity.COLUMNS.PUBLISHED_TYPE
-    Activity.COLUMNS.PUBLISHED_RELATION
-    Activity.COLUMNS.PUBLISHED_VALUE
-    Activity.COLUMNS.PUBLISHED_UNITS
     Activity.COLUMNS.CANONICAL_SMILES
     Activity.COLUMNS.DATA_VALIDITY_COMMENT
     Activity.COLUMNS.DOCUMENT_JOURNAL
