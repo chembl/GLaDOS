@@ -9,11 +9,11 @@ describe 'Standard Strings', ->
       standardStringsMustBe = testData
       done()
 
-  it 'The number of standard Strings has not changed', ->
+  it 'The number of standard Strings is below expected', ->
 
     numStandardStringsGot= _.keys(django.catalog).length
     numStandardStringsMusBe = _.keys(standardStringsMustBe).length
-    expect(numStandardStringsGot).toBe(numStandardStringsMusBe)
+    expect(numStandardStringsGot >= numStandardStringsMusBe).toBe(true)
 
   it 'The standard strings have not changed', ->
 
