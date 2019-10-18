@@ -83,6 +83,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       itemsList = Array.from(new Set(itemsList))
 
       sourceEntityName = @getModelEntityName()
+      if destinationEntityName == 'Drugs And Clinical Candidates'
+        destinationEntityName = 'Mechanism Of Action'
 
       filter = null
       if _.isObject(@ENTITY_NAME_TO_FILTER_GENERATOR[@getModelEntityName()][destinationEntityName]) and not _.isFunction(@ENTITY_NAME_TO_FILTER_GENERATOR[@getModelEntityName()][destinationEntityName])
