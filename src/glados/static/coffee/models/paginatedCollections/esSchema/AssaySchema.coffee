@@ -7,6 +7,9 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       'chembl_assay'
       # Default Selected
       [
+        'assay_classifications.l1',
+        'assay_classifications.l2',
+        'assay_classifications.l3',
         '_metadata.organism_taxonomy.l1',
         '_metadata.organism_taxonomy.l2',
         '_metadata.organism_taxonomy.l3',

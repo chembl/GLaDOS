@@ -65,7 +65,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           12:
             previous: 6
             next: 12
-        LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
+        LINKS_TO_OTHER_ENTITIES: [
+          Activity.prototype.entityName,
+          glados.models.Compound.MechanismOfAction.prototype.entityName,
+          glados.models.Compound.DrugIndication.prototype.entityName
+        ]
         ENABLE_TEXT_FILTER: true
       TARGET:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
@@ -86,7 +90,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Heatmap]
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']
         ENABLE_COLLECTION_CACHING: true
-        LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
+        LINKS_TO_OTHER_ENTITIES: [
+          Activity.prototype.entityName,
+          glados.models.Compound.MechanismOfAction.prototype.entityName
+        ]
         ENABLE_TEXT_FILTER: true
       ASSAY:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
@@ -238,7 +245,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Cards}": 'browser_cards'
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
         ENABLE_COLLECTION_CACHING: true
-        LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
+        LINKS_TO_OTHER_ENTITIES: [
+          Activity.prototype.entityName,
+          glados.models.Compound.MechanismOfAction.prototype.entityName,
+          glados.models.Compound.DrugIndication.prototype.entityName
+        ]
         ENABLE_TEXT_FILTER: true
       COMPOUND_SUBSTRUCTURE_HIGHLIGHTING:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
@@ -271,7 +282,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         SHOW_SUBSTRUCTURE_HIGHLIGHTING: true
         ENABLE_COLLECTION_CACHING: true
         DISABLE_CACHE_ON_DOWNLOAD: true
-        LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
+        LINKS_TO_OTHER_ENTITIES: [
+          Activity.prototype.entityName,
+          glados.models.Compound.MechanismOfAction.prototype.entityName,
+          glados.models.Compound.DrugIndication.prototype.entityName
+        ]
         ENABLE_TEXT_FILTER: true
       TARGET_BLAST_RESULTS:
         ID_NAME: 'ESTarget'
@@ -325,7 +340,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         SHOW_SIMILARITY_MAPS: false
         ENABLE_COLLECTION_CACHING: true
         DISABLE_CACHE_ON_DOWNLOAD: true
-        LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
+        LINKS_TO_OTHER_ENTITIES: [
+          Activity.prototype.entityName,
+          glados.models.Compound.MechanismOfAction.prototype.entityName,
+          glados.models.Compound.DrugIndication.prototype.entityName
+        ]
         DOWNLOAD_COLUMNS_GROUP: 'download_similarity'
         ENABLE_TEXT_FILTER: true
       DRUGS_LIST:
@@ -358,7 +377,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DEFAULT_VIEW: glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Cards']
         ENABLE_COLLECTION_CACHING: true
         DISABLE_CACHE_ON_DOWNLOAD: true
-        LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
+        LINKS_TO_OTHER_ENTITIES: [
+          Activity.prototype.entityName,
+          glados.models.Compound.MechanismOfAction.prototype.entityName,
+          glados.models.Compound.DrugIndication.prototype.entityName
+        ]
         DOWNLOAD_COLUMNS_GROUP: 'download_drugs'
         ENABLE_TEXT_FILTER: true
       DRUG_INDICATIONS:
@@ -370,7 +393,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BROWSE_LIST_URL: glados.models.Compound.DrugIndication.getListURL
         MODEL: glados.models.Compound.DrugIndication
         PERMANENT_COMPARATORS_TO_FETCH: ['parent_molecule._metadata.compound_generated.image_file',
-          'parent_molecule.molecule_chembl_id', 'drug_indication.mesh_id']
+          'parent_molecule.molecule_chembl_id', 'drug_indication.mesh_id', 'drug_indication.drugind_id']
         CONFIG_GROUPS:
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.DrugIndicationSchema.FACETS_GROUPS
@@ -379,6 +402,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
         ENABLE_TEXT_FILTER: true
+        LINKS_TO_OTHER_ENTITIES: [
+          glados.models.Compound.Drug.prototype.browseLinkEntityName,
+          Compound.prototype.entityName
+        ]
       DRUG_INDICATIONS_COMPOUND_REPORT_CARD:
         ID_NAME: 'ESDrugIndications'
         LABEL: 'Drug Indications'
@@ -388,7 +415,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BROWSE_LIST_URL: glados.models.Compound.DrugIndication.getListURL
         MODEL: glados.models.Compound.DrugIndication
         PERMANENT_COMPARATORS_TO_FETCH: ['parent_molecule._metadata.compound_generated.image_file',
-          'parent_molecule.molecule_chembl_id', 'drug_indication.mesh_id']
+          'parent_molecule.molecule_chembl_id', 'drug_indication.mesh_id', 'drug_indication.drugind_id']
         CONFIG_GROUPS:
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'report_card_table'
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.DrugIndicationSchema.FACETS_GROUPS
@@ -403,7 +430,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         BROWSE_LIST_URL: glados.models.Compound.MechanismOfAction.getListURL
         MODEL: glados.models.Compound.MechanismOfAction
         PERMANENT_COMPARATORS_TO_FETCH: ['parent_molecule._metadata.compound_generated.image_file',
-          'parent_molecule.molecule_chembl_id', 'target.target_chembl_id']
+          'parent_molecule.molecule_chembl_id', 'target.target_chembl_id', 'mechanism_of_action.mec_id']
         CONFIG_GROUPS:
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
         FACETS_GROUPS: glados.models.paginatedCollections.esSchema.MechanismSchema.FACETS_GROUPS
@@ -411,6 +438,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
+        LINKS_TO_OTHER_ENTITIES: [
+          glados.models.Compound.Drug.prototype.browseLinkEntityName,
+          Compound.prototype.entityName,
+          Target.prototype.entityName
+        ]
         ENABLE_TEXT_FILTER: true
       MECHANISMS_OF_ACTION_COMPOUND_REPORT_CARD:
         ID_NAME: 'ESMechsOfAction'

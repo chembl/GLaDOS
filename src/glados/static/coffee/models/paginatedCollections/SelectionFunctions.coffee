@@ -109,46 +109,58 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       allAreSelected = @getMeta('all_items_selected')
       return isSelectionException != allAreSelected
 
-    getItemsIDs: (onlySelected=true, propertyToPluck) ->
+    getItemsIDs: (onlySelected=true, propertiesToPluck) ->
 
       idProperty = @getMeta('id_column').comparator
-      propertyToPluck ?= idProperty
+      propertiesToPluck ?= [idProperty]
+      if not _.isArray propertiesToPluck
+        propertiesToPluck = [propertiesToPluck]
 
       itemsList = []
 
       if @downloadIsValidAndReady()
-        if onlySelected
-          itemsList = (model[propertyToPluck] for model in @allResults when @itemIsSelected(model[idProperty]) )
-        else
-          itemsList = (model[propertyToPluck] for model in @allResults)
+        for model in @allResults
+          itemProperties = {}
+          if not onlySelected or (onlySelected and @itemIsSelected(glados.Utils.getNestedValue(model, idProperty)))
+            for propertyToPluckI in propertiesToPluck
+              itemProperties[propertyToPluckI] = glados.Utils.getNestedValue(model, propertyToPluckI)
+            itemsList.push itemProperties
       else
+        for model in @models
+          itemProperties = {}
+          if not onlySelected or (onlySelected and @itemIsSelected(glados.Utils.getNestedValue(model.attributes, idProperty)))
+            for propertyToPluckI in propertiesToPluck
+              itemProperties[propertyToPluckI] = glados.Utils.getNestedValue(model.attributes, propertyToPluckI)
+            itemsList.push itemProperties
 
-        if onlySelected
-          itemsList = (model.attributes[propertyToPluck] for model in @models when @itemIsSelected(model.attributes[idProperty]) )
+      finalItemsList = []
+      for itemI in itemsList
+        if _.keys(itemI).length == 1
+          finalItemsList.push itemI[_.keys(itemI)[0]]
         else
-          itemsList = (model.attributes[propertyToPluck] for model in @models)
+          finalItemsList.push itemI
 
       if onlySelected
-        incompleteCondition = itemsList.length != @getNumberOfSelectedItems()
+        incompleteCondition = finalItemsList.length != @getNumberOfSelectedItems()
       else
-        incompleteCondition = itemsList.length != @getTotalRecords()
+        incompleteCondition = finalItemsList.length != @getTotalRecords()
 
       if incompleteCondition
         return glados.Settings.INCOMPLETE_SELECTION_LIST_LABEL
 
-      return itemsList
+      return finalItemsList
 
-    getItemsIDsPromise: (onlySelected=true, propertyToPluck) ->
+    getItemsIDsPromise: (onlySelected=true, propertiesToPluck) ->
 
-      idsList = @getItemsIDs(onlySelected, propertyToPluck)
+      idsList = @getItemsIDs(onlySelected, propertiesToPluck)
       idsPromise = jQuery.Deferred()
 
       if idsList == glados.Settings.INCOMPLETE_SELECTION_LIST_LABEL
 
-        deferreds = @getAllResults($progressElement=undefined, askingForOnlySelected=true)
+        deferreds = @getAllResults($progressElement=undefined, askingForOnlySelected=false)
         thisCollection = @
         $.when.apply($, deferreds).done ->
-          idsList = thisCollection.getItemsIDs(onlySelected, propertyToPluck)
+          idsList = thisCollection.getItemsIDs(onlySelected, propertiesToPluck)
           idsPromise.resolve(idsList)
 
       else

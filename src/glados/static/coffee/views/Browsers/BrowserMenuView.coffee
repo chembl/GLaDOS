@@ -251,12 +251,19 @@ glados.useNameSpace 'glados.views.Browsers',
       tooManyItems = @collection.thereAreTooManyItemsForActivitiesLink()
       needsToBeDisabled = tooManyItems
 
+      sourceEntity = @collection.getModelEntityName()
+
       availableDestinationEntities = []
 
       for entityName in @collection.getMeta('links_to_other_entities')
-        availableDestinationEntities.push
-          singular: entityName
-          plural: glados.Settings.ENTITY_NAME_TO_ENTITY[entityName].prototype.entityNamePlural
+        if sourceEntity == 'Target' and entityName == 'Mechanism Of Action'
+          availableDestinationEntities.push
+            singular: 'Drugs And Clinical Candidates'
+            plural: 'Drugs And Clinical Candidates'
+        else
+          availableDestinationEntities.push
+            singular: entityName
+            plural: glados.Settings.ENTITY_NAME_TO_ENTITY[entityName].prototype.entityNamePlural
 
       firstDestinationEntityName = availableDestinationEntities[0]
       restOfDestinationEntityNames = availableDestinationEntities[1..]
