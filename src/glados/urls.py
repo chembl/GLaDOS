@@ -216,7 +216,7 @@ common_urls = [
     # Compounds
     # --------------------------------------------------------------------------------------------------------------------
 
-    url(r'^compound_report_card/(?P<chembl_id>\w+)/$', views.compound_report_card,
+    url(r'^compound_report_card/(?P<chembl_id>\w+)/$', xframe_options_exempt(views.compound_report_card),
         name='compound_report_card'),
 
     url(r'^compound_metabolism/(?P<chembl_id>\w+)$', xframe_options_exempt(
@@ -227,22 +227,22 @@ common_urls = [
     # Targets
     # --------------------------------------------------------------------------------------------------------------------
 
-    url(r'^target_report_card/(?P<chembl_id>\w+)/$',
-        views.target_report_card, name='target_report_card'),
+    url(r'^target_report_card/(?P<chembl_id>\w+)/$', xframe_options_exempt(views.target_report_card), 
+        name='target_report_card'),
 
     # --------------------------------------------------------------------------------------------------------------------
     # Assays
     # --------------------------------------------------------------------------------------------------------------------
 
-    url(r'^assay_report_card/(?P<chembl_id>\w+)/$',
-        views.assay_report_card, name='assay_report_card'),
+    url(r'^assay_report_card/(?P<chembl_id>\w+)/$', xframe_options_exempt(views.assay_report_card), 
+        name='assay_report_card'),
 
     # --------------------------------------------------------------------------------------------------------------------
     # Documents
     # --------------------------------------------------------------------------------------------------------------------
 
     url(r'^document_report_card/(?P<chembl_id>\w+)/$',
-        views.document_report_card, name='document_report_card'),
+        xframe_options_exempt(views.document_report_card), name='document_report_card'),
 
     url(r'^document_assay_network/(?P<chembl_id>\w+)/$',
         DirectTemplateView.as_view(template_name="glados/DocumentAssayNetwork/DocumentAssayNetwork.html"), ),
@@ -254,14 +254,14 @@ common_urls = [
     # Cells
     # --------------------------------------------------------------------------------------------------------------------
 
-    url(r'^cell_line_report_card/(?P<chembl_id>\w+)/$',
-        views.cell_line_report_card, name='cell_line_report_card'),
+    url(r'^cell_line_report_card/(?P<chembl_id>\w+)/$', xframe_options_exempt(views.cell_line_report_card), 
+        name='cell_line_report_card'),
 
     # --------------------------------------------------------------------------------------------------------------------
     # Tissues
     # --------------------------------------------------------------------------------------------------------------------
-    url(r'^tissue_report_card/(?P<chembl_id>\w+)/$',
-        views.tissue_report_card, name='tissue_report_card'),
+    url(r'^tissue_report_card/(?P<chembl_id>\w+)/$', xframe_options_exempt(views.tissue_report_card), 
+        name='tissue_report_card'),
 
     # ------------------------------------------------------------------------------------------------------------------
     # Old Interface redirections
