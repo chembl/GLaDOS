@@ -186,7 +186,8 @@ glados.useNameSpace 'glados.views.Compound',
           enzyme_chembl_id = e.data('enzyme_chembl_id')
 
           if enzyme_chembl_id?
-            enzyme_text = "<a target ='_blank' href = '/target_report_card/#{enzyme_chembl_id}'> #{enzyme_chembl_id}</a>"
+            enzyme_text = "<a target ='_blank' href = \
+              '#{Target.get_report_card_url(enzyme_chembl_id)}'> #{enzyme_chembl_id}</a>"
           else
             enzyme_text = "--"
 
@@ -194,7 +195,9 @@ glados.useNameSpace 'glados.views.Compound',
           met_conversion_text = if met_conversion? then met_conversion else '--'
 
           doc_chembl_id = e.data('doc_chembl_id')
-          doc_chembl_id_link = "<a target ='_blank' href = '/document_report_card/#{doc_chembl_id}'> #{doc_chembl_id}</a>"
+          doc_chembl_id_link = "<a target ='_blank' href = \
+            '#{Document.get_report_card_url(doc_chembl_id)}'> #{doc_chembl_id}</a>"
+
           organism = e.data('organism')
           organism_text = if organism? then " <b> Organism: </b> #{organism}" else '--'
 
