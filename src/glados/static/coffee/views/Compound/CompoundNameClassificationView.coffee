@@ -28,10 +28,6 @@ CompoundNameClassificationView = CardView.extend
     @activateTooltips()
     @activateModals()
 
-    # this is required to render correctly the molecular formulas.
-    # it comes from the easychem.js library
-    ChemJQ.autoCompile()
-
   renderTitle: ->
     $(@el).find('#Bck-CHEMBL_ID').text(@model.get('molecule_chembl_id'))
 
