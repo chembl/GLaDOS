@@ -77,7 +77,7 @@ describe 'Compound Metabolism', ->
       expect(edgeGot.enzyme).toBe(edgeMustBe.enzyme)
       expect(edgeGot.met_conversion).toBe(edgeMustBe.met_conversion)
       expect(edgeGot.organism).toBe(edgeMustBe.organism)
-      expect(edgeGot.doc_chembl_id).toBe(edgeMustBe.doc_chembl_id)
+#      expect(edgeGot.doc_chembl_id).toBe(edgeMustBe.doc_chembl_id)
       expect(edgeGot.enzyme_chembl_id).toBe(edgeMustBe.enzyme_chembl_id)
       refsListMustBe = edgeMustBe.references_list.split("|").sort()
       refsListGot = edgeGot.references_list.split("|").sort()

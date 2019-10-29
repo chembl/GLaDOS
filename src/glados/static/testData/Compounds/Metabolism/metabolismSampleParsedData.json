@@ -72,7 +72,7 @@
         "target": 1,
         "met_conversion": "O-glucuronide conjugation to the hydroxyl group forming an ether",
         "organism": null,
-        "doc_chembl_id": "CHEMBL3544494",
+        "doc_chembl_id": null,
         "enzyme_chembl_id": "CHEMBL1743316",
         "references_list": "http://doi.org/10.1159/000327782|http://doi.org/10.1007/s00210-012-0752-0|http://www.isbnsearch.org/isbn/0443051488"
       },
@@ -82,7 +82,7 @@
         "target": 2,
         "met_conversion": "Ring hydroxylation para to the other hydroxyl",
         "organism": null,
-        "doc_chembl_id": "CHEMBL3544494",
+        "doc_chembl_id": null,
         "enzyme_chembl_id": "CHEMBL612545",
         "references_list": "http://doi.org/10.1007/s00210-012-0752-0|http://www.isbnsearch.org/isbn/0443051488"
       },
@@ -92,7 +92,7 @@
         "target": 3,
         "met_conversion": "Glycine conjugation to the carboxylic acid group",
         "organism": null,
-        "doc_chembl_id": "CHEMBL3544494",
+        "doc_chembl_id": null,
         "enzyme_chembl_id": "CHEMBL1743316",
         "references_list": "http://doi.org/10.1007/s00210-012-0752-0"
       },
@@ -102,7 +102,7 @@
         "target": 5,
         "met_conversion": "Ring hydroxylation para to one of the hydroxyls and meta to the other hydroxyl",
         "organism": null,
-        "doc_chembl_id": "CHEMBL3544494",
+        "doc_chembl_id": null,
         "enzyme_chembl_id": "CHEMBL612545",
         "references_list": "http://doi.org/10.1007/s00210-012-0752-0"
       },
@@ -112,7 +112,7 @@
         "target": 4,
         "met_conversion": "Ring hydroxylation ortho to the other hydroxyl",
         "organism": null,
-        "doc_chembl_id": "CHEMBL3544494",
+        "doc_chembl_id": null,
         "enzyme_chembl_id": "CHEMBL612545",
         "references_list": "http://doi.org/10.1007/s00210-012-0752-0"
       },
@@ -122,7 +122,7 @@
         "target": 0,
         "met_conversion": "Ester hydrolysis, leaving a hydroxyl group substituent on the aromatic ring.",
         "organism": null,
-        "doc_chembl_id": "CHEMBL3544494",
+        "doc_chembl_id": null,
         "enzyme_chembl_id": "CHEMBL612545",
         "references_list": "http://doi.org/10.1159/000327782|http://doi.org/10.1007/s00210-012-0752-0|http://www.isbnsearch.org/isbn/0443051488"
       },
@@ -132,7 +132,7 @@
         "target": 7,
         "met_conversion": "O-glucuronide conjugation to the carboxylic acid group forming an ester",
         "organism": null,
-        "doc_chembl_id": "CHEMBL3544494",
+        "doc_chembl_id": null,
         "enzyme_chembl_id": "CHEMBL1743316",
         "references_list": "http://doi.org/10.1159/000327782|http://doi.org/10.1007/s00210-012-0752-0|http://www.isbnsearch.org/isbn/0443051488"
       },
@@ -142,7 +142,7 @@
         "target": 8,
         "met_conversion": "Glycine conjugation to the carboxylic acid group",
         "organism": null,
-        "doc_chembl_id": "CHEMBL3544494",
+        "doc_chembl_id": null,
         "enzyme_chembl_id": "CHEMBL1743316",
         "references_list": "http://doi.org/10.1159/000327782|http://doi.org/10.1007/s00210-012-0752-0|http://www.isbnsearch.org/isbn/0443051488"
       },
@@ -152,7 +152,7 @@
         "target": 3,
         "met_conversion": "Ring hydroxylation para to the other hydroxyl group",
         "organism": null,
-        "doc_chembl_id": "CHEMBL3544494",
+        "doc_chembl_id": null,
         "enzyme_chembl_id": "CHEMBL612545",
         "references_list": "http://doi.org/10.1007/s00210-012-0752-0"
       },
@@ -162,7 +162,7 @@
         "target": 5,
         "met_conversion": "Ring hydroxylation ortho to one of the hydroxyl groups and meta to the other hydroxyl group",
         "organism": null,
-        "doc_chembl_id": "CHEMBL3544494",
+        "doc_chembl_id": null,
         "enzyme_chembl_id": "CHEMBL612545",
         "references_list": "http://doi.org/10.1007/s00210-012-0752-0"
       }
