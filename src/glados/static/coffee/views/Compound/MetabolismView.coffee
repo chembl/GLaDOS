@@ -195,8 +195,11 @@ glados.useNameSpace 'glados.views.Compound',
           met_conversion_text = if met_conversion? then met_conversion else '--'
 
           doc_chembl_id = e.data('doc_chembl_id')
-          doc_chembl_id_link = "<a target ='_blank' href = \
-            '#{Document.get_report_card_url(doc_chembl_id)}'> #{doc_chembl_id}</a>"
+          # Disable this until it's in elasticsearch
+#          doc_chembl_id_link = "<a target ='_blank' href = \
+#            '#{Document.get_report_card_url(doc_chembl_id)}'> #{doc_chembl_id}</a>"
+
+          doc_chembl_id_link = '---'
 
           organism = e.data('organism')
           organism_text = if organism? then " <b> Organism: </b> #{organism}" else '--'

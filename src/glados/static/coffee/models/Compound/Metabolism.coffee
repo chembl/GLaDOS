@@ -51,7 +51,7 @@ glados.useNameSpace 'glados.models.Compound',
           target: nodesToPosition[metaboliteID]
           met_conversion: metData.met_conversion
           organism: metData.organism
-          doc_chembl_id: 'CHEMBL3544494'
+          doc_chembl_id: undefined
           enzyme_chembl_id: metData.target_chembl_id
           references_list: (ref.ref_url for ref in metData.metabolism_refs).join("|")
 
