@@ -149,6 +149,30 @@ Assay.PROPERTIES_VISUAL_CONFIG = {
         rows.push(currentRow)
       console.log('parsed rows: ', rows)
       return rows
+  },
+  'assay_classifications_level1': {
+    parse_function: (raw_classifications) ->
+
+      if raw_classifications == glados.Settings.DEFAULT_NULL_VALUE_LABEL
+        return glados.Settings.DEFAULT_NULL_VALUE_LABEL
+      else
+        return (data['l1'] for data in raw_classifications).join(', ')
+  },
+  'assay_classifications_level2': {
+    parse_function: (raw_classifications) ->
+
+      if raw_classifications == glados.Settings.DEFAULT_NULL_VALUE_LABEL
+        return glados.Settings.DEFAULT_NULL_VALUE_LABEL
+      else
+        return (data['l2'] for data in raw_classifications).join(', ')
+  },
+  'assay_classifications_level3': {
+    parse_function: (raw_classifications) ->
+
+      if raw_classifications == glados.Settings.DEFAULT_NULL_VALUE_LABEL
+        return glados.Settings.DEFAULT_NULL_VALUE_LABEL
+      else
+        return (data['l3'] for data in raw_classifications).join(', ')
   }
 }
 Assay.COLUMNS = {

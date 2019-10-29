@@ -146,6 +146,15 @@ chembl_assay:
     label: 'Assay Parameters'
   'assay_parameters_report_card_rows':
     based_on: 'assay_parameters'
+  'assay_classifications_level1':
+    based_on: 'assay_classifications'
+    label: 'Classifications L1'
+  'assay_classifications_level2':
+    based_on: 'assay_classifications'
+    label: 'Classifications L2'
+  'assay_classifications_level3':
+    based_on: 'assay_classifications'
+    label: 'Classifications L3'
 chembl_target:
   'pref_name':
     label: 'Name'

@@ -100,7 +100,7 @@ chembl_assay:
     'assay_tissue', 'assay_cell_type', 'assay_subcellular_fraction', '_metadata.document_data.pubmed_id',
     '_metadata.document_data.doi', '_metadata.document_data.year', '_metadata.document_data.journal',
     '_metadata.document_data.volume', '_metadata.document_data.first_page','_metadata.document_data.last_page',
-    'assay_parameters']
+    'assay_parameters', 'assay_classifications_level1', 'assay_classifications_level2', 'assay_classifications_level3']
   assay_parameters:
     default: ['assay_parameters_report_card_rows']
 chembl_target:
