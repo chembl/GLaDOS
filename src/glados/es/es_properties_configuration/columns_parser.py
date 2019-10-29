@@ -37,6 +37,10 @@ def parse_atc_codes_descriptions(raw_classifications, level):
     return ' | '.join([class_data['level' + str(level) + '_description'] for class_data in raw_classifications])
 
 
+def parse_assay_classifications(raw_classifications, level):
+    return ' | '.join([class_data['l' + str(level)] for class_data in raw_classifications])
+
+
 def parse_drug_atc_class_descriptions(raw_classifications):
     return '|'.join([class_data['description'] for class_data in raw_classifications])
 
@@ -139,7 +143,10 @@ PARSING_FUNCTIONS = {
         'uniprot_accessions': lambda original_value: parse_target_uniprot_accession(original_value)
     },
     'chembl_assay': {
-        'assay_parameters': lambda original_value: parse_assay_parameters(original_value)
+        'assay_parameters': lambda original_value: parse_assay_parameters(original_value),
+        'assay_classifications_level1': lambda original_value: parse_assay_classifications(original_value, 1),
+        'assay_classifications_level2': lambda original_value: parse_assay_classifications(original_value, 2),
+        'assay_classifications_level3': lambda original_value: parse_assay_classifications(original_value, 3),
     },
     'chembl_document': {
         '_metadata.source': lambda original_value: parse_document_source(original_value),
