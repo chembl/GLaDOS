@@ -334,7 +334,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
           + '.png?engine=indigo'
       objData.structure_image = true
 
-    objData.report_card_url = Compound.get_report_card_url(objData.molecule_chembl_id )
+    objData.report_card_url = Compound.get_report_card_url(objData.molecule_chembl_id)
 
     filterForTargets = '_metadata.related_compounds.all_chembl_ids:' + objData.molecule_chembl_id
     objData.targets_url = Target.getTargetsListURL(filterForTargets)

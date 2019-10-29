@@ -162,7 +162,7 @@ glados.useNameSpace 'glados.views.Compound',
           backup_img =  "#{glados.Settings.STATIC_IMAGES_URL}compound_placeholders/#{n.data('image_file')}"
 
           img_link = if n.data('has_structure') then ws_img else backup_img
-          compound_link = " <a target ='_blank' href = '/compound_report_card/#{chembl_id}'> #{chembl_id} </a>"
+          compound_link = " <a target ='_blank' href = '#{Compound.get_report_card_url(chembl_id)}'> #{chembl_id} </a>"
           compound_img = "<img style='width: 100%' src='#{img_link}'>"
           colour_class = 'qtip-bootstrap'
           text = " <h3> #{compound_link}</h3> #{compound_img}"
