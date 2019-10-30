@@ -58,6 +58,12 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       else
         @showPreloaderHideOthers()
 
+      @collection.on(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_FETCHING_STATE_CHANGED,
+          @render, @)
+
+      @collection.on(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.SHOULD_RESET_PAGE_NUMBER,
+          @resetPageNumber, @)
+
       @initPageQueue()
 
     initPageQueue: ->
@@ -178,6 +184,11 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       @renderViewState()
 
     renderViewState: ->
+
+      if not @collection.isReady()
+        @showPreloaderHideOthers()
+        return
+
       @stampViewIDOnEventsTriggerers()
       @fillTemplates()
       @renderLinkToAllItems() unless not @config.full_list_url?

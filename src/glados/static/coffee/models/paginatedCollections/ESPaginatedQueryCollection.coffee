@@ -598,7 +598,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       isSelected = facetingHandler.toggleKeySelection(fKey)
       @setMeta('facets_changed', true)
       @setMeta('at_least_one_facet_is_selected', true)
+      @setPage(1, doFetch=false)
       @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.STATE_OBJECT_CHANGED, @)
+      @trigger(
+        glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.SHOULD_RESET_PAGE_NUMBER)
       @fetch()
 
       return isSelected
@@ -667,7 +670,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     loadFacetGroups: (esRequestData) ->
 
-      @setFacetsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.FETCHING_FACETS)
+      @setFacetsFetchingState(
+        glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.FETCHING_FACETS)
 
       if @getMeta('test_mode')
         return
@@ -699,6 +703,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       for fGroupKey, fGroup of @getFacetsGroups(true, onlyVisible=false)
         fGroup.faceting_handler.clearSelections()
+
+      @trigger(
+        glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.SHOULD_RESET_PAGE_NUMBER)
 
       if @getMeta('at_least_one_facet_is_selected')
         @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.STATE_OBJECT_CHANGED, @)
