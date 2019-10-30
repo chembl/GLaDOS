@@ -770,8 +770,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @setSearchState(glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_QUERY_SET)
       @sleep()
 
-      if cleanUpBeforeFetch
-        @cleanUpList(doFetch)
+#      if cleanUpBeforeFetch
+      @cleanUpList(doFetch)
 
       if not doFetch
         @doFetchWhenAwaken()
