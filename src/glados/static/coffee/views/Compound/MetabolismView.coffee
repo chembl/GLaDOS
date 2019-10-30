@@ -219,9 +219,6 @@ glados.useNameSpace 'glados.views.Compound',
             <tr><th>Conversion:</th></tr>
             <tr><td>#{met_conversion_text}</td></tr>
 
-            <tr><th>Document:</th></tr>
-            <tr><td>#{doc_chembl_id_link}</td></tr>
-
             <tr><th>Organism:</th></tr>
             <tr><td>#{organism_text}</td></tr>
 
@@ -239,9 +236,6 @@ glados.useNameSpace 'glados.views.Compound',
 
               <tr><th>Conversion:</th></tr>
               <tr><td>#{met_conversion_text}</td></tr>
-
-              <tr><th>Document:</th></tr>
-              <tr><td>#{doc_chembl_id_link}</td></tr>
 
               <tr><th>Organism:</th></tr>
               <tr><td>#{organism_text}</td></tr>
