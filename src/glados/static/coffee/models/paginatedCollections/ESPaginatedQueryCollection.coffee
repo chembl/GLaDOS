@@ -38,12 +38,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       facetGroups = @getFacetsGroups()
       facetsState = stateObject.facets_state
 
+      console.log('FACETS STATE: ', facetsState)
       if facetsState?
         for fGroupKey, fGroupState of facetsState
 
           originalFGroupState = facetsState[fGroupKey]
           facetingHandler = facetGroups[fGroupKey].faceting_handler
           facetingHandler.loadState(originalFGroupState)
+          @setMeta('skip_clean_up_once', true)
 
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -752,6 +754,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
     cleanUpList: (doFetch) ->
 
+      if @getMeta('skip_clean_up_once')
+        @setMeta('skip_clean_up_once', false)
+        return
 
       @resetCache() unless not @getMeta('enable_collection_caching')
       @invalidateAllDownloadedResults()
