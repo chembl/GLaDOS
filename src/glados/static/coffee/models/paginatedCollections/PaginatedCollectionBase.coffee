@@ -221,6 +221,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
     # Fetching state handling
     # ------------------------------------------------------------------------------------------------------------------
+    usesFacets: ->
+      if not @getMeta('facets_groups')?
+        return false
+      if Object.keys(@getMeta('facets_groups')).length == 0
+        return false
+      return true
+
     getItemsFetchingState: -> @getMeta('items_fetching_state')
     getFacetsFetchingState: -> @getMeta('facets_fetching_state')
     setItemsFetchingState: (newFetchingState) ->
@@ -331,6 +338,7 @@ glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS =
   AWAKE_STATE_CHANGED: 'AWAKE_STATE_CHANGED'
   STATE_OBJECT_CHANGED: 'STATE_OBJECT_CHANGED'
   CONFIG_FETCHING_STATE_CHANGED: 'CONFIG_FETCHING_STATE_CHANGED'
+  SHOULD_RESET_PAGE_NUMBER: 'SHOULD_RESET_PAGE_NUMBER'
 
 glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES =
   INITIAL_STATE: 'INITIAL_STATE'

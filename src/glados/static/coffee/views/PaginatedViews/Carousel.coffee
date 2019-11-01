@@ -1,5 +1,6 @@
 glados.useNameSpace 'glados.views.PaginatedViews',
   Carousel:
+    isCarousel: -> true
     activePage: 1
     initAvailablePageSizes: ->
 

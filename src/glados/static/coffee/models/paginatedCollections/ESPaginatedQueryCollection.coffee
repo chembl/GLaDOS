@@ -38,12 +38,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       facetGroups = @getFacetsGroups()
       facetsState = stateObject.facets_state
 
+      console.log('FACETS STATE: ', facetsState)
       if facetsState?
         for fGroupKey, fGroupState of facetsState
 
           originalFGroupState = facetsState[fGroupKey]
           facetingHandler = facetGroups[fGroupKey].faceting_handler
           facetingHandler.loadState(originalFGroupState)
+          @setMeta('skip_clean_up_once', true)
 
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -598,7 +600,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       isSelected = facetingHandler.toggleKeySelection(fKey)
       @setMeta('facets_changed', true)
       @setMeta('at_least_one_facet_is_selected', true)
+      @setPage(1, doFetch=false)
       @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.STATE_OBJECT_CHANGED, @)
+      @trigger(
+        glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.SHOULD_RESET_PAGE_NUMBER)
       @fetch()
 
       return isSelected
@@ -667,7 +672,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     loadFacetGroups: (esRequestData) ->
 
-      @setFacetsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.FETCHING_FACETS)
+      @setFacetsFetchingState(
+        glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.FETCHING_FACETS)
 
       if @getMeta('test_mode')
         return
@@ -699,6 +705,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       for fGroupKey, fGroup of @getFacetsGroups(true, onlyVisible=false)
         fGroup.faceting_handler.clearSelections()
+
+      @trigger(
+        glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.SHOULD_RESET_PAGE_NUMBER)
 
       if @getMeta('at_least_one_facet_is_selected')
         @trigger(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.STATE_OBJECT_CHANGED, @)
@@ -745,6 +754,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
     cleanUpList: (doFetch) ->
 
+      if @getMeta('skip_clean_up_once')
+        @setMeta('skip_clean_up_once', false)
+        return
 
       @resetCache() unless not @getMeta('enable_collection_caching')
       @invalidateAllDownloadedResults()
@@ -763,8 +775,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       @setSearchState(glados.models.paginatedCollections.PaginatedCollectionBase.SEARCHING_STATES.SEARCH_QUERY_SET)
       @sleep()
 
-      if cleanUpBeforeFetch
-        @cleanUpList(doFetch)
+#      if cleanUpBeforeFetch
+      @cleanUpList(doFetch)
 
       if not doFetch
         @doFetchWhenAwaken()

@@ -20,7 +20,7 @@ glados.useNameSpace 'glados.views.Browsers',
       @showPreloader()
       @collection.on 'reset do-repaint sort', @renderViewState, @
       @collection.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_FETCHING_STATE_CHANGED,
-      @renderViewState, @
+        @renderViewState, @
 
       @collection.on glados.Events.Collections.SELECTION_UPDATED, @handleSelection, @
 
