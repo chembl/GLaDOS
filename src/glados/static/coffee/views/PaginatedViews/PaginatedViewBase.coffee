@@ -186,15 +186,17 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     renderViewState: ->
 
-      readyToRender = false
-      if @collection.usesFacets()
-        readyToRender = @collection.isReady()
-      else
-        readyToRender = @collection.itemsAreReady()
+      if not @isCarousel?
 
-      if not readyToRender
-        @showPreloaderHideOthers()
-        return
+        readyToRender = false
+        if @collection.usesFacets()
+          readyToRender = @collection.isReady()
+        else
+          readyToRender = @collection.itemsAreReady()
+
+        if not readyToRender
+          @showPreloaderHideOthers()
+          return
 
       @stampViewIDOnEventsTriggerers()
       @fillTemplates()

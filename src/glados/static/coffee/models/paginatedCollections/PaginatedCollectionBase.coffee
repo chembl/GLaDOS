@@ -221,7 +221,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
     # Fetching state handling
     # ------------------------------------------------------------------------------------------------------------------
-    usesFacets: -> @getMeta('facets_groups')?
+    usesFacets: ->
+      if not @getMeta('facets_groups')?
+        return false
+      if Object.keys(@getMeta('facets_groups')).length == 0
+        return false
+      return true
 
     getItemsFetchingState: -> @getMeta('items_fetching_state')
     getFacetsFetchingState: -> @getMeta('facets_fetching_state')
