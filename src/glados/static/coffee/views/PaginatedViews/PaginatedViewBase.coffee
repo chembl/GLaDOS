@@ -58,11 +58,12 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       else
         @showPreloaderHideOthers()
 
-      @collection.on(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_FETCHING_STATE_CHANGED,
-          @render, @)
+      if @collection.usesFacets()
+        @collection.on(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_FETCHING_STATE_CHANGED,
+            @render, @)
 
-      @collection.on(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.SHOULD_RESET_PAGE_NUMBER,
-          @resetPageNumber, @)
+        @collection.on(glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.SHOULD_RESET_PAGE_NUMBER,
+            @resetPageNumber, @)
 
       @initPageQueue()
 
@@ -185,7 +186,13 @@ glados.useNameSpace 'glados.views.PaginatedViews',
 
     renderViewState: ->
 
-      if not @collection.isReady()
+      readyToRender = false
+      if @collection.usesFacets()
+        readyToRender = @collection.isReady()
+      else
+        readyToRender = @collection.itemsAreReady()
+
+      if not readyToRender
         @showPreloaderHideOthers()
         return
 

@@ -221,6 +221,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
     # Fetching state handling
     # ------------------------------------------------------------------------------------------------------------------
+    usesFacets: -> @getMeta('facets_groups')?
+
     getItemsFetchingState: -> @getMeta('items_fetching_state')
     getFacetsFetchingState: -> @getMeta('facets_fetching_state')
     setItemsFetchingState: (newFetchingState) ->
