@@ -219,6 +219,15 @@ msgstr "Assay Type"
 #-----------------------------------------------------------------------------------------------------------------------
 # Assays Paginated Views:
 #-----------------------------------------------------------------------------------------------------------------------
+msgid "glados_es_gs__assay__assay_classifications___l1__label"
+msgstr "Assay Classification L1"
+
+msgid "glados_es_gs__assay__assay_classifications___l2__label"
+msgstr "Assay Classification L2"
+
+msgid "glados_es_gs__assay__assay_classifications___l3__label"
+msgstr "Assay Classification L3"
+
 msgid "glados_es_gs__assay__document_chembl_id__label"
 msgstr "Document"
 
