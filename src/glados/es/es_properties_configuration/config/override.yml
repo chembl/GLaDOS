@@ -148,13 +148,13 @@ chembl_assay:
     based_on: 'assay_parameters'
   'assay_classifications_level1':
     based_on: 'assay_classifications'
-    label: 'Classifications L1'
+    label: 'Assay Classification L1'
   'assay_classifications_level2':
     based_on: 'assay_classifications'
-    label: 'Classifications L2'
+    label: 'Assay Classification L2'
   'assay_classifications_level3':
     based_on: 'assay_classifications'
-    label: 'Classifications L3'
+    label: 'Assay Classification L3'
 chembl_target:
   'pref_name':
     label: 'Name'

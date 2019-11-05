@@ -7,6 +7,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       'chembl_assay'
       # Default Selected
       [
+        '_metadata.assay_generated.type_label',
         'assay_classifications.l1',
         'assay_classifications.l2',
         'assay_classifications.l3',
@@ -18,7 +19,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           sort:'asc'
           intervals: 20
         },
-        '_metadata.assay_generated.type_label',
         {
           property:'bao_label'
           sort:'asc'
