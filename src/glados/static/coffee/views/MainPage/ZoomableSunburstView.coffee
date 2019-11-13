@@ -306,6 +306,8 @@ glados.useNameSpace 'glados.views.MainPage',
 
     getBucketData: ->
       receivedBuckets = @model.get 'bucket_data'
+      console.log('receivedBuckets: ', receivedBuckets)
+      return
       id = 0
 
       fillNode = (parent_node, input_node) ->
