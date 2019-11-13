@@ -1,10 +1,24 @@
-from elasticsearch_dsl import Search
 from elasticsearch_dsl.connections import connections
-import json
+import traceback
 from elasticsearch_dsl import MultiSearch, Search
+from django.core.cache import cache
 
 
 def get_classification_json():
+
+    cache_key = "protein_target_classification"
+    print('cache_key', cache_key)
+
+    cache_response = None
+    try:
+        cache_response = cache.get(cache_key)
+    except Exception as e:
+        print('Error searching in cache!')
+
+    if cache_response is not None:
+        print('results are in cache')
+        return cache_response
+
     es_conn = connections.get_connection()
     index_name = 'chembl_protein_class'
 
@@ -87,17 +101,21 @@ def get_classification_json():
     result = es_conn.search(index=index_name, body=body)
     raw_tree_root = result['aggregations']['children']['buckets']
 
-    print('raw_tree_root: ', raw_tree_root)
-    print('----')
-
     final_tree = build_final_tree(raw_tree_root)
+
+    try:
+        cache_time = 3000000
+        cache.set(cache_key, final_tree, cache_time)
+    except Exception as e:
+        traceback.print_exc()
+        print('Error saving in the cache!')
+
     return final_tree
 
 
 def build_final_tree(raw_tree_root):
 
     parsed_tree_root = load_tree(raw_tree_root)
-    print('parsed_tree_root: ', json.dumps(parsed_tree_root, indent=4))
     load_target_counts(parsed_tree_root)
     return parsed_tree_root
 
@@ -116,12 +134,8 @@ def load_tree(raw_tree_root):
         if children is not None:
             child_buckets = children.get('buckets')
             if child_buckets is not None:
-
                 if len(child_buckets) > 0:
-
-                    print('going to process: ', child_buckets)
                     node['children'] = load_tree(child_buckets)
-                    print('^^^')
 
     return parsed_tree_root
 
@@ -145,9 +159,6 @@ def generate_count_queries(parsed_tree_root, level=1):
 
 
 def execute_count_queries(queries):
-
-    print('queries: ', json.dumps(queries, indent=4))
-    print('num queries', len(queries.keys()))
 
     ms = MultiSearch(index='chembl_target')
 
@@ -199,13 +210,10 @@ def get_nodes_index(parsed_tree_root):
 
 
 def load_target_counts(parsed_tree_root):
-    print('LOADING TARGET COUNTS')
     nodes_index = get_nodes_index(parsed_tree_root)
 
     queries = generate_count_queries(parsed_tree_root)
     execute_count_queries(queries)
     add_counts_to_tree(queries, nodes_index)
-
-    print('nodes_index count: ', len(nodes_index.keys()))
 
 
