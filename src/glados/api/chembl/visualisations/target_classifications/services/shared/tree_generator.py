@@ -39,18 +39,18 @@ def load_tree(raw_tree_root):
     return parsed_tree_root
 
 
-def generate_count_queries(tree_root, level=1):
+def generate_count_queries(tree_root, query_generator, level=1):
 
     queries = {}
     for node_id, node in tree_root.items():
-        query_string = '_metadata.protein_classification.l{level}:("{class_name}")'.format(level=level,
-                                                                                           class_name=node_id)
+        query_string = query_generator(level, node_id)
+
         queries[node_id] = {
             'query': query_string
         }
         children = node.get('children')
         if children is not None:
-            queries_to_add = generate_count_queries(children, level + 1)
+            queries_to_add = generate_count_queries(children, query_generator, level + 1)
             for key, value in queries_to_add.items():
                 queries[key] = value
 
@@ -59,7 +59,7 @@ def generate_count_queries(tree_root, level=1):
 
 class TargetHierarchyTreeGenerator:
 
-    def __init__(self, index_name, es_query):
+    def __init__(self, index_name, es_query, query_generator):
 
         print('init TargetHierarchyTreeGenerator')
         print('index_name: ', index_name)
@@ -67,6 +67,7 @@ class TargetHierarchyTreeGenerator:
 
         self.index_name = index_name
         self.es_query = es_query
+        self.query_generator = query_generator
         self.raw_tree_root = None
         self.parsed_tree_root = {}
         self.count_queries = {}
@@ -89,7 +90,7 @@ class TargetHierarchyTreeGenerator:
     def load_target_counts(self):
 
         self.nodes_index = get_nodes_index(self.parsed_tree_root)
-        self.count_queries = generate_count_queries(self.parsed_tree_root)
+        self.count_queries = generate_count_queries(self.parsed_tree_root, self.query_generator)
         self.execute_count_queries()
         self.add_counts_to_tree()
 

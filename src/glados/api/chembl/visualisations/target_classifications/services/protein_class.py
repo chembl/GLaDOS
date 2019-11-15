@@ -6,8 +6,6 @@ from .shared.tree_generator import TargetHierarchyTreeGenerator
 def get_classification_tree():
 
     cache_key = 'target_classifications_protein_class'
-    print('cache_key', cache_key)
-
     cache_response = None
     try:
         cache_response = cache.get(cache_key)
@@ -20,13 +18,6 @@ def get_classification_tree():
 
     index_name = 'chembl_protein_class'
     es_query = {
-        "size": 0,
-        "query": {
-            "query_string": {
-                "query": "*",
-                "analyze_wildcard": True
-            }
-        },
         "aggs": {
             "children": {
                 "terms": {
@@ -95,7 +86,13 @@ def get_classification_tree():
         }
     }
 
-    tree_generator = TargetHierarchyTreeGenerator(index_name=index_name, es_query=es_query)
+    def generate_count_query(level, node_id):
+
+        return '_metadata.protein_classification.l{level}:("{class_name}")'.format(level=level, class_name=node_id)
+
+    tree_generator = TargetHierarchyTreeGenerator(index_name=index_name, es_query=es_query,
+                                                  query_generator=generate_count_query)
+
     tree_generator.get_classification_tree()
     final_tree = tree_generator.get_classification_tree()
 
