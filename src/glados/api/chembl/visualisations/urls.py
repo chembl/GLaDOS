@@ -1,6 +1,6 @@
 from django.conf.urls import include, url
 
 urlpatterns = [
-    url(r'protein_target_classification/',
-        include('glados.api.chembl.visualisations.protein_target_classification.urls')),
+    url(r'target_classifications/',
+        include('glados.api.chembl.visualisations.target_classifications.urls')),
 ]

@@ -6,7 +6,7 @@ from django.core.cache import cache
 
 def get_classification_json():
 
-    cache_key = "protein_target_classification"
+    cache_key = "target_classifications_protein_class"
     print('cache_key', cache_key)
 
     cache_response = None
