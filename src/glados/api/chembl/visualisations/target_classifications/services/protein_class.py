@@ -99,7 +99,6 @@ def get_classification_tree():
     tree_generator = TargetHierarchyTreeGenerator(index_name=index_name, es_query=es_query,
                                                   query_generator=generate_count_query)
 
-    tree_generator.get_classification_tree()
     final_tree = tree_generator.get_classification_tree()
 
     try:

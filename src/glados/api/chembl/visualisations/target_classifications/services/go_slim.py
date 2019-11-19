@@ -1,6 +1,6 @@
 import traceback
 from django.core.cache import cache
-from .shared.tree_generator import TargetHierarchyTreeGenerator
+from .shared.tree_generator import GoSlimTreeGenerator
 
 
 def get_classification_tree():
@@ -16,57 +16,7 @@ def get_classification_tree():
         print('results are in cache')
         return cache_response
 
-    index_name = 'chembl_organism'
-    es_query = {
-        "aggs": {
-            "children": {
-                "terms": {
-                    "field": "l1",
-                    "size": 100,
-                    "order": {
-                        "_count": "desc"
-                    }
-                },
-                "aggs": {
-                    "children": {
-                        "terms": {
-                            "field": "l2",
-                            "size": 100,
-                            "order": {
-                                "_count": "desc"
-                            }
-                        },
-                        "aggs": {
-                            "children": {
-                                "terms": {
-                                    "field": "l3",
-                                    "size": 100,
-                                    "order": {
-                                        "_count": "desc"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    def generate_count_query(path_to_node):
-
-        queries = []
-        level = 1
-        for node in path_to_node:
-            queries.append('_metadata.organism_taxonomy.l{level}:("{class_name}")'.format(level=level, class_name=node))
-            level += 1
-
-        return ' AND '.join(queries)
-
-    tree_generator = TargetHierarchyTreeGenerator(index_name=index_name, es_query=es_query,
-                                                  query_generator=generate_count_query)
-
-    tree_generator.get_classification_tree()
+    tree_generator = GoSlimTreeGenerator()
     final_tree = tree_generator.get_classification_tree()
 
     try:
