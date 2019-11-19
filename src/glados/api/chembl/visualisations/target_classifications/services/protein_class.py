@@ -86,9 +86,15 @@ def get_classification_tree():
         }
     }
 
-    def generate_count_query(level, node_id):
+    def generate_count_query(path_to_node):
 
-        return '_metadata.protein_classification.l{level}:("{class_name}")'.format(level=level, class_name=node_id)
+        queries = []
+        level = 1
+        for node in path_to_node:
+            queries.append('_metadata.protein_classification.l{level}:("{class_name}")'.format(level=level, class_name=node))
+            level += 1
+
+        return ' AND '.join(queries)
 
     tree_generator = TargetHierarchyTreeGenerator(index_name=index_name, es_query=es_query,
                                                   query_generator=generate_count_query)

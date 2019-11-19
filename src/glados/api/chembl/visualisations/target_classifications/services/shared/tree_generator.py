@@ -3,16 +3,17 @@ import json
 from elasticsearch_dsl import MultiSearch, Search
 
 
-def get_nodes_index(parsed_tree_root):
+def get_nodes_index(parsed_tree_root, path=[]):
 
     nodes_index = {}
     for node_id, node in parsed_tree_root.items():
-        nodes_index[node_id] = node
+        path_to_node = path + [node_id]
+        index_id = ';'.join(path_to_node)
+        nodes_index[index_id] = node
 
         children = node.get('children')
         if children is not None:
-            nodes_to_add = get_nodes_index(children)
-
+            nodes_to_add = get_nodes_index(children, path_to_node)
             for key, value in nodes_to_add.items():
                 nodes_index[key] = value
 
@@ -39,18 +40,21 @@ def load_tree(raw_tree_root):
     return parsed_tree_root
 
 
-def generate_count_queries(tree_root, query_generator, level=1):
+def generate_count_queries(tree_root, query_generator, level=1, path=[]):
 
     queries = {}
     for node_id, node in tree_root.items():
-        query_string = query_generator(level, node_id)
 
-        queries[node_id] = {
+        path_to_node = path + [node_id]
+        query_id = ';'.join(path_to_node)
+        query_string = query_generator(path_to_node)
+
+        queries[query_id] = {
             'query': query_string
         }
         children = node.get('children')
         if children is not None:
-            queries_to_add = generate_count_queries(children, query_generator, level + 1)
+            queries_to_add = generate_count_queries(children, query_generator, level + 1, path_to_node)
             for key, value in queries_to_add.items():
                 queries[key] = value
 
@@ -60,10 +64,6 @@ def generate_count_queries(tree_root, query_generator, level=1):
 class TargetHierarchyTreeGenerator:
 
     def __init__(self, index_name, es_query, query_generator):
-
-        print('init TargetHierarchyTreeGenerator')
-        print('index_name: ', index_name)
-        print('es_query: ', es_query)
 
         self.index_name = index_name
         self.es_query = es_query
@@ -121,5 +121,6 @@ class TargetHierarchyTreeGenerator:
 
     def add_counts_to_tree(self):
 
-        for class_name, query in self.count_queries.items():
-            self.nodes_index[class_name]['target_count'] = query['count']
+        for node_path_str, query in self.count_queries.items():
+            self.nodes_index[node_path_str]['target_count'] = query['count']
+            self.nodes_index[node_path_str]['query_string'] = query['query']
