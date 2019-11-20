@@ -173,15 +173,21 @@ def get_schema_obj_for_compound(chembl_id, request):
     if item_name is not None:
         metadata_obj['name'] = item['pref_name']
 
+    iupac_name = ""
     alternate_names_set = set()
     raw_synonyms = item['molecule_synonyms']
     if raw_synonyms is not None:
         for raw_syn in raw_synonyms:
             alternate_names_set.add(raw_syn['molecule_synonym'])
+            if raw_syn['syn_type'] == 'SYSTEMATIC':
+                iupac_name = raw_syn['molecule_synonym']
 
     alternate_names = list(alternate_names_set)
     if len(alternate_names) > 0:
         metadata_obj['alternateName'] = alternate_names
+
+    if len(iupac_name):
+        metadata_obj['iupacName'] = iupac_name
 
     try:
         placeholder_image = item['_metadata']['compound_generated']['image_file']
@@ -217,7 +223,7 @@ def get_schema_obj_for_compound(chembl_id, request):
         pass
 
     try:
-        metadata_obj['canonical_smiles'] = [item['molecule_structures']['canonical_smiles']]
+        metadata_obj['smiles'] = [item['molecule_structures']['canonical_smiles']]
     except (KeyError, AttributeError, TypeError):
         pass
 
@@ -235,7 +241,7 @@ def get_schema_obj_for_compound(chembl_id, request):
         if len(related_targets_for_schema) == 0:
             related_targets_for_schema = None
 
-        metadata_obj['biochemicalInteraction'] = related_targets_for_schema
+        metadata_obj['bioChemInteraction'] = related_targets_for_schema
     except (KeyError, AttributeError, TypeError):
         pass
 
