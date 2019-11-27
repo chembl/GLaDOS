@@ -365,8 +365,6 @@ glados.useNameSpace 'glados.models.Aggregations',
 
     parse: (data) ->
 
-      console.log('PARSING: ', data)
-      return
       bucketsData = {}
       aggsConfig = @get('aggs_config')
       receivedAggsInfo = data.aggregations

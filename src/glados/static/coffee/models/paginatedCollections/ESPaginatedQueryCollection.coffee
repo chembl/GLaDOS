@@ -38,7 +38,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       facetGroups = @getFacetsGroups()
       facetsState = stateObject.facets_state
 
-      console.log('FACETS STATE: ', facetsState)
       if facetsState?
         for fGroupKey, fGroupState of facetsState
 
