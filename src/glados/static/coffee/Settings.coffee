@@ -303,7 +303,7 @@ glados.loadSearchResultsURLS = ()->
     glados.Settings.ENTITY_NAME_TO_ENTITY[Entity.prototype.entityName] = Entity
   glados.Settings.ENTITY_NAME_TO_ENTITY[glados.models.Compound.Drug.prototype.browseLinkEntityName] = glados.models.Compound.Drug
 
-  glados.Settings.GLADOS_API_BASE_URL = "#{glados.Settings.GLADOS_BASE_PATH_REL}glados_api/chembl"
+  glados.Settings.GLADOS_API_BASE_URL = "#{glados.Settings.GLADOS_BASE_URL_FULL}glados_api/chembl"
   glados.Settings.GENERATE_SERVER_SIDE_DOWNLOAD_ENDPOINT = 'glados_api/shared/downloads/queue_download/'
   glados.Settings.SEARCH_RESULTS_PARSER_ENDPOINT = 'search_results_parser'
   glados.Settings.SHORTEN_URLS_ENDPOINT = 'glados_api/chembl/url_shortening/shorten_url/'

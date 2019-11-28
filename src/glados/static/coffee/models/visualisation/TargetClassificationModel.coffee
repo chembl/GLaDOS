@@ -3,11 +3,6 @@ glados.useNameSpace 'glados.models.visualisation',
 
   TargetClassification: Backbone.Model.extend
 
-    initialize: ->
-
-      console.log('INIT TARGET CLASSIFICATION')
-      console.log(@get('type'))
-
     url: ->
 
       baseUrl = "#{glados.Settings.GLADOS_API_BASE_URL}/visualisations/target_classifications"
@@ -18,7 +13,6 @@ glados.useNameSpace 'glados.models.visualisation',
         return "#{baseUrl}/organism_taxonomy"
       else if type == glados.models.visualisation.TargetClassification.Types.GENE_ONTOLOGY
         return "#{baseUrl}/go_slim"
-
 
 glados.models.visualisation.TargetClassification.Types =
   PROTEIN_CLASSIFICATION: 'PROTEIN_CLASSIFICATION'

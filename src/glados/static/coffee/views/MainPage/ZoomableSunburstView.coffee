@@ -26,6 +26,7 @@ glados.useNameSpace 'glados.views.MainPage',
       @$vis_elem.empty()
 
       @ROOT = @getBucketData()
+      console.log('@ROOT: ', @ROOT)
       @VIS_WIDTH = $(@el).width() - 10
       @VIS_HEIGHT = $(@el).height() - 15
       @RADIUS = (Math.min(@VIS_WIDTH, @VIS_HEIGHT) / 2)

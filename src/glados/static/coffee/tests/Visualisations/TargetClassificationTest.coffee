@@ -1,5 +1,16 @@
 describe "Protein Target Classification", ->
 
+  protein_classification = {}
+
+  beforeAll (done) ->
+
+    dataURL = glados.Settings.STATIC_URL + 'testData/Visualisations/TargetClassification/ProteinTargetClassification.json'
+
+    $.get dataURL, (data) ->
+      protein_classification = data
+      done()
+
+
   it 'Sets up the url correctly for protein classification', ->
 
     proteinClassificationModel = new glados.models.visualisation.TargetClassification
@@ -35,3 +46,13 @@ describe "Protein Target Classification", ->
     urlGot = proteinClassificationModel.url()
     urlMustBe = "#{glados.Settings.GLADOS_API_BASE_URL}/visualisations/target_classifications/go_slim"
     expect(urlGot).toBe(urlMustBe)
+
+
+  it 'Parses the protein classification correctly', ->
+
+    proteinClassificationModel = new glados.models.visualisation.TargetClassification
+      type: glados.models.visualisation.TargetClassification.Types.PROTEIN_CLASSIFICATION
+
+    parsedDataGot = proteinClassificationModel.parse(protein_classification)
+    console.log('parsedDataGot: ', parsedDataGot)
+
