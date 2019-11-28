@@ -8,6 +8,17 @@ glados.useNameSpace 'glados.models.visualisation',
       console.log('INIT TARGET CLASSIFICATION')
       console.log(@get('type'))
 
+    url: ->
+
+      baseUrl = "#{glados.Settings.GLADOS_API_BASE_URL}/visualisations/target_classifications"
+      type = @get('type')
+      if type == glados.models.visualisation.TargetClassification.Types.PROTEIN_CLASSIFICATION
+        return "#{baseUrl}/protein_class"
+      else if type == glados.models.visualisation.TargetClassification.Types.ORGANISM_TAXONOMY
+        return "#{baseUrl}/organism_taxonomy"
+      else if type == glados.models.visualisation.TargetClassification.Types.GENE_ONTOLOGY
+        return "#{baseUrl}/go_slim"
+
 
 glados.models.visualisation.TargetClassification.Types =
   PROTEIN_CLASSIFICATION: 'PROTEIN_CLASSIFICATION'
