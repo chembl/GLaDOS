@@ -14,6 +14,18 @@ glados.useNameSpace 'glados.models.visualisation',
       else if type == glados.models.visualisation.TargetClassification.Types.GENE_ONTOLOGY
         return "#{baseUrl}/go_slim"
 
+
+
+    parse: (data) ->
+
+      return {
+        'root': {
+          'buckets': []
+          'bucket_index': data
+        }
+      }
+
+
 glados.models.visualisation.TargetClassification.Types =
   PROTEIN_CLASSIFICATION: 'PROTEIN_CLASSIFICATION'
   ORGANISM_TAXONOMY: 'ORGANISM_TAXONOMY'
