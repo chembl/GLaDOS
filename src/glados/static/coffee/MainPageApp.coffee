@@ -23,7 +23,7 @@ class MainPageApp
   @initZoomableSunburst = ($browseButtonContainer) ->
 
     proteinClassificationModel = new glados.models.visualisation.TargetClassification
-      type: glados.models.visualisation.TargetClassification.Types.PROTEIN_CLASSIFICATION
+      type: glados.models.visualisation.TargetClassification.Types.GENE_ONTOLOGY
 
     config =
       browse_all_link: "#{glados.Settings.GLADOS_BASE_URL_FULL}/g/#browse/targets"

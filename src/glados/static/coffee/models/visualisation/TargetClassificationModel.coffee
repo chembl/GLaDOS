@@ -17,7 +17,9 @@ glados.useNameSpace 'glados.models.visualisation',
     parse: (data) ->
 
       return {
-        'root': data
+        'root': {
+          'children': data
+        }
       }
 
 glados.models.visualisation.TargetClassification.Types =

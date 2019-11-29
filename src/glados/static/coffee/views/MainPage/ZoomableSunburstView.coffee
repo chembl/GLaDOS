@@ -299,6 +299,7 @@ glados.useNameSpace 'glados.views.MainPage',
           link_url: d.link
 
     getTreeData: ->
+      console.log('GET TREE DATA')
       receivedRoot = @model.get 'root'
       id = 0
 
@@ -326,11 +327,10 @@ glados.useNameSpace 'glados.views.MainPage',
       parsedRoot.name = 'root'
       parsedRoot.id = id
 
-      if receivedRoot.children?
-        parsedRoot.children = []
-        for nodeID, node of receivedRoot.children
-          id++
-          fillNode(parsedRoot, node)
+      parsedRoot.children = []
+      for nodeID, node of receivedRoot.children
+        id++
+        fillNode(parsedRoot, node)
 
       return parsedRoot
 

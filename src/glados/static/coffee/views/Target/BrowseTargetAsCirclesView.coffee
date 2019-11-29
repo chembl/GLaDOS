@@ -66,7 +66,7 @@ BrowseTargetAsCirclesView = Backbone.View.extend(ResponsiviseViewExt).extend
     if @model.get('state') != glados.models.Aggregations.Aggregation.States.INITIAL_STATE
       return
 
-    @root = @getTreeData()
+    @root = @getBucketData()
 
     @$vis_elem.empty()
     thisView = @
