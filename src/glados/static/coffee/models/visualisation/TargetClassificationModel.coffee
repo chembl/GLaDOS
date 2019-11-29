@@ -14,13 +14,24 @@ glados.useNameSpace 'glados.models.visualisation',
       else if type == glados.models.visualisation.TargetClassification.Types.GENE_ONTOLOGY
         return "#{baseUrl}/go_slim"
 
+    setUpTreeLinks: (node) ->
+
+      node.link = Target.getTargetsListURL(node.query_string)
+
+      children = node.children
+      if children?
+        for nodeID, node of children
+          @setUpTreeLinks(node)
+
     parse: (data) ->
 
-      return {
+      tree = {
         'root': {
           'children': data
         }
       }
+      @setUpTreeLinks(tree['root'])
+      return tree
 
 glados.models.visualisation.TargetClassification.Types =
   PROTEIN_CLASSIFICATION: 'PROTEIN_CLASSIFICATION'
