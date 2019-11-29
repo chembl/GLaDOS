@@ -21,7 +21,9 @@ class MainPageApp
 # Init functions
 # ----------------------------------------------------------------------------------------------------------------------
   @initZoomableSunburst = ($browseButtonContainer) ->
-    targetHierarchyAgg = MainPageApp.getTargetsTreeAgg()
+
+    proteinClassificationModel = new glados.models.visualisation.TargetClassification
+      type: glados.models.visualisation.TargetClassification.Types.PROTEIN_CLASSIFICATION
 
     config =
       browse_all_link: "#{glados.Settings.GLADOS_BASE_URL_FULL}/g/#browse/targets"
@@ -30,10 +32,10 @@ class MainPageApp
 
     view = new glados.views.MainPage.ZoomableSunburstView
       el: $('#BCK-zoomable-sunburst')
-      model: targetHierarchyAgg
+      model: proteinClassificationModel
       config: config
 
-    targetHierarchyAgg.fetch()
+    proteinClassificationModel.fetch()
     return view
 
   @initBrowseEntities = ->

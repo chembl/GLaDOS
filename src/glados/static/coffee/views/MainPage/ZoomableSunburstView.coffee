@@ -11,21 +11,14 @@ glados.useNameSpace 'glados.views.MainPage',
       @model.on 'change', @render, @
 
     render: ->
+
+      console.log('RENDER SUNBURST')
       thisView = @
-
-      if @model.get('state') == glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE
-        return
-
-      if @model.get('state') == glados.models.Aggregations.Aggregation.States.LOADING_BUCKETS
-        return
-
-      if @model.get('state') != glados.models.Aggregations.Aggregation.States.INITIAL_STATE
-        return
 
       @showCardContent()
       @$vis_elem.empty()
 
-      @ROOT = @getBucketData()
+      @ROOT = @getTreeData()
       console.log('@ROOT: ', @ROOT)
       @VIS_WIDTH = $(@el).width() - 10
       @VIS_HEIGHT = $(@el).height() - 15
@@ -305,44 +298,41 @@ glados.useNameSpace 'glados.views.MainPage',
           link_title: "Browse all #{d.name} Targets"
           link_url: d.link
 
-    getBucketData: ->
-      receivedBuckets = @model.get 'bucket_data'
-      console.log('receivedBuckets: ', receivedBuckets)
-      return
+    getTreeData: ->
+      receivedRoot = @model.get 'root'
       id = 0
 
-      fillNode = (parent_node, input_node) ->
+      fillNode = (parentNode, currentNodeReceived) ->
 
         node = {}
-        node.name = input_node.key
-        node.size = input_node.doc_count
-        node.parent_id = parent_node.id
+        node.name = currentNodeReceived.id
+        node.size = currentNodeReceived.target_count
+        node.parent_id = parentNode.id
         node.id = id
-        node.link = input_node.link
-        node.depth = parent_node.depth + 1
-        node.parent = parent_node
+        node.link = currentNodeReceived.link
+        node.depth = parentNode.depth + 1
+        node.parent = parentNode
 
-        parent_node.children.push(node)
+        parentNode.children.push(node)
 
-        if input_node.children?
+        if currentNodeReceived.children?
           node.children = []
-          for child in input_node.children['buckets']
+          for childID, child of currentNodeReceived.children
             id++
             fillNode(node, child)
 
-      if receivedBuckets?
-        root = {}
-        root.depth = 0
-        root.name = 'root'
-        root.id = id
+      parsedRoot = {}
+      parsedRoot.depth = 0
+      parsedRoot.name = 'root'
+      parsedRoot.id = id
 
-        if receivedBuckets.children?
-          root.children = []
-          for node in receivedBuckets.children['buckets']
-            id++
-            fillNode(root, node)
+      if receivedRoot.children?
+        parsedRoot.children = []
+        for nodeID, node of receivedRoot.children
+          id++
+          fillNode(parsedRoot, node)
 
-      return root
+      return parsedRoot
 
     showCardContent: ->
       $(@el).find('.card-preolader-to-hide').hide()
