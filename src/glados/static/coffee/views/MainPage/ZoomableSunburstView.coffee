@@ -73,6 +73,7 @@ glados.useNameSpace 'glados.views.MainPage',
             .attr("xlink:href", "##{pathID}")
             .attr("href", "##{pathID}")
             .text((d) -> d.name)
+            .style('fill', (d) -> textColor(d.assignedColor))
             .attr('data-limit-for-text', limitForText - 12)
 
         else
@@ -83,6 +84,7 @@ glados.useNameSpace 'glados.views.MainPage',
             .attr('dy', '.4em')
             .attr('x', (d) -> getRadius(d.y))
             .text((d) -> d.name)
+            .style('fill', (d) -> textColor(d.assignedColor))
             .attr('data-limit-for-text', limitForText)
             .attr('transform', (d) ->
               'rotate(' + thisView.computeTextRotation(d, getAngle) + ')'
@@ -116,6 +118,32 @@ glados.useNameSpace 'glados.views.MainPage',
             '#e95f7e',
             '#cc4362',
 
+        ])
+
+      textColor = d3.scale.ordinal()
+        .domain([
+          '#0b4d56',
+          '#066c70',
+          '#088d91',
+          '#41aeaf',
+          '#79cccb',
+          '#c4e6e5',
+          '#fdabbc',
+          '#f9849d',
+          '#e95f7e',
+          '#cc4362',
+        ])
+        .range([
+            '#ffffff',
+            '#ffffff',
+            '#ffffff'
+            '#000000',
+            '#000000',
+            '#000000',
+            '#000000',
+            '#ffffff',
+            '#ffffff',
+            '#ffffff',
         ])
 
       partition = d3.layout.partition()
@@ -154,7 +182,9 @@ glados.useNameSpace 'glados.views.MainPage',
         .classed('arc-path', true)
         .attr('d', arc)
         .style 'fill', (d) ->
-          color (if d.children then d else d.parent).name
+          assignedColor = color (if d.children then d else d.parent).name
+          d.assignedColor = assignedColor
+          return assignedColor
 
 #     append paths for text
       textPaths = sunburstGroup.append('path')
@@ -306,7 +336,11 @@ glados.useNameSpace 'glados.views.MainPage',
       fillNode = (parentNode, currentNodeReceived) ->
 
         node = {}
-        node.name = currentNodeReceived.id
+        if currentNodeReceived.label?
+          node.name = currentNodeReceived.label
+        else
+          node.name = currentNodeReceived.id
+
         node.size = currentNodeReceived.target_count
         node.parent_id = parentNode.id
         node.id = id
