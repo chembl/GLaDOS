@@ -111,6 +111,13 @@
 
 </script>
 
+<script id="Handlebars-Visualisations-SelectHierarchyTree" type="text/x-handlebars-template">
+    {{#each options}}
+        <option value="{{this.value}}" {{#if this.is_selected }}selected{{/if  }} >{{ this.label }}</option>
+    {{/each}}
+</script>
+
+
 <script id="Handlebars-Common-SortDirectionBtn" type="text/x-handlebars-template">
 
   <a class="waves-effect waves-light btn-mini teal btn-sort-direction" {{#if disabled}} disabled {{/if}}

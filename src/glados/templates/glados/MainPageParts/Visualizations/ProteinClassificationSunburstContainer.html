@@ -1,0 +1,38 @@
+{% extends "glados/base/basic_visualisation_card.html" %}
+
+{% block card_id %}BCK-protein-classification-zoomburst{% endblock %}
+
+{% block general_content %}
+
+    Select a hierarchy tree:
+    <div class="row">
+        <select class="BCK-ParamSelect BCK-search-param"
+                data-hb-template="Handlebars-Visualisations-SelectHierarchyTree">
+
+
+        </select>
+    </div>
+
+
+    <div class="BCK-sunburst-container sunburst-container">
+        sunburst
+    </div>
+
+{% endblock %}
+
+
+
+{##}
+{#{% verbatim %}#}
+{#<div>#}
+{##}
+{#    #}
+{##}
+{#    {% endverbatim %}#}
+{#    {% with is_dynamic=True %}#}
+{#        {% include "glados/MainPageParts/Visualizations/zoomable_sunburst.html" %}#}
+{#    {% endwith %}#}
+{##}
+{#</div>#}
+
+

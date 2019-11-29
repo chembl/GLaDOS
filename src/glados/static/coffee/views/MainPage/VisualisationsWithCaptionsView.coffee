@@ -111,8 +111,8 @@ glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_CONFIG =
   1:
     description: 'Representation of the ChEMBL protein target classification hierarchy.'
     instructions: 'Click on a section to expand it and then click on the browse button to start exploring the target family in more detail.'
-    template_id: 'Handlebars-Visualisations-ZoomableSunburst'
-    init_function: MainPageApp.initZoomableSunburst
+    template_id: 'Handlebars-Visualisations-ZoomableSunburst-Container'
+    init_function: MainPageApp.initTargetClassificationSunburst
     link_title: 'Browse all Targets'
     link_url_function: -> Target.getTargetsListURL()
     vis_title: 'Protein Targets in ChEMBL'
