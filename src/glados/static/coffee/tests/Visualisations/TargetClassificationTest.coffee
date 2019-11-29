@@ -1,16 +1,5 @@
 describe "Protein Target Classification", ->
 
-  protein_classification = {}
-
-  beforeAll (done) ->
-
-    dataURL = glados.Settings.STATIC_URL + 'testData/Visualisations/TargetClassification/ProteinTargetClassification.json'
-
-    $.get dataURL, (data) ->
-      protein_classification = data
-      done()
-
-
   it 'Sets up the url correctly for protein classification', ->
 
     proteinClassificationModel = new glados.models.visualisation.TargetClassification
