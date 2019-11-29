@@ -48,29 +48,4 @@ describe "Protein Target Classification", ->
     expect(urlGot).toBe(urlMustBe)
 
 
-  it 'Parses the protein classification correctly', ->
-
-    proteinClassificationModel = new glados.models.visualisation.TargetClassification
-      type: glados.models.visualisation.TargetClassification.Types.PROTEIN_CLASSIFICATION
-
-    parsedDataGot = proteinClassificationModel.parse(protein_classification)
-    treeRoot = parsedDataGot['root']
-    console.log('parsedDataGot: ', parsedDataGot)
-
-    check_node_structure = (node) ->
-
-      console.log('checking node: ', node)
-      expect(node?).toBe(true)
-      bucket_index = node['bucket_index']
-      buckets = node['buckets']
-
-      expect(buckets? == bucket_index?).toBe(true)
-
-      isLeaf = buckets?
-      if not isLeaf
-        
-
-    check_node_structure(treeRoot)
-
-
 
