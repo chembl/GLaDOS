@@ -4,14 +4,14 @@ glados.useNameSpace 'glados.views.MainPage',
     CLASSIFICATION_TREES:
       protein_classification:
         label: 'Protein Target Tree'
-        classification_type: glados.models.visualisation.TargetClassification.Types.PROTEIN_CLASSIFICATION
+        classification_type: glados.models.visualisation.TargetClassificationModel.Types.PROTEIN_CLASSIFICATION
       organism_taxonomy:
         label: 'Organism Taxonomy'
-        classification_type: glados.models.visualisation.TargetClassification.Types.ORGANISM_TAXONOMY
+        classification_type: glados.models.visualisation.TargetClassificationModel.Types.ORGANISM_TAXONOMY
         selected: true
       gene_ontology:
         label: 'Gene Ontology'
-        classification_type: glados.models.visualisation.TargetClassification.Types.GENE_ONTOLOGY
+        classification_type: glados.models.visualisation.TargetClassificationModel.Types.GENE_ONTOLOGY
 
     events:
       'change .BCK-TreeSelect': 'selectTree'
@@ -61,8 +61,9 @@ glados.useNameSpace 'glados.views.MainPage',
 
       treeDesc = @CLASSIFICATION_TREES[treeKey]
       viewElementID = treeDesc.viewElementID
+      sunburstWasAlreadyCreated = viewElementID?
 
-      if not viewElementID?
+      if not sunburstWasAlreadyCreated
 
         $viewContainer = $(@el).find('.BCK-sunbursts-container')
         viewElementID = "Sunburst-#{treeKey}-#{Math.floor((Math.random() * 10000) + 1)}"
@@ -76,7 +77,7 @@ glados.useNameSpace 'glados.views.MainPage',
         $viewContainer.append($sunburstElem)
         treeDesc.viewElementID = viewElementID
 
-        proteinClassificationModel = new glados.models.visualisation.TargetClassification
+        proteinClassificationModel = new glados.models.visualisation.TargetClassificationModel
           type: treeDesc.classification_type
 
         view = new glados.views.MainPage.ZoomableSunburstView
@@ -84,9 +85,14 @@ glados.useNameSpace 'glados.views.MainPage',
           config: @config
           model: proteinClassificationModel
 
+        treeDesc.view = view
+
         proteinClassificationModel.fetch()
 
       $allSunbursts = $(@el).find('.BCK-sunburst')
       $allSunbursts.hide()
       $sunburstElem = $(@el).find("##{viewElementID}")
       $sunburstElem.show()
+
+      if sunburstWasAlreadyCreated
+        treeDesc.view.wakeUp()

@@ -369,6 +369,11 @@ glados.useNameSpace 'glados.views.MainPage',
 
       return parsedRoot
 
+    wakeUp: ->
+
+      console.log('WAKE UP SUNBURST')
+      @render()
+
     showCardContent: ->
       $(@el).find('.card-preolader-to-hide').hide()
       $(@el).find('.card-content').show()
