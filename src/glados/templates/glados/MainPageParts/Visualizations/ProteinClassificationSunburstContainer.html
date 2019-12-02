@@ -4,9 +4,10 @@
 
 {% block general_content %}
 
-    Select a hierarchy tree:
+
     <div class="row">
-        <select class="BCK-ParamSelect BCK-search-param"
+        <div class="col s12">Select a hierarchy tree:</div>
+        <select class="BCK-TreeSelect col s12 m4"
                 data-hb-template="Handlebars-Visualisations-SelectHierarchyTree">
 
 
@@ -14,8 +15,7 @@
     </div>
 
 
-    <div class="BCK-sunburst-container sunburst-container">
-        sunburst
+    <div class="BCK-sunbursts-container">
     </div>
 
 {% endblock %}
