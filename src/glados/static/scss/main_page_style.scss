@@ -320,19 +320,36 @@ $full-header-height-large: 180px;
 }
 
 /* --- SUNBURST --- */
-.sunburst-container {
 
-  .arc-path {
-    stroke: white;
-    stroke-width: 0.8px;
-  }
-
-  .sunburst-text {
-    fill: #0d343a;
-    font-size: 9px;
-    pointer-events: none;
+.tree-select-anchor {
+  position: relative;
+  width: 100%;
+  .tree-select-container {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 }
+
+.sunbursts-group-container {
+
+  height: 100%;
+  .sunburst-container {
+    height: 100%;
+    .arc-path {
+      stroke: white;
+      stroke-width: 0.8px;
+    }
+    .sunburst-text {
+      fill: #0d343a;
+      font-size: 9px;
+      pointer-events: none;
+    }
+  }
+
+}
+
 
 /* -------- CHEMBL TEXT -------- */
 .main-page-container {

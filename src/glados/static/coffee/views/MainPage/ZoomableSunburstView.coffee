@@ -4,6 +4,7 @@ glados.useNameSpace 'glados.views.MainPage',
   .extend(glados.views.base.TrackView).extend
 
     initialize: ->
+      console.log('INIT SUNBURST VIEW')
       @config = arguments[0].config
       @initTracking('ZoomableSunburst-ProteinClass', glados.views.base.TrackView.viewTypes.VISUALISATION)
       @$vis_elem = $(@el).find('.BCK-sunburst-container')

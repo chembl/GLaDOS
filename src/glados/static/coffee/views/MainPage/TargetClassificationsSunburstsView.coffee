@@ -4,11 +4,14 @@ glados.useNameSpace 'glados.views.MainPage',
     CLASSIFICATION_TREES:
       protein_classification:
         label: 'Protein Target Tree'
-        selected: true
+        classification_type: glados.models.visualisation.TargetClassification.Types.PROTEIN_CLASSIFICATION
       organism_taxonomy:
         label: 'Organism Taxonomy'
+        classification_type: glados.models.visualisation.TargetClassification.Types.ORGANISM_TAXONOMY
+        selected: true
       gene_ontology:
         label: 'Gene Ontology'
+        classification_type: glados.models.visualisation.TargetClassification.Types.GENE_ONTOLOGY
 
     events:
       'change .BCK-TreeSelect': 'selectTree'
@@ -16,13 +19,11 @@ glados.useNameSpace 'glados.views.MainPage',
     initialize: ->
 
       @config = arguments[0].config
-      console.log('INIT CLASS SUNBURST VIEW')
       @render()
 
     render: ->
 
       $selector = $(@el).find('.BCK-TreeSelect')
-      console.log('$selector: ', $selector)
 
       selectorParams =
         options: []
@@ -39,31 +40,14 @@ glados.useNameSpace 'glados.views.MainPage',
 
         selectorParams.options.push(newOption)
 
-      @showTree(treeID)
-
       glados.Utils.fillContentForElement($selector, selectorParams)
       $selector.material_select()
 
       @showCardContent()
-
-#      proteinClassificationModel = new glados.models.visualisation.TargetClassification
-#      type: glados.models.visualisation.TargetClassification.Types.GENE_ONTOLOGY
-
-
-#      config =
-#        browse_all_link: "#{glados.Settings.GLADOS_BASE_URL_FULL}/g/#browse/targets"
-#        browse_button: true
-#        browse_button_container: $browseButtonContainer
-#
-#      view = new glados.views.MainPage.ZoomableSunburstView
-#        el: $('#BCK-zoomable-sunburst')
-#        model: proteinClassificationModel
-#        config: config
-#
-#      proteinClassificationModel.fetch()
-
+      @showTree(selectedTree)
 
     showCardContent: ->
+
       $(@el).find('.card-preolader-to-hide').hide()
       $(@el).find('.card-content').show()
 
@@ -75,7 +59,6 @@ glados.useNameSpace 'glados.views.MainPage',
 
     showTree: (treeKey) ->
 
-      console.log('showTree: ', treeKey)
       treeDesc = @CLASSIFICATION_TREES[treeKey]
       viewElementID = treeDesc.viewElementID
 
@@ -83,13 +66,25 @@ glados.useNameSpace 'glados.views.MainPage',
 
         $viewContainer = $(@el).find('.BCK-sunbursts-container')
         viewElementID = "Sunburst-#{treeKey}-#{Math.floor((Math.random() * 10000) + 1)}"
-        console.log('viewElementID: ', viewElementID)
         templateID = 'Handlebars-Sunburst-container'
-        $sunburstElem = $('<div>').attr('id', viewElementID).attr('data-hb-template', templateID)
+        $sunburstElem = $('<div>')
+          .attr('id', viewElementID)
+          .attr('data-hb-template', templateID)
+          .css('height', '100%')
           .addClass('BCK-sunburst')
-        $sunburstElem.html(glados.Utils.getContentFromTemplate(templateID, {name: treeKey}))
+        $sunburstElem.html(glados.Utils.getContentFromTemplate(templateID))
         $viewContainer.append($sunburstElem)
         treeDesc.viewElementID = viewElementID
+
+        proteinClassificationModel = new glados.models.visualisation.TargetClassification
+          type: treeDesc.classification_type
+
+        view = new glados.views.MainPage.ZoomableSunburstView
+          el: $sunburstElem
+          config: @config
+          model: proteinClassificationModel
+
+        proteinClassificationModel.fetch()
 
       $allSunbursts = $(@el).find('.BCK-sunburst')
       $allSunbursts.hide()
