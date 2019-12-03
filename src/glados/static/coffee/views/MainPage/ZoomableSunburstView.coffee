@@ -241,6 +241,15 @@ glados.useNameSpace 'glados.views.MainPage',
           thisView.numTooltips++
           $elem.trigger('mouseover')
 
+      thisView.repaintAllLabels = ->
+        d3.selectAll('.sunburst-text').remove()
+        f = thisView.FOCUS
+        sunburstGroup.each (d) ->
+
+          shouldCreateLabels = d.depth - f.depth <= thisView.LABEL_LEVELS_TO_SHOW and d.x >= f.x and d.x < (f.x + f.dx)
+          if shouldCreateLabels
+            appendLabelText(d, @)
+
 
       # --- click handling --- #
       click = (d) ->
@@ -269,10 +278,6 @@ glados.useNameSpace 'glados.views.MainPage',
               shouldCreateLabels = d.depth - f.depth <= thisView.LABEL_LEVELS_TO_SHOW and d.x >= f.x and d.x < (f.x + f.dx)
               if shouldCreateLabels
                 appendLabelText(d, @)
-
-        thisView.repaintAllLabels = ->
-          d3.selectAll('.sunburst-text').remove()
-          appendLabels(true, true)
 
 #       if focus changes
         if thisView.FOCUS != d
