@@ -1,8 +1,8 @@
 from django.http import JsonResponse
 from django.views.decorators.http import require_GET
-from src.glados.api.chembl.visualisations.target_classifications.services import protein_class
-from src.glados.api.chembl.visualisations.target_classifications.services import organism_taxonomy
-from src.glados.api.chembl.visualisations.target_classifications.services import go_slim
+from glados.api.chembl.visualisations.target_classifications.services import protein_class
+from glados.api.chembl.visualisations.target_classifications.services import organism_taxonomy
+from glados.api.chembl.visualisations.target_classifications.services import go_slim
 
 
 @require_GET
