@@ -27,6 +27,7 @@ glados.useNameSpace 'glados.views.MainPage',
 
       selectorParams =
         options: []
+        group_id: "sunburst-trees-selector-#{Math.floor((Math.random() * 10000) + 1)}"
 
       selectedTree = undefined
       for treeID, treeDesc of @CLASSIFICATION_TREES
@@ -34,6 +35,7 @@ glados.useNameSpace 'glados.views.MainPage',
           value: treeID
           label: treeDesc.label
           is_selected: treeDesc.selected == true
+          radio_button_id: "sunburst-option-#{treeID}-#{Math.floor((Math.random() * 10000) + 1)}"
 
         if treeDesc.selected == true
           selectedTree = treeID
@@ -41,7 +43,6 @@ glados.useNameSpace 'glados.views.MainPage',
         selectorParams.options.push(newOption)
 
       glados.Utils.fillContentForElement($selector, selectorParams)
-      $selector.material_select()
 
       @showCardContent()
       @showTree(selectedTree)

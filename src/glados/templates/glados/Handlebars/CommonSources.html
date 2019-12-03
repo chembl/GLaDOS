@@ -112,9 +112,22 @@
 </script>
 
 <script id="Handlebars-Visualisations-SelectHierarchyTree" type="text/x-handlebars-template">
-    {{#each options}}
-        <option value="{{this.value}}" {{#if this.is_selected }}selected{{/if  }} >{{ this.label }}</option>
-    {{/each}}
+
+     <div id="{{ group_id }}">
+         {{#each options}}
+         <input type="radio"
+                id="{{ this.radio_button_id }}"
+                name="radio"
+                {{#if this.is_selected}} checked="checked" {{/if}}
+                value="{{ this.value }}" >
+             <label for="{{ this.radio_button_id }}">
+                 {{ this.label }}
+             </label>
+         </input>
+         {{/each}}
+    </div>
+
+
 </script>
 
 

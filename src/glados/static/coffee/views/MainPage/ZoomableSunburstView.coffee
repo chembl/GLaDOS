@@ -16,8 +16,8 @@ glados.useNameSpace 'glados.views.MainPage',
       console.log('RENDER SUNBURST')
       thisView = @
 
-      @showCardContent()
       @$vis_elem.empty()
+      @showCardContent()
 
       @ROOT = @getTreeData()
       console.log('@ROOT: ', @ROOT)
@@ -372,7 +372,7 @@ glados.useNameSpace 'glados.views.MainPage',
     wakeUp: ->
 
       console.log('WAKE UP SUNBURST')
-      @render()
+#      @render()
 
     showCardContent: ->
       $(@el).find('.card-preolader-to-hide').hide()

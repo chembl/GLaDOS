@@ -320,21 +320,15 @@ $full-header-height-large: 180px;
 }
 
 /* --- SUNBURST --- */
+.tree-select-container {
+  text-align: center;
+  padding-bottom: 10px;
 
-.tree-select-anchor {
-  position: relative;
-  width: 100%;
-  .tree-select-container {
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
 }
 
 .sunbursts-group-container {
 
-  height: 100%;
+  height: 95%;
   .sunburst-container {
     height: 100%;
     .arc-path {
