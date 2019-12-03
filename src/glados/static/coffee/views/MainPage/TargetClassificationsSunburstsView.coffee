@@ -8,10 +8,10 @@ glados.useNameSpace 'glados.views.MainPage',
       organism_taxonomy:
         label: 'Organism Taxonomy'
         classification_type: glados.models.visualisation.TargetClassificationModel.Types.ORGANISM_TAXONOMY
-        selected: true
       gene_ontology:
         label: 'Gene Ontology'
         classification_type: glados.models.visualisation.TargetClassificationModel.Types.GENE_ONTOLOGY
+        selected: true
 
     events:
       'change .BCK-TreeSelect': 'selectTree'

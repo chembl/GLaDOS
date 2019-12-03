@@ -4,7 +4,6 @@ glados.useNameSpace 'glados.views.MainPage',
   .extend(glados.views.base.TrackView).extend
 
     initialize: ->
-      console.log('INIT SUNBURST VIEW')
       @config = arguments[0].config
       @initTracking('ZoomableSunburst-ProteinClass', glados.views.base.TrackView.viewTypes.VISUALISATION)
       @$vis_elem = $(@el).find('.BCK-sunburst-container')
@@ -13,20 +12,19 @@ glados.useNameSpace 'glados.views.MainPage',
 
     render: ->
 
-      console.log('RENDER SUNBURST')
       thisView = @
 
       @$vis_elem.empty()
       @showCardContent()
 
       @ROOT = @getTreeData()
-      console.log('@ROOT: ', @ROOT)
       @VIS_WIDTH = $(@el).width() - 10
       @VIS_HEIGHT = $(@el).height() - 15
       @RADIUS = (Math.min(@VIS_WIDTH, @VIS_HEIGHT) / 2)
       @FOCUS = @ROOT
       @MAX_LINE_HEIGHT = 12
       @LABEL_LEVELS_TO_SHOW = 3
+      @BASE_ID = "#{Math.floor((Math.random() * 10000) + 1)}"
 
       # ------------ helper functions --------------- #
       wrapText = (d) ->
@@ -38,13 +36,13 @@ glados.useNameSpace 'glados.views.MainPage',
         wrappedText = glados.Utils.Text.getTextForEllipsis(text, textLength, textLimit)
         self.text wrappedText
 
-      appendLabelText = (d, parent) ->
+      appendLabelText = (d, parentGroup) ->
 
         if d.name == 'root'
           return
 
-        group = d3.select(parent)
-        path = d3.select(parent).select('.text-path')
+        group = d3.select(parentGroup)
+        path = group.select('.text-path')
         pathID = path.attr('id')
 
         innerRadius = arc.innerRadius() (d)
@@ -190,7 +188,7 @@ glados.useNameSpace 'glados.views.MainPage',
 #     append paths for text
       textPaths = sunburstGroup.append('path')
         .classed('text-path', true)
-        .attr('id', (d, i) -> "text-path-#{i}")
+        .attr('id', (d, i) -> "#{thisView.BASE_ID}-text-path-#{i}")
         .attr('d', textArc)
         .style('stroke', 'none')
 
@@ -272,6 +270,10 @@ glados.useNameSpace 'glados.views.MainPage',
               if shouldCreateLabels
                 appendLabelText(d, @)
 
+        thisView.repaintAllLabels = ->
+          d3.selectAll('.sunburst-text').remove()
+          appendLabels(true, true)
+
 #       if focus changes
         if thisView.FOCUS != d
 
@@ -312,6 +314,7 @@ glados.useNameSpace 'glados.views.MainPage',
 #     trigger events
       sunburstGroup.on 'click',  click
       sunburstGroup.on 'mouseover', renderQTip
+      @fillBrowseButton(@FOCUS)
 
     computeTextRotation: (d, getAngle) ->
       (getAngle(d.x + d.dx / 2) - (Math.PI / 2)) / Math.PI * 180
@@ -330,7 +333,6 @@ glados.useNameSpace 'glados.views.MainPage',
           link_url: d.link
 
     getTreeData: ->
-      console.log('GET TREE DATA')
       receivedRoot = @model.get 'root'
       id = 0
 
@@ -371,8 +373,8 @@ glados.useNameSpace 'glados.views.MainPage',
 
     wakeUp: ->
 
-      console.log('WAKE UP SUNBURST')
-#      @render()
+      @repaintAllLabels()
+      @fillBrowseButton(@FOCUS)
 
     showCardContent: ->
       $(@el).find('.card-preolader-to-hide').hide()
