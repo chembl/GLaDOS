@@ -4,7 +4,6 @@ from .shared.tree_generator import TargetHierarchyTreeGenerator
 
 
 def get_classification_tree():
-
     cache_key = 'target_classifications_protein_class'
     cache_response = None
     try:
@@ -91,7 +90,8 @@ def get_classification_tree():
         queries = []
         level = 1
         for node in path_to_node:
-            queries.append('_metadata.protein_classification.l{level}:("{class_name}")'.format(level=level, class_name=node))
+            queries.append('_metadata.protein_classification.l{level}:("{class_name}")'.format(level=level,
+                                                                                               class_name=node))
             level += 1
 
         return ' AND '.join(queries)

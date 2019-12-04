@@ -39,7 +39,6 @@ def load_tree_from_agg(raw_tree_root):
 
 
 def load_tree_from_hits(hits):
-
     parsed_tree_root = {}
     nodes_index = {}
 
@@ -108,7 +107,6 @@ def generate_count_queries_parent_to_child(tree_root, query_generator, level=1, 
 
 
 def get_node_and_descendancy(node):
-
     node_and_descendancy = []
     children = node.get('children')
     if children is None:
@@ -122,7 +120,6 @@ def get_node_and_descendancy(node):
 
 
 def fill_descendants_index(tree_root_node, descendants_index, path=[]):
-
     node_id = tree_root_node['id']
     path_to_node = path + [node_id]
     index_id = ';'.join(path_to_node)
@@ -133,7 +130,6 @@ def fill_descendants_index(tree_root_node, descendants_index, path=[]):
     if children is not None:
 
         for child_id, child in children.items():
-
             path_to_child = path_to_node + [child_id]
             child_index_id = ';'.join(path_to_child)
 
@@ -145,7 +141,6 @@ def fill_descendants_index(tree_root_node, descendants_index, path=[]):
 
 
 def generate_count_queries_child_to_parent(tree_root_nodes, query_generator):
-
     queries = {}
     descendants = {}
     root_id = 'Root'
@@ -247,7 +242,6 @@ class GoSlimTreeGenerator(TargetHierarchyTreeGenerator):
         }
 
         def generate_count_query(current_node_id, descendant_list):
-
             all_queries = []
             for node_id in [current_node_id] + descendant_list:
                 node_query = '_metadata.target_component.go_slims.go_id:("{class_name}")'.format(class_name=node_id)
@@ -262,7 +256,6 @@ class GoSlimTreeGenerator(TargetHierarchyTreeGenerator):
         self.nodes_index = {}
 
     def get_classification_tree(self):
-
         es_response = glados_server_statistics.get_and_record_es_cached_response(self.index_name,
                                                                                  json.dumps(self.es_query))
 
@@ -272,14 +265,11 @@ class GoSlimTreeGenerator(TargetHierarchyTreeGenerator):
         return self.parsed_tree_root
 
     def build_final_tree(self):
-
         self.parsed_tree_root = load_tree_from_hits(self.raw_tree_root)
         self.load_target_counts()
 
     def load_target_counts(self):
-
         self.nodes_index = get_nodes_index(self.parsed_tree_root)
         self.count_queries = generate_count_queries_child_to_parent(self.parsed_tree_root, self.query_generator)
         self.execute_count_queries()
         self.add_counts_to_tree()
-
