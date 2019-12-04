@@ -151,6 +151,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       "#{Compound.prototype.entityName}":
         "#{Activity.prototype.entityName}":\
           Handlebars.compile('molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
+        "#{glados.models.Compound.Drug.prototype.entityName}":\
+          Handlebars.compile('molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
         "#{glados.models.Compound.MechanismOfAction.prototype.entityName}":\
           Handlebars.compile(
             'mechanism_of_action.molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})'+

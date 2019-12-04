@@ -1,5 +1,6 @@
 glados.useNameSpace 'glados.models.Compound',
   Drug: Compound.extend
+    entityName: 'Drug'
     entityNamePlural: 'Drugs'
     browseLinkEntityName: 'Drug'
     parse: (response) ->
