@@ -67,6 +67,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             next: 12
         LINKS_TO_OTHER_ENTITIES: [
           Activity.prototype.entityName,
+          glados.models.Compound.Drug.prototype.entityName,
           glados.models.Compound.MechanismOfAction.prototype.entityName,
           glados.models.Compound.DrugIndication.prototype.entityName
         ]
@@ -247,6 +248,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         ENABLE_COLLECTION_CACHING: true
         LINKS_TO_OTHER_ENTITIES: [
           Activity.prototype.entityName,
+          glados.models.Compound.Drug.prototype.entityName,
           glados.models.Compound.MechanismOfAction.prototype.entityName,
           glados.models.Compound.DrugIndication.prototype.entityName
         ]

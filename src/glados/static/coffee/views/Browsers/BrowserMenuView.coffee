@@ -294,8 +294,8 @@ glados.useNameSpace 'glados.views.Browsers',
           style:
             classes:'qtip-light'
           position:
-            my: 'top middle'
-            at: 'bottom middle'
+            my: 'left center'
+            at: 'right center'
 
       else
 
@@ -309,33 +309,54 @@ glados.useNameSpace 'glados.views.Browsers',
         $links.click $.proxy(@handleLinkToOtherEntitiesClick, @)
 
       unless noAdditionalLinks
-        $additionalLinksOpener = $linkToAllContainer.find('.BCK-open-more-links')
-        $additionalLinksOpener.click $.proxy(@toggleAdditionalLinks, @)
+
+        $linkToAllContainer.mouseenter($.proxy(@showAdditionalLinks, @))
+        $linkToAllContainer.mouseleave($.proxy(@hideAdditionalLinks, @))
+
 
     toggleAdditionalLinks: ->
+
+      console.log('toggleAdditionalLinksProxy')
 
       $selectionMenuContainer = $(@el).find('.BCK-selection-menu-container')
       $linkToAllContainer = $selectionMenuContainer.find('.BCK-LinkToOtherEntitiesContainer')
       $additionalLinksContainer = $linkToAllContainer.find(".BCK-additional-links-container")
 
       if $additionalLinksContainer.attr('data-is-open') == 'yes'
-        $additionalLinksContainer.hide()
-        $additionalLinksContainer.attr('data-is-open', 'no')
+        @hideAdditionalLinks()
       else
-        $additionalLinksContainer.show()
-        $additionalLinksContainer.attr('data-is-open', 'yes')
+        @showAdditionalLinks()
 
-        closeAdditionalLinks = (event) ->
+    hideAdditionalLinks: ->
 
-          isOutside = not $linkToAllContainer.is(event.target) and \
-            $linkToAllContainer.has(event.target).length == 0
+      $selectionMenuContainer = $(@el).find('.BCK-selection-menu-container')
+      $linkToAllContainer = $selectionMenuContainer.find('.BCK-LinkToOtherEntitiesContainer')
+      $additionalLinksContainer = $linkToAllContainer.find(".BCK-additional-links-container")
 
-          if isOutside
-            $additionalLinksContainer.hide()
-            $additionalLinksContainer.attr('data-is-open', 'no')
-            $(document).off 'mouseup', closeAdditionalLinks
+      $additionalLinksContainer.hide()
+      $additionalLinksContainer.attr('data-is-open', 'no')
 
-        $(document).mouseup closeAdditionalLinks
+    showAdditionalLinks: ->
+
+      $selectionMenuContainer = $(@el).find('.BCK-selection-menu-container')
+      $linkToAllContainer = $selectionMenuContainer.find('.BCK-LinkToOtherEntitiesContainer')
+      $additionalLinksContainer = $linkToAllContainer.find(".BCK-additional-links-container")
+
+      $additionalLinksContainer.show()
+      $additionalLinksContainer.attr('data-is-open', 'yes')
+
+      closeAdditionalLinks = (event) ->
+
+        isOutside = not $linkToAllContainer.is(event.target) and \
+          $linkToAllContainer.has(event.target).length == 0
+
+        if isOutside
+          $additionalLinksContainer.hide()
+          $additionalLinksContainer.attr('data-is-open', 'no')
+          $(document).off 'mouseup', closeAdditionalLinks
+
+      $(document).mouseup closeAdditionalLinks
+
 
     handleLinkToOtherEntitiesClick: (event) ->
 
