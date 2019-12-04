@@ -102,7 +102,7 @@ def get_classification_tree():
     final_tree = tree_generator.get_classification_tree()
 
     try:
-        cache_time = 3000000
+        cache_time = int(3.154e7)
         cache.set(cache_key, final_tree, cache_time)
     except Exception as e:
         traceback.print_exc()

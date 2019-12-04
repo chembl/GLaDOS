@@ -17,6 +17,4 @@ def get_organism_taxonomy(request):
 
 @require_GET
 def get_go_slim(request):
-    resp = go_slim.get_classification_tree()
-    print('resp: ', resp)
-    return JsonResponse(resp)
+    return JsonResponse(go_slim.get_classification_tree())
