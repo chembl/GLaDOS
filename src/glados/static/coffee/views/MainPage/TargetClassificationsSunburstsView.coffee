@@ -5,13 +5,13 @@ glados.useNameSpace 'glados.views.MainPage',
       protein_classification:
         label: 'Protein Target Tree'
         classification_type: glados.models.visualisation.TargetClassificationModel.Types.PROTEIN_CLASSIFICATION
+        selected: true
       organism_taxonomy:
         label: 'Organism Taxonomy'
         classification_type: glados.models.visualisation.TargetClassificationModel.Types.ORGANISM_TAXONOMY
       gene_ontology:
         label: 'Gene Ontology'
         classification_type: glados.models.visualisation.TargetClassificationModel.Types.GENE_ONTOLOGY
-        selected: true
 
     events:
       'change .BCK-TreeSelect': 'selectTree'

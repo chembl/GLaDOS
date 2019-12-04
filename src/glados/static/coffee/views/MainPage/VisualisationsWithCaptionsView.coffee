@@ -109,13 +109,13 @@ glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_CONFIG =
     link_url_function: -> SearchModel.getSearchURL()
     vis_title: 'Explore ChEMBL'
   1:
-    description: 'Representation of the ChEMBL protein target classification hierarchy.'
-    instructions: 'Click on a section to expand it and then click on the browse button to start exploring the target family in more detail.'
+    description: 'Representation of the ChEMBL target classification hierarchies.'
+    instructions: 'Click on a section to expand it and then click on the browse button below to start exploring the target family in more detail. Use the buttons on the top to explore different hierarchies.'
     template_id: 'Handlebars-Visualisations-ZoomableSunburst-Container'
     init_function: MainPageApp.initTargetClassificationSunburst
     link_title: 'Browse all Targets'
     link_url_function: -> Target.getTargetsListURL()
-    vis_title: 'Protein Targets in ChEMBL'
+    vis_title: 'Targets in ChEMBL'
     uses_browse_button_dynamically: true
   2:
     description: 'Bar chart showing the distribution of types of drugs (small molecules, antibodies etc) and the year they were approved for use.'
