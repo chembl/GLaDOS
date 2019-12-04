@@ -255,8 +255,6 @@ glados.useNameSpace 'glados.views.Browsers',
 
       availableDestinationEntities = []
 
-      console.log('LINKS TO OTHER ENTITIES')
-      console.log(@collection.getMeta('links_to_other_entities'))
       for entityName in @collection.getMeta('links_to_other_entities')
         if sourceEntity == 'Target' and entityName == 'Mechanism Of Action'
           availableDestinationEntities.push
