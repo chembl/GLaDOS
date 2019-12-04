@@ -111,6 +111,26 @@
 
 </script>
 
+<script id="Handlebars-Visualisations-SelectHierarchyTree" type="text/x-handlebars-template">
+
+     <div id="{{ group_id }}">
+         {{#each options}}
+         <input type="radio"
+                id="{{ this.radio_button_id }}"
+                name="radio"
+                {{#if this.is_selected}} checked="checked" {{/if}}
+                value="{{ this.value }}" >
+             <label for="{{ this.radio_button_id }}">
+                 {{ this.label }}
+             </label>
+         </input>
+         {{/each}}
+    </div>
+
+
+</script>
+
+
 <script id="Handlebars-Common-SortDirectionBtn" type="text/x-handlebars-template">
 
   <a class="waves-effect waves-light btn-mini teal btn-sort-direction" {{#if disabled}} disabled {{/if}}

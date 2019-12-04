@@ -5,33 +5,26 @@ glados.useNameSpace 'glados.views.MainPage',
 
     initialize: ->
       @config = arguments[0].config
-      @initTracking('ZoomableSunburst', glados.views.base.TrackView.viewTypes.VISUALISATION)
+      @initTracking('ZoomableSunburst-ProteinClass', glados.views.base.TrackView.viewTypes.VISUALISATION)
       @$vis_elem = $(@el).find('.BCK-sunburst-container')
       @setUpResponsiveRender()
       @model.on 'change', @render, @
 
     render: ->
+
       thisView = @
 
-      if @model.get('state') == glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE
-        return
-
-      if @model.get('state') == glados.models.Aggregations.Aggregation.States.LOADING_BUCKETS
-        return
-
-      if @model.get('state') != glados.models.Aggregations.Aggregation.States.INITIAL_STATE
-        return
-
-      @showCardContent()
       @$vis_elem.empty()
+      @showCardContent()
 
-      @ROOT = @getBucketData()
+      @ROOT = @getTreeData()
       @VIS_WIDTH = $(@el).width() - 10
       @VIS_HEIGHT = $(@el).height() - 15
       @RADIUS = (Math.min(@VIS_WIDTH, @VIS_HEIGHT) / 2)
       @FOCUS = @ROOT
       @MAX_LINE_HEIGHT = 12
       @LABEL_LEVELS_TO_SHOW = 3
+      @BASE_ID = "#{Math.floor((Math.random() * 10000) + 1)}"
 
       # ------------ helper functions --------------- #
       wrapText = (d) ->
@@ -43,13 +36,13 @@ glados.useNameSpace 'glados.views.MainPage',
         wrappedText = glados.Utils.Text.getTextForEllipsis(text, textLength, textLimit)
         self.text wrappedText
 
-      appendLabelText = (d, parent) ->
+      appendLabelText = (d, parentGroup) ->
 
         if d.name == 'root'
           return
 
-        group = d3.select(parent)
-        path = d3.select(parent).select('.text-path')
+        group = d3.select(parentGroup)
+        path = group.select('.text-path')
         pathID = path.attr('id')
 
         innerRadius = arc.innerRadius() (d)
@@ -79,6 +72,7 @@ glados.useNameSpace 'glados.views.MainPage',
             .attr("xlink:href", "##{pathID}")
             .attr("href", "##{pathID}")
             .text((d) -> d.name)
+            .style('fill', (d) -> textColor(d.assignedColor))
             .attr('data-limit-for-text', limitForText - 12)
 
         else
@@ -89,6 +83,7 @@ glados.useNameSpace 'glados.views.MainPage',
             .attr('dy', '.4em')
             .attr('x', (d) -> getRadius(d.y))
             .text((d) -> d.name)
+            .style('fill', (d) -> textColor(d.assignedColor))
             .attr('data-limit-for-text', limitForText)
             .attr('transform', (d) ->
               'rotate(' + thisView.computeTextRotation(d, getAngle) + ')'
@@ -122,6 +117,32 @@ glados.useNameSpace 'glados.views.MainPage',
             '#e95f7e',
             '#cc4362',
 
+        ])
+
+      textColor = d3.scale.ordinal()
+        .domain([
+          '#0b4d56',
+          '#066c70',
+          '#088d91',
+          '#41aeaf',
+          '#79cccb',
+          '#c4e6e5',
+          '#fdabbc',
+          '#f9849d',
+          '#e95f7e',
+          '#cc4362',
+        ])
+        .range([
+            '#ffffff',
+            '#ffffff',
+            '#ffffff'
+            '#000000',
+            '#000000',
+            '#000000',
+            '#000000',
+            '#ffffff',
+            '#ffffff',
+            '#ffffff',
         ])
 
       partition = d3.layout.partition()
@@ -160,12 +181,14 @@ glados.useNameSpace 'glados.views.MainPage',
         .classed('arc-path', true)
         .attr('d', arc)
         .style 'fill', (d) ->
-          color (if d.children then d else d.parent).name
+          assignedColor = color (if d.children then d else d.parent).name
+          d.assignedColor = assignedColor
+          return assignedColor
 
 #     append paths for text
       textPaths = sunburstGroup.append('path')
         .classed('text-path', true)
-        .attr('id', (d, i) -> "text-path-#{i}")
+        .attr('id', (d, i) -> "#{thisView.BASE_ID}-text-path-#{i}")
         .attr('d', textArc)
         .style('stroke', 'none')
 
@@ -217,6 +240,15 @@ glados.useNameSpace 'glados.views.MainPage',
           $elem.attr('data-qtip-configured', 'yes')
           thisView.numTooltips++
           $elem.trigger('mouseover')
+
+      thisView.repaintAllLabels = ->
+        d3.selectAll('.sunburst-text').remove()
+        f = thisView.FOCUS
+        sunburstGroup.each (d) ->
+
+          shouldCreateLabels = d.depth - f.depth <= thisView.LABEL_LEVELS_TO_SHOW and d.x >= f.x and d.x < (f.x + f.dx)
+          if shouldCreateLabels
+            appendLabelText(d, @)
 
 
       # --- click handling --- #
@@ -287,6 +319,7 @@ glados.useNameSpace 'glados.views.MainPage',
 #     trigger events
       sunburstGroup.on 'click',  click
       sunburstGroup.on 'mouseover', renderQTip
+      @fillBrowseButton(@FOCUS)
 
     computeTextRotation: (d, getAngle) ->
       (getAngle(d.x + d.dx / 2) - (Math.PI / 2)) / Math.PI * 180
@@ -304,42 +337,49 @@ glados.useNameSpace 'glados.views.MainPage',
           link_title: "Browse all #{d.name} Targets"
           link_url: d.link
 
-    getBucketData: ->
-      receivedBuckets = @model.get 'bucket_data'
+    getTreeData: ->
+      receivedRoot = @model.get 'root'
       id = 0
 
-      fillNode = (parent_node, input_node) ->
+      fillNode = (parentNode, currentNodeReceived) ->
 
         node = {}
-        node.name = input_node.key
-        node.size = input_node.doc_count
-        node.parent_id = parent_node.id
+        if currentNodeReceived.label?
+          node.name = currentNodeReceived.label
+        else
+          node.name = currentNodeReceived.id
+
+        node.size = currentNodeReceived.target_count
+        node.parent_id = parentNode.id
         node.id = id
-        node.link = input_node.link
-        node.depth = parent_node.depth + 1
-        node.parent = parent_node
+        node.link = currentNodeReceived.link
+        node.depth = parentNode.depth + 1
+        node.parent = parentNode
 
-        parent_node.children.push(node)
+        parentNode.children.push(node)
 
-        if input_node.children?
+        if currentNodeReceived.children?
           node.children = []
-          for child in input_node.children['buckets']
+          for childID, child of currentNodeReceived.children
             id++
             fillNode(node, child)
 
-      if receivedBuckets?
-        root = {}
-        root.depth = 0
-        root.name = 'root'
-        root.id = id
+      parsedRoot = {}
+      parsedRoot.depth = 0
+      parsedRoot.name = 'root'
+      parsedRoot.id = id
 
-        if receivedBuckets.children?
-          root.children = []
-          for node in receivedBuckets.children['buckets']
-            id++
-            fillNode(root, node)
+      parsedRoot.children = []
+      for nodeID, node of receivedRoot.children
+        id++
+        fillNode(parsedRoot, node)
 
-      return root
+      return parsedRoot
+
+    wakeUp: ->
+
+      @repaintAllLabels()
+      @fillBrowseButton(@FOCUS)
 
     showCardContent: ->
       $(@el).find('.card-preolader-to-hide').hide()

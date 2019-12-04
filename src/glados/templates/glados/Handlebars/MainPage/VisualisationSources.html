@@ -30,13 +30,21 @@
   </script>
 
   <script id="Handlebars-Carousel-items-bases" type="text/x-handlebars-template">
-
         {{#each visualisations_ids}}
             <div data-carousel-item-id="Carousel{{#if this.is_caption}}Caption{{else}}Visualisation{{/if}}{{this.id}}"
                  class="carousel-item">
             </div>
         {{/each}}
+  </script>
 
+  <script id="Handlebars-Sunburst-container" type="text/x-handlebars-template">
+      <div class="BCK-sunburst-container sunburst-container">
+          <div class="card-preolader-to-hide">
+            <div class="progress">
+              <div class="indeterminate"></div>
+            </div>
+          </div>
+      </div>
   </script>
 
   <script id="Handlebars-Carousel-items-caption" type="text/x-handlebars-template">

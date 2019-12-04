@@ -5,4 +5,5 @@ urlpatterns = [
     url(r'sssearch/', include('glados.api.chembl.sssearch.urls')),
     url(r'list_pagination/', include('glados.api.chembl.list_pagination.urls')),
     url(r'url_shortening/', include('glados.api.chembl.url_shortening.urls')),
+    url(r'visualisations/', include('glados.api.chembl.visualisations.urls')),
 ]
