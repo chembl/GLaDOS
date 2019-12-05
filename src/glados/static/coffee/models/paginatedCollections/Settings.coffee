@@ -427,7 +427,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
       MECHANISMS_OF_ACTION:
         ID_NAME: 'ESMechsOfAction'
-        LABEL: 'Mechanisms of Action'
+        LABEL: 'Drug Mechanisms'
         INDEX_NAME: 'chembl_mechanism_by_parent_target'
         BROWSE_LIST_URL: glados.models.Compound.MechanismOfAction.getListURL
         MODEL: glados.models.Compound.MechanismOfAction
