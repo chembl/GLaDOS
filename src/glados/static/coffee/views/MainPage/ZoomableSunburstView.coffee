@@ -10,6 +10,7 @@ glados.useNameSpace 'glados.views.MainPage',
       @setUpResponsiveRender()
       @model.on 'change', @render, @
 
+
     render: ->
 
       thisView = @
@@ -378,8 +379,12 @@ glados.useNameSpace 'glados.views.MainPage',
 
     wakeUp: ->
 
+      if @$vis_elem.children().length == 0
+        @render()
       @repaintAllLabels()
       @fillBrowseButton(@FOCUS)
+
+
 
     showCardContent: ->
       $(@el).find('.card-preolader-to-hide').hide()

@@ -38,7 +38,7 @@ glados.useNameSpace 'glados.apps.Browsers',
       tissues: 'Tissues'
       drugs: 'Drugs'
       activities: 'Activities'
-      mechanisms_of_action: 'Mechanisms of Action'
+      mechanisms_of_action: 'Drug Mechanisms'
       drug_indications: 'Drug Indications'
 
     @initBrowserForEntity = (entityName, query, state, isFullState=false) ->

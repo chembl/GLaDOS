@@ -1,8 +1,8 @@
 glados.useNameSpace 'glados.models.Compound',
   MechanismOfAction: Backbone.Model.extend
 
-    entityName: 'Mechanism Of Action'
-    entityNamePlural: 'Mechanisms Of Action'
+    entityName: 'Drug Mechanisms'
+    entityNamePlural: 'Drug Mechanisms'
     idAttribute:'mechanism_of_action.mec_id'
 
     parse: (response) ->

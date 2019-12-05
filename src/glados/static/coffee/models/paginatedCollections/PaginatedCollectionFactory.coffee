@@ -29,6 +29,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         for fGroupKey, selectedKeys of facetsState
 
           originalFGroupState = facetsState[fGroupKey]
+          if not facetGroups[fGroupKey]?
+            continue
           facetingHandler = facetGroups[fGroupKey].faceting_handler
           # make sure all restored facets are shown
           facetGroups[fGroupKey].show = true

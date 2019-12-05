@@ -16,7 +16,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         'molecule_properties.num_ro5_violations',
         'molecule_properties.full_mwt',
         'molecule_properties.alogp',
-        '_metadata.drug.is_drug',
         {
           property:'_metadata.atc_classifications.level1_description'
           sort:'asc'

@@ -42,6 +42,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         for fGroupKey, fGroupState of facetsState
 
           originalFGroupState = facetsState[fGroupKey]
+          if not facetGroups[fGroupKey]?
+            continue
           facetingHandler = facetGroups[fGroupKey].faceting_handler
           facetingHandler.loadState(originalFGroupState)
           @setMeta('skip_clean_up_once', true)

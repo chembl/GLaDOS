@@ -67,6 +67,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             next: 12
         LINKS_TO_OTHER_ENTITIES: [
           Activity.prototype.entityName,
+          glados.models.Compound.Drug.prototype.entityName,
           glados.models.Compound.MechanismOfAction.prototype.entityName,
           glados.models.Compound.DrugIndication.prototype.entityName
         ]
@@ -247,6 +248,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         ENABLE_COLLECTION_CACHING: true
         LINKS_TO_OTHER_ENTITIES: [
           Activity.prototype.entityName,
+          glados.models.Compound.Drug.prototype.entityName,
           glados.models.Compound.MechanismOfAction.prototype.entityName,
           glados.models.Compound.DrugIndication.prototype.entityName
         ]
@@ -425,7 +427,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
       MECHANISMS_OF_ACTION:
         ID_NAME: 'ESMechsOfAction'
-        LABEL: 'Mechanisms of Action'
+        LABEL: 'Drug Mechanisms'
         INDEX_NAME: 'chembl_mechanism_by_parent_target'
         BROWSE_LIST_URL: glados.models.Compound.MechanismOfAction.getListURL
         MODEL: glados.models.Compound.MechanismOfAction

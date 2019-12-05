@@ -171,7 +171,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       el: $('#MechOfActCard')
       resource_type: gettext('glados_entities_compound_name')
       section_id: 'MechanismOfAction'
-      section_label: 'Mechanism Of Action'
+      section_label: 'Drug Mechanisms'
       entity_name: Compound.prototype.entityName
       config: viewConfig
       report_card_app: @
@@ -214,7 +214,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       el: $('#CDrugIndicationsCard')
       resource_type: gettext('glados_entities_compound_name')
       section_id: 'Indications'
-      section_label: 'Indications'
+      section_label: 'Drug Indications'
       entity_name: Compound.prototype.entityName
       config: viewConfig
       report_card_app: @
