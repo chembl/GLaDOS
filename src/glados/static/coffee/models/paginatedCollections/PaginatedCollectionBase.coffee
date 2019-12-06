@@ -163,6 +163,21 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             'drug_indication.molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})'+
             ' OR '+
             'drug_indication.parent_molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
+      "#{glados.models.Compound.Drug.prototype.entityName}":
+        "#{Activity.prototype.entityName}":\
+          Handlebars.compile('molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
+        "#{glados.models.Compound.Drug.prototype.entityName}":\
+          Handlebars.compile('molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
+        "#{glados.models.Compound.MechanismOfAction.prototype.entityName}":\
+          Handlebars.compile(
+            'mechanism_of_action.molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})'+
+            ' OR '+
+            'mechanism_of_action.parent_molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
+        "#{glados.models.Compound.DrugIndication.prototype.entityName}":\
+          Handlebars.compile(
+            'drug_indication.molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})'+
+            ' OR '+
+            'drug_indication.parent_molecule_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
       "#{Target.prototype.entityName}":
         "#{Activity.prototype.entityName}":\
           Handlebars.compile('target_chembl_id:({{#each ids}}"{{this}}"{{#unless @last}} OR {{/unless}}{{/each}})')
