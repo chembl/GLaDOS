@@ -149,7 +149,7 @@ glados.useNameSpace 'glados.views.Visualisation',
         X_AXIS_HEIGHT = 0
         Y_AXIS_WIDTH = 0
 
-      if @config.hide_title
+      if @config.hide_title or @config.external_title
         TITLE_Y = 0
         TITLE_Y_PADDING = 0
 
@@ -226,6 +226,7 @@ glados.useNameSpace 'glados.views.Visualisation',
       # add title
       #-----------------------------------------------------------------------------------------------------------------
       unless @config.hide_title
+
         totalItems = _.reduce(bucketSizes, ((a, b) -> a + b))
         totalItemsTxt = '(' + totalItems + ')'
 
@@ -236,16 +237,32 @@ glados.useNameSpace 'glados.views.Visualisation',
         if @config.big_size
            titleText += ' ' + totalItemsTxt
 
-        mainSVGContainer.append('text')
-          .text(titleText)
-          .attr('x', VISUALISATION_WIDTH/2)
-          .attr('y', TITLE_Y)
-          .attr('text-anchor', 'middle')
-          .classed('title', @config.big_size)
-          .on('click',
-            if @config.title_link_url
-              -> glados.Utils.URLS.shortenLinkIfTooLongAndOpen(thisView.config.title_link_url)
-          )
+        if @config.external_title
+
+          $titleContainer = $(@el).find('.BCK-histogram-title')
+          glados.Utils.fillContentForElement $titleContainer,
+            title: titleText
+
+          if @config.title_link_url
+            $titleLink = $titleContainer.find('.menu-button')
+            $titleLink.click(-> glados.Utils.URLS.shortenLinkIfTooLongAndOpen(thisView.config.title_link_url))
+
+        else
+
+          mainSVGContainer.append('text')
+            .text(titleText)
+            .attr('x', VISUALISATION_WIDTH/2)
+            .attr('y', TITLE_Y)
+            .attr('text-anchor', 'middle')
+            .classed('title', @config.big_size)
+            .on('click',
+              if @config.title_link_url
+                -> glados.Utils.URLS.shortenLinkIfTooLongAndOpen(thisView.config.title_link_url)
+            )
+
+
+
+
 
       if not @config.big_size
         return

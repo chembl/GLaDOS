@@ -432,6 +432,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       title: 'Documents by Year'
       title_link_url: Document.getDocumentsListURL('_metadata.related_compounds.all_chembl_ids:' +
         chemblID)
+      external_title: true
       max_z_categories: 7
       max_height: 320
 

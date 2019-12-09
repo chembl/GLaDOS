@@ -266,6 +266,7 @@ class TargetReportCardApp extends glados.ReportCardApp
       title: 'Associated Compounds for Target ' + chemblID
       title_link_url: Compound.getCompoundsListURL('_metadata.related_targets.all_chembl_ids:' +
         chemblID)
+      external_title: true
       range_categories: true
 
     config =
