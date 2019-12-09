@@ -144,6 +144,7 @@ class TissueReportCardApp extends glados.ReportCardApp
       x_axis_prop_name: 'x_axis_agg'
       title: 'Associated Compounds for Tissue ' + chemblID
       title_link_url: Compound.getCompoundsListURL('_metadata.related_tissues.all_chembl_ids:' + chemblID)
+      external_title: true
       range_categories: true
 
     config =

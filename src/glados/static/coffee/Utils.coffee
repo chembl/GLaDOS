@@ -779,10 +779,12 @@ glados.useNameSpace 'glados',
 
 
             $('#GladosMainSplashScreen').hide()
-            window.open newHref
+            window.location.href = newHref
+            return false
 
         else
-          window.open url
+          window.location.href = url
+          return false
 
       getShortenedEmbebURLPromise: (url) ->
 
