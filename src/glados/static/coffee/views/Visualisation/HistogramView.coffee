@@ -243,9 +243,17 @@ glados.useNameSpace 'glados.views.Visualisation',
           glados.Utils.fillContentForElement $titleContainer,
             title: titleText
 
+          console.log('title_link_url: ', @config.title_link_url)
           if @config.title_link_url
+
             $titleLink = $titleContainer.find('.menu-button')
-            $titleLink.click(-> glados.Utils.URLS.shortenLinkIfTooLongAndOpen(thisView.config.title_link_url))
+            console.log('$titleLink: ', $titleLink)
+            $titleLink.click(->
+              console.log('CLICK ON TITLE!')
+              glados.Utils.URLS.shortenLinkIfTooLongAndOpen(thisView.config.title_link_url)
+            )
+
+
 
         else
 
