@@ -321,7 +321,7 @@
   {{#if show_warning_icon}} <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{/if}}
   {{message}}
   {{#if link_url}}
-    <a target="_blank" href="{{link_url}}">{{link_text}}</a>
+    <a href="{{link_url}}">{{link_text}}</a>
   {{/if}}
 </script>
 
@@ -374,7 +374,7 @@
   <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> The following results were excluded from the plot
   because in any of the shown axes their value is null: <br>
   {{#each rejected}}
-    <a href="/compound_report_card/{{id}}" target="_blank" {{#if selected}}class="green lighten-5"{{/if}}>{{id}}</a>
+    <a href="/compound_report_card/{{id}}" {{#if selected}}class="green lighten-5"{{/if}}>{{id}}</a>
   {{/each}}
 </script>
 
@@ -401,7 +401,7 @@
 </script>
 
 <script id="Handlebars-Common-PieAllSourcesLink" type="text/x-handlebars-template">
-<a target='_blank' href="{{url}}" > {{link_text}}</a>
+<a href="{{url}}" > {{link_text}}</a>
 </script>
 
 <script id="Handlebars-Common-MiniHistogramContainer" type="text/x-handlebars-template">

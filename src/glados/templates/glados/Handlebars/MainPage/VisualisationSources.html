@@ -16,7 +16,7 @@
                      data-hb-template="Handlebars-circles-browser-button"
                      data-viz-item-id="Visualisation{{this.id}}">
 
-                    <a class="hollow-button" href="{{ this.link_url }}" target="_blank">
+                    <a class="hollow-button" href="{{ this.link_url }}">
 
                         {{ this.link_title }}
 
@@ -65,8 +65,7 @@
                     data-hb-template="Handlebars-main-page-browser-button"
                     data-viz-item-id="Visualisation{{vis_id}}"
                  >
-                     <a class="btn-chembl" href="{{ link_url }}"
-                        target="_blank">
+                     <a class="btn-chembl" href="{{ link_url }}">
 
                          {{ link_title }}
                      </a>
@@ -99,15 +98,14 @@
   </script>
 
     <script id="Handlebars-main-page-browser-button" type="text/x-handlebars-template">
-       <a class="btn-chembl" href="{{ link_url }}"
-            target="_blank">
+       <a class="btn-chembl" href="{{ link_url }}">
              {{ link_title }}
         </a>
    </script>
 
    <script id="Handlebars-circles-browser-button" type="text/x-handlebars-template">
 
-             <a class="hollow-button" href="{{ link_url }}" target="_blank">
+             <a class="hollow-button" href="{{ link_url }}">
                   {{ link_title }}
              </a>
 
