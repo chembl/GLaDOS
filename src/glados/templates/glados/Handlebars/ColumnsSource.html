@@ -59,17 +59,17 @@
             {{/each}}
         {{else if this.has_highlight}}
             {{#if this.has_link}}
-                <a href="{{this.link_url}}" target="_blank">{{{this.highlighted_value}}}</a>
+                <a href="{{this.link_url}}" >{{{this.highlighted_value}}}</a>
             {{else}}
                 {{{this.highlighted_value}}}
             {{/if}}
         {{ else if this.no_data }}
             {{this.value}}
         {{else if this.has_link}}
-            <a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
+            <a href="{{this.link_url}}" >{{this.value}}</a>
         {{else if this.has_multiple_links}}
             {{#each this.links_values}}
-                <a href="{{this.url}}" target="_blank">{{this.text}}</a>{{#unless @last }}, {{/unless}}
+                <a href="{{this.url}}" >{{this.text}}</a>{{#unless @last }}, {{/unless}}
             {{/each}}
         {{else if this.custom_html}}
             {{{this.custom_html}}}
@@ -88,12 +88,12 @@
                     <p class="css-tooltip z-depth-5">
                         {{#if this.has_highlight}}
                             {{#if this.has_link}}
-                                <a href="{{this.link_url}}" target="_blank">{{{this.highlighted_value}}}</a>
+                                <a href="{{this.link_url}}" >{{{this.highlighted_value}}}</a>
                             {{else}}
                                 {{{this.highlighted_value}}}
                             {{/if}}
                         {{else if this.has_link}}
-                            <a href="{{this.link_url}}" target="_blank">{{this.value}}</a>
+                            <a href="{{this.link_url}}" >{{this.value}}</a>
                         {{/if}}
                     </p>
                     </div>

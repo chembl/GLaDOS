@@ -135,12 +135,12 @@
             <i class="BCK-preloader fa fa-cog fa-spin fa-fw" data-destination-entity="{{ first_entity.singular }}"
             style="display: none">
             </i>
-            <a target="_blank" class="BCK-LinkToOtherEntities {{#if too_many_items}}disabled{{/if}}"
+            <a class="BCK-LinkToOtherEntities {{#if too_many_items}}disabled{{/if}}"
             data-destination-entity="{{ first_entity.singular }}">
                 Browse {{ first_entity.plural }}
             </a>
             
-            <a {% endverbatim %}href="{%  url 'faqs_browsing_related_entities' %}"{% verbatim %} target="_blank">
+            <a {% endverbatim %}href="{%  url 'faqs_browsing_related_entities' %}"{% verbatim %}>
                 <i class="BCK-preloader fa fa-question-circle" ></i>
             </a>
         </div>
