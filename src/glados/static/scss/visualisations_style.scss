@@ -463,17 +463,8 @@
   .pie-title {
 
     a {
-      cursor: pointer;
-      font-size: 85%;
-      font-family: "ChEMBL_HelveticaNeueLTPRo", helvetica, Arial, sans-serif;
-      color: $grey-dark;
-      text-align: center;
-      width: 100%;
+      max-width: 80%;
     }
-  }
-
-  .pie-title a:hover {
-    color: $teal-accent;
   }
 
   .pie-content {
