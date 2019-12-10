@@ -4,7 +4,7 @@ glados.useNameSpace 'glados.views.MainPage',
     CLASSIFICATION_TREES:
       in_vivo:
         label: 'In vivo assays'
-        classification_type: glados.models.visualisation.TargetClassificationModel.Types.PROTEIN_CLASSIFICATION
+        classification_type: glados.models.visualisation.AssayClassificationModel.Types.IN_VIVO
         selected: true
 
     initialize: ->
@@ -12,7 +12,14 @@ glados.useNameSpace 'glados.views.MainPage',
       @config = arguments[0].config
       @render()
 
+    showCardContent: ->
+
+      $(@el).find('.card-preolader-to-hide').hide()
+      $(@el).find('.card-content').show()
+
     render: ->
+
+      @showCardContent()
 
       treeKey = 'in_vivo'
       treeDesc = @CLASSIFICATION_TREES[treeKey]
@@ -29,3 +36,15 @@ glados.useNameSpace 'glados.views.MainPage',
       $sunburstElem.html(glados.Utils.getContentFromTemplate(templateID))
       $viewContainer.append($sunburstElem)
       treeDesc.viewElementID = viewElementID
+
+      assayClassificationModel = new glados.models.visualisation.AssayClassificationModel
+        type: treeDesc.classification_type
+
+      view = new glados.views.MainPage.ZoomableSunburstView
+          el: $sunburstElem
+          config: @config
+          model: assayClassificationModel
+
+      $sunburstElem.show()
+
+      assayClassificationModel.fetch()

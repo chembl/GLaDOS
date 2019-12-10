@@ -4,12 +4,13 @@ glados.useNameSpace 'glados.views.MainPage',
   .extend(glados.views.base.TrackView).extend
 
     initialize: ->
+
       @config = arguments[0].config
       @initTracking('ZoomableSunburst-ProteinClass', glados.views.base.TrackView.viewTypes.VISUALISATION)
       @$vis_elem = $(@el).find('.BCK-sunburst-container')
+      @$vis_elem.attr('id', "sunburst-#{Math.floor((Math.random() * 10000) + 1)}")
       @setUpResponsiveRender()
       @model.on 'change', @render, @
-
 
     render: ->
 
@@ -243,7 +244,8 @@ glados.useNameSpace 'glados.views.MainPage',
           $elem.trigger('mouseover')
 
       thisView.repaintAllLabels = ->
-        d3.selectAll('.sunburst-text').remove()
+
+        d3.selectAll("##{thisView.$vis_elem.attr('id')} .sunburst-text").remove()
         f = thisView.FOCUS
         sunburstGroup.each (d) ->
 
@@ -283,7 +285,7 @@ glados.useNameSpace 'glados.views.MainPage',
 #       if focus changes
         if thisView.FOCUS != d
 
-          d3.selectAll('.sunburst-text').remove()
+          d3.selectAll("##{thisView.$vis_elem.attr('id')} .sunburst-text").remove()
 
           if thisView.config.browse_button
             thisView.fillBrowseButton(d)
