@@ -189,9 +189,9 @@ class TargetHierarchyTreeGenerator:
     def build_final_tree(self):
 
         self.parsed_tree_root = load_tree_from_agg(self.raw_tree_root)
-        self.load_target_counts()
+        self.load_item_counts()
 
-    def load_target_counts(self):
+    def load_item_counts(self):
 
         self.nodes_index = get_nodes_index(self.parsed_tree_root)
         self.count_queries = generate_count_queries_parent_to_child(self.parsed_tree_root, self.query_generator)
@@ -226,7 +226,7 @@ class TargetHierarchyTreeGenerator:
     def add_counts_to_tree(self):
 
         for node_path_str, query in self.count_queries.items():
-            self.nodes_index[node_path_str]['target_count'] = query['count']
+            self.nodes_index[node_path_str]['count'] = query['count']
             self.nodes_index[node_path_str]['query_string'] = query['query']
 
 
@@ -268,9 +268,9 @@ class GoSlimTreeGenerator(TargetHierarchyTreeGenerator):
 
     def build_final_tree(self):
         self.parsed_tree_root = load_tree_from_hits(self.raw_tree_root)
-        self.load_target_counts()
+        self.load_item_counts()
 
-    def load_target_counts(self):
+    def load_item_counts(self):
         self.nodes_index = get_nodes_index(self.parsed_tree_root)
         self.count_queries = generate_count_queries_child_to_parent(self.parsed_tree_root, self.query_generator)
         self.execute_count_queries()
