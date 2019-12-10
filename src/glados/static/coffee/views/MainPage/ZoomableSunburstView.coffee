@@ -350,7 +350,7 @@ glados.useNameSpace 'glados.views.MainPage',
         else
           node.name = currentNodeReceived.id
 
-        node.size = currentNodeReceived.target_count
+        node.size = currentNodeReceived.count
         node.parent_id = parentNode.id
         node.id = id
         node.link = currentNodeReceived.link

@@ -6,7 +6,7 @@ from src.glados.api.chembl.visualisations.shared.tree_generator import TargetHie
 
 
 def get_classification_tree():
-    cache_key = 'target_classifications_protein_class'
+    cache_key = 'target_classifications_protein_class_1'
     cache_response = None
     try:
         cache_response = cache.get(cache_key)
