@@ -1,6 +1,8 @@
 import traceback
+
 from django.core.cache import cache
-from .shared.tree_generator import TargetHierarchyTreeGenerator
+
+from src.glados.api.chembl.visualisations.shared.tree_generator import TargetHierarchyTreeGenerator
 
 
 def get_classification_tree():
@@ -97,7 +99,7 @@ def get_classification_tree():
         return ' AND '.join(queries)
 
     tree_generator = TargetHierarchyTreeGenerator(index_name=index_name, es_query=es_query,
-                                                  query_generator=generate_count_query)
+                                                  query_generator=generate_count_query, count_index='chembl_target')
 
     final_tree = tree_generator.get_classification_tree()
 

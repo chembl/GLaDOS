@@ -166,7 +166,7 @@ def generate_count_queries_child_to_parent(tree_root_nodes, query_generator):
 
 
 class TargetHierarchyTreeGenerator:
-    def __init__(self, index_name, es_query, query_generator):
+    def __init__(self, index_name, es_query, query_generator, count_index):
 
         self.index_name = index_name
         self.es_query = es_query
@@ -175,6 +175,7 @@ class TargetHierarchyTreeGenerator:
         self.parsed_tree_root = {}
         self.count_queries = {}
         self.nodes_index = {}
+        self.count_index = count_index
 
     def get_classification_tree(self):
 
@@ -199,7 +200,7 @@ class TargetHierarchyTreeGenerator:
 
     def execute_count_queries(self):
 
-        ms = MultiSearch(index='chembl_target')
+        ms = MultiSearch(index=self.count_index)
 
         target_classes = list(self.count_queries.keys())  # be sure to be consistent with the order
 
@@ -236,6 +237,7 @@ class GoSlimTreeGenerator(TargetHierarchyTreeGenerator):
 
     def __init__(self):
         self.index_name = 'chembl_go_slim'
+        self.count_index = 'chembl_target'
         self.es_query = {
             "size": 1000,
             "from": 0
