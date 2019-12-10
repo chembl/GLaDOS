@@ -22,7 +22,6 @@ class MainPageApp
 # ----------------------------------------------------------------------------------------------------------------------
   @initTargetClassificationSunburst = ($browseButtonContainer) ->
 
-    console.log('@initTargetClassificationSunburst')
     config =
       browse_all_link: "#{glados.Settings.GLADOS_BASE_URL_FULL}/g/#browse/targets"
       browse_button: true
@@ -30,6 +29,20 @@ class MainPageApp
 
     view = new glados.views.MainPage.TargetClassificationsSunburstsView
       el: $('#BCK-protein-classification-zoomburst')
+      config: config
+
+    return view
+
+  @initAssayClassificationSunburst = ($browseButtonContainer) ->
+
+    console.log('@initTargetClassificationSunburst')
+    config =
+      browse_all_link: "#{glados.Settings.GLADOS_BASE_URL_FULL}/g/#browse/assays"
+      browse_button: true
+      browse_button_container: $browseButtonContainer
+
+    view = new glados.views.MainPage.AssayClassificationsSunburstsView
+      el: $('#BCK-assay-classification-zoomburst')
       config: config
 
     return view
