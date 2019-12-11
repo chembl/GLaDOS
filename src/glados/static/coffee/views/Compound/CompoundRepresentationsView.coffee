@@ -45,9 +45,8 @@ CompoundRepresentationsView = CardView.extend
     )
     # Download button/link
     ButtonsHelper.initLinkButton($(@el).find('#Reps-Molfile-dnld,#Reps-Molfile-dnld-small'), 'Download SDF File', ->
-      compound_model.get('get_sdf_content_promise')().done (molfile_data) ->
-        blob = new Blob([molfile_data], {type: "chemical/x-mdl-sdfile;charset=utf-8"})
-        saveAs(blob, compound_model.get('molecule_chembl_id')+'.sdf') unless glados.JS_TEST_MODE
+      sdfURL = "#{glados.Settings.WS_BASE_URL}molecule/#{thisView.model.get('id')}.sdf"
+      window.open(sdfURL)
     )
 
     # Editor button/link
