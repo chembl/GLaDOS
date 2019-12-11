@@ -6,6 +6,7 @@ glados.useNameSpace 'glados.views.MainPage',
     initialize: ->
 
       @config = arguments[0].config
+      console.log('@config: ', @config)
       @initTracking('ZoomableSunburst-ProteinClass', glados.views.base.TrackView.viewTypes.VISUALISATION)
       @$vis_elem = $(@el).find('.BCK-sunburst-container')
       @$vis_elem.attr('id', "sunburst-#{Math.floor((Math.random() * 10000) + 1)}")
@@ -333,11 +334,11 @@ glados.useNameSpace 'glados.views.MainPage',
 
       if d.name == 'root'
         glados.Utils.fillContentForElement $browseButtonContainer,
-          link_title: "Browse all Targets"
+          link_title: "Browse all #{@config.entity_name_plural}"
           link_url: Target.getTargetsListURL()
       else
         glados.Utils.fillContentForElement $browseButtonContainer,
-          link_title: "Browse all #{d.name} Targets"
+          link_title: "Browse all #{d.name} #{@config.entity_name_plural}"
           link_url: d.link
 
     getTreeData: ->
