@@ -4,23 +4,14 @@
 
 {% block general_content %}
 
-      The two tables below display ChEMBL single-protein targets which are predicted to interact with CHEMBL25. A 1uM
-      and 10 uM cut-off have been applied to ChEMBL bioactivity data used to generate the respective models and the
-      <span class="light-green lighten-5">green coloured rows</span> correspond to genuine predictions, i.e. targets not
-      included in the original training set for
-      this compound.
+    The two table below displays ChEMBL single-protein targets which are predicted to interact with
+    <span class="BCK-Predictions-MolChemblID"></span>.
+    The <span class="light-green lighten-5">green coloured rows</span> correspond to genuine predictions, i.e.
+    targets not included in the original training set for this compound.
 
-      <h4>1uM</h4>
-
-      <div class="BCK-1MicroMolar-Predictions">
+    <div class="BCK-1MicroMolar-Predictions">
         {% include "glados/base/PaginatedCollections/DefaultTableContentB.html" %}
-      </div>
-
-      <h4>10uM</h4>
-
-      <div class="BCK-10MicroMolar-Predictions">
-        {% include "glados/base/PaginatedCollections/DefaultTableContentB.html" %}
-      </div>
+    </div>
 
 
 {% endblock %}
