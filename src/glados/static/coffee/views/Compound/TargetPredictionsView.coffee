@@ -24,18 +24,6 @@ glados.useNameSpace 'glados.views.Compound',
       glados.views.PaginatedViews.PaginatedViewFactory.getNewTablePaginatedView(
         list1uM, $(@el).find('.BCK-1MicroMolar-Predictions'), customRenderEvent=undefined, disableColumnsSelection=true)
 
-      filterFunc10uM = (p) -> p.value == 10
-      generator10uM =
-        model: @model
-        generator_property: '_metadata.target_predictions'
-        filter: filterFunc10uM
-        sort_by_function: sortByFunc
-
-      list10uM = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewClientSideCollectionFor(settings,
-        generator10uM)
-
-      glados.views.PaginatedViews.PaginatedViewFactory.getNewTablePaginatedView(
-        list10uM, $(@el).find('.BCK-10MicroMolar-Predictions'), customRenderEvent=undefined, disableColumnsSelection=true)
 
       @initEmbedModal(arguments[0].embed_section_name, arguments[0].embed_identifier)
       @activateModals()
@@ -50,6 +38,9 @@ glados.useNameSpace 'glados.views.Compound',
       if rawTargetPredidctions.length == 0
         @hideSection()
         return
+
+      $chemblIDSpan = $(@el).find('.BCK-Predictions-MolChemblID')
+      $chemblIDSpan.text(@model.get('id'))
 
       @showCardContent()
       @showSection()
