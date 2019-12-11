@@ -2,7 +2,7 @@ import traceback
 
 from django.core.cache import cache
 
-from src.glados.api.chembl.visualisations.shared.tree_generator import GoSlimTreeGenerator
+from glados.api.chembl.visualisations.shared.tree_generator import GoSlimTreeGenerator
 
 
 def get_classification_tree():

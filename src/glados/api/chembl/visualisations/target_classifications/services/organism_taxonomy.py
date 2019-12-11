@@ -2,7 +2,7 @@ import traceback
 
 from django.core.cache import cache
 
-from src.glados.api.chembl.visualisations.shared.tree_generator import TargetHierarchyTreeGenerator
+from glados.api.chembl.visualisations.shared.tree_generator import TargetHierarchyTreeGenerator
 
 
 def get_classification_tree():
