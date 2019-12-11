@@ -35,16 +35,8 @@ CompoundRepresentationsView = CardView.extend
     @model.get('get_sdf_content_promise')().done( )
 
     # View Raw button/link
-    raw_modal = $(@el).find('#SDF-raw-modal')
-    raw_modal_title = $(@el).find('#SDF-raw-modal-title')
-    raw_modal_content = $(@el).find('.SDF-raw-modal-content')
-    ButtonsHelper.initLinkButton($(@el).find('#Reps-Molfile-rawview,#Reps-Molfile-rawview-small'), 'View Raw SDF File', ->
-      compound_model.get('get_sdf_content_promise')().done (molfile_data) ->
-        raw_modal_title.text(compound_model.get('molecule_chembl_id'))
-        raw_modal_content.html(molfile_data.replace(/[\n\r]/g,'<br/>'))
-    )
-    # Download button/link
-    ButtonsHelper.initLinkButton($(@el).find('#Reps-Molfile-dnld,#Reps-Molfile-dnld-small'), 'Download SDF File', ->
+
+    ButtonsHelper.initLinkButton($(@el).find('#Reps-Molfile-rawview,#Reps-Molfile-rawview-small'), 'View SDF File', ->
       sdfURL = "#{glados.Settings.WS_BASE_URL}molecule/#{thisView.model.get('id')}.sdf"
       window.open(sdfURL)
     )
