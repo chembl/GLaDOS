@@ -4,12 +4,14 @@ glados.useNameSpace 'glados.views.MainPage',
   .extend(glados.views.base.TrackView).extend
 
     initialize: ->
+
       @config = arguments[0].config
+      console.log('@config: ', @config)
       @initTracking('ZoomableSunburst-ProteinClass', glados.views.base.TrackView.viewTypes.VISUALISATION)
       @$vis_elem = $(@el).find('.BCK-sunburst-container')
+      @$vis_elem.attr('id', "sunburst-#{Math.floor((Math.random() * 10000) + 1)}")
       @setUpResponsiveRender()
       @model.on 'change', @render, @
-
 
     render: ->
 
@@ -243,7 +245,8 @@ glados.useNameSpace 'glados.views.MainPage',
           $elem.trigger('mouseover')
 
       thisView.repaintAllLabels = ->
-        d3.selectAll('.sunburst-text').remove()
+
+        d3.selectAll("##{thisView.$vis_elem.attr('id')} .sunburst-text").remove()
         f = thisView.FOCUS
         sunburstGroup.each (d) ->
 
@@ -283,7 +286,7 @@ glados.useNameSpace 'glados.views.MainPage',
 #       if focus changes
         if thisView.FOCUS != d
 
-          d3.selectAll('.sunburst-text').remove()
+          d3.selectAll("##{thisView.$vis_elem.attr('id')} .sunburst-text").remove()
 
           if thisView.config.browse_button
             thisView.fillBrowseButton(d)
@@ -331,11 +334,11 @@ glados.useNameSpace 'glados.views.MainPage',
 
       if d.name == 'root'
         glados.Utils.fillContentForElement $browseButtonContainer,
-          link_title: "Browse all Targets"
+          link_title: "Browse all #{@config.entity_name_plural}"
           link_url: Target.getTargetsListURL()
       else
         glados.Utils.fillContentForElement $browseButtonContainer,
-          link_title: "Browse all #{d.name} Targets"
+          link_title: "Browse all #{d.name} #{@config.entity_name_plural}"
           link_url: d.link
 
     getTreeData: ->
@@ -350,7 +353,7 @@ glados.useNameSpace 'glados.views.MainPage',
         else
           node.name = currentNodeReceived.id
 
-        node.size = currentNodeReceived.target_count
+        node.size = currentNodeReceived.count
         node.parent_id = parentNode.id
         node.id = id
         node.link = currentNodeReceived.link

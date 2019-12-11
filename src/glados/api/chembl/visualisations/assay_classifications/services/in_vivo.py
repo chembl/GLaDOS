@@ -6,7 +6,7 @@ from glados.api.chembl.visualisations.shared.tree_generator import TargetHierarc
 
 
 def get_classification_tree():
-    cache_key = 'target_classifications_organism_taxonomy_1'
+    cache_key = 'assay_classifications_in_vivo'
     cache_response = None
     try:
         cache_response = cache.get(cache_key)
@@ -17,13 +17,14 @@ def get_classification_tree():
         print('results are in cache')
         return cache_response
 
-    index_name = 'chembl_organism'
+    index_name = 'chembl_assay_class'
     es_query = {
+        "size": 0,
         "aggs": {
             "children": {
                 "terms": {
                     "field": "l1",
-                    "size": 100,
+                    "size": 1000,
                     "order": {
                         "_count": "desc"
                     }
@@ -32,7 +33,7 @@ def get_classification_tree():
                     "children": {
                         "terms": {
                             "field": "l2",
-                            "size": 100,
+                            "size": 1000,
                             "order": {
                                 "_count": "desc"
                             }
@@ -41,7 +42,7 @@ def get_classification_tree():
                             "children": {
                                 "terms": {
                                     "field": "l3",
-                                    "size": 100,
+                                    "size": 1000,
                                     "order": {
                                         "_count": "desc"
                                     }
@@ -59,13 +60,14 @@ def get_classification_tree():
         queries = []
         level = 1
         for node in path_to_node:
-            queries.append('_metadata.organism_taxonomy.l{level}:("{class_name}")'.format(level=level, class_name=node))
+            queries.append('assay_classifications.l{level}:("{class_name}")'.format(level=level,
+                                                                                    class_name=node))
             level += 1
 
         return ' AND '.join(queries)
 
     tree_generator = TargetHierarchyTreeGenerator(index_name=index_name, es_query=es_query,
-                                                  query_generator=generate_count_query, count_index='chembl_target')
+                                                  query_generator=generate_count_query, count_index='chembl_assay')
 
     final_tree = tree_generator.get_classification_tree()
 

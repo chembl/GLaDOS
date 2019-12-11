@@ -166,7 +166,7 @@ def generate_count_queries_child_to_parent(tree_root_nodes, query_generator):
 
 
 class TargetHierarchyTreeGenerator:
-    def __init__(self, index_name, es_query, query_generator):
+    def __init__(self, index_name, es_query, query_generator, count_index):
 
         self.index_name = index_name
         self.es_query = es_query
@@ -175,6 +175,7 @@ class TargetHierarchyTreeGenerator:
         self.parsed_tree_root = {}
         self.count_queries = {}
         self.nodes_index = {}
+        self.count_index = count_index
 
     def get_classification_tree(self):
 
@@ -188,9 +189,9 @@ class TargetHierarchyTreeGenerator:
     def build_final_tree(self):
 
         self.parsed_tree_root = load_tree_from_agg(self.raw_tree_root)
-        self.load_target_counts()
+        self.load_item_counts()
 
-    def load_target_counts(self):
+    def load_item_counts(self):
 
         self.nodes_index = get_nodes_index(self.parsed_tree_root)
         self.count_queries = generate_count_queries_parent_to_child(self.parsed_tree_root, self.query_generator)
@@ -199,7 +200,7 @@ class TargetHierarchyTreeGenerator:
 
     def execute_count_queries(self):
 
-        ms = MultiSearch(index='chembl_target')
+        ms = MultiSearch(index=self.count_index)
 
         target_classes = list(self.count_queries.keys())  # be sure to be consistent with the order
 
@@ -225,7 +226,7 @@ class TargetHierarchyTreeGenerator:
     def add_counts_to_tree(self):
 
         for node_path_str, query in self.count_queries.items():
-            self.nodes_index[node_path_str]['target_count'] = query['count']
+            self.nodes_index[node_path_str]['count'] = query['count']
             self.nodes_index[node_path_str]['query_string'] = query['query']
 
 
@@ -236,6 +237,7 @@ class GoSlimTreeGenerator(TargetHierarchyTreeGenerator):
 
     def __init__(self):
         self.index_name = 'chembl_go_slim'
+        self.count_index = 'chembl_target'
         self.es_query = {
             "size": 1000,
             "from": 0
@@ -266,9 +268,9 @@ class GoSlimTreeGenerator(TargetHierarchyTreeGenerator):
 
     def build_final_tree(self):
         self.parsed_tree_root = load_tree_from_hits(self.raw_tree_root)
-        self.load_target_counts()
+        self.load_item_counts()
 
-    def load_target_counts(self):
+    def load_item_counts(self):
         self.nodes_index = get_nodes_index(self.parsed_tree_root)
         self.count_queries = generate_count_queries_child_to_parent(self.parsed_tree_root, self.query_generator)
         self.execute_count_queries()

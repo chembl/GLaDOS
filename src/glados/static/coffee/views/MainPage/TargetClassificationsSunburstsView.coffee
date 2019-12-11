@@ -64,6 +64,11 @@ glados.useNameSpace 'glados.views.MainPage',
       viewElementID = treeDesc.viewElementID
       sunburstWasAlreadyCreated = viewElementID?
 
+      $allSunbursts = $(@el).find('.BCK-sunburst')
+      $allSunbursts.hide()
+      $sunburstElem = $(@el).find("##{viewElementID}")
+      $sunburstElem.show()
+
       if not sunburstWasAlreadyCreated
 
         $viewContainer = $(@el).find('.BCK-sunbursts-container')
@@ -90,10 +95,6 @@ glados.useNameSpace 'glados.views.MainPage',
 
         proteinClassificationModel.fetch()
 
-      $allSunbursts = $(@el).find('.BCK-sunburst')
-      $allSunbursts.hide()
-      $sunburstElem = $(@el).find("##{viewElementID}")
-      $sunburstElem.show()
 
       if sunburstWasAlreadyCreated
         treeDesc.view.wakeUp()
