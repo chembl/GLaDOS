@@ -19,20 +19,18 @@ glados.models.Compound.TargetPrediction.COLUMNS =
   ORGANISM:
     name_to_show: 'Organism'
     comparator: 'target_organism'
-  SCORE:
-    name_to_show: 'Score'
-    comparator: 'probability'
-    parse_function: (value) -> parseFloat(value).toFixed(3)
+  CONFIDENCE_70:
+    name_to_show: 'Confidence 70%'
+    comparator: 'confidence_70'
+  CONFIDENCE_80:
+    name_to_show: 'Confidence 80%'
+    comparator: 'confidence_80'
+  CONFIDENCE_90:
+    name_to_show: 'Confidence 90%'
+    comparator: 'confidence_90'
   IN_TRAINING:
     name_to_show: 'In Training Set'
     comparator: 'in_training'
-    parse_function: (value) ->
-      if value == '0'
-        return 'no'
-      else if value == '1'
-        return 'yes'
-      else
-        return 'unknown'
 
 glados.models.Compound.TargetPrediction.ID_COLUMN = glados.models.Compound.TargetPrediction.COLUMNS.PRED_ID
 
@@ -47,13 +45,15 @@ glados.models.Compound.TargetPrediction.COLUMNS_SETTINGS =
     glados.models.Compound.TargetPrediction.COLUMNS.TARGET_CHEMBL_ID
     glados.models.Compound.TargetPrediction.COLUMNS.TARGET_PREF_NAME
     glados.models.Compound.TargetPrediction.COLUMNS.ORGANISM
-    glados.models.Compound.TargetPrediction.COLUMNS.SCORE
+    glados.models.Compound.TargetPrediction.COLUMNS.CONFIDENCE_70
+    glados.models.Compound.TargetPrediction.COLUMNS.CONFIDENCE_80
+    glados.models.Compound.TargetPrediction.COLUMNS.CONFIDENCE_90
     glados.models.Compound.TargetPrediction.COLUMNS.IN_TRAINING
   ]
 
 glados.models.Compound.TargetPrediction.CONDITIONAL_ROW_FORMATS =
   COMPOUND_REPORT_CARD: (model) ->
-    if model.get('in_training') == '0'
+    if model.get('in_training') == 'no'
       return {
         color: glados.Settings.VIS_COLORS.LIGHT_GREEN5
       }
