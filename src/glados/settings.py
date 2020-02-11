@@ -106,7 +106,7 @@ print('FILTER_QUERY_MAX_CLAUSES: ', FILTER_QUERY_MAX_CLAUSES)
 
 TARGET_PREDICTION_LOOKUP_FILE = run_config.get('target_prediction_lookup_file')
 if TARGET_PREDICTION_LOOKUP_FILE is None:
-    TARGET_PREDICTION_LOOKUP_FILE = os.path.join(GLADOS_ROOT, 'api/chembl/target_prediction/prediction_lookup.csv')
+    TARGET_PREDICTION_LOOKUP_FILE = os.path.join(GLADOS_ROOT, 'api/chembl/target_prediction/prediction_lookup.json')
 print('TARGET_PREDICTION_LOOKUP_FILE: ', TARGET_PREDICTION_LOOKUP_FILE)
 
 

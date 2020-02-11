@@ -1,5 +1,4 @@
 import json
-import csv
 
 import requests
 from django.conf import settings
@@ -12,7 +11,7 @@ class TargetPredictionError(Exception):
     """Base class for exceptions in this module."""
     pass
 
-CACHE_TIME = 3600
+CACHE_TIME = 30
 
 
 def get_smiles_from_chembl_id(molecule_chembl_id):
@@ -46,32 +45,21 @@ def get_smiles_from_chembl_id(molecule_chembl_id):
     return smiles
 
 
-def get_in_training_lookup_key(molecule_chembl_id, target_chembl_id):
+def load_target_prediction_in_training_lookup():
 
-    return 'mol:{molecule}-targ:{target}'.format(molecule=molecule_chembl_id, target=target_chembl_id)
+    with open(settings.TARGET_PREDICTION_LOOKUP_FILE, 'r') as lookupfile:
+        in_training_lookup = json.load(lookupfile)
 
-
-def get_target_prediction_in_training_lookup():
-
-    cache_key = 'target-prediction-in-training-lookup'
-    cache_response = cache.get(cache_key)
-    if cache_response is not None:
-        return cache_response
-
-    in_training_lookup = set()
-    with open(settings.TARGET_PREDICTION_LOOKUP_FILE) as csvfile:
-        reader = csv.reader(csvfile, delimiter=',')
-        i = 0
-        for row in reader:
-            if i != 0:
-                target_chembl_id = row[0]
-                molecule_chembl_id = row[2]
-                lookup_key = get_in_training_lookup_key(molecule_chembl_id, target_chembl_id)
-                in_training_lookup.add(lookup_key)
-            i += 1
-
-    cache.set(cache_key, in_training_lookup, CACHE_TIME)
     return in_training_lookup
+
+
+def check_if_in_training(molecule_chembl_id, target_chembl_id, in_training_lookup):
+
+    trainings_for_mol = in_training_lookup.get(molecule_chembl_id)
+    if trainings_for_mol is None:
+        return False
+
+    return trainings_for_mol.get(target_chembl_id, False)
 
 
 def get_target_predictions(molecule_chembl_id):
@@ -88,17 +76,26 @@ def get_target_predictions(molecule_chembl_id):
         }
         return final_response
 
+    import time
+    start_time = int(round(time.time() * 1000))
+    print('CALLING PREDICTION WEBSERVICE')
+
     external_service_request = requests.post('http://hx-rke-wp-webadmin-04-worker-3.caas.ebi.ac.uk:31112/function/mcp',
                                              json={"smiles": smiles})
+    service_call_time = int(round(time.time() * 1000))
+    print('PREDICTIONS RECEIVED AFTER: {mseconds}ms'.format(mseconds=(service_call_time - start_time)))
 
     external_service_response = external_service_request.json()
-    target_prediction_lookup = get_target_prediction_in_training_lookup()
+    in_training_lookup = load_target_prediction_in_training_lookup()
     final_predictions = []
+
+    lookup_creation_time = int(round(time.time() * 1000))
+    print('Lookup structure generated after: {mseconds}ms'.format(mseconds=(lookup_creation_time - service_call_time)))
 
     for raw_prediction in external_service_response:
 
         target_chembl_id = raw_prediction['target_chemblid']
-        in_training_lookup_key = get_in_training_lookup_key(molecule_chembl_id, target_chembl_id)
+
         parsed_prediction = {
             'target_chembl_id': target_chembl_id,
             'target_pref_name': raw_prediction['pref_name'],
@@ -106,10 +103,13 @@ def get_target_predictions(molecule_chembl_id):
             'confidence_70': raw_prediction['70%'],
             'confidence_80': raw_prediction['80%'],
             'confidence_90': raw_prediction['90%'],
-            'in_training': in_training_lookup_key in target_prediction_lookup
+            'in_training': check_if_in_training(molecule_chembl_id, target_chembl_id, in_training_lookup)
         }
         final_predictions.append(parsed_prediction)
 
+    final_predictions_time = int(round(time.time() * 1000))
+    print('Final predictions generated after: {mseconds}ms'.format(
+        mseconds=(final_predictions_time - lookup_creation_time)))
 
     final_response = {
         'predictions': final_predictions
