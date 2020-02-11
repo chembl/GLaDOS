@@ -7,7 +7,7 @@ from django.core.cache import cache
 from glados.usage_statistics import glados_server_statistics
 
 
-CACHE_TIME = 30
+CACHE_TIME = 60
 
 
 class TargetPredictionError(Exception):
@@ -72,9 +72,7 @@ def check_if_in_training(molecule_chembl_id, target_chembl_id):
 def get_target_predictions(molecule_chembl_id):
 
     try:
-
         smiles = get_smiles_from_chembl_id(molecule_chembl_id)
-
     except TargetPredictionError as error:
 
         final_response = {
@@ -82,6 +80,11 @@ def get_target_predictions(molecule_chembl_id):
             'msg': 'No predictions could be returned because of this error: ' + repr(error)
         }
         return final_response
+
+    cache_key = 'target_prediction-{molecule_chembl_id}'.format(molecule_chembl_id=molecule_chembl_id)
+    cache_response = cache.get(cache_key)
+    if cache_response is not None:
+        return cache_response
 
     import time
     start_time = int(round(time.time() * 1000))
@@ -120,4 +123,5 @@ def get_target_predictions(molecule_chembl_id):
     final_response = {
         'predictions': final_predictions
     }
+    cache.set(cache_key, final_response, CACHE_TIME)
     return final_response
