@@ -1,6 +1,9 @@
 import json
+import csv
 
 import requests
+from django.conf import settings
+from django.core.cache import cache
 
 from glados.usage_statistics import glados_server_statistics
 
@@ -8,6 +11,8 @@ from glados.usage_statistics import glados_server_statistics
 class TargetPredictionError(Exception):
     """Base class for exceptions in this module."""
     pass
+
+CACHE_TIME = 3600
 
 
 def get_smiles_from_chembl_id(molecule_chembl_id):
@@ -41,6 +46,34 @@ def get_smiles_from_chembl_id(molecule_chembl_id):
     return smiles
 
 
+def get_in_training_lookup_key(molecule_chembl_id, target_chembl_id):
+
+    return 'mol:{molecule}-targ:{target}'.format(molecule=molecule_chembl_id, target=target_chembl_id)
+
+
+def get_target_prediction_in_training_lookup():
+
+    cache_key = 'target-prediction-in-training-lookup'
+    cache_response = cache.get(cache_key)
+    if cache_response is not None:
+        return cache_response
+
+    in_training_lookup = set()
+    with open(settings.TARGET_PREDICTION_LOOKUP_FILE) as csvfile:
+        reader = csv.reader(csvfile, delimiter=',')
+        i = 0
+        for row in reader:
+            if i != 0:
+                target_chembl_id = row[0]
+                molecule_chembl_id = row[2]
+                lookup_key = get_in_training_lookup_key(molecule_chembl_id, target_chembl_id)
+                in_training_lookup.add(lookup_key)
+            i += 1
+
+    cache.set(cache_key, in_training_lookup, CACHE_TIME)
+    return in_training_lookup
+
+
 def get_target_predictions(molecule_chembl_id):
 
     try:
@@ -59,7 +92,26 @@ def get_target_predictions(molecule_chembl_id):
                                              json={"smiles": smiles})
 
     external_service_response = external_service_request.json()
+    target_prediction_lookup = get_target_prediction_in_training_lookup()
+    final_predictions = []
+
+    for raw_prediction in external_service_response:
+
+        target_chembl_id = raw_prediction['target_chemblid']
+        in_training_lookup_key = get_in_training_lookup_key(molecule_chembl_id, target_chembl_id)
+        parsed_prediction = {
+            'target_chembl_id': target_chembl_id,
+            'target_pref_name': raw_prediction['pref_name'],
+            'target_organism': raw_prediction['organism'],
+            'confidence_70': raw_prediction['70%'],
+            'confidence_80': raw_prediction['80%'],
+            'confidence_90': raw_prediction['90%'],
+            'in_training': in_training_lookup_key in target_prediction_lookup
+        }
+        final_predictions.append(parsed_prediction)
+
+
     final_response = {
-        'predictions': external_service_response
+        'predictions': final_predictions
     }
     return final_response

@@ -104,6 +104,12 @@ if FILTER_QUERY_MAX_CLAUSES is None:
     raise GladosSettingsError("You must tell me the filter_query_max_clauses")
 print('FILTER_QUERY_MAX_CLAUSES: ', FILTER_QUERY_MAX_CLAUSES)
 
+TARGET_PREDICTION_LOOKUP_FILE = run_config.get('target_prediction_lookup_file')
+if TARGET_PREDICTION_LOOKUP_FILE is None:
+    TARGET_PREDICTION_LOOKUP_FILE = os.path.join(GLADOS_ROOT, 'api/chembl/target_prediction/prediction_lookup.csv')
+print('TARGET_PREDICTION_LOOKUP_FILE: ', TARGET_PREDICTION_LOOKUP_FILE)
+
+
 SPAWN_JOBS = run_config.get('spawn_jobs', True)
 if SPAWN_JOBS:
     print('SPAWN_JOBS is True, this means that I will delay the annotated functions and put them in the worker queue.')
