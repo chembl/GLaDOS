@@ -5,6 +5,9 @@ glados.useNameSpace 'glados.models.Compound',
     parse: (response) ->
 
       response.target_link = Target.get_report_card_url(response.target_chembl_id)
+      if response.in_training == true
+        response.activities_link = Activity.getActivitiesListURL(
+          "molecule_chembl_id:#{response.molecule_chembl_id} AND target_chembl_id:#{response.target_chembl_id}")
       return response
 
 glados.models.Compound.TargetPrediction.COLUMNS =
@@ -31,9 +34,10 @@ glados.models.Compound.TargetPrediction.COLUMNS =
   IN_TRAINING:
     name_to_show: 'In Training Set'
     comparator: 'in_training'
+    link_base: 'activities_link'
     parse_function: (value) ->
       if value == true
-        return 'yes'
+        return 'yes (Click to see activities)'
       else
         return 'no'
 
