@@ -7,7 +7,8 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
 
     parse: (data) ->
 
-      raw_predictions = data.predictions
+      raw_predictions = _.sortBy(data.predictions, 'confidence_80')
+
       parsed_predictions = []
       for pred in raw_predictions
         parsed_properties = glados.models.Compound.TargetPrediction.prototype.parse(pred)
