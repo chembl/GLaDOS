@@ -8,7 +8,6 @@ glados.useNameSpace 'glados.views.Compound',
       @model.on 'error', @.showCompoundErrorCard, @
       @resource_type = 'Compound'
 
-      console.log('model: ', @model)
 
       settings = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.TARGET_PREDICTIONS
       flavour = glados.models.paginatedCollections.SpecificFlavours.TargetPredictionsList
@@ -17,8 +16,6 @@ glados.useNameSpace 'glados.views.Compound',
         generator=undefined, flavour)
 
       list.initURL(@model.get('id'))
-
-#      sortByFunc = (item) -> -parseFloat(item.probability)
 
       glados.views.PaginatedViews.PaginatedViewFactory.getNewTablePaginatedView(
         list, $(@el).find('.BCK-1MicroMolar-Predictions'), customRenderEvent=undefined, disableColumnsSelection=true)
