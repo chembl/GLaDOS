@@ -71,6 +71,8 @@ def check_if_in_training(molecule_chembl_id, target_chembl_id):
 
 def get_target_predictions(molecule_chembl_id):
 
+    print('GETTING TARGET PREDICTIONS')
+
     try:
         smiles = get_smiles_from_chembl_id(molecule_chembl_id)
     except TargetPredictionError as error:
@@ -82,15 +84,21 @@ def get_target_predictions(molecule_chembl_id):
         return final_response
 
     cache_key = 'target_prediction-{molecule_chembl_id}'.format(molecule_chembl_id=molecule_chembl_id)
+    print('cache_key: ', cache_key)
     cache_response = cache.get(cache_key)
     if cache_response is not None:
+        print('response was cached')
         return cache_response
 
+    print('querying eloys web services')
     external_service_request = requests.post('http://hx-rke-wp-webadmin-04-worker-3.caas.ebi.ac.uk:31112/function/mcp',
                                              json={"smiles": smiles})
 
+    print('response obtained')
     external_service_response = external_service_request.json()
     final_predictions = []
+
+    print('processing predictions obtained')
 
     for raw_prediction in external_service_response:
 
@@ -107,6 +115,7 @@ def get_target_predictions(molecule_chembl_id):
         }
         final_predictions.append(parsed_prediction)
 
+    print('final response ready')
     final_response = {
         'predictions': final_predictions
     }
