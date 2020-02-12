@@ -41,6 +41,7 @@ glados.useNameSpace 'glados.views.Compound',
 
       $APICALLAnchor = $(@el).find('.BCK-Predictions-APICall')
       $APICALLAnchor.text(@list.url)
+      $APICALLAnchor.attr('href', @list.url)
 
       @showCardContent()
       @showSection()
