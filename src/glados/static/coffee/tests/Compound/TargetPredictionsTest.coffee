@@ -1,85 +1,17 @@
 describe 'Target Predictions', ->
 
   chemblID = 'CHEMBL25'
-  compound = new Compound
-    molecule_chembl_id: chemblID
-    fetch_from_elastic: true
 
-  beforeAll (done) ->
-
-    dataURL = glados.Settings.STATIC_URL + 'testData/Compounds/CHEMBL25esResponse.json'
-    $.get dataURL, (testData) ->
-      esResponse = testData
-      compound.set(compound.parse(esResponse))
-      done()
-
-
-  it 'is generated from a preloaded compound model', ->
+  it 'generates the correct url', ->
 
     settings = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.TARGET_PREDICTIONS
-
-    generator =
-      model: compound
-      generator_property: '_metadata.target_predictions'
-
-    list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewClientSideCollectionFor(settings, generator)
-    compound.trigger('change')
-
-    targetPredictionsMustBe = compound.get('_metadata').target_predictions
-    expect(targetPredictionsMustBe.length).toBe(list.length)
-
-    for predMustBe in targetPredictionsMustBe
-      predID = predMustBe.pred_id
-      predGot = list.get(predID)
-
-      expect(predMustBe.molecule_chembl_id).toBe(predGot.get('molecule_chembl_id'))
-      expect(predMustBe.probability).toBe(predGot.get('probability'))
-      expect(predMustBe.target_accession).toBe(predGot.get('target_accession'))
-      expect(predMustBe.target_chembl_id).toBe(predGot.get('target_chembl_id'))
-
-  it 'is generated from a preloaded compound model (filtered)', ->
-
-    settings = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.TARGET_PREDICTIONS
-
-    filterFunc = (p) -> p.value == 10
-    generator =
-      model: compound
-      generator_property: '_metadata.target_predictions'
-      filter: filterFunc
+    flavour = glados.models.paginatedCollections.SpecificFlavours.TargetPredictionsList
 
     list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewClientSideCollectionFor(settings,
-      generator)
-    compound.trigger('change')
+      generator=undefined, flavour)
 
-    targetPredictionsMustBe = _.filter(compound.get('_metadata').target_predictions, filterFunc)
+    list.initURL(chemblID)
 
-    for predMustBe in targetPredictionsMustBe
-      predID = predMustBe.pred_id
-      predGot = list.get(predID)
-
-      expect(predMustBe.molecule_chembl_id).toBe(predGot.get('molecule_chembl_id'))
-      expect(predMustBe.probability).toBe(predGot.get('probability'))
-      expect(predMustBe.target_accession).toBe(predGot.get('target_accession'))
-      expect(predMustBe.target_chembl_id).toBe(predGot.get('target_chembl_id'))
-
-  it 'is sorts elements by score by default', ->
-
-    settings = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.TARGET_PREDICTIONS
-
-    generator =
-      model: compound
-      generator_property: '_metadata.target_predictions'
-      sort_by_function: (item) -> -parseFloat(item.probability)
-
-    list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewClientSideCollectionFor(settings, generator)
-    compound.trigger('change')
-
-    targetPredictionsMustBe = compound.get('_metadata').target_predictions
-    expect(targetPredictionsMustBe.length).toBe(list.length)
-
-    previousProbability = Number.MAX_VALUE
-    targetPredictionsGot = list.models
-
-    for targPredGot in targetPredictionsGot
-      expect(previousProbability >= targPredGot.get('probability')).toBe(true)
-      previousProbability = targPredGot.get('probability')
+    urlGot = list.url
+    urlMustBe = "#{glados.Settings.GLADOS_API_BASE_URL}/target_prediction/predictions/#{chemblID}"
+    expect(urlGot).toBe(urlMustBe)

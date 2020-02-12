@@ -86,20 +86,11 @@ def get_target_predictions(molecule_chembl_id):
     if cache_response is not None:
         return cache_response
 
-    import time
-    start_time = int(round(time.time() * 1000))
-    print('CALLING PREDICTION WEBSERVICE')
-
     external_service_request = requests.post('http://hx-rke-wp-webadmin-04-worker-3.caas.ebi.ac.uk:31112/function/mcp',
                                              json={"smiles": smiles})
-    service_call_time = int(round(time.time() * 1000))
-    print('PREDICTIONS RECEIVED AFTER: {mseconds}ms'.format(mseconds=(service_call_time - start_time)))
 
     external_service_response = external_service_request.json()
     final_predictions = []
-
-    lookup_creation_time = int(round(time.time() * 1000))
-    print('Lookup structure generated after: {mseconds}ms'.format(mseconds=(lookup_creation_time - service_call_time)))
 
     for raw_prediction in external_service_response:
 
@@ -115,10 +106,6 @@ def get_target_predictions(molecule_chembl_id):
             'in_training': check_if_in_training(molecule_chembl_id, target_chembl_id)
         }
         final_predictions.append(parsed_prediction)
-
-    final_predictions_time = int(round(time.time() * 1000))
-    print('Final predictions generated after: {mseconds}ms'.format(
-        mseconds=(final_predictions_time - lookup_creation_time)))
 
     final_response = {
         'predictions': final_predictions

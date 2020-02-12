@@ -8,22 +8,23 @@ glados.useNameSpace 'glados.views.Compound',
       @model.on 'error', @.showCompoundErrorCard, @
       @resource_type = 'Compound'
 
-      sortByFunc = (item) -> -parseFloat(item.probability)
+      console.log('model: ', @model)
+
       settings = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.TARGET_PREDICTIONS
-      filterFunc1uM = (p) -> p.value == 1
+      flavour = glados.models.paginatedCollections.SpecificFlavours.TargetPredictionsList
 
-      generator1uM =
-        model: @model
-        generator_property: '_metadata.target_predictions'
-        filter: filterFunc1uM
-        sort_by_function: sortByFunc
+      list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewClientSideCollectionFor(settings,
+        generator=undefined, flavour)
 
-      list1uM = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewClientSideCollectionFor(settings,
-        generator1uM)
+      list.initURL(@model.get('id'))
+
+#      sortByFunc = (item) -> -parseFloat(item.probability)
 
       glados.views.PaginatedViews.PaginatedViewFactory.getNewTablePaginatedView(
-        list1uM, $(@el).find('.BCK-1MicroMolar-Predictions'), customRenderEvent=undefined, disableColumnsSelection=true)
+        list, $(@el).find('.BCK-1MicroMolar-Predictions'), customRenderEvent=undefined, disableColumnsSelection=true)
 
+      console.log('list: ', list)
+      list.fetch()
 
       @initEmbedModal(arguments[0].embed_section_name, arguments[0].embed_identifier)
       @activateModals()
