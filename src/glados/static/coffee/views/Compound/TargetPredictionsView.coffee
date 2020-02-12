@@ -12,16 +12,15 @@ glados.useNameSpace 'glados.views.Compound',
       settings = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.TARGET_PREDICTIONS
       flavour = glados.models.paginatedCollections.SpecificFlavours.TargetPredictionsList
 
-      list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewClientSideCollectionFor(settings,
+      @list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewClientSideCollectionFor(settings,
         generator=undefined, flavour)
 
-      list.initURL(@model.get('id'))
+      @list.initURL(@model.get('id'))
 
       glados.views.PaginatedViews.PaginatedViewFactory.getNewTablePaginatedView(
-        list, $(@el).find('.BCK-1MicroMolar-Predictions'), customRenderEvent=undefined, disableColumnsSelection=true)
+        @list, $(@el).find('.BCK-1MicroMolar-Predictions'), customRenderEvent=undefined, disableColumnsSelection=true)
 
-      console.log('list: ', list)
-      list.fetch()
+      @list.fetch()
 
       @initEmbedModal(arguments[0].embed_section_name, arguments[0].embed_identifier)
       @activateModals()
@@ -39,6 +38,9 @@ glados.useNameSpace 'glados.views.Compound',
 
       $chemblIDSpan = $(@el).find('.BCK-Predictions-MolChemblID')
       $chemblIDSpan.text(@model.get('id'))
+
+      $APICALLAnchor = $(@el).find('.BCK-Predictions-APICall')
+      $APICALLAnchor.text(@list.url)
 
       @showCardContent()
       @showSection()

@@ -6,4 +6,11 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
       @url = "#{glados.Settings.GLADOS_API_BASE_URL}/target_prediction/predictions/#{chemblID}"
 
     parse: (data) ->
-      @reset(data.predictions)
+
+      raw_predictions = data.predictions
+      parsed_predictions = []
+      for pred in raw_predictions
+        parsed_properties = glados.models.Compound.TargetPrediction.prototype.parse(pred)
+        parsed_predictions.push(new glados.models.Compound.TargetPrediction(parsed_properties))
+
+      @reset(raw_predictions)
