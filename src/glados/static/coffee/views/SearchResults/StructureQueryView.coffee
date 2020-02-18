@@ -63,7 +63,6 @@ glados.useNameSpace 'glados.views.SearchResults',
       deferred = $.post(ajaxRequestDict)
       deferred.done ((ctabData)->
         @ctabData = ctabData
-        @img_url = glados.Settings.BEAKER_BASE_URL + 'ctab2svg/'+ btoa(ctabData)
       ).bind(@)
 
       deferred.then @getCtabSvgAndRender.bind(@)
