@@ -1,6 +1,7 @@
 import traceback
 
 from django.core.cache import cache
+from django.conf import settings
 
 from glados.api.chembl.visualisations.shared.tree_generator import TargetHierarchyTreeGenerator
 
@@ -17,7 +18,7 @@ def get_classification_tree():
         print('results are in cache')
         return cache_response
 
-    index_name = 'chembl_protein_class'
+    index_name = settings.CHEMBL_ES_INDEX_PREFIX+'protein_class'
     es_query = {
         "aggs": {
             "children": {
@@ -99,7 +100,8 @@ def get_classification_tree():
         return ' AND '.join(queries)
 
     tree_generator = TargetHierarchyTreeGenerator(index_name=index_name, es_query=es_query,
-                                                  query_generator=generate_count_query, count_index='chembl_target')
+                                                  query_generator=generate_count_query,
+                                                  count_index=settings.CHEMBL_ES_INDEX_PREFIX+'target')
 
     final_tree = tree_generator.get_classification_tree()
 
