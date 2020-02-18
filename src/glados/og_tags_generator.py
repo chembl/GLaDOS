@@ -1,4 +1,6 @@
 from elasticsearch_dsl import Search
+from django.conf import settings
+
 # This uses elasticsearch to generate og tags for the main entities in ChEMBL (Compounds, Targets, Assays, Documents,
 # Cell Lines, Tissues) and other pages. These tags are used to generate a preview when you share the page in social
 # media
@@ -27,7 +29,7 @@ def get_og_tags_for_compound(chembl_id):
             "query": chembl_id
         }
     }
-    s = Search(index="chembl_molecule").query(q)
+    s = Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"molecule").query(q)
     response = s.execute()
 
     title = 'Compound: '+ chembl_id
@@ -87,7 +89,7 @@ def get_og_tags_for_target(chembl_id):
         }
     }
 
-    s = Search(index="chembl_target").query(q)
+    s = Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"target").query(q)
     response = s.execute()
 
     title = 'Target: ' + chembl_id
@@ -123,7 +125,7 @@ def get_og_tags_for_assay(chembl_id):
         }
     }
 
-    s = Search(index="chembl_assay").query(q)
+    s = Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"assay").query(q)
     response = s.execute()
 
     title = 'Assay: ' + chembl_id
@@ -157,7 +159,7 @@ def get_og_tags_for_cell_line(chembl_id):
         }
     }
 
-    s = Search(index="chembl_cell_line").query(q)
+    s = Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"cell_line").query(q)
     response = s.execute()
 
     title = 'Cell Line: ' + chembl_id
@@ -193,7 +195,7 @@ def get_og_tags_for_tissue(chembl_id):
         }
     }
 
-    s = Search(index="chembl_tissue").query(q)
+    s = Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"tissue").query(q)
     response = s.execute()
 
     title = 'Tissue: ' + chembl_id
@@ -226,7 +228,7 @@ def get_og_tags_for_document(chembl_id):
         }
     }
 
-    s = Search(index="chembl_document").query(q)
+    s = Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"document").query(q)
     response = s.execute()
 
     title = 'Document: ' + chembl_id
