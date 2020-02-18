@@ -28,7 +28,7 @@ class FileWriterTester(TestCase):
     def test_fails_when_output_format_is_not_available(self):
         test_columns_to_download = [{'label': 'ChEMBL ID', 'prop_id': 'molecule_chembl_id'},
                                     {'label': 'Name', 'prop_id': 'pref_name'}]
-        test_index_name = 'chembl_molecule'
+        test_index_name = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
         query_file_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/test_query0.json')
         test_query = json.loads(open(query_file_path, 'r').read())
 
@@ -58,7 +58,7 @@ class FileWriterTester(TestCase):
     def test_downloads_and_writes_csv_file_no_parsing_required(self):
         test_columns_to_download = [{'label': 'ChEMBL ID', 'prop_id': 'molecule_chembl_id'},
                                     {'label': 'Name', 'prop_id': 'pref_name'}]
-        test_index_name = 'chembl_molecule'
+        test_index_name = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
         query_file_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/test_query0.json')
         test_query = json.loads(open(query_file_path, 'r').read())
 
@@ -79,7 +79,7 @@ class FileWriterTester(TestCase):
     def test_downloads_and_writes_csv_file_parsing_required(self):
         test_columns_to_download = [{'label': 'ChEMBL ID', 'prop_id': 'molecule_chembl_id'},
                                     {'label': 'Synonyms', 'prop_id': 'molecule_synonyms'}]
-        test_index_name = 'chembl_molecule'
+        test_index_name = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
 
         query_file_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/test_query0.json')
         test_query = json.loads(open(query_file_path, 'r').read())
@@ -102,7 +102,7 @@ class FileWriterTester(TestCase):
     def test_fails_with_context_but_no_id_property(self):
         test_columns_to_download = [{'label': 'ChEMBL ID', 'prop_id': 'molecule_chembl_id'},
                                     {'label': 'Synonyms', 'prop_id': 'molecule_synonyms'}]
-        test_index_name = 'chembl_molecule'
+        test_index_name = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
         query_file_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/test_query0.json')
         test_query = json.loads(open(query_file_path, 'r').read())
         test_contextual_columns = [{'label': 'Similarity', 'prop_id': 'similarity'}]
@@ -127,7 +127,7 @@ class FileWriterTester(TestCase):
     def test_fails_with_context_but_no_contextual_columns(self):
         test_columns_to_download = [{'label': 'ChEMBL ID', 'prop_id': 'molecule_chembl_id'},
                                     {'label': 'Synonyms', 'prop_id': 'molecule_synonyms'}]
-        test_index_name = 'chembl_molecule'
+        test_index_name = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
         query_file_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/test_query0.json')
         test_query = json.loads(open(query_file_path, 'r').read())
         id_property = 'molecule_chembl_id'
@@ -153,7 +153,7 @@ class FileWriterTester(TestCase):
     def test_writes_csv_files_with_context(self):
         test_columns_to_download = [{'label': 'ChEMBL ID', 'prop_id': 'molecule_chembl_id'},
                                     {'label': 'Synonyms', 'prop_id': 'molecule_synonyms'}]
-        test_index_name = 'chembl_molecule'
+        test_index_name = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
         query_file_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/test_query0.json')
         test_query = json.loads(open(query_file_path, 'r').read())
         id_property = 'molecule_chembl_id'
@@ -187,7 +187,7 @@ class FileWriterTester(TestCase):
         test_columns_to_download = [{'label': 'ChEMBL ID', 'prop_id': 'molecule_chembl_id'},
                                     {'label': 'Research Codes', 'prop_id': 'research_codes', 'is_virtual': True,
                                      'is_contextual': False, 'based_on': 'molecule_synonyms'}]
-        test_index_name = 'chembl_molecule'
+        test_index_name = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
         query_file_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/test_query6.json')
         test_query = json.loads(open(query_file_path, 'r').read())
         id_property = 'molecule_chembl_id'
@@ -220,7 +220,7 @@ class FileWriterTester(TestCase):
     def test_reports_file_writing_progress(self):
         test_columns_to_download = [{'label': 'ChEMBL ID', 'prop_id': 'molecule_chembl_id'},
                                     {'label': 'Synonyms', 'prop_id': 'molecule_synonyms'}]
-        test_index_name = 'chembl_molecule'
+        test_index_name = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
 
         query_file_path = os.path.join(settings.GLADOS_ROOT, 'es/tests/data/test_query1.json')
         test_query = json.loads(open(query_file_path, 'r').read())
