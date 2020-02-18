@@ -31,7 +31,7 @@ IN_TRAINING_LOOKUP = load_target_prediction_in_training_lookup()
 
 def get_smiles_from_chembl_id(molecule_chembl_id):
 
-    index_name = 'chembl_molecule'
+    index_name = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
     es_query = {
         "_source": [
             "molecule_structures.canonical_smiles"
