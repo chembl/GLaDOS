@@ -1,4 +1,4 @@
-chembl_molecule:
+chembl_26_molecule:
   'similarity':
     label: 'Similarity'
     label_mini: 'Similarity'
