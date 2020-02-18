@@ -35,7 +35,7 @@ class DownloadJobsServiceTester(TestCase):
         with open(test_search_context_path, 'wt') as test_search_file:
             test_search_file.write(json.dumps(test_raw_context))
 
-        index_name = 'chembl_molecule'
+        index_name = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
         raw_query = '{"query_string": {"query": "molecule_chembl_id:(CHEMBL59)"}}'
         desired_format = 'csv'
         context_id = 'test_search_context'
@@ -49,9 +49,9 @@ class DownloadJobsServiceTester(TestCase):
 
         columns_to_download_must_be = [
             {'aggregatable': True, 'type': 'string', 'label': 'ChEMBL ID', 'prop_id': 'molecule_chembl_id',
-             'sortable': True, 'index_name': 'chembl_molecule', 'label_mini': 'ChEMBL ID'},
+             'sortable': True, 'index_name': settings.CHEMBL_ES_INDEX_PREFIX+'molecule', 'label_mini': 'ChEMBL ID'},
             {'aggregatable': True, 'type': 'string', 'label': 'Name', 'prop_id': 'pref_name', 'sortable': True,
-             'index_name': 'chembl_molecule', 'label_mini': 'Name'}]
+             'index_name': settings.CHEMBL_ES_INDEX_PREFIX+'molecule', 'label_mini': 'Name'}]
 
         raw_columns_to_download_got = download_job_got.raw_columns_to_download
         columns_to_download_got = json.loads(raw_columns_to_download_got)
@@ -73,7 +73,7 @@ class DownloadJobsServiceTester(TestCase):
         with open(test_search_context_path, 'wt') as test_search_file:
             test_search_file.write(json.dumps(test_raw_context))
 
-        index_name = 'chembl_molecule'
+        index_name = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
         raw_query = '{"query_string": {"query": "molecule_chembl_id:(CHEMBL59)"}}'
         desired_format = 'csv'
         context_id = 'test_search_context'
@@ -89,9 +89,9 @@ class DownloadJobsServiceTester(TestCase):
 
         columns_to_download_must_be = [
             {'aggregatable': True, 'label_mini': 'ChEMBL ID', 'type': 'string', 'prop_id': 'molecule_chembl_id',
-             'sortable': True, 'index_name': 'chembl_molecule', 'label': 'ChEMBL ID'},
+             'sortable': True, 'index_name': settings.CHEMBL_ES_INDEX_PREFIX+'molecule', 'label': 'ChEMBL ID'},
             {'aggregatable': True, 'label_mini': 'Max Phase', 'type': 'integer', 'prop_id': 'max_phase',
-             'sortable': True, 'index_name': 'chembl_molecule', 'label': 'Max Phase'}]
+             'sortable': True, 'index_name': settings.CHEMBL_ES_INDEX_PREFIX+'molecule', 'label': 'Max Phase'}]
 
         raw_columns_to_download_got = download_job_got.raw_columns_to_download
         columns_to_download_got = json.loads(raw_columns_to_download_got)
@@ -113,7 +113,7 @@ class DownloadJobsServiceTester(TestCase):
         with open(test_search_context_path, 'wt') as test_search_file:
             test_search_file.write(json.dumps(test_raw_context))
 
-        index_name = 'chembl_molecule'
+        index_name = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
         raw_query = '{"query_string": {"query": "molecule_chembl_id:(CHEMBL59)"}}'
         desired_format = 'csv'
         context_id = 'test_search_context'
@@ -148,7 +148,7 @@ class DownloadJobsServiceTester(TestCase):
         with open(test_search_context_path, 'wt') as test_search_file:
             test_search_file.write(json.dumps(test_raw_context))
 
-        index_name = 'chembl_molecule'
+        index_name = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
         raw_query = '{"query_string": {"query": "molecule_chembl_id:(CHEMBL59)"}}'
         desired_format = 'csv'
         context_id = 'test_search_context'
@@ -187,7 +187,7 @@ class DownloadJobsServiceTester(TestCase):
         with open(test_search_context_path, 'wt') as test_search_file:
             test_search_file.write(json.dumps(test_raw_context))
 
-        index_name = 'chembl_molecule'
+        index_name = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
         raw_query = '{"query_string": {"query": "molecule_chembl_id:(CHEMBL59)"}}'
         desired_format = 'csv'
         context_id = 'test_search_context'
@@ -230,7 +230,7 @@ class DownloadJobsServiceTester(TestCase):
         with open(test_search_context_path, 'wt') as test_search_file:
             test_search_file.write(json.dumps(test_raw_context))
 
-        index_name = 'chembl_molecule'
+        index_name = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
         raw_query = '{"query_string": {"query": "molecule_chembl_id:(CHEMBL59)"}}'
         desired_format = 'csv'
         context_id = 'test_search_context'
