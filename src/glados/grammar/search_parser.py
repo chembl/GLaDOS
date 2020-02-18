@@ -269,7 +269,10 @@ def check_doi(term_dict: dict):
         try:
             chembl_ids = []
             response = requests.get(
-                '{es_url}/chembl_document/_search'.format(es_url=settings.ELASTICSEARCH_EXTERNAL_URL),
+                '{es_url}/{index_prefix}document/_search'.format(
+                    es_url=settings.ELASTICSEARCH_EXTERNAL_URL,
+                    index_prefix=settings.CHEMBL_ES_INDEX_PREFIX
+                ),
                 json=
                 {
                     'size': 10,
@@ -305,7 +308,10 @@ def check_inchi(term_dict: dict, term_is_inchi_key=False):
     try:
         chembl_ids = []
         response = requests.get(
-            '{es_url}/chembl_molecule/_search'.format(es_url=settings.ELASTICSEARCH_EXTERNAL_URL),
+            '{es_url}/{index_prefix}molecule/_search'.format(
+                es_url=settings.ELASTICSEARCH_EXTERNAL_URL,
+                index_prefix=settings.CHEMBL_ES_INDEX_PREFIX
+            ),
             json=
             {
                 'size': 10,
