@@ -142,7 +142,7 @@ def write_sdf_file(query, base_file_name='compounds', output_dir=settings.DYNAMI
                    progress_function=(lambda progress: progress)):
 
     file_path = os.path.join(output_dir, base_file_name + '.sdf.gz')
-    index_name = 'chembl_molecule'
+    index_name = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
     es_conn = connections.get_connection()
 
     total_items = es_conn.search(index=index_name, body={'query': query})['hits']['total']

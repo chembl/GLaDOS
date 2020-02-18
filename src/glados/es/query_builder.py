@@ -1,4 +1,5 @@
 from glados.es_models import ElasticSearchMultiSearchQuery, do_multi_search
+from django.conf import settings
 
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -247,9 +248,9 @@ class QueryBuilder:
                     best_query_i = es_base_queries[j]
                     best_query_i_total = results[i * len(es_base_queries) + j]['hits']['total']
                     best_query_i_score += results[i * len(es_base_queries) + j]['hits']['max_score']/(10**j)
-                    if es_index_i == 'chembl_target':
+                    if es_index_i == settings.CHEMBL_ES_INDEX_PREFIX+'target':
                         best_query_i_score *= 100
-                    if es_index_i == 'chembl_molecule':
+                    if es_index_i == settings.CHEMBL_ES_INDEX_PREFIX+'molecule':
                         best_query_i_score *= 1000
                 j += 1
             if best_query_i is None:
