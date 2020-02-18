@@ -150,7 +150,7 @@ def get_schema_obj_for_compound(chembl_id, request):
             "query": chembl_id
         }
     }
-    s = Search(index="chembl_molecule").query(q)
+    s = Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"molecule").query(q)
     response = s.execute()
 
     if response.hits.total == 0:
