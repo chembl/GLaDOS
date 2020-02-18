@@ -14,7 +14,7 @@ current_release:
   downloads_date: '2020-02-21'
   # The basename of the files in the ftp
   downloads_release_name: 'chembl_26'
-  elastic_index_prefix: 'chembl_26_'
+  elasticsearch_chembl_index_prefix: 'chembl_26_'
 server_secret_key: 'server_secret_key'
 enable_twitter: True
 twitter_secrets:
