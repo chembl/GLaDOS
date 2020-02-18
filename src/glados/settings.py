@@ -37,6 +37,7 @@ WS_URL = 'https://www.ebi.ac.uk/chembl/api/data'
 BEAKER_URL = 'https://www.ebi.ac.uk/chembl/api/utils'
 ELASTICSEARCH_HOST = '<INTERNAL_URL_CAN NOT BE PUBLISHED>'
 ELASTICSEARCH_EXTERNAL_URL = 'https://www.ebi.ac.uk/chembl/glados-es'
+CHEMBL_ES_INDEX_PREFIX = 'chembl_'
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Read config file
@@ -144,6 +145,11 @@ if CURRENT_DOWNLOADS_DATE is None:
 DOWNLOADS_RELEASE_NAME = release_config.get('downloads_release_name')
 if DOWNLOADS_RELEASE_NAME is None:
     raise GladosSettingsError("You must provide the current downloads base name ")
+
+CHEMBL_ES_INDEX_PREFIX = release_config.get('elasticsearch_chembl_index_prefix')
+if DOWNLOADS_RELEASE_NAME is None:
+    raise GladosSettingsError("You must provide the current downloads base name ")
+
 # ----------------------------------------------------------------------------------------------------------------------
 # SERVER BASE PATH
 # ----------------------------------------------------------------------------------------------------------------------
