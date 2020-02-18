@@ -4,16 +4,18 @@ spawn_jobs: False # When False, it doesn't use the django rq system, it just exe
 elasticsearch:
   host: 'https://www.ebi.ac.uk/chembl/glados-es'
   public_host: 'https://www.ebi.ac.uk/chembl/glados-es'
+  index_prefix: 'chembl_26_'
 chembl_api:
   ws_url: 'https://wwwdev.ebi.ac.uk/chembl/api/data'
   beaker_url: 'https://wwwdev.ebi.ac.uk/chembl/api/utils'
 old_interface_url: 'https://www.ebi.ac.uk/chembl/old'
 current_release:
-  full_name: 'CHEMBL25'
-  full_doi: 'http://doi.org/10.6019/CHEMBL.database.25'
-  downloads_date: '2018-06-18'
+  full_name: 'CHEMBL26'
+  full_doi: 'http://doi.org/10.6019/CHEMBL.database.26'
+  downloads_date: '2020-02-21'
   # The basename of the files in the ftp
-  downloads_release_name: 'chembl_25'
+  downloads_release_name: 'chembl_26'
+  elastic_index_prefix: 'chembl_26_'
 unichemapi: 'le unichem api'
 unichem_similarity_endpoint: 'le similarity endpoint'
 filter_query_max_clauses: 30000
