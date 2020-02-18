@@ -36,7 +36,7 @@ class DownloadJobsControllerTester(TestCase):
         with open(test_search_context_path, 'wt') as test_search_file:
             test_search_file.write(json.dumps(test_raw_context))
 
-        index_name = 'chembl_molecule'
+        index_name = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
         raw_query = '{"query_string": {"query": "molecule_chembl_id:(CHEMBL59)"}}'
         desired_format = 'csv'
         context_id = 'test_search_context'
@@ -67,7 +67,7 @@ class DownloadJobsControllerTester(TestCase):
         with open(test_search_context_path, 'wt') as test_search_file:
             test_search_file.write(json.dumps(test_raw_context))
 
-        index_name = 'chembl_molecule'
+        index_name = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
         raw_query = '{"query_string": {"query": "molecule_chembl_id:(CHEMBL59)"}}'
         desired_format = 'csv'
         context_id = 'test_search_context'
@@ -100,7 +100,7 @@ class DownloadJobsControllerTester(TestCase):
         with open(test_search_context_path, 'wt') as test_search_file:
             test_search_file.write(json.dumps(test_raw_context))
 
-        index_name = 'chembl_molecule'
+        index_name = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
         raw_query = '{"query_string": {"query": "molecule_chembl_id:(CHEMBL59)"}}'
         desired_format = 'csv'
         context_id = 'test_search_context'
