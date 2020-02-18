@@ -226,7 +226,7 @@ def get_database_summary(request):
 
     print('datasets are not in cache')
 
-    s = Search(index="chembl_document").query(q)
+    s = Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"document").query(q)
     response = s.execute()
     response = { 'num_datasets': response.hits.total }
     cache.set(cache_key, response, cache_time)
@@ -255,15 +255,15 @@ def get_entities_records(request):
     }
 
     response = {
-        'Compounds': Search(index="chembl_molecule").execute().hits.total,
-        'Drugs': Search(index="chembl_molecule").query(drugs_query).execute().hits.total,
-        'Assays': Search(index="chembl_assay").execute().hits.total,
-        'Documents': Search(index="chembl_document").execute().hits.total,
-        'Targets': Search(index="chembl_target").execute().hits.total,
-        'Cells': Search(index="chembl_cell_line").execute().hits.total,
-        'Tissues': Search(index="chembl_tissue").execute().hits.total,
-        'Indications': Search(index="chembl_drug_indication_by_parent").execute().hits.total,
-        'Mechanisms': Search(index="chembl_mechanism_by_parent_target").execute().hits.total
+        'Compounds': Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"molecule").execute().hits.total,
+        'Drugs': Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"molecule").query(drugs_query).execute().hits.total,
+        'Assays': Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"assay").execute().hits.total,
+        'Documents': Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"document").execute().hits.total,
+        'Targets': Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"target").execute().hits.total,
+        'Cells': Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"cell_line").execute().hits.total,
+        'Tissues': Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"tissue").execute().hits.total,
+        'Indications': Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"drug_indication_by_parent").execute().hits.total,
+        'Mechanisms': Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"mechanism_by_parent_target").execute().hits.total
     }
 
     cache.set(cache_key, response, cache_time)
