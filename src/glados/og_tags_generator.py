@@ -10,7 +10,7 @@ from django.conf import settings
 # --------------------------------------------------------------------------------------------------------------------
 
 
-def add_attribute_to_tescription(description_items, item, attr_name, text_attr_name):
+def add_attribute_to_description(description_items, item, attr_name, text_attr_name):
 
     attr_vale = item[attr_name]
     if attr_vale is not None:
@@ -43,7 +43,7 @@ def get_og_tags_for_compound(chembl_id):
         if pref_name is not None:
             title = 'Compound: '+ pref_name
 
-        add_attribute_to_tescription(description_items, item, 'molecule_type', 'Molecule Type')
+        add_attribute_to_description(description_items, item, 'molecule_type', 'Molecule Type')
 
         try:
             mol_formula = item['molecule_properties']['full_molformula']
@@ -103,8 +103,8 @@ def get_og_tags_for_target(chembl_id):
         if pref_name is not None:
             title = 'Target: ' + pref_name
 
-        add_attribute_to_tescription(description_items, item, 'target_type', 'Type')
-        add_attribute_to_tescription(description_items, item, 'organism', 'Organism')
+        add_attribute_to_description(description_items, item, 'target_type', 'Type')
+        add_attribute_to_description(description_items, item, 'organism', 'Organism')
 
         description = ', '.join(description_items)
 
@@ -136,9 +136,9 @@ def get_og_tags_for_assay(chembl_id):
         item = response.hits[0]
         # add the items to the description if they are available
 
-        add_attribute_to_tescription(description_items, item, 'assay_type_description', 'Type')
-        add_attribute_to_tescription(description_items, item, 'assay_organism', 'Organism')
-        add_attribute_to_tescription(description_items, item, 'description', 'Description')
+        add_attribute_to_description(description_items, item, 'assay_type_description', 'Type')
+        add_attribute_to_description(description_items, item, 'assay_organism', 'Organism')
+        add_attribute_to_description(description_items, item, 'description', 'Description')
 
         description = ', '.join(description_items)
 
@@ -173,9 +173,9 @@ def get_og_tags_for_cell_line(chembl_id):
         if cell_name is not None:
             title = 'Cell Line: ' + cell_name
 
-        add_attribute_to_tescription(description_items, item, 'cell_source_organism', 'Source Organism')
-        add_attribute_to_tescription(description_items, item, 'cell_source_tissue', 'Source Tissue')
-        add_attribute_to_tescription(description_items, item, 'cell_description', 'Description')
+        add_attribute_to_description(description_items, item, 'cell_source_organism', 'Source Organism')
+        add_attribute_to_description(description_items, item, 'cell_source_tissue', 'Source Tissue')
+        add_attribute_to_description(description_items, item, 'cell_description', 'Description')
         description = ', '.join(description_items)
 
     og_tags = {
@@ -242,10 +242,10 @@ def get_og_tags_for_document(chembl_id):
         if doc_title is not None:
             title = 'Document: ' + doc_title
 
-        add_attribute_to_tescription(description_items, item, 'doc_type', 'Type')
-        add_attribute_to_tescription(description_items, item, 'abstract', 'Abstract')
-        add_attribute_to_tescription(description_items, item, 'journal', 'Journal')
-        add_attribute_to_tescription(description_items, item, 'authors', 'Authors')
+        add_attribute_to_description(description_items, item, 'doc_type', 'Type')
+        add_attribute_to_description(description_items, item, 'abstract', 'Abstract')
+        add_attribute_to_description(description_items, item, 'journal', 'Journal')
+        add_attribute_to_description(description_items, item, 'authors', 'Authors')
         description = ', '.join(description_items)
 
     og_tags = {
