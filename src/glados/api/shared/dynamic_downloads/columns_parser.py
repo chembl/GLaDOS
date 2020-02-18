@@ -1,3 +1,5 @@
+from django.conf import settings
+
 def parse_synonyms(raw_synonyms):
     true_synonyms = set()
     for raw_syn in raw_synonyms:
@@ -21,17 +23,17 @@ def parse_mech_of_act_synonyms(raw_synonyms):
 
 
 PARSING_FUNCTIONS = {
-    'chembl_molecule': {
+    settings.CHEMBL_ES_INDEX_PREFIX+'molecule': {
         'molecule_synonyms': lambda original_value: parse_synonyms(original_value)
     },
-    'chembl_target': {
+    settings.CHEMBL_ES_INDEX_PREFIX+'target': {
         'target_components': lambda original_value: parse_target_uniprot_accession(original_value)
     },
-    'chembl_mechanism_by_parent_target': {
+    settings.CHEMBL_ES_INDEX_PREFIX+'mechanism_by_parent_target': {
         'parent_molecule._metadata.drug.drug_data.synonyms': lambda original_value: parse_mech_of_act_synonyms(
             original_value)
     },
-    'chembl_drug_indication_by_parent': {
+    settings.CHEMBL_ES_INDEX_PREFIX+'drug_indication_by_parent': {
         'parent_molecule._metadata.drug.drug_data.synonyms': lambda original_value: parse_mech_of_act_synonyms(
             original_value)
     }
