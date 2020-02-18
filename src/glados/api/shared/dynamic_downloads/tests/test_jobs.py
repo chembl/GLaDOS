@@ -18,10 +18,10 @@ class DownloadJobsTester(TestCase):
         DownloadJob.objects.all().delete()
 
     def test_make_csv_download_file_no_context(self):
-        job_id = 'CHEMBL25-chembl_molecule-gZ6DeuyotzHOwnHi1bKOiu_WHWBbLgOlaCGSTa4Hiuw=.csv'
+        job_id = 'CHEMBL25-'+settings.CHEMBL_ES_INDEX_PREFIX+'molecule-gZ6DeuyotzHOwnHi1bKOiu_WHWBbLgOlaCGSTa4Hiuw=.csv'
         test_download_job = DownloadJob(
             job_id=job_id,
-            index_name='chembl_molecule',
+            index_name=settings.CHEMBL_ES_INDEX_PREFIX+'molecule',
             raw_columns_to_download='[{"prop_id":"molecule_chembl_id","label":"ChEMBL ID"},'
                                     '{"prop_id":"pref_name","label":"Name"}]',
             raw_query='{"query_string": {"query": "molecule_chembl_id:(CHEMBL59)"}}',
@@ -73,11 +73,11 @@ class DownloadJobsTester(TestCase):
         with open(test_search_context_path, 'wt') as test_search_file:
             test_search_file.write(json.dumps(test_raw_context))
 
-        job_id = 'CHEMBL25-chembl_molecule-gZ6DeuyotzHOwnHi1bKOiu_WHWBbLgOlaCGSTa4Hiuw=.csv'
+        job_id = 'CHEMBL25-'+settings.CHEMBL_ES_INDEX_PREFIX+'molecule-gZ6DeuyotzHOwnHi1bKOiu_WHWBbLgOlaCGSTa4Hiuw=.csv'
         context_id = 'test_search_context'
         test_download_job = DownloadJob(
             job_id=job_id,
-            index_name='chembl_molecule',
+            index_name=settings.CHEMBL_ES_INDEX_PREFIX+'molecule',
             raw_columns_to_download='[{"prop_id":"molecule_chembl_id","label":"ChEMBL ID"},'
                                     '{"prop_id":"pref_name","label":"Name"},'
                                     '{"prop_id": "similarity","label": "Similarity","is_contextual": true}]',
@@ -138,11 +138,12 @@ class DownloadJobsTester(TestCase):
         with open(test_search_context_path, 'wt') as test_search_file:
             test_search_file.write(json.dumps(test_raw_context))
 
-        job_id = 'CHEMBL2108809-chembl_molecule-gZ6DeuyotzHOwnHi1bKOiu_WHWBbLgOlaCGSTa4Hiuw=.csv'
+        job_id = 'CHEMBL2108809-'+settings.CHEMBL_ES_INDEX_PREFIX +\
+                 'molecule-gZ6DeuyotzHOwnHi1bKOiu_WHWBbLgOlaCGSTa4Hiuw=.csv'
         context_id = 'test_search_context'
         test_download_job = DownloadJob(
             job_id=job_id,
-            index_name='chembl_molecule',
+            index_name=settings.CHEMBL_ES_INDEX_PREFIX+'molecule',
             raw_columns_to_download='[{"label": "ChEMBL ID", "prop_id": "molecule_chembl_id"}, '
                                     '{"label": "Research Codes", "prop_id": "research_codes", "is_virtual": true, '
                                     '"is_contextual": false, "based_on": "molecule_synonyms"}, '
@@ -193,10 +194,10 @@ class DownloadJobsTester(TestCase):
         os.remove(test_search_context_path)
 
     def test_fails_when_format_is_not_available(self):
-        job_id = 'CHEMBL25-chembl_molecule-gZ6DeuyotzHOwnHi1bKOiu_WHWBbLgOlaCGSTa4Hiuw=.csv'
+        job_id = 'CHEMBL25-'+settings.CHEMBL_ES_INDEX_PREFIX+'molecule-gZ6DeuyotzHOwnHi1bKOiu_WHWBbLgOlaCGSTa4Hiuw=.csv'
         test_download_job = DownloadJob(
             job_id=job_id,
-            index_name='chembl_molecule',
+            index_name=settings.CHEMBL_ES_INDEX_PREFIX+'molecule',
             raw_columns_to_download='[{"prop_id":"molecule_chembl_id","label":"ChEMBL ID"},'
                                     '{"prop_id":"pref_name","label":"Name"}]',
             raw_query='{"query_string": {"query": "molecule_chembl_id:(CHEMBL59)"}}',
@@ -212,10 +213,10 @@ class DownloadJobsTester(TestCase):
             jobs.make_download_file(job_id)
 
     def test_make_sdf_download_file(self):
-        job_id = 'CHEMBL25-chembl_molecule-gZ6DeuyotzHOwnHi1bKOiu_WHWBbLgOlaCGSTa4Hiuw=.csv'
+        job_id = 'CHEMBL25-'+settings.CHEMBL_ES_INDEX_PREFIX+'molecule-gZ6DeuyotzHOwnHi1bKOiu_WHWBbLgOlaCGSTa4Hiuw=.csv'
         test_download_job = DownloadJob(
             job_id=job_id,
-            index_name='chembl_molecule',
+            index_name=settings.CHEMBL_ES_INDEX_PREFIX+'molecule',
             raw_query='{"query_string": {"query": "molecule_chembl_id:(CHEMBL59)"}}',
             desired_format='sdf',
             log=DownloadJob.format_log_message('Job Queued'),
