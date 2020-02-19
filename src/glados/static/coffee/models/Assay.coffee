@@ -5,7 +5,7 @@ Assay = Backbone.Model.extend
   idAttribute: 'assay_chembl_id'
   defaults:
     fetch_from_elastic: true
-  indexName:'chembl_assay'
+  indexName:glados.Settings.CHEMBL_ES_INDEX_PREFIX+'assay'
   initialize: ->
 
     id = @get('id')
@@ -14,7 +14,7 @@ Assay = Backbone.Model.extend
     @set('assay_chembl_id', id)
 
     if @get('fetch_from_elastic')
-      @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_assay/_doc/' + id
+      @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/'+glados.Settings.CHEMBL_ES_INDEX_PREFIX+'assay/_doc/' + id
     else
       @url = glados.Settings.WS_BASE_URL + 'assay/' + id + '.json'
 
@@ -77,7 +77,7 @@ Assay.getAssaysListURL = (filter, isFullState=false, fragmentOnly=false) ->
     filter: encodeURIComponent(filter) unless not filter?
     is_full_state: isFullState
 
-Assay.INDEX_NAME = 'chembl_assay'
+Assay.INDEX_NAME = glados.Settings.CHEMBL_ES_INDEX_PREFIX+'assay'
 Assay.PROPERTIES_VISUAL_CONFIG = {
   'assay_chembl_id': {
     link_base: 'report_card_url'
