@@ -36,7 +36,7 @@ describe "Columns Factory for paginated views", ->
     configFromServer = {
       "sortable": true,
       "prop_id": "molecule_chembl_id",
-      "index_name": "chembl_molecule",
+      "index_name": glados.Settings.CHEMBL_ES_INDEX_PREFIX+"molecule",
       "label": "ChEMBL ID",
       "label_mini": "ChEMBL ID",
       "aggregatable": true,
@@ -55,7 +55,7 @@ describe "Columns Factory for paginated views", ->
 
     configFromServer = {
       "sortable": false,
-      "index_name": "chembl_molecule",
+      "index_name": glados.Settings.CHEMBL_ES_INDEX_PREFIX+"molecule",
       "label": "Synonyms",
       "prop_id": "molecule_synonyms",
       "aggregatable": false,
