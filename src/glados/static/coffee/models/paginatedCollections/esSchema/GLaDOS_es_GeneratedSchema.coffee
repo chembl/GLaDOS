@@ -2,7 +2,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 # The contents of this file were generated from the GLaDOS-es project
 
   GLaDOS_es_GeneratedSchema:
-    settings.CHEMBL_ES_INDEX_PREFIX+'activity':
+    chembl_26_activity:
       '_metadata.activity_generated.short_data_validity_comment' : 
         type : String
         aggregatable : true
@@ -611,7 +611,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         label_id : 'glados_es_gs__activity__value__label'
         label_mini_id : 'glados_es_gs__activity__value__label__mini'
 
-    settings.CHEMBL_ES_INDEX_PREFIX+'assay':
+    chembl_26_assay:
       '_metadata.assay_generated.confidence_label' : 
         type : String
         aggregatable : true
@@ -1132,7 +1132,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         label_id : 'glados_es_gs__assay__tissue_chembl_id__label'
         label_mini_id : 'glados_es_gs__assay__tissue_chembl_id__label__mini'
 
-    settings.CHEMBL_ES_INDEX_PREFIX+'cell_line':
+    chembl_26_cell_line:
       '_metadata.es_completion' : 
         type : String
         aggregatable : false
@@ -1409,7 +1409,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         label_id : 'glados_es_gs__cell_line__efo_id__label'
         label_mini_id : 'glados_es_gs__cell_line__efo_id__label__mini'
 
-    settings.CHEMBL_ES_INDEX_PREFIX+'document':
+    chembl_26_document:
       '_metadata.es_completion' : 
         type : String
         aggregatable : false
@@ -1766,7 +1766,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         label_id : 'glados_es_gs__document__year__label'
         label_mini_id : 'glados_es_gs__document__year__label__mini'
 
-    settings.CHEMBL_ES_INDEX_PREFIX+'drug'_indication_by_parent:
+    chembl_26_drug_indication_by_parent:
       'drug_indication._metadata.all_molecule_chembl_ids' : 
         type : String
         aggregatable : true
@@ -3575,7 +3575,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         label_id : 'glados_es_gs__drug_indication_by_parent__parent_molecule__label'
         label_mini_id : 'glados_es_gs__drug_indication_by_parent__parent_molecule__label__mini'
 
-    settings.CHEMBL_ES_INDEX_PREFIX+'mechanism'_by_parent_target:
+    chembl_26_mechanism_by_parent_target:
       'binding_site.site_components.component_id' : 
         type : String
         aggregatable : true
@@ -6104,7 +6104,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         label_id : 'glados_es_gs__mechanism_by_parent_target__target__label'
         label_mini_id : 'glados_es_gs__mechanism_by_parent_target__target__label__mini'
 
-    settings.CHEMBL_ES_INDEX_PREFIX+'molecule':
+    chembl_26_molecule:
       '_metadata.activity_count' : 
         type : Number
         integer : true
@@ -7831,7 +7831,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         label_id : 'glados_es_gs__molecule__withdrawn_year__label'
         label_mini_id : 'glados_es_gs__molecule__withdrawn_year__label__mini'
 
-    settings.CHEMBL_ES_INDEX_PREFIX+'target':
+    chembl_26_target:
       '_metadata.activity_count' : 
         type : Number
         integer : true
@@ -8470,7 +8470,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         label_id : 'glados_es_gs__target__tax_id__label'
         label_mini_id : 'glados_es_gs__target__tax_id__label__mini'
 
-    settings.CHEMBL_ES_INDEX_PREFIX+'tissue':
+    chembl_26_tissue:
       '_metadata.es_completion' : 
         type : String
         aggregatable : false
