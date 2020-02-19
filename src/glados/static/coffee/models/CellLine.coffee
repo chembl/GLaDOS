@@ -13,7 +13,7 @@ CellLine = Backbone.Model.extend
     @set('cell_chembl_id', id)
 
     if @get('fetch_from_elastic')
-      @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_cell_line/_doc/' + id
+      @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/'+glados.Settings.CHEMBL_ES_INDEX_PREFIX+'cell_line/_doc/' + id
     else
       @url = glados.Settings.WS_BASE_URL + 'cell_line/' + id + '.json'
 
@@ -40,7 +40,7 @@ _.extend(CellLine, glados.models.base.ReportCardEntity)
 CellLine.color = 'deep-purple'
 CellLine.reportCardPath = 'cell_line_report_card/'
 
-CellLine.INDEX_NAME = 'chembl_cell_line'
+CellLine.INDEX_NAME = glados.Settings.CHEMBL_ES_INDEX_PREFIX+'cell_line'
 CellLine.PROPERTIES_VISUAL_CONFIG = {
   'cell_chembl_id': {
     link_base: 'report_card_url'
