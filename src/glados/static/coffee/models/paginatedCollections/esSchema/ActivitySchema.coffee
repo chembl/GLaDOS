@@ -4,7 +4,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
   # --------------------------------------------------------------------------------------------------------------------
   ActivitySchema:
     FACETS_GROUPS: glados.models.paginatedCollections.esSchema.FacetingHandler.generateFacetsForIndex(
-      'chembl_activity',
+      settings.CHEMBL_ES_INDEX_PREFIX+'activity',
       # Default Selected
       [
         'standard_type',

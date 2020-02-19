@@ -26,7 +26,7 @@ glados.useNameSpace 'glados.models.Compound',
       return objData
 
 
-glados.models.Compound.MechanismOfAction.INDEX_NAME = 'chembl_mechanism_by_parent_target'
+glados.models.Compound.MechanismOfAction.INDEX_NAME = settings.CHEMBL_ES_INDEX_PREFIX+'mechanism_by_parent_target'
 glados.models.Compound.MechanismOfAction.PROPERTIES_VISUAL_CONFIG = {
   'parent_molecule.molecule_chembl_id': {
     image_base_url: 'parent_image_url'

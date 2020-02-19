@@ -4,7 +4,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
   # --------------------------------------------------------------------------------------------------------------------
   CompoundSchema:
     FACETS_GROUPS: glados.models.paginatedCollections.esSchema.FacetingHandler.generateFacetsForIndex(
-      'chembl_molecule',
+      settings.CHEMBL_ES_INDEX_PREFIX+'molecule',
       # Default Selected
       [
         {

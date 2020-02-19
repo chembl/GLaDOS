@@ -11,7 +11,7 @@ describe "Properties Factory for visualisation", ->
 
   it 'parses the value for a property with a value parser', ->
 
-    indexName = 'chembl_molecule'
+    indexName = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
     propName = 'therapeutic_flag'
     testCases = [
       {value: 0, parsedMustBe: 'No'}
@@ -25,7 +25,7 @@ describe "Properties Factory for visualisation", ->
         tCase.value))
 
   it 'parses the value for a property for which there is no parser (no property with that name)', ->
-    indexName = 'chembl_molecule'
+    indexName = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
     propName = 'noexist'
     valueMustBe = 'value'
 

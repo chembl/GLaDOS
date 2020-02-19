@@ -1,7 +1,7 @@
 glados.useNameSpace 'glados.models.visualisation',
   PropertiesFactory:
     Compound:
-      esIndex:'chembl_molecule'
+      esIndex:settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
       Properties:
         USAN_YEAR:
           propName: 'usan_year'
@@ -238,7 +238,7 @@ glados.useNameSpace 'glados.models.visualisation',
           ]
           colourScaleType: glados.Visualisation.CATEGORICAL
     Target:
-      esIndex:'chembl_target'
+      esIndex:settings.CHEMBL_ES_INDEX_PREFIX+'target'
       Properties:
         ACTIVITY_TYPES:
           propName: 'type'
@@ -331,7 +331,7 @@ glados.useNameSpace 'glados.models.visualisation',
 
           colourScaleType: glados.Visualisation.CATEGORICAL
     Cell:
-      esIndex: 'chembl_cell_line'
+      esIndex: settings.CHEMBL_ES_INDEX_PREFIX+'cell_line'
       Properties:
         RELATED_ASSAYS:
           propName: 'type'
@@ -366,7 +366,7 @@ glados.useNameSpace 'glados.models.visualisation',
           ]
           colourScaleType: glados.Visualisation.CATEGORICAL
     Tissue:
-      esIndex:'chembl_tissue'
+      esIndex:settings.CHEMBL_ES_INDEX_PREFIX+'tissue'
       Properties:
         RELATED_ASSAYS:
           propName: 'type'
@@ -401,7 +401,7 @@ glados.useNameSpace 'glados.models.visualisation',
           ]
           colourScaleType: glados.Visualisation.CATEGORICAL
     Assay:
-      esIndex:'chembl_assay'
+      esIndex:settings.CHEMBL_ES_INDEX_PREFIX+'assay'
       Properties:
         RELATED_TARGETS:
           propName: 'type'
@@ -420,7 +420,7 @@ glados.useNameSpace 'glados.models.visualisation',
           ]
           colourScaleType: glados.Visualisation.CATEGORICAL
     Activity:
-      esIndex:'chembl_activity'
+      esIndex:settings.CHEMBL_ES_INDEX_PREFIX+'activity'
       Properties:
         LIGAND_EFFICIENCY_SEI:
           propName: 'ligand_efficiency.sei'

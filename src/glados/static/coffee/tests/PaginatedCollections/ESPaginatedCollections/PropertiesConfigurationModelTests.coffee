@@ -136,7 +136,7 @@ describe 'PropertiesConfigurationModel', ->
   }
 
   it 'Generates the correct url', ->
-    indexName = 'chembl_molecule'
+    indexName = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
     groupName = 'browser_table'
 
     propertiesConfigModel = new glados.models.paginatedCollections.esSchema.PropertiesConfigurationModel
@@ -151,7 +151,7 @@ describe 'PropertiesConfigurationModel', ->
     expect(urlMustBe).toBe(urlGot)
 
   it 'Parses the response correctly', ->
-    indexName = 'chembl_molecule'
+    indexName = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
     groupName = 'browser_table'
 
     propertiesConfigModel = new glados.models.paginatedCollections.esSchema.PropertiesConfigurationModel
@@ -195,7 +195,7 @@ describe 'PropertiesConfigurationModel', ->
     for comp in comparatorsInFilterList
       comparatorsInFilterMustBe[comp] = comp
 
-    indexName = 'chembl_molecule'
+    indexName = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
     groupName = 'browser_table'
 
     propertiesConfigModel = new glados.models.paginatedCollections.esSchema.PropertiesConfigurationModel
