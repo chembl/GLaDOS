@@ -3,7 +3,7 @@ glados.useNameSpace 'glados.models.Compound',
 
     initialize: ->
       @url = glados.models.paginatedCollections.Settings.ES_BASE_URL +
-      '/chembl_metabolism/_search?q=_metadata.all_graph_chembl_ids:' + @get('molecule_chembl_id') + '&size=10000'
+      '/'+settings.CHEMBL_ES_INDEX_PREFIX+'metabolism/_search?q=_metadata.all_graph_chembl_ids:' + @get('molecule_chembl_id') + '&size=10000'
 
     #-------------------------------------------------------------------------------------------------------------------
     # Parsing

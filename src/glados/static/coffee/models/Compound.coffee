@@ -5,7 +5,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
   idAttribute: 'molecule_chembl_id'
   defaults:
     fetch_from_elastic: true
-  indexName:'chembl_molecule'
+  indexName: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
   initialize: ->
 
     id = @get('id')
@@ -14,7 +14,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     @set('molecule_chembl_id', id)
 
     if @get('fetch_from_elastic')
-      @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_molecule/_doc/' + id
+      @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/'+glados.Settings.CHEMBL_ES_INDEX_PREFIX+'molecule/_doc/' + id
     else
       @url = glados.Settings.WS_BASE_URL + 'molecule/' + id + '.json'
 
@@ -593,7 +593,7 @@ Compound.reportCardPath = 'compound_report_card/'
 
 Compound.getSDFURL = (chemblId) -> glados.Settings.WS_BASE_URL + 'molecule/' + chemblId + '.sdf'
 
-Compound.INDEX_NAME = 'chembl_molecule'
+Compound.INDEX_NAME = glados.Settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
 
 Compound.PROPERTIES_VISUAL_CONFIG = {
   'molecule_chembl_id': {

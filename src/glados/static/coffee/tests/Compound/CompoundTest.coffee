@@ -293,7 +293,7 @@ describe "Compound", ->
 
       it 'generates the elasctisearch url', ->
 
-        urlMustBe = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_molecule/_doc/' + chemblID
+        urlMustBe = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/'+settings.CHEMBL_ES_INDEX_PREFIX+'molecule/_doc/' + chemblID
         expect(compound.url).toBe(urlMustBe)
 
       it 'parses the basic information received from web services', -> testBasicProperties(esResponse._source, parsed)
