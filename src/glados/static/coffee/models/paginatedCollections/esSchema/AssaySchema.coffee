@@ -4,7 +4,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
   # --------------------------------------------------------------------------------------------------------------------
   AssaySchema:
     FACETS_GROUPS: glados.models.paginatedCollections.esSchema.FacetingHandler.generateFacetsForIndex(
-      settings.CHEMBL_ES_INDEX_PREFIX+'assay'
+      glados.Settings.CHEMBL_ES_INDEX_PREFIX+'assay'
       # Default Selected
       [
         '_metadata.assay_generated.type_label',

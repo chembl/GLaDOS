@@ -21,7 +21,7 @@ describe "An elasticsearch collection initialised from a custom query (full)", -
     console.log 'esQuery: ', JSON.stringify(esQuery)
     console.log 'query: ', Compound.getCompoundsListURL(JSON.stringify(esQuery))
     expect(esList.getMeta('id_name')).toBe("ESCompound")
-    expect(esList.getMeta('index')).toBe("/"+settings.CHEMBL_ES_INDEX_PREFIX+"molecule")
+    expect(esList.getMeta('index')).toBe("/"+glados.Settings.CHEMBL_ES_INDEX_PREFIX+"molecule")
     expect(esList.getMeta('key_name')).toBe("COMPOUND_COOL_CARDS")
     esQueryGot = esList.getMeta('custom_query')
     expect(_.isEqual(esQueryGot, JSON.stringify(esQuery))).toBe(true)

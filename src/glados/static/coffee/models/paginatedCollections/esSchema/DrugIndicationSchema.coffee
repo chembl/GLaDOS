@@ -4,7 +4,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
   # --------------------------------------------------------------------------------------------------------------------
   DrugIndicationSchema:
     FACETS_GROUPS: glados.models.paginatedCollections.esSchema.FacetingHandler.generateFacetsForIndex(
-      settings.CHEMBL_ES_INDEX_PREFIX+'drug_indication_by_parent',
+      glados.Settings.CHEMBL_ES_INDEX_PREFIX+'drug_indication_by_parent',
       # Default Selected
       [
         {

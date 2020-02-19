@@ -4,5 +4,5 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
   # --------------------------------------------------------------------------------------------------------------------
   TissueSchema:
     FACETS_GROUPS: glados.models.paginatedCollections.esSchema.FacetingHandler.generateFacetsForIndex(
-      settings.CHEMBL_ES_INDEX_PREFIX+'tissue', [], [], []
+      glados.Settings.CHEMBL_ES_INDEX_PREFIX+'tissue', [], [], []
     )

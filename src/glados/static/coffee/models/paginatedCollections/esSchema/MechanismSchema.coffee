@@ -4,7 +4,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
   # --------------------------------------------------------------------------------------------------------------------
   MechanismSchema:
     FACETS_GROUPS: glados.models.paginatedCollections.esSchema.FacetingHandler.generateFacetsForIndex(
-      settings.CHEMBL_ES_INDEX_PREFIX+'mechanism_by_parent_target',
+      glados.Settings.CHEMBL_ES_INDEX_PREFIX+'mechanism_by_parent_target',
       # Default Selected
       [
         'mechanism_of_action.action_type',

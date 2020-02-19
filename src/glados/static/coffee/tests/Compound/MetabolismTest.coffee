@@ -24,7 +24,7 @@ describe 'Compound Metabolism', ->
       molecule_chembl_id: testChemblID
 
     urlMustBe = glados.models.paginatedCollections.Settings.ES_BASE_URL +
-      '/'+settings.CHEMBL_ES_INDEX_PREFIX+'metabolism/_search?q=_metadata.all_graph_chembl_ids:' + testChemblID + '&size=10000'
+      '/'+glados.Settings.CHEMBL_ES_INDEX_PREFIX+'metabolism/_search?q=_metadata.all_graph_chembl_ids:' + testChemblID + '&size=10000'
     console.log 'URL: ', compoundMetabolism.url
     expect(compoundMetabolism.url).toBe(urlMustBe)
 

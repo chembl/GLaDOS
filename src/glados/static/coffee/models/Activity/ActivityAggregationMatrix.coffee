@@ -35,7 +35,7 @@ glados.useNameSpace 'glados.models.Activity',
       @set('matrix', cleanMatrixConfig, {silent:true})
       @set('state', glados.models.Aggregations.Aggregation.States.LOADING_BUCKETS)
 
-      @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/'+settings.CHEMBL_ES_INDEX_PREFIX+'activity/_search'
+      @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/'+glados.Settings.CHEMBL_ES_INDEX_PREFIX+'activity/_search'
       # Creates the Elastic Search Query parameters and serializes them
       esJSONRequest = JSON.stringify(@getRequestData())
       fetchESOptions =
