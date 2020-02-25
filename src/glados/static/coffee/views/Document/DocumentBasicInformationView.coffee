@@ -37,6 +37,7 @@ DocumentBasicInformationView = CardView.extend(DownloadViewExt).extend
       title: @model.get('title')
       abstract: @model.get('abstract')
       authors: @model.get('authors')
+      patent_id: @model.get('patent_id')
 
   # --------------------------------------------------------------------
   # Downloads
