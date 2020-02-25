@@ -42,11 +42,14 @@ glados.useNameSpace 'glados.views.References',
 
         for refKey, refsList of refsIndex
 
+          if refKey == 'CREDO'
+            continue
+
           for ref in refsList
             ref.src_url = ref.xref_src_url
             ref.link = ref.xref_url
 
-            if refKey in ['PDBe', 'CREDO']
+            if refKey == 'PDBe'
               ref.id = ref.xref_id
             else
               ref.id = ref.xref_name
