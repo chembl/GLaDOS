@@ -736,13 +736,13 @@ Compound.COLUMNS = {
   QED_WEIGHTED: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     comparator: 'molecule_properties.qed_weighted'
   APKA: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.acd_most_apka'
+    comparator: 'molecule_properties.cx_most_apka'
   BPKA: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.acd_most_bpka'
-  ACD_LOGP: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.acd_logp'
-  ACD_LOGD: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.acd_logd'
+    comparator: 'molecule_properties.cx_most_bpka'
+  LOGP: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
+    comparator: 'molecule_properties.cx_logp'
+  LOGD: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
+    comparator: 'molecule_properties.cx_logd'
   AROMATIC_RINGS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     comparator: 'molecule_properties.aromatic_rings'
   HBA_LIPINSKI: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
@@ -898,8 +898,8 @@ Compound.COLUMNS_SETTINGS = {
 #  RESULTS_LIST_REPORT_CARD_ADDITIONAL:[
 #    Compound.COLUMNS.APKA,
 #    Compound.COLUMNS.BPKA,
-#    Compound.COLUMNS.ACD_LOGP,
-#    Compound.COLUMNS.ACD_LOGD,
+#    Compound.COLUMNS.LOGP,
+#    Compound.COLUMNS.LOGD,
 #    Compound.COLUMNS.AROMATIC_RINGS,
 #    Compound.COLUMNS.STRUCTURE_TYPE,
 #    Compound.COLUMNS.INORGANIC_FLAG,
