@@ -41,7 +41,7 @@ describe "Compound", ->
     testHasNormalImageURL = (response, parsed) ->
 
       chemblID = response.molecule_chembl_id
-      imageURLMustBe = glados.Settings.WS_BASE_URL + 'image/' + chemblID + '.svg?engine=indigo'
+      imageURLMustBe = glados.Settings.WS_BASE_URL + 'image/' + chemblID + '.svg'
       expect(parsed.image_url).toBe(imageURLMustBe)
 
     testHasMetalContainingIMG = (response, parsed) ->

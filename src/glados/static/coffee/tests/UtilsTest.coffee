@@ -135,7 +135,7 @@ describe "Utils", ->
         expect(col.value?).toBe(true)
 
       expect(colsWithVals[0].has_link).toBe(true)
-      expect(colsWithVals[0].img_url).toBe(glados.Settings.WS_BASE_URL+"image/CHEMBL25.svg?engine=indigo")
+      expect(colsWithVals[0].img_url).toBe(glados.Settings.WS_BASE_URL+"image/CHEMBL25.svg")
       expect(colsWithVals[0].link_url).toBe("/compound_report_card/CHEMBL25")
       expect(colsWithVals[0].name_to_show).toBe("ChEMBL ID")
       expect(colsWithVals[0].value).toBe("CHEMBL25")
@@ -153,7 +153,7 @@ describe "Utils", ->
       columns = Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD
       [colsWithVals, highlights] = glados.Utils.getColumnsWithValuesAndHighlights(columns, testCompound)
 
-      expect(glados.Utils.getImgURL(colsWithVals)).toBe(glados.Settings.WS_BASE_URL+"image/CHEMBL25.svg?engine=indigo")
+      expect(glados.Utils.getImgURL(colsWithVals)).toBe(glados.Settings.WS_BASE_URL+"image/CHEMBL25.svg")
 
   describe "Buckets", ->
 

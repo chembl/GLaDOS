@@ -329,9 +329,9 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
       #response.image_url = glados.Settings.OLD_DEFAULT_IMAGES_BASE_URL + response.molecule_chembl_id
     else
-      objData.image_url = glados.Settings.WS_BASE_URL + 'image/' + objData.molecule_chembl_id + '.svg?engine=indigo'
+      objData.image_url = glados.Settings.WS_BASE_URL + 'image/' + objData.molecule_chembl_id + '.svg'
       objData.image_url_png = glados.Settings.WS_BASE_URL + 'image/' + objData.molecule_chembl_id \
-          + '.png?engine=indigo'
+          + '.png'
       objData.structure_image = true
 
     objData.report_card_url = Compound.get_report_card_url(objData.molecule_chembl_id)

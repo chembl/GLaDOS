@@ -17,7 +17,7 @@ glados.useNameSpace 'glados.models.Compound',
         objData.parent_image_url = "#{glados.Settings.STATIC_IMAGES_URL}compound_placeholders/#{imageFile}"
       else
         objData.parent_image_url = \
-          "#{glados.Settings.WS_BASE_URL}image/#{objData.parent_molecule.molecule_chembl_id}.svg?engine=indigo"
+          "#{glados.Settings.WS_BASE_URL}image/#{objData.parent_molecule.molecule_chembl_id}.svg"
       objData.molecule_link = Compound.get_report_card_url(objData.parent_molecule.molecule_chembl_id)
 
       objData.target_link = null

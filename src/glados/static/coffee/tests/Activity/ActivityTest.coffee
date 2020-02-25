@@ -8,7 +8,7 @@ describe "Activity", ->
     testHasNormalImageURL = (response, parsed) ->
 
       moleculeChemblID = parsed.molecule_chembl_id
-      imageURLMustBe = "#{glados.Settings.WS_BASE_URL}image/#{moleculeChemblID}.svg?engine=indigo"
+      imageURLMustBe = "#{glados.Settings.WS_BASE_URL}image/#{moleculeChemblID}.svg"
       imgURLGot = parsed.image_url
       expect(imageURLMustBe).toBe(imgURLGot)
 
