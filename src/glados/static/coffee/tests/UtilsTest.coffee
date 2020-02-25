@@ -91,7 +91,7 @@ describe "Utils", ->
 
         expect(glados.Utils.getNestedValue(testObj, 'availability_type')).toBe('2')
         expect(glados.Utils.getNestedValue(testObj, 'biotherapeutic')).toBe(glados.Settings.DEFAULT_NULL_VALUE_LABEL)
-        expect(glados.Utils.getNestedValue(testObj, 'molecule_properties.acd_logd')).toBe('-1.68')
+        expect(glados.Utils.getNestedValue(testObj, 'molecule_properties.cx_logd')).toBe('-1.68')
 
     describe "When some parent items are null", ->
 
@@ -105,7 +105,7 @@ describe "Utils", ->
       it 'Retrieves a nested value from an object', ->
 
         expect(glados.Utils.getNestedValue(testObj, 'molecule_properties')).toBe(glados.Settings.DEFAULT_NULL_VALUE_LABEL)
-        expect(glados.Utils.getNestedValue(testObj, 'molecule_properties.acd_logd')).toBe(glados.Settings.DEFAULT_NULL_VALUE_LABEL)
+        expect(glados.Utils.getNestedValue(testObj, 'molecule_properties.cx_logd')).toBe(glados.Settings.DEFAULT_NULL_VALUE_LABEL)
 
       it 'Return nulls instead of null value label when requested', ->
 
@@ -113,7 +113,7 @@ describe "Utils", ->
           customNullValueLabel=undefined, returnUndefined=true)
         expect(valueGot).toBe(undefined)
 
-        valueGot = glados.Utils.getNestedValue(testObj, 'molecule_properties.acd_logd', forceAsNumber=false,
+        valueGot = glados.Utils.getNestedValue(testObj, 'molecule_properties.cx_logd', forceAsNumber=false,
           customNullValueLabel=undefined, returnUndefined=true)
         expect(valueGot).toBe(undefined)
 

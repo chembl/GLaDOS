@@ -36,7 +36,7 @@ describe 'PropertiesConfigurationModel', ->
           "sortable": true,
           "label": "ACD BpKa",
           "label_mini": "Acd Most Bpka",
-          "prop_id": "molecule_properties.acd_most_bpka"
+          "prop_id": "molecule_properties.cx_most_bpka"
         },
         {
           "aggregatable": true,
@@ -45,7 +45,7 @@ describe 'PropertiesConfigurationModel', ->
           "sortable": true,
           "label": "ACD ApKa",
           "label_mini": "Acd Most Apka",
-          "prop_id": "molecule_properties.acd_most_apka"
+          "prop_id": "molecule_properties.cx_most_apka"
         },
         {
           "type": "string",

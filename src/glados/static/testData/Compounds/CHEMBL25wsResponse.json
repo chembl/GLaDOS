@@ -24,10 +24,10 @@
     "parent_chembl_id": "CHEMBL25"
   },
   "molecule_properties": {
-    "acd_logd": "-1.68",
-    "acd_logp": "1.4",
-    "acd_most_apka": "3.48",
-    "acd_most_bpka": null,
+    "cx_logd": "-1.68",
+    "cx_logp": "1.4",
+    "cx_most_apka": "3.48",
+    "cx_most_bpka": null,
     "alogp": "1.23",
     "aromatic_rings": 1,
     "full_molformula": "C9H8O4",
