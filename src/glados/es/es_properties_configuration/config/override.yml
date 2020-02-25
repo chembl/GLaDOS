@@ -28,14 +28,14 @@ chembl_26_molecule:
     label: 'Passes Ro3'
   'molecule_properties.qed_weighted':
     label: 'QED Weighted'
-  'molecule_properties.acd_most_apka':
-    label: 'ACD ApKa'
-  'molecule_properties.acd_most_bpka':
-    label: 'ACD BpKa'
-  'molecule_properties.acd_logp':
-    label: 'ACD LogP'
-  'molecule_properties.acd_logd':
-    label: 'ACD LogD'
+  'molecule_properties.cx_most_apka':
+    label: 'CX ApKa'
+  'molecule_properties.cx_most_bpka':
+    label: 'CX BpKa'
+  'molecule_properties.cx_logp':
+    label: 'CX LogP'
+  'molecule_properties.cx_logd':
+    label: 'CX LogD'
   'molecule_properties.aromatic_rings':
     label: 'Aromatic Rings'
   'structure_type':
