@@ -4,7 +4,7 @@ import glados.es.ws2es.mappings.es_chembl_molecule_n_drug_shared_mapping as mole
 
 # Shards size - can be overridden from the default calculated value here
 # shards = 3,
-replicas = 1
+replicas = 0
 
 analysis = DefaultMappings.COMMON_ANALYSIS
 

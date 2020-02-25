@@ -101,16 +101,16 @@ biotherapeutic = {
 molecule_properties = {
     'properties':
     {
-        'acd_logd': DefaultMappings.DOUBLE,
+        'cx_logd': DefaultMappings.DOUBLE,
         # EXAMPLES:
         # '2.53' , '1.17' , '2.72' , '-1.84' , '-1.70' , '2.69' , '-1.54' , '1.16' , '3.94' , '0.59'
-        'acd_logp': DefaultMappings.DOUBLE,
+        'cx_logp': DefaultMappings.DOUBLE,
         # EXAMPLES:
         # '2.53' , '1.73' , '3.67' , '1.18' , '0.00' , '2.69' , '-1.53' , '2.93' , '4.53' , '5.31'
-        'acd_most_apka': DefaultMappings.DOUBLE,
+        'cx_most_apka': DefaultMappings.DOUBLE,
         # EXAMPLES:
         # '12.54' , '4.14' , '11.20' , '12.01' , '13.42' , '3.55' , '4.86' , '13.26' , '13.99' , '11.15'
-        'acd_most_bpka': DefaultMappings.DOUBLE,
+        'cx_most_bpka': DefaultMappings.DOUBLE,
         # EXAMPLES:
         # '2.00' , '8.19' , '8.34' , '5.12' , '9.09' , '4.05' , '5.64' , '9.25' , '10.28' , '0.54'
         'alogp': DefaultMappings.DOUBLE,
@@ -214,6 +214,10 @@ molecule_structures = {
         # , 'XJIREEHRSUICRY-DEOSSOPVSA-N' , 'IBTISPLPBBHVSU-UVOOVGFISA-N' , 'DVKIICSQTRTPIE-BOPFTXTBSA-N
         # ' , 'ISIPQAHMLLFSFR-XNTDXEJSSA-N' , 'BHYLGMFIZXXPJS-UHFFFAOYSA-N' , 'JEROPZADNPCENF-UHFFFAOYSA
         # -N' , 'KDNMVHRYHFFDMT-UHFFFAOYSA-N'
+
+        'molfile': DefaultMappings.NO_INDEX_TEXT_NO_OFFSETS,
+        # EXAMPLES:
+        # .mol and .sdf files with \n embedded
     }
 }
 
