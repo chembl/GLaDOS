@@ -19,45 +19,44 @@ mappings = \
                     {
                         'component_id': 'NUMERIC',
                         # EXAMPLES:
-                        # '694' , '26' , '4524' , '1594' , '402' , '3413' , '2389' , '3506' , '3413' , '2389'
+                        # '5575' , '118' , '397' , '218' , '1835' , '2632' , '873' , '970' , '3106' , '2231'
                         'domain': 
                         {
                             'properties': 
                             {
                                 'domain_id': 'NUMERIC',
                                 # EXAMPLES:
-                                # '2712' , '3658' , '2683' , '3173' , '2712' , '2951' , '2683' , '2788' , '2951' , '2683
+                                # '2683' , '2922' , '2627' , '2788' , '3719' , '2627' , '2683' , '4003' , '2776' , '2805
                                 # '
                                 'domain_name': 'TEXT',
                                 # EXAMPLES:
-                                # 'Hormone_recep' , 'Neur_chan_LBD' , 'Pkinase' , 'Na_H_Exchanger' , 'Hormone_recep' , '
-                                # Ion_trans' , 'Pkinase' , 'SNF' , 'Ion_trans' , 'Pkinase'
+                                # 'Pkinase' , 'IMPDH' , '7tm_1' , 'SNF' , 'PAF-AH_p_II' , '7tm_1' , 'Pkinase' , 'Pkinase
+                                # _Tyr' , 'Carb_anhydrase' , 'PDEase_I'
                                 'domain_type': 'TEXT',
                                 # EXAMPLES:
                                 # 'Pfam-A' , 'Pfam-A' , 'Pfam-A' , 'Pfam-A' , 'Pfam-A' , 'Pfam-A' , 'Pfam-A' , 'Pfam-A' 
                                 # , 'Pfam-A' , 'Pfam-A'
                                 'source_domain_id': 'TEXT',
                                 # EXAMPLES:
-                                # 'PF00104' , 'PF02931' , 'PF00069' , 'PF00999' , 'PF00104' , 'PF00520' , 'PF00069' , 'P
-                                # F00209' , 'PF00520' , 'PF00069'
+                                # 'PF00069' , 'PF00478' , 'PF00001' , 'PF00209' , 'PF03403' , 'PF00001' , 'PF00069' , 'P
+                                # F07714' , 'PF00194' , 'PF00233'
                             }
                         },
                         'sitecomp_id': 'NUMERIC',
                         # EXAMPLES:
-                        # '1937' , '12606' , '8933' , '7692' , '8784' , '5283' , '3965' , '835' , '11502' , '7632'
+                        # '1503' , '1077' , '432' , '654' , '435' , '438' , '226' , '229' , '232' , '20'
                     }
                 },
                 'site_id': 'NUMERIC',
                 # EXAMPLES:
-                # '1930' , '5139' , '8139' , '4187' , '7190' , '4888' , '7889' , '1679' , '4889' , '7890'
+                # '3' , '4' , '5' , '6' , '7' , '8' , '9' , '10' , '11' , '12'
                 'site_name': 'TEXT',
                 # EXAMPLES:
-                # 'Vitamin D receptor, Hormone_recep domain' , 'Neuronal acetylcholine receptor; alpha2/beta4, Neur_chan
-                # _LBD domain' , 'Cyclin-C/Cyclin-dependent kinase 19, Pkinase domain' , 'Sodium/hydrogen exchanger 3, N
-                # a_H_Exchanger domain' , 'Retinoic acid receptor RXR-alpha/oxysterols receptor LXR-beta, Hormone_recep 
-                # domain' , 'Voltage-gated N-type calcium channel alpha-1B subunit, Ion_trans domain' , 'Casein kinase I
-                # I alpha'/ beta, Pkinase domain' , 'GABA transporter 3, SNF domain' , 'Voltage-gated N-type calcium cha
-                # nnel alpha-1B subunit, Ion_trans domain' , 'Casein kinase II alpha'/ beta, Pkinase domain'
+                # 'Mitogen-activated protein kinase 8, Pkinase domain' , 'Inosine-5'-monophosphate dehydrogenase 1, IMPD
+                # H domain' , 'Dopamine D1 receptor, 7tm_1 domain' , 'GABA transporter 1, SNF domain' , 'LDL-associated 
+                # phospholipase A2, PAF-AH_p_II domain' , 'Purinergic receptor P2Y1, 7tm_1 domain' , '3-phosphoinositide
+                #  dependent protein kinase-1, Pkinase domain' , 'Tyrosine-protein kinase CSK, Pkinase_Tyr domain' , 'Ca
+                # rbonic anhydrase VA, Carb_anhydrase domain' , 'Phosphodiesterase 3B, PDEase_I domain'
             }
         }
     }

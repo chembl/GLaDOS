@@ -15,50 +15,47 @@ mappings = \
             {
                 'level1': 'TEXT',
                 # EXAMPLES:
-                # 'A' , 'A' , 'A' , 'A' , 'A' , 'A' , 'A' , 'A' , 'A' , 'A'
+                # 'C' , 'C' , 'C' , 'C' , 'C' , 'C' , 'C' , 'C' , 'C' , 'C'
                 'level1_description': 'TEXT',
                 # EXAMPLES:
-                # 'ALIMENTARY TRACT AND METABOLISM' , 'ALIMENTARY TRACT AND METABOLISM' , 'ALIMENTARY TRACT AND METABOLI
-                # SM' , 'ALIMENTARY TRACT AND METABOLISM' , 'ALIMENTARY TRACT AND METABOLISM' , 'ALIMENTARY TRACT AND ME
-                # TABOLISM' , 'ALIMENTARY TRACT AND METABOLISM' , 'ALIMENTARY TRACT AND METABOLISM' , 'ALIMENTARY TRACT 
-                # AND METABOLISM' , 'ALIMENTARY TRACT AND METABOLISM'
+                # 'CARDIOVASCULAR SYSTEM' , 'CARDIOVASCULAR SYSTEM' , 'CARDIOVASCULAR SYSTEM' , 'CARDIOVASCULAR SYSTEM' 
+                # , 'CARDIOVASCULAR SYSTEM' , 'CARDIOVASCULAR SYSTEM' , 'CARDIOVASCULAR SYSTEM' , 'CARDIOVASCULAR SYSTEM
+                # ' , 'CARDIOVASCULAR SYSTEM' , 'CARDIOVASCULAR SYSTEM'
                 'level2': 'TEXT',
                 # EXAMPLES:
-                # 'A01' , 'A01' , 'A01' , 'A01' , 'A01' , 'A01' , 'A01' , 'A01' , 'A01' , 'A01'
+                # 'C02' , 'C02' , 'C02' , 'C02' , 'C02' , 'C02' , 'C02' , 'C02' , 'C02' , 'C02'
                 'level2_description': 'TEXT',
                 # EXAMPLES:
-                # 'STOMATOLOGICAL PREPARATIONS' , 'STOMATOLOGICAL PREPARATIONS' , 'STOMATOLOGICAL PREPARATIONS' , 'STOMA
-                # TOLOGICAL PREPARATIONS' , 'STOMATOLOGICAL PREPARATIONS' , 'STOMATOLOGICAL PREPARATIONS' , 'STOMATOLOGI
-                # CAL PREPARATIONS' , 'STOMATOLOGICAL PREPARATIONS' , 'STOMATOLOGICAL PREPARATIONS' , 'STOMATOLOGICAL PR
-                # EPARATIONS'
+                # 'ANTIHYPERTENSIVES' , 'ANTIHYPERTENSIVES' , 'ANTIHYPERTENSIVES' , 'ANTIHYPERTENSIVES' , 'ANTIHYPERTENS
+                # IVES' , 'ANTIHYPERTENSIVES' , 'ANTIHYPERTENSIVES' , 'ANTIHYPERTENSIVES' , 'ANTIHYPERTENSIVES' , 'ANTIH
+                # YPERTENSIVES'
                 'level3': 'TEXT',
                 # EXAMPLES:
-                # 'A01A' , 'A01A' , 'A01A' , 'A01A' , 'A01A' , 'A01A' , 'A01A' , 'A01A' , 'A01A' , 'A01A'
+                # 'C02A' , 'C02A' , 'C02A' , 'C02A' , 'C02A' , 'C02A' , 'C02A' , 'C02A' , 'C02A' , 'C02B'
                 'level3_description': 'TEXT',
                 # EXAMPLES:
-                # 'STOMATOLOGICAL PREPARATIONS' , 'STOMATOLOGICAL PREPARATIONS' , 'STOMATOLOGICAL PREPARATIONS' , 'STOMA
-                # TOLOGICAL PREPARATIONS' , 'STOMATOLOGICAL PREPARATIONS' , 'STOMATOLOGICAL PREPARATIONS' , 'STOMATOLOGI
-                # CAL PREPARATIONS' , 'STOMATOLOGICAL PREPARATIONS' , 'STOMATOLOGICAL PREPARATIONS' , 'STOMATOLOGICAL PR
-                # EPARATIONS'
+                # 'ANTIADRENERGIC AGENTS, CENTRALLY ACTING' , 'ANTIADRENERGIC AGENTS, CENTRALLY ACTING' , 'ANTIADRENERGI
+                # C AGENTS, CENTRALLY ACTING' , 'ANTIADRENERGIC AGENTS, CENTRALLY ACTING' , 'ANTIADRENERGIC AGENTS, CENT
+                # RALLY ACTING' , 'ANTIADRENERGIC AGENTS, CENTRALLY ACTING' , 'ANTIADRENERGIC AGENTS, CENTRALLY ACTING' 
+                # , 'ANTIADRENERGIC AGENTS, CENTRALLY ACTING' , 'ANTIADRENERGIC AGENTS, CENTRALLY ACTING' , 'ANTIADRENER
+                # GIC AGENTS, GANGLION-BLOCKING'
                 'level4': 'TEXT',
                 # EXAMPLES:
-                # 'A01AA' , 'A01AA' , 'A01AA' , 'A01AA' , 'A01AA' , 'A01AA' , 'A01AB' , 'A01AB' , 'A01AB' , 'A01AB'
+                # 'C02AA' , 'C02AA' , 'C02AB' , 'C02AB' , 'C02AC' , 'C02AC' , 'C02AC' , 'C02AC' , 'C02AC' , 'C02BA'
                 'level4_description': 'TEXT',
                 # EXAMPLES:
-                # 'Caries prophylactic agents' , 'Caries prophylactic agents' , 'Caries prophylactic agents' , 'Caries p
-                # rophylactic agents' , 'Caries prophylactic agents' , 'Caries prophylactic agents' , 'Antiinfectives an
-                # d antiseptics for local oral treatment' , 'Antiinfectives and antiseptics for local oral treatment' , 
-                # 'Antiinfectives and antiseptics for local oral treatment' , 'Antiinfectives and antiseptics for local 
-                # oral treatment'
+                # 'Rauwolfia alkaloids' , 'Rauwolfia alkaloids' , 'Methyldopa' , 'Methyldopa' , 'Imidazoline receptor ag
+                # onists' , 'Imidazoline receptor agonists' , 'Imidazoline receptor agonists' , 'Imidazoline receptor ag
+                # onists' , 'Imidazoline receptor agonists' , 'Sulfonium derivatives'
                 'level5': 'TEXT',
                 # EXAMPLES:
-                # 'A01AA01' , 'A01AA02' , 'A01AA03' , 'A01AA04' , 'A01AA30' , 'A01AA51' , 'A01AB02' , 'A01AB03' , 'A01AB
-                # 04' , 'A01AB05'
+                # 'C02AA53' , 'C02AA57' , 'C02AB01' , 'C02AB02' , 'C02AC01' , 'C02AC02' , 'C02AC04' , 'C02AC05' , 'C02AC
+                # 06' , 'C02BA01'
                 'who_name': 'TEXT',
                 # EXAMPLES:
-                # 'sodium fluoride' , 'sodium monofluorophosphate' , 'olaflur' , 'stannous fluoride' , 'combinations' , 
-                # 'sodium fluoride, combinations' , 'hydrogen peroxide' , 'chlorhexidine' , 'amphotericin B' , 'polynoxy
-                # lin'
+                # 'combinations of rauwolfia alkoloids, combinations' , 'bietaserpine, combinations' , 'methyldopa (levo
+                # rotatory)' , 'methyldopa (racemic)' , 'clonidine' , 'guanfacine' , 'tolonidine' , 'moxonidine' , 'rilm
+                # enidine' , 'trimetaphan'
             }
         }
     }

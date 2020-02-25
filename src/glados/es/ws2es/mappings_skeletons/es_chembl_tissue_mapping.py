@@ -19,11 +19,11 @@ mappings = \
                     {
                         'es_completion': 'TEXT',
                         # EXAMPLES:
-                        # '{'weight': 10, 'input': 'CHEMBL3988026'}' , '{'weight': 10, 'input': 'UBERON:0000004'}' , '{'
-                        # weight': 100, 'input': 'Pituitary gland'}' , '{'weight': 100, 'input': 'Submucosa'}' , '{'weig
-                        # ht': 10, 'input': 'CHEMBL3638174'}' , '{'weight': 100, 'input': 'Wing'}' , '{'weight': 10, 'in
-                        # put': 'UBERON:0000025'}' , '{'weight': 10, 'input': 'UBERON:0000029'}' , '{'weight': 100, 'inp
-                        # ut': 'Lamina propria'}' , '{'weight': 10, 'input': 'UBERON:0000033'}'
+                        # '{'weight': 10, 'input': 'UBERON:0000002'}' , '{'weight': 10, 'input': 'UBERON:0000004'}' , '{
+                        # 'weight': 10, 'input': 'CHEMBL4296343'}' , '{'weight': 100, 'input': 'Pituitary gland'}' , '{'
+                        # weight': 10, 'input': 'CHEMBL3987982'}' , '{'weight': 10, 'input': 'CHEMBL3638174'}' , '{'weig
+                        # ht': 100, 'input': 'Wing'}' , '{'weight': 10, 'input': 'UBERON:0000025'}' , '{'weight': 10, 'i
+                        # nput': 'CHEMBL3638175'}' , '{'weight': 100, 'input': 'Lamina propria'}'
                     }
                 },
                 'bto_id': 'TEXT',
@@ -40,16 +40,16 @@ mappings = \
                 # :0000362' , 'EFO:0001943' , 'UBERON:0000473' , 'UBERON:0000945' , 'UBERON:0000947'
                 'pref_name': 'TEXT',
                 # EXAMPLES:
-                # 'Uterine cervix' , 'Nose' , 'Pituitary gland' , 'Submucosa' , 'Zone of skin' , 'Wing' , 'Tube' , 'Lymp
-                # h node' , 'Lamina propria' , 'Head'
+                # 'Uterine cervix' , 'Nose' , 'Islets of langerhans' , 'Pituitary gland' , 'Submucosa' , 'Zone of skin' 
+                # , 'Wing' , 'Tube' , 'Lymph node' , 'Lamina propria'
                 'tissue_chembl_id': 'TEXT',
                 # EXAMPLES:
-                # 'CHEMBL3988026' , 'CHEMBL3987869' , 'CHEMBL3638173' , 'CHEMBL3987982' , 'CHEMBL3638174' , 'CHEMBL39880
-                # 49' , 'CHEMBL3988015' , 'CHEMBL3638175' , 'CHEMBL3987795' , 'CHEMBL3987761'
+                # 'CHEMBL3988026' , 'CHEMBL3987869' , 'CHEMBL4296343' , 'CHEMBL3638173' , 'CHEMBL3987982' , 'CHEMBL36381
+                # 74' , 'CHEMBL3988049' , 'CHEMBL3988015' , 'CHEMBL3638175' , 'CHEMBL3987795'
                 'uberon_id': 'TEXT',
                 # EXAMPLES:
-                # 'UBERON:0000002' , 'UBERON:0000004' , 'UBERON:0000007' , 'UBERON:0000009' , 'UBERON:0000014' , 'UBERON
-                # :0000023' , 'UBERON:0000025' , 'UBERON:0000029' , 'UBERON:0000030' , 'UBERON:0000033'
+                # 'UBERON:0000002' , 'UBERON:0000004' , 'UBERON:0000006' , 'UBERON:0000007' , 'UBERON:0000009' , 'UBERON
+                # :0000014' , 'UBERON:0000023' , 'UBERON:0000025' , 'UBERON:0000029' , 'UBERON:0000030'
             }
         }
     }

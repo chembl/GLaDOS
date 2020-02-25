@@ -15,11 +15,11 @@ mappings = \
             {
                 'activity_comment': 'TEXT',
                 # EXAMPLES:
-                # 'Not Active' , 'Not Determined' , 'active at 100 mg/kg' , 'Not Determined' , 'Not Active' , 'Not Deter
-                # mined' , 'no protection up to 100 mg/kg' , 'Not Active' , 'Not Active' , 'Not Active'
+                # 'less potent' , 'Not Determined' , 'Not Determined' , 'Partially active' , 'Not Active' , 'Not signifi
+                # cant' , 'Not significant' , 'Not Active' , 'Not Active' , 'Active'
                 'activity_id': 'NUMERIC',
                 # EXAMPLES:
-                # '113191' , '110281' , '93501' , '99205' , '116326' , '107960' , '113376' , '99206' , '93503' , '93504'
+                # '38667' , '47821' , '41769' , '59926' , '59927' , '53669' , '47823' , '44920' , '35731' , '32674'
                 'activity_properties': 
                 {
                     'properties': 
@@ -35,11 +35,10 @@ mappings = \
                         # '=' , '=' , '=' , '=' , '=' , '=' , '=' , '=' , '=' , '='
                         'standard_text_value': 'TEXT',
                         # EXAMPLES:
-                        # 'MCH (Ery. Mean Corpuscular Hemoglobin)' , 'NEUTLE (Neutrophils/Leukocytes)' , 'APTT (Activate
-                        # d Partial Thromboplastin Time)' , 'RBC (Erythrocytes)' , 'RETIRBC (Reticulocytes/Erythrocytes)
-                        # ' , 'BASOLE (Basophils/Leukocytes)' , 'MONOLE (Monocytes/Leukocytes)' , 'LYMLE (Lymphocytes/Le
-                        # ukocytes)' , 'APTT (Activated Partial Thromboplastin Time)' , 'RETIRBC (Reticulocytes/Erythroc
-                        # ytes)'
+                        # 'WBC (Leukocytes)' , 'EOSLE (Eosinophils/Leukocytes)' , 'HCT (Hematocrit)' , 'WBC (Leukocytes)
+                        # ' , 'NEUTLE (Neutrophils/Leukocytes)' , 'MONOLE (Monocytes/Leukocytes)' , 'APTT (Activated Par
+                        # tial Thromboplastin Time)' , 'MCH (Ery. Mean Corpuscular Hemoglobin)' , 'MCHC (Ery. Mean Corpu
+                        # scular HGB Concentration)' , 'MCV (Ery. Mean Corpuscular Volume)'
                         'standard_type': 'TEXT',
                         # EXAMPLES:
                         # 'ACTIVITY_TEST' , 'ACTIVITY_TEST' , 'ACTIVITY_TEST' , 'ACTIVITY_TEST' , 'ACTIVITY_TEST' , 'ACT
@@ -50,14 +49,14 @@ mappings = \
                         # , 'mg.kg-1' , 'mg.kg-1'
                         'standard_value': 'NUMERIC',
                         # EXAMPLES:
-                        # '300' , '50' , '50' , '1000' , '100' , '0' , '0' , '0' , '0' , '100'
+                        # '60.0' , '60.0' , '600.0' , '600.0' , '600.0' , '600.0' , '600.0' , '600.0' , '600.0' , '200.0
+                        # '
                         'text_value': 'TEXT',
                         # EXAMPLES:
-                        # 'MCH (Ery. Mean Corpuscular Hemoglobin)' , 'NEUTLE (Neutrophils/Leukocytes)' , 'APTT (Activate
-                        # d Partial Thromboplastin Time)' , 'RBC (Erythrocytes)' , 'RETIRBC (Reticulocytes/Erythrocytes)
-                        # ' , 'BASOLE (Basophils/Leukocytes)' , 'MONOLE (Monocytes/Leukocytes)' , 'LYMLE (Lymphocytes/Le
-                        # ukocytes)' , 'APTT (Activated Partial Thromboplastin Time)' , 'RETIRBC (Reticulocytes/Erythroc
-                        # ytes)'
+                        # 'WBC (Leukocytes)' , 'EOSLE (Eosinophils/Leukocytes)' , 'HCT (Hematocrit)' , 'WBC (Leukocytes)
+                        # ' , 'NEUTLE (Neutrophils/Leukocytes)' , 'MONOLE (Monocytes/Leukocytes)' , 'APTT (Activated Par
+                        # tial Thromboplastin Time)' , 'MCH (Ery. Mean Corpuscular Hemoglobin)' , 'MCHC (Ery. Mean Corpu
+                        # scular HGB Concentration)' , 'MCV (Ery. Mean Corpuscular Volume)'
                         'type': 'TEXT',
                         # EXAMPLES:
                         # 'ACTIVITY_TEST' , 'ACTIVITY_TEST' , 'ACTIVITY_TEST' , 'ACTIVITY_TEST' , 'ACTIVITY_TEST' , 'ACT
@@ -68,123 +67,129 @@ mappings = \
                         # kg'
                         'value': 'NUMERIC',
                         # EXAMPLES:
-                        # '300' , '50' , '50' , '1000' , '100' , '0' , '0' , '0' , '0' , '100'
+                        # '60.0' , '60.0' , '600.0' , '600.0' , '600.0' , '600.0' , '600.0' , '600.0' , '600.0' , '200.0
+                        # '
                     }
                 },
                 'assay_chembl_id': 'TEXT',
                 # EXAMPLES:
-                # 'CHEMBL636564' , 'CHEMBL649456' , 'CHEMBL694573' , 'CHEMBL852303' , 'CHEMBL725678' , 'CHEMBL718849' , 
-                # 'CHEMBL727297' , 'CHEMBL649694' , 'CHEMBL698413' , 'CHEMBL692770'
+                # 'CHEMBL772292' , 'CHEMBL699059' , 'CHEMBL710767' , 'CHEMBL807560' , 'CHEMBL804398' , 'CHEMBL760811' , 
+                # 'CHEMBL671073' , 'CHEMBL722545' , 'CHEMBL638243' , 'CHEMBL729973'
                 'assay_description': 'TEXT',
                 # EXAMPLES:
-                # 'Retention time at 30 mM' , 'In vitro minimum inhibitory concentration for Bacillus cereus ATCC 11778'
-                #  , 'Agonistic activity tested against histamine H2 receptor on guinea pig atrium' , 'Selectivity expre
-                # ssed as ratio between NE and 5-HT uptake inhibition in mouse brain slices' , 'Compound at an intraperi
-                # toneal dose of 10 mg/Kg was tested for salivation in mice expressed as score; 2=Marked salivation or t
-                # remor' , 'Inhibitory constant against matrix metalloprotease-1' , 'In vivo activity tested against C3H
-                #  mice bearing mammary adenocarcinoma -16c/ADR tumor measured as % treated/control calculated at 582 mg
-                # /kg (po)' , 'In vitro inhibitory activity towards partially purified calf lens aldose reductase; value
-                #  ranges from 10E-6 - 10E-7' , 'In vitro antagonistic activity tested against Histamine H3 receptor on 
-                # synaptosomes from rat cerebral cortex' , 'In vitro antagonistic activity tested against Histamine H3 r
-                # eceptor on synaptosomes from rat cerebral cortex'
+                # 'Tested ex vivo for ocular tissue concentration against cornea after 2 hour of treatment with 50 uL' ,
+                #  'Concentration required to inhibit the growth of HeLa S3 cells after 72 hours.' , 'Compound was teste
+                # d for analgesic activity in mice after intraperitoneal administration at a dose of 10 ug/kg; less pote
+                # nt' , 'In vitro antibacterial activity of compound against Staphylococcus aureus Tour L 165' , 'In vit
+                # ro antibacterial activity of compound against Staphylococcus epidermidis ATCC 12228' , 'Agonistic acti
+                # vity against human progesterone receptor in T47D breast cancer cells' , 'Binding affinity to cloned hu
+                # man Dopamine receptor D2 expressed in A9L cells by [3H]spiperone displacement.' , 'Suppressive antimal
+                # arial activity against Plasmodium berghei in Rane mice (Mus musculus) when administered at 40 mg/kg pe
+                # rorally; 2 cured' , 'The compound was evaluated for the optical density at concentrations 10E-7 M in M
+                # CF-7 cell culture in the presence of estradiol.' , 'Agonistic efficacy against human Mineralocorticoid
+                #  receptor'
                 'assay_type': 'TEXT',
                 # EXAMPLES:
-                # 'A' , 'F' , 'F' , 'F' , 'F' , 'B' , 'F' , 'B' , 'F' , 'F'
+                # 'F' , 'F' , 'F' , 'F' , 'F' , 'F' , 'B' , 'F' , 'A' , 'F'
                 'bao_endpoint': 'TEXT',
                 # EXAMPLES:
-                # 'BAO_0000179' , 'BAO_0002146' , 'BAO_0000179' , 'BAO_0000179' , 'BAO_0000179' , 'BAO_0000192' , 'BAO_0
-                # 001103' , 'BAO_0000190' , 'BAO_0000192' , 'BAO_0000192'
+                # 'BAO_0002752' , 'BAO_0000190' , 'BAO_0000375' , 'BAO_0002146' , 'BAO_0002146' , 'BAO_0000188' , 'BAO_0
+                # 000190' , 'BAO_0000179' , 'BAO_0000179' , 'BAO_0000656'
                 'bao_format': 'TEXT',
                 # EXAMPLES:
-                # 'BAO_0000019' , 'BAO_0000218' , 'BAO_0000221' , 'BAO_0000221' , 'BAO_0000218' , 'BAO_0000357' , 'BAO_0
-                # 000218' , 'BAO_0000357' , 'BAO_0000220' , 'BAO_0000220'
+                # 'BAO_0000218' , 'BAO_0000219' , 'BAO_0000218' , 'BAO_0000218' , 'BAO_0000218' , 'BAO_0000219' , 'BAO_0
+                # 000219' , 'BAO_0000218' , 'BAO_0000218' , 'BAO_0000019'
                 'bao_label': 'TEXT',
                 # EXAMPLES:
-                # 'assay format' , 'organism-based format' , 'tissue-based format' , 'tissue-based format' , 'organism-b
-                # ased format' , 'single protein format' , 'organism-based format' , 'single protein format' , 'subcellu
-                # lar format' , 'subcellular format'
+                # 'organism-based format' , 'cell-based format' , 'organism-based format' , 'organism-based format' , 'o
+                # rganism-based format' , 'cell-based format' , 'cell-based format' , 'organism-based format' , 'organis
+                # m-based format' , 'assay format'
                 'canonical_smiles': 'TEXT',
                 # EXAMPLES:
-                # 'Cc1nc2cc(Cl)c(cc2[nH]1)c3nc(C)c([nH]3)c4cccnc4' , 'C[C@@H]1[C@H](CN1c2cc3N(C=C(C(=O)O)C(=O)c3cc2F)C4C
-                # C4)N(C)C' , 'Ic1ccccc1C(=O)OCCCc2c[nH]cn2' , 'CNC\C=C(/c1ccc(Br)cc1)\c2cccnc2' , 'CCCSc1nsnc1OC2CN3CCC
-                # 2C3' , 'Cc1ccc(CCC[C@H](CC(=O)NO)C(=O)N[C@@H](CC2CCCCC2)C(=O)NCCc3ccccc3)cc1' , 'COc1ccc2ncc(Oc3ccc(OC
-                # (C)C(=O)O)cc3)nc2c1' , 'O=C1NC(=O)C2(CCOc3c(cccc23)c4ccccc4)N1' , 'Cc1ccc(cc1I)C(=O)OCCCc2c[nH]cn2' , 
-                # 'Cc1ccc(cc1I)C(=O)OCCCc2c[nH]cn2'
+                # 'NC(=O)CC(/N=C(\S)Nc1ccc(S(N)(=O)=O)cc1)C(=O)O' , 'COC(=O)c1c(C)[nH]c2c1[C@@]13C[C@@H]1CN(C(=O)c1cc4cc
+                # (OC)c(OC)c(OC)c4[nH]1)C3=CC2=O' , 'Clc1ccc(C2CCNC2)cn1' , 'CO[C@H]1/C=C/O[C@@]2(C)Oc3c(C)c(O)c4c(O)c(c
+                # (/C=N/N5CCN(C)CC5)c(O)c4c3C2=O)NC(=O)/C(C)=C\C=C\[C@H](C)[C@H](O)[C@@H](C)[C@@H](O)[C@@H](C)[C@H](OC(C
+                # )=O)[C@@H]1C' , 'CO[C@H]1/C=C/O[C@@]2(C)Oc3c(C)c(O)c4c(O)c(c(/C=N/N5CCN(C)CC5)c(O)c4c3C2=O)NC(=O)/C(C)
+                # =C\C=C\[C@H](C)[C@H](O)[C@@H](C)[C@@H](O)[C@@H](C)[C@H](OC(C)=O)[C@@H]1C' , 'CC1=CC(C)(C)Nc2ccc3c(c21)
+                # /C(=C/c1ccncc1C)Oc1ccc(F)cc1-3' , 'Fc1ccc(-c2cccc(CN3CCN(c4ncccn4)CC3)c2)cc1' , 'CCCCCCOc1c(OC)cc(NC(C
+                # )CCCN)c2nc(OC)cc(C)c12' , 'CN(C)CCOc1ccc(C2=C(c3ccccc3)CCCc3ccccc32)cc1' , 'CC1=CC(C)(C)Nc2ccc3c(c21)/
+                # C(=C/c1ccsc1)Oc1ccc(F)cc1-3'
                 'data_validity_comment': 'TEXT',
                 # EXAMPLES:
-                # 'Outside typical range' , 'Outside typical range' , 'Potential missing data' , 'Potential missing data
-                # ' , 'Potential missing data' , 'Non standard unit for type' , 'Outside typical range' , 'Outside typic
-                # al range' , 'Non standard unit for type' , 'Non standard unit for type'
+                # 'Outside typical range' , 'Potential missing data' , 'Non standard unit for type' , 'Outside typical r
+                # ange' , 'Outside typical range' , 'Outside typical range' , 'Outside typical range' , 'Non standard un
+                # it for type' , 'Outside typical range' , 'Outside typical range'
                 'data_validity_description': 'TEXT',
                 # EXAMPLES:
-                # 'Values for this activity type are unusually large/small, so may not be accurate' , 'Values for this a
-                # ctivity type are unusually large/small, so may not be accurate' , 'No data provided for value, units o
-                # r activity_comment, needs further investigation' , 'No data provided for value, units or activity_comm
-                # ent, needs further investigation' , 'No data provided for value, units or activity_comment, needs furt
-                # her investigation' , 'Units for this activity type are unusual and may be incorrect (or the standard_t
-                # ype may be incorrect)' , 'Values for this activity type are unusually large/small, so may not be accur
-                # ate' , 'Values for this activity type are unusually large/small, so may not be accurate' , 'Units for 
-                # this activity type are unusual and may be incorrect (or the standard_type may be incorrect)' , 'Units 
-                # for this activity type are unusual and may be incorrect (or the standard_type may be incorrect)'
+                # 'Values for this activity type are unusually large/small, so may not be accurate' , 'No data provided 
+                # for value, units or activity_comment, needs further investigation' , 'Units for this activity type are
+                #  unusual and may be incorrect (or the standard_type may be incorrect)' , 'Values for this activity typ
+                # e are unusually large/small, so may not be accurate' , 'Values for this activity type are unusually la
+                # rge/small, so may not be accurate' , 'Values for this activity type are unusually large/small, so may 
+                # not be accurate' , 'Values for this activity type are unusually large/small, so may not be accurate' ,
+                #  'Units for this activity type are unusual and may be incorrect (or the standard_type may be incorrect
+                # )' , 'Values for this activity type are unusually large/small, so may not be accurate' , 'Values for t
+                # his activity type are unusually large/small, so may not be accurate'
                 'document_chembl_id': 'TEXT',
                 # EXAMPLES:
-                # 'CHEMBL1127309' , 'CHEMBL1127424' , 'CHEMBL1129520' , 'CHEMBL1124236' , 'CHEMBL1131461' , 'CHEMBL11347
-                # 61' , 'CHEMBL1134487' , 'CHEMBL1124229' , 'CHEMBL1129520' , 'CHEMBL1129520'
+                # 'CHEMBL1133556' , 'CHEMBL1129161' , 'CHEMBL1128964' , 'CHEMBL1124774' , 'CHEMBL1124774' , 'CHEMBL11450
+                # 87' , 'CHEMBL1130912' , 'CHEMBL1124633' , 'CHEMBL1123514' , 'CHEMBL1145087'
                 'document_journal': 'TEXT',
                 # EXAMPLES:
-                # 'J. Med. Chem.' , 'J. Med. Chem.' , 'J. Med. Chem.' , 'J. Med. Chem.' , 'J. Med. Chem.' , 'J. Med. Che
-                # m.' , 'J. Med. Chem.' , 'J. Med. Chem.' , 'J. Med. Chem.' , 'J. Med. Chem.'
+                # 'J. Med. Chem.' , 'Bioorg. Med. Chem. Lett.' , 'Bioorg. Med. Chem. Lett.' , 'J. Med. Chem.' , 'J. Med.
+                #  Chem.' , 'J. Med. Chem.' , 'Bioorg. Med. Chem. Lett.' , 'J. Med. Chem.' , 'J. Med. Chem.' , 'J. Med. 
+                # Chem.'
                 'document_year': 'NUMERIC',
                 # EXAMPLES:
-                # '1994' , '1994' , '1996' , '1988' , '1998' , '2001' , '2001' , '1988' , '1996' , '1996'
+                # '2000' , '1996' , '1996' , '1990' , '1990' , '2003' , '1998' , '1989' , '1986' , '2003'
                 'ligand_efficiency': 
                 {
                     'properties': 
                     {
                         'bei': 'NUMERIC',
                         # EXAMPLES:
-                        # '11.57' , '20.39' , '15.5' , '27.71' , '15.47' , '25.75' , '12.44' , '13.04' , '15.83' , '12.3
-                        # 2'
+                        # '20.98' , '19.94' , '6.88' , '16.16' , '21.87' , '12.99' , '19.41' , '17.43' , '13.34' , '13.9
+                        # 4'
                         'le': 'NUMERIC',
                         # EXAMPLES:
-                        # '0.22' , '0.37' , '0.29' , '0.56' , '0.28' , '0.47' , '0.24' , '0.25' , '0.3' , '0.23'
+                        # '0.38' , '0.41' , '0.13' , '0.29' , '0.41' , '0.25' , '0.37' , '0.38' , '0.26' , '0.27'
                         'lle': 'NUMERIC',
                         # EXAMPLES:
-                        # '1.4' , '3.83' , '3.44' , '5.84' , '2.67' , '4.53' , '0.07' , '4.29' , '2.31' , '0.57'
+                        # '3.71' , '6.46' , '-2.41' , '-0.25' , '4.69' , '3.19' , '4.12' , '3.58' , '2.53' , '2.65'
                         'sei': 'NUMERIC',
                         # EXAMPLES:
-                        # '5.61' , '8.9' , '7.52' , '10.38' , '9.2' , '36.8' , '11.08' , '8.36' , '7.46' , '7.51'
+                        # '22.66' , '5.55' , '3.85' , '18.86' , '17.19' , '4.50' , '15.88' , '7.49' , '7.02' , '7.51'
                     }
                 },
                 'molecule_chembl_id': 'TEXT',
                 # EXAMPLES:
-                # 'CHEMBL140914' , 'CHEMBL334799' , 'CHEMBL20191' , 'CHEMBL173745' , 'CHEMBL126846' , 'CHEMBL312076' , '
-                # CHEMBL50493' , 'CHEMBL420024' , 'CHEMBL20211' , 'CHEMBL20211'
+                # 'CHEMBL144006' , 'CHEMBL35670' , 'CHEMBL94774' , 'CHEMBL374478' , 'CHEMBL374478' , 'CHEMBL130141' , 'C
+                # HEMBL59942' , 'CHEMBL48245' , 'CHEMBL23063' , 'CHEMBL134277'
                 'molecule_pref_name': 'TEXT',
                 # EXAMPLES:
-                # 'NORZIMELIDINE' , 'Platinum complex' , 'FENTANYL' , 'FENTANYL' , 'CISPLATIN' , 'CISPLATIN' , 'CISPLATI
-                # N' , 'CISPLATIN' , 'L-764004' , 'EZETIMIBE'
+                # 'RIFAMPIN' , 'RIFAMPIN' , 'RIFAMPIN' , 'BUTYLATED HYDROXYTOLUENE' , 'RIFAMPIN' , 'RIFAMPIN' , 'RIFAMPI
+                # N' , 'RIFAMPIN' , 'SURAMIN' , 'SURAMIN'
                 'parent_molecule_chembl_id': 'TEXT',
                 # EXAMPLES:
-                # 'CHEMBL140914' , 'CHEMBL334799' , 'CHEMBL20191' , 'CHEMBL173745' , 'CHEMBL126846' , 'CHEMBL312076' , '
-                # CHEMBL50493' , 'CHEMBL420024' , 'CHEMBL20211' , 'CHEMBL20211'
+                # 'CHEMBL144006' , 'CHEMBL35670' , 'CHEMBL94774' , 'CHEMBL374478' , 'CHEMBL374478' , 'CHEMBL130141' , 'C
+                # HEMBL59942' , 'CHEMBL48245' , 'CHEMBL23063' , 'CHEMBL134277'
                 'pchembl_value': 'NUMERIC',
                 # EXAMPLES:
-                # '6.04' , '6' , '7.52' , '7.5' , '8.08' , '6.58' , '7.9' , '7' , '7.7' , '8.67'
+                # '8.34' , '7.31' , '7.89' , '4.28' , '4.60' , '4.19' , '6.44' , '9.70' , '6.41' , '8.96'
                 'potential_duplicate': 'BOOLEAN',
                 # EXAMPLES:
                 # 'False' , 'False' , 'False' , 'False' , 'False' , 'False' , 'False' , 'False' , 'False' , 'False'
                 'qudt_units': 'TEXT',
                 # EXAMPLES:
-                # 'http://qudt.org/vocab/unit#MinuteTime' , 'http://www.openphacts.org/units/MicrogramPerMilliliter' , '
-                # http://www.openphacts.org/units/Nanomolar' , 'http://qudt.org/vocab/unit#Percent' , 'http://www.openph
-                # acts.org/units/Nanomolar' , 'http://www.openphacts.org/units/Nanomolar' , 'http://www.openphacts.org/u
-                # nits/Nanomolar' , 'http://www.openphacts.org/units/Nanomolar' , 'http://qudt.org/vocab/unit#Percent' ,
-                #  'http://www.openphacts.org/units/Nanomolar'
+                # 'http://www.openphacts.org/units/Micromolar' , 'http://www.openphacts.org/units/Nanomolar' , 'http://w
+                # ww.openphacts.org/units/MicrogramPerMilliliter' , 'http://www.openphacts.org/units/MicrogramPerMillili
+                # ter' , 'http://www.openphacts.org/units/Nanomolar' , 'http://www.openphacts.org/units/Nanomolar' , 'ht
+                # tp://qudt.org/vocab/unit#Percent' , 'http://qudt.org/vocab/unit#Percent' , 'http://www.openphacts.org/
+                # units/Nanomolar' , 'http://www.openphacts.org/units/Nanomolar'
                 'record_id': 'NUMERIC',
                 # EXAMPLES:
-                # '272543' , '257165' , '26300' , '340885' , '243621' , '136431' , '83880' , '144058' , '26315' , '26315
-                # '
+                # '282510' , '119153' , '176513' , '54507' , '54507' , '253304' , '108671' , '80038' , '110442' , '25329
+                # 0'
                 'relation': 'TEXT',
                 # EXAMPLES:
                 # '=' , '=' , '=' , '=' , '=' , '=' , '=' , '=' , '=' , '='
@@ -193,7 +198,7 @@ mappings = \
                 # '1' , '1' , '1' , '1' , '1' , '1' , '1' , '1' , '1' , '1'
                 'standard_flag': 'BOOLEAN',
                 # EXAMPLES:
-                # 'False' , 'True' , 'False' , 'False' , 'False' , 'True' , 'False' , 'True' , 'True' , 'True'
+                # 'False' , 'True' , 'False' , 'True' , 'True' , 'True' , 'True' , 'False' , 'False' , 'False'
                 'standard_relation': 'TEXT',
                 # EXAMPLES:
                 # '=' , '=' , '=' , '=' , '=' , '=' , '=' , '=' , '=' , '='
@@ -203,52 +208,54 @@ mappings = \
                 # ve' , 'Active' , 'Active'
                 'standard_type': 'TEXT',
                 # EXAMPLES:
-                # 'Retention time' , 'MIC' , '-Log KB' , 'Ratio' , 'Score' , 'Ki' , 'T/C' , 'IC50' , 'Ki' , 'Ki'
+                # 'Concentration' , 'IC50' , 'Activity' , 'MIC' , 'MIC' , 'EC50' , 'IC50' , 'MST' , 'Optical density' , 
+                # 'Efficacy'
                 'standard_units': 'TEXT',
                 # EXAMPLES:
-                # 'min' , 'ug.mL-1' , 'nM' , '%' , 'nM' , 'nM' , 'nM' , 'nM' , '%' , 'nM'
+                # 'uM' , 'nM' , 'ug.mL-1' , 'ug.mL-1' , 'nM' , 'nM' , '%' , '%' , 'nM' , 'nM'
                 'standard_value': 'NUMERIC',
                 # EXAMPLES:
-                # '3.41' , '0.5' , '4.6' , '0.32' , '2' , '921' , '0' , '1000' , '30' , '31.62'
+                # '54.0' , '0.0052' , '0.016' , '0.008' , '4.6' , '49.0' , '0.379' , '63.0' , '1.0' , '13.0'
                 'target_chembl_id': 'TEXT',
                 # EXAMPLES:
-                # 'CHEMBL612558' , 'CHEMBL613070' , 'CHEMBL2882' , 'CHEMBL612545' , 'CHEMBL375' , 'CHEMBL332' , 'CHEMBL3
-                # 75' , 'CHEMBL3081' , 'CHEMBL4124' , 'CHEMBL4124'
+                # 'CHEMBL374' , 'CHEMBL399' , 'CHEMBL375' , 'CHEMBL352' , 'CHEMBL353' , 'CHEMBL208' , 'CHEMBL217' , 'CHE
+                # MBL375' , 'CHEMBL372' , 'CHEMBL1994'
                 'target_organism': 'TEXT',
                 # EXAMPLES:
-                # 'Bacillus cereus' , 'Cavia porcellus' , 'Mus musculus' , 'Homo sapiens' , 'Mus musculus' , 'Bos taurus
-                # ' , 'Rattus norvegicus' , 'Rattus norvegicus' , 'Homo sapiens' , 'Mus musculus'
+                # 'Oryctolagus cuniculus' , 'Homo sapiens' , 'Mus musculus' , 'Staphylococcus aureus' , 'Staphylococcus 
+                # epidermidis' , 'Homo sapiens' , 'Homo sapiens' , 'Mus musculus' , 'Homo sapiens' , 'Homo sapiens'
                 'target_pref_name': 'TEXT',
                 # EXAMPLES:
-                # 'ADMET' , 'Bacillus cereus' , 'Histamine H2 receptor' , 'Unchecked' , 'Mus musculus' , 'Matrix metallo
-                # proteinase-1' , 'Mus musculus' , 'Aldose reductase' , 'Histamine H3 receptor' , 'Histamine H3 receptor
-                # '
+                # 'Oryctolagus cuniculus' , 'HeLa' , 'Mus musculus' , 'Staphylococcus aureus' , 'Staphylococcus epidermi
+                # dis' , 'Progesterone receptor' , 'Dopamine D2 receptor' , 'Mus musculus' , 'Homo sapiens' , 'Mineraloc
+                # orticoid receptor'
                 'target_tax_id': 'NUMERIC',
                 # EXAMPLES:
-                # '1396' , '10141' , '10090' , '9606' , '10090' , '9913' , '10116' , '10116' , '9606' , '10090'
+                # '9986' , '9606' , '10090' , '1280' , '1282' , '9606' , '9606' , '10090' , '9606' , '9606'
                 'text_value': 'TEXT',
                 # EXAMPLES:
                 # 'Active' , 'Not Active' , 'Not Active' , 'Not Active' , 'Not Active' , 'Active' , 'Not Active' , 'Acti
                 # ve' , 'Active' , 'Active'
                 'toid': 'NUMERIC',
                 # EXAMPLES:
-                # '5141' , '4817' , '4820' , '5146' , '4822' , '4974' , '4974' , '4974' , '4974' , '4823'
+                # '4967' , '4967' , '4807' , '4807' , '4807' , '4807' , '4807' , '4808' , '4808' , '4969'
                 'type': 'TEXT',
                 # EXAMPLES:
-                # 'Retention time' , 'MIC' , '-Log KB' , 'Ratio' , 'Score' , 'Ki' , 'T/C' , 'IC50' , 'Ki' , '-Log Ki'
+                # 'Concentration' , 'IC50' , 'Activity' , 'MIC' , 'MIC' , 'EC50' , 'IC50' , 'MST' , 'Optical density' , 
+                # 'Efficacy'
                 'units': 'TEXT',
                 # EXAMPLES:
-                # 'min' , 'ug ml-1' , 'nM' , '%' , 'M' , 'nM' , 'nM' , '%' , 'uM' , 'uM'
+                # 'uM' , 'nM' , 'ug ml-1' , 'ug ml-1' , 'nM' , 'nM' , 'day' , '%' , '%' , 'nM'
                 'uo_units': 'TEXT',
                 # EXAMPLES:
-                # 'UO_0000031' , 'UO_0000274' , 'UO_0000065' , 'UO_0000187' , 'UO_0000065' , 'UO_0000065' , 'UO_0000065'
-                #  , 'UO_0000065' , 'UO_0000187' , 'UO_0000065'
+                # 'UO_0000064' , 'UO_0000065' , 'UO_0000274' , 'UO_0000274' , 'UO_0000065' , 'UO_0000065' , 'UO_0000187'
+                #  , 'UO_0000187' , 'UO_0000065' , 'UO_0000065'
                 'upper_value': 'NUMERIC',
                 # EXAMPLES:
-                # '17' , '25.9' , '18.87' , '1800' , '35' , '440' , '10.5' , '10.5' , '1.82' , '10.5'
+                # '1.0' , '100.0' , '100.0' , '40.0' , '5.0' , '5.0' , '300.0' , '0.5' , '1.0' , '6000.0'
                 'value': 'NUMERIC',
                 # EXAMPLES:
-                # '3.41' , '0.5' , '4.6' , '0.32' , '2' , '921' , '0' , '0.000001' , '30' , '7.5'
+                # '54.0' , '0.0052' , '0.016' , '0.008' , '4.6' , '49.0' , '0.379' , '63.0' , '1.0' , '13.0'
             }
         }
     }

@@ -22,11 +22,12 @@ mappings = \
                         # '0' , '0' , '0' , '0' , '0' , '0' , '0' , '0' , '0' , '0'
                         'es_completion': 'TEXT',
                         # EXAMPLES:
-                        # '{'weight': 75, 'input': 'CYP-S1'}' , '{'weight': 75, 'input': 'NET1'}' , '{'weight': 10, 'inp
-                        # ut': 'CHEMBL2039'}' , '{'weight': 75, 'input': 'ENR'}' , '{'weight': 75, 'input': 'IMPA'}' , '
-                        # {'weight': 75, 'input': 'GABT1'}' , '{'weight': 100, 'input': 'Somatostatin receptor 2'}' , '{
-                        # 'weight': 75, 'input': 'Type II 5-alpha reductase'}' , '{'weight': 100, 'input': 'Amiloride-se
-                        # nsitive sodium channel alpha-subunit'}' , '{'weight': 10, 'input': 'CHEMBL236'}'
+                        # '{'weight': 75, 'input': 'Voltage-dependent T-type calcium channel subunit alpha-1H'}' , '{'we
+                        # ight': 20, 'input': 'Ascaris suum'}' , '{'weight': 100, 'input': 'Dihydrofolate reductase'}' ,
+                        #  '{'weight': 75, 'input': 'Abelson tyrosine-protein kinase 1'}' , '{'weight': 75, 'input': 'Re
+                        # ceptor tyrosine-protein kinase erbB-1'}' , '{'weight': 75, 'input': 'Thrombin heavy chain'}' ,
+                        #  '{'weight': 10, 'input': 'CHEMBL1801'}' , '{'weight': 75, 'input': 'Serpin C1'}' , '{'weight'
+                        # : 75, 'input': '3.2.1.18'}' , '{'weight': 100, 'input': 'Glucocorticoid receptor'}'
                         'related_compounds': 
                         {
                             'properties': 
@@ -44,55 +45,53 @@ mappings = \
                     {
                         'xref_id': 'TEXT',
                         # EXAMPLES:
-                        # 'PPIB' , 'Norepinephrine_transporter' , 'Monoamine_oxidase_B' , 'P0AEK4' , 'IMPA1' , 'GABA_tra
-                        # nsporter_1' , 'Somatostatin_receptor_2' , 'SRD5A2' , 'SCNN1A' , 'NBK23011'
+                        # 'O95180' , 'O96760' , 'P00374' , 'P00519' , 'P00533' , 'P00734' , 'P00747' , 'P01008' , 'P0346
+                        # 8' , 'P04150'
                         'xref_name': 'TEXT',
                         # EXAMPLES:
-                        # 'Delta opioid receptor' , 'Type 2 vesicular monoamine transporter (VMAT2)' , 'Prostate-specifi
-                        # c membrane antigen (PSMA)' , 'Dopamine D4 receptors' , 'Somatostatin receptor (sst2)' , 'Delta
-                        #  opioid receptor' , 'Epidermal growth factor receptor (EGFR)' , 'Adenosine A1 receptor' , 'Pol
-                        # y(ADP-ribose)polymerase-1 (PARP-1)' , 'Cathepsin K'
+                        # 'Epidermal growth factor receptor' , '5-HT4 serotonin receptors' , 'Matrix metalloprotein-2 (M
+                        # MP-2)' , 'Caspase-3' , 'IGF1 receptor (IGF1R), CCND1 mRNA' , 'Dopamine transporter (DAT)' , 'G
+                        # astrin/cholecystokinin-2 (CCK-2, CCK-B) receptor' , 'Brain norepinephrine transporter (NET)' ,
+                        #  'Carbonic anhydrase IX' , 'Alpha-Fetoprotein (AFP)'
                         'xref_src': 'TEXT',
                         # EXAMPLES:
-                        # 'Wikipedia' , 'Wikipedia' , 'Wikipedia' , 'canSAR-Target' , 'Wikipedia' , 'Wikipedia' , 'Wikip
-                        # edia' , 'Wikipedia' , 'Wikipedia' , 'MICAD'
+                        # 'canSAR-Target' , 'canSAR-Target' , 'canSAR-Target' , 'canSAR-Target' , 'canSAR-Target' , 'can
+                        # SAR-Target' , 'canSAR-Target' , 'canSAR-Target' , 'canSAR-Target' , 'canSAR-Target'
                     }
                 },
                 'organism': 'TEXT',
                 # EXAMPLES:
-                # 'Homo sapiens' , 'Homo sapiens' , 'Homo sapiens' , 'Escherichia coli K-12' , 'Homo sapiens' , 'Homo sa
-                # piens' , 'Homo sapiens' , 'Homo sapiens' , 'Homo sapiens' , 'Homo sapiens'
+                # 'Homo sapiens' , 'Ascaris suum' , 'Homo sapiens' , 'Homo sapiens' , 'Homo sapiens' , 'Homo sapiens' , 
+                # 'Homo sapiens' , 'Homo sapiens' , 'Influenza A virus (A/Puerto Rico/8/1934(H1N1))' , 'Homo sapiens'
                 'pref_name': 'TEXT',
                 # EXAMPLES:
-                # 'Cyclophilin B' , 'Norepinephrine transporter' , 'Monoamine oxidase B' , 'Enoyl-[acyl-carrier-protein]
-                #  reductase' , 'Inositol-1(or 4)-monophosphatase 1' , 'GABA transporter 1' , 'Somatostatin receptor 2' 
-                # , 'Steroid 5-alpha-reductase 2' , 'Amiloride-sensitive sodium channel alpha-subunit' , 'Delta opioid r
-                # eceptor'
+                # 'Voltage-gated T-type calcium channel alpha-1H subunit' , 'Nicotinic acetylcholine receptor alpha subu
+                # nit' , 'Dihydrofolate reductase' , 'Tyrosine-protein kinase ABL' , 'Epidermal growth factor receptor e
+                # rbB1' , 'Thrombin' , 'Plasminogen' , 'Antithrombin-III' , 'Neuraminidase' , 'Glucocorticoid receptor'
                 'species_group_flag': 'BOOLEAN',
                 # EXAMPLES:
                 # 'False' , 'False' , 'False' , 'False' , 'False' , 'False' , 'False' , 'False' , 'False' , 'False'
                 'target_chembl_id': 'TEXT',
                 # EXAMPLES:
-                # 'CHEMBL2075' , 'CHEMBL222' , 'CHEMBL2039' , 'CHEMBL1857' , 'CHEMBL1786' , 'CHEMBL1903' , 'CHEMBL1804' 
-                # , 'CHEMBL1856' , 'CHEMBL1791' , 'CHEMBL236'
+                # 'CHEMBL1859' , 'CHEMBL1884' , 'CHEMBL202' , 'CHEMBL1862' , 'CHEMBL203' , 'CHEMBL204' , 'CHEMBL1801' , 
+                # 'CHEMBL1950' , 'CHEMBL2051' , 'CHEMBL2034'
                 'target_components': 
                 {
                     'properties': 
                     {
                         'accession': 'TEXT',
                         # EXAMPLES:
-                        # 'P23284' , 'P23975' , 'P27338' , 'P0AEK4' , 'P29218' , 'P30531' , 'P30874' , 'P31213' , 'P3708
-                        # 8' , 'P41143'
+                        # 'O95180' , 'O96760' , 'P00374' , 'P00519' , 'P00533' , 'P00734' , 'P00747' , 'P01008' , 'P0346
+                        # 8' , 'P04150'
                         'component_description': 'TEXT',
                         # EXAMPLES:
-                        # 'Peptidyl-prolyl cis-trans isomerase B' , 'Sodium-dependent noradrenaline transporter' , 'Amin
-                        # e oxidase [flavin-containing] B' , 'Enoyl-[acyl-carrier-protein] reductase [NADH] FabI' , 'Ino
-                        # sitol monophosphatase 1' , 'Sodium- and chloride-dependent GABA transporter 1' , 'Somatostatin
-                        #  receptor type 2' , '3-oxo-5-alpha-steroid 4-dehydrogenase 2' , 'Amiloride-sensitive sodium ch
-                        # annel subunit alpha' , 'Delta-type opioid receptor'
+                        # 'Voltage-dependent T-type calcium channel subunit alpha-1H' , 'Nicotinic acetylcholine recepto
+                        # r alpha subunit' , 'Dihydrofolate reductase' , 'Tyrosine-protein kinase ABL1' , 'Epidermal gro
+                        # wth factor receptor' , 'Prothrombin' , 'Plasminogen' , 'Antithrombin-III' , 'Neuraminidase' , 
+                        # 'Glucocorticoid receptor'
                         'component_id': 'NUMERIC',
                         # EXAMPLES:
-                        # '435' , '436' , '377' , '165' , '77' , '218' , '98' , '164' , '82' , '242'
+                        # '167' , '198' , '396' , '173' , '147' , '92' , '93' , '273' , '391' , '371'
                         'component_type': 'TEXT',
                         # EXAMPLES:
                         # 'PROTEIN' , 'PROTEIN' , 'PROTEIN' , 'PROTEIN' , 'PROTEIN' , 'PROTEIN' , 'PROTEIN' , 'PROTEIN' 
@@ -141,7 +140,7 @@ mappings = \
                 #  PROTEIN' , 'SINGLE PROTEIN' , 'SINGLE PROTEIN' , 'SINGLE PROTEIN' , 'SINGLE PROTEIN'
                 'tax_id': 'NUMERIC',
                 # EXAMPLES:
-                # '9606' , '9606' , '9606' , '83333' , '9606' , '9606' , '9606' , '9606' , '9606' , '9606'
+                # '9606' , '6253' , '9606' , '9606' , '9606' , '9606' , '9606' , '9606' , '211044' , '9606'
             }
         }
     }

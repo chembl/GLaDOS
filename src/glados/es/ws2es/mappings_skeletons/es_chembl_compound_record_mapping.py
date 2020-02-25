@@ -15,31 +15,35 @@ mappings = \
             {
                 'compound_key': 'TEXT',
                 # EXAMPLES:
-                # '2a' , '172 (Glucose)' , '2d' , '43' , '18' , '9a' , '17' , '8a' , '51d' , '56'
+                # '179' , '17' , '36c' , '11' , '(3S,4S,5S,10R,13R,17R)-17-((R)-1,5-Dimethyl-hexyl)-4-(4-fluoro-benzyl)-
+                # 10,13-dimethyl-hexadecahydro-cyclopenta[a]phenanthren-3-ol' , '36t' , '17' , '16' , '14' , '8'
                 'compound_name': 'TEXT',
                 # EXAMPLES:
-                # '2,6-Di-tert-butyl-4-[(dimethyl-phenyl-silanyl)-methylsulfanyl]-phenol' , 'Glucose6-Hydroxymethyl-tetr
-                # ahydro-pyran-2,3,4,5-tetraol' , '2,6-Di-tert-butyl-4-{[(2-methoxy-phenyl)-dimethyl-silanyl]-methoxy}-p
-                # henol' , '1-(4-Phenyl-butyl)-3-(5-thioxo-4,5-dihydro-[1,3,4]thiadiazol-2-yl)-urea' , '10,10-Dioxo-9,10
-                # -dihydro-10lambda*6*-thioxanthene-9-carboxylic acid [(2R,3S,5R)-5-(5-ethyl-2,4-dioxo-3,4-dihydro-2H-py
-                # rimidin-1-yl)-3-hydroxy-tetrahydro-furan-2-ylmethyl]-amide' , '8-[2-((S)-2-tert-Butoxycarbonylamino-2-
-                # methyl-3-phenyl-propionylamino)-3-phenyl-propionylamino]-octanoic acid' , '9H-Thioxanthene-9-carboxyli
-                # c acid [(2R,3S,5R)-5-(5-ethyl-2,4-dioxo-3,4-dihydro-2H-pyrimidin-1-yl)-3-hydroxy-tetrahydro-furan-2-yl
-                # methyl]-amide' , '{(S)-1-[1-(8-Methoxy-octylcarbamoyl)-2-phenyl-ethylcarbamoyl]-1-methyl-2-phenyl-ethy
-                # l}-carbamic acid tert-butyl ester' , '4-{(E)-2-[({[2,4-Dichloro-3-(2,3-dimethyl-benzofuran-7-yloxymeth
-                # yl)-phenyl]-methyl-carbamoyl}-methyl)-carbamoyl]-vinyl}-N-methyl-benzamide' , '(S)-3-Phenyl-2-[3-(5-th
-                # ioxo-4,5-dihydro-[1,3,4]thiadiazol-2-yl)-ureido]-propionamide'
+                # '4-(3-Trifluoromethyl-3H-diazirin-3-yl)-benzoic acid 2-amino-4-oxo-3,4,5,6,7,8-hexahydro-pteridin-6-yl
+                # methyl ester' , '(3R,4S,10R,13R,17R)-4-Butyl-17-((R)-1,5-dimethyl-hexyl)-10,13-dimethyl-hexadecahydro-
+                # cyclopenta[a]phenanthren-3-ol' , '(3R,4S,10R,13R,17R)-17-((R)-1,5-Dimethyl-hexyl)-4-(3-iodo-benzyl)-10
+                # ,13-dimethyl-hexadecahydro-cyclopenta[a]phenanthren-3-ol' , '(3R,4S,10R,13R,17R)-4-(2-Chloro-allyl)-17
+                # -((1R,4R)-4-ethyl-1,5-dimethyl-hexyl)-10,13-dimethyl-hexadecahydro-cyclopenta[a]phenanthren-3-ol' , '(
+                # 3S,4S,5S,10R,13R,17R)-17-((R)-1,5-Dimethyl-hexyl)-4-(4-fluoro-benzyl)-10,13-dimethyl-hexadecahydro-cyc
+                # lopenta[a]phenanthren-3-ol' , '(3R,4S,10R,13R,17R)-17-((R)-1,5-Dimethyl-hexyl)-4-(4-hydroxy-benzyl)-10
+                # ,13-dimethyl-hexadecahydro-cyclopenta[a]phenanthren-3-ol' , 'Sodium salt 3-[(R)-{3-[(E)-2-(7-chloro-qu
+                # inolin-2-yl)-vinyl]-phenyl}-(2-dimethylcarbamoyl-ethylsulfanyl)-methylsulfanyl]-propionate' , 'Sodium 
+                # salt 3-[{3-[(E)-2-(7-chloro-quinolin-2-yl)-vinyl]-phenyl}-(2-dimethylcarbamoyl-ethylsulfanyl)-methylsu
+                # lfanyl]-propionate' , '4-{(R)-1-{3-[(E)-2-(7-Chloro-quinolin-2-yl)-vinyl]-phenyl}-3-[2-(1-hydroxy-1-me
+                # thyl-ethyl)-phenyl]-propylsulfanyl}-3,3-dimethyl-butyric acid' , '(R)-3-{(R)-1-{3-[(E)-2-(7-Chloro-qui
+                # nolin-2-yl)-vinyl]-phenyl}-3-[2-(1-hydroxy-1-methyl-ethyl)-phenyl]-propylsulfanyl}-butyric acid'
                 'document_chembl_id': 'TEXT',
                 # EXAMPLES:
-                # 'CHEMBL1129112' , 'CHEMBL1122538' , 'CHEMBL1129112' , 'CHEMBL1132172' , 'CHEMBL1134111' , 'CHEMBL11277
-                # 09' , 'CHEMBL1134111' , 'CHEMBL1127709' , 'CHEMBL1149113' , 'CHEMBL1132172'
+                # 'CHEMBL1135494' , 'CHEMBL1128436' , 'CHEMBL1128436' , 'CHEMBL1128436' , 'CHEMBL1128436' , 'CHEMBL11284
+                # 36' , 'CHEMBL1151076' , 'CHEMBL1151076' , 'CHEMBL1151076' , 'CHEMBL1151076'
                 'molecule_chembl_id': 'TEXT',
                 # EXAMPLES:
-                # 'CHEMBL433056' , 'CHEMBL1222250' , 'CHEMBL288433' , 'CHEMBL39316' , 'CHEMBL42459' , 'CHEMBL46290' , 'C
-                # HEMBL288569' , 'CHEMBL47929' , 'CHEMBL41446' , 'CHEMBL39553'
+                # 'CHEMBL101527' , 'CHEMBL3137873' , 'CHEMBL3137881' , 'CHEMBL3138214' , 'CHEMBL3137902' , 'CHEMBL313823
+                # 5' , 'CHEMBL89340' , 'CHEMBL89768' , 'CHEMBL99775' , 'CHEMBL95317'
                 'record_id': 'NUMERIC',
                 # EXAMPLES:
-                # '63491' , '72160' , '63492' , '60878' , '72353' , '75336' , '72354' , '75337' , '69381' , '60881'
+                # '185724' , '180925' , '180927' , '180928' , '180931' , '180941' , '180944' , '180945' , '180947' , '18
+                # 0952'
                 'src_id': 'NUMERIC',
                 # EXAMPLES:
                 # '1' , '1' , '1' , '1' , '1' , '1' , '1' , '1' , '1' , '1'
