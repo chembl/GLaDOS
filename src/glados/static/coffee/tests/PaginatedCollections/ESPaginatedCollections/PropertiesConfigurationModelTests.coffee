@@ -34,8 +34,8 @@ describe 'PropertiesConfigurationModel', ->
           "index_name": glados.Settings.CHEMBL_ES_INDEX_PREFIX+"molecule",
           "type": "double",
           "sortable": true,
-          "label": "ACD BpKa",
-          "label_mini": "Acd Most Bpka",
+          "label": "CX BpKa",
+          "label_mini": "Cx Most Bpka",
           "prop_id": "molecule_properties.cx_most_bpka"
         },
         {
@@ -43,8 +43,8 @@ describe 'PropertiesConfigurationModel', ->
           "index_name": glados.Settings.CHEMBL_ES_INDEX_PREFIX+"molecule",
           "type": "double",
           "sortable": true,
-          "label": "ACD ApKa",
-          "label_mini": "Acd Most Apka",
+          "label": "CX ApKa",
+          "label_mini": "Cx Most Apka",
           "prop_id": "molecule_properties.cx_most_apka"
         },
         {
