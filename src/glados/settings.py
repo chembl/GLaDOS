@@ -313,9 +313,9 @@ if ENABLE_MYSQL_DATABASE:
             'USER': mysql_config.get('user'),
             'PASSWORD': mysql_config.get('password'),
             'OPTIONS': {
+                'isolation_level': "repeatable read",
                 'autocommit': True,
             }
-
         }
 
 else:
