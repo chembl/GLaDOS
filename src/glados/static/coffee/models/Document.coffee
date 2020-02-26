@@ -50,6 +50,9 @@ Document.PROPERTIES_VISUAL_CONFIG = {
   'doi': {
     link_function: (id) -> 'http://dx.doi.org/' + encodeURIComponent(id)
   }
+  'patent_id': {
+    link_function: (patent_id) -> "https://www.surechembl.org/document/#gi{patent_id}"
+  }
   '_metadata.related_activities.count': {
     link_base: 'activities_url'
     on_click: DocumentReportCardApp.initMiniHistogramFromFunctionLink
