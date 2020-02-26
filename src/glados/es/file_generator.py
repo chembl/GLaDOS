@@ -151,7 +151,7 @@ def write_sdf_file(query, base_file_name='compounds', output_dir=settings.DYNAMI
     with gzip.open(file_path, 'wt') as out_file:
         es_conn = connections.get_connection()
         scanner = scan(es_conn, index=index_name, scroll=u'1m', size=1000, request_timeout=60, query={
-            "_source": ['_metadata.compound_generated.sdf_data'],
+            "_source": ['molecule_structures.molfile'],
             "query": query
         })
 
@@ -163,7 +163,7 @@ def write_sdf_file(query, base_file_name='compounds', output_dir=settings.DYNAMI
 
             doc_source = doc_i['_source']
             dot_notation_getter = DotNotationGetter(doc_source)
-            sdf_value = dot_notation_getter.get_from_string('_metadata.compound_generated.sdf_data')
+            sdf_value = dot_notation_getter.get_from_string('molecule_structures.molfile')
 
             if sdf_value is None:
                 continue
