@@ -86,7 +86,7 @@ def get_target_predictions(molecule_chembl_id):
     if cache_response is not None:
         return cache_response
 
-    external_service_request = requests.post('http://hx-rke-wp-webadmin-04-worker-3.caas.ebi.ac.uk:31112/function/mcp',
+    external_service_request = requests.post('http://wwwdev.ebi.ac.uk/chembl/api/data/target_predictions_proxy',
                                              json={"smiles": smiles})
 
     external_service_response = external_service_request.json()
