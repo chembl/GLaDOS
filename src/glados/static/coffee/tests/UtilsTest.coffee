@@ -136,7 +136,7 @@ describe "Utils", ->
 
       expect(colsWithVals[0].has_link).toBe(true)
       expect(colsWithVals[0].img_url).toBe(glados.Settings.WS_BASE_URL+"image/CHEMBL25.svg")
-      expect(colsWithVals[0].link_url).toBe("/compound_report_card/CHEMBL25")
+      expect(colsWithVals[0].link_url).toBe(glados.Settings.GLADOS_BASE_PATH_REL+"compound_report_card/CHEMBL25")
       expect(colsWithVals[0].name_to_show).toBe("ChEMBL ID")
       expect(colsWithVals[0].value).toBe("CHEMBL25")
 
