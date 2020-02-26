@@ -16,6 +16,7 @@ glados.useNameSpace 'glados.views.Compound',
         generator=undefined, flavour)
 
       @list.initURL(@model.get('id'))
+      @list.on 'reset', @render, @
 
       glados.views.PaginatedViews.PaginatedViewFactory.getNewTablePaginatedView(
         @list, $(@el).find('.BCK-1MicroMolar-Predictions'), customRenderEvent=undefined, disableColumnsSelection=true)
@@ -28,11 +29,7 @@ glados.useNameSpace 'glados.views.Compound',
 
     render: ->
 
-      rawTargetPredidctions = @model.get('_metadata').target_predictions
-      if not rawTargetPredidctions?
-        @hideSection()
-        return
-      if rawTargetPredidctions.length == 0
+      if @list.models.length == 0
         @hideSection()
         return
 
