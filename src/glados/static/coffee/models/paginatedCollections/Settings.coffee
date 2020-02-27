@@ -522,7 +522,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COLUMNS_DESCRIPTION:
           Table:
             Default: glados.models.Compound.UnichemConnectivityMatch.COLUMNS_SETTINGS.RESULTS_LIST_TABLE
-      git branchTARGET_PREDICTIONS:
+      TARGET_PREDICTIONS:
         MODEL: glados.models.Compound.TargetPrediction
         DEFAULT_PAGE_SIZE: 5
         ID_COLUMN: glados.models.Compound.TargetPrediction.ID_COLUMN
