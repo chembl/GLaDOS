@@ -4,10 +4,15 @@
 
 {% block general_content %}
 
-    The table below displays ChEMBL single-protein targets which are predicted to interact with
-    <span class="BCK-Predictions-MolChemblID"></span>.
-    The <span class="light-green lighten-5">green coloured rows</span> correspond to genuine predictions, i.e.
-    targets not included in the original training set for this compound. <br>
+    The table below displays ChEMBL targets which are predicted to interact with
+    <span class="BCK-Predictions-MolChemblID"></span>. When there are experimental data for a given
+    target-compound pair, the row is displayed in green with a link to the actual information. The target prediction
+    returns four classes: ‘active’ or ‘inactive’ depending on whether or not
+    <span class="BCK-Predictions-MolChemblID"></span> is
+    predicted to interact or not with the target. The value returned can also be 'empty' if the model was not able to
+    predict the compound or 'both' if it could not conclude.
+    The predictions are given at three different confidence levels.
+    <br> <br>
     API call: <a target="_blank" class="BCK-Predictions-APICall" href=''></a>. <br>
 
     <div class="BCK-1MicroMolar-Predictions">
