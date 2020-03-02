@@ -96,7 +96,7 @@ class FileWriterTester(TestCase):
             line_0 = lines_got[0]
             self.assertEqual(line_0, '"ChEMBL ID";"Synonyms"\n', 'Header line is malformed!')
             line_1 = lines_got[1]
-            self.assertEqual(line_1, '"CHEMBL59";"Carbilev|DOPAMINE|Dopamine|Intropin|Parcopa|Sinemet"\n',
+            self.assertEqual(line_1, '"CHEMBL59";"Carbilev|DOPAMINE|Dopamine|Intropin|NSC-173182|Parcopa|Sinemet"\n',
                              'Line is malformed!')
 
     def test_fails_with_context_but_no_id_property(self):
@@ -180,7 +180,7 @@ class FileWriterTester(TestCase):
             line_0 = lines_got[0]
             self.assertEqual(line_0, '"Similarity";"ChEMBL ID";"Synonyms"\n', 'Header line is malformed!')
             line_1 = lines_got[1]
-            self.assertEqual(line_1, '"100.0";"CHEMBL59";"Carbilev|DOPAMINE|Dopamine|Intropin|Parcopa|Sinemet"\n',
+            self.assertEqual(line_1, '"100.0";"CHEMBL59";"Carbilev|DOPAMINE|Dopamine|Intropin|NSC-173182|Parcopa|Sinemet"\n',
                              'Line is malformed!')
 
     def test_writes_csv_files_with_virual_properties(self):
