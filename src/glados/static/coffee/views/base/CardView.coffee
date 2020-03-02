@@ -9,7 +9,8 @@ CardView = Backbone.View.extend(glados.views.base.TrackView).extend
       @sectionID = originalArguments[0].section_id
       @sectionLabel = originalArguments[0].section_label
       @reportCardApp = originalArguments[0].report_card_app
-      @reportCardApp.registerSection(@sectionID, @sectionLabel)
+      @positionInScrollSpy = originalArguments[0].position_in_scroll_spy
+      @reportCardApp.registerSection(@sectionID, @sectionLabel, @positionInScrollSpy)
 
     if @config.view_name?
       viewName = @config.view_name

@@ -345,6 +345,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
         section_id: 'AlternateFormsOfCompoundInChEMBL'
         section_label: 'Alternative Forms'
         entity_name: Compound.prototype.entityName
+        position_in_scroll_spy: 2
         config: viewConfig
         report_card_app: @
 
