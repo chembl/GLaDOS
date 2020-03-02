@@ -4,14 +4,19 @@ glados.useNameSpace 'glados.models.ScrollSpy',
     initialize: ->
       @set('sections', {})
 
-    registerSection: (sectionName, sectionLabel) ->
+    registerSection: (sectionName, sectionLabel, positionInScrollSpy) ->
       sections = @get('sections')
+
+      if not positionInScrollSpy? or positionInScrollSpy > _.keys(sections).length
+        position = _.keys(sections).length
+      else
+        position = positionInScrollSpy
 
       sections[sectionName] =
         name: sectionName
         label: sectionLabel
         state: glados.models.ScrollSpy.ScrollSpyHandler.SECTION_STATES.NOT_AVAILABLE
-        position: _.keys(sections).length
+        position: position
         decided_state: false
 
     showSection: (sectionName) ->
