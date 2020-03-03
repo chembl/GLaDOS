@@ -181,10 +181,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     fetchList = ->
       chemblID = compound.get('id')
 
-      if compound.isParent()
-        query = "parent_molecule.molecule_chembl_id:#{chemblID}"
-      else
-        query = "mechanism_of_action.molecule_chembl_id:#{chemblID}"
+      query = "parent_molecule._metadata.hierarchy.all_family.chembl_id:#{chemblID}"
 
       viewConfig.table_config.full_list_url = glados.models.Compound.MechanismOfAction.getListURL(query)
       list.setMeta('custom_query', query)
