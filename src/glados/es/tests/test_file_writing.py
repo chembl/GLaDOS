@@ -294,10 +294,6 @@ class FileWriterTester(TestCase):
 
         with gzip.open(out_file_path, 'rt') as file_got:
             content_got = file_got.read()
-            print('CONTENT GOT')
-            print('test_writes_simple_sdf_file_when_some_items_have_no_structure')
-            print(content_got)
-            print('^^^')
             self.assertEqual(sdf_must_be, content_got, msg='The sdf was not generated properly!')
             self.assertEqual(num_items_must_be, total_items, msg='The total number of items was not returned properly')
 
@@ -314,10 +310,6 @@ class FileWriterTester(TestCase):
 
         with gzip.open(out_file_path, 'rt') as file_got:
             content_got = file_got.read()
-            print('CONTENT GOT')
-            print('test_writes_simple_sdf_file_when_no_items_have_structure')
-            print(content_got)
-            print('^^^')
             self.assertEqual(sdf_must_be, content_got, msg='The sdf was not generated properly!')
             self.assertEqual(num_items_must_be, total_items, msg='The total number of items was not returned properly')
 
@@ -342,10 +334,6 @@ class FileWriterTester(TestCase):
         with gzip.open(out_file_path, 'rt') as file_got:
             content_got = file_got.read()
 
-            print('CONTENT GOT')
-            print('test_reports_sdf_file_writing_progress')
-            print(content_got)
-            print('^^^')
             self.assertEqual(sdf_must_be, content_got, msg='The sdf was not generated properly!')
             self.assertEqual(num_items_must_be, total_items, msg='The total number of items was not returned properly')
 
