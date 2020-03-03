@@ -44,7 +44,7 @@ class PropertiesConfigurationControllerTester(TestCase):
                        GROUPS_DEFAULT_SORTING_FILE=SORTING_TEST_FILE)
     def test_returns_server_error_when_property_does_not_exist(self):
 
-        index_name = 'chembl_molecule'
+        index_name = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
         prop_id = 'does_not_exist'
 
         request_url = reverse('get_config_for_property', args=(index_name, prop_id))
@@ -58,7 +58,7 @@ class PropertiesConfigurationControllerTester(TestCase):
                        PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE,
                        GROUPS_DEFAULT_SORTING_FILE=SORTING_TEST_FILE)
     def test_gets_config_for_one_property(self):
-        index_name = 'chembl_molecule'
+        index_name = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
         prop_id = 'molecule_chembl_id'
 
         request_url = reverse('get_config_for_property', args=(index_name, prop_id))
@@ -90,7 +90,7 @@ class PropertiesConfigurationControllerTester(TestCase):
                        GROUPS_DEFAULT_SORTING_FILE=SORTING_TEST_FILE)
     def test_gets_config_for_a_group(self):
 
-        index_name = 'chembl_molecule'
+        index_name = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
         group_name = 'sorted_table'
 
         request_url = reverse('get_config_for_property', args=(index_name, group_name))

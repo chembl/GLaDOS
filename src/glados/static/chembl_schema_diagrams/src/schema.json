@@ -2907,25 +2907,25 @@
           "color": "#32A8D3",
           "figure": "FivePointedStar",
           "info": "The most acidic pKa calculated using ACDlabs v12.01",
-          "name": "acd_most_apka"
+          "name": "cx_most_apka"
         },
         {
           "color": "#32A8D3",
           "figure": "FivePointedStar",
           "info": "The most basic pKa calculated using ACDlabs v12.01",
-          "name": "acd_most_bpka"
+          "name": "cx_most_bpka"
         },
         {
           "color": "#32A8D3",
           "figure": "FivePointedStar",
           "info": "The calculated octanol/water partition coefficient using ACDlabs v12.01",
-          "name": "acd_logp"
+          "name": "cx_logp"
         },
         {
           "color": "#32A8D3",
           "figure": "FivePointedStar",
           "info": "The calculated octanol/water distribution coefficient at pH7.4 using ACDlabs v12.01",
-          "name": "acd_logd"
+          "name": "cx_logd"
         },
         {
           "color": "#F7B84B",

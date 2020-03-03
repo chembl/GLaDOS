@@ -1,5 +1,6 @@
 from django.test import TestCase
 from glados.es.es_properties_configuration import columns_parser
+from django.conf import settings
 
 
 class ColumnsParserTester(TestCase):
@@ -48,7 +49,7 @@ class ColumnsParserTester(TestCase):
             }
         ]
 
-        index_name = 'chembl_molecule'
+        index_name = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
         property_name = 'molecule_synonyms'
 
         parsed_value_got = columns_parser.parse(original_value, index_name, property_name)

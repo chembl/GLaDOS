@@ -15,18 +15,18 @@ mappings = \
             {
                 'document_1_chembl_id': 'TEXT',
                 # EXAMPLES:
-                # 'CHEMBL1127162' , 'CHEMBL1130369' , 'CHEMBL1126530' , 'CHEMBL1127968' , 'CHEMBL1126410' , 'CHEMBL11271
-                # 62' , 'CHEMBL1129107' , 'CHEMBL1128095' , 'CHEMBL1126530' , 'CHEMBL1130369'
+                # 'CHEMBL1129912' , 'CHEMBL1129182' , 'CHEMBL1130787' , 'CHEMBL1129014' , 'CHEMBL1129182' , 'CHEMBL11318
+                # 34' , 'CHEMBL1130601' , 'CHEMBL1130813' , 'CHEMBL1131789' , 'CHEMBL1129866'
                 'document_2_chembl_id': 'TEXT',
                 # EXAMPLES:
-                # 'CHEMBL1129716' , 'CHEMBL1142063' , 'CHEMBL1132089' , 'CHEMBL1133055' , 'CHEMBL1121586' , 'CHEMBL11289
-                # 52' , 'CHEMBL1122357' , 'CHEMBL1128591' , 'CHEMBL1131680' , 'CHEMBL1145533'
+                # 'CHEMBL1151435' , 'CHEMBL1921691' , 'CHEMBL1147473' , 'CHEMBL1122840' , 'CHEMBL3244383' , 'CHEMBL11331
+                # 56' , 'CHEMBL1131789' , 'CHEMBL1133147' , 'CHEMBL1147505' , 'CHEMBL1130963'
                 'mol_tani': 'NUMERIC',
                 # EXAMPLES:
-                # '0.0' , '0.0' , '0.0' , '0.0' , '0.0' , '0.0' , '0.0' , '0.02' , '0.0' , '0.0'
+                # '0.0' , '0.0' , '0.0' , '0.0' , '0.0' , '0.0' , '0.0' , '0.0' , '0.0' , '0.0'
                 'tid_tani': 'NUMERIC',
                 # EXAMPLES:
-                # '1.0' , '1.0' , '1.0' , '1.0' , '1.0' , '1.0' , '1.0' , '1.0' , '1.0' , '1.0'
+                # '1.0' , '1.0' , '1.0' , '1.0' , '1.0' , '0.8' , '1.0' , '1.0' , '1.0' , '0.75'
             }
         }
     }

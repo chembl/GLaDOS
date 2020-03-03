@@ -4,7 +4,7 @@ describe "Columns Factory for paginated views", ->
 
     baseColConfig =
       comparator: 'molecule_type'
-    indexName = 'chembl_molecule'
+    indexName = glados.Settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
 
     configGot = glados.models.paginatedCollections.ColumnsFactory.generateColumn(indexName, baseColConfig)
     console.log('configGot before: ', configGot)
@@ -20,7 +20,7 @@ describe "Columns Factory for paginated views", ->
 
     baseColConfig =
       comparator: 'molecule_synonyms'
-    indexName = 'chembl_molecule'
+    indexName = glados.Settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
 
     configGot = glados.models.paginatedCollections.ColumnsFactory.generateColumn(indexName, baseColConfig)
 
@@ -36,7 +36,7 @@ describe "Columns Factory for paginated views", ->
     configFromServer = {
       "sortable": true,
       "prop_id": "molecule_chembl_id",
-      "index_name": "chembl_molecule",
+      "index_name": glados.Settings.CHEMBL_ES_INDEX_PREFIX+"molecule",
       "label": "ChEMBL ID",
       "label_mini": "ChEMBL ID",
       "aggregatable": true,
@@ -55,7 +55,7 @@ describe "Columns Factory for paginated views", ->
 
     configFromServer = {
       "sortable": false,
-      "index_name": "chembl_molecule",
+      "index_name": glados.Settings.CHEMBL_ES_INDEX_PREFIX+"molecule",
       "label": "Synonyms",
       "prop_id": "molecule_synonyms",
       "aggregatable": false,

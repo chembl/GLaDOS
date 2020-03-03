@@ -5,7 +5,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
   idAttribute: 'molecule_chembl_id'
   defaults:
     fetch_from_elastic: true
-  indexName:'chembl_molecule'
+  indexName: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
   initialize: ->
 
     id = @get('id')
@@ -14,7 +14,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     @set('molecule_chembl_id', id)
 
     if @get('fetch_from_elastic')
-      @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_molecule/_doc/' + id
+      @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/'+glados.Settings.CHEMBL_ES_INDEX_PREFIX+'molecule/_doc/' + id
     else
       @url = glados.Settings.WS_BASE_URL + 'molecule/' + id + '.json'
 
@@ -329,9 +329,9 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 
       #response.image_url = glados.Settings.OLD_DEFAULT_IMAGES_BASE_URL + response.molecule_chembl_id
     else
-      objData.image_url = glados.Settings.WS_BASE_URL + 'image/' + objData.molecule_chembl_id + '.svg?engine=indigo'
+      objData.image_url = glados.Settings.WS_BASE_URL + 'image/' + objData.molecule_chembl_id + '.svg'
       objData.image_url_png = glados.Settings.WS_BASE_URL + 'image/' + objData.molecule_chembl_id \
-          + '.png?engine=indigo'
+          + '.png'
       objData.structure_image = true
 
     objData.report_card_url = Compound.get_report_card_url(objData.molecule_chembl_id)
@@ -488,58 +488,6 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
   # Highlighting
   #---------------------------------------------------------------------------------------------------------------------
 
-  downloadAlignedSDF: ()->
-    @set
-#      'reference_smiles_error': false
-      'download_aligned_error': false
-    ,
-      silent: true
-    model = @
-    promiseFunc = (resolve, reject)->
-      referenceCTAB = model.get('reference_ctab')
-      sdf2DData = model.get('sdf2DData')
-      if not referenceCTAB?
-        reject('Error, the reference CTAB is not present!')
-        return
-      if not sdf2DData?
-        reject('Error, the compound '+model.get('molecule_chembl_id')+' CTAB is not present!')
-        return
-
-      if model.get('aligned_sdf')?
-        resolve(model.get('aligned_sdf'))
-      else
-        formData = new FormData()
-        sdf2DData = sdf2DData+'$$$$\n'
-        templateBlob = new Blob([referenceCTAB], {type: 'chemical/x-mdl-molfile'})
-        ctabBlob = new Blob([sdf2DData+sdf2DData], {type: 'chemical/x-mdl-sdfile'})
-        formData.append('template', templateBlob, 'pattern.mol')
-        formData.append('ctab', ctabBlob, 'mcs.sdf')
-        formData.append('force', 'true')
-        ajax_deferred = $.post
-          url: Compound.SDF_2D_ALIGN_URL
-          data: formData
-          enctype: 'multipart/form-data'
-          processData: false
-          contentType: false
-          cache: false
-        ajax_deferred.done (ajaxData)->
-          alignedSdf = ajaxData.split('$$$$')[0]+'$$$$\n'
-          if alignedSdf.includes('Wrong arguments')
-            reject('Wrong arguments')
-          model.set('aligned_sdf', alignedSdf)
-          resolve(ajaxData)
-        ajax_deferred.fail (jqxhrError)->
-          reject(jqxhrError)
-    promise = new Promise(promiseFunc)
-    promise.then null, (jqxhrError)->
-      console.error jqxhrError
-      model.set
-        'download_aligned_error': true
-        'aligned_sdf': null
-#        'reference_smiles_error': true
-#      model.trigger glados.Events.Compound.STRUCTURE_HIGHLIGHT_ERROR
-    return promise
-
   downloadHighlightedSVG: ()->
     @set
       'reference_smiles_error': false
@@ -602,7 +550,7 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     return promise
 
   #---------------------------------------------------------------------------------------------------------------------
-  # 3D SDF
+  # SDF
   #---------------------------------------------------------------------------------------------------------------------
 
   download2DSDF: ()->
@@ -621,100 +569,6 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
           reject(error)
     return new Promise(promiseFunc.bind(@))
 
-  download3DSDF: (endpointIndex)->
-    @set('sdf3DError', false, {silent: true})
-    data3DCacheName = 'sdf3DData_'+endpointIndex
-    promiseFunc = (resolve, reject)->
-      if not @get('sdf2DData')?
-        error = 'Error, There is no 2D data for the compound '+@get('molecule_chembl_id')+'!'
-        compoundModel.set('sdf3DError', true)
-        console.error error
-        reject(error)
-      else if @get(data3DCacheName)?
-        resolve(data3DCacheName)
-      else
-        formData = new FormData()
-        molFileBlob = new Blob([@get('sdf2DData')], {type: 'chemical/x-mdl-molfile'})
-        formData.append('file', molFileBlob, 'molecule.mol')
-
-        ajaxRequestDict =
-          url: Compound.SDF_3D_ENDPOINTS[endpointIndex].url
-          data: formData
-          enctype: 'multipart/form-data'
-          processData: false
-          contentType: false
-          cache: false
-
-        ajax_deferred = $.post ajaxRequestDict
-        compoundModel = @
-        ajax_deferred.done (ajaxData)->
-          if ajaxData? and ajaxData.trim().length > 0
-            compoundModel.set(data3DCacheName, ajaxData)
-            resolve(ajaxData)
-          else
-            compoundModel.set('sdf3DError', true)
-            reject()
-
-        ajax_deferred.fail (error)->
-          compoundModel.set('sdf3DError', true)
-          reject()
-    return new Promise(promiseFunc.bind(@))
-
-  download3DXYZ: (endpointIndex)->
-    @set('xyz3DError', false, {silent: true})
-    dataVarName = 'sdf3DDataXYZ_'+endpointIndex
-    data3DSDFVarName = 'sdf3DData_'+endpointIndex
-    promiseFunc = (resolve, reject)->
-      if not @get('current3DData')?
-        error = 'Error, There is no 3D data for the compound '+@get('molecule_chembl_id')+'!'
-        compoundModel.set('xyz3DError', true)
-        console.error error
-        reject(error)
-      else if @get(dataVarName)?
-        resolve(dataVarName)
-      else
-        formData = new FormData()
-        formData.append('file', new Blob([@get(data3DSDFVarName)], {type: 'chemical/x-mdl-molfile'}), 'aligned.mol')
-        formData.set('computeCoords', 0)
-
-        ajax_deferred = $.post
-          url: Compound.SDF_3D_2_XYZ
-          data: formData
-          enctype: 'multipart/form-data'
-          processData: false
-          contentType: false
-          cache: false
-        compoundModel = @
-        ajax_deferred.done (ajaxData)->
-          compoundModel.set(dataVarName, ajaxData)
-          resolve(ajaxData)
-        ajax_deferred.fail (error)->
-          compoundModel.set('xyz3DError', true)
-          reject()
-    return new Promise(promiseFunc.bind(@))
-
-
-  calculate3DSDFAndXYZ: (endpointIndex)->
-    @set
-      cur3DEndpointIndex: endpointIndex
-      current3DData: null
-      current3DXYZData: null
-    @trigger 'change:current3DData'
-    @trigger 'change:current3DXYZData'
-    dataVarName = 'sdf3DData_'+endpointIndex
-    dataXYZVarName = 'sdf3DDataXYZ_'+endpointIndex
-
-    after3DDownload = ()->
-      @set('current3DData', @get(dataVarName))
-      afterXYZDownload = ()->
-        @set('current3DXYZData', @get(dataXYZVarName))
-      @download3DXYZ(endpointIndex).then afterXYZDownload.bind(@)
-    after3DDownload = after3DDownload.bind(@)
-
-    download3DPromise = @download3DSDF.bind(@, endpointIndex)
-    @download2DSDF().then ()->
-      download3DPromise().then(after3DDownload)
-
   #---------------------------------------------------------------------------------------------------------------------
   # instance urls
   #---------------------------------------------------------------------------------------------------------------------
@@ -728,29 +582,9 @@ Compound = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
 # 3D SDF Constants
 #-----------------------------------------------------------------------------------------------------------------------
 
-Compound.SDF_2D_ALIGN_URL = glados.Settings.BEAKER_BASE_URL + 'align'
 Compound.SDF_2D_HIGHLIGHT_URL = glados.Settings.BEAKER_BASE_URL + 'highlightCtabFragmentSvg'
 Compound.SDF_2D_URL = glados.Settings.WS_BASE_URL + 'molecule/'
-Compound.SDF_3D_2_XYZ = glados.Settings.BEAKER_BASE_URL + 'ctab2xyz'
 Compound.SMILES_2_SIMILARITY_MAP_URL = glados.Settings.BEAKER_BASE_URL + 'smiles2SimilarityMapSvg'
-Compound.SDF_3D_ENDPOINTS = [
-  {
-    label: 'UFF'
-    url: glados.Settings.BEAKER_BASE_URL+ 'ctab23D'
-  },
-  {
-    label: 'MMFF'
-    url: glados.Settings.BEAKER_BASE_URL+ 'MMFFctab23D'
-  },
-  {
-    label: 'ETKDG'
-    url: glados.Settings.BEAKER_BASE_URL+ 'ETKDGctab23D'
-  },
-  {
-    label: 'KDG'
-    url: glados.Settings.BEAKER_BASE_URL+ 'KDGctab23D'
-  }
-]
 
 # Constant definition for ReportCardEntity model functionalities
 _.extend(Compound, glados.models.base.ReportCardEntity)
@@ -759,7 +593,7 @@ Compound.reportCardPath = 'compound_report_card/'
 
 Compound.getSDFURL = (chemblId) -> glados.Settings.WS_BASE_URL + 'molecule/' + chemblId + '.sdf'
 
-Compound.INDEX_NAME = 'chembl_molecule'
+Compound.INDEX_NAME = glados.Settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
 
 Compound.PROPERTIES_VISUAL_CONFIG = {
   'molecule_chembl_id': {
@@ -902,13 +736,13 @@ Compound.COLUMNS = {
   QED_WEIGHTED: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     comparator: 'molecule_properties.qed_weighted'
   APKA: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.acd_most_apka'
+    comparator: 'molecule_properties.cx_most_apka'
   BPKA: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.acd_most_bpka'
-  ACD_LOGP: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.acd_logp'
-  ACD_LOGD: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.acd_logd'
+    comparator: 'molecule_properties.cx_most_bpka'
+  LOGP: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
+    comparator: 'molecule_properties.cx_logp'
+  LOGD: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
+    comparator: 'molecule_properties.cx_logd'
   AROMATIC_RINGS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     comparator: 'molecule_properties.aromatic_rings'
   HBA_LIPINSKI: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
@@ -1064,8 +898,8 @@ Compound.COLUMNS_SETTINGS = {
 #  RESULTS_LIST_REPORT_CARD_ADDITIONAL:[
 #    Compound.COLUMNS.APKA,
 #    Compound.COLUMNS.BPKA,
-#    Compound.COLUMNS.ACD_LOGP,
-#    Compound.COLUMNS.ACD_LOGD,
+#    Compound.COLUMNS.LOGP,
+#    Compound.COLUMNS.LOGD,
 #    Compound.COLUMNS.AROMATIC_RINGS,
 #    Compound.COLUMNS.STRUCTURE_TYPE,
 #    Compound.COLUMNS.INORGANIC_FLAG,

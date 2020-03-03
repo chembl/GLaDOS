@@ -14,7 +14,7 @@ glados.useNameSpace 'glados.models',
       @set('tissue_chembl_id', id)
 
       if @get('fetch_from_elastic')
-        @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_tissue/_doc/' + id
+        @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/'+glados.Settings.CHEMBL_ES_INDEX_PREFIX+'tissue/_doc/' + id
       else
         @url = glados.Settings.WS_BASE_URL + 'tissue/' + id + '.json'
 
@@ -77,7 +77,7 @@ glados.models.Tissue.PROPERTIES_VISUAL_CONFIG = {
   }
 }
 
-glados.models.Tissue.INDEX_NAME = 'chembl_tissue'
+glados.models.Tissue.INDEX_NAME = glados.Settings.CHEMBL_ES_INDEX_PREFIX+'tissue'
 glados.models.Tissue.COLUMNS = {
   CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn glados.models.Tissue.INDEX_NAME,
     comparator: 'tissue_chembl_id'

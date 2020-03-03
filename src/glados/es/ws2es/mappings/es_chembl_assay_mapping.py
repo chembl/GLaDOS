@@ -3,7 +3,7 @@ from glados.es.ws2es.es_util import DefaultMappings
 
 # Shards size - can be overridden from the default calculated value here
 # shards = 3,
-replicas = 1
+replicas = 0
 
 analysis = DefaultMappings.COMMON_ANALYSIS
 
@@ -54,6 +54,10 @@ mappings = \
                         # 'Neoplasms' , 'Fractional Excretion Methods' , 'General Hypothermia' , 'General Androgen Activ
                         # ity' , 'Experimental Melanoma' , 'Experimental Melanoma' , 'Experimental Melanoma' , 'Experime
                         # ntal Melanoma' , 'Experimental Melanoma' , 'Experimental Melanoma'
+                        'source': DefaultMappings.LOWER_CASE_KEYWORD,
+                        # EXAMPLES:
+                        # 'phenotype' , 'phenotype' , 'phenotype' , 'phenotype' , 'phenotype' , 'Hock_2016' , 'phenotype
+                        # ' , 'phenotype' , 'phenotype' , 'phenotype'
                     }
                 },
                 'assay_cell_type': DefaultMappings.KEYWORD,

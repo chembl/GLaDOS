@@ -49,17 +49,17 @@ msgstr "Passes Ro3"
 msgid "glados_es_gs__molecule__molecule_properties___qed_weighted__label"
 msgstr "QED Weighted"
 
-msgid "glados_es_gs__molecule__molecule_properties___acd_most_apka__label"
-msgstr "ACD ApKa"
+msgid "glados_es_gs__molecule__molecule_properties___cx_most_apka__label"
+msgstr "CX ApKa"
 
-msgid "glados_es_gs__molecule__molecule_properties___acd_most_bpka__label"
-msgstr "ACD BpKa"
+msgid "glados_es_gs__molecule__molecule_properties___cx_most_bpka__label"
+msgstr "CX BpKa"
 
-msgid "glados_es_gs__molecule__molecule_properties___acd_logp__label"
-msgstr "ACD LogP"
+msgid "glados_es_gs__molecule__molecule_properties___cx_logp__label"
+msgstr "CX LogP"
 
-msgid "glados_es_gs__molecule__molecule_properties___acd_logd__label"
-msgstr "ACD LogD"
+msgid "glados_es_gs__molecule__molecule_properties___cx_logd__label"
+msgstr "CX LogD"
 
 msgid "glados_es_gs__molecule__molecule_properties___aromatic_rings__label"
 msgstr "Aromatic Rings"

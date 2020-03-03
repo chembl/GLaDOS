@@ -2,8 +2,8 @@
 from glados.es.ws2es.es_util import DefaultMappings
 
 # Shards size - can be overridden from the default calculated value here
-shards = 7
-replicas = 1
+# shards = 7
+replicas = 0
 
 analysis = DefaultMappings.COMMON_ANALYSIS
 

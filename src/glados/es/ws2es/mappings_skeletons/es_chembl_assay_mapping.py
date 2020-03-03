@@ -19,12 +19,12 @@ mappings = \
                     {
                         'es_completion': 'TEXT',
                         # EXAMPLES:
-                        # '{'weight': 10, 'input': 'CHEMBL626547'}' , '{'weight': 10, 'input': 'BAO_0000019'}' , '{'weig
-                        # ht': 30, 'input': 'Rattus norvegicus'}' , '{'weight': 10, 'input': 'BAO_0000100'}' , '{'weight
-                        # ': 10, 'input': 'CHEMBL1133614'}' , '{'weight': 10, 'input': 'CHEMBL639051'}' , '{'weight': 10
-                        # , 'input': 'BAO_0000019'}' , '{'weight': 10, 'input': 'BAO_0000100'}' , '{'weight': 80, 'input
-                        # ': 'Biodistribution after 1 hour of postinjection in blood'}' , '{'weight': 10, 'input': 'CHEM
-                        # BL639052'}'
+                        # '{'weight': 30, 'input': 'Aspergillus fumigatus'}' , '{'weight': 30, 'input': 'Staphylococcus 
+                        # aureus'}' , '{'weight': 30, 'input': 'Mus musculus'}' , '{'weight': 30, 'input': 'Hepatitis C 
+                        # virus (isolate Con1)'}' , '{'weight': 10, 'input': 'BAO_0000218'}' , '{'weight': 10, 'input': 
+                        # 'CHEMBL1250528'}' , '{'weight': 30, 'input': 'Mus musculus'}' , '{'weight': 30, 'input': 'Salm
+                        # onella enterica subsp. enterica serovar Hadar'}' , '{'weight': 10, 'input': 'CHEMBL1245071'}' 
+                        # , '{'weight': 10, 'input': 'BAO_0000357'}'
                     }
                 },
                 'assay_category': 'TEXT',
@@ -33,19 +33,18 @@ mappings = \
                 # 'confirmatory' , 'confirmatory' , 'confirmatory' , 'confirmatory'
                 'assay_cell_type': 'TEXT',
                 # EXAMPLES:
-                # 'HeLa' , 'HeLa' , 'HeLa' , 'CHO' , 'CCRF S-180' , 'CHO' , 'CCRF S-180' , 'CCRF S-180' , 'CCRF S-180' ,
-                #  'NG 108-15'
+                # 'RAW' , 'HB1' , 'HT-29' , 'HT-29' , 'HEK293' , 'HEp-2' , 'CV-1' , 'HT-29' , 'HT-29' , 'HT-29'
                 'assay_chembl_id': 'TEXT',
                 # EXAMPLES:
-                # 'CHEMBL626547' , 'CHEMBL615627' , 'CHEMBL626548' , 'CHEMBL876617' , 'CHEMBL874503' , 'CHEMBL639051' , 
-                # 'CHEMBL627509' , 'CHEMBL633640' , 'CHEMBL640971' , 'CHEMBL639052'
+                # 'CHEMBL1263248' , 'CHEMBL1266962' , 'CHEMBL1274648' , 'CHEMBL1250177' , 'CHEMBL1265014' , 'CHEMBL12511
+                # 05' , 'CHEMBL1274416' , 'CHEMBL1247649' , 'CHEMBL1245071' , 'CHEMBL1251106'
                 'assay_classifications': 
                 {
                     'properties': 
                     {
                         'assay_class_id': 'NUMERIC',
                         # EXAMPLES:
-                        # '216' , '322' , '322' , '85' , '115' , '115' , '85' , '115' , '115' , '210'
+                        # '296' , '296' , '401' , '401' , '115' , '339' , '341' , '341' , '140' , '296'
                         'class_type': 'TEXT',
                         # EXAMPLES:
                         # 'In vivo efficacy' , 'In vivo efficacy' , 'In vivo efficacy' , 'In vivo efficacy' , 'In vivo e
@@ -53,28 +52,31 @@ mappings = \
                         #  'In vivo efficacy'
                         'l1': 'TEXT',
                         # EXAMPLES:
-                        # 'CARDIOVASCULAR SYSTEM' , 'NERVOUS SYSTEM' , 'NERVOUS SYSTEM' , 'ANTINEOPLASTIC AND IMMUNOMODU
-                        # LATING AGENTS' , 'ANTINEOPLASTIC AND IMMUNOMODULATING AGENTS' , 'ANTINEOPLASTIC AND IMMUNOMODU
-                        # LATING AGENTS' , 'ANTINEOPLASTIC AND IMMUNOMODULATING AGENTS' , 'ANTINEOPLASTIC AND IMMUNOMODU
-                        # LATING AGENTS' , 'ANTINEOPLASTIC AND IMMUNOMODULATING AGENTS' , 'CARDIOVASCULAR SYSTEM'
+                        # 'MUSCULO-SKELETAL SYSTEM' , 'MUSCULO-SKELETAL SYSTEM' , 'NERVOUS SYSTEM' , 'NERVOUS SYSTEM' , 
+                        # 'ANTINEOPLASTIC AND IMMUNOMODULATING AGENTS' , 'NERVOUS SYSTEM' , 'NERVOUS SYSTEM' , 'NERVOUS 
+                        # SYSTEM' , 'CARDIOVASCULAR SYSTEM' , 'MUSCULO-SKELETAL SYSTEM'
                         'l2': 'TEXT',
                         # EXAMPLES:
-                        # 'Inhibition of Cholesterol Absorption' , 'Anti-Depressant Activity' , 'Anti-Depressant Activit
-                        # y' , 'Carcinoma Oncology Models' , 'Neoplasm Oncology Models' , 'Neoplasm Oncology Models' , '
-                        # Carcinoma Oncology Models' , 'Neoplasm Oncology Models' , 'Neoplasm Oncology Models' , 'Influe
-                        # nce on Lipid Metabolism'
+                        # 'Anti-Inflammatory Activity' , 'Anti-Inflammatory Activity' , 'Learning and Memory' , 'Learnin
+                        # g and Memory' , 'Neoplasm Oncology Models' , 'Anti-Epileptic Activity' , 'Anti-Epileptic Activ
+                        # ity' , 'Anti-Epileptic Activity' , 'Anti-Arrhythmic Activity' , 'Anti-Inflammatory Activity'
                         'l3': 'TEXT',
                         # EXAMPLES:
-                        # 'General Cholesterol Activity' , 'General Hypothermia' , 'General Hypothermia' , 'Non Small Ce
-                        # ll Lung Carcinoma' , 'Neoplasms' , 'Neoplasms' , 'Non Small Cell Lung Carcinoma' , 'Neoplasms'
-                        #  , 'Neoplasms' , 'General Lipid Metabolism'
+                        # 'General Anti-Inflammatory Models' , 'General Anti-Inflammatory Models' , 'General Anti-Alzhei
+                        # mer Activity' , 'General Anti-Alzheimer Activity' , 'Neoplasms' , 'Electroshock in Mice' , 'Ge
+                        # neral Anti-Convulsant Activity' , 'General Anti-Convulsant Activity' , 'General Anti-Arrhythmi
+                        # c Activity' , 'General Anti-Inflammatory Models'
+                        'source': 'TEXT',
+                        # EXAMPLES:
+                        # 'phenotype' , 'phenotype' , 'phenotype' , 'phenotype' , 'phenotype' , 'Hock_2016' , 'phenotype
+                        # ' , 'phenotype' , 'phenotype' , 'phenotype'
                     }
                 },
                 'assay_organism': 'TEXT',
                 # EXAMPLES:
-                # 'Rattus norvegicus' , 'Cavia porcellus' , 'Rattus norvegicus' , 'Rattus norvegicus' , 'Rattus norvegic
-                # us' , 'Rattus norvegicus' , 'Canis lupus familiaris' , 'Rattus norvegicus' , 'Canis lupus familiaris' 
-                # , 'Homo sapiens'
+                # 'Aspergillus fumigatus' , 'Staphylococcus aureus' , 'Mus musculus' , 'Hepatitis C virus (isolate Con1)
+                # ' , 'Salmonella enterica subsp. enterica serovar Typhimurium' , 'Mus musculus' , 'Salmonella enterica 
+                # subsp. enterica serovar Hadar' , 'Hepatitis C virus' , 'Homo sapiens' , 'Staphylococcus aureus'
                 'assay_parameters': 
                 {
                     'properties': 
@@ -84,15 +86,14 @@ mappings = \
                         # '1' , '1' , '1' , '1' , '1' , '1' , '1' , '1' , '1' , '1'
                         'comments': 'TEXT',
                         # EXAMPLES:
-                        # 'Is the measured interaction considered due to direct binding to target?' , 'Is the measured i
-                        # nteraction considered due to direct binding to target?' , 'Is the measured interaction conside
-                        # red due to direct binding to target?' , 'Is the measured interaction considered due to direct 
-                        # binding to target?' , 'Is the measured interaction considered due to direct binding to target?
-                        # ' , 'Is the measured interaction considered due to direct binding to target?' , 'Is the measur
-                        # ed interaction considered due to direct binding to target?' , 'Is the measured interaction con
-                        # sidered due to direct binding to target?' , 'Is the measured interaction considered due to dir
-                        # ect binding to target?' , 'Is the measured interaction considered due to direct binding to tar
-                        # get?'
+                        # '+/- 0.0000033 (Mca-RPKPVE-Nval-WRK(Dnp)-NH2; ES002 from R&D Systems)' , '+/- 0.0000033 (Mca-R
+                        # PKPVE-Nval-WRK(Dnp)-NH2; ES002 from R&D Systems)' , 'Is the measured interaction considered du
+                        # e to direct binding to target?' , 'Is the measured interaction considered due to direct bindin
+                        # g to target?' , 'Is the measured interaction considered due to direct binding to target?' , 'I
+                        # s the measured interaction considered due to direct binding to target?' , 'Is the measured int
+                        # eraction considered due to direct binding to target?' , 'Is the measured interaction considere
+                        # d due to direct binding to target?' , 'Is the measured interaction considered due to direct bi
+                        # nding to target?' , 'Is the measured interaction considered due to direct binding to target?'
                         'relation': 'TEXT',
                         # EXAMPLES:
                         # '=' , '=' , '=' , '=' , '=' , '=' , '=' , '=' , '=' , '='
@@ -101,11 +102,11 @@ mappings = \
                         # '=' , '=' , '=' , '=' , '=' , '=' , '=' , '=' , '=' , '='
                         'standard_text_value': 'TEXT',
                         # EXAMPLES:
-                        # 'Intravenous' , 'Oral' , 'Oral' , 'Oral' , 'Oral' , 'Oral' , 'Intravenous' , 'Intravenous' , '
-                        # Intravenous' , 'Oral'
+                        # 'Oral' , 'Oral' , 'Oral' , 'Oral' , 'Oral' , 'Intravenous' , 'Oral' , 'Intravenous' , 'Intrave
+                        # nous' , 'Intravenous'
                         'standard_type': 'TEXT',
                         # EXAMPLES:
-                        # 'DOSE' , 'DOSE' , 'DOSE' , 'DOSE' , 'DOSE' , 'DOSE' , 'DOSE' , 'DOSE' , 'DOSE' , 'DOSE'
+                        # 'DOSE' , 'DOSE' , 'ROUTE' , 'DOSE' , 'DOSE' , 'DOSE' , 'DOSE' , 'DOSE' , 'DOSE' , 'DOSE'
                         'standard_type_fixed': 'NUMERIC',
                         # EXAMPLES:
                         # '0' , '0' , '0' , '0' , '0' , '0' , '0' , '0' , '0' , '0'
@@ -115,112 +116,112 @@ mappings = \
                         # , 'mg.kg-1' , 'mg.kg-1'
                         'standard_value': 'NUMERIC',
                         # EXAMPLES:
-                        # '5' , '2' , '30' , '10' , '10' , '2' , '40' , '30' , '1' , '4'
+                        # '5.0' , '5.0' , '100.0' , '100.0' , '5.0' , '30.0' , '5.0' , '5.0' , '5.0' , '5.0'
                         'text_value': 'TEXT',
                         # EXAMPLES:
-                        # 'Intravenous' , 'Oral' , 'Oral' , 'Oral' , 'Oral' , 'Oral' , 'Intravenous' , 'Intravenous' , '
-                        # Intravenous' , 'Oral'
+                        # 'Oral' , 'Oral' , 'Oral' , 'Oral' , 'Oral' , 'Intravenous' , 'Oral' , 'Intravenous' , 'Intrave
+                        # nous' , 'Intravenous'
                         'type': 'TEXT',
                         # EXAMPLES:
-                        # 'DOSE' , 'DOSE' , 'DOSE' , 'DOSE' , 'DOSE' , 'DOSE' , 'DOSE' , 'DOSE' , 'DOSE' , 'DOSE'
+                        # 'DOSE' , 'DOSE' , 'ROUTE' , 'DOSE' , 'DOSE' , 'DOSE' , 'DOSE' , 'DOSE' , 'DOSE' , 'DOSE'
                         'units': 'TEXT',
                         # EXAMPLES:
                         # 'mg/kg' , 'mg/kg' , 'mg/kg' , 'mg/kg' , 'mg/kg' , 'mg/kg' , 'mg/kg' , 'mg/kg' , 'mg/kg' , 'mg/
                         # kg'
                         'value': 'NUMERIC',
                         # EXAMPLES:
-                        # '5' , '2' , '30' , '10' , '10' , '2' , '40' , '30' , '1' , '4'
+                        # '5.0' , '5.0' , '100.0' , '100.0' , '5.0' , '30.0' , '5.0' , '5.0' , '5.0' , '5.0'
                     }
                 },
                 'assay_strain': 'TEXT',
                 # EXAMPLES:
-                # 'oka' , 'nigeriensis' , 'nigeriensis' , 'K1' , 'tk-07' , 'oka' , 'nigeriensis' , 'nigeriensis' , 'nige
-                # riensis' , 'nigeriensis'
+                # '25' , 'ddY' , 'ATCC 14028' , 'ddY' , 'VA5649' , '510' , 'ddY' , 'ddY' , 'ddY' , 'ATCC 14028'
                 'assay_subcellular_fraction': 'TEXT',
                 # EXAMPLES:
-                # 'Membrane' , 'Mitochondria' , 'Microsome' , 'S9 fraction' , 'S9 fraction' , 'S9 fraction' , 'Microsome
-                # ' , 'Mitochondria' , 'Brain membranes' , 'Membrane'
+                # 'Membrane' , 'Membrane' , 'Membrane' , 'Mitochondria' , 'Microsome' , 'Microsome' , 'Microsome' , 'Mic
+                # rosome' , 'Microsome' , 'Microsome'
                 'assay_tax_id': 'NUMERIC',
                 # EXAMPLES:
-                # '10116' , '10141' , '10116' , '10116' , '10116' , '10116' , '9615' , '10116' , '9615' , '9606'
+                # '746128' , '1280' , '10090' , '333284' , '90371' , '10090' , '149385' , '11103' , '9606' , '1280'
                 'assay_test_type': 'TEXT',
                 # EXAMPLES:
-                # 'In vivo' , 'In vivo' , 'In vivo' , 'In vivo' , 'In vivo' , 'In vivo' , 'In vivo' , 'In vivo' , 'In vi
-                # vo' , 'In vivo'
+                # 'In vivo' , 'In vivo' , 'In vivo' , 'In vivo' , 'In vivo' , 'In vivo' , 'In vivo' , 'In vitro' , 'In v
+                # ivo' , 'In vivo'
                 'assay_tissue': 'TEXT',
                 # EXAMPLES:
-                # 'Thalamus' , 'Blood' , 'Brain' , 'Feces' , 'Kidney' , 'Plasma' , 'Plasma' , 'Muscle tissue' , 'Spleen'
-                #  , 'Cerebral cortex'
+                # 'Blood' , 'Liver' , 'Kidney' , 'Stomach' , 'Spleen' , 'Heart' , 'Brain' , 'Kidney' , 'Brain' , 'Plasma
+                # '
                 'assay_type': 'TEXT',
                 # EXAMPLES:
-                # 'A' , 'F' , 'A' , 'P' , 'A' , 'B' , 'A' , 'P' , 'A' , 'B'
+                # 'F' , 'B' , 'A' , 'F' , 'F' , 'B' , 'A' , 'F' , 'F' , 'B'
                 'assay_type_description': 'TEXT',
                 # EXAMPLES:
-                # 'ADME' , 'Functional' , 'ADME' , 'Physicochemical' , 'ADME' , 'Binding' , 'ADME' , 'Physicochemical' ,
-                #  'ADME' , 'Binding'
+                # 'Functional' , 'Binding' , 'ADME' , 'Functional' , 'Functional' , 'Binding' , 'ADME' , 'Functional' , 
+                # 'Functional' , 'Binding'
                 'bao_format': 'TEXT',
                 # EXAMPLES:
-                # 'BAO_0000218' , 'BAO_0000019' , 'BAO_0000218' , 'BAO_0000100' , 'BAO_0000218' , 'BAO_0000357' , 'BAO_0
-                # 000019' , 'BAO_0000100' , 'BAO_0000218' , 'BAO_0000357'
+                # 'BAO_0000218' , 'BAO_0000019' , 'BAO_0000218' , 'BAO_0000218' , 'BAO_0000218' , 'BAO_0000019' , 'BAO_0
+                # 000218' , 'BAO_0000019' , 'BAO_0000218' , 'BAO_0000357'
                 'bao_label': 'TEXT',
                 # EXAMPLES:
-                # 'organism-based format' , 'assay format' , 'organism-based format' , 'small-molecule physicochemical f
-                # ormat' , 'organism-based format' , 'single protein format' , 'assay format' , 'small-molecule physicoc
-                # hemical format' , 'organism-based format' , 'single protein format'
+                # 'organism-based format' , 'assay format' , 'organism-based format' , 'organism-based format' , 'organi
+                # sm-based format' , 'assay format' , 'organism-based format' , 'assay format' , 'organism-based format'
+                #  , 'single protein format'
                 'cell_chembl_id': 'TEXT',
                 # EXAMPLES:
-                # 'CHEMBL3308376' , 'CHEMBL3308376' , 'CHEMBL3308376' , 'CHEMBL3308072' , 'CHEMBL3307278' , 'CHEMBL33080
-                # 72' , 'CHEMBL3307278' , 'CHEMBL3307278' , 'CHEMBL3307278' , 'CHEMBL3307651'
+                # 'CHEMBL3307413' , 'CHEMBL3307768' , 'CHEMBL3307768' , 'CHEMBL3307715' , 'CHEMBL3307694' , 'CHEMBL33080
+                # 33' , 'CHEMBL3307768' , 'CHEMBL3307768' , 'CHEMBL3307768' , 'CHEMBL3307768'
                 'confidence_description': 'TEXT',
                 # EXAMPLES:
-                # 'Target assigned is non-molecular' , 'Homologous single protein target assigned' , 'Target assigned is
-                #  non-molecular' , 'Default value - Target unknown or has yet to be assigned' , 'Target assigned is non
-                # -molecular' , 'Homologous single protein target assigned' , 'Default value - Target unknown or has yet
-                #  to be assigned' , 'Default value - Target unknown or has yet to be assigned' , 'Default value - Targe
-                # t unknown or has yet to be assigned' , 'Homologous single protein target assigned'
+                # 'Target assigned is non-molecular' , 'Default value - Target unknown or has yet to be assigned' , 'Tar
+                # get assigned is non-molecular' , 'Target assigned is non-molecular' , 'Target assigned is non-molecula
+                # r' , 'Default value - Target unknown or has yet to be assigned' , 'Target assigned is non-molecular' ,
+                #  'Target assigned is non-molecular' , 'Target assigned is non-molecular' , 'Direct single protein targ
+                # et assigned'
                 'confidence_score': 'NUMERIC',
                 # EXAMPLES:
-                # '1' , '8' , '1' , '0' , '1' , '8' , '0' , '0' , '0' , '8'
+                # '1' , '0' , '1' , '1' , '1' , '0' , '1' , '1' , '1' , '9'
                 'description': 'TEXT',
                 # EXAMPLES:
-                # 'Pharmacokinetic parameter area under curve was reported' , 'Inhibition of [14C]arachidonic acid conve
-                # rsion to 5-HETE by broken cell 5-LO isolated from guinea pig PMN; not active at the highest concentrat
-                # ion (3 ug/mL) tested; No activity' , 'Pharmacokinetic property (AUC) in rat' , 'Solubility in phosphat
-                # e buffer, tested as a HCl salt' , 'Biodistribution of radioactivity in rat thalamus upon Tail-Vein inj
-                # ection of [11C]-labeled compound after 60 min' , 'Compound was tested for inhibition against human acr
-                # osin and control activity being 11.3 umol/min/mg; No data' , 'Effect of pH on carbamate hydrolysis in 
-                # 0.05 M buffer concentration at the pH 5.0, 25 degree C.' , 'Solubility in saline' , 'Biodistribution a
-                # fter 1 hour of postinjection in blood' , 'Compound was tested for inhibition of Human acrosin by aldoh
-                # exoses'
+                # 'Antimicrobial activity against itraconazole-susceptible Aspergillus fumigatus clinical isolate expres
+                # sing cyp51A F46Y, G89G, M172V, N248T, D255E, E427K mutant gene by CLSI method' , 'Binding affinity to 
+                # against methicillin-, daptomycin-resistant, vancomycin-intermediate, beta-lactamase-positive Staphyloc
+                # occus aureus 25 PBP2 by competitive binding assay' , 'Biodistribution in ddY mouse blood assessed per 
+                # gram of tissue at 14.8 kBq, iv after 180 mins' , 'Antiviral activity against Hepatitis C virus (isolat
+                # e Con1) genotype 1b in human Huh-7/3-1 replicon cells assessed as inhibition of [14C]sphingomyelin syn
+                # thesis after 48 hrs by TLC' , 'Antibacterial activity against Salmonella enterica serovars Typhimurium
+                #  ATCC 14028 at pH 7.0 by broth dilution method' , 'Selectivity ratio of p38alpha over nonreceptor tyro
+                # sine kinase' , 'Biodistribution in ddY mouse liver assessed per gram of tissue at 14.8 kBq, iv after 1
+                # 80 mins' , 'Antibacterial activity against Salmonella enterica serovar Hadar VA5649 harboring wild typ
+                # e ramR-2313 gene by Etest method' , 'Antiviral activity against Hepatitis C virus containing NS3/A156T
+                #  protease mutant activity by TaqMan-based assay' , 'Inhibition of human ERG at 30 uM'
                 'document_chembl_id': 'TEXT',
                 # EXAMPLES:
-                # 'CHEMBL1135072' , 'CHEMBL1126332' , 'CHEMBL1134422' , 'CHEMBL1123133' , 'CHEMBL1133614' , 'CHEMBL11231
-                # 55' , 'CHEMBL1124794' , 'CHEMBL1131746' , 'CHEMBL1133774' , 'CHEMBL1121739'
+                # 'CHEMBL1255497' , 'CHEMBL1255453' , 'CHEMBL1268917' , 'CHEMBL1240304' , 'CHEMBL1255258' , 'CHEMBL12505
+                # 28' , 'CHEMBL1268917' , 'CHEMBL1240379' , 'CHEMBL1240347' , 'CHEMBL1250528'
                 'relationship_description': 'TEXT',
                 # EXAMPLES:
-                # 'Non-molecular target assigned' , 'Homologous protein target assigned' , 'Non-molecular target assigne
-                # d' , 'Default value - Target has yet to be curated' , 'Non-molecular target assigned' , 'Homologous pr
-                # otein target assigned' , 'Default value - Target has yet to be curated' , 'Default value - Target has 
-                # yet to be curated' , 'Default value - Target has yet to be curated' , 'Homologous protein target assig
-                # ned'
+                # 'Non-molecular target assigned' , 'Default value - Target has yet to be curated' , 'Non-molecular targ
+                # et assigned' , 'Non-molecular target assigned' , 'Non-molecular target assigned' , 'Default value - Ta
+                # rget has yet to be curated' , 'Non-molecular target assigned' , 'Non-molecular target assigned' , 'Non
+                # -molecular target assigned' , 'Direct protein target assigned'
                 'relationship_type': 'TEXT',
                 # EXAMPLES:
-                # 'N' , 'H' , 'N' , 'U' , 'N' , 'H' , 'U' , 'U' , 'U' , 'H'
+                # 'N' , 'U' , 'N' , 'N' , 'N' , 'U' , 'N' , 'N' , 'N' , 'D'
                 'src_assay_id': 'NUMERIC',
                 # EXAMPLES:
-                # '506980' , '533665' , '503053' , '515022' , '503051' , '517112' , '503050' , '515019' , '517111' , '50
-                # 3131'
+                # '937' , '1898' , '1278' , '463086' , '924' , '1259' , '2195' , '2763' , '994' , '992'
                 'src_id': 'NUMERIC',
                 # EXAMPLES:
                 # '1' , '1' , '1' , '1' , '1' , '1' , '1' , '1' , '1' , '1'
                 'target_chembl_id': 'TEXT',
                 # EXAMPLES:
-                # 'CHEMBL376' , 'CHEMBL215' , 'CHEMBL376' , 'CHEMBL2362975' , 'CHEMBL376' , 'CHEMBL2738' , 'CHEMBL612558
-                # ' , 'CHEMBL2362975' , 'CHEMBL612558' , 'CHEMBL2738'
+                # 'CHEMBL363' , 'CHEMBL612545' , 'CHEMBL613561' , 'CHEMBL379' , 'CHEMBL351' , 'CHEMBL612545' , 'CHEMBL61
+                # 3580' , 'CHEMBL3879801' , 'CHEMBL379' , 'CHEMBL240'
                 'tissue_chembl_id': 'TEXT',
                 # EXAMPLES:
-                # 'CHEMBL3638280' , 'CHEMBL3638178' , 'CHEMBL3638188' , 'CHEMBL3638230' , 'CHEMBL3638241' , 'CHEMBL35597
-                # 21' , 'CHEMBL3559721' , 'CHEMBL3638254' , 'CHEMBL3559722' , 'CHEMBL3559724'
+                # 'CHEMBL3638178' , 'CHEMBL3559723' , 'CHEMBL3638241' , 'CHEMBL3638185' , 'CHEMBL3559722' , 'CHEMBL36381
+                # 87' , 'CHEMBL3638188' , 'CHEMBL3638241' , 'CHEMBL3638188' , 'CHEMBL3559721'
             }
         }
     }

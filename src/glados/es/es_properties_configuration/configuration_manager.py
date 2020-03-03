@@ -1,4 +1,3 @@
-import glados.es.ws2es.resources_description as resources_description
 from glados.es.ws2es.util import SummableDict
 from glados.es.ws2es import resources_description
 import yaml
@@ -26,7 +25,7 @@ def get_config_for_prop(index_name, prop_id):
     if cache_response is not None:
         return cache_response
 
-    index_mapping = resources_description.RESOURCES_BY_ALIAS_NAME.get(index_name)
+    index_mapping = resources_description.RESOURCES_BY_IDX_NAME.get(index_name)
     if index_mapping is None:
         raise ESPropsConfigurationManagerError("The index {} does not exist!".format(index_name))
 
@@ -84,7 +83,8 @@ def get_config_for_prop(index_name, prop_id):
                             property_override_description.get('type') is None or \
                             property_override_description.get('sortable') is None:
                 raise ESPropsConfigurationManagerError('A contextual property must define the type and if it is '
-                                                       'aggregatable and sortable')
+                                                       'aggregatable and sortable. index => {} : prop => {}'
+                                                       .format(index_name, prop_id))
 
         config += property_override_description
 
@@ -117,7 +117,7 @@ def get_config_for_group(index_name, group_name):
                                                "There should be a configuration set up in {}"
                                                .format(settings.PROPERTIES_GROUPS_FILE))
 
-    index_mapping = resources_description.RESOURCES_BY_ALIAS_NAME.get(index_name)
+    index_mapping = resources_description.RESOURCES_BY_IDX_NAME.get(index_name)
     if index_mapping is None:
         raise ESPropsConfigurationManagerError("The index {} does not exist!".format(index_name))
 
@@ -145,7 +145,7 @@ def get_config_for_group(index_name, group_name):
 
 
 def get_id_property_for_index(index_name):
-    resources_desc = resources_description.RESOURCES_BY_ALIAS_NAME
+    resources_desc = resources_description.RESOURCES_BY_IDX_NAME
     resource_desc = resources_desc.get(index_name)
     if resource_desc is None:
         raise ESPropsConfigurationManagerError('The index {} does not exist.'.format(index_name))
@@ -182,7 +182,7 @@ def print_props_counts():
 
     all_labels = [index_name_label, total_properties_label, num_used_properties_label]
 
-    for index_name, index_mapping in resources_description.RESOURCES_BY_ALIAS_NAME.items():
+    for index_name, index_mapping in resources_description.RESOURCES_BY_IDX_NAME.items():
 
         mapping = index_mapping.get_resource_mapping_from_es()
         current_index_description = {
@@ -216,7 +216,7 @@ def print_groups_counts():
     total_groups_label = 'Total Groups'
     all_labels = [index_name_label, groups_and_subgroups_label, total_groups_label]
 
-    for index_name, index_mapping in resources_description.RESOURCES_BY_ALIAS_NAME.items():
+    for index_name, index_mapping in resources_description.RESOURCES_BY_IDX_NAME.items():
 
         current_index_description = {
             index_name_label: index_name,

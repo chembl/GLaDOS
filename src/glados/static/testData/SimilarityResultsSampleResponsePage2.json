@@ -22,10 +22,10 @@
         "parent_chembl_id": "CHEMBL2333413"
       },
       "molecule_properties": {
-        "acd_logd": "1.2",
-        "acd_logp": "1.21",
-        "acd_most_apka": "8.8",
-        "acd_most_bpka": null,
+        "cx_logd": "1.2",
+        "cx_logp": "1.21",
+        "cx_most_apka": "8.8",
+        "cx_most_bpka": null,
         "alogp": "1.56",
         "aromatic_rings": 1,
         "full_molformula": "C6H2F5NO2S",
@@ -93,10 +93,10 @@
         "parent_chembl_id": "CHEMBL141255"
       },
       "molecule_properties": {
-        "acd_logd": "0.1",
-        "acd_logp": "0.13",
-        "acd_most_apka": "8.9",
-        "acd_most_bpka": null,
+        "cx_logd": "0.1",
+        "cx_logp": "0.13",
+        "cx_most_apka": "8.9",
+        "cx_most_bpka": null,
         "alogp": "1.72",
         "aromatic_rings": 2,
         "full_molformula": "C13H7ClF5N3O5S2",
@@ -164,10 +164,10 @@
         "parent_chembl_id": "CHEMBL336455"
       },
       "molecule_properties": {
-        "acd_logd": "0.7",
-        "acd_logp": "0.73",
-        "acd_most_apka": "8.56",
-        "acd_most_bpka": null,
+        "cx_logd": "0.7",
+        "cx_logp": "0.73",
+        "cx_most_apka": "8.56",
+        "cx_most_bpka": null,
         "alogp": "2.06",
         "aromatic_rings": 2,
         "full_molformula": "C13H9F5N2O4S2",
@@ -235,10 +235,10 @@
         "parent_chembl_id": "CHEMBL265534"
       },
       "molecule_properties": {
-        "acd_logd": "0.63",
-        "acd_logp": "0.66",
-        "acd_most_apka": "8.68",
-        "acd_most_bpka": null,
+        "cx_logd": "0.63",
+        "cx_logp": "0.66",
+        "cx_most_apka": "8.68",
+        "cx_most_bpka": null,
         "alogp": "1.85",
         "aromatic_rings": 2,
         "full_molformula": "C13H10F4N2O4S2",
@@ -306,10 +306,10 @@
         "parent_chembl_id": "CHEMBL2003021"
       },
       "molecule_properties": {
-        "acd_logd": "-0.96",
-        "acd_logp": "-0.92",
-        "acd_most_apka": "8.86",
-        "acd_most_bpka": "0.86",
+        "cx_logd": "-0.96",
+        "cx_logp": "-0.92",
+        "cx_most_apka": "8.86",
+        "cx_most_bpka": "0.86",
         "alogp": "0.82",
         "aromatic_rings": 1,
         "full_molformula": "C7H8Cl2N4O4S3",
@@ -377,10 +377,10 @@
         "parent_chembl_id": "CHEMBL295343"
       },
       "molecule_properties": {
-        "acd_logd": "-0.96",
-        "acd_logp": "-0.96",
-        "acd_most_apka": "9.33",
-        "acd_most_bpka": null,
+        "cx_logd": "-0.96",
+        "cx_logp": "-0.96",
+        "cx_most_apka": "9.33",
+        "cx_most_bpka": null,
         "alogp": "0.69",
         "aromatic_rings": 2,
         "full_molformula": "C13H12ClN3O5S2",
@@ -448,10 +448,10 @@
         "parent_chembl_id": "CHEMBL363168"
       },
       "molecule_properties": {
-        "acd_logd": "0.95",
-        "acd_logp": "0.96",
-        "acd_most_apka": "9.07",
-        "acd_most_bpka": "0.26",
+        "cx_logd": "0.95",
+        "cx_logp": "0.96",
+        "cx_most_apka": "9.07",
+        "cx_most_bpka": "0.26",
         "alogp": "0.6",
         "aromatic_rings": 2,
         "full_molformula": "C13H13ClN4O5S2",
@@ -519,10 +519,10 @@
         "parent_chembl_id": "CHEMBL343268"
       },
       "molecule_properties": {
-        "acd_logd": "-0.05",
-        "acd_logp": "1.93",
-        "acd_most_apka": "4.12",
-        "acd_most_bpka": null,
+        "cx_logd": "-0.05",
+        "cx_logp": "1.93",
+        "cx_most_apka": "4.12",
+        "cx_most_bpka": null,
         "alogp": "2.71",
         "aromatic_rings": 2,
         "full_molformula": "C12H6ClF5N2O4S2",
@@ -590,10 +590,10 @@
         "parent_chembl_id": "CHEMBL317743"
       },
       "molecule_properties": {
-        "acd_logd": "-0.09",
-        "acd_logp": "1.79",
-        "acd_most_apka": "4.83",
-        "acd_most_bpka": null,
+        "cx_logd": "-0.09",
+        "cx_logp": "1.79",
+        "cx_most_apka": "4.83",
+        "cx_most_bpka": null,
         "alogp": "2.51",
         "aromatic_rings": 2,
         "full_molformula": "C12H7ClF4N2O4S2",
@@ -661,10 +661,10 @@
         "parent_chembl_id": "CHEMBL1880645"
       },
       "molecule_properties": {
-        "acd_logd": "1.74",
-        "acd_logp": "1.75",
-        "acd_most_apka": "9.64",
-        "acd_most_bpka": null,
+        "cx_logd": "1.74",
+        "cx_logp": "1.75",
+        "cx_most_apka": "9.64",
+        "cx_most_bpka": null,
         "alogp": "2.36",
         "aromatic_rings": 2,
         "full_molformula": "C13H12Cl2N2O4S2",
@@ -732,10 +732,10 @@
         "parent_chembl_id": "CHEMBL281027"
       },
       "molecule_properties": {
-        "acd_logd": "1.99",
-        "acd_logp": "1.99",
-        "acd_most_apka": "9.2",
-        "acd_most_bpka": null,
+        "cx_logd": "1.99",
+        "cx_logp": "1.99",
+        "cx_most_apka": "9.2",
+        "cx_most_bpka": null,
         "alogp": "2.53",
         "aromatic_rings": 1,
         "full_molformula": "C6H4Cl3NO2S",
@@ -803,10 +803,10 @@
         "parent_chembl_id": "CHEMBL140428"
       },
       "molecule_properties": {
-        "acd_logd": "-0.5",
-        "acd_logp": "1.46",
-        "acd_most_apka": "4.34",
-        "acd_most_bpka": null,
+        "cx_logd": "-0.5",
+        "cx_logp": "1.46",
+        "cx_most_apka": "4.34",
+        "cx_most_bpka": null,
         "alogp": "2.26",
         "aromatic_rings": 2,
         "full_molformula": "C12H6F6N2O4S2",
@@ -874,10 +874,10 @@
         "parent_chembl_id": "CHEMBL540698"
       },
       "molecule_properties": {
-        "acd_logd": "-0.5",
-        "acd_logp": "1.32",
-        "acd_most_apka": "5.05",
-        "acd_most_bpka": null,
+        "cx_logd": "-0.5",
+        "cx_logp": "1.32",
+        "cx_most_apka": "5.05",
+        "cx_most_bpka": null,
         "alogp": "2.05",
         "aromatic_rings": 2,
         "full_molformula": "C12H7F5N2O4S2",
@@ -945,10 +945,10 @@
         "parent_chembl_id": "CHEMBL342679"
       },
       "molecule_properties": {
-        "acd_logd": "-0.25",
-        "acd_logp": "1.57",
-        "acd_most_apka": "5.11",
-        "acd_most_bpka": null,
+        "cx_logd": "-0.25",
+        "cx_logp": "1.57",
+        "cx_most_apka": "5.11",
+        "cx_most_bpka": null,
         "alogp": "2.05",
         "aromatic_rings": 2,
         "full_molformula": "C12H7F5N2O4S2",
@@ -1016,10 +1016,10 @@
         "parent_chembl_id": "CHEMBL381906"
       },
       "molecule_properties": {
-        "acd_logd": "-2.64",
-        "acd_logp": "-0.53",
-        "acd_most_apka": "9.03",
-        "acd_most_bpka": "9.65",
+        "cx_logd": "-2.64",
+        "cx_logp": "-0.53",
+        "cx_most_apka": "9.03",
+        "cx_most_bpka": "9.65",
         "alogp": "-1.37",
         "aromatic_rings": 1,
         "full_molformula": "C10H15ClN4O5S2",
@@ -1087,10 +1087,10 @@
         "parent_chembl_id": "CHEMBL2140238"
       },
       "molecule_properties": {
-        "acd_logd": "-0.26",
-        "acd_logp": "3.08",
-        "acd_most_apka": "3.88",
-        "acd_most_bpka": null,
+        "cx_logd": "-0.26",
+        "cx_logp": "3.08",
+        "cx_most_apka": "3.88",
+        "cx_most_bpka": null,
         "alogp": "4.38",
         "aromatic_rings": 3,
         "full_molformula": "C19H13Cl2NO6S2",
@@ -1158,10 +1158,10 @@
         "parent_chembl_id": "CHEMBL2376566"
       },
       "molecule_properties": {
-        "acd_logd": "0.75",
-        "acd_logp": "4.31",
-        "acd_most_apka": "3.18",
-        "acd_most_bpka": null,
+        "cx_logd": "0.75",
+        "cx_logp": "4.31",
+        "cx_most_apka": "3.18",
+        "cx_most_bpka": null,
         "alogp": "3.94",
         "aromatic_rings": 2,
         "full_molformula": "C13H8Cl3NO4S",
@@ -1229,10 +1229,10 @@
         "parent_chembl_id": "CHEMBL141408"
       },
       "molecule_properties": {
-        "acd_logd": "0.26",
-        "acd_logp": "2.23",
-        "acd_most_apka": "4.12",
-        "acd_most_bpka": null,
+        "cx_logd": "0.26",
+        "cx_logp": "2.23",
+        "cx_most_apka": "4.12",
+        "cx_most_bpka": null,
         "alogp": "2.8",
         "aromatic_rings": 2,
         "full_molformula": "C12H6BrF5N2O4S2",
@@ -1300,10 +1300,10 @@
         "parent_chembl_id": "CHEMBL344001"
       },
       "molecule_properties": {
-        "acd_logd": "-0.37",
-        "acd_logp": "1.8",
-        "acd_most_apka": "4.22",
-        "acd_most_bpka": null,
+        "cx_logd": "-0.37",
+        "cx_logp": "1.8",
+        "cx_most_apka": "4.22",
+        "cx_most_bpka": null,
         "alogp": "2.54",
         "aromatic_rings": 3,
         "full_molformula": "C18H12F5N3O6S3",
@@ -1371,10 +1371,10 @@
         "parent_chembl_id": "CHEMBL2376567"
       },
       "molecule_properties": {
-        "acd_logd": "1.28",
-        "acd_logp": "5.3",
-        "acd_most_apka": "2.98",
-        "acd_most_bpka": null,
+        "cx_logd": "1.28",
+        "cx_logp": "5.3",
+        "cx_most_apka": "2.98",
+        "cx_most_bpka": null,
         "alogp": "4.61",
         "aromatic_rings": 2,
         "full_molformula": "C13H7Cl4NO4S",

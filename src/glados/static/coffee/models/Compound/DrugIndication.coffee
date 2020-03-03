@@ -17,14 +17,14 @@ glados.useNameSpace 'glados.models.Compound',
         objData.parent_image_url = "#{glados.Settings.STATIC_IMAGES_URL}compound_placeholders/#{imageFile}"
       else
         objData.parent_image_url = \
-          "#{glados.Settings.WS_BASE_URL}image/#{objData.parent_molecule.molecule_chembl_id}.svg?engine=indigo"
+          "#{glados.Settings.WS_BASE_URL}image/#{objData.parent_molecule.molecule_chembl_id}.svg"
       objData.molecule_link = Compound.get_report_card_url(objData.parent_molecule.molecule_chembl_id)
 
 
       objData.mesh_url = "https://id.nlm.nih.gov/mesh/#{objData.drug_indication.mesh_id}.html"
       return objData
 
-glados.models.Compound.DrugIndication.INDEX_NAME = 'chembl_drug_indication_by_parent'
+glados.models.Compound.DrugIndication.INDEX_NAME = glados.Settings.CHEMBL_ES_INDEX_PREFIX+'drug_indication_by_parent'
 glados.models.Compound.DrugIndication.PROPERTIES_VISUAL_CONFIG = {
   'parent_molecule.molecule_chembl_id': {
     image_base_url: 'parent_image_url'

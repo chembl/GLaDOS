@@ -37,6 +37,7 @@ WS_URL = 'https://www.ebi.ac.uk/chembl/api/data'
 BEAKER_URL = 'https://www.ebi.ac.uk/chembl/api/utils'
 ELASTICSEARCH_HOST = '<INTERNAL_URL_CAN NOT BE PUBLISHED>'
 ELASTICSEARCH_EXTERNAL_URL = 'https://www.ebi.ac.uk/chembl/glados-es'
+CHEMBL_ES_INDEX_PREFIX = 'chembl_'
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Read config file
@@ -104,6 +105,12 @@ if FILTER_QUERY_MAX_CLAUSES is None:
     raise GladosSettingsError("You must tell me the filter_query_max_clauses")
 print('FILTER_QUERY_MAX_CLAUSES: ', FILTER_QUERY_MAX_CLAUSES)
 
+TARGET_PREDICTION_LOOKUP_FILE = run_config.get('target_prediction_lookup_file')
+if TARGET_PREDICTION_LOOKUP_FILE is None:
+    TARGET_PREDICTION_LOOKUP_FILE = os.path.join(GLADOS_ROOT, 'api/chembl/target_prediction/prediction_lookup.json')
+print('TARGET_PREDICTION_LOOKUP_FILE: ', TARGET_PREDICTION_LOOKUP_FILE)
+
+
 SPAWN_JOBS = run_config.get('spawn_jobs', True)
 if SPAWN_JOBS:
     print('SPAWN_JOBS is True, this means that I will delay the annotated functions and put them in the worker queue.')
@@ -138,6 +145,11 @@ if CURRENT_DOWNLOADS_DATE is None:
 DOWNLOADS_RELEASE_NAME = release_config.get('downloads_release_name')
 if DOWNLOADS_RELEASE_NAME is None:
     raise GladosSettingsError("You must provide the current downloads base name ")
+
+CHEMBL_ES_INDEX_PREFIX = release_config.get('elasticsearch_chembl_index_prefix')
+if DOWNLOADS_RELEASE_NAME is None:
+    raise GladosSettingsError("You must provide the current downloads base name ")
+
 # ----------------------------------------------------------------------------------------------------------------------
 # SERVER BASE PATH
 # ----------------------------------------------------------------------------------------------------------------------
@@ -301,9 +313,9 @@ if ENABLE_MYSQL_DATABASE:
             'USER': mysql_config.get('user'),
             'PASSWORD': mysql_config.get('password'),
             'OPTIONS': {
+                'isolation_level': "repeatable read",
                 'autocommit': True,
             }
-
         }
 
 else:

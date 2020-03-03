@@ -19,55 +19,58 @@ mappings = \
                     {
                         'es_completion': 'TEXT',
                         # EXAMPLES:
-                        # '{'weight': 10, 'input': 'CHEMBL3307241'}' , '{'weight': 30, 'input': 'Lyphoma'}' , '{'weight'
-                        # : 30, 'input': 'Lung Adenocarcinoma'}' , '{'weight': 10, 'input': 'CVCL_7732'}' , '{'weight': 
-                        # 30, 'input': 'Bladder Carcinoma'}' , '{'weight': 10, 'input': 'CHEMBL3307246'}' , '{'weight': 
-                        # 100, 'input': 'VCR100'}' , '{'weight': 30, 'input': 'Rattus norvegicus'}' , '{'weight': 10, 'i
-                        # nput': 'CLO_0009576'}' , '{'weight': 30, 'input': 'Colon Adenocarcinoma'}'
+                        # '{'weight': 100, 'input': 'Colon carcinoma cell line'}' , '{'weight': 10, 'input': 'CHEMBL3308
+                        # 568'}' , '{'weight': 10, 'input': 'CHEMBL3308650'}' , '{'weight': 40, 'input': 'Human MFH-ST c
+                        # ell line'}' , '{'weight': 10, 'input': 'CHEMBL3308653'}' , '{'weight': 10, 'input': 'CHEMBL330
+                        # 8654'}' , '{'weight': 40, 'input': 'CML/BC cell line'}' , '{'weight': 10, 'input': 'CVCL_D346'
+                        # }' , '{'weight': 10, 'input': 'CHEMBL3308657'}' , '{'weight': 40, 'input': 'HNO 97 cell lines'
+                        # }'
                     }
                 },
                 'cell_chembl_id': 'TEXT',
                 # EXAMPLES:
-                # 'CHEMBL3307241' , 'CHEMBL3307242' , 'CHEMBL3307243' , 'CHEMBL3307244' , 'CHEMBL3307245' , 'CHEMBL33072
-                # 46' , 'CHEMBL3307247' , 'CHEMBL3307248' , 'CHEMBL3307249' , 'CHEMBL3307250'
+                # 'CHEMBL3308649' , 'CHEMBL3308568' , 'CHEMBL3308650' , 'CHEMBL3308652' , 'CHEMBL3308653' , 'CHEMBL33086
+                # 54' , 'CHEMBL3308655' , 'CHEMBL3308656' , 'CHEMBL3308657' , 'CHEMBL3308658'
                 'cell_description': 'TEXT',
                 # EXAMPLES:
-                # 'DC3F' , 'P3HR-1' , 'UCLA P-3' , 'UMSCC22B' , 'UMUC3' , 'V79-4' , 'VCR100' , 'W256' , 'WEHI265.1' , 'W
-                # iDr-NTR'
+                # 'Colon carcinoma cell line' , 'Human lung cancer cell line' , 'M-5 ovarian carcinoma cell line' , 'Hum
+                # an MFH-ST cell line' , 'B(EBV+) cell line' , 'BE-WT cell lines' , 'CML/BC cell line' , 'H2981 cell lin
+                # e' , 'HA22T cell line' , 'HNO 97 cell lines'
                 'cell_id': 'NUMERIC',
                 # EXAMPLES:
-                # '1' , '2' , '3' , '4' , '5' , '6' , '7' , '8' , '9' , '10'
+                # '1132' , '1133' , '1135' , '1137' , '1138' , '1139' , '1140' , '1141' , '1142' , '1143'
                 'cell_name': 'TEXT',
                 # EXAMPLES:
-                # 'DC3F' , 'P3HR-1' , 'UCLA P-3' , 'UMSCC22B' , 'UMUC3' , 'V79-4' , 'VCR100' , 'W256' , 'WEHI265.1' , 'W
-                # iDr-NTR'
+                # 'Colon carcinoma cell line' , 'Lung cancer cell line' , 'M-5' , 'MFH-ST' , 'B(EBV+)' , 'BE-WT' , 'CML/
+                # BC' , 'H2981 cell line' , 'HA22T cell line' , 'HNO 97 cell line'
                 'cell_source_organism': 'TEXT',
                 # EXAMPLES:
-                # 'Cricetulus griseus' , 'Homo sapiens' , 'Homo sapiens' , 'Homo sapiens' , 'Homo sapiens' , 'Cricetulus
-                #  griseus' , 'Mus musculus' , 'Rattus norvegicus' , 'Mus musculus' , 'Homo sapiens'
+                # 'Homo sapiens' , 'Homo sapiens' , 'Homo sapiens' , 'Homo sapiens' , 'Homo sapiens' , 'Homo sapiens' , 
+                # 'Homo sapiens' , 'Homo sapiens' , 'Homo sapiens' , 'Homo sapiens'
                 'cell_source_tax_id': 'NUMERIC',
                 # EXAMPLES:
-                # '10029' , '9606' , '9606' , '9606' , '9606' , '10029' , '10090' , '10116' , '10090' , '9606'
+                # '9606' , '9606' , '9606' , '9606' , '9606' , '9606' , '9606' , '9606' , '9606' , '9606'
                 'cell_source_tissue': 'TEXT',
                 # EXAMPLES:
-                # 'Lung' , 'Lyphoma' , 'Lung Adenocarcinoma' , 'Carcinoma' , 'Bladder Carcinoma' , 'Lung' , 'Leukaemia' 
-                # , 'Monocytic Carcinosarcoma' , 'Macrophage' , 'Colon Adenocarcinoma'
+                # 'Ovarian carcinoma' , 'Human cerebral epithelial cells' , 'Lung fibroblast' , 'Mammary adenocarcinoma'
+                #  , 'Neuroglioma cells' , 'Bladder Carcinoma' , 'Monocytic Carcinosarcoma' , 'Macrophage' , 'Colon Aden
+                # ocarcinoma' , 'Sarcoma'
                 'cellosaurus_id': 'TEXT',
                 # EXAMPLES:
-                # 'CVCL_4704' , 'CVCL_2676' , 'CVCL_N513' , 'CVCL_7732' , 'CVCL_1783' , 'CVCL_2796' , 'CVCL_3537' , 'CVC
-                # L_3620' , 'CVCL_1891' , 'CVCL_1794'
+                # 'CVCL_D346' , 'CVCL_7046' , 'CVCL_D227' , 'CVCL_M353' , 'CVCL_0294' , 'CVCL_2480' , 'CVCL_3317' , 'CVC
+                # L_8233' , 'CVCL_1282' , 'CVCL_H947'
                 'cl_lincs_id': 'TEXT',
                 # EXAMPLES:
-                # 'LCL-2024' , 'LCL-1721' , 'LCL-1792' , 'LCL-1511' , 'LCL-1031' , 'LCL-2001' , 'LCL-1514' , 'LCL-1889' 
-                # , 'LCL-1166' , 'LCL-1734'
+                # 'LCL-1465' , 'LCL-1620' , 'LCL-1292' , 'LCL-1943' , 'LCL-1708' , 'LCL-1772' , 'LCL-1685' , 'LCL-1634' 
+                # , 'LCL-1687' , 'LCL-1602'
                 'clo_id': 'TEXT',
                 # EXAMPLES:
-                # 'CLO_0008331' , 'CLO_0009487' , 'CLO_0009504' , 'CLO_0007335' , 'CLO_0009576' , 'CLO_0009645' , 'CLO_0
-                # 009711' , 'CLO_0003434' , 'CLO_0007018' , 'CLO_0008195'
+                # 'CLO_0003675' , 'CLO_0003681' , 'CLO_0003785' , 'CLO_0003786' , 'CLO_0003836' , 'CLO_0008100' , 'CLO_0
+                # 002190' , 'CLO_0008074' , 'CLO_0009224' , 'CLO_0001202'
                 'efo_id': 'TEXT',
                 # EXAMPLES:
-                # 'EFO_0002312' , 'EFO_0002387' , 'EFO_0002179' , 'EFO_0002344' , 'EFO_0002377' , 'EFO_0002084' , 'EFO_0
-                # 002866' , 'EFO_0002834' , 'EFO_0002246' , 'EFO_0002367'
+                # 'EFO_0002192' , 'EFO_0002195' , 'EFO_0005359' , 'EFO_0002287' , 'EFO_0002372' , 'EFO_0002097' , 'EFO_0
+                # 002098' , 'EFO_0002099' , 'EFO_0002813' , 'EFO_0002110'
             }
         }
     }

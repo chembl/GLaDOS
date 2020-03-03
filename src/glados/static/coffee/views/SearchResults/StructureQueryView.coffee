@@ -12,7 +12,7 @@ glados.useNameSpace 'glados.views.SearchResults',
     loadImage: ->
 
       if @queryParams.search_term.startsWith('CHEMBL')
-        @img_url = glados.Settings.WS_BASE_URL + 'image/' + @queryParams.search_term + '.svg?engine=indigo'
+        @img_url = glados.Settings.WS_BASE_URL + 'image/' + @queryParams.search_term + '.svg'
         @render()
       else
         @render()
@@ -63,7 +63,6 @@ glados.useNameSpace 'glados.views.SearchResults',
       deferred = $.post(ajaxRequestDict)
       deferred.done ((ctabData)->
         @ctabData = ctabData
-        @img_url = glados.Settings.BEAKER_BASE_URL + 'ctab2svg/'+ btoa(ctabData)
       ).bind(@)
 
       deferred.then @getCtabSvgAndRender.bind(@)

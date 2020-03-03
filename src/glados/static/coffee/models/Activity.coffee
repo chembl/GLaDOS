@@ -16,7 +16,7 @@ Activity = Backbone.Model.extend
     if imageFile != glados.Settings.DEFAULT_NULL_VALUE_LABEL
       objData.image_url = "#{glados.Settings.STATIC_IMAGES_URL}compound_placeholders/#{imageFile}"
     else
-      objData.image_url = "#{glados.Settings.WS_BASE_URL}image/#{objData.molecule_chembl_id}.svg?engine=indigo"
+      objData.image_url = "#{glados.Settings.WS_BASE_URL}image/#{objData.molecule_chembl_id}.svg"
 
     objData.molecule_link = Compound.get_report_card_url(objData.molecule_chembl_id )
     objData.target_link = Target.get_report_card_url(objData.target_chembl_id)
@@ -28,7 +28,7 @@ Activity = Backbone.Model.extend
 
     return objData
 
-Activity.indexName = 'chembl_activity'
+Activity.indexName = glados.Settings.CHEMBL_ES_INDEX_PREFIX+'activity'
 Activity.PROPERTIES_VISUAL_CONFIG = {
   'molecule_chembl_id': {
     image_base_url: 'image_url'

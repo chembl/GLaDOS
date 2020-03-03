@@ -6,7 +6,7 @@ describe 'PropertiesConfigurationModel', ->
           "type": "string",
           "label": "Name",
           "aggregatable": true,
-          "index_name": "chembl_molecule",
+          "index_name": glados.Settings.CHEMBL_ES_INDEX_PREFIX+"molecule",
           "sortable": true,
           "label_mini": "Name",
           "prop_id": "pref_name"
@@ -17,7 +17,7 @@ describe 'PropertiesConfigurationModel', ->
           "type": "string",
           "label": "ChEMBL ID",
           "aggregatable": true,
-          "index_name": "chembl_molecule",
+          "index_name": glados.Settings.CHEMBL_ES_INDEX_PREFIX+"molecule",
           "sortable": true,
           "label_mini": "ChEMBL ID",
           "prop_id": "molecule_chembl_id"
@@ -31,27 +31,27 @@ describe 'PropertiesConfigurationModel', ->
       "optional": [
         {
           "aggregatable": true,
-          "index_name": "chembl_molecule",
+          "index_name": glados.Settings.CHEMBL_ES_INDEX_PREFIX+"molecule",
           "type": "double",
           "sortable": true,
-          "label": "ACD BpKa",
-          "label_mini": "Acd Most Bpka",
-          "prop_id": "molecule_properties.acd_most_bpka"
+          "label": "CX BpKa",
+          "label_mini": "Cx Most Bpka",
+          "prop_id": "molecule_properties.cx_most_bpka"
         },
         {
           "aggregatable": true,
-          "index_name": "chembl_molecule",
+          "index_name": glados.Settings.CHEMBL_ES_INDEX_PREFIX+"molecule",
           "type": "double",
           "sortable": true,
-          "label": "ACD ApKa",
-          "label_mini": "Acd Most Apka",
-          "prop_id": "molecule_properties.acd_most_apka"
+          "label": "CX ApKa",
+          "label_mini": "Cx Most Apka",
+          "prop_id": "molecule_properties.cx_most_apka"
         },
         {
           "type": "string",
           "label": "Name",
           "aggregatable": true,
-          "index_name": "chembl_molecule",
+          "index_name": glados.Settings.CHEMBL_ES_INDEX_PREFIX+"molecule",
           "sortable": true,
           "label_mini": "Name",
           "prop_id": "pref_name"
@@ -61,7 +61,7 @@ describe 'PropertiesConfigurationModel', ->
         {
           "aggregatable": false,
           "is_virtual": true,
-          "index_name": "chembl_molecule",
+          "index_name": glados.Settings.CHEMBL_ES_INDEX_PREFIX+"molecule",
           "is_contextual": true,
           "type": "double",
           "sortable": true,
@@ -73,14 +73,14 @@ describe 'PropertiesConfigurationModel', ->
           "type": "string",
           "label": "ChEMBL ID",
           "aggregatable": true,
-          "index_name": "chembl_molecule",
+          "index_name": glados.Settings.CHEMBL_ES_INDEX_PREFIX+"molecule",
           "sortable": true,
           "label_mini": "ChEMBL ID",
           "prop_id": "molecule_chembl_id"
         },
         {
           "aggregatable": false,
-          "index_name": "chembl_molecule",
+          "index_name": glados.Settings.CHEMBL_ES_INDEX_PREFIX+"molecule",
           "type": "object",
           "sortable": false,
           "label": "Synonyms",
@@ -98,7 +98,7 @@ describe 'PropertiesConfigurationModel', ->
         "type": "string",
         "label": "Name",
         "aggregatable": true,
-        "index_name": "chembl_molecule",
+        "index_name": glados.Settings.CHEMBL_ES_INDEX_PREFIX+"molecule",
         "sortable": true,
         "label_mini": "Name",
         "prop_id": "pref_name",
@@ -117,7 +117,7 @@ describe 'PropertiesConfigurationModel', ->
         "type": "string",
         "label": "ChEMBL ID",
         "aggregatable": true,
-        "index_name": "chembl_molecule",
+        "index_name": glados.Settings.CHEMBL_ES_INDEX_PREFIX+"molecule",
         "sortable": true,
         "label_mini": "ChEMBL ID",
         "prop_id": "molecule_chembl_id",
@@ -136,7 +136,7 @@ describe 'PropertiesConfigurationModel', ->
   }
 
   it 'Generates the correct url', ->
-    indexName = 'chembl_molecule'
+    indexName = glados.Settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
     groupName = 'browser_table'
 
     propertiesConfigModel = new glados.models.paginatedCollections.esSchema.PropertiesConfigurationModel
@@ -151,7 +151,7 @@ describe 'PropertiesConfigurationModel', ->
     expect(urlMustBe).toBe(urlGot)
 
   it 'Parses the response correctly', ->
-    indexName = 'chembl_molecule'
+    indexName = glados.Settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
     groupName = 'browser_table'
 
     propertiesConfigModel = new glados.models.paginatedCollections.esSchema.PropertiesConfigurationModel
@@ -195,7 +195,7 @@ describe 'PropertiesConfigurationModel', ->
     for comp in comparatorsInFilterList
       comparatorsInFilterMustBe[comp] = comp
 
-    indexName = 'chembl_molecule'
+    indexName = glados.Settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
     groupName = 'browser_table'
 
     propertiesConfigModel = new glados.models.paginatedCollections.esSchema.PropertiesConfigurationModel

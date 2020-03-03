@@ -38,6 +38,10 @@ mappings = \
                 # Rats Anorectic Activity' , 'General Anti-Obesity activity' , 'Resting Metabolic Rate Anti-Obesity' , '
                 # Alloxan Induced Diabetes' , 'Corticosteroid Induced Diabetes' , 'Streptozotocin Induced Diabetes' , 'V
                 # irus Induced Diabetes' , 'Diet Induced Obesity' , 'Goldthioglucose Induced Obesity'
+                'source': 'TEXT',
+                # EXAMPLES:
+                # 'Vogel_2008' , 'Vogel_2008' , 'phenotype' , 'Vogel_2008' , 'Vogel_2008' , 'Vogel_2008' , 'Vogel_2008' 
+                # , 'Vogel_2008' , 'Hock_2016' , 'Vogel_2008'
             }
         }
     }

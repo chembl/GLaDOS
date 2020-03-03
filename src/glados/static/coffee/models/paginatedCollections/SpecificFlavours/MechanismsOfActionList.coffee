@@ -5,7 +5,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
   MechanismsOfActionList:
 
     initURL: (chemblID) ->
-      @url = "#{glados.models.paginatedCollections.Settings.ES_BASE_URL}/chembl_mechanism/_search?q=#{chemblID}"
+      @url = "#{glados.models.paginatedCollections.Settings.ES_BASE_URL}/#{glados.Settings.CHEMBL_ES_INDEX_PREFIX}mechanism/_search?q=#{chemblID}"
 
     parse: (data) ->
 

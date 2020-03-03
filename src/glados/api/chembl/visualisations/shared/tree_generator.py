@@ -1,6 +1,7 @@
 from glados.usage_statistics import glados_server_statistics
 import json
 from elasticsearch_dsl import MultiSearch, Search
+from django.conf import settings
 
 
 def get_nodes_index(parsed_tree_root, path=[]):
@@ -236,8 +237,8 @@ class GoSlimTreeGenerator(TargetHierarchyTreeGenerator):
     """
 
     def __init__(self):
-        self.index_name = 'chembl_go_slim'
-        self.count_index = 'chembl_target'
+        self.index_name = settings.CHEMBL_ES_INDEX_PREFIX+'go_slim'
+        self.count_index = settings.CHEMBL_ES_INDEX_PREFIX+'target'
         self.es_query = {
             "size": 1000,
             "from": 0

@@ -1,4 +1,4 @@
-chembl_activity:
+chembl_26_activity:
   download:
     default: ['_metadata.activity_generated.short_data_validity_comment', '_metadata.organism_taxonomy.oc_id']
   table:
@@ -6,7 +6,7 @@ chembl_activity:
     '_metadata.assay_data.assay_cell_type']
     additional: ['_metadata.assay_data.assay_organism', '_metadata.assay_data.assay_subcellular_fraction',
     '_metadata.assay_data.assay_tissue' ]
-chembl_molecule:
+chembl_26_molecule:
   sorted_table:
     default: ['_metadata.activity_count', '_metadata.atc_classifications.level1',
     '_metadata.atc_classifications.level1_description']

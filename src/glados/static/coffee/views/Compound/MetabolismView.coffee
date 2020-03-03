@@ -94,7 +94,7 @@ glados.useNameSpace 'glados.views.Compound',
               has_structure: node.has_structure,
               image_file: node.image_file
 
-          ws_img_url = "#{base_img_link}#{node.chembl_id}.svg?engine=indigo"
+          ws_img_url = "#{base_img_link}#{node.chembl_id}.svg"
           backup_img_url = "#{glados.Settings.STATIC_IMAGES_URL}compound_placeholders/#{node.image_file}"
           background_img = if node.has_structure then ws_img_url else backup_img_url
           ans.elems.push(newItem)
@@ -158,7 +158,7 @@ glados.useNameSpace 'glados.views.Compound',
           pref_name = n.data('pref_name')
           chembl_id = n.data('id')
 
-          ws_img = glados.Settings.WS_BASE_URL+"image/#{chembl_id}?engine=indigo"
+          ws_img = glados.Settings.WS_BASE_URL+"image/#{chembl_id}"
           backup_img =  "#{glados.Settings.STATIC_IMAGES_URL}compound_placeholders/#{n.data('image_file')}"
 
           img_link = if n.data('has_structure') then ws_img else backup_img

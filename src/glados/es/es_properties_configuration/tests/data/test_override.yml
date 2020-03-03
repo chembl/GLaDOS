@@ -1,8 +1,8 @@
-chembl_activity:
+chembl_26_activity:
   '_metadata.activity_generated.short_data_validity_comment':
     label: 'My custom label'
     label_mini: 'My cstm lbl'
-chembl_molecule:
+chembl_26_molecule:
   # This is a virtual property, property does not exist in the index, but it is based on an existing property,
   #this can use a different parsing for example, trade names: they are synonyms which are of type trade_name,
   # based_on means on which property in elasticsearch is based on

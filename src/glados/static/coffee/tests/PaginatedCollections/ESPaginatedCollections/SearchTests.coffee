@@ -20,14 +20,14 @@ describe "An elasticsearch collection", ->
 
   it "Sets initial parameters", ->
     expect(esList.getMeta('current_page')).toBe(1)
-    expect(esList.getMeta('index')).toBe('/chembl_molecule')
+    expect(esList.getMeta('index')).toBe('/'+glados.Settings.CHEMBL_ES_INDEX_PREFIX+'molecule')
     expect(esList.getMeta('page_size')).toBe(24)
     expect(esList.getMeta('all_items_selected')).toBe(false)
     expect(Object.keys(esList.getMeta('selection_exceptions')).length).toBe(0)
 
   it "Sets the request data to get the 5th page", ->
     esList.setPage(5)
-    expect(esList.getURL()).toBe(glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_molecule/_search')
+    expect(esList.getURL()).toBe(glados.models.paginatedCollections.Settings.ES_BASE_URL + '/'+glados.Settings.CHEMBL_ES_INDEX_PREFIX+'molecule/_search')
 
     requestData = esList.getRequestData()
     expect(requestData['from']).toBe(0)
@@ -35,7 +35,7 @@ describe "An elasticsearch collection", ->
 
   it "Sets the request data to switch to 10 items per page", ->
     esList.resetPageSize(10)
-    expect(esList.getURL()).toBe(glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_molecule/_search')
+    expect(esList.getURL()).toBe(glados.models.paginatedCollections.Settings.ES_BASE_URL + '/'+glados.Settings.CHEMBL_ES_INDEX_PREFIX+'molecule/_search')
 
     requestData = esList.getRequestData()
     expect(requestData['from']).toBe(0)

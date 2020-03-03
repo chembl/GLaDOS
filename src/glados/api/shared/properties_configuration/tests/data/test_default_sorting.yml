@@ -1,4 +1,4 @@
-chembl_molecule:
+chembl_26_molecule:
   # this is as elasticsearch would receve the object to sort the dataset
   # see https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html
   sorted_table: [

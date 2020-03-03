@@ -150,7 +150,7 @@ def get_schema_obj_for_compound(chembl_id, request):
             "query": chembl_id
         }
     }
-    s = Search(index="chembl_molecule").query(q)
+    s = Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"molecule").query(q)
     response = s.execute()
 
     if response.hits.total == 0:
@@ -195,7 +195,7 @@ def get_schema_obj_for_compound(chembl_id, request):
         image_local_url = static("img/compound_placeholders/{}".format(placeholder_image))
         metadata_obj['image'] = "{}{}".format(host_url, image_local_url)
     except (KeyError, AttributeError, TypeError):
-        metadata_obj['image'] = "{0}/image/{1}.svg?engine=indigo".format(settings.WS_URL, chembl_id)
+        metadata_obj['image'] = "{0}/image/{1}.svg".format(settings.WS_URL, chembl_id)
 
     try:
         metadata_obj['molecularFormula'] = item['molecule_properties']['full_molformula']

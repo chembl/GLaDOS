@@ -1,4 +1,4 @@
-chembl_molecule:
+chembl_26_molecule:
   download:
     default: ['molecule_chembl_id', 'pref_name']
   download_drugs:

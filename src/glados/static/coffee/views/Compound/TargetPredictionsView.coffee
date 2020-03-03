@@ -8,34 +8,20 @@ glados.useNameSpace 'glados.views.Compound',
       @model.on 'error', @.showCompoundErrorCard, @
       @resource_type = 'Compound'
 
-      sortByFunc = (item) -> -parseFloat(item.probability)
+
       settings = glados.models.paginatedCollections.Settings.CLIENT_SIDE_WS_COLLECTIONS.TARGET_PREDICTIONS
-      filterFunc1uM = (p) -> p.value == 1
+      flavour = glados.models.paginatedCollections.SpecificFlavours.TargetPredictionsList
 
-      generator1uM =
-        model: @model
-        generator_property: '_metadata.target_predictions'
-        filter: filterFunc1uM
-        sort_by_function: sortByFunc
+      @list = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewClientSideCollectionFor(settings,
+        generator=undefined, flavour)
 
-      list1uM = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewClientSideCollectionFor(settings,
-        generator1uM)
+      @list.initURL(@model.get('id'))
+      @list.on 'reset', @render, @
 
       glados.views.PaginatedViews.PaginatedViewFactory.getNewTablePaginatedView(
-        list1uM, $(@el).find('.BCK-1MicroMolar-Predictions'), customRenderEvent=undefined, disableColumnsSelection=true)
+        @list, $(@el).find('.BCK-1MicroMolar-Predictions'), customRenderEvent=undefined, disableColumnsSelection=true)
 
-      filterFunc10uM = (p) -> p.value == 10
-      generator10uM =
-        model: @model
-        generator_property: '_metadata.target_predictions'
-        filter: filterFunc10uM
-        sort_by_function: sortByFunc
-
-      list10uM = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewClientSideCollectionFor(settings,
-        generator10uM)
-
-      glados.views.PaginatedViews.PaginatedViewFactory.getNewTablePaginatedView(
-        list10uM, $(@el).find('.BCK-10MicroMolar-Predictions'), customRenderEvent=undefined, disableColumnsSelection=true)
+      @list.fetch()
 
       @initEmbedModal(arguments[0].embed_section_name, arguments[0].embed_identifier)
       @activateModals()
@@ -43,13 +29,16 @@ glados.useNameSpace 'glados.views.Compound',
 
     render: ->
 
-      rawTargetPredidctions = @model.get('_metadata').target_predictions
-      if not rawTargetPredidctions?
+      if @list.models.length == 0
         @hideSection()
         return
-      if rawTargetPredidctions.length == 0
-        @hideSection()
-        return
+
+      $chemblIDSpan = $(@el).find('.BCK-Predictions-MolChemblID')
+      $chemblIDSpan.text(@model.get('id'))
+
+      $APICALLAnchor = $(@el).find('.BCK-Predictions-APICall')
+      $APICALLAnchor.text(@list.url)
+      $APICALLAnchor.attr('href', @list.url)
 
       @showCardContent()
       @showSection()

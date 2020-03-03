@@ -1,4 +1,6 @@
 from elasticsearch_dsl import Search
+from django.conf import settings
+
 # This uses elasticsearch to generate og tags for the main entities in ChEMBL (Compounds, Targets, Assays, Documents,
 # Cell Lines, Tissues) and other pages. These tags are used to generate a preview when you share the page in social
 # media
@@ -8,7 +10,7 @@ from elasticsearch_dsl import Search
 # --------------------------------------------------------------------------------------------------------------------
 
 
-def add_attribute_to_tescription(description_items, item, attr_name, text_attr_name):
+def add_attribute_to_description(description_items, item, attr_name, text_attr_name):
 
     attr_vale = item[attr_name]
     if attr_vale is not None:
@@ -27,7 +29,7 @@ def get_og_tags_for_compound(chembl_id):
             "query": chembl_id
         }
     }
-    s = Search(index="chembl_molecule").query(q)
+    s = Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"molecule").query(q)
     response = s.execute()
 
     title = 'Compound: '+ chembl_id
@@ -41,7 +43,7 @@ def get_og_tags_for_compound(chembl_id):
         if pref_name is not None:
             title = 'Compound: '+ pref_name
 
-        add_attribute_to_tescription(description_items, item, 'molecule_type', 'Molecule Type')
+        add_attribute_to_description(description_items, item, 'molecule_type', 'Molecule Type')
 
         try:
             mol_formula = item['molecule_properties']['full_molformula']
@@ -87,7 +89,7 @@ def get_og_tags_for_target(chembl_id):
         }
     }
 
-    s = Search(index="chembl_target").query(q)
+    s = Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"target").query(q)
     response = s.execute()
 
     title = 'Target: ' + chembl_id
@@ -101,8 +103,8 @@ def get_og_tags_for_target(chembl_id):
         if pref_name is not None:
             title = 'Target: ' + pref_name
 
-        add_attribute_to_tescription(description_items, item, 'target_type', 'Type')
-        add_attribute_to_tescription(description_items, item, 'organism', 'Organism')
+        add_attribute_to_description(description_items, item, 'target_type', 'Type')
+        add_attribute_to_description(description_items, item, 'organism', 'Organism')
 
         description = ', '.join(description_items)
 
@@ -123,7 +125,7 @@ def get_og_tags_for_assay(chembl_id):
         }
     }
 
-    s = Search(index="chembl_assay").query(q)
+    s = Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"assay").query(q)
     response = s.execute()
 
     title = 'Assay: ' + chembl_id
@@ -134,9 +136,9 @@ def get_og_tags_for_assay(chembl_id):
         item = response.hits[0]
         # add the items to the description if they are available
 
-        add_attribute_to_tescription(description_items, item, 'assay_type_description', 'Type')
-        add_attribute_to_tescription(description_items, item, 'assay_organism', 'Organism')
-        add_attribute_to_tescription(description_items, item, 'description', 'Description')
+        add_attribute_to_description(description_items, item, 'assay_type_description', 'Type')
+        add_attribute_to_description(description_items, item, 'assay_organism', 'Organism')
+        add_attribute_to_description(description_items, item, 'description', 'Description')
 
         description = ', '.join(description_items)
 
@@ -157,7 +159,7 @@ def get_og_tags_for_cell_line(chembl_id):
         }
     }
 
-    s = Search(index="chembl_cell_line").query(q)
+    s = Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"cell_line").query(q)
     response = s.execute()
 
     title = 'Cell Line: ' + chembl_id
@@ -171,9 +173,9 @@ def get_og_tags_for_cell_line(chembl_id):
         if cell_name is not None:
             title = 'Cell Line: ' + cell_name
 
-        add_attribute_to_tescription(description_items, item, 'cell_source_organism', 'Source Organism')
-        add_attribute_to_tescription(description_items, item, 'cell_source_tissue', 'Source Tissue')
-        add_attribute_to_tescription(description_items, item, 'cell_description', 'Description')
+        add_attribute_to_description(description_items, item, 'cell_source_organism', 'Source Organism')
+        add_attribute_to_description(description_items, item, 'cell_source_tissue', 'Source Tissue')
+        add_attribute_to_description(description_items, item, 'cell_description', 'Description')
         description = ', '.join(description_items)
 
     og_tags = {
@@ -193,7 +195,7 @@ def get_og_tags_for_tissue(chembl_id):
         }
     }
 
-    s = Search(index="chembl_tissue").query(q)
+    s = Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"tissue").query(q)
     response = s.execute()
 
     title = 'Tissue: ' + chembl_id
@@ -226,7 +228,7 @@ def get_og_tags_for_document(chembl_id):
         }
     }
 
-    s = Search(index="chembl_document").query(q)
+    s = Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"document").query(q)
     response = s.execute()
 
     title = 'Document: ' + chembl_id
@@ -240,10 +242,10 @@ def get_og_tags_for_document(chembl_id):
         if doc_title is not None:
             title = 'Document: ' + doc_title
 
-        add_attribute_to_tescription(description_items, item, 'doc_type', 'Type')
-        add_attribute_to_tescription(description_items, item, 'abstract', 'Abstract')
-        add_attribute_to_tescription(description_items, item, 'journal', 'Journal')
-        add_attribute_to_tescription(description_items, item, 'authors', 'Authors')
+        add_attribute_to_description(description_items, item, 'doc_type', 'Type')
+        add_attribute_to_description(description_items, item, 'abstract', 'Abstract')
+        add_attribute_to_description(description_items, item, 'journal', 'Journal')
+        add_attribute_to_description(description_items, item, 'authors', 'Authors')
         description = ', '.join(description_items)
 
     og_tags = {

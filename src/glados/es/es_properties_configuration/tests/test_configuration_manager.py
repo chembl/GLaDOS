@@ -36,7 +36,7 @@ class ConfigurationGetterTester(TestCase):
 
     def test_fails_when_property_does_not_exist(self):
 
-        index_name = 'chembl_activity'
+        index_name = settings.CHEMBL_ES_INDEX_PREFIX+'activity'
         prop_id = 'does_not_exist'
 
         try:
@@ -48,7 +48,7 @@ class ConfigurationGetterTester(TestCase):
     @override_settings(PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE)
     def test_gets_config_for_one_property_with_no_override(self):
 
-        index_name = 'chembl_activity'
+        index_name = settings.CHEMBL_ES_INDEX_PREFIX+'activity'
         prop_id = '_metadata.assay_data.assay_subcellular_fraction'
         config_got = configuration_manager.get_config_for_prop(index_name, prop_id)
 
@@ -64,7 +64,7 @@ class ConfigurationGetterTester(TestCase):
 
         override_config_must_be = yaml.load(open(settings.PROPERTIES_CONFIG_OVERRIDE_FILE, 'r'), Loader=yaml.FullLoader)
 
-        index_name = 'chembl_activity'
+        index_name = settings.CHEMBL_ES_INDEX_PREFIX+'activity'
         prop_id = '_metadata.activity_generated.short_data_validity_comment'
         config_got = configuration_manager.get_config_for_prop(index_name, prop_id)
 
@@ -79,7 +79,7 @@ class ConfigurationGetterTester(TestCase):
 
         override_config_must_be = yaml.load(open(settings.PROPERTIES_CONFIG_OVERRIDE_FILE, 'r'), Loader=yaml.FullLoader)
 
-        index_name = 'chembl_molecule'
+        index_name = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
         prop_id = 'trade_names'
         config_got = configuration_manager.get_config_for_prop(index_name, prop_id)
 
@@ -100,7 +100,7 @@ class ConfigurationGetterTester(TestCase):
     @override_settings(PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE)
     def test_gets_config_fails_for_a_virtual_property_based_on_non_existing_prop(self):
 
-        index_name = 'chembl_molecule'
+        index_name = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
         prop_id = 'trade_names_wrong'
 
         try:
@@ -112,7 +112,7 @@ class ConfigurationGetterTester(TestCase):
     @override_settings(PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE)
     def test_makes_sure_config_for_a_contextual_property_is_correct(self):
 
-        index_name = 'chembl_molecule'
+        index_name = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
         prop_id = '_context.similarity_wrong'
 
         try:
@@ -124,7 +124,7 @@ class ConfigurationGetterTester(TestCase):
     @override_settings(PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE)
     def test_gets_config_for_a_contextual_property(self):
 
-        index_name = 'chembl_molecule'
+        index_name = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
         prop_id = '_context.similarity'
         config_got = configuration_manager.get_config_for_prop(index_name, prop_id)
 
@@ -156,7 +156,7 @@ class ConfigurationGetterTester(TestCase):
 
     def test_fails_config_for_a_list_of_properties_when_property_does_not_exist(self):
 
-        index_name = 'chembl_activity'
+        index_name = settings.CHEMBL_ES_INDEX_PREFIX+'activity'
         props = ['does_not_exist']
 
         try:
@@ -167,7 +167,7 @@ class ConfigurationGetterTester(TestCase):
 
     def test_gets_config_for_a_list_of_properties(self):
 
-        index_name = 'chembl_activity'
+        index_name = settings.CHEMBL_ES_INDEX_PREFIX+'activity'
         props = ['_metadata.activity_generated.short_data_validity_comment', '_metadata.assay_data.assay_cell_type']
 
         configs_got = configuration_manager.get_config_for_props_list(index_name, props)
@@ -205,7 +205,7 @@ class ConfigurationGetterTester(TestCase):
     @override_settings(PROPERTIES_GROUPS_FILE=GROUPS_TEST_FILE)
     def test_gets_config_for_a_group_fails_when_group_does_not_exist(self):
 
-        index_name = 'chembl_activity'
+        index_name = settings.CHEMBL_ES_INDEX_PREFIX+'activity'
         group_name = 'does_not_exist'
 
         try:
@@ -217,7 +217,7 @@ class ConfigurationGetterTester(TestCase):
     @override_settings(PROPERTIES_GROUPS_FILE=GROUPS_TEST_FILE)
     def test_gets_config_for_a_group_with_only_default_properties(self):
 
-        index_name = 'chembl_activity'
+        index_name = settings.CHEMBL_ES_INDEX_PREFIX+'activity'
         group_name = 'download'
 
         configs_got = configuration_manager.get_config_for_group(index_name, group_name)['properties']
@@ -231,7 +231,7 @@ class ConfigurationGetterTester(TestCase):
     @override_settings(PROPERTIES_GROUPS_FILE=GROUPS_TEST_FILE)
     def test_gets_config_for_a_group_with_default_and_additional_properties(self):
 
-        index_name = 'chembl_activity'
+        index_name = settings.CHEMBL_ES_INDEX_PREFIX+'activity'
         group_name = 'table'
 
         configs_got = configuration_manager.get_config_for_group(index_name, group_name)['properties']
@@ -245,7 +245,7 @@ class ConfigurationGetterTester(TestCase):
     @override_settings(PROPERTIES_GROUPS_FILE=GROUPS_TEST_FILE, GROUPS_DEFAULT_SORTING_FILE=SORTING_TEST_FILE)
     def test_gets_config_for_a_group_with_default_sorting(self):
 
-        index_name = 'chembl_molecule'
+        index_name = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
         group_name = 'sorted_table'
 
         configs_got = configuration_manager.get_config_for_group(index_name, group_name)
@@ -266,10 +266,10 @@ class ConfigurationGetterTester(TestCase):
 
     def test_gets_id_property_for_index(self):
 
-        index_name = 'chembl_molecule'
+        index_name = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
         id_property_must_be = 'molecule_chembl_id'
 
-        for index_name, id_property_must_be in [('chembl_molecule', 'molecule_chembl_id')]:
+        for index_name, id_property_must_be in [(settings.CHEMBL_ES_INDEX_PREFIX+'molecule', 'molecule_chembl_id')]:
             id_property_got = configuration_manager.get_id_property_for_index(index_name)
 
             self.assertEqual(id_property_must_be, id_property_got, msg='The id property for {} was not returned '
@@ -286,7 +286,7 @@ class ConfigurationGetterTester(TestCase):
     def test_fails_to_get_id_property_when_it_is_a_compound_id(self):
         """Handling of compound ids is not implemented yet! mostly in using contexts!"""
 
-        index_name = 'chembl_mechanism_by_parent_target'
+        index_name = settings.CHEMBL_ES_INDEX_PREFIX+'mechanism_by_parent_target'
         # for now, the id property will be the first property
         id_property_must_be = 'parent_molecule.molecule_chembl_id'
 

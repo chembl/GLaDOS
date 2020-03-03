@@ -4,7 +4,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
   # --------------------------------------------------------------------------------------------------------------------
   DocumentSchema:
     FACETS_GROUPS: glados.models.paginatedCollections.esSchema.FacetingHandler.generateFacetsForIndex(
-      'chembl_document'
+      glados.Settings.CHEMBL_ES_INDEX_PREFIX+'document'
       # Default Selected
       [
         'doc_type',

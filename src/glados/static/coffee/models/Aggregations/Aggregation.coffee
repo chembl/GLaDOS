@@ -526,19 +526,19 @@ glados.useNameSpace 'glados.models.Aggregations',
 
 
 glados.models.Aggregations.Aggregation.COMPOUND_INDEX_URL = glados.models.paginatedCollections.Settings.ES_BASE_URL\
-+ '/chembl_molecule/_search'
++ '/'+glados.Settings.CHEMBL_ES_INDEX_PREFIX+'molecule/_search'
 
 glados.models.Aggregations.Aggregation.ACTIVITY_INDEX_URL = glados.models.paginatedCollections.Settings.ES_BASE_URL\
-+ '/chembl_activity/_search'
++ '/'+glados.Settings.CHEMBL_ES_INDEX_PREFIX+'activity/_search'
 
 glados.models.Aggregations.Aggregation.TARGET_INDEX_URL = glados.models.paginatedCollections.Settings.ES_BASE_URL\
-+ '/chembl_target/_search'
++ '/'+glados.Settings.CHEMBL_ES_INDEX_PREFIX+'target/_search'
 
 glados.models.Aggregations.Aggregation.ASSAY_INDEX_URL = glados.models.paginatedCollections.Settings.ES_BASE_URL\
-+ '/chembl_assay/_search'
++ '/'+glados.Settings.CHEMBL_ES_INDEX_PREFIX+'assay/_search'
 
 glados.models.Aggregations.Aggregation.DOCUMENT_INDEX_URL = glados.models.paginatedCollections.Settings.ES_BASE_URL\
-+ '/chembl_document/_search'
++ '/'+glados.Settings.CHEMBL_ES_INDEX_PREFIX+'document/_search'
 
 
 # do tests for cell lines and tissues if they are needed

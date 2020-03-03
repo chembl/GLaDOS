@@ -1,3 +1,6 @@
+from django.conf import settings
+
+
 def parse_synonyms(raw_synonyms):
     true_synonyms = set()
     for raw_syn in raw_synonyms:
@@ -124,7 +127,7 @@ def parse_assay_parameters(raw_parameters):
 
 
 PARSING_FUNCTIONS = {
-    'chembl_molecule': {
+    settings.CHEMBL_ES_INDEX_PREFIX+'molecule': {
         'molecule_synonyms': lambda original_value: parse_synonyms(original_value),
         'research_codes': lambda original_value: parse_research_codes(original_value),
         '_metadata.drug.drug_data.applicants': lambda original_value: list_to_pipe_separated_string(original_value),
@@ -139,26 +142,26 @@ PARSING_FUNCTIONS = {
         'drug_atc_codes_level_2': lambda original_value: parse_atc_codes_descriptions(original_value, 2),
         'drug_atc_codes_level_1': lambda original_value: parse_atc_codes_descriptions(original_value, 1),
     },
-    'chembl_target': {
+    settings.CHEMBL_ES_INDEX_PREFIX+'target': {
         'uniprot_accessions': lambda original_value: parse_target_uniprot_accession(original_value)
     },
-    'chembl_assay': {
+    settings.CHEMBL_ES_INDEX_PREFIX+'assay': {
         'assay_parameters': lambda original_value: parse_assay_parameters(original_value),
         'assay_classifications_level1': lambda original_value: parse_assay_classifications(original_value, 1),
         'assay_classifications_level2': lambda original_value: parse_assay_classifications(original_value, 2),
         'assay_classifications_level3': lambda original_value: parse_assay_classifications(original_value, 3),
     },
-    'chembl_document': {
+    settings.CHEMBL_ES_INDEX_PREFIX+'document': {
         '_metadata.source': lambda original_value: parse_document_source(original_value),
     },
-    'chembl_activity': {
+    settings.CHEMBL_ES_INDEX_PREFIX+'activity': {
         'standard_relation': lambda original_value: escape_text_with_simple_colon(original_value),
     },
-    'chembl_mechanism_by_parent_target': {
+    settings.CHEMBL_ES_INDEX_PREFIX+'mechanism_by_parent_target': {
         'parent_molecule._metadata.drug.drug_data.synonyms': lambda original_value: parse_mech_of_act_synonyms(
             original_value)
     },
-    'chembl_drug_indication_by_parent': {
+    settings.CHEMBL_ES_INDEX_PREFIX+'drug_indication_by_parent': {
         'parent_molecule._metadata.drug.drug_data.synonyms': lambda original_value: parse_mech_of_act_synonyms(
             original_value),
         'efo_ids': lambda original_value: parse_efo_ids(original_value),
@@ -169,7 +172,7 @@ PARSING_FUNCTIONS = {
         'parent_molecule._metadata.drug.drug_data.usan_stem': lambda original_value: escape_text_with_simple_colon(
             original_value)
     },
-    'chembl_mechanism_by_parent_target': {
+    settings.CHEMBL_ES_INDEX_PREFIX+'mechanism_by_parent_target': {
         'parent_molecule.usan_stem': lambda original_value: escape_text_with_simple_colon(
             original_value),
         'mechanism_of_action.mechanism_comment': lambda original_value: list_to_pipe_separated_string(original_value),

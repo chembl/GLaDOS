@@ -41,7 +41,7 @@ describe "Compound", ->
     testHasNormalImageURL = (response, parsed) ->
 
       chemblID = response.molecule_chembl_id
-      imageURLMustBe = glados.Settings.WS_BASE_URL + 'image/' + chemblID + '.svg?engine=indigo'
+      imageURLMustBe = glados.Settings.WS_BASE_URL + 'image/' + chemblID + '.svg'
       expect(parsed.image_url).toBe(imageURLMustBe)
 
     testHasMetalContainingIMG = (response, parsed) ->
@@ -293,7 +293,7 @@ describe "Compound", ->
 
       it 'generates the elasctisearch url', ->
 
-        urlMustBe = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/chembl_molecule/_doc/' + chemblID
+        urlMustBe = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/'+glados.Settings.CHEMBL_ES_INDEX_PREFIX+'molecule/_doc/' + chemblID
         expect(compound.url).toBe(urlMustBe)
 
       it 'parses the basic information received from web services', -> testBasicProperties(esResponse._source, parsed)

@@ -20,10 +20,10 @@
     "parent_chembl_id": "CHEMBL364516"
   },
   "molecule_properties": {
-    "acd_logd": null,
-    "acd_logp": null,
-    "acd_most_apka": null,
-    "acd_most_bpka": null,
+    "cx_logd": null,
+    "cx_logp": null,
+    "cx_most_apka": null,
+    "cx_most_bpka": null,
     "alogp": null,
     "aromatic_rings": null,
     "full_molformula": "C26H25FeN3O2",

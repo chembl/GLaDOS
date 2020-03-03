@@ -4,7 +4,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
   # --------------------------------------------------------------------------------------------------------------------
   CellLineSchema:
     FACETS_GROUPS: glados.models.paginatedCollections.esSchema.FacetingHandler.generateFacetsForIndex(
-      'chembl_cell_line'
+      glados.Settings.CHEMBL_ES_INDEX_PREFIX+'cell_line'
       # Default Selected
       [
         'cell_source_tissue',

@@ -3,7 +3,7 @@ from glados.es.ws2es.es_util import DefaultMappings
 
 # Shards size - can be overridden from the default calculated value here
 # shards = 3,
-replicas = 1
+replicas = 0
 
 analysis = DefaultMappings.COMMON_ANALYSIS
 
@@ -38,6 +38,10 @@ mappings = \
                 # Rats Anorectic Activity' , 'General Anti-Obesity activity' , 'Resting Metabolic Rate Anti-Obesity' , '
                 # Alloxan Induced Diabetes' , 'Corticosteroid Induced Diabetes' , 'Streptozotocin Induced Diabetes' , 'V
                 # irus Induced Diabetes' , 'Diet Induced Obesity' , 'Goldthioglucose Induced Obesity'
+                'source': DefaultMappings.LOWER_CASE_KEYWORD,
+                # EXAMPLES:
+                # 'Vogel_2008' , 'Vogel_2008' , 'phenotype' , 'Vogel_2008' , 'Vogel_2008' , 'Vogel_2008' , 'Vogel_2008'
+                # , 'Vogel_2008' , 'Hock_2016' , 'Vogel_2008'
             }
         }
     }

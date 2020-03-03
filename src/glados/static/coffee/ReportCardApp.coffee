@@ -31,8 +31,8 @@ glados.useNameSpace 'glados',
       @scrollSpyHandler.showSection(sectionID)
       $('#' + sectionID).show()
 
-    @registerSection = (sectionID, sectionLabel) ->
-      @scrollSpyHandler.registerSection(sectionID, sectionLabel)
+    @registerSection = (sectionID, sectionLabel, positionInScrollSpy) ->
+      @scrollSpyHandler.registerSection(sectionID, sectionLabel, positionInScrollSpy)
       sectionModel = new Backbone.Model
         title: sectionLabel
         expanded: true
