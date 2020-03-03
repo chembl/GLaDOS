@@ -9,6 +9,10 @@ import os
 
 class FileWriterTester(TestCase):
 
+    def setUp(self):
+
+        self.maxDiff = None
+
     def test_generates_source(self):
         test_columns_to_download = [{'label': 'ChEMBL ID', 'prop_id': 'molecule_chembl_id'},
                                     {'label': 'Name', 'prop_id': 'pref_name'}]
