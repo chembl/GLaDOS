@@ -89,7 +89,7 @@ CompoundNameClassificationView = CardView.extend
 
   renderMolFormula: ->
 
-    if @model.get('structure_type') == 'SEQ' or @model.get('structure_type') == 'NONE'
+    if @model.get('structure_type') == 'SEQ' or @model.get('structure_type') == 'NONE' or not @model.get('molecule_properties')?
       $(@el).find('#Bck-MOLFORMULA').parent().parent().hide()
       $(@el).find('#Bck-FULLMWT').parent().parent().hide()
     else
