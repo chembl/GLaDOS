@@ -92,7 +92,6 @@ def get_target_predictions(molecule_chembl_id):
     external_service_response = external_service_request.json()
     final_predictions = []
 
-
     for raw_prediction in external_service_response:
 
         target_chembl_id = raw_prediction['target_chemblid']
