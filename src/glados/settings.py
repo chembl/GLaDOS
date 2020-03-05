@@ -393,13 +393,10 @@ LOCALE_PATHS = [
 USE_X_FORWARDED_HOST = True
 
 STATIC_URL = '/{0}static/'.format(SERVER_BASE_PATH)
-VUE_STATIC_URL = '{0}v/'.format(SERVER_BASE_PATH)
 
-print('VUE ROOT', VUE_ROOT)
 
 STATICFILES_DIRS = (
     os.path.join(GLADOS_ROOT, 'static/'),
-    VUE_ROOT
 )
 
 STATIC_ROOT = os.path.join(GLADOS_ROOT, 'static_root')
