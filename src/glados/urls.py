@@ -321,4 +321,3 @@ urlpatterns = [url(r'^' + settings.SERVER_BASE_PATH, include(common_urls))]
 # ----------------------------------------------------------------------------------------------------------------------
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-urlpatterns += static(settings.VUE_STATIC_URL, document_root=settings.VUE_ROOT)
