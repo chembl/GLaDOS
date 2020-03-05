@@ -75,7 +75,12 @@ class MongoDBCache(BaseCache):
 # ----------------------------------------------------------------------------------------------------------------------
 
     def _base_set(self, mode, key, value, timeout=None):
-        expiration_time = datetime.datetime.now() + datetime.timedelta(seconds=timeout)
+
+        if timeout is not None:
+            expiration_time = datetime.datetime.now() + datetime.timedelta(seconds=timeout)
+        else:
+            expiration_time = None
+
         coll = self._get_collection()
         encoded = self._encode(value)
         document_size = len(encoded)
@@ -120,9 +125,10 @@ class MongoDBCache(BaseCache):
         if not data:
             return default
         expiration_time = data['expires']
-        if expiration_time < datetime.datetime.now():
-            coll.delete_one({'_id': key})
-            return default
+        if expiration_time is not None:
+            if expiration_time < datetime.datetime.now():
+                coll.delete_one({'_id': key})
+                return default
         raw = data.get('data')
         if not raw:
             chunks = data.get('chunks')
