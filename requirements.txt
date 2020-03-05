@@ -29,3 +29,4 @@ mysqlclient==1.4.2.post1
 progressbar2==3.10.1
 wrapt==1.11.1
 blessings==1.6
+django-ratelimit==2.0.0

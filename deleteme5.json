@@ -1,0 +1,49 @@
+{
+  'REMOTE_ADDR': '127.0.0.1',
+  'wsgi.input': <gunicorn.http.body.Body
+  object
+  at
+  0x7fb990302550>,
+  'SERVER_PROTOCOL': 'HTTP/1.0',
+  'wsgi.run_once': False,
+  'HTTP_X_FORWARDED_HOST': 'wwwdev.ebi.ac.uk',
+  'HTTP_X_FORWARDED_FOR': '172.23.50.10, 193.62.197.26',
+  'wsgi.multithread': False,
+  'REQUEST_METHOD': 'GET',
+  'HTTP_X_FORWARDED_PROTO': 'https',
+  'REMOTE_PORT': '41166',
+  'RAW_URI': '/chembl/glados_api/chembl/target_prediction/predictions/CHEMBL3894860',
+  'wsgi.url_scheme': 'https',
+  'wsgi.errors': <gunicorn.http.wsgi.WSGIErrorsWrapper
+  object
+  at
+  0x7fb9903023c8>,
+  'HTTP_HOST': 'wwwdev.ebi.ac.uk',
+  'QUERY_STRING': '',
+  'HTTP_USER_AGENT': 'curl/7.65.3',
+  'SERVER_PORT': '8000',
+  'HTTP_ACCEPT': '*/*',
+  'SERVER_NAME': '0.0.0.0',
+  'SERVER_SOFTWARE': 'gunicorn/19.8.1',
+  'HTTP_X_CLUSTER_CLIENT_IP': '172.23.50.10',
+  'wsgi.multiprocess': False,
+  'HTTP_X_FORWARDED_SERVER': 'www.ebi.ac.uk',
+  'wsgi.version': (1,
+  0),
+  'wsgi.file_wrapper': <class
+  'gunicorn.http.wsgi.FileWrapper'
+  >,
+  'SCRIPT_NAME': '',
+  'PATH_INFO': '/chembl/glados_api/chembl/target_prediction/predictions/CHEMBL3894860',
+  'gunicorn.socket': <socket.socket
+  fd=20,
+  family=AddressFamily.AF_INET,
+  type=SocketKind.SOCK_STREAM,
+  proto=0,
+  laddr=(
+  '127.0.0.1',
+  8000),
+  raddr=(
+  '127.0.0.1',
+  41166)>
+}

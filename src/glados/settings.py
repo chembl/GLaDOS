@@ -394,7 +394,6 @@ USE_X_FORWARDED_HOST = True
 
 STATIC_URL = '/{0}static/'.format(SERVER_BASE_PATH)
 
-
 STATICFILES_DIRS = (
     os.path.join(GLADOS_ROOT, 'static/'),
 )
@@ -503,3 +502,8 @@ LOGGING = {
         },
     },
 }
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Rate limit key
+# ----------------------------------------------------------------------------------------------------------------------
+RATE_LIMIT_KEY = run_config.get('rate_limit_key', 'ip')
