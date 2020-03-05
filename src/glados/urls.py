@@ -296,11 +296,6 @@ common_urls = [
     url(r'^register_usage', views.register_usage, name='register_usage'),
 
     # --------------------------------------------------------------------------------------------------------------------
-    # VueJs Front
-    # --------------------------------------------------------------------------------------------------------------------
-    url(r'^vs/', DirectTemplateView.as_view(template_name="glados/mainvue.html"), name='unichem_sss'),
-
-    # --------------------------------------------------------------------------------------------------------------------
     # django RQ (Redis Queue)
     # --------------------------------------------------------------------------------------------------------------------
     url(r'^django-rq/', include('django_rq.urls')),
@@ -326,4 +321,3 @@ urlpatterns = [url(r'^' + settings.SERVER_BASE_PATH, include(common_urls))]
 # ----------------------------------------------------------------------------------------------------------------------
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-urlpatterns += static(settings.VUE_STATIC_URL, document_root=settings.VUE_ROOT)
