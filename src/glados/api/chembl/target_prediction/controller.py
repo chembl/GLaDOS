@@ -9,6 +9,9 @@ def get_target_prediction(request, molecule_chembl_id):
     print('Target prediction request headers')
     print(request.headers)
     print('^^^')
+    print('Target prediction request META')
+    print(request.META)
+    print('^^^')
     agent = request.headers['User-Agent']
     if 'wget' in agent.lower():
         print('Target prediction rejecting wget')
