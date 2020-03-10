@@ -228,7 +228,7 @@ def get_schema_obj_for_compound(chembl_id, request):
         pass
 
     try:
-        related_targets_ids = item['_metadata']['related_targets']['chembl_ids']['0'][:5]
+        related_targets_ids = item['_metadata']['related_targets']['all_chembl_ids'].split(' ')[:5]
         related_targets_for_schema = []
 
         for targ_id in related_targets_ids:
