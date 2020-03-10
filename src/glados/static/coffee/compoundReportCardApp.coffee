@@ -874,7 +874,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
       queryValueField: 'molecule_chembl_id'
-      fields: ['_metadata.related_compounds.chembl_ids.*']
+      fields: ['_metadata.related_compounds.all_chembl_ids']
 
     aggsConfig =
       aggs:
@@ -945,7 +945,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
       queryValueField: 'molecule_chembl_id'
-      fields: ['_metadata.related_compounds.chembl_ids.*']
+      fields: ['_metadata.related_compounds.all_chembl_ids']
 
     aggsConfig =
       aggs:
