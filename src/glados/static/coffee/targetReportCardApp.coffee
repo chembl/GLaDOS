@@ -456,7 +456,7 @@ class TargetReportCardApp extends glados.ReportCardApp
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
       queryValueField: 'target_chembl_id'
-      fields: ['_metadata.related_targets.chembl_ids.*']
+      fields: ['_metadata.related_targets.all_chembl_ids']
 
     aggsConfig =
       aggs:
