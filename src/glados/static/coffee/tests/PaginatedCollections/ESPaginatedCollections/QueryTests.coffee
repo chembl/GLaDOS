@@ -6,7 +6,7 @@ describe "An elasticsearch collection initialised from a custom query (full)", -
           {
             "multi_match": {
               "query": "CHEMBL5607",
-              "fields": "_metadata.related_targets.chembl_ids.*"
+              "fields": "_metadata.related_targets.all_chembl_ids"
             }
           }
         ],
@@ -41,7 +41,7 @@ describe "An elasticsearch collection initialised from a custom query (full)", -
           "must": [{
             "multi_match": {
               "query": "CHEMBL5607",
-              "fields": "_metadata.related_targets.chembl_ids.*"
+              "fields": "_metadata.related_targets.all_chembl_ids"
             }
           }], "filter": []
         }

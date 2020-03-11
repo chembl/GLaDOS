@@ -220,7 +220,7 @@ class AssayReportCardApp extends glados.ReportCardApp
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
       queryValueField: 'assay_chembl_id'
-      fields: ['_metadata.related_assays.chembl_ids.*']
+      fields: ['_metadata.related_assays.all_chembl_ids']
 
     aggsConfig =
       aggs:
@@ -252,7 +252,7 @@ class AssayReportCardApp extends glados.ReportCardApp
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
       queryValueField: 'assay_chembl_id'
-      fields: ['_metadata.related_assays.chembl_ids.*']
+      fields: ['_metadata.related_assays.all_chembl_ids']
 
     aggsConfig =
       aggs:
@@ -285,7 +285,7 @@ class AssayReportCardApp extends glados.ReportCardApp
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
       queryValueField: 'assay_chembl_id'
-      fields: ['_metadata.related_assays.chembl_ids.*']
+      fields: ['_metadata.related_assays.all_chembl_ids']
 
     aggsConfig =
       aggs:

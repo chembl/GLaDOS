@@ -7,8 +7,7 @@
       "_metadata.*"
     ],
     "excludes": [
-      "_metadata.related_targets.chembl_ids.*",
-      "_metadata.related_compounds.chembl_ids.*"
+      "_metadata.related_*.all_chembl_ids",
     ]
   },
   "query": {

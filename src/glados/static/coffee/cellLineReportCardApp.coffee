@@ -242,7 +242,7 @@ class CellLineReportCardApp extends glados.ReportCardApp
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
       queryValueField: 'cell_chembl_id'
-      fields: ['_metadata.related_cell_lines.chembl_ids.*']
+      fields: ['_metadata.related_cell_lines.all_chembl_ids']
 
     aggsConfig =
       aggs:

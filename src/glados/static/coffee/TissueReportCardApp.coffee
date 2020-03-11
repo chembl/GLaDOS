@@ -242,7 +242,7 @@ class TissueReportCardApp extends glados.ReportCardApp
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
       queryValueField: 'tissue_chembl_id'
-      fields: ['_metadata.related_tissues.chembl_ids.*']
+      fields: ['_metadata.related_tissues.all_chembl_ids']
 
     aggsConfig =
       aggs:

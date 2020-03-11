@@ -266,7 +266,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
       queryValueField: 'document_chembl_id'
-      fields: ['_metadata.related_documents.chembl_ids.*']
+      fields: ['_metadata.related_documents.all_chembl_ids']
 
     aggsConfig =
       aggs:
@@ -299,7 +299,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
       queryValueField: 'document_chembl_id'
-      fields: ['_metadata.related_documents.chembl_ids.*']
+      fields: ['_metadata.related_documents.all_chembl_ids']
 
     aggsConfig =
       aggs:
@@ -400,7 +400,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
     queryConfig =
       type: glados.models.Aggregations.Aggregation.QueryTypes.MULTIMATCH
       queryValueField: 'document_chembl_id'
-      fields: ['_metadata.related_documents.chembl_ids.*']
+      fields: ['_metadata.related_documents.all_chembl_ids']
 
     aggsConfig =
       aggs:
