@@ -2,6 +2,9 @@ glados.useNameSpace 'glados.models.Compound',
   TargetPrediction: Backbone.Model.extend
     idAttribute: 'pred_id'
 
+    fetch: ->
+      console.log('FETCH LIST')
+
     parse: (response) ->
 
       response.target_link = Target.get_report_card_url(response.target_chembl_id)
