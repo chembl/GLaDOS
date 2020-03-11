@@ -489,7 +489,6 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
   @initTargetPredictions = ->
 
-    return
     compound = CompoundReportCardApp.getCurrentCompound()
 
     new glados.views.Compound.TargetPredictionsView
