@@ -6,7 +6,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
 
     fetch: ->
 
-
       deferred = $.post
         url: @url
         data: JSON.stringify({'smiles': @canonical_smiles})
@@ -17,7 +16,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
       thisList = @
       deferred.done (data) ->
 
-        console.log('DATA RECEIVED')
         parsedData = thisList.parse(data)
         thisList.reset(parsedData)
 
