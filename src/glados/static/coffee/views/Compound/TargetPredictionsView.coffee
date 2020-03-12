@@ -29,6 +29,7 @@ glados.useNameSpace 'glados.views.Compound',
         generator=undefined, flavour)
 
       @list.initURL()
+      @list.molecule_chembl_id = @model.get('id')
       @list.canonical_smiles = canonical_smiles
       @list.on 'reset', @renderPredictions, @
 
@@ -38,7 +39,6 @@ glados.useNameSpace 'glados.views.Compound',
       @list.fetch()
 
     renderPredictions: ->
-
 
       if @list.models.length == 0
         @hideSection()
