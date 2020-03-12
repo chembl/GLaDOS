@@ -38,8 +38,8 @@ def delete_expired_downloads():
             delete_download_file(file_to_remove)
         expired_downloads.delete()
         print('Deleted {} expired expired downloads.'.format(num_expired_downloads))
-        if settings.RUN_ENV == RunEnvs.PROD:
-            rsync_nfss()
+        # if settings.RUN_ENV == RunEnvs.PROD:
+        #     rsync_nfss()
 
 
 def delete_download_file(path):

@@ -99,8 +99,8 @@ def make_download_file(job_id):
         download_job.file_path = out_file_path
         download_job.save()
 
-        if settings.RUN_ENV == RunEnvs.PROD:
-            rsync_to_the_other_nfs(download_job)
+        # if settings.RUN_ENV == RunEnvs.PROD:
+        #     rsync_to_the_other_nfs(download_job)
 
         download_job.append_to_job_log('File Ready')
         logger.info('File Ready: ' + out_file_path)

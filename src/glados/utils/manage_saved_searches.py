@@ -37,8 +37,8 @@ def delete_expired_searches():
             delete_search_results_file(file_to_remove)
         expired_searches.delete()
         print('Deleted {} expired expired searches.'.format(num_expired_searches))
-        if settings.RUN_ENV == RunEnvs.PROD:
-            rsync_nfss()
+        # if settings.RUN_ENV == RunEnvs.PROD:
+        #     rsync_nfss()
 
 
 def delete_search_results_file(path):
