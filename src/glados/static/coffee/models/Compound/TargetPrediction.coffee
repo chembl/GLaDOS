@@ -60,7 +60,7 @@ glados.models.Compound.TargetPrediction.COLUMNS_SETTINGS =
     glados.models.Compound.TargetPrediction.COLUMNS.CONFIDENCE_70
     glados.models.Compound.TargetPrediction.COLUMNS.CONFIDENCE_80
     glados.models.Compound.TargetPrediction.COLUMNS.CONFIDENCE_90
-    glados.models.Compound.TargetPrediction.COLUMNS.IN_TRAINING
+#    glados.models.Compound.TargetPrediction.COLUMNS.IN_TRAINING
   ]
 
 glados.models.Compound.TargetPrediction.CONDITIONAL_ROW_FORMATS =
