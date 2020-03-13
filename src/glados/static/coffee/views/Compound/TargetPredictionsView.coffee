@@ -41,10 +41,10 @@ glados.useNameSpace 'glados.views.Compound',
 
     handleFetchingError: ->
 
-      alert('HANDLE FETCHING ERROR')
       @hideSection()
 
     renderPredictions: ->
+
 
       if @list.models.length == 0
         @hideSection()
