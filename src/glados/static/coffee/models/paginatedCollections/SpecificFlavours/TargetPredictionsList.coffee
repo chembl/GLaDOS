@@ -19,6 +19,10 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
         parsedData = thisList.parse(data)
         thisList.reset(parsedData)
 
+      deferred.fail (jqxhrError) ->
+
+        thisList.trigger('error', thisList, jqxhrError)
+
     parse: (data) ->
 
       parsedPredictions = []

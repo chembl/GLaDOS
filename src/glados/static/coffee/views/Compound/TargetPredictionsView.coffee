@@ -32,13 +32,19 @@ glados.useNameSpace 'glados.views.Compound',
       @list.molecule_chembl_id = @model.get('id')
       @list.canonical_smiles = canonical_smiles
       @list.on 'reset', @renderPredictions, @
+      @list.on 'error', @handleFetchingError, @
 
       glados.views.PaginatedViews.PaginatedViewFactory.getNewTablePaginatedView(
         @list, $(@el).find('.BCK-1MicroMolar-Predictions'), customRenderEvent=undefined, disableColumnsSelection=true)
 
       @list.fetch()
 
+    handleFetchingError: ->
+
+      @hideSection()
+
     renderPredictions: ->
+
 
       if @list.models.length == 0
         @hideSection()
