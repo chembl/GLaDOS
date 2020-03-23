@@ -19,7 +19,7 @@ glados.useNameSpace 'glados.views.PaginatedViews',
         @currentPageSize = newPageSize
         @collection.resetPageSize(newPageSize)
 
-      resetPageSizeProxy = $.proxy(f, @)
+      resetPageSizeProxy = $.proxy(_.debounce(f, 200), @)
       thisView = @
       $(window).resize ->
         if GlobalVariables.CURRENT_SCREEN_TYPE_CHANGED
