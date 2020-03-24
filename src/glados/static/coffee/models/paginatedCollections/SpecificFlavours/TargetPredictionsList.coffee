@@ -26,7 +26,8 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
     parse: (data) ->
 
       parsedPredictions = []
-      for pred in data
+      sortedData = _.sortBy(data, '80%')
+      for pred in sortedData
 
         parsedProps =
           'molecule_chembl_id': @molecule_chembl_id
@@ -39,7 +40,5 @@ glados.useNameSpace 'glados.models.paginatedCollections.SpecificFlavours',
 
         parsedProperties = glados.models.Compound.TargetPrediction.prototype.parse(parsedProps)
         parsedPredictions.push(new glados.models.Compound.TargetPrediction(parsedProperties))
-
-      parsedPredictions = _.sortBy(parsedPredictions, 'confidence_80')
 
       @reset(parsedPredictions)
