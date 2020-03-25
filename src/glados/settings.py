@@ -437,9 +437,9 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # ----------------------------------------------------------------------------------------------------------------------
 # Cache
 # ----------------------------------------------------------------------------------------------------------------------
-ENABLE_MONGO_DB_CACHE = run_config.get('enable_mongo_db_cache', False)
+ENABLE_MEMCACHED_CACHE = run_config.get('enable_kubernetes_memcached', False)
 
-if not ENABLE_MONGO_DB_CACHE:
+if not ENABLE_MEMCACHED_CACHE:
 
     CACHES = {
         'default': {
@@ -449,15 +449,19 @@ if not ENABLE_MONGO_DB_CACHE:
     }
 else:
 
-    mongo_db_cache_config = run_config.get('mongo_db_cache_config')
+    kubernetes_memcached_config = run_config.get('kubernetes_memcached_config')
 
-    if mongo_db_cache_config is None:
-        raise GladosSettingsError('You must provide a mongdo db cache configuration!')
+    if kubernetes_memcached_config is None:
+        raise GladosSettingsError('You must provide a memcached configuration!')
 
-    mongo_db_cache_config['OPTIONS']['READ_PREFERENCE'] = ReadPreference.SECONDARY_PREFERRED
+    hosts = kubernetes_memcached_config.get('hosts')
+    print('MEMCACHED HOSTS: ', hosts)
 
     CACHES = {
-        'default': mongo_db_cache_config
+        'default': {
+            'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+            'LOCATION': hosts,
+        }
     }
 
 
@@ -503,3 +507,7 @@ LOGGING = {
         },
     },
 }
+
+# from django.core.cache import cache
+# cache.set('hello' , 'world', 300)
+# print(cache.get('world'))
