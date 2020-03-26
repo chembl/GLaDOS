@@ -507,7 +507,3 @@ LOGGING = {
         },
     },
 }
-
-# from django.core.cache import cache
-# cache.set('hello' , 'world', 300)
-# print(cache.get('world'))
