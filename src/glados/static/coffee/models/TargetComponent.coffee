@@ -4,8 +4,7 @@ TargetComponent = Backbone.Model.extend
     parsed = data
     parsed.accession_url = ''
     if _.has(parsed, 'accession')
-      if parsed.accession.startsWith('ENSG')
-        parsed.accession_url =  "https://www.ensembl.org/Homo_sapiens/Gene/Summary?g=#{parsed.accession}"
+        parsed.accession_url =  "https://www.uniprot.org/uniprot/#{parsed.accession}"
     return parsed;
 
 TargetComponent.COLUMNS = {
