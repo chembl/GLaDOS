@@ -204,7 +204,7 @@ def save_results_file(results, sssearch_job):
     with open(output_file_path, 'w') as outfile:
         json.dump(results, outfile)
 
-    # if settings.RUN_ENV == RunEnvs.PROD:
-    #     rsync_to_the_other_nfs(sssearch_job)
+    if settings.RUN_ENV == RunEnvs.PROD:
+        rsync_to_the_other_nfs(sssearch_job)
 
 
