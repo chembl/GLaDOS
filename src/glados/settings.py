@@ -15,7 +15,6 @@ import glados
 from django.utils.translation import ugettext_lazy as _
 import logging
 import yaml
-from pymongo.read_preferences import ReadPreference
 
 
 class GladosSettingsError(Exception):
