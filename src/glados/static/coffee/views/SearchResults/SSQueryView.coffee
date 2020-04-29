@@ -14,7 +14,10 @@ glados.useNameSpace 'glados.views.SearchResults',
       else if currentStatus == glados.models.Search.StructureSearchModel.STATES.SEARCH_QUEUED
         return 'Submitted'
       else if currentStatus == glados.models.Search.StructureSearchModel.STATES.SEARCHING
-        return 'Searching'
+        progress = @model.get('progress')
+        if progress?
+          return "Searching (#{progress}%)"
+        else return 'Searching'
       else if currentStatus == glados.models.Search.StructureSearchModel.STATES.LOADING_RESULTS
         return 'Loading Results'
       else if currentStatus == glados.models.Search.StructureSearchModel.STATES.FINISHED
