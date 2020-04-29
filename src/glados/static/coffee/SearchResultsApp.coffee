@@ -38,11 +38,11 @@ class SearchResultsApp
 
     listConfig = @getListConfig(searchType)
 
-    # PLACEHOLDER
-#    thisApp = @
-#    ssSearchModel.once glados.models.Search.StructureSearchModel.EVENTS.RESULTS_READY, ->
-#
-#      $browserContainer.show()
+    thisApp = @
+    ssSearchModel.once glados.models.Search.StructureSearchModel.EVENTS.RESULTS_READY, ->
+
+      $browserContainer.show()
+      console.log('SHOW RESULTS!')
 #      thisApp.initBrowserFromSSResults($browserContainer, $noResultsDiv, listConfig, ssSearchModel)
 
 

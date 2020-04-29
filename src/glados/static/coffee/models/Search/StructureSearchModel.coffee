@@ -19,13 +19,12 @@ glados.useNameSpace 'glados.models.Search',
     submitStructureSearch: ->
 
       queryParams = @get('query_params')
-      console.log('searchType: ', @get('search_type'))
-      console.log(@get('query_params'))
+
       paramsDict =
         search_type: @get('search_type')
         search_term: queryParams.search_term
         threshold: queryParams.threshold
-        dl__ignore_cache: true
+        dl__ignore_cache: false
 
       submissionURL = glados.Settings.SUBMIT_STRUCTURE_SEARCH_URL
       submitPromise = $.post(submissionURL, paramsDict)
@@ -53,8 +52,6 @@ glados.useNameSpace 'glados.models.Search',
       thisModel = @
       submitPromise.then (data) ->
 
-        console.log('search_id: ', data.search_id)
-
         thisModel.set('search_id', data.search_id)
         thisModel.setState(glados.models.Search.StructureSearchModel.STATES.SEARCH_QUEUED)
 
@@ -63,7 +60,6 @@ glados.useNameSpace 'glados.models.Search',
     #-------------------------------------------------------------------------------------------------------------------
     getProgressURL: ->
 
-      console.log('GET PROGRESS URL')
       if @get('search_type') == glados.models.Search.StructureSearchModel.SEARCH_TYPES.SEQUENCE.BLAST
 
         url = "#{glados.Settings.GLADOS_BASE_PATH_REL}glados_api/chembl/sssearch/sssearch-progress/#{@get('search_id')}"
@@ -73,7 +69,6 @@ glados.useNameSpace 'glados.models.Search',
       else
 
         search_id = @get('search_id')
-        console.log('search_id: ', search_id)
 
         url = glados.Settings.DELAYED_JOB_STATUS_URL_GENERATOR
           job_id: encodeURIComponent(search_id)
