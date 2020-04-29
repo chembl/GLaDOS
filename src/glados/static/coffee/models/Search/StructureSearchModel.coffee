@@ -9,6 +9,45 @@ glados.useNameSpace 'glados.models.Search',
 
     submitSearch: ->
 
+      searchType = @get('search_type')
+      if searchType == glados.models.Search.StructureSearchModel.SEARCH_TYPES.SEQUENCE.BLAST
+        @oldSubmitSearch()
+        return
+
+      @submitStructureSearch()
+
+    submitStructureSearch: ->
+
+      queryParams = @get('query_params')
+      console.log('searchType: ', @get('search_type'))
+      console.log(@get('query_params'))
+      paramsDict =
+        search_type: @get('search_type')
+        search_term: queryParams.search_term
+        threshold: queryParams.threshold
+        dl__ignore_cache: false
+
+      submissionURL = glados.Settings.SUBMIT_STRUCTURE_SEARCH_URL
+      console.log('submissionURL: ', submissionURL)
+      submitPromise = $.post('jkjkjk', paramsDict)
+
+      thisModel = @
+      submitPromise.then (data) ->
+
+        thisModel.set('search_id', data.job_id)
+
+#        thisModel.setState(glados.models.Search.StructureSearchModel.STATES.SEARCH_QUEUED)
+
+      submitPromise.fail (jqXHR) ->
+
+        errorMSG = if jqXHR.status == 500 then jqXHR.responseText else jqXHR.statusText
+        thisModel.set('error_message', errorMSG)
+        thisModel.setState(glados.models.Search.StructureSearchModel.STATES.ERROR_STATE)
+
+
+    oldSubmitSearch: ->
+
+
       paramsDict =
         search_type: @get('search_type')
         raw_search_params: JSON.stringify(@get('query_params'))
@@ -20,22 +59,24 @@ glados.useNameSpace 'glados.models.Search',
         thisModel.set('search_id', data.search_id)
         thisModel.setState(glados.models.Search.StructureSearchModel.STATES.SEARCH_QUEUED)
 
-      submitPromise.fail (jqXHR) ->
 
-        errorMSG = if jqXHR.status == 500 then jqXHR.responseText else jqXHR.statusText
-        thisModel.set('error_message', errorMSG)
-        thisModel.setState(glados.models.Search.StructureSearchModel.STATES.ERROR_STATE)
 
     #-------------------------------------------------------------------------------------------------------------------
     # Check search progress
     #-------------------------------------------------------------------------------------------------------------------
     getProgressURL: ->
 
-      url = "#{glados.Settings.GLADOS_BASE_PATH_REL}glados_api/chembl/sssearch/sssearch-progress/#{@get('search_id')}"
       if @get('search_type') == glados.models.Search.StructureSearchModel.SEARCH_TYPES.SEQUENCE.BLAST
-        url += "?is_blast=True"
-      return url
 
+        url = "#{glados.Settings.GLADOS_BASE_PATH_REL}glados_api/chembl/sssearch/sssearch-progress/#{@get('search_id')}"
+        url += "?is_blast=True"
+        return url
+
+      else
+
+        search_id = @get('search_id')
+        url = glados.Settings.DELAYED_JOB_STATUS_URL_GENERATOR(search_id)
+        return url
 
     checkSearchStatusPeriodically: ->
 

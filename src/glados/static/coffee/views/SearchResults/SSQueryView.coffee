@@ -26,6 +26,6 @@ glados.useNameSpace 'glados.views.SearchResults',
     getStatusLink: ->
 
       currentStatus = @model.getState()
-      if currentStatus != glados.models.Search.StructureSearchModel.STATES.INITIAL_STATE
-        return @model.getProgressURL()
-      else return undefined
+      if currentStatus == glados.models.Search.StructureSearchModel.STATES.INITIAL_STATE
+        return undefined
+      else return @model.getProgressURL()

@@ -38,12 +38,15 @@ class SearchResultsApp
 
     listConfig = @getListConfig(searchType)
 
-    thisApp = @
-    ssSearchModel.once glados.models.Search.StructureSearchModel.EVENTS.RESULTS_READY, ->
+    # PLACEHOLDER
+#    thisApp = @
+#    ssSearchModel.once glados.models.Search.StructureSearchModel.EVENTS.RESULTS_READY, ->
+#
+#      $browserContainer.show()
+#      thisApp.initBrowserFromSSResults($browserContainer, $noResultsDiv, listConfig, ssSearchModel)
 
-      $browserContainer.show()
-      thisApp.initBrowserFromSSResults($browserContainer, $noResultsDiv, listConfig, ssSearchModel)
 
+    console.log('SUBMIT SEARCH')
     ssSearchModel.submitSearch()
 
   @initSequenceQueryView = ($queryContainer, ssSearchModel) ->
