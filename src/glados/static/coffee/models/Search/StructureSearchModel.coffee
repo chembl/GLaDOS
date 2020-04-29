@@ -82,16 +82,12 @@ glados.useNameSpace 'glados.models.Search',
 
     checkSearchStatusPeriodically: ->
 
-      console.log('CHECK PROGRESS PERIODICALLY')
-
       progressURL = @getProgressURL()
       thisModel = @
       getProgress = $.get(progressURL)
 
       getProgress.then (response) ->
 
-        console.log('PROGRESS OBTAINED')
-        console.log(response)
         status = response.status
         if status == 'ERROR'
 
@@ -105,16 +101,12 @@ glados.useNameSpace 'glados.models.Search',
         else if status == 'RUNNING'
 
           thisModel.set('progress', response.progress)
-          console.log('progress percentage: ', response.progress)
           thisModel.setState(glados.models.Search.StructureSearchModel.STATES.SEARCHING)
           setTimeout(thisModel.checkSearchStatusPeriodically.bind(thisModel), 1000)
 
         else if status == 'FINISHED'
 
-          thisModel.set('result_ids', response.ids)
-          thisModel.set('total_results', response.total_results)
-          thisModel.set('size_limit', response.size_limit)
-          thisModel.set('expires', response.expires)
+          thisModel.set('expires', response.expires_at)
           thisModel.setState(glados.models.Search.StructureSearchModel.STATES.FINISHED)
 
         else
