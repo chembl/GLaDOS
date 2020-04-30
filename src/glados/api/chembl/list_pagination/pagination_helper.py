@@ -6,40 +6,47 @@ from glados.api.chembl.sssearch import search_manager
 from django.core.cache import cache
 import json
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 
 
 @csrf_exempt
+@require_POST
 def get_page(request):
 
-    if request.method == "POST":
+    print('GET PAGE!!!')
 
-        index_name = request.POST.get('index_name', '')
-        raw_search_data = request.POST.get('search_data', '')
-        context_id = request.POST.get('context_id')
-        id_property = request.POST.get('id_property')
-        raw_contextual_sort_data = request.POST.get('contextual_sort_data')
-        print('raw_search_data: ', raw_search_data)
+    index_name = request.POST.get('index_name', '')
+    raw_search_data = request.POST.get('search_data', '')
+    raw_context = request.POST.get('context_obj')
 
-        try:
-            if context_id is None or context_id == 'undefined' or context_id == 'null':
-                print('no context id')
-                response = glados_server_statistics.get_and_record_es_cached_response(index_name, raw_search_data)
-            else:
-                response = get_items_with_context(index_name, raw_search_data, context_id, id_property,
-                                                  raw_contextual_sort_data)
-        except Exception as e:
-            traceback.print_exc()
-            return HttpResponse('Internal Server Error', status=500)
+    id_property = request.POST.get('id_property')
+    raw_contextual_sort_data = request.POST.get('contextual_sort_data')
+    print('raw_search_data: ', raw_search_data)
 
-        if response is None:
-            return HttpResponse('ELASTIC SEARCH RESPONSE IS EMPTY!', status=500)
+    print('raw_context: ')
+    print(raw_context)
 
-        return JsonResponse(response)
-    else:
-        return JsonResponse({'error': 'this is only available via POST! You crazy hacker! :P'})
+    try:
+        if raw_context is None or raw_context == 'undefined' or raw_context == 'null':
+            print('no context id')
+            response = glados_server_statistics.get_and_record_es_cached_response(index_name, raw_search_data)
+        else:
+            response = get_items_with_context(index_name, raw_search_data, raw_context, id_property,
+                                              raw_contextual_sort_data)
+    except Exception as e:
+        traceback.print_exc()
+        return HttpResponse('Internal Server Error', status=500)
+
+    if response is None:
+        return HttpResponse('ELASTIC SEARCH RESPONSE IS EMPTY!', status=500)
+
+    return JsonResponse(response)
 
 
-def get_items_with_context(index_name, raw_search_data, context_id, id_property, raw_contextual_sort_data='{}'):
+def get_items_with_context(index_name, raw_search_data, raw_context, id_property, raw_contextual_sort_data='{}'):
+
+    print('GET ITEMS WITH CONTEXT')
+
 
     sssearch_job = SSSearchJob.objects.get(search_id=context_id)
     context, total_results = search_manager.get_search_results_context(sssearch_job)
