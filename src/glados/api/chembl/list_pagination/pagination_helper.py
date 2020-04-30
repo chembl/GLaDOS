@@ -7,6 +7,7 @@ from django.core.cache import cache
 import json
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
+from glados.api.chembl.list_pagination.services import context_loader
 
 
 @csrf_exempt
@@ -47,11 +48,18 @@ def get_items_with_context(index_name, raw_search_data, raw_context, id_property
 
     print('GET ITEMS WITH CONTEXT')
 
+    context_dict = json.loads(raw_context)
+    context, total_results = context_loader.get_context(context_dict)
+    print('context: ', context)
+    print('total_results: ', total_results)
 
-    sssearch_job = SSSearchJob.objects.get(search_id=context_id)
-    context, total_results = search_manager.get_search_results_context(sssearch_job)
+
+    # sssearch_job = SSSearchJob.objects.get(search_id=context_id)
+    # context, total_results = search_manager.get_search_results_context(sssearch_job)
 
     # create a context index so access is faster
+    context_id = context_dict['context_id']
+    print('context_id: ', context_id)
     context_index_key = 'context_index-{}'.format(context_id)
     context_index = cache.get(context_index_key)
     if context_index is None:
@@ -62,6 +70,8 @@ def get_items_with_context(index_name, raw_search_data, raw_context, id_property
             context_index[item[id_property]]['index'] = index
 
         cache.set(context_index_key, context_index, 3600)
+
+    print('context_index: ', context_index)
 
     contextual_sort_data = json.loads(raw_contextual_sort_data)
     contextual_sort_data_keys = contextual_sort_data.keys()
