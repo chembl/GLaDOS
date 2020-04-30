@@ -316,6 +316,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     # Prepares an Elastic Search query to search in all the fields of a document in a specific index
     fetchData: (options, testMode=false) ->
+      console.log('FETCH DATA')
       testMode |= @getMeta('test_mode')
       @trigger('before_fetch_elastic')
       @url = @getURL()
@@ -332,6 +333,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       )
       # Creates the Elastic Search Query parameters and serializes them
       esCacheRequest = @getListHelperRequestData()
+      console.log('esCacheRequest: ', esCacheRequest)
 
       unless testMode
         fetchPromise = glados.doCSRFPost(glados.Settings.CHEMBL_LIST_HELPER_ENDPOINT, esCacheRequest)
@@ -394,7 +396,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         index_name: @getMeta('index_name')
         search_data: JSON.stringify(@getRequestData(customPage, customPageSize))
         contextual_sort_data: JSON.stringify(@getContextualSortingProperties())
-        context_id: if ssSearchModel? then ssSearchModel.get('search_id') else undefined
+        context_obj: if ssSearchModel? then ssSearchModel.getContextObj() else undefined
         id_property: @getMeta('model').ID_COLUMN.comparator
 
       return cacheRequestData

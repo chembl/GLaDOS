@@ -42,11 +42,8 @@ class SearchResultsApp
     ssSearchModel.once glados.models.Search.StructureSearchModel.EVENTS.RESULTS_READY, ->
 
       $browserContainer.show()
-      console.log('SHOW RESULTS!')
-#      thisApp.initBrowserFromSSResults($browserContainer, $noResultsDiv, listConfig, ssSearchModel)
+      thisApp.initBrowserFromSSResults($browserContainer, $noResultsDiv, listConfig, ssSearchModel)
 
-
-    console.log('SUBMIT SEARCH')
     ssSearchModel.submitSearch()
 
   @initSequenceQueryView = ($queryContainer, ssSearchModel) ->
@@ -119,9 +116,8 @@ class SearchResultsApp
 
   @initBrowserFromSSResults = ($browserContainer, $noResultsDiv, customSettings, ssSearchModel) ->
 
-    resultIds = ssSearchModel.get('result_ids')
     esCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(
-      customQuery=undefined, itemsList=resultIds, settings=customSettings, ssSearchModel)
+      customQuery=undefined, itemsList=undefined, settings=customSettings, ssSearchModel)
 
     new glados.views.Browsers.BrowserMenuView
       collection: esCompoundsList

@@ -108,6 +108,17 @@ glados.useNameSpace 'glados.models.Search',
 
           setTimeout(thisModel.checkSearchStatusPeriodically.bind(thisModel), 1000)
 
+    getContextObj: ->
+
+      searchType = @get('search_type')
+      searchID = @get('search_id')
+
+      contextObj = {
+        'context_type': searchType,
+        'context_id': searchID
+      }
+
+      return contextObj
     #-------------------------------------------------------------------------------------------------------------------
     # State handling
     #-------------------------------------------------------------------------------------------------------------------
