@@ -5,7 +5,7 @@ import unittest
 
 from django.conf import settings
 
-from glados.api.chembl.list_pagination.services import context_loader
+from glados.api.chembl.es_proxy.services import context_loader
 
 
 class TestContextLoader(unittest.TestCase):

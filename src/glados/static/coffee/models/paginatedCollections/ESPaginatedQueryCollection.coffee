@@ -613,9 +613,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     __requestFacetsGroupsData: (first_call)->
       es_url = @getURL()
+      console.log('ES_URL: ', es_url)
       # Creates the Elastic Search Query parameters and serializes them
       # Includes the request for the faceting data
       esJSONRequestData = JSON.stringify(@getRequestData(1, 0, true, first_call))
+      console.log('esJSONRequestData: ', esJSONRequestData)
+      console.log('^^^')
       # Uses POST to prevent result caching
       ajax_deferred = $.post
         url: es_url

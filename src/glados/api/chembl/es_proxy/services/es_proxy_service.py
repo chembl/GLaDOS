@@ -2,7 +2,7 @@
 Module that implements the functions of the pagination service
 """
 import json
-from glados.api.chembl.list_pagination.services import context_loader
+from glados.api.chembl.es_proxy.services import context_loader
 from glados.usage_statistics import glados_server_statistics
 
 CONTEXT_PREFIX = '_context'
