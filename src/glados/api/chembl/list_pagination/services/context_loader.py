@@ -2,6 +2,7 @@
 Module that loads contexts from results
 """
 from django.conf import settings
+from django.core.cache import cache
 
 import requests
 
@@ -39,4 +40,27 @@ def get_context(context_dict):
         results = results[0:WEB_RESULTS_SIZE_LIMIT]
 
     return results, total_results
+
+
+def load_context_index(context_id, id_property, context):
+    """
+    Loads an index based on the id property of the context, for fast access
+    :param context_id: id of the context loaded
+    :param id_property: property used to identify each item
+    :param context: context loaded
+    :return:
+    """
+
+    context_index_key = 'context_index-{}'.format(context_id)
+    context_index = cache.get(context_index_key)
+    if context_index is None:
+        context_index = {}
+
+        for index, item in enumerate(context):
+            context_index[item[id_property]] = item
+            context_index[item[id_property]]['index'] = index
+
+        cache.set(context_index_key, context_index, 3600)
+
+    return context_index
 
