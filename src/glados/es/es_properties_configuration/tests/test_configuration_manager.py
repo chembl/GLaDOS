@@ -1,10 +1,9 @@
 from django.test import TestCase, override_settings
 from glados.es.es_properties_configuration import configuration_manager
-import glados.es.ws2es.es_util as es_util
 from django.conf import settings
-from glados.settings import RunEnvs
 import os
 import yaml
+from glados.es_connection import setup_glados_es_connection, DATA_CONNECTION, MONITORING_CONNECTION
 
 
 class ConfigurationGetterTester(TestCase):
@@ -14,11 +13,8 @@ class ConfigurationGetterTester(TestCase):
                                      'es/es_properties_configuration/tests/data/test_default_sorting.yml')
 
     def setUp(self):
-
-        if settings.RUN_ENV == RunEnvs.TRAVIS:
-            es_util.setup_connection_from_full_url(settings.ELASTICSEARCH_EXTERNAL_URL)
-        else:
-            es_util.setup_connection_from_full_url(settings.ELASTICSEARCH_HOST)
+        setup_glados_es_connection(connection_type=DATA_CONNECTION)
+        setup_glados_es_connection(connection_type=MONITORING_CONNECTION)
 
     # ------------------------------------------------------------------------------------------------------------------
     # Getting one property

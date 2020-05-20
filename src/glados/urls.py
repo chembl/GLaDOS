@@ -14,10 +14,11 @@ from django.http import HttpResponse
 
 from django.views.generic.base import RedirectView
 
-import glados.es_connection
+from glados.es_connection import setup_glados_es_connection, DATA_CONNECTION, MONITORING_CONNECTION
 
 # Setup Elastic Search Connection here only once
-glados.es_connection.setup_glados_es_connection()
+setup_glados_es_connection(DATA_CONNECTION)
+setup_glados_es_connection(MONITORING_CONNECTION)
 
 common_urls = [
     # --------------------------------------------------------------------------------------------------------------------

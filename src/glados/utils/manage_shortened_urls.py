@@ -16,7 +16,7 @@ def delete_expired_urls():
 
     print('I am going to delete the urls that expire before {}'.format(str(now)))
 
-    es_connection.setup_glados_es_connection()
+    es_connection.setup_glados_es_connection(MONITORING_CONNECTION)
     es_conn = connections.get_connection(alias=MONITORING_CONNECTION)
 
     query = {

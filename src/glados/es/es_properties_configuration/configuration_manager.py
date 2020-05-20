@@ -3,8 +3,8 @@ from glados.es.ws2es import resources_description
 import yaml
 from django.conf import settings
 from django.core.cache import cache
-import glados.es.ws2es.es_util as es_util
 import warnings
+from glados.es_connection import setup_glados_es_connection, DATA_CONNECTION, MONITORING_CONNECTION
 
 
 class ESPropsConfigurationManagerError(Exception):
@@ -161,8 +161,10 @@ def get_id_property_for_index(index_name):
 # Properties counts
 # -----------------------------------------------------------------------------------
 
+
 def print_properties_counts():
-    es_util.setup_connection_from_full_url(settings.ELASTICSEARCH_HOST)
+    setup_glados_es_connection(connection_type=DATA_CONNECTION)
+    setup_glados_es_connection(connection_type=MONITORING_CONNECTION)
     print()
     print_groups_counts()
     print()

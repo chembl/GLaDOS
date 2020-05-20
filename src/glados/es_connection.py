@@ -140,10 +140,10 @@ REQUIRED_INDEXES = [
 def setup_glados_es_connection(connection_type=DATA_CONNECTION):
     try:
         connections.get_connection(alias=connection_type)
-        logger.info('ES Connection {0} has already been created! Skipping for now . . .'.format(connection_type))
+        logger.info('ES-CONN:{0}: Connection has already been created! Skipping for now . . .'.format(connection_type))
         return
     except KeyError as e:
-        logger.info('ES Connection {0} does not exist, will try to create it!'.format(connection_type))
+        logger.info('ES-CONN:{0}: Connection does not exist, will try to create it!'.format(connection_type))
     es_host = None
     es_username = None
     es_password = None
@@ -157,15 +157,15 @@ def setup_glados_es_connection(connection_type=DATA_CONNECTION):
         es_username = getattr(settings, 'ELASTICSEARCH_MONITORING_USERNAME', None)
         es_password = getattr(settings, 'ELASTICSEARCH_MONITORING_PASSWORD', None)
 
-    logger.info('SETTING UP ES CONNECTION - TYPE: {0}'.format(connection_type))
+    logger.info('ES-CONN:{0}: SETTING UP ES CONNECTION'.format(connection_type))
     if es_host is None:
-        logger.warning('The elastic search connection has not been defined for "{0}"!'.format(connection_type))
+        logger.warning('ES-CONN:{0}: The elastic search connection has not been defined!'.format(connection_type))
     else:
         try:
             keyword_args = {
-                "hosts": [es_host],
-                "timeout": 30,
-                "retry_on_timeout": True,
+                'hosts': [es_host],
+                'timeout': 30,
+                'retry_on_timeout': True,
                 'alias': connection_type
             }
 
@@ -176,21 +176,23 @@ def setup_glados_es_connection(connection_type=DATA_CONNECTION):
 
             if not connections.get_connection(alias=connection_type).ping():
                 raise Exception('PING to elasticsearch endpoint failed!')
-            logger.info('PING to {0} was successful for {1} connection!'.format(es_host, connection_type))
+            logger.info('ES-CONN:{0}: PING to {1} was successful!'.format(connection_type, es_host))
 
             if connection_type == MONITORING_CONNECTION:
                 create_indexes()
             elif connection_type == DATA_CONNECTION:
-                logger.info('Initialising es-utils connection')
+                logger.info('ES-CONN:{0}: Initialising es-utils connection.'.format(connection_type))
+                es_util.es_conn = connections.get_connection(alias=DATA_CONNECTION)
 
-                if settings.RUN_ENV == RunEnvs.TRAVIS:
-                    es_util.setup_connection_from_full_url(settings.ELASTICSEARCH_EXTERNAL_URL)
-                else:
-                    es_util.setup_connection_from_full_url(settings.ELASTICSEARCH_HOST)
+                # TODO: Check what to do with travis
+                # if settings.RUN_ENV == RunEnvs.TRAVIS:
+                #     es_util.setup_connection_from_full_url(settings.ELASTICSEARCH_EXTERNAL_URL)
+                # else:
+                #     es_util.setup_connection_from_full_url(settings.ELASTICSEARCH_HOST)
 
         except Exception as e:
             traceback.print_exc()
-            logger.error('{0} ES connection could not be created - Reason:'.format(connection_type) + str(e))
+            logger.error('ES-CONN:{0}: Connection could not be created - Reason:'.format(connection_type) + str(e))
 
 
 def create_idx(idx_name, shards=5, replicas=1, mappings=None):
