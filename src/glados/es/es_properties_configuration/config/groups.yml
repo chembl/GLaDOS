@@ -1,4 +1,4 @@
-chembl_26_molecule:
+chembl_27_molecule:
   download:
     default: ['molecule_chembl_id', 'pref_name', 'molecule_synonyms', 'molecule_type', 'max_phase',
     'molecule_properties.full_mwt', '_metadata.related_targets.count', '_metadata.related_activities.count',
@@ -83,7 +83,7 @@ chembl_26_molecule:
     default: ['helm_notation']
   biocomponents:
     default: ['molecule_chembl_id', 'biotherapeutic.biocomponents']
-chembl_26_assay:
+chembl_27_assay:
   download:
     default: ['assay_chembl_id', 'assay_type', 'description', 'assay_organism', '_metadata.related_compounds.count',
     '_metadata.related_activities.count', 'bao_format', 'bao_label', 'confidence_score',
@@ -104,7 +104,7 @@ chembl_26_assay:
     'assay_parameters', 'assay_classifications_level1', 'assay_classifications_level2', 'assay_classifications_level3']
   assay_parameters:
     default: ['assay_parameters_report_card_rows']
-chembl_26_target:
+chembl_27_target:
   download:
     default: ['target_chembl_id', 'pref_name', 'uniprot_accessions', 'target_type', 'organism',
     '_metadata.related_compounds.count', '_metadata.related_activities.count', 'tax_id', 'species_group_flag']
@@ -121,7 +121,7 @@ chembl_26_target:
     'target_chembl_id', 'pref_name', 'uniprot_accessions', 'target_type', 'organism',
     '_metadata.related_compounds.count', '_metadata.related_activities.count']
     optional: ['tax_id', 'species_group_flag']
-chembl_26_document:
+chembl_27_document:
   download:
     default: ['document_chembl_id', 'journal_full_title', 'src_id', '_metadata.source', 'title', 'pubmed_id', 'doi',
     'patent_id', 'authors', 'year', 'volume', 'issue', 'first_page', 'last_page', 'doc_type', 'abstract',
@@ -130,7 +130,7 @@ chembl_26_document:
     default: ['document_chembl_id', 'journal_full_title', '_metadata.source', 'title', 'pubmed_id', 'doi', 'patent_id',
     'authors', 'year', 'volume', 'issue', 'first_page', 'last_page', '_metadata.related_activities.count']
     optional: ['src_id', 'abstract', '_metadata.related_compounds.count', '_metadata.related_targets.count']
-chembl_26_cell_line:
+chembl_27_cell_line:
   download:
     default: ['cell_chembl_id', 'cell_name', 'cell_description', 'cell_source_organism', 'cell_source_tissue',
     'cell_source_tax_id', 'clo_id', 'efo_id', 'cellosaurus_id', 'cl_lincs_id', '_metadata.related_compounds.count',
@@ -140,14 +140,14 @@ chembl_26_cell_line:
     '_metadata.related_activities.count']
     optional: ['cell_source_tax_id', 'clo_id', 'efo_id', 'cellosaurus_id', 'cl_lincs_id',
     '_metadata.related_compounds.count']
-chembl_26_tissue:
+chembl_27_tissue:
   download:
     default: ['tissue_chembl_id', 'pref_name', 'uberon_id', 'efo_id', 'bto_id', 'caloha_id',
     '_metadata.related_compounds.count', '_metadata.related_activities.count']
   browser_table:
     default: ['tissue_chembl_id', 'pref_name', 'uberon_id', 'efo_id', '_metadata.related_activities.count']
     optional: ['bto_id', 'caloha_id', '_metadata.related_compounds.count']
-chembl_26_drug_indication_by_parent:
+chembl_27_drug_indication_by_parent:
   download:
     default: ['parent_molecule.molecule_chembl_id', 'parent_molecule.pref_name', 'parent_molecule.molecule_type',
     'drug_indication.max_phase_for_ind', 'parent_molecule.first_approval', 'drug_indication.mesh_id',
@@ -163,7 +163,7 @@ chembl_26_drug_indication_by_parent:
   report_card_table:
     default: ['drug_indication.mesh_id', 'drug_indication.mesh_heading', 'efo_ids', 'efo_terms',
     'drug_indication.max_phase_for_ind', 'parent_molecule.first_approval', 'drug_indication.indication_refs']
-chembl_26_mechanism_by_parent_target:
+chembl_27_mechanism_by_parent_target:
   download:
     default: ['parent_molecule.molecule_chembl_id', 'parent_molecule.pref_name', 'parent_molecule.molecule_type',
     'mechanism_of_action.max_phase', 'parent_molecule.first_approval', 'parent_molecule.usan_stem',
@@ -189,7 +189,7 @@ chembl_26_mechanism_by_parent_target:
     default: ['parent_molecule.molecule_chembl_id', 'parent_molecule.pref_name', 'parent_molecule.molecule_type',
     'mechanism_of_action.max_phase', 'parent_molecule.first_approval', 'parent_molecule.usan_stem',
     'mechanism_of_action.mechanism_refs']
-chembl_26_activity:
+chembl_27_activity:
   download:
     default: ['molecule_chembl_id', 'molecule_pref_name', '_metadata.parent_molecule_data.max_phase',
     '_metadata.parent_molecule_data.full_mwt', '_metadata.parent_molecule_data.num_ro5_violations',
