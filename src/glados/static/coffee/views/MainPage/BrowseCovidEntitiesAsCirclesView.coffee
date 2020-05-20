@@ -9,14 +9,9 @@ glados.useNameSpace 'glados.views.MainPage',
       @setUpResponsiveRender()
       @links =
         Documents: Document.getDocumentsListURL()
-        Drugs: Drug.getDrugsListURL()
-        Tissues: glados.models.Tissue.getTissuesListURL()
-        Cells: CellLine.getCellsListURL()
         Assays: Assay.getAssaysListURL()
         Compounds: Compound.getCompoundsListURL()
-        Targets: Target.getTargetsListURL()
-        Indications: glados.models.Compound.DrugIndication.getListURL()
-        Mechanisms: glados.models.Compound.MechanismOfAction.getListURL()
+        Activities: Activity.getActivitiesListURL()
 
       @render()
 
@@ -24,7 +19,7 @@ glados.useNameSpace 'glados.views.MainPage',
       thisView = @
 
 
-      infoURL = "#{glados.Settings.GLADOS_BASE_PATH_REL}entities_records"
+      infoURL = "#{glados.Settings.GLADOS_BASE_PATH_REL}covid_entities_records"
 
       fetchDatabasePromise = $.getJSON(infoURL)
 
@@ -62,14 +57,9 @@ glados.useNameSpace 'glados.views.MainPage',
 
       colours = {
         Documents: LIGHT_TEAL
-        Drugs: DARK_GREEN
-        Tissues: DARK_RED
-        Cells: TEAL
         Assays: RED
         Compounds: DARKEST_GREEN
-        Targets: PINK
-        Indications: DARK_GREEN
-        Mechanisms: DARK_GREEN
+        Activities: PINK
       }
 
       sizes = []

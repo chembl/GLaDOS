@@ -291,6 +291,46 @@ def get_entities_records(request):
     return JsonResponse(response)
 
 
+def get_covid_entities_records(request):
+
+    cache_key = 'entities_records_v2'
+    cache_time = 604800
+    cache_response = cache.get(cache_key)
+
+    if cache_response is not None:
+        print('records are in cache')
+        return JsonResponse(cache_response)
+
+    print('records are not in cache')
+
+    drugs_query = {
+
+        "term": {
+          "_metadata.drug.is_drug": True
+        }
+
+    }
+
+    response = {
+        'Compounds':
+            Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"molecule").extra(track_total_hits=True).using(DATA_CONNECTION)
+            .execute().hits.total.value,
+        'Assays': Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"assay").extra(track_total_hits=True)
+            .using(DATA_CONNECTION)
+            .execute().hits.total.value,
+        'Documents': Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"document").extra(track_total_hits=True)
+            .using(DATA_CONNECTION)
+            .execute().hits.total.value,
+        'Activities': Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"target").extra(track_total_hits=True)
+            .using(DATA_CONNECTION)
+            .execute().hits.total.value,
+    }
+
+    cache.set(cache_key, response, cache_time)
+
+    return JsonResponse(response)
+
+
 def get_github_details(request):
 
     cache_key = 'github_details'
