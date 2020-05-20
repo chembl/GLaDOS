@@ -623,6 +623,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         dataType: 'json'
         contentType: 'application/json'
         mimeType: 'application/json'
+        beforeSend: (xhr) ->
+          xhr.setRequestHeader(
+            'Authorization', 'Basic ' + btoa(glados.Settings.ES_USERNAME+':'+glados.Settings.ES_PASSWORD)
+          )
       return ajax_deferred
 
     __parseFacetsGroupsData: (non_selected_facets_groups, es_data, first_call, resolve, reject, needs_second_call)->
@@ -942,6 +946,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             dataType: 'json'
             contentType: 'application/json'
             mimeType: 'application/json'
+            beforeSend: (xhr) ->
+              xhr.setRequestHeader(
+                'Authorization', 'Basic ' + btoa(glados.Settings.ES_USERNAME+':'+glados.Settings.ES_PASSWORD)
+              )
           }).done((response) ->
           thisCollection.setMeta('total_records', response.hits.total.value)
           thisCollection.getAllResults($progressElement, askingForOnlySelected)
@@ -992,6 +1000,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             dataType: 'json'
             contentType: 'application/json'
             mimeType: 'application/json'
+            beforeSend: (xhr) ->
+              xhr.setRequestHeader(
+                'Authorization', 'Basic ' + btoa(glados.Settings.ES_USERNAME+':'+glados.Settings.ES_PASSWORD)
+              )
           }).done((response) ->
           #I know that I must be receiving currentPage.
           newItems = (item._source for item in response.hits.hits)

@@ -62,6 +62,10 @@ glados.useNameSpace 'glados',
         dataType: 'json'
         contentType: 'application/json'
         mimeType: 'application/json'
+        beforeSend: (xhr) ->
+          xhr.setRequestHeader(
+            'Authorization', 'Basic ' + btoa(glados.Settings.ES_USERNAME+':'+glados.Settings.ES_PASSWORD)
+          )
       ajax_deferred.then (data) ->
         if data.hits.hits.length > 0
           entityName = data.hits.hits[0]._source.entity_type
