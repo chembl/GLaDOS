@@ -237,10 +237,8 @@ else:
         ELASTICSEARCH_PASSWORD = elasticsearch_config.get('password')
 
     # Public URL
-    public_host_data = elasticsearch_config.get('public')
-    ELASTICSEARCH_EXTERNAL_URL = public_host_data.get('host')
-    ELASTICSEARCH_EXTERNAL_USERNAME = public_host_data.get('username')
-    ELASTICSEARCH_EXTERNAL_PASSWORD = public_host_data.get('password')
+
+    ELASTICSEARCH_EXTERNAL_URL = elasticsearch_config.get('public_host')
     if ELASTICSEARCH_EXTERNAL_URL is None:
         raise GladosSettingsError("You must provide the elasticsearch public URL that will be accessible from the js "
                                   "code in the browser")

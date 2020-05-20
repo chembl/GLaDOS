@@ -175,10 +175,6 @@ SearchModel = Backbone.Model.extend
         dataType: 'json'
         contentType: 'application/json'
         mimeType: 'application/json'
-        beforeSend: (xhr) ->
-          xhr.setRequestHeader(
-            'Authorization', 'Basic ' + btoa(glados.Settings.ES_USERNAME+':'+glados.Settings.ES_PASSWORD)
-          )
 
       deferred_i.done(getDoneCallBack(es_index_i.INDEX_NAME))
       deferreds.push(deferred_i)
