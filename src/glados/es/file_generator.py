@@ -88,7 +88,8 @@ def write_separated_values_file(desired_format, index_name, query, columns_to_do
         i = 0
         previous_percentage = 0
         progress_function(previous_percentage)
-        total_items = es_conn.search(index=index_name, body={'query': query})['hits']['total']
+        total_items = es_conn\
+            .search(index=index_name, body={'query': query, 'track_total_hits': True})['hits']['total']['value']
         for doc_i in scanner:
             i += 1
             doc_source = doc_i['_source']
@@ -146,7 +147,8 @@ def write_sdf_file(query, base_file_name='compounds', output_dir=settings.DYNAMI
     index_name = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
     es_conn = connections.get_connection(alias=DATA_CONNECTION)
 
-    total_items = es_conn.search(index=index_name, body={'query': query})['hits']['total']
+    total_items = es_conn\
+        .search(index=index_name, body={'query': query, 'track_total_hits': True})['hits']['total']['value']
     num_items_with_structure = 0
 
     with gzip.open(file_path, 'wt') as out_file:

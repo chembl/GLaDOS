@@ -23,19 +23,17 @@ REQUIRED_INDEXES = [
         'shards': 7,
         'replicas': 1,
         'mappings': {
-            '_doc': {
-                'properties': {
-                    'es_index': KEYWORD_TYPE,
-                    'es_query': KEYWORD_TYPE,
-                    'es_aggs': KEYWORD_TYPE,
-                    'es_request_digest': KEYWORD_TYPE,
-                    'host': KEYWORD_TYPE,
-                    'run_env_type': KEYWORD_TYPE,
-                    'is_cached': BOOLEAN_TYPE,
-                    'request_date': {
-                        'type':   'date',
-                        'format': 'yyyy-MM-dd HH:mm:ss||epoch_millis'
-                    }
+            'properties': {
+                'es_index': KEYWORD_TYPE,
+                'es_query': KEYWORD_TYPE,
+                'es_aggs': KEYWORD_TYPE,
+                'es_request_digest': KEYWORD_TYPE,
+                'host': KEYWORD_TYPE,
+                'run_env_type': KEYWORD_TYPE,
+                'is_cached': BOOLEAN_TYPE,
+                'request_date': {
+                    'type':   'date',
+                    'format': 'yyyy-MM-dd HH:mm:ss||epoch_millis'
                 }
             }
         }
@@ -45,22 +43,20 @@ REQUIRED_INDEXES = [
         'shards': 7,
         'replicas': 1,
         'mappings': {
-            '_doc': {
-                'properties': {
-                    'download_id': KEYWORD_TYPE,
-                    'time_taken': INTEGER_TYPE,
-                    'is_new': BOOLEAN_TYPE,
-                    'file_size': LONG_TYPE,
-                    'es_index': KEYWORD_TYPE,
-                    'es_query': KEYWORD_TYPE,
-                    'run_env_type': KEYWORD_TYPE,
-                    'desired_format': KEYWORD_TYPE,
-                    'total_items': INTEGER_TYPE,
-                    'host': KEYWORD_TYPE,
-                    'request_date': {
-                        'type':   'date',
-                        'format': 'yyyy-MM-dd HH:mm:ss||epoch_millis'
-                    }
+            'properties': {
+                'download_id': KEYWORD_TYPE,
+                'time_taken': INTEGER_TYPE,
+                'is_new': BOOLEAN_TYPE,
+                'file_size': LONG_TYPE,
+                'es_index': KEYWORD_TYPE,
+                'es_query': KEYWORD_TYPE,
+                'run_env_type': KEYWORD_TYPE,
+                'desired_format': KEYWORD_TYPE,
+                'total_items': INTEGER_TYPE,
+                'host': KEYWORD_TYPE,
+                'request_date': {
+                    'type':   'date',
+                    'format': 'yyyy-MM-dd HH:mm:ss||epoch_millis'
                 }
             }
         }
@@ -70,15 +66,13 @@ REQUIRED_INDEXES = [
         'shards': 7,
         'replicas': 1,
         'mappings': {
-            '_doc': {
-                'properties': {
-                    'search_type': KEYWORD_TYPE,
-                    'run_env_type': KEYWORD_TYPE,
-                    'host': KEYWORD_TYPE,
-                    'request_date': {
-                        'type':   'date',
-                        'format': 'yyyy-MM-dd HH:mm:ss||epoch_millis'
-                    }
+            'properties': {
+                'search_type': KEYWORD_TYPE,
+                'run_env_type': KEYWORD_TYPE,
+                'host': KEYWORD_TYPE,
+                'request_date': {
+                    'type':   'date',
+                    'format': 'yyyy-MM-dd HH:mm:ss||epoch_millis'
                 }
             }
         }
@@ -88,15 +82,13 @@ REQUIRED_INDEXES = [
         'shards': 7,
         'replicas': 1,
         'mappings': {
-            '_doc': {
-                'properties': {
-                    'event': KEYWORD_TYPE,
-                    'run_env_type': KEYWORD_TYPE,
-                    'host': KEYWORD_TYPE,
-                    'request_date': {
-                        'type':   'date',
-                        'format': 'yyyy-MM-dd HH:mm:ss||epoch_millis'
-                    }
+            'properties': {
+                'event': KEYWORD_TYPE,
+                'run_env_type': KEYWORD_TYPE,
+                'host': KEYWORD_TYPE,
+                'request_date': {
+                    'type':   'date',
+                    'format': 'yyyy-MM-dd HH:mm:ss||epoch_millis'
                 }
             }
         }
@@ -106,20 +98,18 @@ REQUIRED_INDEXES = [
         'shards': 7,
         'replicas': 1,
         'mappings': {
-            '_doc': {
-                'properties': {
-                    'view_name': KEYWORD_TYPE,
-                    'view_type': KEYWORD_TYPE,
-                    'entity_name': KEYWORD_TYPE,
-                    'run_env_type': KEYWORD_TYPE,
-                    'host': KEYWORD_TYPE,
-                    'request_date': {
-                        'type':   'date',
-                        'format': 'yyyy-MM-dd HH:mm:ss||epoch_millis'
-                    },
-                    'time_taken': INTEGER_TYPE,
-                    'is_new': BOOLEAN_TYPE,
-                }
+            'properties': {
+                'view_name': KEYWORD_TYPE,
+                'view_type': KEYWORD_TYPE,
+                'entity_name': KEYWORD_TYPE,
+                'run_env_type': KEYWORD_TYPE,
+                'host': KEYWORD_TYPE,
+                'request_date': {
+                    'type':   'date',
+                    'format': 'yyyy-MM-dd HH:mm:ss||epoch_millis'
+                },
+                'time_taken': INTEGER_TYPE,
+                'is_new': BOOLEAN_TYPE,
             }
         }
     },
@@ -128,9 +118,7 @@ REQUIRED_INDEXES = [
         'shards': 7,
         'replicas': 1,
         'mappings': {
-            '_doc': {
-                'properties': {
-                }
+            'properties': {
             }
         }
     }

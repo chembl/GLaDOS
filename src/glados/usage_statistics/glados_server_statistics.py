@@ -43,6 +43,9 @@ def get_and_record_es_cached_response(index_name, raw_search_data):
         response = cache_response
     else:
         print('results are NOT in cache')
+        if search_data is None:
+            search_data = {}
+        search_data['track_total_hits'] = True
         response = connections.get_connection(alias=DATA_CONNECTION).search(index=index_name, body=search_data)
         try:
             cache_time = 3000000

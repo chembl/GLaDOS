@@ -21,17 +21,18 @@ def delete_expired_urls():
 
     query = {
 
-        "query":{
+        "query": {
             "range": {
                 "expires": {
                     "lte": str(int(now.timestamp() * 1000))
                 }
 
             }
-        }
+        },
+        'track_total_hits': True
     }
 
-    total_items = es_conn.search(index=ES_INDEX, body=query)['hits']['total']
+    total_items = es_conn.search(index=ES_INDEX, body=query)['hits']['total']['value']
     if dry_run:
         print('I would have deleted {} saved urls (dry run).'.format(total_items))
     else:
@@ -41,7 +42,7 @@ def delete_expired_urls():
 
 def stream_items(es_conn, query):
 
-    for doc_i in scan(es_conn, query=query, index=ES_INDEX, doc_type='_doc', scroll='1m'):
+    for doc_i in scan(es_conn, query=query, index=ES_INDEX, scroll='1m'):
 
         del doc_i['_score']
         doc_i['_op_type'] = 'delete'

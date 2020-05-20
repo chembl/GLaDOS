@@ -1,9 +1,6 @@
-from django.db import models
 from glados.es_models import TinyURLIndex, ESCachedRequestIndex, ESDownloadRecordIndex, ESViewRecordIndex, \
     ESSearchRecordIndex, ESTinyURLUsageRecordIndex
 import time
-import socket
-from django.conf import settings
 from glados.api.shared.dynamic_downloads.models import *
 
 

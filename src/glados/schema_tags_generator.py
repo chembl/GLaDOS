@@ -3,6 +3,8 @@ import json
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.conf import settings
 from django.urls import reverse
+from glados.es_connection import DATA_CONNECTION, MONITORING_CONNECTION
+
 # This uses elasticsearch to generate helper objects to generate the schema tags of the pages
 # ------------------------------------------------------------------------------------------------------------------
 # Helper functions
@@ -150,10 +152,11 @@ def get_schema_obj_for_compound(chembl_id, request):
             "query": chembl_id
         }
     }
-    s = Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"molecule").query(q)
+    s = Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"molecule")\
+        .extra(track_total_hits=True).using(DATA_CONNECTION).query(q)
     response = s.execute()
 
-    if response.hits.total == 0:
+    if response.hits.total.value == 0:
         return get_no_metadata_object()
 
     item = response.hits[0]
