@@ -30,6 +30,7 @@ def add_data_dir_recursive_as_package_data(base_package_dir, data_dir, pkg_data)
     pkg_data[base_package_dir] = prev_files
     return pkg_data
 
+
 # Includes data directories required by the Django app
 package_data_desc = {}
 add_data_dir_recursive_as_package_data('glados', 'db', package_data_desc)
