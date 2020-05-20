@@ -2,6 +2,7 @@ from elasticsearch_dsl.connections import connections
 from elasticsearch.helpers import scan
 from glados.utils.dot_notation_getter import DotNotationGetter
 from glados.es.es_properties_configuration import columns_parser
+from glados.es_connection import DATA_CONNECTION
 from enum import Enum
 import os
 from django.conf import settings
@@ -76,7 +77,7 @@ def write_separated_values_file(desired_format, index_name, query, columns_to_do
         header_line = separator.join([format_cell(col['label']) for col in all_columns])
         out_file.write(header_line + '\n')
 
-        es_conn = connections.get_connection()
+        es_conn = connections.get_connection(alias=DATA_CONNECTION)
         source = get_search_source(columns_to_download)
 
         scanner = scan(es_conn, index=index_name, scroll=u'1m', size=1000, request_timeout=60, query={
@@ -143,13 +144,13 @@ def write_sdf_file(query, base_file_name='compounds', output_dir=settings.DYNAMI
 
     file_path = os.path.join(output_dir, base_file_name + '.sdf.gz')
     index_name = settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
-    es_conn = connections.get_connection()
+    es_conn = connections.get_connection(alias=DATA_CONNECTION)
 
     total_items = es_conn.search(index=index_name, body={'query': query})['hits']['total']
     num_items_with_structure = 0
 
     with gzip.open(file_path, 'wt') as out_file:
-        es_conn = connections.get_connection()
+        es_conn = connections.get_connection(alias=DATA_CONNECTION)
         scanner = scan(es_conn, index=index_name, scroll=u'1m', size=1000, request_timeout=60, query={
             "_source": ['molecule_structures.molfile'],
             "query": query

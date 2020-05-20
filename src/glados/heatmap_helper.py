@@ -8,4 +8,5 @@ def generate_heatmap_initial_data(index_name, raw_search_data):
     print('raw_search_data: ', raw_search_data)
 
     # get aggregation from elasticsearch
+    # TODO: check es_connection to use DATA or MONITORING connection
     # add_response = connections.get_connection().search(index=index_name, body=search_data)

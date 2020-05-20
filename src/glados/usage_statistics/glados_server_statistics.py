@@ -12,6 +12,7 @@ from django.core.cache import cache
 import traceback
 from django.conf import settings
 from glados.settings import RunEnvs
+from glados.es_connection import DATA_CONNECTION
 
 
 def get_and_record_es_cached_response(index_name, raw_search_data):
@@ -42,7 +43,7 @@ def get_and_record_es_cached_response(index_name, raw_search_data):
         response = cache_response
     else:
         print('results are NOT in cache')
-        response = connections.get_connection().search(index=index_name, body=search_data)
+        response = connections.get_connection(alias=DATA_CONNECTION).search(index=index_name, body=search_data)
         try:
             cache_time = 3000000
             cache.set(cache_key, response, cache_time)
