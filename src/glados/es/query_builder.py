@@ -252,9 +252,9 @@ class QueryBuilder:
             best_query_i_score = 0 + (len(indexes)-i)/(10**(len(es_base_queries)+1))
             j = 0
             while best_query_i is None and j < len(es_base_queries):
-                if results[i*len(es_base_queries) + j]['hits']['total'] > 0:
+                if results[i*len(es_base_queries) + j]['hits']['total']['value'] > 0:
                     best_query_i = es_base_queries[j]
-                    best_query_i_total = results[i * len(es_base_queries) + j]['hits']['total']
+                    best_query_i_total = results[i * len(es_base_queries) + j]['hits']['total']['value']
                     best_query_i_score += results[i * len(es_base_queries) + j]['hits']['max_score']/(10**j)
                     if es_index_i == settings.CHEMBL_ES_INDEX_PREFIX+'target':
                         best_query_i_score *= 100
