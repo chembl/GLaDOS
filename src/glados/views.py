@@ -337,7 +337,7 @@ def get_covid_entities_records(request):
         'Documents': Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"document").extra(track_total_hits=True)
             .using(DATA_CONNECTION)
             .query(covid_documents_query).execute().hits.total.value,
-        'Activities': Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"target").extra(track_total_hits=True)
+        'Activities': Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"activity").extra(track_total_hits=True)
             .using(DATA_CONNECTION)
             .query(covid_activities_query).execute().hits.total.value,
     }

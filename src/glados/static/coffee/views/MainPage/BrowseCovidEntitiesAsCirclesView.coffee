@@ -8,10 +8,10 @@ glados.useNameSpace 'glados.views.MainPage',
       @$vis_elem = $(@el).find('.BCK-circles-Container')
       @setUpResponsiveRender()
       @links =
-        Documents: Document.getDocumentsListURL()
-        Assays: Assay.getAssaysListURL()
-        Compounds: Compound.getCompoundsListURL()
-        Activities: Activity.getActivitiesListURL()
+        Documents: Document.getDocumentsListURL('_metadata.source.src_id:52')
+        Assays: Assay.getAssaysListURL('_metadata.source.src_id:52')
+        Compounds: Compound.getCompoundsListURL('_metadata.compound_records.src_id:52')
+        Activities: Activity.getActivitiesListURL('src_id:52')
 
       @render()
 
