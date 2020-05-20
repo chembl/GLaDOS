@@ -202,7 +202,7 @@ class TargetHierarchyTreeGenerator:
 
     def execute_count_queries(self):
 
-        ms = MultiSearch(index=self.count_index)
+        ms = MultiSearch(index=self.count_index).extra(track_total_hits=True).using(DATA_CONNECTION)
 
         target_classes = list(self.count_queries.keys())  # be sure to be consistent with the order
 
