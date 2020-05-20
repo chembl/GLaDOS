@@ -46,7 +46,8 @@ describe "An elasticsearch collection initialised from a custom query (full)", -
           }], "filter": []
         }
       },
-      "sort": []
+      "sort": [],
+      "track_total_hits": true
     }
 
     requestDataGot = esList.getRequestData()
