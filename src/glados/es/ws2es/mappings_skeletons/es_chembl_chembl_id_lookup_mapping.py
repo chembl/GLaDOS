@@ -9,32 +9,28 @@ analysis = DefaultMappings.COMMON_ANALYSIS
 
 mappings = \
     {
-        '_doc': 
+        'properties': 
         {
-            'properties': 
-            {
-                'chembl_id': 'TEXT',
-                # EXAMPLES:
-                # 'CHEMBL1060315' , 'CHEMBL1060316' , 'CHEMBL1062397' , 'CHEMBL1057849' , 'CHEMBL1056580' , 'CHEMBL10603
-                # 19' , 'CHEMBL106032' , 'CHEMBL1056583' , 'CHEMBL1056584' , 'CHEMBL1064799'
-                'chembl_id_number': 'NUMERIC',
-                # EXAMPLES:
-                # '1060315' , '1060316' , '1062397' , '1057849' , '1056580' , '1060319' , '106032' , '1056583' , '105658
-                # 4' , '1064799'
-                'entity_type': 'TEXT',
-                # EXAMPLES:
-                # 'ASSAY' , 'ASSAY' , 'ASSAY' , 'ASSAY' , 'ASSAY' , 'ASSAY' , 'COMPOUND' , 'ASSAY' , 'ASSAY' , 'ASSAY'
-                'resource_url': 'TEXT',
-                # EXAMPLES:
-                # '/chembl/api/data/assay/CHEMBL1060315' , '/chembl/api/data/assay/CHEMBL1060316' , '/chembl/api/data/as
-                # say/CHEMBL1062397' , '/chembl/api/data/assay/CHEMBL1057849' , '/chembl/api/data/assay/CHEMBL1056580' ,
-                #  '/chembl/api/data/assay/CHEMBL1060319' , '/chembl/api/data/molecule/CHEMBL106032' , '/chembl/api/data
-                # /assay/CHEMBL1056583' , '/chembl/api/data/assay/CHEMBL1056584' , '/chembl/api/data/assay/CHEMBL1064799
-                # '
-                'status': 'TEXT',
-                # EXAMPLES:
-                # 'ACTIVE' , 'ACTIVE' , 'ACTIVE' , 'ACTIVE' , 'ACTIVE' , 'ACTIVE' , 'ACTIVE' , 'ACTIVE' , 'ACTIVE' , 'AC
-                # TIVE'
-            }
+            'chembl_id': 'TEXT',
+            # EXAMPLES:
+            # 'CHEMBL1000002' , 'CHEMBL1000003' , 'CHEMBL1000008' , 'CHEMBL1000009' , 'CHEMBL100001' , 'CHEMBL1002704' ,
+            #  'CHEMBL1002706' , 'CHEMBL10054' , 'CHEMBL100271' , 'CHEMBL1002710'
+            'chembl_id_number': 'NUMERIC',
+            # EXAMPLES:
+            # '1000002' , '1000003' , '1000008' , '1000009' , '100001' , '1002704' , '1002706' , '10054' , '100271' , '1
+            # 002710'
+            'entity_type': 'TEXT',
+            # EXAMPLES:
+            # 'ASSAY' , 'ASSAY' , 'ASSAY' , 'ASSAY' , 'COMPOUND' , 'ASSAY' , 'ASSAY' , 'COMPOUND' , 'COMPOUND' , 'ASSAY'
+            'resource_url': 'TEXT',
+            # EXAMPLES:
+            # '/chembl/api/data/assay/CHEMBL1000002' , '/chembl/api/data/assay/CHEMBL1000003' , '/chembl/api/data/assay/
+            # CHEMBL1000008' , '/chembl/api/data/assay/CHEMBL1000009' , '/chembl/api/data/molecule/CHEMBL100001' , '/che
+            # mbl/api/data/assay/CHEMBL1002704' , '/chembl/api/data/assay/CHEMBL1002706' , '/chembl/api/data/molecule/CH
+            # EMBL10054' , '/chembl/api/data/molecule/CHEMBL100271' , '/chembl/api/data/assay/CHEMBL1002710'
+            'status': 'TEXT',
+            # EXAMPLES:
+            # 'ACTIVE' , 'ACTIVE' , 'ACTIVE' , 'ACTIVE' , 'ACTIVE' , 'ACTIVE' , 'ACTIVE' , 'INACTIVE' , 'ACTIVE' , 'ACTI
+            # VE'
         }
     }

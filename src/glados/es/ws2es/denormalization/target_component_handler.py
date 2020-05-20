@@ -17,7 +17,7 @@ class TargetComponentDenormalizationHandler(DenormalizationHandler):
             {
                 'properties':
                 {
-                    'target_component': tc_mappings['_doc']
+                    'target_component': tc_mappings
                 }
             }
         }

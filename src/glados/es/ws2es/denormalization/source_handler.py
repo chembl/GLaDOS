@@ -34,3 +34,5 @@ class SourceDenormalizationHandler(DenormalizationHandler):
 
     def handle_doc(self, doc: dict, total_docs: int, index: int, first: bool, last: bool):
         self.sources_by_id[doc['src_id']] = doc
+        self.sources_by_id[doc['src_id']]['src_description'] = self.sources_by_id[doc['src_id']]['src_description']\
+            .strip()

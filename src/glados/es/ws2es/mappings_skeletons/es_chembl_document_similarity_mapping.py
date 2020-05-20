@@ -9,24 +9,21 @@ analysis = DefaultMappings.COMMON_ANALYSIS
 
 mappings = \
     {
-        '_doc': 
+        'properties': 
         {
-            'properties': 
-            {
-                'document_1_chembl_id': 'TEXT',
-                # EXAMPLES:
-                # 'CHEMBL1129912' , 'CHEMBL1129182' , 'CHEMBL1130787' , 'CHEMBL1129014' , 'CHEMBL1129182' , 'CHEMBL11318
-                # 34' , 'CHEMBL1130601' , 'CHEMBL1130813' , 'CHEMBL1131789' , 'CHEMBL1129866'
-                'document_2_chembl_id': 'TEXT',
-                # EXAMPLES:
-                # 'CHEMBL1151435' , 'CHEMBL1921691' , 'CHEMBL1147473' , 'CHEMBL1122840' , 'CHEMBL3244383' , 'CHEMBL11331
-                # 56' , 'CHEMBL1131789' , 'CHEMBL1133147' , 'CHEMBL1147505' , 'CHEMBL1130963'
-                'mol_tani': 'NUMERIC',
-                # EXAMPLES:
-                # '0.0' , '0.0' , '0.0' , '0.0' , '0.0' , '0.0' , '0.0' , '0.0' , '0.0' , '0.0'
-                'tid_tani': 'NUMERIC',
-                # EXAMPLES:
-                # '1.0' , '1.0' , '1.0' , '1.0' , '1.0' , '0.8' , '1.0' , '1.0' , '1.0' , '0.75'
-            }
+            'document_1_chembl_id': 'TEXT',
+            # EXAMPLES:
+            # 'CHEMBL1135026' , 'CHEMBL1135026' , 'CHEMBL1135026' , 'CHEMBL1135026' , 'CHEMBL1135026' , 'CHEMBL1135026' 
+            # , 'CHEMBL1135026' , 'CHEMBL1135028' , 'CHEMBL1135028' , 'CHEMBL1135028'
+            'document_2_chembl_id': 'TEXT',
+            # EXAMPLES:
+            # 'CHEMBL1147479' , 'CHEMBL1147580' , 'CHEMBL1121524' , 'CHEMBL1121543' , 'CHEMBL1121371' , 'CHEMBL1121630' 
+            # , 'CHEMBL1121447' , 'CHEMBL1136751' , 'CHEMBL1148890' , 'CHEMBL1152254'
+            'mol_tani': 'NUMERIC',
+            # EXAMPLES:
+            # '0.0' , '0.0' , '0.0' , '0.0' , '0.0' , '0.0' , '0.0' , '0.0' , '0.0' , '0.0'
+            'tid_tani': 'NUMERIC',
+            # EXAMPLES:
+            # '1.0' , '1.0' , '1.0' , '1.0' , '1.0' , '1.0' , '1.0' , '1.0' , '1.0' , '1.0'
         }
     }

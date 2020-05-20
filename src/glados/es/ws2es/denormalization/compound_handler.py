@@ -2,11 +2,9 @@ from glados.es.ws2es.denormalization import DenormalizationHandler
 from glados.es.ws2es.es_util import DefaultMappings
 from glados.es.ws2es.util import SummableDict
 from glados.es.ws2es.denormalization.atc_class_handler import ATCClassDenormalizationHandler
-from glados.es.ws2es.denormalization.target_prediction_handler import TargetPredictionDenormalizationHandler
 import glados.es.ws2es.denormalization.unichem_helper as unichem_helper
 import glados.es.ws2es.denormalization.xrefs_helper as xrefs_helper
 from glados.es.ws2es.denormalization.compound_family_helper import CompoundFamiliesDir, CompoundFamilyNode
-from glados.es.ws2es.denormalization.mol_file_helper import get_sdf_by_chembl_id
 import re
 import sys
 
@@ -30,7 +28,8 @@ class CompoundDenormalizationHandler(DenormalizationHandler):
                             'num_ro5_violations': DefaultMappings.SHORT,
                             'full_mwt': DefaultMappings.DOUBLE,
                             'alogp': DefaultMappings.DOUBLE,
-                            'image_file': DefaultMappings.KEYWORD
+                            'psa': DefaultMappings.DOUBLE,
+                            'image_file': DefaultMappings.KEYWORD,
                         }
                     }
                 }
@@ -54,12 +53,11 @@ class CompoundDenormalizationHandler(DenormalizationHandler):
     }
 
     def __init__(self, complete_x_refs: bool=False,
-                 atc_dh: ATCClassDenormalizationHandler=None, tp_dh: TargetPredictionDenormalizationHandler=None,
+                 atc_dh: ATCClassDenormalizationHandler=None,
                  analyze_hierarchy: bool=False):
-        super().__init__(complete_x_refs or atc_dh is not None or tp_dh is not None)
+        super().__init__(complete_x_refs or atc_dh is not None)
         self.complete_x_refs = complete_x_refs
         self.atc_dh = atc_dh
-        self.tp_dh = tp_dh
         self.molecule_activity_data = {}
         self.image_file_by_chembl_id = {}
         self.pref_name_by_chembl_id = {}
@@ -151,7 +149,6 @@ class CompoundDenormalizationHandler(DenormalizationHandler):
     def get_custom_mappings_for_complete_data(self):
         mappings = SummableDict()
         mappings += unichem_helper.UNICHEM_MAPPING
-        mappings += TargetPredictionDenormalizationHandler.METADATA_MAPPING
         mappings += ATCClassDenormalizationHandler.METADATA_MAPPING
         mappings += {
             'properties': {
@@ -161,8 +158,7 @@ class CompoundDenormalizationHandler(DenormalizationHandler):
                             'properties': {
                                 'availability_type_label': DefaultMappings.KEYWORD,
                                 'chirality_label': DefaultMappings.KEYWORD,
-                                'image_file': DefaultMappings.KEYWORD,
-                                'sdf_data': DefaultMappings.NO_INDEX_TEXT_NO_OFFSETS
+                                'image_file': DefaultMappings.KEYWORD
                             }
                         }
                     }
@@ -185,6 +181,9 @@ class CompoundDenormalizationHandler(DenormalizationHandler):
                 doc['molecule_properties']['full_mwt']
             self.molecule_activity_data[doc['molecule_chembl_id']]['alogp'] = \
                 doc['molecule_properties']['alogp']
+            self.molecule_activity_data[doc['molecule_chembl_id']]['psa'] = \
+                doc['molecule_properties']['psa']
+
         non_structure_image = self.get_non_structure_image_type(doc)
         if non_structure_image:
             self.image_file_by_chembl_id[doc['molecule_chembl_id']] = non_structure_image
@@ -220,16 +219,7 @@ class CompoundDenormalizationHandler(DenormalizationHandler):
         if non_structure_image:
             compound_generated['image_file'] = non_structure_image
 
-        sdf_data = get_sdf_by_chembl_id(doc['molecule_chembl_id'])
-        compound_generated['sdf_data'] = sdf_data
-
         update_doc_md['compound_generated'] = compound_generated
-
-        target_predictions = None
-        if self.tp_dh:
-            target_predictions = self.tp_dh.molecule_chembl_id_2_target_predictions.get(doc['molecule_chembl_id'], None)
-        if target_predictions and len(target_predictions) > 0:
-            update_doc_md['target_predictions'] = target_predictions
 
         if self.complete_x_refs:
             xrefs_helper.complete_xrefs(doc['cross_references'])

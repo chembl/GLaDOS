@@ -3,7 +3,7 @@ from glados.es.ws2es.util import SummableDict
 from glados.es.ws2es.denormalization import DenormalizationHandler
 import glados.es.ws2es.mappings.es_chembl_drug_indication_mapping as drug_indication_mapping
 from glados.es.ws2es.denormalization.compound_family_helper import CompoundFamiliesDir
-from glados.es.ws2es.es_util import DefaultMappings, create_idx, delete_idx
+from glados.es.ws2es.es_util import DefaultMappings, es_util
 
 from glados.es.ws2es.resources_description import MOLECULE, DRUG_INDICATION, DRUG_INDICATION_BY_PARENT
 import sys
@@ -16,28 +16,24 @@ class DrugIndicationDenormalizationHandler(DenormalizationHandler):
     @staticmethod
     def get_new_index_mappings():
         return {
-            '_doc':
+            'properties':
             {
-                'properties':
+                'parent_molecule':
                 {
-                    'parent_molecule':
+                    'properties': MOLECULE.get_resource_mapping_from_es()
+                },
+                'drug_indication': {
+                    'properties': SummableDict(**DRUG_INDICATION.get_resource_mapping_from_es()) -
+                    ['efo_term', 'efo_id'] +
                     {
-                        'properties': MOLECULE.get_resource_mapping_from_es()
-                    },
-                    'drug_indication': {
-                        'properties': SummableDict(**DRUG_INDICATION.get_resource_mapping_from_es()) -
-                        ['efo_term', 'efo_id'] +
-                        {
-                            'efo': {
-                                'properties': {
-                                    'term': DefaultMappings.LOWER_CASE_KEYWORD + DefaultMappings.TEXT_STD,
-                                    'id': DefaultMappings.ID
-                                }
+                        'efo': {
+                            'properties': {
+                                'term': DefaultMappings.LOWER_CASE_KEYWORD + DefaultMappings.TEXT_STD,
+                                'id': DefaultMappings.ID
                             }
                         }
                     }
                 }
-
             }
         }
 
@@ -95,7 +91,7 @@ class DrugIndicationDenormalizationHandler(DenormalizationHandler):
                 'properties': {
                     '_metadata': {
                         'properties': {
-                            'drug_indications': drug_indication_mapping.mappings['_doc']
+                            'drug_indications': drug_indication_mapping.mappings
                         }
                     }
                 }
@@ -131,9 +127,11 @@ class DrugIndicationDenormalizationHandler(DenormalizationHandler):
         }
 
     def save_denormalization_for_new_index(self):
-        delete_idx(self.generated_resource.idx_name)
-        create_idx(self.generated_resource.idx_name, 3, 1, analysis=DefaultMappings.COMMON_ANALYSIS,
-                   mappings=DrugIndicationDenormalizationHandler.get_new_index_mappings())
+        es_util.delete_idx(self.generated_resource.idx_name)
+        es_util.create_idx(
+            self.generated_resource.idx_name, 3, 1, analysis=DefaultMappings.COMMON_ANALYSIS,
+            mappings=DrugIndicationDenormalizationHandler.get_new_index_mappings()
+        )
 
         dn_dict = {}
 
@@ -143,14 +141,12 @@ class DrugIndicationDenormalizationHandler(DenormalizationHandler):
         i = 0
         for group_drug_inds in self.drug_inds_by_grouping_id.values():
             base_drug_ind = group_drug_inds[0]
-            max_phase = 0
             efo_data = {}
             indication_refs = []
+            max_phase_for_ind = 0
             for drug_ind_i in group_drug_inds:
 
-                max_phase_i = drug_ind_i.get('max_phase', 0)
-                if max_phase_i > max_phase:
-                    max_phase = max_phase_i
+                max_phase_for_ind = max(max_phase_for_ind, drug_ind_i.get('max_phase_for_ind', 0))
 
                 efo_id_i = drug_ind_i.get('efo_id', None)
                 if efo_id_i is not None:
@@ -163,7 +159,7 @@ class DrugIndicationDenormalizationHandler(DenormalizationHandler):
             drug_ind_data = SummableDict(**DRUG_INDICATION.get_doc_by_id_from_es(base_drug_ind['drugind_id']))
             drug_ind_data -= ['efo_term', 'efo_id']
             drug_ind_data['efo'] = [{'id': efo_id, 'term': term} for efo_id, term in efo_data.items()]
-            drug_ind_data['max_phase'] = max_phase
+            drug_ind_data['max_phase_for_ind'] = max_phase_for_ind
             drug_ind_data['indication_refs'] = indication_refs
 
             new_mechanism_doc = {

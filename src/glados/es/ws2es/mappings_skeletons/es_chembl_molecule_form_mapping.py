@@ -9,21 +9,18 @@ analysis = DefaultMappings.COMMON_ANALYSIS
 
 mappings = \
     {
-        '_doc': 
+        'properties': 
         {
-            'properties': 
-            {
-                'is_parent': 'BOOLEAN',
-                # EXAMPLES:
-                # 'True' , 'True' , 'True' , 'True' , 'True' , 'True' , 'True' , 'True' , 'True' , 'True'
-                'molecule_chembl_id': 'TEXT',
-                # EXAMPLES:
-                # 'CHEMBL515641' , 'CHEMBL496009' , 'CHEMBL518524' , 'CHEMBL464791' , 'CHEMBL522114' , 'CHEMBL463151' , 
-                # 'CHEMBL449803' , 'CHEMBL474072' , 'CHEMBL463757' , 'CHEMBL455279'
-                'parent_chembl_id': 'TEXT',
-                # EXAMPLES:
-                # 'CHEMBL515641' , 'CHEMBL496009' , 'CHEMBL518524' , 'CHEMBL464791' , 'CHEMBL522114' , 'CHEMBL463151' , 
-                # 'CHEMBL449803' , 'CHEMBL474072' , 'CHEMBL463757' , 'CHEMBL455279'
-            }
+            'is_parent': 'BOOLEAN',
+            # EXAMPLES:
+            # 'True' , 'True' , 'True' , 'True' , 'True' , 'True' , 'True' , 'True' , 'True' , 'True'
+            'molecule_chembl_id': 'TEXT',
+            # EXAMPLES:
+            # 'CHEMBL246397' , 'CHEMBL248129' , 'CHEMBL247210' , 'CHEMBL397121' , 'CHEMBL245878' , 'CHEMBL395353' , 'CHE
+            # MBL246081' , 'CHEMBL247330' , 'CHEMBL246713' , 'CHEMBL246284'
+            'parent_chembl_id': 'TEXT',
+            # EXAMPLES:
+            # 'CHEMBL246397' , 'CHEMBL248129' , 'CHEMBL247210' , 'CHEMBL397121' , 'CHEMBL245878' , 'CHEMBL395353' , 'CHE
+            # MBL246081' , 'CHEMBL247330' , 'CHEMBL246713' , 'CHEMBL246284'
         }
     }

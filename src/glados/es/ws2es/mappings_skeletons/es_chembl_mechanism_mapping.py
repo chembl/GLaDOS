@@ -9,105 +9,127 @@ analysis = DefaultMappings.COMMON_ANALYSIS
 
 mappings = \
     {
-        '_doc': 
+        'properties': 
         {
-            'properties': 
+            '_metadata': 
             {
-                'action_type': 'TEXT',
-                # EXAMPLES:
-                # 'PARTIAL AGONIST' , 'ANTAGONIST' , 'PARTIAL AGONIST' , 'ANTAGONIST' , 'POSITIVE ALLOSTERIC MODULATOR' 
-                # , 'ANTAGONIST' , 'ANTAGONIST' , 'ANTAGONIST' , 'ANTAGONIST' , 'AGONIST'
-                'binding_site_comment': 'TEXT',
-                # EXAMPLES:
-                # 'Partial agonist of the glycin-site on GRIN1-subunits.' , 'Binds to ifenprodil site on N-terminal doma
-                # in.' , 'Benzodiazepine site' , 'Benzodiazepine site' , 'Benzodiazepine site' , 'ATP-binding site' , 'B
-                # inds to ifenprodil site on N-terminal domain.' , 'Binds to ifenprodil site on N-terminal domain.' , 'S
-                # ee structure of the complex in PDBe under accession codes: 5TH6 (apo) 5TH9 (GS-5745 complex)' , 'Binds
-                #  free carboxy terminal amino acids 30-40 of the Abeta40 peptide (PMID:22197375).'
-                'direct_interaction': 'BOOLEAN',
-                # EXAMPLES:
-                # 'True' , 'True' , 'True' , 'True' , 'True' , 'True' , 'True' , 'True' , 'True' , 'True'
-                'disease_efficacy': 'BOOLEAN',
-                # EXAMPLES:
-                # 'True' , 'True' , 'True' , 'True' , 'True' , 'True' , 'True' , 'True' , 'True' , 'True'
-                'max_phase': 'NUMERIC',
-                # EXAMPLES:
-                # '2' , '4' , '3' , '4' , '2' , '4' , '2' , '4' , '2' , '4'
-                'mec_id': 'NUMERIC',
-                # EXAMPLES:
-                # '5132' , '611' , '5133' , '612' , '5134' , '613' , '5135' , '614' , '5136' , '615'
-                'mechanism_comment': 'TEXT',
-                # EXAMPLES:
-                # 'Partial agonist of the glycin-site on GRIN1-subunits, preferentially modulates NR2B-containing NMDAR 
-                # receptor complexes.' , 'NMDA glycin site partial-agonist, preferentially modulates NR2B-containing NMD
-                # AR receptor complexes' , 'PAM of the glycin-site on GRIN1-subunits, binds to other allosteric site?' ,
-                #  'Antagonist of the glycin-site on GRIN1-subunits.' , ' Compound is listed in AstaZeneca's clinical an
-                # d/or preclinical compound bank and available for research projects (http://openinnovation.astrazeneca.
-                # com/what-we-offer/compound/azd9056/).' , 'P2RX3 and P2RX2/3 trimers allosteric antagonist' , 'Developm
-                # ent discontinued due to QT prolongation.' , 'Alpha-7 nicotinic receptor: consists entirely of a7 subun
-                # its (pentamere) CNS-type.' , 'Alpha-7 nicotinic receptor: consists entirely of a7 subunits (pentamere)
-                #  CNS-type.' , 'Open channel stabilizer.'
-                'mechanism_of_action': 'TEXT',
-                # EXAMPLES:
-                # 'Glutamate [NMDA] receptor partial agonist' , 'Serotonin 2a (5-HT2a) receptor antagonist' , 'Glutamate
-                #  [NMDA] receptor partial agonist' , 'Serotonin 2a (5-HT2a) receptor antagonist' , 'Glutamate [NMDA] re
-                # ceptor positive allosteric modulator' , 'Serotonin 2a (5-HT2a) receptor antagonist' , 'Glutamate [NMDA
-                # ] receptor antagonist' , 'Serotonin 2c (5-HT2c) receptor antagonist' , 'P2X purinoceptor 7 antagonist'
-                #  , 'Serotonin 2c (5-HT2c) receptor agonist'
-                'mechanism_refs': 
+                'properties': 
                 {
-                    'properties': 
-                    {
-                        'ref_id': 'TEXT',
-                        # EXAMPLES:
-                        # 'NRX-1074' , '0443-059748 PP. 555' , '16051282' , 'setid=5c03ca62-5dd5-4cf5-abc7-b0c2873503dd#
-                        # nlm34090-1' , '23009122' , 'setid=5c03ca62-5dd5-4cf5-abc7-b0c2873503dd#nlm34090-1' , 'http://w
-                        # ww.vistagen.com/?page_id=11' , 'label/2012/022549s000lbl.pdf' , 'http://openinnovation.astraze
-                        # neca.com/what-we-offer/compound/azd9056/' , 'LORCASERIN'
-                        'ref_type': 'TEXT',
-                        # EXAMPLES:
-                        # 'Wikipedia' , 'ISBN' , 'PubMed' , 'DailyMed' , 'PubMed' , 'DailyMed' , 'Other' , 'FDA' , 'Othe
-                        # r' , 'Expert'
-                        'ref_url': 'TEXT',
-                        # EXAMPLES:
-                        # 'https://en.wikipedia.org/wiki/NRX-1074' , 'http://www.isbnsearch.org/isbn/0443059748' , 'http
-                        # ://europepmc.org/abstract/MED/16051282' , 'http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?set
-                        # id=5c03ca62-5dd5-4cf5-abc7-b0c2873503dd#nlm34090-1' , 'http://europepmc.org/abstract/MED/23009
-                        # 122' , 'http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=5c03ca62-5dd5-4cf5-abc7-b0c28735
-                        # 03dd#nlm34090-1' , 'http://www.vistagen.com/?page_id=11' , 'http://www.accessdata.fda.gov/drug
-                        # satfda_docs/label/2012/022549s000lbl.pdf' , 'http://openinnovation.astrazeneca.com/what-we-off
-                        # er/compound/azd9056/' , 'http://chembl.blogspot.co.uk/search?q=LORCASERIN'
-                    }
-                },
-                'molecular_mechanism': 'BOOLEAN',
-                # EXAMPLES:
-                # 'True' , 'True' , 'True' , 'True' , 'True' , 'True' , 'True' , 'True' , 'True' , 'True'
-                'molecule_chembl_id': 'TEXT',
-                # EXAMPLES:
-                # 'CHEMBL3989872' , 'CHEMBL1200948' , 'CHEMBL3544917' , 'CHEMBL1375743' , 'CHEMBL1255840' , 'CHEMBL39898
-                # 33' , 'CHEMBL3545351' , 'CHEMBL831' , 'CHEMBL3545108' , 'CHEMBL2095211'
-                'parent_molecule_chembl_id': 'TEXT',
-                # EXAMPLES:
-                # 'CHEMBL3989872' , 'CHEMBL644' , 'CHEMBL3544917' , 'CHEMBL708' , 'CHEMBL1255840' , 'CHEMBL708' , 'CHEMB
-                # L3545351' , 'CHEMBL831' , 'CHEMBL3545108' , 'CHEMBL360328'
-                'record_id': 'NUMERIC',
-                # EXAMPLES:
-                # '2473316' , '1343777' , '2472686' , '1343179' , '1705337' , '1344176' , '2473609' , '1703520' , '24730
-                # 41' , '1679367'
-                'selectivity_comment': 'TEXT',
-                # EXAMPLES:
-                # 'Partial agonist of the glycin-site on GRIN1-subunits, preferentially modulates NR2B-containing NMDAR'
-                #  , 'Selective for the NR2B subunit.' , 'Selectivity for the cytisine binding site on CHRNA4.' , 'Selec
-                # tivity for the cytisine binding site on CHRNA4.' , 'GRIN2B selective.' , 'Binds with higher affinity t
-                # o RARB+RARG' , 'M3 selective' , 'Selective' , 'Selective' , 'Non-selective but type 5 receptor is over
-                # expressed in Cushing's disease'
-                'site_id': 'NUMERIC',
-                # EXAMPLES:
-                # '2617' , '2617' , '2617' , '2638' , '2638' , '2646' , '2633' , '2631' , '2631' , '2632'
-                'target_chembl_id': 'TEXT',
-                # EXAMPLES:
-                # 'CHEMBL2094124' , 'CHEMBL224' , 'CHEMBL2094124' , 'CHEMBL224' , 'CHEMBL2094124' , 'CHEMBL224' , 'CHEMB
-                # L2094124' , 'CHEMBL225' , 'CHEMBL4805' , 'CHEMBL225'
-            }
+                    'all_molecule_chembl_ids': 'TEXT',
+                    # EXAMPLES:
+                    # 'CHEMBL1256' , 'CHEMBL2104095' , 'CHEMBL1190' , 'CHEMBL3833372' , 'CHEMBL362558' , 'CHEMBL1201509'
+                    #  , 'CHEMBL265502' , 'CHEMBL1201216' , 'CHEMBL3544949' , 'CHEMBL111'
+                    'parent_molecule_chembl_id': 'TEXT',
+                    # EXAMPLES:
+                    # 'CHEMBL1256' , 'CHEMBL2104095' , 'CHEMBL1190' , 'CHEMBL3833372' , 'CHEMBL362558' , 'CHEMBL1201509'
+                    #  , 'CHEMBL265502' , 'CHEMBL1201216' , 'CHEMBL3544949' , 'CHEMBL111'
+                    'should_appear_in_browser': 'BOOLEAN',
+                    # EXAMPLES:
+                    # 'True' , 'True' , 'False' , 'True' , 'True' , 'True' , 'False' , 'False' , 'True' , 'True'
+                }
+            },
+            'action_type': 'TEXT',
+            # EXAMPLES:
+            # 'POSITIVE ALLOSTERIC MODULATOR' , 'PARTIAL AGONIST' , 'INHIBITOR' , 'INHIBITOR' , 'AGONIST' , 'INHIBITOR' 
+            # , 'ANTAGONIST' , 'ANTAGONIST' , 'ANTAGONIST' , 'POSITIVE ALLOSTERIC MODULATOR'
+            'binding_site_comment': 'TEXT',
+            # EXAMPLES:
+            # 'Likely allosteric but unclear whether benzodiazepine or barbiturate site involved' , 'Alpha (p19) subunit
+            #  is binding site' , 'Binds to fibroblast growth factor 1 in a hydrophobic manner at L14, C16, L133, and L1
+            # 35 residues' , 'Binds with high affinity to TTR at its Thyroxine (T4)-binding sites' , 'Melagatran, the ac
+            # tive molecule, binds to the arginine side pocket of thrombin.' , 'Alpha subunit is likely binding site' , 
+            # 'Calcitonin receptor is binding site' , 'PDBe: 1ht8 (The 2.7 angstrom resolution model of ovine COX-1 comp
+            # lexed with alclofenac)' , 'Alpha subunit is likely binding site' , 'Binds Pro-Asp-Thr-Arg sequences of tan
+            # dem repeats in Mucin 1 N-terminal extracellular subunit'
+            'direct_interaction': 'BOOLEAN',
+            # EXAMPLES:
+            # 'True' , 'True' , 'True' , 'True' , 'True' , 'True' , 'True' , 'True' , 'True' , 'True'
+            'disease_efficacy': 'BOOLEAN',
+            # EXAMPLES:
+            # 'True' , 'True' , 'True' , 'True' , 'True' , 'True' , 'True' , 'True' , 'True' , 'True'
+            'max_phase': 'NUMERIC',
+            # EXAMPLES:
+            # '4' , '4' , '4' , '2' , '2' , '4' , '3' , '4' , '2' , '4'
+            'mec_id': 'NUMERIC',
+            # EXAMPLES:
+            # '1629' , '6673' , '1527' , '6385' , '4753' , '253' , '5890' , '239' , '5102' , '6296'
+            'mechanism_comment': 'TEXT',
+            # EXAMPLES:
+            # 'Choline salicylate is a non-steroidal anti-inflammatory drug.' , 'depolarizing' , 'Alcuronium binds to ca
+            # rdiac muscarinic receptors simultaneously with their specific antagonist [3H]methyl-N-scopolamine ([3H]NMS
+            # ) and allosterically increases their affinity to this ligand.' , 'Also thought to inhibit CDK1, CDK6 and C
+            # DK9 (http://www.bloodjournal.org/content/122/21/1636?sso-checked=true)' , 'Clotiapine affects multiple rec
+            # eptors. It blocks 5HT3-receptors and downregulates cortical 5HT2- receptors. It has high affinity for the 
+            # 5HT-6 and 5HT-7 receptors and acts as an antagonist of the D-4 receptors.' , 'Relebactam is used in combin
+            # ation with the beta-lactam antibacterial imipenem and protects imipenem from degradation by certain bacter
+            # ial beta-lactamases. Relebactam itself has no antibacterial activity.' , 'mAB' , 'Role in regulating gastr
+            # ic secretion, M1 likely involved' , 'Beclamide is a drug that possesses anticonvulsant activity.' , 'Alkyl
+            # ating agent'
+            'mechanism_of_action': 'TEXT',
+            # EXAMPLES:
+            # 'GABA-A receptor; anion channel positive allosteric modulator' , 'Unknown' , 'Muscle-type nicotinic acetyl
+            # choline receptor partial agonist' , 'Interleukin-23 inhibitor' , 'Glycogen synthase kinase-3 alpha inhibit
+            # or' , 'Luteinizing hormone/Choriogonadotropin receptor agonist' , 'Acidic fibroblast growth factor inhibit
+            # or' , 'Alpha-1a adrenergic receptor antagonist' , 'C-X-C chemokine receptor type 4 antagonist' , 'Cannabin
+            # oid CB1 receptor antagonist'
+            'mechanism_refs': 
+            {
+                'properties': 
+                {
+                    'ref_id': 'TEXT',
+                    # EXAMPLES:
+                    # '20083606' , '25057393' , '9780702034718 PP. 164' , '25205227' , '23305709' , 'setid=f93b2baa-03ac
+                    # -4650-b35a-20b818d712d6' , '8514' , '9401944' , 'http://mct.aacrjournals.org/content/6/11_Suppleme
+                    # nt/A153.short' , '16503766'
+                    'ref_type': 'TEXT',
+                    # EXAMPLES:
+                    # 'PubMed' , 'PubMed' , 'ISBN' , 'PubMed' , 'PubMed' , 'DailyMed' , 'PubChem' , 'PubMed' , 'Other' ,
+                    #  'PubMed'
+                    'ref_url': 'TEXT',
+                    # EXAMPLES:
+                    # 'http://europepmc.org/abstract/MED/20083606' , 'http://europepmc.org/abstract/MED/25057393' , 'htt
+                    # p://www.isbnsearch.org/isbn/9780702034718' , 'http://europepmc.org/abstract/MED/25205227' , 'http:
+                    # //europepmc.org/abstract/MED/23305709' , 'http://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=f9
+                    # 3b2baa-03ac-4650-b35a-20b818d712d6' , 'https://pubchem.ncbi.nlm.nih.gov/compound/8514' , 'http://e
+                    # uropepmc.org/abstract/MED/9401944' , 'http://mct.aacrjournals.org/content/6/11_Supplement/A153.sho
+                    # rt' , 'http://europepmc.org/abstract/MED/16503766'
+                }
+            },
+            'molecular_mechanism': 'BOOLEAN',
+            # EXAMPLES:
+            # 'True' , 'True' , 'True' , 'True' , 'True' , 'True' , 'True' , 'True' , 'True' , 'True'
+            'molecule_chembl_id': 'TEXT',
+            # EXAMPLES:
+            # 'CHEMBL1256' , 'CHEMBL2104095' , 'CHEMBL1134' , 'CHEMBL3833372' , 'CHEMBL362558' , 'CHEMBL1201509' , 'CHEM
+            # BL413376' , 'CHEMBL1201044' , 'CHEMBL3544949' , 'CHEMBL111'
+            'parent_molecule_chembl_id': 'TEXT',
+            # EXAMPLES:
+            # 'CHEMBL1256' , 'CHEMBL2104095' , 'CHEMBL1190' , 'CHEMBL3833372' , 'CHEMBL362558' , 'CHEMBL1201509' , 'CHEM
+            # BL265502' , 'CHEMBL1201216' , 'CHEMBL3544949' , 'CHEMBL111'
+            'record_id': 'NUMERIC',
+            # EXAMPLES:
+            # '1344953' , '1700302' , '1343488' , '1707161' , '2472886' , '1343544' , '1699551' , '1344726' , '2472748' 
+            # , '1699368'
+            'selectivity_comment': 'TEXT',
+            # EXAMPLES:
+            # 'Inhibition was reversible and competitive in nature with a KI of 0.7 mM' , 'Inhibits serine beta lactamas
+            # es (SHV, TEM, CTX-M type and Enterobacter cloacae P99, Pseudomonase derived cephalosporinase PDC and Klebs
+            # iella pneumoniae carbapenemase KPC). Not active against MBLs, some oxacillinases and certain GES allelles.
+            #  Can restore the activity of imipenem/cilastatin combinations against KPC-producing Enterobacteriaceae and
+            #  PDC-producing Pseudomonas aeruginosa.' , 'Specifically directed against the alphav subunit of human integ
+            # rins.' , 'High selectivity for CXCR2 over CXCR1' , 'Higher selectivity for JAK2 over family members JAK1, 
+            # JAK3 and TYK2.' , 'Antibody binding affinity: Kd~1 nmol/L' , 'Bilastine has high specificity for H1-recept
+            # ors while has negligible affinity for 30 other receptors (serotonin, bradykinin, leukotriene-D4, muscarini
+            # c M3-receptors, ¿1-adrenoceptors, ß2-adrenoceptors, and H2- and H3-histamine receptors).' , 'Isoxsuprine h
+            # as a higher affinity of ¿1-adrenoreceptors (Kd=59+-15nM, adrenoreceptors in rat vas deferens) than for ß2-
+            # adrenoceptors ( Kd=3900+-500nM adrenoreceptors in rat vas deferens).' , 'It binds to the alpha2/alpha3 sub
+            # types of the GABAA receptor' , 'Selective'
+            'site_id': 'NUMERIC',
+            # EXAMPLES:
+            # '9800' , '2651' , '2635' , '9803' , '2651' , '2617' , '2617' , '2617' , '2645' , '2644'
+            'target_chembl_id': 'TEXT',
+            # EXAMPLES:
+            # 'CHEMBL2093872' , 'CHEMBL2362997' , 'CHEMBL2364154' , 'CHEMBL2850' , 'CHEMBL1854' , 'CHEMBL2120' , 'CHEMBL
+            # 229' , 'CHEMBL2107' , 'CHEMBL218' , 'CHEMBL211'
         }
     }

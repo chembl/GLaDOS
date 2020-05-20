@@ -1,5 +1,5 @@
 import glados.es.ws2es.progress_bar_handler as progress_bar_handler
-import glados.es.ws2es.es_util as es_util
+from glados.es.ws2es.es_util import es_util, DefaultMappings
 import glados.es.ws2es.resources_description as resources_description
 import glados.es.ws2es.signal_handler as signal_handler
 import glados.es.ws2es.util as util
@@ -23,13 +23,13 @@ class DenormalizationHandler(object):
             {
                 "related_entities_ws_ids": {
                     "path_match": "_metadata.*.all_chembl_ids",
-                    "mapping": es_util.DefaultMappings.CHEMBL_ID_REF_AS_WS
+                    "mapping": DefaultMappings.CHEMBL_ID_REF_AS_WS
                 },
             },
             {
                 "related_entities_count": {
                     "path_match": "_metadata.*.count",
-                    "mapping": es_util.DefaultMappings.INTEGER
+                    "mapping": DefaultMappings.INTEGER
                 }
             }
         ]
@@ -76,7 +76,7 @@ class DenormalizationHandler(object):
         self.complete_data = complete_data
         self.complete_data_pb = None
 
-    def on_doc_for_scan(self, doc: dict, total_docs: int, index: int, first: bool, last: bool):
+    def on_doc_for_scan(self, doc: dict, doc_id: str, total_docs: int, index: int, first: bool, last: bool):
         if self.complete_data:
             self.do_complete_data(doc, total_docs, index, first, last)
         self.handle_doc(doc, total_docs, index, first, last)
