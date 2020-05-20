@@ -158,12 +158,36 @@ msgid "glados_es_gs__activity__assay_data___assay_organism__label__mini"
 msgstr "Assay Data Orgnsm."
 
 
+msgid "glados_es_gs__activity__assay_data___assay_parameters__label"
+msgstr "Assay Data Parameters"
+
+
+msgid "glados_es_gs__activity__assay_data___assay_parameters__label__mini"
+msgstr "As. Data Parm."
+
+
+msgid "glados_es_gs__activity__assay_data___assay_strain__label"
+msgstr "Assay Data Strain"
+
+
+msgid "glados_es_gs__activity__assay_data___assay_strain__label__mini"
+msgstr "Assay Data Strain"
+
+
 msgid "glados_es_gs__activity__assay_data___assay_subcellular_fraction__label"
 msgstr "Assay Data Subcellular Fraction"
 
 
 msgid "glados_es_gs__activity__assay_data___assay_subcellular_fraction__label__mini"
 msgstr "As. Data Subc. Frct."
+
+
+msgid "glados_es_gs__activity__assay_data___assay_tax_id__label"
+msgstr "Assay Data Tax ID"
+
+
+msgid "glados_es_gs__activity__assay_data___assay_tax_id__label__mini"
+msgstr "Assay Data Tax ID"
 
 
 msgid "glados_es_gs__activity__assay_data___assay_tissue__label"
@@ -174,12 +198,36 @@ msgid "glados_es_gs__activity__assay_data___assay_tissue__label__mini"
 msgstr "Assay Data Tissue"
 
 
+msgid "glados_es_gs__activity__assay_data___assay_type__label"
+msgstr "Assay Data Type"
+
+
+msgid "glados_es_gs__activity__assay_data___assay_type__label__mini"
+msgstr "Assay Data Type"
+
+
 msgid "glados_es_gs__activity__assay_data___cell_chembl_id__label"
 msgstr "Assay Data Cell ChEMBL ID"
 
 
 msgid "glados_es_gs__activity__assay_data___cell_chembl_id__label__mini"
 msgstr "As. Data Cell ChEMBL ID"
+
+
+msgid "glados_es_gs__activity__assay_data___src_desc__label"
+msgstr "Assay Data Src Desc"
+
+
+msgid "glados_es_gs__activity__assay_data___src_desc__label__mini"
+msgstr "Assay Data Src Desc"
+
+
+msgid "glados_es_gs__activity__assay_data___src_id__label"
+msgstr "Assay Data Src ID"
+
+
+msgid "glados_es_gs__activity__assay_data___src_id__label__mini"
+msgstr "Assay Data Src ID"
 
 
 msgid "glados_es_gs__activity__assay_data___tissue_chembl_id__label"
@@ -212,6 +260,110 @@ msgstr "Assay Description"
 
 msgid "glados_es_gs__activity__assay_description__label__mini"
 msgstr "Assay Descrp."
+
+
+msgid "glados_es_gs__activity__assay_parameters___active__label"
+msgstr "Assay Parameters Active"
+
+
+msgid "glados_es_gs__activity__assay_parameters___active__label__mini"
+msgstr "As. Parm. Actv."
+
+
+msgid "glados_es_gs__activity__assay_parameters___comments__label"
+msgstr "Assay Parameters Comments"
+
+
+msgid "glados_es_gs__activity__assay_parameters___comments__label__mini"
+msgstr "As. Parm. Comn."
+
+
+msgid "glados_es_gs__activity__assay_parameters___relation__label"
+msgstr "Assay Parameters Relation"
+
+
+msgid "glados_es_gs__activity__assay_parameters___relation__label__mini"
+msgstr "As. Parm. Relt."
+
+
+msgid "glados_es_gs__activity__assay_parameters___standard_relation__label"
+msgstr "Assay Parameters Standard Relation"
+
+
+msgid "glados_es_gs__activity__assay_parameters___standard_relation__label__mini"
+msgstr "As. Parm. Stnd. Relt."
+
+
+msgid "glados_es_gs__activity__assay_parameters___standard_text_value__label"
+msgstr "Assay Parameters Standard Text Value"
+
+
+msgid "glados_es_gs__activity__assay_parameters___standard_text_value__label__mini"
+msgstr "As. Parm. Stnd. Text Val."
+
+
+msgid "glados_es_gs__activity__assay_parameters___standard_type__label"
+msgstr "Assay Parameters Standard Type"
+
+
+msgid "glados_es_gs__activity__assay_parameters___standard_type__label__mini"
+msgstr "As. Parm. Stnd. Type"
+
+
+msgid "glados_es_gs__activity__assay_parameters___standard_type_fixed__label"
+msgstr "Assay Parameters Standard Type Fixed"
+
+
+msgid "glados_es_gs__activity__assay_parameters___standard_type_fixed__label__mini"
+msgstr "As. Parm. Stnd. Type Fixd."
+
+
+msgid "glados_es_gs__activity__assay_parameters___standard_units__label"
+msgstr "Assay Parameters Standard Units"
+
+
+msgid "glados_es_gs__activity__assay_parameters___standard_units__label__mini"
+msgstr "As. Parm. Stnd. Unts."
+
+
+msgid "glados_es_gs__activity__assay_parameters___standard_value__label"
+msgstr "Assay Parameters Standard Value"
+
+
+msgid "glados_es_gs__activity__assay_parameters___standard_value__label__mini"
+msgstr "As. Parm. Stnd. Val."
+
+
+msgid "glados_es_gs__activity__assay_parameters___text_value__label"
+msgstr "Assay Parameters Text Value"
+
+
+msgid "glados_es_gs__activity__assay_parameters___text_value__label__mini"
+msgstr "As. Parm. Text Val."
+
+
+msgid "glados_es_gs__activity__assay_parameters___type__label"
+msgstr "Assay Parameters Type"
+
+
+msgid "glados_es_gs__activity__assay_parameters___type__label__mini"
+msgstr "As. Parm. Type"
+
+
+msgid "glados_es_gs__activity__assay_parameters___units__label"
+msgstr "Assay Parameters Units"
+
+
+msgid "glados_es_gs__activity__assay_parameters___units__label__mini"
+msgstr "As. Parm. Unts."
+
+
+msgid "glados_es_gs__activity__assay_parameters___value__label"
+msgstr "Assay Parameters Value"
+
+
+msgid "glados_es_gs__activity__assay_parameters___value__label__mini"
+msgstr "As. Parm. Val."
 
 
 msgid "glados_es_gs__activity__assay_type__label"
@@ -276,6 +428,46 @@ msgstr "Document ChEMBL ID"
 
 msgid "glados_es_gs__activity__document_chembl_id__label__mini"
 msgstr "Docmnt. ChEMBL ID"
+
+
+msgid "glados_es_gs__activity__document_data___first_page__label"
+msgstr "Document Data First Page"
+
+
+msgid "glados_es_gs__activity__document_data___first_page__label__mini"
+msgstr "Docm. Data Firs. Page"
+
+
+msgid "glados_es_gs__activity__document_data___pubmed_id__label"
+msgstr "Document Data Pubmed ID"
+
+
+msgid "glados_es_gs__activity__document_data___pubmed_id__label__mini"
+msgstr "Docm. Data Pubm. ID"
+
+
+msgid "glados_es_gs__activity__document_data___volume__label"
+msgstr "Document Data Volume"
+
+
+msgid "glados_es_gs__activity__document_data___volume__label__mini"
+msgstr "Docmnt. Data Volume"
+
+
+msgid "glados_es_gs__activity__document_data___year__label"
+msgstr "Document Data Year"
+
+
+msgid "glados_es_gs__activity__document_data___year__label__mini"
+msgstr "Docmnt. Data Year"
+
+
+msgid "glados_es_gs__activity__document_data__label"
+msgstr "Document Data"
+
+
+msgid "glados_es_gs__activity__document_data__label__mini"
+msgstr "Document Data"
 
 
 msgid "glados_es_gs__activity__document_journal__label"
@@ -452,6 +644,14 @@ msgstr "Parent Molecule Data # Ro5 Violations"
 
 msgid "glados_es_gs__activity__parent_molecule_data___num_ro5_violations__label__mini"
 msgstr "Parn. Molc. Data # Ro5 Vilt."
+
+
+msgid "glados_es_gs__activity__parent_molecule_data___psa__label"
+msgstr "Parent Molecule Data Psa"
+
+
+msgid "glados_es_gs__activity__parent_molecule_data___psa__label__mini"
+msgstr "Parn. Molc. Data Psa"
 
 
 msgid "glados_es_gs__activity__parent_molecule_data__label"
@@ -2604,14 +2804,6 @@ msgstr "Drug Indication Refs"
 
 msgid "glados_es_gs__drug_indication_by_parent__drug_indication___indication_refs__label__mini"
 msgstr "Drug Indctn. Refs"
-
-
-msgid "glados_es_gs__drug_indication_by_parent__drug_indication___max_phase__label"
-msgstr "Drug Indication Max Phase"
-
-
-msgid "glados_es_gs__drug_indication_by_parent__drug_indication___max_phase__label__mini"
-msgstr "Drug Indc. Max Phs."
 
 
 msgid "glados_es_gs__drug_indication_by_parent__drug_indication___max_phase_for_ind__label"

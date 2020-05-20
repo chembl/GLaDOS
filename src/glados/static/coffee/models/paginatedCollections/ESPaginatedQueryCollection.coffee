@@ -173,7 +173,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         lastPageResultsIds = {}
       curPageResultsIds = {}
 
-      @resetMeta(data.hits.total, data.hits.max_score)
+      @resetMeta(data.hits.total.value, data.hits.max_score)
       @setMeta('data_loaded', true)
       jsonResultsList = []
 
@@ -359,6 +359,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         size: pageSize,
         from: ((page - 1) * pageSize)
         query: query
+        track_total_hits: true
       }
 
     getQueryForGeneratorList: ->
@@ -431,6 +432,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           bool:
             must: []
             filter: []
+        track_total_hits: true
       }
 
       if useCustomQuery and customQueryIsFullQuery
@@ -941,7 +943,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             contentType: 'application/json'
             mimeType: 'application/json'
           }).done((response) ->
-          thisCollection.setMeta('total_records', response.hits.total)
+          thisCollection.setMeta('total_records', response.hits.total.value)
           thisCollection.getAllResults($progressElement, askingForOnlySelected)
         )
         return [restartGetAllResults]
