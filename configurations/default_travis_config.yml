@@ -2,8 +2,15 @@ run_env: TRAVIS
 spawn_jobs: False # When False, it doesn't use the django rq system, it just executes the function right away.
 # ^ If not present, it is assumed to be True
 elasticsearch:
-  host: 'https://www.ebi.ac.uk/chembl/glados-es/__secret/'
-  public_host: 'https://www.ebi.ac.uk/chembl/glados-es'
+  monitoring:
+    host: 'https://wwwdev.ebi.ac.uk/chembl/elk/monitoring'
+    username: chembl-mon
+    password: <MONITORING_PASSWORD>
+  data:
+    host: 'https://wwwdev.ebi.ac.uk/chembl/elk/es'
+    username: chembl-indexer
+    password: <MONITORING_PASSWORD>
+  public_host: 'https://wwwdev.ebi.ac.uk/chembl/elk/es'
 chembl_api:
   ws_url: 'https://www.ebi.ac.uk/chembl/api/data'
   beaker_url: 'https://www.ebi.ac.uk/chembl/api/utils'
