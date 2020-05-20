@@ -13,5 +13,5 @@ describe 'Target Predictions', ->
     list.initURL(chemblID)
 
     urlGot = list.url
-    urlMustBe = "#{glados.Settings.GLADOS_API_BASE_URL}/target_prediction/predictions/#{chemblID}"
+    urlMustBe = "https://www.ebi.ac.uk/chembl/target-predictions"
     expect(urlGot).toBe(urlMustBe)
