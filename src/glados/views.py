@@ -303,27 +303,43 @@ def get_covid_entities_records(request):
 
     print('records are not in cache')
 
-    drugs_query = {
-
-        "term": {
-          "_metadata.drug.is_drug": True
+    covid_compounds_query = {
+        "query_string" : {
+            "query" : "_metadata.compound_records.src_id:52",
         }
+    }
 
+    covid_assays_query = {
+        "query_string": {
+            "query": "_metadata.source.src_id:52",
+        }
+    }
+
+    covid_documents_query = {
+        "query_string": {
+            "query": "_metadata.source.src_id:52",
+        }
+    }
+
+    covid_activities_query = {
+        "query_string": {
+            "query": "src_id:52",
+        }
     }
 
     response = {
         'Compounds':
             Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"molecule").extra(track_total_hits=True).using(DATA_CONNECTION)
-            .execute().hits.total.value,
+            .query(covid_compounds_query).execute().hits.total.value,
         'Assays': Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"assay").extra(track_total_hits=True)
             .using(DATA_CONNECTION)
-            .execute().hits.total.value,
+            .query(covid_assays_query).execute().hits.total.value,
         'Documents': Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"document").extra(track_total_hits=True)
             .using(DATA_CONNECTION)
-            .execute().hits.total.value,
+            .query(covid_documents_query).execute().hits.total.value,
         'Activities': Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"target").extra(track_total_hits=True)
             .using(DATA_CONNECTION)
-            .execute().hits.total.value,
+            .query(covid_activities_query).execute().hits.total.value,
     }
 
     cache.set(cache_key, response, cache_time)
