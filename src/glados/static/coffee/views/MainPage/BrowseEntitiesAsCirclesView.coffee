@@ -157,25 +157,25 @@ glados.useNameSpace 'glados.views.MainPage',
 
             ADD = PADDING/2 - 2
 
-            d3.select('.nod' + i).transition()
+            d3.select(thisView.$vis_elem[0]).select('.nod' + i).transition()
               .ease("cubic-out")
               .delay("10")
               .duration("200")
               .attr("r", d.r + ADD)
 
-            d3.select('.hover' + i).transition()
+            d3.select(thisView.$vis_elem[0]).select('.hover' + i).transition()
               .ease("cubic-out")
               .delay("10")
               .duration("200")
               .attr("r", d.r + ADD)
 
-            d3.select('.count' + i).transition()
+            d3.select(thisView.$vis_elem[0]).select('.count' + i).transition()
               .ease("cubic-out")
               .delay("10")
               .duration("200")
               .attr('font-size', (d.r + ADD)/ 2 )
 
-            d3.select('.lab' + i).transition()
+            d3.select(thisView.$vis_elem[0]).select('.lab' + i).transition()
               .ease("cubic-out")
               .delay("10")
               .duration("200")
@@ -185,25 +185,25 @@ glados.useNameSpace 'glados.views.MainPage',
 
           .on("mouseout", (d, i) ->
 
-            d3.select('.nod' + i).transition()
+            d3.select(thisView.$vis_elem[0]).select('.nod' + i).transition()
               .ease("quad")
               .delay("300")
               .duration("200")
               .attr("r", d.r )
 
-            d3.select('.hover' + i).transition()
+            d3.select(thisView.$vis_elem[0]).select('.hover' + i).transition()
               .ease("quad")
               .delay("300")
               .duration("200")
               .attr("r", d.r )
 
-            d3.select('.count' + i).transition()
+            d3.select(thisView.$vis_elem[0]).select('.count' + i).transition()
               .ease("quad")
               .delay("300")
               .duration("200")
               .attr('font-size', d.r/ 2 )
 
-            d3.select('.lab' + i).transition()
+            d3.select(thisView.$vis_elem[0]).select('.lab' + i).transition()
               .ease("quad")
               .delay("300")
               .duration("200")
@@ -212,19 +212,19 @@ glados.useNameSpace 'glados.views.MainPage',
           )
 
 #     make first node transparent
-      firstNode = d3.select('.nod0')
+      firstNode = d3.select(thisView.$vis_elem[0]).select('.nod0')
         .style('fill', 'none')
         .style('stroke', 'none')
 
-      firstcount = d3.select('.count0')
+      firstcount = d3.select(thisView.$vis_elem[0]).select('.count0')
         .style('fill', 'none')
         .style('stroke', 'none')
 
-      firstlabel = d3.select('.lab0')
+      firstlabel = d3.select(thisView.$vis_elem[0]).select('.lab0')
         .style('fill', 'none')
         .style('stroke', 'none')
 
-      firstHover = d3.select('.hover0')
+      firstHover = d3.select(thisView.$vis_elem[0]).select('.hover0')
         .style('fill', 'none')
         .style('stroke', 'none')
 
