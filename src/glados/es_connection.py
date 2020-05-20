@@ -17,7 +17,7 @@ BOOLEAN_TYPE = {'type': 'boolean'}
 INTEGER_TYPE = {'type': 'integer'}
 LONG_TYPE = {'type': 'long'}
 
-REQUIRED_INDEXES = [
+REQUIRED_INDEXES_MONITORING = [
     {
         'idx_name': 'chembl_glados_es_cache_usage',
         'shards': 7,
@@ -112,7 +112,10 @@ REQUIRED_INDEXES = [
                 'is_new': BOOLEAN_TYPE,
             }
         }
-    },
+    }
+]
+
+REQUIRED_INDEXES_DATA = [
     {
         'idx_name': 'chembl_glados_tiny_url',
         'shards': 7,
@@ -166,9 +169,9 @@ def setup_glados_es_connection(connection_type=DATA_CONNECTION):
                 raise Exception('PING to elasticsearch endpoint failed!')
             logger.info('ES-CONN:{0}: PING to {1} was successful!'.format(connection_type, es_host))
 
-            if connection_type == MONITORING_CONNECTION:
-                create_indexes()
-            elif connection_type == DATA_CONNECTION:
+            create_indexes(connection_type)
+
+            if connection_type == DATA_CONNECTION:
                 logger.info('ES-CONN:{0}: Initialising es-utils connection.'.format(connection_type))
                 es_util.es_conn = connections.get_connection(alias=DATA_CONNECTION)
 
@@ -183,8 +186,8 @@ def setup_glados_es_connection(connection_type=DATA_CONNECTION):
             logger.error('ES-CONN:{0}: Connection could not be created - Reason:'.format(connection_type) + str(e))
 
 
-def create_idx(idx_name, shards=5, replicas=1, mappings=None):
-    es_conn = connections.get_connection(alias=MONITORING_CONNECTION)
+def create_idx(idx_name, shards=5, replicas=1, mappings=None, connection_type=None):
+    es_conn = connections.get_connection(alias=connection_type)
     if es_conn.indices.exists(index=idx_name):
         logger.info('Elastic search index {0} already exists.'.format(idx_name))
         return
@@ -215,9 +218,11 @@ def create_idx(idx_name, shards=5, replicas=1, mappings=None):
                     )
 
 
-def create_indexes():
-    global REQUIRED_INDEXES
-    for index_desc in REQUIRED_INDEXES:
+def create_indexes(connection_type):
+    global REQUIRED_INDEXES_DATA, REQUIRED_INDEXES_MONITORING
+    required_indexes = REQUIRED_INDEXES_DATA if connection_type == DATA_CONNECTION else REQUIRED_INDEXES_MONITORING
+    for index_desc in required_indexes:
+        index_desc['connection_type'] = connection_type
         try:
             create_idx(**index_desc)
         except Exception as e:
