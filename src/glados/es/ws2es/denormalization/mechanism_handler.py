@@ -2,7 +2,7 @@ import glados.es.ws2es.progress_bar_handler as progress_bar_handler
 from glados.es.ws2es.denormalization import DenormalizationHandler
 from glados.es.ws2es.util import SummableDict
 from glados.es.ws2es.denormalization.compound_family_helper import CompoundFamiliesDir
-from glados.es.ws2es.es_util import DefaultMappings, create_idx, delete_idx
+from glados.es.ws2es.es_util import DefaultMappings, es_util
 
 from glados.es.ws2es.resources_description import MOLECULE, TARGET, BINDING_SITE, MECHANISM, MECHANISM_BY_PARENT_TARGET
 import sys
@@ -16,26 +16,22 @@ class MechanismDenormalizationHandler(DenormalizationHandler):
     @staticmethod
     def get_new_index_mappings():
         return {
-            '_doc':
+            'properties':
             {
-                'properties':
+                'parent_molecule':
                 {
-                    'parent_molecule':
-                    {
-                        'properties': MOLECULE.get_resource_mapping_from_es()
-                    },
-                    'target':
-                    {
-                        'properties': TARGET.get_resource_mapping_from_es()
-                    },
-                    'binding_site': {
-                        'properties': BINDING_SITE.get_resource_mapping_from_es()
-                    },
-                    'mechanism_of_action': {
-                        'properties': MECHANISM.get_resource_mapping_from_es()
-                    }
+                    'properties': MOLECULE.get_resource_mapping_from_es()
+                },
+                'target':
+                {
+                    'properties': TARGET.get_resource_mapping_from_es()
+                },
+                'binding_site': {
+                    'properties': BINDING_SITE.get_resource_mapping_from_es()
+                },
+                'mechanism_of_action': {
+                    'properties': MECHANISM.get_resource_mapping_from_es()
                 }
-
             }
         }
 
@@ -100,8 +96,8 @@ class MechanismDenormalizationHandler(DenormalizationHandler):
 
     def save_denormalization(self):
         if self.compound_families_dir:
-            delete_idx(self.generated_resource.idx_name)
-            create_idx(self.generated_resource.idx_name, 3, 1, analysis=DefaultMappings.COMMON_ANALYSIS,
+            es_util.delete_idx(self.generated_resource.idx_name)
+            es_util.create_idx(self.generated_resource.idx_name, 3, 1, analysis=DefaultMappings.COMMON_ANALYSIS,
                        mappings=MechanismDenormalizationHandler.get_new_index_mappings())
 
             dn_dict = {}
@@ -118,6 +114,7 @@ class MechanismDenormalizationHandler(DenormalizationHandler):
                 mechanism_comments_set = set()
                 selectivity_comments_set = set()
                 binding_site_comments_set = set()
+                max_phase = 0
                 for mechanism_i in group_mechanisms:
                     if action_type != mechanism_i.get('action_type', None):
                         print('ACTION TYPE SHOULD BE {0} FOR MECHANISM {1}!'.format(action_type, mechanism_i['mec_id'])
@@ -144,6 +141,8 @@ class MechanismDenormalizationHandler(DenormalizationHandler):
 
                     mechanism_refs += mechanism_i.get('mechanism_refs', [])
 
+                    max_phase = max(max_phase, mechanism_i.get('max_phase', 0))
+
                 parent_chembl_id, target_chembl_id, mechanism_of_action = \
                     self.get_mechanism_grouping_id_parts(base_mechanism)
 
@@ -156,6 +155,7 @@ class MechanismDenormalizationHandler(DenormalizationHandler):
                 new_mechanism_doc['mechanism_of_action']['mechanism_comment'] = list(mechanism_comments_set)
                 new_mechanism_doc['mechanism_of_action']['selectivity_comment'] = list(selectivity_comments_set)
                 new_mechanism_doc['mechanism_of_action']['binding_site_comment'] = list(binding_site_comments_set)
+                new_mechanism_doc['mechanism_of_action']['max_phase'] = max_phase
                 doc_id = self.generated_resource.get_doc_id(new_mechanism_doc)
 
                 if len(mechanism_comments_set) > 1:

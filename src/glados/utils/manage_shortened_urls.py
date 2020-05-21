@@ -3,6 +3,7 @@ from glados import es_connection
 from elasticsearch.helpers import scan, bulk
 from datetime import datetime, timezone
 import sys
+from glados.es_connection import MONITORING_CONNECTION
 
 ES_INDEX = 'chembl_glados_tiny_url'
 BULK_SIZE = 1000
@@ -15,22 +16,23 @@ def delete_expired_urls():
 
     print('I am going to delete the urls that expire before {}'.format(str(now)))
 
-    es_connection.setup_glados_es_connection()
-    es_conn = connections.get_connection()
+    es_connection.setup_glados_es_connection(MONITORING_CONNECTION)
+    es_conn = connections.get_connection(alias=MONITORING_CONNECTION)
 
     query = {
 
-        "query":{
+        "query": {
             "range": {
                 "expires": {
                     "lte": str(int(now.timestamp() * 1000))
                 }
 
             }
-        }
+        },
+        'track_total_hits': True
     }
 
-    total_items = es_conn.search(index=ES_INDEX, body=query)['hits']['total']
+    total_items = es_conn.search(index=ES_INDEX, body=query)['hits']['total']['value']
     if dry_run:
         print('I would have deleted {} saved urls (dry run).'.format(total_items))
     else:
@@ -40,7 +42,7 @@ def delete_expired_urls():
 
 def stream_items(es_conn, query):
 
-    for doc_i in scan(es_conn, query=query, index=ES_INDEX, doc_type='_doc', scroll='1m'):
+    for doc_i in scan(es_conn, query=query, index=ES_INDEX, scroll='1m'):
 
         del doc_i['_score']
         doc_i['_op_type'] = 'delete'

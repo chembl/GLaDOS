@@ -1120,8 +1120,6 @@
   "glados_es_gs__drug_indication_by_parent__drug_indication___efo__label__mini": "EFO",
   "glados_es_gs__drug_indication_by_parent__drug_indication___indication_refs__label": "Indication References",
   "glados_es_gs__drug_indication_by_parent__drug_indication___indication_refs__label__mini": "Indication Refs",
-  "glados_es_gs__drug_indication_by_parent__drug_indication___max_phase__label": "Drug Indication Max Phase",
-  "glados_es_gs__drug_indication_by_parent__drug_indication___max_phase__label__mini": "Drug Indc. Max Phs.",
   "glados_es_gs__drug_indication_by_parent__drug_indication___max_phase_for_ind__label": "Max Phase for Indication",
   "glados_es_gs__drug_indication_by_parent__drug_indication___max_phase_for_ind__label__mini": "Max Phase for Indication",
   "glados_es_gs__drug_indication_by_parent__drug_indication___mesh_heading__label": "MESH Heading",

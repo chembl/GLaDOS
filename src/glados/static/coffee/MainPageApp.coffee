@@ -52,6 +52,10 @@ class MainPageApp
     return new glados.views.MainPage.BrowseEntitiesAsCirclesView
       el: $('#BrowseEntitiesAsCircles')
 
+  @initBrowseCovidEntities = ->
+    return new glados.views.MainPage.BrowseCovidEntitiesAsCirclesView
+      el: $('#BrowseCovidEntitiesAsCircles')
+
   @initMaxPhaseForDisease = ->
     maxPhaseForDisease = MainPageApp.getMaxPhaseForDiseaseAgg()
     maxPhaseProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'MAX_PHASE', true)

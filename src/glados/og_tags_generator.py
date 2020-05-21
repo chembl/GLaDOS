@@ -1,5 +1,6 @@
 from elasticsearch_dsl import Search
 from django.conf import settings
+from glados.es_connection import DATA_CONNECTION, MONITORING_CONNECTION
 
 # This uses elasticsearch to generate og tags for the main entities in ChEMBL (Compounds, Targets, Assays, Documents,
 # Cell Lines, Tissues) and other pages. These tags are used to generate a preview when you share the page in social
@@ -29,12 +30,13 @@ def get_og_tags_for_compound(chembl_id):
             "query": chembl_id
         }
     }
-    s = Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"molecule").query(q)
+    s = Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"molecule")\
+        .extra(track_total_hits=True).using(DATA_CONNECTION).query(q)
     response = s.execute()
 
     title = 'Compound: '+ chembl_id
     description = 'Compound not found'
-    if response.hits.total == 1:
+    if response.hits.total.value == 1:
         description = ''
         description_items = []
         item = response.hits[0]
@@ -89,12 +91,13 @@ def get_og_tags_for_target(chembl_id):
         }
     }
 
-    s = Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"target").query(q)
+    s = Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"target")\
+        .extra(track_total_hits=True).using(DATA_CONNECTION).query(q)
     response = s.execute()
 
     title = 'Target: ' + chembl_id
     description = 'Target not found'
-    if response.hits.total == 1:
+    if response.hits.total.value == 1:
         description = ''
         description_items = []
         item = response.hits[0]
@@ -125,12 +128,13 @@ def get_og_tags_for_assay(chembl_id):
         }
     }
 
-    s = Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"assay").query(q)
+    s = Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"assay")\
+        .extra(track_total_hits=True).using(DATA_CONNECTION).query(q)
     response = s.execute()
 
     title = 'Assay: ' + chembl_id
     description = 'Assay not found'
-    if response.hits.total == 1:
+    if response.hits.total.value == 1:
         description = ''
         description_items = []
         item = response.hits[0]
@@ -159,12 +163,13 @@ def get_og_tags_for_cell_line(chembl_id):
         }
     }
 
-    s = Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"cell_line").query(q)
+    s = Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"cell_line")\
+        .extra(track_total_hits=True).using(DATA_CONNECTION).query(q)
     response = s.execute()
 
     title = 'Cell Line: ' + chembl_id
     description = 'Cell Line not found'
-    if response.hits.total == 1:
+    if response.hits.total.value == 1:
         description = ''
         description_items = []
         item = response.hits[0]
@@ -195,12 +200,13 @@ def get_og_tags_for_tissue(chembl_id):
         }
     }
 
-    s = Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"tissue").query(q)
+    s = Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"tissue")\
+        .extra(track_total_hits=True).using(DATA_CONNECTION).query(q)
     response = s.execute()
 
     title = 'Tissue: ' + chembl_id
     description = 'Tissue not found'
-    if response.hits.total == 1:
+    if response.hits.total.value == 1:
         description = ''
         description_items = []
         item = response.hits[0]
@@ -228,12 +234,13 @@ def get_og_tags_for_document(chembl_id):
         }
     }
 
-    s = Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"document").query(q)
+    s = Search(index=settings.CHEMBL_ES_INDEX_PREFIX+"document")\
+        .extra(track_total_hits=True).using(DATA_CONNECTION).query(q)
     response = s.execute()
 
     title = 'Document: ' + chembl_id
     description = 'Document not found'
-    if response.hits.total == 1:
+    if response.hits.total.value == 1:
         description = ''
         description_items = []
         item = response.hits[0]

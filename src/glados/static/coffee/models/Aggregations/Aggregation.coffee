@@ -178,7 +178,7 @@ glados.useNameSpace 'glados.models.Aggregations',
         if $progressElem?
           $progressElem.html ''
 
-        if data.hits.total == 0
+        if data.hits.total.value == 0
           thisModel.set
             'state': glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE
         else
@@ -232,7 +232,7 @@ glados.useNameSpace 'glados.models.Aggregations',
     #-------------------------------------------------------------------------------------------------------------------
     parseMinMax: (data) ->
 
-      if data.hits.total == 0
+      if data.hits.total.value == 0
         @set('state', glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE)
         return @get('aggs_config')
 
@@ -447,7 +447,7 @@ glados.useNameSpace 'glados.models.Aggregations',
         size: 0
         query: queryData
         aggs: aggsData
-
+        track_total_hits: true
       }
 
 
@@ -522,6 +522,7 @@ glados.useNameSpace 'glados.models.Aggregations',
         size: 0
         query: queryData
         aggs: aggsData
+        track_total_hits: true
       }
 
 

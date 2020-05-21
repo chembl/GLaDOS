@@ -16,6 +16,14 @@ class QueryBuilder:
         "*.alphanumeric_lowercase_keyword^1.3"
     ]
 
+    TEXT_PHRASE_PREFIX_BOOSTS = [
+        "*.std_analyzed^1.6",
+        "*.eng_analyzed^0.8",
+        "*.ws_analyzed^1.4",
+        "*.lower_case_keyword^1.5",
+        "*.alphanumeric_lowercase_keyword^1.3"
+    ]
+
     ID_FIELDS_BOOSTS = [
         "*.entity_id^2",
         "*.id_reference^1.5",
@@ -63,7 +71,7 @@ class QueryBuilder:
                 {
                     'multi_match': {
                         'type': 'phrase_prefix',
-                        'fields': QueryBuilder.TEXT_FIELDS_BOOSTS,
+                        'fields': QueryBuilder.TEXT_PHRASE_PREFIX_BOOSTS,
                         'query': query_string,
                         'minimum_should_match': '{0}%'.format(minimum_should_match)
                     }
@@ -244,9 +252,9 @@ class QueryBuilder:
             best_query_i_score = 0 + (len(indexes)-i)/(10**(len(es_base_queries)+1))
             j = 0
             while best_query_i is None and j < len(es_base_queries):
-                if results[i*len(es_base_queries) + j]['hits']['total'] > 0:
+                if results[i*len(es_base_queries) + j]['hits']['total']['value'] > 0:
                     best_query_i = es_base_queries[j]
-                    best_query_i_total = results[i * len(es_base_queries) + j]['hits']['total']
+                    best_query_i_total = results[i * len(es_base_queries) + j]['hits']['total']['value']
                     best_query_i_score += results[i * len(es_base_queries) + j]['hits']['max_score']/(10**j)
                     if es_index_i == settings.CHEMBL_ES_INDEX_PREFIX+'target':
                         best_query_i_score *= 100

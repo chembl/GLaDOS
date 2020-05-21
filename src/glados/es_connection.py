@@ -3,36 +3,37 @@ from django.conf import settings
 import logging
 import json
 import traceback
-import glados.es.ws2es.es_util as es_util
+from glados.es.ws2es.es_util import es_util
 from glados.settings import RunEnvs
 
 
 logger = logging.getLogger('glados.es_connection')
+
+MONITORING_CONNECTION = 'monitoring'
+DATA_CONNECTION = 'data'
 
 KEYWORD_TYPE = {'type': 'keyword', 'ignore_above': 500}
 BOOLEAN_TYPE = {'type': 'boolean'}
 INTEGER_TYPE = {'type': 'integer'}
 LONG_TYPE = {'type': 'long'}
 
-REQUIRED_INDEXES = [
+REQUIRED_INDEXES_MONITORING = [
     {
         'idx_name': 'chembl_glados_es_cache_usage',
         'shards': 7,
         'replicas': 1,
         'mappings': {
-            '_doc': {
-                'properties': {
-                    'es_index': KEYWORD_TYPE,
-                    'es_query': KEYWORD_TYPE,
-                    'es_aggs': KEYWORD_TYPE,
-                    'es_request_digest': KEYWORD_TYPE,
-                    'host': KEYWORD_TYPE,
-                    'run_env_type': KEYWORD_TYPE,
-                    'is_cached': BOOLEAN_TYPE,
-                    'request_date': {
-                        'type':   'date',
-                        'format': 'yyyy-MM-dd HH:mm:ss||epoch_millis'
-                    }
+            'properties': {
+                'es_index': KEYWORD_TYPE,
+                'es_query': KEYWORD_TYPE,
+                'es_aggs': KEYWORD_TYPE,
+                'es_request_digest': KEYWORD_TYPE,
+                'host': KEYWORD_TYPE,
+                'run_env_type': KEYWORD_TYPE,
+                'is_cached': BOOLEAN_TYPE,
+                'request_date': {
+                    'type':   'date',
+                    'format': 'yyyy-MM-dd HH:mm:ss||epoch_millis'
                 }
             }
         }
@@ -42,22 +43,20 @@ REQUIRED_INDEXES = [
         'shards': 7,
         'replicas': 1,
         'mappings': {
-            '_doc': {
-                'properties': {
-                    'download_id': KEYWORD_TYPE,
-                    'time_taken': INTEGER_TYPE,
-                    'is_new': BOOLEAN_TYPE,
-                    'file_size': LONG_TYPE,
-                    'es_index': KEYWORD_TYPE,
-                    'es_query': KEYWORD_TYPE,
-                    'run_env_type': KEYWORD_TYPE,
-                    'desired_format': KEYWORD_TYPE,
-                    'total_items': INTEGER_TYPE,
-                    'host': KEYWORD_TYPE,
-                    'request_date': {
-                        'type':   'date',
-                        'format': 'yyyy-MM-dd HH:mm:ss||epoch_millis'
-                    }
+            'properties': {
+                'download_id': KEYWORD_TYPE,
+                'time_taken': INTEGER_TYPE,
+                'is_new': BOOLEAN_TYPE,
+                'file_size': LONG_TYPE,
+                'es_index': KEYWORD_TYPE,
+                'es_query': KEYWORD_TYPE,
+                'run_env_type': KEYWORD_TYPE,
+                'desired_format': KEYWORD_TYPE,
+                'total_items': INTEGER_TYPE,
+                'host': KEYWORD_TYPE,
+                'request_date': {
+                    'type':   'date',
+                    'format': 'yyyy-MM-dd HH:mm:ss||epoch_millis'
                 }
             }
         }
@@ -67,15 +66,13 @@ REQUIRED_INDEXES = [
         'shards': 7,
         'replicas': 1,
         'mappings': {
-            '_doc': {
-                'properties': {
-                    'search_type': KEYWORD_TYPE,
-                    'run_env_type': KEYWORD_TYPE,
-                    'host': KEYWORD_TYPE,
-                    'request_date': {
-                        'type':   'date',
-                        'format': 'yyyy-MM-dd HH:mm:ss||epoch_millis'
-                    }
+            'properties': {
+                'search_type': KEYWORD_TYPE,
+                'run_env_type': KEYWORD_TYPE,
+                'host': KEYWORD_TYPE,
+                'request_date': {
+                    'type':   'date',
+                    'format': 'yyyy-MM-dd HH:mm:ss||epoch_millis'
                 }
             }
         }
@@ -85,15 +82,13 @@ REQUIRED_INDEXES = [
         'shards': 7,
         'replicas': 1,
         'mappings': {
-            '_doc': {
-                'properties': {
-                    'event': KEYWORD_TYPE,
-                    'run_env_type': KEYWORD_TYPE,
-                    'host': KEYWORD_TYPE,
-                    'request_date': {
-                        'type':   'date',
-                        'format': 'yyyy-MM-dd HH:mm:ss||epoch_millis'
-                    }
+            'properties': {
+                'event': KEYWORD_TYPE,
+                'run_env_type': KEYWORD_TYPE,
+                'host': KEYWORD_TYPE,
+                'request_date': {
+                    'type':   'date',
+                    'format': 'yyyy-MM-dd HH:mm:ss||epoch_millis'
                 }
             }
         }
@@ -103,87 +98,96 @@ REQUIRED_INDEXES = [
         'shards': 7,
         'replicas': 1,
         'mappings': {
-            '_doc': {
-                'properties': {
-                    'view_name': KEYWORD_TYPE,
-                    'view_type': KEYWORD_TYPE,
-                    'entity_name': KEYWORD_TYPE,
-                    'run_env_type': KEYWORD_TYPE,
-                    'host': KEYWORD_TYPE,
-                    'request_date': {
-                        'type':   'date',
-                        'format': 'yyyy-MM-dd HH:mm:ss||epoch_millis'
-                    },
-                    'time_taken': INTEGER_TYPE,
-                    'is_new': BOOLEAN_TYPE,
-                }
+            'properties': {
+                'view_name': KEYWORD_TYPE,
+                'view_type': KEYWORD_TYPE,
+                'entity_name': KEYWORD_TYPE,
+                'run_env_type': KEYWORD_TYPE,
+                'host': KEYWORD_TYPE,
+                'request_date': {
+                    'type':   'date',
+                    'format': 'yyyy-MM-dd HH:mm:ss||epoch_millis'
+                },
+                'time_taken': INTEGER_TYPE,
+                'is_new': BOOLEAN_TYPE,
             }
         }
-    },
+    }
+]
+
+REQUIRED_INDEXES_DATA = [
     {
         'idx_name': 'chembl_glados_tiny_url',
         'shards': 7,
         'replicas': 1,
         'mappings': {
-            '_doc': {
-                'properties': {
-                }
+            'properties': {
             }
         }
     }
 ]
 
 
-def setup_glados_es_connection():
-    print('SET UP ES CONNECTION')
-    if getattr(settings, 'ELASTICSEARCH_HOST', None) is None:
-        logger.warning('The elastic search connection has not been defined!')
-        logger.warning('Please use ELASTICSEARCH_HOST in the Django settings to define it.')
-        logger.warning('Elastic search functionalities will be disabled!')
+def setup_glados_es_connection(connection_type=DATA_CONNECTION):
+    try:
+        connections.get_connection(alias=connection_type)
+        logger.info('ES-CONN:{0}: Connection has already been created! Skipping for now . . .'.format(connection_type))
+        return
+    except KeyError as e:
+        logger.info('ES-CONN:{0}: Connection does not exist, will try to create it!'.format(connection_type))
+    es_host = None
+    es_username = None
+    es_password = None
+
+    if connection_type == DATA_CONNECTION:
+        es_host = getattr(settings, 'ELASTICSEARCH_DATA_HOST', None)
+        es_username = getattr(settings, 'ELASTICSEARCH_DATA_USERNAME', None)
+        es_password = getattr(settings, 'ELASTICSEARCH_DATA_PASSWORD', None)
+    elif connection_type == MONITORING_CONNECTION:
+        es_host = getattr(settings, 'ELASTICSEARCH_MONITORING_HOST', None)
+        es_username = getattr(settings, 'ELASTICSEARCH_MONITORING_USERNAME', None)
+        es_password = getattr(settings, 'ELASTICSEARCH_MONITORING_PASSWORD', None)
+
+    logger.info('ES-CONN:{0}: SETTING UP ES CONNECTION'.format(connection_type))
+    if es_host is None:
+        logger.warning('ES-CONN:{0}: The elastic search connection has not been defined!'.format(connection_type))
     else:
         try:
             keyword_args = {
-                "hosts": [settings.ELASTICSEARCH_HOST],
-                "timeout": 30,
-                "retry_on_timeout": True
+                'hosts': [es_host],
+                'timeout': 30,
+                'retry_on_timeout': True,
+                'alias': connection_type
             }
 
-            print('ELASTICSEARCH_HOST: ', settings.ELASTICSEARCH_HOST)
-            print('ELASTICSEARCH_USERNAME')
-            # for c in settings.ELASTICSEARCH_USERNAME:
-            #     print(c)
-            #
-            # print('ELASTICSEARCH_PASSWORD')
-            # for c in settings.ELASTICSEARCH_PASSWORD:
-            #     print(c)
-
-            if settings.ELASTICSEARCH_PASSWORD is not None:
-                keyword_args["http_auth"] = (settings.ELASTICSEARCH_USERNAME, settings.ELASTICSEARCH_PASSWORD)
+            if es_password is not None:
+                keyword_args["http_auth"] = (es_username, es_password)
 
             connections.create_connection(**keyword_args)
-            if not connections.get_connection().ping():
-                raise Exception('Connection to elasticsearch endpoint failed!')
-            logger.info('PING to {0} was successful!'.format(settings.ELASTICSEARCH_HOST))
-            create_indexes()
-            logger.info('Initialising utils connection')
 
-            if settings.RUN_ENV == RunEnvs.TRAVIS:
-                es_util.setup_connection_from_full_url(settings.ELASTICSEARCH_EXTERNAL_URL)
-            else:
-                es_util.setup_connection_from_full_url(settings.ELASTICSEARCH_HOST)
+            if not connections.get_connection(alias=connection_type).ping():
+                raise Exception('PING to elasticsearch endpoint failed!')
+            logger.info('ES-CONN:{0}: PING to {1} was successful!'.format(connection_type, es_host))
+
+            create_indexes(connection_type)
+
+            if connection_type == DATA_CONNECTION:
+                logger.info('ES-CONN:{0}: Initialising es-utils connection.'.format(connection_type))
+                es_util.es_conn = connections.get_connection(alias=DATA_CONNECTION)
+
+                # TODO: Check what to do with travis
+                # if settings.RUN_ENV == RunEnvs.TRAVIS:
+                #     es_util.setup_connection_from_full_url(settings.ELASTICSEARCH_EXTERNAL_URL)
+                # else:
+                #     es_util.setup_connection_from_full_url(settings.ELASTICSEARCH_HOST)
 
         except Exception as e:
-            print('CONNECTION NOT CREATED!')
             traceback.print_exc()
-            logger.warning('The elastic search connection has not been created!')
-            logger.warning('please use ELASTICSEARCH_HOST, ELASTICSEARCH_USERNAME and ELASTICSEARCH_PASSWORD'
-                           ' in the Django settings to define it.')
-            logger.warning('elastic search functionalities will be disabled!')
-            logger.error(e)
+            logger.error('ES-CONN:{0}: Connection could not be created - Reason:'.format(connection_type) + str(e))
 
 
-def create_idx(idx_name, shards=5, replicas=1, mappings=None):
-    es_conn = connections.get_connection()
+def create_idx(idx_name, shards=5, replicas=1, mappings=None, connection_type=None):
+    es_conn = connections.get_connection(alias=connection_type)
     if es_conn.indices.exists(index=idx_name):
         logger.info('Elastic search index {0} already exists.'.format(idx_name))
         return
@@ -214,9 +218,11 @@ def create_idx(idx_name, shards=5, replicas=1, mappings=None):
                     )
 
 
-def create_indexes():
-    global REQUIRED_INDEXES
-    for index_desc in REQUIRED_INDEXES:
+def create_indexes(connection_type):
+    global REQUIRED_INDEXES_DATA, REQUIRED_INDEXES_MONITORING
+    required_indexes = REQUIRED_INDEXES_DATA if connection_type == DATA_CONNECTION else REQUIRED_INDEXES_MONITORING
+    for index_desc in required_indexes:
+        index_desc['connection_type'] = connection_type
         try:
             create_idx(**index_desc)
         except Exception as e:

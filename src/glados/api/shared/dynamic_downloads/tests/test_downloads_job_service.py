@@ -4,9 +4,8 @@ import json
 import os
 from django.conf import settings
 from glados.api.shared.dynamic_downloads import download_job_service
-import glados.es.ws2es.es_util as es_util
-from glados.settings import RunEnvs
 from datetime import timezone
+from glados.es_connection import setup_glados_es_connection, DATA_CONNECTION, MONITORING_CONNECTION
 
 
 class DownloadJobsServiceTester(TestCase):
@@ -15,10 +14,8 @@ class DownloadJobsServiceTester(TestCase):
 
     def setUp(self):
         DownloadJob.objects.all().delete()
-        if settings.RUN_ENV == RunEnvs.TRAVIS:
-            es_util.setup_connection_from_full_url(settings.ELASTICSEARCH_EXTERNAL_URL)
-        else:
-            es_util.setup_connection_from_full_url(settings.ELASTICSEARCH_HOST)
+        setup_glados_es_connection(connection_type=DATA_CONNECTION)
+        setup_glados_es_connection(connection_type=MONITORING_CONNECTION)
 
     def tearDown(self):
         DownloadJob.objects.all().delete()

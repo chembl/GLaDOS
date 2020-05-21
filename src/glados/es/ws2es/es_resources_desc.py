@@ -23,7 +23,6 @@ import glados.es.ws2es.mappings.es_chembl_protein_class_mapping as es_chembl_pro
 import glados.es.ws2es.mappings.es_chembl_source_mapping as es_chembl_source_mapping
 import glados.es.ws2es.mappings.es_chembl_target_mapping as es_chembl_target_mapping
 import glados.es.ws2es.mappings.es_chembl_target_component_mapping as es_chembl_target_component_mapping
-import glados.es.ws2es.mappings.es_chembl_target_prediction_mapping as es_chembl_target_prediction_mapping
 import glados.es.ws2es.mappings.es_chembl_target_relation_mapping as es_chembl_target_relation_mapping
 import glados.es.ws2es.mappings.es_chembl_tissue_mapping as es_chembl_tissue_mapping
 
@@ -32,8 +31,7 @@ __author__ = 'jfmosquera@ebi.ac.uk'
 resources_2_es_mapping = \
     {
         'activity': es_chembl_activity_mapping,
-        'activity_supplementary_data_by_activity':
-            es_chembl_activity_supplementary_data_by_activity_mapping,
+        'activity_supplementary_data_by_activity': es_chembl_activity_supplementary_data_by_activity_mapping,
         'assay': es_chembl_assay_mapping,
         'assay_class': es_chembl_assay_class_mapping,
         'atc_class': es_chembl_atc_class_mapping,
@@ -56,7 +54,6 @@ resources_2_es_mapping = \
         'source': es_chembl_source_mapping,
         'target': es_chembl_target_mapping,
         'target_component': es_chembl_target_component_mapping,
-        'target_prediction': es_chembl_target_prediction_mapping,
         'target_relation': es_chembl_target_relation_mapping,
         'tissue': es_chembl_tissue_mapping,
     }

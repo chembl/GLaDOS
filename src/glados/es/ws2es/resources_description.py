@@ -4,7 +4,7 @@ import requests
 import sys
 import traceback
 import glados.es.ws2es.util as util
-import glados.es.ws2es.es_util as es_util
+from glados.es.ws2es.es_util import es_util, simplify_es_properties
 import re
 from functools import lru_cache
 
@@ -29,21 +29,20 @@ ALL_RESOURCES = []
 ALL_RESOURCES_NAMES = []
 ALL_WS_RESOURCES = []
 ALL_WS_RESOURCES_NAMES = []
-CURRENT_INDEX_VERSION = '26'
+CURRENT_INDEX_VERSION = '27'
 MAX_RES_NAME_LENGTH = 0
 
 
 @lru_cache(maxsize=64)
 def memoized_get_resource_mapping_from_es(idx_name):
     mapping = es_util.get_index_mapping(idx_name)
-    path_to_properties = '{0}.properties'.format('_doc')
-    return util.get_js_path_from_dict(mapping, path_to_properties)
+    return mapping['properties']
 
 
 @lru_cache(maxsize=64)
 def memoized_get_simplified_mapping_from_es(res_name, idx_name):
     mapping = memoized_get_resource_mapping_from_es(idx_name)
-    return es_util.simplify_es_properties(res_name, mapping)
+    return simplify_es_properties(res_name, mapping)
 
 
 class ResourceDescription(object):
@@ -86,16 +85,24 @@ class ResourceDescription(object):
         return '___'.join(ids_parts)
 
     # noinspection PyBroadException
-    def create_alias(self, es_host='localhost', es_port=9200):
+    def create_alias(self, es_host='localhost', es_port=9200, user=None, password=None):
         try:
-            req = requests.post('http://{0}:{1}/_aliases'.format(es_host, es_port), json={
-                "actions": [
-                    {"remove": {"index": "*", "alias": self.idx_alias}},
-                    {"add": {"index": self.idx_name, "alias": self.idx_alias}}
-                ]
-            })
+            auth_data = None
+            if user is not None and password is not None:
+                auth_data = (user, password)
+            req = requests.post(
+                'http://{0}:{1}/_aliases'.format(es_host, es_port),
+                json={
+                    "actions": [
+                        {"remove": {"index": "*", "alias": self.idx_alias}},
+                        {"add": {"index": self.idx_name, "alias": self.idx_alias}}
+                    ]
+                },
+                auth=auth_data
+            )
+            if req.status_code != 200:
+                raise Exception(req.content)
             print('INDEX ALIAS CREATED FOR {0}!'.format(self.idx_alias))
-            print(req.json())
         except Exception as e:
             traceback.print_exc(file=sys.stderr)
             print('ERROR: Failed to create alias for {0}'.format(self.idx_alias), file=sys.stderr)
@@ -107,12 +114,12 @@ class ResourceDescription(object):
         return memoized_get_simplified_mapping_from_es(self.res_name, self.idx_name)
 
     def get_doc_by_id_from_es(self, doc_id):
-        return es_util.get_doc_by_id(self.idx_name, '_doc', doc_id)
+        return es_util.get_doc_by_id(self.idx_name, doc_id)
 
     @staticmethod
-    def create_all_aliases(es_host='localhost', es_port=9200):
+    def create_all_aliases(es_host='localhost', es_port=9200, user=None, password=None):
         for res_i in ALL_RESOURCES:
-            res_i.create_alias(es_host, es_port)
+            res_i.create_alias(es_host, es_port, user, password)
 
 
 # Resources coming from the Web Services
@@ -139,7 +146,6 @@ PROTEIN_CLASS = ResourceDescription('protein_class', ['protein_class_id'])
 SOURCE = ResourceDescription('source', ['src_id'])
 TARGET = ResourceDescription('target', ['target_chembl_id'])
 TARGET_COMPONENT = ResourceDescription('target_component', ['component_id'])
-TARGET_PREDICTION = ResourceDescription('target_prediction', ['pred_id'])
 TARGET_RELATION = ResourceDescription('target_relation', ['target_chembl_id', 'related_target_chembl_id'])
 TISSUE = ResourceDescription('tissue', ['tissue_chembl_id'])
 METABOLISM = ResourceDescription('metabolism', ['met_id'])

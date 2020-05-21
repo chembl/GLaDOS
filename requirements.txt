@@ -12,8 +12,8 @@ whitenoise
 requests
 python-gettext
 gunicorn==19.8.1
-elasticsearch==6.3.1
-elasticsearch-dsl==6.3.1
+elasticsearch>=7.0.0,<8.0.0
+elasticsearch-dsl>=7.0.0,<8.0.0
 google-api-python-client==1.6.6
 pymongo==3.3.0
 timeago==1.0.8

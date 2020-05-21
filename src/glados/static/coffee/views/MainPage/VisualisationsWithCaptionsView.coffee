@@ -101,6 +101,14 @@ glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_HB_SOURCES =
 
 glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_CONFIG =
   0:
+    description: 'Shows a summary of SARS-CoV-2 related ChEMBL entities and quantities of data for each item.'
+    instructions: 'Click on a bubble to explore a specific ChEMBL entity in more detail.'
+    template_id: 'Handlebars-Visualisations-BrowseCovidEntitiesCircles'
+    init_function: MainPageApp.initBrowseCovidEntities
+    link_title: 'Browse all ChEMBL'
+    link_url_function: -> SearchModel.getSearchURL()
+    vis_title: 'Explore SARS-CoV-2 data'
+  1:
     description: 'Shows a summary of the ChEMBL entities and quantities of data for each of them.'
     instructions: 'Click on a bubble to explore a specific ChEMBL entity in more detail.'
     template_id: 'Handlebars-Visualisations-BrowseEntitiesCircles'
@@ -108,7 +116,7 @@ glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_CONFIG =
     link_title: 'Browse all ChEMBL'
     link_url_function: -> SearchModel.getSearchURL()
     vis_title: 'Explore ChEMBL'
-  1:
+  2:
     description: 'Representation of the ChEMBL target classification hierarchies.'
     instructions: 'Click on a section to expand it and then click on the browse button below to start exploring the target family in more detail. Use the buttons on the top to explore different hierarchies.'
     template_id: 'Handlebars-Visualisations-ZoomableSunburst-Container'
@@ -117,7 +125,7 @@ glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_CONFIG =
     link_url_function: -> Target.getTargetsListURL()
     vis_title: 'Targets in ChEMBL'
     uses_browse_button_dynamically: true
-  2:
+  3:
     description: 'Representation of the ChEMBL assay in vivo classification.'
     instructions: 'Click on a section to expand it and then click on the browse button below to start exploring the assay class in more detail.'
     template_id: 'Handlebars-Visualisations-Assay-ZoomableSunburst-Container'
@@ -126,7 +134,7 @@ glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_CONFIG =
     link_url_function: -> Assay.getAssaysListURL()
     vis_title: 'In vivo Assays in ChEMBL'
     uses_browse_button_dynamically: true
-  3:
+  4:
     description: 'Bar chart showing the distribution of types of drugs (small molecules, antibodies etc) and the year they were approved for use.'
     instructions: 'Click on a bar to explore the drugs\' details.'
     template_id: 'Handlebars-Visualisations-DrugFirstApprovalHistogram'
@@ -134,7 +142,7 @@ glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_CONFIG =
     link_title: 'Browse all Approved Drugs'
     link_url_function: -> Drug.getDrugsListURL('_exists_:first_approval')
     vis_title: 'Drugs by Molecule Type and First Approval'
-  4:
+  5:
     description: 'Representation of the taxonomy hierarchy used to classify the ChEMBL organisms.'
     instructions: 'Click on a bubble to focus on a taxonomy class and then click on the browse button to start exploring the taxonomy class in more detail.'
     template_id: 'Handlebars-Visualisations-BrowseTargetsAsCircles'
@@ -143,7 +151,7 @@ glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_CONFIG =
     link_url_function: -> Target.getTargetsListURL()
     vis_title: 'ChEMBL Taxonomy Tree'
     uses_browse_button_dynamically: true
-  5:
+  6:
     description: 'Bar chart showing the current maximum development phase for compounds and the year they were registered with a USAN (United States Adopted Name). Note: only shows compounds with a known USAN registration year.'
     instructions: 'Click on a bar to explore the drugs\' details.'
     template_id: 'Handlebars-Visualisations-DrugsPerUsanYear'
@@ -151,7 +159,7 @@ glados.views.MainPage.VisualisationsWithCaptionsView.VISUALISATIONS_CONFIG =
     link_title: 'Browse all USAN Drugs'
     link_url_function: -> Drug.getDrugsListURL('_metadata.compound_records.src_id:13')
     vis_title: 'Development Phase and USAN Registration'
-  6:
+  7:
     description: 'Distribution of drugs and clinical candidate development phases for the most frequent drug indications.  Note: less frequently occurring indications are not shown.'
     instructions: 'Click on a sector of the piechart to explore the compounds for that indication and development phase.'
     template_id: 'Handlebars-Visualisations-MaxPhaseForDiseaseDonut'

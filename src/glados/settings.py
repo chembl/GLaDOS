@@ -34,7 +34,8 @@ class RunEnvs(object):
 # ----------------------------------------------------------------------------------------------------------------------
 WS_URL = 'https://www.ebi.ac.uk/chembl/api/data'
 BEAKER_URL = 'https://www.ebi.ac.uk/chembl/api/utils'
-ELASTICSEARCH_HOST = '<INTERNAL_URL_CAN NOT BE PUBLISHED>'
+ELASTICSEARCH_MONITORING_HOST = '<INTERNAL_URL_CAN NOT BE PUBLISHED>'
+ELASTICSEARCH_DATA_HOST = '<INTERNAL_URL_CAN NOT BE PUBLISHED>'
 ELASTICSEARCH_EXTERNAL_URL = 'https://www.ebi.ac.uk/chembl/glados-es'
 CHEMBL_ES_INDEX_PREFIX = 'chembl_'
 
@@ -215,14 +216,27 @@ elasticsearch_config = run_config.get('elasticsearch')
 if elasticsearch_config is None:
     raise GladosSettingsError("You must provide the elasticsearch configuration")
 else:
-    ELASTICSEARCH_HOST = elasticsearch_config.get('host')
+    # data connection
+    data_host_config = elasticsearch_config.get('data')
+    ELASTICSEARCH_DATA_HOST = data_host_config.get('host')
+    ELASTICSEARCH_DATA_USERNAME = data_host_config.get('username')
+    ELASTICSEARCH_DATA_PASSWORD = data_host_config.get('password')
 
+    # monitoring connection
+    monitoring_host_config = elasticsearch_config.get('monitoring')
+    ELASTICSEARCH_MONITORING_HOST = monitoring_host_config.get('host')
+    ELASTICSEARCH_MONITORING_USERNAME = monitoring_host_config.get('username')
+    ELASTICSEARCH_MONITORING_PASSWORD = monitoring_host_config.get('password')
+
+    # TODO: HANDLE TRAVIS PWD
     if RUN_ENV == RunEnvs.TRAVIS:
         ELASTICSEARCH_USERNAME = 'glados'
         ELASTICSEARCH_PASSWORD = os.getenv('ELASTICSEARCH_PASSWORD')
     else:
         ELASTICSEARCH_USERNAME = elasticsearch_config.get('username')
         ELASTICSEARCH_PASSWORD = elasticsearch_config.get('password')
+
+    # Public URL
 
     ELASTICSEARCH_EXTERNAL_URL = elasticsearch_config.get('public_host')
     if ELASTICSEARCH_EXTERNAL_URL is None:

@@ -33,6 +33,9 @@ class DocumentSimilarityHandler(DenormalizationHandler):
     def handle_doc(self, es_doc: dict, total_docs: int, index: int, first: bool, last: bool):
         chembl_id_1 = es_doc['document_1_chembl_id']
         chembl_id_2 = es_doc['document_2_chembl_id']
+        if chembl_id_1 is None or chembl_id_2 is None:
+            print('WARNING FOUND MISSING CHEMBL ID FOR:', chembl_id_1, chembl_id_2, file=sys.stderr)
+            return
         if chembl_id_1 == chembl_id_2:
             print('WARNING FOUND DUPLICATE CHEMBL ID FOR:', chembl_id_1, chembl_id_2, file=sys.stderr)
         self.save_similarity_data(chembl_id_1, chembl_id_2, es_doc['mol_tani'], es_doc['tid_tani'])

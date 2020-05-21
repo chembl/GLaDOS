@@ -3,10 +3,9 @@ import json
 from django.test import RequestFactory, TestCase, override_settings
 from django.conf import settings
 from django.urls import reverse
-from glados.settings import RunEnvs
 from glados.api.shared.properties_configuration import properties_configuration_controller
 from glados.es.es_properties_configuration import configuration_manager
-import glados.es.ws2es.es_util as es_util
+from glados.es_connection import setup_glados_es_connection, DATA_CONNECTION, MONITORING_CONNECTION
 
 
 class PropertiesConfigurationControllerTester(TestCase):
@@ -20,10 +19,8 @@ class PropertiesConfigurationControllerTester(TestCase):
 
     def setUp(self):
         self.request_factory = RequestFactory()
-        if settings.RUN_ENV == RunEnvs.TRAVIS:
-            es_util.setup_connection_from_full_url(settings.ELASTICSEARCH_EXTERNAL_URL)
-        else:
-            es_util.setup_connection_from_full_url(settings.ELASTICSEARCH_HOST)
+        setup_glados_es_connection(connection_type=DATA_CONNECTION)
+        setup_glados_es_connection(connection_type=MONITORING_CONNECTION)
 
     @override_settings(PROPERTIES_GROUPS_FILE=GROUPS_TEST_FILE,
                        PROPERTIES_CONFIG_OVERRIDE_FILE=CONFIG_TEST_FILE,

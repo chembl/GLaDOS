@@ -13,7 +13,7 @@ class ATCClassDenormalizationHandler(DenormalizationHandler):
             {
                 'properties':
                 {
-                    'atc_classifications': mappings['_doc']
+                    'atc_classifications': mappings
                 }
 
             }

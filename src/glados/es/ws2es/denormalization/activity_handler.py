@@ -5,6 +5,7 @@ from glados.es.ws2es.util import SummableDict
 from glados.es.ws2es.denormalization.assay_handler import AssayDenormalizationHandler
 from glados.es.ws2es.denormalization.compound_handler import CompoundDenormalizationHandler
 from glados.es.ws2es.denormalization.compound_record_handler import CompoundRecordDenormalizationHandler
+from glados.es.ws2es.denormalization.document_handler import DocumentDenormalizationHandler
 from glados.es.ws2es.denormalization.organism_handler import OrganismDenormalizationHandler
 from glados.es.ws2es.denormalization.source_handler import SourceDenormalizationHandler
 from glados.es.ws2es.denormalization.target_component_handler import TargetComponentDenormalizationHandler
@@ -21,7 +22,8 @@ class ActivityDenormalizationHandler(DenormalizationHandler):
                  compound_dh: CompoundDenormalizationHandler=None, organism_dh: OrganismDenormalizationHandler=None,
                  source_dh: SourceDenormalizationHandler=None, target_dh: TargetDenormalizationHandler=None,
                  target_component_dh: TargetComponentDenormalizationHandler=None,
-                 compound_record_dh: CompoundRecordDenormalizationHandler=None):
+                 compound_record_dh: CompoundRecordDenormalizationHandler=None,
+                 document_dh: DocumentDenormalizationHandler=None):
         super().__init__(complete_from_activity or
                          assay_dh is not None or
                          compound_dh is not None or
@@ -29,7 +31,8 @@ class ActivityDenormalizationHandler(DenormalizationHandler):
                          source_dh is not None or
                          target_dh is not None or
                          target_component_dh is not None or
-                         compound_record_dh is not None)
+                         compound_record_dh is not None or
+                         document_dh is not None)
         self.assay_dh = assay_dh
         self.compound_dh = compound_dh
         self.organism_dh = organism_dh
@@ -37,6 +40,7 @@ class ActivityDenormalizationHandler(DenormalizationHandler):
         self.target_dh = target_dh
         self.target_component_dh = target_component_dh
         self.compound_record_dh = compound_record_dh
+        self.document_dh = document_dh
 
         self.assay_dict = {}
         self.compound_dict = {}
@@ -103,6 +107,7 @@ class ActivityDenormalizationHandler(DenormalizationHandler):
         mappings += CompoundRecordDenormalizationHandler.ACTIVITY_DATA_MAPPING
         mappings += TargetDenormalizationHandler.ACTIVITY_DATA_MAPPING
         mappings += ProteinClassDenormalizationHandler.METADATA_MAPPING
+        mappings += DocumentDenormalizationHandler.FIELDS_FOR_ACTIVITY_MAPPING
         mappings += {
             'properties':
             {
@@ -174,6 +179,12 @@ class ActivityDenormalizationHandler(DenormalizationHandler):
             target_data = self.target_dh.target_2_target_type.get(doc['target_chembl_id'], None)
         if target_data:
             update_doc_md['target_data'] = target_data
+
+        document_data = None
+        if self.document_dh and doc.get('document_chembl_id', None) in self.document_dh.docs_for_activity_by_chembl_id:
+            document_data = self.document_dh.docs_for_activity_by_chembl_id[doc['document_chembl_id']]
+        if document_data is not None:
+            update_doc_md['document_data'] = document_data
 
         return {
             '_metadata': update_doc_md

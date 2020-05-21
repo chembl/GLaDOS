@@ -5,6 +5,15 @@ import glados.es.ws2es.mappings.es_chembl_molecule_n_drug_shared_mapping as mole
 from glados.es.ws2es.progress_bar_handler import get_new_progressbar
 
 
+def get_inchi_connectivity_layer(inchi_key_str):
+    if isinstance(inchi_key_str, str) and len(inchi_key_str.strip()) > 0:
+        if inchi_key_str.find('-') == -1:
+            print('WARNING: {0} is not a valid inchi key.'.format(inchi_key_str), file=sys.stderr)
+            return None
+        return inchi_key_str.split('-')[0]
+    return None
+
+
 class CompoundFamilyNode:
 
     DRUG_SOURCES = {9, 12, 36, 41, 42}
@@ -31,10 +40,22 @@ class CompoundFamilyNode:
             'src_short_name': DefaultMappings.KEYWORD
         }
         put_js_path_in_dict(
+            mappings_dict, '._metadata.hierarchy.family_inchi_connectivity_layer',
+            DefaultMappings.KEYWORD, es_properties_style=True
+        )
+        put_js_path_in_dict(
             mappings_dict, '._metadata.hierarchy.is_approved_drug', DefaultMappings.BOOLEAN, es_properties_style=True
         )
         put_js_path_in_dict(
             mappings_dict, '._metadata.hierarchy.is_usan', DefaultMappings.BOOLEAN, es_properties_style=True
+        )
+        put_js_path_in_dict(
+            mappings_dict, '._metadata.hierarchy.all_family.inchi', DefaultMappings.KEYWORD,
+            es_properties_style=True
+        )
+        put_js_path_in_dict(
+            mappings_dict, '._metadata.hierarchy.all_family.inchi_connectivity_layer', DefaultMappings.KEYWORD,
+            es_properties_style=True
         )
         put_js_path_in_dict(
             mappings_dict, '._metadata.hierarchy.all_family.inchi_key', DefaultMappings.KEYWORD,
@@ -107,10 +128,11 @@ class CompoundFamilyNode:
         is_usan_src = self.compound_data['is_usan_src']
         is_db_drug = self.compound_data['is_db_drug']
         max_phase = self.compound_data['max_phase']
-        target_predictions = self.compound_data['target_predictions']
 
         shared_family_data = [{
             'chembl_id': self.chembl_id,
+            'inchi': self.compound_data['inchi'],
+            'inchi_connectivity_layer': get_inchi_connectivity_layer(self.compound_data['inchi_key']),
             'inchi_key': self.compound_data['inchi_key']
         }]
 
@@ -121,15 +143,13 @@ class CompoundFamilyNode:
             is_drug_src |= node.compound_data['is_drug_src']
             is_usan_src |= node.compound_data['is_usan_src']
             max_phase = max(max_phase, node.compound_data['max_phase'])
-            target_predictions_i = node.compound_data['target_predictions'] + target_predictions
             dn_data_i, sf_data_i, nd_i = node.get_denormalization_dict()
             children_data.append(nd_i)
             put_js_path_in_dict(dn_data_i, node.chembl_id+'._metadata.hierarchy.parent', node_data)
-            put_js_path_in_dict(dn_data_i, node.chembl_id+'._metadata.target_predictions', target_predictions_i)
             dn_dict += dn_data_i
             shared_family_data += sf_data_i
         # Warning checks!
-        if is_db_drug != ((is_usan_src or is_drug_src) and self.is_family_parent()):
+        if is_db_drug and is_db_drug != ((is_usan_src or is_drug_src) and self.is_family_parent()):
             print(
                 'WARNING! {0} has db_drug {1} and sources_drug {2}'.format(
                     self.chembl_id, is_db_drug, (is_usan_src or is_drug_src)
@@ -152,8 +172,11 @@ class CompoundFamilyNode:
 
         # If root collect the shared family data
         if self.is_family_parent():
+            family_inchi_connectivity_layer = get_inchi_connectivity_layer(self.compound_data['inchi_key'])
             for dn_data in dn_dict.values():
                 put_js_path_in_dict(dn_data, '_metadata.hierarchy.all_family', shared_family_data)
+                put_js_path_in_dict(dn_data, '_metadata.hierarchy.family_inchi_connectivity_layer',
+                                    family_inchi_connectivity_layer)
         return dn_dict, shared_family_data, node_data
 
     def collect_str_sub_tree(self, cur_depth=0):
@@ -191,10 +214,10 @@ class CompoundFamilyNode:
             'is_usan_src': is_usan_src,
             'is_db_drug': is_db_drug,
             'src_data': src_data,
+            'inchi': get_js_path_from_dict(doc, 'molecule_structures.standard_inchi'),
             'inchi_key': get_js_path_from_dict(doc, 'molecule_structures.standard_inchi_key'),
             'synonyms': get_js_path_from_dict(doc, 'molecule_synonyms'),
-            'target_predictions': get_js_path_from_dict(doc, '_metadata.target_predictions', default=[]),
-            'max_phase': max_phase
+            'max_phase': max_phase,
         }
 
     def get_family_parent_id(self):

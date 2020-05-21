@@ -78,10 +78,16 @@ class ResourceIterator(Thread):
                     return int(lines[1])
         except:
             pass
-        res_url = self._build_url()
-        req = requests.get(res_url)
-        response = req.json()
-        res_count = response['page_meta']['total_count']
+        res_url = '<URL>'
+        res_count = 0
+        try:
+            res_url = self._build_url()
+            req = requests.get(res_url)
+            response = req.json()
+            res_count = response['page_meta']['total_count']
+        except:
+            print('ERROR: Could not get resource count for resource="{0}" from: {1}\n'
+                  .format(self.resource.res_name, res_url), file=sys.stderr)
         with open(self.count_file, 'w') as pf:
             pf.write('OK\n')
             pf.write('{0}\n'.format(res_count))

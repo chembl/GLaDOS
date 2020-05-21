@@ -1,4 +1,4 @@
-import glados.es.ws2es.es_util as es_util
+from glados.es.ws2es.es_util import es_util
 import sys
 import logging
 import time
@@ -37,7 +37,7 @@ def create_test_doc(str_field):
     new_doc = {
         test_str_std_name: str_field
     }
-    es_util.index_doc(test_idx_name, test_doc_name, doc_id_seq, new_doc)
+    es_util.index_doc(test_idx_name, doc_id_seq, new_doc)
     doc_id_seq += 1
 
 
@@ -107,7 +107,7 @@ def run_analysers():
         create_test_doc('6-Octylsalicylic Acid')
         create_test_doc('ACETYLSALICYLIC-LYSINE')
         time.sleep(3)
-        run_coffee_query("./es_query_test.coffee", test_idx_name, test_doc_name,
+        run_coffee_query("./es_query_test.coffee", test_idx_name,
                          replacements_dict={
                              "<SEARCH_STRING>": "Acetylsalicylic Acid"
                          },
@@ -124,7 +124,7 @@ def run_analysers():
 
 def run_coffee_queries():
     # run_analysers()
-    run_coffee_query("./es_query_test.coffee", "chembl_molecule", "molecule",
+    run_coffee_query("./es_query_test.coffee", "chembl_molecule",
                      replacements_dict={
                          "<SEARCH_STRING>": "Acetyl salicylic Acid"
                      },
@@ -133,7 +133,7 @@ def run_coffee_queries():
                          "molecule_synonyms"
                      ]
                      )
-    run_coffee_query("./es_query_test.coffee", "chembl_molecule", "molecule",
+    run_coffee_query("./es_query_test.coffee", "chembl_molecule",
                      replacements_dict={
                          "<SEARCH_STRING>": "viagra"
                      },
@@ -142,7 +142,7 @@ def run_coffee_queries():
                          "molecule_synonyms"
                      ]
                      )
-    # run_coffee_query("./es_query_string_test.coffee", "chembl_molecule", "molecule",
+    # run_coffee_query("./es_query_string_test.coffee", "chembl_molecule",
     #                  show_only=[
     #                      "pref_name",
     #                      "molecule_synonyms",
@@ -157,6 +157,7 @@ def main():
         logging.error("ERROR: Can not establish connection with the elastic search server.")
         sys.exit(1)
     run_coffee_queries()
+
 
 ########################################################################################################################
 

@@ -1,11 +1,9 @@
 import sys
-import glados.es.ws2es.es_util as es_util
+from glados.es.ws2es.es_util import es_util, num_shards_by_num_rows
 import glados.es.ws2es.es_resources_desc as es_resources_desc
 import glados.es.ws2es.migration_logging as migration_logging
 import glados.es.ws2es.es_mappings_skeleton_generator as es_mappings_skeleton_generator
 import glados.es.ws2es.resources_description as resources_description
-import subprocess
-import importlib
 from glados.es.ws2es.resources_metadata import resources_metadata
 import copy
 
@@ -23,10 +21,9 @@ MIG_LOG = migration_logging.get_logger()
 # ----------------------------------------------------------------------------------------------------------------------
 
 MIG_TRIED_COUNT = {res_i: 0 for res_i in resources_description.ALL_WS_RESOURCES_NAMES}
-MIG_SUCCESS_COUNT = {res_i: 0 for res_i in resources_description.ALL_WS_RESOURCES_NAMES}
 MIG_TOTAL = {res_i: 0 for res_i in resources_description.ALL_WS_RESOURCES_NAMES}
 
-UPDATE_AUTOCOMPLETE_ONLY = False
+DELETE_AND_CREATE_INDEXES = False
 
 
 def get_index_name(res_name):
@@ -40,12 +37,18 @@ def get_alias_name(res_name):
 def create_res_idx(res_name, num_docs):
     global MIG_TOTAL
     MIG_TOTAL[res_name] = num_docs
-    if UPDATE_AUTOCOMPLETE_ONLY:
-        return
+
     idx_desc = es_resources_desc.resources_2_es_mapping.get(res_name, None)
     idx_name = get_index_name(res_name)
-    n_shards = getattr(idx_desc, 'shards', es_util.num_shards_by_num_rows(num_docs))
-    n_replicas = getattr(idx_desc, 'replicas', 1)
+
+    idx_exists = es_util.get_idx_count(idx_name) > 0
+
+    if idx_exists and not DELETE_AND_CREATE_INDEXES:
+        MIG_LOG.info('INDEX {0} EXISTS. SKIPPING DELETION.'.format(idx_name))
+        return
+
+    n_shards = getattr(idx_desc, 'shards', num_shards_by_num_rows(num_docs))
+    n_replicas = getattr(idx_desc, 'replicas', 0)
     res_analysis = getattr(idx_desc, 'analysis', None)
     res_mappings = getattr(idx_desc, 'mappings', None)
     es_util.create_idx(
@@ -125,7 +128,7 @@ def fill_autocomplete(res_name, res_doc):
 
 
 def write_res_doc2es_first_id(res_name, res_id_fields, res_doc):
-    global MIG_TRIED_COUNT, MIG_SUCCESS_COUNT
+    global MIG_TRIED_COUNT
 
     if res_name in resources_metadata:
         res_doc['_metadata'] = copy.deepcopy(resources_metadata[res_name])
@@ -137,15 +140,10 @@ def write_res_doc2es_first_id(res_name, res_id_fields, res_doc):
 
     doc_id = resources_description.RESOURCES_BY_RES_NAME[res_name].get_doc_id(res_doc)
 
-    if UPDATE_AUTOCOMPLETE_ONLY and '_metadata' in res_doc and 'es_completion' in res_doc['_metadata']\
-            and res_doc['_metadata']['es_completion']:
-        es_util.update_doc_bulk(idx_name, doc_id, doc={
-            '_metadata': {
-                'es_completion': res_doc['_metadata']['es_completion']
-            }
-        })
+    if DELETE_AND_CREATE_INDEXES:
+        es_util.index_doc_bulk(idx_name, doc_id, res_doc)
     else:
-        es_util.index_doc_bulk(idx_name, doc_id, res_doc, logger=MIG_LOG)
+        es_util.update_doc_bulk(idx_name, doc_id, doc=res_doc, upsert=True)
 
 
 def generate_mapping_skeleton_file(res_name):
@@ -162,7 +160,7 @@ def generate_mappings_for_resources(resources=None):
             continue
         index_alias = get_alias_name(res_i)
         index_name = get_index_name(res_i)
-        module_name = es_mappings_skeleton_generator.MODULE_PATTERN.format(index_alias)
+        module_name = es_mappings_skeleton_generator.MODULE_PATTERN.format(index_alias).replace('.py', '')
         es_mappings_skeleton_generator.generate_mapping_skeleton(index_name)
         imports += 'import glados.es.ws2es.mappings.{0} as {0}\n'.format(module_name)
         descriptions += '        \'{0}\': {1},\n'.format(res_i, module_name)

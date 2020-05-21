@@ -2,6 +2,7 @@ from glados.usage_statistics import glados_server_statistics
 import json
 from elasticsearch_dsl import MultiSearch, Search
 from django.conf import settings
+from glados.es_connection import DATA_CONNECTION, MONITORING_CONNECTION
 
 
 def get_nodes_index(parsed_tree_root, path=[]):
@@ -201,7 +202,7 @@ class TargetHierarchyTreeGenerator:
 
     def execute_count_queries(self):
 
-        ms = MultiSearch(index=self.count_index)
+        ms = MultiSearch(index=self.count_index).extra(track_total_hits=True).using(DATA_CONNECTION)
 
         target_classes = list(self.count_queries.keys())  # be sure to be consistent with the order
 
@@ -214,14 +215,14 @@ class TargetHierarchyTreeGenerator:
                 }
             }
 
-            ms = ms.add(Search().query(query))
+            ms = ms.add(Search().extra(track_total_hits=True).using(DATA_CONNECTION).query(query))
 
         responses = ms.execute()
 
         i = 0
         for response in responses:
             class_name = target_classes[i]
-            self.count_queries[class_name]['count'] = response.hits.total
+            self.count_queries[class_name]['count'] = response.hits.total.value
             i = i + 1
 
     def add_counts_to_tree(self):

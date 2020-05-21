@@ -1,7 +1,9 @@
 import argparse
-import glados.es.ws2es.es_util as es_util
+import sys
+import time
+from datetime import datetime, timedelta
+from glados.es.ws2es.es_util import es_util
 import glados.es.ws2es.signal_handler as signal_handler
-import glados.es.ws2es.denormalization.mol_file_helper as mol_file_helper
 from glados.es.ws2es.denormalization.activity_handler import ActivityDenormalizationHandler
 from glados.es.ws2es.denormalization.atc_class_handler import ATCClassDenormalizationHandler
 from glados.es.ws2es.denormalization.assay_handler import AssayDenormalizationHandler
@@ -19,9 +21,9 @@ from glados.es.ws2es.denormalization.organism_handler import OrganismDenormaliza
 from glados.es.ws2es.denormalization.protein_class_handler import ProteinClassDenormalizationHandler
 from glados.es.ws2es.denormalization.source_handler import SourceDenormalizationHandler
 from glados.es.ws2es.denormalization.target_component_handler import TargetComponentDenormalizationHandler
-from glados.es.ws2es.denormalization.target_prediction_handler import TargetPredictionDenormalizationHandler
 from glados.es.ws2es.denormalization.target_handler import TargetDenormalizationHandler
 from glados.es.ws2es.denormalization.tissue_handler import TissueDenormalizationHandler
+import glados.es.ws2es.progress_bar_handler
 
 __author__ = 'jfmosquera@ebi.ac.uk'
 
@@ -31,7 +33,6 @@ __author__ = 'jfmosquera@ebi.ac.uk'
 # ----------------------------------------------------------------------------------------------------------------------
 
 def denormalize_all_but_activity():
-    mol_file_helper.pre_cache_sdf_files()
     source_dh = SourceDenormalizationHandler()
     source_dh.scan_data_from_es()
     source_dh.save_denormalization()
@@ -39,7 +40,6 @@ def denormalize_all_but_activity():
     organism_dh = OrganismDenormalizationHandler()
     organism_dh.scan_data_from_es()
     organism_dh.save_denormalization()
-    organism_dh.complete_data_from_assay_and_target()
 
     atc_class_dh = ATCClassDenormalizationHandler()
     atc_class_dh.scan_data_from_es()
@@ -47,12 +47,6 @@ def denormalize_all_but_activity():
 
     target_pre_dh = TargetDenormalizationHandler()
     target_pre_dh.scan_data_from_es()
-
-    target_prediction_dh = TargetPredictionDenormalizationHandler(target_dh=target_pre_dh)
-    target_prediction_dh.scan_data_from_es()
-    target_prediction_dh.save_denormalization()
-    # Scan again to load the target pref name for other denormalizers
-    target_prediction_dh.scan_data_from_es()
 
     protein_class_dh = ProteinClassDenormalizationHandler()
     protein_class_dh.scan_data_from_es()
@@ -85,7 +79,7 @@ def denormalize_all_but_activity():
     # assay_dh.save_denormalization()
 
     compound_dh = CompoundDenormalizationHandler(
-        complete_x_refs=True, atc_dh=atc_class_dh, tp_dh=target_prediction_dh
+        complete_x_refs=True, atc_dh=atc_class_dh
     )
     compound_dh.scan_data_from_es()
     compound_dh.save_denormalization()
@@ -102,7 +96,7 @@ def denormalize_all_but_activity():
     metabolism_dh.scan_data_from_es()
     metabolism_dh.save_denormalization()
 
-    target_dh = TargetDenormalizationHandler(complete_x_refs=True, organism_dh=organism_dh, tp_dh=target_prediction_dh)
+    target_dh = TargetDenormalizationHandler(complete_x_refs=True, organism_dh=organism_dh)
     target_dh.scan_data_from_es()
     target_dh.save_denormalization()
 
@@ -123,7 +117,11 @@ def denormalize_unichem():
 
 
 def denormalize_activity():
-    assay_dh = AssayDenormalizationHandler()
+    source_dh = SourceDenormalizationHandler()
+    source_dh.scan_data_from_es()
+
+    # required to change the order to be able to load source description
+    assay_dh = AssayDenormalizationHandler(source_dh=source_dh)
     assay_dh.scan_data_from_es()
 
     compound_dh = CompoundDenormalizationHandler()
@@ -131,9 +129,6 @@ def denormalize_activity():
 
     organism_dh = OrganismDenormalizationHandler()
     organism_dh.scan_data_from_es()
-
-    source_dh = SourceDenormalizationHandler()
-    source_dh.scan_data_from_es()
 
     target_dh = TargetDenormalizationHandler()
     target_dh.scan_data_from_es()
@@ -147,12 +142,16 @@ def denormalize_activity():
     compound_record_dh = CompoundRecordDenormalizationHandler()
     compound_record_dh.scan_data_from_es()
 
+    document_dh = DocumentDenormalizationHandler()
+    document_dh.scan_data_from_es()
+
     activity_dh = ActivityDenormalizationHandler(
         complete_from_activity=True, assay_dh=assay_dh,
         compound_dh=compound_dh, organism_dh=organism_dh,
         source_dh=source_dh, target_dh=target_dh,
         target_component_dh=target_component_dh,
-        compound_record_dh=compound_record_dh
+        compound_record_dh=compound_record_dh,
+        document_dh=document_dh
     )
     activity_dh.scan_data_from_es()
 
@@ -202,11 +201,20 @@ def denormalize_mechanism_and_drug_indication():
 
 
 def main():
+    t_ini = time.time()
     parser = argparse.ArgumentParser(description="Denormalize ChEMBL data existing in Elastic Search")
     parser.add_argument("--host",
                         dest="es_host",
                         help="Elastic Search Hostname or IP address.",
                         default="localhost")
+    parser.add_argument("--user",
+                        dest="es_user",
+                        help="Elastic Search username.",
+                        default=None)
+    parser.add_argument("--password",
+                        dest="es_password",
+                        help="Elastic Search username password.",
+                        default=None)
     parser.add_argument("--port",
                         dest="es_port",
                         help="Elastic Search port.",
@@ -219,30 +227,52 @@ def main():
                         dest="denormalize_activity",
                         help="If included will denormalize the configured activity related data.",
                         action="store_true",)
-    parser.add_argument("--compound-hierarchy",
+    parser.add_argument("--compound_hierarchy",
                         dest="denormalize_compound_hierarchy",
                         help="If included will denormalize the Compound Hierarchy data.",
                         action="store_true",)
-    parser.add_argument("--mechanism-and-drug-indication",
+    parser.add_argument("--mechanism_and_drug_indication",
                         dest="denormalize_mechanism_and_drug_indication",
                         help="If included will denormalize the Mechanism and Drug Indication data.",
                         action="store_true",)
     args = parser.parse_args()
 
-    es_util.setup_connection(args.es_host, args.es_port)
+    es_util.setup_connection(args.es_host, args.es_port, args.es_user, args.es_password)
+    es_util.bulk_submitter.start()
 
     signal_handler.add_termination_handler(es_util.stop_scan)
 
+    dn_type = None
     if args.denormalize_compound_hierarchy:
         denormalize_compound_hierarchy()
+        dn_type = 'COMPOUND-HIERARCHY'
     elif args.denormalize_activity:
         denormalize_activity()
+        dn_type = 'ACTIVITY'
     elif args.denormalize_unichem:
         denormalize_unichem()
+        dn_type = 'UNICHEM'
     elif args.denormalize_mechanism_and_drug_indication:
         denormalize_mechanism_and_drug_indication()
+        dn_type = 'MECHANISMS-AND-DRUG-INDICATION'
     else:
         denormalize_all_but_activity()
+        dn_type = 'ALL-NO-ACTIVITY'
+    end_msg = 'DENORMALIZATION FOR "{}" FINISHED'.format(dn_type)
+
+    es_util.bulk_submitter.join()
+    glados.es.ws2es.progress_bar_handler.write_after_progress_bars()
+
+    total_time = time.time() - t_ini
+    sec = timedelta(seconds=total_time)
+    d = datetime(1, 1, 1) + sec
+
+    print(end_msg, file=sys.stderr)
+    print(
+        "Finished in: {0} Day(s), {1} Hour(s), {2} Minute(s) and {3} Second(s)"
+        .format(d.day-1, d.hour, d.minute, d.second),
+        file=sys.stderr
+    )
 
 
 if __name__ == "__main__":

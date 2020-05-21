@@ -1,5 +1,5 @@
 glados.useNameSpace 'glados.views.MainPage',
-  BrowseEntitiesAsCirclesView: Backbone.View\
+  BrowseCovidEntitiesAsCirclesView: Backbone.View\
   .extend(ResponsiviseViewExt)\
   .extend(glados.views.base.TrackView).extend
 
@@ -8,15 +8,10 @@ glados.useNameSpace 'glados.views.MainPage',
       @$vis_elem = $(@el).find('.BCK-circles-Container')
       @setUpResponsiveRender()
       @links =
-        Documents: Document.getDocumentsListURL()
-        Drugs: Drug.getDrugsListURL()
-        Tissues: glados.models.Tissue.getTissuesListURL()
-        Cells: CellLine.getCellsListURL()
-        Assays: Assay.getAssaysListURL()
-        Compounds: Compound.getCompoundsListURL()
-        Targets: Target.getTargetsListURL()
-        Indications: glados.models.Compound.DrugIndication.getListURL()
-        Mechanisms: glados.models.Compound.MechanismOfAction.getListURL()
+        Documents: Document.getDocumentsListURL('_metadata.source.src_id:52 AND NOT document_chembl_id:CHEMBL4303081')
+        Assays: Assay.getAssaysListURL('_metadata.source.src_id:52')
+        Compounds: Compound.getCompoundsListURL('_metadata.compound_records.src_id:52')
+        Activities: Activity.getActivitiesListURL('src_id:52')
 
       @render()
 
@@ -24,7 +19,7 @@ glados.useNameSpace 'glados.views.MainPage',
       thisView = @
 
 
-      infoURL = "#{glados.Settings.GLADOS_BASE_PATH_REL}entities_records"
+      infoURL = "#{glados.Settings.GLADOS_BASE_PATH_REL}covid_entities_records"
 
       fetchDatabasePromise = $.getJSON(infoURL)
 
@@ -62,14 +57,9 @@ glados.useNameSpace 'glados.views.MainPage',
 
       colours = {
         Documents: LIGHT_TEAL
-        Drugs: DARK_GREEN
-        Tissues: DARK_RED
-        Cells: TEAL
         Assays: RED
         Compounds: DARKEST_GREEN
-        Targets: PINK
-        Indications: DARK_GREEN
-        Mechanisms: DARK_GREEN
+        Activities: PINK
       }
 
       sizes = []

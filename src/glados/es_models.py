@@ -1,10 +1,11 @@
-from elasticsearch_dsl import DocType, Text, Keyword, Boolean, Integer, Long
+from elasticsearch_dsl import Document, Text, Keyword, Boolean, Integer, Long
 from elasticsearch_dsl.connections import connections
 from typing import List
 import traceback
+from glados.es_connection import DATA_CONNECTION, MONITORING_CONNECTION
 
 
-class TinyURLIndex(DocType):
+class TinyURLIndex(Document):
 
     long_url = Text()
     hash = Text()
@@ -12,12 +13,10 @@ class TinyURLIndex(DocType):
 
     class Index:
         name = 'chembl_glados_tiny_url'
-
-    class Meta:
-        doc_type = '_doc'
+        using = DATA_CONNECTION
 
 
-class ESCachedRequestIndex(DocType):
+class ESCachedRequestIndex(Document):
     es_index = Keyword()
     es_query = Keyword()
     es_aggs = Keyword()
@@ -30,12 +29,10 @@ class ESCachedRequestIndex(DocType):
 
     class Index:
         name = 'chembl_glados_es_cache_usage'
-
-    class Meta:
-        doc_type = '_doc'
+        using = MONITORING_CONNECTION
 
         
-class ESDownloadRecordIndex(DocType):
+class ESDownloadRecordIndex(Document):
     download_id = Keyword()
     time_taken = Integer()
     is_new = Boolean()
@@ -51,12 +48,10 @@ class ESDownloadRecordIndex(DocType):
 
     class Index:
         name = 'chembl_glados_es_download_record'
-
-    class Meta:
-        doc_type = '_doc'
+        using = MONITORING_CONNECTION
 
 
-class ESTinyURLUsageRecordIndex(DocType):
+class ESTinyURLUsageRecordIndex(Document):
     event = Keyword()
     host = Keyword()
     run_env_type = Keyword()
@@ -64,12 +59,10 @@ class ESTinyURLUsageRecordIndex(DocType):
 
     class Index:
         name = 'chembl_glados_es_tinyurl_usage_record'
-
-    class Meta:
-        doc_type = '_doc'
+        using = MONITORING_CONNECTION
 
 
-class ESSearchRecordIndex(DocType):
+class ESSearchRecordIndex(Document):
 
     search_type = Keyword()
     run_env_type = Keyword()
@@ -80,12 +73,10 @@ class ESSearchRecordIndex(DocType):
 
     class Index:
         name = 'chembl_glados_es_search_record'
-
-    class Meta:
-        doc_type = '_doc'
+        using = MONITORING_CONNECTION
 
 
-class ESViewRecordIndex(DocType):
+class ESViewRecordIndex(Document):
     view_name = Keyword()
     view_type = Keyword()
     entity_name = Keyword()
@@ -95,9 +86,7 @@ class ESViewRecordIndex(DocType):
 
     class Index:
         name = 'chembl_glados_es_view_record'
-
-    class Meta:
-        doc_type = '_doc'
+        using = MONITORING_CONNECTION
 
 
 class ElasticSearchMultiSearchQuery:
@@ -107,12 +96,15 @@ class ElasticSearchMultiSearchQuery:
         self.body = body
 
 
-def do_multi_search(queries: List[ElasticSearchMultiSearchQuery]):
+def do_multi_search(queries: List[ElasticSearchMultiSearchQuery], connection_type=DATA_CONNECTION):
     try:
-        conn = connections.get_connection()
+        conn = connections.get_connection(alias=connection_type)
         multi_search_body = []
         for query_i in queries:
             multi_search_body.append({'index': query_i.index})
+            if query_i.body is None:
+                query_i.body = {}
+            query_i.body['track_total_hits'] = True
             multi_search_body.append(query_i.body)
         return conn.msearch(body=multi_search_body)
     except Exception as e:

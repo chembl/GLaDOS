@@ -9,22 +9,19 @@ analysis = DefaultMappings.COMMON_ANALYSIS
 
 mappings = \
     {
-        '_doc': 
+        'properties': 
         {
-            'properties': 
-            {
-                'related_target_chembl_id': 'TEXT',
-                # EXAMPLES:
-                # 'CHEMBL1907599' , 'CHEMBL4296119' , 'CHEMBL2979' , 'CHEMBL2111463' , 'CHEMBL3429' , 'CHEMBL2096666' , 
-                # 'CHEMBL2111352' , 'CHEMBL2096669' , 'CHEMBL3885544' , 'CHEMBL4106133'
-                'relationship': 'TEXT',
-                # EXAMPLES:
-                # 'OVERLAPS WITH' , 'OVERLAPS WITH' , 'SUPERSET OF' , 'SUBSET OF' , 'SUPERSET OF' , 'OVERLAPS WITH' , 'O
-                # VERLAPS WITH' , 'SUBSET OF' , 'OVERLAPS WITH' , 'SUBSET OF'
-                'target_chembl_id': 'TEXT',
-                # EXAMPLES:
-                # 'CHEMBL2095184' , 'CHEMBL2221342' , 'CHEMBL2095184' , 'CHEMBL5034' , 'CHEMBL4296142' , 'CHEMBL3038506'
-                #  , 'CHEMBL2095187' , 'CHEMBL3038506' , 'CHEMBL3885543' , 'CHEMBL4105991'
-            }
+            'related_target_chembl_id': 'TEXT',
+            # EXAMPLES:
+            # 'CHEMBL2095180' , 'CHEMBL3559691' , 'CHEMBL2094127' , 'CHEMBL3038467' , 'CHEMBL3885551' , 'CHEMBL3038468' 
+            # , 'CHEMBL4296066' , 'CHEMBL4296065' , 'CHEMBL1907602' , 'CHEMBL2094108'
+            'relationship': 'TEXT',
+            # EXAMPLES:
+            # 'SUBSET OF' , 'SUBSET OF' , 'SUBSET OF' , 'SUBSET OF' , 'SUBSET OF' , 'SUBSET OF' , 'SUBSET OF' , 'SUBSET 
+            # OF' , 'SUBSET OF' , 'SUBSET OF'
+            'target_chembl_id': 'TEXT',
+            # EXAMPLES:
+            # 'CHEMBL261' , 'CHEMBL308' , 'CHEMBL308' , 'CHEMBL308' , 'CHEMBL308' , 'CHEMBL308' , 'CHEMBL308' , 'CHEMBL3
+            # 08' , 'CHEMBL308' , 'CHEMBL271'
         }
     }

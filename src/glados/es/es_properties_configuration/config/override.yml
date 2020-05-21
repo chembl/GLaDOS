@@ -1,4 +1,4 @@
-chembl_26_molecule:
+chembl_27_molecule:
   'molecule_properties.full_mwt':
     label: 'Molecular Weight'
     label_mini: 'Mol. Wt.'
@@ -109,7 +109,7 @@ chembl_26_molecule:
     type: 'string'
     aggregatable: false
     sortable: true
-chembl_26_assay:
+chembl_27_assay:
   '_metadata.related_compounds.count':
     label: 'Compounds'
     label_mini: 'Compounds'
@@ -155,7 +155,7 @@ chembl_26_assay:
   'assay_classifications_level3':
     based_on: 'assay_classifications'
     label: 'Assay Classification L3'
-chembl_26_target:
+chembl_27_target:
   'pref_name':
     label: 'Name'
   'uniprot_accessions':
@@ -203,7 +203,7 @@ chembl_26_target:
     type: 'double'
     aggregatable: false
     sortable: true
-chembl_26_document:
+chembl_27_document:
   'journal_full_title':
     label: 'Journal'
   'src_id':
@@ -230,7 +230,7 @@ chembl_26_document:
     label: 'Targets'
   '_metadata.related_activities.count':
     label: 'Activities'
-chembl_26_cell_line:
+chembl_27_cell_line:
   'clo_id':
     label: 'CLO ID'
   'cl_lincs_id':
@@ -239,14 +239,14 @@ chembl_26_cell_line:
     label: 'Compounds'
   '_metadata.related_activities.count':
     label: 'Activities'
-chembl_26_tissue:
+chembl_27_tissue:
   'bto_id':
     label: 'BTO ID'
   '_metadata.related_compounds.count':
     label: 'Compounds'
   '_metadata.related_activities.count':
     label: 'Activities'
-chembl_26_drug_indication_by_parent:
+chembl_27_drug_indication_by_parent:
   'drug_indication.max_phase_for_ind':
     label: 'Max Phase for Indication'
   'parent_molecule.first_approval':
@@ -265,7 +265,7 @@ chembl_26_drug_indication_by_parent:
     label: 'References'
   'parent_molecule._metadata.drug.drug_data.synonyms':
     label: 'Synonyms'
-chembl_26_mechanism_by_parent_target:
+chembl_27_mechanism_by_parent_target:
   'mechanism_of_action.max_phase':
     label: 'Max Phase'
   'parent_molecule.first_approval':
@@ -305,7 +305,7 @@ chembl_26_mechanism_by_parent_target:
   'drug_atc_codes_level_1':
     based_on: 'parent_molecule._metadata.atc_classifications'
     label: 'Level 1 ATC Codes'
-chembl_26_activity:
+chembl_27_activity:
   '_metadata.parent_molecule_data.max_phase':
     label: 'Molecule Max Phase'
   '_metadata.parent_molecule_data.full_mwt':
