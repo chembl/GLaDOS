@@ -317,13 +317,13 @@ def get_covid_entities_records(request):
 
     covid_documents_query = {
         "query_string": {
-            "query": "_metadata.source.src_id:52",
+            "query": "_metadata.source.src_id:52 AND NOT document_chembl_id:CHEMBL4303081",
         }
     }
 
     covid_activities_query = {
         "query_string": {
-            "query": "src_id:52",
+            "query": "_metadata.source.src_id:52",
         }
     }
 
