@@ -3,7 +3,7 @@ from glados import es_connection
 from elasticsearch.helpers import scan, bulk
 from datetime import datetime, timezone
 import sys
-from glados.es_connection import MONITORING_CONNECTION
+from glados.es_connection import DATA_CONNECTION, MONITORING_CONNECTION
 
 ES_INDEX = 'chembl_glados_tiny_url'
 BULK_SIZE = 1000
@@ -16,8 +16,8 @@ def delete_expired_urls():
 
     print('I am going to delete the urls that expire before {}'.format(str(now)))
 
-    es_connection.setup_glados_es_connection(MONITORING_CONNECTION)
-    es_conn = connections.get_connection(alias=MONITORING_CONNECTION)
+    es_connection.setup_glados_es_connection(DATA_CONNECTION)
+    es_conn = connections.get_connection(alias=DATA_CONNECTION)
 
     query = {
 
