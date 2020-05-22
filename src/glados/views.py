@@ -241,6 +241,7 @@ def get_entities_records(request):
     cache_key = 'entities_records_v2'
     cache_time = 604800
     cache_response = cache.get(cache_key)
+    print(cache_key)
 
     if cache_response is not None:
         print('records are in cache')
@@ -296,6 +297,7 @@ def get_covid_entities_records(request):
     cache_key = 'covid_entities_records'
     cache_time = 604800
     cache_response = cache.get(cache_key)
+    print(cache_key)
 
     if cache_response is not None:
         print('records are in cache')
