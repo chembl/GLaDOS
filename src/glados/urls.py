@@ -11,6 +11,8 @@ from django.views.i18n import JavaScriptCatalog
 from glados import old_urls_redirector
 from django.conf.urls import url
 from django.http import HttpResponse
+from django.views.decorators.cache import cache_page
+from django.urls import path
 
 from django.views.generic.base import RedirectView
 
@@ -24,17 +26,21 @@ common_urls = [
     # --------------------------------------------------------------------------------------------------------------------
     # Translation for Javascript
     # --------------------------------------------------------------------------------------------------------------------
-    url(r'^glados_jsi18n/glados$',
-        JavaScriptCatalog.as_view(packages=['glados'], domain='glados'),
-        name='js-glados-catalog'),
 
-    url(r'^glados_jsi18n/glados_es_generated$',
-        JavaScriptCatalog.as_view(packages=['glados'], domain='glados_es_generated'),
-        name='js-glados_es_generated-catalog'),
+    path('glados_jsi18n/glados',
+         cache_page(86400, key_prefix='glados_jsi18n')(JavaScriptCatalog.as_view(packages=['glados'], domain='glados')),
+         name='javascript-catalog'),
 
-    url(r'^glados_jsi18n/glados_es_override$',
-        JavaScriptCatalog.as_view(packages=['glados'], domain='glados_es_override'),
-        name='js-glados_es_override-catalog'),
+    path('glados_jsi18n/glados_es_generated',
+         cache_page(86400, key_prefix='glados_es_generated')(JavaScriptCatalog.as_view(packages=['glados'],
+                                                                                        domain='glados_es_generated$')),
+         name='js-glados_es_generated-catalog'),
+
+    path('glados_jsi18n/glados_es_override',
+         cache_page(86400, key_prefix='glados_es_override')(JavaScriptCatalog.as_view(packages=['glados'],
+                                                                                        domain='glados_es_override')),
+         name='js-glados_es_override-catalog'),
+
     # --------------------------------------------------------------------------------------------------------------------
     # Main Pages
     # --------------------------------------------------------------------------------------------------------------------
