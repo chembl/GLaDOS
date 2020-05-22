@@ -126,7 +126,7 @@ def get_latest_blog_entries(request, pageToken):
     fetchBodies = True
     fetchImages = False
     maxResults = 15
-    orderBy = 'published'
+    orderBy = 'PUBLISHED'
 
     cache_key = str(pageToken)
     cache_time = 1800
