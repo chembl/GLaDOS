@@ -33,12 +33,12 @@ common_urls = [
 
     path('glados_jsi18n/glados_es_generated',
          cache_page(86400, key_prefix='glados_es_generated')(JavaScriptCatalog.as_view(packages=['glados'],
-                                                                                        domain='glados_es_generated$')),
+                                                                                       domain='glados_es_generated$')),
          name='js-glados_es_generated-catalog'),
 
     path('glados_jsi18n/glados_es_override',
          cache_page(86400, key_prefix='glados_es_override')(JavaScriptCatalog.as_view(packages=['glados'],
-                                                                                        domain='glados_es_override')),
+                                                                                      domain='glados_es_override')),
          name='js-glados_es_override-catalog'),
 
     # --------------------------------------------------------------------------------------------------------------------
@@ -107,8 +107,9 @@ common_urls = [
             permanent=True), name='faqs_edit_query_string'),
 
     url(r'^faqs_shorten_url/$',
-        RedirectView.as_view(url='https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions/chembl-data-questions#are-my-queries-stored-and-if-so-are-they-routinely-deleted',
-                             permanent=True), name='faqs_shorten_url'),
+        RedirectView.as_view(
+            url='https://chembl.gitbook.io/chembl-interface-documentation/frequently-asked-questions/chembl-data-questions#are-my-queries-stored-and-if-so-are-they-routinely-deleted',
+            permanent=True), name='faqs_shorten_url'),
 
     url(r'^contact_us/$',
         RedirectView.as_view(
@@ -166,7 +167,6 @@ common_urls = [
 
     url(r'^db_schema',
         DirectTemplateView.as_view(template_name="glados/database_schema.html"), name='db_schema'),
-
 
     url(r'^admesarfari/$',
         RedirectView.as_view(
