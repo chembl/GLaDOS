@@ -293,16 +293,16 @@ class CompoundReportCardApp extends glados.ReportCardApp
       compound.fetch()
 
   @initStructuralAlerts = ->
-
     chemblID = glados.Utils.URLS.getCurrentModelChemblID()
     structuralAlertsSets = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewStructuralAlertsSetsList()
     structuralAlertsSets.initURL(chemblID)
+
 
     viewConfig =
       embed_section_name: 'structural_alerts'
       embed_identifier: chemblID
 
-    new glados.views.ReportCards.PaginatedTableInCardView
+    sa_view = new glados.views.ReportCards.PaginatedTableInCardView
       collection: structuralAlertsSets
       el: $('#CStructuralAlertsCard')
       resource_type: gettext('glados_entities_compound_name')
@@ -313,6 +313,18 @@ class CompoundReportCardApp extends glados.ReportCardApp
       report_card_app: @
 
     structuralAlertsSets.fetch()
+
+    # This is the best way to do it since using the show_if with the model and the collection
+    # at the same time in the view with the render leads to bugs in the rendering
+    model = CompoundReportCardApp.getCurrentCompound()
+    showOrHideSA = () ->
+      molecule_structures = model.get('molecule_structures')
+      if molecule_structures?
+        sa_view.showSection()
+      else
+        sa_view.hideSection()
+    model.on 'change', showOrHideSA
+
 
   @initAlternateForms = ->
 
