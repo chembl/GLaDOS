@@ -33,7 +33,7 @@ common_urls = [
 
     path('glados_jsi18n/glados_es_generated',
          cache_page(86400, key_prefix='glados_es_generated')(JavaScriptCatalog.as_view(packages=['glados'],
-                                                                                       domain='glados_es_generated$')),
+                                                                                       domain='glados_es_generated')),
          name='js-glados_es_generated-catalog'),
 
     path('glados_jsi18n/glados_es_override',
