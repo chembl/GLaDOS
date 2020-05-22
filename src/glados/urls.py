@@ -142,6 +142,10 @@ common_urls = [
     url(r'^surechembl/$',
         RedirectView.as_view(url='https://www.surechembl.org',
                              permanent=True), name='surechembl'),
+    url(r'^maip/$',
+        RedirectView.as_view(url='https://www.ebi.ac.uk/chembl/maip/',
+                             permanent=True), name='maip'),
+
     url(r'^chembl_rdf/$',
         RedirectView.as_view(url='https://www.ebi.ac.uk/rdf',
                              permanent=True), name='chembl_rdf'),
