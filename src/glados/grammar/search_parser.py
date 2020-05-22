@@ -90,7 +90,7 @@ def load_unichem_data(wait=True):
     return UNICHEM_DS is not None
 
 
-# load_unichem_data(False)
+load_unichem_data(False)
 
 
 def get_unichem_cross_reference_link_data(src_id: str, cross_reference_id: str) -> dict:
@@ -377,52 +377,51 @@ def check_smiles(term_dict: dict):
 
 # noinspection PyBroadException
 def check_unichem(term_dict: dict):
-    pass
-    # try:
-    #     response = requests.get(
-    #         BASE_EBI_URL+'/unichem/rest/orphanIdMap/{0}'
-    #         .format(urllib.parse.quote(term_dict['term'])),
-    #         headers={'Accept': 'application/json'},
-    #         timeout=5
-    #     )
-    #     json_response = response.json()
-    #     if 'error' in json_response:
-    #         return None
-    #     chembl_ids = []
-    #     unichem_not_in_chembl_cross_refs = []
-    #     for unichem_src_i in json_response:
-    #         cross_references = []
-    #         chembl_id_i = None
-    #         for link_i in json_response[unichem_src_i]:
-    #             if link_i['src_id'] == '1':
-    #                 chembl_id_i = link_i['src_compound_id']
-    #             elif unichem_src_i == '1':
-    #                 chembl_id_i = term_dict['term']
-    #             cross_references.append(
-    #                 get_unichem_cross_reference_link_data(link_i['src_id'], link_i['src_compound_id'])
-    #             )
-    #         cross_references_dict = {
-    #             'from': get_unichem_cross_reference_link_data(unichem_src_i, term_dict['term']),
-    #             'also_in': cross_references
-    #         }
-    #         if chembl_id_i is not None:
-    #             chembl_ids.append(get_chembl_id_dict(chembl_id_i, [cross_references_dict]))
-    #         else:
-    #             unichem_not_in_chembl_cross_refs.append(cross_references_dict)
-    #
-    #     if len(chembl_ids) > 0 or len(unichem_not_in_chembl_cross_refs) > 0:
-    #         term_dict['references'].append(
-    #             {
-    #                 'type': 'unichem',
-    #                 'label': 'UniChem',
-    #                 'chembl_ids': chembl_ids,
-    #                 'not_in_chembl': unichem_not_in_chembl_cross_refs,
-    #                 'include_in_query': False,
-    #                 'chembl_entity': 'compound'
-    #             }
-    #         )
-    # except:
-    #     traceback.print_exc()
+    try:
+        response = requests.get(
+            BASE_EBI_URL+'/unichem/rest/orphanIdMap/{0}'
+            .format(urllib.parse.quote(term_dict['term'])),
+            headers={'Accept': 'application/json'},
+            timeout=5
+        )
+        json_response = response.json()
+        if 'error' in json_response:
+            return None
+        chembl_ids = []
+        unichem_not_in_chembl_cross_refs = []
+        for unichem_src_i in json_response:
+            cross_references = []
+            chembl_id_i = None
+            for link_i in json_response[unichem_src_i]:
+                if link_i['src_id'] == '1':
+                    chembl_id_i = link_i['src_compound_id']
+                elif unichem_src_i == '1':
+                    chembl_id_i = term_dict['term']
+                cross_references.append(
+                    get_unichem_cross_reference_link_data(link_i['src_id'], link_i['src_compound_id'])
+                )
+            cross_references_dict = {
+                'from': get_unichem_cross_reference_link_data(unichem_src_i, term_dict['term']),
+                'also_in': cross_references
+            }
+            if chembl_id_i is not None:
+                chembl_ids.append(get_chembl_id_dict(chembl_id_i, [cross_references_dict]))
+            else:
+                unichem_not_in_chembl_cross_refs.append(cross_references_dict)
+
+        if len(chembl_ids) > 0 or len(unichem_not_in_chembl_cross_refs) > 0:
+            term_dict['references'].append(
+                {
+                    'type': 'unichem',
+                    'label': 'UniChem',
+                    'chembl_ids': chembl_ids,
+                    'not_in_chembl': unichem_not_in_chembl_cross_refs,
+                    'include_in_query': False,
+                    'chembl_entity': 'compound'
+                }
+            )
+    except:
+        traceback.print_exc()
 
 
 class TermsVisitor(PTNodeVisitor):
