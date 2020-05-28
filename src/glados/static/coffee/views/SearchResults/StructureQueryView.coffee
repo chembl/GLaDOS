@@ -6,6 +6,7 @@ glados.useNameSpace 'glados.views.SearchResults',
 
       @queryParams = @model.get('query_params')
       @model.on 'change:state', @render, @
+      @model.on 'change:progress', @render, @
       @loadImage()
 
 

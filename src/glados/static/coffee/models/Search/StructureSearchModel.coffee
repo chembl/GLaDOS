@@ -9,6 +9,41 @@ glados.useNameSpace 'glados.models.Search',
 
     submitSearch: ->
 
+      searchType = @get('search_type')
+      if searchType == glados.models.Search.StructureSearchModel.SEARCH_TYPES.SEQUENCE.BLAST
+        @oldSubmitSearch()
+        return
+
+      @submitStructureSearch()
+
+    submitStructureSearch: ->
+
+      queryParams = @get('query_params')
+
+      paramsDict =
+        search_type: @get('search_type')
+        search_term: queryParams.search_term
+        threshold: queryParams.threshold
+        dl__ignore_cache: false
+
+      submissionURL = glados.Settings.SUBMIT_STRUCTURE_SEARCH_URL
+      submitPromise = $.post(submissionURL, paramsDict)
+
+      thisModel = @
+      submitPromise.then (data) ->
+
+        thisModel.set('search_id', data.job_id)
+        thisModel.setState(glados.models.Search.StructureSearchModel.STATES.SEARCH_QUEUED)
+
+      submitPromise.fail (jqXHR) ->
+
+        errorMSG = if jqXHR.status == 500 then jqXHR.responseText else jqXHR.statusText
+        thisModel.set('error_message', errorMSG)
+        thisModel.setState(glados.models.Search.StructureSearchModel.STATES.ERROR_STATE)
+
+
+    oldSubmitSearch: ->
+
       paramsDict =
         search_type: @get('search_type')
         raw_search_params: JSON.stringify(@get('query_params'))
@@ -20,22 +55,25 @@ glados.useNameSpace 'glados.models.Search',
         thisModel.set('search_id', data.search_id)
         thisModel.setState(glados.models.Search.StructureSearchModel.STATES.SEARCH_QUEUED)
 
-      submitPromise.fail (jqXHR) ->
-
-        errorMSG = if jqXHR.status == 500 then jqXHR.responseText else jqXHR.statusText
-        thisModel.set('error_message', errorMSG)
-        thisModel.setState(glados.models.Search.StructureSearchModel.STATES.ERROR_STATE)
-
     #-------------------------------------------------------------------------------------------------------------------
     # Check search progress
     #-------------------------------------------------------------------------------------------------------------------
     getProgressURL: ->
 
-      url = "#{glados.Settings.GLADOS_BASE_PATH_REL}glados_api/chembl/sssearch/sssearch-progress/#{@get('search_id')}"
       if @get('search_type') == glados.models.Search.StructureSearchModel.SEARCH_TYPES.SEQUENCE.BLAST
-        url += "?is_blast=True"
-      return url
 
+        url = "#{glados.Settings.GLADOS_BASE_PATH_REL}glados_api/chembl/sssearch/sssearch-progress/#{@get('search_id')}"
+        url += "?is_blast=True"
+        return url
+
+      else
+
+        search_id = @get('search_id')
+
+        url = glados.Settings.DELAYED_JOB_STATUS_URL_GENERATOR
+          job_id: encodeURIComponent(search_id)
+
+        return url
 
     checkSearchStatusPeriodically: ->
 
@@ -44,43 +82,43 @@ glados.useNameSpace 'glados.models.Search',
       getProgress = $.get(progressURL)
 
       getProgress.then (response) ->
+
         status = response.status
         if status == 'ERROR'
 
           thisModel.set('error_message', response.msg)
           thisModel.setState(glados.models.Search.StructureSearchModel.STATES.ERROR_STATE)
 
-        else if status == 'SEARCH_QUEUED'
+        else if status == 'QUEUED'
 
           setTimeout(thisModel.checkSearchStatusPeriodically.bind(thisModel), 1000)
 
-        else if status == 'SEARCHING'
+        else if status == 'RUNNING'
 
+          thisModel.set('progress', response.progress)
           thisModel.setState(glados.models.Search.StructureSearchModel.STATES.SEARCHING)
-          setTimeout(thisModel.checkSearchStatusPeriodically.bind(thisModel), 1000)
-
-        else if status == 'LOADING_RESULTS'
-
-          thisModel.setState(glados.models.Search.StructureSearchModel.STATES.LOADING_RESULTS)
-          setTimeout(thisModel.checkSearchStatusPeriodically.bind(thisModel), 1000)
-
-        else if status == 'DELETING'
-
-          thisModel.setState(glados.models.Search.StructureSearchModel.STATES.DELETING)
           setTimeout(thisModel.checkSearchStatusPeriodically.bind(thisModel), 1000)
 
         else if status == 'FINISHED'
 
-          thisModel.set('result_ids', response.ids)
-          thisModel.set('total_results', response.total_results)
-          thisModel.set('size_limit', response.size_limit)
-          thisModel.set('expires', response.expires)
+          thisModel.set('expires', response.expires_at)
           thisModel.setState(glados.models.Search.StructureSearchModel.STATES.FINISHED)
 
         else
 
           setTimeout(thisModel.checkSearchStatusPeriodically.bind(thisModel), 1000)
 
+    getContextObj: ->
+
+      searchType = @get('search_type')
+      searchID = @get('search_id')
+
+      contextObj = {
+        'context_type': searchType,
+        'context_id': searchID
+      }
+
+      return contextObj
     #-------------------------------------------------------------------------------------------------------------------
     # State handling
     #-------------------------------------------------------------------------------------------------------------------

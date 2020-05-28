@@ -23,6 +23,7 @@ current_release:
   downloads_release_name: 'chembl_27'
   elasticsearch_chembl_index_prefix: 'chembl_27_'
 filter_query_max_clauses: 30000
-
 chemvue_root_api: 'http://localhost:8000'
 unichem_similarity_endpoint: 'http://fakeserver/similarity'
+delayed_jobs:
+  base_url: 'https://www.ebi.ac.uk/chembl/interface_api/delayed_jobs'

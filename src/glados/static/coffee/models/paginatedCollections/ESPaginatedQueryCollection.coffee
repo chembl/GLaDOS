@@ -316,6 +316,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     # Prepares an Elastic Search query to search in all the fields of a document in a specific index
     fetchData: (options, testMode=false) ->
+      console.log('FETCH DATA')
       testMode |= @getMeta('test_mode')
       @trigger('before_fetch_elastic')
       @url = @getURL()
@@ -389,13 +390,27 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # Request data
     # ------------------------------------------------------------------------------------------------------------------
     getListHelperRequestData: (customPage, customPageSize) ->
+      # Request to get the data of the items of the page
 
       ssSearchModel = @getMeta('sssearch_model')
       cacheRequestData =
         index_name: @getMeta('index_name')
         search_data: JSON.stringify(@getRequestData(customPage, customPageSize))
         contextual_sort_data: JSON.stringify(@getContextualSortingProperties())
-        context_id: if ssSearchModel? then ssSearchModel.get('search_id') else undefined
+        context_obj: if ssSearchModel? then JSON.stringify(ssSearchModel.getContextObj()) else undefined
+        id_property: @getMeta('model').ID_COLUMN.comparator
+
+      return cacheRequestData
+
+    getFacetsRequestData: (firstCall) ->
+      # Request to get the data of the facets of the page
+
+      ssSearchModel = @getMeta('sssearch_model')
+      cacheRequestData =
+        index_name: @getMeta('index_name')
+        search_data: JSON.stringify(@getRequestData(1, 0, true, firstCall))
+        contextual_sort_data: JSON.stringify(@getContextualSortingProperties())
+        context_obj: if ssSearchModel? then JSON.stringify(ssSearchModel.getContextObj()) else undefined
         id_property: @getMeta('model').ID_COLUMN.comparator
 
       return cacheRequestData
@@ -613,17 +628,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     __requestFacetsGroupsData: (first_call)->
       es_url = @getURL()
-      # Creates the Elastic Search Query parameters and serializes them
-      # Includes the request for the faceting data
-      esJSONRequestData = JSON.stringify(@getRequestData(1, 0, true, first_call))
-      # Uses POST to prevent result caching
-      ajax_deferred = $.post
-        url: es_url
-        data: esJSONRequestData
-        dataType: 'json'
-        contentType: 'application/json'
-        mimeType: 'application/json'
-      return ajax_deferred
+
+      requestData = @getFacetsRequestData(first_call)
+      fetchPromise = glados.doCSRFPost(glados.Settings.CHEMBL_LIST_HELPER_ENDPOINT, requestData)
+
+      return fetchPromise
 
     __parseFacetsGroupsData: (non_selected_facets_groups, es_data, first_call, resolve, reject, needs_second_call)->
       if not es_data? or not es_data.aggregations?
