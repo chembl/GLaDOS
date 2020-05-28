@@ -165,7 +165,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return simplifiedHL
 
     # Parses the Elastic Search Response and resets the pagination metadata
-    parse: (data) ->
+    parse: (response) ->
+
+      data = response.es_response
 
       lastPageResultsIds = null
       lastPageResultsIds = @getMeta('last_page_results_ids')
