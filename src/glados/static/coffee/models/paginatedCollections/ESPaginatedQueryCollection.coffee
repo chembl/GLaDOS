@@ -316,7 +316,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     # Prepares an Elastic Search query to search in all the fields of a document in a specific index
     fetchData: (options, testMode=false) ->
-      console.log('FETCH DATA')
+
       testMode |= @getMeta('test_mode')
       @trigger('before_fetch_elastic')
       @url = @getURL()
@@ -332,10 +332,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.FETCHING_ITEMS
       )
       # Creates the Elastic Search Query parameters and serializes them
-      esCacheRequest = @getListHelperRequestData()
+      esCacheRequestData = @getESRequestData()
 
       unless testMode
-        fetchPromise = glados.doCSRFPost(glados.Settings.CHEMBL_LIST_HELPER_ENDPOINT, esCacheRequest)
+
+        console.log('GOING TO FETCH DATA')
+        fetchURL = glados.Settings.ES_PROXY_ES_DATA_URL
+        console.log('fetchURL: ', fetchURL)
+        console.log('esCacheRequestData: ', esCacheRequestData)
+        fetchPromise = $.post(fetchURL, esCacheRequestData)
         thisCollection = @
 
         fetchPromise.then (data) -> thisCollection.reset(thisCollection.parse(data))
@@ -343,7 +348,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
         @loadFacetGroups(@getRequestData())
 
-      return esCacheRequest
+      return esCacheRequestData
 
     # ------------------------------------------------------------------------------------------------------------------
     # Elastic Search Query structure
@@ -399,6 +404,18 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         contextual_sort_data: JSON.stringify(@getContextualSortingProperties())
         context_obj: if ssSearchModel? then JSON.stringify(ssSearchModel.getContextObj()) else undefined
         id_property: @getMeta('model').ID_COLUMN.comparator
+
+      return cacheRequestData
+
+    getESRequestData: (customPage, customPageSize) ->
+      # Request to get the data of the items of the page
+
+      ssSearchModel = @getMeta('sssearch_model')
+      cacheRequestData =
+        index_name: @getMeta('index_name')
+        es_query: JSON.stringify(@getRequestData(customPage, customPageSize))
+        contextual_sort_data: JSON.stringify(@getContextualSortingProperties())
+        context_obj: if ssSearchModel? then JSON.stringify(ssSearchModel.getContextObj()) else undefined
 
       return cacheRequestData
 

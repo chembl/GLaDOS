@@ -115,7 +115,8 @@ glados.useNameSpace 'glados.models.Search',
 
       contextObj = {
         'context_type': searchType,
-        'context_id': searchID
+        'context_id': searchID,
+        'delayed_jobs_base_url': glados.Settings.DELAYED_JOBS_BASE_URL
       }
 
       return contextObj

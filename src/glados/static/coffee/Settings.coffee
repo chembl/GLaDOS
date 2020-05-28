@@ -324,6 +324,9 @@ glados.loadSearchResultsURLS = ()->
   glados.Settings.DELAYED_JOB_STATUS_URL_GENERATOR =
     Handlebars.compile("#{glados.Settings.DELAYED_JOBS_BASE_URL}/status/{{job_id}}")
 
+  glados.Settings.ES_PROXY_API_BASE_URL = 'https://www.ebi.ac.uk/chembl/interface_api/es_proxy'
+  glados.Settings.ES_PROXY_ES_DATA_URL = "#{glados.Settings.ES_PROXY_API_BASE_URL}/es_data/get_es_data"
+
   glados.Settings.SHORTENED_EMBED_URL_GENERATOR =
   Handlebars.compile("#{glados.Settings.GLADOS_BASE_URL_FULL}embed/tiny/{{{hash}}}")
 

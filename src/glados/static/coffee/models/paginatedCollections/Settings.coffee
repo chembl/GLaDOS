@@ -9,7 +9,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCompound'
         LABEL: 'Compounds'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
+        INDEX_NAME: 'chembl_molecule'
         BROWSE_LIST_URL: Compound.getCompoundsListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
@@ -207,7 +207,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCompound'
         LABEL: 'Compounds'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
+        INDEX_NAME: 'chembl_molecule'
         BROWSE_LIST_URL: Compound.getCompoundsListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
@@ -223,7 +223,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCompound'
         LABEL: 'Compounds'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
+        INDEX_NAME: 'chembl_molecule'
         BROWSE_LIST_URL: Compound.getCompoundsListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
@@ -257,7 +257,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCompound'
         LABEL: 'Compounds'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
+        INDEX_NAME: 'chembl_molecule'
         BROWSE_LIST_URL: Compound.getCompoundsListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
@@ -315,7 +315,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCompound'
         LABEL: 'Compounds'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
+        INDEX_NAME: 'chembl_molecule'
         BROWSE_LIST_URL: Compound.getCompoundsListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
@@ -353,7 +353,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESDrugs'
         LABEL: 'Drugs'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
+        INDEX_NAME: 'chembl_molecule'
         # PATH: Assigned after this declaration using the INDEX_NAME
         BROWSE_LIST_URL: Drug.getDrugsListURL
         MODEL: glados.models.Compound.Drug
