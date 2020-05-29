@@ -338,10 +338,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       unless testMode
 
-        console.log('GOING TO FETCH DATA')
         fetchURL = glados.Settings.ES_PROXY_ES_DATA_URL
-        console.log('fetchURL: ', fetchURL)
-        console.log('esCacheRequestData: ', esCacheRequestData)
         fetchPromise = $.post(fetchURL, esCacheRequestData)
         thisCollection = @
 
@@ -396,19 +393,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
     # Request data
     # ------------------------------------------------------------------------------------------------------------------
-    getListHelperRequestData: (customPage, customPageSize) ->
-      # Request to get the data of the items of the page
-
-      ssSearchModel = @getMeta('sssearch_model')
-      cacheRequestData =
-        index_name: @getMeta('index_name')
-        search_data: JSON.stringify(@getRequestData(customPage, customPageSize))
-        contextual_sort_data: JSON.stringify(@getContextualSortingProperties())
-        context_obj: if ssSearchModel? then JSON.stringify(ssSearchModel.getContextObj()) else undefined
-        id_property: @getMeta('model').ID_COLUMN.comparator
-
-      return cacheRequestData
-
     getESRequestData: (customPage, customPageSize) ->
       # Request to get the data of the items of the page
 
@@ -427,10 +411,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       ssSearchModel = @getMeta('sssearch_model')
       cacheRequestData =
         index_name: @getMeta('index_name')
-        search_data: JSON.stringify(@getRequestData(1, 0, true, firstCall))
+        es_query: JSON.stringify(@getRequestData(1, 0, true, firstCall))
         contextual_sort_data: JSON.stringify(@getContextualSortingProperties())
         context_obj: if ssSearchModel? then JSON.stringify(ssSearchModel.getContextObj()) else undefined
-        id_property: @getMeta('model').ID_COLUMN.comparator
 
       return cacheRequestData
 
@@ -646,14 +629,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return isSelected
 
     __requestFacetsGroupsData: (first_call)->
-      es_url = @getURL()
 
+      fetchURL = glados.Settings.ES_PROXY_ES_DATA_URL
       requestData = @getFacetsRequestData(first_call)
-      fetchPromise = glados.doCSRFPost(glados.Settings.CHEMBL_LIST_HELPER_ENDPOINT, requestData)
+      fetchPromise = $.post(fetchURL, requestData)
 
       return fetchPromise
 
-    __parseFacetsGroupsData: (non_selected_facets_groups, es_data, first_call, resolve, reject, needs_second_call)->
+    __parseFacetsGroupsData: (non_selected_facets_groups, esResponse, first_call, resolve, reject, needs_second_call)->
+
+      es_data = esResponse.es_response
       if not es_data? or not es_data.aggregations?
         console.error "ERROR! The aggregations data in the response is missing!"
         reject()

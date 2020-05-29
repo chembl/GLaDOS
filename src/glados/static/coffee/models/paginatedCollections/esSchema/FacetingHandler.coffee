@@ -52,6 +52,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       if not _.has(glados.models.paginatedCollections.esSchema.GLaDOS_es_GeneratedSchema, es_index)
         throw 'ERROR: '+es_index+' was not found in the Generated Schema for GLaDOS!'
       gs_data = glados.models.paginatedCollections.esSchema.GLaDOS_es_GeneratedSchema[es_index]
+      console.log('gs_data: ', gs_data)
       cur_pos = 1
       getFacetData = (prop_data, prop_name)->
         sort = null
