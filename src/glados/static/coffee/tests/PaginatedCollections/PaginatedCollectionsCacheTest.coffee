@@ -181,10 +181,11 @@ describe "Paginated Collections Cache", ->
         expectedPosition = startingPosition + i
         expect(cache[expectedPosition].name).toBe(i)
 
-  testAddsItemsAfterParse = (list, testDataToParse1, colType) ->
+  testAddsItemsAfterParse = (list, dataToParse, colType) ->
 
-    list.reset(list.parse(testDataToParse1))
+    list.reset(list.parse(dataToParse))
 
+    testDataToParse1 = dataToParse.es_response
     if colType == WS_COL_TYPE
       objsInData = testDataToParse1.molecules
     else if colType == ES_COL_TYPE

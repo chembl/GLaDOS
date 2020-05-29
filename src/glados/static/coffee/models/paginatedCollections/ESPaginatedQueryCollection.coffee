@@ -232,6 +232,10 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return jsonResultsList
 
+    fetchFacetsDescription: ->
+
+      alert('FETCH FACETS CONFIG!')
+
     fetchColumnsDescription: ->
       @setConfigState(
         glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING_STATES.FETCHING_CONFIGURATION
@@ -315,6 +319,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       ).catch( (jqXHR) ->
         thisCollection.trigger('error', thisCollection, jqXHR)
       )
+
+      facetsDescriptionPromise = @fetchFacetsDescription()
 
     # Prepares an Elastic Search query to search in all the fields of a document in a specific index
     fetchData: (options, testMode=false) ->
