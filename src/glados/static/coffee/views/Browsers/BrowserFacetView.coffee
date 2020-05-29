@@ -9,26 +9,9 @@ glados.useNameSpace 'glados.views.Browsers',
       @FACET_GROUP_IS_CLOSED = {}
       @$vis_elem = $(@el)
       @setUpResponsiveRender(emptyBeforeRender=false)
+      @collection.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_CONFIG_FETCHING_STATE_CHANGED, @checkIfFacetsConfigLoadedAndInitStructure, @
       @collection.on 'facets-changed', @render, @
       @collection.on 'reset', @checkIfNoItems, @
-
-      @facetsStreamingCover = $(@el).find('.div-cover')
-
-      facetsGroups = @collection.getFacetsGroups(undefined, onlyVisible=false)
-
-      @facetsVisibilityHandler = new glados.models.paginatedCollections.FacetGroupVisibilityHandler
-        all_facets_groups: facetsGroups
-
-      @facetsVisibilityHandler.on glados.models.paginatedCollections.ColumnsHandler.EVENTS.COLUMNS_ORDER_CHANGED,\
-        @handleFiltersReordering, @
-
-      @facetsVisibilityHandler.on \
-        glados.models.paginatedCollections.FacetGroupVisibilityHandler.EVENTS.COLUMNS_SHOW_STATUS_CHANGED,\
-        @handleShowHideFilter, @
-
-      @initialiseTitle()
-      @initializeHTMLStructure()
-      @showPreloader()
 
     events:
       'click .BCK-clear-facets' : 'clearFacetsSelection'
@@ -64,11 +47,43 @@ glados.useNameSpace 'glados.views.Browsers',
         onClose: $.proxy(@handleCloseFacet, @)
 
     # ------------------------------------------------------------------------------------------------------------------
+    # React to facets config loaded
+    # ------------------------------------------------------------------------------------------------------------------
+    checkIfFacetsConfigLoadedAndInitStructure: ->
+
+      alert('CHECK IF FACETS CONFIG WAS LOADED')
+
+      if @collection.facetsConfigIsReady()
+
+        alert('CONFIG IS READY')
+        @initFacetsVisualStructure()
+
+    initFacetsVisualStructure: ->
+
+      @facetsStreamingCover = $(@el).find('.div-cover')
+
+      facetsGroups = @collection.getFacetsGroups(undefined, onlyVisible=false)
+
+      @facetsVisibilityHandler = new glados.models.paginatedCollections.FacetGroupVisibilityHandler
+        all_facets_groups: facetsGroups
+
+      @facetsVisibilityHandler.on glados.models.paginatedCollections.ColumnsHandler.EVENTS.COLUMNS_ORDER_CHANGED,\
+        @handleFiltersReordering, @
+
+      @facetsVisibilityHandler.on \
+        glados.models.paginatedCollections.FacetGroupVisibilityHandler.EVENTS.COLUMNS_SHOW_STATUS_CHANGED,\
+        @handleShowHideFilter, @
+
+      @initialiseTitle()
+      @initializeHTMLStructure()
+      @showPreloader()
+
+    # ------------------------------------------------------------------------------------------------------------------
     # Render
     # ------------------------------------------------------------------------------------------------------------------
     wakeUp: ->
 
-      if @collection.facetsReady
+      if @collection.facetsConfigIsReady() and @collection.facetsReady
         @render()
 
     collapseAllFilters: ->
@@ -249,6 +264,11 @@ glados.useNameSpace 'glados.views.Browsers',
 
       if not $(@el).is(":visible") or $(@el).width() == 0
         return
+
+      if not @collection.facetsConfigIsReady()
+        return
+
+      alert('RENDER')
 
       @destroyAllTooltips()
 
