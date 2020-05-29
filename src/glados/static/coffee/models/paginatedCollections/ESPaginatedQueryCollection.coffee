@@ -234,9 +234,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     fetchFacetsDescription: ->
 
-      alert('FETCH FACETS CONFIG!')
+      @setFacetsConfigState(
+        glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_CONFIGURATION_FETCHING_STATES.FETCHING_CONFIGURATION
+      )
 
     fetchColumnsDescription: ->
+
       @setConfigState(
         glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING_STATES.FETCHING_CONFIGURATION
       )
