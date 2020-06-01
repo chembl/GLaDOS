@@ -135,7 +135,7 @@ class QueryBuilder:
                             'query': ' '.join(chembl_ids_et),
                             'allow_leading_wildcard': False,
                             'fuzziness': 0,
-                            'use_dis_max': False,
+                            # 'use_dis_max': False,
                         }
                     }
                 )
