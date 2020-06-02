@@ -44,7 +44,8 @@
     {% compress js file cytoscape_libs %}
 
         <!-- Polyfill for cytoscape -->
-        <script type="text/javascript" src="{% static 'js/api/MetabolismVisualiser/browser-polyfill.min.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/api/MetabolismVisualiser/browser-polyfill.min.js' %}"></script>
         <!-- http://js.cytoscape.org/ -->
         <script type="text/javascript" src="{% static 'js/api/cytoscape.js-2.7.13/cytoscape.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/api/MetabolismVisualiser/dagre.min.js' %}"></script>
@@ -68,295 +69,406 @@
 
 <!-- Load Server url variables -->
 <script type="text/javascript">
-  glados.Settings.DEBUG = {{ js_debug }};
-  /**
-    * TODO: Remove the requirement for a trailing  '/' in WS and BEAKER URLS
-    */
-  glados.Settings.WS_BASE_URL = "{{ ws_url }}/";
-  glados.Settings.BEAKER_BASE_URL = "{{ beaker_url }}/";
-  glados.Settings.CHEMBL_ES_INDEX_PREFIX = "{{ chembl_es_index_prefix }}";
-  glados.Settings.ES_BASE_URL = "{{ es_url }}";
-  glados.loadURLPaths('{{ request_root_url }}', '{% url "main" %}', '{% static "" %}');
-  glados.loadGLaDOSTopS3cre7();
+    glados.Settings.DEBUG = {{ js_debug }};
+    /**
+     * TODO: Remove the requirement for a trailing  '/' in WS and BEAKER URLS
+     */
+    glados.Settings.WS_BASE_URL = "{{ ws_url }}/";
+    glados.Settings.BEAKER_BASE_URL = "{{ beaker_url }}/";
+    glados.Settings.CHEMBL_ES_INDEX_PREFIX = "{{ chembl_es_index_prefix }}";
+    glados.Settings.ES_BASE_URL = "{{ es_url }}";
+    glados.loadURLPaths('{{ request_root_url }}', '{% url "main" %}', '{% static "" %}');
+    glados.loadGLaDOSTopS3cre7();
 </script>
 <script type="text/javascript" src="{% static 'js/coffee-gen/GlobalVariables.js' %}"></script>
 
 <!-- SECOND COMPRESS: loads the rest of the coffee script -->
-{%  compress js %}
-  {% block common_js_coffee_gen %}
-    <!-- Helpers -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/URLProcessor.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/helpers/lazy_iframes_helper.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/helpers/scrollspy_helper.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/helpers/buttons_helper.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/helpers/HeaderHelper.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/helpers/EmbedModalsHelper.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/helpers/ChemicalEditorHelper.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/helpers/SequenceSearchHelper.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/helpers/SharePageHelper.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/helpers/URLHelper.js' %}"></script>
+{% compress js %}
+    {% block common_js_coffee_gen %}
+        <!-- Helpers -->
+        <script type="text/javascript" src="{% static 'js/coffee-gen/URLProcessor.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/helpers/lazy_iframes_helper.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/helpers/scrollspy_helper.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/helpers/buttons_helper.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/helpers/HeaderHelper.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/helpers/EmbedModalsHelper.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/helpers/ChemicalEditorHelper.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/helpers/SequenceSearchHelper.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/helpers/SharePageHelper.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/helpers/URLHelper.js' %}"></script>
 
-    <!-- Backbone -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/base/TrackView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/base/CardView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/base/DownloadModelOrCollectionExt.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/base/ReportCardEntity.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/base/ResponsiviseViewExt.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/base/DownloadViewExt.js' %}"></script>
+        <!-- Backbone -->
+        <script type="text/javascript" src="{% static 'js/coffee-gen/views/base/TrackView.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/views/base/CardView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/base/DownloadModelOrCollectionExt.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/models/base/ReportCardEntity.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/views/base/ResponsiviseViewExt.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/views/base/DownloadViewExt.js' %}"></script>
 
-    <!-- Properties handling -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/GLaDOS_es_GeneratedSchema.js' %}"></script>
-      <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/PropertiesConfigurationModel.js' %}"></script>
-      <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/FacetsConfigurationModel.js' %}"></script>
-
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/ColumnsFactory.js' %}"></script>
-
-    <!-- Generic List Views -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/PaginatedViews/Carousel.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/PaginatedViews/InfiniteCards.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/PaginatedViews/PaginatedCards.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/PaginatedViews/PaginatedTable.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/PaginatedViews/ItemViewsFunctions.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/PaginatedViews/SelectionFunctions.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/PaginatedViews/PaginationFunctions.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/PaginatedViews/CardZoomFunctions.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/PaginatedViews/DeferredViewsFunctions.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/PaginatedViews/TooltipFunctions.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/PaginatedViews/PaginatedViewBase.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/PaginatedViews/PaginatedViewFactory.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/PaginatedViews/ItemCardView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/PaginatedViews/ColumnsHandling/ColumnsHandlerView.js' %}"></script>
-
-    <!-- Target Browser -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/TargetHierarchyNode.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/TargetHierarchyChildren.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/TargetHierarchyTree.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Target/BrowseTargetAsListNodeView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Target/BrowseTargetAsListView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Target/BrowseTargetAsCirclesNodeView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Target/BrowseTargetAsCirclesView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Target/BrowseTargetMainView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/targetBrowserApp.js' %}"></script>
-
-    <!-- Report Cards -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/ReportCardApp.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/MiniReportCardView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/ReportCards/PieInCardView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/ReportCards/HistogramInCardView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/ReportCards/VisualisationInCardView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/ReportCards/ReferencesInCardView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/ReportCards/MetabolismInCardView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/ReportCards/EntityDetailsInCardView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/ReportCards/CarouselInCardView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/ReportCards/PaginatedTableInCardView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/ReportCards/FullSectionEmbedderView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/ReportCards/SectionView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/ScrollSpy/ScrollSpyHandler.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/ScrollSpy/ScrollSpyView.js' %}"></script>
-
-    <!-- Tissue Report Card -->
-
-    <script type="text/javascript" src="{% static 'js/coffee-gen/TissueReportCardApp.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/Tissue.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Tissue/TissueBasicInformationView.js' %}"></script>
-
-    <!-- Compound Report Card -->
-
-    <script type="text/javascript" src="{% static 'js/coffee-gen/configs/ReportCards/Compound/ToggleAlternateFormsInPieConfig.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/configs/ReportCards/Compound/AssaySummaryPieConfig.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/configs/ReportCards/Compound/ActivityPieSummaryConfig.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/configs/ReportCards/Compound/TargetSummaryPieConfig.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/compoundReportCardApp.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound.js' %}"></script>
-
-      <!-- The Drug.js file needs to be loaded after the Compound.js -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound/Drug.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/ApprovedDrugClinicalCandidate.js' %}"></script>
-
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/Activity.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound/Metabolism.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound/StructuralAlertSet.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound/StructuralAlert.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound/DrugIndication.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound/MechanismOfAction.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound/TargetPrediction.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound/UnichemConnectivityMatch.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Compound/CompoundNameClassificationView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Compound/CompoundImageView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Compound/CompoundRepresentationsView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Compound/CompoundCalculatedParentPropertiesView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Compound/CompoundFeaturesView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Compound/CompoundMetabolismFSView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Compound/DeferredStructureView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/MechanismOfAction/MechanismOfActionRowView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/MechanismOfAction/MechanismOfActionCollItemView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/MechanismOfAction/CompoundMechanismsOfActionView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Compound/MetabolismView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Compound/TargetPredictionsView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Compound/UnichemConnectivityMatchesView.js' %}"></script>
+        <!-- Properties handling -->
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/GLaDOS_es_GeneratedSchema.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/PropertiesConfigurationModel.js' %}"></script>
 
 
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/ColumnsFactory.js' %}"></script>
+
+        <!-- Generic List Views -->
+        <script type="text/javascript" src="{% static 'js/coffee-gen/views/PaginatedViews/Carousel.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/PaginatedViews/InfiniteCards.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/PaginatedViews/PaginatedCards.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/PaginatedViews/PaginatedTable.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/PaginatedViews/ItemViewsFunctions.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/PaginatedViews/SelectionFunctions.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/PaginatedViews/PaginationFunctions.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/PaginatedViews/CardZoomFunctions.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/PaginatedViews/DeferredViewsFunctions.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/PaginatedViews/TooltipFunctions.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/PaginatedViews/PaginatedViewBase.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/PaginatedViews/PaginatedViewFactory.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/views/PaginatedViews/ItemCardView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/PaginatedViews/ColumnsHandling/ColumnsHandlerView.js' %}"></script>
+
+        <!-- Target Browser -->
+        <script type="text/javascript" src="{% static 'js/coffee-gen/models/TargetHierarchyNode.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/models/TargetHierarchyChildren.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/models/TargetHierarchyTree.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/Target/BrowseTargetAsListNodeView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/Target/BrowseTargetAsListView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/Target/BrowseTargetAsCirclesNodeView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/Target/BrowseTargetAsCirclesView.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/views/Target/BrowseTargetMainView.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/targetBrowserApp.js' %}"></script>
+
+        <!-- Report Cards -->
+        <script type="text/javascript" src="{% static 'js/coffee-gen/ReportCardApp.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/views/MiniReportCardView.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/views/ReportCards/PieInCardView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/ReportCards/HistogramInCardView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/ReportCards/VisualisationInCardView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/ReportCards/ReferencesInCardView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/ReportCards/MetabolismInCardView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/ReportCards/EntityDetailsInCardView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/ReportCards/CarouselInCardView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/ReportCards/PaginatedTableInCardView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/ReportCards/FullSectionEmbedderView.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/views/ReportCards/SectionView.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/models/ScrollSpy/ScrollSpyHandler.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/views/ScrollSpy/ScrollSpyView.js' %}"></script>
+
+        <!-- Tissue Report Card -->
+
+        <script type="text/javascript" src="{% static 'js/coffee-gen/TissueReportCardApp.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/models/Tissue.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/Tissue/TissueBasicInformationView.js' %}"></script>
+
+        <!-- Compound Report Card -->
+
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/configs/ReportCards/Compound/ToggleAlternateFormsInPieConfig.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/configs/ReportCards/Compound/AssaySummaryPieConfig.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/configs/ReportCards/Compound/ActivityPieSummaryConfig.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/configs/ReportCards/Compound/TargetSummaryPieConfig.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/compoundReportCardApp.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound.js' %}"></script>
+
+        <!-- The Drug.js file needs to be loaded after the Compound.js -->
+        <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound/Drug.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/ApprovedDrugClinicalCandidate.js' %}"></script>
+
+        <script type="text/javascript" src="{% static 'js/coffee-gen/models/Activity.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound/Metabolism.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/Compound/StructuralAlertSet.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound/StructuralAlert.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound/DrugIndication.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound/MechanismOfAction.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/models/Compound/TargetPrediction.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/Compound/UnichemConnectivityMatch.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/Compound/CompoundNameClassificationView.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/views/Compound/CompoundImageView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/Compound/CompoundRepresentationsView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/Compound/CompoundCalculatedParentPropertiesView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/Compound/CompoundFeaturesView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/Compound/CompoundMetabolismFSView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/Compound/DeferredStructureView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/MechanismOfAction/MechanismOfActionRowView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/MechanismOfAction/MechanismOfActionCollItemView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/MechanismOfAction/CompoundMechanismsOfActionView.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/views/Compound/MetabolismView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/Compound/TargetPredictionsView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/Compound/UnichemConnectivityMatchesView.js' %}"></script>
 
 
-    <!-- Activities -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/Activity/ActivityAggregation.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/Activity/ActivityAggregationMatrix.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Activity/ActivityAggregationView.js' %}"></script>
+        <!-- Activities -->
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/Activity/ActivityAggregation.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/Activity/ActivityAggregationMatrix.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/Activity/ActivityAggregationView.js' %}"></script>
 
-    <!-- Target Report Card -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/targetReportCardApp.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/Target.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/TargetComponent.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/TargetRelation.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Target/TargetNameAndClassificationView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Target/LigandEfficienciesView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/targetReportCardApp.js' %}"></script>
+        <!-- Target Report Card -->
+        <script type="text/javascript" src="{% static 'js/coffee-gen/targetReportCardApp.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/models/Target.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/models/TargetComponent.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/models/TargetRelation.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/Target/TargetNameAndClassificationView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/Target/LigandEfficienciesView.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/targetReportCardApp.js' %}"></script>
 
-    <!-- Cell Line Report Card -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/cellLineReportCardApp.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/CellLine.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/CellLine/CellLineBasicInformationView.js' %}"></script>
+        <!-- Cell Line Report Card -->
+        <script type="text/javascript" src="{% static 'js/coffee-gen/cellLineReportCardApp.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/models/CellLine.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/CellLine/CellLineBasicInformationView.js' %}"></script>
 
-    <!-- Assay Report Card -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/assayReportCardApp.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/Assay.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Assay/AssayBasicInformationView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Assay/AssayCurationSummaryView.js' %}"></script>
+        <!-- Assay Report Card -->
+        <script type="text/javascript" src="{% static 'js/coffee-gen/assayReportCardApp.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/models/Assay.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/Assay/AssayBasicInformationView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/Assay/AssayCurationSummaryView.js' %}"></script>
 
-    <!-- Document Report Card -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/documentReportCardApp.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/Document.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Document/DocumentBasicInformationView.js' %}"></script>
+        <!-- Document Report Card -->
+        <script type="text/javascript" src="{% static 'js/coffee-gen/documentReportCardApp.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/models/Document.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/Document/DocumentBasicInformationView.js' %}"></script>
 
-    <!-- Elastic Search Models -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/PaginatedCollectionBase.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/FacetingHandler.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/CompoundSchema.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/TargetSchema.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/AssaySchema.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/ActivitySchema.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/DocumentSchema.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/CellLineSchema.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/TissueSchema.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/DrugIndicationSchema.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/MechanismSchema.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/StateSaving/ESCollectionStateSavingFunctions.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/TextFilter/ESCollectionTextFilterFunctions.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/ColumnsHandler.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/FacetGroupVisibilityHandler.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/ESPaginatedQueryCollection.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/WSPaginatedCollection.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/ClientSidePaginatedCollection.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/SelectionFunctions.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/ReferenceStructureFunctions.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/CacheFunctions.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/SortingFunctions.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/PaginatedCollectionFactory.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/FacetsConfigurationModel.js' %}"></script>
 
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/SpecificFlavours/UnichemConnectivityRefsList.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/SpecificFlavours/MechanismsOfActionList.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/SpecificFlavours/TargetRelationsList.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/SpecificFlavours/TargetPredictionsList.js' %}"></script>
+        <!-- Elastic Search Models -->
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/PaginatedCollectionBase.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/FacetingHandler.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/CompoundSchema.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/TargetSchema.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/AssaySchema.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/ActivitySchema.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/DocumentSchema.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/CellLineSchema.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/TissueSchema.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/DrugIndicationSchema.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/esSchema/MechanismSchema.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/StateSaving/ESCollectionStateSavingFunctions.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/TextFilter/ESCollectionTextFilterFunctions.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/ColumnsHandler.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/FacetGroupVisibilityHandler.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/ESPaginatedQueryCollection.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/WSPaginatedCollection.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/ClientSidePaginatedCollection.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/SelectionFunctions.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/ReferenceStructureFunctions.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/CacheFunctions.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/SortingFunctions.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/PaginatedCollectionFactory.js' %}"></script>
 
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/ColumnsFactory2.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/SpecificFlavours/UnichemConnectivityRefsList.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/SpecificFlavours/MechanismsOfActionList.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/SpecificFlavours/TargetRelationsList.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/SpecificFlavours/TargetPredictionsList.js' %}"></script>
 
-    <!-- Visualisation -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/visualisation/PropertiesFactory.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Visualisation/PlotView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Visualisation/MatrixView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Visualisation/LegendView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Visualisation/PieView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Visualisation/HistogramView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/visualisation/LegendModel.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/visualisation/TargetClassificationModel.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/visualisation/AssayClassificationModel.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/ColumnsFactory2.js' %}"></script>
 
-    <!-- Visualisations Page -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/apps/VisualisePageApp.js' %}"></script>
+        <!-- Visualisation -->
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/visualisation/PropertiesFactory.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/views/Visualisation/PlotView.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/views/Visualisation/MatrixView.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/views/Visualisation/LegendView.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/views/Visualisation/PieView.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/views/Visualisation/HistogramView.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/models/visualisation/LegendModel.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/visualisation/TargetClassificationModel.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/visualisation/AssayClassificationModel.js' %}"></script>
 
-    <!-- Browsers -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/apps/Browsers/BrowserApp.js' %}"></script>
+        <!-- Visualisations Page -->
+        <script type="text/javascript" src="{% static 'js/coffee-gen/apps/VisualisePageApp.js' %}"></script>
 
-    <!-- References -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/References/ReferencesView.js' %}"></script>
+        <!-- Browsers -->
+        <script type="text/javascript" src="{% static 'js/coffee-gen/apps/Browsers/BrowserApp.js' %}"></script>
 
-    <!-- Search Results -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/SearchModel.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Browsers/BrowserFacetView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Browsers/BrowserToolBarView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/SearchResults/SearchBarView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/SearchResults/SearchBarAutocompleteView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/SearchResults/SearchResultsView.js' %}"></script>
+        <!-- References -->
+        <script type="text/javascript" src="{% static 'js/coffee-gen/views/References/ReferencesView.js' %}"></script>
 
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/Search/StructureSearchModel.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/Search/BLASTParamsModel.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/ServerSideDownloads/DownloadModel.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/ServerSideDownloads/ServerSideDownloadView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/SearchResults/ESResultsGraphView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/SearchResults/ESResultsBioactivitySummaryView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Browsers/QueryEditorView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Browsers/BrowserMenuView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/SearchResults/SSQueryView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/SearchResults/StructureQueryView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/SearchResults/SequenceQueryView.js' %}"></script>
+        <!-- Search Results -->
+        <script type="text/javascript" src="{% static 'js/coffee-gen/models/SearchModel.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/views/Browsers/BrowserFacetView.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/views/Browsers/BrowserToolBarView.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/views/SearchResults/SearchBarView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/SearchResults/SearchBarAutocompleteView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/SearchResults/SearchResultsView.js' %}"></script>
 
-    <script type="text/javascript" src="{% static 'js/coffee-gen/SearchResultsApp.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/Search/StructureSearchModel.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/models/Search/BLASTParamsModel.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/ServerSideDownloads/DownloadModel.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/ServerSideDownloads/ServerSideDownloadView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/SearchResults/ESResultsGraphView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/SearchResults/ESResultsBioactivitySummaryView.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/views/Browsers/QueryEditorView.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/views/Browsers/BrowserMenuView.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/views/SearchResults/SSQueryView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/SearchResults/StructureQueryView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/SearchResults/SequenceQueryView.js' %}"></script>
 
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/SearchResults/MarvinSketcherView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/SearchResults/SequenceSearchView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/SharePage/SharePageModel.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/SharePage/SharePageView.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/SearchResultsApp.js' %}"></script>
 
-    <!-- Main Page -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/MainPage/DatabaseSummaryInfo.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/MainPage/AssociatedResourcesView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/MainPage/GitHubDetailsView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/MainPage/BrowseEntitiesAsCirclesView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/MainPage/BrowseCovidEntitiesAsCirclesView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/MainPage/TargetClassificationsSunburstsView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/MainPage/AssayClassificationsSunburstsView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/MainPage/ZoomableSunburstView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/MainPage/Tweet.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/MainPage/BlogEntry.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/SpecificFlavours/BlogEntriesList.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/MainPage/DatabaseSummaryView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/MainPage/CentralCardView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/MainPageApp.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/MainPage/VisualisationsWithCaptionsView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Visualisation/VisualisationsPageHandlerView.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Play/ChEMBLGameView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/SearchResults/MarvinSketcherView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/SearchResults/SequenceSearchView.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/models/SharePage/SharePageModel.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/views/SharePage/SharePageView.js' %}"></script>
 
-    <!-- Breadcrumbs -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/apps/BreadcrumbApp.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/Breadcrumb/BreadcrumbModel.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Breadcrumb/BreadcrumbsView.js' %}"></script>
+        <!-- Main Page -->
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/MainPage/DatabaseSummaryInfo.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/MainPage/AssociatedResourcesView.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/views/MainPage/GitHubDetailsView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/MainPage/BrowseEntitiesAsCirclesView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/MainPage/BrowseCovidEntitiesAsCirclesView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/MainPage/TargetClassificationsSunburstsView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/MainPage/AssayClassificationsSunburstsView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/MainPage/ZoomableSunburstView.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/models/MainPage/Tweet.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/models/MainPage/BlogEntry.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/SpecificFlavours/BlogEntriesList.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/MainPage/DatabaseSummaryView.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/views/MainPage/CentralCardView.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/MainPageApp.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/MainPage/VisualisationsWithCaptionsView.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/views/Visualisation/VisualisationsPageHandlerView.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/views/Play/ChEMBLGameView.js' %}"></script>
 
-    <!-- Sketchers Full Screen Page -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/MarvinFullScreenApp.js' %}"></script>
+        <!-- Breadcrumbs -->
+        <script type="text/javascript" src="{% static 'js/coffee-gen/apps/BreadcrumbApp.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/models/Breadcrumb/BreadcrumbModel.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/views/Breadcrumb/BreadcrumbsView.js' %}"></script>
 
-    <!-- Settings -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/paginatedCollections/Settings.js' %}"></script>
+        <!-- Sketchers Full Screen Page -->
+        <script type="text/javascript" src="{% static 'js/coffee-gen/MarvinFullScreenApp.js' %}"></script>
 
-    <!-- Aggregations -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/Aggregations/Aggregation.js' %}"></script>
+        <!-- Settings -->
+        <script type="text/javascript"
+                src="{% static 'js/coffee-gen/models/paginatedCollections/Settings.js' %}"></script>
 
-    <!-- Embedder -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/apps/Embedding/EmbeddingRouter.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/apps/Embedding/EmbeddingApp.js' %}"></script>
+        <!-- Aggregations -->
+        <script type="text/javascript" src="{% static 'js/coffee-gen/models/Aggregations/Aggregation.js' %}"></script>
 
-    <script type="text/javascript" src="{% static 'js/coffee-gen/models/Embedding/EmbedModalModel.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/views/Embedding/EmbedModalView.js' %}"></script>
+        <!-- Embedder -->
+        <script type="text/javascript" src="{% static 'js/coffee-gen/apps/Embedding/EmbeddingRouter.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/apps/Embedding/EmbeddingApp.js' %}"></script>
 
-    <!-- Routing -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/routers/MainGladosRouter.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/models/Embedding/EmbedModalModel.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/views/Embedding/EmbedModalView.js' %}"></script>
 
-    <!-- Main glados app -->
-    <script type="text/javascript" src="{% static 'js/coffee-gen/apps/Main/MainGladosApp.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/coffee-gen/apps/Play/PlayPageApp.js' %}"></script>
+        <!-- Routing -->
+        <script type="text/javascript" src="{% static 'js/coffee-gen/routers/MainGladosRouter.js' %}"></script>
 
-    <!-- JavaScript Environment log -->
-    <script type="text/javascript">
-      glados.logGladosSettings();
-    </script>
-  {% endblock %}
+        <!-- Main glados app -->
+        <script type="text/javascript" src="{% static 'js/coffee-gen/apps/Main/MainGladosApp.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/coffee-gen/apps/Play/PlayPageApp.js' %}"></script>
+
+        <!-- JavaScript Environment log -->
+        <script type="text/javascript">
+            glados.logGladosSettings();
+        </script>
+    {% endblock %}
 {% endcompress %}

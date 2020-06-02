@@ -67,7 +67,7 @@ describe 'FacetsConfigurationModel', ->
 
   propertiesConfigMustBe = {
     "_metadata.atc_classifications.level1_description": {
-      "label": "ATC Classifications Level1 Descriptione",
+      "label": "ATC Classifications Level1 Description",
       "label_mini": "ATC Clsf. Levl. Desc.",
       "show": true,
       "position": 1,
@@ -88,6 +88,7 @@ describe 'FacetsConfigurationModel', ->
       "initial_sort": null,
       "initial_intervals": null,
       "prop_id": "_metadata.related_activities.count"
+      "report_card_entity": null
     },
     "_metadata.compound_generated.availability_type_label": {
       "label": "Availability Type",
@@ -99,6 +100,7 @@ describe 'FacetsConfigurationModel', ->
       "initial_sort": null,
       "initial_intervals": null,
       "prop_id": "_metadata.compound_generated.availability_type_label"
+      "report_card_entity": null
     }
   }
 
