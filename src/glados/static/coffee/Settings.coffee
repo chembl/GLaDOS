@@ -350,6 +350,9 @@ glados.loadSearchResultsURLS = ()->
   glados.Settings.PROPERTIES_GROUP_CONFIGURATION_URL_GENERATOR = Handlebars.compile(
     "#{glados.Settings.ES_PROXY_API_BASE_URL}/properties_configuration/group/{{index_name}}/{{group_name}}")
 
+  glados.Settings.FACETS_GROUP_CONFIGURATION_URL_GENERATOR = Handlebars.compile(
+    "#{glados.Settings.ES_PROXY_API_BASE_URL}/properties_configuration/facets/{{index_name}}/{{group_name}}")
+
 # Logs the JavaScript environment details
 glados.logGladosSettings = () ->
   if glados.Settings.DEBUG
