@@ -1,0 +1,4 @@
+describe 'FacetsConfigurationModel', ->
+
+  it 'works', ->
+

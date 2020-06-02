@@ -17,6 +17,8 @@ describe "An elasticsearch collection", ->
 
     it 'sets the initial state', ->
 
+      esList.setInitialFacetsConfigState()
+
       configStateGot = esList.getFacetsConfigState()
       configStateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_CONFIGURATION_FETCHING_STATES.INITIAL_STATE
       expect(configStateGot).toBe(configStateMustBe)

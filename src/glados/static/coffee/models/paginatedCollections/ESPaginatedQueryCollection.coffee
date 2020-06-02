@@ -238,9 +238,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_CONFIGURATION_FETCHING_STATES.FETCHING_CONFIGURATION
       )
 
-      @setFacetsConfigState(
-        glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_CONFIGURATION_FETCHING_STATES.CONFIGURATION_READY
-      )
+      testMode = @getMeta('test_mode')
+      unless testMode
+        @setFacetsConfigState(
+          glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_CONFIGURATION_FETCHING_STATES.CONFIGURATION_READY
+        )
 
     fetchColumnsDescription: ->
 
