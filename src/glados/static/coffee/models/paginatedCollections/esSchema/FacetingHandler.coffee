@@ -100,6 +100,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           facets[prop_name] = getFacetData(prop_i, prop_name)
           facets[prop_name].show = false
 
+      console.log('facets: ', facets)
       return facets
 
     @getNewFacetingHandler: (es_index, es_property, sort=null, intervals=null, report_card_entity=null)->
