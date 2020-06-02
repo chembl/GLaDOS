@@ -66,41 +66,43 @@ describe 'FacetsConfigurationModel', ->
   }
 
   propertiesConfigMustBe = {
-    "_metadata.atc_classifications.level1_description": {
-      "label": "ATC Classifications Level1 Description",
-      "label_mini": "ATC Clsf. Levl. Desc.",
-      "show": true,
-      "position": 1,
-      "es_index": "chembl_molecule",
-      "prop_name": "_metadata.atc_classifications.level1_description",
-      "initial_sort": "asc",
-      "initial_intervals": 20,
-      "prop_id": "_metadata.atc_classifications.level1_description"
-      "report_card_entity": Compound
-    },
-    "_metadata.related_activities.count": {
-      "label": "Bioactivities",
-      "label_mini": "Activities",
-      "show": true,
-      "position": 2,
-      "es_index": "chembl_molecule",
-      "prop_name": "_metadata.related_activities.count",
-      "initial_sort": null,
-      "initial_intervals": null,
-      "prop_id": "_metadata.related_activities.count"
-      "report_card_entity": null
-    },
-    "_metadata.compound_generated.availability_type_label": {
-      "label": "Availability Type",
-      "label_mini": "Avlb. Type Labl.",
-      "show": false,
-      "position": 3,
-      "es_index": "chembl_molecule",
-      "prop_name": "_metadata.compound_generated.availability_type_label",
-      "initial_sort": null,
-      "initial_intervals": null,
-      "prop_id": "_metadata.compound_generated.availability_type_label"
-      "report_card_entity": null
+    "facets_config": {
+      "_metadata.atc_classifications.level1_description": {
+        "label": "ATC Classifications Level1 Description",
+        "label_mini": "ATC Clsf. Levl. Desc.",
+        "show": true,
+        "position": 1,
+        "es_index": "chembl_molecule",
+        "prop_name": "_metadata.atc_classifications.level1_description",
+        "initial_sort": "asc",
+        "initial_intervals": 20,
+        "prop_id": "_metadata.atc_classifications.level1_description"
+        "report_card_entity": Compound
+      },
+      "_metadata.related_activities.count": {
+        "label": "Bioactivities",
+        "label_mini": "Activities",
+        "show": true,
+        "position": 2,
+        "es_index": "chembl_molecule",
+        "prop_name": "_metadata.related_activities.count",
+        "initial_sort": null,
+        "initial_intervals": null,
+        "prop_id": "_metadata.related_activities.count"
+        "report_card_entity": null
+      },
+      "_metadata.compound_generated.availability_type_label": {
+        "label": "Availability Type",
+        "label_mini": "Avlb. Type Labl.",
+        "show": false,
+        "position": 3,
+        "es_index": "chembl_molecule",
+        "prop_name": "_metadata.compound_generated.availability_type_label",
+        "initial_sort": null,
+        "initial_intervals": null,
+        "prop_id": "_metadata.compound_generated.availability_type_label"
+        "report_card_entity": null
+      }
     }
   }
 
@@ -121,7 +123,6 @@ describe 'FacetsConfigurationModel', ->
 
 
   it 'Parses the response correctly', ->
-
     indexName = 'chembl_molecule'
     groupName = 'browser_table'
 

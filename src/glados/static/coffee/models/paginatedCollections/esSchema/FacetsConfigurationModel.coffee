@@ -10,8 +10,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
     parse: (response) ->
 
-      console.log('PARSING RESONSE')
-      console.log(response)
       facetsConfig = {}
 
       propertiesFacetConfig = response.properties
@@ -55,7 +53,9 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         facetsConfig[propConfig.prop_id] = parsedConfig
         i += 1
 
-      return facetsConfig
+      return {
+        'facets_config': facetsConfig
+      }
 
     ENTITY_NAME_TO_REPORT_CARD_ENTITY:
       'Compound': Compound

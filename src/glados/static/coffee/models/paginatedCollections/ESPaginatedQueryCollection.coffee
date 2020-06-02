@@ -238,11 +238,26 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_CONFIGURATION_FETCHING_STATES.FETCHING_CONFIGURATION
       )
 
-      testMode = @getMeta('test_mode')
-      unless testMode
-        @setFacetsConfigState(
+      facetsConfigModel = new glados.models.paginatedCollections.esSchema.FacetsConfigurationModel
+        index_name: @getMeta('index_name')
+        group_name: 'browser_facets'
+
+      facetsConfigModel.on('error', (model, jqXHR) -> reject(jqXHR))
+
+      thisCollection = @
+      facetsConfigModel.once('change:facets_config', ->
+        console.log('config loaded!')
+        console.log(facetsConfigModel)
+
+        thisCollection.setFacetsConfigState(
           glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_CONFIGURATION_FETCHING_STATES.CONFIGURATION_READY
         )
+
+      )
+
+      testMode = @getMeta('test_mode')
+      unless testMode
+        facetsConfigModel.fetch()
 
     fetchColumnsDescription: ->
 
