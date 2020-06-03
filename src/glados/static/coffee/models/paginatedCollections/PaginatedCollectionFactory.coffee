@@ -66,6 +66,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             browse_list_url: esIndexSettings.BROWSE_LIST_URL
             id_column: esIndexSettings.ID_COLUMN
             facets_groups: glados.models.paginatedCollections.esSchema.FacetingHandler.initFacetGroups(esIndexSettings.FACETS_GROUPS)
+#            facets_groups: undefined
             columns: esIndexSettings.COLUMNS
 #            columns_description: esIndexSettings.COLUMNS_DESCRIPTION
             permanent_comparators_to_fetch: esIndexSettings.PERMANENT_COMPARATORS_TO_FETCH

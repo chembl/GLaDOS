@@ -129,7 +129,5 @@ describe 'FacetsConfigurationModel', ->
       group_name: groupName
 
     facetsConfigGot = facetsConfigModel.parse(sampleResponse).facets_config
-    console.log('facetsConfigGot: ', facetsConfigGot)
-    console.log('facetsConfigMustBe: ', facetsConfigMustBe)
     expect(_.isEqual(facetsConfigMustBe, facetsConfigGot)).toBe(true)
 

@@ -76,7 +76,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESTarget'
         LABEL: 'Targets'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'target'
+        INDEX_NAME: 'chembl_target'
         BROWSE_LIST_URL: Target.getTargetsListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Target
@@ -100,7 +100,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESAssay'
         LABEL: 'Assays'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'assay'
+        INDEX_NAME: 'chembl_assay'
         BROWSE_LIST_URL: Assay.getAssaysListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Assay
@@ -121,7 +121,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESDocument'
         LABEL: 'Documents'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'document'
+        INDEX_NAME: 'chembl_document'
         BROWSE_LIST_URL: Document.getDocumentsListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Document
@@ -141,7 +141,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCellLine'
         LABEL: 'Cells'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'cell_line'
+        INDEX_NAME: 'chembl_cell_line'
         BROWSE_LIST_URL: CellLine.getCellsListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: CellLine
@@ -161,7 +161,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESTissue'
         LABEL: 'Tissues'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'tissue'
+        INDEX_NAME: 'chembl_tissue'
         BROWSE_LIST_URL: glados.models.Tissue.getTissuesListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: glados.models.Tissue
@@ -182,7 +182,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESActivitity'
         LABEL: 'Activities'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'activity'
+        INDEX_NAME: 'chembl_activity'
         BROWSE_LIST_URL: Activity.getActivitiesListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Activity
@@ -293,7 +293,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       TARGET_BLAST_RESULTS:
         ID_NAME: 'ESTarget'
         LABEL: 'Targets'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'target'
+        INDEX_NAME: 'chembl_target'
         BROWSE_LIST_URL: Target.getTargetsListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Target
@@ -389,7 +389,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       DRUG_INDICATIONS:
         ID_NAME: 'ESDrugIndications'
         LABEL: 'Drug Indications'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'drug_indication_by_parent'
+        INDEX_NAME: 'chembl_drug_indication_by_parent'
         # PATH: Assigned after this declaration using the INDEX_NAME
         #BROWSE_LIST_URL: Drug.getDrugsListURL
         BROWSE_LIST_URL: glados.models.Compound.DrugIndication.getListURL
@@ -411,7 +411,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       DRUG_INDICATIONS_COMPOUND_REPORT_CARD:
         ID_NAME: 'ESDrugIndications'
         LABEL: 'Drug Indications'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'drug_indication_by_parent'
+        INDEX_NAME: 'chembl_drug_indication_by_parent'
         # PATH: Assigned after this declaration using the INDEX_NAME
         #BROWSE_LIST_URL: Drug.getDrugsListURL
         BROWSE_LIST_URL: glados.models.Compound.DrugIndication.getListURL
@@ -449,7 +449,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       MECHANISMS_OF_ACTION_COMPOUND_REPORT_CARD:
         ID_NAME: 'ESMechsOfAction'
         LABEL: 'Mechanisms of Action'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'mechanism_by_parent_target'
+        INDEX_NAME: 'chembl_mechanism_by_parent_target'
         BROWSE_LIST_URL: glados.models.Compound.MechanismOfAction.getListURL
         MODEL: glados.models.Compound.MechanismOfAction
         PERMANENT_COMPARATORS_TO_FETCH: ['parent_molecule._metadata.compound_generated.image_file',
