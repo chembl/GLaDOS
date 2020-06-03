@@ -65,7 +65,7 @@ describe 'FacetsConfigurationModel', ->
     }
   }
 
-  propertiesConfigMustBe = {
+  facetsConfigMustBe = {
     "facets_config": {
       "_metadata.atc_classifications.level1_description": {
         "label": "ATC Classifications Level1 Description",
@@ -131,5 +131,7 @@ describe 'FacetsConfigurationModel', ->
       group_name: groupName
 
     facetsConfigGot = facetsConfigModel.parse(sampleResponse)
-    expect(_.isEqual(propertiesConfigMustBe, facetsConfigGot)).toBe(true)
+    console.log('facetsConfigGot: ', facetsConfigGot)
+    console.log('facetsConfigMustBe: ', facetsConfigMustBe)
+    expect(_.isEqual(facetsConfigMustBe, facetsConfigGot)).toBe(true)
 

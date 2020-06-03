@@ -247,7 +247,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       thisCollection = @
       facetsConfigModel.once('change:facets_config', ->
         console.log('config loaded!')
-        console.log(facetsConfigModel)
+
+        console.log(thisCollection)
+
+        facetsConfig = facetsConfigModel.get('facets_config')
+        console.log(facetsConfig)
 
         thisCollection.setFacetsConfigState(
           glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_CONFIGURATION_FETCHING_STATES.CONFIGURATION_READY

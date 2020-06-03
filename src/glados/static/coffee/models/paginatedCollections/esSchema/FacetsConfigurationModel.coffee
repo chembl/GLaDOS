@@ -11,6 +11,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
     parse: (response) ->
 
       facetsConfig = {}
+      facetsConfigWithHandler = {}
 
       propertiesFacetConfig = response.properties
       defaultProperties = propertiesFacetConfig.default
@@ -31,6 +32,9 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           initial_intervals: if propConfig.agg_config.agg_params.initial_intervals? then propConfig.agg_config.agg_params.initial_intervals else null
           report_card_entity: if propConfig.agg_config.agg_params.report_card_entity? then @ENTITY_NAME_TO_REPORT_CARD_ENTITY[propConfig.agg_config.agg_params.report_card_entity] else null
         }
+        configWithHandler = Object.assign({}, parsedConfig)
+        @generateFacetingHandler(configWithHandler, propConfig)
+        console.log('configWithHandler: ', configWithHandler)
 
         facetsConfig[propConfig.prop_id] = parsedConfig
         i += 1
@@ -49,6 +53,9 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           initial_intervals: if propConfig.agg_config.agg_params.initial_intervals? then propConfig.agg_config.agg_params.initial_intervals else null
           report_card_entity: if propConfig.agg_config.agg_params.report_card_entity? then @ENTITY_NAME_TO_REPORT_CARD_ENTITY[propConfig.agg_config.agg_params.report_card_entity] else null
         }
+        configWithHandler = Object.assign({}, parsedConfig)
+        @generateFacetingHandler(configWithHandler, propConfig)
+        console.log('configWithHandler: ', configWithHandler)
 
         facetsConfig[propConfig.prop_id] = parsedConfig
         i += 1
@@ -62,3 +69,49 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       'Target': Target
       'Document': Document
       'Assay': Assay
+
+    generateFacetingHandler: (parsedConfig, propConfig) ->
+
+      console.log('GENERATING FACEINT HANDLER')
+      property_type = propConfig.property_config.type
+      console.log('property_type: ', property_type)
+      if property_type == 'string'
+        js_property_type = String
+      else if property_type == 'boolean'
+        js_property_type = Boolean
+      else if property_type == 'integer' or property_type == 'double' or property_type == 'date'
+        js_property_type = Number
+
+      es_index = @get('index_name')
+      es_property = propConfig.prop_id
+      sort = if propConfig.agg_config.agg_params.initial_sort? then propConfig.agg_config.agg_params.initial_sort else null
+      intervals = if propConfig.agg_config.agg_params.initial_intervals? then propConfig.agg_config.agg_params.initial_intervals else null
+      report_card_entity = if propConfig.agg_config.agg_params.report_card_entity? then @ENTITY_NAME_TO_REPORT_CARD_ENTITY[propConfig.agg_config.agg_params.report_card_entity] else null
+
+      if property_type == 'string' or property_type == 'boolean'
+        parsedConfig.faceting_handler = new FacetingHandler(
+          es_index,
+          es_property,
+          js_property_type.type,
+          FacetingHandler.CATEGORY_FACETING,
+          js_property_type,
+          null,
+          sort,
+          intervals,
+          report_card_entity
+        )
+      else if property_type == 'integer' or property_type == 'double' or property_type == 'date'
+        parsedConfig.faceting_handler = new FacetingHandler(
+          es_index,
+          es_property,
+          js_property_type.type,
+          FacetingHandler.INTERVAL_FACETING,
+          js_property_type,
+          js_property_type.year,
+          sort,
+          intervals,
+          report_card_entity
+        )
+      else
+        throw "ERROR! "+propConfig.prop_id+" for elastic index "+es_index+" with type "+property_type.type\
+            +" does not have a defined faceting type"
