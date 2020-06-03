@@ -14,9 +14,10 @@ glados.useNameSpace 'glados.views.Browsers',
 
       @browserView = arguments[0].menu_view
       @collection.on 'reset', @checkIfNoItems, @
+      @collection.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_CONFIG_FETCHING_STATE_CHANGED, @checkIfNoItems, @
 
-      @checkIfNoFilters()
-      @checkIfNoItems()
+#      @checkIfNoFilters()
+#      @checkIfNoItems()
 
     # ------------------------------------------------------------------------------------------------------------------
     # Render
@@ -32,6 +33,10 @@ glados.useNameSpace 'glados.views.Browsers',
 
     checkIfNoItems: ->
 
+      if not @collection.facetsConfigIsReady()
+        return
+
+      console.log('CHECK IF NO ITEMS')
       totalRecords = @collection.getMeta('total_records')
 
       thereAreItems = totalRecords != 0

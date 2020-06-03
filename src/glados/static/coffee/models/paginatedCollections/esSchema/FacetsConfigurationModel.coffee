@@ -78,6 +78,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       console.log('GENERATING FACEINT HANDLER')
       property_type = propConfig.property_config.type
       console.log('property_type: ', property_type)
+
       if property_type == 'string'
         js_property_type = String
       else if property_type == 'boolean'
@@ -91,13 +92,20 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       intervals = if propConfig.agg_config.agg_params.initial_intervals? then propConfig.agg_config.agg_params.initial_intervals else null
       report_card_entity = if propConfig.agg_config.agg_params.report_card_entity? then @ENTITY_NAME_TO_REPORT_CARD_ENTITY[propConfig.agg_config.agg_params.report_card_entity] else null
 
+      old_obfuscated_type =
+        type : js_property_type
+        integer : js_property_type == Number
+        year : false # review this one!!!
+        aggregatable : propConfig.property_config.aggregatable
+
+
       if property_type == 'string' or property_type == 'boolean'
         parsedConfig.faceting_handler = new FacetingHandler(
           es_index,
           es_property,
-          js_property_type.type,
-          FacetingHandler.CATEGORY_FACETING,
           js_property_type,
+          FacetingHandler.CATEGORY_FACETING,
+          old_obfuscated_type,
           null,
           sort,
           intervals,
@@ -107,9 +115,9 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         parsedConfig.faceting_handler = new FacetingHandler(
           es_index,
           es_property,
-          js_property_type.type,
-          FacetingHandler.INTERVAL_FACETING,
           js_property_type,
+          FacetingHandler.INTERVAL_FACETING,
+          old_obfuscated_type,
           js_property_type.year,
           sort,
           intervals,

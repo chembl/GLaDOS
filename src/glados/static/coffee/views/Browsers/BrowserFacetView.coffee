@@ -11,6 +11,7 @@ glados.useNameSpace 'glados.views.Browsers',
       @setUpResponsiveRender(emptyBeforeRender=false)
       @collection.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_CONFIG_FETCHING_STATE_CHANGED, @checkIfFacetsConfigLoadedAndInitStructure, @
       @collection.on 'facets-changed', @render, @
+      @collection.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_CONFIG_FETCHING_STATE_CHANGED, @render, @
       @collection.on 'reset', @checkIfNoItems, @
 
     events:
@@ -51,11 +52,11 @@ glados.useNameSpace 'glados.views.Browsers',
     # ------------------------------------------------------------------------------------------------------------------
     checkIfFacetsConfigLoadedAndInitStructure: ->
 
-      alert('CHECK IF FACETS CONFIG WAS LOADED')
+      console.log('CHECK IF FACETS CONFIG WAS LOADED')
 
       if @collection.facetsConfigIsReady()
 
-        alert('CONFIG IS READY')
+        console.log('CONFIG IS READY')
         @initFacetsVisualStructure()
 
     initFacetsVisualStructure: ->
@@ -63,6 +64,8 @@ glados.useNameSpace 'glados.views.Browsers',
       @facetsStreamingCover = $(@el).find('.div-cover')
 
       facetsGroups = @collection.getFacetsGroups(undefined, onlyVisible=false)
+      console.log('INIT FACETS VISUAL STRUCTURE')
+      console.log(facetsGroups)
 
       @facetsVisibilityHandler = new glados.models.paginatedCollections.FacetGroupVisibilityHandler
         all_facets_groups: facetsGroups
@@ -268,12 +271,12 @@ glados.useNameSpace 'glados.views.Browsers',
       if not @collection.facetsConfigIsReady()
         return
 
-      alert('RENDER')
+      if not @collection.facetsAreReady()
+        return
+
+      console.log('RENDER FACETS')
 
       @destroyAllTooltips()
-
-      if @IS_RESPONSIVE_RENDER and not @WAITING_FOR_FACETS
-        @initializeHTMLStructure()
 
       @HISTOGRAM_WIDTH = $(@el).width() - @HISTOGRAM_PADDING.left - @HISTOGRAM_PADDING.right
       @BARS_MAX_WIDTH = @HISTOGRAM_WIDTH

@@ -252,8 +252,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
         facetsConfigWithHandler = facetsConfigModel.get('facets_config_with_handler')
         console.log(facetsConfigWithHandler)
-        thisCollection.set('facets_groups', facetsConfigWithHandler)
-        alert('facets groups set!')
+        thisCollection.setMeta('facets_groups', facetsConfigWithHandler)
+        console.log('facets groups set!')
 
         thisCollection.setFacetsConfigState(
           glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_CONFIGURATION_FETCHING_STATES.CONFIGURATION_READY
@@ -381,6 +381,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         fetchPromise.then (data) -> thisCollection.reset(thisCollection.parse(data))
         fetchPromise.fail (jqXHR) -> thisCollection.trigger('error', thisCollection, jqXHR)
 
+        console.log('GOING TO REQUEST FACETS DATA')
         @loadFacetGroups(@getRequestData())
 
       return esCacheRequestData
