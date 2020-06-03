@@ -37,6 +37,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         console.log('configWithHandler: ', configWithHandler)
 
         facetsConfig[propConfig.prop_id] = parsedConfig
+        facetsConfigWithHandler[propConfig.prop_id] = configWithHandler
         i += 1
 
       for propConfig in optionalProperties
@@ -58,10 +59,12 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         console.log('configWithHandler: ', configWithHandler)
 
         facetsConfig[propConfig.prop_id] = parsedConfig
+        facetsConfigWithHandler[propConfig.prop_id] = configWithHandler
         i += 1
 
       return {
         'facets_config': facetsConfig
+        'facets_config_with_handler': facetsConfigWithHandler
       }
 
     ENTITY_NAME_TO_REPORT_CARD_ENTITY:
