@@ -37,7 +37,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COMPLICATE_CARDS_VIEW: true
         COMPLICATE_CARDS_COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_LONG
         ADDITIONAL_COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.CompoundSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV'], glados.Settings.DEFAULT_FILE_FORMAT_NAMES['SDF']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
@@ -84,7 +83,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         CONFIG_GROUPS:
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
         ID_COLUMN: Target.ID_COLUMN
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.TargetSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
@@ -109,7 +107,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         ID_COLUMN: Assay.ID_COLUMN
         CONFIG_GROUPS:
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.AssaySchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
@@ -129,7 +126,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         PERMANENT_COMPARATORS_TO_FETCH: ['document_chembl_id']
         CONFIG_GROUPS:
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.DocumentSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
@@ -149,7 +145,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         PERMANENT_COMPARATORS_TO_FETCH: ['cell_chembl_id']
         CONFIG_GROUPS:
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.CellLineSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
@@ -169,7 +164,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         PERMANENT_COMPARATORS_TO_FETCH: ['tissue_chembl_id']
         CONFIG_GROUPS:
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.TissueSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
@@ -195,7 +189,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.ActivitySchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
@@ -235,7 +228,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         ENABLE_CARDS_ZOOM: true
         CUSTOM_CARDS_TEMPLATE: 'Handlebars-Common-Paginated-Card-Compound'
         CUSTOM_CARDS_ITEM_VIEW: glados.views.PaginatedViews.ItemCardView
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.CompoundSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV'], glados.Settings.DEFAULT_FILE_FORMAT_NAMES['SDF']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
@@ -270,7 +262,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         CUSTOM_CARDS_TEMPLATE: 'Handlebars-Common-Paginated-Card-Compound'
         CUSTOM_CARDS_ITEM_VIEW: glados.views.PaginatedViews.ItemCardView
         ADDITIONAL_COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.CompoundSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV'], glados.Settings.DEFAULT_FILE_FORMAT_NAMES['SDF']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
@@ -302,7 +293,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         PERMANENT_COMPARATORS_TO_FETCH: ['target_chembl_id', 'cross_references', 'target_components']
         CONFIG_GROUPS:
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table_blast'
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.TargetSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
@@ -331,7 +321,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         CUSTOM_CARDS_TEMPLATE: 'Handlebars-Common-Paginated-Card-Compound'
         CUSTOM_CARDS_ITEM_VIEW: glados.views.PaginatedViews.ItemCardView
         ADDITIONAL_COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.CompoundSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV'], glados.Settings.DEFAULT_FILE_FORMAT_NAMES['SDF']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
@@ -367,7 +356,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         CUSTOM_CARDS_ITEM_VIEW: glados.views.PaginatedViews.ItemCardView
         CUSTOM_CARD_ITEM_VIEW_DETAILS_COLUMNS: glados.models.Compound.Drug.COLUMNS_SETTINGS.CARD_DETAILS
         ADDITIONAL_COLUMNS: Drug.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.CompoundSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV'], glados.Settings.DEFAULT_FILE_FORMAT_NAMES['SDF']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
@@ -399,7 +387,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           'parent_molecule.molecule_chembl_id', 'drug_indication.mesh_id', 'drug_indication.drugind_id']
         CONFIG_GROUPS:
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.DrugIndicationSchema.FACETS_GROUPS
         ID_COLUMN: glados.models.Compound.DrugIndication.ID_COLUMN
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
@@ -421,7 +408,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           'parent_molecule.molecule_chembl_id', 'drug_indication.mesh_id', 'drug_indication.drugind_id']
         CONFIG_GROUPS:
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'report_card_table'
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.DrugIndicationSchema.FACETS_GROUPS
         ID_COLUMN: glados.models.Compound.DrugIndication.ID_COLUMN
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
@@ -436,7 +422,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           'parent_molecule.molecule_chembl_id', 'target.target_chembl_id', 'mechanism_of_action.mec_id']
         CONFIG_GROUPS:
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.MechanismSchema.FACETS_GROUPS
         ID_COLUMN: glados.models.Compound.MechanismOfAction.ID_COLUMN
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
@@ -457,7 +442,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           'parent_molecule.molecule_chembl_id', 'target.target_chembl_id']
         CONFIG_GROUPS:
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'report_card_table'
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.MechanismSchema.FACETS_GROUPS
         ID_COLUMN: glados.models.Compound.MechanismOfAction.ID_COLUMN
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
@@ -472,7 +456,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           'parent_molecule.molecule_chembl_id', 'target.target_chembl_id']
         CONFIG_GROUPS:
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'target_report_card_table'
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.MechanismSchema.FACETS_GROUPS
         ID_COLUMN: glados.models.Compound.MechanismOfAction.ID_COLUMN
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
