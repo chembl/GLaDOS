@@ -18,6 +18,10 @@ glados.useNameSpace 'glados.views.ReportCards',
 
 
       indexName = @model.indexName
+      console.log('render entity details in card view')
+      console.log(indexName)
+      console.log(@model)
+      console.log(@model.url)
 
       propertiesGroup = @config.properties_group
 

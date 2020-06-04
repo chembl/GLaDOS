@@ -48,16 +48,32 @@ class TestsUtils
   # it is meant to work only for a ES compound list
   @simulateFacetsESList = (list, dataURL, done) ->
 
-    return $.get dataURL, (testData) ->
+    checkIfFacetsConfigReady = ->
 
-      for item in testData
-        aggData = item.aggData
-        firstCall = item.firstCall
-        for facetGroupKey, facetGroup of list.getFacetsGroups()
+      facets_config_is_ready = list.facetsConfigIsReady()
+      if not facets_config_is_ready
+        list.once( glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_CONFIG_FETCHING_STATE_CHANGED,
+          checkIfFacetsConfigReady, @)
+      else
+        parseFacetsData()
 
-          facetGroup.faceting_handler.parseESResults(aggData, firstCall)
-      list.setFacetsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.FACETS_READY)
-      done() unless not done?
+    parseFacetsData = ->
+
+      $.get dataURL, (testData) ->
+
+        for item in testData
+          aggData = item.aggData
+          firstCall = item.firstCall
+          for facetGroupKey, facetGroup of list.getFacetsGroups()
+
+            facetGroup.faceting_handler.parseESResults(aggData, firstCall)
+        list.setFacetsFetchingState(glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.FACETS_READY)
+        done() unless not done?
+
+    list.once( glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_CONFIG_FETCHING_STATE_CHANGED,
+    checkIfFacetsConfigReady, @)
+
+    list.fetchFacetsDescription(force=true)
 
   @generateListOfRandomValues = (minVal, maxVal) ->
 

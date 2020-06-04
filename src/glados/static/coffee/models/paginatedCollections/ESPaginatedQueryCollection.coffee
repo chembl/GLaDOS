@@ -232,7 +232,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return jsonResultsList
 
-    fetchFacetsDescription: ->
+    fetchFacetsDescription: (force=false) ->
 
       @setFacetsConfigState(
         glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_CONFIGURATION_FETCHING_STATES.FETCHING_CONFIGURATION
@@ -256,8 +256,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       )
 
-      testMode = @getMeta('test_mode')
-      unless testMode
+      stopFetch = (thisCollection.getMeta('test_mode') and not force)
+
+      unless stopFetch
         facetsConfigModel.fetch()
 
     fetchColumnsDescription: ->
@@ -294,6 +295,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
               )
               resolve('success')
           )
+
           unless thisCollection.getMeta('test_mode')
             propertiesConfigModel.fetch()
 
