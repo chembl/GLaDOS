@@ -34,7 +34,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         }
         configWithHandler = Object.assign({}, parsedConfig)
         @generateFacetingHandler(configWithHandler, propConfig)
-        console.log('configWithHandler: ', configWithHandler)
 
         facetsConfig[propConfig.prop_id] = parsedConfig
         facetsConfigWithHandler[propConfig.prop_id] = configWithHandler
@@ -56,7 +55,6 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         }
         configWithHandler = Object.assign({}, parsedConfig)
         @generateFacetingHandler(configWithHandler, propConfig)
-        console.log('configWithHandler: ', configWithHandler)
 
         facetsConfig[propConfig.prop_id] = parsedConfig
         facetsConfigWithHandler[propConfig.prop_id] = configWithHandler
@@ -75,9 +73,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
 
     generateFacetingHandler: (parsedConfig, propConfig) ->
 
-      console.log('GENERATING FACEINT HANDLER')
       property_type = propConfig.property_config.type
-      console.log('property_type: ', property_type)
 
       if property_type == 'string'
         js_property_type = String

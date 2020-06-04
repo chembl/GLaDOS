@@ -36,7 +36,6 @@ glados.useNameSpace 'glados.views.Browsers',
       if not @collection.facetsConfigIsReady()
         return
 
-      console.log('CHECK IF NO ITEMS')
       totalRecords = @collection.getMeta('total_records')
 
       thereAreItems = totalRecords != 0

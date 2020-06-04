@@ -246,14 +246,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       thisCollection = @
       facetsConfigModel.once('change:facets_config', ->
-        console.log('config loaded!')
-
-        console.log(thisCollection)
 
         facetsConfigWithHandler = facetsConfigModel.get('facets_config_with_handler')
-        console.log(facetsConfigWithHandler)
         thisCollection.setMeta('facets_groups', facetsConfigWithHandler)
-        console.log('facets groups set!')
 
         thisCollection.setFacetsConfigState(
           glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_CONFIGURATION_FETCHING_STATES.CONFIGURATION_READY
@@ -340,18 +335,15 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       testMode |= @getMeta('test_mode')
 
       disableFacets = @getMeta('disable_facets')
-      console.log('disableFacets: ', disableFacets)
 
       if disableFacets
         allConfigsReady = @configIsReady()
       else
         allConfigsReady = @configIsReady() and @facetsConfigIsReady()
 
-      console.log('allConfigsReady: ', allConfigsReady)
       if testMode or allConfigsReady
         return @fetchData(options, testMode)
 
-      console.log('CONFIG WAS NOT READY GOING TO FETCH IT!')
       @fetchColumnsDescription()
       @fetchFacetsDescription() unless disableFacets
 
@@ -392,7 +384,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         fetchPromise.then (data) -> thisCollection.reset(thisCollection.parse(data))
         fetchPromise.fail (jqXHR) -> thisCollection.trigger('error', thisCollection, jqXHR)
 
-        console.log('GOING TO REQUEST FACETS DATA')
         @loadFacetGroups(@getRequestData())
 
       return esCacheRequestData

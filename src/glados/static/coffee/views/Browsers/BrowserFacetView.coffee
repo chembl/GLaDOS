@@ -52,11 +52,8 @@ glados.useNameSpace 'glados.views.Browsers',
     # ------------------------------------------------------------------------------------------------------------------
     checkIfFacetsConfigLoadedAndInitStructure: ->
 
-      console.log('CHECK IF FACETS CONFIG WAS LOADED')
-
       if @collection.facetsConfigIsReady()
 
-        console.log('CONFIG IS READY')
         @initFacetsVisualStructure()
 
     initFacetsVisualStructure: ->
@@ -64,8 +61,6 @@ glados.useNameSpace 'glados.views.Browsers',
       @facetsStreamingCover = $(@el).find('.div-cover')
 
       facetsGroups = @collection.getFacetsGroups(undefined, onlyVisible=false)
-      console.log('INIT FACETS VISUAL STRUCTURE')
-      console.log(facetsGroups)
 
       @facetsVisibilityHandler = new glados.models.paginatedCollections.FacetGroupVisibilityHandler
         all_facets_groups: facetsGroups
@@ -276,8 +271,6 @@ glados.useNameSpace 'glados.views.Browsers',
       if not @collection.facetsAreReady()
         @showPreloader()
         return
-
-      console.log('RENDER FACETS')
 
       @destroyAllTooltips()
 
