@@ -107,6 +107,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             sssearch_model: ssSearchModel
             download_columns_group: esIndexSettings.DOWNLOAD_COLUMNS_GROUP
             enable_text_filter: esIndexSettings.ENABLE_TEXT_FILTER
+            disable_facets: esIndexSettings.DISABLE_FACETS
 
           if @getMeta('enable_similarity_maps') or @getMeta('enable_substructure_highlighting')
             @initReferenceStructureFunctions()

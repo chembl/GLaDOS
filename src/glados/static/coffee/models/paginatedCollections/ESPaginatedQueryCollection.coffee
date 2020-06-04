@@ -338,20 +338,29 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     fetch: (options, testMode=false) ->
 
       testMode |= @getMeta('test_mode')
-      allConfigsReady = @configIsReady() and @facetsConfigIsReady()
+
+      disableFacets = @getMeta('disable_facets')
+      console.log('disableFacets: ', disableFacets)
+
+      if disableFacets
+        allConfigsReady = @configIsReady()
+      else
+        allConfigsReady = @configIsReady() and @facetsConfigIsReady()
+
+      console.log('allConfigsReady: ', allConfigsReady)
       if testMode or allConfigsReady
         return @fetchData(options, testMode)
 
-      console.log('CONFIG WAS NOT READY!')
+      console.log('CONFIG WAS NOT READY GOING TO FETCH IT!')
       @fetchColumnsDescription()
-      @fetchFacetsDescription()
+      @fetchFacetsDescription() unless disableFacets
 
       thisCollection = @
 
       @once( glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_CONFIG_FETCHING_STATE_CHANGED,
       (-> thisCollection.fetchData(options, testMode=false)), @)
 
-      @once( glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_FETCHING_STATE_CHANGED,
+      @once( glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.CONFIG_FETCHING_STATE_CHANGED,
       (-> thisCollection.fetchData(options, testMode=false)), @)
 
     # Prepares an Elastic Search query to search in all the fields of a document in a specific index

@@ -177,6 +177,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         ENABLE_COLLECTION_CACHING: true
         LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
         ENABLE_TEXT_FILTER: true
+        DISABLE_FACETS: true
     ES_INDEXES_NO_MAIN_SEARCH:
       ACTIVITY:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
@@ -428,7 +429,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       MECHANISMS_OF_ACTION:
         ID_NAME: 'ESMechsOfAction'
         LABEL: 'Drug Mechanisms'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'mechanism_by_parent_target'
+        INDEX_NAME: 'chembl_mechanism_by_parent_target'
         BROWSE_LIST_URL: glados.models.Compound.MechanismOfAction.getListURL
         MODEL: glados.models.Compound.MechanismOfAction
         PERMANENT_COMPARATORS_TO_FETCH: ['parent_molecule._metadata.compound_generated.image_file',
@@ -464,7 +465,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       MECHANISMS_OF_ACTION_TARGET_REPORT_CARD:
         ID_NAME: 'ESMechsOfAction'
         LABEL: 'Mechanisms of Action'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'mechanism_by_parent_target'
+        INDEX_NAME: 'chembl_mechanism_by_parent_target'
         BROWSE_LIST_URL: glados.models.Compound.MechanismOfAction.getListURL
         MODEL: glados.models.Compound.MechanismOfAction
         PERMANENT_COMPARATORS_TO_FETCH: ['parent_molecule._metadata.compound_generated.image_file',
