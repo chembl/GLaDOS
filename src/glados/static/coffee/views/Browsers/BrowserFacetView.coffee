@@ -194,6 +194,7 @@ glados.useNameSpace 'glados.views.Browsers',
     # Show/hide filters
     # ------------------------------------------------------------------------------------------------------------------
     handleShowHideFilter: ->
+      @initializeHTMLStructure()
       @showPreloader()
       @collection.loadFacetGroups()
     # ------------------------------------------------------------------------------------------------------------------
