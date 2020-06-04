@@ -90,12 +90,13 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
       es_property = propConfig.prop_id
       sort = if propConfig.agg_config.agg_params.initial_sort? then propConfig.agg_config.agg_params.initial_sort else null
       intervals = if propConfig.agg_config.agg_params.initial_intervals? then propConfig.agg_config.agg_params.initial_intervals else null
+      isYear = if propConfig.agg_config.agg_params.is_year? then propConfig.agg_config.agg_params.is_year else null
       report_card_entity = if propConfig.agg_config.agg_params.report_card_entity? then @ENTITY_NAME_TO_REPORT_CARD_ENTITY[propConfig.agg_config.agg_params.report_card_entity] else null
 
       old_obfuscated_type =
         type : js_property_type
         integer : js_property_type == Number
-        year : false # review this one!!!
+        year : isYear
         aggregatable : propConfig.property_config.aggregatable
 
 
@@ -118,7 +119,7 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
           js_property_type,
           FacetingHandler.INTERVAL_FACETING,
           old_obfuscated_type,
-          js_property_type.year,
+          isYear,
           sort,
           intervals,
           report_card_entity
