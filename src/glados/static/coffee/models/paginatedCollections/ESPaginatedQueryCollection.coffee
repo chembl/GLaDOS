@@ -338,19 +338,21 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     fetch: (options, testMode=false) ->
 
       testMode |= @getMeta('test_mode')
-      if testMode or @configIsReady()
+      allConfigsReady = @configIsReady() and @facetsConfigIsReady()
+      if testMode or allConfigsReady
         return @fetchData(options, testMode)
 
-      descriptionPromise = @fetchColumnsDescription()
+      console.log('CONFIG WAS NOT READY!')
+      @fetchColumnsDescription()
+      @fetchFacetsDescription()
 
       thisCollection = @
-      descriptionPromise.then( ->
-        thisCollection.fetchData(options, testMode=false)
-      ).catch( (jqXHR) ->
-        thisCollection.trigger('error', thisCollection, jqXHR)
-      )
 
-      facetsDescriptionPromise = @fetchFacetsDescription()
+      @once( glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_CONFIG_FETCHING_STATE_CHANGED,
+      (-> thisCollection.fetchData(options, testMode=false)), @)
+
+      @once( glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_FETCHING_STATE_CHANGED,
+      (-> thisCollection.fetchData(options, testMode=false)), @)
 
     # Prepares an Elastic Search query to search in all the fields of a document in a specific index
     fetchData: (options, testMode=false) ->

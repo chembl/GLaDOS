@@ -269,9 +269,11 @@ glados.useNameSpace 'glados.views.Browsers',
         return
 
       if not @collection.facetsConfigIsReady()
+        @showPreloader()
         return
 
       if not @collection.facetsAreReady()
+        @showPreloader()
         return
 
       console.log('RENDER FACETS')
