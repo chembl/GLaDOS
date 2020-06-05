@@ -8,6 +8,8 @@ glados.useNameSpace 'glados.models.Aggregations',
     #-------------------------------------------------------------------------------------------------------------------
     initialize: ->
       @url = @get('index_url')
+      console.log('init aggregation')
+      console.log('@url: ', @url)
       @set('state', glados.models.Aggregations.Aggregation.States.INITIAL_STATE)
       @loadQuery()
 
