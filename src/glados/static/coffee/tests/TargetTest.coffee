@@ -110,7 +110,7 @@ describe "Target", ->
 
       it 'generates the elasticsearch url', ->
 
-        urlMustBe = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/'+glados.Settings.CHEMBL_ES_INDEX_PREFIX+'target/_doc/' + chemblID
+        urlMustBe = "#{glados.Settings.ES_PROXY_API_BASE_URL}/es_data/get_es_document/#{Target.ES_INDEX}/#{chemblID}"
         expect(target.url).toBe(urlMustBe)
 
       # TODO: this needs to be replaced with a better tests which does not depend on the server
