@@ -249,6 +249,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
         facetsConfigWithHandler = facetsConfigModel.get('facets_config_with_handler')
         thisCollection.setMeta('facets_groups', facetsConfigWithHandler)
+        thisCollection.restoreFacetsStateIfSaved()
 
         thisCollection.setFacetsConfigState(
           glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_CONFIGURATION_FETCHING_STATES.CONFIGURATION_READY
@@ -260,6 +261,26 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       unless stopFetch
         facetsConfigModel.fetch()
+
+    restoreFacetsStateIfSaved: ->
+
+      facetsState = @getMeta('facets_state_to_restore')
+      if not facetsState?
+        return
+
+      facetGroups = @getFacetsGroups(selected=undefined, onlyVisible=false)
+
+      for fGroupKey, selectedKeys of facetsState
+
+          originalFGroupState = facetsState[fGroupKey]
+          if not facetGroups[fGroupKey]?
+            continue
+          facetingHandler = facetGroups[fGroupKey].faceting_handler
+          # make sure all restored facets are shown
+          facetGroups[fGroupKey].show = true
+          facetingHandler.loadState(originalFGroupState)
+
+      @setMeta('facets_state_to_restore', undefined)
 
     fetchColumnsDescription: ->
 

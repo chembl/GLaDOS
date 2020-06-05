@@ -22,20 +22,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       list = @getNewESResultsListFor(settings, queryString, useQueryString, itemsList, ssSearchModel=undefined,
         stickyQuery, searchESQuery, flavour=undefined, textFilter)
 
-      facetGroups = list.getFacetsGroups(selected=undefined, onlyVisible=false)
       facetsState = stateObject.facets_state
 
       if facetsState?
-        for fGroupKey, selectedKeys of facetsState
-
-          originalFGroupState = facetsState[fGroupKey]
-          if not facetGroups[fGroupKey]?
-            continue
-          facetingHandler = facetGroups[fGroupKey].faceting_handler
-          # make sure all restored facets are shown
-          facetGroups[fGroupKey].show = true
-          facetingHandler.loadState(originalFGroupState)
-          console.log 'facetingHandler: ', facetingHandler
+        # it will now load the facets state later, after loading the facets config
+        list.setMeta('facets_state_to_restore', facetsState)
 
       return list
 
