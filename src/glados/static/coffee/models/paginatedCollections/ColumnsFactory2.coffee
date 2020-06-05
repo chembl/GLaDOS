@@ -2,7 +2,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
   ColumnsFactory2:
 
     ENTITY_NAME_TO_ENTITY_MODEL:
-      "#{Compound.INDEX_NAME}": Compound
+      "#{Compound.ES_INDEX}": Compound
       "#{Target.INDEX_NAME}": Target
       "#{Assay.INDEX_NAME}": Assay
       "#{Document.INDEX_NAME}": Document
@@ -10,6 +10,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     generateColumn: (configFromServer, customEntity) ->
 
+      console.log('GENERATE COLUMN')
       propID = configFromServer.prop_id
 
       indexName = configFromServer.index_name
