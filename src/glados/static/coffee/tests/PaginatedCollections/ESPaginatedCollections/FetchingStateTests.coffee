@@ -72,15 +72,23 @@ describe "An elasticsearch collection", ->
 
     it 'sets the correct state after parsing items (facets)', (done) ->
 
+      checkIfFacetsConfigReady = ->
+
+        facetsFetchingState = esList.facetsConfigIsReady()
+        if not facetsFetchingState
+          esList.once( glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_FETCHING_STATE_CHANGED,
+            checkIfFacetsConfigReady, @)
+        else
+          facetsStateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.FACETS_READY
+          facetsStateGot = esList.getFacetsFetchingState()
+          expect(facetsStateGot).toBe(facetsStateMustBe)
+          done()
+
+
+      esList.once( glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_CONFIG_FETCHING_STATE_CHANGED,
+      checkIfFacetsConfigReady, @)
+
       simulateFacets = TestsUtils.simulateFacetsESList(esList, glados.Settings.STATIC_URL + 'testData/FacetsTestData.json', ->)
-
-      simulateFacets.then ->
-
-        facetsStateGot = esList.getFacetsFetchingState()
-        facetsStateMustBe = glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_FETCHING_STATES.FACETS_READY
-        expect(facetsStateGot).toBe(facetsStateMustBe)
-
-        done()
 
     it 'triggers the correct event when changing items fetching state', ->
 
