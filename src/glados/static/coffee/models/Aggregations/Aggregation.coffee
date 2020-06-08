@@ -110,7 +110,7 @@ glados.useNameSpace 'glados.models.Aggregations',
 
       esCacheData =
         index_name: @getIndexName()
-        search_data: JSON.stringify(@getRequestData())
+        es_query: JSON.stringify(@getRequestData())
 
       return esCacheData
 
@@ -118,7 +118,7 @@ glados.useNameSpace 'glados.models.Aggregations',
 
       esCacheData =
         index_name: @getIndexName()
-        search_data: JSON.stringify(@getRequestMinMaxData())
+        es_query: JSON.stringify(@getRequestMinMaxData())
 
       return esCacheData
 
@@ -135,8 +135,6 @@ glados.useNameSpace 'glados.models.Aggregations',
       return false
 
     fetch: ->
-
-      console.log('FETCH AGGREGATION')
 
       $progressElem = @get('progress_elem')
       state = @get('state')
@@ -155,27 +153,21 @@ glados.useNameSpace 'glados.models.Aggregations',
         $progressElem.html 'Fetching Data...'
       @set('state', glados.models.Aggregations.Aggregation.States.LOADING_BUCKETS)
 
-      console.log('using web server cache: ', @get('use_web_server_cache'))
-
       fetchURL = glados.Settings.ES_PROXY_ES_DATA_URL
-      console.log('fetchURL: ', fetchURL)
-
       esCacheData = @getESCacheRequestData()
-      console.log('esCacheData: ', esCacheData)
-      fetchPromise = glados.doCSRFPost(glados.Settings.ELASTICSEARCH_CACHE, esCacheData)
-
+      fetchPromise = $.post(fetchURL, esCacheData)
 
       thisModel = @
-      fetchPromise.done((data) ->
+      fetchPromise.done((response) ->
         if $progressElem?
           $progressElem.html ''
 
-        if data.hits.total.value == 0
+        if response.es_response.hits.total.value == 0
           thisModel.set
             'state': glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE
         else
           thisModel.set
-            'bucket_data': thisModel.parse(data)
+            'bucket_data': thisModel.parse(response)
             'state': glados.models.Aggregations.Aggregation.States.INITIAL_STATE
 
 
@@ -183,20 +175,17 @@ glados.useNameSpace 'glados.models.Aggregations',
 
     fetchMinMax: ->
 
-      console.log('fetch min and max')
       $progressElem = @get('progress_elem')
 
       fetchURL = glados.Settings.ES_PROXY_ES_DATA_URL
-      console.log('fetchURL: ', fetchURL)
 
       esCacheData = @getESCacheRequestDataFroMinAndMax()
-      console.log('esCacheData: ', esCacheData)
-      fetchPromise = glados.doCSRFPost(glados.Settings.ELASTICSEARCH_CACHE, esCacheData)
+      fetchPromise = $.post(fetchURL, esCacheData)
 
       thisModel = @
-      fetchPromise.done((data) ->
+      fetchPromise.done((response) ->
 
-        thisModel.set('aggs_config', thisModel.parseMinMax(data))
+        thisModel.set('aggs_config', thisModel.parseMinMax(response))
 
         if thisModel.get('state') == glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE
           $progressElem.html '' unless not $progressElem?
@@ -211,7 +200,9 @@ glados.useNameSpace 'glados.models.Aggregations',
     #-------------------------------------------------------------------------------------------------------------------
     # Parsing
     #-------------------------------------------------------------------------------------------------------------------
-    parseMinMax: (data) ->
+    parseMinMax: (response) ->
+
+      data = response.es_response
 
       if data.hits.total.value == 0
         @set('state', glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE)
@@ -344,7 +335,9 @@ glados.useNameSpace 'glados.models.Aggregations',
             parsedParentKey = newBucketsData.parsed_key
           @loadBuckets(newBucketsData, newAggsConfig, newReceivedAggsInfo, parentKey, parsedParentKey)
 
-    parse: (data) ->
+    parse: (response) ->
+
+      data = response.es_response
 
       bucketsData = {}
       aggsConfig = @get('aggs_config')
