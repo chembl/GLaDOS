@@ -9,7 +9,6 @@ glados.useNameSpace 'glados.models.Search',
 
     submitSearch: ->
 
-      console.log('SUBMIT SEARCH')
       searchType = @get('search_type')
       if searchType == glados.models.Search.StructureSearchModel.SEARCH_TYPES.SEQUENCE.BLAST
         paramsDict = @getSequenceSearchParamsDict()
@@ -50,7 +49,7 @@ glados.useNameSpace 'glados.models.Search',
       queryParams = @get('query_params')
 
       paramsDict = queryParams
-      paramsDict.dl__ignore_cache = false
+      paramsDict.dl__ignore_cache = true
 
       return paramsDict
 
@@ -86,6 +85,12 @@ glados.useNameSpace 'glados.models.Search',
       getProgress = $.get(progressURL)
 
       getProgress.then (response) ->
+
+        statusDescription = response.status_description
+
+        if statusDescription? and statusDescription != 'None'
+          parsedStatusDescription = JSON.parse(statusDescription)
+          thisModel.set('status_description', parsedStatusDescription)
 
         status = response.status
         if status == 'ERROR'

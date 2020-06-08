@@ -23,7 +23,15 @@ glados.useNameSpace 'glados.views.SearchResults',
       if currentStatus == glados.models.Search.StructureSearchModel.STATES.INITIAL_STATE
         return undefined
 
-      return "https://www.ebi.ac.uk/Tools/services/web/toolresult.ebi?jobId=#{@model.get('search_id')}"
+      parsedStatusDescription = @model.get('status_description')
+      if not parsedStatusDescription?
+        return undefined
+
+      ebiJobID = parsedStatusDescription.ebi_job_id
+      if not ebiJobID?
+        return undefined
+
+      return "https://www.ebi.ac.uk/Tools/services/web/toolresult.ebi?jobId=#{ebiJobID}"
 
 
     showEditModal: ->
