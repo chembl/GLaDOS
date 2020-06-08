@@ -1,15 +1,11 @@
 glados.useNameSpace 'glados.models.Aggregations',
   Aggregation: Backbone.Model.extend
 
-    defaults:
-      use_web_server_cache: true
     #-------------------------------------------------------------------------------------------------------------------
     # Initialisation
     #-------------------------------------------------------------------------------------------------------------------
     initialize: ->
       @url = @get('index_url')
-      console.log('init aggregation')
-      console.log('@url: ', @url)
       @set('state', glados.models.Aggregations.Aggregation.States.INITIAL_STATE)
       @loadQuery()
 
@@ -140,6 +136,8 @@ glados.useNameSpace 'glados.models.Aggregations',
 
     fetch: ->
 
+      console.log('FETCH AGGREGATION')
+
       $progressElem = @get('progress_elem')
       state = @get('state')
 
@@ -157,23 +155,15 @@ glados.useNameSpace 'glados.models.Aggregations',
         $progressElem.html 'Fetching Data...'
       @set('state', glados.models.Aggregations.Aggregation.States.LOADING_BUCKETS)
 
-      if @get('use_web_server_cache')
-        esCacheData = @getESCacheRequestData()
-        fetchPromise = glados.doCSRFPost(glados.Settings.ELASTICSEARCH_CACHE, esCacheData)
-      else
+      console.log('using web server cache: ', @get('use_web_server_cache'))
 
-        esJSONRequest = JSON.stringify(@getRequestData())
+      fetchURL = glados.Settings.ES_PROXY_ES_DATA_URL
+      console.log('fetchURL: ', fetchURL)
 
-        fetchESOptions =
-          url: @url
-          data: esJSONRequest
-          type: 'POST'
-          reset: true
-          dataType: 'json'
-          contentType: 'application/json'
-          mimeType: 'application/json'
+      esCacheData = @getESCacheRequestData()
+      console.log('esCacheData: ', esCacheData)
+      fetchPromise = glados.doCSRFPost(glados.Settings.ELASTICSEARCH_CACHE, esCacheData)
 
-        fetchPromise = $.ajax(fetchESOptions)
 
       thisModel = @
       fetchPromise.done((data) ->
@@ -193,26 +183,15 @@ glados.useNameSpace 'glados.models.Aggregations',
 
     fetchMinMax: ->
 
+      console.log('fetch min and max')
       $progressElem = @get('progress_elem')
-      esJSONRequest = JSON.stringify(@getRequestMinMaxData())
 
-      if @get('use_web_server_cache')
+      fetchURL = glados.Settings.ES_PROXY_ES_DATA_URL
+      console.log('fetchURL: ', fetchURL)
 
-        esCacheData = @getESCacheRequestDataFroMinAndMax()
-        fetchPromise = glados.doCSRFPost(glados.Settings.ELASTICSEARCH_CACHE, esCacheData)
-
-      else
-
-        fetchESOptions =
-          url: @url
-          data: esJSONRequest
-          type: 'POST'
-          reset: true
-          dataType: 'json'
-          contentType: 'application/json'
-          mimeType: 'application/json'
-
-        fetchPromise = $.ajax(fetchESOptions)
+      esCacheData = @getESCacheRequestDataFroMinAndMax()
+      console.log('esCacheData: ', esCacheData)
+      fetchPromise = glados.doCSRFPost(glados.Settings.ELASTICSEARCH_CACHE, esCacheData)
 
       thisModel = @
       fetchPromise.done((data) ->
