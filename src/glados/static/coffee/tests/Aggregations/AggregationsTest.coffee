@@ -136,7 +136,7 @@ describe 'Aggregation', ->
     it 'parses the bucket data', ->
 
       parsedObj = associatedCompounds.parse(bucketsTestData)
-      bucketsShouldBe = bucketsTestData.aggregations.x_axis_agg.buckets
+      bucketsShouldBe = bucketsTestData.es_response.aggregations.x_axis_agg.buckets
       bucketsGot = parsedObj.x_axis_agg.buckets
 
       for key, bucket of bucketsGot
@@ -238,7 +238,7 @@ describe 'Aggregation', ->
     it 'parses the bucket data', ->
 
       parsedObj = associatedBioactivities.parse(bucketsTestData)
-      bucketsShouldBe = bucketsTestData.aggregations.types.buckets
+      bucketsShouldBe = bucketsTestData.es_response.aggregations.types.buckets
       bucketsGot = parsedObj.types.buckets
 
       for i in [0..bucketsGot.length-1]
@@ -255,7 +255,7 @@ describe 'Aggregation', ->
     it 'generates a bucket index', ->
 
       parsedObj = associatedBioactivities.parse(bucketsTestData)
-      bucketsShouldBe = bucketsTestData.aggregations.types.buckets
+      bucketsShouldBe = bucketsTestData.es_response.aggregations.types.buckets
       bucketIndexGot = parsedObj.types.buckets_index
 
       for bucketShouldBe in bucketsShouldBe
@@ -327,7 +327,7 @@ describe 'Aggregation', ->
     it 'parses the bucket data', ->
 
       parsedObj = allDocumentsByYear.parse(bucketsTestData)
-      bucketsShouldBe = bucketsTestData.aggregations.documentsPerYear.buckets
+      bucketsShouldBe = bucketsTestData.es_response.aggregations.documentsPerYear.buckets
       bucketsGot = parsedObj.documentsPerYear.buckets
 
       for key, bucket of bucketsGot
@@ -347,7 +347,7 @@ describe 'Aggregation', ->
         splitSeriesAgg = bucketGot.split_series_agg
         expect(splitSeriesAgg?).toBe(true)
         bucketKey = bucketGot.key
-        bucketMustBe = bucketsTestData.aggregations.documentsPerYear.buckets[bucketKey]
+        bucketMustBe = bucketsTestData.es_response.aggregations.documentsPerYear.buckets[bucketKey]
         bucketLengthMustBe = bucketMustBe.split_series_agg.buckets.length
         bucketLengthGot = bucketGot.split_series_agg.num_columns
         expect(bucketLengthGot).toBe(bucketLengthMustBe)
