@@ -10,7 +10,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
     generateColumn: (configFromServer, customEntity) ->
 
-      console.log('GENERATE COLUMN')
       propID = configFromServer.prop_id
 
       indexName = configFromServer.index_name
