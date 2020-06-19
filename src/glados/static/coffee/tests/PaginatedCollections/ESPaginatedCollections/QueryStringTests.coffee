@@ -6,7 +6,7 @@ describe "An elasticsearch collection initialised from a custom querystring", ->
 
   it 'Sets initial parameters', ->
     expect(esList.getMeta('id_name')).toBe("ESActivitity")
-    expect(esList.getMeta('index')).toBe("/"+glados.Settings.CHEMBL_ES_INDEX_PREFIX+"activity")
+    expect(esList.getMeta('index')).toBe("/chembl_activity")
     expect(esList.getMeta('key_name')).toBe("ACTIVITY")
     expect(esList.getMeta('custom_query')).toBe(customQueryString)
 

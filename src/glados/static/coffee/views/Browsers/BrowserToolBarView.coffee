@@ -14,9 +14,10 @@ glados.useNameSpace 'glados.views.Browsers',
 
       @browserView = arguments[0].menu_view
       @collection.on 'reset', @checkIfNoItems, @
+      @collection.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_CONFIG_FETCHING_STATE_CHANGED, @checkIfNoItems, @
 
       @checkIfNoFilters()
-      @checkIfNoItems()
+#      @checkIfNoItems()
 
     # ------------------------------------------------------------------------------------------------------------------
     # Render
@@ -31,6 +32,9 @@ glados.useNameSpace 'glados.views.Browsers',
       @browserView.showFilters()
 
     checkIfNoItems: ->
+
+      if not @collection.facetsConfigIsReady()
+        return
 
       totalRecords = @collection.getMeta('total_records')
 
@@ -48,8 +52,9 @@ glados.useNameSpace 'glados.views.Browsers',
     wakeUp: ->
 
     checkIfNoFilters: ->
-      facetsGroups = @collection.getFacetsGroups(undefined, onlyVisible=false)
-      if Object.keys(facetsGroups).length == 0
+
+      disableFacets = @collection.getMeta('disable_facets')
+      if disableFacets
         $filtersCollapser = $(@el).find('.BCK-toggle-collapse-filters')
         $filtersCollapser.addClass('disabled')
         $opener = $(@el).find('.BCK-toggle-hide-filters')

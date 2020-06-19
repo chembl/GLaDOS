@@ -165,7 +165,9 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return simplifiedHL
 
     # Parses the Elastic Search Response and resets the pagination metadata
-    parse: (data) ->
+    parse: (response) ->
+
+      data = response.es_response
 
       lastPageResultsIds = null
       lastPageResultsIds = @getMeta('last_page_results_ids')
@@ -230,7 +232,58 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return jsonResultsList
 
+    fetchFacetsDescription: (force=false) ->
+
+      @setFacetsConfigState(
+        glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_CONFIGURATION_FETCHING_STATES.FETCHING_CONFIGURATION
+      )
+
+      facetsConfigModel = new glados.models.paginatedCollections.esSchema.FacetsConfigurationModel
+        index_name: @getMeta('index_name')
+        group_name: 'browser_facets'
+
+      facetsConfigModel.on('error', (model, jqXHR) -> reject(jqXHR))
+
+      thisCollection = @
+      facetsConfigModel.once('change:facets_config', ->
+
+        facetsConfigWithHandler = facetsConfigModel.get('facets_config_with_handler')
+        thisCollection.setMeta('facets_groups', facetsConfigWithHandler)
+        thisCollection.restoreFacetsStateIfSaved()
+
+        thisCollection.setFacetsConfigState(
+          glados.models.paginatedCollections.PaginatedCollectionBase.FACETS_CONFIGURATION_FETCHING_STATES.CONFIGURATION_READY
+        )
+
+      )
+
+      stopFetch = (thisCollection.getMeta('test_mode') and not force)
+
+      unless stopFetch
+        facetsConfigModel.fetch()
+
+    restoreFacetsStateIfSaved: ->
+
+      facetsState = @getMeta('facets_state_to_restore')
+      if not facetsState?
+        return
+
+      facetGroups = @getFacetsGroups(selected=undefined, onlyVisible=false)
+
+      for fGroupKey, selectedKeys of facetsState
+
+          originalFGroupState = facetsState[fGroupKey]
+          if not facetGroups[fGroupKey]?
+            continue
+          facetingHandler = facetGroups[fGroupKey].faceting_handler
+          # make sure all restored facets are shown
+          facetGroups[fGroupKey].show = true
+          facetingHandler.loadState(originalFGroupState)
+
+      @setMeta('facets_state_to_restore', undefined)
+
     fetchColumnsDescription: ->
+
       @setConfigState(
         glados.models.paginatedCollections.PaginatedCollectionBase.CONFIGURATION_FETCHING_STATES.FETCHING_CONFIGURATION
       )
@@ -263,6 +316,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
               )
               resolve('success')
           )
+
           unless thisCollection.getMeta('test_mode')
             propertiesConfigModel.fetch()
 
@@ -302,20 +356,31 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     fetch: (options, testMode=false) ->
 
       testMode |= @getMeta('test_mode')
-      if testMode or @configIsReady()
+
+      disableFacets = @getMeta('disable_facets')
+
+      if disableFacets
+        allConfigsReady = @configIsReady()
+      else
+        allConfigsReady = @configIsReady() and @facetsConfigIsReady()
+
+      if testMode or allConfigsReady
         return @fetchData(options, testMode)
 
-      descriptionPromise = @fetchColumnsDescription()
+      @fetchColumnsDescription()
+      @fetchFacetsDescription() unless disableFacets
 
       thisCollection = @
-      descriptionPromise.then( ->
-        thisCollection.fetchData(options, testMode=false)
-      ).catch( (jqXHR) ->
-        thisCollection.trigger('error', thisCollection, jqXHR)
-      )
+
+      @once( glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_CONFIG_FETCHING_STATE_CHANGED,
+      (-> thisCollection.fetchData(options, testMode=false)), @)
+
+      @once( glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.CONFIG_FETCHING_STATE_CHANGED,
+      (-> thisCollection.fetchData(options, testMode=false)), @)
 
     # Prepares an Elastic Search query to search in all the fields of a document in a specific index
     fetchData: (options, testMode=false) ->
+
       testMode |= @getMeta('test_mode')
       @trigger('before_fetch_elastic')
       @url = @getURL()
@@ -331,10 +396,12 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         glados.models.paginatedCollections.PaginatedCollectionBase.ITEMS_FETCHING_STATES.FETCHING_ITEMS
       )
       # Creates the Elastic Search Query parameters and serializes them
-      esCacheRequest = @getListHelperRequestData()
+      esCacheRequestData = @getESRequestData()
 
       unless testMode
-        fetchPromise = glados.doCSRFPost(glados.Settings.CHEMBL_LIST_HELPER_ENDPOINT, esCacheRequest)
+
+        fetchURL = glados.Settings.ES_PROXY_ES_DATA_URL
+        fetchPromise = $.post(fetchURL, esCacheRequestData)
         thisCollection = @
 
         fetchPromise.then (data) -> thisCollection.reset(thisCollection.parse(data))
@@ -342,7 +409,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
         @loadFacetGroups(@getRequestData())
 
-      return esCacheRequest
+      return esCacheRequestData
 
     # ------------------------------------------------------------------------------------------------------------------
     # Elastic Search Query structure
@@ -388,15 +455,27 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
     # Request data
     # ------------------------------------------------------------------------------------------------------------------
-    getListHelperRequestData: (customPage, customPageSize) ->
+    getESRequestData: (customPage, customPageSize) ->
+      # Request to get the data of the items of the page
 
       ssSearchModel = @getMeta('sssearch_model')
       cacheRequestData =
         index_name: @getMeta('index_name')
-        search_data: JSON.stringify(@getRequestData(customPage, customPageSize))
+        es_query: JSON.stringify(@getRequestData(customPage, customPageSize))
         contextual_sort_data: JSON.stringify(@getContextualSortingProperties())
-        context_id: if ssSearchModel? then ssSearchModel.get('search_id') else undefined
-        id_property: @getMeta('model').ID_COLUMN.comparator
+        context_obj: if ssSearchModel? then JSON.stringify(ssSearchModel.getContextObj()) else undefined
+
+      return cacheRequestData
+
+    getFacetsRequestData: (firstCall) ->
+      # Request to get the data of the facets of the page
+
+      ssSearchModel = @getMeta('sssearch_model')
+      cacheRequestData =
+        index_name: @getMeta('index_name')
+        es_query: JSON.stringify(@getRequestData(1, 0, true, firstCall))
+        contextual_sort_data: JSON.stringify(@getContextualSortingProperties())
+        context_obj: if ssSearchModel? then JSON.stringify(ssSearchModel.getContextObj()) else undefined
 
       return cacheRequestData
 
@@ -612,20 +691,16 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       return isSelected
 
     __requestFacetsGroupsData: (first_call)->
-      es_url = @getURL()
-      # Creates the Elastic Search Query parameters and serializes them
-      # Includes the request for the faceting data
-      esJSONRequestData = JSON.stringify(@getRequestData(1, 0, true, first_call))
-      # Uses POST to prevent result caching
-      ajax_deferred = $.post
-        url: es_url
-        data: esJSONRequestData
-        dataType: 'json'
-        contentType: 'application/json'
-        mimeType: 'application/json'
-      return ajax_deferred
 
-    __parseFacetsGroupsData: (non_selected_facets_groups, es_data, first_call, resolve, reject, needs_second_call)->
+      fetchURL = glados.Settings.ES_PROXY_ES_DATA_URL
+      requestData = @getFacetsRequestData(first_call)
+      fetchPromise = $.post(fetchURL, requestData)
+
+      return fetchPromise
+
+    __parseFacetsGroupsData: (non_selected_facets_groups, esResponse, first_call, resolve, reject, needs_second_call)->
+
+      es_data = esResponse.es_response
       if not es_data? or not es_data.aggregations?
         console.error "ERROR! The aggregations data in the response is missing!"
         reject()

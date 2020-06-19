@@ -22,20 +22,11 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       list = @getNewESResultsListFor(settings, queryString, useQueryString, itemsList, ssSearchModel=undefined,
         stickyQuery, searchESQuery, flavour=undefined, textFilter)
 
-      facetGroups = list.getFacetsGroups(selected=undefined, onlyVisible=false)
       facetsState = stateObject.facets_state
 
       if facetsState?
-        for fGroupKey, selectedKeys of facetsState
-
-          originalFGroupState = facetsState[fGroupKey]
-          if not facetGroups[fGroupKey]?
-            continue
-          facetingHandler = facetGroups[fGroupKey].faceting_handler
-          # make sure all restored facets are shown
-          facetGroups[fGroupKey].show = true
-          facetingHandler.loadState(originalFGroupState)
-          console.log 'facetingHandler: ', facetingHandler
+        # it will now load the facets state later, after loading the facets config
+        list.setMeta('facets_state_to_restore', facetsState)
 
       return list
 
@@ -65,7 +56,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             to_show: []
             browse_list_url: esIndexSettings.BROWSE_LIST_URL
             id_column: esIndexSettings.ID_COLUMN
-            facets_groups: glados.models.paginatedCollections.esSchema.FacetingHandler.initFacetGroups(esIndexSettings.FACETS_GROUPS)
+#            facets_groups: glados.models.paginatedCollections.esSchema.FacetingHandler.initFacetGroups(esIndexSettings.FACETS_GROUPS)
+            facets_groups: undefined
             columns: esIndexSettings.COLUMNS
 #            columns_description: esIndexSettings.COLUMNS_DESCRIPTION
             permanent_comparators_to_fetch: esIndexSettings.PERMANENT_COMPARATORS_TO_FETCH
@@ -106,6 +98,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
             sssearch_model: ssSearchModel
             download_columns_group: esIndexSettings.DOWNLOAD_COLUMNS_GROUP
             enable_text_filter: esIndexSettings.ENABLE_TEXT_FILTER
+            disable_facets: esIndexSettings.DISABLE_FACETS
 
           if @getMeta('enable_similarity_maps') or @getMeta('enable_substructure_highlighting')
             @initReferenceStructureFunctions()

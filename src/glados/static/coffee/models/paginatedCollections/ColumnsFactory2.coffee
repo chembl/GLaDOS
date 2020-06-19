@@ -2,8 +2,8 @@ glados.useNameSpace 'glados.models.paginatedCollections',
   ColumnsFactory2:
 
     ENTITY_NAME_TO_ENTITY_MODEL:
-      "#{Compound.INDEX_NAME}": Compound
-      "#{Target.INDEX_NAME}": Target
+      "#{Compound.ES_INDEX}": Compound
+      "#{Target.ES_INDEX}": Target
       "#{Assay.INDEX_NAME}": Assay
       "#{Document.INDEX_NAME}": Document
       "#{CellLine.INDEX_NAME}": CellLine

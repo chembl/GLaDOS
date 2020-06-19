@@ -61,6 +61,7 @@ describe "An elasticsearch collection", ->
         esList = glados.models.paginatedCollections.PaginatedCollectionFactory.getAllESResultsListDict()[\
         glados.models.paginatedCollections.Settings.ES_INDEXES.COMPOUND.KEY_NAME
         ]
+        esList.setMeta('test_mode', true)
         TestsUtils.simulateFacetsESList(esList, glados.Settings.STATIC_URL + 'testData/FacetsTestData.json', done)
 
 
@@ -107,6 +108,7 @@ describe "An elasticsearch collection", ->
       beforeEach ->
 
         esList.setMeta('searchESQuery', searchESQuery)
+        esList.setMeta('test_mode', true)
         facetGroups = esList.getFacetsGroups()
 
         testFacetKey1 = facetGroups[testFacetGroupKey1].faceting_handler.faceting_keys_inorder[0]

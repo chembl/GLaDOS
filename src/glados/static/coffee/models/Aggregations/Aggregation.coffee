@@ -1,8 +1,6 @@
 glados.useNameSpace 'glados.models.Aggregations',
   Aggregation: Backbone.Model.extend
 
-    defaults:
-      use_web_server_cache: true
     #-------------------------------------------------------------------------------------------------------------------
     # Initialisation
     #-------------------------------------------------------------------------------------------------------------------
@@ -112,7 +110,7 @@ glados.useNameSpace 'glados.models.Aggregations',
 
       esCacheData =
         index_name: @getIndexName()
-        search_data: JSON.stringify(@getRequestData())
+        es_query: JSON.stringify(@getRequestData())
 
       return esCacheData
 
@@ -120,7 +118,7 @@ glados.useNameSpace 'glados.models.Aggregations',
 
       esCacheData =
         index_name: @getIndexName()
-        search_data: JSON.stringify(@getRequestMinMaxData())
+        es_query: JSON.stringify(@getRequestMinMaxData())
 
       return esCacheData
 
@@ -155,35 +153,21 @@ glados.useNameSpace 'glados.models.Aggregations',
         $progressElem.html 'Fetching Data...'
       @set('state', glados.models.Aggregations.Aggregation.States.LOADING_BUCKETS)
 
-      if @get('use_web_server_cache')
-        esCacheData = @getESCacheRequestData()
-        fetchPromise = glados.doCSRFPost(glados.Settings.ELASTICSEARCH_CACHE, esCacheData)
-      else
-
-        esJSONRequest = JSON.stringify(@getRequestData())
-
-        fetchESOptions =
-          url: @url
-          data: esJSONRequest
-          type: 'POST'
-          reset: true
-          dataType: 'json'
-          contentType: 'application/json'
-          mimeType: 'application/json'
-
-        fetchPromise = $.ajax(fetchESOptions)
+      fetchURL = glados.Settings.ES_PROXY_ES_DATA_URL
+      esCacheData = @getESCacheRequestData()
+      fetchPromise = $.post(fetchURL, esCacheData)
 
       thisModel = @
-      fetchPromise.done((data) ->
+      fetchPromise.done((response) ->
         if $progressElem?
           $progressElem.html ''
 
-        if data.hits.total.value == 0
+        if response.es_response.hits.total.value == 0
           thisModel.set
             'state': glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE
         else
           thisModel.set
-            'bucket_data': thisModel.parse(data)
+            'bucket_data': thisModel.parse(response)
             'state': glados.models.Aggregations.Aggregation.States.INITIAL_STATE
 
 
@@ -192,30 +176,16 @@ glados.useNameSpace 'glados.models.Aggregations',
     fetchMinMax: ->
 
       $progressElem = @get('progress_elem')
-      esJSONRequest = JSON.stringify(@getRequestMinMaxData())
 
-      if @get('use_web_server_cache')
+      fetchURL = glados.Settings.ES_PROXY_ES_DATA_URL
 
-        esCacheData = @getESCacheRequestDataFroMinAndMax()
-        fetchPromise = glados.doCSRFPost(glados.Settings.ELASTICSEARCH_CACHE, esCacheData)
-
-      else
-
-        fetchESOptions =
-          url: @url
-          data: esJSONRequest
-          type: 'POST'
-          reset: true
-          dataType: 'json'
-          contentType: 'application/json'
-          mimeType: 'application/json'
-
-        fetchPromise = $.ajax(fetchESOptions)
+      esCacheData = @getESCacheRequestDataFroMinAndMax()
+      fetchPromise = $.post(fetchURL, esCacheData)
 
       thisModel = @
-      fetchPromise.done((data) ->
+      fetchPromise.done((response) ->
 
-        thisModel.set('aggs_config', thisModel.parseMinMax(data))
+        thisModel.set('aggs_config', thisModel.parseMinMax(response))
 
         if thisModel.get('state') == glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE
           $progressElem.html '' unless not $progressElem?
@@ -230,7 +200,9 @@ glados.useNameSpace 'glados.models.Aggregations',
     #-------------------------------------------------------------------------------------------------------------------
     # Parsing
     #-------------------------------------------------------------------------------------------------------------------
-    parseMinMax: (data) ->
+    parseMinMax: (response) ->
+
+      data = response.es_response
 
       if data.hits.total.value == 0
         @set('state', glados.models.Aggregations.Aggregation.States.NO_DATA_FOUND_STATE)
@@ -363,7 +335,9 @@ glados.useNameSpace 'glados.models.Aggregations',
             parsedParentKey = newBucketsData.parsed_key
           @loadBuckets(newBucketsData, newAggsConfig, newReceivedAggsInfo, parentKey, parsedParentKey)
 
-    parse: (data) ->
+    parse: (response) ->
+
+      data = response.es_response
 
       bucketsData = {}
       aggsConfig = @get('aggs_config')

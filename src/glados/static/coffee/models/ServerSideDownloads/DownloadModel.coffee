@@ -11,11 +11,13 @@ glados.useNameSpace 'glados.models.ServerSideDownloads',
     startServerSideDownload: (desiredFormat) ->
 
       downloadParams = @getDownloadParams(desiredFormat)
-      generateDownload = glados.doCSRFPost(glados.Settings.GENERATE_SERVER_SIDE_DOWNLOAD_ENDPOINT, downloadParams)
+      downloadURL = glados.Settings.SUBMIT_DOWNLOAD_URL
+      generateDownload = $.post(downloadURL, downloadParams)
 
       thisModel = @
       generateDownload.then (response) ->
-        thisModel.set('download_id', response.download_id)
+
+        thisModel.set('download_id', response.job_id)
         thisModel.set('progress', 0)
         thisModel.setState(glados.models.ServerSideDownloads.DownloadModel.states.GENERATING_DOWNLOAD)
 
@@ -30,21 +32,38 @@ glados.useNameSpace 'glados.models.ServerSideDownloads',
       download_columns_group = collection.getMeta('download_columns_group')
 
       ssSearchModel = collection.getMeta('sssearch_model')
-      return {
+      params = {
         index_name: collection.getMeta('index_name')
         query: JSON.stringify(requestData.query)
         format: desiredFormat
-        context_id: if ssSearchModel? then ssSearchModel.get('search_id') else undefined
-        download_columns_group: if download_columns_group? then download_columns_group else undefined
+        dl__ignore_cache: false
       }
+
+      if ssSearchModel?
+
+        contextObj = {
+          delayed_jobs_base_url: glados.Settings.DELAYED_JOBS_BASE_URL
+          context_type: ssSearchModel.get('search_type')
+          context_id: ssSearchModel.get('search_id')
+        }
+        params['context_obj'] = JSON.stringify(contextObj)
+
+      else
+
+
+      if download_columns_group?
+        params['download_columns_group'] = download_columns_group
+
+      return params
 
     #-------------------------------------------------------------------------------------------------------------------
     # Check download progress
     #-------------------------------------------------------------------------------------------------------------------
-    getProgressURL: -> "#{glados.Settings.GLADOS_BASE_PATH_REL}glados_api/shared/downloads/download_status/#{@get('download_id')}"
+    getProgressURL: -> "#{glados.Settings.DELAYED_JOBS_BASE_URL}/status/#{@get('download_id')}"
     checkDownloadProgressPeriodically: ->
 
       progressURL = @getProgressURL()
+
       thisModel = @
       getProgress = $.get(progressURL)
 
@@ -58,27 +77,25 @@ glados.useNameSpace 'glados.models.ServerSideDownloads',
 
         else if status == 'QUEUED'
 
-          setTimeout(thisModel.checkDownloadProgressPeriodically.bind(thisModel), 1000)
+          setTimeout(thisModel.checkDownloadProgressPeriodically.bind(thisModel), 2000)
 
-        else if status == 'PROCESSING'
+        else if status == 'RUNNING'
 
-          thisModel.set('progress', response.percentage)
-          setTimeout(thisModel.checkDownloadProgressPeriodically.bind(thisModel), 1000)
-
-        else if status == 'DELETING'
-
-          thisModel.set('progress', '--')
-          thisModel.setState(glados.models.ServerSideDownloads.DownloadModel.states.DELETING)
-          setTimeout(thisModel.checkDownloadProgressPeriodically.bind(thisModel), 1000)
+          thisModel.set('progress', response.progress)
+          setTimeout(thisModel.checkDownloadProgressPeriodically.bind(thisModel), 2000)
 
         else if status == 'FINISHED'
 
           thisModel.set('expires', response.expires)
+
+          output_file_url = "https://#{response.output_files_urls[Object.keys(response.output_files_urls)[0]]}"
+          thisModel.set('output_file_url', output_file_url)
+
           thisModel.setState(glados.models.ServerSideDownloads.DownloadModel.states.FINISHED)
 
         else
 
-          setTimeout(thisModel.checkDownloadProgressPeriodically.bind(thisModel), 1000)
+          setTimeout(thisModel.checkDownloadProgressPeriodically.bind(thisModel), 2000)
 
       getProgress.fail (response) ->
 
@@ -88,7 +105,10 @@ glados.useNameSpace 'glados.models.ServerSideDownloads',
     #-------------------------------------------------------------------------------------------------------------------
     # Getting download final url
     #-------------------------------------------------------------------------------------------------------------------
-    getDownloadURL: -> "#{glados.Settings.GLADOS_BASE_PATH_REL}dynamic-downloads/#{@get('download_id')}.gz"
+    getDownloadURL: ->
+
+      outputFileURL = @get('output_file_url')
+      return outputFileURL
 
     #-------------------------------------------------------------------------------------------------------------------
     # State handling

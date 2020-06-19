@@ -132,7 +132,6 @@ glados.useNameSpace 'glados.views.PaginatedViews',
       records_in_page = parseInt(@collection.getMeta('records_in_page'))
       page_size = parseInt(@collection.getMeta('page_size'))
       num_pages = parseInt(@collection.getMeta('total_pages'))
-      console.log('num_pages: ', num_pages)
 
       if customPage?
         current_page = parseInt(customPage)

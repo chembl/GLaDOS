@@ -14,18 +14,16 @@ glados.useNameSpace 'glados.views.SearchResults',
       else if currentStatus == glados.models.Search.StructureSearchModel.STATES.SEARCH_QUEUED
         return 'Submitted'
       else if currentStatus == glados.models.Search.StructureSearchModel.STATES.SEARCHING
-        return 'Searching'
-      else if currentStatus == glados.models.Search.StructureSearchModel.STATES.LOADING_RESULTS
-        return 'Loading Results'
+        progress = @model.get('progress')
+        if progress?
+          return "Searching (#{progress}%)"
+        else return 'Searching'
       else if currentStatus == glados.models.Search.StructureSearchModel.STATES.FINISHED
         return 'Results Ready'
-      else if currentStatus == glados.models.Search.StructureSearchModel.STATES.DELETING
-        return 'Waiting for Server Clean-up'
-
 
     getStatusLink: ->
 
       currentStatus = @model.getState()
-      if currentStatus != glados.models.Search.StructureSearchModel.STATES.INITIAL_STATE
-        return @model.getProgressURL()
-      else return undefined
+      if currentStatus == glados.models.Search.StructureSearchModel.STATES.INITIAL_STATE
+        return undefined
+      else return @model.getProgressURL()

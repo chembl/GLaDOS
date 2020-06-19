@@ -14,7 +14,7 @@ Assay = Backbone.Model.extend
     @set('assay_chembl_id', id)
 
     if @get('fetch_from_elastic')
-      @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/'+glados.Settings.CHEMBL_ES_INDEX_PREFIX+'assay/_doc/' + id
+      @url = "#{glados.Settings.ES_PROXY_API_BASE_URL}/es_data/get_es_document/#{Assay.ES_INDEX}/#{id}"
     else
       @url = glados.Settings.WS_BASE_URL + 'assay/' + id + '.json'
 
@@ -76,6 +76,8 @@ Assay.getAssaysListURL = (filter, isFullState=false, fragmentOnly=false) ->
     entity: 'assays'
     filter: encodeURIComponent(filter) unless not filter?
     is_full_state: isFullState
+
+Assay.ES_INDEX = 'chembl_assay'
 
 Assay.INDEX_NAME = glados.Settings.CHEMBL_ES_INDEX_PREFIX+'assay'
 Assay.PROPERTIES_VISUAL_CONFIG = {

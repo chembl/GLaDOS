@@ -11,7 +11,7 @@ Document = Backbone.Model.extend(DownloadModelOrCollectionExt).extend
     @set('document_chembl_id', id)
 
     if @get('fetch_from_elastic')
-      @url = glados.models.paginatedCollections.Settings.ES_BASE_URL + '/'+glados.Settings.CHEMBL_ES_INDEX_PREFIX+'document/_doc/' + id
+      @url = "#{glados.Settings.ES_PROXY_API_BASE_URL}/es_data/get_es_document/#{Document.ES_INDEX}/#{id}"
     else
       @url = glados.Settings.WS_BASE_URL + 'document/' + id + '.json'
 
@@ -36,6 +36,7 @@ _.extend(Document, glados.models.base.ReportCardEntity)
 Document.color = 'red'
 Document.reportCardPath = 'document_report_card/'
 
+Document.ES_INDEX = 'chembl_document'
 Document.INDEX_NAME = glados.Settings.CHEMBL_ES_INDEX_PREFIX+'document'
 Document.PROPERTIES_VISUAL_CONFIG = {
   'document_chembl_id': {

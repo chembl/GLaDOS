@@ -1,54 +1,56 @@
 {
-  "took": 0,
-  "timed_out": false,
-  "_shards": {
-    "total": 7,
-    "successful": 7,
-    "failed": 0
-  },
-  "hits": {
-    "total": 162,
-    "max_score": 0,
-    "hits": []
-  },
-  "aggregations": {
-    "types": {
-      "doc_count_error_upper_bound": 0,
-      "sum_other_doc_count": 0,
-      "buckets": [
-        {
-          "key": "Ratio",
-          "doc_count": 94
-        },
-        {
-          "key": "Ki",
-          "doc_count": 32
-        },
-        {
-          "key": "IC50",
-          "doc_count": 18
-        },
-        {
-          "key": "EC50",
-          "doc_count": 5
-        },
-        {
-          "key": "Emax",
-          "doc_count": 5
-        },
-        {
-          "key": "Change",
-          "doc_count": 4
-        },
-        {
-          "key": "Bmax",
-          "doc_count": 2
-        },
-        {
-          "key": "Kd",
-          "doc_count": 2
-        }
-      ]
+  "es_response": {
+    "took": 0,
+    "timed_out": false,
+    "_shards": {
+      "total": 7,
+      "successful": 7,
+      "failed": 0
+    },
+    "hits": {
+      "total": 162,
+      "max_score": 0,
+      "hits": []
+    },
+    "aggregations": {
+      "types": {
+        "doc_count_error_upper_bound": 0,
+        "sum_other_doc_count": 0,
+        "buckets": [
+          {
+            "key": "Ratio",
+            "doc_count": 94
+          },
+          {
+            "key": "Ki",
+            "doc_count": 32
+          },
+          {
+            "key": "IC50",
+            "doc_count": 18
+          },
+          {
+            "key": "EC50",
+            "doc_count": 5
+          },
+          {
+            "key": "Emax",
+            "doc_count": 5
+          },
+          {
+            "key": "Change",
+            "doc_count": 4
+          },
+          {
+            "key": "Bmax",
+            "doc_count": 2
+          },
+          {
+            "key": "Kd",
+            "doc_count": 2
+          }
+        ]
+      }
     }
   }
 }

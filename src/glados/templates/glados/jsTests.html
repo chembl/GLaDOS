@@ -1,74 +1,103 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Javascript Tests for ChEMBL</title>
-  {% load static %}
-  {% include "glados/base/css_imports_for_all.html" %}
+    <meta charset="UTF-8">
+    <title>Javascript Tests for ChEMBL</title>
+    {% load static %}
+    {% include "glados/base/css_imports_for_all.html" %}
 
-  <link rel="shortcut icon" type="image/png" href="{% static 'css/jasmine/jasmine_favicon.png' %}"/>
-  <link rel="stylesheet" type="text/css" href="{% static 'css/jasmine/jasmine.css' %}"/>
+    <link rel="shortcut icon" type="image/png" href="{% static 'css/jasmine/jasmine_favicon.png' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jasmine/jasmine.css' %}"/>
 
 
-  {% include "glados/base/js_imports_for_all.html" %}
+    {% include "glados/base/js_imports_for_all.html" %}
 
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/TestsUtils.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/api/jasmine/jasmine.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/api/jasmine/jasmine-html.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/api/jasmine/boot.js' %}"></script>
-  <script type="text/javascript">
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 15000;
-    jasmine.getEnv().defaultTimeoutInterval = 15000;
-    glados.JS_TEST_MODE = true
-  </script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/Aggregations/AggregationsTest.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/Aggregations/AggregationsWithServerCacheTests.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/TargetHierarchyTreeTest.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/Compound/CompoundTest.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/Compound/HierarchyTest.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/Compound/MetabolismTest.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/Compound/StructuralAlertsListTest.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/Compound/TargetPredictionsTest.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/Document/RelatedDocumentsTest.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/Compound/UnichemConnectivityTest.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/Compound/MoleculeFeaturesTest.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/Document/DocumentTest.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/Activity/ActivityTest.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/TargetTest.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/TargetRelationsTest.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/ApprovedDrugClinicalCandidateListTest.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/PaginatedCollections/PaginatedCollectionTest.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/PaginatedCollections/PaginatedCollectionsCacheTest.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/PaginatedCollections/ClientSidePaginatedCollectionTest.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/PaginatedCollections/ESPaginatedCollections/QueryStringTests.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/PaginatedCollections/ESPaginatedCollections/QueryTests.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/PaginatedCollections/ESPaginatedCollections/StickyQueryTests.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/PaginatedCollections/ESPaginatedCollections/SearchTests.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/PaginatedCollections/ESPaginatedCollections/FacetingTests.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/PaginatedCollections/ESPaginatedCollections/TextFilterTests.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/PaginatedCollections/ESPaginatedCollections/FetchingStateTests.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/PaginatedCollections/ESPaginatedCollections/SearchingStateTests.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/PaginatedCollections/ESPaginatedCollections/ConfigFetchingStateTests.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/PaginatedCollections/ESPaginatedCollections/StateChangesEvents.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/PaginatedCollections/ESPaginatedCollections/SleepAwakeTests.js' %}"></script><script type="text/javascript" src="{% static 'js/coffee-gen/tests/PaginatedCollections/ESPaginatedCollections/PropertiesConfigurationModelTests.js' %}"></script><script type="text/javascript" src="{% static 'js/coffee-gen/tests/PaginatedCollections/SelectionFunctionsTest.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/PaginatedCollections/LinksToOtherEntities/LinkToOtherEntitiesTest.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/DynamicURLs/SearchURLsTests.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/DynamicURLs/URLHelperTests.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/Search/AutoSuggestionTests.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/ServerSideDownloads/ServerSideDownloadsTest.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/MatrixTest.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/UtilsTest.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/LegendTest.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/PropertiesFactoryTest.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/ColumnsFactoryTest.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/ScrollSpyHandlerTest.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/ColumnsHandlerTest.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/FacetGroupVisibilityHandlerTest.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/MainPage/TweetsTest.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/MainPage/BlogEntriesTest.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/Visualisations/TargetClassificationTest.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/StandardStrings/StandardStringTests.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/coffee-gen/tests/PositronicBrainTest.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/tests/TestsUtils.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/api/jasmine/jasmine.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/api/jasmine/jasmine-html.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/api/jasmine/boot.js' %}"></script>
+    <script type="text/javascript">
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 15000;
+        jasmine.getEnv().defaultTimeoutInterval = 15000;
+        glados.JS_TEST_MODE = true
+    </script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/tests/Aggregations/AggregationsTest.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'js/coffee-gen/tests/Aggregations/AggregationsWithServerCacheTests.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/tests/Compound/CompoundTest.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/tests/Compound/HierarchyTest.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/tests/Compound/MetabolismTest.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'js/coffee-gen/tests/Compound/StructuralAlertsListTest.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/tests/Compound/TargetPredictionsTest.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/tests/Document/RelatedDocumentsTest.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'js/coffee-gen/tests/Compound/UnichemConnectivityTest.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/tests/Compound/MoleculeFeaturesTest.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/tests/Document/DocumentTest.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/tests/Activity/ActivityTest.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/tests/TargetTest.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/tests/TargetRelationsTest.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'js/coffee-gen/tests/ApprovedDrugClinicalCandidateListTest.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'js/coffee-gen/tests/PaginatedCollections/PaginatedCollectionTest.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'js/coffee-gen/tests/PaginatedCollections/PaginatedCollectionsCacheTest.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'js/coffee-gen/tests/PaginatedCollections/ClientSidePaginatedCollectionTest.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'js/coffee-gen/tests/PaginatedCollections/ESPaginatedCollections/QueryStringTests.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'js/coffee-gen/tests/PaginatedCollections/ESPaginatedCollections/QueryTests.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'js/coffee-gen/tests/PaginatedCollections/ESPaginatedCollections/StickyQueryTests.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'js/coffee-gen/tests/PaginatedCollections/ESPaginatedCollections/SearchTests.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'js/coffee-gen/tests/PaginatedCollections/ESPaginatedCollections/FacetingTests.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'js/coffee-gen/tests/PaginatedCollections/ESPaginatedCollections/TextFilterTests.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'js/coffee-gen/tests/PaginatedCollections/ESPaginatedCollections/FetchingStateTests.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'js/coffee-gen/tests/PaginatedCollections/ESPaginatedCollections/SearchingStateTests.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'js/coffee-gen/tests/PaginatedCollections/ESPaginatedCollections/ConfigFetchingStateTests.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'js/coffee-gen/tests/PaginatedCollections/ESPaginatedCollections/FacetsConfigFetchingStateTests.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'js/coffee-gen/tests/PaginatedCollections/ESPaginatedCollections/StateChangesEvents.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'js/coffee-gen/tests/PaginatedCollections/ESPaginatedCollections/SleepAwakeTests.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'js/coffee-gen/tests/PaginatedCollections/ESPaginatedCollections/PropertiesConfigurationModelTests.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'js/coffee-gen/tests/PaginatedCollections/ESPaginatedCollections/FacetsConfigurationModelTests.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'js/coffee-gen/tests/PaginatedCollections/SelectionFunctionsTest.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'js/coffee-gen/tests/PaginatedCollections/LinksToOtherEntities/LinkToOtherEntitiesTest.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/tests/DynamicURLs/SearchURLsTests.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/tests/DynamicURLs/URLHelperTests.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/tests/Search/AutoSuggestionTests.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'js/coffee-gen/tests/ServerSideDownloads/ServerSideDownloadsTest.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/tests/MatrixTest.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/tests/UtilsTest.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/tests/LegendTest.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/tests/PropertiesFactoryTest.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/tests/ColumnsFactoryTest.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/tests/ScrollSpyHandlerTest.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/tests/ColumnsHandlerTest.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/tests/FacetGroupVisibilityHandlerTest.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/tests/MainPage/TweetsTest.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/tests/MainPage/BlogEntriesTest.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'js/coffee-gen/tests/Visualisations/TargetClassificationTest.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'js/coffee-gen/tests/StandardStrings/StandardStringTests.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/coffee-gen/tests/PositronicBrainTest.js' %}"></script>
 
 </head>
 

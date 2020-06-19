@@ -465,24 +465,6 @@ def request_heatmap_helper(request):
     return JsonResponse({'data': 'Data'})
 
 
-# noinspection PyBroadException
-@csrf_exempt
-def elasticsearch_cache(request):
-    if request.method == "POST":
-
-        print('elasticsearch_cache')
-        index_name = request.POST.get('index_name', '')
-        raw_search_data = request.POST.get('search_data', '')
-
-        response = glados_server_statistics.get_and_record_es_cached_response(index_name, raw_search_data)
-        if response is None:
-            return HttpResponse('ELASTIC SEARCH RESPONSE IS EMPTY!', status=500)
-
-        return JsonResponse(response)
-    else:
-        return JsonResponse({'error': 'this is only available via POST! You crazy hacker! :P'})
-
-
 def extend_url(request, hash):
     resp_data = {
         'long_url': url_shortener.get_original_url(hash)

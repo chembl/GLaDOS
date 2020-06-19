@@ -9,7 +9,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCompound'
         LABEL: 'Compounds'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
+        INDEX_NAME: 'chembl_molecule'
         BROWSE_LIST_URL: Compound.getCompoundsListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
@@ -37,7 +37,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         COMPLICATE_CARDS_VIEW: true
         COMPLICATE_CARDS_COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_LONG
         ADDITIONAL_COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.CompoundSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV'], glados.Settings.DEFAULT_FILE_FORMAT_NAMES['SDF']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
@@ -76,7 +75,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESTarget'
         LABEL: 'Targets'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'target'
+        INDEX_NAME: 'chembl_target'
         BROWSE_LIST_URL: Target.getTargetsListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Target
@@ -84,7 +83,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         CONFIG_GROUPS:
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
         ID_COLUMN: Target.ID_COLUMN
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.TargetSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
@@ -100,7 +98,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESAssay'
         LABEL: 'Assays'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'assay'
+        INDEX_NAME: 'chembl_assay'
         BROWSE_LIST_URL: Assay.getAssaysListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Assay
@@ -109,7 +107,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         ID_COLUMN: Assay.ID_COLUMN
         CONFIG_GROUPS:
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.AssaySchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
@@ -121,7 +118,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESDocument'
         LABEL: 'Documents'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'document'
+        INDEX_NAME: 'chembl_document'
         BROWSE_LIST_URL: Document.getDocumentsListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Document
@@ -129,7 +126,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         PERMANENT_COMPARATORS_TO_FETCH: ['document_chembl_id']
         CONFIG_GROUPS:
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.DocumentSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
@@ -141,7 +137,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCellLine'
         LABEL: 'Cells'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'cell_line'
+        INDEX_NAME: 'chembl_cell_line'
         BROWSE_LIST_URL: CellLine.getCellsListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: CellLine
@@ -149,7 +145,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         PERMANENT_COMPARATORS_TO_FETCH: ['cell_chembl_id']
         CONFIG_GROUPS:
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.CellLineSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
@@ -161,7 +156,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESTissue'
         LABEL: 'Tissues'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'tissue'
+        INDEX_NAME: 'chembl_tissue'
         BROWSE_LIST_URL: glados.models.Tissue.getTissuesListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: glados.models.Tissue
@@ -169,7 +164,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         PERMANENT_COMPARATORS_TO_FETCH: ['tissue_chembl_id']
         CONFIG_GROUPS:
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.TissueSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
@@ -177,12 +171,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         ENABLE_COLLECTION_CACHING: true
         LINKS_TO_OTHER_ENTITIES: [Activity.prototype.entityName]
         ENABLE_TEXT_FILTER: true
+        DISABLE_FACETS: true
     ES_INDEXES_NO_MAIN_SEARCH:
       ACTIVITY:
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESActivitity'
         LABEL: 'Activities'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'activity'
+        INDEX_NAME: 'chembl_activity'
         BROWSE_LIST_URL: Activity.getActivitiesListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Activity
@@ -194,7 +189,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
         DEFAULT_PAGE_SIZE: glados.Settings.TABLE_PAGE_SIZES[2]
         AVAILABLE_PAGE_SIZES: glados.Settings.TABLE_PAGE_SIZES
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.ActivitySchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table']]
@@ -207,7 +201,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCompound'
         LABEL: 'Compounds'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
+        INDEX_NAME: 'chembl_molecule'
         BROWSE_LIST_URL: Compound.getCompoundsListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
@@ -223,7 +217,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCompound'
         LABEL: 'Compounds'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
+        INDEX_NAME: 'chembl_molecule'
         BROWSE_LIST_URL: Compound.getCompoundsListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
@@ -234,7 +228,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         ENABLE_CARDS_ZOOM: true
         CUSTOM_CARDS_TEMPLATE: 'Handlebars-Common-Paginated-Card-Compound'
         CUSTOM_CARDS_ITEM_VIEW: glados.views.PaginatedViews.ItemCardView
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.CompoundSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV'], glados.Settings.DEFAULT_FILE_FORMAT_NAMES['SDF']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
@@ -257,7 +250,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCompound'
         LABEL: 'Compounds'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
+        INDEX_NAME: 'chembl_molecule'
         BROWSE_LIST_URL: Compound.getCompoundsListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
@@ -269,7 +262,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         CUSTOM_CARDS_TEMPLATE: 'Handlebars-Common-Paginated-Card-Compound'
         CUSTOM_CARDS_ITEM_VIEW: glados.views.PaginatedViews.ItemCardView
         ADDITIONAL_COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.CompoundSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV'], glados.Settings.DEFAULT_FILE_FORMAT_NAMES['SDF']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
@@ -293,7 +285,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       TARGET_BLAST_RESULTS:
         ID_NAME: 'ESTarget'
         LABEL: 'Targets'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'target'
+        INDEX_NAME: 'chembl_target'
         BROWSE_LIST_URL: Target.getTargetsListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Target
@@ -301,7 +293,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         PERMANENT_COMPARATORS_TO_FETCH: ['target_chembl_id', 'cross_references', 'target_components']
         CONFIG_GROUPS:
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table_blast'
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.TargetSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
@@ -315,7 +306,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESCompound'
         LABEL: 'Compounds'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
+        INDEX_NAME: 'chembl_molecule'
         BROWSE_LIST_URL: Compound.getCompoundsListURL
         # PATH: Assigned after this declaration using the INDEX_NAME
         MODEL: Compound
@@ -330,7 +321,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         CUSTOM_CARDS_TEMPLATE: 'Handlebars-Common-Paginated-Card-Compound'
         CUSTOM_CARDS_ITEM_VIEW: glados.views.PaginatedViews.ItemCardView
         ADDITIONAL_COLUMNS: Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.CompoundSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV'], glados.Settings.DEFAULT_FILE_FORMAT_NAMES['SDF']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
@@ -353,7 +343,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         # KEY_NAME: Assigned after this declaration using the same string used for the key in ES_INDEXES
         ID_NAME: 'ESDrugs'
         LABEL: 'Drugs'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
+        INDEX_NAME: 'chembl_molecule'
         # PATH: Assigned after this declaration using the INDEX_NAME
         BROWSE_LIST_URL: Drug.getDrugsListURL
         MODEL: glados.models.Compound.Drug
@@ -366,7 +356,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         CUSTOM_CARDS_ITEM_VIEW: glados.views.PaginatedViews.ItemCardView
         CUSTOM_CARD_ITEM_VIEW_DETAILS_COLUMNS: glados.models.Compound.Drug.COLUMNS_SETTINGS.CARD_DETAILS
         ADDITIONAL_COLUMNS: Drug.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.CompoundSchema.FACETS_GROUPS
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV'], glados.Settings.DEFAULT_FILE_FORMAT_NAMES['SDF']]
         AVAILABLE_VIEWS: [glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES['Table'],
@@ -389,7 +378,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       DRUG_INDICATIONS:
         ID_NAME: 'ESDrugIndications'
         LABEL: 'Drug Indications'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'drug_indication_by_parent'
+        INDEX_NAME: 'chembl_drug_indication_by_parent'
         # PATH: Assigned after this declaration using the INDEX_NAME
         #BROWSE_LIST_URL: Drug.getDrugsListURL
         BROWSE_LIST_URL: glados.models.Compound.DrugIndication.getListURL
@@ -398,7 +387,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           'parent_molecule.molecule_chembl_id', 'drug_indication.mesh_id', 'drug_indication.drugind_id']
         CONFIG_GROUPS:
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.DrugIndicationSchema.FACETS_GROUPS
         ID_COLUMN: glados.models.Compound.DrugIndication.ID_COLUMN
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
@@ -411,7 +399,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       DRUG_INDICATIONS_COMPOUND_REPORT_CARD:
         ID_NAME: 'ESDrugIndications'
         LABEL: 'Drug Indications'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'drug_indication_by_parent'
+        INDEX_NAME: 'chembl_drug_indication_by_parent'
         # PATH: Assigned after this declaration using the INDEX_NAME
         #BROWSE_LIST_URL: Drug.getDrugsListURL
         BROWSE_LIST_URL: glados.models.Compound.DrugIndication.getListURL
@@ -420,7 +408,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
           'parent_molecule.molecule_chembl_id', 'drug_indication.mesh_id', 'drug_indication.drugind_id']
         CONFIG_GROUPS:
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'report_card_table'
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.DrugIndicationSchema.FACETS_GROUPS
         ID_COLUMN: glados.models.Compound.DrugIndication.ID_COLUMN
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
@@ -428,14 +415,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       MECHANISMS_OF_ACTION:
         ID_NAME: 'ESMechsOfAction'
         LABEL: 'Drug Mechanisms'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'mechanism_by_parent_target'
+        INDEX_NAME: 'chembl_mechanism_by_parent_target'
         BROWSE_LIST_URL: glados.models.Compound.MechanismOfAction.getListURL
         MODEL: glados.models.Compound.MechanismOfAction
         PERMANENT_COMPARATORS_TO_FETCH: ['parent_molecule._metadata.compound_generated.image_file',
           'parent_molecule.molecule_chembl_id', 'target.target_chembl_id', 'mechanism_of_action.mec_id']
         CONFIG_GROUPS:
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'browser_table'
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.MechanismSchema.FACETS_GROUPS
         ID_COLUMN: glados.models.Compound.MechanismOfAction.ID_COLUMN
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
@@ -449,14 +435,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       MECHANISMS_OF_ACTION_COMPOUND_REPORT_CARD:
         ID_NAME: 'ESMechsOfAction'
         LABEL: 'Mechanisms of Action'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'mechanism_by_parent_target'
+        INDEX_NAME: 'chembl_mechanism_by_parent_target'
         BROWSE_LIST_URL: glados.models.Compound.MechanismOfAction.getListURL
         MODEL: glados.models.Compound.MechanismOfAction
         PERMANENT_COMPARATORS_TO_FETCH: ['parent_molecule._metadata.compound_generated.image_file',
           'parent_molecule.molecule_chembl_id', 'target.target_chembl_id']
         CONFIG_GROUPS:
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'report_card_table'
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.MechanismSchema.FACETS_GROUPS
         ID_COLUMN: glados.models.Compound.MechanismOfAction.ID_COLUMN
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]
@@ -464,14 +449,13 @@ glados.useNameSpace 'glados.models.paginatedCollections',
       MECHANISMS_OF_ACTION_TARGET_REPORT_CARD:
         ID_NAME: 'ESMechsOfAction'
         LABEL: 'Mechanisms of Action'
-        INDEX_NAME: glados.Settings.CHEMBL_ES_INDEX_PREFIX+'mechanism_by_parent_target'
+        INDEX_NAME: 'chembl_mechanism_by_parent_target'
         BROWSE_LIST_URL: glados.models.Compound.MechanismOfAction.getListURL
         MODEL: glados.models.Compound.MechanismOfAction
         PERMANENT_COMPARATORS_TO_FETCH: ['parent_molecule._metadata.compound_generated.image_file',
           'parent_molecule.molecule_chembl_id', 'target.target_chembl_id']
         CONFIG_GROUPS:
           "#{glados.Settings.DEFAULT_RESULTS_VIEWS_NAMES.Table}": 'target_report_card_table'
-        FACETS_GROUPS: glados.models.paginatedCollections.esSchema.MechanismSchema.FACETS_GROUPS
         ID_COLUMN: glados.models.Compound.MechanismOfAction.ID_COLUMN
         DOWNLOAD_FORMATS: [glados.Settings.DEFAULT_FILE_FORMAT_NAMES['CSV'],
           glados.Settings.DEFAULT_FILE_FORMAT_NAMES['TSV']]

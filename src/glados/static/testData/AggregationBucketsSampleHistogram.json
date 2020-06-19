@@ -1,1169 +1,1171 @@
 {
-	"took": 1,
-	"timed_out": false,
-	"_shards": {
-		"total": 1,
-		"successful": 1,
-		"failed": 0
-	},
-	"hits": {
-		"total": 67722,
-		"max_score": 0.0,
-		"hits": []
-	},
-	"aggregations": {
-		"documentsPerYear": {
-			"buckets": {
-				"1974.0": {
-					"key": 1974.0,
-					"doc_count": 2,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 0,
-						"buckets": [
-							{
-								"key": "Eur J Clin Pharmacol",
-								"doc_count": 1
-							},
-							{
-								"key": "J. Pharm. Sci",
-								"doc_count": 1
-							}
-						]
-					}
-				},
-				"1975.0": {
-					"key": 1975.0,
-					"doc_count": 0,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 0,
-						"buckets": []
-					}
-				},
-				"1976.0": {
-					"key": 1976.0,
-					"doc_count": 204,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 0,
-						"buckets": [
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 204
-							}
-						]
-					}
-				},
-				"1977.0": {
-					"key": 1977.0,
-					"doc_count": 333,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 0,
-						"buckets": [
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 331
-							},
-							{
-								"key": "Eur J Clin Pharmacol",
-								"doc_count": 1
-							},
-							{
-								"key": "Plant Physiol",
-								"doc_count": 1
-							}
-						]
-					}
-				},
-				"1978.0": {
-					"key": 1978.0,
-					"doc_count": 260,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 0,
-						"buckets": [
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 258
-							},
-							{
-								"key": "Acta Paediatr Scand",
-								"doc_count": 1
-							},
-							{
-								"key": "Br. J. Clin. Pharmacol.",
-								"doc_count": 1
-							}
-						]
-					}
-				},
-				"1979.0": {
-					"key": 1979.0,
-					"doc_count": 299,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 0,
-						"buckets": [
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 274
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 23
-							},
-							{
-								"key": "Br. J. Clin. Pharmacol.",
-								"doc_count": 1
-							},
-							{
-								"key": "Eur J Clin Pharmacol",
-								"doc_count": 1
-							}
-						]
-					}
-				},
-				"1980.0": {
-					"key": 1980.0,
-					"doc_count": 299,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 0,
-						"buckets": [
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 277
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 21
-							},
-							{
-								"key": "Br. J. Clin. Pharmacol.",
-								"doc_count": 1
-							}
-						]
-					}
-				},
-				"1981.0": {
-					"key": 1981.0,
-					"doc_count": 312,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 0,
-						"buckets": [
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 286
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 24
-							},
-							{
-								"key": "Eur J Clin Pharmacol",
-								"doc_count": 2
-							}
-						]
-					}
-				},
-				"1982.0": {
-					"key": 1982.0,
-					"doc_count": 319,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 0,
-						"buckets": [
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 290
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 28
-							},
-							{
-								"key": "J. Clin. Pharmacol.",
-								"doc_count": 1
-							}
-						]
-					}
-				},
-				"1983.0": {
-					"key": 1983.0,
-					"doc_count": 333,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 0,
-						"buckets": [
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 295
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 38
-							}
-						]
-					}
-				},
-				"1984.0": {
-					"key": 1984.0,
-					"doc_count": 342,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 0,
-						"buckets": [
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 305
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 37
-							}
-						]
-					}
-				},
-				"1985.0": {
-					"key": 1985.0,
-					"doc_count": 367,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 0,
-						"buckets": [
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 337
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 29
-							},
-							{
-								"key": "Biopharm. Drug Dispos.",
-								"doc_count": 1
-							}
-						]
-					}
-				},
-				"1986.0": {
-					"key": 1986.0,
-					"doc_count": 429,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 0,
-						"buckets": [
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 400
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 28
-							},
-							{
-								"key": "Int J Immunopharmacol",
-								"doc_count": 1
-							}
-						]
-					}
-				},
-				"1987.0": {
-					"key": 1987.0,
-					"doc_count": 435,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 0,
-						"buckets": [
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 390
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 42
-							},
-							{
-								"key": "Br. J. Clin. Pharmacol.",
-								"doc_count": 1
-							},
-							{
-								"key": "Chem Pharm Bull (Tokyo)",
-								"doc_count": 1
-							},
-							{
-								"key": "Psychopharmacology (Berl)",
-								"doc_count": 1
-							}
-						]
-					}
-				},
-				"1988.0": {
-					"key": 1988.0,
-					"doc_count": 424,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 0,
-						"buckets": [
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 368
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 53
-							},
-							{
-								"key": "J. Natl. Cancer Inst.",
-								"doc_count": 1
-							},
-							{
-								"key": "Proc. Natl. Acad. Sci. U.S.A.",
-								"doc_count": 1
-							},
-							{
-								"key": "Xenobiotica",
-								"doc_count": 1
-							}
-						]
-					}
-				},
-				"1989.0": {
-					"key": 1989.0,
-					"doc_count": 447,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 0,
-						"buckets": [
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 389
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 57
-							},
-							{
-								"key": "Eur. J. Biochem.",
-								"doc_count": 1
-							}
-						]
-					}
-				},
-				"1990.0": {
-					"key": 1990.0,
-					"doc_count": 554,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 2,
-						"buckets": [
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 475
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 67
-							},
-							{
-								"key": "J Pesticide Sci",
-								"doc_count": 8
-							},
-							{
-								"key": "Cancer Commun.",
-								"doc_count": 1
-							},
-							{
-								"key": "J. Biol. Chem.",
-								"doc_count": 1
-							}
-						]
-					}
-				},
-				"1991.0": {
-					"key": 1991.0,
-					"doc_count": 661,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 5,
-						"buckets": [
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 461
-							},
-							{
-								"key": "Bioorg. Med. Chem. Lett.",
-								"doc_count": 97
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 83
-							},
-							{
-								"key": "J Pesticide Sci",
-								"doc_count": 8
-							},
-							{
-								"key": "Agric Biol Chem",
-								"doc_count": 7
-							}
-						]
-					}
-				},
-				"1992.0": {
-					"key": 1992.0,
-					"doc_count": 958,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 10,
-						"buckets": [
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 591
-							},
-							{
-								"key": "Bioorg. Med. Chem. Lett.",
-								"doc_count": 234
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 101
-							},
-							{
-								"key": "Biosci. Biotechnol. Biochem.",
-								"doc_count": 11
-							},
-							{
-								"key": "J Pesticide Sci",
-								"doc_count": 11
-							}
-						]
-					}
-				},
-				"1993.0": {
-					"key": 1993.0,
-					"doc_count": 1000,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 5,
-						"buckets": [
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 504
-							},
-							{
-								"key": "Bioorg. Med. Chem. Lett.",
-								"doc_count": 371
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 112
-							},
-							{
-								"key": "Biosci. Biotechnol. Biochem.",
-								"doc_count": 6
-							},
-							{
-								"key": "FEBS Lett.",
-								"doc_count": 2
-							}
-						]
-					}
-				},
-				"1994.0": {
-					"key": 1994.0,
-					"doc_count": 1099,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 29,
-						"buckets": [
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 531
-							},
-							{
-								"key": "Bioorg. Med. Chem. Lett.",
-								"doc_count": 406
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 122
-							},
-							{
-								"key": "J Pesticide Sci",
-								"doc_count": 7
-							},
-							{
-								"key": "Biochem. Pharmacol.",
-								"doc_count": 4
-							}
-						]
-					}
-				},
-				"1995.0": {
-					"key": 1995.0,
-					"doc_count": 1169,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 24,
-						"buckets": [
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 530
-							},
-							{
-								"key": "Bioorg. Med. Chem. Lett.",
-								"doc_count": 475
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 125
-							},
-							{
-								"key": "J Pesticide Sci",
-								"doc_count": 12
-							},
-							{
-								"key": "Tetrahedron",
-								"doc_count": 3
-							}
-						]
-					}
-				},
-				"1996.0": {
-					"key": 1996.0,
-					"doc_count": 1244,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 49,
-						"buckets": [
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 566
-							},
-							{
-								"key": "Bioorg. Med. Chem. Lett.",
-								"doc_count": 461
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 147
-							},
-							{
-								"key": "J Pesticide Sci",
-								"doc_count": 16
-							},
-							{
-								"key": "Am. J. Physiol.",
-								"doc_count": 5
-							}
-						]
-					}
-				},
-				"1997.0": {
-					"key": 1997.0,
-					"doc_count": 1159,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 49,
-						"buckets": [
-							{
-								"key": "Bioorg. Med. Chem. Lett.",
-								"doc_count": 468
-							},
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 463
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 155
-							},
-							{
-								"key": "J Pesticide Sci",
-								"doc_count": 16
-							},
-							{
-								"key": "J. Pharmacol. Exp. Ther.",
-								"doc_count": 8
-							}
-						]
-					}
-				},
-				"1998.0": {
-					"key": 1998.0,
-					"doc_count": 1371,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 64,
-						"buckets": [
-							{
-								"key": "Bioorg. Med. Chem. Lett.",
-								"doc_count": 547
-							},
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 531
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 203
-							},
-							{
-								"key": "J Pesticide Sci",
-								"doc_count": 15
-							},
-							{
-								"key": "J. Biol. Chem.",
-								"doc_count": 11
-							}
-						]
-					}
-				},
-				"1999.0": {
-					"key": 1999.0,
-					"doc_count": 1410,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 95,
-						"buckets": [
-							{
-								"key": "Bioorg. Med. Chem. Lett.",
-								"doc_count": 547
-							},
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 518
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 221
-							},
-							{
-								"key": "J. Pharmacol. Exp. Ther.",
-								"doc_count": 18
-							},
-							{
-								"key": "J Pesticide Sci",
-								"doc_count": 10
-							}
-						]
-					}
-				},
-				"2000.0": {
-					"key": 2000.0,
-					"doc_count": 1428,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 110,
-						"buckets": [
-							{
-								"key": "Bioorg. Med. Chem. Lett.",
-								"doc_count": 549
-							},
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 506
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 224
-							},
-							{
-								"key": "J Agric Food Chem",
-								"doc_count": 25
-							},
-							{
-								"key": "J. Pharmacol. Exp. Ther.",
-								"doc_count": 14
-							}
-						]
-					}
-				},
-				"2001.0": {
-					"key": 2001.0,
-					"doc_count": 1441,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 105,
-						"buckets": [
-							{
-								"key": "Bioorg. Med. Chem. Lett.",
-								"doc_count": 611
-							},
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 457
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 242
-							},
-							{
-								"key": "J Pesticide Sci",
-								"doc_count": 14
-							},
-							{
-								"key": "J. Biol. Chem.",
-								"doc_count": 11
-							}
-						]
-					}
-				},
-				"2002.0": {
-					"key": 2002.0,
-					"doc_count": 1662,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 136,
-						"buckets": [
-							{
-								"key": "Bioorg. Med. Chem. Lett.",
-								"doc_count": 668
-							},
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 551
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 265
-							},
-							{
-								"key": "J Agric Food Chem",
-								"doc_count": 25
-							},
-							{
-								"key": "J Pesticide Sci",
-								"doc_count": 17
-							}
-						]
-					}
-				},
-				"2003.0": {
-					"key": 2003.0,
-					"doc_count": 1780,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 115,
-						"buckets": [
-							{
-								"key": "Bioorg. Med. Chem. Lett.",
-								"doc_count": 804
-							},
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 563
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 252
-							},
-							{
-								"key": "J Agric Food Chem",
-								"doc_count": 32
-							},
-							{
-								"key": "Pharm. Res.",
-								"doc_count": 14
-							}
-						]
-					}
-				},
-				"2004.0": {
-					"key": 2004.0,
-					"doc_count": 2106,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 115,
-						"buckets": [
-							{
-								"key": "Bioorg. Med. Chem. Lett.",
-								"doc_count": 995
-							},
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 633
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 313
-							},
-							{
-								"key": "Med Chem Res",
-								"doc_count": 32
-							},
-							{
-								"key": "J Agric Food Chem",
-								"doc_count": 18
-							}
-						]
-					}
-				},
-				"2005.0": {
-					"key": 2005.0,
-					"doc_count": 2009,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 78,
-						"buckets": [
-							{
-								"key": "Bioorg. Med. Chem. Lett.",
-								"doc_count": 871
-							},
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 724
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 285
-							},
-							{
-								"key": "Med Chem Res",
-								"doc_count": 26
-							},
-							{
-								"key": "J Agric Food Chem",
-								"doc_count": 25
-							}
-						]
-					}
-				},
-				"2006.0": {
-					"key": 2006.0,
-					"doc_count": 2133,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 66,
-						"buckets": [
-							{
-								"key": "Bioorg. Med. Chem. Lett.",
-								"doc_count": 1033
-							},
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 683
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 298
-							},
-							{
-								"key": "Nat. Chem. Biol.",
-								"doc_count": 36
-							},
-							{
-								"key": "Crop Protection",
-								"doc_count": 17
-							}
-						]
-					}
-				},
-				"2007.0": {
-					"key": 2007.0,
-					"doc_count": 3823,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 480,
-						"buckets": [
-							{
-								"key": "Bioorg. Med. Chem. Lett.",
-								"doc_count": 1194
-							},
-							{
-								"key": "Bioorg. Med. Chem.",
-								"doc_count": 645
-							},
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 644
-							},
-							{
-								"key": "Antimicrob. Agents Chemother.",
-								"doc_count": 558
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 302
-							}
-						]
-					}
-				},
-				"2008.0": {
-					"key": 2008.0,
-					"doc_count": 4063,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 428,
-						"buckets": [
-							{
-								"key": "Bioorg. Med. Chem. Lett.",
-								"doc_count": 1178
-							},
-							{
-								"key": "Bioorg. Med. Chem.",
-								"doc_count": 882
-							},
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 770
-							},
-							{
-								"key": "Antimicrob. Agents Chemother.",
-								"doc_count": 463
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 341
-							}
-						]
-					}
-				},
-				"2009.0": {
-					"key": 2009.0,
-					"doc_count": 4443,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 532,
-						"buckets": [
-							{
-								"key": "Bioorg. Med. Chem. Lett.",
-								"doc_count": 1316
-							},
-							{
-								"key": "Bioorg. Med. Chem.",
-								"doc_count": 765
-							},
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 753
-							},
-							{
-								"key": "Antimicrob. Agents Chemother.",
-								"doc_count": 550
-							},
-							{
-								"key": "Eur. J. Med. Chem.",
-								"doc_count": 527
-							}
-						]
-					}
-				},
-				"2010.0": {
-					"key": 2010.0,
-					"doc_count": 4625,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 592,
-						"buckets": [
-							{
-								"key": "Bioorg. Med. Chem. Lett.",
-								"doc_count": 1419
-							},
-							{
-								"key": "Bioorg. Med. Chem.",
-								"doc_count": 793
-							},
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 694
-							},
-							{
-								"key": "Eur. J. Med. Chem.",
-								"doc_count": 614
-							},
-							{
-								"key": "Antimicrob. Agents Chemother.",
-								"doc_count": 513
-							}
-						]
-					}
-				},
-				"2011.0": {
-					"key": 2011.0,
-					"doc_count": 4228,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 671,
-						"buckets": [
-							{
-								"key": "Bioorg. Med. Chem. Lett.",
-								"doc_count": 1313
-							},
-							{
-								"key": "Bioorg. Med. Chem.",
-								"doc_count": 684
-							},
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 658
-							},
-							{
-								"key": "Eur. J. Med. Chem.",
-								"doc_count": 580
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 319
-							}
-						]
-					}
-				},
-				"2012.0": {
-					"key": 2012.0,
-					"doc_count": 4426,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 840,
-						"buckets": [
-							{
-								"key": "Bioorg. Med. Chem. Lett.",
-								"doc_count": 1299
-							},
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 793
-							},
-							{
-								"key": "Bioorg. Med. Chem.",
-								"doc_count": 595
-							},
-							{
-								"key": "Eur. J. Med. Chem.",
-								"doc_count": 512
-							},
-							{
-								"key": "Med Chem Res",
-								"doc_count": 387
-							}
-						]
-					}
-				},
-				"2013.0": {
-					"key": 2013.0,
-					"doc_count": 4610,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 776,
-						"buckets": [
-							{
-								"key": "Bioorg. Med. Chem. Lett.",
-								"doc_count": 1083
-							},
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 708
-							},
-							{
-								"key": "Bioorg. Med. Chem.",
-								"doc_count": 659
-							},
-							{
-								"key": "Eur. J. Med. Chem.",
-								"doc_count": 626
-							},
-							{
-								"key": "Med Chem Res",
-								"doc_count": 523
-							}
-						]
-					}
-				},
-				"2014.0": {
-					"key": 2014.0,
-					"doc_count": 3837,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 388,
-						"buckets": [
-							{
-								"key": "Bioorg. Med. Chem. Lett.",
-								"doc_count": 910
-							},
-							{
-								"key": "Eur. J. Med. Chem.",
-								"doc_count": 657
-							},
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 647
-							},
-							{
-								"key": "Bioorg. Med. Chem.",
-								"doc_count": 527
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 319
-							}
-						]
-					}
-				},
-				"2015.0": {
-					"key": 2015.0,
-					"doc_count": 3551,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 403,
-						"buckets": [
-							{
-								"key": "Bioorg. Med. Chem. Lett.",
-								"doc_count": 818
-							},
-							{
-								"key": "Bioorg. Med. Chem.",
-								"doc_count": 567
-							},
-							{
-								"key": "Eur. J. Med. Chem.",
-								"doc_count": 536
-							},
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 526
-							},
-							{
-								"key": "J. Nat. Prod.",
-								"doc_count": 311
-							}
-						]
-					}
-				},
-				"2016.0": {
-					"key": 2016.0,
-					"doc_count": 1870,
-					"split_series_agg": {
-						"doc_count_error_upper_bound": 0,
-						"sum_other_doc_count": 159,
-						"buckets": [
-							{
-								"key": "Bioorg. Med. Chem. Lett.",
-								"doc_count": 614
-							},
-							{
-								"key": "Eur. J. Med. Chem.",
-								"doc_count": 348
-							},
-							{
-								"key": "Bioorg. Med. Chem.",
-								"doc_count": 343
-							},
-							{
-								"key": "J. Med. Chem.",
-								"doc_count": 306
-							},
-							{
-								"key": "ACS Med. Chem. Lett.",
-								"doc_count": 99
-							}
-						]
-					}
-				}
-			}
-		}
-	}
+  "es_response": {
+    "took": 1,
+    "timed_out": false,
+    "_shards": {
+      "total": 1,
+      "successful": 1,
+      "failed": 0
+    },
+    "hits": {
+      "total": 67722,
+      "max_score": 0.0,
+      "hits": []
+    },
+    "aggregations": {
+      "documentsPerYear": {
+        "buckets": {
+          "1974.0": {
+            "key": 1974.0,
+            "doc_count": 2,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 0,
+              "buckets": [
+                {
+                  "key": "Eur J Clin Pharmacol",
+                  "doc_count": 1
+                },
+                {
+                  "key": "J. Pharm. Sci",
+                  "doc_count": 1
+                }
+              ]
+            }
+          },
+          "1975.0": {
+            "key": 1975.0,
+            "doc_count": 0,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 0,
+              "buckets": []
+            }
+          },
+          "1976.0": {
+            "key": 1976.0,
+            "doc_count": 204,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 0,
+              "buckets": [
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 204
+                }
+              ]
+            }
+          },
+          "1977.0": {
+            "key": 1977.0,
+            "doc_count": 333,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 0,
+              "buckets": [
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 331
+                },
+                {
+                  "key": "Eur J Clin Pharmacol",
+                  "doc_count": 1
+                },
+                {
+                  "key": "Plant Physiol",
+                  "doc_count": 1
+                }
+              ]
+            }
+          },
+          "1978.0": {
+            "key": 1978.0,
+            "doc_count": 260,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 0,
+              "buckets": [
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 258
+                },
+                {
+                  "key": "Acta Paediatr Scand",
+                  "doc_count": 1
+                },
+                {
+                  "key": "Br. J. Clin. Pharmacol.",
+                  "doc_count": 1
+                }
+              ]
+            }
+          },
+          "1979.0": {
+            "key": 1979.0,
+            "doc_count": 299,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 0,
+              "buckets": [
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 274
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 23
+                },
+                {
+                  "key": "Br. J. Clin. Pharmacol.",
+                  "doc_count": 1
+                },
+                {
+                  "key": "Eur J Clin Pharmacol",
+                  "doc_count": 1
+                }
+              ]
+            }
+          },
+          "1980.0": {
+            "key": 1980.0,
+            "doc_count": 299,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 0,
+              "buckets": [
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 277
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 21
+                },
+                {
+                  "key": "Br. J. Clin. Pharmacol.",
+                  "doc_count": 1
+                }
+              ]
+            }
+          },
+          "1981.0": {
+            "key": 1981.0,
+            "doc_count": 312,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 0,
+              "buckets": [
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 286
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 24
+                },
+                {
+                  "key": "Eur J Clin Pharmacol",
+                  "doc_count": 2
+                }
+              ]
+            }
+          },
+          "1982.0": {
+            "key": 1982.0,
+            "doc_count": 319,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 0,
+              "buckets": [
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 290
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 28
+                },
+                {
+                  "key": "J. Clin. Pharmacol.",
+                  "doc_count": 1
+                }
+              ]
+            }
+          },
+          "1983.0": {
+            "key": 1983.0,
+            "doc_count": 333,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 0,
+              "buckets": [
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 295
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 38
+                }
+              ]
+            }
+          },
+          "1984.0": {
+            "key": 1984.0,
+            "doc_count": 342,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 0,
+              "buckets": [
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 305
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 37
+                }
+              ]
+            }
+          },
+          "1985.0": {
+            "key": 1985.0,
+            "doc_count": 367,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 0,
+              "buckets": [
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 337
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 29
+                },
+                {
+                  "key": "Biopharm. Drug Dispos.",
+                  "doc_count": 1
+                }
+              ]
+            }
+          },
+          "1986.0": {
+            "key": 1986.0,
+            "doc_count": 429,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 0,
+              "buckets": [
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 400
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 28
+                },
+                {
+                  "key": "Int J Immunopharmacol",
+                  "doc_count": 1
+                }
+              ]
+            }
+          },
+          "1987.0": {
+            "key": 1987.0,
+            "doc_count": 435,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 0,
+              "buckets": [
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 390
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 42
+                },
+                {
+                  "key": "Br. J. Clin. Pharmacol.",
+                  "doc_count": 1
+                },
+                {
+                  "key": "Chem Pharm Bull (Tokyo)",
+                  "doc_count": 1
+                },
+                {
+                  "key": "Psychopharmacology (Berl)",
+                  "doc_count": 1
+                }
+              ]
+            }
+          },
+          "1988.0": {
+            "key": 1988.0,
+            "doc_count": 424,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 0,
+              "buckets": [
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 368
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 53
+                },
+                {
+                  "key": "J. Natl. Cancer Inst.",
+                  "doc_count": 1
+                },
+                {
+                  "key": "Proc. Natl. Acad. Sci. U.S.A.",
+                  "doc_count": 1
+                },
+                {
+                  "key": "Xenobiotica",
+                  "doc_count": 1
+                }
+              ]
+            }
+          },
+          "1989.0": {
+            "key": 1989.0,
+            "doc_count": 447,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 0,
+              "buckets": [
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 389
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 57
+                },
+                {
+                  "key": "Eur. J. Biochem.",
+                  "doc_count": 1
+                }
+              ]
+            }
+          },
+          "1990.0": {
+            "key": 1990.0,
+            "doc_count": 554,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 2,
+              "buckets": [
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 475
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 67
+                },
+                {
+                  "key": "J Pesticide Sci",
+                  "doc_count": 8
+                },
+                {
+                  "key": "Cancer Commun.",
+                  "doc_count": 1
+                },
+                {
+                  "key": "J. Biol. Chem.",
+                  "doc_count": 1
+                }
+              ]
+            }
+          },
+          "1991.0": {
+            "key": 1991.0,
+            "doc_count": 661,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 5,
+              "buckets": [
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 461
+                },
+                {
+                  "key": "Bioorg. Med. Chem. Lett.",
+                  "doc_count": 97
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 83
+                },
+                {
+                  "key": "J Pesticide Sci",
+                  "doc_count": 8
+                },
+                {
+                  "key": "Agric Biol Chem",
+                  "doc_count": 7
+                }
+              ]
+            }
+          },
+          "1992.0": {
+            "key": 1992.0,
+            "doc_count": 958,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 10,
+              "buckets": [
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 591
+                },
+                {
+                  "key": "Bioorg. Med. Chem. Lett.",
+                  "doc_count": 234
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 101
+                },
+                {
+                  "key": "Biosci. Biotechnol. Biochem.",
+                  "doc_count": 11
+                },
+                {
+                  "key": "J Pesticide Sci",
+                  "doc_count": 11
+                }
+              ]
+            }
+          },
+          "1993.0": {
+            "key": 1993.0,
+            "doc_count": 1000,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 5,
+              "buckets": [
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 504
+                },
+                {
+                  "key": "Bioorg. Med. Chem. Lett.",
+                  "doc_count": 371
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 112
+                },
+                {
+                  "key": "Biosci. Biotechnol. Biochem.",
+                  "doc_count": 6
+                },
+                {
+                  "key": "FEBS Lett.",
+                  "doc_count": 2
+                }
+              ]
+            }
+          },
+          "1994.0": {
+            "key": 1994.0,
+            "doc_count": 1099,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 29,
+              "buckets": [
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 531
+                },
+                {
+                  "key": "Bioorg. Med. Chem. Lett.",
+                  "doc_count": 406
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 122
+                },
+                {
+                  "key": "J Pesticide Sci",
+                  "doc_count": 7
+                },
+                {
+                  "key": "Biochem. Pharmacol.",
+                  "doc_count": 4
+                }
+              ]
+            }
+          },
+          "1995.0": {
+            "key": 1995.0,
+            "doc_count": 1169,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 24,
+              "buckets": [
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 530
+                },
+                {
+                  "key": "Bioorg. Med. Chem. Lett.",
+                  "doc_count": 475
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 125
+                },
+                {
+                  "key": "J Pesticide Sci",
+                  "doc_count": 12
+                },
+                {
+                  "key": "Tetrahedron",
+                  "doc_count": 3
+                }
+              ]
+            }
+          },
+          "1996.0": {
+            "key": 1996.0,
+            "doc_count": 1244,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 49,
+              "buckets": [
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 566
+                },
+                {
+                  "key": "Bioorg. Med. Chem. Lett.",
+                  "doc_count": 461
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 147
+                },
+                {
+                  "key": "J Pesticide Sci",
+                  "doc_count": 16
+                },
+                {
+                  "key": "Am. J. Physiol.",
+                  "doc_count": 5
+                }
+              ]
+            }
+          },
+          "1997.0": {
+            "key": 1997.0,
+            "doc_count": 1159,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 49,
+              "buckets": [
+                {
+                  "key": "Bioorg. Med. Chem. Lett.",
+                  "doc_count": 468
+                },
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 463
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 155
+                },
+                {
+                  "key": "J Pesticide Sci",
+                  "doc_count": 16
+                },
+                {
+                  "key": "J. Pharmacol. Exp. Ther.",
+                  "doc_count": 8
+                }
+              ]
+            }
+          },
+          "1998.0": {
+            "key": 1998.0,
+            "doc_count": 1371,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 64,
+              "buckets": [
+                {
+                  "key": "Bioorg. Med. Chem. Lett.",
+                  "doc_count": 547
+                },
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 531
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 203
+                },
+                {
+                  "key": "J Pesticide Sci",
+                  "doc_count": 15
+                },
+                {
+                  "key": "J. Biol. Chem.",
+                  "doc_count": 11
+                }
+              ]
+            }
+          },
+          "1999.0": {
+            "key": 1999.0,
+            "doc_count": 1410,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 95,
+              "buckets": [
+                {
+                  "key": "Bioorg. Med. Chem. Lett.",
+                  "doc_count": 547
+                },
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 518
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 221
+                },
+                {
+                  "key": "J. Pharmacol. Exp. Ther.",
+                  "doc_count": 18
+                },
+                {
+                  "key": "J Pesticide Sci",
+                  "doc_count": 10
+                }
+              ]
+            }
+          },
+          "2000.0": {
+            "key": 2000.0,
+            "doc_count": 1428,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 110,
+              "buckets": [
+                {
+                  "key": "Bioorg. Med. Chem. Lett.",
+                  "doc_count": 549
+                },
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 506
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 224
+                },
+                {
+                  "key": "J Agric Food Chem",
+                  "doc_count": 25
+                },
+                {
+                  "key": "J. Pharmacol. Exp. Ther.",
+                  "doc_count": 14
+                }
+              ]
+            }
+          },
+          "2001.0": {
+            "key": 2001.0,
+            "doc_count": 1441,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 105,
+              "buckets": [
+                {
+                  "key": "Bioorg. Med. Chem. Lett.",
+                  "doc_count": 611
+                },
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 457
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 242
+                },
+                {
+                  "key": "J Pesticide Sci",
+                  "doc_count": 14
+                },
+                {
+                  "key": "J. Biol. Chem.",
+                  "doc_count": 11
+                }
+              ]
+            }
+          },
+          "2002.0": {
+            "key": 2002.0,
+            "doc_count": 1662,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 136,
+              "buckets": [
+                {
+                  "key": "Bioorg. Med. Chem. Lett.",
+                  "doc_count": 668
+                },
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 551
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 265
+                },
+                {
+                  "key": "J Agric Food Chem",
+                  "doc_count": 25
+                },
+                {
+                  "key": "J Pesticide Sci",
+                  "doc_count": 17
+                }
+              ]
+            }
+          },
+          "2003.0": {
+            "key": 2003.0,
+            "doc_count": 1780,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 115,
+              "buckets": [
+                {
+                  "key": "Bioorg. Med. Chem. Lett.",
+                  "doc_count": 804
+                },
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 563
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 252
+                },
+                {
+                  "key": "J Agric Food Chem",
+                  "doc_count": 32
+                },
+                {
+                  "key": "Pharm. Res.",
+                  "doc_count": 14
+                }
+              ]
+            }
+          },
+          "2004.0": {
+            "key": 2004.0,
+            "doc_count": 2106,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 115,
+              "buckets": [
+                {
+                  "key": "Bioorg. Med. Chem. Lett.",
+                  "doc_count": 995
+                },
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 633
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 313
+                },
+                {
+                  "key": "Med Chem Res",
+                  "doc_count": 32
+                },
+                {
+                  "key": "J Agric Food Chem",
+                  "doc_count": 18
+                }
+              ]
+            }
+          },
+          "2005.0": {
+            "key": 2005.0,
+            "doc_count": 2009,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 78,
+              "buckets": [
+                {
+                  "key": "Bioorg. Med. Chem. Lett.",
+                  "doc_count": 871
+                },
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 724
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 285
+                },
+                {
+                  "key": "Med Chem Res",
+                  "doc_count": 26
+                },
+                {
+                  "key": "J Agric Food Chem",
+                  "doc_count": 25
+                }
+              ]
+            }
+          },
+          "2006.0": {
+            "key": 2006.0,
+            "doc_count": 2133,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 66,
+              "buckets": [
+                {
+                  "key": "Bioorg. Med. Chem. Lett.",
+                  "doc_count": 1033
+                },
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 683
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 298
+                },
+                {
+                  "key": "Nat. Chem. Biol.",
+                  "doc_count": 36
+                },
+                {
+                  "key": "Crop Protection",
+                  "doc_count": 17
+                }
+              ]
+            }
+          },
+          "2007.0": {
+            "key": 2007.0,
+            "doc_count": 3823,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 480,
+              "buckets": [
+                {
+                  "key": "Bioorg. Med. Chem. Lett.",
+                  "doc_count": 1194
+                },
+                {
+                  "key": "Bioorg. Med. Chem.",
+                  "doc_count": 645
+                },
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 644
+                },
+                {
+                  "key": "Antimicrob. Agents Chemother.",
+                  "doc_count": 558
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 302
+                }
+              ]
+            }
+          },
+          "2008.0": {
+            "key": 2008.0,
+            "doc_count": 4063,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 428,
+              "buckets": [
+                {
+                  "key": "Bioorg. Med. Chem. Lett.",
+                  "doc_count": 1178
+                },
+                {
+                  "key": "Bioorg. Med. Chem.",
+                  "doc_count": 882
+                },
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 770
+                },
+                {
+                  "key": "Antimicrob. Agents Chemother.",
+                  "doc_count": 463
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 341
+                }
+              ]
+            }
+          },
+          "2009.0": {
+            "key": 2009.0,
+            "doc_count": 4443,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 532,
+              "buckets": [
+                {
+                  "key": "Bioorg. Med. Chem. Lett.",
+                  "doc_count": 1316
+                },
+                {
+                  "key": "Bioorg. Med. Chem.",
+                  "doc_count": 765
+                },
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 753
+                },
+                {
+                  "key": "Antimicrob. Agents Chemother.",
+                  "doc_count": 550
+                },
+                {
+                  "key": "Eur. J. Med. Chem.",
+                  "doc_count": 527
+                }
+              ]
+            }
+          },
+          "2010.0": {
+            "key": 2010.0,
+            "doc_count": 4625,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 592,
+              "buckets": [
+                {
+                  "key": "Bioorg. Med. Chem. Lett.",
+                  "doc_count": 1419
+                },
+                {
+                  "key": "Bioorg. Med. Chem.",
+                  "doc_count": 793
+                },
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 694
+                },
+                {
+                  "key": "Eur. J. Med. Chem.",
+                  "doc_count": 614
+                },
+                {
+                  "key": "Antimicrob. Agents Chemother.",
+                  "doc_count": 513
+                }
+              ]
+            }
+          },
+          "2011.0": {
+            "key": 2011.0,
+            "doc_count": 4228,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 671,
+              "buckets": [
+                {
+                  "key": "Bioorg. Med. Chem. Lett.",
+                  "doc_count": 1313
+                },
+                {
+                  "key": "Bioorg. Med. Chem.",
+                  "doc_count": 684
+                },
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 658
+                },
+                {
+                  "key": "Eur. J. Med. Chem.",
+                  "doc_count": 580
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 319
+                }
+              ]
+            }
+          },
+          "2012.0": {
+            "key": 2012.0,
+            "doc_count": 4426,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 840,
+              "buckets": [
+                {
+                  "key": "Bioorg. Med. Chem. Lett.",
+                  "doc_count": 1299
+                },
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 793
+                },
+                {
+                  "key": "Bioorg. Med. Chem.",
+                  "doc_count": 595
+                },
+                {
+                  "key": "Eur. J. Med. Chem.",
+                  "doc_count": 512
+                },
+                {
+                  "key": "Med Chem Res",
+                  "doc_count": 387
+                }
+              ]
+            }
+          },
+          "2013.0": {
+            "key": 2013.0,
+            "doc_count": 4610,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 776,
+              "buckets": [
+                {
+                  "key": "Bioorg. Med. Chem. Lett.",
+                  "doc_count": 1083
+                },
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 708
+                },
+                {
+                  "key": "Bioorg. Med. Chem.",
+                  "doc_count": 659
+                },
+                {
+                  "key": "Eur. J. Med. Chem.",
+                  "doc_count": 626
+                },
+                {
+                  "key": "Med Chem Res",
+                  "doc_count": 523
+                }
+              ]
+            }
+          },
+          "2014.0": {
+            "key": 2014.0,
+            "doc_count": 3837,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 388,
+              "buckets": [
+                {
+                  "key": "Bioorg. Med. Chem. Lett.",
+                  "doc_count": 910
+                },
+                {
+                  "key": "Eur. J. Med. Chem.",
+                  "doc_count": 657
+                },
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 647
+                },
+                {
+                  "key": "Bioorg. Med. Chem.",
+                  "doc_count": 527
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 319
+                }
+              ]
+            }
+          },
+          "2015.0": {
+            "key": 2015.0,
+            "doc_count": 3551,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 403,
+              "buckets": [
+                {
+                  "key": "Bioorg. Med. Chem. Lett.",
+                  "doc_count": 818
+                },
+                {
+                  "key": "Bioorg. Med. Chem.",
+                  "doc_count": 567
+                },
+                {
+                  "key": "Eur. J. Med. Chem.",
+                  "doc_count": 536
+                },
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 526
+                },
+                {
+                  "key": "J. Nat. Prod.",
+                  "doc_count": 311
+                }
+              ]
+            }
+          },
+          "2016.0": {
+            "key": 2016.0,
+            "doc_count": 1870,
+            "split_series_agg": {
+              "doc_count_error_upper_bound": 0,
+              "sum_other_doc_count": 159,
+              "buckets": [
+                {
+                  "key": "Bioorg. Med. Chem. Lett.",
+                  "doc_count": 614
+                },
+                {
+                  "key": "Eur. J. Med. Chem.",
+                  "doc_count": 348
+                },
+                {
+                  "key": "Bioorg. Med. Chem.",
+                  "doc_count": 343
+                },
+                {
+                  "key": "J. Med. Chem.",
+                  "doc_count": 306
+                },
+                {
+                  "key": "ACS Med. Chem. Lett.",
+                  "doc_count": 99
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
 }

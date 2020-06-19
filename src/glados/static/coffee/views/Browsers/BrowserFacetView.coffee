@@ -9,26 +9,10 @@ glados.useNameSpace 'glados.views.Browsers',
       @FACET_GROUP_IS_CLOSED = {}
       @$vis_elem = $(@el)
       @setUpResponsiveRender(emptyBeforeRender=false)
+      @collection.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_CONFIG_FETCHING_STATE_CHANGED, @checkIfFacetsConfigLoadedAndInitStructure, @
       @collection.on 'facets-changed', @render, @
+      @collection.on glados.models.paginatedCollections.PaginatedCollectionBase.EVENTS.FACETS_CONFIG_FETCHING_STATE_CHANGED, @render, @
       @collection.on 'reset', @checkIfNoItems, @
-
-      @facetsStreamingCover = $(@el).find('.div-cover')
-
-      facetsGroups = @collection.getFacetsGroups(undefined, onlyVisible=false)
-
-      @facetsVisibilityHandler = new glados.models.paginatedCollections.FacetGroupVisibilityHandler
-        all_facets_groups: facetsGroups
-
-      @facetsVisibilityHandler.on glados.models.paginatedCollections.ColumnsHandler.EVENTS.COLUMNS_ORDER_CHANGED,\
-        @handleFiltersReordering, @
-
-      @facetsVisibilityHandler.on \
-        glados.models.paginatedCollections.FacetGroupVisibilityHandler.EVENTS.COLUMNS_SHOW_STATUS_CHANGED,\
-        @handleShowHideFilter, @
-
-      @initialiseTitle()
-      @initializeHTMLStructure()
-      @showPreloader()
 
     events:
       'click .BCK-clear-facets' : 'clearFacetsSelection'
@@ -64,11 +48,40 @@ glados.useNameSpace 'glados.views.Browsers',
         onClose: $.proxy(@handleCloseFacet, @)
 
     # ------------------------------------------------------------------------------------------------------------------
+    # React to facets config loaded
+    # ------------------------------------------------------------------------------------------------------------------
+    checkIfFacetsConfigLoadedAndInitStructure: ->
+
+      if @collection.facetsConfigIsReady()
+
+        @initFacetsVisualStructure()
+
+    initFacetsVisualStructure: ->
+
+      @facetsStreamingCover = $(@el).find('.div-cover')
+
+      facetsGroups = @collection.getFacetsGroups(undefined, onlyVisible=false)
+
+      @facetsVisibilityHandler = new glados.models.paginatedCollections.FacetGroupVisibilityHandler
+        all_facets_groups: facetsGroups
+
+      @facetsVisibilityHandler.on glados.models.paginatedCollections.ColumnsHandler.EVENTS.COLUMNS_ORDER_CHANGED,\
+        @handleFiltersReordering, @
+
+      @facetsVisibilityHandler.on \
+        glados.models.paginatedCollections.FacetGroupVisibilityHandler.EVENTS.COLUMNS_SHOW_STATUS_CHANGED,\
+        @handleShowHideFilter, @
+
+      @initialiseTitle()
+      @initializeHTMLStructure()
+      @showPreloader()
+
+    # ------------------------------------------------------------------------------------------------------------------
     # Render
     # ------------------------------------------------------------------------------------------------------------------
     wakeUp: ->
 
-      if @collection.facetsReady
+      if @collection.facetsConfigIsReady() and @collection.facetsReady
         @render()
 
     collapseAllFilters: ->
@@ -176,6 +189,7 @@ glados.useNameSpace 'glados.views.Browsers',
     # Show/hide filters
     # ------------------------------------------------------------------------------------------------------------------
     handleShowHideFilter: ->
+      @initializeHTMLStructure()
       @showPreloader()
       @collection.loadFacetGroups()
     # ------------------------------------------------------------------------------------------------------------------
@@ -250,10 +264,15 @@ glados.useNameSpace 'glados.views.Browsers',
       if not $(@el).is(":visible") or $(@el).width() == 0
         return
 
-      @destroyAllTooltips()
+      if not @collection.facetsConfigIsReady()
+        @showPreloader()
+        return
 
-      if @IS_RESPONSIVE_RENDER and not @WAITING_FOR_FACETS
-        @initializeHTMLStructure()
+      if not @collection.facetsAreReady()
+        @showPreloader()
+        return
+
+      @destroyAllTooltips()
 
       @HISTOGRAM_WIDTH = $(@el).width() - @HISTOGRAM_PADDING.left - @HISTOGRAM_PADDING.right
       @BARS_MAX_WIDTH = @HISTOGRAM_WIDTH
