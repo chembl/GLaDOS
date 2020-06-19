@@ -110,8 +110,31 @@ glados.useNameSpace 'glados.models.Search',
 
         else if status == 'FINISHED'
 
+          contextUrl = "https://#{response.output_files_urls['results.json']}"
           thisModel.set('expires', response.expires_at)
-          thisModel.setState(glados.models.Search.StructureSearchModel.STATES.FINISHED)
+          thisModel.setState(glados.models.Search.StructureSearchModel.STATES.LOADING_RESULTS)
+          $.get(contextUrl).done( (results) ->
+
+            searchType = thisModel.get('search_type')
+            if searchType == glados.models.Search.StructureSearchModel.SEARCH_TYPES.SEQUENCE.BLAST
+              id_property = 'target_chembl_id'
+            else
+              id_property = 'molecule_chembl_id'
+
+            ids = []
+            search_results = results['search_results']
+            for result in search_results
+              ids.push(result[id_property])
+
+            thisModel.set('ids_list', ids)
+            thisModel.setState(glados.models.Search.StructureSearchModel.STATES.FINISHED)
+
+          ).fail( (error) ->
+
+            thisModel.set('error_message', response.msg)
+            thisModel.setState(glados.models.Search.StructureSearchModel.STATES.ERROR_STATE)
+
+          )
 
         else
 
@@ -149,7 +172,6 @@ glados.models.Search.StructureSearchModel.STATES =
   SEARCHING: 'SEARCHING'
   LOADING_RESULTS: 'LOADING_RESULTS'
   FINISHED: 'FINISHED'
-  DELETING: 'DELETING'
 
 glados.models.Search.StructureSearchModel.EVENTS =
   RESULTS_READY: 'RESULTS_READY'

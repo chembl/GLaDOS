@@ -116,8 +116,9 @@ class SearchResultsApp
 
   @initBrowserFromSSResults = ($browserContainer, $noResultsDiv, customSettings, ssSearchModel) ->
 
+    itemsList = ssSearchModel.get('ids_list')
     esCompoundsList = glados.models.paginatedCollections.PaginatedCollectionFactory.getNewESCompoundsList(
-      customQuery=undefined, itemsList=undefined, settings=customSettings, ssSearchModel)
+      customQuery=undefined, itemsList=itemsList, settings=customSettings, ssSearchModel)
 
     new glados.views.Browsers.BrowserMenuView
       collection: esCompoundsList

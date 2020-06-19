@@ -321,6 +321,7 @@ glados.loadSearchResultsURLS = ()->
   glados.Settings.DELAYED_JOBS_BASE_URL = 'https://www.ebi.ac.uk/chembl/interface_api/delayed_jobs'
   glados.Settings.SUBMIT_STRUCTURE_SEARCH_URL = "#{glados.Settings.DELAYED_JOBS_BASE_URL}/submit/structure_search_job"
   glados.Settings.SUBMIT_SEQUENCE_SEARCH_URL = "#{glados.Settings.DELAYED_JOBS_BASE_URL}/submit/biological_sequence_search_job"
+  glados.Settings.SUBMIT_DOWNLOAD_URL = "#{glados.Settings.DELAYED_JOBS_BASE_URL}/submit/download_job"
   glados.Settings.DELAYED_JOB_STATUS_URL_GENERATOR =
     Handlebars.compile("#{glados.Settings.DELAYED_JOBS_BASE_URL}/status/{{job_id}}")
 
