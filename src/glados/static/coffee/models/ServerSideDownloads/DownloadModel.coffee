@@ -77,12 +77,12 @@ glados.useNameSpace 'glados.models.ServerSideDownloads',
 
         else if status == 'QUEUED'
 
-          setTimeout(thisModel.checkDownloadProgressPeriodically.bind(thisModel), 1000)
+          setTimeout(thisModel.checkDownloadProgressPeriodically.bind(thisModel), 2000)
 
         else if status == 'RUNNING'
 
           thisModel.set('progress', response.progress)
-          setTimeout(thisModel.checkDownloadProgressPeriodically.bind(thisModel), 1000)
+          setTimeout(thisModel.checkDownloadProgressPeriodically.bind(thisModel), 2000)
 
         else if status == 'FINISHED'
 
@@ -95,7 +95,7 @@ glados.useNameSpace 'glados.models.ServerSideDownloads',
 
         else
 
-          setTimeout(thisModel.checkDownloadProgressPeriodically.bind(thisModel), 1000)
+          setTimeout(thisModel.checkDownloadProgressPeriodically.bind(thisModel), 2000)
 
       getProgress.fail (response) ->
 

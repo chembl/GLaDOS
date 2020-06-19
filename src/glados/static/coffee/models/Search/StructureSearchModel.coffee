@@ -100,13 +100,13 @@ glados.useNameSpace 'glados.models.Search',
 
         else if status == 'QUEUED'
 
-          setTimeout(thisModel.checkSearchStatusPeriodically.bind(thisModel), 1000)
+          setTimeout(thisModel.checkSearchStatusPeriodically.bind(thisModel), 2000)
 
         else if status == 'RUNNING'
 
           thisModel.set('progress', response.progress)
           thisModel.setState(glados.models.Search.StructureSearchModel.STATES.SEARCHING)
-          setTimeout(thisModel.checkSearchStatusPeriodically.bind(thisModel), 1000)
+          setTimeout(thisModel.checkSearchStatusPeriodically.bind(thisModel), 2000)
 
         else if status == 'FINISHED'
 
@@ -138,7 +138,7 @@ glados.useNameSpace 'glados.models.Search',
 
         else
 
-          setTimeout(thisModel.checkSearchStatusPeriodically.bind(thisModel), 1000)
+          setTimeout(thisModel.checkSearchStatusPeriodically.bind(thisModel), 2000)
 
     getContextObj: ->
 
