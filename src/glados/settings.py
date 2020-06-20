@@ -243,16 +243,6 @@ else:
         raise GladosSettingsError("You must provide the elasticsearch public URL that will be accessible from the js "
                                   "code in the browser")
 
-# ----------------------------------------------------------------------------------------------------------------------
-# Delayed Jobs
-# ----------------------------------------------------------------------------------------------------------------------
-delayed_jobs_config = run_config.get('delayed_jobs')
-if delayed_jobs_config is None:
-    raise GladosSettingsError("You must provide the delayed jobs configuration")
-else:
-    DELAYED_JOBS_BASE_URL = delayed_jobs_config.get('base_url')
-
-
 ALLOWED_HOSTS = ['*']
 
 # Application definition
