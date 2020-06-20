@@ -18,8 +18,6 @@ def generate_config():
 
         output = config_template.format(SERVER_BASE_PATH=server_base_path,
                                         STATIC_ROOT=settings.STATIC_ROOT,
-                                        DYNAMIC_DOWNLOADS_DIR=settings.DYNAMIC_DOWNLOADS_DIR,
-                                        VUE_ROOT=settings.VUE_ROOT
                                         )
 
         with open(output_file_path, 'w') as out_file:

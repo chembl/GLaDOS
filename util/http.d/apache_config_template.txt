@@ -33,22 +33,6 @@ Alias "/{SERVER_BASE_PATH}/static" "{STATIC_ROOT}"
   Allow from all
 </Directory>
 
-# serve directly dynamically generated download files
-Alias "/{SERVER_BASE_PATH}/dynamic-downloads" "{DYNAMIC_DOWNLOADS_DIR}"
-<Directory "{DYNAMIC_DOWNLOADS_DIR}">
-  AllowOverride None
-  Order allow,deny
-  Allow from all
-</Directory>
-
-# serve directly chemvue (vuejs) static files
-Alias "/{SERVER_BASE_PATH}/v" "{VUE_ROOT}"
-<Directory "{VUE_ROOT}">
-  AllowOverride None
-  Order allow,deny
-  Allow from all
-</Directory>
-
 # Always set these headers.
 Header unset access-control-allow-Origin
 Header unset Access-Control-Allow-Origin
