@@ -1,7 +1,0 @@
-chembl_27_molecule:
-  'similarity':
-    label: 'Similarity'
-    label_mini: 'Similarity'
-    type: 'double'
-    aggregatable: false
-    sortable: true

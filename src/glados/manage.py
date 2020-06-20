@@ -16,11 +16,8 @@ def main():
     import glados.apache_config_generator
     import glados.admin_user_generator
     from glados.utils import manage_shortened_urls
-    from glados.utils import manage_downloads
-    from glados.utils import manage_saved_searches
     from glados.utils import daemon_simulator
-    from glados.utils import rq_workers
-    from glados.es.es_properties_configuration import configuration_manager
+
         
     # Compress files before server launch if compression is enabled
     if os.environ.get('RUN_MAIN') != 'true' and len(sys.argv) > 1 and sys.argv[1] == 'runserver' and settings.DEBUG:
@@ -54,21 +51,7 @@ def main():
 
         manage_shortened_urls.delete_expired_urls()
 
-    elif os.environ.get('RUN_MAIN') != 'true' and len(sys.argv) > 1 and sys.argv[1] == 'waitunitlworkersarefree':
 
-        rq_workers.wait_until_workers_are_free()
-
-    elif os.environ.get('RUN_MAIN') != 'true' and len(sys.argv) > 1 and sys.argv[1] == 'deleteexpireddownloads':
-
-        manage_downloads.delete_expired_downloads()
-
-    elif os.environ.get('RUN_MAIN') != 'true' and len(sys.argv) > 1 and sys.argv[1] == 'deleteexpiredsearches':
-
-        manage_saved_searches.delete_expired_searches()
-
-    elif os.environ.get('RUN_MAIN') != 'true' and len(sys.argv) > 1 and sys.argv[1] == 'getpropertiescounts':
-
-        configuration_manager.print_properties_counts()
 
     # all our custom commands are listed here so they are not sent to the original manage.py
     execute_in_manage = sys.argv[1] not in ['createapacheconfig', 'createdefaultadminuser', 'simulatedaemon',
