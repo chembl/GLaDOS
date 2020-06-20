@@ -1,5 +1,0 @@
-{
-  "query_string": {
-    "query": "molecule_chembl_id:(CHEMBL4116337 OR CHEMBL4116520 OR CHEMBL4117176)"
-  }
-}

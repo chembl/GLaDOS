@@ -5,7 +5,6 @@ from glados.utils_refactor import DirectTemplateView
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.conf import settings
 from . import views
-from django.contrib import admin
 import glados.grammar.search_parser
 from django.views.i18n import JavaScriptCatalog
 from glados import old_urls_redirector
