@@ -67,24 +67,6 @@ print('DEBUG: ', DEBUG)
 GLADOS_ROOT = os.path.dirname(os.path.abspath(glados.__file__))
 VUE_ROOT = os.path.join(GLADOS_ROOT, 'v')
 
-DYNAMIC_DOWNLOADS_DIR = run_config.get('dynamic_downloads_dir')
-if DYNAMIC_DOWNLOADS_DIR is None:
-    DYNAMIC_DOWNLOADS_DIR = os.path.join(GLADOS_ROOT, 'dynamic-downloads')
-print('DYNAMIC_DOWNLOADS_DIR: ', DYNAMIC_DOWNLOADS_DIR)
-
-if not os.path.exists(DYNAMIC_DOWNLOADS_DIR):
-    print("Dynamic downloads dir ({}) didn't exist, I will create it".format(DYNAMIC_DOWNLOADS_DIR))
-    os.mkdir(DYNAMIC_DOWNLOADS_DIR)
-
-SSSEARCH_RESULTS_DIR = run_config.get('sssearch_results_dir')
-if SSSEARCH_RESULTS_DIR is None:
-    SSSEARCH_RESULTS_DIR = os.path.join(GLADOS_ROOT, 'sssearch-results')
-print('SSSEARCH_RESULTS_DIR: ', SSSEARCH_RESULTS_DIR)
-
-if not os.path.exists(SSSEARCH_RESULTS_DIR):
-    print("SSSearch results dir ({}) didn't exist, I will create it".format(SSSEARCH_RESULTS_DIR))
-    os.mkdir(SSSEARCH_RESULTS_DIR)
-
 PROPERTIES_CONFIG_OVERRIDE_FILE = run_config.get('properties_config_override_file')
 if PROPERTIES_CONFIG_OVERRIDE_FILE is None:
     PROPERTIES_CONFIG_OVERRIDE_FILE = os.path.join(GLADOS_ROOT, 'es/es_properties_configuration/config/override.yml')
@@ -99,11 +81,6 @@ GROUPS_DEFAULT_SORTING_FILE = run_config.get('groups_default_sorting_file')
 if GROUPS_DEFAULT_SORTING_FILE is None:
     GROUPS_DEFAULT_SORTING_FILE = os.path.join(GLADOS_ROOT, 'es/es_properties_configuration/config/default_sorting.yml')
 print('GROUPS_DEFAULT_SORTING_FILE: ', GROUPS_DEFAULT_SORTING_FILE)
-
-FILTER_QUERY_MAX_CLAUSES = run_config.get('filter_query_max_clauses')
-if FILTER_QUERY_MAX_CLAUSES is None:
-    raise GladosSettingsError("You must tell me the filter_query_max_clauses")
-print('FILTER_QUERY_MAX_CLAUSES: ', FILTER_QUERY_MAX_CLAUSES)
 
 TARGET_PREDICTION_LOOKUP_FILE = run_config.get('target_prediction_lookup_file')
 if TARGET_PREDICTION_LOOKUP_FILE is None:
@@ -121,10 +98,6 @@ else:
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
-OLD_INTERFACE_URL = run_config.get('old_interface_url')
-if OLD_INTERFACE_URL is None:
-    raise GladosSettingsError("You must provide the url for the old interface")
 
 release_config = run_config.get('current_release')
 if release_config is None:
@@ -243,16 +216,6 @@ else:
         raise GladosSettingsError("You must provide the elasticsearch public URL that will be accessible from the js "
                                   "code in the browser")
 
-# ----------------------------------------------------------------------------------------------------------------------
-# Delayed Jobs
-# ----------------------------------------------------------------------------------------------------------------------
-delayed_jobs_config = run_config.get('delayed_jobs')
-if delayed_jobs_config is None:
-    raise GladosSettingsError("You must provide the delayed jobs configuration")
-else:
-    DELAYED_JOBS_BASE_URL = delayed_jobs_config.get('base_url')
-
-
 ALLOWED_HOSTS = ['*']
 
 # Application definition
@@ -268,7 +231,6 @@ INSTALLED_APPS = [
   'glados',
   'compressor',
   'twitter',
-  'django_rq'
 ]
 
 MIDDLEWARE = [
@@ -313,64 +275,13 @@ TEMPLATES = [
 # ----------------------------------------------------------------------------------------------------------------------
 DATABASES = {}
 
-ENABLE_MYSQL_DATABASE = run_config.get('enable_mysql_database', False)
-print('ENABLE_MYSQL_DATABASE: ', ENABLE_MYSQL_DATABASE)
-
 DATABASES = {
   'default': {
     'ENGINE': 'django.db.backends.sqlite3',
     'NAME': os.path.join(GLADOS_ROOT, 'db/db.sqlite3')
   }
 }
-if ENABLE_MYSQL_DATABASE:
 
-    mysql_config = run_config.get('mysql_config')
-    if mysql_config is None:
-        raise GladosSettingsError("You must provide the mysql configuration")
-    else:
-        DATABASES['default'] = {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': mysql_config.get('schema_name'),
-            'HOST': mysql_config.get('host'),
-            'PORT': mysql_config.get('port'),
-            'USER': mysql_config.get('user'),
-            'PASSWORD': mysql_config.get('password'),
-            'OPTIONS': {
-                'isolation_level': "repeatable read",
-                'autocommit': True,
-            }
-        }
-
-else:
-
-    print('Using sqlite database: ', os.path.join(GLADOS_ROOT, 'db/db.sqlite3'))
-    DATABASES['default'] = {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(GLADOS_ROOT, 'db/db.sqlite3')
-    }
-
-# ----------------------------------------------------------------------------------------------------------------------
-# Django RQ
-# https://github.com/rq/django-rq
-# ----------------------------------------------------------------------------------------------------------------------
-CUSTOM_RQ_QUEUES = run_config.get('custom_rq_queues_config')
-
-if CUSTOM_RQ_QUEUES is not None:
-
-    RQ_QUEUES = CUSTOM_RQ_QUEUES
-
-else:
-
-    RQ_QUEUES = {
-        'default': {
-            'HOST': 'localhost',
-            'PORT': 6379,
-            'DB': 0,
-            'DEFAULT_TIMEOUT': 86400,
-        },
-    }
-
-print('RQ_QUEUES: ', RQ_QUEUES)
 # ----------------------------------------------------------------------------------------------------------------------
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators

@@ -1,11 +1,13 @@
 from glados.es_models import TinyURLIndex, ESCachedRequestIndex, ESDownloadRecordIndex, ESViewRecordIndex, \
     ESSearchRecordIndex, ESTinyURLUsageRecordIndex
 import time
-from glados.api.shared.dynamic_downloads.models import *
+
+from django.db import models
+from django.conf import settings
+import socket
 
 
 class TinyURL(models.Model):
-
     long_url = models.TextField()
     hash = models.CharField(max_length=100)
     expires = models.BigIntegerField(null=True)
@@ -37,14 +39,14 @@ class ESCachedRequest(models.Model):
 
     def indexing(self):
         obj = ESCachedRequestIndex(
-          es_index=self.es_index,
-          es_query=self.es_query,
-          es_aggs=self.es_aggs,
-          es_request_digest=self.es_request_digest,
-          host=socket.gethostname(),
-          run_env_type=settings.RUN_ENV,
-          is_cached=self.is_cached,
-          request_date=int(time.time()*1000)
+            es_index=self.es_index,
+            es_query=self.es_query,
+            es_aggs=self.es_aggs,
+            es_request_digest=self.es_request_digest,
+            host=socket.gethostname(),
+            run_env_type=settings.RUN_ENV,
+            is_cached=self.is_cached,
+            request_date=int(time.time() * 1000)
         )
         obj.save()
         return obj.to_dict(include_meta=True)
@@ -81,7 +83,6 @@ class ESDownloadRecord(models.Model):
 
 
 class ESTinyURLUsageRecord(models.Model):
-
     URL_SHORTENED = 'URL_SHORTENED'
     URL_EXPANDED = 'URL_EXPANDED'
 
@@ -111,7 +112,6 @@ class ESTinyURLUsageRecord(models.Model):
 
 
 class ESViewRecord(models.Model):
-
     view_name = models.CharField(max_length=20, default='')
     view_type = models.CharField(max_length=100, default='')
     entity_name = models.CharField(max_length=100, default='')
@@ -132,7 +132,6 @@ class ESViewRecord(models.Model):
 
 
 class ESSearchRecord(models.Model):
-
     FREE_TEXT = 'FREE_TEXT'
     SUBSTRUCTURE = 'SUBSTRUCTURE'
     SIMILARITY = 'SIMILARITY'
@@ -166,50 +165,3 @@ class ESSearchRecord(models.Model):
         )
         obj.save()
         return obj.to_dict(include_meta=True)
-
-
-# ----------------------------------------------------------------------------------------------------------------------
-# Search Jobs
-# ----------------------------------------------------------------------------------------------------------------------
-
-
-class SSSearchJob(models.Model):
-    search_id = models.CharField(max_length=250, primary_key=True)
-    SIMILARITY = 'SIMILARITY'
-    SUBSTRUCTURE = 'SUBSTRUCTURE'
-    CONNECTIVITY = 'CONNECTIVITY'
-    BLAST = 'BLAST'
-
-    CONTEXT_PREFIX = '_context'
-
-    SEARCH_TYPES = (
-        (SIMILARITY, SIMILARITY),
-        (SUBSTRUCTURE, SUBSTRUCTURE),
-        (CONNECTIVITY, CONNECTIVITY),
-        (BLAST, BLAST)
-    )
-
-    search_type = models.CharField(max_length=20, choices=SEARCH_TYPES)
-
-    SEARCH_QUEUED = 'SEARCH_QUEUED'
-    SEARCHING = 'SEARCHING'
-    LOADING_RESULTS = 'LOADING_RESULTS'
-    FINISHED = 'FINISHED'
-    ERROR = 'ERROR'
-    DELETING = 'DELETING'
-
-    STATUSES = (
-        (SEARCH_QUEUED, SEARCH_QUEUED),
-        (SEARCHING, SEARCHING),
-        (LOADING_RESULTS, LOADING_RESULTS),
-        (FINISHED, FINISHED),
-        (ERROR, ERROR),
-        (DELETING, DELETING)
-    )
-
-    raw_search_params = models.TextField(null=True)
-    status = models.CharField(max_length=20, choices=STATUSES, default=SEARCH_QUEUED)
-    worker = models.TextField(max_length=250, null=True)
-    log = models.TextField(null=True)
-    error_message = models.TextField(null=True)
-    expires = models.DateTimeField(null=True)

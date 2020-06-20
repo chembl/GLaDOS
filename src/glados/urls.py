@@ -5,7 +5,6 @@ from glados.utils_refactor import DirectTemplateView
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.conf import settings
 from . import views
-from django.contrib import admin
 import glados.grammar.search_parser
 from django.views.i18n import JavaScriptCatalog
 from glados import old_urls_redirector
@@ -138,10 +137,6 @@ common_urls = [
         RedirectView.as_view(url='https://chembl.gitbook.io/chembl-interface-documentation/web-services',
                              permanent=True), name='web_services_home_2'),
 
-    url(r'^deprecated_interface/$',
-        RedirectView.as_view(url=settings.OLD_INTERFACE_URL,
-                             permanent=False), name='old_interface_home'),
-
     url(r'^unichem_home/$',
         RedirectView.as_view(url='https://www.ebi.ac.uk/unichem',
                              permanent=True), name='unichem_home'),
@@ -212,11 +207,6 @@ common_urls = [
         DirectTemplateView.as_view(template_name="glados/stringStandardisationTest.html"), ),
     url(r'^js_tests/$', DirectTemplateView.as_view(template_name="glados/jsTests.html"), ),
 
-    # --------------------------------------------------------------------------------------------------------------------
-    # Django Admin
-    # --------------------------------------------------------------------------------------------------------------------
-
-    url(r'^admin/', admin.site.urls),
 
     # --------------------------------------------------------------------------------------------------------------------
     # Embedding
@@ -304,18 +294,10 @@ common_urls = [
     url(r'^register_usage', views.register_usage, name='register_usage'),
 
     # --------------------------------------------------------------------------------------------------------------------
-    # django RQ (Redis Queue)
-    # --------------------------------------------------------------------------------------------------------------------
-    url(r'^django-rq/', include('django_rq.urls')),
-    # --------------------------------------------------------------------------------------------------------------------
     # Chembl UI API
     # --------------------------------------------------------------------------------------------------------------------
     url(r'^glados_api/', include('glados.api.urls')),
 
-    # --------------------------------------------------------------------------------------------------------------------
-    # django RQ (Redis Queue)
-    # --------------------------------------------------------------------------------------------------------------------
-    url(r'^django-rq/', include('django_rq.urls')),
 ]
 
 # ----------------------------------------------------------------------------------------------------------------------

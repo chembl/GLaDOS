@@ -14,7 +14,6 @@ elasticsearch:
 chembl_api:
   ws_url: 'https://www.ebi.ac.uk/chembl/api/data'
   beaker_url: 'https://www.ebi.ac.uk/chembl/api/utils'
-old_interface_url: 'https://www.ebi.ac.uk/chembl/old'
 current_release:
   full_name: 'CHEMBL27'
   full_doi: 'http://doi.org/10.6019/CHEMBL.database.27'
@@ -22,7 +21,6 @@ current_release:
   # The basename of the files in the ftp
   downloads_release_name: 'chembl_27'
   elasticsearch_chembl_index_prefix: 'chembl_27_'
-filter_query_max_clauses: 30000
 chemvue_root_api: 'http://localhost:8000'
 unichem_similarity_endpoint: 'http://fakeserver/similarity'
 delayed_jobs:
