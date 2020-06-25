@@ -72,7 +72,7 @@ class CellLineReportCardApp extends glados.ReportCardApp
 
     viewConfig =
       pie_config: pieConfig
-      resource_type: gettext('glados_entities_cell_line_name')
+      resource_type: CellLine.prototype.entityName
       link_to_all:
         link_text: 'See all assays for cell line ' + chemblID + ' used in this visualisation.'
         url: Assay.getAssaysListURL('cell_chembl_id:' + chemblID)
@@ -107,7 +107,7 @@ class CellLineReportCardApp extends glados.ReportCardApp
 
     viewConfig =
       pie_config: pieConfig
-      resource_type: gettext('glados_entities_cell_line_name')
+      resource_type: CellLine.prototype.entityName
       embed_section_name: 'bioactivities'
       embed_identifier: chemblID
       link_to_all:
@@ -150,7 +150,7 @@ class CellLineReportCardApp extends glados.ReportCardApp
 
     config =
       histogram_config: histogramConfig
-      resource_type: gettext('glados_entities_cell_line_name')
+      resource_type: CellLine.prototype.entityName
       embed_section_name: 'related_compounds'
       embed_identifier: chemblID
 

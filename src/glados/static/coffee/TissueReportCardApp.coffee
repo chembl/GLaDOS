@@ -72,7 +72,7 @@ class TissueReportCardApp extends glados.ReportCardApp
 
     viewConfig =
       pie_config: pieConfig
-      resource_type: gettext('glados_entities_tissue_name')
+      resource_type: glados.models.Tissue.prototype.entityName
       link_to_all:
         link_text: 'See all assays for tissue ' + chemblID + ' used in this visualisation.'
         url: Assay.getAssaysListURL('tissue_chembl_id:' + chemblID)
@@ -106,7 +106,7 @@ class TissueReportCardApp extends glados.ReportCardApp
 
     viewConfig =
       pie_config: pieConfig
-      resource_type: gettext('glados_entities_tissue_name')
+      resource_type: glados.models.Tissue.prototype.entityName
       embed_section_name: 'bioactivities'
       embed_identifier: chemblID
       link_to_all:
@@ -149,7 +149,7 @@ class TissueReportCardApp extends glados.ReportCardApp
 
     config =
       histogram_config: histogramConfig
-      resource_type: gettext('glados_entities_tissue_name')
+      resource_type: glados.models.Tissue.prototype.entityName
       embed_section_name: 'related_compounds'
       embed_identifier: chemblID
 
