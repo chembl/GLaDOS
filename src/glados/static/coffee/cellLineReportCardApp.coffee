@@ -64,7 +64,7 @@ class CellLineReportCardApp extends glados.ReportCardApp
 
     pieConfig =
       x_axis_prop_name: 'types'
-      title: gettext('glados_cell_line__associated_assays_pie_title_base') + chemblID
+      title: "ChEMBL Assay Types for Assay " + chemblID
       title_link_url: Assay.getAssaysListURL('cell_chembl_id:' + chemblID)
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
       properties:
@@ -99,7 +99,7 @@ class CellLineReportCardApp extends glados.ReportCardApp
 
     pieConfig =
       x_axis_prop_name: 'types'
-      title: gettext('glados_cell_line__bioactivities_pie_title_base') + chemblID
+      title: "ChEMBL Activity Types for Cell Line " + chemblID
       title_link_url: Activity.getActivitiesListURL('_metadata.assay_data.cell_chembl_id:' + chemblID)
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
       properties:

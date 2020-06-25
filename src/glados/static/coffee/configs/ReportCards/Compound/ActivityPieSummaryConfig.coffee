@@ -24,7 +24,7 @@ glados.useNameSpace 'glados.configs.ReportCards.Compound',
           relatedActivitiesProp = glados.models.visualisation.PropertiesFactory.getPropertyConfigFor('Compound', 'RELATED_ACTIVITIES')
           pieConfig =
             x_axis_prop_name: 'types'
-            title: "#{gettext('glados_compound__associated_activities_pie_title_base')}#{chemblID}#{titleAdditionalText}"
+            title: "#{" Activity Types for Compound "}#{chemblID}#{titleAdditionalText}"
             title_link_url: Activity.getActivitiesListURL(titleLinkFilter)
             max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
             properties:
