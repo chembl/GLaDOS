@@ -274,6 +274,9 @@ glados.useNameSpace 'glados.models.paginatedCollections.esSchema',
         @faceting_keys_inorder.sort()
         @faceting_keys_inorder.reverse()
 
+
+      return @
+
     parseCategoricalKey: (key) ->
 
       esIndex = @es_index

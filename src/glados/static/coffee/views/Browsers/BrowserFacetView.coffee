@@ -272,6 +272,10 @@ glados.useNameSpace 'glados.views.Browsers',
         @showPreloader()
         return
 
+      # update the visibility handler's facet groups, in some cases it can end up with an outdated instance
+      facetsGroups = @collection.getFacetsGroups(undefined, onlyVisible=false)
+      @facetsVisibilityHandler.set('all_facets_groups', facetsGroups)
+
       @destroyAllTooltips()
 
       @HISTOGRAM_WIDTH = $(@el).width() - @HISTOGRAM_PADDING.left - @HISTOGRAM_PADDING.right

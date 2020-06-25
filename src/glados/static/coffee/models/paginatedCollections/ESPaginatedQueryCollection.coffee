@@ -698,14 +698,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       return fetchPromise
 
-    __parseFacetsGroupsData: (non_selected_facets_groups, esResponse, first_call, resolve, reject, needs_second_call)->
+    __parseFacetsGroupsData: (non_selected_facets_groups, esResponse, first_call, resolve, reject, needs_second_call, collection)->
 
       es_data = esResponse.es_response
       if not es_data? or not es_data.aggregations?
         console.error "ERROR! The aggregations data in the response is missing!"
         reject()
       for facet_group_key, facet_group of non_selected_facets_groups
-        facet_group.faceting_handler.parseESResults(es_data.aggregations, first_call)
+        facet_group.faceting_handler = facet_group.faceting_handler.parseESResults(es_data.aggregations, first_call)
       if (first_call and not needs_second_call) or not first_call
         resolve()
 
@@ -722,7 +722,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         ajax_deferred = @__requestFacetsGroupsData(true)
         first_call = true
         done_callback = (es_data)->
-          @__parseFacetsGroupsData(non_selected_facets_groups, es_data, first_call, resolve, reject, needs_second_call)
+          @__parseFacetsGroupsData(non_selected_facets_groups, es_data, first_call, resolve, reject, needs_second_call, @)
         fail_callback = ()->
           reject()
           setTimeout(@loadFacetGroups.bind(@), 1000)
