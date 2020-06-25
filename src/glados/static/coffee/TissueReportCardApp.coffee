@@ -64,7 +64,7 @@ class TissueReportCardApp extends glados.ReportCardApp
 
     pieConfig =
       x_axis_prop_name: 'types'
-      title: gettext('glados_tissue__associated_assays_pie_title_base') + chemblID
+      title: "ChEMBL Assay Types for Tissue " + chemblID
       title_link_url: Assay.getAssaysListURL('tissue_chembl_id:' + chemblID)
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
       properties:
