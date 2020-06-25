@@ -98,7 +98,7 @@ class TissueReportCardApp extends glados.ReportCardApp
 
     pieConfig =
       x_axis_prop_name: 'types'
-      title: gettext('glados_tissue__bioactivities_pie_title_base') + chemblID
+      title: "ChEMBL Activity Types for Tissue " + chemblID
       title_link_url: Activity.getActivitiesListURL('_metadata.assay_data.tissue_chembl_id:' + chemblID)
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
       properties:

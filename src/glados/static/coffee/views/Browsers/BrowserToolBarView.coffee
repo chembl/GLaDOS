@@ -63,7 +63,7 @@ glados.useNameSpace 'glados.views.Browsers',
 
         qtipConfig =
           content:
-            text: gettext('glados_filters__no_filters_available')
+            text: "There are no filters available."
           style:
             classes: 'qtip-light qtip-shadow'
           position:
