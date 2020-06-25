@@ -103,7 +103,7 @@ class AssayReportCardApp extends glados.ReportCardApp
 
     viewConfig =
       pie_config: pieConfig
-      resource_type: gettext('glados_entities_assay_name')
+      resource_type: Assay.prototype.entityName
       embed_section_name: 'bioactivities'
       embed_identifier: chemblID
       link_to_all:

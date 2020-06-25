@@ -76,7 +76,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
     new glados.views.ReportCards.PaginatedTableInCardView
       collection: relatedDocumentsList
       el: $('#CRelatedDocumentsCard')
-      resource_type: gettext('glados_entities_document_name')
+      resource_type: Document.prototype.entityName
       section_id: 'RelatedDocuments'
       section_label: 'Related Documents'
       entity_name: Document.prototype.entityName
@@ -113,7 +113,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
 
     viewConfig =
       pie_config: pieConfig
-      resource_type: gettext('glados_entities_document_name')
+      resource_type: Document.prototype.entityName
       embed_section_name: 'related_targets'
       embed_identifier: chemblID
       link_to_all:
@@ -148,7 +148,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
 
     viewConfig =
       pie_config: pieConfig
-      resource_type: gettext('glados_entities_document_name')
+      resource_type: Document.prototype.entityName
       embed_section_name: 'related_assays'
       embed_identifier: chemblID
       link_to_all:
@@ -182,7 +182,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
 
     viewConfig =
       pie_config: pieConfig
-      resource_type: gettext('glados_entities_document_name')
+      resource_type: Document.prototype.entityName
       embed_section_name: 'related_activities'
       embed_identifier: chemblID
       link_to_all:
@@ -225,7 +225,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
 
     config =
       histogram_config: histogramConfig
-      resource_type: gettext('glados_entities_document_name')
+      resource_type: Document.prototype.entityName
       embed_section_name: 'related_compounds'
       embed_identifier: chemblID
 
