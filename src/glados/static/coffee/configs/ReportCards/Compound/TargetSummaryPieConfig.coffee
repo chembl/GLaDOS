@@ -35,7 +35,7 @@ glados.useNameSpace 'glados.configs.ReportCards.Compound',
 
       viewConfig =
         init_agg_from_model_event: aggGenerationConfig
-        resource_type: gettext('glados_entities_compound_name')
+        resource_type: Compound.prototype.entityName
         embed_section_name: 'related_targets'
         embed_identifier: chemblID
         alternate_forms:

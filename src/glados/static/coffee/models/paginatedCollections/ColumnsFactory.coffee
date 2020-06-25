@@ -4,8 +4,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     #the baseConfig MUST have a comparator, from there it will do the rest
     generateColumn: (indexName, baseConfig) ->
 
-
-
       gladosSchema = glados.models.paginatedCollections.esSchema.GLaDOS_es_GeneratedSchema
       gladosConfig = gladosSchema[indexName][baseConfig.comparator]
 
