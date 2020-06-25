@@ -21,7 +21,7 @@ glados.useNameSpace 'glados.views',
       columns = @customColumns
       columns ?= @entity.MINI_REPORT_CARD.COLUMNS
 
-      indexName = @entity.INDEX_NAME
+      indexName = @entity.ES_INDEX
       groupName = 'browser_table'
 
       propertiesConfigModel = new glados.models.paginatedCollections.esSchema.PropertiesConfigurationModel
