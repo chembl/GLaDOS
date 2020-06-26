@@ -24,7 +24,7 @@ glados.useNameSpace 'glados.models.Compound',
       objData.mesh_url = "https://id.nlm.nih.gov/mesh/#{objData.drug_indication.mesh_id}.html"
       return objData
 
-glados.models.Compound.DrugIndication.INDEX_NAME = glados.Settings.CHEMBL_ES_INDEX_PREFIX+'drug_indication_by_parent'
+glados.models.Compound.DrugIndication.INDEX_NAME = 'chembl_drug_indication_by_parent'
 glados.models.Compound.DrugIndication.PROPERTIES_VISUAL_CONFIG = {
   'parent_molecule.molecule_chembl_id': {
     image_base_url: 'parent_image_url'
