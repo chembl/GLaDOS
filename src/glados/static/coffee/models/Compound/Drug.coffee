@@ -213,17 +213,7 @@ glados.models.Compound.Drug.COLUMNS_SETTINGS =
     Drug.COLUMNS.RESEARCH_CODES
     Drug.COLUMNS.PHASE
   ]
-  CARD_DETAILS: [
-    Drug.COLUMNS.CHEMBL_ID
-    Drug.COLUMNS.SYNONYMS
-    Drug.COLUMNS.RESEARCH_CODES
-    Drug.COLUMNS.PHASE
-    Drug.COLUMNS.APPLICANTS
-    Drug.COLUMNS.USAN_STEM
-    Drug.COLUMNS.USAN_YEAR
-    Drug.COLUMNS.FIRST_APPROVAL
-    Drug.COLUMNS.ATC_CLASSIFICATIONS
-  ]
+
 
 Drug.getDrugsListURL = (filter, isFullState=false, fragmentOnly=false) ->
 
