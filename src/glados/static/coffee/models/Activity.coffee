@@ -49,8 +49,18 @@ Activity.PROPERTIES_VISUAL_CONFIG = {
   }
 }
 Activity.COLUMNS = {
-  ACTIVITY_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'activity_id'
+  ACTIVITY_ID:
+
+    aggregatable: true
+    comparator: "activity_id"
+    id: "activity_id"
+    is_sorting: 0
+    name_to_show: "ID"
+    name_to_show_short: "ID"
+    show: true
+    sort_class: "fa-sort"
+    sort_disabled: false
+
   ASSAY_CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: 'assay_chembl_id'
     link_base:'assay_link'
@@ -160,89 +170,8 @@ Activity.COLUMNS = {
     comparator: 'target_tax_id'
 }
 
-Activity.COLUMNS.ACTIVITY_ID = {
-  aggregatable: true
-  comparator: "activity_id"
-  id: "activity_id"
-  is_sorting: 0
-  name_to_show: "ID"
-  name_to_show_short: "ID"
-  show: true
-  sort_class: "fa-sort"
-  sort_disabled: false
-}
-
 Activity.ID_COLUMN = Activity.COLUMNS.ACTIVITY_ID
 Activity = Activity.extend({idAttribute: Activity.ID_COLUMN.comparator})
-
-Activity.COLUMNS_SETTINGS = {
-  ALL_COLUMNS: (->
-    colsList = []
-    for key, value of Activity.COLUMNS
-      colsList.push value
-    return colsList
-  )()
-  RESULTS_LIST_REPORT_TABLE: [
-    Activity.COLUMNS.MOLECULE_CHEMBL_ID
-    Activity.COLUMNS.STANDARD_TYPE
-    Activity.COLUMNS.STANDARD_RELATION
-    Activity.COLUMNS.STANDARD_VALUE
-    Activity.COLUMNS.STANDARD_UNITS
-    Activity.COLUMNS.PCHEMBL_VALUE
-    Activity.COLUMNS.ACTIVITY_COMMENT
-    Activity.COLUMNS.COMPOUND_KEY
-    Activity.COLUMNS.ASSAY_CHEMBL_ID
-    Activity.COLUMNS.ASSAY_DESCRIPTION
-    Activity.COLUMNS.BAO_LABEL
-    Activity.COLUMNS.TARGET_CHEMBL_ID
-    Activity.COLUMNS.TARGET_PREF_NAME
-    Activity.COLUMNS.TARGET_ORGANISM
-    Activity.COLUMNS.TARGET_TYPE
-    Activity.COLUMNS.DOCUMENT_CHEMBL_ID
-    Activity.COLUMNS.SRC_DESCRIPTION
-  ]
-  RESULTS_LIST_REPORT_CARD: [
-    Activity.COLUMNS.MOLECULE_CHEMBL_ID
-    Activity.COLUMNS.STANDARD_TYPE
-    Activity.COLUMNS.STANDARD_RELATION
-    Activity.COLUMNS.STANDARD_VALUE
-    Activity.COLUMNS.STANDARD_UNITS
-    Activity.COLUMNS.PCHEMBL_VALUE
-    Activity.COLUMNS.ASSAY_TYPE
-    Activity.COLUMNS.ASSAY_DESCRIPTION
-    Activity.COLUMNS.TARGET_PREF_NAME
-    Activity.COLUMNS.TARGET_CHEMBL_ID
-    Activity.COLUMNS.TARGET_ORGANISM
-    Activity.COLUMNS.DOCUMENT_CHEMBL_ID
-  ]
-  RESULTS_LIST_TABLE_ADDITIONAL: [
-    Activity.COLUMNS.MAX_PHASE
-    Activity.COLUMNS.NUM_RO5_VIOLATIONS
-    Activity.COLUMNS.MOLECULAR_WEIGHT
-    Activity.COLUMNS.LIGAND_EFFICIENCIES_BEI
-    Activity.COLUMNS.LIGAND_EFFICIENCIES_LE
-    Activity.COLUMNS.LIGAND_EFFICIENCIES_LLE
-    Activity.COLUMNS.LIGAND_EFFICIENCIES_SEI
-    Activity.COLUMNS.ALOGP
-    Activity.COLUMNS.ASSAY_ORGANISM
-    Activity.COLUMNS.ASSAY_TISSUE_CHEMBL_ID
-    Activity.COLUMNS.ASSAY_TISSUE_NAME
-    Activity.COLUMNS.ASSAY_CELL_TYPE
-    Activity.COLUMNS.ASSAY_SUBCELLULAR_FRACTION
-    Activity.COLUMNS.TARGET_TAX_ID
-    Activity.COLUMNS.BAO_FORMAT
-    Activity.COLUMNS.CANONICAL_SMILES
-    Activity.COLUMNS.DATA_VALIDITY_COMMENT
-    Activity.COLUMNS.DOCUMENT_JOURNAL
-    Activity.COLUMNS.DOCUMENT_YEAR
-    Activity.COLUMNS.SRC_ID
-    Activity.COLUMNS.UO_UNITS
-    Activity.COLUMNS.POTENTIAL_DUPLICATE
-  ]
-}
-
-Activity.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS = _.union(Activity.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_TABLE,
-  Activity.COLUMNS_SETTINGS.RESULTS_LIST_TABLE_ADDITIONAL)
 
 Activity.getActivitiesListURL = (filter, isFullState=false, fragmentOnly=false) ->
 
