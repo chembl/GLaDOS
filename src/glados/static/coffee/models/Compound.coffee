@@ -678,6 +678,21 @@ Compound.PROPERTIES_VISUAL_CONFIG = {
 
 Compound.COLUMNS = {
 
+  CHEMBL_ID:
+
+    aggregatable: true
+    comparator: "molecule_chembl_id"
+    hide_label: true
+    id: "molecule_chembl_id"
+    image_base_url: "image_url"
+    is_sorting: 0
+    link_base: "report_card_url"
+    name_to_show: "ChEMBL ID"
+    name_to_show_short: "ChEMBL ID"
+    show: true
+    sort_class: "fa-sort"
+    sort_disabled: false
+
   SYNONYMS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     comparator: 'molecule_synonyms'
     parse_function: (values) -> _.uniq(v.molecule_synonym for v in values).join(', ')
@@ -970,13 +985,6 @@ Compound.COLUMNS_SETTINGS = {
 
   ]
 }
-
-Compound.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS = _.union(Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE,
-  Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL)
-
-Compound.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS_SIMILARITY = _.union(
-  Compound.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS,
-  [Compound.COLUMNS.SIMILARITY_ELASTIC])
 
 Compound.MINI_REPORT_CARD =
   LOADING_TEMPLATE: 'Handlebars-Common-MiniRepCardPreloader'
