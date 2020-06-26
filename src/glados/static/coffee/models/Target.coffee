@@ -173,7 +173,7 @@ Target.color = 'lime'
 Target.reportCardPath = 'target_report_card/'
 
 Target.ES_INDEX = 'chembl_target'
-Target.INDEX_NAME = glados.Settings.CHEMBL_ES_INDEX_PREFIX+'target'
+Target.INDEX_NAME = Target.ES_INDEX
 
 Target.PROPERTIES_VISUAL_CONFIG = {
   'target_chembl_id': {
@@ -271,175 +271,23 @@ Target.PROPERTIES_VISUAL_CONFIG = {
 }
 
 Target.COLUMNS = {
-  CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Target.INDEX_NAME,
-    comparator: 'target_chembl_id'
-    link_base: 'report_card_url'
-    hide_label: true
-  BIOACTIVITIES_NUMBER: glados.models.paginatedCollections.ColumnsFactory.generateColumn Target.INDEX_NAME,
-    comparator: '_metadata.related_activities.count'
-    link_base: 'activities_url'
-    on_click: TargetReportCardApp.initMiniHistogramFromFunctionLink
-    function_parameters: ['target_chembl_id']
-    function_constant_parameters: ['activities']
-    # to help bind the link to the function, it could be necessary to always use the key of the columns descriptions
-    # or probably not, depending on how this evolves
-    function_key: 'bioactivities'
-    function_link: true
-    execute_on_render: true
-    format_class: 'number-cell-center'
-  PREF_NAME: glados.models.paginatedCollections.ColumnsFactory.generateColumn Target.INDEX_NAME,
-    comparator: 'pref_name'
-    sort_disabled: true
-    custom_field_template: '<i>{{val}}</i>'
-  TYPE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Target.INDEX_NAME,
-    comparator: 'target_type'
-  ORGANISM: glados.models.paginatedCollections.ColumnsFactory.generateColumn Target.INDEX_NAME,
-    comparator: 'organism'
-  ACCESSION: glados.models.paginatedCollections.ColumnsFactory.generateColumn Target.INDEX_NAME,
-    comparator: 'target_components'
-    parse_function: (components) -> (comp.accession for comp in components).join(', ')
-    link_function: (components) ->
-      'http://www.uniprot.org/uniprot/?query=' + ('accession:' + comp.accession for comp in components).join('+OR+')
-  NUM_COMPOUNDS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Target.INDEX_NAME,
-    comparator: '_metadata.related_compounds.count'
-    format_class: 'number-cell-center'
-    link_base: 'compounds_url'
-  NUM_COMPOUNDS_HISTOGRAM: glados.models.paginatedCollections.ColumnsFactory.generateColumn Target.INDEX_NAME,
-    comparator: '_metadata.related_compounds.count'
-    link_base: 'compounds_url'
-    on_click: TargetReportCardApp.initMiniHistogramFromFunctionLink
-    function_constant_parameters: ['compounds']
-    function_parameters: ['target_chembl_id']
-    # to help bind the link to the function, it could be necessary to always use the key of the columns descriptions
-    # or probably not, depending on how this evolves
-    function_key: 'num_compounds'
-    function_link: true
-    execute_on_render: true
-    format_class: 'number-cell-center'
-  SPECIES_GROUP: glados.models.paginatedCollections.ColumnsFactory.generateColumn Target.INDEX_NAME,
-    comparator: 'species_group_flag'
-  TAX_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Target.INDEX_NAME,
-    comparator: 'tax_id'
-  BLAST_EXPECTATION:{
-    'show': true
-    'name_to_show': 'E-Value'
-    'comparator': '_context.best_expectation'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-    'is_contextual': true
-  }
-  POSITIVES_BLAST:{
-    'show': true
-    'name_to_show': 'Positives %'
-    'comparator': '_context.best_positives'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-    'is_contextual': true
-  }
-  IDENTITIES_BLAST:{
-    'show': true
-    'name_to_show': 'Identities %'
-    'comparator': '_context.best_identities'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-    'is_contextual': true
-  }
-  SCORE_BITS_BLAST:{
-    'show': true
-    'name_to_show': 'Score (bits)'
-    'comparator': '_context.best_score_bits'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-    'is_contextual': true
-  }
-  SCORE_BLAST:{
-    'show': true
-    'name_to_show': 'Score'
-    'comparator': '_context.best_score'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-    'is_contextual': true
-  }
-  LENGTH_BLAST:{
-    'show': true
-    'name_to_show': 'Length'
-    'comparator': '_context.length'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-    'is_contextual': true
-  }
-}
+  CHEMBL_ID:
 
-Target.COLUMNS.CHEMBL_ID = {
-  aggregatable: true
-  comparator: "target_chembl_id"
-  hide_label: true
-  id: "target_chembl_id"
-  is_sorting: 0
-  link_base: "report_card_url"
-  name_to_show: "ChEMBL ID"
-  name_to_show_short: "ChEMBL ID"
-  show: true
-  sort_class: "fa-sort"
-  sort_disabled: false
+    aggregatable: true
+    comparator: "target_chembl_id"
+    hide_label: true
+    id: "target_chembl_id"
+    is_sorting: 0
+    link_base: "report_card_url"
+    name_to_show: "ChEMBL ID"
+    name_to_show_short: "ChEMBL ID"
+    show: true
+    sort_class: "fa-sort"
+    sort_disabled: false
+
 }
 
 Target.ID_COLUMN = Target.COLUMNS.CHEMBL_ID
-
-Target.COLUMNS_SETTINGS = {
-  ALL_COLUMNS: (->
-    colsList = []
-    for key, value of Target.COLUMNS
-      colsList.push value
-    return colsList
-  )()
-  RESULTS_LIST_TABLE: [
-    Target.COLUMNS.CHEMBL_ID
-    Target.COLUMNS.PREF_NAME
-    Target.COLUMNS.ACCESSION
-    Target.COLUMNS.TYPE
-    Target.COLUMNS.ORGANISM
-    Target.COLUMNS.NUM_COMPOUNDS_HISTOGRAM
-    Target.COLUMNS.BIOACTIVITIES_NUMBER
-  ]
-  RESULTS_LIST_BLAST: [
-    Target.COLUMNS.CHEMBL_ID
-    Target.COLUMNS.BLAST_EXPECTATION
-    Target.COLUMNS.POSITIVES_BLAST
-    Target.COLUMNS.IDENTITIES_BLAST
-    Target.COLUMNS.SCORE_BITS_BLAST
-    Target.COLUMNS.SCORE_BLAST
-    Target.COLUMNS.LENGTH_BLAST
-    Target.COLUMNS.PREF_NAME
-    Target.COLUMNS.ACCESSION
-    Target.COLUMNS.TYPE
-    Target.COLUMNS.ORGANISM
-    Target.COLUMNS.NUM_COMPOUNDS_HISTOGRAM
-    Target.COLUMNS.BIOACTIVITIES_NUMBER
-  ]
-  RESULTS_LIST_ADDITIONAL: [
-    Target.COLUMNS.TAX_ID
-    Target.COLUMNS.SPECIES_GROUP
-  ]
-  RESULTS_LIST_REPORT_CARD:[
-    Target.COLUMNS.CHEMBL_ID
-    Target.COLUMNS.PREF_NAME
-    Target.COLUMNS.ACCESSION
-    Target.COLUMNS.TYPE
-    Target.COLUMNS.ORGANISM
-    Target.COLUMNS.NUM_COMPOUNDS
-    Target.COLUMNS.BIOACTIVITIES_NUMBER
-  ]
-}
-
-Target.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS = _.union(Target.COLUMNS_SETTINGS.RESULTS_LIST_TABLE,
-  Target.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL)
 
 Target.MINI_REPORT_CARD =
   LOADING_TEMPLATE: 'Handlebars-Common-MiniRepCardPreloader'
