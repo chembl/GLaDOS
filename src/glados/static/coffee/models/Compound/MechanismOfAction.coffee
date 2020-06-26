@@ -55,9 +55,6 @@ glados.models.Compound.MechanismOfAction.PROPERTIES_VISUAL_CONFIG = {
   'drug_atc_codes_level_2': glados.models.Compound.Drug.PROPERTIES_VISUAL_CONFIG['drug_atc_codes_level_2']
   'drug_atc_codes_level_1': glados.models.Compound.Drug.PROPERTIES_VISUAL_CONFIG['drug_atc_codes_level_1']
 }
-generateMechanismColumn = (columnMetadata)->
-  return glados.models.paginatedCollections.ColumnsFactory.generateColumn glados.models.Compound\
-    .MechanismOfAction.INDEX_NAME, columnMetadata
 
 glados.models.Compound.MechanismOfAction.COLUMNS =
 
