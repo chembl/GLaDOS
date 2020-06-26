@@ -69,6 +69,22 @@ generateDrugIndicationColumn = (columnMetadata)->
     .DrugIndication.INDEX_NAME, columnMetadata
 
 glados.models.Compound.DrugIndication.COLUMNS =
+
+  MOLECULE_CHEMBL_ID:
+
+    aggregatable: true
+    comparator: "parent_molecule.molecule_chembl_id"
+    id: "parent_molecule.molecule_chembl_id"
+    image_base_url: "parent_image_url"
+    is_sorting: 0
+    link_base: "molecule_link"
+    name_to_show: "ChEMBL ID"
+    name_to_show_short: "ChEMBL ID"
+    show: true
+    sort_class: "fa-sort"
+    sort_disabled: false
+
+
   DRUGIND_ID: generateDrugIndicationColumn
     comparator: 'drug_indication.drugind_id'
   MESH_ID: generateDrugIndicationColumn
@@ -128,46 +144,7 @@ glados.models.Compound.DrugIndication.COLUMNS =
   )
 
 
-glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_CHEMBL_ID = {
-  aggregatable: true
-  comparator: "parent_molecule.molecule_chembl_id"
-  id: "parent_molecule.molecule_chembl_id"
-  image_base_url: "parent_image_url"
-  is_sorting: 0
-  link_base: "molecule_link"
-  name_to_show: "ChEMBL ID"
-  name_to_show_short: "ChEMBL ID"
-  show: true
-  sort_class: "fa-sort"
-  sort_disabled: false
-}
-
 glados.models.Compound.DrugIndication.ID_COLUMN = glados.models.Compound.DrugIndication.COLUMNS.DRUGIND_ID
-
-glados.models.Compound.DrugIndication.COLUMNS_SETTINGS =
-  ALL_COLUMNS: (->
-    colsList = []
-    for key, value of glados.models.Compound.DrugIndication.COLUMNS
-      colsList.push value
-    return colsList
-  )()
-  RESULTS_LIST_TABLE: [
-    glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_CHEMBL_ID
-    glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_PREF_NAME
-    glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_TYPE
-    glados.models.Compound.DrugIndication.COLUMNS.INDICATION_MAX_PHASE
-    glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_FIRST_APPROVAL
-    glados.models.Compound.DrugIndication.COLUMNS.MESH_ID
-    glados.models.Compound.DrugIndication.COLUMNS.MESH_HEADING
-    glados.models.Compound.DrugIndication.COLUMNS.EFO_ID
-    glados.models.Compound.DrugIndication.COLUMNS.EFO_TERM
-    glados.models.Compound.DrugIndication.COLUMNS.INDICATION_REFERENCES
-  ]
-  RESULTS_LIST_TABLE_ADDITIONAL: [
-    glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_DRUG_SYNONYMS
-    glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_USAN_STEM
-    glados.models.Compound.DrugIndication.COLUMNS.MOLECULE_USAN_YEAR
-  ]
 
 glados.models.Compound.DrugIndication.getListURL = (filter, isFullState=false, fragmentOnly=false) ->
 
@@ -183,7 +160,3 @@ glados.models.Compound.DrugIndication.getListURL = (filter, isFullState=false, f
 glados.models.Compound.DrugIndication.getListURLByMoleculeChemblId = (moleculeChemblId) ->
   filterStr = "drug_indication._metadata.all_molecule_chembl_ids:#{moleculeChemblId}"
   glados.models.Compound.DrugIndication.getListURL filterStr
-
-glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.DOWNLOAD_COLUMNS =
-  _.union(glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.RESULTS_LIST_TABLE,
-    glados.models.Compound.DrugIndication.COLUMNS_SETTINGS.RESULTS_LIST_TABLE_ADDITIONAL)

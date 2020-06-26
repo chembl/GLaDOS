@@ -225,10 +225,6 @@ glados.models.Compound.Drug.COLUMNS_SETTINGS =
     Drug.COLUMNS.ATC_CLASSIFICATIONS
   ]
 
-glados.models.Compound.Drug.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS = _.union(
-  glados.models.Compound.Drug.COLUMNS_SETTINGS.RESULTS_LIST_TABLE,
-  glados.models.Compound.Drug.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL)
-
 Drug.getDrugsListURL = (filter, isFullState=false, fragmentOnly=false) ->
 
   if isFullState
