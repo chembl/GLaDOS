@@ -154,39 +154,6 @@ glados.models.Compound.MechanismOfAction.COLUMNS.MECH_ID = {
 
 glados.models.Compound.MechanismOfAction.ID_COLUMN = glados.models.Compound.MechanismOfAction.COLUMNS.MECH_ID
 
-glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS =
-  ALL_COLUMNS: (->
-    colsList = []
-    for key, value of glados.models.Compound.MechanismOfAction.COLUMNS
-      colsList.push value
-    return colsList
-  )()
-  RESULTS_LIST_TABLE: [
-    glados.models.Compound.MechanismOfAction.COLUMNS.MOLECULE_CHEMBL_ID
-    glados.models.Compound.MechanismOfAction.COLUMNS.MOLECULE_PREF_NAME
-    glados.models.Compound.MechanismOfAction.COLUMNS.MOLECULE_TYPE
-    glados.models.Compound.MechanismOfAction.COLUMNS.MAX_PHASE
-    glados.models.Compound.MechanismOfAction.COLUMNS.MOLECULE_FIRST_APPROVAL
-    glados.models.Compound.MechanismOfAction.COLUMNS.MOLECULE_USAN_STEM
-    glados.models.Compound.MechanismOfAction.COLUMNS.MECHANISM_OF_ACTION
-    glados.models.Compound.MechanismOfAction.COLUMNS.TARGET_CHEMBL_ID
-    glados.models.Compound.MechanismOfAction.COLUMNS.TARGET_PREF_NAME
-    glados.models.Compound.MechanismOfAction.COLUMNS.ACTION_TYPE
-    glados.models.Compound.MechanismOfAction.COLUMNS.TARGET_TYPE
-    glados.models.Compound.MechanismOfAction.COLUMNS.TARGET_ORGANISM
-    glados.models.Compound.MechanismOfAction.COLUMNS.BINDING_SITE_NAME
-    glados.models.Compound.MechanismOfAction.COLUMNS.REFERENCES
-
-  ]
-  RESULTS_LIST_TABLE_ADDITIONAL:[
-    glados.models.Compound.MechanismOfAction.COLUMNS.MOLECULE_DRUG_SYNONYMS
-    glados.models.Compound.MechanismOfAction.COLUMNS.MOLECULE_ATC_CODES
-    glados.models.Compound.MechanismOfAction.COLUMNS.MOLECULE_ATC_CODES_DESCRIPTION
-    glados.models.Compound.MechanismOfAction.COLUMNS.MECHANISM_COMMENT
-    glados.models.Compound.MechanismOfAction.COLUMNS.MECHANISM_SELECTIVITY_COMMENT
-    glados.models.Compound.MechanismOfAction.COLUMNS.BINDING_SITE_COMMENT
-  ]
-
 glados.models.Compound.MechanismOfAction.getListURL = (filter, isFullState=false, fragmentOnly=false) ->
 
   if isFullState
@@ -205,7 +172,3 @@ glados.models.Compound.MechanismOfAction.getListURLByMoleculeChemblId = (molecul
 glados.models.Compound.MechanismOfAction.getListURLByTargetChemblId = (moleculeChemblId) ->
   filterStr = "target.target_chembl_id:#{moleculeChemblId}"
   glados.models.Compound.MechanismOfAction.getListURL filterStr
-
-glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.DOWNLOAD_COLUMNS =
-  _.union(glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.RESULTS_LIST_TABLE,
-    glados.models.Compound.MechanismOfAction.COLUMNS_SETTINGS.RESULTS_LIST_TABLE_ADDITIONAL)
