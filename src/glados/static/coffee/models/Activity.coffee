@@ -28,7 +28,7 @@ Activity = Backbone.Model.extend
 
     return objData
 
-Activity.indexName = glados.Settings.CHEMBL_ES_INDEX_PREFIX+'activity'
+Activity.indexName = 'chembl_activity'
 Activity.PROPERTIES_VISUAL_CONFIG = {
   'molecule_chembl_id': {
     image_base_url: 'image_url'
