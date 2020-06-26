@@ -64,10 +64,6 @@ glados.models.Compound.DrugIndication.PROPERTIES_VISUAL_CONFIG = {
 
 }
 
-generateDrugIndicationColumn = (columnMetadata)->
-  return glados.models.paginatedCollections.ColumnsFactory.generateColumn glados.models.Compound\
-    .DrugIndication.INDEX_NAME, columnMetadata
-
 glados.models.Compound.DrugIndication.COLUMNS =
 
   MOLECULE_CHEMBL_ID:
