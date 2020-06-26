@@ -91,44 +91,6 @@ Activity.COLUMNS = {
   DOCUMENT_CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: 'document_chembl_id'
     link_base: 'document_link'
-  DOCUMENT_JOURNAL: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    'comparator': 'document_journal'
-  DOCUMENT_YEAR: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    'comparator': 'document_year'
-  MOLECULE_CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'molecule_chembl_id'
-    image_base_url: 'image_url'
-    link_base:'molecule_link'
-  ALOGP: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: '_metadata.parent_molecule_data.alogp'
-  MAX_PHASE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: '_metadata.parent_molecule_data.max_phase'
-  NUM_RO5_VIOLATIONS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: '_metadata.parent_molecule_data.num_ro5_violations'
-  MOLECULAR_WEIGHT: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: '_metadata.parent_molecule_data.full_mwt'
-  COMPOUND_KEY: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: '_metadata.parent_molecule_data.compound_key'
-  LIGAND_EFFICIENCIES_BEI: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'ligand_efficiency.bei'
-  LIGAND_EFFICIENCIES_LE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'ligand_efficiency.le'
-  LIGAND_EFFICIENCIES_LLE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'ligand_efficiency.lle'
-  LIGAND_EFFICIENCIES_SEI: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'ligand_efficiency.sei'
-  STANDARD_TYPE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'standard_type'
-  PCHEMBL_VALUE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'pchembl_value'
-  ACTIVITY_COMMENT: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'activity_comment'
-  POTENTIAL_DUPLICATE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'potential_duplicate'
-  QUDT_UNITS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'qudt_units' # not used???
-  RECORD_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'record_id'
 }
 
 Activity.ID_COLUMN = Activity.COLUMNS.ACTIVITY_ID
