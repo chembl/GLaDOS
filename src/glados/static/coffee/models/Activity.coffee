@@ -50,7 +50,6 @@ Activity.PROPERTIES_VISUAL_CONFIG = {
 }
 Activity.COLUMNS = {
   ACTIVITY_ID:
-
     aggregatable: true
     comparator: "activity_id"
     id: "activity_id"
@@ -61,36 +60,6 @@ Activity.COLUMNS = {
     sort_class: "fa-sort"
     sort_disabled: false
 
-  ASSAY_CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'assay_chembl_id'
-    link_base:'assay_link'
-    use_in_summary: true
-  ASSAY_DESCRIPTION: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    'comparator': 'assay_description'
-  ASSAY_TYPE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'assay_type'
-  ASSAY_ORGANISM: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: '_metadata.assay_data.assay_organism'
-  ASSAY_TISSUE_NAME: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: '_metadata.assay_data.assay_tissue'
-  ASSAY_TISSUE_CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: '_metadata.assay_data.tissue_chembl_id'
-    link_base: 'tissue_link'
-  ASSAY_CELL_TYPE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: '_metadata.assay_data.assay_cell_type'
-  ASSAY_SUBCELLULAR_FRACTION: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: '_metadata.assay_data.assay_subcellular_fraction'
-  BAO_FORMAT: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'bao_format'
-  BAO_LABEL: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'bao_label'
-  CANONICAL_SMILES: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'canonical_smiles'
-  DATA_VALIDITY_COMMENT: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'data_validity_comment'
-  DOCUMENT_CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'document_chembl_id'
-    link_base: 'document_link'
 }
 
 Activity.ID_COLUMN = Activity.COLUMNS.ACTIVITY_ID
