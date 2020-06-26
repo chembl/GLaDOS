@@ -12,13 +12,37 @@ glados.useNameSpace 'glados.models.Compound',
 
 glados.models.Compound.TargetPrediction.COLUMNS =
   PRED_ID:
+
     name_to_show: 'Pred ID'
     comparator: 'pred_id'
-  TARGET_CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'target_chembl_id'
-    link_base:'target_link'
-  TARGET_PREF_NAME: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'target_pref_name'
+
+  TARGET_CHEMBL_ID:
+
+    aggregatable: true
+    comparator: "target_chembl_id"
+    id: "target_chembl_id"
+    is_sorting: 0
+    link_base: "target_link"
+    name_to_show: "Target"
+    name_to_show_short: "Target ChEMBL ID"
+    prop_id: "target_chembl_id"
+    show: true
+    sort_class: "fa-sort"
+    sort_disabled: false
+
+  TARGET_PREF_NAME:
+
+    aggregatable: true
+    comparator: "target_pref_name"
+    id: "target_pref_name"
+    is_sorting: 0
+    name_to_show: "Target Pref. Name"
+    name_to_show_short: "Target Name"
+    prop_id: "target_pref_name"
+    show: true
+    sort_class: "fa-sort"
+    sort_disabled: false
+
   ORGANISM:
     name_to_show: 'Organism'
     comparator: 'target_organism'
