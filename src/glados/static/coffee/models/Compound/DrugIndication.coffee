@@ -117,31 +117,7 @@ glados.models.Compound.DrugIndication.COLUMNS =
     comparator: 'drug_indication.indication_refs'
     multiple_links: true
     multiple_links_function: (refs) -> ({text:r.ref_type, url:r.ref_url} for r in refs)
-  MOLECULE_CHEMBL_ID: generateDrugIndicationColumn
-    comparator: 'parent_molecule.molecule_chembl_id'
-    image_base_url: 'parent_image_url'
-    link_base: 'molecule_link'
-  MOLECULE_PREF_NAME: generateDrugIndicationColumn
-    comparator: 'parent_molecule.pref_name'
-  MOLECULE_TYPE: generateDrugIndicationColumn
-    comparator: 'parent_molecule.molecule_type'
-  MOLECULE_FIRST_APPROVAL: generateDrugIndicationColumn
-    comparator: 'parent_molecule.first_approval'
-  MOLECULE_USAN_STEM: generateDrugIndicationColumn
-    comparator: 'parent_molecule.usan_stem'
-  MOLECULE_USAN_YEAR: generateDrugIndicationColumn
-    comparator: 'parent_molecule.usan_year'
-  MOLECULE_DRUG_SYNONYMS: _.extend(
-    {}, generateDrugIndicationColumn({comparator: 'parent_molecule._metadata.drug.drug_data.synonyms'}),
-      custom_field_template: '<ul class="no-margin" style="width: 15rem; margin-left: 1rem !important;">' +
-        '{{#each val}}<li style="list-style-type: circle;">{{this}}</li>{{/each}}</ul>'
-      parse_function: (values) ->
-        realValues = []
-        for valI in values
-          if valI?.trim().length > 0
-            realValues.push valI.trim()
-        return realValues
-  )
+
 
 
 glados.models.Compound.DrugIndication.ID_COLUMN = glados.models.Compound.DrugIndication.COLUMNS.DRUGIND_ID
