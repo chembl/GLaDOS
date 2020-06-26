@@ -85,40 +85,18 @@ glados.models.Compound.DrugIndication.COLUMNS =
     sort_disabled: false
 
 
-  DRUGIND_ID: generateDrugIndicationColumn
-    comparator: 'drug_indication.drugind_id'
-  MESH_ID: generateDrugIndicationColumn
-    comparator: 'drug_indication.mesh_id'
-    link_base: 'mesh_url'
-  MESH_HEADING: generateDrugIndicationColumn
-    comparator: 'drug_indication.mesh_heading'
-  EFO_ID: generateDrugIndicationColumn
-    name_to_show: 'EFO ID'
-    name_to_show_short: 'EFO ID'
-    comparator: 'drug_indication.efo'
-    multiple_links: true
-    multiple_links_function: (efos) ->
-      ({text:efo.id, url:"http://www.ebi.ac.uk/efo/#{efo.id.replace(/:/g, '_')}"} for efo in efos)
-  EFO_TERM: _.extend(
-    {}, generateDrugIndicationColumn({comparator: 'drug_indication.efo'}),
-      name_to_show: 'EFO Term'
-      name_to_show_short: 'EFO Term'
-      parse_function: (values) ->
-        realValues = []
-        for valI in values
-          if valI?.term?.trim().length > 0
-            realValues.push valI.term.trim()
-        return realValues.join(', ')
-  )
-  INDICATION_MAX_PHASE: generateDrugIndicationColumn
-    comparator: 'drug_indication.max_phase_for_ind'
+  DRUGIND_ID:
 
-  INDICATION_REFERENCES:generateDrugIndicationColumn
-    comparator: 'drug_indication.indication_refs'
-    multiple_links: true
-    multiple_links_function: (refs) -> ({text:r.ref_type, url:r.ref_url} for r in refs)
-
-
+    aggregatable: true
+    comparator: "drug_indication.drugind_id"
+    id: "drug_indication.drugind_id"
+    is_sorting: 0
+    name_to_show: "Drug Indication Drugind ID"
+    name_to_show_short: "Drug Indc. Drgn. ID"
+    prop_id: "drug_indication.drugind_id"
+    show: true
+    sort_class: "fa-sort"
+    sort_disabled: false
 
 glados.models.Compound.DrugIndication.ID_COLUMN = glados.models.Compound.DrugIndication.COLUMNS.DRUGIND_ID
 
