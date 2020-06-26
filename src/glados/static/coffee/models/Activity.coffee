@@ -129,45 +129,6 @@ Activity.COLUMNS = {
     comparator: 'qudt_units' # not used???
   RECORD_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
     comparator: 'record_id'
-  SRC_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'src_id'
-  SRC_DESCRIPTION: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: '_metadata.source.src_description'
-  STANDARD_FLAG: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'standard_flag'
-  STANDARD_RELATION: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'standard_relation'
-  STANDARD_UNITS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'standard_units'
-  STANDARD_VALUE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'standard_value'
-  TARGET_CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'target_chembl_id'
-    link_base:'target_link'
-  TARGET_ORGANISM: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'target_organism'
-  TARGET_PREF_NAME: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'target_pref_name'
-  TARGET_TYPE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: '_metadata.target_data.target_type'
-  UO_UNITS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'uo_units'
-  DOC_COUNT: {
-    'name_to_show': 'Count'
-    'comparator': 'doc_count'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  }
-  IS_AGGREGATION: {
-    'name_to_show': 'Is aggregation'
-    'comparator': 'is_aggregation'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-  }
-  TARGET_TAX_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Activity.indexName,
-    comparator: 'target_tax_id'
 }
 
 Activity.ID_COLUMN = Activity.COLUMNS.ACTIVITY_ID
