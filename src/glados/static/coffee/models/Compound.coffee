@@ -721,81 +721,8 @@ Compound.COLUMNS = {
     comparator: 'inorganic_flag'
   FULL_MWT: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     comparator: 'molecule_properties.full_mwt'
-  FULL_MWT_CARD: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    name_to_show: 'MWt'
-    comparator: 'molecule_properties.full_mwt'
   ALOGP: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     comparator: 'molecule_properties.alogp'
-  HBA: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.hba'
-  HBD: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.hbd'
-  HEAVY_ATOMS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.heavy_atoms'
-  PSA: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.psa'
-  RO5: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.num_ro5_violations'
-  RO5_CARD: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    name_to_show: '#RO5'
-    comparator: 'molecule_properties.num_ro5_violations'
-  ROTATABLE_BONDS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.rtb'
-  ROTATABLE_BONDS_CARD: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    name_to_show: '#RTB'
-    comparator: 'molecule_properties.rtb'
-  RULE_OF_THREE_PASS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.ro3_pass'
-  RULE_OF_THREE_PASS_CARD: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    name_to_show: 'Passes Rule of Three'
-    comparator: 'molecule_properties.ro3_pass'
-  QED_WEIGHTED: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.qed_weighted'
-  APKA: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.cx_most_apka'
-  BPKA: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.cx_most_bpka'
-  LOGP: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.cx_logp'
-  LOGD: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.cx_logd'
-  AROMATIC_RINGS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.aromatic_rings'
-  HBA_LIPINSKI: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.hba_lipinski'
-  HBD_LIPINSKI: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.hbd_lipinski'
-  RO5_LIPINSKI: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.num_lipinski_ro5_violations'
-  MWT_MONOISOTOPIC: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.mw_monoisotopic'
-  MOLECULAR_SPECIES: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.molecular_species'
-  FULL_MOLFORMULA: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.full_molformula'
-  NUM_TARGETS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: '_metadata.related_targets.count'
-    format_as_number: true
-    link_base: 'targets_url'
-    on_click: CompoundReportCardApp.initMiniHistogramFromFunctionLink
-    function_parameters: ['molecule_chembl_id']
-    function_constant_parameters: ['targets']
-    function_key: 'targets'
-    function_link: true
-    execute_on_render: true
-    format_class: 'number-cell-center'
-  NUM_TARGETS_BY_CLASS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    name_to_show: 'Targets (by Class)'
-    comparator: '_metadata.related_targets.count'
-    format_as_number: true
-    link_base: 'targets_url'
-    on_click: CompoundReportCardApp.initMiniHistogramFromFunctionLink
-    function_parameters: ['molecule_chembl_id']
-    function_constant_parameters: ['targets_by_class']
-    function_key: 'compound_targets_by_class'
-    function_link: true
-    execute_on_render: true
-    format_class: 'number-cell-center'
 
 }
 
