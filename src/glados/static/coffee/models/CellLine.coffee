@@ -41,7 +41,7 @@ CellLine.color = 'deep-purple'
 CellLine.reportCardPath = 'cell_line_report_card/'
 
 CellLine.ES_INDEX = 'chembl_cell_line'
-CellLine.INDEX_NAME = glados.Settings.CHEMBL_ES_INDEX_PREFIX+'cell_line'
+CellLine.INDEX_NAME = CellLine.ES_INDEX
 CellLine.PROPERTIES_VISUAL_CONFIG = {
   'cell_chembl_id': {
     link_base: 'report_card_url'

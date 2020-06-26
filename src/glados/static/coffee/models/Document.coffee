@@ -37,7 +37,7 @@ Document.color = 'red'
 Document.reportCardPath = 'document_report_card/'
 
 Document.ES_INDEX = 'chembl_document'
-Document.INDEX_NAME = glados.Settings.CHEMBL_ES_INDEX_PREFIX+'document'
+Document.INDEX_NAME = Document.ES_INDEX
 Document.PROPERTIES_VISUAL_CONFIG = {
   'document_chembl_id': {
     link_base: 'report_card_url'

@@ -77,7 +77,7 @@ glados.models.Tissue.PROPERTIES_VISUAL_CONFIG = {
   }
 }
 glados.models.Tissue.ES_INDEX = 'chembl_tissue'
-glados.models.Tissue.INDEX_NAME = glados.Settings.CHEMBL_ES_INDEX_PREFIX+'tissue'
+glados.models.Tissue.INDEX_NAME = glados.models.Tissue.ES_INDEX
 
 glados.models.Tissue.COLUMNS = {
   CHEMBL_ID: {
