@@ -878,20 +878,7 @@ Compound.COLUMNS_SETTINGS = {
     Compound.COLUMNS.FULL_MWT,
     Compound.COLUMNS.ALOGP
   ]
-  MINI_REPORT_CARD:[
-    Compound.COLUMNS.CHEMBL_ID,
-    Compound.COLUMNS.PREF_NAME,
-    Compound.COLUMNS.SYNONYMS,
-    Compound.COLUMNS.MAX_PHASE,
-    Compound.COLUMNS.FULL_MWT,
-    Compound.COLUMNS.ALOGP,
-    Compound.COLUMNS.PSA,
-    Compound.COLUMNS.HBA,
-    Compound.COLUMNS.HBD,
-    Compound.COLUMNS.RO5,
-    Compound.COLUMNS.NUM_TARGETS,
-    Compound.COLUMNS.BIOACTIVITIES_NUMBER
-  ]
+
   RESULTS_LIST_REPORT_CARD_ADDITIONAL:[
     Compound.COLUMNS.PREF_NAME
   ]
