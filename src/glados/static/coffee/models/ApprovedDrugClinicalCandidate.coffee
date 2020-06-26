@@ -2,8 +2,19 @@ ApprovedDrugClinicalCandidate = Compound.extend
   idAttribute: "molecule_chembl_id"
 
 ApprovedDrugClinicalCandidate.COLUMNS = {
-  CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_chembl_id'
+  CHEMBL_ID:
+    aggregatable: true
+    comparator: "molecule_chembl_id"
+    hide_label: true
+    id: "molecule_chembl_id"
+    image_base_url: "image_url"
+    is_sorting: 0
+    link_base: "report_card_url"
+    name_to_show: "ChEMBL ID"
+    name_to_show_short: "ChEMBL ID"
+    show: true
+    sort_class: "fa-sort"
+    sort_disabled: false
     link_function: Compound.get_report_card_url.bind(Compound)
   PREF_NAME:{
     'name_to_show': 'Name'
