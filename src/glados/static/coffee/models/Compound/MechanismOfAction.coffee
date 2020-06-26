@@ -60,8 +60,19 @@ generateMechanismColumn = (columnMetadata)->
     .MechanismOfAction.INDEX_NAME, columnMetadata
 
 glados.models.Compound.MechanismOfAction.COLUMNS =
-  MECH_ID: generateMechanismColumn
-    comparator: 'mechanism_of_action.mec_id'
+
+  MECH_ID:
+
+    aggregatable: true
+    comparator: "mechanism_of_action.mec_id"
+    id: "mechanism_of_action.mec_id"
+    is_sorting: 0
+    name_to_show: "Mechanism ID"
+    name_to_show_short: "Mech ID"
+    show: true
+    sort_class: "fa-sort"
+    sort_disabled: false
+
   MECHANISM_OF_ACTION: generateMechanismColumn
     comparator: 'mechanism_of_action.mechanism_of_action'
   MECHANISM_COMMENT: generateMechanismColumn
@@ -140,17 +151,6 @@ glados.models.Compound.MechanismOfAction.COLUMNS =
         return realValues
   )
 
-glados.models.Compound.MechanismOfAction.COLUMNS.MECH_ID = {
-  aggregatable: true
-  comparator: "mechanism_of_action.mec_id"
-  id: "mechanism_of_action.mec_id"
-  is_sorting: 0
-  name_to_show: "Mechanism ID"
-  name_to_show_short: "Mech ID"
-  show: true
-  sort_class: "fa-sort"
-  sort_disabled: false
-}
 
 glados.models.Compound.MechanismOfAction.ID_COLUMN = glados.models.Compound.MechanismOfAction.COLUMNS.MECH_ID
 
