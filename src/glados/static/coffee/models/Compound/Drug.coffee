@@ -178,42 +178,6 @@ glados.models.Compound.Drug.COLUMNS =
 glados.models.Compound.Drug.COLUMNS.CHEMBL_ID = _.extend({}, Compound.COLUMNS.CHEMBL_ID, 'name_to_show': 'Parent Molecule')
 glados.models.Compound.Drug.ID_COLUMN = glados.models.Compound.Drug.COLUMNS.CHEMBL_ID
 
-glados.models.Compound.Drug.COLUMNS_SETTINGS =
-  ALL_COLUMNS: (->
-    colsList = []
-    for key, value of Drug.COLUMNS
-      colsList.push value
-    return colsList
-  )()
-  RESULTS_LIST_TABLE: [
-    Drug.COLUMNS.CHEMBL_ID
-    Drug.COLUMNS.SYNONYMS
-    Drug.COLUMNS.RESEARCH_CODES
-    Drug.COLUMNS.PHASE
-    Drug.COLUMNS.APPLICANTS
-    Drug.COLUMNS.USAN_STEM
-    Drug.COLUMNS.USAN_YEAR
-    Drug.COLUMNS.FIRST_APPROVAL
-    Drug.COLUMNS.ATC_CLASSIFICATIONS
-    Drug.COLUMNS.ICON
-  ]
-  RESULTS_LIST_REPORT_CARD_ADDITIONAL: [
-    Drug.COLUMNS.USAN_STEM_DEFINITION
-    Drug.COLUMNS.USAN_STEM_SUBSTEM
-    Drug.COLUMNS.INDICATION_CLASS
-    Drug.COLUMNS.PATENT
-    Drug.COLUMNS.WITHDRAWN_YEAR
-    Drug.COLUMNS.WITHDRAWN_REASON
-    Drug.COLUMNS.WITHDRAWN_COUNTRY
-    Drug.COLUMNS.WITHDRAWN_CLASS
-  ]
-  RESULTS_LIST_REPORT_CARD: [
-    Drug.COLUMNS.CHEMBL_ID
-    Drug.COLUMNS.SYNONYMS
-    Drug.COLUMNS.RESEARCH_CODES
-    Drug.COLUMNS.PHASE
-  ]
-
 
 Drug.getDrugsListURL = (filter, isFullState=false, fragmentOnly=false) ->
 
