@@ -5,7 +5,7 @@ Assay = Backbone.Model.extend
   idAttribute: 'assay_chembl_id'
   defaults:
     fetch_from_elastic: true
-  indexName:glados.Settings.CHEMBL_ES_INDEX_PREFIX+'assay'
+  indexName: 'chembl_assay'
   initialize: ->
 
     id = @get('id')
@@ -79,7 +79,7 @@ Assay.getAssaysListURL = (filter, isFullState=false, fragmentOnly=false) ->
 
 Assay.ES_INDEX = 'chembl_assay'
 
-Assay.INDEX_NAME = glados.Settings.CHEMBL_ES_INDEX_PREFIX+'assay'
+Assay.INDEX_NAME = Assay.ES_INDEX
 Assay.PROPERTIES_VISUAL_CONFIG = {
   'assay_chembl_id': {
     link_base: 'report_card_url'
@@ -179,109 +179,23 @@ Assay.PROPERTIES_VISUAL_CONFIG = {
 }
 Assay.COLUMNS = {
 
-  CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
-    comparator: 'assay_chembl_id'
-    link_base: 'report_card_url'
-    hide_label: true
-  STRAIN: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
-    comparator: 'assay_strain'
-    custom_field_template: '<i>{{val}}</i>'
-  DESCRIPTION: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
-    comparator: 'description'
-  ORGANISM: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
-    comparator: 'assay_organism'
-  ASSAY_TYPE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
-    comparator: 'assay_type'
-  DOCUMENT: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
-    comparator: 'document_chembl_id'
-    link_base: 'document_link'
-  BAO_LABEL: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
-    comparator: 'bao_label'
-  SRC_DESCRIPTION: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
-    comparator: '_metadata.source.src_description'
-  TISSUE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
-    comparator: 'tissue_chembl_id'
-    link_base: 'tissue_link'
-  CELL_TYPE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
-    comparator: 'assay_cell_type'
-  SUBCELLULAR_FRACTION: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
-    comparator: 'assay_subcellular_fraction'
-  TAX_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
-    comparator: 'assay_tax_id'
-  NUM_COMPOUNDS_HISTOGRAM: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
-    comparator: '_metadata.related_compounds.count'
-    link_base: 'compounds_url'
-    on_click: AssayReportCardApp.initMiniHistogramFromFunctionLink
-    function_constant_parameters: ['compounds']
-    function_parameters: ['assay_chembl_id']
-    function_key: 'assay_num_compounds'
-    function_link: true
-    execute_on_render: true
-    format_class: 'number-cell-center'
-  BIOACTIVITIES_NUMBER: glados.models.paginatedCollections.ColumnsFactory.generateColumn Assay.INDEX_NAME,
-    comparator: '_metadata.related_activities.count'
-    link_base: 'activities_url'
-    on_click: AssayReportCardApp.initMiniHistogramFromFunctionLink
-    function_parameters: ['assay_chembl_id']
-    function_constant_parameters: ['activities']
-    function_key: 'assay_bioactivities'
-    function_link: true
-    execute_on_render: true
-    format_class: 'number-cell-center'
-}
+  CHEMBL_ID:
 
-Assay.COLUMNS.CHEMBL_ID = {
-  aggregatable: true
-  comparator: "assay_chembl_id"
-  hide_label: true
-  id: "assay_chembl_id"
-  is_sorting: 0
-  link_base: "report_card_url"
-  name_to_show: "ChEMBL ID"
-  name_to_show_short: "ChEMBL ID"
-  show: true
-  sort_class: "fa-sort"
-  sort_disabled: false
+    aggregatable: true
+    comparator: "assay_chembl_id"
+    hide_label: true
+    id: "assay_chembl_id"
+    is_sorting: 0
+    link_base: "report_card_url"
+    name_to_show: "ChEMBL ID"
+    name_to_show_short: "ChEMBL ID"
+    show: true
+    sort_class: "fa-sort"
+    sort_disabled: false
+
 }
 
 Assay.ID_COLUMN = Assay.COLUMNS.CHEMBL_ID
-
-Assay.COLUMNS_SETTINGS = {
-  ALL_COLUMNS: (->
-    colsList = []
-    for key, value of Assay.COLUMNS
-      colsList.push value
-    return colsList
-  )()
-
-  RESULTS_LIST_TABLE: [
-    Assay.COLUMNS.CHEMBL_ID
-    Assay.COLUMNS.DESCRIPTION
-    Assay.COLUMNS.ORGANISM
-    Assay.COLUMNS.NUM_COMPOUNDS_HISTOGRAM
-    Assay.COLUMNS.DOCUMENT
-    Assay.COLUMNS.BAO_LABEL
-    Assay.COLUMNS.SRC_DESCRIPTION
-  ]
-  RESULTS_LIST_ADDITIONAL:[
-    Assay.COLUMNS.TAX_ID
-    Assay.COLUMNS.STRAIN
-    Assay.COLUMNS.ASSAY_TYPE
-    Assay.COLUMNS.TISSUE
-    Assay.COLUMNS.CELL_TYPE
-    Assay.COLUMNS.SUBCELLULAR_FRACTION
-    Assay.COLUMNS.BIOACTIVITIES_NUMBER
-  ]
-  RESULTS_LIST_CARD: [
-    Assay.COLUMNS.CHEMBL_ID
-    Assay.COLUMNS.DESCRIPTION
-    Assay.COLUMNS.ORGANISM
-    Assay.COLUMNS.ASSAY_TYPE
-  ]
-}
-
-Assay.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS = _.union(Assay.COLUMNS_SETTINGS.RESULTS_LIST_TABLE,
-  Assay.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL)
 
 Assay.MINI_REPORT_CARD =
   LOADING_TEMPLATE: 'Handlebars-Common-MiniRepCardPreloader'
