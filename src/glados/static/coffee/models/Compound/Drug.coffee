@@ -152,28 +152,7 @@ glados.models.Compound.Drug.COLUMNS =
   WITHDRAWN_COUNTRY: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
     name_to_show: 'Withdrawn Country'
     comparator: 'withdrawn_country'
-  WITHDRAWN_REASON: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    name_to_show: 'Withdrawn Reason'
-    comparator: 'withdrawn_reason'
-  WITHDRAWN_CLASS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    name_to_show: 'Withdrawn Class'
-    comparator: 'withdrawn_class'
-  ICON: {
-    'name_to_show': 'Icon'
-    'comparator': '--'
-    'sort_disabled': true
-    'on_click': CompoundReportCardApp.initDrugIconGridFromFunctionLink
-    'function_parameters': ['molecule_chembl_id']
-    # to help bind the link to the function, it could be necessary to always use the key of the columns descriptions
-    # or probably not, depending on how this evolves
-    'function_key': 'drug_icon_grid'
-    'function_link': true
-    'execute_on_render': true
-    'hide_value': true
-    'remove_link_after_click': true
-    'table_cell_width': '250px'
 
-  }
 
 glados.models.Compound.Drug.COLUMNS.CHEMBL_ID = _.extend({}, Compound.COLUMNS.CHEMBL_ID, 'name_to_show': 'Parent Molecule')
 glados.models.Compound.Drug.ID_COLUMN = glados.models.Compound.Drug.COLUMNS.CHEMBL_ID
