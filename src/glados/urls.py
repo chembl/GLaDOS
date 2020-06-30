@@ -45,8 +45,6 @@ common_urls = [
 
     url(r'^visualise/$', views.visualise, name='visualise'),
 
-    url(r'^play/$', views.play, name='play'),
-
     url(r'^handlebars/visualisation_sources/$',
         xframe_options_exempt(
             DirectTemplateView.as_view(
@@ -186,8 +184,6 @@ common_urls = [
     # Tests
     # --------------------------------------------------------------------------------------------------------------------
     url(r'^layout_test/$', DirectTemplateView.as_view(template_name="glados/layoutTest.html"), ),
-    url(r'^string_standardisation_test/$',
-        DirectTemplateView.as_view(template_name="glados/stringStandardisationTest.html"), ),
     url(r'^js_tests/$', DirectTemplateView.as_view(template_name="glados/jsTests.html"), ),
 
 
