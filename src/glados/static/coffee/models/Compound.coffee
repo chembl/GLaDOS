@@ -593,7 +593,7 @@ Compound.getSDFURL = (chemblId) -> glados.Settings.WS_BASE_URL + 'molecule/' + c
 
 Compound.ES_INDEX = 'chembl_molecule'
 
-Compound.INDEX_NAME = glados.Settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
+Compound.INDEX_NAME = Compound.ES_INDEX
 
 Compound.PROPERTIES_VISUAL_CONFIG = {
   'molecule_chembl_id': {
