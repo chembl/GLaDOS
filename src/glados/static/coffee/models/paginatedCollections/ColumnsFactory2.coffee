@@ -44,3 +44,14 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       finalConfig = _.extend({show:true}, configFromServer, inferredProperties, visualConfig)
       return finalConfig
+
+    getSearchResultsHighlightColumn: () ->
+      srhColumn= {
+        sort_disabled: true
+        name_to_show: 'Search Hit'
+        id: 'glados_search_hit_highlight'
+        search_hit_highlight_column: true
+        show: true
+        comparator: '_highlights'
+      }
+      return srhColumn

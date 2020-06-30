@@ -27,7 +27,7 @@ glados.useNameSpace 'glados.models.paginatedCollections',
 
       allColumns = _.union(defaultColumns, contextualProperties, additionalColumns)
       if @get 'include_highlights_column'
-        srhColumn = glados.models.paginatedCollections.ColumnsFactory.getSearchResultsHighlightColumn()
+        srhColumn = glados.models.paginatedCollections.ColumnsFactory2.getSearchResultsHighlightColumn()
         if allColumns?
           allColumns.splice 1, 0, srhColumn
         else

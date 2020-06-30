@@ -64,7 +64,7 @@ class TissueReportCardApp extends glados.ReportCardApp
 
     pieConfig =
       x_axis_prop_name: 'types'
-      title: gettext('glados_tissue__associated_assays_pie_title_base') + chemblID
+      title: "ChEMBL Assay Types for Tissue " + chemblID
       title_link_url: Assay.getAssaysListURL('tissue_chembl_id:' + chemblID)
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
       properties:
@@ -72,7 +72,7 @@ class TissueReportCardApp extends glados.ReportCardApp
 
     viewConfig =
       pie_config: pieConfig
-      resource_type: gettext('glados_entities_tissue_name')
+      resource_type: glados.models.Tissue.prototype.entityName
       link_to_all:
         link_text: 'See all assays for tissue ' + chemblID + ' used in this visualisation.'
         url: Assay.getAssaysListURL('tissue_chembl_id:' + chemblID)
@@ -98,7 +98,7 @@ class TissueReportCardApp extends glados.ReportCardApp
 
     pieConfig =
       x_axis_prop_name: 'types'
-      title: gettext('glados_tissue__bioactivities_pie_title_base') + chemblID
+      title: "ChEMBL Activity Types for Tissue " + chemblID
       title_link_url: Activity.getActivitiesListURL('_metadata.assay_data.tissue_chembl_id:' + chemblID)
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
       properties:
@@ -106,7 +106,7 @@ class TissueReportCardApp extends glados.ReportCardApp
 
     viewConfig =
       pie_config: pieConfig
-      resource_type: gettext('glados_entities_tissue_name')
+      resource_type: glados.models.Tissue.prototype.entityName
       embed_section_name: 'bioactivities'
       embed_identifier: chemblID
       link_to_all:
@@ -149,7 +149,7 @@ class TissueReportCardApp extends glados.ReportCardApp
 
     config =
       histogram_config: histogramConfig
-      resource_type: gettext('glados_entities_tissue_name')
+      resource_type: glados.models.Tissue.prototype.entityName
       embed_section_name: 'related_compounds'
       embed_identifier: chemblID
 

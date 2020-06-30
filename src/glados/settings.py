@@ -315,9 +315,7 @@ USE_TZ = True
 LANGUAGES = [
     ('en', _('English')),
 ]
-LOCALE_PATHS = [
-    os.path.join(GLADOS_ROOT, 'locale'),
-]
+
 
 # ----------------------------------------------------------------------------------------------------------------------
 # STATIC FILES (CSS, JavaScript, Images) and URL's

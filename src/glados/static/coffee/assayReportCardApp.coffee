@@ -95,7 +95,7 @@ class AssayReportCardApp extends glados.ReportCardApp
 
     pieConfig =
       x_axis_prop_name: 'types'
-      title: gettext('glados_assay__associated_activities_pie_title_base') + chemblID
+      title: "ChEMBL Activity Types for Assay " + chemblID
       title_link_url: Activity.getActivitiesListURL('assay_chembl_id:' + chemblID)
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
       properties:
@@ -103,7 +103,7 @@ class AssayReportCardApp extends glados.ReportCardApp
 
     viewConfig =
       pie_config: pieConfig
-      resource_type: gettext('glados_entities_assay_name')
+      resource_type: Assay.prototype.entityName
       embed_section_name: 'bioactivities'
       embed_identifier: chemblID
       link_to_all:

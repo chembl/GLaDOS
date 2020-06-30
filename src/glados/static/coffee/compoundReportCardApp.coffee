@@ -169,7 +169,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     tableView = new glados.views.ReportCards.PaginatedTableInCardView
       collection: list
       el: $('#MechOfActCard')
-      resource_type: gettext('glados_entities_compound_name')
+      resource_type: Compound.prototype.entityName
       section_id: 'MechanismOfAction'
       section_label: 'Drug Mechanisms'
       entity_name: Compound.prototype.entityName
@@ -209,7 +209,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     tableView = new glados.views.ReportCards.PaginatedTableInCardView
       collection: list
       el: $('#CDrugIndicationsCard')
-      resource_type: gettext('glados_entities_compound_name')
+      resource_type: Compound.prototype.entityName
       section_id: 'Indications'
       section_label: 'Drug Indications'
       entity_name: Compound.prototype.entityName
@@ -305,7 +305,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     sa_view = new glados.views.ReportCards.PaginatedTableInCardView
       collection: structuralAlertsSets
       el: $('#CStructuralAlertsCard')
-      resource_type: gettext('glados_entities_compound_name')
+      resource_type: Compound.prototype.entityName
       section_id: 'StructuralAlerts'
       section_label: 'Structural Alerts'
       entity_name: Compound.prototype.entityName
@@ -353,7 +353,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       new glados.views.ReportCards.CarouselInCardView
         collection: alternateFormsList
         el: $('#AlternateFormsCard')
-        resource_type: gettext('glados_entities_compound_name')
+        resource_type: Compound.prototype.entityName
         section_id: 'AlternateFormsOfCompoundInChEMBL'
         section_label: 'Alternative Forms'
         entity_name: Compound.prototype.entityName
@@ -373,7 +373,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     compound = CompoundReportCardApp.getCurrentCompound()
 
     viewConfig =
-      resource_type: gettext('glados_entities_compound_name')
+      resource_type: Compound.prototype.entityName
       embed_identifier: compound.get('molecule_chembl_id')
 
     new glados.views.ReportCards.FullSectionEmbedderView
@@ -448,7 +448,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
 
     config =
       histogram_config: histogramConfig
-      resource_type: gettext('glados_entities_compound_name')
+      resource_type: Compound.prototype.entityName
       embed_section_name: 'papers_per_year'
       embed_identifier: chemblID
 
@@ -527,7 +527,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       el: $('#CrossReferencesCard')
       embed_section_name: 'cross_refs'
       embed_identifier: glados.Utils.URLS.getCurrentModelChemblID()
-      resource_type: gettext('glados_entities_compound_name')
+      resource_type: Compound.prototype.entityName
       section_id: 'CompoundCrossReferences'
       section_label: 'Cross References'
       entity_name: Compound.prototype.entityName
@@ -549,7 +549,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
       el: $('#UniChemCrossReferencesCard')
       embed_section_name: 'unichem_cross_refs'
       embed_identifier: glados.Utils.URLS.getCurrentModelChemblID()
-      resource_type: gettext('glados_entities_compound_name')
+      resource_type: Compound.prototype.entityName
       section_id: 'UniChemCrossReferences'
       section_label: 'UniChem Cross References'
       entity_name: Compound.prototype.entityName
@@ -606,7 +606,7 @@ class CompoundReportCardApp extends glados.ReportCardApp
     new glados.views.ReportCards.CarouselInCardView
       collection: similarCompoundsList
       el: $('#SimilarCompoundsCard')
-      resource_type: gettext('glados_entities_compound_name')
+      resource_type: Compound.prototype.entityName
       section_id: 'SimilarCompounds'
       section_label: 'Similar Compounds'
       entity_name: Compound.prototype.entityName

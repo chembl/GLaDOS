@@ -593,7 +593,7 @@ Compound.getSDFURL = (chemblId) -> glados.Settings.WS_BASE_URL + 'molecule/' + c
 
 Compound.ES_INDEX = 'chembl_molecule'
 
-Compound.INDEX_NAME = glados.Settings.CHEMBL_ES_INDEX_PREFIX+'molecule'
+Compound.INDEX_NAME = Compound.ES_INDEX
 
 Compound.PROPERTIES_VISUAL_CONFIG = {
   'molecule_chembl_id': {
@@ -678,199 +678,84 @@ Compound.PROPERTIES_VISUAL_CONFIG = {
 
 Compound.COLUMNS = {
 
-  SYNONYMS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_synonyms'
-    parse_function: (values) -> _.uniq(v.molecule_synonym for v in values).join(', ')
-  PREF_NAME: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'pref_name'
-  MOLECULE_TYPE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_type'
-  MAX_PHASE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'max_phase'
-  DOSED_INGREDIENT: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    name_to_show: 'Dosed Ingredient'
-    comparator: 'dosed_ingredient'
-  SIMILARITY_ELASTIC: {
-      'show': true
-      'name_to_show': 'Similarity'
-      'comparator': '_context.similarity'
-      'sort_disabled': false
-      'is_sorting': 0
-      'sort_class': 'fa-sort'
-      'is_contextual': true
-    }
-  STRUCTURE_TYPE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'structure_type'
-  INORGANIC_FLAG: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'inorganic_flag'
-  FULL_MWT: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.full_mwt'
-  FULL_MWT_CARD: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    name_to_show: 'MWt'
-    comparator: 'molecule_properties.full_mwt'
-  ALOGP: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.alogp'
-  HBA: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.hba'
-  HBD: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.hbd'
-  HEAVY_ATOMS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.heavy_atoms'
-  PSA: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.psa'
-  RO5: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.num_ro5_violations'
-  RO5_CARD: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    name_to_show: '#RO5'
-    comparator: 'molecule_properties.num_ro5_violations'
-  ROTATABLE_BONDS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.rtb'
-  ROTATABLE_BONDS_CARD: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    name_to_show: '#RTB'
-    comparator: 'molecule_properties.rtb'
-  RULE_OF_THREE_PASS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.ro3_pass'
-  RULE_OF_THREE_PASS_CARD: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    name_to_show: 'Passes Rule of Three'
-    comparator: 'molecule_properties.ro3_pass'
-  QED_WEIGHTED: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.qed_weighted'
-  APKA: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.cx_most_apka'
-  BPKA: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.cx_most_bpka'
-  LOGP: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.cx_logp'
-  LOGD: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.cx_logd'
-  AROMATIC_RINGS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.aromatic_rings'
-  HBA_LIPINSKI: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.hba_lipinski'
-  HBD_LIPINSKI: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.hbd_lipinski'
-  RO5_LIPINSKI: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.num_lipinski_ro5_violations'
-  MWT_MONOISOTOPIC: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.mw_monoisotopic'
-  MOLECULAR_SPECIES: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.molecular_species'
-  FULL_MOLFORMULA: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.full_molformula'
-  NUM_TARGETS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: '_metadata.related_targets.count'
-    format_as_number: true
-    link_base: 'targets_url'
-    on_click: CompoundReportCardApp.initMiniHistogramFromFunctionLink
-    function_parameters: ['molecule_chembl_id']
-    function_constant_parameters: ['targets']
-    function_key: 'targets'
-    function_link: true
-    execute_on_render: true
-    format_class: 'number-cell-center'
-  NUM_TARGETS_BY_CLASS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    name_to_show: 'Targets (by Class)'
-    comparator: '_metadata.related_targets.count'
-    format_as_number: true
-    link_base: 'targets_url'
-    on_click: CompoundReportCardApp.initMiniHistogramFromFunctionLink
-    function_parameters: ['molecule_chembl_id']
-    function_constant_parameters: ['targets_by_class']
-    function_key: 'compound_targets_by_class'
-    function_link: true
-    execute_on_render: true
-    format_class: 'number-cell-center'
-  BIOACTIVITIES_NUMBER: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: '_metadata.related_activities.count'
-    link_base: 'activities_url'
-    on_click: CompoundReportCardApp.initMiniHistogramFromFunctionLink
-    function_parameters: ['molecule_chembl_id']
-    function_constant_parameters: ['activities']
-    # to help bind the link to the function, it could be necessary to always use the key of the columns descriptions
-    # or probably not, depending on how this evolves
-    function_key: 'bioactivities'
-    function_link: true
-    execute_on_render: true
-    format_class: 'number-cell-center'
-  COMPOUND_SOURCES_LIST: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    # this should be generated automatically
-    id: 'compound_sources_list'
-    comparator: '_metadata.compound_records'
-    name_to_show: 'Compound Sources'
-    parse_function: (values) -> _.unique(v.src_description for v in values)
-  ADDITIONAL_SOURCES_LIST: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    id: 'additional_sources_list'
-    comparator: '_metadata.compound_records'
-    name_to_show_function: (model) ->
+  CHEMBL_ID:
 
-      switch model.isParent()
-        when true then return 'Additional Sources From Alternate Forms:'
-        when false then return 'Additional Sources From Parent:'
+    aggregatable: true
+    comparator: "molecule_chembl_id"
+    hide_label: true
+    id: "molecule_chembl_id"
+    image_base_url: "image_url"
+    is_sorting: 0
+    link_base: "report_card_url"
+    name_to_show: "ChEMBL ID"
+    name_to_show_short: "ChEMBL ID"
+    show: true
+    sort_class: "fa-sort"
+    sort_disabled: false
 
-    col_value_function: (model) -> model.getAdditionalSources()
-    show_function: (model) -> model.hasAdditionalSources()
-  WITHDRAWN_YEAR: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'withdrawn_year'
-  WITHDRAWN_COUNTRY: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'withdrawn_country'
-  WITHDRAWN_REASON: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'withdrawn_reason'
-  WITHDRAWN_CLASS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'withdrawn_class'
-  HELM_NOTATION: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'helm_notation'
-  BIOCOMPONENTS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'biotherapeutic.biocomponents'
-}
+  PREF_NAME:
+    aggregatable: true
+    comparator: "pref_name"
+    id: "pref_name"
+    is_sorting: 0
+    name_to_show: "Name"
+    name_to_show_short: "Name"
+    prop_id: "pref_name"
+    show: true
+    sort_class: "fa-sort"
+    sort_disabled: false
 
+  MAX_PHASE:
 
-Compound.COLUMNS.CHEMBL_ID = {
-  aggregatable: true
-  comparator: "molecule_chembl_id"
-  hide_label: true
-  id: "molecule_chembl_id"
-  image_base_url: "image_url"
-  is_sorting: 0
-  link_base: "report_card_url"
-  name_to_show: "ChEMBL ID"
-  name_to_show_short: "ChEMBL ID"
-  show: true
-  sort_class: "fa-sort"
-  sort_disabled: false
+    aggregatable: true
+    comparator: "max_phase"
+    id: "max_phase"
+    integer: true
+    is_sorting: 0
+    name_to_show: "Max Phase"
+    name_to_show_short: "Max Phase"
+    prop_id: "max_phase"
+    show: true
+    sort_class: "fa-sort"
+    sort_disabled: false
+    year: false
+
+  FULL_MWT:
+
+    aggregatable: true
+    comparator: "molecule_properties.full_mwt"
+    id: "molecule_properties.full_mwt"
+    integer: false
+    is_sorting: 0
+    name_to_show: "Molecular Weight"
+    name_to_show_short: "Full Mwt"
+    prop_id: "molecule_properties.full_mwt"
+    show: true
+    sort_class: "fa-sort"
+    sort_disabled: false
+    year: false
+
+  ALOGP:
+
+    aggregatable: true
+    comparator: "molecule_properties.alogp"
+    id: "molecule_properties.alogp"
+    integer: false
+    is_sorting: 0
+    name_to_show: "AlogP"
+    name_to_show_short: "Alogp"
+    prop_id: "molecule_properties.alogp"
+    show: true
+    sort_class: "fa-sort"
+    sort_disabled: false
+    year: false
+
 }
 
 Compound.ID_COLUMN = Compound.COLUMNS.CHEMBL_ID
 
 Compound.COLUMNS_SETTINGS = {
 
-  RESULTS_LIST_TABLE_SIMILARITY: [
-    Compound.COLUMNS.SIMILARITY_ELASTIC
-    Compound.COLUMNS.CHEMBL_ID,
-    Compound.COLUMNS.PREF_NAME
-    Compound.COLUMNS.SYNONYMS,
-    Compound.COLUMNS.MOLECULE_TYPE,
-    Compound.COLUMNS.MAX_PHASE,
-    Compound.COLUMNS.FULL_MWT,
-    Compound.COLUMNS.NUM_TARGETS,
-    Compound.COLUMNS.BIOACTIVITIES_NUMBER,
-    Compound.COLUMNS.ALOGP,
-    Compound.COLUMNS.PSA,
-    Compound.COLUMNS.HBA,
-    Compound.COLUMNS.HBD,
-    Compound.COLUMNS.RO5,
-    Compound.COLUMNS.ROTATABLE_BONDS,
-    Compound.COLUMNS.RULE_OF_THREE_PASS,
-    Compound.COLUMNS.QED_WEIGHTED
-  ]
-  RESULTS_LIST_REPORT_CARD:[
-    Compound.COLUMNS.CHEMBL_ID,
-    Compound.COLUMNS.PREF_NAME
-  ]
-  RESULTS_LIST_REPORT_CARD_SIMILARITY:[
-    Compound.COLUMNS.CHEMBL_ID,
-    Compound.COLUMNS.PREF_NAME,
-    Compound.COLUMNS.SIMILARITY_ELASTIC
-  ]
   RESULTS_LIST_REPORT_CARD_LONG:[
     Compound.COLUMNS.CHEMBL_ID,
     Compound.COLUMNS.PREF_NAME,
@@ -878,105 +763,8 @@ Compound.COLUMNS_SETTINGS = {
     Compound.COLUMNS.FULL_MWT,
     Compound.COLUMNS.ALOGP
   ]
-  MINI_REPORT_CARD:[
-    Compound.COLUMNS.CHEMBL_ID,
-    Compound.COLUMNS.PREF_NAME,
-    Compound.COLUMNS.SYNONYMS,
-    Compound.COLUMNS.MAX_PHASE,
-    Compound.COLUMNS.FULL_MWT,
-    Compound.COLUMNS.ALOGP,
-    Compound.COLUMNS.PSA,
-    Compound.COLUMNS.HBA,
-    Compound.COLUMNS.HBD,
-    Compound.COLUMNS.RO5,
-    Compound.COLUMNS.NUM_TARGETS,
-    Compound.COLUMNS.BIOACTIVITIES_NUMBER
-  ]
-  RESULTS_LIST_REPORT_CARD_ADDITIONAL:[
-    Compound.COLUMNS.PREF_NAME
-  ]
-#  RESULTS_LIST_REPORT_CARD_ADDITIONAL:[
-#    Compound.COLUMNS.APKA,
-#    Compound.COLUMNS.BPKA,
-#    Compound.COLUMNS.LOGP,
-#    Compound.COLUMNS.LOGD,
-#    Compound.COLUMNS.AROMATIC_RINGS,
-#    Compound.COLUMNS.STRUCTURE_TYPE,
-#    Compound.COLUMNS.INORGANIC_FLAG,
-#    Compound.COLUMNS.HEAVY_ATOMS,
-#    Compound.COLUMNS.HBA_LIPINSKI,
-#    Compound.COLUMNS.HBD_LIPINSKI,
-#    Compound.COLUMNS.RO5_LIPINSKI,
-#    Compound.COLUMNS.MWT_MONOISOTOPIC,
-#    Compound.COLUMNS.MOLECULAR_SPECIES,
-#    Compound.COLUMNS.FULL_MOLFORMULA,
-##    Compound.COLUMNS.NUM_TARGETS_BY_CLASS
-#  ]
-  RESULTS_LIST_SIMILARITY:[
-    Compound.COLUMNS.CHEMBL_ID,
-    Compound.COLUMNS.SIMILARITY,
-    Compound.COLUMNS.MOLECULE_TYPE,
-    Compound.COLUMNS.PREF_NAME,
-  ]
-  RESULTS_LIST_REPORT_CARD_CAROUSEL: [
-    Compound.COLUMNS.CHEMBL_ID
-  ]
-  TEST: [
-    Compound.COLUMNS.CHEMBL_ID,
-    Compound.COLUMNS.PREF_NAME
-    Compound.COLUMNS.MAX_PHASE,
-  ]
-  COMPOUND_SOURCES_SECTION: [
-    Compound.COLUMNS.COMPOUND_SOURCES_LIST
-    Compound.COLUMNS.ADDITIONAL_SOURCES_LIST
-  ]
-  WITHDRAWN_INFO_SECTION: [
-    Compound.COLUMNS.WITHDRAWN_YEAR
-    Compound.COLUMNS.WITHDRAWN_COUNTRY
-    Compound.COLUMNS.WITHDRAWN_REASON
-    Compound.COLUMNS.WITHDRAWN_CLASS
-  ]
-  HELM_NOTATION_SECTION: [
-    Compound.COLUMNS.CHEMBL_ID
-    Compound.COLUMNS.HELM_NOTATION
-  ]
-  BIOCOMPONENTS_SECTION: [
-    Compound.COLUMNS.CHEMBL_ID
-    Compound.COLUMNS.BIOCOMPONENTS
-  ]
-  CLINICAL_DATA_SECTION:[
-    _.extend Compound.COLUMNS.PREF_NAME,
-      additional_parsing:
-        encoded_value: (value) -> value.replace(/[ ]/g, '+')
-    _.extend {}, Compound.COLUMNS.SYNONYMS,
-      parse_from_model: true
-      additional_parsing:
-        search_term: (model) ->
-          synonyms = if model.isParent() then model.getOwnAndAdditionalSynonyms() else model.getSynonyms()
-          tradenames = if model.isParent() then model.getOwnAndAdditionalTradenames() else model.getTradenames()
-          fullList = _.union(synonyms, tradenames)
-          linkText = _.uniq(v for v in fullList).join(' OR ')
 
-          maxTextLength = 100
-          if linkText.length > maxTextLength
-            linkText = "#{linkText.substring(0, (maxTextLength-3))}..."
-
-          return linkText
-        encoded_search_term: (model) ->
-          synonyms = if model.isParent() then model.getOwnAndAdditionalSynonyms() else model.getSynonyms()
-          tradenames = if model.isParent() then model.getOwnAndAdditionalTradenames() else model.getTradenames()
-          fullList = _.union(synonyms, tradenames)
-          return encodeURIComponent(_.uniq(v for v in fullList).join(' OR '))
-
-  ]
 }
-
-Compound.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS = _.union(Compound.COLUMNS_SETTINGS.RESULTS_LIST_TABLE,
-  Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_ADDITIONAL)
-
-Compound.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS_SIMILARITY = _.union(
-  Compound.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS,
-  [Compound.COLUMNS.SIMILARITY_ELASTIC])
 
 Compound.MINI_REPORT_CARD =
   LOADING_TEMPLATE: 'Handlebars-Common-MiniRepCardPreloader'

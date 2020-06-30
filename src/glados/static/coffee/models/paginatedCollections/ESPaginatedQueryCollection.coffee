@@ -52,118 +52,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
     # ------------------------------------------------------------------------------------------------------------------
     # Parse/Fetch Collection data
     # ------------------------------------------------------------------------------------------------------------------
-    simplifyHighlights: (highlights)->
-      gs_data = glados.models.paginatedCollections.esSchema.GLaDOS_es_GeneratedSchema[@getMeta('index_name')]
-      simplifiedHL = {}
-      for propPath in _.keys(highlights)
-        hlData = highlights[propPath]
-        for suffixJ in glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_SUFFIXES_TO_REMOVE
-          if suffixJ instanceof RegExp
-            propPath = propPath.replace suffixJ, ''
-          else if propPath.endsWith suffixJ
-            propPath = propPath.replace new RegExp('\.'+suffixJ+'$'), ''
-        if not _.has simplifiedHL, propPath
-          simplifiedHL[propPath] = {}
-        for hlK in hlData
-          simpleHlK = hlK.replace(
-            new RegExp(
-              glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_OPEN_TAG_REGEX_ESCAPED, 'g'
-            ), ''
-          )
-          simpleHlK = simpleHlK.replace(
-            new RegExp(
-              glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_CLOSE_TAG_REGEX_ESCAPED, 'g'
-            ), ''
-          )
-          included = false
-          _.each _.keys(simplifiedHL[propPath]), (keyJ, indexJ, keysList) ->
-            included |= keyJ.includes(simpleHlK) or simpleHlK.includes(keyJ)
-          if not included
-            simplifiedHL[propPath][simpleHlK] = hlK
-      for propPath in _.keys(simplifiedHL)
-        maxValueLength = 0
-        _.each _.values(simplifiedHL[propPath]), (valueJ, indexJ, valuesList) ->
-          if valueJ.length > 0
-            maxValueLength = valueJ.length
-
-        joinStr = ', '
-        if maxValueLength > glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_MAX_WORD_LENGTH * 10
-          joinStr = ' .... '
-
-        label = propPath
-        label_mini = propPath
-        if gs_data[propPath]?
-          label = django.gettext(gs_data[propPath].label_id)
-          label_mini = django.gettext(gs_data[propPath].label_mini_id)
-
-
-        hlValue =  Array.from(_.values(simplifiedHL[propPath])).join(joinStr)
-        miniHLValue = hlValue
-        if hlValue.length > glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_MAX_WORD_LENGTH * 10
-          firstSimplified = _.keys(simplifiedHL[propPath])[0].trim()
-          firstComplete = _.values(simplifiedHL[propPath])[0].trim()
-          startsHighlighted = firstComplete.startsWith(
-            glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_OPEN_TAG
-          )
-          endsHighlighted = firstComplete.startsWith(
-            glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_CLOSE_TAG
-          )
-
-          simpleHlKWords = firstSimplified.split(/([^a-zA-Z0-9]|\s)/)
-
-          firstWord = simpleHlKWords[0]
-          firstWord = firstWord.substring(
-            -1, glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_MAX_WORD_LENGTH
-          )
-          if startsHighlighted
-            firstWord = glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_OPEN_TAG + firstWord +
-              glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_CLOSE_TAG
-
-          lastWord = simpleHlKWords[simpleHlKWords.length - 1]
-          lastWord = lastWord.substring(
-            -1, glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_MAX_WORD_LENGTH
-          )
-          if endsHighlighted
-            lastWord = glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_OPEN_TAG + lastWord +
-              glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_CLOSE_TAG
-
-          tagIdx = firstComplete.indexOf(
-            glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_OPEN_TAG
-          ) + glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_OPEN_TAG.length
-          closeTagIdx = firstComplete.indexOf(
-            glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_CLOSE_TAG
-          )
-          firstTag = firstComplete.substring(
-            tagIdx, closeTagIdx
-          )
-
-          firstTag = firstTag.substring(
-            -1, glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_MAX_WORD_LENGTH
-          )
-
-          firstTag = glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_OPEN_TAG + firstTag +
-            glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_CLOSE_TAG
-
-          tagCount = (firstComplete.match(new RegExp(
-              glados.models.paginatedCollections.ESPaginatedQueryCollection.HIGHLIGHT_OPEN_TAG_REGEX_ESCAPED, 'g'
-            ), ''
-          ) || []).length
-
-          miniHLValue = firstWord + ' ... ' + firstTag + ' ...'
-          if tagCount == 1 and (startsHighlighted or endsHighlighted)
-            miniHLValue = firstWord + ' ... ' + lastWord
-          if tagCount == 2 and (startsHighlighted and endsHighlighted)
-            miniHLValue = firstWord + ' ... ' + lastWord
-
-        simplifiedHL[propPath] = {
-          value_mini: miniHLValue
-          value: hlValue
-          label: label
-          label_mini: label_mini
-          active_tooltip: miniHLValue != hlValue
-        }
-      return simplifiedHL
-
     # Parses the Elastic Search Response and resets the pagination metadata
     parse: (response) ->
 
@@ -197,7 +85,6 @@ glados.useNameSpace 'glados.models.paginatedCollections',
         hitI = parsingModel.parse(hitI)
         curPageResultsIds[hitI._id] = true
 
-        currentItemData._highlights = if hitI.highlight? then @simplifyHighlights(hitI.highlight) else null
         currentItemData._score = hitI._score
 
         if not currentItemData._score? and scores?

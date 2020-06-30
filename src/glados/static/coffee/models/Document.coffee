@@ -37,7 +37,7 @@ Document.color = 'red'
 Document.reportCardPath = 'document_report_card/'
 
 Document.ES_INDEX = 'chembl_document'
-Document.INDEX_NAME = glados.Settings.CHEMBL_ES_INDEX_PREFIX+'document'
+Document.INDEX_NAME = Document.ES_INDEX
 Document.PROPERTIES_VISUAL_CONFIG = {
   'document_chembl_id': {
     link_base: 'report_card_url'
@@ -88,107 +88,102 @@ Document.PROPERTIES_VISUAL_CONFIG = {
 }
 
 Document.COLUMNS = {
-  CHEMBL_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
-    comparator: 'document_chembl_id'
-    link_base: 'report_card_url'
+
+  CHEMBL_ID:
+
+    aggregatable: true
+    comparator: "document_chembl_id"
     hide_label: true
-  TITLE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
-    comparator: 'title'
-    custom_field_template: '<i>{{val}}</i>'
-  AUTHORS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
-    comparator: 'authors'
-  YEAR: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
-    comparator: 'year'
-  SOURCE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
-    comparator: '_metadata.source'
-    parse_function: (values) -> (v.src_description for v in values).join(', ')
-# this is shown when searching documents by terms.
-  SCORE: {
-    'name_to_show': 'Score'
-    'comparator': 'score'
-    'sort_disabled': false
-    'is_sorting': 0
-    'sort_class': 'fa-sort'
-    'custom_field_template': '<b>Score: </b>{{val}}'
-  }
+    id: "document_chembl_id"
+    is_sorting: 0
+    link_base: "report_card_url"
+    name_to_show: "ChEMBL ID"
+    name_to_show_short: "ChEMBL ID"
+    show: true
+    sort_class: "fa-sort"
+    sort_disabled: false
+
+  TITLE:
+
+    aggregatable: true
+    comparator: "title"
+    custom_field_template: "<i>{{val}}</i>"
+    id: "title"
+    is_sorting: 0
+    name_to_show: "Title"
+    name_to_show_short: "Title"
+    show: true
+    sort_class: "fa-sort"
+    sort_disabled: false
+
 # this is shown when showing related documents in a report card
-  TARGET_TANIMOTO: {
-    name_to_show: 'Target Similarity'
-    comparator: 'tid_tani'
+  TARGET_TANIMOTO:
+
+    comparator: "tid_tani"
+    is_sorting: 0
+    name_to_show: "Target Similarity"
     parse_function: (value) -> "#{parseFloat(value) * 100}%"
-  }
-  COMPOUND_TANIMOTO: {
-    name_to_show: 'Compound Similarity'
-    comparator: 'mol_tani'
+    prop_id: "tid_tani"
+    show: true
+    sort_class: "fa-sort"
+
+  COMPOUND_TANIMOTO:
+
+    comparator: "mol_tani"
+    is_sorting: 0
+    name_to_show: "Compound Similarity"
     parse_function: (value) -> "#{parseFloat(value) * 100}%"
-  }
-  REFERENCE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
-    comparator: '_metadata.similar_documents'
-    name_to_show: 'Reference'
-    parse_function: (model) -> Document.getFormattedReference model.attributes
-    parse_from_model: true
-    link_function: (model) -> 'http://dx.doi.org/' + encodeURIComponent(model.attributes.doi)
+    prop_id: "mol_tani"
+    show: true
+    sort_class: "fa-sort"
+
+  REFERENCE:
+
+    aggregatable: false
+    comparator: "_metadata.similar_documents"
     get_link_from_model: true
-  PUBMED_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
-    comparator: 'pubmed_id'
+    id: "_metadata.similar_documents"
+    is_sorting: 0
+    link_function: (model) -> 'http://dx.doi.org/' + encodeURIComponent(model.attributes.doi)
+    name_to_show: "Reference"
+    name_to_show_short: "Simlr. Docmnt."
+    parse_from_model: true
+    parse_function: (model) -> Document.getFormattedReference model.attributes
+    prop_id: "_metadata.similar_documents"
+    show: true
+    sort_class: "fa-sort"
+    sort_disabled: true
+
+  PUBMED_ID:
+
+    aggregatable: true
+    comparator: "pubmed_id"
+    id: "pubmed_id"
+    is_sorting: 0
     link_function: (id) -> 'http://europepmc.org/abstract/MED/' + encodeURIComponent(id)
-  DOI: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
-    comparator: 'doi'
+    name_to_show: "PubMed ID"
+    name_to_show_short: "Pubmed ID"
+    prop_id: "pubmed_id"
+    show: true
+    sort_class: "fa-sort"
+    sort_disabled: false
+
+  DOI:
+
+    aggregatable: true
+    comparator: "doi"
+    id: "doi"
+    is_sorting: 0
     link_function: (id) -> 'http://dx.doi.org/' + encodeURIComponent(id)
-  PATENT_ID: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
-    comparator: 'patent_id'
-  JOURNAL: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
-    comparator: 'journal'
-  TYPE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
-    comparator: 'doc_type'
-  ABSTRACT: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
-    comparator: 'abstract'
-  BIOACTIVITIES_NUMBER: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
-    comparator: '_metadata.related_activities.count'
-    link_base: 'activities_url'
-    on_click: DocumentReportCardApp.initMiniHistogramFromFunctionLink
-    function_parameters: ['document_chembl_id']
-    function_constant_parameters: ['activities']
-    function_key: 'document_bioactivities'
-    function_link: true
-    execute_on_render: true
-    format_class: 'number-cell-center'
-  NUM_COMPOUNDS_HISTOGRAM: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
-    comparator: '_metadata.related_compounds.count'
-    link_base: 'compounds_url'
-    on_click: DocumentReportCardApp.initMiniHistogramFromFunctionLink
-    function_constant_parameters: ['compounds']
-    function_parameters: ['document_chembl_id']
-    function_key: 'document_num_compounds'
-    function_link: true
-    execute_on_render: true
-    format_class: 'number-cell-center'
-  NUM_TARGETS: glados.models.paginatedCollections.ColumnsFactory.generateColumn Document.INDEX_NAME,
-    comparator: '_metadata.related_targets.count'
-    format_as_number: true
-    link_base: 'targets_url'
-    on_click: DocumentReportCardApp.initMiniHistogramFromFunctionLink
-    function_parameters: ['document_chembl_id']
-    function_constant_parameters: ['targets']
-    function_key: 'document_targets'
-    function_link: true
-    execute_on_render: true
-    format_class: 'number-cell-center'
+    name_to_show: "DOI"
+    name_to_show_short: "Doi"
+    prop_id: "doi"
+    show: true
+    sort_class: "fa-sort"
+    sort_disabled: false
+
 }
 
-Document.COLUMNS.CHEMBL_ID = {
-  aggregatable: true
-  comparator: "document_chembl_id"
-  hide_label: true
-  id: "document_chembl_id"
-  is_sorting: 0
-  link_base: "report_card_url"
-  name_to_show: "ChEMBL ID"
-  name_to_show_short: "ChEMBL ID"
-  show: true
-  sort_class: "fa-sort"
-  sort_disabled: false
-}
 
 Document.ID_COLUMN = Document.COLUMNS.CHEMBL_ID
 
@@ -200,40 +195,6 @@ Document.COLUMNS_SETTINGS = {
       colsList.push value
     return colsList
   )()
-
-  RESULTS_LIST_TABLE: [
-    Document.COLUMNS.CHEMBL_ID
-    Document.COLUMNS.JOURNAL
-    Document.COLUMNS.TITLE
-    Document.COLUMNS.PUBMED_ID
-    Document.COLUMNS.DOI
-    Document.COLUMNS.BIOACTIVITIES_NUMBER
-    Document.COLUMNS.PATENT_ID
-    Document.COLUMNS.SOURCE
-    Document.COLUMNS.JOURNAL
-    Document.COLUMNS.AUTHORS
-    Document.COLUMNS.YEAR
-  ]
-  RESULTS_LIST_ADDITIONAL: [
-    Document.COLUMNS.TYPE
-    Document.COLUMNS.ABSTRACT
-    Document.COLUMNS.NUM_COMPOUNDS_HISTOGRAM
-    Document.COLUMNS.NUM_TARGETS
-  ]
-  RESULTS_LIST_CARD: [
-    Document.COLUMNS.CHEMBL_ID
-    Document.COLUMNS.JOURNAL
-    Document.COLUMNS.TITLE
-    Document.COLUMNS.AUTHORS
-    Document.COLUMNS.YEAR
-  ]
-  SEARCH_BY_TERM_RESULTS: [
-    Document.COLUMNS.CHEMBL_ID
-    Document.COLUMNS.SCORE
-    Document.COLUMNS.TITLE
-    Document.COLUMNS.AUTHORS
-    Document.COLUMNS.YEAR
-  ]
   SIMILAR_TERMS_IN_REPORT_CARDS: [
     Document.COLUMNS.CHEMBL_ID
     Document.COLUMNS.TARGET_TANIMOTO
@@ -244,9 +205,6 @@ Document.COLUMNS_SETTINGS = {
     Document.COLUMNS.DOI
   ]
 }
-
-Document.COLUMNS_SETTINGS.DEFAULT_DOWNLOAD_COLUMNS = _.union(Document.COLUMNS_SETTINGS.RESULTS_LIST_TABLE,
-  Document.COLUMNS_SETTINGS.RESULTS_LIST_ADDITIONAL)
 
 Document.MINI_REPORT_CARD =
   LOADING_TEMPLATE: 'Handlebars-Common-MiniRepCardPreloader'

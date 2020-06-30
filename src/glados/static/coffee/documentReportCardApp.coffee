@@ -76,7 +76,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
     new glados.views.ReportCards.PaginatedTableInCardView
       collection: relatedDocumentsList
       el: $('#CRelatedDocumentsCard')
-      resource_type: gettext('glados_entities_document_name')
+      resource_type: Document.prototype.entityName
       section_id: 'RelatedDocuments'
       section_label: 'Related Documents'
       entity_name: Document.prototype.entityName
@@ -104,7 +104,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
 
     pieConfig =
       x_axis_prop_name: 'classes'
-      title: gettext('glados_compound__associated_targets_by_class_pie_title_base') + chemblID
+      title: 'Target Classes for Compound ' + chemblID
       title_link_url: Target.getTargetsListURL('_metadata.related_documents.all_chembl_ids:' + chemblID)
       custom_empty_message: "No target classification data available for document #{chemblID} (all may be non-protein targets)"
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
@@ -113,7 +113,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
 
     viewConfig =
       pie_config: pieConfig
-      resource_type: gettext('glados_entities_document_name')
+      resource_type: Document.prototype.entityName
       embed_section_name: 'related_targets'
       embed_identifier: chemblID
       link_to_all:
@@ -139,7 +139,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
 
     pieConfig =
       x_axis_prop_name: 'types'
-      title: gettext('glados_document__associated_assays_pie_title_base') + chemblID
+      title: "ChEMBL Assay Types for Document " + chemblID
       title_link_url: Assay.getAssaysListURL('document_chembl_id:' + chemblID)
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
       properties:
@@ -148,7 +148,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
 
     viewConfig =
       pie_config: pieConfig
-      resource_type: gettext('glados_entities_document_name')
+      resource_type: Document.prototype.entityName
       embed_section_name: 'related_assays'
       embed_identifier: chemblID
       link_to_all:
@@ -174,7 +174,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
 
     pieConfig =
       x_axis_prop_name: 'types'
-      title: gettext('glados_document__associated_activities_pie_title_base') + chemblID
+      title: "ChEMBL Activity Types for Document " + chemblID
       title_link_url: Activity.getActivitiesListURL('document_chembl_id:' + chemblID)
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
       properties:
@@ -182,7 +182,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
 
     viewConfig =
       pie_config: pieConfig
-      resource_type: gettext('glados_entities_document_name')
+      resource_type: Document.prototype.entityName
       embed_section_name: 'related_activities'
       embed_identifier: chemblID
       link_to_all:
@@ -225,7 +225,7 @@ class DocumentReportCardApp extends glados.ReportCardApp
 
     config =
       histogram_config: histogramConfig
-      resource_type: gettext('glados_entities_document_name')
+      resource_type: Document.prototype.entityName
       embed_section_name: 'related_compounds'
       embed_identifier: chemblID
 

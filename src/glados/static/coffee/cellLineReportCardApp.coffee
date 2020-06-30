@@ -64,7 +64,7 @@ class CellLineReportCardApp extends glados.ReportCardApp
 
     pieConfig =
       x_axis_prop_name: 'types'
-      title: gettext('glados_cell_line__associated_assays_pie_title_base') + chemblID
+      title: "ChEMBL Assay Types for Assay " + chemblID
       title_link_url: Assay.getAssaysListURL('cell_chembl_id:' + chemblID)
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
       properties:
@@ -72,7 +72,7 @@ class CellLineReportCardApp extends glados.ReportCardApp
 
     viewConfig =
       pie_config: pieConfig
-      resource_type: gettext('glados_entities_cell_line_name')
+      resource_type: CellLine.prototype.entityName
       link_to_all:
         link_text: 'See all assays for cell line ' + chemblID + ' used in this visualisation.'
         url: Assay.getAssaysListURL('cell_chembl_id:' + chemblID)
@@ -99,7 +99,7 @@ class CellLineReportCardApp extends glados.ReportCardApp
 
     pieConfig =
       x_axis_prop_name: 'types'
-      title: gettext('glados_cell_line__bioactivities_pie_title_base') + chemblID
+      title: "ChEMBL Activity Types for Cell Line " + chemblID
       title_link_url: Activity.getActivitiesListURL('_metadata.assay_data.cell_chembl_id:' + chemblID)
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
       properties:
@@ -107,7 +107,7 @@ class CellLineReportCardApp extends glados.ReportCardApp
 
     viewConfig =
       pie_config: pieConfig
-      resource_type: gettext('glados_entities_cell_line_name')
+      resource_type: CellLine.prototype.entityName
       embed_section_name: 'bioactivities'
       embed_identifier: chemblID
       link_to_all:
@@ -150,7 +150,7 @@ class CellLineReportCardApp extends glados.ReportCardApp
 
     config =
       histogram_config: histogramConfig
-      resource_type: gettext('glados_entities_cell_line_name')
+      resource_type: CellLine.prototype.entityName
       embed_section_name: 'related_compounds'
       embed_identifier: chemblID
 

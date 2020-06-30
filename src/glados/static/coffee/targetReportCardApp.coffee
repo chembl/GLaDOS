@@ -80,7 +80,7 @@ class TargetReportCardApp extends glados.ReportCardApp
     new glados.views.ReportCards.PaginatedTableInCardView
       collection: targetComponents
       el: $('#TComponentsCard')
-      resource_type: gettext('glados_entities_target_name')
+      resource_type: Target.prototype.entityName
       section_id: 'TargetComponents'
       section_label: 'Components'
       entity_name: Target.prototype.entityName
@@ -102,7 +102,7 @@ class TargetReportCardApp extends glados.ReportCardApp
     new glados.views.ReportCards.PaginatedTableInCardView
       collection: targetRelations
       el: $('#TRelationsCard')
-      resource_type: gettext('glados_entities_target_name')
+      resource_type: Target.prototype.entityName
       section_id: 'TargetRelations'
       section_label: 'Relations'
       entity_name: Target.prototype.entityName
@@ -129,7 +129,7 @@ class TargetReportCardApp extends glados.ReportCardApp
     new glados.views.ReportCards.PaginatedTableInCardView
       collection: list
       el: $('#ApprovedDrugsAndClinicalCandidatesCard')
-      resource_type: gettext('glados_entities_target_name')
+      resource_type: Target.prototype.entityName
       section_id: 'ApprovedDrugsAndClinicalCandidates'
       section_label: 'Drugs And Clinical Candidates'
       entity_name: Target.prototype.entityName
@@ -143,7 +143,7 @@ class TargetReportCardApp extends glados.ReportCardApp
     target = TargetReportCardApp.getCurrentTarget()
 
     viewConfig =
-      resource_type: gettext('glados_entities_target_name')
+      resource_type: Target.prototype.entityName
       embed_identifier: target.get('id')
 
     new glados.views.ReportCards.FullSectionEmbedderView
@@ -168,7 +168,7 @@ class TargetReportCardApp extends glados.ReportCardApp
 
     pieConfig =
       x_axis_prop_name: 'types'
-      title: gettext('glados_target__associated_activities_pie_title_base') + targetChemblID
+      title: "Activity Types for Target " + targetChemblID
       title_link_url: Activity.getActivitiesListURL('target_chembl_id:' + targetChemblID)
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
       properties:
@@ -177,7 +177,7 @@ class TargetReportCardApp extends glados.ReportCardApp
 
     viewConfig =
       pie_config: pieConfig
-      resource_type: gettext('glados_entities_target_name')
+      resource_type: Target.prototype.entityName
       embed_section_name: 'bioactivities'
       embed_identifier: targetChemblID
       link_to_all:
@@ -203,7 +203,7 @@ class TargetReportCardApp extends glados.ReportCardApp
 
     pieConfig =
       x_axis_prop_name: 'types'
-      title: gettext('glados_target__associated_assays_pie_title_base') + chemblID
+      title: "Assays for Target " + chemblID
       title_link_url: Assay.getAssaysListURL('target_chembl_id:' + chemblID)
       max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
       properties:
@@ -211,7 +211,7 @@ class TargetReportCardApp extends glados.ReportCardApp
 
     viewConfig =
       pie_config: pieConfig
-      resource_type: gettext('glados_entities_target_name')
+      resource_type: Target.prototype.entityName
       link_to_all:
         link_text: 'See all assays for target ' + chemblID + ' used in this visualisation.'
         url: Assay.getAssaysListURL('target_chembl_id:' + chemblID)
@@ -301,7 +301,7 @@ class TargetReportCardApp extends glados.ReportCardApp
       el: $('#TGeneCrossReferencesCard')
       embed_section_name: 'gene_cross_refs'
       embed_identifier: glados.Utils.URLS.getCurrentModelChemblID()
-      resource_type: gettext('glados_entities_target_name')
+      resource_type: Target.prototype.entityName
       section_id: 'TargetCrossReferencesGene'
       section_label: 'Gene Cross References'
       entity_name: Target.prototype.entityName
@@ -327,7 +327,7 @@ class TargetReportCardApp extends glados.ReportCardApp
       el: $('#TProteinCrossReferencesCard')
       embed_section_name: 'protein_cross_refs'
       embed_identifier: glados.Utils.URLS.getCurrentModelChemblID()
-      resource_type: gettext('glados_entities_target_name')
+      resource_type: Target.prototype.entityName
       section_id: 'TargetCrossReferencesProtein'
       section_label: 'Protein Cross References'
       entity_name: Target.prototype.entityName
@@ -352,7 +352,7 @@ class TargetReportCardApp extends glados.ReportCardApp
       el: $('#TDomainCrossReferencesCard')
       embed_section_name: 'domain_cross_refs'
       embed_identifier: glados.Utils.URLS.getCurrentModelChemblID()
-      resource_type: gettext('glados_entities_target_name')
+      resource_type: Target.prototype.entityName
       section_id: 'TargetCrossReferencesDomain'
       section_label: 'Domain Cross References'
       entity_name: Target.prototype.entityName
@@ -377,7 +377,7 @@ class TargetReportCardApp extends glados.ReportCardApp
       el: $('#TStructureCrossReferencesCard')
       embed_section_name: 'structure_cross_refs'
       embed_identifier: glados.Utils.URLS.getCurrentModelChemblID()
-      resource_type: gettext('glados_entities_target_name')
+      resource_type: Target.prototype.entityName
       section_id: 'TargetCrossReferencesStructure'
       section_label: 'Structure Cross References'
       entity_name: Target.prototype.entityName

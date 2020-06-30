@@ -25,7 +25,7 @@ glados.useNameSpace 'glados.configs.ReportCards.Compound',
 
           pieConfig =
             x_axis_prop_name: 'classes'
-            title: "#{gettext('glados_compound__associated_targets_by_class_pie_title_base')}#{chemblID}#{titleAdditionalText}"
+            title: "#{'Target Classes for Compound '}#{chemblID}#{titleAdditionalText}"
             title_link_url: Target.getTargetsListURL(titleLinkFilter)
             custom_empty_message: "No target classification data available for compound #{chemblID} (all may be non-protein targets)"
             max_categories: glados.Settings.PIECHARTS.MAX_CATEGORIES
@@ -35,7 +35,7 @@ glados.useNameSpace 'glados.configs.ReportCards.Compound',
 
       viewConfig =
         init_agg_from_model_event: aggGenerationConfig
-        resource_type: gettext('glados_entities_compound_name')
+        resource_type: Compound.prototype.entityName
         embed_section_name: 'related_targets'
         embed_identifier: chemblID
         alternate_forms:

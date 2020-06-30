@@ -568,12 +568,9 @@ glados.useNameSpace 'glados.models.visualisation',
 
 glados.models.visualisation.PropertiesFactory.getPropertyConfigFor = (entityName, propertyID, withColourScale=false) ->
 
-  esIndex = glados.models.visualisation.PropertiesFactory[entityName].esIndex
   customConfig = glados.models.visualisation.PropertiesFactory[entityName].Properties[propertyID]
-  baseConfig = if not esIndex? \
-    then {} else glados.models.paginatedCollections.esSchema.GLaDOS_es_GeneratedSchema[esIndex][customConfig.propName]
 
-  prop = $.extend({}, baseConfig, customConfig)
+  prop = $.extend({}, customConfig)
 
   if withColourScale
     glados.models.visualisation.PropertiesFactory.generateColourScale(prop)
