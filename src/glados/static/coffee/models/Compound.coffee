@@ -693,14 +693,62 @@ Compound.COLUMNS = {
     sort_class: "fa-sort"
     sort_disabled: false
 
-  PREF_NAME: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'pref_name'
-  MAX_PHASE: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'max_phase'
-  FULL_MWT: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.full_mwt'
-  ALOGP: glados.models.paginatedCollections.ColumnsFactory.generateColumn Compound.INDEX_NAME,
-    comparator: 'molecule_properties.alogp'
+  PREF_NAME:
+    aggregatable: true
+    comparator: "pref_name"
+    id: "pref_name"
+    is_sorting: 0
+    name_to_show: "Name"
+    name_to_show_short: "Name"
+    prop_id: "pref_name"
+    show: true
+    sort_class: "fa-sort"
+    sort_disabled: false
+
+  MAX_PHASE:
+
+    aggregatable: true
+    comparator: "max_phase"
+    id: "max_phase"
+    integer: true
+    is_sorting: 0
+    name_to_show: "Max Phase"
+    name_to_show_short: "Max Phase"
+    prop_id: "max_phase"
+    show: true
+    sort_class: "fa-sort"
+    sort_disabled: false
+    year: false
+
+  FULL_MWT:
+
+    aggregatable: true
+    comparator: "molecule_properties.full_mwt"
+    id: "molecule_properties.full_mwt"
+    integer: false
+    is_sorting: 0
+    name_to_show: "Molecular Weight"
+    name_to_show_short: "Full Mwt"
+    prop_id: "molecule_properties.full_mwt"
+    show: true
+    sort_class: "fa-sort"
+    sort_disabled: false
+    year: false
+
+  ALOGP:
+
+    aggregatable: true
+    comparator: "molecule_properties.alogp"
+    id: "molecule_properties.alogp"
+    integer: false
+    is_sorting: 0
+    name_to_show: "AlogP"
+    name_to_show_short: "Alogp"
+    prop_id: "molecule_properties.alogp"
+    show: true
+    sort_class: "fa-sort"
+    sort_disabled: false
+    year: false
 
 }
 
@@ -717,6 +765,8 @@ Compound.COLUMNS_SETTINGS = {
   ]
 
 }
+
+console.log('Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_LONG:', Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_LONG)
 
 
 Compound.MINI_REPORT_CARD =
