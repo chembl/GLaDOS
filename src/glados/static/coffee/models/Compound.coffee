@@ -766,9 +766,6 @@ Compound.COLUMNS_SETTINGS = {
 
 }
 
-console.log('Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_LONG:', Compound.COLUMNS_SETTINGS.RESULTS_LIST_REPORT_CARD_LONG)
-
-
 Compound.MINI_REPORT_CARD =
   LOADING_TEMPLATE: 'Handlebars-Common-MiniRepCardPreloader'
   TEMPLATE: 'Handlebars-Common-MiniReportCard'
