@@ -22,23 +22,6 @@ setup_glados_es_connection(DATA_CONNECTION)
 setup_glados_es_connection(MONITORING_CONNECTION)
 
 common_urls = [
-    # --------------------------------------------------------------------------------------------------------------------
-    # Translation for Javascript
-    # --------------------------------------------------------------------------------------------------------------------
-
-    path('glados_jsi18n/glados',
-         cache_page(86400, key_prefix='glados_jsi18n1')(JavaScriptCatalog.as_view(packages=['glados'], domain='glados')),
-         name='js-glados-catalog'),
-
-    path('glados_jsi18n/glados_es_generated',
-         cache_page(86400, key_prefix='glados_es_generated1')(JavaScriptCatalog.as_view(packages=['glados'],
-                                                                                       domain='glados_es_generated')),
-         name='js-glados_es_generated-catalog'),
-
-    path('glados_jsi18n/glados_es_override',
-         cache_page(86400, key_prefix='glados_es_override1')(JavaScriptCatalog.as_view(packages=['glados'],
-                                                                                      domain='glados_es_override')),
-         name='js-glados_es_override-catalog'),
 
     # --------------------------------------------------------------------------------------------------------------------
     # Main Pages
