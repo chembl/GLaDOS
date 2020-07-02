@@ -248,8 +248,7 @@ SearchModel = Backbone.Model.extend
   parseQueryString: (rawQueryString, selectedESEntity)->
 
     indexName2ResourceName = {}
-    done_callback = (serverJsonResponse)->
-      jsonResponse = JSON.parse(serverJsonResponse)
+    done_callback = (jsonResponse)->
       parsedQuery = jsonResponse['parsed_query']
       bestESQueries = jsonResponse['best_es_base_queries']
       sortedIndexesByScore = jsonResponse['sorted_indexes_by_score']
@@ -268,8 +267,8 @@ SearchModel = Backbone.Model.extend
       indexes_names.push idxName
 
 
-    ajaxDeferred = glados.doCSRFPost glados.Settings.SEARCH_RESULTS_PARSER_ENDPOINT, {
-        query_string: rawQueryString
+    ajaxDeferred = $.post glados.Settings.SEARCH_RESULTS_PARSER_ENDPOINT, {
+        search_term: rawQueryString
         es_indexes: indexes_names.join(',')
         selected_es_index: null
     }
