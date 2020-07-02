@@ -305,7 +305,6 @@ glados.loadSearchResultsURLS = ()->
 
   glados.Settings.GLADOS_API_BASE_URL = "#{glados.Settings.GLADOS_BASE_URL_FULL}glados_api/chembl"
   glados.Settings.GENERATE_SERVER_SIDE_DOWNLOAD_ENDPOINT = 'glados_api/shared/downloads/queue_download/'
-  glados.Settings.SEARCH_RESULTS_PARSER_ENDPOINT = 'search_results_parser'
   glados.Settings.SHORTEN_URLS_ENDPOINT = 'glados_api/chembl/url_shortening/shorten_url/'
   glados.Settings.EXTEND_URLS_ENDPOINT = 'glados_api/chembl/url_shortening/extend_url/'
   glados.Settings.REGISTER_USAGE_ENDPOINT = 'register_usage'
@@ -327,6 +326,7 @@ glados.loadSearchResultsURLS = ()->
 
   glados.Settings.ES_PROXY_API_BASE_URL = 'https://www.ebi.ac.uk/chembl/interface_api/es_proxy'
   glados.Settings.ES_PROXY_ES_DATA_URL = "#{glados.Settings.ES_PROXY_API_BASE_URL}/es_data/get_es_data"
+  glados.Settings.SEARCH_RESULTS_PARSER_ENDPOINT = "#{glados.Settings.ES_PROXY_API_BASE_URL}/search_parsing/parse_free_text_search"
 
   glados.Settings.SHORTENED_EMBED_URL_GENERATOR =
   Handlebars.compile("#{glados.Settings.GLADOS_BASE_URL_FULL}embed/tiny/{{{hash}}}")

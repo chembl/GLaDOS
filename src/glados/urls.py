@@ -1,17 +1,12 @@
 from django.conf.urls import include, url
-from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from glados.utils_refactor import DirectTemplateView
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.conf import settings
 from . import views
-import glados.grammar.search_parser
-from django.views.i18n import JavaScriptCatalog
 from glados import old_urls_redirector
 from django.conf.urls import url
 from django.http import HttpResponse
-from django.views.decorators.cache import cache_page
-from django.urls import path
 
 from django.views.generic.base import RedirectView
 
@@ -249,13 +244,6 @@ common_urls = [
     # Old Interface redirections
     # ------------------------------------------------------------------------------------------------------------------
     url(r'^(index\.php\/)?(?P<entity_name>\w+)/inspect/(?P<chembl_id>\w+)/$', old_urls_redirector.redirect_report_card),
-
-    # --------------------------------------------------------------------------------------------------------------------
-    # Search Results
-    # --------------------------------------------------------------------------------------------------------------------
-
-    url(r'^search_results_parser.*$',
-        glados.grammar.search_parser.parse_url_search, ),
 
     # --------------------------------------------------------------------------------------------------------------------
     # Tiny urls
