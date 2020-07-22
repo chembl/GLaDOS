@@ -11,9 +11,6 @@ This project has been split into 3 projects which now live in the EBI's Gitlab:
 This GitHub project will still be used for issue tracking, but the code in this repository is no longer up to date.  
 
 ----
-## Travis
-
-[![Build Status](https://travis-ci.org/chembl/GLaDOS.svg?branch=master)](https://travis-ci.org/chembl/GLaDOS)
 
 ## Ghost Inspector
 
