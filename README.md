@@ -1,4 +1,16 @@
+----
 
+# Important!
+
+This project has been split into 3 projects which now live in the EBI's Gitlab:
+
+- [GLaDOS Frontend](https://gitlab.ebi.ac.uk/chembl/chembl/main-web-interface/glados-frontend-chembl-main-interface)
+- [Elasticsearch Proxy API](https://gitlab.ebi.ac.uk/chembl/chembl/main-web-interface/elasticsearch-proxy-api)
+- [Delayed Jobs](https://gitlab.ebi.ac.uk/chembl/chembl/delayed-jobs/delayed-jobs-api)
+
+This GitHub project will still be used for issue tracking, but the code in this repository is no longer up to date.  
+
+----
 ## Travis
 
 [![Build Status](https://travis-ci.org/chembl/GLaDOS.svg?branch=master)](https://travis-ci.org/chembl/GLaDOS)
@@ -58,42 +70,3 @@ Here you can find some informal diagrams that help to understand how some compon
 
 ### Design Components Page
 https://www.ebi.ac.uk/chembl/beta/design_components/
-
-## Running it locally with Docker
-
-This requires [Docker](https://www.docker.com/get-started) installed and running.
-Copy and rename the [minimal_dev_config](/configurations/minimal_dev_config.yml) file to ```configurations/config.yml```, add the elasticsearch endpoint information.
-Then run the following command to create and start the instance:
-
-```
-$ docker-compose up
-```
-
-The entry point for the images is [fireitup.sh](/fireitup.sh) file, there an instance of the service will be started listening on
-the port **8000**.
-
-
-## Chemvue front (VueJS 3)
-
-VueJS 3 requires its [client](https://cli.vuejs.org/) which can be installed by running:
-
-```bash
-$ npm install -g @vue/cli
-```
-
-GLaDOS collectstatic function ```CONFIG_FILE_PATH=configurations/config.yml ./manage_glados_no_install.sh collectstatic --no-input```
-will build and place chemvue static files on ```src/glados/v``` folder, which will be served by Django.
-
-This process will fail if the configuration file is not present 
-
-In order to take advantage of VueJS's [hot reload](https://vue-loader.vuejs.org/guide/hot-reload.html) capabilities while developing, on chemvue dir run:
-
-```bash
-$ CONFIG_FILE_PATH=../configurations/config.yml npm start
-```
-
-To build the statics files run:
-
-```bash
-$ CONFIG_FILE_PATH=../configurations/config.yml npm run build
-```
