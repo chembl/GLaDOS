@@ -1,4 +1,4 @@
-django==2.2
+django==2.2.24
 django-compressor==2.3
 django-cors-headers==2.4.0
 selenium==3.14.0
